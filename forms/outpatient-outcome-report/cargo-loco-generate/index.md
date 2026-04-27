@@ -16,11 +16,15 @@ assessment ...` call covers every questionnaire section.
 
 - `patient`
 - `clinician`
+- `assessment`
+- `grading_result`
+- `grading_fired_rule`
+- `grading_additional_flag`
 
 ## Usage
 
 ```sh
-cd ../full-stack-with-rust-axum-loco-tera-htmx-alpine
+cd ../full-stack-with-loco-tera-htmx-alpine
 sh ../cargo-loco-generate/cargo-loco-generate.sh
 ```
 
