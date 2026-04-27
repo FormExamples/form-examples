@@ -1,0 +1,12 @@
+<!ELEMENT grading_result (id,assessment_id,overall_grade,clinical_grade,prom_grade,prem_grade,operational_grade,result_notes,graded_at,created_at,updated_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT overall_grade (#PCDATA)>
+<!ELEMENT clinical_grade (#PCDATA)>
+<!ELEMENT prom_grade (#PCDATA)>
+<!ELEMENT prem_grade (#PCDATA)>
+<!ELEMENT operational_grade (#PCDATA)>
+<!ELEMENT result_notes (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE assessment_encounter SYSTEM "assessment_encounter.dtd">
+<assessment_encounter>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<clinic_date>2026-01-15</clinic_date>
+<specialty></specialty>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<modality>in_person</modality>
+<appointment_type>new</appointment_type>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+</assessment_encounter>

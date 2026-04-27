@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE assessment_prom_grc SYSTEM "assessment_prom_grc.dtd">
+<assessment_prom_grc>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<global_rating_of_change>1</global_rating_of_change>
+<self_rated_health>excellent</self_rated_health>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+</assessment_prom_grc>

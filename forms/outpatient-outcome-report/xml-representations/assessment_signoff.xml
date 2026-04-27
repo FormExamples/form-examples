@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE assessment_signoff SYSTEM "assessment_signoff.dtd">
+<assessment_signoff>
+<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<reporting_clinician_id>660e8400-e29b-41d4-a716-446655440001</reporting_clinician_id>
+<reporting_clinician_name>Example</reporting_clinician_name>
+<reporting_clinician_role>Dr Smith</reporting_clinician_role>
+<signed_off_at>2026-04-09T10:00:00Z</signed_off_at>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+</assessment_signoff>

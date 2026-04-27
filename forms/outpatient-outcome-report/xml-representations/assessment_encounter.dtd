@@ -1,0 +1,10 @@
+<!ELEMENT assessment_encounter (id,assessment_id,clinic_date,specialty,clinician_id,modality,appointment_type,created_at,updated_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT clinic_date (#PCDATA)>
+<!ELEMENT specialty (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT modality (#PCDATA)>
+<!ELEMENT appointment_type (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>

@@ -1,0 +1,3 @@
+<!ELEMENT assessment_prom_eq5d5l (id,assessment_id)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>

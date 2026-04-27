@@ -1,0 +1,10 @@
+<!ELEMENT assessment_operational (id,assessment_id,referral_date,appointment_date,wait_time_days,service_target_days,nhs_attendance_outcome,created_at,updated_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT referral_date (#PCDATA)>
+<!ELEMENT appointment_date (#PCDATA)>
+<!ELEMENT wait_time_days (#PCDATA)>
+<!ELEMENT service_target_days (#PCDATA)>
+<!ELEMENT nhs_attendance_outcome (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>

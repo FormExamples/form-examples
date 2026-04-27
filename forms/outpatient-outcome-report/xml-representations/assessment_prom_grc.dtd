@@ -1,0 +1,7 @@
+<!ELEMENT assessment_prom_grc (id,assessment_id,global_rating_of_change,self_rated_health,created_at,updated_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT global_rating_of_change (#PCDATA)>
+<!ELEMENT self_rated_health (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
