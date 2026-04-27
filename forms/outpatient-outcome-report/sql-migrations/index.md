@@ -1,18 +1,8 @@
-# outpatient-outcome-report — sql-migrations
+# Outpatient Outcome Report — SQL Migrations
 
-PostgreSQL migrations for this form. See
-`AGENTS/sql-migrations.md` for conventions.
+PostgreSQL migrations defining the schema for the outpatient outcome report.
 
-## Canonical files
+Numbered migrations run in order. `schema.sql` and `schema-flat.sql` are generated from these files via:
 
-- `00_extensions.sql` — required extensions (pgcrypto).
-- `01_create_function_set_updated_at.sql` — trigger function used by every `updated_at` column.
-- `02_create_table_patient.sql` — patient table.
-- `03_create_table_clinician.sql` — clinician table.
-
-## Form-specific tables
-
-
-## Derived artefacts
-
-- `schema.sql` — every migration concatenated (generated).
+- `bin/generate-sql-combined.py` → `schema.sql`
+- `bin/generate-sql-flat.py` → `schema-flat.sql`
