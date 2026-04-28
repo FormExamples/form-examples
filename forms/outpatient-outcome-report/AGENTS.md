@@ -17,7 +17,7 @@ Structured outpatient outcome report covering clinical outcome, PROMs, PREMs, an
 - ./front-end-form-with-svelte/ - SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-html/ - Static HTML dashboard
 - ./front-end-dashboard-with-svelte/ - SvelteKit + SVAR DataGrid dashboard
-- ./full-stack-with-rust-axum-loco-tera-htmx-alpine/ - Rust backend
+- ./full-stack-with-loco-tera-htmx-alpine/ - Rust backend
 
 ## Scoring system
 

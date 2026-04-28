@@ -4,7 +4,8 @@
 - [x] Scaffold form directory (via `bin/create-form`)
 - [x] Write top-level docs (index.md, AGENTS.md, plan.md, tasks.md)
 - [x] Write SQL migrations
-- [x] Generate schema.sql and schema-flat.sql
+- [x] Generate schema files.
+- [ ] 
 - [x] Generate XML + DTD representations
 - [x] Generate FHIR R5 JSON
 - [x] Generate cargo-loco scaffold commands

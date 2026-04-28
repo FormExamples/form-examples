@@ -2,7 +2,26 @@
   "permissions": {
     "allow": [
       "Read(//Users/jph/git/joelparkerhenderson/medical-forms/docs/**)",
-      "Read(//Users/jph/git/joelparkerhenderson/medical-forms/docs/superpowers/**)"
+      "Read(//Users/jph/git/joelparkerhenderson/medical-forms/docs/superpowers/**)",
+      "Bash(python3 bin/generate-sql-combined.py outpatient-outcome-report)",
+      "Bash(python3 bin/generate-sql-flat.py outpatient-outcome-report)",
+      "Bash(python3 bin/generate-xml-representations.py outpatient-outcome-report)",
+      "Bash(python3 bin/generate-fhir-r5-representations.py outpatient-outcome-report)",
+      "Bash(python3 bin/generate-cargo-loco-scaffold.py outpatient-outcome-report)",
+      "Bash(cp __TRACKED_VAR__/package.json __TRACKED_VAR__/package.json)",
+      "Bash(cp __TRACKED_VAR__/svelte.config.js __TRACKED_VAR__/svelte.config.js)",
+      "Bash(cp __TRACKED_VAR__/vite.config.ts __TRACKED_VAR__/vite.config.ts)",
+      "Bash(cp __TRACKED_VAR__/tsconfig.json __TRACKED_VAR__/tsconfig.json)",
+      "Bash(mkdir -p __TRACKED_VAR__/src/routes __TRACKED_VAR__/static)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm run *)",
+      "Bash(cp __TRACKED_VAR__/src/app.d.ts __TRACKED_VAR__/src/app.d.ts)",
+      "Bash(cp __TRACKED_VAR__/src/app.css __TRACKED_VAR__/src/app.css)",
+      "Bash(cp __TRACKED_VAR__/src/routes/+layout.svelte __TRACKED_VAR__/src/routes/+layout.svelte)",
+      "Bash(cp __TRACKED_VAR__/src/routes/+page.svelte __TRACKED_VAR__/src/routes/+page.svelte)",
+      "Bash(bin/test-form outpatient-outcome-report-front-end-form-with-html *)",
+      "Bash(bin/test-form outpatient-outcome-report *)",
+      "Bash(cargo build *)"
     ]
   }
 }
