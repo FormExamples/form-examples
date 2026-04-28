@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}All Reports — Outpatient Outcome Report{% endblock %}
+
+{% block content %}
+<div style="max-width:900px;margin:2rem auto;padding:1rem;">
+  <h1>All Outpatient Outcome Reports</h1>
+
+  <form method="POST" action="/assessments/new" style="margin-bottom:1.5rem;">
+    <button type="submit" style="padding:0.5rem 1.2rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+      + New Report
+    </button>
+  </form>
+
+  <table style="width:100%;border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f4f4f4;text-align:left;">
+        <th style="padding:0.6rem 1rem;border-bottom:2px solid #ddd;">Patient</th>
+        <th style="padding:0.6rem 1rem;border-bottom:2px solid #ddd;">Encounter Date</th>
+        <th style="padding:0.6rem 1rem;border-bottom:2px solid #ddd;">Status</th>
+        <th style="padding:0.6rem 1rem;border-bottom:2px solid #ddd;">OOCG</th>
+        <th style="padding:0.6rem 1rem;border-bottom:2px solid #ddd;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in assessments %}
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:0.6rem 1rem;">{{ a.patient_name }}</td>
+        <td style="padding:0.6rem 1rem;">{{ a.encounter_date }}</td>
+        <td style="padding:0.6rem 1rem;">{{ a.status }}</td>
+        <td style="padding:0.6rem 1rem;font-weight:bold;">{{ a.composite_grade }}</td>
+        <td style="padding:0.6rem 1rem;">
+          <a href="/assessments/{{ a.id }}" style="margin-right:0.5rem;">Edit</a>
+          <a href="/assessments/{{ a.id }}/report">Report</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
