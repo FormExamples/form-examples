@@ -25,7 +25,7 @@ import re
 import sys
 from pathlib import Path
 
-TOP = Path(__file__).resolve().parent.parent
+TOP = Path(__file__).resolve().parent.parent.parent
 FORMS_DIR = TOP / "forms"
 
 # --- SQL parsing -------------------------------------------------------------
