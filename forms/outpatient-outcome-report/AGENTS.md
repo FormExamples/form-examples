@@ -12,7 +12,6 @@ Structured outpatient outcome report covering clinical outcome, PROMs, PREMs, an
 - ./sql-migrations/ - PostgreSQL migrations
 - ./xml-representations/ - XML + DTD per table
 - ./fhir-r5/ - FHIR HL7 R5 JSON per table
-- ./cargo-loco-generate/ - Loco scaffold shell scripts
 - ./front-end-form-with-html/ - Static HTML wizard
 - ./front-end-form-with-svelte/ - SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-html/ - Static HTML dashboard

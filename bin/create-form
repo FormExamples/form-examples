@@ -24,7 +24,6 @@ mkdir_with_ai_planning() (
 dir="$top/forms/$1"
 mkdir_with_ai_planning "$dir"
 
-mkdir_with_ai "$dir/cargo-loco-generate"
 mkdir_with_ai "$dir/doc"
 mkdir_with_ai "$dir/fhir-r5"
 mkdir_with_ai "$dir/sql-migrations"
@@ -34,6 +33,24 @@ mkdir_with_ai_planning "$dir/front-end-form-with-html"
 mkdir_with_ai_planning "$dir/front-end-form-with-svelte"
 mkdir_with_ai_planning "$dir/front-end-dashboard-with-html"
 mkdir_with_ai_planning "$dir/front-end-dashboard-with-svelte"
-mkdir_with_ai_planning "$dir/full-stack-with-rust-axum-loco-tera-htmx-alpine"
+mkdir_with_ai_planning "$dir/full-stack-with-loco-tera-htmx-alpine"
+mkdir_with_ai_planning "$dir/full-stack-with-loco-tera-htmx-alpine-new"
 
 rsync -av "$top/skel/" "$dir/"
+
+bin/forms-as-kebab-case | 
+while read form; do 
+    snake=$(echo "$form" | snake-case)
+    f="$dir/full-stack-with-loco-tera-htmx-alpine-new/00-new.sh"
+    cat << EOF > "$f"
+#!/bin/sh
+set -euf
+
+createuser --host=localhost --port=5432 --username=postgres --login --createdb loco || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_development || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_test || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_production || :
+loco new --name ${form} --db postgres --bg async --assets serverside
+EOF
+  chmod +x "$f"
+done

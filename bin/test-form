@@ -63,13 +63,6 @@ top="$(git rev-parse --show-toplevel)"
 form="$1"
 form_dir="$top/forms/$form"
 
-test_form_cargo_loco_generate() {
-    dir="$1/cargo-loco-generate"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
-    grep_exists_or_err "@../../../AGENTS/cargo-loco-generate-scaffold.md" "$dir/AGENTS.md"
-}
-
 test_form_doc() {
     dir="$1/doc"
     directory_exists_or_err "$dir"
@@ -101,7 +94,6 @@ test_form() {
     form_dir="$1"
     echo "test_form $form_dir"
     ai_exists_or_err "$form_dir"
-    test_form_cargo_loco_generate "$form_dir"
     test_form_doc "$form_dir"
     test_form_fhir_r5 "$form_dir"
     test_form_sql_migrations "$form_dir"
@@ -110,6 +102,7 @@ test_form() {
     ai_exists_or_err "$form_dir/front-end-form-with-svelte"
     ai_exists_or_err "$form_dir/front-end-dashboard-with-html"
     ai_exists_or_err "$form_dir/front-end-dashboard-with-svelte"
+    file_size_or_err "$form_dir/full-stack-with-loco-tera-htmx-alpine-setup"
     rust_crate_exists_or_err "$form_dir/full-stack-with-loco-tera-htmx-alpine"
 }
 

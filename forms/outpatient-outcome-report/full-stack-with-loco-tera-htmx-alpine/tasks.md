@@ -2,5 +2,5 @@
 
 - [x] Scaffold minimal crate
 - [ ] Initialise Loco app
-- [ ] Run cargo-loco-generate scaffold scripts
+- [ ] Run Loco scaffold setup script
 - [ ] Implement controllers and views

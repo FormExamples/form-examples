@@ -40,7 +40,6 @@ outpatient-outcome-report/
   sql-migrations/
   xml-representations/
   fhir-r5/
-  cargo-loco-generate/
   doc/
 ```
 
