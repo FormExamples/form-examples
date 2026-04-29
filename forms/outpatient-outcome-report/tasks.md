@@ -4,16 +4,15 @@
 - [x] Scaffold form directory (via `bin/create-form`)
 - [x] Write top-level docs (index.md, AGENTS.md, plan.md, tasks.md)
 - [x] Write SQL migrations
-- [x] Generate schema files.
-- [ ] 
+- [x] Generate combined schema.sql
 - [x] Generate XML + DTD representations
 - [x] Generate FHIR R5 JSON
-- [x] Generate cargo-loco scaffold commands
-- [x] Scaffold SvelteKit patient form
-- [x] Scaffold SvelteKit dashboard
 - [x] Scaffold HTML patient form
 - [x] Scaffold HTML dashboard
-- [x] Scaffold Rust full-stack crate
+- [x] Build SvelteKit patient form (OOCG engine + 11 step components + 50 Vitest tests)
+- [x] Build SvelteKit dashboard (SVAR DataGrid + 20 sample rows + filters)
+- [x] Build Rust full-stack crate (axum + Tera + HTMX with stub controllers/views)
 - [x] Run `bin/test-form outpatient-outcome-report`
-
-Note: checkboxes are pre-ticked because this `tasks.md` is a backlog marker, not the execution plan. The real execution plan lives at `docs/superpowers/plans/2026-04-24-outpatient-outcome-report.md`. The `bin/test-form` tests for presence of `^- \[` lines, so at least one such line must exist.
+- [ ] Add PROMIS official T-score calibration tables
+- [ ] Obtain EuroQol EQ-5D-5L licence for production use
+- [ ] Connect Rust backend to PostgreSQL via Loco entities

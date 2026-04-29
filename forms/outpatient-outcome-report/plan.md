@@ -2,19 +2,20 @@
 
 ## Current status
 
-Design spec complete (`docs/superpowers/specs/2026-04-23-outpatient-outcome-report-design.md`). Scaffolding and SQL migrations in progress. Front-end and Rust step-by-step implementations deferred.
+Implementation complete. SQL migrations, generated artifacts (XML, FHIR R5), SvelteKit form (with full OOCG scoring engine and 50 Vitest tests), SvelteKit dashboard (with SVAR DataGrid), HTML scaffolds, and Rust full-stack crate are all in place.
 
 ## Scoring engine
 
-The Outpatient Outcome Composite Grade (OOCG) takes four independent domain grades (clinical outcome classification, PROM composite, PREM FFT response, operational attendance+wait-time) on an A–E scale and emits the worst of the four as the overall grade. Flagged issues include DNA, any PROM worsening, FFT Poor/Very Poor, wait time over target, clinical Worsened/Died, and data-quality gaps in PROM/PREM/attendance fields.
+The Outpatient Outcome Composite Grade (OOCG) takes four independent domain grades — clinical outcome classification, PROM composite (EQ-5D-5L + GRC + PROMIS Global Health), PREM Friends and Family Test response, and operational attendance + wait-time vs target — on an A–E scale and emits the worst of the four as the overall grade.
+
+Flagged issues include DNA, any PROM worsening, FFT Poor/Very Poor, wait time over target, clinical Worsened/Died, and data-quality gaps in PROM/PREM/attendance fields.
 
 ## Future enhancements
 
-- Implement interactive SvelteKit wizard with reactive assessment store
-- Implement Vitest unit tests for OOCG grader
-- Implement Rust full-stack with Loco.rs scaffolded entities
-- Add PROMIS official T-score calibration tables
-- Obtain EuroQol EQ-5D-5L licence for production use
+- Add PROMIS official T-score calibration tables (current implementation uses a documented linear approximation)
+- Obtain EuroQol EQ-5D-5L licence for production use (current implementation paraphrases the items)
 - Add autosave to localStorage
 - Add i18n support
+- Connect the Rust backend to PostgreSQL via Loco entities (currently uses in-memory stubs)
+- Build the static HTML front-ends to the same level as the SvelteKit ones
 - Clinical safety case documentation
