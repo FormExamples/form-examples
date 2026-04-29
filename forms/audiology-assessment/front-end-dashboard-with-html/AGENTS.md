@@ -1,5 +1,5 @@
-# Audiology Assessment: Front End Clinician Dashboard With Html
+# Audiology Assessment — clinician dashboard (static HTML)
 
-## Status
+Static HTML + table. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

@@ -1,5 +1,5 @@
-# Framingham Risk Score for Hard CHD: Front End Clinician Dashboard With Html
+# Framingham Risk Score For Hard Coronary Heart Disease — clinician dashboard (static HTML)
 
-## Status
+Static HTML + table. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

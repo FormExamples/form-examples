@@ -1,5 +1,5 @@
-# Asthma Assessment: Front End Patient Form With Html
+# Asthma Assessment — patient form (static HTML + vanilla JS)
 
-## Status
+Static HTML + vanilla JavaScript. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

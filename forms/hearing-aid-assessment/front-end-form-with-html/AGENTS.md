@@ -1,5 +1,5 @@
-# Hearing Aid Assessment: Front End Patient Form With Html
+# Hearing Aid Assessment — patient form (static HTML + vanilla JS)
 
-## Status
+Static HTML + vanilla JavaScript. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

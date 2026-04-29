@@ -1,5 +1,5 @@
-# Advance Decision To Refuse Treatment: Front End Clinician Dashboard With Html
+# Advance Decision To Refuse Treatment — clinician dashboard (static HTML)
 
-## Status
+Static HTML + table. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

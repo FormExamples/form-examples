@@ -1,5 +1,11 @@
-# Plan: Stroke Assessment: Front End Patient Form With Html
+# Plan: Stroke Assessment — patient form (static HTML + vanilla JS)
 
-## Status
+## Current status
 
-Not yet implemented.
+Scaffold only. Project structure and documentation are in place; the interactive patient form (static HTML + vanilla JS) is pending.
+
+## Future work
+
+- Build `index.html` containing the single-page wizard
+- Implement client-side validation in vanilla JS
+- Implement the scoring engine in vanilla JS

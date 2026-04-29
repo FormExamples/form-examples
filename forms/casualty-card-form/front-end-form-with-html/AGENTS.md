@@ -1,7 +1,5 @@
-# Casualty card form: front-end patient form with HTML
+# Casualty Card Form — patient form (static HTML + vanilla JS)
 
-Plain HTML implementation of the casualty card form.
+Static HTML + vanilla JavaScript. No build step.
 
-## Status
-
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

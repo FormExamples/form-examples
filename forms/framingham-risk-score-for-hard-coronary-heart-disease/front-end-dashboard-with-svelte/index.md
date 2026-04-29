@@ -1,5 +1,5 @@
-# Framingham Risk Score for Hard CHD: Front End Clinician Dashboard With Svelte
+# Framingham Risk Score For Hard Coronary Heart Disease — clinician dashboard (SvelteKit + SVAR DataGrid)
 
-## Status
+SvelteKit 2 + Svelte 5 runes + Tailwind CSS 4 + @svar-ui/svelte-grid (Willow theme).
 
-Not yet implemented.
+This directory currently holds documentation and the project scaffold; the interactive implementation is pending. See parent `../plan.md` for the full form specification (steps, scoring engine, conventions).

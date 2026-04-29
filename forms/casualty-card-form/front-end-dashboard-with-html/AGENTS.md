@@ -1,7 +1,5 @@
-# Casualty card form: front-end clinician dashboard with HTML
+# Casualty Card Form — clinician dashboard (static HTML)
 
-Plain HTML implementation of the clinician dashboard.
+Static HTML + table. No build step.
 
-## Status
-
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

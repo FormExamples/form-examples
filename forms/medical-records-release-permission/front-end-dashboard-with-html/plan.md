@@ -1,5 +1,10 @@
-# Plan: Medical Records Release Permission: Front End Clinician Dashboard With Html
+# Plan: Medical Records Release Permission — clinician dashboard (static HTML)
 
-## Status
+## Current status
 
-Not yet implemented.
+Scaffold only. Project structure and documentation are in place; the interactive clinician dashboard (static HTML) is pending.
+
+## Future work
+
+- Build `index.html` with a sortable, filterable table
+- Add CSV/JSON export

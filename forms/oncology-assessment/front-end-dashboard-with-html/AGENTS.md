@@ -1,5 +1,5 @@
-# Oncology Assessment: Front End Clinician Dashboard With Html
+# Oncology Assessment — clinician dashboard (static HTML)
 
-## Status
+Static HTML + table. No build step.
 
-Not yet implemented.
+See parent [`../index.md`](../index.md) for the form specification.

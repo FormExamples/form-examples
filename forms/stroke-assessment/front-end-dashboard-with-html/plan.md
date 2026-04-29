@@ -1,5 +1,10 @@
-# Plan: Stroke Assessment: Front End Clinician Dashboard With Html
+# Plan: Stroke Assessment — clinician dashboard (static HTML)
 
-## Status
+## Current status
 
-Not yet implemented.
+Scaffold only. Project structure and documentation are in place; the interactive clinician dashboard (static HTML) is pending.
+
+## Future work
+
+- Build `index.html` with a sortable, filterable table
+- Add CSV/JSON export

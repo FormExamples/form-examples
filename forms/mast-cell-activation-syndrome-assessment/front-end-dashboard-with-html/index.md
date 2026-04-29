@@ -1,5 +1,5 @@
-# Mast Cell Activation Syndrome Assessment: Front End Clinician Dashboard With Html
+# Mast Cell Activation Syndrome Assessment — clinician dashboard (static HTML)
 
-## Status
+Static HTML + table. No build step.
 
-Not yet implemented.
+This directory currently holds documentation and the project scaffold; the interactive implementation is pending. See parent `../plan.md` for the full form specification (steps, scoring engine, conventions).

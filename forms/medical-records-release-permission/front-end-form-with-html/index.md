@@ -1,5 +1,5 @@
-# Medical Records Release Permission: Front End Patient Form With Html
+# Medical Records Release Permission — patient form (static HTML + vanilla JS)
 
-## Status
+Static HTML + vanilla JavaScript. No build step.
 
-Not yet implemented.
+This directory currently holds documentation and the project scaffold; the interactive implementation is pending. See parent `../plan.md` for the full form specification (steps, scoring engine, conventions).
