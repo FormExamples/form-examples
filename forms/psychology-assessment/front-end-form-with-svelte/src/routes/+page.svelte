@@ -1,14 +1,83 @@
 <script lang="ts">
-  const title = 'psychology assessment';
-  const role = 'patient form';
+	import { goto } from '$app/navigation';
+	import { assessment } from '$lib/stores/assessment.svelte';
+	import { calculateDass21 } from '$lib/engine/dass21-grader';
+	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
+
+	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
+	import Step2ReasonForAssessment from '$lib/components/steps/Step2ReasonForAssessment.svelte';
+	import Step3DassDepression from '$lib/components/steps/Step3DassDepression.svelte';
+	import Step4DassAnxiety from '$lib/components/steps/Step4DassAnxiety.svelte';
+	import Step5DassStress from '$lib/components/steps/Step5DassStress.svelte';
+	import Step6FunctionalImpact from '$lib/components/steps/Step6FunctionalImpact.svelte';
+	import Step7RiskScreen from '$lib/components/steps/Step7RiskScreen.svelte';
+	import Step8SupportAndHistory from '$lib/components/steps/Step8SupportAndHistory.svelte';
+
+	function submitAssessment() {
+		const { depression, anxiety, stress, firedRules } = calculateDass21(assessment.data);
+		const additionalFlags = detectAdditionalFlags(
+			assessment.data,
+			depression,
+			anxiety,
+			stress
+		);
+		assessment.result = {
+			depression,
+			anxiety,
+			stress,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+	}
 </script>
 
-<svelte:head>
-  <title>{title} — {role}</title>
-</svelte:head>
+<div class="min-h-screen bg-gray-50">
+	<header class="border-b border-gray-200 bg-white shadow-sm no-print">
+		<div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
+			<h1 class="text-lg font-bold text-gray-900">Psychology Assessment (DASS-21)</h1>
+			<button
+				type="button"
+				onclick={startOver}
+				class="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
+			>
+				Start over
+			</button>
+		</div>
+	</header>
 
-<main class="mx-auto max-w-3xl p-6">
-  <h1 class="text-2xl font-semibold mb-4">{title}</h1>
-  <p class="mb-2">This SvelteKit project is the <strong>{role}</strong> for the {title} form.</p>
-  <p class="mb-2">Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
-</main>
+	<main class="mx-auto max-w-3xl px-4 py-6">
+		<div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+			This single-page questionnaire collects your demographics, the DASS-21 (a
+			validated screen of depression, anxiety, and stress), and a brief safety screen.
+			It takes about 10 minutes. Your responses generate a clinical report; if any
+			urgent concerns are flagged, your clinician will be alerted.
+		</div>
+
+		<div class="space-y-8">
+			<Step1Demographics />
+			<Step2ReasonForAssessment />
+			<Step3DassDepression />
+			<Step4DassAnxiety />
+			<Step5DassStress />
+			<Step6FunctionalImpact />
+			<Step7RiskScreen />
+			<Step8SupportAndHistory />
+		</div>
+
+		<div class="mt-10 flex justify-end">
+			<button
+				type="button"
+				onclick={submitAssessment}
+				class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
+			>
+				Submit Assessment
+			</button>
+		</div>
+	</main>
+</div>
