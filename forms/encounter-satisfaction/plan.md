@@ -2,17 +2,30 @@
 
 ## Current status
 
-Not yet implemented. Directory structure exists but no code has been written.
+Implemented. SvelteKit patient form with 8-step wizard, ESS composite
+scoring (1.0–5.0), and flagged-issues detection. SQL migrations and
+xml-representations in place. Dashboard and full-stack Rust backend
+remain to be built.
 
-## Implementation plan
+## Scoring engine
 
-Follow the same patterns as dermatology-assessment (canonical template):
+The Encounter Satisfaction Score (ESS) grader is inspired by PSQ-18 and
+HCAHPS. It scores 19 questions across 6 domains (Access & Scheduling,
+Communication, Staff & Professionalism, Care Quality, Environment,
+Overall Satisfaction) on a 5-point Likert scale. The composite score is
+the mean of all answered Likert items (1.0–5.0), categorised as
+Excellent (≥4.5), Good (≥3.5), Fair (≥2.5), Poor (≥1.5), or Very Poor.
+Flagged issues escalate any Likert rating of 1, communication ratings
+≤2, and Poor composite scores.
 
-1. Create front-end-form-with-svelte/ with all engine files, step components, and routes
-2. Create front-end-dashboard-with-svelte/ with SVAR DataGrid
-3. Create back-end-with-rust-axum-loco-json/ with Rust engine types
-4. Add Vitest unit tests for grading logic
+## Future enhancements
 
-## Planned scoring system
-
-The scoring approach has not yet been finalised. A composite satisfaction score is anticipated, likely using Likert-scale responses (e.g. 1-5 or 0-10) across multiple dimensions of the patient encounter such as communication quality, wait time, care environment, staff professionalism, and overall satisfaction. The design phase should evaluate established patient satisfaction instruments (e.g. HCAHPS, PSQ-18) for potential adaptation.
+- Build front-end-dashboard-with-svelte with SVAR DataGrid
+- Build full-stack-with-loco-tera-htmx-alpine Rust backend
+- Add input validation with Zod schemas
+- Add accessibility audit (axe-core)
+- Add end-to-end tests with Playwright
+- Add form autosave to localStorage
+- Add internationalisation (i18n) support
+- Clinical safety case documentation
+- User acceptance testing with patient advisory group

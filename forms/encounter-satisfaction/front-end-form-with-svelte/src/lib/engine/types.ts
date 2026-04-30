@@ -35,6 +35,7 @@ export interface AccessScheduling {
 	easeOfScheduling: LikertScore | null;
 	waitForAppointment: LikertScore | null;
 	waitInWaitingRoom: LikertScore | null;
+	[key: string]: LikertScore | null;
 }
 
 export interface Communication {
@@ -42,24 +43,28 @@ export interface Communication {
 	explainingCondition: LikertScore | null;
 	answeringQuestions: LikertScore | null;
 	timeSpent: LikertScore | null;
+	[key: string]: LikertScore | null;
 }
 
 export interface StaffProfessionalism {
 	receptionCourtesy: LikertScore | null;
 	nursingCourtesy: LikertScore | null;
 	respectShown: LikertScore | null;
+	[key: string]: LikertScore | null;
 }
 
 export interface CareQuality {
 	involvementInDecisions: LikertScore | null;
 	treatmentPlanExplanation: LikertScore | null;
 	confidenceInCare: LikertScore | null;
+	[key: string]: LikertScore | null;
 }
 
 export interface Environment {
 	cleanliness: LikertScore | null;
 	waitingAreaComfort: LikertScore | null;
 	privacy: LikertScore | null;
+	[key: string]: LikertScore | null;
 }
 
 export interface OverallSatisfaction {
@@ -67,6 +72,7 @@ export interface OverallSatisfaction {
 	likelyToRecommend: LikertScore | null;
 	likelyToReturn: LikertScore | null;
 	comments: string;
+	[key: string]: LikertScore | string | null;
 }
 
 // ─── Composite assessment data ──────────────────────────────

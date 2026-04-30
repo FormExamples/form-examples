@@ -2,30 +2,32 @@
 
 ## Current status
 
-Not yet implemented. Directory structure exists but no code has been written.
+Implemented. SvelteKit patient form with 10-step wizard covering blood
+count analysis, coagulation studies, blood film, iron studies,
+haemoglobinopathy screening, bone-marrow assessment, transfusion
+history, treatment, and clinical review. SQL migrations,
+xml-representations, and FHIR R5 resources in place. Dashboard and
+full-stack Rust backend remain to be built.
 
-## Implementation plan
+## Scoring engine
 
-Follow the same patterns as dermatology-assessment (canonical template):
+The hematology grader interprets CBC parameters (haemoglobin, white-cell
+count, platelets, MCV/MCH/MCHC) against reference ranges and classifies
+abnormalities as Normal, Mild, Moderate, or Severe. It cross-references
+iron studies (ferritin, serum iron, TIBC, transferrin saturation) and
+coagulation values (PT, APTT, fibrinogen, D-dimer) to refine the
+classification, and produces flagged issues for critical values
+requiring urgent intervention (e.g. severe anaemia, thrombocytopenia,
+neutropenia, deranged coagulation).
 
-1. Create front-end-form-with-svelte/ with all engine files, step components, and routes
-2. Create front-end-dashboard-with-svelte/ with SVAR DataGrid
-3. Create back-end-with-rust-axum-loco-json/ with Rust engine types
-4. Add Vitest unit tests for grading logic
+## Future enhancements
 
-## Planned scoring system
-
-CBC interpretation with anaemia classification (iron-deficiency, B12/folate, chronic disease, haemolytic), coagulation screen assessment, and white cell differential analysis. The scoring engine should flag critical values requiring urgent intervention.
-
-## Planned steps
-
-1. Demographics
-2. Presenting Symptoms (fatigue, bruising, bleeding, infections)
-3. Bleeding History (epistaxis, menorrhagia, surgical bleeding)
-4. CBC Results (Hb, WCC, platelets, MCV, MCH, MCHC)
-5. Iron Studies (ferritin, serum iron, TIBC, transferrin saturation)
-6. Coagulation Screen (PT, APTT, fibrinogen, D-dimer)
-7. Blood Film (morphology, reticulocytes)
-8. Transfusion History
-9. Current Medications (anticoagulants, antiplatelets, iron supplements)
-10. Comorbidities (liver disease, renal disease, malignancy)
+- Build front-end-dashboard-with-svelte with SVAR DataGrid
+- Build full-stack-with-loco-tera-htmx-alpine Rust backend
+- Add input validation with Zod schemas
+- Add accessibility audit (axe-core)
+- Add end-to-end tests with Playwright
+- Add form autosave to localStorage
+- Add internationalisation (i18n) support
+- Clinical safety case documentation
+- User acceptance testing with haematology clinicians
