@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_presenting_complaint (id,casualty_card_id,chief_complaint,history_of_presenting_complaint,onset,duration,character,severity,location,radiation,aggravating_factors,relieving_factors,associated_symptoms,previous_episodes,treatment_prior_to_arrival,created_at,updated_at)>
+<!ELEMENT casualty_card_presenting_complaint (id,created_at,updated_at,deleted_at,casualty_card_id,chief_complaint,history_of_presenting_complaint,onset,duration,character,severity,location,radiation,aggravating_factors,relieving_factors,associated_symptoms,previous_episodes,treatment_prior_to_arrival)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT chief_complaint (#PCDATA)>
 <!ELEMENT history_of_presenting_complaint (#PCDATA)>
@@ -14,5 +17,3 @@
 <!ELEMENT associated_symptoms (#PCDATA)>
 <!ELEMENT previous_episodes (#PCDATA)>
 <!ELEMENT treatment_prior_to_arrival (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

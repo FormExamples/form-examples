@@ -1,5 +1,8 @@
-<!ELEMENT authorized_recipient (id,release_form_id,recipient_name,recipient_organization,recipient_address,recipient_phone,recipient_email,recipient_role,created_at,updated_at)>
+<!ELEMENT authorized_recipient (id,created_at,updated_at,deleted_at,release_form_id,recipient_name,recipient_organization,recipient_address,recipient_phone,recipient_email,recipient_role)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT release_form_id (#PCDATA)>
 <!ELEMENT recipient_name (#PCDATA)>
 <!ELEMENT recipient_organization (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT recipient_phone (#PCDATA)>
 <!ELEMENT recipient_email (#PCDATA)>
 <!ELEMENT recipient_role (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

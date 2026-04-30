@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "dd0e8400-e29b-41d4-a716-446655440008",
+  "id": "bb0e8400-e29b-41d4-a716-446655440006",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -29,7 +29,7 @@
     ]
   },
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/cc0e8400-e29b-41d4-a716-446655440007"
   },
   "encounter": {
     "reference": "Encounter/220e8400-e29b-41d4-a716-44665544000c"
@@ -41,12 +41,24 @@
         "coding": [
           {
             "system": "urn:medical-forms:encounter-satisfaction",
-            "code": "cleanliness",
-            "display": "Cleanliness"
+            "code": "deleted_at",
+            "display": "Deleted At"
           }
         ]
       },
-      "valueInteger": 1
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:encounter-satisfaction",
+            "code": "NULL",
+            "display": "Null"
+          }
+        ]
+      },
+      "valueString": ""
     },
     {
       "code": {

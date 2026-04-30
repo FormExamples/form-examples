@@ -11,7 +11,7 @@ implemented" errors:
 1. `front-end-form-with-html/AGENTS.md`
 2. `front-end-form-with-html/plan.md`
 3. `front-end-form-with-svelte/plan.md`
-4. `full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md`
+4. `full-stack-with-loco-tera-htmx-alpine/plan.md`
 
 The application code in all three sub-projects is already fully implemented
 (16-step SvelteKit wizard with ASA engine; single-page HTML + Alpine.js form
@@ -82,7 +82,7 @@ Agent instructions following the standard monorepo AGENTS.md shape:
 - How to add a new ASA rule / safety flag (where to edit, what to test).
 - Verify command: `bin/test-form pre-operative-assessment-by-patient`.
 
-### 4. `full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md`
+### 4. `full-stack-with-loco-tera-htmx-alpine/plan.md`
 
 Short plan document describing:
 

@@ -1,0 +1,10 @@
+<!ELEMENT assessment_current_medications (id,created_at,updated_at,deleted_at,assessment_id,has_ocular_medications,has_systemic_medications,medication_allergies,medications_notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT has_ocular_medications (#PCDATA)>
+<!ELEMENT has_systemic_medications (#PCDATA)>
+<!ELEMENT medication_allergies (#PCDATA)>
+<!ELEMENT medications_notes (#PCDATA)>

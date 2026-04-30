@@ -10,7 +10,7 @@ Read-and-acknowledge privacy notice covering the use of patient data for researc
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Recipient form; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Information governance dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-rust-axum-loco-tera-htmx-alpine/ - Full-stack Rust backend
+- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack Rust backend
 
 ## Scoring system
 

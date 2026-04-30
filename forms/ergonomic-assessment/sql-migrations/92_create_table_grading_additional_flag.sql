@@ -3,7 +3,7 @@ CREATE TABLE grading_additional_flag (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id   UUID NOT NULL REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
     -- Flag identifier (e.g. FLAG-POSTURE-001, FLAG-RSI-001)
     flag_id             TEXT NOT NULL,
     -- Category of the flag
@@ -14,10 +14,10 @@ CREATE TABLE grading_additional_flag (
     priority            TEXT NOT NULL
                         CHECK (priority IN ('high', 'medium', 'low')),
     -- Prevent duplicate flags per grading
-    CONSTRAINT uq_grading_additional_flag UNIQUE (grading_result_id, flag_id)
+    CONSTRAINT uq_grading_additional_flag UNIQUE (grade_id, flag_id)
 );
 
-CREATE INDEX idx_grading_additional_flag_result ON grading_additional_flag(grading_result_id);
+CREATE INDEX idx_grading_additional_flag_result ON grading_additional_flag(grade_id);
 
 COMMENT ON TABLE grading_additional_flag IS
     'Additional safety flags raised during grading, independent of REBA score. Actionable alerts for clinician review.';
@@ -30,8 +30,8 @@ COMMENT ON COLUMN grading_additional_flag.message IS
 COMMENT ON COLUMN grading_additional_flag.priority IS
     'Flag priority: high (urgent action), medium (review needed), low (informational).';
 
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN grading_additional_flag.created_at IS

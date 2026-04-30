@@ -1,5 +1,8 @@
-<!ELEMENT childhood_vaccinations (id,assessment_id,dtap_ipv_hib_hepb,pneumococcal,rotavirus,meningitis_b,mmr,hib_menc,preschool_booster,created_at,updated_at)>
+<!ELEMENT childhood_vaccinations (id,created_at,updated_at,deleted_at,assessment_id,dtap_ipv_hib_hepb,pneumococcal,rotavirus,meningitis_b,mmr,hib_menc,preschool_booster)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT dtap_ipv_hib_hepb (#PCDATA)>
 <!ELEMENT pneumococcal (#PCDATA)>
@@ -8,5 +11,3 @@
 <!ELEMENT mmr (#PCDATA)>
 <!ELEMENT hib_menc (#PCDATA)>
 <!ELEMENT preschool_booster (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

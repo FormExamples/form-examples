@@ -1,0 +1,13 @@
+<!ELEMENT assessment_rom_measurement (id,created_at,updated_at,deleted_at,range_of_motion_id,movement,active_degrees,passive_degrees,normal_degrees,end_feel,pain_on_movement,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT range_of_motion_id (#PCDATA)>
+<!ELEMENT movement (#PCDATA)>
+<!ELEMENT active_degrees (#PCDATA)>
+<!ELEMENT passive_degrees (#PCDATA)>
+<!ELEMENT normal_degrees (#PCDATA)>
+<!ELEMENT end_feel (#PCDATA)>
+<!ELEMENT pain_on_movement (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

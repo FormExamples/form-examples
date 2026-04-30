@@ -17,5 +17,20 @@
     }
   ],
   "birthDate": "1965-06-15",
-  "gender": "unknown"
+  "gender": "unknown",
+  "telecom": [
+    {
+      "system": "email",
+      "value": "jane.doe@example.com"
+    },
+    {
+      "system": "phone",
+      "value": "07700900000"
+    }
+  ],
+  "address": [
+    {
+      "postalCode": "SW1A 1AA"
+    }
+  ]
 }

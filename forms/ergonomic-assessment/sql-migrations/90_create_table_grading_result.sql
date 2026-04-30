@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -24,30 +24,30 @@ CREATE TABLE grading_result (
     )
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed REBA grading result for an assessment. Includes optional clinician override.';
-COMMENT ON COLUMN grading_result.reba_score IS
+COMMENT ON COLUMN grade.reba_score IS
     'Computed REBA score (1-15), sum of fired rule scores clamped to range.';
-COMMENT ON COLUMN grading_result.risk_level IS
+COMMENT ON COLUMN grade.risk_level IS
     'Risk level derived from REBA score: Negligible, Low, Medium, High, or Very high risk.';
-COMMENT ON COLUMN grading_result.reba_score_override IS
+COMMENT ON COLUMN grade.reba_score_override IS
     'Clinician override of the computed REBA score. NULL if no override.';
-COMMENT ON COLUMN grading_result.override_reason IS
+COMMENT ON COLUMN grade.override_reason IS
     'Required reason text when reba_score_override is set.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the REBA grading was computed.';
 
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

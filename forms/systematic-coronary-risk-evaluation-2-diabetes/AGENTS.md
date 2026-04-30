@@ -10,7 +10,7 @@ SCORE2-Diabetes predicts 10-year risk of fatal and non-fatal cardiovascular dise
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Clinician form; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Diabetes clinic dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-rust-axum-loco-tera-htmx-alpine/ - Full-stack Rust backend
+- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack Rust backend
 
 ## Scoring system
 

@@ -27,7 +27,7 @@ fn assessment_renders_single_page_with_all_16_sections() {
 }
 
 #[test]
-fn report_renders_with_grading_result() {
+fn report_renders_with_grade() {
     let tera = load_tera();
     let mut data = ClinicianAssessment::default();
     data.echo_ef_percent = Some(30);

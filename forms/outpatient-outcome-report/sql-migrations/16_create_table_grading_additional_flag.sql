@@ -1,8 +1,8 @@
 CREATE TABLE grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -20,13 +20,13 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag (grading_result_id, flag_id);
+    ON grading_additional_flag (grade_id, flag_id);
 
 COMMENT ON TABLE grading_additional_flag IS
     'Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).';
 COMMENT ON COLUMN grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
     'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS
     'Stable identifier of the flag.';

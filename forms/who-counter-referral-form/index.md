@@ -104,7 +104,7 @@ Note: Attach copy of medication chart at discharge or list of current medication
 who-counter-referral-form/
   front-end-form-with-svelte/                         # Patient questionnaire
   front-end-dashboard-with-svelte/                    # Dashboard
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/    # Full-stack option
+  full-stack-with-loco-tera-htmx-alpine/    # Full-stack option
 ```
 
 ## Technology

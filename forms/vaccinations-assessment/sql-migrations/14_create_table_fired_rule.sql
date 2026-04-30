@@ -3,8 +3,8 @@ CREATE TABLE fired_rule (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -18,7 +18,7 @@ CREATE TRIGGER trigger_fired_rule_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE fired_rule IS
-    'Vaccination rules that fired during assessment grading. Many-to-one child of grading_result.';
+    'Vaccination rules that fired during assessment grading. Many-to-one child of grade.';
 COMMENT ON COLUMN fired_rule.rule_id IS
     'Identifier of the vaccination rule that fired (e.g. VAX-001).';
 COMMENT ON COLUMN fired_rule.category IS
@@ -26,8 +26,8 @@ COMMENT ON COLUMN fired_rule.category IS
 COMMENT ON COLUMN fired_rule.concern_level IS
     'Concern level: high, medium, or low.';
 
-COMMENT ON COLUMN fired_rule.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN fired_rule.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN fired_rule.description IS
     'Description.';
 COMMENT ON COLUMN fired_rule.id IS

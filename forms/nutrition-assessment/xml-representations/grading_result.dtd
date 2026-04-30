@@ -1,9 +1,10 @@
-<!ELEMENT grading_result (id,assessment_id,must_total_score,must_risk_category,overall_risk_level,graded_at,created_at,updated_at)>
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,must_total_score,must_risk_category,overall_risk_level,graded_at)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT must_total_score (#PCDATA)>
 <!ELEMENT must_risk_category (#PCDATA)>
 <!ELEMENT overall_risk_level (#PCDATA)>
 <!ELEMENT graded_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

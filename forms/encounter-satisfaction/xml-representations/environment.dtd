@@ -1,8 +1,9 @@
-<!ELEMENT environment (id,encounter_satisfaction_id,cleanliness,waiting_area_comfort,privacy,created_at,updated_at)>
+<!ELEMENT environment (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,waiting_area_comfort,privacy)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT cleanliness (#PCDATA)>
-<!ELEMENT waiting_area_comfort (#PCDATA)>
-<!ELEMENT privacy (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT encounter_satisfaction_id (#PCDATA)>
+<!ELEMENT NULL (#PCDATA)>
+<!ELEMENT waiting_area_comfort (#PCDATA)>
+<!ELEMENT privacy (#PCDATA)>

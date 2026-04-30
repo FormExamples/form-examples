@@ -3,8 +3,8 @@ CREATE TABLE grading_fired_rule (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -26,8 +26,8 @@ COMMENT ON COLUMN grading_fired_rule.category IS
 COMMENT ON COLUMN grading_fired_rule.risk_level IS
     'Risk level contributed by this rule: high, medium, or low.';
 
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN grading_fired_rule.description IS
     'Description.';
 COMMENT ON COLUMN grading_fired_rule.id IS

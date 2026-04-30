@@ -1,5 +1,8 @@
-<!ELEMENT restrictions_limitations (id,release_form_id,exclude_hiv,exclude_substance_abuse,exclude_mental_health,exclude_genetic_info,exclude_sti,additional_restrictions,created_at,updated_at)>
+<!ELEMENT restrictions_limitations (id,created_at,updated_at,deleted_at,release_form_id,exclude_hiv,exclude_substance_abuse,exclude_mental_health,exclude_genetic_info,exclude_sti,additional_restrictions)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT release_form_id (#PCDATA)>
 <!ELEMENT exclude_hiv (#PCDATA)>
 <!ELEMENT exclude_substance_abuse (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT exclude_genetic_info (#PCDATA)>
 <!ELEMENT exclude_sti (#PCDATA)>
 <!ELEMENT additional_restrictions (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

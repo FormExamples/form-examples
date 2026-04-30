@@ -1,0 +1,11 @@
+<!ELEMENT assessment_performance_rating_item (id,created_at,updated_at,deleted_at,performance_ratings_id,occupational_issue,domain,importance_score,performance_score,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT performance_ratings_id (#PCDATA)>
+<!ELEMENT occupational_issue (#PCDATA)>
+<!ELEMENT domain (#PCDATA)>
+<!ELEMENT importance_score (#PCDATA)>
+<!ELEMENT performance_score (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

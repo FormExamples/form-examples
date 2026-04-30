@@ -1,0 +1,11 @@
+<!ELEMENT assessment_allergy_item (id,created_at,updated_at,deleted_at,allergies_id,allergen,allergy_type,reaction,severity,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT allergies_id (#PCDATA)>
+<!ELEMENT allergen (#PCDATA)>
+<!ELEMENT allergy_type (#PCDATA)>
+<!ELEMENT reaction (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

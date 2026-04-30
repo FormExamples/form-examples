@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -29,10 +29,10 @@
     ]
   },
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/990e8400-e29b-41d4-a716-446655440004"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "component": [
@@ -59,6 +59,54 @@
         ]
       },
       "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:respirology-assessment",
+            "code": "email",
+            "display": "Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:respirology-assessment",
+            "code": "phone",
+            "display": "Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:respirology-assessment",
+            "code": "postal_address_as_full_text",
+            "display": "Postal Address As Full Text"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:respirology-assessment",
+            "code": "postcode",
+            "display": "Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
     },
     {
       "code": {

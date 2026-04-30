@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive dermatology assessment evaluating skin conditions, DLQI scoring, treatment response, and quality of life impact.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

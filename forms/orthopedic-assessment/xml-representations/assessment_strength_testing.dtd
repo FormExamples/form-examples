@@ -1,0 +1,10 @@
+<!ELEMENT assessment_strength_testing (id,created_at,updated_at,deleted_at,assessment_id,grip_strength_affected_kg,grip_strength_unaffected_kg,overall_strength_status,strength_testing_notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT grip_strength_affected_kg (#PCDATA)>
+<!ELEMENT grip_strength_unaffected_kg (#PCDATA)>
+<!ELEMENT overall_strength_status (#PCDATA)>
+<!ELEMENT strength_testing_notes (#PCDATA)>

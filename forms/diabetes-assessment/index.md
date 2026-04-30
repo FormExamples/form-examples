@@ -32,7 +32,7 @@ Structured diabetes review aligned with NICE NG28 (type 2) / NG17 (type 1) and t
 diabetes-assessment/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/
+  full-stack-with-loco-tera-htmx-alpine/
 ```
 
 ## Technology

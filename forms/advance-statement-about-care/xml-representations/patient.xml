@@ -2,14 +2,19 @@
 <!DOCTYPE patient SYSTEM "patient.dtd">
 <patient>
 <id>550e8400-e29b-41d4-a716-446655440000</id>
-<first_name>Jane</first_name>
-<last_name>Doe</last_name>
-<date_of_birth>1965-06-15</date_of_birth>
-<nhs_number>9434765919</nhs_number>
-<sex>male</sex>
-<weight_kg>70.0</weight_kg>
-<height_cm>170.0</height_cm>
-<bmi>24.2</bmi>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<birth_date>2026-01-15</birth_date>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<postcode>SW1A 1AA</postcode>
+<united_kingdom_nhs_number>mg/dL</united_kingdom_nhs_number>
+<height_as_cm>170.0</height_as_cm>
+<weight_as_kg>70.0</weight_as_kg>
+<body_mass_index>0.0</body_mass_index>
+<waist_height_ratio>170.0</waist_height_ratio>
+<vo2_max>0.0</vo2_max>
 </patient>

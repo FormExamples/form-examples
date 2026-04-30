@@ -2,7 +2,7 @@
 
 Server-rendered web application for evaluating gastrointestinal symptoms including upper/lower GI, alarm features, IBD activity, liver function, nutritional status, and endoscopy needs for conditions including IBS, IBD, GERD, coeliac disease, and liver disease.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

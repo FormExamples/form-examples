@@ -1,6 +1,7 @@
-<!ELEMENT assessment (id,patient_id,status,created_at,updated_at)>
+<!ELEMENT assessment (id,created_at,updated_at,deleted_at,patient_id,status)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT patient_id (#PCDATA)>
-<!ELEMENT status (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>

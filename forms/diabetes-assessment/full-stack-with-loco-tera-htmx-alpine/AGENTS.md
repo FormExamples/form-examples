@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive diabetes management assessment evaluating glycaemic control, complications screening, medication management, and self-care behaviours for type 1 and type 2 diabetes.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

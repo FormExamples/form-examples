@@ -1,9 +1,10 @@
-<!ELEMENT casualty_card_assessment_plan (id,casualty_card_id,working_diagnosis,differential_diagnoses,clinical_impression,risk_stratification,created_at,updated_at)>
+<!ELEMENT casualty_card_assessment_plan (id,created_at,updated_at,deleted_at,casualty_card_id,working_diagnosis,differential_diagnoses,clinical_impression,risk_stratification)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT working_diagnosis (#PCDATA)>
 <!ELEMENT differential_diagnoses (#PCDATA)>
 <!ELEMENT clinical_impression (#PCDATA)>
 <!ELEMENT risk_stratification (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

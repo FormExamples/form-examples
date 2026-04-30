@@ -84,7 +84,7 @@ sql-migrations/
   11_create_table_assessment_prem_fft.sql      -- step 8
   12_create_table_assessment_followup.sql      -- step 9
   13_create_table_assessment_signoff.sql       -- step 10
-  14_create_table_grading_result.sql           -- overall + per-domain grades
+  14_create_table_grade.sql           -- overall + per-domain grades
   15_create_table_grading_fired_rule.sql       -- rule trace
   16_create_table_grading_additional_flag.sql  -- per-issue flags
 ```
@@ -132,7 +132,7 @@ Pure functions, no I/O, fully unit-tested.
 
 ## Full-stack Rust backend
 
-`full-stack-with-rust-axum-loco-tera-htmx-alpine/` — Loco.rs + axum + Tera templates + HTMX + Alpine.js, using the flat schema (`schema-flat.sql`) and `serde(rename_all = "camelCase")` on structs shared with the front-end. Scaffold commands generated into `cargo-loco-generate/`.
+`full-stack-with-loco-tera-htmx-alpine/` — Loco.rs + axum + Tera templates + HTMX + Alpine.js, using the flat schema (`schema-flat.sql`) and `serde(rename_all = "camelCase")` on structs shared with the front-end. Scaffold commands generated into `cargo-loco-generate/`.
 
 ## Compliance
 
@@ -156,7 +156,7 @@ Captured in `index.md` compliance section.
 - [ ] `front-end-form-with-svelte/` with Vitest tests for OOCG grader
 - [ ] `front-end-dashboard-with-html/`
 - [ ] `front-end-dashboard-with-svelte/`
-- [ ] `full-stack-with-rust-axum-loco-tera-htmx-alpine/`
+- [ ] `full-stack-with-loco-tera-htmx-alpine/`
 - [ ] `bin/test-form outpatient-outcome-report` passes
 
 ## Non-goals

@@ -24,7 +24,7 @@ Read-and-acknowledge privacy notice covering the use of patient data for researc
 research-and-planning-privacy-notice/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/
+  full-stack-with-loco-tera-htmx-alpine/
 ```
 
 ## Technology

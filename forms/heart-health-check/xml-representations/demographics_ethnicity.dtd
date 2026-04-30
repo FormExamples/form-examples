@@ -1,9 +1,10 @@
-<!ELEMENT demographics_ethnicity (id,assessment_id,age,sex,ethnicity,townsend_deprivation,created_at,updated_at)>
+<!ELEMENT demographics_ethnicity (id,created_at,updated_at,deleted_at,assessment_id,age,sex,ethnicity,townsend_deprivation)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT age (#PCDATA)>
 <!ELEMENT sex (#PCDATA)>
 <!ELEMENT ethnicity (#PCDATA)>
 <!ELEMENT townsend_deprivation (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -1,0 +1,10 @@
+<!ELEMENT assessment_imaging_history (id,created_at,updated_at,deleted_at,assessment_id,has_previous_imaging,imaging_requested,imaging_requested_details,imaging_notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT has_previous_imaging (#PCDATA)>
+<!ELEMENT imaging_requested (#PCDATA)>
+<!ELEMENT imaging_requested_details (#PCDATA)>
+<!ELEMENT imaging_notes (#PCDATA)>

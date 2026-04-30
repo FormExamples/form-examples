@@ -3,8 +3,8 @@ CREATE TABLE grading_fired_rule (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
@@ -13,10 +13,10 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE INDEX idx_grading_fired_rule_result
-    ON grading_fired_rule(grading_result_id);
+    ON grading_fired_rule(grade_id);
 
 COMMENT ON TABLE grading_fired_rule IS
-    'Individual risk rules that fired during the Heart Health Check grading. Many-to-one child of grading_result.';
+    'Individual risk rules that fired during the Heart Health Check grading. Many-to-one child of grade.';
 COMMENT ON COLUMN grading_fired_rule.rule_id IS
     'Rule identifier (e.g. HHC-001).';
 COMMENT ON COLUMN grading_fired_rule.category IS
@@ -26,8 +26,8 @@ COMMENT ON COLUMN grading_fired_rule.description IS
 COMMENT ON COLUMN grading_fired_rule.risk_level IS
     'Risk level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN grading_fired_rule.created_at IS

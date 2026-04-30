@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,29 +19,29 @@ CREATE TABLE grading_result (
 );
 
 -- Auto-update updated_at on every row change
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     '1:1 with assessment. Stores computed hematology abnormality level, score, and optional clinician override.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'FK to assessment (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN grading_result.abnormality_level IS
+COMMENT ON COLUMN grade.abnormality_level IS
     'Computed abnormality level: draft (insufficient data), normal (0%), mildAbnormality (1-20%), moderateAbnormality (21-50%), severeAbnormality (51-75%), critical (76-100%).';
-COMMENT ON COLUMN grading_result.abnormality_score IS
+COMMENT ON COLUMN grade.abnormality_score IS
     'Composite abnormality score as percentage (0.0-100.0).';
-COMMENT ON COLUMN grading_result.abnormality_level_override IS
+COMMENT ON COLUMN grade.abnormality_level_override IS
     'Clinician-assigned abnormality level override. NULL means no override.';
-COMMENT ON COLUMN grading_result.override_reason IS
+COMMENT ON COLUMN grade.override_reason IS
     'Free-text justification for overriding the computed level. Required when override is set.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading engine produced this result.';
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -1,5 +1,8 @@
-<!ELEMENT consent_information (id,assessment_id,information_provided,risks_explained,benefits_explained,questions_answered,consent_given,consent_date,guardian_consent,created_at,updated_at)>
+<!ELEMENT consent_information (id,created_at,updated_at,deleted_at,assessment_id,information_provided,risks_explained,benefits_explained,questions_answered,consent_given,consent_date,guardian_consent)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT information_provided (#PCDATA)>
 <!ELEMENT risks_explained (#PCDATA)>
@@ -8,5 +11,3 @@
 <!ELEMENT consent_given (#PCDATA)>
 <!ELEMENT consent_date (#PCDATA)>
 <!ELEMENT guardian_consent (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

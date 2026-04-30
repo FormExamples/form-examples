@@ -248,7 +248,7 @@ async fn show_report(
         });
     }
 
-    let grading_result = crate::engine::types::GradingResult {
+    let grade = crate::engine::types::GradingResult {
         news2_score,
         clinical_response: clinical_response.clone(),
         fired_rules: fired_rules.clone(),
@@ -257,7 +257,7 @@ async fn show_report(
     };
 
     // Store result in DB
-    let result_json = serde_json::to_value(&grading_result).map_err(Error::wrap)?;
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
     let mut active: ActiveModel = item.into_active_model();
     active.result = ActiveValue::Set(Some(result_json));
     active.status = ActiveValue::Set("completed".to_string());

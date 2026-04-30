@@ -110,7 +110,7 @@ INSERT INTO asa_rule (code, system, description, grade) VALUES
 -- ========================================================================
 
 -- ============================================================
--- 20_grading_result.sql
+-- 20_grade.sql
 -- Computed ASA grading result (1:1 with assessment).
 -- ============================================================
 -- Stores the output of the ASA grading engine. Created when

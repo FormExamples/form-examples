@@ -2,7 +2,7 @@
 
 Server-rendered web application for autism spectrum screening using the AQ-10 (Autism Spectrum Quotient) instrument alongside clinical observation of social communication, restricted/repetitive behaviours, sensory processing, developmental history, and support needs.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

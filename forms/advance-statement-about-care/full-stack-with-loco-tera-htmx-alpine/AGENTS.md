@@ -2,7 +2,7 @@
 
 Server-rendered web application for documenting patient wishes, preferences, and values for future care using completeness-based scoring.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

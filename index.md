@@ -16,7 +16,7 @@ engine, and generates a clinical report with flagged issues.
 - Full-stack Rust implementation (axum + Loco + Tera + HTMX + Alpine.js)
 
 For the full list of form projects, see [`forms/AGENTS.md`](forms/AGENTS.md)
-or run `bin/list-forms-as-kebab-case`.
+or run `bin/forms-as-kebab-case`.
 
 ## Form categories
 
@@ -46,7 +46,7 @@ or run `bin/list-forms-as-kebab-case`.
 │   ├── sql-migrations.md
 │   ├── xml-representations.md
 │   └── fhir-r5.md
-├── bin/                            # Tools (list-forms-as-kebab-case, create-form, test, etc.)
+├── bin/                            # Tools (forms-as-kebab-case, create-form, test, etc.)
 ├── docs/                           # Repo-wide docs (specs, plans)
 ├── forms/                          # All form projects
 │   ├── AGENTS.md                   # Index of all forms
@@ -76,7 +76,7 @@ forms/<slug>/
   front-end-form-with-svelte/                      # Patient questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit)
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/ # Full-stack Rust backend
+  full-stack-with-loco-tera-htmx-alpine/ # Full-stack Rust backend
 ```
 
 ## Design patterns
@@ -115,7 +115,7 @@ See the per-stack agent docs:
 
 ## Tools
 
-- `bin/list-forms-as-kebab-case` — list all form directory slugs
+- `bin/forms-as-kebab-case` — list all form directory slugs
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/test` — validate structure of all forms
 - `bin/test-form <slug>` — validate one form
@@ -154,10 +154,30 @@ cargo install loco
 cargo install sea-orm-cli
 ```
 
-Create database default role:
+Create role if needed via shell:
+
+```sh
+createuser --host=localhost --port=5432 --username=postgres --login --createdb loco || :
+```
+
+Create role if needed via psql:
 
 ```sql
 CREATE USER loco PASSWORD 'loco';
+ALTER USER username CREATEDB; 
+```
+
+Create databases via shell:
+
+```sh
+createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_development || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_test || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_production || :
+```
+
+Create databases via psql:
+
+```sql
 CREATE DATABASE pre_operative_assessment_by_clinician_development OWNER loco;
 CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER loco;
 ```

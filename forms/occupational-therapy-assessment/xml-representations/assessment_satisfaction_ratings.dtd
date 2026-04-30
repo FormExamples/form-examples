@@ -1,0 +1,11 @@
+<!ELEMENT assessment_satisfaction_ratings (id,created_at,updated_at,deleted_at,assessment_id,overall_satisfaction_score,self_care_satisfaction_score,productivity_satisfaction_score,leisure_satisfaction_score,satisfaction_notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT overall_satisfaction_score (#PCDATA)>
+<!ELEMENT self_care_satisfaction_score (#PCDATA)>
+<!ELEMENT productivity_satisfaction_score (#PCDATA)>
+<!ELEMENT leisure_satisfaction_score (#PCDATA)>
+<!ELEMENT satisfaction_notes (#PCDATA)>

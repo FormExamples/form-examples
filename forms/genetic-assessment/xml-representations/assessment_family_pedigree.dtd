@@ -1,0 +1,13 @@
+<!ELEMENT assessment_family_pedigree (id,created_at,updated_at,deleted_at,assessment_id,total_first_degree_relatives,total_second_degree_relatives,consanguinity_in_family,consanguinity_details,adoption_status,pedigree_notes,three_generation_pedigree_drawn)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT total_first_degree_relatives (#PCDATA)>
+<!ELEMENT total_second_degree_relatives (#PCDATA)>
+<!ELEMENT consanguinity_in_family (#PCDATA)>
+<!ELEMENT consanguinity_details (#PCDATA)>
+<!ELEMENT adoption_status (#PCDATA)>
+<!ELEMENT pedigree_notes (#PCDATA)>
+<!ELEMENT three_generation_pedigree_drawn (#PCDATA)>

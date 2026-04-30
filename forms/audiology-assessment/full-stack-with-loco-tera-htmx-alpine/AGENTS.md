@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive audiology assessment evaluating hearing loss type and severity, tinnitus, balance disorders, audiometric results, and hearing aid candidacy.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

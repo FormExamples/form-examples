@@ -102,7 +102,7 @@ pre-operative-assessment-by-clinician/
   front-end-form-with-svelte/                       # SvelteKit single-page wizard
   front-end-dashboard-with-html/                    # review dashboard (HTML table)
   front-end-dashboard-with-svelte/                  # review dashboard (SVAR Grid)
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/  # Rust backend + server-rendered UI
+  full-stack-with-loco-tera-htmx-alpine/  # Rust backend + server-rendered UI
 ```
 
 > Note: the monorepo uses the directory name `front-end-patient-form-with-*` as

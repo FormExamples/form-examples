@@ -17,5 +17,5 @@
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Pre Operative Assessment By Clinician grading result",
-  "summary": "Computed Asa Grade: I; Final Asa Grade: I; Asa Emergency Suffix: E; Override Reason: Example text.; Mallampati Class: I; Rcri Score: 5; Stopbang Score: 5; Frailty Scale: 1; Composite Risk: low; Recommendation: proceed; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Computed Asa Grade: I; Final Asa Grade: I; Asa Emergency Suffix: E; Override Reason: Example text.; Mallampati Class: I; Rcri Score: 5; Stopbang Score: 5; Frailty Scale: 1; Composite Risk: low; Recommendation: proceed; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
 }

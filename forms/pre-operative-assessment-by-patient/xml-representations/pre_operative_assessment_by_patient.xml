@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pre_operative_assessment_by_patient SYSTEM "pre_operative_assessment_by_patient.dtd">
+<pre_operative_assessment_by_patient>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>bb0e8400-e29b-41d4-a716-446655440006</patient_id>
+<weight>70.0</weight>
+<height>170.0</height>
+<bmi>24.2</bmi>
+<planned_procedure>Example text.</planned_procedure>
+<procedure_urgency>elective</procedure_urgency>
+<status>in_progress</status>
+<hypertension>yes</hypertension>
+<hypertension_controlled>yes</hypertension_controlled>
+<ischemic_heart_disease>yes</ischemic_heart_disease>
+<ihd_details>Example text.</ihd_details>
+<heart_failure>yes</heart_failure>
+<heart_failure_nyha>1</heart_failure_nyha>
+<valvular_disease>yes</valvular_disease>
+<valvular_details>Example text.</valvular_details>
+<arrhythmia>yes</arrhythmia>
+<arrhythmia_type>standard</arrhythmia_type>
+<pacemaker>yes</pacemaker>
+<recent_mi>yes</recent_mi>
+<recent_mi_weeks>1</recent_mi_weeks>
+<asthma>yes</asthma>
+<asthma_frequency>intermittent</asthma_frequency>
+<copd>yes</copd>
+<copd_severity>mild</copd_severity>
+<osa>yes</osa>
+<osa_cpap>yes</osa_cpap>
+<smoking>current</smoking>
+<smoking_pack_years>2026</smoking_pack_years>
+<recent_urti>yes</recent_urti>
+<ckd>yes</ckd>
+<ckd_stage>1</ckd_stage>
+<dialysis>yes</dialysis>
+<dialysis_type>haemodialysis</dialysis_type>
+<liver_disease>yes</liver_disease>
+<cirrhosis>yes</cirrhosis>
+<child_pugh_score>A</child_pugh_score>
+<hepatitis>yes</hepatitis>
+<hepatitis_type>standard</hepatitis_type>
+<diabetes>type1</diabetes>
+<diabetes_control>well-controlled</diabetes_control>
+<diabetes_on_insulin>yes</diabetes_on_insulin>
+<thyroid_disease>yes</thyroid_disease>
+<thyroid_type>hypothyroid</thyroid_type>
+<adrenal_insufficiency>yes</adrenal_insufficiency>
+<stroke_or_tia>yes</stroke_or_tia>
+<stroke_details>Example text.</stroke_details>
+<epilepsy>yes</epilepsy>
+<epilepsy_controlled>yes</epilepsy_controlled>
+<neuromuscular_disease>yes</neuromuscular_disease>
+<neuromuscular_details>Example text.</neuromuscular_details>
+<raised_icp>yes</raised_icp>
+<bleeding_disorder>yes</bleeding_disorder>
+<bleeding_details>Example text.</bleeding_details>
+<on_anticoagulants>yes</on_anticoagulants>
+<anticoagulant_type>standard</anticoagulant_type>
+<sickle_cell_disease>yes</sickle_cell_disease>
+<sickle_cell_trait>yes</sickle_cell_trait>
+<anaemia>yes</anaemia>
+<rheumatoid_arthritis>yes</rheumatoid_arthritis>
+<cervical_spine_issues>yes</cervical_spine_issues>
+<limited_neck_movement>yes</limited_neck_movement>
+<limited_mouth_opening>yes</limited_mouth_opening>
+<dental_issues>yes</dental_issues>
+<dental_details>Example text.</dental_details>
+<previous_difficult_airway>yes</previous_difficult_airway>
+<mallampati_score>1</mallampati_score>
+<gord>yes</gord>
+<hiatus_hernia>yes</hiatus_hernia>
+<nausea>yes</nausea>
+<name>Example</name>
+<dose>500mg</dose>
+<frequency>twice daily</frequency>
+<sort_order>0</sort_order>
+<allergen>Peanuts</allergen>
+<reaction>Urticaria</reaction>
+<severity>mild</severity>
+<allergy_sort_order>0</allergy_sort_order>
+<previous_anaesthesia>yes</previous_anaesthesia>
+<anaesthesia_problems>yes</anaesthesia_problems>
+<anaesthesia_problem_details>Example text.</anaesthesia_problem_details>
+<family_mh_history>yes</family_mh_history>
+<family_mh_details>Example text.</family_mh_details>
+<ponv>yes</ponv>
+<alcohol>none</alcohol>
+<alcohol_units_per_week>1</alcohol_units_per_week>
+<recreational_drugs>yes</recreational_drugs>
+<drug_details>Example text.</drug_details>
+<exercise_tolerance>unable</exercise_tolerance>
+<estimated_mets>0.0</estimated_mets>
+<mobility_aids>yes</mobility_aids>
+<recent_decline>yes</recent_decline>
+<possibly_pregnant>yes</possibly_pregnant>
+<pregnancy_confirmed>yes</pregnancy_confirmed>
+<gestation_weeks>1</gestation_weeks>
+</pre_operative_assessment_by_patient>

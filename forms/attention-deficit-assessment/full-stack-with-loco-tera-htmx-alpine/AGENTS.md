@@ -2,7 +2,7 @@
 
 Server-rendered web application for conducting adult ADHD assessments using the ASRS (Adult ADHD Self-Report Scale) v1.1 screener with comprehensive clinical evaluation.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "id": "dd0e8400-e29b-41d4-a716-446655440008",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -29,7 +29,7 @@
     ]
   },
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
   },
   "encounter": {
     "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
@@ -59,6 +59,54 @@
         ]
       },
       "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:medical-records-release-permission",
+            "code": "email",
+            "display": "Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:medical-records-release-permission",
+            "code": "phone",
+            "display": "Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:medical-records-release-permission",
+            "code": "postal_address_as_full_text",
+            "display": "Postal Address As Full Text"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:medical-records-release-permission",
+            "code": "postcode",
+            "display": "Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
     },
     {
       "code": {

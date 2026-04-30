@@ -3,8 +3,8 @@ CREATE TABLE grading_additional_flag (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -18,10 +18,10 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag (grading_result_id, flag_id);
+    ON grading_additional_flag (grade_id, flag_id);
 
 COMMENT ON TABLE grading_additional_flag IS 'Safety-critical clinical flags raised alongside the grading result.';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS 'Foreign key to the parent grading result.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS 'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS 'Stable identifier of the flag.';
 COMMENT ON COLUMN grading_additional_flag.category IS 'Category / domain of the flag.';
 COMMENT ON COLUMN grading_additional_flag.description IS 'Human-readable description of the flag.';

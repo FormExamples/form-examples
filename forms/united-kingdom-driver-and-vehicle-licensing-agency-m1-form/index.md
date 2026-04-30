@@ -124,7 +124,7 @@ Same structure as other DVLA forms:
 united-kingdom-driver-and-vehicle-licensing-agency-m1-form/
   front-end-form-with-svelte/                         # Patient questionnaire
   front-end-dashboard-with-svelte/                    # Dashboard
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/    # Full-stack option
+  full-stack-with-loco-tera-htmx-alpine/    # Full-stack option
 ```
 
 ## Technology

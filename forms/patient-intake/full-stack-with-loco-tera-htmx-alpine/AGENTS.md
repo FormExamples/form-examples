@@ -2,7 +2,7 @@
 
 Server-rendered Rust web application using Loco framework with Tera templates for patient intake assessment.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Architecture
 

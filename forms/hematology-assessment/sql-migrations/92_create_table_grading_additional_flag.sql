@@ -4,7 +4,7 @@ CREATE TABLE grading_additional_flag (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many flags
-    grading_result_id   UUID NOT NULL REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
     -- Flag identification (matches the application-side flag id)
     flag_id             TEXT NOT NULL,
     -- Flag details
@@ -14,12 +14,12 @@ CREATE TABLE grading_additional_flag (
 );
 
 -- Index for fetching all flags for a grading result
-CREATE INDEX idx_grading_additional_flag_grading_result_id
-    ON grading_additional_flag(grading_result_id);
+CREATE INDEX idx_grading_additional_flag_grade_id
+    ON grading_additional_flag(grade_id);
 
 -- Prevent duplicate flags per grading result
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag(grading_result_id, flag_id);
+    ON grading_additional_flag(grade_id, flag_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
@@ -27,9 +27,9 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE grading_additional_flag IS
-    'Many-to-one with grading_result. Safety-critical alerts detected by the flagged issues engine.';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
-    'FK to grading_result. One result may have many flags.';
+    'Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'FK to grade. One result may have many flags.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS
     'Application-side flag identifier (e.g. FLAG-CBC-001, FLAG-COAG-001).';
 COMMENT ON COLUMN grading_additional_flag.category IS

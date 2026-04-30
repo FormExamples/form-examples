@@ -3,7 +3,7 @@
 Server-rendered web application for evaluating sleep quality using the Pittsburgh Sleep Quality Index (PSQI), Epworth Sleepiness Scale (ESS), and STOP-BANG screening for obstructive sleep apnoea.
 Client-side interactivity via HTMX for smooth navigation and Alpine.js for instant conditional field toggles.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Technology Stack
 

@@ -1,6 +1,6 @@
 {
   "resourceType": "ClinicalImpression",
-  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "id": "660e8400-e29b-41d4-a716-446655440001",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -9,13 +9,13 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/990e8400-e29b-41d4-a716-446655440004"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Mental Health Assessment grading result",
-  "summary": "Phq9 Total Score: 5; Phq9 Severity: minimal; Gad7 Total Score: 5; Gad7 Severity: minimal; Risk Level: low"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Phq9 Total Score: 5; Phq9 Severity: minimal; Gad7 Total Score: 5; Gad7 Severity: minimal; Risk Level: low"
 }

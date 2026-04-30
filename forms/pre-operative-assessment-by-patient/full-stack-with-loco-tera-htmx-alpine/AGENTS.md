@@ -1,6 +1,6 @@
 # Pre-Operative Assessment: Full Stack With Rust Axum Loco Tera
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ### Directory Structure
 

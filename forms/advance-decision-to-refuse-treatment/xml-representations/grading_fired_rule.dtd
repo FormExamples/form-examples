@@ -1,9 +1,10 @@
-<!ELEMENT grading_fired_rule (id,grading_result_id,rule_id,category,description,validity_level,created_at,updated_at)>
+<!ELEMENT grading_fired_rule (id,created_at,updated_at,deleted_at,grade_id,rule_id,category,description,validity_level)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT grading_result_id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT grade_id (#PCDATA)>
 <!ELEMENT rule_id (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
 <!ELEMENT validity_level (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

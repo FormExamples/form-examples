@@ -3,8 +3,8 @@ CREATE TABLE grading_additional_flag (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -19,7 +19,7 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
 
 COMMENT ON TABLE grading_additional_flag IS
     'Additional safety-critical flags detected during MCAS assessment grading (e.g. anaphylaxis risk, elevated tryptase, multi-system involvement).';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
     'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-ANAPH-001, FLAG-TRYPT-001).';

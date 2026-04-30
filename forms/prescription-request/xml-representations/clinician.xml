@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clinician SYSTEM "clinician.dtd">
 <clinician>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
-<first_name>Jane</first_name>
-<last_name>Doe</last_name>
-<nhs_employee_number></nhs_employee_number>
-<phone>07700900000</phone>
-<email>jane.doe@example.com</email>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<postcode>SW1A 1AA</postcode>
+<role>anaesthetist</role>
+<registration_body>GMC</registration_body>
+<registration_number></registration_number>
+<united_kingdom_nhs_number>mg/dL</united_kingdom_nhs_number>
 </clinician>

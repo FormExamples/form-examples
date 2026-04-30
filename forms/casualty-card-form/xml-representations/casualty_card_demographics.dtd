@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_demographics (id,casualty_card_id,address,postcode,phone,email,ethnicity,preferred_language,interpreter_required,created_at,updated_at)>
+<!ELEMENT casualty_card_demographics (id,created_at,updated_at,deleted_at,casualty_card_id,address,postcode,phone,email,ethnicity,preferred_language,interpreter_required)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT address (#PCDATA)>
 <!ELEMENT postcode (#PCDATA)>
@@ -8,5 +11,3 @@
 <!ELEMENT ethnicity (#PCDATA)>
 <!ELEMENT preferred_language (#PCDATA)>
 <!ELEMENT interpreter_required (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

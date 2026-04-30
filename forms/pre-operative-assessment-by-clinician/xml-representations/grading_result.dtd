@@ -1,6 +1,9 @@
-<!ELEMENT grading_result (id,assessment_id,computed_asa_grade,final_asa_grade,asa_emergency_suffix,override_reason,mallampati_class,rcri_score,stopbang_score,frailty_scale,composite_risk,recommendation,clinician_notes,signed_at,graded_at,created_at,updated_at)>
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,pre_operative_assessment_by_clinician_id,computed_asa_grade,final_asa_grade,asa_emergency_suffix,override_reason,mallampati_class,rcri_score,stopbang_score,frailty_scale,composite_risk,recommendation,clinician_notes,signed_at,graded_at)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT pre_operative_assessment_by_clinician_id (#PCDATA)>
 <!ELEMENT computed_asa_grade (#PCDATA)>
 <!ELEMENT final_asa_grade (#PCDATA)>
 <!ELEMENT asa_emergency_suffix (#PCDATA)>
@@ -14,5 +17,3 @@
 <!ELEMENT clinician_notes (#PCDATA)>
 <!ELEMENT signed_at (#PCDATA)>
 <!ELEMENT graded_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

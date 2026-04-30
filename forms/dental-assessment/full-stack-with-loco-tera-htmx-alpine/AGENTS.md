@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive dental assessment evaluating oral health status, periodontal condition, dental caries risk, treatment needs, and oral hygiene habits.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

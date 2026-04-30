@@ -2,7 +2,7 @@
 
 Server-rendered web application for clinical asthma assessment based on GINA (Global Initiative for Asthma) guidelines, evaluating symptom control, lung function, exacerbation risk, and treatment step.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

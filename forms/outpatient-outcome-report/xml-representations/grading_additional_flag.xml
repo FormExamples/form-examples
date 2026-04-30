@@ -2,7 +2,7 @@
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
 <grading_additional_flag>
 <id>440e8400-e29b-41d4-a716-44665544000e</id>
-<grading_result_id>220e8400-e29b-41d4-a716-44665544000c</grading_result_id>
+<grade_id>220e8400-e29b-41d4-a716-44665544000c</grade_id>
 <flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
 <category>General</category>
 <description>Example text.</description>

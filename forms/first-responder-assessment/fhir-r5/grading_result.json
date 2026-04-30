@@ -9,13 +9,13 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/660e8400-e29b-41d4-a716-446655440001"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "First Responder Assessment grading result",
-  "summary": "Physical Fitness Level: not-competent; Clinical Skills Level: not-competent; Equipment Vehicle Level: not-competent; Communication Level: not-competent; Psychological Level: not-competent; Overall Competency: not-competent; Overall Fitness: fit-for-duty"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Physical Fitness Level: not-competent; Clinical Skills Level: not-competent; Equipment Vehicle Level: not-competent; Communication Level: not-competent; Psychological Level: not-competent; Overall Competency: not-competent; Overall Fitness: fit-for-duty"
 }

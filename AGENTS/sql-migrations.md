@@ -19,7 +19,7 @@ sql-migrations/
   03_create_table_clinician.sql          # Assessment header / encounter
   04_create_table_[form_snake_case].sql          # Assessment header / encounter
   ...
-  90_create_table_grading_result.sql      # Computed scoring / grading result
+  90_create_table_grade.sql      # Computed scoring / grading result
   91_create_table_grading_fired_rule.sql  # Rules that fired during grading
   92_create_table_grading_additional_flag.sql # Safety-critical flags
 ```

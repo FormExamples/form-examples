@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,33 +18,33 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed prenatal risk stratification result. Risk level based on obstetric, medical, and mental health factors. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.risk_level IS
+COMMENT ON COLUMN grade.risk_level IS
     'Overall prenatal risk level: low, moderate, or high.';
-COMMENT ON COLUMN grading_result.risk_score IS
+COMMENT ON COLUMN grade.risk_score IS
     'Aggregate risk score across all domains.';
-COMMENT ON COLUMN grading_result.obstetric_risk IS
+COMMENT ON COLUMN grade.obstetric_risk IS
     'Risk level from obstetric history: low, moderate, high, or empty.';
-COMMENT ON COLUMN grading_result.medical_risk IS
+COMMENT ON COLUMN grade.medical_risk IS
     'Risk level from medical history: low, moderate, high, or empty.';
-COMMENT ON COLUMN grading_result.mental_health_risk IS
+COMMENT ON COLUMN grade.mental_health_risk IS
     'Risk level from mental health screening: low, moderate, high, or empty.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

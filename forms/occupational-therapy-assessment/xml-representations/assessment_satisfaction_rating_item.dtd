@@ -1,0 +1,10 @@
+<!ELEMENT assessment_satisfaction_rating_item (id,created_at,updated_at,deleted_at,satisfaction_ratings_id,occupational_issue,domain,satisfaction_score,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT satisfaction_ratings_id (#PCDATA)>
+<!ELEMENT occupational_issue (#PCDATA)>
+<!ELEMENT domain (#PCDATA)>
+<!ELEMENT satisfaction_score (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

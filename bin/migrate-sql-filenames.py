@@ -9,7 +9,7 @@ Canonical filename layout per form:
     02_create_table_patient.sql              -- canonical patient
     03_create_table_clinician.sql            -- canonical clinician
     04_create_table_<slug>.sql               -- per-form main assessment
-    05_create_table_grading_result.sql
+    05_create_table_grade.sql
     06_create_table_grading_fired_rule.sql
     07_create_table_grading_additional_flag.sql
     (and any additional CREATE TABLE statements renumbered sequentially)
@@ -228,7 +228,7 @@ def explode_main_sql(sql_dir: Path):
     for table, block in blocks:
         if table == "patient":
             continue
-        if table in ("grading_result", "grading_fired_rule", "grading_additional_flag"):
+        if table in ("grade", "grading_fired_rule", "grading_additional_flag"):
             continue
         tmp_index = 40 + len(new_files)
         out = sql_dir / f"{tmp_index:02d}_create_table_{table}.sql"
@@ -384,7 +384,7 @@ def process_form(form_dir: Path):
             return 0
         if table.startswith("assessment_"):
             return 1
-        if table == "grading_result":
+        if table == "grade":
             return 3
         if table in ("grading_fired_rule", "grading_additional_flag"):
             return 4

@@ -2,7 +2,7 @@
 
 Server-rendered web application for creating, reviewing, and grading Advance Decisions to Refuse Treatment (ADRT) under the UK Mental Capacity Act 2005.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

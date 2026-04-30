@@ -9,7 +9,7 @@ FHIR resource mapping:
   assessment               → Encounter
   assessment_*             → Observation (one per section)
   *_item                   → Observation (one per item row)
-  grading_result           → ClinicalImpression
+  grade           → ClinicalImpression
   grading_fired_rule       → DetectedIssue (finding)
   grading_additional_flag  → DetectedIssue (flag)
 """
@@ -627,7 +627,7 @@ def build_observation_resource(table_name, columns, form_slug):
 
 
 def build_clinical_impression_resource(table_name, columns, form_slug):
-    """Build a FHIR R5 ClinicalImpression resource from the grading_result table."""
+    """Build a FHIR R5 ClinicalImpression resource from the grade table."""
     ci_id = get_uuid(table_name)
     patient_id = get_uuid("patient")
     encounter_id = get_uuid("assessment")
@@ -715,7 +715,7 @@ def build_fired_rule_resource(table_name, columns, form_slug):
 
     # Add evidence from columns
     evidence = []
-    skip_cols = {'id', 'grading_result_id', 'created_at', 'updated_at'}
+    skip_cols = {'id', 'grade_id', 'created_at', 'updated_at'}
     for col in columns:
         if col['name'] in skip_cols:
             continue
@@ -779,7 +779,7 @@ def build_additional_flag_resource(table_name, columns, form_slug):
     }
 
     # Map columns
-    skip_cols = {'id', 'grading_result_id', 'created_at', 'updated_at'}
+    skip_cols = {'id', 'grade_id', 'created_at', 'updated_at'}
     for col in columns:
         if col['name'] in skip_cols or col['name'].endswith('_id'):
             continue
@@ -804,7 +804,7 @@ def classify_table(table_name):
         return 'patient'
     if table_name == 'assessment':
         return 'encounter'
-    if table_name == 'grading_result':
+    if table_name == 'grade':
         return 'clinical_impression'
     if table_name == 'grading_fired_rule':
         return 'fired_rule'

@@ -27,14 +27,14 @@
       "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms && bin/test-forms 2>&1)",
       "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/casuality-card-form/front-end-patient-form-with-svelte && npm run build 2>&1 | tail -5)",
       "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/heart-health-check && rm -rf front-end-patient-form-with-html/front-end-patient-form-with-svelte && ls front-end-patient-form-with-html/)",
-      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment/full-stack-with-rust-axum-loco-tera-htmx-alpine && cargo build 2>&1)",
+      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment/full-stack-with-loco-tera-htmx-alpine && cargo build 2>&1)",
       "Bash(cargo test 2>&1)",
-      "Bash(grep -l \"medications\\\\|allergies\" /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment/full-stack-with-rust-axum-loco-tera-htmx-alpine/templates/assessment/step*.tera | head -3)",
-      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/casuality-card-form/full-stack-with-rust-axum-loco-tera-htmx-alpine && mkdir -p migration/src config src/controllers src/engine src/models/_entities src/views templates/assessment assets/static/css tests/engine)",
+      "Bash(grep -l \"medications\\\\|allergies\" /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment/full-stack-with-loco-tera-htmx-alpine/templates/assessment/step*.tera | head -3)",
+      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/casuality-card-form/full-stack-with-loco-tera-htmx-alpine && mkdir -p migration/src config src/controllers src/engine src/models/_entities src/views templates/assessment assets/static/css tests/engine)",
       "Bash(cargo build 2>&1)",
       "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms && ls -d */ | head -20)",
-      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/sleep-quality-assessment/full-stack-with-rust-axum-loco-tera-htmx-alpine && cargo build 2>&1)",
-      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/sleep-quality-assessment/full-stack-with-rust-axum-loco-tera-htmx-alpine && cargo test 2>&1)"
+      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/sleep-quality-assessment/full-stack-with-loco-tera-htmx-alpine && cargo build 2>&1)",
+      "Bash(cd /Users/jph/git/joelparkerhenderson/medical-forms/forms/sleep-quality-assessment/full-stack-with-loco-tera-htmx-alpine && cargo test 2>&1)"
     ]
   }
 }

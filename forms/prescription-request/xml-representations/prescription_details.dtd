@@ -1,5 +1,8 @@
-<!ELEMENT prescription_details (id,prescription_request_id,request_date,medication_name,dosage,frequency,route_of_administration,treatment_instructions,created_at,updated_at)>
+<!ELEMENT prescription_details (id,created_at,updated_at,deleted_at,prescription_request_id,request_date,medication_name,dosage,frequency,route_of_administration,treatment_instructions)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT prescription_request_id (#PCDATA)>
 <!ELEMENT request_date (#PCDATA)>
 <!ELEMENT medication_name (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT frequency (#PCDATA)>
 <!ELEMENT route_of_administration (#PCDATA)>
 <!ELEMENT treatment_instructions (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

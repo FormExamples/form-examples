@@ -3,8 +3,8 @@ CREATE TABLE grading_additional_flag (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -39,8 +39,8 @@ CREATE TABLE grading_additional_flag (
     suggested_action VARCHAR(500) NOT NULL DEFAULT ''
 );
 
-CREATE INDEX idx_grading_additional_flag_grading_result_id
-    ON grading_additional_flag(grading_result_id);
+CREATE INDEX idx_grading_additional_flag_grade_id
+    ON grading_additional_flag(grade_id);
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
     BEFORE UPDATE ON grading_additional_flag
@@ -49,8 +49,8 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
 
 COMMENT ON TABLE grading_additional_flag IS
     'Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
-    'Foreign key to the parent grading_result.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'Foreign key to the parent grade.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS
     'Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).';
 COMMENT ON COLUMN grading_additional_flag.category IS

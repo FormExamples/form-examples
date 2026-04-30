@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -20,35 +20,35 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed DMFT grading result for dental assessment. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.dmft_score IS
+COMMENT ON COLUMN grade.dmft_score IS
     'Total DMFT score (D + M + F), range 0-28.';
-COMMENT ON COLUMN grading_result.decayed_count IS
+COMMENT ON COLUMN grade.decayed_count IS
     'Number of decayed teeth contributing to the score.';
-COMMENT ON COLUMN grading_result.missing_count IS
+COMMENT ON COLUMN grade.missing_count IS
     'Number of missing teeth contributing to the score.';
-COMMENT ON COLUMN grading_result.filled_count IS
+COMMENT ON COLUMN grade.filled_count IS
     'Number of filled teeth contributing to the score.';
-COMMENT ON COLUMN grading_result.severity_level IS
+COMMENT ON COLUMN grade.severity_level IS
     'DMFT severity classification: very_low (0-4), low (5-8), moderate (9-13), high (14-17), very_high (18+).';
-COMMENT ON COLUMN grading_result.periodontal_risk IS
+COMMENT ON COLUMN grade.periodontal_risk IS
     'Overall periodontal risk level derived from the periodontal assessment.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

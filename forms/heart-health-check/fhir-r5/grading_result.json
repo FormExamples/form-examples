@@ -9,13 +9,13 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/bb0e8400-e29b-41d4-a716-446655440006"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Heart Health Check grading result",
-  "summary": "Risk Category: draft; Ten Year Risk Percent: 0.0; Heart Age: 45"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Risk Category: draft; Ten Year Risk Percent: 0.0; Heart Age: 45"
 }

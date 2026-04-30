@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -14,29 +14,29 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed IPSS prostate symptom grading result. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.ipss_total_score IS
+COMMENT ON COLUMN grade.ipss_total_score IS
     'IPSS total score (0-35); 0-7 mild, 8-19 moderate, 20-35 severe.';
-COMMENT ON COLUMN grading_result.ipss_qol_score IS
+COMMENT ON COLUMN grade.ipss_qol_score IS
     'IPSS quality of life bother score (0-6).';
-COMMENT ON COLUMN grading_result.symptom_severity IS
+COMMENT ON COLUMN grade.symptom_severity IS
     'Symptom severity category: mild (0-7), moderate (8-19), severe (20-35), or empty string if not yet graded.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

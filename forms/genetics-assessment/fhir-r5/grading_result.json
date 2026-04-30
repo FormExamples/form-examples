@@ -9,13 +9,13 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/660e8400-e29b-41d4-a716-446655440001"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Genetics Assessment grading result",
-  "summary": "Result Category: General; Result Score: 5.0; Result Notes: Example text."
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Result Category: General; Result Score: 5.0; Result Notes: Example text."
 }

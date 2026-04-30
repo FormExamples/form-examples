@@ -1,10 +1,11 @@
-<!ELEMENT news2_result (id,casualty_card_id,total_score,clinical_response,has_any_single_score_3,parameter_scores,scored_at,created_at,updated_at)>
+<!ELEMENT news2_result (id,created_at,updated_at,deleted_at,casualty_card_id,total_score,clinical_response,has_any_single_score_3,supplemental_oxygen,scored_at)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT total_score (#PCDATA)>
 <!ELEMENT clinical_response (#PCDATA)>
 <!ELEMENT has_any_single_score_3 (#PCDATA)>
-<!ELEMENT parameter_scores (#PCDATA)>
+<!ELEMENT supplemental_oxygen (#PCDATA)>
 <!ELEMENT scored_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

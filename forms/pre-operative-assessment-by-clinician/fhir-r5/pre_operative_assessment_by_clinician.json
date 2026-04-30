@@ -41,6 +41,18 @@
         "coding": [
           {
             "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
             "code": "status",
             "display": "Status"
           }

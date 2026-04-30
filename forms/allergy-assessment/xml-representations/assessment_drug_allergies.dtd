@@ -1,0 +1,8 @@
+<!ELEMENT assessment_drug_allergies (id,created_at,updated_at,deleted_at,assessment_id,has_drug_allergies,cross_reactivity_concerns)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT has_drug_allergies (#PCDATA)>
+<!ELEMENT cross_reactivity_concerns (#PCDATA)>

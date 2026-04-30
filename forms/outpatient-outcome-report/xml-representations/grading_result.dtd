@@ -1,4 +1,4 @@
-<!ELEMENT grading_result (id,assessment_id,overall_grade,clinical_grade,prom_grade,prem_grade,operational_grade,result_notes,graded_at,created_at,updated_at)>
+<!ELEMENT grade (id,assessment_id,overall_grade,clinical_grade,prom_grade,prem_grade,operational_grade,result_notes,graded_at,created_at,updated_at)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT overall_grade (#PCDATA)>

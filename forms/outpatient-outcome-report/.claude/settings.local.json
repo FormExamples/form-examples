@@ -21,7 +21,24 @@
       "Bash(cp __TRACKED_VAR__/src/routes/+page.svelte __TRACKED_VAR__/src/routes/+page.svelte)",
       "Bash(bin/test-form outpatient-outcome-report-front-end-form-with-html *)",
       "Bash(bin/test-form outpatient-outcome-report *)",
-      "Bash(cargo build *)"
+      "Bash(cargo build *)",
+      "Bash(bin/test)",
+      "Bash(pnpm exec *)",
+      "Bash(cargo test *)",
+      "Bash(bin/test-form hospital-discharge *)",
+      "Bash(ls etc/skel/cargo-loco-generate)",
+      "Bash(ls forms/pre-operative-assessment-by-clinician/cargo-loco-generate.sh)",
+      "Bash(find forms *)",
+      "Bash(rm -rf /Users/jph/git/joelparkerhenderson/medical-forms/etc/skel/cargo-loco-generate)",
+      "Bash(rm -f /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-clinician/cargo-loco-generate.sh)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(python3 /tmp/replace_nyi_stubs.py)",
+      "Bash(python3 /Users/jph/git/joelparkerhenderson/medical-forms/bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py)",
+      "Bash(kill 10938)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs kill *)",
+      "Bash(python3 *)"
     ]
   }
 }

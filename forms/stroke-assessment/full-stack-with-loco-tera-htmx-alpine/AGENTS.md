@@ -2,7 +2,7 @@
 
 Server-rendered web application for stroke assessment based on the NIHSS (National Institutes of Health Stroke Scale), evaluating stroke type, severity, risk factors, functional status, and secondary prevention.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Technology Stack
 

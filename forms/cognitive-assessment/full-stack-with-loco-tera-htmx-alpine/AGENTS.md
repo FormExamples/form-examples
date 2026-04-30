@@ -2,7 +2,7 @@
 
 Server-rendered web application for cognitive function screening using MMSE (Mini-Mental State Examination) and MoCA (Montreal Cognitive Assessment) for dementia screening.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

@@ -39,8 +39,10 @@
  */
 declare module '$env/static/private' {
 	export const MANPATH: string;
+	export const NoDefaultCurrentDirectoryInExePath: string;
 	export const __MISE_DIFF: string;
 	export const GHOSTTY_RESOURCES_DIR: string;
+	export const CLAUDE_CODE_ENTRYPOINT: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
@@ -56,6 +58,7 @@ declare module '$env/static/private' {
 	export const npm_config_registry: string;
 	export const PNPM_HOME: string;
 	export const ZSH: string;
+	export const GIT_EDITOR: string;
 	export const MIX_ARCHIVES: string;
 	export const STDOUT_COLOR_START: string;
 	export const USER: string;
@@ -86,6 +89,7 @@ declare module '$env/static/private' {
 	export const PWD: string;
 	export const npm_command: string;
 	export const JAVA_HOME: string;
+	export const OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
 	export const npm_config__jsr_registry: string;
 	export const npm_lifecycle_event: string;
 	export const LANG: string;
@@ -102,6 +106,7 @@ declare module '$env/static/private' {
 	export const SHLVL: string;
 	export const __MISE_ORIG_PATH: string;
 	export const TERMINFO: string;
+	export const CLAUDE_CODE_EXECPATH: string;
 	export const CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING: string;
 	export const STDERR_COLOR_STOP: string;
 	export const AVO_LICENSE_KEY: string;
@@ -114,6 +119,7 @@ declare module '$env/static/private' {
 	export const SDKMAN_DIR: string;
 	export const npm_lifecycle_script: string;
 	export const XDG_DATA_DIRS: string;
+	export const COREPACK_ENABLE_AUTO_PIN: string;
 	export const GHOSTTY_BIN_DIR: string;
 	export const PGDATA: string;
 	export const __MISE_DIR: string;
@@ -122,6 +128,7 @@ declare module '$env/static/private' {
 	export const ANDROID_NDK_HOME: string;
 	export const GITHUB_PERSONAL_ACCESS_TOKEN: string;
 	export const OSLogRateLimit: string;
+	export const CLAUDECODE: string;
 	export const RUBYLIB: string;
 	export const AIRFLOW_HOME: string;
 	export const COLORTERM: string;
@@ -213,8 +220,10 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		MANPATH: string;
+		NoDefaultCurrentDirectoryInExePath: string;
 		__MISE_DIFF: string;
 		GHOSTTY_RESOURCES_DIR: string;
+		CLAUDE_CODE_ENTRYPOINT: string;
 		TERM_PROGRAM: string;
 		NODE: string;
 		INIT_CWD: string;
@@ -230,6 +239,7 @@ declare module '$env/dynamic/private' {
 		npm_config_registry: string;
 		PNPM_HOME: string;
 		ZSH: string;
+		GIT_EDITOR: string;
 		MIX_ARCHIVES: string;
 		STDOUT_COLOR_START: string;
 		USER: string;
@@ -260,6 +270,7 @@ declare module '$env/dynamic/private' {
 		PWD: string;
 		npm_command: string;
 		JAVA_HOME: string;
+		OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
 		npm_config__jsr_registry: string;
 		npm_lifecycle_event: string;
 		LANG: string;
@@ -276,6 +287,7 @@ declare module '$env/dynamic/private' {
 		SHLVL: string;
 		__MISE_ORIG_PATH: string;
 		TERMINFO: string;
+		CLAUDE_CODE_EXECPATH: string;
 		CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING: string;
 		STDERR_COLOR_STOP: string;
 		AVO_LICENSE_KEY: string;
@@ -288,6 +300,7 @@ declare module '$env/dynamic/private' {
 		SDKMAN_DIR: string;
 		npm_lifecycle_script: string;
 		XDG_DATA_DIRS: string;
+		COREPACK_ENABLE_AUTO_PIN: string;
 		GHOSTTY_BIN_DIR: string;
 		PGDATA: string;
 		__MISE_DIR: string;
@@ -296,6 +309,7 @@ declare module '$env/dynamic/private' {
 		ANDROID_NDK_HOME: string;
 		GITHUB_PERSONAL_ACCESS_TOKEN: string;
 		OSLogRateLimit: string;
+		CLAUDECODE: string;
 		RUBYLIB: string;
 		AIRFLOW_HOME: string;
 		COLORTERM: string;

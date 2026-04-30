@@ -1,0 +1,12 @@
+<!ELEMENT assessment_drug_allergy_item (id,created_at,updated_at,deleted_at,drug_allergies_id,allergen,reaction_type,severity,timing,alternatives_tolerated,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT drug_allergies_id (#PCDATA)>
+<!ELEMENT allergen (#PCDATA)>
+<!ELEMENT reaction_type (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT timing (#PCDATA)>
+<!ELEMENT alternatives_tolerated (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

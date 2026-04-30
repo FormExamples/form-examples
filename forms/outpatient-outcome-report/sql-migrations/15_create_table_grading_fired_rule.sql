@@ -1,8 +1,8 @@
 CREATE TABLE grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -23,7 +23,7 @@ COMMENT ON TABLE grading_fired_rule IS
     'Individual OOCG rules that evaluated to true during grading.';
 COMMENT ON COLUMN grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
     'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_fired_rule.rule_id IS
     'Stable identifier of the rule that fired.';

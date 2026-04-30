@@ -2,7 +2,7 @@
 
 Server-rendered web application for collecting and analysing clinical allergy assessments using severity-based composite scoring.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE assessment_rom_measurement SYSTEM "assessment_rom_measurement.dtd">
+<assessment_rom_measurement>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<range_of_motion_id>660e8400-e29b-41d4-a716-446655440001</range_of_motion_id>
+<movement></movement>
+<active_degrees>1</active_degrees>
+<passive_degrees>1</passive_degrees>
+<normal_degrees>1</normal_degrees>
+<end_feel>firm</end_feel>
+<pain_on_movement>yes</pain_on_movement>
+<sort_order>0</sort_order>
+</assessment_rom_measurement>

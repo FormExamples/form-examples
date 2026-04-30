@@ -3,7 +3,7 @@ CREATE TABLE grading_fired_rule (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id   UUID NOT NULL REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
     -- The rule that fired
     rule_id             TEXT NOT NULL REFERENCES reba_rule(id),
     -- Denormalized fields from the rule at time of grading
@@ -11,14 +11,14 @@ CREATE TABLE grading_fired_rule (
     description         TEXT NOT NULL,
     score               INTEGER NOT NULL CHECK (score >= 0 AND score <= 15),
     -- Prevent duplicate rule entries per grading
-    CONSTRAINT uq_grading_fired_rule UNIQUE (grading_result_id, rule_id)
+    CONSTRAINT uq_grading_fired_rule UNIQUE (grade_id, rule_id)
 );
 
-CREATE INDEX idx_grading_fired_rule_result ON grading_fired_rule(grading_result_id);
+CREATE INDEX idx_grading_fired_rule_result ON grading_fired_rule(grade_id);
 
 COMMENT ON TABLE grading_fired_rule IS
     'Denormalized record of each REBA rule that fired during grading. Preserves exact context for clinical audit.';
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
     'FK to the grading result this fired rule belongs to.';
 COMMENT ON COLUMN grading_fired_rule.rule_id IS
     'FK to the REBA rule that fired.';

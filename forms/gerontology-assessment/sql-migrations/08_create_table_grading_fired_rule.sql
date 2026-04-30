@@ -3,8 +3,8 @@ CREATE TABLE grading_fired_rule (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -28,8 +28,8 @@ COMMENT ON COLUMN grading_fired_rule.description IS
 COMMENT ON COLUMN grading_fired_rule.cfs_contribution IS
     'Contribution of this rule to the CFS score.';
 
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN grading_fired_rule.created_at IS

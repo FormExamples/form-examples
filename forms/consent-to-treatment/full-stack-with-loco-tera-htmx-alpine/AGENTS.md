@@ -2,7 +2,7 @@
 
 Server-rendered web application for documenting informed consent for medical procedures and treatments, with capacity assessment, risk/benefit documentation, and consent validation.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

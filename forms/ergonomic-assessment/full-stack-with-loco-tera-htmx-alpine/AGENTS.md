@@ -2,7 +2,7 @@
 
 Server-rendered web application for conducting workplace ergonomic assessments evaluating workstation setup, posture, musculoskeletal symptoms, manual handling risks, and DSE compliance.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

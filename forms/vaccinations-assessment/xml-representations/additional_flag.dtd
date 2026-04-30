@@ -1,9 +1,10 @@
-<!ELEMENT additional_flag (id,grading_result_id,flag_id,category,message,priority,created_at,updated_at)>
+<!ELEMENT additional_flag (id,created_at,updated_at,deleted_at,grade_id,flag_id,category,message,priority)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT grading_result_id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT grade_id (#PCDATA)>
 <!ELEMENT flag_id (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT message (#PCDATA)>
 <!ELEMENT priority (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

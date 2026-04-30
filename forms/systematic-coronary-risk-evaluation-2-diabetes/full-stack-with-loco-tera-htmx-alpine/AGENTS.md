@@ -2,7 +2,7 @@
 
 Server-rendered web application for SCORE2-Diabetes cardiovascular risk assessment in patients with type 2 diabetes, based on ESC 2023 guidelines. Evaluates 10-year CVD risk using clinical, metabolic, and lifestyle factors.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Technology Stack
 

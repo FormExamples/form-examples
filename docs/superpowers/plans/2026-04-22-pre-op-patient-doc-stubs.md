@@ -35,7 +35,7 @@ Expected output (exactly four `Error: not yet implemented` lines):
 Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-html/AGENTS.md
 Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-html/plan.md
 Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-svelte/plan.md
-Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md
+Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md
 ```
 
 If any other error appears, stop and investigate before proceeding — the
@@ -314,10 +314,10 @@ EOF
 
 ---
 
-## Task 5: Rewrite `full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md`
+## Task 5: Rewrite `full-stack-with-loco-tera-htmx-alpine/plan.md`
 
 **Files:**
-- Modify: `forms/pre-operative-assessment-by-patient/full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md`
+- Modify: `forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md`
 
 **Context:** The source tree under the Rust sub-project contains:
 - `Cargo.toml`
@@ -339,7 +339,7 @@ EOF
 - [ ] **Step 1: Replace the file with the content below**
 
 Write this exact content to
-`forms/pre-operative-assessment-by-patient/full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md`:
+`forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md`:
 
 ```markdown
 # Plan: Rust full-stack
@@ -379,7 +379,7 @@ templates, and a Rust port of the ASA grading engine in place.
 Run:
 ```sh
 cd /Users/jph/git/joelparkerhenderson/medical-forms
-bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md" || echo "CLEAN"
+bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "full-stack-with-loco-tera-htmx-alpine/plan.md" || echo "CLEAN"
 ```
 
 Expected: prints `CLEAN`.
@@ -388,7 +388,7 @@ Expected: prints `CLEAN`.
 
 ```sh
 cd /Users/jph/git/joelparkerhenderson/medical-forms
-git add forms/pre-operative-assessment-by-patient/full-stack-with-rust-axum-loco-tera-htmx-alpine/plan.md
+git add forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md
 git commit -m "$(cat <<'EOF'
 Document implemented Rust full-stack backend
 

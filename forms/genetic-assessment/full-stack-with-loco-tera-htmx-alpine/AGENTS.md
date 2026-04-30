@@ -2,7 +2,7 @@
 
 Server-rendered web application for clinical genetics assessment, evaluating family pedigree, genetic testing candidacy, and risk assessment for inherited conditions (cancer genetics, cardiac genetics, reproductive genetics).
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

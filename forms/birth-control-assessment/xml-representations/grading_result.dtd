@@ -1,5 +1,8 @@
-<!ELEMENT grading_result (id,assessment_id,mec_category_coc,mec_category_pop,mec_category_implant,mec_category_injection,mec_category_iud,mec_category_ius,overall_risk_level,graded_at,created_at,updated_at)>
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,mec_category_coc,mec_category_pop,mec_category_implant,mec_category_injection,mec_category_iud,mec_category_ius,overall_risk_level,graded_at)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT mec_category_coc (#PCDATA)>
 <!ELEMENT mec_category_pop (#PCDATA)>
@@ -9,5 +12,3 @@
 <!ELEMENT mec_category_ius (#PCDATA)>
 <!ELEMENT overall_risk_level (#PCDATA)>
 <!ELEMENT graded_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

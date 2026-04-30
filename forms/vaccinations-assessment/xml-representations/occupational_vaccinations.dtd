@@ -1,5 +1,8 @@
-<!ELEMENT occupational_vaccinations (id,assessment_id,occupation,healthcare_worker,hepatitis_b_occupational,influenza_occupational,varicella,bcg_tuberculosis,created_at,updated_at)>
+<!ELEMENT occupational_vaccinations (id,created_at,updated_at,deleted_at,assessment_id,occupation,healthcare_worker,hepatitis_b_occupational,influenza_occupational,varicella,bcg_tuberculosis)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT occupation (#PCDATA)>
 <!ELEMENT healthcare_worker (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT influenza_occupational (#PCDATA)>
 <!ELEMENT varicella (#PCDATA)>
 <!ELEMENT bcg_tuberculosis (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

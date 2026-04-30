@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive cardiology assessment evaluating cardiac symptoms, risk factors, ECG findings, echocardiography results, functional status (NYHA class), and management plan.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

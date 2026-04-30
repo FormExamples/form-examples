@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_vital_signs (id,casualty_card_id,heart_rate,systolic_bp,diastolic_bp,respiratory_rate,oxygen_saturation,supplemental_oxygen,oxygen_flow_rate,temperature,blood_glucose,consciousness_level,pupil_left_size,pupil_left_reactive,pupil_right_size,pupil_right_reactive,capillary_refill_time,weight,created_at,updated_at)>
+<!ELEMENT casualty_card_vital_signs (id,created_at,updated_at,deleted_at,casualty_card_id,heart_rate,systolic_bp,diastolic_bp,respiratory_rate,oxygen_saturation,supplemental_oxygen,oxygen_flow_rate,temperature,blood_glucose,consciousness_level,pupil_left_size,pupil_left_reactive,pupil_right_size,pupil_right_reactive,capillary_refill_time,weight)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT heart_rate (#PCDATA)>
 <!ELEMENT systolic_bp (#PCDATA)>
@@ -17,5 +20,3 @@
 <!ELEMENT pupil_right_reactive (#PCDATA)>
 <!ELEMENT capillary_refill_time (#PCDATA)>
 <!ELEMENT weight (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

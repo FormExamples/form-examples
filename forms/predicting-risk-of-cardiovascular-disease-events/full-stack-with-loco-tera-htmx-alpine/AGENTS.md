@@ -2,7 +2,7 @@
 
 Server-rendered web application for calculating AHA PREVENT 10-year and 30-year cardiovascular disease risk estimates using a point-based scoring system with sex-specific age coefficients.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

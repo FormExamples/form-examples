@@ -2,7 +2,7 @@
 
 Server-rendered web application for calculating the Framingham 10-year risk of hard coronary heart disease using the Wilson/D'Agostino 1998 Cox regression model with sex-specific coefficients.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

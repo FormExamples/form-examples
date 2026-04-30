@@ -1,7 +1,9 @@
-<!ELEMENT hem_rule (id,category,description,concern_level,created_at,updated_at)>
+<!ELEMENT hem_rule (id,created_at,updated_at,deleted_at,code,category,description,concern_level)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
 <!ELEMENT concern_level (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -9,13 +9,13 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/660e8400-e29b-41d4-a716-446655440001"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/550e8400-e29b-41d4-a716-446655440000"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",
   "description": "Mast Cell Activation Syndrome Assessment grading result",
-  "summary": "Total Symptom Score: 5; Dermatological Score: 5; Gastrointestinal Score: 5; Cardiovascular Score: 5; Respiratory Score: 5; Neurological Score: 5; Organ System Count: 2; Severity Level: mild; Trigger Count: 2"
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Total Symptom Score: 5; Dermatological Score: 5; Gastrointestinal Score: 5; Cardiovascular Score: 5; Respiratory Score: 5; Neurological Score: 5; Organ System Count: 2; Severity Level: mild; Trigger Count: 2"
 }

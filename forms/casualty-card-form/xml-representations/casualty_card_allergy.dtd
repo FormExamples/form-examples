@@ -1,9 +1,10 @@
-<!ELEMENT casualty_card_allergy (id,casualty_card_id,allergen,reaction,severity,sort_order,created_at,updated_at)>
+<!ELEMENT casualty_card_allergy (id,created_at,updated_at,deleted_at,casualty_card_id,allergen,reaction,severity,sort_order)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT allergen (#PCDATA)>
 <!ELEMENT reaction (#PCDATA)>
 <!ELEMENT severity (#PCDATA)>
 <!ELEMENT sort_order (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

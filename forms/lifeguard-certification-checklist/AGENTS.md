@@ -10,7 +10,7 @@ Pool / beach lifeguard certification checklist aligned with the RLSS UK National
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Examiner form; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Training coordinator dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-rust-axum-loco-tera-htmx-alpine/ - Full-stack Rust backend
+- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack Rust backend
 
 ## Scoring system
 

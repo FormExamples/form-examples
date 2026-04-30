@@ -1,6 +1,6 @@
-<!ELEMENT grading_additional_flag (id,grading_result_id,flag_id,category,description,priority,created_at,updated_at)>
+<!ELEMENT grading_additional_flag (id,grade_id,flag_id,category,description,priority,created_at,updated_at)>
 <!ELEMENT id (#PCDATA)>
-<!ELEMENT grading_result_id (#PCDATA)>
+<!ELEMENT grade_id (#PCDATA)>
 <!ELEMENT flag_id (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT description (#PCDATA)>

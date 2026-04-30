@@ -17,7 +17,7 @@ Each SQL table maps to a FHIR R5 resource type as follows:
 | patient                 | Patient            | Patient demographics and identifiers |
 | assessment              | Encounter          | Clinical encounter for the form      |
 | assessment_*            | Observation        | Clinical data sections (components)  |
-| grading_result          | ClinicalImpression | Computed scoring / grading result    |
+| grade          | ClinicalImpression | Computed scoring / grading result    |
 | grading_fired_rule      | DetectedIssue      | Rules that fired during grading      |
 | grading_additional_flag | DetectedIssue      | Safety-critical flags                |
 
@@ -28,7 +28,7 @@ fhir-r5/
   patient.json                    # FHIR Patient resource
   assessment.json                 # FHIR Encounter resource
   assessment_<section>.json       # FHIR Observation resource per section
-  grading_result.json             # FHIR ClinicalImpression resource
+  grade.json             # FHIR ClinicalImpression resource
   grading_fired_rule.json         # FHIR DetectedIssue resource
   grading_additional_flag.json    # FHIR DetectedIssue resource
 ```

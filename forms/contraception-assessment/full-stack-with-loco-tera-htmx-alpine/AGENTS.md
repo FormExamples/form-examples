@@ -2,7 +2,7 @@
 
 Server-rendered web application for contraception eligibility assessment using the UKMEC (UK Medical Eligibility Criteria) framework, evaluating patient suitability for different contraceptive methods.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

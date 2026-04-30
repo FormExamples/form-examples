@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_investigations (id,casualty_card_id,blood_tests,urinalysis,pregnancy_test,ecg_performed,ecg_findings,other_investigations,created_at,updated_at)>
+<!ELEMENT casualty_card_investigations (id,created_at,updated_at,deleted_at,casualty_card_id,blood_tests,urinalysis,pregnancy_test,ecg_performed,ecg_findings,other_investigations)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT blood_tests (#PCDATA)>
 <!ELEMENT urinalysis (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT ecg_performed (#PCDATA)>
 <!ELEMENT ecg_findings (#PCDATA)>
 <!ELEMENT other_investigations (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

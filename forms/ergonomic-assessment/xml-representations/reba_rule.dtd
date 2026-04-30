@@ -1,6 +1,9 @@
-<!ELEMENT reba_rule (id,system,description,score,created_at)>
+<!ELEMENT reba_rule (id,created_at,updated_at,deleted_at,code,system,description,score)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
 <!ELEMENT system (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
 <!ELEMENT score (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>

@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_medical_history (id,casualty_card_id,past_medical_history,past_surgical_history,tetanus_status,smoking_status,alcohol_consumption,recreational_drug_use,last_oral_intake,created_at,updated_at)>
+<!ELEMENT casualty_card_medical_history (id,created_at,updated_at,deleted_at,casualty_card_id,past_medical_history,past_surgical_history,tetanus_status,smoking_status,alcohol_consumption,recreational_drug_use,last_oral_intake)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT past_medical_history (#PCDATA)>
 <!ELEMENT past_surgical_history (#PCDATA)>
@@ -8,5 +11,3 @@
 <!ELEMENT alcohol_consumption (#PCDATA)>
 <!ELEMENT recreational_drug_use (#PCDATA)>
 <!ELEMENT last_oral_intake (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

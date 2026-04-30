@@ -2,7 +2,7 @@
 
 Server-rendered web application for conducting NHS Heart Health Checks using QRISK3-based cardiovascular risk assessment with 10-year CVD risk estimation and heart age calculation.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

@@ -1,8 +1,9 @@
-<!ELEMENT patient_rights (id,release_form_id,acknowledged_right_to_revoke,acknowledged_no_charge_for_access,acknowledged_data_protection,created_at,updated_at)>
+<!ELEMENT patient_rights (id,created_at,updated_at,deleted_at,release_form_id,acknowledged_right_to_revoke,acknowledged_no_charge_for_access,acknowledged_data_protection)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT release_form_id (#PCDATA)>
 <!ELEMENT acknowledged_right_to_revoke (#PCDATA)>
 <!ELEMENT acknowledged_no_charge_for_access (#PCDATA)>
 <!ELEMENT acknowledged_data_protection (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

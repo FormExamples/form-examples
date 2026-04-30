@@ -20,7 +20,7 @@
 --   - 11_create_table_assessment_prem_fft.sql
 --   - 12_create_table_assessment_followup.sql
 --   - 13_create_table_assessment_signoff.sql
---   - 14_create_table_grading_result.sql
+--   - 14_create_table_grade.sql
 --   - 15_create_table_grading_fired_rule.sql
 --   - 16_create_table_grading_additional_flag.sql
 
@@ -718,10 +718,10 @@ COMMENT ON COLUMN assessment_signoff.updated_at IS
 -- ========================================================================
 
 -- ========================================================================
--- BEGIN 14_create_table_grading_result.sql
+-- BEGIN 14_create_table_grade.sql
 -- ========================================================================
 
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     assessment_id UUID NOT NULL UNIQUE
@@ -745,38 +745,38 @@ CREATE TABLE grading_result (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four).';
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.overall_grade IS
+COMMENT ON COLUMN grade.overall_grade IS
     'Overall OOCG grade A (best) - E (worst); equals the worst per-domain grade.';
-COMMENT ON COLUMN grading_result.clinical_grade IS
+COMMENT ON COLUMN grade.clinical_grade IS
     'Clinical-domain grade A-E (A=Resolved, B=Improved, C=Unchanged, D=Worsened, E=Died).';
-COMMENT ON COLUMN grading_result.prom_grade IS
+COMMENT ON COLUMN grade.prom_grade IS
     'PROM-domain composite grade A-E over EQ-5D-5L, GRC, and PROMIS.';
-COMMENT ON COLUMN grading_result.prem_grade IS
+COMMENT ON COLUMN grade.prem_grade IS
     'PREM-domain grade A-E from FFT response.';
-COMMENT ON COLUMN grading_result.operational_grade IS
+COMMENT ON COLUMN grade.operational_grade IS
     'Operational-domain grade A-E from attendance outcome + wait vs target + modality.';
-COMMENT ON COLUMN grading_result.result_notes IS
+COMMENT ON COLUMN grade.result_notes IS
     'Free-text clinician notes accompanying the grading result.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the OOCG was computed.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
 
 -- ========================================================================
--- END 14_create_table_grading_result.sql
+-- END 14_create_table_grade.sql
 -- ========================================================================
 
 -- ========================================================================
@@ -786,8 +786,8 @@ COMMENT ON COLUMN grading_result.updated_at IS
 CREATE TABLE grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -808,7 +808,7 @@ COMMENT ON TABLE grading_fired_rule IS
     'Individual OOCG rules that evaluated to true during grading.';
 COMMENT ON COLUMN grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
     'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_fired_rule.rule_id IS
     'Stable identifier of the rule that fired.';
@@ -834,8 +834,8 @@ COMMENT ON COLUMN grading_fired_rule.updated_at IS
 CREATE TABLE grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -853,13 +853,13 @@ CREATE TRIGGER trigger_grading_additional_flag_updated_at
     EXECUTE FUNCTION set_updated_at();
 
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag (grading_result_id, flag_id);
+    ON grading_additional_flag (grade_id, flag_id);
 
 COMMENT ON TABLE grading_additional_flag IS
     'Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).';
 COMMENT ON COLUMN grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
     'Foreign key to the parent grading result.';
 COMMENT ON COLUMN grading_additional_flag.flag_id IS
     'Stable identifier of the flag.';

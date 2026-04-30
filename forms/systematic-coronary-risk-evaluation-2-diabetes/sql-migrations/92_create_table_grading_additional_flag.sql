@@ -3,8 +3,8 @@ CREATE TABLE grading_additional_flag (
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -26,8 +26,8 @@ COMMENT ON COLUMN grading_additional_flag.category IS
 COMMENT ON COLUMN grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grading_result_id IS
-    'Foreign key to the grading_result table.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'Foreign key to the grade table.';
 COMMENT ON COLUMN grading_additional_flag.message IS
     'Message.';
 COMMENT ON COLUMN grading_additional_flag.id IS

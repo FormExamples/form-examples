@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_primary_survey (id,casualty_card_id,airway_status,airway_adjuncts,c_spine_immobilised,breathing_effort,chest_movement,breath_sounds,trachea_position,pulse_character,skin_colour,skin_temperature,capillary_refill,haemorrhage,iv_access,gcs_eye,gcs_verbal,gcs_motor,gcs_total,pupils,blood_glucose_disability,limb_movements,skin_examination,injuries_identified,log_roll_findings,created_at,updated_at)>
+<!ELEMENT casualty_card_primary_survey (id,created_at,updated_at,deleted_at,casualty_card_id,airway_status,airway_adjuncts,c_spine_immobilised,breathing_effort,chest_movement,breath_sounds,trachea_position,pulse_character,skin_colour,skin_temperature,capillary_refill,haemorrhage,iv_access,gcs_eye,gcs_verbal,gcs_motor,gcs_total,pupils,blood_glucose_disability,limb_movements,skin_examination,injuries_identified,log_roll_findings)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT airway_status (#PCDATA)>
 <!ELEMENT airway_adjuncts (#PCDATA)>
@@ -24,5 +27,3 @@
 <!ELEMENT skin_examination (#PCDATA)>
 <!ELEMENT injuries_identified (#PCDATA)>
 <!ELEMENT log_roll_findings (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -29,49 +29,49 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN grading_result.computed_asa_grade IS
+COMMENT ON COLUMN grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
-COMMENT ON COLUMN grading_result.final_asa_grade IS
+COMMENT ON COLUMN grade.final_asa_grade IS
     'ASA grade signed off by the clinician (may equal or differ from computed).';
-COMMENT ON COLUMN grading_result.asa_emergency_suffix IS
+COMMENT ON COLUMN grade.asa_emergency_suffix IS
     'Emergency suffix: E if the procedure is emergency, empty otherwise.';
-COMMENT ON COLUMN grading_result.override_reason IS
+COMMENT ON COLUMN grade.override_reason IS
     'Reason the clinician set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN grading_result.mallampati_class IS
+COMMENT ON COLUMN grade.mallampati_class IS
     'Mallampati airway class as per step 4.';
-COMMENT ON COLUMN grading_result.rcri_score IS
+COMMENT ON COLUMN grade.rcri_score IS
     'Revised Cardiac Risk Index score (0-6).';
-COMMENT ON COLUMN grading_result.stopbang_score IS
+COMMENT ON COLUMN grade.stopbang_score IS
     'STOP-BANG score (0-8).';
-COMMENT ON COLUMN grading_result.frailty_scale IS
+COMMENT ON COLUMN grade.frailty_scale IS
     'Clinical Frailty Scale score (1-9).';
-COMMENT ON COLUMN grading_result.composite_risk IS
+COMMENT ON COLUMN grade.composite_risk IS
     'Composite perioperative risk: low, moderate, high, critical.';
-COMMENT ON COLUMN grading_result.recommendation IS
+COMMENT ON COLUMN grade.recommendation IS
     'Overall recommendation: proceed, optimise-first, mdt-review, cancel.';
-COMMENT ON COLUMN grading_result.clinician_notes IS
+COMMENT ON COLUMN grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN grading_result.signed_at IS
+COMMENT ON COLUMN grade.signed_at IS
     'Timestamp of clinician electronic signature.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
-COMMENT ON COLUMN grading_result.pre_operative_assessment_by_patient_id IS
+COMMENT ON COLUMN grade.pre_operative_assessment_by_patient_id IS
     'Foreign key to the pre_operative_assessment_by_patient table.';
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

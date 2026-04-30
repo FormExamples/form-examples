@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_pain_assessment (id,casualty_card_id,pain_present,pain_score,pain_location,pain_character,pain_onset,pain_severity_category,created_at,updated_at)>
+<!ELEMENT casualty_card_pain_assessment (id,created_at,updated_at,deleted_at,casualty_card_id,pain_present,pain_score,pain_location,pain_character,pain_onset,pain_severity_category)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT pain_present (#PCDATA)>
 <!ELEMENT pain_score (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT pain_character (#PCDATA)>
 <!ELEMENT pain_onset (#PCDATA)>
 <!ELEMENT pain_severity_category (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

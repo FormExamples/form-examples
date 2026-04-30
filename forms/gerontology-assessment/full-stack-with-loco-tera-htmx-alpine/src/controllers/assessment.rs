@@ -286,7 +286,7 @@ async fn show_report(
     let gds_score = calculate_gds_score(&assessment_data);
     let cfs_score = assessment_data.clinical_review.clinical_frailty_scale;
 
-    let grading_result = crate::engine::types::GradingResult {
+    let grade = crate::engine::types::GradingResult {
         frailty_level: frailty_level.clone(),
         barthel_score,
         cognitive_score,
@@ -301,7 +301,7 @@ async fn show_report(
     };
 
     // Store result in DB
-    let result_json = serde_json::to_value(&grading_result).map_err(Error::wrap)?;
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
     let mut active: ActiveModel = item.into_active_model();
     active.result = ActiveValue::Set(Some(result_json));
     active.status = ActiveValue::Set("completed".to_string());

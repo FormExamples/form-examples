@@ -1,0 +1,11 @@
+<!ELEMENT assessment_testing_results (id,created_at,updated_at,deleted_at,assessment_id,skin_prick_tests_done,specific_ige_done,component_resolved_diagnostics_done,challenge_tests_done,patch_tests_done)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT skin_prick_tests_done (#PCDATA)>
+<!ELEMENT specific_ige_done (#PCDATA)>
+<!ELEMENT component_resolved_diagnostics_done (#PCDATA)>
+<!ELEMENT challenge_tests_done (#PCDATA)>
+<!ELEMENT patch_tests_done (#PCDATA)>

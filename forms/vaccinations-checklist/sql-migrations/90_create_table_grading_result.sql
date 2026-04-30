@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -20,35 +20,35 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed vaccination compliance grading result. Compliance status and risk level. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.compliance_status IS
+COMMENT ON COLUMN grade.compliance_status IS
     'Overall compliance: fully-immunised, partially-immunised, non-compliant, contraindicated, or empty.';
-COMMENT ON COLUMN grading_result.overall_risk_level IS
+COMMENT ON COLUMN grade.overall_risk_level IS
     'Overall vaccination risk level: low, moderate, high, critical, or empty.';
-COMMENT ON COLUMN grading_result.childhood_complete IS
+COMMENT ON COLUMN grade.childhood_complete IS
     'Whether childhood immunisation schedule is complete: yes, no, or empty.';
-COMMENT ON COLUMN grading_result.occupational_complete IS
+COMMENT ON COLUMN grade.occupational_complete IS
     'Whether occupational vaccine requirements are met: yes, no, not-required, or empty.';
-COMMENT ON COLUMN grading_result.covid_complete IS
+COMMENT ON COLUMN grade.covid_complete IS
     'Whether COVID-19 vaccination is up to date: yes, no, or empty.';
-COMMENT ON COLUMN grading_result.flu_current IS
+COMMENT ON COLUMN grade.flu_current IS
     'Whether current season flu vaccine has been received: yes, no, or empty.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

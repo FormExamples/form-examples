@@ -1,9 +1,10 @@
-<!ELEMENT cholesterol (id,assessment_id,total_cholesterol,hdl_cholesterol,total_hdl_ratio,on_statin,created_at,updated_at)>
+<!ELEMENT cholesterol (id,created_at,updated_at,deleted_at,assessment_id,total_cholesterol,hdl_cholesterol,total_hdl_ratio,on_statin)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT total_cholesterol (#PCDATA)>
 <!ELEMENT hdl_cholesterol (#PCDATA)>
 <!ELEMENT total_hdl_ratio (#PCDATA)>
 <!ELEMENT on_statin (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

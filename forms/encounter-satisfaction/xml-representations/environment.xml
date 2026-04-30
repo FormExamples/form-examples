@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE environment SYSTEM "environment.dtd">
 <environment>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
-<encounter_satisfaction_id>660e8400-e29b-41d4-a716-446655440001</encounter_satisfaction_id>
-<cleanliness>1</cleanliness>
-<waiting_area_comfort>1</waiting_area_comfort>
-<privacy>1</privacy>
+<id>bb0e8400-e29b-41d4-a716-446655440006</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<encounter_satisfaction_id>550e8400-e29b-41d4-a716-446655440000</encounter_satisfaction_id>
+<NULL></NULL>
+<waiting_area_comfort>1</waiting_area_comfort>
+<privacy>1</privacy>
 </environment>

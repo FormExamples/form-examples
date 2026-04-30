@@ -52,7 +52,7 @@
 - [x] `front-end-dashboard-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `full-stack-with-rust-axum-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8
+- [x] `full-stack-with-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8
       + SeaORM + Tera + HTMX + Alpine.
 
 ## Tests

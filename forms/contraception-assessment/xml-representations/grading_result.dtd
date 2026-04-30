@@ -1,5 +1,8 @@
-<!ELEMENT grading_result (id,assessment_id,overall_highest_ukmec_category,ukmec_cocp,ukmec_pop,ukmec_patch,ukmec_ring,ukmec_injection,ukmec_implant,ukmec_cu_iud,ukmec_lng_ius,ukmec_condom_male,ukmec_condom_female,ukmec_diaphragm,graded_at,created_at,updated_at)>
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,overall_highest_ukmec_category,ukmec_cocp,ukmec_pop,ukmec_patch,ukmec_ring,ukmec_injection,ukmec_implant,ukmec_cu_iud,ukmec_lng_ius,ukmec_condom_male,ukmec_condom_female,ukmec_diaphragm,graded_at)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT overall_highest_ukmec_category (#PCDATA)>
 <!ELEMENT ukmec_cocp (#PCDATA)>
@@ -14,5 +17,3 @@
 <!ELEMENT ukmec_condom_female (#PCDATA)>
 <!ELEMENT ukmec_diaphragm (#PCDATA)>
 <!ELEMENT graded_at (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

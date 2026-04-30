@@ -1,0 +1,7 @@
+<!ELEMENT patient_allergy (id,created_at,updated_at,deleted_at,patient_id,allergy_id)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT allergy_id (#PCDATA)>

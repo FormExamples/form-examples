@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_disposition (id,casualty_card_id,disposition,admitting_specialty,admitting_consultant,ward,level_of_care,discharge_diagnosis,discharge_medications,discharge_instructions,follow_up,return_precautions,receiving_hospital,reason_for_transfer,mode_of_transfer,discharge_time,total_time_in_department,created_at,updated_at)>
+<!ELEMENT casualty_card_disposition (id,created_at,updated_at,deleted_at,casualty_card_id,disposition,admitting_specialty,admitting_consultant,ward,level_of_care,discharge_diagnosis,discharge_medications,discharge_instructions,follow_up,return_precautions,receiving_hospital,reason_for_transfer,mode_of_transfer,discharge_time,total_time_in_department)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT disposition (#PCDATA)>
 <!ELEMENT admitting_specialty (#PCDATA)>
@@ -16,5 +19,3 @@
 <!ELEMENT mode_of_transfer (#PCDATA)>
 <!ELEMENT discharge_time (#PCDATA)>
 <!ELEMENT total_time_in_department (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

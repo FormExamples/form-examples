@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -30,33 +30,33 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed GAF (Global Assessment of Functioning) score. Range 1-100, with higher scores indicating better functioning. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.gaf_score IS
+COMMENT ON COLUMN grade.gaf_score IS
     'GAF score (1-100): 91-100 superior functioning, 51-60 moderate symptoms, 1-10 persistent danger.';
-COMMENT ON COLUMN grading_result.gaf_category IS
+COMMENT ON COLUMN grade.gaf_category IS
     'GAF descriptive category corresponding to the score decile.';
-COMMENT ON COLUMN grading_result.symptom_severity IS
+COMMENT ON COLUMN grade.symptom_severity IS
     'Overall symptom severity: minimal, mild, moderate, severe, extreme, or empty.';
-COMMENT ON COLUMN grading_result.functional_impairment IS
+COMMENT ON COLUMN grade.functional_impairment IS
     'Overall functional impairment level: minimal, mild, moderate, severe, extreme, or empty.';
-COMMENT ON COLUMN grading_result.risk_classification IS
+COMMENT ON COLUMN grade.risk_classification IS
     'Overall risk classification: low, moderate, high, imminent, or empty.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

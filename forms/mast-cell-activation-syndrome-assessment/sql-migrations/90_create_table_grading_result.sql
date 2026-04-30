@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -26,41 +26,41 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed MCAS symptom grading result across multiple organ systems. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grading_result.total_symptom_score IS
+COMMENT ON COLUMN grade.total_symptom_score IS
     'Total cumulative symptom severity score across all organ systems.';
-COMMENT ON COLUMN grading_result.dermatological_score IS
+COMMENT ON COLUMN grade.dermatological_score IS
     'Symptom severity score for dermatological system.';
-COMMENT ON COLUMN grading_result.gastrointestinal_score IS
+COMMENT ON COLUMN grade.gastrointestinal_score IS
     'Symptom severity score for gastrointestinal system.';
-COMMENT ON COLUMN grading_result.cardiovascular_score IS
+COMMENT ON COLUMN grade.cardiovascular_score IS
     'Symptom severity score for cardiovascular system.';
-COMMENT ON COLUMN grading_result.respiratory_score IS
+COMMENT ON COLUMN grade.respiratory_score IS
     'Symptom severity score for respiratory system.';
-COMMENT ON COLUMN grading_result.neurological_score IS
+COMMENT ON COLUMN grade.neurological_score IS
     'Symptom severity score for neurological system.';
-COMMENT ON COLUMN grading_result.organ_system_count IS
+COMMENT ON COLUMN grade.organ_system_count IS
     'Number of organ systems affected (0-5).';
-COMMENT ON COLUMN grading_result.severity_level IS
+COMMENT ON COLUMN grade.severity_level IS
     'Overall severity classification: mild, moderate, or severe.';
-COMMENT ON COLUMN grading_result.trigger_count IS
+COMMENT ON COLUMN grade.trigger_count IS
     'Number of identified symptom triggers.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';

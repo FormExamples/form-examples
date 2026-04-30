@@ -35,7 +35,7 @@ See `doc/` and `docs/superpowers/specs/2026-04-16-anesthesiology-assessment-desi
 anesthesiology-assessment/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/
+  full-stack-with-loco-tera-htmx-alpine/
 ```
 
 ## Technology

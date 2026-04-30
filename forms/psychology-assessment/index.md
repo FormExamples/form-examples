@@ -39,7 +39,7 @@ psychology-assessment/
   front-end-form-with-svelte/
   front-end-dashboard-with-html/
   front-end-dashboard-with-svelte/
-  full-stack-with-rust-axum-loco-tera-htmx-alpine/
+  full-stack-with-loco-tera-htmx-alpine/
   doc/
   sql-migrations/
   xml-representations/

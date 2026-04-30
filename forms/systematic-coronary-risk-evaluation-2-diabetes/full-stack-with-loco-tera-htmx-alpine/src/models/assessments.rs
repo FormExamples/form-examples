@@ -36,7 +36,7 @@ impl Model {
         serde_json::from_value(self.data.clone())
     }
 
-    pub fn grading_result(&self) -> Result<Option<GradingResult>, serde_json::Error> {
+    pub fn grade(&self) -> Result<Option<GradingResult>, serde_json::Error> {
         match &self.result {
             Some(v) => serde_json::from_value(v.clone()).map(Some),
             None => Ok(None),

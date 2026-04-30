@@ -65,6 +65,54 @@
         "coding": [
           {
             "system": "urn:medical-forms:advance-decision-to-refuse-treatment",
+            "code": "email",
+            "display": "Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:advance-decision-to-refuse-treatment",
+            "code": "phone",
+            "display": "Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:advance-decision-to-refuse-treatment",
+            "code": "postal_address_as_full_text",
+            "display": "Postal Address As Full Text"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:advance-decision-to-refuse-treatment",
+            "code": "postcode",
+            "display": "Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:medical-forms:advance-decision-to-refuse-treatment",
             "code": "role",
             "display": "Role"
           }

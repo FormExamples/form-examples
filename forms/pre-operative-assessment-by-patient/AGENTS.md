@@ -63,7 +63,7 @@ Rules:
 - Denormalized fired rules preserve exact grading context for clinical audit
 - override column allows clinician judgement to differ from computed grade
 - override_reason required when asa_grade_override is set
-- Unique constraint on (grading_result_id, flag_id) prevents duplicate flags
+- Unique constraint on (grade_id, flag_id) prevents duplicate flags
 - Diabetes control/insulin fields constrained to only be set when diabetes is present
 - recent_mi_weeks constrained to only be set when recent_mi = 'yes'
 - Conditional CHECK constraints enforce dependent field validity (e.g., hypertension_controlled only when hypertension = 'yes')

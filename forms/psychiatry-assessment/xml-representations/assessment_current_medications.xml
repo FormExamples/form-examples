@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE assessment_current_medications SYSTEM "assessment_current_medications.dtd">
+<assessment_current_medications>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<assessment_id>550e8400-e29b-41d4-a716-446655440000</assessment_id>
+<takes_psychiatric_medications>yes</takes_psychiatric_medications>
+<takes_other_medications>yes</takes_other_medications>
+<medication_adherence>good</medication_adherence>
+<adherence_barriers></adherence_barriers>
+<side_effects></side_effects>
+<clozapine_registered>yes</clozapine_registered>
+<depot_injection>yes</depot_injection>
+<depot_details>Example text.</depot_details>
+<adverse_drug_reactions>Paracetamol</adverse_drug_reactions>
+<additional_notes>Example text.</additional_notes>
+</assessment_current_medications>

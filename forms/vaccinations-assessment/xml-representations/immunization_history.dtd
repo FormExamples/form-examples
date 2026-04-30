@@ -1,5 +1,8 @@
-<!ELEMENT immunization_history (id,assessment_id,has_vaccination_record,record_source,last_review_date,previous_adverse_reactions,adverse_reaction_details,immunocompromised,immunocompromised_details,created_at,updated_at)>
+<!ELEMENT immunization_history (id,created_at,updated_at,deleted_at,assessment_id,has_vaccination_record,record_source,last_review_date,previous_adverse_reactions,adverse_reaction_details,immunocompromised,immunocompromised_details)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT has_vaccination_record (#PCDATA)>
 <!ELEMENT record_source (#PCDATA)>
@@ -8,5 +11,3 @@
 <!ELEMENT adverse_reaction_details (#PCDATA)>
 <!ELEMENT immunocompromised (#PCDATA)>
 <!ELEMENT immunocompromised_details (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

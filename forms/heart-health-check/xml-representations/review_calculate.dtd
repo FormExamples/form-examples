@@ -1,9 +1,10 @@
-<!ELEMENT review_calculate (id,assessment_id,clinician_name,review_date,clinical_notes,audit_score,created_at,updated_at)>
+<!ELEMENT review_calculate (id,created_at,updated_at,deleted_at,assessment_id,clinician_name,review_date,clinical_notes,audit_score)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT clinician_name (#PCDATA)>
 <!ELEMENT review_date (#PCDATA)>
 <!ELEMENT clinical_notes (#PCDATA)>
 <!ELEMENT audit_score (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -167,7 +167,7 @@ async fn show_report(
     let additional_flags = flagged_issues::detect_additional_flags(&assessment_data);
     let timestamp = Utc::now().to_rfc3339();
 
-    let grading_result = crate::engine::types::GradingResult {
+    let grade = crate::engine::types::GradingResult {
         completion_level: completion_level.clone(),
         completion_score,
         fired_rules: fired_rules.clone(),
@@ -176,7 +176,7 @@ async fn show_report(
     };
 
     // Store result in DB
-    let result_json = serde_json::to_value(&grading_result).map_err(Error::wrap)?;
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
     let mut active: ActiveModel = item.into_active_model();
     active.result = ActiveValue::Set(Some(result_json));
     active.status = ActiveValue::Set("completed".to_string());

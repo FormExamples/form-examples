@@ -1,5 +1,8 @@
-<!ELEMENT visit_information (id,encounter_satisfaction_id,visit_date,department,provider_name,visit_type,reason_for_visit,first_visit,created_at,updated_at)>
+<!ELEMENT visit_information (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,visit_date,department,provider_name,visit_type,reason_for_visit,first_visit)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
 <!ELEMENT visit_date (#PCDATA)>
 <!ELEMENT department (#PCDATA)>
@@ -7,5 +10,3 @@
 <!ELEMENT visit_type (#PCDATA)>
 <!ELEMENT reason_for_visit (#PCDATA)>
 <!ELEMENT first_visit (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

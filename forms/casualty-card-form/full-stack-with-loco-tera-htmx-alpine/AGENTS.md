@@ -3,7 +3,7 @@
 Rust backend for the casualty card form using Axum, Loco, Tera templates, SeaORM, and PostgreSQL.
 Client-side interactivity via HTMX for smooth navigation and Alpine.js for instant conditional field toggles and dynamic lists.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ### Directory Structure
 

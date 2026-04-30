@@ -29,7 +29,7 @@ Typical entities per form:
 ```
 patient.xml / patient.dtd                   # patient identity
 assessment.xml / assessment.dtd             # top-level assessment + nested per-section blocks
-grading_result.xml / grading_result.dtd
+grade.xml / grade.dtd
 grading_fired_rule.xml / grading_fired_rule.dtd
 grading_additional_flag.xml / grading_additional_flag.dtd
 ```

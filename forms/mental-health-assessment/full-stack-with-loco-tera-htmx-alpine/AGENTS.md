@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive mental health assessment combining PHQ-9 depression screening, GAD-7 anxiety screening, risk assessment, and functional status evaluation.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

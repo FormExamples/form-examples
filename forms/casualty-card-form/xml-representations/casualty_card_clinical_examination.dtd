@@ -1,5 +1,8 @@
-<!ELEMENT casualty_card_clinical_examination (id,casualty_card_id,general_appearance,head_and_face,neck,chest_cardiovascular,chest_respiratory,abdomen,pelvis,musculoskeletal_limbs,neurological,skin,mental_state,body_diagram_notes,created_at,updated_at)>
+<!ELEMENT casualty_card_clinical_examination (id,created_at,updated_at,deleted_at,casualty_card_id,general_appearance,head_and_face,neck,chest_cardiovascular,chest_respiratory,abdomen,pelvis,musculoskeletal_limbs,neurological,skin,mental_state,body_diagram_notes)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT general_appearance (#PCDATA)>
 <!ELEMENT head_and_face (#PCDATA)>
@@ -13,5 +16,3 @@
 <!ELEMENT skin (#PCDATA)>
 <!ELEMENT mental_state (#PCDATA)>
 <!ELEMENT body_diagram_notes (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -1,9 +1,10 @@
-<!ELEMENT overall_satisfaction (id,encounter_satisfaction_id,overall_rating,likely_to_recommend,likely_to_return,comments,created_at,updated_at)>
+<!ELEMENT overall_satisfaction (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,NULL,likely_to_recommend,likely_to_return,comments)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT encounter_satisfaction_id (#PCDATA)>
-<!ELEMENT overall_rating (#PCDATA)>
+<!ELEMENT NULL (#PCDATA)>
 <!ELEMENT likely_to_recommend (#PCDATA)>
 <!ELEMENT likely_to_return (#PCDATA)>
 <!ELEMENT comments (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

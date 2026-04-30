@@ -2,7 +2,7 @@
 
 Server-rendered web application for comprehensive neurology assessment evaluating neurological symptoms, cranial nerves, motor/sensory function, reflexes, coordination, and cognitive screening.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

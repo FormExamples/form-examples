@@ -67,7 +67,7 @@ Flagged issues: `acknowledgment-not-checked`, `name-blank`, `date-blank`.
 | 02-assessment | assessment | Links patient_id, status (draft/submitted/reviewed) |
 | 03-practice-configuration | practice_configuration | practice_name, practice_address, dpo_name, dpo_contact_details, research_organisations, data_sharing_partners |
 | 04-acknowledgment | acknowledgment | agreed (boolean), patient_typed_full_name (varchar), patient_typed_date (date), acknowledged_at (timestamptz) |
-| 05-grading-result | grading_result | overall_status (complete/incomplete), completeness_score, flagged_issues_count |
+| 05-grading-result | grade | overall_status (complete/incomplete), completeness_score, flagged_issues_count |
 | 06-grading-fired-rule | grading_fired_rule | rule_code, rule_name, severity, message |
 
 ## Clinician Dashboard
@@ -79,7 +79,7 @@ Flagged issues: `acknowledgment-not-checked`, `name-blank`, `date-blank`.
 | Patient Name | patient.first_name + patient.last_name |
 | NHS Number | patient.nhs_number |
 | Date Acknowledged | acknowledgment.patient_typed_date |
-| Status | grading_result.overall_status |
+| Status | grade.overall_status |
 | Practice Name | practice_configuration.practice_name |
 
 ### Features
@@ -112,4 +112,4 @@ All standard form directory artifacts:
 - `front-end-form-with-svelte/`
 - `front-end-dashboard-with-html/`
 - `front-end-dashboard-with-svelte/`
-- `full-stack-with-rust-axum-loco-tera-htmx-alpine/`
+- `full-stack-with-loco-tera-htmx-alpine/`

@@ -1,9 +1,10 @@
-<!ELEMENT flagged_issue (id,satisfaction_result_id,flag_id,category,message,priority,created_at,updated_at)>
+<!ELEMENT flagged_issue (id,created_at,updated_at,deleted_at,satisfaction_result_id,flag_id,category,message,priority)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT satisfaction_result_id (#PCDATA)>
 <!ELEMENT flag_id (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT message (#PCDATA)>
 <!ELEMENT priority (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

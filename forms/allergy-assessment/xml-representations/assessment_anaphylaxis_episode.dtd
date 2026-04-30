@@ -1,0 +1,10 @@
+<!ELEMENT assessment_anaphylaxis_episode (id,created_at,updated_at,deleted_at,anaphylaxis_history_id,trigger_description,symptoms,treatment_required,sort_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT anaphylaxis_history_id (#PCDATA)>
+<!ELEMENT trigger_description (#PCDATA)>
+<!ELEMENT symptoms (#PCDATA)>
+<!ELEMENT treatment_required (#PCDATA)>
+<!ELEMENT sort_order (#PCDATA)>

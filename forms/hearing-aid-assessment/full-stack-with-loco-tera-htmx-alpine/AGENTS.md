@@ -2,7 +2,7 @@
 
 Server-rendered web application for collecting and analysing hearing aid assessment data using Likert-scale composite scoring across communication needs, lifestyle factors, fitting requirements, trial outcomes, and clinical review.
 
-@../../../AGENTS/full-stack-with-rust-axum-loco-tera-htmx-alpine.md
+@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
 
 ## Project Structure
 

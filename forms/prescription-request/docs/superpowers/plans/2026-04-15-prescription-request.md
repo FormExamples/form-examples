@@ -297,7 +297,7 @@ COMMENT ON COLUMN prescription_request_type.additional_notes IS 'Additional note
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     prescription_request_id UUID NOT NULL UNIQUE
@@ -313,17 +313,17 @@ CREATE TABLE grading_result (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed priority classification result for the prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN grading_result.priority_level IS 'Overall priority: routine, urgent, or emergency.';
-COMMENT ON COLUMN grading_result.rule_count IS 'Total number of classification rules that fired.';
-COMMENT ON COLUMN grading_result.graded_at IS 'Timestamp when the priority classification was computed.';
---rollback DROP TABLE grading_result;
+COMMENT ON COLUMN grade.priority_level IS 'Overall priority: routine, urgent, or emergency.';
+COMMENT ON COLUMN grade.rule_count IS 'Total number of classification rules that fired.';
+COMMENT ON COLUMN grade.graded_at IS 'Timestamp when the priority classification was computed.';
+--rollback DROP TABLE grade;
 ```
 
 - [ ] **Step 10: Create 08-grading-fired-rule.sql**
@@ -335,8 +335,8 @@ COMMENT ON COLUMN grading_result.graded_at IS 'Timestamp when the priority class
 CREATE TABLE grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -371,8 +371,8 @@ COMMENT ON COLUMN grading_fired_rule.severity_level IS 'Priority level contribut
 CREATE TABLE grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    grading_result_id UUID NOT NULL
-        REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL
+        REFERENCES grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',

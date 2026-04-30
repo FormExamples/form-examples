@@ -1,5 +1,8 @@
-<!ELEMENT clinical_review (id,assessment_id,post_vaccination_observation,immediate_reaction,reaction_details,next_dose_due,catch_up_schedule_needed,referral_needed,clinician_notes,reviewing_clinician,created_at,updated_at)>
+<!ELEMENT clinical_review (id,created_at,updated_at,deleted_at,assessment_id,post_vaccination_observation,immediate_reaction,reaction_details,next_dose_due,catch_up_schedule_needed,referral_needed,clinician_notes,reviewing_clinician)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT assessment_id (#PCDATA)>
 <!ELEMENT post_vaccination_observation (#PCDATA)>
 <!ELEMENT immediate_reaction (#PCDATA)>
@@ -9,5 +12,3 @@
 <!ELEMENT referral_needed (#PCDATA)>
 <!ELEMENT clinician_notes (#PCDATA)>
 <!ELEMENT reviewing_clinician (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

@@ -228,7 +228,7 @@ async fn show_report(
     let phq9 = crate::engine::utils::phq9_total(&assessment_data);
     let gad7 = crate::engine::utils::gad7_total(&assessment_data);
 
-    let grading_result = crate::engine::types::GradingResult {
+    let grade = crate::engine::types::GradingResult {
         severity_level: severity_level.clone(),
         severity_score,
         phq9_total: phq9,
@@ -239,7 +239,7 @@ async fn show_report(
     };
 
     // Store result in DB
-    let result_json = serde_json::to_value(&grading_result).map_err(Error::wrap)?;
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
     let mut active: ActiveModel = item.into_active_model();
     active.result = ActiveValue::Set(Some(result_json));
     active.status = ActiveValue::Set("completed".to_string());

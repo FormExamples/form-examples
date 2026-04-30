@@ -117,4 +117,4 @@ CFS ≥ 7 fires a `severe-frailty` safety flag.
 
 The clinician may set a final ASA grade different from the computed one on
 step 16, with a documented reason. Both values are persisted in the
-`grading_result` row.
+`grade` row.

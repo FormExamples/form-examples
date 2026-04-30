@@ -10,7 +10,7 @@ International Patient Summary (IPS) — a standardised, minimal, specialty-agnos
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Clinician form; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Cross-border care dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-rust-axum-loco-tera-htmx-alpine/ - Full-stack Rust backend
+- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack Rust backend
 
 ## Scoring system
 

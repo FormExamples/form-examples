@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE casualty_card_clinical_examination SYSTEM "casualty_card_clinical_examination.dtd">
 <casualty_card_clinical_examination>
-<id>330e8400-e29b-41d4-a716-44665544000d</id>
-<casualty_card_id>660e8400-e29b-41d4-a716-446655440001</casualty_card_id>
+<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<casualty_card_id>550e8400-e29b-41d4-a716-446655440000</casualty_card_id>
 <general_appearance></general_appearance>
 <head_and_face></head_and_face>
 <neck></neck>
@@ -15,6 +18,4 @@
 <skin></skin>
 <mental_state></mental_state>
 <body_diagram_notes>Example text.</body_diagram_notes>
-<created_at>2026-04-09T10:00:00Z</created_at>
-<updated_at>2026-04-09T10:00:00Z</updated_at>
 </casualty_card_clinical_examination>

@@ -4,7 +4,7 @@ CREATE TABLE grading_fired_rule (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many fired rules
-    grading_result_id   UUID NOT NULL REFERENCES grading_result(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
     -- FK to the rule catalogue (may be NULL if rule is retired)
     rule_code    TEXT REFERENCES diabetes_rule(code) ON DELETE SET NULL,
     -- Denormalized snapshot of the rule at grading time
@@ -14,8 +14,8 @@ CREATE TABLE grading_fired_rule (
 );
 
 -- Index for fetching all fired rules for a grading result
-CREATE INDEX idx_grading_fired_rule_grading_result_id
-    ON grading_fired_rule(grading_result_id);
+CREATE INDEX idx_grading_fired_rule_grade_id
+    ON grading_fired_rule(grade_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
@@ -23,9 +23,9 @@ CREATE TRIGGER trigger_grading_fired_rule_updated_at
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
 COMMENT ON TABLE grading_fired_rule IS
-    'Many-to-one with grading_result. Each row is one diabetes rule that fired. Denormalized for audit.';
-COMMENT ON COLUMN grading_fired_rule.grading_result_id IS
-    'FK to grading_result. One result may have many fired rules.';
+    'Many-to-one with grade. Each row is one diabetes rule that fired. Denormalized for audit.';
+COMMENT ON COLUMN grading_fired_rule.grade_id IS
+    'FK to grade. One result may have many fired rules.';
 COMMENT ON COLUMN grading_fired_rule.rule_code IS
     'FK to diabetes_rule catalogue. SET NULL on delete so audit rows survive rule removal.';
 COMMENT ON COLUMN grading_fired_rule.rule_category IS

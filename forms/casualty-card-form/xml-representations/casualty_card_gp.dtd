@@ -1,9 +1,10 @@
-<!ELEMENT casualty_card_gp (id,casualty_card_id,name,practice_name,practice_address,practice_phone,created_at,updated_at)>
+<!ELEMENT casualty_card_gp (id,created_at,updated_at,deleted_at,casualty_card_id,name,practice_name,practice_address,practice_phone)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
 <!ELEMENT casualty_card_id (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT practice_name (#PCDATA)>
 <!ELEMENT practice_address (#PCDATA)>
 <!ELEMENT practice_phone (#PCDATA)>
-<!ELEMENT created_at (#PCDATA)>
-<!ELEMENT updated_at (#PCDATA)>

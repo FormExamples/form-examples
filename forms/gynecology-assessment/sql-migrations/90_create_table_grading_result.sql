@@ -1,4 +1,4 @@
-CREATE TABLE grading_result (
+CREATE TABLE grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,33 +18,33 @@ CREATE TABLE grading_result (
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER trigger_grading_result_updated_at
-    BEFORE UPDATE ON grading_result
+CREATE TRIGGER trigger_grade_updated_at
+    BEFORE UPDATE ON grade
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
 
-COMMENT ON TABLE grading_result IS
+COMMENT ON TABLE grade IS
     'Computed gynaecological symptom severity result based on frequency, intensity, and clinical significance. One-to-one child of assessment.';
-COMMENT ON COLUMN grading_result.severity_level IS
+COMMENT ON COLUMN grade.severity_level IS
     'Overall severity classification: mild, moderate, or severe.';
-COMMENT ON COLUMN grading_result.total_symptom_score IS
+COMMENT ON COLUMN grade.total_symptom_score IS
     'Composite symptom severity score across all domains.';
-COMMENT ON COLUMN grading_result.menstrual_domain_score IS
+COMMENT ON COLUMN grade.menstrual_domain_score IS
     'Sub-score for menstrual symptoms.';
-COMMENT ON COLUMN grading_result.pelvic_symptom_score IS
+COMMENT ON COLUMN grade.pelvic_symptom_score IS
     'Sub-score for pelvic pain and prolapse symptoms.';
-COMMENT ON COLUMN grading_result.urogenital_symptom_score IS
+COMMENT ON COLUMN grade.urogenital_symptom_score IS
     'Sub-score for urogenital and vulval symptoms.';
-COMMENT ON COLUMN grading_result.graded_at IS
+COMMENT ON COLUMN grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grading_result.assessment_id IS
+COMMENT ON COLUMN grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grading_result.id IS
+COMMENT ON COLUMN grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_result.created_at IS
+COMMENT ON COLUMN grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_result.updated_at IS
+COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_result.deleted_at IS
+COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';
