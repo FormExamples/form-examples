@@ -24,7 +24,7 @@ PostgreSQL migrations for this form. See
 - `clinical_review`
 - `fired_rule`
 - `additional_flag`
-- `grading_result`
+- `grade`
 
 ## Derived artefacts
 

@@ -33,8 +33,8 @@ PostgreSQL schema migrations for the Heart Health Check assessment. 15 files cre
 - CHECK constraints for enum values
 - Comments on all tables and columns
 - One-to-one child tables for each assessment section (03–11)
-- One-to-one grading_result per assessment
-- One-to-many grading_fired_rule and grading_additional_flag per grading_result
+- One-to-one grade per assessment
+- One-to-many grading_fired_rule and grading_additional_flag per grade
 
 ## Status
 

@@ -16,7 +16,7 @@ PostgreSQL migrations for this form. See
 - `prescription_details`
 - `prescription_substitution_options`
 - `prescription_request_type`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

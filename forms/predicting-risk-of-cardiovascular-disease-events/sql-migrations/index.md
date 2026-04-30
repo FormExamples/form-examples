@@ -14,7 +14,7 @@ PostgreSQL migrations for this form. See
 
 - `assessment`
 - `pvt_rule`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

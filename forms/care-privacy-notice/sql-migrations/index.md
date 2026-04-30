@@ -13,7 +13,7 @@ PostgreSQL migrations for this form. See
 ## Form-specific tables
 
 - `assessment`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 
 ## Derived artefacts

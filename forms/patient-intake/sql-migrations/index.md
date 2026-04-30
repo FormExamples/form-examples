@@ -17,7 +17,7 @@ PostgreSQL migrations for this form. See
 - `assessment_medication_item`
 - `assessment_allergies`
 - `assessment_allergy_item`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

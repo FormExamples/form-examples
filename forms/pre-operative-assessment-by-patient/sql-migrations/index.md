@@ -14,7 +14,7 @@ PostgreSQL migrations for this form. See
 
 - `pre_operative_assessment_by_patient`
 - `asa_rule`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

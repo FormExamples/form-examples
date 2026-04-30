@@ -22,7 +22,7 @@ PostgreSQL migrations for this form. See
 - `physical_activity_diet`
 - `body_measurements`
 - `review_calculate`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

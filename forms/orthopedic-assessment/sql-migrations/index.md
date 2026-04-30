@@ -21,7 +21,7 @@ PostgreSQL migrations for this form. See
 - `assessment_imaging_item`
 - `assessment_surgical_history`
 - `assessment_surgery_item`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

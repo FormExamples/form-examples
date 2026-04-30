@@ -23,7 +23,7 @@ PostgreSQL migrations for this form. See
 - `assessment_test_result_item`
 - `assessment_current_management`
 - `assessment_other_medication`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

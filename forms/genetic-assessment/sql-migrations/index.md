@@ -17,7 +17,7 @@ PostgreSQL migrations for this form. See
 - `assessment_cancer_history_item`
 - `assessment_family_pedigree`
 - `assessment_family_pedigree_member`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 

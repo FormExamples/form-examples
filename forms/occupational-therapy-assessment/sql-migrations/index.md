@@ -17,7 +17,7 @@ PostgreSQL migrations for this form. See
 - `assessment_performance_rating_item`
 - `assessment_satisfaction_ratings`
 - `assessment_satisfaction_rating_item`
-- `grading_result`
+- `grade`
 - `grading_fired_rule`
 - `grading_additional_flag`
 
