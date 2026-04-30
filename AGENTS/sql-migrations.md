@@ -24,15 +24,13 @@ sql-migrations/
   92_create_table_grading_additional_flag.sql # Safety-critical flags
 ```
 
-Each form must have `00-extensions.sql` as the first migration so that
+Each form must have `00_extensions.sql` as the first migration so that
 `pgcrypto` (for `gen_random_uuid()`) is available before any table is created.
-`bin/test-form` asserts that `00-extensions.sql` exists.
+`bin/test-form` asserts that `00_extensions.sql` exists.
 
 ## Schema conventions
 
 - UUIDv4 primary keys via `gen_random_uuid()` (from `pgcrypto`)
-
-
 - `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`
 - `updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`, maintained by the `set_updated_at()` trigger
 - Foreign keys cascade on delete (`ON DELETE CASCADE`) within a form's own schema; foreign keys to shared tables use `ON DELETE RESTRICT`
@@ -53,7 +51,7 @@ deleted_at TIMESTAMPTZ DEFAULT NULL,
 
 Canonical comments:
 
-```shl
+```sql
 COMMENT ON COLUMN grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
 COMMENT ON COLUMN grading_additional_flag.created_at IS

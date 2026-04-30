@@ -45,7 +45,8 @@ forms/<slug>/
   front-end-form-with-svelte/                      # Questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML + table)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend
+  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend (axum + Loco + Tera + HTMX + Alpine.js)
+  full-stack-with-loco-tera-htmx-alpine-setup     # Scaffold generator (executable shell script of `cargo loco generate scaffold` calls)
 ```
 
 Generated FHIR HL7 R5 JSON resources live in `fhir-r5/`.
@@ -71,7 +72,8 @@ multi-page forms.
 See the per-stack agent docs:
 
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Rust / axum / Loco / HTMX / Alpine.js](AGENTS/full-stack-with-rust-axum-loco-htmx-alpine.md)
+- [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
+- [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)

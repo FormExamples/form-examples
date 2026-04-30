@@ -5,7 +5,9 @@ CSS 4 and powered by a pure Svelte 5 reactive scoring engine.
 
 Slug: front-end-with-sveltekit-tailwind-svar
 
-- Search pattern: `forms/*/front-end-*-with-svelte`
+- Search patterns:
+  - `forms/*/front-end-form-with-svelte` — patient questionnaire (single-page wizard)
+  - `forms/*/front-end-dashboard-with-svelte` — dashboard (SVAR DataGrid)
 
 ## Technology stack
 
