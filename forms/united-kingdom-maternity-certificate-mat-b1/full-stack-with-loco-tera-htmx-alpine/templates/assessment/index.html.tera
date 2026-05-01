@@ -1,0 +1,272 @@
+{% extends "base.html.tera" %}
+
+{% block title %}MAT B1 — Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;"
+     x-data="{
+       step: 1,
+       totalSteps: {{ total_steps }},
+       certificateType: '{{ data.certificateType }}',
+       issuerType: '{{ data.issuer.issuerType }}'
+     }">
+  <h1>MAT B1 — Maternity Certificate</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Patient Identification -->
+    <div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 1: Patient Identification</h2>
+      <p style="color:#555;">Front-page details for the patient on the MAT B1 certificate.</p>
+      <div style="margin-top:0.6rem;">
+        <label>Patient name (as it should appear above Part A)</label>
+        <input type="text" name="patientName" value="{{ data.patientIdentification.patientName }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:160px;">
+          <label>Date of birth (optional)</label>
+          <input type="date" name="dateOfBirth" value="{{ data.patientIdentification.dateOfBirth }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>NHS number (optional)</label>
+          <input type="text" name="nhsNumber" value="{{ data.patientIdentification.nhsNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <label><strong>Certificate type</strong> (Part A and Part B are mutually exclusive)</label>
+        <div style="display:flex;gap:1rem;margin-top:0.4rem;">
+          <label>
+            <input type="radio" name="certificateType" value="pre"
+                   x-model="certificateType"
+                   {% if data.certificateType == "pre" %}checked{% endif %}>
+            Part A — Pre-confinement (EWC only)
+          </label>
+          <label>
+            <input type="radio" name="certificateType" value="post"
+                   x-model="certificateType"
+                   {% if data.certificateType == "post" %}checked{% endif %}>
+            Part B — Post-confinement (actual DOB + EWC)
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Part A (Pre-Confinement) -->
+    <div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 2: Part A — Pre-Confinement Certificate</h2>
+      <p style="color:#555;">
+        Required when <em>certificate type = pre</em>. The MAT B1 must not be
+        issued more than 20 weeks before the expected date of confinement.
+      </p>
+      <div x-show="certificateType !== 'pre'"
+           style="background:#fffbe6;border:1px solid #f1d76b;padding:0.6rem;border-radius:4px;color:#8a6d00;">
+        Part A is not active because the patient has not selected the
+        pre-confinement certificate type. Use Step 1 to select it, or skip
+        directly to Step 3 (Part B) / Step 4 (Issuer).
+      </div>
+      <div x-show="certificateType === 'pre'">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <div style="flex:1;min-width:200px;">
+            <label>Expected date of confinement (EWC)</label>
+            <input type="date" name="preEwc"
+                   value="{{ data.preConfinement.expectedDateOfConfinement }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <label>Examination date (date the certificate is issued)</label>
+            <input type="date" name="preExamDate"
+                   value="{{ data.preConfinement.examinationDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Part B (Post-Confinement) -->
+    <div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 3: Part B — Post-Confinement Certificate</h2>
+      <p style="color:#555;">
+        Required when <em>certificate type = post</em>. Records the baby's
+        actual date of birth alongside the originally expected EWC.
+      </p>
+      <div x-show="certificateType !== 'post'"
+           style="background:#fffbe6;border:1px solid #f1d76b;padding:0.6rem;border-radius:4px;color:#8a6d00;">
+        Part B is not active because the patient has not selected the
+        post-confinement certificate type.
+      </div>
+      <div x-show="certificateType === 'post'">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <div style="flex:1;min-width:200px;">
+            <label>Baby's actual date of birth</label>
+            <input type="date" name="postActualDob"
+                   value="{{ data.postConfinement.actualDateOfBirth }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <label>Originally expected date of confinement</label>
+            <input type="date" name="postEwc"
+                   value="{{ data.postConfinement.expectedDateOfConfinement }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 — Issuer Validation -->
+    <div x-show="step === 4" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 4: Issuer Validation</h2>
+      <p style="color:#555;">
+        Healthcare professional credentials. Doctors apply a name-and-address
+        stamp; midwives provide their NMC PIN and registration expiry date.
+      </p>
+
+      <div style="margin-top:0.6rem;">
+        <label><strong>Issuer type</strong></label>
+        <div style="display:flex;gap:1rem;margin-top:0.4rem;">
+          <label>
+            <input type="radio" name="issuerType" value="doctor"
+                   x-model="issuerType"
+                   {% if data.issuer.issuerType == "doctor" %}checked{% endif %}>
+            Doctor
+          </label>
+          <label>
+            <input type="radio" name="issuerType" value="midwife"
+                   x-model="issuerType"
+                   {% if data.issuer.issuerType == "midwife" %}checked{% endif %}>
+            Registered midwife
+          </label>
+        </div>
+      </div>
+
+      <!-- Doctor branch -->
+      <div x-show="issuerType === 'doctor'" style="margin-top:1rem;border-top:1px solid #eee;padding-top:1rem;">
+        <h3>Doctor details</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <label>Doctor name</label>
+            <input type="text" name="doctorName" value="{{ data.issuer.doctor.doctorName }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <label>Practice / surgery name</label>
+            <input type="text" name="practiceName" value="{{ data.issuer.doctor.practiceName }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+        <div style="margin-top:0.6rem;">
+          <label>Practice address</label>
+          <textarea name="practiceAddress" rows="2"
+                    style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.issuer.doctor.practiceAddress }}</textarea>
+        </div>
+        <div style="margin-top:0.6rem;">
+          <label>Name-and-address stamp applied?</label>
+          <select name="stampApplied"
+                  style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value="" {% if data.issuer.doctor.stampApplied == "" %}selected{% endif %}>Choose…</option>
+            <option value="yes" {% if data.issuer.doctor.stampApplied == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if data.issuer.doctor.stampApplied == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Midwife branch -->
+      <div x-show="issuerType === 'midwife'" style="margin-top:1rem;border-top:1px solid #eee;padding-top:1rem;">
+        <h3>Midwife details</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <label>Midwife name</label>
+            <input type="text" name="midwifeName" value="{{ data.issuer.midwife.midwifeName }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>NMC PIN</label>
+            <input type="text" name="nmcPin" value="{{ data.issuer.midwife.nmcPin }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>NMC registration expiry date</label>
+            <input type="date" name="nmcExpiryDate" value="{{ data.issuer.midwife.nmcExpiryDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate-level fields -->
+      <div style="margin-top:1.2rem;border-top:1px solid #eee;padding-top:1rem;">
+        <h3>Certificate</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <label>Unique certificate number</label>
+            <input type="text" name="certificateNumber" value="{{ data.issuer.certificateNumber }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>Issue date</label>
+            <input type="date" name="issueDate" value="{{ data.issuer.issueDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <div style="flex:1;min-width:160px;">
+            <label>Is this a duplicate?</label>
+            <select name="isDuplicate"
+                    style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;width:100%;">
+              <option value="" {% if data.issuer.isDuplicate == "" %}selected{% endif %}>Choose…</option>
+              <option value="yes" {% if data.issuer.isDuplicate == "yes" %}selected{% endif %}>Yes</option>
+              <option value="no" {% if data.issuer.isDuplicate == "no" %}selected{% endif %}>No</option>
+            </select>
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <label>Duplicate marker applied?</label>
+            <select name="duplicateMarkerApplied"
+                    style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;width:100%;">
+              <option value="" {% if data.issuer.duplicateMarkerApplied == "" %}selected{% endif %}>Choose…</option>
+              <option value="yes" {% if data.issuer.duplicateMarkerApplied == "yes" %}selected{% endif %}>Yes</option>
+              <option value="no" {% if data.issuer.duplicateMarkerApplied == "no" %}selected{% endif %}>No</option>
+            </select>
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>Completed in ink?</label>
+            <select name="completedInInk"
+                    style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;width:100%;">
+              <option value="" {% if data.issuer.completedInInk == "" %}selected{% endif %}>Choose…</option>
+              <option value="yes" {% if data.issuer.completedInInk == "yes" %}selected{% endif %}>Yes</option>
+              <option value="no" {% if data.issuer.completedInInk == "no" %}selected{% endif %}>No</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wizard nav -->
+    <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+      <button type="button" x-show="step > 1" @click="step = step - 1"
+              style="padding:0.5rem 1.2rem;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;">
+        Previous
+      </button>
+      <span></span>
+      <button type="button" x-show="step < totalSteps" @click="step = step + 1"
+              style="padding:0.5rem 1.2rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+        Next
+      </button>
+      <button type="submit" x-show="step === totalSteps"
+              style="padding:0.5rem 1.4rem;background:#080;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+        Submit & Generate Report
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

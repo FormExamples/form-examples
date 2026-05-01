@@ -1,0 +1,747 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA V1 — Vision Self-Declaration Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;" x-data="{ step: 1, totalSteps: {{ total_steps }} }">
+  <h1>DVLA V1 — Vision Self-Declaration</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Personal Details -->
+    <div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 1: Personal Details (Part A)</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:140px;">
+          <label>Title</label>
+          <input type="text" name="title" value="{{ data.personalDetails.title }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:2;min-width:200px;">
+          <label>Full Name</label>
+          <input type="text" name="fullName" value="{{ data.personalDetails.fullName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Date of Birth</label>
+          <input type="date" name="dateOfBirth" value="{{ data.personalDetails.dateOfBirth }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:1rem;">
+        <label>Address</label>
+        <textarea name="address" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.personalDetails.address }}</textarea>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:140px;">
+          <label>Postcode</label>
+          <input type="text" name="postcode" value="{{ data.personalDetails.postcode }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:2;min-width:200px;">
+          <label>Email</label>
+          <input type="email" name="email" value="{{ data.personalDetails.email }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Contact Number</label>
+          <input type="text" name="contactNumber" value="{{ data.personalDetails.contactNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Change of details (since last contact)</label>
+        <textarea name="changeOfDetails" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.personalDetails.changeOfDetails }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 2 — Healthcare Professionals -->
+    <div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 2: Healthcare Professionals (Part B)</h2>
+      <h3>GP</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>GP name</label>
+          <input type="text" name="gpName" value="{{ data.healthcareProfessionals.gp.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Surgery name</label>
+          <input type="text" name="gpSurgeryName" value="{{ data.healthcareProfessionals.gp.surgeryName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Address</label>
+        <textarea name="gpAddress" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.healthcareProfessionals.gp.address }}</textarea>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:140px;">
+          <label>Town</label>
+          <input type="text" name="gpTown" value="{{ data.healthcareProfessionals.gp.town }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Postcode</label>
+          <input type="text" name="gpPostcode" value="{{ data.healthcareProfessionals.gp.postcode }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Contact number</label>
+          <input type="text" name="gpContactNumber" value="{{ data.healthcareProfessionals.gp.contactNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:2;min-width:200px;">
+          <label>Email</label>
+          <input type="email" name="gpEmail" value="{{ data.healthcareProfessionals.gp.email }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Date last seen</label>
+          <input type="date" name="gpDateLastSeen" value="{{ data.healthcareProfessionals.gp.dateLastSeen }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">Consultant</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Consultant name</label>
+          <input type="text" name="consultantName" value="{{ data.healthcareProfessionals.consultant.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Speciality</label>
+          <input type="text" name="consultantSpeciality" value="{{ data.healthcareProfessionals.consultant.speciality }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Department</label>
+          <input type="text" name="consultantDepartment" value="{{ data.healthcareProfessionals.consultant.department }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Hospital name</label>
+          <input type="text" name="hospitalName" value="{{ data.healthcareProfessionals.consultant.hospitalName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Address</label>
+        <textarea name="consultantAddress" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.healthcareProfessionals.consultant.address }}</textarea>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:140px;">
+          <label>Town</label>
+          <input type="text" name="consultantTown" value="{{ data.healthcareProfessionals.consultant.town }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Postcode</label>
+          <input type="text" name="consultantPostcode" value="{{ data.healthcareProfessionals.consultant.postcode }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Date last seen</label>
+          <input type="date" name="consultantDateLastSeen" value="{{ data.healthcareProfessionals.consultant.dateLastSeen }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Q1 Eyesight Standards -->
+    <div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 3: Q1 Eyesight Standards</h2>
+      <p>
+        In good daylight, can you read a vehicle number plate (made after
+        1 September 2001) at a minimum distance of 20 metres? This corresponds
+        to the Snellen 6/12 standard.
+      </p>
+      <fieldset style="border:none;padding:0;">
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="meetsStandard" value="yes-without-correction"
+                 {% if data.eyesightStandards.meetsStandard == "yes-without-correction" %}checked{% endif %}>
+          Yes, without glasses or corrective lenses
+        </label>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="meetsStandard" value="yes-with-correction"
+                 {% if data.eyesightStandards.meetsStandard == "yes-with-correction" %}checked{% endif %}>
+          Yes, with glasses or corrective lenses
+        </label>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="meetsStandard" value="no"
+                 {% if data.eyesightStandards.meetsStandard == "no" %}checked{% endif %}>
+          No
+        </label>
+      </fieldset>
+    </div>
+
+    <!-- Step 4 — Q2 Vision in Both Eyes -->
+    <div x-show="step === 4" x-data="{ mono: '{{ data.visionInBothEyes.hasVisionInBothEyes }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 4: Q2 Vision in Both Eyes</h2>
+      <p>Do you have vision in both eyes?</p>
+      <fieldset style="border:none;padding:0;">
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="hasVisionInBothEyes" value="yes" x-model="mono"
+                 {% if data.visionInBothEyes.hasVisionInBothEyes == "yes" %}checked{% endif %}>
+          Yes
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="hasVisionInBothEyes" value="no" x-model="mono"
+                 {% if data.visionInBothEyes.hasVisionInBothEyes == "no" %}checked{% endif %}>
+          No
+        </label>
+      </fieldset>
+
+      <!-- Monocular branch -->
+      <div x-show="mono === 'no'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <h3>Monocular vision details</h3>
+        <p>Which eye can you see with?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="whichEye" value="left"
+                 {% if data.visionInBothEyes.whichEye == "left" %}checked{% endif %}>
+          Left eye only
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="whichEye" value="right"
+                 {% if data.visionInBothEyes.whichEye == "right" %}checked{% endif %}>
+          Right eye only
+        </label>
+
+        <p style="margin-top:1rem;">How long have you had vision in only one eye?</p>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="monocularDuration" value="since-birth-or-childhood"
+                 {% if data.visionInBothEyes.duration == "since-birth-or-childhood" %}checked{% endif %}>
+          Since birth or childhood
+        </label>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="monocularDuration" value="health-or-injury"
+                 {% if data.visionInBothEyes.duration == "health-or-injury" %}checked{% endif %}>
+          As a result of a health condition, accident or injury
+        </label>
+
+        <p style="margin-top:1rem;">Have you adapted to vision in one eye?</p>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="monocularAdaptation" value="adapted-advised"
+                 {% if data.visionInBothEyes.adaptation == "adapted-advised" %}checked{% endif %}>
+          Adapted, as advised by a healthcare professional
+        </label>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="monocularAdaptation" value="adapted-self"
+                 {% if data.visionInBothEyes.adaptation == "adapted-self" %}checked{% endif %}>
+          Adapted, but not advised by a healthcare professional
+        </label>
+        <label style="display:block;margin:0.4rem 0;">
+          <input type="radio" name="monocularAdaptation" value="not-adapted"
+                 {% if data.visionInBothEyes.adaptation == "not-adapted" %}checked{% endif %}>
+          Not yet adapted
+        </label>
+
+        <label style="display:block;margin-top:1rem;">
+          <input type="checkbox" name="monocularDeclarationConfirmed" value="on"
+                 {% if data.visionInBothEyes.monocularDeclarationConfirmed %}checked{% endif %}>
+          I confirm the monocular vision declaration.
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 5 — Q3 Field of Vision -->
+    <div x-show="step === 5"
+         x-data="{ vf: '{{ data.fieldOfVision.hasProblem }}', vfCause: '{{ data.fieldOfVision.causedSolelyByEyeCondition }}', cause: '{{ data.fieldOfVision.cause }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 5: Q3 Field of Vision</h2>
+      <p>Do you have a problem with your field of vision (peripheral / side vision)?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="fieldHasProblem" value="yes" x-model="vf"
+               {% if data.fieldOfVision.hasProblem == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="fieldHasProblem" value="no" x-model="vf"
+               {% if data.fieldOfVision.hasProblem == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="vf === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Is the problem caused solely by an eye condition?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="fieldCausedByEyeCondition" value="yes" x-model="vfCause"
+                 {% if data.fieldOfVision.causedSolelyByEyeCondition == "yes" %}checked{% endif %}>
+          Yes
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="fieldCausedByEyeCondition" value="no" x-model="vfCause"
+                 {% if data.fieldOfVision.causedSolelyByEyeCondition == "no" %}checked{% endif %}>
+          No
+        </label>
+
+        <div x-show="vfCause === 'no'" style="margin-top:1rem;">
+          <p>What is the cause?</p>
+          <label style="display:block;margin:0.4rem 0;">
+            <input type="radio" name="fieldCause" value="brain-tumour" x-model="cause"
+                   {% if data.fieldOfVision.cause == "brain-tumour" %}checked{% endif %}>
+            Brain tumour
+          </label>
+          <label style="display:block;margin:0.4rem 0;">
+            <input type="radio" name="fieldCause" value="head-injury" x-model="cause"
+                   {% if data.fieldOfVision.cause == "head-injury" %}checked{% endif %}>
+            Head injury
+          </label>
+          <label style="display:block;margin:0.4rem 0;">
+            <input type="radio" name="fieldCause" value="stroke" x-model="cause"
+                   {% if data.fieldOfVision.cause == "stroke" %}checked{% endif %}>
+            Stroke
+          </label>
+          <label style="display:block;margin:0.4rem 0;">
+            <input type="radio" name="fieldCause" value="other" x-model="cause"
+                   {% if data.fieldOfVision.cause == "other" %}checked{% endif %}>
+            Other
+          </label>
+
+          <div x-show="cause === 'other'" style="margin-top:0.6rem;">
+            <label>Please describe</label>
+            <textarea name="fieldCauseOtherDetails" rows="2"
+                      style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.fieldOfVision.causeOtherDetails }}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 — Q4 Glaucoma -->
+    <div x-show="step === 6" x-data="{ has: '{{ data.glaucoma.hasCondition }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 6: Q4 Glaucoma</h2>
+      <p>Do you have glaucoma?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="glaucomaHasCondition" value="yes" x-model="has"
+               {% if data.glaucoma.hasCondition == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="glaucomaHasCondition" value="no" x-model="has"
+               {% if data.glaucoma.hasCondition == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Which eye(s) are affected?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="glaucomaWhichEyes" value="both"
+                 {% if data.glaucoma.whichEyes == "both" %}checked{% endif %}>
+          Both
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="glaucomaWhichEyes" value="left"
+                 {% if data.glaucoma.whichEyes == "left" %}checked{% endif %}>
+          Left
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="glaucomaWhichEyes" value="right"
+                 {% if data.glaucoma.whichEyes == "right" %}checked{% endif %}>
+          Right
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 7 — Q5 Retinitis Pigmentosa -->
+    <div x-show="step === 7" x-data="{ has: '{{ data.retinitisPigmentosa.hasCondition }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 7: Q5 Retinitis Pigmentosa</h2>
+      <p>Do you have retinitis pigmentosa?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="rpHasCondition" value="yes" x-model="has"
+               {% if data.retinitisPigmentosa.hasCondition == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="rpHasCondition" value="no" x-model="has"
+               {% if data.retinitisPigmentosa.hasCondition == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Which eye(s) are affected?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="rpWhichEyes" value="both"
+                 {% if data.retinitisPigmentosa.whichEyes == "both" %}checked{% endif %}>
+          Both
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="rpWhichEyes" value="left"
+                 {% if data.retinitisPigmentosa.whichEyes == "left" %}checked{% endif %}>
+          Left
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="rpWhichEyes" value="right"
+                 {% if data.retinitisPigmentosa.whichEyes == "right" %}checked{% endif %}>
+          Right
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 8 — Q6 Laser Treatment -->
+    <div x-show="step === 8" x-data="{ has: '{{ data.laserTreatment.hasHadTreatment }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 8: Q6 Laser Treatment</h2>
+      <p>Have you had laser treatment?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="laserHasHadTreatment" value="yes" x-model="has"
+               {% if data.laserTreatment.hasHadTreatment == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="laserHasHadTreatment" value="no" x-model="has"
+               {% if data.laserTreatment.hasHadTreatment == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:160px;">
+            <label>Left eye — first date</label>
+            <input type="date" name="laserLeftFirstDate" value="{{ data.laserTreatment.leftEyeFirstDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>Left eye — last date</label>
+            <input type="date" name="laserLeftLastDate" value="{{ data.laserTreatment.leftEyeLastDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <div style="flex:1;min-width:160px;">
+            <label>Right eye — first date</label>
+            <input type="date" name="laserRightFirstDate" value="{{ data.laserTreatment.rightEyeFirstDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>Right eye — last date</label>
+            <input type="date" name="laserRightLastDate" value="{{ data.laserTreatment.rightEyeLastDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 9 — Q7 Blepharospasm -->
+    <div x-show="step === 9" x-data="{ has: '{{ data.blepharospasm.hasCondition }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 9: Q7 Blepharospasm</h2>
+      <p>Do you have blepharospasm (involuntary eyelid muscle spasm)?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="blepharospasmHasCondition" value="yes" x-model="has"
+               {% if data.blepharospasm.hasCondition == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="blepharospasmHasCondition" value="no" x-model="has"
+               {% if data.blepharospasm.hasCondition == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Which eye(s) are affected?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmWhichEyes" value="both"
+                 {% if data.blepharospasm.whichEyes == "both" %}checked{% endif %}>
+          Both
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmWhichEyes" value="left"
+                 {% if data.blepharospasm.whichEyes == "left" %}checked{% endif %}>
+          Left
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmWhichEyes" value="right"
+                 {% if data.blepharospasm.whichEyes == "right" %}checked{% endif %}>
+          Right
+        </label>
+
+        <p style="margin-top:1rem;">Have you had treatment for blepharospasm?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmHasHadTreatment" value="yes"
+                 {% if data.blepharospasm.hasHadTreatment == "yes" %}checked{% endif %}>
+          Yes
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmHasHadTreatment" value="no"
+                 {% if data.blepharospasm.hasHadTreatment == "no" %}checked{% endif %}>
+          No
+        </label>
+
+        <p style="margin-top:1rem;">Is your healthcare professional satisfied that the condition is adequately controlled?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmAdequatelyControlled" value="yes"
+                 {% if data.blepharospasm.adequatelyControlled == "yes" %}checked{% endif %}>
+          Yes
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="blepharospasmAdequatelyControlled" value="no"
+                 {% if data.blepharospasm.adequatelyControlled == "no" %}checked{% endif %}>
+          No
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 10 — Q8 Night Blindness -->
+    <div x-show="step === 10" x-data="{ has: '{{ data.nightBlindness.hasCondition }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 10: Q8 Night Blindness</h2>
+      <p>Do you have night blindness (nyctalopia)?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="nightBlindnessHasCondition" value="yes" x-model="has"
+               {% if data.nightBlindness.hasCondition == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="nightBlindnessHasCondition" value="no" x-model="has"
+               {% if data.nightBlindness.hasCondition == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Which eye(s) are affected?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="nightBlindnessWhichEyes" value="both"
+                 {% if data.nightBlindness.whichEyes == "both" %}checked{% endif %}>
+          Both
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="nightBlindnessWhichEyes" value="left"
+                 {% if data.nightBlindness.whichEyes == "left" %}checked{% endif %}>
+          Left
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="nightBlindnessWhichEyes" value="right"
+                 {% if data.nightBlindness.whichEyes == "right" %}checked{% endif %}>
+          Right
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 11 — Q9 Double Vision -->
+    <div x-show="step === 11"
+         x-data="{ has: '{{ data.doubleVision.hasCondition }}', ctrl: '{{ data.doubleVision.controlled }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 11: Q9 Double Vision</h2>
+      <p>Do you have double vision (diplopia)?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="doubleVisionHasCondition" value="yes" x-model="has"
+               {% if data.doubleVision.hasCondition == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="doubleVisionHasCondition" value="no" x-model="has"
+               {% if data.doubleVision.hasCondition == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <p>Is your double vision controlled?</p>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="doubleVisionControlled" value="yes" x-model="ctrl"
+                 {% if data.doubleVision.controlled == "yes" %}checked{% endif %}>
+          Yes
+        </label>
+        <label style="display:inline-block;margin-right:1rem;">
+          <input type="radio" name="doubleVisionControlled" value="no" x-model="ctrl"
+                 {% if data.doubleVision.controlled == "no" %}checked{% endif %}>
+          No
+        </label>
+
+        <div x-show="ctrl === 'no'" style="margin-top:1rem;">
+          <p>Has the double vision been the same for 6 months or more?</p>
+          <label style="display:inline-block;margin-right:1rem;">
+            <input type="radio" name="doubleVisionSameForSixMonths" value="yes"
+                   {% if data.doubleVision.sameForSixMonthsOrMore == "yes" %}checked{% endif %}>
+            Yes
+          </label>
+          <label style="display:inline-block;margin-right:1rem;">
+            <input type="radio" name="doubleVisionSameForSixMonths" value="no"
+                   {% if data.doubleVision.sameForSixMonthsOrMore == "no" %}checked{% endif %}>
+            No
+          </label>
+        </div>
+
+        <label style="display:block;margin-top:1rem;">
+          <input type="checkbox" name="doubleVisionDeclarationConfirmed" value="on"
+                 {% if data.doubleVision.doubleVisionDeclarationConfirmed %}checked{% endif %}>
+          I confirm the double-vision adaptation declaration.
+        </label>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+          <div style="flex:2;min-width:200px;">
+            <label>Declaration: signed name</label>
+            <input type="text" name="doubleVisionDeclarationSignatureName"
+                   value="{{ data.doubleVision.declarationSignatureName }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <label>Declaration date</label>
+            <input type="date" name="doubleVisionDeclarationDate"
+                   value="{{ data.doubleVision.declarationDate }}"
+                   style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 12 — Q10 Other Vision Conditions -->
+    <div x-show="step === 12" x-data="{ has: '{{ data.otherVisionConditions.hasOther }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 12: Q10 Other Vision Conditions</h2>
+      <p>Do you have any other vision condition that may affect driving?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="otherVisionHasOther" value="yes" x-model="has"
+               {% if data.otherVisionConditions.hasOther == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="otherVisionHasOther" value="no" x-model="has"
+               {% if data.otherVisionConditions.hasOther == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <label>Please describe the condition(s) and which eye(s) are affected.</label>
+        <textarea name="otherVisionDetails" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.otherVisionConditions.details }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 13 — Q11 Recent Contact -->
+    <div x-show="step === 13" x-data="{ has: '{{ data.recentContact.hadContact }}' }"
+         style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 13: Q11 Recent Contact</h2>
+      <p>
+        Have you had recent contact with your healthcare professional or
+        optician about your vision (in the last 12 months)?
+      </p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="recentContactHadContact" value="yes" x-model="has"
+               {% if data.recentContact.hadContact == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="recentContactHadContact" value="no" x-model="has"
+               {% if data.recentContact.hadContact == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div x-show="has === 'yes'" style="border-left:3px solid #0070f3;padding-left:1rem;margin-top:1rem;">
+        <label>Date of most recent contact</label>
+        <input type="date" name="recentContactDate" value="{{ data.recentContact.dateOfContact }}"
+               style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+    </div>
+
+    <!-- Step 14 — Authorisation -->
+    <div x-show="step === 14" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 14: Authorisation</h2>
+      <p>
+        I authorise the DVLA's medical advisers to ask any healthcare
+        professional listed above for further information about my vision.
+      </p>
+      <label style="display:block;">
+        <input type="checkbox" name="authorisationDeclarationConfirmed" value="on"
+               {% if data.authorisation.declarationConfirmed %}checked{% endif %}>
+        I confirm the applicant authorisation declaration.
+      </label>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Full name</label>
+          <input type="text" name="authorisationName" value="{{ data.authorisation.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Signature (typed)</label>
+          <input type="text" name="authorisationSignature" value="{{ data.authorisation.signature }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Date</label>
+          <input type="date" name="authorisationDate" value="{{ data.authorisation.date }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <p style="margin-top:1rem;">Do you authorise electronic correspondence?</p>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="authoriseElectronicCorrespondence" value="yes"
+               {% if data.authorisation.authoriseElectronicCorrespondence == "yes" %}checked{% endif %}>
+        Yes
+      </label>
+      <label style="display:inline-block;margin-right:1rem;">
+        <input type="radio" name="authoriseElectronicCorrespondence" value="no"
+               {% if data.authorisation.authoriseElectronicCorrespondence == "no" %}checked{% endif %}>
+        No
+      </label>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Healthcare-professional contact preference</label>
+          <select name="contactPreferenceFromHealthcareProfessional"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value="" {% if data.authorisation.contactPreferenceFromHealthcareProfessional == "" %}selected{% endif %}></option>
+            <option value="email" {% if data.authorisation.contactPreferenceFromHealthcareProfessional == "email" %}selected{% endif %}>Email</option>
+            <option value="sms" {% if data.authorisation.contactPreferenceFromHealthcareProfessional == "sms" %}selected{% endif %}>SMS (Text)</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>DVLA contact preference</label>
+          <select name="contactPreferenceFromDvla"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value="" {% if data.authorisation.contactPreferenceFromDvla == "" %}selected{% endif %}></option>
+            <option value="email" {% if data.authorisation.contactPreferenceFromDvla == "email" %}selected{% endif %}>Email</option>
+            <option value="sms" {% if data.authorisation.contactPreferenceFromDvla == "sms" %}selected{% endif %}>SMS (Text)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+      <button type="button" @click="step = Math.max(1, step - 1)" :disabled="step === 1"
+              style="padding:0.5rem 1rem;background:#666;color:#fff;border:none;border-radius:4px;cursor:pointer;"
+              x-bind:style="step === 1 ? 'opacity:0.5;cursor:not-allowed;' : ''">
+        ← Previous
+      </button>
+
+      <span x-text="`${step} / ${totalSteps}`" style="color:#555;"></span>
+
+      <template x-if="step < totalSteps">
+        <button type="button" @click="step = Math.min(totalSteps, step + 1)"
+                style="padding:0.5rem 1rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Next →
+        </button>
+      </template>
+      <template x-if="step === totalSteps">
+        <button type="submit"
+                style="padding:0.5rem 1.4rem;background:#0a7d31;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Submit
+        </button>
+      </template>
+    </div>
+  </form>
+
+  <p style="margin-top:1.5rem;"><a href="/">← Cancel and return home</a></p>
+</div>
+{% endblock %}
