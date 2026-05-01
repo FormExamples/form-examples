@@ -1,16 +1,24 @@
 # Plan: Psychology Assessment
 
-## Status
+## Current status
 
-Not yet implemented.
+SvelteKit patient front-end implemented. DASS-21 patient form (8-step wizard, 3 subscales, severity per subscale, suicidal-ideation safety flag).
 
-## Roadmap
+Remaining work:
 
-- [ ] SQL migrations for patient, assessment, item responses, grading result.
-- [ ] DASS-21 scoring engine (TypeScript) with tests.
-- [ ] Front-end patient wizard (HTML + SvelteKit).
-- [ ] Dashboard (HTML + SvelteKit SVAR DataGrid).
-- [ ] Rust backend (axum + Loco + Tera + HTMX).
-- [ ] Risk-escalation flow for positive suicidal-ideation screen.
-- [ ] XML + DTD representations.
-- [ ] FHIR HL7 R5 resources.
+- Build front-end-dashboard-with-svelte (SVAR DataGrid)
+- Build full-stack-with-loco-tera-htmx-alpine Rust backend (axum + Loco +
+  Tera + HTMX + Alpine.js)
+- PDF report generation via SvelteKit server endpoint
+- End-to-end Playwright tests
+- Clinical safety case documentation
+
+See [AGENTS.md](AGENTS.md) for the form's design spec and step list.
+
+## Future enhancements
+
+- Add input validation with Zod schemas
+- Add accessibility audit (axe-core)
+- Add form autosave to localStorage
+- Add internationalisation (i18n) support
+- User acceptance testing with domain stakeholders

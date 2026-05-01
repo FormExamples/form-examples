@@ -2,31 +2,23 @@
 
 ## Current status
 
-Not yet implemented. Directory scaffolded with stub files.
+SvelteKit patient front-end implemented. WHO emergency first aid for community first-aid responders (CABCDE) — 12-step wizard, 30 validation rules, 14 clinical flags including major bleeding without intervention and tourniquet-without-time escalation.
 
-## Form purpose
+Remaining work:
 
-WHO standardised emergency first aid documentation form for community first aid responders (CFAR). Uses the CABCDE systematic assessment framework with paired interventions for each category. Captures patient identification, referral and transport details, situation (medical vs trauma, pregnancy), background (history, medications, allergies), CABCDE assessment and interventions, recommendations, and responder details. No clinical scoring — the form validates completeness and flags precaution indicators.
+- Build front-end-dashboard-with-svelte (SVAR DataGrid)
+- Build full-stack-with-loco-tera-htmx-alpine Rust backend (axum + Loco +
+  Tera + HTMX + Alpine.js)
+- PDF report generation via SvelteKit server endpoint
+- End-to-end Playwright tests
+- Clinical safety case documentation
 
-## Implementation plan
-
-1. Author SQL migrations for patient, referral/transport, situation, background, CABCDE sections, recommendations, and responder
-2. Generate XML representations and FHIR R5 resources from migrations
-3. Build HTML form frontend (12 steps with assessment/intervention pairs per CABCDE category)
-4. Build SvelteKit form frontend with Svelte 5 runes and Tailwind 4
-5. Build HTML dashboard for incident tracking
-6. Build SvelteKit dashboard with SVAR DataGrid
-7. Build Rust backend with Loco/Tera
-8. Add completeness validation engine and precaution flag detection
-9. Add unit tests for validation logic
+See [AGENTS.md](AGENTS.md) for the form's design spec and step list.
 
 ## Future enhancements
 
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)
-- Add end-to-end tests with Playwright
 - Add form autosave to localStorage
 - Add internationalisation (i18n) support
-- Clinical safety case documentation
-- User acceptance testing with clinical staff
-- GDPR data processing impact assessment
+- User acceptance testing with domain stakeholders

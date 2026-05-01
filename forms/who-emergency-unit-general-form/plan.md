@@ -2,31 +2,23 @@
 
 ## Current status
 
-Not yet implemented. Directory scaffolded with stub files.
+SvelteKit patient front-end implemented. WHO emergency unit general (non-trauma) clinical documentation — 16-step wizard with ABCD primary survey, ROS over 14 systems, PE over 11 systems, diagnostics, interventions, reassessment, disposition; 27 tests.
 
-## Form purpose
+Remaining work:
 
-WHO standardised emergency unit clinical documentation form for general (non-trauma) patients. Comprehensive 2-page form covering patient registration, chief complaint and vitals, high risk signs, primary survey (ABCD), history of present illness, review of systems (14 systems), past medical history, physical exam (11 systems), diagnostics (CBC, lytes, ECG, imaging), additional interventions, assessment and plan, reassessment, and disposition. No clinical scoring — the form structures emergency clinical documentation with triage indicators.
+- Build front-end-dashboard-with-svelte (SVAR DataGrid)
+- Build full-stack-with-loco-tera-htmx-alpine Rust backend (axum + Loco +
+  Tera + HTMX + Alpine.js)
+- PDF report generation via SvelteKit server endpoint
+- End-to-end Playwright tests
+- Clinical safety case documentation
 
-## Implementation plan
-
-1. Author SQL migrations for patient registration, vitals, high risk signs, ABCD survey, history, ROS, past medical, physical exam, diagnostics, interventions, assessment, reassessment, and disposition
-2. Generate XML representations and FHIR R5 resources from migrations
-3. Build HTML form frontend (16 steps)
-4. Build SvelteKit form frontend with Svelte 5 runes and Tailwind 4
-5. Build HTML dashboard for patient tracking
-6. Build SvelteKit dashboard with SVAR DataGrid
-7. Build Rust backend with Loco/Tera
-8. Add completeness validation engine and high risk sign detection
-9. Add unit tests for validation logic
+See [AGENTS.md](AGENTS.md) for the form's design spec and step list.
 
 ## Future enhancements
 
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)
-- Add end-to-end tests with Playwright
 - Add form autosave to localStorage
 - Add internationalisation (i18n) support
-- Clinical safety case documentation
-- User acceptance testing with clinical staff
-- GDPR data processing impact assessment
+- User acceptance testing with domain stakeholders
