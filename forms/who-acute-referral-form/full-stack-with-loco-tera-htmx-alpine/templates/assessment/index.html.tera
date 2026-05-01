@@ -1,0 +1,488 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Acute Referral - Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;" x-data="{ step: 1, totalSteps: {{ total_steps }} }">
+  <h1>WHO Acute Referral Form</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit. Steps 1-7 are completed by the initiating facility; step 8 is completed by the receiving facility on arrival.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Patient Identification -->
+    <div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 1: Patient Identification</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Last name (family name)</label>
+          <input type="text" name="patientLastName" value="{{ data.patientIdentification.patientLastName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>First name (given name)</label>
+          <input type="text" name="patientFirstName" value="{{ data.patientIdentification.patientFirstName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:160px;">
+          <label>Date of birth</label>
+          <input type="date" name="dateOfBirth" value="{{ data.patientIdentification.dateOfBirth }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Sex</label>
+          <select name="sex" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value=""        {% if data.patientIdentification.sex == "" %}selected{% endif %}>-- Select --</option>
+            <option value="male"    {% if data.patientIdentification.sex == "male" %}selected{% endif %}>Male</option>
+            <option value="female"  {% if data.patientIdentification.sex == "female" %}selected{% endif %}>Female</option>
+            <option value="unknown" {% if data.patientIdentification.sex == "unknown" %}selected{% endif %}>Unknown</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Patient contact information</label>
+        <input type="text" name="patientContactInformation"
+               value="{{ data.patientIdentification.patientContactInformation }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <h3 style="margin-top:1rem;">Emergency contact</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="emergencyContactName"
+                 value="{{ data.patientIdentification.emergencyContact.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Contact information</label>
+          <input type="text" name="emergencyContactInformation"
+                 value="{{ data.patientIdentification.emergencyContact.contactInformation }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Facility & Transport -->
+    <div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 2: Facility &amp; Transport</h2>
+      <h3>Initiating facility</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="initiatingFacilityName"
+                 value="{{ data.facilityAndTransport.initiatingFacility.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Focal point</label>
+          <input type="text" name="initiatingFacilityFocalPoint"
+                 value="{{ data.facilityAndTransport.initiatingFacility.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="initiatingFacilityPhoneNumber"
+                 value="{{ data.facilityAndTransport.initiatingFacility.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Reason for referral</label>
+        <textarea name="reasonForReferral" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.facilityAndTransport.reasonForReferral }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>
+          <input type="checkbox" name="referralFacilityContacted" value="on"
+                 {% if data.facilityAndTransport.referralFacilityContacted %}checked{% endif %}>
+          Referral facility contacted prior to transfer
+        </label>
+      </div>
+
+      <h3 style="margin-top:1rem;">Referral facility</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="referralFacilityName"
+                 value="{{ data.facilityAndTransport.referralFacility.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Focal point</label>
+          <input type="text" name="referralFacilityFocalPoint"
+                 value="{{ data.facilityAndTransport.referralFacility.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="referralFacilityPhoneNumber"
+                 value="{{ data.facilityAndTransport.referralFacility.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">Ambulance / transport vehicle</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Name / unit</label>
+          <input type="text" name="ambulanceName"
+                 value="{{ data.facilityAndTransport.ambulance.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Focal point</label>
+          <input type="text" name="ambulanceFocalPoint"
+                 value="{{ data.facilityAndTransport.ambulance.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="ambulancePhoneNumber"
+                 value="{{ data.facilityAndTransport.ambulance.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:220px;">
+          <label>Transfer decision (date &amp; time)</label>
+          <input type="datetime-local" name="transferDecisionDateTime"
+                 value="{{ data.facilityAndTransport.transferDecisionDateTime }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <label>Departure (date &amp; time)</label>
+          <input type="datetime-local" name="departureDateTime"
+                 value="{{ data.facilityAndTransport.departureDateTime }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Mode of transfer</label>
+          <select name="modeOfTransfer" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value=""       {% if data.facilityAndTransport.modeOfTransfer == "" %}selected{% endif %}>-- Select --</option>
+            <option value="ground" {% if data.facilityAndTransport.modeOfTransfer == "ground" %}selected{% endif %}>Ground</option>
+            <option value="air"    {% if data.facilityAndTransport.modeOfTransfer == "air" %}selected{% endif %}>Air</option>
+            <option value="sea"    {% if data.facilityAndTransport.modeOfTransfer == "sea" %}selected{% endif %}>Sea</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Situation -->
+    <div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 3: Situation</h2>
+      <div style="margin-top:0.6rem;">
+        <label>Chief complaint</label>
+        <textarea name="chiefComplaint" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.chiefComplaint }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Primary diagnosis</label>
+        <textarea name="primaryDiagnosis" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.primaryDiagnosis }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Pregnant?</label>
+        <select name="pregnant" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""        {% if data.situation.pregnant == "" %}selected{% endif %}>-- Select --</option>
+          <option value="yes"     {% if data.situation.pregnant == "yes" %}selected{% endif %}>Yes</option>
+          <option value="no"      {% if data.situation.pregnant == "no" %}selected{% endif %}>No</option>
+          <option value="unknown" {% if data.situation.pregnant == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Other acute diagnoses</label>
+        <textarea name="otherAcuteDiagnoses" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.otherAcuteDiagnoses }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Treatments initiated</label>
+        <textarea name="treatmentsInitiated" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.treatmentsInitiated }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 4 — Background -->
+    <div x-show="step === 4" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 4: Background (history + ABCDE)</h2>
+      <div style="margin-top:0.6rem;">
+        <label>History of present illness</label>
+        <textarea name="historyOfPresentIllness" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.historyOfPresentIllness }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Past medical &amp; surgical history</label>
+        <textarea name="pastMedicalAndSurgicalHistory" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.pastMedicalAndSurgicalHistory }}</textarea>
+      </div>
+
+      <h3 style="margin-top:1rem;">A — Airway</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="airwayFindingNormal" value="on" {% if data.background.airway.findingNormal %}checked{% endif %}> Finding normal</label>
+          <input type="text" name="airwayFindingDetails" placeholder="Finding details"
+                 value="{{ data.background.airway.findingDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="airwayInterventionNone" value="on" {% if data.background.airway.interventionNone %}checked{% endif %}> Intervention: none</label>
+          <input type="text" name="airwayInterventionDetails" placeholder="Intervention details"
+                 value="{{ data.background.airway.interventionDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">B — Breathing</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="breathingFindingNormal" value="on" {% if data.background.breathing.findingNormal %}checked{% endif %}> Finding normal</label>
+          <input type="text" name="breathingFindingDetails" placeholder="Finding details"
+                 value="{{ data.background.breathing.findingDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="breathingInterventionNone" value="on" {% if data.background.breathing.interventionNone %}checked{% endif %}> Intervention: none</label>
+          <input type="text" name="breathingInterventionDetails" placeholder="Intervention details"
+                 value="{{ data.background.breathing.interventionDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">C — Circulation</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="circulationFindingNormal" value="on" {% if data.background.circulation.findingNormal %}checked{% endif %}> Finding normal</label>
+          <input type="text" name="circulationFindingDetails" placeholder="Finding details"
+                 value="{{ data.background.circulation.findingDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="circulationInterventionNone" value="on" {% if data.background.circulation.interventionNone %}checked{% endif %}> Intervention: none</label>
+          <input type="text" name="circulationInterventionDetails" placeholder="Intervention details"
+                 value="{{ data.background.circulation.interventionDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">D — Disability (neurologic)</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="disabilityFindingNormal" value="on" {% if data.background.disability.findingNormal %}checked{% endif %}> Finding normal</label>
+          <input type="text" name="disabilityFindingDetails" placeholder="Finding details"
+                 value="{{ data.background.disability.findingDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="disabilityInterventionNone" value="on" {% if data.background.disability.interventionNone %}checked{% endif %}> Intervention: none</label>
+          <input type="text" name="disabilityInterventionDetails" placeholder="Intervention details"
+                 value="{{ data.background.disability.interventionDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">E — Exposure</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="exposureFindingNormal" value="on" {% if data.background.exposure.findingNormal %}checked{% endif %}> Finding normal</label>
+          <input type="text" name="exposureFindingDetails" placeholder="Finding details"
+                 value="{{ data.background.exposure.findingDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label><input type="checkbox" name="exposureInterventionNone" value="on" {% if data.background.exposure.interventionNone %}checked{% endif %}> Intervention: none</label>
+          <input type="text" name="exposureInterventionDetails" placeholder="Intervention details"
+                 value="{{ data.background.exposure.interventionDetails }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;margin-top:0.3rem;">
+        </div>
+      </div>
+
+      <div style="margin-top:0.8rem;">
+        <label>Other significant treatments</label>
+        <textarea name="otherSignificantTreatments" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.otherSignificantTreatments }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 5 — Assessment -->
+    <div x-show="step === 5" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 5: Assessment</h2>
+      <div style="margin-top:0.6rem;">
+        <label>Clinical assessment (description and need for referral)</label>
+        <textarea name="clinicalAssessment" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessment.clinicalAssessment }}</textarea>
+      </div>
+      <h3 style="margin-top:1rem;">Vital signs</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:140px;">
+          <label>Heart rate (bpm)</label>
+          <input type="number" step="any" name="heartRate"
+                 value="{{ data.assessment.vitalSigns.heartRate | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Respiratory rate (/min)</label>
+          <input type="number" step="any" name="respiratoryRate"
+                 value="{{ data.assessment.vitalSigns.respiratoryRate | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>SBP (mmHg)</label>
+          <input type="number" step="any" name="systolicBloodPressure"
+                 value="{{ data.assessment.vitalSigns.systolicBloodPressure | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>DBP (mmHg)</label>
+          <input type="number" step="any" name="diastolicBloodPressure"
+                 value="{{ data.assessment.vitalSigns.diastolicBloodPressure | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Temperature (C)</label>
+          <input type="number" step="any" name="temperatureCelsius"
+                 value="{{ data.assessment.vitalSigns.temperatureCelsius | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>SpO2 (%)</label>
+          <input type="number" step="any" name="oxygenSaturation"
+                 value="{{ data.assessment.vitalSigns.oxygenSaturation | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>GCS (3-15)</label>
+          <input type="number" step="any" min="3" max="15" name="glasgowComaScale"
+                 value="{{ data.assessment.vitalSigns.glasgowComaScale | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 — Recommendations -->
+    <div x-show="step === 6" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 6: Recommendations</h2>
+      <div style="margin-top:0.6rem;">
+        <label>Treatment plan during transport</label>
+        <textarea name="treatmentPlanDuringTransport" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.treatmentPlanDuringTransport }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Potential worsening of condition</label>
+        <textarea name="potentialWorseningOfCondition" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.potentialWorseningOfCondition }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Cautions regarding prior therapies</label>
+        <textarea name="cautionsRegardingPriorTherapies" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.cautionsRegardingPriorTherapies }}</textarea>
+      </div>
+
+      <h3 style="margin-top:1rem;">Precautions</h3>
+      <div style="display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="highlyInfectiousDisease" value="on" {% if data.recommendations.precautions.highlyInfectiousDisease %}checked{% endif %}> Highly infectious disease</label>
+        <label><input type="checkbox" name="spinalPrecautions" value="on" {% if data.recommendations.precautions.spinalPrecautions %}checked{% endif %}> Spinal precautions</label>
+        <label><input type="checkbox" name="weightBearingRestrictions" value="on" {% if data.recommendations.precautions.weightBearingRestrictions %}checked{% endif %}> Weight-bearing restrictions</label>
+        <label><input type="checkbox" name="fallRisk" value="on" {% if data.recommendations.precautions.fallRisk %}checked{% endif %}> Fall risk</label>
+        <label><input type="checkbox" name="aspirationRisk" value="on" {% if data.recommendations.precautions.aspirationRisk %}checked{% endif %}> Aspiration risk</label>
+        <label><input type="checkbox" name="precautionOther" value="on" {% if data.recommendations.precautions.other %}checked{% endif %}> Other</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Other precaution details (required if "Other" ticked)</label>
+        <input type="text" name="precautionOtherDetails"
+               value="{{ data.recommendations.precautions.otherDetails }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+    </div>
+
+    <!-- Step 7 — Initiating Provider Sign-off -->
+    <div x-show="step === 7" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 7: Provider Sign-off (initiating facility)</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <label>Provider name</label>
+          <input type="text" name="providerName"
+                 value="{{ data.initiatingProviderSignoff.providerName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <label>Signature</label>
+          <input type="text" name="providerSignature"
+                 value="{{ data.initiatingProviderSignoff.signature }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Signature date</label>
+          <input type="date" name="providerSignatureDate"
+                 value="{{ data.initiatingProviderSignoff.signatureDate }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 8 — Referral Facility Receipt -->
+    <div x-show="step === 8" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 8: Referral Facility Receipt</h2>
+      <p style="color:#666;font-size:0.9rem;">Completed by the receiving facility on patient arrival.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <label>Patient arrival (date &amp; time)</label>
+          <input type="datetime-local" name="patientArrivalDateTime"
+                 value="{{ data.referralFacilityReceipt.patientArrivalDateTime }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <label>Receiving provider name</label>
+          <input type="text" name="receivingProviderName"
+                 value="{{ data.referralFacilityReceipt.receivingProviderName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <label>Receiving provider signature</label>
+          <input type="text" name="receivingProviderSignature"
+                 value="{{ data.referralFacilityReceipt.receivingProviderSignature }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>
+          <input type="checkbox" name="feedbackProvidedToInitiatingFacility" value="on"
+                 {% if data.referralFacilityReceipt.feedbackProvidedToInitiatingFacility %}checked{% endif %}>
+          Feedback provided to initiating facility
+        </label>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;gap:1rem;margin-top:1rem;">
+      <button type="button" @click="if (step>1) step--"
+              :disabled="step === 1"
+              style="padding:0.5rem 1.2rem;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;">
+        Previous
+      </button>
+
+      <template x-if="step < totalSteps">
+        <button type="button" @click="step++"
+                style="padding:0.5rem 1.2rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Next
+        </button>
+      </template>
+
+      <template x-if="step === totalSteps">
+        <button type="submit"
+                style="padding:0.5rem 1.4rem;background:#080;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Submit
+        </button>
+      </template>
+    </div>
+  </form>
+</div>
+{% endblock %}

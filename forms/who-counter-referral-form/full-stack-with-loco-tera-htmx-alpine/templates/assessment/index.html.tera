@@ -1,0 +1,387 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Counter-Referral — Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;" x-data="{ step: 1, totalSteps: {{ total_steps }} }">
+  <h1>WHO Counter-Referral Form</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Patient Identification -->
+    <div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 1: Patient Identification</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:2;min-width:200px;">
+          <label>Patient name (LAST, First)</label>
+          <input type="text" name="patientName" value="{{ data.patientIdentification.patientName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Date of birth</label>
+          <input type="date" name="dateOfBirth" value="{{ data.patientIdentification.dateOfBirth }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Sex</label>
+          {% set v = data.patientIdentification.sex %}
+          <select name="sex" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value="">— select —</option>
+            <option value="male" {% if v == "male" %}selected{% endif %}>Male</option>
+            <option value="female" {% if v == "female" %}selected{% endif %}>Female</option>
+            <option value="unknown" {% if v == "unknown" %}selected{% endif %}>Unknown</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Patient contact information</label>
+        <input type="text" name="patientContact" value="{{ data.patientIdentification.patientContact }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <h3 style="margin-top:1.2rem;">Emergency contact</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="emergencyContactName" value="{{ data.patientIdentification.emergencyContact.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Contact information</label>
+          <input type="text" name="emergencyContactInformation" value="{{ data.patientIdentification.emergencyContact.contactInformation }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Facility Details -->
+    <div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 2: Facility Details</h2>
+
+      <h3>Initiating facility</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:2;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="initiatingFacilityName" value="{{ data.facilityDetails.initiatingFacility.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Focal point</label>
+          <input type="text" name="initiatingFacilityFocalPoint" value="{{ data.facilityDetails.initiatingFacility.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="initiatingFacilityPhoneNumber" value="{{ data.facilityDetails.initiatingFacility.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+        <div style="flex:1;min-width:160px;">
+          <label>Date of original referral</label>
+          <input type="date" name="referralDate" value="{{ data.facilityDetails.referralDate }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Acuity</label>
+          {% set v = data.facilityDetails.acuity %}
+          <select name="acuity" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value="">— select —</option>
+            <option value="acute" {% if v == "acute" %}selected{% endif %}>Acute</option>
+            <option value="non-acute" {% if v == "non-acute" %}selected{% endif %}>Non-acute</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Reason for original referral</label>
+        <textarea name="referralReason" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.facilityDetails.referralReason }}</textarea>
+      </div>
+
+      <h3 style="margin-top:1.2rem;">Referral facility</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:2;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="referralFacilityName" value="{{ data.facilityDetails.referralFacility.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Focal point</label>
+          <input type="text" name="referralFacilityFocalPoint" value="{{ data.facilityDetails.referralFacility.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="referralFacilityPhoneNumber" value="{{ data.facilityDetails.referralFacility.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.2rem;">Communication</h3>
+      <div>
+        <label>
+          <input type="checkbox" name="discussedWithPrimaryCareProvider" value="on"
+                 {% if data.facilityDetails.communication.discussedWithPrimaryCareProvider %}checked{% endif %}>
+          Discussed with primary care provider
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="discussedWithInitiatingFacility" value="on"
+                 {% if data.facilityDetails.communication.discussedWithInitiatingFacility %}checked{% endif %}>
+          Discussed with initiating facility
+        </label>
+      </div>
+
+      <h3 style="margin-top:1.2rem;">Primary care facility</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:2;min-width:200px;">
+          <label>Name</label>
+          <input type="text" name="primaryCareFacilityName" value="{{ data.facilityDetails.primaryCareFacility.name }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Focal point</label>
+          <input type="text" name="primaryCareFacilityFocalPoint" value="{{ data.facilityDetails.primaryCareFacility.focalPoint }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Phone number</label>
+          <input type="text" name="primaryCareFacilityPhoneNumber" value="{{ data.facilityDetails.primaryCareFacility.phoneNumber }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <div style="margin-top:0.8rem;">
+        <label>Time frame for primary care follow-up with patient</label>
+        {% set v = data.facilityDetails.followUpTimeframe %}
+        <select name="followUpTimeframe" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value="">— select —</option>
+          <option value="urgent-within-24-hours" {% if v == "urgent-within-24-hours" %}selected{% endif %}>Urgent (within 24 hours)</option>
+          <option value="2-to-6-days" {% if v == "2-to-6-days" %}selected{% endif %}>2 to 6 days</option>
+          <option value="1-to-2-weeks" {% if v == "1-to-2-weeks" %}selected{% endif %}>1 to 2 weeks</option>
+          <option value="more-than-2-weeks" {% if v == "more-than-2-weeks" %}selected{% endif %}>More than 2 weeks</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Step 3 — Situation -->
+    <div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 3: Situation (S of SBAR)</h2>
+      <div>
+        <label>Chief complaint</label>
+        <textarea name="chiefComplaint" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.chiefComplaint }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Primary diagnosis</label>
+        <textarea name="primaryDiagnosis" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.primaryDiagnosis }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Pregnancy status</label>
+        {% set v = data.situation.pregnant %}
+        <select name="pregnant" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value="">— select —</option>
+          <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+          <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+          <option value="unknown" {% if v == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Treatments initiated</label>
+        <textarea name="treatmentsInitiated" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.situation.treatmentsInitiated }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>
+          <input type="checkbox" name="icuStay" value="on" {% if data.situation.icuStay %}checked{% endif %}>
+          Patient was admitted to ICU
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="surgery" value="on" {% if data.situation.surgery %}checked{% endif %}>
+          Patient underwent surgery
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="hospitalized" value="on" {% if data.situation.hospitalized %}checked{% endif %}>
+          Patient was hospitalised
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 4 — Background -->
+    <div x-show="step === 4" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 4: Background (B of SBAR)</h2>
+      <div>
+        <label>Brief history of present illness</label>
+        <textarea name="historyOfPresentIllness" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.historyOfPresentIllness }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Relevant past medical history</label>
+        <textarea name="pastMedicalHistory" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.pastMedicalHistory }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Significant investigations / events</label>
+        <textarea name="significantEvents" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.background.significantEvents }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 5 — Assessment -->
+    <div x-show="step === 5" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 5: Assessment (A of SBAR)</h2>
+      <div>
+        <label>Final diagnoses / problem list</label>
+        <textarea name="finalDiagnoses" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessment.finalDiagnoses }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Prognosis and goals of care</label>
+        <textarea name="prognosisAndGoalsOfCare" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessment.prognosisAndGoalsOfCare }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Patient/family informed of diagnosis?</label>
+        {% set v = data.assessment.patientFamilyInformed %}
+        <select name="patientFamilyInformed" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value="">— select —</option>
+          <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+          <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>If Yes, please explain how patient/family were informed</label>
+        <textarea name="informedExplanation" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessment.informedExplanation }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 6 — Recommendations -->
+    <div x-show="step === 6" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 6: Recommendations (R of SBAR)</h2>
+      <div>
+        <label>Next steps in follow-up plan</label>
+        <textarea name="followUpPlan" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.followUpPlan }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Pending investigations (results to chase up)</label>
+        <textarea name="pendingInvestigations" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.pendingInvestigations }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Follow-up arrangements (when, where, with whom)</label>
+        <textarea name="followUpArrangements" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.followUpArrangements }}</textarea>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Instructions if patient's condition deteriorates</label>
+        <textarea name="deteriorationInstructions" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.recommendations.deteriorationInstructions }}</textarea>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Contact name (for follow-up questions)</label>
+          <input type="text" name="contactName" value="{{ data.recommendations.contactName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Contact information</label>
+          <input type="text" name="contactInformation" value="{{ data.recommendations.contactInformation }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.2rem;">Status flags</h3>
+      <div>
+        <label>
+          <input type="checkbox" name="cognitiveImpairment" value="on"
+                 {% if data.recommendations.statusFlags.cognitiveImpairment %}checked{% endif %}>
+          Cognitive impairment
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="carerDependent" value="on"
+                 {% if data.recommendations.statusFlags.carerDependent %}checked{% endif %}>
+          Carer-dependent
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="spinalPrecautions" value="on"
+                 {% if data.recommendations.statusFlags.spinalPrecautions %}checked{% endif %}>
+          Spinal precautions
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="weightBearingRestrictions" value="on"
+                 {% if data.recommendations.statusFlags.weightBearingRestrictions %}checked{% endif %}>
+          Weight-bearing restrictions
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="palliativeCare" value="on"
+                 {% if data.recommendations.statusFlags.palliativeCare %}checked{% endif %}>
+          Palliative care
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 7 — Provider Sign-off -->
+    <div x-show="step === 7" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 7: Referral Facility Provider Sign-off</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:2;min-width:200px;">
+          <label>Provider name</label>
+          <input type="text" name="providerName" value="{{ data.providerSignOff.providerName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Signature date</label>
+          <input type="date" name="signatureDate" value="{{ data.providerSignOff.signatureDate }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Provider signature</label>
+        <input type="text" name="signature" value="{{ data.providerSignOff.signature }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <p style="color:#666;font-size:0.9rem;margin-top:1rem;">Assessment ID: {{ id }}</p>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;margin-top:1.5rem;">
+      <button type="button" @click="if(step > 1) step--" :disabled="step === 1"
+              style="padding:0.5rem 1.2rem;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;">
+        &laquo; Previous
+      </button>
+      <button type="button" @click="if(step < totalSteps) step++" x-show="step < totalSteps"
+              style="padding:0.5rem 1.2rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+        Next &raquo;
+      </button>
+      <button type="submit" x-show="step === totalSteps"
+              style="padding:0.5rem 1.4rem;background:#28a745;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:bold;">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
