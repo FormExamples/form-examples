@@ -1,0 +1,45 @@
+<script lang="ts">
+	import { assessment } from '$lib/stores/assessment.svelte';
+	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import TextArea from '$lib/components/ui/TextArea.svelte';
+
+	const s = assessment.data.situation;
+
+	const yesNoUnknown = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' },
+		{ value: 'unknown', label: 'Unknown' }
+	];
+</script>
+
+<SectionCard
+	title="Situation"
+	description="Classify the problem (medical, trauma or both), pregnancy status, and what happened."
+>
+	<fieldset class="mb-4">
+		<legend class="mb-2 block text-sm font-medium text-gray-700">
+			Problem (tick all that apply) <span class="text-red-500">*</span>
+		</legend>
+		<Checkbox label="Medical" name="situationMedical" bind:checked={s.medical} />
+		<Checkbox label="Trauma" name="situationTrauma" bind:checked={s.trauma} />
+	</fieldset>
+
+	<RadioGroup
+		label="Pregnant?"
+		name="situationPregnant"
+		options={yesNoUnknown}
+		bind:value={s.pregnant}
+		required
+	/>
+
+	<TextArea
+		label="What happened to the patient"
+		name="whatHappened"
+		bind:value={s.whatHappened}
+		placeholder="Date and time of injury or illness onset, where, how — narrative description."
+		rows={4}
+		required
+	/>
+</SectionCard>
