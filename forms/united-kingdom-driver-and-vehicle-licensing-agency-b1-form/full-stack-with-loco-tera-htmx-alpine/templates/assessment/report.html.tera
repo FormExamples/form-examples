@@ -1,0 +1,85 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA B1 — Report{% endblock %}
+
+{% block content %}
+<div style="max-width:820px;margin:2rem auto;padding:1rem;">
+  <h1>DVLA B1 — Validation Report</h1>
+  <p style="color:#555;">Report generated: {{ timestamp }}</p>
+  <p style="color:#555;">Assessment ID: {{ id }}</p>
+
+  <h2>Completeness</h2>
+  <p>
+    {% if result.validation.complete %}
+      <strong style="color:#080;">Form is complete.</strong>
+    {% else %}
+      <strong style="color:#a00;">Form is incomplete</strong> —
+      {{ result.validation.totalSatisfied }} of {{ result.validation.totalRequired }} required fields satisfied.
+    {% endif %}
+  </p>
+
+  <table style="width:100%;border-collapse:collapse;margin-bottom:1.5rem;">
+    <thead>
+      <tr style="background:#f4f4f4;">
+        <th style="padding:0.6rem 1rem;text-align:left;">Section</th>
+        <th style="padding:0.6rem 1rem;text-align:right;">Required</th>
+        <th style="padding:0.6rem 1rem;text-align:right;">Satisfied</th>
+        <th style="padding:0.6rem 1rem;text-align:right;">Missing</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in result.validation.sections %}
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:0.6rem 1rem;">{{ s.sectionLabel }}</td>
+        <td style="padding:0.6rem 1rem;text-align:right;">{{ s.required }}</td>
+        <td style="padding:0.6rem 1rem;text-align:right;color:#080;">{{ s.satisfied }}</td>
+        <td style="padding:0.6rem 1rem;text-align:right;color:{% if s.missing | length == 0 %}#080{% else %}#a00{% endif %};">{{ s.missing | length }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Missing items</h2>
+  {% if result.validation.missing | length == 0 %}
+    <p style="color:#080;">All required fields are satisfied.</p>
+  {% else %}
+    <ul style="padding-left:1.2rem;">
+      {% for m in result.validation.missing %}
+        <li style="margin-bottom:0.4rem;">
+          <strong>{{ m.id }}</strong>: {{ m.description }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>Flagged Issues</h2>
+  {% if result.flaggedIssues | length == 0 %}
+    <p style="color:#080;">No additional clinician flags were raised.</p>
+  {% else %}
+    <ul style="padding-left:1.2rem;">
+      {% for flag in result.flaggedIssues %}
+        <li style="margin-bottom:0.6rem;">
+          <span style="display:inline-block;padding:0.1rem 0.5rem;border-radius:3px;font-size:0.8rem;
+            {% if flag.priority == 'urgent' %}background:#fee;color:#900;border:1px solid #f99;{% endif %}
+            {% if flag.priority == 'high' %}background:#fef0e6;color:#a35100;border:1px solid #f5b97c;{% endif %}
+            {% if flag.priority == 'medium' %}background:#fffbe6;color:#8a6d00;border:1px solid #f1d76b;{% endif %}
+            {% if flag.priority == 'low' %}background:#eef;color:#226;border:1px solid #99d;{% endif %}">
+            {{ flag.priority | upper }}
+          </span>
+          <strong>{{ flag.category }}:</strong> {{ flag.message }}
+          <span style="color:#888;font-size:0.85rem;">({{ flag.id }})</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+    <a href="/assessment/{{ id }}" style="padding:0.5rem 1.2rem;border:1px solid #0070f3;color:#0070f3;border-radius:4px;text-decoration:none;">
+      Edit Assessment
+    </a>
+    <a href="/" style="padding:0.5rem 1.2rem;border:1px solid #ccc;color:#333;border-radius:4px;text-decoration:none;">
+      Home
+    </a>
+  </div>
+</div>
+{% endblock %}
