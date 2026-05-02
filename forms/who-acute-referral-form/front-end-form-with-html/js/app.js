@@ -1,2 +1,1010 @@
-// Plain JavaScript entrypoint. Implementation pending.
-console.log('Form scaffold loaded.');
+// WHO Acute Referral Form - patient/clinician wizard (vanilla JS, classic
+// <script>).
+//
+// Single-page continuous wizard: every section is rendered into the page
+// in document order. Steps 1-7 are completed by the initiating facility;
+// step 8 (Referral Facility Receipt) is completed by the receiving
+// facility on arrival. Receipt-side validation rules only fire once any
+// receipt field is touched (two-party gating). Submission runs the pure
+// validator + flagged-issues engine and renders an inline report. State
+// is persisted to localStorage so a partial fill survives a page reload.
+
+(function () {
+'use strict';
+const {
+  emptyAssessment,
+  hasText,
+  isYesNoUnknownAnswered,
+  hasNumber,
+  sectionLabel,
+  priorityLabel,
+  validateReferral,
+  detectFlaggedIssues
+} = window.WhoAcuteReferralForm;
+
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
+
+const STORAGE_KEY =
+  'who-acute-referral-form.front-end-form-with-html.v1';
+
+/** Deep-merge persisted state over a fresh empty assessment. */
+function mergeDeep(target, source) {
+  if (!source || typeof source !== 'object') return target;
+  for (const key of Object.keys(target)) {
+    const t = target[key];
+    const s = source[key];
+    if (
+      t !== null &&
+      typeof t === 'object' &&
+      !Array.isArray(t) &&
+      s !== null &&
+      typeof s === 'object' &&
+      !Array.isArray(s)
+    ) {
+      mergeDeep(t, s);
+    } else if (s !== undefined) {
+      target[key] = s;
+    }
+  }
+  return target;
+}
+
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    const fresh = emptyAssessment();
+    mergeDeep(fresh, parsed);
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved WHO referral form; starting fresh.', e);
+    return emptyAssessment();
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save WHO referral form to localStorage.', e);
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored WHO referral form.', e);
+  }
+}
+
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {{ validation: any, flags: any[], timestamp: string } | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/** Resolve a dotted path on state. */
+function getPath(path) {
+  const parts = path.split('.');
+  let cur = state;
+  for (const p of parts) {
+    if (cur == null) return undefined;
+    cur = cur[p];
+  }
+  return cur;
+}
+
+/** Set a dotted path on state, persist, and re-render the form. */
+function setPath(path, value) {
+  const parts = path.split('.');
+  let cur = state;
+  for (let i = 0; i < parts.length - 1; i++) {
+    cur = cur[parts[i]];
+  }
+  cur[parts[parts.length - 1]] = value;
+  saveState();
+  renderForm();
+  updateProgress();
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Field component builders
+// ----------------------------------------------------------------------
+
+/**
+ * @param {{ label: string, path: string, type?: string, placeholder?: string,
+ *           required?: boolean }} opts
+ */
+function textInput(opts) {
+  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const value = getPath(opts.path) ?? '';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input id="${id}" name="${id}" type="${type}" class="text-input"
+      value="${esc(value)}"${placeholderAttr}${opts.required ? ' required' : ''}>
+  `;
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    const parts = opts.path.split('.');
+    let cur = state;
+    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
+    cur[parts[parts.length - 1]] = input.value;
+    saveState();
+    updateProgress();
+  });
+  input.addEventListener('change', () => {
+    renderForm();
+  });
+  return wrapper;
+}
+
+/**
+ * Number input bound to a numeric path. Stores `null` when the field is
+ * blanked, otherwise the parsed Number.
+ * @param {{ label: string, path: string, min?: number, max?: number,
+ *           step?: number, unit?: string }} opts
+ */
+function numberInput(opts) {
+  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const raw = getPath(opts.path);
+  const value = hasNumber(raw) ? String(raw) : '';
+  const labelText =
+    esc(opts.label) +
+    (opts.unit ? ` <span class="unit">${esc(opts.unit)}</span>` : '');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  const minAttr = opts.min !== undefined ? ` min="${opts.min}"` : '';
+  const maxAttr = opts.max !== undefined ? ` max="${opts.max}"` : '';
+  const stepAttr = opts.step !== undefined ? ` step="${opts.step}"` : '';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input id="${id}" name="${id}" type="number" class="text-input"
+      value="${esc(value)}"${minAttr}${maxAttr}${stepAttr} inputmode="decimal">
+  `;
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    const parts = opts.path.split('.');
+    let cur = state;
+    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
+    const txt = input.value.trim();
+    if (txt === '') {
+      cur[parts[parts.length - 1]] = null;
+    } else {
+      const n = Number(txt);
+      cur[parts[parts.length - 1]] = Number.isFinite(n) ? n : null;
+    }
+    saveState();
+    updateProgress();
+  });
+  return wrapper;
+}
+
+/**
+ * @param {{ label: string, path: string, rows?: number, placeholder?: string,
+ *           required?: boolean }} opts
+ */
+function textArea(opts) {
+  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const value = getPath(opts.path) ?? '';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      class="textarea"${placeholderAttr}>${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => {
+    const parts = opts.path.split('.');
+    let cur = state;
+    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
+    cur[parts[parts.length - 1]] = ta.value;
+    saveState();
+    updateProgress();
+  });
+  return wrapper;
+}
+
+/**
+ * @param {{ label: string, path: string,
+ *           options: { value: string, label: string }[],
+ *           required?: boolean }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `f-${opts.path.replace(/\./g, '-')}`;
+  const current = getPath(opts.path);
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.innerHTML = labelText;
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const lab = document.createElement('label');
+    lab.className = 'radio-option';
+    lab.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    lab.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = lab.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setPath(opts.path, option.value);
+    });
+    list.appendChild(lab);
+  }
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+/**
+ * @param {{ label: string, path: string }} opts
+ */
+function checkbox(opts) {
+  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const checked = !!getPath(opts.path);
+  const wrapper = document.createElement('label');
+  wrapper.className = 'checkbox-field';
+  wrapper.htmlFor = id;
+  wrapper.innerHTML = `
+    <input type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
+    <span>${esc(opts.label)}</span>
+  `;
+  const input = wrapper.querySelector('input');
+  input.addEventListener('change', () => {
+    setPath(opts.path, input.checked);
+  });
+  return wrapper;
+}
+
+/**
+ * Build a section card.
+ * @param {{ stepNumber: number, title: string, description?: string,
+ *           extraClass?: string }} opts
+ */
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card' + (opts.extraClass ? ' ' + opts.extraClass : '');
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Section ${opts.stepNumber} of 8</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
+}
+
+function twoCol(...children) {
+  const grid = document.createElement('div');
+  grid.className = 'two-col';
+  for (const c of children) grid.appendChild(c);
+  return grid;
+}
+
+const SEX_OPTIONS = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+  { value: 'unknown', label: 'Unknown' }
+];
+
+const YES_NO_UNKNOWN = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' },
+  { value: 'unknown', label: 'Unknown' }
+];
+
+const MODE_OPTIONS = [
+  { value: 'ground', label: 'Ground' },
+  { value: 'air', label: 'Air' },
+  { value: 'sea', label: 'Sea' }
+];
+
+// ----------------------------------------------------------------------
+// Section renderers
+// ----------------------------------------------------------------------
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Patient Identification',
+    description: 'Identify the patient being referred and one emergency contact.'
+  });
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Last name (family name)',
+      path: 'patientIdentification.patientLastName',
+      required: true
+    }),
+    textInput({
+      label: 'First name (given name)',
+      path: 'patientIdentification.patientFirstName',
+      required: true
+    })
+  ));
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Date of birth',
+      path: 'patientIdentification.dateOfBirth',
+      type: 'date',
+      required: true
+    }),
+    radioGroup({
+      label: 'Sex',
+      path: 'patientIdentification.sex',
+      options: SEX_OPTIONS,
+      required: true
+    })
+  ));
+  card.appendChild(textInput({
+    label: 'Patient contact information (phone, address)',
+    path: 'patientIdentification.patientContactInformation'
+  }));
+
+  const ecHeader = document.createElement('h3');
+  ecHeader.className = 'subsection-title';
+  ecHeader.textContent = 'Emergency contact';
+  card.appendChild(ecHeader);
+
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Emergency contact name',
+      path: 'patientIdentification.emergencyContact.name'
+    }),
+    textInput({
+      label: 'Emergency contact phone / details',
+      path: 'patientIdentification.emergencyContact.contactInformation'
+    })
+  ));
+  return card;
+}
+
+function renderStep2() {
+  const card = sectionCard({
+    stepNumber: 2,
+    title: 'Facility & Transport',
+    description: 'Identify the initiating and receiving facilities, the ambulance service, and the transfer mode and timing.'
+  });
+
+  const initHeader = document.createElement('h3');
+  initHeader.className = 'subsection-title';
+  initHeader.textContent = 'Initiating facility';
+  card.appendChild(initHeader);
+
+  card.appendChild(textInput({
+    label: 'Facility name',
+    path: 'facilityAndTransport.initiatingFacility.name',
+    required: true
+  }));
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Focal point (contact person)',
+      path: 'facilityAndTransport.initiatingFacility.focalPoint',
+      required: true
+    }),
+    textInput({
+      label: 'Phone number',
+      path: 'facilityAndTransport.initiatingFacility.phoneNumber',
+      type: 'tel',
+      required: true
+    })
+  ));
+
+  card.appendChild(textArea({
+    label: 'Reason for referral',
+    path: 'facilityAndTransport.reasonForReferral',
+    rows: 2,
+    required: true
+  }));
+
+  const refHeader = document.createElement('h3');
+  refHeader.className = 'subsection-title';
+  refHeader.textContent = 'Referral (receiving) facility';
+  card.appendChild(refHeader);
+
+  card.appendChild(checkbox({
+    label: 'Referral facility has been contacted and accepts the patient',
+    path: 'facilityAndTransport.referralFacilityContacted'
+  }));
+  card.appendChild(textInput({
+    label: 'Facility name',
+    path: 'facilityAndTransport.referralFacility.name',
+    required: true
+  }));
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Focal point (contact person)',
+      path: 'facilityAndTransport.referralFacility.focalPoint'
+    }),
+    textInput({
+      label: 'Phone number',
+      path: 'facilityAndTransport.referralFacility.phoneNumber',
+      type: 'tel',
+      required: true
+    })
+  ));
+
+  const ambHeader = document.createElement('h3');
+  ambHeader.className = 'subsection-title';
+  ambHeader.textContent = 'Ambulance / transport service';
+  card.appendChild(ambHeader);
+
+  card.appendChild(textInput({
+    label: 'Ambulance service / vehicle',
+    path: 'facilityAndTransport.ambulance.name'
+  }));
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Focal point',
+      path: 'facilityAndTransport.ambulance.focalPoint'
+    }),
+    textInput({
+      label: 'Phone number',
+      path: 'facilityAndTransport.ambulance.phoneNumber',
+      type: 'tel'
+    })
+  ));
+
+  const timeHeader = document.createElement('h3');
+  timeHeader.className = 'subsection-title';
+  timeHeader.textContent = 'Timing and mode';
+  card.appendChild(timeHeader);
+
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Date/time of transfer decision',
+      path: 'facilityAndTransport.transferDecisionDateTime',
+      type: 'datetime-local',
+      required: true
+    }),
+    textInput({
+      label: 'Date/time of departure',
+      path: 'facilityAndTransport.departureDateTime',
+      type: 'datetime-local',
+      required: true
+    })
+  ));
+  card.appendChild(radioGroup({
+    label: 'Mode of transfer',
+    path: 'facilityAndTransport.modeOfTransfer',
+    options: MODE_OPTIONS,
+    required: true
+  }));
+
+  return card;
+}
+
+function renderStep3() {
+  const card = sectionCard({
+    stepNumber: 3,
+    title: 'Situation (S)',
+    description: 'Briefly state why the patient needs to be referred now.'
+  });
+  card.appendChild(textInput({
+    label: 'Chief complaint',
+    path: 'situation.chiefComplaint',
+    required: true,
+    placeholder: 'e.g. Chest pain x 2 hours'
+  }));
+  card.appendChild(textInput({
+    label: 'Primary diagnosis',
+    path: 'situation.primaryDiagnosis',
+    required: true,
+    placeholder: 'e.g. Acute myocardial infarction'
+  }));
+  card.appendChild(radioGroup({
+    label: 'Pregnant?',
+    path: 'situation.pregnant',
+    options: YES_NO_UNKNOWN,
+    required: true
+  }));
+  card.appendChild(textArea({
+    label: 'Other acute diagnoses',
+    path: 'situation.otherAcuteDiagnoses',
+    rows: 2,
+    placeholder: 'Any additional acute diagnoses contributing to the referral.'
+  }));
+  card.appendChild(textArea({
+    label: 'Treatments initiated at the initiating facility',
+    path: 'situation.treatmentsInitiated',
+    rows: 3,
+    placeholder: 'e.g. IV fluids, oxygen, aspirin, antibiotics'
+  }));
+  return card;
+}
+
+/**
+ * Render an ABCDE entry (finding + intervention with explicit "normal" /
+ * "none" toggles to satisfy the validator).
+ * @param {{ key: string, label: string }} opts
+ */
+function renderAbcdeBlock(opts) {
+  const block = document.createElement('div');
+  block.className = 'inset-block';
+  const header = document.createElement('h4');
+  header.textContent = opts.label;
+  block.appendChild(header);
+
+  const findingPath = `background.${opts.key}.findingNormal`;
+  const findingDetailsPath = `background.${opts.key}.findingDetails`;
+  const interventionNonePath = `background.${opts.key}.interventionNone`;
+  const interventionDetailsPath = `background.${opts.key}.interventionDetails`;
+
+  block.appendChild(checkbox({
+    label: 'Finding: normal',
+    path: findingPath
+  }));
+  if (!getPath(findingPath)) {
+    block.appendChild(textArea({
+      label: 'Finding details',
+      path: findingDetailsPath,
+      rows: 2,
+      placeholder: 'Describe the abnormal finding(s).'
+    }));
+  }
+  block.appendChild(checkbox({
+    label: 'Intervention: none required',
+    path: interventionNonePath
+  }));
+  if (!getPath(interventionNonePath)) {
+    block.appendChild(textArea({
+      label: 'Intervention details',
+      path: interventionDetailsPath,
+      rows: 2,
+      placeholder: 'Describe the intervention(s) performed.'
+    }));
+  }
+  return block;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'Background (B) — history and ABCDE',
+    description: 'Brief history, past medical/surgical history, and an ABCDE primary survey with the interventions performed.'
+  });
+  card.appendChild(textArea({
+    label: 'Brief history of present illness',
+    path: 'background.historyOfPresentIllness',
+    rows: 3,
+    required: true
+  }));
+  card.appendChild(textArea({
+    label: 'Past medical and surgical history',
+    path: 'background.pastMedicalAndSurgicalHistory',
+    rows: 3
+  }));
+
+  const abcdeHeader = document.createElement('h3');
+  abcdeHeader.className = 'subsection-title';
+  abcdeHeader.textContent = 'ABCDE primary survey';
+  card.appendChild(abcdeHeader);
+
+  card.appendChild(renderAbcdeBlock({ key: 'airway', label: 'A — Airway' }));
+  card.appendChild(renderAbcdeBlock({ key: 'breathing', label: 'B — Breathing' }));
+  card.appendChild(renderAbcdeBlock({ key: 'circulation', label: 'C — Circulation' }));
+  card.appendChild(renderAbcdeBlock({ key: 'disability', label: 'D — Disability (neurologic)' }));
+  card.appendChild(renderAbcdeBlock({ key: 'exposure', label: 'E — Exposure' }));
+
+  card.appendChild(textArea({
+    label: 'Other significant treatments',
+    path: 'background.otherSignificantTreatments',
+    rows: 2
+  }));
+
+  return card;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Assessment (A) — clinical assessment & vital signs',
+    description: 'Describe the patient and the need for referral; record the latest set of vital signs.'
+  });
+  card.appendChild(textArea({
+    label: 'Clinical assessment (description of the patient and need for referral)',
+    path: 'assessment.clinicalAssessment',
+    rows: 4,
+    required: true
+  }));
+
+  const vitalsHeader = document.createElement('h3');
+  vitalsHeader.className = 'subsection-title';
+  vitalsHeader.textContent = 'Vital signs';
+  card.appendChild(vitalsHeader);
+
+  const vitalsGrid = document.createElement('div');
+  vitalsGrid.className = 'vitals-grid';
+  vitalsGrid.appendChild(numberInput({
+    label: 'Heart rate',
+    path: 'assessment.vitalSigns.heartRate',
+    min: 0, max: 300, step: 1, unit: 'bpm'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Respiratory rate',
+    path: 'assessment.vitalSigns.respiratoryRate',
+    min: 0, max: 80, step: 1, unit: '/min'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Systolic BP',
+    path: 'assessment.vitalSigns.systolicBloodPressure',
+    min: 0, max: 300, step: 1, unit: 'mmHg'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Diastolic BP',
+    path: 'assessment.vitalSigns.diastolicBloodPressure',
+    min: 0, max: 200, step: 1, unit: 'mmHg'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Temperature',
+    path: 'assessment.vitalSigns.temperatureCelsius',
+    min: 25, max: 45, step: 0.1, unit: '°C'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Oxygen saturation',
+    path: 'assessment.vitalSigns.oxygenSaturation',
+    min: 0, max: 100, step: 1, unit: '%'
+  }));
+  vitalsGrid.appendChild(numberInput({
+    label: 'Glasgow Coma Scale',
+    path: 'assessment.vitalSigns.glasgowComaScale',
+    min: 3, max: 15, step: 1, unit: '/15'
+  }));
+  card.appendChild(vitalsGrid);
+  return card;
+}
+
+function renderStep6() {
+  const card = sectionCard({
+    stepNumber: 6,
+    title: 'Recommendations (R)',
+    description: 'Recommended treatment plan during transport, anticipated deterioration, cautions, and precautions.'
+  });
+  card.appendChild(textArea({
+    label: 'Treatment plan during transport',
+    path: 'recommendations.treatmentPlanDuringTransport',
+    rows: 3,
+    required: true,
+    placeholder: 'e.g. Continue O2, IV fluids 100 ml/h, monitor SpO2 and ECG, repeat aspirin if pain recurs.'
+  }));
+  card.appendChild(textArea({
+    label: 'Potential worsening of condition during transport',
+    path: 'recommendations.potentialWorseningOfCondition',
+    rows: 3,
+    placeholder: 'Anticipated complications and how to recognise/manage them.'
+  }));
+  card.appendChild(textArea({
+    label: 'Cautions regarding prior therapies / interventions',
+    path: 'recommendations.cautionsRegardingPriorTherapies',
+    rows: 3,
+    placeholder: 'e.g. recent thrombolysis, anticoagulation, drug allergies.'
+  }));
+
+  const precHeader = document.createElement('h3');
+  precHeader.className = 'subsection-title';
+  precHeader.textContent = 'Precautions';
+  card.appendChild(precHeader);
+
+  const precNote = document.createElement('p');
+  precNote.className = 'subsection-note';
+  precNote.textContent = 'Tick any precautions that apply during transport and on arrival.';
+  card.appendChild(precNote);
+
+  const precWrap = document.createElement('div');
+  precWrap.className = 'precaution-list';
+  precWrap.appendChild(checkbox({
+    label: 'Highly infectious disease',
+    path: 'recommendations.precautions.highlyInfectiousDisease'
+  }));
+  precWrap.appendChild(checkbox({
+    label: 'Spinal precautions',
+    path: 'recommendations.precautions.spinalPrecautions'
+  }));
+  precWrap.appendChild(checkbox({
+    label: 'Weight-bearing restrictions',
+    path: 'recommendations.precautions.weightBearingRestrictions'
+  }));
+  precWrap.appendChild(checkbox({
+    label: 'Fall risk',
+    path: 'recommendations.precautions.fallRisk'
+  }));
+  precWrap.appendChild(checkbox({
+    label: 'Aspiration risk',
+    path: 'recommendations.precautions.aspirationRisk'
+  }));
+  precWrap.appendChild(checkbox({
+    label: 'Other',
+    path: 'recommendations.precautions.other'
+  }));
+  card.appendChild(precWrap);
+
+  if (state.recommendations.precautions.other) {
+    card.appendChild(textArea({
+      label: 'Describe how the "Other" precaution applies',
+      path: 'recommendations.precautions.otherDetails',
+      rows: 2,
+      required: true
+    }));
+  }
+
+  return card;
+}
+
+function renderStep7() {
+  const card = sectionCard({
+    stepNumber: 7,
+    title: 'Provider Sign-off (initiating facility)',
+    description: 'Completed by the clinician at the initiating facility before the patient leaves.'
+  });
+  card.appendChild(textInput({
+    label: 'Provider name',
+    path: 'initiatingProviderSignoff.providerName',
+    required: true
+  }));
+  card.appendChild(twoCol(
+    textInput({
+      label: 'Signature (typed full name)',
+      path: 'initiatingProviderSignoff.signature',
+      required: true
+    }),
+    textInput({
+      label: 'Signature date',
+      path: 'initiatingProviderSignoff.signatureDate',
+      type: 'date',
+      required: true
+    })
+  ));
+  return card;
+}
+
+function renderStep8() {
+  const card = sectionCard({
+    stepNumber: 8,
+    title: 'Referral Facility Receipt',
+    description: 'Completed by the receiving (referral) facility on patient arrival. Required only once any field below is filled in.',
+    extraClass: 'receipt'
+  });
+
+  const note = document.createElement('p');
+  note.className = 'info-note';
+  note.textContent =
+    'This section is filled in by the receiving facility. Validation rules for the receipt-side only fire once any of the receipt fields below has any value (two-party gating).';
+  card.appendChild(note);
+
+  card.appendChild(textInput({
+    label: 'Patient arrival date and time',
+    path: 'referralFacilityReceipt.patientArrivalDateTime',
+    type: 'datetime-local'
+  }));
+  card.appendChild(textInput({
+    label: 'Receiving provider name',
+    path: 'referralFacilityReceipt.receivingProviderName'
+  }));
+  card.appendChild(textInput({
+    label: 'Receiving provider signature (typed full name)',
+    path: 'referralFacilityReceipt.receivingProviderSignature'
+  }));
+  card.appendChild(checkbox({
+    label: 'Feedback provided to the initiating facility',
+    path: 'referralFacilityReceipt.feedbackProvidedToInitiatingFacility'
+  }));
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
+
+/**
+ * Compute progress: how many currently-applicable rules are satisfied.
+ * Uses the same validator as submit so progress and missing counts agree.
+ */
+function updateProgress() {
+  const result = validateReferral(state);
+  const total = result.totalRequired;
+  const answered = result.totalSatisfied;
+  const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) {
+    text.textContent = `${answered} of ${total} required fields answered (${percent}%)`;
+  }
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+}
+
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'urgent': return 'flag-urgent';
+    case 'high': return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low': return 'flag-low';
+    default: return '';
+  }
+}
+
+function renderReport() {
+  if (!lastResult) return;
+  const { validation, flags, timestamp } = lastResult;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const completenessBadge = validation.complete
+    ? '<span class="completeness-badge complete">Complete</span>'
+    : '<span class="completeness-badge incomplete">Incomplete</span>';
+
+  const sectionRows = validation.sections.map((s) => {
+    const missingItems = s.missing.length === 0
+      ? '<span class="muted">All required fields completed.</span>'
+      : `<ul class="missing-list">${s.missing.map(
+          (m) => `<li>${esc(m.id)} — ${esc(m.description)}</li>`
+        ).join('')}</ul>`;
+    return `
+      <tr>
+        <th scope="row">${esc(sectionLabel(s.section))}</th>
+        <td>${s.satisfied} / ${s.required}</td>
+        <td>${missingItems}</td>
+      </tr>
+    `;
+  }).join('');
+
+  const flagsList = flags.length === 0
+    ? '<p class="muted">No flagged issues raised.</p>'
+    : `
+      <ul class="flags">
+        ${flags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(priorityLabel(f.priority).toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>WHO Acute Referral Form — submission report</h2>
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <div class="completeness">
+        ${completenessBadge}
+        <span>${validation.totalSatisfied} of ${validation.totalRequired} required fields answered.</span>
+      </div>
+
+      <h3>Section completeness</h3>
+      <table class="sections-table">
+        <thead>
+          <tr>
+            <th scope="col">Section</th>
+            <th scope="col">Answered</th>
+            <th scope="col">Missing items</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sectionRows}
+        </tbody>
+      </table>
+
+      <h3>Flagged issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const startOverBtn = document.getElementById('start-over-btn');
+  if (startOverBtn) startOverBtn.addEventListener('click', startOver);
+}
+
+function submitForm() {
+  const validation = validateReferral(state);
+  const flags = detectFlaggedIssues(state);
+  lastResult = {
+    validation,
+    flags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Clear all answers and start a fresh WHO acute referral form?')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  const out = document.getElementById('report');
+  if (out) out.innerHTML = '';
+  renderForm();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+const RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4,
+  renderStep5, renderStep6, renderStep7, renderStep8
+];
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  if (!host) return;
+  // Preserve scroll position across re-renders.
+  const scrollY = window.scrollY;
+  host.innerHTML = '';
+  for (const r of RENDERERS) host.appendChild(r());
+  window.scrollTo({ top: scrollY });
+}
+
+function init() {
+  renderForm();
+  updateProgress();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();
