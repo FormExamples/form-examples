@@ -3,17 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>United Kingdom Driver And Vehicle Licensing Agency M1 Form — patient questionnaire</title>
+  <title>DVLA M1 — Confidential medical information (mental health)</title>
+  <meta name="description" content="UK DVLA M1 form: confidential medical information for assessment of fitness to drive — mental health.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>DVLA M1 — Confidential Medical Information</h1>
+      <p class="subtitle">Mental health questionnaire for the UK Driver &amp; Vehicle Licensing Agency.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>United Kingdom Driver And Vehicle Licensing Agency M1 Form</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the United Kingdom Driver And Vehicle Licensing Agency M1 Form form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please complete this confidential questionnaire so the DVLA can assess
+        your fitness to drive. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        If you answer <strong>No</strong> to Question 1 (have you been
+        diagnosed with a mental health condition) the DVLA instructions ask
+        you not to complete Questions 2 or 3. You may continue directly to the
+        authorisation step.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections"></div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        DVLA Form M1 — Confidential medical information (mental health). This
+        client-side tool helps you prepare a complete submission; it does not
+        send anything to the DVLA on your behalf.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.DvlaM1Form`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/m1-rules.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/m1-validator.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
