@@ -1,0 +1,520 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Emergency Unit (General) - Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;" x-data="{ step: 1, totalSteps: {{ total_steps }} }">
+  <h1>WHO Emergency Unit Form: General</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Patient Registration -->
+    <div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 1: Patient Registration</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <label>Surname (family name)</label>
+          <input type="text" name="surname" value="{{ data.patientRegistration.surname }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>First name</label>
+          <input type="text" name="firstName" value="{{ data.patientRegistration.firstName }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:160px;">
+          <label>Date of birth</label>
+          <input type="date" name="dateOfBirth" value="{{ data.patientRegistration.dateOfBirth }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Sex</label>
+          <select name="sex" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value=""       {% if data.patientRegistration.sex == "" %}selected{% endif %}>-- Select --</option>
+            <option value="male"   {% if data.patientRegistration.sex == "male" %}selected{% endif %}>Male</option>
+            <option value="female" {% if data.patientRegistration.sex == "female" %}selected{% endif %}>Female</option>
+            <option value="other"  {% if data.patientRegistration.sex == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Weight (kg)</label>
+          <input type="number" step="any" name="weightKg"
+                 value="{{ data.patientRegistration.weightKg | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:160px;">
+          <label>Date of arrival</label>
+          <input type="date" name="dateOfArrival" value="{{ data.patientRegistration.dateOfArrival }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Time of arrival (24h)</label>
+          <input type="time" name="timeOfArrival" value="{{ data.patientRegistration.timeOfArrival }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Arrival mode</label>
+          <select name="arrivalMode" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value=""                {% if data.patientRegistration.arrivalMode == "" %}selected{% endif %}>-- Select --</option>
+            <option value="ambulance"       {% if data.patientRegistration.arrivalMode == "ambulance" %}selected{% endif %}>Ambulance</option>
+            <option value="car-private"     {% if data.patientRegistration.arrivalMode == "car-private" %}selected{% endif %}>Car (private)</option>
+            <option value="car-taxi"        {% if data.patientRegistration.arrivalMode == "car-taxi" %}selected{% endif %}>Car (taxi)</option>
+            <option value="motor-2-3-private" {% if data.patientRegistration.arrivalMode == "motor-2-3-private" %}selected{% endif %}>2/3-wheel motor (private)</option>
+            <option value="motor-2-3-taxi"  {% if data.patientRegistration.arrivalMode == "motor-2-3-taxi" %}selected{% endif %}>2/3-wheel motor (taxi)</option>
+            <option value="public-transport"{% if data.patientRegistration.arrivalMode == "public-transport" %}selected{% endif %}>Public transport</option>
+            <option value="walk"            {% if data.patientRegistration.arrivalMode == "walk" %}selected{% endif %}>Walk</option>
+            <option value="other"           {% if data.patientRegistration.arrivalMode == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Ambulance level (if ambulance)</label>
+          <select name="ambulanceLevel" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+            <option value=""         {% if data.patientRegistration.ambulanceLevel == "" %}selected{% endif %}>-- Select --</option>
+            <option value="basic"    {% if data.patientRegistration.ambulanceLevel == "basic" %}selected{% endif %}>Basic</option>
+            <option value="advanced" {% if data.patientRegistration.ambulanceLevel == "advanced" %}selected{% endif %}>Advanced</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Chief Complaint & Vitals -->
+    <div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 2: Chief Complaint &amp; Vitals</h2>
+      <div>
+        <label>Chief complaint</label>
+        <textarea name="chiefComplaint" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.chiefComplaintAndVitals.chiefComplaint }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Triage category</label>
+        <select name="triageCategory" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""       {% if data.chiefComplaintAndVitals.triageCategory == "" %}selected{% endif %}>-- Select --</option>
+          <option value="red"    {% if data.chiefComplaintAndVitals.triageCategory == "red" %}selected{% endif %}>Red</option>
+          <option value="orange" {% if data.chiefComplaintAndVitals.triageCategory == "orange" %}selected{% endif %}>Orange</option>
+          <option value="yellow" {% if data.chiefComplaintAndVitals.triageCategory == "yellow" %}selected{% endif %}>Yellow</option>
+          <option value="green"  {% if data.chiefComplaintAndVitals.triageCategory == "green" %}selected{% endif %}>Green</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label><input type="checkbox" name="deadOnArrival" value="on" {% if data.chiefComplaintAndVitals.deadOnArrival %}checked{% endif %}> Dead on arrival</label>
+      </div>
+
+      <h3 style="margin-top:1rem;">Initial vital signs</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:140px;">
+          <label>Time</label>
+          <input type="time" name="initialVitalsTime"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.time }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Temp (C)</label>
+          <input type="number" step="any" name="initialTempC"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.tempC | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>SBP</label>
+          <input type="number" step="any" name="initialBpSystolic"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.bpSystolic | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>DBP</label>
+          <input type="number" step="any" name="initialBpDiastolic"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.bpDiastolic | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Pulse</label>
+          <input type="number" step="any" name="initialPulse"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.pulse | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>RR</label>
+          <input type="number" step="any" name="initialRespiratoryRate"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.respiratoryRate | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>SpO2 (%)</label>
+          <input type="number" step="any" name="initialSpo2"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.spo2 | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <label>Pain (0-10)</label>
+          <input type="number" step="any" min="0" max="10" name="initialPainScore"
+                 value="{{ data.chiefComplaintAndVitals.initialVitals.painScore | default(value='') }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — High Risk Signs -->
+    <div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 3: High Risk Signs</h2>
+      <div style="display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="abnormalAvpu" value="on" {% if data.highRiskSigns.abnormalAvpu %}checked{% endif %}> Abnormal AVPU</label>
+        <label><input type="checkbox" name="abnormalHeartRate" value="on" {% if data.highRiskSigns.abnormalHeartRate %}checked{% endif %}> Abnormal heart rate</label>
+        <label><input type="checkbox" name="stridorOrVoiceChange" value="on" {% if data.highRiskSigns.stridorOrVoiceChange %}checked{% endif %}> Stridor or voice change</label>
+        <label><input type="checkbox" name="poorPerfusion" value="on" {% if data.highRiskSigns.poorPerfusion %}checked{% endif %}> Poor perfusion</label>
+        <label><input type="checkbox" name="abnormalTemperature" value="on" {% if data.highRiskSigns.abnormalTemperature %}checked{% endif %}> Abnormal temperature</label>
+        <label><input type="checkbox" name="lowSpo2" value="on" {% if data.highRiskSigns.lowSpo2 %}checked{% endif %}> Low SpO2</label>
+        <label><input type="checkbox" name="respiratoryDistress" value="on" {% if data.highRiskSigns.respiratoryDistress %}checked{% endif %}> Respiratory distress</label>
+        <label><input type="checkbox" name="vomitsEverythingOrCannotFeed" value="on" {% if data.highRiskSigns.vomitsEverythingOrCannotFeed %}checked{% endif %}> Vomits everything / cannot feed</label>
+      </div>
+    </div>
+
+    <!-- Step 4 — Airway -->
+    <div x-show="step === 4" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 4: Airway (A)</h2>
+      <div style="display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="airwayNormal" value="on" {% if data.airway.normal %}checked{% endif %}> Normal</label>
+        <label><input type="checkbox" name="airwayAngioedema" value="on" {% if data.airway.angioedema %}checked{% endif %}> Angioedema</label>
+        <label><input type="checkbox" name="airwayStridor" value="on" {% if data.airway.stridor %}checked{% endif %}> Stridor</label>
+        <label><input type="checkbox" name="airwayVoiceChanges" value="on" {% if data.airway.voiceChanges %}checked{% endif %}> Voice changes</label>
+      </div>
+      <h3 style="margin-top:1rem;">Interventions</h3>
+      <div style="display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="airwayInterventionRepositioning" value="on" {% if data.airway.interventionRepositioning %}checked{% endif %}> Repositioning</label>
+        <label><input type="checkbox" name="airwayInterventionSuction" value="on" {% if data.airway.interventionSuction %}checked{% endif %}> Suction</label>
+        <label><input type="checkbox" name="airwayInterventionOpa" value="on" {% if data.airway.interventionOpa %}checked{% endif %}> OPA</label>
+        <label><input type="checkbox" name="airwayInterventionNpa" value="on" {% if data.airway.interventionNpa %}checked{% endif %}> NPA</label>
+        <label><input type="checkbox" name="airwayInterventionLma" value="on" {% if data.airway.interventionLma %}checked{% endif %}> LMA</label>
+        <label><input type="checkbox" name="airwayInterventionBvm" value="on" {% if data.airway.interventionBvm %}checked{% endif %}> BVM</label>
+        <label><input type="checkbox" name="airwayInterventionEtt" value="on" {% if data.airway.interventionEtt %}checked{% endif %}> ETT</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Airway notes</label>
+        <textarea name="airwayNotes" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.airway.notes }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 5 — Breathing -->
+    <div x-show="step === 5" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 5: Breathing (B)</h2>
+      <div>
+        <label><input type="checkbox" name="breathingNormal" value="on" {% if data.breathing.normal %}checked{% endif %}> Normal</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Spontaneous respiratory rate</label>
+        <input type="number" step="any" name="breathingSpontaneousRespiratoryRate"
+               value="{{ data.breathing.spontaneousRespiratoryRate | default(value='') }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <h3 style="margin-top:1rem;">Oxygen / ventilation</h3>
+      <div style="display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="breathingOxygenNasalCannula" value="on" {% if data.breathing.oxygenNasalCannula %}checked{% endif %}> Nasal cannula</label>
+        <label><input type="checkbox" name="breathingOxygenMask" value="on" {% if data.breathing.oxygenMask %}checked{% endif %}> Mask</label>
+        <label><input type="checkbox" name="breathingOxygenNonRebreather" value="on" {% if data.breathing.oxygenNonRebreather %}checked{% endif %}> Non-rebreather</label>
+        <label><input type="checkbox" name="breathingOxygenBvm" value="on" {% if data.breathing.oxygenBvm %}checked{% endif %}> BVM</label>
+        <label><input type="checkbox" name="breathingOxygenCpapBipap" value="on" {% if data.breathing.oxygenCpapBipap %}checked{% endif %}> CPAP / BiPAP</label>
+        <label><input type="checkbox" name="breathingOxygenVentilator" value="on" {% if data.breathing.oxygenVentilator %}checked{% endif %}> Ventilator</label>
+        <label><input type="checkbox" name="breathingBronchodilator" value="on" {% if data.breathing.bronchodilator %}checked{% endif %}> Bronchodilator</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Oxygen (litres)</label>
+        <input type="number" step="any" name="breathingOxygenLitres"
+               value="{{ data.breathing.oxygenLitres | default(value='') }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Breathing notes</label>
+        <textarea name="breathingNotes" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.breathing.notes }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 6 — Circulation -->
+    <div x-show="step === 6" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 6: Circulation (C)</h2>
+      <div>
+        <label><input type="checkbox" name="circulationNormal" value="on" {% if data.circulation.normal %}checked{% endif %}> Normal</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>IV access location</label>
+        <input type="text" name="circulationAccessIvLocation"
+               value="{{ data.circulation.accessIvLocation }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>CVL location</label>
+        <input type="text" name="circulationAccessCvlLocation"
+               value="{{ data.circulation.accessCvlLocation }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>IO location</label>
+        <input type="text" name="circulationAccessIoLocation"
+               value="{{ data.circulation.accessIoLocation }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>IV fluids (mL)</label>
+        <input type="number" step="any" name="circulationIvfMls"
+               value="{{ data.circulation.ivfMls | default(value='') }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="circulationBloodOrdered" value="on" {% if data.circulation.bloodOrdered %}checked{% endif %}> Blood ordered</label>
+        <label><input type="checkbox" name="circulationEpinephrineGiven" value="on" {% if data.circulation.epinephrineGiven %}checked{% endif %}> Epinephrine given</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Circulation notes</label>
+        <textarea name="circulationNotes" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.circulation.notes }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 7 — Disability -->
+    <div x-show="step === 7" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 7: Disability (D)</h2>
+      <div>
+        <label><input type="checkbox" name="disabilityNormal" value="on" {% if data.disability.normal %}checked{% endif %}> Normal</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>AVPU level</label>
+        <select name="avpu" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""  {% if data.disability.avpu == "" %}selected{% endif %}>-- Select --</option>
+          <option value="A" {% if data.disability.avpu == "A" %}selected{% endif %}>A - Alert</option>
+          <option value="V" {% if data.disability.avpu == "V" %}selected{% endif %}>V - Verbal</option>
+          <option value="P" {% if data.disability.avpu == "P" %}selected{% endif %}>P - Pain</option>
+          <option value="U" {% if data.disability.avpu == "U" %}selected{% endif %}>U - Unresponsive</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label><input type="checkbox" name="disabilityDeficit" value="on" {% if data.disability.deficit %}checked{% endif %}> Deficit</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Deficit description (required if Deficit checked)</label>
+        <input type="text" name="disabilityDeficitDescription"
+               value="{{ data.disability.deficitDescription }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Blood glucose (mmol/L)</label>
+        <input type="number" step="any" name="disabilityBloodGlucoseMmol"
+               value="{{ data.disability.bloodGlucoseMmol | default(value='') }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="disabilityInterventionGlucose" value="on" {% if data.disability.interventionGlucose %}checked{% endif %}> Glucose given</label>
+        <label><input type="checkbox" name="disabilityInterventionNaloxone" value="on" {% if data.disability.interventionNaloxone %}checked{% endif %}> Naloxone given</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Disability notes</label>
+        <textarea name="disabilityNotes" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.disability.notes }}</textarea>
+      </div>
+    </div>
+
+    <!-- Step 8 — History of Present Illness -->
+    <div x-show="step === 8" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 8: History of Present Illness</h2>
+      <textarea name="hpiNarrative" rows="6"
+                style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.historyOfPresentIllness.narrative }}</textarea>
+    </div>
+
+    <!-- Step 9 — Review of Systems -->
+    <div x-show="step === 9" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 9: Review of Systems</h2>
+      <p style="color:#666;font-size:0.9rem;">14 body systems reviewed (General, HEENT, Respiratory, Cardiovascular, GI, Pelvis/GU/Rectal, Female Reproductive, Male Reproductive, Skin, MSK, Heme, Neuro, Psych, Pediatric Specific). Tick "Normal" or add notes per system.</p>
+    </div>
+
+    <!-- Step 10 — Past Medical History -->
+    <div x-show="step === 10" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 10: Past Medical History</h2>
+      <div>
+        <label>History obtained from</label>
+        <input type="text" name="historyObtainedFrom"
+               value="{{ data.pastMedicalHistory.historyObtainedFrom }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Medications</label>
+        <textarea name="medications" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.pastMedicalHistory.medications }}</textarea>
+        <label><input type="checkbox" name="medicationsUnknown" value="on" {% if data.pastMedicalHistory.medicationsUnknown %}checked{% endif %}> Unknown</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Allergies</label>
+        <textarea name="allergies" rows="2"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.pastMedicalHistory.allergies }}</textarea>
+        <label><input type="checkbox" name="allergiesUnknown" value="on" {% if data.pastMedicalHistory.allergiesUnknown %}checked{% endif %}> Unknown</label>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Pregnant?</label>
+        <select name="pregnant" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""    {% if data.pastMedicalHistory.pregnant == "" %}selected{% endif %}>-- Select --</option>
+          <option value="yes" {% if data.pastMedicalHistory.pregnant == "yes" %}selected{% endif %}>Yes</option>
+          <option value="no"  {% if data.pastMedicalHistory.pregnant == "no" %}selected{% endif %}>No</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;display:flex;flex-direction:column;gap:0.3rem;">
+        <label><input type="checkbox" name="tobaccoUse" value="on" {% if data.pastMedicalHistory.tobaccoUse %}checked{% endif %}> Tobacco use</label>
+        <label><input type="checkbox" name="alcoholUse" value="on" {% if data.pastMedicalHistory.alcoholUse %}checked{% endif %}> Alcohol use</label>
+        <label><input type="checkbox" name="drugUse" value="on" {% if data.pastMedicalHistory.drugUse %}checked{% endif %}> Drug use</label>
+        <label><input type="checkbox" name="ivDrugUse" value="on" {% if data.pastMedicalHistory.ivDrugUse %}checked{% endif %}> IV drug use</label>
+      </div>
+    </div>
+
+    <!-- Step 11 — Physical Exam -->
+    <div x-show="step === 11" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 11: Physical Exam</h2>
+      <p style="color:#666;font-size:0.9rem;">11 body systems examined (General, Neuro/Psych, HEENT, Neck, Respiratory, Cardiac, Abdominal, Pelvis/GU/Rectal, Lymph, MSK, Skin). Tick "Normal" or add notes per system.</p>
+    </div>
+
+    <!-- Step 12 — Diagnostics -->
+    <div x-show="step === 12" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 12: Diagnostics</h2>
+      <p style="color:#666;font-size:0.9rem;">CBC (WBC, Hgb, Plt, Hct), electrolytes (Na, K, Cl, HCO3, BUN, Cr, glucose), urine pregnancy test, malaria, HIV, urine dip, ECG interpretation, imaging.</p>
+    </div>
+
+    <!-- Step 13 — Additional Interventions -->
+    <div x-show="step === 13" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 13: Additional Interventions</h2>
+      <p style="color:#666;font-size:0.9rem;">Medications and fluids, blood products, analgesia, sedation, antimicrobials, tetanus, plus procedures (intubation, chest tube, lumbar puncture, laceration repair).</p>
+    </div>
+
+    <!-- Step 14 — Assessment & Plan -->
+    <div x-show="step === 14" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 14: Assessment &amp; Plan</h2>
+      <textarea name="assessmentAndPlanNarrative" rows="6"
+                style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessmentAndPlan.narrative }}</textarea>
+    </div>
+
+    <!-- Step 15 — Reassessment -->
+    <div x-show="step === 15" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 15: Reassessment</h2>
+      <p style="color:#666;font-size:0.9rem;">Repeat vitals (temp, pulse, BP, RR, SpO2) and document whether condition is unchanged or how it has changed.</p>
+    </div>
+
+    <!-- Step 16 — Disposition -->
+    <div x-show="step === 16" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+      <h2>Step 16: Disposition</h2>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:160px;">
+          <label>ED departure date</label>
+          <input type="date" name="edDepartureDate"
+                 value="{{ data.disposition.edDepartureDate }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>ED departure time (24h)</label>
+          <input type="time" name="edDepartureTime"
+                 value="{{ data.disposition.edDepartureTime }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Diagnoses / impressions</label>
+        <textarea name="diagnosesImpressions" rows="3"
+                  style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.disposition.diagnosesImpressions }}</textarea>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Disposition</label>
+        <select name="disposition" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""          {% if data.disposition.disposition == "" %}selected{% endif %}>-- Select --</option>
+          <option value="admit"     {% if data.disposition.disposition == "admit" %}selected{% endif %}>Admit</option>
+          <option value="transfer"  {% if data.disposition.disposition == "transfer" %}selected{% endif %}>Transfer</option>
+          <option value="discharge" {% if data.disposition.disposition == "discharge" %}selected{% endif %}>Discharge</option>
+          <option value="died"      {% if data.disposition.disposition == "died" %}selected{% endif %}>Died</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Admit ward (if Admit)</label>
+        <select name="admitWard" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""     {% if data.disposition.admitWard == "" %}selected{% endif %}>-- Select --</option>
+          <option value="ward" {% if data.disposition.admitWard == "ward" %}selected{% endif %}>Ward</option>
+          <option value="icu"  {% if data.disposition.admitWard == "icu" %}selected{% endif %}>ICU</option>
+          <option value="ot"   {% if data.disposition.admitWard == "ot" %}selected{% endif %}>OT</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Transfer destination (if Transfer)</label>
+        <input type="text" name="transferTo"
+               value="{{ data.disposition.transferTo }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Cause of death (if Died, NOT cardiopulmonary arrest)</label>
+        <input type="text" name="diedCause"
+               value="{{ data.disposition.diedCause }}"
+               style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Discharge plan discussed?</label>
+        <select name="dischargePlanDiscussed" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+          <option value=""    {% if data.disposition.dischargePlanDiscussed == "" %}selected{% endif %}>-- Select --</option>
+          <option value="yes" {% if data.disposition.dischargePlanDiscussed == "yes" %}selected{% endif %}>Yes</option>
+          <option value="no"  {% if data.disposition.dischargePlanDiscussed == "no" %}selected{% endif %}>No</option>
+        </select>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label><input type="checkbox" name="leftWithoutBeingSeen" value="on" {% if data.disposition.leftWithoutBeingSeen %}checked{% endif %}> Left without being seen (LWBS)</label>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+        <div style="flex:1;min-width:200px;">
+          <label>Emergency unit provider</label>
+          <input type="text" name="emergencyUnitProvider"
+                 value="{{ data.disposition.emergencyUnitProvider }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <label>Signature</label>
+          <input type="text" name="signature"
+                 value="{{ data.disposition.signature }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <label>Signature date</label>
+          <input type="date" name="signatureDate"
+                 value="{{ data.disposition.signatureDate }}"
+                 style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;gap:1rem;margin-top:1rem;">
+      <button type="button" @click="if (step>1) step--"
+              :disabled="step === 1"
+              style="padding:0.5rem 1.2rem;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;">
+        Previous
+      </button>
+
+      <template x-if="step < totalSteps">
+        <button type="button" @click="step++"
+                style="padding:0.5rem 1.2rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Next
+        </button>
+      </template>
+
+      <template x-if="step === totalSteps">
+        <button type="submit"
+                style="padding:0.5rem 1.4rem;background:#080;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Submit
+        </button>
+      </template>
+    </div>
+  </form>
+</div>
+{% endblock %}

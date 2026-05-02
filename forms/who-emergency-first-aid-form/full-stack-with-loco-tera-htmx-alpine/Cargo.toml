@@ -1,7 +1,18 @@
 [package]
 name = "who-emergency-first-aid-form-tera-crate"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 publish = false
 
 [dependencies]
+axum = { version = "0.8" }
+tokio = { version = "1.45", features = ["rt-multi-thread", "macros"] }
+tera = { version = "1.20" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tower = { version = "0.5" }
+tower-http = { version = "0.6", features = ["trace"] }

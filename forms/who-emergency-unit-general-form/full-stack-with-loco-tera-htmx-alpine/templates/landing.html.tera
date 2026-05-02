@@ -1,0 +1,36 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Emergency Unit Form: General{% endblock %}
+
+{% block content %}
+<div style="max-width:760px;margin:2rem auto;padding:1rem;">
+  <h1>WHO Emergency Unit Form: General</h1>
+  <p>
+    World Health Organization standardised emergency unit clinical
+    documentation form for general (non-trauma) patients. Captures
+    registration, vital signs, ABCD primary survey, history, review of
+    systems, physical exam, diagnostics, interventions, and disposition.
+  </p>
+
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
+      <h3>16 Steps</h3>
+      <p>Registration, Vitals, High Risk, Airway, Breathing, Circulation, Disability, HPI, ROS, PMH, Exam, Diagnostics, Interventions, A&amp;P, Reassessment, Disposition.</p>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
+      <h3>AVPU + Vitals</h3>
+      <p>Triage, AVPU level (Alert / Verbal / Pain / Unresponsive), and full vital sign capture with thresholds.</p>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
+      <h3>Flagged Issues</h3>
+      <p>Critical SpO2, abnormal AVPU, hypoglycaemia, dead-on-arrival, LWBS and other clinically significant findings escalate for review.</p>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/new">
+    <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
+      Begin New Assessment
+    </button>
+  </form>
+</div>
+{% endblock %}
