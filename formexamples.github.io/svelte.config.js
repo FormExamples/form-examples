@@ -11,7 +11,10 @@ const config = {
       fallback: undefined,
       precompress: false,
       strict: true
-    })
+    }),
+    prerender: {
+      handleHttpError: 'warn'
+    }
   }
 };
 
