@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cognitive Assessment — patient questionnaire</title>
+  <meta name="description" content="Mini-Mental State Examination (MMSE) cognitive screening with functional impact assessment.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cognitive Assessment</h1>
+      <p class="subtitle">Mini-Mental State Examination (MMSE) plus functional history.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Cognitive Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Cognitive Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This questionnaire administers the Mini-Mental State Examination
+        (MMSE), a 30-point validated cognitive screening tool, along with
+        demographic, referral, and functional-history sections. Each MMSE
+        item is scored 0 (incorrect) or 1 (correct). Answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This screening tool is for information only and is not a diagnosis.
+        Discuss your results with a clinician.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Referral Information, 3 Orientation, -->
+        <!-- 4 Registration, 5 Attention & Calculation, 6 Recall, -->
+        <!-- 7 Language (Naming), 8 Repetition & Commands, -->
+        <!-- 9 Visuospatial, 10 Functional History -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Mini-Mental State Examination (MMSE) is a validated 30-point
+        screening tool for cognitive impairment in adults. Results should
+        be interpreted in the context of education, language, and sensory
+        function. This form is for information only and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CognitiveAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/mmse-rules.js"></script>
+  <script src="js/mmse-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
