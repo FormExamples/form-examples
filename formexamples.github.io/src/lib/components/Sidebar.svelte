@@ -14,12 +14,13 @@
 
 <!-- Mobile backdrop -->
 {#if open}
-  <button
-    type="button"
+  <div
     class="fixed inset-0 top-14 z-20 bg-slate-900/40 md:hidden"
-    aria-label="Close navigation"
+    role="presentation"
+    aria-hidden="true"
     onclick={() => onClose?.()}
-  ></button>
+    onkeydown={(e) => e.key === 'Escape' && onClose?.()}
+  ></div>
 {/if}
 
 <aside

@@ -3,8 +3,10 @@
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import type { Snippet } from 'svelte';
 
-  let { children } = $props();
+  type Props = { children: Snippet };
+  let { children }: Props = $props();
   let menuOpen = $state(false);
 </script>
 

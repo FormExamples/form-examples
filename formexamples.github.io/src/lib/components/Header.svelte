@@ -24,6 +24,7 @@
     <div class="flex items-center gap-1">
       <a
         href={REPO_URL}
+        target="_blank"
         rel="noopener noreferrer"
         class="rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:no-underline dark:text-slate-300 dark:hover:bg-slate-800"
       >
