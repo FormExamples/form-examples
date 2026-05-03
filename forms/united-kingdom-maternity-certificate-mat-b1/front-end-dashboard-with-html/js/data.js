@@ -1,0 +1,167 @@
+// Sample MAT B1 patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Ten realistic rows: mix of pre-confinement (Part A) / post-confinement
+// (Part B), doctor and midwife issuers, with one row marked DUPLICATE.
+
+(function () {
+'use strict';
+window.MatB1Dashboard = window.MatB1Dashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    patientName: 'Smith, Jane',
+    dateOfBirth: '1992-03-14',
+    certificateNumber: 'MATB1-2026-001234',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-08-15',
+    actualDateOfBirth: null,
+    issuerType: 'doctor',
+    issuerName: 'Dr. Aisha Khan',
+    issuerNmcPin: '',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-04-10T09:14:00Z'
+  },
+  {
+    id: '2',
+    patientName: 'Patel, Priya',
+    dateOfBirth: '1988-11-22',
+    certificateNumber: 'MATB1-2026-001235',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-09-02',
+    actualDateOfBirth: null,
+    issuerType: 'midwife',
+    issuerName: 'Sarah Edwards RM',
+    issuerNmcPin: '12A3456E',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-04-11T10:22:00Z'
+  },
+  {
+    id: '3',
+    patientName: 'Jones, Margaret',
+    dateOfBirth: '1995-06-08',
+    certificateNumber: 'MATB1-2026-001236',
+    certificateType: 'post',
+    expectedDateOfConfinement: '2026-03-20',
+    actualDateOfBirth: '2026-03-18',
+    issuerType: 'doctor',
+    issuerName: 'Dr. Michael O\u2019Connor',
+    issuerNmcPin: '',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-03-25T14:05:00Z'
+  },
+  {
+    id: '4',
+    patientName: 'Williams, Charlotte',
+    dateOfBirth: '1990-09-30',
+    certificateNumber: 'MATB1-2026-001237',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-07-04',
+    actualDateOfBirth: null,
+    issuerType: 'midwife',
+    issuerName: 'Linda Hughes RM',
+    issuerNmcPin: '45B7890H',
+    isDuplicate: false,
+    highPriorityFlagCount: 1,
+    issuedAt: '2026-04-12T08:48:00Z'
+  },
+  {
+    id: '5',
+    patientName: 'Brown, Sarah',
+    dateOfBirth: '1987-01-17',
+    certificateNumber: 'MATB1-2026-001238',
+    certificateType: 'post',
+    expectedDateOfConfinement: '2026-04-01',
+    actualDateOfBirth: '2026-04-05',
+    issuerType: 'midwife',
+    issuerName: 'Helen Foster RM',
+    issuerNmcPin: '78C2345F',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-04-08T16:31:00Z'
+  },
+  {
+    id: '6',
+    patientName: 'Taylor, Emma',
+    dateOfBirth: '1993-12-05',
+    certificateNumber: 'MATB1-2026-001239',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-10-12',
+    actualDateOfBirth: null,
+    issuerType: 'doctor',
+    issuerName: 'Dr. James Whitman',
+    issuerNmcPin: '',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-04-13T11:09:00Z'
+  },
+  {
+    id: '7',
+    patientName: 'Davies, Helen',
+    dateOfBirth: '1985-04-19',
+    certificateNumber: 'MATB1-2026-001240',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-06-25',
+    actualDateOfBirth: null,
+    issuerType: 'midwife',
+    issuerName: 'Joanne Bryant RM',
+    issuerNmcPin: '23D6789B',
+    isDuplicate: true,
+    highPriorityFlagCount: 2,
+    issuedAt: '2026-04-14T13:54:00Z'
+  },
+  {
+    id: '8',
+    patientName: 'Wilson, Rebecca',
+    dateOfBirth: '1991-07-28',
+    certificateNumber: 'MATB1-2026-001241',
+    certificateType: 'post',
+    expectedDateOfConfinement: '2026-02-14',
+    actualDateOfBirth: '2026-02-09',
+    issuerType: 'doctor',
+    issuerName: 'Dr. Priya Subramanian',
+    issuerNmcPin: '',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-02-15T15:27:00Z'
+  },
+  {
+    id: '9',
+    patientName: 'Evans, Catherine',
+    dateOfBirth: '1989-10-11',
+    certificateNumber: 'MATB1-2026-001242',
+    certificateType: 'pre',
+    expectedDateOfConfinement: '2026-08-30',
+    actualDateOfBirth: null,
+    issuerType: 'midwife',
+    issuerName: 'Margaret Ellis RM',
+    issuerNmcPin: '56E1234C',
+    isDuplicate: false,
+    highPriorityFlagCount: 0,
+    issuedAt: '2026-04-15T10:42:00Z'
+  },
+  {
+    id: '10',
+    patientName: 'Thomas, Olivia',
+    dateOfBirth: '1996-02-26',
+    certificateNumber: 'MATB1-2026-001243',
+    certificateType: 'post',
+    expectedDateOfConfinement: '2026-03-10',
+    actualDateOfBirth: '2026-03-12',
+    issuerType: 'doctor',
+    issuerName: 'Dr. Robert Carlisle',
+    issuerNmcPin: '',
+    isDuplicate: false,
+    highPriorityFlagCount: 1,
+    issuedAt: '2026-03-20T09:18:00Z'
+  }
+];
+
+window.MatB1Dashboard.samplePatients = samplePatients;
+})();
