@@ -9,6 +9,7 @@
     "predev": "tsx scripts/generate-forms-data.ts",
     "dev": "vite dev",
     "preview": "vite preview",
+    "precheck": "tsx scripts/generate-forms-data.ts",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
