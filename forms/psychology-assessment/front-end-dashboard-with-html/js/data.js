@@ -1,0 +1,137 @@
+// Sample patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every severity band, three with suicidal-
+// ideation flag, NHS numbers in the canonical "NNN NNN NNNN" display form.
+
+(function () {
+'use strict';
+window.PsychologyAssessmentDashboard = window.PsychologyAssessmentDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    nhsNumber: '943 476 5919',
+    patientName: 'Smith, Jane',
+    depressionSeverity: 'Normal',
+    anxietySeverity: 'Normal',
+    stressSeverity: 'Mild',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-12T09:14:00Z'
+  },
+  {
+    id: '2',
+    nhsNumber: '721 938 4102',
+    patientName: 'Patel, Priya',
+    depressionSeverity: 'Mild',
+    anxietySeverity: 'Moderate',
+    stressSeverity: 'Mild',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-13T14:22:00Z'
+  },
+  {
+    id: '3',
+    nhsNumber: '384 615 7230',
+    patientName: 'Jones, Margaret',
+    depressionSeverity: 'Severe',
+    anxietySeverity: 'Severe',
+    stressSeverity: 'Moderate',
+    suicidalIdeationFlag: true,
+    completedAt: '2026-04-14T10:05:00Z'
+  },
+  {
+    id: '4',
+    nhsNumber: '512 847 9063',
+    patientName: 'Williams, David',
+    depressionSeverity: 'Moderate',
+    anxietySeverity: 'Mild',
+    stressSeverity: 'Moderate',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-15T08:48:00Z'
+  },
+  {
+    id: '5',
+    nhsNumber: '167 293 8451',
+    patientName: 'Brown, Sarah',
+    depressionSeverity: 'Extremely Severe',
+    anxietySeverity: 'Extremely Severe',
+    stressSeverity: 'Severe',
+    suicidalIdeationFlag: true,
+    completedAt: '2026-04-16T16:31:00Z'
+  },
+  {
+    id: '6',
+    nhsNumber: '835 162 4097',
+    patientName: 'Taylor, James',
+    depressionSeverity: 'Normal',
+    anxietySeverity: 'Mild',
+    stressSeverity: 'Normal',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-17T11:09:00Z'
+  },
+  {
+    id: '7',
+    nhsNumber: '294 708 5316',
+    patientName: 'Davies, Helen',
+    depressionSeverity: 'Severe',
+    anxietySeverity: 'Moderate',
+    stressSeverity: 'Extremely Severe',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-18T13:54:00Z'
+  },
+  {
+    id: '8',
+    nhsNumber: '608 341 2975',
+    patientName: 'Wilson, Robert',
+    depressionSeverity: 'Moderate',
+    anxietySeverity: 'Severe',
+    stressSeverity: 'Moderate',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-19T15:27:00Z'
+  },
+  {
+    id: '9',
+    nhsNumber: '473 926 1084',
+    patientName: 'Evans, Catherine',
+    depressionSeverity: 'Mild',
+    anxietySeverity: 'Normal',
+    stressSeverity: 'Mild',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-20T10:42:00Z'
+  },
+  {
+    id: '10',
+    nhsNumber: '159 684 7302',
+    patientName: 'Thomas, Michael',
+    depressionSeverity: 'Extremely Severe',
+    anxietySeverity: 'Severe',
+    stressSeverity: 'Extremely Severe',
+    suicidalIdeationFlag: true,
+    completedAt: '2026-04-21T09:18:00Z'
+  },
+  {
+    id: '11',
+    nhsNumber: '742 051 3896',
+    patientName: 'Robinson, Emma',
+    depressionSeverity: 'Normal',
+    anxietySeverity: 'Normal',
+    stressSeverity: 'Normal',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-22T14:03:00Z'
+  },
+  {
+    id: '12',
+    nhsNumber: '386 219 5740',
+    patientName: 'Clark, George',
+    depressionSeverity: 'Moderate',
+    anxietySeverity: 'Moderate',
+    stressSeverity: 'Severe',
+    suicidalIdeationFlag: false,
+    completedAt: '2026-04-23T11:36:00Z'
+  }
+];
+
+window.PsychologyAssessmentDashboard.samplePatients = samplePatients;
+})();
