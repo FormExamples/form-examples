@@ -4,16 +4,147 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Prenatal Assessment — clinician dashboard</title>
+  <meta name="description" content="Prenatal Assessment clinician dashboard: review patient submissions with risk level, gestational age, primary concern, and referral status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Prenatal Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Antenatal patient list with risk stratification, gestational age,
+        primary concern, and referral status.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Prenatal Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Prenatal Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or concern..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Level</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All risk levels</option>
+            <option value="low">Low Risk</option>
+            <option value="moderate">Moderate Risk</option>
+            <option value="high">High Risk</option>
+            <option value="very-high">Very High Risk</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-trimester">Trimester</label>
+          <select id="filter-trimester" class="select-input">
+            <option value="">All trimesters</option>
+            <option value="1">1st trimester (&lt; 14 weeks)</option>
+            <option value="2">2nd trimester (14-27 weeks)</option>
+            <option value="3">3rd trimester (28+ weeks)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-referral">Referral</label>
+          <select id="filter-referral" class="select-input">
+            <option value="">All referral statuses</option>
+            <option value="None">No referral</option>
+            <option value="referred">Referred</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Prenatal risk stratification supports antenatal care planning and
+        specialist referral. This dashboard is a clinical-review tool and
+        is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PrenatalAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
