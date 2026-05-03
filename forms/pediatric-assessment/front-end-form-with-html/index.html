@@ -4,16 +4,103 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Pediatric Assessment — patient questionnaire</title>
+  <meta name="description" content="Child development screening covering birth history, growth, developmental milestones, immunisation status, and family environment.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Pediatric Assessment</h1>
+      <p class="subtitle">Child developmental screening with birth history, growth, milestones, and family environment.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Pediatric Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Pediatric Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please complete each section below about the child. Answers are saved
+        automatically in this browser as you go, so you can come back later
+        without losing progress. The form covers demographics, birth history,
+        growth, developmental milestones, immunisations, medical and family
+        history, current medications, and the social/home environment.
+      </p>
+      <p>
+        If you are worried about an immediate medical emergency — severe
+        breathing difficulty, a seizure, signs of anaphylaxis, or a serious
+        injury — call your local emergency number now rather than completing
+        this form.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Birth History, 3 Growth & Nutrition, -->
+        <!-- 4 Developmental Milestones, 5 Immunization Status, -->
+        <!-- 6 Medical History, 7 Current Medications, -->
+        <!-- 8 Family History, 9 Social & Environmental -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This developmental screening tool flags areas that may need further
+        clinical evaluation; it is not a diagnosis. Discuss the report with
+        your paediatrician or family doctor.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PediatricAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/dev-rules.js"></script>
+  <script src="js/dev-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

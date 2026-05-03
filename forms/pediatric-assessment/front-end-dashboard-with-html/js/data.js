@@ -1,0 +1,126 @@
+// Sample patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every developmental-screen result, growth
+// status, and immunization status; NHS numbers in the canonical
+// "NNN NNN NNNN" display form.
+
+(function () {
+'use strict';
+window.PediatricAssessmentDashboard = window.PediatricAssessmentDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    nhsNumber: '943 476 5919',
+    patientName: 'Smith, Emma',
+    devScreenResult: 'normal',
+    age: '18 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '2',
+    nhsNumber: '721 938 4102',
+    patientName: 'Patel, Arjun',
+    devScreenResult: 'developmental-concern',
+    age: '24 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '3',
+    nhsNumber: '384 615 7230',
+    patientName: 'Jones, Oliver',
+    devScreenResult: 'developmental-delay',
+    age: '36 months',
+    growthStatus: 'Below 3rd percentile',
+    immunizationStatus: 'Missing MMR'
+  },
+  {
+    id: '4',
+    nhsNumber: '512 847 9063',
+    patientName: 'Williams, Sophia',
+    devScreenResult: 'normal',
+    age: '12 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '5',
+    nhsNumber: '167 293 8451',
+    patientName: 'Brown, Liam',
+    devScreenResult: 'developmental-delay',
+    age: '48 months',
+    growthStatus: 'Failure to thrive',
+    immunizationStatus: 'Missing DTP, Polio'
+  },
+  {
+    id: '6',
+    nhsNumber: '835 162 4097',
+    patientName: 'Taylor, Amelia',
+    devScreenResult: 'normal',
+    age: '6 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '7',
+    nhsNumber: '294 708 5316',
+    patientName: 'Davies, Noah',
+    devScreenResult: 'developmental-concern',
+    age: '30 months',
+    growthStatus: 'Below 10th percentile',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '8',
+    nhsNumber: '608 341 2975',
+    patientName: 'Wilson, Isla',
+    devScreenResult: 'normal',
+    age: '9 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '9',
+    nhsNumber: '473 926 1084',
+    patientName: 'Evans, George',
+    devScreenResult: 'developmental-concern',
+    age: '42 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Exemption (medical)'
+  },
+  {
+    id: '10',
+    nhsNumber: '159 684 7302',
+    patientName: 'Thomas, Mia',
+    devScreenResult: 'normal',
+    age: '15 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '11',
+    nhsNumber: '742 051 3896',
+    patientName: 'Robinson, Jack',
+    devScreenResult: 'developmental-delay',
+    age: '60 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  },
+  {
+    id: '12',
+    nhsNumber: '386 219 5740',
+    patientName: 'Clark, Olivia',
+    devScreenResult: 'normal',
+    age: '3 months',
+    growthStatus: 'Normal',
+    immunizationStatus: 'Up to date'
+  }
+];
+
+window.PediatricAssessmentDashboard.samplePatients = samplePatients;
+})();
