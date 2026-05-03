@@ -1,22 +1,22 @@
-// Anesthesiology Assessment - clinician dashboard (vanilla classic-script app).
+// Allergy Assessment - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + composite-risk dropdown + ASA-grade dropdown +
-// Mallampati dropdown + difficult-airway dropdown).
+// (search box + severity dropdown + status dropdown + allergy-type dropdown
+// + anaphylaxis dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.AnesthesiologyAssessmentDashboard`. Pulling
-// them off here keeps the rest of this file referring to short local names.
-// The whole file is wrapped in an IIFE so its top-level identifiers do not
-// leak to the global scope.
+// attach their exports to `window.AllergyAssessmentDashboard`. Pulling them
+// off here keeps the rest of this file referring to short local names. The
+// whole file is wrapped in an IIFE so its top-level identifiers do not leak
+// to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.AnesthesiologyAssessmentDashboard;
+} = window.AllergyAssessmentDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -27,57 +27,48 @@ let patients = [];
 
 const filters = {
   search: '',
-  risk: '',
-  asa: '',
-  mallampati: '',
-  airway: '' // '', 'yes', 'no'
+  severity: '',
+  status: '',
+  allergyType: '',
+  anaphylaxis: '' // '', 'yes', 'no'
 };
 
-// Default sort: composite risk descending. Critical / High patients float to
-// the top so the highest-acuity cases are surfaced first to the
-// anaesthetist.
+// Default sort: most recently submitted first. This matches the SvelteKit
+// dashboard's `init` callback that calls
+// api.exec('sort-rows', { key: 'submittedDate', order: 'desc' }).
 const sortState = {
-  key: 'compositeRisk',
+  key: 'submittedDate',
   direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',           label: 'NHS Number' },
-  { key: 'patientName',         label: 'Patient Name' },
-  { key: 'surgeryType',         label: 'Surgery' },
-  { key: 'asaGrade',            label: 'ASA' },
-  { key: 'mallampatiClass',     label: 'Mallampati' },
-  { key: 'rcriScore',           label: 'RCRI' },
-  { key: 'stopBangScore',       label: 'STOP-BANG' },
-  { key: 'compositeRisk',       label: 'Composite Risk' },
-  { key: 'difficultAirwayFlag', label: 'Difficult Airway' }
+  { key: 'nhsNumber',          label: 'NHS Number' },
+  { key: 'patientName',        label: 'Patient Name' },
+  { key: 'severityLevel',      label: 'Severity' },
+  { key: 'allergenCount',      label: 'Allergens' },
+  { key: 'primaryAllergyType', label: 'Primary Type' },
+  { key: 'hasAnaphylaxis',     label: 'Anaphylaxis' },
+  { key: 'burdenScore',        label: 'Burden' },
+  { key: 'flagCount',          label: 'Flags' },
+  { key: 'status',             label: 'Status' },
+  { key: 'submittedDate',      label: 'Submitted' }
 ];
 
-// Rank used when sorting categorical columns so order matches clinical
-// severity regardless of locale.
-const compositeRiskRank = {
-  'Low': 0,
-  'Moderate': 1,
-  'High': 2,
-  'Critical': 3
+// Rank used when sorting the severityLevel column so 'mild' is always less
+// than 'severe' regardless of locale-aware string ordering.
+const severityRank = {
+  mild: 0,
+  moderate: 1,
+  severe: 2
 };
 
-const asaRank = {
-  'I': 0,
-  'II': 1,
-  'III': 2,
-  'IV': 3,
-  'V': 4,
-  'VI': 5
-};
-
-const mallampatiRank = {
-  'I': 0,
-  'II': 1,
-  'III': 2,
-  'IV': 3
+// Rank used when sorting the status column. Lower = earlier in workflow.
+const statusRank = {
+  pending: 0,
+  reviewed: 1,
+  urgent: 2
 };
 
 // ----------------------------------------------------------------------
@@ -94,28 +85,34 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-function riskClass(label) {
+function severityClass(label) {
   if (!label) return '';
-  return 'risk-' + String(label).toLowerCase();
+  return 'severity-' + String(label).toLowerCase();
 }
 
-function asaClass(label) {
+function statusClass(label) {
   if (!label) return '';
-  return 'asa-' + String(label).toLowerCase();
+  return 'status-' + String(label).toLowerCase();
 }
 
-function mallampatiClass(label) {
+function allergyTypeClass(label) {
   if (!label) return '';
-  return 'mallampati-' + String(label).toLowerCase();
+  return 'allergy-type-' + String(label).toLowerCase();
+}
+
+function flagCountClass(count) {
+  if (!count || count === 0) return 'flag-count-zero';
+  if (count >= 3) return 'flag-count-high';
+  return '';
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.risk !== '' ||
-    filters.asa !== '' ||
-    filters.mallampati !== '' ||
-    filters.airway !== ''
+    filters.severity !== '' ||
+    filters.status !== '' ||
+    filters.allergyType !== '' ||
+    filters.anaphylaxis !== ''
   );
 }
 
@@ -132,28 +129,29 @@ function matchesFilters(row) {
     const term = filters.search.toLowerCase();
     const matches =
       row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term) ||
-      row.surgeryType.toLowerCase().includes(term);
+      row.patientName.toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.risk && row.compositeRisk !== filters.risk) {
+  if (filters.severity && row.severityLevel !== filters.severity) {
     return false;
   }
-  if (filters.asa && row.asaGrade !== filters.asa) {
+  if (filters.status && row.status !== filters.status) {
     return false;
   }
-  if (filters.mallampati && row.mallampatiClass !== filters.mallampati) {
+  if (filters.allergyType && row.primaryAllergyType !== filters.allergyType) {
     return false;
   }
-  if (filters.airway === 'yes' && !row.difficultAirwayFlag) return false;
-  if (filters.airway === 'no' && row.difficultAirwayFlag) return false;
+  if (filters.anaphylaxis === 'yes' && !row.hasAnaphylaxis) return false;
+  if (filters.anaphylaxis === 'no' && row.hasAnaphylaxis) return false;
   return true;
 }
 
 /**
  * Compare two rows for the active sort column. Categorical columns use
  * their rank tables; booleans sort false<true; numbers compare directly;
- * everything else uses a locale-aware string compare.
+ * everything else uses a locale-aware string compare. ISO yyyy-mm-dd date
+ * strings sort correctly under string compare so submittedDate uses the
+ * default branch.
  */
 function compareRows(a, b) {
   const key = sortState.key;
@@ -161,33 +159,28 @@ function compareRows(a, b) {
   let av = a[key];
   let bv = b[key];
 
-  if (key === 'compositeRisk') {
-    av = compositeRiskRank[av] ?? -1;
-    bv = compositeRiskRank[bv] ?? -1;
+  if (key === 'severityLevel') {
+    av = severityRank[av] ?? -1;
+    bv = severityRank[bv] ?? -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'asaGrade') {
-    av = asaRank[av] ?? -1;
-    bv = asaRank[bv] ?? -1;
+  if (key === 'status') {
+    av = statusRank[av] ?? -1;
+    bv = statusRank[bv] ?? -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'mallampatiClass') {
-    av = mallampatiRank[av] ?? -1;
-    bv = mallampatiRank[bv] ?? -1;
-    return (av - bv) * dir;
-  }
-
-  if (key === 'difficultAirwayFlag') {
+  if (key === 'hasAnaphylaxis') {
     return ((av === bv) ? 0 : (av ? 1 : -1)) * dir;
   }
 
-  if (key === 'rcriScore' || key === 'stopBangScore') {
+  if (key === 'allergenCount' || key === 'burdenScore' || key === 'flagCount') {
     return ((av ?? 0) - (bv ?? 0)) * dir;
   }
 
-  // Default: string compare (nhsNumber, patientName, surgeryType)
+  // Default: string compare (nhsNumber, patientName, primaryAllergyType,
+  // submittedDate). ISO dates sort correctly lexicographically.
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -251,26 +244,25 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.compositeRisk === 'Critical') {
-      tr.classList.add('row-risk-critical');
-    } else if (row.compositeRisk === 'High') {
-      tr.classList.add('row-risk-high');
+    if (row.hasAnaphylaxis) {
+      tr.classList.add('row-anaphylaxis');
     }
 
     tr.innerHTML = `
       <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td>${esc(row.surgeryType)}</td>
-      <td><span class="asa-badge ${asaClass(row.asaGrade)}">ASA ${esc(row.asaGrade)}</span></td>
-      <td><span class="mallampati-badge ${mallampatiClass(row.mallampatiClass)}">${esc(row.mallampatiClass)}</span></td>
-      <td><span class="score-cell">${esc(row.rcriScore)}/6</span></td>
-      <td><span class="score-cell">${esc(row.stopBangScore)}/8</span></td>
-      <td><span class="risk-badge ${riskClass(row.compositeRisk)}">${esc(row.compositeRisk)}</span></td>
+      <td><span class="severity-badge ${severityClass(row.severityLevel)}">${esc(row.severityLevel)}</span></td>
+      <td><span class="num-cell">${esc(row.allergenCount)}</span></td>
+      <td><span class="allergy-type-badge ${allergyTypeClass(row.primaryAllergyType)}">${esc(row.primaryAllergyType)}</span></td>
       <td>
-        <span class="airway-badge ${row.difficultAirwayFlag ? 'airway-yes' : 'airway-no'}">
-          ${row.difficultAirwayFlag ? 'Yes' : 'No'}
+        <span class="anaphylaxis-badge ${row.hasAnaphylaxis ? 'anaphylaxis-yes' : 'anaphylaxis-no'}">
+          ${row.hasAnaphylaxis ? 'Yes' : 'No'}
         </span>
       </td>
+      <td><span class="num-cell">${esc(row.burdenScore)}</span></td>
+      <td><span class="flag-count ${flagCountClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
+      <td><span class="status-badge ${statusClass(row.status)}">${esc(row.status)}</span></td>
+      <td>${esc(row.submittedDate)}</td>
     `;
     body.appendChild(tr);
   }
@@ -326,10 +318,10 @@ function onSortClick(key) {
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const risk = document.getElementById('filter-risk');
-  const asa = document.getElementById('filter-asa');
-  const mallampati = document.getElementById('filter-mallampati');
-  const airway = document.getElementById('filter-airway');
+  const severity = document.getElementById('filter-severity');
+  const status = document.getElementById('filter-status');
+  const allergyType = document.getElementById('filter-allergy-type');
+  const anaphylaxis = document.getElementById('filter-anaphylaxis');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -338,42 +330,42 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (risk) {
-    risk.addEventListener('change', () => {
-      filters.risk = risk.value;
+  if (severity) {
+    severity.addEventListener('change', () => {
+      filters.severity = severity.value;
       renderAll();
     });
   }
-  if (asa) {
-    asa.addEventListener('change', () => {
-      filters.asa = asa.value;
+  if (status) {
+    status.addEventListener('change', () => {
+      filters.status = status.value;
       renderAll();
     });
   }
-  if (mallampati) {
-    mallampati.addEventListener('change', () => {
-      filters.mallampati = mallampati.value;
+  if (allergyType) {
+    allergyType.addEventListener('change', () => {
+      filters.allergyType = allergyType.value;
       renderAll();
     });
   }
-  if (airway) {
-    airway.addEventListener('change', () => {
-      filters.airway = airway.value;
+  if (anaphylaxis) {
+    anaphylaxis.addEventListener('change', () => {
+      filters.anaphylaxis = anaphylaxis.value;
       renderAll();
     });
   }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.risk = '';
-      filters.asa = '';
-      filters.mallampati = '';
-      filters.airway = '';
+      filters.severity = '';
+      filters.status = '';
+      filters.allergyType = '';
+      filters.anaphylaxis = '';
       if (search) search.value = '';
-      if (risk) risk.value = '';
-      if (asa) asa.value = '';
-      if (mallampati) mallampati.value = '';
-      if (airway) airway.value = '';
+      if (severity) severity.value = '';
+      if (status) status.value = '';
+      if (allergyType) allergyType.value = '';
+      if (anaphylaxis) anaphylaxis.value = '';
       renderAll();
     });
   }

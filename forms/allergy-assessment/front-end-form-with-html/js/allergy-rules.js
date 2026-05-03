@@ -1,10 +1,29 @@
+// Allergy severity classification rules.
+//
+// Each rule evaluates patient data and returns true if the condition is
+// present. The overall severity level is the highest level among all fired
+// rules; mild is the default when no rules fire. Mirrors the SvelteKit
+// reference engine in `src/lib/engine/allergy-rules.ts`.
+
 /**
- * Declarative allergy severity classification rules.
- * Each rule evaluates patient data and returns true if the condition is present.
- * The severity level is determined by the highest-severity rule that fires.
- * Mild is the default when no rules fire (no significant allergic conditions).
+ * @typedef {import('./types.js').AssessmentData} AssessmentData
+ * @typedef {import('./types.js').SeverityLevel} SeverityLevel
+ *
+ * @typedef {Object} AllergyRule
+ * @property {string} id
+ * @property {string} category
+ * @property {string} description
+ * @property {SeverityLevel} severityLevel
+ * @property {(d: AssessmentData) => boolean} evaluate
  */
-export const allergyRules = [
+
+// Wrapped in an IIFE; published via window.AllergyAssessment.
+(function () {
+'use strict';
+window.AllergyAssessment = window.AllergyAssessment || {};
+
+/** @type {AllergyRule[]} */
+const allergyRules = [
   // ─── ANAPHYLAXIS INDICATORS (SEVERE) ────────────────────────
   {
     id: 'AN-001',
@@ -122,8 +141,7 @@ export const allergyRules = [
     category: 'Food Allergy',
     description: 'IgE-mediated food allergy',
     severityLevel: 'moderate',
-    evaluate: (d) =>
-      d.foodAllergies.igeType === 'IgE-mediated'
+    evaluate: (d) => d.foodAllergies.igeType === 'IgE-mediated'
   },
 
   // ─── ENVIRONMENTAL ALLERGY SEVERITY ─────────────────────────
@@ -234,5 +252,8 @@ export const allergyRules = [
     evaluate: (d) =>
       d.anaphylaxisHistory.hasAnaphylaxisHistory === 'yes' &&
       d.anaphylaxisHistory.adrenalineAutoInjectorPrescribed === 'no'
-  },
+  }
 ];
+
+window.AllergyAssessment.allergyRules = allergyRules;
+})();

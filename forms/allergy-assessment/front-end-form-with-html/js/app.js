@@ -1,339 +1,1437 @@
-import { createDefaultAssessment } from './data-model.js';
-import { calculateAllergySeverity, calculateAllergyBurdenScore } from './grader.js';
-import { detectAdditionalFlags } from './flagged-issues.js';
-import { TOTAL_STEPS, steps } from './steps.js';
-import { calculateBMI } from './utils.js';
+// Allergy Assessment - patient wizard (vanilla JavaScript, no build).
+//
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. The user scrolls through them; a sticky top-of-page
+// progress summary reflects how many fields have been answered. Submission
+// runs the pure allergy severity engine and renders an inline report. State
+// is persisted to localStorage so a partial fill survives a page reload.
+//
+// Sibling files loaded as plain `<script>` tags (in order) attach their
+// exports to `window.AllergyAssessment`. Pulling them off here keeps the
+// rest of this file referring to short local names. Whole file is wrapped
+// in an IIFE so its top-level identifiers don't leak to the global scope.
+(function () {
+'use strict';
 
-let data = createDefaultAssessment();
+const NS = window.AllergyAssessment;
+const {
+  emptyAssessment,
+  calculateBMI,
+  bmiCategory,
+  calculateAllergyBurdenScore,
+  calculateAllergySeverity,
+  detectAdditionalFlags,
+  severityLabel,
+  severityClass
+} = NS;
 
-// ─── Navigation ────────────────────────────────────────
-window.submitForm = function () {
-  collectAllFields();
-  const { severityLevel, firedRules } = calculateAllergySeverity(data);
-  const allergyBurdenScore = calculateAllergyBurdenScore(data);
-  const additionalFlags = detectAdditionalFlags(data);
-  const result = { severityLevel, allergyBurdenScore, firedRules, additionalFlags, timestamp: new Date().toISOString() };
-  sessionStorage.setItem('allergyData', JSON.stringify(data));
-  sessionStorage.setItem('allergyResult', JSON.stringify(result));
-  window.location.href = 'report.html';
-};
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
 
-// ─── Data binding: populate form from data ─────────────
-function populateStep(step) {
-  const section = document.getElementById('step-' + step);
-  if (!section) return;
+const STORAGE_KEY = 'allergy-assessment.front-end-form-with-html.v1';
 
-  // Text/select/textarea/number fields
-  document.querySelectorAll('[data-field]').forEach(el => {
-    const path = el.getAttribute('data-field');
-    const val = getNestedValue(data, path);
-    if (el.type === 'radio') {
-      el.checked = (el.value === String(val));
-    } else if (el.type === 'number') {
-      el.value = val !== null && val !== undefined ? val : '';
-    } else {
-      el.value = val || '';
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    // Merge over a fresh empty so any newly-added fields default correctly.
+    const fresh = emptyAssessment();
+    for (const key of Object.keys(fresh)) {
+      if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
+        fresh[key] = { ...fresh[key], ...parsed[key] };
+      }
     }
-  });
-
-  // Populate dynamic lists
-  if (step === 3) renderDrugAllergyList();
-  if (step === 4) renderFoodAllergyList();
-  if (step === 6) renderEpisodeList();
-  if (step === 7) renderTestResultList();
-  if (step === 8) renderMedicationList();
-
-  // BMI display
-  if (step === 1) updateBMIDisplay();
-}
-
-// ─── Data binding: collect form into data ──────────────
-function collectAllFields() {
-  document.querySelectorAll('[data-field]').forEach(el => {
-    const path = el.getAttribute('data-field');
-    if (el.type === 'radio') {
-      if (el.checked) setNestedValue(data, path, el.value);
-    } else if (el.type === 'number') {
-      setNestedValue(data, path, el.value === '' ? null : parseFloat(el.value));
-    } else {
-      setNestedValue(data, path, el.value);
-    }
-  });
-
-  // Collect dynamic lists
-  collectDrugAllergyList();
-  collectFoodAllergyList();
-  collectEpisodeList();
-  collectTestResultList();
-  collectMedicationList();
-
-  // Auto-calculate BMI
-  {
-    data.demographics.bmi = calculateBMI(data.demographics.weight, data.demographics.height);
-    updateBMIDisplay();
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved assessment; starting fresh.', e);
+    return emptyAssessment();
   }
 }
 
-// ─── Conditional fields ────────────────────────────────
-function updateConditionalFields() {
-  document.querySelectorAll('[data-show-if]').forEach(el => {
-    const condition = el.getAttribute('data-show-if');
-    const [path, values] = condition.split('=');
-    const currentVal = String(getNestedValue(data, path));
-    const allowed = values.split('|');
-    el.style.display = allowed.includes(currentVal) ? 'block' : 'none';
-  });
-}
-
-// Listen for radio/select changes to update conditional fields
-document.addEventListener('change', (e) => {
-  const field = e.target.getAttribute('data-field');
-  if (!field) return;
-  if (e.target.type === 'radio' && e.target.checked) {
-    setNestedValue(data, field, e.target.value);
-  } else if (e.target.tagName === 'SELECT') {
-    setNestedValue(data, field, e.target.value);
-  } else if (e.target.type === 'number') {
-    setNestedValue(data, field, e.target.value === '' ? null : parseFloat(e.target.value));
-  }
-  updateConditionalFields();
-});
-
-// BMI auto-calculation on weight/height change
-document.addEventListener('input', (e) => {
-  if (e.target.getAttribute('data-field') === 'demographics.weight' ||
-      e.target.getAttribute('data-field') === 'demographics.height') {
-    const w = parseFloat(document.querySelector('[data-field="demographics.weight"]')?.value) || null;
-    const h = parseFloat(document.querySelector('[data-field="demographics.height"]')?.value) || null;
-    data.demographics.weight = w;
-    data.demographics.height = h;
-    data.demographics.bmi = calculateBMI(w, h);
-    updateBMIDisplay();
-  }
-});
-
-function updateBMIDisplay() {
-  const el = document.getElementById('bmi-display');
-  if (!el) return;
-  if (data.demographics.bmi) {
-    el.textContent = data.demographics.bmi;
-  } else {
-    el.textContent = 'Auto-calculated';
+/** @param {import('./types.js').AssessmentData} state */
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save assessment to localStorage.', e);
   }
 }
 
-// ─── Dynamic list: Drug allergies ──────────────────────
-window.addDrugAllergy = function () {
-  data.drugAllergies.drugAllergies.push({ allergen: '', reactionType: '', severity: '', timing: '', alternativesTolerated: '' });
-  renderDrugAllergyList();
-};
-
-window.removeDrugAllergy = function (i) {
-  data.drugAllergies.drugAllergies.splice(i, 1);
-  renderDrugAllergyList();
-};
-
-function renderDrugAllergyList() {
-  const container = document.getElementById('drug-allergy-list');
-  if (!container) return;
-  container.innerHTML = data.drugAllergies.drugAllergies.map((item, i) =>
-    '<div class="dynamic-list-item">' +
-    '<input type="text" placeholder="Drug name" value="' + escAttr(item.allergen) + '" data-list="drugAllergies" data-index="' + i + '" data-prop="allergen">' +
-    '<input type="text" placeholder="Reaction type" value="' + escAttr(item.reactionType) + '" data-list="drugAllergies" data-index="' + i + '" data-prop="reactionType">' +
-    '<select data-list="drugAllergies" data-index="' + i + '" data-prop="severity">' +
-    '<option value="">Severity</option>' +
-    '<option value="mild"' + (item.severity === 'mild' ? ' selected' : '') + '>Mild</option>' +
-    '<option value="moderate"' + (item.severity === 'moderate' ? ' selected' : '') + '>Moderate</option>' +
-    '<option value="severe"' + (item.severity === 'severe' ? ' selected' : '') + '>Severe</option>' +
-    '<option value="anaphylaxis"' + (item.severity === 'anaphylaxis' ? ' selected' : '') + '>Anaphylaxis</option>' +
-    '</select>' +
-    '<input type="text" placeholder="Timing" value="' + escAttr(item.timing) + '" data-list="drugAllergies" data-index="' + i + '" data-prop="timing">' +
-    '<input type="text" placeholder="Alternatives tolerated" value="' + escAttr(item.alternativesTolerated) + '" data-list="drugAllergies" data-index="' + i + '" data-prop="alternativesTolerated">' +
-    '<button type="button" class="btn-remove" onclick="removeDrugAllergy(' + i + ')" aria-label="Remove">&times;</button>' +
-    '</div>'
-  ).join('');
-}
-
-function collectDrugAllergyList() {
-  const items = document.querySelectorAll('[data-list="drugAllergies"]');
-  items.forEach(el => {
-    const i = parseInt(el.getAttribute('data-index'));
-    const prop = el.getAttribute('data-prop');
-    if (data.drugAllergies.drugAllergies[i]) {
-      data.drugAllergies.drugAllergies[i][prop] = el.value;
-    }
-  });
-}
-
-// ─── Dynamic list: Food allergies ──────────────────────
-window.addFoodAllergy = function () {
-  data.foodAllergies.foodAllergies.push({ allergen: '', reactionType: '', severity: '', timing: '', alternativesTolerated: '' });
-  renderFoodAllergyList();
-};
-
-window.removeFoodAllergy = function (i) {
-  data.foodAllergies.foodAllergies.splice(i, 1);
-  renderFoodAllergyList();
-};
-
-function renderFoodAllergyList() {
-  const container = document.getElementById('food-allergy-list');
-  if (!container) return;
-  container.innerHTML = data.foodAllergies.foodAllergies.map((item, i) =>
-    '<div class="dynamic-list-item">' +
-    '<input type="text" placeholder="Food allergen" value="' + escAttr(item.allergen) + '" data-list="foodAllergies" data-index="' + i + '" data-prop="allergen">' +
-    '<input type="text" placeholder="Reaction type" value="' + escAttr(item.reactionType) + '" data-list="foodAllergies" data-index="' + i + '" data-prop="reactionType">' +
-    '<select data-list="foodAllergies" data-index="' + i + '" data-prop="severity">' +
-    '<option value="">Severity</option>' +
-    '<option value="mild"' + (item.severity === 'mild' ? ' selected' : '') + '>Mild</option>' +
-    '<option value="moderate"' + (item.severity === 'moderate' ? ' selected' : '') + '>Moderate</option>' +
-    '<option value="severe"' + (item.severity === 'severe' ? ' selected' : '') + '>Severe</option>' +
-    '<option value="anaphylaxis"' + (item.severity === 'anaphylaxis' ? ' selected' : '') + '>Anaphylaxis</option>' +
-    '</select>' +
-    '<input type="text" placeholder="Timing" value="' + escAttr(item.timing) + '" data-list="foodAllergies" data-index="' + i + '" data-prop="timing">' +
-    '<input type="text" placeholder="Alternatives tolerated" value="' + escAttr(item.alternativesTolerated) + '" data-list="foodAllergies" data-index="' + i + '" data-prop="alternativesTolerated">' +
-    '<button type="button" class="btn-remove" onclick="removeFoodAllergy(' + i + ')" aria-label="Remove">&times;</button>' +
-    '</div>'
-  ).join('');
-}
-
-function collectFoodAllergyList() {
-  const items = document.querySelectorAll('[data-list="foodAllergies"]');
-  items.forEach(el => {
-    const i = parseInt(el.getAttribute('data-index'));
-    const prop = el.getAttribute('data-prop');
-    if (data.foodAllergies.foodAllergies[i]) {
-      data.foodAllergies.foodAllergies[i][prop] = el.value;
-    }
-  });
-}
-
-// ─── Dynamic list: Anaphylaxis episodes ────────────────
-window.addEpisode = function () {
-  data.anaphylaxisHistory.episodes.push({ trigger: '', symptoms: '', treatmentRequired: '' });
-  renderEpisodeList();
-};
-
-window.removeEpisode = function (i) {
-  data.anaphylaxisHistory.episodes.splice(i, 1);
-  renderEpisodeList();
-};
-
-function renderEpisodeList() {
-  const container = document.getElementById('episode-list');
-  if (!container) return;
-  container.innerHTML = data.anaphylaxisHistory.episodes.map((item, i) =>
-    '<div class="dynamic-list-item">' +
-    '<input type="text" placeholder="Trigger" value="' + escAttr(item.trigger) + '" data-list="episodes" data-index="' + i + '" data-prop="trigger">' +
-    '<input type="text" placeholder="Symptoms" value="' + escAttr(item.symptoms) + '" data-list="episodes" data-index="' + i + '" data-prop="symptoms">' +
-    '<input type="text" placeholder="Treatment required" value="' + escAttr(item.treatmentRequired) + '" data-list="episodes" data-index="' + i + '" data-prop="treatmentRequired">' +
-    '<button type="button" class="btn-remove" onclick="removeEpisode(' + i + ')" aria-label="Remove">&times;</button>' +
-    '</div>'
-  ).join('');
-}
-
-function collectEpisodeList() {
-  const items = document.querySelectorAll('[data-list="episodes"]');
-  items.forEach(el => {
-    const i = parseInt(el.getAttribute('data-index'));
-    const prop = el.getAttribute('data-prop');
-    if (data.anaphylaxisHistory.episodes[i]) {
-      data.anaphylaxisHistory.episodes[i][prop] = el.value;
-    }
-  });
-}
-
-// ─── Dynamic list: Test results ────────────────────────
-window.addTestResult = function () {
-  data.testingResults.testResults.push({ testType: '', allergen: '', result: '' });
-  renderTestResultList();
-};
-
-window.removeTestResult = function (i) {
-  data.testingResults.testResults.splice(i, 1);
-  renderTestResultList();
-};
-
-function renderTestResultList() {
-  const container = document.getElementById('test-result-list');
-  if (!container) return;
-  container.innerHTML = data.testingResults.testResults.map((item, i) =>
-    '<div class="dynamic-list-item">' +
-    '<input type="text" placeholder="Test type" value="' + escAttr(item.testType) + '" data-list="testResults" data-index="' + i + '" data-prop="testType">' +
-    '<input type="text" placeholder="Allergen" value="' + escAttr(item.allergen) + '" data-list="testResults" data-index="' + i + '" data-prop="allergen">' +
-    '<input type="text" placeholder="Result" value="' + escAttr(item.result) + '" data-list="testResults" data-index="' + i + '" data-prop="result">' +
-    '<button type="button" class="btn-remove" onclick="removeTestResult(' + i + ')" aria-label="Remove">&times;</button>' +
-    '</div>'
-  ).join('');
-}
-
-function collectTestResultList() {
-  const items = document.querySelectorAll('[data-list="testResults"]');
-  items.forEach(el => {
-    const i = parseInt(el.getAttribute('data-index'));
-    const prop = el.getAttribute('data-prop');
-    if (data.testingResults.testResults[i]) {
-      data.testingResults.testResults[i][prop] = el.value;
-    }
-  });
-}
-
-// ─── Dynamic list: Other medications ───────────────────
-window.addMedication = function () {
-  data.currentManagement.otherMedications.push({ name: '', dose: '', frequency: '' });
-  renderMedicationList();
-};
-
-window.removeMedication = function (i) {
-  data.currentManagement.otherMedications.splice(i, 1);
-  renderMedicationList();
-};
-
-function renderMedicationList() {
-  const container = document.getElementById('medication-list');
-  if (!container) return;
-  container.innerHTML = data.currentManagement.otherMedications.map((item, i) =>
-    '<div class="dynamic-list-item">' +
-    '<input type="text" placeholder="Medication name" value="' + escAttr(item.name) + '" data-list="medications" data-index="' + i + '" data-prop="name">' +
-    '<input type="text" placeholder="Dose" value="' + escAttr(item.dose) + '" data-list="medications" data-index="' + i + '" data-prop="dose">' +
-    '<input type="text" placeholder="Frequency" value="' + escAttr(item.frequency) + '" data-list="medications" data-index="' + i + '" data-prop="frequency">' +
-    '<button type="button" class="btn-remove" onclick="removeMedication(' + i + ')" aria-label="Remove">&times;</button>' +
-    '</div>'
-  ).join('');
-}
-
-function collectMedicationList() {
-  const items = document.querySelectorAll('[data-list="medications"]');
-  items.forEach(el => {
-    const i = parseInt(el.getAttribute('data-index'));
-    const prop = el.getAttribute('data-prop');
-    if (data.currentManagement.otherMedications[i]) {
-      data.currentManagement.otherMedications[i][prop] = el.value;
-    }
-  });
-}
-
-// ─── Utilities ─────────────────────────────────────────
-function getNestedValue(obj, path) {
-  return path.split('.').reduce((o, key) => (o && o[key] !== undefined) ? o[key] : '', obj);
-}
-
-function setNestedValue(obj, path, value) {
-  const keys = path.split('.');
-  let current = obj;
-  for (let i = 0; i < keys.length - 1; i++) {
-    if (!current[keys[i]]) current[keys[i]] = {};
-    current = current[keys[i]];
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored assessment.', e);
   }
-  current[keys[keys.length - 1]] = value;
 }
 
-function escAttr(str) {
-  return (str || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {import('./types.js').GradingResult | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/**
+ * Set a deeply-nested field on the state and persist.
+ * Re-runs derived values (BMI), progress, and conditional visibility after
+ * each change.
+ */
+function setField(section, field, value) {
+  state[section][field] = value;
+  recomputeDerived();
+  saveState(state);
+  updateProgress();
+  updateConditionalSections();
+  refreshAutoCalculatedReadouts();
 }
 
-// Show form immediately (single-page layout)
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('form-container');
-  if (form) form.classList.remove('hidden');
-});
+/** Recompute auto-calculated values that depend on other fields. */
+function recomputeDerived() {
+  state.demographics.bmi = calculateBMI(
+    state.demographics.weight,
+    state.demographics.height
+  );
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Component builders
+// ----------------------------------------------------------------------
+
+function textInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field];
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="text-input"`,
+    `value="${esc(value ?? '')}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+  `;
+
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    let v = input.value;
+    if (type === 'number') {
+      v = v === '' ? null : Number(v);
+    }
+    setField(opts.section, opts.field, v);
+  });
+  return wrapper;
+}
+
+function textArea(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      class="textarea">${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  return wrapper;
+}
+
+function selectInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+
+  const optionsHtml = [
+    `<option value="">— Select —</option>`,
+    ...opts.options.map((o) =>
+      `<option value="${esc(o.value)}"${o.value === current ? ' selected' : ''}>${esc(o.label)}</option>`
+    )
+  ].join('');
+
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}${opts.required ? ' <span class="req" aria-hidden="true">*</span>' : ''}</label>
+    <select id="${id}" name="${id}" class="select-input">
+      ${optionsHtml}
+    </select>
+  `;
+  const sel = wrapper.querySelector('select');
+  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  return wrapper;
+}
+
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.textContent = opts.label + (opts.required ? ' *' : '');
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.className = 'radio-option';
+    label.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, option.value);
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+function readOnlyReadout(opts) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field readout';
+  wrapper.innerHTML = `
+    <label>${esc(opts.label)}</label>
+    <div id="${opts.id}" class="readout-value">${opts.render()}</div>
+  `;
+  return wrapper;
+}
+
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card';
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Section ${opts.stepNumber} of 10</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Repeating-list editors
+// ----------------------------------------------------------------------
+
+const severityOptionsHtml = (current) => `
+  <option value=""${current === '' ? ' selected' : ''}>— Severity —</option>
+  <option value="mild"${current === 'mild' ? ' selected' : ''}>Mild</option>
+  <option value="moderate"${current === 'moderate' ? ' selected' : ''}>Moderate</option>
+  <option value="severe"${current === 'severe' ? ' selected' : ''}>Severe</option>
+  <option value="anaphylaxis"${current === 'anaphylaxis' ? ' selected' : ''}>Anaphylaxis</option>
+`;
+
+/**
+ * Editor for an array of AllergyItem (allergen, reactionType, severity,
+ * timing, alternativesTolerated). Used for both drug and food allergies.
+ */
+function allergyItemEditor(opts) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
+
+  function rerender() {
+    const rows = state[opts.section][opts.field];
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent = opts.emptyLabel || 'None added.';
+      wrapper.appendChild(empty);
+    }
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row allergy-row';
+      r.innerHTML = `
+        <div class="list-grid allergy-grid">
+          <label class="list-cell">
+            <span>Allergen</span>
+            <input type="text" class="text-input" data-key="allergen"
+                   value="${esc(row.allergen)}" placeholder="${esc(opts.allergenPlaceholder || 'e.g. Penicillin')}">
+          </label>
+          <label class="list-cell">
+            <span>Reaction type</span>
+            <input type="text" class="text-input" data-key="reactionType"
+                   value="${esc(row.reactionType)}" placeholder="e.g. Rash, swelling">
+          </label>
+          <label class="list-cell">
+            <span>Severity</span>
+            <select class="select-input" data-key="severity">
+              ${severityOptionsHtml(row.severity || '')}
+            </select>
+          </label>
+          <label class="list-cell">
+            <span>Timing</span>
+            <input type="text" class="text-input" data-key="timing"
+                   value="${esc(row.timing)}" placeholder="e.g. Within 1 hour">
+          </label>
+          <label class="list-cell">
+            <span>Alternatives tolerated</span>
+            <input type="text" class="text-input" data-key="alternativesTolerated"
+                   value="${esc(row.alternativesTolerated)}" placeholder="e.g. Cephalosporins OK">
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove allergy">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input, select').forEach((inp) => {
+        const handler = () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        };
+        inp.addEventListener('input', handler);
+        inp.addEventListener('change', handler);
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = `+ ${opts.addLabel}`;
+    addBtn.addEventListener('click', () => {
+      rows.push({
+        allergen: '',
+        reactionType: '',
+        severity: '',
+        timing: '',
+        alternativesTolerated: ''
+      });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
+}
+
+/** Editor for an array of {trigger, symptoms, treatmentRequired} episode rows. */
+function episodeListEditor() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
+
+  function rerender() {
+    const rows = state.anaphylaxisHistory.episodes;
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent = 'No episodes added.';
+      wrapper.appendChild(empty);
+    }
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row';
+      r.innerHTML = `
+        <div class="list-grid episode-grid">
+          <label class="list-cell">
+            <span>Trigger</span>
+            <input type="text" class="text-input" data-key="trigger"
+                   value="${esc(row.trigger)}" placeholder="e.g. Peanut">
+          </label>
+          <label class="list-cell">
+            <span>Symptoms</span>
+            <input type="text" class="text-input" data-key="symptoms"
+                   value="${esc(row.symptoms)}" placeholder="e.g. Hives, throat swelling">
+          </label>
+          <label class="list-cell">
+            <span>Treatment required</span>
+            <input type="text" class="text-input" data-key="treatmentRequired"
+                   value="${esc(row.treatmentRequired)}" placeholder="e.g. Adrenaline, ED visit">
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove episode">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        });
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = '+ Add episode';
+    addBtn.addEventListener('click', () => {
+      rows.push({ trigger: '', symptoms: '', treatmentRequired: '' });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
+}
+
+/** Editor for an array of {testType, allergen, result} test result rows. */
+function testResultEditor() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
+
+  function rerender() {
+    const rows = state.testingResults.testResults;
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent = 'No test results added.';
+      wrapper.appendChild(empty);
+    }
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row';
+      r.innerHTML = `
+        <div class="list-grid test-grid">
+          <label class="list-cell">
+            <span>Test type</span>
+            <input type="text" class="text-input" data-key="testType"
+                   value="${esc(row.testType)}" placeholder="e.g. Skin prick">
+          </label>
+          <label class="list-cell">
+            <span>Allergen</span>
+            <input type="text" class="text-input" data-key="allergen"
+                   value="${esc(row.allergen)}" placeholder="e.g. Cat dander">
+          </label>
+          <label class="list-cell">
+            <span>Result</span>
+            <input type="text" class="text-input" data-key="result"
+                   value="${esc(row.result)}" placeholder="e.g. 8mm wheal, positive">
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove test result">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        });
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = '+ Add test result';
+    addBtn.addEventListener('click', () => {
+      rows.push({ testType: '', allergen: '', result: '' });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
+}
+
+/** Editor for an array of {name, dose, frequency} medication rows. */
+function medicationListEditor() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
+
+  function rerender() {
+    const rows = state.currentManagement.otherMedications;
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent = 'None added.';
+      wrapper.appendChild(empty);
+    }
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row';
+      r.innerHTML = `
+        <div class="list-grid med-grid">
+          <label class="list-cell">
+            <span>Name</span>
+            <input type="text" class="text-input" data-key="name"
+                   value="${esc(row.name)}" placeholder="e.g. Montelukast">
+          </label>
+          <label class="list-cell">
+            <span>Dose</span>
+            <input type="text" class="text-input" data-key="dose"
+                   value="${esc(row.dose)}" placeholder="e.g. 10mg">
+          </label>
+          <label class="list-cell">
+            <span>Frequency</span>
+            <input type="text" class="text-input" data-key="frequency"
+                   value="${esc(row.frequency)}" placeholder="e.g. once daily">
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove medication">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        });
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = '+ Add medication';
+    addBtn.addEventListener('click', () => {
+      rows.push({ name: '', dose: '', frequency: '' });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
+}
+
+// ----------------------------------------------------------------------
+// Section renderers (10 total)
+// ----------------------------------------------------------------------
+
+const yesNo = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
+];
+
+const severityLevelOptions = [
+  { value: 'mild', label: 'Mild' },
+  { value: 'moderate', label: 'Moderate' },
+  { value: 'severe', label: 'Severe' }
+];
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Demographics',
+    description: 'Basic patient information.'
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'two-col';
+  grid.appendChild(textInput({ label: 'First Name', section: 'demographics', field: 'firstName', required: true }));
+  grid.appendChild(textInput({ label: 'Last Name', section: 'demographics', field: 'lastName', required: true }));
+  card.appendChild(grid);
+
+  const row2 = document.createElement('div');
+  row2.className = 'two-col';
+  row2.appendChild(textInput({
+    label: 'Date of Birth',
+    section: 'demographics', field: 'dateOfBirth',
+    type: 'date', required: true
+  }));
+  row2.appendChild(textInput({
+    label: 'NHS Number',
+    section: 'demographics', field: 'nhsNumber',
+    placeholder: '000 000 0000'
+  }));
+  card.appendChild(row2);
+
+  card.appendChild(radioGroup({
+    label: 'Sex',
+    section: 'demographics', field: 'sex',
+    required: true,
+    options: [
+      { value: 'male', label: 'Male' },
+      { value: 'female', label: 'Female' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+
+  const measurements = document.createElement('div');
+  measurements.className = 'three-col';
+  measurements.appendChild(textInput({
+    label: 'Weight', section: 'demographics', field: 'weight',
+    type: 'number', min: 1, max: 400, step: 0.1, unit: 'kg', required: true
+  }));
+  measurements.appendChild(textInput({
+    label: 'Height', section: 'demographics', field: 'height',
+    type: 'number', min: 50, max: 250, step: 0.1, unit: 'cm', required: true
+  }));
+  measurements.appendChild(readOnlyReadout({
+    label: 'BMI',
+    id: 'bmi-readout',
+    render: () => {
+      const bmi = state.demographics.bmi;
+      if (bmi == null) return '<span class="muted">Auto-calculated</span>';
+      return `<strong>${bmi}</strong> <span class="muted">(${esc(bmiCategory(bmi))})</span>`;
+    }
+  }));
+  card.appendChild(measurements);
+
+  return card;
+}
+
+function renderStep2() {
+  const card = sectionCard({
+    stepNumber: 2,
+    title: 'Allergy History',
+    description: 'Age of onset, known allergens, and family history.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Age of allergy onset',
+    section: 'allergyHistory', field: 'ageOfOnset',
+    type: 'number', min: 0, max: 120, unit: 'years'
+  }));
+
+  card.appendChild(textArea({
+    label: 'Known allergens (list all)',
+    section: 'allergyHistory', field: 'knownAllergens',
+    placeholder: 'e.g. Penicillin, peanuts, pollen, dust mites...',
+    rows: 3
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Family history of atopy (asthma, eczema, hay fever)?',
+    section: 'allergyHistory', field: 'familyHistoryOfAtopy',
+    options: yesNo
+  }));
+  const atopyDetails = document.createElement('div');
+  atopyDetails.dataset.conditional = 'allergyHistory.familyHistoryOfAtopy=yes';
+  atopyDetails.appendChild(textArea({
+    label: 'Atopy details',
+    section: 'allergyHistory', field: 'familyAtopyDetails',
+    placeholder: 'Which family members and conditions?',
+    rows: 2
+  }));
+  card.appendChild(atopyDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Family history of allergy?',
+    section: 'allergyHistory', field: 'familyHistoryOfAllergy',
+    options: yesNo
+  }));
+  const allergyDetails = document.createElement('div');
+  allergyDetails.dataset.conditional = 'allergyHistory.familyHistoryOfAllergy=yes';
+  allergyDetails.appendChild(textArea({
+    label: 'Allergy details',
+    section: 'allergyHistory', field: 'familyAllergyDetails',
+    placeholder: 'Which family members and allergens?',
+    rows: 2
+  }));
+  card.appendChild(allergyDetails);
+
+  return card;
+}
+
+function renderStep3() {
+  const card = sectionCard({
+    stepNumber: 3,
+    title: 'Drug Allergies',
+    description: 'Specific drug allergies, reaction types, severity, and cross-reactivity.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you have any drug allergies?',
+    section: 'drugAllergies', field: 'hasDrugAllergies',
+    options: yesNo
+  }));
+
+  const conditional = document.createElement('div');
+  conditional.dataset.conditional = 'drugAllergies.hasDrugAllergies=yes';
+
+  const header = document.createElement('div');
+  header.className = 'list-section-header';
+  header.innerHTML = '<h3>Drug allergy details</h3>';
+  conditional.appendChild(header);
+
+  conditional.appendChild(allergyItemEditor({
+    section: 'drugAllergies',
+    field: 'drugAllergies',
+    addLabel: 'Add drug allergy',
+    emptyLabel: 'No drug allergies added.',
+    allergenPlaceholder: 'e.g. Penicillin'
+  }));
+
+  conditional.appendChild(textArea({
+    label: 'Cross-reactivity concerns',
+    section: 'drugAllergies', field: 'crossReactivityConcerns',
+    placeholder: 'e.g. Penicillin/cephalosporin cross-reactivity, NSAID class effects...',
+    rows: 2
+  }));
+
+  card.appendChild(conditional);
+  return card;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'Food Allergies',
+    description: 'Specific food allergies, IgE type, and dietary restrictions.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you have any food allergies?',
+    section: 'foodAllergies', field: 'hasFoodAllergies',
+    options: yesNo
+  }));
+
+  const conditional = document.createElement('div');
+  conditional.dataset.conditional = 'foodAllergies.hasFoodAllergies=yes';
+
+  const header = document.createElement('div');
+  header.className = 'list-section-header';
+  header.innerHTML = '<h3>Food allergy details</h3>';
+  conditional.appendChild(header);
+
+  conditional.appendChild(allergyItemEditor({
+    section: 'foodAllergies',
+    field: 'foodAllergies',
+    addLabel: 'Add food allergy',
+    emptyLabel: 'No food allergies added.',
+    allergenPlaceholder: 'e.g. Peanut'
+  }));
+
+  conditional.appendChild(selectInput({
+    label: 'IgE classification',
+    section: 'foodAllergies', field: 'igeType',
+    options: [
+      { value: 'IgE-mediated', label: 'IgE-mediated' },
+      { value: 'non-IgE-mediated', label: 'Non-IgE-mediated' },
+      { value: 'mixed', label: 'Mixed' },
+      { value: 'unknown', label: 'Unknown' }
+    ]
+  }));
+
+  conditional.appendChild(radioGroup({
+    label: 'Oral allergy syndrome?',
+    section: 'foodAllergies', field: 'oralAllergySyndrome',
+    options: yesNo
+  }));
+
+  conditional.appendChild(textArea({
+    label: 'Dietary restrictions',
+    section: 'foodAllergies', field: 'dietaryRestrictions',
+    placeholder: 'Any foods avoided due to allergies...',
+    rows: 2
+  }));
+
+  card.appendChild(conditional);
+  return card;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Environmental Allergies',
+    description: 'Pollen, dust mites, mould, animal dander, latex, and insect stings.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Pollen allergy?',
+    section: 'environmentalAllergies', field: 'pollenAllergy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Dust mite allergy?',
+    section: 'environmentalAllergies', field: 'dustMiteAllergy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Mould allergy?',
+    section: 'environmentalAllergies', field: 'mouldAllergy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Animal dander allergy?',
+    section: 'environmentalAllergies', field: 'animalDanderAllergy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Latex allergy?',
+    section: 'environmentalAllergies', field: 'latexAllergy',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Insect sting allergy?',
+    section: 'environmentalAllergies', field: 'insectStingAllergy',
+    options: yesNo
+  }));
+
+  const stingSeverity = document.createElement('div');
+  stingSeverity.dataset.conditional = 'environmentalAllergies.insectStingAllergy=yes';
+  stingSeverity.appendChild(selectInput({
+    label: 'Insect sting reaction severity',
+    section: 'environmentalAllergies', field: 'insectStingSeverity',
+    required: true,
+    options: [
+      { value: 'mild', label: 'Mild (local reaction)' },
+      { value: 'moderate', label: 'Moderate (large local or mild systemic)' },
+      { value: 'severe', label: 'Severe (systemic reaction)' },
+      { value: 'anaphylaxis', label: 'Anaphylaxis' }
+    ]
+  }));
+  card.appendChild(stingSeverity);
+
+  card.appendChild(selectInput({
+    label: 'Seasonal pattern',
+    section: 'environmentalAllergies', field: 'seasonalPattern',
+    options: [
+      { value: 'perennial', label: 'Perennial (year-round)' },
+      { value: 'spring', label: 'Spring' },
+      { value: 'summer', label: 'Summer' },
+      { value: 'autumn', label: 'Autumn' },
+      { value: 'winter', label: 'Winter' },
+      { value: 'multiple', label: 'Multiple seasons' }
+    ]
+  }));
+
+  card.appendChild(textArea({
+    label: 'Other environmental allergens',
+    section: 'environmentalAllergies', field: 'otherEnvironmentalAllergens',
+    placeholder: 'Any other environmental triggers...',
+    rows: 2
+  }));
+
+  return card;
+}
+
+function renderStep6() {
+  const card = sectionCard({
+    stepNumber: 6,
+    title: 'Anaphylaxis History',
+    description: 'Previous anaphylaxis episodes, triggers, and emergency preparedness.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you have a history of anaphylaxis?',
+    section: 'anaphylaxisHistory', field: 'hasAnaphylaxisHistory',
+    options: yesNo
+  }));
+
+  const conditional = document.createElement('div');
+  conditional.dataset.conditional = 'anaphylaxisHistory.hasAnaphylaxisHistory=yes';
+
+  conditional.appendChild(textInput({
+    label: 'Number of episodes',
+    section: 'anaphylaxisHistory', field: 'numberOfEpisodes',
+    type: 'number', min: 1, max: 100, required: true
+  }));
+
+  const epHeader = document.createElement('div');
+  epHeader.className = 'list-section-header';
+  epHeader.innerHTML = '<h3>Episode details</h3>';
+  conditional.appendChild(epHeader);
+  conditional.appendChild(episodeListEditor());
+
+  conditional.appendChild(radioGroup({
+    label: 'Has an adrenaline auto-injector been prescribed?',
+    section: 'anaphylaxisHistory', field: 'adrenalineAutoInjectorPrescribed',
+    options: yesNo
+  }));
+  conditional.appendChild(radioGroup({
+    label: 'Is an action plan in place?',
+    section: 'anaphylaxisHistory', field: 'actionPlanInPlace',
+    options: yesNo
+  }));
+
+  card.appendChild(conditional);
+  return card;
+}
+
+function renderStep7() {
+  const card = sectionCard({
+    stepNumber: 7,
+    title: 'Testing Results',
+    description: 'Skin prick tests, IgE levels, challenge tests, and patch tests.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Skin prick tests done?',
+    section: 'testingResults', field: 'skinPrickTestsDone',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Specific IgE levels done?',
+    section: 'testingResults', field: 'specificIgEDone',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Component-resolved diagnostics done?',
+    section: 'testingResults', field: 'componentResolvedDiagnosticsDone',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Challenge tests done?',
+    section: 'testingResults', field: 'challengeTestsDone',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Patch tests done?',
+    section: 'testingResults', field: 'patchTestsDone',
+    options: yesNo
+  }));
+
+  const trHeader = document.createElement('div');
+  trHeader.className = 'list-section-header';
+  trHeader.innerHTML = '<h3>Test results</h3>';
+  card.appendChild(trHeader);
+  card.appendChild(testResultEditor());
+
+  return card;
+}
+
+function renderStep8() {
+  const card = sectionCard({
+    stepNumber: 8,
+    title: 'Current Management',
+    description: 'Medications, immunotherapy, biologics, and avoidance strategies.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Taking antihistamines?',
+    section: 'currentManagement', field: 'antihistamines',
+    options: yesNo
+  }));
+  const antihistDetails = document.createElement('div');
+  antihistDetails.dataset.conditional = 'currentManagement.antihistamines=yes';
+  antihistDetails.appendChild(textInput({
+    label: 'Antihistamine details',
+    section: 'currentManagement', field: 'antihistamineDetails',
+    placeholder: 'e.g. Cetirizine 10mg daily'
+  }));
+  card.appendChild(antihistDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Using nasal steroids?',
+    section: 'currentManagement', field: 'nasalSteroids',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Carry adrenaline auto-injector?',
+    section: 'currentManagement', field: 'adrenalineAutoInjector',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Receiving immunotherapy?',
+    section: 'currentManagement', field: 'immunotherapy',
+    options: yesNo
+  }));
+  const immunoDetails = document.createElement('div');
+  immunoDetails.dataset.conditional = 'currentManagement.immunotherapy=yes';
+  immunoDetails.appendChild(textInput({
+    label: 'Immunotherapy details',
+    section: 'currentManagement', field: 'immunotherapyDetails',
+    placeholder: 'e.g. Grass pollen SCIT, started 2024'
+  }));
+  card.appendChild(immunoDetails);
+
+  card.appendChild(radioGroup({
+    label: 'On biologic therapy?',
+    section: 'currentManagement', field: 'biologics',
+    options: yesNo
+  }));
+  const bioDetails = document.createElement('div');
+  bioDetails.dataset.conditional = 'currentManagement.biologics=yes';
+  bioDetails.appendChild(textInput({
+    label: 'Biologic details',
+    section: 'currentManagement', field: 'biologicDetails',
+    placeholder: 'e.g. Omalizumab 300mg monthly'
+  }));
+  card.appendChild(bioDetails);
+
+  card.appendChild(textArea({
+    label: 'Allergen avoidance strategies',
+    section: 'currentManagement', field: 'allergenAvoidanceStrategies',
+    placeholder: 'Describe any allergen avoidance measures in place...',
+    rows: 2
+  }));
+
+  const medHeader = document.createElement('div');
+  medHeader.className = 'list-section-header';
+  medHeader.innerHTML = '<h3>Other medications</h3>';
+  card.appendChild(medHeader);
+  card.appendChild(medicationListEditor());
+
+  return card;
+}
+
+function renderStep9() {
+  const card = sectionCard({
+    stepNumber: 9,
+    title: 'Comorbidities',
+    description: 'Associated conditions: asthma, eczema, rhinitis, and other relevant conditions.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you have asthma?',
+    section: 'comorbidities', field: 'asthma',
+    options: yesNo
+  }));
+  const asthmaSeverity = document.createElement('div');
+  asthmaSeverity.dataset.conditional = 'comorbidities.asthma=yes';
+  asthmaSeverity.appendChild(selectInput({
+    label: 'Asthma severity',
+    section: 'comorbidities', field: 'asthmaSeverity',
+    required: true,
+    options: severityLevelOptions
+  }));
+  card.appendChild(asthmaSeverity);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have eczema (atopic dermatitis)?',
+    section: 'comorbidities', field: 'eczema',
+    options: yesNo
+  }));
+  const eczemaSeverity = document.createElement('div');
+  eczemaSeverity.dataset.conditional = 'comorbidities.eczema=yes';
+  eczemaSeverity.appendChild(selectInput({
+    label: 'Eczema severity',
+    section: 'comorbidities', field: 'eczemaSeverity',
+    required: true,
+    options: severityLevelOptions
+  }));
+  card.appendChild(eczemaSeverity);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have rhinitis (allergic or non-allergic)?',
+    section: 'comorbidities', field: 'rhinitis',
+    options: yesNo
+  }));
+  const rhinitisSeverity = document.createElement('div');
+  rhinitisSeverity.dataset.conditional = 'comorbidities.rhinitis=yes';
+  rhinitisSeverity.appendChild(selectInput({
+    label: 'Rhinitis severity',
+    section: 'comorbidities', field: 'rhinitisSeverity',
+    required: true,
+    options: severityLevelOptions
+  }));
+  card.appendChild(rhinitisSeverity);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have eosinophilic oesophagitis?',
+    section: 'comorbidities', field: 'eosinophilicOesophagitis',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Do you have a mast cell disorder?',
+    section: 'comorbidities', field: 'mastCellDisorders',
+    options: yesNo
+  }));
+  const mastDetails = document.createElement('div');
+  mastDetails.dataset.conditional = 'comorbidities.mastCellDisorders=yes';
+  mastDetails.appendChild(textArea({
+    label: 'Mast cell disorder details',
+    section: 'comorbidities', field: 'mastCellDetails',
+    placeholder: 'Diagnosis, treatment, triggers...',
+    rows: 2
+  }));
+  card.appendChild(mastDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Has your allergy affected your mental health?',
+    section: 'comorbidities', field: 'mentalHealthImpact',
+    options: yesNo
+  }));
+  const mhDetails = document.createElement('div');
+  mhDetails.dataset.conditional = 'comorbidities.mentalHealthImpact=yes';
+  mhDetails.appendChild(textArea({
+    label: 'Mental health impact details',
+    section: 'comorbidities', field: 'mentalHealthDetails',
+    placeholder: 'Anxiety, avoidance behaviours, social impact...',
+    rows: 2
+  }));
+  card.appendChild(mhDetails);
+
+  return card;
+}
+
+function renderStep10() {
+  const card = sectionCard({
+    stepNumber: 10,
+    title: 'Impact & Action Plan',
+    description: 'Quality of life, school/work impact, emergency action plan, and follow-up.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Quality of life score (1 = very poor, 10 = excellent)',
+    section: 'impactActionPlan', field: 'qualityOfLifeScore',
+    type: 'number', min: 1, max: 10, step: 1
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Does your allergy impact school or work?',
+    section: 'impactActionPlan', field: 'schoolWorkImpact',
+    options: yesNo
+  }));
+  const swDetails = document.createElement('div');
+  swDetails.dataset.conditional = 'impactActionPlan.schoolWorkImpact=yes';
+  swDetails.appendChild(textArea({
+    label: 'School/work impact details',
+    section: 'impactActionPlan', field: 'schoolWorkImpactDetails',
+    placeholder: 'Missed days, activity limitations, accommodations needed...',
+    rows: 2
+  }));
+  card.appendChild(swDetails);
+
+  card.appendChild(selectInput({
+    label: 'Emergency action plan status',
+    section: 'impactActionPlan', field: 'emergencyActionPlanStatus',
+    options: [
+      { value: 'in-place', label: 'In place' },
+      { value: 'not-in-place', label: 'Not in place' },
+      { value: 'needs-update', label: 'Needs update' }
+    ]
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Has training been provided on allergy management?',
+    section: 'impactActionPlan', field: 'trainingProvided',
+    options: yesNo
+  }));
+  const trDetails = document.createElement('div');
+  trDetails.dataset.conditional = 'impactActionPlan.trainingProvided=yes';
+  trDetails.appendChild(textInput({
+    label: 'Training details',
+    section: 'impactActionPlan', field: 'trainingDetails',
+    placeholder: 'e.g. EpiPen training, first aid course'
+  }));
+  card.appendChild(trDetails);
+
+  card.appendChild(textInput({
+    label: 'Follow-up schedule',
+    section: 'impactActionPlan', field: 'followUpSchedule',
+    placeholder: 'e.g. Annual allergy review, 6-monthly IgE monitoring'
+  }));
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Conditional sections + auto-calculated readouts
+// ----------------------------------------------------------------------
+
+function updateConditionalSections() {
+  document.querySelectorAll('[data-conditional]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional');
+    const [path, target] = expr.split('=');
+    const [section, field] = path.split('.');
+    const current = state[section]?.[field];
+    host.style.display = String(current) === target ? '' : 'none';
+  });
+}
+
+function refreshAutoCalculatedReadouts() {
+  const bmi = document.getElementById('bmi-readout');
+  if (bmi) {
+    const v = state.demographics.bmi;
+    bmi.innerHTML = v == null
+      ? '<span class="muted">Auto-calculated</span>'
+      : `<strong>${v}</strong> <span class="muted">(${esc(bmiCategory(v))})</span>`;
+  }
+}
+
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
+
+const TRACKED_FIELDS = [
+  // Demographics
+  ['demographics', 'firstName'],
+  ['demographics', 'lastName'],
+  ['demographics', 'dateOfBirth'],
+  ['demographics', 'sex'],
+  ['demographics', 'weight'],
+  ['demographics', 'height'],
+  // Allergy history
+  ['allergyHistory', 'ageOfOnset'],
+  ['allergyHistory', 'knownAllergens'],
+  ['allergyHistory', 'familyHistoryOfAtopy'],
+  ['allergyHistory', 'familyHistoryOfAllergy'],
+  // Drug allergies
+  ['drugAllergies', 'hasDrugAllergies'],
+  // Food allergies
+  ['foodAllergies', 'hasFoodAllergies'],
+  // Environmental allergies
+  ['environmentalAllergies', 'pollenAllergy'],
+  ['environmentalAllergies', 'dustMiteAllergy'],
+  ['environmentalAllergies', 'mouldAllergy'],
+  ['environmentalAllergies', 'animalDanderAllergy'],
+  ['environmentalAllergies', 'latexAllergy'],
+  ['environmentalAllergies', 'insectStingAllergy'],
+  ['environmentalAllergies', 'seasonalPattern'],
+  // Anaphylaxis history
+  ['anaphylaxisHistory', 'hasAnaphylaxisHistory'],
+  // Testing results
+  ['testingResults', 'skinPrickTestsDone'],
+  ['testingResults', 'specificIgEDone'],
+  ['testingResults', 'componentResolvedDiagnosticsDone'],
+  ['testingResults', 'challengeTestsDone'],
+  ['testingResults', 'patchTestsDone'],
+  // Current management
+  ['currentManagement', 'antihistamines'],
+  ['currentManagement', 'nasalSteroids'],
+  ['currentManagement', 'adrenalineAutoInjector'],
+  ['currentManagement', 'immunotherapy'],
+  ['currentManagement', 'biologics'],
+  // Comorbidities
+  ['comorbidities', 'asthma'],
+  ['comorbidities', 'eczema'],
+  ['comorbidities', 'rhinitis'],
+  ['comorbidities', 'eosinophilicOesophagitis'],
+  ['comorbidities', 'mastCellDisorders'],
+  ['comorbidities', 'mentalHealthImpact'],
+  // Impact & action plan
+  ['impactActionPlan', 'qualityOfLifeScore'],
+  ['impactActionPlan', 'schoolWorkImpact'],
+  ['impactActionPlan', 'emergencyActionPlanStatus'],
+  ['impactActionPlan', 'trainingProvided'],
+  ['impactActionPlan', 'followUpSchedule']
+];
+
+function updateProgress() {
+  let answered = 0;
+  for (const [section, field] of TRACKED_FIELDS) {
+    const v = state[section][field];
+    if (v !== null && v !== undefined && v !== '') answered++;
+  }
+  const total = TRACKED_FIELDS.length;
+  const percent = Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+}
+
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'urgent': return 'flag-urgent';
+    case 'high': return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low': return 'flag-low';
+    default: return '';
+  }
+}
+
+function renderReport() {
+  if (!lastResult) return;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { severityLevel, allergyBurdenScore, firedRules, additionalFlags, timestamp } = lastResult;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags raised.</p>`
+    : `
+      <ul class="flags">
+        ${additionalFlags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(f.priority.toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  const firedRows = firedRules.map((r) => `
+    <tr>
+      <th scope="row">${esc(r.id)}</th>
+      <td>${esc(r.category)}</td>
+      <td>${esc(r.description)}</td>
+      <td class="severity-cell ${esc(severityClass(r.severityLevel))}">${esc(r.severityLevel)}</td>
+    </tr>
+  `).join('');
+
+  const firedTable = firedRules.length === 0
+    ? `<p class="muted">No severity rules fired — only mild localised reactions or no allergic conditions reported.</p>`
+    : `
+      <table class="subscales">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Severity</th>
+          </tr>
+        </thead>
+        <tbody>${firedRows}</tbody>
+      </table>
+    `;
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>Allergy Assessment Report</h2>
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <h3>Overall Severity</h3>
+      <p class="severity-summary">
+        <span class="severity-badge ${esc(severityClass(severityLevel))}">${esc(severityLevel || 'mild')}</span>
+        <span class="burden-score">Allergy burden score: ${allergyBurdenScore}</span>
+      </p>
+      <p class="muted">${esc(severityLabel(severityLevel))}</p>
+
+      <h3>Fired severity rules</h3>
+      ${firedTable}
+
+      <h3>Flagged Issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('start-over-btn').addEventListener('click', startOver);
+}
+
+function submitForm() {
+  recomputeDerived();
+  const { severityLevel, firedRules } = calculateAllergySeverity(state);
+  const allergyBurdenScore = calculateAllergyBurdenScore(state);
+  const additionalFlags = detectAdditionalFlags(state);
+  lastResult = {
+    severityLevel,
+    allergyBurdenScore,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Clear all answers and start a fresh assessment?')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  document.getElementById('report').innerHTML = '';
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+  refreshAutoCalculatedReadouts();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  host.innerHTML = '';
+  host.appendChild(renderStep1());
+  host.appendChild(renderStep2());
+  host.appendChild(renderStep3());
+  host.appendChild(renderStep4());
+  host.appendChild(renderStep5());
+  host.appendChild(renderStep6());
+  host.appendChild(renderStep7());
+  host.appendChild(renderStep8());
+  host.appendChild(renderStep9());
+  host.appendChild(renderStep10());
+}
+
+function init() {
+  recomputeDerived();
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+  refreshAutoCalculatedReadouts();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();

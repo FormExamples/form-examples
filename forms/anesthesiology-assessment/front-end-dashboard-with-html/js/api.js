@@ -8,7 +8,8 @@
 
 (function () {
 'use strict';
-window.AllergyAssessmentDashboard = window.AllergyAssessmentDashboard || {};
+window.AnesthesiologyAssessmentDashboard =
+  window.AnesthesiologyAssessmentDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +35,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.AllergyAssessmentDashboard.fetchPatients = fetchPatients;
-window.AllergyAssessmentDashboard.API_BASE = API_BASE;
+window.AnesthesiologyAssessmentDashboard.fetchPatients = fetchPatients;
+window.AnesthesiologyAssessmentDashboard.API_BASE = API_BASE;
 })();
