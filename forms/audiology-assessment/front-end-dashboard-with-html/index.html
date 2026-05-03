@@ -4,16 +4,150 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Audiology Assessment — clinician dashboard</title>
+  <meta name="description" content="Audiology Assessment clinician dashboard: review patient submissions with hearing grade, affected ear, hearing loss type, tinnitus flag, and hearing aid status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Audiology Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Patient list with hearing assessment grade, affected ear,
+        hearing loss type, tinnitus flag, and hearing aid status.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Audiology Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Audiology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-grade">Hearing Grade</label>
+          <select id="filter-grade" class="select-input">
+            <option value="">All grades</option>
+            <option value="normal">Normal</option>
+            <option value="mild">Mild</option>
+            <option value="moderate">Moderate</option>
+            <option value="severe">Severe</option>
+            <option value="profound">Profound</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-tinnitus">Tinnitus</label>
+          <select id="filter-tinnitus" class="select-input">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-aid-status">Aid Status</label>
+          <select id="filter-aid-status" class="select-input">
+            <option value="">All statuses</option>
+            <option value="None">None</option>
+            <option value="Candidate">Candidate</option>
+            <option value="Fitted">Fitted</option>
+            <option value="Cochlear implant candidate">Cochlear implant candidate</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Audiology assessment uses a multi-level hearing-grade scale derived
+        from pure tone average (dB HL): Normal, Mild, Moderate, Moderately
+        Severe, Severe, Profound. This dashboard is a clinical-review tool
+        and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AudiologyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
