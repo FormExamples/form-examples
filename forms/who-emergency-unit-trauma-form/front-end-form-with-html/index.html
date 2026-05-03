@@ -3,17 +3,99 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Who Emergency Unit Trauma Form — patient questionnaire</title>
+  <title>WHO Emergency Unit Form: Trauma — patient questionnaire</title>
+  <meta name="description" content="World Health Organization standardised emergency unit clinical documentation form for trauma patients.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>WHO Emergency Unit Form: Trauma</h1>
+      <p class="subtitle">Structured clinical documentation for emergency unit trauma encounters. Seventeen sections cover registration, primary survey (ABCDE + FAST), injury history, physical exam, diagnostics, medications/procedures, reassessment and disposition.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 of 0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Who Emergency Unit Trauma Form</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Who Emergency Unit Trauma Form form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This single-page wizard captures one emergency unit trauma encounter
+        end-to-end: from patient registration and triage through the ABCDE +
+        FAST primary survey, injury history, physical exam, diagnostics,
+        medications and procedures, reassessment, and final disposition.
+      </p>
+      <p>
+        Your answers are saved automatically in your browser as you go.
+        Conditional sections (time of death when dead-on-arrival; spine
+        stabilization and GCS for RED triage; mechanism details when
+        road-traffic; admit ward / transfer destination / cause of death by
+        disposition) only appear when the answers above them require them.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections"></div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        WHO Emergency Unit Form: Trauma — unofficial digital companion
+        based on the World Health Organization standardised emergency
+        unit clinical documentation form for trauma patients. The
+        published WHO PDF remains the authoritative source.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.WhoEmergencyUnitTraumaForm`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/eu-trauma-rules.js"></script>
+  <script src="js/eu-trauma-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
