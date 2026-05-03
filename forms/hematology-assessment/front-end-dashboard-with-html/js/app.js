@@ -1,22 +1,21 @@
-// Renal Assessment - clinician dashboard (vanilla classic-script app).
+// Hematology Assessment - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + GFR-category dropdown + albuminuria dropdown +
-// composite-risk dropdown).
+// (search box + abnormality-level dropdown + score-range dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.RenalAssessmentDashboard`. Pulling them
-// off here keeps the rest of this file referring to short local names. The
-// whole file is wrapped in an IIFE so its top-level identifiers do not leak
-// to the global scope.
+// attach their exports to `window.HematologyAssessmentDashboard`. Pulling
+// them off here keeps the rest of this file referring to short local names.
+// The whole file is wrapped in an IIFE so its top-level identifiers do not
+// leak to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.RenalAssessmentDashboard;
+} = window.HematologyAssessmentDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -27,53 +26,49 @@ let patients = [];
 
 const filters = {
   search: '',
-  gfr: '',
-  albuminuria: '',
-  risk: ''
+  level: '',
+  score: '' // '', '0', '1-20', '21-50', '51-75', '76-100'
 };
 
-// Default sort: eGFR ascending. Worst kidney function = lowest eGFR = top
-// of the list, surfacing the patients who most need clinical attention.
+// Default sort: specimen date descending. Most recent specimens float to the
+// top — matches the SvelteKit dashboard's `sort-rows` init call.
 const sortState = {
-  key: 'egfr',
-  direction: 'asc' // 'asc' | 'desc'
+  key: 'specimenDate',
+  direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',           label: 'NHS Number' },
-  { key: 'patientName',         label: 'Patient Name' },
-  { key: 'egfr',                label: 'eGFR' },
-  { key: 'gfrCategory',         label: 'GFR Category' },
-  { key: 'albuminuriaCategory', label: 'Albuminuria' },
-  { key: 'compositeRisk',       label: 'Composite Risk' }
+  { key: 'patientName',        label: 'Patient Name' },
+  { key: 'mrn',                label: 'MRN' },
+  { key: 'specimenDate',       label: 'Specimen Date' },
+  { key: 'referringPhysician', label: 'Physician' },
+  { key: 'abnormalityLevel',   label: 'Level' },
+  { key: 'abnormalityScore',   label: 'Score' },
+  { key: 'diagnosis',          label: 'Diagnosis' },
+  { key: 'flagCount',          label: 'Flags' }
 ];
 
-// Rank used when sorting the gfrCategory column so 'G1' < 'G5' regardless
-// of locale or string ordering ('G3a' vs 'G3b' would otherwise be brittle).
-const gfrRank = {
-  'G1': 0,
-  'G2': 1,
-  'G3a': 2,
-  'G3b': 3,
-  'G4': 4,
-  'G5': 5
+// Rank used when sorting the abnormalityLevel column so 'normal' is always
+// less than 'critical' regardless of locale.
+const levelRank = {
+  'normal': 0,
+  'mildAbnormality': 1,
+  'moderateAbnormality': 2,
+  'severeAbnormality': 3,
+  'critical': 4,
+  'draft': -1
 };
 
-// Rank used when sorting the albuminuriaCategory column.
-const albuminuriaRank = {
-  'A1': 0,
-  'A2': 1,
-  'A3': 2
-};
-
-// Rank used when sorting the compositeRisk column.
-const riskRank = {
-  'Low': 0,
-  'Moderate': 1,
-  'High': 2,
-  'Very High': 3
+// Human-readable labels for the abnormalityLevel column.
+const levelLabels = {
+  'normal': 'Normal',
+  'mildAbnormality': 'Mild',
+  'moderateAbnormality': 'Moderate',
+  'severeAbnormality': 'Severe',
+  'critical': 'Critical',
+  'draft': 'Draft'
 };
 
 // ----------------------------------------------------------------------
@@ -90,28 +85,36 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-function gfrClass(label) {
-  if (!label) return '';
-  return 'gfr-' + String(label).toLowerCase();
+function levelLabel(level) {
+  return levelLabels[level] || level || 'Unknown';
 }
 
-function albuminuriaClass(label) {
-  if (!label) return '';
-  return 'albuminuria-' + String(label).toLowerCase();
-}
-
-function riskClass(label) {
-  if (!label) return '';
-  return 'risk-' + String(label).toLowerCase().replace(/\s+/g, '-');
+function levelClass(level) {
+  if (!level) return '';
+  return 'level-' + level;
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.gfr !== '' ||
-    filters.albuminuria !== '' ||
-    filters.risk !== ''
+    filters.level !== '' ||
+    filters.score !== ''
   );
+}
+
+/**
+ * Test a numeric score against a score-range filter value.
+ * Mirrors `scoreInRange` in the SvelteKit dashboard.
+ */
+function scoreInRange(score, range) {
+  switch (range) {
+    case '0':      return score === 0;
+    case '1-20':   return score >= 1  && score <= 20;
+    case '21-50':  return score >= 21 && score <= 50;
+    case '51-75':  return score >= 51 && score <= 75;
+    case '76-100': return score >= 76 && score <= 100;
+    default:       return true;
+  }
 }
 
 // ----------------------------------------------------------------------
@@ -126,17 +129,16 @@ function matchesFilters(row) {
   if (filters.search) {
     const term = filters.search.toLowerCase();
     const matches =
-      row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term);
+      row.patientName.toLowerCase().includes(term) ||
+      row.mrn.toLowerCase().includes(term) ||
+      row.referringPhysician.toLowerCase().includes(term) ||
+      (row.diagnosis || '').toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.gfr && row.gfrCategory !== filters.gfr) {
+  if (filters.level && row.abnormalityLevel !== filters.level) {
     return false;
   }
-  if (filters.albuminuria && row.albuminuriaCategory !== filters.albuminuria) {
-    return false;
-  }
-  if (filters.risk && row.compositeRisk !== filters.risk) {
+  if (filters.score && !scoreInRange(row.abnormalityScore, filters.score)) {
     return false;
   }
   return true;
@@ -153,29 +155,18 @@ function compareRows(a, b) {
   let av = a[key];
   let bv = b[key];
 
-  if (key === 'gfrCategory') {
-    av = gfrRank[av] ?? -1;
-    bv = gfrRank[bv] ?? -1;
+  if (key === 'abnormalityLevel') {
+    av = levelRank[av] ?? -1;
+    bv = levelRank[bv] ?? -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'albuminuriaCategory') {
-    av = albuminuriaRank[av] ?? -1;
-    bv = albuminuriaRank[bv] ?? -1;
-    return (av - bv) * dir;
-  }
-
-  if (key === 'compositeRisk') {
-    av = riskRank[av] ?? -1;
-    bv = riskRank[bv] ?? -1;
-    return (av - bv) * dir;
-  }
-
-  if (key === 'egfr') {
+  if (key === 'abnormalityScore' || key === 'flagCount') {
     return ((av ?? 0) - (bv ?? 0)) * dir;
   }
 
-  // Default: string compare (nhsNumber, patientName)
+  // Default: string compare (patientName, mrn, specimenDate ISO,
+  // referringPhysician, diagnosis). ISO dates compare correctly as strings.
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -239,17 +230,21 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.compositeRisk === 'Very High') {
-      tr.classList.add('row-very-high-risk');
+    if (row.abnormalityLevel === 'critical') {
+      tr.classList.add('row-critical');
     }
 
+    const flagClass = row.flagCount > 0 ? 'flag-nonzero' : 'flag-zero';
+
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="egfr-value">${esc(row.egfr)}</span></td>
-      <td><span class="gfr-badge ${gfrClass(row.gfrCategory)}">${esc(row.gfrCategory)}</span></td>
-      <td><span class="albuminuria-badge ${albuminuriaClass(row.albuminuriaCategory)}">${esc(row.albuminuriaCategory)}</span></td>
-      <td><span class="risk-badge ${riskClass(row.compositeRisk)}">${esc(row.compositeRisk)}</span></td>
+      <td>${esc(row.mrn)}</td>
+      <td>${esc(row.specimenDate)}</td>
+      <td>${esc(row.referringPhysician)}</td>
+      <td><span class="level-badge ${levelClass(row.abnormalityLevel)}">${esc(levelLabel(row.abnormalityLevel))}</span></td>
+      <td><span class="score-value">${esc(row.abnormalityScore)}%</span></td>
+      <td class="cell-diagnosis">${esc(row.diagnosis)}</td>
+      <td><span class="flag-badge ${flagClass}">${esc(row.flagCount)}</span></td>
     `;
     body.appendChild(tr);
   }
@@ -305,9 +300,8 @@ function onSortClick(key) {
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const gfr = document.getElementById('filter-gfr');
-  const albuminuria = document.getElementById('filter-albuminuria');
-  const risk = document.getElementById('filter-risk');
+  const level = document.getElementById('filter-level');
+  const score = document.getElementById('filter-score');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -316,34 +310,26 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (gfr) {
-    gfr.addEventListener('change', () => {
-      filters.gfr = gfr.value;
+  if (level) {
+    level.addEventListener('change', () => {
+      filters.level = level.value;
       renderAll();
     });
   }
-  if (albuminuria) {
-    albuminuria.addEventListener('change', () => {
-      filters.albuminuria = albuminuria.value;
-      renderAll();
-    });
-  }
-  if (risk) {
-    risk.addEventListener('change', () => {
-      filters.risk = risk.value;
+  if (score) {
+    score.addEventListener('change', () => {
+      filters.score = score.value;
       renderAll();
     });
   }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.gfr = '';
-      filters.albuminuria = '';
-      filters.risk = '';
+      filters.level = '';
+      filters.score = '';
       if (search) search.value = '';
-      if (gfr) gfr.value = '';
-      if (albuminuria) albuminuria.value = '';
-      if (risk) risk.value = '';
+      if (level) level.value = '';
+      if (score) score.value = '';
       renderAll();
     });
   }

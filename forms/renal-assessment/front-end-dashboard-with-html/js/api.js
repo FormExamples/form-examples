@@ -8,7 +8,7 @@
 
 (function () {
 'use strict';
-window.HematologyAssessmentDashboard = window.HematologyAssessmentDashboard || {};
+window.RenalAssessmentDashboard = window.RenalAssessmentDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +34,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.HematologyAssessmentDashboard.fetchPatients = fetchPatients;
-window.HematologyAssessmentDashboard.API_BASE = API_BASE;
+window.RenalAssessmentDashboard.fetchPatients = fetchPatients;
+window.RenalAssessmentDashboard.API_BASE = API_BASE;
 })();
