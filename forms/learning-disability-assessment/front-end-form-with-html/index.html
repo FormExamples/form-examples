@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Learning Disability Assessment — patient questionnaire</title>
+  <meta name="description" content="NHS England annual health check and adaptive-functioning assessment for people with a learning disability.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Learning Disability Assessment</h1>
+      <p class="subtitle">NHS England Annual Health Check &amp; adaptive functioning review.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Learning Disability Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Learning Disability Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This questionnaire supports the annual health check for a person with
+        a learning disability. It can be completed by the person, a family
+        member, a paid carer, or a clinician working alongside them. Answers
+        are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If the person you are completing this for needs urgent medical
+        attention, call your local emergency number now. This form is not a
+        substitute for clinical care.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Carer & Support, 3 Communication, 4 Medical, -->
+        <!-- 5 Physical Examination, 6 Adaptive Functioning, -->
+        <!-- 7 Behavioural Concerns, 8 Capacity & Consent, -->
+        <!-- 9 Reasonable Adjustments, 10 Health Action Plan -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Severity categories are aligned with DSM-5-TR and ICD-11. This tool
+        is for information only and does not constitute a diagnosis;
+        clinical judgement is required to confirm severity, capacity, and
+        any reasonable adjustments.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.LearningDisabilityAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/ld-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
