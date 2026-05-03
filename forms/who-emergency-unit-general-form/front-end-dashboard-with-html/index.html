@@ -3,17 +3,161 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Who Emergency Unit General Form — clinician dashboard</title>
+  <title>WHO Emergency Unit Form: General — clinician dashboard</title>
+  <meta name="description" content="WHO Emergency Unit Form (General) clinician dashboard: review non-trauma emergency encounters with arrival mode, AVPU, high-risk signs, and disposition.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>WHO Emergency Unit Form: General — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Non-trauma emergency encounters with arrival mode, AVPU level,
+        high-risk signs, and disposition outcomes.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Who Emergency Unit General Form</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Who Emergency Unit General Form form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient name or chief complaint..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-arrival">Arrival mode</label>
+          <select id="filter-arrival" class="select-input">
+            <option value="">All arrival modes</option>
+            <option value="walking">Walking</option>
+            <option value="wheelchair">Wheelchair</option>
+            <option value="stretcher">Stretcher</option>
+            <option value="ambulance">Ambulance</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-avpu">AVPU level</label>
+          <select id="filter-avpu" class="select-input">
+            <option value="">All AVPU levels</option>
+            <option value="A">A &mdash; Alert</option>
+            <option value="V">V &mdash; Verbal</option>
+            <option value="P">P &mdash; Pain</option>
+            <option value="U">U &mdash; Unresponsive</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-high-risk">High-risk signs</label>
+          <select id="filter-high-risk" class="select-input">
+            <option value="all">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-disposition">Disposition</label>
+          <select id="filter-disposition" class="select-input">
+            <option value="">All dispositions</option>
+            <option value="admit">Admit</option>
+            <option value="transfer">Transfer</option>
+            <option value="discharge">Discharge</option>
+            <option value="died">Died</option>
+            <option value="lwbs">LWBS</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        WHO Emergency Unit Form (General) is a World Health Organization
+        standardised clinical documentation form. This dashboard is a
+        clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.WhoEmergencyUnitGeneralDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
