@@ -4,16 +4,148 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Gynecology Assessment — clinician dashboard</title>
+  <meta name="description" content="Gynecology Assessment clinician dashboard: review patient submissions with symptom severity score, primary concern, menopausal status, and cervical screening status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Gynecology Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Patient list with gynaecological assessment status: symptom severity
+        score, primary concern, menopausal status, and cervical screening.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Gynecology Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Gynecology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or concern..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-score">Symptom Score</label>
+          <select id="filter-score" class="select-input">
+            <option value="">All scores</option>
+            <option value="0-5">Minimal (0-5)</option>
+            <option value="6-10">Mild (6-10)</option>
+            <option value="11-20">Moderate (11-20)</option>
+            <option value="21-30">Severe (21-30)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-menopausal">Menopausal Status</label>
+          <select id="filter-menopausal" class="select-input">
+            <option value="">All statuses</option>
+            <option value="Pre-menopausal">Pre-menopausal</option>
+            <option value="Peri-menopausal">Peri-menopausal</option>
+            <option value="Post-menopausal">Post-menopausal</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-screening">Screening</label>
+          <select id="filter-screening" class="select-input">
+            <option value="">All screening</option>
+            <option value="Up to date">Up to date</option>
+            <option value="Overdue">Overdue</option>
+            <option value="Abnormal result">Abnormal result</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Gynecology Assessment captures menstrual history, cervical screening,
+        obstetric history, and sexual health. This dashboard is a
+        clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GynecologyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
