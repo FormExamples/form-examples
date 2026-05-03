@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mental Health Assessment — patient questionnaire</title>
+  <meta name="description" content="PHQ-9 depression screen, GAD-7 anxiety screen, AUDIT-C alcohol use, and structured mental-health risk and history self-report.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Mental Health Assessment</h1>
+      <p class="subtitle">PHQ-9 depression + GAD-7 anxiety screens with risk and history.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Mental Health Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Mental Health Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about how you have been feeling
+        over the past 2 weeks. The first two scoring sections are the
+        validated PHQ-9 depression screen and the GAD-7 anxiety screen.
+        All answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If you are in immediate danger or having thoughts of harming
+        yourself or others, please call your local emergency number
+        (999 / 911) or go to your nearest emergency department now.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 PHQ-9 Depression, 3 GAD-7 Anxiety, -->
+        <!-- 4 Mood & Affect, 5 Risk Assessment, 6 Substance Use, -->
+        <!-- 7 Current Medications, 8 Treatment History, 9 Social & Functional -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The PHQ-9 (Patient Health Questionnaire-9) and GAD-7 (Generalised
+        Anxiety Disorder-7) are validated self-report screening tools for
+        depression and anxiety. The AUDIT-C is a validated alcohol use
+        screen. These instruments are for information only and are not a
+        diagnosis; please discuss your results with your clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MentalHealthAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/mh-rules.js"></script>
+  <script src="js/mh-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

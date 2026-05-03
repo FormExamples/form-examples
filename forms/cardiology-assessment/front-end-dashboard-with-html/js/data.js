@@ -1,0 +1,138 @@
+// Sample patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every CCS class, NYHA class, and risk band,
+// with allergy and anticoagulant comorbidities flagged for a subset; NHS
+// numbers in the canonical "NNN NNN NNNN" display form.
+
+(function () {
+'use strict';
+window.CardiologyAssessmentDashboard = window.CardiologyAssessmentDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    nhsNumber: '943 476 5919',
+    patientName: 'Smith, John',
+    ccsClass: null,
+    nyhaClass: null,
+    riskLevel: 'low',
+    allergyFlag: false,
+    anticoagulantFlag: false
+  },
+  {
+    id: '2',
+    nhsNumber: '721 938 4102',
+    patientName: 'Patel, Priya',
+    ccsClass: 2,
+    nyhaClass: null,
+    riskLevel: 'moderate',
+    allergyFlag: true,
+    anticoagulantFlag: false
+  },
+  {
+    id: '3',
+    nhsNumber: '384 615 7230',
+    patientName: 'Jones, Margaret',
+    ccsClass: 3,
+    nyhaClass: 3,
+    riskLevel: 'high',
+    allergyFlag: false,
+    anticoagulantFlag: true
+  },
+  {
+    id: '4',
+    nhsNumber: '512 847 9063',
+    patientName: 'Williams, David',
+    ccsClass: 1,
+    nyhaClass: null,
+    riskLevel: 'low',
+    allergyFlag: false,
+    anticoagulantFlag: false
+  },
+  {
+    id: '5',
+    nhsNumber: '167 293 8451',
+    patientName: 'Brown, Sarah',
+    ccsClass: 4,
+    nyhaClass: 4,
+    riskLevel: 'critical',
+    allergyFlag: true,
+    anticoagulantFlag: true
+  },
+  {
+    id: '6',
+    nhsNumber: '835 162 4097',
+    patientName: 'Taylor, James',
+    ccsClass: null,
+    nyhaClass: 1,
+    riskLevel: 'low',
+    allergyFlag: false,
+    anticoagulantFlag: false
+  },
+  {
+    id: '7',
+    nhsNumber: '294 708 5316',
+    patientName: 'Davies, Helen',
+    ccsClass: 2,
+    nyhaClass: 2,
+    riskLevel: 'moderate',
+    allergyFlag: true,
+    anticoagulantFlag: false
+  },
+  {
+    id: '8',
+    nhsNumber: '608 341 2975',
+    patientName: 'Wilson, Robert',
+    ccsClass: null,
+    nyhaClass: 2,
+    riskLevel: 'moderate',
+    allergyFlag: false,
+    anticoagulantFlag: true
+  },
+  {
+    id: '9',
+    nhsNumber: '473 926 1084',
+    patientName: 'Evans, Catherine',
+    ccsClass: 3,
+    nyhaClass: null,
+    riskLevel: 'high',
+    allergyFlag: false,
+    anticoagulantFlag: false
+  },
+  {
+    id: '10',
+    nhsNumber: '742 051 3896',
+    patientName: 'Robinson, Emma',
+    ccsClass: 1,
+    nyhaClass: 1,
+    riskLevel: 'low',
+    allergyFlag: true,
+    anticoagulantFlag: false
+  },
+  {
+    id: '11',
+    nhsNumber: '386 219 5740',
+    patientName: 'Clark, George',
+    ccsClass: 4,
+    nyhaClass: 3,
+    riskLevel: 'critical',
+    allergyFlag: false,
+    anticoagulantFlag: true
+  },
+  {
+    id: '12',
+    nhsNumber: '618 305 9247',
+    patientName: 'Hall, Richard',
+    ccsClass: 3,
+    nyhaClass: 2,
+    riskLevel: 'high',
+    allergyFlag: true,
+    anticoagulantFlag: true
+  }
+];
+
+window.CardiologyAssessmentDashboard.samplePatients = samplePatients;
+})();
