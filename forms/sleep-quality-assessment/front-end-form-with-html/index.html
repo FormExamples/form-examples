@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sleep Quality Assessment — patient questionnaire</title>
+  <meta name="description" content="Pittsburgh Sleep Quality Index (PSQI) questionnaire for assessing sleep quality over the past month.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Sleep Quality Assessment</h1>
+      <p class="subtitle">Pittsburgh Sleep Quality Index (PSQI) plus structured sleep history.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Sleep Quality Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Sleep Quality Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your sleep over the past
+        month. The scoring instrument is the validated Pittsburgh Sleep
+        Quality Index (PSQI), which produces a total score of 0–21 across
+        seven components. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        If you experience drowsiness while driving, gasping or stopping
+        breathing during sleep, or extreme daytime fatigue, please discuss
+        these symptoms with a clinician promptly.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Sleep Habits, 3 Sleep Latency, 4 Sleep Duration, -->
+        <!-- 5 Sleep Efficiency, 6 Sleep Disturbances, 7 Daytime Dysfunction, -->
+        <!-- 8 Sleep Medication Use, 9 Medical & Lifestyle Factors -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Pittsburgh Sleep Quality Index (PSQI) is a validated 19-item
+        questionnaire that assesses sleep quality and disturbances over the
+        past month. This screening tool is for information only and is not
+        a diagnosis; please discuss your results with your clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SleepQualityAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/psqi-rules.js"></script>
+  <script src="js/psqi-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
