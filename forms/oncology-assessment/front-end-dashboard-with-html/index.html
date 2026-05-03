@@ -4,16 +4,163 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Oncology Assessment — clinician dashboard</title>
+  <meta name="description" content="ECOG (Eastern Cooperative Oncology Group) Performance Status clinician dashboard: review patient submissions with ECOG status, cancer type, stage, and treatment status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Oncology Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Patient list with ECOG performance status, cancer type, disease
+        stage, and current treatment status.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Oncology Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Oncology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or cancer type..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-ecog">ECOG Status</label>
+          <select id="filter-ecog" class="select-input">
+            <option value="">All ECOG grades</option>
+            <option value="0">ECOG 0</option>
+            <option value="1">ECOG 1</option>
+            <option value="2">ECOG 2</option>
+            <option value="3">ECOG 3</option>
+            <option value="4">ECOG 4</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-cancer-type">Cancer Type</label>
+          <select id="filter-cancer-type" class="select-input">
+            <option value="">All cancer types</option>
+            <option value="Breast">Breast</option>
+            <option value="Lung">Lung</option>
+            <option value="Colorectal">Colorectal</option>
+            <option value="Prostate">Prostate</option>
+            <option value="Melanoma">Melanoma</option>
+            <option value="Lymphoma">Lymphoma</option>
+            <option value="Pancreatic">Pancreatic</option>
+            <option value="Ovarian">Ovarian</option>
+            <option value="Brain">Brain</option>
+            <option value="Renal">Renal</option>
+            <option value="Gastric">Gastric</option>
+            <option value="Thyroid">Thyroid</option>
+            <option value="Cervical">Cervical</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-treatment">Treatment Status</label>
+          <select id="filter-treatment" class="select-input">
+            <option value="">All statuses</option>
+            <option value="On Treatment">On Treatment</option>
+            <option value="Complete Response">Complete Response</option>
+            <option value="Partial Response">Partial Response</option>
+            <option value="Stable Disease">Stable Disease</option>
+            <option value="Progressive Disease">Progressive Disease</option>
+            <option value="Palliative Care">Palliative Care</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        ECOG (Eastern Cooperative Oncology Group) Performance Status is a
+        validated instrument for assessing functional status in cancer
+        patients. This dashboard is a clinical-review tool and is not a
+        diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OncologyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
