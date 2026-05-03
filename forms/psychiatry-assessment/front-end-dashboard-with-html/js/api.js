@@ -8,7 +8,7 @@
 
 (function () {
 'use strict';
-window.ErgonomicAssessmentDashboard = window.ErgonomicAssessmentDashboard || {};
+window.PsychiatryAssessmentDashboard = window.PsychiatryAssessmentDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +34,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.ErgonomicAssessmentDashboard.fetchPatients = fetchPatients;
-window.ErgonomicAssessmentDashboard.API_BASE = API_BASE;
+window.PsychiatryAssessmentDashboard.fetchPatients = fetchPatients;
+window.PsychiatryAssessmentDashboard.API_BASE = API_BASE;
 })();

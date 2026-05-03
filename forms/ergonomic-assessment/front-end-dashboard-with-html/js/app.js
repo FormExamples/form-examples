@@ -1,24 +1,21 @@
-// Psychiatry Assessment - clinician dashboard (vanilla classic-script app).
+// Ergonomic Assessment - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + GAF-band dropdown + risk-level dropdown + legal-status
-// dropdown). Rows whose riskLevel is 'imminent' (active suicidal ideation
-// with plan/intent) are visually emphasised so a clinician scanning the
-// list cannot miss them.
+// (search box + risk-level dropdown + occupation dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.PsychiatryAssessmentDashboard`. Pulling
-// them off here keeps the rest of this file referring to short local names.
-// The whole file is wrapped in an IIFE so its top-level identifiers do not
-// leak to the global scope.
+// attach their exports to `window.ErgonomicAssessmentDashboard`. Pulling
+// them off here keeps the rest of this file referring to short local
+// names. The whole file is wrapped in an IIFE so its top-level
+// identifiers do not leak to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.PsychiatryAssessmentDashboard;
+} = window.ErgonomicAssessmentDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -29,43 +26,37 @@ let patients = [];
 
 const filters = {
   search: '',
-  gaf: '',    // '' or 'NN-MM' band
-  risk: '',   // '' | 'none' | 'low' | 'moderate' | 'high' | 'imminent'
-  legal: ''   // '' | 'voluntary' | 'involuntary'
+  risk: '',
+  occupation: ''
 };
 
-// Default sort: patient name ascending. Matches the SvelteKit dashboard's
-// `init` callback (`sort-rows { key: 'patientName', order: 'asc' }`).
+// Default sort: REBA score descending. Highest risk = highest score = top
+// of the list, surfacing the patients who most need clinical attention.
 const sortState = {
-  key: 'patientName',
-  direction: 'asc' // 'asc' | 'desc'
+  key: 'rebaScore',
+  direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',        label: 'NHS Number' },
-  { key: 'patientName',      label: 'Patient Name' },
-  { key: 'gafScore',         label: 'GAF Score' },
-  { key: 'riskLevel',        label: 'Risk Level' },
-  { key: 'legalStatus',      label: 'Legal Status' },
-  { key: 'primaryDiagnosis', label: 'Primary Diagnosis' }
+  { key: 'nhsNumber',    label: 'NHS Number' },
+  { key: 'patientName',  label: 'Patient Name' },
+  { key: 'rebaScore',    label: 'REBA Score' },
+  { key: 'riskLevel',    label: 'Risk Level' },
+  { key: 'occupation',   label: 'Occupation' },
+  { key: 'painSeverity', label: 'Pain' },
+  { key: 'keyFinding',   label: 'Key Finding' }
 ];
 
-// Rank used when sorting the riskLevel column so 'none' is always less than
-// 'imminent' regardless of locale.
+// Rank used when sorting the riskLevel column so 'Negligible' is always
+// less than 'Very high' regardless of locale.
 const riskRank = {
-  none: 0,
-  low: 1,
-  moderate: 2,
-  high: 3,
-  imminent: 4
-};
-
-// Rank used when sorting legalStatus.
-const legalRank = {
-  voluntary: 0,
-  involuntary: 1
+  'Negligible risk': 0,
+  'Low risk': 1,
+  'Medium risk': 2,
+  'High risk': 3,
+  'Very high risk': 4
 };
 
 // ----------------------------------------------------------------------
@@ -82,51 +73,23 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-/** Capitalise the first letter of a lowercase enum label for display. */
-function titleCase(s) {
-  if (!s) return '';
-  return s.charAt(0).toUpperCase() + s.slice(1);
+function riskClass(label) {
+  if (!label) return '';
+  return 'risk-' + String(label).toLowerCase().replace(/\s+/g, '-');
 }
 
-function riskClass(value) {
-  if (!value) return '';
-  return 'risk-' + String(value).toLowerCase();
-}
-
-function legalClass(value) {
-  if (!value) return '';
-  return 'legal-' + String(value).toLowerCase();
-}
-
-/**
- * GAF band classifier. Returns a CSS-class suffix matching the colour bands
- * declared in style.css.
- */
-function gafClass(score) {
-  if (score >= 91) return 'gaf-superior';
-  if (score >= 81) return 'gaf-minimal';
-  if (score >= 71) return 'gaf-transient';
-  if (score >= 61) return 'gaf-mild';
-  if (score >= 51) return 'gaf-moderate';
-  if (score >= 41) return 'gaf-serious';
-  if (score >= 31) return 'gaf-major';
-  return 'gaf-severe';
-}
-
-/** Test whether a numeric score falls inside an "NN-MM" filter range. */
-function gafInRange(score, range) {
-  if (!range) return true;
-  const parts = range.split('-').map(Number);
-  if (parts.length !== 2 || parts.some(isNaN)) return true;
-  return score >= parts[0] && score <= parts[1];
+function painFillClass(value) {
+  const n = Number(value) || 0;
+  if (n >= 7) return 'pain-high';
+  if (n >= 4) return 'pain-mid';
+  return '';
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.gaf !== '' ||
     filters.risk !== '' ||
-    filters.legal !== ''
+    filters.occupation !== ''
   );
 }
 
@@ -144,16 +107,14 @@ function matchesFilters(row) {
     const matches =
       row.nhsNumber.toLowerCase().includes(term) ||
       row.patientName.toLowerCase().includes(term) ||
-      row.primaryDiagnosis.toLowerCase().includes(term);
+      String(row.occupation || '').toLowerCase().includes(term) ||
+      String(row.keyFinding || '').toLowerCase().includes(term);
     if (!matches) return false;
-  }
-  if (filters.gaf && !gafInRange(row.gafScore, filters.gaf)) {
-    return false;
   }
   if (filters.risk && row.riskLevel !== filters.risk) {
     return false;
   }
-  if (filters.legal && row.legalStatus !== filters.legal) {
+  if (filters.occupation && row.occupation !== filters.occupation) {
     return false;
   }
   return true;
@@ -161,7 +122,7 @@ function matchesFilters(row) {
 
 /**
  * Compare two rows for the active sort column. Categorical columns use
- * their rank tables; numbers compare directly; everything else uses a
+ * their rank table; numbers compare directly; everything else uses a
  * locale-aware string compare.
  */
 function compareRows(a, b) {
@@ -176,17 +137,11 @@ function compareRows(a, b) {
     return (av - bv) * dir;
   }
 
-  if (key === 'legalStatus') {
-    av = legalRank[av] ?? -1;
-    bv = legalRank[bv] ?? -1;
-    return (av - bv) * dir;
-  }
-
-  if (key === 'gafScore') {
+  if (key === 'rebaScore' || key === 'painSeverity') {
     return ((av ?? 0) - (bv ?? 0)) * dir;
   }
 
-  // Default: string compare (nhsNumber, patientName, primaryDiagnosis)
+  // Default: string compare (nhsNumber, patientName, occupation, keyFinding)
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -250,21 +205,27 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    // Suicidal-ideation visual emphasis. The GAF risk model treats
-    // 'imminent' as active suicidal ideation with plan or intent — the
-    // single most clinically urgent row state, so the entire row gets a
-    // contrasting background plus a left-edge indicator (see CSS).
-    if (row.riskLevel === 'imminent') {
-      tr.classList.add('row-suicidal-ideation');
+    if (row.riskLevel === 'Very high risk') {
+      tr.classList.add('row-very-high-risk');
     }
+
+    const painPct = Math.max(0, Math.min(10, Number(row.painSeverity) || 0)) * 10;
 
     tr.innerHTML = `
       <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="gaf-score ${gafClass(row.gafScore)}">${esc(row.gafScore)}/100</span></td>
-      <td><span class="risk-badge ${riskClass(row.riskLevel)}">${esc(titleCase(row.riskLevel))}</span></td>
-      <td><span class="legal-badge ${legalClass(row.legalStatus)}">${esc(titleCase(row.legalStatus))}</span></td>
-      <td>${esc(row.primaryDiagnosis)}</td>
+      <td><span class="reba-score">REBA ${esc(row.rebaScore)}</span></td>
+      <td><span class="risk-badge ${riskClass(row.riskLevel)}">${esc(row.riskLevel)}</span></td>
+      <td>${esc(row.occupation)}</td>
+      <td>
+        <span class="pain-cell">
+          <span>${esc(row.painSeverity)}/10</span>
+          <span class="pain-bar" aria-hidden="true">
+            <span class="pain-bar-fill ${painFillClass(row.painSeverity)}" style="width: ${painPct}%;"></span>
+          </span>
+        </span>
+      </td>
+      <td class="cell-finding">${esc(row.keyFinding)}</td>
     `;
     body.appendChild(tr);
   }
@@ -290,6 +251,37 @@ function renderClearButton() {
   btn.hidden = !hasActiveFilters();
 }
 
+/**
+ * Populate the occupation <select> from the unique occupations present in
+ * the current patient list. Preserves the user's current selection if it
+ * still exists; otherwise resets to "All occupations".
+ */
+function renderOccupationOptions() {
+  const select = document.getElementById('filter-occupation');
+  if (!select) return;
+  const previous = filters.occupation;
+
+  const occupations = Array.from(
+    new Set(patients.map((p) => p.occupation).filter(Boolean))
+  ).sort((a, b) => a.localeCompare(b));
+
+  // Keep the leading "All occupations" placeholder, replace the rest.
+  select.innerHTML = '<option value="">All occupations</option>';
+  for (const occ of occupations) {
+    const opt = document.createElement('option');
+    opt.value = occ;
+    opt.textContent = occ;
+    select.appendChild(opt);
+  }
+
+  if (previous && occupations.includes(previous)) {
+    select.value = previous;
+  } else {
+    select.value = '';
+    filters.occupation = '';
+  }
+}
+
 function renderAll() {
   renderTableHead();
   renderTableBody();
@@ -313,27 +305,22 @@ function onSortClick(key) {
     sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
   } else {
     sortState.key = key;
-    sortState.direction = 'asc';
+    // Sensible default direction: numbers descending (worst first), text ascending.
+    sortState.direction =
+      key === 'rebaScore' || key === 'painSeverity' ? 'desc' : 'asc';
   }
   renderAll();
 }
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const gaf = document.getElementById('filter-gaf');
   const risk = document.getElementById('filter-risk');
-  const legal = document.getElementById('filter-legal');
+  const occupation = document.getElementById('filter-occupation');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
     search.addEventListener('input', () => {
       filters.search = search.value;
-      renderAll();
-    });
-  }
-  if (gaf) {
-    gaf.addEventListener('change', () => {
-      filters.gaf = gaf.value;
       renderAll();
     });
   }
@@ -343,22 +330,20 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (legal) {
-    legal.addEventListener('change', () => {
-      filters.legal = legal.value;
+  if (occupation) {
+    occupation.addEventListener('change', () => {
+      filters.occupation = occupation.value;
       renderAll();
     });
   }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.gaf = '';
       filters.risk = '';
-      filters.legal = '';
+      filters.occupation = '';
       if (search) search.value = '';
-      if (gaf) gaf.value = '';
       if (risk) risk.value = '';
-      if (legal) legal.value = '';
+      if (occupation) occupation.value = '';
       renderAll();
     });
   }
@@ -372,6 +357,7 @@ async function loadPatients() {
   // Optimistic: show sample data immediately so the page is never blank,
   // then try the backend and replace if we get real data back.
   patients = samplePatients;
+  renderOccupationOptions();
   renderAll();
 
   try {
@@ -393,6 +379,7 @@ async function loadPatients() {
     );
   }
 
+  renderOccupationOptions();
   renderAll();
 }
 
