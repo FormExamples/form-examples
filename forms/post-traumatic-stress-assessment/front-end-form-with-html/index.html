@@ -3,17 +3,103 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Post Traumatic Stress Assessment — patient questionnaire</title>
+  <title>Post-Traumatic Stress Assessment — patient questionnaire</title>
+  <meta name="description" content="PCL-5 (PTSD Checklist for DSM-5) self-report screen for adults exposed to a traumatic event.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Post-Traumatic Stress Assessment</h1>
+      <p class="subtitle">PCL-5 (PTSD Checklist for DSM-5) — 20-item self-report.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Post Traumatic Stress Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Post Traumatic Stress Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Below are 20 problems that people sometimes have in response to a very
+        stressful experience. Please read each one carefully, then choose how
+        much you have been bothered by that problem <em>in the past month</em>.
+        All answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If at any point you feel unsafe, are having thoughts of harming
+        yourself, or are in crisis, please call your local emergency number,
+        a trusted clinician, or a 24-hour crisis helpline immediately.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Trauma Event Identification, -->
+        <!-- 3 Cluster B Intrusion, 4 Cluster C Avoidance, -->
+        <!-- 5 Cluster D Negative Alterations, 6 Cluster E Arousal & Reactivity -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The PCL-5 is a 20-item self-report measure of the DSM-5 symptoms of
+        PTSD. It is provided as an unauthenticated screen for information
+        only and is not a diagnosis; please discuss your results with a
+        qualified clinician. A structured clinical interview such as the
+        CAPS-5 is required to confirm a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PostTraumaticStressAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/pcl5-rules.js"></script>
+  <script src="js/pcl5-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -4,16 +4,162 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Substance Abuse Assessment — clinician dashboard</title>
+  <meta name="description" content="AUDIT (Alcohol Use Disorders Identification Test) and DAST-10 (Drug Abuse Screening Test) clinician dashboard: review patient submissions with AUDIT score, AUDIT category, DAST-10 score, DAST-10 category, and combined severity flag.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Substance Abuse Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        AUDIT (Alcohol Use Disorders Identification Test) and DAST-10
+        (Drug Abuse Screening Test) patient list with combined severity
+        and withdrawal risk flag.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Substance Abuse Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Substance Abuse Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-audit">AUDIT Category</label>
+          <select id="filter-audit" class="select-input">
+            <option value="">All AUDIT categories</option>
+            <option value="Low Risk">Low Risk</option>
+            <option value="Hazardous">Hazardous</option>
+            <option value="Harmful">Harmful</option>
+            <option value="Dependence Likely">Dependence Likely</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-dast">DAST-10 Category</label>
+          <select id="filter-dast" class="select-input">
+            <option value="">All DAST-10 categories</option>
+            <option value="No Problems">No Problems</option>
+            <option value="Low Level">Low Level</option>
+            <option value="Moderate Level">Moderate Level</option>
+            <option value="Substantial Level">Substantial Level</option>
+            <option value="Severe Level">Severe Level</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-severity">Combined Severity</label>
+          <select id="filter-severity" class="select-input">
+            <option value="">All severities</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-withdrawal">Withdrawal Risk</label>
+          <select id="filter-withdrawal" class="select-input">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        AUDIT (Alcohol Use Disorders Identification Test) and DAST-10
+        (Drug Abuse Screening Test) are validated screening instruments
+        for substance use disorders. This dashboard is a clinical-review
+        tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SubstanceAbuseAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
