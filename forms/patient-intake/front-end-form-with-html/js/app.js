@@ -1,240 +1,1165 @@
-import { createDefaultAssessment } from './data-model.js';
-import { calculateRiskLevel } from './intake-grader.js';
-import { detectAdditionalFlags } from './flagged-issues.js';
-import { riskLevelLabel, riskLevelColor } from './utils.js';
-import { TOTAL_STEPS, steps } from './steps.js';
+// Patient Intake - patient wizard (vanilla JavaScript, no build).
+//
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. The user scrolls through them; a sticky top-of-page
+// progress summary reflects how many fields have been answered. Submission
+// runs the pure intake grader and renders an inline report. State is
+// persisted to localStorage so a partial fill survives a page reload.
+//
+// Sibling files loaded as plain `<script>` tags (in order) attach their
+// exports to `window.PatientIntake`. Pulling them off here keeps the rest
+// of this file referring to short local names. Whole file is wrapped in
+// an IIFE so its top-level identifiers don't leak to the global scope.
+(function () {
+'use strict';
 
-let data = createDefaultAssessment();
+const NS = window.PatientIntake;
+const {
+  emptyAssessment,
+  riskLevelLabel,
+  riskLevelClass,
+  calculateRiskLevel,
+  detectAdditionalFlags
+} = NS;
 
-// ─── Navigation ────────────────────────────────────────
-window.submitForm = function () {
-  collectAllFields();
-  const { riskLevel, firedRules } = calculateRiskLevel(data);
-  const additionalFlags = detectAdditionalFlags(data);
-  const result = { riskLevel, firedRules, additionalFlags, timestamp: new Date().toISOString() };
-  sessionStorage.setItem('intakeData', JSON.stringify(data));
-  sessionStorage.setItem('intakeResult', JSON.stringify(result));
-  window.location.href = 'report.html';
-};
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
 
-// ─── Data binding: populate form from data ─────────────
-function populateStep(step) {
-  const section = document.getElementById('step-' + step);
-  if (!section) return;
+const STORAGE_KEY = 'patient-intake.front-end-form-with-html.v1';
 
-  // Text/select/textarea fields
-  document.querySelectorAll('[data-field]').forEach(el => {
-    const path = el.getAttribute('data-field');
-    const val = getNestedValue(data, path);
-    if (el.type === 'radio') {
-      el.checked = (el.value === val);
-    } else if (el.type === 'number') {
-      el.value = val !== null && val !== undefined ? val : '';
-    } else {
-      el.value = val || '';
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    // Merge over a fresh empty so any newly-added fields default correctly.
+    const fresh = emptyAssessment();
+    for (const key of Object.keys(fresh)) {
+      const val = parsed && parsed[key];
+      if (Array.isArray(fresh[key])) {
+        if (Array.isArray(val)) fresh[key] = val;
+      } else if (val && typeof val === 'object') {
+        fresh[key] = { ...fresh[key], ...val };
+      }
     }
-  });
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved intake; starting fresh.', e);
+    return emptyAssessment();
+  }
+}
 
-  // Chronic conditions checkboxes
-  if (step === 4) {
-    const container = document.getElementById('chronic-conditions');
-    container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.checked = data.medicalHistory.chronicConditions.includes(cb.value);
-      cb.parentElement.classList.toggle('checked', cb.checked);
+/** @param {import('./types.js').AssessmentData} state */
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save intake to localStorage.', e);
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored intake.', e);
+  }
+}
+
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {import('./types.js').GradingResult | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/**
+ * Set a deeply-nested field on the state and persist.
+ * @param {string} section
+ * @param {string} field
+ * @param {*} value
+ */
+function setField(section, field, value) {
+  state[section][field] = value;
+  saveState(state);
+  updateProgress();
+  updateConditionalSections();
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Component builders
+// ----------------------------------------------------------------------
+
+/**
+ * Build a labelled text input.
+ * @param {{ label: string, section: string, field: string, type?: string,
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number, unit?: string }} opts
+ */
+function textInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field];
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="text-input"`,
+    `value="${esc(value ?? '')}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+  `;
+
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    let v = input.value;
+    if (type === 'number') {
+      v = v === '' ? null : Number(v);
+    }
+    setField(opts.section, opts.field, v);
+  });
+  return wrapper;
+}
+
+/**
+ * Build a labelled multi-line text area.
+ * @param {{ label: string, section: string, field: string, rows?: number,
+ *           placeholder?: string, required?: boolean }} opts
+ */
+function textArea(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field] ?? '';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      class="textarea">${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  return wrapper;
+}
+
+/**
+ * Build a select / dropdown input.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[],
+ *           required?: boolean }} opts
+ */
+function selectInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field] ?? '';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+
+  const optionsHtml = [
+    `<option value="">— Select —</option>`,
+    ...opts.options.map((o) =>
+      `<option value="${esc(o.value)}"${o.value === current ? ' selected' : ''}>${esc(o.label)}</option>`
+    )
+  ].join('');
+
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <select id="${id}" name="${id}" class="select-input">
+      ${optionsHtml}
+    </select>
+  `;
+  const sel = wrapper.querySelector('select');
+  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  return wrapper;
+}
+
+/**
+ * Build a radio group.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[],
+ *           required?: boolean }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.innerHTML = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.className = 'radio-option';
+    label.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, option.value);
     });
+    list.appendChild(label);
   }
-
-  // Dynamic lists
-  if (step === 5) renderMedications();
-  if (step === 6) renderAllergies();
+  wrapper.appendChild(list);
+  return wrapper;
 }
 
-// ─── Data binding: collect form into data ──────────────
-function collectAllFields() {
-  document.querySelectorAll('[data-field]').forEach(el => {
-    const path = el.getAttribute('data-field');
-    if (el.type === 'radio') {
-      if (el.checked) setNestedValue(data, path, el.value);
-    } else if (el.getAttribute('data-type') === 'number') {
-      setNestedValue(data, path, el.value === '' ? null : parseFloat(el.value));
-    } else {
-      setNestedValue(data, path, el.value);
-    }
-  });
+/**
+ * Build a checkbox group bound to an array of selected string values.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function checkboxGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field checkbox-group';
+  const legend = document.createElement('legend');
+  legend.textContent = opts.label;
+  wrapper.appendChild(legend);
 
-  // Chronic conditions
-  {
-    const checked = [];
-    document.querySelectorAll('#chronic-conditions input[type="checkbox"]:checked').forEach(cb => {
-      checked.push(cb.value);
+  const list = document.createElement('div');
+  list.className = 'checkbox-options';
+
+  for (const option of opts.options) {
+    const cbId = `${groupId}-${option.value}`;
+    const arr = state[opts.section][opts.field];
+    const checked = Array.isArray(arr) && arr.includes(option.value) ? ' checked' : '';
+    const label = document.createElement('label');
+    label.className = 'checkbox-option';
+    label.htmlFor = cbId;
+    label.innerHTML = `
+      <input type="checkbox" id="${cbId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      const cur = state[opts.section][opts.field];
+      if (input.checked) {
+        if (!cur.includes(option.value)) cur.push(option.value);
+      } else {
+        const i = cur.indexOf(option.value);
+        if (i >= 0) cur.splice(i, 1);
+      }
+      saveState(state);
+      updateProgress();
     });
-    data.medicalHistory.chronicConditions = checked;
+    list.appendChild(label);
   }
-
-  // Medications
-  collectMedications();
-  // Allergies
-  collectAllergies();
+  wrapper.appendChild(list);
+  return wrapper;
 }
 
-// ─── Medications dynamic list ──────────────────────────
-function renderMedications() {
-  const list = document.getElementById('medications-list');
-  list.innerHTML = '';
-  data.medications.forEach((med, i) => {
-    list.appendChild(createMedicationRow(i, med));
-  });
+/**
+ * Build a section card.
+ * @param {{ stepNumber: number, title: string, description?: string }} opts
+ */
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card';
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Section ${opts.stepNumber} of 10</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
 }
 
-function createMedicationRow(index, med) {
-  const div = document.createElement('div');
-  div.className = 'dynamic-list-item';
-  div.innerHTML = '<button class="remove-btn" onclick="removeMedication(' + index + ')">&times;</button>' +
-    '<div class="form-row-4">' +
-    '<div class="form-group"><label>Name</label><input type="text" class="med-name" value="' + escHtml(med.name) + '"></div>' +
-    '<div class="form-group"><label>Dose</label><input type="text" class="med-dose" value="' + escHtml(med.dose) + '"></div>' +
-    '<div class="form-group"><label>Frequency</label><input type="text" class="med-frequency" value="' + escHtml(med.frequency) + '"></div>' +
-    '<div class="form-group"><label>Prescriber</label><input type="text" class="med-prescriber" value="' + escHtml(med.prescriber) + '"></div>' +
-    '</div>';
-  return div;
-}
+// ----------------------------------------------------------------------
+// Repeating-list editors (medications, allergies)
+// ----------------------------------------------------------------------
 
-window.addMedication = function () {
-  collectMedications();
-  data.medications.push({ name: '', dose: '', frequency: '', prescriber: '' });
-  renderMedications();
-};
+/** Editor for the array of {name, dose, frequency, prescriber} medications. */
+function medicationListEditor() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
 
-window.removeMedication = function (i) {
-  collectMedications();
-  data.medications.splice(i, 1);
-  renderMedications();
-};
-
-function collectMedications() {
-  const items = document.querySelectorAll('#medications-list .dynamic-list-item');
-  data.medications = [];
-  items.forEach(item => {
-    const name = item.querySelector('.med-name').value;
-    const dose = item.querySelector('.med-dose').value;
-    const frequency = item.querySelector('.med-frequency').value;
-    const prescriber = item.querySelector('.med-prescriber').value;
-    if (name || dose || frequency || prescriber) {
-      data.medications.push({ name, dose, frequency, prescriber });
+  function rerender() {
+    const rows = state.medications;
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent =
+        'No medications added. Click the button below to add one, or skip if you take none.';
+      wrapper.appendChild(empty);
     }
-  });
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row med-row';
+      r.innerHTML = `
+        <div class="list-grid med-grid">
+          <label class="list-cell">
+            <span>Name</span>
+            <input type="text" class="text-input" data-key="name" value="${esc(row.name)}" placeholder="e.g. Atorvastatin">
+          </label>
+          <label class="list-cell">
+            <span>Dose</span>
+            <input type="text" class="text-input" data-key="dose" value="${esc(row.dose)}" placeholder="e.g. 20 mg">
+          </label>
+          <label class="list-cell">
+            <span>Frequency</span>
+            <input type="text" class="text-input" data-key="frequency" value="${esc(row.frequency)}" placeholder="e.g. once daily">
+          </label>
+          <label class="list-cell">
+            <span>Prescriber</span>
+            <input type="text" class="text-input" data-key="prescriber" value="${esc(row.prescriber)}" placeholder="e.g. GP">
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove medication">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        });
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = '+ Add medication';
+    addBtn.addEventListener('click', () => {
+      rows.push({ name: '', dose: '', frequency: '', prescriber: '' });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
 }
 
-// ─── Allergies dynamic list ────────────────────────────
-function renderAllergies() {
-  const list = document.getElementById('allergies-list');
-  list.innerHTML = '';
-  data.allergies.forEach((allergy, i) => {
-    list.appendChild(createAllergyRow(i, allergy));
-  });
-}
+/** Editor for the array of {allergen, allergyType, reaction, severity} allergies. */
+function allergyListEditor() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'list-editor';
 
-function createAllergyRow(index, allergy) {
-  const div = document.createElement('div');
-  div.className = 'dynamic-list-item';
-  div.innerHTML = '<button class="remove-btn" onclick="removeAllergy(' + index + ')">&times;</button>' +
-    '<div class="form-row-4">' +
-    '<div class="form-group"><label>Allergen</label><input type="text" class="allergy-allergen" value="' + escHtml(allergy.allergen) + '"></div>' +
-    '<div class="form-group"><label>Type</label><select class="allergy-type">' +
-      '<option value="">-- Select --</option>' +
-      '<option value="drug"' + (allergy.allergyType === 'drug' ? ' selected' : '') + '>Drug</option>' +
-      '<option value="food"' + (allergy.allergyType === 'food' ? ' selected' : '') + '>Food</option>' +
-      '<option value="environmental"' + (allergy.allergyType === 'environmental' ? ' selected' : '') + '>Environmental</option>' +
-      '<option value="latex"' + (allergy.allergyType === 'latex' ? ' selected' : '') + '>Latex</option>' +
-      '<option value="other"' + (allergy.allergyType === 'other' ? ' selected' : '') + '>Other</option>' +
-    '</select></div>' +
-    '<div class="form-group"><label>Reaction</label><input type="text" class="allergy-reaction" value="' + escHtml(allergy.reaction) + '"></div>' +
-    '<div class="form-group"><label>Severity</label><select class="allergy-severity">' +
-      '<option value="">-- Select --</option>' +
-      '<option value="mild"' + (allergy.severity === 'mild' ? ' selected' : '') + '>Mild</option>' +
-      '<option value="moderate"' + (allergy.severity === 'moderate' ? ' selected' : '') + '>Moderate</option>' +
-      '<option value="anaphylaxis"' + (allergy.severity === 'anaphylaxis' ? ' selected' : '') + '>Anaphylaxis</option>' +
-    '</select></div>' +
-    '</div>';
-  return div;
-}
-
-window.addAllergy = function () {
-  collectAllergies();
-  data.allergies.push({ allergen: '', allergyType: '', reaction: '', severity: '' });
-  renderAllergies();
-};
-
-window.removeAllergy = function (i) {
-  collectAllergies();
-  data.allergies.splice(i, 1);
-  renderAllergies();
-};
-
-function collectAllergies() {
-  const items = document.querySelectorAll('#allergies-list .dynamic-list-item');
-  data.allergies = [];
-  items.forEach(item => {
-    const allergen = item.querySelector('.allergy-allergen').value;
-    const allergyType = item.querySelector('.allergy-type').value;
-    const reaction = item.querySelector('.allergy-reaction').value;
-    const severity = item.querySelector('.allergy-severity').value;
-    if (allergen || allergyType || reaction || severity) {
-      data.allergies.push({ allergen, allergyType, reaction, severity });
+  function rerender() {
+    const rows = state.allergies;
+    wrapper.innerHTML = '';
+    if (!rows.length) {
+      const empty = document.createElement('p');
+      empty.className = 'list-empty';
+      empty.textContent =
+        'No allergies added. Click the button below to add one, or skip if you have none.';
+      wrapper.appendChild(empty);
     }
+    rows.forEach((row, idx) => {
+      const r = document.createElement('div');
+      r.className = 'list-row allergy-row';
+      r.innerHTML = `
+        <div class="list-grid allergy-grid">
+          <label class="list-cell">
+            <span>Allergen</span>
+            <input type="text" class="text-input" data-key="allergen" value="${esc(row.allergen)}" placeholder="e.g. Penicillin">
+          </label>
+          <label class="list-cell">
+            <span>Type</span>
+            <select class="select-input" data-key="allergyType">
+              <option value="">— Select —</option>
+              <option value="drug"${row.allergyType === 'drug' ? ' selected' : ''}>Drug</option>
+              <option value="food"${row.allergyType === 'food' ? ' selected' : ''}>Food</option>
+              <option value="environmental"${row.allergyType === 'environmental' ? ' selected' : ''}>Environmental</option>
+              <option value="latex"${row.allergyType === 'latex' ? ' selected' : ''}>Latex</option>
+              <option value="other"${row.allergyType === 'other' ? ' selected' : ''}>Other</option>
+            </select>
+          </label>
+          <label class="list-cell">
+            <span>Reaction</span>
+            <input type="text" class="text-input" data-key="reaction" value="${esc(row.reaction)}" placeholder="e.g. Rash, swelling">
+          </label>
+          <label class="list-cell">
+            <span>Severity</span>
+            <select class="select-input" data-key="severity">
+              <option value="">— Select —</option>
+              <option value="mild"${row.severity === 'mild' ? ' selected' : ''}>Mild</option>
+              <option value="moderate"${row.severity === 'moderate' ? ' selected' : ''}>Moderate</option>
+              <option value="anaphylaxis"${row.severity === 'anaphylaxis' ? ' selected' : ''}>Anaphylaxis</option>
+            </select>
+          </label>
+          <button type="button" class="btn btn-icon" aria-label="Remove allergy">&times;</button>
+        </div>
+      `;
+      r.querySelectorAll('input, select').forEach((inp) => {
+        const handler = () => {
+          rows[idx][inp.dataset.key] = inp.value;
+          saveState(state);
+          updateProgress();
+        };
+        inp.addEventListener('input', handler);
+        inp.addEventListener('change', handler);
+      });
+      r.querySelector('button').addEventListener('click', () => {
+        rows.splice(idx, 1);
+        saveState(state);
+        rerender();
+        updateProgress();
+      });
+      wrapper.appendChild(r);
+    });
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-add';
+    addBtn.textContent = '+ Add allergy';
+    addBtn.addEventListener('click', () => {
+      rows.push({ allergen: '', allergyType: '', reaction: '', severity: '' });
+      saveState(state);
+      rerender();
+      updateProgress();
+    });
+    wrapper.appendChild(addBtn);
+  }
+
+  rerender();
+  return wrapper;
+}
+
+// ----------------------------------------------------------------------
+// Section renderers (1 per intake step)
+// ----------------------------------------------------------------------
+
+const yesNo = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
+];
+
+function subsectionHeader(title) {
+  const h = document.createElement('div');
+  h.className = 'subsection-header';
+  h.innerHTML = `<h3>${esc(title)}</h3>`;
+  return h;
+}
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Personal Information',
+    description: 'Please provide your basic personal details.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Full Name', section: 'personalInformation', field: 'fullName', required: true
+  }));
+
+  card.appendChild(textInput({
+    label: 'Date of Birth', section: 'personalInformation', field: 'dateOfBirth',
+    type: 'date', required: true
+  }));
+  card.appendChild(radioGroup({
+    label: 'Sex',
+    section: 'personalInformation', field: 'sex', required: true,
+    options: [
+      { value: 'male', label: 'Male' },
+      { value: 'female', label: 'Female' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+
+  card.appendChild(textInput({
+    label: 'Address Line 1', section: 'personalInformation', field: 'addressLine1', required: true
+  }));
+  card.appendChild(textInput({
+    label: 'Address Line 2', section: 'personalInformation', field: 'addressLine2'
+  }));
+
+  const cityPost = document.createElement('div');
+  cityPost.className = 'two-col';
+  cityPost.appendChild(textInput({
+    label: 'City', section: 'personalInformation', field: 'city', required: true
+  }));
+  cityPost.appendChild(textInput({
+    label: 'Postcode', section: 'personalInformation', field: 'postcode', required: true
+  }));
+  card.appendChild(cityPost);
+
+  const phoneEmail = document.createElement('div');
+  phoneEmail.className = 'two-col';
+  phoneEmail.appendChild(textInput({
+    label: 'Phone Number', section: 'personalInformation', field: 'phone', required: true
+  }));
+  phoneEmail.appendChild(textInput({
+    label: 'Email', section: 'personalInformation', field: 'email', type: 'email'
+  }));
+  card.appendChild(phoneEmail);
+
+  card.appendChild(subsectionHeader('Emergency Contact'));
+  card.appendChild(textInput({
+    label: 'Contact Name', section: 'personalInformation', field: 'emergencyContactName', required: true
+  }));
+  const ecGrid = document.createElement('div');
+  ecGrid.className = 'two-col';
+  ecGrid.appendChild(textInput({
+    label: 'Contact Phone', section: 'personalInformation', field: 'emergencyContactPhone', required: true
+  }));
+  ecGrid.appendChild(textInput({
+    label: 'Relationship', section: 'personalInformation', field: 'emergencyContactRelationship'
+  }));
+  card.appendChild(ecGrid);
+
+  return card;
+}
+
+function renderStep2() {
+  const card = sectionCard({
+    stepNumber: 2,
+    title: 'Insurance & ID',
+    description: 'Insurance and identification details.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Insurance Provider', section: 'insuranceAndId', field: 'insuranceProvider'
+  }));
+  card.appendChild(textInput({
+    label: 'Policy Number', section: 'insuranceAndId', field: 'policyNumber'
+  }));
+  card.appendChild(textInput({
+    label: 'NHS Number', section: 'insuranceAndId', field: 'nhsNumber',
+    placeholder: 'e.g. 943 476 5919'
+  }));
+
+  card.appendChild(subsectionHeader('GP Details'));
+  card.appendChild(textInput({
+    label: 'GP Name', section: 'insuranceAndId', field: 'gpName'
+  }));
+  card.appendChild(textInput({
+    label: 'GP Practice Name', section: 'insuranceAndId', field: 'gpPracticeName'
+  }));
+  card.appendChild(textInput({
+    label: 'GP Phone', section: 'insuranceAndId', field: 'gpPhone'
+  }));
+
+  return card;
+}
+
+function renderStep3() {
+  const card = sectionCard({
+    stepNumber: 3,
+    title: 'Reason for Visit',
+    description: 'Please describe why you are visiting today.'
+  });
+
+  card.appendChild(textArea({
+    label: 'Primary Reason for Visit',
+    section: 'reasonForVisit', field: 'primaryReason',
+    placeholder: 'Please describe your main reason for visiting',
+    required: true
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Urgency Level',
+    section: 'reasonForVisit', field: 'urgencyLevel', required: true,
+    options: [
+      { value: 'routine', label: 'Routine' },
+      { value: 'urgent', label: 'Urgent' },
+      { value: 'emergency', label: 'Emergency' }
+    ]
+  }));
+
+  card.appendChild(textInput({
+    label: 'Referring Provider',
+    section: 'reasonForVisit', field: 'referringProvider',
+    placeholder: 'If referred by another doctor'
+  }));
+
+  card.appendChild(textInput({
+    label: 'How long have you had these symptoms?',
+    section: 'reasonForVisit', field: 'symptomDuration',
+    placeholder: 'e.g. 2 weeks, 3 months'
+  }));
+
+  card.appendChild(textArea({
+    label: 'Additional Details',
+    section: 'reasonForVisit', field: 'additionalDetails',
+    placeholder: "Any other information you'd like to share"
+  }));
+
+  return card;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'Medical History',
+    description: 'Your past and current medical conditions.'
+  });
+
+  card.appendChild(checkboxGroup({
+    label: 'Do you have any of the following chronic conditions?',
+    section: 'medicalHistory', field: 'chronicConditions',
+    options: [
+      { value: 'hypertension', label: 'Hypertension' },
+      { value: 'type-1-diabetes', label: 'Type 1 Diabetes' },
+      { value: 'type-2-diabetes', label: 'Type 2 Diabetes' },
+      { value: 'heart-disease', label: 'Heart Disease' },
+      { value: 'heart-failure', label: 'Heart Failure' },
+      { value: 'asthma', label: 'Asthma' },
+      { value: 'copd', label: 'COPD' },
+      { value: 'chronic-kidney-disease', label: 'Chronic Kidney Disease' },
+      { value: 'liver-disease', label: 'Liver Disease' },
+      { value: 'thyroid-disorder', label: 'Thyroid Disorder' },
+      { value: 'epilepsy', label: 'Epilepsy' },
+      { value: 'arthritis', label: 'Arthritis' },
+      { value: 'cancer', label: 'Cancer' },
+      { value: 'depression', label: 'Depression' },
+      { value: 'anxiety', label: 'Anxiety' },
+      { value: 'autoimmune-disorder', label: 'Autoimmune Disorder' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+
+  card.appendChild(textArea({
+    label: 'Previous Surgeries',
+    section: 'medicalHistory', field: 'previousSurgeries',
+    placeholder: 'List any previous surgeries with approximate dates'
+  }));
+
+  card.appendChild(textArea({
+    label: 'Previous Hospitalizations',
+    section: 'medicalHistory', field: 'previousHospitalizations',
+    placeholder: 'List any previous hospital stays with approximate dates and reasons'
+  }));
+
+  card.appendChild(textArea({
+    label: 'Ongoing Treatments',
+    section: 'medicalHistory', field: 'ongoingTreatments',
+    placeholder: 'Describe any ongoing treatments or therapies'
+  }));
+
+  return card;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Current Medications',
+    description: 'List all medications you currently take, including over-the-counter and supplements.'
+  });
+  card.appendChild(medicationListEditor());
+  return card;
+}
+
+function renderStep6() {
+  const card = sectionCard({
+    stepNumber: 6,
+    title: 'Allergies',
+    description: 'List any known allergies (drug, food, environmental, latex, etc.).'
+  });
+  card.appendChild(allergyListEditor());
+  return card;
+}
+
+function renderStep7() {
+  const card = sectionCard({
+    stepNumber: 7,
+    title: 'Family History',
+    description: 'Medical conditions in your immediate family (parents, siblings, children).'
+  });
+
+  const conditions = [
+    ['heartDisease',     'heartDiseaseDetails',     'Heart disease in family?',     'Please provide details'],
+    ['cancer',           'cancerDetails',           'Cancer in family?',            'Please provide details (type, relation)'],
+    ['diabetes',         'diabetesDetails',         'Diabetes in family?',          'Please provide details'],
+    ['stroke',           'strokeDetails',           'Stroke in family?',            'Please provide details'],
+    ['mentalIllness',    'mentalIllnessDetails',    'Mental illness in family?',    'Please provide details'],
+    ['geneticConditions','geneticConditionsDetails','Genetic conditions in family?','Please provide details']
+  ];
+  for (const [field, detailField, label, detailLabel] of conditions) {
+    card.appendChild(radioGroup({
+      label, section: 'familyHistory', field, options: yesNo
+    }));
+    const details = document.createElement('div');
+    details.dataset.conditional = `familyHistory.${field}=yes`;
+    details.appendChild(textInput({
+      label: detailLabel, section: 'familyHistory', field: detailField
+    }));
+    card.appendChild(details);
+  }
+
+  return card;
+}
+
+function renderStep8() {
+  const card = sectionCard({
+    stepNumber: 8,
+    title: 'Social History',
+    description: 'Lifestyle factors relevant to your health.'
+  });
+
+  card.appendChild(selectInput({
+    label: 'Smoking status',
+    section: 'socialHistory', field: 'smokingStatus',
+    options: [
+      { value: 'current', label: 'Current smoker' },
+      { value: 'ex', label: 'Ex-smoker' },
+      { value: 'never', label: 'Never smoked' }
+    ]
+  }));
+  const packHost = document.createElement('div');
+  packHost.dataset.conditionalAny = 'socialHistory.smokingStatus=current,ex';
+  packHost.appendChild(textInput({
+    label: 'Pack years', section: 'socialHistory', field: 'smokingPackYears',
+    type: 'number', min: 0, max: 200
+  }));
+  card.appendChild(packHost);
+
+  card.appendChild(selectInput({
+    label: 'Alcohol consumption',
+    section: 'socialHistory', field: 'alcoholFrequency',
+    options: [
+      { value: 'none', label: 'None' },
+      { value: 'occasional', label: 'Occasional (1-7 units/week)' },
+      { value: 'moderate', label: 'Moderate (8-14 units/week)' },
+      { value: 'heavy', label: 'Heavy (>14 units/week)' }
+    ]
+  }));
+  const unitsHost = document.createElement('div');
+  unitsHost.dataset.conditionalAny = 'socialHistory.alcoholFrequency=occasional,moderate,heavy';
+  unitsHost.appendChild(textInput({
+    label: 'Units per week', section: 'socialHistory', field: 'alcoholUnitsPerWeek',
+    type: 'number', min: 0, max: 200
+  }));
+  card.appendChild(unitsHost);
+
+  card.appendChild(selectInput({
+    label: 'Recreational drug use',
+    section: 'socialHistory', field: 'drugUse',
+    options: [
+      { value: 'none', label: 'None' },
+      { value: 'occasional', label: 'Occasional' },
+      { value: 'regular', label: 'Regular' }
+    ]
+  }));
+  const drugDetailsHost = document.createElement('div');
+  drugDetailsHost.dataset.conditionalAny = 'socialHistory.drugUse=occasional,regular';
+  drugDetailsHost.appendChild(textInput({
+    label: 'Please provide details (substance, frequency)',
+    section: 'socialHistory', field: 'drugDetails'
+  }));
+  card.appendChild(drugDetailsHost);
+
+  card.appendChild(textInput({
+    label: 'Occupation', section: 'socialHistory', field: 'occupation'
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Exercise frequency',
+    section: 'socialHistory', field: 'exerciseFrequency',
+    options: [
+      { value: 'none', label: 'None' },
+      { value: 'occasional', label: 'Occasional (1-2 times/week)' },
+      { value: 'moderate', label: 'Moderate (3-4 times/week)' },
+      { value: 'regular', label: 'Regular (5+ times/week)' }
+    ]
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Diet quality',
+    section: 'socialHistory', field: 'dietQuality',
+    options: [
+      { value: 'poor', label: 'Poor' },
+      { value: 'average', label: 'Average' },
+      { value: 'good', label: 'Good' },
+      { value: 'excellent', label: 'Excellent' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderStep9() {
+  const card = sectionCard({
+    stepNumber: 9,
+    title: 'Review of Systems',
+    description: 'Please note any current symptoms in each area. Leave blank if none.'
+  });
+
+  card.appendChild(textArea({
+    label: 'Constitutional (fever, weight changes, fatigue)',
+    section: 'reviewOfSystems', field: 'constitutional',
+    placeholder: 'e.g. unexplained weight loss, persistent fatigue'
+  }));
+  card.appendChild(textArea({
+    label: 'HEENT (Head, Eyes, Ears, Nose, Throat)',
+    section: 'reviewOfSystems', field: 'heent',
+    placeholder: 'e.g. headaches, vision changes, hearing loss'
+  }));
+  card.appendChild(textArea({
+    label: 'Cardiovascular',
+    section: 'reviewOfSystems', field: 'cardiovascular',
+    placeholder: 'e.g. chest pain, palpitations, shortness of breath on exertion'
+  }));
+  card.appendChild(textArea({
+    label: 'Respiratory',
+    section: 'reviewOfSystems', field: 'respiratory',
+    placeholder: 'e.g. cough, wheezing, shortness of breath'
+  }));
+  card.appendChild(textArea({
+    label: 'Gastrointestinal',
+    section: 'reviewOfSystems', field: 'gastrointestinal',
+    placeholder: 'e.g. nausea, abdominal pain, changes in bowel habits'
+  }));
+  card.appendChild(textArea({
+    label: 'Genitourinary',
+    section: 'reviewOfSystems', field: 'genitourinary',
+    placeholder: 'e.g. urinary frequency, pain, blood in urine'
+  }));
+  card.appendChild(textArea({
+    label: 'Musculoskeletal',
+    section: 'reviewOfSystems', field: 'musculoskeletal',
+    placeholder: 'e.g. joint pain, stiffness, swelling'
+  }));
+  card.appendChild(textArea({
+    label: 'Neurological',
+    section: 'reviewOfSystems', field: 'neurological',
+    placeholder: 'e.g. numbness, tingling, weakness, seizures'
+  }));
+  card.appendChild(textArea({
+    label: 'Psychiatric',
+    section: 'reviewOfSystems', field: 'psychiatric',
+    placeholder: 'e.g. anxiety, depression, sleep disturbance'
+  }));
+  card.appendChild(textArea({
+    label: 'Skin',
+    section: 'reviewOfSystems', field: 'skin',
+    placeholder: 'e.g. rashes, lesions, changes in moles'
+  }));
+
+  return card;
+}
+
+function renderStep10() {
+  const card = sectionCard({
+    stepNumber: 10,
+    title: 'Consent & Preferences',
+    description: 'Please review and confirm your preferences.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you consent to treatment?',
+    section: 'consentAndPreferences', field: 'consentToTreatment',
+    options: yesNo, required: true
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Do you acknowledge our privacy notice and agree to the use of your data for clinical purposes?',
+    section: 'consentAndPreferences', field: 'privacyAcknowledgement',
+    options: yesNo, required: true
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Preferred communication method',
+    section: 'consentAndPreferences', field: 'communicationPreference',
+    options: [
+      { value: 'phone', label: 'Phone' },
+      { value: 'email', label: 'Email' },
+      { value: 'text', label: 'Text/SMS' },
+      { value: 'post', label: 'Post' }
+    ]
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Do you have any advance directives (living will, power of attorney for healthcare)?',
+    section: 'consentAndPreferences', field: 'advanceDirectives',
+    options: yesNo
+  }));
+  const adHost = document.createElement('div');
+  adHost.dataset.conditional = 'consentAndPreferences.advanceDirectives=yes';
+  adHost.appendChild(textArea({
+    label: 'Please provide details',
+    section: 'consentAndPreferences', field: 'advanceDirectiveDetails'
+  }));
+  card.appendChild(adHost);
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Conditional sections
+// ----------------------------------------------------------------------
+
+function updateConditionalSections() {
+  document.querySelectorAll('[data-conditional]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional');
+    const [path, target] = expr.split('=');
+    const [section, field] = path.split('.');
+    const current = state[section]?.[field];
+    host.style.display = String(current) === target ? '' : 'none';
+  });
+  document.querySelectorAll('[data-conditional-any]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional-any');
+    const [path, targetCsv] = expr.split('=');
+    const [section, field] = path.split('.');
+    const current = String(state[section]?.[field] ?? '');
+    const targets = targetCsv.split(',');
+    host.style.display = targets.includes(current) ? '' : 'none';
   });
 }
 
-// ─── Conditional fields ────────────────────────────────
-function updateConditionalFields() {
-  document.querySelectorAll('[data-show-if]').forEach(el => {
-    const condition = el.getAttribute('data-show-if');
-    const [path, values] = condition.split('=');
-    const currentVal = getNestedValue(data, path);
-    const allowed = values.split('|');
-    el.style.display = allowed.includes(currentVal) ? 'block' : 'none';
-  });
-}
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
 
-// Listen for radio/select changes to update conditional fields
-document.addEventListener('change', (e) => {
-  const field = e.target.getAttribute('data-field');
-  if (!field) return;
-  if (e.target.type === 'radio' && e.target.checked) {
-    setNestedValue(data, field, e.target.value);
-  } else if (e.target.tagName === 'SELECT') {
-    setNestedValue(data, field, e.target.value);
+const TRACKED_FIELDS = [
+  // Personal Information
+  ['personalInformation', 'fullName'],
+  ['personalInformation', 'dateOfBirth'],
+  ['personalInformation', 'sex'],
+  ['personalInformation', 'addressLine1'],
+  ['personalInformation', 'city'],
+  ['personalInformation', 'postcode'],
+  ['personalInformation', 'phone'],
+  ['personalInformation', 'emergencyContactName'],
+  ['personalInformation', 'emergencyContactPhone'],
+  // Insurance & ID
+  ['insuranceAndId', 'gpName'],
+  // Reason for Visit
+  ['reasonForVisit', 'primaryReason'],
+  ['reasonForVisit', 'urgencyLevel'],
+  // Family History
+  ['familyHistory', 'heartDisease'],
+  ['familyHistory', 'cancer'],
+  ['familyHistory', 'diabetes'],
+  ['familyHistory', 'stroke'],
+  ['familyHistory', 'mentalIllness'],
+  ['familyHistory', 'geneticConditions'],
+  // Social History
+  ['socialHistory', 'smokingStatus'],
+  ['socialHistory', 'alcoholFrequency'],
+  ['socialHistory', 'drugUse'],
+  ['socialHistory', 'exerciseFrequency'],
+  ['socialHistory', 'dietQuality'],
+  // Consent
+  ['consentAndPreferences', 'consentToTreatment'],
+  ['consentAndPreferences', 'privacyAcknowledgement'],
+  ['consentAndPreferences', 'communicationPreference'],
+  ['consentAndPreferences', 'advanceDirectives']
+];
+
+function updateProgress() {
+  let answered = 0;
+  for (const [section, field] of TRACKED_FIELDS) {
+    const v = state[section][field];
+    if (v !== null && v !== undefined && v !== '') answered++;
   }
-  // Update checkbox styling
-  if (e.target.type === 'checkbox') {
-    e.target.parentElement.classList.toggle('checked', e.target.checked);
+  // Count chronic conditions as one tracked answer if any selected.
+  const total = TRACKED_FIELDS.length + 1;
+  if (Array.isArray(state.medicalHistory.chronicConditions) &&
+      state.medicalHistory.chronicConditions.length > 0) {
+    answered++;
   }
-  updateConditionalFields();
-});
-
-// ─── Utilities ─────────────────────────────────────────
-function getNestedValue(obj, path) {
-  return path.split('.').reduce((o, key) => (o && o[key] !== undefined) ? o[key] : '', obj);
+  const percent = Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
 }
 
-function setNestedValue(obj, path, value) {
-  const keys = path.split('.');
-  let current = obj;
-  for (let i = 0; i < keys.length - 1; i++) {
-    if (!current[keys[i]]) current[keys[i]] = {};
-    current = current[keys[i]];
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'high': return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low': return 'flag-low';
+    default: return '';
   }
-  current[keys[keys.length - 1]] = value;
 }
 
-function escHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str || '';
-  return div.innerHTML;
+function renderReport() {
+  if (!lastResult) return;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { riskLevel, firedRules, additionalFlags, timestamp } = lastResult;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags raised.</p>`
+    : `
+      <ul class="flags">
+        ${additionalFlags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(f.priority.toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  const firedRows = firedRules.map((r) => `
+    <tr>
+      <th scope="row">${esc(r.id)}</th>
+      <td>${esc(r.category)}</td>
+      <td>${esc(r.description)}</td>
+      <td class="risk risk-${esc(r.riskLevel)}">${esc(r.riskLevel)}</td>
+    </tr>
+  `).join('');
+
+  const firedTable = firedRules.length === 0
+    ? `<p class="muted">No risk rules fired — minimal complexity profile.</p>`
+    : `
+      <table class="subscales">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Risk</th>
+          </tr>
+        </thead>
+        <tbody>${firedRows}</tbody>
+      </table>
+    `;
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>Patient Intake Report</h2>
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <h3>Overall Risk Level</h3>
+      <p class="risk-summary">
+        <span class="risk-badge ${riskLevelClass(riskLevel)}">${esc(riskLevel)}</span>
+        <span class="risk-label">${esc(riskLevelLabel(riskLevel))}</span>
+      </p>
+      <p class="muted">Based on ${firedRules.length} fired rule(s) across the questionnaire.</p>
+
+      <h3>Fired Rules</h3>
+      ${firedTable}
+
+      <h3>Flagged Issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('start-over-btn').addEventListener('click', startOver);
 }
 
-// Show form immediately (single-page layout)
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('form-container');
-  if (form) form.classList.remove('hidden');
-});
+function submitForm() {
+  const { riskLevel, firedRules } = calculateRiskLevel(state);
+  const additionalFlags = detectAdditionalFlags(state);
+  lastResult = {
+    riskLevel,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Clear all answers and start a fresh intake?')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  document.getElementById('report').innerHTML = '';
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  host.innerHTML = '';
+  host.appendChild(renderStep1());
+  host.appendChild(renderStep2());
+  host.appendChild(renderStep3());
+  host.appendChild(renderStep4());
+  host.appendChild(renderStep5());
+  host.appendChild(renderStep6());
+  host.appendChild(renderStep7());
+  host.appendChild(renderStep8());
+  host.appendChild(renderStep9());
+  host.appendChild(renderStep10());
+}
+
+function init() {
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();
