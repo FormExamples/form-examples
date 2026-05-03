@@ -4,16 +4,146 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Otolaryngology Assessment — clinician dashboard</title>
+  <meta name="description" content="SNOT-22 (Sino-Nasal Outcome Test) clinician dashboard: review patient submissions with SNOT-22 score, severity band, management priority, and ENT red-flag indicator.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Otolaryngology Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        SNOT-22 (Sino-Nasal Outcome Test) patient list with severity band,
+        management priority, and ENT red-flag indicator.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Otolaryngology Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Otolaryngology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-severity">Severity</label>
+          <select id="filter-severity" class="select-input">
+            <option value="">All severities</option>
+            <option value="Mild">Mild</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Severe">Severe</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-priority">Priority</label>
+          <select id="filter-priority" class="select-input">
+            <option value="">All priorities</option>
+            <option value="Routine">Routine</option>
+            <option value="Soon">Soon</option>
+            <option value="Urgent">Urgent</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-red-flag">Red Flag</label>
+          <select id="filter-red-flag" class="select-input">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        SNOT-22 (Sino-Nasal Outcome Test) is a validated 22-item
+        patient-reported outcome measure for sinonasal quality of life. This
+        dashboard is a clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OtolaryngologyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

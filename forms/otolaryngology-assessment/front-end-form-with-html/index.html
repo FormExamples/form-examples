@@ -4,16 +4,103 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Otolaryngology Assessment — patient questionnaire</title>
+  <meta name="description" content="ENT (otolaryngology) consultation questionnaire including SNOT-22 sino-nasal symptom score and clinician examination.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Otolaryngology Assessment</h1>
+      <p class="subtitle">SNOT-22 sino-nasal score plus structured ENT history and examination.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Otolaryngology Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Otolaryngology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your ear, nose, and throat
+        symptoms. Section 5 is the validated 22-item SNOT-22 questionnaire,
+        which quantifies how much your symptoms affect daily life. All
+        answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If you are experiencing severe sudden hearing loss, severe nosebleed
+        that will not stop, severe difficulty breathing, or rapidly
+        progressive neck swelling, contact your local emergency service
+        immediately.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Presenting Complaint, 3 History of Present Illness, -->
+        <!-- 4 Past ENT History & Surgery, 5 SNOT-22, 6 External Examination, -->
+        <!-- 7 Otoscopy, 8 Anterior Rhinoscopy, 9 Oropharyngeal & Neck Examination, -->
+        <!-- 10 Clinical Impression & Management Plan -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        SNOT-22 (Sino-Nasal Outcome Test) is a validated 22-item
+        questionnaire for assessing the impact of chronic rhinosinusitis on
+        quality of life. This tool is for information only and is not a
+        diagnosis; please discuss your results with your ENT clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OtolaryngologyAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/snot22-rules.js"></script>
+  <script src="js/snot22-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
