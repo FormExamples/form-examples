@@ -4,16 +4,105 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Hormone Replacement Therapy Assessment — patient questionnaire</title>
+  <meta name="description" content="Menopause Rating Scale (MRS) plus structured HRT eligibility, contraindication, and risk-benefit assessment.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Hormone Replacement Therapy Assessment</h1>
+      <p class="subtitle">Menopause Rating Scale (MRS) plus structured HRT eligibility and risk-benefit screen.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Hormone Replacement Therapy Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Hormone Replacement Therapy Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your menopausal symptoms and
+        general health. The third section is the validated 11-item Menopause
+        Rating Scale (MRS). Answers are saved automatically in your browser
+        as you go, so you can step away and come back without losing your
+        progress.
+      </p>
+      <p>
+        This screening tool is for information only and is not a diagnosis.
+        If you experience sudden severe symptoms — for example a new severe
+        headache, chest pain, sudden breathlessness, or unexplained vaginal
+        bleeding — please contact your clinician or local emergency service.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Menopause Status, 3 MRS Symptom Scale, -->
+        <!-- 4 Vasomotor Symptoms, 5 Bone Health, 6 Cardiovascular Risk, -->
+        <!-- 7 Breast Health, 8 Current Medications, -->
+        <!-- 9 Contraindications Screen, 10 Treatment Preferences -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Menopause Rating Scale (MRS) is a validated 11-item self-report
+        instrument grouped into somatic, psychological, and urogenital
+        subscales. This questionnaire also screens for HRT contraindications
+        and risk factors. Results are intended to support — not replace —
+        a clinical consultation.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.HormoneReplacementTherapyAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/mrs-rules.js"></script>
+  <script src="js/mrs-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
