@@ -4,16 +4,140 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dental Assessment — clinician dashboard</title>
+  <meta name="description" content="DMFT (Decayed, Missing, Filled Teeth) clinician dashboard: review patient submissions with DMFT score, chief complaint, and periodontal status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Dental Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        DMFT (Decayed, Missing, Filled Teeth) patient list with chief
+        complaint and periodontal status.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Dental Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Dental Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, or complaint..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-dmft">DMFT Score</label>
+          <select id="filter-dmft" class="select-input">
+            <option value="">All DMFT scores</option>
+            <option value="caries-free">Caries-Free (0)</option>
+            <option value="very-low">Very Low (1-5)</option>
+            <option value="low">Low (6-10)</option>
+            <option value="moderate">Moderate (11-15)</option>
+            <option value="high">High (16-20)</option>
+            <option value="very-high">Very High (21+)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-periodontal">Periodontal Status</label>
+          <select id="filter-periodontal" class="select-input">
+            <option value="">All statuses</option>
+            <option value="healthy">Healthy</option>
+            <option value="gingivitis">Gingivitis</option>
+            <option value="periodontitis">Periodontitis</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        DMFT (Decayed, Missing, Filled Teeth) is a validated index for
+        oral-health surveillance. This dashboard is a clinical-review tool
+        and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.DentalAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

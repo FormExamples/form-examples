@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Urology Assessment — patient questionnaire</title>
+  <meta name="description" content="International Prostate Symptom Score (IPSS) and structured urological history self-report.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Urology Assessment</h1>
+      <p class="subtitle">International Prostate Symptom Score (IPSS) plus structured urological history.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Urology Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Urology Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your urological symptoms over
+        the past month. The first scoring section is the validated seven-question
+        International Prostate Symptom Score (IPSS) plus a quality-of-life item.
+        All answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If you have severe abdominal or flank pain, fever with chills, inability
+        to pass urine, or visible blood in the urine right now, please seek
+        urgent medical care immediately.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Chief Complaint, 3 IPSS Questionnaire, -->
+        <!-- 4 Quality of Life, 5 Urinary Symptoms, 6 Renal Function, -->
+        <!-- 7 Sexual Health, 8 Medical History, 9 Current Medications, -->
+        <!-- 10 Family History -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The International Prostate Symptom Score (IPSS) is a validated 7-item
+        questionnaire for assessing lower urinary tract symptoms in men. This
+        screening tool is for information only and is not a diagnosis;
+        please discuss your results with your clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.UrologyAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/ipss-rules.js"></script>
+  <script src="js/ipss-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

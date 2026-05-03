@@ -1,2 +1,1067 @@
-// Plain JavaScript entrypoint. Implementation pending.
-console.log('Form scaffold loaded.');
+// Dental Assessment - patient wizard (vanilla JavaScript, no build).
+//
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. The user scrolls through them; a sticky top-of-page
+// progress summary reflects how many fields have been answered. Submission
+// runs the pure DMFT scoring engine and renders an inline report. State
+// persists to localStorage so a partial fill survives a page reload.
+//
+// Sibling files loaded as plain `<script>` tags (in order) attach their
+// exports to `window.DentalAssessment`. Pulling them off here keeps the
+// rest of this file referring to short local names. Whole file is wrapped
+// in an IIFE so its top-level identifiers don't leak to the global scope.
+(function () {
+'use strict';
+
+const NS = window.DentalAssessment;
+const {
+  emptyAssessment,
+  getDMFTScore,
+  getDMFTCategory,
+  dmftCategoryLabel,
+  dmftScoreShortLabel,
+  dmftCategoryClass,
+  calculateDMFT,
+  detectAdditionalFlags
+} = NS;
+
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
+
+const STORAGE_KEY = 'dental-assessment.front-end-form-with-html.v1';
+
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    // Merge over a fresh empty so any newly-added fields default correctly.
+    const fresh = emptyAssessment();
+    for (const key of Object.keys(fresh)) {
+      if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
+        fresh[key] = { ...fresh[key], ...parsed[key] };
+      }
+    }
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved assessment; starting fresh.', e);
+    return emptyAssessment();
+  }
+}
+
+/** @param {import('./types.js').AssessmentData} state */
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save assessment to localStorage.', e);
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored assessment.', e);
+  }
+}
+
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {import('./types.js').GradingResult | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/**
+ * Set a deeply-nested field on the state and persist.
+ * Re-runs progress, conditional visibility, and the live DMFT banner
+ * after each change.
+ *
+ * @param {string} section
+ * @param {string} field
+ * @param {*} value
+ */
+function setField(section, field, value) {
+  state[section][field] = value;
+  saveState(state);
+  updateProgress();
+  updateConditionalSections();
+  refreshDmftBanner();
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Component builders
+// ----------------------------------------------------------------------
+
+/**
+ * Build a labelled text input.
+ * @param {{ label: string, section: string, field: string, type?: string,
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number, unit?: string }} opts
+ */
+function textInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field];
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="text-input"`,
+    `value="${esc(value ?? '')}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+  `;
+
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    let v = input.value;
+    if (type === 'number') {
+      v = v === '' ? null : Number(v);
+    }
+    setField(opts.section, opts.field, v);
+  });
+  return wrapper;
+}
+
+/**
+ * Build a labelled multi-line text area.
+ * @param {{ label: string, section: string, field: string, rows?: number,
+ *           placeholder?: string }} opts
+ */
+function textArea(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      class="textarea">${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  return wrapper;
+}
+
+/**
+ * Build a select / dropdown input.
+ * @param {{ label: string, section: string, field: string, required?: boolean,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function selectInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
+  const optionsHtml = [
+    `<option value="">— Select —</option>`,
+    ...opts.options.map((o) =>
+      `<option value="${esc(o.value)}"${o.value === current ? ' selected' : ''}>${esc(o.label)}</option>`
+    )
+  ].join('');
+
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <select id="${id}" name="${id}" class="select-input">
+      ${optionsHtml}
+    </select>
+  `;
+  const sel = wrapper.querySelector('select');
+  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  return wrapper;
+}
+
+/**
+ * Build a radio group.
+ * @param {{ label: string, section: string, field: string, required?: boolean,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.textContent = opts.label + (opts.required ? ' *' : '');
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.className = 'radio-option';
+    label.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, option.value);
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+/**
+ * Build a section card.
+ * @param {{ stepNumber: number, title: string, description?: string }} opts
+ */
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card';
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Section ${opts.stepNumber} of 9</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Section renderers (1 per step)
+// ----------------------------------------------------------------------
+
+const yesNo = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
+];
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Demographics',
+    description: 'Basic patient information.'
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'two-col';
+  grid.appendChild(textInput({ label: 'First Name', section: 'demographics', field: 'firstName', required: true }));
+  grid.appendChild(textInput({ label: 'Last Name', section: 'demographics', field: 'lastName', required: true }));
+  card.appendChild(grid);
+
+  card.appendChild(textInput({
+    label: 'Date of Birth',
+    section: 'demographics', field: 'dateOfBirth',
+    type: 'date', required: true
+  }));
+  card.appendChild(radioGroup({
+    label: 'Sex',
+    section: 'demographics', field: 'sex',
+    required: true,
+    options: [
+      { value: 'male', label: 'Male' },
+      { value: 'female', label: 'Female' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+
+  const ec = document.createElement('div');
+  ec.className = 'two-col';
+  ec.appendChild(textInput({
+    label: 'Emergency Contact Name',
+    section: 'demographics', field: 'emergencyContactName',
+    required: true
+  }));
+  ec.appendChild(textInput({
+    label: 'Emergency Contact Phone',
+    section: 'demographics', field: 'emergencyContactPhone',
+    required: true
+  }));
+  card.appendChild(ec);
+
+  return card;
+}
+
+function renderStep2() {
+  const card = sectionCard({
+    stepNumber: 2,
+    title: 'Chief Complaint',
+    description: 'Primary dental concern and pain assessment.'
+  });
+
+  card.appendChild(textArea({
+    label: 'What is your primary dental concern?',
+    section: 'chiefComplaint', field: 'primaryConcern',
+    placeholder: 'e.g. Toothache, broken tooth, routine check-up'
+  }));
+
+  card.appendChild(textInput({
+    label: 'Pain location (if any)',
+    section: 'chiefComplaint', field: 'painLocation',
+    placeholder: 'e.g. Lower right molar'
+  }));
+
+  card.appendChild(textInput({
+    label: 'Pain severity',
+    section: 'chiefComplaint', field: 'painSeverity',
+    type: 'number', min: 0, max: 10, unit: '0-10 scale'
+  }));
+
+  card.appendChild(textInput({
+    label: 'When did the pain start?',
+    section: 'chiefComplaint', field: 'painOnset',
+    placeholder: 'e.g. 3 days ago'
+  }));
+
+  card.appendChild(textInput({
+    label: 'How long does the pain last?',
+    section: 'chiefComplaint', field: 'painDuration',
+    placeholder: 'e.g. Constant, intermittent, only when eating'
+  }));
+
+  return card;
+}
+
+function renderStep3() {
+  const card = sectionCard({
+    stepNumber: 3,
+    title: 'Dental History',
+    description: 'Your dental care habits and history.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Date of last dental visit',
+    section: 'dentalHistory', field: 'lastDentalVisit',
+    type: 'date'
+  }));
+
+  card.appendChild(selectInput({
+    label: 'How often do you visit the dentist?',
+    section: 'dentalHistory', field: 'visitFrequency',
+    options: [
+      { value: 'every-6-months', label: 'Every 6 months' },
+      { value: 'annually', label: 'Annually' },
+      { value: 'rarely', label: 'Rarely' },
+      { value: 'never', label: 'Never' }
+    ]
+  }));
+
+  card.appendChild(selectInput({
+    label: 'How often do you brush your teeth?',
+    section: 'dentalHistory', field: 'brushingFrequency',
+    options: [
+      { value: 'twice-daily', label: 'Twice daily' },
+      { value: 'once-daily', label: 'Once daily' },
+      { value: 'occasionally', label: 'Occasionally' },
+      { value: 'rarely', label: 'Rarely' }
+    ]
+  }));
+
+  card.appendChild(selectInput({
+    label: 'How often do you floss?',
+    section: 'dentalHistory', field: 'flossingFrequency',
+    options: [
+      { value: 'daily', label: 'Daily' },
+      { value: 'occasionally', label: 'Occasionally' },
+      { value: 'rarely', label: 'Rarely' },
+      { value: 'never', label: 'Never' }
+    ]
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Level of dental anxiety',
+    section: 'dentalHistory', field: 'dentalAnxietyLevel',
+    options: [
+      { value: 'none', label: 'None' },
+      { value: 'mild', label: 'Mild' },
+      { value: 'moderate', label: 'Moderate' },
+      { value: 'severe', label: 'Severe' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'DMFT Assessment',
+    description: 'Decayed, Missing, and Filled Teeth index (maximum 32).'
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'three-col';
+  grid.appendChild(textInput({
+    label: 'Decayed Teeth (D)',
+    section: 'dmftAssessment', field: 'decayedTeeth',
+    type: 'number', min: 0, max: 32
+  }));
+  grid.appendChild(textInput({
+    label: 'Missing Teeth (M)',
+    section: 'dmftAssessment', field: 'missingTeeth',
+    type: 'number', min: 0, max: 32
+  }));
+  grid.appendChild(textInput({
+    label: 'Filled Teeth (F)',
+    section: 'dmftAssessment', field: 'filledTeeth',
+    type: 'number', min: 0, max: 32
+  }));
+  card.appendChild(grid);
+
+  // Live DMFT banner — refreshed by refreshDmftBanner().
+  const banner = document.createElement('div');
+  banner.id = 'dmft-banner';
+  banner.className = 'dmft-banner';
+  banner.setAttribute('aria-live', 'polite');
+  banner.innerHTML = renderDmftBannerInner();
+  card.appendChild(banner);
+
+  card.appendChild(textArea({
+    label: 'Tooth chart notes',
+    section: 'dmftAssessment', field: 'toothChartNotes',
+    placeholder: 'Note specific teeth affected using FDI notation (e.g. 16 MOD amalgam, 36 D caries)',
+    rows: 4
+  }));
+
+  return card;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Periodontal Assessment',
+    description: 'Gum health and supporting structures.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do your gums bleed when brushing or flossing?',
+    section: 'periodontalAssessment', field: 'gumBleeding', options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Are any pocket depths above normal (>3mm)?',
+    section: 'periodontalAssessment', field: 'pocketDepthsAboveNormal', options: yesNo
+  }));
+  const pocketDetails = document.createElement('div');
+  pocketDetails.dataset.conditional = 'periodontalAssessment.pocketDepthsAboveNormal=yes';
+  pocketDetails.appendChild(textInput({
+    label: 'Pocket depth details',
+    section: 'periodontalAssessment', field: 'pocketDepthDetails',
+    placeholder: 'e.g. 5mm on 16 mesial'
+  }));
+  card.appendChild(pocketDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Is there gum recession?',
+    section: 'periodontalAssessment', field: 'gumRecession', options: yesNo
+  }));
+  const recessionDetails = document.createElement('div');
+  recessionDetails.dataset.conditional = 'periodontalAssessment.gumRecession=yes';
+  recessionDetails.appendChild(textInput({
+    label: 'Recession details',
+    section: 'periodontalAssessment', field: 'gumRecessionDetails',
+    placeholder: 'e.g. 2mm recession on 31 labial'
+  }));
+  card.appendChild(recessionDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Is there any tooth mobility?',
+    section: 'periodontalAssessment', field: 'toothMobility', options: yesNo
+  }));
+  const mobilityDetails = document.createElement('div');
+  mobilityDetails.dataset.conditional = 'periodontalAssessment.toothMobility=yes';
+  mobilityDetails.appendChild(textInput({
+    label: 'Mobility details',
+    section: 'periodontalAssessment', field: 'mobilityDetails',
+    placeholder: 'e.g. Grade II mobility on 41'
+  }));
+  card.appendChild(mobilityDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Is there furcation involvement?',
+    section: 'periodontalAssessment', field: 'furcationInvolvement', options: yesNo
+  }));
+  const furcationDetails = document.createElement('div');
+  furcationDetails.dataset.conditional = 'periodontalAssessment.furcationInvolvement=yes';
+  furcationDetails.appendChild(textInput({
+    label: 'Furcation details',
+    section: 'periodontalAssessment', field: 'furcationDetails',
+    placeholder: 'e.g. Class II furcation on 36'
+  }));
+  card.appendChild(furcationDetails);
+
+  return card;
+}
+
+function renderStep6() {
+  const card = sectionCard({
+    stepNumber: 6,
+    title: 'Oral Examination',
+    description: 'Soft tissue, TMJ, and occlusion findings.'
+  });
+
+  card.appendChild(textArea({
+    label: 'Soft tissue findings',
+    section: 'oralExamination', field: 'softTissueFindings',
+    placeholder: 'e.g. Normal mucosa, no lesions; or describe any findings'
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'TMJ pain?',
+    section: 'oralExamination', field: 'tmjPain', options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'TMJ clicking or crepitus?',
+    section: 'oralExamination', field: 'tmjClicking', options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Limited jaw opening?',
+    section: 'oralExamination', field: 'tmjLimitedOpening', options: yesNo
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Occlusion classification',
+    section: 'oralExamination', field: 'occlusion',
+    options: [
+      { value: 'class-I', label: 'Class I - Normal' },
+      { value: 'class-II', label: 'Class II - Retrognathic' },
+      { value: 'class-III', label: 'Class III - Prognathic' }
+    ]
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Oral hygiene index',
+    section: 'oralExamination', field: 'oralHygieneIndex',
+    options: [
+      { value: 'good', label: 'Good' },
+      { value: 'fair', label: 'Fair' },
+      { value: 'poor', label: 'Poor' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderStep7() {
+  const card = sectionCard({
+    stepNumber: 7,
+    title: 'Medical History',
+    description: 'Relevant medical conditions that may affect dental treatment.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Do you have any cardiovascular disease?',
+    section: 'medicalHistory', field: 'cardiovascularDisease', options: yesNo
+  }));
+  const cvDetails = document.createElement('div');
+  cvDetails.dataset.conditional = 'medicalHistory.cardiovascularDisease=yes';
+  cvDetails.appendChild(textInput({
+    label: 'Please provide details',
+    section: 'medicalHistory', field: 'cardiovascularDetails',
+    placeholder: 'e.g. Heart valve replacement, endocarditis history'
+  }));
+  card.appendChild(cvDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have diabetes?',
+    section: 'medicalHistory', field: 'diabetes', options: yesNo
+  }));
+  const diabetesBlock = document.createElement('div');
+  diabetesBlock.dataset.conditional = 'medicalHistory.diabetes=yes';
+  diabetesBlock.appendChild(selectInput({
+    label: 'Diabetes type',
+    section: 'medicalHistory', field: 'diabetesType',
+    required: true,
+    options: [
+      { value: 'type1', label: 'Type 1' },
+      { value: 'type2', label: 'Type 2' }
+    ]
+  }));
+  diabetesBlock.appendChild(radioGroup({
+    label: 'Is your diabetes well controlled?',
+    section: 'medicalHistory', field: 'diabetesControlled', options: yesNo
+  }));
+  card.appendChild(diabetesBlock);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have a bleeding disorder?',
+    section: 'medicalHistory', field: 'bleedingDisorder', options: yesNo
+  }));
+  const bleedDetails = document.createElement('div');
+  bleedDetails.dataset.conditional = 'medicalHistory.bleedingDisorder=yes';
+  bleedDetails.appendChild(textInput({
+    label: 'Please provide details',
+    section: 'medicalHistory', field: 'bleedingDetails',
+    placeholder: 'e.g. Haemophilia, von Willebrand disease'
+  }));
+  card.appendChild(bleedDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Have you ever taken bisphosphonates (e.g. Alendronate, Zoledronic acid)?',
+    section: 'medicalHistory', field: 'bisphosphonateUse', options: yesNo
+  }));
+  const bisphDetails = document.createElement('div');
+  bisphDetails.dataset.conditional = 'medicalHistory.bisphosphonateUse=yes';
+  bisphDetails.appendChild(textInput({
+    label: 'Bisphosphonate details',
+    section: 'medicalHistory', field: 'bisphosphonateDetails',
+    placeholder: 'e.g. Drug name, duration of use'
+  }));
+  card.appendChild(bisphDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Have you had radiation therapy to the head or neck?',
+    section: 'medicalHistory', field: 'radiationTherapyHeadNeck', options: yesNo
+  }));
+  const radDetails = document.createElement('div');
+  radDetails.dataset.conditional = 'medicalHistory.radiationTherapyHeadNeck=yes';
+  radDetails.appendChild(textInput({
+    label: 'Radiation therapy details',
+    section: 'medicalHistory', field: 'radiationDetails',
+    placeholder: 'e.g. Area treated, when completed'
+  }));
+  card.appendChild(radDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Are you immunosuppressed?',
+    section: 'medicalHistory', field: 'immunosuppression', options: yesNo
+  }));
+  const immunoDetails = document.createElement('div');
+  immunoDetails.dataset.conditional = 'medicalHistory.immunosuppression=yes';
+  immunoDetails.appendChild(textInput({
+    label: 'Please provide details',
+    section: 'medicalHistory', field: 'immunosuppressionDetails',
+    placeholder: 'e.g. HIV, organ transplant, chemotherapy'
+  }));
+  card.appendChild(immunoDetails);
+
+  return card;
+}
+
+function renderStep8() {
+  const card = sectionCard({
+    stepNumber: 8,
+    title: 'Current Medications',
+    description: 'Medications relevant to dental treatment.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Are you taking anticoagulants (blood thinners)?',
+    section: 'currentMedications', field: 'anticoagulantUse', options: yesNo
+  }));
+  const anticoagDetails = document.createElement('div');
+  anticoagDetails.dataset.conditional = 'currentMedications.anticoagulantUse=yes';
+  anticoagDetails.appendChild(textInput({
+    label: 'Anticoagulant name and dose',
+    section: 'currentMedications', field: 'anticoagulantType',
+    placeholder: 'e.g. Warfarin 5mg, Rivaroxaban 20mg'
+  }));
+  card.appendChild(anticoagDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Are you currently taking bisphosphonates?',
+    section: 'currentMedications', field: 'bisphosphonateCurrentUse', options: yesNo
+  }));
+  const bisphCur = document.createElement('div');
+  bisphCur.dataset.conditional = 'currentMedications.bisphosphonateCurrentUse=yes';
+  bisphCur.appendChild(textInput({
+    label: 'Bisphosphonate name',
+    section: 'currentMedications', field: 'bisphosphonateName',
+    placeholder: 'e.g. Alendronate, Risedronate'
+  }));
+  card.appendChild(bisphCur);
+
+  card.appendChild(radioGroup({
+    label: 'Are you taking immunosuppressant medications?',
+    section: 'currentMedications', field: 'immunosuppressantUse', options: yesNo
+  }));
+  const immunoMed = document.createElement('div');
+  immunoMed.dataset.conditional = 'currentMedications.immunosuppressantUse=yes';
+  immunoMed.appendChild(textInput({
+    label: 'Immunosuppressant name',
+    section: 'currentMedications', field: 'immunosuppressantName',
+    placeholder: 'e.g. Methotrexate, Cyclosporin'
+  }));
+  card.appendChild(immunoMed);
+
+  card.appendChild(radioGroup({
+    label: 'Do you have any allergies to dental anaesthetics?',
+    section: 'currentMedications', field: 'allergyToAnaesthetics', options: yesNo
+  }));
+  const anaesAllergy = document.createElement('div');
+  anaesAllergy.dataset.conditional = 'currentMedications.allergyToAnaesthetics=yes';
+  anaesAllergy.appendChild(textInput({
+    label: 'Anaesthetic allergy details',
+    section: 'currentMedications', field: 'anaestheticAllergyDetails',
+    placeholder: 'e.g. Lidocaine - rash, Articaine - swelling'
+  }));
+  card.appendChild(anaesAllergy);
+
+  card.appendChild(textArea({
+    label: 'Other medications',
+    section: 'currentMedications', field: 'otherMedications',
+    placeholder: 'List any other medications you are currently taking',
+    rows: 3
+  }));
+
+  return card;
+}
+
+function renderStep9() {
+  const card = sectionCard({
+    stepNumber: 9,
+    title: 'Radiographic Findings',
+    description: 'X-ray and imaging results.'
+  });
+
+  card.appendChild(textArea({
+    label: 'Panoramic (OPG) findings',
+    section: 'radiographicFindings', field: 'panoramicFindings',
+    placeholder: 'e.g. No significant findings; or describe pathology'
+  }));
+  card.appendChild(textArea({
+    label: 'Periapical radiograph findings',
+    section: 'radiographicFindings', field: 'periapicalFindings',
+    placeholder: 'e.g. Periapical radiolucency at 46; widened PDL space at 36'
+  }));
+  card.appendChild(textArea({
+    label: 'Bitewing radiograph findings',
+    section: 'radiographicFindings', field: 'bitewingFindings',
+    placeholder: 'e.g. Interproximal caries at 15 mesial; overhanging restoration at 26 distal'
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Bone loss pattern',
+    section: 'radiographicFindings', field: 'boneLossPattern',
+    options: [
+      { value: 'none', label: 'No bone loss' },
+      { value: 'horizontal', label: 'Horizontal bone loss' },
+      { value: 'vertical', label: 'Vertical (angular) bone loss' },
+      { value: 'combined', label: 'Combined pattern' }
+    ]
+  }));
+
+  const boneLossDetails = document.createElement('div');
+  boneLossDetails.dataset.conditionalAny = 'radiographicFindings.boneLossPattern=horizontal,vertical,combined';
+  boneLossDetails.appendChild(textInput({
+    label: 'Bone loss details',
+    section: 'radiographicFindings', field: 'boneLossDetails',
+    placeholder: 'e.g. Generalised horizontal bone loss, 30% in molar regions'
+  }));
+  card.appendChild(boneLossDetails);
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Conditional sections + live DMFT banner
+// ----------------------------------------------------------------------
+
+function updateConditionalSections() {
+  document.querySelectorAll('[data-conditional]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional');
+    const [path, target] = expr.split('=');
+    const [section, field] = path.split('.');
+    const current = state[section]?.[field];
+    host.style.display = String(current) === target ? '' : 'none';
+  });
+  document.querySelectorAll('[data-conditional-any]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional-any');
+    const [path, targetCsv] = expr.split('=');
+    const [section, field] = path.split('.');
+    const current = String(state[section]?.[field] ?? '');
+    const targets = targetCsv.split(',');
+    host.style.display = targets.includes(current) ? '' : 'none';
+  });
+}
+
+/** Build the inner HTML (no wrapper) of the live DMFT banner. */
+function renderDmftBannerInner() {
+  const d = state.dmftAssessment.decayedTeeth ?? 0;
+  const m = state.dmftAssessment.missingTeeth ?? 0;
+  const f = state.dmftAssessment.filledTeeth ?? 0;
+  const score = getDMFTScore(state.dmftAssessment.decayedTeeth, state.dmftAssessment.missingTeeth, state.dmftAssessment.filledTeeth);
+  const cat = getDMFTCategory(score);
+  return `
+    <div class="dmft-score-line">
+      <strong>DMFT Score: ${score}</strong>
+      <span>(${esc(dmftScoreShortLabel(cat))})</span>
+    </div>
+    <div class="dmft-breakdown">D = ${d} + M = ${m} + F = ${f}</div>
+  `;
+}
+
+/** Refresh the live banner with the current category colour and value. */
+function refreshDmftBanner() {
+  const banner = document.getElementById('dmft-banner');
+  if (!banner) return;
+  const score = getDMFTScore(state.dmftAssessment.decayedTeeth, state.dmftAssessment.missingTeeth, state.dmftAssessment.filledTeeth);
+  const cat = getDMFTCategory(score);
+  banner.className = `dmft-banner ${dmftCategoryClass(cat)}`;
+  banner.innerHTML = renderDmftBannerInner();
+}
+
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
+
+const TRACKED_FIELDS = [
+  // Demographics
+  ['demographics', 'firstName'],
+  ['demographics', 'lastName'],
+  ['demographics', 'dateOfBirth'],
+  ['demographics', 'sex'],
+  ['demographics', 'emergencyContactName'],
+  ['demographics', 'emergencyContactPhone'],
+  // Chief complaint
+  ['chiefComplaint', 'primaryConcern'],
+  ['chiefComplaint', 'painSeverity'],
+  // Dental history
+  ['dentalHistory', 'visitFrequency'],
+  ['dentalHistory', 'brushingFrequency'],
+  ['dentalHistory', 'flossingFrequency'],
+  ['dentalHistory', 'dentalAnxietyLevel'],
+  // DMFT (3 numerics)
+  ['dmftAssessment', 'decayedTeeth'],
+  ['dmftAssessment', 'missingTeeth'],
+  ['dmftAssessment', 'filledTeeth'],
+  // Periodontal
+  ['periodontalAssessment', 'gumBleeding'],
+  ['periodontalAssessment', 'pocketDepthsAboveNormal'],
+  ['periodontalAssessment', 'gumRecession'],
+  ['periodontalAssessment', 'toothMobility'],
+  ['periodontalAssessment', 'furcationInvolvement'],
+  // Oral examination
+  ['oralExamination', 'tmjPain'],
+  ['oralExamination', 'tmjClicking'],
+  ['oralExamination', 'tmjLimitedOpening'],
+  ['oralExamination', 'occlusion'],
+  ['oralExamination', 'oralHygieneIndex'],
+  // Medical history
+  ['medicalHistory', 'cardiovascularDisease'],
+  ['medicalHistory', 'diabetes'],
+  ['medicalHistory', 'bleedingDisorder'],
+  ['medicalHistory', 'bisphosphonateUse'],
+  ['medicalHistory', 'radiationTherapyHeadNeck'],
+  ['medicalHistory', 'immunosuppression'],
+  // Current medications
+  ['currentMedications', 'anticoagulantUse'],
+  ['currentMedications', 'bisphosphonateCurrentUse'],
+  ['currentMedications', 'immunosuppressantUse'],
+  ['currentMedications', 'allergyToAnaesthetics'],
+  // Radiographic findings
+  ['radiographicFindings', 'boneLossPattern']
+];
+
+function updateProgress() {
+  let answered = 0;
+  for (const [section, field] of TRACKED_FIELDS) {
+    const v = state[section][field];
+    if (v !== null && v !== undefined && v !== '') answered++;
+  }
+  const total = TRACKED_FIELDS.length;
+  const percent = Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+}
+
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'high': return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low': return 'flag-low';
+    default: return '';
+  }
+}
+
+function renderReport() {
+  if (!lastResult) return;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { dmftScore, dmftCategory, firedRules, additionalFlags, timestamp } = lastResult;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags raised.</p>`
+    : `
+      <ul class="flags">
+        ${additionalFlags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(f.priority.toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  const firedRows = firedRules.map((r) => `
+    <tr>
+      <th scope="row">${esc(r.id)}</th>
+      <td>${esc(r.system)}</td>
+      <td>${esc(r.description)}</td>
+      <td><span class="cat-pill cat-${esc(r.category)}">${esc(dmftScoreShortLabel(r.category) || r.category)}</span></td>
+    </tr>
+  `).join('');
+
+  const firedTable = firedRules.length === 0
+    ? `<p class="muted">No grading rules fired.</p>`
+    : `
+      <table class="subscales">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">System</th>
+            <th scope="col">Finding</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>${firedRows}</tbody>
+      </table>
+    `;
+
+  const d = state.dmftAssessment.decayedTeeth ?? 0;
+  const m = state.dmftAssessment.missingTeeth ?? 0;
+  const f = state.dmftAssessment.filledTeeth ?? 0;
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>Dental Assessment Report</h2>
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <h3>DMFT Total Score</h3>
+      <p class="dmft-summary">
+        <span class="dmft-score-badge ${dmftCategoryClass(dmftCategory)}">${dmftScore}</span>
+        <span class="dmft-category-label">${esc(dmftCategoryLabel(dmftCategory))}</span>
+      </p>
+      <p class="muted">D = ${d} + M = ${m} + F = ${f}</p>
+
+      <h3>Fired Rules</h3>
+      ${firedTable}
+
+      <h3>Flagged Issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const startOverBtn = document.getElementById('start-over-btn');
+  if (startOverBtn) startOverBtn.addEventListener('click', startOver);
+}
+
+function submitForm() {
+  const { dmftScore, dmftCategory, firedRules } = calculateDMFT(state);
+  const additionalFlags = detectAdditionalFlags(state);
+  lastResult = {
+    dmftScore,
+    dmftCategory,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Clear all answers and start a fresh assessment?')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  document.getElementById('report').innerHTML = '';
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+  refreshDmftBanner();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  host.innerHTML = '';
+  host.appendChild(renderStep1());
+  host.appendChild(renderStep2());
+  host.appendChild(renderStep3());
+  host.appendChild(renderStep4());
+  host.appendChild(renderStep5());
+  host.appendChild(renderStep6());
+  host.appendChild(renderStep7());
+  host.appendChild(renderStep8());
+  host.appendChild(renderStep9());
+}
+
+function init() {
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+  refreshDmftBanner();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();
