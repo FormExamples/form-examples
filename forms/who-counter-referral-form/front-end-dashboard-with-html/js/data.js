@@ -1,0 +1,185 @@
+// Sample patient counter-referrals for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every follow-up timeframe, every status flag,
+// and includes one row where the patient/family has not been informed.
+
+(function () {
+'use strict';
+window.WhoCounterReferralDashboard = window.WhoCounterReferralDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    patientName: 'Smith, Jane',
+    dateOfBirth: '1972-03-14',
+    sex: 'F',
+    referralFacility: 'St Mary Tertiary Care Centre',
+    primaryCareFacility: 'Riverside Family Practice',
+    finalDiagnosis: 'NSTEMI — post-PCI',
+    followUpTimeframe: 'urgent',
+    statusFlags: ['weight-bearing'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 1,
+    dischargedAt: '2026-04-12T11:30:00Z'
+  },
+  {
+    id: '2',
+    patientName: 'Patel, Priya',
+    dateOfBirth: '1989-11-02',
+    sex: 'F',
+    referralFacility: 'University Teaching Hospital',
+    primaryCareFacility: 'Greenfield Community Clinic',
+    finalDiagnosis: 'Severe traumatic brain injury — recovering',
+    followUpTimeframe: '2-6-days',
+    statusFlags: ['cognitive-impairment', 'carer-dependent'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 2,
+    dischargedAt: '2026-04-15T09:10:00Z'
+  },
+  {
+    id: '3',
+    patientName: 'Jones, Margaret',
+    dateOfBirth: '1955-06-21',
+    sex: 'F',
+    referralFacility: 'Regional Referral Hospital',
+    primaryCareFacility: 'Coastal Rural Clinic',
+    finalDiagnosis: 'Septic shock — resolved',
+    followUpTimeframe: '1-2-weeks',
+    statusFlags: ['carer-dependent'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 1,
+    dischargedAt: '2026-04-19T14:45:00Z'
+  },
+  {
+    id: '4',
+    patientName: 'Williams, David',
+    dateOfBirth: '1968-09-08',
+    sex: 'M',
+    referralFacility: 'Central Trauma Centre',
+    primaryCareFacility: 'Northbridge GP Surgery',
+    finalDiagnosis: 'Polytrauma — fractures stabilised',
+    followUpTimeframe: '2-6-days',
+    statusFlags: ['spinal', 'weight-bearing'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 2,
+    dischargedAt: '2026-04-20T08:20:00Z'
+  },
+  {
+    id: '5',
+    patientName: 'Brown, Sarah',
+    dateOfBirth: '1991-01-30',
+    sex: 'F',
+    referralFacility: 'University Teaching Hospital',
+    primaryCareFacility: 'Eastside Maternity Clinic',
+    finalDiagnosis: 'Postpartum haemorrhage — stabilised',
+    followUpTimeframe: 'urgent',
+    statusFlags: [],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 0,
+    dischargedAt: '2026-04-18T17:00:00Z'
+  },
+  {
+    id: '6',
+    patientName: 'Taylor, James',
+    dateOfBirth: '1980-07-19',
+    sex: 'M',
+    referralFacility: 'Cardiac Specialist Centre',
+    primaryCareFacility: 'Lakeside Family Practice',
+    finalDiagnosis: 'Unstable angina — medically managed',
+    followUpTimeframe: '1-2-weeks',
+    statusFlags: [],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 0,
+    dischargedAt: '2026-04-19T12:25:00Z'
+  },
+  {
+    id: '7',
+    patientName: 'Davies, Helen',
+    dateOfBirth: '1947-12-04',
+    sex: 'F',
+    referralFacility: 'Stroke Unit — Central',
+    primaryCareFacility: 'Riverside Family Practice',
+    finalDiagnosis: 'Acute ischaemic stroke — residual deficit',
+    followUpTimeframe: '2-6-days',
+    statusFlags: ['cognitive-impairment', 'carer-dependent', 'weight-bearing'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 3,
+    dischargedAt: '2026-04-22T15:15:00Z'
+  },
+  {
+    id: '8',
+    patientName: 'Wilson, Robert',
+    dateOfBirth: '1962-04-27',
+    sex: 'M',
+    referralFacility: 'Regional Referral Hospital',
+    primaryCareFacility: 'Highland Remote Clinic',
+    finalDiagnosis: 'Pulmonary embolism — anticoagulated',
+    followUpTimeframe: 'over-2-weeks',
+    statusFlags: [],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 0,
+    dischargedAt: '2026-04-23T10:40:00Z'
+  },
+  {
+    id: '9',
+    patientName: 'Evans, Catherine',
+    dateOfBirth: '1996-10-12',
+    sex: 'F',
+    referralFacility: 'University Teaching Hospital',
+    primaryCareFacility: 'Westgate Family Practice',
+    finalDiagnosis: 'Diabetic ketoacidosis — resolved',
+    followUpTimeframe: '1-2-weeks',
+    statusFlags: [],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 0,
+    dischargedAt: '2026-04-21T13:50:00Z'
+  },
+  {
+    id: '10',
+    patientName: 'Thomas, Michael',
+    dateOfBirth: '1958-08-15',
+    sex: 'M',
+    referralFacility: 'Central Trauma Centre',
+    primaryCareFacility: 'Island Coastal Clinic',
+    finalDiagnosis: 'Penetrating chest trauma — palliative care',
+    followUpTimeframe: 'urgent',
+    statusFlags: ['palliative-care'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 1,
+    dischargedAt: '2026-04-24T09:30:00Z'
+  },
+  {
+    id: '11',
+    patientName: 'Robinson, Emma',
+    dateOfBirth: '2003-02-09',
+    sex: 'F',
+    referralFacility: 'Regional Referral Hospital',
+    primaryCareFacility: 'Greenfield Community Clinic',
+    finalDiagnosis: 'Status epilepticus — controlled',
+    followUpTimeframe: '2-6-days',
+    statusFlags: [],
+    patientFamilyInformed: false,
+    highPriorityFlagCount: 0,
+    dischargedAt: '2026-04-25T11:05:00Z'
+  },
+  {
+    id: '12',
+    patientName: 'Clark, George',
+    dateOfBirth: '1944-05-25',
+    sex: 'M',
+    referralFacility: 'Cardiac Specialist Centre',
+    primaryCareFacility: 'Northbridge GP Surgery',
+    finalDiagnosis: 'Aortic dissection — post-operative',
+    followUpTimeframe: 'urgent',
+    statusFlags: ['cognitive-impairment', 'palliative-care'],
+    patientFamilyInformed: true,
+    highPriorityFlagCount: 2,
+    dischargedAt: '2026-04-26T14:00:00Z'
+  }
+];
+
+window.WhoCounterReferralDashboard.samplePatients = samplePatients;
+})();
