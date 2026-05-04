@@ -4,16 +4,109 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Palliative Assessment — patient questionnaire</title>
+  <meta name="description" content="ESAS-r symptom assessment plus structured palliative-care review including diagnosis, prognosis, performance status, goals of care, medications, psychosocial concerns, carer support, and multidisciplinary plan.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Palliative Assessment</h1>
+      <p class="subtitle">Edmonton Symptom Assessment System — revised (ESAS-r) plus structured palliative-care review.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Palliative Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Palliative Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This questionnaire helps your palliative-care team understand the
+        symptoms you are experiencing right now and the support you and
+        your family need. The symptom-scoring section uses the validated
+        Edmonton Symptom Assessment System — revised (ESAS-r): for each of
+        ten symptoms, you choose a number between 0 (no symptom) and
+        10 (worst possible symptom).
+      </p>
+      <p>
+        All answers are saved automatically in your browser as you go.
+        If a question does not apply to you, leave it blank. If you are
+        in severe distress or have a sudden change in symptoms, please
+        contact your palliative-care team or local emergency service.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Primary Diagnosis & Prognosis, -->
+        <!-- 3 ESAS-r Symptom Scoring, 4 Performance Status, -->
+        <!-- 5 Goals of Care & ACP Documents, -->
+        <!-- 6 Medications & Symptom Control Plan, -->
+        <!-- 7 Psychosocial & Spiritual Concerns, -->
+        <!-- 8 Carer & Family Support, -->
+        <!-- 9 Multidisciplinary Plan & Referrals -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        ESAS-r (Edmonton Symptom Assessment System — revised) is a validated
+        ten-item symptom-intensity instrument for palliative-care patients.
+        This screening tool is for information only and is not a substitute
+        for clinical judgement; please discuss your results with your
+        palliative-care team.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PalliativeAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/esas-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -4,16 +4,104 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Seasonal Affective Disorder Assessment — patient questionnaire</title>
+  <meta name="description" content="Combined SPAQ Global Seasonality Score (GSS) and PHQ-9 depression severity self-report.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Seasonal Affective Disorder Assessment</h1>
+      <p class="subtitle">SPAQ Global Seasonality Score (GSS) plus PHQ-9 depression screening.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Seasonal Affective Disorder Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Seasonal Affective Disorder Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your mood, sleep, energy,
+        appetite, and seasonal patterns over the past two weeks (PHQ-9) and
+        across the year (SPAQ). This combined screening tool is designed to
+        identify Seasonal Affective Disorder (SAD) and co-occurring depression.
+        All answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If you are having thoughts of harming yourself or feel unsafe right
+        now, please contact the Samaritans free on <strong>116 123</strong>
+        (UK / ROI), or call <strong>999</strong> or go to your nearest A&amp;E
+        if you are in immediate danger.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Seasonal Pattern History, 3 Current Mood (PHQ-9), -->
+        <!-- 4 Sleep & Energy, 5 Appetite & Weight, 6 Social & Occupational Impact, -->
+        <!-- 7 Light Exposure, 8 Previous Treatments, 9 Risk Assessment, -->
+        <!-- 10 Treatment Plan & Monitoring -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The SPAQ (Seasonal Pattern Assessment Questionnaire) Global Seasonality
+        Score and the PHQ-9 (Patient Health Questionnaire — 9 item) are
+        validated screening instruments. This tool is for information only and
+        is not a diagnosis; please discuss your results with your clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SeasonalAffectiveDisorderAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/sad-rules.js"></script>
+  <script src="js/sad-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
