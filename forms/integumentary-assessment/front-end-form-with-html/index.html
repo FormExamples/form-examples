@@ -4,16 +4,104 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Integumentary Assessment — patient questionnaire</title>
+  <meta name="description" content="Structured integumentary (skin, hair, nails) clinical assessment combining a head-to-toe skin inspection with the Braden Scale for pressure ulcer risk and wound TIME assessment.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Integumentary Assessment</h1>
+      <p class="subtitle">Skin, hair, and nail review with Braden Scale pressure-ulcer risk scoring.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Integumentary Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Integumentary Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This integumentary assessment is normally completed by a clinician
+        with the patient. It records a head-to-toe skin inspection together
+        with hair, scalp, and nail findings; characterises any wound using
+        the TIME framework; and grades pressure-ulcer risk using the
+        validated Braden Scale (range 6-23, lower = higher risk). Answers
+        are saved automatically in your browser as you go.
+      </p>
+      <p>
+        If the patient has a wound that is bleeding heavily, has signs of
+        sepsis (spreading erythema, fever, hypotension), or rapidly
+        progressing necrosis, escalate to urgent clinical care immediately.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Presenting Skin Concern, 3 Skin Inspection, -->
+        <!-- 4 Hair & Scalp Examination, 5 Nail Examination, -->
+        <!-- 6 Wound Assessment, 7 Braden Scale Scoring, -->
+        <!-- 8 Photography & Documentation, 9 Clinical Impression & Care Plan -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Braden Scale for Predicting Pressure Sore Risk (Bergstrom,
+        Braden, Laguzza & Holman, 1987) is a validated 6-subscale instrument
+        scored 6-23. This screening tool supports clinical decision making
+        but is not a substitute for individualised clinical judgement.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.IntegumentaryAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/integumentary-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
