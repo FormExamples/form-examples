@@ -4,16 +4,146 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Blood Donation Assessment — clinician dashboard</title>
+  <meta name="description" content="JPAC Donor Selection Guidelines clinician dashboard: review donor submissions with eligibility status, hemoglobin, vital signs, and risk flags.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#donors-table">Skip to donors table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Blood Donation Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        JPAC Donor Selection Guidelines (DSG) donor list with eligibility
+        status, hemoglobin, vital-sign status, and risk flag.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Blood Donation Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Blood Donation Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or donor name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-eligibility">Eligibility</label>
+          <select id="filter-eligibility" class="select-input">
+            <option value="">All eligibility statuses</option>
+            <option value="Eligible">Eligible</option>
+            <option value="Temporarily Deferred">Temporarily Deferred</option>
+            <option value="Permanently Deferred">Permanently Deferred</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-vitals">Vital Signs</label>
+          <select id="filter-vitals" class="select-input">
+            <option value="">All vital-sign statuses</option>
+            <option value="Normal">Normal</option>
+            <option value="Borderline">Borderline</option>
+            <option value="Out of Range">Out of Range</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Flag</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading donors...</span>
+      </div>
+    </section>
+
+    <!-- Donors table -->
+    <section
+      class="table-card"
+      aria-labelledby="donors-table-heading"
+    >
+      <h2 id="donors-table-heading" class="visually-hidden">Donors</h2>
+
+      <div class="table-scroll">
+        <table id="donors-table" class="donors-table">
+          <thead>
+            <tr id="donors-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="donors-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="donors-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No donors match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        JPAC Donor Selection Guidelines (DSG) is the donor-eligibility
+        standard used by UK NHSBT. This dashboard is a clinical-review tool
+        and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BloodDonationAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

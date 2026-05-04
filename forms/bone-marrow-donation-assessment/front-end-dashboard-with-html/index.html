@@ -4,16 +4,162 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Bone Marrow Donation Assessment — clinician dashboard</title>
+  <meta name="description" content="Bone Marrow Donation Assessment clinician dashboard: review donor submissions with HLA match grade, eligibility, risk level, and collection method.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to donors table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Bone Marrow Donation Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Haematopoietic stem cell donor list with HLA match grade,
+        eligibility classification, risk level, and proposed collection method.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Bone Marrow Donation Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Bone Marrow Donation Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or donor name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-eligibility">Eligibility</label>
+          <select id="filter-eligibility" class="select-input">
+            <option value="">All eligibility</option>
+            <option value="Suitable">Suitable</option>
+            <option value="Conditionally Suitable">Conditionally Suitable</option>
+            <option value="Unsuitable">Unsuitable</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Level</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All risk levels</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-hla">HLA Match</label>
+          <select id="filter-hla" class="select-input">
+            <option value="">All match grades</option>
+            <option value="10/10">10/10</option>
+            <option value="9/10">9/10</option>
+            <option value="8/10">8/10</option>
+            <option value="7/10">7/10</option>
+            <option value="<7/10">&lt;7/10</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-method">Collection Method</label>
+          <select id="filter-method" class="select-input">
+            <option value="">All methods</option>
+            <option value="PBSC">PBSC</option>
+            <option value="Marrow">Marrow</option>
+            <option value="Either">Either</option>
+            <option value="Neither">Neither</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading donors...</span>
+      </div>
+    </section>
+
+    <!-- Donors table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Donors</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No donors match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Donor Eligibility Classification with HLA Match Grading is the
+        screening framework for haematopoietic stem cell donation. This
+        dashboard is a clinical-review tool and is not a final eligibility
+        determination.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BoneMarrowDonationAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

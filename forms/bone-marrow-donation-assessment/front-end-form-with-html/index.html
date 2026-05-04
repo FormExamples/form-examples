@@ -3,17 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Bone Marrow Donation Assessment — patient questionnaire</title>
+  <title>Bone Marrow Donation Assessment — donor questionnaire</title>
+  <meta name="description" content="Haematopoietic stem cell donor evaluation: HLA typing, medical history, screening, anaesthetic fitness, and collection method suitability.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Bone Marrow Donation Assessment</h1>
+      <p class="subtitle">Donor evaluation: HLA matching, health screening, anaesthetic fitness, and collection method.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Bone Marrow Donation Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Bone Marrow Donation Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below to assess your suitability as a
+        haematopoietic stem cell donor. The assessment covers HLA matching,
+        medical history, physical examination, laboratory results, infectious
+        disease screening, anaesthetic fitness, collection method, and
+        psychological readiness. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        This form is part of clinical donor evaluation and does not by itself
+        determine final eligibility — the assessing clinician will review
+        every answer.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Donor Registration & HLA Typing, -->
+        <!-- 3 Medical History, 4 Physical Examination, -->
+        <!-- 5 Haematological Assessment, 6 Infectious Disease Screening, -->
+        <!-- 7 Anaesthetic Assessment, 8 Collection Method Assessment, -->
+        <!-- 9 Psychological Readiness, 10 Consent & Eligibility Decision -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Donor eligibility report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Bone marrow donation requires careful clinical assessment of HLA match
+        quality, donor health, anaesthetic fitness, and informed consent.
+        This screening tool supports evaluation but is not a substitute for
+        clinical judgement; results should be reviewed with the donor
+        assessment team.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.BoneMarrowDonationAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/donor-rules.js"></script>
+  <script src="js/donor-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
