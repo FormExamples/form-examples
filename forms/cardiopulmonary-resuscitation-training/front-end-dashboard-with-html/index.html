@@ -3,17 +3,159 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cardiopulmonary Resuscitation Training — clinician dashboard</title>
+  <title>Cardiopulmonary Resuscitation Training — training coordinator dashboard</title>
+  <meta name="description" content="AHA BLS Skills Verification training coordinator dashboard: review trainee Pass/Fail outcomes, critical-action failures, certification expiry, and instructor sign-off.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#trainees-table">Skip to trainees table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cardiopulmonary Resuscitation Training — Training Coordinator Dashboard</h1>
+      <p class="subtitle">
+        AHA BLS Skills Verification trainee list with Pass/Fail outcome,
+        critical-action review, and certification currency.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Cardiopulmonary Resuscitation Training</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Cardiopulmonary Resuscitation Training form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Trainee name, ID, or training centre..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select-input">
+            <option value="">All outcomes</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-role">Role</label>
+          <select id="filter-role" class="select-input">
+            <option value="">All roles</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Healthcare Assistant">Healthcare Assistant</option>
+            <option value="Lifeguard">Lifeguard</option>
+            <option value="Manual Handler">Manual Handler</option>
+            <option value="Security Officer">Security Officer</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-currency">Certification</label>
+          <select id="filter-currency" class="select-input">
+            <option value="">All certifications</option>
+            <option value="Current">Current</option>
+            <option value="Expiring Soon">Expiring Soon</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-instructor">Instructor</label>
+          <select id="filter-instructor" class="select-input">
+            <option value="">All instructors</option>
+            <!-- Instructor options populated by app.js -->
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading trainees...</span>
+      </div>
+    </section>
+
+    <!-- Trainees table -->
+    <section
+      class="table-card"
+      aria-labelledby="trainees-table-heading"
+    >
+      <h2 id="trainees-table-heading" class="visually-hidden">Trainees</h2>
+
+      <div class="table-scroll">
+        <table id="trainees-table" class="trainees-table">
+          <thead>
+            <tr id="trainees-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="trainees-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="trainees-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No trainees match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        AHA BLS Skills Verification is a competency checklist used by
+        certified instructors to verify adult Basic Life Support and AED
+        skills. This dashboard is a training-administration tool and is not
+        a clinical record. Standard certification validity is two years.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CardiopulmonaryResuscitationTrainingDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

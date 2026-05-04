@@ -3,17 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cardiopulmonary Resuscitation Training — patient questionnaire</title>
+  <title>Cardiopulmonary Resuscitation Training — examiner checklist</title>
+  <meta name="description" content="AHA BLS Skills Verification Checklist for adult CPR / AED competency, with pass/fail outcome and critical-action audit.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to checklist</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Cardiopulmonary Resuscitation Training</h1>
+      <p class="subtitle">AHA BLS Skills Verification Checklist — examiner-completed.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Checklist completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 items assessed (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Cardiopulmonary Resuscitation Training</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Cardiopulmonary Resuscitation Training form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Use this checklist while observing a trainee perform single-rescuer
+        adult Basic Life Support (BLS) on a manikin. For each item, mark
+        whether the trainee demonstrated the skill correctly, has not yet
+        demonstrated it, or whether the item was not assessed in this
+        session. Critical actions are highlighted; any critical-action
+        failure results in an overall <strong>Fail</strong>.
+      </p>
+      <p>
+        Pass criterion: all required skills demonstrated, no critical-action
+        failure, and at most two non-critical deficiencies. Answers are
+        saved automatically to your browser as you go.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Trainee Details, 2 Scene Safety, 3 Responsiveness/Breathing, -->
+        <!-- 4 Activate Emergency Response, 5 Chest Compressions, -->
+        <!-- 6 Airway & Rescue Breaths, 7 AED & Shock Delivery, -->
+        <!-- 8 Team Dynamics, Handoff & Feedback -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Grade and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Skills verification report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The AHA BLS Skills Verification Checklist is a competency-based
+        instrument used to certify rescuers on adult Basic Life Support and
+        AED skills. This examiner tool records observed performance and
+        applies AHA pass/fail criteria; it is not a substitute for the
+        instructor's professional judgement.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.CardiopulmonaryResuscitationTraining`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/bls-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
