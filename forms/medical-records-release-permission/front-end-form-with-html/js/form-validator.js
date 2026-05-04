@@ -1,34 +1,55 @@
-import { validationRules } from './validation-rules.js';
-import { validationStatus } from './utils.js';
+// Pure form-completeness validator for the Medical Records Release
+// Permission form. Mirrors `src/lib/engine/form-validator.ts` from the
+// SvelteKit implementation: each missing required field, each invalid
+// email, and each cross-field date inconsistency surfaces as a fired rule.
+
+(function () {
+'use strict';
+const NS = window.MedicalRecordsReleasePermission =
+  window.MedicalRecordsReleasePermission || {};
+const {
+  validationRules,
+  completenessPercent,
+  validationStatus,
+  completenessStatus,
+  isValidEmail
+} = NS;
 
 /**
- * Pure function: validates the Medical Records Release Permission form data.
- * Returns a completeness score (0-100), status labels, and fired rules
- * for each incomplete or invalid field.
+ * Validate the full assessment data and return a completeness score plus a
+ * list of fired rules. Pure function: no side effects.
+ *
+ * @param {AssessmentData} data
+ * @returns {{
+ *   completenessScore: number,
+ *   completenessStatusLabel: string,
+ *   validationStatusLabel: string,
+ *   firedRules: FiredRule[],
+ *   completedFields: number,
+ *   totalFields: number
+ * }}
  */
-export function validateForm(data) {
+function validateForm(data) {
   const firedRules = [];
   const totalFields = validationRules.length;
   let completedFields = 0;
 
-  const yesRequiredFields = [
-    'acknowledgedRightToRevoke',
-    'acknowledgedDataProtection',
-    'acknowledgedNoChargeForAccess',
-    'patientSignatureConfirmed',
-    'witnessSignatureConfirmed'
-  ];
-
   for (const rule of validationRules) {
     const section = data[rule.section];
-    const value = section[rule.field];
+    const value = section ? section[rule.field] : undefined;
 
     let isComplete = false;
-
     if (Array.isArray(value)) {
       isComplete = value.length > 0;
     } else if (typeof value === 'string') {
-      if (yesRequiredFields.includes(rule.field)) {
+      // Acknowledgement / signature fields must explicitly be 'yes' to count.
+      if (
+        rule.field === 'acknowledgedRightToRevoke' ||
+        rule.field === 'acknowledgedDataProtection' ||
+        rule.field === 'acknowledgedNoChargeForAccess' ||
+        rule.field === 'patientSignatureConfirmed' ||
+        rule.field === 'witnessSignatureConfirmed'
+      ) {
         isComplete = value === 'yes';
       } else {
         isComplete = value.trim() !== '';
@@ -68,7 +89,7 @@ export function validateForm(data) {
     });
   }
 
-  // Date validation: end date must be after start date
+  // End date must be after start date.
   if (data.authorizationPeriod.startDate && data.authorizationPeriod.endDate) {
     if (data.authorizationPeriod.endDate < data.authorizationPeriod.startDate) {
       firedRules.push({
@@ -80,7 +101,7 @@ export function validateForm(data) {
     }
   }
 
-  // Date range validation for records
+  // Specific date range requires both endpoints.
   if (data.recordsToRelease.specificDateRange === 'yes') {
     if (!data.recordsToRelease.dateFrom) {
       firedRules.push({
@@ -100,8 +121,11 @@ export function validateForm(data) {
     }
   }
 
-  // Purpose "other" requires details
-  if (data.purposeOfRelease.purpose === 'other' && !(data.purposeOfRelease.otherDetails || '').trim()) {
+  // Purpose "other" requires details.
+  if (
+    data.purposeOfRelease.purpose === 'other' &&
+    !data.purposeOfRelease.otherDetails.trim()
+  ) {
     firedRules.push({
       id: 'RULE-FMT-006',
       domain: 'purposeOfRelease',
@@ -110,25 +134,16 @@ export function validateForm(data) {
     });
   }
 
-  const score = totalFields === 0 ? 100 : Math.round((completedFields / totalFields) * 100);
-  const status = completenessStatus(score);
-  const valStatus = validationStatus(firedRules.length);
-
+  const score = completenessPercent(completedFields, totalFields);
   return {
     completenessScore: score,
-    completenessStatus: status,
-    validationStatusLabel: valStatus,
-    firedRules
+    completenessStatusLabel: completenessStatus(score),
+    validationStatusLabel: validationStatus(firedRules.length),
+    firedRules,
+    completedFields,
+    totalFields
   };
 }
 
-function completenessStatus(score) {
-  if (score === 100) return 'Complete';
-  if (score >= 75) return 'Nearly Complete';
-  if (score >= 50) return 'Partially Complete';
-  return 'Incomplete';
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+Object.assign(NS, { validateForm });
+})();

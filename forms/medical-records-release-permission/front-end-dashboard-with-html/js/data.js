@@ -1,18 +1,127 @@
-/** Sample patient release records for the clinician dashboard */
-export const patients = [
-  { id: '1', nhsNumber: '943 476 5919', patientName: 'Smith, John', recipientName: 'Dr. A. Patel', recipientOrganization: 'Royal London Hospital', status: 'approved', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-03-01', flagCount: 0 },
-  { id: '2', nhsNumber: '721 938 4102', patientName: 'Patel, Priya', recipientName: 'Dr. M. Khan', recipientOrganization: 'Birmingham City Hospital', status: 'submitted', completenessScore: 95, completenessLabel: 'nearly-complete', submittedDate: '2026-03-05', flagCount: 1 },
-  { id: '3', nhsNumber: '384 615 7230', patientName: 'Jones, Margaret', recipientName: 'Prof. S. Williams', recipientOrganization: 'Cardiff University Hospital', status: 'draft', completenessScore: 40, completenessLabel: 'incomplete', submittedDate: '', flagCount: 3 },
-  { id: '4', nhsNumber: '512 847 9063', patientName: 'Williams, David', recipientName: 'Dr. H. Singh', recipientOrganization: 'Leeds General Infirmary', status: 'approved', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-02-18', flagCount: 0 },
-  { id: '5', nhsNumber: '167 293 8451', patientName: 'Brown, Sarah', recipientName: 'Dr. L. Chen', recipientOrganization: 'Manchester Royal Infirmary', status: 'expired', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2025-06-10', flagCount: 0 },
-  { id: '6', nhsNumber: '835 162 4097', patientName: 'Taylor, James', recipientName: 'Dr. R. Thompson', recipientOrganization: 'St Thomas Hospital', status: 'submitted', completenessScore: 85, completenessLabel: 'nearly-complete', submittedDate: '2026-03-08', flagCount: 2 },
-  { id: '7', nhsNumber: '294 708 5316', patientName: 'Davies, Helen', recipientName: 'Dr. J. Murray', recipientOrganization: 'Edinburgh Royal Infirmary', status: 'revoked', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-01-15', flagCount: 0 },
-  { id: '8', nhsNumber: '608 341 2975', patientName: 'Wilson, Robert', recipientName: 'Dr. E. Baker', recipientOrganization: 'Nottingham City Hospital', status: 'approved', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-03-02', flagCount: 0 },
-  { id: '9', nhsNumber: '473 926 1084', patientName: 'Evans, Catherine', recipientName: 'Dr. P. Gupta', recipientOrganization: 'Bristol Royal Infirmary', status: 'draft', completenessScore: 20, completenessLabel: 'incomplete', submittedDate: '', flagCount: 5 },
-  { id: '10', nhsNumber: '159 684 7302', patientName: 'Thomas, Michael', recipientName: 'Dr. N. Osei', recipientOrganization: 'Southampton General Hospital', status: 'submitted', completenessScore: 90, completenessLabel: 'nearly-complete', submittedDate: '2026-03-10', flagCount: 1 },
-  { id: '11', nhsNumber: '742 051 3896', patientName: 'Robinson, Emma', recipientName: 'Dr. C. Flores', recipientOrganization: 'Queens Medical Centre', status: 'approved', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-02-25', flagCount: 0 },
-  { id: '12', nhsNumber: '386 219 5740', patientName: 'Clark, George', recipientName: 'Dr. D. Ahmed', recipientOrganization: 'Kings College Hospital', status: 'expired', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2025-09-12', flagCount: 0 },
-  { id: '13', nhsNumber: '925 473 0168', patientName: 'Walker, Susan', recipientName: 'Dr. F. O\'Brien', recipientOrganization: 'Addenbrookes Hospital', status: 'draft', completenessScore: 60, completenessLabel: 'incomplete', submittedDate: '', flagCount: 2 },
-  { id: '14', nhsNumber: '618 305 9247', patientName: 'Hall, Richard', recipientName: 'Dr. B. Nair', recipientOrganization: 'Sheffield Teaching Hospitals', status: 'submitted', completenessScore: 80, completenessLabel: 'nearly-complete', submittedDate: '2026-03-11', flagCount: 1 },
-  { id: '15', nhsNumber: '057 842 6139', patientName: 'Young, Elizabeth', recipientName: 'Dr. K. Ramirez', recipientOrganization: 'Newcastle Freeman Hospital', status: 'revoked', completenessScore: 100, completenessLabel: 'complete', submittedDate: '2026-02-01', flagCount: 0 },
+// Sample patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every authorisation status and every purpose
+// category, with NHS numbers in the canonical "NNN NNN NNNN" display form
+// and ISO-8601 calendar dates.
+
+(function () {
+'use strict';
+window.MedicalRecordsReleasePermissionDashboard =
+  window.MedicalRecordsReleasePermissionDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    nhsNumber: '943 476 5919',
+    patientName: 'Smith, John',
+    recipientOrg: 'Royal London Hospital',
+    purpose: 'Continuing Care',
+    status: 'approved',
+    submittedDate: '2026-03-01'
+  },
+  {
+    id: '2',
+    nhsNumber: '721 938 4102',
+    patientName: 'Patel, Priya',
+    recipientOrg: 'Bupa Health Centre',
+    purpose: 'Insurance',
+    status: 'pending',
+    submittedDate: '2026-03-05'
+  },
+  {
+    id: '3',
+    nhsNumber: '384 615 7230',
+    patientName: 'Jones, Margaret',
+    recipientOrg: 'Kings College Hospital',
+    purpose: 'Second Opinion',
+    status: 'approved',
+    submittedDate: '2026-02-20'
+  },
+  {
+    id: '4',
+    nhsNumber: '512 847 9063',
+    patientName: 'Williams, David',
+    recipientOrg: 'Harley Street Clinic',
+    purpose: 'Personal Use',
+    status: 'pending',
+    submittedDate: '2026-03-07'
+  },
+  {
+    id: '5',
+    nhsNumber: '167 293 8451',
+    patientName: 'Brown, Sarah',
+    recipientOrg: 'NHS England Legal',
+    purpose: 'Legal Proceedings',
+    status: 'approved',
+    submittedDate: '2026-02-15'
+  },
+  {
+    id: '6',
+    nhsNumber: '835 162 4097',
+    patientName: 'Taylor, James',
+    recipientOrg: 'Cambridge Research Institute',
+    purpose: 'Research',
+    status: 'expired',
+    submittedDate: '2025-12-10'
+  },
+  {
+    id: '7',
+    nhsNumber: '294 708 5316',
+    patientName: 'Davies, Helen',
+    recipientOrg: 'St Thomas Hospital',
+    purpose: 'Continuing Care',
+    status: 'approved',
+    submittedDate: '2026-01-28'
+  },
+  {
+    id: '8',
+    nhsNumber: '608 341 2975',
+    patientName: 'Wilson, Robert',
+    recipientOrg: 'AXA PPP Healthcare',
+    purpose: 'Insurance',
+    status: 'pending',
+    submittedDate: '2026-03-06'
+  },
+  {
+    id: '9',
+    nhsNumber: '473 926 1084',
+    patientName: 'Evans, Catherine',
+    recipientOrg: 'University College Hospital',
+    purpose: 'Second Opinion',
+    status: 'approved',
+    submittedDate: '2026-02-28'
+  },
+  {
+    id: '10',
+    nhsNumber: '159 684 7302',
+    patientName: 'Thomas, Michael',
+    recipientOrg: 'NHS Occupational Health',
+    purpose: 'Employment',
+    status: 'expired',
+    submittedDate: '2025-11-20'
+  },
+  {
+    id: '11',
+    nhsNumber: '742 051 3896',
+    patientName: 'Robinson, Emma',
+    recipientOrg: 'Great Ormond Street Hospital',
+    purpose: 'Continuing Care',
+    status: 'pending',
+    submittedDate: '2026-03-08'
+  },
+  {
+    id: '12',
+    nhsNumber: '386 219 5740',
+    patientName: 'Clark, George',
+    recipientOrg: 'Aviva Health',
+    purpose: 'Insurance',
+    status: 'approved',
+    submittedDate: '2026-02-10'
+  }
 ];
+
+window.MedicalRecordsReleasePermissionDashboard.samplePatients = samplePatients;
+})();

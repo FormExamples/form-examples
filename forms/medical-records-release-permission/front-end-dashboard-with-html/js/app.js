@@ -1,72 +1,60 @@
-// Medical Error Report - clinician dashboard (vanilla classic-script app).
+// Medical Records Release Permission - clinician dashboard (vanilla classic-script app).
 //
-// On boot we fetch the incident list from the backend; on any failure (or
+// On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + WHO severity dropdown + NCC MERP dropdown + reported
-// dropdown).
+// (search box + status dropdown + purpose dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.MedicalErrorReportDashboard`. Pulling them
-// off here keeps the rest of this file referring to short local names. The
-// whole file is wrapped in an IIFE so its top-level identifiers do not leak
-// to the global scope.
+// attach their exports to `window.MedicalRecordsReleasePermissionDashboard`.
+// Pulling them off here keeps the rest of this file referring to short local
+// names. The whole file is wrapped in an IIFE so its top-level identifiers
+// do not leak to the global scope.
 (function () {
 'use strict';
 const {
-  fetchIncidents,
-  sampleIncidents
-} = window.MedicalErrorReportDashboard;
+  fetchPatients,
+  samplePatients
+} = window.MedicalRecordsReleasePermissionDashboard;
 
 // ----------------------------------------------------------------------
 // State
 // ----------------------------------------------------------------------
 
-/** @type {import('./types.js').IncidentRow[]} */
-let incidents = [];
+/** @type {import('./types.js').PatientRow[]} */
+let patients = [];
 
 const filters = {
   search: '',
-  severity: '',
-  merp: '',
-  reported: '' // '', 'yes', 'no'
+  status: '',
+  purpose: ''
 };
 
-// Default sort: WHO severity descending so the most-harmful incidents
-// surface at the top of the list, then by incident date descending so
-// recent events come first within a severity band.
+// Default sort: submitted date descending. Newest authorisation requests
+// appear at the top of the list, mirroring the SvelteKit dashboard's
+// `init` callback which calls `sort-rows` with key=submittedDate, order=desc.
 const sortState = {
-  key: 'whoSeverity',
+  key: 'submittedDate',
   direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'incidentId',    label: 'Incident ID' },
-  { key: 'incidentDate',  label: 'Date' },
   { key: 'nhsNumber',     label: 'NHS Number' },
   { key: 'patientName',   label: 'Patient Name' },
-  { key: 'whoSeverity',   label: 'WHO Severity' },
-  { key: 'merpCategory',  label: 'NCC MERP' },
-  { key: 'errorType',     label: 'Error Type' },
-  { key: 'reportedFlag',  label: 'Reported' }
+  { key: 'recipientOrg',  label: 'Recipient Organisation' },
+  { key: 'purpose',       label: 'Purpose' },
+  { key: 'status',        label: 'Status' },
+  { key: 'submittedDate', label: 'Submitted' }
 ];
 
-// Rank used when sorting the whoSeverity column so 'Near Miss' < 'Critical'
-// regardless of locale.
-const severityRank = {
-  'Near Miss': 0,
-  'Mild': 1,
-  'Moderate': 2,
-  'Severe': 3,
-  'Critical': 4
-};
-
-// Rank used when sorting the merpCategory column. NCC MERP is alphabetic
-// A-I, but we keep an explicit table so future re-orderings stay safe.
-const merpRank = {
-  A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6, H: 7, I: 8
+// Rank used when sorting the status column so 'pending' is always less than
+// 'approved' which is less than 'expired', regardless of locale.
+const statusRank = {
+  'pending': 0,
+  'approved': 1,
+  'expired': 2
 };
 
 // ----------------------------------------------------------------------
@@ -83,22 +71,16 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-function severityClass(label) {
+function statusClass(label) {
   if (!label) return '';
-  return 'severity-' + String(label).toLowerCase().replace(/\s+/g, '-');
-}
-
-function merpClass(category) {
-  if (!category) return '';
-  return 'merp-' + String(category).toLowerCase();
+  return 'status-' + String(label).toLowerCase().replace(/\s+/g, '-');
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.severity !== '' ||
-    filters.merp !== '' ||
-    filters.reported !== ''
+    filters.status !== '' ||
+    filters.purpose !== ''
   );
 }
 
@@ -107,33 +89,31 @@ function hasActiveFilters() {
 // ----------------------------------------------------------------------
 
 /**
- * @param {import('./types.js').IncidentRow} row
+ * @param {import('./types.js').PatientRow} row
  * @returns {boolean}
  */
 function matchesFilters(row) {
   if (filters.search) {
     const term = filters.search.toLowerCase();
     const matches =
-      row.incidentId.toLowerCase().includes(term) ||
       row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term);
+      row.patientName.toLowerCase().includes(term) ||
+      row.recipientOrg.toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.severity && row.whoSeverity !== filters.severity) {
+  if (filters.status && row.status !== filters.status) {
     return false;
   }
-  if (filters.merp && row.merpCategory !== filters.merp) {
+  if (filters.purpose && row.purpose !== filters.purpose) {
     return false;
   }
-  if (filters.reported === 'yes' && !row.reportedFlag) return false;
-  if (filters.reported === 'no' && row.reportedFlag) return false;
   return true;
 }
 
 /**
  * Compare two rows for the active sort column. Categorical columns use
- * their rank tables; booleans sort false<true; everything else uses a
- * locale-aware string compare (which also handles ISO dates correctly).
+ * their rank tables; dates compare lexicographically (ISO-8601 ordering);
+ * everything else uses a locale-aware string compare.
  */
 function compareRows(a, b) {
   const key = sortState.key;
@@ -141,29 +121,21 @@ function compareRows(a, b) {
   let av = a[key];
   let bv = b[key];
 
-  if (key === 'whoSeverity') {
-    av = severityRank[av] ?? -1;
-    bv = severityRank[bv] ?? -1;
+  if (key === 'status') {
+    av = statusRank[av] ?? -1;
+    bv = statusRank[bv] ?? -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'merpCategory') {
-    av = merpRank[av] ?? -1;
-    bv = merpRank[bv] ?? -1;
-    return (av - bv) * dir;
-  }
-
-  if (key === 'reportedFlag') {
-    return ((av === bv) ? 0 : (av ? 1 : -1)) * dir;
-  }
-
-  // Default: string compare (incidentId, incidentDate, nhsNumber,
-  // patientName, errorType). ISO "YYYY-MM-DD" sorts correctly as a string.
+  // Dates are stored as ISO-8601 (YYYY-MM-DD) so a lexicographic compare
+  // is equivalent to a chronological compare and avoids parsing.
+  // Default: string compare (nhsNumber, patientName, recipientOrg, purpose,
+  // submittedDate).
   return String(av).localeCompare(String(bv)) * dir;
 }
 
 function visibleRows() {
-  return incidents.filter(matchesFilters).slice().sort(compareRows);
+  return patients.filter(matchesFilters).slice().sort(compareRows);
 }
 
 // ----------------------------------------------------------------------
@@ -171,7 +143,7 @@ function visibleRows() {
 // ----------------------------------------------------------------------
 
 function renderTableHead() {
-  const head = document.getElementById('incidents-table-head');
+  const head = document.getElementById('patients-table-head');
   if (!head) return;
   head.innerHTML = '';
 
@@ -207,8 +179,8 @@ function renderTableHead() {
 }
 
 function renderTableBody() {
-  const body = document.getElementById('incidents-table-body');
-  const empty = document.getElementById('incidents-empty-message');
+  const body = document.getElementById('patients-table-body');
+  const empty = document.getElementById('patients-empty-message');
   if (!body) return;
 
   const rows = visibleRows();
@@ -222,25 +194,17 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.whoSeverity === 'Critical') {
-      tr.classList.add('row-critical');
-    } else if (row.whoSeverity === 'Severe') {
-      tr.classList.add('row-severe');
+    if (row.status === 'expired') {
+      tr.classList.add('row-expired');
     }
 
     tr.innerHTML = `
-      <td><span class="incident-id">${esc(row.incidentId)}</span></td>
-      <td><span class="incident-date">${esc(row.incidentDate)}</span></td>
       <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="severity-badge ${severityClass(row.whoSeverity)}">${esc(row.whoSeverity)}</span></td>
-      <td><span class="merp-badge ${merpClass(row.merpCategory)}">${esc(row.merpCategory)}</span></td>
-      <td>${esc(row.errorType)}</td>
-      <td>
-        <span class="reported-badge ${row.reportedFlag ? 'reported-yes' : 'reported-no'}">
-          ${row.reportedFlag ? 'Yes' : 'No'}
-        </span>
-      </td>
+      <td>${esc(row.recipientOrg)}</td>
+      <td><span class="purpose-label">${esc(row.purpose)}</span></td>
+      <td><span class="status-badge ${statusClass(row.status)}">${esc(row.status)}</span></td>
+      <td><span class="submitted-date">${esc(row.submittedDate)}</span></td>
     `;
     body.appendChild(tr);
   }
@@ -249,14 +213,14 @@ function renderTableBody() {
 function renderFilterCount() {
   const el = document.getElementById('filter-count');
   if (!el) return;
-  const total = incidents.length;
+  const total = patients.length;
   const shown = visibleRows().length;
   if (total === 0) {
-    el.textContent = 'No incidents to display.';
+    el.textContent = 'No patients to display.';
   } else if (shown === total) {
-    el.textContent = `Showing ${total} of ${total} incidents`;
+    el.textContent = `Showing ${total} of ${total} patients`;
   } else {
-    el.textContent = `Showing ${shown} of ${total} incidents`;
+    el.textContent = `Showing ${shown} of ${total} patients`;
   }
 }
 
@@ -296,9 +260,8 @@ function onSortClick(key) {
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const severity = document.getElementById('filter-severity');
-  const merp = document.getElementById('filter-merp');
-  const reported = document.getElementById('filter-reported');
+  const status = document.getElementById('filter-status');
+  const purpose = document.getElementById('filter-purpose');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -307,34 +270,26 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (severity) {
-    severity.addEventListener('change', () => {
-      filters.severity = severity.value;
+  if (status) {
+    status.addEventListener('change', () => {
+      filters.status = status.value;
       renderAll();
     });
   }
-  if (merp) {
-    merp.addEventListener('change', () => {
-      filters.merp = merp.value;
-      renderAll();
-    });
-  }
-  if (reported) {
-    reported.addEventListener('change', () => {
-      filters.reported = reported.value;
+  if (purpose) {
+    purpose.addEventListener('change', () => {
+      filters.purpose = purpose.value;
       renderAll();
     });
   }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.severity = '';
-      filters.merp = '';
-      filters.reported = '';
+      filters.status = '';
+      filters.purpose = '';
       if (search) search.value = '';
-      if (severity) severity.value = '';
-      if (merp) merp.value = '';
-      if (reported) reported.value = '';
+      if (status) status.value = '';
+      if (purpose) purpose.value = '';
       renderAll();
     });
   }
@@ -344,23 +299,23 @@ function bindFilterInputs() {
 // Bootstrap
 // ----------------------------------------------------------------------
 
-async function loadIncidents() {
+async function loadPatients() {
   // Optimistic: show sample data immediately so the page is never blank,
   // then try the backend and replace if we get real data back.
-  incidents = sampleIncidents;
+  patients = samplePatients;
   renderAll();
 
   try {
-    const items = await fetchIncidents();
+    const items = await fetchPatients();
     if (items && items.length > 0) {
-      incidents = items;
+      patients = items;
       // Hide any earlier banner if a previous attempt had failed.
       const banner = document.getElementById('status-banner');
       if (banner) banner.hidden = true;
     } else {
       // Backend reachable but empty — keep sample data and notify.
       showStatusBanner(
-        'Showing sample data — backend returned no incidents.'
+        'Showing sample data — backend returned no patients.'
       );
     }
   } catch (err) {
@@ -374,7 +329,7 @@ async function loadIncidents() {
 
 function init() {
   bindFilterInputs();
-  loadIncidents();
+  loadPatients();
 }
 
 if (document.readyState === 'loading') {

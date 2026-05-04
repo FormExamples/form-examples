@@ -2,39 +2,38 @@
 //
 // Mirrors the SvelteKit dashboard's `src/lib/api.ts`. The backend lives at
 // http://localhost:5150 (Loco / axum); the dashboard endpoint returns a
-// `DashboardPatientsResponse`. When the fetch fails (CORS, network, server
+// `DashboardIncidentsResponse`. When the fetch fails (CORS, network, server
 // down) or returns an empty list, callers fall back to the sample data
 // shipped in `data.js` so the page is usable standalone.
 
 (function () {
 'use strict';
-window.MedicalRecordsReleasePermissionDashboard =
-  window.MedicalRecordsReleasePermissionDashboard || {};
+window.MedicalErrorReportDashboard = window.MedicalErrorReportDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const INCIDENTS_PATH = '/api/dashboard/incidents';
 
 /**
- * Fetch the patient list from the backend.
+ * Fetch the incident list from the backend.
  *
  * Resolves with the `items` array on a successful 2xx response. Rejects on
  * any network error or non-2xx response so the caller can fall back to
  * sample data and surface a user-visible notice.
  *
- * @returns {Promise<import('./types.js').PatientRow[]>}
+ * @returns {Promise<import('./types.js').IncidentRow[]>}
  */
-async function fetchPatients() {
-  const res = await fetch(`${API_BASE}${PATIENTS_PATH}`);
+async function fetchIncidents() {
+  const res = await fetch(`${API_BASE}${INCIDENTS_PATH}`);
   if (!res.ok) {
     throw new Error(
-      `Failed to fetch patients: ${res.status} ${res.statusText}`
+      `Failed to fetch incidents: ${res.status} ${res.statusText}`
     );
   }
-  /** @type {import('./types.js').DashboardPatientsResponse} */
+  /** @type {import('./types.js').DashboardIncidentsResponse} */
   const data = await res.json();
   return data.items || [];
 }
 
-window.MedicalRecordsReleasePermissionDashboard.fetchPatients = fetchPatients;
-window.MedicalRecordsReleasePermissionDashboard.API_BASE = API_BASE;
+window.MedicalErrorReportDashboard.fetchIncidents = fetchIncidents;
+window.MedicalErrorReportDashboard.API_BASE = API_BASE;
 })();

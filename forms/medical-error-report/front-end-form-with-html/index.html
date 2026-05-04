@@ -3,17 +3,108 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Medical Error Report — patient questionnaire</title>
+  <title>Medical Error Report — incident reporting form</title>
+  <meta name="description" content="Medical-error incident report. Captures incident details, classification, contributing factors, root cause, and corrective actions; grades using WHO Severity and NCC MERP categories.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Medical Error Report</h1>
+      <p class="subtitle">WHO severity + NCC MERP category. Structured incident report.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Medical Error Report</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Medical Error Report form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Use this form to document a medical error or near-miss. Sections cover
+        the reporter, incident details, the patient (if any), error
+        classification, contributing factors, immediate actions, patient
+        outcome, root cause analysis, corrective actions, and follow-up
+        reporting. Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This is an internal incident-reporting tool. If a patient requires
+        urgent clinical attention right now, escalate via your local clinical
+        emergency pathway before completing this form.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Incident Details, 3 Patient Involvement, -->
+        <!-- 4 Error Classification, 5 Contributing Factors, -->
+        <!-- 6 Immediate Actions, 7 Patient Outcome, -->
+        <!-- 8 Root Cause Analysis, 9 Corrective Actions, -->
+        <!-- 10 Reporting & Follow-up -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Grading report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Grading uses the WHO patient-safety severity scale and the NCC MERP
+        harm-categorisation framework. This form is for internal incident
+        reporting and quality improvement; submit external regulatory reports
+        through Datix, NRLS, CQC, HSIB, or coroner pathways as required.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MedicalErrorReport`.
+
+    Order matters: types -> flagged-issues -> error-rules -> error-grader
+    (depends on errorRules and detectAdditionalFlags) -> app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/error-rules.js"></script>
+  <script src="js/error-grader.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
