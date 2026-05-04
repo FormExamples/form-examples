@@ -3,17 +3,105 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Employee Onboarding Checklist — patient questionnaire</title>
+  <title>Employee Onboarding Checklist — staff onboarding</title>
+  <meta name="description" content="Healthcare staff onboarding checklist: pre-employment checks, occupational health, mandatory training, IT access, uniform/ID, induction, probation, and sign-off.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Employee Onboarding Checklist</h1>
+      <p class="subtitle">Healthcare staff onboarding — pre-arrival paperwork, day-1 access, week-1 training, and 30/60/90-day milestones.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Onboarding completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Employee Onboarding Checklist</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Employee Onboarding Checklist form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Complete the ten sections below to track this employee's onboarding
+        progress. Sections cover pre-employment checks (DBS, right to work,
+        references), occupational health clearance, mandatory training,
+        professional registration, IT systems &amp; access, uniform &amp; ID
+        badge, induction, probation &amp; supervision, and final sign-off.
+      </p>
+      <p>
+        All answers are saved automatically in your browser as you go.
+        Submit at the bottom to compute completion percentage, fired
+        compliance rules, and HR flags.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Pre-Employment Checks, 3 Occupational Health, -->
+        <!-- 4 Mandatory Training, 5 Professional Registration, -->
+        <!-- 6 IT Systems & Access, 7 Uniform & ID Badge, 8 Induction Programme, -->
+        <!-- 9 Probation & Supervision, 10 Sign-off & Compliance -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Onboarding report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Onboarding compliance grading is for HR / line-manager use. Fired
+        rules are graded 1 (minor) – 4 (critical). High-priority flags
+        indicate items that may block clinical duties (DBS, right to work,
+        OH clearance, professional registration). Always confirm against
+        local policy and statutory requirements.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EmployeeOnboardingChecklist`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/onboarding-rules.js"></script>
+  <script src="js/onboarding-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
