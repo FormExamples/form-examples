@@ -1,35 +1,70 @@
-import { estimateTenYearRisk, estimateThirtyYearRisk, isLikelyDraft } from './utils.js';
-import { allRules } from './risk-rules.js';
+// PREVENT risk grader. Pure functions: take an `AssessmentData` object,
+// return a complete GradingResult including risk category, percentages,
+// fired rules, and additional flags.
+//
+// Risk category cutoffs (10-year total CVD):
+//   < 5%       -> low
+//   5-7.4%     -> borderline
+//   7.5-19.9%  -> intermediate
+//   >= 20%     -> high
 
 /**
- * Pure function: evaluates all PREVENT risk rules against assessment data.
- * Returns { riskCategory, tenYearRiskPercent, thirtyYearRiskPercent, firedRules }.
+ * @typedef {import('./types.js').AssessmentData} AssessmentData
+ * @typedef {import('./types.js').GradingResult} GradingResult
  */
-export function calculateRisk(data) {
+
+(function () {
+'use strict';
+window.PredictingRiskOfCardiovascularDiseaseEvents =
+  window.PredictingRiskOfCardiovascularDiseaseEvents || {};
+
+const NS = window.PredictingRiskOfCardiovascularDiseaseEvents;
+const {
+  estimateTenYearRisk,
+  estimateThirtyYearRisk,
+  isLikelyDraft,
+  evaluateRules,
+  detectAdditionalFlags
+} = NS;
+
+/**
+ * @param {AssessmentData} data
+ * @returns {GradingResult}
+ */
+function calculateRisk(data) {
   if (isLikelyDraft(data)) {
-    return { riskCategory: 'draft', tenYearRiskPercent: 0, thirtyYearRiskPercent: 0, firedRules: [] };
+    return {
+      riskCategory: 'draft',
+      tenYearRiskPercent: 0.0,
+      thirtyYearRiskPercent: 0.0,
+      firedRules: [],
+      additionalFlags: [],
+      timestamp: new Date().toISOString()
+    };
   }
 
   const tenYear = estimateTenYearRisk(data);
   const thirtyYear = estimateThirtyYearRisk(tenYear);
+  const firedRules = evaluateRules(data);
+  const additionalFlags = detectAdditionalFlags(data);
 
-  const firedRules = [];
-  for (const rule of allRules()) {
-    if (rule.evaluate(data)) {
-      firedRules.push({
-        id: rule.id,
-        category: rule.category,
-        description: rule.description,
-        riskLevel: rule.riskLevel,
-      });
-    }
-  }
+  let category;
+  if (tenYear < 5.0) category = 'low';
+  else if (tenYear < 7.5) category = 'borderline';
+  else if (tenYear < 20.0) category = 'intermediate';
+  else category = 'high';
 
-  let riskCategory;
-  if (tenYear < 5) riskCategory = 'low';
-  else if (tenYear < 7.5) riskCategory = 'borderline';
-  else if (tenYear < 20) riskCategory = 'intermediate';
-  else riskCategory = 'high';
-
-  return { riskCategory, tenYearRiskPercent: tenYear, thirtyYearRiskPercent: thirtyYear, firedRules };
+  return {
+    riskCategory: category,
+    tenYearRiskPercent: tenYear,
+    thirtyYearRiskPercent: thirtyYear,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }
+
+Object.assign(window.PredictingRiskOfCardiovascularDiseaseEvents, {
+  calculateRisk
+});
+})();

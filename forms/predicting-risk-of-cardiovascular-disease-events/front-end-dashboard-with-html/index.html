@@ -1,57 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinician Dashboard - PREVENT CVD Risk</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PREVENT CVD Risk — clinician dashboard</title>
+  <meta name="description" content="AHA PREVENT clinician dashboard: review patient submissions with 10-year cardiovascular risk, risk category, diabetes status, and renal function.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <span class="header-title">PREVENT CVD Risk — Clinician Dashboard</span>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>PREVENT CVD Risk — Clinician Dashboard</h1>
+      <p class="subtitle">
+        AHA PREVENT 10-year cardiovascular disease risk patient list with
+        risk category, diabetes status, and estimated glomerular filtration
+        rate (eGFR).
+      </p>
     </div>
   </header>
 
-  <main class="container">
-    <div class="filter-bar">
-      <input type="text" id="search-input" placeholder="Search by NHS number or name...">
-      <select id="risk-filter">
-        <option value="">All Risk Categories</option>
-        <option value="low">Low</option>
-        <option value="borderline">Borderline</option>
-        <option value="intermediate">Intermediate</option>
-        <option value="high">High</option>
-      </select>
-      <select id="diabetes-filter">
-        <option value="">Diabetes Status</option>
-        <option value="yes">Has Diabetes</option>
-        <option value="no">No Diabetes</option>
-      </select>
-      <button id="clear-filters">Clear Filters</button>
-    </div>
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
 
-    <table class="patient-table">
-      <thead>
-        <tr>
-          <th data-sort="nhsNumber">NHS Number</th>
-          <th data-sort="patientName">Patient Name</th>
-          <th data-sort="riskCategory">Risk Category</th>
-          <th data-sort="tenYearRisk">10-Year Risk (%)</th>
-          <th data-sort="diabetes">Diabetes</th>
-          <th data-sort="egfr">eGFR</th>
-        </tr>
-      </thead>
-      <tbody id="patients-tbody">
-        <tr><td colspan="6" style="text-align:center;color:#6b7280;padding:2rem;">Loading...</td></tr>
-      </tbody>
-    </table>
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
-    <div class="patient-count" id="patient-count"></div>
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Category</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All risk categories</option>
+            <option value="low">Low</option>
+            <option value="borderline">Borderline</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-diabetes">Diabetes</label>
+          <select id="filter-diabetes" class="select-input">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        PREVENT (AHA, 2023) is a validated equation set for predicting 10- and
+        30-year risk of total cardiovascular disease in adults aged 30-79
+        without known CVD. This dashboard is a clinical-review tool and is
+        not a diagnosis.
+      </p>
+    </footer>
   </main>
 
-  <footer class="footer"><p>PREVENT CVD Risk Calculator &copy; 2026. For clinical use only.</p></footer>
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PredictingRiskOfCardiovascularDiseaseEventsDashboard`.
 
-  <script type="module" src="js/dashboard.js"></script>
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
