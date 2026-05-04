@@ -4,16 +4,104 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Plastic Surgery Assessment — patient questionnaire</title>
+  <meta name="description" content="Plastic surgery assessment questionnaire using ASA Physical Status, wound classification, and surgical complexity scoring.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Plastic Surgery Assessment</h1>
+      <p class="subtitle">ASA Physical Status, wound classification, and surgical complexity scoring.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Plastic Surgery Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Plastic Surgery Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below about your reason for referral,
+        relevant medical and surgical history, the area of concern, and your
+        expectations of treatment. The clinician will record ASA, wound
+        classification, and surgical complexity. All answers are saved
+        automatically in your browser as you go.
+      </p>
+      <p>
+        This screening tool is for information only and is not a diagnosis;
+        please discuss your results with your plastic surgery team.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Reason for Referral, 3 Medical & Surgical History, -->
+        <!-- 4 Current Condition, 5 Wound & Tissue Assessment, -->
+        <!-- 6 Psychological Assessment, 7 Anaesthetic Risk, -->
+        <!-- 8 Photography & Documentation, 9 Medications & Allergies, -->
+        <!-- 10 Procedure Planning & Consent. -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        ASA Physical Status Classification (American Society of
+        Anesthesiologists), the CDC Surgical Wound Classification, and a
+        4-point surgical complexity scale are used to summarise overall
+        risk. This screening tool supports — but does not replace —
+        clinical judgement.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PlasticSurgeryAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/plastics-rules.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/plastics-grader.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
