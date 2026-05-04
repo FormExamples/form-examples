@@ -1,10 +1,11 @@
-/* Pre-operative Assessment by Clinician - clinician dashboard styles.
- * Mobile-first; no framework dependencies. Adapted from the patient-form
- * stylesheet so the two surfaces share the same visual language. */
+/* Pre-operative Assessment by Patient - clinician dashboard styles.
+ * Mobile-first; no framework dependencies. Adapted from the canonical
+ * asthma-assessment dashboard so the two surfaces share the same visual
+ * language. */
 
 :root {
-  --color-primary: #1e40af;
-  --color-primary-dark: #1e3a8a;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
   --color-primary-light: #dbeafe;
   --color-bg: #f9fafb;
   --color-surface: #ffffff;
@@ -76,7 +77,7 @@ body {
   box-shadow: var(--shadow-sm);
 }
 .page-header-inner {
-  max-width: 84rem;
+  max-width: 76rem;
   margin: 0 auto;
   padding: 1rem 1.25rem;
 }
@@ -84,7 +85,6 @@ body {
   font-size: 1.375rem;
   font-weight: 600;
   margin: 0 0 0.25rem;
-  color: var(--color-primary);
 }
 .subtitle {
   color: var(--color-muted);
@@ -94,7 +94,7 @@ body {
 
 /* Main */
 main {
-  max-width: 84rem;
+  max-width: 76rem;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 4rem;
 }
@@ -137,8 +137,8 @@ main {
   color: var(--color-text);
 }
 .filter-field-search {
-  flex: 1 1 16rem;
-  min-width: 16rem;
+  flex: 1 1 14rem;
+  min-width: 14rem;
 }
 .filter-field-actions {
   min-width: 0;
@@ -204,7 +204,7 @@ main {
   background: var(--color-bg);
 }
 
-/* Assessments table card */
+/* Patients table card */
 .table-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -216,26 +216,25 @@ main {
   overflow-x: auto;
 }
 
-.assessments-table {
+.patients-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
-.assessments-table thead {
+.patients-table thead {
   background: var(--color-bg);
 }
-.assessments-table th,
-.assessments-table td {
+.patients-table th,
+.patients-table td {
   padding: 0.625rem 0.875rem;
   text-align: left;
   border-bottom: 1px solid var(--color-border);
   white-space: nowrap;
-  vertical-align: top;
 }
-.assessments-table tbody tr:last-child td {
+.patients-table tbody tr:last-child td {
   border-bottom: 0;
 }
-.assessments-table tbody tr:hover {
+.patients-table tbody tr:hover {
   background: #f3f4f6;
 }
 
@@ -269,106 +268,71 @@ main {
   display: inline-block;
   text-align: center;
 }
-.assessments-table th[aria-sort="ascending"] .sort-indicator,
-.assessments-table th[aria-sort="descending"] .sort-indicator {
+.patients-table th[aria-sort="ascending"] .sort-indicator,
+.patients-table th[aria-sort="descending"] .sort-indicator {
   color: var(--color-primary);
 }
 
-/* Critical-risk row emphasis */
-.assessments-table tbody tr.row-critical {
+/* High-grade row emphasis (ASA IV, V, VI) */
+.patients-table tbody tr.row-high-grade {
   background: var(--color-danger-row-bg);
 }
-.assessments-table tbody tr.row-critical:hover {
+.patients-table tbody tr.row-high-grade:hover {
   background: #fee2e2;
 }
-
-/* Composite risk badges */
-.risk-badge {
-  display: inline-block;
-  padding: 0.125rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  border: 1px solid;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-.risk-low      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.risk-moderate { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.risk-high     { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.risk-critical { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
 
 /* ASA grade badges */
 .asa-badge {
   display: inline-block;
   padding: 0.125rem 0.5rem;
-  border-radius: var(--radius-sm);
+  border-radius: 9999px;
   font-size: 0.8125rem;
-  font-weight: 700;
+  font-weight: 600;
   border: 1px solid;
   font-variant-numeric: tabular-nums;
-  min-width: 2rem;
-  text-align: center;
+  letter-spacing: 0.01em;
 }
 .asa-i   { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.asa-ii  { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+.asa-ii  { background: #ecfccb; color: #3f6212; border-color: #bef264; }
 .asa-iii { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .asa-iv  { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.asa-v   { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
-.asa-vi  { background: #1f2937; color: #ffffff; border-color: #111827; }
+.asa-v   { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+.asa-vi  { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
 
-/* Urgency badges */
-.urgency-badge {
+/* Safety-flag count cell */
+.flag-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.flag-count.flag-count-zero {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+.flag-count.flag-count-warn {
+  color: #92400e;
+}
+.flag-count.flag-count-high {
+  color: #991b1b;
+}
+
+/* Yes/No flag badges (allergy + adverse incident) */
+.flag-badge {
   display: inline-block;
   padding: 0.125rem 0.5rem;
   border-radius: 9999px;
   font-size: 0.8125rem;
-  font-weight: 500;
-  border: 1px solid;
-  text-transform: capitalize;
-}
-.urgency-elective  { background: var(--color-bg); color: var(--color-text); border-color: var(--color-border-strong); }
-.urgency-urgent    { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.urgency-emergency { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.urgency-immediate { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
-
-/* Numeric score cells */
-.numeric-cell {
-  font-variant-numeric: tabular-nums;
   font-weight: 600;
-  text-align: center;
+  border: 1px solid;
 }
-.numeric-muted {
+.flag-yes {
+  background: var(--color-warning-bg);
+  color: #78350f;
+  border-color: #fcd34d;
+}
+.flag-no {
+  background: var(--color-bg);
   color: var(--color-muted);
-}
-
-/* Flags chips */
-.flag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  max-width: 16rem;
-  white-space: normal;
-}
-.flag-chip {
-  display: inline-block;
-  padding: 0.0625rem 0.4375rem;
-  border-radius: 9999px;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  background: var(--color-danger-bg);
-  color: #991b1b;
-  border: 1px solid #fca5a5;
-}
-.flag-empty {
-  color: var(--color-muted);
-  font-size: 0.8125rem;
-}
-
-/* Date cell */
-.date-cell {
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text);
+  border-color: var(--color-border-strong);
 }
 
 /* Empty filter result message */
