@@ -4,16 +4,113 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Advance Statement About Care — patient questionnaire</title>
+  <meta name="description" content="An advance statement about care: a written record of your wishes, values and preferences for future care, used if you lose capacity to decide for yourself.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Advance Statement About Care</h1>
+      <p class="subtitle">A written record of your wishes, values and preferences for future care.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Advance Statement About Care</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Advance Statement About Care form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        An advance statement is a written record of your wishes, values and
+        preferences for future care. It is used if you lose the capacity to
+        make or communicate decisions for yourself.
+      </p>
+      <p>
+        Under the Mental Capacity Act 2005, an advance statement records your
+        preferences but is <strong>not legally binding</strong> (unlike an
+        Advance Decision to Refuse Treatment, which is). Your care team must
+        take it into account when making best-interest decisions on your
+        behalf.
+      </p>
+      <ul>
+        <li>9 sections covering personal details, values, care preferences and wishes</li>
+        <li>Takes approximately 20–30 minutes to complete thoughtfully</li>
+        <li>You can revise any answer at any time — answers save automatically in your browser</li>
+      </ul>
+      <p>
+        This document should be completed when you have mental capacity. You
+        may wish to discuss it with your family, carers or healthcare team.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Personal Information, 2 Statement Context, 3 Values & Beliefs, -->
+        <!-- 4 Care Preferences, 5 Medical Treatment Wishes, -->
+        <!-- 6 Communication Preferences, 7 People Important to Me, -->
+        <!-- 8 Practical Matters, 9 Signatures & Witnesses -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Statement completeness report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This advance statement is a record of wishes and preferences. It is
+        not the same as an Advance Decision to Refuse Treatment (ADRT), which
+        is legally binding under the Mental Capacity Act 2005. Discuss this
+        document with your healthcare team and ensure copies are held with
+        your GP and the people important to you.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AdvanceStatementAboutCare`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/completeness-rules.js"></script>
+  <script src="js/flagged-issues.js"></script>
+  <script src="js/completeness-grader.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,21 +1,22 @@
-// Advance Statement About Care - clinician dashboard (vanilla classic-script app).
+// Casualty Card Form - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + completeness-level dropdown + witnessed dropdown).
+// (search box + NEWS2-level dropdown + MTS-category dropdown + allergy
+// dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.AdvanceStatementAboutCareDashboard`.
-// Pulling them off here keeps the rest of this file referring to short
-// local names. The whole file is wrapped in an IIFE so its top-level
-// identifiers do not leak to the global scope.
+// attach their exports to `window.CasualtyCardFormDashboard`. Pulling them
+// off here keeps the rest of this file referring to short local names. The
+// whole file is wrapped in an IIFE so its top-level identifiers do not leak
+// to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.AdvanceStatementAboutCareDashboard;
+} = window.CasualtyCardFormDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -26,44 +27,48 @@ let patients = [];
 
 const filters = {
   search: '',
-  completeness: '',
-  witnessed: '' // '', 'yes', 'no'
+  news2: '',
+  mts: '',
+  allergy: '' // '', 'yes', 'no'
 };
 
-// Default sort: patient name ascending. Matches the SvelteKit dashboard's
-// initial `sort-rows` call and gives the clinician a predictable first view.
+// Default sort: NEWS2 score descending. Highest score = most clinically
+// urgent = top of the list, surfacing the patients who most need attention.
 const sortState = {
-  key: 'patientName',
-  direction: 'asc' // 'asc' | 'desc'
+  key: 'news2Score',
+  direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',         label: 'NHS Number' },
-  { key: 'patientName',       label: 'Patient Name' },
-  { key: 'completenessLevel', label: 'Completeness' },
-  { key: 'reviewDate',        label: 'Review Date' },
-  { key: 'witnessed',         label: 'Witnessed' },
-  { key: 'lastUpdated',       label: 'Last Updated' }
+  { key: 'nhsNumber',      label: 'NHS Number' },
+  { key: 'patientName',    label: 'Patient Name' },
+  { key: 'news2Score',     label: 'NEWS2' },
+  { key: 'mtsCategory',    label: 'MTS Category' },
+  { key: 'chiefComplaint', label: 'Chief Complaint' },
+  { key: 'allergyFlag',    label: 'Allergy' }
 ];
 
-// Rank used when sorting the completenessLevel column so 'incomplete' is
-// always less than 'verified' regardless of locale.
-const completenessRank = {
-  incomplete: 0,
-  partial: 1,
-  complete: 2,
-  verified: 3
+// Rank used when sorting the news2Response label so 'low' is always less
+// than 'high' regardless of locale (only used as a tiebreak; primary sort
+// is the numeric news2Score).
+const news2ResponseRank = {
+  'low': 0,
+  'low-medium': 1,
+  'medium': 2,
+  'high': 3
 };
 
-// Human-readable labels for the completeness column. Keep in sync with the
-// dropdown <option>s and the SvelteKit `completenessLabel` helper.
-const completenessLabels = {
-  incomplete: 'Incomplete',
-  partial: 'Partial',
-  complete: 'Complete',
-  verified: 'Verified'
+// Rank used when sorting the mtsCategory column. Slugs already start with
+// the priority digit so a string compare would work, but an explicit map
+// keeps intent obvious if labels ever drift.
+const mtsRank = {
+  '1-immediate': 1,
+  '2-very-urgent': 2,
+  '3-urgent': 3,
+  '4-standard': 4,
+  '5-non-urgent': 5
 };
 
 // ----------------------------------------------------------------------
@@ -80,20 +85,43 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-function completenessClass(level) {
-  if (!level) return '';
-  return 'completeness-' + String(level).toLowerCase();
+/** Title-case a hyphen-separated slug ('low-medium' -> 'Low-Medium'). */
+function capitalize(s) {
+  if (!s) return '';
+  return String(s)
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join('-');
 }
 
-function completenessLabel(level) {
-  return completenessLabels[level] || String(level || '');
+/** Short human-friendly MTS label for the table cell. */
+function mtsCategoryShort(cat) {
+  switch (cat) {
+    case '1-immediate':   return '1 Immediate';
+    case '2-very-urgent': return '2 Very Urgent';
+    case '3-urgent':      return '3 Urgent';
+    case '4-standard':    return '4 Standard';
+    case '5-non-urgent':  return '5 Non-Urgent';
+    default:              return cat || '';
+  }
+}
+
+function news2Class(label) {
+  if (!label) return '';
+  return 'news2-' + String(label);
+}
+
+function mtsClass(label) {
+  if (!label) return '';
+  return 'mts-' + String(label);
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.completeness !== '' ||
-    filters.witnessed !== ''
+    filters.news2 !== '' ||
+    filters.mts !== '' ||
+    filters.allergy !== ''
   );
 }
 
@@ -110,22 +138,25 @@ function matchesFilters(row) {
     const term = filters.search.toLowerCase();
     const matches =
       row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term);
+      row.patientName.toLowerCase().includes(term) ||
+      (row.chiefComplaint || '').toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.completeness && row.completenessLevel !== filters.completeness) {
+  if (filters.news2 && row.news2Response !== filters.news2) {
     return false;
   }
-  if (filters.witnessed === 'yes' && !row.witnessed) return false;
-  if (filters.witnessed === 'no' && row.witnessed) return false;
+  if (filters.mts && row.mtsCategory !== filters.mts) {
+    return false;
+  }
+  if (filters.allergy === 'yes' && !row.allergyFlag) return false;
+  if (filters.allergy === 'no' && row.allergyFlag) return false;
   return true;
 }
 
 /**
  * Compare two rows for the active sort column. Categorical columns use
- * their rank tables; booleans sort false<true; date strings (ISO
- * "YYYY-MM-DD") compare lexicographically with empty strings sinking to
- * the bottom; everything else uses a locale-aware string compare.
+ * their rank tables; booleans sort false<true; numbers compare directly;
+ * everything else uses a locale-aware string compare.
  */
 function compareRows(a, b) {
   const key = sortState.key;
@@ -133,28 +164,21 @@ function compareRows(a, b) {
   let av = a[key];
   let bv = b[key];
 
-  if (key === 'completenessLevel') {
-    av = completenessRank[av] ?? -1;
-    bv = completenessRank[bv] ?? -1;
+  if (key === 'news2Score') {
+    return ((av ?? 0) - (bv ?? 0)) * dir;
+  }
+
+  if (key === 'mtsCategory') {
+    av = mtsRank[av] ?? 99;
+    bv = mtsRank[bv] ?? 99;
     return (av - bv) * dir;
   }
 
-  if (key === 'witnessed') {
+  if (key === 'allergyFlag') {
     return ((av === bv) ? 0 : (av ? 1 : -1)) * dir;
   }
 
-  if (key === 'reviewDate' || key === 'lastUpdated') {
-    // Empty review dates sink to the end regardless of sort direction so
-    // they never push real dates out of view.
-    const aEmpty = !av;
-    const bEmpty = !bv;
-    if (aEmpty && bEmpty) return 0;
-    if (aEmpty) return 1;
-    if (bEmpty) return -1;
-    return String(av).localeCompare(String(bv)) * dir;
-  }
-
-  // Default: string compare (nhsNumber, patientName)
+  // Default: string compare (nhsNumber, patientName, chiefComplaint)
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -218,25 +242,21 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.completenessLevel === 'incomplete') {
-      tr.classList.add('row-incomplete');
+    if (row.news2Response === 'high') {
+      tr.classList.add('row-news2-high');
     }
-
-    const reviewCell = row.reviewDate
-      ? `<td><span class="date-cell">${esc(row.reviewDate)}</span></td>`
-      : `<td><span class="date-cell date-empty">Not set</span></td>`;
 
     tr.innerHTML = `
       <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="completeness-badge ${completenessClass(row.completenessLevel)}">${esc(completenessLabel(row.completenessLevel))}</span></td>
-      ${reviewCell}
+      <td><span class="news2-badge ${news2Class(row.news2Response)}">${esc(row.news2Score)} (${esc(capitalize(row.news2Response))})</span></td>
+      <td><span class="mts-badge ${mtsClass(row.mtsCategory)}">${esc(mtsCategoryShort(row.mtsCategory))}</span></td>
+      <td class="complaint-cell">${esc(row.chiefComplaint)}</td>
       <td>
-        <span class="witnessed-badge ${row.witnessed ? 'witnessed-yes' : 'witnessed-no'}">
-          ${row.witnessed ? 'Yes' : 'No'}
+        <span class="allergy-badge ${row.allergyFlag ? 'allergy-yes' : 'allergy-no'}">
+          ${row.allergyFlag ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="date-cell">${esc(row.lastUpdated)}</span></td>
     `;
     body.appendChild(tr);
   }
@@ -285,15 +305,21 @@ function onSortClick(key) {
     sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
   } else {
     sortState.key = key;
-    sortState.direction = 'asc';
+    // Numeric / categorical urgency columns default descending so the most
+    // urgent patients surface first; everything else defaults ascending.
+    sortState.direction =
+      (key === 'news2Score' || key === 'mtsCategory' || key === 'allergyFlag')
+        ? 'desc'
+        : 'asc';
   }
   renderAll();
 }
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const completeness = document.getElementById('filter-completeness');
-  const witnessed = document.getElementById('filter-witnessed');
+  const news2 = document.getElementById('filter-news2');
+  const mts = document.getElementById('filter-mts');
+  const allergy = document.getElementById('filter-allergy');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -302,26 +328,34 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (completeness) {
-    completeness.addEventListener('change', () => {
-      filters.completeness = completeness.value;
+  if (news2) {
+    news2.addEventListener('change', () => {
+      filters.news2 = news2.value;
       renderAll();
     });
   }
-  if (witnessed) {
-    witnessed.addEventListener('change', () => {
-      filters.witnessed = witnessed.value;
+  if (mts) {
+    mts.addEventListener('change', () => {
+      filters.mts = mts.value;
+      renderAll();
+    });
+  }
+  if (allergy) {
+    allergy.addEventListener('change', () => {
+      filters.allergy = allergy.value;
       renderAll();
     });
   }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.completeness = '';
-      filters.witnessed = '';
+      filters.news2 = '';
+      filters.mts = '';
+      filters.allergy = '';
       if (search) search.value = '';
-      if (completeness) completeness.value = '';
-      if (witnessed) witnessed.value = '';
+      if (news2) news2.value = '';
+      if (mts) mts.value = '';
+      if (allergy) allergy.value = '';
       renderAll();
     });
   }
@@ -370,3 +404,8 @@ if (document.readyState === 'loading') {
   init();
 }
 })();
+
+// Expose a minimal namespace marker so consumers can confirm the dashboard
+// app loaded successfully (handy in console / smoke tests).
+window.CasualtyCardFormDashboard = window.CasualtyCardFormDashboard || {};
+window.CasualtyCardFormDashboard.appLoaded = true;

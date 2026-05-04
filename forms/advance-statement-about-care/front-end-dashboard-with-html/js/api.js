@@ -8,7 +8,8 @@
 
 (function () {
 'use strict';
-window.CasualtyCardFormDashboard = window.CasualtyCardFormDashboard || {};
+window.AdvanceStatementAboutCareDashboard =
+  window.AdvanceStatementAboutCareDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +35,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.CasualtyCardFormDashboard.fetchPatients = fetchPatients;
-window.CasualtyCardFormDashboard.API_BASE = API_BASE;
+window.AdvanceStatementAboutCareDashboard.fetchPatients = fetchPatients;
+window.AdvanceStatementAboutCareDashboard.API_BASE = API_BASE;
 })();

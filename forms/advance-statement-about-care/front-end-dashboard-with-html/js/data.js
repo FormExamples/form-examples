@@ -1,0 +1,127 @@
+// Sample patient data for the clinician dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every completeness level, mixes witnessed
+// and unwitnessed statements, includes statements with and without a
+// scheduled review date. NHS numbers in the canonical "NNN NNN NNNN" form.
+
+(function () {
+'use strict';
+window.AdvanceStatementAboutCareDashboard =
+  window.AdvanceStatementAboutCareDashboard || {};
+
+/** @type {import('./types.js').PatientRow[]} */
+const samplePatients = [
+  {
+    id: '1',
+    nhsNumber: '943 476 5919',
+    patientName: 'Smith, Jane',
+    completenessLevel: 'verified',
+    reviewDate: '2027-01-15',
+    witnessed: true,
+    lastUpdated: '2026-01-16'
+  },
+  {
+    id: '2',
+    nhsNumber: '721 938 4102',
+    patientName: 'Patel, Priya',
+    completenessLevel: 'complete',
+    reviewDate: '2026-12-01',
+    witnessed: true,
+    lastUpdated: '2026-02-10'
+  },
+  {
+    id: '3',
+    nhsNumber: '384 615 7230',
+    patientName: 'Jones, Margaret',
+    completenessLevel: 'partial',
+    reviewDate: '',
+    witnessed: false,
+    lastUpdated: '2026-01-28'
+  },
+  {
+    id: '4',
+    nhsNumber: '512 847 9063',
+    patientName: 'Williams, David',
+    completenessLevel: 'verified',
+    reviewDate: '2027-03-20',
+    witnessed: true,
+    lastUpdated: '2026-03-01'
+  },
+  {
+    id: '5',
+    nhsNumber: '167 293 8451',
+    patientName: 'Brown, Sarah',
+    completenessLevel: 'incomplete',
+    reviewDate: '',
+    witnessed: false,
+    lastUpdated: '2026-02-15'
+  },
+  {
+    id: '6',
+    nhsNumber: '835 162 4097',
+    patientName: 'Taylor, James',
+    completenessLevel: 'complete',
+    reviewDate: '2026-09-30',
+    witnessed: false,
+    lastUpdated: '2025-09-30'
+  },
+  {
+    id: '7',
+    nhsNumber: '294 708 5316',
+    patientName: 'Davies, Helen',
+    completenessLevel: 'verified',
+    reviewDate: '2026-06-15',
+    witnessed: true,
+    lastUpdated: '2025-12-15'
+  },
+  {
+    id: '8',
+    nhsNumber: '608 341 2975',
+    patientName: 'Wilson, Robert',
+    completenessLevel: 'partial',
+    reviewDate: '2026-11-01',
+    witnessed: false,
+    lastUpdated: '2026-02-20'
+  },
+  {
+    id: '9',
+    nhsNumber: '473 926 1084',
+    patientName: 'Evans, Catherine',
+    completenessLevel: 'complete',
+    reviewDate: '2027-02-28',
+    witnessed: true,
+    lastUpdated: '2026-02-28'
+  },
+  {
+    id: '10',
+    nhsNumber: '159 684 7302',
+    patientName: 'Thomas, Michael',
+    completenessLevel: 'incomplete',
+    reviewDate: '',
+    witnessed: false,
+    lastUpdated: '2026-03-05'
+  },
+  {
+    id: '11',
+    nhsNumber: '742 051 3896',
+    patientName: 'Robinson, Emma',
+    completenessLevel: 'verified',
+    reviewDate: '2026-08-15',
+    witnessed: true,
+    lastUpdated: '2025-08-15'
+  },
+  {
+    id: '12',
+    nhsNumber: '386 219 5740',
+    patientName: 'Clark, George',
+    completenessLevel: 'partial',
+    reviewDate: '2026-07-01',
+    witnessed: false,
+    lastUpdated: '2026-01-01'
+  }
+];
+
+window.AdvanceStatementAboutCareDashboard.samplePatients = samplePatients;
+})();
