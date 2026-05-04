@@ -8,7 +8,7 @@
 
 (function () {
 'use strict';
-window.HeartHealthCheckDashboard = window.HeartHealthCheckDashboard || {};
+window.FraminghamRiskScoreDashboard = window.FraminghamRiskScoreDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +34,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.HeartHealthCheckDashboard.fetchPatients = fetchPatients;
-window.HeartHealthCheckDashboard.API_BASE = API_BASE;
+window.FraminghamRiskScoreDashboard.fetchPatients = fetchPatients;
+window.FraminghamRiskScoreDashboard.API_BASE = API_BASE;
 })();

@@ -1,22 +1,21 @@
-// Framingham Risk Score for Hard CHD - clinician dashboard
-// (vanilla classic-script app).
+// Heart Health Check - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
 // rendered table is sortable (click any column header) and filterable
-// (search box + risk-category dropdown + sex dropdown + smoker dropdown).
+// (search box + risk-level dropdown + sex dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.FraminghamRiskScoreDashboard`. Pulling
-// them off here keeps the rest of this file referring to short local names.
-// The whole file is wrapped in an IIFE so its top-level identifiers do not
-// leak to the global scope.
+// attach their exports to `window.HeartHealthCheckDashboard`. Pulling them
+// off here keeps the rest of this file referring to short local names. The
+// whole file is wrapped in an IIFE so its top-level identifiers do not leak
+// to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.FraminghamRiskScoreDashboard;
+} = window.HeartHealthCheckDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -27,36 +26,40 @@ let patients = [];
 
 const filters = {
   search: '',
-  category: '',
-  sex: '',
-  smoker: '' // '', 'yes', 'no'
+  risk: '',  // '', 'low', 'moderate', 'high'
+  sex: ''    // '', 'female', 'male'
 };
 
-// Default sort: 10-year risk descending. Highest-risk patients surface at
-// the top of the list so they are easiest to triage.
+// Default sort: 10-year CVD risk descending. Highest-risk patients surface
+// at the top of the list, prompting clinical attention first. This matches
+// the clinical priority of a screening dashboard (worst first).
 const sortState = {
-  key: 'tenYearRiskPercent',
+  key: 'tenYearRisk',
   direction: 'desc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',          label: 'NHS Number' },
-  { key: 'patientName',        label: 'Patient Name' },
-  { key: 'age',                label: 'Age' },
-  { key: 'sex',                label: 'Sex' },
-  { key: 'tenYearRiskPercent', label: '10-Year Risk' },
-  { key: 'riskCategory',       label: 'Risk Category' },
-  { key: 'smokerFlag',         label: 'Smoker' }
+  { key: 'nhsNumber',     label: 'NHS Number' },
+  { key: 'patientName',   label: 'Patient Name' },
+  { key: 'age',           label: 'Age' },
+  { key: 'sex',           label: 'Sex' },
+  { key: 'riskCategory',  label: 'Risk' },
+  { key: 'tenYearRisk',   label: '10-Year CVD %' },
+  { key: 'heartAge',      label: 'Heart Age' },
+  { key: 'flagCount',     label: 'Flags' },
+  { key: 'submittedDate', label: 'Submitted' }
 ];
 
-// Rank used when sorting the riskCategory column so 'Low' is always less
-// than 'High' regardless of locale.
-const categoryRank = {
-  'Low': 0,
-  'Intermediate': 1,
-  'High': 2
+// Rank used when sorting the riskCategory column so 'low' < 'moderate' <
+// 'high' regardless of locale. 'draft' sinks below the rest because draft
+// records normally won't appear in a dashboard view.
+const riskRank = {
+  'draft': -1,
+  'low': 0,
+  'moderate': 1,
+  'high': 2
 };
 
 // ----------------------------------------------------------------------
@@ -73,23 +76,51 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
-function categoryClass(label) {
+function riskClass(label) {
   if (!label) return '';
-  return 'category-' + String(label).toLowerCase().replace(/\s+/g, '-');
+  return 'risk-' + String(label).toLowerCase();
 }
 
-/** Render a 10-year risk percentage with one decimal place. */
-function formatRiskPercent(n) {
-  if (n === null || n === undefined || Number.isNaN(n)) return '';
-  return Number(n).toFixed(1) + '%';
+/**
+ * Bucket a flag count into one of three CSS classes:
+ *  - flag-zero  (0)        — subtle / muted
+ *  - flag-low   (1-2)      — amber
+ *  - flag-high  (3+)       — red
+ */
+function flagClass(n) {
+  if (!n || n === 0) return 'flag-zero';
+  if (n <= 2) return 'flag-low';
+  return 'flag-high';
 }
 
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
-    filters.category !== '' ||
-    filters.sex !== '' ||
-    filters.smoker !== ''
+    filters.risk !== '' ||
+    filters.sex !== ''
+  );
+}
+
+/** Render the heart-age cell: heart age plus a coloured gap indicator. */
+function renderHeartAgeCell(row) {
+  if (row.heartAge == null) {
+    return '<span class="num-cell">&mdash;</span>';
+  }
+  const gap = row.heartAge - row.age;
+  let gapClass = '';
+  let gapLabel = '';
+  if (gap > 0) {
+    gapClass = 'gap-positive';
+    gapLabel = '(+' + gap + ')';
+  } else if (gap < 0) {
+    gapClass = 'gap-negative';
+    gapLabel = '(' + gap + ')';
+  } else {
+    gapLabel = '(0)';
+  }
+  return (
+    '<span class="num-cell">' + esc(row.heartAge) + '</span>' +
+    '<span class="heart-age-gap ' + gapClass + '">' + esc(gapLabel) + '</span>'
   );
 }
 
@@ -109,21 +140,19 @@ function matchesFilters(row) {
       row.patientName.toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.category && row.riskCategory !== filters.category) {
+  if (filters.risk && row.riskCategory !== filters.risk) {
     return false;
   }
   if (filters.sex && row.sex !== filters.sex) {
     return false;
   }
-  if (filters.smoker === 'yes' && !row.smokerFlag) return false;
-  if (filters.smoker === 'no' && row.smokerFlag) return false;
   return true;
 }
 
 /**
  * Compare two rows for the active sort column. Categorical columns use
- * their rank tables; booleans sort false<true; numbers compare directly;
- * everything else uses a locale-aware string compare.
+ * their rank tables; numbers compare directly; nullable numbers sort nulls
+ * last; everything else uses a locale-aware string compare.
  */
 function compareRows(a, b) {
   const key = sortState.key;
@@ -132,20 +161,24 @@ function compareRows(a, b) {
   let bv = b[key];
 
   if (key === 'riskCategory') {
-    av = categoryRank[av] ?? -1;
-    bv = categoryRank[bv] ?? -1;
+    av = riskRank[av] ?? -1;
+    bv = riskRank[bv] ?? -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'smokerFlag') {
-    return ((av === bv) ? 0 : (av ? 1 : -1)) * dir;
-  }
-
-  if (key === 'tenYearRiskPercent' || key === 'age') {
+  if (key === 'age' || key === 'tenYearRisk' || key === 'flagCount') {
     return ((av ?? 0) - (bv ?? 0)) * dir;
   }
 
-  // Default: string compare (nhsNumber, patientName, sex)
+  if (key === 'heartAge') {
+    // Nulls sink to the bottom regardless of direction.
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    return (av - bv) * dir;
+  }
+
+  // Default: string compare (nhsNumber, patientName, sex, submittedDate)
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -209,22 +242,24 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.riskCategory === 'High') {
-      tr.classList.add('row-high');
+    if (row.riskCategory === 'high') {
+      tr.classList.add('row-high-risk');
     }
+
+    const tenYearLabel = (row.tenYearRisk == null)
+      ? '&mdash;'
+      : esc(Number(row.tenYearRisk).toFixed(1)) + '%';
 
     tr.innerHTML = `
       <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="age-cell">${esc(row.age)}</span></td>
-      <td><span class="sex-badge">${esc(row.sex)}</span></td>
-      <td><span class="risk-percent">${esc(formatRiskPercent(row.tenYearRiskPercent))}</span></td>
-      <td><span class="category-badge ${categoryClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
-      <td>
-        <span class="smoker-badge ${row.smokerFlag ? 'smoker-yes' : 'smoker-no'}">
-          ${row.smokerFlag ? 'Yes' : 'No'}
-        </span>
-      </td>
+      <td><span class="num-cell">${esc(row.age)}</span></td>
+      <td><span class="sex-cell">${esc(row.sex)}</span></td>
+      <td><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
+      <td><span class="num-cell">${tenYearLabel}</span></td>
+      <td>${renderHeartAgeCell(row)}</td>
+      <td><span class="flag-badge ${flagClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
+      <td>${esc(row.submittedDate)}</td>
     `;
     body.appendChild(tr);
   }
@@ -273,13 +308,15 @@ function onSortClick(key) {
     sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
   } else {
     sortState.key = key;
-    // Numeric / categorical columns are most useful sorted descending
-    // first (worst-on-top); text columns sort ascending first.
+    // Numeric / risk columns default to descending (worst first); textual
+    // columns default to ascending (A-Z).
     if (
-      key === 'tenYearRiskPercent' ||
+      key === 'tenYearRisk' ||
+      key === 'flagCount' ||
       key === 'riskCategory' ||
-      key === 'smokerFlag' ||
-      key === 'age'
+      key === 'heartAge' ||
+      key === 'age' ||
+      key === 'submittedDate'
     ) {
       sortState.direction = 'desc';
     } else {
@@ -291,9 +328,8 @@ function onSortClick(key) {
 
 function bindFilterInputs() {
   const search = document.getElementById('filter-search');
-  const category = document.getElementById('filter-category');
+  const risk = document.getElementById('filter-risk');
   const sex = document.getElementById('filter-sex');
-  const smoker = document.getElementById('filter-smoker');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -302,9 +338,9 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (category) {
-    category.addEventListener('change', () => {
-      filters.category = category.value;
+  if (risk) {
+    risk.addEventListener('change', () => {
+      filters.risk = risk.value;
       renderAll();
     });
   }
@@ -314,22 +350,14 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (smoker) {
-    smoker.addEventListener('change', () => {
-      filters.smoker = smoker.value;
-      renderAll();
-    });
-  }
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       filters.search = '';
-      filters.category = '';
+      filters.risk = '';
       filters.sex = '';
-      filters.smoker = '';
       if (search) search.value = '';
-      if (category) category.value = '';
+      if (risk) risk.value = '';
       if (sex) sex.value = '';
-      if (smoker) smoker.value = '';
       renderAll();
     });
   }

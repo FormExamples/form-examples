@@ -1,14 +1,36 @@
-import { calculateBMI, calculateTcHdlRatio } from './utils.js';
-import { estimateTenYearRisk, calculateHeartAge } from './grader.js';
+// 13 additional clinical safety flags that are independent of the 20 HHC
+// rules. Mirrors `src/lib/engine/flagged-issues.ts` from the SvelteKit
+// reference. Each flag has a stable ID, a category, a human-readable
+// message, and a priority (high | medium | low). Flags are sorted by
+// priority before return so the most critical appear first.
 
 /**
- * Detects additional flags that should be highlighted for clinician review.
- * These are safety-critical or process-significant alerts.
+ * @typedef {import('./types.js').AssessmentData} AssessmentData
+ * @typedef {import('./types.js').AdditionalFlag} AdditionalFlag
  */
-export function detectAdditionalFlags(data) {
+
+(function () {
+'use strict';
+window.HeartHealthCheck = window.HeartHealthCheck || {};
+const {
+  calculateBMI,
+  calculateTcHdlRatio,
+  estimateTenYearRisk,
+  calculateHeartAge
+} = window.HeartHealthCheck;
+
+/**
+ * Detect all "additional" (non-rule) clinical flags raised by the supplied
+ * assessment data and return them sorted by priority.
+ *
+ * @param {AssessmentData} data
+ * @returns {AdditionalFlag[]}
+ */
+function detectAdditionalFlags(data) {
+  /** @type {AdditionalFlag[]} */
   const flags = [];
 
-  // FLAG-AGE-001: Age outside 25-84 range
+  // FLAG-AGE-001: Age outside 25-84 validated range
   if (data.demographicsEthnicity.age != null) {
     if (data.demographicsEthnicity.age < 25 || data.demographicsEthnicity.age > 84) {
       flags.push({
@@ -78,7 +100,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-SMOKE-001: Heavy smoker >= 20/day
+  // FLAG-SMOKE-001: Heavy smoker (20+ cigarettes/day)
   if (data.smokingAlcohol.cigarettesPerDay != null && data.smokingAlcohol.cigarettesPerDay >= 20) {
     flags.push({
       id: 'FLAG-SMOKE-001',
@@ -88,7 +110,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-AF-001: AF present
+  // FLAG-AF-001: Atrial fibrillation present
   if (data.medicalConditions.hasAtrialFibrillation === 'yes') {
     flags.push({
       id: 'FLAG-AF-001',
@@ -98,7 +120,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-BMI-001: BMI >= 40
+  // FLAG-BMI-001: BMI >= 40 (morbid obesity)
   const bmi = data.bodyMeasurements.bmi
     ?? calculateBMI(data.bodyMeasurements.heightCm, data.bodyMeasurements.weightKg);
   if (bmi != null && bmi >= 40) {
@@ -110,7 +132,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-AUDIT-001: High AUDIT score
+  // FLAG-AUDIT-001: AUDIT score >= 16
   if (data.reviewCalculate.auditScore != null && data.reviewCalculate.auditScore >= 16) {
     flags.push({
       id: 'FLAG-AUDIT-001',
@@ -120,7 +142,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-HEART-001: Heart age >= 15 years above chronological
+  // FLAG-HEART-001: Heart age >= 15 years above chronological age
   const tenYearRisk = estimateTenYearRisk(data);
   const heartAge = calculateHeartAge(data, tenYearRisk);
   if (heartAge != null && data.demographicsEthnicity.age != null) {
@@ -134,7 +156,7 @@ export function detectAdditionalFlags(data) {
     }
   }
 
-  // FLAG-MED-001: High risk without statin
+  // FLAG-MED-001: 10-year risk 10%+ without statin therapy
   if (tenYearRisk >= 10 && data.cholesterol.onStatin !== 'yes') {
     flags.push({
       id: 'FLAG-MED-001',
@@ -144,7 +166,7 @@ export function detectAdditionalFlags(data) {
     });
   }
 
-  // FLAG-INACT-001: Sedentary
+  // FLAG-INACT-001: Sedentary (< 30 min/week)
   if (
     data.physicalActivityDiet.physicalActivityMinutesPerWeek != null &&
     data.physicalActivityDiet.physicalActivityMinutesPerWeek < 30
@@ -163,3 +185,6 @@ export function detectAdditionalFlags(data) {
 
   return flags;
 }
+
+Object.assign(window.HeartHealthCheck, { detectAdditionalFlags });
+})();

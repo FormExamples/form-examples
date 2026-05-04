@@ -1,52 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinician Dashboard - Heart Health Check</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Heart Health Check — clinician dashboard</title>
+  <meta name="description" content="NHS Heart Health Check clinician dashboard: review patient submissions with 10-year CVD risk, heart age, risk category, and flag count.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <span class="header-title">Clinician Dashboard</span>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Heart Health Check — Clinician Dashboard</h1>
+      <p class="subtitle">
+        NHS Heart Health Check patient list with 10-year CVD risk,
+        heart age, and flagged-issue count.
+      </p>
     </div>
   </header>
 
-  <main class="container">
-    <div class="filter-bar">
-      <input type="text" id="search-input" placeholder="Search by NHS number or name...">
-      <select id="risk-filter">
-        <option value="">All Risk Levels</option>
-        <option value="low">Low</option>
-        <option value="moderate">Moderate</option>
-        <option value="high">High</option>
-      </select>
-      <button id="clear-filters">Clear Filters</button>
-    </div>
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
 
-    <table class="patient-table">
-      <thead>
-        <tr>
-          <th data-sort="nhsNumber">NHS Number</th>
-          <th data-sort="patientName">Patient Name</th>
-          <th data-sort="age">Age / Sex</th>
-          <th data-sort="riskCategory">Risk</th>
-          <th data-sort="tenYearRisk">10-Year CVD Risk</th>
-          <th data-sort="flagCount">Flags</th>
-          <th data-sort="submittedDate">Submitted</th>
-        </tr>
-      </thead>
-      <tbody id="patients-tbody">
-        <tr><td colspan="7" style="text-align:center;color:#6b7280;padding:2rem;">Loading...</td></tr>
-      </tbody>
-    </table>
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
-    <div class="patient-count" id="patient-count"></div>
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or patient name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Level</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All risk levels</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-sex">Sex</label>
+          <select id="filter-sex" class="select-input">
+            <option value="">All</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The NHS Heart Health Check uses a simplified QRISK3-based instrument
+        to estimate 10-year cardiovascular disease risk and heart age. This
+        dashboard is a clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
 
-  <footer class="footer"><p>Heart Health Check System &copy; 2026. For clinical use only.</p></footer>
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.HeartHealthCheckDashboard`.
 
-  <script type="module" src="js/dashboard.js"></script>
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

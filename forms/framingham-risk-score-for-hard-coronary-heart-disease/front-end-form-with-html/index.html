@@ -3,17 +3,104 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Framingham Risk Score For Hard Coronary Heart Disease — patient questionnaire</title>
+  <title>Framingham Risk Score for Hard CHD — patient questionnaire</title>
+  <meta name="description" content="Framingham 10-year hard coronary heart disease risk assessment.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Framingham Risk Score for Hard CHD</h1>
+      <p class="subtitle">10-year risk of hard coronary heart disease (Wilson 1998 / ATP III).</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Framingham Risk Score For Hard Coronary Heart Disease</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Framingham Risk Score For Hard Coronary Heart Disease form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This calculator estimates the 10-year risk of a hard coronary heart
+        disease event (myocardial infarction or coronary death) in adults
+        aged 30-79 with no history of CHD or diabetes. Complete each section
+        below; answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This screening tool is for clinical decision support only and is not
+        a diagnosis. Discuss the results with the patient's clinician.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Patient Information, 2 Demographics, 3 Smoking History, -->
+        <!-- 4 Blood Pressure, 5 Cholesterol, 6 Medical History, -->
+        <!-- 7 Family History, 8 Lifestyle Factors, 9 Current Medications, -->
+        <!-- 10 Review & Calculate -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Calculate risk and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Framingham risk report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Reference: Wilson PWF, D'Agostino RB, Levy D et al. Prediction of
+        coronary heart disease using risk factor categories. Circulation.
+        1998;97:1837-1847. The Framingham hard-CHD calculator is intended
+        for primary prevention in adults aged 30-79 without a prior CHD
+        diagnosis or diabetes.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.FraminghamRiskScore`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/risk-rules.js"></script>
+  <script src="js/risk-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

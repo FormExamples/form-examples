@@ -1,49 +1,49 @@
 # Heart Health Check: Front End Patient Form With HTML
 
-Patient-facing 10-step Heart Health Check assessment form. Built with plain HTML, CSS, and vanilla JavaScript with ES modules.
+Patient-facing 10-step Heart Health Check assessment form. Built with plain
+HTML, CSS, and vanilla JavaScript. Classic `<script>` tags (no ES modules,
+no build step) so the page works when opened directly via `file://`.
 
 ## Architecture
 
-- Single-page 10-step wizard form with progress bar
-- Landing page with feature cards and "Begin Assessment" button
-- Data binding via `data-field` attributes with nested dot notation (e.g. `data-field="demographicsEthnicity.age"`)
-- Conditional field visibility via `data-show-if` attribute (e.g. `data-show-if="smokingAlcohol.smokingStatus=currentSmoker"`)
-- Computed values (BMI, TC/HDL ratio) calculated and displayed inline
-- Risk calculation on submit with redirect to report page
-- Data persisted to sessionStorage between form and report pages
+- Single-page continuous wizard with all 10 sections rendered in document order
+- Sticky top-of-page progress bar driven by an `aria-live` field count
+- Pure scoring engine: 10-year CVD risk + heart age + 20 HHC rules + 13 flags
+- IIFE-wrapped classic scripts that publish exports to `window.HeartHealthCheck`
+- Data persistence to `localStorage` under key
+  `heart-health-check.front-end-form-with-html.v1`
+- Conditional sections via `data-conditional` and `data-conditional-any` hooks
+- Inline aria-live `#report` region rendered after submission
 
 ## Files
 
 ```
 front-end-form-with-html/
-  index.html             # Landing page + 10-step form wizard
-  report.html            # Risk report with results, flags, rules
-  css/style.css          # Responsive styling with NHS colour scheme
+  index.html             # Page shell (sticky progress, form host, report region)
+  css/style.css          # Mobile-first responsive styling
   js/
-    app.js               # Form navigation, data binding, submission
-    data-model.js        # createDefaultAssessment() with 10 sections
-    steps.js             # Step metadata (number, title, section key)
-    utils.js             # BMI, TC/HDL ratio, formatting, parsing helpers
-    grader.js            # estimateTenYearRisk(), calculateHeartAge(), calculateRisk()
-    grading-rules.js     # 20 HHC rules (evaluateRules())
+    types.js             # emptyAssessment(), BMI, TC/HDL, smoking points
+    risk-rules.js        # 20 HHC rules (evaluateRules())
+    risk-grader.js       # estimateTenYearRisk(), calculateHeartAge(), calculateRisk()
     flagged-issues.js    # 13 clinical flags (detectAdditionalFlags())
+    app.js               # Wizard render, persistence, submission, report rendering
 ```
 
 ## Scoring engine
 
-- **grader.js**: Point-based scoring with exponential mapping; heart age calculation
-- **grading-rules.js**: 20 declarative rules (HHC-001 to HHC-020) with evaluate functions
-- **flagged-issues.js**: 13 safety-critical clinical alerts with priority sorting
+- **risk-grader.js**: Point-based QRISK3-shaped scoring with exponential
+  mapping; heart-age calculation iterates a baseline patient by age.
+- **risk-rules.js**: 20 declarative rules (HHC-001 to HHC-020) with
+  evaluate functions.
+- **flagged-issues.js**: 13 safety-critical clinical alerts with priority
+  sorting (high > medium > low).
 
-## Report page
+## Report
 
 - Risk banner with colour-coded category, 10-year risk %, heart age
-- Flagged issues list with priority colours
-- Fired rules table (high/medium risk factors, low/positive factors)
-- Patient summary grid
-- Clinical measurements grid
-- Clinician review section
-- Print and new assessment actions
+- Fired-rules table (high/medium/low)
+- Flagged-issues list with priority colours
+- Start over action that clears localStorage and re-renders the wizard
 
 ## Status
 
