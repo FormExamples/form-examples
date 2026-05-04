@@ -3,17 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Provider Transfer Request — patient questionnaire</title>
+  <title>Provider Transfer Request — clinician questionnaire</title>
+  <meta name="description" content="Inter-provider handover form (SBAR) for transferring a patient's care between clinicians, wards, or organisations.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Provider Transfer Request</h1>
+      <p class="subtitle">Inter-provider handover (SBAR). Steps 1-8 are completed by the requesting provider; step 9 is the receiving-provider acknowledgement.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 of 0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Provider Transfer Request</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Provider Transfer Request form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This form is a structured handover for a patient whose care is being
+        transferred between clinicians, wards, or organisations. Sections
+        follow the SBAR framework (Situation, Background, Assessment,
+        Recommendation) plus the practical transfer logistics that the
+        receiving team needs at the bedside.
+      </p>
+      <p>
+        Your answers are saved automatically in your browser as you go.
+        The receiving-provider acknowledgement (step 9) only triggers
+        required fields once any acknowledgement detail is entered.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections"></div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Validation report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Provider Transfer Request — structured handover. The completeness
+        validator is informational and does not replace clinical judgement;
+        the requesting and receiving providers remain responsible for safe
+        handover.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ProviderTransferRequest`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/validation-rules.js"></script>
+  <script src="js/transfer-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

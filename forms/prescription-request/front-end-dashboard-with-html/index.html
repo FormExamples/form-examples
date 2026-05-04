@@ -4,16 +4,146 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Prescription Request — clinician dashboard</title>
+  <meta name="description" content="Prescription Request clinician dashboard: review prescription requests with priority classification (Routine / Urgent / Emergency), request type, and status.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#prescriptions-table">Skip to prescriptions table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Prescription Request — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Prescription requests with priority classification
+        (Routine / Urgent / Emergency), request type, and review status.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Prescription Request</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Prescription Request form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient, medication, NHS number, or clinician..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-priority">Priority</label>
+          <select id="filter-priority" class="select-input">
+            <option value="">All Priorities</option>
+            <option value="routine">Routine</option>
+            <option value="urgent">Urgent</option>
+            <option value="emergency">Emergency</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-type">Type</label>
+          <select id="filter-type" class="select-input">
+            <option value="">All Types</option>
+            <option value="New">New</option>
+            <option value="Refill">Refill</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="select-input">
+            <option value="">All Statuses</option>
+            <option value="submitted">Submitted</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="approved">Approved</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading prescription requests...</span>
+      </div>
+    </section>
+
+    <!-- Prescriptions table -->
+    <section
+      class="table-card"
+      aria-labelledby="prescriptions-table-heading"
+    >
+      <h2 id="prescriptions-table-heading" class="visually-hidden">Prescription requests</h2>
+
+      <div class="table-scroll">
+        <table id="prescriptions-table" class="prescriptions-table">
+          <thead>
+            <tr id="prescriptions-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="prescriptions-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="prescriptions-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No prescription requests match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Priority classification (Routine / Urgent / Emergency) reflects the
+        urgency of the prescription request. This dashboard is a
+        clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PrescriptionRequestDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

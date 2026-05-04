@@ -4,16 +4,99 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Prescription Request — patient questionnaire</title>
+  <meta name="description" content="Prescription request form with priority classification (Routine / Urgent / Emergency).">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Prescription Request Form</h1>
+      <p class="subtitle">Complete all sections below to submit a prescription request.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Prescription Request</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Prescription Request form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please complete every section of this prescription request. Required
+        fields are marked with an asterisk. All answers are saved automatically
+        in your browser as you type.
+      </p>
+      <p>
+        Mark the request as an emergency only when immediate dispensing is
+        clinically required. If the patient is in immediate danger, call your
+        local emergency number instead of submitting this form.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Patient Information, 2 Clinician Information, -->
+        <!-- 3 Prescription Details, 4 Substitution Options, 5 Request Type -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit prescription request
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Prescription request report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This prescription request tool classifies submissions by priority
+        (Routine / Urgent / Emergency) using a deterministic rule engine.
+        It is intended for use by clinicians and patients within an existing
+        clinical workflow and is not a substitute for clinical judgement.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PrescriptionRequest`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/prescription-rules.js"></script>
+  <script src="js/prescription-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
