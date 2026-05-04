@@ -3,17 +3,158 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Workplace Safety Assessment — clinician dashboard</title>
+  <title>Workplace Safety Assessment — safety officer dashboard</title>
+  <meta name="description" content="HSE Workplace Safety Audit dashboard: review site audits with outcome category, last-audit date, and open corrective-action counts.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#sites-table">Skip to sites table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Workplace Safety Assessment — Safety Officer Dashboard</h1>
+      <p class="subtitle">
+        HSE Workplace Safety Audit — site list with outcome category,
+        last-audit date, and open corrective-action counts.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Workplace Safety Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Workplace Safety Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Site name or location..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select-input">
+            <option value="">All outcomes</option>
+            <option value="Compliant">Compliant</option>
+            <option value="Minor Findings">Minor Findings</option>
+            <option value="Major Findings">Major Findings</option>
+            <option value="Critical Findings">Critical Findings</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-site-type">Site Type</label>
+          <select id="filter-site-type" class="select-input">
+            <option value="">All site types</option>
+            <option value="NHS Hospital">NHS Hospital</option>
+            <option value="GP Practice">GP Practice</option>
+            <option value="Mental Health Unit">Mental Health Unit</option>
+            <option value="Dental Practice">Dental Practice</option>
+            <option value="Community Pharmacy">Community Pharmacy</option>
+            <option value="Ambulance Station">Ambulance Station</option>
+            <option value="Care Home">Care Home</option>
+            <option value="Hospice">Hospice</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-recency">Audit Recency</label>
+          <select id="filter-recency" class="select-input">
+            <option value="">All</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="180">Last 180 days</option>
+            <option value="365">Last 12 months</option>
+            <option value="overdue">Overdue (&gt; 12 months)</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading sites...</span>
+      </div>
+    </section>
+
+    <!-- Sites table -->
+    <section
+      class="table-card"
+      aria-labelledby="sites-table-heading"
+    >
+      <h2 id="sites-table-heading" class="visually-hidden">Sites</h2>
+
+      <div class="table-scroll">
+        <table id="sites-table" class="sites-table">
+          <thead>
+            <tr id="sites-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="sites-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="sites-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No sites match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The HSE Workplace Safety Audit Checklist is a structured framework for
+        identifying physical, chemical, biological, ergonomic, and
+        organisational hazards in healthcare settings. This dashboard is a
+        management-review tool aligned with UK Health and Safety Executive
+        guidance and is not a substitute for statutory RIDDOR reporting.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.WorkplaceSafetyAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
