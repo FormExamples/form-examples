@@ -4,16 +4,104 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Advance Decision To Refuse Treatment — patient questionnaire</title>
+  <meta name="description" content="Advance Decision to Refuse Treatment (ADRT) under the UK Mental Capacity Act 2005. Validity check, flagged-issue detection, and structured legal questionnaire.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Advance Decision To Refuse Treatment</h1>
+      <p class="subtitle">UK Mental Capacity Act 2005 — legal validity check and structured ADRT questionnaire.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Advance Decision To Refuse Treatment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Advance Decision To Refuse Treatment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        An Advance Decision to Refuse Treatment (ADRT) is a legal document
+        under the UK Mental Capacity Act 2005 that lets you record, in
+        advance, treatments you wish to refuse if you later lack the capacity
+        to decide for yourself. All answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        Refusal of life-sustaining treatment carries additional legal
+        requirements (written, signed, witnessed, with an explicit
+        "even if life is at risk" statement). This wizard checks for those
+        requirements and flags issues for clinical and legal review.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Personal Information, 2 Capacity Declaration, 3 Circumstances, -->
+        <!-- 4 Treatments Refused (General), 5 Treatments Refused (Life-Sustaining), -->
+        <!-- 6 Exceptions & Conditions, 7 Other Wishes, 8 Lasting Power of Attorney, -->
+        <!-- 9 Healthcare Professional Review, 10 Legal Signatures -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This tool implements the legal-validity checks for an Advance
+        Decision to Refuse Treatment under the UK Mental Capacity Act 2005.
+        It is provided for information only and is not a substitute for
+        independent legal advice or a clinical capacity assessment.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.AdvanceDecisionToRefuseTreatment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/validity-rules.js"></script>
+  <script src="js/validity-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

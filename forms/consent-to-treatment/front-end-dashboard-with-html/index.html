@@ -3,17 +3,136 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Consent To Treatment — clinician dashboard</title>
+  <title>Consent to Treatment — clinician dashboard</title>
+  <meta name="description" content="Consent to Treatment clinician dashboard: review patient consent forms with procedure, department, status, and scheduled date.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Consent to Treatment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Patient consent form status and management: procedure, department,
+        consent status, and scheduled date.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Consent To Treatment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Consent To Treatment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number, name, procedure, or department..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="select-input">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="signed">Signed</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-department">Department</label>
+          <select id="filter-department" class="select-input">
+            <option value="">All departments</option>
+            <!-- Department options populated by app.js from the data set -->
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Consent to Treatment captures informed consent for medical procedures.
+        This dashboard is a clinical-review tool that surfaces pending,
+        signed, and expired consent forms; it is not a diagnostic instrument.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.ConsentToTreatmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
