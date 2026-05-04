@@ -3,17 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sports Medicine Assessment — patient questionnaire</title>
+  <title>Sports Medicine Assessment — pre-participation physical evaluation</title>
+  <meta name="description" content="Pre-Participation Physical Evaluation (PPE 5th ed.) for athletes: structured medical and family history, cardiovascular and MSK screening, neurological / concussion baseline, vision and skin screening, and clearance decision.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Sports Medicine Assessment</h1>
+      <p class="subtitle">Pre-Participation Physical Evaluation (PPE 5th ed.) — clearance for sport.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Sports Medicine Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Sports Medicine Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        This pre-participation physical evaluation (PPE) covers ten sections:
+        demographics, sport &amp; position, medical and family history,
+        menstrual / RED-S screening (where applicable), cardiovascular and
+        musculoskeletal examination, neurological &amp; concussion baseline,
+        vision and skin screening, and the clearance decision. All answers are
+        saved automatically in your browser as you go.
+      </p>
+      <p>
+        If you currently have chest pain, severe breathlessness, or syncope,
+        do not exercise — seek medical assessment immediately and call your
+        local emergency number for any acute symptoms.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Sport & Position Details, 3 Medical History, -->
+        <!-- 4 Family History, 5 Menstrual History / RED-S Screening, -->
+        <!-- 6 Cardiovascular Screening, 7 Musculoskeletal Screening, -->
+        <!-- 8 Neurological & Concussion Baseline, 9 Vision & Skin, -->
+        <!-- 10 Clearance Decision -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Modelled on the AAP / AAFP / ACSM / AMSSM / AOSSM / AOASM
+        Pre-Participation Physical Evaluation, 5th edition. This screening
+        tool is for clinical decision support; final clearance for sport
+        rests with the supervising clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SportsMedicineAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/ppe-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

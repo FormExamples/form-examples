@@ -3,17 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Genetics Assessment — patient questionnaire</title>
+  <title>Genetics Assessment — clinical questionnaire</title>
+  <meta name="description" content="Clinical genetics risk assessment with three-generation family pedigree, Manchester score for BRCA1/2, Bethesda criteria for Lynch syndrome, Tyrer-Cuzick and PREMM5 inputs.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Genetics Assessment</h1>
+      <p class="subtitle">
+        Three-generation pedigree plus targeted risk scoring
+        (Manchester / Bethesda / Tyrer-Cuzick / PREMM5).
+      </p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Genetics Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Genetics Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please complete the proband demographics, presenting concern, personal
+        medical history, three-generation family pedigree, ancestry,
+        instrument-specific questions for cancer-genetics scoring, and any
+        prior testing. Answers are saved to your browser as you go.
+      </p>
+      <p>
+        This tool aligns to NICE CG164, NCCN guidelines, the Manchester Score
+        for BRCA1/2, the Revised Bethesda criteria for Lynch syndrome, the
+        Tyrer-Cuzick (IBIS) breast cancer model and the PREMM5 Lynch model.
+        Risk stratification is for clinician decision support and does not
+        replace formal genetic counselling.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Proband Demographics, 2 Presenting Concern, -->
+        <!-- 3 Personal Medical History, 4 Three-Generation Family Pedigree, -->
+        <!-- 5 Consanguinity & Ancestry, 6 Targeted Risk Scoring, -->
+        <!-- 7 Prior Genetic Testing, 8 Patient Understanding & Concerns, -->
+        <!-- 9 Recommendation & Referral Plan -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This screening tool is for clinical decision support only. It is not a
+        diagnosis. Final risk stratification, testing decisions and management
+        plans must be made by a clinical geneticist or genetic counsellor in
+        the context of a full pedigree review.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.GeneticsAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/genetics-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
