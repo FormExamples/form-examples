@@ -3,17 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lifeguard Certification Checklist — patient questionnaire</title>
+  <title>Lifeguard Certification Checklist — examiner verification</title>
+  <meta name="description" content="RLSS UK NPLQ / ILSF-aligned Lifeguard Competency Verification Checklist. Pass / Needs Development / Fail outcome with critical-skill audit.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to checklist</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Lifeguard Certification Checklist</h1>
+      <p class="subtitle">RLSS UK NPLQ / ILSF Lifeguard Competency Verification — examiner-completed.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Checklist completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 items assessed (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Lifeguard Certification Checklist</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Lifeguard Certification Checklist form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Use this checklist while observing a candidate complete the
+        practical lifeguard certification assessment. For each item, mark
+        whether the candidate demonstrated the skill correctly, has not
+        yet demonstrated it, or whether the item was not assessed in this
+        session. Critical competencies are highlighted; any
+        critical-competency failure results in an overall <strong>Fail</strong>.
+      </p>
+      <p>
+        Outcome rules: any critical-competency failure is an automatic Fail.
+        With no critical failures, one or two non-critical deficiencies
+        produce <strong>Needs Development</strong>; otherwise the candidate
+        passes. Answers are saved automatically to your browser as you go.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Candidate Details, 2 Physical Fitness & Swim Competency, -->
+        <!-- 3 Supervision/Scanning/Zoning, 4 Rescue - Conscious, -->
+        <!-- 5 Rescue - Unconscious, 6 Spinal Injury Management, -->
+        <!-- 7 CPR & AED, 8 First Aid & Oxygen Therapy, -->
+        <!-- 9 Legal/Regulatory/Incident, 10 Overall Result & Signoff -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Grade and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Lifeguard certification report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Lifeguard Competency Verification Checklist is aligned with the
+        RLSS UK National Pool Lifeguard Qualification (NPLQ) and the
+        International Life Saving Federation (ILSF) competency framework.
+        This examiner tool records observed performance and applies the
+        published pass/fail criteria; it is not a substitute for the
+        examiner's professional judgement.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.LifeguardCertificationChecklist`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/lifeguard-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

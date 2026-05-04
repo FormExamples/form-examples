@@ -3,17 +3,168 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Employee Offboarding Checklist — clinician dashboard</title>
+  <title>Employee Offboarding Checklist — HR dashboard</title>
+  <meta name="description" content="HR / management dashboard for the Employee Offboarding Checklist: review departing-employee records with completion status, blocker categories, department, role, and days since leaving.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#employees-table">Skip to employees table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Employee Offboarding Checklist — HR Dashboard</h1>
+      <p class="subtitle">
+        Departing-staff offboarding tracker showing completion status,
+        outstanding blockers (access, equipment, NDA), department, role,
+        and days since leaving.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Employee Offboarding Checklist</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Employee Offboarding Checklist form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Employee ID, name, role..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Completion Status</label>
+          <select id="filter-status" class="select-input">
+            <option value="">All statuses</option>
+            <option value="Complete">Complete</option>
+            <option value="Partial">Partial</option>
+            <option value="Incomplete">Incomplete</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-department">Department</label>
+          <select id="filter-department" class="select-input">
+            <option value="">All departments</option>
+            <option value="Nursing">Nursing</option>
+            <option value="Medical">Medical</option>
+            <option value="Admin">Admin</option>
+            <option value="Allied Health">Allied Health</option>
+            <option value="IT">IT</option>
+            <option value="Pharmacy">Pharmacy</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-blocker">Blocker Category</label>
+          <select id="filter-blocker" class="select-input">
+            <option value="">All blockers</option>
+            <option value="None">None</option>
+            <option value="Access Not Revoked">Access Not Revoked</option>
+            <option value="Equipment Outstanding">Equipment Outstanding</option>
+            <option value="NDA Pending">NDA Pending</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-days">Days Since Leaving</label>
+          <select id="filter-days" class="select-input">
+            <option value="">Any timeframe</option>
+            <option value="upcoming">Upcoming (not yet left)</option>
+            <option value="0-7">0–7 days</option>
+            <option value="8-30">8–30 days</option>
+            <option value="31-90">31–90 days</option>
+            <option value="90+">90+ days</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading employees...</span>
+      </div>
+    </section>
+
+    <!-- Employees table -->
+    <section
+      class="table-card"
+      aria-labelledby="employees-table-heading"
+    >
+      <h2 id="employees-table-heading" class="visually-hidden">Employees</h2>
+
+      <div class="table-scroll">
+        <table id="employees-table" class="employees-table">
+          <thead>
+            <tr id="employees-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="employees-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="employees-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No employees match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Employee Offboarding Checklist tracks completion of mandatory
+        leaver requirements (exit interview, knowledge transfer, equipment
+        return, access revocation, final payroll, references, NDA, forwarding
+        details, sign-off). This dashboard is an HR / management review tool
+        used to surface outstanding blockers that put patient safety,
+        organisational data, or service continuity at risk.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EmployeeOffboardingChecklistDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

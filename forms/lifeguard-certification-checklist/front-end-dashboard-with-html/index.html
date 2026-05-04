@@ -3,17 +3,164 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lifeguard Certification Checklist — clinician dashboard</title>
+  <title>Lifeguard Certification Checklist — training coordinator dashboard</title>
+  <meta name="description" content="RLSS NPLQ / ILSF-aligned Lifeguard Competency Verification training coordinator dashboard: review candidate Pass / Needs Development / Fail outcomes, certification currency, venue type, and examiner sign-off.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#candidates-table">Skip to candidates table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Lifeguard Certification Checklist — Training Coordinator Dashboard</h1>
+      <p class="subtitle">
+        RLSS NPLQ / ILSF-aligned Lifeguard Competency Verification candidate
+        list with Pass / Needs Development / Fail outcome, venue type, and
+        certification currency.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Lifeguard Certification Checklist</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Lifeguard Certification Checklist form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Candidate name, ID, venue, or examiner..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome" class="select-input">
+            <option value="">All outcomes</option>
+            <option value="Pass">Pass</option>
+            <option value="Needs Development">Needs Development</option>
+            <option value="Fail">Fail</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-venue-type">Venue Type</label>
+          <select id="filter-venue-type" class="select-input">
+            <option value="">All venue types</option>
+            <option value="Pool">Pool</option>
+            <option value="Beach">Beach</option>
+            <option value="Leisure Centre">Leisure Centre</option>
+            <option value="Water Park">Water Park</option>
+            <option value="Lido">Lido</option>
+            <option value="Hotel Pool">Hotel Pool</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-currency">Certification</label>
+          <select id="filter-currency" class="select-input">
+            <option value="">All certifications</option>
+            <option value="Current">Current</option>
+            <option value="Expiring Soon">Expiring Soon</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-examiner">Examiner</label>
+          <select id="filter-examiner" class="select-input">
+            <option value="">All examiners</option>
+            <!-- Examiner options populated by app.js -->
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading candidates...</span>
+      </div>
+    </section>
+
+    <!-- Candidates table -->
+    <section
+      class="table-card"
+      aria-labelledby="candidates-table-heading"
+    >
+      <h2 id="candidates-table-heading" class="visually-hidden">Candidates</h2>
+
+      <div class="table-scroll">
+        <table id="candidates-table" class="candidates-table">
+          <thead>
+            <tr id="candidates-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="candidates-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="candidates-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No candidates match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The RLSS UK National Pool Lifeguard Qualification (NPLQ) and the
+        International Life Saving Federation (ILSF) competencies cover
+        supervision and scanning, physical fitness, rescue scenarios, CPR /
+        AED, first aid, and legal / regulatory knowledge. This dashboard is a
+        training-administration tool and is not a clinical record. Standard
+        certification validity is two years; CPR refresher is required
+        annually.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.LifeguardCertificationChecklistDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

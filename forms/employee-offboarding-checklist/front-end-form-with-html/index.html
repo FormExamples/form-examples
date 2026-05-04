@@ -3,17 +3,110 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Employee Offboarding Checklist — patient questionnaire</title>
+  <title>Employee Offboarding Checklist — staff offboarding</title>
+  <meta name="description" content="Healthcare staff offboarding checklist: exit interview, knowledge transfer, equipment return, access revocation, final payroll, references, NDA reaffirmation, forwarding details, and HR/IT/manager sign-off.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Employee Offboarding Checklist</h1>
+      <p class="subtitle">Healthcare staff offboarding — exit interview, knowledge transfer, equipment return, access revocation, payroll, NDA reaffirmation, and sign-off.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Offboarding completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Employee Offboarding Checklist</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Employee Offboarding Checklist form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Complete the ten sections below to track this employee's offboarding.
+        Sections cover employee details, exit interview, knowledge transfer,
+        equipment return, access revocation, final payroll &amp; benefits,
+        references &amp; recommendations, non-disclosure &amp; post-employment
+        obligations, forwarding details, and final HR / line-manager / IT
+        sign-off.
+      </p>
+      <p>
+        All answers are saved automatically in your browser as you go.
+        Submit at the bottom to compute the offboarding outcome
+        (Complete / Partial / Incomplete), completion percentage, blockers,
+        and HR flags.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Employee Details, 2 Exit Interview, 3 Knowledge Transfer, -->
+        <!-- 4 Equipment Return, 5 Access Revocation, -->
+        <!-- 6 Final Payroll & Benefits, 7 References & Recommendations, -->
+        <!-- 8 Non-Disclosure & Post-Employment, 9 Forwarding Details, -->
+        <!-- 10 Sign-off -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Offboarding report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Offboarding validation is for HR / line-manager / IT use. Outcome is
+        Complete (all mandatory items confirmed), Partial (non-blocking items
+        outstanding) or Incomplete (mandatory items outstanding; requires
+        escalation). High-priority flags indicate access not revoked,
+        equipment not returned, missing NDA reaffirmation, or possible
+        unauthorised data download. Always confirm against local policy and
+        statutory requirements (data protection, payroll, contractual).
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EmployeeOffboardingChecklist`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/validation-rules.js"></script>
+  <script src="js/checklist-validator.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
