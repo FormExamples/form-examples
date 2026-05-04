@@ -1,2 +1,1222 @@
-// Plain JavaScript entrypoint. Implementation pending.
-console.log('Form scaffold loaded.');
+// Genetic Assessment - patient wizard (vanilla JavaScript, no build).
+//
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. The user scrolls through them; a sticky top-of-page
+// progress summary reflects how many fields have been answered. Submission
+// runs the pure risk-grading engine and renders an inline report. State is
+// persisted to localStorage so a partial fill survives a page reload.
+//
+// Sibling files loaded as plain `<script>` tags (in order) attach their
+// exports to `window.GeneticAssessment`. Pulling them off here keeps the
+// rest of this file referring to short local names. Whole file is wrapped
+// in an IIFE so its top-level identifiers don't leak to the global scope.
+(function () {
+'use strict';
+
+const NS = window.GeneticAssessment;
+const {
+  emptyAssessment,
+  emptyFamilyMember,
+  riskCategory,
+  riskLevelClass,
+  calculateAge,
+  gradeRisk,
+  detectAdditionalFlags
+} = NS;
+
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
+
+const STORAGE_KEY = 'genetic-assessment.front-end-form-with-html.v1';
+
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    // Merge over a fresh empty so any newly-added fields default correctly.
+    const fresh = emptyAssessment();
+    for (const key of Object.keys(fresh)) {
+      if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
+        // Family pedigree has nested family-member objects; merge each one.
+        if (key === 'familyPedigree') {
+          for (const memberKey of Object.keys(fresh.familyPedigree)) {
+            const target = fresh.familyPedigree[memberKey];
+            const incoming = parsed.familyPedigree?.[memberKey];
+            if (typeof target === 'object' && target !== null && incoming && typeof incoming === 'object') {
+              fresh.familyPedigree[memberKey] = { ...target, ...incoming };
+            } else if (typeof incoming === 'string') {
+              fresh.familyPedigree[memberKey] = incoming;
+            }
+          }
+        } else {
+          fresh[key] = { ...fresh[key], ...parsed[key] };
+        }
+      }
+    }
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved assessment; starting fresh.', e);
+    return emptyAssessment();
+  }
+}
+
+/** @param {import('./types.js').AssessmentData} state */
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save assessment to localStorage.', e);
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored assessment.', e);
+  }
+}
+
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {(import('./types.js').GradingResult & { riskScore: number, riskLevel: string, firedRules: any[], additionalFlags: any[], timestamp: string }) | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/**
+ * Set a field on a top-level section and persist.
+ *
+ * @param {string} section
+ * @param {string} field
+ * @param {*} value
+ */
+function setField(section, field, value) {
+  state[section][field] = value;
+  saveState(state);
+  updateProgress();
+  updateConditionalSections();
+}
+
+/**
+ * Set a field inside one of the family-pedigree members (mother, father,
+ * grandparents) and persist.
+ *
+ * @param {string} memberKey
+ * @param {string} field
+ * @param {*} value
+ */
+function setFamilyMemberField(memberKey, field, value) {
+  state.familyPedigree[memberKey][field] = value;
+  saveState(state);
+  updateProgress();
+  updateConditionalSections();
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Component builders
+// ----------------------------------------------------------------------
+
+/**
+ * Build a labelled text input.
+ * @param {{ label: string, section: string, field: string, type?: string,
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number, unit?: string }} opts
+ */
+function textInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field];
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="text-input"`,
+    `value="${esc(value ?? '')}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+  `;
+
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    let v = input.value;
+    if (type === 'number') {
+      v = v === '' ? null : Number(v);
+    }
+    setField(opts.section, opts.field, v);
+  });
+  return wrapper;
+}
+
+/**
+ * Build a labelled multi-line text area.
+ * @param {{ label: string, section: string, field: string, rows?: number,
+ *           placeholder?: string }} opts
+ */
+function textArea(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      class="textarea">${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  return wrapper;
+}
+
+/**
+ * Build a select / dropdown input.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function selectInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+
+  const optionsHtml = [
+    `<option value="">— Select —</option>`,
+    ...opts.options.map((o) =>
+      `<option value="${esc(o.value)}"${o.value === current ? ' selected' : ''}>${esc(o.label)}</option>`
+    )
+  ].join('');
+
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select-input">
+      ${optionsHtml}
+    </select>
+  `;
+  const sel = wrapper.querySelector('select');
+  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  return wrapper;
+}
+
+/**
+ * Build a radio group.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.textContent = opts.label;
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.className = 'radio-option';
+    label.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, option.value);
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+/**
+ * Build a section card.
+ * @param {{ stepNumber: number, title: string, description?: string }} opts
+ */
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card';
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Section ${opts.stepNumber} of 10</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Family pedigree row editor
+// ----------------------------------------------------------------------
+
+const yesNo = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
+];
+
+/**
+ * Build the editor block for one family member (mother, father, or
+ * grandparent). Each member has conditions, cancers, ageAtDiagnosis,
+ * deceased (yes/no) and ageAtDeath (visible only when deceased=yes).
+ *
+ * @param {{ memberKey: string, memberLabel: string }} opts
+ */
+function familyMemberEditor(opts) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'family-member';
+
+  const header = document.createElement('h3');
+  header.className = 'family-member-title';
+  header.textContent = opts.memberLabel;
+  wrapper.appendChild(header);
+
+  const data = state.familyPedigree[opts.memberKey];
+
+  // Conditions textarea
+  const condId = `family-${opts.memberKey}-conditions`;
+  const condField = document.createElement('div');
+  condField.className = 'field';
+  condField.innerHTML = `
+    <label for="${condId}">Medical conditions</label>
+    <textarea id="${condId}" rows="2" class="textarea"
+      placeholder="List any known medical or genetic conditions...">${esc(data.conditions)}</textarea>
+  `;
+  const condTa = condField.querySelector('textarea');
+  condTa.addEventListener('input', () =>
+    setFamilyMemberField(opts.memberKey, 'conditions', condTa.value));
+  wrapper.appendChild(condField);
+
+  // Cancers
+  const cancerId = `family-${opts.memberKey}-cancers`;
+  const cancerField = document.createElement('div');
+  cancerField.className = 'field';
+  cancerField.innerHTML = `
+    <label for="${cancerId}">Cancer history</label>
+    <input type="text" id="${cancerId}" class="text-input"
+      value="${esc(data.cancers)}"
+      placeholder="Type of cancer(s), if any">
+  `;
+  const cancerInp = cancerField.querySelector('input');
+  cancerInp.addEventListener('input', () =>
+    setFamilyMemberField(opts.memberKey, 'cancers', cancerInp.value));
+  wrapper.appendChild(cancerField);
+
+  // Age at diagnosis (free text per Svelte component)
+  const ageDxId = `family-${opts.memberKey}-ageAtDiagnosis`;
+  const ageDxField = document.createElement('div');
+  ageDxField.className = 'field';
+  ageDxField.innerHTML = `
+    <label for="${ageDxId}">Age at diagnosis (if applicable)</label>
+    <input type="text" id="${ageDxId}" class="text-input"
+      value="${esc(data.ageAtDiagnosis)}"
+      placeholder="e.g., 45">
+  `;
+  const ageDxInp = ageDxField.querySelector('input');
+  ageDxInp.addEventListener('input', () =>
+    setFamilyMemberField(opts.memberKey, 'ageAtDiagnosis', ageDxInp.value));
+  wrapper.appendChild(ageDxField);
+
+  // Deceased radio
+  const groupId = `family-${opts.memberKey}-deceased`;
+  const decFieldset = document.createElement('fieldset');
+  decFieldset.className = 'field radio-group';
+  const decLegend = document.createElement('legend');
+  decLegend.textContent = 'Deceased?';
+  decFieldset.appendChild(decLegend);
+  const decList = document.createElement('div');
+  decList.className = 'radio-options';
+  for (const opt of yesNo) {
+    const rid = `${groupId}-${opt.value}`;
+    const lbl = document.createElement('label');
+    lbl.className = 'radio-option';
+    lbl.htmlFor = rid;
+    const checked = data.deceased === opt.value ? ' checked' : '';
+    lbl.innerHTML = `
+      <input type="radio" id="${rid}" name="${groupId}" value="${esc(opt.value)}"${checked}>
+      <span>${esc(opt.label)}</span>
+    `;
+    const inp = lbl.querySelector('input');
+    inp.addEventListener('change', () => {
+      if (inp.checked) setFamilyMemberField(opts.memberKey, 'deceased', opt.value);
+    });
+    decList.appendChild(lbl);
+  }
+  decFieldset.appendChild(decList);
+  wrapper.appendChild(decFieldset);
+
+  // Age at death (conditional on deceased=yes)
+  const ageDeathHost = document.createElement('div');
+  ageDeathHost.dataset.conditional = `familyPedigree.${opts.memberKey}.deceased=yes`;
+  const ageDeathId = `family-${opts.memberKey}-ageAtDeath`;
+  const ageDeathField = document.createElement('div');
+  ageDeathField.className = 'field';
+  ageDeathField.innerHTML = `
+    <label for="${ageDeathId}">Age at death</label>
+    <input type="text" id="${ageDeathId}" class="text-input"
+      value="${esc(data.ageAtDeath)}"
+      placeholder="e.g., 72">
+  `;
+  const ageDeathInp = ageDeathField.querySelector('input');
+  ageDeathInp.addEventListener('input', () =>
+    setFamilyMemberField(opts.memberKey, 'ageAtDeath', ageDeathInp.value));
+  ageDeathHost.appendChild(ageDeathField);
+  wrapper.appendChild(ageDeathHost);
+
+  return wrapper;
+}
+
+// ----------------------------------------------------------------------
+// Section renderers (1 per step, 10 total)
+// ----------------------------------------------------------------------
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Demographics',
+    description: 'Basic patient information.'
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'two-col';
+  grid.appendChild(textInput({ label: 'First Name', section: 'demographics', field: 'firstName', required: true }));
+  grid.appendChild(textInput({ label: 'Last Name', section: 'demographics', field: 'lastName', required: true }));
+  card.appendChild(grid);
+
+  card.appendChild(textInput({
+    label: 'Date of Birth',
+    section: 'demographics',
+    field: 'dateOfBirth',
+    type: 'date',
+    required: true
+  }));
+  card.appendChild(radioGroup({
+    label: 'Sex',
+    section: 'demographics',
+    field: 'sex',
+    options: [
+      { value: 'male', label: 'Male' },
+      { value: 'female', label: 'Female' },
+      { value: 'other', label: 'Other' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderStep2() {
+  const card = sectionCard({
+    stepNumber: 2,
+    title: 'Referral Information',
+    description: 'Who is referring you, and why.'
+  });
+
+  card.appendChild(textArea({
+    label: 'Reason for referral',
+    section: 'referralInformation',
+    field: 'referralReason',
+    placeholder: 'Describe the main reason for this genetic assessment referral...',
+    rows: 3
+  }));
+
+  card.appendChild(textInput({
+    label: 'Referring clinician',
+    section: 'referralInformation',
+    field: 'referringClinician',
+    placeholder: 'e.g., Dr. Smith, Oncology'
+  }));
+
+  card.appendChild(selectInput({
+    label: 'Urgency',
+    section: 'referralInformation',
+    field: 'urgency',
+    options: [
+      { value: 'routine', label: 'Routine' },
+      { value: 'urgent', label: 'Urgent' },
+      { value: 'emergency', label: 'Emergency' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderStep3() {
+  const card = sectionCard({
+    stepNumber: 3,
+    title: 'Personal Medical History',
+    description: 'Personal history of birth defects, developmental issues, and known genetic conditions.'
+  });
+
+  // Birth defects
+  card.appendChild(radioGroup({
+    label: 'Birth defects?',
+    section: 'personalMedicalHistory',
+    field: 'birthDefects',
+    options: yesNo
+  }));
+  const birthDetails = document.createElement('div');
+  birthDetails.dataset.conditional = 'personalMedicalHistory.birthDefects=yes';
+  birthDetails.appendChild(textArea({
+    label: 'Birth defects details',
+    section: 'personalMedicalHistory',
+    field: 'birthDefectsDetails',
+    placeholder: 'Describe any known birth defects...',
+    rows: 2
+  }));
+  card.appendChild(birthDetails);
+
+  // Developmental delay
+  card.appendChild(radioGroup({
+    label: 'Developmental delay?',
+    section: 'personalMedicalHistory',
+    field: 'developmentalDelay',
+    options: yesNo
+  }));
+  const ddDetails = document.createElement('div');
+  ddDetails.dataset.conditional = 'personalMedicalHistory.developmentalDelay=yes';
+  ddDetails.appendChild(textArea({
+    label: 'Developmental delay details',
+    section: 'personalMedicalHistory',
+    field: 'developmentalDelayDetails',
+    placeholder: 'Describe any developmental delays...',
+    rows: 2
+  }));
+  card.appendChild(ddDetails);
+
+  // Intellectual disability
+  card.appendChild(radioGroup({
+    label: 'Intellectual disability?',
+    section: 'personalMedicalHistory',
+    field: 'intellectualDisability',
+    options: yesNo
+  }));
+  const idDetails = document.createElement('div');
+  idDetails.dataset.conditional = 'personalMedicalHistory.intellectualDisability=yes';
+  idDetails.appendChild(textArea({
+    label: 'Intellectual disability details',
+    section: 'personalMedicalHistory',
+    field: 'intellectualDisabilityDetails',
+    placeholder: 'Describe...',
+    rows: 2
+  }));
+  card.appendChild(idDetails);
+
+  // Multiple anomalies
+  card.appendChild(radioGroup({
+    label: 'Multiple congenital anomalies?',
+    section: 'personalMedicalHistory',
+    field: 'multipleAnomalies',
+    options: yesNo
+  }));
+  const maDetails = document.createElement('div');
+  maDetails.dataset.conditional = 'personalMedicalHistory.multipleAnomalies=yes';
+  maDetails.appendChild(textArea({
+    label: 'Multiple anomalies details',
+    section: 'personalMedicalHistory',
+    field: 'multipleAnomaliesDetails',
+    placeholder: 'Describe...',
+    rows: 2
+  }));
+  card.appendChild(maDetails);
+
+  // Chromosomal condition
+  card.appendChild(radioGroup({
+    label: 'Known chromosomal condition?',
+    section: 'personalMedicalHistory',
+    field: 'chromosomalCondition',
+    options: yesNo
+  }));
+  const ccDetails = document.createElement('div');
+  ccDetails.dataset.conditional = 'personalMedicalHistory.chromosomalCondition=yes';
+  ccDetails.appendChild(textArea({
+    label: 'Chromosomal condition details',
+    section: 'personalMedicalHistory',
+    field: 'chromosomalConditionDetails',
+    placeholder: 'e.g., Down syndrome, Turner syndrome...',
+    rows: 2
+  }));
+  card.appendChild(ccDetails);
+
+  // Known genetic condition
+  card.appendChild(radioGroup({
+    label: 'Known genetic condition?',
+    section: 'personalMedicalHistory',
+    field: 'knownGeneticCondition',
+    options: yesNo
+  }));
+  const kgDetails = document.createElement('div');
+  kgDetails.dataset.conditional = 'personalMedicalHistory.knownGeneticCondition=yes';
+  kgDetails.appendChild(textArea({
+    label: 'Genetic condition details',
+    section: 'personalMedicalHistory',
+    field: 'knownGeneticConditionDetails',
+    placeholder: 'e.g., BRCA1, Lynch syndrome, cystic fibrosis...',
+    rows: 2
+  }));
+  card.appendChild(kgDetails);
+
+  return card;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'Cancer History',
+    description: 'Personal history of cancer.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Personal cancer history?',
+    section: 'cancerHistory',
+    field: 'personalCancerHistory',
+    options: yesNo
+  }));
+
+  const cancerDetails = document.createElement('div');
+  cancerDetails.dataset.conditional = 'cancerHistory.personalCancerHistory=yes';
+  cancerDetails.appendChild(textInput({
+    label: 'Type of cancer',
+    section: 'cancerHistory',
+    field: 'cancerType',
+    placeholder: 'e.g., breast, colorectal, ovarian'
+  }));
+  cancerDetails.appendChild(textInput({
+    label: 'Age at diagnosis',
+    section: 'cancerHistory',
+    field: 'ageAtDiagnosis',
+    type: 'number',
+    min: 0,
+    max: 120,
+    placeholder: 'e.g., 45'
+  }));
+  cancerDetails.appendChild(radioGroup({
+    label: 'Multiple primary cancers?',
+    section: 'cancerHistory',
+    field: 'multiplePrimaryCancers',
+    options: yesNo
+  }));
+  card.appendChild(cancerDetails);
+
+  return card;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Family Pedigree',
+    description: 'Three-generation family history of medical conditions and cancers.'
+  });
+
+  const familyMembers = [
+    { key: 'mother', label: 'Mother' },
+    { key: 'father', label: 'Father' },
+    { key: 'maternalGrandmother', label: 'Maternal Grandmother' },
+    { key: 'maternalGrandfather', label: 'Maternal Grandfather' },
+    { key: 'paternalGrandmother', label: 'Paternal Grandmother' },
+    { key: 'paternalGrandfather', label: 'Paternal Grandfather' }
+  ];
+
+  for (const m of familyMembers) {
+    card.appendChild(familyMemberEditor({
+      memberKey: m.key,
+      memberLabel: m.label
+    }));
+  }
+
+  card.appendChild(textArea({
+    label: 'Siblings (conditions, cancers, age at diagnosis)',
+    section: 'familyPedigree',
+    field: 'siblings',
+    placeholder: 'List siblings and any relevant medical history...',
+    rows: 3
+  }));
+
+  card.appendChild(textArea({
+    label: 'Children (conditions, cancers, age at diagnosis)',
+    section: 'familyPedigree',
+    field: 'children',
+    placeholder: 'List children and any relevant medical history...',
+    rows: 3
+  }));
+
+  return card;
+}
+
+function renderStep6() {
+  const card = sectionCard({
+    stepNumber: 6,
+    title: 'Cardiovascular Genetics',
+    description: 'Family history of inherited cardiovascular conditions.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Familial hypercholesterolemia (very high cholesterol running in family)?',
+    section: 'cardiovascularGenetics',
+    field: 'familialHypercholesterolemia',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Cardiomyopathy in family?',
+    section: 'cardiovascularGenetics',
+    field: 'cardiomyopathy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Aortic aneurysm in family?',
+    section: 'cardiovascularGenetics',
+    field: 'aorticAneurysm',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Sudden cardiac death in family (unexplained, often before age 50)?',
+    section: 'cardiovascularGenetics',
+    field: 'suddenCardiacDeath',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Early-onset cardiovascular disease in family (heart attack/stroke before 55 in men, 65 in women)?',
+    section: 'cardiovascularGenetics',
+    field: 'earlyOnsetCVD',
+    options: yesNo
+  }));
+
+  card.appendChild(textArea({
+    label: 'Cardiovascular details',
+    section: 'cardiovascularGenetics',
+    field: 'cardiovascularDetails',
+    placeholder: 'Describe any cardiovascular genetic concerns or family history details...',
+    rows: 3
+  }));
+
+  return card;
+}
+
+function renderStep7() {
+  const card = sectionCard({
+    stepNumber: 7,
+    title: 'Neurogenetics',
+    description: 'Family history of inherited neurological conditions.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Huntington disease in family?',
+    section: 'neurogenetics',
+    field: 'huntington',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Early-onset Alzheimer disease in family (before age 65)?',
+    section: 'neurogenetics',
+    field: 'alzheimersEarly',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Parkinson disease in family?',
+    section: 'neurogenetics',
+    field: 'parkinson',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Muscular dystrophy in family?',
+    section: 'neurogenetics',
+    field: 'muscularDystrophy',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Spinocerebellar ataxia in family?',
+    section: 'neurogenetics',
+    field: 'spinocerebellarAtaxia',
+    options: yesNo
+  }));
+
+  card.appendChild(textArea({
+    label: 'Neurological details',
+    section: 'neurogenetics',
+    field: 'neurologicalDetails',
+    placeholder: 'Describe any neurogenetic concerns or family history details...',
+    rows: 3
+  }));
+
+  return card;
+}
+
+function renderStep8() {
+  const card = sectionCard({
+    stepNumber: 8,
+    title: 'Reproductive Genetics',
+    description: 'Pregnancy loss, infertility, and known carrier status.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Recurrent miscarriages (3 or more)?',
+    section: 'reproductiveGenetics',
+    field: 'recurrentMiscarriages',
+    options: yesNo
+  }));
+  card.appendChild(radioGroup({
+    label: 'Infertility?',
+    section: 'reproductiveGenetics',
+    field: 'infertility',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Previous child with a genetic condition?',
+    section: 'reproductiveGenetics',
+    field: 'previousAffectedChild',
+    options: yesNo
+  }));
+  const pacDetails = document.createElement('div');
+  pacDetails.dataset.conditional = 'reproductiveGenetics.previousAffectedChild=yes';
+  pacDetails.appendChild(textArea({
+    label: 'Previous affected child — details',
+    section: 'reproductiveGenetics',
+    field: 'previousAffectedChildDetails',
+    placeholder: 'Describe condition, age at diagnosis, etc.',
+    rows: 2
+  }));
+  card.appendChild(pacDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Consanguinity (related to partner, e.g. cousins)?',
+    section: 'reproductiveGenetics',
+    field: 'consanguinity',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Known carrier status (you have been told you are a carrier of a genetic condition)?',
+    section: 'reproductiveGenetics',
+    field: 'carrierStatus',
+    options: yesNo
+  }));
+  const carrierDetails = document.createElement('div');
+  carrierDetails.dataset.conditional = 'reproductiveGenetics.carrierStatus=yes';
+  carrierDetails.appendChild(textArea({
+    label: 'Carrier status — details',
+    section: 'reproductiveGenetics',
+    field: 'carrierStatusDetails',
+    placeholder: 'e.g., cystic fibrosis carrier, sickle cell trait, Tay-Sachs...',
+    rows: 2
+  }));
+  card.appendChild(carrierDetails);
+
+  return card;
+}
+
+function renderStep9() {
+  const card = sectionCard({
+    stepNumber: 9,
+    title: 'Ethnic Background & Consanguinity',
+    description: 'Ethnicity and consanguinity can affect genetic-condition probabilities.'
+  });
+
+  card.appendChild(textInput({
+    label: 'Ethnicity / ancestry',
+    section: 'ethnicBackground',
+    field: 'ethnicity',
+    placeholder: 'e.g., Northern European, East Asian, West African...'
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Ashkenazi Jewish heritage?',
+    section: 'ethnicBackground',
+    field: 'ashkenaziJewish',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Consanguinity in your background?',
+    section: 'ethnicBackground',
+    field: 'consanguinity',
+    options: yesNo
+  }));
+  const consDetails = document.createElement('div');
+  consDetails.dataset.conditional = 'ethnicBackground.consanguinity=yes';
+  consDetails.appendChild(textArea({
+    label: 'Consanguinity details',
+    section: 'ethnicBackground',
+    field: 'consanguinityDetails',
+    placeholder: 'e.g., parents are first cousins...',
+    rows: 2
+  }));
+  card.appendChild(consDetails);
+
+  return card;
+}
+
+function renderStep10() {
+  const card = sectionCard({
+    stepNumber: 10,
+    title: 'Genetic Testing History',
+    description: 'Any prior genetic testing or counselling.'
+  });
+
+  card.appendChild(radioGroup({
+    label: 'Previous genetic tests?',
+    section: 'geneticTestingHistory',
+    field: 'previousGeneticTests',
+    options: yesNo
+  }));
+  const prevDetails = document.createElement('div');
+  prevDetails.dataset.conditional = 'geneticTestingHistory.previousGeneticTests=yes';
+  prevDetails.appendChild(textArea({
+    label: 'Previous tests — details',
+    section: 'geneticTestingHistory',
+    field: 'previousGeneticTestsDetails',
+    placeholder: 'List any prior genetic tests (panel, exome, single-gene, karyotype, etc.)...',
+    rows: 3
+  }));
+  prevDetails.appendChild(textArea({
+    label: 'Test results',
+    section: 'geneticTestingHistory',
+    field: 'testResults',
+    placeholder: 'Summarise the results of any prior genetic testing...',
+    rows: 3
+  }));
+  card.appendChild(prevDetails);
+
+  card.appendChild(radioGroup({
+    label: 'Have you had genetic counselling before?',
+    section: 'geneticTestingHistory',
+    field: 'geneticCounseling',
+    options: yesNo
+  }));
+
+  card.appendChild(radioGroup({
+    label: 'Variants of uncertain significance identified?',
+    section: 'geneticTestingHistory',
+    field: 'variantsOfUncertainSignificance',
+    options: yesNo
+  }));
+  const vusDetails = document.createElement('div');
+  vusDetails.dataset.conditional = 'geneticTestingHistory.variantsOfUncertainSignificance=yes';
+  vusDetails.appendChild(textArea({
+    label: 'Variants of uncertain significance — details',
+    section: 'geneticTestingHistory',
+    field: 'variantsOfUncertainSignificanceDetails',
+    placeholder: 'List any reported VUS findings...',
+    rows: 2
+  }));
+  card.appendChild(vusDetails);
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Conditional sections
+// ----------------------------------------------------------------------
+
+/**
+ * Resolve a dotted path (e.g. "familyPedigree.mother.deceased") down through
+ * the state object and return the final value (or undefined).
+ *
+ * @param {string} path
+ */
+function resolvePath(path) {
+  const parts = path.split('.');
+  let cur = state;
+  for (const p of parts) {
+    if (cur == null) return undefined;
+    cur = cur[p];
+  }
+  return cur;
+}
+
+function updateConditionalSections() {
+  document.querySelectorAll('[data-conditional]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional');
+    const eqIdx = expr.lastIndexOf('=');
+    if (eqIdx < 0) return;
+    const path = expr.slice(0, eqIdx);
+    const target = expr.slice(eqIdx + 1);
+    const current = resolvePath(path);
+    host.style.display = String(current) === target ? '' : 'none';
+  });
+  document.querySelectorAll('[data-conditional-any]').forEach((host) => {
+    const expr = host.getAttribute('data-conditional-any');
+    const eqIdx = expr.lastIndexOf('=');
+    if (eqIdx < 0) return;
+    const path = expr.slice(0, eqIdx);
+    const targetCsv = expr.slice(eqIdx + 1);
+    const current = String(resolvePath(path) ?? '');
+    const targets = targetCsv.split(',');
+    host.style.display = targets.includes(current) ? '' : 'none';
+  });
+}
+
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
+
+const TRACKED_FIELDS = [
+  // Demographics (4)
+  ['demographics', 'firstName'],
+  ['demographics', 'lastName'],
+  ['demographics', 'dateOfBirth'],
+  ['demographics', 'sex'],
+  // Referral information (3)
+  ['referralInformation', 'referralReason'],
+  ['referralInformation', 'referringClinician'],
+  ['referralInformation', 'urgency'],
+  // Personal medical history (6 yes/no)
+  ['personalMedicalHistory', 'birthDefects'],
+  ['personalMedicalHistory', 'developmentalDelay'],
+  ['personalMedicalHistory', 'intellectualDisability'],
+  ['personalMedicalHistory', 'multipleAnomalies'],
+  ['personalMedicalHistory', 'chromosomalCondition'],
+  ['personalMedicalHistory', 'knownGeneticCondition'],
+  // Cancer history (1 yes/no, conditionals are bonus but tracked simply)
+  ['cancerHistory', 'personalCancerHistory'],
+  ['cancerHistory', 'multiplePrimaryCancers'],
+  // Cardiovascular genetics (5)
+  ['cardiovascularGenetics', 'familialHypercholesterolemia'],
+  ['cardiovascularGenetics', 'cardiomyopathy'],
+  ['cardiovascularGenetics', 'aorticAneurysm'],
+  ['cardiovascularGenetics', 'suddenCardiacDeath'],
+  ['cardiovascularGenetics', 'earlyOnsetCVD'],
+  // Neurogenetics (5)
+  ['neurogenetics', 'huntington'],
+  ['neurogenetics', 'alzheimersEarly'],
+  ['neurogenetics', 'parkinson'],
+  ['neurogenetics', 'muscularDystrophy'],
+  ['neurogenetics', 'spinocerebellarAtaxia'],
+  // Reproductive genetics (5)
+  ['reproductiveGenetics', 'recurrentMiscarriages'],
+  ['reproductiveGenetics', 'infertility'],
+  ['reproductiveGenetics', 'previousAffectedChild'],
+  ['reproductiveGenetics', 'consanguinity'],
+  ['reproductiveGenetics', 'carrierStatus'],
+  // Ethnic background (3)
+  ['ethnicBackground', 'ethnicity'],
+  ['ethnicBackground', 'ashkenaziJewish'],
+  ['ethnicBackground', 'consanguinity'],
+  // Genetic testing history (3)
+  ['geneticTestingHistory', 'previousGeneticTests'],
+  ['geneticTestingHistory', 'geneticCounseling'],
+  ['geneticTestingHistory', 'variantsOfUncertainSignificance']
+];
+
+// Family-pedigree members add another 6 "deceased" fields tracked toward
+// progress, since they are visible top-level radio choices in the pedigree.
+const TRACKED_FAMILY_MEMBERS = [
+  'mother',
+  'father',
+  'maternalGrandmother',
+  'maternalGrandfather',
+  'paternalGrandmother',
+  'paternalGrandfather'
+];
+
+function updateProgress() {
+  let answered = 0;
+  for (const [section, field] of TRACKED_FIELDS) {
+    const v = state[section][field];
+    if (v !== null && v !== undefined && v !== '') answered++;
+  }
+  for (const memberKey of TRACKED_FAMILY_MEMBERS) {
+    const v = state.familyPedigree[memberKey].deceased;
+    if (v !== null && v !== undefined && v !== '') answered++;
+  }
+  const total = TRACKED_FIELDS.length + TRACKED_FAMILY_MEMBERS.length;
+  const percent = Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+}
+
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'urgent': return 'flag-urgent';
+    case 'high': return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low': return 'flag-low';
+    default: return '';
+  }
+}
+
+function renderReport() {
+  if (!lastResult) return;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { riskScore, riskLevel, firedRules, additionalFlags, timestamp } = lastResult;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags raised.</p>`
+    : `
+      <ul class="flags">
+        ${additionalFlags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(String(f.priority).toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  const firedRows = firedRules.map((r) => `
+    <tr>
+      <th scope="row">${esc(r.id)}</th>
+      <td>${esc(r.category)}</td>
+      <td>${esc(r.description)}</td>
+      <td class="num">+${r.weight}</td>
+    </tr>
+  `).join('');
+
+  const firedTable = firedRules.length === 0
+    ? `<p class="muted">No risk rules fired.</p>`
+    : `
+      <table class="subscales">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Weight</th>
+          </tr>
+        </thead>
+        <tbody>${firedRows}</tbody>
+      </table>
+    `;
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>Genetic Assessment Report</h2>
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <h3>Risk Score</h3>
+      <p class="risk-summary">
+        <span class="risk-level-badge ${riskLevelClass(riskLevel)}">${esc(riskLevel)} Risk</span>
+        <span class="risk-score">Score: ${riskScore}</span>
+      </p>
+      <p class="muted">Stratification: 0–2 = Low, 3–5 = Moderate, 6+ = High.</p>
+
+      <h3>Fired Rules</h3>
+      ${firedTable}
+
+      <h3>Flagged Issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('start-over-btn').addEventListener('click', startOver);
+}
+
+function submitForm() {
+  const { riskScore, riskLevel, firedRules } = gradeRisk(state);
+  const additionalFlags = detectAdditionalFlags(state);
+  lastResult = {
+    riskScore,
+    riskLevel,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Are you sure? This will clear all answers and start a fresh assessment.')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  const report = document.getElementById('report');
+  if (report) report.innerHTML = '';
+  // Full reload to reset every form control to its empty default.
+  window.location.reload();
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  host.innerHTML = '';
+  host.appendChild(renderStep1());
+  host.appendChild(renderStep2());
+  host.appendChild(renderStep3());
+  host.appendChild(renderStep4());
+  host.appendChild(renderStep5());
+  host.appendChild(renderStep6());
+  host.appendChild(renderStep7());
+  host.appendChild(renderStep8());
+  host.appendChild(renderStep9());
+  host.appendChild(renderStep10());
+}
+
+function init() {
+  renderForm();
+  updateProgress();
+  updateConditionalSections();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();
