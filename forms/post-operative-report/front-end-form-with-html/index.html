@@ -3,17 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Post Operative Report — patient questionnaire</title>
+  <title>Post-Operative Report — clinician questionnaire</title>
+  <meta name="description" content="Structured post-operative report with Clavien-Dindo classification of surgical complications.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Post-Operative Report</h1>
+      <p class="subtitle">Operation note with Clavien-Dindo grading of complications.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Post Operative Report</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Post Operative Report form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Complete each section to document the procedure, intra-operative
+        findings, anaesthesia, blood loss and fluids, specimens and implants,
+        immediate recovery status, complications, and onward plan.
+        Complications are graded by the Clavien-Dindo classification; the
+        overall grade reflects the worst complication recorded. All answers
+        are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This electronic record supports clinical documentation and is not a
+        substitute for the formal operation note signed by the responsible
+        surgeon.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Patient Details, 2 Procedure Details, 3 Surgical Team, -->
+        <!-- 4 Intra-operative Findings, 5 Anaesthesia Summary, -->
+        <!-- 6 Blood Loss & Fluid Balance, 7 Specimens & Implants, -->
+        <!-- 8 Immediate Post-op Status, 9 Complications Assessment, -->
+        <!-- 10 Post-op Plan & Instructions -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Post-operative report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        The Clavien-Dindo classification grades surgical complications by the
+        therapy required to treat them, from Grade 0 (no complication) to
+        Grade V (death). This electronic form is for clinical documentation
+        and decision support; the responsible surgeon retains accountability
+        for the operative record.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PostOperativeReport`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/clavien-dindo-rules.js"></script>
+  <script src="js/clavien-dindo-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
