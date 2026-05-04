@@ -4,16 +4,161 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Organ Donation Assessment — clinician dashboard</title>
+  <meta name="description" content="Organ Donation Assessment clinician dashboard: review donor submissions with eligibility classification, risk level, donor type, organ, ABO compatibility, and HLA match grade.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#donors-table">Skip to donors table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Organ Donation Assessment — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Living and deceased organ donor list with eligibility, risk band,
+        donor type, organ offered, ABO compatibility, and HLA match grade.
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Organ Donation Assessment</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Organ Donation Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="NHS number or donor name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-eligibility">Eligibility</label>
+          <select id="filter-eligibility" class="select-input">
+            <option value="">All eligibility</option>
+            <option value="Suitable">Suitable</option>
+            <option value="Conditionally Suitable">Conditionally Suitable</option>
+            <option value="Unsuitable">Unsuitable</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-risk">Risk Level</label>
+          <select id="filter-risk" class="select-input">
+            <option value="">All risk levels</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-donor-type">Donor Type</label>
+          <select id="filter-donor-type" class="select-input">
+            <option value="">All donor types</option>
+            <option value="Living">Living</option>
+            <option value="DBD">DBD (deceased — brain death)</option>
+            <option value="DCD">DCD (deceased — circulatory death)</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-organ">Organ</label>
+          <select id="filter-organ" class="select-input">
+            <option value="">All organs</option>
+            <option value="Kidney">Kidney</option>
+            <option value="Liver">Liver</option>
+            <option value="Heart">Heart</option>
+            <option value="Lung">Lung</option>
+            <option value="Pancreas">Pancreas</option>
+            <option value="Intestine">Intestine</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading donors...</span>
+      </div>
+    </section>
+
+    <!-- Donors table -->
+    <section
+      class="table-card"
+      aria-labelledby="donors-table-heading"
+    >
+      <h2 id="donors-table-heading" class="visually-hidden">Donors</h2>
+
+      <div class="table-scroll">
+        <table id="donors-table" class="patients-table">
+          <thead>
+            <tr id="donors-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="donors-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="donors-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No donors match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Donor Risk Index with Organ-Specific Suitability Scoring is the
+        screening framework for solid-organ donation. This dashboard is a
+        clinical-review tool and is not a final allocation decision.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.OrganDonationAssessmentDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
