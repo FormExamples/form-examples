@@ -1,14 +1,16 @@
-// Backend API client for the clinician dashboard.
+// Backend API client for the Patient Satisfaction Survey clinician
+// dashboard.
 //
-// Mirrors the SvelteKit dashboard's `src/lib/api.ts`. The backend lives at
-// http://localhost:5150 (Loco / axum); the dashboard endpoint returns a
-// `DashboardPatientsResponse`. When the fetch fails (CORS, network, server
-// down) or returns an empty list, callers fall back to the sample data
-// shipped in `data.js` so the page is usable standalone.
+// The backend is expected at http://localhost:5150 (Loco / axum); the
+// dashboard endpoint returns a `DashboardPatientsResponse`. When the fetch
+// fails (CORS, network, server down) or returns an empty list, callers
+// fall back to the sample data shipped in `data.js` so the page remains
+// usable standalone (e.g. when opened directly via `file://`).
 
 (function () {
 'use strict';
-window.EncounterSatisfactionDashboard = window.EncounterSatisfactionDashboard || {};
+window.PatientSatisfactionSurveyDashboard =
+  window.PatientSatisfactionSurveyDashboard || {};
 
 const API_BASE = 'http://localhost:5150';
 const PATIENTS_PATH = '/api/dashboard/patients';
@@ -34,6 +36,6 @@ async function fetchPatients() {
   return data.items || [];
 }
 
-window.EncounterSatisfactionDashboard.fetchPatients = fetchPatients;
-window.EncounterSatisfactionDashboard.API_BASE = API_BASE;
+window.PatientSatisfactionSurveyDashboard.fetchPatients = fetchPatients;
+window.PatientSatisfactionSurveyDashboard.API_BASE = API_BASE;
 })();

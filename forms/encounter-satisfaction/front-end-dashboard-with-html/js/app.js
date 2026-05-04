@@ -1,22 +1,21 @@
-// Patient Satisfaction Survey - clinician dashboard (vanilla classic-script app).
+// Encounter Satisfaction - clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
-// empty response) we fall back to sample data and show a small banner.
-// The rendered table is sortable (click any column header) and filterable
-// (search box + satisfaction-category dropdown + visit-department dropdown
-// + would-recommend dropdown).
+// empty response) we fall back to sample data and show a small banner. The
+// rendered table is sortable (click any column header) and filterable
+// (search box + category dropdown + department dropdown + flags dropdown).
 //
 // Sibling modules loaded as plain `<script>` tags (in dependency order)
-// attach their exports to `window.PatientSatisfactionSurveyDashboard`.
-// Pulling them off here keeps the rest of this file referring to short
-// local names. The whole file is wrapped in an IIFE so its top-level
-// identifiers do not leak to the global scope.
+// attach their exports to `window.EncounterSatisfactionDashboard`. Pulling
+// them off here keeps the rest of this file referring to short local names.
+// The whole file is wrapped in an IIFE so its top-level identifiers do not
+// leak to the global scope.
 (function () {
 'use strict';
 const {
   fetchPatients,
   samplePatients
-} = window.PatientSatisfactionSurveyDashboard;
+} = window.EncounterSatisfactionDashboard;
 
 // ----------------------------------------------------------------------
 // State
@@ -29,35 +28,36 @@ const filters = {
   search: '',
   category: '',
   department: '',
-  recommend: '' // '', 'yes', 'no'
+  flags: '' // '', 'any', 'none'
 };
 
-// Default sort: satisfaction score ascending. Worst experience = lowest
-// score = top of the list, surfacing the patients whose feedback most
-// urgently needs clinical / operational follow-up.
+// Default sort: composite score ascending. Worst experience = lowest score
+// = top of the list, surfacing the encounters that most need follow-up.
 const sortState = {
-  key: 'satisfactionScore',
+  key: 'compositeScore',
   direction: 'asc' // 'asc' | 'desc'
 };
 
 // Column definitions — single source of truth for header rendering and the
 // row-cell renderer below.
 const columns = [
-  { key: 'nhsNumber',            label: 'NHS Number' },
-  { key: 'patientName',          label: 'Patient Name' },
-  { key: 'visitDepartment',      label: 'Visit Department' },
-  { key: 'satisfactionScore',    label: 'Score' },
-  { key: 'satisfactionCategory', label: 'Category' },
-  { key: 'recommendFlag',        label: 'Would Recommend' }
+  { key: 'patientName',    label: 'Patient Name' },
+  { key: 'department',     label: 'Department' },
+  { key: 'providerName',   label: 'Provider' },
+  { key: 'visitType',      label: 'Visit Type' },
+  { key: 'compositeScore', label: 'Composite Score' },
+  { key: 'category',       label: 'Category' },
+  { key: 'visitDate',      label: 'Visit Date' },
+  { key: 'flagCount',      label: 'Flags' }
 ];
 
-// Rank used when sorting the satisfactionCategory column so 'Excellent' is
-// always greater than 'Very Poor' regardless of locale.
+// Rank used when sorting the category column so 'Excellent' is always
+// greater than 'Very Poor' regardless of locale.
 const categoryRank = {
   'Very Poor': 0,
-  'Poor': 1,
-  'Satisfactory': 2,
-  'Good': 3,
+  'Poor':      1,
+  'Fair':      2,
+  'Good':      3,
   'Excellent': 4
 };
 
@@ -67,7 +67,7 @@ const categoryRank = {
 
 /** Escape user-entered or backend-supplied text for safe rendering. */
 function esc(s) {
-  return String(s ?? '')
+  return String(s == null ? '' : s)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -80,12 +80,18 @@ function categoryClass(label) {
   return 'category-' + String(label).toLowerCase().replace(/\s+/g, '-');
 }
 
+function flagClass(count) {
+  if (!count || count === 0) return 'flag-zero';
+  if (count <= 2) return 'flag-some';
+  return 'flag-many';
+}
+
 function hasActiveFilters() {
   return (
     filters.search !== '' ||
     filters.category !== '' ||
     filters.department !== '' ||
-    filters.recommend !== ''
+    filters.flags !== ''
   );
 }
 
@@ -101,25 +107,26 @@ function matchesFilters(row) {
   if (filters.search) {
     const term = filters.search.toLowerCase();
     const matches =
-      row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term);
+      row.patientName.toLowerCase().includes(term) ||
+      row.providerName.toLowerCase().includes(term) ||
+      row.department.toLowerCase().includes(term);
     if (!matches) return false;
   }
-  if (filters.category && row.satisfactionCategory !== filters.category) {
+  if (filters.category && row.category !== filters.category) {
     return false;
   }
-  if (filters.department && row.visitDepartment !== filters.department) {
+  if (filters.department && row.department !== filters.department) {
     return false;
   }
-  if (filters.recommend === 'yes' && !row.recommendFlag) return false;
-  if (filters.recommend === 'no' && row.recommendFlag) return false;
+  if (filters.flags === 'any' && !(row.flagCount > 0)) return false;
+  if (filters.flags === 'none' && row.flagCount > 0) return false;
   return true;
 }
 
 /**
- * Compare two rows for the active sort column. Categorical columns use
- * their rank tables; booleans sort false<true; numbers compare directly;
- * everything else uses a locale-aware string compare.
+ * Compare two rows for the active sort column. The category column uses its
+ * rank table; numbers compare directly; everything else uses a locale-aware
+ * string compare.
  */
 function compareRows(a, b) {
   const key = sortState.key;
@@ -127,21 +134,19 @@ function compareRows(a, b) {
   let av = a[key];
   let bv = b[key];
 
-  if (key === 'satisfactionCategory') {
-    av = categoryRank[av] ?? -1;
-    bv = categoryRank[bv] ?? -1;
+  if (key === 'category') {
+    av = categoryRank[av] != null ? categoryRank[av] : -1;
+    bv = categoryRank[bv] != null ? categoryRank[bv] : -1;
     return (av - bv) * dir;
   }
 
-  if (key === 'recommendFlag') {
-    return ((av === bv) ? 0 : (av ? 1 : -1)) * dir;
+  if (key === 'compositeScore' || key === 'flagCount') {
+    return ((av == null ? 0 : av) - (bv == null ? 0 : bv)) * dir;
   }
 
-  if (key === 'satisfactionScore') {
-    return ((av ?? 0) - (bv ?? 0)) * dir;
-  }
-
-  // Default: string compare (nhsNumber, patientName, visitDepartment)
+  // Default: string compare (patientName, department, providerName,
+  // visitType, visitDate). visitDate uses ISO 8601 so a string compare
+  // sorts chronologically.
   return String(av).localeCompare(String(bv)) * dir;
 }
 
@@ -205,21 +210,21 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
-    if (row.satisfactionCategory === 'Very Poor') {
+    if (row.category === 'Very Poor') {
       tr.classList.add('row-very-poor');
     }
 
+    const flagLabel = row.flagCount === 1 ? '1 flag' : (row.flagCount + ' flags');
+
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
       <td>${esc(row.patientName)}</td>
-      <td><span class="department-badge">${esc(row.visitDepartment)}</span></td>
-      <td><span class="satisfaction-score">${esc(row.satisfactionScore)}/100</span></td>
-      <td><span class="category-badge ${categoryClass(row.satisfactionCategory)}">${esc(row.satisfactionCategory)}</span></td>
-      <td>
-        <span class="recommend-badge ${row.recommendFlag ? 'recommend-yes' : 'recommend-no'}">
-          ${row.recommendFlag ? 'Yes' : 'No'}
-        </span>
-      </td>
+      <td>${esc(row.department)}</td>
+      <td>${esc(row.providerName)}</td>
+      <td>${esc(row.visitType)}</td>
+      <td><span class="composite-score">${Number(row.compositeScore).toFixed(1)}</span></td>
+      <td><span class="category-badge ${categoryClass(row.category)}">${esc(row.category)}</span></td>
+      <td><span class="visit-date">${esc(row.visitDate)}</span></td>
+      <td><span class="flag-badge ${flagClass(row.flagCount)}">${esc(flagLabel)}</span></td>
     `;
     body.appendChild(tr);
   }
@@ -277,7 +282,7 @@ function bindFilterInputs() {
   const search = document.getElementById('filter-search');
   const category = document.getElementById('filter-category');
   const department = document.getElementById('filter-department');
-  const recommend = document.getElementById('filter-recommend');
+  const flagsSel = document.getElementById('filter-flags');
   const clearBtn = document.getElementById('filter-clear-btn');
 
   if (search) {
@@ -298,9 +303,9 @@ function bindFilterInputs() {
       renderAll();
     });
   }
-  if (recommend) {
-    recommend.addEventListener('change', () => {
-      filters.recommend = recommend.value;
+  if (flagsSel) {
+    flagsSel.addEventListener('change', () => {
+      filters.flags = flagsSel.value;
       renderAll();
     });
   }
@@ -309,11 +314,11 @@ function bindFilterInputs() {
       filters.search = '';
       filters.category = '';
       filters.department = '';
-      filters.recommend = '';
+      filters.flags = '';
       if (search) search.value = '';
       if (category) category.value = '';
       if (department) department.value = '';
-      if (recommend) recommend.value = '';
+      if (flagsSel) flagsSel.value = '';
       renderAll();
     });
   }

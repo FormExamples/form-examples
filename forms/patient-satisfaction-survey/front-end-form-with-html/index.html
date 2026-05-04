@@ -4,16 +4,102 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Patient Satisfaction Survey — patient questionnaire</title>
+  <meta name="description" content="Likert-scale satisfaction survey across access, communication, clinical care, staff, environment, discharge, and overall experience domains.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Patient Satisfaction Survey</h1>
+      <p class="subtitle">Likert-scale survey across seven care domains, scored 0-100.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Patient Satisfaction Survey</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Patient Satisfaction Survey form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please share your honest feedback about your recent visit. Each question
+        uses a five-point Likert scale from <em>Very Dissatisfied</em> to
+        <em>Very Satisfied</em>. Your answers are saved automatically in your
+        browser as you go.
+      </p>
+      <p>
+        This survey is anonymous unless you choose to provide contact details
+        in the final section. If you have an urgent clinical concern, please
+        contact your care provider directly rather than relying on this survey.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Visit Details, 3 Access & Waiting Times, -->
+        <!-- 4 Communication & Information, 5 Clinical Care Quality, -->
+        <!-- 6 Staff Attitude & Professionalism, 7 Environment & Facilities, -->
+        <!-- 8 Discharge & Follow-up, 9 Overall Experience, -->
+        <!-- 10 Comments & Suggestions -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Survey report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        This survey collects patient-reported experience and is for service
+        quality improvement. Free-text comments may be reviewed by service
+        managers and clinical governance teams. Completion is voluntary.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.PatientSatisfactionSurvey`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

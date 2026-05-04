@@ -1,66 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinician Dashboard - Encounter Satisfaction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Encounter Satisfaction — clinician dashboard</title>
+  <meta name="description" content="Encounter Satisfaction Score (ESS) clinician dashboard: review patient submissions with composite score, satisfaction category, department, provider, visit type, and flagged-issue count.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <span class="header-title">Clinician Dashboard - Encounter Satisfaction</span>
+  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Encounter Satisfaction — Clinician Dashboard</h1>
+      <p class="subtitle">
+        Encounter Satisfaction Score (ESS) patient list with composite
+        score, satisfaction category, and flagged-issue count.
+      </p>
     </div>
   </header>
 
-  <main class="container">
-    <div class="filter-bar">
-      <input type="text" id="search-input" placeholder="Search by patient name, provider, or department...">
-      <select id="category-filter">
-        <option value="">All Categories</option>
-        <option value="Excellent">Excellent</option>
-        <option value="Good">Good</option>
-        <option value="Fair">Fair</option>
-        <option value="Poor">Poor</option>
-        <option value="Very Poor">Very Poor</option>
-      </select>
-      <select id="department-filter">
-        <option value="">All Departments</option>
-        <option value="Primary Care">Primary Care</option>
-        <option value="Cardiology">Cardiology</option>
-        <option value="Urgent Care">Urgent Care</option>
-        <option value="Dermatology">Dermatology</option>
-        <option value="Orthopaedics">Orthopaedics</option>
-        <option value="Neurology">Neurology</option>
-        <option value="Gynaecology">Gynaecology</option>
-        <option value="Paediatrics">Paediatrics</option>
-        <option value="Oncology">Oncology</option>
-        <option value="Rheumatology">Rheumatology</option>
-      </select>
-      <button id="clear-filters">Clear Filters</button>
-    </div>
+  <main>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
 
-    <table class="patient-table">
-      <thead>
-        <tr>
-          <th data-sort="patientName">Patient Name</th>
-          <th data-sort="department">Department</th>
-          <th data-sort="providerName">Provider</th>
-          <th data-sort="visitType">Visit Type</th>
-          <th data-sort="compositeScore">Score</th>
-          <th data-sort="visitDate">Visit Date</th>
-        </tr>
-      </thead>
-      <tbody id="patients-tbody">
-        <tr><td colspan="7" style="text-align:center;color:#6b7280;padding:2rem;">Loading...</td></tr>
-      </tbody>
-    </table>
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
-    <div class="patient-count" id="patient-count"></div>
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Patient name, provider, or department..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-category">Category</label>
+          <select id="filter-category" class="select-input">
+            <option value="">All categories</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+            <option value="Very Poor">Very Poor</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-department">Department</label>
+          <select id="filter-department" class="select-input">
+            <option value="">All departments</option>
+            <option value="Primary Care">Primary Care</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Urgent Care">Urgent Care</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Orthopaedics">Orthopaedics</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Gynaecology">Gynaecology</option>
+            <option value="Paediatrics">Paediatrics</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Rheumatology">Rheumatology</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-flags">Flags</label>
+          <select id="filter-flags" class="select-input">
+            <option value="">All</option>
+            <option value="any">Any flagged</option>
+            <option value="none">No flags</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading patients...</span>
+      </div>
+    </section>
+
+    <!-- Patients table -->
+    <section
+      class="table-card"
+      aria-labelledby="patients-table-heading"
+    >
+      <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
+
+      <div class="table-scroll">
+        <table id="patients-table" class="patients-table">
+          <thead>
+            <tr id="patients-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="patients-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="patients-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No patients match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Encounter Satisfaction Score (ESS) is a patient-reported survey
+        instrument inspired by PSQ-18 and HCAHPS. This dashboard is a
+        clinical-review tool and is not a diagnosis.
+      </p>
+    </footer>
   </main>
 
-  <footer class="footer"><p>Encounter Satisfaction Survey &copy; 2026. For clinical use only.</p></footer>
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.EncounterSatisfactionDashboard`.
 
-  <script type="module" src="js/dashboard.js"></script>
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
