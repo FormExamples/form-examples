@@ -4,16 +4,105 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Semaglutide Assessment — patient questionnaire</title>
+  <meta name="description" content="GLP-1 receptor agonist (semaglutide) eligibility screening with absolute and relative contraindications.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Semaglutide Assessment</h1>
+      <p class="subtitle">GLP-1 receptor agonist eligibility screening: contraindications, metabolic profile, treatment plan.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
   <main>
-    <h1>Semaglutide Assessment</h1>
-    <p>This is the <strong>patient questionnaire</strong> for the Semaglutide Assessment form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <div class="intro">
+      <p>
+        Please answer the questions below to help us assess whether
+        semaglutide (a GLP-1 receptor agonist) may be a suitable
+        treatment option for you. The questionnaire covers your medical
+        history, contraindications, metabolic profile, and treatment
+        goals. All answers are saved automatically in your browser as
+        you go.
+      </p>
+      <p>
+        If you experience severe abdominal pain that does not go away,
+        or if you are currently having thoughts of self-harm, please
+        contact your local emergency number immediately.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Demographics, 2 Indication & Goals, 3 Body Composition, -->
+        <!-- 4 Metabolic Profile, 5 Cardiovascular Risk, -->
+        <!-- 6 Contraindications Screening, 7 Gastrointestinal History, -->
+        <!-- 8 Current Medications, 9 Mental Health Screening, -->
+        <!-- 10 Treatment Plan -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Semaglutide eligibility screening is a clinical decision-support
+        tool, not a diagnosis. Final prescribing decisions must be made
+        by a qualified clinician after a full clinical assessment. Please
+        discuss your results with your prescribing clinician.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.SemaglutideAssessment`.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/eligibility-rules.js"></script>
+  <script src="js/eligibility-grader.js"></script>
+  <script src="js/flagged-issues.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
