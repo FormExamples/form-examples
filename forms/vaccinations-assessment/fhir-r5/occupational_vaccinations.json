@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "occupational_vaccinations",
         "display": "Occupational Vaccinations"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "occupation",
             "display": "Occupation"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "healthcare_worker",
             "display": "Healthcare Worker"
           }
@@ -73,7 +73,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:healthcare_worker",
+            "system": "urn:form-examples:vaccinations-assessment:healthcare_worker",
             "code": "yes",
             "display": "Yes"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "hepatitis_b_occupational",
             "display": "Hepatitis B Occupational"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "influenza_occupational",
             "display": "Influenza Occupational"
           }
@@ -108,7 +108,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "varicella",
             "display": "Varicella"
           }
@@ -120,7 +120,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "bcg_tuberculosis",
             "display": "Bcg Tuberculosis"
           }

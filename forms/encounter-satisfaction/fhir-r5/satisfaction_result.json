@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:encounter-satisfaction",
+        "system": "urn:form-examples:encounter-satisfaction",
         "code": "satisfaction_result",
         "display": "Satisfaction Result"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "composite_score",
             "display": "Composite Score"
           }
@@ -66,7 +66,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "category",
             "display": "Category"
           }
@@ -75,7 +75,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction:category",
+            "system": "urn:form-examples:encounter-satisfaction:category",
             "code": "Excellent",
             "display": "Excellent"
           }
@@ -86,7 +86,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "answered_count",
             "display": "Answered Count"
           }
@@ -98,7 +98,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "scored_at",
             "display": "Scored At"
           }

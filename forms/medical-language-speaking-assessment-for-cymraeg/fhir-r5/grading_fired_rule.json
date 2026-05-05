@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:medical-language-speaking-assessment-for-cymraeg",
+          "system": "urn:form-examples:medical-language-speaking-assessment-for-cymraeg",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-language-speaking-assessment-for-cymraeg:rules",
+        "system": "urn:form-examples:medical-language-speaking-assessment-for-cymraeg:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

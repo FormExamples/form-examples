@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_primary_survey",
         "display": "Casualty Card Primary Survey"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "airway_status",
             "display": "Airway Status"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:airway_status",
+            "system": "urn:form-examples:casualty-card-form:airway_status",
             "code": "patent",
             "display": "Patent"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "airway_adjuncts",
             "display": "Airway Adjuncts"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "c_spine_immobilised",
             "display": "C Spine Immobilised"
           }
@@ -93,7 +93,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:c_spine_immobilised",
+            "system": "urn:form-examples:casualty-card-form:c_spine_immobilised",
             "code": "yes",
             "display": "Yes"
           }
@@ -104,7 +104,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "breathing_effort",
             "display": "Breathing Effort"
           }
@@ -113,7 +113,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:breathing_effort",
+            "system": "urn:form-examples:casualty-card-form:breathing_effort",
             "code": "normal",
             "display": "Normal"
           }
@@ -124,7 +124,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "chest_movement",
             "display": "Chest Movement"
           }
@@ -136,7 +136,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "breath_sounds",
             "display": "Breath Sounds"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "trachea_position",
             "display": "Trachea Position"
           }
@@ -160,7 +160,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pulse_character",
             "display": "Pulse Character"
           }
@@ -172,7 +172,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "skin_colour",
             "display": "Skin Colour"
           }
@@ -184,7 +184,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "skin_temperature",
             "display": "Skin Temperature"
           }
@@ -196,7 +196,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "capillary_refill",
             "display": "Capillary Refill"
           }
@@ -208,7 +208,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "haemorrhage",
             "display": "Haemorrhage"
           }
@@ -220,7 +220,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "iv_access",
             "display": "Iv Access"
           }
@@ -232,7 +232,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "gcs_eye",
             "display": "Gcs Eye"
           }
@@ -244,7 +244,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "gcs_verbal",
             "display": "Gcs Verbal"
           }
@@ -256,7 +256,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "gcs_motor",
             "display": "Gcs Motor"
           }
@@ -268,7 +268,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "gcs_total",
             "display": "Gcs Total"
           }
@@ -280,7 +280,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pupils",
             "display": "Pupils"
           }
@@ -292,7 +292,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "blood_glucose_disability",
             "display": "Blood Glucose Disability"
           }
@@ -304,7 +304,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "limb_movements",
             "display": "Limb Movements"
           }
@@ -316,7 +316,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "skin_examination",
             "display": "Skin Examination"
           }
@@ -328,7 +328,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "injuries_identified",
             "display": "Injuries Identified"
           }
@@ -340,7 +340,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "log_roll_findings",
             "display": "Log Roll Findings"
           }

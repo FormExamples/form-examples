@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check",
+        "system": "urn:form-examples:heart-health-check",
         "code": "family_history",
         "display": "Family History"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "family_cvd_under_60",
             "display": "Family Cvd Under 60"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:family_cvd_under_60",
+            "system": "urn:form-examples:heart-health-check:family_cvd_under_60",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "family_cvd_relationship",
             "display": "Family Cvd Relationship"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:family_cvd_relationship",
+            "system": "urn:form-examples:heart-health-check:family_cvd_relationship",
             "code": "parent",
             "display": "Parent"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "family_diabetes_history",
             "display": "Family Diabetes History"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:family_diabetes_history",
+            "system": "urn:form-examples:heart-health-check:family_diabetes_history",
             "code": "yes",
             "display": "Yes"
           }

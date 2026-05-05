@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_disposition",
         "display": "Casualty Card Disposition"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "disposition",
             "display": "Disposition"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:disposition",
+            "system": "urn:form-examples:casualty-card-form:disposition",
             "code": "admitted",
             "display": "Admitted"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "admitting_specialty",
             "display": "Admitting Specialty"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "admitting_consultant",
             "display": "Admitting Consultant"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "ward",
             "display": "Ward"
           }
@@ -108,7 +108,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "level_of_care",
             "display": "Level Of Care"
           }
@@ -120,7 +120,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "discharge_diagnosis",
             "display": "Discharge Diagnosis"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "discharge_medications",
             "display": "Discharge Medications"
           }
@@ -144,7 +144,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "discharge_instructions",
             "display": "Discharge Instructions"
           }
@@ -156,7 +156,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "follow_up",
             "display": "Follow Up"
           }
@@ -168,7 +168,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "return_precautions",
             "display": "Return Precautions"
           }
@@ -180,7 +180,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "receiving_hospital",
             "display": "Receiving Hospital"
           }
@@ -192,7 +192,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "reason_for_transfer",
             "display": "Reason For Transfer"
           }
@@ -204,7 +204,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "mode_of_transfer",
             "display": "Mode Of Transfer"
           }
@@ -216,7 +216,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "discharge_time",
             "display": "Discharge Time"
           }
@@ -228,7 +228,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "total_time_in_department",
             "display": "Total Time In Department"
           }

@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-records-release-permission",
+        "system": "urn:form-examples:medical-records-release-permission",
         "code": "patient_rights",
         "display": "Patient Rights"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "acknowledged_right_to_revoke",
             "display": "Acknowledged Right To Revoke"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:acknowledged_right_to_revoke",
+            "system": "urn:form-examples:medical-records-release-permission:acknowledged_right_to_revoke",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "acknowledged_no_charge_for_access",
             "display": "Acknowledged No Charge For Access"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:acknowledged_no_charge_for_access",
+            "system": "urn:form-examples:medical-records-release-permission:acknowledged_no_charge_for_access",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "acknowledged_data_protection",
             "display": "Acknowledged Data Protection"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:acknowledged_data_protection",
+            "system": "urn:form-examples:medical-records-release-permission:acknowledged_data_protection",
             "code": "yes",
             "display": "Yes"
           }

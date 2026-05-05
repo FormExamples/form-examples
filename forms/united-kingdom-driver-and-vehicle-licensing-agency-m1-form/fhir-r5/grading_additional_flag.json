@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:united-kingdom-driver-and-vehicle-licensing-agency-m1-form",
+          "system": "urn:form-examples:united-kingdom-driver-and-vehicle-licensing-agency-m1-form",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:united-kingdom-driver-and-vehicle-licensing-agency-m1-form:flags",
+        "system": "urn:form-examples:united-kingdom-driver-and-vehicle-licensing-agency-m1-form:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

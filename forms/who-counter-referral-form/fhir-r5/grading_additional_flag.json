@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:who-counter-referral-form",
+          "system": "urn:form-examples:who-counter-referral-form",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:who-counter-referral-form:flags",
+        "system": "urn:form-examples:who-counter-referral-form:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

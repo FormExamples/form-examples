@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:ophthalmology-assessment",
+          "system": "urn:form-examples:ophthalmology-assessment",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:ophthalmology-assessment:rules",
+        "system": "urn:form-examples:ophthalmology-assessment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

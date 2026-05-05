@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:autism-assessment",
+          "system": "urn:form-examples:autism-assessment",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:autism-assessment:flags",
+        "system": "urn:form-examples:autism-assessment:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

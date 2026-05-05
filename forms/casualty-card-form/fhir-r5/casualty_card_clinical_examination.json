@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_clinical_examination",
         "display": "Casualty Card Clinical Examination"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "general_appearance",
             "display": "General Appearance"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "head_and_face",
             "display": "Head And Face"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "neck",
             "display": "Neck"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "chest_cardiovascular",
             "display": "Chest Cardiovascular"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "chest_respiratory",
             "display": "Chest Respiratory"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "abdomen",
             "display": "Abdomen"
           }
@@ -124,7 +124,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pelvis",
             "display": "Pelvis"
           }
@@ -136,7 +136,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "musculoskeletal_limbs",
             "display": "Musculoskeletal Limbs"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "neurological",
             "display": "Neurological"
           }
@@ -160,7 +160,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "skin",
             "display": "Skin"
           }
@@ -172,7 +172,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "mental_state",
             "display": "Mental State"
           }
@@ -184,7 +184,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "body_diagram_notes",
             "display": "Body Diagram Notes"
           }

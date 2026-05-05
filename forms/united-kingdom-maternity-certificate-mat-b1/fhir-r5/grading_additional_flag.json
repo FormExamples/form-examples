@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:united-kingdom-maternity-certificate-mat-b1",
+          "system": "urn:form-examples:united-kingdom-maternity-certificate-mat-b1",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:united-kingdom-maternity-certificate-mat-b1:flags",
+        "system": "urn:form-examples:united-kingdom-maternity-certificate-mat-b1:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:prescription-request",
+        "system": "urn:form-examples:prescription-request",
         "code": "prescription_details",
         "display": "Prescription Details"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "request_date",
             "display": "Request Date"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "medication_name",
             "display": "Medication Name"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "dosage",
             "display": "Dosage"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "frequency",
             "display": "Frequency"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "route_of_administration",
             "display": "Route Of Administration"
           }
@@ -109,7 +109,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:route_of_administration",
+            "system": "urn:form-examples:prescription-request:route_of_administration",
             "code": "oral",
             "display": "Oral"
           }
@@ -120,7 +120,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "treatment_instructions",
             "display": "Treatment Instructions"
           }

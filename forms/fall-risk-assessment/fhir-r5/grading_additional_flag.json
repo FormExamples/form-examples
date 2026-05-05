@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:fall-risk-assessment",
+          "system": "urn:form-examples:fall-risk-assessment",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:fall-risk-assessment:flags",
+        "system": "urn:form-examples:fall-risk-assessment:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

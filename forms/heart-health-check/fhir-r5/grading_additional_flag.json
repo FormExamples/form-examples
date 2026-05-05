@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:heart-health-check",
+          "system": "urn:form-examples:heart-health-check",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check:flags",
+        "system": "urn:form-examples:heart-health-check:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

@@ -410,7 +410,7 @@ git commit -m "feat(screening-program-privacy-notice): add XML representations"
     {
       "purpose": [
         {
-          "system": "urn:medical-forms:screening-program-privacy-notice",
+          "system": "urn:form-examples:screening-program-privacy-notice",
           "code": "screening_program_privacy_notice",
           "display": "Acknowledgment of screening program privacy notice"
         }
@@ -419,15 +419,15 @@ git commit -m "feat(screening-program-privacy-notice): add XML representations"
   ],
   "extension": [
     {
-      "url": "urn:medical-forms:screening-program-privacy-notice:confirmed",
+      "url": "urn:form-examples:screening-program-privacy-notice:confirmed",
       "valueBoolean": false
     },
     {
-      "url": "urn:medical-forms:screening-program-privacy-notice:full_name",
+      "url": "urn:form-examples:screening-program-privacy-notice:full_name",
       "valueString": ""
     },
     {
-      "url": "urn:medical-forms:screening-program-privacy-notice:acknowledged_date",
+      "url": "urn:form-examples:screening-program-privacy-notice:acknowledged_date",
       "valueDate": ""
     }
   ]

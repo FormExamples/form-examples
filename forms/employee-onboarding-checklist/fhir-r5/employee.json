@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:employee-onboarding-checklist",
+        "system": "urn:form-examples:employee-onboarding-checklist",
         "code": "employee",
         "display": "Employee"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "first_name",
             "display": "First Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "last_name",
             "display": "Last Name"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "date_of_birth",
             "display": "Date Of Birth"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "nhs_number",
             "display": "Nhs Number"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "email",
             "display": "Email"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "phone",
             "display": "Phone"
           }
@@ -124,7 +124,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "job_title",
             "display": "Job Title"
           }
@@ -136,7 +136,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "department",
             "display": "Department"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:employee-onboarding-checklist",
+            "system": "urn:form-examples:employee-onboarding-checklist",
             "code": "start_date",
             "display": "Start Date"
           }

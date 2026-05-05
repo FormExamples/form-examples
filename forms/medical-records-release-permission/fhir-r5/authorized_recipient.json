@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-records-release-permission",
+        "system": "urn:form-examples:medical-records-release-permission",
         "code": "authorized_recipient",
         "display": "Authorized Recipient"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_name",
             "display": "Recipient Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_organization",
             "display": "Recipient Organization"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_address",
             "display": "Recipient Address"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_phone",
             "display": "Recipient Phone"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_email",
             "display": "Recipient Email"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "recipient_role",
             "display": "Recipient Role"
           }

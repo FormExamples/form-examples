@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:hospital-discharge",
+        "system": "urn:form-examples:hospital-discharge",
         "code": "clinician",
         "display": "Clinician"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "name",
             "display": "Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "email",
             "display": "Email"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "phone",
             "display": "Phone"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "postal_address_as_full_text",
             "display": "Postal Address As Full Text"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "postcode",
             "display": "Postcode"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "role",
             "display": "Role"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge:role",
+            "system": "urn:form-examples:hospital-discharge:role",
             "code": "anaesthetist",
             "display": "Anaesthetist"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "registration_body",
             "display": "Registration Body"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge:registration_body",
+            "system": "urn:form-examples:hospital-discharge:registration_body",
             "code": "GMC",
             "display": "Gmc"
           }
@@ -152,7 +152,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "registration_number",
             "display": "Registration Number"
           }
@@ -164,7 +164,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:hospital-discharge",
+            "system": "urn:form-examples:hospital-discharge",
             "code": "united_kingdom_nhs_number",
             "display": "United Kingdom Nhs Number"
           }

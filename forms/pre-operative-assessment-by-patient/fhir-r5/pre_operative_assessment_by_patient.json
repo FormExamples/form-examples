@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+        "system": "urn:form-examples:pre-operative-assessment-by-patient",
         "code": "pre_operative_assessment_by_patient",
         "display": "Pre Operative By Patient"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "weight",
             "display": "Weight"
           }
@@ -66,7 +66,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "height",
             "display": "Height"
           }
@@ -80,7 +80,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "bmi",
             "display": "Bmi"
           }
@@ -94,7 +94,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "planned_procedure",
             "display": "Planned Procedure"
           }
@@ -106,7 +106,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "procedure_urgency",
             "display": "Procedure Urgency"
           }
@@ -115,7 +115,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:procedure_urgency",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:procedure_urgency",
             "code": "elective",
             "display": "Elective"
           }
@@ -126,7 +126,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "status",
             "display": "Status"
           }
@@ -135,7 +135,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:status",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:status",
             "code": "in_progress",
             "display": "In Progress"
           }
@@ -146,7 +146,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "hypertension",
             "display": "Hypertension"
           }
@@ -155,7 +155,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:hypertension",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:hypertension",
             "code": "yes",
             "display": "Yes"
           }
@@ -166,7 +166,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "hypertension_controlled",
             "display": "Hypertension Controlled"
           }
@@ -175,7 +175,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:hypertension_controlled",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:hypertension_controlled",
             "code": "yes",
             "display": "Yes"
           }
@@ -186,7 +186,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "ischemic_heart_disease",
             "display": "Ischemic Heart Disease"
           }
@@ -195,7 +195,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:ischemic_heart_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:ischemic_heart_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -206,7 +206,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "ihd_details",
             "display": "Ihd Details"
           }
@@ -218,7 +218,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "heart_failure",
             "display": "Heart Failure"
           }
@@ -227,7 +227,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:heart_failure",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:heart_failure",
             "code": "yes",
             "display": "Yes"
           }
@@ -238,7 +238,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "heart_failure_nyha",
             "display": "Heart Failure Nyha"
           }
@@ -247,7 +247,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:heart_failure_nyha",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:heart_failure_nyha",
             "code": "1",
             "display": "1"
           }
@@ -258,7 +258,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "valvular_disease",
             "display": "Valvular Disease"
           }
@@ -267,7 +267,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:valvular_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:valvular_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -278,7 +278,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "valvular_details",
             "display": "Valvular Details"
           }
@@ -290,7 +290,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "arrhythmia",
             "display": "Arrhythmia"
           }
@@ -299,7 +299,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:arrhythmia",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:arrhythmia",
             "code": "yes",
             "display": "Yes"
           }
@@ -310,7 +310,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "arrhythmia_type",
             "display": "Arrhythmia Type"
           }
@@ -322,7 +322,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "pacemaker",
             "display": "Pacemaker"
           }
@@ -331,7 +331,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:pacemaker",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:pacemaker",
             "code": "yes",
             "display": "Yes"
           }
@@ -342,7 +342,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "recent_mi",
             "display": "Recent Mi"
           }
@@ -351,7 +351,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:recent_mi",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:recent_mi",
             "code": "yes",
             "display": "Yes"
           }
@@ -362,7 +362,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "recent_mi_weeks",
             "display": "Recent Mi Weeks"
           }
@@ -374,7 +374,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "asthma",
             "display": "Asthma"
           }
@@ -383,7 +383,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:asthma",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:asthma",
             "code": "yes",
             "display": "Yes"
           }
@@ -394,7 +394,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "asthma_frequency",
             "display": "Asthma Frequency"
           }
@@ -403,7 +403,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:asthma_frequency",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:asthma_frequency",
             "code": "intermittent",
             "display": "Intermittent"
           }
@@ -414,7 +414,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "copd",
             "display": "Copd"
           }
@@ -423,7 +423,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:copd",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:copd",
             "code": "yes",
             "display": "Yes"
           }
@@ -434,7 +434,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "copd_severity",
             "display": "Copd Severity"
           }
@@ -443,7 +443,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:copd_severity",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:copd_severity",
             "code": "mild",
             "display": "Mild"
           }
@@ -454,7 +454,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "osa",
             "display": "Osa"
           }
@@ -463,7 +463,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:osa",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:osa",
             "code": "yes",
             "display": "Yes"
           }
@@ -474,7 +474,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "osa_cpap",
             "display": "Osa Cpap"
           }
@@ -483,7 +483,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:osa_cpap",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:osa_cpap",
             "code": "yes",
             "display": "Yes"
           }
@@ -494,7 +494,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "smoking",
             "display": "Smoking"
           }
@@ -503,7 +503,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:smoking",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:smoking",
             "code": "current",
             "display": "Current"
           }
@@ -514,7 +514,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "smoking_pack_years",
             "display": "Smoking Pack Years"
           }
@@ -526,7 +526,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "recent_urti",
             "display": "Recent Urti"
           }
@@ -535,7 +535,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:recent_urti",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:recent_urti",
             "code": "yes",
             "display": "Yes"
           }
@@ -546,7 +546,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "ckd",
             "display": "Ckd"
           }
@@ -555,7 +555,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:ckd",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:ckd",
             "code": "yes",
             "display": "Yes"
           }
@@ -566,7 +566,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "ckd_stage",
             "display": "Ckd Stage"
           }
@@ -575,7 +575,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:ckd_stage",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:ckd_stage",
             "code": "1",
             "display": "1"
           }
@@ -586,7 +586,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "dialysis",
             "display": "Dialysis"
           }
@@ -595,7 +595,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:dialysis",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:dialysis",
             "code": "yes",
             "display": "Yes"
           }
@@ -606,7 +606,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "dialysis_type",
             "display": "Dialysis Type"
           }
@@ -615,7 +615,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:dialysis_type",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:dialysis_type",
             "code": "haemodialysis",
             "display": "Haemodialysis"
           }
@@ -626,7 +626,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "liver_disease",
             "display": "Liver Disease"
           }
@@ -635,7 +635,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:liver_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:liver_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -646,7 +646,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "cirrhosis",
             "display": "Cirrhosis"
           }
@@ -655,7 +655,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:cirrhosis",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:cirrhosis",
             "code": "yes",
             "display": "Yes"
           }
@@ -666,7 +666,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "child_pugh_score",
             "display": "Child Pugh Score"
           }
@@ -675,7 +675,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:child_pugh_score",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:child_pugh_score",
             "code": "A",
             "display": "A"
           }
@@ -686,7 +686,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "hepatitis",
             "display": "Hepatitis"
           }
@@ -695,7 +695,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:hepatitis",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:hepatitis",
             "code": "yes",
             "display": "Yes"
           }
@@ -706,7 +706,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "hepatitis_type",
             "display": "Hepatitis Type"
           }
@@ -718,7 +718,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "diabetes",
             "display": "Diabetes"
           }
@@ -727,7 +727,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:diabetes",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:diabetes",
             "code": "type1",
             "display": "Type1"
           }
@@ -738,7 +738,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "diabetes_control",
             "display": "Diabetes Control"
           }
@@ -747,7 +747,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:diabetes_control",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:diabetes_control",
             "code": "well-controlled",
             "display": "Well-Controlled"
           }
@@ -758,7 +758,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "diabetes_on_insulin",
             "display": "Diabetes On Insulin"
           }
@@ -767,7 +767,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:diabetes_on_insulin",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:diabetes_on_insulin",
             "code": "yes",
             "display": "Yes"
           }
@@ -778,7 +778,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "thyroid_disease",
             "display": "Thyroid Disease"
           }
@@ -787,7 +787,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:thyroid_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:thyroid_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -798,7 +798,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "thyroid_type",
             "display": "Thyroid Type"
           }
@@ -807,7 +807,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:thyroid_type",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:thyroid_type",
             "code": "hypothyroid",
             "display": "Hypothyroid"
           }
@@ -818,7 +818,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "adrenal_insufficiency",
             "display": "Adrenal Insufficiency"
           }
@@ -827,7 +827,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:adrenal_insufficiency",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:adrenal_insufficiency",
             "code": "yes",
             "display": "Yes"
           }
@@ -838,7 +838,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "stroke_or_tia",
             "display": "Stroke Or Tia"
           }
@@ -847,7 +847,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:stroke_or_tia",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:stroke_or_tia",
             "code": "yes",
             "display": "Yes"
           }
@@ -858,7 +858,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "stroke_details",
             "display": "Stroke Details"
           }
@@ -870,7 +870,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "epilepsy",
             "display": "Epilepsy"
           }
@@ -879,7 +879,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:epilepsy",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:epilepsy",
             "code": "yes",
             "display": "Yes"
           }
@@ -890,7 +890,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "epilepsy_controlled",
             "display": "Epilepsy Controlled"
           }
@@ -899,7 +899,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:epilepsy_controlled",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:epilepsy_controlled",
             "code": "yes",
             "display": "Yes"
           }
@@ -910,7 +910,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "neuromuscular_disease",
             "display": "Neuromuscular Disease"
           }
@@ -919,7 +919,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:neuromuscular_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:neuromuscular_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -930,7 +930,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "neuromuscular_details",
             "display": "Neuromuscular Details"
           }
@@ -942,7 +942,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "raised_icp",
             "display": "Raised Icp"
           }
@@ -951,7 +951,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:raised_icp",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:raised_icp",
             "code": "yes",
             "display": "Yes"
           }
@@ -962,7 +962,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "bleeding_disorder",
             "display": "Bleeding Disorder"
           }
@@ -971,7 +971,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:bleeding_disorder",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:bleeding_disorder",
             "code": "yes",
             "display": "Yes"
           }
@@ -982,7 +982,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "bleeding_details",
             "display": "Bleeding Details"
           }
@@ -994,7 +994,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "on_anticoagulants",
             "display": "On Anticoagulants"
           }
@@ -1003,7 +1003,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:on_anticoagulants",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:on_anticoagulants",
             "code": "yes",
             "display": "Yes"
           }
@@ -1014,7 +1014,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "anticoagulant_type",
             "display": "Anticoagulant Type"
           }
@@ -1026,7 +1026,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "sickle_cell_disease",
             "display": "Sickle Cell Disease"
           }
@@ -1035,7 +1035,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:sickle_cell_disease",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:sickle_cell_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -1046,7 +1046,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "sickle_cell_trait",
             "display": "Sickle Cell Trait"
           }
@@ -1055,7 +1055,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:sickle_cell_trait",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:sickle_cell_trait",
             "code": "yes",
             "display": "Yes"
           }
@@ -1066,7 +1066,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "anaemia",
             "display": "Anaemia"
           }
@@ -1075,7 +1075,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:anaemia",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:anaemia",
             "code": "yes",
             "display": "Yes"
           }
@@ -1086,7 +1086,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "rheumatoid_arthritis",
             "display": "Rheumatoid Arthritis"
           }
@@ -1095,7 +1095,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:rheumatoid_arthritis",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:rheumatoid_arthritis",
             "code": "yes",
             "display": "Yes"
           }
@@ -1106,7 +1106,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "cervical_spine_issues",
             "display": "Cervical Spine Issues"
           }
@@ -1115,7 +1115,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:cervical_spine_issues",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:cervical_spine_issues",
             "code": "yes",
             "display": "Yes"
           }
@@ -1126,7 +1126,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "limited_neck_movement",
             "display": "Limited Neck Movement"
           }
@@ -1135,7 +1135,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:limited_neck_movement",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:limited_neck_movement",
             "code": "yes",
             "display": "Yes"
           }
@@ -1146,7 +1146,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "limited_mouth_opening",
             "display": "Limited Mouth Opening"
           }
@@ -1155,7 +1155,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:limited_mouth_opening",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:limited_mouth_opening",
             "code": "yes",
             "display": "Yes"
           }
@@ -1166,7 +1166,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "dental_issues",
             "display": "Dental Issues"
           }
@@ -1175,7 +1175,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:dental_issues",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:dental_issues",
             "code": "yes",
             "display": "Yes"
           }
@@ -1186,7 +1186,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "dental_details",
             "display": "Dental Details"
           }
@@ -1198,7 +1198,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "previous_difficult_airway",
             "display": "Previous Difficult Airway"
           }
@@ -1207,7 +1207,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:previous_difficult_airway",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:previous_difficult_airway",
             "code": "yes",
             "display": "Yes"
           }
@@ -1218,7 +1218,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "mallampati_score",
             "display": "Mallampati Score"
           }
@@ -1227,7 +1227,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:mallampati_score",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:mallampati_score",
             "code": "1",
             "display": "1"
           }
@@ -1238,7 +1238,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "gord",
             "display": "Gord"
           }
@@ -1247,7 +1247,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:gord",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:gord",
             "code": "yes",
             "display": "Yes"
           }
@@ -1258,7 +1258,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "hiatus_hernia",
             "display": "Hiatus Hernia"
           }
@@ -1267,7 +1267,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:hiatus_hernia",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:hiatus_hernia",
             "code": "yes",
             "display": "Yes"
           }
@@ -1278,7 +1278,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "nausea",
             "display": "Nausea"
           }
@@ -1287,7 +1287,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:nausea",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:nausea",
             "code": "yes",
             "display": "Yes"
           }
@@ -1298,7 +1298,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "name",
             "display": "Name"
           }
@@ -1310,7 +1310,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "dose",
             "display": "Dose"
           }
@@ -1322,7 +1322,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "frequency",
             "display": "Frequency"
           }
@@ -1334,7 +1334,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "sort_order",
             "display": "Sort Order"
           }
@@ -1346,7 +1346,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "allergen",
             "display": "Allergen"
           }
@@ -1358,7 +1358,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "reaction",
             "display": "Reaction"
           }
@@ -1370,7 +1370,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "severity",
             "display": "Severity"
           }
@@ -1379,7 +1379,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:severity",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:severity",
             "code": "mild",
             "display": "Mild"
           }
@@ -1390,7 +1390,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "allergy_sort_order",
             "display": "Allergy Sort Order"
           }
@@ -1402,7 +1402,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "previous_anaesthesia",
             "display": "Previous Anaesthesia"
           }
@@ -1411,7 +1411,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:previous_anaesthesia",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:previous_anaesthesia",
             "code": "yes",
             "display": "Yes"
           }
@@ -1422,7 +1422,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "anaesthesia_problems",
             "display": "Anaesthesia Problems"
           }
@@ -1431,7 +1431,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:anaesthesia_problems",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:anaesthesia_problems",
             "code": "yes",
             "display": "Yes"
           }
@@ -1442,7 +1442,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "anaesthesia_problem_details",
             "display": "Anaesthesia Problem Details"
           }
@@ -1454,7 +1454,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "family_mh_history",
             "display": "Family Mh History"
           }
@@ -1463,7 +1463,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:family_mh_history",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:family_mh_history",
             "code": "yes",
             "display": "Yes"
           }
@@ -1474,7 +1474,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "family_mh_details",
             "display": "Family Mh Details"
           }
@@ -1486,7 +1486,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "ponv",
             "display": "Ponv"
           }
@@ -1495,7 +1495,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:ponv",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:ponv",
             "code": "yes",
             "display": "Yes"
           }
@@ -1506,7 +1506,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "alcohol",
             "display": "Alcohol"
           }
@@ -1515,7 +1515,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:alcohol",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:alcohol",
             "code": "none",
             "display": "None"
           }
@@ -1526,7 +1526,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "alcohol_units_per_week",
             "display": "Alcohol Units Per Week"
           }
@@ -1538,7 +1538,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "recreational_drugs",
             "display": "Recreational Drugs"
           }
@@ -1547,7 +1547,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:recreational_drugs",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:recreational_drugs",
             "code": "yes",
             "display": "Yes"
           }
@@ -1558,7 +1558,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "drug_details",
             "display": "Drug Details"
           }
@@ -1570,7 +1570,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "exercise_tolerance",
             "display": "Exercise Tolerance"
           }
@@ -1579,7 +1579,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:exercise_tolerance",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:exercise_tolerance",
             "code": "unable",
             "display": "Unable"
           }
@@ -1590,7 +1590,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "estimated_mets",
             "display": "Estimated Mets"
           }
@@ -1604,7 +1604,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "mobility_aids",
             "display": "Mobility Aids"
           }
@@ -1613,7 +1613,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:mobility_aids",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:mobility_aids",
             "code": "yes",
             "display": "Yes"
           }
@@ -1624,7 +1624,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "recent_decline",
             "display": "Recent Decline"
           }
@@ -1633,7 +1633,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:recent_decline",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:recent_decline",
             "code": "yes",
             "display": "Yes"
           }
@@ -1644,7 +1644,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "possibly_pregnant",
             "display": "Possibly Pregnant"
           }
@@ -1653,7 +1653,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:possibly_pregnant",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:possibly_pregnant",
             "code": "yes",
             "display": "Yes"
           }
@@ -1664,7 +1664,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "pregnancy_confirmed",
             "display": "Pregnancy Confirmed"
           }
@@ -1673,7 +1673,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient:pregnancy_confirmed",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient:pregnancy_confirmed",
             "code": "yes",
             "display": "Yes"
           }
@@ -1684,7 +1684,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "gestation_weeks",
             "display": "Gestation Weeks"
           }

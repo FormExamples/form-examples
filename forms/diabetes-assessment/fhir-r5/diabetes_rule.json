@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:diabetes-assessment",
+        "system": "urn:form-examples:diabetes-assessment",
         "code": "diabetes_rule",
         "display": "Diabetes Rule"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment",
+            "system": "urn:form-examples:diabetes-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment",
+            "system": "urn:form-examples:diabetes-assessment",
             "code": "code",
             "display": "Code"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment",
+            "system": "urn:form-examples:diabetes-assessment",
             "code": "category",
             "display": "Category"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment",
+            "system": "urn:form-examples:diabetes-assessment",
             "code": "description",
             "display": "Description"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment",
+            "system": "urn:form-examples:diabetes-assessment",
             "code": "concern_level",
             "display": "Concern Level"
           }
@@ -97,7 +97,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:diabetes-assessment:concern_level",
+            "system": "urn:form-examples:diabetes-assessment:concern_level",
             "code": "high",
             "display": "High"
           }

@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:encounter-satisfaction",
+        "system": "urn:form-examples:encounter-satisfaction",
         "code": "encounter_satisfaction",
         "display": "Encounter Satisfaction"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "status",
             "display": "Status"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction:status",
+            "system": "urn:form-examples:encounter-satisfaction:status",
             "code": "in_progress",
             "display": "In Progress"
           }

@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-records-release-permission",
+        "system": "urn:form-examples:medical-records-release-permission",
         "code": "signature_consent",
         "display": "Signature Consent"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "patient_signature_confirmed",
             "display": "Patient Signature Confirmed"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:patient_signature_confirmed",
+            "system": "urn:form-examples:medical-records-release-permission:patient_signature_confirmed",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "signature_date",
             "display": "Signature Date"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "witness_name",
             "display": "Witness Name"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "witness_signature_confirmed",
             "display": "Witness Signature Confirmed"
           }
@@ -105,7 +105,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:witness_signature_confirmed",
+            "system": "urn:form-examples:medical-records-release-permission:witness_signature_confirmed",
             "code": "yes",
             "display": "Yes"
           }
@@ -116,7 +116,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "witness_date",
             "display": "Witness Date"
           }
@@ -128,7 +128,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "parent_guardian_name",
             "display": "Parent Guardian Name"
           }

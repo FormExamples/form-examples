@@ -1,6 +1,6 @@
 /* Dental Assessment - patient questionnaire styles.
  * Mirrors the asthma-assessment HTML reference for consistency across
- * the medical-forms monorepo. Mobile-first; no framework dependencies. */
+ * the form-examples monorepo. Mobile-first; no framework dependencies. */
 
 :root {
   --color-primary: #0d9488;

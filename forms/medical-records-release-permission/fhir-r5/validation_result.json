@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-records-release-permission",
+        "system": "urn:form-examples:medical-records-release-permission",
         "code": "validation_result",
         "display": "Validation Result"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "completeness_score",
             "display": "Completeness Score"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "completeness_status",
             "display": "Completeness Status"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "validation_status",
             "display": "Validation Status"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "validated_at",
             "display": "Validated At"
           }

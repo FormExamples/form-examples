@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:hospital-discharge",
+          "system": "urn:form-examples:hospital-discharge",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:hospital-discharge:flags",
+        "system": "urn:form-examples:hospital-discharge:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

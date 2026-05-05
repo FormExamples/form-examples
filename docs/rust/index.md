@@ -1,6 +1,6 @@
 # Rust
 
-This page is Rust-related documentation for the medical-forms monorepo.
+This page is Rust-related documentation for the form-examples monorepo.
 
 ## Rust sscache
 

@@ -12,7 +12,7 @@
 
 <h2 class="mt-10 text-xl font-semibold">Clone</h2>
 <CodeBlock>{`git clone ${REPO_URL.replace('https://', '')}.git
-cd medical-forms`}</CodeBlock>
+cd form-examples`}</CodeBlock>
 
 <h2 class="mt-10 text-xl font-semibold">Install Loco (Rust full stack)</h2>
 <CodeBlock>{`cargo install loco

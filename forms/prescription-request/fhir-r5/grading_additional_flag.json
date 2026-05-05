@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:prescription-request",
+          "system": "urn:form-examples:prescription-request",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:prescription-request:flags",
+        "system": "urn:form-examples:prescription-request:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

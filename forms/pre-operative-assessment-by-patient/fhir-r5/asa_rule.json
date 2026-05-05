@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+        "system": "urn:form-examples:pre-operative-assessment-by-patient",
         "code": "asa_rule",
         "display": "Asa Rule"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "code",
             "display": "Code"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "system",
             "display": "System"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "description",
             "display": "Description"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-patient",
+            "system": "urn:form-examples:pre-operative-assessment-by-patient",
             "code": "grade",
             "display": "Grade"
           }

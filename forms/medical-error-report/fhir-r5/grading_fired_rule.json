@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:medical-error-report",
+          "system": "urn:form-examples:medical-error-report",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-error-report:rules",
+        "system": "urn:form-examples:medical-error-report:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:employee-onboarding-checklist",
+          "system": "urn:form-examples:employee-onboarding-checklist",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:employee-onboarding-checklist:flags",
+        "system": "urn:form-examples:employee-onboarding-checklist:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:hospital-discharge",
+          "system": "urn:form-examples:hospital-discharge",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:hospital-discharge:rules",
+        "system": "urn:form-examples:hospital-discharge:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

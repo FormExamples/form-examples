@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:encounter-satisfaction",
+        "system": "urn:form-examples:encounter-satisfaction",
         "code": "flagged_issue",
         "display": "Flagged Issue"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "category",
             "display": "Category"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "message",
             "display": "Message"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "priority",
             "display": "Priority"
           }
@@ -85,7 +85,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction:priority",
+            "system": "urn:form-examples:encounter-satisfaction:priority",
             "code": "high",
             "display": "High"
           }

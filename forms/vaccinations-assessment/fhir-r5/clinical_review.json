@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "clinical_review",
         "display": "Clinical Review"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "post_vaccination_observation",
             "display": "Post Vaccination Observation"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "immediate_reaction",
             "display": "Immediate Reaction"
           }
@@ -73,7 +73,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:immediate_reaction",
+            "system": "urn:form-examples:vaccinations-assessment:immediate_reaction",
             "code": "yes",
             "display": "Yes"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "reaction_details",
             "display": "Reaction Details"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "next_dose_due",
             "display": "Next Dose Due"
           }
@@ -108,7 +108,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "catch_up_schedule_needed",
             "display": "Catch Up Schedule Needed"
           }
@@ -117,7 +117,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:catch_up_schedule_needed",
+            "system": "urn:form-examples:vaccinations-assessment:catch_up_schedule_needed",
             "code": "yes",
             "display": "Yes"
           }
@@ -128,7 +128,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "referral_needed",
             "display": "Referral Needed"
           }
@@ -137,7 +137,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:referral_needed",
+            "system": "urn:form-examples:vaccinations-assessment:referral_needed",
             "code": "yes",
             "display": "Yes"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "clinician_notes",
             "display": "Clinician Notes"
           }
@@ -160,7 +160,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "reviewing_clinician",
             "display": "Reviewing Clinician"
           }

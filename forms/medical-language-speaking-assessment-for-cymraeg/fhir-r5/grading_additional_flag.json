@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:medical-language-speaking-assessment-for-cymraeg",
+          "system": "urn:form-examples:medical-language-speaking-assessment-for-cymraeg",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-language-speaking-assessment-for-cymraeg:flags",
+        "system": "urn:form-examples:medical-language-speaking-assessment-for-cymraeg:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

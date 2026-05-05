@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:united-kingdom-driver-and-vehicle-licensing-agency-v1-form",
+          "system": "urn:form-examples:united-kingdom-driver-and-vehicle-licensing-agency-v1-form",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:united-kingdom-driver-and-vehicle-licensing-agency-v1-form:rules",
+        "system": "urn:form-examples:united-kingdom-driver-and-vehicle-licensing-agency-v1-form:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

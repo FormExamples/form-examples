@@ -8,7 +8,7 @@
 ## Purpose
 
 Build a public-facing, multi-page website at `formexamples.com` that explains
-the `medical-forms` parent monorepo: what it contains, how forms are
+the `form-examples` parent monorepo: what it contains, how forms are
 structured, what tech stacks are used, what compliance frameworks it
 references, and how a developer can get started. Audience: prospective
 contributors, healthcare-tech engineers, and anyone evaluating the project.
@@ -125,13 +125,13 @@ docs require a manual sync to the site.
 - "What's in the repo" — bulleted: 116 forms, SQL migrations, XML+DTD, FHIR R5, four front-end implementations, Rust full stack
 - Compact category list (12 categories with one-line examples)
 - "How a form is structured" — short code block of the per-form directory layout
-- CTA: "Browse on GitHub →" linking to `https://github.com/joelparkerhenderson/medical-forms`
+- CTA: "Browse on GitHub →" linking to `https://github.com/formexamples/form-examples`
 
 ### Forms (`/forms/`)
 
 - Full 12-row category table from `index.md`
 - Alphabetical list of all form slugs from `src/lib/data/forms.generated.ts`
-- Each slug links to `https://github.com/joelparkerhenderson/medical-forms/tree/main/forms/<slug>`
+- Each slug links to `https://github.com/formexamples/form-examples/tree/main/forms/<slug>`
 
 ### Architecture (`/architecture/`)
 

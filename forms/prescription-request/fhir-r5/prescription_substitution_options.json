@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:prescription-request",
+        "system": "urn:form-examples:prescription-request",
         "code": "prescription_substitution_options",
         "display": "Prescription Substitution Options"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "allow_brand_substitution",
             "display": "Allow Brand Substitution"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:allow_brand_substitution",
+            "system": "urn:form-examples:prescription-request:allow_brand_substitution",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "allow_generic_substitution",
             "display": "Allow Generic Substitution"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:allow_generic_substitution",
+            "system": "urn:form-examples:prescription-request:allow_generic_substitution",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "allow_dosage_adjustment",
             "display": "Allow Dosage Adjustment"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:allow_dosage_adjustment",
+            "system": "urn:form-examples:prescription-request:allow_dosage_adjustment",
             "code": "yes",
             "display": "Yes"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "substitution_notes",
             "display": "Substitution Notes"
           }

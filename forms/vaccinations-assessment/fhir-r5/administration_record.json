@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "administration_record",
         "display": "Administration Record"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "vaccine_name",
             "display": "Vaccine Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "batch_number",
             "display": "Batch Number"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "expiry_date",
             "display": "Expiry Date"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "administration_site",
             "display": "Administration Site"
           }
@@ -97,7 +97,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:administration_site",
+            "system": "urn:form-examples:vaccinations-assessment:administration_site",
             "code": "leftDeltoid",
             "display": "Leftdeltoid"
           }
@@ -108,7 +108,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "administration_route",
             "display": "Administration Route"
           }
@@ -117,7 +117,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:administration_route",
+            "system": "urn:form-examples:vaccinations-assessment:administration_route",
             "code": "intramuscular",
             "display": "Intramuscular"
           }
@@ -128,7 +128,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "dose_number",
             "display": "Dose Number"
           }
@@ -137,7 +137,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:dose_number",
+            "system": "urn:form-examples:vaccinations-assessment:dose_number",
             "code": "1",
             "display": "1"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "administered_by",
             "display": "Administered By"
           }
@@ -160,7 +160,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "administration_date",
             "display": "Administration Date"
           }

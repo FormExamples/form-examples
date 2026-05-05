@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "consent_information",
         "display": "Consent Information"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "information_provided",
             "display": "Information Provided"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "risks_explained",
             "display": "Risks Explained"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "benefits_explained",
             "display": "Benefits Explained"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "questions_answered",
             "display": "Questions Answered"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "consent_given",
             "display": "Consent Given"
           }
@@ -109,7 +109,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:consent_given",
+            "system": "urn:form-examples:vaccinations-assessment:consent_given",
             "code": "yes",
             "display": "Yes"
           }
@@ -120,7 +120,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "consent_date",
             "display": "Consent Date"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "guardian_consent",
             "display": "Guardian Consent"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:guardian_consent",
+            "system": "urn:form-examples:vaccinations-assessment:guardian_consent",
             "code": "yes",
             "display": "Yes"
           }

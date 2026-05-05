@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_allergy",
         "display": "Casualty Card Allergy"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "allergen",
             "display": "Allergen"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "reaction",
             "display": "Reaction"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "severity",
             "display": "Severity"
           }
@@ -85,7 +85,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:severity",
+            "system": "urn:form-examples:casualty-card-form:severity",
             "code": "mild",
             "display": "Mild"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "sort_order",
             "display": "Sort Order"
           }

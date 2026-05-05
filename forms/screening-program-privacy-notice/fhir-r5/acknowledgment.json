@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:screening-program-privacy-notice",
+        "system": "urn:form-examples:screening-program-privacy-notice",
         "code": "acknowledgment",
         "display": "Acknowledgment"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:screening-program-privacy-notice",
+            "system": "urn:form-examples:screening-program-privacy-notice",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:screening-program-privacy-notice",
+            "system": "urn:form-examples:screening-program-privacy-notice",
             "code": "confirmed",
             "display": "Confirmed"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:screening-program-privacy-notice",
+            "system": "urn:form-examples:screening-program-privacy-notice",
             "code": "full_name",
             "display": "Full Name"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:screening-program-privacy-notice",
+            "system": "urn:form-examples:screening-program-privacy-notice",
             "code": "acknowledged_date",
             "display": "Acknowledged Date"
           }

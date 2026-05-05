@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:neurology-assessment",
+          "system": "urn:form-examples:neurology-assessment",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:neurology-assessment:rules",
+        "system": "urn:form-examples:neurology-assessment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

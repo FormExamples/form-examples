@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_demographics",
         "display": "Casualty Card Demographics"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "address",
             "display": "Address"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "postcode",
             "display": "Postcode"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "phone",
             "display": "Phone"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "email",
             "display": "Email"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "ethnicity",
             "display": "Ethnicity"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "preferred_language",
             "display": "Preferred Language"
           }
@@ -124,7 +124,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "interpreter_required",
             "display": "Interpreter Required"
           }
@@ -133,7 +133,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:interpreter_required",
+            "system": "urn:form-examples:casualty-card-form:interpreter_required",
             "code": "yes",
             "display": "Yes"
           }

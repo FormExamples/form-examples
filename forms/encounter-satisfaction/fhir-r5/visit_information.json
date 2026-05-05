@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:encounter-satisfaction",
+        "system": "urn:form-examples:encounter-satisfaction",
         "code": "visit_information",
         "display": "Visit Information"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "visit_date",
             "display": "Visit Date"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "department",
             "display": "Department"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "provider_name",
             "display": "Provider Name"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "visit_type",
             "display": "Visit Type"
           }
@@ -97,7 +97,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction:visit_type",
+            "system": "urn:form-examples:encounter-satisfaction:visit_type",
             "code": "routine-checkup",
             "display": "Routine-Checkup"
           }
@@ -108,7 +108,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "reason_for_visit",
             "display": "Reason For Visit"
           }
@@ -120,7 +120,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "first_visit",
             "display": "First Visit"
           }
@@ -129,7 +129,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction:first_visit",
+            "system": "urn:form-examples:encounter-satisfaction:first_visit",
             "code": "yes",
             "display": "Yes"
           }

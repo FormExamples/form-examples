@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:emergency-medical-technician-psychomotor-examination",
+          "system": "urn:form-examples:emergency-medical-technician-psychomotor-examination",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:emergency-medical-technician-psychomotor-examination:flags",
+        "system": "urn:form-examples:emergency-medical-technician-psychomotor-examination:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

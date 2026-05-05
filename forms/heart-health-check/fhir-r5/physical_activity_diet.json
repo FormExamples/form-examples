@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check",
+        "system": "urn:form-examples:heart-health-check",
         "code": "physical_activity_diet",
         "display": "Physical Activity Diet"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "physical_activity_minutes_per_week",
             "display": "Physical Activity Minutes Per Week"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "activity_intensity",
             "display": "Activity Intensity"
           }
@@ -73,7 +73,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:activity_intensity",
+            "system": "urn:form-examples:heart-health-check:activity_intensity",
             "code": "light",
             "display": "Light"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "fruit_veg_portions_per_day",
             "display": "Fruit Veg Portions Per Day"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "diet_quality",
             "display": "Diet Quality"
           }
@@ -105,7 +105,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:diet_quality",
+            "system": "urn:form-examples:heart-health-check:diet_quality",
             "code": "poor",
             "display": "Poor"
           }
@@ -116,7 +116,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "salt_intake",
             "display": "Salt Intake"
           }
@@ -125,7 +125,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:salt_intake",
+            "system": "urn:form-examples:heart-health-check:salt_intake",
             "code": "low",
             "display": "Low"
           }

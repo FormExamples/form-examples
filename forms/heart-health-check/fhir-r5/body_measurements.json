@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check",
+        "system": "urn:form-examples:heart-health-check",
         "code": "body_measurements",
         "display": "Body Measurements"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "height_cm",
             "display": "Height Cm"
           }
@@ -66,7 +66,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "weight_kg",
             "display": "Weight Kg"
           }
@@ -80,7 +80,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "bmi",
             "display": "Bmi"
           }
@@ -94,7 +94,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "waist_circumference_cm",
             "display": "Waist Circumference Cm"
           }

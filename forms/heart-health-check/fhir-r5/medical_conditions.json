@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check",
+        "system": "urn:form-examples:heart-health-check",
         "code": "medical_conditions",
         "display": "Medical Conditions"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_diabetes",
             "display": "Has Diabetes"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_diabetes",
+            "system": "urn:form-examples:heart-health-check:has_diabetes",
             "code": "no",
             "display": "No"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_atrial_fibrillation",
             "display": "Has Atrial Fibrillation"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_atrial_fibrillation",
+            "system": "urn:form-examples:heart-health-check:has_atrial_fibrillation",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_rheumatoid_arthritis",
             "display": "Has Rheumatoid Arthritis"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_rheumatoid_arthritis",
+            "system": "urn:form-examples:heart-health-check:has_rheumatoid_arthritis",
             "code": "yes",
             "display": "Yes"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_chronic_kidney_disease",
             "display": "Has Chronic Kidney Disease"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_chronic_kidney_disease",
+            "system": "urn:form-examples:heart-health-check:has_chronic_kidney_disease",
             "code": "yes",
             "display": "Yes"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_migraine",
             "display": "Has Migraine"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_migraine",
+            "system": "urn:form-examples:heart-health-check:has_migraine",
             "code": "yes",
             "display": "Yes"
           }
@@ -152,7 +152,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_severe_mental_illness",
             "display": "Has Severe Mental Illness"
           }
@@ -161,7 +161,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_severe_mental_illness",
+            "system": "urn:form-examples:heart-health-check:has_severe_mental_illness",
             "code": "yes",
             "display": "Yes"
           }
@@ -172,7 +172,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "has_erectile_dysfunction",
             "display": "Has Erectile Dysfunction"
           }
@@ -181,7 +181,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:has_erectile_dysfunction",
+            "system": "urn:form-examples:heart-health-check:has_erectile_dysfunction",
             "code": "yes",
             "display": "Yes"
           }
@@ -192,7 +192,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "on_atypical_antipsychotic",
             "display": "On Atypical Antipsychotic"
           }
@@ -201,7 +201,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:on_atypical_antipsychotic",
+            "system": "urn:form-examples:heart-health-check:on_atypical_antipsychotic",
             "code": "yes",
             "display": "Yes"
           }
@@ -212,7 +212,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "on_corticosteroids",
             "display": "On Corticosteroids"
           }
@@ -221,7 +221,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:on_corticosteroids",
+            "system": "urn:form-examples:heart-health-check:on_corticosteroids",
             "code": "yes",
             "display": "Yes"
           }

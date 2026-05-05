@@ -1,6 +1,6 @@
 # formexamples.com
 
-Static documentation site for the [medical-forms](https://github.com/joelparkerhenderson/medical-forms) monorepo. Built with SvelteKit + adapter-static, deployed to GitHub Pages.
+Static documentation site for the [form-examples](https://github.com/formexamples/form-examples) monorepo. Built with SvelteKit + adapter-static, deployed to GitHub Pages.
 
 ## Develop
 

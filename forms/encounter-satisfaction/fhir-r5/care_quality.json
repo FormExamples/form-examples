@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:encounter-satisfaction",
+        "system": "urn:form-examples:encounter-satisfaction",
         "code": "care_quality",
         "display": "Care Quality"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "NULL",
             "display": "Null"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "treatment_plan_explanation",
             "display": "Treatment Plan Explanation"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:encounter-satisfaction",
+            "system": "urn:form-examples:encounter-satisfaction",
             "code": "confidence_in_care",
             "display": "Confidence In Care"
           }

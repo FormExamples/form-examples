@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:kinesiology-assessment",
+          "system": "urn:form-examples:kinesiology-assessment",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:kinesiology-assessment:rules",
+        "system": "urn:form-examples:kinesiology-assessment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:post-operative-report",
+          "system": "urn:form-examples:post-operative-report",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:post-operative-report:flags",
+        "system": "urn:form-examples:post-operative-report:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

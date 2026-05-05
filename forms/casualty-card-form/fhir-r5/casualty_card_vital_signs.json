@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_vital_signs",
         "display": "Casualty Card Vital Signs"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "heart_rate",
             "display": "Heart Rate"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "systolic_bp",
             "display": "Systolic Bp"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "diastolic_bp",
             "display": "Diastolic Bp"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "respiratory_rate",
             "display": "Respiratory Rate"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "oxygen_saturation",
             "display": "Oxygen Saturation"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "supplemental_oxygen",
             "display": "Supplemental Oxygen"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:supplemental_oxygen",
+            "system": "urn:form-examples:casualty-card-form:supplemental_oxygen",
             "code": "yes",
             "display": "Yes"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "oxygen_flow_rate",
             "display": "Oxygen Flow Rate"
           }
@@ -144,7 +144,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "temperature",
             "display": "Temperature"
           }
@@ -158,7 +158,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "blood_glucose",
             "display": "Blood Glucose"
           }
@@ -172,7 +172,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "consciousness_level",
             "display": "Consciousness Level"
           }
@@ -181,7 +181,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:consciousness_level",
+            "system": "urn:form-examples:casualty-card-form:consciousness_level",
             "code": "alert",
             "display": "Alert"
           }
@@ -192,7 +192,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pupil_left_size",
             "display": "Pupil Left Size"
           }
@@ -204,7 +204,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pupil_left_reactive",
             "display": "Pupil Left Reactive"
           }
@@ -213,7 +213,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:pupil_left_reactive",
+            "system": "urn:form-examples:casualty-card-form:pupil_left_reactive",
             "code": "yes",
             "display": "Yes"
           }
@@ -224,7 +224,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pupil_right_size",
             "display": "Pupil Right Size"
           }
@@ -236,7 +236,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "pupil_right_reactive",
             "display": "Pupil Right Reactive"
           }
@@ -245,7 +245,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:pupil_right_reactive",
+            "system": "urn:form-examples:casualty-card-form:pupil_right_reactive",
             "code": "yes",
             "display": "Yes"
           }
@@ -256,7 +256,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "capillary_refill_time",
             "display": "Capillary Refill Time"
           }
@@ -268,7 +268,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "weight",
             "display": "Weight"
           }

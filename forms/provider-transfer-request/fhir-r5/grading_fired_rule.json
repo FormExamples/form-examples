@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:provider-transfer-request",
+          "system": "urn:form-examples:provider-transfer-request",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:provider-transfer-request:rules",
+        "system": "urn:form-examples:provider-transfer-request:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

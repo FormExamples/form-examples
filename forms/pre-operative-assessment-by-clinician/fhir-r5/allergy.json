@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+        "system": "urn:form-examples:pre-operative-assessment-by-clinician",
         "code": "allergy",
         "display": "Allergy"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "scientific_name",
             "display": "Scientific Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "european_union_name",
             "display": "European Union Name"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "united_states_name",
             "display": "United States Name"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "cosmetic_name",
             "display": "Cosmetic Name"
           }

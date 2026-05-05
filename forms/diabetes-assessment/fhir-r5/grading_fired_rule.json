@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:diabetes-assessment",
+          "system": "urn:form-examples:diabetes-assessment",
           "code": "grading-fired-rule",
           "display": "Grading Fired Rule"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:diabetes-assessment:rules",
+        "system": "urn:form-examples:diabetes-assessment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

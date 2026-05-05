@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check",
+        "system": "urn:form-examples:heart-health-check",
         "code": "demographics_ethnicity",
         "display": "Demographics Ethnicity"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "age",
             "display": "Age"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "sex",
             "display": "Sex"
           }
@@ -73,7 +73,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check:sex",
+            "system": "urn:form-examples:heart-health-check:sex",
             "code": "male",
             "display": "Male"
           }
@@ -84,7 +84,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "ethnicity",
             "display": "Ethnicity"
           }
@@ -96,7 +96,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:heart-health-check",
+            "system": "urn:form-examples:heart-health-check",
             "code": "townsend_deprivation",
             "display": "Townsend Deprivation"
           }

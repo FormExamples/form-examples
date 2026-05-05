@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:casualty-card-form",
+        "system": "urn:form-examples:casualty-card-form",
         "code": "casualty_card_arrival_triage",
         "display": "Casualty Card Arrival Triage"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "attendance_category",
             "display": "Attendance Category"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:attendance_category",
+            "system": "urn:form-examples:casualty-card-form:attendance_category",
             "code": "first",
             "display": "First"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "arrival_mode",
             "display": "Arrival Mode"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:arrival_mode",
+            "system": "urn:form-examples:casualty-card-form:arrival_mode",
             "code": "ambulance",
             "display": "Ambulance"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "referral_source",
             "display": "Referral Source"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:referral_source",
+            "system": "urn:form-examples:casualty-card-form:referral_source",
             "code": "self",
             "display": "Self"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "ambulance_incident_number",
             "display": "Ambulance Incident Number"
           }
@@ -124,7 +124,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "triage_time",
             "display": "Triage Time"
           }
@@ -136,7 +136,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "triage_nurse",
             "display": "Triage Nurse"
           }
@@ -148,7 +148,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "mts_flowchart",
             "display": "Mts Flowchart"
           }
@@ -160,7 +160,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "mts_category",
             "display": "Mts Category"
           }
@@ -169,7 +169,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form:mts_category",
+            "system": "urn:form-examples:casualty-card-form:mts_category",
             "code": "1-immediate",
             "display": "1-Immediate"
           }
@@ -180,7 +180,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:casualty-card-form",
+            "system": "urn:form-examples:casualty-card-form",
             "code": "mts_discriminator",
             "display": "Mts Discriminator"
           }

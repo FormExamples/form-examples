@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "additional_flag",
         "display": "Additional Flag"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "category",
             "display": "Category"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "message",
             "display": "Message"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "priority",
             "display": "Priority"
           }
@@ -85,7 +85,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:priority",
+            "system": "urn:form-examples:vaccinations-assessment:priority",
             "code": "high",
             "display": "High"
           }

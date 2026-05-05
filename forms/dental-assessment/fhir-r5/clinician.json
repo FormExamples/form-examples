@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:dental-assessment",
+        "system": "urn:form-examples:dental-assessment",
         "code": "clinician",
         "display": "Clinician"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "name",
             "display": "Name"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "email",
             "display": "Email"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "phone",
             "display": "Phone"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "postal_address_as_full_text",
             "display": "Postal Address As Full Text"
           }
@@ -100,7 +100,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "postcode",
             "display": "Postcode"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "role",
             "display": "Role"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment:role",
+            "system": "urn:form-examples:dental-assessment:role",
             "code": "anaesthetist",
             "display": "Anaesthetist"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "registration_body",
             "display": "Registration Body"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment:registration_body",
+            "system": "urn:form-examples:dental-assessment:registration_body",
             "code": "GMC",
             "display": "Gmc"
           }
@@ -152,7 +152,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "registration_number",
             "display": "Registration Number"
           }
@@ -164,7 +164,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:dental-assessment",
+            "system": "urn:form-examples:dental-assessment",
             "code": "united_kingdom_nhs_number",
             "display": "United Kingdom Nhs Number"
           }

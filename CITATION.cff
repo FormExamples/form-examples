@@ -12,9 +12,9 @@ authors:
     orcid: 'https://orcid.org/0009-0000-4681-282X'
 identifiers:
   - type: url
-    value: 'https://github.com/joelparkerhenderson/medical-forms/'
+    value: 'https://github.com/formexamples/form-examples/'
     description: Medical forms
-repository-code: 'https://github.com/joelparkerhenderson/medical-forms/'
+repository-code: 'https://github.com/formexamples/form-examples/'
 abstract: >-
   Medical forms
 license: See license file

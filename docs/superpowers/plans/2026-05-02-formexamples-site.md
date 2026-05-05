@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a six-page static documentation site at `formexamples.com` that explains the `medical-forms` parent monorepo, deployed to GitHub Pages from the `formexamples.github.io/` subdirectory of this repo.
+**Goal:** Build a six-page static documentation site at `formexamples.com` that explains the `form-examples` parent monorepo, deployed to GitHub Pages from the `formexamples.github.io/` subdirectory of this repo.
 
 **Architecture:** SvelteKit + `@sveltejs/adapter-static` (full prerender) + Tailwind CSS v4. Documentation-style layout (sticky header, left sidebar, max-width prose). Form-slug list is generated at build time from `../forms/`. Deploy via GitHub Actions on push to `main`.
 
@@ -63,7 +63,7 @@ formexamples.github.io/
     deploy.yml                              # Task 12
 ```
 
-All work happens in `formexamples.github.io/` unless noted. The repo is the parent `medical-forms` git repo — there is no separate git repo for the site.
+All work happens in `formexamples.github.io/` unless noted. The repo is the parent `form-examples` git repo — there is no separate git repo for the site.
 
 ---
 
@@ -258,7 +258,7 @@ src/lib/data/forms.generated.ts
 ```markdown
 # formexamples.com
 
-Static documentation site for the [medical-forms](https://github.com/joelparkerhenderson/medical-forms) monorepo. Built with SvelteKit + adapter-static, deployed to GitHub Pages.
+Static documentation site for the [form-examples](https://github.com/formexamples/form-examples) monorepo. Built with SvelteKit + adapter-static, deployed to GitHub Pages.
 
 ## Develop
 
@@ -331,7 +331,7 @@ Expected: serves on `http://localhost:4173/`. Visit it in a browser; "Hello" sho
 - [ ] **Step 12: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/
 git commit -m "Initialize formexamples.github.io SvelteKit project with adapter-static + Tailwind v4"
 ```
@@ -384,7 +384,7 @@ Expected: all three files exist; `CNAME` contains `formexamples.com`.
 - [ ] **Step 5: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/static/
 git commit -m "Add CNAME, .nojekyll, and favicon for formexamples.com"
 ```
@@ -508,7 +508,7 @@ Expected: `forms.generated.ts` is recreated by the `prebuild` script; `npm run b
 - [ ] **Step 5: Confirm the generated file is gitignored**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms && git status formexamples.github.io/src/lib/data/forms.generated.ts
+cd /Users/jph/git/formexamples/form-examples && git status formexamples.github.io/src/lib/data/forms.generated.ts
 ```
 
 Expected: file is not listed (it is ignored by `.gitignore`).
@@ -516,7 +516,7 @@ Expected: file is not listed (it is ignored by `.gitignore`).
 - [ ] **Step 6: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/scripts/ formexamples.github.io/src/lib/data/categories.ts
 git commit -m "Add form-list generator and category data for formexamples site"
 ```
@@ -541,7 +541,7 @@ export type NavLink = { href: string; label: string };
 
 export const SITE_NAME = 'FormExamples';
 export const SITE_TAGLINE = '116 medical-form reference implementations';
-export const REPO_URL = 'https://github.com/joelparkerhenderson/medical-forms';
+export const REPO_URL = 'https://github.com/formexamples/form-examples';
 
 export const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
@@ -702,7 +702,7 @@ export const navLinks: NavLink[] = [
 <footer class="mt-16 border-t border-slate-200 py-8 text-sm text-slate-500 dark:border-slate-800 dark:text-slate-400">
   <div class="px-4 sm:px-6">
     © {year} —
-    <a href={REPO_URL} rel="noopener noreferrer">medical-forms on GitHub</a>
+    <a href={REPO_URL} rel="noopener noreferrer">form-examples on GitHub</a>
   </div>
 </footer>
 ```
@@ -780,7 +780,7 @@ Stop the server (Ctrl-C).
 - [ ] **Step 10: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/
 git commit -m "Add layout shell with Header, Sidebar, Footer, dark-mode toggle"
 ```
@@ -891,7 +891,7 @@ Expected: success.
 - [ ] **Step 7: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/lib/components/
 git commit -m "Add reusable components: CategoryTable, CodeBlock, ReferenceCard, OnThisPage"
 ```
@@ -986,7 +986,7 @@ Stop the server.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/+page.svelte
 git commit -m "Add Home page for formexamples site"
 ```
@@ -1052,7 +1052,7 @@ Stop the server.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/forms/
 git commit -m "Add Forms page for formexamples site"
 ```
@@ -1164,7 +1164,7 @@ Stop the server.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/architecture/
 git commit -m "Add Architecture page for formexamples site"
 ```
@@ -1284,7 +1284,7 @@ Stop the server.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/tech-stacks/
 git commit -m "Add Tech stacks page for formexamples site"
 ```
@@ -1363,7 +1363,7 @@ Stop the server.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/compliance/
 git commit -m "Add Compliance page for formexamples site"
 ```
@@ -1392,7 +1392,7 @@ git commit -m "Add Compliance page for formexamples site"
 
 <h2 class="mt-10 text-xl font-semibold">Clone</h2>
 <CodeBlock>{`git clone ${REPO_URL.replace('https://', '')}.git
-cd medical-forms`}</CodeBlock>
+cd form-examples`}</CodeBlock>
 
 <h2 class="mt-10 text-xl font-semibold">Install Loco (Rust full stack)</h2>
 <CodeBlock>{`cargo install loco
@@ -1437,14 +1437,14 @@ npm run preview
 Open `http://localhost:4173/get-started/`. Confirm:
 - All five H2 sections render in order
 - Code blocks render with monospace font, light background, scrollable on narrow viewports
-- Final paragraph link points to `https://github.com/joelparkerhenderson/medical-forms#install`
+- Final paragraph link points to `https://github.com/formexamples/form-examples#install`
 
 Stop the server.
 
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add formexamples.github.io/src/routes/get-started/
 git commit -m "Add Get started page for formexamples site"
 ```
@@ -1456,14 +1456,14 @@ git commit -m "Add Get started page for formexamples site"
 **Files:**
 - Create: `formexamples.github.io/.github/workflows/deploy.yml`
 
-Note: this workflow file lives **inside** the `formexamples.github.io/` subdirectory, but GitHub Actions only reads workflows from the **repo root** `.github/workflows/`. So the file must actually be placed at `/.github/workflows/deploy.yml` (root of `medical-forms`), not inside the subdirectory.
+Note: this workflow file lives **inside** the `formexamples.github.io/` subdirectory, but GitHub Actions only reads workflows from the **repo root** `.github/workflows/`. So the file must actually be placed at `/.github/workflows/deploy.yml` (root of `form-examples`), not inside the subdirectory.
 
 **Corrected path:** Create `.github/workflows/deploy-formexamples.yml` at the **repo root**.
 
 - [ ] **Step 1: Verify the repo root `.github/workflows/` directory state**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 ls -la .github/workflows/ 2>/dev/null || echo "directory does not exist"
 ```
 
@@ -1537,7 +1537,7 @@ jobs:
 - [ ] **Step 3: Validate the YAML locally**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 python3 -c "import yaml; yaml.safe_load(open('.github/workflows/deploy-formexamples.yml'))"
 ```
 
@@ -1546,7 +1546,7 @@ Expected: no output (means the YAML parses cleanly). Errors mean a syntax proble
 - [ ] **Step 4: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add .github/workflows/deploy-formexamples.yml
 git commit -m "Add GitHub Actions workflow to deploy formexamples.com on push to main"
 ```
@@ -1572,7 +1572,7 @@ Do not run any of these steps from the implementation task — they require acco
 - [ ] **Step 1: Clean build from scratch**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms/formexamples.github.io
+cd /Users/jph/git/formexamples/form-examples/formexamples.github.io
 rm -rf node_modules build .svelte-kit src/lib/data/forms.generated.ts
 npm ci
 npm run check
@@ -1629,7 +1629,7 @@ Stop the preview server.
 - [ ] **Step 4: Confirm no uncommitted changes**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git status formexamples.github.io/ .github/workflows/deploy-formexamples.yml
 ```
 

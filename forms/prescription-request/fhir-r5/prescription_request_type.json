@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:prescription-request",
+        "system": "urn:form-examples:prescription-request",
         "code": "prescription_request_type",
         "display": "Prescription Request Type"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "is_new_prescription",
             "display": "Is New Prescription"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:is_new_prescription",
+            "system": "urn:form-examples:prescription-request:is_new_prescription",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "is_emergency",
             "display": "Is Emergency"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request:is_emergency",
+            "system": "urn:form-examples:prescription-request:is_emergency",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:prescription-request",
+            "system": "urn:form-examples:prescription-request",
             "code": "additional_notes",
             "display": "Additional Notes"
           }

@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:medical-records-release-permission",
+        "system": "urn:form-examples:medical-records-release-permission",
         "code": "restrictions_limitations",
         "display": "Restrictions Limitations"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "exclude_hiv",
             "display": "Exclude Hiv"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:exclude_hiv",
+            "system": "urn:form-examples:medical-records-release-permission:exclude_hiv",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "exclude_substance_abuse",
             "display": "Exclude Substance Abuse"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:exclude_substance_abuse",
+            "system": "urn:form-examples:medical-records-release-permission:exclude_substance_abuse",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "exclude_mental_health",
             "display": "Exclude Mental Health"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:exclude_mental_health",
+            "system": "urn:form-examples:medical-records-release-permission:exclude_mental_health",
             "code": "yes",
             "display": "Yes"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "exclude_genetic_info",
             "display": "Exclude Genetic Info"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:exclude_genetic_info",
+            "system": "urn:form-examples:medical-records-release-permission:exclude_genetic_info",
             "code": "yes",
             "display": "Yes"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "exclude_sti",
             "display": "Exclude Sti"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission:exclude_sti",
+            "system": "urn:form-examples:medical-records-release-permission:exclude_sti",
             "code": "yes",
             "display": "Yes"
           }
@@ -152,7 +152,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:medical-records-release-permission",
+            "system": "urn:form-examples:medical-records-release-permission",
             "code": "additional_restrictions",
             "display": "Additional Restrictions"
           }

@@ -416,7 +416,7 @@ git commit -m "feat(prescription-request): add SQL migrations for prescription r
 - [ ] **Step 1: Generate XML representations**
 
 ```bash
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 python3 bin/generate-xml-representations.py
 ```
 
@@ -425,7 +425,7 @@ Expected: XML and DTD files generated in `forms/prescription-request/xml-represe
 - [ ] **Step 2: Generate FHIR R5 representations**
 
 ```bash
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 python3 bin/generate-fhir-r5-representations.py
 ```
 
@@ -2773,7 +2773,7 @@ Expected: No type errors.
 - [ ] **Step 4: Run project-level tests**
 
 ```bash
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test
 ```
 

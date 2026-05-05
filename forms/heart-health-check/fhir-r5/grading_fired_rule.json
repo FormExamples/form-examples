@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:heart-health-check",
+          "system": "urn:form-examples:heart-health-check",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:heart-health-check:rules",
+        "system": "urn:form-examples:heart-health-check:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

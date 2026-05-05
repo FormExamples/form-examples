@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:sundowner-syndrome-assessment",
+          "system": "urn:form-examples:sundowner-syndrome-assessment",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:sundowner-syndrome-assessment:rules",
+        "system": "urn:form-examples:sundowner-syndrome-assessment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

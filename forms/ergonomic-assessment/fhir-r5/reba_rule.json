@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:ergonomic-assessment",
+        "system": "urn:form-examples:ergonomic-assessment",
         "code": "reba_rule",
         "display": "Reba Rule"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:ergonomic-assessment",
+            "system": "urn:form-examples:ergonomic-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:ergonomic-assessment",
+            "system": "urn:form-examples:ergonomic-assessment",
             "code": "code",
             "display": "Code"
           }
@@ -64,7 +64,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:ergonomic-assessment",
+            "system": "urn:form-examples:ergonomic-assessment",
             "code": "system",
             "display": "System"
           }
@@ -76,7 +76,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:ergonomic-assessment",
+            "system": "urn:form-examples:ergonomic-assessment",
             "code": "description",
             "display": "Description"
           }
@@ -88,7 +88,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:ergonomic-assessment",
+            "system": "urn:form-examples:ergonomic-assessment",
             "code": "score",
             "display": "Score"
           }

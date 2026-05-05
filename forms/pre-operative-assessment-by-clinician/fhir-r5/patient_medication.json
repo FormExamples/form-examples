@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+        "system": "urn:form-examples:pre-operative-assessment-by-clinician",
         "code": "patient_medication",
         "display": "Patient Medication"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:pre-operative-assessment-by-clinician",
+            "system": "urn:form-examples:pre-operative-assessment-by-clinician",
             "code": "deleted_at",
             "display": "Deleted At"
           }

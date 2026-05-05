@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:advance-statement-about-care",
+          "system": "urn:form-examples:advance-statement-about-care",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:advance-statement-about-care:rules",
+        "system": "urn:form-examples:advance-statement-about-care:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

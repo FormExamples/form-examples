@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:mental-health-assessment",
+          "system": "urn:form-examples:mental-health-assessment",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:mental-health-assessment:flags",
+        "system": "urn:form-examples:mental-health-assessment:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

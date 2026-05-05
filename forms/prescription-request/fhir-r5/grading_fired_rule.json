@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:prescription-request",
+          "system": "urn:form-examples:prescription-request",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:prescription-request:rules",
+        "system": "urn:form-examples:prescription-request:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

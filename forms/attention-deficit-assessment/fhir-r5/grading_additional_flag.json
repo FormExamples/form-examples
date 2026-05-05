@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:attention-deficit-assessment",
+          "system": "urn:form-examples:attention-deficit-assessment",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:attention-deficit-assessment:flags",
+        "system": "urn:form-examples:attention-deficit-assessment:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

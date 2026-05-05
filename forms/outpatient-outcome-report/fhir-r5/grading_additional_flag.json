@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:outpatient-outcome-report",
+          "system": "urn:form-examples:outpatient-outcome-report",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:outpatient-outcome-report:flags",
+        "system": "urn:form-examples:outpatient-outcome-report:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

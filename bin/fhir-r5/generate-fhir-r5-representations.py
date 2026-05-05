@@ -546,7 +546,7 @@ def build_observation_resource(table_name, columns, form_slug):
             "code": {
                 "coding": [
                     {
-                        "system": f"urn:medical-forms:{form_slug}",
+                        "system": f"urn:form-examples:{form_slug}",
                         "code": col['name'],
                         "display": col_name_to_display(col['name'])
                     }
@@ -565,7 +565,7 @@ def build_observation_resource(table_name, columns, form_slug):
             component["valueCodeableConcept"] = {
                 "coding": [
                     {
-                        "system": f"urn:medical-forms:{form_slug}:{col['name']}",
+                        "system": f"urn:form-examples:{form_slug}:{col['name']}",
                         "code": value,
                         "display": col_name_to_display(str(value))
                     }
@@ -607,7 +607,7 @@ def build_observation_resource(table_name, columns, form_slug):
         "code": {
             "coding": [
                 {
-                    "system": f"urn:medical-forms:{form_slug}",
+                    "system": f"urn:form-examples:{form_slug}",
                     "code": table_name,
                     "display": section_name
                 }
@@ -689,7 +689,7 @@ def build_fired_rule_resource(table_name, columns, form_slug):
             {
                 "coding": [
                     {
-                        "system": f"urn:medical-forms:{form_slug}",
+                        "system": f"urn:form-examples:{form_slug}",
                         "code": "grading-fired-rule",
                         "display": "Grading Fired Rule"
                     }
@@ -699,7 +699,7 @@ def build_fired_rule_resource(table_name, columns, form_slug):
         "code": {
             "coding": [
                 {
-                    "system": f"urn:medical-forms:{form_slug}:rules",
+                    "system": f"urn:form-examples:{form_slug}:rules",
                     "code": "RULE-001",
                     "display": "Example grading rule"
                 }
@@ -754,7 +754,7 @@ def build_additional_flag_resource(table_name, columns, form_slug):
             {
                 "coding": [
                     {
-                        "system": f"urn:medical-forms:{form_slug}",
+                        "system": f"urn:form-examples:{form_slug}",
                         "code": "grading-additional-flag",
                         "display": "Additional Safety Flag"
                     }
@@ -764,7 +764,7 @@ def build_additional_flag_resource(table_name, columns, form_slug):
         "code": {
             "coding": [
                 {
-                    "system": f"urn:medical-forms:{form_slug}:flags",
+                    "system": f"urn:form-examples:{form_slug}:flags",
                     "code": "FLAG-001",
                     "display": "Safety flag"
                 }

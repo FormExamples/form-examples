@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:vaccinations-assessment",
+        "system": "urn:form-examples:vaccinations-assessment",
         "code": "contraindications_allergies",
         "display": "Contraindications Allergies"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "egg_allergy",
             "display": "Egg Allergy"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:egg_allergy",
+            "system": "urn:form-examples:vaccinations-assessment:egg_allergy",
             "code": "yes",
             "display": "Yes"
           }
@@ -72,7 +72,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "gelatin_allergy",
             "display": "Gelatin Allergy"
           }
@@ -81,7 +81,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:gelatin_allergy",
+            "system": "urn:form-examples:vaccinations-assessment:gelatin_allergy",
             "code": "yes",
             "display": "Yes"
           }
@@ -92,7 +92,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "latex_allergy",
             "display": "Latex Allergy"
           }
@@ -101,7 +101,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:latex_allergy",
+            "system": "urn:form-examples:vaccinations-assessment:latex_allergy",
             "code": "yes",
             "display": "Yes"
           }
@@ -112,7 +112,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "neomycin_allergy",
             "display": "Neomycin Allergy"
           }
@@ -121,7 +121,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:neomycin_allergy",
+            "system": "urn:form-examples:vaccinations-assessment:neomycin_allergy",
             "code": "yes",
             "display": "Yes"
           }
@@ -132,7 +132,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "pregnant",
             "display": "Pregnant"
           }
@@ -141,7 +141,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:pregnant",
+            "system": "urn:form-examples:vaccinations-assessment:pregnant",
             "code": "yes",
             "display": "Yes"
           }
@@ -152,7 +152,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "pregnancy_weeks",
             "display": "Pregnancy Weeks"
           }
@@ -164,7 +164,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "severe_illness",
             "display": "Severe Illness"
           }
@@ -173,7 +173,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:severe_illness",
+            "system": "urn:form-examples:vaccinations-assessment:severe_illness",
             "code": "yes",
             "display": "Yes"
           }
@@ -184,7 +184,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "previous_anaphylaxis",
             "display": "Previous Anaphylaxis"
           }
@@ -193,7 +193,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment:previous_anaphylaxis",
+            "system": "urn:form-examples:vaccinations-assessment:previous_anaphylaxis",
             "code": "yes",
             "display": "Yes"
           }
@@ -204,7 +204,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:vaccinations-assessment",
+            "system": "urn:form-examples:vaccinations-assessment",
             "code": "anaphylaxis_details",
             "display": "Anaphylaxis Details"
           }

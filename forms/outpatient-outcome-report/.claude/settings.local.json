@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//Users/jph/git/joelparkerhenderson/medical-forms/docs/**)",
-      "Read(//Users/jph/git/joelparkerhenderson/medical-forms/docs/superpowers/**)",
+      "Read(//Users/jph/git/formexamples/form-examples/docs/**)",
+      "Read(//Users/jph/git/formexamples/form-examples/docs/superpowers/**)",
       "Bash(python3 bin/generate-sql-combined.py outpatient-outcome-report)",
       "Bash(python3 bin/generate-sql-flat.py outpatient-outcome-report)",
       "Bash(python3 bin/generate-xml-representations.py outpatient-outcome-report)",
@@ -29,12 +29,12 @@
       "Bash(ls etc/skel/cargo-loco-generate)",
       "Bash(ls forms/pre-operative-assessment-by-clinician/cargo-loco-generate.sh)",
       "Bash(find forms *)",
-      "Bash(rm -rf /Users/jph/git/joelparkerhenderson/medical-forms/etc/skel/cargo-loco-generate)",
-      "Bash(rm -f /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-clinician/cargo-loco-generate.sh)",
+      "Bash(rm -rf /Users/jph/git/formexamples/form-examples/etc/skel/cargo-loco-generate)",
+      "Bash(rm -f /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-clinician/cargo-loco-generate.sh)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(python3 /tmp/replace_nyi_stubs.py)",
-      "Bash(python3 /Users/jph/git/joelparkerhenderson/medical-forms/bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py)",
+      "Bash(python3 /Users/jph/git/formexamples/form-examples/bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py)",
       "Bash(kill 10938)",
       "Bash(awk '{print $2}')",
       "Bash(xargs kill *)",

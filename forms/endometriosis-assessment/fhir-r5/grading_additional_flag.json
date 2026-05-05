@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:endometriosis-assessment",
+          "system": "urn:form-examples:endometriosis-assessment",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:endometriosis-assessment:flags",
+        "system": "urn:form-examples:endometriosis-assessment:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:who-emergency-unit-trauma-form",
+          "system": "urn:form-examples:who-emergency-unit-trauma-form",
           "code": "grading-additional-flag",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:who-emergency-unit-trauma-form:flags",
+        "system": "urn:form-examples:who-emergency-unit-trauma-form:flags",
         "code": "FLAG-001",
         "display": "Safety flag"
       }

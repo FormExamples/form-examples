@@ -26,16 +26,16 @@ which greps for the literal string `"Not yet implemented."`.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient
 ```
 
 Expected output (exactly four `Error: not yet implemented` lines):
 ```
-Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-html/AGENTS.md
-Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-html/plan.md
-Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/front-end-form-with-svelte/plan.md
-Error: not yet implemented: /Users/jph/git/joelparkerhenderson/medical-forms/forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md
+Error: not yet implemented: /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-patient/front-end-form-with-html/AGENTS.md
+Error: not yet implemented: /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-patient/front-end-form-with-html/plan.md
+Error: not yet implemented: /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-patient/front-end-form-with-svelte/plan.md
+Error: not yet implemented: /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md
 ```
 
 If any other error appears, stop and investigate before proceeding — the
@@ -103,7 +103,7 @@ all in place.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "front-end-form-with-svelte/plan.md" || echo "CLEAN"
 ```
 
@@ -112,7 +112,7 @@ Expected: prints `CLEAN` (this file no longer appears in the error list).
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add forms/pre-operative-assessment-by-patient/front-end-form-with-svelte/plan.md
 git commit -m "$(cat <<'EOF'
 Document implemented SvelteKit patient form
@@ -184,7 +184,7 @@ grading engine, no build step required.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "front-end-form-with-html/plan.md" || echo "CLEAN"
 ```
 
@@ -193,7 +193,7 @@ Expected: prints `CLEAN`.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add forms/pre-operative-assessment-by-patient/front-end-form-with-html/plan.md
 git commit -m "$(cat <<'EOF'
 Document implemented HTML patient form
@@ -288,7 +288,7 @@ bin/test-form pre-operative-assessment-by-patient
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "front-end-form-with-html/AGENTS.md" || echo "CLEAN"
 ```
 
@@ -297,7 +297,7 @@ Expected: prints `CLEAN`.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add forms/pre-operative-assessment-by-patient/front-end-form-with-html/AGENTS.md
 git commit -m "$(cat <<'EOF'
 Document implemented HTML patient form agent instructions
@@ -378,7 +378,7 @@ templates, and a Rust port of the ASA grading engine in place.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient 2>&1 | grep "full-stack-with-loco-tera-htmx-alpine/plan.md" || echo "CLEAN"
 ```
 
@@ -387,7 +387,7 @@ Expected: prints `CLEAN`.
 - [ ] **Step 3: Commit**
 
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git add forms/pre-operative-assessment-by-patient/full-stack-with-loco-tera-htmx-alpine/plan.md
 git commit -m "$(cat <<'EOF'
 Document implemented Rust full-stack backend
@@ -411,7 +411,7 @@ EOF
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test-form pre-operative-assessment-by-patient
 echo "exit=$?"
 ```
@@ -427,7 +427,7 @@ only that file — do not expand scope to unrelated issues.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 bin/test 2>&1 | grep -c "pre-operative-assessment-by-patient" || true
 ```
 
@@ -438,7 +438,7 @@ produce errors from their own stubs — those are out of scope.
 
 Run:
 ```sh
-cd /Users/jph/git/joelparkerhenderson/medical-forms
+cd /Users/jph/git/formexamples/form-examples
 git status
 git log --oneline -6
 ```

@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:patient-intake",
+          "system": "urn:form-examples:patient-intake",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:patient-intake:rules",
+        "system": "urn:form-examples:patient-intake:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

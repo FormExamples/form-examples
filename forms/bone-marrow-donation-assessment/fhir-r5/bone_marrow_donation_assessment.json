@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:bone-marrow-donation-assessment",
+        "system": "urn:form-examples:bone-marrow-donation-assessment",
         "code": "bone_marrow_donation_assessment",
         "display": "Bone Marrow Donation Assessment"
       }
@@ -40,7 +40,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:bone-marrow-donation-assessment",
+            "system": "urn:form-examples:bone-marrow-donation-assessment",
             "code": "deleted_at",
             "display": "Deleted At"
           }
@@ -52,7 +52,7 @@
       "code": {
         "coding": [
           {
-            "system": "urn:medical-forms:bone-marrow-donation-assessment",
+            "system": "urn:form-examples:bone-marrow-donation-assessment",
             "code": "status",
             "display": "Status"
           }
@@ -61,7 +61,7 @@
       "valueCodeableConcept": {
         "coding": [
           {
-            "system": "urn:medical-forms:bone-marrow-donation-assessment:status",
+            "system": "urn:form-examples:bone-marrow-donation-assessment:status",
             "code": "draft",
             "display": "Draft"
           }

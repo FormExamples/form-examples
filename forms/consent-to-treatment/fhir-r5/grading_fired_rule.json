@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:consent-to-treatment",
+          "system": "urn:form-examples:consent-to-treatment",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:consent-to-treatment:rules",
+        "system": "urn:form-examples:consent-to-treatment:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }

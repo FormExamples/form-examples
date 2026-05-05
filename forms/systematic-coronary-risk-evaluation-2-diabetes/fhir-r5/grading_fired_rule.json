@@ -12,7 +12,7 @@
     {
       "coding": [
         {
-          "system": "urn:medical-forms:systematic-coronary-risk-evaluation-2-diabetes",
+          "system": "urn:form-examples:systematic-coronary-risk-evaluation-2-diabetes",
           "code": "grading-fired-rule",
           "display": "General"
         }
@@ -22,7 +22,7 @@
   "code": {
     "coding": [
       {
-        "system": "urn:medical-forms:systematic-coronary-risk-evaluation-2-diabetes:rules",
+        "system": "urn:form-examples:systematic-coronary-risk-evaluation-2-diabetes:rules",
         "code": "RULE-001",
         "display": "Example grading rule"
       }
