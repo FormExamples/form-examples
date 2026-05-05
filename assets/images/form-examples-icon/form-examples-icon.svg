@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.25"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect x="16" y="16" width="480" height="480" rx="96" ry="96" fill="url(#bgGradient)"/>
+
+  <!-- Decorative back card (offset paper) -->
+  <rect x="120" y="100" width="260" height="320" rx="20" ry="20" fill="#93C5FD" opacity="0.55" transform="rotate(-6 250 260)"/>
+
+  <!-- Main form card -->
+  <g filter="url(#shadow)">
+    <rect x="116" y="108" width="280" height="340" rx="24" ry="24" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Form title bar -->
+  <rect x="148" y="148" width="140" height="18" rx="9" ry="9" fill="#1E3A8A"/>
+  <rect x="148" y="178" width="90" height="10" rx="5" ry="5" fill="#9CA3AF"/>
+
+  <!-- Input field 1 -->
+  <rect x="148" y="212" width="216" height="40" rx="10" ry="10" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2"/>
+  <rect x="160" y="227" width="100" height="10" rx="5" ry="5" fill="#D1D5DB"/>
+
+  <!-- Input field 2 -->
+  <rect x="148" y="264" width="216" height="40" rx="10" ry="10" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2"/>
+  <rect x="160" y="279" width="140" height="10" rx="5" ry="5" fill="#D1D5DB"/>
+
+  <!-- Checkbox row -->
+  <rect x="148" y="320" width="22" height="22" rx="6" ry="6" fill="url(#accentGradient)"/>
+  <path d="M 153 331 L 159 337 L 167 327" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="180" y="326" width="120" height="10" rx="5" ry="5" fill="#6B7280"/>
+
+  <!-- Submit button -->
+  <rect x="148" y="364" width="100" height="40" rx="20" ry="20" fill="url(#accentGradient)"/>
+  <rect x="170" y="379" width="56" height="10" rx="5" ry="5" fill="#FFFFFF"/>
+
+  <!-- Floating pencil/edit accent -->
+  <g transform="translate(360 340) rotate(35)">
+    <rect x="-8" y="-44" width="16" height="60" rx="3" ry="3" fill="#FBBF24"/>
+    <rect x="-8" y="-44" width="16" height="14" fill="#D97706"/>
+    <polygon points="-8,16 8,16 0,32" fill="#1E3A8A"/>
+    <polygon points="-3,24 3,24 0,32" fill="#FCD34D"/>
+  </g>
+
+  <!-- Sparkle accents -->
+  <g fill="#FCD34D">
+    <path d="M 90 90 L 96 102 L 108 108 L 96 114 L 90 126 L 84 114 L 72 108 L 84 102 Z"/>
+    <path d="M 420 380 L 424 388 L 432 392 L 424 396 L 420 404 L 416 396 L 408 392 L 416 388 Z"/>
+  </g>
+</svg>

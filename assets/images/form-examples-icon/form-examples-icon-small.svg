@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <!-- Vibrant blue rounded background -->
+  <rect x="0" y="0" width="24" height="24" rx="5" ry="5" fill="#1E40AF"/>
+
+  <!-- White form card -->
+  <rect x="5" y="4" width="14" height="16" rx="2" ry="2" fill="#FFFFFF"/>
+
+  <!-- Form lines -->
+  <rect x="7.5" y="7" width="9" height="1.5" rx="0.75" fill="#9CA3AF"/>
+  <rect x="7.5" y="11" width="9" height="1.5" rx="0.75" fill="#9CA3AF"/>
+
+  <!-- Gold checkmark accent -->
+  <path d="M 7.5 16 L 9.5 18 L 13 14.5" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
