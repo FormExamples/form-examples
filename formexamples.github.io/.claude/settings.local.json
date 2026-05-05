@@ -5,7 +5,15 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "Bash(npm install *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(echo \"EXIT_CODE: $?\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npx tsx *)",
+      "Bash(python3 -c \"import yaml; yaml.safe_load\\(open\\('.github/workflows/deploy-formexamples.yml'\\)\\)\")",
+      "Bash(npm ci *)",
+      "Read(//Users/jph/.claude/plugins/cache/playwright-skill/playwright-skill/4.0.2/skills/playwright-skill/**)",
+      "Bash(node -e \"require\\('./lib/helpers'\\).detectDevServers\\(\\).then\\(s => console.log\\(JSON.stringify\\(s\\)\\)\\)\")",
+      "Bash(node run.js /tmp/playwright-formexamples-smoke.js)"
     ]
   }
 }
