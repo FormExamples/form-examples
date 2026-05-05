@@ -1,2 +1,824 @@
-// Plain JavaScript entrypoint. Implementation pending.
-console.log('Form scaffold loaded.');
+// Medical Language Speaking Assessment for Cymraeg — examiner wizard
+// (vanilla JavaScript, no build).
+//
+// Single-page continuous wizard: every section is rendered into the page in
+// document order. The examiner scrolls through them; a sticky top-of-page
+// progress summary reflects how many fields have been answered. Submission
+// runs the pure scoring engine and renders an inline report with grade
+// badge, scaled-score breakdown, per-criterion table, and flagged-issues
+// list. State is persisted to localStorage so a partial fill survives a
+// page reload.
+//
+// Sibling files loaded as plain `<script>` tags (in order) attach their
+// exports to `window.MedicalLanguageSpeakingAssessmentForCymraeg`. Pulling
+// them off here keeps the rest of this file referring to short local
+// names. The whole file is wrapped in an IIFE so its top-level identifiers
+// don't leak to the global scope.
+(function () {
+'use strict';
+
+const NS = window.MedicalLanguageSpeakingAssessmentForCymraeg;
+const {
+  emptyAssessment,
+  gradeLabel,
+  gradeClass,
+  CRITERIA,
+  criterionRegistry,
+  linguisticCriteria,
+  clinicalCriteria,
+  gradeOET,
+  detectAdditionalFlags
+} = NS;
+
+const TOTAL_STEPS = 5;
+
+// ----------------------------------------------------------------------
+// Persistence
+// ----------------------------------------------------------------------
+
+const STORAGE_KEY =
+  'medical-language-speaking-assessment-for-cymraeg.front-end-form-with-html.v1';
+
+/** @returns {import('./types.js').AssessmentData} */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return emptyAssessment();
+    const parsed = JSON.parse(raw);
+    // Merge over a fresh empty so any newly-added fields default correctly.
+    const fresh = emptyAssessment();
+    for (const key of Object.keys(fresh)) {
+      if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
+        fresh[key] = { ...fresh[key], ...parsed[key] };
+      }
+    }
+    return fresh;
+  } catch (e) {
+    console.warn('Could not parse saved assessment; starting fresh.', e);
+    return emptyAssessment();
+  }
+}
+
+/** @param {import('./types.js').AssessmentData} state */
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save assessment to localStorage.', e);
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear stored assessment.', e);
+  }
+}
+
+// ----------------------------------------------------------------------
+// State
+// ----------------------------------------------------------------------
+
+/** @type {import('./types.js').AssessmentData} */
+let state = loadState();
+
+/** @type {import('./types.js').AssessmentReport | null} */
+let lastResult = null;
+
+// ----------------------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------------------
+
+/**
+ * Set a deeply-nested field on the state and persist.
+ * @param {string} section
+ * @param {string} field
+ * @param {*} value
+ */
+function setField(section, field, value) {
+  state[section][field] = value;
+  saveState(state);
+  updateProgress();
+}
+
+/** Escape user-entered text for safe rendering. */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ----------------------------------------------------------------------
+// Component builders
+// ----------------------------------------------------------------------
+
+/**
+ * Build a labelled text input.
+ * @param {{ label: string, section: string, field: string, type?: string,
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number }} opts
+ */
+function textInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field];
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const type = opts.type || 'text';
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="text-input"`,
+    `value="${esc(value ?? '')}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+  `;
+
+  const input = wrapper.querySelector('input');
+  input.addEventListener('input', () => {
+    let v = input.value;
+    if (type === 'number') {
+      v = v === '' ? null : Number(v);
+    }
+    setField(opts.section, opts.field, v);
+  });
+  return wrapper;
+}
+
+/**
+ * Build a labelled multi-line text area.
+ * @param {{ label: string, section: string, field: string, rows?: number,
+ *           placeholder?: string, hint?: string }} opts
+ */
+function textArea(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const value = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    ${opts.hint ? `<p class="hint">${esc(opts.hint)}</p>` : ''}
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      class="textarea">${esc(value)}</textarea>
+  `;
+  const ta = wrapper.querySelector('textarea');
+  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  return wrapper;
+}
+
+/**
+ * Build a select / dropdown input.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function selectInput(opts) {
+  const id = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field] ?? '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
+
+  const optionsHtml = [
+    `<option value="">— Select —</option>`,
+    ...opts.options.map((o) =>
+      `<option value="${esc(o.value)}"${o.value === current ? ' selected' : ''}>${esc(o.label)}</option>`
+    )
+  ].join('');
+
+  wrapper.innerHTML = `
+    <label for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select-input">
+      ${optionsHtml}
+    </select>
+  `;
+  const sel = wrapper.querySelector('select');
+  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  return wrapper;
+}
+
+/**
+ * Build a radio group.
+ * @param {{ label: string, section: string, field: string,
+ *           options: { value: string, label: string }[] }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field radio-group';
+
+  const legend = document.createElement('legend');
+  legend.textContent = opts.label;
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-options';
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.className = 'radio-option';
+    label.htmlFor = radioId;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, option.value);
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+/**
+ * Compact 0..N rating-chip group used for criterion ratings.
+ *
+ * @param {{ section: string, field: string,
+ *           anchors: { value: number, label: string, description: string }[],
+ *           groupName: string, ariaLabel: string }} opts
+ */
+function ratingChips(opts) {
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('div');
+  wrapper.className = 'rating-chips';
+  wrapper.setAttribute('role', 'radiogroup');
+  wrapper.setAttribute('aria-label', opts.ariaLabel);
+
+  for (const a of opts.anchors) {
+    const radioId = `${opts.groupName}-${a.value}`;
+    const isChecked = current === a.value;
+    const label = document.createElement('label');
+    label.className = 'rating-chip';
+    label.htmlFor = radioId;
+    label.title = `${a.label} — ${a.description}`;
+    label.innerHTML = `
+      <input type="radio" id="${radioId}" name="${opts.groupName}" value="${a.value}"${isChecked ? ' checked' : ''}>
+      <span class="chip-value">${a.value}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) setField(opts.section, opts.field, a.value);
+    });
+    wrapper.appendChild(label);
+  }
+  return wrapper;
+}
+
+/**
+ * Build a section card.
+ * @param {{ stepNumber: number, title: string, description?: string }} opts
+ */
+function sectionCard(opts) {
+  const card = document.createElement('section');
+  card.className = 'section-card';
+  card.dataset.step = String(opts.stepNumber);
+  card.id = `step-${opts.stepNumber}`;
+  const desc = opts.description
+    ? `<p class="section-description">${esc(opts.description)}</p>`
+    : '';
+  card.innerHTML = `
+    <header class="section-header">
+      <span class="section-step">Step ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+      <h2 class="section-title">${esc(opts.title)}</h2>
+      ${desc}
+    </header>
+  `;
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Step renderers
+// ----------------------------------------------------------------------
+
+function renderStep1() {
+  const card = sectionCard({
+    stepNumber: 1,
+    title: 'Candidate Details',
+    description: 'Identifying details for the candidate, examiner, and test occasion.'
+  });
+
+  const ids = document.createElement('div');
+  ids.className = 'two-col';
+  ids.appendChild(textInput({
+    label: 'Candidate ID', section: 'candidate', field: 'candidateId',
+    placeholder: 'e.g. CYM-2026-00123', required: true
+  }));
+  ids.appendChild(textInput({
+    label: 'Candidate name', section: 'candidate', field: 'candidateName', required: true
+  }));
+  card.appendChild(ids);
+
+  const examiner = document.createElement('div');
+  examiner.className = 'two-col';
+  examiner.appendChild(textInput({
+    label: 'Examiner name', section: 'candidate', field: 'examinerName', required: true
+  }));
+  examiner.appendChild(textInput({
+    label: 'Test centre', section: 'candidate', field: 'testCentre',
+    placeholder: 'e.g. Caerdydd / Bangor / Aberystwyth'
+  }));
+  card.appendChild(examiner);
+
+  card.appendChild(textInput({
+    label: 'Test date', section: 'candidate', field: 'testDate',
+    type: 'date', required: true
+  }));
+
+  const profile = document.createElement('div');
+  profile.className = 'two-col';
+  profile.appendChild(textInput({
+    label: 'Candidate first language', section: 'candidate', field: 'firstLanguage',
+    placeholder: 'e.g. English, Cymraeg, Polish'
+  }));
+  profile.appendChild(textInput({
+    label: 'Country where the candidate trained', section: 'candidate',
+    field: 'countryOfTraining',
+    placeholder: 'e.g. Wales, England, Ireland'
+  }));
+  card.appendChild(profile);
+
+  card.appendChild(selectInput({
+    label: 'Years of clinical experience',
+    section: 'candidate', field: 'yearsOfExperience',
+    options: [
+      { value: '0-2',  label: '0 - 2 years' },
+      { value: '3-5',  label: '3 - 5 years' },
+      { value: '6-10', label: '6 - 10 years' },
+      { value: '11+',  label: '11 or more years' }
+    ]
+  }));
+
+  return card;
+}
+
+function renderRolePlayContext(stepNumber, sectionKey, title, description, defaultExample) {
+  const card = sectionCard({
+    stepNumber,
+    title,
+    description
+  });
+
+  card.appendChild(textInput({
+    label: 'Scenario title', section: sectionKey, field: 'scenarioTitle',
+    placeholder: defaultExample.title, required: true
+  }));
+
+  card.appendChild(textArea({
+    label: 'Scenario summary', section: sectionKey, field: 'scenarioSummary',
+    placeholder: defaultExample.summary,
+    rows: 3
+  }));
+
+  const setting = document.createElement('div');
+  setting.className = 'two-col';
+  setting.appendChild(textInput({
+    label: 'Patient (interlocutor) role', section: sectionKey, field: 'patientRole',
+    placeholder: defaultExample.patientRole
+  }));
+  setting.appendChild(textInput({
+    label: 'Clinical setting', section: sectionKey, field: 'setting',
+    placeholder: defaultExample.setting
+  }));
+  card.appendChild(setting);
+
+  card.appendChild(radioGroup({
+    label: 'Safety-criticality of the scenario',
+    section: sectionKey, field: 'safetyCriticality',
+    options: [
+      { value: 'low',      label: 'Low — routine, non-urgent' },
+      { value: 'standard', label: 'Standard — typical clinical encounter' },
+      { value: 'high',     label: 'High — urgent, high-stakes, or breaking bad news' }
+    ]
+  }));
+
+  card.appendChild(textArea({
+    label: 'Examiner notes for this role-play',
+    section: sectionKey, field: 'examinerNotes',
+    placeholder: 'Observations during the Welsh-language role-play (rapport, structure, language lapses, mutations / treigladau, dialect register, recovery from breakdowns…)',
+    rows: 4
+  }));
+
+  return card;
+}
+
+function renderStep2() {
+  return renderRolePlayContext(
+    2,
+    'rolePlay1',
+    'Role-play 1 — Sgwrs gyda Chlaf (Patient Conversation)',
+    'A Welsh-language patient-interview scenario: history-taking, eliciting concerns, building rapport in Cymraeg.',
+    {
+      title: 'e.g. Poen yn y frest mewn dyn 62 oed (suspected angina)',
+      summary: 'Mae claf yn cyflwyno â phoen canolog yn y frest wrth ymarfer; cymerwch hanes ac archwiliwch bryderon yn Gymraeg.',
+      patientRole: 'e.g. Claf â phoen yn y frest',
+      setting: 'e.g. Meddygfa / GP clinic'
+    }
+  );
+}
+
+function renderStep3() {
+  return renderRolePlayContext(
+    3,
+    'rolePlay2',
+    'Role-play 2 — Esboniad Clinigol (Clinical Explanation)',
+    'A Welsh-language clinical-explanation scenario: explaining a diagnosis, treatment, or procedure to the patient or relative in Cymraeg.',
+    {
+      title: 'e.g. Esbonio diagnosis newydd o ddiabetes math 2',
+      summary: 'Mae\u2019r claf newydd gael diagnosis o ddiabetes math 2; esboniwch y cyflwr, newidiadau ffordd o fyw, a dilyniant yn Gymraeg.',
+      patientRole: 'e.g. Claf newydd-ddiagnosedig',
+      setting: 'e.g. Clinig cleifion allanol'
+    }
+  );
+}
+
+/**
+ * Render a single linguistic-criterion block with two role-play scales.
+ */
+function linguisticCriterionBlock(criterion) {
+  const block = document.createElement('div');
+  block.className = 'criterion-block';
+  block.innerHTML = `
+    <div class="criterion-header">
+      <span class="criterion-id">${esc(criterion.id)}</span>
+      <h3 class="criterion-title">${esc(criterion.label)}</h3>
+    </div>
+    <p class="criterion-description">${esc(criterion.description)}</p>
+  `;
+
+  // Role-play 1
+  const rp1Heading = document.createElement('p');
+  rp1Heading.className = 'rp-heading';
+  rp1Heading.textContent = 'Role-play 1 (Sgwrs gyda Chlaf)';
+  block.appendChild(rp1Heading);
+  block.appendChild(ratingChips({
+    section: 'linguisticRolePlay1',
+    field: criterion.dataField,
+    anchors: criterion.anchors,
+    groupName: `linguisticRolePlay1-${criterion.dataField}`,
+    ariaLabel: `${criterion.label} (role-play 1) — rate 0 to 6`
+  }));
+
+  // Role-play 2
+  const rp2Heading = document.createElement('p');
+  rp2Heading.className = 'rp-heading';
+  rp2Heading.textContent = 'Role-play 2 (Esboniad Clinigol)';
+  block.appendChild(rp2Heading);
+  block.appendChild(ratingChips({
+    section: 'linguisticRolePlay2',
+    field: criterion.dataField,
+    anchors: criterion.anchors,
+    groupName: `linguisticRolePlay2-${criterion.dataField}`,
+    ariaLabel: `${criterion.label} (role-play 2) — rate 0 to 6`
+  }));
+
+  return block;
+}
+
+function renderStep4() {
+  const card = sectionCard({
+    stepNumber: 4,
+    title: 'Linguistic Criteria Rating',
+    description: 'Rate each Welsh-language linguistic criterion on a 0-6 scale, separately for role-play 1 and role-play 2. Hover any chip for an anchor description.'
+  });
+
+  const intro = document.createElement('p');
+  intro.className = 'hint';
+  intro.textContent =
+    '0 = below the lowest descriptor; 6 = approaches a fluent Welsh speaker (CEFR C2). The mean of the two role-plays is used in the overall score.';
+  card.appendChild(intro);
+
+  for (const c of linguisticCriteria()) {
+    card.appendChild(linguisticCriterionBlock(c));
+  }
+
+  return card;
+}
+
+/**
+ * Render a single clinical-indicator block with one 0-3 scale.
+ */
+function clinicalIndicatorBlock(criterion) {
+  const block = document.createElement('div');
+  block.className = 'criterion-block';
+  block.innerHTML = `
+    <div class="criterion-header">
+      <span class="criterion-id">${esc(criterion.id)}</span>
+      <h3 class="criterion-title">${esc(criterion.label)}</h3>
+    </div>
+    <p class="criterion-description">${esc(criterion.description)}</p>
+  `;
+
+  block.appendChild(ratingChips({
+    section: 'clinicalIndicators',
+    field: criterion.dataField,
+    anchors: criterion.anchors,
+    groupName: `clinicalIndicators-${criterion.dataField}`,
+    ariaLabel: `${criterion.label} — rate 0 to 3`
+  }));
+
+  return block;
+}
+
+function renderStep5() {
+  const card = sectionCard({
+    stepNumber: 5,
+    title: 'Clinical Communication Indicators & Overall Grade',
+    description: 'Rate each clinical communication indicator on a 0-3 scale across the whole Welsh-language assessment. The overall grade is then computed automatically.'
+  });
+
+  const intro = document.createElement('p');
+  intro.className = 'hint';
+  intro.textContent =
+    '0 = not demonstrated; 1 = partial; 2 = satisfactory; 3 = high standard. Hover any chip for the anchor description.';
+  card.appendChild(intro);
+
+  for (const c of clinicalCriteria()) {
+    card.appendChild(clinicalIndicatorBlock(c));
+  }
+
+  card.appendChild(textArea({
+    label: 'Overall examiner notes',
+    section: 'clinicalIndicators', field: 'examinerNotes',
+    placeholder: 'Holistic comments on Welsh-language clinical communication, recurring themes, recommendations for development…',
+    rows: 4
+  }));
+
+  return card;
+}
+
+// ----------------------------------------------------------------------
+// Progress
+// ----------------------------------------------------------------------
+
+/**
+ * Build the list of tracked fields for progress accounting. Includes
+ * candidate identifiers, role-play context, every linguistic rating
+ * (4 criteria × 2 role-plays), and every clinical indicator (5).
+ */
+function buildTrackedFields() {
+  /** @type {[string, string][]} */
+  const fields = [
+    ['candidate', 'candidateId'],
+    ['candidate', 'candidateName'],
+    ['candidate', 'examinerName'],
+    ['candidate', 'testCentre'],
+    ['candidate', 'testDate'],
+    ['candidate', 'firstLanguage'],
+    ['candidate', 'countryOfTraining'],
+    ['candidate', 'yearsOfExperience'],
+    ['rolePlay1', 'scenarioTitle'],
+    ['rolePlay1', 'scenarioSummary'],
+    ['rolePlay1', 'patientRole'],
+    ['rolePlay1', 'setting'],
+    ['rolePlay1', 'safetyCriticality'],
+    ['rolePlay2', 'scenarioTitle'],
+    ['rolePlay2', 'scenarioSummary'],
+    ['rolePlay2', 'patientRole'],
+    ['rolePlay2', 'setting'],
+    ['rolePlay2', 'safetyCriticality']
+  ];
+  for (const c of CRITERIA) {
+    if (c.domain === 'linguistic') {
+      fields.push(['linguisticRolePlay1', c.dataField]);
+      fields.push(['linguisticRolePlay2', c.dataField]);
+    } else {
+      fields.push(['clinicalIndicators', c.dataField]);
+    }
+  }
+  return fields;
+}
+
+const TRACKED_FIELDS = buildTrackedFields();
+
+function isAnswered(v) {
+  return v !== null && v !== undefined && v !== '';
+}
+
+function updateProgress() {
+  let answered = 0;
+  for (const [section, field] of TRACKED_FIELDS) {
+    if (isAnswered(state[section]?.[field])) answered++;
+  }
+  const total = TRACKED_FIELDS.length;
+  const percent = Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress-bar-fill');
+  const text = document.getElementById('progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  const aria = document.getElementById('progress-bar');
+  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+}
+
+// ----------------------------------------------------------------------
+// Submit / Report
+// ----------------------------------------------------------------------
+
+function priorityClass(priority) {
+  switch (priority) {
+    case 'high':   return 'flag-high';
+    case 'medium': return 'flag-medium';
+    case 'low':    return 'flag-low';
+    default:       return '';
+  }
+}
+
+function fmtScore(v) {
+  if (v === null || v === undefined) return '—';
+  return String(v);
+}
+
+function renderReport() {
+  if (!lastResult) return;
+  const out = document.getElementById('report');
+  if (!out) return;
+
+  const { grading, additionalFlags, timestamp } = lastResult;
+  const {
+    linguisticTotal, clinicalTotal, rawTotal, scaledScore, grade,
+    perCriterionScores, firedRules
+  } = grading;
+
+  const flagsList = additionalFlags.length === 0
+    ? `<p class="muted">No additional flags raised.</p>`
+    : `
+      <ul class="flags">
+        ${additionalFlags.map((f) => `
+          <li class="${priorityClass(f.priority)}">
+            <span class="flag-priority">${esc(f.priority.toUpperCase())}</span>
+            <span class="flag-category">${esc(f.category)}</span>
+            <span class="flag-message">${esc(f.message)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  // Build the per-criterion rows: linguistic block first, then clinical.
+  const ling = perCriterionScores.filter((s) => s.domain === 'linguistic');
+  const clin = perCriterionScores.filter((s) => s.domain === 'clinical');
+
+  const lingRows = ling.map((s) => `
+    <tr>
+      <th scope="row">${esc(s.id)}</th>
+      <td>${esc(s.label)}</td>
+      <td class="num">${fmtScore(s.rolePlay1Score)} / 6</td>
+      <td class="num">${fmtScore(s.rolePlay2Score)} / 6</td>
+      <td class="num">${fmtScore(s.meanScore)} / 6</td>
+    </tr>
+  `).join('');
+
+  const clinRows = clin.map((s) => `
+    <tr>
+      <th scope="row">${esc(s.id)}</th>
+      <td>${esc(s.label)}</td>
+      <td class="num" colspan="2">—</td>
+      <td class="num">${fmtScore(s.meanScore)} / 3</td>
+    </tr>
+  `).join('');
+
+  const tableHtml = `
+    <table class="subscales">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Criterion</th>
+          <th scope="col">Role-play 1</th>
+          <th scope="col">Role-play 2</th>
+          <th scope="col">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="criterion-domain-divider">
+          <th colspan="5" scope="colgroup">Linguistic criteria (each 0-6)</th>
+        </tr>
+        ${lingRows}
+        <tr class="criterion-domain-divider">
+          <th colspan="5" scope="colgroup">Clinical communication indicators (each 0-3)</th>
+        </tr>
+        ${clinRows}
+      </tbody>
+    </table>
+  `;
+
+  const candidateName = (state.candidate?.candidateName || '').trim();
+  const candidateId = (state.candidate?.candidateId || '').trim();
+  const candidateLine = candidateName || candidateId
+    ? `<p class="muted">Candidate: ${esc(candidateName || '(unnamed)')}${candidateId ? ` — ${esc(candidateId)}` : ''}</p>`
+    : '';
+
+  out.innerHTML = `
+    <div class="report-card">
+      <header class="report-header">
+        <h2>Cymraeg Clinical Speaking — Examiner Report</h2>
+        ${candidateLine}
+        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+      </header>
+
+      <h3>Overall result</h3>
+      <p class="score-summary">
+        <span class="scaled-score-badge ${gradeClass(grade)}">${scaledScore} / 500</span>
+        <span class="grade-label">Grade ${esc(grade)}</span>
+      </p>
+      <p class="muted">${esc(gradeLabel(grade))}</p>
+
+      <dl class="score-breakdown">
+        <div class="breakdown-item">
+          <dt>Linguistic total</dt>
+          <dd>${linguisticTotal} / 24</dd>
+        </div>
+        <div class="breakdown-item">
+          <dt>Clinical total</dt>
+          <dd>${clinicalTotal} / 15</dd>
+        </div>
+        <div class="breakdown-item">
+          <dt>Raw total</dt>
+          <dd>${rawTotal} / 39</dd>
+        </div>
+        <div class="breakdown-item">
+          <dt>Scaled</dt>
+          <dd>${scaledScore} / 500</dd>
+        </div>
+      </dl>
+
+      <h3>Per-criterion scores</h3>
+      ${tableHtml}
+
+      <h3>Flagged Issues</h3>
+      ${flagsList}
+
+      <div class="report-actions">
+        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+      </div>
+    </div>
+  `;
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('start-over-btn').addEventListener('click', startOver);
+}
+
+function submitForm() {
+  const grading = gradeOET(state);
+  const additionalFlags = detectAdditionalFlags(state, grading);
+  lastResult = {
+    grading,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
+  renderReport();
+}
+
+function startOver() {
+  if (!confirm('Clear all answers and start a fresh assessment?')) return;
+  clearState();
+  state = emptyAssessment();
+  lastResult = null;
+  document.getElementById('report').innerHTML = '';
+  renderForm();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----------------------------------------------------------------------
+// Bootstrap
+// ----------------------------------------------------------------------
+
+function renderForm() {
+  const host = document.getElementById('form-sections');
+  host.innerHTML = '';
+  host.appendChild(renderStep1());
+  host.appendChild(renderStep2());
+  host.appendChild(renderStep3());
+  host.appendChild(renderStep4());
+  host.appendChild(renderStep5());
+}
+
+function init() {
+  renderForm();
+  updateProgress();
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+  document.getElementById('reset-btn').addEventListener('click', startOver);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+})();

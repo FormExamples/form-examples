@@ -3,17 +3,167 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Medical Language Speaking Assessment For Cymraeg — clinician dashboard</title>
+  <title>Medical Language Speaking Assessment For Cymraeg — admin dashboard</title>
+  <meta name="description" content="Welsh-language clinical speaking assessment training and exam admin dashboard: review candidate sittings with grade (A-E), scaled score (0-500), profession, examiner, and registration outcome. Aligned to NHS Wales Welsh Language Standards and the Iaith Gwaith framework.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#candidates-table">Skip to candidates table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Medical Language Speaking Assessment For Cymraeg — Admin Dashboard</h1>
+      <p class="subtitle">
+        Welsh-language clinical speaking sub-test (Medicine) candidate list
+        with grade, scaled score, profession, examiner, and registration
+        outcome. Aligned to NHS Wales Welsh Language Standards (Iaith Gwaith).
+      </p>
+    </div>
+  </header>
+
   <main>
-    <h1>Medical Language Speaking Assessment For Cymraeg</h1>
-    <p>This is the <strong>clinician dashboard</strong> for the Medical Language Speaking Assessment For Cymraeg form (plain HTML + CSS + vanilla JS implementation).</p>
-    <p>Scoring system, steps, and conventions: see the parent
-      <a href="../index.md">form specification</a>.</p>
-    <p>Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code>.</p>
+    <!-- Status banner: shown when backend fetch fails and we fall back -->
+    <div
+      id="status-banner"
+      class="status-banner"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- Filter bar -->
+    <section
+      class="filter-bar"
+      aria-labelledby="filter-bar-heading"
+    >
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Candidate ID or candidate name..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-grade">Grade</label>
+          <select id="filter-grade" class="select-input">
+            <option value="">All grades</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C+">C+</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-profession">Profession</label>
+          <select id="filter-profession" class="select-input">
+            <option value="">All professions</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Pharmacist">Pharmacist</option>
+            <option value="Dentist">Dentist</option>
+            <option value="Physiotherapist">Physiotherapist</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-examiner">Examiner</label>
+          <select id="filter-examiner" class="select-input">
+            <option value="">All examiners</option>
+            <!-- Options populated by app.js from candidate data -->
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-registration">Registration Outcome</label>
+          <select id="filter-registration" class="select-input">
+            <option value="">All outcomes</option>
+            <option value="Eligible">Eligible</option>
+            <option value="Not Eligible">Not Eligible</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading candidates...</span>
+      </div>
+    </section>
+
+    <!-- Candidates table -->
+    <section
+      class="table-card"
+      aria-labelledby="candidates-table-heading"
+    >
+      <h2 id="candidates-table-heading" class="visually-hidden">Candidates</h2>
+
+      <div class="table-scroll">
+        <table id="candidates-table" class="candidates-table">
+          <thead>
+            <tr id="candidates-table-head">
+              <!-- Sortable column headers built by app.js -->
+            </tr>
+          </thead>
+          <tbody id="candidates-table-body">
+            <!-- Data rows built by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p
+        id="candidates-empty-message"
+        class="empty-message"
+        hidden
+      >
+        No candidates match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        The Medical Language Speaking Assessment For Cymraeg is a Welsh-language
+        clinical communication assessment for healthcare professionals working
+        with Welsh-speaking patients in NHS Wales settings (Bangor,
+        Aberystwyth, Caernarfon, Carmarthen and beyond). It is aligned to the
+        NHS Wales Welsh Language Standards and the Iaith Gwaith framework.
+        Most NHS Wales Welsh-essential posts require Grade B (350+). This
+        dashboard is a training and exam admin tool and is not a regulatory
+        determination.
+      </p>
+    </footer>
   </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MedicalLanguageSpeakingAssessmentForCymraegDashboard`.
+
+    Load order: types -> data -> api -> app (each depends on those above).
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
