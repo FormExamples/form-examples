@@ -1,0 +1,95 @@
+#!/bin/sh
+set -euf
+top="$(git rev-parse --show-toplevel)"
+
+"$top/bin/forms-as-kebab-case" |
+while read -r kebab; do
+    echo "normalize $kebab"
+    snake=$(echo "$kebab" | snake-case)
+    cd "$top/forms/$kebab/sql-migrations"
+    pwd
+
+    # find . -name "*_create_table_assessment_*" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_create_table_assessment_/_create_table_${snake}_/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_create_table_grade_*" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_create_table_grade_/_create_table_${snake}_grade_/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_create_table_grade.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_create_table_grade/_create_table_${snake}_grade/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "10_create_table_patient.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/10_create_table_patient.sql/02_create_table_patient.sql/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "11_create_table_clinician.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/11_create_table_clinician.sql/03_create_table_clinician.sql/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grading_additional_flag.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grading_additional_flag/_grade_flag/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grade_additional_flag.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grade_additional_flag/_grade_flag/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grading_fired_rule.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grading_fired_rule/_grade_rule/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grade_fired_rule.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grade_fired_rule/_grade_rule/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grading_result.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grading_result/_grade/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    # find . -name "*_grade_result.sql" |
+    # while read -r src; do
+    #     dst=$(echo "$src" | sed "s/_grade_result/_grade/")
+    #     echo "mv $src $dst"
+    #     mv "$src" "$dst"
+    # done
+
+    echo "rename-files-prepend-number-autoincrement"
+    find . -name "*.sql" | sort |
+    ~/git/sixarm/rename-files-prepend-number-autoincrement/rename-files-prepend-number-autoincrement "%2.2d_"
+
+done
+
+cd "$top"

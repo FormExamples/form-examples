@@ -14,7 +14,7 @@ CREATE TABLE casualty_card (
 );
 
 -- Index for the most common query: all casualty cards for a patient
-CREATE INDEX idx_casualty_card_patient_id ON casualty_card(patient_id);
+CREATE INDEX index_casualty_card_patient_id ON casualty_card(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_updated_at

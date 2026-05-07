@@ -7,7 +7,7 @@ CREATE TABLE bone_marrow_donation_assessment (
         REFERENCES patient(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
-        CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
+        CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at

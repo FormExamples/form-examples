@@ -1,0 +1,48 @@
+CREATE TABLE grading_additional_flag (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    -- Many-to-one: one grading result can have many flags
+    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    -- Flag identification (matches the application-side flag id)
+    flag_id             TEXT NOT NULL,
+    -- Flag details
+    category            TEXT NOT NULL,
+    message             TEXT NOT NULL,
+    priority            TEXT NOT NULL CHECK (priority IN ('high', 'medium', 'low'))
+);
+
+-- Index for fetching all flags for a grading result
+CREATE INDEX index_grading_additional_flag_grade_id
+    ON grading_additional_flag(grade_id);
+
+-- Prevent duplicate flags per grading result
+CREATE UNIQUE INDEX idx_grading_additional_flag_unique
+    ON grading_additional_flag(grade_id, flag_id);
+
+-- Auto-update updated_at on every row change
+CREATE TRIGGER trigger_grading_additional_flag_updated_at
+    BEFORE UPDATE ON grading_additional_flag
+    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+
+COMMENT ON TABLE grading_additional_flag IS
+    'Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.';
+COMMENT ON COLUMN grading_additional_flag.grade_id IS
+    'FK to grade. One result may have many flags.';
+COMMENT ON COLUMN grading_additional_flag.flag_id IS
+    'Application-side flag identifier (e.g. FLAG-CVD-001, FLAG-BP-001).';
+COMMENT ON COLUMN grading_additional_flag.category IS
+    'Flag category (e.g. Eligibility, Blood Pressure, Cholesterol, Diabetes, Renal Function).';
+COMMENT ON COLUMN grading_additional_flag.message IS
+    'Human-readable alert message for the clinician.';
+COMMENT ON COLUMN grading_additional_flag.priority IS
+    'Alert priority: high, medium, or low.';
+COMMENT ON COLUMN grading_additional_flag.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN grading_additional_flag.created_at IS
+    'Timestamp when this row was created.';
+COMMENT ON COLUMN grading_additional_flag.updated_at IS
+    'Timestamp when this row was updated.';
+COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+    'Timestamp when this row was deleted.';

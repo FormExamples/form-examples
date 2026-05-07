@@ -14,7 +14,7 @@ CREATE TABLE casualty_card_medication (
 );
 
 -- Index for fetching all medications for a casualty card
-CREATE INDEX idx_casualty_card_medication_casualty_card_id
+CREATE INDEX index_casualty_card_medication_casualty_card_id
     ON casualty_card_medication(casualty_card_id);
 
 -- Auto-update updated_at on every row change

@@ -11,7 +11,7 @@ CREATE TABLE encounter_satisfaction (
 );
 
 -- Index for the most common query: all surveys for a patient
-CREATE INDEX idx_encounter_satisfaction_patient_id ON encounter_satisfaction(patient_id);
+CREATE INDEX index_encounter_satisfaction_patient_id ON encounter_satisfaction(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_encounter_satisfaction_updated_at

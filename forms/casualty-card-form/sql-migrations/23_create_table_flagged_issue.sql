@@ -14,7 +14,7 @@ CREATE TABLE flagged_issue (
 );
 
 -- Index for fetching all flagged issues for a NEWS2 result
-CREATE INDEX idx_flagged_issue_news2_result_id
+CREATE INDEX index_flagged_issue_news2_result_id
     ON flagged_issue(news2_result_id);
 
 -- Prevent duplicate flags per NEWS2 result

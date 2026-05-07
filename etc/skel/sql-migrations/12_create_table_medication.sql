@@ -7,7 +7,7 @@ CREATE TABLE medication (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     international_nonproprietary_name TEXT NOT NULL DEFAULT '',
-    description TEXT NOT NULL DEFAULT '',
+    description TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_medication_updated_at

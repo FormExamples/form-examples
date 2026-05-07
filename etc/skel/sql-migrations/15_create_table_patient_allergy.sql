@@ -4,7 +4,7 @@ CREATE TABLE patient_allergy (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    allergy_id UUID NOT NULL REFERENCES medication(id) ON DELETE CASCADE,
+    allergy_id UUID NOT NULL REFERENCES medication(id) ON DELETE CASCADE
 );
 
 CREATE TRIGGER trigger_patient_allergy_updated_at

@@ -16,7 +16,6 @@
 
 set -euf
 
-
 echo "Scaffolding advance-decision-to-refuse-treatment (6 tables)..."
 
 cargo loco generate scaffold patient \

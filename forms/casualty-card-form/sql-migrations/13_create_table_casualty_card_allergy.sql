@@ -15,7 +15,7 @@ CREATE TABLE casualty_card_allergy (
 );
 
 -- Index for fetching all allergies for a casualty card
-CREATE INDEX idx_casualty_card_allergy_casualty_card_id
+CREATE INDEX index_casualty_card_allergy_casualty_card_id
     ON casualty_card_allergy(casualty_card_id);
 
 -- Auto-update updated_at on every row change

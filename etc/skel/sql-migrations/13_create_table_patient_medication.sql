@@ -4,7 +4,7 @@ CREATE TABLE patient_medication (
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    medication_id UUID NOT NULL REFERENCES medication(id) ON DELETE CASCADE,
+    medication_id UUID NOT NULL REFERENCES medication(id) ON DELETE CASCADE
 );
 
 CREATE TRIGGER trigger_patient_medication_updated_at

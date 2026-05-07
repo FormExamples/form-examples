@@ -11,7 +11,7 @@ CREATE TABLE assessment (
 );
 
 -- Index for the most common query: all assessments for a patient
-CREATE INDEX idx_assessment_patient_id ON assessment(patient_id);
+CREATE INDEX index_assessment_patient_id ON assessment(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_assessment_updated_at
