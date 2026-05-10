@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agile Principles Assessment — questionnaire</title>
+  <meta name="description" content="14-step single-page wizard scoring a team's adoption of the 12 Agile Manifesto principles, with composite maturity, fired rules, and operational flags." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Agile Principles Assessment</h1>
+      <p class="subtitle">12 Agile Manifesto principles — composite maturity level and coaching action plan.</p>
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Principles scored"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 of 12 principles scored (0%)</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Score your team or organisation on each of the 12 principles of the
+        Agile Manifesto. Use the 1–5 Likert scale (1 = strongly disagree,
+        5 = strongly agree). Answer at least six principles for a
+        composite-maturity result.
+      </p>
+      <p>
+        The tool computes a maturity level (Optimising, Mature, Developing,
+        Initial, or Ad-hoc), surfaces operational flags (burnout risk,
+        technical-debt risk, command-and-control, etc.), and produces a
+        coaching action plan. Results are entirely client-side — nothing
+        is sent to a server from this static page.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections"></div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Generate report
+        </button>
+        <button type="button" id="reset-btn" class="btn">Start over</button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Based on the Manifesto for Agile Software Development
+        (Beck et al., 2001) and the 12 principles behind the Agile
+        Manifesto. This self-report is intended to seed coaching
+        conversations and retrospectives, not to deliver a final verdict.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags so the page works under file://. Each script
+    attaches symbols to window.AgilePrinciplesAssessment.
+  -->
+  <script src="js/principles.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

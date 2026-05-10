@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ln -sf index.md README.md)",
+      "Bash(ln -sf AGENTS.md index.md)",
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
+      "Bash(python3 bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py)",
+      "mcp__svelte__svelte-autofixer",
+      "Bash(pnpm install *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm check *)",
+      "Bash(pnpm build *)",
+      "Bash(bin/test-form agile-principles-assessment *)",
+      "Bash(bin/test-form pre-operative-assessment-by-clinician *)",
+      "Read(//Users/jph/.claude/plugins/cache/playwright-skill/playwright-skill/4.0.2/skills/playwright-skill/**)",
+      "Read(//Users/jph/.claude/plugins/cache/playwright-skill/playwright-skill/4.0.2/skills/playwright-skill/node_modules/playwright/**)",
+      "Bash(pnpm dev *)",
+      "Bash(echo \"started pid $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174)",
+      "Bash(node run.js /tmp/playwright-test-agile.js)",
+      "Bash(pkill -f \"vite dev\")",
+      "Bash(kill 26716)"
+    ]
+  }
+}

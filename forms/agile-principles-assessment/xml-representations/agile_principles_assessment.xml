@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agile_principles_assessment SYSTEM "agile_principles_assessment.dtd">
+<agile_principles_assessment>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<respondent_id>550e8400-e29b-41d4-a716-446655440000</respondent_id>
+<status>draft</status>
+<is_anonymous>true</is_anonymous>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_period>sprint</assessment_period>
+<p01_customer_satisfaction>1</p01_customer_satisfaction>
+<p01_comment>Example text.</p01_comment>
+<p01_weight>70.0</p01_weight>
+<p02_welcome_change>1</p02_welcome_change>
+<p02_comment>Example text.</p02_comment>
+<p02_weight>70.0</p02_weight>
+<p03_deliver_frequently>1</p03_deliver_frequently>
+<p03_comment>Example text.</p03_comment>
+<p03_weight>70.0</p03_weight>
+<p04_collaboration>1</p04_collaboration>
+<p04_comment>Example text.</p04_comment>
+<p04_weight>70.0</p04_weight>
+<p05_motivated_individuals>1</p05_motivated_individuals>
+<p05_comment>Example text.</p05_comment>
+<p05_weight>70.0</p05_weight>
+<p06_face_to_face>1</p06_face_to_face>
+<p06_comment>Example text.</p06_comment>
+<p06_weight>70.0</p06_weight>
+<p07_working_software>1</p07_working_software>
+<p07_comment>Example text.</p07_comment>
+<p07_weight>70.0</p07_weight>
+<p08_sustainable_development>1</p08_sustainable_development>
+<p08_comment>Example text.</p08_comment>
+<p08_weight>70.0</p08_weight>
+<p09_technical_excellence>1</p09_technical_excellence>
+<p09_comment>Example text.</p09_comment>
+<p09_weight>70.0</p09_weight>
+<p10_simplicity>1</p10_simplicity>
+<p10_comment>Example text.</p10_comment>
+<p10_weight>70.0</p10_weight>
+<p11_self_organising_teams>1</p11_self_organising_teams>
+<p11_comment>Example text.</p11_comment>
+<p11_weight>70.0</p11_weight>
+<p12_regular_reflection>1</p12_regular_reflection>
+<p12_comment>Example text.</p12_comment>
+<p12_weight>70.0</p12_weight>
+<overall_notes>Example text.</overall_notes>
+</agile_principles_assessment>

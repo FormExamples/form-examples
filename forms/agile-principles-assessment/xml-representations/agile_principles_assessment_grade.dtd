@@ -1,0 +1,17 @@
+<!ELEMENT agile_principles_assessment_grade (id,created_at,updated_at,deleted_at,agile_principles_assessment_id,answered_count,mean_score,weighted_mean_score,weights_customised,maturity,top_action_1,top_action_2,top_action_3,coach_notes,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT agile_principles_assessment_id (#PCDATA)>
+<!ELEMENT answered_count (#PCDATA)>
+<!ELEMENT mean_score (#PCDATA)>
+<!ELEMENT weighted_mean_score (#PCDATA)>
+<!ELEMENT weights_customised (#PCDATA)>
+<!ELEMENT maturity (#PCDATA)>
+<!ELEMENT top_action_1 (#PCDATA)>
+<!ELEMENT top_action_2 (#PCDATA)>
+<!ELEMENT top_action_3 (#PCDATA)>
+<!ELEMENT coach_notes (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

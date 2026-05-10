@@ -1,0 +1,4 @@
+import{b as o,E as i,D as l,i as c,B as p,a as d,f as h,s as f,c as x,n as b,r as m}from"../chunks/B6NgeR8s.js";function u(t,s,...e){var n=new p(t);o(()=>{const a=s()??null;l&&a==null&&c(),n.ensure(a,a&&(r=>a(r,...e)))},i)}var v=h(`<div class="max-w-5xl mx-auto px-4 py-6"><header class="mb-6 pb-4 border-b border-slate-200"><h1 class="text-2xl font-bold text-brand-700">Agile Principles Assessment</h1> <p class="text-sm text-slate-600">Score your team or organisation against the 12 Agile Manifesto principles
+      and generate a coaching action plan.</p></header> <!> <footer class="mt-12 pt-4 border-t border-slate-200 text-xs text-slate-500">Based on the Manifesto for Agile Software Development (Beck et al., 2001).
+    This tool produces a self-report; treat results as an input to coaching
+    conversations rather than a final verdict.</footer></div>`);function A(t,s){var e=v(),n=f(x(e),2);u(n,()=>s.children),b(2),m(e),d(t,e)}export{A as component};

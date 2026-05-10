@@ -1,0 +1,11 @@
+<!ELEMENT agile_principles_assessment_grade_rule (id,created_at,updated_at,deleted_at,agile_principles_assessment_grade_id,rule_id,principle_number,band,principle_slug,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT agile_principles_assessment_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT principle_number (#PCDATA)>
+<!ELEMENT band (#PCDATA)>
+<!ELEMENT principle_slug (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
