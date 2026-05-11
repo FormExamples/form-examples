@@ -6,6 +6,7 @@ Subprojects:
 - [advance statement about care](advance-statement-about-care)
 - [allergy assessment](allergy-assessment)
 - [anesthesiology assessment](anesthesiology-assessment)
+- [arc42](arc42)
 - [asthma assessment](asthma-assessment)
 - [attention deficit assessment](attention-deficit-assessment)
 - [audio-vestibular assessment](audio-vestibular-assessment)
