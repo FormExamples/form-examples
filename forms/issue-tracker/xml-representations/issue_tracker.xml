@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE issue_tracker SYSTEM "issue_tracker.dtd">
+<issue_tracker>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<reporter_id>550e8400-e29b-41d4-a716-446655440000</reporter_id>
+<status>draft</status>
+<reported_at>2026-04-09T10:00:00Z</reported_at>
+<discovered_at>2026-04-09T10:00:00Z</discovered_at>
+<started_at>2026-04-09T10:00:00Z</started_at>
+<resolved_at>2026-04-09T10:00:00Z</resolved_at>
+<issue_category>software-defect</issue_category>
+<environment>dev</environment>
+<system_name>Example</system_name>
+<component></component>
+<customer_or_project_tag></customer_or_project_tag>
+<external_reference></external_reference>
+<cc_summary>Example text.</cc_summary>
+<cc_long_description>Example text.</cc_long_description>
+<cc_reported_by_name>Example</cc_reported_by_name>
+<cc_reported_via>self</cc_reported_via>
+<pt_discoverer_name>Example</pt_discoverer_name>
+<pt_affected_users_count>2</pt_affected_users_count>
+<pt_affected_user_groups></pt_affected_user_groups>
+<pt_assignees></pt_assignees>
+<pt_stakeholders_to_inform></pt_stakeholders_to_inform>
+<pt_observers></pt_observers>
+<sx_external_signals></sx_external_signals>
+<sx_alert_ids></sx_alert_ids>
+<sx_error_messages></sx_error_messages>
+<sx_screenshots_url></sx_screenshots_url>
+<sx_logs_url></sx_logs_url>
+<sx_first_observed_at>2026-04-09T10:00:00Z</sx_first_observed_at>
+<fx_broken_components></fx_broken_components>
+<fx_failed_services></fx_failed_services>
+<fx_stuck_processes></fx_stuck_processes>
+<fx_hardware_faults></fx_hardware_faults>
+<fx_data_corruption>none</fx_data_corruption>
+<hx_related_issues></hx_related_issues>
+<hx_prior_occurrences>1</hx_prior_occurrences>
+<hx_recent_change_url></hx_recent_change_url>
+<hx_references></hx_references>
+<hx_timeline></hx_timeline>
+<ix_hypotheses></ix_hypotheses>
+<ix_repro_steps></ix_repro_steps>
+<ix_diagnostic_queries></ix_diagnostic_queries>
+<ix_tests_run></ix_tests_run>
+<ix_blocking_unknowns></ix_blocking_unknowns>
+<dx_root_cause></dx_root_cause>
+<dx_contributing_causes></dx_contributing_causes>
+<dx_scope>single-instance</dx_scope>
+<dx_confirmed>yes</dx_confirmed>
+<tx_mitigation_steps></tx_mitigation_steps>
+<tx_fix_plan>Example text.</tx_fix_plan>
+<tx_workaround></tx_workaround>
+<tx_rollback_plan>Example text.</tx_rollback_plan>
+<tx_communication_plan>Example text.</tx_communication_plan>
+<px_expected_resolution_at>2026-04-09T10:00:00Z</px_expected_resolution_at>
+<px_residual_risk></px_residual_risk>
+<px_monitoring_plan>Example text.</px_monitoring_plan>
+<px_recurrence_likelihood>very-low</px_recurrence_likelihood>
+<px_lessons_learned></px_lessons_learned>
+<score_by_priority_rank>5</score_by_priority_rank>
+<score_by_severity_of_impact>5</score_by_severity_of_impact>
+<score_by_magnitude_of_damage>5</score_by_magnitude_of_damage>
+<score_by_harm_grade>5</score_by_harm_grade>
+<score_by_failure_condition>A</score_by_failure_condition>
+<score_by_moscow_requirement>5</score_by_moscow_requirement>
+<score_by_frequency_percent>5.0</score_by_frequency_percent>
+</issue_tracker>

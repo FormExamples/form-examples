@@ -1,0 +1,21 @@
+<fieldset class="step">
+  <legend>Step 9 — Treatments &amp; Prognosis (Tx, Px)</legend>
+  <label>Mitigation steps <textarea name="tx_mitigation_steps" rows="3">{{ data.tx_mitigation_steps | default(value='') }}</textarea></label>
+  <label>Fix plan <textarea name="tx_fix_plan" rows="3">{{ data.tx_fix_plan | default(value='') }}</textarea></label>
+  <label>Workaround <textarea name="tx_workaround" rows="2">{{ data.tx_workaround | default(value='') }}</textarea></label>
+  <label>Rollback plan <textarea name="tx_rollback_plan" rows="2">{{ data.tx_rollback_plan | default(value='') }}</textarea></label>
+  <label>Communication plan <input name="tx_communication_plan" type="text" value="{{ data.tx_communication_plan | default(value='') }}"></label>
+  <label>Expected resolution at <input name="px_expected_resolution_at" type="datetime-local" value="{{ data.px_expected_resolution_at | default(value='') }}"></label>
+  <label>Residual risk <textarea name="px_residual_risk" rows="2">{{ data.px_residual_risk | default(value='') }}</textarea></label>
+  <label>Monitoring plan <textarea name="px_monitoring_plan" rows="2">{{ data.px_monitoring_plan | default(value='') }}</textarea></label>
+  <label>Recurrence likelihood
+    <select name="px_recurrence_likelihood">
+      {% set rl = data.px_recurrence_likelihood | default(value='') %}
+      <option value="" {% if rl == '' %}selected{% endif %}>(unspecified)</option>
+      {% for v in ['very-low','low','moderate','high','very-high'] %}
+        <option value="{{ v }}" {% if rl == v %}selected{% endif %}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Lessons learned <textarea name="px_lessons_learned" rows="2">{{ data.px_lessons_learned | default(value='') }}</textarea></label>
+</fieldset>

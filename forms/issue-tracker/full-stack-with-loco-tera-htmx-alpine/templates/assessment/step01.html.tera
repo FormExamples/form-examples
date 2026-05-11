@@ -1,0 +1,38 @@
+<fieldset class="step">
+  <legend>Step 1 — Reporter &amp; metadata</legend>
+  <label>Reporter name <input name="reporter_name" type="text" value="{{ data.reporter_name | default(value='') }}"></label>
+  <label>Reporter email <input name="reporter_email" type="email" value="{{ data.reporter_email | default(value='') }}"></label>
+  <label>Reporter role
+    <select name="reporter_role">
+      {% set role = data.reporter_role | default(value='') %}
+      <option value="" {% if role == '' %}selected{% endif %}>(unspecified)</option>
+      {% for r in ['engineer','sre','on-call','product-manager','project-manager','customer-success','safety-officer','compliance-officer','clinician','patient','employee','customer','other'] %}
+        <option value="{{ r }}" {% if role == r %}selected{% endif %}>{{ r }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Reported at <input name="reported_at" type="datetime-local" value="{{ data.reported_at | default(value='') }}"></label>
+  <label>Discovered at <input name="discovered_at" type="datetime-local" value="{{ data.discovered_at | default(value='') }}"></label>
+  <label>Issue category
+    <select name="issue_category">
+      {% set cat = data.issue_category | default(value='') %}
+      <option value="" {% if cat == '' %}selected{% endif %}>(unspecified)</option>
+      {% for c in ['software-defect','service-outage','performance','security','data-protection','clinical-safety','workplace-safety','medical-device','regulatory','project-blocker','customer-complaint','hardware-fault','process','other'] %}
+        <option value="{{ c }}" {% if cat == c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Environment
+    <select name="environment">
+      {% set env = data.environment | default(value='') %}
+      <option value="" {% if env == '' %}selected{% endif %}>(unspecified)</option>
+      {% for e in ['dev','test','staging','production','on-prem','field'] %}
+        <option value="{{ e }}" {% if env == e %}selected{% endif %}>{{ e }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>System name <input name="system_name" type="text" value="{{ data.system_name | default(value='') }}"></label>
+  <label>Component <input name="component" type="text" value="{{ data.component | default(value='') }}"></label>
+  <label>Customer / project tag <input name="customer_or_project_tag" type="text" value="{{ data.customer_or_project_tag | default(value='') }}"></label>
+  <label>External reference <input name="external_reference" type="text" value="{{ data.external_reference | default(value='') }}"></label>
+</fieldset>

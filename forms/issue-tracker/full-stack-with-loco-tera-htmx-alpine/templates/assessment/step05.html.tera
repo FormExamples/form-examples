@@ -1,0 +1,16 @@
+<fieldset class="step">
+  <legend>Step 5 — Fractures (Fx)</legend>
+  <label>Broken components <textarea name="fx_broken_components" rows="3">{{ data.fx_broken_components | default(value='') }}</textarea></label>
+  <label>Failed services <input name="fx_failed_services" type="text" value="{{ data.fx_failed_services | default(value='') }}"></label>
+  <label>Stuck processes <input name="fx_stuck_processes" type="text" value="{{ data.fx_stuck_processes | default(value='') }}"></label>
+  <label>Hardware faults <input name="fx_hardware_faults" type="text" value="{{ data.fx_hardware_faults | default(value='') }}"></label>
+  <label>Data corruption
+    <select name="fx_data_corruption">
+      {% set dc = data.fx_data_corruption | default(value='') %}
+      <option value="" {% if dc == '' %}selected{% endif %}>(unspecified)</option>
+      {% for v in ['none','suspected','confirmed','unknown'] %}
+        <option value="{{ v }}" {% if dc == v %}selected{% endif %}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</fieldset>

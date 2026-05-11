@@ -1,0 +1,69 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Issue {{ id }} report — Issue Tracker{% endblock %}
+
+{% block content %}
+<article class="report">
+
+  <h2>Report — issue {{ id }}</h2>
+
+  <p>
+    Composite priority:
+    <span class="badge {{ result.composite_priority }}">{{ result.composite_priority | upper }}</span>
+  </p>
+
+  <section>
+    <h3>Chief complaint</h3>
+    <p>{{ data.cc_summary | default(value='(none)') }}</p>
+  </section>
+
+  <section>
+    <h3>Seven scores</h3>
+    <dl class="scores">
+      <dt>Priority rank</dt><dd>{{ result.score_by_priority_rank | default(value='—') }}</dd>
+      <dt>Severity of impact</dt><dd>{{ result.score_by_severity_of_impact | default(value='—') }}</dd>
+      <dt>Magnitude of damage</dt><dd>{{ result.score_by_magnitude_of_damage | default(value='—') }}</dd>
+      <dt>Harm grade</dt><dd>{{ result.score_by_harm_grade | default(value='—') }}</dd>
+      <dt>Failure condition</dt><dd>{{ result.score_by_failure_condition | default(value='—') }}</dd>
+      <dt>MoSCoW</dt><dd>{{ result.score_by_moscow_requirement | default(value='—') }}</dd>
+      <dt>Frequency %</dt><dd>{{ result.score_by_frequency_percent | default(value='—') }}</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h3>Fired rules ({{ result.fired_rules | length }})</h3>
+    <ul>
+    {% for rule in result.fired_rules %}
+      <li>
+        <code>{{ rule.rule_id }}</code> ({{ rule.instrument }})
+        — {{ rule.description }}
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h3>Safety flags ({{ result.additional_flags | length }})</h3>
+    {% if result.additional_flags | length == 0 %}
+      <p>(none)</p>
+    {% else %}
+      <ul>
+      {% for flag in result.additional_flags %}
+        <li class="flag-{{ flag.priority }}">
+          <strong>[{{ flag.category }}]</strong>
+          {{ flag.description }}
+          <br><em>{{ flag.suggested_action }}</em>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+
+  <p class="actions">
+    <a href="/issue-tracker/{{ id }}" hx-boost="true">Edit</a>
+    <a href="/issue-tracker/{{ id }}/report.pdf">Download PDF</a>
+    <a href="/dashboard" hx-boost="true">Back to dashboard</a>
+  </p>
+
+</article>
+{% endblock %}

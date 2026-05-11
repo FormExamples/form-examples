@@ -1,0 +1,98 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Dashboard — Issue Tracker{% endblock %}
+
+{% block content %}
+<article class="dashboard">
+
+  <h2>Dashboard</h2>
+  <p class="muted">Triage view across composite priority, severity, harm, failure-condition, environment, and free-text search.</p>
+
+  <form id="filters" method="GET" action="/dashboard"
+        hx-get="/dashboard/rows" hx-target="#issues-body" hx-trigger="change, search delay:200ms from:#search">
+    <label>Search
+      <input id="search" name="q" type="search" value="{{ filters.q | default(value='') }}" placeholder="Search CC, system, assignee">
+    </label>
+    <label>Composite
+      <select name="composite">
+        {% set comp = filters.composite | default(value='') %}
+        <option value="" {% if comp == '' %}selected{% endif %}>All</option>
+        {% for v in ['critical','high','moderate','low'] %}
+          <option value="{{ v }}" {% if comp == v %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Severity
+      <select name="severity">
+        {% set sev = filters.severity | default(value='') %}
+        <option value="" {% if sev == '' %}selected{% endif %}>All</option>
+        {% for v in [5,4,3,2,1] %}
+          <option value="{{ v }}" {% if sev == v %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Harm
+      <select name="harm">
+        {% set h = filters.harm | default(value='') %}
+        <option value="" {% if h == '' %}selected{% endif %}>All</option>
+        {% for v in [4,3,2,1,0] %}
+          <option value="{{ v }}" {% if h == v %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Failure
+      <select name="failure">
+        {% set f = filters.failure | default(value='') %}
+        <option value="" {% if f == '' %}selected{% endif %}>All</option>
+        {% for v in ['A','B','C','D','E'] %}
+          <option value="{{ v }}" {% if f == v %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Environment
+      <select name="environment">
+        {% set env = filters.environment | default(value='') %}
+        <option value="" {% if env == '' %}selected{% endif %}>All</option>
+        {% for v in ['production','staging','test','dev','on-prem','field'] %}
+          <option value="{{ v }}" {% if env == v %}selected{% endif %}>{{ v }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </form>
+
+  <p class="row-count">Showing {{ rows | length }} of {{ total | default(value=rows | length) }} issues.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Status</th><th>Composite</th>
+        <th>Sev</th><th>Harm</th><th>Fail</th><th>Pri</th><th>Freq %</th>
+        <th>Chief complaint</th><th>System</th><th>Env</th><th>Assignee</th><th>Reported</th>
+      </tr>
+    </thead>
+    <tbody id="issues-body">
+    {% for r in rows %}
+      <tr>
+        <td><a href="/issue-tracker/{{ r.id }}/report" hx-boost="true">{{ r.id }}</a></td>
+        <td>{{ r.status }}</td>
+        <td><span class="badge {{ r.composite_priority }}">{{ r.composite_priority }}</span></td>
+        <td>{{ r.score_by_severity_of_impact | default(value='—') }}</td>
+        <td>{{ r.score_by_harm_grade | default(value='—') }}</td>
+        <td>{{ r.score_by_failure_condition | default(value='—') }}</td>
+        <td>{{ r.score_by_priority_rank | default(value='—') }}</td>
+        <td>{{ r.score_by_frequency_percent | default(value='—') }}</td>
+        <td>{{ r.cc_summary }}</td>
+        <td>{{ r.system_name }}</td>
+        <td>{{ r.environment }}</td>
+        <td>{{ r.pt_assignees }}</td>
+        <td>{{ r.reported_at | truncate(length=10, end='') }}</td>
+      </tr>
+    {% endfor %}
+    {% if rows | length == 0 %}
+      <tr><td colspan="13" class="no-results">No matching issues.</td></tr>
+    {% endif %}
+    </tbody>
+  </table>
+
+</article>
+{% endblock %}

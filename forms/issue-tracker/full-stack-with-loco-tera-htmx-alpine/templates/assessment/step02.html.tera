@@ -1,0 +1,15 @@
+<fieldset class="step">
+  <legend>Step 2 — Chief Complaint (CC)</legend>
+  <label>One-sentence summary <input name="cc_summary" type="text" maxlength="500" value="{{ data.cc_summary | default(value='') }}"></label>
+  <label>Long description <textarea name="cc_long_description" rows="4">{{ data.cc_long_description | default(value='') }}</textarea></label>
+  <label>Reported by name <input name="cc_reported_by_name" type="text" value="{{ data.cc_reported_by_name | default(value='') }}"></label>
+  <label>Reported via
+    <select name="cc_reported_via">
+      {% set via = data.cc_reported_via | default(value='') %}
+      <option value="" {% if via == '' %}selected{% endif %}>(unspecified)</option>
+      {% for v in ['self','colleague','customer','monitoring-alert','ticket','phone','email','chat','in-person','other'] %}
+        <option value="{{ v }}" {% if via == v %}selected{% endif %}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</fieldset>

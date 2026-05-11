@@ -1,0 +1,8 @@
+<fieldset class="step">
+  <legend>Step 6 — History (Hx)</legend>
+  <label>Related issues <input name="hx_related_issues" type="text" value="{{ data.hx_related_issues | default(value='') }}"></label>
+  <label>Prior occurrences count <input name="hx_prior_occurrences" type="number" min="0" value="{{ data.hx_prior_occurrences | default(value='') }}"></label>
+  <label>Recent change URL <input name="hx_recent_change_url" type="url" value="{{ data.hx_recent_change_url | default(value='') }}"></label>
+  <label>References <textarea name="hx_references" rows="3">{{ data.hx_references | default(value='') }}</textarea></label>
+  <label>Timeline <textarea name="hx_timeline" rows="3">{{ data.hx_timeline | default(value='') }}</textarea></label>
+</fieldset>

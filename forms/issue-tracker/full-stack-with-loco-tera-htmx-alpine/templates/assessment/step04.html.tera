@@ -1,0 +1,9 @@
+<fieldset class="step">
+  <legend>Step 4 — Symptoms (Sx)</legend>
+  <label>External signals <textarea name="sx_external_signals" rows="3">{{ data.sx_external_signals | default(value='') }}</textarea></label>
+  <label>Alert IDs <input name="sx_alert_ids" type="text" value="{{ data.sx_alert_ids | default(value='') }}"></label>
+  <label>Error messages <textarea name="sx_error_messages" rows="3">{{ data.sx_error_messages | default(value='') }}</textarea></label>
+  <label>Screenshots URL <input name="sx_screenshots_url" type="url" value="{{ data.sx_screenshots_url | default(value='') }}"></label>
+  <label>Logs URL <input name="sx_logs_url" type="url" value="{{ data.sx_logs_url | default(value='') }}"></label>
+  <label>First observed at <input name="sx_first_observed_at" type="datetime-local" value="{{ data.sx_first_observed_at | default(value='') }}"></label>
+</fieldset>

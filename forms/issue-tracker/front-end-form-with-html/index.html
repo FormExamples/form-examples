@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Issue Tracker</h1>
+  <p class="subtitle">A SOAP-style single-page wizard with seven independent scoring scales.</p>
+</header>
+
+<main>
+
+<form id="issue-form" novalidate>
+
+  <fieldset class="step" id="step-1">
+    <legend>Step 1 — Reporter &amp; metadata</legend>
+    <label>Reporter name <input name="reporterName" type="text"></label>
+    <label>Reporter email <input name="reporterEmail" type="email"></label>
+    <label>Reporter role
+      <select name="reporterRole">
+        <option value="">(unspecified)</option>
+        <option>engineer</option><option>sre</option><option>on-call</option>
+        <option>product-manager</option><option>project-manager</option>
+        <option>customer-success</option><option>safety-officer</option>
+        <option>compliance-officer</option><option>clinician</option>
+        <option>patient</option><option>employee</option><option>customer</option>
+        <option>other</option>
+      </select>
+    </label>
+    <label>Reported at <input name="reportedAt" type="datetime-local"></label>
+    <label>Discovered at <input name="discoveredAt" type="datetime-local"></label>
+    <label>Issue category
+      <select name="issueCategory">
+        <option value="">(unspecified)</option>
+        <option>software-defect</option><option>service-outage</option>
+        <option>performance</option><option>security</option>
+        <option>data-protection</option><option>clinical-safety</option>
+        <option>workplace-safety</option><option>medical-device</option>
+        <option>regulatory</option><option>project-blocker</option>
+        <option>customer-complaint</option><option>hardware-fault</option>
+        <option>process</option><option>other</option>
+      </select>
+    </label>
+    <label>Environment
+      <select name="environment">
+        <option value="">(unspecified)</option>
+        <option>dev</option><option>test</option><option>staging</option>
+        <option>production</option><option>on-prem</option><option>field</option>
+      </select>
+    </label>
+    <label>System name <input name="systemName" type="text"></label>
+    <label>Component <input name="component" type="text"></label>
+    <label>Customer / project tag <input name="customerOrProjectTag" type="text"></label>
+    <label>External reference (ticket id, LFPSE id, etc.) <input name="externalReference" type="text"></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-2">
+    <legend>Step 2 — Chief Complaint (CC)</legend>
+    <label>One-sentence summary <input name="ccSummary" type="text" maxlength="500"></label>
+    <label>Long description <textarea name="ccLongDescription" rows="4"></textarea></label>
+    <label>Reported by name <input name="ccReportedByName" type="text"></label>
+    <label>Reported via
+      <select name="ccReportedVia">
+        <option value="">(unspecified)</option>
+        <option>self</option><option>colleague</option><option>customer</option>
+        <option>monitoring-alert</option><option>ticket</option><option>phone</option>
+        <option>email</option><option>chat</option><option>in-person</option>
+        <option>other</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <fieldset class="step" id="step-3">
+    <legend>Step 3 — Participants (Pt)</legend>
+    <label>Discoverer name <input name="ptDiscovererName" type="text"></label>
+    <label>Affected users count <input name="ptAffectedUsersCount" type="number" min="0"></label>
+    <label>Affected user groups <input name="ptAffectedUserGroups" type="text"></label>
+    <label>Assignees <input name="ptAssignees" type="text"></label>
+    <label>Stakeholders to inform <input name="ptStakeholdersToInform" type="text"></label>
+    <label>Observers <input name="ptObservers" type="text"></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-4">
+    <legend>Step 4 — Symptoms (Sx)</legend>
+    <label>External signals <textarea name="sxExternalSignals" rows="3"></textarea></label>
+    <label>Alert IDs <input name="sxAlertIds" type="text"></label>
+    <label>Error messages <textarea name="sxErrorMessages" rows="3"></textarea></label>
+    <label>Screenshots URL <input name="sxScreenshotsUrl" type="url"></label>
+    <label>Logs URL <input name="sxLogsUrl" type="url"></label>
+    <label>First observed at <input name="sxFirstObservedAt" type="datetime-local"></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-5">
+    <legend>Step 5 — Fractures (Fx)</legend>
+    <label>Broken components <textarea name="fxBrokenComponents" rows="3"></textarea></label>
+    <label>Failed services <input name="fxFailedServices" type="text"></label>
+    <label>Stuck processes <input name="fxStuckProcesses" type="text"></label>
+    <label>Hardware faults <input name="fxHardwareFaults" type="text"></label>
+    <label>Data corruption
+      <select name="fxDataCorruption">
+        <option value="">(unspecified)</option>
+        <option>none</option><option>suspected</option>
+        <option>confirmed</option><option>unknown</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <fieldset class="step" id="step-6">
+    <legend>Step 6 — History (Hx)</legend>
+    <label>Related issues <input name="hxRelatedIssues" type="text"></label>
+    <label>Prior occurrences count <input name="hxPriorOccurrences" type="number" min="0"></label>
+    <label>Recent change URL <input name="hxRecentChangeUrl" type="url"></label>
+    <label>References <textarea name="hxReferences" rows="3"></textarea></label>
+    <label>Timeline <textarea name="hxTimeline" rows="3"></textarea></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-7">
+    <legend>Step 7 — Investigations (Ix)</legend>
+    <label>Hypotheses <textarea name="ixHypotheses" rows="3"></textarea></label>
+    <label>Repro steps <textarea name="ixReproSteps" rows="3"></textarea></label>
+    <label>Diagnostic queries <textarea name="ixDiagnosticQueries" rows="3"></textarea></label>
+    <label>Tests run <input name="ixTestsRun" type="text"></label>
+    <label>Blocking unknowns <textarea name="ixBlockingUnknowns" rows="3"></textarea></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-8">
+    <legend>Step 8 — Diagnosis (Dx)</legend>
+    <label>Root cause <textarea name="dxRootCause" rows="3"></textarea></label>
+    <label>Contributing causes <textarea name="dxContributingCauses" rows="3"></textarea></label>
+    <label>Scope
+      <select name="dxScope">
+        <option value="">(unspecified)</option>
+        <option>single-instance</option><option>single-service</option>
+        <option>multiple-services</option><option>whole-system</option>
+        <option>organisation-wide</option>
+      </select>
+    </label>
+    <label>Confirmed
+      <select name="dxConfirmed">
+        <option value="">(unspecified)</option>
+        <option>yes</option><option>no</option><option>partial</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <fieldset class="step" id="step-9">
+    <legend>Step 9 — Treatments &amp; Prognosis (Tx, Px)</legend>
+    <label>Mitigation steps <textarea name="txMitigationSteps" rows="3"></textarea></label>
+    <label>Fix plan <textarea name="txFixPlan" rows="3"></textarea></label>
+    <label>Workaround <textarea name="txWorkaround" rows="2"></textarea></label>
+    <label>Rollback plan <textarea name="txRollbackPlan" rows="2"></textarea></label>
+    <label>Communication plan <input name="txCommunicationPlan" type="text"></label>
+    <label>Expected resolution at <input name="pxExpectedResolutionAt" type="datetime-local"></label>
+    <label>Residual risk <textarea name="pxResidualRisk" rows="2"></textarea></label>
+    <label>Monitoring plan <textarea name="pxMonitoringPlan" rows="2"></textarea></label>
+    <label>Recurrence likelihood
+      <select name="pxRecurrenceLikelihood">
+        <option value="">(unspecified)</option>
+        <option>very-low</option><option>low</option>
+        <option>moderate</option><option>high</option><option>very-high</option>
+      </select>
+    </label>
+    <label>Lessons learned <textarea name="pxLessonsLearned" rows="2"></textarea></label>
+  </fieldset>
+
+  <fieldset class="step" id="step-10">
+    <legend>Step 10 — Score &amp; sign-off</legend>
+
+    <label>Priority rank (1 = do first, ascending) <input name="scoreByPriorityRank" type="number" min="1" max="999"></label>
+
+    <label>Severity of impact (1 minimal &rarr; 5 catastrophic)
+      <select name="scoreBySeverityOfImpact">
+        <option value="">(unspecified)</option>
+        <option value="1">1 — minimal</option>
+        <option value="2">2 — minor</option>
+        <option value="3">3 — moderate</option>
+        <option value="4">4 — major</option>
+        <option value="5">5 — catastrophic</option>
+      </select>
+    </label>
+
+    <label>Magnitude of damage (1 minor &rarr; 10 total destruction) <input name="scoreByMagnitudeOfDamage" type="number" min="1" max="10"></label>
+
+    <label>Harm grade (NHS LFPSE)
+      <select name="scoreByHarmGrade">
+        <option value="">(unspecified)</option>
+        <option value="0">0 — no harm</option>
+        <option value="1">1 — low harm</option>
+        <option value="2">2 — moderate harm</option>
+        <option value="3">3 — severe harm</option>
+        <option value="4">4 — fatal</option>
+      </select>
+    </label>
+
+    <label>Failure condition (FAA / EASA)
+      <select name="scoreByFailureCondition">
+        <option value="">(unspecified)</option>
+        <option value="A">A — catastrophic</option>
+        <option value="B">B — hazardous</option>
+        <option value="C">C — major</option>
+        <option value="D">D — minor</option>
+        <option value="E">E — no effect</option>
+      </select>
+    </label>
+
+    <label>MoSCoW requirement
+      <select name="scoreByMoscowRequirement">
+        <option value="">(unspecified)</option>
+        <option value="1">1 — must have</option>
+        <option value="2">2 — should have</option>
+        <option value="3">3 — could have</option>
+        <option value="4">4 — won't have</option>
+      </select>
+    </label>
+
+    <label>Frequency percent (0 &rarr; 100) <input name="scoreByFrequencyPercent" type="number" min="0" max="100" step="0.01"></label>
+  </fieldset>
+
+  <div class="actions">
+    <button type="button" id="grade-button">Grade issue</button>
+    <button type="reset">Reset</button>
+  </div>
+
+</form>
+
+<section id="report" hidden>
+  <h2>Report</h2>
+  <div id="report-body"></div>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Issue Tracker — single-page HTML wizard.</p>
+</footer>
+
+<!-- Classic <script> tags (no type="module") so the page works when opened
+     directly via the file:// protocol. -->
+<script src="js/scoring.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

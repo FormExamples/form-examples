@@ -1,0 +1,8 @@
+<fieldset class="step">
+  <legend>Step 7 — Investigations (Ix)</legend>
+  <label>Hypotheses <textarea name="ix_hypotheses" rows="3">{{ data.ix_hypotheses | default(value='') }}</textarea></label>
+  <label>Repro steps <textarea name="ix_repro_steps" rows="3">{{ data.ix_repro_steps | default(value='') }}</textarea></label>
+  <label>Diagnostic queries <textarea name="ix_diagnostic_queries" rows="3">{{ data.ix_diagnostic_queries | default(value='') }}</textarea></label>
+  <label>Tests run <input name="ix_tests_run" type="text" value="{{ data.ix_tests_run | default(value='') }}"></label>
+  <label>Blocking unknowns <textarea name="ix_blocking_unknowns" rows="3">{{ data.ix_blocking_unknowns | default(value='') }}</textarea></label>
+</fieldset>

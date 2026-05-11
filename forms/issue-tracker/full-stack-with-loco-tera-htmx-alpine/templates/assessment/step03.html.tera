@@ -1,0 +1,9 @@
+<fieldset class="step">
+  <legend>Step 3 — Participants (Pt)</legend>
+  <label>Discoverer name <input name="pt_discoverer_name" type="text" value="{{ data.pt_discoverer_name | default(value='') }}"></label>
+  <label>Affected users count <input name="pt_affected_users_count" type="number" min="0" value="{{ data.pt_affected_users_count | default(value='') }}"></label>
+  <label>Affected user groups <input name="pt_affected_user_groups" type="text" value="{{ data.pt_affected_user_groups | default(value='') }}"></label>
+  <label>Assignees <input name="pt_assignees" type="text" value="{{ data.pt_assignees | default(value='') }}"></label>
+  <label>Stakeholders to inform <input name="pt_stakeholders_to_inform" type="text" value="{{ data.pt_stakeholders_to_inform | default(value='') }}"></label>
+  <label>Observers <input name="pt_observers" type="text" value="{{ data.pt_observers | default(value='') }}"></label>
+</fieldset>

@@ -1,0 +1,28 @@
+[package]
+name = "issue-tracker"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Lean dependency set for the pure scoring engine.
+# Loco / SeaORM / axum / Tera / tokio will be re-added by the form's
+# `full-stack-with-loco-tera-htmx-alpine-setup` shell script when the
+# crate is promoted from "engine only" to "full Loco app". The engine
+# itself has no runtime dependencies beyond serde for serialisation.
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+# Tera is used by the template-render tests under tests/template_tests.rs
+# to confirm every .tera file parses and renders against a sample context.
+# When the Loco scaffold runs, tera moves up to a regular [dependencies].
+tera = "1.20"
+
+[lib]
+name = "issue_tracker"
+path = "src/lib.rs"
+
+[[bin]]
+name = "issue-tracker-cli"
+path = "src/bin/main.rs"

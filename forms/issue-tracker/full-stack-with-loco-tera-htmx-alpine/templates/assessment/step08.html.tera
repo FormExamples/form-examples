@@ -1,0 +1,23 @@
+<fieldset class="step">
+  <legend>Step 8 — Diagnosis (Dx)</legend>
+  <label>Root cause <textarea name="dx_root_cause" rows="3">{{ data.dx_root_cause | default(value='') }}</textarea></label>
+  <label>Contributing causes <textarea name="dx_contributing_causes" rows="3">{{ data.dx_contributing_causes | default(value='') }}</textarea></label>
+  <label>Scope
+    <select name="dx_scope">
+      {% set sc = data.dx_scope | default(value='') %}
+      <option value="" {% if sc == '' %}selected{% endif %}>(unspecified)</option>
+      {% for v in ['single-instance','single-service','multiple-services','whole-system','organisation-wide'] %}
+        <option value="{{ v }}" {% if sc == v %}selected{% endif %}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Confirmed
+    <select name="dx_confirmed">
+      {% set cf = data.dx_confirmed | default(value='') %}
+      <option value="" {% if cf == '' %}selected{% endif %}>(unspecified)</option>
+      {% for v in ['yes','no','partial'] %}
+        <option value="{{ v }}" {% if cf == v %}selected{% endif %}>{{ v }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</fieldset>

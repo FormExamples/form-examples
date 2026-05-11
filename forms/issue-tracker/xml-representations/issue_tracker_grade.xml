@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE issue_tracker_grade SYSTEM "issue_tracker_grade.dtd">
+<issue_tracker_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<issue_tracker_id>770e8400-e29b-41d4-a716-446655440002</issue_tracker_id>
+<score_by_priority_rank>5</score_by_priority_rank>
+<score_by_severity_of_impact>5</score_by_severity_of_impact>
+<score_by_magnitude_of_damage>5</score_by_magnitude_of_damage>
+<score_by_harm_grade>5</score_by_harm_grade>
+<score_by_failure_condition>A</score_by_failure_condition>
+<score_by_moscow_requirement>5</score_by_moscow_requirement>
+<score_by_frequency_percent>5.0</score_by_frequency_percent>
+<computed_composite_priority>low</computed_composite_priority>
+<final_composite_priority>low</final_composite_priority>
+<override_reason>Example text.</override_reason>
+<recommendation>proceed</recommendation>
+<triage_notes>Example text.</triage_notes>
+<signed_by></signed_by>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</issue_tracker_grade>
