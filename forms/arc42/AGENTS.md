@@ -1,12 +1,13 @@
 # arc42 Architecture Documentation Form — Agent Instructions
 
-Single-page wizard that guides an architect through the **12 sections of the
-arc42 template**, scores completeness on a 0–3 scale per section, computes an
-overall maturity (Draft / Developing / Established / Optimised), fires
-section-specific flags, and emits a gap-action-plan report.
+Single-page wizard that guides an architect through arc42's **12-step
+documentation template**, computes per-section completeness (`empty` /
+`partial` / `complete`), derives a composite maturity band
+(Draft / Reviewable / Ready / Mature) via a max-grade algorithm, fires
+independent flags for architecturally critical omissions, and emits a signed
+arc42 document in HTML, PDF, AsciiDoc, FHIR R5 Bundle, and XML.
 
-See [`index.md`](./index.md) for the full design, the 14-step wizard table, and
-the completeness-flag table.
+See [`index.md`](./index.md) for the full design and the 12-step wizard table.
 
 ## Directory map
 
@@ -19,58 +20,60 @@ the completeness-flag table.
 - `./sql-migrations/` — Liquibase-formatted Postgres schema
 - `./xml-representations/` — generated XML + DTD per SQL table
 - `./fhir-r5/` — generated FHIR HL7 R5 JSON per SQL entity
-- `./front-end-form-with-html/` — static single-page architect wizard
-- `./front-end-form-with-svelte/` — SvelteKit single-page architect wizard
-- `./front-end-dashboard-with-html/` — HTML review table
-- `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with
-  server-rendered HTMX UI
+- `./front-end-form-with-svelte/` — SvelteKit 12-step architect wizard
+- `./front-end-form-with-html/` — placeholder (follow-up session)
+- `./front-end-dashboard-with-html/` — placeholder
+- `./front-end-dashboard-with-svelte/` — placeholder
+- `./full-stack-with-loco-tera-htmx-alpine/` — placeholder
 
 ## Scoring engine
 
-- **Input shape:** `Arc42Assessment` TypeScript type containing:
-  - `respondent` — `RespondentBlock` (name, role, systemName, organisation,
-    reviewDate, arc42Version)
-  - `sections` — array of 12 `SectionResponse` objects
-    (`{ sectionId: 1..12; score: 0|1|2|3|null; notes: string }`)
-  - `stakeholders` — `Stakeholder[]` (name, role, concern)
-  - `adrs` — `ArchitecturalDecisionRecord[]`
-  - `glossaryTerms` — `GlossaryTerm[]`
-  - `risks` — `Risk[]`
+- **Input shape:** `Arc42Documentation` TypeScript type containing prose fields
+  directly on the top-level object plus child arrays:
+  `businessGoals`, `qualityGoals`, `stakeholders`, `constraintItems`,
+  `contextPartners`, `technologyDecisions`, `buildingBlocks`,
+  `runtimeScenarios`, `deploymentNodes`, `crosscuttingConcepts`,
+  `architecturalDecisions`, `qualityScenarios`, `riskItems`, `glossaryTerms`.
 
 - **Output shape:**
   ```ts
-  calculateMaturity(data: Arc42Assessment): {
-    answeredCount: number;             // 0..12
-    totalScore: number | null;         // null if fewer than 4 sections answered
-    maturity: 'optimised' | 'established' | 'developing' | 'draft'
-            | 'insufficient-data';
-    perSectionScores: Array<{ sectionId: number; score: 0|1|2|3|null }>;
+  calculateMaturity(d: Arc42Documentation): {
+    computedMaturity: 'Draft' | 'Reviewable' | 'Ready' | 'Mature';
+    finalMaturity: 'Draft' | 'Reviewable' | 'Ready' | 'Mature';
+    completenessBySection: Record<1|2|3|4|5|6|7|8|9|10|11|12,
+                                  'empty' | 'partial' | 'complete'>;
     firedRules: FiredRule[];
     additionalFlags: AdditionalFlag[];
-    topGaps: number[];                 // up to 3 sectionIds with lowest scores
   }
   ```
 
-- **Algorithm:** unweighted sum of answered section scores; thresholds in
-  `index.md`. Each section below 2 fires its own coaching rule; a score of 0
-  on a high-priority section raises a high-priority flag.
+- **Algorithm (max-grade):**
+  1. Evaluate per-section completeness (`empty` / `partial` / `complete`) using
+     the thresholds in `doc/completeness-rules.md`.
+  2. Derive `computedMaturity` from the lowest completeness across all 12
+     sections, checked against the four band drivers in `doc/maturity-rules.md`.
+  3. Fire independent flags (high / medium / low priority) from
+     `doc/maturity-rules.md`; flags do not alter the maturity calculation.
+  4. Apply any author override from step 12 to produce `finalMaturity`.
+  5. Store both `computedMaturity` and `finalMaturity`.
 
-- **Engine files:** `types.ts`, `factory.ts`, `sections.ts`,
-  `completeness-rules.ts`, `maturity-rules.ts`, `flagged-issues.ts`,
-  `composite-grader.ts`.
-
-- **Tests:** `composite-grader.test.ts`, `completeness-rules.test.ts`.
+- **Engine files:**
+  - `src/lib/grading/types.ts` — `Arc42Documentation` + sub-types
+  - `src/lib/grading/utils.ts` — cardinality + completeness helpers
+  - `src/lib/grading/completeness-rules.ts` — per-section completeness rules
+  - `src/lib/grading/maturity-grader.ts` — `calculateMaturity()` pure function
+  - `src/lib/grading/flagged-issues.ts` — `detectFlags()`
+  - `src/lib/grading/completeness-rules.test.ts`
+  - `src/lib/grading/maturity-grader.test.ts`
 
 ## Conventions
 
-- Empty string `''` for unanswered text fields.
-- `null` for unanswered numeric / score fields.
+- Empty string `''` for unanswered text / enum fields.
+- `null` for unanswered numeric fields.
 - camelCase property names in TypeScript.
 - snake_case in SQL and Rust.
-- Step components named `StepNNName.svelte` (1-indexed, zero-padded to two
-  digits). Steps 02–13 correspond to arc42 sections 1–12; step 01 is respondent
-  identification and step 14 is the summary.
+- Step components named `StepNName.svelte` (1-indexed, e.g.
+  `Step1Introduction.svelte` … `Step12Summary.svelte`).
 - UI components in `src/lib/components/ui/`.
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.
 - UUIDv4 primary keys; `created_at` + `updated_at` timestamps on every table.
@@ -80,29 +83,10 @@ the completeness-flag table.
 - SvelteKit 2.x + TypeScript
 - Svelte 5 runes (`$state`, `$derived`, `$bindable`, `$props`)
 - Tailwind CSS 4 with `@import 'tailwindcss'` and `@theme`
-- `pdfmake` for client-side PDF
+- `pdfmake` for server-side PDF
 - Vitest for engine unit tests
-
-## Dashboard stack
-
-- SvelteKit + SVAR DataGrid (`@svar-ui/svelte-grid`) with the Willow theme.
-- Sortable columns, dropdown filters (maturity level, system name, review date).
-- Backend API client with sample-data fallback for standalone development.
-
-## Backend stack
-
-- Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
-- Tera templates with HTMX 2.0.8 and Alpine.js 3.14.8
-- `serde(rename_all = "camelCase")` for front-end interop
-
-## Source grounding
-
-- Starke, G. & Hruschka, P. *arc42 — Architecture Documentation Template*.
-  <https://arc42.org/>.
-- Starke, G. *Effective Software Architectures: A Practical Guide*. Hanser, 2023.
-- Nygard, M. "Documenting Architecture Decisions." *Cognitect Blog*, 2011.
+- Dynamic step route `/documentation/[step=step]/+page.svelte` with the `step`
+  param matcher validating 1–12.
 
 ## Compliance
 
