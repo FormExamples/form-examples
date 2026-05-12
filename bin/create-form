@@ -27,6 +27,8 @@ mkdir_with_ai_planning "$dir"
 mkdir_with_ai "$dir/doc"
 mkdir_with_ai "$dir/fhir-r5"
 mkdir_with_ai "$dir/sql-migrations"
+rsync -av "$top/etc/skel/sql-migrations/00_create_extensions.sql" "$dir/sql-migrations"
+rsync -av "$top/etc/skel/sql-migrations/01_create_function_set_updated_at.sql" "$dir/sql-migrations"
 mkdir_with_ai "$dir/xml-representations"
 
 mkdir_with_ai_planning "$dir/front-end-form-with-html"
