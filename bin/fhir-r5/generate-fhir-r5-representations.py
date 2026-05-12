@@ -20,7 +20,7 @@ import re
 import sys
 from pathlib import Path
 
-FORMS_DIR = Path(__file__).resolve().parent.parent / "forms"
+FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 
 # Consistent example UUIDs
 UUIDS = [
