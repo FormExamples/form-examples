@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE arc42_documentation_grade_flag SYSTEM "arc42_documentation_grade_flag.dtd">
+<arc42_documentation_grade_flag>
+<id>881e8400-e29b-41d4-a716-446655440012</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<arc42_documentation_grade_id>661e8400-e29b-41d4-a716-446655440010</arc42_documentation_grade_id>
+<ordinal>1</ordinal>
+<category>General</category>
+<priority>high</priority>
+<description>Example text.</description>
+</arc42_documentation_grade_flag>

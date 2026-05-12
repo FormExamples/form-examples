@@ -1,0 +1,10 @@
+<!ELEMENT arc42_documentation_grade_flag (id,created_at,updated_at,deleted_at,arc42_documentation_grade_id,ordinal,category,priority,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_grade_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

@@ -1,0 +1,10 @@
+<!ELEMENT deployment_node (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,environment,node_name,responsibility)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT environment (#PCDATA)>
+<!ELEMENT node_name (#PCDATA)>
+<!ELEMENT responsibility (#PCDATA)>
