@@ -1,0 +1,26 @@
+{
+  "name": "All seven axes healthy → green",
+  "input": {
+    "scores": {
+      "progressPercent": 80, "confidenceDecile": 8, "stretchTier": 1,
+      "alignmentGrade": 5, "impactTier": 4, "smartQuality": 5,
+      "paceDeviationPercent": 0
+    },
+    "keyResults": [{
+      "position": 1, "title": "Lift NPS to 50", "krType": "numeric",
+      "startValue": 32, "currentValue": 46, "targetValue": 50,
+      "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7778
+    }],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 7
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "green",
+    "expectedFlags": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Six KRs (above the UI cap of 5) → over-scoped flag",
+  "input": {
+    "scores": {
+      "progressPercent": 70, "confidenceDecile": 7, "stretchTier": 1,
+      "alignmentGrade": 4, "impactTier": 4, "smartQuality": 4,
+      "paceDeviationPercent": 0
+    },
+    "keyResults": [
+      {"position": 1, "title": "K1", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7},
+      {"position": 2, "title": "K2", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7},
+      {"position": 3, "title": "K3", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7},
+      {"position": 4, "title": "K4", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7},
+      {"position": 5, "title": "K5", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7},
+      {"position": 6, "title": "K6", "krType": "numeric", "startValue": 0, "currentValue": 7, "targetValue": 10, "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7}
+    ],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 7
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "green",
+    "expectedFlags": [{"flagCode": "over-scoped", "priority": "low"}]
+  }
+}

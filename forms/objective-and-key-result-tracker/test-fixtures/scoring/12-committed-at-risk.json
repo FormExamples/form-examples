@@ -1,0 +1,26 @@
+{
+  "name": "Committed objective at 30% progress, 80% of cycle elapsed → committed-at-risk + red",
+  "input": {
+    "scores": {
+      "progressPercent": 30, "confidenceDecile": 5, "stretchTier": 1,
+      "alignmentGrade": 4, "impactTier": 4, "smartQuality": 4,
+      "paceDeviationPercent": -30
+    },
+    "keyResults": [{
+      "position": 1, "title": "X", "krType": "numeric",
+      "startValue": 0, "currentValue": 30, "targetValue": 100,
+      "milestonesJson": null, "binaryDone": null, "progressFraction": 0.3
+    }],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-06-15T12:00:00Z", "previousConfidenceDecile": 5
+    },
+    "now": "2026-06-15T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "red",
+    "expectedFlags": [{"flagCode": "committed-at-risk", "priority": "high"}]
+  }
+}

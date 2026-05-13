@@ -1,0 +1,26 @@
+{
+  "name": "Mid-band progress on a committed objective → amber",
+  "input": {
+    "scores": {
+      "progressPercent": 55, "confidenceDecile": 5, "stretchTier": 1,
+      "alignmentGrade": 3, "impactTier": 3, "smartQuality": 3,
+      "paceDeviationPercent": -20
+    },
+    "keyResults": [{
+      "position": 1, "title": "X", "krType": "numeric",
+      "startValue": 0, "currentValue": 55, "targetValue": 100,
+      "milestonesJson": null, "binaryDone": null, "progressFraction": 0.55
+    }],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 5
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "amber",
+    "expectedFlags": []
+  }
+}

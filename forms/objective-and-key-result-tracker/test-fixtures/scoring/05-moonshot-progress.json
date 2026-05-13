@@ -1,0 +1,26 @@
+{
+  "name": "Moonshot at 75% → green and moonshot-progress flag",
+  "input": {
+    "scores": {
+      "progressPercent": 75, "confidenceDecile": 7, "stretchTier": 3,
+      "alignmentGrade": 5, "impactTier": 5, "smartQuality": 5,
+      "paceDeviationPercent": -5
+    },
+    "keyResults": [{
+      "position": 1, "title": "10x ARR", "krType": "numeric",
+      "startValue": 0, "currentValue": 75, "targetValue": 100,
+      "milestonesJson": null, "binaryDone": null, "progressFraction": 0.75
+    }],
+    "context": {
+      "level": "company", "parentObjectiveId": null,
+      "parentObjectiveStatus": null, "driPresent": true,
+      "cycleStartDate": "2026-01-01", "cycleEndDate": "2026-12-31",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 6
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "green",
+    "expectedFlags": [{"flagCode": "moonshot-progress", "priority": "low"}]
+  }
+}

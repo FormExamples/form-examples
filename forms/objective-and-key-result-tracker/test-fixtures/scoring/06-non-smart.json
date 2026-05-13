@@ -1,0 +1,26 @@
+{
+  "name": "smart_quality 1 → red and non-smart flag",
+  "input": {
+    "scores": {
+      "progressPercent": 70, "confidenceDecile": 7, "stretchTier": 1,
+      "alignmentGrade": 4, "impactTier": 4, "smartQuality": 1,
+      "paceDeviationPercent": 0
+    },
+    "keyResults": [{
+      "position": 1, "title": "Make things better", "krType": "numeric",
+      "startValue": 0, "currentValue": 70, "targetValue": 100,
+      "milestonesJson": null, "binaryDone": null, "progressFraction": 0.7
+    }],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 7
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "red",
+    "expectedFlags": [{"flagCode": "non-smart", "priority": "high"}]
+  }
+}

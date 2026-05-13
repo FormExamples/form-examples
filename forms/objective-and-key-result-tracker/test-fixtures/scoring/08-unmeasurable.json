@@ -1,0 +1,26 @@
+{
+  "name": "Only binary KRs → unmeasurable flag",
+  "input": {
+    "scores": {
+      "progressPercent": 50, "confidenceDecile": 7, "stretchTier": 1,
+      "alignmentGrade": 4, "impactTier": 4, "smartQuality": 4,
+      "paceDeviationPercent": 0
+    },
+    "keyResults": [{
+      "position": 1, "title": "Done?", "krType": "binary",
+      "startValue": null, "currentValue": null, "targetValue": null,
+      "milestonesJson": null, "binaryDone": false, "progressFraction": 0.0
+    }],
+    "context": {
+      "level": "team", "parentObjectiveId": "p-1",
+      "parentObjectiveStatus": "active", "driPresent": true,
+      "cycleStartDate": "2026-04-01", "cycleEndDate": "2026-06-30",
+      "checkedInAt": "2026-05-08T12:00:00Z", "previousConfidenceDecile": 7
+    },
+    "now": "2026-05-08T12:00:00Z"
+  },
+  "expected": {
+    "computedCompositeRag": "amber",
+    "expectedFlags": [{"flagCode": "unmeasurable", "priority": "high"}]
+  }
+}
