@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: casualty_card_medical_history
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum CasualtyCardMedicalHistoryTetanusStatusEnum {
+  TETANUSSTATUS_UNSPECIFIED = 0;
+  TETANUSSTATUS_UP_TO_DATE = 1;  // up-to-date
+  TETANUSSTATUS_NOT_UP_TO_DATE = 2;  // not-up-to-date
+  TETANUSSTATUS_UNKNOWN = 3;  // unknown
+}
+
+enum CasualtyCardMedicalHistorySmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_CURRENT = 1;  // current
+  SMOKINGSTATUS_EX_SMOKER = 2;  // ex-smoker
+  SMOKINGSTATUS_NEVER = 3;  // never
+}
+
+message CasualtyCardMedicalHistory {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  string past_medical_history = 6;  // TEXT
+  string past_surgical_history = 7;  // TEXT
+  CasualtyCardMedicalHistoryTetanusStatusEnum tetanus_status = 8;  // TEXT
+  CasualtyCardMedicalHistorySmokingStatusEnum smoking_status = 9;  // TEXT
+  string alcohol_consumption = 10;  // TEXT
+  string recreational_drug_use = 11;  // TEXT
+  string last_oral_intake = 12;  // TEXT
+}

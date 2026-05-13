@@ -1,0 +1,28 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.genetic_assessment;
+
+enum GradeRiskLevelEnum {
+  RISKLEVEL_UNSPECIFIED = 0;
+  RISKLEVEL_LOW = 1;  // low
+  RISKLEVEL_MODERATE = 2;  // moderate
+  RISKLEVEL_HIGH = 3;  // high
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeRiskLevelEnum risk_level = 6;  // VARCHAR(10)
+  int32 total_risk_score = 7;  // INTEGER
+  int32 cancer_genetics_score = 8;  // INTEGER
+  int32 cardiovascular_genetics_score = 9;  // INTEGER
+  int32 neurogenetics_score = 10;  // INTEGER
+  int32 reproductive_genetics_score = 11;  // INTEGER
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

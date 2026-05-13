@@ -1,0 +1,36 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: prescription_substitution_options
+
+syntax = "proto3";
+
+package form_examples.prescription_request;
+
+enum PrescriptionSubstitutionOptionsAllowBrandSubstitutionEnum {
+  ALLOWBRANDSUBSTITUTION_UNSPECIFIED = 0;
+  ALLOWBRANDSUBSTITUTION_YES = 1;  // yes
+  ALLOWBRANDSUBSTITUTION_NO = 2;  // no
+}
+
+enum PrescriptionSubstitutionOptionsAllowGenericSubstitutionEnum {
+  ALLOWGENERICSUBSTITUTION_UNSPECIFIED = 0;
+  ALLOWGENERICSUBSTITUTION_YES = 1;  // yes
+  ALLOWGENERICSUBSTITUTION_NO = 2;  // no
+}
+
+enum PrescriptionSubstitutionOptionsAllowDosageAdjustmentEnum {
+  ALLOWDOSAGEADJUSTMENT_UNSPECIFIED = 0;
+  ALLOWDOSAGEADJUSTMENT_YES = 1;  // yes
+  ALLOWDOSAGEADJUSTMENT_NO = 2;  // no
+}
+
+message PrescriptionSubstitutionOptions {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string prescription_request_id = 5;  // UUID — uuid
+  PrescriptionSubstitutionOptionsAllowBrandSubstitutionEnum allow_brand_substitution = 6;  // VARCHAR(3)
+  PrescriptionSubstitutionOptionsAllowGenericSubstitutionEnum allow_generic_substitution = 7;  // VARCHAR(3)
+  PrescriptionSubstitutionOptionsAllowDosageAdjustmentEnum allow_dosage_adjustment = 8;  // VARCHAR(3)
+  string substitution_notes = 9;  // TEXT
+}

@@ -1,0 +1,78 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_conditions
+
+syntax = "proto3";
+
+package form_examples.heart_health_check;
+
+enum MedicalConditionsHasDiabetesEnum {
+  HASDIABETES_UNSPECIFIED = 0;
+  HASDIABETES_NO = 1;  // no
+  HASDIABETES_TYPE1 = 2;  // type1
+  HASDIABETES_TYPE2 = 3;  // type2
+}
+
+enum MedicalConditionsHasAtrialFibrillationEnum {
+  HASATRIALFIBRILLATION_UNSPECIFIED = 0;
+  HASATRIALFIBRILLATION_YES = 1;  // yes
+  HASATRIALFIBRILLATION_NO = 2;  // no
+}
+
+enum MedicalConditionsHasRheumatoidArthritisEnum {
+  HASRHEUMATOIDARTHRITIS_UNSPECIFIED = 0;
+  HASRHEUMATOIDARTHRITIS_YES = 1;  // yes
+  HASRHEUMATOIDARTHRITIS_NO = 2;  // no
+}
+
+enum MedicalConditionsHasChronicKidneyDiseaseEnum {
+  HASCHRONICKIDNEYDISEASE_UNSPECIFIED = 0;
+  HASCHRONICKIDNEYDISEASE_YES = 1;  // yes
+  HASCHRONICKIDNEYDISEASE_NO = 2;  // no
+}
+
+enum MedicalConditionsHasMigraineEnum {
+  HASMIGRAINE_UNSPECIFIED = 0;
+  HASMIGRAINE_YES = 1;  // yes
+  HASMIGRAINE_NO = 2;  // no
+}
+
+enum MedicalConditionsHasSevereMentalIllnessEnum {
+  HASSEVEREMENTALILLNESS_UNSPECIFIED = 0;
+  HASSEVEREMENTALILLNESS_YES = 1;  // yes
+  HASSEVEREMENTALILLNESS_NO = 2;  // no
+}
+
+enum MedicalConditionsHasErectileDysfunctionEnum {
+  HASERECTILEDYSFUNCTION_UNSPECIFIED = 0;
+  HASERECTILEDYSFUNCTION_YES = 1;  // yes
+  HASERECTILEDYSFUNCTION_NO = 2;  // no
+}
+
+enum MedicalConditionsOnAtypicalAntipsychoticEnum {
+  ONATYPICALANTIPSYCHOTIC_UNSPECIFIED = 0;
+  ONATYPICALANTIPSYCHOTIC_YES = 1;  // yes
+  ONATYPICALANTIPSYCHOTIC_NO = 2;  // no
+}
+
+enum MedicalConditionsOnCorticosteroidsEnum {
+  ONCORTICOSTEROIDS_UNSPECIFIED = 0;
+  ONCORTICOSTEROIDS_YES = 1;  // yes
+  ONCORTICOSTEROIDS_NO = 2;  // no
+}
+
+message MedicalConditions {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  MedicalConditionsHasDiabetesEnum has_diabetes = 6;  // VARCHAR(10)
+  MedicalConditionsHasAtrialFibrillationEnum has_atrial_fibrillation = 7;  // VARCHAR(5)
+  MedicalConditionsHasRheumatoidArthritisEnum has_rheumatoid_arthritis = 8;  // VARCHAR(5)
+  MedicalConditionsHasChronicKidneyDiseaseEnum has_chronic_kidney_disease = 9;  // VARCHAR(5)
+  MedicalConditionsHasMigraineEnum has_migraine = 10;  // VARCHAR(5)
+  MedicalConditionsHasSevereMentalIllnessEnum has_severe_mental_illness = 11;  // VARCHAR(5)
+  MedicalConditionsHasErectileDysfunctionEnum has_erectile_dysfunction = 12;  // VARCHAR(5)
+  MedicalConditionsOnAtypicalAntipsychoticEnum on_atypical_antipsychotic = 13;  // VARCHAR(5)
+  MedicalConditionsOnCorticosteroidsEnum on_corticosteroids = 14;  // VARCHAR(5)
+}

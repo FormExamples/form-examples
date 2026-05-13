@@ -1,0 +1,28 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: purpose_of_release
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum PurposeOfReleasePurposeEnum {
+  PURPOSE_UNSPECIFIED = 0;
+  PURPOSE_CONTINUING_CARE = 1;  // continuing-care
+  PURPOSE_SECOND_OPINION = 2;  // second-opinion
+  PURPOSE_INSURANCE = 3;  // insurance
+  PURPOSE_LEGAL = 4;  // legal
+  PURPOSE_PERSONAL = 5;  // personal
+  PURPOSE_RESEARCH = 6;  // research
+  PURPOSE_EMPLOYMENT = 7;  // employment
+  PURPOSE_OTHER = 8;  // other
+}
+
+message PurposeOfRelease {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string release_form_id = 5;  // UUID — uuid
+  PurposeOfReleasePurposeEnum purpose = 6;  // VARCHAR(30)
+  string other_details = 7;  // TEXT
+}

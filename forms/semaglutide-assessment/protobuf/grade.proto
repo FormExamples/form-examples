@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.semaglutide_assessment;
+
+enum GradeEligibilityStatusEnum {
+  ELIGIBILITYSTATUS_UNSPECIFIED = 0;
+  ELIGIBILITYSTATUS_ELIGIBLE = 1;  // eligible
+  ELIGIBILITYSTATUS_CONDITIONAL = 2;  // conditional
+  ELIGIBILITYSTATUS_INELIGIBLE = 3;  // ineligible
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeEligibilityStatusEnum eligibility_status = 6;  // VARCHAR(20)
+  int32 absolute_contraindication_count = 7;  // INTEGER
+  int32 relative_contraindication_count = 8;  // INTEGER
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

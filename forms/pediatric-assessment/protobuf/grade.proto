@@ -1,0 +1,41 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.pediatric_assessment;
+
+enum GradeOverallOutcomeEnum {
+  OVERALLOUTCOME_UNSPECIFIED = 0;
+  OVERALLOUTCOME_PASS = 1;  // pass
+  OVERALLOUTCOME_CONCERN = 2;  // concern
+  OVERALLOUTCOME_REFER = 3;  // refer
+}
+
+enum GradeGrowthClassificationEnum {
+  GROWTHCLASSIFICATION_UNSPECIFIED = 0;
+  GROWTHCLASSIFICATION_NORMAL = 1;  // normal
+  GROWTHCLASSIFICATION_UNDERWEIGHT = 2;  // underweight
+  GROWTHCLASSIFICATION_OVERWEIGHT = 3;  // overweight
+  GROWTHCLASSIFICATION_FAILURE_TO_THRIVE = 4;  // failure-to-thrive
+}
+
+enum GradeEnvironmentalRiskLevelEnum {
+  ENVIRONMENTALRISKLEVEL_UNSPECIFIED = 0;
+  ENVIRONMENTALRISKLEVEL_LOW = 1;  // low
+  ENVIRONMENTALRISKLEVEL_MODERATE = 2;  // moderate
+  ENVIRONMENTALRISKLEVEL_HIGH = 3;  // high
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeOverallOutcomeEnum overall_outcome = 6;  // VARCHAR(10)
+  int32 developmental_score = 7;  // INTEGER
+  GradeGrowthClassificationEnum growth_classification = 8;  // VARCHAR(20)
+  GradeEnvironmentalRiskLevelEnum environmental_risk_level = 9;  // VARCHAR(10)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

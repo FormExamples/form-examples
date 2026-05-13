@@ -1,0 +1,43 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: issue_tracker_grade_flag
+
+syntax = "proto3";
+
+package form_examples.issue_tracker;
+
+enum IssueTrackerGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HARM_FATAL = 1;  // harm-fatal
+  CATEGORY_FAILURE_CATASTROPHIC = 2;  // failure-catastrophic
+  CATEGORY_SEVERITY_CATASTROPHIC = 3;  // severity-catastrophic
+  CATEGORY_MAGNITUDE_TOTAL_DESTRUCTION = 4;  // magnitude-total-destruction
+  CATEGORY_FREQUENCY_UNIVERSAL = 5;  // frequency-universal
+  CATEGORY_REQUIREMENT_MANDATORY = 6;  // requirement-mandatory
+  CATEGORY_REGULATORY = 7;  // regulatory
+  CATEGORY_SAFEGUARDING = 8;  // safeguarding
+  CATEGORY_DATA_LOSS = 9;  // data-loss
+  CATEGORY_OUTAGE = 10;  // outage
+  CATEGORY_SECURITY = 11;  // security
+  CATEGORY_SAFETY = 12;  // safety
+  CATEGORY_OTHER = 13;  // other
+}
+
+enum IssueTrackerGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message IssueTrackerGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string issue_tracker_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  IssueTrackerGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  IssueTrackerGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

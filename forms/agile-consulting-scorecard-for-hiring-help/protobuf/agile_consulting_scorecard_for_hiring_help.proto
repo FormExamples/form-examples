@@ -1,0 +1,60 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_consulting_scorecard_for_hiring_help
+
+syntax = "proto3";
+
+package form_examples.agile_consulting_scorecard_for_hiring_help;
+
+enum AgileConsultingScorecardForHiringHelpStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_IN_PROGRESS = 2;  // in-progress
+  STATUS_SUBMITTED = 3;  // submitted
+  STATUS_FINALIZED = 4;  // finalized
+  STATUS_CANCELLED = 5;  // cancelled
+}
+
+message AgileConsultingScorecardForHiringHelp {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string organization_id = 5;  // UUID — uuid
+  string respondent_id = 6;  // UUID — uuid
+  AgileConsultingScorecardForHiringHelpStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string submitted_at = 9;  // TIMESTAMPTZ — iso 8601
+  string finalized_at = 10;  // TIMESTAMPTZ — iso 8601
+  bool m1_done = 11;  // BOOLEAN
+  string m1_evidence = 12;  // TEXT
+  bool m2_done = 13;  // BOOLEAN
+  string m2_evidence = 14;  // TEXT
+  bool m3_done = 15;  // BOOLEAN
+  string m3_evidence = 16;  // TEXT
+  bool m4_done = 17;  // BOOLEAN
+  string m4_evidence = 18;  // TEXT
+  bool p1_done = 19;  // BOOLEAN
+  string p1_evidence = 20;  // TEXT
+  bool p2_done = 21;  // BOOLEAN
+  string p2_evidence = 22;  // TEXT
+  bool p3_done = 23;  // BOOLEAN
+  string p3_evidence = 24;  // TEXT
+  bool p4_done = 25;  // BOOLEAN
+  string p4_evidence = 26;  // TEXT
+  bool p5_done = 27;  // BOOLEAN
+  string p5_evidence = 28;  // TEXT
+  bool p6_done = 29;  // BOOLEAN
+  string p6_evidence = 30;  // TEXT
+  bool p7_done = 31;  // BOOLEAN
+  string p7_evidence = 32;  // TEXT
+  bool p8_done = 33;  // BOOLEAN
+  string p8_evidence = 34;  // TEXT
+  bool p9_done = 35;  // BOOLEAN
+  string p9_evidence = 36;  // TEXT
+  bool p10_done = 37;  // BOOLEAN
+  string p10_evidence = 38;  // TEXT
+  bool p11_done = 39;  // BOOLEAN
+  string p11_evidence = 40;  // TEXT
+  bool p12_done = 41;  // BOOLEAN
+  string p12_evidence = 42;  // TEXT
+}

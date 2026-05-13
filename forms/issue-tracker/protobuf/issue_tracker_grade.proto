@@ -1,0 +1,64 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: issue_tracker_grade
+
+syntax = "proto3";
+
+package form_examples.issue_tracker;
+
+enum IssueTrackerGradeScoreByFailureConditionEnum {
+  SCOREBYFAILURECONDITION_UNSPECIFIED = 0;
+  SCOREBYFAILURECONDITION_A = 1;  // A
+  SCOREBYFAILURECONDITION_B = 2;  // B
+  SCOREBYFAILURECONDITION_C = 3;  // C
+  SCOREBYFAILURECONDITION_D = 4;  // D
+  SCOREBYFAILURECONDITION_E = 5;  // E
+}
+
+enum IssueTrackerGradeComputedCompositePriorityEnum {
+  COMPUTEDCOMPOSITEPRIORITY_UNSPECIFIED = 0;
+  COMPUTEDCOMPOSITEPRIORITY_LOW = 1;  // low
+  COMPUTEDCOMPOSITEPRIORITY_MODERATE = 2;  // moderate
+  COMPUTEDCOMPOSITEPRIORITY_HIGH = 3;  // high
+  COMPUTEDCOMPOSITEPRIORITY_CRITICAL = 4;  // critical
+}
+
+enum IssueTrackerGradeFinalCompositePriorityEnum {
+  FINALCOMPOSITEPRIORITY_UNSPECIFIED = 0;
+  FINALCOMPOSITEPRIORITY_LOW = 1;  // low
+  FINALCOMPOSITEPRIORITY_MODERATE = 2;  // moderate
+  FINALCOMPOSITEPRIORITY_HIGH = 3;  // high
+  FINALCOMPOSITEPRIORITY_CRITICAL = 4;  // critical
+}
+
+enum IssueTrackerGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_PROCEED = 1;  // proceed
+  RECOMMENDATION_MITIGATE_FIRST = 2;  // mitigate-first
+  RECOMMENDATION_ESCALATE = 3;  // escalate
+  RECOMMENDATION_WONTFIX = 4;  // wontfix
+  RECOMMENDATION_DUPLICATE = 5;  // duplicate
+  RECOMMENDATION_CANCEL = 6;  // cancel
+}
+
+message IssueTrackerGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string issue_tracker_id = 5;  // UUID — uuid
+  int32 score_by_priority_rank = 6;  // INTEGER
+  int32 score_by_severity_of_impact = 7;  // INTEGER
+  int32 score_by_magnitude_of_damage = 8;  // INTEGER
+  int32 score_by_harm_grade = 9;  // INTEGER
+  IssueTrackerGradeScoreByFailureConditionEnum score_by_failure_condition = 10;  // VARCHAR(1)
+  int32 score_by_moscow_requirement = 11;  // INTEGER
+  double score_by_frequency_percent = 12;  // NUMERIC(5,2) — numeric(5,2)
+  IssueTrackerGradeComputedCompositePriorityEnum computed_composite_priority = 13;  // VARCHAR(10)
+  IssueTrackerGradeFinalCompositePriorityEnum final_composite_priority = 14;  // VARCHAR(10)
+  string override_reason = 15;  // VARCHAR(500) — max 500 chars
+  IssueTrackerGradeRecommendationEnum recommendation = 16;  // VARCHAR(30)
+  string triage_notes = 17;  // TEXT
+  string signed_by = 18;  // VARCHAR(255) — max 255 chars
+  string signed_at = 19;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
+}

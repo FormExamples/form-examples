@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: outpatient_outcome_clinical
+
+syntax = "proto3";
+
+package form_examples.outpatient_outcome;
+
+enum OutpatientOutcomeClinicalOutcomeClassificationEnum {
+  OUTCOMECLASSIFICATION_UNSPECIFIED = 0;
+  OUTCOMECLASSIFICATION_RESOLVED = 1;  // resolved
+  OUTCOMECLASSIFICATION_IMPROVED = 2;  // improved
+  OUTCOMECLASSIFICATION_UNCHANGED = 3;  // unchanged
+  OUTCOMECLASSIFICATION_WORSENED = 4;  // worsened
+  OUTCOMECLASSIFICATION_DIED = 5;  // died
+}
+
+message OutpatientOutcomeClinical {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string outpatient_outcome_id = 5;  // UUID — uuid
+  string presenting_complaint = 6;  // TEXT
+  string diagnosis = 7;  // TEXT
+  string treatment_delivered = 8;  // TEXT
+  OutpatientOutcomeClinicalOutcomeClassificationEnum outcome_classification = 9;  // VARCHAR(20)
+}

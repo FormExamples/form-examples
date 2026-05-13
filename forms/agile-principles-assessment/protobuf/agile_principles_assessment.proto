@@ -1,0 +1,71 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_principles_assessment
+
+syntax = "proto3";
+
+package form_examples.agile_principles_assessment;
+
+enum AgilePrinciplesAssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+}
+
+enum AgilePrinciplesAssessmentAssessmentPeriodEnum {
+  ASSESSMENTPERIOD_UNSPECIFIED = 0;
+  ASSESSMENTPERIOD_SPRINT = 1;  // sprint
+  ASSESSMENTPERIOD_QUARTER = 2;  // quarter
+  ASSESSMENTPERIOD_HALF_YEAR = 3;  // half-year
+  ASSESSMENTPERIOD_ANNUAL = 4;  // annual
+  ASSESSMENTPERIOD_AD_HOC = 5;  // ad-hoc
+}
+
+message AgilePrinciplesAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string respondent_id = 5;  // UUID — uuid
+  AgilePrinciplesAssessmentStatusEnum status = 6;  // VARCHAR(20)
+  bool is_anonymous = 7;  // BOOLEAN
+  string assessment_date = 8;  // DATE — iso 8601 date
+  AgilePrinciplesAssessmentAssessmentPeriodEnum assessment_period = 9;  // VARCHAR(50)
+  int32 p01_customer_satisfaction = 10;  // SMALLINT
+  string p01_comment = 11;  // TEXT
+  double p01_weight = 12;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p02_welcome_change = 13;  // SMALLINT
+  string p02_comment = 14;  // TEXT
+  double p02_weight = 15;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p03_deliver_frequently = 16;  // SMALLINT
+  string p03_comment = 17;  // TEXT
+  double p03_weight = 18;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p04_collaboration = 19;  // SMALLINT
+  string p04_comment = 20;  // TEXT
+  double p04_weight = 21;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p05_motivated_individuals = 22;  // SMALLINT
+  string p05_comment = 23;  // TEXT
+  double p05_weight = 24;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p06_face_to_face = 25;  // SMALLINT
+  string p06_comment = 26;  // TEXT
+  double p06_weight = 27;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p07_working_software = 28;  // SMALLINT
+  string p07_comment = 29;  // TEXT
+  double p07_weight = 30;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p08_sustainable_development = 31;  // SMALLINT
+  string p08_comment = 32;  // TEXT
+  double p08_weight = 33;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p09_technical_excellence = 34;  // SMALLINT
+  string p09_comment = 35;  // TEXT
+  double p09_weight = 36;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p10_simplicity = 37;  // SMALLINT
+  string p10_comment = 38;  // TEXT
+  double p10_weight = 39;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p11_self_organising_teams = 40;  // SMALLINT
+  string p11_comment = 41;  // TEXT
+  double p11_weight = 42;  // NUMERIC(3,2) — numeric(3,2)
+  int32 p12_regular_reflection = 43;  // SMALLINT
+  string p12_comment = 44;  // TEXT
+  double p12_weight = 45;  // NUMERIC(3,2) — numeric(3,2)
+  string overall_notes = 46;  // TEXT
+}

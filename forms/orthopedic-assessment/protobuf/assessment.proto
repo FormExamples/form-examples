@@ -1,0 +1,202 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_range_of_motion, assessment_rom_measurement, assessment_strength_testing, assessment_strength_test_item, assessment_imaging_history, assessment_imaging_item, assessment_surgical_history, assessment_surgery_item
+
+syntax = "proto3";
+
+package form_examples.orthopedic_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentJointAssessedEnum {
+  JOINTASSESSED_UNSPECIFIED = 0;
+  JOINTASSESSED_SHOULDER = 1;  // shoulder
+  JOINTASSESSED_ELBOW = 2;  // elbow
+  JOINTASSESSED_WRIST = 3;  // wrist
+  JOINTASSESSED_HAND = 4;  // hand
+  JOINTASSESSED_HIP = 5;  // hip
+  JOINTASSESSED_KNEE = 6;  // knee
+  JOINTASSESSED_ANKLE = 7;  // ankle
+  JOINTASSESSED_SPINE_CERVICAL = 8;  // spine-cervical
+  JOINTASSESSED_SPINE_LUMBAR = 9;  // spine-lumbar
+  JOINTASSESSED_OTHER = 10;  // other
+}
+
+enum AssessmentSideAssessedEnum {
+  SIDEASSESSED_UNSPECIFIED = 0;
+  SIDEASSESSED_LEFT = 1;  // left
+  SIDEASSESSED_RIGHT = 2;  // right
+  SIDEASSESSED_BILATERAL = 3;  // bilateral
+}
+
+enum AssessmentOverallRomStatusEnum {
+  OVERALLROMSTATUS_UNSPECIFIED = 0;
+  OVERALLROMSTATUS_FULL = 1;  // full
+  OVERALLROMSTATUS_MILDLY_RESTRICTED = 2;  // mildly-restricted
+  OVERALLROMSTATUS_MODERATELY_RESTRICTED = 3;  // moderately-restricted
+  OVERALLROMSTATUS_SEVERELY_RESTRICTED = 4;  // severely-restricted
+}
+
+enum AssessmentEndFeelEnum {
+  ENDFEEL_UNSPECIFIED = 0;
+  ENDFEEL_FIRM = 1;  // firm
+  ENDFEEL_HARD = 2;  // hard
+  ENDFEEL_SOFT = 3;  // soft
+  ENDFEEL_EMPTY = 4;  // empty
+  ENDFEEL_SPRINGY = 5;  // springy
+}
+
+enum AssessmentPainOnMovementEnum {
+  PAINONMOVEMENT_UNSPECIFIED = 0;
+  PAINONMOVEMENT_YES = 1;  // yes
+  PAINONMOVEMENT_NO = 2;  // no
+}
+
+enum AssessmentOverallStrengthStatusEnum {
+  OVERALLSTRENGTHSTATUS_UNSPECIFIED = 0;
+  OVERALLSTRENGTHSTATUS_NORMAL = 1;  // normal
+  OVERALLSTRENGTHSTATUS_MILDLY_REDUCED = 2;  // mildly-reduced
+  OVERALLSTRENGTHSTATUS_MODERATELY_REDUCED = 3;  // moderately-reduced
+  OVERALLSTRENGTHSTATUS_SEVERELY_REDUCED = 4;  // severely-reduced
+}
+
+enum AssessmentPainOnTestingEnum {
+  PAINONTESTING_UNSPECIFIED = 0;
+  PAINONTESTING_YES = 1;  // yes
+  PAINONTESTING_NO = 2;  // no
+}
+
+enum AssessmentHasPreviousImagingEnum {
+  HASPREVIOUSIMAGING_UNSPECIFIED = 0;
+  HASPREVIOUSIMAGING_YES = 1;  // yes
+  HASPREVIOUSIMAGING_NO = 2;  // no
+}
+
+enum AssessmentImagingRequestedEnum {
+  IMAGINGREQUESTED_UNSPECIFIED = 0;
+  IMAGINGREQUESTED_YES = 1;  // yes
+  IMAGINGREQUESTED_NO = 2;  // no
+}
+
+enum AssessmentModalityEnum {
+  MODALITY_UNSPECIFIED = 0;
+  MODALITY_X_RAY = 1;  // x-ray
+  MODALITY_MRI = 2;  // mri
+  MODALITY_CT = 3;  // ct
+  MODALITY_ULTRASOUND = 4;  // ultrasound
+  MODALITY_BONE_SCAN = 5;  // bone-scan
+  MODALITY_DEXA = 6;  // dexa
+  MODALITY_OTHER = 7;  // other
+}
+
+enum AssessmentHasPreviousSurgeryEnum {
+  HASPREVIOUSSURGERY_UNSPECIFIED = 0;
+  HASPREVIOUSSURGERY_YES = 1;  // yes
+  HASPREVIOUSSURGERY_NO = 2;  // no
+}
+
+enum AssessmentSurgeryConsideredEnum {
+  SURGERYCONSIDERED_UNSPECIFIED = 0;
+  SURGERYCONSIDERED_YES = 1;  // yes
+  SURGERYCONSIDERED_NO = 2;  // no
+}
+
+enum AssessmentPatientPreferenceEnum {
+  PATIENTPREFERENCE_UNSPECIFIED = 0;
+  PATIENTPREFERENCE_CONSERVATIVE = 1;  // conservative
+  PATIENTPREFERENCE_OPEN_TO_SURGERY = 2;  // open-to-surgery
+  PATIENTPREFERENCE_PREFERS_SURGERY = 3;  // prefers-surgery
+  PATIENTPREFERENCE_UNDECIDED = 4;  // undecided
+}
+
+enum AssessmentAnaestheticRiskEnum {
+  ANAESTHETICRISK_UNSPECIFIED = 0;
+  ANAESTHETICRISK_LOW = 1;  // low
+  ANAESTHETICRISK_MODERATE = 2;  // moderate
+  ANAESTHETICRISK_HIGH = 3;  // high
+}
+
+enum AssessmentAnticoagulantUseEnum {
+  ANTICOAGULANTUSE_UNSPECIFIED = 0;
+  ANTICOAGULANTUSE_YES = 1;  // yes
+  ANTICOAGULANTUSE_NO = 2;  // no
+}
+
+enum AssessmentOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_GOOD = 1;  // good
+  OUTCOME_FAIR = 2;  // fair
+  OUTCOME_POOR = 3;  // poor
+  OUTCOME_COMPLICATION = 4;  // complication
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string range_of_motion_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentJointAssessedEnum joint_assessed = 8;  // VARCHAR(30)
+  AssessmentSideAssessedEnum side_assessed = 9;  // VARCHAR(10)
+  AssessmentOverallRomStatusEnum overall_rom_status = 10;  // VARCHAR(20)
+  string range_of_motion_notes = 11;  // TEXT
+  string rom_measurement_deleted_at = 12;  // TIMESTAMPTZ — iso 8601
+  string range_of_motion_id = 13;  // UUID — uuid
+  string movement = 14;  // VARCHAR(50) — max 50 chars
+  int32 active_degrees = 15;  // INTEGER
+  int32 passive_degrees = 16;  // INTEGER
+  int32 normal_degrees = 17;  // INTEGER
+  AssessmentEndFeelEnum end_feel = 18;  // VARCHAR(20)
+  AssessmentPainOnMovementEnum pain_on_movement = 19;  // VARCHAR(5)
+  int32 sort_order = 20;  // INTEGER
+  string strength_testing_deleted_at = 21;  // TIMESTAMPTZ — iso 8601
+  double grip_strength_affected_kg = 22;  // NUMERIC(5,1) — numeric(5,1)
+  double grip_strength_unaffected_kg = 23;  // NUMERIC(5,1) — numeric(5,1)
+  AssessmentOverallStrengthStatusEnum overall_strength_status = 24;  // VARCHAR(20)
+  string strength_testing_notes = 25;  // TEXT
+  string strength_test_item_deleted_at = 26;  // TIMESTAMPTZ — iso 8601
+  string strength_testing_id = 27;  // UUID — uuid
+  string muscle_group = 28;  // VARCHAR(100) — max 100 chars
+  string strength_test_item_movement = 29;  // VARCHAR(100) — max 100 chars
+  int32 mrc_grade = 30;  // INTEGER
+  AssessmentPainOnTestingEnum pain_on_testing = 31;  // VARCHAR(5)
+  int32 strength_test_item_sort_order = 32;  // INTEGER
+  string imaging_history_deleted_at = 33;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasPreviousImagingEnum has_previous_imaging = 34;  // VARCHAR(5)
+  AssessmentImagingRequestedEnum imaging_requested = 35;  // VARCHAR(5)
+  string imaging_requested_details = 36;  // TEXT
+  string imaging_notes = 37;  // TEXT
+  string imaging_item_deleted_at = 38;  // TIMESTAMPTZ — iso 8601
+  string imaging_history_id = 39;  // UUID — uuid
+  AssessmentModalityEnum modality = 40;  // VARCHAR(20)
+  string body_region = 41;  // VARCHAR(100) — max 100 chars
+  string date_performed = 42;  // DATE — iso 8601 date
+  string findings = 43;  // TEXT
+  int32 imaging_item_sort_order = 44;  // INTEGER
+  string surgical_history_deleted_at = 45;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasPreviousSurgeryEnum has_previous_surgery = 46;  // VARCHAR(5)
+  AssessmentSurgeryConsideredEnum surgery_considered = 47;  // VARCHAR(5)
+  string surgery_considered_details = 48;  // TEXT
+  AssessmentPatientPreferenceEnum patient_preference = 49;  // VARCHAR(30)
+  string comorbidities_affecting_surgery = 50;  // TEXT
+  AssessmentAnaestheticRiskEnum anaesthetic_risk = 51;  // VARCHAR(20)
+  AssessmentAnticoagulantUseEnum anticoagulant_use = 52;  // VARCHAR(5)
+  string anticoagulant_details = 53;  // TEXT
+  string surgical_history_notes = 54;  // TEXT
+  string surgery_item_deleted_at = 55;  // TIMESTAMPTZ — iso 8601
+  string surgical_history_id = 56;  // UUID — uuid
+  string procedure_name = 57;  // VARCHAR(255) — max 255 chars
+  string surgery_item_date_performed = 58;  // DATE — iso 8601 date
+  string surgeon = 59;  // VARCHAR(255) — max 255 chars
+  string hospital = 60;  // VARCHAR(255) — max 255 chars
+  AssessmentOutcomeEnum outcome = 61;  // VARCHAR(20)
+  string outcome_details = 62;  // TEXT
+  int32 surgery_item_sort_order = 63;  // INTEGER
+}

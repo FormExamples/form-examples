@@ -1,0 +1,100 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_polypharmacy_review, assessment_polypharmacy_review_medication
+
+syntax = "proto3";
+
+package form_examples.gerontology_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentPolypharmacyFlagEnum {
+  POLYPHARMACYFLAG_UNSPECIFIED = 0;
+  POLYPHARMACYFLAG_YES = 1;  // yes
+  POLYPHARMACYFLAG_NO = 2;  // no
+}
+
+enum AssessmentFallsRiskMedicationsEnum {
+  FALLSRISKMEDICATIONS_UNSPECIFIED = 0;
+  FALLSRISKMEDICATIONS_YES = 1;  // yes
+  FALLSRISKMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentAnticholinergicBurdenEnum {
+  ANTICHOLINERGICBURDEN_UNSPECIFIED = 0;
+  ANTICHOLINERGICBURDEN_LOW = 1;  // low
+  ANTICHOLINERGICBURDEN_MODERATE = 2;  // moderate
+  ANTICHOLINERGICBURDEN_HIGH = 3;  // high
+}
+
+enum AssessmentDrugInteractionsIdentifiedEnum {
+  DRUGINTERACTIONSIDENTIFIED_UNSPECIFIED = 0;
+  DRUGINTERACTIONSIDENTIFIED_YES = 1;  // yes
+  DRUGINTERACTIONSIDENTIFIED_NO = 2;  // no
+}
+
+enum AssessmentAdherenceConcernsEnum {
+  ADHERENCECONCERNS_UNSPECIFIED = 0;
+  ADHERENCECONCERNS_YES = 1;  // yes
+  ADHERENCECONCERNS_NO = 2;  // no
+}
+
+enum AssessmentStoppStartReviewDoneEnum {
+  STOPPSTARTREVIEWDONE_UNSPECIFIED = 0;
+  STOPPSTARTREVIEWDONE_YES = 1;  // yes
+  STOPPSTARTREVIEWDONE_NO = 2;  // no
+}
+
+enum AssessmentRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_ORAL = 1;  // oral
+  ROUTE_TOPICAL = 2;  // topical
+  ROUTE_INHALED = 3;  // inhaled
+  ROUTE_INJECTABLE = 4;  // injectable
+  ROUTE_PATCH = 5;  // patch
+  ROUTE_OTHER = 6;  // other
+}
+
+enum AssessmentIsPrnEnum {
+  ISPRN_UNSPECIFIED = 0;
+  ISPRN_YES = 1;  // yes
+  ISPRN_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string polypharmacy_review_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  int32 total_regular_medications = 8;  // INTEGER
+  int32 total_prn_medications = 9;  // INTEGER
+  AssessmentPolypharmacyFlagEnum polypharmacy_flag = 10;  // VARCHAR(5)
+  string medication_review_date = 11;  // DATE — iso 8601 date
+  AssessmentFallsRiskMedicationsEnum falls_risk_medications = 12;  // VARCHAR(5)
+  string falls_risk_medication_details = 13;  // TEXT
+  AssessmentAnticholinergicBurdenEnum anticholinergic_burden = 14;  // VARCHAR(10)
+  AssessmentDrugInteractionsIdentifiedEnum drug_interactions_identified = 15;  // VARCHAR(5)
+  string drug_interaction_details = 16;  // TEXT
+  AssessmentAdherenceConcernsEnum adherence_concerns = 17;  // VARCHAR(5)
+  string adherence_details = 18;  // TEXT
+  AssessmentStoppStartReviewDoneEnum stopp_start_review_done = 19;  // VARCHAR(5)
+  string deprescribing_opportunities = 20;  // TEXT
+  string polypharmacy_notes = 21;  // TEXT
+  string polypharmacy_review_medication_deleted_at = 22;  // TIMESTAMPTZ — iso 8601
+  string polypharmacy_review_id = 23;  // UUID — uuid
+  string medication_name = 24;  // VARCHAR(255) — max 255 chars
+  string dose = 25;  // VARCHAR(100) — max 100 chars
+  string frequency = 26;  // VARCHAR(100) — max 100 chars
+  AssessmentRouteEnum route = 27;  // VARCHAR(50)
+  string indication = 28;  // VARCHAR(255) — max 255 chars
+  AssessmentIsPrnEnum is_prn = 29;  // VARCHAR(5)
+  int32 sort_order = 30;  // INTEGER
+}

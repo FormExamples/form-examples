@@ -1,0 +1,26 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: outpatient_outcome_followup
+
+syntax = "proto3";
+
+package form_examples.outpatient_outcome;
+
+enum OutpatientOutcomeFollowupDispositionEnum {
+  DISPOSITION_UNSPECIFIED = 0;
+  DISPOSITION_DISCHARGE = 1;  // discharge
+  DISPOSITION_PIFU = 2;  // pifu
+  DISPOSITION_FOLLOW_UP_BOOKED = 3;  // follow_up_booked
+  DISPOSITION_ONWARD_REFERRAL = 4;  // onward_referral
+}
+
+message OutpatientOutcomeFollowup {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string outpatient_outcome_id = 5;  // UUID — uuid
+  OutpatientOutcomeFollowupDispositionEnum disposition = 6;  // VARCHAR(30)
+  string next_appointment_date = 7;  // DATE — iso 8601 date
+  string onward_referral_specialty = 8;  // VARCHAR(100) — max 100 chars
+  string followup_notes = 9;  // TEXT
+}

@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.patient_intake;
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string birth_date = 6;  // DATE — iso 8601 date
+  string email = 7;  // TEXT
+  string phone = 8;  // TEXT
+  string postal_address_as_full_text = 9;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 10;  // CHAR(2) — max 2 chars
+  string postcode = 11;  // TEXT
+  string united_kingdom_nhs_number = 12;  // VARCHAR(20) — max 20 chars
+  double waist_as_cm = 13;  // NUMERIC(5,1) — numeric(5,1)
+  double height_as_cm = 14;  // NUMERIC(5,1) — numeric(5,1)
+  double weight_as_kg = 15;  // NUMERIC(5,1) — numeric(5,1)
+  double body_mass_index = 16;  // NUMERIC(4,1) — numeric(4,1)
+  double waist_height_ratio = 17;  // NUMERIC(4,1) — numeric(4,1)
+  double vo2_max = 18;  // NUMERIC(4,1) — numeric(4,1)
+}

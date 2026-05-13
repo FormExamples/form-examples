@@ -1,0 +1,160 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_medications, assessment_medication_item, assessment_allergies, assessment_allergy_item
+
+syntax = "proto3";
+
+package form_examples.patient_intake;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakesMedicationsEnum {
+  TAKESMEDICATIONS_UNSPECIFIED = 0;
+  TAKESMEDICATIONS_YES = 1;  // yes
+  TAKESMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentTakesOverTheCounterEnum {
+  TAKESOVERTHECOUNTER_UNSPECIFIED = 0;
+  TAKESOVERTHECOUNTER_YES = 1;  // yes
+  TAKESOVERTHECOUNTER_NO = 2;  // no
+}
+
+enum AssessmentTakesSupplementsEnum {
+  TAKESSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESSUPPLEMENTS_YES = 1;  // yes
+  TAKESSUPPLEMENTS_NO = 2;  // no
+}
+
+enum AssessmentMedicationAdherenceEnum {
+  MEDICATIONADHERENCE_UNSPECIFIED = 0;
+  MEDICATIONADHERENCE_GOOD = 1;  // good
+  MEDICATIONADHERENCE_PARTIAL = 2;  // partial
+  MEDICATIONADHERENCE_POOR = 3;  // poor
+}
+
+enum AssessmentRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_ORAL = 1;  // oral
+  ROUTE_TOPICAL = 2;  // topical
+  ROUTE_INHALED = 3;  // inhaled
+  ROUTE_INJECTABLE = 4;  // injectable
+  ROUTE_OTHER = 5;  // other
+}
+
+enum AssessmentHasDrugAllergiesEnum {
+  HASDRUGALLERGIES_UNSPECIFIED = 0;
+  HASDRUGALLERGIES_YES = 1;  // yes
+  HASDRUGALLERGIES_NO = 2;  // no
+}
+
+enum AssessmentHasFoodAllergiesEnum {
+  HASFOODALLERGIES_UNSPECIFIED = 0;
+  HASFOODALLERGIES_YES = 1;  // yes
+  HASFOODALLERGIES_NO = 2;  // no
+}
+
+enum AssessmentHasEnvironmentalAllergiesEnum {
+  HASENVIRONMENTALALLERGIES_UNSPECIFIED = 0;
+  HASENVIRONMENTALALLERGIES_YES = 1;  // yes
+  HASENVIRONMENTALALLERGIES_NO = 2;  // no
+}
+
+enum AssessmentHasLatexAllergyEnum {
+  HASLATEXALLERGY_UNSPECIFIED = 0;
+  HASLATEXALLERGY_YES = 1;  // yes
+  HASLATEXALLERGY_NO = 2;  // no
+}
+
+enum AssessmentHasContrastAllergyEnum {
+  HASCONTRASTALLERGY_UNSPECIFIED = 0;
+  HASCONTRASTALLERGY_YES = 1;  // yes
+  HASCONTRASTALLERGY_NO = 2;  // no
+}
+
+enum AssessmentHasAnaestheticAllergyEnum {
+  HASANAESTHETICALLERGY_UNSPECIFIED = 0;
+  HASANAESTHETICALLERGY_YES = 1;  // yes
+  HASANAESTHETICALLERGY_NO = 2;  // no
+}
+
+enum AssessmentHistoryOfAnaphylaxisEnum {
+  HISTORYOFANAPHYLAXIS_UNSPECIFIED = 0;
+  HISTORYOFANAPHYLAXIS_YES = 1;  // yes
+  HISTORYOFANAPHYLAXIS_NO = 2;  // no
+}
+
+enum AssessmentCarriesEpipenEnum {
+  CARRIESEPIPEN_UNSPECIFIED = 0;
+  CARRIESEPIPEN_YES = 1;  // yes
+  CARRIESEPIPEN_NO = 2;  // no
+}
+
+enum AssessmentAllergyTypeEnum {
+  ALLERGYTYPE_UNSPECIFIED = 0;
+  ALLERGYTYPE_DRUG = 1;  // drug
+  ALLERGYTYPE_FOOD = 2;  // food
+  ALLERGYTYPE_ENVIRONMENTAL = 3;  // environmental
+  ALLERGYTYPE_LATEX = 4;  // latex
+  ALLERGYTYPE_CONTRAST = 5;  // contrast
+  ALLERGYTYPE_ANAESTHETIC = 6;  // anaesthetic
+  ALLERGYTYPE_OTHER = 7;  // other
+}
+
+enum AssessmentSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_MILD = 1;  // mild
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_SEVERE = 3;  // severe
+  SEVERITY_ANAPHYLAXIS = 4;  // anaphylaxis
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakesMedicationsEnum takes_medications = 8;  // VARCHAR(5)
+  AssessmentTakesOverTheCounterEnum takes_over_the_counter = 9;  // VARCHAR(5)
+  AssessmentTakesSupplementsEnum takes_supplements = 10;  // VARCHAR(5)
+  string supplement_details = 11;  // TEXT
+  AssessmentMedicationAdherenceEnum medication_adherence = 12;  // VARCHAR(20)
+  string pharmacy_name = 13;  // VARCHAR(255) — max 255 chars
+  string pharmacy_phone = 14;  // VARCHAR(50) — max 50 chars
+  string medications_notes = 15;  // TEXT
+  string medication_item_deleted_at = 16;  // TIMESTAMPTZ — iso 8601
+  string medications_id = 17;  // UUID — uuid
+  string medication_name = 18;  // VARCHAR(255) — max 255 chars
+  string dose = 19;  // VARCHAR(100) — max 100 chars
+  string frequency = 20;  // VARCHAR(100) — max 100 chars
+  AssessmentRouteEnum route = 21;  // VARCHAR(30)
+  string prescriber = 22;  // VARCHAR(255) — max 255 chars
+  string reason = 23;  // VARCHAR(255) — max 255 chars
+  string start_date = 24;  // DATE — iso 8601 date
+  int32 sort_order = 25;  // INTEGER
+  string allergies_deleted_at = 26;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasDrugAllergiesEnum has_drug_allergies = 27;  // VARCHAR(5)
+  AssessmentHasFoodAllergiesEnum has_food_allergies = 28;  // VARCHAR(5)
+  AssessmentHasEnvironmentalAllergiesEnum has_environmental_allergies = 29;  // VARCHAR(5)
+  AssessmentHasLatexAllergyEnum has_latex_allergy = 30;  // VARCHAR(5)
+  AssessmentHasContrastAllergyEnum has_contrast_allergy = 31;  // VARCHAR(5)
+  AssessmentHasAnaestheticAllergyEnum has_anaesthetic_allergy = 32;  // VARCHAR(5)
+  AssessmentHistoryOfAnaphylaxisEnum history_of_anaphylaxis = 33;  // VARCHAR(5)
+  AssessmentCarriesEpipenEnum carries_epipen = 34;  // VARCHAR(5)
+  string allergies_notes = 35;  // TEXT
+  string allergy_item_deleted_at = 36;  // TIMESTAMPTZ — iso 8601
+  string allergies_id = 37;  // UUID — uuid
+  string allergen = 38;  // VARCHAR(255) — max 255 chars
+  AssessmentAllergyTypeEnum allergy_type = 39;  // VARCHAR(20)
+  string reaction = 40;  // TEXT
+  AssessmentSeverityEnum severity = 41;  // VARCHAR(20)
+  int32 allergy_item_sort_order = 42;  // INTEGER
+}

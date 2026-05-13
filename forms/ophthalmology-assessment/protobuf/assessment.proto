@@ -1,0 +1,67 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_medication_item
+
+syntax = "proto3";
+
+package form_examples.ophthalmology_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentHasOcularMedicationsEnum {
+  HASOCULARMEDICATIONS_UNSPECIFIED = 0;
+  HASOCULARMEDICATIONS_YES = 1;  // yes
+  HASOCULARMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentHasSystemicMedicationsEnum {
+  HASSYSTEMICMEDICATIONS_UNSPECIFIED = 0;
+  HASSYSTEMICMEDICATIONS_YES = 1;  // yes
+  HASSYSTEMICMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_TOPICAL = 1;  // topical
+  ROUTE_ORAL = 2;  // oral
+  ROUTE_INTRAVITREAL = 3;  // intravitreal
+  ROUTE_PERIOCULAR = 4;  // periocular
+  ROUTE_IV = 5;  // iv
+  ROUTE_OTHER = 6;  // other
+}
+
+enum AssessmentEyeEnum {
+  EYE_UNSPECIFIED = 0;
+  EYE_RIGHT = 1;  // right
+  EYE_LEFT = 2;  // left
+  EYE_BOTH = 3;  // both
+  EYE_SYSTEMIC = 4;  // systemic
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasOcularMedicationsEnum has_ocular_medications = 8;  // VARCHAR(5)
+  AssessmentHasSystemicMedicationsEnum has_systemic_medications = 9;  // VARCHAR(5)
+  string medication_allergies = 10;  // TEXT
+  string medications_notes = 11;  // TEXT
+  string medication_item_deleted_at = 12;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 13;  // UUID — uuid
+  string medication_name = 14;  // VARCHAR(255) — max 255 chars
+  string dose = 15;  // VARCHAR(100) — max 100 chars
+  string frequency = 16;  // VARCHAR(100) — max 100 chars
+  AssessmentRouteEnum route = 17;  // VARCHAR(30)
+  AssessmentEyeEnum eye = 18;  // VARCHAR(10)
+  string indication = 19;  // VARCHAR(255) — max 255 chars
+  int32 sort_order = 20;  // INTEGER
+}

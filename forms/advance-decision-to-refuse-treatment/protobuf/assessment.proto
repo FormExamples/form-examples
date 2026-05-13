@@ -1,0 +1,291 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment
+
+syntax = "proto3";
+
+package form_examples.advance_decision_to_refuse_treatment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentHasMentalCapacityEnum {
+  HASMENTALCAPACITY_UNSPECIFIED = 0;
+  HASMENTALCAPACITY_YES = 1;  // yes
+  HASMENTALCAPACITY_NO = 2;  // no
+}
+
+enum AssessmentUnderstandsConsequencesEnum {
+  UNDERSTANDSCONSEQUENCES_UNSPECIFIED = 0;
+  UNDERSTANDSCONSEQUENCES_YES = 1;  // yes
+  UNDERSTANDSCONSEQUENCES_NO = 2;  // no
+}
+
+enum AssessmentMadeVoluntarilyEnum {
+  MADEVOLUNTARILY_UNSPECIFIED = 0;
+  MADEVOLUNTARILY_YES = 1;  // yes
+  MADEVOLUNTARILY_NO = 2;  // no
+}
+
+enum AssessmentAppliesIfTerminallyIllEnum {
+  APPLIESIFTERMINALLYILL_UNSPECIFIED = 0;
+  APPLIESIFTERMINALLYILL_YES = 1;  // yes
+  APPLIESIFTERMINALLYILL_NO = 2;  // no
+}
+
+enum AssessmentAppliesIfPermanentlyUnconsciousEnum {
+  APPLIESIFPERMANENTLYUNCONSCIOUS_UNSPECIFIED = 0;
+  APPLIESIFPERMANENTLYUNCONSCIOUS_YES = 1;  // yes
+  APPLIESIFPERMANENTLYUNCONSCIOUS_NO = 2;  // no
+}
+
+enum AssessmentAppliesIfSeverelyBrainDamagedEnum {
+  APPLIESIFSEVERELYBRAINDAMAGED_UNSPECIFIED = 0;
+  APPLIESIFSEVERELYBRAINDAMAGED_YES = 1;  // yes
+  APPLIESIFSEVERELYBRAINDAMAGED_NO = 2;  // no
+}
+
+enum AssessmentAppliesIfAdvancedDementiaEnum {
+  APPLIESIFADVANCEDDEMENTIA_UNSPECIFIED = 0;
+  APPLIESIFADVANCEDDEMENTIA_YES = 1;  // yes
+  APPLIESIFADVANCEDDEMENTIA_NO = 2;  // no
+}
+
+enum AssessmentRefusesCardiopulmonaryResuscitationEnum {
+  REFUSESCARDIOPULMONARYRESUSCITATION_UNSPECIFIED = 0;
+  REFUSESCARDIOPULMONARYRESUSCITATION_YES = 1;  // yes
+  REFUSESCARDIOPULMONARYRESUSCITATION_NO = 2;  // no
+}
+
+enum AssessmentRefusesMechanicalVentilationEnum {
+  REFUSESMECHANICALVENTILATION_UNSPECIFIED = 0;
+  REFUSESMECHANICALVENTILATION_YES = 1;  // yes
+  REFUSESMECHANICALVENTILATION_NO = 2;  // no
+}
+
+enum AssessmentRefusesArtificialNutritionEnum {
+  REFUSESARTIFICIALNUTRITION_UNSPECIFIED = 0;
+  REFUSESARTIFICIALNUTRITION_YES = 1;  // yes
+  REFUSESARTIFICIALNUTRITION_NO = 2;  // no
+}
+
+enum AssessmentRefusesArtificialHydrationEnum {
+  REFUSESARTIFICIALHYDRATION_UNSPECIFIED = 0;
+  REFUSESARTIFICIALHYDRATION_YES = 1;  // yes
+  REFUSESARTIFICIALHYDRATION_NO = 2;  // no
+}
+
+enum AssessmentRefusesAntibioticsEnum {
+  REFUSESANTIBIOTICS_UNSPECIFIED = 0;
+  REFUSESANTIBIOTICS_YES = 1;  // yes
+  REFUSESANTIBIOTICS_NO = 2;  // no
+}
+
+enum AssessmentRefusesBloodTransfusionEnum {
+  REFUSESBLOODTRANSFUSION_UNSPECIFIED = 0;
+  REFUSESBLOODTRANSFUSION_YES = 1;  // yes
+  REFUSESBLOODTRANSFUSION_NO = 2;  // no
+}
+
+enum AssessmentRefusesDialysisEnum {
+  REFUSESDIALYSIS_UNSPECIFIED = 0;
+  REFUSESDIALYSIS_YES = 1;  // yes
+  REFUSESDIALYSIS_NO = 2;  // no
+}
+
+enum AssessmentIncludesLifeSustainingTreatmentEnum {
+  INCLUDESLIFESUSTAININGTREATMENT_UNSPECIFIED = 0;
+  INCLUDESLIFESUSTAININGTREATMENT_YES = 1;  // yes
+  INCLUDESLIFESUSTAININGTREATMENT_NO = 2;  // no
+}
+
+enum AssessmentUnderstandsMayResultInDeathEnum {
+  UNDERSTANDSMAYRESULTINDEATH_UNSPECIFIED = 0;
+  UNDERSTANDSMAYRESULTINDEATH_YES = 1;  // yes
+  UNDERSTANDSMAYRESULTINDEATH_NO = 2;  // no
+}
+
+enum AssessmentIsWrittenAndSignedEnum {
+  ISWRITTENANDSIGNED_UNSPECIFIED = 0;
+  ISWRITTENANDSIGNED_YES = 1;  // yes
+  ISWRITTENANDSIGNED_NO = 2;  // no
+}
+
+enum AssessmentIsWitnessedEnum {
+  ISWITNESSED_UNSPECIFIED = 0;
+  ISWITNESSED_YES = 1;  // yes
+  ISWITNESSED_NO = 2;  // no
+}
+
+enum AssessmentHasExceptionsEnum {
+  HASEXCEPTIONS_UNSPECIFIED = 0;
+  HASEXCEPTIONS_YES = 1;  // yes
+  HASEXCEPTIONS_NO = 2;  // no
+}
+
+enum AssessmentOrganDonationWishesEnum {
+  ORGANDONATIONWISHES_UNSPECIFIED = 0;
+  ORGANDONATIONWISHES_YES = 1;  // yes
+  ORGANDONATIONWISHES_NO = 2;  // no
+  ORGANDONATIONWISHES_UNDECIDED = 3;  // undecided
+}
+
+enum AssessmentHasHealthWelfareLpaEnum {
+  HASHEALTHWELFARELPA_UNSPECIFIED = 0;
+  HASHEALTHWELFARELPA_YES = 1;  // yes
+  HASHEALTHWELFARELPA_NO = 2;  // no
+}
+
+enum AssessmentLpaRegisteredWithOpgEnum {
+  LPAREGISTEREDWITHOPG_UNSPECIFIED = 0;
+  LPAREGISTEREDWITHOPG_YES = 1;  // yes
+  LPAREGISTEREDWITHOPG_NO = 2;  // no
+}
+
+enum AssessmentLpaConflictsWithAdrtEnum {
+  LPACONFLICTSWITHADRT_UNSPECIFIED = 0;
+  LPACONFLICTSWITHADRT_YES = 1;  // yes
+  LPACONFLICTSWITHADRT_NO = 2;  // no
+}
+
+enum AssessmentReviewedByHealthcareProfessionalEnum {
+  REVIEWEDBYHEALTHCAREPROFESSIONAL_UNSPECIFIED = 0;
+  REVIEWEDBYHEALTHCAREPROFESSIONAL_YES = 1;  // yes
+  REVIEWEDBYHEALTHCAREPROFESSIONAL_NO = 2;  // no
+}
+
+enum AssessmentReviewerConfirmsCapacityEnum {
+  REVIEWERCONFIRMSCAPACITY_UNSPECIFIED = 0;
+  REVIEWERCONFIRMSCAPACITY_YES = 1;  // yes
+  REVIEWERCONFIRMSCAPACITY_NO = 2;  // no
+}
+
+enum AssessmentReviewerConfirmsInformedEnum {
+  REVIEWERCONFIRMSINFORMED_UNSPECIFIED = 0;
+  REVIEWERCONFIRMSINFORMED_YES = 1;  // yes
+  REVIEWERCONFIRMSINFORMED_NO = 2;  // no
+}
+
+enum AssessmentReviewerSignatureObtainedEnum {
+  REVIEWERSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  REVIEWERSIGNATUREOBTAINED_YES = 1;  // yes
+  REVIEWERSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+enum AssessmentMakerSignatureObtainedEnum {
+  MAKERSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  MAKERSIGNATUREOBTAINED_YES = 1;  // yes
+  MAKERSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+enum AssessmentWitnessSignatureObtainedEnum {
+  WITNESSSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  WITNESSSIGNATUREOBTAINED_YES = 1;  // yes
+  WITNESSSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+enum AssessmentSecondWitnessSignatureObtainedEnum {
+  SECONDWITNESSSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  SECONDWITNESSSIGNATUREOBTAINED_YES = 1;  // yes
+  SECONDWITNESSSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+enum AssessmentDeclarationStatementAgreedEnum {
+  DECLARATIONSTATEMENTAGREED_UNSPECIFIED = 0;
+  DECLARATIONSTATEMENTAGREED_YES = 1;  // yes
+  DECLARATIONSTATEMENTAGREED_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string full_name = 7;  // VARCHAR(255) — max 255 chars
+  string address = 8;  // TEXT
+  string postcode = 9;  // VARCHAR(20) — max 20 chars
+  string date_of_birth = 10;  // DATE — iso 8601 date
+  string nhs_number = 11;  // VARCHAR(20) — max 20 chars
+  string gp_name = 12;  // VARCHAR(255) — max 255 chars
+  string gp_practice = 13;  // VARCHAR(255) — max 255 chars
+  string gp_address = 14;  // TEXT
+  string gp_phone = 15;  // VARCHAR(30) — max 30 chars
+  AssessmentHasMentalCapacityEnum has_mental_capacity = 16;  // VARCHAR(5)
+  AssessmentUnderstandsConsequencesEnum understands_consequences = 17;  // VARCHAR(5)
+  AssessmentMadeVoluntarilyEnum made_voluntarily = 18;  // VARCHAR(5)
+  string capacity_assessment_date = 19;  // DATE — iso 8601 date
+  string capacity_assessor_name = 20;  // VARCHAR(255) — max 255 chars
+  string capacity_assessor_role = 21;  // VARCHAR(100) — max 100 chars
+  string capacity_notes = 22;  // TEXT
+  string circumstances_description = 23;  // TEXT
+  string specific_conditions = 24;  // TEXT
+  AssessmentAppliesIfTerminallyIllEnum applies_if_terminally_ill = 25;  // VARCHAR(5)
+  AssessmentAppliesIfPermanentlyUnconsciousEnum applies_if_permanently_unconscious = 26;  // VARCHAR(5)
+  AssessmentAppliesIfSeverelyBrainDamagedEnum applies_if_severely_brain_damaged = 27;  // VARCHAR(5)
+  AssessmentAppliesIfAdvancedDementiaEnum applies_if_advanced_dementia = 28;  // VARCHAR(5)
+  string other_circumstances = 29;  // TEXT
+  AssessmentRefusesCardiopulmonaryResuscitationEnum refuses_cardiopulmonary_resuscitation = 30;  // VARCHAR(5)
+  AssessmentRefusesMechanicalVentilationEnum refuses_mechanical_ventilation = 31;  // VARCHAR(5)
+  AssessmentRefusesArtificialNutritionEnum refuses_artificial_nutrition = 32;  // VARCHAR(5)
+  AssessmentRefusesArtificialHydrationEnum refuses_artificial_hydration = 33;  // VARCHAR(5)
+  AssessmentRefusesAntibioticsEnum refuses_antibiotics = 34;  // VARCHAR(5)
+  AssessmentRefusesBloodTransfusionEnum refuses_blood_transfusion = 35;  // VARCHAR(5)
+  AssessmentRefusesDialysisEnum refuses_dialysis = 36;  // VARCHAR(5)
+  string other_treatments_refused = 37;  // TEXT
+  string treatment_refusal_details = 38;  // TEXT
+  AssessmentIncludesLifeSustainingTreatmentEnum includes_life_sustaining_treatment = 39;  // VARCHAR(5)
+  AssessmentUnderstandsMayResultInDeathEnum understands_may_result_in_death = 40;  // VARCHAR(5)
+  string life_sustaining_treatments_specified = 41;  // TEXT
+  AssessmentIsWrittenAndSignedEnum is_written_and_signed = 42;  // VARCHAR(5)
+  AssessmentIsWitnessedEnum is_witnessed = 43;  // VARCHAR(5)
+  string witness_confirmation = 44;  // TEXT
+  AssessmentHasExceptionsEnum has_exceptions = 45;  // VARCHAR(5)
+  string exception_details = 46;  // TEXT
+  string pain_management_wishes = 47;  // TEXT
+  string comfort_care_wishes = 48;  // TEXT
+  string emergency_exception_details = 49;  // TEXT
+  string condition_specific_exceptions = 50;  // TEXT
+  string preferred_place_of_care = 51;  // TEXT
+  string preferred_place_of_death = 52;  // TEXT
+  string spiritual_or_religious_wishes = 53;  // TEXT
+  AssessmentOrganDonationWishesEnum organ_donation_wishes = 54;  // VARCHAR(20)
+  string organ_donation_details = 55;  // TEXT
+  string other_wishes = 56;  // TEXT
+  string people_to_notify = 57;  // TEXT
+  AssessmentHasHealthWelfareLpaEnum has_health_welfare_lpa = 58;  // VARCHAR(5)
+  AssessmentLpaRegisteredWithOpgEnum lpa_registered_with_opg = 59;  // VARCHAR(5)
+  string lpa_registration_date = 60;  // DATE — iso 8601 date
+  string attorney_name = 61;  // VARCHAR(255) — max 255 chars
+  string attorney_address = 62;  // TEXT
+  string attorney_phone = 63;  // VARCHAR(30) — max 30 chars
+  string replacement_attorney_name = 64;  // VARCHAR(255) — max 255 chars
+  string lpa_authority_scope = 65;  // TEXT
+  AssessmentLpaConflictsWithAdrtEnum lpa_conflicts_with_adrt = 66;  // VARCHAR(5)
+  string lpa_conflict_details = 67;  // TEXT
+  AssessmentReviewedByHealthcareProfessionalEnum reviewed_by_healthcare_professional = 68;  // VARCHAR(5)
+  string reviewer_name = 69;  // VARCHAR(255) — max 255 chars
+  string reviewer_role = 70;  // VARCHAR(100) — max 100 chars
+  string reviewer_registration_number = 71;  // VARCHAR(50) — max 50 chars
+  string review_date = 72;  // DATE — iso 8601 date
+  AssessmentReviewerConfirmsCapacityEnum reviewer_confirms_capacity = 73;  // VARCHAR(5)
+  AssessmentReviewerConfirmsInformedEnum reviewer_confirms_informed = 74;  // VARCHAR(5)
+  string clinical_notes = 75;  // TEXT
+  string concerns_raised = 76;  // TEXT
+  AssessmentReviewerSignatureObtainedEnum reviewer_signature_obtained = 77;  // VARCHAR(5)
+  AssessmentMakerSignatureObtainedEnum maker_signature_obtained = 78;  // VARCHAR(5)
+  string maker_signature_date = 79;  // DATE — iso 8601 date
+  string witness_name = 80;  // VARCHAR(255) — max 255 chars
+  string witness_address = 81;  // TEXT
+  AssessmentWitnessSignatureObtainedEnum witness_signature_obtained = 82;  // VARCHAR(5)
+  string witness_signature_date = 83;  // DATE — iso 8601 date
+  string second_witness_name = 84;  // VARCHAR(255) — max 255 chars
+  AssessmentSecondWitnessSignatureObtainedEnum second_witness_signature_obtained = 85;  // VARCHAR(5)
+  AssessmentDeclarationStatementAgreedEnum declaration_statement_agreed = 86;  // VARCHAR(5)
+  string legal_notes = 87;  // TEXT
+}

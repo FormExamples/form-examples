@@ -1,0 +1,51 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_consulting_scorecard_for_hiring_help_grade
+
+syntax = "proto3";
+
+package form_examples.agile_consulting_scorecard_for_hiring_help;
+
+enum AgileConsultingScorecardForHiringHelpGradeComputedBandEnum {
+  COMPUTEDBAND_UNSPECIFIED = 0;
+  COMPUTEDBAND_LOW = 1;  // low
+  COMPUTEDBAND_BORDERLINE = 2;  // borderline
+  COMPUTEDBAND_MEDIUM = 3;  // medium
+  COMPUTEDBAND_HIGH = 4;  // high
+}
+
+enum AgileConsultingScorecardForHiringHelpGradeFinalBandEnum {
+  FINALBAND_UNSPECIFIED = 0;
+  FINALBAND_LOW = 1;  // low
+  FINALBAND_BORDERLINE = 2;  // borderline
+  FINALBAND_MEDIUM = 3;  // medium
+  FINALBAND_HIGH = 4;  // high
+}
+
+enum AgileConsultingScorecardForHiringHelpGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_DO_NOT_HIRE_YET = 1;  // do-not-hire-yet
+  RECOMMENDATION_DO_HOMEWORK_FIRST = 2;  // do-homework-first
+  RECOMMENDATION_TRIAL_ENGAGEMENT = 3;  // trial-engagement
+  RECOMMENDATION_HIRE_WITH_FOCUS_AREAS = 4;  // hire-with-focus-areas
+  RECOMMENDATION_REASSESS_IN_3_MONTHS = 5;  // reassess-in-3-months
+}
+
+message AgileConsultingScorecardForHiringHelpGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string agile_consulting_scorecard_id = 5;  // UUID — uuid
+  int32 score_total = 6;  // INTEGER
+  int32 manifesto_subtotal = 7;  // INTEGER
+  int32 principles_subtotal = 8;  // INTEGER
+  AgileConsultingScorecardForHiringHelpGradeComputedBandEnum computed_band = 9;  // VARCHAR(12)
+  AgileConsultingScorecardForHiringHelpGradeFinalBandEnum final_band = 10;  // VARCHAR(12)
+  string override_reason = 11;  // VARCHAR(500) — max 500 chars
+  AgileConsultingScorecardForHiringHelpGradeRecommendationEnum recommendation = 12;  // VARCHAR(40)
+  string recommended_focus_areas = 13;  // TEXT
+  string review_notes = 14;  // TEXT
+  string signed_by = 15;  // VARCHAR(255) — max 255 chars
+  string signed_at = 16;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 17;  // TIMESTAMPTZ — iso 8601
+}

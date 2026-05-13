@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: arc42_documentation
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+enum Arc42DocumentationRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_PROCEED = 1;  // proceed
+  RECOMMENDATION_REVISE_FIRST = 2;  // revise-first
+  RECOMMENDATION_BLOCK = 3;  // block
+}
+
+message Arc42Documentation {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string architecture_id = 5;  // UUID — uuid
+  string author_name = 6;  // TEXT
+  string author_role = 7;  // TEXT
+  string document_date = 8;  // DATE — iso 8601 date
+  string introduction = 9;  // TEXT
+  string business_context_description = 10;  // TEXT
+  string technical_context_description = 11;  // TEXT
+  string solution_strategy_summary = 12;  // TEXT
+  string top_level_decomposition_summary = 13;  // TEXT
+  string building_block_overview = 14;  // TEXT
+  string runtime_overview = 15;  // TEXT
+  string deployment_overview = 16;  // TEXT
+  string crosscutting_overview = 17;  // TEXT
+  string quality_tree_summary = 18;  // TEXT
+  Arc42DocumentationRecommendationEnum recommendation = 19;  // TEXT
+  string additional_notes = 20;  // TEXT
+  string signed_by = 21;  // TEXT
+  string signed_at = 22;  // TIMESTAMPTZ — iso 8601
+}

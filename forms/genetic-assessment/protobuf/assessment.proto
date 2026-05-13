@@ -1,0 +1,133 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_cancer_history, assessment_cancer_history_item, assessment_family_pedigree, assessment_family_pedigree_member
+
+syntax = "proto3";
+
+package form_examples.genetic_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentFamilyCancerHistoryEnum {
+  FAMILYCANCERHISTORY_UNSPECIFIED = 0;
+  FAMILYCANCERHISTORY_YES = 1;  // yes
+  FAMILYCANCERHISTORY_NO = 2;  // no
+}
+
+enum AssessmentMultipleFamilyCancersEnum {
+  MULTIPLEFAMILYCANCERS_UNSPECIFIED = 0;
+  MULTIPLEFAMILYCANCERS_YES = 1;  // yes
+  MULTIPLEFAMILYCANCERS_NO = 2;  // no
+}
+
+enum AssessmentEarlyOnsetCancerEnum {
+  EARLYONSETCANCER_UNSPECIFIED = 0;
+  EARLYONSETCANCER_YES = 1;  // yes
+  EARLYONSETCANCER_NO = 2;  // no
+}
+
+enum AssessmentBilateralCancerEnum {
+  BILATERALCANCER_UNSPECIFIED = 0;
+  BILATERALCANCER_YES = 1;  // yes
+  BILATERALCANCER_NO = 2;  // no
+}
+
+enum AssessmentRareTumourTypesEnum {
+  RARETUMOURTYPES_UNSPECIFIED = 0;
+  RARETUMOURTYPES_YES = 1;  // yes
+  RARETUMOURTYPES_NO = 2;  // no
+}
+
+enum AssessmentKnownCancerSyndromeEnum {
+  KNOWNCANCERSYNDROME_UNSPECIFIED = 0;
+  KNOWNCANCERSYNDROME_YES = 1;  // yes
+  KNOWNCANCERSYNDROME_NO = 2;  // no
+}
+
+enum AssessmentOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_ALIVE = 1;  // alive
+  OUTCOME_DECEASED = 2;  // deceased
+  OUTCOME_UNKNOWN = 3;  // unknown
+}
+
+enum AssessmentConsanguinityInFamilyEnum {
+  CONSANGUINITYINFAMILY_UNSPECIFIED = 0;
+  CONSANGUINITYINFAMILY_YES = 1;  // yes
+  CONSANGUINITYINFAMILY_NO = 2;  // no
+}
+
+enum AssessmentAdoptionStatusEnum {
+  ADOPTIONSTATUS_UNSPECIFIED = 0;
+  ADOPTIONSTATUS_NOT_ADOPTED = 1;  // not-adopted
+  ADOPTIONSTATUS_ADOPTED_KNOWN_HISTORY = 2;  // adopted-known-history
+  ADOPTIONSTATUS_ADOPTED_UNKNOWN_HISTORY = 3;  // adopted-unknown-history
+}
+
+enum AssessmentThreeGenerationPedigreeDrawnEnum {
+  THREEGENERATIONPEDIGREEDRAWN_UNSPECIFIED = 0;
+  THREEGENERATIONPEDIGREEDRAWN_YES = 1;  // yes
+  THREEGENERATIONPEDIGREEDRAWN_NO = 2;  // no
+}
+
+enum AssessmentSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_MALE = 1;  // male
+  SEX_FEMALE = 2;  // female
+  SEX_OTHER = 3;  // other
+}
+
+enum AssessmentAliveEnum {
+  ALIVE_UNSPECIFIED = 0;
+  ALIVE_YES = 1;  // yes
+  ALIVE_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string cancer_history_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentFamilyCancerHistoryEnum family_cancer_history = 8;  // VARCHAR(5)
+  AssessmentMultipleFamilyCancersEnum multiple_family_cancers = 9;  // VARCHAR(5)
+  AssessmentEarlyOnsetCancerEnum early_onset_cancer = 10;  // VARCHAR(5)
+  AssessmentBilateralCancerEnum bilateral_cancer = 11;  // VARCHAR(5)
+  AssessmentRareTumourTypesEnum rare_tumour_types = 12;  // VARCHAR(5)
+  string rare_tumour_details = 13;  // TEXT
+  AssessmentKnownCancerSyndromeEnum known_cancer_syndrome = 14;  // VARCHAR(5)
+  string cancer_syndrome_details = 15;  // TEXT
+  int32 cancer_risk_score = 16;  // INTEGER
+  string cancer_history_item_deleted_at = 17;  // TIMESTAMPTZ — iso 8601
+  string cancer_history_id = 18;  // UUID — uuid
+  string relative_relationship = 19;  // VARCHAR(50) — max 50 chars
+  string cancer_type = 20;  // VARCHAR(255) — max 255 chars
+  int32 age_at_diagnosis = 21;  // INTEGER
+  AssessmentOutcomeEnum outcome = 22;  // VARCHAR(20)
+  int32 sort_order = 23;  // INTEGER
+  string family_pedigree_deleted_at = 24;  // TIMESTAMPTZ — iso 8601
+  int32 total_first_degree_relatives = 25;  // INTEGER
+  int32 total_second_degree_relatives = 26;  // INTEGER
+  AssessmentConsanguinityInFamilyEnum consanguinity_in_family = 27;  // VARCHAR(5)
+  string consanguinity_details = 28;  // TEXT
+  AssessmentAdoptionStatusEnum adoption_status = 29;  // VARCHAR(20)
+  string pedigree_notes = 30;  // TEXT
+  AssessmentThreeGenerationPedigreeDrawnEnum three_generation_pedigree_drawn = 31;  // VARCHAR(5)
+  string family_pedigree_member_deleted_at = 32;  // TIMESTAMPTZ — iso 8601
+  string family_pedigree_id = 33;  // UUID — uuid
+  string relationship = 34;  // VARCHAR(50) — max 50 chars
+  AssessmentSexEnum sex = 35;  // VARCHAR(10)
+  int32 age = 36;  // INTEGER
+  AssessmentAliveEnum alive = 37;  // VARCHAR(5)
+  int32 age_at_death = 38;  // INTEGER
+  string cause_of_death = 39;  // VARCHAR(255) — max 255 chars
+  string medical_conditions = 40;  // TEXT
+  int32 family_pedigree_member_sort_order = 41;  // INTEGER
+}

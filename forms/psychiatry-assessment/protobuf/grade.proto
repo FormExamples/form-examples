@@ -1,0 +1,60 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.psychiatry_assessment;
+
+enum GradeGafCategoryEnum {
+  GAFCATEGORY_UNSPECIFIED = 0;
+  GAFCATEGORY_SUPERIOR_FUNCTIONING = 1;  // superior-functioning
+  GAFCATEGORY_ABSENT_MINIMAL_SYMPTOMS = 2;  // absent-minimal-symptoms
+  GAFCATEGORY_TRANSIENT_SYMPTOMS = 3;  // transient-symptoms
+  GAFCATEGORY_MILD_SYMPTOMS = 4;  // mild-symptoms
+  GAFCATEGORY_MODERATE_SYMPTOMS = 5;  // moderate-symptoms
+  GAFCATEGORY_SERIOUS_SYMPTOMS = 6;  // serious-symptoms
+  GAFCATEGORY_IMPAIRED_REALITY_TESTING = 7;  // impaired-reality-testing
+  GAFCATEGORY_BEHAVIOUR_INFLUENCED_BY_DELUSIONS = 8;  // behaviour-influenced-by-delusions
+  GAFCATEGORY_DANGER_OF_HURTING_SELF_OTHERS = 9;  // danger-of-hurting-self-others
+  GAFCATEGORY_PERSISTENT_DANGER = 10;  // persistent-danger
+}
+
+enum GradeSymptomSeverityEnum {
+  SYMPTOMSEVERITY_UNSPECIFIED = 0;
+  SYMPTOMSEVERITY_MINIMAL = 1;  // minimal
+  SYMPTOMSEVERITY_MILD = 2;  // mild
+  SYMPTOMSEVERITY_MODERATE = 3;  // moderate
+  SYMPTOMSEVERITY_SEVERE = 4;  // severe
+  SYMPTOMSEVERITY_EXTREME = 5;  // extreme
+}
+
+enum GradeFunctionalImpairmentEnum {
+  FUNCTIONALIMPAIRMENT_UNSPECIFIED = 0;
+  FUNCTIONALIMPAIRMENT_MINIMAL = 1;  // minimal
+  FUNCTIONALIMPAIRMENT_MILD = 2;  // mild
+  FUNCTIONALIMPAIRMENT_MODERATE = 3;  // moderate
+  FUNCTIONALIMPAIRMENT_SEVERE = 4;  // severe
+  FUNCTIONALIMPAIRMENT_EXTREME = 5;  // extreme
+}
+
+enum GradeRiskClassificationEnum {
+  RISKCLASSIFICATION_UNSPECIFIED = 0;
+  RISKCLASSIFICATION_LOW = 1;  // low
+  RISKCLASSIFICATION_MODERATE = 2;  // moderate
+  RISKCLASSIFICATION_HIGH = 3;  // high
+  RISKCLASSIFICATION_IMMINENT = 4;  // imminent
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 gaf_score = 6;  // INTEGER
+  GradeGafCategoryEnum gaf_category = 7;  // VARCHAR(50)
+  GradeSymptomSeverityEnum symptom_severity = 8;  // VARCHAR(10)
+  GradeFunctionalImpairmentEnum functional_impairment = 9;  // VARCHAR(10)
+  GradeRiskClassificationEnum risk_classification = 10;  // VARCHAR(10)
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

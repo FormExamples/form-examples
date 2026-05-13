@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.gerontology_assessment;
+
+enum GradeCfsCategoryEnum {
+  CFSCATEGORY_UNSPECIFIED = 0;
+  CFSCATEGORY_VERY_FIT = 1;  // very-fit
+  CFSCATEGORY_WELL = 2;  // well
+  CFSCATEGORY_MANAGING_WELL = 3;  // managing-well
+  CFSCATEGORY_VULNERABLE = 4;  // vulnerable
+  CFSCATEGORY_MILDLY_FRAIL = 5;  // mildly-frail
+  CFSCATEGORY_MODERATELY_FRAIL = 6;  // moderately-frail
+  CFSCATEGORY_SEVERELY_FRAIL = 7;  // severely-frail
+  CFSCATEGORY_VERY_SEVERELY_FRAIL = 8;  // very-severely-frail
+  CFSCATEGORY_TERMINALLY_ILL = 9;  // terminally-ill
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 cfs_score = 6;  // INTEGER
+  GradeCfsCategoryEnum cfs_category = 7;  // VARCHAR(30)
+  int32 functional_domain_score = 8;  // INTEGER
+  int32 cognitive_domain_score = 9;  // INTEGER
+  int32 mobility_domain_score = 10;  // INTEGER
+  int32 nutrition_domain_score = 11;  // INTEGER
+  int32 polypharmacy_domain_score = 12;  // INTEGER
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,53 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grading_additional_flag
+
+syntax = "proto3";
+
+package form_examples.pre_operative_assessment_by_patient;
+
+enum GradingAdditionalFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DIFFICULT_AIRWAY = 1;  // difficult-airway
+  CATEGORY_SEVERE_CARDIAC = 2;  // severe-cardiac
+  CATEGORY_SEVERE_RESPIRATORY = 3;  // severe-respiratory
+  CATEGORY_SEVERE_RENAL = 4;  // severe-renal
+  CATEGORY_SEVERE_HEPATIC = 5;  // severe-hepatic
+  CATEGORY_SEVERE_ANAEMIA = 6;  // severe-anaemia
+  CATEGORY_COAGULOPATHY = 7;  // coagulopathy
+  CATEGORY_UNCONTROLLED_DIABETES = 8;  // uncontrolled-diabetes
+  CATEGORY_SEVERE_FRAILTY = 9;  // severe-frailty
+  CATEGORY_RECENT_COVID_19 = 10;  // recent-covid-19
+  CATEGORY_FASTING_VIOLATION = 11;  // fasting-violation
+  CATEGORY_MISSING_CROSSMATCH = 12;  // missing-crossmatch
+  CATEGORY_HIGH_RISK_MEDICATION = 13;  // high-risk-medication
+  CATEGORY_CAPACITY_CONCERN = 14;  // capacity-concern
+  CATEGORY_PAEDIATRIC = 15;  // paediatric
+  CATEGORY_PREGNANCY = 16;  // pregnancy
+  CATEGORY_SAFEGUARDING = 17;  // safeguarding
+  CATEGORY_MALIGNANT_HYPERTHERMIA = 18;  // malignant-hyperthermia
+  CATEGORY_LATEX_ALLERGY = 19;  // latex-allergy
+  CATEGORY_SUX_APNOEA = 20;  // sux-apnoea
+  CATEGORY_PSEUDOCHOLINESTERASE_DEFICIENCY = 21;  // pseudocholinesterase-deficiency
+  CATEGORY_MALNUTRITION_RISK = 22;  // malnutrition-risk
+  CATEGORY_OTHER = 23;  // other
+}
+
+enum GradingAdditionalFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message GradingAdditionalFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  GradingAdditionalFlagCategoryEnum category = 7;  // VARCHAR(50)
+  GradingAdditionalFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

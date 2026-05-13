@@ -1,0 +1,24 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.systematic_coronary_risk_evaluation_2_diabetes;
+
+enum GradeRiskCategoryEnum {
+  RISKCATEGORY_UNSPECIFIED = 0;
+  RISKCATEGORY_LOW = 1;  // low
+  RISKCATEGORY_MODERATE = 2;  // moderate
+  RISKCATEGORY_HIGH = 3;  // high
+  RISKCATEGORY_VERYHIGH = 4;  // veryHigh
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeRiskCategoryEnum risk_category = 6;  // VARCHAR(20)
+  string graded_at = 7;  // TIMESTAMPTZ — iso 8601
+}

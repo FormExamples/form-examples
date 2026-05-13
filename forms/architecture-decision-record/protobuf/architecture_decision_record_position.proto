@@ -1,0 +1,20 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: architecture_decision_record_position
+
+syntax = "proto3";
+
+package form_examples.architecture_decision_record;
+
+message ArchitectureDecisionRecordPosition {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string architecture_decision_record_id = 4;  // UUID — uuid
+  int32 ordinal = 5;  // INTEGER
+  string name = 6;  // TEXT
+  string description = 7;  // TEXT
+  string model_or_diagram_url = 8;  // TEXT
+  bool is_chosen = 9;  // BOOLEAN
+  string pros = 10;  // TEXT
+  string cons = 11;  // TEXT
+}

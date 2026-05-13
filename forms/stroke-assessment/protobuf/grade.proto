@@ -1,0 +1,26 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.stroke_assessment;
+
+enum GradeStrokeSeverityEnum {
+  STROKESEVERITY_UNSPECIFIED = 0;
+  STROKESEVERITY_NO_STROKE_SYMPTOMS = 1;  // no_stroke_symptoms
+  STROKESEVERITY_MINOR = 2;  // minor
+  STROKESEVERITY_MODERATE = 3;  // moderate
+  STROKESEVERITY_MODERATE_TO_SEVERE = 4;  // moderate_to_severe
+  STROKESEVERITY_SEVERE = 5;  // severe
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 nihss_total_score = 6;  // INTEGER
+  GradeStrokeSeverityEnum stroke_severity = 7;  // VARCHAR(30)
+  string graded_at = 8;  // TIMESTAMPTZ — iso 8601
+}

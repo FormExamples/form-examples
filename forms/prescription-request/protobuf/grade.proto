@@ -1,0 +1,24 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.prescription_request;
+
+enum GradePriorityLevelEnum {
+  PRIORITYLEVEL_UNSPECIFIED = 0;
+  PRIORITYLEVEL_ROUTINE = 1;  // routine
+  PRIORITYLEVEL_URGENT = 2;  // urgent
+  PRIORITYLEVEL_EMERGENCY = 3;  // emergency
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string prescription_request_id = 5;  // UUID — uuid
+  GradePriorityLevelEnum priority_level = 6;  // VARCHAR(10)
+  int32 rule_count = 7;  // INTEGER
+  string graded_at = 8;  // TIMESTAMPTZ — iso 8601
+}

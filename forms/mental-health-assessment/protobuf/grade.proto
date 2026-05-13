@@ -1,0 +1,45 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.mental_health_assessment;
+
+enum GradePhq9SeverityEnum {
+  PHQ9SEVERITY_UNSPECIFIED = 0;
+  PHQ9SEVERITY_MINIMAL = 1;  // minimal
+  PHQ9SEVERITY_MILD = 2;  // mild
+  PHQ9SEVERITY_MODERATE = 3;  // moderate
+  PHQ9SEVERITY_MODERATELY_SEVERE = 4;  // moderately_severe
+  PHQ9SEVERITY_SEVERE = 5;  // severe
+}
+
+enum GradeGad7SeverityEnum {
+  GAD7SEVERITY_UNSPECIFIED = 0;
+  GAD7SEVERITY_MINIMAL = 1;  // minimal
+  GAD7SEVERITY_MILD = 2;  // mild
+  GAD7SEVERITY_MODERATE = 3;  // moderate
+  GAD7SEVERITY_SEVERE = 4;  // severe
+}
+
+enum GradeRiskLevelEnum {
+  RISKLEVEL_UNSPECIFIED = 0;
+  RISKLEVEL_LOW = 1;  // low
+  RISKLEVEL_MODERATE = 2;  // moderate
+  RISKLEVEL_HIGH = 3;  // high
+  RISKLEVEL_IMMINENT = 4;  // imminent
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 phq9_total_score = 6;  // INTEGER
+  GradePhq9SeverityEnum phq9_severity = 7;  // VARCHAR(20)
+  int32 gad7_total_score = 8;  // INTEGER
+  GradeGad7SeverityEnum gad7_severity = 9;  // VARCHAR(10)
+  GradeRiskLevelEnum risk_level = 10;  // VARCHAR(20)
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

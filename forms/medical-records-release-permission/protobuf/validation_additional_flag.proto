@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: validation_additional_flag
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum ValidationAdditionalFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_HIGH = 1;  // high
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_LOW = 3;  // low
+}
+
+message ValidationAdditionalFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string validation_result_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(30) — max 30 chars
+  string category = 7;  // VARCHAR(50) — max 50 chars
+  string message_ = 8;  // TEXT
+  ValidationAdditionalFlagPriorityEnum priority = 9;  // VARCHAR(10)
+}

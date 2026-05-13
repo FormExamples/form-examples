@@ -1,0 +1,132 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment
+
+syntax = "proto3";
+
+package form_examples.advance_statement_about_care;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentHasDiscussedWithFamilyEnum {
+  HASDISCUSSEDWITHFAMILY_UNSPECIFIED = 0;
+  HASDISCUSSEDWITHFAMILY_YES = 1;  // yes
+  HASDISCUSSEDWITHFAMILY_NO = 2;  // no
+}
+
+enum AssessmentHasDiscussedWithClinicianEnum {
+  HASDISCUSSEDWITHCLINICIAN_UNSPECIFIED = 0;
+  HASDISCUSSEDWITHCLINICIAN_YES = 1;  // yes
+  HASDISCUSSEDWITHCLINICIAN_NO = 2;  // no
+}
+
+enum AssessmentHasLastingPowerOfAttorneyEnum {
+  HASLASTINGPOWEROFATTORNEY_UNSPECIFIED = 0;
+  HASLASTINGPOWEROFATTORNEY_YES = 1;  // yes
+  HASLASTINGPOWEROFATTORNEY_NO = 2;  // no
+}
+
+enum AssessmentBurialOrCremationEnum {
+  BURIALORCREMATION_UNSPECIFIED = 0;
+  BURIALORCREMATION_BURIAL = 1;  // burial
+  BURIALORCREMATION_CREMATION = 2;  // cremation
+  BURIALORCREMATION_OTHER = 3;  // other
+}
+
+enum AssessmentMakerSignatureObtainedEnum {
+  MAKERSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  MAKERSIGNATUREOBTAINED_YES = 1;  // yes
+  MAKERSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+enum AssessmentWitnessSignatureObtainedEnum {
+  WITNESSSIGNATUREOBTAINED_UNSPECIFIED = 0;
+  WITNESSSIGNATUREOBTAINED_YES = 1;  // yes
+  WITNESSSIGNATUREOBTAINED_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string full_name = 7;  // VARCHAR(255) — max 255 chars
+  string address = 8;  // TEXT
+  string postcode = 9;  // VARCHAR(20) — max 20 chars
+  string date_of_birth = 10;  // DATE — iso 8601 date
+  string nhs_number = 11;  // VARCHAR(20) — max 20 chars
+  string phone = 12;  // VARCHAR(30) — max 30 chars
+  string email = 13;  // VARCHAR(255) — max 255 chars
+  string gp_name = 14;  // VARCHAR(255) — max 255 chars
+  string gp_practice = 15;  // VARCHAR(255) — max 255 chars
+  string reason_for_statement = 16;  // TEXT
+  string current_health_status = 17;  // TEXT
+  string current_diagnoses = 18;  // TEXT
+  AssessmentHasDiscussedWithFamilyEnum has_discussed_with_family = 19;  // VARCHAR(5)
+  AssessmentHasDiscussedWithClinicianEnum has_discussed_with_clinician = 20;  // VARCHAR(5)
+  string discussion_details = 21;  // TEXT
+  string personal_values = 22;  // TEXT
+  string quality_of_life_priorities = 23;  // TEXT
+  string religious_beliefs = 24;  // TEXT
+  string spiritual_needs = 25;  // TEXT
+  string cultural_considerations = 26;  // TEXT
+  string fears_and_concerns = 27;  // TEXT
+  string things_that_matter_most = 28;  // TEXT
+  string preferred_place_of_care = 29;  // TEXT
+  string preferred_place_of_death = 30;  // TEXT
+  string daily_routine_preferences = 31;  // TEXT
+  string personal_care_preferences = 32;  // TEXT
+  string food_and_drink_preferences = 33;  // TEXT
+  string sleep_preferences = 34;  // TEXT
+  string clothing_preferences = 35;  // TEXT
+  string environment_preferences = 36;  // TEXT
+  string pet_care_wishes = 37;  // TEXT
+  string pain_management_preferences = 38;  // TEXT
+  string attitude_to_hospital_admission = 39;  // TEXT
+  string attitude_to_intensive_care = 40;  // TEXT
+  string attitude_to_artificial_nutrition = 41;  // TEXT
+  string attitude_to_artificial_hydration = 42;  // TEXT
+  string medication_preferences = 43;  // TEXT
+  string complementary_therapy_preferences = 44;  // TEXT
+  string other_treatment_wishes = 45;  // TEXT
+  string preferred_language = 46;  // VARCHAR(100) — max 100 chars
+  string communication_aids = 47;  // TEXT
+  string how_to_share_information = 48;  // TEXT
+  string who_to_involve_in_decisions = 49;  // TEXT
+  string information_sharing_restrictions = 50;  // TEXT
+  string preferred_communication_style = 51;  // TEXT
+  string primary_contact_name = 52;  // VARCHAR(255) — max 255 chars
+  string primary_contact_relationship = 53;  // VARCHAR(100) — max 100 chars
+  string primary_contact_phone = 54;  // VARCHAR(30) — max 30 chars
+  string primary_contact_email = 55;  // VARCHAR(255) — max 255 chars
+  string secondary_contact_name = 56;  // VARCHAR(255) — max 255 chars
+  string secondary_contact_relationship = 57;  // VARCHAR(100) — max 100 chars
+  string secondary_contact_phone = 58;  // VARCHAR(30) — max 30 chars
+  string people_who_should_visit = 59;  // TEXT
+  string people_who_should_not_visit = 60;  // TEXT
+  string support_network_details = 61;  // TEXT
+  string financial_arrangements = 62;  // TEXT
+  string property_arrangements = 63;  // TEXT
+  string insurance_details = 64;  // TEXT
+  string will_location = 65;  // TEXT
+  AssessmentHasLastingPowerOfAttorneyEnum has_lasting_power_of_attorney = 66;  // VARCHAR(5)
+  string lpa_details = 67;  // TEXT
+  string funeral_wishes = 68;  // TEXT
+  AssessmentBurialOrCremationEnum burial_or_cremation = 69;  // VARCHAR(20)
+  string other_practical_matters = 70;  // TEXT
+  AssessmentMakerSignatureObtainedEnum maker_signature_obtained = 71;  // VARCHAR(5)
+  string maker_signature_date = 72;  // DATE — iso 8601 date
+  string witness_name = 73;  // VARCHAR(255) — max 255 chars
+  string witness_address = 74;  // TEXT
+  AssessmentWitnessSignatureObtainedEnum witness_signature_obtained = 75;  // VARCHAR(5)
+  string witness_signature_date = 76;  // DATE — iso 8601 date
+  string review_date = 77;  // DATE — iso 8601 date
+  string review_notes = 78;  // TEXT
+}

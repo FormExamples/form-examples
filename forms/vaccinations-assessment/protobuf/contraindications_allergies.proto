@@ -1,0 +1,66 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: contraindications_allergies
+
+syntax = "proto3";
+
+package form_examples.vaccinations_assessment;
+
+enum ContraindicationsAllergiesEggAllergyEnum {
+  EGGALLERGY_UNSPECIFIED = 0;
+  EGGALLERGY_YES = 1;  // yes
+  EGGALLERGY_NO = 2;  // no
+}
+
+enum ContraindicationsAllergiesGelatinAllergyEnum {
+  GELATINALLERGY_UNSPECIFIED = 0;
+  GELATINALLERGY_YES = 1;  // yes
+  GELATINALLERGY_NO = 2;  // no
+}
+
+enum ContraindicationsAllergiesLatexAllergyEnum {
+  LATEXALLERGY_UNSPECIFIED = 0;
+  LATEXALLERGY_YES = 1;  // yes
+  LATEXALLERGY_NO = 2;  // no
+}
+
+enum ContraindicationsAllergiesNeomycinAllergyEnum {
+  NEOMYCINALLERGY_UNSPECIFIED = 0;
+  NEOMYCINALLERGY_YES = 1;  // yes
+  NEOMYCINALLERGY_NO = 2;  // no
+}
+
+enum ContraindicationsAllergiesPregnantEnum {
+  PREGNANT_UNSPECIFIED = 0;
+  PREGNANT_YES = 1;  // yes
+  PREGNANT_NO = 2;  // no
+  PREGNANT_NOTAPPLICABLE = 3;  // notApplicable
+}
+
+enum ContraindicationsAllergiesSevereIllnessEnum {
+  SEVEREILLNESS_UNSPECIFIED = 0;
+  SEVEREILLNESS_YES = 1;  // yes
+  SEVEREILLNESS_NO = 2;  // no
+}
+
+enum ContraindicationsAllergiesPreviousAnaphylaxisEnum {
+  PREVIOUSANAPHYLAXIS_UNSPECIFIED = 0;
+  PREVIOUSANAPHYLAXIS_YES = 1;  // yes
+  PREVIOUSANAPHYLAXIS_NO = 2;  // no
+}
+
+message ContraindicationsAllergies {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  ContraindicationsAllergiesEggAllergyEnum egg_allergy = 6;  // VARCHAR(10)
+  ContraindicationsAllergiesGelatinAllergyEnum gelatin_allergy = 7;  // VARCHAR(10)
+  ContraindicationsAllergiesLatexAllergyEnum latex_allergy = 8;  // VARCHAR(10)
+  ContraindicationsAllergiesNeomycinAllergyEnum neomycin_allergy = 9;  // VARCHAR(10)
+  ContraindicationsAllergiesPregnantEnum pregnant = 10;  // VARCHAR(20)
+  string pregnancy_weeks = 11;  // VARCHAR(10) — max 10 chars
+  ContraindicationsAllergiesSevereIllnessEnum severe_illness = 12;  // VARCHAR(10)
+  ContraindicationsAllergiesPreviousAnaphylaxisEnum previous_anaphylaxis = 13;  // VARCHAR(10)
+  string anaphylaxis_details = 14;  // TEXT
+}

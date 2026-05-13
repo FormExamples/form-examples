@@ -1,0 +1,29 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: architectural_decision
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+enum ArchitecturalDecisionStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_PROPOSED = 2;  // proposed
+  STATUS_ACCEPTED = 3;  // accepted
+  STATUS_DEPRECATED = 4;  // deprecated
+  STATUS_SUPERSEDED = 5;  // superseded
+}
+
+message ArchitecturalDecision {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  int32 ordinal = 6;  // SMALLINT
+  string title = 7;  // TEXT
+  ArchitecturalDecisionStatusEnum status = 8;  // TEXT
+  string context = 9;  // TEXT
+  string decision = 10;  // TEXT
+  string consequences = 11;  // TEXT
+}

@@ -1,0 +1,29 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.ophthalmology_assessment;
+
+enum GradeVisualAcuityGradeEnum {
+  VISUALACUITYGRADE_UNSPECIFIED = 0;
+  VISUALACUITYGRADE_NORMAL = 1;  // normal
+  VISUALACUITYGRADE_MILD_IMPAIRMENT = 2;  // mild-impairment
+  VISUALACUITYGRADE_MODERATE_IMPAIRMENT = 3;  // moderate-impairment
+  VISUALACUITYGRADE_SEVERE_IMPAIRMENT = 4;  // severe-impairment
+  VISUALACUITYGRADE_NEAR_BLINDNESS = 5;  // near-blindness
+  VISUALACUITYGRADE_BLINDNESS = 6;  // blindness
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeVisualAcuityGradeEnum visual_acuity_grade = 6;  // VARCHAR(30)
+  string best_corrected_va_right = 7;  // VARCHAR(20) — max 20 chars
+  string best_corrected_va_left = 8;  // VARCHAR(20) — max 20 chars
+  string better_eye_va = 9;  // VARCHAR(20) — max 20 chars
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,19 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: building_block
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+message BuildingBlock {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  int32 ordinal = 6;  // SMALLINT
+  string parent_id = 7;  // UUID — uuid
+  string name = 8;  // TEXT
+  string responsibility = 9;  // TEXT
+  string interfaces = 10;  // TEXT
+}

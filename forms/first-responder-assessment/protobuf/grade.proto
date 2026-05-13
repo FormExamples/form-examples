@@ -1,0 +1,78 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.first_responder_assessment;
+
+enum GradePhysicalFitnessLevelEnum {
+  PHYSICALFITNESSLEVEL_UNSPECIFIED = 0;
+  PHYSICALFITNESSLEVEL_NOT_COMPETENT = 1;  // not-competent
+  PHYSICALFITNESSLEVEL_DEVELOPING = 2;  // developing
+  PHYSICALFITNESSLEVEL_COMPETENT = 3;  // competent
+  PHYSICALFITNESSLEVEL_EXPERT = 4;  // expert
+}
+
+enum GradeClinicalSkillsLevelEnum {
+  CLINICALSKILLSLEVEL_UNSPECIFIED = 0;
+  CLINICALSKILLSLEVEL_NOT_COMPETENT = 1;  // not-competent
+  CLINICALSKILLSLEVEL_DEVELOPING = 2;  // developing
+  CLINICALSKILLSLEVEL_COMPETENT = 3;  // competent
+  CLINICALSKILLSLEVEL_EXPERT = 4;  // expert
+}
+
+enum GradeEquipmentVehicleLevelEnum {
+  EQUIPMENTVEHICLELEVEL_UNSPECIFIED = 0;
+  EQUIPMENTVEHICLELEVEL_NOT_COMPETENT = 1;  // not-competent
+  EQUIPMENTVEHICLELEVEL_DEVELOPING = 2;  // developing
+  EQUIPMENTVEHICLELEVEL_COMPETENT = 3;  // competent
+  EQUIPMENTVEHICLELEVEL_EXPERT = 4;  // expert
+}
+
+enum GradeCommunicationLevelEnum {
+  COMMUNICATIONLEVEL_UNSPECIFIED = 0;
+  COMMUNICATIONLEVEL_NOT_COMPETENT = 1;  // not-competent
+  COMMUNICATIONLEVEL_DEVELOPING = 2;  // developing
+  COMMUNICATIONLEVEL_COMPETENT = 3;  // competent
+  COMMUNICATIONLEVEL_EXPERT = 4;  // expert
+}
+
+enum GradePsychologicalLevelEnum {
+  PSYCHOLOGICALLEVEL_UNSPECIFIED = 0;
+  PSYCHOLOGICALLEVEL_NOT_COMPETENT = 1;  // not-competent
+  PSYCHOLOGICALLEVEL_DEVELOPING = 2;  // developing
+  PSYCHOLOGICALLEVEL_COMPETENT = 3;  // competent
+  PSYCHOLOGICALLEVEL_EXPERT = 4;  // expert
+}
+
+enum GradeOverallCompetencyEnum {
+  OVERALLCOMPETENCY_UNSPECIFIED = 0;
+  OVERALLCOMPETENCY_NOT_COMPETENT = 1;  // not-competent
+  OVERALLCOMPETENCY_DEVELOPING = 2;  // developing
+  OVERALLCOMPETENCY_COMPETENT = 3;  // competent
+  OVERALLCOMPETENCY_EXPERT = 4;  // expert
+}
+
+enum GradeOverallFitnessEnum {
+  OVERALLFITNESS_UNSPECIFIED = 0;
+  OVERALLFITNESS_FIT_FOR_DUTY = 1;  // fit-for-duty
+  OVERALLFITNESS_FIT_WITH_RESTRICTIONS = 2;  // fit-with-restrictions
+  OVERALLFITNESS_TEMPORARILY_UNFIT = 3;  // temporarily-unfit
+  OVERALLFITNESS_PERMANENTLY_UNFIT = 4;  // permanently-unfit
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradePhysicalFitnessLevelEnum physical_fitness_level = 6;  // VARCHAR(20)
+  GradeClinicalSkillsLevelEnum clinical_skills_level = 7;  // VARCHAR(20)
+  GradeEquipmentVehicleLevelEnum equipment_vehicle_level = 8;  // VARCHAR(20)
+  GradeCommunicationLevelEnum communication_level = 9;  // VARCHAR(20)
+  GradePsychologicalLevelEnum psychological_level = 10;  // VARCHAR(20)
+  GradeOverallCompetencyEnum overall_competency = 11;  // VARCHAR(20)
+  GradeOverallFitnessEnum overall_fitness = 12;  // VARCHAR(30)
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

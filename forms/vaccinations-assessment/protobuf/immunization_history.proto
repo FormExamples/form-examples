@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: immunization_history
+
+syntax = "proto3";
+
+package form_examples.vaccinations_assessment;
+
+enum ImmunizationHistoryHasVaccinationRecordEnum {
+  HASVACCINATIONRECORD_UNSPECIFIED = 0;
+  HASVACCINATIONRECORD_YES = 1;  // yes
+  HASVACCINATIONRECORD_NO = 2;  // no
+  HASVACCINATIONRECORD_UNKNOWN = 3;  // unknown
+}
+
+enum ImmunizationHistoryRecordSourceEnum {
+  RECORDSOURCE_UNSPECIFIED = 0;
+  RECORDSOURCE_REDBOOK = 1;  // redBook
+  RECORDSOURCE_GPRECORDS = 2;  // gpRecords
+  RECORDSOURCE_NHSAPP = 3;  // nhsApp
+  RECORDSOURCE_PATIENTRECALL = 4;  // patientRecall
+  RECORDSOURCE_OTHER = 5;  // other
+}
+
+enum ImmunizationHistoryPreviousAdverseReactionsEnum {
+  PREVIOUSADVERSEREACTIONS_UNSPECIFIED = 0;
+  PREVIOUSADVERSEREACTIONS_YES = 1;  // yes
+  PREVIOUSADVERSEREACTIONS_NO = 2;  // no
+}
+
+enum ImmunizationHistoryImmunocompromisedEnum {
+  IMMUNOCOMPROMISED_UNSPECIFIED = 0;
+  IMMUNOCOMPROMISED_YES = 1;  // yes
+  IMMUNOCOMPROMISED_NO = 2;  // no
+}
+
+message ImmunizationHistory {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  ImmunizationHistoryHasVaccinationRecordEnum has_vaccination_record = 6;  // VARCHAR(10)
+  ImmunizationHistoryRecordSourceEnum record_source = 7;  // VARCHAR(30)
+  string last_review_date = 8;  // DATE — iso 8601 date
+  ImmunizationHistoryPreviousAdverseReactionsEnum previous_adverse_reactions = 9;  // VARCHAR(10)
+  string adverse_reaction_details = 10;  // TEXT
+  ImmunizationHistoryImmunocompromisedEnum immunocompromised = 11;  // VARCHAR(10)
+  string immunocompromised_details = 12;  // TEXT
+}

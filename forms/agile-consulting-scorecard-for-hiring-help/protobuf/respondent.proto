@@ -1,0 +1,61 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: respondent
+
+syntax = "proto3";
+
+package form_examples.agile_consulting_scorecard_for_hiring_help;
+
+enum RespondentRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_BOARD_MEMBER = 1;  // board-member
+  ROLE_CXO = 2;  // cxo
+  ROLE_VP = 3;  // vp
+  ROLE_DIRECTOR = 4;  // director
+  ROLE_HEAD_OF_PRODUCT = 5;  // head-of-product
+  ROLE_HEAD_OF_ENGINEERING = 6;  // head-of-engineering
+  ROLE_HEAD_OF_DELIVERY = 7;  // head-of-delivery
+  ROLE_TRANSFORMATION_LEAD = 8;  // transformation-lead
+  ROLE_PROGRAMME_MANAGER = 9;  // programme-manager
+  ROLE_PROJECT_MANAGER = 10;  // project-manager
+  ROLE_PRODUCT_MANAGER = 11;  // product-manager
+  ROLE_ENGINEERING_MANAGER = 12;  // engineering-manager
+  ROLE_AGILE_COACH = 13;  // agile-coach
+  ROLE_SCRUM_MASTER = 14;  // scrum-master
+  ROLE_CONSULTANT = 15;  // consultant
+  ROLE_EMPLOYEE = 16;  // employee
+  ROLE_OTHER = 17;  // other
+}
+
+enum RespondentSeniorityEnum {
+  SENIORITY_UNSPECIFIED = 0;
+  SENIORITY_BOARD = 1;  // board
+  SENIORITY_EXECUTIVE = 2;  // executive
+  SENIORITY_SENIOR_LEADER = 3;  // senior-leader
+  SENIORITY_MIDDLE_MANAGER = 4;  // middle-manager
+  SENIORITY_TEAM_LEAD = 5;  // team-lead
+  SENIORITY_INDIVIDUAL_CONTRIBUTOR = 6;  // individual-contributor
+}
+
+enum RespondentPreferredContactEnum {
+  PREFERREDCONTACT_UNSPECIFIED = 0;
+  PREFERREDCONTACT_EMAIL = 1;  // email
+  PREFERREDCONTACT_PHONE = 2;  // phone
+  PREFERREDCONTACT_CHAT = 3;  // chat
+  PREFERREDCONTACT_IN_PERSON = 4;  // in-person
+}
+
+message Respondent {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string organization_id = 5;  // UUID — uuid
+  string name = 6;  // VARCHAR(255) — max 255 chars
+  string email = 7;  // TEXT
+  string phone = 8;  // TEXT
+  RespondentRoleEnum role = 9;  // VARCHAR(40)
+  string department = 10;  // VARCHAR(255) — max 255 chars
+  RespondentSeniorityEnum seniority = 11;  // VARCHAR(20)
+  string timezone = 12;  // VARCHAR(64) — max 64 chars
+  RespondentPreferredContactEnum preferred_contact = 13;  // VARCHAR(20)
+}

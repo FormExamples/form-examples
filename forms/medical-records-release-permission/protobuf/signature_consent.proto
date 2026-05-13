@@ -1,0 +1,32 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: signature_consent
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum SignatureConsentPatientSignatureConfirmedEnum {
+  PATIENTSIGNATURECONFIRMED_UNSPECIFIED = 0;
+  PATIENTSIGNATURECONFIRMED_YES = 1;  // yes
+  PATIENTSIGNATURECONFIRMED_NO = 2;  // no
+}
+
+enum SignatureConsentWitnessSignatureConfirmedEnum {
+  WITNESSSIGNATURECONFIRMED_UNSPECIFIED = 0;
+  WITNESSSIGNATURECONFIRMED_YES = 1;  // yes
+  WITNESSSIGNATURECONFIRMED_NO = 2;  // no
+}
+
+message SignatureConsent {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string release_form_id = 5;  // UUID — uuid
+  SignatureConsentPatientSignatureConfirmedEnum patient_signature_confirmed = 6;  // VARCHAR(5)
+  string signature_date = 7;  // DATE — iso 8601 date
+  string witness_name = 8;  // VARCHAR(255) — max 255 chars
+  SignatureConsentWitnessSignatureConfirmedEnum witness_signature_confirmed = 9;  // VARCHAR(5)
+  string witness_date = 10;  // DATE — iso 8601 date
+  string parent_guardian_name = 11;  // VARCHAR(255) — max 255 chars
+}

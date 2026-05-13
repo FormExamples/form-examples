@@ -1,0 +1,54 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: organization
+
+syntax = "proto3";
+
+package form_examples.agile_consulting_scorecard_for_hiring_help;
+
+enum OrganizationSectorEnum {
+  SECTOR_UNSPECIFIED = 0;
+  SECTOR_HEALTHCARE = 1;  // healthcare
+  SECTOR_PHARMACEUTICALS = 2;  // pharmaceuticals
+  SECTOR_MEDTECH = 3;  // medtech
+  SECTOR_PUBLIC_SECTOR = 4;  // public-sector
+  SECTOR_FINANCE = 5;  // finance
+  SECTOR_INSURANCE = 6;  // insurance
+  SECTOR_RETAIL = 7;  // retail
+  SECTOR_MANUFACTURING = 8;  // manufacturing
+  SECTOR_LOGISTICS = 9;  // logistics
+  SECTOR_ENERGY = 10;  // energy
+  SECTOR_UTILITIES = 11;  // utilities
+  SECTOR_MEDIA = 12;  // media
+  SECTOR_TELECOMMUNICATIONS = 13;  // telecommunications
+  SECTOR_TECHNOLOGY = 14;  // technology
+  SECTOR_EDUCATION = 15;  // education
+  SECTOR_CHARITY = 16;  // charity
+  SECTOR_AGRICULTURE = 17;  // agriculture
+  SECTOR_PROFESSIONAL_SERVICES = 18;  // professional-services
+  SECTOR_OTHER = 19;  // other
+}
+
+enum OrganizationSizeBandEnum {
+  SIZEBAND_UNSPECIFIED = 0;
+  SIZEBAND_MICRO = 1;  // micro
+  SIZEBAND_SMALL = 2;  // small
+  SIZEBAND_MEDIUM = 3;  // medium
+  SIZEBAND_LARGE = 4;  // large
+  SIZEBAND_ENTERPRISE = 5;  // enterprise
+}
+
+message Organization {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string legal_name = 6;  // VARCHAR(255) — max 255 chars
+  OrganizationSectorEnum sector = 7;  // VARCHAR(40)
+  OrganizationSizeBandEnum size_band = 8;  // VARCHAR(20)
+  int32 headcount = 9;  // INTEGER
+  string country = 10;  // VARCHAR(2) — max 2 chars
+  string region = 11;  // VARCHAR(255) — max 255 chars
+  string website = 12;  // TEXT
+  string notes = 13;  // TEXT
+}

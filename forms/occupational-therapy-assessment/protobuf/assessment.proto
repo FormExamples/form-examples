@@ -1,0 +1,62 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_performance_ratings, assessment_performance_rating_item, assessment_satisfaction_ratings, assessment_satisfaction_rating_item
+
+syntax = "proto3";
+
+package form_examples.occupational_therapy_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentDomainEnum {
+  DOMAIN_UNSPECIFIED = 0;
+  DOMAIN_SELF_CARE = 1;  // self-care
+  DOMAIN_PRODUCTIVITY = 2;  // productivity
+  DOMAIN_LEISURE = 3;  // leisure
+}
+
+enum AssessmentSatisfactionRatingItemDomainEnum {
+  SATISFACTIONRATINGITEMDOMAIN_UNSPECIFIED = 0;
+  SATISFACTIONRATINGITEMDOMAIN_SELF_CARE = 1;  // self-care
+  SATISFACTIONRATINGITEMDOMAIN_PRODUCTIVITY = 2;  // productivity
+  SATISFACTIONRATINGITEMDOMAIN_LEISURE = 3;  // leisure
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string performance_ratings_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  double overall_performance_score = 8;  // NUMERIC(3,1) — numeric(3,1)
+  double self_care_performance_score = 9;  // NUMERIC(3,1) — numeric(3,1)
+  double productivity_performance_score = 10;  // NUMERIC(3,1) — numeric(3,1)
+  double leisure_performance_score = 11;  // NUMERIC(3,1) — numeric(3,1)
+  string performance_notes = 12;  // TEXT
+  string performance_rating_item_deleted_at = 13;  // TIMESTAMPTZ — iso 8601
+  string performance_ratings_id = 14;  // UUID — uuid
+  string occupational_issue = 15;  // VARCHAR(255) — max 255 chars
+  AssessmentDomainEnum domain = 16;  // VARCHAR(20)
+  int32 importance_score = 17;  // INTEGER
+  int32 performance_score = 18;  // INTEGER
+  int32 sort_order = 19;  // INTEGER
+  string satisfaction_ratings_deleted_at = 20;  // TIMESTAMPTZ — iso 8601
+  double overall_satisfaction_score = 21;  // NUMERIC(3,1) — numeric(3,1)
+  double self_care_satisfaction_score = 22;  // NUMERIC(3,1) — numeric(3,1)
+  double productivity_satisfaction_score = 23;  // NUMERIC(3,1) — numeric(3,1)
+  double leisure_satisfaction_score = 24;  // NUMERIC(3,1) — numeric(3,1)
+  string satisfaction_notes = 25;  // TEXT
+  string satisfaction_rating_item_deleted_at = 26;  // TIMESTAMPTZ — iso 8601
+  string satisfaction_ratings_id = 27;  // UUID — uuid
+  string satisfaction_rating_item_occupational_issue = 28;  // VARCHAR(255) — max 255 chars
+  AssessmentSatisfactionRatingItemDomainEnum satisfaction_rating_item_domain = 29;  // VARCHAR(20)
+  int32 satisfaction_score = 30;  // INTEGER
+  int32 satisfaction_rating_item_sort_order = 31;  // INTEGER
+}

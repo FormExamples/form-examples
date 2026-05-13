@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: deployment_node
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+enum DeploymentNodeEnvironmentEnum {
+  ENVIRONMENT_UNSPECIFIED = 0;
+  ENVIRONMENT_DEVELOPMENT = 1;  // development
+  ENVIRONMENT_STAGING = 2;  // staging
+  ENVIRONMENT_PRODUCTION = 3;  // production
+  ENVIRONMENT_DISASTER_RECOVERY = 4;  // disaster-recovery
+  ENVIRONMENT_OTHER = 5;  // other
+}
+
+message DeploymentNode {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  int32 ordinal = 6;  // SMALLINT
+  DeploymentNodeEnvironmentEnum environment = 7;  // TEXT
+  string node_name = 8;  // TEXT
+  string responsibility = 9;  // TEXT
+}

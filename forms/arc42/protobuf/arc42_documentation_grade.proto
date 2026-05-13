@@ -1,0 +1,129 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: arc42_documentation_grade
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+enum Arc42DocumentationGradeComputedMaturityEnum {
+  COMPUTEDMATURITY_UNSPECIFIED = 0;
+  COMPUTEDMATURITY_DRAFT = 1;  // draft
+  COMPUTEDMATURITY_REVIEWABLE = 2;  // reviewable
+  COMPUTEDMATURITY_READY = 3;  // ready
+  COMPUTEDMATURITY_MATURE = 4;  // mature
+}
+
+enum Arc42DocumentationGradeFinalMaturityEnum {
+  FINALMATURITY_UNSPECIFIED = 0;
+  FINALMATURITY_DRAFT = 1;  // draft
+  FINALMATURITY_REVIEWABLE = 2;  // reviewable
+  FINALMATURITY_READY = 3;  // ready
+  FINALMATURITY_MATURE = 4;  // mature
+}
+
+enum Arc42DocumentationGradeCompletenessSection1Enum {
+  COMPLETENESSSECTION1_UNSPECIFIED = 0;
+  COMPLETENESSSECTION1_EMPTY = 1;  // empty
+  COMPLETENESSSECTION1_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION1_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection2Enum {
+  COMPLETENESSSECTION2_UNSPECIFIED = 0;
+  COMPLETENESSSECTION2_EMPTY = 1;  // empty
+  COMPLETENESSSECTION2_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION2_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection3Enum {
+  COMPLETENESSSECTION3_UNSPECIFIED = 0;
+  COMPLETENESSSECTION3_EMPTY = 1;  // empty
+  COMPLETENESSSECTION3_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION3_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection4Enum {
+  COMPLETENESSSECTION4_UNSPECIFIED = 0;
+  COMPLETENESSSECTION4_EMPTY = 1;  // empty
+  COMPLETENESSSECTION4_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION4_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection5Enum {
+  COMPLETENESSSECTION5_UNSPECIFIED = 0;
+  COMPLETENESSSECTION5_EMPTY = 1;  // empty
+  COMPLETENESSSECTION5_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION5_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection6Enum {
+  COMPLETENESSSECTION6_UNSPECIFIED = 0;
+  COMPLETENESSSECTION6_EMPTY = 1;  // empty
+  COMPLETENESSSECTION6_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION6_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection7Enum {
+  COMPLETENESSSECTION7_UNSPECIFIED = 0;
+  COMPLETENESSSECTION7_EMPTY = 1;  // empty
+  COMPLETENESSSECTION7_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION7_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection8Enum {
+  COMPLETENESSSECTION8_UNSPECIFIED = 0;
+  COMPLETENESSSECTION8_EMPTY = 1;  // empty
+  COMPLETENESSSECTION8_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION8_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection9Enum {
+  COMPLETENESSSECTION9_UNSPECIFIED = 0;
+  COMPLETENESSSECTION9_EMPTY = 1;  // empty
+  COMPLETENESSSECTION9_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION9_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection10Enum {
+  COMPLETENESSSECTION10_UNSPECIFIED = 0;
+  COMPLETENESSSECTION10_EMPTY = 1;  // empty
+  COMPLETENESSSECTION10_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION10_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection11Enum {
+  COMPLETENESSSECTION11_UNSPECIFIED = 0;
+  COMPLETENESSSECTION11_EMPTY = 1;  // empty
+  COMPLETENESSSECTION11_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION11_COMPLETE = 3;  // complete
+}
+
+enum Arc42DocumentationGradeCompletenessSection12Enum {
+  COMPLETENESSSECTION12_UNSPECIFIED = 0;
+  COMPLETENESSSECTION12_EMPTY = 1;  // empty
+  COMPLETENESSSECTION12_PARTIAL = 2;  // partial
+  COMPLETENESSSECTION12_COMPLETE = 3;  // complete
+}
+
+message Arc42DocumentationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  Arc42DocumentationGradeComputedMaturityEnum computed_maturity = 6;  // TEXT
+  Arc42DocumentationGradeFinalMaturityEnum final_maturity = 7;  // TEXT
+  string override_reason = 8;  // TEXT
+  Arc42DocumentationGradeCompletenessSection1Enum completeness_section_1 = 9;  // TEXT
+  Arc42DocumentationGradeCompletenessSection2Enum completeness_section_2 = 10;  // TEXT
+  Arc42DocumentationGradeCompletenessSection3Enum completeness_section_3 = 11;  // TEXT
+  Arc42DocumentationGradeCompletenessSection4Enum completeness_section_4 = 12;  // TEXT
+  Arc42DocumentationGradeCompletenessSection5Enum completeness_section_5 = 13;  // TEXT
+  Arc42DocumentationGradeCompletenessSection6Enum completeness_section_6 = 14;  // TEXT
+  Arc42DocumentationGradeCompletenessSection7Enum completeness_section_7 = 15;  // TEXT
+  Arc42DocumentationGradeCompletenessSection8Enum completeness_section_8 = 16;  // TEXT
+  Arc42DocumentationGradeCompletenessSection9Enum completeness_section_9 = 17;  // TEXT
+  Arc42DocumentationGradeCompletenessSection10Enum completeness_section_10 = 18;  // TEXT
+  Arc42DocumentationGradeCompletenessSection11Enum completeness_section_11 = 19;  // TEXT
+  Arc42DocumentationGradeCompletenessSection12Enum completeness_section_12 = 20;  // TEXT
+}

@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: casualty_card_disposition
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum CasualtyCardDispositionDispositionEnum {
+  DISPOSITION_UNSPECIFIED = 0;
+  DISPOSITION_ADMITTED = 1;  // admitted
+  DISPOSITION_DISCHARGED = 2;  // discharged
+  DISPOSITION_TRANSFERRED = 3;  // transferred
+  DISPOSITION_LEFT_BEFORE_SEEN = 4;  // left-before-seen
+  DISPOSITION_SELF_DISCHARGED = 5;  // self-discharged
+}
+
+message CasualtyCardDisposition {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  CasualtyCardDispositionDispositionEnum disposition = 6;  // TEXT
+  string admitting_specialty = 7;  // TEXT
+  string admitting_consultant = 8;  // TEXT
+  string ward = 9;  // TEXT
+  string level_of_care = 10;  // TEXT
+  string discharge_diagnosis = 11;  // TEXT
+  string discharge_medications = 12;  // TEXT
+  string discharge_instructions = 13;  // TEXT
+  string follow_up = 14;  // TEXT
+  string return_precautions = 15;  // TEXT
+  string receiving_hospital = 16;  // TEXT
+  string reason_for_transfer = 17;  // TEXT
+  string mode_of_transfer = 18;  // TEXT
+  string discharge_time = 19;  // TIMESTAMPTZ — iso 8601
+  string total_time_in_department = 20;  // TEXT
+}

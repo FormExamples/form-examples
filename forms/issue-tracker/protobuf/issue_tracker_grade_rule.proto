@@ -1,0 +1,31 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: issue_tracker_grade_rule
+
+syntax = "proto3";
+
+package form_examples.issue_tracker;
+
+enum IssueTrackerGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_PRIORITY = 1;  // priority
+  INSTRUMENT_SEVERITY = 2;  // severity
+  INSTRUMENT_MAGNITUDE = 3;  // magnitude
+  INSTRUMENT_HARM = 4;  // harm
+  INSTRUMENT_FAILURE = 5;  // failure
+  INSTRUMENT_MOSCOW = 6;  // moscow
+  INSTRUMENT_FREQUENCY = 7;  // frequency
+  INSTRUMENT_COMPOSITE = 8;  // composite
+}
+
+message IssueTrackerGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string issue_tracker_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(50) — max 50 chars
+  IssueTrackerGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  string grade = 8;  // VARCHAR(10) — max 10 chars
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

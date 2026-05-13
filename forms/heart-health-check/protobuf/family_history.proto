@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: family_history
+
+syntax = "proto3";
+
+package form_examples.heart_health_check;
+
+enum FamilyHistoryFamilyCvdUnder60Enum {
+  FAMILYCVDUNDER60_UNSPECIFIED = 0;
+  FAMILYCVDUNDER60_YES = 1;  // yes
+  FAMILYCVDUNDER60_NO = 2;  // no
+}
+
+enum FamilyHistoryFamilyCvdRelationshipEnum {
+  FAMILYCVDRELATIONSHIP_UNSPECIFIED = 0;
+  FAMILYCVDRELATIONSHIP_PARENT = 1;  // parent
+  FAMILYCVDRELATIONSHIP_SIBLING = 2;  // sibling
+  FAMILYCVDRELATIONSHIP_CHILD = 3;  // child
+  FAMILYCVDRELATIONSHIP_MULTIPLE = 4;  // multiple
+}
+
+enum FamilyHistoryFamilyDiabetesHistoryEnum {
+  FAMILYDIABETESHISTORY_UNSPECIFIED = 0;
+  FAMILYDIABETESHISTORY_YES = 1;  // yes
+  FAMILYDIABETESHISTORY_NO = 2;  // no
+}
+
+message FamilyHistory {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  FamilyHistoryFamilyCvdUnder60Enum family_cvd_under_60 = 6;  // VARCHAR(5)
+  FamilyHistoryFamilyCvdRelationshipEnum family_cvd_relationship = 7;  // VARCHAR(20)
+  FamilyHistoryFamilyDiabetesHistoryEnum family_diabetes_history = 8;  // VARCHAR(5)
+}

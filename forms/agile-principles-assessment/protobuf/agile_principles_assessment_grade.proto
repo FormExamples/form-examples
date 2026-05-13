@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_principles_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.agile_principles_assessment;
+
+enum AgilePrinciplesAssessmentGradeMaturityEnum {
+  MATURITY_UNSPECIFIED = 0;
+  MATURITY_OPTIMISING = 1;  // optimising
+  MATURITY_MATURE = 2;  // mature
+  MATURITY_DEVELOPING = 3;  // developing
+  MATURITY_INITIAL = 4;  // initial
+  MATURITY_AD_HOC = 5;  // ad-hoc
+  MATURITY_INSUFFICIENT_DATA = 6;  // insufficient-data
+}
+
+message AgilePrinciplesAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string agile_principles_assessment_id = 5;  // UUID — uuid
+  int32 answered_count = 6;  // SMALLINT
+  double mean_score = 7;  // NUMERIC(3,2) — numeric(3,2)
+  double weighted_mean_score = 8;  // NUMERIC(3,2) — numeric(3,2)
+  bool weights_customised = 9;  // BOOLEAN
+  AgilePrinciplesAssessmentGradeMaturityEnum maturity = 10;  // VARCHAR(20)
+  string top_action_1 = 11;  // VARCHAR(500) — max 500 chars
+  string top_action_2 = 12;  // VARCHAR(500) — max 500 chars
+  string top_action_3 = 13;  // VARCHAR(500) — max 500 chars
+  string coach_notes = 14;  // TEXT
+  string signed_at = 15;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

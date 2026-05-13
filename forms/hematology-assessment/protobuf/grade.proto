@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.hematology_assessment;
+
+enum GradeAbnormalityLevelEnum {
+  ABNORMALITYLEVEL_UNSPECIFIED = 0;
+  ABNORMALITYLEVEL_DRAFT = 1;  // draft
+  ABNORMALITYLEVEL_NORMAL = 2;  // normal
+  ABNORMALITYLEVEL_MILDABNORMALITY = 3;  // mildAbnormality
+  ABNORMALITYLEVEL_MODERATEABNORMALITY = 4;  // moderateAbnormality
+  ABNORMALITYLEVEL_SEVEREABNORMALITY = 5;  // severeAbnormality
+  ABNORMALITYLEVEL_CRITICAL = 6;  // critical
+}
+
+enum GradeAbnormalityLevelOverrideEnum {
+  ABNORMALITYLEVELOVERRIDE_UNSPECIFIED = 0;
+  ABNORMALITYLEVELOVERRIDE_NORMAL = 1;  // normal
+  ABNORMALITYLEVELOVERRIDE_MILDABNORMALITY = 2;  // mildAbnormality
+  ABNORMALITYLEVELOVERRIDE_MODERATEABNORMALITY = 3;  // moderateAbnormality
+  ABNORMALITYLEVELOVERRIDE_SEVEREABNORMALITY = 4;  // severeAbnormality
+  ABNORMALITYLEVELOVERRIDE_CRITICAL = 5;  // critical
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeAbnormalityLevelEnum abnormality_level = 6;  // TEXT
+  double abnormality_score = 7;  // NUMERIC(5,1) — numeric(5,1)
+  GradeAbnormalityLevelOverrideEnum abnormality_level_override = 8;  // TEXT
+  string override_reason = 9;  // TEXT
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

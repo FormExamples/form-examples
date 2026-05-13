@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: outpatient_outcome_encounter
+
+syntax = "proto3";
+
+package form_examples.outpatient_outcome;
+
+enum OutpatientOutcomeEncounterModalityEnum {
+  MODALITY_UNSPECIFIED = 0;
+  MODALITY_IN_PERSON = 1;  // in_person
+  MODALITY_TELEPHONE = 2;  // telephone
+  MODALITY_VIDEO = 3;  // video
+}
+
+enum OutpatientOutcomeEncounterAppointmentTypeEnum {
+  APPOINTMENTTYPE_UNSPECIFIED = 0;
+  APPOINTMENTTYPE_NEW = 1;  // new
+  APPOINTMENTTYPE_FOLLOW_UP = 2;  // follow_up
+  APPOINTMENTTYPE_PIFU = 3;  // pifu
+}
+
+message OutpatientOutcomeEncounter {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string outpatient_outcome_id = 5;  // UUID — uuid
+  string clinic_date = 6;  // DATE — iso 8601 date
+  string specialty = 7;  // VARCHAR(100) — max 100 chars
+  string clinician_id = 8;  // UUID — uuid
+  OutpatientOutcomeEncounterModalityEnum modality = 9;  // VARCHAR(20)
+  OutpatientOutcomeEncounterAppointmentTypeEnum appointment_type = 10;  // VARCHAR(20)
+}

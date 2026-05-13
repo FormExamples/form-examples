@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: outpatient_outcome_prom_grc
+
+syntax = "proto3";
+
+package form_examples.outpatient_outcome;
+
+enum OutpatientOutcomePromGrcSelfRatedHealthEnum {
+  SELFRATEDHEALTH_UNSPECIFIED = 0;
+  SELFRATEDHEALTH_EXCELLENT = 1;  // excellent
+  SELFRATEDHEALTH_VERY_GOOD = 2;  // very_good
+  SELFRATEDHEALTH_GOOD = 3;  // good
+  SELFRATEDHEALTH_FAIR = 4;  // fair
+  SELFRATEDHEALTH_POOR = 5;  // poor
+}
+
+message OutpatientOutcomePromGrc {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string outpatient_outcome_id = 5;  // UUID — uuid
+  int32 global_rating_of_change = 6;  // SMALLINT
+  OutpatientOutcomePromGrcSelfRatedHealthEnum self_rated_health = 7;  // VARCHAR(20)
+}

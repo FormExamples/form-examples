@@ -1,0 +1,70 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_current_medication_item
+
+syntax = "proto3";
+
+package form_examples.mental_health_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakingPsychotropicMedicationEnum {
+  TAKINGPSYCHOTROPICMEDICATION_UNSPECIFIED = 0;
+  TAKINGPSYCHOTROPICMEDICATION_YES = 1;  // yes
+  TAKINGPSYCHOTROPICMEDICATION_NO = 2;  // no
+}
+
+enum AssessmentMedicationAdherenceEnum {
+  MEDICATIONADHERENCE_UNSPECIFIED = 0;
+  MEDICATIONADHERENCE_GOOD = 1;  // good
+  MEDICATIONADHERENCE_PARTIAL = 2;  // partial
+  MEDICATIONADHERENCE_POOR = 3;  // poor
+}
+
+enum AssessmentSideEffectsEnum {
+  SIDEEFFECTS_UNSPECIFIED = 0;
+  SIDEEFFECTS_YES = 1;  // yes
+  SIDEEFFECTS_NO = 2;  // no
+}
+
+enum AssessmentMedicationClassEnum {
+  MEDICATIONCLASS_UNSPECIFIED = 0;
+  MEDICATIONCLASS_ANTIDEPRESSANT = 1;  // antidepressant
+  MEDICATIONCLASS_ANXIOLYTIC = 2;  // anxiolytic
+  MEDICATIONCLASS_ANTIPSYCHOTIC = 3;  // antipsychotic
+  MEDICATIONCLASS_MOOD_STABILISER = 4;  // mood-stabiliser
+  MEDICATIONCLASS_HYPNOTIC = 5;  // hypnotic
+  MEDICATIONCLASS_STIMULANT = 6;  // stimulant
+  MEDICATIONCLASS_OTHER = 7;  // other
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakingPsychotropicMedicationEnum taking_psychotropic_medication = 8;  // VARCHAR(5)
+  AssessmentMedicationAdherenceEnum medication_adherence = 9;  // VARCHAR(20)
+  AssessmentSideEffectsEnum side_effects = 10;  // VARCHAR(5)
+  string side_effects_details = 11;  // TEXT
+  string over_the_counter_medications = 12;  // TEXT
+  string supplements = 13;  // TEXT
+  string medication_notes = 14;  // TEXT
+  string current_medication_item_deleted_at = 15;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 16;  // UUID — uuid
+  string medication_name = 17;  // VARCHAR(255) — max 255 chars
+  string dose = 18;  // VARCHAR(100) — max 100 chars
+  string frequency = 19;  // VARCHAR(100) — max 100 chars
+  string prescriber = 20;  // VARCHAR(255) — max 255 chars
+  string start_date = 21;  // DATE — iso 8601 date
+  AssessmentMedicationClassEnum medication_class = 22;  // VARCHAR(50)
+  int32 sort_order = 23;  // INTEGER
+}

@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: administration_record
+
+syntax = "proto3";
+
+package form_examples.vaccinations_assessment;
+
+enum AdministrationRecordAdministrationSiteEnum {
+  ADMINISTRATIONSITE_UNSPECIFIED = 0;
+  ADMINISTRATIONSITE_LEFTDELTOID = 1;  // leftDeltoid
+  ADMINISTRATIONSITE_RIGHTDELTOID = 2;  // rightDeltoid
+  ADMINISTRATIONSITE_LEFTTHIGH = 3;  // leftThigh
+  ADMINISTRATIONSITE_RIGHTTHIGH = 4;  // rightThigh
+  ADMINISTRATIONSITE_ORAL = 5;  // oral
+  ADMINISTRATIONSITE_NASAL = 6;  // nasal
+}
+
+enum AdministrationRecordAdministrationRouteEnum {
+  ADMINISTRATIONROUTE_UNSPECIFIED = 0;
+  ADMINISTRATIONROUTE_INTRAMUSCULAR = 1;  // intramuscular
+  ADMINISTRATIONROUTE_SUBCUTANEOUS = 2;  // subcutaneous
+  ADMINISTRATIONROUTE_INTRADERMAL = 3;  // intradermal
+  ADMINISTRATIONROUTE_ORAL = 4;  // oral
+  ADMINISTRATIONROUTE_NASAL = 5;  // nasal
+}
+
+enum AdministrationRecordDoseNumberEnum {
+  DOSENUMBER_UNSPECIFIED = 0;
+  DOSENUMBER_V_1 = 1;  // 1
+  DOSENUMBER_V_2 = 2;  // 2
+  DOSENUMBER_V_3 = 3;  // 3
+  DOSENUMBER_BOOSTER = 4;  // booster
+}
+
+message AdministrationRecord {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  string vaccine_name = 6;  // VARCHAR(255) — max 255 chars
+  string batch_number = 7;  // VARCHAR(50) — max 50 chars
+  string expiry_date = 8;  // DATE — iso 8601 date
+  AdministrationRecordAdministrationSiteEnum administration_site = 9;  // VARCHAR(20)
+  AdministrationRecordAdministrationRouteEnum administration_route = 10;  // VARCHAR(20)
+  AdministrationRecordDoseNumberEnum dose_number = 11;  // VARCHAR(10)
+  string administered_by = 12;  // VARCHAR(255) — max 255 chars
+  string administration_date = 13;  // DATE — iso 8601 date
+}

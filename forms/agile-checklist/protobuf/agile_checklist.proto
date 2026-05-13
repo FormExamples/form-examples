@@ -1,0 +1,91 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_checklist
+
+syntax = "proto3";
+
+package form_examples.agile_checklist;
+
+enum AgileChecklistStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+}
+
+enum AgileChecklistAssessmentPeriodEnum {
+  ASSESSMENTPERIOD_UNSPECIFIED = 0;
+  ASSESSMENTPERIOD_SPRINT = 1;  // sprint
+  ASSESSMENTPERIOD_QUARTER = 2;  // quarter
+  ASSESSMENTPERIOD_HALF_YEAR = 3;  // half-year
+  ASSESSMENTPERIOD_ANNUAL = 4;  // annual
+  ASSESSMENTPERIOD_AD_HOC = 5;  // ad-hoc
+}
+
+message AgileChecklist {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string respondent_id = 5;  // UUID — uuid
+  AgileChecklistStatusEnum status = 6;  // VARCHAR(20)
+  string assessment_date = 7;  // DATE — iso 8601 date
+  AgileChecklistAssessmentPeriodEnum assessment_period = 8;  // VARCHAR(50)
+  string t01_problems_to_solve = 9;  // agile_checklist_answer
+  string t02_decisions_without_manager = 10;  // agile_checklist_answer
+  string t03_adopt_and_improve_practices = 11;  // agile_checklist_answer
+  string t04_actively_coordinate = 12;  // agile_checklist_answer
+  string t05_openly_share_ideas = 13;  // agile_checklist_answer
+  string t06_decide_how_to_execute = 14;  // agile_checklist_answer
+  string t07_act_on_feedback = 15;  // agile_checklist_answer
+  string t08_rarely_wait = 16;  // agile_checklist_answer
+  string t09_fully_complete_work = 17;  // agile_checklist_answer
+  string t10_manage_own_performance = 18;  // agile_checklist_answer
+  string t11_understand_agile = 19;  // agile_checklist_answer
+  string t12_high_quality = 20;  // agile_checklist_answer
+  string t13_welcome_change = 21;  // agile_checklist_answer
+  string t14_collaborate_to_finish = 22;  // agile_checklist_answer
+  string t15_admit_mistakes = 23;  // agile_checklist_answer
+  string t16_work_outside_specialty = 24;  // agile_checklist_answer
+  string t17_seek_new_skills = 25;  // agile_checklist_answer
+  string t18_improve_skills = 26;  // agile_checklist_answer
+  string t19_improve_ways_of_working = 27;  // agile_checklist_answer
+  string t20_various_ways_communicating = 28;  // agile_checklist_answer
+  string t21_received_basic_training = 29;  // agile_checklist_answer
+  string t22_safe_to_dissent = 30;  // agile_checklist_answer
+  string t23_start_with_open_issues = 31;  // agile_checklist_answer
+  string t24_motivated = 32;  // agile_checklist_answer
+  string t25_pride_in_craft = 33;  // agile_checklist_answer
+  string s01_know_priority_factors = 34;  // agile_checklist_answer
+  string s02_accept_plan_ranges = 35;  // agile_checklist_answer
+  string s03_accept_plan_changes = 36;  // agile_checklist_answer
+  string s04_evaluate_product = 37;  // agile_checklist_answer
+  string s05_champion_agile = 38;  // agile_checklist_answer
+  string s06_respect_quality = 39;  // agile_checklist_answer
+  string s07_delegate_authority = 40;  // agile_checklist_answer
+  string s08_keep_authority_delegated = 41;  // agile_checklist_answer
+  string s09_support_experiments = 42;  // agile_checklist_answer
+  string s10_no_punish_experiments = 43;  // agile_checklist_answer
+  string s11_communicate_agile_goals = 44;  // agile_checklist_answer
+  string s12_encourage_new_skills = 45;  // agile_checklist_answer
+  string s13_encourage_new_ways = 46;  // agile_checklist_answer
+  string s14_develop_people = 47;  // agile_checklist_answer
+  string p01_early_good_release = 48;  // agile_checklist_answer
+  string p02_educated_sponsor = 49;  // agile_checklist_answer
+  string p03_quick_decisions = 50;  // agile_checklist_answer
+  string p04_plans_data_based = 51;  // agile_checklist_answer
+  string p05_proactive_dependencies = 52;  // agile_checklist_answer
+  string p06_good_intentions = 53;  // agile_checklist_answer
+  string p07_reciprocal_trust = 54;  // agile_checklist_answer
+  string p08_docs_plus_conversations = 55;  // agile_checklist_answer
+  string p09_update_plans = 56;  // agile_checklist_answer
+  string p10_non_punitive = 57;  // agile_checklist_answer
+  string p11_outside_groups_aware = 58;  // agile_checklist_answer
+  string p12_finished_over_wip = 59;  // agile_checklist_answer
+  string p13_quality_over_deadline = 60;  // agile_checklist_answer
+  string p14_solution_over_blame = 61;  // agile_checklist_answer
+  string p15_change_agents_in_place = 62;  // agile_checklist_answer
+  string p16_agile_beyond_origin = 63;  // agile_checklist_answer
+  string p17_one_team = 64;  // agile_checklist_answer
+  string p18_honor_commitments = 65;  // agile_checklist_answer
+  string overall_notes = 66;  // TEXT
+}

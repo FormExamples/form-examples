@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_checklist_grade_flag
+
+syntax = "proto3";
+
+package form_examples.agile_checklist;
+
+enum AgileChecklistGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_TEAMS_AUTONOMY_RISK = 1;  // teams-autonomy-risk
+  CATEGORY_STAKEHOLDERS_TRUST_RISK = 2;  // stakeholders-trust-risk
+  CATEGORY_PRACTICES_DISCIPLINE_RISK = 3;  // practices-discipline-risk
+  CATEGORY_SECTION_IMBALANCE = 4;  // section-imbalance
+  CATEGORY_FINISHED_WORK_RISK = 5;  // finished-work-risk
+  CATEGORY_EXPERIMENTATION_BLOCKED = 6;  // experimentation-blocked
+  CATEGORY_LEARNING_STALLED = 7;  // learning-stalled
+  CATEGORY_PSYCHOLOGICAL_SAFETY_RISK = 8;  // psychological-safety-risk
+  CATEGORY_INSUFFICIENT_DATA = 9;  // insufficient-data
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum AgileChecklistGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+enum AgileChecklistGradeFlagSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_TEAMS = 1;  // teams
+  SECTION_STAKEHOLDERS = 2;  // stakeholders
+  SECTION_PRACTICES = 3;  // practices
+}
+
+message AgileChecklistGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string agile_checklist_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(40) — max 40 chars
+  AgileChecklistGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  AgileChecklistGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  AgileChecklistGradeFlagSectionEnum section = 9;  // VARCHAR(20)
+  string triggering_items = 10;  // VARCHAR(200) — max 200 chars
+  string description = 11;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 12;  // VARCHAR(500) — max 500 chars
+}

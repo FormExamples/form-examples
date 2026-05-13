@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: context_partner
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+enum ContextPartnerKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_BUSINESS = 1;  // business
+  KIND_TECHNICAL = 2;  // technical
+}
+
+enum ContextPartnerDirectionEnum {
+  DIRECTION_UNSPECIFIED = 0;
+  DIRECTION_INBOUND = 1;  // inbound
+  DIRECTION_OUTBOUND = 2;  // outbound
+  DIRECTION_BIDIRECTIONAL = 3;  // bidirectional
+}
+
+message ContextPartner {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  int32 ordinal = 6;  // SMALLINT
+  ContextPartnerKindEnum kind = 7;  // TEXT
+  string name = 8;  // TEXT
+  string interface_description = 9;  // TEXT
+  string protocol = 10;  // TEXT
+  ContextPartnerDirectionEnum direction = 11;  // TEXT
+}

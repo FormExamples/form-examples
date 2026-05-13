@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: casualty_card_allergy
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum CasualtyCardAllergySeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_MILD = 1;  // mild
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_ANAPHYLAXIS = 3;  // anaphylaxis
+}
+
+message CasualtyCardAllergy {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  string allergen = 6;  // TEXT
+  string reaction = 7;  // TEXT
+  CasualtyCardAllergySeverityEnum severity = 8;  // TEXT
+  int32 sort_order = 9;  // INTEGER
+}

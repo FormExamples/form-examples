@@ -1,0 +1,36 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.employee_onboarding_checklist;
+
+enum GradeCompletionStatusEnum {
+  COMPLETIONSTATUS_UNSPECIFIED = 0;
+  COMPLETIONSTATUS_NOT_STARTED = 1;  // not-started
+  COMPLETIONSTATUS_IN_PROGRESS = 2;  // in-progress
+  COMPLETIONSTATUS_MOSTLY_COMPLETE = 3;  // mostly-complete
+  COMPLETIONSTATUS_COMPLETE = 4;  // complete
+}
+
+enum GradeOverallRiskLevelEnum {
+  OVERALLRISKLEVEL_UNSPECIFIED = 0;
+  OVERALLRISKLEVEL_LOW = 1;  // low
+  OVERALLRISKLEVEL_MODERATE = 2;  // moderate
+  OVERALLRISKLEVEL_HIGH = 3;  // high
+  OVERALLRISKLEVEL_CRITICAL = 4;  // critical
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  double completion_percentage = 6;  // NUMERIC(5,1) — numeric(5,1)
+  GradeCompletionStatusEnum completion_status = 7;  // VARCHAR(20)
+  GradeOverallRiskLevelEnum overall_risk_level = 8;  // VARCHAR(10)
+  int32 items_completed = 9;  // INTEGER
+  int32 items_total = 10;  // INTEGER
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

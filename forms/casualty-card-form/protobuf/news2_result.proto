@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: news2_result
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum News2ResultClinicalResponseEnum {
+  CLINICALRESPONSE_UNSPECIFIED = 0;
+  CLINICALRESPONSE_LOW = 1;  // low
+  CLINICALRESPONSE_LOW_MEDIUM = 2;  // low-medium
+  CLINICALRESPONSE_MEDIUM = 3;  // medium
+  CLINICALRESPONSE_HIGH = 4;  // high
+}
+
+message News2Result {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  int32 total_score = 6;  // INTEGER
+  News2ResultClinicalResponseEnum clinical_response = 7;  // TEXT
+  bool has_any_single_score_3 = 8;  // BOOLEAN
+  string supplemental_oxygen = 9;  // parameter_scores
+  string scored_at = 10;  // TIMESTAMPTZ — iso 8601
+}

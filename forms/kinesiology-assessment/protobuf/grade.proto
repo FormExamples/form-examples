@@ -1,0 +1,26 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.kinesiology_assessment;
+
+enum GradeRiskCategoryEnum {
+  RISKCATEGORY_UNSPECIFIED = 0;
+  RISKCATEGORY_INCREASED_INJURY_RISK = 1;  // increased_injury_risk
+  RISKCATEGORY_MODERATE_RISK = 2;  // moderate_risk
+  RISKCATEGORY_LOW_RISK = 3;  // low_risk
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 total_fms_score = 6;  // INTEGER
+  GradeRiskCategoryEnum risk_category = 7;  // VARCHAR(30)
+  int32 asymmetry_count = 8;  // INTEGER
+  int32 pain_count = 9;  // INTEGER
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

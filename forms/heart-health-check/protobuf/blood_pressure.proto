@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: blood_pressure
+
+syntax = "proto3";
+
+package form_examples.heart_health_check;
+
+enum BloodPressureOnBpTreatmentEnum {
+  ONBPTREATMENT_UNSPECIFIED = 0;
+  ONBPTREATMENT_YES = 1;  // yes
+  ONBPTREATMENT_NO = 2;  // no
+}
+
+message BloodPressure {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 systolic_bp = 6;  // SMALLINT
+  double systolic_bp_sd = 7;  // NUMERIC(5, 2) — numeric(5, 2)
+  int32 diastolic_bp = 8;  // SMALLINT
+  BloodPressureOnBpTreatmentEnum on_bp_treatment = 9;  // VARCHAR(5)
+  int32 number_of_bp_medications = 10;  // SMALLINT
+}

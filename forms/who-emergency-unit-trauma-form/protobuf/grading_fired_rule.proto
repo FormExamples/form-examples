@@ -1,0 +1,26 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grading_fired_rule
+
+syntax = "proto3";
+
+package form_examples.who_emergency_unit_trauma_form;
+
+enum GradingFiredRuleSeverityLevelEnum {
+  SEVERITYLEVEL_UNSPECIFIED = 0;
+  SEVERITYLEVEL_LOW = 1;  // low
+  SEVERITYLEVEL_MEDIUM = 2;  // medium
+  SEVERITYLEVEL_HIGH = 3;  // high
+  SEVERITYLEVEL_CRITICAL = 4;  // critical
+}
+
+message GradingFiredRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(50) — max 50 chars
+  string category = 7;  // VARCHAR(100) — max 100 chars
+  string description = 8;  // TEXT
+  GradingFiredRuleSeverityLevelEnum severity_level = 9;  // VARCHAR(20)
+}

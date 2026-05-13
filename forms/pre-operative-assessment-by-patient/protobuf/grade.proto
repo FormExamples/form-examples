@@ -1,0 +1,76 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.pre_operative_assessment_by_patient;
+
+enum GradeComputedAsaGradeEnum {
+  COMPUTEDASAGRADE_UNSPECIFIED = 0;
+  COMPUTEDASAGRADE_I = 1;  // I
+  COMPUTEDASAGRADE_II = 2;  // II
+  COMPUTEDASAGRADE_III = 3;  // III
+  COMPUTEDASAGRADE_IV = 4;  // IV
+  COMPUTEDASAGRADE_V = 5;  // V
+  COMPUTEDASAGRADE_VI = 6;  // VI
+}
+
+enum GradeFinalAsaGradeEnum {
+  FINALASAGRADE_UNSPECIFIED = 0;
+  FINALASAGRADE_I = 1;  // I
+  FINALASAGRADE_II = 2;  // II
+  FINALASAGRADE_III = 3;  // III
+  FINALASAGRADE_IV = 4;  // IV
+  FINALASAGRADE_V = 5;  // V
+  FINALASAGRADE_VI = 6;  // VI
+}
+
+enum GradeAsaEmergencySuffixEnum {
+  ASAEMERGENCYSUFFIX_UNSPECIFIED = 0;
+  ASAEMERGENCYSUFFIX_E = 1;  // E
+}
+
+enum GradeMallampatiClassEnum {
+  MALLAMPATICLASS_UNSPECIFIED = 0;
+  MALLAMPATICLASS_I = 1;  // I
+  MALLAMPATICLASS_II = 2;  // II
+  MALLAMPATICLASS_III = 3;  // III
+  MALLAMPATICLASS_IV = 4;  // IV
+}
+
+enum GradeCompositeRiskEnum {
+  COMPOSITERISK_UNSPECIFIED = 0;
+  COMPOSITERISK_LOW = 1;  // low
+  COMPOSITERISK_MODERATE = 2;  // moderate
+  COMPOSITERISK_HIGH = 3;  // high
+  COMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+enum GradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_PROCEED = 1;  // proceed
+  RECOMMENDATION_OPTIMISE_FIRST = 2;  // optimise-first
+  RECOMMENDATION_MDT_REVIEW = 3;  // mdt-review
+  RECOMMENDATION_CANCEL = 4;  // cancel
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pre_operative_assessment_by_patient_id = 5;  // UUID — uuid
+  GradeComputedAsaGradeEnum computed_asa_grade = 6;  // VARCHAR(5)
+  GradeFinalAsaGradeEnum final_asa_grade = 7;  // VARCHAR(5)
+  GradeAsaEmergencySuffixEnum asa_emergency_suffix = 8;  // VARCHAR(5)
+  string override_reason = 9;  // VARCHAR(500) — max 500 chars
+  GradeMallampatiClassEnum mallampati_class = 10;  // VARCHAR(5)
+  int32 rcri_score = 11;  // INTEGER
+  int32 stopbang_score = 12;  // INTEGER
+  int32 frailty_scale = 13;  // INTEGER
+  GradeCompositeRiskEnum composite_risk = 14;  // VARCHAR(10)
+  GradeRecommendationEnum recommendation = 15;  // VARCHAR(20)
+  string clinician_notes = 16;  // TEXT
+  string signed_at = 17;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 18;  // TIMESTAMPTZ — iso 8601
+}

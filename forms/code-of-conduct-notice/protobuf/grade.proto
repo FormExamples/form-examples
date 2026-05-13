@@ -1,0 +1,18 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.code_of_conduct_notice;
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  string result_category = 6;  // VARCHAR(100) — max 100 chars
+  double result_score = 7;  // NUMERIC — numeric
+  string result_notes = 8;  // TEXT
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,23 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.autism_assessment;
+
+enum GradeThresholdCategoryEnum {
+  THRESHOLDCATEGORY_UNSPECIFIED = 0;
+  THRESHOLDCATEGORY_BELOW_THRESHOLD = 1;  // below_threshold
+  THRESHOLDCATEGORY_REFERRAL_RECOMMENDED = 2;  // referral_recommended
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 aq10_score = 6;  // INTEGER
+  GradeThresholdCategoryEnum threshold_category = 7;  // VARCHAR(30)
+  string graded_at = 8;  // TIMESTAMPTZ — iso 8601
+}

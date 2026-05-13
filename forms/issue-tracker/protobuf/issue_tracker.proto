@@ -1,0 +1,173 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: issue_tracker
+
+syntax = "proto3";
+
+package form_examples.issue_tracker;
+
+enum IssueTrackerStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_OPEN = 2;  // open
+  STATUS_IN_PROGRESS = 3;  // in-progress
+  STATUS_BLOCKED = 4;  // blocked
+  STATUS_RESOLVED = 5;  // resolved
+  STATUS_CLOSED = 6;  // closed
+  STATUS_DUPLICATE = 7;  // duplicate
+  STATUS_CANCELLED = 8;  // cancelled
+}
+
+enum IssueTrackerIssueCategoryEnum {
+  ISSUECATEGORY_UNSPECIFIED = 0;
+  ISSUECATEGORY_SOFTWARE_DEFECT = 1;  // software-defect
+  ISSUECATEGORY_SERVICE_OUTAGE = 2;  // service-outage
+  ISSUECATEGORY_PERFORMANCE = 3;  // performance
+  ISSUECATEGORY_SECURITY = 4;  // security
+  ISSUECATEGORY_DATA_PROTECTION = 5;  // data-protection
+  ISSUECATEGORY_CLINICAL_SAFETY = 6;  // clinical-safety
+  ISSUECATEGORY_WORKPLACE_SAFETY = 7;  // workplace-safety
+  ISSUECATEGORY_MEDICAL_DEVICE = 8;  // medical-device
+  ISSUECATEGORY_REGULATORY = 9;  // regulatory
+  ISSUECATEGORY_PROJECT_BLOCKER = 10;  // project-blocker
+  ISSUECATEGORY_CUSTOMER_COMPLAINT = 11;  // customer-complaint
+  ISSUECATEGORY_HARDWARE_FAULT = 12;  // hardware-fault
+  ISSUECATEGORY_PROCESS = 13;  // process
+  ISSUECATEGORY_OTHER = 14;  // other
+}
+
+enum IssueTrackerEnvironmentEnum {
+  ENVIRONMENT_UNSPECIFIED = 0;
+  ENVIRONMENT_DEV = 1;  // dev
+  ENVIRONMENT_TEST = 2;  // test
+  ENVIRONMENT_STAGING = 3;  // staging
+  ENVIRONMENT_PRODUCTION = 4;  // production
+  ENVIRONMENT_ON_PREM = 5;  // on-prem
+  ENVIRONMENT_FIELD = 6;  // field
+}
+
+enum IssueTrackerCcReportedViaEnum {
+  CCREPORTEDVIA_UNSPECIFIED = 0;
+  CCREPORTEDVIA_SELF = 1;  // self
+  CCREPORTEDVIA_COLLEAGUE = 2;  // colleague
+  CCREPORTEDVIA_CUSTOMER = 3;  // customer
+  CCREPORTEDVIA_MONITORING_ALERT = 4;  // monitoring-alert
+  CCREPORTEDVIA_TICKET = 5;  // ticket
+  CCREPORTEDVIA_PHONE = 6;  // phone
+  CCREPORTEDVIA_EMAIL = 7;  // email
+  CCREPORTEDVIA_CHAT = 8;  // chat
+  CCREPORTEDVIA_IN_PERSON = 9;  // in-person
+  CCREPORTEDVIA_OTHER = 10;  // other
+}
+
+enum IssueTrackerFxDataCorruptionEnum {
+  FXDATACORRUPTION_UNSPECIFIED = 0;
+  FXDATACORRUPTION_NONE = 1;  // none
+  FXDATACORRUPTION_SUSPECTED = 2;  // suspected
+  FXDATACORRUPTION_CONFIRMED = 3;  // confirmed
+  FXDATACORRUPTION_UNKNOWN = 4;  // unknown
+}
+
+enum IssueTrackerDxScopeEnum {
+  DXSCOPE_UNSPECIFIED = 0;
+  DXSCOPE_SINGLE_INSTANCE = 1;  // single-instance
+  DXSCOPE_SINGLE_SERVICE = 2;  // single-service
+  DXSCOPE_MULTIPLE_SERVICES = 3;  // multiple-services
+  DXSCOPE_WHOLE_SYSTEM = 4;  // whole-system
+  DXSCOPE_ORGANISATION_WIDE = 5;  // organisation-wide
+}
+
+enum IssueTrackerDxConfirmedEnum {
+  DXCONFIRMED_UNSPECIFIED = 0;
+  DXCONFIRMED_YES = 1;  // yes
+  DXCONFIRMED_NO = 2;  // no
+  DXCONFIRMED_PARTIAL = 3;  // partial
+}
+
+enum IssueTrackerPxRecurrenceLikelihoodEnum {
+  PXRECURRENCELIKELIHOOD_UNSPECIFIED = 0;
+  PXRECURRENCELIKELIHOOD_VERY_LOW = 1;  // very-low
+  PXRECURRENCELIKELIHOOD_LOW = 2;  // low
+  PXRECURRENCELIKELIHOOD_MODERATE = 3;  // moderate
+  PXRECURRENCELIKELIHOOD_HIGH = 4;  // high
+  PXRECURRENCELIKELIHOOD_VERY_HIGH = 5;  // very-high
+}
+
+enum IssueTrackerScoreByFailureConditionEnum {
+  SCOREBYFAILURECONDITION_UNSPECIFIED = 0;
+  SCOREBYFAILURECONDITION_A = 1;  // A
+  SCOREBYFAILURECONDITION_B = 2;  // B
+  SCOREBYFAILURECONDITION_C = 3;  // C
+  SCOREBYFAILURECONDITION_D = 4;  // D
+  SCOREBYFAILURECONDITION_E = 5;  // E
+}
+
+message IssueTracker {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string reporter_id = 5;  // UUID — uuid
+  IssueTrackerStatusEnum status = 6;  // VARCHAR(20)
+  string reported_at = 7;  // TIMESTAMPTZ — iso 8601
+  string discovered_at = 8;  // TIMESTAMPTZ — iso 8601
+  string started_at = 9;  // TIMESTAMPTZ — iso 8601
+  string resolved_at = 10;  // TIMESTAMPTZ — iso 8601
+  IssueTrackerIssueCategoryEnum issue_category = 11;  // VARCHAR(40)
+  IssueTrackerEnvironmentEnum environment = 12;  // VARCHAR(20)
+  string system_name = 13;  // VARCHAR(255) — max 255 chars
+  string component = 14;  // VARCHAR(255) — max 255 chars
+  string customer_or_project_tag = 15;  // VARCHAR(255) — max 255 chars
+  string external_reference = 16;  // VARCHAR(255) — max 255 chars
+  string cc_summary = 17;  // VARCHAR(500) — max 500 chars
+  string cc_long_description = 18;  // TEXT
+  string cc_reported_by_name = 19;  // VARCHAR(255) — max 255 chars
+  IssueTrackerCcReportedViaEnum cc_reported_via = 20;  // VARCHAR(40)
+  string pt_discoverer_name = 21;  // VARCHAR(255) — max 255 chars
+  int32 pt_affected_users_count = 22;  // INTEGER
+  string pt_affected_user_groups = 23;  // VARCHAR(500) — max 500 chars
+  string pt_assignees = 24;  // VARCHAR(500) — max 500 chars
+  string pt_stakeholders_to_inform = 25;  // VARCHAR(500) — max 500 chars
+  string pt_observers = 26;  // VARCHAR(500) — max 500 chars
+  string sx_external_signals = 27;  // TEXT
+  string sx_alert_ids = 28;  // VARCHAR(500) — max 500 chars
+  string sx_error_messages = 29;  // TEXT
+  string sx_screenshots_url = 30;  // VARCHAR(500) — max 500 chars
+  string sx_logs_url = 31;  // VARCHAR(500) — max 500 chars
+  string sx_first_observed_at = 32;  // TIMESTAMPTZ — iso 8601
+  string fx_broken_components = 33;  // TEXT
+  string fx_failed_services = 34;  // VARCHAR(500) — max 500 chars
+  string fx_stuck_processes = 35;  // VARCHAR(500) — max 500 chars
+  string fx_hardware_faults = 36;  // VARCHAR(500) — max 500 chars
+  IssueTrackerFxDataCorruptionEnum fx_data_corruption = 37;  // VARCHAR(20)
+  string hx_related_issues = 38;  // VARCHAR(500) — max 500 chars
+  int32 hx_prior_occurrences = 39;  // INTEGER
+  string hx_recent_change_url = 40;  // VARCHAR(500) — max 500 chars
+  string hx_references = 41;  // TEXT
+  string hx_timeline = 42;  // TEXT
+  string ix_hypotheses = 43;  // TEXT
+  string ix_repro_steps = 44;  // TEXT
+  string ix_diagnostic_queries = 45;  // TEXT
+  string ix_tests_run = 46;  // VARCHAR(500) — max 500 chars
+  string ix_blocking_unknowns = 47;  // TEXT
+  string dx_root_cause = 48;  // TEXT
+  string dx_contributing_causes = 49;  // TEXT
+  IssueTrackerDxScopeEnum dx_scope = 50;  // VARCHAR(40)
+  IssueTrackerDxConfirmedEnum dx_confirmed = 51;  // VARCHAR(10)
+  string tx_mitigation_steps = 52;  // TEXT
+  string tx_fix_plan = 53;  // TEXT
+  string tx_workaround = 54;  // TEXT
+  string tx_rollback_plan = 55;  // TEXT
+  string tx_communication_plan = 56;  // VARCHAR(500) — max 500 chars
+  string px_expected_resolution_at = 57;  // TIMESTAMPTZ — iso 8601
+  string px_residual_risk = 58;  // TEXT
+  string px_monitoring_plan = 59;  // TEXT
+  IssueTrackerPxRecurrenceLikelihoodEnum px_recurrence_likelihood = 60;  // VARCHAR(20)
+  string px_lessons_learned = 61;  // TEXT
+  int32 score_by_priority_rank = 62;  // INTEGER
+  int32 score_by_severity_of_impact = 63;  // INTEGER
+  int32 score_by_magnitude_of_damage = 64;  // INTEGER
+  int32 score_by_harm_grade = 65;  // INTEGER
+  IssueTrackerScoreByFailureConditionEnum score_by_failure_condition = 66;  // VARCHAR(1)
+  int32 score_by_moscow_requirement = 67;  // INTEGER
+  double score_by_frequency_percent = 68;  // NUMERIC(5,2) — numeric(5,2)
+}

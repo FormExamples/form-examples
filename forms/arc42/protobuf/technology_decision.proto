@@ -1,0 +1,18 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: technology_decision
+
+syntax = "proto3";
+
+package form_examples.arc42;
+
+message TechnologyDecision {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string arc42_documentation_id = 5;  // UUID — uuid
+  int32 ordinal = 6;  // SMALLINT
+  string category = 7;  // TEXT
+  string choice = 8;  // TEXT
+  string rationale = 9;  // TEXT
+}

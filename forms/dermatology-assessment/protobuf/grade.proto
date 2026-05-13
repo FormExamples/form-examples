@@ -1,0 +1,26 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.dermatology_assessment;
+
+enum GradeImpactLevelEnum {
+  IMPACTLEVEL_UNSPECIFIED = 0;
+  IMPACTLEVEL_NO_EFFECT = 1;  // no_effect
+  IMPACTLEVEL_SMALL = 2;  // small
+  IMPACTLEVEL_MODERATE = 3;  // moderate
+  IMPACTLEVEL_VERY_LARGE = 4;  // very_large
+  IMPACTLEVEL_EXTREMELY_LARGE = 5;  // extremely_large
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 dlqi_score = 6;  // INTEGER
+  GradeImpactLevelEnum impact_level = 7;  // VARCHAR(20)
+  string graded_at = 8;  // TIMESTAMPTZ — iso 8601
+}

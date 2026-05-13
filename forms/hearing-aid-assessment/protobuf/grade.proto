@@ -1,0 +1,50 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.hearing_aid_assessment;
+
+enum GradeHandicapLevelEnum {
+  HANDICAPLEVEL_UNSPECIFIED = 0;
+  HANDICAPLEVEL_NO_HANDICAP = 1;  // no-handicap
+  HANDICAPLEVEL_MILD_MODERATE = 2;  // mild-moderate
+  HANDICAPLEVEL_SIGNIFICANT = 3;  // significant
+}
+
+enum GradeHearingAidCandidacyEnum {
+  HEARINGAIDCANDIDACY_UNSPECIFIED = 0;
+  HEARINGAIDCANDIDACY_RECOMMENDED = 1;  // recommended
+  HEARINGAIDCANDIDACY_CONSIDER = 2;  // consider
+  HEARINGAIDCANDIDACY_NOT_INDICATED = 3;  // not-indicated
+}
+
+enum GradeLeftEarRecommendationEnum {
+  LEFTEARRECOMMENDATION_UNSPECIFIED = 0;
+  LEFTEARRECOMMENDATION_HEARING_AID = 1;  // hearing-aid
+  LEFTEARRECOMMENDATION_MEDICAL_REFERRAL = 2;  // medical-referral
+  LEFTEARRECOMMENDATION_MONITORING = 3;  // monitoring
+  LEFTEARRECOMMENDATION_NO_ACTION = 4;  // no-action
+}
+
+enum GradeRightEarRecommendationEnum {
+  RIGHTEARRECOMMENDATION_UNSPECIFIED = 0;
+  RIGHTEARRECOMMENDATION_HEARING_AID = 1;  // hearing-aid
+  RIGHTEARRECOMMENDATION_MEDICAL_REFERRAL = 2;  // medical-referral
+  RIGHTEARRECOMMENDATION_MONITORING = 3;  // monitoring
+  RIGHTEARRECOMMENDATION_NO_ACTION = 4;  // no-action
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeHandicapLevelEnum handicap_level = 6;  // VARCHAR(20)
+  int32 hhies_total_score = 7;  // INTEGER
+  GradeHearingAidCandidacyEnum hearing_aid_candidacy = 8;  // VARCHAR(20)
+  GradeLeftEarRecommendationEnum left_ear_recommendation = 9;  // VARCHAR(30)
+  GradeRightEarRecommendationEnum right_ear_recommendation = 10;  // VARCHAR(30)
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

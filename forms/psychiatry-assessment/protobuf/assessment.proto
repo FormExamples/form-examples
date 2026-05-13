@@ -1,0 +1,85 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_medication_item
+
+syntax = "proto3";
+
+package form_examples.psychiatry_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakesPsychiatricMedicationsEnum {
+  TAKESPSYCHIATRICMEDICATIONS_UNSPECIFIED = 0;
+  TAKESPSYCHIATRICMEDICATIONS_YES = 1;  // yes
+  TAKESPSYCHIATRICMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentTakesOtherMedicationsEnum {
+  TAKESOTHERMEDICATIONS_UNSPECIFIED = 0;
+  TAKESOTHERMEDICATIONS_YES = 1;  // yes
+  TAKESOTHERMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentMedicationAdherenceEnum {
+  MEDICATIONADHERENCE_UNSPECIFIED = 0;
+  MEDICATIONADHERENCE_GOOD = 1;  // good
+  MEDICATIONADHERENCE_FAIR = 2;  // fair
+  MEDICATIONADHERENCE_POOR = 3;  // poor
+}
+
+enum AssessmentClozapineRegisteredEnum {
+  CLOZAPINEREGISTERED_UNSPECIFIED = 0;
+  CLOZAPINEREGISTERED_YES = 1;  // yes
+  CLOZAPINEREGISTERED_NO = 2;  // no
+}
+
+enum AssessmentDepotInjectionEnum {
+  DEPOTINJECTION_UNSPECIFIED = 0;
+  DEPOTINJECTION_YES = 1;  // yes
+  DEPOTINJECTION_NO = 2;  // no
+}
+
+enum AssessmentMedicationTypeEnum {
+  MEDICATIONTYPE_UNSPECIFIED = 0;
+  MEDICATIONTYPE_ANTIDEPRESSANT = 1;  // antidepressant
+  MEDICATIONTYPE_ANTIPSYCHOTIC = 2;  // antipsychotic
+  MEDICATIONTYPE_ANXIOLYTIC = 3;  // anxiolytic
+  MEDICATIONTYPE_MOOD_STABILISER = 4;  // mood-stabiliser
+  MEDICATIONTYPE_HYPNOTIC = 5;  // hypnotic
+  MEDICATIONTYPE_STIMULANT = 6;  // stimulant
+  MEDICATIONTYPE_OTHER = 7;  // other
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakesPsychiatricMedicationsEnum takes_psychiatric_medications = 8;  // VARCHAR(5)
+  AssessmentTakesOtherMedicationsEnum takes_other_medications = 9;  // VARCHAR(5)
+  AssessmentMedicationAdherenceEnum medication_adherence = 10;  // VARCHAR(20)
+  string adherence_barriers = 11;  // TEXT
+  string side_effects = 12;  // TEXT
+  AssessmentClozapineRegisteredEnum clozapine_registered = 13;  // VARCHAR(5)
+  AssessmentDepotInjectionEnum depot_injection = 14;  // VARCHAR(5)
+  string depot_details = 15;  // TEXT
+  string adverse_drug_reactions = 16;  // TEXT
+  string additional_notes = 17;  // TEXT
+  string medication_item_deleted_at = 18;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 19;  // UUID — uuid
+  string medication_name = 20;  // VARCHAR(255) — max 255 chars
+  string dose = 21;  // VARCHAR(100) — max 100 chars
+  string frequency = 22;  // VARCHAR(100) — max 100 chars
+  AssessmentMedicationTypeEnum medication_type = 23;  // VARCHAR(30)
+  string indication = 24;  // TEXT
+  string prescribing_clinician = 25;  // VARCHAR(255) — max 255 chars
+  int32 sort_order = 26;  // INTEGER
+}

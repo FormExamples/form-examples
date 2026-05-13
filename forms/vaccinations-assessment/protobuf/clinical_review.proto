@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: clinical_review
+
+syntax = "proto3";
+
+package form_examples.vaccinations_assessment;
+
+enum ClinicalReviewImmediateReactionEnum {
+  IMMEDIATEREACTION_UNSPECIFIED = 0;
+  IMMEDIATEREACTION_YES = 1;  // yes
+  IMMEDIATEREACTION_NO = 2;  // no
+}
+
+enum ClinicalReviewCatchUpScheduleNeededEnum {
+  CATCHUPSCHEDULENEEDED_UNSPECIFIED = 0;
+  CATCHUPSCHEDULENEEDED_YES = 1;  // yes
+  CATCHUPSCHEDULENEEDED_NO = 2;  // no
+}
+
+enum ClinicalReviewReferralNeededEnum {
+  REFERRALNEEDED_UNSPECIFIED = 0;
+  REFERRALNEEDED_YES = 1;  // yes
+  REFERRALNEEDED_NO = 2;  // no
+}
+
+message ClinicalReview {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 post_vaccination_observation = 6;  // SMALLINT
+  ClinicalReviewImmediateReactionEnum immediate_reaction = 7;  // VARCHAR(10)
+  string reaction_details = 8;  // TEXT
+  string next_dose_due = 9;  // DATE — iso 8601 date
+  ClinicalReviewCatchUpScheduleNeededEnum catch_up_schedule_needed = 10;  // VARCHAR(10)
+  ClinicalReviewReferralNeededEnum referral_needed = 11;  // VARCHAR(10)
+  string clinician_notes = 12;  // TEXT
+  string reviewing_clinician = 13;  // VARCHAR(255) — max 255 chars
+}

@@ -1,0 +1,58 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: casualty_card_primary_survey
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum CasualtyCardPrimarySurveyAirwayStatusEnum {
+  AIRWAYSTATUS_UNSPECIFIED = 0;
+  AIRWAYSTATUS_PATENT = 1;  // patent
+  AIRWAYSTATUS_COMPROMISED = 2;  // compromised
+  AIRWAYSTATUS_OBSTRUCTED = 3;  // obstructed
+}
+
+enum CasualtyCardPrimarySurveyCSpineImmobilisedEnum {
+  CSPINEIMMOBILISED_UNSPECIFIED = 0;
+  CSPINEIMMOBILISED_YES = 1;  // yes
+  CSPINEIMMOBILISED_NO = 2;  // no
+}
+
+enum CasualtyCardPrimarySurveyBreathingEffortEnum {
+  BREATHINGEFFORT_UNSPECIFIED = 0;
+  BREATHINGEFFORT_NORMAL = 1;  // normal
+  BREATHINGEFFORT_LABOURED = 2;  // laboured
+  BREATHINGEFFORT_SHALLOW = 3;  // shallow
+  BREATHINGEFFORT_ABSENT = 4;  // absent
+}
+
+message CasualtyCardPrimarySurvey {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  CasualtyCardPrimarySurveyAirwayStatusEnum airway_status = 6;  // TEXT
+  string airway_adjuncts = 7;  // TEXT
+  CasualtyCardPrimarySurveyCSpineImmobilisedEnum c_spine_immobilised = 8;  // TEXT
+  CasualtyCardPrimarySurveyBreathingEffortEnum breathing_effort = 9;  // TEXT
+  string chest_movement = 10;  // TEXT
+  string breath_sounds = 11;  // TEXT
+  string trachea_position = 12;  // TEXT
+  string pulse_character = 13;  // TEXT
+  string skin_colour = 14;  // TEXT
+  string skin_temperature = 15;  // TEXT
+  string capillary_refill = 16;  // TEXT
+  string haemorrhage = 17;  // TEXT
+  string iv_access = 18;  // TEXT
+  int32 gcs_eye = 19;  // INTEGER
+  int32 gcs_verbal = 20;  // INTEGER
+  int32 gcs_motor = 21;  // INTEGER
+  int32 gcs_total = 22;  // INTEGER
+  string pupils = 23;  // TEXT
+  string blood_glucose_disability = 24;  // TEXT
+  string limb_movements = 25;  // TEXT
+  string skin_examination = 26;  // TEXT
+  string injuries_identified = 27;  // TEXT
+  string log_roll_findings = 28;  // TEXT
+}

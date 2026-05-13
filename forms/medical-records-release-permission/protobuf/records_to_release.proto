@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: records_to_release
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum RecordsToReleaseSpecificDateRangeEnum {
+  SPECIFICDATERANGE_UNSPECIFIED = 0;
+  SPECIFICDATERANGE_YES = 1;  // yes
+  SPECIFICDATERANGE_NO = 2;  // no
+}
+
+message RecordsToRelease {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string release_form_id = 5;  // UUID — uuid
+  string record_types = 6;  // TEXT
+  RecordsToReleaseSpecificDateRangeEnum specific_date_range = 7;  // VARCHAR(5)
+  string date_from = 8;  // DATE — iso 8601 date
+  string date_to = 9;  // DATE — iso 8601 date
+  string specific_record_details = 10;  // TEXT
+}

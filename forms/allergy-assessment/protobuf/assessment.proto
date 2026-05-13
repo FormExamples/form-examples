@@ -1,0 +1,381 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_drug_allergies, assessment_drug_allergy_item, assessment_food_allergies, assessment_food_allergy_item, assessment_anaphylaxis_history, assessment_anaphylaxis_episode, assessment_testing_results, assessment_test_result_item, assessment_current_management, assessment_other_medication
+
+syntax = "proto3";
+
+package form_examples.allergy_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentFamilyHistoryOfAtopyEnum {
+  FAMILYHISTORYOFATOPY_UNSPECIFIED = 0;
+  FAMILYHISTORYOFATOPY_YES = 1;  // yes
+  FAMILYHISTORYOFATOPY_NO = 2;  // no
+}
+
+enum AssessmentFamilyHistoryOfAllergyEnum {
+  FAMILYHISTORYOFALLERGY_UNSPECIFIED = 0;
+  FAMILYHISTORYOFALLERGY_YES = 1;  // yes
+  FAMILYHISTORYOFALLERGY_NO = 2;  // no
+}
+
+enum AssessmentPollenAllergyEnum {
+  POLLENALLERGY_UNSPECIFIED = 0;
+  POLLENALLERGY_YES = 1;  // yes
+  POLLENALLERGY_NO = 2;  // no
+}
+
+enum AssessmentDustMiteAllergyEnum {
+  DUSTMITEALLERGY_UNSPECIFIED = 0;
+  DUSTMITEALLERGY_YES = 1;  // yes
+  DUSTMITEALLERGY_NO = 2;  // no
+}
+
+enum AssessmentMouldAllergyEnum {
+  MOULDALLERGY_UNSPECIFIED = 0;
+  MOULDALLERGY_YES = 1;  // yes
+  MOULDALLERGY_NO = 2;  // no
+}
+
+enum AssessmentAnimalDanderAllergyEnum {
+  ANIMALDANDERALLERGY_UNSPECIFIED = 0;
+  ANIMALDANDERALLERGY_YES = 1;  // yes
+  ANIMALDANDERALLERGY_NO = 2;  // no
+}
+
+enum AssessmentLatexAllergyEnum {
+  LATEXALLERGY_UNSPECIFIED = 0;
+  LATEXALLERGY_YES = 1;  // yes
+  LATEXALLERGY_NO = 2;  // no
+}
+
+enum AssessmentInsectStingAllergyEnum {
+  INSECTSTINGALLERGY_UNSPECIFIED = 0;
+  INSECTSTINGALLERGY_YES = 1;  // yes
+  INSECTSTINGALLERGY_NO = 2;  // no
+}
+
+enum AssessmentInsectStingSeverityEnum {
+  INSECTSTINGSEVERITY_UNSPECIFIED = 0;
+  INSECTSTINGSEVERITY_MILD = 1;  // mild
+  INSECTSTINGSEVERITY_MODERATE = 2;  // moderate
+  INSECTSTINGSEVERITY_SEVERE = 3;  // severe
+  INSECTSTINGSEVERITY_ANAPHYLAXIS = 4;  // anaphylaxis
+}
+
+enum AssessmentSeasonalPatternEnum {
+  SEASONALPATTERN_UNSPECIFIED = 0;
+  SEASONALPATTERN_PERENNIAL = 1;  // perennial
+  SEASONALPATTERN_SPRING = 2;  // spring
+  SEASONALPATTERN_SUMMER = 3;  // summer
+  SEASONALPATTERN_AUTUMN = 4;  // autumn
+  SEASONALPATTERN_WINTER = 5;  // winter
+  SEASONALPATTERN_MULTIPLE = 6;  // multiple
+}
+
+enum AssessmentAsthmaEnum {
+  ASTHMA_UNSPECIFIED = 0;
+  ASTHMA_YES = 1;  // yes
+  ASTHMA_NO = 2;  // no
+}
+
+enum AssessmentAsthmaSeverityEnum {
+  ASTHMASEVERITY_UNSPECIFIED = 0;
+  ASTHMASEVERITY_MILD = 1;  // mild
+  ASTHMASEVERITY_MODERATE = 2;  // moderate
+  ASTHMASEVERITY_SEVERE = 3;  // severe
+}
+
+enum AssessmentEczemaEnum {
+  ECZEMA_UNSPECIFIED = 0;
+  ECZEMA_YES = 1;  // yes
+  ECZEMA_NO = 2;  // no
+}
+
+enum AssessmentEczemaSeverityEnum {
+  ECZEMASEVERITY_UNSPECIFIED = 0;
+  ECZEMASEVERITY_MILD = 1;  // mild
+  ECZEMASEVERITY_MODERATE = 2;  // moderate
+  ECZEMASEVERITY_SEVERE = 3;  // severe
+}
+
+enum AssessmentRhinitisEnum {
+  RHINITIS_UNSPECIFIED = 0;
+  RHINITIS_YES = 1;  // yes
+  RHINITIS_NO = 2;  // no
+}
+
+enum AssessmentRhinitisSeverityEnum {
+  RHINITISSEVERITY_UNSPECIFIED = 0;
+  RHINITISSEVERITY_MILD = 1;  // mild
+  RHINITISSEVERITY_MODERATE = 2;  // moderate
+  RHINITISSEVERITY_SEVERE = 3;  // severe
+}
+
+enum AssessmentEosinophilicOesophagitisEnum {
+  EOSINOPHILICOESOPHAGITIS_UNSPECIFIED = 0;
+  EOSINOPHILICOESOPHAGITIS_YES = 1;  // yes
+  EOSINOPHILICOESOPHAGITIS_NO = 2;  // no
+}
+
+enum AssessmentMastCellDisordersEnum {
+  MASTCELLDISORDERS_UNSPECIFIED = 0;
+  MASTCELLDISORDERS_YES = 1;  // yes
+  MASTCELLDISORDERS_NO = 2;  // no
+}
+
+enum AssessmentMentalHealthImpactEnum {
+  MENTALHEALTHIMPACT_UNSPECIFIED = 0;
+  MENTALHEALTHIMPACT_YES = 1;  // yes
+  MENTALHEALTHIMPACT_NO = 2;  // no
+}
+
+enum AssessmentSchoolWorkImpactEnum {
+  SCHOOLWORKIMPACT_UNSPECIFIED = 0;
+  SCHOOLWORKIMPACT_YES = 1;  // yes
+  SCHOOLWORKIMPACT_NO = 2;  // no
+}
+
+enum AssessmentEmergencyActionPlanStatusEnum {
+  EMERGENCYACTIONPLANSTATUS_UNSPECIFIED = 0;
+  EMERGENCYACTIONPLANSTATUS_IN_PLACE = 1;  // in-place
+  EMERGENCYACTIONPLANSTATUS_NOT_IN_PLACE = 2;  // not-in-place
+  EMERGENCYACTIONPLANSTATUS_NEEDS_UPDATE = 3;  // needs-update
+}
+
+enum AssessmentTrainingProvidedEnum {
+  TRAININGPROVIDED_UNSPECIFIED = 0;
+  TRAININGPROVIDED_YES = 1;  // yes
+  TRAININGPROVIDED_NO = 2;  // no
+}
+
+enum AssessmentHasDrugAllergiesEnum {
+  HASDRUGALLERGIES_UNSPECIFIED = 0;
+  HASDRUGALLERGIES_YES = 1;  // yes
+  HASDRUGALLERGIES_NO = 2;  // no
+}
+
+enum AssessmentSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_MILD = 1;  // mild
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_SEVERE = 3;  // severe
+  SEVERITY_ANAPHYLAXIS = 4;  // anaphylaxis
+}
+
+enum AssessmentHasFoodAllergiesEnum {
+  HASFOODALLERGIES_UNSPECIFIED = 0;
+  HASFOODALLERGIES_YES = 1;  // yes
+  HASFOODALLERGIES_NO = 2;  // no
+}
+
+enum AssessmentIgeTypeEnum {
+  IGETYPE_UNSPECIFIED = 0;
+  IGETYPE_IGE_MEDIATED = 1;  // IgE-mediated
+  IGETYPE_NON_IGE_MEDIATED = 2;  // non-IgE-mediated
+  IGETYPE_MIXED = 3;  // mixed
+  IGETYPE_UNKNOWN = 4;  // unknown
+}
+
+enum AssessmentOralAllergySyndromeEnum {
+  ORALALLERGYSYNDROME_UNSPECIFIED = 0;
+  ORALALLERGYSYNDROME_YES = 1;  // yes
+  ORALALLERGYSYNDROME_NO = 2;  // no
+}
+
+enum AssessmentFoodAllergyItemSeverityEnum {
+  FOODALLERGYITEMSEVERITY_UNSPECIFIED = 0;
+  FOODALLERGYITEMSEVERITY_MILD = 1;  // mild
+  FOODALLERGYITEMSEVERITY_MODERATE = 2;  // moderate
+  FOODALLERGYITEMSEVERITY_SEVERE = 3;  // severe
+  FOODALLERGYITEMSEVERITY_ANAPHYLAXIS = 4;  // anaphylaxis
+}
+
+enum AssessmentHasAnaphylaxisHistoryEnum {
+  HASANAPHYLAXISHISTORY_UNSPECIFIED = 0;
+  HASANAPHYLAXISHISTORY_YES = 1;  // yes
+  HASANAPHYLAXISHISTORY_NO = 2;  // no
+}
+
+enum AssessmentAdrenalineAutoInjectorPrescribedEnum {
+  ADRENALINEAUTOINJECTORPRESCRIBED_UNSPECIFIED = 0;
+  ADRENALINEAUTOINJECTORPRESCRIBED_YES = 1;  // yes
+  ADRENALINEAUTOINJECTORPRESCRIBED_NO = 2;  // no
+}
+
+enum AssessmentActionPlanInPlaceEnum {
+  ACTIONPLANINPLACE_UNSPECIFIED = 0;
+  ACTIONPLANINPLACE_YES = 1;  // yes
+  ACTIONPLANINPLACE_NO = 2;  // no
+}
+
+enum AssessmentSkinPrickTestsDoneEnum {
+  SKINPRICKTESTSDONE_UNSPECIFIED = 0;
+  SKINPRICKTESTSDONE_YES = 1;  // yes
+  SKINPRICKTESTSDONE_NO = 2;  // no
+}
+
+enum AssessmentSpecificIgeDoneEnum {
+  SPECIFICIGEDONE_UNSPECIFIED = 0;
+  SPECIFICIGEDONE_YES = 1;  // yes
+  SPECIFICIGEDONE_NO = 2;  // no
+}
+
+enum AssessmentComponentResolvedDiagnosticsDoneEnum {
+  COMPONENTRESOLVEDDIAGNOSTICSDONE_UNSPECIFIED = 0;
+  COMPONENTRESOLVEDDIAGNOSTICSDONE_YES = 1;  // yes
+  COMPONENTRESOLVEDDIAGNOSTICSDONE_NO = 2;  // no
+}
+
+enum AssessmentChallengeTestsDoneEnum {
+  CHALLENGETESTSDONE_UNSPECIFIED = 0;
+  CHALLENGETESTSDONE_YES = 1;  // yes
+  CHALLENGETESTSDONE_NO = 2;  // no
+}
+
+enum AssessmentPatchTestsDoneEnum {
+  PATCHTESTSDONE_UNSPECIFIED = 0;
+  PATCHTESTSDONE_YES = 1;  // yes
+  PATCHTESTSDONE_NO = 2;  // no
+}
+
+enum AssessmentAntihistaminesEnum {
+  ANTIHISTAMINES_UNSPECIFIED = 0;
+  ANTIHISTAMINES_YES = 1;  // yes
+  ANTIHISTAMINES_NO = 2;  // no
+}
+
+enum AssessmentNasalSteroidsEnum {
+  NASALSTEROIDS_UNSPECIFIED = 0;
+  NASALSTEROIDS_YES = 1;  // yes
+  NASALSTEROIDS_NO = 2;  // no
+}
+
+enum AssessmentAdrenalineAutoInjectorEnum {
+  ADRENALINEAUTOINJECTOR_UNSPECIFIED = 0;
+  ADRENALINEAUTOINJECTOR_YES = 1;  // yes
+  ADRENALINEAUTOINJECTOR_NO = 2;  // no
+}
+
+enum AssessmentImmunotherapyEnum {
+  IMMUNOTHERAPY_UNSPECIFIED = 0;
+  IMMUNOTHERAPY_YES = 1;  // yes
+  IMMUNOTHERAPY_NO = 2;  // no
+}
+
+enum AssessmentBiologicsEnum {
+  BIOLOGICS_UNSPECIFIED = 0;
+  BIOLOGICS_YES = 1;  // yes
+  BIOLOGICS_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  int32 age_of_onset = 7;  // INTEGER
+  string known_allergens = 8;  // TEXT
+  AssessmentFamilyHistoryOfAtopyEnum family_history_of_atopy = 9;  // VARCHAR(5)
+  string family_atopy_details = 10;  // TEXT
+  AssessmentFamilyHistoryOfAllergyEnum family_history_of_allergy = 11;  // VARCHAR(5)
+  string family_allergy_details = 12;  // TEXT
+  AssessmentPollenAllergyEnum pollen_allergy = 13;  // VARCHAR(5)
+  AssessmentDustMiteAllergyEnum dust_mite_allergy = 14;  // VARCHAR(5)
+  AssessmentMouldAllergyEnum mould_allergy = 15;  // VARCHAR(5)
+  AssessmentAnimalDanderAllergyEnum animal_dander_allergy = 16;  // VARCHAR(5)
+  AssessmentLatexAllergyEnum latex_allergy = 17;  // VARCHAR(5)
+  AssessmentInsectStingAllergyEnum insect_sting_allergy = 18;  // VARCHAR(5)
+  AssessmentInsectStingSeverityEnum insect_sting_severity = 19;  // VARCHAR(20)
+  AssessmentSeasonalPatternEnum seasonal_pattern = 20;  // VARCHAR(20)
+  string other_environmental_allergens = 21;  // TEXT
+  AssessmentAsthmaEnum asthma = 22;  // VARCHAR(5)
+  AssessmentAsthmaSeverityEnum asthma_severity = 23;  // VARCHAR(10)
+  AssessmentEczemaEnum eczema = 24;  // VARCHAR(5)
+  AssessmentEczemaSeverityEnum eczema_severity = 25;  // VARCHAR(10)
+  AssessmentRhinitisEnum rhinitis = 26;  // VARCHAR(5)
+  AssessmentRhinitisSeverityEnum rhinitis_severity = 27;  // VARCHAR(10)
+  AssessmentEosinophilicOesophagitisEnum eosinophilic_oesophagitis = 28;  // VARCHAR(5)
+  AssessmentMastCellDisordersEnum mast_cell_disorders = 29;  // VARCHAR(5)
+  string mast_cell_details = 30;  // TEXT
+  AssessmentMentalHealthImpactEnum mental_health_impact = 31;  // VARCHAR(5)
+  string mental_health_details = 32;  // TEXT
+  int32 quality_of_life_score = 33;  // INTEGER
+  AssessmentSchoolWorkImpactEnum school_work_impact = 34;  // VARCHAR(5)
+  string school_work_impact_details = 35;  // TEXT
+  AssessmentEmergencyActionPlanStatusEnum emergency_action_plan_status = 36;  // VARCHAR(20)
+  AssessmentTrainingProvidedEnum training_provided = 37;  // VARCHAR(5)
+  string training_details = 38;  // TEXT
+  string follow_up_schedule = 39;  // TEXT
+  string drug_allergies_deleted_at = 40;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasDrugAllergiesEnum has_drug_allergies = 41;  // VARCHAR(5)
+  string cross_reactivity_concerns = 42;  // TEXT
+  string drug_allergy_item_deleted_at = 43;  // TIMESTAMPTZ — iso 8601
+  string drug_allergies_id = 44;  // UUID — uuid
+  string allergen = 45;  // VARCHAR(255) — max 255 chars
+  string reaction_type = 46;  // VARCHAR(255) — max 255 chars
+  AssessmentSeverityEnum severity = 47;  // VARCHAR(20)
+  string timing = 48;  // VARCHAR(255) — max 255 chars
+  string alternatives_tolerated = 49;  // TEXT
+  int32 sort_order = 50;  // INTEGER
+  string food_allergies_deleted_at = 51;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasFoodAllergiesEnum has_food_allergies = 52;  // VARCHAR(5)
+  AssessmentIgeTypeEnum ige_type = 53;  // VARCHAR(20)
+  AssessmentOralAllergySyndromeEnum oral_allergy_syndrome = 54;  // VARCHAR(5)
+  string dietary_restrictions = 55;  // TEXT
+  string food_allergy_item_deleted_at = 56;  // TIMESTAMPTZ — iso 8601
+  string food_allergies_id = 57;  // UUID — uuid
+  string food_allergy_item_allergen = 58;  // VARCHAR(255) — max 255 chars
+  string food_allergy_item_reaction_type = 59;  // VARCHAR(255) — max 255 chars
+  AssessmentFoodAllergyItemSeverityEnum food_allergy_item_severity = 60;  // VARCHAR(20)
+  string food_allergy_item_timing = 61;  // VARCHAR(255) — max 255 chars
+  string food_allergy_item_alternatives_tolerated = 62;  // TEXT
+  int32 food_allergy_item_sort_order = 63;  // INTEGER
+  string anaphylaxis_history_deleted_at = 64;  // TIMESTAMPTZ — iso 8601
+  AssessmentHasAnaphylaxisHistoryEnum has_anaphylaxis_history = 65;  // VARCHAR(5)
+  int32 number_of_episodes = 66;  // INTEGER
+  AssessmentAdrenalineAutoInjectorPrescribedEnum adrenaline_auto_injector_prescribed = 67;  // VARCHAR(5)
+  AssessmentActionPlanInPlaceEnum action_plan_in_place = 68;  // VARCHAR(5)
+  string anaphylaxis_episode_deleted_at = 69;  // TIMESTAMPTZ — iso 8601
+  string anaphylaxis_history_id = 70;  // UUID — uuid
+  string trigger_description = 71;  // TEXT
+  string symptoms = 72;  // TEXT
+  string treatment_required = 73;  // TEXT
+  int32 anaphylaxis_episode_sort_order = 74;  // INTEGER
+  string testing_results_deleted_at = 75;  // TIMESTAMPTZ — iso 8601
+  AssessmentSkinPrickTestsDoneEnum skin_prick_tests_done = 76;  // VARCHAR(5)
+  AssessmentSpecificIgeDoneEnum specific_ige_done = 77;  // VARCHAR(5)
+  AssessmentComponentResolvedDiagnosticsDoneEnum component_resolved_diagnostics_done = 78;  // VARCHAR(5)
+  AssessmentChallengeTestsDoneEnum challenge_tests_done = 79;  // VARCHAR(5)
+  AssessmentPatchTestsDoneEnum patch_tests_done = 80;  // VARCHAR(5)
+  string test_result_item_deleted_at = 81;  // TIMESTAMPTZ — iso 8601
+  string testing_results_id = 82;  // UUID — uuid
+  string test_type = 83;  // VARCHAR(255) — max 255 chars
+  string test_result_item_allergen = 84;  // VARCHAR(255) — max 255 chars
+  string result = 85;  // VARCHAR(255) — max 255 chars
+  int32 test_result_item_sort_order = 86;  // INTEGER
+  string current_management_deleted_at = 87;  // TIMESTAMPTZ — iso 8601
+  AssessmentAntihistaminesEnum antihistamines = 88;  // VARCHAR(5)
+  string antihistamine_details = 89;  // TEXT
+  AssessmentNasalSteroidsEnum nasal_steroids = 90;  // VARCHAR(5)
+  AssessmentAdrenalineAutoInjectorEnum adrenaline_auto_injector = 91;  // VARCHAR(5)
+  AssessmentImmunotherapyEnum immunotherapy = 92;  // VARCHAR(5)
+  string immunotherapy_details = 93;  // TEXT
+  AssessmentBiologicsEnum biologics = 94;  // VARCHAR(5)
+  string biologic_details = 95;  // TEXT
+  string allergen_avoidance_strategies = 96;  // TEXT
+  string other_medication_deleted_at = 97;  // TIMESTAMPTZ — iso 8601
+  string current_management_id = 98;  // UUID — uuid
+  string medication_name = 99;  // VARCHAR(255) — max 255 chars
+  string dose = 100;  // VARCHAR(255) — max 255 chars
+  string frequency = 101;  // VARCHAR(255) — max 255 chars
+  int32 other_medication_sort_order = 102;  // INTEGER
+}

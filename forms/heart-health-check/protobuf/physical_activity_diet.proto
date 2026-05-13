@@ -1,0 +1,41 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: physical_activity_diet
+
+syntax = "proto3";
+
+package form_examples.heart_health_check;
+
+enum PhysicalActivityDietActivityIntensityEnum {
+  ACTIVITYINTENSITY_UNSPECIFIED = 0;
+  ACTIVITYINTENSITY_LIGHT = 1;  // light
+  ACTIVITYINTENSITY_MODERATE = 2;  // moderate
+  ACTIVITYINTENSITY_VIGOROUS = 3;  // vigorous
+}
+
+enum PhysicalActivityDietDietQualityEnum {
+  DIETQUALITY_UNSPECIFIED = 0;
+  DIETQUALITY_POOR = 1;  // poor
+  DIETQUALITY_FAIR = 2;  // fair
+  DIETQUALITY_GOOD = 3;  // good
+  DIETQUALITY_EXCELLENT = 4;  // excellent
+}
+
+enum PhysicalActivityDietSaltIntakeEnum {
+  SALTINTAKE_UNSPECIFIED = 0;
+  SALTINTAKE_LOW = 1;  // low
+  SALTINTAKE_MODERATE = 2;  // moderate
+  SALTINTAKE_HIGH = 3;  // high
+}
+
+message PhysicalActivityDiet {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 physical_activity_minutes_per_week = 6;  // SMALLINT
+  PhysicalActivityDietActivityIntensityEnum activity_intensity = 7;  // VARCHAR(10)
+  int32 fruit_veg_portions_per_day = 8;  // SMALLINT
+  PhysicalActivityDietDietQualityEnum diet_quality = 9;  // VARCHAR(10)
+  PhysicalActivityDietSaltIntakeEnum salt_intake = 10;  // VARCHAR(10)
+}

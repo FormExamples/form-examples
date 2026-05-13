@@ -1,0 +1,56 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: casualty_card_vital_signs
+
+syntax = "proto3";
+
+package form_examples.casualty_card_form;
+
+enum CasualtyCardVitalSignsSupplementalOxygenEnum {
+  SUPPLEMENTALOXYGEN_UNSPECIFIED = 0;
+  SUPPLEMENTALOXYGEN_YES = 1;  // yes
+  SUPPLEMENTALOXYGEN_NO = 2;  // no
+}
+
+enum CasualtyCardVitalSignsConsciousnessLevelEnum {
+  CONSCIOUSNESSLEVEL_UNSPECIFIED = 0;
+  CONSCIOUSNESSLEVEL_ALERT = 1;  // alert
+  CONSCIOUSNESSLEVEL_VERBAL = 2;  // verbal
+  CONSCIOUSNESSLEVEL_PAIN = 3;  // pain
+  CONSCIOUSNESSLEVEL_UNRESPONSIVE = 4;  // unresponsive
+}
+
+enum CasualtyCardVitalSignsPupilLeftReactiveEnum {
+  PUPILLEFTREACTIVE_UNSPECIFIED = 0;
+  PUPILLEFTREACTIVE_YES = 1;  // yes
+  PUPILLEFTREACTIVE_NO = 2;  // no
+}
+
+enum CasualtyCardVitalSignsPupilRightReactiveEnum {
+  PUPILRIGHTREACTIVE_UNSPECIFIED = 0;
+  PUPILRIGHTREACTIVE_YES = 1;  // yes
+  PUPILRIGHTREACTIVE_NO = 2;  // no
+}
+
+message CasualtyCardVitalSigns {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string casualty_card_id = 5;  // UUID — uuid
+  int32 heart_rate = 6;  // INTEGER
+  int32 systolic_bp = 7;  // INTEGER
+  int32 diastolic_bp = 8;  // INTEGER
+  int32 respiratory_rate = 9;  // INTEGER
+  int32 oxygen_saturation = 10;  // INTEGER
+  CasualtyCardVitalSignsSupplementalOxygenEnum supplemental_oxygen = 11;  // TEXT
+  string oxygen_flow_rate = 12;  // TEXT
+  double temperature = 13;  // NUMERIC(4,1) — numeric(4,1)
+  double blood_glucose = 14;  // NUMERIC(4,1) — numeric(4,1)
+  CasualtyCardVitalSignsConsciousnessLevelEnum consciousness_level = 15;  // TEXT
+  int32 pupil_left_size = 16;  // INTEGER
+  CasualtyCardVitalSignsPupilLeftReactiveEnum pupil_left_reactive = 17;  // TEXT
+  int32 pupil_right_size = 18;  // INTEGER
+  CasualtyCardVitalSignsPupilRightReactiveEnum pupil_right_reactive = 19;  // TEXT
+  string capillary_refill_time = 20;  // TEXT
+  double weight = 21;  // NUMERIC(5,1) — numeric(5,1)
+}

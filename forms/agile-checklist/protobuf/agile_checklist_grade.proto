@@ -1,0 +1,69 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_checklist_grade
+
+syntax = "proto3";
+
+package form_examples.agile_checklist;
+
+enum AgileChecklistGradeTeamsBandEnum {
+  TEAMSBAND_UNSPECIFIED = 0;
+  TEAMSBAND_HIGH = 1;  // high
+  TEAMSBAND_MID = 2;  // mid
+  TEAMSBAND_LOW = 3;  // low
+  TEAMSBAND_UNANSWERED = 4;  // unanswered
+}
+
+enum AgileChecklistGradeStakeholdersBandEnum {
+  STAKEHOLDERSBAND_UNSPECIFIED = 0;
+  STAKEHOLDERSBAND_HIGH = 1;  // high
+  STAKEHOLDERSBAND_MID = 2;  // mid
+  STAKEHOLDERSBAND_LOW = 3;  // low
+  STAKEHOLDERSBAND_UNANSWERED = 4;  // unanswered
+}
+
+enum AgileChecklistGradePracticesBandEnum {
+  PRACTICESBAND_UNSPECIFIED = 0;
+  PRACTICESBAND_HIGH = 1;  // high
+  PRACTICESBAND_MID = 2;  // mid
+  PRACTICESBAND_LOW = 3;  // low
+  PRACTICESBAND_UNANSWERED = 4;  // unanswered
+}
+
+enum AgileChecklistGradeMaturityEnum {
+  MATURITY_UNSPECIFIED = 0;
+  MATURITY_OPTIMISING = 1;  // optimising
+  MATURITY_MATURE = 2;  // mature
+  MATURITY_DEVELOPING = 3;  // developing
+  MATURITY_INITIAL = 4;  // initial
+  MATURITY_AD_HOC = 5;  // ad-hoc
+  MATURITY_INSUFFICIENT_DATA = 6;  // insufficient-data
+}
+
+message AgileChecklistGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string agile_checklist_id = 5;  // UUID — uuid
+  int32 answered_count = 6;  // SMALLINT
+  int32 teams_yes_count = 7;  // SMALLINT
+  int32 teams_applicable_count = 8;  // SMALLINT
+  double teams_percent = 9;  // NUMERIC(5,2) — numeric(5,2)
+  int32 stakeholders_yes_count = 10;  // SMALLINT
+  int32 stakeholders_applicable_count = 11;  // SMALLINT
+  double stakeholders_percent = 12;  // NUMERIC(5,2) — numeric(5,2)
+  int32 practices_yes_count = 13;  // SMALLINT
+  int32 practices_applicable_count = 14;  // SMALLINT
+  double practices_percent = 15;  // NUMERIC(5,2) — numeric(5,2)
+  double overall_percent = 16;  // NUMERIC(5,2) — numeric(5,2)
+  AgileChecklistGradeTeamsBandEnum teams_band = 17;  // VARCHAR(15)
+  AgileChecklistGradeStakeholdersBandEnum stakeholders_band = 18;  // VARCHAR(15)
+  AgileChecklistGradePracticesBandEnum practices_band = 19;  // VARCHAR(15)
+  AgileChecklistGradeMaturityEnum maturity = 20;  // VARCHAR(20)
+  string top_action_1 = 21;  // VARCHAR(500) — max 500 chars
+  string top_action_2 = 22;  // VARCHAR(500) — max 500 chars
+  string top_action_3 = 23;  // VARCHAR(500) — max 500 chars
+  string coach_notes = 24;  // TEXT
+  string signed_at = 25;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 26;  // TIMESTAMPTZ — iso 8601
+}

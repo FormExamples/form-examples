@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.mobility_assessment;
+
+enum GradeFallRiskCategoryEnum {
+  FALLRISKCATEGORY_UNSPECIFIED = 0;
+  FALLRISKCATEGORY_HIGH_FALL_RISK = 1;  // high_fall_risk
+  FALLRISKCATEGORY_MODERATE_RISK = 2;  // moderate_risk
+  FALLRISKCATEGORY_LOW_RISK = 3;  // low_risk
+}
+
+enum GradeTugRiskCategoryEnum {
+  TUGRISKCATEGORY_UNSPECIFIED = 0;
+  TUGRISKCATEGORY_NORMAL = 1;  // normal
+  TUGRISKCATEGORY_MODERATE_RISK = 2;  // moderate_risk
+  TUGRISKCATEGORY_HIGH_RISK = 3;  // high_risk
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 balance_score = 6;  // INTEGER
+  int32 gait_score = 7;  // INTEGER
+  int32 total_tinetti_score = 8;  // INTEGER
+  GradeFallRiskCategoryEnum fall_risk_category = 9;  // VARCHAR(20)
+  double tug_time_seconds = 10;  // NUMERIC(5,1) — numeric(5,1)
+  GradeTugRiskCategoryEnum tug_risk_category = 11;  // VARCHAR(20)
+  string graded_at = 12;  // TIMESTAMPTZ — iso 8601
+}

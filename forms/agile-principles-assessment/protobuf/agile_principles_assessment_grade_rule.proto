@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: agile_principles_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.agile_principles_assessment;
+
+enum AgilePrinciplesAssessmentGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_HIGH = 1;  // high
+  BAND_MID = 2;  // mid
+  BAND_LOW = 3;  // low
+  BAND_UNANSWERED = 4;  // unanswered
+}
+
+message AgilePrinciplesAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string agile_principles_assessment_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  int32 principle_number = 7;  // SMALLINT
+  AgilePrinciplesAssessmentGradeRuleBandEnum band = 8;  // VARCHAR(15)
+  string principle_slug = 9;  // VARCHAR(40) — max 40 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,25 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: flagged_issue
+
+syntax = "proto3";
+
+package form_examples.encounter_satisfaction;
+
+enum FlaggedIssuePriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_HIGH = 1;  // high
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_LOW = 3;  // low
+}
+
+message FlaggedIssue {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string satisfaction_result_id = 5;  // UUID — uuid
+  string flag_id = 6;  // TEXT
+  string category = 7;  // TEXT
+  string message_ = 8;  // TEXT
+  FlaggedIssuePriorityEnum priority = 9;  // TEXT
+}

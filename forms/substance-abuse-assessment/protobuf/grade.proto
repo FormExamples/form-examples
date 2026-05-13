@@ -1,0 +1,45 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.substance_abuse_assessment;
+
+enum GradeAuditRiskCategoryEnum {
+  AUDITRISKCATEGORY_UNSPECIFIED = 0;
+  AUDITRISKCATEGORY_LOW_RISK = 1;  // low-risk
+  AUDITRISKCATEGORY_HAZARDOUS = 2;  // hazardous
+  AUDITRISKCATEGORY_HARMFUL = 3;  // harmful
+  AUDITRISKCATEGORY_DEPENDENCE_LIKELY = 4;  // dependence-likely
+}
+
+enum GradeDastRiskCategoryEnum {
+  DASTRISKCATEGORY_UNSPECIFIED = 0;
+  DASTRISKCATEGORY_NO_PROBLEMS = 1;  // no-problems
+  DASTRISKCATEGORY_LOW = 2;  // low
+  DASTRISKCATEGORY_MODERATE = 3;  // moderate
+  DASTRISKCATEGORY_SUBSTANTIAL = 4;  // substantial
+  DASTRISKCATEGORY_SEVERE = 5;  // severe
+}
+
+enum GradeOverallRiskLevelEnum {
+  OVERALLRISKLEVEL_UNSPECIFIED = 0;
+  OVERALLRISKLEVEL_LOW = 1;  // low
+  OVERALLRISKLEVEL_MODERATE = 2;  // moderate
+  OVERALLRISKLEVEL_HIGH = 3;  // high
+  OVERALLRISKLEVEL_CRITICAL = 4;  // critical
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 audit_score = 6;  // INTEGER
+  GradeAuditRiskCategoryEnum audit_risk_category = 7;  // VARCHAR(20)
+  int32 dast_score = 8;  // INTEGER
+  GradeDastRiskCategoryEnum dast_risk_category = 9;  // VARCHAR(20)
+  GradeOverallRiskLevelEnum overall_risk_level = 10;  // VARCHAR(10)
+  string graded_at = 11;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,78 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.birth_control_assessment;
+
+enum GradeMecCategoryCocEnum {
+  MECCATEGORYCOC_UNSPECIFIED = 0;
+  MECCATEGORYCOC_V_1 = 1;  // 1
+  MECCATEGORYCOC_V_2 = 2;  // 2
+  MECCATEGORYCOC_V_3 = 3;  // 3
+  MECCATEGORYCOC_V_4 = 4;  // 4
+}
+
+enum GradeMecCategoryPopEnum {
+  MECCATEGORYPOP_UNSPECIFIED = 0;
+  MECCATEGORYPOP_V_1 = 1;  // 1
+  MECCATEGORYPOP_V_2 = 2;  // 2
+  MECCATEGORYPOP_V_3 = 3;  // 3
+  MECCATEGORYPOP_V_4 = 4;  // 4
+}
+
+enum GradeMecCategoryImplantEnum {
+  MECCATEGORYIMPLANT_UNSPECIFIED = 0;
+  MECCATEGORYIMPLANT_V_1 = 1;  // 1
+  MECCATEGORYIMPLANT_V_2 = 2;  // 2
+  MECCATEGORYIMPLANT_V_3 = 3;  // 3
+  MECCATEGORYIMPLANT_V_4 = 4;  // 4
+}
+
+enum GradeMecCategoryInjectionEnum {
+  MECCATEGORYINJECTION_UNSPECIFIED = 0;
+  MECCATEGORYINJECTION_V_1 = 1;  // 1
+  MECCATEGORYINJECTION_V_2 = 2;  // 2
+  MECCATEGORYINJECTION_V_3 = 3;  // 3
+  MECCATEGORYINJECTION_V_4 = 4;  // 4
+}
+
+enum GradeMecCategoryIudEnum {
+  MECCATEGORYIUD_UNSPECIFIED = 0;
+  MECCATEGORYIUD_V_1 = 1;  // 1
+  MECCATEGORYIUD_V_2 = 2;  // 2
+  MECCATEGORYIUD_V_3 = 3;  // 3
+  MECCATEGORYIUD_V_4 = 4;  // 4
+}
+
+enum GradeMecCategoryIusEnum {
+  MECCATEGORYIUS_UNSPECIFIED = 0;
+  MECCATEGORYIUS_V_1 = 1;  // 1
+  MECCATEGORYIUS_V_2 = 2;  // 2
+  MECCATEGORYIUS_V_3 = 3;  // 3
+  MECCATEGORYIUS_V_4 = 4;  // 4
+}
+
+enum GradeOverallRiskLevelEnum {
+  OVERALLRISKLEVEL_UNSPECIFIED = 0;
+  OVERALLRISKLEVEL_LOW = 1;  // low
+  OVERALLRISKLEVEL_MODERATE = 2;  // moderate
+  OVERALLRISKLEVEL_HIGH = 3;  // high
+  OVERALLRISKLEVEL_CRITICAL = 4;  // critical
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  GradeMecCategoryCocEnum mec_category_coc = 6;  // VARCHAR(5)
+  GradeMecCategoryPopEnum mec_category_pop = 7;  // VARCHAR(5)
+  GradeMecCategoryImplantEnum mec_category_implant = 8;  // VARCHAR(5)
+  GradeMecCategoryInjectionEnum mec_category_injection = 9;  // VARCHAR(5)
+  GradeMecCategoryIudEnum mec_category_iud = 10;  // VARCHAR(5)
+  GradeMecCategoryIusEnum mec_category_ius = 11;  // VARCHAR(5)
+  GradeOverallRiskLevelEnum overall_risk_level = 12;  // VARCHAR(10)
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,24 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: release_form
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum ReleaseFormStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_APPROVED = 3;  // approved
+  STATUS_EXPIRED = 4;  // expired
+  STATUS_REVOKED = 5;  // revoked
+}
+
+message ReleaseForm {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  ReleaseFormStatusEnum status = 6;  // VARCHAR(20)
+}

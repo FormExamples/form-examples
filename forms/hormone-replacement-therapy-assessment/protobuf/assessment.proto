@@ -1,0 +1,91 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_current_medication_item
+
+syntax = "proto3";
+
+package form_examples.hormone_replacement_therapy_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakesRegularMedicationsEnum {
+  TAKESREGULARMEDICATIONS_UNSPECIFIED = 0;
+  TAKESREGULARMEDICATIONS_YES = 1;  // yes
+  TAKESREGULARMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentCurrentHrtEnum {
+  CURRENTHRT_UNSPECIFIED = 0;
+  CURRENTHRT_YES = 1;  // yes
+  CURRENTHRT_NO = 2;  // no
+}
+
+enum AssessmentCurrentHrtTypeEnum {
+  CURRENTHRTTYPE_UNSPECIFIED = 0;
+  CURRENTHRTTYPE_OESTROGEN_ONLY = 1;  // oestrogen-only
+  CURRENTHRTTYPE_COMBINED = 2;  // combined
+  CURRENTHRTTYPE_TIBOLONE = 3;  // tibolone
+  CURRENTHRTTYPE_LOCAL_OESTROGEN = 4;  // local-oestrogen
+}
+
+enum AssessmentCurrentHrtRouteEnum {
+  CURRENTHRTROUTE_UNSPECIFIED = 0;
+  CURRENTHRTROUTE_ORAL = 1;  // oral
+  CURRENTHRTROUTE_TRANSDERMAL_PATCH = 2;  // transdermal-patch
+  CURRENTHRTROUTE_TRANSDERMAL_GEL = 3;  // transdermal-gel
+  CURRENTHRTROUTE_VAGINAL = 4;  // vaginal
+  CURRENTHRTROUTE_IMPLANT = 5;  // implant
+}
+
+enum AssessmentPreviousHrtEnum {
+  PREVIOUSHRT_UNSPECIFIED = 0;
+  PREVIOUSHRT_YES = 1;  // yes
+  PREVIOUSHRT_NO = 2;  // no
+}
+
+enum AssessmentTakesHerbalSupplementsEnum {
+  TAKESHERBALSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESHERBALSUPPLEMENTS_YES = 1;  // yes
+  TAKESHERBALSUPPLEMENTS_NO = 2;  // no
+}
+
+enum AssessmentTakesAnticoagulantsEnum {
+  TAKESANTICOAGULANTS_UNSPECIFIED = 0;
+  TAKESANTICOAGULANTS_YES = 1;  // yes
+  TAKESANTICOAGULANTS_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakesRegularMedicationsEnum takes_regular_medications = 8;  // VARCHAR(5)
+  AssessmentCurrentHrtEnum current_hrt = 9;  // VARCHAR(5)
+  AssessmentCurrentHrtTypeEnum current_hrt_type = 10;  // VARCHAR(30)
+  AssessmentCurrentHrtRouteEnum current_hrt_route = 11;  // VARCHAR(20)
+  string current_hrt_duration = 12;  // VARCHAR(50) — max 50 chars
+  AssessmentPreviousHrtEnum previous_hrt = 13;  // VARCHAR(5)
+  string previous_hrt_details = 14;  // TEXT
+  string reason_for_stopping_hrt = 15;  // TEXT
+  AssessmentTakesHerbalSupplementsEnum takes_herbal_supplements = 16;  // VARCHAR(5)
+  string herbal_supplement_details = 17;  // TEXT
+  AssessmentTakesAnticoagulantsEnum takes_anticoagulants = 18;  // VARCHAR(5)
+  string anticoagulant_details = 19;  // TEXT
+  string medication_notes = 20;  // TEXT
+  string current_medication_item_deleted_at = 21;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 22;  // UUID — uuid
+  string medication_name = 23;  // VARCHAR(255) — max 255 chars
+  string dose = 24;  // VARCHAR(100) — max 100 chars
+  string frequency = 25;  // VARCHAR(100) — max 100 chars
+  string indication = 26;  // VARCHAR(255) — max 255 chars
+  int32 sort_order = 27;  // INTEGER
+}

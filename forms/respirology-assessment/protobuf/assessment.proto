@@ -1,0 +1,101 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_medication_item
+
+syntax = "proto3";
+
+package form_examples.respirology_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakesRespiratoryMedicationsEnum {
+  TAKESRESPIRATORYMEDICATIONS_UNSPECIFIED = 0;
+  TAKESRESPIRATORYMEDICATIONS_YES = 1;  // yes
+  TAKESRESPIRATORYMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentInhalerUseEnum {
+  INHALERUSE_UNSPECIFIED = 0;
+  INHALERUSE_YES = 1;  // yes
+  INHALERUSE_NO = 2;  // no
+}
+
+enum AssessmentInhalerTechniqueAssessedEnum {
+  INHALERTECHNIQUEASSESSED_UNSPECIFIED = 0;
+  INHALERTECHNIQUEASSESSED_YES = 1;  // yes
+  INHALERTECHNIQUEASSESSED_NO = 2;  // no
+}
+
+enum AssessmentInhalerTechniqueAdequateEnum {
+  INHALERTECHNIQUEADEQUATE_UNSPECIFIED = 0;
+  INHALERTECHNIQUEADEQUATE_YES = 1;  // yes
+  INHALERTECHNIQUEADEQUATE_NO = 2;  // no
+}
+
+enum AssessmentLongTermOxygenTherapyEnum {
+  LONGTERMOXYGENTHERAPY_UNSPECIFIED = 0;
+  LONGTERMOXYGENTHERAPY_YES = 1;  // yes
+  LONGTERMOXYGENTHERAPY_NO = 2;  // no
+}
+
+enum AssessmentNebuliserUseEnum {
+  NEBULISERUSE_UNSPECIFIED = 0;
+  NEBULISERUSE_YES = 1;  // yes
+  NEBULISERUSE_NO = 2;  // no
+}
+
+enum AssessmentTakesOtherMedicationsEnum {
+  TAKESOTHERMEDICATIONS_UNSPECIFIED = 0;
+  TAKESOTHERMEDICATIONS_YES = 1;  // yes
+  TAKESOTHERMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentMedicationAdherenceEnum {
+  MEDICATIONADHERENCE_UNSPECIFIED = 0;
+  MEDICATIONADHERENCE_GOOD = 1;  // good
+  MEDICATIONADHERENCE_FAIR = 2;  // fair
+  MEDICATIONADHERENCE_POOR = 3;  // poor
+}
+
+enum AssessmentRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_INHALED = 1;  // inhaled
+  ROUTE_ORAL = 2;  // oral
+  ROUTE_NEBULISED = 3;  // nebulised
+  ROUTE_SUBCUTANEOUS = 4;  // subcutaneous
+  ROUTE_INTRAVENOUS = 5;  // intravenous
+  ROUTE_OTHER = 6;  // other
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakesRespiratoryMedicationsEnum takes_respiratory_medications = 8;  // VARCHAR(5)
+  AssessmentInhalerUseEnum inhaler_use = 9;  // VARCHAR(5)
+  AssessmentInhalerTechniqueAssessedEnum inhaler_technique_assessed = 10;  // VARCHAR(5)
+  AssessmentInhalerTechniqueAdequateEnum inhaler_technique_adequate = 11;  // VARCHAR(5)
+  AssessmentLongTermOxygenTherapyEnum long_term_oxygen_therapy = 12;  // VARCHAR(5)
+  AssessmentNebuliserUseEnum nebuliser_use = 13;  // VARCHAR(5)
+  AssessmentTakesOtherMedicationsEnum takes_other_medications = 14;  // VARCHAR(5)
+  AssessmentMedicationAdherenceEnum medication_adherence = 15;  // VARCHAR(20)
+  string adverse_drug_reactions = 16;  // TEXT
+  string additional_notes = 17;  // TEXT
+  string medication_item_deleted_at = 18;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 19;  // UUID — uuid
+  string medication_name = 20;  // VARCHAR(255) — max 255 chars
+  string dose = 21;  // VARCHAR(100) — max 100 chars
+  string frequency = 22;  // VARCHAR(100) — max 100 chars
+  AssessmentRouteEnum route = 23;  // VARCHAR(50)
+  string indication = 24;  // TEXT
+  int32 sort_order = 25;  // INTEGER
+}

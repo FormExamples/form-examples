@@ -1,0 +1,21 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: adult_vaccinations
+
+syntax = "proto3";
+
+package form_examples.vaccinations_assessment;
+
+message AdultVaccinations {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  int32 td_ipv_booster = 6;  // SMALLINT
+  int32 hpv = 7;  // SMALLINT
+  int32 meningitis_acwy = 8;  // SMALLINT
+  int32 influenza_annual = 9;  // SMALLINT
+  int32 covid19 = 10;  // SMALLINT
+  int32 shingles = 11;  // SMALLINT
+  int32 pneumococcal_ppv = 12;  // SMALLINT
+}

@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade
+
+syntax = "proto3";
+
+package form_examples.occupational_therapy_assessment;
+
+enum GradePerformanceCategoryEnum {
+  PERFORMANCECATEGORY_UNSPECIFIED = 0;
+  PERFORMANCECATEGORY_SIGNIFICANT_ISSUES = 1;  // significant-issues
+  PERFORMANCECATEGORY_MODERATE_CONCERNS = 2;  // moderate-concerns
+  PERFORMANCECATEGORY_GOOD_PERFORMANCE = 3;  // good-performance
+}
+
+enum GradeSatisfactionCategoryEnum {
+  SATISFACTIONCATEGORY_UNSPECIFIED = 0;
+  SATISFACTIONCATEGORY_SIGNIFICANT_ISSUES = 1;  // significant-issues
+  SATISFACTIONCATEGORY_MODERATE_CONCERNS = 2;  // moderate-concerns
+  SATISFACTIONCATEGORY_GOOD_PERFORMANCE = 3;  // good-performance
+}
+
+message Grade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string assessment_id = 5;  // UUID — uuid
+  double performance_mean_score = 6;  // NUMERIC(3,1) — numeric(3,1)
+  double satisfaction_mean_score = 7;  // NUMERIC(3,1) — numeric(3,1)
+  GradePerformanceCategoryEnum performance_category = 8;  // VARCHAR(30)
+  GradeSatisfactionCategoryEnum satisfaction_category = 9;  // VARCHAR(30)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

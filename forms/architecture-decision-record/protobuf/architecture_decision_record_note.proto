@@ -1,0 +1,16 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: architecture_decision_record_note
+
+syntax = "proto3";
+
+package form_examples.architecture_decision_record;
+
+message ArchitectureDecisionRecordNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string architecture_decision_record_id = 4;  // UUID — uuid
+  string noted_at = 5;  // TIMESTAMPTZ — iso 8601
+  string noted_by = 6;  // TEXT
+  string body = 7;  // TEXT
+}

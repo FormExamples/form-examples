@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: author
+
+syntax = "proto3";
+
+package form_examples.architecture_decision_record;
+
+enum AuthorRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ARCHITECT = 1;  // architect
+  ROLE_PRINCIPAL_ENGINEER = 2;  // principal-engineer
+  ROLE_STAFF_ENGINEER = 3;  // staff-engineer
+  ROLE_ENGINEERING_MANAGER = 4;  // engineering-manager
+  ROLE_CTO = 5;  // cto
+  ROLE_PRODUCT_MANAGER = 6;  // product-manager
+  ROLE_SECURITY_OFFICER = 7;  // security-officer
+  ROLE_COMPLIANCE_OFFICER = 8;  // compliance-officer
+  ROLE_CONSULTANT = 9;  // consultant
+  ROLE_OTHER = 10;  // other
+}
+
+message Author {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  AuthorRoleEnum role = 8;  // TEXT
+  string organization_name = 9;  // TEXT
+  string team_name = 10;  // TEXT
+}

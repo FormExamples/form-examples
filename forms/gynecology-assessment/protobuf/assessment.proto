@@ -1,0 +1,62 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: assessment, assessment_current_medications, assessment_current_medication_item
+
+syntax = "proto3";
+
+package form_examples.gynecology_assessment;
+
+enum AssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum AssessmentTakesRegularMedicationsEnum {
+  TAKESREGULARMEDICATIONS_UNSPECIFIED = 0;
+  TAKESREGULARMEDICATIONS_YES = 1;  // yes
+  TAKESREGULARMEDICATIONS_NO = 2;  // no
+}
+
+enum AssessmentTakesOverTheCounterEnum {
+  TAKESOVERTHECOUNTER_UNSPECIFIED = 0;
+  TAKESOVERTHECOUNTER_YES = 1;  // yes
+  TAKESOVERTHECOUNTER_NO = 2;  // no
+}
+
+enum AssessmentTakesHerbalSupplementsEnum {
+  TAKESHERBALSUPPLEMENTS_UNSPECIFIED = 0;
+  TAKESHERBALSUPPLEMENTS_YES = 1;  // yes
+  TAKESHERBALSUPPLEMENTS_NO = 2;  // no
+}
+
+enum AssessmentHormoneTherapyEnum {
+  HORMONETHERAPY_UNSPECIFIED = 0;
+  HORMONETHERAPY_YES = 1;  // yes
+  HORMONETHERAPY_NO = 2;  // no
+}
+
+message Assessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  AssessmentStatusEnum status = 6;  // VARCHAR(20)
+  string current_medications_deleted_at = 7;  // TIMESTAMPTZ — iso 8601
+  AssessmentTakesRegularMedicationsEnum takes_regular_medications = 8;  // VARCHAR(5)
+  AssessmentTakesOverTheCounterEnum takes_over_the_counter = 9;  // VARCHAR(5)
+  AssessmentTakesHerbalSupplementsEnum takes_herbal_supplements = 10;  // VARCHAR(5)
+  string herbal_supplement_details = 11;  // TEXT
+  AssessmentHormoneTherapyEnum hormone_therapy = 12;  // VARCHAR(5)
+  string hormone_therapy_details = 13;  // TEXT
+  string medication_notes = 14;  // TEXT
+  string current_medication_item_deleted_at = 15;  // TIMESTAMPTZ — iso 8601
+  string current_medications_id = 16;  // UUID — uuid
+  string medication_name = 17;  // VARCHAR(255) — max 255 chars
+  string dose = 18;  // VARCHAR(100) — max 100 chars
+  string frequency = 19;  // VARCHAR(100) — max 100 chars
+  string indication = 20;  // VARCHAR(255) — max 255 chars
+  int32 sort_order = 21;  // INTEGER
+}

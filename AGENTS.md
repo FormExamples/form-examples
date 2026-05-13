@@ -18,6 +18,7 @@ engine, and generates a clinical report with flagged issues.
 - `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 - `bin/xml-representations/generate-xml-representations.py` — generate XML and DTD from SQL migrations
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON from SQL migrations
+- `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas from SQL migrations
 
 ## Form index
 
@@ -41,6 +42,7 @@ forms/<slug>/
   sql-migrations/                                  # PostgreSQL Liquibase migrations
   xml-representations/                             # XML + DTD per SQL table entity
   fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity
+  protobuf/                                        # Protocol Buffers .proto schemas per SQL entity
   front-end-form-with-html/                        # Questionnaire (HTML)
   front-end-form-with-svelte/                      # Questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML + table)
@@ -77,6 +79,7 @@ See the per-stack agent docs:
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
+- [Protocol Buffers representations](AGENTS/protobuf.md)
 
 ## Conventions
 

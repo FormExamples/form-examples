@@ -1,0 +1,30 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: outpatient_outcome_operational
+
+syntax = "proto3";
+
+package form_examples.outpatient_outcome;
+
+enum OutpatientOutcomeOperationalNhsAttendanceOutcomeEnum {
+  NHSATTENDANCEOUTCOME_UNSPECIFIED = 0;
+  NHSATTENDANCEOUTCOME_ATTENDED = 1;  // attended
+  NHSATTENDANCEOUTCOME_ATTENDED_LATE_SEEN = 2;  // attended_late_seen
+  NHSATTENDANCEOUTCOME_ATTENDED_LATE_NOT_SEEN = 3;  // attended_late_not_seen
+  NHSATTENDANCEOUTCOME_DID_NOT_ATTEND = 4;  // did_not_attend
+  NHSATTENDANCEOUTCOME_CANCELLED_BY_PATIENT = 5;  // cancelled_by_patient
+  NHSATTENDANCEOUTCOME_CANCELLED_BY_PROVIDER = 6;  // cancelled_by_provider
+  NHSATTENDANCEOUTCOME_REBOOKED = 7;  // rebooked
+}
+
+message OutpatientOutcomeOperational {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string outpatient_outcome_id = 5;  // UUID — uuid
+  string referral_date = 6;  // DATE — iso 8601 date
+  string appointment_date = 7;  // DATE — iso 8601 date
+  int32 wait_time_days = 8;  // INTEGER
+  int32 service_target_days = 9;  // INTEGER
+  OutpatientOutcomeOperationalNhsAttendanceOutcomeEnum nhs_attendance_outcome = 10;  // VARCHAR(50)
+}

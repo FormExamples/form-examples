@@ -1,0 +1,50 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: reporter
+
+syntax = "proto3";
+
+package form_examples.issue_tracker;
+
+enum ReporterRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ENGINEER = 1;  // engineer
+  ROLE_SRE = 2;  // sre
+  ROLE_ON_CALL = 3;  // on-call
+  ROLE_PRODUCT_MANAGER = 4;  // product-manager
+  ROLE_PROJECT_MANAGER = 5;  // project-manager
+  ROLE_CUSTOMER_SUCCESS = 6;  // customer-success
+  ROLE_SAFETY_OFFICER = 7;  // safety-officer
+  ROLE_COMPLIANCE_OFFICER = 8;  // compliance-officer
+  ROLE_CLINICIAN = 9;  // clinician
+  ROLE_PATIENT = 10;  // patient
+  ROLE_EMPLOYEE = 11;  // employee
+  ROLE_CONTRACTOR = 12;  // contractor
+  ROLE_VISITOR = 13;  // visitor
+  ROLE_CUSTOMER = 14;  // customer
+  ROLE_PARTNER = 15;  // partner
+  ROLE_OTHER = 16;  // other
+}
+
+enum ReporterPreferredContactEnum {
+  PREFERREDCONTACT_UNSPECIFIED = 0;
+  PREFERREDCONTACT_EMAIL = 1;  // email
+  PREFERREDCONTACT_PHONE = 2;  // phone
+  PREFERREDCONTACT_CHAT = 3;  // chat
+  PREFERREDCONTACT_IN_PERSON = 4;  // in-person
+}
+
+message Reporter {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  ReporterRoleEnum role = 8;  // VARCHAR(50)
+  string organisation = 9;  // VARCHAR(255) — max 255 chars
+  string team = 10;  // VARCHAR(255) — max 255 chars
+  string location = 11;  // VARCHAR(255) — max 255 chars
+  string timezone = 12;  // VARCHAR(64) — max 64 chars
+  ReporterPreferredContactEnum preferred_contact = 13;  // VARCHAR(20)
+}

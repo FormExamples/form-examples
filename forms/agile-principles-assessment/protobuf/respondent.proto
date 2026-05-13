@@ -1,0 +1,31 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: respondent
+
+syntax = "proto3";
+
+package form_examples.agile_principles_assessment;
+
+enum RespondentRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_INDIVIDUAL_CONTRIBUTOR = 1;  // individual-contributor
+  ROLE_TEAM_LEAD = 2;  // team-lead
+  ROLE_SCRUM_MASTER = 3;  // scrum-master
+  ROLE_PRODUCT_OWNER = 4;  // product-owner
+  ROLE_ENGINEERING_MANAGER = 5;  // engineering-manager
+  ROLE_AGILE_COACH = 6;  // agile-coach
+  ROLE_EXECUTIVE_SPONSOR = 7;  // executive-sponsor
+  ROLE_OTHER = 8;  // other
+}
+
+message Respondent {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string full_name = 5;  // VARCHAR(255) — max 255 chars
+  string email = 6;  // VARCHAR(255) — max 255 chars
+  RespondentRoleEnum role = 7;  // VARCHAR(50)
+  string team_name = 8;  // VARCHAR(255) — max 255 chars
+  string organisation_name = 9;  // VARCHAR(255) — max 255 chars
+  int32 years_in_agile = 10;  // INTEGER
+}

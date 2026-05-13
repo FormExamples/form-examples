@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient_rights
+
+syntax = "proto3";
+
+package form_examples.medical_records_release_permission;
+
+enum PatientRightsAcknowledgedRightToRevokeEnum {
+  ACKNOWLEDGEDRIGHTTOREVOKE_UNSPECIFIED = 0;
+  ACKNOWLEDGEDRIGHTTOREVOKE_YES = 1;  // yes
+  ACKNOWLEDGEDRIGHTTOREVOKE_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgedNoChargeForAccessEnum {
+  ACKNOWLEDGEDNOCHARGEFORACCESS_UNSPECIFIED = 0;
+  ACKNOWLEDGEDNOCHARGEFORACCESS_YES = 1;  // yes
+  ACKNOWLEDGEDNOCHARGEFORACCESS_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgedDataProtectionEnum {
+  ACKNOWLEDGEDDATAPROTECTION_UNSPECIFIED = 0;
+  ACKNOWLEDGEDDATAPROTECTION_YES = 1;  // yes
+  ACKNOWLEDGEDDATAPROTECTION_NO = 2;  // no
+}
+
+message PatientRights {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string release_form_id = 5;  // UUID — uuid
+  PatientRightsAcknowledgedRightToRevokeEnum acknowledged_right_to_revoke = 6;  // VARCHAR(5)
+  PatientRightsAcknowledgedNoChargeForAccessEnum acknowledged_no_charge_for_access = 7;  // VARCHAR(5)
+  PatientRightsAcknowledgedDataProtectionEnum acknowledged_data_protection = 8;  // VARCHAR(5)
+}
