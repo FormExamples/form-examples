@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE arc42_documentation SYSTEM "arc42_documentation.dtd">
+<arc42_documentation>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<architecture_id>550e8400-e29b-41d4-a716-446655440000</architecture_id>
+<author_name>Example</author_name>
+<author_role></author_role>
+<document_date>2026-01-15</document_date>
+<introduction></introduction>
+<business_context_description>Example text.</business_context_description>
+<technical_context_description>Example text.</technical_context_description>
+<solution_strategy_summary>Example text.</solution_strategy_summary>
+<top_level_decomposition_summary>Example text.</top_level_decomposition_summary>
+<building_block_overview></building_block_overview>
+<runtime_overview></runtime_overview>
+<deployment_overview></deployment_overview>
+<crosscutting_overview></crosscutting_overview>
+<quality_tree_summary>Example text.</quality_tree_summary>
+<recommendation>proceed</recommendation>
+<additional_notes>Example text.</additional_notes>
+<signed_by></signed_by>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</arc42_documentation>

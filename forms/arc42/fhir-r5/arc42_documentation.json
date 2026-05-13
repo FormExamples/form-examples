@@ -1,0 +1,264 @@
+{
+  "resourceType": "Observation",
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:arc42",
+        "code": "arc42_documentation",
+        "display": "Arc42 Documentation"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/991e8400-e29b-41d4-a716-446655440013"
+  },
+  "encounter": {
+    "reference": "Encounter/aa1e8400-e29b-41d4-a716-446655440014"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "author_name",
+            "display": "Author Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "author_role",
+            "display": "Author Role"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "document_date",
+            "display": "Document Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "introduction",
+            "display": "Introduction"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "business_context_description",
+            "display": "Business Context Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "technical_context_description",
+            "display": "Technical Context Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "solution_strategy_summary",
+            "display": "Solution Strategy Summary"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "top_level_decomposition_summary",
+            "display": "Top Level Decomposition Summary"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "building_block_overview",
+            "display": "Building Block Overview"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "runtime_overview",
+            "display": "Runtime Overview"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "deployment_overview",
+            "display": "Deployment Overview"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "crosscutting_overview",
+            "display": "Crosscutting Overview"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "quality_tree_summary",
+            "display": "Quality Tree Summary"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "recommendation",
+            "display": "Recommendation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42:recommendation",
+            "code": "proceed",
+            "display": "Proceed"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "additional_notes",
+            "display": "Additional Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "signed_by",
+            "display": "Signed By"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:arc42",
+            "code": "signed_at",
+            "display": "Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

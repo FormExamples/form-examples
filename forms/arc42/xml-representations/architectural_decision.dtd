@@ -1,0 +1,12 @@
+<!ELEMENT architectural_decision (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,title,status,context,decision,consequences)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT context (#PCDATA)>
+<!ELEMENT decision (#PCDATA)>
+<!ELEMENT consequences (#PCDATA)>

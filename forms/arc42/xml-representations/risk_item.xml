@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE risk_item SYSTEM "risk_item.dtd">
+<risk_item>
+<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<arc42_documentation_id>660e8400-e29b-41d4-a716-446655440001</arc42_documentation_id>
+<ordinal>1</ordinal>
+<kind>risk</kind>
+<name>Example</name>
+<probability>high</probability>
+<impact>high</impact>
+<mitigation></mitigation>
+</risk_item>

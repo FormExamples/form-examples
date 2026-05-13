@@ -1,0 +1,10 @@
+<!ELEMENT quality_goal (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,name,priority,scenario)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT scenario (#PCDATA)>

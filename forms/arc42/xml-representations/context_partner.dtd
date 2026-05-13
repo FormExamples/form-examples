@@ -1,0 +1,12 @@
+<!ELEMENT context_partner (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,kind,name,interface_description,protocol,direction)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT interface_description (#PCDATA)>
+<!ELEMENT protocol (#PCDATA)>
+<!ELEMENT direction (#PCDATA)>

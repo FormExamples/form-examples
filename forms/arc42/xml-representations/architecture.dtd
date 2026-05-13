@@ -1,0 +1,10 @@
+<!ELEMENT architecture (id,created_at,updated_at,deleted_at,name,version,owner,status,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT owner (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

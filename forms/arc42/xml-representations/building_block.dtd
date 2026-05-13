@@ -1,0 +1,11 @@
+<!ELEMENT building_block (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,parent_id,name,responsibility,interfaces)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT parent_id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT responsibility (#PCDATA)>
+<!ELEMENT interfaces (#PCDATA)>

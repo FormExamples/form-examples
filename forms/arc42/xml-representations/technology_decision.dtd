@@ -1,0 +1,10 @@
+<!ELEMENT technology_decision (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,category,choice,rationale)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT choice (#PCDATA)>
+<!ELEMENT rationale (#PCDATA)>

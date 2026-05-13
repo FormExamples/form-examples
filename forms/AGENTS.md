@@ -7,6 +7,7 @@ Subprojects:
 - [agile checklist](agile-checklist)
 - [allergy assessment](allergy-assessment)
 - [anesthesiology assessment](anesthesiology-assessment)
+- [arc42](arc42)
 - [asthma assessment](asthma-assessment)
 - [attention deficit assessment](attention-deficit-assessment)
 - [audio-vestibular assessment](audio-vestibular-assessment)

@@ -1,0 +1,10 @@
+<!ELEMENT runtime_scenario (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,name,trigger_description,steps_summary)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT arc42_documentation_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT trigger_description (#PCDATA)>
+<!ELEMENT steps_summary (#PCDATA)>
