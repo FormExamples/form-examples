@@ -1,0 +1,212 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:objective-and-key-result-tracker",
+        "code": "okr_key_result",
+        "display": "Okr Key Result"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "encounter": {
+    "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "position",
+            "display": "Position"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "title",
+            "display": "Title"
+          }
+        ]
+      },
+      "valueString": "Example Title"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "kr_type",
+            "display": "Kr Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker:kr_type",
+            "code": "numeric",
+            "display": "Numeric"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "unit",
+            "display": "Unit"
+          }
+        ]
+      },
+      "valueString": "mg/dL"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "start_value",
+            "display": "Start Value"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "current_value",
+            "display": "Current Value"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "target_value",
+            "display": "Target Value"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "milestones_json",
+            "display": "Milestones Json"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "binary_done",
+            "display": "Binary Done"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "owner_name",
+            "display": "Owner Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "due_date",
+            "display": "Due Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objective-and-key-result-tracker",
+            "code": "progress_fraction",
+            "display": "Progress Fraction"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    }
+  ]
+}
