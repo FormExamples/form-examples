@@ -14,10 +14,10 @@ engine, and generates a clinical report with flagged issues.
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — update, upgrade, fix, harmonize, audit, test (via Claude Code)
 - `bin/migrate-sql-filenames.py` — one-shot migration of each form's sql-migrations/ to the canonical `NN_create_table_<name>.sql` layout
-- `bin/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
-- `bin/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
-- `bin/generate-xml-representations.py` — generate XML and DTD from SQL migrations
-- `bin/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON from SQL migrations
+- `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
+- `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
+- `bin/xml-representations/generate-xml-representations.py` — generate XML and DTD from SQL migrations
+- `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON from SQL migrations
 
 ## Form index
 

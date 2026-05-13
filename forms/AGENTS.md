@@ -4,6 +4,7 @@ Subprojects:
 
 - [advance decision to refuse treatment](advance-decision-to-refuse-treatment)
 - [advance statement about care](advance-statement-about-care)
+- [agile checklist](agile-checklist)
 - [allergy assessment](allergy-assessment)
 - [anesthesiology assessment](anesthesiology-assessment)
 - [asthma assessment](asthma-assessment)
@@ -51,6 +52,7 @@ Subprojects:
 - [hospital discharge](hospital-discharge)
 - [integumentary assessment](integumentary-assessment)
 - [international patient summary](international-patient-summary)
+- [issue tracker](issue-tracker)
 - [kinesiology assessment](kinesiology-assessment)
 - [learning disability assessment](learning-disability-assessment)
 - [legal requirements privacy notice](legal-requirements-privacy-notice)
