@@ -1,0 +1,32 @@
+<table id="scorecard-table" class="scorecard-table">
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>Sector</th>
+      <th>Size</th>
+      <th>Respondent</th>
+      <th>Date</th>
+      <th class="num">Score</th>
+      <th>Band</th>
+      <th class="num">Flags</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+      <tr>
+        <td>
+          <a href="/scorecard/{{ row.id }}">{{ row.organization_name | default(value="(no name)") }}</a>
+        </td>
+        <td>{{ row.sector }}</td>
+        <td>{{ row.size_band }}</td>
+        <td>{{ row.respondent_name }}</td>
+        <td>{{ row.assessment_date }}</td>
+        <td class="num">{{ row.score_total }} / 16</td>
+        <td><span class="band band-{{ row.computed_band }}">{{ row.computed_band }}</span></td>
+        <td class="num">{{ row.flags | length }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="8" class="empty">No scorecards match the current filters.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

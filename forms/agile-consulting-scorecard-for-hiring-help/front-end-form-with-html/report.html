@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Agile Consulting Scorecard — Report</title>
+  <meta name="description" content="Printable readiness report for an agile-consulting scorecard.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+      color: #1a202c;
+      background: #f7fafc;
+      line-height: 1.5;
+    }
+    h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
+    .subtitle { margin: 0 0 1.5rem; color: #4a5568; }
+    .card {
+      background: white;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 0 0 1.25rem;
+    }
+    h2 { margin: 0 0 0.75rem; font-size: 1.1rem; color: #2d3748; }
+    .kv { display: grid; grid-template-columns: 12rem 1fr; gap: 0.4rem 1rem; }
+    .kv dt { color: #4a5568; font-weight: 500; }
+    .kv dd { margin: 0; }
+
+    .summary {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .total-box {
+      flex: 0 0 auto;
+      text-align: center;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+    }
+    .total-num { font-size: 2.4rem; font-weight: 700; line-height: 1; }
+    .total-label { color: #4a5568; font-size: 0.875rem; }
+    .band {
+      display: inline-block;
+      padding: 0.25rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .band-low        { background: #fed7d7; color: #742a2a; }
+    .band-borderline { background: #fefcbf; color: #744210; }
+    .band-medium     { background: #bee3f8; color: #2a4365; }
+    .band-high       { background: #c6f6d5; color: #22543d; }
+    .recommendation { font-weight: 600; color: #2d3748; }
+
+    .item {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0.5rem 0.75rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid #edf2f7;
+    }
+    .item:first-of-type { border-top: 0; }
+    .answer-pill {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .answer-yes        { background: #c6f6d5; color: #22543d; }
+    .answer-no         { background: #fed7d7; color: #742a2a; }
+    .answer-unanswered { background: #edf2f7; color: #4a5568; }
+    .item-prompt { font-weight: 500; }
+    .item-evidence {
+      color: #4a5568;
+      font-size: 0.875rem;
+      margin-top: 0.2rem;
+      white-space: pre-wrap;
+    }
+
+    .flag {
+      padding: 0.5rem 0.75rem;
+      border-left: 4px solid #c53030;
+      background: #fff5f5;
+      border-radius: 4px;
+      margin: 0 0 0.5rem;
+    }
+    .flag.priority-medium { border-left-color: #d69e2e; background: #fffff0; }
+    .flag.priority-low    { border-left-color: #4299e1; background: #ebf8ff; }
+    .flag-cat { font-weight: 600; }
+    .flag-action { color: #4a5568; font-size: 0.875rem; margin-top: 0.2rem; }
+
+    .input-card { background: #ebf8ff; border-color: #bee3f8; }
+    button {
+      padding: 0.4rem 0.85rem;
+      border: 1px solid #4299e1;
+      border-radius: 4px;
+      background: #4299e1;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.secondary { background: white; color: #4299e1; }
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.8rem;
+      min-height: 8rem;
+      resize: vertical;
+    }
+    .err { color: #c53030; margin: 0.5rem 0 0; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .input-card, .actions { display: none; }
+      .card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Agile Consulting Scorecard — Report</h1>
+  <p class="subtitle">
+    Load a scorecard JSON (the assessment shape exported by the wizard, or
+    a combined `{ assessment, grade }` payload) to render a printable
+    readiness report.
+  </p>
+
+  <section class="card input-card" id="input-section">
+    <h2>Load scorecard</h2>
+    <div class="actions" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <input type="file" id="file-input" accept="application/json,.json">
+      <button type="button" id="paste-btn" class="secondary">Paste JSON</button>
+      <button type="button" id="sample-btn" class="secondary">Load sample</button>
+    </div>
+    <div id="paste-area" hidden>
+      <textarea id="paste-text" placeholder="Paste assessment or { assessment, grade } JSON here…"></textarea>
+      <div class="actions" style="display:flex;gap:0.5rem;margin-top:0.5rem;">
+        <button type="button" id="paste-load-btn">Load pasted</button>
+      </div>
+    </div>
+    <p class="err" id="error" hidden></p>
+  </section>
+
+  <div id="report-output"></div>
+
+  <script>
+    'use strict';
+
+    const ITEM_LABELS = {
+      m1:  'Manifesto 1 — Individuals and interactions: leaders in conversation with customers ≥1 hr/week.',
+      m2:  'Manifesto 2 — Working software: brand-new "hello world" shipped to production.',
+      m3:  'Manifesto 3 — Customer collaboration: org bought customer\'s favourite book and shared.',
+      m4:  'Manifesto 4 — Responding to change: every senior leader read an agile change book.',
+      p1:  'Principle 1 — Customer satisfaction: every product lead measures NPS.',
+      p2:  'Principle 2 — Welcome change: "hello world" internationalized to ≥1 language.',
+      p3:  'Principle 3 — Deliver frequently: i18n version shipped to production.',
+      p4:  'Principle 4 — Business + developers: lead commitment in place.',
+      p5:  'Principle 5 — Motivated individuals: 3-amigos team shipped MVP in 30 days.',
+      p6:  'Principle 6 — Face-to-face: ≥50% face-to-face time committed.',
+      p7:  'Principle 7 — Working software primary measure: "fizz buzz" shipped.',
+      p8:  'Principle 8 — Sustainable pace: ≥1 year staff budget secured.',
+      p9:  'Principle 9 — Technical excellence: quality metrics in pre-commit + CI.',
+      p10: 'Principle 10 — Simplicity: ≥2 process-improvement experts per team.',
+      p11: 'Principle 11 — Self-organizing teams: Likert ≥ "Agree".',
+      p12: 'Principle 12 — Reflection: leaders shared previous 2 retrospectives.',
+    };
+
+    const RECOMMENDATION = {
+      low:        "Don't hire agile help yet — focus on internal operations first.",
+      borderline: "Borderline — do your agile homework first; revisit in ~3 months.",
+      medium:     "Do your agile homework first; revisit the scorecard in ~3 months.",
+      high:       "Likely ready — trial an engagement and review in ~3 months.",
+    };
+
+    const SAMPLE = {
+      assessment: {
+        organization: { organizationName: 'Pharos Pharma', sector: 'pharmaceuticals', sizeBand: 'enterprise', country: 'GB', region: 'London' },
+        respondent:   { respondentName: 'Chiara Rossi', respondentEmail: 'chiara.rossi@pharos.example', role: 'transformation-lead' },
+        assessment:   { assessmentDate: '2026-04-18', status: 'submitted' },
+        manifesto: {
+          m1: { done: true,  evidence: 'Weekly customer roundtables since 2025-Q3.' },
+          m2: { done: true,  evidence: 'Hello-world program shipped 2025-11.' },
+          m3: { done: false, evidence: 'Planned for 2026-Q3.' },
+          m4: { done: true,  evidence: 'CXOs read Kotter, shared takeaways at all-hands.' },
+        },
+        principles: {
+          p1:  { done: false, evidence: 'NPS programme not yet adopted.' },
+          p2:  { done: true,  evidence: 'i18n done in 2026-Q1.' },
+          p3:  { done: true,  evidence: 'Internationalised version live.' },
+          p4:  { done: true,  evidence: '' },
+          p5:  { done: false, evidence: 'No 3-amigos exercise yet.' },
+          p6:  { done: true,  evidence: '' },
+          p7:  { done: false, evidence: 'Fizz-buzz program not yet shipped.' },
+          p8:  { done: true,  evidence: '' },
+          p9:  { done: false, evidence: '' },
+          p10: { done: false, evidence: '' },
+          p11: { done: false, evidence: 'Likert results 2.8/5.' },
+          p12: { done: true,  evidence: '' },
+        },
+      },
+    };
+
+    // Local engine — port of front-end-form-with-svelte/src/lib/engine.
+    function gradeScorecard(a) {
+      const items = [
+        ...['m1','m2','m3','m4'].map((k) => ({ key: k, group: 'manifesto' })),
+        ...['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12'].map((k) => ({ key: k, group: 'principles' })),
+      ];
+      let manifestoSubtotal = 0, principlesSubtotal = 0;
+      for (const it of items) {
+        const v = a[it.group]?.[it.key]?.done;
+        const pts = v === true ? 1 : 0;
+        if (it.group === 'manifesto') manifestoSubtotal += pts; else principlesSubtotal += pts;
+      }
+      const total = manifestoSubtotal + principlesSubtotal;
+      const band = total <= 4 ? 'low' : total === 5 ? 'borderline' : total <= 10 ? 'medium' : 'high';
+      const flags = [];
+      const m = a.manifesto || {}, p = a.principles || {};
+      if (m.m4?.done === false) flags.push({ category: 'no-senior-leadership-buyin', priority: 'high', description: 'No senior leader has read an agile change-management book and shared takeaways.', suggestedAction: 'Have every BoD/CXO/VP/Director read one agile change book and present three takeaways before procurement.' });
+      if (m.m1?.done === false || p.p1?.done === false) flags.push({ category: 'no-customer-contact', priority: 'high', description: 'Customer-contact gap: leaders are not in regular conversation with customers, or NPS is not measured.', suggestedAction: 'Establish weekly customer conversations for every product lead and stand up a basic NPS measurement.' });
+      if (m.m2?.done === false && p.p7?.done === false) flags.push({ category: 'no-working-software', priority: 'high', description: 'Neither "hello world" nor "fizz buzz" has been launched to production.', suggestedAction: 'Run the warm-up exercise: ship "hello world" then "fizz buzz" to production and discuss.' });
+      if (p.p8?.done === false) flags.push({ category: 'no-sustainable-budget', priority: 'medium', description: 'Less than 1 year of staff sustaining budget is secured.', suggestedAction: 'Secure a 1-year sustaining budget before engaging consultants, or scope the engagement to budget.' });
+      if (p.p11?.done === false) flags.push({ category: 'no-self-organization', priority: 'medium', description: 'Self-organization Likert average is below "Agree".', suggestedAction: 'Run a focused self-organization improvement initiative before hiring agile coaches.' });
+      if (p.p12?.done === false) flags.push({ category: 'no-reflection-culture', priority: 'medium', description: 'Leaders are not running or sharing retrospectives.', suggestedAction: 'Establish a regular leader-level retrospective cadence and require sharing the last two with stakeholders.' });
+      return { scoreTotal: total, manifestoSubtotal, principlesSubtotal, computedBand: band, additionalFlags: flags };
+    }
+
+    function escape(s) {
+      return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      })[c]);
+    }
+
+    function answerPill(v) {
+      if (v === true)  return '<span class="answer-pill answer-yes">YES</span>';
+      if (v === false) return '<span class="answer-pill answer-no">NO</span>';
+      return '<span class="answer-pill answer-unanswered">—</span>';
+    }
+
+    function renderReport(payload) {
+      const a = payload.assessment || payload;
+      const g = payload.grade || gradeScorecard(a);
+
+      const out = document.getElementById('report-output');
+      const items = ['m1','m2','m3','m4','p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12'];
+      const itemsHtml = items.map((k) => {
+        const group = k.startsWith('m') ? 'manifesto' : 'principles';
+        const it = a[group]?.[k] || {};
+        return `
+          <div class="item">
+            <div>${answerPill(it.done)}</div>
+            <div>
+              <div class="item-prompt">${escape(ITEM_LABELS[k])}</div>
+              ${it.evidence ? `<div class="item-evidence">${escape(it.evidence)}</div>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+
+      const flagsHtml = (g.additionalFlags || []).length === 0
+        ? '<p style="color:#22543d;">No readiness flags fired — the organization has not flagged any blocking gaps.</p>'
+        : g.additionalFlags.map((f) => `
+            <div class="flag priority-${escape(f.priority)}">
+              <div class="flag-cat">${escape(f.category)} <small style="color:#4a5568;">(${escape(f.priority)})</small></div>
+              <div>${escape(f.description)}</div>
+              ${f.suggestedAction ? `<div class="flag-action"><strong>Suggested action:</strong> ${escape(f.suggestedAction)}</div>` : ''}
+            </div>`).join('');
+
+      out.innerHTML = `
+        <section class="card">
+          <h2>Organization &amp; respondent</h2>
+          <dl class="kv">
+            <dt>Organization</dt><dd>${escape(a.organization?.organizationName || '—')}</dd>
+            <dt>Sector</dt>      <dd>${escape(a.organization?.sector || '—')}</dd>
+            <dt>Size band</dt>   <dd>${escape(a.organization?.sizeBand || '—')}</dd>
+            <dt>Country</dt>     <dd>${escape(a.organization?.country || '—')}</dd>
+            <dt>Respondent</dt>  <dd>${escape(a.respondent?.respondentName || '—')}</dd>
+            <dt>Email</dt>       <dd>${escape(a.respondent?.respondentEmail || '—')}</dd>
+            <dt>Role</dt>        <dd>${escape(a.respondent?.role || '—')}</dd>
+            <dt>Date</dt>        <dd>${escape(a.assessment?.assessmentDate || '—')}</dd>
+          </dl>
+        </section>
+
+        <section class="card">
+          <h2>Score &amp; readiness band</h2>
+          <div class="summary">
+            <div class="total-box"><div class="total-num">${g.scoreTotal}</div><div class="total-label">/ 16 total</div></div>
+            <div class="total-box"><div class="total-num">${g.manifestoSubtotal}</div><div class="total-label">/ 4 manifesto</div></div>
+            <div class="total-box"><div class="total-num">${g.principlesSubtotal}</div><div class="total-label">/ 12 principles</div></div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;">
+              <span class="band band-${escape(g.computedBand)}">${escape(g.computedBand)}</span>
+              <span class="recommendation">${escape(RECOMMENDATION[g.computedBand] || '')}</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Item-by-item answers</h2>
+          ${itemsHtml}
+        </section>
+
+        <section class="card">
+          <h2>Readiness flags</h2>
+          ${flagsHtml}
+        </section>
+
+        <div class="actions" style="display:flex;gap:0.5rem;">
+          <button type="button" onclick="window.print()">Print / save as PDF</button>
+        </div>
+      `;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('error');
+      el.textContent = msg;
+      el.hidden = false;
+    }
+    function clearError() { document.getElementById('error').hidden = true; }
+
+    function loadJsonText(text) {
+      try {
+        const data = JSON.parse(text);
+        clearError();
+        renderReport(data);
+      } catch (e) {
+        showError('Could not parse JSON: ' + e.message);
+      }
+    }
+
+    document.getElementById('file-input').addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const text = await file.text();
+      loadJsonText(text);
+    });
+    document.getElementById('paste-btn').addEventListener('click', () => {
+      document.getElementById('paste-area').hidden = false;
+    });
+    document.getElementById('paste-load-btn').addEventListener('click', () => {
+      loadJsonText(document.getElementById('paste-text').value);
+    });
+    document.getElementById('sample-btn').addEventListener('click', () => {
+      clearError();
+      renderReport(SAMPLE);
+    });
+  </script>
+</body>
+</html>

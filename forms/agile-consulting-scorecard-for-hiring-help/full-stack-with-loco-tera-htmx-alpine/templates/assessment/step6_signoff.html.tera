@@ -1,0 +1,10 @@
+<fieldset class="wizard-step" x-show="step === 6">
+  <legend>Step 6 — Score &amp; sign-off</legend>
+  <p>
+    Submit to score this assessment, persist it, and view the report.
+    The total and band are computed server-side.
+  </p>
+  <label>Signed by (optional)
+    <input type="text" name="signed_by">
+  </label>
+</fieldset>

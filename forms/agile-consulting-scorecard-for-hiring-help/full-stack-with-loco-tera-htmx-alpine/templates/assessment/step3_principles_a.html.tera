@@ -1,0 +1,8 @@
+{% import "assessment/_macros.html.tera" as m %}
+<fieldset class="wizard-step" x-show="step === 3">
+  <legend>Step 3 — Principles 1–4</legend>
+  {{ m::item(key="p1", heading="Principle 1 — Customer satisfaction", prompt="Every product lead measures customer Net Promoter Score (NPS).") }}
+  {{ m::item(key="p2", heading="Principle 2 — Welcome changing requirements", prompt='The "hello world" program has been internationalized to ≥ 1 additional language using the user locale.') }}
+  {{ m::item(key="p3", heading="Principle 3 — Deliver frequently", prompt='The internationalized "hello world" version has been launched to production and verified by a native speaker.') }}
+  {{ m::item(key="p4", heading="Principle 4 — Business and developers together", prompt="Commitment is in place from every product / project / programme / practice lead.") }}
+</fieldset>

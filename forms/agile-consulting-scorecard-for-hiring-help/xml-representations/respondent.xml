@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE respondent SYSTEM "respondent.dtd">
+<respondent>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<organization_id>550e8400-e29b-41d4-a716-446655440000</organization_id>
+<name>Example</name>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<role>board-member</role>
+<department></department>
+<seniority>board</seniority>
+<timezone></timezone>
+<preferred_contact>email</preferred_contact>
+</respondent>

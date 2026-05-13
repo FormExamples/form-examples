@@ -1,0 +1,224 @@
+/* Agile Consulting Scorecard — base styles for the Tera-rendered HTML.
+ * Loaded by templates/base.html.tera. */
+
+:root {
+  --color-band-low: #fed7d7;
+  --color-band-low-text: #742a2a;
+  --color-band-borderline: #fefcbf;
+  --color-band-borderline-text: #744210;
+  --color-band-medium: #bee3f8;
+  --color-band-medium-text: #2a4365;
+  --color-band-high: #c6f6d5;
+  --color-band-high-text: #22543d;
+  --color-primary: #4299e1;
+  --color-primary-dark: #2b6cb0;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: #1a202c;
+  background: #f7fafc;
+  line-height: 1.5;
+}
+
+header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+header h1 { font-size: 1.4rem; margin: 0; }
+header nav a { margin-left: 0.75rem; color: var(--color-primary-dark); text-decoration: none; }
+header nav a:hover { text-decoration: underline; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #cbd5e0; color: #4a5568; font-size: 0.875rem; }
+
+main { margin-top: 1rem; }
+.subtitle { color: #4a5568; }
+
+/* ───────── buttons + bands ───────── */
+
+.btn, button {
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-secondary, button.secondary {
+  background: white;
+  color: var(--color-primary-dark);
+}
+.btn-primary { background: var(--color-primary); color: white; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.band {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.band-low        { background: var(--color-band-low);        color: var(--color-band-low-text); }
+.band-borderline { background: var(--color-band-borderline); color: var(--color-band-borderline-text); }
+.band-medium     { background: var(--color-band-medium);     color: var(--color-band-medium-text); }
+.band-high       { background: var(--color-band-high);       color: var(--color-band-high-text); }
+
+/* ───────── landing ───────── */
+
+.hero { padding: 1.5rem 0; }
+.hero h2 { margin: 0; font-size: 1.6rem; }
+.hero p.actions { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+.band-explainer { margin-top: 1.5rem; }
+.band-explainer ul { list-style: none; padding: 0; }
+.band-explainer li { padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem; }
+.api-pointer { margin-top: 1.5rem; padding: 1rem; background: #ebf8ff; border: 1px solid #bee3f8; border-radius: 6px; }
+
+/* ───────── dashboard ───────── */
+
+.filters form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  margin: 0 0 1rem;
+}
+.filters label { display: flex; flex-direction: column; font-size: 0.8rem; color: #4a5568; }
+.filters select, .filters input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font: inherit;
+  min-width: 9rem;
+}
+
+.scorecard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+.scorecard-table th, .scorecard-table td { padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+.scorecard-table thead th {
+  background: #edf2f7;
+  font-weight: 600;
+  border-bottom: 1px solid #cbd5e0;
+}
+.scorecard-table tbody tr { border-bottom: 1px solid #edf2f7; }
+.scorecard-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.scorecard-table .empty { color: #4a5568; text-align: center; padding: 1rem; font-style: italic; }
+.scorecard-table a { color: var(--color-primary-dark); text-decoration: none; }
+.scorecard-table a:hover { text-decoration: underline; }
+
+/* ───────── report ───────── */
+
+.report-header { margin: 1rem 0; }
+.report-card {
+  background: white;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1rem;
+}
+.report-card h3 { margin: 0 0 0.5rem; }
+.kv { display: grid; grid-template-columns: 12rem 1fr; gap: 0.4rem 1rem; margin: 0; }
+.kv dt { color: #4a5568; font-weight: 500; }
+.kv dd { margin: 0; }
+.score-summary { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.stat {
+  text-align: center;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+}
+.stat-num { font-size: 2rem; font-weight: 700; line-height: 1; }
+.stat-label { color: #4a5568; font-size: 0.8rem; }
+.band-wrap { margin-left: auto; display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-end; }
+.recommendation { font-weight: 500; margin: 0; }
+.flag-list { list-style: none; padding: 0; margin: 0; }
+.flag-list .flag {
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid #c53030;
+  background: #fff5f5;
+  border-radius: 4px;
+  margin: 0 0 0.5rem;
+}
+.flag-list .flag-priority-medium { border-left-color: #d69e2e; background: #fffff0; }
+.flag-list .flag-priority-low    { border-left-color: var(--color-primary); background: #ebf8ff; }
+.flag-list .priority { color: #4a5568; font-size: 0.8rem; }
+.recommendation-list { padding-left: 1.4rem; }
+.rec-heading { font-weight: 600; }
+.rec-intervention { margin-top: 0.15rem; }
+.rec-rationale { color: #4a5568; font-size: 0.85rem; margin-top: 0.15rem; }
+.empty { color: #4a5568; font-style: italic; }
+
+/* ───────── wizard ───────── */
+
+.wizard-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0.5rem 0 1rem;
+}
+.progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.2s ease;
+}
+.wizard-form { display: flex; flex-direction: column; gap: 1rem; }
+.wizard-step {
+  background: white;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.wizard-step legend { font-weight: 600; padding: 0 0.5rem; color: #2d3748; }
+.wizard-step label { display: block; margin-top: 0.75rem; font-weight: 500; }
+.wizard-step input[type="text"],
+.wizard-step input[type="email"],
+.wizard-step input[type="date"],
+.wizard-step select,
+.wizard-step textarea {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font: inherit;
+  margin-top: 0.2rem;
+}
+.checklist-item {
+  border-top: 1px solid #edf2f7;
+  padding: 0.75rem 0;
+}
+.checklist-item:first-of-type { border-top: 0; }
+.checklist-item h4 { margin: 0; font-size: 1rem; }
+.checklist-item .prompt { color: #4a5568; margin: 0.3rem 0 0.5rem; }
+.answer-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.answer-row label { font-weight: normal; display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0; }
+.evidence-label { display: block; font-size: 0.85rem; color: #4a5568; margin-top: 0.5rem; }
+.wizard-nav {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid #cbd5e0;
+}

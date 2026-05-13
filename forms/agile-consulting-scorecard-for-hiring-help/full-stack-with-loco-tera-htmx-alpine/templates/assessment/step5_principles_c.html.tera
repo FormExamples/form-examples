@@ -1,0 +1,8 @@
+{% import "assessment/_macros.html.tera" as m %}
+<fieldset class="wizard-step" x-show="step === 5">
+  <legend>Step 5 — Principles 9–12</legend>
+  {{ m::item(key="p9", heading="Principle 9 — Technical excellence and good design", prompt="Quality-attribute metrics are wired into pre-commit hooks and continuous integration.") }}
+  {{ m::item(key="p10", heading="Principle 10 — Simplicity", prompt="Every product team has ≥ 2 people with process-improvement skills (Lean / Six Sigma / VSM / TPS / TPC).") }}
+  {{ m::item(key="p11", heading="Principle 11 — Self-organizing teams", prompt='A 5-point Likert "our team is self-organizing" averages "Agree" or better.') }}
+  {{ m::item(key="p12", heading="Principle 12 — Reflection at regular intervals", prompt="Every leader has shared their previous 2 retrospectives with all stakeholders.") }}
+</fieldset>

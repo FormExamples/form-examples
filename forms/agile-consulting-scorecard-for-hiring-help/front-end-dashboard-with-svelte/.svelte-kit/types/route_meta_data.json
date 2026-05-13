@@ -1,0 +1,14 @@
+{
+	"/": [],
+	"/api/dashboard/scorecards": [
+		"src/routes/api/dashboard/scorecards/+server.ts"
+	],
+	"/api/scorecards/[id]": [
+		"src/routes/api/scorecards/[id]/+server.ts"
+	],
+	"/api/stats": [
+		"src/routes/api/stats/+server.ts"
+	],
+	"/import": [],
+	"/report/[id]": []
+}

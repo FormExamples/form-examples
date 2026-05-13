@@ -1,0 +1,178 @@
+{
+  "scoreTotal": 9,
+  "manifestoSubtotal": 3,
+  "principlesSubtotal": 6,
+  "computedBand": "medium",
+  "recommendation": "do-homework-first",
+  "firedRules": [
+    {
+      "ruleId": "R-MANIFESTO-1",
+      "instrument": "manifesto",
+      "itemNumber": 1,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "individuals-and-interactions",
+      "description": "Every leader is in conversation with customers >=1 hour per week, with weekly results radiated to stakeholders."
+    },
+    {
+      "ruleId": "R-MANIFESTO-2",
+      "instrument": "manifesto",
+      "itemNumber": 2,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "working-software",
+      "description": "The team has launched a brand-new \"hello world\" program to production and discussed the experience."
+    },
+    {
+      "ruleId": "R-MANIFESTO-3",
+      "instrument": "manifesto",
+      "itemNumber": 3,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "customer-collaboration",
+      "description": "The organization has bought copies of the customer's favourite book and shared with the team (org spend, not personal)."
+    },
+    {
+      "ruleId": "R-MANIFESTO-4",
+      "instrument": "manifesto",
+      "itemNumber": 4,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "responding-to-change",
+      "description": "Every senior leader (BoD/CXO/VP/Dir) has read one agile change-management book and shared three takeaways."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-1",
+      "instrument": "principles",
+      "itemNumber": 5,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "customer-satisfaction",
+      "description": "Every product lead measures customer Net Promoter Score (NPS)."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-2",
+      "instrument": "principles",
+      "itemNumber": 6,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "welcome-changing-requirements",
+      "description": "The \"hello world\" program has been internationalized to >=1 additional language using the user locale."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-3",
+      "instrument": "principles",
+      "itemNumber": 7,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "deliver-frequently",
+      "description": "The internationalized \"hello world\" version has been launched to production and verified by a native speaker."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-4",
+      "instrument": "principles",
+      "itemNumber": 8,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "business-and-developers-together",
+      "description": "Commitment is in place from every product / project / programme / practice lead."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-5",
+      "instrument": "principles",
+      "itemNumber": 9,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "motivated-individuals",
+      "description": "A 3-amigos team (business + dev + test) has shipped a real new MVP within 30 days and on budget."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-6",
+      "instrument": "principles",
+      "itemNumber": 10,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "face-to-face",
+      "description": "Every product owner has committed to >=50% face-to-face time (or weekly-video equivalent for remote teams)."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-7",
+      "instrument": "principles",
+      "itemNumber": 11,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "working-software-is-primary-measure",
+      "description": "A new \"fizz buzz\" program has been created and shipped to production."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-8",
+      "instrument": "principles",
+      "itemNumber": 12,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "sustainable-pace",
+      "description": "All staff have a sustaining budget for >=1 year secured."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-9",
+      "instrument": "principles",
+      "itemNumber": 13,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "technical-excellence",
+      "description": "Quality-attribute metrics are wired into pre-commit hooks and continuous integration."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-10",
+      "instrument": "principles",
+      "itemNumber": 14,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "simplicity",
+      "description": "Every product team has >=2 people with process-improvement skills (Lean / Six Sigma / VSM / TPS / TPC)."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-11",
+      "instrument": "principles",
+      "itemNumber": 15,
+      "grade": "no",
+      "pointsAwarded": 0,
+      "category": "self-organizing-teams",
+      "description": "A 5-point Likert \"our team is self-organizing\" averages \"Agree\" or better."
+    },
+    {
+      "ruleId": "R-PRINCIPLES-12",
+      "instrument": "principles",
+      "itemNumber": 16,
+      "grade": "yes",
+      "pointsAwarded": 1,
+      "category": "reflection",
+      "description": "Every leader has shared their previous 2 retrospectives with all stakeholders."
+    },
+    {
+      "ruleId": "R-COMPOSITE-MEDIUM",
+      "instrument": "composite",
+      "itemNumber": null,
+      "grade": "medium",
+      "pointsAwarded": 0,
+      "category": "composite",
+      "description": "Total 9/16 places the organization in the \"medium\" readiness band."
+    }
+  ],
+  "additionalFlags": [
+    {
+      "flagId": "F-NO-CUSTOMER-CONTACT-001",
+      "category": "no-customer-contact",
+      "priority": "high",
+      "description": "Customer-contact gap: leaders are not in regular conversation with customers, or NPS is not measured.",
+      "suggestedAction": "Establish weekly customer conversations for every product lead and stand up a basic NPS measurement."
+    },
+    {
+      "flagId": "F-NO-SELF-ORGANIZATION-001",
+      "category": "no-self-organization",
+      "priority": "medium",
+      "description": "Principle 11 not satisfied: self-organization Likert average is below \"Agree\".",
+      "suggestedAction": "Run a focused self-organization improvement initiative (e.g. The Vanguard Method) before hiring agile coaches."
+    }
+  ]
+}

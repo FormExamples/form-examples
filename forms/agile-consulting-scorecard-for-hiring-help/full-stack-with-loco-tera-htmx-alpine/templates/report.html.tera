@@ -1,0 +1,84 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Scorecard {{ row.id }} — Agile Consulting Scorecard{% endblock %}
+
+{% block content %}
+<section class="report-header">
+  <h2>Scorecard {{ row.id }}</h2>
+  <p>
+    <a href="/dashboard">← Back to dashboard</a>
+  </p>
+</section>
+
+<section class="report-card">
+  <h3>Organization &amp; respondent</h3>
+  <dl class="kv">
+    <dt>Organization</dt><dd>{{ row.organization_name | default(value="—") }}</dd>
+    <dt>Sector</dt><dd>{{ row.sector | default(value="—") }}</dd>
+    <dt>Size band</dt><dd>{{ row.size_band | default(value="—") }}</dd>
+    <dt>Respondent</dt><dd>{{ row.respondent_name | default(value="—") }}</dd>
+    <dt>Assessment date</dt><dd>{{ row.assessment_date | default(value="—") }}</dd>
+  </dl>
+</section>
+
+<section class="report-card">
+  <h3>Score &amp; readiness band</h3>
+  <div class="score-summary">
+    <div class="stat">
+      <div class="stat-num">{{ row.score_total }}</div>
+      <div class="stat-label">/ 16 total</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">{{ row.manifesto_subtotal }}</div>
+      <div class="stat-label">/ 4 manifesto</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">{{ row.principles_subtotal }}</div>
+      <div class="stat-label">/ 12 principles</div>
+    </div>
+    <div class="band-wrap">
+      <span class="band band-{{ row.computed_band }}">{{ row.computed_band }}</span>
+      <p class="recommendation">{{ recommendation_copy }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="report-card">
+  <h3>Readiness flags</h3>
+  {% if row.flags | length == 0 %}
+    <p class="empty">No flags fired.</p>
+  {% else %}
+    <ul class="flag-list">
+      {% for f in row.flags %}
+        <li class="flag flag-priority-{{ f.priority }}">
+          <strong>{{ f.category }}</strong>
+          <span class="priority">({{ f.priority }})</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>
+
+{% if recommended_actions and recommended_actions | length > 0 %}
+<section class="report-card">
+  <h3>Recommended next actions</h3>
+  <ol class="recommendation-list">
+    {% for a in recommended_actions %}
+      <li>
+        <div class="rec-heading">{{ a.heading }}</div>
+        <div class="rec-intervention">{{ a.intervention }}</div>
+        <div class="rec-rationale"><em>Why:</em> {{ a.rationale }}</div>
+      </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+<section class="report-card">
+  <h3>JSON exports</h3>
+  <ul>
+    <li><a href="/api/scorecards/{{ row.id }}">/api/scorecards/{{ row.id }}</a> — dashboard row</li>
+    <li><a href="/scorecard/{{ row.id }}/pre-tender">/scorecard/{{ row.id }}/pre-tender</a> — redacted vendor-facing summary</li>
+  </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Reviewer dashboard — Agile Consulting Scorecard{% endblock %}
+
+{% block content %}
+<section class="dashboard-header">
+  <h2>Reviewer dashboard</h2>
+  <p class="subtitle">
+    {{ total }} scorecard{{ total | pluralize }} on record.
+    Sort and filter to identify organizations ready to engage external agile
+    consultants and those that should do their homework first.
+  </p>
+</section>
+
+<section class="filters">
+  <form
+    method="get"
+    action="/dashboard"
+    hx-get="/dashboard/table"
+    hx-trigger="change, keyup changed delay:300ms"
+    hx-target="#scorecard-table"
+    hx-swap="outerHTML"
+    hx-push-url="false"
+  >
+    <label>
+      Band
+      <select name="band">
+        <option value="" {% if band == "" %}selected{% endif %}>all bands</option>
+        <option value="low" {% if band == "low" %}selected{% endif %}>low</option>
+        <option value="borderline" {% if band == "borderline" %}selected{% endif %}>borderline</option>
+        <option value="medium" {% if band == "medium" %}selected{% endif %}>medium</option>
+        <option value="high" {% if band == "high" %}selected{% endif %}>high</option>
+      </select>
+    </label>
+    <label>
+      Sector
+      <select name="sector">
+        <option value="" {% if sector == "" %}selected{% endif %}>all sectors</option>
+        {% for s in sectors %}
+          <option value="{{ s }}" {% if s == sector %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      Search
+      <input
+        type="search"
+        name="search"
+        value="{{ search }}"
+        placeholder="organization name"
+        autocomplete="off"
+      >
+    </label>
+    <button type="submit">Apply</button>
+  </form>
+</section>
+
+{% include "_scorecard_table.html.tera" %}
+{% endblock %}

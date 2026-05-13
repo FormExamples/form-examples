@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bin/test-form agile-consulting-scorecard-for-hiring-help *)",
+      "Bash(python3 bin/xml-representations/generate-xml-representations.py forms/agile-consulting-scorecard-for-hiring-help)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py forms/agile-consulting-scorecard-for-hiring-help)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm test *)",
+      "Bash(cargo build *)",
+      "Bash(cargo test *)",
+      "Bash(:)",
+      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/agile-consulting-scorecard-for-hiring-help/full-stack-with-loco-tera-htmx-alpine-setup)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const c=fs.readFileSync\\('index.html','utf8'\\);console.log\\('size:',c.length,'chars'\\);console.log\\('items found:',\\(c.match\\(/key:.'\\(m\\\\d|p\\\\d{1,2}\\)'/g\\)||[]\\).length\\);\")",
+      "Bash(node *)",
+      "Bash(cargo run *)",
+      "Read(//tmp/**)",
+      "Bash(cp /tmp/sample-input.json /Users/jph/git/formexamples/form-examples/forms/agile-consulting-scorecard-for-hiring-help/samples/sample-assessment.json)",
+      "Bash(cp /tmp/sample-grade.json /Users/jph/git/formexamples/form-examples/forms/agile-consulting-scorecard-for-hiring-help/samples/sample-grade.json)",
+      "Bash(pnpm run *)"
+    ]
+  }
+}

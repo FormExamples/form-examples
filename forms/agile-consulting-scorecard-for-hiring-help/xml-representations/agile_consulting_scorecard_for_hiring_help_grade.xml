@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agile_consulting_scorecard_for_hiring_help_grade SYSTEM "agile_consulting_scorecard_for_hiring_help_grade.dtd">
+<agile_consulting_scorecard_for_hiring_help_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<agile_consulting_scorecard_id>660e8400-e29b-41d4-a716-446655440001</agile_consulting_scorecard_id>
+<score_total>5</score_total>
+<manifesto_subtotal>1</manifesto_subtotal>
+<principles_subtotal>1</principles_subtotal>
+<computed_band>low</computed_band>
+<final_band>low</final_band>
+<override_reason>Example text.</override_reason>
+<recommendation>do-not-hire-yet</recommendation>
+<recommended_focus_areas></recommended_focus_areas>
+<review_notes>Example text.</review_notes>
+<signed_by></signed_by>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</agile_consulting_scorecard_for_hiring_help_grade>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Agile Consulting Scorecard — Reviewer Dashboard</title>
+  <meta name="description" content="Reviewer dashboard for submitted agile-consulting readiness scorecards.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+      color: #1a202c;
+      background: #f7fafc;
+      line-height: 1.4;
+    }
+    h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
+    .subtitle { margin: 0 0 1.25rem; color: #4a5568; }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: end;
+      margin: 0 0 1rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+    }
+    .filters label { display: flex; flex-direction: column; font-size: 0.85rem; color: #4a5568; }
+    .filters select,
+    .filters input {
+      padding: 0.35rem 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      font: inherit;
+      min-width: 8rem;
+    }
+    .meta { margin-left: auto; align-self: end; color: #4a5568; font-size: 0.875rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 0.9rem;
+    }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+    thead th {
+      background: #edf2f7;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid #cbd5e0;
+      white-space: nowrap;
+    }
+    thead th:hover { background: #e2e8f0; }
+    thead th .arrow { color: #a0aec0; font-size: 0.75rem; }
+    tbody tr { border-bottom: 1px solid #edf2f7; }
+    tbody tr:hover { background: #f7fafc; cursor: pointer; }
+
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .band {
+      display: inline-block;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .band-low        { background: #fed7d7; color: #742a2a; }
+    .band-borderline { background: #fefcbf; color: #744210; }
+    .band-medium     { background: #bee3f8; color: #2a4365; }
+    .band-high       { background: #c6f6d5; color: #22543d; }
+
+    .flag-pill {
+      display: inline-block;
+      padding: 0 0.4rem;
+      border-radius: 4px;
+      background: #fed7d7;
+      color: #742a2a;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .flag-pill.zero { background: #c6f6d5; color: #22543d; }
+
+    details.row-details summary { cursor: pointer; }
+    details.row-details[open] {
+      background: #f7fafc;
+      padding: 0.5rem 0.75rem;
+      border-left: 3px solid #4299e1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Agile Consulting Scorecard — Reviewer Dashboard</h1>
+  <p class="subtitle">
+    Aggregate view of submitted scorecards. Filter and sort to identify
+    organizations ready to engage external agile consultants and those
+    that should do their homework first.
+  </p>
+
+  <div class="filters">
+    <label>Band
+      <select id="filter-band">
+        <option value="">— all —</option>
+        <option value="low">low</option>
+        <option value="borderline">borderline</option>
+        <option value="medium">medium</option>
+        <option value="high">high</option>
+      </select>
+    </label>
+    <label>Sector
+      <select id="filter-sector"><option value="">— all —</option></select>
+    </label>
+    <label>Size
+      <select id="filter-size">
+        <option value="">— all —</option>
+        <option>micro</option>
+        <option>small</option>
+        <option>medium</option>
+        <option>large</option>
+        <option>enterprise</option>
+      </select>
+    </label>
+    <label>Search
+      <input id="filter-search" type="search" placeholder="organization or respondent">
+    </label>
+    <span class="meta" id="result-count">0 / 0</span>
+  </div>
+
+  <table id="scorecard-table">
+    <thead>
+      <tr>
+        <th data-sort="organizationName">Organization <span class="arrow"></span></th>
+        <th data-sort="sector">Sector <span class="arrow"></span></th>
+        <th data-sort="sizeBand">Size <span class="arrow"></span></th>
+        <th data-sort="respondentName">Respondent <span class="arrow"></span></th>
+        <th data-sort="assessmentDate">Date <span class="arrow"></span></th>
+        <th data-sort="scoreTotal" class="num">Score <span class="arrow"></span></th>
+        <th data-sort="manifestoSubtotal" class="num">Mfst <span class="arrow"></span></th>
+        <th data-sort="principlesSubtotal" class="num">Prin <span class="arrow"></span></th>
+        <th data-sort="band">Band <span class="arrow"></span></th>
+        <th data-sort="flagsCount" class="num">Flags <span class="arrow"></span></th>
+        <th data-sort="recommendation">Recommendation <span class="arrow"></span></th>
+      </tr>
+    </thead>
+    <tbody id="scorecard-body"></tbody>
+  </table>
+
+  <script>
+    'use strict';
+
+    // Inline sample data — twelve representative scorecards spanning all
+    // four bands. Substituted for the backend API call when running the
+    // dashboard standalone.
+    const SAMPLE = [
+      { id: 's-001', organizationName: 'NHS Acute Trust', sector: 'healthcare',         sizeBand: 'enterprise', respondentName: 'Asha Patel',        assessmentDate: '2026-04-12', scoreTotal: 14, manifestoSubtotal: 4, principlesSubtotal: 10, computedBand: 'high',       flags: [] },
+      { id: 's-002', organizationName: 'Ada Insurance',   sector: 'insurance',          sizeBand: 'large',      respondentName: 'Ben Okafor',        assessmentDate: '2026-04-15', scoreTotal: 12, manifestoSubtotal: 4, principlesSubtotal:  8, computedBand: 'high',       flags: [{ category: 'no-self-organization', priority: 'medium' }] },
+      { id: 's-003', organizationName: 'Pharos Pharma',   sector: 'pharmaceuticals',    sizeBand: 'enterprise', respondentName: 'Chiara Rossi',      assessmentDate: '2026-04-18', scoreTotal:  9, manifestoSubtotal: 3, principlesSubtotal:  6, computedBand: 'medium',     flags: [{ category: 'no-customer-contact', priority: 'high' }] },
+      { id: 's-004', organizationName: 'Helix Medtech',   sector: 'medtech',            sizeBand: 'medium',     respondentName: 'David Kim',         assessmentDate: '2026-04-19', scoreTotal:  8, manifestoSubtotal: 2, principlesSubtotal:  6, computedBand: 'medium',     flags: [] },
+      { id: 's-005', organizationName: 'Fjord Energy',    sector: 'energy',             sizeBand: 'large',      respondentName: 'Eira Jones',        assessmentDate: '2026-04-22', scoreTotal:  7, manifestoSubtotal: 2, principlesSubtotal:  5, computedBand: 'medium',     flags: [{ category: 'no-sustainable-budget', priority: 'medium' }] },
+      { id: 's-006', organizationName: 'Tenby Council',   sector: 'public-sector',      sizeBand: 'large',      respondentName: 'Ffion Davies',      assessmentDate: '2026-04-23', scoreTotal:  6, manifestoSubtotal: 2, principlesSubtotal:  4, computedBand: 'medium',     flags: [{ category: 'no-reflection-culture', priority: 'medium' }] },
+      { id: 's-007', organizationName: 'Mainline Retail', sector: 'retail',             sizeBand: 'enterprise', respondentName: 'Grace Hofstadter',  assessmentDate: '2026-04-24', scoreTotal:  5, manifestoSubtotal: 2, principlesSubtotal:  3, computedBand: 'borderline', flags: [{ category: 'no-self-organization', priority: 'medium' }, { category: 'no-reflection-culture', priority: 'medium' }] },
+      { id: 's-008', organizationName: 'Crescent Charity', sector: 'charity',            sizeBand: 'small',      respondentName: 'Hari Singh',        assessmentDate: '2026-04-25', scoreTotal:  4, manifestoSubtotal: 1, principlesSubtotal:  3, computedBand: 'low',        flags: [{ category: 'no-senior-leadership-buyin', priority: 'high' }] },
+      { id: 's-009', organizationName: 'Apex Logistics',  sector: 'logistics',          sizeBand: 'medium',     respondentName: 'Iris Larsson',      assessmentDate: '2026-04-26', scoreTotal:  3, manifestoSubtotal: 1, principlesSubtotal:  2, computedBand: 'low',        flags: [{ category: 'no-customer-contact', priority: 'high' }, { category: 'no-working-software', priority: 'high' }] },
+      { id: 's-010', organizationName: 'Lyceum School',   sector: 'education',          sizeBand: 'small',      respondentName: 'Joon Park',         assessmentDate: '2026-04-27', scoreTotal:  2, manifestoSubtotal: 0, principlesSubtotal:  2, computedBand: 'low',        flags: [{ category: 'no-senior-leadership-buyin', priority: 'high' }, { category: 'no-customer-contact', priority: 'high' }] },
+      { id: 's-011', organizationName: 'Gala Telecom',    sector: 'telecommunications', sizeBand: 'enterprise', respondentName: 'Kemi Adeyemi',      assessmentDate: '2026-04-28', scoreTotal: 11, manifestoSubtotal: 4, principlesSubtotal:  7, computedBand: 'high',       flags: [] },
+      { id: 's-012', organizationName: 'Northwood Bank',  sector: 'finance',            sizeBand: 'enterprise', respondentName: 'Lior Stein',        assessmentDate: '2026-04-29', scoreTotal: 10, manifestoSubtotal: 3, principlesSubtotal:  7, computedBand: 'medium',     flags: [{ category: 'no-self-organization', priority: 'medium' }] },
+    ];
+
+    const RECOMMENDATION = {
+      low:        "do-not-hire-yet",
+      borderline: "do-homework-first",
+      medium:     "do-homework-first",
+      high:       "trial-engagement",
+    };
+
+    const tableBody = document.getElementById('scorecard-body');
+    const sectorFilter = document.getElementById('filter-sector');
+    const bandFilter = document.getElementById('filter-band');
+    const sizeFilter = document.getElementById('filter-size');
+    const searchFilter = document.getElementById('filter-search');
+    const resultCount = document.getElementById('result-count');
+
+    let sortKey = 'scoreTotal';
+    let sortDir = -1; // -1 desc, +1 asc
+
+    function populateSectorFilter() {
+      const sectors = Array.from(new Set(SAMPLE.map((r) => r.sector))).sort();
+      for (const s of sectors) {
+        const opt = document.createElement('option');
+        opt.value = s; opt.textContent = s;
+        sectorFilter.appendChild(opt);
+      }
+    }
+
+    function annotate(row) {
+      return {
+        ...row,
+        flagsCount: row.flags.length,
+        band: row.computedBand,
+        recommendation: RECOMMENDATION[row.computedBand] || '',
+      };
+    }
+
+    function render() {
+      const band = bandFilter.value;
+      const sector = sectorFilter.value;
+      const size = sizeFilter.value;
+      const q = searchFilter.value.trim().toLowerCase();
+
+      const rows = SAMPLE.map(annotate).filter((r) => {
+        if (band && r.band !== band) return false;
+        if (sector && r.sector !== sector) return false;
+        if (size && r.sizeBand !== size) return false;
+        if (q) {
+          const blob = (r.organizationName + ' ' + r.respondentName).toLowerCase();
+          if (!blob.includes(q)) return false;
+        }
+        return true;
+      });
+
+      rows.sort((a, b) => {
+        const av = a[sortKey];
+        const bv = b[sortKey];
+        if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * sortDir;
+        return String(av).localeCompare(String(bv)) * sortDir;
+      });
+
+      tableBody.innerHTML = '';
+      for (const r of rows) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escape(r.organizationName)}</td>
+          <td>${escape(r.sector)}</td>
+          <td>${escape(r.sizeBand)}</td>
+          <td>${escape(r.respondentName)}</td>
+          <td>${escape(r.assessmentDate)}</td>
+          <td class="num">${r.scoreTotal} / 16</td>
+          <td class="num">${r.manifestoSubtotal} / 4</td>
+          <td class="num">${r.principlesSubtotal} / 12</td>
+          <td><span class="band band-${r.band}">${r.band}</span></td>
+          <td class="num"><span class="flag-pill ${r.flagsCount === 0 ? 'zero' : ''}">${r.flagsCount}</span></td>
+          <td>${escape(r.recommendation)}</td>`;
+        tr.addEventListener('click', () => toggleRowDetails(tr, r));
+        tableBody.appendChild(tr);
+      }
+
+      resultCount.textContent = `${rows.length} / ${SAMPLE.length}`;
+
+      // refresh sort arrows
+      document.querySelectorAll('thead th[data-sort]').forEach((th) => {
+        const arrow = th.querySelector('.arrow');
+        if (th.dataset.sort === sortKey) {
+          arrow.textContent = sortDir === 1 ? '▲' : '▼';
+        } else {
+          arrow.textContent = '';
+        }
+      });
+    }
+
+    function toggleRowDetails(tr, r) {
+      const next = tr.nextElementSibling;
+      if (next && next.classList.contains('details-row')) {
+        next.remove();
+        return;
+      }
+      const detail = document.createElement('tr');
+      detail.classList.add('details-row');
+      const flagsHtml = r.flags.length === 0
+        ? '<em>(no flags)</em>'
+        : '<ul style="margin:0;padding-left:1.2rem;">' +
+          r.flags.map((f) => `<li><strong>${escape(f.category)}</strong> — ${escape(f.priority)}</li>`).join('') +
+          '</ul>';
+      detail.innerHTML = `
+        <td colspan="11">
+          <details class="row-details" open>
+            <summary>${escape(r.organizationName)} — readiness flags</summary>
+            ${flagsHtml}
+          </details>
+        </td>`;
+      tr.after(detail);
+    }
+
+    function escape(s) {
+      return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      })[c]);
+    }
+
+    document.querySelectorAll('thead th[data-sort]').forEach((th) => {
+      th.addEventListener('click', () => {
+        const k = th.dataset.sort;
+        if (k === sortKey) sortDir = -sortDir;
+        else { sortKey = k; sortDir = -1; }
+        render();
+      });
+    });
+    [bandFilter, sectorFilter, sizeFilter, searchFilter].forEach((el) => {
+      el.addEventListener('input', render);
+      el.addEventListener('change', render);
+    });
+
+    populateSectorFilter();
+    render();
+  </script>
+</body>
+</html>

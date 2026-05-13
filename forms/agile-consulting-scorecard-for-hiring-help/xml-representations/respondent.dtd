@@ -1,0 +1,14 @@
+<!ELEMENT respondent (id,created_at,updated_at,deleted_at,organization_id,name,email,phone,role,department,seniority,timezone,preferred_contact)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT organization_id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT department (#PCDATA)>
+<!ELEMENT seniority (#PCDATA)>
+<!ELEMENT timezone (#PCDATA)>
+<!ELEMENT preferred_contact (#PCDATA)>

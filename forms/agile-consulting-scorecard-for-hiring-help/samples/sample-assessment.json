@@ -1,0 +1,43 @@
+{
+  "organization": {
+    "organizationName": "Pharos Pharma",
+    "legalName": "Pharos Pharma Ltd",
+    "sector": "pharmaceuticals",
+    "sizeBand": "enterprise",
+    "headcount": 4200,
+    "country": "GB",
+    "region": "London",
+    "website": "https://pharos.example"
+  },
+  "respondent": {
+    "respondentName": "Chiara Rossi",
+    "respondentEmail": "chiara.rossi@pharos.example",
+    "respondentPhone": "",
+    "role": "transformation-lead",
+    "department": "Strategy",
+    "seniority": "senior-leader",
+    "timezone": "Europe/London",
+    "preferredContact": "email"
+  },
+  "assessment": { "assessmentDate": "2026-04-18", "status": "submitted" },
+  "manifesto": {
+    "m1": { "done": true,  "evidence": "Weekly customer roundtables since 2025-Q3." },
+    "m2": { "done": true,  "evidence": "Hello-world program shipped 2025-11." },
+    "m3": { "done": false, "evidence": "Planned for 2026-Q3." },
+    "m4": { "done": true,  "evidence": "CXOs read Kotter, shared takeaways at all-hands." }
+  },
+  "principles": {
+    "p1":  { "done": false, "evidence": "NPS programme not yet adopted." },
+    "p2":  { "done": true,  "evidence": "i18n done in 2026-Q1." },
+    "p3":  { "done": true,  "evidence": "Internationalised version live." },
+    "p4":  { "done": true,  "evidence": "" },
+    "p5":  { "done": false, "evidence": "No 3-amigos exercise yet." },
+    "p6":  { "done": true,  "evidence": "" },
+    "p7":  { "done": false, "evidence": "Fizz-buzz program not yet shipped." },
+    "p8":  { "done": true,  "evidence": "" },
+    "p9":  { "done": false, "evidence": "" },
+    "p10": { "done": false, "evidence": "" },
+    "p11": { "done": false, "evidence": "Likert results 2.8/5." },
+    "p12": { "done": true,  "evidence": "" }
+  }
+}

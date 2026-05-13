@@ -1,0 +1,47 @@
+[workspace]
+members = ["migration"]
+
+[package]
+name = "agile-consulting-scorecard-for-hiring-help"
+version = "0.1.0"
+edition = "2024"
+publish = false
+default-run = "agile-consulting-scorecard-cli"
+
+[workspace.dependencies]
+loco-rs = { version = "0.16" }
+
+[dependencies]
+async-trait = { version = "0.1" }
+axum = { version = "0.8" }
+chrono = { version = "0.4", features = ["serde"] }
+loco-rs = { workspace = true }
+migration = { path = "migration" }
+sea-orm = { version = "1.1", features = [
+  "sqlx-postgres",
+  "runtime-tokio-rustls",
+  "macros",
+] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tera = { version = "1.20" }
+tokio = { version = "1.45", default-features = false, features = [
+  "rt-multi-thread",
+] }
+tower = { version = "0.5" }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+[lib]
+name = "agile_consulting_scorecard_for_hiring_help"
+path = "src/lib.rs"
+
+[[bin]]
+name = "agile-consulting-scorecard-cli"
+path = "src/bin/main.rs"
+required-features = []
+
+[dev-dependencies]
+loco-rs = { workspace = true, features = ["testing"] }
+serial_test = { version = "3.1.1" }

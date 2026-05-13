@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Agile Consulting Scorecard for Hiring Help</title>
+  <meta name="description" content="Sixteen-item self-assessment to decide whether your organization is ready to hire agile consulting help.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+      color: #1a202c;
+      background: #f7fafc;
+      line-height: 1.5;
+    }
+    h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
+    .subtitle { margin: 0 0 1.5rem; color: #4a5568; }
+    fieldset {
+      background: white;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      margin: 0 0 1.5rem;
+      padding: 1rem 1.25rem 1.25rem;
+    }
+    legend {
+      font-weight: 600;
+      padding: 0 0.5rem;
+      color: #2d3748;
+    }
+    .field { margin: 0.75rem 0; }
+    label { display: block; font-weight: 500; margin-bottom: 0.25rem; }
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      font: inherit;
+    }
+    textarea { resize: vertical; min-height: 2.4rem; }
+    .item { padding: 0.75rem; border-top: 1px solid #edf2f7; }
+    .item:first-of-type { border-top: 0; }
+    .item-prompt { font-weight: 500; }
+    .item-help { font-size: 0.875rem; color: #4a5568; margin: 0.25rem 0 0.5rem; }
+    .answer-row {
+      display: flex;
+      gap: 1.25rem;
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+    }
+    .answer-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-weight: normal;
+    }
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #4299e1;
+      border-radius: 4px;
+      background: #4299e1;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.secondary { background: white; color: #4299e1; }
+    .preview {
+      background: white;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 0 0 1.5rem;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 1;
+    }
+    .preview-row { display: flex; justify-content: space-between; gap: 1rem; }
+    .preview-row + .preview-row { margin-top: 0.4rem; }
+    .preview-band {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    .band-low        { background: #fed7d7; color: #742a2a; }
+    .band-borderline { background: #fefcbf; color: #744210; }
+    .band-medium     { background: #bee3f8; color: #2a4365; }
+    .band-high       { background: #c6f6d5; color: #22543d; }
+    .flags-list {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+    .flag-priority-high   { color: #742a2a; }
+    .flag-priority-medium { color: #744210; }
+    .flag-priority-low    { color: #2d3748; }
+    code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <h1>Agile Consulting Scorecard for Hiring Help</h1>
+  <p class="subtitle">
+    Sixteen yes/no checkpoints from the Agile Manifesto and Principles.
+    Score yourself and see whether you are ready to hire agile consulting help.
+  </p>
+
+  <section class="preview" aria-live="polite">
+    <div class="preview-row">
+      <strong>Total</strong>
+      <span><span id="preview-total">0</span> / 16</span>
+    </div>
+    <div class="preview-row">
+      <span>Manifesto</span>
+      <span><span id="preview-manifesto">0</span> / 4</span>
+    </div>
+    <div class="preview-row">
+      <span>Principles</span>
+      <span><span id="preview-principles">0</span> / 12</span>
+    </div>
+    <div class="preview-row">
+      <strong>Band</strong>
+      <span class="preview-band band-low" id="preview-band">low</span>
+    </div>
+    <div class="preview-row">
+      <span>Recommendation</span>
+      <span id="preview-recommendation">Don't hire agile help yet — focus on internal operations first.</span>
+    </div>
+    <ul class="flags-list" id="preview-flags" hidden></ul>
+  </section>
+
+  <form id="scorecard-form" autocomplete="off" novalidate onsubmit="return false;">
+    <fieldset>
+      <legend>Step 1 — Organization &amp; respondent</legend>
+      <div class="field">
+        <label for="org-name">Organization name</label>
+        <input id="org-name" type="text">
+      </div>
+      <div class="field">
+        <label for="org-sector">Sector</label>
+        <select id="org-sector">
+          <option value="">—</option>
+          <option>healthcare</option>
+          <option>pharmaceuticals</option>
+          <option>medtech</option>
+          <option>public-sector</option>
+          <option>finance</option>
+          <option>insurance</option>
+          <option>retail</option>
+          <option>manufacturing</option>
+          <option>logistics</option>
+          <option>energy</option>
+          <option>utilities</option>
+          <option>media</option>
+          <option>telecommunications</option>
+          <option>technology</option>
+          <option>education</option>
+          <option>charity</option>
+          <option>agriculture</option>
+          <option>professional-services</option>
+          <option>other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="org-size">Size band</label>
+        <select id="org-size">
+          <option value="">—</option>
+          <option value="micro">Micro (&lt; 10)</option>
+          <option value="small">Small (10–49)</option>
+          <option value="medium">Medium (50–249)</option>
+          <option value="large">Large (250–999)</option>
+          <option value="enterprise">Enterprise (1000+)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="resp-name">Respondent name</label>
+        <input id="resp-name" type="text">
+      </div>
+      <div class="field">
+        <label for="resp-email">Respondent email</label>
+        <input id="resp-email" type="email">
+      </div>
+      <div class="field">
+        <label for="resp-role">Role</label>
+        <select id="resp-role">
+          <option value="">—</option>
+          <option>cxo</option>
+          <option>vp</option>
+          <option>director</option>
+          <option>head-of-product</option>
+          <option>head-of-engineering</option>
+          <option>head-of-delivery</option>
+          <option>transformation-lead</option>
+          <option>programme-manager</option>
+          <option>product-manager</option>
+          <option>engineering-manager</option>
+          <option>agile-coach</option>
+          <option>scrum-master</option>
+          <option>consultant</option>
+          <option>employee</option>
+          <option>other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="assessment-date">Assessment date</label>
+        <input id="assessment-date" type="date">
+      </div>
+    </fieldset>
+
+    <fieldset id="manifesto">
+      <legend>Step 2 — Agile Manifesto (4 items)</legend>
+    </fieldset>
+    <fieldset id="principles-a">
+      <legend>Step 3 — Principles 1–4</legend>
+    </fieldset>
+    <fieldset id="principles-b">
+      <legend>Step 4 — Principles 5–8</legend>
+    </fieldset>
+    <fieldset id="principles-c">
+      <legend>Step 5 — Principles 9–12</legend>
+    </fieldset>
+
+    <fieldset>
+      <legend>Step 6 — Score &amp; sign-off</legend>
+      <p>Total, band, and flags update live above. Sign off below.</p>
+      <div class="field">
+        <label for="reviewer-override">Override band (optional)</label>
+        <select id="reviewer-override">
+          <option value="">— use computed —</option>
+          <option value="low">low</option>
+          <option value="borderline">borderline</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="override-reason">Override reason (required if overriding)</label>
+        <textarea id="override-reason" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="signed-by">Signed by</label>
+        <input id="signed-by" type="text">
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" id="export-btn">Export JSON</button>
+      <button type="button" class="secondary" id="reset-btn">Reset</button>
+    </div>
+  </form>
+
+  <script>
+    'use strict';
+
+    // The 16 items, in scorecard order. Mirrors
+    // front-end-form-with-svelte/src/lib/engine/{manifesto,principles}-rules.ts
+    // and full-stack-with-loco-tera-htmx-alpine/src/scoring/{manifesto,principles}.rs.
+    const ITEMS = [
+      { key: 'm1', group: 'manifesto', heading: 'Manifesto 1 — Individuals and interactions',
+        prompt: 'Every leader is in conversation with customers ≥ 1 hour per week, with weekly results radiated to stakeholders.' },
+      { key: 'm2', group: 'manifesto', heading: 'Manifesto 2 — Working software',
+        prompt: 'The team has launched a brand-new "hello world" program to production and discussed the experience.' },
+      { key: 'm3', group: 'manifesto', heading: 'Manifesto 3 — Customer collaboration',
+        prompt: 'The organization has bought copies of the customer\'s favourite book and shared with the team (org spend, not personal).' },
+      { key: 'm4', group: 'manifesto', heading: 'Manifesto 4 — Responding to change',
+        prompt: 'Every senior leader (BoD/CXO/VP/Dir) has read one agile change-management book and shared three takeaways.' },
+      { key: 'p1', group: 'principles-a', heading: 'Principle 1 — Customer satisfaction',
+        prompt: 'Every product lead measures customer Net Promoter Score (NPS).' },
+      { key: 'p2', group: 'principles-a', heading: 'Principle 2 — Welcome changing requirements',
+        prompt: 'The "hello world" program has been internationalized to ≥ 1 additional language using the user locale.' },
+      { key: 'p3', group: 'principles-a', heading: 'Principle 3 — Deliver frequently',
+        prompt: 'The internationalized "hello world" version has been launched to production and verified by a native speaker.' },
+      { key: 'p4', group: 'principles-a', heading: 'Principle 4 — Business and developers together',
+        prompt: 'Commitment is in place from every product / project / programme / practice lead.' },
+      { key: 'p5', group: 'principles-b', heading: 'Principle 5 — Motivated individuals',
+        prompt: 'A 3-amigos team (business + dev + test) has shipped a real new MVP within 30 days and on budget.' },
+      { key: 'p6', group: 'principles-b', heading: 'Principle 6 — Face-to-face',
+        prompt: 'Every product owner has committed to ≥ 50 % face-to-face time (or weekly-video equivalent for remote teams).' },
+      { key: 'p7', group: 'principles-b', heading: 'Principle 7 — Working software is the primary measure',
+        prompt: 'A new "fizz buzz" program has been created and shipped to production.' },
+      { key: 'p8', group: 'principles-b', heading: 'Principle 8 — Sustainable pace',
+        prompt: 'All staff have a sustaining budget for ≥ 1 year secured.' },
+      { key: 'p9', group: 'principles-c', heading: 'Principle 9 — Technical excellence',
+        prompt: 'Quality-attribute metrics are wired into pre-commit hooks and continuous integration.' },
+      { key: 'p10', group: 'principles-c', heading: 'Principle 10 — Simplicity',
+        prompt: 'Every product team has ≥ 2 people with process-improvement skills (Lean / Six Sigma / VSM / TPS / TPC).' },
+      { key: 'p11', group: 'principles-c', heading: 'Principle 11 — Self-organizing teams',
+        prompt: 'A 5-point Likert "our team is self-organizing" averages "Agree" or better.' },
+      { key: 'p12', group: 'principles-c', heading: 'Principle 12 — Reflection',
+        prompt: 'Every leader has shared their previous 2 retrospectives with all stakeholders.' },
+    ];
+
+    function renderItems() {
+      const html = (k, prompt) => `
+        <div class="item" id="item-${k}">
+          <div class="item-prompt">${prompt}</div>
+          <div class="answer-row">
+            <label><input type="radio" name="${k}-done" value="true">Yes</label>
+            <label><input type="radio" name="${k}-done" value="false">No</label>
+            <label><input type="radio" name="${k}-done" value="" checked>Unanswered</label>
+          </div>
+          <label for="${k}-evidence" style="font-size:0.875rem;color:#4a5568;">Evidence (optional)</label>
+          <textarea id="${k}-evidence" rows="2"></textarea>
+        </div>`;
+      for (const item of ITEMS) {
+        const fs = document.getElementById(item.group);
+        if (!fs) continue;
+        fs.insertAdjacentHTML('beforeend',
+          `<h3 style="margin:1rem 0 0.25rem;font-size:1rem;">${item.heading}</h3>` + html(item.key, item.prompt));
+      }
+    }
+
+    // Pure scoring engine — JavaScript port of
+    // front-end-form-with-svelte/src/lib/engine/score-grader.ts.
+    function readAnswer(key) {
+      const v = document.querySelector(`input[name="${key}-done"]:checked`)?.value;
+      if (v === 'true')  return true;
+      if (v === 'false') return false;
+      return null;
+    }
+    function answerToPoints(a) { return a === true ? 1 : 0; }
+    function totalToBand(t) {
+      if (t <= 4) return 'low';
+      if (t === 5) return 'borderline';
+      if (t <= 10) return 'medium';
+      return 'high';
+    }
+    const RECOMMENDATION = {
+      low:        "Don't hire agile help yet — focus on internal operations first.",
+      borderline: "Borderline — do your agile homework first; revisit in ~3 months.",
+      medium:     "Do your agile homework first; revisit the scorecard in ~3 months.",
+      high:       "Likely ready — trial an engagement and review in ~3 months.",
+    };
+
+    function computeFlags(answers) {
+      const out = [];
+      if (answers.m4 === false) out.push({ p: 'high',
+        cat: 'no-senior-leadership-buyin',
+        text: 'No senior leader has read an agile change-management book and shared takeaways.' });
+      if (answers.m1 === false || answers.p1 === false) out.push({ p: 'high',
+        cat: 'no-customer-contact',
+        text: 'Customer-contact gap: leaders are not in regular conversation with customers, or NPS is not measured.' });
+      if (answers.m2 === false && answers.p7 === false) out.push({ p: 'high',
+        cat: 'no-working-software',
+        text: 'Neither "hello world" nor "fizz buzz" has been launched to production.' });
+      if (answers.p8 === false) out.push({ p: 'medium',
+        cat: 'no-sustainable-budget',
+        text: 'Less than 1 year of staff sustaining budget is secured.' });
+      if (answers.p11 === false) out.push({ p: 'medium',
+        cat: 'no-self-organization',
+        text: 'Self-organization Likert average is below "Agree".' });
+      if (answers.p12 === false) out.push({ p: 'medium',
+        cat: 'no-reflection-culture',
+        text: 'Leaders are not running or sharing retrospectives.' });
+      return out;
+    }
+
+    function recompute() {
+      const answers = {};
+      for (const item of ITEMS) answers[item.key] = readAnswer(item.key);
+      const manifestoTotal = ['m1', 'm2', 'm3', 'm4'].reduce((s, k) => s + answerToPoints(answers[k]), 0);
+      const principlesKeys = ['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12'];
+      const principlesTotal = principlesKeys.reduce((s, k) => s + answerToPoints(answers[k]), 0);
+      const total = manifestoTotal + principlesTotal;
+      const band = totalToBand(total);
+      const flags = computeFlags(answers);
+
+      document.getElementById('preview-total').textContent = total;
+      document.getElementById('preview-manifesto').textContent = manifestoTotal;
+      document.getElementById('preview-principles').textContent = principlesTotal;
+      const bandEl = document.getElementById('preview-band');
+      bandEl.textContent = band;
+      bandEl.className = 'preview-band band-' + band;
+      document.getElementById('preview-recommendation').textContent = RECOMMENDATION[band];
+
+      const flagsList = document.getElementById('preview-flags');
+      flagsList.innerHTML = '';
+      if (flags.length === 0) {
+        flagsList.hidden = true;
+      } else {
+        flagsList.hidden = false;
+        for (const f of flags) {
+          const li = document.createElement('li');
+          li.className = 'flag-priority-' + f.p;
+          li.innerHTML = `<strong>${f.cat}</strong> — ${f.text}`;
+          flagsList.appendChild(li);
+        }
+      }
+    }
+
+    function exportJson() {
+      const items = {};
+      for (const item of ITEMS) {
+        items[item.key] = {
+          done: readAnswer(item.key),
+          evidence: document.getElementById(item.key + '-evidence')?.value || '',
+        };
+      }
+      const data = {
+        organization: {
+          organizationName: document.getElementById('org-name').value,
+          sector: document.getElementById('org-sector').value,
+          sizeBand: document.getElementById('org-size').value,
+        },
+        respondent: {
+          respondentName: document.getElementById('resp-name').value,
+          respondentEmail: document.getElementById('resp-email').value,
+          role: document.getElementById('resp-role').value,
+        },
+        assessment: {
+          assessmentDate: document.getElementById('assessment-date').value,
+          status: 'submitted',
+        },
+        manifesto: { m1: items.m1, m2: items.m2, m3: items.m3, m4: items.m4 },
+        principles: {
+          p1: items.p1, p2: items.p2, p3: items.p3, p4: items.p4,
+          p5: items.p5, p6: items.p6, p7: items.p7, p8: items.p8,
+          p9: items.p9, p10: items.p10, p11: items.p11, p12: items.p12,
+        },
+        signoff: {
+          override: document.getElementById('reviewer-override').value,
+          overrideReason: document.getElementById('override-reason').value,
+          signedBy: document.getElementById('signed-by').value,
+        },
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'agile-consulting-scorecard.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderItems();
+      document.getElementById('scorecard-form').addEventListener('change', recompute);
+      document.getElementById('scorecard-form').addEventListener('input', recompute);
+      document.getElementById('export-btn').addEventListener('click', exportJson);
+      document.getElementById('reset-btn').addEventListener('click', () => {
+        document.getElementById('scorecard-form').reset();
+        for (const item of ITEMS) {
+          const r = document.querySelector(`input[name="${item.key}-done"][value=""]`);
+          if (r) r.checked = true;
+        }
+        recompute();
+      });
+      recompute();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+import{c as e,a as n}from"../chunks/CWchDWmJ.js";import{f as m,e as s,$ as i}from"../chunks/PcKaDNv1.js";import{s as c}from"../chunks/CtzzVSNT.js";import{h as f}from"../chunks/AeXxpAwH.js";function $(a,r){var o=e();f("12qhfyh",p=>{s(()=>{i.title="Agile Consulting Scorecard — Dashboard"})});var t=m(o);c(t,()=>r.children),n(a,o)}export{$ as component};
