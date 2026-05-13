@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE okr_grade SYSTEM "okr_grade.dtd">
+<okr_grade>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<okr_objective_id>770e8400-e29b-41d4-a716-446655440002</okr_objective_id>
+<score_by_progress_percent>5.0</score_by_progress_percent>
+<score_by_confidence_decile>5</score_by_confidence_decile>
+<score_by_stretch_tier>5</score_by_stretch_tier>
+<score_by_alignment_grade>5</score_by_alignment_grade>
+<score_by_impact_tier>5</score_by_impact_tier>
+<score_by_smart_quality>5</score_by_smart_quality>
+<score_by_pace_deviation_percent>5.0</score_by_pace_deviation_percent>
+<computed_composite_rag>green</computed_composite_rag>
+<final_composite_rag>green</final_composite_rag>
+<override_reason>Example text.</override_reason>
+<recommendation>continue</recommendation>
+<triage_notes>Example text.</triage_notes>
+<signed_by></signed_by>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</okr_grade>

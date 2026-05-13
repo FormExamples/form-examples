@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE okr_objective SYSTEM "okr_objective.dtd">
+<okr_objective>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<reporter_id>550e8400-e29b-41d4-a716-446655440000</reporter_id>
+<parent_objective_id>660e8400-e29b-41d4-a716-446655440001</parent_objective_id>
+<status>draft</status>
+<level>individual</level>
+<cycle>monthly</cycle>
+<cycle_start_date>2026-01-15</cycle_start_date>
+<cycle_end_date>2026-01-15</cycle_end_date>
+<team_or_org_name>Example</team_or_org_name>
+<strategic_theme></strategic_theme>
+<external_reference></external_reference>
+<obj_title>Example Title</obj_title>
+<obj_long_description>Example text.</obj_long_description>
+<sa_parent_summary>Example text.</sa_parent_summary>
+<sa_business_value_statement></sa_business_value_statement>
+<in_initiatives></in_initiatives>
+<in_supporting_links></in_supporting_links>
+<rk_known_risks></rk_known_risks>
+<rk_dependencies></rk_dependencies>
+<rk_blockers></rk_blockers>
+<rk_mitigation_plans>Example text.</rk_mitigation_plans>
+<fc_expected_end_state></fc_expected_end_state>
+<fc_residual_risk></fc_residual_risk>
+<score_by_progress_percent>5.0</score_by_progress_percent>
+<score_by_confidence_decile>5</score_by_confidence_decile>
+<score_by_stretch_tier>5</score_by_stretch_tier>
+<score_by_alignment_grade>5</score_by_alignment_grade>
+<score_by_impact_tier>5</score_by_impact_tier>
+<score_by_smart_quality>5</score_by_smart_quality>
+<score_by_pace_deviation_percent>5.0</score_by_pace_deviation_percent>
+</okr_objective>

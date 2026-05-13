@@ -1,0 +1,10 @@
+<!ELEMENT participant (id,created_at,updated_at,deleted_at,okr_objective_id,role,name,email,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT okr_objective_id (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>
