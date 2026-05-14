@@ -21,7 +21,10 @@ export function gradeProgress(s: RawScores): [RagBand, FiredRule[]] {
 			}],
 		];
 	}
-	const thresholds = { 1: { green: 70, red: 30 }, 2: { green: 30, red: 10 }, 3: { green: 25, red: -1 } } as const;
+	// Red threshold for committed (tier 1) aligns with the `committed-at-risk`
+	// flag trigger and the spec example "a committed at 40 % is Red"
+	// (design spec §3 paragraph after the RAG table).
+	const thresholds = { 1: { green: 70, red: 50 }, 2: { green: 30, red: 10 }, 3: { green: 25, red: -1 } } as const;
 	const t = thresholds[tier];
 	const band: RagBand = p >= t.green ? 'green' : p < t.red ? 'red' : 'amber';
 	return [
