@@ -146,6 +146,55 @@ function renderStep5() {
   draw();
 }
 
+function renderStep6() {
+  document.querySelector('[data-step="6"]').innerHTML = `
+    <label>Initiatives (one per line)<textarea id="i-init"></textarea></label>
+    <label>Supporting links (one per line)<textarea id="i-links"></textarea></label>
+  `;
+  bind('#i-init', 'initiatives.in_initiatives');
+  bind('#i-links', 'initiatives.in_supporting_links');
+}
+
+function renderStep7() {
+  document.querySelector('[data-step="7"]').innerHTML = `
+    <label>Known risks<textarea id="rk-risks"></textarea></label>
+    <label>Dependencies<textarea id="rk-deps"></textarea></label>
+    <label>Blockers<textarea id="rk-block"></textarea></label>
+    <label>Mitigation plans<textarea id="rk-mit"></textarea></label>
+  `;
+  bind('#rk-risks', 'risks.rk_known_risks');
+  bind('#rk-deps', 'risks.rk_dependencies');
+  bind('#rk-block', 'risks.rk_blockers');
+  bind('#rk-mit', 'risks.rk_mitigation_plans');
+}
+
+function renderStep8() {
+  document.querySelector('[data-step="8"]').innerHTML = `
+    <label>Check-in narrative<textarea id="ci-narr"></textarea></label>
+    <label>Changes since last check-in<textarea id="ci-changes"></textarea></label>
+    <label>Blockers<textarea id="ci-block"></textarea></label>
+    <label>Asks / help needed<textarea id="ci-asks"></textarea></label>
+    <label>Confidence decile at check-in (1–10)<input id="ci-conf" type="number" min="1" max="10"/></label>
+  `;
+  bind('#ci-narr', 'checkIn.narrative');
+  bind('#ci-changes', 'checkIn.since_last_changes');
+  bind('#ci-block', 'checkIn.blockers');
+  bind('#ci-asks', 'checkIn.asks');
+  document.querySelector('#ci-conf').addEventListener('input', (e) => {
+    state.checkIn.confidenceDecileAtCheckIn = e.target.value === '' ? null : Number(e.target.value);
+  });
+}
+
+function renderStep9() {
+  document.querySelector('[data-step="9"]').innerHTML = `
+    <label>Expected end-state<textarea id="fc-end"></textarea></label>
+    <label>Residual risk<textarea id="fc-resid"></textarea></label>
+  `;
+  bind('#fc-end', 'forecast.fc_expected_end_state');
+  bind('#fc-resid', 'forecast.fc_residual_risk');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
+  renderStep6(); renderStep7(); renderStep8(); renderStep9();
 });
