@@ -258,8 +258,29 @@ function wireCompute() {
   });
 }
 
+function wirePdf() {
+  document.querySelector('#btn-pdf').addEventListener('click', () => {
+    const last = JSON.parse(document.querySelector('#result').dataset.lastResult || '{}');
+    const doc = {
+      content: [
+        { text: 'OKR Tracker Report', style: 'header' },
+        { text: state.objective.obj_title || '(no title)', style: 'subheader' },
+        { text: `Level: ${state.cycle.level}  •  Cycle: ${state.cycle.cycleStartDate} → ${state.cycle.cycleEndDate}` },
+        { text: `RAG: ${last.computedCompositeRag ?? '(not computed)'}`, style: 'rag', color: last.computedCompositeRag === 'red' ? '#c0392b' : last.computedCompositeRag === 'amber' ? '#c47a00' : '#2c8a3a' },
+        { text: 'Key Results', style: 'subheader' },
+        { ul: state.keyResults.map(k => `${k.position}. ${k.title} (${k.krType}) — ${k.currentValue}/${k.targetValue} ${k.unit}`) },
+        { text: 'Flags', style: 'subheader' },
+        { ul: (last.flags ?? []).map(f => `[${f.priority}] ${f.flagCode}: ${f.description}`) },
+        { text: `Signed by ${state.signature.signed_by} on ${new Date().toISOString()}` },
+      ],
+      styles: { header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] }, subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] }, rag: { fontSize: 16, bold: true, margin: [0, 5, 0, 10] } },
+    };
+    pdfMake.createPdf(doc).download(`okr-${(state.objective.obj_title || 'objective').replaceAll(/\s+/g, '-')}.pdf`);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
   renderStep6(); renderStep7(); renderStep8(); renderStep9(); renderStep10();
-  wireCompute();
+  wireCompute(); wirePdf();
 });
