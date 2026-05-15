@@ -39,4 +39,67 @@ function renderSteps() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', renderSteps);
+const bind = (selector, path) => {
+  const [section, key] = path.split('.');
+  document.querySelector(selector).addEventListener('input', (e) => {
+    state[section][key] = e.target.value;
+  });
+};
+
+function renderStep1() {
+  document.querySelector('[data-step="1"]').innerHTML = `
+    <label>Reporter name<input id="r-name"/></label>
+    <label>Reporter email<input id="r-email" type="email"/></label>
+    <label>Reporter role<input id="r-role"/></label>
+    <label>Level<select id="c-level">
+      <option value="">—</option><option>individual</option><option>team</option>
+      <option>department</option><option>company</option></select></label>
+    <label>Cycle<select id="c-cycle">
+      <option value="">—</option><option>monthly</option><option>quarterly</option>
+      <option>half-yearly</option><option>annual</option><option>custom</option></select></label>
+    <label>Cycle start date<input id="c-start" type="date"/></label>
+    <label>Cycle end date<input id="c-end" type="date"/></label>
+  `;
+  bind('#r-name', 'reporter.name'); bind('#r-email', 'reporter.email'); bind('#r-role', 'reporter.role');
+  bind('#c-level', 'cycle.level'); bind('#c-cycle', 'cycle.cycle');
+  bind('#c-start', 'cycle.cycleStartDate'); bind('#c-end', 'cycle.cycleEndDate');
+}
+
+function renderStep2() {
+  document.querySelector('[data-step="2"]').innerHTML = `
+    <label>Title<input id="o-title"/></label>
+    <label>Long description<textarea id="o-desc"></textarea></label>
+    <label>Strategic theme<input id="o-theme"/></label>
+    <label>Parent objective ID<input id="o-parent"/></label>
+  `;
+  bind('#o-title', 'objective.obj_title');
+  bind('#o-desc', 'objective.obj_long_description');
+  bind('#o-theme', 'objective.strategic_theme');
+  bind('#o-parent', 'objective.parent_objective_id');
+}
+
+function renderStep3() {
+  document.querySelector('[data-step="3"]').innerHTML = `
+    <label>DRI (directly responsible individual)<input id="p-dri"/></label>
+    <label>Contributors<textarea id="p-contrib"></textarea></label>
+    <label>Reviewers<textarea id="p-rev"></textarea></label>
+    <label>Stakeholders to inform<textarea id="p-stake"></textarea></label>
+  `;
+  bind('#p-dri', 'participants.dri');
+  bind('#p-contrib', 'participants.contributors');
+  bind('#p-rev', 'participants.reviewers');
+  bind('#p-stake', 'participants.stakeholders');
+}
+
+function renderStep4() {
+  document.querySelector('[data-step="4"]').innerHTML = `
+    <label>How this ladders to the parent / mission<textarea id="a-parent"></textarea></label>
+    <label>Business-value statement<textarea id="a-value"></textarea></label>
+  `;
+  bind('#a-parent', 'alignment.sa_parent_summary');
+  bind('#a-value', 'alignment.sa_business_value_statement');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4();
+});
