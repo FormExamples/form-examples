@@ -100,6 +100,52 @@ function renderStep4() {
   bind('#a-value', 'alignment.sa_business_value_statement');
 }
 
+function renderKR(i, kr) {
+  return `<fieldset data-kr="${i}">
+    <legend>Key Result ${i + 1} <button type="button" data-action="remove" data-kr="${i}">remove</button></legend>
+    <label>Title<input data-field="title" value="${kr.title}"/></label>
+    <label>Type<select data-field="krType">
+      <option value="">—</option><option>numeric</option><option>milestone</option><option>binary</option></select></label>
+    <label>Unit<input data-field="unit" value="${kr.unit}"/></label>
+    <label>Start<input type="number" step="any" data-field="startValue" value="${kr.startValue ?? ''}"/></label>
+    <label>Current<input type="number" step="any" data-field="currentValue" value="${kr.currentValue ?? ''}"/></label>
+    <label>Target<input type="number" step="any" data-field="targetValue" value="${kr.targetValue ?? ''}"/></label>
+    <label>Owner<input data-field="ownerName" value="${kr.ownerName}"/></label>
+    <label>Due date<input type="date" data-field="dueDate" value="${kr.dueDate}"/></label>
+  </fieldset>`;
+}
+
+function renderStep5() {
+  const root = document.querySelector('[data-step="5"]');
+  const draw = () => {
+    root.innerHTML = state.keyResults.map((kr, i) => renderKR(i, kr)).join('') +
+      `<button type="button" id="kr-add" ${state.keyResults.length >= 5 ? 'disabled' : ''}>Add Key Result</button>`;
+    root.querySelector('#kr-add')?.addEventListener('click', () => {
+      if (state.keyResults.length >= 5) return;
+      state.keyResults.push({ position: state.keyResults.length + 1, title: '', krType: '', unit: '',
+        startValue: null, currentValue: null, targetValue: null, ownerName: '', dueDate: '' });
+      draw();
+    });
+    root.querySelectorAll('[data-action="remove"]').forEach((btn) => btn.addEventListener('click', () => {
+      const i = Number(btn.dataset.kr);
+      state.keyResults.splice(i, 1);
+      state.keyResults.forEach((kr, idx) => { kr.position = idx + 1; });
+      draw();
+    }));
+    root.querySelectorAll('fieldset[data-kr]').forEach((fs) => {
+      const i = Number(fs.dataset.kr);
+      fs.querySelectorAll('[data-field]').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          const field = inp.dataset.field;
+          const v = inp.type === 'number' ? (inp.value === '' ? null : Number(inp.value)) : inp.value;
+          state.keyResults[i][field] = v;
+        });
+      });
+    });
+  };
+  draw();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4();
+  renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
 });
