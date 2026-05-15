@@ -194,7 +194,72 @@ function renderStep9() {
   bind('#fc-resid', 'forecast.fc_residual_risk');
 }
 
+function renderStep10() {
+  document.querySelector('[data-step="10"]').innerHTML = `
+    <label>Progress percent (0–100)<input id="s-progress" type="number" min="0" max="100"/></label>
+    <label>Confidence decile (1–10)<input id="s-confidence" type="number" min="1" max="10"/></label>
+    <label>Stretch tier<select id="s-stretch">
+      <option value="">—</option><option value="1">1 — committed</option>
+      <option value="2">2 — aspirational</option><option value="3">3 — moonshot</option></select></label>
+    <label>Alignment grade (1–5)<input id="s-alignment" type="number" min="1" max="5"/></label>
+    <label>Impact tier (1–5)<input id="s-impact" type="number" min="1" max="5"/></label>
+    <label>SMART quality (0–5)<input id="s-smart" type="number" min="0" max="5"/></label>
+    <label>Pace deviation % (-100..+100)<input id="s-pace" type="number" min="-100" max="100"/></label>
+    <label>Signed by<input id="s-signed-by"/></label>
+    <label>Recommendation<select id="s-rec"><option value="">—</option>
+      <option>continue</option><option>escalate</option><option>re-scope</option>
+      <option>retire</option><option>split</option><option>merge</option></select></label>
+    <label>Override reason (if any)<textarea id="s-override"></textarea></label>
+  `;
+  const numScore = (selector, key) => {
+    document.querySelector(selector).addEventListener('input', (e) => {
+      state.scores[key] = e.target.value === '' ? null : Number(e.target.value);
+    });
+  };
+  numScore('#s-progress', 'progressPercent');
+  numScore('#s-confidence', 'confidenceDecile');
+  numScore('#s-stretch', 'stretchTier');
+  numScore('#s-alignment', 'alignmentGrade');
+  numScore('#s-impact', 'impactTier');
+  numScore('#s-smart', 'smartQuality');
+  numScore('#s-pace', 'paceDeviationPercent');
+  bind('#s-signed-by', 'signature.signed_by');
+  bind('#s-rec', 'signature.recommendation');
+  bind('#s-override', 'signature.override_reason');
+}
+
+function buildAssessment() {
+  const driPresent = !!state.participants.dri;
+  return {
+    scores: state.scores,
+    keyResults: state.keyResults,
+    context: {
+      level: state.cycle.level,
+      parentObjectiveId: state.objective.parent_objective_id || null,
+      parentObjectiveStatus: null,
+      driPresent,
+      cycleStartDate: state.cycle.cycleStartDate || null,
+      cycleEndDate: state.cycle.cycleEndDate || null,
+      checkedInAt: state.checkIn.narrative ? new Date().toISOString() : null,
+      previousConfidenceDecile: null,
+    },
+    now: new Date().toISOString(),
+  };
+}
+
+function wireCompute() {
+  document.querySelector('#btn-compute').addEventListener('click', () => {
+    const r = gradeObjective(buildAssessment());
+    const el = document.querySelector('#result');
+    el.innerHTML = `<span class="rag-badge rag-${r.computedCompositeRag}">${r.computedCompositeRag.toUpperCase()}</span>
+      <h3>Flags (${r.flags.length})</h3>
+      <ul class="flag-list">${r.flags.map(f => `<li><b>${f.flagCode}</b> (${f.priority}): ${f.description}</li>`).join('')}</ul>`;
+    el.dataset.lastResult = JSON.stringify(r);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
-  renderStep6(); renderStep7(); renderStep8(); renderStep9();
+  renderStep6(); renderStep7(); renderStep8(); renderStep9(); renderStep10();
+  wireCompute();
 });
