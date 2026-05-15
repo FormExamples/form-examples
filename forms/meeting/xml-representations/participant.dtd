@@ -1,0 +1,14 @@
+<!ELEMENT participant (id,created_at,updated_at,deleted_at,meeting_id,position,name,email,organisation,role,response_status,attendance_status,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT meeting_id (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT organisation (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT response_status (#PCDATA)>
+<!ELEMENT attendance_status (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

@@ -1,0 +1,45 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: organizer
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum OrganizerRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ORGANIZER = 1;  // organizer
+  ROLE_SECRETARY = 2;  // secretary
+  ROLE_CHAIR = 3;  // chair
+  ROLE_FACILITATOR = 4;  // facilitator
+  ROLE_PROJECT_MANAGER = 5;  // project-manager
+  ROLE_SCRUM_MASTER = 6;  // scrum-master
+  ROLE_ASSISTANT = 7;  // assistant
+  ROLE_TEAM_LEAD = 8;  // team-lead
+  ROLE_EXECUTIVE = 9;  // executive
+  ROLE_CLINICIAN = 10;  // clinician
+  ROLE_OTHER = 11;  // other
+}
+
+enum OrganizerPreferredContactEnum {
+  PREFERREDCONTACT_UNSPECIFIED = 0;
+  PREFERREDCONTACT_EMAIL = 1;  // email
+  PREFERREDCONTACT_PHONE = 2;  // phone
+  PREFERREDCONTACT_CHAT = 3;  // chat
+  PREFERREDCONTACT_IN_PERSON = 4;  // in-person
+}
+
+message Organizer {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string email = 6;  // VARCHAR(320) — max 320 chars
+  string phone = 7;  // VARCHAR(64) — max 64 chars
+  OrganizerRoleEnum role = 8;  // VARCHAR(40)
+  string organisation = 9;  // VARCHAR(255) — max 255 chars
+  string team = 10;  // VARCHAR(255) — max 255 chars
+  string location = 11;  // VARCHAR(255) — max 255 chars
+  string timezone = 12;  // VARCHAR(64) — max 64 chars
+  OrganizerPreferredContactEnum preferred_contact = 13;  // VARCHAR(20)
+}

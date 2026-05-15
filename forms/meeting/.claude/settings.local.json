@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jph/git/formexamples/form-examples/forms/prescription-request/sql-migrations/**)",
+      "Read(//Users/jph/git/formexamples/form-examples/forms/medical-records-release-permission/sql-migrations/**)",
+      "Read(//Users/jph/git/formexamples/form-examples/forms/employee-onboarding-checklist/sql-migrations/**)",
+      "Bash(chmod +x *)",
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(bin/test-form meeting *)"
+    ]
+  }
+}

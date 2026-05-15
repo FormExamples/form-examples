@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE meeting_output SYSTEM "meeting_output.dtd">
+<meeting_output>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<meeting_id>660e8400-e29b-41d4-a716-446655440001</meeting_id>
+<position>1</position>
+<title>Example Title</title>
+<kind>document</kind>
+<url></url>
+<description>Example text.</description>
+<owner_name>Example</owner_name>
+</meeting_output>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE meeting SYSTEM "meeting.dtd">
+<meeting>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<organizer_id>550e8400-e29b-41d4-a716-446655440000</organizer_id>
+<status>draft</status>
+<title>Example Title</title>
+<purpose></purpose>
+<long_description>Example text.</long_description>
+<category>stand-up</category>
+<visibility>public</visibility>
+<scheduled_start_at>2026-04-09T10:00:00Z</scheduled_start_at>
+<scheduled_end_at>2026-04-09T10:00:00Z</scheduled_end_at>
+<timezone></timezone>
+<location>Example location</location>
+<video_url></video_url>
+<phone_number></phone_number>
+<dial_in_code>ABC123</dial_in_code>
+<joining_instructions>Example text.</joining_instructions>
+<calendar_uid></calendar_uid>
+<summary>Example text.</summary>
+<actual_start_at>2026-04-09T10:00:00Z</actual_start_at>
+<actual_end_at>2026-04-09T10:00:00Z</actual_end_at>
+<overall_result>productive</overall_result>
+<additional_notes>Example text.</additional_notes>
+<signed_by_name>Example</signed_by_name>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</meeting>

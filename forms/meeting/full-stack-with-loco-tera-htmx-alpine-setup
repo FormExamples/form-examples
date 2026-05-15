@@ -1,0 +1,180 @@
+#!/bin/sh
+# setup.sh
+#
+# Setup script for the meeting full-stack Loco application.
+#
+# - Create database user `loco` (if not exists).
+# - Create application databases for development, test, production (if not exists).
+# - Run `cargo loco generate scaffold` once per SQL table, in the order of
+#   the form's sql-migrations/ so that FK targets exist when referencing
+#   tables are created.
+#
+# Generated from sql-migrations/*.sql.
+
+set -euf
+
+
+echo "Scaffolding meeting (12 tables)..."
+
+cargo loco generate scaffold organizer \
+    deleted_at:ts \
+    name:string! \
+    email:string! \
+    phone:string! \
+    role:string! \
+    organisation:string! \
+    team:string! \
+    location:string! \
+    timezone:string! \
+    preferred_contact:string! \
+    --htmx && \
+cargo loco generate scaffold meeting \
+    deleted_at:ts \
+    organizer:references \
+    status:string! \
+    title:string! \
+    purpose:string! \
+    long_description:text! \
+    category:string! \
+    visibility:string! \
+    scheduled_start_at:ts \
+    scheduled_end_at:ts \
+    timezone:string! \
+    location:string! \
+    video_url:string! \
+    phone_number:string! \
+    dial_in_code:string! \
+    joining_instructions:text! \
+    calendar_uid:string! \
+    summary:string! \
+    actual_start_at:ts \
+    actual_end_at:ts \
+    overall_result:string! \
+    additional_notes:text! \
+    signed_by_name:string! \
+    signed_at:ts \
+    --htmx && \
+cargo loco generate scaffold agenda_item \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    title:string! \
+    duration_minutes:int \
+    presenter:string! \
+    notes:text! \
+    status:string! \
+    --htmx && \
+cargo loco generate scaffold participant \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    name:string! \
+    email:string! \
+    organisation:string! \
+    role:string! \
+    response_status:string! \
+    attendance_status:string! \
+    notes:text! \
+    --htmx && \
+cargo loco generate scaffold resource \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    resource_type:string! \
+    name:string! \
+    quantity:int \
+    unit:string! \
+    url:string! \
+    cost_amount:double \
+    cost_currency:string! \
+    status:string! \
+    notes:text! \
+    --htmx && \
+cargo loco generate scaffold recurring_rule \
+    deleted_at:ts \
+    meeting:references \
+    frequency:string! \
+    interval_count:int! \
+    by_day_of_week:string! \
+    by_day_of_month:int \
+    by_set_position:int \
+    by_month_of_year:int \
+    series_count:int \
+    series_until:ts \
+    timezone:string! \
+    rrule_text:string! \
+    --htmx && \
+cargo loco generate scaffold action_item \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    title:string! \
+    description:text! \
+    owner_name:string! \
+    owner_email:string! \
+    due_date:date \
+    priority:string! \
+    status:string! \
+    completed_at:ts \
+    external_reference:string! \
+    --htmx && \
+cargo loco generate scaffold meeting_output \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    title:string! \
+    kind:string! \
+    url:string! \
+    description:text! \
+    owner_name:string! \
+    --htmx && \
+cargo loco generate scaffold meeting_outcome \
+    deleted_at:ts \
+    meeting:references \
+    position:int! \
+    title:string! \
+    category:string! \
+    description:text! \
+    impact:string! \
+    related_action_item:references \
+    --htmx && \
+cargo loco generate scaffold meeting_grade \
+    deleted_at:ts \
+    meeting:references \
+    duration_minutes:int \
+    agenda_item_count:int! \
+    participant_count:int! \
+    accepted_count:int! \
+    declined_count:int! \
+    attended_count:int! \
+    action_item_count:int! \
+    output_count:int! \
+    outcome_count:int! \
+    completion_status:string! \
+    overall_health:string! \
+    override_reason:string! \
+    notes:text! \
+    signed_by:string! \
+    signed_at:ts \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold meeting_grade_rule \
+    deleted_at:ts \
+    meeting_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    grade:string! \
+    category:string! \
+    description:string! \
+    --htmx && \
+cargo loco generate scaffold meeting_grade_flag \
+    deleted_at:ts \
+    meeting_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --htmx
+
+echo "Done."

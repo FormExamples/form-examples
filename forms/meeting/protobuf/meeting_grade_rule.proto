@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: meeting_grade_rule
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum MeetingGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_INVITATION = 1;  // invitation
+  INSTRUMENT_AGENDA = 2;  // agenda
+  INSTRUMENT_PARTICIPANTS = 3;  // participants
+  INSTRUMENT_RESOURCES = 4;  // resources
+  INSTRUMENT_RECURRENCE = 5;  // recurrence
+  INSTRUMENT_SUMMARY = 6;  // summary
+  INSTRUMENT_ACTION_ITEMS = 7;  // action-items
+  INSTRUMENT_OUTPUTS = 8;  // outputs
+  INSTRUMENT_OUTCOMES = 9;  // outcomes
+  INSTRUMENT_COMPOSITE = 10;  // composite
+}
+
+message MeetingGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string meeting_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(50) — max 50 chars
+  MeetingGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(20)
+  string grade = 8;  // VARCHAR(10) — max 10 chars
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

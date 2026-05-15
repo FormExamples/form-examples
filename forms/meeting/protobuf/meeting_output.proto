@@ -1,0 +1,32 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: meeting_output
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum MeetingOutputKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_DOCUMENT = 1;  // document
+  KIND_DECISION = 2;  // decision
+  KIND_DATA = 3;  // data
+  KIND_RECORDING = 4;  // recording
+  KIND_MINUTES = 5;  // minutes
+  KIND_SLIDES = 6;  // slides
+  KIND_AGREEMENT = 7;  // agreement
+  KIND_OTHER = 8;  // other
+}
+
+message MeetingOutput {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string meeting_id = 5;  // UUID — uuid
+  int32 position = 6;  // INTEGER
+  string title = 7;  // VARCHAR(255) — max 255 chars
+  MeetingOutputKindEnum kind = 8;  // VARCHAR(20)
+  string url = 9;  // VARCHAR(500) — max 500 chars
+  string description = 10;  // TEXT
+  string owner_name = 11;  // VARCHAR(255) — max 255 chars
+}

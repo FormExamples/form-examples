@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE meeting_grade SYSTEM "meeting_grade.dtd">
+<meeting_grade>
+<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<meeting_id>660e8400-e29b-41d4-a716-446655440001</meeting_id>
+<duration_minutes>1</duration_minutes>
+<agenda_item_count>45</agenda_item_count>
+<participant_count>2</participant_count>
+<accepted_count>2</accepted_count>
+<declined_count>2</declined_count>
+<attended_count>2</attended_count>
+<action_item_count>2</action_item_count>
+<output_count>2</output_count>
+<outcome_count>2</outcome_count>
+<completion_status>planned</completion_status>
+<overall_health>green</overall_health>
+<override_reason>Example text.</override_reason>
+<notes>Example text.</notes>
+<signed_by></signed_by>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</meeting_grade>

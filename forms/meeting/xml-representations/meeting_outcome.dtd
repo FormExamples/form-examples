@@ -1,0 +1,12 @@
+<!ELEMENT meeting_outcome (id,created_at,updated_at,deleted_at,meeting_id,position,title,category,description,impact,related_action_item_id)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT meeting_id (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT impact (#PCDATA)>
+<!ELEMENT related_action_item_id (#PCDATA)>

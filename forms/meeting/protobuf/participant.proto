@@ -1,0 +1,52 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: participant
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum ParticipantRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ORGANIZER = 1;  // organizer
+  ROLE_CHAIR = 2;  // chair
+  ROLE_REQUIRED = 3;  // required
+  ROLE_OPTIONAL = 4;  // optional
+  ROLE_OBSERVER = 5;  // observer
+  ROLE_PRESENTER = 6;  // presenter
+  ROLE_NOTE_TAKER = 7;  // note-taker
+}
+
+enum ParticipantResponseStatusEnum {
+  RESPONSESTATUS_UNSPECIFIED = 0;
+  RESPONSESTATUS_NO_RESPONSE = 1;  // no-response
+  RESPONSESTATUS_ACCEPTED = 2;  // accepted
+  RESPONSESTATUS_DECLINED = 3;  // declined
+  RESPONSESTATUS_TENTATIVE = 4;  // tentative
+  RESPONSESTATUS_DELEGATED = 5;  // delegated
+}
+
+enum ParticipantAttendanceStatusEnum {
+  ATTENDANCESTATUS_UNSPECIFIED = 0;
+  ATTENDANCESTATUS_PRESENT = 1;  // present
+  ATTENDANCESTATUS_LATE = 2;  // late
+  ATTENDANCESTATUS_ABSENT = 3;  // absent
+  ATTENDANCESTATUS_PARTIAL = 4;  // partial
+  ATTENDANCESTATUS_REMOTE = 5;  // remote
+  ATTENDANCESTATUS_UNKNOWN = 6;  // unknown
+}
+
+message Participant {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string meeting_id = 5;  // UUID — uuid
+  int32 position = 6;  // INTEGER
+  string name = 7;  // VARCHAR(255) — max 255 chars
+  string email = 8;  // VARCHAR(320) — max 320 chars
+  string organisation = 9;  // VARCHAR(255) — max 255 chars
+  ParticipantRoleEnum role = 10;  // VARCHAR(20)
+  ParticipantResponseStatusEnum response_status = 11;  // VARCHAR(20)
+  ParticipantAttendanceStatusEnum attendance_status = 12;  // VARCHAR(20)
+  string notes = 13;  // TEXT
+}

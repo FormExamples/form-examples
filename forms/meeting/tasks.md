@@ -1,0 +1,34 @@
+# Tasks: Meeting
+
+- [x] Scaffold form directory with `bin/create-form meeting`.
+- [x] Author seed in `seed.md`.
+- [x] Author `index.md` design specification.
+- [x] Author `AGENTS.md` agent instructions.
+- [x] Author `plan.md` roadmap.
+- [x] Author `tasks.md` (this file).
+- [x] Author SQL migration `02_create_table_organizer.sql`.
+- [x] Author SQL migration `03_create_table_meeting.sql`.
+- [x] Author SQL migration `04_create_table_agenda_item.sql`.
+- [x] Author SQL migration `05_create_table_participant.sql`.
+- [x] Author SQL migration `06_create_table_resource.sql`.
+- [x] Author SQL migration `07_create_table_recurring_rule.sql`.
+- [x] Author SQL migration `08_create_table_action_item.sql`.
+- [x] Author SQL migration `09_create_table_meeting_output.sql`.
+- [x] Author SQL migration `10_create_table_meeting_outcome.sql`.
+- [x] Author SQL migration `11_create_table_meeting_grade.sql`.
+- [x] Author SQL migration `12_create_table_meeting_grade_rule.sql`.
+- [x] Author SQL migration `13_create_table_meeting_grade_flag.sql`.
+- [x] Generate `xml-representations/` via the XML generator script.
+- [x] Generate `fhir-r5/` via the FHIR R5 generator script.
+- [x] Generate `protobuf/` via the protobuf generator script.
+- [x] Author docs for each subproject (`AGENTS.md`, `CLAUDE.md`,
+      `index.md`, `plan.md`, `tasks.md`).
+- [x] Build `front-end-form-with-html/` static single-page wizard.
+- [x] Build `front-end-dashboard-with-html/` static review table.
+- [ ] Build `front-end-form-with-svelte/` SvelteKit single-page wizard.
+- [ ] Build `front-end-dashboard-with-svelte/` SVAR DataGrid dashboard.
+- [ ] Build `full-stack-with-loco-tera-htmx-alpine-setup` scaffold script.
+- [ ] Build `full-stack-with-loco-tera-htmx-alpine/` Rust crate.
+- [ ] Author `typespec/` TypeSpec API definitions.
+- [ ] Unit-test `validateMeeting()` with Vitest.
+- [ ] Run `bin/test-form meeting` and resolve remaining failures.

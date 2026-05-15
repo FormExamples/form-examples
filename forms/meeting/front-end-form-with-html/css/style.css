@@ -1,0 +1,188 @@
+:root {
+  --color-bg: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-border: #d4d4d8;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-accent: #2563eb;
+  --color-green: #16a34a;
+  --color-amber: #ca8a04;
+  --color-red: #dc2626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+header, footer { padding: 1rem 2rem; }
+
+header h1 { margin: 0 0 0.25rem 0; font-size: 1.5rem; }
+
+.subtitle { margin: 0; color: var(--color-muted); }
+
+main { max-width: 62rem; margin: 0 auto; padding: 1rem 2rem 4rem; }
+
+.step {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.step legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.step h3 {
+  margin: 1.25rem 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--color-muted);
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+input[type="text"], input[type="email"], input[type="url"],
+input[type="tel"], input[type="number"], input[type="datetime-local"],
+input[type="date"], select, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  font: inherit;
+  background: var(--color-surface);
+}
+
+textarea { resize: vertical; min-height: 4rem; }
+
+.counter {
+  margin: 0;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+.counter.over { color: var(--color-red); font-weight: 600; }
+
+table.rowset {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+table.rowset th, table.rowset td {
+  padding: 0.35rem 0.4rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+  text-align: left;
+}
+table.rowset th { background: var(--color-bg); font-weight: 600; }
+table.rowset input, table.rowset select, table.rowset textarea {
+  margin-top: 0;
+  padding: 0.3rem 0.4rem;
+}
+table.rowset .row-index { width: 2.5rem; color: var(--color-muted); }
+table.rowset .row-remove { width: 2.5rem; text-align: center; }
+table.rowset button.remove {
+  background: var(--color-surface);
+  color: var(--color-red);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.4rem;
+}
+
+button.add-row {
+  margin-top: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px dashed var(--color-border);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: var(--color-accent);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+button[type="reset"] {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+button:hover { filter: brightness(1.05); }
+
+#report {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+#report h2 { margin-top: 0; }
+
+#report .health {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.health.green { background: var(--color-green); }
+.health.amber { background: var(--color-amber); }
+.health.red { background: var(--color-red); }
+
+#report .counts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.5rem 1.5rem;
+  margin: 1rem 0;
+}
+
+#report .counts div {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+#report .counts strong { color: var(--color-muted); font-weight: 500; margin-right: 0.5rem; }
+
+#report ul { padding-left: 1.25rem; }
+
+#report .flag-high { color: var(--color-red); }
+#report .flag-medium { color: var(--color-amber); }
+#report .flag-low { color: var(--color-muted); }
+
+@media print {
+  body { background: white; }
+  header, footer { padding: 0; }
+  .step { break-inside: avoid; box-shadow: none; }
+  .actions, button { display: none; }
+}

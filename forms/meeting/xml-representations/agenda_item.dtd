@@ -1,0 +1,12 @@
+<!ELEMENT agenda_item (id,created_at,updated_at,deleted_at,meeting_id,position,title,duration_minutes,presenter,notes,status)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT meeting_id (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT duration_minutes (#PCDATA)>
+<!ELEMENT presenter (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>
+<!ELEMENT status (#PCDATA)>

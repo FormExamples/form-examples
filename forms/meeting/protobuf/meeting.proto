@@ -1,0 +1,81 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: meeting
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum MeetingStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SCHEDULED = 2;  // scheduled
+  STATUS_IN_PROGRESS = 3;  // in-progress
+  STATUS_COMPLETED = 4;  // completed
+  STATUS_CANCELLED = 5;  // cancelled
+  STATUS_NO_SHOW = 6;  // no-show
+}
+
+enum MeetingCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_STAND_UP = 1;  // stand-up
+  CATEGORY_REVIEW = 2;  // review
+  CATEGORY_PLANNING = 3;  // planning
+  CATEGORY_RETROSPECTIVE = 4;  // retrospective
+  CATEGORY_TRAINING = 5;  // training
+  CATEGORY_ONE_TO_ONE = 6;  // one-to-one
+  CATEGORY_INTERVIEW = 7;  // interview
+  CATEGORY_GOVERNANCE = 8;  // governance
+  CATEGORY_MULTIDISCIPLINARY_TEAM = 9;  // multidisciplinary-team
+  CATEGORY_SOCIAL = 10;  // social
+  CATEGORY_KICKOFF = 11;  // kickoff
+  CATEGORY_ALL_HANDS = 12;  // all-hands
+  CATEGORY_WORKSHOP = 13;  // workshop
+  CATEGORY_DEMO = 14;  // demo
+  CATEGORY_OTHER = 15;  // other
+}
+
+enum MeetingVisibilityEnum {
+  VISIBILITY_UNSPECIFIED = 0;
+  VISIBILITY_PUBLIC = 1;  // public
+  VISIBILITY_INTERNAL = 2;  // internal
+  VISIBILITY_CONFIDENTIAL = 3;  // confidential
+  VISIBILITY_RESTRICTED = 4;  // restricted
+}
+
+enum MeetingOverallResultEnum {
+  OVERALLRESULT_UNSPECIFIED = 0;
+  OVERALLRESULT_PRODUCTIVE = 1;  // productive
+  OVERALLRESULT_PARTIAL = 2;  // partial
+  OVERALLRESULT_UNPRODUCTIVE = 3;  // unproductive
+  OVERALLRESULT_CANCELLED = 4;  // cancelled
+}
+
+message Meeting {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string organizer_id = 5;  // UUID — uuid
+  MeetingStatusEnum status = 6;  // VARCHAR(20)
+  string title = 7;  // VARCHAR(255) — max 255 chars
+  string purpose = 8;  // VARCHAR(500) — max 500 chars
+  string long_description = 9;  // TEXT
+  MeetingCategoryEnum category = 10;  // VARCHAR(40)
+  MeetingVisibilityEnum visibility = 11;  // VARCHAR(20)
+  string scheduled_start_at = 12;  // TIMESTAMPTZ — iso 8601
+  string scheduled_end_at = 13;  // TIMESTAMPTZ — iso 8601
+  string timezone = 14;  // VARCHAR(64) — max 64 chars
+  string location = 15;  // VARCHAR(255) — max 255 chars
+  string video_url = 16;  // VARCHAR(500) — max 500 chars
+  string phone_number = 17;  // VARCHAR(64) — max 64 chars
+  string dial_in_code = 18;  // VARCHAR(64) — max 64 chars
+  string joining_instructions = 19;  // TEXT
+  string calendar_uid = 20;  // VARCHAR(255) — max 255 chars
+  string summary = 21;  // VARCHAR(250) — max 250 chars
+  string actual_start_at = 22;  // TIMESTAMPTZ — iso 8601
+  string actual_end_at = 23;  // TIMESTAMPTZ — iso 8601
+  MeetingOverallResultEnum overall_result = 24;  // VARCHAR(20)
+  string additional_notes = 25;  // TEXT
+  string signed_by_name = 26;  // VARCHAR(255) — max 255 chars
+  string signed_at = 27;  // TIMESTAMPTZ — iso 8601
+}

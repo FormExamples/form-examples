@@ -1,0 +1,45 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: meeting_grade_flag
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum MeetingGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUMMARY_OVER_LIMIT = 1;  // summary-over-limit
+  CATEGORY_NO_ORGANIZER = 2;  // no-organizer
+  CATEGORY_NO_PARTICIPANTS = 3;  // no-participants
+  CATEGORY_NO_AGENDA = 4;  // no-agenda
+  CATEGORY_NO_OUTCOMES = 5;  // no-outcomes
+  CATEGORY_NO_SUMMARY = 6;  // no-summary
+  CATEGORY_START_AFTER_END = 7;  // start-after-end
+  CATEGORY_RECURRING_WITHOUT_UNTIL = 8;  // recurring-without-until
+  CATEGORY_ACTION_ITEM_OVERDUE = 9;  // action-item-overdue
+  CATEGORY_LOW_ACCEPTANCE_RATE = 10;  // low-acceptance-rate
+  CATEGORY_LOW_ATTENDANCE_RATE = 11;  // low-attendance-rate
+  CATEGORY_OVER_RUNNING = 12;  // over-running
+  CATEGORY_CONFLICTING_RESOURCE = 13;  // conflicting-resource
+  CATEGORY_CONFIDENTIAL_CONTENT = 14;  // confidential-content
+  CATEGORY_OTHER = 15;  // other
+}
+
+enum MeetingGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MeetingGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string meeting_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MeetingGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  MeetingGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

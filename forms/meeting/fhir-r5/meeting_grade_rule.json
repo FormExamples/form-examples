@@ -1,0 +1,108 @@
+{
+  "resourceType": "Observation",
+  "id": "ff0e8400-e29b-41d4-a716-44665544000a",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:meeting",
+        "code": "meeting_grade_rule",
+        "display": "Meeting Grade Rule"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/220e8400-e29b-41d4-a716-44665544000c"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting",
+            "code": "instrument",
+            "display": "Instrument"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting:instrument",
+            "code": "invitation",
+            "display": "Invitation"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting",
+            "code": "grade",
+            "display": "Grade"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting",
+            "code": "category",
+            "display": "Category"
+          }
+        ]
+      },
+      "valueString": "General"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:meeting",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+<!ELEMENT resource (id,created_at,updated_at,deleted_at,meeting_id,position,resource_type,name,quantity,unit,url,cost_amount,cost_currency,status,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT meeting_id (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT resource_type (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT unit (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT cost_amount (#PCDATA)>
+<!ELEMENT cost_currency (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

@@ -1,0 +1,46 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: resource
+
+syntax = "proto3";
+
+package form_examples.meeting;
+
+enum ResourceResourceTypeEnum {
+  RESOURCETYPE_UNSPECIFIED = 0;
+  RESOURCETYPE_ROOM = 1;  // room
+  RESOURCETYPE_EQUIPMENT = 2;  // equipment
+  RESOURCETYPE_DOCUMENT = 3;  // document
+  RESOURCETYPE_LINK = 4;  // link
+  RESOURCETYPE_BUDGET = 5;  // budget
+  RESOURCETYPE_CATERING = 6;  // catering
+  RESOURCETYPE_INTERPRETER = 7;  // interpreter
+  RESOURCETYPE_TRANSPORT = 8;  // transport
+  RESOURCETYPE_OTHER = 9;  // other
+}
+
+enum ResourceStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_REQUESTED = 1;  // requested
+  STATUS_RESERVED = 2;  // reserved
+  STATUS_CONFIRMED = 3;  // confirmed
+  STATUS_UNAVAILABLE = 4;  // unavailable
+  STATUS_CANCELLED = 5;  // cancelled
+}
+
+message Resource {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string meeting_id = 5;  // UUID — uuid
+  int32 position = 6;  // INTEGER
+  ResourceResourceTypeEnum resource_type = 7;  // VARCHAR(20)
+  string name = 8;  // VARCHAR(255) — max 255 chars
+  int32 quantity = 9;  // INTEGER
+  string unit = 10;  // VARCHAR(40) — max 40 chars
+  string url = 11;  // VARCHAR(500) — max 500 chars
+  double cost_amount = 12;  // NUMERIC(12, 2) — numeric(12, 2)
+  string cost_currency = 13;  // VARCHAR(3) — max 3 chars
+  ResourceStatusEnum status = 14;  // VARCHAR(20)
+  string notes = 15;  // TEXT
+}

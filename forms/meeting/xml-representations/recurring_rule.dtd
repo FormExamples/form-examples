@@ -1,0 +1,16 @@
+<!ELEMENT recurring_rule (id,created_at,updated_at,deleted_at,meeting_id,frequency,interval_count,by_day_of_week,by_day_of_month,by_set_position,by_month_of_year,series_count,series_until,timezone,rrule_text)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT meeting_id (#PCDATA)>
+<!ELEMENT frequency (#PCDATA)>
+<!ELEMENT interval_count (#PCDATA)>
+<!ELEMENT by_day_of_week (#PCDATA)>
+<!ELEMENT by_day_of_month (#PCDATA)>
+<!ELEMENT by_set_position (#PCDATA)>
+<!ELEMENT by_month_of_year (#PCDATA)>
+<!ELEMENT series_count (#PCDATA)>
+<!ELEMENT series_until (#PCDATA)>
+<!ELEMENT timezone (#PCDATA)>
+<!ELEMENT rrule_text (#PCDATA)>
