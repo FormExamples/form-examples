@@ -279,8 +279,24 @@ function wirePdf() {
   });
 }
 
+function wireCopyTriage() {
+  document.querySelector('#btn-copy-triage').addEventListener('click', async () => {
+    const last = JSON.parse(document.querySelector('#result').dataset.lastResult || '{}');
+    const lines = [
+      `[OKR] ${state.objective.obj_title || '(no title)'}`,
+      `Level: ${state.cycle.level}  Cycle: ${state.cycle.cycleStartDate} → ${state.cycle.cycleEndDate}`,
+      `RAG: ${(last.computedCompositeRag ?? 'not-computed').toUpperCase()}  Progress: ${state.scores.progressPercent}%  Conf: ${state.scores.confidenceDecile}/10`,
+      `KRs (${state.keyResults.length}):`,
+      ...state.keyResults.map(k => `  ${k.position}. ${k.title} — ${k.currentValue}/${k.targetValue} ${k.unit}`),
+      `Flags: ${(last.flags ?? []).map(f => `${f.flagCode}(${f.priority})`).join(', ') || '(none)'}`,
+    ];
+    await navigator.clipboard.writeText(lines.join('\n'));
+    document.querySelector('#result').insertAdjacentHTML('beforeend', '<p><i>Copied to clipboard.</i></p>');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
   renderStep6(); renderStep7(); renderStep8(); renderStep9(); renderStep10();
-  wireCompute(); wirePdf();
+  wireCompute(); wirePdf(); wireCopyTriage();
 });
