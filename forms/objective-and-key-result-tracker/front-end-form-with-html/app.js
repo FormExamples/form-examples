@@ -1,5 +1,9 @@
 import { gradeObjective } from './engine.js';
 
+// Expose the engine on `window` so the Playwright smoke test (and any
+// in-browser tooling) can call it without a cross-origin dynamic import.
+if (typeof window !== 'undefined') window.gradeObjective = gradeObjective;
+
 export const state = {
   reporter: { name: '', email: '', role: '' },
   cycle: { level: '', cycle: '', cycleStartDate: '', cycleEndDate: '' },
