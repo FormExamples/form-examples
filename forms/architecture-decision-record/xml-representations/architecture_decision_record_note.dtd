@@ -1,0 +1,8 @@
+<!ELEMENT architecture_decision_record_note (id,created_at,updated_at,architecture_decision_record_id,noted_at,noted_by,body)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT architecture_decision_record_id (#PCDATA)>
+<!ELEMENT noted_at (#PCDATA)>
+<!ELEMENT noted_by (#PCDATA)>
+<!ELEMENT body (#PCDATA)>

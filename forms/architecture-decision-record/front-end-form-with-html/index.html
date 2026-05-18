@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Architecture Decision Record — Tyree &amp; Akerman</title>
+  <meta name="description" content="Single-page wizard for capturing an Architecture Decision Record using the Jeff Tyree and Art Akerman 14-section template.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Architecture Decision Record</h1>
+      <p class="subtitle">Tyree &amp; Akerman 14-section template — author identification, all 14 sections, and sign-off in one wizard.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Capture an architecture decision using the Tyree &amp; Akerman 14-section
+        template (IEEE Software, 2005). Complete all 16 steps; the last step
+        renders a Markdown ADR document ready to commit to
+        <code>docs/adr/NNNN-slug.md</code>.
+      </p>
+      <p>
+        This is a documentation aid, not a workflow tool. The form does not
+        notify reviewers, route approvals, or enforce sign-off. Status
+        <code>pending</code> lets you save partial work; status
+        <code>decided</code> means all sections are populated.
+      </p>
+    </div>
+
+    <form
+      id="adr-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+        <!-- Sections rendered by js/app.js: -->
+        <!-- 1 Author, 2 Organization, 3 Issue, 4 Decision, -->
+        <!-- 5 Status & Group, 6 Assumptions, 7 Constraints, -->
+        <!-- 8 Positions, 9 Argument, 10 Implications, -->
+        <!-- 11 Related Decisions, 12 Related Requirements, -->
+        <!-- 13 Related Artifacts, 14 Related Principles, -->
+        <!-- 15 Notes, 16 Summary -->
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Generate Markdown ADR
+        </button>
+        <label for="import-input" class="btn btn-secondary" style="cursor: pointer;">
+          Import .md
+        </label>
+        <input
+          type="file"
+          id="import-input"
+          accept=".md,text/markdown,text/plain"
+          style="display: none;"
+        >
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="ADR report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        Template: Jeff Tyree &amp; Art Akerman, "Architecture Decisions:
+        Demystifying Architecture", IEEE Software, March/April 2005. Source:
+        <a href="https://github.com/joelparkerhenderson/architecture-decision-record">joelparkerhenderson/architecture-decision-record</a>.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tag (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts.
+  -->
+  <script src="js/app.js"></script>
+</body>
+</html>

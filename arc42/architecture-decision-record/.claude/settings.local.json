@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(ls skel/)",
+      "Bash(grep -i \"architecture\\\\|arc-?42\\\\|adr\" forms.tsv)",
+      "Bash(bin/create-form architecture-decision-record *)",
+      "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
+      "Bash(bin/test-form architecture-decision-record *)",
+      "Bash(awk -F/ '{print $4}')",
+      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/architecture-decision-record/full-stack-with-loco-tera-htmx-alpine-setup)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm run *)",
+      "Bash(cargo loco *)",
+      "Bash(loco --help)",
+      "Bash(ln -s index.md README.md)",
+      "Bash(cargo check *)",
+      "Bash(cargo test *)",
+      "Bash(echo \"rc: $?\")",
+      "Bash(echo \"exit code: $?\")",
+      "Read(//private/tmp/**)",
+      "Bash(PGUSER=postgres psql -l)"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+View architecture_decision_record_note: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View architecture_decision_record_note: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"architecture_decision_record_id" | capitalize }}:</b> {{item.architecture_decision_record_id}}</label>
+    </div>
+<div>
+    <label><b>{{"noted_at" | capitalize }}:</b> {{item.noted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"noted_by" | capitalize }}:</b> {{item.noted_by}}</label>
+    </div>
+<div>
+    <label><b>{{"body" | capitalize }}:</b> {{item.body}}</label>
+    </div>
+<br />
+<a href="/architecture_decision_record_notes">Back to architecture_decision_record_notes</a>
+</div>
+{% endblock content %}

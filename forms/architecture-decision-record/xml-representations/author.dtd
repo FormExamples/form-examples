@@ -1,0 +1,11 @@
+<!ELEMENT author (id,created_at,updated_at,deleted_at,name,email,phone,role,organization_name,team_name)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT organization_name (#PCDATA)>
+<!ELEMENT team_name (#PCDATA)>

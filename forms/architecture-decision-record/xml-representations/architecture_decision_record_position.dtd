@@ -1,0 +1,12 @@
+<!ELEMENT architecture_decision_record_position (id,created_at,updated_at,architecture_decision_record_id,ordinal,name,description,model_or_diagram_url,is_chosen,pros,cons)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT architecture_decision_record_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT model_or_diagram_url (#PCDATA)>
+<!ELEMENT is_chosen (#PCDATA)>
+<!ELEMENT pros (#PCDATA)>
+<!ELEMENT cons (#PCDATA)>

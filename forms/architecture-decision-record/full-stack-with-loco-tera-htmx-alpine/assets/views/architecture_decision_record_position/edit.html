@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit architecture_decision_record_position: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+Edit architecture_decision_record_position: {{ item.id }}
+{% endblock page_title %}
+
+{% block content %}
+<div class="mb-10">
+    <div id="error-message" class="mt-4 text-sm text-red-600"></div>
+    <form hx-put="/architecture_decision_record_positions/{{ item.id }}" hx-ext="submitjson" hx-target="#success-message" class="flex-1 lg:max-w-2xl">
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">architecture_decision_record_id</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" min="-2147483648" max="2147483647" id="architecture_decision_record_id" name="architecture_decision_record_id" type="number" value="{{item.architecture_decision_record_id}}"  step="1" />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">ordinal</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" min="-2147483648" max="2147483647" id="ordinal" name="ordinal" type="number" value="{{item.ordinal}}"  step="1" />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">name</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="name" name="name" type="text" value="{{item.name}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">description</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="description" name="description" type="text" value="{{item.description}}"  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">model_or_diagram_url</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="model_or_diagram_url" name="model_or_diagram_url" type="text" value="{{item.model_or_diagram_url}}"  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">is_chosen</label>
+    <input class="flex rounded-md border border-input bg-transparent text-base shadow-sm md:text-sm" id="is_chosen" name="is_chosen" type="checkbox" value="true" {% if item.is_chosen %}checked{%endif %}  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">pros</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="pros" name="pros" type="text" value="{{item.pros}}"  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">cons</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="cons" name="cons" type="text" value="{{item.cons}}"  />
+</div>
+        <div>
+            <div class="mt-5">
+                <button class=" text-xs py-3 px-6 rounded-lg bg-gray-900 text-white" type="submit">Submit</button>
+                <button class="text-xs py-3 px-6 rounded-lg bg-red-600 text-white"
+                            onclick="confirmDelete(event, '/architecture_decision_record_positions/{{ item.id }}', '/architecture_decision_record_positions' )">Delete</button>
+            </div>
+        </div>
+    </form>
+    <div id="success-message" class="mt-4"></div>
+    <br />
+    <a href="/architecture_decision_record_positions">Back to architecture_decision_record_position</a>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

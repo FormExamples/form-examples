@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE architecture_decision_record_position SYSTEM "architecture_decision_record_position.dtd">
+<architecture_decision_record_position>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<architecture_decision_record_id>770e8400-e29b-41d4-a716-446655440002</architecture_decision_record_id>
+<ordinal>1</ordinal>
+<name>Example</name>
+<description>Example text.</description>
+<model_or_diagram_url></model_or_diagram_url>
+<is_chosen>true</is_chosen>
+<pros></pros>
+<cons></cons>
+</architecture_decision_record_position>

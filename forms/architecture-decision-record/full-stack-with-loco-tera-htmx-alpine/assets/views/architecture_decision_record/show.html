@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}
+ADR — {{ item.title }}
+{% endblock title %}
+
+{% block page_title %}
+ADR — {{ item.title }}
+{% endblock page_title %}
+
+{% macro section(title, body) %}
+<section class="card">
+    <h2 class="text-lg font-semibold mb-2">{{ title }}</h2>
+    {% if body and body | length > 0 %}
+        <div class="text-sm whitespace-pre-wrap">{{ body | escape }}</div>
+    {% else %}
+        <p class="text-sm text-slate-500 italic">_TBD_</p>
+    {% endif %}
+</section>
+{% endmacro section %}
+
+{% macro bullets(title, body) %}
+<section class="card">
+    <h2 class="text-lg font-semibold mb-2">{{ title }}</h2>
+    {% set raw = body | default(value="") %}
+    {% if raw | trim | length > 0 %}
+        <ul class="list-disc list-inside text-sm space-y-1">
+            {% for line in raw | split(pat="\n") %}
+                {% set t = line | trim %}
+                {% if t %}<li>{{ t | escape }}</li>{% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-sm text-slate-500 italic">_None._</p>
+    {% endif %}
+</section>
+{% endmacro bullets %}
+
+{% block content %}
+<div class="mb-10 space-y-4">
+
+    {% set s = item.status | default(value="pending") %}
+
+    {% if s == "superseded" %}
+    <div role="alert" class="rounded-md border-l-4 border-slate-400 bg-slate-100 text-slate-800 p-3 text-sm">
+        <strong>This decision has been superseded.</strong>
+        See the <a class="underline" href="#related-decisions">Related Decisions</a>
+        section below for the replacement.
+    </div>
+    {% elif s == "deprecated" %}
+    <div role="alert" class="rounded-md border-l-4 border-red-500 bg-red-50 text-red-900 p-3 text-sm">
+        <strong>This decision is deprecated.</strong>
+        It is preserved for historical reference and should not be applied to new work.
+    </div>
+    {% elif s == "pending" %}
+    <div role="alert" class="rounded-md border-l-4 border-amber-400 bg-amber-50 text-amber-900 p-3 text-sm">
+        <strong>This decision is still pending.</strong>
+        It has not yet been formally accepted. Status will move to <em>decided</em> when the author commits, then <em>approved</em> after review.
+    </div>
+    {% endif %}
+
+    <section class="card flex flex-wrap items-start justify-between gap-3">
+        <div>
+            <div class="flex items-center gap-3 mb-1">
+                <span class="font-mono text-slate-500 text-sm">
+                    {% if item.number %}{{ item.number }}{% else %}NNNN{% endif %}
+                </span>
+                <span class="status-pill status-{{ s }}">{{ s }}</span>
+                {% if item.decision_group %}
+                    <span class="text-xs text-slate-600 bg-slate-100 rounded px-2 py-0.5">{{ item.decision_group }}</span>
+                {% endif %}
+            </div>
+            <h2 class="text-xl font-semibold">{{ item.title | escape }}</h2>
+            <div class="text-xs text-slate-600 mt-1 space-x-3">
+                {% if author %}<span><strong>Author:</strong> {{ author.name | escape }}{% if author.email %} &lt;{{ author.email | escape }}&gt;{% endif %}{% if author.role %} ({{ author.role | escape }}){% endif %}</span>{% endif %}
+                {% if organization %}<span><strong>Organization:</strong> {{ organization.name | escape }}</span>{% endif %}
+                {% if item.decision_date %}<span><strong>Date:</strong> {{ item.decision_date }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="flex gap-2 text-sm">
+            <a class="btn-primary" href="/architecture_decision_records/{{ item.id }}/edit">Edit</a>
+            <a class="text-blue-700 hover:underline self-center" href="/architecture_decision_records/{{ item.id }}/markdown" target="_blank">View Markdown →</a>
+        </div>
+    </section>
+
+    {{ self::section(title="Issue",        body=item.issue) }}
+    {{ self::section(title="Decision",     body=item.decision) }}
+    {{ self::section(title="Assumptions",  body=item.assumptions) }}
+    {{ self::section(title="Constraints",  body=item.constraints) }}
+
+    <section class="card">
+        <h2 class="text-lg font-semibold mb-2">Positions</h2>
+        {% if positions %}
+            <div class="grid gap-3">
+                {% for p in positions %}
+                    <div class="border rounded p-3 {% if p.is_chosen %}bg-blue-50 border-blue-500{% else %}bg-slate-50 border-slate-200{% endif %}">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-sm">
+                                {{ loop.index }}. {{ p.name | escape }}
+                                {% if p.is_chosen %}<span class="ml-2 text-blue-700">✓ chosen</span>{% endif %}
+                            </span>
+                        </div>
+                        {% if p.description %}<p class="text-sm whitespace-pre-wrap">{{ p.description | escape }}</p>{% endif %}
+                        {% if p.model_or_diagram_url %}
+                            <p class="text-xs mt-1"><a class="text-blue-700 underline" href="{{ p.model_or_diagram_url }}" target="_blank">{{ p.model_or_diagram_url }}</a></p>
+                        {% endif %}
+                        {% if p.pros %}<div class="mt-2"><strong class="text-xs">Pros:</strong><pre class="text-xs whitespace-pre-wrap mt-1">{{ p.pros | escape }}</pre></div>{% endif %}
+                        {% if p.cons %}<div class="mt-2"><strong class="text-xs">Cons:</strong><pre class="text-xs whitespace-pre-wrap mt-1">{{ p.cons | escape }}</pre></div>{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-sm text-slate-500 italic">_None._</p>
+        {% endif %}
+    </section>
+
+    {{ self::section(title="Argument",     body=item.argument) }}
+    {{ self::section(title="Implications", body=item.implications) }}
+
+    <div id="related-decisions" class="scroll-mt-4">
+        {{ self::bullets(title="Related Decisions",    body=item.related_decisions) }}
+    </div>
+    {{ self::bullets(title="Related Requirements", body=item.related_requirements) }}
+    {{ self::bullets(title="Related Artifacts",    body=item.related_artifacts) }}
+    {{ self::bullets(title="Related Principles",   body=item.related_principles) }}
+
+    <section class="card">
+        <h2 class="text-lg font-semibold mb-2">Notes</h2>
+        {% if notes %}
+            <div class="grid gap-2">
+                {% for n in notes %}
+                    <div class="border-l-4 border-blue-500 bg-slate-50 p-2 rounded">
+                        <div class="text-xs text-slate-600">
+                            {{ n.noted_at | default(value=n.created_at) }} — {{ n.noted_by | default(value="unknown") | escape }}
+                        </div>
+                        <div class="text-sm whitespace-pre-wrap">{{ n.body | escape }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-sm text-slate-500 italic">_None._</p>
+        {% endif %}
+    </section>
+
+    {% if item.signed_off_by %}
+    <section class="card border-t-4 border-green-500">
+        <h2 class="text-lg font-semibold mb-2">Signed off</h2>
+        <p class="text-sm">
+            Signed off by <strong>{{ item.signed_off_by | escape }}</strong>
+            {% if item.signed_off_at %}on {{ item.signed_off_at }}{% endif %}.
+        </p>
+    </section>
+    {% endif %}
+
+    <div class="mt-4">
+        <a class="text-blue-700 hover:underline text-sm" href="/architecture_decision_records">← Back to ADR register</a>
+    </div>
+</div>
+{% endblock content %}

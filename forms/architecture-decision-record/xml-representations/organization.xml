@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE organization SYSTEM "organization.dtd">
+<organization>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<legal_name>Example</legal_name>
+<industry></industry>
+<domain></domain>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<description>Example text.</description>
+</organization>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE architecture_decision_record SYSTEM "architecture_decision_record.dtd">
+<architecture_decision_record>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<author_id>550e8400-e29b-41d4-a716-446655440000</author_id>
+<organization_id>660e8400-e29b-41d4-a716-446655440001</organization_id>
+<slug></slug>
+<number>2</number>
+<title>Example Title</title>
+<decision_date>2026-01-15</decision_date>
+<status>pending</status>
+<decision_group>business</decision_group>
+<issue></issue>
+<decision></decision>
+<assumptions></assumptions>
+<constraints></constraints>
+<argument></argument>
+<implications></implications>
+<related_decisions></related_decisions>
+<related_requirements></related_requirements>
+<related_artifacts></related_artifacts>
+<related_principles></related_principles>
+<signed_off_by></signed_off_by>
+<signed_off_at>2026-04-09T10:00:00Z</signed_off_at>
+</architecture_decision_record>
