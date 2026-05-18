@@ -1,0 +1,16 @@
+<!ELEMENT clinician (id,created_at,updated_at,deleted_at,name,professional_status,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,registration_body,registration_number,signature_image_data_url,united_kingdom_nhs_number)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT professional_status (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT registration_body (#PCDATA)>
+<!ELEMENT registration_number (#PCDATA)>
+<!ELEMENT signature_image_data_url (#PCDATA)>
+<!ELEMENT united_kingdom_nhs_number (#PCDATA)>

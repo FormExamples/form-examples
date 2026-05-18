@@ -1,0 +1,38 @@
+logger:
+  enable: true
+  level: debug
+  format: pretty
+
+server:
+  port: 5150
+  host: http://localhost
+  middlewares:
+    static:
+      enable: true
+      must_exist: false
+      folder:
+        uri: "/static"
+        path: "assets/static"
+    cors:
+      enable: true
+
+database:
+  uri: postgres://postgres:postgres@localhost:5432/international_certificate_of_vaccination_or_prophylaxis_development
+  enable_logging: false
+  connect_timeout: 500
+  idle_timeout: 500
+  min_connections: 1
+  max_connections: 10
+  auto_migrate: true
+  dangerously_truncate: false
+  dangerously_recreate: false
+
+workers:
+  mode: BackgroundQueue
+
+mailer:
+  smtp:
+    enable: false
+    host: localhost
+    port: 1025
+    secure: false

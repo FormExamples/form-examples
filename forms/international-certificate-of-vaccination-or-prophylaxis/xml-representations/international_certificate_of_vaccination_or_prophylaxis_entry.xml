@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE international_certificate_of_vaccination_or_prophylaxis_entry SYSTEM "international_certificate_of_vaccination_or_prophylaxis_entry.dtd">
+<international_certificate_of_vaccination_or_prophylaxis_entry>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<international_certificate_of_vaccination_or_prophylaxis_id>880e8400-e29b-41d4-a716-446655440003</international_certificate_of_vaccination_or_prophylaxis_id>
+<entry_index>1</entry_index>
+<disease>yellow-fever</disease>
+<disease_other_label></disease_other_label>
+<disease_as_snomed_ct></disease_as_snomed_ct>
+<disease_as_icd_11></disease_as_icd_11>
+<vaccine_or_prophylaxis_name>Example</vaccine_or_prophylaxis_name>
+<vaccine_as_snomed_ct></vaccine_as_snomed_ct>
+<vaccine_as_atc></vaccine_as_atc>
+<manufacturer></manufacturer>
+<manufacturer_country_as_iso_3166_1_alpha_3></manufacturer_country_as_iso_3166_1_alpha_3>
+<batch_number></batch_number>
+<lot_expiry_date>2026-01-15</lot_expiry_date>
+<route>intramuscular</route>
+<anatomical_site>left-deltoid</anatomical_site>
+<dose_amount_value>10.0</dose_amount_value>
+<dose_amount_unit>mL</dose_amount_unit>
+<dose_sequence>1</dose_sequence>
+<dose_sequence_total>1</dose_sequence_total>
+<vaccination_date>2026-01-15</vaccination_date>
+<vaccination_time></vaccination_time>
+<administered_by_clinician_id>660e8400-e29b-41d4-a716-446655440001</administered_by_clinician_id>
+<administering_clinician_signature_data_url>Dr Smith</administering_clinician_signature_data_url>
+<administering_clinician_professional_status>active</administering_clinician_professional_status>
+<validity_starts_on>2026-01-15</validity_starts_on>
+<validity_ends_on>2026-01-15</validity_ends_on>
+<validity_is_lifetime>yes</validity_is_lifetime>
+<centre_id>660e8400-e29b-41d4-a716-446655440001</centre_id>
+<centre_stamp_image_data_url></centre_stamp_image_data_url>
+<centre_stamp_applied>yes</centre_stamp_applied>
+<adverse_event>none</adverse_event>
+<adverse_event_notes>Example text.</adverse_event_notes>
+<entry_valid>yes</entry_valid>
+<entry_notes>Example text.</entry_notes>
+</international_certificate_of_vaccination_or_prophylaxis_entry>

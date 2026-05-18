@@ -1,0 +1,13 @@
+<h2>Step 2 — Vaccinee identity</h2>
+<label>Surname <input name="patient_surname" required /></label>
+<label>Given names <input name="patient_given_names" required /></label>
+<label>Date of birth <input type="date" name="patient_birth_date" required /></label>
+<label>Sex
+  <select name="patient_sex">
+    <option value="">Select…</option>
+    <option>male</option><option>female</option>
+    <option>other</option><option>unspecified</option>
+  </select>
+</label>
+<label>Nationality (ISO 3166-1 alpha-3) <input name="patient_nationality_alpha_3" maxlength="3" /></label>
+<label>Travel document number <input name="patient_travel_document_number" /></label>

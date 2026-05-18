@@ -1,0 +1,384 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+        "code": "international_certificate_of_vaccination_or_prophylaxis",
+        "display": "International Certificate Of Vaccination Or Prophylaxis"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/aa0e8400-e29b-41d4-a716-446655440005"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "issued_at",
+            "display": "Issued At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "revoked_at",
+            "display": "Revoked At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "revocation_reason",
+            "display": "Revocation Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "certificate_serial_number",
+            "display": "Certificate Serial Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "issuing_country_as_iso_3166_1_alpha_3",
+            "display": "Issuing Country As Iso 3166 1 Alpha 3"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "primary_language_as_bcp_47",
+            "display": "Primary Language As Bcp 47"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "secondary_language_as_bcp_47",
+            "display": "Secondary Language As Bcp 47"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "tertiary_language_as_bcp_47",
+            "display": "Tertiary Language As Bcp 47"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "destination_countries_as_iso_3166_1_alpha_3",
+            "display": "Destination Countries As Iso 3166 1 Alpha 3"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "planned_arrival_date",
+            "display": "Planned Arrival Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "purpose_of_travel",
+            "display": "Purpose Of Travel"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:purpose_of_travel",
+            "code": "tourism",
+            "display": "Tourism"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "medical_waiver",
+            "display": "Medical Waiver"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:medical_waiver",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "medical_waiver_reason",
+            "display": "Medical Waiver Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "medical_waiver_signed_at",
+            "display": "Medical Waiver Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "declared_pregnancy",
+            "display": "Declared Pregnancy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:declared_pregnancy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "declared_breastfeeding",
+            "display": "Declared Breastfeeding"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:declared_breastfeeding",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "declared_immunosuppression",
+            "display": "Declared Immunosuppression"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:declared_immunosuppression",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "electronic_signature_data_url",
+            "display": "Electronic Signature Data Url"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "electronic_signature_signed_at",
+            "display": "Electronic Signature Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "overall_valid",
+            "display": "Overall Valid"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis:overall_valid",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "validity_computed_at",
+            "display": "Validity Computed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:international-certificate-of-vaccination-or-prophylaxis",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

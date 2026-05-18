@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE international_certificate_of_vaccination_or_prophylaxis SYSTEM "international_certificate_of_vaccination_or_prophylaxis.dtd">
+<international_certificate_of_vaccination_or_prophylaxis>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<center_id>770e8400-e29b-41d4-a716-446655440002</center_id>
+<status>draft</status>
+<issued_at>2026-04-09T10:00:00Z</issued_at>
+<revoked_at>2026-04-09T10:00:00Z</revoked_at>
+<revocation_reason>Example text.</revocation_reason>
+<certificate_serial_number></certificate_serial_number>
+<issuing_country_as_iso_3166_1_alpha_3></issuing_country_as_iso_3166_1_alpha_3>
+<primary_language_as_bcp_47>English</primary_language_as_bcp_47>
+<secondary_language_as_bcp_47>English</secondary_language_as_bcp_47>
+<tertiary_language_as_bcp_47>English</tertiary_language_as_bcp_47>
+<destination_countries_as_iso_3166_1_alpha_3></destination_countries_as_iso_3166_1_alpha_3>
+<planned_arrival_date>2026-01-15</planned_arrival_date>
+<purpose_of_travel>tourism</purpose_of_travel>
+<medical_waiver>yes</medical_waiver>
+<medical_waiver_reason>Example text.</medical_waiver_reason>
+<medical_waiver_signed_by_clinician_id>660e8400-e29b-41d4-a716-446655440001</medical_waiver_signed_by_clinician_id>
+<medical_waiver_signed_at>2026-04-09T10:00:00Z</medical_waiver_signed_at>
+<declared_pregnancy>yes</declared_pregnancy>
+<declared_breastfeeding>yes</declared_breastfeeding>
+<declared_immunosuppression>yes</declared_immunosuppression>
+<electronic_signature_data_url></electronic_signature_data_url>
+<electronic_signature_signed_at>2026-04-09T10:00:00Z</electronic_signature_signed_at>
+<overall_valid>yes</overall_valid>
+<validity_computed_at>2026-04-09T10:00:00Z</validity_computed_at>
+<notes>Example text.</notes>
+</international_certificate_of_vaccination_or_prophylaxis>

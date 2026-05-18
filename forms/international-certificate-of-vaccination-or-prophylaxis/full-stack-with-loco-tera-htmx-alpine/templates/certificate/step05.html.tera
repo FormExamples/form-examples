@@ -1,0 +1,29 @@
+<h2>Step 5 — Vaccination entry — disease &amp; vaccine</h2>
+<label>Disease
+  <select name="entry_1_disease">
+    <option value="">Select…</option>
+    <option>yellow-fever</option><option>polio</option>
+    <option>smallpox</option><option>cholera</option>
+    <option>meningococcal</option><option>covid-19</option>
+    <option>other</option>
+  </select>
+</label>
+<label>Vaccine name <input name="entry_1_vaccine_or_prophylaxis_name" /></label>
+<label>Manufacturer <input name="entry_1_manufacturer" /></label>
+<label>Batch number <input name="entry_1_batch_number" /></label>
+<label>Route
+  <select name="entry_1_route">
+    <option value="">Select…</option>
+    <option>intramuscular</option><option>subcutaneous</option>
+    <option>intradermal</option><option>oral</option>
+    <option>intranasal</option><option>other</option>
+  </select>
+</label>
+<label>Dose amount + unit
+  <input type="number" step="0.001" name="entry_1_dose_amount_value" />
+  <select name="entry_1_dose_amount_unit">
+    <option value="">unit</option>
+    <option>mL</option><option>mg</option>
+    <option>IU</option><option>drops</option>
+  </select>
+</label>

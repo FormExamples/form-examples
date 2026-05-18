@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE center SYSTEM "center.dtd">
+<center>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<who_designation_reference></who_designation_reference>
+<national_authority_reference></national_authority_reference>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<country_as_iso_3166_1_alpha_3></country_as_iso_3166_1_alpha_3>
+<postcode>SW1A 1AA</postcode>
+<uniform_stamp_image_data_url></uniform_stamp_image_data_url>
+<authorised_diseases></authorised_diseases>
+<designation_valid_from>2026-01-15</designation_valid_from>
+<designation_valid_until>2026-01-15</designation_valid_until>
+</center>

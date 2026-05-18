@@ -1,0 +1,9 @@
+<h2>Step 3 — Vaccinee signature &amp; consent</h2>
+<label>Signature (drawn or typed)
+  <textarea name="patient_signature" rows="3" required></textarea>
+</label>
+<label>
+  <input type="checkbox" name="consented_to_data_sharing" value="yes" />
+  I consent to onward sharing of this certificate data with destination
+  health authorities.
+</label>

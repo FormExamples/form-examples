@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICVP review dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>ICVP review dashboard</h1>
+    <p>Issued International Certificates of Vaccination or Prophylaxis</p>
+  </header>
+
+  <section class="filters">
+    <label>Disease
+      <select id="filterDisease">
+        <option value="">All</option>
+        <option>yellow-fever</option><option>polio</option>
+        <option>smallpox</option><option>cholera</option>
+        <option>meningococcal</option><option>covid-19</option>
+        <option>other</option>
+      </select>
+    </label>
+    <label>Status
+      <select id="filterStatus">
+        <option value="">All</option>
+        <option>draft</option><option>issued</option>
+        <option>reissued</option><option>revoked</option>
+      </select>
+    </label>
+    <label>Centre
+      <select id="filterCentre"><option value="">All</option></select>
+    </label>
+    <label>Search
+      <input type="search" id="filterSearch" placeholder="surname / given names / serial" />
+    </label>
+  </section>
+
+  <main class="grid">
+    <table id="certificatesTable">
+      <thead>
+        <tr>
+          <th data-sort="serial">Serial</th>
+          <th data-sort="surname">Surname</th>
+          <th data-sort="givenNames">Given names</th>
+          <th data-sort="centre">Centre</th>
+          <th data-sort="primaryDisease">Primary disease</th>
+          <th data-sort="entries">Entries</th>
+          <th data-sort="vaccinationDate">Vaccination date</th>
+          <th data-sort="validityStatus">Validity</th>
+          <th data-sort="status">Status</th>
+        </tr>
+      </thead>
+      <tbody id="certificates"></tbody>
+    </table>
+
+    <aside id="detail" aria-live="polite">
+      <h2>Details</h2>
+      <p>Select a row to see the certificate's vaccination entries.</p>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
