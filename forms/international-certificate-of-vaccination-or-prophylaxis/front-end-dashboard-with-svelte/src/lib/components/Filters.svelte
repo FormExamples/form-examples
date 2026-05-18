@@ -21,7 +21,7 @@
 <section class="flex flex-wrap gap-4 p-4 bg-white border-b">
   <label class="flex flex-col text-sm gap-1">
     Disease
-    <select class="border rounded p-1" bind:value={disease} on:change={emit}>
+    <select class="border rounded p-1" bind:value={disease} onchange={emit}>
       <option value="">All</option>
       <option value="yellow-fever">yellow-fever</option>
       <option value="polio">polio</option>
@@ -34,7 +34,7 @@
   </label>
   <label class="flex flex-col text-sm gap-1">
     Status
-    <select class="border rounded p-1" bind:value={status} on:change={emit}>
+    <select class="border rounded p-1" bind:value={status} onchange={emit}>
       <option value="">All</option>
       <option>draft</option><option>issued</option>
       <option>reissued</option><option>revoked</option>
@@ -42,7 +42,7 @@
   </label>
   <label class="flex flex-col text-sm gap-1">
     Centre
-    <select class="border rounded p-1" bind:value={centre} on:change={emit}>
+    <select class="border rounded p-1" bind:value={centre} onchange={emit}>
       <option value="">All</option>
       {#each centres as c}
         <option value={c}>{c}</option>
@@ -52,6 +52,6 @@
   <label class="flex flex-col text-sm gap-1">
     Search
     <input type="search" class="border rounded p-1" placeholder="surname / given / serial"
-           bind:value={search} on:input={emit} />
+           bind:value={search} oninput={emit} />
   </label>
 </section>

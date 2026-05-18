@@ -40,7 +40,7 @@
     </ul>
   </details>
 
-  <button class="bg-yellow-700 text-white px-4 py-2 rounded" on:click={() => window.print()}>
+  <button class="bg-yellow-700 text-white px-4 py-2 rounded" onclick={() => window.print()}>
     Print certificate
   </button>
 </div>

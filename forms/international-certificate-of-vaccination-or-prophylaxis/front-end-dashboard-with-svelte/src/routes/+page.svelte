@@ -56,7 +56,7 @@
     <thead class="bg-stone-100">
       <tr>
         {#each COLUMNS as col}
-          <th class="text-left p-2 cursor-pointer select-none" on:click={() => setSort(col.id)}>
+          <th class="text-left p-2 cursor-pointer select-none" onclick={() => setSort(col.id)}>
             {col.header}
             {sortKey === col.id ? (sortDir === 'asc' ? '↑' : '↓') : ''}
           </th>
@@ -67,7 +67,7 @@
       {#each sortedView as row}
         <tr class="border-t hover:bg-yellow-50 cursor-pointer"
             class:bg-yellow-100={selected?.id === row.id}
-            on:click={() => (selected = row)}>
+            onclick={() => (selected = row)}>
           <td class="p-2">{row.serial}</td>
           <td class="p-2">{row.surname}</td>
           <td class="p-2">{row.givenNames}</td>

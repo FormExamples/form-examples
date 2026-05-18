@@ -26,7 +26,7 @@
 <nav class="flex gap-1 flex-wrap mb-4" aria-live="polite">
   {#each STEPS as s}
     <button class="px-3 py-1 border rounded text-sm" class:bg-yellow-700={s.n === step}
-            class:text-white={s.n === step} on:click={() => go(s.n)}>
+            class:text-white={s.n === step} onclick={() => go(s.n)}>
       {s.n}
     </button>
   {/each}
@@ -45,6 +45,6 @@
 </section>
 
 <nav class="flex justify-between mt-4">
-  <button class="px-4 py-2 border rounded" on:click={() => go(step - 1)} disabled={step === 1}>Previous</button>
-  <button class="px-4 py-2 border rounded" on:click={() => go(step + 1)} disabled={step === TOTAL_STEPS}>Next</button>
+  <button class="px-4 py-2 border rounded" onclick={() => go(step - 1)} disabled={step === 1}>Previous</button>
+  <button class="px-4 py-2 border rounded" onclick={() => go(step + 1)} disabled={step === TOTAL_STEPS}>Next</button>
 </nav>

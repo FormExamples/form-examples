@@ -15,7 +15,7 @@
   <label class="flex items-center gap-2">
     <input type="checkbox"
            checked={c.patient.consentedToDataSharing === 'yes'}
-           on:change={toggleConsent} />
+           onchange={toggleConsent} />
     I consent to onward sharing of this certificate data with destination health authorities.
   </label>
 </div>
