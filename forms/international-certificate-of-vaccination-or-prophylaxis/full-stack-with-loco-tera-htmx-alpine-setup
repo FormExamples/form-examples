@@ -1,0 +1,132 @@
+#!/bin/sh
+# setup.sh
+#
+# Setup script for the full stack Loco application for the WHO
+# International Certificate of Vaccination or Prophylaxis (ICVP).
+#
+# - Create database user `loco` (if not exists).
+# - Create application databases for development, test, production (if not
+#   exists).
+# - Run `cargo loco generate scaffold` once per table, in dependency order
+#   (patient, clinician, center, certificate, entry) so that foreign-key
+#   targets already exist when referencing tables are created.
+#
+# Database names use the FULL form slug, never an abbreviation.
+#
+# Do not edit by hand — re-run after changing the SQL migrations.
+
+set -euf
+
+echo "Scaffolding international-certificate-of-vaccination-or-prophylaxis (5 tables)..."
+
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    surname:string! \
+    given_names:string! \
+    birth_date:date \
+    sex:string! \
+    nationality_as_iso_3166_1_alpha_3:string! \
+    travel_document_kind:string! \
+    travel_document_number:string! \
+    travel_document_issuer_as_iso_3166_1_alpha_3:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    consented_to_data_sharing:string! \
+    signature_image_data_url:text! \
+    --htmx && \
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    professional_status:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    registration_body:string! \
+    registration_number:text! \
+    signature_image_data_url:text! \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold center \
+    deleted_at:ts \
+    name:text! \
+    who_designation_reference:string! \
+    national_authority_reference:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    country_as_iso_3166_1_alpha_3:string \
+    postcode:text \
+    uniform_stamp_image_data_url:text! \
+    authorised_diseases:text! \
+    designation_valid_from:date \
+    designation_valid_until:date \
+    --htmx && \
+cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis \
+    deleted_at:ts \
+    patient:references \
+    clinician:references \
+    center:references \
+    status:string! \
+    issued_at:ts \
+    revoked_at:ts \
+    revocation_reason:text! \
+    certificate_serial_number:string! \
+    issuing_country_as_iso_3166_1_alpha_3:string! \
+    primary_language_as_bcp_47:string! \
+    secondary_language_as_bcp_47:string! \
+    tertiary_language_as_bcp_47:string! \
+    destination_countries_as_iso_3166_1_alpha_3:text! \
+    planned_arrival_date:date \
+    purpose_of_travel:string! \
+    medical_waiver:string! \
+    medical_waiver_reason:text! \
+    medical_waiver_signed_at:ts \
+    declared_pregnancy:string! \
+    declared_breastfeeding:string! \
+    declared_immunosuppression:string! \
+    electronic_signature_data_url:text! \
+    electronic_signature_signed_at:ts \
+    overall_valid:string! \
+    validity_computed_at:ts \
+    notes:text! \
+    --htmx && \
+cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis_entry \
+    deleted_at:ts \
+    international_certificate_of_vaccination_or_prophylaxis:references \
+    entry_index:int! \
+    disease:string! \
+    disease_other_label:string! \
+    disease_as_snomed_ct:string! \
+    disease_as_icd_11:string! \
+    vaccine_or_prophylaxis_name:string! \
+    vaccine_as_snomed_ct:string! \
+    vaccine_as_atc:string! \
+    manufacturer:string! \
+    manufacturer_country_as_iso_3166_1_alpha_3:string! \
+    batch_number:string! \
+    lot_expiry_date:date \
+    route:string! \
+    anatomical_site:string! \
+    dose_amount_value:double \
+    dose_amount_unit:string! \
+    dose_sequence:int \
+    dose_sequence_total:int \
+    vaccination_date:date \
+    administering_clinician_signature_data_url:text! \
+    administering_clinician_professional_status:string! \
+    validity_starts_on:date \
+    validity_ends_on:date \
+    validity_is_lifetime:string! \
+    centre_stamp_image_data_url:text! \
+    centre_stamp_applied:string! \
+    adverse_event:string! \
+    adverse_event_notes:text! \
+    entry_valid:string! \
+    entry_notes:text! \
+    --htmx

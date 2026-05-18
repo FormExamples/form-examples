@@ -1,0 +1,27 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; color: #1a1a1a; background: #fff8e1; }
+header { background: #fbc02d; color: #1a1a1a; padding: 1rem 1.5rem; border-bottom: 4px solid #f57f17; }
+header h1 { margin: 0; font-size: 1.25rem; }
+header p { margin: 0.25rem 0 0.75rem; font-size: 0.9rem; }
+#progress { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+#progress button { padding: 0.25rem 0.75rem; border: 1px solid #f57f17; background: #fff; cursor: pointer; border-radius: 3px; }
+#progress button.is-active { background: #f57f17; color: #fff; font-weight: 600; }
+main { max-width: 760px; margin: 1rem auto; padding: 0 1rem; }
+fieldset.step { display: none; padding: 1rem; border: 1px solid #d6d6d6; background: #fff; border-radius: 4px; margin: 0 0 1rem; }
+fieldset.step.is-active { display: block; }
+legend { font-weight: 600; padding: 0 0.5rem; }
+label { display: block; margin: 0.75rem 0; font-size: 0.95rem; }
+label input, label select, label textarea { display: block; width: 100%; padding: 0.5rem; margin-top: 0.25rem; border: 1px solid #ccc; border-radius: 3px; font: inherit; }
+input[type="checkbox"] { display: inline; width: auto; margin-right: 0.5rem; }
+.wizard-nav { display: flex; justify-content: space-between; padding-top: 1rem; }
+.wizard-nav button { padding: 0.5rem 1.25rem; background: #1976d2; color: #fff; border: 0; border-radius: 3px; cursor: pointer; font: inherit; }
+.wizard-nav button[disabled] { background: #b0bec5; cursor: not-allowed; }
+#generate { margin-top: 1rem; background: #2e7d32; color: #fff; border: 0; padding: 0.6rem 1.25rem; border-radius: 3px; cursor: pointer; font: inherit; }
+#firedRules li.error { color: #b71c1c; font-weight: 600; }
+#firedRules li.warning { color: #ef6c00; }
+#preview { margin-top: 1rem; padding: 1rem; background: #fffde7; border: 2px solid #f9a825; border-radius: 4px; }
+@media print {
+  header, #progress, .wizard-nav, button { display: none; }
+  fieldset.step { display: none !important; }
+  #preview { display: block !important; border: none; background: #fff; }
+}

@@ -1,0 +1,8 @@
+/target
+/node_modules
+**/*.rs.bk
+*.swp
+.DS_Store
+.env
+.env.local
+config/local.yaml

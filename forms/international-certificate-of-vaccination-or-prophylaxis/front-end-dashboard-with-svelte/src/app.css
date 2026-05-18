@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "wx-svelte-grid/style.css";
+
+@theme {
+  --color-icvp-yellow: #fbc02d;
+  --color-icvp-yellow-dark: #f57f17;
+}

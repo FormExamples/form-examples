@@ -1,0 +1,15 @@
+<h2>Step 4 — Travel context (optional)</h2>
+<label>Destination countries (space-separated alpha-3)
+  <input name="destination_countries_alpha_3" />
+</label>
+<label>Planned arrival date <input type="date" name="planned_arrival_date" /></label>
+<label>Purpose of travel
+  <select name="purpose_of_travel">
+    <option value="">Select…</option>
+    <option>tourism</option><option>business</option>
+    <option>study</option><option>employment</option>
+    <option>humanitarian</option><option>military</option>
+    <option>family</option><option>medical</option>
+    <option>other</option>
+  </select>
+</label>

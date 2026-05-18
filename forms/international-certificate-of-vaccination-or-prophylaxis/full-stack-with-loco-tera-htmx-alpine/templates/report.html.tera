@@ -1,0 +1,9 @@
+{% extends "base.html.tera" %}
+{% block title %}Report — Certificate {{ id }}{% endblock %}
+{% block content %}
+<article class="report">
+  <h1>Certificate {{ id }}</h1>
+  <p>Validity report.</p>
+  <a href="/certificate/{{ id }}">Back to wizard</a>
+</article>
+{% endblock %}

@@ -1,0 +1,14 @@
+<h2>Step 7 — Vaccination entry — validity &amp; stamp</h2>
+<label>Validity starts on <input type="date" name="entry_1_validity_starts_on" /></label>
+<label>Validity ends on <input type="date" name="entry_1_validity_ends_on" /></label>
+<label>
+  <input type="checkbox" name="entry_1_validity_is_lifetime" value="yes" />
+  Validity is lifetime (yellow fever — 2016 IHR amendment)
+</label>
+<label>Centre stamp image
+  <input type="file" name="entry_1_centre_stamp_image" accept="image/*" />
+</label>
+<label>
+  <input type="checkbox" name="entry_1_centre_stamp_applied" value="yes" />
+  Official centre stamp applied
+</label>
