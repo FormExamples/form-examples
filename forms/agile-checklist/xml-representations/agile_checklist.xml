@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agile_checklist SYSTEM "agile_checklist.dtd">
+<agile_checklist>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<respondent_id>550e8400-e29b-41d4-a716-446655440000</respondent_id>
+<status>draft</status>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_period>sprint</assessment_period>
+<t01_problems_to_solve></t01_problems_to_solve>
+<t02_decisions_without_manager></t02_decisions_without_manager>
+<t03_adopt_and_improve_practices></t03_adopt_and_improve_practices>
+<t04_actively_coordinate></t04_actively_coordinate>
+<t05_openly_share_ideas></t05_openly_share_ideas>
+<t06_decide_how_to_execute></t06_decide_how_to_execute>
+<t07_act_on_feedback></t07_act_on_feedback>
+<t08_rarely_wait></t08_rarely_wait>
+<t09_fully_complete_work></t09_fully_complete_work>
+<t10_manage_own_performance></t10_manage_own_performance>
+<t11_understand_agile></t11_understand_agile>
+<t12_high_quality></t12_high_quality>
+<t13_welcome_change></t13_welcome_change>
+<t14_collaborate_to_finish></t14_collaborate_to_finish>
+<t15_admit_mistakes></t15_admit_mistakes>
+<t16_work_outside_specialty></t16_work_outside_specialty>
+<t17_seek_new_skills></t17_seek_new_skills>
+<t18_improve_skills></t18_improve_skills>
+<t19_improve_ways_of_working></t19_improve_ways_of_working>
+<t20_various_ways_communicating></t20_various_ways_communicating>
+<t21_received_basic_training></t21_received_basic_training>
+<t22_safe_to_dissent></t22_safe_to_dissent>
+<t23_start_with_open_issues></t23_start_with_open_issues>
+<t24_motivated></t24_motivated>
+<t25_pride_in_craft></t25_pride_in_craft>
+<s01_know_priority_factors></s01_know_priority_factors>
+<s02_accept_plan_ranges>Example text.</s02_accept_plan_ranges>
+<s03_accept_plan_changes>Example text.</s03_accept_plan_changes>
+<s04_evaluate_product></s04_evaluate_product>
+<s05_champion_agile></s05_champion_agile>
+<s06_respect_quality></s06_respect_quality>
+<s07_delegate_authority></s07_delegate_authority>
+<s08_keep_authority_delegated></s08_keep_authority_delegated>
+<s09_support_experiments></s09_support_experiments>
+<s10_no_punish_experiments></s10_no_punish_experiments>
+<s11_communicate_agile_goals></s11_communicate_agile_goals>
+<s12_encourage_new_skills></s12_encourage_new_skills>
+<s13_encourage_new_ways></s13_encourage_new_ways>
+<s14_develop_people></s14_develop_people>
+<p01_early_good_release></p01_early_good_release>
+<p02_educated_sponsor></p02_educated_sponsor>
+<p03_quick_decisions></p03_quick_decisions>
+<p04_plans_data_based>Example text.</p04_plans_data_based>
+<p05_proactive_dependencies></p05_proactive_dependencies>
+<p06_good_intentions></p06_good_intentions>
+<p07_reciprocal_trust></p07_reciprocal_trust>
+<p08_docs_plus_conversations></p08_docs_plus_conversations>
+<p09_update_plans>2026-01-15</p09_update_plans>
+<p10_non_punitive>mg/dL</p10_non_punitive>
+<p11_outside_groups_aware></p11_outside_groups_aware>
+<p12_finished_over_wip></p12_finished_over_wip>
+<p13_quality_over_deadline></p13_quality_over_deadline>
+<p14_solution_over_blame></p14_solution_over_blame>
+<p15_change_agents_in_place></p15_change_agents_in_place>
+<p16_agile_beyond_origin></p16_agile_beyond_origin>
+<p17_one_team></p17_one_team>
+<p18_honor_commitments></p18_honor_commitments>
+<overall_notes>Example text.</overall_notes>
+</agile_checklist>

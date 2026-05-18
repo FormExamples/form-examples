@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ form_title | default(value="Agile Checklist") }}{% endblock %}</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --color-text: #0f172a; --color-muted: #475569; --color-bg: #f8fafc;
+      --color-card: #ffffff; --color-border: #cbd5e1; --color-brand: #4f46e5;
+      --color-brand-dark: #4338ca;
+      --color-low: #dc2626; --color-mid: #ca8a04; --color-high: #15803d;
+      --color-bad-bg: #fee2e2; --color-mid-bg: #fef3c7; --color-good-bg: #dcfce7;
+      --color-info-bg: #e0e7ff; --color-neutral-bg: #f1f5f9;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin: 0; background: var(--color-bg); color: var(--color-text); line-height: 1.5; }
+    header.top { background: var(--color-card); border-bottom: 1px solid var(--color-border);
+      padding: 16px 24px; }
+    header.top h1 { margin: 0; font-size: 1.5rem; color: var(--color-brand-dark); }
+    header.top p { margin: 0; color: var(--color-muted); font-size: 0.9rem; }
+    main { max-width: 1024px; margin: 0 auto; padding: 24px 16px 64px; }
+    .step-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; font-size: 0.8rem; }
+    .step-nav a { background: var(--color-card); border: 1px solid var(--color-border);
+      border-radius: 4px; padding: 4px 8px; color: var(--color-text); text-decoration: none; }
+    .step-nav a:hover { background: var(--color-info-bg); }
+    .form-section { background: var(--color-card); border: 1px solid var(--color-border);
+      border-radius: 8px; padding: 16px; margin-bottom: 16px; scroll-margin-top: 16px; }
+    .form-section h2 { margin: 0 0 8px; font-size: 1.15rem; color: var(--color-brand-dark); }
+    .description { color: var(--color-muted); margin: 0 0 12px; font-size: 0.9rem; }
+    .section-summary { background: var(--color-neutral-bg); border-radius: 4px;
+      padding: 6px 10px; margin-bottom: 10px; font-size: 0.85rem; font-weight: 500; }
+    .field-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 720px) { .field-grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+    label.stacked { display: block; }
+    label.stacked > span { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 4px; }
+    input[type="text"], input[type="email"], input[type="number"], input[type="date"],
+    select, textarea { width: 100%; padding: 6px 8px; border: 1px solid var(--color-border);
+      border-radius: 4px; font: inherit; background: var(--color-card); }
+    textarea { resize: vertical; min-height: 64px; }
+    .item-list { border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-card); }
+    .item-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px;
+      align-items: start; padding: 8px 12px; border-bottom: 1px solid var(--color-neutral-bg); }
+    .item-row:last-child { border-bottom: 0; }
+    .item-row .item-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.75rem; color: var(--color-muted); padding-top: 2px; }
+    .item-row .item-text { margin: 0; font-size: 0.9rem; }
+    .yesnona { display: grid; grid-template-columns: repeat(3, auto); gap: 4px; }
+    .yesnona-btn { border: 1px solid var(--color-border); background: var(--color-card);
+      padding: 4px 10px; border-radius: 4px; font: inherit; font-size: 0.85rem;
+      font-weight: 500; cursor: pointer; min-width: 3.5rem; }
+    .yesnona-btn:hover { background: var(--color-info-bg); }
+    .yesnona-btn.checked.yesnona-yes { background: var(--color-good-bg);
+      border-color: var(--color-high); color: #14532d; }
+    .yesnona-btn.checked.yesnona-no { background: var(--color-bad-bg);
+      border-color: var(--color-low); color: #7f1d1d; }
+    .yesnona-btn.checked.yesnona-not-applicable { background: var(--color-neutral-bg);
+      border-color: var(--color-muted); color: var(--color-text); }
+    .yesnona-btn:focus-visible { outline: 2px solid var(--color-brand); }
+    @media (max-width: 600px) {
+      .item-row { grid-template-columns: auto 1fr; }
+      .yesnona { grid-column: 1 / -1; justify-self: start; }
+    }
+    .btn { display: inline-block; border: 1px solid var(--color-border); background: var(--color-card);
+      color: var(--color-text); padding: 8px 14px; border-radius: 4px; font: inherit; cursor: pointer; }
+    .btn-primary { background: var(--color-brand); color: #fff; border-color: var(--color-brand); }
+    .btn-primary:hover { background: var(--color-brand-dark); border-color: var(--color-brand-dark); }
+    .form-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .form-submit fieldset { border: 1px solid var(--color-border); border-radius: 4px;
+      padding: 10px 14px; margin-top: 12px; }
+    .form-submit legend { padding: 0 6px; color: var(--color-muted); font-size: 0.85rem; }
+    .flag-banner { border-left: 4px solid var(--color-mid); background: var(--color-info-bg);
+      padding: 12px 16px; border-radius: 4px; margin: 12px 0; }
+    .flag-banner.maturity-optimising, .flag-banner.maturity-mature {
+      background: var(--color-good-bg); border-left-color: var(--color-high); color: #14532d; }
+    .flag-banner.maturity-developing { background: var(--color-mid-bg);
+      border-left-color: var(--color-mid); color: #713f12; }
+    .flag-banner.maturity-initial, .flag-banner.maturity-ad-hoc {
+      background: var(--color-bad-bg); border-left-color: var(--color-low); color: #7f1d1d; }
+    .flag-banner.maturity-insufficient-data { background: var(--color-neutral-bg);
+      border-left-color: var(--color-muted); }
+    .flag-list { margin: 8px 0 0 16px; padding: 0; }
+    .flag-list li { margin-bottom: 4px; font-size: 0.9rem; }
+    .progress-bar { height: 8px; background: var(--color-neutral-bg); border-radius: 4px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--color-brand); transition: width 200ms ease; }
+    .progress-text { margin: 6px 0 0; font-size: 0.8rem; color: var(--color-muted); }
+  </style>
+</head>
+<body hx-boost="true">
+  {% block content %}{% endblock %}
+</body>
+</html>

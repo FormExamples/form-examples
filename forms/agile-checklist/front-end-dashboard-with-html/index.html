@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agile Checklist — Dashboard</title>
+  <meta name="description" content="Review dashboard for agile-checklist submissions: composite maturity, per-section bands, weak sections, and operational flags." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>Agile Checklist Dashboard</h1>
+    <p>Recent checklist submissions, composite maturity, and operational flags.</p>
+  </header>
+
+  <main>
+    <section id="tile-row" class="tile-row" aria-label="Maturity totals"></section>
+
+    <section class="filter-row" aria-label="Filters">
+      <label>
+        <span>Maturity</span>
+        <select id="filter-maturity"></select>
+      </label>
+      <label>
+        <span>Role</span>
+        <select id="filter-role"></select>
+      </label>
+      <div role="tablist" class="view-tabs">
+        <button type="button" role="tab" id="tab-individuals" class="active" aria-selected="true">Individuals</button>
+        <button type="button" role="tab" id="tab-teams" aria-selected="false">Teams</button>
+      </div>
+      <button type="button" id="export-csv" class="btn-csv">Export CSV</button>
+      <label class="btn-csv" for="import-csv" style="cursor:pointer">
+        Import CSV
+        <input type="file" id="import-csv" accept=".csv,text/csv" hidden />
+      </label>
+      <button type="button" id="reset-sample" class="btn-csv">Reset to sample</button>
+      <p id="results-count" class="results-count">0 results</p>
+    </section>
+
+    <p id="import-status" class="import-status" role="status" aria-live="polite"></p>
+
+    <div class="table-scroll">
+      <table class="assessments" id="individuals-table" aria-label="Checklist submissions">
+        <thead>
+          <tr>
+            <th data-sort="date">Date</th>
+            <th data-sort="respondent">Respondent</th>
+            <th data-sort="role">Role</th>
+            <th data-sort="team">Team</th>
+            <th>Org</th>
+            <th>Answered</th>
+            <th>Teams</th>
+            <th>Stakeholders</th>
+            <th>Practices</th>
+            <th data-sort="overallPercent">Overall</th>
+            <th data-sort="maturity">Maturity</th>
+            <th>Weak</th>
+            <th>Flags</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <table class="assessments" id="teams-table" aria-label="Team aggregates" hidden>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Organisation</th>
+            <th>Submissions</th>
+            <th>Mean of overall %</th>
+            <th>Maturity</th>
+            <th>Trend (0–100%)</th>
+            <th>Top flags</th>
+          </tr>
+        </thead>
+        <tbody id="team-rows"></tbody>
+      </table>
+    </div>
+
+    <aside id="detail-panel" class="detail-panel" role="region" aria-label="Submission detail"></aside>
+
+    <p class="note">
+      Falls back to sample data when no backend is reachable. In production rows
+      come from the Rust backend's <code>/api/checklists</code> endpoint.
+    </p>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

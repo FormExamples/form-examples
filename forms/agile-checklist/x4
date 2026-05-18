@@ -1,0 +1,1442 @@
+<!DOCTYPE html><html lang="en">
+
+	
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="NHS&#x20;Wales,&#x20;Local&#x20;Services,&#x20;111,&#x20;Get&#x20;Help,&#x20;Staff&#x20;Resources,&#x20;Careers,&#x20;National&#x20;Programmes.&#x20;The&#x20;point&#x20;of&#x20;access&#x20;for&#x20;information&#x20;on&#x20;what&#x20;the&#x20;NHS&#x20;in&#x20;Wales&#x20;does,&#x20;how&#x20;to&#x20;access&#x20;its&#x20;services,&#x20;available&#x20;jobs&#x20;and&#x20;the&#x20;careers&#x20;we&#x20;offer.">
+	<meta name="keywords" content="">
+	
+	
+
+	<title>Home - NHS Wales</title>
+
+	
+	<link rel="canonical" href="https://www.nhs.wales/">
+
+	
+	
+	<link rel="stylesheet" href="/core/modules/v1/core_assets/css/mura.10.min.css?v=10.0.624"><link rel="stylesheet" href="/core/modules/v1/core_assets/css/mura.10.skin.css?v=10.0.624">
+
+	
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/font-awesome/css/fontawesome.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/font-awesome/css/brands.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/font-awesome/css/solid.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/font-awesome/css/v4-shims.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/font-awesome/css/v5-font-face.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+
+	
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/assets/nucleo/css/style.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+
+	
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/css/site-cc255acfde.min.css">
+
+	
+	<link rel="stylesheet" href="/sites/NHSWales/css/jquery-ui.min.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0">
+
+	<link rel="stylesheet" href="/sites/NHSWales/css/dataTables/v1.11.0/dataTables.bootstrap4.css">
+
+	
+	<link rel="stylesheet" href="/themes/gradientTrustTheme/css/trustNav-2f3030fa79.min.css">
+
+	
+	<link rel="stylesheet" media="print" href="/themes/gradientTrustTheme/css/print-d4b40c0840.min.css">
+
+	
+	<script src="/themes/gradientTrustTheme/js/libraries/jquery-3.5.1.min.js"></script>
+
+	
+	<link rel="shortcut icon" href="/sites/NHSWales/images/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/sites/NHSWales/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/sites/NHSWales/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/sites/NHSWales/images/favicon-16x16.png">
+	<link rel="manifest" href="/sites/NHSWales/images/site.webmanifest">
+	<link rel="mask-icon" href="/sites/NHSWales/images/safari-pinned-tab.svg" color="#2c3e72">
+
+	<meta name="msapplication-TileColor" content="#2c3e72">
+	<meta name="msapplication-config" content="/sites/NHSWales/images/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="siteid" content="NHSWales">
+	<meta name="published" content="2017-06-09T16:04:17Z">
+	<meta name="expires" content="">
+	<meta name="type" content="page">
+	<meta name="searchable" content="true">
+
+	
+	
+	
+	
+
+	<meta property="og:url" content="https&#x3a;&#x2f;&#x2f;www.nhs.wales&#x2f;" />
+	<meta property="og:site_name" content="NHS&#x20;Wales" />
+	<meta property="og:title" content="Home" />
+	<meta property="og:description" content="NHS&#x20;Wales,&#x20;Local&#x20;Services,&#x20;111,&#x20;Get&#x20;Help,&#x20;Staff&#x20;Resources,&#x20;Careers,&#x20;National&#x20;Programmes.&#x20;The&#x20;point&#x20;of&#x20;access&#x20;for&#x20;information&#x20;on&#x20;what&#x20;the&#x20;NHS&#x20;in&#x20;Wales&#x20;does,&#x20;how&#x20;to&#x20;access&#x20;its&#x20;services,&#x20;available&#x20;jobs&#x20;and&#x20;the&#x20;careers&#x20;we&#x20;offer." />
+	<meta property="og:image" content="" />
+	<meta property="og:image:width" content="1600" />
+	<meta property="og:image:height" content="900" />
+	<meta property="og:type" content="website" />
+
+
+<script type="text/javascript" src="/core/modules/v1/core_assets/js/mura.min.js?v=10.0.624" defer="defer"></script>
+<script>
+(function(root,config){root.queuedMuraCmds=[],root.queuedMuraPreInitCmds=[],root.deferMuraInit=function(){void 0!==root.Mura&&"function"==typeof root.Mura.init?root.Mura.init(config):("function"!=typeof root.Mura&&(root.mura=root.m=root.Mura=function(o){root.queuedMuraCmds.push(o)},root.Mura.preInit=function(o){root.queuedMuraPreInitCmds.push(o)}),setTimeout(root.deferMuraInit))},root.deferMuraInit();}
+)(this,{
+loginURL:"?display=login",
+siteid:"NHSWales",
+contentid:"00000000000000000000000000000000001",
+contenthistid:"F4B1AD9D-B98A-4292-864166E51A840126",
+changesetid:"",
+parentid:"00000000000000000000000000000000END",
+context:"",
+indexfileinapi:true,
+nocache:0,
+assetpath:"/sites/NHSWales",
+corepath:"/core",
+fileassetpath:"https://emedia4.nhs.wales/NHSWales",
+themepath:"/themes/gradientTrustTheme",
+reCAPTCHALanguage:"en-GB",
+preloaderMarkup: "\x3Cdiv\x20class\x3D\x22mura\x2Dpreloader\x2Dwrapper\x20container\x22\x3E\x3Cdiv\x20class\x3D\x22mura\x2Dpreloader\x20fa\x20fa\x2Drefresh\x20fa\x2Dspin\x22\x3E\x3Cspan\x3E\x3C\x2Fspan\x3E\x3C\x2Fdiv\x3E\x3C\x2Fdiv\x3E",
+mobileformat: false,
+windowdocumentdomain: "",
+layoutmanager:true,
+type:"Page",
+subtype:"Default",
+queueObjects: true,
+rb:{"formrequiredwrapperclass":"","formradiolabelclass":"form-check-label","formresponsewrapperclass":"","formwrapperclass":"","formbuttoncancellabel":"Cancel","formselectclass":"form-control","formbuttonclass":"btn btn-primary","formfileclass":"form-control","formfileplaceholder":"Select File","formbuttonwrapperclass":"btn-group","formbuttoninnerclass":"","formcheckboxwrapperclass":"form-check","formradiowrapperclass":"form-check","formcheckboxlabelclass":"form-check-label","forminputclass":"form-control","formradioclass":"form-check-input","formcheckboxclass":"form-check-input","formfieldlabelclass":"control-label","formtextareaclass":"form-control","formbuttonbacklabel":"Back","formbuttonsubmitclass":"form-submit btn-primary","formbuttonnextclass":"form-nav","formbuttonsubmitlabel":"Submit","formrequiredlabel":"Required","generalwrapperclass":"","formbuttonnextlabel":"Next","generalwrapperbodyclass":"","formbuttomsubmitclass":"form-submit btn-primary","formbuttonbackclass":"form-nav","formerrorwrapperclass":"","formbuttoncancelclass":"form-cancel btn btn-danger","formwrapperbodyclass":"","formbuttonsubmitwaitlabel":"Please wait","formgeneralcontrolclass":"form-control","formfieldwrapperclass":"form-group"},
+dtExample:"10/11/2024",
+dtCh:"/",
+dtFormat:[1,0,2],
+dtLocale:"en-GB"
+});
+</script></head>
+
+
+
+
+
+	<body id="homepage" class="home" data-spy="scroll" data-target=".subnav" data-offset="50">
+
+		<div id="fixableTopHeader" class="stickySharebar navbar-fixed-top header-min"></div>
+		
+
+	
+
+	
+	<div class="skip-to-main" id="skip-to-main">
+		<a class="sr-only sr-only-focusable" href="#skipnav" tabindex="1" aria-label="Skip to main content">Skip to main content</a>
+	</div>
+
+	<div hidden><span id="new-window-0">Opens in new window</span></div>
+	
+	<div id="tophead"></div>
+
+	<div class="topNav">
+		
+
+		
+		
+		
+
+		
+			
+			<nav class="navbar navbar-expand-md bg-white header-nav1">
+				<div class="container">
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav mr-auto"></ul>
+						<ul class="navbar-nav contactLinks">
+							
+							
+				
+					
+						<li class="nav-item"><a href="https://111.wales.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS 111 Wales</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS England</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.scot.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS Scotland</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="http://www.hscni.net/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS Northern Ireland</a></li>
+					
+				
+			
+							
+						</ul>
+					</div>
+				</div>
+			</nav>
+		
+
+		
+		
+		
+
+		
+			
+			<nav class="navbar navbar-expand-md header-nav2">
+				<div class="container">
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav mr-auto"></ul>
+						<ul class="navbar-nav contactLinks">
+							
+								<li class="nav-item"><a class="nav-link" href="#skipnav" target="_self">Skip Navigation</a></li>
+							
+							
+				
+					
+						
+						
+					
+				
+					
+						<li class="nav-item"><a href="/use-of-site/a-z-sites-services/" class="nav-link" target="_self">A-Z Sites &amp; Services</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.jobs.nhs.uk/candidate/search" class="nav-link" target="_self">NHS Jobs</a></li>
+					
+				
+			
+							<li class="nav-item"><div class="mura-object" data-object="singlelanguagenavtool" data-objectid="" data-instanceid="3B0DA841-0C76-45F8-8B7BB96C00F3AA1D" style="" data-render="server" data-async="false" data-renderlinkonly="true" data-cssstyles="" data-classstyle="nav-link" data-objecticonclass="mi-commenting" data-objectname=""><div id="" class="mura-object-content" style=""><style>
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span[lang="CY"].labelForIcon:before
+			,a[lang="CY"].d-none.d-md-block.nav-link:before {
+				height: 21px; 
+				width: 18px; 
+				content: ''; 
+				display: inline-block; 
+				background-image: url(/plugins/MTnhswales/images/lang/cymraeg-icon.svg);
+				background-color: #FF6400;
+				mask: url(/plugins/MTnhswales/images/lang/cymraeg-icon.svg) no-repeat center; 
+				mask-size: cover; 
+				vertical-align: middle; 
+			}
+
+			a[lang="CY"].d-none.d-md-block.nav-link:before{
+				margin-right: 4px;
+			}
+			
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span
+			,a.d-none.d-md-block.nav-link {
+				background:#EDF1F8 0% 0% no-repeat padding-box;
+				color: #325083 !important;
+				border-radius: 3px;
+				height: 31px;		
+			}
+
+			.navbar-expand-md.header-nav2 .navbar-nav .nav-item a{
+				display: flex !important;
+				align-items: center;
+				justify-content: center;
+			}
+
+			a.d-none.d-md-block.nav-link {
+				margin-left: 1rem;
+			}
+
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span:hover
+			,.navbar-expand-md.header-nav2 .navbar-nav .nav-item a:hover
+			,a.d-none.d-md-block.nav-link:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 767.98px) {
+				 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span[lang="CY"].labelForIcon:before
+				,a[lang="CY"].d-none.d-md-block.nav-link:before {	
+					position: absolute !important;
+					left: 2.05em;
+					margin-top: -0.45em;
+				}
+
+				.mainNavBurgerMobile{
+					padding: 12px 0px 10px 0px;
+				}
+
+				button.navbar-toggler.mainNavToggle.d-md-none.nav-link span.mainNavBurgerMobile:hover{
+					text-decoration: none;
+				}
+
+				.labelForIconMobile{
+					vertical-align: -50%;
+				}
+
+				div:has(> button.languageButton){
+					padding-top: 5px;
+				}
+			}
+
+			@media (max-width: 544.98px) {
+				div:has(> button.languageButton){
+					padding-top: 2px;
+				}
+			}
+		</style>
+	
+	
+	
+	
+		
+			
+			
+			
+				<button class      = "languageButton navbar-toggler mainNavToggle d-md-none nav-link"
+						type       = "button"
+						aria-label = "Cymraeg"
+						onclick    = "window.location.href = 'https&#x3a;&#x2f;&#x2f;www.gig.cymru&#x2f;';">
+
+						<span class="mainNavBurger mainNavBurgerMobile">
+							<span class="labelForIcon labelForIconMobile" lang="CY">Cymraeg</span>
+						</span>
+				</button>
+			
+			<a href="https&#x3a;&#x2f;&#x2f;www.gig.cymru&#x2f;" lang="CY" class="d-none d-md-block nav-link">Cymraeg</a></div></div></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		
+
+		<nav class="navbar navbar-expand-md header-nav3">
+			<div class="container">
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav siteBrand">
+						<li class="image-container">
+							<a href="/" >
+								<img class="nav-large-image" src="/sites/NHSWales/images/logo/NHSWales2.png" alt="NHS Wales | NHS Wales"/>
+							</a>
+						</li>
+					</ul>
+
+					
+						<h1>
+							<span class="visually-hidden">
+								Welcome to NHS Wales
+							</span>
+						</h1>
+					
+
+					
+					
+
+					<ul class="navbar-nav searchbox">
+						<li class="input-group">
+							<form method="get" id="searchFormdt" class="form-inline" action="/search-results/">
+								<div class="searchFilterContainer">
+									<select name="searchFilter" id="searchFilter" class="form-control searchFilter" aria-label="Search within">
+										<option value="">All...</option>
+									</select>
+								</div>
+								<div class="input-group-append">
+									<input type="text" name="Keywords" id="navKeywords" class="form-control" value="" placeholder="Search" autocomplete="off" aria-label="Search for">
+									<button class="closeIcon" type="reset" id="grCloseIcon" data-formId="navKeywords" aria-label="Clear"></button>
+									<button type="submit" class="btn btn-search" id="button-addon" aria-label="Search">
+										<i class="fa fa-search" aria-hidden="true"></i>
+										<span class="sr-only">Search</span>
+									</button>
+								</div>
+								<input type="hidden" name="strippedKeywords" value="" id="strippedKeywords2">
+								<input type="hidden" name="display"          value="search">
+								<input type="hidden" name="newSearch"        value="true">
+								<input type="hidden" name="noCache"          value="1">
+								<input type="hidden" name="csrf_token" value="6AAC86DFEBCF23AE7DBDB94A22FD3BBC" /><input type="hidden" name="csrf_token_expires" value="260516204205794" />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+
+<script>
+	$(function() {
+		
+			var eSearchFilter = $('#searchFilter');
+			var maxLength     = 60;
+			var siteId="NHSWales";
+			var selId="";
+            var remotePath="/themes/gradientTrustTheme";
+			var textAll="All...";
+			var textLoading="Loading";
+		
+		setSearchFilter(eSearchFilter, siteId, selId, remotePath, maxLength, textAll, textLoading);
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var navKeywords = document.getElementById('navKeywords');
+		var closeIcon   = document.getElementById('grCloseIcon');
+
+		function toggleCloseIcon() {
+			if (navKeywords.value.trim() !== '') {
+				closeIcon.style.display = 'block';
+			} else {
+				closeIcon.style.display = 'none';
+			}
+		}
+
+		closeIcon.addEventListener('click', function() {
+			navKeywords.value = '';
+			toggleCloseIcon();	
+		});
+
+		navKeywords.addEventListener('input', toggleCloseIcon);
+		toggleCloseIcon();
+	});
+</script>
+	
+
+	<script>
+		Mura(function(){
+			var menuDepth = 0;
+			["/"].forEach(
+				function(value){
+					menuDepth += 1;
+					if(menuDepth <= 2){
+						var navItem = [Mura("#navPrimary [href='" + value + "']"), Mura("#moreMenuList [href='" + value + "']")];
+
+						for (i = 0; i < navItem.length; i++){
+							if(navItem[i].length){
+								navItem[i].addClass("active");
+								var navItemLi = navItem[i].closest("li");
+								if(navItemLi.length){
+									navItemLi.addClass("active");
+								}
+							}
+						}
+					}
+				}
+			);
+
+			var activeLinkInPrimaryNav = $('#navPrimary').find('li a.active')
+			if ($(window).width() > 767 && activeLinkInPrimaryNav.length > 0 && activeLinkInPrimaryNav.parent().hasClass('hidden')){
+				$('button.btn-more').addClass('active');
+			} else {
+				$('button.btn-more').removeClass('active');
+			}
+
+			
+		})
+	</script>
+
+	<style>
+		ul#navPrimary li div::-webkit-scrollbar-thumb, ul#moreMenuList li div::-webkit-scrollbar-thumb{
+			background: #264BA5;
+		}
+
+		
+		@-moz-document url-prefix() {
+			ul#navPrimary li div, ul#moreMenuList li div{
+				scrollbar-color: #264BA5 #f9f9f9;
+			}
+		}
+
+		
+		@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+			ul#navPrimary li div, ul#moreMenuList li div{
+				scrollbar-face-color: #264BA5;
+				scrollbar-shadow-color: #264BA5;
+				scrollbar-dark-shadow-color: #264BA5;
+			}
+		}
+	</style>
+
+	<div class="headerWrap">
+		<header>
+			<div id="mainheader">
+				<nav class="navbar navbar-expand-md navbar-dark mainNav">
+					<a href="/" class="mobileSiteName" style="display:none" tabindex="2">
+						<div class="imageContainerMobile">
+							<img class="mobileLogoImage" src="/sites/NHSWales/images/logo/mobileLogo.png" alt="NHS Wales"/>
+							<span class="mobileSiteLogoText">nhs&#x20;wales</span>
+						</div>
+					</a>
+					<div class="container smMobileNav">
+						
+						
+						
+							<div class="mura-object" data-object="singlelanguagenavtool" data-objectid="" data-instanceid="71D98F7C-2456-49C2-BF90192F9B82565A" style="" data-render="server" data-async="false" data-renderlinkonly="true" data-cssstyles="" data-classstyle="nav-link" data-objecticonclass="mi-commenting" data-objectname=""><div id="" class="mura-object-content" style=""><style>
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span[lang="CY"].labelForIcon:before
+			,a[lang="CY"].d-none.d-md-block.nav-link:before {
+				height: 21px; 
+				width: 18px; 
+				content: ''; 
+				display: inline-block; 
+				background-image: url(/plugins/MTnhswales/images/lang/cymraeg-icon.svg);
+				background-color: #FF6400;
+				mask: url(/plugins/MTnhswales/images/lang/cymraeg-icon.svg) no-repeat center; 
+				mask-size: cover; 
+				vertical-align: middle; 
+			}
+
+			a[lang="CY"].d-none.d-md-block.nav-link:before{
+				margin-right: 4px;
+			}
+			
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span
+			,a.d-none.d-md-block.nav-link {
+				background:#EDF1F8 0% 0% no-repeat padding-box;
+				color: #325083 !important;
+				border-radius: 3px;
+				height: 31px;		
+			}
+
+			.navbar-expand-md.header-nav2 .navbar-nav .nav-item a{
+				display: flex !important;
+				align-items: center;
+				justify-content: center;
+			}
+
+			a.d-none.d-md-block.nav-link {
+				margin-left: 1rem;
+			}
+
+			 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span:hover
+			,.navbar-expand-md.header-nav2 .navbar-nav .nav-item a:hover
+			,a.d-none.d-md-block.nav-link:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 767.98px) {
+				 button.navbar-toggler.mainNavToggle.d-md-none.nav-link span[lang="CY"].labelForIcon:before
+				,a[lang="CY"].d-none.d-md-block.nav-link:before {	
+					position: absolute !important;
+					left: 2.05em;
+					margin-top: -0.45em;
+				}
+
+				.mainNavBurgerMobile{
+					padding: 12px 0px 10px 0px;
+				}
+
+				button.navbar-toggler.mainNavToggle.d-md-none.nav-link span.mainNavBurgerMobile:hover{
+					text-decoration: none;
+				}
+
+				.labelForIconMobile{
+					vertical-align: -50%;
+				}
+
+				div:has(> button.languageButton){
+					padding-top: 5px;
+				}
+			}
+
+			@media (max-width: 544.98px) {
+				div:has(> button.languageButton){
+					padding-top: 2px;
+				}
+			}
+		</style>
+	
+	
+	
+	
+		
+			
+			
+			
+				<button class      = "languageButton navbar-toggler mainNavToggle d-md-none nav-link"
+						type       = "button"
+						aria-label = "Cymraeg"
+						onclick    = "window.location.href = 'https&#x3a;&#x2f;&#x2f;www.gig.cymru&#x2f;';">
+
+						<span class="mainNavBurger mainNavBurgerMobile">
+							<span class="labelForIcon labelForIconMobile" lang="CY">Cymraeg</span>
+						</span>
+				</button>
+			
+			<a href="https&#x3a;&#x2f;&#x2f;www.gig.cymru&#x2f;" lang="CY" class="d-none d-md-block nav-link">Cymraeg</a></div></div>
+						
+						<div>
+							<button tabindex="8" class="navbar-toggler mainNavToggle searchBoxBtn" type="button" data-id='searchBox' aria-label="Search">
+								<span class="fa fa-search mainNavBurger"><br>
+									<span class="labelForIcon">Search</span>
+								</span>
+							</button>
+														
+							<button tabindex="9" class="navbar-toggler mainNavToggle mainNavBurgerMobile" type="button" data-id='mobileAsidePrimaryBurgerMenu' aria-label="Menu">
+								<span class="fa fa-bars mainNavBurger"><br>
+									<span class="labelForIcon">Menu</span>
+								</span>
+							</button>
+						</div>
+						<div id="mainNavBar" class="collapse navbar-collapse">
+							
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+  
+   
+
+
+
+  
+       
+  
+
+    
+      
+        
+        
+				
+
+			
+				
+
+				
+				<ul id="navPrimary" class="navbar-nav mr-auto">
+				<li class="first  nav-item" role='none'><a href="/" class="nav-link">Home</a></li>
+			
+
+			
+			
+			
+
+			
+			<li class="nav-item" role='none'>
+				<a href="https://womenshealth.nhs.wales/" class="nav-link">Women's Health</a>
+				
+				
+			</li>
+			
+			
+			
+
+			
+			<li class="nav-item" role='none'>
+				<a href="/about-us/" class="nav-link">About Us</a>
+				
+				
+			</li>
+			
+			
+			
+
+			
+			<li class="nav-item" role='none'>
+				<a href="/staff-resources/" class="nav-link">Staff Resources</a>
+				
+				
+			</li>
+			
+			
+			
+
+			
+			<li class="nav-item" role='none'>
+				<a href="/national-programmes-and-services/" class="nav-link">National Programmes and Services</a>
+				
+				
+			</li>
+			
+			
+			
+
+			
+			<li class="last nav-item" role='none'>
+				<a href="/nhs-jobs-in-wales/" class="nav-link">NHS jobs in Wales</a>
+				
+				
+			</li>
+			
+			</ul>
+			
+			
+        
+        
+		
+
+							<div class="more hidden">
+								<span class="divider"></span>
+								<button class="btn-more" aria-controls="moreMenuContent" aria-label="More">
+									<div class="more-menu" >More</div>
+									<i class="fa fa-angle-double-down"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<nav class="navbar moreMenu">
+					<div id="moreMenuPanel" class="container">
+						<div id="moreMenuContent">
+							<button type="button" class="close" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	<div class="topIcons">
+		<div id="mobileAsidePrimaryBurgerMenu" style="display:none">
+			
+			
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+  
+   
+
+
+
+  
+       
+  
+
+    
+      
+        
+        
+					
+			
+			
+
+				
+				
+				
+					
+					<ul class="nav flex-column">
+				
+				<li class="nav-item first" data-mobileExclude='0'>
+					<a href="https://womenshealth.nhs.wales/" class="nav-link">Women's Health</a>
+					
+
+						
+					
+				</li>
+					
+			
+
+				
+				
+				
+				<li class="nav-item" data-mobileExclude='0'>
+					<a href="/about-us/" class="nav-link">About Us</a>
+					
+
+						
+					
+				</li>
+					
+			
+
+				
+				
+				
+				<li class="nav-item" data-mobileExclude='0'>
+					<a href="/staff-resources/" class="nav-link">Staff Resources</a>
+					
+
+						
+					
+				</li>
+					
+			
+
+				
+				
+				
+				<li class="nav-item" data-mobileExclude='0'>
+					<a href="/national-programmes-and-services/" class="nav-link">National Programmes and Services</a>
+					
+
+						
+					
+				</li>
+					
+			
+
+				
+				
+				
+				<li class="nav-item last" data-mobileExclude='0'>
+					<a href="/nhs-jobs-in-wales/" class="nav-link">NHS jobs in Wales</a>
+					
+
+						
+					
+				</li>
+					
+			
+
+			</ul>
+			
+				
+        
+        
+			
+		
+			<ul class="navbar-nav contactLinks businessLinks1">
+				
+					
+				
+					
+						<li class="nav-item"><a href="https://111.wales.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS 111 Wales</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS England</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.scot.nhs.uk/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS Scotland</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="http://www.hscni.net/" class="nav-link" target="_blank" rel="noreferrer noopener" aria-describedby="new-window-0">NHS Northern Ireland</a></li>
+					
+				
+			
+					
+				
+			</ul>
+			<ul class="navbar-nav contactLinks businessLinks2">
+				
+				
+					
+						
+						
+					
+				
+					
+						<li class="nav-item"><a href="/use-of-site/a-z-sites-services/" class="nav-link" target="_self">A-Z Sites &amp; Services</a></li>
+					
+				
+					
+						<li class="nav-item"><a href="https://www.jobs.nhs.uk/candidate/search" class="nav-link" target="_self">NHS Jobs</a></li>
+					
+				
+			
+			</ul>
+		</div>
+
+		
+		
+
+		<div class="container-fluid" id="searchBox" style="display:none">
+			<div class="searchBar input-group">
+				<form method="get" id="searchForm" class="form-control" role="search" action="/search-results/">
+					<div class="searchSelectBox">
+						<select tabindex="4" name="searchFilter" id="searchFilter3" class="form-control" aria-label="Search within">
+							<option value="">All...</option>
+						</select>
+						<i class="fa fa-chevron-down" aria-hidden="true"></i>
+					</div>
+					<div class="input-group-append">
+						<input tabindex="5" type="text" name="Keywords" id="txtKeywords3" class="form-control" value="" placeholder="Search" aria-label="Search for">
+						<button tabindex="6" class="closeIcon" id= "mbCloseIcon" type="reset" data-formId="txtKeywords3" aria-label="Clear"></button>
+						<button tabindex="7" type="submit" class="btn btn-search" id="button-addon2" aria-label="Search">
+							<i class="fa fa-search" aria-hidden="true"></i>
+							<span class="sr-only">Search</span>
+						</button>
+					</div>
+					<input type="hidden" name="strippedKeywords" value="" id="strippedKeywords3" >
+					<input type="hidden" name="display"          value="search">
+					<input type="hidden" name="newSearch"        value="true">
+					<input type="hidden" name="noCache"          value="1">
+					<input type="hidden" name="csrf_token" value="3F913BDCA4DD21853FE3BC79D17047A8" /><input type="hidden" name="csrf_token_expires" value="260516204205856" />
+				</form>
+			</div>
+		</div>
+		<div class="container-fluid" id="languageLink" style="display:none"></div>
+		
+	</div>
+	
+	<a name="skipnav"></a>
+
+
+<script>
+	$(function() {
+		
+			var eSearchFilter = $('#searchFilter3');
+			var maxLength     = 60;
+			var siteId="NHSWales";
+			var selId="";
+			var remotePath="/themes/gradientTrustTheme";
+			var textAll="All...";
+			var textLoading="Loading";
+		
+        setSearchFilter(eSearchFilter, siteId, selId, remotePath, maxLength, textAll, textLoading);
+		$('.smMobileNav .navbar-toggler.mainNavToggle.d-md-none').attr('tabindex', '8');
+
+		document.addEventListener("keydown", (event) => {
+  			if (event.key === "Escape") {
+				hideAnyOpenDropdown();
+  			}
+		});
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var txtKeywords = document.getElementById('txtKeywords3');
+		var closeIcon   = document.getElementById('mbCloseIcon');
+
+		function toggleCloseIcon() {
+			if (txtKeywords.value.trim() !== '') {
+				closeIcon.style.display = 'block';
+			} else {
+				closeIcon.style.display = 'none';
+			}
+		}
+
+		closeIcon.addEventListener('click', function() {
+			txtKeywords.value = '';
+			toggleCloseIcon();	
+		});
+
+		txtKeywords.addEventListener('input', toggleCloseIcon);
+		toggleCloseIcon();
+	});
+</script>
+
+		<div class="container top">
+			<div class="mura-region"><div class="mura-region-local"><div class="mura-object" data-object="screenreader" data-objectid="EB9F05DC-18F5-45E1-8BF43D8A848D57BE" data-instanceid="C8BBE5B7-4F29-4585-BC3C943E11B43C51" style="" data-objectname="Screen&#x20;Reader" data-objecticonclass="mi-eye" data-queue="true" data-screenreader="2" data-buttonhoverovertext="Activate&#x20;Recite&#x20;Me" data-isfontcontrolenabled="1" data-isvisualcontrolenabled="1" data-isdictionarycontrolenabled="1" data-istranslatecontrolenabled="1" data-ismp3controlenabled="1" data-iscontinuousplayenabled="1" data-buttontext="Listen" data-readspeakerbuttontitle="Listen&#x20;to&#x20;this&#x20;page&#x20;using&#x20;ReadSpeaker" data-customerid="7475" data-layoutid="EB9F05DC-18F5-45E1-8BF43D8A848D57BE" data-stylesupport="&#x7b;&#x7d;" data-render="server" data-selectedcontrol="all" data-language="en_uk" data-async="false" data-servicekey="" data-cssstyles=""><div id="" class="mura-object-content" style=""><script>
+		if (!Element.prototype.matches) {
+			Element.prototype.matches = Element.prototype.msMatchesSelector;
+		}
+	</script>
+
+	<script src="//cdn1.readspeaker.com/script/7475/webReader/webReader.js?pids=wr&ver=1" type="text/javascript"></script>
+
+	
+		<script type="text/javascript">
+			window.rsConf = {
+				general: {
+					usePost: true,
+					uiLang: "en_uk"
+				}
+			};
+		</script>
+	
+
+	<script>
+		function waitForElementAvailable(selector) {
+			return new Promise(resolve => {
+				if (document.querySelector(selector)) {
+					return resolve(document.querySelector(selector));
+				}
+
+				const observer = new MutationObserver(mutations => {
+					if (document.querySelector(selector)) {
+						observer.disconnect();
+						resolve(document.querySelector(selector));
+					}
+				});
+
+				observer.observe(document.body, {
+					childList: true,
+					subtree: true
+				});
+			});
+		};
+
+		waitForElementAvailable('.rsbtn_tools .rsbtn_toollist').then(element => {
+			var readSpeakerEngHelpUrl      = "https://listen.wales.nhs.uk/";
+			var readSpeakerWelshHelpUrl    = "https://gwrando.wales.nhs.uk/";
+			var originalReadSpeakerHelpLi  = $('.rsbtn_tools .rsbtn_toollist .rsbtn_tool_help').not('.dhcwCustomHelp');
+			var originalReadSpeakerHelpBtn = originalReadSpeakerHelpLi.find('button');
+			var isOriginalHelpBtnLastchild = originalReadSpeakerHelpBtn.hasClass('last-child');
+
+			originalReadSpeakerHelpLi.hide();
+
+			$(element).append(`<li class="rsbtn_tool_help dhcwCustomHelp">
+									<button class="rsbtn_tool ${isOriginalHelpBtnLastchild ? 'last-child' : ""}" onclick='openHelpSite()'>
+										<span class="rsicn rsicn-help" aria-hidden="true"></span>
+										<span class="rsbtn_btnlabel newWindowIndicator" data-rslang="content:help">Help</span>
+									</button>
+									<a id="readSpeakerHelpLink" class="hidden" href="${'en_uk' == 'cy_cy' ? readSpeakerWelshHelpUrl : readSpeakerEngHelpUrl}" target="_blank"></a>
+								</li>`);
+
+			isOriginalHelpBtnLastchild ? originalReadSpeakerHelpBtn.removeClass('last-child') : "";
+		});
+
+		function openHelpSite(){
+			$('#readSpeakerHelpLink')[0].click();
+		};
+
+	</script>
+	<script>
+		$(function() {
+			if ($('section#mainPageContent').length == 1){
+				$('#read_speaker').prependTo('section#mainPageContent').removeClass("hidden");
+
+				
+
+				return false;
+			}
+		});
+
+		ReadSpeaker.q(function(){
+			var accordionCardToShow = {};
+
+			rspkr.c.addEvent('onBeforeSync', function(type, id) {
+				var showPrefix    = 'readSpeakerShow_';
+				var	element       = $rs.get('#sync' + id);
+				var	parentElement = element.parentElement;
+
+				while (parentElement.length != 0 && parentElement !== document.body) {
+					var classes = parentElement.classList;
+
+					for (var classIndex = 0, currentClass; currentClass = classes[classIndex]; classIndex++){
+						if(Object.keys(accordionCardToShow).length != 0 && $('#sync' + id).parents('#' + $(accordionCardToShow).attr("id")).length === 0){
+							$(accordionCardToShow).collapse('hide');
+							accordionCardToShow = {};
+						}
+
+						if (currentClass.substr(0, showPrefix.length) === showPrefix){
+							accordionCardToShow = $rs.get('#' + currentClass.substr(showPrefix.length));
+							$(accordionCardToShow).collapse('show');
+						}
+					}
+
+					parentElement = parentElement.parentElement;
+				}
+			});
+		});
+	</script>
+
+	<div id="read_speaker" class="hidden noindex">
+		<div class="listener">
+			<div id="readspeaker_button1" class="rs_skip rsbtn rs_preserve">
+				<a rel       = "nofollow"
+				   class     = "rsbtn_play"
+				   accesskey = "L"
+				   title     = "Listen&#x20;to&#x20;this&#x20;page&#x20;using&#x20;ReadSpeaker"
+				   href      = "//app-eu.readspeaker.com/cgi-bin/rsent?customerid=7475&amp;lang=en_uk&amp;readid=mainPageContent&amp;voice=Branwen&amp;url=">
+
+				   	<span class="rsbtn_left rsimg rspart">
+						<span class="rsbtn_text">
+							<span>Listen</span>
+						</span>
+					</span>
+					<span class="rsbtn_right rsimg rsplay rspart"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		#read_speaker {
+			padding-top:10px;
+		}
+	</style></div></div><div class="mura-object" data-object="cookiecontrol" data-objectid="98DF3E2A-2198-47C3-BD5038E1D43BBA38" data-instanceid="C50B6A90-2680-41AC-A012DF16B0A78053" style="" data-objectname="Cookie&#x20;Control" data-objecticonclass="mi-creative-commons" data-queue="true" data-selectedpageorfolder="9BF74B05-F49A-4916-818D01B591F946AF&#x7c;Cookie&#x20;Policy" data-pageorfolderlistingtype="c" data-acceptbehaviour="all" data-textaccept="Accept&#x20;All&#x20;Cookies" data-rejectbutton="1" data-textreject="Reject&#x20;Non-Essential&#x20;Cookies" data-texton="On" data-textoff="Off" data-notificationbehaviour="notify" data-notifyonce="true" data-position="left" data-layout="slideout" data-theme="dark" data-accessibilityoutline="true" data-layoutid="98DF3E2A-2198-47C3-BD5038E1D43BBA38" data-stylesupport="&#x7b;&#x7d;" data-accessibilityhighlightfocus="true" data-render="server" data-apikey="bee2ac5483a1d10bc6dda8a79a4c178685e552e1" data-product="PRO_MULTISITE" data-mode="gdpr" data-settingsbuttontext="Settings" data-fontfamily="-apple-system,BlinkMacSystemFont,Segoe&#x20;UI,Roboto,Helvetica&#x20;Neue,Arial,sans-serif" data-toggletype="slider" data-closestyle="icon" data-settingsstyle="button" data-consentcookieexpiry="90" data-optionalcookiescatcontentidb563aa4f="4A91CE4D-D9F8-481E-A6381F3ADB2FEBB8" data-sitekey4a91ce4dd9f8481ea6381f3adb2febb8="G-361930431" data-async="false" data-necessarycookies="" data-cssstyles=""><div id="" class="mura-object-content" style=""><script>
+		Mura(function(m){
+			m.loader()
+			  .loadcss('/modules/cookieControl/css/cookieControl.css?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0');
+		});
+	</script>
+	<style>
+		#ccc-icon {
+			fill: #2d7ea5 !important;
+		}
+		#ccc .ccc-content--highlight.ccc-content--light .ccc-link.ccc-tabbable:focus {
+			background-color: #2d7ea5 !important;
+			filter: invert(0%) !important;
+		}
+		#ccc #ccc-notify:not(.ccc-notify__box) {
+			background-color: #333333 !important;
+			display: block !important;
+			text-align: center;
+		}
+		#ccc .ccc-content--dark .ccc-notify-button:focus, .ccc-content--light .ccc-notify-button:focus  {
+			box-shadow: 0 0 0 2px #ffffff !important;
+			outline: #333333 solid 2px !important;
+			outline-offset: 2px !important;
+		}
+
+		#ccc .ccc-content--light .ccc-accept-button span  {
+			color: #ffffff !important;
+		}
+		#ccc .ccc-content--light .ccc-reject-button span  {
+			color: #000000 !important;
+		}
+
+		#ccc .ccc-content--dark span  {
+			color: #ffffff !important;
+		}
+
+		#ccc .ccc-notify-button {
+			-webkit-border-radius: 0 !important;
+			-moz-border-radius: 0 !important;
+			border-radius: 0 !important;
+			background-color: #2d7ea5 !important;
+			color: #ffffff !important;
+			border-color: #fff !important;
+			background: transparent;
+			border: 2px solid;
+			border-color:#2d7ea5 !important;
+		}
+
+		#ccc #ccc-content {
+			background-color: #333333 !important;
+		}
+		#ccc #ccc-content p {
+			color: #ffffff !important;
+		}
+
+		#cc-panel {
+            padding-bottom: 40px;
+        }
+
+		@media (hover: none) and (pointer: coarse) {
+			::-webkit-scrollbar {
+				width: 10px;
+				height: 10px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #888; 
+				border-radius: 5px;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #555; 
+			}
+
+			::-webkit-scrollbar-track {
+				background: #f1f1f1; 
+			}
+        }
+	</style>
+
+	
+
+	
+
+	<script>
+		Mura(function(m) {
+			
+		var config = {
+			apiKey   : 'bee2ac5483a1d10bc6dda8a79a4c178685e552e1'
+			,product : 'PRO_MULTISITE'
+			,text    : { 
+						 title : '<h2 id="ccc-title">This site uses cookies to store information on your computer</h2>'
+						,intro : '<p>Cookies are small text files saved on your phone, tablet or computer when you visit a website.</p> Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used.'
+						,
+					
+			             
+						 necessaryTitle       : 'Essential cookies'
+						,necessaryDescription : '<p>These cookies enable core functionality such as page navigation and access to secure areas. The website cannot function properly without these cookies, and can only be disabled by changing your browser preferences.</p>'
+						,
+					
+			             
+						 thirdPartyTitle       : 'Warning: Some cookies require your attention'
+						,thirdPartyDescription : '<p>Consent for some third party cookies can not be automatically revoked. Please follow the link below if you want to opt out of them.</p>'
+						,thirdPartyCookies     : 'This service may set third party cookies'
+						,readMore              : 'Read More'
+						,showVendors           : 'Show services within this category'
+						,
+					
+			             
+						 notifyTitle       : '<h2 id="ccc-notify-title">Your choice regarding cookies on this site</h2>'
+						,notifyDescription : 'We use cookies to optimise site functionality and give you the best possible experience'
+						,
+					
+			             acceptSettings     : 'Accept All Cookies'
+			             ,rejectSettings    : 'Reject Non-Essential Cookies'
+			             ,accept            : 'Accept All Cookies'
+			             ,reject            : 'Reject Non-Essential Cookies'
+			             ,acceptRecommended : 'Accept All Cookies'
+			             ,settings          : 'Settings'
+			             ,on                : 'On'
+			             ,off               : 'Off'
+			           }
+			
+							,statement : { description : 'For more information, view our'
+							              ,name        : 'Cookie Information'
+							              ,url         : '/use-of-site/cookie-information/'
+							              ,updated     : '08/08/2023'
+							             }
+						
+			,notifyOnce          : true
+			,rejectButton        : true
+			,mode                : "gdpr"
+			,position            : "left"
+			,layout              : "slideout"
+			,theme               : "dark"
+			,initialState        : "notify"
+			,setInnerHTML        : true
+			,wrapInnerHTML       : true
+			,toggleType          : "slider"
+			,closeStyle          : "icon"
+			,settingsStyle       : "button"
+			,notifyDismissButton : true
+			,consentCookieExpiry : 90
+			,logConsent          : false
+			,encodeCookie        : true
+			,subDomains          : true
+			,acceptBehaviour     : "all"
+			,necessaryCookies    : ['cfid','cftoken','MuraCMSAffinity','MuraCMSAffinityCORS','MXP_TRACKINGID','MURA_UPC','rb','RB','FETDISPLAY','infobanner*','minimiseBanner-eConsultDefaultTarget']
+			,optionalCookies     : [
+					{
+						 name              : 'Website usage cookies'
+						,label             : 'Website usage cookies'
+						,description       : '<p>We may use third party tools such as Google Analytics and similar to help us anonymously measure how you use our websites. This allows us to make improvements based on our users\' needs.</p><p>These tools set cookies that store anonymised information about how you got to the site, and how you interact with the site.</p>'
+						,cookies           : ['_ga' ,'_gid' ,'_gat' ,'_gat_UA-*' ,'_gac_UA-*' ,'_ga_*']
+						,onAccept          : function(){/* Disable Google Analytics 4*/
+gtag('consent', 'update', {'analytics_storage': 'granted'});
+/* End Google Analytics */}
+						,onRevoke          : function(){/* Disable Google Analytics 4*/
+gtag('consent', 'update', {'analytics_storage': 'denied'});
+/* End Google Analytics 4*/}
+						,vendors           : [{thirdPartyCookies:false,url:"https://policies.google.com/technologies/cookies?hl=en-US",name:"Google Analytics",description:"We use Google Analytics for usage metrics like page views and link clicks. It uses cookies to join up user behaviour across multiple page views and sessions."}]
+						,thirdPartyCookies : []
+					},
+			]
+			,accessibility       : { outline              : true
+			                        ,highlightFocus       : true
+			                        ,overlay              : false
+			                        ,disableSiteScrolling : false
+			                       }
+			,branding            : { fontFamily      : "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"
+			                        ,toggleColor     : "#2d7ea5"
+			                        ,toggleText      : "#fff"
+			                        ,backgroundColor : "#333333"
+			                        ,fontColor       : "#ffffff"
+			                        ,removeAbout     : true
+			                       }
+		};
+	
+
+			m.loader().loadjs('https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js', function() {
+				var cc_cookie = JSON.parse(CookieControl.getCookie('CookieControl'));
+				if(cc_cookie){
+					var cookie_valid       = ('necessaryCookies' in cc_cookie);
+					var iab_enabled        = ('iabCMP' in config) && (config.iabCMP);
+					var cookie_iab_enabled = ('iabConsent' in cc_cookie) && !('optionalCookies' in cc_cookie);
+					if(!cookie_valid || (iab_enabled !== cookie_iab_enabled)){
+						CookieControl.delete('CookieControl');
+						CookieControl.delete('CookieControlTC');
+					}
+				}
+
+				config.onLoad = function() {
+					$("#ccc-icon").attr("tabindex", "2");	
+				};
+				
+				CookieControl.load(config);
+			});
+		});
+	</script></div></div></div></div>
+		</div>
+
+		<div class="template">
+			<div class="container">
+				<section id="mainPageContent">
+					
+			
+			
+			
+				
+
+					
+					
+					
+						
+						
+						
+	
+		
+
+		
+
+		<div class="mura-body">
+			
+
+		
+			<div class="mura-region mura-region-loose">
+					<div class="mura-region-local"><p></p></div>
+					</div>
+		</div>
+	
+
+
+					
+					
+				
+			
+		
+
+					<div class="mura-region"><div class="mura-region-local"><div class="mura-object mura-expanded mura-sm mura-object-label-top" data-object="container" data-objectid="F9C8FB6F-2B94-429C-932D92EE9EB7D80D" data-instanceid="FD5CA4CE-5703-4729-89647BEC19E418E3" style="" data-class="mura-expanded&#x20;mura-sm&#x20;mura-object-label-top" data-items="&#x5b;&#x5d;" data-objecticonclass="mi-square-o" data-objectname="Container" data-queue="true" data-render="client" data-stylesupport="&#x7b;&quot;objectbackgroundimageurl&quot;&#x3a;&quot;https&#x3a;&#x2f;&#x2f;emedia4.nhs.wales&#x2f;NHSWales&#x2f;cache&#x2f;file&#x2f;A97E2D3C-7EDC-4205-900A972B6700B209_carouselimage.jpg&#x3f;cacheid&#x3d;0.9434554169416047&quot;,&quot;objectBackgroundPositionY&quot;&#x3a;&quot;center&quot;,&quot;objectBackgroundPositionX&quot;&#x3a;&quot;center&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;minHeight&quot;&#x3a;&quot;430px&quot;,&quot;alignContent&quot;&#x3a;&quot;center&quot;,&quot;backgroundImage&quot;&#x3a;&quot;url&#x28;&#x27;https&#x3a;&#x2f;&#x2f;emedia4.nhs.wales&#x2f;NHSWales&#x2f;cache&#x2f;file&#x2f;A97E2D3C-7EDC-4205-900A972B6700B209_carouselimage.jpg&#x3f;cacheid&#x3d;0.9434554169416047&#x27;&#x29;&quot;,&quot;backgroundPositionY&quot;&#x3a;&quot;center&quot;,&quot;backgroundPositionX&quot;&#x3a;&quot;center&quot;,&quot;backgroundRepeat&quot;&#x3a;&quot;no-repeat&quot;,&quot;backgroundSize&quot;&#x3a;&quot;cover&quot;,&quot;backgroundAttachment&quot;&#x3a;&quot;scroll&quot;&#x7d;,&quot;object_sm_styles&quot;&#x3a;&#x7b;&quot;alignContent&quot;&#x3a;&quot;center&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;display&quot;&#x3a;&quot;flex&quot;&#x7d;&#x7d;" data-async="false" data-cssstyles=""></div><div class="mura-object mura-expanded constrain mura-sm mura-object-label-top" data-object="container" data-objectid="1848901B-25FE-4C72-936A07C29D3A7A55" data-instanceid="94328F82-9959-4DE2-9BBC896F473C29B9" style="" data-class="mura-expanded&#x20;constrain&#x20;mura-sm&#x20;mura-object-label-top" data-contentcssclass="container" data-items="&#x5b;&#x7b;&quot;object&quot;&#x3a;&quot;hr&quot;,&quot;objectname&quot;&#x3a;&quot;Horizontal&#x20;Rule&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-minus&quot;,&quot;async&quot;&#x3a;false,&quot;instanceid&quot;&#x3a;&quot;C3F32BA9-3A21-45AF-B041404BE7A2F0ED&quot;,&quot;queue&quot;&#x3a;true,&quot;objectid&quot;&#x3a;&quot;7C3811B2-3B3D-49E1-8797981EBCA4064C&quot;,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;mura-sm&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;objectmarginuom&quot;&#x3a;&quot;px&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;marginTop&quot;&#x3a;&quot;5px&quot;,&quot;marginBottom&quot;&#x3a;&quot;5px&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;textAlign&quot;&#x3a;&quot;left&quot;,&quot;color&quot;&#x3a;&quot;&#x23;325284&quot;&#x7d;&#x7d;,&quot;transient&quot;&#x3a;false&#x7d;,&#x7b;&quot;async&quot;&#x3a;false,&quot;class&quot;&#x3a;&quot;mura-expanded&#x20;constrain&#x20;mura-sm&#x20;tight&#x20;mura-object-label-top&quot;,&quot;contentcssclass&quot;&#x3a;&quot;container&quot;,&quot;instanceid&quot;&#x3a;&quot;6DE7F59E-A5D1-4025-AD479CC86303C9EC&quot;,&quot;isconfigurator&quot;&#x3a;true,&quot;object&quot;&#x3a;&quot;text&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-font&quot;,&quot;objectid&quot;&#x3a;&quot;55B22205-1C6A-4A73-B50E63B594400A47&quot;,&quot;objectname&quot;&#x3a;&quot;Text&quot;,&quot;queue&quot;&#x3a;true,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;source&quot;&#x3a;&quot;&lt;h4&#x20;style&#x3d;&#x5c;&quot;text-align&#x3a;&#x20;center&#x3b;&#x5c;&quot;&gt;This&#x20;website&amp;nbsp&#x3b;is&#x20;the&#x20;point&#x20;of&#x20;access&#x20;for&#x20;information&#x20;on&#x20;what&amp;nbsp&#x3b;the&#x20;NHS&#x20;in&#x20;Wales&#x20;does,&#x20;how&#x20;to&#x20;access&#x20;its&#x20;services,&#x20;available&#x20;jobs&#x20;and&#x20;the&#x20;careers&#x20;we&#x20;offer.&lt;&#x2f;h4&gt;&#x5c;n&quot;,&quot;sourcetype&quot;&#x3a;&quot;custom&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;objectstyles&quot;&#x3a;&#x7b;&quot;backgroundColor&quot;&#x3a;&quot;&#x23;efefef&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;textAlign&quot;&#x3a;&quot;center&quot;,&quot;color&quot;&#x3a;&quot;&#x23;2c3e72&quot;&#x7d;&#x7d;,&quot;transient&quot;&#x3a;false,&quot;objectspacing&quot;&#x3a;&quot;tight&quot;&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;hr&quot;,&quot;objectname&quot;&#x3a;&quot;Horizontal&#x20;Rule&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-minus&quot;,&quot;async&quot;&#x3a;false,&quot;instanceid&quot;&#x3a;&quot;D723390E-E8AC-44AA-BABC87F176E93261&quot;,&quot;queue&quot;&#x3a;true,&quot;objectid&quot;&#x3a;&quot;BE54DF07-1AAC-4838-BC448BE12D05543A&quot;,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;mura-sm&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;objectmarginuom&quot;&#x3a;&quot;px&quot;,&quot;contentpaddinguom&quot;&#x3a;&quot;px&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;marginBottom&quot;&#x3a;&quot;5px&quot;,&quot;alignSelf&quot;&#x3a;&quot;center&quot;,&quot;alignContent&quot;&#x3a;&quot;center&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;paddingLeft&quot;&#x3a;&quot;140px&quot;,&quot;paddingRight&quot;&#x3a;&quot;140px&quot;,&quot;textAlign&quot;&#x3a;&quot;center&quot;,&quot;color&quot;&#x3a;&quot;&#x23;325284&quot;&#x7d;&#x7d;,&quot;transient&quot;&#x3a;false&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;text&quot;,&quot;objectname&quot;&#x3a;&quot;Text&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-font&quot;,&quot;async&quot;&#x3a;false,&quot;instanceid&quot;&#x3a;&quot;620F41C8-CE4A-4AE2-9D59979CD975DBDA&quot;,&quot;queue&quot;&#x3a;true,&quot;objectid&quot;&#x3a;&quot;4994DFE0-F870-48AA-9D116AEC9890858F&quot;,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;transient&quot;&#x3a;false,&quot;sourcetype&quot;&#x3a;&quot;custom&quot;,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;mura-sm&#x20;mura-object-label-top&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;contentstyles&quot;&#x3a;&#x7b;&quot;color&quot;&#x3a;&quot;&#x23;2c3e72&quot;&#x7d;&#x7d;,&quot;source&quot;&#x3a;&quot;&lt;p&#x20;style&#x3d;&#x5c;&quot;color&#x3a;&#x20;rgb&#x28;44,&#x20;62,&#x20;114&#x29;&#x3b;&#x20;text-align&#x3a;&#x20;center&#x3b;&#x5c;&quot;&gt;&amp;nbsp&#x3b;&lt;&#x2f;p&gt;&#x5c;n&#x5c;n&lt;h2&#x20;style&#x3d;&#x5c;&quot;text-align&#x3a;&#x20;center&#x3b;&#x5c;&quot;&gt;Discover&#x20;More&lt;&#x2f;h2&gt;&#x5c;n&#x5c;n&lt;p&gt;&amp;nbsp&#x3b;&lt;&#x2f;p&gt;&#x5c;n&quot;&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;hr&quot;,&quot;objectid&quot;&#x3a;&quot;0106BAAF-0348-4097-91B83B535DF80207&quot;,&quot;instanceid&quot;&#x3a;&quot;89BFEB9B-0B3E-455D-BCBE3DC989D4EA62&quot;,&quot;objectname&quot;&#x3a;&quot;Horizontal&#x20;Rule&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-minus&quot;,&quot;queue&quot;&#x3a;true,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;mura-sm&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;objectmarginuom&quot;&#x3a;&quot;px&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;marginBottom&quot;&#x3a;&quot;5px&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;color&quot;&#x3a;&quot;&#x23;325284&quot;&#x7d;&#x7d;,&quot;transient&quot;&#x3a;false,&quot;async&quot;&#x3a;false,&quot;isconfigurator&quot;&#x3a;false&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;collection&quot;,&quot;objectid&quot;&#x3a;&quot;3F08E282-34B7-46EE-9C3D53DF617CFAE6&quot;,&quot;instanceid&quot;&#x3a;&quot;9EE2FAEE-2082-4189-8928B6BFD653A79B&quot;,&quot;objectname&quot;&#x3a;&quot;Collection&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-th-list&quot;,&quot;queue&quot;&#x3a;true,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;constrain&#x20;mura-sm&#x20;tight&#x20;mura-object-label-top&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&#x7d;,&quot;layout&quot;&#x3a;&quot;grid&quot;,&quot;render&quot;&#x3a;&quot;server&quot;,&quot;imagesize&quot;&#x3a;&quot;small&quot;,&quot;imageheight&quot;&#x3a;&quot;AUTO&quot;,&quot;imagewidth&quot;&#x3a;&quot;AUTO&quot;,&quot;displaylist&quot;&#x3a;&quot;Title,Summary&quot;,&quot;modalimages&quot;&#x3a;false,&quot;maxitems&quot;&#x3a;4,&quot;nextn&quot;&#x3a;20,&quot;scrollpages&quot;&#x3a;false,&quot;applypermfilter&quot;&#x3a;false,&quot;gridstyle&quot;&#x3a;&quot;mura-grid-three&quot;,&quot;linktextcolour&quot;&#x3a;&quot;&#x23;2C3E72&quot;,&quot;sourcetype&quot;&#x3a;&quot;relatedcontent&quot;,&quot;source&quot;&#x3a;&quot;custom&quot;,&quot;items&quot;&#x3a;&quot;294050E5-3AE0-4996-BB4ECB0BF1B24143,47350BFE-0955-409B-AD60A0ECCEF455CC,6674F103-B130-4BCD-AE4ED709A46E0E68&quot;,&quot;contentcssclass&quot;&#x3a;&quot;container&quot;,&quot;objectspacing&quot;&#x3a;&quot;tight&quot;,&quot;transient&quot;&#x3a;false,&quot;async&quot;&#x3a;false,&quot;usecategoryintersect&quot;&#x3a;false,&quot;textcolour&quot;&#x3a;&quot;&#x23;ffffff&quot;,&quot;backgroundcolour&quot;&#x3a;&quot;&#x23;1D70C0&quot;,&quot;contentids&quot;&#x3a;&quot;294050E5-3AE0-4996-BB4ECB0BF1B24143,47350BFE-0955-409B-AD60A0ECCEF455CC,6674F103-B130-4BCD-AE4ED709A46E0E68&quot;,&quot;siteid&quot;&#x3a;&quot;NHSWales&quot;,&quot;showexcludesearch&quot;&#x3a;1,&quot;contenttextcolour&quot;&#x3a;&quot;&#x23;000000&quot;,&quot;isconfigurator&quot;&#x3a;true&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;hr&quot;,&quot;objectname&quot;&#x3a;&quot;Horizontal&#x20;Rule&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-minus&quot;,&quot;async&quot;&#x3a;false,&quot;instanceid&quot;&#x3a;&quot;5A012792-56DC-4DBB-AA5F304DEA960FFA&quot;,&quot;queue&quot;&#x3a;true,&quot;objectid&quot;&#x3a;&quot;23AB3360-D190-4637-A12347B2CC4BF750&quot;,&quot;render&quot;&#x3a;&quot;client&quot;,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;mura-sm&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&quot;objectmarginuom&quot;&#x3a;&quot;px&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;marginBottom&quot;&#x3a;&quot;5px&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;color&quot;&#x3a;&quot;&#x23;325284&quot;&#x7d;&#x7d;,&quot;transient&quot;&#x3a;false&#x7d;,&#x7b;&quot;object&quot;&#x3a;&quot;collection&quot;,&quot;objectid&quot;&#x3a;&quot;2CF86C54-A9AC-4E26-A0BA19A46E3A384A&quot;,&quot;instanceid&quot;&#x3a;&quot;96DD6384-CDC3-4DC6-8F5AA4FBA847F19F&quot;,&quot;objectname&quot;&#x3a;&quot;Collection&quot;,&quot;objecticonclass&quot;&#x3a;&quot;mi-th-list&quot;,&quot;queue&quot;&#x3a;true,&quot;class&quot;&#x3a;&quot;mura-twelve&#x20;constrain&#x20;mura-sm&#x20;tight&#x20;mura-object-label-top&quot;,&quot;stylesupport&quot;&#x3a;&#x7b;&#x7d;,&quot;layout&quot;&#x3a;&quot;grid&quot;,&quot;render&quot;&#x3a;&quot;server&quot;,&quot;imagesize&quot;&#x3a;&quot;small&quot;,&quot;imageheight&quot;&#x3a;&quot;AUTO&quot;,&quot;imagewidth&quot;&#x3a;&quot;AUTO&quot;,&quot;displaylist&quot;&#x3a;&quot;Title,Summary&quot;,&quot;modalimages&quot;&#x3a;false,&quot;maxitems&quot;&#x3a;4,&quot;nextn&quot;&#x3a;20,&quot;scrollpages&quot;&#x3a;false,&quot;applypermfilter&quot;&#x3a;false,&quot;gridstyle&quot;&#x3a;&quot;mura-grid-three&quot;,&quot;linktextcolour&quot;&#x3a;&quot;&#x23;2C3E72&quot;,&quot;sourcetype&quot;&#x3a;&quot;relatedcontent&quot;,&quot;source&quot;&#x3a;&quot;custom&quot;,&quot;items&quot;&#x3a;&quot;5EFD0785-49C2-4D09-BBC9AE81524F0B07,562DF6B0-1B75-40C6-8F70EB6693B1738E,52D74C46-76CB-45B6-8ED9C696680FCBD3&quot;,&quot;contentcssclass&quot;&#x3a;&quot;container&quot;,&quot;objectspacing&quot;&#x3a;&quot;tight&quot;,&quot;transient&quot;&#x3a;false,&quot;async&quot;&#x3a;false,&quot;usecategoryintersect&quot;&#x3a;false,&quot;textcolour&quot;&#x3a;&quot;&#x23;ffffff&quot;,&quot;backgroundcolour&quot;&#x3a;&quot;&#x23;1D70C0&quot;,&quot;contentids&quot;&#x3a;&quot;5EFD0785-49C2-4D09-BBC9AE81524F0B07,562DF6B0-1B75-40C6-8F70EB6693B1738E,52D74C46-76CB-45B6-8ED9C696680FCBD3&quot;,&quot;siteid&quot;&#x3a;&quot;NHSWales&quot;,&quot;showexcludesearch&quot;&#x3a;1,&quot;contenttextcolour&quot;&#x3a;&quot;&#x23;000000&quot;,&quot;isconfigurator&quot;&#x3a;true&#x7d;&#x5d;" data-objecticonclass="mi-square-o" data-objectname="Container" data-queue="true" data-render="client" data-stylesupport="&#x7b;&quot;objectpaddinguom&quot;&#x3a;&quot;px&quot;,&quot;objectstyles&quot;&#x3a;&#x7b;&quot;paddingBottom&quot;&#x3a;&quot;25px&quot;,&quot;backgroundColor&quot;&#x3a;&quot;&#x23;efefef&quot;&#x7d;,&quot;contentstyles&quot;&#x3a;&#x7b;&quot;display&quot;&#x3a;&quot;flex&quot;&#x7d;&#x7d;" data-async="false" data-cssstyles=""></div></div></div>
+				</section>
+			</div><!-- /.container -->
+
+			<div class="container bottom">
+				<div class="row">
+					<div class="container py-3">
+						<div class="mura-region"><div class="mura-region-local"></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+
+	<footer>
+		<div class="container">
+			<div class="d-flex footer-navbar col-12">
+				<div class="col-lg-12 mb-12 p-2 flex-fill footer-logo">
+					<img class="nav-large-image" src="/sites/NHSWales/images/logo/NHSWales2.png" alt="NHS Wales | NHS Wales">
+				</div>
+				
+				
+				
+				
+					<section class="p-2 flex-fill footer-section">
+						<ul class="justify-content-center">
+							
+								<li><a href="/use-of-site/accessibility-statement/" class="nav-link" target="_self">Accessibility Statement</a></li>
+							
+								<li><a href="/use-of-site/terms-of-use/" class="nav-link" target="_self">Terms of use</a></li>
+							
+								<li><a href="/use-of-site/freedom-of-information/" class="nav-link" target="_self">Freedom of Information</a></li>
+							
+								<li><a href="/use-of-site/privacy-policy/" class="nav-link" target="_self">Privacy Policy</a></li>
+							
+						</ul>
+					</section>
+				
+			</div>
+			
+				<div class="col-lg-12 mb-12 flex-fill app-download-buttons">
+					<h2 class="widget-title inline">Download the NHS Wales App</h2>
+					<a href="https://apps.apple.com/gb/app/nhs-wales-app/id1636689276" target="_blank" rel="noopener noreferrer">
+						<img src="/themes/gradientTrustTheme/images/downloadAppApple.svg" alt="Download on the App Store" width="149" height="50">
+					</a>
+					<a href="https://play.google.com/store/apps/details?id=com.dhcw.nhswapp" target="_blank" rel="noopener noreferrer">
+						<img src="/themes/gradientTrustTheme/images/downloadAppGoogle.png" alt="Get it on Google Play" width="168" height="50">
+					</a>
+				</div>
+			
+			<hr class="footer-divider">
+			<div class="builtBy">
+				
+				Built by <a href="https://dhcw.nhs.wales/" target="_self">Digital Health and Care Wales</a>
+			</div>
+		</div>
+	</footer>
+
+		
+
+
+
+
+<script src="/themes/gradientTrustTheme/assets/bootstrap/js/bootstrap.bundle.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+<script type="text/javascript" src="/sites/NHSWales/js/external/jquery.validate.min.js?v=1.19.3"></script>
+
+
+<script src="/sites/NHSWales/js/external/jquery.touchSwipe.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+<script src="/sites/NHSWales/js/external/jquery-ui.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+<script>
+	emailconfirmvalidate="The 'Email address' and 'Confirm email' fields must match";;
+	dateofbirthagerange="Age must be between {0} and {1}";;
+	var xOpen="Open";;
+	var xClose="Close";;
+</script>
+
+<script src="/themes/gradientTrustTheme/js/theme/theme.53125628.min.js"></script>
+<script src="/sites/NHSWales/js/external/jquery.visible.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+<script src="/sites/NHSWales/js/external/jsCookie/v3.0.1/js.cookie.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+
+<script type="text/javascript" src="/sites/NHSWales/js/external/dataTables/v1.11.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/sites/NHSWales/js/external/dataTables/v1.11.0/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="/sites/NHSWales/js/external/dataTables/responsive/v2.2.9/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="/sites/NHSWales/js/external/moment/v2.29.1/moment.min.js"></script>
+<script type="text/javascript" src="/sites/NHSWales/js/external/dataTables/v1.11.0/datetime-moment.js"></script>
+
+
+<script type="text/javascript" src="/sites/NHSWales/js/external/dataTables/datatables.pipeline.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+
+<script type="text/javascript" src="/sites/NHSWales/js/external/acronymsAndAbbreviations.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+
+<script type="text/javascript" src="/sites/NHSWales/js/external/trackedFileDownload.min.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+
+<script>
+	var isGoogleApiLoaded = false;
+	window.gApiCallback = function () {
+		isGoogleApiLoaded = true;
+	};
+</script>
+
+<script nomodule type="text/javascript" src="/modules/collection/js/supportStylesForIE.js?v=e91a94e4-a753-4ee7-936e-1c0f0a5e0ab0"></script>
+
+
+	
+<script src="//www.nhs.wales/core/modules/v1/pdfviewer/dist/main.bundle.js" defer="defer"></script>
+<link rel="stylesheet" href="//www.nhs.wales/core/modules/v1/resource_hub/assets/css/resource_hub.css">
+<script src="/modules/cta/js/mura.displayobject.cta.min.js" defer="defer"></script>
+<script src="/modules/image/js/image.js"></script>
+<script>var downloadLabel="Download";</script>
+<script src="/modules/pdfviewer/main.js" defer="defer"></script>
+<style>
+			                        .pdf-btn-container .btn-primary {
+			                        	background-color: #f8f9fa !important;
+			                        	color: #1B69B1 !important;
+			                        	border-color : #1B69B1 !important;
+			                        }
+			                      </style></body>
+</html>

@@ -1,0 +1,344 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:agile-checklist",
+        "code": "agile_checklist_grade",
+        "display": "Agile Checklist Grade"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "answered_count",
+            "display": "Answered Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "teams_yes_count",
+            "display": "Teams Yes Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "teams_applicable_count",
+            "display": "Teams Applicable Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "teams_percent",
+            "display": "Teams Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "stakeholders_yes_count",
+            "display": "Stakeholders Yes Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "stakeholders_applicable_count",
+            "display": "Stakeholders Applicable Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "stakeholders_percent",
+            "display": "Stakeholders Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "practices_yes_count",
+            "display": "Practices Yes Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "practices_applicable_count",
+            "display": "Practices Applicable Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "practices_percent",
+            "display": "Practices Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "overall_percent",
+            "display": "Overall Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "teams_band",
+            "display": "Teams Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist:teams_band",
+            "code": "high",
+            "display": "High"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "stakeholders_band",
+            "display": "Stakeholders Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist:stakeholders_band",
+            "code": "high",
+            "display": "High"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "practices_band",
+            "display": "Practices Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist:practices_band",
+            "code": "high",
+            "display": "High"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "maturity",
+            "display": "Maturity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist:maturity",
+            "code": "optimising",
+            "display": "Optimising"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "top_action_1",
+            "display": "Top Action 1"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "top_action_2",
+            "display": "Top Action 2"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "top_action_3",
+            "display": "Top Action 3"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "coach_notes",
+            "display": "Coach Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "signed_at",
+            "display": "Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:agile-checklist",
+            "code": "graded_at",
+            "display": "Graded At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

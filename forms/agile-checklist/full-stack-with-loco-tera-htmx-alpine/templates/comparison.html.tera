@@ -1,0 +1,213 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Agile Checklist — Principles vs. Behaviour{% endblock %}
+
+{% block content %}
+<style>
+  .upload-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .upload-grid { grid-template-columns: 1fr 1fr; } }
+  .upload-grid textarea { width: 100%; min-height: 140px; padding: 8px 10px;
+    font: 0.85rem/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-card); }
+  .tile-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0; }
+  @media (min-width: 720px) { .tile-row { grid-template-columns: repeat(5, 1fr); } }
+  .qtile { border-left: 4px solid #94a3b8; border: 1px solid var(--color-border);
+    border-left-width: 4px; background: var(--color-card); border-radius: 6px; padding: 10px 12px; }
+  .qtile.q-healthy-adoption { border-left-color: #15803d; background: #ecfdf5; }
+  .qtile.q-aspirational-gap { border-left-color: #ca8a04; background: #fefce8; }
+  .qtile.q-cargo-cult { border-left-color: #ea580c; background: #fff7ed; }
+  .qtile.q-pre-agile { border-left-color: #dc2626; background: #fef2f2; }
+  .qtile.q-insufficient-data { border-left-color: #94a3b8; background: #f8fafc; }
+  .qtile .label { margin: 0; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--color-muted); }
+  .qtile .value { margin: 0; font-size: 1.5rem; font-weight: 600; }
+  table.comp { width: 100%; border-collapse: collapse; font-size: 0.875rem;
+    background: var(--color-card); }
+  table.comp th, table.comp td { padding: 8px; border-bottom: 1px solid #e2e8f0;
+    text-align: left; vertical-align: top; }
+  table.comp th { background: #f1f5f9; }
+  table.comp tr.q-healthy-adoption { background: #ecfdf5; }
+  table.comp tr.q-aspirational-gap { background: #fefce8; }
+  table.comp tr.q-cargo-cult { background: #fff7ed; }
+  table.comp tr.q-pre-agile { background: #fef2f2; }
+  table.comp tr.q-insufficient-data { background: #f8fafc; }
+  table.comp .upper { text-transform: uppercase; font-weight: 600; }
+  table.comp .muted { color: var(--color-muted); }
+  .table-scroll { overflow-x: auto; }
+  .nav-tabs { display: inline-flex; gap: 4px; margin-bottom: 12px; }
+  .nav-tabs a { background: var(--color-card); color: var(--color-text);
+    border: 1px solid var(--color-border); padding: 4px 12px; border-radius: 4px;
+    text-decoration: none; font-size: 0.85rem; }
+  .nav-tabs a.active { background: var(--color-brand); color: #fff;
+    border-color: var(--color-brand); }
+  .panel { background: var(--color-card); border: 1px solid var(--color-border);
+    border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .err { color: #b91c1c; font-size: 0.9rem; }
+</style>
+
+<header class="top">
+  <h1>Agile Checklist — Principles vs. Behaviour</h1>
+  <p>
+    Paste your team's
+    <a href="../agile-principles-assessment">principles assessment</a>
+    CSV (or any CSV with <code>team, organisation, maturity</code>) into
+    the first textarea and the agile-checklist CSV into the second.
+    Teams are paired by <code>team + organisation</code>; each pair is
+    classified into one of the four quadrants from
+    <a href="../doc/sister-form-comparison.md">sister-form-comparison.md</a>.
+  </p>
+</header>
+
+<main>
+  <nav class="nav-tabs" aria-label="View" style="margin-bottom:12px">
+    <a href="/">Form</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/comparison" class="active">Compare</a>
+  </nav>
+
+  <form method="post" action="/comparison" hx-boost="false" class="panel">
+    <h2 style="font-size:1rem;margin:0 0 8px">Source data</h2>
+    <fieldset style="border:1px solid var(--color-border);border-radius:4px;padding:10px 14px;margin:0 0 12px">
+      <legend style="padding:0 6px;color:var(--color-muted);font-size:0.85rem">
+        Behaviour data source
+      </legend>
+      <label style="display:block;margin:4px 0;font-size:0.9rem">
+        <input type="radio" name="behaviour_source" value="csv"
+          {% if behaviour_source != "db" %}checked{% endif %} />
+        Paste a CSV (works without any submissions)
+      </label>
+      <label style="display:block;margin:4px 0;font-size:0.9rem">
+        <input type="radio" name="behaviour_source" value="db"
+          {% if behaviour_source == "db" %}checked{% endif %} />
+        Use submissions persisted in this app
+        <span style="color:var(--color-muted);font-size:0.85rem">
+          ({{ db_row_count }} row{% if db_row_count != 1 %}s{% endif %} in the database)
+        </span>
+      </label>
+    </fieldset>
+
+    <div class="upload-grid">
+      <label>
+        <span style="display:block;font-size:0.85rem;font-weight:500;margin-bottom:4px">
+          Principles assessment CSV (with <code>meanScore</code>)
+        </span>
+        <textarea name="principles_csv" autocomplete="off"
+          placeholder="id,date,respondent,role,team,organisation,answered,meanScore,maturity,weakPrinciples,flags&#10;A001,2026-04-12,Alice,scrum-master,Aurora,Acme,12,4.5,optimising,,&#10;..."
+        >{{ principles_csv }}</textarea>
+      </label>
+      <label>
+        <span style="display:block;font-size:0.85rem;font-weight:500;margin-bottom:4px">
+          Behaviour checklist CSV (with <code>overallPercent</code>)
+          {% if behaviour_source == "db" %}
+            <span style="color:var(--color-muted)">— ignored when using the database</span>
+          {% endif %}
+        </span>
+        <textarea name="behaviour_csv" autocomplete="off"
+          placeholder="id,date,respondent,role,team,organisation,answered,teamsPercent,stakeholdersPercent,practicesPercent,overallPercent,maturity,weakSections,flags&#10;C001,2026-04-12,Alice,scrum-master,Aurora,Acme,57,96,86,89,90,optimising,,&#10;..."
+        >{{ behaviour_csv }}</textarea>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Compare</button>
+      <a href="/comparison" class="btn">Clear</a>
+    </div>
+    {% if error and error != "" %}
+      <p class="err" style="margin-top:8px"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+  </form>
+
+  {% if rendered and pairs | length > 0 %}
+    <section class="tile-row" aria-label="Quadrant totals">
+      <div class="qtile q-healthy-adoption">
+        <p class="label">Healthy adoption</p><p class="value">{{ totals.healthyAdoption }}</p>
+      </div>
+      <div class="qtile q-aspirational-gap">
+        <p class="label">Aspirational gap</p><p class="value">{{ totals.aspirationalGap }}</p>
+      </div>
+      <div class="qtile q-cargo-cult">
+        <p class="label">Cargo-cult agile</p><p class="value">{{ totals.cargoCult }}</p>
+      </div>
+      <div class="qtile q-pre-agile">
+        <p class="label">Pre-agile / waterfall</p><p class="value">{{ totals.preAgile }}</p>
+      </div>
+      <div class="qtile q-insufficient-data">
+        <p class="label">Insufficient data</p><p class="value">{{ totals.insufficientData }}</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Quadrant scatter">
+      <h2 style="font-size:1rem;margin:0 0 8px">Quadrant grid</h2>
+      <p class="muted" style="color:#64748b;margin:0 0 8px;font-size:0.8rem">
+        X: principles meanScore (1–5). Y: behaviour overallPercent (0–100).
+        Dotted lines mark the high-vs-low boundary (mature / 75 %).
+      </p>
+      <svg width="360" height="260" viewBox="0 0 360 260" role="img"
+        aria-label="Quadrant scatter: principles vs behaviour">
+        <rect x="40" y="20" width="280" height="200" fill="#f8fafc" stroke="#cbd5e1" />
+        <line x1="232.5" y1="20" x2="232.5" y2="220" stroke="#94a3b8" stroke-dasharray="3,3" />
+        <line x1="40" y1="70" x2="320" y2="70" stroke="#94a3b8" stroke-dasharray="3,3" />
+        <text x="180" y="240" text-anchor="middle" font-size="11" fill="#475569">Principles maturity →</text>
+        <text x="20" y="120" text-anchor="middle" transform="rotate(-90,20,120)"
+          font-size="11" fill="#475569">Behaviour maturity →</text>
+        <text x="50" y="35" font-size="10" fill="#ea580c">cargo-cult</text>
+        <text x="310" y="35" text-anchor="end" font-size="10" fill="#15803d">healthy</text>
+        <text x="50" y="215" font-size="10" fill="#dc2626">pre-agile</text>
+        <text x="310" y="215" text-anchor="end" font-size="10" fill="#ca8a04">aspirational</text>
+        {% for p in pairs %}
+          {% if p.sparkX and p.sparkY %}
+            {% set cx = 40 + (p.sparkX / 100) * 280 %}
+            {% set cy = 220 - (p.sparkY / 100) * 200 %}
+            <circle cx="{{ cx }}" cy="{{ cy }}" r="5"
+              fill="{{ p.sparkColor }}" fill-opacity="0.85" />
+            <text x="{{ cx + 8 }}" y="{{ cy + 3 }}" font-size="10" fill="#0f172a">{{ p.team }}</text>
+          {% endif %}
+        {% endfor %}
+      </svg>
+    </section>
+
+    <section class="panel" aria-label="Per-team comparison">
+      <h2 style="font-size:1rem;margin:0 0 8px">By team</h2>
+      <div class="table-scroll">
+        <table class="comp">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Organisation</th>
+              <th>Principles</th>
+              <th>Behaviour</th>
+              <th>Quadrant</th>
+              <th>Coaching focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in pairs %}
+              <tr class="q-{{ p.quadrant }}">
+                <td><strong>{{ p.team }}</strong></td>
+                <td>{{ p.organisation }}</td>
+                <td>
+                  {% if p.principles %}
+                    {{ p.principles.scoreDisplay }} · <span class="upper">{{ p.principles.maturity }}</span>
+                  {% else %}
+                    <span class="muted">— no row</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if p.behaviour %}
+                    {{ p.behaviour.scoreDisplay }} · <span class="upper">{{ p.behaviour.maturity }}</span>
+                  {% else %}
+                    <span class="muted">— no row</span>
+                  {% endif %}
+                </td>
+                <td class="upper" style="white-space:nowrap">{{ p.quadrantLabel }}</td>
+                <td class="muted">{{ p.quadrantDescription }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {% elif rendered %}
+    <p class="muted">No pairings were found in the supplied CSVs.</p>
+  {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,10 @@
+<!ELEMENT agile_checklist_grade_rule (id,created_at,updated_at,deleted_at,agile_checklist_grade_id,rule_id,section,band,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT agile_checklist_grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT section (#PCDATA)>
+<!ELEMENT band (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

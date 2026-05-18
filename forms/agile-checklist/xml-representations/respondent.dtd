@@ -1,0 +1,11 @@
+<!ELEMENT respondent (id,created_at,updated_at,deleted_at,full_name,email,role,team_name,organisation_name,years_in_agile)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT full_name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT team_name (#PCDATA)>
+<!ELEMENT organisation_name (#PCDATA)>
+<!ELEMENT years_in_agile (#PCDATA)>

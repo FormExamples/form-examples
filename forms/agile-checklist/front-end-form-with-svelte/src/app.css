@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-900: #312e81;
+  --color-maturity-optimising: #15803d;
+  --color-maturity-mature: #16a34a;
+  --color-maturity-developing: #ca8a04;
+  --color-maturity-initial: #ea580c;
+  --color-maturity-ad-hoc: #dc2626;
+  --color-maturity-insufficient: #6b7280;
+}

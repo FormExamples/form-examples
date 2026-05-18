@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agile_checklist_grade SYSTEM "agile_checklist_grade.dtd">
+<agile_checklist_grade>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<agile_checklist_id>660e8400-e29b-41d4-a716-446655440001</agile_checklist_id>
+<answered_count>2</answered_count>
+<teams_yes_count>2</teams_yes_count>
+<teams_applicable_count>2</teams_applicable_count>
+<teams_percent>50.0</teams_percent>
+<stakeholders_yes_count>2</stakeholders_yes_count>
+<stakeholders_applicable_count>2</stakeholders_applicable_count>
+<stakeholders_percent>50.0</stakeholders_percent>
+<practices_yes_count>2</practices_yes_count>
+<practices_applicable_count>2</practices_applicable_count>
+<practices_percent>50.0</practices_percent>
+<overall_percent>50.0</overall_percent>
+<teams_band>high</teams_band>
+<stakeholders_band>high</stakeholders_band>
+<practices_band>high</practices_band>
+<maturity>optimising</maturity>
+<top_action_1></top_action_1>
+<top_action_2></top_action_2>
+<top_action_3></top_action_3>
+<coach_notes>Example text.</coach_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</agile_checklist_grade>
