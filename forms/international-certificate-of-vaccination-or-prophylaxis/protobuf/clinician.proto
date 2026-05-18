@@ -1,0 +1,47 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.international_certificate_of_vaccination_or_prophylaxis;
+
+enum ClinicianProfessionalStatusEnum {
+  PROFESSIONALSTATUS_UNSPECIFIED = 0;
+  PROFESSIONALSTATUS_MD = 1;  // MD
+  PROFESSIONALSTATUS_DO = 2;  // DO
+  PROFESSIONALSTATUS_RN = 3;  // RN
+  PROFESSIONALSTATUS_NP = 4;  // NP
+  PROFESSIONALSTATUS_PA = 5;  // PA
+  PROFESSIONALSTATUS_PHARMACIST = 6;  // Pharmacist
+  PROFESSIONALSTATUS_PARAMEDIC = 7;  // Paramedic
+  PROFESSIONALSTATUS_OTHER = 8;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_STATE_MEDICAL_BOARD = 5;  // state-medical-board
+  REGISTRATIONBODY_NATIONAL_MEDICAL_COUNCIL = 6;  // national-medical-council
+  REGISTRATIONBODY_OTHER = 7;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  ClinicianProfessionalStatusEnum professional_status = 6;  // VARCHAR(50)
+  string email = 7;  // TEXT
+  string phone = 8;  // TEXT
+  string postal_address_as_full_text = 9;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 10;  // CHAR(2) — max 2 chars
+  string postcode = 11;  // TEXT
+  ClinicianRegistrationBodyEnum registration_body = 12;  // VARCHAR(20)
+  string registration_number = 13;  // TEXT
+  string signature_image_data_url = 14;  // TEXT
+  string united_kingdom_nhs_number = 15;  // CHAR(12) — max 12 chars
+}

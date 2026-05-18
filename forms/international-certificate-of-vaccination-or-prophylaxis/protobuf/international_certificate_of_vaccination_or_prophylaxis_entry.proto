@@ -1,0 +1,116 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: international_certificate_of_vaccination_or_prophylaxis_entry
+
+syntax = "proto3";
+
+package form_examples.international_certificate_of_vaccination_or_prophylaxis;
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryDiseaseEnum {
+  DISEASE_UNSPECIFIED = 0;
+  DISEASE_YELLOW_FEVER = 1;  // yellow-fever
+  DISEASE_POLIO = 2;  // polio
+  DISEASE_SMALLPOX = 3;  // smallpox
+  DISEASE_CHOLERA = 4;  // cholera
+  DISEASE_MENINGOCOCCAL = 5;  // meningococcal
+  DISEASE_COVID_19 = 6;  // covid-19
+  DISEASE_OTHER = 7;  // other
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_INTRAMUSCULAR = 1;  // intramuscular
+  ROUTE_SUBCUTANEOUS = 2;  // subcutaneous
+  ROUTE_INTRADERMAL = 3;  // intradermal
+  ROUTE_ORAL = 4;  // oral
+  ROUTE_INTRANASAL = 5;  // intranasal
+  ROUTE_OTHER = 6;  // other
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryAnatomicalSiteEnum {
+  ANATOMICALSITE_UNSPECIFIED = 0;
+  ANATOMICALSITE_LEFT_DELTOID = 1;  // left-deltoid
+  ANATOMICALSITE_RIGHT_DELTOID = 2;  // right-deltoid
+  ANATOMICALSITE_LEFT_THIGH = 3;  // left-thigh
+  ANATOMICALSITE_RIGHT_THIGH = 4;  // right-thigh
+  ANATOMICALSITE_LEFT_GLUTEUS = 5;  // left-gluteus
+  ANATOMICALSITE_RIGHT_GLUTEUS = 6;  // right-gluteus
+  ANATOMICALSITE_ORAL = 7;  // oral
+  ANATOMICALSITE_NASAL = 8;  // nasal
+  ANATOMICALSITE_OTHER = 9;  // other
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryDoseAmountUnitEnum {
+  DOSEAMOUNTUNIT_UNSPECIFIED = 0;
+  DOSEAMOUNTUNIT_ML = 1;  // mL
+  DOSEAMOUNTUNIT_MG = 2;  // mg
+  DOSEAMOUNTUNIT_IU = 3;  // IU
+  DOSEAMOUNTUNIT_DROPS = 4;  // drops
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryValidityIsLifetimeEnum {
+  VALIDITYISLIFETIME_UNSPECIFIED = 0;
+  VALIDITYISLIFETIME_YES = 1;  // yes
+  VALIDITYISLIFETIME_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryCentreStampAppliedEnum {
+  CENTRESTAMPAPPLIED_UNSPECIFIED = 0;
+  CENTRESTAMPAPPLIED_YES = 1;  // yes
+  CENTRESTAMPAPPLIED_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryAdverseEventEnum {
+  ADVERSEEVENT_UNSPECIFIED = 0;
+  ADVERSEEVENT_NONE = 1;  // none
+  ADVERSEEVENT_LOCAL = 2;  // local
+  ADVERSEEVENT_SYSTEMIC = 3;  // systemic
+  ADVERSEEVENT_ANAPHYLAXIS = 4;  // anaphylaxis
+  ADVERSEEVENT_OTHER = 5;  // other
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisEntryEntryValidEnum {
+  ENTRYVALID_UNSPECIFIED = 0;
+  ENTRYVALID_YES = 1;  // yes
+  ENTRYVALID_NO = 2;  // no
+}
+
+message InternationalCertificateOfVaccinationOrProphylaxisEntry {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string international_certificate_of_vaccination_or_prophylaxis_id = 5;  // UUID — uuid
+  int32 entry_index = 6;  // INTEGER
+  InternationalCertificateOfVaccinationOrProphylaxisEntryDiseaseEnum disease = 7;  // VARCHAR(30)
+  string disease_other_label = 8;  // VARCHAR(100) — max 100 chars
+  string disease_as_snomed_ct = 9;  // VARCHAR(20) — max 20 chars
+  string disease_as_icd_11 = 10;  // VARCHAR(20) — max 20 chars
+  string vaccine_or_prophylaxis_name = 11;  // VARCHAR(255) — max 255 chars
+  string vaccine_as_snomed_ct = 12;  // VARCHAR(20) — max 20 chars
+  string vaccine_as_atc = 13;  // VARCHAR(20) — max 20 chars
+  string manufacturer = 14;  // VARCHAR(255) — max 255 chars
+  string manufacturer_country_as_iso_3166_1_alpha_3 = 15;  // CHAR(3) — max 3 chars
+  string batch_number = 16;  // VARCHAR(50) — max 50 chars
+  string lot_expiry_date = 17;  // DATE — iso 8601 date
+  InternationalCertificateOfVaccinationOrProphylaxisEntryRouteEnum route = 18;  // VARCHAR(30)
+  InternationalCertificateOfVaccinationOrProphylaxisEntryAnatomicalSiteEnum anatomical_site = 19;  // VARCHAR(30)
+  double dose_amount_value = 20;  // NUMERIC(6,3) — numeric(6,3)
+  InternationalCertificateOfVaccinationOrProphylaxisEntryDoseAmountUnitEnum dose_amount_unit = 21;  // VARCHAR(10)
+  int32 dose_sequence = 22;  // INTEGER
+  int32 dose_sequence_total = 23;  // INTEGER
+  string vaccination_date = 24;  // DATE — iso 8601 date
+  string vaccination_time = 25;  // TIME — iso 8601 time
+  string administered_by_clinician_id = 26;  // UUID — uuid
+  string administering_clinician_signature_data_url = 27;  // TEXT
+  string administering_clinician_professional_status = 28;  // VARCHAR(50) — max 50 chars
+  string validity_starts_on = 29;  // DATE — iso 8601 date
+  string validity_ends_on = 30;  // DATE — iso 8601 date
+  InternationalCertificateOfVaccinationOrProphylaxisEntryValidityIsLifetimeEnum validity_is_lifetime = 31;  // VARCHAR(5)
+  string centre_id = 32;  // UUID — uuid
+  string centre_stamp_image_data_url = 33;  // TEXT
+  InternationalCertificateOfVaccinationOrProphylaxisEntryCentreStampAppliedEnum centre_stamp_applied = 34;  // VARCHAR(5)
+  InternationalCertificateOfVaccinationOrProphylaxisEntryAdverseEventEnum adverse_event = 35;  // VARCHAR(20)
+  string adverse_event_notes = 36;  // TEXT
+  InternationalCertificateOfVaccinationOrProphylaxisEntryEntryValidEnum entry_valid = 37;  // VARCHAR(5)
+  string entry_notes = 38;  // TEXT
+}

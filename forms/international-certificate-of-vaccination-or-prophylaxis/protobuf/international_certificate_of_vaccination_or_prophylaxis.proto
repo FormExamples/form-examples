@@ -1,0 +1,91 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: international_certificate_of_vaccination_or_prophylaxis
+
+syntax = "proto3";
+
+package form_examples.international_certificate_of_vaccination_or_prophylaxis;
+
+enum InternationalCertificateOfVaccinationOrProphylaxisStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_ISSUED = 2;  // issued
+  STATUS_REISSUED = 3;  // reissued
+  STATUS_REVOKED = 4;  // revoked
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisPurposeOfTravelEnum {
+  PURPOSEOFTRAVEL_UNSPECIFIED = 0;
+  PURPOSEOFTRAVEL_TOURISM = 1;  // tourism
+  PURPOSEOFTRAVEL_BUSINESS = 2;  // business
+  PURPOSEOFTRAVEL_STUDY = 3;  // study
+  PURPOSEOFTRAVEL_EMPLOYMENT = 4;  // employment
+  PURPOSEOFTRAVEL_HUMANITARIAN = 5;  // humanitarian
+  PURPOSEOFTRAVEL_MILITARY = 6;  // military
+  PURPOSEOFTRAVEL_FAMILY = 7;  // family
+  PURPOSEOFTRAVEL_MEDICAL = 8;  // medical
+  PURPOSEOFTRAVEL_OTHER = 9;  // other
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisMedicalWaiverEnum {
+  MEDICALWAIVER_UNSPECIFIED = 0;
+  MEDICALWAIVER_YES = 1;  // yes
+  MEDICALWAIVER_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisDeclaredPregnancyEnum {
+  DECLAREDPREGNANCY_UNSPECIFIED = 0;
+  DECLAREDPREGNANCY_YES = 1;  // yes
+  DECLAREDPREGNANCY_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisDeclaredBreastfeedingEnum {
+  DECLAREDBREASTFEEDING_UNSPECIFIED = 0;
+  DECLAREDBREASTFEEDING_YES = 1;  // yes
+  DECLAREDBREASTFEEDING_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisDeclaredImmunosuppressionEnum {
+  DECLAREDIMMUNOSUPPRESSION_UNSPECIFIED = 0;
+  DECLAREDIMMUNOSUPPRESSION_YES = 1;  // yes
+  DECLAREDIMMUNOSUPPRESSION_NO = 2;  // no
+}
+
+enum InternationalCertificateOfVaccinationOrProphylaxisOverallValidEnum {
+  OVERALLVALID_UNSPECIFIED = 0;
+  OVERALLVALID_YES = 1;  // yes
+  OVERALLVALID_NO = 2;  // no
+}
+
+message InternationalCertificateOfVaccinationOrProphylaxis {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string center_id = 7;  // UUID — uuid
+  InternationalCertificateOfVaccinationOrProphylaxisStatusEnum status = 8;  // VARCHAR(20)
+  string issued_at = 9;  // TIMESTAMPTZ — iso 8601
+  string revoked_at = 10;  // TIMESTAMPTZ — iso 8601
+  string revocation_reason = 11;  // TEXT
+  string certificate_serial_number = 12;  // VARCHAR(50) — max 50 chars
+  string issuing_country_as_iso_3166_1_alpha_3 = 13;  // CHAR(3) — max 3 chars
+  string primary_language_as_bcp_47 = 14;  // VARCHAR(10) — max 10 chars
+  string secondary_language_as_bcp_47 = 15;  // VARCHAR(10) — max 10 chars
+  string tertiary_language_as_bcp_47 = 16;  // VARCHAR(10) — max 10 chars
+  string destination_countries_as_iso_3166_1_alpha_3 = 17;  // TEXT
+  string planned_arrival_date = 18;  // DATE — iso 8601 date
+  InternationalCertificateOfVaccinationOrProphylaxisPurposeOfTravelEnum purpose_of_travel = 19;  // VARCHAR(50)
+  InternationalCertificateOfVaccinationOrProphylaxisMedicalWaiverEnum medical_waiver = 20;  // VARCHAR(5)
+  string medical_waiver_reason = 21;  // TEXT
+  string medical_waiver_signed_by_clinician_id = 22;  // UUID — uuid
+  string medical_waiver_signed_at = 23;  // TIMESTAMPTZ — iso 8601
+  InternationalCertificateOfVaccinationOrProphylaxisDeclaredPregnancyEnum declared_pregnancy = 24;  // VARCHAR(5)
+  InternationalCertificateOfVaccinationOrProphylaxisDeclaredBreastfeedingEnum declared_breastfeeding = 25;  // VARCHAR(5)
+  InternationalCertificateOfVaccinationOrProphylaxisDeclaredImmunosuppressionEnum declared_immunosuppression = 26;  // VARCHAR(5)
+  string electronic_signature_data_url = 27;  // TEXT
+  string electronic_signature_signed_at = 28;  // TIMESTAMPTZ — iso 8601
+  InternationalCertificateOfVaccinationOrProphylaxisOverallValidEnum overall_valid = 29;  // VARCHAR(5)
+  string validity_computed_at = 30;  // TIMESTAMPTZ — iso 8601
+  string notes = 31;  // TEXT
+}
