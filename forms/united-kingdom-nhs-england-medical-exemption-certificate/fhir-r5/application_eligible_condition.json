@@ -1,0 +1,340 @@
+{
+  "resourceType": "Observation",
+  "id": "990e8400-e29b-41d4-a716-446655440004",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+        "code": "application_eligible_condition",
+        "display": "Application Eligible Condition"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "diagnosis_date",
+            "display": "Diagnosis Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "snomed_ct_code",
+            "display": "Snomed Ct Code"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "icd10_code",
+            "display": "Icd10 Code"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "treatment_detail",
+            "display": "Treatment Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "fistula_site",
+            "display": "Fistula Site"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:fistula_site",
+            "code": "caecostomy",
+            "display": "Caecostomy"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "appliance_type",
+            "display": "Appliance Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:appliance_type",
+            "code": "one-piece-bag",
+            "display": "One-Piece-Bag"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "substitution_therapy",
+            "display": "Substitution Therapy"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "on_substitution_therapy",
+            "display": "On Substitution Therapy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:on_substitution_therapy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "diabetes_treatment_mode",
+            "display": "Diabetes Treatment Mode"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:diabetes_treatment_mode",
+            "code": "insulin",
+            "display": "Insulin"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "anticonvulsant",
+            "display": "Anticonvulsant"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "continuous_anticonvulsant_therapy",
+            "display": "Continuous Anticonvulsant Therapy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:continuous_anticonvulsant_therapy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "cannot_leave_home_unaided",
+            "display": "Cannot Leave Home Unaided"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:cannot_leave_home_unaided",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "disability_carer_detail",
+            "display": "Disability Carer Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "disability_expected_to_be_permanent",
+            "display": "Disability Expected To Be Permanent"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:disability_expected_to_be_permanent",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "cancer_site",
+            "display": "Cancer Site"
+          }
+        ]
+      },
+      "valueString": "Example location"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "cancer_treatment_phase",
+            "display": "Cancer Treatment Phase"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:cancer_treatment_phase",
+            "code": "active-treatment",
+            "display": "Active-Treatment"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "histology_confirmed",
+            "display": "Histology Confirmed"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:histology_confirmed",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "practitioner_attestation_notes",
+            "display": "Practitioner Attestation Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

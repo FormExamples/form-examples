@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(bin/test-form uk-nhs-england-medical-exemption-certificate *)",
+      "Bash(pnpm run *)",
+      "Bash(git restore *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git add *)",
+      "Bash(git mv *)",
+      "Bash(bin/test-form united-kingdom-nhs-england-medical-exemption-certificate *)",
+      "Bash(git reset *)",
+      "Bash(grep -E \"united-kingdom-nhs-england|uk-nhs-england|^.. forms.tsv$|^.. forms/AGENTS.md$\")",
+      "Bash(awk '{print $1}')",
+      "Bash(grep -v \".sample$\")",
+      "Bash(awk -F/ '{print $2}')",
+      "Bash(git fetch *)"
+    ]
+  }
+}

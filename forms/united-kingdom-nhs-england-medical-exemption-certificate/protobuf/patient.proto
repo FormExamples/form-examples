@@ -1,0 +1,61 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_nhs_england_medical_exemption_certificate;
+
+enum PatientTitleEnum {
+  TITLE_UNSPECIFIED = 0;
+  TITLE_MR = 1;  // Mr
+  TITLE_MRS = 2;  // Mrs
+  TITLE_MISS = 3;  // Miss
+  TITLE_MS = 4;  // Ms
+  TITLE_MX = 5;  // Mx
+  TITLE_DR = 6;  // Dr
+  TITLE_PROF = 7;  // Prof
+  TITLE_REV = 8;  // Rev
+  TITLE_OTHER = 9;  // Other
+}
+
+enum PatientSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum PatientFullTimeEducationEnum {
+  FULLTIMEEDUCATION_UNSPECIFIED = 0;
+  FULLTIMEEDUCATION_YES = 1;  // yes
+  FULLTIMEEDUCATION_NO = 2;  // no
+}
+
+enum PatientPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POST_PARTUM_WITHIN_12_MONTHS = 3;  // post-partum-within-12-months
+}
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  PatientTitleEnum title = 5;  // TEXT
+  string surname = 6;  // VARCHAR(255) — max 255 chars
+  string forenames = 7;  // VARCHAR(255) — max 255 chars
+  string name = 8;  // VARCHAR(255) — max 255 chars
+  string birth_date = 9;  // DATE — iso 8601 date
+  PatientSexEnum sex = 10;  // TEXT
+  string email = 11;  // TEXT
+  string phone = 12;  // TEXT
+  string postal_address_as_full_text = 13;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 14;  // CHAR(2) — max 2 chars
+  string postcode = 15;  // TEXT
+  string united_kingdom_nhs_number = 16;  // VARCHAR(20) — max 20 chars
+  PatientFullTimeEducationEnum full_time_education = 17;  // VARCHAR(5)
+  PatientPregnancyStatusEnum pregnancy_status = 18;  // TEXT
+}

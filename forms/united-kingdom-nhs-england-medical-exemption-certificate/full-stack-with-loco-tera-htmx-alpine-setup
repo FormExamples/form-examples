@@ -1,0 +1,140 @@
+#!/bin/sh
+# setup.sh
+#
+# Setup script for full stack Loco application.
+#
+# - Create database user `loco` (if not exists).
+# - Create application databases for development, test, production (if not exists).
+# - Create Cargo Loco commands to generate scaffolds.
+#
+# Tables are scaffolded in the same order as the form's sql-migrations/
+# so that FK targets already exist when referencing tables are created.
+#
+# Generated from sql-migrations/*.sql for the FP92A Medical Exemption Certificate.
+#
+# Do not edit by hand — re-run the generator after changing the SQL migrations.
+
+set -euf
+
+
+echo "Scaffolding united-kingdom-nhs-england-medical-exemption-certificate (8 tables)..."
+
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    title:text! \
+    surname:string! \
+    forenames:string! \
+    name:string! \
+    birth_date:date \
+    sex:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    full_time_education:string! \
+    pregnancy_status:text! \
+    --htmx && \
+cargo loco generate scaffold practitioner \
+    deleted_at:ts \
+    name:string! \
+    email:text \
+    phone:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    practice_name:string! \
+    practice_code:string! \
+    practitioner_code:string! \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold eligible_condition \
+    deleted_at:ts \
+    code:text! \
+    label:string! \
+    description:text! \
+    requires_appliance_detail:string! \
+    requires_substitution_therapy_detail:string! \
+    requires_disability_attestation:string! \
+    requires_cancer_detail:string! \
+    excludes_diet_only_diabetes:string! \
+    snomed_ct_reference:string! \
+    icd10_reference:string! \
+    --htmx && \
+cargo loco generate scaffold application \
+    deleted_at:ts \
+    patient:references \
+    practitioner:references \
+    status:string! \
+    application_kind:string! \
+    previous_certificate_number:string! \
+    previous_certificate_expiry_date:date \
+    completed_date:date \
+    posted_date:date \
+    received_by_nhsbsa_date:date \
+    certificate_number:string! \
+    valid_from:date \
+    valid_until:date \
+    practitioner_signature_present:string! \
+    practitioner_declaration_text:text! \
+    notes:text! \
+    --htmx && \
+cargo loco generate scaffold application_eligible_condition \
+    deleted_at:ts \
+    application:references \
+    eligible_condition:references \
+    diagnosis_date:date \
+    snomed_ct_code:string! \
+    icd10_code:string! \
+    treatment_detail:text! \
+    fistula_site:text! \
+    appliance_type:text! \
+    substitution_therapy:string! \
+    on_substitution_therapy:string! \
+    diabetes_treatment_mode:text! \
+    anticonvulsant:text! \
+    continuous_anticonvulsant_therapy:string! \
+    cannot_leave_home_unaided:string! \
+    disability_carer_detail:text! \
+    disability_expected_to_be_permanent:string! \
+    cancer_site:string! \
+    cancer_treatment_phase:text! \
+    histology_confirmed:string! \
+    practitioner_attestation_notes:text! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    application:references \
+    outcome:text! \
+    redirect_to:text! \
+    result_category:text! \
+    result_score:double \
+    result_notes:text! \
+    valid_from:date \
+    valid_until:date \
+    validity_years:int \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grade_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    severity_level:string! \
+    contributing_condition_code:text! \
+    --htmx && \
+cargo loco generate scaffold grade_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    description:text! \
+    priority:string! \
+    --htmx
+
+echo "Done."

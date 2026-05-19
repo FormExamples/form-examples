@@ -1,0 +1,102 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: application_eligible_condition
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_nhs_england_medical_exemption_certificate;
+
+enum ApplicationEligibleConditionFistulaSiteEnum {
+  FISTULASITE_UNSPECIFIED = 0;
+  FISTULASITE_CAECOSTOMY = 1;  // caecostomy
+  FISTULASITE_COLOSTOMY = 2;  // colostomy
+  FISTULASITE_LARYNGOSTOMY = 3;  // laryngostomy
+  FISTULASITE_ILEOSTOMY = 4;  // ileostomy
+  FISTULASITE_UROSTOMY = 5;  // urostomy
+  FISTULASITE_GASTROSTOMY = 6;  // gastrostomy
+  FISTULASITE_OTHER = 7;  // other
+}
+
+enum ApplicationEligibleConditionApplianceTypeEnum {
+  APPLIANCETYPE_UNSPECIFIED = 0;
+  APPLIANCETYPE_ONE_PIECE_BAG = 1;  // one-piece-bag
+  APPLIANCETYPE_TWO_PIECE_BAG = 2;  // two-piece-bag
+  APPLIANCETYPE_CONTINUOUS_DRESSING = 3;  // continuous-dressing
+  APPLIANCETYPE_IRRIGATION_KIT = 4;  // irrigation-kit
+  APPLIANCETYPE_OTHER = 5;  // other
+}
+
+enum ApplicationEligibleConditionOnSubstitutionTherapyEnum {
+  ONSUBSTITUTIONTHERAPY_UNSPECIFIED = 0;
+  ONSUBSTITUTIONTHERAPY_YES = 1;  // yes
+  ONSUBSTITUTIONTHERAPY_NO = 2;  // no
+}
+
+enum ApplicationEligibleConditionDiabetesTreatmentModeEnum {
+  DIABETESTREATMENTMODE_UNSPECIFIED = 0;
+  DIABETESTREATMENTMODE_INSULIN = 1;  // insulin
+  DIABETESTREATMENTMODE_ORAL_HYPOGLYCAEMIC = 2;  // oral-hypoglycaemic
+  DIABETESTREATMENTMODE_INSULIN_AND_ORAL = 3;  // insulin-and-oral
+  DIABETESTREATMENTMODE_GLP1_AGONIST = 4;  // glp1-agonist
+  DIABETESTREATMENTMODE_DIET_ONLY = 5;  // diet-only
+}
+
+enum ApplicationEligibleConditionContinuousAnticonvulsantTherapyEnum {
+  CONTINUOUSANTICONVULSANTTHERAPY_UNSPECIFIED = 0;
+  CONTINUOUSANTICONVULSANTTHERAPY_YES = 1;  // yes
+  CONTINUOUSANTICONVULSANTTHERAPY_NO = 2;  // no
+}
+
+enum ApplicationEligibleConditionCannotLeaveHomeUnaidedEnum {
+  CANNOTLEAVEHOMEUNAIDED_UNSPECIFIED = 0;
+  CANNOTLEAVEHOMEUNAIDED_YES = 1;  // yes
+  CANNOTLEAVEHOMEUNAIDED_NO = 2;  // no
+}
+
+enum ApplicationEligibleConditionDisabilityExpectedToBePermanentEnum {
+  DISABILITYEXPECTEDTOBEPERMANENT_UNSPECIFIED = 0;
+  DISABILITYEXPECTEDTOBEPERMANENT_YES = 1;  // yes
+  DISABILITYEXPECTEDTOBEPERMANENT_NO = 2;  // no
+}
+
+enum ApplicationEligibleConditionCancerTreatmentPhaseEnum {
+  CANCERTREATMENTPHASE_UNSPECIFIED = 0;
+  CANCERTREATMENTPHASE_ACTIVE_TREATMENT = 1;  // active-treatment
+  CANCERTREATMENTPHASE_EFFECTS_OF_CANCER = 2;  // effects-of-cancer
+  CANCERTREATMENTPHASE_EFFECTS_OF_TREATMENT = 3;  // effects-of-treatment
+  CANCERTREATMENTPHASE_REMISSION_WITH_ONGOING_TREATMENT = 4;  // remission-with-ongoing-treatment
+  CANCERTREATMENTPHASE_PALLIATIVE = 5;  // palliative
+}
+
+enum ApplicationEligibleConditionHistologyConfirmedEnum {
+  HISTOLOGYCONFIRMED_UNSPECIFIED = 0;
+  HISTOLOGYCONFIRMED_YES = 1;  // yes
+  HISTOLOGYCONFIRMED_NO = 2;  // no
+  HISTOLOGYCONFIRMED_PENDING = 3;  // pending
+}
+
+message ApplicationEligibleCondition {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string application_id = 5;  // UUID — uuid
+  string eligible_condition_id = 6;  // UUID — uuid
+  string diagnosis_date = 7;  // DATE — iso 8601 date
+  string snomed_ct_code = 8;  // VARCHAR(50) — max 50 chars
+  string icd10_code = 9;  // VARCHAR(20) — max 20 chars
+  string treatment_detail = 10;  // TEXT
+  ApplicationEligibleConditionFistulaSiteEnum fistula_site = 11;  // TEXT
+  ApplicationEligibleConditionApplianceTypeEnum appliance_type = 12;  // TEXT
+  string substitution_therapy = 13;  // VARCHAR(255) — max 255 chars
+  ApplicationEligibleConditionOnSubstitutionTherapyEnum on_substitution_therapy = 14;  // VARCHAR(5)
+  ApplicationEligibleConditionDiabetesTreatmentModeEnum diabetes_treatment_mode = 15;  // TEXT
+  string anticonvulsant = 16;  // TEXT
+  ApplicationEligibleConditionContinuousAnticonvulsantTherapyEnum continuous_anticonvulsant_therapy = 17;  // VARCHAR(5)
+  ApplicationEligibleConditionCannotLeaveHomeUnaidedEnum cannot_leave_home_unaided = 18;  // VARCHAR(5)
+  string disability_carer_detail = 19;  // TEXT
+  ApplicationEligibleConditionDisabilityExpectedToBePermanentEnum disability_expected_to_be_permanent = 20;  // VARCHAR(5)
+  string cancer_site = 21;  // VARCHAR(255) — max 255 chars
+  ApplicationEligibleConditionCancerTreatmentPhaseEnum cancer_treatment_phase = 22;  // TEXT
+  ApplicationEligibleConditionHistologyConfirmedEnum histology_confirmed = 23;  // VARCHAR(5)
+  string practitioner_attestation_notes = 24;  // TEXT
+}

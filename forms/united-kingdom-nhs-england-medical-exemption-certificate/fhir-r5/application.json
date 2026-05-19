@@ -1,0 +1,232 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+        "code": "application",
+        "display": "Application"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "application_kind",
+            "display": "Application Kind"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:application_kind",
+            "code": "new",
+            "display": "New"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "previous_certificate_number",
+            "display": "Previous Certificate Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "previous_certificate_expiry_date",
+            "display": "Previous Certificate Expiry Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "completed_date",
+            "display": "Completed Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "posted_date",
+            "display": "Posted Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "received_by_nhsbsa_date",
+            "display": "Received By Nhsbsa Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "certificate_number",
+            "display": "Certificate Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "valid_from",
+            "display": "Valid From"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "valid_until",
+            "display": "Valid Until"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "practitioner_signature_present",
+            "display": "Practitioner Signature Present"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate:practitioner_signature_present",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "practitioner_declaration_text",
+            "display": "Practitioner Declaration Text"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-nhs-england-medical-exemption-certificate",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}
