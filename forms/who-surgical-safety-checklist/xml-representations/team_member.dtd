@@ -1,0 +1,11 @@
+<!ELEMENT team_member (id,created_at,updated_at,deleted_at,checklist_id,clinician_id,name,role,introduced_during_time_out,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT checklist_id (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT introduced_during_time_out (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

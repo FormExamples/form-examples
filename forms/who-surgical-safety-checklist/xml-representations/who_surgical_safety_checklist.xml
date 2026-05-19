@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE who_surgical_safety_checklist SYSTEM "who_surgical_safety_checklist.dtd">
+<who_surgical_safety_checklist>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<surgeon_id>660e8400-e29b-41d4-a716-446655440001</surgeon_id>
+<anaesthetist_id>660e8400-e29b-41d4-a716-446655440001</anaesthetist_id>
+<lead_nurse_id>660e8400-e29b-41d4-a716-446655440001</lead_nurse_id>
+<status>not-started</status>
+<site_name>Example</site_name>
+<operating_room></operating_room>
+<case_date>2026-01-15</case_date>
+<case_start_at>2026-04-09T10:00:00Z</case_start_at>
+<case_end_at>2026-04-09T10:00:00Z</case_end_at>
+<planned_procedure>Example text.</planned_procedure>
+<surgical_specialty></surgical_specialty>
+<urgency>elective</urgency>
+<laterality>left</laterality>
+<is_paediatric>yes</is_paediatric>
+<abandoned_reason>Example text.</abandoned_reason>
+<sign_in_identity_site_procedure_consent>yes</sign_in_identity_site_procedure_consent>
+<sign_in_site_marked>yes</sign_in_site_marked>
+<sign_in_anaesthesia_check_complete>yes</sign_in_anaesthesia_check_complete>
+<sign_in_pulse_oximeter_on_patient>yes</sign_in_pulse_oximeter_on_patient>
+<sign_in_known_allergy>no</sign_in_known_allergy>
+<sign_in_known_allergy_detail></sign_in_known_allergy_detail>
+<sign_in_difficult_airway_aspiration_risk>no</sign_in_difficult_airway_aspiration_risk>
+<sign_in_blood_loss_risk>no</sign_in_blood_loss_risk>
+<sign_in_coordinator_id>660e8400-e29b-41d4-a716-446655440001</sign_in_coordinator_id>
+<sign_in_completed_at>2026-04-09T10:00:00Z</sign_in_completed_at>
+<time_out_team_introductions_confirmed>yes</time_out_team_introductions_confirmed>
+<time_out_patient_procedure_incision_confirmed>yes</time_out_patient_procedure_incision_confirmed>
+<time_out_antibiotic_prophylaxis_within_60min>yes</time_out_antibiotic_prophylaxis_within_60min>
+<time_out_surgeon_critical_steps></time_out_surgeon_critical_steps>
+<time_out_surgeon_case_duration_minutes>1</time_out_surgeon_case_duration_minutes>
+<time_out_surgeon_anticipated_blood_loss_ml>1</time_out_surgeon_anticipated_blood_loss_ml>
+<time_out_anaesthetist_patient_concerns></time_out_anaesthetist_patient_concerns>
+<time_out_nursing_sterility_confirmed>yes</time_out_nursing_sterility_confirmed>
+<time_out_nursing_equipment_concerns></time_out_nursing_equipment_concerns>
+<time_out_essential_imaging_displayed>yes</time_out_essential_imaging_displayed>
+<time_out_coordinator_id>660e8400-e29b-41d4-a716-446655440001</time_out_coordinator_id>
+<time_out_completed_at>2026-04-09T10:00:00Z</time_out_completed_at>
+<sign_out_procedure_name_confirmed>yes</sign_out_procedure_name_confirmed>
+<sign_out_counts_confirmed>yes</sign_out_counts_confirmed>
+<sign_out_specimens_labelled>yes</sign_out_specimens_labelled>
+<sign_out_equipment_problems></sign_out_equipment_problems>
+<sign_out_recovery_concerns></sign_out_recovery_concerns>
+<sign_out_coordinator_id>660e8400-e29b-41d4-a716-446655440001</sign_out_coordinator_id>
+<sign_out_completed_at>2026-04-09T10:00:00Z</sign_out_completed_at>
+</who_surgical_safety_checklist>

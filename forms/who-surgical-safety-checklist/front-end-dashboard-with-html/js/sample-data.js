@@ -1,0 +1,728 @@
+// Sample checklist data for the WHO Surgical Safety Checklist review
+// dashboard.
+//
+// Twelve representative rows spanning:
+//   - every urgency category (elective / urgent / emergency / immediate)
+//   - every lifecycle status (not-started, sign-in-complete,
+//     time-out-complete, sign-out-complete, completed, abandoned)
+//   - cases with and without safety flags
+//   - paediatric and adult cases
+//   - a variety of surgical specialties (general, orthopaedic, cardiac,
+//     vascular, ENT, ophthalmic, neurosurgery, obstetrics, urology,
+//     gynaecology, paediatric)
+//
+// Coordinator / team names are placeholder values.
+
+(function () {
+'use strict';
+window.WhoSurgicalSafetyChecklistDashboard =
+  window.WhoSurgicalSafetyChecklistDashboard || {};
+
+/** @type {import('./types.js').ChecklistRow[]} */
+const sampleChecklists = [
+  {
+    id: 'C001',
+    caseDate: '2026-05-04',
+    patient: 'Adams, Sarah',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 3',
+    plannedProcedure: 'Right total hip arthroplasty',
+    surgeon: 'Mr A Khan',
+    anaesthetist: 'Dr B Patel',
+    leadNurse: 'Sr C Murphy',
+    urgency: 'elective',
+    specialty: 'Orthopaedics',
+    laterality: 'right',
+    status: 'completed',
+    flags: [],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'yes',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr C Murphy',
+      completedAt: '2026-05-04T07:55:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Standard posterior approach, no anticipated difficulty.',
+      surgeonCaseDurationMinutes: 90,
+      surgeonAnticipatedBloodLossMl: 300,
+      anaesthetistPatientConcerns: 'None.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr C Murphy',
+      completedAt: '2026-05-04T08:10:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'not-applicable',
+      equipmentProblems: '',
+      recoveryConcerns: 'Standard post-op orthopaedic recovery; PCA in situ.',
+      coordinator: 'Sr C Murphy',
+      completedAt: '2026-05-04T09:50:00Z'
+    },
+    team: [
+      { name: 'Mr A Khan', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr E Singh', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr B Patel', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr C Murphy', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse F Reed', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C002',
+    caseDate: '2026-05-04',
+    patient: 'Brown, Liam',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 1',
+    plannedProcedure: 'Laparoscopic cholecystectomy',
+    surgeon: 'Ms D Hassan',
+    anaesthetist: 'Dr B Patel',
+    leadNurse: 'Sr G Walsh',
+    urgency: 'elective',
+    specialty: 'General surgery',
+    laterality: 'na',
+    status: 'completed',
+    flags: ['known-allergy'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'yes',
+      knownAllergyDetail: 'Penicillin — rash and angioedema (2019).',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr G Walsh',
+      completedAt: '2026-05-04T09:00:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Routine 4-port laparoscopic; cefuroxime substituted with clindamycin.',
+      surgeonCaseDurationMinutes: 60,
+      surgeonAnticipatedBloodLossMl: 50,
+      anaesthetistPatientConcerns: 'Penicillin allergy — alternative cover confirmed.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'not-applicable',
+      coordinator: 'Sr G Walsh',
+      completedAt: '2026-05-04T09:20:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'yes',
+      equipmentProblems: '',
+      recoveryConcerns: 'Routine recovery, discharge same day.',
+      coordinator: 'Sr G Walsh',
+      completedAt: '2026-05-04T10:35:00Z'
+    },
+    team: [
+      { name: 'Ms D Hassan', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr B Patel', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr G Walsh', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C003',
+    caseDate: '2026-05-05',
+    patient: 'Carter, James',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 5',
+    plannedProcedure: 'Dynamic hip screw, left',
+    surgeon: 'Mr H O\u2019Connor',
+    anaesthetist: 'Dr I Lopez',
+    leadNurse: 'Sr J Davies',
+    urgency: 'urgent',
+    specialty: 'Orthopaedics',
+    laterality: 'left',
+    status: 'completed',
+    flags: ['difficult-airway', 'high-blood-loss-risk'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'yes',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'yes-equipment-available',
+      bloodLossRisk: 'yes-two-ivs-and-fluids-planned',
+      coordinator: 'Sr J Davies',
+      completedAt: '2026-05-05T14:30:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Elderly trauma patient on apixaban (held 48h). Anticipate slow blood loss.',
+      surgeonCaseDurationMinutes: 75,
+      surgeonAnticipatedBloodLossMl: 600,
+      anaesthetistPatientConcerns: 'Difficult airway predicted (Mallampati IV, limited neck extension); video laryngoscope on standby. Crossmatched 2 units.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr J Davies',
+      completedAt: '2026-05-05T14:50:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'not-applicable',
+      equipmentProblems: '',
+      recoveryConcerns: 'Delirium risk; HDU bed booked. Restart apixaban per protocol.',
+      coordinator: 'Sr J Davies',
+      completedAt: '2026-05-05T16:30:00Z'
+    },
+    team: [
+      { name: 'Mr H O\u2019Connor', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr K Tanaka', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr I Lopez', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr L Schmidt', role: 'anaesthetic-assistant', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr J Davies', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse M Bauer', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C004',
+    caseDate: '2026-05-05',
+    patient: 'Dixon, Maria',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 2',
+    plannedProcedure: 'Caesarean section, category 1',
+    surgeon: 'Miss N Patel',
+    anaesthetist: 'Dr O Reeves',
+    leadNurse: 'Sr P Garcia',
+    urgency: 'immediate',
+    specialty: 'Obstetrics',
+    laterality: 'midline',
+    status: 'completed',
+    flags: ['site-not-marked', 'imaging-missing'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'yes-equipment-available',
+      bloodLossRisk: 'yes-two-ivs-and-fluids-planned',
+      coordinator: 'Sr P Garcia',
+      completedAt: '2026-05-05T03:08:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Category 1 LSCS — fetal bradycardia. Decision-to-delivery target < 30 min.',
+      surgeonCaseDurationMinutes: 45,
+      surgeonAnticipatedBloodLossMl: 800,
+      anaesthetistPatientConcerns: 'Full stomach — RSI. Crossmatched 2 units, cell salvage available.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'no',
+      coordinator: 'Sr P Garcia',
+      completedAt: '2026-05-05T03:11:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'yes',
+      equipmentProblems: '',
+      recoveryConcerns: 'Mother and baby to recovery together; oxytocin infusion running.',
+      coordinator: 'Sr P Garcia',
+      completedAt: '2026-05-05T03:55:00Z'
+    },
+    team: [
+      { name: 'Miss N Patel', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr Q Rossi', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr O Reeves', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr P Garcia', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse R Kim', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C005',
+    caseDate: '2026-05-06',
+    patient: 'Evans, Thomas',
+    site: 'Queen Elizabeth Hospital',
+    operatingRoom: 'OR 7',
+    plannedProcedure: 'Cataract extraction (right) with IOL',
+    surgeon: 'Mr S Nakamura',
+    anaesthetist: 'Dr T Adeyemi',
+    leadNurse: 'Sr U Chen',
+    urgency: 'elective',
+    specialty: 'Ophthalmology',
+    laterality: 'right',
+    status: 'completed',
+    flags: [],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'yes',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr U Chen',
+      completedAt: '2026-05-06T08:10:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'not-applicable',
+      surgeonCriticalSteps: 'Routine phaco with monofocal IOL under topical anaesthesia.',
+      surgeonCaseDurationMinutes: 20,
+      surgeonAnticipatedBloodLossMl: 0,
+      anaesthetistPatientConcerns: 'Topical only; no sedation required.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'not-applicable',
+      coordinator: 'Sr U Chen',
+      completedAt: '2026-05-06T08:15:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'not-applicable',
+      equipmentProblems: '',
+      recoveryConcerns: 'Day-case discharge with eye-care leaflet.',
+      coordinator: 'Sr U Chen',
+      completedAt: '2026-05-06T08:45:00Z'
+    },
+    team: [
+      { name: 'Mr S Nakamura', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr T Adeyemi', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr U Chen', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse V Ali', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C006',
+    caseDate: '2026-05-06',
+    patient: 'Foster, Eleanor',
+    site: 'Queen Elizabeth Hospital',
+    operatingRoom: 'OR 4',
+    plannedProcedure: 'Endoscopic transsphenoidal pituitary resection',
+    surgeon: 'Mr W Johansson',
+    anaesthetist: 'Dr X Ali',
+    leadNurse: 'Sr Y Brown',
+    urgency: 'elective',
+    specialty: 'Neurosurgery',
+    laterality: 'midline',
+    status: 'completed',
+    flags: ['count-discrepancy', 'equipment-problem'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr Y Brown',
+      completedAt: '2026-05-06T09:30:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Endoscopic approach; cortisol replacement on standby.',
+      surgeonCaseDurationMinutes: 180,
+      surgeonAnticipatedBloodLossMl: 200,
+      anaesthetistPatientConcerns: 'Diabetes insipidus risk post-op; monitor urine output and Na+.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: 'Image guidance station rebooted twice in setup.',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr Y Brown',
+      completedAt: '2026-05-06T09:55:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'no',
+      specimensLabelled: 'yes',
+      equipmentProblems: 'Image guidance station froze twice mid-procedure; engineering ticket #4421 raised.',
+      recoveryConcerns: 'Hourly Na+, fluid balance; report polyuria > 250 ml/h.',
+      coordinator: 'Sr Y Brown',
+      completedAt: '2026-05-06T13:20:00Z'
+    },
+    team: [
+      { name: 'Mr W Johansson', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Mr Z Iqbal', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr X Ali', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr Y Brown', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse AA Park', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Tech BB Singh', role: 'technician', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C007',
+    caseDate: '2026-05-07',
+    patient: 'Gomez, Oliver',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 6',
+    plannedProcedure: 'Open repair ruptured abdominal aortic aneurysm',
+    surgeon: 'Mr CC Williams',
+    anaesthetist: 'Dr DD Ito',
+    leadNurse: 'Sr EE Rivera',
+    urgency: 'immediate',
+    specialty: 'Vascular surgery',
+    laterality: 'midline',
+    status: 'abandoned',
+    flags: ['high-blood-loss-risk', 'identity-not-confirmed'],
+    phase1: {
+      identitySiteProcedureConsent: '',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: '',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'yes-two-ivs-and-fluids-planned',
+      coordinator: 'Sr EE Rivera',
+      completedAt: '2026-05-07T01:14:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: '',
+      patientProcedureIncisionConfirmed: '',
+      antibioticProphylaxisWithin60min: '',
+      surgeonCriticalSteps: '',
+      surgeonCaseDurationMinutes: null,
+      surgeonAnticipatedBloodLossMl: null,
+      anaesthetistPatientConcerns: '',
+      nursingSterilityConfirmed: '',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: '',
+      coordinator: '',
+      completedAt: ''
+    },
+    phase3: {
+      procedureNameConfirmed: '',
+      countsConfirmed: '',
+      specimensLabelled: '',
+      equipmentProblems: '',
+      recoveryConcerns: '',
+      coordinator: '',
+      completedAt: ''
+    },
+    team: [
+      { name: 'Mr CC Williams', role: 'surgeon', introducedDuringTimeOut: '' },
+      { name: 'Dr DD Ito', role: 'anaesthetist', introducedDuringTimeOut: '' },
+      { name: 'Sr EE Rivera', role: 'circulating-nurse', introducedDuringTimeOut: '' }
+    ],
+    abandonedReason: 'Cardiac arrest on induction; patient resuscitated but case cancelled before incision. Transferred to ICU.'
+  },
+  {
+    id: 'C008',
+    caseDate: '2026-05-07',
+    patient: 'Harris, Noah',
+    site: 'Royal Children\u2019s Hospital',
+    operatingRoom: 'OR P2',
+    plannedProcedure: 'Bilateral myringotomy and grommets',
+    surgeon: 'Miss FF Ng',
+    anaesthetist: 'Dr GG Patel',
+    leadNurse: 'Sr HH Kowalski',
+    urgency: 'elective',
+    specialty: 'ENT',
+    laterality: 'bilateral',
+    status: 'completed',
+    flags: [],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr HH Kowalski',
+      completedAt: '2026-05-07T11:05:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'not-applicable',
+      surgeonCriticalSteps: 'Routine bilateral grommets; LMA airway.',
+      surgeonCaseDurationMinutes: 15,
+      surgeonAnticipatedBloodLossMl: 0,
+      anaesthetistPatientConcerns: 'Paediatric (4 y/o); parent present at induction.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'not-applicable',
+      coordinator: 'Sr HH Kowalski',
+      completedAt: '2026-05-07T11:08:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'not-applicable',
+      equipmentProblems: '',
+      recoveryConcerns: 'Day-case discharge; analgesia advice given.',
+      coordinator: 'Sr HH Kowalski',
+      completedAt: '2026-05-07T11:30:00Z'
+    },
+    team: [
+      { name: 'Miss FF Ng', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr GG Patel', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr HH Kowalski', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse II Park', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C009',
+    caseDate: '2026-05-08',
+    patient: 'Ito, Ava',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 1',
+    plannedProcedure: 'Hemicolectomy for malignancy',
+    surgeon: 'Ms JJ Martinez',
+    anaesthetist: 'Dr KK Bauer',
+    leadNurse: 'Sr LL Wright',
+    urgency: 'urgent',
+    specialty: 'General surgery',
+    laterality: 'midline',
+    status: 'sign-out-complete',
+    flags: ['antibiotic-prophylaxis-missed'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr LL Wright',
+      completedAt: '2026-05-08T08:20:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'no',
+      surgeonCriticalSteps: 'Open right hemicolectomy; antibiotic given 75 min before incision — re-dose at 4 h.',
+      surgeonCaseDurationMinutes: 150,
+      surgeonAnticipatedBloodLossMl: 400,
+      anaesthetistPatientConcerns: 'Epidural for post-op analgesia; group-and-save in lab.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr LL Wright',
+      completedAt: '2026-05-08T08:40:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'yes',
+      equipmentProblems: '',
+      recoveryConcerns: 'Enhanced recovery pathway; ileostomy education to follow.',
+      coordinator: 'Sr LL Wright',
+      completedAt: '2026-05-08T11:10:00Z'
+    },
+    team: [
+      { name: 'Ms JJ Martinez', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr MM Hassan', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr KK Bauer', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr LL Wright', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse NN Ali', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C010',
+    caseDate: '2026-05-08',
+    patient: 'Jenkins, Sophia',
+    site: 'St Mary\u2019s Hospital',
+    operatingRoom: 'OR 3',
+    plannedProcedure: 'Transurethral resection of bladder tumour',
+    surgeon: 'Mr OO Khan',
+    anaesthetist: 'Dr PP Adams',
+    leadNurse: 'Sr QQ Nakamura',
+    urgency: 'urgent',
+    specialty: 'Urology',
+    laterality: 'na',
+    status: 'time-out-complete',
+    flags: [],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr QQ Nakamura',
+      completedAt: '2026-05-08T13:45:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'Standard TURBT; check obturator reflex with relaxant.',
+      surgeonCaseDurationMinutes: 45,
+      surgeonAnticipatedBloodLossMl: 100,
+      anaesthetistPatientConcerns: 'GA + muscle relaxant for obturator reflex.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr QQ Nakamura',
+      completedAt: '2026-05-08T14:00:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: '',
+      countsConfirmed: '',
+      specimensLabelled: '',
+      equipmentProblems: '',
+      recoveryConcerns: '',
+      coordinator: '',
+      completedAt: ''
+    },
+    team: [
+      { name: 'Mr OO Khan', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr PP Adams', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr QQ Nakamura', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse RR Patel', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C011',
+    caseDate: '2026-05-09',
+    patient: 'Kowalski, Mason',
+    site: 'Queen Elizabeth Hospital',
+    operatingRoom: 'OR 8',
+    plannedProcedure: 'Coronary artery bypass grafting x3',
+    surgeon: 'Mr SS Reeves',
+    anaesthetist: 'Dr TT O\u2019Connor',
+    leadNurse: 'Sr UU Walsh',
+    urgency: 'urgent',
+    specialty: 'Cardiothoracic surgery',
+    laterality: 'midline',
+    status: 'completed',
+    flags: ['difficult-airway'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: 'not-applicable',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'yes-equipment-available',
+      bloodLossRisk: 'yes-two-ivs-and-fluids-planned',
+      coordinator: 'Sr UU Walsh',
+      completedAt: '2026-05-09T07:30:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: 'yes',
+      patientProcedureIncisionConfirmed: 'yes',
+      antibioticProphylaxisWithin60min: 'yes',
+      surgeonCriticalSteps: 'On-pump CABG x3; LIMA to LAD, vein grafts to OM1 and RCA.',
+      surgeonCaseDurationMinutes: 240,
+      surgeonAnticipatedBloodLossMl: 800,
+      anaesthetistPatientConcerns: 'Beard — video laryngoscope used. Cell salvage and 4 units in fridge.',
+      nursingSterilityConfirmed: 'yes',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: 'yes',
+      coordinator: 'Sr UU Walsh',
+      completedAt: '2026-05-09T07:50:00Z'
+    },
+    phase3: {
+      procedureNameConfirmed: 'yes',
+      countsConfirmed: 'yes',
+      specimensLabelled: 'not-applicable',
+      equipmentProblems: '',
+      recoveryConcerns: 'Direct transfer to cardiac ICU intubated; protamine reversal complete.',
+      coordinator: 'Sr UU Walsh',
+      completedAt: '2026-05-09T12:20:00Z'
+    },
+    team: [
+      { name: 'Mr SS Reeves', role: 'surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Mr VV Patel', role: 'assistant-surgeon', introducedDuringTimeOut: 'yes' },
+      { name: 'Dr TT O\u2019Connor', role: 'anaesthetist', introducedDuringTimeOut: 'yes' },
+      { name: 'Mr WW Singh', role: 'perfusionist', introducedDuringTimeOut: 'yes' },
+      { name: 'Sr UU Walsh', role: 'circulating-nurse', introducedDuringTimeOut: 'yes' },
+      { name: 'Nurse XX Khan', role: 'scrub-nurse', introducedDuringTimeOut: 'yes' }
+    ],
+    abandonedReason: ''
+  },
+  {
+    id: 'C012',
+    caseDate: '2026-05-09',
+    patient: 'Lopez, Isabella',
+    site: 'Queen Elizabeth Hospital',
+    operatingRoom: 'OR 2',
+    plannedProcedure: 'Laparoscopic salpingo-oophorectomy',
+    surgeon: 'Miss YY Johansson',
+    anaesthetist: 'Dr ZZ Bauer',
+    leadNurse: 'Sr AAA Rivera',
+    urgency: 'elective',
+    specialty: 'Gynaecology',
+    laterality: 'left',
+    status: 'sign-in-complete',
+    flags: ['site-not-marked'],
+    phase1: {
+      identitySiteProcedureConsent: 'yes',
+      siteMarked: '',
+      anaesthesiaCheckComplete: 'yes',
+      pulseOximeterOnPatient: 'yes',
+      knownAllergy: 'no',
+      knownAllergyDetail: '',
+      difficultAirwayAspirationRisk: 'no',
+      bloodLossRisk: 'no',
+      coordinator: 'Sr AAA Rivera',
+      completedAt: '2026-05-09T13:55:00Z'
+    },
+    phase2: {
+      teamIntroductionsConfirmed: '',
+      patientProcedureIncisionConfirmed: '',
+      antibioticProphylaxisWithin60min: '',
+      surgeonCriticalSteps: '',
+      surgeonCaseDurationMinutes: null,
+      surgeonAnticipatedBloodLossMl: null,
+      anaesthetistPatientConcerns: '',
+      nursingSterilityConfirmed: '',
+      nursingEquipmentConcerns: '',
+      essentialImagingDisplayed: '',
+      coordinator: '',
+      completedAt: ''
+    },
+    phase3: {
+      procedureNameConfirmed: '',
+      countsConfirmed: '',
+      specimensLabelled: '',
+      equipmentProblems: '',
+      recoveryConcerns: '',
+      coordinator: '',
+      completedAt: ''
+    },
+    team: [
+      { name: 'Miss YY Johansson', role: 'surgeon', introducedDuringTimeOut: '' },
+      { name: 'Dr ZZ Bauer', role: 'anaesthetist', introducedDuringTimeOut: '' },
+      { name: 'Sr AAA Rivera', role: 'circulating-nurse', introducedDuringTimeOut: '' }
+    ],
+    abandonedReason: ''
+  }
+];
+
+window.WhoSurgicalSafetyChecklistDashboard.sampleChecklists = sampleChecklists;
+})();

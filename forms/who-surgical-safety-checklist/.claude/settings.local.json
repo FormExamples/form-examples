@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:cdn.who.int)",
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
+      "Bash(python3 bin/protobuf/generate-protobuf-representations.py)",
+      "Bash(bin/test-form who-surgical-safety-checklist *)",
+      "Bash(bin/test-form pre-operative-assessment-by-clinician *)",
+      "Bash(loco --help)",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)",
+      "Bash(awk -F/ 'NR<=3 || NR>=350 {print}')",
+      "Bash(git reset *)",
+      "Bash(awk -F/ '{print $3}')",
+      "Bash(git restore *)"
+    ]
+  }
+}

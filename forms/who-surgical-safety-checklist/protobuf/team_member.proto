@@ -1,0 +1,39 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: team_member
+
+syntax = "proto3";
+
+package form_examples.who_surgical_safety_checklist;
+
+enum TeamMemberRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_SURGEON = 1;  // surgeon
+  ROLE_ASSISTANT_SURGEON = 2;  // assistant-surgeon
+  ROLE_ANAESTHETIST = 3;  // anaesthetist
+  ROLE_CIRCULATING_NURSE = 4;  // circulating-nurse
+  ROLE_SCRUB_NURSE = 5;  // scrub-nurse
+  ROLE_ANAESTHETIC_ASSISTANT = 6;  // anaesthetic-assistant
+  ROLE_PERFUSIONIST = 7;  // perfusionist
+  ROLE_TECHNICIAN = 8;  // technician
+  ROLE_OBSERVER = 9;  // observer
+  ROLE_OTHER = 10;  // other
+}
+
+enum TeamMemberIntroducedDuringTimeOutEnum {
+  INTRODUCEDDURINGTIMEOUT_UNSPECIFIED = 0;
+  INTRODUCEDDURINGTIMEOUT_YES = 1;  // yes
+  INTRODUCEDDURINGTIMEOUT_NO = 2;  // no
+}
+
+message TeamMember {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string checklist_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string name = 7;  // VARCHAR(255) — max 255 chars
+  TeamMemberRoleEnum role = 8;  // VARCHAR(30)
+  TeamMemberIntroducedDuringTimeOutEnum introduced_during_time_out = 9;  // VARCHAR(5)
+  string notes = 10;  // VARCHAR(255) — max 255 chars
+}

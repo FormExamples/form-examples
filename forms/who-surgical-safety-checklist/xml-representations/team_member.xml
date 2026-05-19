@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE team_member SYSTEM "team_member.dtd">
+<team_member>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<checklist_id>660e8400-e29b-41d4-a716-446655440001</checklist_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<name>Example</name>
+<role>surgeon</role>
+<introduced_during_time_out>yes</introduced_during_time_out>
+<notes>Example text.</notes>
+</team_member>
