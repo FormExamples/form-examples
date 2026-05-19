@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_practice
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum MedicalPracticeSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_PRIMARY_CARE = 1;  // primary_care
+  SETTING_SECONDARY_CARE_INPATIENT = 2;  // secondary_care_inpatient
+  SETTING_SECONDARY_CARE_DISCHARGE = 3;  // secondary_care_discharge
+  SETTING_OCCUPATIONAL_HEALTH = 4;  // occupational_health
+  SETTING_PHARMACY = 5;  // pharmacy
+  SETTING_COMMUNITY_CLINIC = 6;  // community_clinic
+  SETTING_PRIVATE_PRACTICE = 7;  // private_practice
+  SETTING_OTHER = 8;  // other
+}
+
+message MedicalPractice {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string postal_address_as_full_text = 6;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 7;  // CHAR(2) — max 2 chars
+  string postcode = 8;  // TEXT
+  string phone = 9;  // TEXT
+  string email = 10;  // TEXT
+  string ods_code = 11;  // TEXT
+  MedicalPracticeSettingEnum setting = 12;  // TEXT
+}

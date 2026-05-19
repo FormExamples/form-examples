@@ -1,0 +1,170 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: united_kingdom_statement_of_fitness_for_work
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum UnitedKingdomStatementOfFitnessForWorkStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_ISSUED = 3;  // issued
+  STATUS_DUPLICATE = 4;  // duplicate
+  STATUS_CANCELLED = 5;  // cancelled
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkAssessmentMethodEnum {
+  ASSESSMENTMETHOD_UNSPECIFIED = 0;
+  ASSESSMENTMETHOD_IN_PERSON = 1;  // in_person
+  ASSESSMENTMETHOD_VIDEO_CALL = 2;  // video_call
+  ASSESSMENTMETHOD_TELEPHONE = 3;  // telephone
+  ASSESSMENTMETHOD_WRITTEN_REPORT_FROM_OTHER_HCP = 4;  // written_report_from_other_hcp
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGeneralFitnessConsideredEnum {
+  GENERALFITNESSCONSIDERED_UNSPECIFIED = 0;
+  GENERALFITNESSCONSIDERED_YES = 1;  // yes
+  GENERALFITNESSCONSIDERED_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkDiagnosisCategoryEnum {
+  DIAGNOSISCATEGORY_UNSPECIFIED = 0;
+  DIAGNOSISCATEGORY_MENTAL_HEALTH = 1;  // mental_health
+  DIAGNOSISCATEGORY_MUSCULOSKELETAL = 2;  // musculoskeletal
+  DIAGNOSISCATEGORY_RESPIRATORY = 3;  // respiratory
+  DIAGNOSISCATEGORY_CARDIOVASCULAR = 4;  // cardiovascular
+  DIAGNOSISCATEGORY_NEOPLASM = 5;  // neoplasm
+  DIAGNOSISCATEGORY_INFECTION = 6;  // infection
+  DIAGNOSISCATEGORY_INJURY = 7;  // injury
+  DIAGNOSISCATEGORY_PREGNANCY = 8;  // pregnancy
+  DIAGNOSISCATEGORY_NEUROLOGICAL = 9;  // neurological
+  DIAGNOSISCATEGORY_GASTROINTESTINAL = 10;  // gastrointestinal
+  DIAGNOSISCATEGORY_ENDOCRINE = 11;  // endocrine
+  DIAGNOSISCATEGORY_OTHER = 12;  // other
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkIsAutomaticDisabilityEnum {
+  ISAUTOMATICDISABILITY_UNSPECIFIED = 0;
+  ISAUTOMATICDISABILITY_YES = 1;  // yes
+  ISAUTOMATICDISABILITY_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkIsNonMedicalEnum {
+  ISNONMEDICAL_UNSPECIFIED = 0;
+  ISNONMEDICAL_YES = 1;  // yes
+  ISNONMEDICAL_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkFitnessForWorkEnum {
+  FITNESSFORWORK_UNSPECIFIED = 0;
+  FITNESSFORWORK_NOT_FIT = 1;  // not_fit
+  FITNESSFORWORK_MAY_BE_FIT = 2;  // may_be_fit
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkAdaptationPhasedReturnEnum {
+  ADAPTATIONPHASEDRETURN_UNSPECIFIED = 0;
+  ADAPTATIONPHASEDRETURN_YES = 1;  // yes
+  ADAPTATIONPHASEDRETURN_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkAdaptationAlteredHoursEnum {
+  ADAPTATIONALTEREDHOURS_UNSPECIFIED = 0;
+  ADAPTATIONALTEREDHOURS_YES = 1;  // yes
+  ADAPTATIONALTEREDHOURS_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkAdaptationAmendedDutiesEnum {
+  ADAPTATIONAMENDEDDUTIES_UNSPECIFIED = 0;
+  ADAPTATIONAMENDEDDUTIES_YES = 1;  // yes
+  ADAPTATIONAMENDEDDUTIES_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkAdaptationWorkplaceAdaptationsEnum {
+  ADAPTATIONWORKPLACEADAPTATIONS_UNSPECIFIED = 0;
+  ADAPTATIONWORKPLACEADAPTATIONS_YES = 1;  // yes
+  ADAPTATIONWORKPLACEADAPTATIONS_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkPeriodTypeEnum {
+  PERIODTYPE_UNSPECIFIED = 0;
+  PERIODTYPE_DURATION = 1;  // duration
+  PERIODTYPE_FROM_TO = 2;  // from_to
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkPeriodDurationUnitEnum {
+  PERIODDURATIONUNIT_UNSPECIFIED = 0;
+  PERIODDURATIONUNIT_DAYS = 1;  // days
+  PERIODDURATIONUNIT_WEEKS = 2;  // weeks
+  PERIODDURATIONUNIT_MONTHS = 3;  // months
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkWillAssessAgainEnum {
+  WILLASSESSAGAIN_UNSPECIFIED = 0;
+  WILLASSESSAGAIN_YES = 1;  // yes
+  WILLASSESSAGAIN_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkIssuedViaEnum {
+  ISSUEDVIA_UNSPECIFIED = 0;
+  ISSUEDVIA_DIGITAL = 1;  // digital
+  ISSUEDVIA_PRINTED_COMPUTER_GENERATED = 2;  // printed_computer_generated
+  ISSUEDVIA_PRINTED_HANDWRITTEN = 3;  // printed_handwritten
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkIssueSettingEnum {
+  ISSUESETTING_UNSPECIFIED = 0;
+  ISSUESETTING_PRIMARY_CARE = 1;  // primary_care
+  ISSUESETTING_SECONDARY_CARE_DISCHARGE = 2;  // secondary_care_discharge
+  ISSUESETTING_OCCUPATIONAL_HEALTH = 3;  // occupational_health
+  ISSUESETTING_PHARMACY = 4;  // pharmacy
+  ISSUESETTING_COMMUNITY = 5;  // community
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkSafeguardingConcernEnum {
+  SAFEGUARDINGCONCERN_UNSPECIFIED = 0;
+  SAFEGUARDINGCONCERN_YES = 1;  // yes
+  SAFEGUARDINGCONCERN_NO = 2;  // no
+}
+
+message UnitedKingdomStatementOfFitnessForWork {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string medical_practice_id = 7;  // UUID — uuid
+  UnitedKingdomStatementOfFitnessForWorkStatusEnum status = 8;  // VARCHAR(20)
+  string assessment_date = 9;  // DATE — iso 8601 date
+  UnitedKingdomStatementOfFitnessForWorkAssessmentMethodEnum assessment_method = 10;  // VARCHAR(30)
+  UnitedKingdomStatementOfFitnessForWorkGeneralFitnessConsideredEnum general_fitness_considered = 11;  // VARCHAR(5)
+  string diagnosis_text = 12;  // TEXT
+  string diagnosis_snomed_code = 13;  // VARCHAR(20) — max 20 chars
+  string diagnosis_snomed_display = 14;  // VARCHAR(255) — max 255 chars
+  UnitedKingdomStatementOfFitnessForWorkDiagnosisCategoryEnum diagnosis_category = 15;  // VARCHAR(30)
+  string condition_first_recorded_date = 16;  // DATE — iso 8601 date
+  UnitedKingdomStatementOfFitnessForWorkIsAutomaticDisabilityEnum is_automatic_disability = 17;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkIsNonMedicalEnum is_non_medical = 18;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkFitnessForWorkEnum fitness_for_work = 19;  // VARCHAR(15)
+  UnitedKingdomStatementOfFitnessForWorkAdaptationPhasedReturnEnum adaptation_phased_return = 20;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkAdaptationAlteredHoursEnum adaptation_altered_hours = 21;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkAdaptationAmendedDutiesEnum adaptation_amended_duties = 22;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkAdaptationWorkplaceAdaptationsEnum adaptation_workplace_adaptations = 23;  // VARCHAR(5)
+  string comments = 24;  // TEXT
+  UnitedKingdomStatementOfFitnessForWorkPeriodTypeEnum period_type = 25;  // VARCHAR(15)
+  int32 period_duration_value = 26;  // INTEGER
+  UnitedKingdomStatementOfFitnessForWorkPeriodDurationUnitEnum period_duration_unit = 27;  // VARCHAR(10)
+  string period_from = 28;  // DATE — iso 8601 date
+  string period_to = 29;  // DATE — iso 8601 date
+  UnitedKingdomStatementOfFitnessForWorkWillAssessAgainEnum will_assess_again = 30;  // VARCHAR(5)
+  string planned_review_date = 31;  // DATE — iso 8601 date
+  string issued_at = 32;  // TIMESTAMPTZ — iso 8601
+  UnitedKingdomStatementOfFitnessForWorkIssuedViaEnum issued_via = 33;  // VARCHAR(30)
+  UnitedKingdomStatementOfFitnessForWorkIssueSettingEnum issue_setting = 34;  // VARCHAR(30)
+  string is_duplicate_of = 35;  // UUID — uuid
+  UnitedKingdomStatementOfFitnessForWorkSafeguardingConcernEnum safeguarding_concern = 36;  // VARCHAR(5)
+  string safeguarding_notes = 37;  // TEXT
+  string clinician_signature_svg = 38;  // TEXT
+  string clinician_signed_at = 39;  // TIMESTAMPTZ — iso 8601
+}

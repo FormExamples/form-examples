@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: united_kingdom_statement_of_fitness_for_work_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_INVALID_NO_NAME = 1;  // invalid_no_name
+  CATEGORY_INVALID_NO_PROFESSION = 2;  // invalid_no_profession
+  CATEGORY_INVALID_NO_PRACTICE_ADDRESS = 3;  // invalid_no_practice_address
+  CATEGORY_MAY_BE_FIT_NO_ADAPTATIONS = 4;  // may_be_fit_no_adaptations
+  CATEGORY_MAY_BE_FIT_NO_COMMENTS = 5;  // may_be_fit_no_comments
+  CATEGORY_NON_MEDICAL_REASON_DETECTED = 6;  // non_medical_reason_detected
+  CATEGORY_AUTOMATIC_DISABILITY = 7;  // automatic_disability
+  CATEGORY_DURATION_EXCEEDS_3_MONTHS_IN_FIRST_6_MONTHS = 8;  // duration_exceeds_3_months_in_first_6_months
+  CATEGORY_SELF_CERT_RANGE = 9;  // self_cert_range
+  CATEGORY_LONG_ABSENCE_FOUR_WEEKS = 10;  // long_absence_four_weeks
+  CATEGORY_LONG_ABSENCE_TWELVE_WEEKS = 11;  // long_absence_twelve_weeks
+  CATEGORY_PRIVATE_PRACTICE = 12;  // private_practice
+  CATEGORY_SECONDARY_CARE_DISCHARGE = 13;  // secondary_care_discharge
+  CATEGORY_NEW_AUTHORITY_HCP = 14;  // new_authority_hcp
+  CATEGORY_MENTAL_HEALTH_CONDITION = 15;  // mental_health_condition
+  CATEGORY_DRIVING_RESTRICTION_RECOMMENDED = 16;  // driving_restriction_recommended
+  CATEGORY_SAFEGUARDING_CONCERN = 17;  // safeguarding_concern
+  CATEGORY_ONGOING_REVIEW_REQUIRED = 18;  // ongoing_review_required
+  CATEGORY_OTHER = 19;  // other
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomStatementOfFitnessForWorkGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_statement_of_fitness_for_work_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(60) — max 60 chars
+  UnitedKingdomStatementOfFitnessForWorkGradeFlagCategoryEnum category = 7;  // VARCHAR(60)
+  UnitedKingdomStatementOfFitnessForWorkGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

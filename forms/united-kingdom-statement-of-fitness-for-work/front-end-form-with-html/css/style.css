@@ -1,0 +1,193 @@
+/* UK Statement of Fitness for Work — HTML wizard styles. */
+
+:root {
+  --colour-nhs-blue: #005eb8;
+  --colour-nhs-dark-blue: #003087;
+  --colour-nhs-bright-blue: #0072ce;
+  --colour-nhs-green: #007f3b;
+  --colour-nhs-warm-yellow: #ffb81c;
+  --colour-nhs-red: #d5281b;
+  --colour-text: #212b32;
+  --colour-text-muted: #4c6272;
+  --colour-bg: #fff;
+  --colour-surface: #f0f4f5;
+  --colour-border: #aeb7bd;
+  --radius: 4px;
+  --gap: 1rem;
+  --max-width: 64rem;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Frutiger W01", Arial, sans-serif;
+  color: var(--colour-text);
+  background: var(--colour-bg);
+  line-height: 1.5;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--colour-nhs-warm-yellow);
+  padding: 0.5rem 1rem;
+  z-index: 999;
+}
+
+.page-header {
+  background: var(--colour-nhs-blue);
+  color: #fff;
+  padding: 1.5rem 1rem;
+}
+.page-header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.page-header h1 { margin: 0 0 0.25rem 0; font-size: 1.5rem; }
+.subtitle { margin: 0; color: #d9e4ec; font-size: 0.95rem; }
+
+.progress { margin-top: 1rem; }
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background: rgba(255,255,255,0.25);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--colour-nhs-warm-yellow);
+  transition: width 200ms ease;
+}
+.progress-text { margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #d9e4ec; }
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.intro p { color: var(--colour-text-muted); }
+
+.form-sections { display: grid; gap: 1.5rem; }
+fieldset {
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem 1.25rem;
+  background: var(--colour-bg);
+}
+legend {
+  font-weight: 700;
+  color: var(--colour-nhs-dark-blue);
+  padding: 0 0.25rem;
+}
+.field {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+.field label { font-weight: 600; }
+.field .help { font-size: 0.85rem; color: var(--colour-text-muted); }
+.field input[type="text"],
+.field input[type="date"],
+.field input[type="number"],
+.field input[type="email"],
+.field input[type="tel"],
+.field select,
+.field textarea {
+  border: 1px solid var(--colour-border);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  font: inherit;
+  min-height: 2.4rem;
+}
+.field textarea { min-height: 6rem; resize: vertical; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 3px solid var(--colour-nhs-warm-yellow);
+  outline-offset: 0;
+}
+
+.radio-group,
+.check-group {
+  display: grid;
+  gap: 0.4rem;
+}
+.radio-group label,
+.check-group label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-weight: 400;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.btn {
+  font: inherit;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-primary {
+  background: var(--colour-nhs-green);
+  color: #fff;
+}
+.btn-primary:hover { background: #00692f; }
+.btn-secondary {
+  background: var(--colour-surface);
+  color: var(--colour-text);
+  border-color: var(--colour-border);
+}
+
+.report-region {
+  margin-top: 2rem;
+}
+.report-card {
+  border: 2px solid var(--colour-nhs-dark-blue);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: #fff;
+}
+.report-card h2 { margin-top: 0; color: var(--colour-nhs-dark-blue); }
+.report-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+.report-grid dt { font-weight: 700; }
+.report-grid dd { margin: 0; }
+
+.flag-list { display: grid; gap: 0.5rem; padding-left: 0; list-style: none; }
+.flag {
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid var(--colour-text-muted);
+  background: var(--colour-surface);
+  border-radius: var(--radius);
+}
+.flag.high   { border-left-color: var(--colour-nhs-red); }
+.flag.medium { border-left-color: var(--colour-nhs-warm-yellow); }
+.flag.low    { border-left-color: var(--colour-nhs-green); }
+.flag-meta { font-size: 0.8rem; color: var(--colour-text-muted); }
+
+.page-footer {
+  border-top: 1px solid var(--colour-border);
+  margin-top: 3rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--colour-text-muted);
+  text-align: center;
+}

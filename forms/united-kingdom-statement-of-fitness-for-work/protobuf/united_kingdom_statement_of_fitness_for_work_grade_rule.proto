@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: united_kingdom_statement_of_fitness_for_work_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeRuleRuleSetEnum {
+  RULESET_UNSPECIFIED = 0;
+  RULESET_VALIDITY = 1;  // validity
+  RULESET_ADAPTATION = 2;  // adaptation
+  RULESET_PERIOD = 3;  // period
+  RULESET_SAFETY = 4;  // safety
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeRuleSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_LOW = 1;  // low
+  SEVERITY_MEDIUM = 2;  // medium
+  SEVERITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomStatementOfFitnessForWorkGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_statement_of_fitness_for_work_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedKingdomStatementOfFitnessForWorkGradeRuleRuleSetEnum rule_set = 7;  // VARCHAR(15)
+  UnitedKingdomStatementOfFitnessForWorkGradeRuleSeverityEnum severity = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

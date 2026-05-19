@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE united_kingdom_statement_of_fitness_for_work_grade SYSTEM "united_kingdom_statement_of_fitness_for_work_grade.dtd">
+<united_kingdom_statement_of_fitness_for_work_grade>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<united_kingdom_statement_of_fitness_for_work_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_statement_of_fitness_for_work_id>
+<fitness_category>not_fit</fitness_category>
+<adaptation_intensity>none</adaptation_intensity>
+<adaptation_count>2</adaptation_count>
+<period_days>1</period_days>
+<period_compliance>self_cert_range</period_compliance>
+<recommendation>standard</recommendation>
+<is_within_first_six_months_of_condition>yes</is_within_first_six_months_of_condition>
+<is_valid>yes</is_valid>
+<grader_notes>Example text.</grader_notes>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+<clinician_override>yes</clinician_override>
+<clinician_override_reason>Example text.</clinician_override_reason>
+<clinician_final_recommendation>standard</clinician_final_recommendation>
+</united_kingdom_statement_of_fitness_for_work_grade>

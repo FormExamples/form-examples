@@ -1,0 +1,454 @@
+/* UK Statement of Fitness for Work — dashboard styles.
+ * Mobile-first; no framework dependencies. NHS visual identity (NHS Blue,
+ * NHS Warm Yellow) mirroring the existing wizard stylesheet. */
+
+:root {
+  --colour-nhs-blue: #005eb8;
+  --colour-nhs-dark-blue: #003087;
+  --colour-nhs-bright-blue: #0072ce;
+  --colour-nhs-green: #007f3b;
+  --colour-nhs-warm-yellow: #ffb81c;
+  --colour-nhs-red: #d5281b;
+  --colour-text: #212b32;
+  --colour-text-muted: #4c6272;
+  --colour-bg: #f0f4f5;
+  --colour-surface: #ffffff;
+  --colour-border: #aeb7bd;
+  --colour-border-strong: #768692;
+  --colour-focus: #ffb81c;
+  --colour-row-warn-bg: #fff7e0;
+  --colour-row-invalid-bg: #fdecea;
+
+  --radius: 4px;
+  --radius-sm: 3px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Frutiger W01", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--colour-text);
+  background: var(--colour-bg);
+}
+
+/* Visually hidden (still readable to assistive tech) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--colour-nhs-warm-yellow);
+  color: var(--colour-text);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Header */
+.page-header {
+  background: var(--colour-nhs-blue);
+  color: #ffffff;
+  border-bottom: 4px solid var(--colour-nhs-warm-yellow);
+  box-shadow: var(--shadow-sm);
+}
+.page-header-inner {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem;
+}
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: #ffffff;
+}
+.subtitle {
+  color: #d9e4ec;
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+/* Main */
+main {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+/* Status banner (sample-data fallback notice) */
+.status-banner {
+  background: #fff4d6;
+  border-left: 4px solid var(--colour-nhs-warm-yellow);
+  color: #5e4500;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+/* Summary cards section */
+.summary-section {
+  margin-bottom: 1.25rem;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem;
+}
+.summary-card {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-top: 4px solid var(--colour-nhs-bright-blue);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.875rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.summary-card-total {
+  border-top-color: var(--colour-nhs-blue);
+  background: linear-gradient(180deg, #eef4fa 0%, #ffffff 100%);
+}
+.summary-card-label {
+  font-size: 0.8125rem;
+  color: var(--colour-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+.summary-card-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--colour-text);
+  font-variant-numeric: tabular-nums;
+}
+.summary-card.recommendation-standard           { border-top-color: var(--colour-nhs-green); }
+.summary-card.recommendation-refer_occupational_health { border-top-color: #d97706; }
+.summary-card.recommendation-refer_access_to_work      { border-top-color: var(--colour-nhs-bright-blue); }
+.summary-card.recommendation-refer_employment_advisor  { border-top-color: #7c3aed; }
+.summary-card.recommendation-review_for_validity       { border-top-color: var(--colour-nhs-red); }
+
+/* Filter bar */
+.filter-bar {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.filter-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  align-items: flex-end;
+}
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 11rem;
+}
+.filter-field label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--colour-text);
+}
+.filter-field-search {
+  flex: 1 1 18rem;
+  min-width: 16rem;
+}
+.filter-field-actions {
+  min-width: 0;
+}
+.filter-summary {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--colour-text-muted);
+}
+
+/* Inputs */
+.text-input,
+.select-input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.9375rem;
+  color: inherit;
+  padding: 0.5rem 0.625rem;
+  border: 2px solid var(--colour-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--colour-surface);
+}
+.text-input:focus,
+.select-input:focus {
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 0;
+  border-color: var(--colour-nhs-blue);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: background 120ms ease, border 120ms ease;
+}
+.btn:focus-visible {
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 0;
+}
+.btn-primary {
+  background: var(--colour-nhs-blue);
+  color: #ffffff;
+  border-color: var(--colour-nhs-blue);
+}
+.btn-primary:hover {
+  background: var(--colour-nhs-dark-blue);
+  border-color: var(--colour-nhs-dark-blue);
+}
+.btn-secondary {
+  background: var(--colour-surface);
+  color: var(--colour-nhs-blue);
+  border-color: var(--colour-nhs-blue);
+}
+.btn-secondary:hover {
+  background: #eef4fa;
+}
+
+/* Fit notes table card */
+.table-card {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.table-scroll {
+  overflow-x: auto;
+}
+
+.fit-notes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.fit-notes-table thead {
+  background: #eef4fa;
+}
+.fit-notes-table th,
+.fit-notes-table td {
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  border-bottom: 1px solid var(--colour-border);
+  white-space: nowrap;
+  vertical-align: top;
+}
+.fit-notes-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.fit-notes-table tbody tr:hover {
+  background: #f5f8fa;
+}
+
+/* Sortable column header buttons */
+.sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--colour-text);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+}
+.sort-btn:hover {
+  color: var(--colour-nhs-blue);
+}
+.sort-btn:focus-visible {
+  outline: 3px solid var(--colour-focus);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+.sort-indicator {
+  font-size: 0.6875rem;
+  color: var(--colour-text-muted);
+  width: 0.75rem;
+  display: inline-block;
+  text-align: center;
+}
+.fit-notes-table th[aria-sort="ascending"] .sort-indicator,
+.fit-notes-table th[aria-sort="descending"] .sort-indicator {
+  color: var(--colour-nhs-blue);
+}
+
+/* Row emphasis for validity-review cases */
+.fit-notes-table tbody tr.row-review {
+  background: var(--colour-row-invalid-bg);
+}
+.fit-notes-table tbody tr.row-review:hover {
+  background: #fadbd7;
+}
+
+/* Recommendation badges */
+.rec-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid;
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+.rec-standard                 { background: #d6f0e0; color: #07502c; border-color: #7fc99a; }
+.rec-refer_occupational_health { background: #fef0d1; color: #6b4500; border-color: #f0b955; }
+.rec-refer_access_to_work     { background: #d8e9f7; color: #003e7a; border-color: #6ea7d6; }
+.rec-refer_employment_advisor { background: #ece1fb; color: #3b1f70; border-color: #b497e9; }
+.rec-review_for_validity      { background: #fbd5d1; color: #6b1a13; border-color: #e3786d; }
+
+/* Fitness-category badges */
+.fitness-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border: 1px solid;
+  text-transform: capitalize;
+}
+.fitness-may_be_fit { background: #d8e9f7; color: #003e7a; border-color: #6ea7d6; }
+.fitness-not_fit    { background: #fbd5d1; color: #6b1a13; border-color: #e3786d; }
+
+/* Adaptation intensity badges */
+.intensity-badge {
+  display: inline-block;
+  padding: 0.0625rem 0.4375rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+  text-transform: capitalize;
+}
+.intensity-none         { background: var(--colour-bg); color: var(--colour-text-muted); border-color: var(--colour-border); }
+.intensity-light        { background: #e9f5ec; color: #07502c; border-color: #a4d5b1; }
+.intensity-moderate     { background: #fef0d1; color: #6b4500; border-color: #f0b955; }
+.intensity-substantial  { background: #fde2c4; color: #6b3000; border-color: #f0a25a; }
+.intensity-comprehensive{ background: #fbd5d1; color: #6b1a13; border-color: #e3786d; }
+
+/* Period compliance badges */
+.compliance-badge {
+  display: inline-block;
+  padding: 0.0625rem 0.4375rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+  text-transform: capitalize;
+}
+.compliance-self_cert_range      { background: var(--colour-bg); color: var(--colour-text-muted); border-color: var(--colour-border); }
+.compliance-compliant            { background: #d6f0e0; color: #07502c; border-color: #7fc99a; }
+.compliance-long_term            { background: #fef0d1; color: #6b4500; border-color: #f0b955; }
+.compliance-very_long_term       { background: #fde2c4; color: #6b3000; border-color: #f0a25a; }
+.compliance-exceeds_initial_max  { background: #fbd5d1; color: #6b1a13; border-color: #e3786d; }
+
+/* Numeric cells */
+.numeric-cell {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+}
+.numeric-muted {
+  color: var(--colour-text-muted);
+}
+
+/* Safety-flag count */
+.flag-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background: var(--colour-bg);
+  color: var(--colour-text-muted);
+  border: 1px solid var(--colour-border);
+}
+.flag-count.flag-count-some {
+  background: #fef0d1;
+  color: #6b4500;
+  border-color: #f0b955;
+}
+.flag-count.flag-count-many {
+  background: #fbd5d1;
+  color: #6b1a13;
+  border-color: #e3786d;
+}
+
+/* Date cell */
+.date-cell {
+  font-variant-numeric: tabular-nums;
+  color: var(--colour-text);
+}
+
+/* Empty filter result message */
+.empty-message {
+  text-align: center;
+  color: var(--colour-text-muted);
+  padding: 1.5rem 1rem;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+/* Footer */
+.page-footer {
+  margin-top: 2rem;
+  font-size: 0.8125rem;
+  color: var(--colour-text-muted);
+  border-top: 1px solid var(--colour-border);
+  padding-top: 1rem;
+}
+.page-footer p { margin: 0; }
+
+/* Reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

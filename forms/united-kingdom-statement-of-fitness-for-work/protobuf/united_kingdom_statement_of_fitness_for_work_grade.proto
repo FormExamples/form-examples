@@ -1,0 +1,87 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: united_kingdom_statement_of_fitness_for_work_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeFitnessCategoryEnum {
+  FITNESSCATEGORY_UNSPECIFIED = 0;
+  FITNESSCATEGORY_NOT_FIT = 1;  // not_fit
+  FITNESSCATEGORY_MAY_BE_FIT = 2;  // may_be_fit
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeAdaptationIntensityEnum {
+  ADAPTATIONINTENSITY_UNSPECIFIED = 0;
+  ADAPTATIONINTENSITY_NONE = 1;  // none
+  ADAPTATIONINTENSITY_LIGHT = 2;  // light
+  ADAPTATIONINTENSITY_MODERATE = 3;  // moderate
+  ADAPTATIONINTENSITY_SUBSTANTIAL = 4;  // substantial
+  ADAPTATIONINTENSITY_COMPREHENSIVE = 5;  // comprehensive
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradePeriodComplianceEnum {
+  PERIODCOMPLIANCE_UNSPECIFIED = 0;
+  PERIODCOMPLIANCE_SELF_CERT_RANGE = 1;  // self_cert_range
+  PERIODCOMPLIANCE_COMPLIANT = 2;  // compliant
+  PERIODCOMPLIANCE_EXCEEDS_INITIAL_MAX = 3;  // exceeds_initial_max
+  PERIODCOMPLIANCE_LONG_TERM = 4;  // long_term
+  PERIODCOMPLIANCE_VERY_LONG_TERM = 5;  // very_long_term
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_STANDARD = 1;  // standard
+  RECOMMENDATION_REFER_OCCUPATIONAL_HEALTH = 2;  // refer_occupational_health
+  RECOMMENDATION_REFER_ACCESS_TO_WORK = 3;  // refer_access_to_work
+  RECOMMENDATION_REFER_EMPLOYMENT_ADVISOR = 4;  // refer_employment_advisor
+  RECOMMENDATION_REVIEW_FOR_VALIDITY = 5;  // review_for_validity
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeIsWithinFirstSixMonthsOfConditionEnum {
+  ISWITHINFIRSTSIXMONTHSOFCONDITION_UNSPECIFIED = 0;
+  ISWITHINFIRSTSIXMONTHSOFCONDITION_YES = 1;  // yes
+  ISWITHINFIRSTSIXMONTHSOFCONDITION_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeIsValidEnum {
+  ISVALID_UNSPECIFIED = 0;
+  ISVALID_YES = 1;  // yes
+  ISVALID_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeClinicianOverrideEnum {
+  CLINICIANOVERRIDE_UNSPECIFIED = 0;
+  CLINICIANOVERRIDE_YES = 1;  // yes
+  CLINICIANOVERRIDE_NO = 2;  // no
+}
+
+enum UnitedKingdomStatementOfFitnessForWorkGradeClinicianFinalRecommendationEnum {
+  CLINICIANFINALRECOMMENDATION_UNSPECIFIED = 0;
+  CLINICIANFINALRECOMMENDATION_STANDARD = 1;  // standard
+  CLINICIANFINALRECOMMENDATION_REFER_OCCUPATIONAL_HEALTH = 2;  // refer_occupational_health
+  CLINICIANFINALRECOMMENDATION_REFER_ACCESS_TO_WORK = 3;  // refer_access_to_work
+  CLINICIANFINALRECOMMENDATION_REFER_EMPLOYMENT_ADVISOR = 4;  // refer_employment_advisor
+  CLINICIANFINALRECOMMENDATION_REVIEW_FOR_VALIDITY = 5;  // review_for_validity
+}
+
+message UnitedKingdomStatementOfFitnessForWorkGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_statement_of_fitness_for_work_id = 5;  // UUID — uuid
+  UnitedKingdomStatementOfFitnessForWorkGradeFitnessCategoryEnum fitness_category = 6;  // VARCHAR(15)
+  UnitedKingdomStatementOfFitnessForWorkGradeAdaptationIntensityEnum adaptation_intensity = 7;  // VARCHAR(15)
+  int32 adaptation_count = 8;  // INTEGER
+  int32 period_days = 9;  // INTEGER
+  UnitedKingdomStatementOfFitnessForWorkGradePeriodComplianceEnum period_compliance = 10;  // VARCHAR(20)
+  UnitedKingdomStatementOfFitnessForWorkGradeRecommendationEnum recommendation = 11;  // VARCHAR(30)
+  UnitedKingdomStatementOfFitnessForWorkGradeIsWithinFirstSixMonthsOfConditionEnum is_within_first_six_months_of_condition = 12;  // VARCHAR(5)
+  UnitedKingdomStatementOfFitnessForWorkGradeIsValidEnum is_valid = 13;  // VARCHAR(5)
+  string grader_notes = 14;  // TEXT
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+  UnitedKingdomStatementOfFitnessForWorkGradeClinicianOverrideEnum clinician_override = 16;  // VARCHAR(5)
+  string clinician_override_reason = 17;  // VARCHAR(500) — max 500 chars
+  UnitedKingdomStatementOfFitnessForWorkGradeClinicianFinalRecommendationEnum clinician_final_recommendation = 18;  // VARCHAR(30)
+}

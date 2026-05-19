@@ -1,0 +1,48 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_statement_of_fitness_for_work;
+
+enum ClinicianProfessionEnum {
+  PROFESSION_UNSPECIFIED = 0;
+  PROFESSION_DOCTOR = 1;  // doctor
+  PROFESSION_NURSE = 2;  // nurse
+  PROFESSION_OCCUPATIONAL_THERAPIST = 3;  // occupational_therapist
+  PROFESSION_PHARMACIST = 4;  // pharmacist
+  PROFESSION_PHYSIOTHERAPIST = 5;  // physiotherapist
+  PROFESSION_OTHER = 6;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+enum ClinicianIsPrivatePracticeEnum {
+  ISPRIVATEPRACTICE_UNSPECIFIED = 0;
+  ISPRIVATEPRACTICE_YES = 1;  // yes
+  ISPRIVATEPRACTICE_NO = 2;  // no
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ClinicianProfessionEnum profession = 11;  // TEXT
+  ClinicianRegistrationBodyEnum registration_body = 12;  // TEXT
+  string registration_number = 13;  // TEXT
+  ClinicianIsPrivatePracticeEnum is_private_practice = 14;  // VARCHAR(5)
+}

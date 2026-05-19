@@ -1,0 +1,15 @@
+<!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,united_kingdom_nhs_number,employer_name,occupation)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT united_kingdom_nhs_number (#PCDATA)>
+<!ELEMENT employer_name (#PCDATA)>
+<!ELEMENT occupation (#PCDATA)>

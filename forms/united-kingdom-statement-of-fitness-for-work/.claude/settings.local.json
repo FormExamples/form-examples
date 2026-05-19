@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py united-kingdom-statement-of-fitness-for-work)",
+      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/united-kingdom-statement-of-fitness-for-work/full-stack-with-loco-tera-htmx-alpine-setup)",
+      "Bash(bin/test-form united-kingdom-statement-of-fitness-for-work *)",
+      "Bash(pnpm run *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm install *)",
+      "Bash(echo \"Exit: $?\")"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-nhs-blue: #005eb8;
+  --color-nhs-dark-blue: #003087;
+  --color-nhs-bright-blue: #0072ce;
+  --color-nhs-warm-yellow: #ffb81c;
+  --color-nhs-green: #007f3b;
+  --color-nhs-red: #d5281b;
+  --color-nhs-text: #212b32;
+  --color-nhs-muted: #4c6272;
+}

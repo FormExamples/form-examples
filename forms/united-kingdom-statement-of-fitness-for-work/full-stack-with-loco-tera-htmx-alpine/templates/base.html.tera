@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}UK Statement of Fitness for Work{% endblock %}</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; color: #1a1a1a; background: #fafafa; }
+    a { color: #0070f3; }
+    button { font-family: inherit; }
+    label { display: block; font-weight: 500; margin-bottom: 0.2rem; }
+    .fieldset { border: 1px solid #ddd; border-radius: 6px; padding: 1.5rem; margin-bottom: 1rem; background: #fff; }
+    .branch { border-left: 3px solid #0070f3; padding-left: 1rem; margin-top: 1rem; }
+    .grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .grid > * { flex: 1; min-width: 200px; }
+    input[type=text], input[type=email], input[type=date], input[type=number], textarea, select {
+      width: 100%; padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; font: inherit; box-sizing: border-box;
+    }
+  </style>
+</head>
+<body hx-boost="true">
+  {% block content %}{% endblock %}
+</body>
+</html>

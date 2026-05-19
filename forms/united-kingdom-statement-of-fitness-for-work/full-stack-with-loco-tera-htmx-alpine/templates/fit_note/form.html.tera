@@ -1,0 +1,423 @@
+{% extends "base.html.tera" %}
+
+{% block title %}UK Fit Note — Ten-Step Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:920px;margin:2rem auto;padding:1rem;"
+     x-data="{
+        step: 1,
+        totalSteps: {{ total_steps }},
+        fitness: '{{ data.fitnessForWork }}',
+        periodType: '{{ data.periodType }}'
+     }">
+  <h1>UK Statement of Fitness for Work</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/fit-note/{{ id }}/submit" hx-boost="false">
+
+    <!-- Step 1 — Issuer -->
+    <div x-show="step === 1" class="fieldset">
+      <h2>Step 1: Issuer (clinician + medical practice)</h2>
+      <div class="grid">
+        <div>
+          <label>Clinician name</label>
+          <input type="text" name="clinicianName" value="{{ data.clinician.name }}">
+        </div>
+        <div>
+          <label>Profession</label>
+          <select name="clinicianProfession">
+            <option value="" {% if data.clinician.profession == "" %}selected{% endif %}></option>
+            <option value="doctor"                 {% if data.clinician.profession == "doctor" %}selected{% endif %}>Doctor (GMC)</option>
+            <option value="nurse"                  {% if data.clinician.profession == "nurse" %}selected{% endif %}>Nurse (NMC)</option>
+            <option value="occupational_therapist" {% if data.clinician.profession == "occupational_therapist" %}selected{% endif %}>Occupational therapist (HCPC)</option>
+            <option value="pharmacist"             {% if data.clinician.profession == "pharmacist" %}selected{% endif %}>Pharmacist (GPhC)</option>
+            <option value="physiotherapist"        {% if data.clinician.profession == "physiotherapist" %}selected{% endif %}>Physiotherapist (HCPC)</option>
+            <option value="other"                  {% if data.clinician.profession == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>Registration body</label>
+          <select name="clinicianRegistrationBody">
+            <option value=""      {% if data.clinician.registrationBody == "" %}selected{% endif %}></option>
+            <option value="GMC"   {% if data.clinician.registrationBody == "GMC" %}selected{% endif %}>GMC</option>
+            <option value="NMC"   {% if data.clinician.registrationBody == "NMC" %}selected{% endif %}>NMC</option>
+            <option value="HCPC"  {% if data.clinician.registrationBody == "HCPC" %}selected{% endif %}>HCPC</option>
+            <option value="GPhC"  {% if data.clinician.registrationBody == "GPhC" %}selected{% endif %}>GPhC</option>
+            <option value="other" {% if data.clinician.registrationBody == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+        <div>
+          <label>Registration number</label>
+          <input type="text" name="clinicianRegistrationNumber" value="{{ data.clinician.registrationNumber }}">
+        </div>
+        <div>
+          <label>Private practice?</label>
+          <select name="clinicianIsPrivatePractice">
+            <option value=""    {% if data.clinician.isPrivatePractice == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.clinician.isPrivatePractice == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.clinician.isPrivatePractice == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top:1rem;">Medical practice</h3>
+      <div class="grid">
+        <div>
+          <label>Practice name</label>
+          <input type="text" name="medicalPracticeName" value="{{ data.medicalPractice.name }}">
+        </div>
+        <div>
+          <label>ODS code</label>
+          <input type="text" name="medicalPracticeOdsCode" value="{{ data.medicalPractice.odsCode }}">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Practice address (full)</label>
+        <textarea name="medicalPracticePostalAddress" rows="2">{{ data.medicalPractice.postalAddressAsFullText }}</textarea>
+      </div>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>Postcode</label>
+          <input type="text" name="medicalPracticePostcode" value="{{ data.medicalPractice.postcode }}">
+        </div>
+        <div>
+          <label>Setting</label>
+          <select name="medicalPracticeSetting">
+            <option value=""                         {% if data.medicalPractice.setting == "" %}selected{% endif %}></option>
+            <option value="primary_care"             {% if data.medicalPractice.setting == "primary_care" %}selected{% endif %}>Primary care</option>
+            <option value="secondary_care_inpatient" {% if data.medicalPractice.setting == "secondary_care_inpatient" %}selected{% endif %}>Secondary care (inpatient)</option>
+            <option value="secondary_care_discharge" {% if data.medicalPractice.setting == "secondary_care_discharge" %}selected{% endif %}>Secondary care (discharge)</option>
+            <option value="occupational_health"      {% if data.medicalPractice.setting == "occupational_health" %}selected{% endif %}>Occupational health</option>
+            <option value="pharmacy"                 {% if data.medicalPractice.setting == "pharmacy" %}selected{% endif %}>Pharmacy</option>
+            <option value="community_clinic"         {% if data.medicalPractice.setting == "community_clinic" %}selected{% endif %}>Community clinic</option>
+            <option value="private_practice"         {% if data.medicalPractice.setting == "private_practice" %}selected{% endif %}>Private practice</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Patient -->
+    <div x-show="step === 2" class="fieldset">
+      <h2>Step 2: Patient</h2>
+      <div class="grid">
+        <div>
+          <label>Full name</label>
+          <input type="text" name="patientName" value="{{ data.patient.name }}">
+        </div>
+        <div>
+          <label>Date of birth</label>
+          <input type="date" name="patientBirthDate" value="{{ data.patient.birthDate }}">
+        </div>
+        <div>
+          <label>NHS number</label>
+          <input type="text" name="patientNhsNumber" value="{{ data.patient.unitedKingdomNhsNumber }}">
+        </div>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <label>Postal address (full)</label>
+        <textarea name="patientPostalAddress" rows="2">{{ data.patient.postalAddressAsFullText }}</textarea>
+      </div>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>Postcode</label>
+          <input type="text" name="patientPostcode" value="{{ data.patient.postcode }}">
+        </div>
+        <div>
+          <label>Employer name</label>
+          <input type="text" name="patientEmployerName" value="{{ data.patient.employerName }}">
+        </div>
+        <div>
+          <label>Occupation</label>
+          <input type="text" name="patientOccupation" value="{{ data.patient.occupation }}">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Assessment -->
+    <div x-show="step === 3" class="fieldset">
+      <h2>Step 3: Assessment</h2>
+      <div class="grid">
+        <div>
+          <label>Assessment date</label>
+          <input type="date" name="assessmentDate" value="{{ data.assessmentDate }}">
+        </div>
+        <div>
+          <label>Method</label>
+          <select name="assessmentMethod">
+            <option value=""                              {% if data.assessmentMethod == "" %}selected{% endif %}></option>
+            <option value="in_person"                     {% if data.assessmentMethod == "in_person" %}selected{% endif %}>In person</option>
+            <option value="video_call"                    {% if data.assessmentMethod == "video_call" %}selected{% endif %}>Video call</option>
+            <option value="telephone"                     {% if data.assessmentMethod == "telephone" %}selected{% endif %}>Telephone</option>
+            <option value="written_report_from_other_hcp" {% if data.assessmentMethod == "written_report_from_other_hcp" %}selected{% endif %}>Written report from another HCP</option>
+          </select>
+        </div>
+        <div>
+          <label>General fitness considered?</label>
+          <select name="generalFitnessConsidered">
+            <option value=""    {% if data.generalFitnessConsidered == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.generalFitnessConsidered == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.generalFitnessConsidered == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 — Diagnosis -->
+    <div x-show="step === 4" class="fieldset">
+      <h2>Step 4: Diagnosis</h2>
+      <label>Diagnosis text</label>
+      <textarea name="diagnosisText" rows="3">{{ data.diagnosisText }}</textarea>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>SNOMED CT code</label>
+          <input type="text" name="diagnosisSnomedCode" value="{{ data.diagnosisSnomedCode }}">
+        </div>
+        <div>
+          <label>SNOMED CT display</label>
+          <input type="text" name="diagnosisSnomedDisplay" value="{{ data.diagnosisSnomedDisplay }}">
+        </div>
+        <div>
+          <label>Category</label>
+          <select name="diagnosisCategory">
+            <option value=""                  {% if data.diagnosisCategory == "" %}selected{% endif %}></option>
+            <option value="mental_health"     {% if data.diagnosisCategory == "mental_health" %}selected{% endif %}>Mental health</option>
+            <option value="musculoskeletal"   {% if data.diagnosisCategory == "musculoskeletal" %}selected{% endif %}>Musculoskeletal</option>
+            <option value="respiratory"       {% if data.diagnosisCategory == "respiratory" %}selected{% endif %}>Respiratory</option>
+            <option value="cardiovascular"    {% if data.diagnosisCategory == "cardiovascular" %}selected{% endif %}>Cardiovascular</option>
+            <option value="neoplasm"          {% if data.diagnosisCategory == "neoplasm" %}selected{% endif %}>Neoplasm</option>
+            <option value="infection"         {% if data.diagnosisCategory == "infection" %}selected{% endif %}>Infection</option>
+            <option value="injury"            {% if data.diagnosisCategory == "injury" %}selected{% endif %}>Injury</option>
+            <option value="pregnancy"         {% if data.diagnosisCategory == "pregnancy" %}selected{% endif %}>Pregnancy</option>
+            <option value="neurological"      {% if data.diagnosisCategory == "neurological" %}selected{% endif %}>Neurological</option>
+            <option value="gastrointestinal"  {% if data.diagnosisCategory == "gastrointestinal" %}selected{% endif %}>Gastrointestinal</option>
+            <option value="endocrine"         {% if data.diagnosisCategory == "endocrine" %}selected{% endif %}>Endocrine</option>
+            <option value="other"             {% if data.diagnosisCategory == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>Condition first recorded date</label>
+          <input type="date" name="conditionFirstRecordedDate" value="{{ data.conditionFirstRecordedDate }}">
+        </div>
+        <div>
+          <label>Automatic disability? (HIV / cancer / MS)</label>
+          <select name="isAutomaticDisability">
+            <option value=""    {% if data.isAutomaticDisability == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.isAutomaticDisability == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.isAutomaticDisability == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+        <div>
+          <label>Non-medical reason?</label>
+          <select name="isNonMedical">
+            <option value=""    {% if data.isNonMedical == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.isNonMedical == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.isNonMedical == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 — Fitness for work -->
+    <div x-show="step === 5" class="fieldset">
+      <h2>Step 5: Fitness for work</h2>
+      <p>Per DWP policy 3.2 the fit note cannot certify the patient as "fit for work".</p>
+      <label style="display:block;margin:0.4rem 0;">
+        <input type="radio" name="fitnessForWork" value="not_fit" x-model="fitness"
+               {% if data.fitnessForWork == "not_fit" %}checked{% endif %}>
+        Not fit for work
+      </label>
+      <label style="display:block;margin:0.4rem 0;">
+        <input type="radio" name="fitnessForWork" value="may_be_fit" x-model="fitness"
+               {% if data.fitnessForWork == "may_be_fit" %}checked{% endif %}>
+        May be fit for work (with adaptations)
+      </label>
+    </div>
+
+    <!-- Step 6 — Adaptations (only when may_be_fit) -->
+    <div x-show="step === 6" class="fieldset">
+      <h2>Step 6: Adaptations</h2>
+      <p x-show="fitness !== 'may_be_fit'" style="color:#888;">
+        Skip this step — fitness is "{{ data.fitnessForWork if data.fitnessForWork else 'not yet selected' }}", adaptations apply only when "may be fit" is chosen on Step 5.
+      </p>
+      <div x-show="fitness === 'may_be_fit'" class="branch">
+        <label>
+          <input type="checkbox" name="adaptationPhasedReturn" value="yes"
+                 {% if data.adaptationPhasedReturn == "yes" %}checked{% endif %}>
+          A phased return to work
+        </label>
+        <label style="margin-top:0.4rem;">
+          <input type="checkbox" name="adaptationAlteredHours" value="yes"
+                 {% if data.adaptationAlteredHours == "yes" %}checked{% endif %}>
+          Altered hours
+        </label>
+        <label style="margin-top:0.4rem;">
+          <input type="checkbox" name="adaptationAmendedDuties" value="yes"
+                 {% if data.adaptationAmendedDuties == "yes" %}checked{% endif %}>
+          Amended duties
+        </label>
+        <label style="margin-top:0.4rem;">
+          <input type="checkbox" name="adaptationWorkplaceAdaptations" value="yes"
+                 {% if data.adaptationWorkplaceAdaptations == "yes" %}checked{% endif %}>
+          Workplace adaptations
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 7 — Comments -->
+    <div x-show="step === 7" class="fieldset">
+      <h2>Step 7: Comments</h2>
+      <p>Free-text advice (DWP policy 5.6) describing functional impact and practical recommendations.</p>
+      <textarea name="comments" rows="5">{{ data.comments }}</textarea>
+    </div>
+
+    <!-- Step 8 — Period -->
+    <div x-show="step === 8" class="fieldset">
+      <h2>Step 8: Period</h2>
+      <label>
+        <input type="radio" name="periodType" value="duration" x-model="periodType"
+               {% if data.periodType == "duration" %}checked{% endif %}>
+        Duration (e.g. 4 weeks)
+      </label>
+      <label style="margin-top:0.4rem;">
+        <input type="radio" name="periodType" value="from_to" x-model="periodType"
+               {% if data.periodType == "from_to" %}checked{% endif %}>
+        From / to dates
+      </label>
+
+      <div x-show="periodType === 'duration'" class="branch">
+        <div class="grid">
+          <div>
+            <label>Value</label>
+            <input type="number" min="1" name="periodDurationValue"
+                   value="{% if data.periodDurationValue %}{{ data.periodDurationValue }}{% endif %}">
+          </div>
+          <div>
+            <label>Unit</label>
+            <select name="periodDurationUnit">
+              <option value=""       {% if data.periodDurationUnit == "" %}selected{% endif %}></option>
+              <option value="days"   {% if data.periodDurationUnit == "days" %}selected{% endif %}>Days</option>
+              <option value="weeks"  {% if data.periodDurationUnit == "weeks" %}selected{% endif %}>Weeks</option>
+              <option value="months" {% if data.periodDurationUnit == "months" %}selected{% endif %}>Months</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div x-show="periodType === 'from_to'" class="branch">
+        <div class="grid">
+          <div>
+            <label>From</label>
+            <input type="date" name="periodFrom" value="{{ data.periodFrom }}">
+          </div>
+          <div>
+            <label>To</label>
+            <input type="date" name="periodTo" value="{{ data.periodTo }}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 9 — Follow-up -->
+    <div x-show="step === 9" class="fieldset">
+      <h2>Step 9: Follow-up</h2>
+      <div class="grid">
+        <div>
+          <label>Will assess again?</label>
+          <select name="willAssessAgain">
+            <option value=""    {% if data.willAssessAgain == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.willAssessAgain == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.willAssessAgain == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+        <div>
+          <label>Planned review date</label>
+          <input type="date" name="plannedReviewDate" value="{{ data.plannedReviewDate }}">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 10 — Sign-off -->
+    <div x-show="step === 10" class="fieldset">
+      <h2>Step 10: Sign-off</h2>
+      <div class="grid">
+        <div>
+          <label>Issued at</label>
+          <input type="text" name="issuedAt" value="{{ data.issuedAt }}" placeholder="YYYY-MM-DDTHH:MM:SSZ">
+        </div>
+        <div>
+          <label>Issued via</label>
+          <select name="issuedVia">
+            <option value=""                           {% if data.issuedVia == "" %}selected{% endif %}></option>
+            <option value="digital"                    {% if data.issuedVia == "digital" %}selected{% endif %}>Digital</option>
+            <option value="printed_computer_generated" {% if data.issuedVia == "printed_computer_generated" %}selected{% endif %}>Printed (computer-generated)</option>
+            <option value="printed_handwritten"        {% if data.issuedVia == "printed_handwritten" %}selected{% endif %}>Printed (handwritten)</option>
+          </select>
+        </div>
+        <div>
+          <label>Issue setting</label>
+          <select name="issueSetting">
+            <option value=""                         {% if data.issueSetting == "" %}selected{% endif %}></option>
+            <option value="primary_care"             {% if data.issueSetting == "primary_care" %}selected{% endif %}>Primary care</option>
+            <option value="secondary_care_discharge" {% if data.issueSetting == "secondary_care_discharge" %}selected{% endif %}>Secondary care discharge</option>
+            <option value="occupational_health"      {% if data.issueSetting == "occupational_health" %}selected{% endif %}>Occupational health</option>
+            <option value="pharmacy"                 {% if data.issueSetting == "pharmacy" %}selected{% endif %}>Pharmacy</option>
+            <option value="community"                {% if data.issueSetting == "community" %}selected{% endif %}>Community</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:0.6rem;">
+        <div>
+          <label>Safeguarding concern?</label>
+          <select name="safeguardingConcern">
+            <option value=""    {% if data.safeguardingConcern == "" %}selected{% endif %}></option>
+            <option value="yes" {% if data.safeguardingConcern == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no"  {% if data.safeguardingConcern == "no" %}selected{% endif %}>No</option>
+          </select>
+        </div>
+        <div>
+          <label>Safeguarding notes (not printed on fit note)</label>
+          <textarea name="safeguardingNotes" rows="2">{{ data.safeguardingNotes }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+      <button type="button" @click="step = Math.max(1, step - 1)" :disabled="step === 1"
+              style="padding:0.5rem 1rem;background:#666;color:#fff;border:none;border-radius:4px;cursor:pointer;"
+              x-bind:style="step === 1 ? 'opacity:0.5;cursor:not-allowed;' : ''">
+        ← Previous
+      </button>
+
+      <span x-text="`${step} / ${totalSteps}`" style="color:#555;"></span>
+
+      <template x-if="step < totalSteps">
+        <button type="button" @click="step = Math.min(totalSteps, step + 1)"
+                style="padding:0.5rem 1rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Next →
+        </button>
+      </template>
+      <template x-if="step === totalSteps">
+        <button type="submit"
+                style="padding:0.5rem 1.4rem;background:#0a7d31;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+          Submit and grade
+        </button>
+      </template>
+    </div>
+  </form>
+
+  <p style="margin-top:1.5rem;"><a href="/">← Cancel and return home</a></p>
+</div>
+{% endblock %}
