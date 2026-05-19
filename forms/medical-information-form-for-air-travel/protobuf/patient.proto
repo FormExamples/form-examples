@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.medical_information_form_for_air_travel;
+
+enum PatientSexAtBirthEnum {
+  SEXATBIRTH_UNSPECIFIED = 0;
+  SEXATBIRTH_FEMALE = 1;  // female
+  SEXATBIRTH_MALE = 2;  // male
+  SEXATBIRTH_INTERSEX = 3;  // intersex
+  SEXATBIRTH_UNKNOWN = 4;  // unknown
+}
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string birth_date = 6;  // DATE — iso 8601 date
+  PatientSexAtBirthEnum sex_at_birth = 7;  // VARCHAR(20)
+  string nationality_as_iso_3166_1_alpha_2 = 8;  // CHAR(2) — max 2 chars
+  string passport_number = 9;  // TEXT
+  string united_kingdom_nhs_number = 10;  // CHAR(12) — max 12 chars
+  string national_health_id = 11;  // TEXT
+  string email = 12;  // TEXT
+  string phone = 13;  // TEXT
+  string postal_address_as_full_text = 14;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 15;  // CHAR(2) — max 2 chars
+  string postcode = 16;  // TEXT
+  string emergency_contact_name = 17;  // TEXT
+  string emergency_contact_relationship = 18;  // TEXT
+  string emergency_contact_phone = 19;  // TEXT
+  double weight_as_kg = 20;  // NUMERIC(5,1) — numeric(5,1)
+  double height_as_cm = 21;  // NUMERIC(5,1) — numeric(5,1)
+}

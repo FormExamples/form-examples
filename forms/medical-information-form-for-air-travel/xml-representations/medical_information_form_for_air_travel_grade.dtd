@@ -1,0 +1,14 @@
+<!ELEMENT medical_information_form_for_air_travel_grade (id,created_at,updated_at,deleted_at,medical_information_form_for_air_travel_id,computed_fitness_band,final_fitness_band,override_reason,desk_recommendation,physician_notes,valid_until,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_information_form_for_air_travel_id (#PCDATA)>
+<!ELEMENT computed_fitness_band (#PCDATA)>
+<!ELEMENT final_fitness_band (#PCDATA)>
+<!ELEMENT override_reason (#PCDATA)>
+<!ELEMENT desk_recommendation (#PCDATA)>
+<!ELEMENT physician_notes (#PCDATA)>
+<!ELEMENT valid_until (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

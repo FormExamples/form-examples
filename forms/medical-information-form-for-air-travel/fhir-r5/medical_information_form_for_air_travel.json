@@ -1,0 +1,1528 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-information-form-for-air-travel",
+        "code": "medical_information_form_for_air_travel",
+        "display": "Medical Information Form For Air Travel"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "submitter_name",
+            "display": "Submitter Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "submitter_role",
+            "display": "Submitter Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:submitter_role",
+            "code": "passenger",
+            "display": "Passenger"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "submitter_email",
+            "display": "Submitter Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "submitter_phone",
+            "display": "Submitter Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "submitter_organisation",
+            "display": "Submitter Organisation"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "airline_booking_reference",
+            "display": "Airline Booking Reference"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "airline_iata_code",
+            "display": "Airline Iata Code"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "airline_name",
+            "display": "Airline Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "outbound_flight_number",
+            "display": "Outbound Flight Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "outbound_date",
+            "display": "Outbound Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "outbound_origin_iata",
+            "display": "Outbound Origin Iata"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "outbound_destination_iata",
+            "display": "Outbound Destination Iata"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "return_flight_number",
+            "display": "Return Flight Number"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "return_date",
+            "display": "Return Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "cabin_class",
+            "display": "Cabin Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:cabin_class",
+            "code": "economy",
+            "display": "Economy"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "sector_duration_minutes",
+            "display": "Sector Duration Minutes"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "transit_airports_iata",
+            "display": "Transit Airports Iata"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "special_assistance_codes",
+            "display": "Special Assistance Codes"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_equipment",
+            "display": "Reason Equipment"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_equipment",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_recent_acute_event",
+            "display": "Reason Recent Acute Event"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_recent_acute_event",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_unstable_condition",
+            "display": "Reason Unstable Condition"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_unstable_condition",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_communicable_disease",
+            "display": "Reason Communicable Disease"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_communicable_disease",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_pregnancy",
+            "display": "Reason Pregnancy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_pregnancy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_mobility_escort",
+            "display": "Reason Mobility Escort"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_mobility_escort",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "reason_psychiatric",
+            "display": "Reason Psychiatric"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:reason_psychiatric",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "primary_diagnosis",
+            "display": "Primary Diagnosis"
+          }
+        ]
+      },
+      "valueString": "Under investigation"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "icd10_codes",
+            "display": "Icd10 Codes"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "diagnosis_date",
+            "display": "Diagnosis Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "current_treatment",
+            "display": "Current Treatment"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_admission_date",
+            "display": "Last Admission Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_discharge_date",
+            "display": "Last Discharge Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_specialist_review_date",
+            "display": "Last Specialist Review Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "resting_systolic_bp",
+            "display": "Resting Systolic Bp"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "resting_diastolic_bp",
+            "display": "Resting Diastolic Bp"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "resting_heart_rate",
+            "display": "Resting Heart Rate"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "nyha_class",
+            "display": "Nyha Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:nyha_class",
+            "code": "I",
+            "display": "I"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_mi_date",
+            "display": "Recent Mi Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_stent_date",
+            "display": "Recent Stent Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "on_anticoagulant",
+            "display": "On Anticoagulant"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:on_anticoagulant",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "pacemaker_or_icd",
+            "display": "Pacemaker Or Icd"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:pacemaker_or_icd",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "exercise_tolerance_metres",
+            "display": "Exercise Tolerance Metres"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "unstable_angina",
+            "display": "Unstable Angina"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:unstable_angina",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "resting_spo2_percent",
+            "display": "Resting Spo2 Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "predicted_inflight_spo2_percent",
+            "display": "Predicted Inflight Spo2 Percent"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "hypoxic_challenge_result",
+            "display": "Hypoxic Challenge Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:hypoxic_challenge_result",
+            "code": "pass",
+            "display": "Pass"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_pneumothorax_date",
+            "display": "Recent Pneumothorax Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "asthma_severity",
+            "display": "Asthma Severity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:asthma_severity",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "copd_severity",
+            "display": "Copd Severity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:copd_severity",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "cpap_or_bipap_use",
+            "display": "Cpap Or Bipap Use"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:cpap_or_bipap_use",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_pulmonary_embolism_date",
+            "display": "Recent Pulmonary Embolism Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_surgery_date",
+            "display": "Last Surgery Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_surgery_site",
+            "display": "Last Surgery Site"
+          }
+        ]
+      },
+      "valueString": "Example location"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "cabin_gas_risk",
+            "display": "Cabin Gas Risk"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:cabin_gas_risk",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_fracture_cast",
+            "display": "Recent Fracture Cast"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:recent_fracture_cast",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_dvt_date",
+            "display": "Recent Dvt Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "scuba_diving_within_24h",
+            "display": "Scuba Diving Within 24H"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:scuba_diving_within_24h",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "recent_stroke_date",
+            "display": "Recent Stroke Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "is_pregnant",
+            "display": "Is Pregnant"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:is_pregnant",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "gestation_weeks",
+            "display": "Gestation Weeks"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "pregnancy_type",
+            "display": "Pregnancy Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:pregnancy_type",
+            "code": "singleton",
+            "display": "Singleton"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "pregnancy_complications",
+            "display": "Pregnancy Complications"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "expected_delivery_date",
+            "display": "Expected Delivery Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "obstetrician_contact",
+            "display": "Obstetrician Contact"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "communicable_disease_status",
+            "display": "Communicable Disease Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:communicable_disease_status",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "last_symptom_date",
+            "display": "Last Symptom Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "isolation_required",
+            "display": "Isolation Required"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:isolation_required",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "vaccination_status",
+            "display": "Vaccination Status"
+          }
+        ]
+      },
+      "valueString": "active"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "current_antimicrobials",
+            "display": "Current Antimicrobials"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_supplemental_oxygen",
+            "display": "Requires Supplemental Oxygen"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_supplemental_oxygen",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "oxygen_flow_rate_lpm",
+            "display": "Oxygen Flow Rate Lpm"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 72.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "oxygen_duration",
+            "display": "Oxygen Duration"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:oxygen_duration",
+            "code": "continuous",
+            "display": "Continuous"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_poc",
+            "display": "Requires Poc"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_poc",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "poc_make_model",
+            "display": "Poc Make Model"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "poc_battery_hours",
+            "display": "Poc Battery Hours"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_stretcher",
+            "display": "Requires Stretcher"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_stretcher",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_incubator",
+            "display": "Requires Incubator"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_incubator",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_iv_pump",
+            "display": "Requires Iv Pump"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_iv_pump",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_medical_escort",
+            "display": "Requires Medical Escort"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_medical_escort",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_extra_seat",
+            "display": "Requires Extra Seat"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_extra_seat",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "requires_accessible_lavatory",
+            "display": "Requires Accessible Lavatory"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:requires_accessible_lavatory",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "wheelchair_type",
+            "display": "Wheelchair Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:wheelchair_type",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "accompanying_carer",
+            "display": "Accompanying Carer"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:accompanying_carer",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "regular_medications",
+            "display": "Regular Medications"
+          }
+        ]
+      },
+      "valueString": "Paracetamol"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "controlled_drugs",
+            "display": "Controlled Drugs"
+          }
+        ]
+      },
+      "valueString": "Paracetamol"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "dangerous_goods_battery_declaration",
+            "display": "Dangerous Goods Battery Declaration"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:dangerous_goods_battery_declaration",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "sharps_in_cabin",
+            "display": "Sharps In Cabin"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:sharps_in_cabin",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "refrigerated_medication",
+            "display": "Refrigerated Medication"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:refrigerated_medication",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "customs_documentation_available",
+            "display": "Customs Documentation Available"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:customs_documentation_available",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "haemoglobin_g_per_l",
+            "display": "Haemoglobin G Per L"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "physician_declaration",
+            "display": "Physician Declaration"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel:physician_declaration",
+            "code": "fit",
+            "display": "Fit"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "physician_signature_name",
+            "display": "Physician Signature Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "physician_signature_date",
+            "display": "Physician Signature Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "valid_until_date",
+            "display": "Valid Until Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-information-form-for-air-travel",
+            "code": "additional_notes",
+            "display": "Additional Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

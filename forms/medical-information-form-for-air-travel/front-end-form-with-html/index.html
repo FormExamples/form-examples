@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medical Information Form for Air Travel (MEDIF) — single-page wizard</title>
+  <meta name="description" content="MEDIF: airline Medical Information Form. 14-step single-page wizard for fitness-to-fly assessment and airline-medical-desk submission.">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#form-sections">Skip to MEDIF wizard</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Medical Information Form for Air Travel (MEDIF)</h1>
+      <p class="subtitle">14-step single-page wizard for fitness-to-fly assessment and airline-medical-desk submission.</p>
+
+      <div class="progress" id="progress" role="region" aria-label="Form progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion"
+        >
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Single-page MEDIF wizard. Part 1 is completed by the passenger or an
+        accessible-travel agent; Part 2 by the attending physician. The form
+        captures passenger identification, trip details, the clinical
+        evaluation, and requested in-flight medical accommodations, then
+        computes a fitness-to-fly band and a list of safety flags suitable
+        for the airline medical desk.
+      </p>
+      <p>
+        This is clinical decision support. The final fitness-to-fly decision
+        is taken by the airline medical desk; the attending physician
+        remains responsible for the clinical declaration in step 14.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="assessment-form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+    >
+      <div id="form-sections" class="form-sections">
+
+        <!-- =========================================================== -->
+        <!-- Step 1. Submitting agent identification                     -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-1-heading">
+          <header class="section-header">
+            <p class="section-step">Step 1 of 14</p>
+            <h2 class="section-title" id="step-1-heading">Submitting agent identification</h2>
+            <p class="section-description">Person submitting Part 1: passenger, accessible-travel agent, clinician, or family member.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="submitterName">Submitter name</label>
+              <input type="text" id="submitterName" name="submitterName" class="text-input">
+            </div>
+            <div class="field">
+              <label for="submitterRole">Role</label>
+              <select id="submitterRole" name="submitterRole" class="select-input">
+                <option value="">--</option>
+                <option value="passenger">Passenger</option>
+                <option value="agent">Accessible-travel agent</option>
+                <option value="clinician">Clinician</option>
+                <option value="family-member">Family member</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="submitterEmail">Email</label>
+              <input type="email" id="submitterEmail" name="submitterEmail" class="text-input">
+            </div>
+            <div class="field">
+              <label for="submitterPhone">Phone</label>
+              <input type="tel" id="submitterPhone" name="submitterPhone" class="text-input">
+            </div>
+            <div class="field">
+              <label for="submitterOrganisation">Organisation</label>
+              <input type="text" id="submitterOrganisation" name="submitterOrganisation" class="text-input">
+            </div>
+            <div class="field">
+              <label for="airlineBookingReference">Airline booking reference (PNR)</label>
+              <input type="text" id="airlineBookingReference" name="airlineBookingReference" class="text-input" maxlength="20">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 2. Passenger identification                            -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-2-heading">
+          <header class="section-header">
+            <p class="section-step">Step 2 of 14</p>
+            <h2 class="section-title" id="step-2-heading">Passenger identification</h2>
+            <p class="section-description">Demographics of the MEDIF subject.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="passengerName">Passenger name</label>
+              <input type="text" id="passengerName" name="passengerName" class="text-input">
+            </div>
+            <div class="field">
+              <label for="passengerDateOfBirth">Date of birth</label>
+              <input type="date" id="passengerDateOfBirth" name="passengerDateOfBirth" class="text-input">
+            </div>
+            <div class="field">
+              <label for="passengerSex">Sex</label>
+              <select id="passengerSex" name="passengerSex" class="select-input">
+                <option value="">--</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="passengerNationality">Nationality</label>
+              <input type="text" id="passengerNationality" name="passengerNationality" class="text-input">
+            </div>
+            <div class="field">
+              <label for="passengerPassportNumber">Passport number</label>
+              <input type="text" id="passengerPassportNumber" name="passengerPassportNumber" class="text-input">
+            </div>
+            <div class="field">
+              <label for="passengerNationalHealthId">National health ID (NHS / equivalent)</label>
+              <input type="text" id="passengerNationalHealthId" name="passengerNationalHealthId" class="text-input">
+            </div>
+            <div class="field">
+              <label for="passengerAddress">Address</label>
+              <textarea id="passengerAddress" name="passengerAddress" class="textarea" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label for="emergencyContact">Emergency contact (name + phone)</label>
+              <input type="text" id="emergencyContact" name="emergencyContact" class="text-input">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 3. Trip details                                        -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-3-heading">
+          <header class="section-header">
+            <p class="section-step">Step 3 of 14</p>
+            <h2 class="section-title" id="step-3-heading">Trip details</h2>
+            <p class="section-description">Airline, flights, cabin class, sector duration, special-assistance codes.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="airlineIataCode">Airline IATA code</label>
+              <input type="text" id="airlineIataCode" name="airlineIataCode" class="text-input" maxlength="2" placeholder="e.g. EK">
+            </div>
+            <div class="field">
+              <label for="airlineName">Airline name</label>
+              <input type="text" id="airlineName" name="airlineName" class="text-input">
+            </div>
+            <div class="field">
+              <label for="outboundFlightNumber">Outbound flight number</label>
+              <input type="text" id="outboundFlightNumber" name="outboundFlightNumber" class="text-input">
+            </div>
+            <div class="field">
+              <label for="outboundDate">Outbound date</label>
+              <input type="date" id="outboundDate" name="outboundDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="outboundOriginIata">Outbound origin (IATA)</label>
+              <input type="text" id="outboundOriginIata" name="outboundOriginIata" class="text-input" maxlength="3" placeholder="LHR">
+            </div>
+            <div class="field">
+              <label for="outboundDestinationIata">Outbound destination (IATA)</label>
+              <input type="text" id="outboundDestinationIata" name="outboundDestinationIata" class="text-input" maxlength="3" placeholder="JFK">
+            </div>
+            <div class="field">
+              <label for="returnFlightNumber">Return flight number</label>
+              <input type="text" id="returnFlightNumber" name="returnFlightNumber" class="text-input">
+            </div>
+            <div class="field">
+              <label for="returnDate">Return date</label>
+              <input type="date" id="returnDate" name="returnDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="cabinClass">Cabin class</label>
+              <select id="cabinClass" name="cabinClass" class="select-input">
+                <option value="">--</option>
+                <option value="economy">Economy</option>
+                <option value="premium-economy">Premium economy</option>
+                <option value="business">Business</option>
+                <option value="first">First</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sectorDurationMinutes">Longest sector duration <span class="unit">(minutes)</span></label>
+              <input type="number" id="sectorDurationMinutes" name="sectorDurationMinutes" class="text-input" min="0" max="2000">
+            </div>
+            <div class="field">
+              <label for="transitAirportsIata">Transit airports (IATA, comma separated)</label>
+              <input type="text" id="transitAirportsIata" name="transitAirportsIata" class="text-input">
+            </div>
+            <div class="field">
+              <label for="specialAssistanceCodes">Special-assistance codes (IATA SSR)</label>
+              <input type="text" id="specialAssistanceCodes" name="specialAssistanceCodes" class="text-input" placeholder="e.g. WCHR,OXYG,MEDA">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 4. Reason MEDIF required                               -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-4-heading">
+          <header class="section-header">
+            <p class="section-step">Step 4 of 14</p>
+            <h2 class="section-title" id="step-4-heading">Reason MEDIF is required</h2>
+            <p class="section-description">Tick every trigger that applies.</p>
+          </header>
+          <div class="two-col">
+            <fieldset class="field radio-group">
+              <legend>In-flight medical equipment</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonEquipment" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonEquipment" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Recent acute event</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonRecentAcuteEvent" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonRecentAcuteEvent" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Unstable chronic condition</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonUnstableCondition" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonUnstableCondition" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Communicable disease</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonCommunicableDisease" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonCommunicableDisease" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Pregnancy beyond carrier threshold</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonPregnancy" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonPregnancy" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Mobility or escort requirement</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonMobilityEscort" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonMobilityEscort" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Psychiatric clearance required</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="reasonPsychiatric" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="reasonPsychiatric" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 5. Attending physician                                 -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-5-heading">
+          <header class="section-header">
+            <p class="section-step">Step 5 of 14</p>
+            <h2 class="section-title" id="step-5-heading">Attending physician identification</h2>
+            <p class="section-description">Part 2 author. Treating clinician, registered with the appropriate regulatory body.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="physicianName">Physician name</label>
+              <input type="text" id="physicianName" name="physicianName" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianSpecialty">Specialty</label>
+              <input type="text" id="physicianSpecialty" name="physicianSpecialty" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianRegistrationNumber">Registration number (GMC / NMC / equivalent)</label>
+              <input type="text" id="physicianRegistrationNumber" name="physicianRegistrationNumber" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianClinic">Clinic or hospital</label>
+              <input type="text" id="physicianClinic" name="physicianClinic" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianEmail">Email</label>
+              <input type="email" id="physicianEmail" name="physicianEmail" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianPhone">Phone</label>
+              <input type="tel" id="physicianPhone" name="physicianPhone" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianAddress">Clinic address</label>
+              <textarea id="physicianAddress" name="physicianAddress" class="textarea" rows="2"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 6. Diagnosis                                           -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-6-heading">
+          <header class="section-header">
+            <p class="section-step">Step 6 of 14</p>
+            <h2 class="section-title" id="step-6-heading">Diagnosis and clinical history</h2>
+            <p class="section-description">Primary diagnosis, ICD-10 codes, recent admissions, specialist review.</p>
+          </header>
+          <div class="field">
+            <label for="primaryDiagnosis">Primary diagnosis</label>
+            <textarea id="primaryDiagnosis" name="primaryDiagnosis" class="textarea" rows="2"></textarea>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label for="icd10Codes">ICD-10 codes (comma separated)</label>
+              <input type="text" id="icd10Codes" name="icd10Codes" class="text-input">
+            </div>
+            <div class="field">
+              <label for="diagnosisDate">Date of onset / diagnosis</label>
+              <input type="date" id="diagnosisDate" name="diagnosisDate" class="text-input">
+            </div>
+          </div>
+          <div class="field">
+            <label for="currentTreatment">Current treatment</label>
+            <textarea id="currentTreatment" name="currentTreatment" class="textarea" rows="2"></textarea>
+          </div>
+          <div class="three-col">
+            <div class="field">
+              <label for="lastAdmissionDate">Last admission</label>
+              <input type="date" id="lastAdmissionDate" name="lastAdmissionDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="lastDischargeDate">Last discharge</label>
+              <input type="date" id="lastDischargeDate" name="lastDischargeDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="lastSpecialistReviewDate">Last specialist review</label>
+              <input type="date" id="lastSpecialistReviewDate" name="lastSpecialistReviewDate" class="text-input">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 7. Cardiovascular                                      -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-7-heading">
+          <header class="section-header">
+            <p class="section-step">Step 7 of 14</p>
+            <h2 class="section-title" id="step-7-heading">Cardiovascular fitness</h2>
+            <p class="section-description">Resting vitals, NYHA class, recent MI / stent, anticoagulation, pacemaker / ICD, exercise tolerance.</p>
+          </header>
+          <div class="three-col">
+            <div class="field">
+              <label for="restingSystolicBp">Resting systolic BP <span class="unit">(mmHg)</span></label>
+              <input type="number" id="restingSystolicBp" name="restingSystolicBp" class="text-input" min="0" max="300">
+            </div>
+            <div class="field">
+              <label for="restingDiastolicBp">Resting diastolic BP <span class="unit">(mmHg)</span></label>
+              <input type="number" id="restingDiastolicBp" name="restingDiastolicBp" class="text-input" min="0" max="200">
+            </div>
+            <div class="field">
+              <label for="restingHeartRate">Resting HR <span class="unit">(bpm)</span></label>
+              <input type="number" id="restingHeartRate" name="restingHeartRate" class="text-input" min="0" max="250">
+            </div>
+          </div>
+          <div class="three-col">
+            <div class="field">
+              <label for="nyhaClass">NYHA functional class</label>
+              <select id="nyhaClass" name="nyhaClass" class="select-input">
+                <option value="">--</option>
+                <option value="I">I — no limitation</option>
+                <option value="II">II — slight limitation</option>
+                <option value="III">III — marked limitation</option>
+                <option value="IV">IV — symptoms at rest</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="recentMiDate">Recent MI date</label>
+              <input type="date" id="recentMiDate" name="recentMiDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="recentStentDate">Recent coronary stent date</label>
+              <input type="date" id="recentStentDate" name="recentStentDate" class="text-input">
+            </div>
+          </div>
+          <div class="three-col">
+            <fieldset class="field radio-group">
+              <legend>On anticoagulant?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="onAnticoagulant" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="onAnticoagulant" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Pacemaker or ICD?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="pacemakerOrIcd" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="pacemakerOrIcd" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Unstable angina?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="unstableAngina" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="unstableAngina" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+          </div>
+          <div class="field">
+            <label for="exerciseToleranceMetres">Exercise tolerance on flat ground <span class="unit">(metres before symptoms)</span></label>
+            <input type="number" id="exerciseToleranceMetres" name="exerciseToleranceMetres" class="text-input" min="0" max="10000">
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 8. Respiratory                                         -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-8-heading">
+          <header class="section-header">
+            <p class="section-step">Step 8 of 14</p>
+            <h2 class="section-title" id="step-8-heading">Respiratory fitness</h2>
+            <p class="section-description">SpO₂, hypoxic challenge, asthma / COPD severity, CPAP use, recent pneumothorax / PE.</p>
+          </header>
+          <div class="three-col">
+            <div class="field">
+              <label for="restingSpo2Percent">Resting SpO₂ on room air <span class="unit">(%)</span></label>
+              <input type="number" step="0.1" id="restingSpo2Percent" name="restingSpo2Percent" class="text-input" min="0" max="100">
+            </div>
+            <div class="field">
+              <label for="predictedInflightSpo2Percent">Predicted in-flight SpO₂ <span class="unit">(%)</span></label>
+              <input type="number" step="0.1" id="predictedInflightSpo2Percent" name="predictedInflightSpo2Percent" class="text-input" min="0" max="100">
+            </div>
+            <div class="field">
+              <label for="hypoxicChallengeResult">Hypoxic challenge test</label>
+              <select id="hypoxicChallengeResult" name="hypoxicChallengeResult" class="select-input">
+                <option value="">--</option>
+                <option value="pass">Pass</option>
+                <option value="borderline">Borderline</option>
+                <option value="fail">Fail</option>
+                <option value="not-performed">Not performed</option>
+              </select>
+            </div>
+          </div>
+          <div class="three-col">
+            <div class="field">
+              <label for="recentPneumothoraxDate">Recent pneumothorax date</label>
+              <input type="date" id="recentPneumothoraxDate" name="recentPneumothoraxDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="asthmaSeverity">Asthma severity</label>
+              <select id="asthmaSeverity" name="asthmaSeverity" class="select-input">
+                <option value="">--</option>
+                <option value="none">None</option>
+                <option value="mild-controlled">Mild controlled</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe-uncontrolled">Severe uncontrolled</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="copdSeverity">COPD severity</label>
+              <select id="copdSeverity" name="copdSeverity" class="select-input">
+                <option value="">--</option>
+                <option value="none">None</option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+              </select>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label for="cpapOrBipapUse">CPAP / BiPAP use</label>
+              <select id="cpapOrBipapUse" name="cpapOrBipapUse" class="select-input">
+                <option value="">--</option>
+                <option value="none">None</option>
+                <option value="cpap">CPAP</option>
+                <option value="bipap">BiPAP</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="recentPulmonaryEmbolismDate">Recent pulmonary embolism date</label>
+              <input type="date" id="recentPulmonaryEmbolismDate" name="recentPulmonaryEmbolismDate" class="text-input">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 9. Recent events and surgery                           -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-9-heading">
+          <header class="section-header">
+            <p class="section-step">Step 9 of 14</p>
+            <h2 class="section-title" id="step-9-heading">Recent events and surgery</h2>
+            <p class="section-description">Surgery, cabin-gas risk, fracture, DVT, scuba, stroke.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="lastSurgeryDate">Last surgery date</label>
+              <input type="date" id="lastSurgeryDate" name="lastSurgeryDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="lastSurgerySite">Surgery site</label>
+              <input type="text" id="lastSurgerySite" name="lastSurgerySite" class="text-input">
+            </div>
+          </div>
+          <div class="field">
+            <label for="cabinGasRisk">Cabin gas-expansion risk</label>
+            <select id="cabinGasRisk" name="cabinGasRisk" class="select-input">
+              <option value="">--</option>
+              <option value="none">None</option>
+              <option value="intra-ocular-gas">Intra-ocular gas</option>
+              <option value="intra-cranial-gas">Intra-cranial gas</option>
+              <option value="intra-abdominal-gas">Intra-abdominal gas</option>
+              <option value="plaster-cast">Plaster cast</option>
+              <option value="pneumothorax">Pneumothorax</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="three-col">
+            <fieldset class="field radio-group">
+              <legend>Recent fracture / cast?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="recentFractureCast" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="recentFractureCast" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="recentDvtDate">Recent DVT date</label>
+              <input type="date" id="recentDvtDate" name="recentDvtDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="recentStrokeDate">Recent stroke date</label>
+              <input type="date" id="recentStrokeDate" name="recentStrokeDate" class="text-input">
+            </div>
+          </div>
+          <fieldset class="field radio-group">
+            <legend>Scuba diving within 24 hours of departure?</legend>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="scubaDivingWithin24h" value="yes"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="scubaDivingWithin24h" value="no"><span>No</span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 10. Pregnancy                                          -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-10-heading" x-data="{ pregnant: '' }">
+          <header class="section-header">
+            <p class="section-step">Step 10 of 14</p>
+            <h2 class="section-title" id="step-10-heading">Pregnancy and obstetric history</h2>
+            <p class="section-description">Gestation, pregnancy type, complications, expected delivery, obstetrician.</p>
+          </header>
+          <fieldset class="field radio-group">
+            <legend>Currently pregnant?</legend>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="isPregnant" value="yes" x-model="pregnant"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="isPregnant" value="no" x-model="pregnant"><span>No</span></label>
+            </div>
+          </fieldset>
+          <div x-show="pregnant === 'yes'" x-cloak>
+            <div class="three-col">
+              <div class="field">
+                <label for="gestationWeeks">Gestation <span class="unit">(weeks)</span></label>
+                <input type="number" id="gestationWeeks" name="gestationWeeks" class="text-input" min="0" max="45">
+              </div>
+              <div class="field">
+                <label for="pregnancyType">Pregnancy type</label>
+                <select id="pregnancyType" name="pregnancyType" class="select-input">
+                  <option value="">--</option>
+                  <option value="singleton">Singleton</option>
+                  <option value="twins">Twins</option>
+                  <option value="multiple">Multiple</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="expectedDeliveryDate">Expected delivery date</label>
+                <input type="date" id="expectedDeliveryDate" name="expectedDeliveryDate" class="text-input">
+              </div>
+            </div>
+            <div class="field">
+              <label for="pregnancyComplications">Complications</label>
+              <textarea id="pregnancyComplications" name="pregnancyComplications" class="textarea" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label for="obstetricianContact">Obstetrician name + contact</label>
+              <input type="text" id="obstetricianContact" name="obstetricianContact" class="text-input">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 11. Communicable disease                               -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-11-heading" x-data="{ status: '' }">
+          <header class="section-header">
+            <p class="section-step">Step 11 of 14</p>
+            <h2 class="section-title" id="step-11-heading">Communicable disease screening</h2>
+            <p class="section-description">Infectious status, last symptoms, isolation, vaccination, antimicrobials.</p>
+          </header>
+          <div class="field">
+            <label for="communicableDiseaseStatus">Communicable disease status</label>
+            <select id="communicableDiseaseStatus" name="communicableDiseaseStatus" class="select-input" x-model="status">
+              <option value="">--</option>
+              <option value="none">None</option>
+              <option value="infectious">Infectious</option>
+              <option value="convalescent">Convalescent</option>
+              <option value="cleared">Cleared</option>
+            </select>
+          </div>
+          <div x-show="status && status !== 'none'" x-cloak>
+            <div class="two-col">
+              <div class="field">
+                <label for="lastSymptomDate">Date of last symptoms</label>
+                <input type="date" id="lastSymptomDate" name="lastSymptomDate" class="text-input">
+              </div>
+              <fieldset class="field radio-group">
+                <legend>Isolation precautions required?</legend>
+                <div class="radio-options">
+                  <label class="radio-option"><input type="radio" name="isolationRequired" value="yes"><span>Yes</span></label>
+                  <label class="radio-option"><input type="radio" name="isolationRequired" value="no"><span>No</span></label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="field">
+            <label for="vaccinationStatus">Vaccination status</label>
+            <textarea id="vaccinationStatus" name="vaccinationStatus" class="textarea" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label for="currentAntimicrobials">Current antimicrobials</label>
+            <textarea id="currentAntimicrobials" name="currentAntimicrobials" class="textarea" rows="2"></textarea>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 12. In-flight medical requirements                     -->
+        <!-- =========================================================== -->
+        <section
+          class="section-card"
+          aria-labelledby="step-12-heading"
+          x-data="{ oxygen: '', poc: '' }"
+        >
+          <header class="section-header">
+            <p class="section-step">Step 12 of 14</p>
+            <h2 class="section-title" id="step-12-heading">In-flight medical requirements</h2>
+            <p class="section-description">Oxygen, POC, stretcher, incubator, IV pump, escort, extra seat, wheelchair, carer.</p>
+          </header>
+
+          <fieldset class="field radio-group">
+            <legend>Supplemental oxygen required?</legend>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="requiresSupplementalOxygen" value="yes" x-model="oxygen"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="requiresSupplementalOxygen" value="no" x-model="oxygen"><span>No</span></label>
+            </div>
+          </fieldset>
+          <div x-show="oxygen === 'yes'" x-cloak>
+            <div class="two-col">
+              <div class="field">
+                <label for="oxygenFlowRateLpm">Oxygen flow rate <span class="unit">(L/min)</span></label>
+                <input type="number" step="0.1" id="oxygenFlowRateLpm" name="oxygenFlowRateLpm" class="text-input" min="0" max="15">
+              </div>
+              <div class="field">
+                <label for="oxygenDuration">Oxygen duration</label>
+                <select id="oxygenDuration" name="oxygenDuration" class="select-input">
+                  <option value="">--</option>
+                  <option value="continuous">Continuous</option>
+                  <option value="as-required">As required</option>
+                  <option value="on-exertion">On exertion</option>
+                  <option value="sleep-only">Sleep only</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="field radio-group">
+            <legend>Portable oxygen concentrator (POC)?</legend>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="requiresPoc" value="yes" x-model="poc"><span>Yes</span></label>
+              <label class="radio-option"><input type="radio" name="requiresPoc" value="no" x-model="poc"><span>No</span></label>
+            </div>
+          </fieldset>
+          <div x-show="poc === 'yes'" x-cloak>
+            <div class="two-col">
+              <div class="field">
+                <label for="pocMakeModel">POC make / model</label>
+                <input type="text" id="pocMakeModel" name="pocMakeModel" class="text-input">
+              </div>
+              <div class="field">
+                <label for="pocBatteryHours">Total battery hours</label>
+                <input type="number" step="0.1" id="pocBatteryHours" name="pocBatteryHours" class="text-input" min="0" max="48">
+              </div>
+            </div>
+          </div>
+
+          <div class="three-col">
+            <fieldset class="field radio-group">
+              <legend>Stretcher?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresStretcher" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresStretcher" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Incubator?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresIncubator" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresIncubator" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>IV pump?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresIvPump" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresIvPump" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Medical escort?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresMedicalEscort" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresMedicalEscort" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Extra seat?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresExtraSeat" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresExtraSeat" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Accessible lavatory?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="requiresAccessibleLavatory" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="requiresAccessibleLavatory" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <label for="wheelchairType">Wheelchair type</label>
+              <select id="wheelchairType" name="wheelchairType" class="select-input">
+                <option value="">--</option>
+                <option value="none">None</option>
+                <option value="WCHR">WCHR — ramp</option>
+                <option value="WCHS">WCHS — steps</option>
+                <option value="WCHC">WCHC — cabin</option>
+              </select>
+            </div>
+            <fieldset class="field radio-group">
+              <legend>Accompanying carer (non-medical)?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="accompanyingCarer" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="accompanyingCarer" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 13. Cabin medications and equipment                    -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-13-heading">
+          <header class="section-header">
+            <p class="section-step">Step 13 of 14</p>
+            <h2 class="section-title" id="step-13-heading">Medications and equipment in cabin</h2>
+            <p class="section-description">Regular medications, controlled drugs, dangerous-goods battery declaration, sharps, refrigeration, haemoglobin.</p>
+          </header>
+          <div class="field">
+            <label for="regularMedications">Regular medications</label>
+            <textarea id="regularMedications" name="regularMedications" class="textarea" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label for="controlledDrugs">Controlled drugs (with customs documentation)</label>
+            <textarea id="controlledDrugs" name="controlledDrugs" class="textarea" rows="2"></textarea>
+          </div>
+          <div class="three-col">
+            <fieldset class="field radio-group">
+              <legend>Dangerous-goods battery declaration?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="dangerousGoodsBatteryDeclaration" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="dangerousGoodsBatteryDeclaration" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Syringes / sharps in cabin?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="sharpsInCabin" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="sharpsInCabin" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Refrigerated medication?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="refrigeratedMedication" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="refrigeratedMedication" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field radio-group">
+              <legend>Customs documentation available?</legend>
+              <div class="radio-options">
+                <label class="radio-option"><input type="radio" name="customsDocumentationAvailable" value="yes"><span>Yes</span></label>
+                <label class="radio-option"><input type="radio" name="customsDocumentationAvailable" value="no"><span>No</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="haemoglobinGPerL">Haemoglobin <span class="unit">(g/L)</span></label>
+              <input type="number" id="haemoglobinGPerL" name="haemoglobinGPerL" class="text-input" min="0" max="250">
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================================================== -->
+        <!-- Step 14. Summary + sign-off                                 -->
+        <!-- =========================================================== -->
+        <section class="section-card" aria-labelledby="step-14-heading">
+          <header class="section-header">
+            <p class="section-step">Step 14 of 14</p>
+            <h2 class="section-title" id="step-14-heading">Summary and physician sign-off</h2>
+            <p class="section-description">Physician declaration and electronic signature. The fitness band and safety flags are computed when you press Submit.</p>
+          </header>
+          <div class="two-col">
+            <div class="field">
+              <label for="physicianDeclaration">Physician declaration</label>
+              <select id="physicianDeclaration" name="physicianDeclaration" class="select-input">
+                <option value="">--</option>
+                <option value="fit">Fit to fly</option>
+                <option value="fit-with-conditions">Fit with conditions</option>
+                <option value="unfit">Unfit to fly</option>
+                <option value="unable-to-determine">Unable to determine</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="physicianSignatureName">Physician signature (printed name)</label>
+              <input type="text" id="physicianSignatureName" name="physicianSignatureName" class="text-input">
+            </div>
+            <div class="field">
+              <label for="physicianSignatureDate">Signature date</label>
+              <input type="date" id="physicianSignatureDate" name="physicianSignatureDate" class="text-input">
+            </div>
+            <div class="field">
+              <label for="validUntilDate">MEDIF valid until</label>
+              <input type="date" id="validUntilDate" name="validUntilDate" class="text-input">
+            </div>
+          </div>
+          <div class="field">
+            <label for="additionalNotes">Additional notes for the airline medical desk</label>
+            <textarea id="additionalNotes" name="additionalNotes" class="textarea" rows="3"></textarea>
+          </div>
+        </section>
+
+      </div><!-- /.form-sections -->
+
+      <div class="form-actions">
+        <button type="button" id="submit-btn" class="btn btn-primary">
+          Submit and view fitness-band report
+        </button>
+        <button type="button" id="reset-btn" class="btn btn-secondary">
+          Start over
+        </button>
+        <button type="button" id="download-btn" class="btn btn-secondary">
+          Download JSON
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="report"
+      class="report-region"
+      role="region"
+      aria-live="polite"
+      aria-label="MEDIF fitness-to-fly report"
+    ></div>
+
+    <footer class="page-footer">
+      <p>
+        MEDIF is an IATA-standardised airline document. The fitness-to-fly
+        band and safety flags computed here are advisory clinical decision
+        support; the final fitness-to-fly decision is taken by the airline
+        medical desk and the attending physician remains responsible for
+        the clinical declaration in step 14.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

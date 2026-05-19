@@ -1,0 +1,39 @@
+<section class="card" id="step-11">
+  <h2 class="text-xl font-semibold mb-2">Step 11 — Communicable disease</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    Communicable-disease status, isolation needs, vaccination summary and
+    current antimicrobial therapy.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label for="communicable_disease_status" class="field-label">Status</label>
+      <select id="communicable_disease_status" name="communicable_disease_status" class="field-input">
+        <option value="">—</option>
+        <option value="none">None</option>
+        <option value="infectious">Infectious</option>
+        <option value="convalescent">Convalescent</option>
+        <option value="cleared">Cleared</option>
+      </select>
+    </div>
+    <div>
+      <label for="last_symptom_date" class="field-label">Last symptom date</label>
+      <input type="date" id="last_symptom_date" name="last_symptom_date" class="field-input">
+    </div>
+    <div>
+      <label for="isolation_required" class="field-label">Isolation required?</label>
+      <select id="isolation_required" name="isolation_required" class="field-input">
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+    <div class="md:col-span-2">
+      <label for="vaccination_status" class="field-label">Vaccination status</label>
+      <textarea id="vaccination_status" name="vaccination_status" class="field-input" rows="2"></textarea>
+    </div>
+    <div class="md:col-span-2">
+      <label for="current_antimicrobials" class="field-label">Current antimicrobials</label>
+      <textarea id="current_antimicrobials" name="current_antimicrobials" class="field-input" rows="2"></textarea>
+    </div>
+  </div>
+</section>

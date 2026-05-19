@@ -1,0 +1,42 @@
+logger:
+  enable: true
+  pretty_backtrace: false
+  level: info
+  format: json
+
+server:
+  port: 5150
+  binding: 0.0.0.0
+  host: https://example.invalid
+  middlewares:
+    static_assets:
+      enable: true
+      must_exist: true
+      precompressed: true
+      folder:
+        uri: "/static"
+        path: "assets/static"
+      fallback: "assets/static/404.html"
+
+workers:
+  mode: BackgroundQueue
+
+mailer:
+  smtp:
+    enable: false
+
+database:
+  uri: ${DATABASE_URL:-postgres://loco:loco@localhost:5432/medical_information_form_for_air_travel_production}
+  enable_logging: false
+  connect_timeout: 500
+  idle_timeout: 500
+  min_connections: 1
+  max_connections: 25
+  auto_migrate: false
+  dangerously_truncate: false
+  dangerously_recreate: false
+
+auth:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 604800

@@ -1,0 +1,34 @@
+logger:
+  enable: false
+  pretty_backtrace: false
+  level: warn
+  format: compact
+
+server:
+  port: 5151
+  binding: 127.0.0.1
+  host: http://localhost
+  middlewares: {}
+
+workers:
+  mode: ForegroundBlocking
+
+mailer:
+  smtp:
+    enable: false
+
+database:
+  uri: postgres://loco:loco@localhost:5432/medical_information_form_for_air_travel_test
+  enable_logging: false
+  connect_timeout: 500
+  idle_timeout: 500
+  min_connections: 1
+  max_connections: 5
+  auto_migrate: true
+  dangerously_truncate: true
+  dangerously_recreate: true
+
+auth:
+  jwt:
+    secret: replace-me-with-a-real-secret
+    expiration: 604800

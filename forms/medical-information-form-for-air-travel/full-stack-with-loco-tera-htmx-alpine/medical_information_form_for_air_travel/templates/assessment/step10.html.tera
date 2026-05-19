@@ -1,0 +1,42 @@
+<section class="card" id="step-10">
+  <h2 class="text-xl font-semibold mb-2">Step 10 — Pregnancy</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    Pregnancy status, gestation, type (singleton or multiple), complications
+    and expected delivery date.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label for="is_pregnant" class="field-label">Currently pregnant?</label>
+      <select id="is_pregnant" name="is_pregnant" class="field-input">
+        <option value="">—</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+    <div>
+      <label for="gestation_weeks" class="field-label">Gestation (completed weeks)</label>
+      <input type="number" id="gestation_weeks" name="gestation_weeks" min="0" max="45" class="field-input">
+    </div>
+    <div>
+      <label for="pregnancy_type" class="field-label">Pregnancy type</label>
+      <select id="pregnancy_type" name="pregnancy_type" class="field-input">
+        <option value="">—</option>
+        <option value="singleton">Singleton</option>
+        <option value="twins">Twins</option>
+        <option value="multiple">Multiple</option>
+      </select>
+    </div>
+    <div>
+      <label for="expected_delivery_date" class="field-label">Expected delivery date</label>
+      <input type="date" id="expected_delivery_date" name="expected_delivery_date" class="field-input">
+    </div>
+    <div class="md:col-span-2">
+      <label for="pregnancy_complications" class="field-label">Complications</label>
+      <textarea id="pregnancy_complications" name="pregnancy_complications" class="field-input" rows="2"></textarea>
+    </div>
+    <div class="md:col-span-2">
+      <label for="obstetrician_contact" class="field-label">Obstetrician contact</label>
+      <input type="text" id="obstetrician_contact" name="obstetrician_contact" class="field-input">
+    </div>
+  </div>
+</section>

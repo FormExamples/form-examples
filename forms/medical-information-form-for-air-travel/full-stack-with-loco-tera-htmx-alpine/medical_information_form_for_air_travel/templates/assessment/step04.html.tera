@@ -1,0 +1,37 @@
+<section class="card" id="step-04">
+  <h2 class="text-xl font-semibold mb-2">Step 4 — Reason for MEDIF</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    Tick every reason this MEDIF is being submitted. At least one reason is
+    required by most carriers.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_equipment" value="yes" class="mt-1">
+      <span>In-flight medical equipment required (oxygen, POC, IV pump).</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_recent_acute_event" value="yes" class="mt-1">
+      <span>Recent acute event (surgery, MI, stroke, fracture).</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_unstable_condition" value="yes" class="mt-1">
+      <span>Unstable chronic condition.</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_communicable_disease" value="yes" class="mt-1">
+      <span>Communicable disease.</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_pregnancy" value="yes" class="mt-1">
+      <span>Pregnancy beyond carrier threshold.</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_mobility_escort" value="yes" class="mt-1">
+      <span>Mobility assistance or escort required.</span>
+    </label>
+    <label class="flex items-start gap-2">
+      <input type="checkbox" name="reason_psychiatric" value="yes" class="mt-1">
+      <span>Recent psychiatric event requiring clearance.</span>
+    </label>
+  </div>
+</section>

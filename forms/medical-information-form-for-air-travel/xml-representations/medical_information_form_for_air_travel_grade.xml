@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_information_form_for_air_travel_grade SYSTEM "medical_information_form_for_air_travel_grade.dtd">
+<medical_information_form_for_air_travel_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_information_form_for_air_travel_id>770e8400-e29b-41d4-a716-446655440002</medical_information_form_for_air_travel_id>
+<computed_fitness_band>fit</computed_fitness_band>
+<final_fitness_band>fit</final_fitness_band>
+<override_reason>Example text.</override_reason>
+<desk_recommendation>Example text.</desk_recommendation>
+<physician_notes>Example text.</physician_notes>
+<valid_until>2026-01-15</valid_until>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</medical_information_form_for_air_travel_grade>

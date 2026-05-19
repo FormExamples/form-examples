@@ -1,0 +1,13 @@
+[package]
+name = "migration"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "migration"
+path = "src/lib.rs"
+
+[dependencies]
+# Migrations will be wired up in Phase 1 of `../plan.md` using
+# `sea-orm-migration = "1.1"`. For now the crate is a plain library placeholder.

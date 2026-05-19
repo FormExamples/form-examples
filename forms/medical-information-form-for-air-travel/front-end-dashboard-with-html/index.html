@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MEDIF medical-desk dashboard — Medical Information Form for Air Travel</title>
+  <meta name="description" content="Airline medical-desk dashboard for MEDIF submissions: review fitness-to-fly bands, safety flags, and clearance status across multiple passengers.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#assessments-table">Skip to assessments table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>MEDIF Medical-Desk Dashboard</h1>
+      <p class="subtitle">
+        Review Medical Information Form for Air Travel submissions by
+        fitness band, lifecycle status, and safety flags.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Filter bar -->
+    <section class="filter-bar" aria-labelledby="filter-bar-heading">
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Passenger, airline, flight, diagnosis, booking ref..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-band">Fitness band</label>
+          <select id="filter-band" class="select-input">
+            <option value="">All bands</option>
+            <option value="fit">Fit</option>
+            <option value="fit-with-conditions">Fit with conditions</option>
+            <option value="requires-review">Requires review</option>
+            <option value="unfit-to-fly">Unfit to fly</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="select-input">
+            <option value="">All statuses</option>
+            <option value="draft">Draft</option>
+            <option value="submitted">Submitted</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="cleared">Cleared</option>
+            <option value="declined">Declined</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-flags">Safety flags</label>
+          <select id="filter-flags" class="select-input">
+            <option value="">All</option>
+            <option value="yes">With flags</option>
+            <option value="no">No flags</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button
+            type="button"
+            id="filter-clear-btn"
+            class="btn btn-secondary"
+            hidden
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading MEDIF assessments...</span>
+      </div>
+    </section>
+
+    <!-- Assessments table -->
+    <section class="table-card" aria-labelledby="assessments-table-heading">
+      <h2 id="assessments-table-heading" class="visually-hidden">MEDIF assessments</h2>
+
+      <div class="table-scroll">
+        <table id="assessments-table" class="assessments-table">
+          <thead>
+            <tr id="assessments-table-head"><!-- built by js/app.js --></tr>
+          </thead>
+          <tbody id="assessments-table-body">
+            <!-- built by js/app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p id="assessments-empty-message" class="empty-message" hidden>
+        No MEDIF assessments match the current filters.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Fitness-to-fly band and safety flags are advisory clinical
+        decision support. The final clearance decision is taken by the
+        airline medical desk; the attending physician retains
+        responsibility for the clinical declaration on each MEDIF.
+        Sample data shown here is illustrative only.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

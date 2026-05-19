@@ -1,0 +1,32 @@
+[package]
+name = "medical_information_form_for_air_travel"
+version = "0.1.0"
+edition = "2021"
+publish = false
+default-run = "medical_information_form_for_air_travel"
+
+# Minimal axum-only skeleton for the MEDIF full-stack target.
+#
+# Loco 0.16 / SeaORM 1.1 / Tera will be wired up in Phase 1 of `plan.md`.
+# For now the crate exposes a `cargo build`-able axum binary that serves
+# the static Tera template files under `templates/`.
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[[bin]]
+name = "medical_information_form_for_air_travel"
+path = "src/bin/main.rs"
+
+[[bin]]
+name = "medical_information_form_for_air_travel-cli"
+path = "src/bin/cli.rs"
+
+[lib]
+name = "medical_information_form_for_air_travel"
+path = "src/lib.rs"

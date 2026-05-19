@@ -1,0 +1,46 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.medical_information_form_for_air_travel;
+
+enum ClinicianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_GENERAL_PRACTITIONER = 1;  // general-practitioner
+  ROLE_CARDIOLOGIST = 2;  // cardiologist
+  ROLE_RESPIROLOGIST = 3;  // respirologist
+  ROLE_OBSTETRICIAN = 4;  // obstetrician
+  ROLE_ONCOLOGIST = 5;  // oncologist
+  ROLE_TRAVEL_MEDICINE_PHYSICIAN = 6;  // travel-medicine-physician
+  ROLE_AEROMEDICAL_PHYSICIAN = 7;  // aeromedical-physician
+  ROLE_DISCHARGE_COORDINATOR = 8;  // discharge-coordinator
+  ROLE_OTHER = 9;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GMC = 1;  // GMC
+  REGISTRATIONBODY_NMC = 2;  // NMC
+  REGISTRATIONBODY_HCPC = 3;  // HCPC
+  REGISTRATIONBODY_GPHC = 4;  // GPhC
+  REGISTRATIONBODY_OTHER = 5;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string specialty = 6;  // TEXT
+  ClinicianRoleEnum role = 7;  // VARCHAR(40)
+  ClinicianRegistrationBodyEnum registration_body = 8;  // VARCHAR(20)
+  string registration_number = 9;  // TEXT
+  string clinic_name = 10;  // TEXT
+  string email = 11;  // TEXT
+  string phone = 12;  // TEXT
+  string postal_address_as_full_text = 13;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 14;  // CHAR(2) — max 2 chars
+  string postcode = 15;  // TEXT
+}

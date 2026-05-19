@@ -1,0 +1,6 @@
+[workspace]
+resolver = "2"
+members = [
+    "medical_information_form_for_air_travel",
+    "medical_information_form_for_air_travel/migration",
+]

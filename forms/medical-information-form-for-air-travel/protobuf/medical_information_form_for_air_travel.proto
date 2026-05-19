@@ -1,0 +1,388 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_information_form_for_air_travel
+
+syntax = "proto3";
+
+package form_examples.medical_information_form_for_air_travel;
+
+enum MedicalInformationFormForAirTravelStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_CLEARED = 4;  // cleared
+  STATUS_DECLINED = 5;  // declined
+  STATUS_URGENT = 6;  // urgent
+}
+
+enum MedicalInformationFormForAirTravelSubmitterRoleEnum {
+  SUBMITTERROLE_UNSPECIFIED = 0;
+  SUBMITTERROLE_PASSENGER = 1;  // passenger
+  SUBMITTERROLE_AGENT = 2;  // agent
+  SUBMITTERROLE_CLINICIAN = 3;  // clinician
+  SUBMITTERROLE_FAMILY_MEMBER = 4;  // family-member
+}
+
+enum MedicalInformationFormForAirTravelCabinClassEnum {
+  CABINCLASS_UNSPECIFIED = 0;
+  CABINCLASS_ECONOMY = 1;  // economy
+  CABINCLASS_PREMIUM_ECONOMY = 2;  // premium-economy
+  CABINCLASS_BUSINESS = 3;  // business
+  CABINCLASS_FIRST = 4;  // first
+}
+
+enum MedicalInformationFormForAirTravelReasonEquipmentEnum {
+  REASONEQUIPMENT_UNSPECIFIED = 0;
+  REASONEQUIPMENT_YES = 1;  // yes
+  REASONEQUIPMENT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonRecentAcuteEventEnum {
+  REASONRECENTACUTEEVENT_UNSPECIFIED = 0;
+  REASONRECENTACUTEEVENT_YES = 1;  // yes
+  REASONRECENTACUTEEVENT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonUnstableConditionEnum {
+  REASONUNSTABLECONDITION_UNSPECIFIED = 0;
+  REASONUNSTABLECONDITION_YES = 1;  // yes
+  REASONUNSTABLECONDITION_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonCommunicableDiseaseEnum {
+  REASONCOMMUNICABLEDISEASE_UNSPECIFIED = 0;
+  REASONCOMMUNICABLEDISEASE_YES = 1;  // yes
+  REASONCOMMUNICABLEDISEASE_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonPregnancyEnum {
+  REASONPREGNANCY_UNSPECIFIED = 0;
+  REASONPREGNANCY_YES = 1;  // yes
+  REASONPREGNANCY_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonMobilityEscortEnum {
+  REASONMOBILITYESCORT_UNSPECIFIED = 0;
+  REASONMOBILITYESCORT_YES = 1;  // yes
+  REASONMOBILITYESCORT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelReasonPsychiatricEnum {
+  REASONPSYCHIATRIC_UNSPECIFIED = 0;
+  REASONPSYCHIATRIC_YES = 1;  // yes
+  REASONPSYCHIATRIC_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelNyhaClassEnum {
+  NYHACLASS_UNSPECIFIED = 0;
+  NYHACLASS_I = 1;  // I
+  NYHACLASS_II = 2;  // II
+  NYHACLASS_III = 3;  // III
+  NYHACLASS_IV = 4;  // IV
+}
+
+enum MedicalInformationFormForAirTravelOnAnticoagulantEnum {
+  ONANTICOAGULANT_UNSPECIFIED = 0;
+  ONANTICOAGULANT_YES = 1;  // yes
+  ONANTICOAGULANT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelPacemakerOrIcdEnum {
+  PACEMAKERORICD_UNSPECIFIED = 0;
+  PACEMAKERORICD_YES = 1;  // yes
+  PACEMAKERORICD_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelUnstableAnginaEnum {
+  UNSTABLEANGINA_UNSPECIFIED = 0;
+  UNSTABLEANGINA_YES = 1;  // yes
+  UNSTABLEANGINA_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelHypoxicChallengeResultEnum {
+  HYPOXICCHALLENGERESULT_UNSPECIFIED = 0;
+  HYPOXICCHALLENGERESULT_PASS = 1;  // pass
+  HYPOXICCHALLENGERESULT_BORDERLINE = 2;  // borderline
+  HYPOXICCHALLENGERESULT_FAIL = 3;  // fail
+  HYPOXICCHALLENGERESULT_NOT_PERFORMED = 4;  // not-performed
+}
+
+enum MedicalInformationFormForAirTravelAsthmaSeverityEnum {
+  ASTHMASEVERITY_UNSPECIFIED = 0;
+  ASTHMASEVERITY_NONE = 1;  // none
+  ASTHMASEVERITY_MILD_CONTROLLED = 2;  // mild-controlled
+  ASTHMASEVERITY_MODERATE = 3;  // moderate
+  ASTHMASEVERITY_SEVERE_UNCONTROLLED = 4;  // severe-uncontrolled
+}
+
+enum MedicalInformationFormForAirTravelCopdSeverityEnum {
+  COPDSEVERITY_UNSPECIFIED = 0;
+  COPDSEVERITY_NONE = 1;  // none
+  COPDSEVERITY_MILD = 2;  // mild
+  COPDSEVERITY_MODERATE = 3;  // moderate
+  COPDSEVERITY_SEVERE = 4;  // severe
+}
+
+enum MedicalInformationFormForAirTravelCpapOrBipapUseEnum {
+  CPAPORBIPAPUSE_UNSPECIFIED = 0;
+  CPAPORBIPAPUSE_NONE = 1;  // none
+  CPAPORBIPAPUSE_CPAP = 2;  // cpap
+  CPAPORBIPAPUSE_BIPAP = 3;  // bipap
+  CPAPORBIPAPUSE_BOTH = 4;  // both
+}
+
+enum MedicalInformationFormForAirTravelCabinGasRiskEnum {
+  CABINGASRISK_UNSPECIFIED = 0;
+  CABINGASRISK_NONE = 1;  // none
+  CABINGASRISK_INTRA_OCULAR_GAS = 2;  // intra-ocular-gas
+  CABINGASRISK_INTRA_CRANIAL_GAS = 3;  // intra-cranial-gas
+  CABINGASRISK_INTRA_ABDOMINAL_GAS = 4;  // intra-abdominal-gas
+  CABINGASRISK_PLASTER_CAST = 5;  // plaster-cast
+  CABINGASRISK_PNEUMOTHORAX = 6;  // pneumothorax
+  CABINGASRISK_OTHER = 7;  // other
+}
+
+enum MedicalInformationFormForAirTravelRecentFractureCastEnum {
+  RECENTFRACTURECAST_UNSPECIFIED = 0;
+  RECENTFRACTURECAST_YES = 1;  // yes
+  RECENTFRACTURECAST_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelScubaDivingWithin24hEnum {
+  SCUBADIVINGWITHIN24H_UNSPECIFIED = 0;
+  SCUBADIVINGWITHIN24H_YES = 1;  // yes
+  SCUBADIVINGWITHIN24H_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelIsPregnantEnum {
+  ISPREGNANT_UNSPECIFIED = 0;
+  ISPREGNANT_YES = 1;  // yes
+  ISPREGNANT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelPregnancyTypeEnum {
+  PREGNANCYTYPE_UNSPECIFIED = 0;
+  PREGNANCYTYPE_SINGLETON = 1;  // singleton
+  PREGNANCYTYPE_TWINS = 2;  // twins
+  PREGNANCYTYPE_MULTIPLE = 3;  // multiple
+}
+
+enum MedicalInformationFormForAirTravelCommunicableDiseaseStatusEnum {
+  COMMUNICABLEDISEASESTATUS_UNSPECIFIED = 0;
+  COMMUNICABLEDISEASESTATUS_NONE = 1;  // none
+  COMMUNICABLEDISEASESTATUS_INFECTIOUS = 2;  // infectious
+  COMMUNICABLEDISEASESTATUS_CONVALESCENT = 3;  // convalescent
+  COMMUNICABLEDISEASESTATUS_CLEARED = 4;  // cleared
+}
+
+enum MedicalInformationFormForAirTravelIsolationRequiredEnum {
+  ISOLATIONREQUIRED_UNSPECIFIED = 0;
+  ISOLATIONREQUIRED_YES = 1;  // yes
+  ISOLATIONREQUIRED_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresSupplementalOxygenEnum {
+  REQUIRESSUPPLEMENTALOXYGEN_UNSPECIFIED = 0;
+  REQUIRESSUPPLEMENTALOXYGEN_YES = 1;  // yes
+  REQUIRESSUPPLEMENTALOXYGEN_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelOxygenDurationEnum {
+  OXYGENDURATION_UNSPECIFIED = 0;
+  OXYGENDURATION_CONTINUOUS = 1;  // continuous
+  OXYGENDURATION_AS_REQUIRED = 2;  // as-required
+  OXYGENDURATION_ON_EXERTION = 3;  // on-exertion
+  OXYGENDURATION_SLEEP_ONLY = 4;  // sleep-only
+}
+
+enum MedicalInformationFormForAirTravelRequiresPocEnum {
+  REQUIRESPOC_UNSPECIFIED = 0;
+  REQUIRESPOC_YES = 1;  // yes
+  REQUIRESPOC_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresStretcherEnum {
+  REQUIRESSTRETCHER_UNSPECIFIED = 0;
+  REQUIRESSTRETCHER_YES = 1;  // yes
+  REQUIRESSTRETCHER_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresIncubatorEnum {
+  REQUIRESINCUBATOR_UNSPECIFIED = 0;
+  REQUIRESINCUBATOR_YES = 1;  // yes
+  REQUIRESINCUBATOR_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresIvPumpEnum {
+  REQUIRESIVPUMP_UNSPECIFIED = 0;
+  REQUIRESIVPUMP_YES = 1;  // yes
+  REQUIRESIVPUMP_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresMedicalEscortEnum {
+  REQUIRESMEDICALESCORT_UNSPECIFIED = 0;
+  REQUIRESMEDICALESCORT_YES = 1;  // yes
+  REQUIRESMEDICALESCORT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresExtraSeatEnum {
+  REQUIRESEXTRASEAT_UNSPECIFIED = 0;
+  REQUIRESEXTRASEAT_YES = 1;  // yes
+  REQUIRESEXTRASEAT_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRequiresAccessibleLavatoryEnum {
+  REQUIRESACCESSIBLELAVATORY_UNSPECIFIED = 0;
+  REQUIRESACCESSIBLELAVATORY_YES = 1;  // yes
+  REQUIRESACCESSIBLELAVATORY_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelWheelchairTypeEnum {
+  WHEELCHAIRTYPE_UNSPECIFIED = 0;
+  WHEELCHAIRTYPE_NONE = 1;  // none
+  WHEELCHAIRTYPE_WCHR = 2;  // WCHR
+  WHEELCHAIRTYPE_WCHS = 3;  // WCHS
+  WHEELCHAIRTYPE_WCHC = 4;  // WCHC
+}
+
+enum MedicalInformationFormForAirTravelAccompanyingCarerEnum {
+  ACCOMPANYINGCARER_UNSPECIFIED = 0;
+  ACCOMPANYINGCARER_YES = 1;  // yes
+  ACCOMPANYINGCARER_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelDangerousGoodsBatteryDeclarationEnum {
+  DANGEROUSGOODSBATTERYDECLARATION_UNSPECIFIED = 0;
+  DANGEROUSGOODSBATTERYDECLARATION_YES = 1;  // yes
+  DANGEROUSGOODSBATTERYDECLARATION_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelSharpsInCabinEnum {
+  SHARPSINCABIN_UNSPECIFIED = 0;
+  SHARPSINCABIN_YES = 1;  // yes
+  SHARPSINCABIN_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelRefrigeratedMedicationEnum {
+  REFRIGERATEDMEDICATION_UNSPECIFIED = 0;
+  REFRIGERATEDMEDICATION_YES = 1;  // yes
+  REFRIGERATEDMEDICATION_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelCustomsDocumentationAvailableEnum {
+  CUSTOMSDOCUMENTATIONAVAILABLE_UNSPECIFIED = 0;
+  CUSTOMSDOCUMENTATIONAVAILABLE_YES = 1;  // yes
+  CUSTOMSDOCUMENTATIONAVAILABLE_NO = 2;  // no
+}
+
+enum MedicalInformationFormForAirTravelPhysicianDeclarationEnum {
+  PHYSICIANDECLARATION_UNSPECIFIED = 0;
+  PHYSICIANDECLARATION_FIT = 1;  // fit
+  PHYSICIANDECLARATION_FIT_WITH_CONDITIONS = 2;  // fit-with-conditions
+  PHYSICIANDECLARATION_UNFIT = 3;  // unfit
+  PHYSICIANDECLARATION_UNABLE_TO_DETERMINE = 4;  // unable-to-determine
+}
+
+message MedicalInformationFormForAirTravel {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MedicalInformationFormForAirTravelStatusEnum status = 7;  // VARCHAR(20)
+  string submitter_name = 8;  // TEXT
+  MedicalInformationFormForAirTravelSubmitterRoleEnum submitter_role = 9;  // VARCHAR(20)
+  string submitter_email = 10;  // TEXT
+  string submitter_phone = 11;  // TEXT
+  string submitter_organisation = 12;  // TEXT
+  string airline_booking_reference = 13;  // VARCHAR(20) — max 20 chars
+  string airline_iata_code = 14;  // CHAR(2) — max 2 chars
+  string airline_name = 15;  // TEXT
+  string outbound_flight_number = 16;  // VARCHAR(10) — max 10 chars
+  string outbound_date = 17;  // DATE — iso 8601 date
+  string outbound_origin_iata = 18;  // CHAR(3) — max 3 chars
+  string outbound_destination_iata = 19;  // CHAR(3) — max 3 chars
+  string return_flight_number = 20;  // VARCHAR(10) — max 10 chars
+  string return_date = 21;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelCabinClassEnum cabin_class = 22;  // VARCHAR(20)
+  int32 sector_duration_minutes = 23;  // INTEGER
+  string transit_airports_iata = 24;  // TEXT
+  string special_assistance_codes = 25;  // TEXT
+  MedicalInformationFormForAirTravelReasonEquipmentEnum reason_equipment = 26;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonRecentAcuteEventEnum reason_recent_acute_event = 27;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonUnstableConditionEnum reason_unstable_condition = 28;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonCommunicableDiseaseEnum reason_communicable_disease = 29;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonPregnancyEnum reason_pregnancy = 30;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonMobilityEscortEnum reason_mobility_escort = 31;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelReasonPsychiatricEnum reason_psychiatric = 32;  // VARCHAR(5)
+  string primary_diagnosis = 33;  // TEXT
+  string icd10_codes = 34;  // TEXT
+  string diagnosis_date = 35;  // DATE — iso 8601 date
+  string current_treatment = 36;  // TEXT
+  string last_admission_date = 37;  // DATE — iso 8601 date
+  string last_discharge_date = 38;  // DATE — iso 8601 date
+  string last_specialist_review_date = 39;  // DATE — iso 8601 date
+  int32 resting_systolic_bp = 40;  // INTEGER
+  int32 resting_diastolic_bp = 41;  // INTEGER
+  int32 resting_heart_rate = 42;  // INTEGER
+  MedicalInformationFormForAirTravelNyhaClassEnum nyha_class = 43;  // VARCHAR(5)
+  string recent_mi_date = 44;  // DATE — iso 8601 date
+  string recent_stent_date = 45;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelOnAnticoagulantEnum on_anticoagulant = 46;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelPacemakerOrIcdEnum pacemaker_or_icd = 47;  // VARCHAR(5)
+  int32 exercise_tolerance_metres = 48;  // INTEGER
+  MedicalInformationFormForAirTravelUnstableAnginaEnum unstable_angina = 49;  // VARCHAR(5)
+  double resting_spo2_percent = 50;  // NUMERIC(4,1) — numeric(4,1)
+  double predicted_inflight_spo2_percent = 51;  // NUMERIC(4,1) — numeric(4,1)
+  MedicalInformationFormForAirTravelHypoxicChallengeResultEnum hypoxic_challenge_result = 52;  // VARCHAR(20)
+  string recent_pneumothorax_date = 53;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelAsthmaSeverityEnum asthma_severity = 54;  // VARCHAR(20)
+  MedicalInformationFormForAirTravelCopdSeverityEnum copd_severity = 55;  // VARCHAR(20)
+  MedicalInformationFormForAirTravelCpapOrBipapUseEnum cpap_or_bipap_use = 56;  // VARCHAR(20)
+  string recent_pulmonary_embolism_date = 57;  // DATE — iso 8601 date
+  string last_surgery_date = 58;  // DATE — iso 8601 date
+  string last_surgery_site = 59;  // TEXT
+  MedicalInformationFormForAirTravelCabinGasRiskEnum cabin_gas_risk = 60;  // VARCHAR(30)
+  MedicalInformationFormForAirTravelRecentFractureCastEnum recent_fracture_cast = 61;  // VARCHAR(5)
+  string recent_dvt_date = 62;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelScubaDivingWithin24hEnum scuba_diving_within_24h = 63;  // VARCHAR(5)
+  string recent_stroke_date = 64;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelIsPregnantEnum is_pregnant = 65;  // VARCHAR(5)
+  int32 gestation_weeks = 66;  // INTEGER
+  MedicalInformationFormForAirTravelPregnancyTypeEnum pregnancy_type = 67;  // VARCHAR(20)
+  string pregnancy_complications = 68;  // TEXT
+  string expected_delivery_date = 69;  // DATE — iso 8601 date
+  string obstetrician_contact = 70;  // TEXT
+  MedicalInformationFormForAirTravelCommunicableDiseaseStatusEnum communicable_disease_status = 71;  // VARCHAR(30)
+  string last_symptom_date = 72;  // DATE — iso 8601 date
+  MedicalInformationFormForAirTravelIsolationRequiredEnum isolation_required = 73;  // VARCHAR(5)
+  string vaccination_status = 74;  // TEXT
+  string current_antimicrobials = 75;  // TEXT
+  MedicalInformationFormForAirTravelRequiresSupplementalOxygenEnum requires_supplemental_oxygen = 76;  // VARCHAR(5)
+  double oxygen_flow_rate_lpm = 77;  // NUMERIC(3,1) — numeric(3,1)
+  MedicalInformationFormForAirTravelOxygenDurationEnum oxygen_duration = 78;  // VARCHAR(20)
+  MedicalInformationFormForAirTravelRequiresPocEnum requires_poc = 79;  // VARCHAR(5)
+  string poc_make_model = 80;  // TEXT
+  double poc_battery_hours = 81;  // NUMERIC(4,1) — numeric(4,1)
+  MedicalInformationFormForAirTravelRequiresStretcherEnum requires_stretcher = 82;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRequiresIncubatorEnum requires_incubator = 83;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRequiresIvPumpEnum requires_iv_pump = 84;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRequiresMedicalEscortEnum requires_medical_escort = 85;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRequiresExtraSeatEnum requires_extra_seat = 86;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRequiresAccessibleLavatoryEnum requires_accessible_lavatory = 87;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelWheelchairTypeEnum wheelchair_type = 88;  // VARCHAR(10)
+  MedicalInformationFormForAirTravelAccompanyingCarerEnum accompanying_carer = 89;  // VARCHAR(5)
+  string regular_medications = 90;  // TEXT
+  string controlled_drugs = 91;  // TEXT
+  MedicalInformationFormForAirTravelDangerousGoodsBatteryDeclarationEnum dangerous_goods_battery_declaration = 92;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelSharpsInCabinEnum sharps_in_cabin = 93;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelRefrigeratedMedicationEnum refrigerated_medication = 94;  // VARCHAR(5)
+  MedicalInformationFormForAirTravelCustomsDocumentationAvailableEnum customs_documentation_available = 95;  // VARCHAR(5)
+  int32 haemoglobin_g_per_l = 96;  // INTEGER
+  MedicalInformationFormForAirTravelPhysicianDeclarationEnum physician_declaration = 97;  // VARCHAR(20)
+  string physician_signature_name = 98;  // TEXT
+  string physician_signature_date = 99;  // DATE — iso 8601 date
+  string valid_until_date = 100;  // DATE — iso 8601 date
+  string additional_notes = 101;  // TEXT
+}

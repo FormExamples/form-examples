@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE patient SYSTEM "patient.dtd">
+<patient>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<birth_date>2026-01-15</birth_date>
+<sex_at_birth>female</sex_at_birth>
+<nationality_as_iso_3166_1_alpha_2></nationality_as_iso_3166_1_alpha_2>
+<passport_number></passport_number>
+<united_kingdom_nhs_number>mg/dL</united_kingdom_nhs_number>
+<national_health_id>660e8400-e29b-41d4-a716-446655440001</national_health_id>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<postcode>SW1A 1AA</postcode>
+<emergency_contact_name>Example</emergency_contact_name>
+<emergency_contact_relationship>Spouse</emergency_contact_relationship>
+<emergency_contact_phone>07700900001</emergency_contact_phone>
+<weight_as_kg>70.0</weight_as_kg>
+<height_as_cm>170.0</height_as_cm>
+</patient>

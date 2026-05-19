@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/medical-information-form-for-air-travel/full-stack-with-loco-tera-htmx-alpine-setup)",
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(bin/test-form medical-information-form-for-air-travel *)",
+      "Bash(pnpm install *)",
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(pnpm --version)",
+      "Bash(/bin/sh -c \"set -euf; pnpm install\")",
+      "Bash(echo \"EXIT_FORM=$?\")",
+      "Bash(pnpm run *)",
+      "Bash(echo \"EXIT_FORM_CHECK=$?\")",
+      "Bash(echo \"EXIT_DASH_CHECK=$?\")"
+    ]
+  }
+}
