@@ -2,7 +2,13 @@
 set -euf
 top="$(git rev-parse --show-toplevel)"
 
-mkdir_with_ai() (
+form_name_as_kebab="$1"
+form_name_as_snake=$(echo "$form_name_as_kebab" | snake-case)
+form_dir="$top/forms/$form_name_as_kebab"
+
+# Make a directory with AI-related files, in an idempotent manner.
+# This function is only needed if there's a glitch with ./etc/skeleton.
+mkdir_with_ai_idempotent() (
   # dir="$1"
   mkdir -p "$1"
   cd "$1"
@@ -10,49 +16,48 @@ mkdir_with_ai() (
   ln -sfn index.md README.md
   touch AGENTS.md
   test -f CLAUDE.md || echo "@AGENTS.md" > CLAUDE.md
-
-)
-
-mkdir_with_ai_planning() (
-  # dir="$1"
-  mkdir_with_ai "$1"
-  cd "$1"
   touch plan.md
   touch tasks.md
 )
 
-dir="$top/forms/$1"
-mkdir_with_ai_planning "$dir"
+# Create a form's directories and important files, in a idempotent manner.
+# This function is only needed if there's a glitch with ./etc/skeleton.
+create_idempotent() {
+    mkdir_with_ai_idempotent "$dir"
+    mkdir_with_ai_idempotent "$dir/doc"
+    mkdir_with_ai_idempotent "$dir/fhir-r5"
+    mkdir_with_ai_idempotent "$dir/front-end-dashboard-with-html"
+    mkdir_with_ai_idempotent "$dir/front-end-dashboard-with-svelte"
+    mkdir_with_ai_idempotent "$dir/front-end-form-with-html"
+    mkdir_with_ai_idempotent "$dir/front-end-form-with-svelte"
+    mkdir_with_ai_idempotent "$dir/full-stack-with-loco-tera-htmx-alpine"
+    mkdir_with_ai_idempotent "$dir/full-stack-with-loco-tera-htmx-alpine-new"
+    mkdir_with_ai_idempotent "$dir/protobuf"
+    mkdir_with_ai_idempotent "$dir/sql-migrations"
+    mkdir_with_ai_idempotent "$dir/typespec"
+    mkdir_with_ai_idempotent "$dir/xml-representations"
+}
 
-mkdir_with_ai "$dir/doc"
-mkdir_with_ai "$dir/fhir-r5"
-mkdir_with_ai "$dir/sql-migrations"
-rsync -av "$top/etc/skel/sql-migrations/00_create_extensions.sql" "$dir/sql-migrations"
-rsync -av "$top/etc/skel/sql-migrations/01_create_function_set_updated_at.sql" "$dir/sql-migrations"
-mkdir_with_ai "$dir/xml-representations"
-
-mkdir_with_ai_planning "$dir/front-end-form-with-html"
-mkdir_with_ai_planning "$dir/front-end-form-with-svelte"
-mkdir_with_ai_planning "$dir/front-end-dashboard-with-html"
-mkdir_with_ai_planning "$dir/front-end-dashboard-with-svelte"
-mkdir_with_ai_planning "$dir/full-stack-with-loco-tera-htmx-alpine"
-mkdir_with_ai_planning "$dir/full-stack-with-loco-tera-htmx-alpine-new"
-
-rsync -av "$top/skel/" "$dir/"
-
-bin/forms-as-kebab-case | 
-while read form; do 
-    snake=$(echo "$form" | snake-case)
-    f="$dir/full-stack-with-loco-tera-htmx-alpine-new/00-new.sh"
-    cat << EOF > "$f"
+create_form_loco_script() {
+    # form_dir="$1"
+    # form_name_as_snake="$2"
+    file="$form_dir/full-stack-with-loco-tera-htmx-alpine/00-new.sh"
+    cat << EOF > "$file"
 #!/bin/sh
 set -euf
 
 createuser --host=localhost --port=5432 --username=postgres --login --createdb loco || :
-createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_development || :
-createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_test || :
-createdb --host=localhost --port=5432 --username=postgres --owner=loco ${snake}_production || :
-loco new --name ${form} --db postgres --bg async --assets serverside
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_development || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_test || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_production || :
+loco new --name ${form_name_as_kebab} --db postgres --bg async --assets serverside
 EOF
-  chmod +x "$f"
-done
+    chmod +x "$file"
+}
+
+main() {
+    rsync -av "$top/etc/skeleton/" "$form_dir/"
+    create_form_loco_script "$form_dir" "$form_name_as_snake"
+}
+
+main
