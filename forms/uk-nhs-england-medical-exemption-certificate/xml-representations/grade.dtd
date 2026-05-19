@@ -1,0 +1,15 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,application_id,outcome,redirect_to,result_category,result_score,result_notes,valid_from,valid_until,validity_years,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT application_id (#PCDATA)>
+<!ELEMENT outcome (#PCDATA)>
+<!ELEMENT redirect_to (#PCDATA)>
+<!ELEMENT result_category (#PCDATA)>
+<!ELEMENT result_score (#PCDATA)>
+<!ELEMENT result_notes (#PCDATA)>
+<!ELEMENT valid_from (#PCDATA)>
+<!ELEMENT valid_until (#PCDATA)>
+<!ELEMENT validity_years (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

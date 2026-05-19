@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eligible_condition SYSTEM "eligible_condition.dtd">
+<eligible_condition>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<code>permanent-fistula</code>
+<label></label>
+<description>Example text.</description>
+<requires_appliance_detail>yes</requires_appliance_detail>
+<requires_substitution_therapy_detail>yes</requires_substitution_therapy_detail>
+<requires_disability_attestation>yes</requires_disability_attestation>
+<requires_cancer_detail>yes</requires_cancer_detail>
+<excludes_diet_only_diabetes>yes</excludes_diet_only_diabetes>
+<snomed_ct_reference></snomed_ct_reference>
+<icd10_reference></icd10_reference>
+</eligible_condition>

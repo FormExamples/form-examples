@@ -1,0 +1,15 @@
+<!ELEMENT eligible_condition (id,created_at,updated_at,deleted_at,code,label,description,requires_appliance_detail,requires_substitution_therapy_detail,requires_disability_attestation,requires_cancer_detail,excludes_diet_only_diabetes,snomed_ct_reference,icd10_reference)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
+<!ELEMENT label (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT requires_appliance_detail (#PCDATA)>
+<!ELEMENT requires_substitution_therapy_detail (#PCDATA)>
+<!ELEMENT requires_disability_attestation (#PCDATA)>
+<!ELEMENT requires_cancer_detail (#PCDATA)>
+<!ELEMENT excludes_diet_only_diabetes (#PCDATA)>
+<!ELEMENT snomed_ct_reference (#PCDATA)>
+<!ELEMENT icd10_reference (#PCDATA)>

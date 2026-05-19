@@ -1,0 +1,131 @@
+{% extends "base.html.tera" %}
+
+{% block title %}FP92A — Report{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;">
+  <h1>FP92A — Eligibility Report</h1>
+  <p style="color:#555;">Report generated: {{ timestamp }}</p>
+  <p style="color:#555;">Application ID: {{ id }}</p>
+
+  <h2>Outcome</h2>
+  <p>
+    {% if result.grade.outcome == "eligible" %}
+      <strong style="color:#080;">Eligible</strong> — qualifying condition(s) attested.
+    {% elif result.grade.outcome == "requires-clarification" %}
+      <strong style="color:#a35100;">Requires clarification</strong> — see fired rules and flags below.
+    {% else %}
+      <strong style="color:#a00;">Not eligible</strong> on the FP92A route.
+    {% endif %}
+  </p>
+
+  {% if result.grade.redirectTo %}
+    <div style="background:#fef0e6;border:1px solid #f5b97c;padding:0.8rem;border-radius:4px;color:#a35100;margin:0.6rem 0;">
+      <strong>Redirect:</strong>
+      {% if result.grade.redirectTo == "FW8" %}
+        Direct the patient to the <strong>FW8 maternity exemption</strong> — FP92A is not the correct route.
+      {% elif result.grade.redirectTo == "age-exemption" %}
+        Patient is already entitled to free prescriptions on <strong>age grounds</strong> — FP92A is not required.
+      {% else %}
+        Suggested alternative: {{ result.grade.redirectTo }}.
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <h2>Patient &amp; Practitioner</h2>
+  <p>
+    <strong>Patient:</strong> {{ data.patient.title }} {{ data.patient.forenames }} {{ data.patient.surname }} —
+    NHS: {{ data.patient.unitedKingdomNhsNumber | default(value="—") }} — DOB: {{ data.patient.birthDate | default(value="—") }}
+  </p>
+  <p>
+    <strong>Practitioner:</strong> {{ data.practitioner.name | default(value="—") }} ({{ data.practitioner.registrationBody | default(value="—") }} {{ data.practitioner.registrationNumber | default(value="—") }})<br>
+    <strong>Practice:</strong> {{ data.practitioner.practiceName | default(value="—") }}
+  </p>
+
+  <h2>Eligible conditions</h2>
+  {% if result.grade.eligibleConditionCodes | length == 0 %}
+    <p style="color:#a00;">No qualifying condition met the FP92A criteria.</p>
+  {% else %}
+    <ul style="padding-left:1.2rem;">
+      {% for code in result.grade.eligibleConditionCodes %}
+        <li><code>{{ code }}</code></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>Validity window</h2>
+  <p>
+    Valid from <strong>{{ result.grade.validFrom }}</strong> until
+    <strong>{{ result.grade.validUntil }}</strong>
+    ({{ result.grade.validityYears }} years).
+  </p>
+
+  <h2>Fired rules</h2>
+  {% if result.grade.firedRules | length == 0 %}
+    <p style="color:#080;">No rules fired.</p>
+  {% else %}
+    <ul style="padding-left:1.2rem;">
+      {% for r in result.grade.firedRules %}
+        <li style="margin-bottom:0.6rem;">
+          <span style="display:inline-block;padding:0.1rem 0.5rem;border-radius:3px;font-size:0.8rem;
+            {% if r.priority == 'urgent' %}background:#fee;color:#900;border:1px solid #f99;{% endif %}
+            {% if r.priority == 'high' %}background:#fef0e6;color:#a35100;border:1px solid #f5b97c;{% endif %}
+            {% if r.priority == 'medium' %}background:#fffbe6;color:#8a6d00;border:1px solid #f1d76b;{% endif %}
+            {% if r.priority == 'low' %}background:#eef;color:#226;border:1px solid #99d;{% endif %}">
+            {{ r.priority | upper }}
+          </span>
+          <strong>{{ r.id }}:</strong> {{ r.message }}
+          {% if r.contributingConditionCode %}<span style="color:#888;font-size:0.85rem;"> ({{ r.contributingConditionCode }})</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>Additional flags</h2>
+  {% if result.grade.additionalFlags | length == 0 %}
+    <p style="color:#080;">No additional flags raised.</p>
+  {% else %}
+    <ul style="padding-left:1.2rem;">
+      {% for flag in result.grade.additionalFlags %}
+        <li style="margin-bottom:0.6rem;">
+          <span style="display:inline-block;padding:0.1rem 0.5rem;border-radius:3px;font-size:0.8rem;
+            {% if flag.priority == 'urgent' %}background:#fee;color:#900;border:1px solid #f99;{% endif %}
+            {% if flag.priority == 'high' %}background:#fef0e6;color:#a35100;border:1px solid #f5b97c;{% endif %}
+            {% if flag.priority == 'medium' %}background:#fffbe6;color:#8a6d00;border:1px solid #f1d76b;{% endif %}
+            {% if flag.priority == 'low' %}background:#eef;color:#226;border:1px solid #99d;{% endif %}">
+            {{ flag.priority | upper }}
+          </span>
+          <strong>{{ flag.category }}:</strong> {{ flag.message }}
+          <span style="color:#888;font-size:0.85rem;">({{ flag.id }})</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {# ── PDF-ready summary ─────────────────────────────── #}
+  <div style="border:1px solid #999;border-radius:4px;padding:1rem;margin-top:1.5rem;background:#fff;page-break-before:always;">
+    <h2 style="margin-top:0;">FP92A — Printable Summary</h2>
+    <p style="color:#555;font-size:0.9rem;">Print this page, have the practitioner sign in ink, and post the original FP92A to NHSBSA Bridge House. NHSBSA does not accept scans, photocopies, downloaded copies, or printed copies of pre-signed forms.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+      <tr><td><strong>Patient</strong></td><td>{{ data.patient.title }} {{ data.patient.forenames }} {{ data.patient.surname }}</td></tr>
+      <tr><td><strong>Date of birth</strong></td><td>{{ data.patient.birthDate }}</td></tr>
+      <tr><td><strong>NHS number</strong></td><td>{{ data.patient.unitedKingdomNhsNumber }}</td></tr>
+      <tr><td><strong>Address</strong></td><td>{{ data.patient.postalAddressAsFullText }} {{ data.patient.postcode }}</td></tr>
+      <tr><td><strong>Practitioner</strong></td><td>{{ data.practitioner.name }} ({{ data.practitioner.registrationBody }} {{ data.practitioner.registrationNumber }})</td></tr>
+      <tr><td><strong>Practice</strong></td><td>{{ data.practitioner.practiceName }} — {{ data.practitioner.postalAddressAsFullText }} {{ data.practitioner.postcode }}</td></tr>
+      <tr><td><strong>Date of completion</strong></td><td>{{ data.practitioner.completedDate }}</td></tr>
+      <tr><td><strong>Outcome</strong></td><td>{{ result.grade.outcome }}</td></tr>
+      <tr><td><strong>Valid</strong></td><td>{{ result.grade.validFrom }} → {{ result.grade.validUntil }}</td></tr>
+    </table>
+  </div>
+
+  <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+    <a href="/application/{{ id }}" style="padding:0.5rem 1.2rem;border:1px solid #0070f3;color:#0070f3;border-radius:4px;text-decoration:none;">
+      Edit Application
+    </a>
+    <a href="/" style="padding:0.5rem 1.2rem;border:1px solid #ccc;color:#333;border-radius:4px;text-decoration:none;">
+      Home
+    </a>
+  </div>
+</div>
+{% endblock %}

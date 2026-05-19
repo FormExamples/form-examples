@@ -1,0 +1,67 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: eligible_condition
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_england_medical_exemption_certificate;
+
+enum EligibleConditionCodeEnum {
+  CODE_UNSPECIFIED = 0;
+  CODE_PERMANENT_FISTULA = 1;  // permanent-fistula
+  CODE_HYPOADRENALISM = 2;  // hypoadrenalism
+  CODE_DIABETES_INSIPIDUS_OR_HYPOPITUITARISM = 3;  // diabetes-insipidus-or-hypopituitarism
+  CODE_DIABETES_MELLITUS_NOT_DIET_ONLY = 4;  // diabetes-mellitus-not-diet-only
+  CODE_HYPOPARATHYROIDISM = 5;  // hypoparathyroidism
+  CODE_MYASTHENIA_GRAVIS = 6;  // myasthenia-gravis
+  CODE_MYXOEDEMA = 7;  // myxoedema
+  CODE_EPILEPSY_ON_ANTICONVULSANT = 8;  // epilepsy-on-anticonvulsant
+  CODE_CONTINUING_PHYSICAL_DISABILITY = 9;  // continuing-physical-disability
+  CODE_CANCER_OR_EFFECTS = 10;  // cancer-or-effects
+}
+
+enum EligibleConditionRequiresApplianceDetailEnum {
+  REQUIRESAPPLIANCEDETAIL_UNSPECIFIED = 0;
+  REQUIRESAPPLIANCEDETAIL_YES = 1;  // yes
+  REQUIRESAPPLIANCEDETAIL_NO = 2;  // no
+}
+
+enum EligibleConditionRequiresSubstitutionTherapyDetailEnum {
+  REQUIRESSUBSTITUTIONTHERAPYDETAIL_UNSPECIFIED = 0;
+  REQUIRESSUBSTITUTIONTHERAPYDETAIL_YES = 1;  // yes
+  REQUIRESSUBSTITUTIONTHERAPYDETAIL_NO = 2;  // no
+}
+
+enum EligibleConditionRequiresDisabilityAttestationEnum {
+  REQUIRESDISABILITYATTESTATION_UNSPECIFIED = 0;
+  REQUIRESDISABILITYATTESTATION_YES = 1;  // yes
+  REQUIRESDISABILITYATTESTATION_NO = 2;  // no
+}
+
+enum EligibleConditionRequiresCancerDetailEnum {
+  REQUIRESCANCERDETAIL_UNSPECIFIED = 0;
+  REQUIRESCANCERDETAIL_YES = 1;  // yes
+  REQUIRESCANCERDETAIL_NO = 2;  // no
+}
+
+enum EligibleConditionExcludesDietOnlyDiabetesEnum {
+  EXCLUDESDIETONLYDIABETES_UNSPECIFIED = 0;
+  EXCLUDESDIETONLYDIABETES_YES = 1;  // yes
+  EXCLUDESDIETONLYDIABETES_NO = 2;  // no
+}
+
+message EligibleCondition {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  EligibleConditionCodeEnum code = 5;  // TEXT
+  string label = 6;  // VARCHAR(255) — max 255 chars
+  string description = 7;  // TEXT
+  EligibleConditionRequiresApplianceDetailEnum requires_appliance_detail = 8;  // VARCHAR(5)
+  EligibleConditionRequiresSubstitutionTherapyDetailEnum requires_substitution_therapy_detail = 9;  // VARCHAR(5)
+  EligibleConditionRequiresDisabilityAttestationEnum requires_disability_attestation = 10;  // VARCHAR(5)
+  EligibleConditionRequiresCancerDetailEnum requires_cancer_detail = 11;  // VARCHAR(5)
+  EligibleConditionExcludesDietOnlyDiabetesEnum excludes_diet_only_diabetes = 12;  // VARCHAR(5)
+  string snomed_ct_reference = 13;  // VARCHAR(50) — max 50 chars
+  string icd10_reference = 14;  // VARCHAR(20) — max 20 chars
+}

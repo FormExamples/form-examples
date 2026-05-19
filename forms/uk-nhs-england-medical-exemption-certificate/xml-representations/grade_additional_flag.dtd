@@ -1,0 +1,10 @@
+<!ELEMENT grade_additional_flag (id,created_at,updated_at,deleted_at,grade_id,flag_id,category,description,priority)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT grade_id (#PCDATA)>
+<!ELEMENT flag_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>

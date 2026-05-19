@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FP92A — Practitioner Dashboard</title>
+  <meta name="description" content="UK NHSBSA FP92A medical exemption certificate dashboard — review submitted, posted, and issued applications.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#applications-table">Skip to applications table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>FP92A — Practitioner Dashboard</h1>
+      <p class="subtitle">UK NHS Business Services Authority medical exemption certificate log.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="filter-bar" aria-labelledby="filter-heading">
+      <h2 id="filter-heading" class="visually-hidden">Filters</h2>
+      <div class="filter-grid">
+        <div class="filter-field">
+          <label for="filter-search">Search</label>
+          <input id="filter-search" type="search" placeholder="Patient name, NHS number, certificate number…">
+        </div>
+        <div class="filter-field">
+          <label for="filter-outcome">Outcome</label>
+          <select id="filter-outcome">
+            <option value="">All outcomes</option>
+            <option value="eligible">Eligible</option>
+            <option value="ineligible">Ineligible</option>
+            <option value="requires-clarification">Requires clarification</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="filter-status">Status</label>
+          <select id="filter-status">
+            <option value="">All statuses</option>
+            <option value="draft">Draft</option>
+            <option value="ready-to-post">Ready to post</option>
+            <option value="posted">Posted</option>
+            <option value="issued">Issued</option>
+            <option value="rejected">Rejected</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="filter-condition">Condition</label>
+          <select id="filter-condition">
+            <option value="">All conditions</option>
+            <option value="permanent-fistula">Permanent fistula</option>
+            <option value="hypoadrenalism">Hypoadrenalism</option>
+            <option value="diabetes-insipidus-or-hypopituitarism">Diabetes insipidus / hypopituitarism</option>
+            <option value="diabetes-mellitus-not-diet-only">Diabetes mellitus</option>
+            <option value="hypoparathyroidism">Hypoparathyroidism</option>
+            <option value="myasthenia-gravis">Myasthenia gravis</option>
+            <option value="myxoedema">Myxoedema</option>
+            <option value="epilepsy-on-anticonvulsant">Epilepsy</option>
+            <option value="continuing-physical-disability">Continuing physical disability</option>
+            <option value="cancer-or-effects">Cancer-related</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <div id="status-banner" class="status-banner" role="status" aria-live="polite" hidden></div>
+
+    <section class="table-wrap" id="applications-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Certificate #</th>
+            <th>Patient</th>
+            <th>NHS number</th>
+            <th>Conditions</th>
+            <th>Outcome</th>
+            <th>Valid from</th>
+            <th>Valid until</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="applications-tbody"></tbody>
+      </table>
+      <p id="empty-message" class="muted" hidden>No applications match the current filters.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        FP92A — UK NHS Business Services Authority. Unofficial digital companion.
+        The authoritative certificate is issued by NHSBSA on receipt of the
+        original paper form.
+      </p>
+    </footer>
+  </main>
+
+  <script src="js/types.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

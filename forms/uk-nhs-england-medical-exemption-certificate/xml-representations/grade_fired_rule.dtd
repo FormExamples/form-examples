@@ -1,0 +1,11 @@
+<!ELEMENT grade_fired_rule (id,created_at,updated_at,deleted_at,grade_id,rule_id,category,description,severity_level,contributing_condition_code)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT grade_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT severity_level (#PCDATA)>
+<!ELEMENT contributing_condition_code (#PCDATA)>

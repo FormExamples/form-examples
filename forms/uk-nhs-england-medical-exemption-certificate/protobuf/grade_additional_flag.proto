@@ -1,0 +1,36 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: grade_additional_flag
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_england_medical_exemption_certificate;
+
+enum GradeAdditionalFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_COMPLETENESS = 1;  // completeness
+  CATEGORY_DATA_QUALITY = 2;  // data-quality
+  CATEGORY_WORKFLOW = 3;  // workflow
+  CATEGORY_EDUCATION = 4;  // education
+  CATEGORY_SAFEGUARDING = 5;  // safeguarding
+  CATEGORY_PREGNANCY = 6;  // pregnancy
+  CATEGORY_AGE_EXEMPTION = 7;  // age-exemption
+}
+
+enum GradeAdditionalFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message GradeAdditionalFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(64) — max 64 chars
+  GradeAdditionalFlagCategoryEnum category = 7;  // VARCHAR(32)
+  string description = 8;  // TEXT
+  GradeAdditionalFlagPriorityEnum priority = 9;  // VARCHAR(16)
+}

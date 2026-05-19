@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE grade SYSTEM "grade.dtd">
+<grade>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<application_id>880e8400-e29b-41d4-a716-446655440003</application_id>
+<outcome>eligible</outcome>
+<redirect_to>FW8</redirect_to>
+<result_category>Normal</result_category>
+<result_score>5.0</result_score>
+<result_notes>Example text.</result_notes>
+<valid_from>2026-01-15</valid_from>
+<valid_until>2026-01-15</valid_until>
+<validity_years>2026</validity_years>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</grade>

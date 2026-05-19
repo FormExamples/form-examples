@@ -1,0 +1,21 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Uk Nhs England Medical Exemption Certificate grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Outcome: eligible; Redirect To: FW8; Result Category: General; Result Score: 5.0; Result Notes: Example text.; Valid From: 2026-01-15; Valid Until: 2026-01-15; Validity Years: 1"
+}

@@ -1,0 +1,73 @@
+/* FP92A practitioner dashboard styles. */
+
+:root {
+  --color-primary: #005eb8;
+  --color-primary-dark: #003d77;
+  --color-bg: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-text: #212b32;
+  --color-muted: #4c6272;
+  --color-border: #d8dde0;
+  --color-focus: #ffb81c;
+  --color-eligible-bg: #cfe8d1;
+  --color-eligible-fg: #00703c;
+  --color-ineligible-bg: #fadcd9;
+  --color-ineligible-fg: #d5281b;
+  --color-clarify-bg: #fff1cc;
+  --color-clarify-fg: #b35a00;
+  --radius: 0.4rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px; line-height: 1.45;
+  color: var(--color-text); background: var(--color-bg);
+}
+
+.skip-link { position: absolute; left: -9999px; top: 0; background: var(--color-primary); color: white; padding: 0.5rem 1rem; z-index: 100; }
+.skip-link:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute !important; height: 1px; width: 1px; overflow: hidden;
+  clip: rect(1px,1px,1px,1px); white-space: nowrap;
+}
+
+.page-header { background: var(--color-primary); color: white; padding: 1.25rem 1rem; }
+.page-header-inner { max-width: 1280px; margin: 0 auto; }
+.page-header h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+.subtitle { margin: 0; opacity: 0.92; }
+
+main { max-width: 1280px; margin: 0 auto; padding: 1.25rem 1rem; }
+
+.status-banner { background: #fff8eb; border-left: 4px solid var(--color-focus); padding: 0.6rem 0.9rem; border-radius: var(--radius); margin: 0.5rem 0 1rem; font-size: 0.9rem; }
+
+.filter-bar { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem 1rem; margin-bottom: 1rem; }
+.filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; align-items: end; }
+.filter-field { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.85rem; }
+.filter-field input,
+.filter-field select { font: inherit; padding: 0.4rem 0.55rem; border: 1px solid var(--color-border); border-radius: 0.3rem; background: white; }
+.filter-field input:focus, .filter-field select:focus { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+
+.table-wrap { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; min-width: 920px; }
+th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+th { background: #f0f4f8; font-weight: 600; font-size: 0.85rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+tbody tr:hover { background: #fafcfd; }
+
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+.badge.eligible { background: var(--color-eligible-bg); color: var(--color-eligible-fg); }
+.badge.ineligible { background: var(--color-ineligible-bg); color: var(--color-ineligible-fg); }
+.badge.requires-clarification { background: var(--color-clarify-bg); color: var(--color-clarify-fg); }
+.badge.status-draft { background: #e1e6eb; color: var(--color-muted); }
+.badge.status-ready-to-post { background: #d8e5f1; color: var(--color-primary-dark); }
+.badge.status-posted { background: #d8e5f1; color: var(--color-primary-dark); }
+.badge.status-issued { background: var(--color-eligible-bg); color: var(--color-eligible-fg); }
+.badge.status-rejected { background: var(--color-ineligible-bg); color: var(--color-ineligible-fg); }
+.badge.status-expired { background: #f0e6cc; color: var(--color-clarify-fg); }
+
+.muted { color: var(--color-muted); }
+
+.page-footer { margin-top: 2rem; border-top: 1px solid var(--color-border); padding-top: 1rem; font-size: 0.85rem; color: var(--color-muted); }

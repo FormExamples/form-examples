@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application_eligible_condition SYSTEM "application_eligible_condition.dtd">
+<application_eligible_condition>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<application_id>880e8400-e29b-41d4-a716-446655440003</application_id>
+<eligible_condition_id>770e8400-e29b-41d4-a716-446655440002</eligible_condition_id>
+<diagnosis_date>2026-01-15</diagnosis_date>
+<snomed_ct_code>ABC123</snomed_ct_code>
+<icd10_code>ABC123</icd10_code>
+<treatment_detail>Example treatment</treatment_detail>
+<fistula_site>caecostomy</fistula_site>
+<appliance_type>one-piece-bag</appliance_type>
+<substitution_therapy>Example treatment</substitution_therapy>
+<on_substitution_therapy>yes</on_substitution_therapy>
+<diabetes_treatment_mode>insulin</diabetes_treatment_mode>
+<anticonvulsant></anticonvulsant>
+<continuous_anticonvulsant_therapy>yes</continuous_anticonvulsant_therapy>
+<cannot_leave_home_unaided>yes</cannot_leave_home_unaided>
+<disability_carer_detail></disability_carer_detail>
+<disability_expected_to_be_permanent>yes</disability_expected_to_be_permanent>
+<cancer_site>Example location</cancer_site>
+<cancer_treatment_phase>active-treatment</cancer_treatment_phase>
+<histology_confirmed>yes</histology_confirmed>
+<practitioner_attestation_notes>Example text.</practitioner_attestation_notes>
+</application_eligible_condition>
