@@ -61,4 +61,22 @@ document.querySelectorAll('#grid th[data-sort]').forEach((th) => {
   });
 });
 
+document.querySelector('#grid tbody').addEventListener('click', (e) => {
+  const tr = e.target.closest('tr[data-id]'); if (!tr) return;
+  const id = tr.dataset.id;
+  const next = tr.nextElementSibling;
+  if (next?.classList.contains('detail') && next.dataset.id === id) { next.remove(); return; }
+  document.querySelectorAll('tr.detail').forEach((d) => d.remove());
+  const d = data.find((x) => x.id === id);
+  const html = `<tr class="detail" data-id="${id}"><td colspan="10">
+    <h3>Key Results</h3>
+    <ul class="kr-list">${d.keyResults.map((k) => `<li>${k.position}. ${k.title} — ${k.current ?? '–'}/${k.target ?? '–'} ${k.unit} (${Math.round((k.progress_fraction ?? 0) * 100)}%)</li>`).join('')}</ul>
+    <h3>Flags</h3>
+    <ul class="flag-list">${d.flags.length ? d.flags.map((f) => `<li><b>${f.code}</b> [${f.priority}]: ${f.description}</li>`).join('') : '<li><i>none</i></li>'}</ul>
+    <h3>Latest check-in</h3>
+    <p>${d.latestCheckIn?.checked_in_at?.slice(0, 10) ?? ''}: ${d.latestCheckIn?.narrative ?? ''}</p>
+  </td></tr>`;
+  tr.insertAdjacentHTML('afterend', html);
+});
+
 load();
