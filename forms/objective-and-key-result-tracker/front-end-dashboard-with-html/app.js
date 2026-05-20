@@ -79,4 +79,15 @@ document.querySelector('#grid tbody').addEventListener('click', (e) => {
   tr.insertAdjacentHTML('afterend', html);
 });
 
+document.querySelector('#btn-csv').addEventListener('click', () => {
+  const headers = ['id', 'obj_title', 'level', 'dri', 'cycle', 'rag', 'progress_percent', 'confidence_decile', 'kr_count', 'flag_count'];
+  const rows = view.map((d) => [d.id, d.obj_title, d.level, d.dri, d.cycle, d.rag, d.progress_percent, d.confidence_decile, d.keyResults.length, d.flags.length]);
+  const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replaceAll('"', '""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'okr-dashboard.csv';
+  a.click();
+});
+
 load();
