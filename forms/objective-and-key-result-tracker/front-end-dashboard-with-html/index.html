@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OKR Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" defer src="app.js"></script>
+</head>
+<body>
+  <header><h1>OKR Dashboard</h1></header>
+  <section id="filters">
+    <label>Level <select id="f-level"><option value="">all</option><option>individual</option><option>team</option><option>department</option><option>company</option></select></label>
+    <label>Status <select id="f-status"><option value="">all</option><option>draft</option><option>active</option><option>at-risk</option><option>achieved</option><option>missed</option><option>retired</option><option>cancelled</option></select></label>
+    <label>RAG <select id="f-rag"><option value="">all</option><option>green</option><option>amber</option><option>red</option></select></label>
+    <label>Owner <input id="f-owner" placeholder="search…"/></label>
+    <button id="btn-csv">Export CSV</button>
+  </section>
+  <table id="grid">
+    <thead><tr>
+      <th data-sort="obj_title">Title</th>
+      <th data-sort="level">Level</th>
+      <th data-sort="dri">DRI</th>
+      <th data-sort="cycle">Cycle</th>
+      <th data-sort="rag">RAG</th>
+      <th data-sort="progress">Progress</th>
+      <th data-sort="confidence">Conf</th>
+      <th data-sort="krs"># KRs</th>
+      <th data-sort="flags"># flags</th>
+      <th data-sort="last_check_in_at">Last check-in</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</body>
+</html>
