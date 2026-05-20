@@ -12,4 +12,4 @@ See [`docs/superpowers/plans/2026-05-10-okr-tracker-plan-3-svelte-form.md`](../.
 - [x] Task 8: Playwright fixture smoke test (14 / 14 passing)
 - [x] Task 9: UI-driving smoke test (1 / 1 passing)
 - [x] Task 10: Sub-project docs
-- [ ] Task 11: Acceptance gate + tag
+- [x] Task 11: Acceptance gate + tag
