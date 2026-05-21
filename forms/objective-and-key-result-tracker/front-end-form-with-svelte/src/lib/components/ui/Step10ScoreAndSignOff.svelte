@@ -23,7 +23,9 @@
 
   async function downloadPdf() {
     if (!result) return;
+    // @ts-expect-error — pdfmake has no published types
     const pdfMake = (await import('pdfmake/build/pdfmake')).default;
+    // @ts-expect-error — pdfmake has no published types
     const pdfFonts = await import('pdfmake/build/vfs_fonts');
     pdfMake.vfs = (pdfFonts as any).pdfMake.vfs;
     pdfMake.createPdf({
