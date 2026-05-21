@@ -1,0 +1,33 @@
+logger:
+  enable: true
+  pretty_backtrace: false
+  level: info
+  format: json
+
+server:
+  port: 5150
+  binding: 0.0.0.0
+  host: http://localhost
+
+workers:
+  mode: BackgroundQueue
+
+mailer:
+  smtp:
+    enable: false
+
+database:
+  uri: "{{ get_env(name='DATABASE_URL', default='postgres://loco:loco@localhost:5432/objective_and_key_result_tracker_production') }}"
+  enable_logging: false
+  connect_timeout: 500
+  idle_timeout: 500
+  min_connections: 1
+  max_connections: 10
+  auto_migrate: false
+  dangerously_truncate: false
+  dangerously_recreate: false
+
+auth:
+  jwt:
+    secret: "{{ get_env(name='JWT_SECRET', default='change_me_in_production') }}"
+    expiration: 604800
