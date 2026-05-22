@@ -1,0 +1,172 @@
+{
+  "resourceType": "Observation",
+  "id": "dd0e8400-e29b-41d4-a716-446655440008",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-states-hipaa-authorization-form",
+        "code": "patient_rights_acknowledgement",
+        "display": "Patient Rights Acknowledgement"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_right_to_revoke",
+            "display": "Acknowledged Right To Revoke"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_right_to_revoke",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_revocation_procedure",
+            "display": "Acknowledged Revocation Procedure"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_revocation_procedure",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_no_conditioning",
+            "display": "Acknowledged No Conditioning"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_no_conditioning",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_redisclosure_warning",
+            "display": "Acknowledged Redisclosure Warning"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_redisclosure_warning",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_right_to_copy",
+            "display": "Acknowledged Right To Copy"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_right_to_copy",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "acknowledged_right_to_inspect_disclosed",
+            "display": "Acknowledged Right To Inspect Disclosed"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:acknowledged_right_to_inspect_disclosed",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    }
+  ]
+}

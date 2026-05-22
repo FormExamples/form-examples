@@ -1,0 +1,98 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: records_to_disclose
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum RecordsToDiscloseIncludeMedicalHealthEnum {
+  INCLUDEMEDICALHEALTH_UNSPECIFIED = 0;
+  INCLUDEMEDICALHEALTH_YES = 1;  // yes
+  INCLUDEMEDICALHEALTH_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludeMentalHealthEnum {
+  INCLUDEMENTALHEALTH_UNSPECIFIED = 0;
+  INCLUDEMENTALHEALTH_YES = 1;  // yes
+  INCLUDEMENTALHEALTH_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludeSubstanceUseEnum {
+  INCLUDESUBSTANCEUSE_UNSPECIFIED = 0;
+  INCLUDESUBSTANCEUSE_YES = 1;  // yes
+  INCLUDESUBSTANCEUSE_NO = 2;  // no
+}
+
+enum RecordsToDisclosePart2RedisclosureNoticeIncludedEnum {
+  PART2REDISCLOSURENOTICEINCLUDED_UNSPECIFIED = 0;
+  PART2REDISCLOSURENOTICEINCLUDED_YES = 1;  // yes
+  PART2REDISCLOSURENOTICEINCLUDED_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludeHivAidsEnum {
+  INCLUDEHIVAIDS_UNSPECIFIED = 0;
+  INCLUDEHIVAIDS_YES = 1;  // yes
+  INCLUDEHIVAIDS_NO = 2;  // no
+}
+
+enum RecordsToDiscloseHivAidsStateConsentIncludedEnum {
+  HIVAIDSSTATECONSENTINCLUDED_UNSPECIFIED = 0;
+  HIVAIDSSTATECONSENTINCLUDED_YES = 1;  // yes
+  HIVAIDSSTATECONSENTINCLUDED_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludePsychotherapyNotesEnum {
+  INCLUDEPSYCHOTHERAPYNOTES_UNSPECIFIED = 0;
+  INCLUDEPSYCHOTHERAPYNOTES_YES = 1;  // yes
+  INCLUDEPSYCHOTHERAPYNOTES_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludeGeneticInformationEnum {
+  INCLUDEGENETICINFORMATION_UNSPECIFIED = 0;
+  INCLUDEGENETICINFORMATION_YES = 1;  // yes
+  INCLUDEGENETICINFORMATION_NO = 2;  // no
+}
+
+enum RecordsToDiscloseIncludeReproductiveHealthEnum {
+  INCLUDEREPRODUCTIVEHEALTH_UNSPECIFIED = 0;
+  INCLUDEREPRODUCTIVEHEALTH_YES = 1;  // yes
+  INCLUDEREPRODUCTIVEHEALTH_NO = 2;  // no
+}
+
+enum RecordsToDiscloseSection7332NoticeIncludedEnum {
+  SECTION7332NOTICEINCLUDED_UNSPECIFIED = 0;
+  SECTION7332NOTICEINCLUDED_YES = 1;  // yes
+  SECTION7332NOTICEINCLUDED_NO = 2;  // no
+}
+
+enum RecordsToDiscloseDateRangeSpecifiedEnum {
+  DATERANGESPECIFIED_UNSPECIFIED = 0;
+  DATERANGESPECIFIED_YES = 1;  // yes
+  DATERANGESPECIFIED_NO = 2;  // no
+}
+
+message RecordsToDisclose {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hipaa_authorization_id = 5;  // UUID — uuid
+  RecordsToDiscloseIncludeMedicalHealthEnum include_medical_health = 6;  // VARCHAR(5)
+  string medical_health_initials = 7;  // VARCHAR(8) — max 8 chars
+  RecordsToDiscloseIncludeMentalHealthEnum include_mental_health = 8;  // VARCHAR(5)
+  string mental_health_initials = 9;  // VARCHAR(8) — max 8 chars
+  RecordsToDiscloseIncludeSubstanceUseEnum include_substance_use = 10;  // VARCHAR(5)
+  string substance_use_initials = 11;  // VARCHAR(8) — max 8 chars
+  RecordsToDisclosePart2RedisclosureNoticeIncludedEnum part2_redisclosure_notice_included = 12;  // VARCHAR(5)
+  RecordsToDiscloseIncludeHivAidsEnum include_hiv_aids = 13;  // VARCHAR(5)
+  string hiv_aids_initials = 14;  // VARCHAR(8) — max 8 chars
+  RecordsToDiscloseHivAidsStateConsentIncludedEnum hiv_aids_state_consent_included = 15;  // VARCHAR(5)
+  RecordsToDiscloseIncludePsychotherapyNotesEnum include_psychotherapy_notes = 16;  // VARCHAR(5)
+  RecordsToDiscloseIncludeGeneticInformationEnum include_genetic_information = 17;  // VARCHAR(5)
+  RecordsToDiscloseIncludeReproductiveHealthEnum include_reproductive_health = 18;  // VARCHAR(5)
+  RecordsToDiscloseSection7332NoticeIncludedEnum section_7332_notice_included = 19;  // VARCHAR(5)
+  RecordsToDiscloseDateRangeSpecifiedEnum date_range_specified = 20;  // VARCHAR(5)
+  string date_from = 21;  // DATE — iso 8601 date
+  string date_to = 22;  // DATE — iso 8601 date
+  string other_description = 23;  // TEXT
+}

@@ -1,0 +1,6 @@
+<!ELEMENT outpatient_outcome_prom_promis (id,created_at,updated_at,deleted_at,outpatient_outcome_id)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>

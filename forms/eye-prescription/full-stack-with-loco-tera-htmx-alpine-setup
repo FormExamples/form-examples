@@ -1,0 +1,188 @@
+#!/bin/sh
+# setup.sh
+#
+# Setup script for full-stack Loco application.
+#
+# - Create database user `loco` (if not exists).
+# - Create application databases for development, test, production (if not exists).
+# - Run `cargo loco generate scaffold` commands matching the form's
+#   sql-migrations/ schema, in the same order so FK targets exist when
+#   referencing tables are created.
+#
+# Hand-authored from forms/eye-prescription/sql-migrations/*.sql to match the
+# canonical pattern. Re-author by hand after changing the SQL migrations.
+
+set -euf
+
+createuser --host=localhost --port=5432 --username=postgres --login --createdb loco || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco eye_prescription_development || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco eye_prescription_test || :
+createdb --host=localhost --port=5432 --username=postgres --owner=loco eye_prescription_production || :
+
+loco new --name eye-prescription --db postgres --bg async --assets serverside
+
+cd eye-prescription
+
+echo "Scaffolding eye-prescription (10 tables)..."
+
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    sex:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold prescriber \
+    deleted_at:ts \
+    name:text! \
+    goc_registration_number:string^! \
+    role:string! \
+    practice_name:text! \
+    practice_address:text! \
+    postcode:text \
+    country_as_iso_3166_1_alpha_2:string \
+    email:text \
+    phone:text \
+    --htmx && \
+cargo loco generate scaffold eye_prescription \
+    deleted_at:ts \
+    patient:references \
+    prescriber:references \
+    status:string! \
+    examination_date:date! \
+    examination_time:string \
+    issue_date:date! \
+    expiry_date:date! \
+    reason_for_sight_test:string! \
+    prior_prescription_on_file:bool! \
+    prior_prescription_date:date \
+    notes:text! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_eye \
+    deleted_at:ts \
+    eye_prescription:references \
+    eye:string! \
+    sphere_diopters:double \
+    cylinder_diopters:double \
+    axis_degrees:int \
+    addition_diopters:double \
+    intermediate_addition_diopters:double \
+    prism_horizontal_diopters:double! \
+    base_horizontal:string! \
+    prism_vertical_diopters:double! \
+    base_vertical:string! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_visual_acuity \
+    deleted_at:ts \
+    eye_prescription:references \
+    distance_right_unaided:string! \
+    distance_left_unaided:string! \
+    distance_binocular_unaided:string! \
+    distance_right_corrected:string! \
+    distance_left_corrected:string! \
+    distance_binocular_corrected:string! \
+    near_right_unaided:string! \
+    near_left_unaided:string! \
+    near_binocular_unaided:string! \
+    near_right_corrected:string! \
+    near_left_corrected:string! \
+    near_binocular_corrected:string! \
+    pinhole_right:string! \
+    pinhole_left:string! \
+    dominant_eye:string! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_pupillary_distance \
+    deleted_at:ts \
+    eye_prescription:references \
+    distance_total_mm:double \
+    distance_right_mm:double \
+    distance_left_mm:double \
+    near_total_mm:double \
+    near_right_mm:double \
+    near_left_mm:double \
+    segment_height_right_mm:double \
+    segment_height_left_mm:double \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_lens_recommendation \
+    deleted_at:ts \
+    eye_prescription:references \
+    lens_type:string! \
+    material:string! \
+    refractive_index:double \
+    aspheric:bool! \
+    coating_anti_reflective:bool! \
+    coating_scratch_resistant:bool! \
+    coating_hydrophobic:bool! \
+    coating_blue_light:bool! \
+    coating_photochromic:bool! \
+    coating_polarised:bool! \
+    coating_uv_400:bool! \
+    tint_description:string! \
+    tint_percent:int \
+    dispenser_notes:text! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_ocular_health_finding \
+    deleted_at:ts \
+    eye_prescription:references \
+    slit_lamp_right:text! \
+    slit_lamp_left:text! \
+    fundus_right:text! \
+    fundus_left:text! \
+    intraocular_pressure_right_mmhg:double \
+    intraocular_pressure_left_mmhg:double \
+    cup_to_disc_ratio_right:double \
+    cup_to_disc_ratio_left:double \
+    oct_performed:bool! \
+    oct_findings:text! \
+    fields_performed:bool! \
+    fields_findings:text! \
+    pathology_flag:bool! \
+    refer_ophthalmology:bool! \
+    referral_reason:text! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_grade \
+    deleted_at:ts \
+    eye_prescription:references \
+    right_eye_sphere_class:string! \
+    right_eye_cylinder_class:string! \
+    left_eye_sphere_class:string! \
+    left_eye_cylinder_class:string! \
+    presbyopia_class:string! \
+    anisometropia_diopters:double \
+    anisometropia_significant:bool! \
+    prism_present:bool! \
+    computed_complexity:string! \
+    final_complexity:string! \
+    override_reason:string! \
+    follow_up_interval_months:int \
+    prescriber_notes:text! \
+    signed_at:ts \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_grade_rule \
+    deleted_at:ts \
+    eye_prescription_grade:references \
+    rule_id:string! \
+    instrument:string! \
+    eye:string! \
+    class:string! \
+    category:string! \
+    description:string! \
+    --htmx && \
+cargo loco generate scaffold eye_prescription_grade_flag \
+    deleted_at:ts \
+    eye_prescription_grade:references \
+    flag_id:string! \
+    category:string! \
+    eye:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --htmx
+
+echo "Done."

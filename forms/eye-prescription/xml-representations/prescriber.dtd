@@ -1,0 +1,14 @@
+<!ELEMENT prescriber (id,created_at,updated_at,deleted_at,name,goc_registration_number,role,practice_name,practice_address,postcode,country_as_iso_3166_1_alpha_2,email,phone)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT goc_registration_number (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT practice_name (#PCDATA)>
+<!ELEMENT practice_address (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>

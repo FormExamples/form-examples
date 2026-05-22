@@ -1,0 +1,108 @@
+{
+  "resourceType": "Observation",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:outpatient-outcome",
+        "code": "outpatient_outcome_clinical",
+        "display": "Outpatient Outcome Clinical"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/551e8400-e29b-41d4-a716-44665544000f"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome",
+            "code": "presenting_complaint",
+            "display": "Presenting Complaint"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome",
+            "code": "diagnosis",
+            "display": "Diagnosis"
+          }
+        ]
+      },
+      "valueString": "Under investigation"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome",
+            "code": "treatment_delivered",
+            "display": "Treatment Delivered"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome",
+            "code": "outcome_classification",
+            "display": "Outcome Classification"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:outpatient-outcome:outcome_classification",
+            "code": "resolved",
+            "display": "Resolved"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:eye-prescription",
+        "code": "eye_prescription_eye",
+        "display": "Eye Prescription Eye"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/110e8400-e29b-41d4-a716-44665544000b"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "eye",
+            "display": "Eye"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:eye",
+            "code": "right",
+            "display": "Right"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "sphere_diopters",
+            "display": "Sphere Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "cylinder_diopters",
+            "display": "Cylinder Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "axis_degrees",
+            "display": "Axis Degrees"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "addition_diopters",
+            "display": "Addition Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "intermediate_addition_diopters",
+            "display": "Intermediate Addition Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "prism_horizontal_diopters",
+            "display": "Prism Horizontal Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "base_horizontal",
+            "display": "Base Horizontal"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:base_horizontal",
+            "code": "in",
+            "display": "In"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "prism_vertical_diopters",
+            "display": "Prism Vertical Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "base_vertical",
+            "display": "Base Vertical"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:base_vertical",
+            "code": "up",
+            "display": "Up"
+          }
+        ]
+      }
+    }
+  ]
+}

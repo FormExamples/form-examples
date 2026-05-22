@@ -75,6 +75,18 @@ test_form_fhir_r5() {
     ai_exists_or_err "$1"
 }
 
+test_form_typespec() {
+    dir="$1/protobuf"
+    directory_exists_or_err "$dir"
+    ai_exists_or_err "$1"
+}
+
+test_form_protobuf() {
+    dir="$1/protobuf"
+    directory_exists_or_err "$dir"
+    ai_exists_or_err "$1"
+}
+
 test_form_sql_migrations() {
     dir="$1/sql-migrations"
     directory_exists_or_err "$dir"

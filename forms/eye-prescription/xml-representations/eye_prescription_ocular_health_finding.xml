@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_prescription_ocular_health_finding SYSTEM "eye_prescription_ocular_health_finding.dtd">
+<eye_prescription_ocular_health_finding>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<slit_lamp_right></slit_lamp_right>
+<slit_lamp_left></slit_lamp_left>
+<fundus_right></fundus_right>
+<fundus_left></fundus_left>
+<intraocular_pressure_right_mmhg>120.0</intraocular_pressure_right_mmhg>
+<intraocular_pressure_left_mmhg>120.0</intraocular_pressure_left_mmhg>
+<cup_to_disc_ratio_right>1.5</cup_to_disc_ratio_right>
+<cup_to_disc_ratio_left>1.5</cup_to_disc_ratio_left>
+<oct_performed>true</oct_performed>
+<oct_findings>Example text.</oct_findings>
+<fields_performed>true</fields_performed>
+<fields_findings>Example text.</fields_findings>
+<pathology_flag>true</pathology_flag>
+<refer_ophthalmology>true</refer_ophthalmology>
+<referral_reason>Example text.</referral_reason>
+</eye_prescription_ocular_health_finding>

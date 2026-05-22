@@ -1,0 +1,10 @@
+<!ELEMENT hipaa_authorization (id,created_at,updated_at,deleted_at,patient_id,status,state_template,revoked_at,revocation_method)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT state_template (#PCDATA)>
+<!ELEMENT revoked_at (#PCDATA)>
+<!ELEMENT revocation_method (#PCDATA)>

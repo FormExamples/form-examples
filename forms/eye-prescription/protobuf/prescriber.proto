@@ -1,0 +1,30 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: prescriber
+
+syntax = "proto3";
+
+package form_examples.eye_prescription;
+
+enum PrescriberRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_OPTOMETRIST = 1;  // optometrist
+  ROLE_DISPENSING_OPTICIAN = 2;  // dispensing-optician
+  ROLE_OPHTHALMOLOGIST = 3;  // ophthalmologist
+  ROLE_STUDENT = 4;  // student
+}
+
+message Prescriber {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string goc_registration_number = 6;  // VARCHAR(20) — max 20 chars
+  PrescriberRoleEnum role = 7;  // VARCHAR(30)
+  string practice_name = 8;  // TEXT
+  string practice_address = 9;  // TEXT
+  string postcode = 10;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 11;  // CHAR(2) — max 2 chars
+  string email = 12;  // TEXT
+  string phone = 13;  // TEXT
+}

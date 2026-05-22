@@ -1,0 +1,14 @@
+<!ELEMENT eye_prescription_pupillary_distance (id,created_at,updated_at,deleted_at,eye_prescription_id,distance_total_mm,distance_right_mm,distance_left_mm,near_total_mm,near_right_mm,near_left_mm,segment_height_right_mm,segment_height_left_mm)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT eye_prescription_id (#PCDATA)>
+<!ELEMENT distance_total_mm (#PCDATA)>
+<!ELEMENT distance_right_mm (#PCDATA)>
+<!ELEMENT distance_left_mm (#PCDATA)>
+<!ELEMENT near_total_mm (#PCDATA)>
+<!ELEMENT near_right_mm (#PCDATA)>
+<!ELEMENT near_left_mm (#PCDATA)>
+<!ELEMENT segment_height_right_mm (#PCDATA)>
+<!ELEMENT segment_height_left_mm (#PCDATA)>

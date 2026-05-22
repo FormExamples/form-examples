@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(bin/test-form uk-nhs-england-medical-exemption-certificate *)",
+      "Bash(pnpm run *)",
+      "Bash(git restore *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git add *)",
+      "Bash(git mv *)"
+    ]
+  }
+}

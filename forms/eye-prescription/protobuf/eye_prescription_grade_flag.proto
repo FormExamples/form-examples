@@ -1,0 +1,50 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: eye_prescription_grade_flag
+
+syntax = "proto3";
+
+package form_examples.eye_prescription;
+
+enum EyePrescriptionGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HIGH_MYOPIA = 1;  // high-myopia
+  CATEGORY_HIGH_HYPEROPIA = 2;  // high-hyperopia
+  CATEGORY_HIGH_ASTIGMATISM = 3;  // high-astigmatism
+  CATEGORY_ANISOMETROPIA = 4;  // anisometropia
+  CATEGORY_PRISM_PRESENT = 5;  // prism-present
+  CATEGORY_PRESBYOPIA = 6;  // presbyopia
+  CATEGORY_PAEDIATRIC = 7;  // paediatric
+  CATEGORY_PRESCRIPTION_EXPIRED = 8;  // prescription-expired
+  CATEGORY_SIGNIFICANT_CHANGE_FROM_PRIOR = 9;  // significant-change-from-prior
+  CATEGORY_OCULAR_PATHOLOGY = 10;  // ocular-pathology
+  CATEGORY_REFER_OPHTHALMOLOGY = 11;  // refer-ophthalmology
+  CATEGORY_OTHER = 12;  // other
+}
+
+enum EyePrescriptionGradeFlagEyeEnum {
+  EYE_UNSPECIFIED = 0;
+  EYE_RIGHT = 1;  // right
+  EYE_LEFT = 2;  // left
+  EYE_BOTH = 3;  // both
+}
+
+enum EyePrescriptionGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message EyePrescriptionGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string eye_prescription_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  EyePrescriptionGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  EyePrescriptionGradeFlagEyeEnum eye = 8;  // VARCHAR(10)
+  EyePrescriptionGradeFlagPriorityEnum priority = 9;  // VARCHAR(10)
+  string description = 10;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 11;  // VARCHAR(500) — max 500 chars
+}

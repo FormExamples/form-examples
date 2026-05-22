@@ -1,0 +1,9 @@
+<!ELEMENT purpose_of_disclosure (id,created_at,updated_at,deleted_at,hipaa_authorization_id,purposes,primary_purpose,other_details)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT purposes (#PCDATA)>
+<!ELEMENT primary_purpose (#PCDATA)>
+<!ELEMENT other_details (#PCDATA)>

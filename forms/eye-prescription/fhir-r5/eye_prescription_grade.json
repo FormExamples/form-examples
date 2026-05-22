@@ -1,0 +1,290 @@
+{
+  "resourceType": "Observation",
+  "id": "dd0e8400-e29b-41d4-a716-446655440008",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:eye-prescription",
+        "code": "eye_prescription_grade",
+        "display": "Eye Prescription Grade"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/110e8400-e29b-41d4-a716-44665544000b"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "right_eye_sphere_class",
+            "display": "Right Eye Sphere Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:right_eye_sphere_class",
+            "code": "emmetropia",
+            "display": "Emmetropia"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "right_eye_cylinder_class",
+            "display": "Right Eye Cylinder Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:right_eye_cylinder_class",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "left_eye_sphere_class",
+            "display": "Left Eye Sphere Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:left_eye_sphere_class",
+            "code": "emmetropia",
+            "display": "Emmetropia"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "left_eye_cylinder_class",
+            "display": "Left Eye Cylinder Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:left_eye_cylinder_class",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "presbyopia_class",
+            "display": "Presbyopia Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:presbyopia_class",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "anisometropia_diopters",
+            "display": "Anisometropia Diopters"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "anisometropia_significant",
+            "display": "Anisometropia Significant"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "prism_present",
+            "display": "Prism Present"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "computed_complexity",
+            "display": "Computed Complexity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:computed_complexity",
+            "code": "simple",
+            "display": "Simple"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "final_complexity",
+            "display": "Final Complexity"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:final_complexity",
+            "code": "simple",
+            "display": "Simple"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "override_reason",
+            "display": "Override Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "follow_up_interval_months",
+            "display": "Follow Up Interval Months"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "prescriber_notes",
+            "display": "Prescriber Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "signed_at",
+            "display": "Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "graded_at",
+            "display": "Graded At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

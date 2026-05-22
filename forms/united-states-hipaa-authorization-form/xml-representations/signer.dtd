@@ -1,0 +1,10 @@
+<!ELEMENT signer (id,created_at,updated_at,deleted_at,hipaa_authorization_id,relationship,representative_name,representative_authority_description,representative_authority_proof_attached)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT relationship (#PCDATA)>
+<!ELEMENT representative_name (#PCDATA)>
+<!ELEMENT representative_authority_description (#PCDATA)>
+<!ELEMENT representative_authority_proof_attached (#PCDATA)>

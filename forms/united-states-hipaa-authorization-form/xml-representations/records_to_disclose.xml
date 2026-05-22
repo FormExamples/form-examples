@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE records_to_disclose SYSTEM "records_to_disclose.dtd">
+<records_to_disclose>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hipaa_authorization_id>660e8400-e29b-41d4-a716-446655440001</hipaa_authorization_id>
+<include_medical_health>yes</include_medical_health>
+<medical_health_initials></medical_health_initials>
+<include_mental_health>yes</include_mental_health>
+<mental_health_initials></mental_health_initials>
+<include_substance_use>yes</include_substance_use>
+<substance_use_initials></substance_use_initials>
+<part2_redisclosure_notice_included>yes</part2_redisclosure_notice_included>
+<include_hiv_aids>yes</include_hiv_aids>
+<hiv_aids_initials></hiv_aids_initials>
+<hiv_aids_state_consent_included>yes</hiv_aids_state_consent_included>
+<include_psychotherapy_notes>yes</include_psychotherapy_notes>
+<include_genetic_information>yes</include_genetic_information>
+<include_reproductive_health>yes</include_reproductive_health>
+<section_7332_notice_included>yes</section_7332_notice_included>
+<date_range_specified>yes</date_range_specified>
+<date_from>2026-01-15</date_from>
+<date_to>2026-01-15</date_to>
+<other_description>Example text.</other_description>
+</records_to_disclose>

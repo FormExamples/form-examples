@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_prescription_lens_recommendation SYSTEM "eye_prescription_lens_recommendation.dtd">
+<eye_prescription_lens_recommendation>
+<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<lens_type>single-vision-distance</lens_type>
+<material>cr-39</material>
+<refractive_index>0.0</refractive_index>
+<aspheric>true</aspheric>
+<coating_anti_reflective>true</coating_anti_reflective>
+<coating_scratch_resistant>true</coating_scratch_resistant>
+<coating_hydrophobic>true</coating_hydrophobic>
+<coating_blue_light>true</coating_blue_light>
+<coating_photochromic>true</coating_photochromic>
+<coating_polarised>true</coating_polarised>
+<coating_uv_400>true</coating_uv_400>
+<tint_description>Example text.</tint_description>
+<tint_percent>1</tint_percent>
+<dispenser_notes>Example text.</dispenser_notes>
+</eye_prescription_lens_recommendation>

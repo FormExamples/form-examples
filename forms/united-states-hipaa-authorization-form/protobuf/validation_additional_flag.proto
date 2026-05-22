@@ -1,0 +1,36 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: validation_additional_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum ValidationAdditionalFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SENSITIVE_CATEGORY = 1;  // sensitive-category
+  CATEGORY_STATE_LAW = 2;  // state-law
+  CATEGORY_REPRESENTATIVE = 3;  // representative
+  CATEGORY_MINOR = 4;  // minor
+  CATEGORY_LANGUAGE = 5;  // language
+  CATEGORY_AUDIT = 6;  // audit
+  CATEGORY_REPRODUCTIVE_HEALTH = 7;  // reproductive-health
+}
+
+enum ValidationAdditionalFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_HIGH = 1;  // high
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_LOW = 3;  // low
+}
+
+message ValidationAdditionalFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string validation_result_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(60) — max 60 chars
+  ValidationAdditionalFlagCategoryEnum category = 7;  // VARCHAR(40)
+  string message_ = 8;  // TEXT
+  ValidationAdditionalFlagPriorityEnum priority = 9;  // VARCHAR(10)
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE disclosing_source SYSTEM "disclosing_source.dtd">
+<disclosing_source>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hipaa_authorization_id>660e8400-e29b-41d4-a716-446655440001</hipaa_authorization_id>
+<identification_mode>specific</identification_mode>
+<specific_persons_or_organizations></specific_persons_or_organizations>
+<class_description>Example text.</class_description>
+<is_va_facility>yes</is_va_facility>
+<is_part_2_program>yes</is_part_2_program>
+</disclosing_source>

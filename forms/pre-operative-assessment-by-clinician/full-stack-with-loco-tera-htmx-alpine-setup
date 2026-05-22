@@ -26,8 +26,10 @@ cargo loco generate scaffold patient \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
     height_as_cm:double \
     weight_as_kg:double \
     body_mass_index:double \
@@ -40,6 +42,7 @@ cargo loco generate scaffold clinician \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     role:text! \
     registration_body:text! \
@@ -272,7 +275,7 @@ cargo loco generate scaffold pre_operative_assessment_by_clinician \
     special_equipment:string! \
     blood_products_required:string! \
     --htmx && \
-cargo loco generate scaffold grade \
+cargo loco generate scaffold pre_operative_assessment_by_clinician_grade \
     deleted_at:ts \
     pre_operative_assessment_by_clinician:references \
     computed_asa_grade:string! \
@@ -289,7 +292,7 @@ cargo loco generate scaffold grade \
     signed_at:ts \
     graded_at:ts! \
     --htmx && \
-cargo loco generate scaffold grading_fired_rule \
+cargo loco generate scaffold pre_operative_assessment_by_clinician_grade_rule \
     deleted_at:ts \
     grade:references \
     rule_id:string! \
@@ -298,9 +301,9 @@ cargo loco generate scaffold grading_fired_rule \
     category:string! \
     description:string! \
     --htmx && \
-cargo loco generate scaffold grading_additional_flag \
+cargo loco generate scaffold pre_operative_assessment_by_clinician_grade_flag \
     deleted_at:ts \
-    grade:references \
+    pre_operative_assessment_by_clinician_grade:references \
     flag_id:string! \
     category:string! \
     priority:string! \

@@ -1,0 +1,8 @@
+<!ELEMENT outpatient_outcome_prom_grc (id,created_at,updated_at,deleted_at,outpatient_outcome_id,global_rating_of_change,self_rated_health)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>
+<!ELEMENT global_rating_of_change (#PCDATA)>
+<!ELEMENT self_rated_health (#PCDATA)>

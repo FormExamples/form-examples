@@ -1,0 +1,240 @@
+{
+  "resourceType": "Observation",
+  "id": "cc0e8400-e29b-41d4-a716-446655440007",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:eye-prescription",
+        "code": "eye_prescription_ocular_health_finding",
+        "display": "Eye Prescription Ocular Health Finding"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/110e8400-e29b-41d4-a716-44665544000b"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "slit_lamp_right",
+            "display": "Slit Lamp Right"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "slit_lamp_left",
+            "display": "Slit Lamp Left"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "fundus_right",
+            "display": "Fundus Right"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "fundus_left",
+            "display": "Fundus Left"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "intraocular_pressure_right_mmhg",
+            "display": "Intraocular Pressure Right Mmhg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "intraocular_pressure_left_mmhg",
+            "display": "Intraocular Pressure Left Mmhg"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "cup_to_disc_ratio_right",
+            "display": "Cup To Disc Ratio Right"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "cup_to_disc_ratio_left",
+            "display": "Cup To Disc Ratio Left"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "oct_performed",
+            "display": "Oct Performed"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "oct_findings",
+            "display": "Oct Findings"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "fields_performed",
+            "display": "Fields Performed"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "fields_findings",
+            "display": "Fields Findings"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "pathology_flag",
+            "display": "Pathology Flag"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "refer_ophthalmology",
+            "display": "Refer Ophthalmology"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "referral_reason",
+            "display": "Referral Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

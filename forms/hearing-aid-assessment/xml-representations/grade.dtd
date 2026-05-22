@@ -1,0 +1,12 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,handicap_level,hhies_total_score,hearing_aid_candidacy,left_ear_recommendation,right_ear_recommendation,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT handicap_level (#PCDATA)>
+<!ELEMENT hhies_total_score (#PCDATA)>
+<!ELEMENT hearing_aid_candidacy (#PCDATA)>
+<!ELEMENT left_ear_recommendation (#PCDATA)>
+<!ELEMENT right_ear_recommendation (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

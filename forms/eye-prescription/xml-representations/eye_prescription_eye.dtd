@@ -1,0 +1,16 @@
+<!ELEMENT eye_prescription_eye (id,created_at,updated_at,deleted_at,eye_prescription_id,eye,sphere_diopters,cylinder_diopters,axis_degrees,addition_diopters,intermediate_addition_diopters,prism_horizontal_diopters,base_horizontal,prism_vertical_diopters,base_vertical)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT eye_prescription_id (#PCDATA)>
+<!ELEMENT eye (#PCDATA)>
+<!ELEMENT sphere_diopters (#PCDATA)>
+<!ELEMENT cylinder_diopters (#PCDATA)>
+<!ELEMENT axis_degrees (#PCDATA)>
+<!ELEMENT addition_diopters (#PCDATA)>
+<!ELEMENT intermediate_addition_diopters (#PCDATA)>
+<!ELEMENT prism_horizontal_diopters (#PCDATA)>
+<!ELEMENT base_horizontal (#PCDATA)>
+<!ELEMENT prism_vertical_diopters (#PCDATA)>
+<!ELEMENT base_vertical (#PCDATA)>

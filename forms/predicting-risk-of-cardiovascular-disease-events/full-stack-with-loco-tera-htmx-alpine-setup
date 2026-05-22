@@ -17,8 +17,102 @@
 set -euf
 
 
-echo "Scaffolding predicting-risk-of-cardiovascular-disease-events (10 tables)..."
+echo "Scaffolding predicting-risk-of-cardiovascular-disease-events (20 tables)..."
 
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_height_ratio:double \
+    vo2_max:double \
+    --htmx && \
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold assessment \
+    deleted_at:ts \
+    patient:references \
+    status:text! \
+    --htmx && \
+cargo loco generate scaffold pvt_rule \
+    deleted_at:ts \
+    code:text!^ \
+    category:text! \
+    description:text! \
+    risk_level:text! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    risk_category:text! \
+    ten_year_risk_percent:double! \
+    thirty_year_risk_percent:double! \
+    risk_category_override:text \
+    override_reason:text! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    pvt_rule:references \
+    rule_category:text! \
+    rule_description:text! \
+    rule_risk_level:text! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:text! \
+    category:text! \
+    message:text! \
+    priority:text! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    risk_category:text! \
+    ten_year_risk_percent:double! \
+    thirty_year_risk_percent:double! \
+    risk_category_override:text \
+    override_reason:text! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    pvt_rule:references \
+    rule_category:text! \
+    rule_description:text! \
+    rule_risk_level:text! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:text! \
+    category:text! \
+    message:text! \
+    priority:text! \
+    --htmx && \
 cargo loco generate scaffold assessment \
     deleted_at:ts \
     patient:references \
@@ -64,8 +158,10 @@ cargo loco generate scaffold patient \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
     height_as_cm:double \
     weight_as_kg:double \
     body_mass_index:double \
@@ -78,6 +174,7 @@ cargo loco generate scaffold clinician \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     role:text! \
     registration_body:text! \

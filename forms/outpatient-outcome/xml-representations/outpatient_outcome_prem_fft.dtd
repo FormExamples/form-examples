@@ -1,0 +1,8 @@
+<!ELEMENT outpatient_outcome_prem_fft (id,created_at,updated_at,deleted_at,outpatient_outcome_id,fft_response,fft_comment)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>
+<!ELEMENT fft_response (#PCDATA)>
+<!ELEMENT fft_comment (#PCDATA)>

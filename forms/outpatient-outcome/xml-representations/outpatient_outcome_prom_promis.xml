@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE outpatient_outcome_prom_promis SYSTEM "outpatient_outcome_prom_promis.dtd">
+<outpatient_outcome_prom_promis>
+<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<outpatient_outcome_id>770e8400-e29b-41d4-a716-446655440002</outpatient_outcome_id>
+</outpatient_outcome_prom_promis>

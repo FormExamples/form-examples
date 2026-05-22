@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:arc42.org)",
+      "Bash(git -C /Users/jph/git/formexamples/form-examples log --oneline --all -- skel)",
+      "Bash(git worktree *)",
+      "Bash(git -C /Users/jph/git/formexamples/form-examples worktree list)",
+      "Bash(ln -s index.md /Users/jph/git/formexamples/form-examples/.worktrees/arc42-form/forms/arc42/README.md)",
+      "Bash(git -C /Users/jph/git/formexamples/form-examples/.worktrees/arc42-form add forms/arc42/ forms/AGENTS.md)",
+      "Bash(git -C /Users/jph/git/formexamples/form-examples/.worktrees/arc42-form status --short)",
+      "Bash(git *)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm vitest *)",
+      "Bash(pnpm check *)",
+      "Bash(bin/test-form arc42 *)",
+      "Bash(timeout 15 pnpm dev)"
+    ]
+  }
+}

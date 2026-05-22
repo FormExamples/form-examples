@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>US HIPAA Authorization — patient form</title>
+  <meta name="description" content="HIPAA Authorization for Release of Protected Health Information (PHI), modelled on Tennessee Department of Human Services HS-2557.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#wizard">Skip to authorization form</a>
+
+  <header class="page-header">
+    <h1>HIPAA Authorization for Release of Protected Health Information</h1>
+    <p class="subtitle">9-step single-page authorization per 45 CFR § 164.508.</p>
+    <div class="progress" role="region" aria-label="Form progress">
+      <div id="progress-bar-fill" class="progress-bar-fill" style="width:0%"></div>
+      <p id="progress-text" class="progress-text">0% complete</p>
+    </div>
+  </header>
+
+  <main id="wizard">
+    <p class="intro">
+      This authorization permits a US health-care provider, health plan,
+      or other covered entity to use or disclose your Protected Health
+      Information for a stated purpose. <strong>You do not have to sign
+      this form.</strong> Your treatment, payment, and eligibility for
+      benefits may not be conditioned on your signing, with very narrow
+      exceptions. Your answers are saved automatically in your browser.
+    </p>
+
+    <section data-step="1" id="step-1">
+      <h2>1. Patient identification</h2>
+      <label>Print name <input type="text" name="patient.name" required></label>
+      <label>Date of birth <input type="date" name="patient.birth_date" required></label>
+      <label>Social Security Number (optional) <input type="text" name="patient.social_security_number" pattern="\d{3}-?\d{2}-?\d{4}"></label>
+      <label>Street address <input type="text" name="patient.street_address" required></label>
+      <label>City <input type="text" name="patient.city" required></label>
+      <label>State <input type="text" name="patient.state" maxlength="2" required></label>
+      <label>ZIP <input type="text" name="patient.zip_code" required></label>
+      <label>Phone <input type="tel" name="patient.phone" required></label>
+    </section>
+
+    <section data-step="2" id="step-2">
+      <h2>2. Signer identification</h2>
+      <fieldset>
+        <legend>I am signing as</legend>
+        <label><input type="radio" name="signer.relationship" value="self"> Self</label>
+        <label><input type="radio" name="signer.relationship" value="parent-of-minor"> Parent of a minor</label>
+        <label><input type="radio" name="signer.relationship" value="guardian"> Guardian</label>
+        <label><input type="radio" name="signer.relationship" value="power-of-attorney"> Power of attorney</label>
+        <label><input type="radio" name="signer.relationship" value="other-authorized-representative"> Other authorized representative</label>
+      </fieldset>
+      <label>Representative authority description
+        <textarea name="signer.representative_authority_description" rows="2"></textarea>
+      </label>
+    </section>
+
+    <section data-step="3" id="step-3">
+      <h2>3. Disclosing source</h2>
+      <fieldset>
+        <legend>I authorize information to be released by</legend>
+        <label><input type="radio" name="disclosing_source.identification_mode" value="specific"> The following specific persons or organisations</label>
+        <label><input type="radio" name="disclosing_source.identification_mode" value="class"> The following class of providers (doctors, hospitals, clinics, nursing homes, insurance companies, health plans, etc.)</label>
+      </fieldset>
+      <label>Specific persons / organizations<textarea name="disclosing_source.specific_persons_or_organizations" rows="2"></textarea></label>
+      <label>Class description<textarea name="disclosing_source.class_description" rows="2"></textarea></label>
+    </section>
+
+    <section data-step="4" id="step-4">
+      <h2>4. Authorized recipient</h2>
+      <label>Recipient name <input type="text" name="authorized_recipient.recipient_name" required></label>
+      <label>Recipient organisation <input type="text" name="authorized_recipient.recipient_organization"></label>
+      <label>Recipient address <input type="text" name="authorized_recipient.recipient_address"></label>
+      <label>Phone <input type="tel" name="authorized_recipient.recipient_phone"></label>
+      <label>Email <input type="email" name="authorized_recipient.recipient_email"></label>
+    </section>
+
+    <section data-step="5" id="step-5">
+      <h2>5. Records to disclose</h2>
+      <p>For each category, check Yes or No and add your initials.</p>
+      <fieldset>
+        <legend>Medical / health records</legend>
+        <label><input type="radio" name="records_to_disclose.include_medical_health" value="yes"> Yes</label>
+        <label><input type="radio" name="records_to_disclose.include_medical_health" value="no"> No</label>
+        <label>Initials <input type="text" name="records_to_disclose.medical_health_initials" maxlength="8"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Mental-health records</legend>
+        <label><input type="radio" name="records_to_disclose.include_mental_health" value="yes"> Yes</label>
+        <label><input type="radio" name="records_to_disclose.include_mental_health" value="no"> No</label>
+        <label>Initials <input type="text" name="records_to_disclose.mental_health_initials" maxlength="8"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Drug or alcohol treatment / referral records (42 CFR Part 2)</legend>
+        <label><input type="radio" name="records_to_disclose.include_substance_use" value="yes"> Yes</label>
+        <label><input type="radio" name="records_to_disclose.include_substance_use" value="no"> No</label>
+        <label>Initials <input type="text" name="records_to_disclose.substance_use_initials" maxlength="8"></label>
+      </fieldset>
+      <fieldset>
+        <legend>HIV / AIDS test or treatment records</legend>
+        <label><input type="radio" name="records_to_disclose.include_hiv_aids" value="yes"> Yes</label>
+        <label><input type="radio" name="records_to_disclose.include_hiv_aids" value="no"> No</label>
+        <label>Initials <input type="text" name="records_to_disclose.hiv_aids_initials" maxlength="8"></label>
+      </fieldset>
+      <label>Specific description of any other PHI<textarea name="records_to_disclose.other_description" rows="3"></textarea></label>
+    </section>
+
+    <section data-step="6" id="step-6">
+      <h2>6. Purpose of disclosure</h2>
+      <fieldset>
+        <legend>Primary purpose</legend>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="eligibility-determination"> Eligibility determination</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="continuing-treatment"> Continuing treatment</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="insurance-claim"> Insurance claim</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="legal-proceeding"> Legal proceeding</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="personal-use"> Personal use</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="research"> Research</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="at-the-request-of-the-individual"> At the request of the individual</label>
+        <label><input type="radio" name="purpose_of_disclosure.primary_purpose" value="other"> Other</label>
+      </fieldset>
+      <label>Other details<textarea name="purpose_of_disclosure.other_details" rows="2"></textarea></label>
+    </section>
+
+    <section data-step="7" id="step-7">
+      <h2>7. Expiration</h2>
+      <p>An expiration date or event is required. "None" is not permitted (except for research).</p>
+      <fieldset>
+        <legend>This authorization expires on</legend>
+        <label><input type="radio" name="expiration.kind" value="date"> A specific date</label>
+        <label><input type="radio" name="expiration.kind" value="event"> The occurrence of an event</label>
+        <label><input type="radio" name="expiration.kind" value="duration"> A duration after my signature</label>
+      </fieldset>
+      <label>Expiration date <input type="date" name="expiration.expiration_date"></label>
+      <label>Expiration event <input type="text" name="expiration.expiration_event"></label>
+      <label>Duration months <input type="number" name="expiration.duration_months" min="1" max="120"></label>
+    </section>
+
+    <section data-step="8" id="step-8">
+      <h2>8. Patient rights acknowledgements</h2>
+      <label><input type="checkbox" name="patient_rights_acknowledgement.acknowledged_right_to_revoke"> I understand I may revoke this authorization in writing at any time.</label>
+      <label><input type="checkbox" name="patient_rights_acknowledgement.acknowledged_no_conditioning"> I understand my treatment, payment, enrolment, or eligibility for benefits may not be conditioned on signing.</label>
+      <label><input type="checkbox" name="patient_rights_acknowledgement.acknowledged_redisclosure_warning"> I understand the information may be re-disclosed by the recipient and no longer protected by the Privacy Rule.</label>
+      <label><input type="checkbox" name="patient_rights_acknowledgement.acknowledged_right_to_copy"> I understand I have the right to receive a copy of this signed form.</label>
+    </section>
+
+    <section data-step="9" id="step-9">
+      <h2>9. Signature, witness &amp; date</h2>
+      <label><input type="checkbox" name="signature_witness.individual_signature_confirmed"> I have signed this authorization.</label>
+      <label>Signature date <input type="date" name="signature_witness.signature_date" required></label>
+      <label>Witness name <input type="text" name="signature_witness.witness_name"></label>
+      <label><input type="checkbox" name="signature_witness.witness_signature_confirmed"> Witness has signed.</label>
+      <label>Witness date <input type="date" name="signature_witness.witness_date"></label>
+    </section>
+
+    <section id="result">
+      <h2>Result</h2>
+      <p id="validity-status">Validity: not yet evaluated.</p>
+      <ul id="fired-rules"></ul>
+      <ul id="additional-flags"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+:root {
+  --color-text: #111;
+  --color-muted: #666;
+  --color-accent: #1e40af;
+  --color-warn: #b45309;
+  --color-err: #b91c1c;
+  --color-bg: #fff;
+  --color-card: #f8fafc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  margin: 0;
+  padding: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -10000px;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+.page-header {
+  background: var(--color-accent);
+  color: white;
+  padding: 1.5rem 2rem;
+}
+.page-header h1 { margin: 0 0 0.25rem 0; font-size: 1.5rem; }
+.subtitle { margin: 0; opacity: 0.9; }
+.progress {
+  margin-top: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  height: 0.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-bar-fill {
+  background: white;
+  height: 100%;
+  transition: width 0.2s ease;
+}
+.progress-text { color: white; margin: 0.25rem 0 0; font-size: 0.85rem; }
+
+main {
+  max-width: 48rem;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+.intro {
+  background: var(--color-card);
+  padding: 1rem;
+  border-left: 4px solid var(--color-accent);
+  margin-bottom: 1.5rem;
+}
+
+section[data-step] {
+  background: var(--color-card);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+section h2 { margin-top: 0; }
+label { display: block; margin: 0.5rem 0; }
+input[type="text"], input[type="date"], input[type="tel"], input[type="email"], input[type="number"], textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font: inherit;
+}
+fieldset {
+  margin: 0.5rem 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+}
+legend { font-weight: 600; padding: 0 0.5rem; }
+
+#result {
+  border-left: 4px solid var(--color-warn);
+  background: #fffbeb;
+}
+#fired-rules li { color: var(--color-err); }
+#additional-flags li { color: var(--color-warn); }
+
+@media print {
+  .page-header { background: none; color: black; border-bottom: 2px solid black; }
+  section[data-step] { background: none; border: 1px solid #999; page-break-inside: avoid; }
+}

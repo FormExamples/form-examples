@@ -17,8 +17,97 @@
 set -euf
 
 
-echo "Scaffolding pulmonology-assessment (9 tables)..."
+echo "Scaffolding pulmonology-assessment (18 tables)..."
 
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_height_ratio:double \
+    vo2_max:double \
+    --htmx && \
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold assessment \
+    deleted_at:ts \
+    patient:references \
+    status:string! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    gold_stage:string! \
+    gold_group:string! \
+    fev1_predicted_pct:double \
+    symptom_burden:string! \
+    exacerbation_risk:string! \
+    composite_score:int! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    severity_level:string! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    gold_stage:string! \
+    gold_group:string! \
+    fev1_predicted_pct:double \
+    symptom_burden:string! \
+    exacerbation_risk:string! \
+    composite_score:int! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    severity_level:string! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --htmx && \
 cargo loco generate scaffold assessment \
     deleted_at:ts \
     patient:references \
@@ -47,6 +136,30 @@ cargo loco generate scaffold assessment \
     route:string! \
     indication:text! \
     sort_order:int! \
+    current_medications_deleted_at:ts \
+    current_medications_inhaler_use:string! \
+    current_medications_inhaler_technique_assessed:string! \
+    current_medications_inhaler_technique_adequate:string! \
+    current_medications_short_acting_bronchodilator:string! \
+    current_medications_saba_frequency:text! \
+    current_medications_long_acting_bronchodilator:string! \
+    current_medications_inhaled_corticosteroid:string! \
+    current_medications_combination_inhaler:string! \
+    current_medications_long_term_oxygen_therapy:string! \
+    current_medications_oxygen_flow_rate_lmin:double \
+    current_medications_oxygen_hours_per_day:int \
+    current_medications_nebuliser_use:string! \
+    current_medications_oral_medications:text! \
+    current_medications_medication_adherence:string! \
+    current_medications_additional_notes:text! \
+    medication_item_deleted_at:ts \
+    medication_item_current_medications:references \
+    medication_item_medication_name:string! \
+    medication_item_dose:string! \
+    medication_item_frequency:string! \
+    medication_item_route:string! \
+    medication_item_indication:text! \
+    medication_item_sort_order:int! \
     --htmx && \
 cargo loco generate scaffold grade \
     deleted_at:ts \
@@ -82,8 +195,10 @@ cargo loco generate scaffold patient \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
     height_as_cm:double \
     weight_as_kg:double \
     body_mass_index:double \
@@ -96,6 +211,7 @@ cargo loco generate scaffold clinician \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     role:text! \
     registration_body:text! \

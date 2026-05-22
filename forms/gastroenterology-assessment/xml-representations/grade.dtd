@@ -1,0 +1,11 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,severity_score,severity_level,red_flag_count,urgent_referral_recommended,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT severity_score (#PCDATA)>
+<!ELEMENT severity_level (#PCDATA)>
+<!ELEMENT red_flag_count (#PCDATA)>
+<!ELEMENT urgent_referral_recommended (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

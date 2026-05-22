@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE signature_witness SYSTEM "signature_witness.dtd">
+<signature_witness>
+<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<hipaa_authorization_id>660e8400-e29b-41d4-a716-446655440001</hipaa_authorization_id>
+<individual_signature_confirmed>yes</individual_signature_confirmed>
+<individual_signature_image_uri></individual_signature_image_uri>
+<signature_date>2026-01-15</signature_date>
+<signed_at_location>Example location</signed_at_location>
+<parent_guardian_co_signature_required>yes</parent_guardian_co_signature_required>
+<parent_guardian_name>Example</parent_guardian_name>
+<parent_guardian_signature_confirmed>yes</parent_guardian_signature_confirmed>
+<parent_guardian_signature_date>2026-01-15</parent_guardian_signature_date>
+<witness_name>Example</witness_name>
+<witness_signature_confirmed>yes</witness_signature_confirmed>
+<witness_date>2026-01-15</witness_date>
+<witness_role></witness_role>
+</signature_witness>

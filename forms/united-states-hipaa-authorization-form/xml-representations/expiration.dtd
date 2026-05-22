@@ -1,0 +1,11 @@
+<!ELEMENT expiration (id,created_at,updated_at,deleted_at,hipaa_authorization_id,kind,expiration_date,expiration_event,duration_months,duration_label)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT expiration_date (#PCDATA)>
+<!ELEMENT expiration_event (#PCDATA)>
+<!ELEMENT duration_months (#PCDATA)>
+<!ELEMENT duration_label (#PCDATA)>

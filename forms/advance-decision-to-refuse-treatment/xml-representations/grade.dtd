@@ -1,0 +1,8 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,validity_level,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT validity_level (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

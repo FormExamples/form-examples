@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: disclosing_source
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum DisclosingSourceIdentificationModeEnum {
+  IDENTIFICATIONMODE_UNSPECIFIED = 0;
+  IDENTIFICATIONMODE_SPECIFIC = 1;  // specific
+  IDENTIFICATIONMODE_CLASS = 2;  // class
+}
+
+enum DisclosingSourceIsVaFacilityEnum {
+  ISVAFACILITY_UNSPECIFIED = 0;
+  ISVAFACILITY_YES = 1;  // yes
+  ISVAFACILITY_NO = 2;  // no
+}
+
+enum DisclosingSourceIsPart2ProgramEnum {
+  ISPART2PROGRAM_UNSPECIFIED = 0;
+  ISPART2PROGRAM_YES = 1;  // yes
+  ISPART2PROGRAM_NO = 2;  // no
+}
+
+message DisclosingSource {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hipaa_authorization_id = 5;  // UUID — uuid
+  DisclosingSourceIdentificationModeEnum identification_mode = 6;  // VARCHAR(10)
+  string specific_persons_or_organizations = 7;  // TEXT
+  string class_description = 8;  // TEXT
+  DisclosingSourceIsVaFacilityEnum is_va_facility = 9;  // VARCHAR(5)
+  DisclosingSourceIsPart2ProgramEnum is_part_2_program = 10;  // VARCHAR(5)
+}

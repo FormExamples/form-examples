@@ -1,0 +1,238 @@
+{
+  "resourceType": "Observation",
+  "id": "bb0e8400-e29b-41d4-a716-446655440006",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:eye-prescription",
+        "code": "eye_prescription_lens_recommendation",
+        "display": "Eye Prescription Lens Recommendation"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/110e8400-e29b-41d4-a716-44665544000b"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "lens_type",
+            "display": "Lens Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:lens_type",
+            "code": "single-vision-distance",
+            "display": "Single-Vision-Distance"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "material",
+            "display": "Material"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription:material",
+            "code": "cr-39",
+            "display": "Cr-39"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "refractive_index",
+            "display": "Refractive Index"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "aspheric",
+            "display": "Aspheric"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_anti_reflective",
+            "display": "Coating Anti Reflective"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_scratch_resistant",
+            "display": "Coating Scratch Resistant"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_hydrophobic",
+            "display": "Coating Hydrophobic"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_blue_light",
+            "display": "Coating Blue Light"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_photochromic",
+            "display": "Coating Photochromic"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_polarised",
+            "display": "Coating Polarised"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "coating_uv_400",
+            "display": "Coating Uv 400"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "tint_description",
+            "display": "Tint Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "tint_percent",
+            "display": "Tint Percent"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:eye-prescription",
+            "code": "dispenser_notes",
+            "display": "Dispenser Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

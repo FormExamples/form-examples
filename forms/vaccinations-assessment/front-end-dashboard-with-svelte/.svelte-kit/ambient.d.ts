@@ -52,10 +52,8 @@ declare module '$env/static/private' {
 	export const FINDER: string;
 	export const TMPDIR: string;
 	export const TERM_PROGRAM_VERSION: string;
-	export const npm_config_npm_globalconfig: string;
 	export const STDERR_COLOR_START: string;
 	export const SDKMAN_PLATFORM: string;
-	export const npm_config_registry: string;
 	export const PNPM_HOME: string;
 	export const ZSH: string;
 	export const GIT_EDITOR: string;
@@ -66,7 +64,6 @@ declare module '$env/static/private' {
 	export const OPENAI_API_KEY: string;
 	export const COMMAND_MODE: string;
 	export const SDKMAN_CANDIDATES_API: string;
-	export const npm_config_globalconfig: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
@@ -75,13 +72,10 @@ declare module '$env/static/private' {
 	export const JUMPER: string;
 	export const LSCOLORS: string;
 	export const BOOK_BINDER_PAGE_PATH_PREPEND: string;
-	export const npm_config_frozen_lockfile: string;
-	export const npm_config_verify_deps_before_run: string;
 	export const __MISE_WATCH: string;
 	export const STDOUT_COLOR_STOP: string;
 	export const PATH: string;
 	export const GHOSTTY_SHELL_FEATURES: string;
-	export const npm_config_engine_strict: string;
 	export const npm_package_json: string;
 	export const __CFBundleIdentifier: string;
 	export const SDKMAN_BROKER_API: string;
@@ -91,7 +85,6 @@ declare module '$env/static/private' {
 	export const npm_command: string;
 	export const JAVA_HOME: string;
 	export const OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
-	export const npm_config__jsr_registry: string;
 	export const npm_lifecycle_event: string;
 	export const LANG: string;
 	export const npm_package_name: string;
@@ -234,10 +227,8 @@ declare module '$env/dynamic/private' {
 		FINDER: string;
 		TMPDIR: string;
 		TERM_PROGRAM_VERSION: string;
-		npm_config_npm_globalconfig: string;
 		STDERR_COLOR_START: string;
 		SDKMAN_PLATFORM: string;
-		npm_config_registry: string;
 		PNPM_HOME: string;
 		ZSH: string;
 		GIT_EDITOR: string;
@@ -248,7 +239,6 @@ declare module '$env/dynamic/private' {
 		OPENAI_API_KEY: string;
 		COMMAND_MODE: string;
 		SDKMAN_CANDIDATES_API: string;
-		npm_config_globalconfig: string;
 		PNPM_SCRIPT_SRC_DIR: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
@@ -257,13 +247,10 @@ declare module '$env/dynamic/private' {
 		JUMPER: string;
 		LSCOLORS: string;
 		BOOK_BINDER_PAGE_PATH_PREPEND: string;
-		npm_config_frozen_lockfile: string;
-		npm_config_verify_deps_before_run: string;
 		__MISE_WATCH: string;
 		STDOUT_COLOR_STOP: string;
 		PATH: string;
 		GHOSTTY_SHELL_FEATURES: string;
-		npm_config_engine_strict: string;
 		npm_package_json: string;
 		__CFBundleIdentifier: string;
 		SDKMAN_BROKER_API: string;
@@ -273,7 +260,6 @@ declare module '$env/dynamic/private' {
 		npm_command: string;
 		JAVA_HOME: string;
 		OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE: string;
-		npm_config__jsr_registry: string;
 		npm_lifecycle_event: string;
 		LANG: string;
 		npm_package_name: string;

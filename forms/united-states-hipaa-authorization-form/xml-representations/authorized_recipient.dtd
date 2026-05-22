@@ -1,0 +1,13 @@
+<!ELEMENT authorized_recipient (id,created_at,updated_at,deleted_at,hipaa_authorization_id,recipient_name,recipient_organization,recipient_role,recipient_address,recipient_phone,recipient_email,recipient_relationship_to_patient)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT recipient_name (#PCDATA)>
+<!ELEMENT recipient_organization (#PCDATA)>
+<!ELEMENT recipient_role (#PCDATA)>
+<!ELEMENT recipient_address (#PCDATA)>
+<!ELEMENT recipient_phone (#PCDATA)>
+<!ELEMENT recipient_email (#PCDATA)>
+<!ELEMENT recipient_relationship_to_patient (#PCDATA)>

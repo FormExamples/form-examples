@@ -1,0 +1,12 @@
+<!ELEMENT eye_prescription_grade_flag (id,created_at,updated_at,deleted_at,eye_prescription_grade_id,flag_id,category,eye,priority,description,suggested_action)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT eye_prescription_grade_id (#PCDATA)>
+<!ELEMENT flag_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT eye (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT suggested_action (#PCDATA)>

@@ -1,0 +1,11 @@
+<!ELEMENT disclosing_source (id,created_at,updated_at,deleted_at,hipaa_authorization_id,identification_mode,specific_persons_or_organizations,class_description,is_va_facility,is_part_2_program)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT identification_mode (#PCDATA)>
+<!ELEMENT specific_persons_or_organizations (#PCDATA)>
+<!ELEMENT class_description (#PCDATA)>
+<!ELEMENT is_va_facility (#PCDATA)>
+<!ELEMENT is_part_2_program (#PCDATA)>

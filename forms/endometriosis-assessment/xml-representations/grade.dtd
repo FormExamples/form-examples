@@ -1,0 +1,11 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,asrm_stage,asrm_points,ehp30_total_score,overall_severity,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT asrm_stage (#PCDATA)>
+<!ELEMENT asrm_points (#PCDATA)>
+<!ELEMENT ehp30_total_score (#PCDATA)>
+<!ELEMENT overall_severity (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

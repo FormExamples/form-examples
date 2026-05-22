@@ -1,0 +1,11 @@
+<!ELEMENT validation_result (id,created_at,updated_at,deleted_at,hipaa_authorization_id,validity_status,completeness_score,completeness_status,validated_at,validator_version)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT hipaa_authorization_id (#PCDATA)>
+<!ELEMENT validity_status (#PCDATA)>
+<!ELEMENT completeness_score (#PCDATA)>
+<!ELEMENT completeness_status (#PCDATA)>
+<!ELEMENT validated_at (#PCDATA)>
+<!ELEMENT validator_version (#PCDATA)>

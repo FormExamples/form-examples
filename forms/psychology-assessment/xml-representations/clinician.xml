@@ -9,6 +9,7 @@
 <email>jane.doe@example.com</email>
 <phone>07700900000</phone>
 <postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
 <postcode>SW1A 1AA</postcode>
 <role>anaesthetist</role>
 <registration_body>GMC</registration_body>

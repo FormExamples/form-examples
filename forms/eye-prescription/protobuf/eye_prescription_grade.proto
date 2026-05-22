@@ -1,0 +1,89 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: eye_prescription_grade
+
+syntax = "proto3";
+
+package form_examples.eye_prescription;
+
+enum EyePrescriptionGradeRightEyeSphereClassEnum {
+  RIGHTEYESPHERECLASS_UNSPECIFIED = 0;
+  RIGHTEYESPHERECLASS_EMMETROPIA = 1;  // emmetropia
+  RIGHTEYESPHERECLASS_LOW_MYOPIA = 2;  // low-myopia
+  RIGHTEYESPHERECLASS_MODERATE_MYOPIA = 3;  // moderate-myopia
+  RIGHTEYESPHERECLASS_HIGH_MYOPIA = 4;  // high-myopia
+  RIGHTEYESPHERECLASS_LOW_HYPEROPIA = 5;  // low-hyperopia
+  RIGHTEYESPHERECLASS_MODERATE_HYPEROPIA = 6;  // moderate-hyperopia
+  RIGHTEYESPHERECLASS_HIGH_HYPEROPIA = 7;  // high-hyperopia
+}
+
+enum EyePrescriptionGradeRightEyeCylinderClassEnum {
+  RIGHTEYECYLINDERCLASS_UNSPECIFIED = 0;
+  RIGHTEYECYLINDERCLASS_NONE = 1;  // none
+  RIGHTEYECYLINDERCLASS_MILD_ASTIGMATISM = 2;  // mild-astigmatism
+  RIGHTEYECYLINDERCLASS_MODERATE_ASTIGMATISM = 3;  // moderate-astigmatism
+  RIGHTEYECYLINDERCLASS_HIGH_ASTIGMATISM = 4;  // high-astigmatism
+}
+
+enum EyePrescriptionGradeLeftEyeSphereClassEnum {
+  LEFTEYESPHERECLASS_UNSPECIFIED = 0;
+  LEFTEYESPHERECLASS_EMMETROPIA = 1;  // emmetropia
+  LEFTEYESPHERECLASS_LOW_MYOPIA = 2;  // low-myopia
+  LEFTEYESPHERECLASS_MODERATE_MYOPIA = 3;  // moderate-myopia
+  LEFTEYESPHERECLASS_HIGH_MYOPIA = 4;  // high-myopia
+  LEFTEYESPHERECLASS_LOW_HYPEROPIA = 5;  // low-hyperopia
+  LEFTEYESPHERECLASS_MODERATE_HYPEROPIA = 6;  // moderate-hyperopia
+  LEFTEYESPHERECLASS_HIGH_HYPEROPIA = 7;  // high-hyperopia
+}
+
+enum EyePrescriptionGradeLeftEyeCylinderClassEnum {
+  LEFTEYECYLINDERCLASS_UNSPECIFIED = 0;
+  LEFTEYECYLINDERCLASS_NONE = 1;  // none
+  LEFTEYECYLINDERCLASS_MILD_ASTIGMATISM = 2;  // mild-astigmatism
+  LEFTEYECYLINDERCLASS_MODERATE_ASTIGMATISM = 3;  // moderate-astigmatism
+  LEFTEYECYLINDERCLASS_HIGH_ASTIGMATISM = 4;  // high-astigmatism
+}
+
+enum EyePrescriptionGradePresbyopiaClassEnum {
+  PRESBYOPIACLASS_UNSPECIFIED = 0;
+  PRESBYOPIACLASS_NONE = 1;  // none
+  PRESBYOPIACLASS_EARLY_PRESBYOPIA = 2;  // early-presbyopia
+  PRESBYOPIACLASS_ESTABLISHED_PRESBYOPIA = 3;  // established-presbyopia
+  PRESBYOPIACLASS_ADVANCED_PRESBYOPIA = 4;  // advanced-presbyopia
+}
+
+enum EyePrescriptionGradeComputedComplexityEnum {
+  COMPUTEDCOMPLEXITY_UNSPECIFIED = 0;
+  COMPUTEDCOMPLEXITY_SIMPLE = 1;  // simple
+  COMPUTEDCOMPLEXITY_MODERATE = 2;  // moderate
+  COMPUTEDCOMPLEXITY_COMPLEX = 3;  // complex
+}
+
+enum EyePrescriptionGradeFinalComplexityEnum {
+  FINALCOMPLEXITY_UNSPECIFIED = 0;
+  FINALCOMPLEXITY_SIMPLE = 1;  // simple
+  FINALCOMPLEXITY_MODERATE = 2;  // moderate
+  FINALCOMPLEXITY_COMPLEX = 3;  // complex
+}
+
+message EyePrescriptionGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string eye_prescription_id = 5;  // UUID — uuid
+  EyePrescriptionGradeRightEyeSphereClassEnum right_eye_sphere_class = 6;  // VARCHAR(30)
+  EyePrescriptionGradeRightEyeCylinderClassEnum right_eye_cylinder_class = 7;  // VARCHAR(30)
+  EyePrescriptionGradeLeftEyeSphereClassEnum left_eye_sphere_class = 8;  // VARCHAR(30)
+  EyePrescriptionGradeLeftEyeCylinderClassEnum left_eye_cylinder_class = 9;  // VARCHAR(30)
+  EyePrescriptionGradePresbyopiaClassEnum presbyopia_class = 10;  // VARCHAR(30)
+  double anisometropia_diopters = 11;  // NUMERIC(5,2) — numeric(5,2)
+  bool anisometropia_significant = 12;  // BOOLEAN
+  bool prism_present = 13;  // BOOLEAN
+  EyePrescriptionGradeComputedComplexityEnum computed_complexity = 14;  // VARCHAR(20)
+  EyePrescriptionGradeFinalComplexityEnum final_complexity = 15;  // VARCHAR(20)
+  string override_reason = 16;  // VARCHAR(500) — max 500 chars
+  int32 follow_up_interval_months = 17;  // INTEGER
+  string prescriber_notes = 18;  // TEXT
+  string signed_at = 19;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
+}

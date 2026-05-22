@@ -101,6 +101,18 @@
         "coding": [
           {
             "system": "urn:form-examples:who-counter-referral-form",
+            "code": "country_as_iso_3166_1_alpha_2",
+            "display": "Country As Iso 3166 1 Alpha 2"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:who-counter-referral-form",
             "code": "postcode",
             "display": "Postcode"
           }

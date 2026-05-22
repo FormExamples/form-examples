@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE grade SYSTEM "grade.dtd">
+<grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<mec_category_coc>1</mec_category_coc>
+<mec_category_pop>1</mec_category_pop>
+<mec_category_implant>1</mec_category_implant>
+<mec_category_injection>1</mec_category_injection>
+<mec_category_iud>1</mec_category_iud>
+<mec_category_ius>1</mec_category_ius>
+<overall_risk_level>low</overall_risk_level>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</grade>

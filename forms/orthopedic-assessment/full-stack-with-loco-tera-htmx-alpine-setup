@@ -17,8 +17,89 @@
 set -euf
 
 
-echo "Scaffolding orthopedic-assessment (9 tables)..."
+echo "Scaffolding orthopedic-assessment (18 tables)..."
 
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_height_ratio:double \
+    vo2_max:double \
+    --htmx && \
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    united_kingdom_nhs_number:string^ \
+    --htmx && \
+cargo loco generate scaffold assessment \
+    deleted_at:ts \
+    patient:references \
+    status:string! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    dash_score:double! \
+    disability_category:string! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    severity_level:string! \
+    --htmx && \
+cargo loco generate scaffold grade \
+    deleted_at:ts \
+    assessment:references \
+    dash_score:double! \
+    disability_category:string! \
+    graded_at:ts! \
+    --htmx && \
+cargo loco generate scaffold grading_fired_rule \
+    deleted_at:ts \
+    grade:references \
+    rule_id:string! \
+    category:string! \
+    description:text! \
+    severity_level:string! \
+    --htmx && \
+cargo loco generate scaffold grading_additional_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_id:string! \
+    category:string! \
+    message:text! \
+    priority:string! \
+    --htmx && \
 cargo loco generate scaffold assessment \
     deleted_at:ts \
     patient:references \
@@ -80,6 +161,63 @@ cargo loco generate scaffold assessment \
     outcome:string! \
     outcome_details:text! \
     surgery_item_sort_order:int! \
+    range_of_motion_deleted_at:ts \
+    range_of_motion_joint_assessed:string! \
+    range_of_motion_side_assessed:string! \
+    range_of_motion_overall_rom_status:string! \
+    range_of_motion_range_of_motion_notes:text! \
+    rom_measurement_deleted_at:ts \
+    rom_measurement_range_of_motion:references \
+    rom_measurement_movement:string! \
+    rom_measurement_active_degrees:int \
+    rom_measurement_passive_degrees:int \
+    rom_measurement_normal_degrees:int \
+    rom_measurement_end_feel:string! \
+    rom_measurement_pain_on_movement:string! \
+    rom_measurement_sort_order:int! \
+    strength_testing_deleted_at:ts \
+    strength_testing_grip_strength_affected_kg:double \
+    strength_testing_grip_strength_unaffected_kg:double \
+    strength_testing_overall_strength_status:string! \
+    strength_testing_strength_testing_notes:text! \
+    strength_test_item_deleted_at:ts \
+    strength_test_item_strength_testing:references \
+    strength_test_item_muscle_group:string! \
+    strength_test_item_movement:string! \
+    strength_test_item_mrc_grade:int \
+    strength_test_item_pain_on_testing:string! \
+    strength_test_item_sort_order:int! \
+    imaging_history_deleted_at:ts \
+    imaging_history_has_previous_imaging:string! \
+    imaging_history_imaging_requested:string! \
+    imaging_history_imaging_requested_details:text! \
+    imaging_history_imaging_notes:text! \
+    imaging_item_deleted_at:ts \
+    imaging_item_imaging_history:references \
+    imaging_item_modality:string! \
+    imaging_item_body_region:string! \
+    imaging_item_date_performed:date \
+    imaging_item_findings:text! \
+    imaging_item_sort_order:int! \
+    surgical_history_deleted_at:ts \
+    surgical_history_has_previous_surgery:string! \
+    surgical_history_surgery_considered:string! \
+    surgical_history_surgery_considered_details:text! \
+    surgical_history_patient_preference:string! \
+    surgical_history_comorbidities_affecting_surgery:text! \
+    surgical_history_anaesthetic_risk:string! \
+    surgical_history_anticoagulant_use:string! \
+    surgical_history_anticoagulant_details:text! \
+    surgical_history_surgical_history_notes:text! \
+    surgery_item_deleted_at:ts \
+    surgery_item_surgical_history:references \
+    surgery_item_procedure_name:string! \
+    surgery_item_date_performed:date \
+    surgery_item_surgeon:string! \
+    surgery_item_hospital:string! \
+    surgery_item_outcome:string! \
+    surgery_item_outcome_details:text! \
+    surgery_item_sort_order:int! \
     --htmx && \
 cargo loco generate scaffold patient \
     deleted_at:ts \
@@ -88,8 +226,10 @@ cargo loco generate scaffold patient \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
     height_as_cm:double \
     weight_as_kg:double \
     body_mass_index:double \
@@ -102,6 +242,7 @@ cargo loco generate scaffold clinician \
     email:text \
     phone:text \
     postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
     postcode:text \
     role:text! \
     registration_body:text! \

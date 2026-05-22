@@ -1,0 +1,10 @@
+<!ELEMENT outpatient_outcome_clinical (id,created_at,updated_at,deleted_at,outpatient_outcome_id,presenting_complaint,diagnosis,treatment_delivered,outcome_classification)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>
+<!ELEMENT presenting_complaint (#PCDATA)>
+<!ELEMENT diagnosis (#PCDATA)>
+<!ELEMENT treatment_delivered (#PCDATA)>
+<!ELEMENT outcome_classification (#PCDATA)>

@@ -1,0 +1,14 @@
+<!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,social_security_number,street_address,city,state,zip_code,phone,email)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT social_security_number (#PCDATA)>
+<!ELEMENT street_address (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT zip_code (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT email (#PCDATA)>

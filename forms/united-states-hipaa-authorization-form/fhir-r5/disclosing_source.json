@@ -1,0 +1,136 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-states-hipaa-authorization-form",
+        "code": "disclosing_source",
+        "display": "Disclosing Source"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "identification_mode",
+            "display": "Identification Mode"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:identification_mode",
+            "code": "specific",
+            "display": "Specific"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "specific_persons_or_organizations",
+            "display": "Specific Persons Or Organizations"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "class_description",
+            "display": "Class Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "is_va_facility",
+            "display": "Is Va Facility"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:is_va_facility",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "is_part_2_program",
+            "display": "Is Part 2 Program"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:is_part_2_program",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    }
+  ]
+}

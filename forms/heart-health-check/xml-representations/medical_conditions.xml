@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_conditions SYSTEM "medical_conditions.dtd">
 <medical_conditions>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<id>bb0e8400-e29b-41d4-a716-446655440006</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>550e8400-e29b-41d4-a716-446655440000</assessment_id>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
 <has_diabetes>no</has_diabetes>
 <has_atrial_fibrillation>yes</has_atrial_fibrillation>
 <has_rheumatoid_arthritis>yes</has_rheumatoid_arthritis>

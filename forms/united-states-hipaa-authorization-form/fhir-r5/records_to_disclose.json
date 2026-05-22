@@ -1,0 +1,348 @@
+{
+  "resourceType": "Observation",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-states-hipaa-authorization-form",
+        "code": "records_to_disclose",
+        "display": "Records To Disclose"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_medical_health",
+            "display": "Include Medical Health"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_medical_health",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "medical_health_initials",
+            "display": "Medical Health Initials"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_mental_health",
+            "display": "Include Mental Health"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_mental_health",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "mental_health_initials",
+            "display": "Mental Health Initials"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_substance_use",
+            "display": "Include Substance Use"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_substance_use",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "substance_use_initials",
+            "display": "Substance Use Initials"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "part2_redisclosure_notice_included",
+            "display": "Part2 Redisclosure Notice Included"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:part2_redisclosure_notice_included",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_hiv_aids",
+            "display": "Include Hiv Aids"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_hiv_aids",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "hiv_aids_initials",
+            "display": "Hiv Aids Initials"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "hiv_aids_state_consent_included",
+            "display": "Hiv Aids State Consent Included"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:hiv_aids_state_consent_included",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_psychotherapy_notes",
+            "display": "Include Psychotherapy Notes"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_psychotherapy_notes",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_genetic_information",
+            "display": "Include Genetic Information"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_genetic_information",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "include_reproductive_health",
+            "display": "Include Reproductive Health"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:include_reproductive_health",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "section_7332_notice_included",
+            "display": "Section 7332 Notice Included"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form:section_7332_notice_included",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "date_range_specified",
+            "display": "Date Range Specified"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "date_from",
+            "display": "Date From"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "date_to",
+            "display": "Date To"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-states-hipaa-authorization-form",
+            "code": "other_description",
+            "display": "Other Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

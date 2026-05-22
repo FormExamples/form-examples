@@ -1,0 +1,31 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: purpose_of_disclosure
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum PurposeOfDisclosurePrimaryPurposeEnum {
+  PRIMARYPURPOSE_UNSPECIFIED = 0;
+  PRIMARYPURPOSE_ELIGIBILITY_DETERMINATION = 1;  // eligibility-determination
+  PRIMARYPURPOSE_CONTINUING_TREATMENT = 2;  // continuing-treatment
+  PRIMARYPURPOSE_INSURANCE_CLAIM = 3;  // insurance-claim
+  PRIMARYPURPOSE_LEGAL_PROCEEDING = 4;  // legal-proceeding
+  PRIMARYPURPOSE_DISABILITY_APPLICATION = 5;  // disability-application
+  PRIMARYPURPOSE_PERSONAL_USE = 6;  // personal-use
+  PRIMARYPURPOSE_RESEARCH = 7;  // research
+  PRIMARYPURPOSE_EMPLOYMENT = 8;  // employment
+  PRIMARYPURPOSE_AT_THE_REQUEST_OF_THE_INDIVIDUAL = 9;  // at-the-request-of-the-individual
+  PRIMARYPURPOSE_OTHER = 10;  // other
+}
+
+message PurposeOfDisclosure {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hipaa_authorization_id = 5;  // UUID — uuid
+  string purposes = 6;  // TEXT
+  PurposeOfDisclosurePrimaryPurposeEnum primary_purpose = 7;  // VARCHAR(40)
+  string other_details = 8;  // TEXT
+}

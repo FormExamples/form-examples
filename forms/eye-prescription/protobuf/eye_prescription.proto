@@ -1,0 +1,46 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: eye_prescription
+
+syntax = "proto3";
+
+package form_examples.eye_prescription;
+
+enum EyePrescriptionStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_ACTIVE = 2;  // active
+  STATUS_CANCELLED = 3;  // cancelled
+  STATUS_SUPERSEDED = 4;  // superseded
+  STATUS_EXPIRED = 5;  // expired
+  STATUS_ENTERED_IN_ERROR = 6;  // entered-in-error
+}
+
+enum EyePrescriptionReasonForSightTestEnum {
+  REASONFORSIGHTTEST_UNSPECIFIED = 0;
+  REASONFORSIGHTTEST_ROUTINE = 1;  // routine
+  REASONFORSIGHTTEST_SYMPTOMS = 2;  // symptoms
+  REASONFORSIGHTTEST_FOLLOW_UP = 3;  // follow-up
+  REASONFORSIGHTTEST_PRE_EMPLOYMENT = 4;  // pre-employment
+  REASONFORSIGHTTEST_DRIVING_LICENCE = 5;  // driving-licence
+  REASONFORSIGHTTEST_AFTER_PATHOLOGY = 6;  // after-pathology
+  REASONFORSIGHTTEST_SECOND_OPINION = 7;  // second-opinion
+  REASONFORSIGHTTEST_OTHER = 8;  // other
+}
+
+message EyePrescription {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string prescriber_id = 6;  // UUID — uuid
+  EyePrescriptionStatusEnum status = 7;  // VARCHAR(20)
+  string examination_date = 8;  // DATE — iso 8601 date
+  string examination_time = 9;  // TIME — iso 8601 time
+  string issue_date = 10;  // DATE — iso 8601 date
+  string expiry_date = 11;  // DATE — iso 8601 date
+  EyePrescriptionReasonForSightTestEnum reason_for_sight_test = 12;  // VARCHAR(50)
+  bool prior_prescription_on_file = 13;  // BOOLEAN
+  string prior_prescription_date = 14;  // DATE — iso 8601 date
+  string notes = 15;  // TEXT
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_prescription_grade_rule SYSTEM "eye_prescription_grade_rule.dtd">
+<eye_prescription_grade_rule>
+<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<eye_prescription_grade_id>dd0e8400-e29b-41d4-a716-446655440008</eye_prescription_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<instrument>sphere</instrument>
+<eye>right</eye>
+<class></class>
+<category>General</category>
+<description>Example text.</description>
+</eye_prescription_grade_rule>

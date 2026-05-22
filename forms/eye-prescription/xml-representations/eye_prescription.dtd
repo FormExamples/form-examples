@@ -1,0 +1,16 @@
+<!ELEMENT eye_prescription (id,created_at,updated_at,deleted_at,patient_id,prescriber_id,status,examination_date,examination_time,issue_date,expiry_date,reason_for_sight_test,prior_prescription_on_file,prior_prescription_date,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT patient_id (#PCDATA)>
+<!ELEMENT prescriber_id (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT examination_date (#PCDATA)>
+<!ELEMENT examination_time (#PCDATA)>
+<!ELEMENT issue_date (#PCDATA)>
+<!ELEMENT expiry_date (#PCDATA)>
+<!ELEMENT reason_for_sight_test (#PCDATA)>
+<!ELEMENT prior_prescription_on_file (#PCDATA)>
+<!ELEMENT prior_prescription_date (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x *)",
+      "Bash(sh -c ' *)",
+      "Read(//Users/jph/.claude/plugins/cache/playwright-skill/playwright-skill/4.0.2/skills/playwright-skill/**)",
+      "Bash(node run.js /tmp/playwright-test-eye-prescription.js)",
+      "Bash(node run.js /tmp/playwright-test-eye-dashboard.js)",
+      "Bash(command -v pnpm node)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5183/)",
+      "Bash(node run.js /tmp/playwright-test-svelte-form.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5184/)",
+      "Bash(node run.js /tmp/playwright-test-svelte-dashboard.js)",
+      "Bash(curl -s http://localhost:5184/)",
+      "Bash(curl -s http://localhost:5184/api/prescriptions -w \"\\\\nHTTP %{http_code}\\\\n\")"
+    ]
+  }
+}

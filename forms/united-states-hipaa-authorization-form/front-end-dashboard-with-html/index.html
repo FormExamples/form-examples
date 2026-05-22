@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>US HIPAA Authorization — dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>HIPAA Authorizations</h1>
+    <p class="subtitle">Review dashboard for signed authorizations.</p>
+  </header>
+  <main>
+    <table id="authorizations">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Recipient</th>
+          <th>Primary purpose</th>
+          <th>Categories</th>
+          <th>Expiration</th>
+          <th>Validity</th>
+          <th>Flags</th>
+          <th>Signed</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

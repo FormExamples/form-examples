@@ -1,0 +1,22 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string birth_date = 6;  // DATE — iso 8601 date
+  string social_security_number = 7;  // VARCHAR(11) — max 11 chars
+  string street_address = 8;  // TEXT
+  string city = 9;  // VARCHAR(120) — max 120 chars
+  string state = 10;  // VARCHAR(2) — max 2 chars
+  string zip_code = 11;  // VARCHAR(10) — max 10 chars
+  string phone = 12;  // VARCHAR(30) — max 30 chars
+  string email = 13;  // VARCHAR(255) — max 255 chars
+}

@@ -1,0 +1,10 @@
+<!ELEMENT outpatient_outcome_signoff (id,created_at,updated_at,deleted_at,outpatient_outcome_id,reporting_clinician_id,reporting_clinician_name,reporting_clinician_role,signed_off_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>
+<!ELEMENT reporting_clinician_id (#PCDATA)>
+<!ELEMENT reporting_clinician_name (#PCDATA)>
+<!ELEMENT reporting_clinician_role (#PCDATA)>
+<!ELEMENT signed_off_at (#PCDATA)>

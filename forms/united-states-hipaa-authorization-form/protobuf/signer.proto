@@ -1,0 +1,35 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: signer
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum SignerRelationshipEnum {
+  RELATIONSHIP_UNSPECIFIED = 0;
+  RELATIONSHIP_SELF = 1;  // self
+  RELATIONSHIP_PARENT_OF_MINOR = 2;  // parent-of-minor
+  RELATIONSHIP_GUARDIAN = 3;  // guardian
+  RELATIONSHIP_CONSERVATOR = 4;  // conservator
+  RELATIONSHIP_POWER_OF_ATTORNEY = 5;  // power-of-attorney
+  RELATIONSHIP_EXECUTOR = 6;  // executor
+  RELATIONSHIP_OTHER_AUTHORIZED_REPRESENTATIVE = 7;  // other-authorized-representative
+}
+
+enum SignerRepresentativeAuthorityProofAttachedEnum {
+  REPRESENTATIVEAUTHORITYPROOFATTACHED_UNSPECIFIED = 0;
+  REPRESENTATIVEAUTHORITYPROOFATTACHED_YES = 1;  // yes
+  REPRESENTATIVEAUTHORITYPROOFATTACHED_NO = 2;  // no
+}
+
+message Signer {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hipaa_authorization_id = 5;  // UUID — uuid
+  SignerRelationshipEnum relationship = 6;  // VARCHAR(40)
+  string representative_name = 7;  // VARCHAR(255) — max 255 chars
+  string representative_authority_description = 8;  // TEXT
+  SignerRepresentativeAuthorityProofAttachedEnum representative_authority_proof_attached = 9;  // VARCHAR(5)
+}

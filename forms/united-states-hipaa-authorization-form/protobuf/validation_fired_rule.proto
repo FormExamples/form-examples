@@ -1,0 +1,36 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: validation_fired_rule
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum ValidationFiredRuleDomainEnum {
+  DOMAIN_UNSPECIFIED = 0;
+  DOMAIN_CORE_ELEMENT = 1;  // core-element
+  DOMAIN_REQUIRED_STATEMENT = 2;  // required-statement
+  DOMAIN_SENSITIVE_CATEGORY = 3;  // sensitive-category
+  DOMAIN_COMPOUND = 4;  // compound
+  DOMAIN_EXPIRATION = 5;  // expiration
+  DOMAIN_REPRESENTATIVE = 6;  // representative
+}
+
+enum ValidationFiredRulePriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_HIGH = 1;  // high
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_LOW = 3;  // low
+}
+
+message ValidationFiredRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string validation_result_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(60) — max 60 chars
+  string citation = 7;  // VARCHAR(80) — max 80 chars
+  ValidationFiredRuleDomainEnum domain = 8;  // VARCHAR(40)
+  string description = 9;  // TEXT
+  ValidationFiredRulePriorityEnum priority = 10;  // VARCHAR(10)
+}

@@ -1,0 +1,56 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient_rights_acknowledgement
+
+syntax = "proto3";
+
+package form_examples.united_states_hipaa_authorization_form;
+
+enum PatientRightsAcknowledgementAcknowledgedRightToRevokeEnum {
+  ACKNOWLEDGEDRIGHTTOREVOKE_UNSPECIFIED = 0;
+  ACKNOWLEDGEDRIGHTTOREVOKE_YES = 1;  // yes
+  ACKNOWLEDGEDRIGHTTOREVOKE_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgementAcknowledgedRevocationProcedureEnum {
+  ACKNOWLEDGEDREVOCATIONPROCEDURE_UNSPECIFIED = 0;
+  ACKNOWLEDGEDREVOCATIONPROCEDURE_YES = 1;  // yes
+  ACKNOWLEDGEDREVOCATIONPROCEDURE_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgementAcknowledgedNoConditioningEnum {
+  ACKNOWLEDGEDNOCONDITIONING_UNSPECIFIED = 0;
+  ACKNOWLEDGEDNOCONDITIONING_YES = 1;  // yes
+  ACKNOWLEDGEDNOCONDITIONING_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgementAcknowledgedRedisclosureWarningEnum {
+  ACKNOWLEDGEDREDISCLOSUREWARNING_UNSPECIFIED = 0;
+  ACKNOWLEDGEDREDISCLOSUREWARNING_YES = 1;  // yes
+  ACKNOWLEDGEDREDISCLOSUREWARNING_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgementAcknowledgedRightToCopyEnum {
+  ACKNOWLEDGEDRIGHTTOCOPY_UNSPECIFIED = 0;
+  ACKNOWLEDGEDRIGHTTOCOPY_YES = 1;  // yes
+  ACKNOWLEDGEDRIGHTTOCOPY_NO = 2;  // no
+}
+
+enum PatientRightsAcknowledgementAcknowledgedRightToInspectDisclosedEnum {
+  ACKNOWLEDGEDRIGHTTOINSPECTDISCLOSED_UNSPECIFIED = 0;
+  ACKNOWLEDGEDRIGHTTOINSPECTDISCLOSED_YES = 1;  // yes
+  ACKNOWLEDGEDRIGHTTOINSPECTDISCLOSED_NO = 2;  // no
+}
+
+message PatientRightsAcknowledgement {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string hipaa_authorization_id = 5;  // UUID — uuid
+  PatientRightsAcknowledgementAcknowledgedRightToRevokeEnum acknowledged_right_to_revoke = 6;  // VARCHAR(5)
+  PatientRightsAcknowledgementAcknowledgedRevocationProcedureEnum acknowledged_revocation_procedure = 7;  // VARCHAR(5)
+  PatientRightsAcknowledgementAcknowledgedNoConditioningEnum acknowledged_no_conditioning = 8;  // VARCHAR(5)
+  PatientRightsAcknowledgementAcknowledgedRedisclosureWarningEnum acknowledged_redisclosure_warning = 9;  // VARCHAR(5)
+  PatientRightsAcknowledgementAcknowledgedRightToCopyEnum acknowledged_right_to_copy = 10;  // VARCHAR(5)
+  PatientRightsAcknowledgementAcknowledgedRightToInspectDisclosedEnum acknowledged_right_to_inspect_disclosed = 11;  // VARCHAR(5)
+}

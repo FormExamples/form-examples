@@ -42,7 +42,8 @@ or run `bin/forms-as-kebab-case`.
 ├── AGENTS.md                       # Cross-cutting agent instructions (this repo)
 ├── AGENTS/                         # Per-stack agent documentation
 │   ├── front-end-with-sveltekit-tailwind-svar.md
-│   ├── full-stack-with-rust-axum-loco-htmx-alpine.md
+│   ├── full-stack-with-loco-tera-htmx-alpine.md
+│   ├── full-stack-with-loco-tera-htmx-alpine-setup.md
 │   ├── sql-migrations.md
 │   ├── xml-representations.md
 │   └── fhir-r5.md
@@ -76,7 +77,7 @@ forms/<slug>/
   front-end-form-with-svelte/                      # Patient questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit)
-  full-stack-with-loco-tera-htmx-alpine/ # Full-stack Rust backend
+  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend (axum + Loco + Tera + HTMX + Alpine.js)
 ```
 
 ## Design patterns
@@ -108,7 +109,8 @@ forms/<slug>/
 See the per-stack agent docs:
 
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Rust / axum / Loco / HTMX / Alpine.js](AGENTS/full-stack-with-rust-axum-loco-htmx-alpine.md)
+- [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
+- [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
@@ -120,8 +122,10 @@ See the per-stack agent docs:
 - `bin/test` — validate structure of all forms
 - `bin/test-form <slug>` — validate one form
 - `bin/update` — run the update/upgrade/fix/harmonize/audit/test prompt via Claude Code
-- `bin/generate-xml-representations.py` — generate XML + DTD from SQL migrations
-- `bin/generate-fhir-r5-representations.py` — generate FHIR R5 JSON from SQL migrations
+- `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
+- `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
+- `bin/xml-representations/generate-xml-representations.py` — generate XML + DTD from SQL migrations
+- `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR R5 JSON from SQL migrations
 
 ## Compliance
 

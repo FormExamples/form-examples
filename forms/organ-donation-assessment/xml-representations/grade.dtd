@@ -1,0 +1,10 @@
+<!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,eligibility,overall_risk_level,donor_risk_index,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT assessment_id (#PCDATA)>
+<!ELEMENT eligibility (#PCDATA)>
+<!ELEMENT overall_risk_level (#PCDATA)>
+<!ELEMENT donor_risk_index (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

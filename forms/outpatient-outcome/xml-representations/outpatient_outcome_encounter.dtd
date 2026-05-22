@@ -1,0 +1,11 @@
+<!ELEMENT outpatient_outcome_encounter (id,created_at,updated_at,deleted_at,outpatient_outcome_id,clinic_date,specialty,clinician_id,modality,appointment_type)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT outpatient_outcome_id (#PCDATA)>
+<!ELEMENT clinic_date (#PCDATA)>
+<!ELEMENT specialty (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT modality (#PCDATA)>
+<!ELEMENT appointment_type (#PCDATA)>

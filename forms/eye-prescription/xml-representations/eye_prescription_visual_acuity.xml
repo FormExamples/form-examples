@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_prescription_visual_acuity SYSTEM "eye_prescription_visual_acuity.dtd">
+<eye_prescription_visual_acuity>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<distance_right_unaided></distance_right_unaided>
+<distance_left_unaided></distance_left_unaided>
+<distance_binocular_unaided></distance_binocular_unaided>
+<distance_right_corrected></distance_right_corrected>
+<distance_left_corrected></distance_left_corrected>
+<distance_binocular_corrected></distance_binocular_corrected>
+<near_right_unaided></near_right_unaided>
+<near_left_unaided></near_left_unaided>
+<near_binocular_unaided></near_binocular_unaided>
+<near_right_corrected></near_right_corrected>
+<near_left_corrected></near_left_corrected>
+<near_binocular_corrected></near_binocular_corrected>
+<pinhole_right></pinhole_right>
+<pinhole_left></pinhole_left>
+<dominant_eye>right</dominant_eye>
+</eye_prescription_visual_acuity>

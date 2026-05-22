@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE grade SYSTEM "grade.dtd">
+<grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<overall_highest_ukmec_category>1</overall_highest_ukmec_category>
+<ukmec_cocp>1</ukmec_cocp>
+<ukmec_pop>1</ukmec_pop>
+<ukmec_patch>1</ukmec_patch>
+<ukmec_ring>1</ukmec_ring>
+<ukmec_injection>1</ukmec_injection>
+<ukmec_implant>1</ukmec_implant>
+<ukmec_cu_iud>1</ukmec_cu_iud>
+<ukmec_lng_ius>1</ukmec_lng_ius>
+<ukmec_condom_male>1</ukmec_condom_male>
+<ukmec_condom_female>1</ukmec_condom_female>
+<ukmec_diaphragm>1</ukmec_diaphragm>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</grade>

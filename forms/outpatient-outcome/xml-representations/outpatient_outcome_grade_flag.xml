@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE outpatient_outcome_grade_flag SYSTEM "outpatient_outcome_grade_flag.dtd">
+<outpatient_outcome_grade_flag>
+<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<grade_id>660e8400-e29b-41d4-a716-446655440001</grade_id>
+<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<category>General</category>
+<description>Example text.</description>
+<priority>low</priority>
+</outpatient_outcome_grade_flag>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE eye_prescription_eye SYSTEM "eye_prescription_eye.dtd">
+<eye_prescription_eye>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<eye>right</eye>
+<sphere_diopters>0.0</sphere_diopters>
+<cylinder_diopters>0.0</cylinder_diopters>
+<axis_degrees>1</axis_degrees>
+<addition_diopters>0.0</addition_diopters>
+<intermediate_addition_diopters>0.0</intermediate_addition_diopters>
+<prism_horizontal_diopters>0.0</prism_horizontal_diopters>
+<base_horizontal>in</base_horizontal>
+<prism_vertical_diopters>0.0</prism_vertical_diopters>
+<base_vertical>up</base_vertical>
+</eye_prescription_eye>
