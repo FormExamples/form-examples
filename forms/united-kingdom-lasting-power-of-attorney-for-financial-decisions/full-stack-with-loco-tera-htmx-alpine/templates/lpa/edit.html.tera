@@ -1,0 +1,11 @@
+{% extends "base.html.tera" %}
+{% block title %}Edit LPA {{ item.id }}{% endblock %}
+{% block content %}
+<section class="lpa-edit">
+  <h2>Edit LPA {{ item.id }}</h2>
+  <form action="/lpa/{{ item.id }}" method="post" hx-put="/lpa/{{ item.id }}" hx-target="body" hx-swap="innerHTML">
+    {% include "lpa/_form.html.tera" %}
+    <button type="submit">Save</button>
+  </form>
+</section>
+{% endblock %}

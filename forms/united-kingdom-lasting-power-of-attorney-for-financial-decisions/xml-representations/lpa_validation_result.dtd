@@ -1,0 +1,9 @@
+<!ELEMENT lpa_validation_result (id,created_at,updated_at,deleted_at,lpa_id,validity_band,composite_risk,computed_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT validity_band (#PCDATA)>
+<!ELEMENT composite_risk (#PCDATA)>
+<!ELEMENT computed_at (#PCDATA)>

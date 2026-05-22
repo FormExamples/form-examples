@@ -1,0 +1,15 @@
+<!ELEMENT lasting_power_of_attorney (id,created_at,updated_at,deleted_at,donor_person_id,decision_mode,decision_mode_mixed_text,when_attorneys_can_act,preferences_text,instructions_text,legal_rights_acknowledged,opg_reference_number,opg_registration_date,status)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT donor_person_id (#PCDATA)>
+<!ELEMENT decision_mode (#PCDATA)>
+<!ELEMENT decision_mode_mixed_text (#PCDATA)>
+<!ELEMENT when_attorneys_can_act (#PCDATA)>
+<!ELEMENT preferences_text (#PCDATA)>
+<!ELEMENT instructions_text (#PCDATA)>
+<!ELEMENT legal_rights_acknowledged (#PCDATA)>
+<!ELEMENT opg_reference_number (#PCDATA)>
+<!ELEMENT opg_registration_date (#PCDATA)>
+<!ELEMENT status (#PCDATA)>

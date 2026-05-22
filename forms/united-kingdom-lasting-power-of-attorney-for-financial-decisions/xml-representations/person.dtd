@@ -1,0 +1,17 @@
+<!ELEMENT person (id,created_at,updated_at,deleted_at,title,first_names,last_name,other_names,date_of_birth,email,phone,address_id,is_trust_corporation,trust_corporation_number,is_bankrupt,has_debt_relief_order)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT first_names (#PCDATA)>
+<!ELEMENT last_name (#PCDATA)>
+<!ELEMENT other_names (#PCDATA)>
+<!ELEMENT date_of_birth (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT address_id (#PCDATA)>
+<!ELEMENT is_trust_corporation (#PCDATA)>
+<!ELEMENT trust_corporation_number (#PCDATA)>
+<!ELEMENT is_bankrupt (#PCDATA)>
+<!ELEMENT has_debt_relief_order (#PCDATA)>

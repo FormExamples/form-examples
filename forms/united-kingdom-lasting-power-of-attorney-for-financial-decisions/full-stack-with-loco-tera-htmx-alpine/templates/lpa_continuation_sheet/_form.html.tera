@@ -1,0 +1,12 @@
+<label>LPA ID <input type="text" name="lpa_id" value="{{ item.lpa_id | default(value='') }}"></label>
+<label>Kind
+  <select name="kind">
+    <option value="1_additional_people">1 — additional people</option>
+    <option value="2_additional_information">2 — additional information</option>
+    <option value="3_donor_cannot_sign">3 — donor cannot sign</option>
+    <option value="4_trust_corporation">4 — trust corporation</option>
+  </select>
+</label>
+<label>Body <textarea name="body_text">{{ item.body_text | default(value='') }}</textarea></label>
+<label>Signed on <input type="date" name="signed_on" value="{{ item.signed_on | default(value='') }}"></label>
+<label>Ordinal <input type="number" name="ordinal" value="{{ item.ordinal | default(value=1) }}"></label>

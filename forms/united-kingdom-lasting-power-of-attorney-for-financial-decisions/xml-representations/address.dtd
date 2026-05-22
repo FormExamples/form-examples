@@ -1,0 +1,10 @@
+<!ELEMENT address (id,created_at,updated_at,deleted_at,address_line_1,address_line_2,address_line_3,postcode,country_as_iso_3166_1_alpha_2)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT address_line_1 (#PCDATA)>
+<!ELEMENT address_line_2 (#PCDATA)>
+<!ELEMENT address_line_3 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>

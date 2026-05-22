@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_certificate_provider SYSTEM "lpa_certificate_provider.dtd">
+<lpa_certificate_provider>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>660e8400-e29b-41d4-a716-446655440001</lpa_id>
+<person_id>550e8400-e29b-41d4-a716-446655440000</person_id>
+<knows_donor_as>friend</knows_donor_as>
+<is_over_eighteen>true</is_over_eighteen>
+<read_lpa>true</read_lpa>
+<no_restrictions_on_acting>true</no_restrictions_on_acting>
+<eligibility_confirmation_at>2026-04-09T10:00:00Z</eligibility_confirmation_at>
+</lpa_certificate_provider>

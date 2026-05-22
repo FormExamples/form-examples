@@ -1,0 +1,8 @@
+<!ELEMENT lpa_attorney (id,created_at,updated_at,deleted_at,lpa_id,person_id,ordinal)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT person_id (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>

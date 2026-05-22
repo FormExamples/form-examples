@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_validation_result
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_financial_decisions;
+
+enum LpaValidationResultValidityBandEnum {
+  VALIDITYBAND_UNSPECIFIED = 0;
+  VALIDITYBAND_DRAFT = 1;  // draft
+  VALIDITYBAND_READY_FOR_SIGNING = 2;  // ready_for_signing
+  VALIDITYBAND_PARTIALLY_SIGNED = 3;  // partially_signed
+  VALIDITYBAND_FULLY_SIGNED = 4;  // fully_signed
+  VALIDITYBAND_READY_FOR_REGISTRATION = 5;  // ready_for_registration
+  VALIDITYBAND_SUBMITTED = 6;  // submitted
+  VALIDITYBAND_REGISTERED = 7;  // registered
+  VALIDITYBAND_REJECTED = 8;  // rejected
+}
+
+enum LpaValidationResultCompositeRiskEnum {
+  COMPOSITERISK_UNSPECIFIED = 0;
+  COMPOSITERISK_LOW = 1;  // low
+  COMPOSITERISK_MODERATE = 2;  // moderate
+  COMPOSITERISK_HIGH = 3;  // high
+  COMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+message LpaValidationResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  LpaValidationResultValidityBandEnum validity_band = 6;  // TEXT
+  LpaValidationResultCompositeRiskEnum composite_risk = 7;  // TEXT
+  string computed_at = 8;  // TIMESTAMPTZ — iso 8601
+}

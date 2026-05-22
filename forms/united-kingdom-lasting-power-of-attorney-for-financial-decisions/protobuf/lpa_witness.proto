@@ -1,0 +1,17 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_witness
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_financial_decisions;
+
+message LpaWitness {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string signature_id = 5;  // UUID — uuid
+  string witness_person_id = 6;  // UUID — uuid
+  string witness_signature_blob_path = 7;  // TEXT
+  string witnessed_on = 8;  // DATE — iso 8601 date
+}

@@ -1,0 +1,11 @@
+{% extends "base.html.tera" %}
+{% block title %}New LPA{% endblock %}
+{% block content %}
+<section class="lpa-new">
+  <h2>New lasting power of attorney</h2>
+  <form action="/lpa" method="post" hx-post="/lpa" hx-target="body" hx-swap="innerHTML">
+    {% include "lpa/_form.html.tera" %}
+    <button type="submit">Create</button>
+  </form>
+</section>
+{% endblock %}

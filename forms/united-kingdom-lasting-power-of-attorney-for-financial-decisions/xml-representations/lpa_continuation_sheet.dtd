@@ -1,0 +1,10 @@
+<!ELEMENT lpa_continuation_sheet (id,created_at,updated_at,deleted_at,lpa_id,kind,body_text,signed_on,ordinal)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT body_text (#PCDATA)>
+<!ELEMENT signed_on (#PCDATA)>
+<!ELEMENT ordinal (#PCDATA)>

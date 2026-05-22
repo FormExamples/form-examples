@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE address SYSTEM "address.dtd">
+<address>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<address_line_1></address_line_1>
+<address_line_2></address_line_2>
+<address_line_3></address_line_3>
+<postcode>SW1A 1AA</postcode>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+</address>

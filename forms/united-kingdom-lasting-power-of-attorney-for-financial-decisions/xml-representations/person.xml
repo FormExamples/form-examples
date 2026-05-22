@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE person SYSTEM "person.dtd">
+<person>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<title>Example Title</title>
+<first_names>Example</first_names>
+<last_name>Doe</last_name>
+<other_names>Example</other_names>
+<date_of_birth>1965-06-15</date_of_birth>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<address_id>660e8400-e29b-41d4-a716-446655440001</address_id>
+<is_trust_corporation>true</is_trust_corporation>
+<trust_corporation_number></trust_corporation_number>
+<is_bankrupt>true</is_bankrupt>
+<has_debt_relief_order>true</has_debt_relief_order>
+</person>

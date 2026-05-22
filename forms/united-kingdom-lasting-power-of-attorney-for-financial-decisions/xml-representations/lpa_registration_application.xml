@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_registration_application SYSTEM "lpa_registration_application.dtd">
+<lpa_registration_application>
+<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>660e8400-e29b-41d4-a716-446655440001</lpa_id>
+<applicant_kind>donor</applicant_kind>
+<payment_method>card</payment_method>
+<card_payment_phone></card_payment_phone>
+<reduced_fee_requested>true</reduced_fee_requested>
+<has_lpa120a_evidence>true</has_lpa120a_evidence>
+<is_repeat_application>true</is_repeat_application>
+<repeat_case_number></repeat_case_number>
+<payment_reference></payment_reference>
+<payment_date>2026-01-15</payment_date>
+<payment_amount>0.0</payment_amount>
+</lpa_registration_application>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jph/git/formexamples/form-examples/**)",
+      "Bash(bin/test-form united-kingdom-lasting-power-of-attorney-for-financial-decisions *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm run *)",
+      "Bash(pnpm install *)"
+    ]
+  }
+}

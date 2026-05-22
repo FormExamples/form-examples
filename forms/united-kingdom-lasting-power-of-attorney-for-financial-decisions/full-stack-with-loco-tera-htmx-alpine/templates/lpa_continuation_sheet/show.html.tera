@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block content %}<article><h2>Continuation sheet {{ item.id }}</h2>
+<dl><dt>Kind</dt><dd>{{ item.kind }}</dd><dt>Body</dt><dd>{{ item.body_text }}</dd><dt>Signed on</dt><dd>{{ item.signed_on }}</dd></dl>
+<a href="/lpa_continuation_sheet/{{ item.id }}/edit">edit</a></article>{% endblock %}

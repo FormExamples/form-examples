@@ -1,0 +1,9 @@
+<!ELEMENT lpa_witness (id,created_at,updated_at,deleted_at,signature_id,witness_person_id,witness_signature_blob_path,witnessed_on)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT signature_id (#PCDATA)>
+<!ELEMENT witness_person_id (#PCDATA)>
+<!ELEMENT witness_signature_blob_path (#PCDATA)>
+<!ELEMENT witnessed_on (#PCDATA)>

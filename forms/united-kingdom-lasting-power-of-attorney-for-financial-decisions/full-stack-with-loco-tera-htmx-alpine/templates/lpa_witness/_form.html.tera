@@ -1,0 +1,4 @@
+<label>Signature ID <input type="text" name="signature_id" value="{{ item.signature_id | default(value='') }}"></label>
+<label>Witness person ID <input type="text" name="witness_person_id" value="{{ item.witness_person_id | default(value='') }}"></label>
+<label>Witness signature blob path <input type="text" name="witness_signature_blob_path" value="{{ item.witness_signature_blob_path | default(value='') }}"></label>
+<label>Witnessed on <input type="date" name="witnessed_on" value="{{ item.witnessed_on | default(value='') }}"></label>

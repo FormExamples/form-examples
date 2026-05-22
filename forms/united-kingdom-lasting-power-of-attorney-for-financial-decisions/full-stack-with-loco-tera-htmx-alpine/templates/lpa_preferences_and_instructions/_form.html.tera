@@ -1,0 +1,5 @@
+<label>LPA ID <input type="text" name="lpa_id" value="{{ item.lpa_id | default(value='') }}"></label>
+<label>Preferences overflow <textarea name="preferences_overflow_text">{{ item.preferences_overflow_text | default(value='') }}</textarea></label>
+<label>Instructions overflow <textarea name="instructions_overflow_text">{{ item.instructions_overflow_text | default(value='') }}</textarea></label>
+<label>Decisions-jointly overflow <textarea name="decisions_jointly_overflow_text">{{ item.decisions_jointly_overflow_text | default(value='') }}</textarea></label>
+<label>Replacement step-in overflow <textarea name="replacement_step_in_overflow_text">{{ item.replacement_step_in_overflow_text | default(value='') }}</textarea></label>

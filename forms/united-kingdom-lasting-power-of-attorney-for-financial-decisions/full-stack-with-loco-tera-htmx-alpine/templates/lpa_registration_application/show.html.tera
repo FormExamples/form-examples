@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block content %}<article><h2>Registration application {{ item.id }}</h2>
+<dl><dt>LPA</dt><dd>{{ item.lpa_id }}</dd><dt>Applicant kind</dt><dd>{{ item.applicant_kind }}</dd><dt>Payment method</dt><dd>{{ item.payment_method }}</dd></dl>
+<a href="/lpa_registration_application/{{ item.id }}/edit">edit</a></article>{% endblock %}

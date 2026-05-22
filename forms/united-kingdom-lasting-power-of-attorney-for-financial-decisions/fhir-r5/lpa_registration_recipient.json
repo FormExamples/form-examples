@@ -1,0 +1,228 @@
+{
+  "resourceType": "Observation",
+  "id": "220e8400-e29b-41d4-a716-44665544000c",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+        "code": "lpa_registration_recipient",
+        "display": "Lpa Registration Recipient"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+  },
+  "encounter": {
+    "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "recipient_kind",
+            "display": "Recipient Kind"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:recipient_kind",
+            "code": "donor",
+            "display": "Donor"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "company_name",
+            "display": "Company Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "prefers_post",
+            "display": "Prefers Post"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "prefers_phone",
+            "display": "Prefers Phone"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "prefers_email",
+            "display": "Prefers Email"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "prefers_welsh",
+            "display": "Prefers Welsh"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "contact_phone",
+            "display": "Contact Phone"
+          }
+        ]
+      },
+      "valueString": "07700900000"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "contact_email",
+            "display": "Contact Email"
+          }
+        ]
+      },
+      "valueString": "jane.doe@example.com"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_first_names",
+            "display": "Other First Names"
+          }
+        ]
+      },
+      "valueString": "Jane"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_last_name",
+            "display": "Other Last Name"
+          }
+        ]
+      },
+      "valueString": "Doe"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_address_line_1",
+            "display": "Other Address Line 1"
+          }
+        ]
+      },
+      "valueString": "10 High Street"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_address_line_2",
+            "display": "Other Address Line 2"
+          }
+        ]
+      },
+      "valueString": "Westminster"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_address_line_3",
+            "display": "Other Address Line 3"
+          }
+        ]
+      },
+      "valueString": "London"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "other_postcode",
+            "display": "Other Postcode"
+          }
+        ]
+      },
+      "valueString": "SW1A 1AA"
+    }
+  ]
+}

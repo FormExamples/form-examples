@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lasting_power_of_attorney
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_financial_decisions;
+
+enum LastingPowerOfAttorneyDecisionModeEnum {
+  DECISIONMODE_UNSPECIFIED = 0;
+  DECISIONMODE_SINGLE_ATTORNEY = 1;  // single_attorney
+  DECISIONMODE_JOINTLY_AND_SEVERALLY = 2;  // jointly_and_severally
+  DECISIONMODE_JOINTLY = 3;  // jointly
+  DECISIONMODE_MIXED = 4;  // mixed
+}
+
+enum LastingPowerOfAttorneyWhenAttorneysCanActEnum {
+  WHENATTORNEYSCANACT_UNSPECIFIED = 0;
+  WHENATTORNEYSCANACT_AS_SOON_AS_REGISTERED = 1;  // as_soon_as_registered
+  WHENATTORNEYSCANACT_ONLY_WHEN_NO_CAPACITY = 2;  // only_when_no_capacity
+}
+
+enum LastingPowerOfAttorneyStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_READY_FOR_SIGNING = 2;  // ready_for_signing
+  STATUS_PARTIALLY_SIGNED = 3;  // partially_signed
+  STATUS_FULLY_SIGNED = 4;  // fully_signed
+  STATUS_READY_FOR_REGISTRATION = 5;  // ready_for_registration
+  STATUS_SUBMITTED = 6;  // submitted
+  STATUS_REGISTERED = 7;  // registered
+  STATUS_REJECTED = 8;  // rejected
+}
+
+message LastingPowerOfAttorney {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string donor_person_id = 5;  // UUID — uuid
+  LastingPowerOfAttorneyDecisionModeEnum decision_mode = 6;  // TEXT
+  string decision_mode_mixed_text = 7;  // TEXT
+  LastingPowerOfAttorneyWhenAttorneysCanActEnum when_attorneys_can_act = 8;  // TEXT
+  string preferences_text = 9;  // TEXT
+  string instructions_text = 10;  // TEXT
+  bool legal_rights_acknowledged = 11;  // BOOLEAN
+  string opg_reference_number = 12;  // TEXT
+  string opg_registration_date = 13;  // DATE — iso 8601 date
+  LastingPowerOfAttorneyStatusEnum status = 14;  // TEXT
+}

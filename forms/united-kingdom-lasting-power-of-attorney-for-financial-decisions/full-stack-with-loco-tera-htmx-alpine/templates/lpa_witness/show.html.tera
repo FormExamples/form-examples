@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block content %}<article><h2>Witness {{ item.id }}</h2>
+<dl><dt>Signature</dt><dd>{{ item.signature_id }}</dd><dt>Witness person</dt><dd>{{ item.witness_person_id }}</dd><dt>Witnessed on</dt><dd>{{ item.witnessed_on }}</dd></dl>
+<a href="/lpa_witness/{{ item.id }}/edit">edit</a></article>{% endblock %}

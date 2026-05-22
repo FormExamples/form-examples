@@ -1,0 +1,11 @@
+<label>Title <input type="text" name="title" value="{{ item.title | default(value='') }}"></label>
+<label>First names <input type="text" name="first_names" value="{{ item.first_names | default(value='') }}"></label>
+<label>Last name <input type="text" name="last_name" value="{{ item.last_name | default(value='') }}"></label>
+<label>Other names <input type="text" name="other_names" value="{{ item.other_names | default(value='') }}"></label>
+<label>Date of birth <input type="date" name="date_of_birth" value="{{ item.date_of_birth | default(value='') }}"></label>
+<label>Email <input type="email" name="email" value="{{ item.email | default(value='') }}"></label>
+<label>Phone <input type="tel" name="phone" value="{{ item.phone | default(value='') }}"></label>
+<label><input type="checkbox" name="is_trust_corporation" value="true" {% if item.is_trust_corporation %}checked{% endif %}> Trust corporation</label>
+<label>Trust corporation number <input type="text" name="trust_corporation_number" value="{{ item.trust_corporation_number | default(value='') }}"></label>
+<label><input type="checkbox" name="is_bankrupt" value="true" {% if item.is_bankrupt %}checked{% endif %}> Bankrupt</label>
+<label><input type="checkbox" name="has_debt_relief_order" value="true" {% if item.has_debt_relief_order %}checked{% endif %}> Debt relief order</label>

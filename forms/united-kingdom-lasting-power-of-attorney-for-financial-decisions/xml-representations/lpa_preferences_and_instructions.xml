@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_preferences_and_instructions SYSTEM "lpa_preferences_and_instructions.dtd">
+<lpa_preferences_and_instructions>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>660e8400-e29b-41d4-a716-446655440001</lpa_id>
+<preferences_overflow_text>Example text.</preferences_overflow_text>
+<instructions_overflow_text>Example text.</instructions_overflow_text>
+<decisions_jointly_overflow_text>Example text.</decisions_jointly_overflow_text>
+<replacement_step_in_overflow_text>Example text.</replacement_step_in_overflow_text>
+</lpa_preferences_and_instructions>

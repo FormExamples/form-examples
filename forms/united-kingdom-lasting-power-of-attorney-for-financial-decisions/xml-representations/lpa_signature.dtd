@@ -1,0 +1,13 @@
+<!ELEMENT lpa_signature (id,created_at,updated_at,deleted_at,lpa_id,signatory_person_id,role,lp1f_section,signature_blob_path,signed_on,signed_on_behalf_full_name,is_witnessed)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT signatory_person_id (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT lp1f_section (#PCDATA)>
+<!ELEMENT signature_blob_path (#PCDATA)>
+<!ELEMENT signed_on (#PCDATA)>
+<!ELEMENT signed_on_behalf_full_name (#PCDATA)>
+<!ELEMENT is_witnessed (#PCDATA)>

@@ -1,0 +1,32 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_signature
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_financial_decisions;
+
+enum LpaSignatureRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_DONOR = 1;  // donor
+  ROLE_CERTIFICATE_PROVIDER = 2;  // certificate_provider
+  ROLE_ATTORNEY = 3;  // attorney
+  ROLE_REPLACEMENT_ATTORNEY = 4;  // replacement_attorney
+  ROLE_APPLICANT = 5;  // applicant
+  ROLE_SIGNING_ON_BEHALF_OF_DONOR = 6;  // signing_on_behalf_of_donor
+  ROLE_TRUST_CORPORATION_AUTHORISED_PERSON = 7;  // trust_corporation_authorised_person
+}
+
+message LpaSignature {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  string signatory_person_id = 6;  // UUID — uuid
+  LpaSignatureRoleEnum role = 7;  // TEXT
+  int32 lp1f_section = 8;  // SMALLINT
+  string signature_blob_path = 9;  // TEXT
+  string signed_on = 10;  // DATE — iso 8601 date
+  string signed_on_behalf_full_name = 11;  // TEXT
+  bool is_witnessed = 12;  // BOOLEAN
+}

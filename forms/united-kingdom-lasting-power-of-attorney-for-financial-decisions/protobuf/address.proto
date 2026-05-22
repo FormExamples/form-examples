@@ -1,0 +1,18 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: address
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_financial_decisions;
+
+message Address {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string address_line_1 = 5;  // TEXT
+  string address_line_2 = 6;  // TEXT
+  string address_line_3 = 7;  // TEXT
+  string postcode = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // TEXT
+}

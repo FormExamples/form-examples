@@ -1,0 +1,11 @@
+<!ELEMENT lpa_validation_rule (id,created_at,updated_at,deleted_at,lpa_id,rule_name,priority,statutory_citation,remediation_hint,fired_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT rule_name (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT statutory_citation (#PCDATA)>
+<!ELEMENT remediation_hint (#PCDATA)>
+<!ELEMENT fired_at (#PCDATA)>

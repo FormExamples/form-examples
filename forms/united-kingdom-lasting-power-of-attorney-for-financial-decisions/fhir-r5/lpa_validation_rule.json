@@ -1,0 +1,120 @@
+{
+  "resourceType": "Observation",
+  "id": "440e8400-e29b-41d4-a716-44665544000e",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+        "code": "lpa_validation_rule",
+        "display": "Lpa Validation Rule"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+  },
+  "encounter": {
+    "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "rule_name",
+            "display": "Rule Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "priority",
+            "display": "Priority"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:priority",
+            "code": "low",
+            "display": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "statutory_citation",
+            "display": "Statutory Citation"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "remediation_hint",
+            "display": "Remediation Hint"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+            "code": "fired_at",
+            "display": "Fired At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

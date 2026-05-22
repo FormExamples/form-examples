@@ -1,0 +1,5 @@
+{% extends "base.html.tera" %}
+{% block title %}Address{% endblock %}
+{% block content %}<article><h2>Address {{ item.id }}</h2>
+<p>{{ item.address_line_1 }}<br>{{ item.address_line_2 }}<br>{{ item.address_line_3 }}<br>{{ item.postcode }} ({{ item.country_as_iso_3166_1_alpha_2 }})</p>
+<p><a href="/address/{{ item.id }}/edit">edit</a></p></article>{% endblock %}

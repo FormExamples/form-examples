@@ -1,0 +1,5 @@
+{% extends "base.html.tera" %}
+{% block title %}Addresses{% endblock %}
+{% block content %}<h2>Addresses</h2><p><a href="/address/new">New</a></p>
+<ul>{% for row in items %}<li><a href="/address/{{ row.id }}">{{ row.address_line_1 }}, {{ row.postcode }}</a></li>{% endfor %}</ul>
+{% endblock %}

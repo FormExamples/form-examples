@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UK Lasting Power of Attorney for Financial Decisions — single-page wizard</title>
+  <meta name="description" content="Single-page 15-step wizard for the LP1F lasting power of attorney for property and financial affairs. Mental Capacity Act 2005, LPA Regulations 2007.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body x-data="lpaWizard()" x-cloak>
+  <a class="skip-link" href="#step-1">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>UK Lasting Power of Attorney for Financial Decisions</h1>
+      <p>LP1F single-page wizard — Mental Capacity Act 2005 and the Lasting Powers of Attorney, Enduring Powers of Attorney and Public Guardian Regulations 2007.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <!-- ============================================================ -->
+      <!-- LEFT: 15-step wizard                                          -->
+      <!-- ============================================================ -->
+      <div>
+        <!-- table of contents -->
+        <ul class="toc" aria-label="Wizard steps">
+          <template x-for="step in steps" :key="step.n">
+            <li>
+              <a :href="'#step-' + step.n">
+                <span x-text="step.n"></span>.
+                <span x-text="step.title"></span>
+              </a>
+            </li>
+          </template>
+        </ul>
+
+        <!-- demo controls -->
+        <div class="step-card flex flex-wrap gap-2 items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-600 m-0">Demo controls — load a clean-deed sample, or clear all data.</p>
+          </div>
+          <div class="flex gap-2">
+            <button type="button" class="btn btn-secondary btn-sm" @click="loadSample()">Load sample</button>
+            <button type="button" class="btn btn-danger btn-sm" @click="resetAll()">Reset</button>
+          </div>
+        </div>
+
+        <!-- =================== Step 1 — Donor =================== -->
+        <section id="step-1" class="step-card" aria-labelledby="step-1-heading">
+          <h2 id="step-1-heading">Step 1 — Donor</h2>
+          <p class="step-section-ref">LP1F section 1 — the person making the LPA.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="donor-title">Title</label>
+              <input id="donor-title" type="text" x-model="state.donor.title">
+            </div>
+            <div class="field">
+              <label for="donor-first-names">First names</label>
+              <input id="donor-first-names" type="text" x-model="state.donor.firstNames">
+            </div>
+            <div class="field">
+              <label for="donor-last-name">Last name</label>
+              <input id="donor-last-name" type="text" x-model="state.donor.lastName">
+            </div>
+            <div class="field">
+              <label for="donor-other-names">Other names</label>
+              <input id="donor-other-names" type="text" x-model="state.donor.otherNames">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="donor-dob">Date of birth</label>
+              <input id="donor-dob" type="date" x-model="state.donor.dateOfBirth">
+            </div>
+            <div class="field">
+              <label for="donor-email">Email</label>
+              <input id="donor-email" type="email" x-model="state.donor.email">
+            </div>
+            <div class="field">
+              <label for="donor-phone">Phone</label>
+              <input id="donor-phone" type="tel" x-model="state.donor.phone">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="donor-address-1">Address line 1</label>
+            <input id="donor-address-1" type="text" x-model="state.donor.addressLine1">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="donor-address-2">Address line 2</label>
+              <input id="donor-address-2" type="text" x-model="state.donor.addressLine2">
+            </div>
+            <div class="field">
+              <label for="donor-address-3">Address line 3</label>
+              <input id="donor-address-3" type="text" x-model="state.donor.addressLine3">
+            </div>
+            <div class="field">
+              <label for="donor-postcode">Postcode</label>
+              <input id="donor-postcode" type="text" x-model="state.donor.postcode">
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== Step 2 — Attorneys =================== -->
+        <section id="step-2" class="step-card" aria-labelledby="step-2-heading">
+          <h2 id="step-2-heading">Step 2 — Attorneys</h2>
+          <p class="step-section-ref">LP1F section 2 — 1 or more attorneys. Trust corporation requires LPC sheet 4; over four attorneys requires LPC sheet 1.</p>
+
+          <template x-for="(a, i) in state.attorneys" :key="i">
+            <div class="person-card">
+              <div class="person-card-header">
+                <h3>Attorney <span x-text="i + 1"></span></h3>
+                <button type="button" class="btn btn-danger btn-sm" @click="removeAttorney(i)">Remove</button>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label>Title</label>
+                  <input type="text" x-model="state.attorneys[i].title">
+                </div>
+                <div class="field">
+                  <label>First names</label>
+                  <input type="text" x-model="state.attorneys[i].firstNames">
+                </div>
+                <div class="field">
+                  <label>Last name</label>
+                  <input type="text" x-model="state.attorneys[i].lastName">
+                </div>
+                <div class="field">
+                  <label>Date of birth</label>
+                  <input type="date" x-model="state.attorneys[i].dateOfBirth">
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label>Email</label>
+                  <input type="email" x-model="state.attorneys[i].email">
+                </div>
+                <div class="field">
+                  <label>Address line 1</label>
+                  <input type="text" x-model="state.attorneys[i].addressLine1">
+                </div>
+                <div class="field">
+                  <label>Postcode</label>
+                  <input type="text" x-model="state.attorneys[i].postcode">
+                </div>
+              </div>
+
+              <div class="checkbox-row">
+                <input :id="'attorney-trust-' + i" type="checkbox" x-model="state.attorneys[i].isTrustCorporation">
+                <label :for="'attorney-trust-' + i">Trust corporation (requires LPC continuation sheet 4)</label>
+              </div>
+              <div class="checkbox-row">
+                <input :id="'attorney-bankrupt-' + i" type="checkbox" x-model="state.attorneys[i].isBankrupt">
+                <label :for="'attorney-bankrupt-' + i">Bankrupt</label>
+              </div>
+              <div class="checkbox-row">
+                <input :id="'attorney-dro-' + i" type="checkbox" x-model="state.attorneys[i].hasDebtReliefOrder">
+                <label :for="'attorney-dro-' + i">Subject to debt relief order</label>
+              </div>
+            </div>
+          </template>
+
+          <div class="flex flex-wrap gap-2 items-center mt-2">
+            <button type="button" class="btn btn-primary btn-sm" @click="addAttorney()">Add attorney</button>
+            <span class="text-sm text-slate-500" x-text="attorneyCount() + ' attorney(s)'"></span>
+          </div>
+
+          <div class="checkbox-row mt-3">
+            <input id="cont-sheet-1" type="checkbox" x-model="state.hasContinuationSheet1">
+            <label for="cont-sheet-1">LPC continuation sheet 1 attached (needed for &gt; 4 attorneys)</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="cont-sheet-4" type="checkbox" x-model="state.hasContinuationSheet4">
+            <label for="cont-sheet-4">LPC continuation sheet 4 attached (needed for trust corporation)</label>
+          </div>
+        </section>
+
+        <!-- =================== Step 3 — Decision mode =================== -->
+        <section id="step-3" class="step-card" aria-labelledby="step-3-heading">
+          <h2 id="step-3-heading">Step 3 — How attorneys make decisions</h2>
+          <p class="step-section-ref">LP1F section 3 — single, jointly and severally, jointly, or mixed (requires LPC sheet 2).</p>
+
+          <div class="field">
+            <label for="decision-mode">Decision mode</label>
+            <select id="decision-mode" x-model="state.decisionMode">
+              <option value="">— choose —</option>
+              <option value="single_attorney">Single attorney</option>
+              <option value="jointly_and_severally">Jointly and severally</option>
+              <option value="jointly">Jointly</option>
+              <option value="mixed">Jointly for some, jointly and severally for others (mixed)</option>
+            </select>
+          </div>
+
+          <div class="field" x-show="state.decisionMode === 'mixed'">
+            <label for="mixed-text">Which decisions are joint?</label>
+            <textarea id="mixed-text" x-model="state.decisionModeMixedText" placeholder="Describe which decisions must be made jointly (e.g. selling property, gifts over £500)."></textarea>
+          </div>
+
+          <div class="checkbox-row" x-show="state.decisionMode === 'mixed'">
+            <input id="cont-sheet-2" type="checkbox" x-model="state.hasContinuationSheet2">
+            <label for="cont-sheet-2">LPC continuation sheet 2 attached</label>
+          </div>
+        </section>
+
+        <!-- =================== Step 4 — Replacement attorneys =================== -->
+        <section id="step-4" class="step-card" aria-labelledby="step-4-heading">
+          <h2 id="step-4-heading">Step 4 — Replacement attorneys</h2>
+          <p class="step-section-ref">LP1F section 4 — 0 or more replacement attorneys.</p>
+
+          <template x-for="(r, i) in state.replacementAttorneys" :key="i">
+            <div class="person-card">
+              <div class="person-card-header">
+                <h3>Replacement <span x-text="i + 1"></span></h3>
+                <button type="button" class="btn btn-danger btn-sm" @click="removeReplacement(i)">Remove</button>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>First names</label><input type="text" x-model="state.replacementAttorneys[i].firstNames"></div>
+                <div class="field"><label>Last name</label><input type="text" x-model="state.replacementAttorneys[i].lastName"></div>
+                <div class="field"><label>Date of birth</label><input type="date" x-model="state.replacementAttorneys[i].dateOfBirth"></div>
+                <div class="field"><label>Postcode</label><input type="text" x-model="state.replacementAttorneys[i].postcode"></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>Email</label><input type="email" x-model="state.replacementAttorneys[i].email"></div>
+                <div class="field"><label>Address line 1</label><input type="text" x-model="state.replacementAttorneys[i].addressLine1"></div>
+              </div>
+              <div class="checkbox-row">
+                <input :id="'rep-bankrupt-' + i" type="checkbox" x-model="state.replacementAttorneys[i].isBankrupt">
+                <label :for="'rep-bankrupt-' + i">Bankrupt</label>
+              </div>
+            </div>
+          </template>
+
+          <div class="flex flex-wrap gap-2 items-center mt-2">
+            <button type="button" class="btn btn-primary btn-sm" @click="addReplacement()">Add replacement</button>
+            <span class="text-sm text-slate-500" x-text="replacementCount() + ' replacement(s)'"></span>
+          </div>
+        </section>
+
+        <!-- =================== Step 5 — When =================== -->
+        <section id="step-5" class="step-card" aria-labelledby="step-5-heading">
+          <h2 id="step-5-heading">Step 5 — When attorneys can act</h2>
+          <p class="step-section-ref">LP1F section 5 — as soon as registered, or only when no capacity.</p>
+
+          <div class="field">
+            <label for="when-act">When can the attorneys begin acting?</label>
+            <select id="when-act" x-model="state.whenAttorneysCanAct">
+              <option value="">— choose —</option>
+              <option value="as_soon_as_registered">As soon as the LPA is registered (recommended)</option>
+              <option value="only_when_no_capacity">Only when I don't have mental capacity</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- =================== Step 6 — People to notify =================== -->
+        <section id="step-6" class="step-card" aria-labelledby="step-6-heading">
+          <h2 id="step-6-heading">Step 6 — People to notify</h2>
+          <p class="step-section-ref">LP1F section 6 — 0 to 5 people who are notified when the LPA is sent for registration.</p>
+
+          <template x-for="(p, i) in state.peopleToNotify" :key="i">
+            <div class="person-card">
+              <div class="person-card-header">
+                <h3>Person to notify <span x-text="i + 1"></span></h3>
+                <button type="button" class="btn btn-danger btn-sm" @click="removePersonToNotify(i)">Remove</button>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>Title</label><input type="text" x-model="state.peopleToNotify[i].title"></div>
+                <div class="field"><label>First names</label><input type="text" x-model="state.peopleToNotify[i].firstNames"></div>
+                <div class="field"><label>Last name</label><input type="text" x-model="state.peopleToNotify[i].lastName"></div>
+                <div class="field"><label>Postcode</label><input type="text" x-model="state.peopleToNotify[i].postcode"></div>
+              </div>
+              <div class="field"><label>Address line 1</label><input type="text" x-model="state.peopleToNotify[i].addressLine1"></div>
+            </div>
+          </template>
+
+          <div class="flex flex-wrap gap-2 items-center mt-2">
+            <button type="button" class="btn btn-primary btn-sm" @click="addPersonToNotify()" :disabled="ptnCount() >= 5">Add person to notify</button>
+            <span class="text-sm text-slate-500" x-text="ptnCount() + ' of 5'"></span>
+          </div>
+        </section>
+
+        <!-- =================== Step 7 — Preferences and instructions =================== -->
+        <section id="step-7" class="step-card" aria-labelledby="step-7-heading">
+          <h2 id="step-7-heading">Step 7 — Preferences and instructions</h2>
+          <p class="step-section-ref">LP1F section 7 — non-binding preferences and legally binding instructions.</p>
+
+          <div class="field">
+            <label for="preferences">Preferences (non-binding guidance)</label>
+            <textarea id="preferences" x-model="state.preferencesText" maxlength="2000" placeholder="Optional non-binding guidance to your attorneys."></textarea>
+            <p class="field-help"><span x-text="(state.preferencesText || '').length"></span> / 2000 characters</p>
+          </div>
+          <div class="field">
+            <label for="instructions">Instructions (legally binding)</label>
+            <textarea id="instructions" x-model="state.instructionsText" maxlength="2000" placeholder="Optional instructions the attorneys must follow."></textarea>
+            <p class="field-help"><span x-text="(state.instructionsText || '').length"></span> / 2000 characters — long or complex instructions risk OPG rejection.</p>
+          </div>
+        </section>
+
+        <!-- =================== Step 8 — Legal rights =================== -->
+        <section id="step-8" class="step-card" aria-labelledby="step-8-heading">
+          <h2 id="step-8-heading">Step 8 — Legal rights</h2>
+          <p class="step-section-ref">LP1F section 8 — the donor confirms they have read the legal-rights statement.</p>
+
+          <div class="checkbox-row">
+            <input id="legal-rights" type="checkbox" x-model="state.legalRightsAcknowledged">
+            <label for="legal-rights">I confirm I have read and understood the legal-rights statement in the LP1F.</label>
+          </div>
+        </section>
+
+        <!-- =================== Step 9 — Donor signature =================== -->
+        <section id="step-9" class="step-card" aria-labelledby="step-9-heading">
+          <h2 id="step-9-heading">Step 9 — Donor signature</h2>
+          <p class="step-section-ref">LP1F section 9 — donor signs first, in the presence of a witness.</p>
+
+          <div class="checkbox-row">
+            <input id="donor-sig-present" type="checkbox" x-model="state.donorSignature.present">
+            <label for="donor-sig-present">Donor signature captured</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="donor-capacity" type="checkbox" x-model="state.donorSignature.capacityConfirmed">
+            <label for="donor-capacity">I confirm the donor has mental capacity at the time of signing (MCA 2005 s. 9(2)(c)).</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="donor-on-behalf" type="checkbox" x-model="state.donorSignature.signedOnBehalf">
+            <label for="donor-on-behalf">Signed by another person at the donor's direction (requires LPC sheet 3)</label>
+          </div>
+          <div class="checkbox-row" x-show="state.donorSignature.signedOnBehalf">
+            <input id="cont-sheet-3" type="checkbox" x-model="state.hasContinuationSheet3">
+            <label for="cont-sheet-3">LPC continuation sheet 3 attached</label>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="donor-signed-at">Date donor signed</label>
+              <input id="donor-signed-at" type="date" x-model="state.donorSignature.signedAt">
+            </div>
+          </div>
+
+          <h3 class="text-base font-semibold mt-4 mb-2 text-slate-700">Witness to donor's signature</h3>
+          <div class="field-row">
+            <div class="field"><label>Witness first names</label><input type="text" x-model="state.donorSignature.witness.firstNames"></div>
+            <div class="field"><label>Witness last name</label><input type="text" x-model="state.donorSignature.witness.lastName"></div>
+            <div class="field"><label>Postcode</label><input type="text" x-model="state.donorSignature.witness.postcode"></div>
+            <div class="field"><label>Date witnessed</label><input type="date" x-model="state.donorSignature.witness.signedAt"></div>
+          </div>
+          <div class="field"><label>Witness address line 1</label><input type="text" x-model="state.donorSignature.witness.addressLine1"></div>
+        </section>
+
+        <!-- =================== Step 10 — Certificate provider =================== -->
+        <section id="step-10" class="step-card" aria-labelledby="step-10-heading">
+          <h2 id="step-10-heading">Step 10 — Certificate-provider signature</h2>
+          <p class="step-section-ref">LP1F section 10 — independent person certifies the donor understands and is not pressured.</p>
+
+          <div class="field-row">
+            <div class="field"><label>Title</label><input type="text" x-model="state.certificateProvider.title"></div>
+            <div class="field"><label>First names</label><input type="text" x-model="state.certificateProvider.firstNames"></div>
+            <div class="field"><label>Last name</label><input type="text" x-model="state.certificateProvider.lastName"></div>
+            <div class="field"><label>Date of birth</label><input type="date" x-model="state.certificateProvider.dateOfBirth"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Address line 1</label><input type="text" x-model="state.certificateProvider.addressLine1"></div>
+            <div class="field"><label>Postcode</label><input type="text" x-model="state.certificateProvider.postcode"></div>
+            <div class="field"><label>Email</label><input type="email" x-model="state.certificateProvider.email"></div>
+          </div>
+
+          <div class="field">
+            <label>How do you know the donor?</label>
+            <select x-model="state.certificateProvider.knowsDonorAs">
+              <option value="">— choose —</option>
+              <option value="friend">Personally known for 2+ years</option>
+              <option value="professional">Relevant professional skill (GP, solicitor, healthcare professional)</option>
+            </select>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="cp-over-18" type="checkbox" x-model="state.certificateProvider.isOverEighteen">
+            <label for="cp-over-18">I am 18 or over</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="cp-read" type="checkbox" x-model="state.certificateProvider.readLpa">
+            <label for="cp-read">I have read the LPA</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="cp-norestrict" type="checkbox" x-model="state.certificateProvider.noRestrictionsOnActing">
+            <label for="cp-norestrict">No statutory disqualification applies (LPA Regs 2007 reg. 8)</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="cp-relative" type="checkbox" x-model="state.certificateProvider.isRelatedToDonorOrAttorney">
+            <label for="cp-relative">I am a family member of the donor or any attorney (this disqualifies me)</label>
+          </div>
+          <div class="checkbox-row">
+            <input id="cp-carehome" type="checkbox" x-model="state.certificateProvider.isCareHomeOwner">
+            <label for="cp-carehome">I am an owner, manager, director, or employee of the donor's care home (this disqualifies me)</label>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Date certificate provider signed</label>
+              <input type="date" x-model="state.certificateProvider.signature.signedAt">
+            </div>
+            <div class="field">
+              <div class="checkbox-row" style="margin-top: 1.75rem;">
+                <input id="cp-sig" type="checkbox" x-model="state.certificateProvider.signature.present">
+                <label for="cp-sig">Signature captured</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== Step 11 — Attorney signatures =================== -->
+        <section id="step-11" class="step-card" aria-labelledby="step-11-heading">
+          <h2 id="step-11-heading">Step 11 — Attorney signatures</h2>
+          <p class="step-section-ref">LP1F section 11 — each attorney signs after the certificate provider, in the presence of a witness.</p>
+
+          <template x-if="attorneyCount() === 0">
+            <p class="text-sm text-slate-500">Add attorneys in step 2 first.</p>
+          </template>
+
+          <template x-for="(a, i) in state.attorneys" :key="i">
+            <div class="person-card" x-init="ensureAttorneySignature(i)">
+              <div class="person-card-header">
+                <h3>
+                  Attorney <span x-text="i + 1"></span>:
+                  <span x-text="(state.attorneys[i].firstNames || '') + ' ' + (state.attorneys[i].lastName || '')"></span>
+                </h3>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <div class="checkbox-row">
+                    <input :id="'att-sig-' + i" type="checkbox" x-model="state.attorneySignatures[i].present">
+                    <label :for="'att-sig-' + i">Signature captured</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Date signed</label>
+                  <input type="date" x-model="state.attorneySignatures[i].signedAt">
+                </div>
+              </div>
+              <h4 class="text-sm font-semibold mt-2 mb-1 text-slate-600">Witness</h4>
+              <div class="field-row">
+                <div class="field"><label>First names</label><input type="text" x-model="state.attorneySignatures[i].witness.firstNames"></div>
+                <div class="field"><label>Last name</label><input type="text" x-model="state.attorneySignatures[i].witness.lastName"></div>
+                <div class="field"><label>Postcode</label><input type="text" x-model="state.attorneySignatures[i].witness.postcode"></div>
+                <div class="field"><label>Date witnessed</label><input type="date" x-model="state.attorneySignatures[i].witness.signedAt"></div>
+              </div>
+              <div class="field"><label>Address line 1</label><input type="text" x-model="state.attorneySignatures[i].witness.addressLine1"></div>
+            </div>
+          </template>
+        </section>
+
+        <!-- =================== Step 12 — Applicant =================== -->
+        <section id="step-12" class="step-card" aria-labelledby="step-12-heading">
+          <h2 id="step-12-heading">Step 12 — Applicant</h2>
+          <p class="step-section-ref">LP1F section 12 — who applies to register the LPA.</p>
+
+          <div class="field">
+            <label for="applicant-kind">Who is applying?</label>
+            <select id="applicant-kind" x-model="state.applicantKind">
+              <option value="">— choose —</option>
+              <option value="donor">The donor</option>
+              <option value="attorneys">One or more attorneys</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- =================== Step 13 — Who receives the LPA =================== -->
+        <section id="step-13" class="step-card" aria-labelledby="step-13-heading">
+          <h2 id="step-13-heading">Step 13 — Who receives the LPA</h2>
+          <p class="step-section-ref">LP1F section 13 — the OPG returns the registered LPA to this contact, in this language and channel.</p>
+
+          <div class="field">
+            <label for="recipient-kind">Recipient</label>
+            <select id="recipient-kind" x-model="state.recipientKind">
+              <option value="">— choose —</option>
+              <option value="donor">The donor</option>
+              <option value="attorney">An attorney</option>
+              <option value="other">Other (e.g. solicitors' firm)</option>
+            </select>
+          </div>
+
+          <div class="field" x-show="state.recipientKind === 'other'">
+            <label for="recipient-company">Company / organisation name</label>
+            <input id="recipient-company" type="text" x-model="state.recipientCompanyName">
+          </div>
+
+          <div class="field">
+            <label for="prefers-contact">Preferred contact channel</label>
+            <select id="prefers-contact" x-model="state.prefersToBeContactedBy">
+              <option value="">— choose —</option>
+              <option value="post">Post</option>
+              <option value="phone">Phone</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="prefers-welsh" type="checkbox" x-model="state.prefersWelsh">
+            <label for="prefers-welsh">Welsh-language correspondence (Welsh Language Act 1993)</label>
+          </div>
+
+          <div class="field-row">
+            <div class="field"><label>Contact phone</label><input type="tel" x-model="state.contactPhone"></div>
+            <div class="field"><label>Contact email</label><input type="email" x-model="state.contactEmail"></div>
+          </div>
+        </section>
+
+        <!-- =================== Step 14 — Application fee =================== -->
+        <section id="step-14" class="step-card" aria-labelledby="step-14-heading">
+          <h2 id="step-14-heading">Step 14 — Application fee</h2>
+          <p class="step-section-ref">LP1F section 14 — OPG application fee, reduced-fee evidence (LPA120A), repeat-application case number.</p>
+
+          <div class="field">
+            <label for="payment-method">Payment method</label>
+            <select id="payment-method" x-model="state.paymentMethod">
+              <option value="">— choose —</option>
+              <option value="card">Card (OPG will phone for details)</option>
+              <option value="cheque">Cheque payable to "Office of the Public Guardian"</option>
+            </select>
+          </div>
+
+          <div class="field" x-show="state.paymentMethod === 'card'">
+            <label for="card-payment-phone">Phone number for card payment</label>
+            <input id="card-payment-phone" type="tel" x-model="state.cardPaymentPhone">
+          </div>
+
+          <div class="checkbox-row">
+            <input id="reduced-fee" type="checkbox" x-model="state.reducedFeeRequested">
+            <label for="reduced-fee">Reduced or waived fee requested (requires LPA120A and evidence)</label>
+          </div>
+          <div class="checkbox-row" x-show="state.reducedFeeRequested">
+            <input id="lpa120a" type="checkbox" x-model="state.hasLpa120aEvidence">
+            <label for="lpa120a">LPA120A evidence attached</label>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="repeat-app" type="checkbox" x-model="state.isRepeatApplication">
+            <label for="repeat-app">Repeat application after a previous rejection</label>
+          </div>
+          <div class="field" x-show="state.isRepeatApplication">
+            <label for="repeat-case">Previous OPG case number</label>
+            <input id="repeat-case" type="text" x-model="state.repeatCaseNumber">
+          </div>
+        </section>
+
+        <!-- =================== Step 15 — Registration signature =================== -->
+        <section id="step-15" class="step-card" aria-labelledby="step-15-heading">
+          <h2 id="step-15-heading">Step 15 — Registration signature</h2>
+          <p class="step-section-ref">LP1F section 15 — the applicant(s) sign the registration application.</p>
+
+          <template x-if="state.applicantKind === ''">
+            <p class="text-sm text-slate-500">Choose an applicant kind in step 12 first.</p>
+          </template>
+
+          <template x-if="state.applicantKind === 'donor'">
+            <div class="person-card">
+              <div class="person-card-header">
+                <h3>
+                  Donor:
+                  <span x-text="(state.donor.firstNames || '') + ' ' + (state.donor.lastName || '')"></span>
+                </h3>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <div class="checkbox-row">
+                    <input id="reg-sig-donor" type="checkbox"
+                      :checked="(state.registrationSignatures[0] && state.registrationSignatures[0].present) || false"
+                      @change="state.registrationSignatures = [{ present: $event.target.checked, signedAt: (state.registrationSignatures[0] && state.registrationSignatures[0].signedAt) || null }]">
+                    <label for="reg-sig-donor">Donor registration signature captured</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Date signed</label>
+                  <input type="date"
+                    :value="(state.registrationSignatures[0] && state.registrationSignatures[0].signedAt) || ''"
+                    @change="state.registrationSignatures = [{ present: (state.registrationSignatures[0] && state.registrationSignatures[0].present) || false, signedAt: $event.target.value }]">
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template x-if="state.applicantKind === 'attorneys'">
+            <div>
+              <template x-for="(a, i) in state.attorneys" :key="i">
+                <div class="person-card">
+                  <div class="person-card-header">
+                    <h3>
+                      Attorney <span x-text="i + 1"></span>:
+                      <span x-text="(state.attorneys[i].firstNames || '') + ' ' + (state.attorneys[i].lastName || '')"></span>
+                    </h3>
+                  </div>
+                  <div class="field-row">
+                    <div class="field">
+                      <div class="checkbox-row">
+                        <input :id="'reg-att-sig-' + i" type="checkbox"
+                          :checked="(state.registrationSignatures[i] && state.registrationSignatures[i].present) || false"
+                          @change="state.registrationSignatures[i] = { present: $event.target.checked, signedAt: (state.registrationSignatures[i] && state.registrationSignatures[i].signedAt) || null }">
+                        <label :for="'reg-att-sig-' + i">Signature captured</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label>Date signed</label>
+                      <input type="date"
+                        :value="(state.registrationSignatures[i] && state.registrationSignatures[i].signedAt) || ''"
+                        @change="state.registrationSignatures[i] = { present: (state.registrationSignatures[i] && state.registrationSignatures[i].present) || false, signedAt: $event.target.value }">
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </template>
+        </section>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- RIGHT: validation summary panel                               -->
+      <!-- ============================================================ -->
+      <aside aria-label="Validation summary">
+        <div class="summary-panel">
+          <h2>Validation</h2>
+          <div class="summary-row">
+            <span class="summary-label">Validity band</span>
+            <span class="summary-value">
+              <span class="badge badge-band" x-text="validation.validityBand.replace(/_/g, ' ')"></span>
+            </span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Composite risk</span>
+            <span class="summary-value">
+              <span :class="riskBadgeClass(validation.compositeRisk)" x-text="validation.compositeRisk"></span>
+            </span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Blockers</span>
+            <span class="summary-value" x-text="validation.firedRules.length"></span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Flags</span>
+            <span class="summary-value" x-text="validation.additionalFlags.length"></span>
+          </div>
+
+          <h3 class="text-sm font-semibold mt-3 mb-1 text-red-700" x-show="validation.firedRules.length > 0">
+            Statutory blockers
+          </h3>
+          <ul class="rule-list" x-show="validation.firedRules.length > 0">
+            <template x-for="(r, i) in validation.firedRules" :key="i + r.ruleId">
+              <li :class="ruleClass(r.priority)">
+                <div class="rule-id" x-text="r.ruleId"></div>
+                <div class="rule-citation" x-text="r.citation"></div>
+                <div class="rule-message" x-text="r.message"></div>
+                <div class="rule-remedy" x-text="r.remediation"></div>
+              </li>
+            </template>
+          </ul>
+
+          <h3 class="text-sm font-semibold mt-3 mb-1 text-amber-700" x-show="validation.additionalFlags.length > 0">
+            Additional flags
+          </h3>
+          <ul class="rule-list" x-show="validation.additionalFlags.length > 0">
+            <template x-for="(r, i) in validation.additionalFlags" :key="i + r.ruleId">
+              <li :class="ruleClass(r.priority)">
+                <div class="rule-id" x-text="r.ruleId"></div>
+                <div class="rule-citation" x-text="r.citation"></div>
+                <div class="rule-message" x-text="r.message"></div>
+                <div class="rule-remedy" x-text="r.remediation"></div>
+              </li>
+            </template>
+          </ul>
+
+          <p class="text-xs text-slate-500 mt-3" x-show="validation.firedRules.length === 0 && validation.additionalFlags.length === 0">
+            No blockers and no flags. The LPA is clean.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="page-footer">
+      <p>
+        LP1F lasting power of attorney for property and financial affairs.
+        Statutory basis: Mental Capacity Act 2005 (c. 9) and the Lasting
+        Powers of Attorney, Enduring Powers of Attorney and Public Guardian
+        Regulations 2007 (SI 2007/1253). This single-page wizard is a
+        drafting aid and is not legal advice.
+      </p>
+    </footer>
+  </main>
+
+  <!-- Order matters: validator -> sample-data -> app. -->
+  <script src="js/validator.js"></script>
+  <script src="js/sample-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

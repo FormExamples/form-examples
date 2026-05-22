@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block title %}People to notify{% endblock %}
+{% block content %}<h2>People to notify</h2><p><a href="/lpa_person_to_notify/new">New</a></p>
+<ul>{% for row in items %}<li><a href="/lpa_person_to_notify/{{ row.id }}">#{{ row.ordinal }} of LPA {{ row.lpa_id }}</a></li>{% endfor %}</ul>{% endblock %}

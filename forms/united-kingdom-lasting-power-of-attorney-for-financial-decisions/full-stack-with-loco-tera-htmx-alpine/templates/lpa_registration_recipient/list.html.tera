@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block title %}Registration recipients{% endblock %}
+{% block content %}<h2>Registration recipients</h2><p><a href="/lpa_registration_recipient/new">New</a></p>
+<ul>{% for row in items %}<li><a href="/lpa_registration_recipient/{{ row.id }}">{{ row.recipient_kind }} of LPA {{ row.lpa_id }}</a></li>{% endfor %}</ul>{% endblock %}

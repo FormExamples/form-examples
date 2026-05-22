@@ -1,0 +1,10 @@
+<!ELEMENT lpa_preferences_and_instructions (id,created_at,updated_at,deleted_at,lpa_id,preferences_overflow_text,instructions_overflow_text,decisions_jointly_overflow_text,replacement_step_in_overflow_text)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT preferences_overflow_text (#PCDATA)>
+<!ELEMENT instructions_overflow_text (#PCDATA)>
+<!ELEMENT decisions_jointly_overflow_text (#PCDATA)>
+<!ELEMENT replacement_step_in_overflow_text (#PCDATA)>

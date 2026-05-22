@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_validation_rule SYSTEM "lpa_validation_rule.dtd">
+<lpa_validation_rule>
+<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>660e8400-e29b-41d4-a716-446655440001</lpa_id>
+<rule_name>Example</rule_name>
+<priority>low</priority>
+<statutory_citation></statutory_citation>
+<remediation_hint></remediation_hint>
+<fired_at>2026-04-09T10:00:00Z</fired_at>
+</lpa_validation_rule>

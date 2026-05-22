@@ -1,0 +1,4 @@
+{% extends "base.html.tera" %}
+{% block title %}Witnesses{% endblock %}
+{% block content %}<h2>Witnesses</h2><p><a href="/lpa_witness/new">New</a></p>
+<ul>{% for row in items %}<li><a href="/lpa_witness/{{ row.id }}">witness for signature {{ row.signature_id }}</a></li>{% endfor %}</ul>{% endblock %}
