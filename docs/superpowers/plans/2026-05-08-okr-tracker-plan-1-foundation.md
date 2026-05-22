@@ -2,19 +2,19 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the foundation of the `objective-and-key-result-tracker` form: scaffolded directory, ten Liquibase SQL migrations, auto-generated XML and FHIR R5 representations, and a pure scoring engine implemented in TypeScript (Vitest) and Rust (`cargo test`) against a shared JSON fixture set.
+**Goal:** Build the foundation of the `objectives-and-key-results-tracker` form: scaffolded directory, ten Liquibase SQL migrations, auto-generated XML and FHIR R5 representations, and a pure scoring engine implemented in TypeScript (Vitest) and Rust (`cargo test`) against a shared JSON fixture set.
 
-**Architecture:** Mirror the existing `forms/issue-tracker/` scaffold. The scoring engine has identical TS and Rust ports living under `front-end-form-with-svelte/src/lib/engine/` and `full-stack-with-loco-tera-htmx-alpine/src/scoring/`. Both ports consume the same fixtures from `forms/objective-and-key-result-tracker/test-fixtures/scoring/*.json`. SQL is the source of truth; XML and FHIR JSON are auto-generated from the migrations.
+**Architecture:** Mirror the existing `forms/issue-tracker/` scaffold. The scoring engine has identical TS and Rust ports living under `front-end-form-with-svelte/src/lib/engine/` and `full-stack-with-loco-tera-htmx-alpine/src/scoring/`. Both ports consume the same fixtures from `forms/objectives-and-key-results-tracker/test-fixtures/scoring/*.json`. SQL is the source of truth; XML and FHIR JSON are auto-generated from the migrations.
 
 **Tech Stack:** PostgreSQL 18 + Liquibase SQL format, TypeScript 5 + Vitest 3, Rust 2024 edition + cargo test, Python 3 generation scripts (existing repo tooling).
 
-**Reference spec:** [`docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md`](../specs/2026-05-08-objective-and-key-result-tracker-design.md)
+**Reference spec:** [`docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md`](../specs/2026-05-08-objectives-and-key-results-tracker-design.md)
 
 **Out of scope (covered by later plans):** wizard UI in HTML and SvelteKit; HTML and Svelte dashboards; full Loco / axum / Tera / HTMX / Alpine.js Rust app; PDF export.
 
-**Plan-1 acceptance gate:** all of (a) `psql` roundtrip script applies migrations and inserts/selects pass; (b) `bin/xml-representations/generate-xml-representations.py forms/objective-and-key-result-tracker` exits 0 and produces non-empty XML+DTD per table; (c) `bin/fhir-r5/generate-fhir-r5-representations.py forms/objective-and-key-result-tracker` exits 0 and produces non-empty JSON per table; (d) `cd forms/objective-and-key-result-tracker/front-end-form-with-svelte && pnpm install && pnpm test` exits 0 with all scoring-engine tests passing; (e) `cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test` exits 0 with all scoring tests passing.
+**Plan-1 acceptance gate:** all of (a) `psql` roundtrip script applies migrations and inserts/selects pass; (b) `bin/xml-representations/generate-xml-representations.py forms/objectives-and-key-results-tracker` exits 0 and produces non-empty XML+DTD per table; (c) `bin/fhir-r5/generate-fhir-r5-representations.py forms/objectives-and-key-results-tracker` exits 0 and produces non-empty JSON per table; (d) `cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte && pnpm install && pnpm test` exits 0 with all scoring-engine tests passing; (e) `cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test` exits 0 with all scoring tests passing.
 
-`bin/test-form objective-and-key-result-tracker` is **not** a Plan-1 gate — it requires the wizard templates and full Loco scaffold delivered by later plans.
+`bin/test-form objectives-and-key-results-tracker` is **not** a Plan-1 gate — it requires the wizard templates and full Loco scaffold delivered by later plans.
 
 ---
 
@@ -23,21 +23,21 @@
 ### Task 1: Scaffold the form directory
 
 **Files:**
-- Run: `bin/create-form objective-and-key-result-tracker`
-- Move: `objective-and-key-result-tracker/seed.md` → `forms/objective-and-key-result-tracker/seed.md`
-- Remove: empty staging directory `objective-and-key-result-tracker/`
+- Run: `bin/create-form objectives-and-key-results-tracker`
+- Move: `objectives-and-key-results-tracker/seed.md` → `forms/objectives-and-key-results-tracker/seed.md`
+- Remove: empty staging directory `objectives-and-key-results-tracker/`
 
 - [ ] **Step 1: Run the scaffold script**
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-bin/create-form objective-and-key-result-tracker
+bin/create-form objectives-and-key-results-tracker
 ```
 
-Expected: prints `mkdir -p` lines and rsyncs the `skel/` template into `forms/objective-and-key-result-tracker/`. Verify with:
+Expected: prints `mkdir -p` lines and rsyncs the `skel/` template into `forms/objectives-and-key-results-tracker/`. Verify with:
 
 ```sh
-ls forms/objective-and-key-result-tracker
+ls forms/objectives-and-key-results-tracker
 ```
 
 Expected listing: `AGENTS.md  CLAUDE.md  doc/  fhir-r5/  front-end-dashboard-with-html/  front-end-dashboard-with-svelte/  front-end-form-with-html/  front-end-form-with-svelte/  full-stack-with-loco-tera-htmx-alpine/  full-stack-with-loco-tera-htmx-alpine-new/  index.md  plan.md  README.md  sql-migrations/  tasks.md  xml-representations/`
@@ -45,16 +45,16 @@ Expected listing: `AGENTS.md  CLAUDE.md  doc/  fhir-r5/  front-end-dashboard-wit
 - [ ] **Step 2: Move the seed file from the staging directory**
 
 ```sh
-mv objective-and-key-result-tracker/seed.md forms/objective-and-key-result-tracker/seed.md
-rmdir objective-and-key-result-tracker
+mv objectives-and-key-results-tracker/seed.md forms/objectives-and-key-results-tracker/seed.md
+rmdir objectives-and-key-results-tracker
 ```
 
 - [ ] **Step 3: Commit the scaffold**
 
 ```sh
-git add forms/objective-and-key-result-tracker
-git rm -r --cached objective-and-key-result-tracker 2>/dev/null || true
-git commit -m "Scaffold objective-and-key-result-tracker form"
+git add forms/objectives-and-key-results-tracker
+git rm -r --cached objectives-and-key-results-tracker 2>/dev/null || true
+git commit -m "Scaffold objectives-and-key-results-tracker form"
 ```
 
 ---
@@ -62,14 +62,14 @@ git commit -m "Scaffold objective-and-key-result-tracker form"
 ### Task 2: Write `index.md` for the form
 
 **Files:**
-- Modify: `forms/objective-and-key-result-tracker/index.md`
+- Modify: `forms/objectives-and-key-results-tracker/index.md`
 
 - [ ] **Step 1: Write `index.md` (replace the empty file)**
 
 ```markdown
-# Objective and Key Result tracker
+# Objectives and Key Results tracker
 
-A general-purpose Objective and Key Result (OKR) tracker. Each submission
+A general-purpose Objectives and Key Results (OKR) tracker. Each submission
 captures one Objective with its 1–5 Key Results through a single-page,
 ten-step wizard, applies a seven-axis scoring engine, and produces a
 signed report with a composite Red / Amber / Green status and a list of
@@ -120,20 +120,20 @@ Composite RAG uses the worst-band-finding algorithm (modulated by
 stretch_tier for the progress threshold). Twelve risk flags are
 computed independently.
 
-See [the design spec](../../docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md)
+See [the design spec](../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
 for the full data model, RAG thresholds, and flag triggers.
 
 ## Verify
 
 ```sh
-bin/test-form objective-and-key-result-tracker
+bin/test-form objectives-and-key-results-tracker
 ```
 ```
 
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/index.md
+git add forms/objectives-and-key-results-tracker/index.md
 git commit -m "OKR tracker: write index.md"
 ```
 
@@ -142,18 +142,18 @@ git commit -m "OKR tracker: write index.md"
 ### Task 3: Author `AGENTS.md`, `plan.md`, `tasks.md`
 
 **Files:**
-- Modify: `forms/objective-and-key-result-tracker/AGENTS.md`
-- Modify: `forms/objective-and-key-result-tracker/plan.md`
-- Modify: `forms/objective-and-key-result-tracker/tasks.md`
+- Modify: `forms/objectives-and-key-results-tracker/AGENTS.md`
+- Modify: `forms/objectives-and-key-results-tracker/plan.md`
+- Modify: `forms/objectives-and-key-results-tracker/tasks.md`
 
 - [ ] **Step 1: Write `AGENTS.md`**
 
 ```markdown
-# Objective and Key Result tracker — agent instructions
+# Objectives and Key Results tracker — agent instructions
 
 The OKR tracker form. See [`index.md`](index.md) for scope, scoring scales,
 RAG thresholds, and risk flags. See the design spec at
-[`docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md`](../../docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md)
+[`docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md`](../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
 for the full data model.
 
 ## Patterns
@@ -210,9 +210,9 @@ artefact on its own.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/AGENTS.md \
-        forms/objective-and-key-result-tracker/plan.md \
-        forms/objective-and-key-result-tracker/tasks.md
+git add forms/objectives-and-key-results-tracker/AGENTS.md \
+        forms/objectives-and-key-results-tracker/plan.md \
+        forms/objectives-and-key-results-tracker/tasks.md
 git commit -m "OKR tracker: author AGENTS.md, plan.md, tasks.md"
 ```
 
@@ -230,7 +230,7 @@ indexes on free-text search columns.
 ### Task 4: `00_extensions.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/00_extensions.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -250,7 +250,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 ```sh
 createdb okr_scratch || true
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/00_extensions.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql
 ```
 
 Expected: `CREATE EXTENSION` success messages with no error.
@@ -258,7 +258,7 @@ Expected: `CREATE EXTENSION` success messages with no error.
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/00_extensions.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/00_extensions.sql
 git commit -m "OKR tracker: SQL 00_extensions"
 ```
 
@@ -267,7 +267,7 @@ git commit -m "OKR tracker: SQL 00_extensions"
 ### Task 5: `01_create_function_set_updated_at.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/01_create_function_set_updated_at.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -291,7 +291,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 - [ ] **Step 2: Verify it loads**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/01_create_function_set_updated_at.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql
 ```
 
 Expected: `CREATE FUNCTION`, `COMMENT`.
@@ -299,7 +299,7 @@ Expected: `CREATE FUNCTION`, `COMMENT`.
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/01_create_function_set_updated_at.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/01_create_function_set_updated_at.sql
 git commit -m "OKR tracker: SQL 01_create_function_set_updated_at"
 ```
 
@@ -308,7 +308,7 @@ git commit -m "OKR tracker: SQL 01_create_function_set_updated_at"
 ### Task 6: `02_create_table_reporter.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/02_create_table_reporter.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql`
 - Reference: `forms/issue-tracker/sql-migrations/02_create_table_reporter.sql` (mirror structure)
 
 - [ ] **Step 1: Read the issue-tracker reporter migration to mirror structure**
@@ -355,7 +355,7 @@ COMMENT ON COLUMN reporter.role IS 'Free-text role label (e.g. team lead, OKR co
 - [ ] **Step 3: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/02_create_table_reporter.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql
 psql -d okr_scratch -c "INSERT INTO reporter (name) VALUES ('Alice') RETURNING id;"
 ```
 
@@ -364,7 +364,7 @@ Expected: a UUID is printed.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/02_create_table_reporter.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/02_create_table_reporter.sql
 git commit -m "OKR tracker: SQL 02_create_table_reporter"
 ```
 
@@ -373,7 +373,7 @@ git commit -m "OKR tracker: SQL 02_create_table_reporter"
 ### Task 7: `03_create_table_participant.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/03_create_table_participant.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -424,13 +424,13 @@ Note: `okr_objective_id` cannot be a `REFERENCES` constraint here because `okr_o
 - [ ] **Step 2: Apply**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/03_create_table_participant.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/03_create_table_participant.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/03_create_table_participant.sql
 git commit -m "OKR tracker: SQL 03_create_table_participant"
 ```
 
@@ -441,7 +441,7 @@ git commit -m "OKR tracker: SQL 03_create_table_participant"
 This is the largest migration — the parent table.
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/04_create_table_okr_objective.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -585,7 +585,7 @@ COMMENT ON COLUMN okr_objective.score_by_pace_deviation_percent IS
 - [ ] **Step 2: Apply and verify a roundtrip**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/04_create_table_okr_objective.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql
 psql -d okr_scratch -c "INSERT INTO reporter (name) VALUES ('Alice') RETURNING id" >/tmp/r.txt
 RID=$(awk 'NR==3{print $1}' /tmp/r.txt)
 psql -d okr_scratch -c "INSERT INTO okr_objective (reporter_id, level, cycle, obj_title) VALUES ('$RID', 'team', 'quarterly', 'Reduce churn by 30%') RETURNING id"
@@ -604,7 +604,7 @@ Expected: prints `OK: rejected invalid level`.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/04_create_table_okr_objective.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/04_create_table_okr_objective.sql
 git commit -m "OKR tracker: SQL 04_create_table_okr_objective"
 ```
 
@@ -613,7 +613,7 @@ git commit -m "OKR tracker: SQL 04_create_table_okr_objective"
 ### Task 9: `05_create_table_okr_key_result.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/05_create_table_okr_key_result.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -684,7 +684,7 @@ COMMENT ON COLUMN okr_key_result.progress_fraction IS
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/05_create_table_okr_key_result.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql
 psql -d okr_scratch -c "INSERT INTO okr_key_result (okr_objective_id, position, title, kr_type) SELECT id, 1, 'Lift NPS to 50', 'numeric' FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
@@ -699,7 +699,7 @@ psql -d okr_scratch -c "INSERT INTO okr_key_result (okr_objective_id, position, 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/05_create_table_okr_key_result.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/05_create_table_okr_key_result.sql
 git commit -m "OKR tracker: SQL 05_create_table_okr_key_result"
 ```
 
@@ -708,7 +708,7 @@ git commit -m "OKR tracker: SQL 05_create_table_okr_key_result"
 ### Task 10: `06_create_table_okr_check_in.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/06_create_table_okr_check_in.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -761,14 +761,14 @@ COMMENT ON COLUMN okr_check_in.confidence_decile_at_check_in IS
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/06_create_table_okr_check_in.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql
 psql -d okr_scratch -c "INSERT INTO okr_check_in (okr_objective_id, narrative, confidence_decile_at_check_in) SELECT id, 'Pilot results positive', 7 FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/06_create_table_okr_check_in.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/06_create_table_okr_check_in.sql
 git commit -m "OKR tracker: SQL 06_create_table_okr_check_in"
 ```
 
@@ -777,7 +777,7 @@ git commit -m "OKR tracker: SQL 06_create_table_okr_check_in"
 ### Task 11: `07_create_table_okr_grade.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/07_create_table_okr_grade.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -861,14 +861,14 @@ COMMENT ON COLUMN okr_grade.graded_at IS 'Timestamp when the engine last compute
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/07_create_table_okr_grade.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql
 psql -d okr_scratch -c "INSERT INTO okr_grade (okr_objective_id, computed_composite_rag) SELECT id, 'amber' FROM okr_objective LIMIT 1 RETURNING id"
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/07_create_table_okr_grade.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/07_create_table_okr_grade.sql
 git commit -m "OKR tracker: SQL 07_create_table_okr_grade"
 ```
 
@@ -877,7 +877,7 @@ git commit -m "OKR tracker: SQL 07_create_table_okr_grade"
 ### Task 12: `08_create_table_okr_grade_rule.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/08_create_table_okr_grade_rule.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql`
 - Reference: `forms/issue-tracker/sql-migrations/06_create_table_issue_tracker_grade_rule.sql`
 
 - [ ] **Step 1: Read the reference**
@@ -937,13 +937,13 @@ COMMENT ON COLUMN okr_grade_rule.description IS 'Human-readable rule description
 - [ ] **Step 3: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
 ```
 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/08_create_table_okr_grade_rule.sql
 git commit -m "OKR tracker: SQL 08_create_table_okr_grade_rule"
 ```
 
@@ -952,7 +952,7 @@ git commit -m "OKR tracker: SQL 08_create_table_okr_grade_rule"
 ### Task 13: `09_create_table_okr_grade_flag.sql`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/09_create_table_okr_grade_flag.sql`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql`
 
 - [ ] **Step 1: Write the migration**
 
@@ -1004,13 +1004,13 @@ COMMENT ON COLUMN okr_grade_flag.description IS 'Human-readable description of w
 - [ ] **Step 2: Apply and verify**
 
 ```sh
-psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objective-and-key-result-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
+psql -d okr_scratch -v ON_ERROR_STOP=1 -f forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
+git add forms/objectives-and-key-results-tracker/sql-migrations/09_create_table_okr_grade_flag.sql
 git commit -m "OKR tracker: SQL 09_create_table_okr_grade_flag"
 ```
 
@@ -1021,7 +1021,7 @@ git commit -m "OKR tracker: SQL 09_create_table_okr_grade_flag"
 ### Task 14: Author and run a roundtrip shell script
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/sql-migrations/_roundtrip-test.sh`
+- Create: `forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh`
 
 - [ ] **Step 1: Write the roundtrip test script**
 
@@ -1106,8 +1106,8 @@ echo "OK: roundtrip succeeded"
 - [ ] **Step 2: Make it executable and run it**
 
 ```sh
-chmod +x forms/objective-and-key-result-tracker/sql-migrations/_roundtrip-test.sh
-forms/objective-and-key-result-tracker/sql-migrations/_roundtrip-test.sh
+chmod +x forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
+forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
 ```
 
 Expected last lines:
@@ -1122,7 +1122,7 @@ OK: roundtrip succeeded
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/sql-migrations/_roundtrip-test.sh
+git add forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
 git commit -m "OKR tracker: SQL roundtrip test script"
 ```
 
@@ -1133,20 +1133,20 @@ git commit -m "OKR tracker: SQL roundtrip test script"
 ### Task 15: Generate XML + DTD per table
 
 **Files:**
-- Will create: `forms/objective-and-key-result-tracker/xml-representations/<table>.xml` and `<table>.dtd` for each table
+- Will create: `forms/objectives-and-key-results-tracker/xml-representations/<table>.xml` and `<table>.dtd` for each table
 
 - [ ] **Step 1: Run the generator script for this form only**
 
 ```sh
-python3 bin/xml-representations/generate-xml-representations.py forms/objective-and-key-result-tracker
+python3 bin/xml-representations/generate-xml-representations.py forms/objectives-and-key-results-tracker
 ```
 
 - [ ] **Step 2: Verify expected files exist and are non-empty**
 
 ```sh
 for t in reporter participant okr_objective okr_key_result okr_check_in okr_grade okr_grade_rule okr_grade_flag; do
-    test -s "forms/objective-and-key-result-tracker/xml-representations/$t.xml" || { echo "MISSING: $t.xml"; exit 1; }
-    test -s "forms/objective-and-key-result-tracker/xml-representations/$t.dtd" || { echo "MISSING: $t.dtd"; exit 1; }
+    test -s "forms/objectives-and-key-results-tracker/xml-representations/$t.xml" || { echo "MISSING: $t.xml"; exit 1; }
+    test -s "forms/objectives-and-key-results-tracker/xml-representations/$t.dtd" || { echo "MISSING: $t.dtd"; exit 1; }
 done
 echo "OK: all XML+DTD files generated"
 ```
@@ -1154,7 +1154,7 @@ echo "OK: all XML+DTD files generated"
 - [ ] **Step 3: Commit the generated files**
 
 ```sh
-git add forms/objective-and-key-result-tracker/xml-representations/
+git add forms/objectives-and-key-results-tracker/xml-representations/
 git commit -m "OKR tracker: generate XML + DTD representations"
 ```
 
@@ -1165,19 +1165,19 @@ git commit -m "OKR tracker: generate XML + DTD representations"
 ### Task 16: Generate FHIR R5 JSON per table
 
 **Files:**
-- Will create: `forms/objective-and-key-result-tracker/fhir-r5/<table>.json` for each table
+- Will create: `forms/objectives-and-key-results-tracker/fhir-r5/<table>.json` for each table
 
 - [ ] **Step 1: Run the generator script**
 
 ```sh
-python3 bin/fhir-r5/generate-fhir-r5-representations.py forms/objective-and-key-result-tracker
+python3 bin/fhir-r5/generate-fhir-r5-representations.py forms/objectives-and-key-results-tracker
 ```
 
 - [ ] **Step 2: Verify expected files exist and are non-empty**
 
 ```sh
 for t in reporter participant okr_objective okr_key_result okr_check_in okr_grade okr_grade_rule okr_grade_flag; do
-    test -s "forms/objective-and-key-result-tracker/fhir-r5/$t.json" || { echo "MISSING: $t.json"; exit 1; }
+    test -s "forms/objectives-and-key-results-tracker/fhir-r5/$t.json" || { echo "MISSING: $t.json"; exit 1; }
 done
 echo "OK: all FHIR R5 JSON files generated"
 ```
@@ -1185,7 +1185,7 @@ echo "OK: all FHIR R5 JSON files generated"
 - [ ] **Step 3: Validate the JSON is well-formed**
 
 ```sh
-for f in forms/objective-and-key-result-tracker/fhir-r5/*.json; do
+for f in forms/objectives-and-key-results-tracker/fhir-r5/*.json; do
     python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" || { echo "BAD JSON: $f"; exit 1; }
 done
 echo "OK: all JSON well-formed"
@@ -1194,7 +1194,7 @@ echo "OK: all JSON well-formed"
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/fhir-r5/
+git add forms/objectives-and-key-results-tracker/fhir-r5/
 git commit -m "OKR tracker: generate FHIR R5 JSON representations"
 ```
 
@@ -1205,10 +1205,10 @@ git commit -m "OKR tracker: generate FHIR R5 JSON representations"
 ### Task 17: Bootstrap the SvelteKit project skeleton (engine + vitest only)
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/package.json`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/tsconfig.json`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/vitest.config.ts`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/.gitignore`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/package.json`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/tsconfig.json`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/vitest.config.ts`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/.gitignore`
 - Reference: `forms/issue-tracker/front-end-form-with-svelte/{package.json,vitest.config.ts,tsconfig.json}`
 
 - [ ] **Step 1: Read the reference files and copy minimal versions**
@@ -1223,7 +1223,7 @@ cat forms/issue-tracker/front-end-form-with-svelte/tsconfig.json
 
 ```json
 {
-  "name": "objective-and-key-result-tracker-front-end-form-with-svelte",
+  "name": "objectives-and-key-results-tracker-front-end-form-with-svelte",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -1281,7 +1281,7 @@ dist/
 - [ ] **Step 6: Install and verify**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte
 pnpm install
 pnpm test
 ```
@@ -1292,7 +1292,7 @@ Expected: vitest exits successfully (`No test files found, exiting with code 0` 
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/{package.json,tsconfig.json,vitest.config.ts,.gitignore,pnpm-lock.yaml} 2>/dev/null
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/{package.json,tsconfig.json,vitest.config.ts,.gitignore,pnpm-lock.yaml} 2>/dev/null
 git commit -m "OKR tracker: bootstrap SvelteKit project (engine + vitest only)"
 ```
 
@@ -1301,7 +1301,7 @@ git commit -m "OKR tracker: bootstrap SvelteKit project (engine + vitest only)"
 ### Task 18: Define `types.ts` for the scoring engine
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/types.ts`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/types.ts`
 
 - [ ] **Step 1: Write the types**
 
@@ -1388,7 +1388,7 @@ export interface ObjectiveAssessment {
 - [ ] **Step 2: Type-check**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte
 pnpm exec tsc --noEmit
 ```
 
@@ -1398,7 +1398,7 @@ Expected: no output (success).
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/types.ts
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/types.ts
 git commit -m "OKR tracker: TS scoring types"
 ```
 
@@ -1410,21 +1410,21 @@ The fixtures live at the form root (not under either language) so both the
 TS and Rust ports consume the same JSON inputs.
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/01-green-on-track.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/02-amber-mid-band.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/03-red-pace-collapse.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/04-red-mis-aligned.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/05-moonshot-progress.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/06-non-smart.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/07-orphaned.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/08-unmeasurable.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/09-stale-check-in.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/10-confidence-collapse.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/11-no-dri.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/12-committed-at-risk.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/13-cascading-broken.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/14-over-scoped.json`
-- Create: `forms/objective-and-key-result-tracker/test-fixtures/scoring/README.md`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/01-green-on-track.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/02-amber-mid-band.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/03-red-pace-collapse.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/04-red-mis-aligned.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/05-moonshot-progress.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/06-non-smart.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/07-orphaned.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/08-unmeasurable.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/09-stale-check-in.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/10-confidence-collapse.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/11-no-dri.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/12-committed-at-risk.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/13-cascading-broken.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/14-over-scoped.json`
+- Create: `forms/objectives-and-key-results-tracker/test-fixtures/scoring/README.md`
 
 - [ ] **Step 1: Write `README.md` describing the fixture shape**
 
@@ -1894,7 +1894,7 @@ it up automatically (TS via `import.meta.glob`, Rust via `fs::read_dir`).
 - [ ] **Step 16: Commit fixtures**
 
 ```sh
-git add forms/objective-and-key-result-tracker/test-fixtures/
+git add forms/objectives-and-key-results-tracker/test-fixtures/
 git commit -m "OKR tracker: shared scoring fixtures (14 scenarios, all 12 flags covered)"
 ```
 
@@ -1903,8 +1903,8 @@ git commit -m "OKR tracker: shared scoring fixtures (14 scenarios, all 12 flags 
 ### Task 20: TDD `progress-rules.ts`
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.ts`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.test.ts`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.ts`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.test.ts`
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1951,7 +1951,7 @@ describe('gradeProgress', () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte
 pnpm test
 ```
 
@@ -2011,8 +2011,8 @@ Expected: all 6 progress-rules tests pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.ts \
-        forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.test.ts
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.ts \
+        forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/progress-rules.test.ts
 git commit -m "OKR tracker: TS progress-rules"
 ```
 
@@ -2052,7 +2052,7 @@ describe('gradeConfidence', () => {
 - [ ] **Step 2: Run to fail**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte && pnpm test
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte && pnpm test
 ```
 
 Expected: import error.
@@ -2081,7 +2081,7 @@ pnpm test
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/confidence-rules.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/confidence-rules.{ts,test.ts}
 git commit -m "OKR tracker: TS confidence-rules"
 ```
 
@@ -2136,7 +2136,7 @@ export function gradeAlignment(grade: number | null): [RagBand, FiredRule[]] {
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/alignment-rules.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/alignment-rules.{ts,test.ts}
 git commit -m "OKR tracker: TS alignment-rules"
 ```
 
@@ -2191,7 +2191,7 @@ export function gradeSmart(quality: number | null): [RagBand, FiredRule[]] {
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/smart-rules.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/smart-rules.{ts,test.ts}
 git commit -m "OKR tracker: TS smart-rules"
 ```
 
@@ -2252,7 +2252,7 @@ export function gradePace(deviation: number | null): [RagBand, FiredRule[]] {
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/pace-rules.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/pace-rules.{ts,test.ts}
 git commit -m "OKR tracker: TS pace-rules"
 ```
 
@@ -2336,7 +2336,7 @@ export function gradeImpact(tier: number | null): [RagBand, FiredRule[]] {
 - [ ] **Step 5: Run all tests to pass**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte
 pnpm test
 ```
 
@@ -2344,8 +2344,8 @@ pnpm test
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/stretch-rules.{ts,test.ts} \
-        forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/impact-rules.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/stretch-rules.{ts,test.ts} \
+        forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/impact-rules.{ts,test.ts}
 git commit -m "OKR tracker: TS stretch-rules and impact-rules"
 ```
 
@@ -2387,7 +2387,7 @@ describe('gradeObjective — fixture 01-green-on-track', () => {
 - [ ] **Step 3: Run to fail**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte && pnpm test
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte && pnpm test
 ```
 
 Expected: import error for `./composite-grader`.
@@ -2450,7 +2450,7 @@ Expected: all tests including the fixture-based composite test pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/{utils.ts,composite-grader.ts,composite-grader.test.ts,flagged-issues.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/{utils.ts,composite-grader.ts,composite-grader.test.ts,flagged-issues.ts}
 git commit -m "OKR tracker: TS composite-grader and flag stub"
 ```
 
@@ -2569,7 +2569,7 @@ export function computeFlags(a: ObjectiveAssessment): FiredFlag[] {
 - [ ] **Step 4: Run to pass — every fixture**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte && pnpm test
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte && pnpm test
 ```
 
 Expected: all 14 fixture tests + per-axis tests pass.
@@ -2578,7 +2578,7 @@ Expected: all 14 fixture tests + per-axis tests pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/flagged-issues.{ts,test.ts}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/flagged-issues.{ts,test.ts}
 git commit -m "OKR tracker: TS flag computation (12 flags)"
 ```
 
@@ -2589,16 +2589,16 @@ git commit -m "OKR tracker: TS flag computation (12 flags)"
 ### Task 28: Bootstrap the Rust crate (engine only)
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/Cargo.toml`
-- Create: `forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/.gitignore`
-- Create: `forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/lib.rs`
-- Create: `forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/mod.rs`
+- Create: `forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/Cargo.toml`
+- Create: `forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/.gitignore`
+- Create: `forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/lib.rs`
+- Create: `forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/mod.rs`
 
 - [ ] **Step 1: Write `Cargo.toml`**
 
 ```toml
 [package]
-name = "objective-and-key-result-tracker"
+name = "objectives-and-key-results-tracker"
 version = "0.1.0"
 edition = "2024"
 publish = false
@@ -2611,7 +2611,7 @@ serde_json = "1"
 # Plan 6 will add tera/loco/sea-orm; engine-only crate stays lean.
 
 [lib]
-name = "objective_and_key_result_tracker"
+name = "objectives_and_key_results_tracker"
 path = "src/lib.rs"
 ```
 
@@ -2649,7 +2649,7 @@ pub mod utils;
 For now write a stub for each module file so `cargo check` succeeds:
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine
 mkdir -p src/scoring
 for m in alignment composite confidence flags impact pace progress smart stretch types utils; do
     echo "// stub" > "src/scoring/$m.rs"
@@ -2663,7 +2663,7 @@ Expected: success.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/{Cargo.toml,.gitignore,Cargo.lock,src/lib.rs,src/scoring/}
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/{Cargo.toml,.gitignore,Cargo.lock,src/lib.rs,src/scoring/}
 git commit -m "OKR tracker: bootstrap Rust crate (engine-only)"
 ```
 
@@ -2790,14 +2790,14 @@ pub struct GradeResult {
 - [ ] **Step 2: Verify**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo check
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo check
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/types.rs
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/types.rs
 git commit -m "OKR tracker: Rust scoring types"
 ```
 
@@ -2838,7 +2838,7 @@ mod tests {
 - [ ] **Step 2: Run cargo test**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test scoring::utils
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test scoring::utils
 ```
 
 Expected: 3 tests pass.
@@ -2847,7 +2847,7 @@ Expected: 3 tests pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/utils.rs
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/utils.rs
 git commit -m "OKR tracker: Rust utils (worst_band)"
 ```
 
@@ -2908,14 +2908,14 @@ mod tests {
 - [ ] **Step 2: Run cargo test**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test scoring::progress
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test scoring::progress
 ```
 
 - [ ] **Step 3: Commit**
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/progress.rs
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/progress.rs
 git commit -m "OKR tracker: Rust progress rules"
 ```
 
@@ -3088,14 +3088,14 @@ mod tests {
 - [ ] **Step 6: Run all tests**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
 ```
 
 - [ ] **Step 7: Commit**
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/{confidence,alignment,smart,pace,stretch,impact}.rs
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/{confidence,alignment,smart,pace,stretch,impact}.rs
 git commit -m "OKR tracker: Rust per-axis rules"
 ```
 
@@ -3234,7 +3234,7 @@ pub fn grade_objective(a: &ObjectiveAssessment) -> GradeResult {
 - [ ] **Step 3: Run cargo test**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
 ```
 
 Expected: all per-axis tests pass; nothing broken.
@@ -3243,7 +3243,7 @@ Expected: all per-axis tests pass; nothing broken.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/{flags.rs,composite.rs}
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/src/scoring/{flags.rs,composite.rs}
 git commit -m "OKR tracker: Rust composite-grader and flags"
 ```
 
@@ -3252,12 +3252,12 @@ git commit -m "OKR tracker: Rust composite-grader and flags"
 ### Task 34: Fixture-driven integration test in Rust
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/tests/scoring_fixtures.rs`
+- Create: `forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/tests/scoring_fixtures.rs`
 
 - [ ] **Step 1: Write the integration test**
 
 ```rust
-use objective_and_key_result_tracker::scoring::{composite::grade_objective, types::ObjectiveAssessment};
+use objectives_and_key_results_tracker::scoring::{composite::grade_objective, types::ObjectiveAssessment};
 use serde::Deserialize;
 use std::fs;
 use std::path::Path;
@@ -3315,7 +3315,7 @@ fn every_fixture_grades_as_expected() {
 - [ ] **Step 2: Run**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test --test scoring_fixtures
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test --test scoring_fixtures
 ```
 
 Expected: all 14 fixtures pass.
@@ -3324,7 +3324,7 @@ Expected: all 14 fixtures pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine/tests/scoring_fixtures.rs
+git add forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine/tests/scoring_fixtures.rs
 git commit -m "OKR tracker: Rust fixture-driven integration test"
 ```
 
@@ -3337,7 +3337,7 @@ git commit -m "OKR tracker: Rust fixture-driven integration test"
 - [ ] **Step 1: SQL roundtrip**
 
 ```sh
-forms/objective-and-key-result-tracker/sql-migrations/_roundtrip-test.sh
+forms/objectives-and-key-results-tracker/sql-migrations/_roundtrip-test.sh
 ```
 
 Expected: ends with `OK: roundtrip succeeded` and the `1|1|1|1|1|1` row.
@@ -3345,8 +3345,8 @@ Expected: ends with `OK: roundtrip succeeded` and the `1|1|1|1|1|1` row.
 - [ ] **Step 2: XML representations**
 
 ```sh
-ls forms/objective-and-key-result-tracker/xml-representations/*.xml \
-   forms/objective-and-key-result-tracker/xml-representations/*.dtd
+ls forms/objectives-and-key-results-tracker/xml-representations/*.xml \
+   forms/objectives-and-key-results-tracker/xml-representations/*.dtd
 ```
 
 Expected: 8 XML + 8 DTD files (one per table).
@@ -3354,7 +3354,7 @@ Expected: 8 XML + 8 DTD files (one per table).
 - [ ] **Step 3: FHIR R5 representations**
 
 ```sh
-ls forms/objective-and-key-result-tracker/fhir-r5/*.json
+ls forms/objectives-and-key-results-tracker/fhir-r5/*.json
 ```
 
 Expected: 8 JSON files.
@@ -3362,7 +3362,7 @@ Expected: 8 JSON files.
 - [ ] **Step 4: TypeScript scoring engine**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte && pnpm test
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte && pnpm test
 ```
 
 Expected: all per-axis + 14 fixture tests pass.
@@ -3370,7 +3370,7 @@ Expected: all per-axis + 14 fixture tests pass.
 - [ ] **Step 5: Rust scoring engine**
 
 ```sh
-cd forms/objective-and-key-result-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
+cd forms/objectives-and-key-results-tracker/full-stack-with-loco-tera-htmx-alpine && cargo test
 ```
 
 Expected: all per-axis unit tests + 14-fixture integration test pass.
@@ -3389,5 +3389,5 @@ git tag okr-tracker-plan-1-foundation
 - [ ] All ten SQL migrations created and `_roundtrip-test.sh` passes.
 - [ ] XML, DTD, and FHIR R5 files exist for every table.
 - [ ] `pnpm test` and `cargo test` both pass with the same 14 fixture scenarios.
-- [ ] No file under `forms/objective-and-key-result-tracker/` contains `Not yet implemented.` (otherwise `bin/test-form` will fail later plans).
+- [ ] No file under `forms/objectives-and-key-results-tracker/` contains `Not yet implemented.` (otherwise `bin/test-form` will fail later plans).
 - [ ] All commits follow the message format `OKR tracker: <terse subject>` for traceability.

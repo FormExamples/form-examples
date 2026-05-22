@@ -1,0 +1,93 @@
+#!/bin/sh
+# setup.sh
+#
+# Setup script for full stack Loco application.
+#
+# - Create database user `loco` (if not exists).
+# - Create application databases for development, test, production (if not exists).
+# - Run cargo loco generate scaffold for each entity.
+#
+# Tables are scaffolded in the same order as the form's sql-migrations/
+# so that FK targets already exist when referencing tables are created.
+
+set -euf
+
+echo "Scaffolding objectives-and-key-results-tracker (8 tables)..."
+
+cargo loco generate scaffold reporter \
+    deleted_at:ts \
+    name:string! \
+    email:text \
+    role:text \
+    --htmx && \
+cargo loco generate scaffold participant \
+    deleted_at:ts \
+    name:string! \
+    role:text \
+    --htmx && \
+cargo loco generate scaffold okr_objective \
+    deleted_at:ts \
+    reporter:references \
+    obj_title:text \
+    obj_long_description:text \
+    strategic_theme:text \
+    parent_objective_id:uuid \
+    level:string \
+    cycle:string \
+    cycle_start_date:date \
+    cycle_end_date:date \
+    status:string! \
+    progress_percent:int \
+    confidence_decile:int \
+    stretch_tier:int \
+    alignment_grade:int \
+    impact_tier:int \
+    smart_quality:int \
+    pace_deviation_percent:int \
+    --htmx && \
+cargo loco generate scaffold okr_key_result \
+    deleted_at:ts \
+    objective:references \
+    position:int! \
+    title:text \
+    kr_type:string \
+    start_value:double \
+    current_value:double \
+    target_value:double \
+    progress_fraction:double \
+    milestones_json:jsonb \
+    binary_done:bool \
+    --htmx && \
+cargo loco generate scaffold okr_check_in \
+    deleted_at:ts \
+    objective:references \
+    checked_in_at:ts! \
+    narrative:text \
+    since_last_changes:text \
+    blockers:text \
+    asks:text \
+    --htmx && \
+cargo loco generate scaffold okr_grade \
+    deleted_at:ts \
+    objective:references \
+    computed_at:ts! \
+    computed_composite_rag:string! \
+    final_composite_rag:string! \
+    override_reason:text \
+    --htmx && \
+cargo loco generate scaffold okr_grade_rule \
+    deleted_at:ts \
+    grade:references \
+    instrument:string! \
+    rule_code:string! \
+    fired_band:string! \
+    --htmx && \
+cargo loco generate scaffold okr_grade_flag \
+    deleted_at:ts \
+    grade:references \
+    flag_code:string! \
+    priority:string! \
+    description:text \
+    --htmx
+
+echo "Done. Run 'cargo loco start' to launch the server on port 5150."

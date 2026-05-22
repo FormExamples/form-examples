@@ -11,7 +11,7 @@
 **Reference Plan 1:** the dashboard renders the same shape of data the wizard (Plans 2-3) produces. The seven scores + computed RAG + flags + KR list are the columns; the engine itself is not invoked by the dashboard (each objective row already has its scored result baked in by the wizard that produced it). For Plan 4, sample objectives are hand-written and **include the engine output** to keep this plan dependency-free; in Plan 6 the dashboard will fetch live data from a Loco backend.
 
 **Plan-4 acceptance gate:**
-1. Opening `forms/objective-and-key-result-tracker/front-end-dashboard-with-html/index.html` shows a table with five sample objectives.
+1. Opening `forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/index.html` shows a table with five sample objectives.
 2. Each filter (level, status, RAG, owner) narrows the displayed rows.
 3. Clicking a column header sorts ascending; clicking again descending.
 4. Clicking a row expands a panel showing every KR, every flag, and the latest check-in narrative.
@@ -23,7 +23,7 @@
 ## File structure
 
 ```
-forms/objective-and-key-result-tracker/front-end-dashboard-with-html/
+forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/
   index.html
   style.css
   app.js
@@ -104,7 +104,7 @@ playwright-report/
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/{index.html,style.css,.gitignore}
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/{index.html,style.css,.gitignore}
 git commit -m "OKR tracker: HTML dashboard shell"
 ```
 
@@ -171,7 +171,7 @@ git commit -m "OKR tracker: HTML dashboard shell"
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/objectives.json
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/objectives.json
 git commit -m "OKR tracker: HTML dashboard sample data"
 ```
 
@@ -253,7 +253,7 @@ load();
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/app.js
 git commit -m "OKR tracker: HTML dashboard table + filters + sort"
 ```
 
@@ -288,7 +288,7 @@ document.querySelector('#grid tbody').addEventListener('click', (e) => {
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/app.js
 git commit -m "OKR tracker: HTML dashboard row expansion"
 ```
 
@@ -316,7 +316,7 @@ document.querySelector('#btn-csv').addEventListener('click', () => {
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/app.js
 git commit -m "OKR tracker: HTML dashboard CSV export"
 ```
 
@@ -331,7 +331,7 @@ git commit -m "OKR tracker: HTML dashboard CSV export"
 
 ```json
 {
-  "name": "objective-and-key-result-tracker-front-end-dashboard-with-html",
+  "name": "objectives-and-key-results-tracker-front-end-dashboard-with-html",
   "version": "0.1.0",
   "private": true,
   "scripts": { "test": "playwright test smoke.spec.mjs --reporter=line" },
@@ -388,7 +388,7 @@ test('sort by progress_percent toggles direction', async ({ page }) => {
 - [ ] **Step 3: Install Playwright and run.**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-dashboard-with-html
+cd forms/objectives-and-key-results-tracker/front-end-dashboard-with-html
 pnpm install
 pnpm exec playwright install --with-deps chromium
 pnpm test
@@ -400,7 +400,7 @@ Expected: 5 tests pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-html/{package.json,smoke.spec.mjs,pnpm-lock.yaml}
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/{package.json,smoke.spec.mjs,pnpm-lock.yaml}
 git commit -m "OKR tracker: HTML dashboard Playwright smoke test"
 ```
 

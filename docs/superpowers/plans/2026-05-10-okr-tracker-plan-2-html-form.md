@@ -8,12 +8,12 @@
 
 **Tech Stack:** HTML5, CSS3 (no framework), ES2022 modules, [pdfmake 0.2 from CDN](https://cdn.jsdelivr.net/npm/pdfmake@0.2/build/pdfmake.min.js).
 
-**Reference spec:** [`docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md`](../specs/2026-05-08-objective-and-key-result-tracker-design.md). **Reference Plan 1:** `2026-05-08-okr-tracker-plan-1-foundation.md` — the TypeScript engine in `front-end-form-with-svelte/src/lib/engine/` is the source of truth. This plan translates it to plain JS.
+**Reference spec:** [`docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md`](../specs/2026-05-08-objectives-and-key-results-tracker-design.md). **Reference Plan 1:** `2026-05-08-okr-tracker-plan-1-foundation.md` — the TypeScript engine in `front-end-form-with-svelte/src/lib/engine/` is the source of truth. This plan translates it to plain JS.
 
 **Out of scope:** persistence (the form posts to `console.log` only in this plan; persistence comes in Plan 6); SvelteKit (Plan 3); dashboard (Plans 4/5).
 
 **Plan-2 acceptance gate:**
-1. Opening `forms/objective-and-key-result-tracker/front-end-form-with-html/index.html` in a browser shows a continuous-page wizard with all ten steps visible.
+1. Opening `forms/objectives-and-key-results-tracker/front-end-form-with-html/index.html` in a browser shows a continuous-page wizard with all ten steps visible.
 2. Filling all fields and clicking "Compute score" updates the RAG badge and lists every triggered flag.
 3. Clicking "Download PDF" produces a PDF that includes every entered field plus the computed RAG.
 4. Clicking "Copy plain-text triage line" copies the seven-score one-liner to the clipboard.
@@ -24,7 +24,7 @@
 ## File structure
 
 ```
-forms/objective-and-key-result-tracker/front-end-form-with-html/
+forms/objectives-and-key-results-tracker/front-end-form-with-html/
   index.html                # 10-step wizard, all sections on one page
   style.css                 # form layout + RAG badge styles
   engine.js                 # JS port of the Plan 1 TS scoring engine
@@ -39,9 +39,9 @@ forms/objective-and-key-result-tracker/front-end-form-with-html/
 ## Task 1: Bootstrap the directory and shell
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/index.html`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/style.css`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/.gitignore`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/index.html`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/style.css`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/.gitignore`
 
 - [ ] **Step 1: Write `index.html` skeleton**
 
@@ -98,7 +98,7 @@ playwright-report/
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/{index.html,style.css,.gitignore}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/{index.html,style.css,.gitignore}
 git commit -m "OKR tracker: HTML form shell"
 ```
 
@@ -107,7 +107,7 @@ git commit -m "OKR tracker: HTML form shell"
 ## Task 2: Port the scoring engine to vanilla JS
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/engine.js`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/engine.js`
 
 This is a direct translation of `front-end-form-with-svelte/src/lib/engine/*.ts` into a single ES module. Same thresholds, same flag logic, same `worstBand` algorithm. No imports — exports `gradeObjective(assessment): GradeResult`.
 
@@ -199,7 +199,7 @@ export function gradeObjective(a) {
 - [ ] **Step 2: Smoke-test by importing in a Node REPL**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-html
+cd forms/objectives-and-key-results-tracker/front-end-form-with-html
 node --input-type=module -e "
   import('./engine.js').then(({ gradeObjective }) => {
     const r = gradeObjective({ scores: { progressPercent: 80, confidenceDecile: 8, stretchTier: 1, alignmentGrade: 5, impactTier: 4, smartQuality: 5, paceDeviationPercent: 0 }, keyResults: [{ position:1, krType:'numeric', startValue:0, currentValue:80, targetValue:100 }], context: { level: 'team', parentObjectiveId: 'p', parentObjectiveStatus: 'active', driPresent: true, cycleStartDate: '2026-04-01', cycleEndDate: '2026-06-30', checkedInAt: '2026-05-08T12:00:00Z', previousConfidenceDecile: 7 }, now: '2026-05-08T12:00:00Z' });
@@ -213,7 +213,7 @@ Expected: `green 0`.
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/engine.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/engine.js
 git commit -m "OKR tracker: HTML form vanilla JS scoring engine"
 ```
 
@@ -222,7 +222,7 @@ git commit -m "OKR tracker: HTML form vanilla JS scoring engine"
 ## Task 3: Wizard state + step rendering scaffolding
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/app.js`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js`
 
 - [ ] **Step 1: Write the bootstrap of `app.js` — state + step container plus a `renderSteps()` that injects empty `<section>` elements**
 
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', renderSteps);
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form state and step scaffolding"
 ```
 
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form steps 1-4"
 ```
 
@@ -396,7 +396,7 @@ function renderStep5() {
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form step 5 dynamic Key Results"
 ```
 
@@ -415,7 +415,7 @@ Four straightforward text-area-heavy steps. Follow the same `bind()` pattern as 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form steps 6-9"
 ```
 
@@ -481,7 +481,7 @@ document.querySelector('#btn-compute').addEventListener('click', () => {
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form step 10 + compute"
 ```
 
@@ -517,7 +517,7 @@ document.querySelector('#btn-pdf').addEventListener('click', () => {
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form PDF export"
 ```
 
@@ -548,7 +548,7 @@ document.querySelector('#btn-copy-triage').addEventListener('click', async () =>
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/app.js
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/app.js
 git commit -m "OKR tracker: HTML form plain-text triage summary"
 ```
 
@@ -557,14 +557,14 @@ git commit -m "OKR tracker: HTML form plain-text triage summary"
 ## Task 10: Playwright smoke test against the 14 shared fixtures
 
 **Files:**
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/package.json`
-- Create: `forms/objective-and-key-result-tracker/front-end-form-with-html/smoke.spec.mjs`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/package.json`
+- Create: `forms/objectives-and-key-results-tracker/front-end-form-with-html/smoke.spec.mjs`
 
 - [ ] **Step 1: Write `package.json`:**
 
 ```json
 {
-  "name": "objective-and-key-result-tracker-front-end-form-with-html",
+  "name": "objectives-and-key-results-tracker-front-end-form-with-html",
   "version": "0.1.0",
   "private": true,
   "scripts": { "test": "playwright test smoke.spec.mjs --reporter=line" },
@@ -607,7 +607,7 @@ test.describe('engine.js — every fixture', () => {
 - [ ] **Step 3: Install Playwright and run the smoke test:**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-html
+cd forms/objectives-and-key-results-tracker/front-end-form-with-html
 pnpm install
 pnpm exec playwright install --with-deps chromium
 pnpm test
@@ -619,7 +619,7 @@ Expected: 14 tests pass.
 
 ```sh
 cd "$(git rev-parse --show-toplevel)"
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/{package.json,smoke.spec.mjs,pnpm-lock.yaml}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/{package.json,smoke.spec.mjs,pnpm-lock.yaml}
 git commit -m "OKR tracker: HTML form smoke test via Playwright"
 ```
 
@@ -628,10 +628,10 @@ git commit -m "OKR tracker: HTML form smoke test via Playwright"
 ## Task 11: Author form-level docs (AGENTS, plan, tasks for this sub-project)
 
 **Files:**
-- Modify: `forms/objective-and-key-result-tracker/front-end-form-with-html/index.md` (the scaffold left it empty)
-- Modify: `forms/objective-and-key-result-tracker/front-end-form-with-html/AGENTS.md`
-- Modify: `forms/objective-and-key-result-tracker/front-end-form-with-html/plan.md`
-- Modify: `forms/objective-and-key-result-tracker/front-end-form-with-html/tasks.md`
+- Modify: `forms/objectives-and-key-results-tracker/front-end-form-with-html/index.md` (the scaffold left it empty)
+- Modify: `forms/objectives-and-key-results-tracker/front-end-form-with-html/AGENTS.md`
+- Modify: `forms/objectives-and-key-results-tracker/front-end-form-with-html/plan.md`
+- Modify: `forms/objectives-and-key-results-tracker/front-end-form-with-html/tasks.md`
 
 - [ ] **Step 1: Write each file with a short description and pointers to the parent design spec and this plan.** Pattern (use this verbatim for `index.md`):
 
@@ -647,7 +647,7 @@ Static single-page wizard for the OKR tracker form. No build step. Opens directl
 - Smoke-tested with the 14 shared fixtures via Playwright
 
 See [the parent form's index.md](../index.md) and
-[the design spec](../../../docs/superpowers/specs/2026-05-08-objective-and-key-result-tracker-design.md).
+[the design spec](../../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md).
 
 ## Verify
 
@@ -661,7 +661,7 @@ Write the AGENTS / plan / tasks files similarly — terse and pointing at the pa
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-html/{index.md,AGENTS.md,plan.md,tasks.md}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-html/{index.md,AGENTS.md,plan.md,tasks.md}
 git commit -m "OKR tracker: HTML form sub-project docs"
 ```
 

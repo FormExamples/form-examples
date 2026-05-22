@@ -1,0 +1,104 @@
+{
+  "resourceType": "Observation",
+  "id": "cc0e8400-e29b-41d4-a716-446655440007",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:objectives-and-key-results-tracker",
+        "code": "okr_grade_flag",
+        "display": "Okr Grade Flag"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "encounter": {
+    "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker",
+            "code": "flag_code",
+            "display": "Flag Code"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker:flag_code",
+            "code": "mis-aligned",
+            "display": "Mis-Aligned"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker",
+            "code": "priority",
+            "display": "Priority"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker:priority",
+            "code": "high",
+            "display": "High"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:objectives-and-key-results-tracker",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

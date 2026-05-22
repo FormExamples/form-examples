@@ -21,7 +21,7 @@
 ## File structure
 
 ```
-forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/
+forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/
   package.json            # SvelteKit + Tailwind + wx-svelte-grid + Playwright
   svelte.config.js
   vite.config.ts
@@ -53,7 +53,7 @@ forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/
 
 ```json
 {
-  "name": "objective-and-key-result-tracker-front-end-dashboard-with-svelte",
+  "name": "objectives-and-key-results-tracker-front-end-dashboard-with-svelte",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -85,14 +85,14 @@ forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/
 - [ ] **Step 3: Install**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte
 pnpm install
 ```
 
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/{package.json,pnpm-lock.yaml,svelte.config.js,vite.config.ts,tailwind.config.ts,src/app.html,src/app.css}
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/{package.json,pnpm-lock.yaml,svelte.config.js,vite.config.ts,tailwind.config.ts,src/app.html,src/app.css}
 git commit -m "OKR tracker: Svelte dashboard bootstrap"
 ```
 
@@ -103,8 +103,8 @@ git commit -m "OKR tracker: Svelte dashboard bootstrap"
 - [ ] **Step 1: Copy `objectives.json` from `front-end-dashboard-with-html/`** to this sub-project's `static/`:
 
 ```sh
-cp forms/objective-and-key-result-tracker/front-end-dashboard-with-html/objectives.json \
-   forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/static/objectives.json
+cp forms/objectives-and-key-results-tracker/front-end-dashboard-with-html/objectives.json \
+   forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/static/objectives.json
 ```
 
 - [ ] **Step 2: Write `src/lib/data/sample.ts`** — typed loader:
@@ -128,7 +128,7 @@ export async function loadObjectives(fetcher: typeof fetch = fetch): Promise<Obj
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/{static/objectives.json,src/lib/data/sample.ts}
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/{static/objectives.json,src/lib/data/sample.ts}
 git commit -m "OKR tracker: Svelte dashboard sample data"
 ```
 
@@ -149,7 +149,7 @@ git commit -m "OKR tracker: Svelte dashboard sample data"
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/src/lib/components/RagChip.svelte
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/src/lib/components/RagChip.svelte
 git commit -m "OKR tracker: Svelte dashboard RAG chip"
 ```
 
@@ -189,7 +189,7 @@ git commit -m "OKR tracker: Svelte dashboard RAG chip"
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/src/lib/components/Grid.svelte
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/src/lib/components/Grid.svelte
 git commit -m "OKR tracker: Svelte dashboard Grid wrapper"
 ```
 
@@ -226,7 +226,7 @@ git commit -m "OKR tracker: Svelte dashboard Grid wrapper"
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/src/lib/components/Sidebar.svelte
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/src/lib/components/Sidebar.svelte
 git commit -m "OKR tracker: Svelte dashboard filter sidebar"
 ```
 
@@ -281,7 +281,7 @@ git commit -m "OKR tracker: Svelte dashboard filter sidebar"
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/src/lib/components/DetailPanel.svelte
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/src/lib/components/DetailPanel.svelte
 git commit -m "OKR tracker: Svelte dashboard detail panel"
 ```
 
@@ -328,7 +328,7 @@ git commit -m "OKR tracker: Svelte dashboard detail panel"
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/src/routes/+page.svelte
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/src/routes/+page.svelte
 git commit -m "OKR tracker: Svelte dashboard page composition"
 ```
 
@@ -376,7 +376,7 @@ pnpm test:e2e
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-dashboard-with-svelte/{playwright.config.ts,e2e/dashboard.spec.ts}
+git add forms/objectives-and-key-results-tracker/front-end-dashboard-with-svelte/{playwright.config.ts,e2e/dashboard.spec.ts}
 git commit -m "OKR tracker: Svelte dashboard Playwright tests"
 ```
 

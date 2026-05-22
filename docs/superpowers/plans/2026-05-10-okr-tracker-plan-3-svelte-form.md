@@ -8,7 +8,7 @@
 
 **Tech Stack:** SvelteKit 2 with Svelte 5, Tailwind 4, `@sveltejs/adapter-static`, Vitest 3 (from Plan 1), Playwright 1.50.
 
-**Reference Plan 1:** scoring engine lives at `forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/engine/`. Plan 1 left the project in an engine-only state with a minimal `package.json` and no SvelteKit adapter, Vite, Tailwind, or routes. Plan 3 promotes it to a full SvelteKit app **without breaking** the existing Vitest engine tests (44 tests) — they must continue to pass.
+**Reference Plan 1:** scoring engine lives at `forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/engine/`. Plan 1 left the project in an engine-only state with a minimal `package.json` and no SvelteKit adapter, Vite, Tailwind, or routes. Plan 3 promotes it to a full SvelteKit app **without breaking** the existing Vitest engine tests (44 tests) — they must continue to pass.
 
 **Plan-3 acceptance gate:**
 1. `pnpm dev` serves the wizard at `http://localhost:5173` with all ten steps on one scrollable page.
@@ -21,7 +21,7 @@
 ## File structure
 
 ```
-forms/objective-and-key-result-tracker/front-end-form-with-svelte/
+forms/objectives-and-key-results-tracker/front-end-form-with-svelte/
   package.json                       # add: @sveltejs/kit, vite, tailwindcss, adapter-static, playwright
   svelte.config.js                   # new
   vite.config.ts                     # new (Vite + Tailwind plugin + Vitest config merge)
@@ -65,7 +65,7 @@ forms/objective-and-key-result-tracker/front-end-form-with-svelte/
 
 ```json
 {
-  "name": "objective-and-key-result-tracker-front-end-form-with-svelte",
+  "name": "objectives-and-key-results-tracker-front-end-form-with-svelte",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -97,7 +97,7 @@ forms/objective-and-key-result-tracker/front-end-form-with-svelte/
 - [ ] **Step 2: Install and confirm engine tests still pass.**
 
 ```sh
-cd forms/objective-and-key-result-tracker/front-end-form-with-svelte
+cd forms/objectives-and-key-results-tracker/front-end-form-with-svelte
 pnpm install
 pnpm test
 ```
@@ -107,7 +107,7 @@ Expected: 44 tests pass (engine tests from Plan 1, unchanged).
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/{package.json,pnpm-lock.yaml}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/{package.json,pnpm-lock.yaml}
 git commit -m "OKR tracker: Svelte form upgrade to full SvelteKit toolchain"
 ```
 
@@ -186,8 +186,8 @@ Expected: tests pass; build emits a static `build/` directory.
 - [ ] **Step 7: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/{svelte.config.js,vite.config.ts,tailwind.config.ts,src/app.html,src/app.css}
-git rm forms/objective-and-key-result-tracker/front-end-form-with-svelte/vitest.config.ts
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/{svelte.config.js,vite.config.ts,tailwind.config.ts,src/app.html,src/app.css}
+git rm forms/objectives-and-key-results-tracker/front-end-form-with-svelte/vitest.config.ts
 git commit -m "OKR tracker: Svelte form config (SvelteKit + Vite + Tailwind)"
 ```
 
@@ -254,7 +254,7 @@ export const formState = new FormState();
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/stores/formState.svelte.ts
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/stores/formState.svelte.ts
 git commit -m "OKR tracker: Svelte form state store (runes)"
 ```
 
@@ -347,7 +347,7 @@ This file will fail to compile until all ten components exist — that's expecte
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/{routes,lib/components/ui/Step01ReporterAndCycle.svelte}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/{routes,lib/components/ui/Step01ReporterAndCycle.svelte}
 git commit -m "OKR tracker: Svelte form layout, page, and Step 1"
 ```
 
@@ -417,7 +417,7 @@ Step 5 is special (dynamic KR list — see Task 6). Step 10 is special (compute 
 - [ ] **Step 2: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/src/lib/components/ui/Step05KeyResults.svelte
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/src/lib/components/ui/Step05KeyResults.svelte
 git commit -m "OKR tracker: Svelte form Step 5 dynamic Key Results"
 ```
 
@@ -538,7 +538,7 @@ Open `http://localhost:5173`, fill fixture 01 values, click Compute, verify GREE
 - [ ] **Step 6: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/{package.json,pnpm-lock.yaml,src/lib/components/ui/{Step10ScoreAndSignOff,RagBadge,FlagList}.svelte}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/{package.json,pnpm-lock.yaml,src/lib/components/ui/{Step10ScoreAndSignOff,RagBadge,FlagList}.svelte}
 git commit -m "OKR tracker: Svelte form Step 10 + PDF + copy"
 ```
 
@@ -601,7 +601,7 @@ Expected: 14 / 14 pass.
 - [ ] **Step 4: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/{playwright.config.ts,e2e/fixtures.spec.ts,pnpm-lock.yaml}
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/{playwright.config.ts,e2e/fixtures.spec.ts,pnpm-lock.yaml}
 git commit -m "OKR tracker: Svelte form Playwright fixture smoke test"
 ```
 
@@ -647,7 +647,7 @@ test('fixture 01 driven through the UI shows GREEN', async ({ page }) => {
 - [ ] **Step 3: Commit**
 
 ```sh
-git add forms/objective-and-key-result-tracker/front-end-form-with-svelte/e2e/ui-driving.spec.ts
+git add forms/objectives-and-key-results-tracker/front-end-form-with-svelte/e2e/ui-driving.spec.ts
 git commit -m "OKR tracker: Svelte form UI-driving smoke test"
 ```
 
