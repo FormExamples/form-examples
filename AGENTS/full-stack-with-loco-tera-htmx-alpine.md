@@ -44,8 +44,7 @@ full-stack-with-loco-tera-htmx-alpine/
   .gitignore                  # ignore /target, /node_modules, etc.
   src/
     bin/
-      main.rs                 # HTTP entrypoint
-      cli.rs                  # Loco CLI entrypoint
+      main.rs                 # Single binary — runs both the HTTP server and the Loco management CLI
     app.rs                    # Loco App trait impl
     controllers/              # axum handlers per resource
     models/                   # SeaORM active-model wrappers + domain logic
@@ -172,6 +171,18 @@ File `config/test.yaml`:
 ```yaml
 database:
   uri: postgres://postgres:postgres@localhost:5432/[form]_test
+```
+
+### Production database
+
+- Production database name is [form]_production snake case; example patient_intake_production
+- Connection string is supplied via `DATABASE_URL`; never hard-code credentials
+
+File `config/production.yaml`:
+
+```yaml
+database:
+  uri: '{{ get_env(name="DATABASE_URL") }}'
 ```
 
 ### Database naming

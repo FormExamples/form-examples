@@ -33,12 +33,17 @@ Slug: front-end-with-sveltekit-tailwind-svar
 
 ## State management
 
-Svelte 5 class-based reactive state in `src/lib/stores/assessment.svelte.ts`:
+Svelte 5 class-based reactive state in `src/lib/stores/<name>.svelte.ts`,
+typically `assessment.svelte.ts` for clinical forms; non-clinical forms
+(e.g. `issue-tracker`, `objectives-and-key-results-tracker`) use a store
+name that matches their subject (`issue.svelte.ts`, `formState.svelte.ts`).
 
-- `assessment.data` — complete questionnaire responses
-- `assessment.result` — grading result (null until submitted)
-- `assessment.currentStep` — current wizard step
-- `assessment.reset()` — clear all data
+Typical fields:
+
+- `.data` — complete questionnaire responses
+- `.result` — grading result (null until submitted)
+- `.currentStep` — current wizard step
+- `.reset()` — clear all data
 
 Do not use Svelte 3/4 `writable` stores. Class-based runes stores are the
 convention across this monorepo.
@@ -84,18 +89,18 @@ Reusable form components in `src/lib/components/ui/`:
 From a form's `front-end-*-with-svelte/` directory:
 
 ```sh
-npm install               # Install dependencies
-npm run dev               # Start dev server (default port 5173)
-npm run build             # Production build
-npm run preview           # Preview production build
-npm run check             # Svelte type-check
-npm test                  # Run Vitest unit tests
+pnpm install              # Install dependencies
+pnpm dev                  # Start dev server (default port 5173)
+pnpm build                # Production build
+pnpm preview              # Preview production build
+pnpm check                # Svelte type-check
+pnpm test                 # Run Vitest unit tests
 ```
 
 ## Verify
 
 ```sh
 for d in forms/*/front-end-*-with-svelte; do
-  (cd "$d" && npm run check && npm test) || echo "FAIL: $d"
+  (cd "$d" && pnpm check && pnpm test) || echo "FAIL: $d"
 done
 ```

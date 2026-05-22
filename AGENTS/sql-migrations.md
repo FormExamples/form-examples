@@ -75,7 +75,7 @@ CREATE TABLE example (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    deleted_at TIMESTAMPTZ DEFAULT NULL
 );
 --rollback DROP TABLE example;
 ```
@@ -96,9 +96,12 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 ## Trigger pattern
 
 Define the trigger function once in an early migration and apply a trigger
-per table:
+per table. Each `CREATE` is paired with a matching `--rollback`:
 
 ```sql
+--liquibase formatted sql
+
+--changeset author:1
 CREATE OR REPLACE FUNCTION set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -106,11 +109,14 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+--rollback DROP FUNCTION IF EXISTS set_updated_at();
 
+--changeset author:2
 CREATE TRIGGER trigger_set_updated_at
     BEFORE UPDATE ON <table_name>
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
+--rollback DROP TRIGGER IF EXISTS trigger_set_updated_at ON <table_name>;
 ```
 
 

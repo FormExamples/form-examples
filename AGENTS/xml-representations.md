@@ -133,7 +133,7 @@ xmllint --schema schema.xsd file.xml
 Regenerate all XML + DTD files from the current SQL migrations:
 
 ```sh
-python3 bin/generate-xml-representations.py
+python3 bin/xml-representations/generate-xml-representations.py
 ```
 
 ## Verify

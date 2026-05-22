@@ -58,11 +58,12 @@ Generated FHIR HL7 R5 JSON resources live in `fhir-r5/`.
 1. `bin/create-form <slug>` — scaffold the directory
 2. Fill in `forms/<slug>/index.md`, `AGENTS.md`, `plan.md`, `tasks.md` with the design spec
 3. Author SQL migrations in `forms/<slug>/sql-migrations/`
-4. Generate XML + DTD representations (`bin/generate-xml-representations.py`)
-5. Generate FHIR R5 JSON (`bin/generate-fhir-r5-representations.py`)
-6. Build the front-ends (form and dashboard, each in HTML and SvelteKit)
-7. Build the full-stack Rust implementation
-8. `bin/test-form <slug>` — validate structure
+4. Generate XML + DTD representations (`bin/xml-representations/generate-xml-representations.py`)
+5. Generate FHIR R5 JSON (`bin/fhir-r5/generate-fhir-r5-representations.py`)
+6. Generate Protocol Buffers `.proto` schemas (`bin/protobuf/generate-protobuf-representations.py`)
+7. Build the front-ends (form and dashboard, each in HTML and SvelteKit)
+8. Build the full-stack Rust implementation
+9. `bin/test-form <slug>` — validate structure
 
 ## User interface
 
@@ -88,7 +89,9 @@ See the per-stack agent docs:
 - Step components named `StepNName.svelte` (1-indexed)
 - UI components in `src/lib/components/ui/`
 - `serde(rename_all = "camelCase")` on Rust structs shared with the front-end
-- UUIDv4 primary keys; `created_at` + `updated_at` timestamps on every table
+- UUIDv4 primary keys
+- Timestamps on every table: `created_at`, `updated_at`, `deleted_at`
+- Import and export via JSON, XML, CSV (Comma-Separated Values), and TSV (Tab-Separated Values)
 
 ## Compliance
 
