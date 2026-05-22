@@ -1,0 +1,6 @@
+{% extends "base.html.tera" %}
+{% block title %}OKR Dashboard{% endblock %}
+{% block content %}
+  <h2>Objectives</h2>
+  <p>Dashboard table — populated by the Loco controller (Plan 6 in progress).</p>
+{% endblock %}

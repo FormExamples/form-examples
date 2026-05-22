@@ -1,0 +1,12 @@
+<!ELEMENT okr_check_in (id,created_at,updated_at,deleted_at,okr_objective_id,checked_in_at,narrative,since_last_changes,blockers,asks,confidence_decile_at_check_in)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT okr_objective_id (#PCDATA)>
+<!ELEMENT checked_in_at (#PCDATA)>
+<!ELEMENT narrative (#PCDATA)>
+<!ELEMENT since_last_changes (#PCDATA)>
+<!ELEMENT blockers (#PCDATA)>
+<!ELEMENT asks (#PCDATA)>
+<!ELEMENT confidence_decile_at_check_in (#PCDATA)>

@@ -1,0 +1,11 @@
+body { font-family: system-ui, sans-serif; margin: 1rem; }
+#filters { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #ddd; text-align: left; }
+th { cursor: pointer; background: #f3f3f3; }
+th[data-sort-dir="asc"]::after { content: ' ▲'; }
+th[data-sort-dir="desc"]::after { content: ' ▼'; }
+.rag { display: inline-block; padding: 0 0.4rem; border-radius: 3px; color: white; font-weight: 700; font-size: 0.85em; }
+.rag.green { background: #2c8a3a; } .rag.amber { background: #c47a00; } .rag.red { background: #c0392b; }
+tr.detail td { background: #fafafa; padding: 1rem; }
+.flag-list li, .kr-list li { margin: 0.2rem 0; }

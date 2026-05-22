@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE okr_grade_flag SYSTEM "okr_grade_flag.dtd">
+<okr_grade_flag>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<okr_grade_id>aa0e8400-e29b-41d4-a716-446655440005</okr_grade_id>
+<flag_code>mis-aligned</flag_code>
+<priority>high</priority>
+<description>Example text.</description>
+</okr_grade_flag>

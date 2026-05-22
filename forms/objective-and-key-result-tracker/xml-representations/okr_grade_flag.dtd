@@ -1,0 +1,9 @@
+<!ELEMENT okr_grade_flag (id,created_at,updated_at,deleted_at,okr_grade_id,flag_code,priority,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT okr_grade_id (#PCDATA)>
+<!ELEMENT flag_code (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

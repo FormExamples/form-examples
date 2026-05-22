@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OKR Tracker — Wizard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/pdfmake@0.2/build/pdfmake.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/pdfmake@0.2/build/vfs_fonts.js"></script>
+  <script type="module" defer src="app.js"></script>
+</head>
+<body>
+  <header><h1>OKR Tracker</h1><p class="subtitle">One Objective with its 1–5 Key Results.</p></header>
+  <main id="wizard"></main>
+  <footer>
+    <button id="btn-compute">Compute score</button>
+    <button id="btn-pdf">Download PDF</button>
+    <button id="btn-copy-triage">Copy plain-text triage line</button>
+    <div id="result" aria-live="polite"></div>
+  </footer>
+</body>
+</html>
