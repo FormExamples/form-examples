@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_registration_application SYSTEM "lpa_registration_application.dtd">
+<lpa_registration_application>
+<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>aa0e8400-e29b-41d4-a716-446655440005</lpa_id>
+<applicant_role>donor</applicant_role>
+<applicant_signed_at>2026-04-09T10:00:00Z</applicant_signed_at>
+<fee_amount_pounds>0.0</fee_amount_pounds>
+<fee_remission>none</fee_remission>
+<fee_remission_reason>low-income</fee_remission_reason>
+<submitted_at>2026-04-09T10:00:00Z</submitted_at>
+<submission_channel>post</submission_channel>
+</lpa_registration_application>

@@ -1,0 +1,13 @@
+<!ELEMENT lpa_registration_application (id,created_at,updated_at,deleted_at,lpa_id,applicant_role,applicant_signed_at,fee_amount_pounds,fee_remission,fee_remission_reason,submitted_at,submission_channel)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT applicant_role (#PCDATA)>
+<!ELEMENT applicant_signed_at (#PCDATA)>
+<!ELEMENT fee_amount_pounds (#PCDATA)>
+<!ELEMENT fee_remission (#PCDATA)>
+<!ELEMENT fee_remission_reason (#PCDATA)>
+<!ELEMENT submitted_at (#PCDATA)>
+<!ELEMENT submission_channel (#PCDATA)>

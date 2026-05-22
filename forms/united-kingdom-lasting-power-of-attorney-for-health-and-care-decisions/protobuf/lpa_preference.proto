@@ -1,0 +1,29 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_preference
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum LpaPreferenceCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_RESIDENCE = 1;  // residence
+  CATEGORY_CONTACT_WITH_OTHERS = 2;  // contact-with-others
+  CATEGORY_RELIGION_AND_BELIEF = 3;  // religion-and-belief
+  CATEGORY_FOOD_AND_DRINK = 4;  // food-and-drink
+  CATEGORY_END_OF_LIFE_CARE = 5;  // end-of-life-care
+  CATEGORY_DAILY_ROUTINE = 6;  // daily-routine
+  CATEGORY_MEDICAL_TREATMENT = 7;  // medical-treatment
+  CATEGORY_OTHER = 8;  // other
+}
+
+message LpaPreference {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  int32 order_position = 6;  // INTEGER
+  LpaPreferenceCategoryEnum category = 7;  // VARCHAR(30)
+  string statement = 8;  // TEXT
+}

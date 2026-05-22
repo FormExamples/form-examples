@@ -1,0 +1,11 @@
+<!ELEMENT lpa_instruction (id,created_at,updated_at,deleted_at,lpa_id,order_position,category,statement,lawfulness_assessed,contradicts_adrt)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT order_position (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT statement (#PCDATA)>
+<!ELEMENT lawfulness_assessed (#PCDATA)>
+<!ELEMENT contradicts_adrt (#PCDATA)>

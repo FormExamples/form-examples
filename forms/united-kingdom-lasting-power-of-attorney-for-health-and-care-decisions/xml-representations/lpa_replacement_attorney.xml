@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lpa_replacement_attorney SYSTEM "lpa_replacement_attorney.dtd">
+<lpa_replacement_attorney>
+<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<lpa_id>aa0e8400-e29b-41d4-a716-446655440005</lpa_id>
+<replacement_attorney_id>770e8400-e29b-41d4-a716-446655440002</replacement_attorney_id>
+<order_position>1</order_position>
+<replacement_trigger></replacement_trigger>
+</lpa_replacement_attorney>

@@ -1,0 +1,15 @@
+<!ELEMENT lpa_signature (id,created_at,updated_at,deleted_at,lpa_id,signer_role,signer_id,signed_at,signature_method,signature_data,witness_name,witness_address,witness_signed_at,witness_is_attorney)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT signer_role (#PCDATA)>
+<!ELEMENT signer_id (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT signature_method (#PCDATA)>
+<!ELEMENT signature_data (#PCDATA)>
+<!ELEMENT witness_name (#PCDATA)>
+<!ELEMENT witness_address (#PCDATA)>
+<!ELEMENT witness_signed_at (#PCDATA)>
+<!ELEMENT witness_is_attorney (#PCDATA)>

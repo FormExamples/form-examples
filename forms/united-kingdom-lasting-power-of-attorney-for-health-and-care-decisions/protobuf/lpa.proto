@@ -1,0 +1,39 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum LpaJurisdictionEnum {
+  JURISDICTION_UNSPECIFIED = 0;
+  JURISDICTION_ENGLAND = 1;  // england
+  JURISDICTION_WALES = 2;  // wales
+}
+
+enum LpaStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_AWAITING_SIGNATURES = 2;  // awaiting-signatures
+  STATUS_READY_TO_REGISTER = 3;  // ready-to-register
+  STATUS_SUBMITTED_TO_OPG = 4;  // submitted-to-opg
+  STATUS_REGISTERED = 5;  // registered
+  STATUS_REJECTED = 6;  // rejected
+  STATUS_REVOKED = 7;  // revoked
+}
+
+message Lpa {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string donor_id = 5;  // UUID — uuid
+  string certificate_provider_id = 6;  // UUID — uuid
+  string form_version = 7;  // VARCHAR(20) — max 20 chars
+  LpaJurisdictionEnum jurisdiction = 8;  // VARCHAR(20)
+  LpaStatusEnum status = 9;  // VARCHAR(20)
+  string opg_reference = 10;  // VARCHAR(50) — max 50 chars
+  string registered_at = 11;  // TIMESTAMPTZ — iso 8601
+  string effective_from = 12;  // TIMESTAMPTZ — iso 8601
+  string notes = 13;  // TEXT
+}

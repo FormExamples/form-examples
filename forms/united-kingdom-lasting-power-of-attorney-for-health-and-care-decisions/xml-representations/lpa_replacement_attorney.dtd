@@ -1,0 +1,9 @@
+<!ELEMENT lpa_replacement_attorney (id,created_at,updated_at,deleted_at,lpa_id,replacement_attorney_id,order_position,replacement_trigger)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT replacement_attorney_id (#PCDATA)>
+<!ELEMENT order_position (#PCDATA)>
+<!ELEMENT replacement_trigger (#PCDATA)>

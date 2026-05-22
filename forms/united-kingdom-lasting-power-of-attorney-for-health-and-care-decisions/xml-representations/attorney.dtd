@@ -1,0 +1,17 @@
+<!ELEMENT attorney (id,created_at,updated_at,deleted_at,title,given_names,family_name,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,relationship_to_donor,is_bankrupt,capacity_declared)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT given_names (#PCDATA)>
+<!ELEMENT family_name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT relationship_to_donor (#PCDATA)>
+<!ELEMENT is_bankrupt (#PCDATA)>
+<!ELEMENT capacity_declared (#PCDATA)>

@@ -1,0 +1,14 @@
+<!ELEMENT lpa (id,created_at,updated_at,deleted_at,donor_id,certificate_provider_id,form_version,jurisdiction,status,opg_reference,registered_at,effective_from,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT donor_id (#PCDATA)>
+<!ELEMENT certificate_provider_id (#PCDATA)>
+<!ELEMENT form_version (#PCDATA)>
+<!ELEMENT jurisdiction (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT opg_reference (#PCDATA)>
+<!ELEMENT registered_at (#PCDATA)>
+<!ELEMENT effective_from (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

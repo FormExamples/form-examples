@@ -1,0 +1,55 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_registration_application
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum LpaRegistrationApplicationApplicantRoleEnum {
+  APPLICANTROLE_UNSPECIFIED = 0;
+  APPLICANTROLE_DONOR = 1;  // donor
+  APPLICANTROLE_ATTORNEY = 2;  // attorney
+  APPLICANTROLE_ATTORNEYS_JOINTLY = 3;  // attorneys-jointly
+}
+
+enum LpaRegistrationApplicationFeeRemissionEnum {
+  FEEREMISSION_UNSPECIFIED = 0;
+  FEEREMISSION_NONE = 1;  // none
+  FEEREMISSION_HALF = 2;  // half
+  FEEREMISSION_FULL_EXEMPT = 3;  // full-exempt
+}
+
+enum LpaRegistrationApplicationFeeRemissionReasonEnum {
+  FEEREMISSIONREASON_UNSPECIFIED = 0;
+  FEEREMISSIONREASON_LOW_INCOME = 1;  // low-income
+  FEEREMISSIONREASON_UNIVERSAL_CREDIT = 2;  // universal-credit
+  FEEREMISSIONREASON_INCOME_SUPPORT = 3;  // income-support
+  FEEREMISSIONREASON_PENSION_CREDIT_GUARANTEE = 4;  // pension-credit-guarantee
+  FEEREMISSIONREASON_HOUSING_BENEFIT = 5;  // housing-benefit
+  FEEREMISSIONREASON_EMPLOYMENT_AND_SUPPORT_ALLOWANCE = 6;  // employment-and-support-allowance
+  FEEREMISSIONREASON_JOBSEEKERS_ALLOWANCE = 7;  // jobseekers-allowance
+  FEEREMISSIONREASON_WORKING_TAX_CREDIT = 8;  // working-tax-credit
+  FEEREMISSIONREASON_OTHER = 9;  // other
+}
+
+enum LpaRegistrationApplicationSubmissionChannelEnum {
+  SUBMISSIONCHANNEL_UNSPECIFIED = 0;
+  SUBMISSIONCHANNEL_POST = 1;  // post
+  SUBMISSIONCHANNEL_OPG_DIGITAL = 2;  // opg-digital
+  SUBMISSIONCHANNEL_SOLICITOR_PORTAL = 3;  // solicitor-portal
+}
+
+message LpaRegistrationApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  LpaRegistrationApplicationApplicantRoleEnum applicant_role = 6;  // VARCHAR(30)
+  string applicant_signed_at = 7;  // TIMESTAMPTZ — iso 8601
+  double fee_amount_pounds = 8;  // NUMERIC(6,2) — numeric(6,2)
+  LpaRegistrationApplicationFeeRemissionEnum fee_remission = 9;  // VARCHAR(20)
+  LpaRegistrationApplicationFeeRemissionReasonEnum fee_remission_reason = 10;  // VARCHAR(50)
+  string submitted_at = 11;  // TIMESTAMPTZ — iso 8601
+  LpaRegistrationApplicationSubmissionChannelEnum submission_channel = 12;  // VARCHAR(20)
+}

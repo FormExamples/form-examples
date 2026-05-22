@@ -1,0 +1,76 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: certificate_provider
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum CertificateProviderRouteEnum {
+  ROUTE_UNSPECIFIED = 0;
+  ROUTE_SKILL_BASED = 1;  // skill-based
+  ROUTE_KNOWLEDGE_BASED = 2;  // knowledge-based
+}
+
+enum CertificateProviderProfessionEnum {
+  PROFESSION_UNSPECIFIED = 0;
+  PROFESSION_SOLICITOR = 1;  // solicitor
+  PROFESSION_BARRISTER = 2;  // barrister
+  PROFESSION_GENERAL_PRACTITIONER = 3;  // general-practitioner
+  PROFESSION_CONSULTANT = 4;  // consultant
+  PROFESSION_REGISTERED_NURSE = 5;  // registered-nurse
+  PROFESSION_REGISTERED_SOCIAL_WORKER = 6;  // registered-social-worker
+  PROFESSION_IMCA = 7;  // imca
+  PROFESSION_PSYCHIATRIST = 8;  // psychiatrist
+  PROFESSION_PSYCHOLOGIST = 9;  // psychologist
+  PROFESSION_OTHER_REGISTERED_PROFESSIONAL = 10;  // other-registered-professional
+}
+
+enum CertificateProviderRelationshipToDonorEnum {
+  RELATIONSHIPTODONOR_UNSPECIFIED = 0;
+  RELATIONSHIPTODONOR_PROFESSIONAL = 1;  // professional
+  RELATIONSHIPTODONOR_FRIEND = 2;  // friend
+  RELATIONSHIPTODONOR_COLLEAGUE = 3;  // colleague
+  RELATIONSHIPTODONOR_NEIGHBOUR = 4;  // neighbour
+  RELATIONSHIPTODONOR_OTHER = 5;  // other
+}
+
+enum CertificateProviderDeclaredNotFamilyEnum {
+  DECLAREDNOTFAMILY_UNSPECIFIED = 0;
+  DECLAREDNOTFAMILY_YES = 1;  // yes
+  DECLAREDNOTFAMILY_NO = 2;  // no
+}
+
+enum CertificateProviderDeclaredNotEmployeeEnum {
+  DECLAREDNOTEMPLOYEE_UNSPECIFIED = 0;
+  DECLAREDNOTEMPLOYEE_YES = 1;  // yes
+  DECLAREDNOTEMPLOYEE_NO = 2;  // no
+}
+
+enum CertificateProviderDeclaredNotAttorneyEnum {
+  DECLAREDNOTATTORNEY_UNSPECIFIED = 0;
+  DECLAREDNOTATTORNEY_YES = 1;  // yes
+  DECLAREDNOTATTORNEY_NO = 2;  // no
+}
+
+message CertificateProvider {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string title = 5;  // VARCHAR(20) — max 20 chars
+  string given_names = 6;  // VARCHAR(255) — max 255 chars
+  string family_name = 7;  // VARCHAR(255) — max 255 chars
+  string email = 8;  // TEXT
+  string phone = 9;  // TEXT
+  string postal_address_as_full_text = 10;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 11;  // CHAR(2) — max 2 chars
+  string postcode = 12;  // TEXT
+  CertificateProviderRouteEnum route = 13;  // VARCHAR(20)
+  CertificateProviderProfessionEnum profession = 14;  // VARCHAR(50)
+  string profession_registration_number = 15;  // VARCHAR(50) — max 50 chars
+  double years_known_donor = 16;  // NUMERIC(4,1) — numeric(4,1)
+  CertificateProviderRelationshipToDonorEnum relationship_to_donor = 17;  // VARCHAR(30)
+  CertificateProviderDeclaredNotFamilyEnum declared_not_family = 18;  // VARCHAR(5)
+  CertificateProviderDeclaredNotEmployeeEnum declared_not_employee = 19;  // VARCHAR(5)
+  CertificateProviderDeclaredNotAttorneyEnum declared_not_attorney = 20;  // VARCHAR(5)
+}

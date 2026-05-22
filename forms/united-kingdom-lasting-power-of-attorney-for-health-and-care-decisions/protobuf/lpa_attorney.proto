@@ -1,0 +1,16 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_attorney
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+message LpaAttorney {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  string attorney_id = 6;  // UUID — uuid
+  int32 order_position = 7;  // INTEGER
+}

@@ -1,0 +1,37 @@
+<script lang="ts">
+  interface Props {
+    label: string;
+    value: string;
+    type?: 'text' | 'email' | 'tel' | 'date' | 'datetime-local';
+    placeholder?: string;
+    hint?: string;
+    required?: boolean;
+    onchange?: () => void;
+  }
+  let {
+    label,
+    value = $bindable(),
+    type = 'text',
+    placeholder = '',
+    hint = '',
+    required = false,
+    onchange,
+  }: Props = $props();
+
+  const id = `f-${Math.random().toString(36).slice(2, 10)}`;
+</script>
+
+<label for={id} class="block">
+  <span class="mb-1 block text-sm font-medium text-slate-700">
+    {label}{#if required}<span class="text-red-600" aria-label="required"> *</span>{/if}
+  </span>
+  <input
+    {id}
+    {type}
+    {placeholder}
+    bind:value
+    oninput={() => onchange?.()}
+    class="w-full rounded border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+  />
+  {#if hint}<p class="mt-1 text-xs text-slate-500">{hint}</p>{/if}
+</label>

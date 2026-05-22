@@ -1,0 +1,224 @@
+#!/bin/sh
+# setup.sh
+#
+# Scaffold generator for the LP1H full-stack Loco crate.
+#
+# - Creates the `loco` Postgres role (if not exists)
+# - Creates `*_development`, `*_test`, `*_production` databases (if not exists)
+# - Runs `cargo loco generate scaffold` for every table in
+#   sql-migrations/*.sql, in the order they appear so foreign-key targets
+#   are scaffolded first.
+#
+# Re-run after changing sql-migrations/*.sql.
+
+set -euf
+
+PROJECT="united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions"
+PGHOST="${PGHOST:-localhost}"
+PGPORT="${PGPORT:-5432}"
+
+echo "==> Ensuring Postgres role 'loco' exists"
+createuser --host="$PGHOST" --port="$PGPORT" --username=postgres \
+  --login --createdb loco || true
+
+for env in development test production; do
+  echo "==> Ensuring database ${PROJECT}_${env} exists"
+  createdb --host="$PGHOST" --port="$PGPORT" --username=postgres \
+    --owner=loco "${PROJECT}_${env}" || true
+done
+
+echo "==> Scaffolding LP1H tables (18 tables)..."
+
+cargo loco generate scaffold donor \
+    deleted_at:ts \
+    title:string \
+    given_names:string! \
+    family_name:string! \
+    other_names_used:text \
+    birth_date:date \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string \
+    jurisdiction:string \
+    preferred_language:string \
+    capacity_declared:string \
+    capacity_declared_at:ts \
+    --htmx && \
+cargo loco generate scaffold attorney \
+    deleted_at:ts \
+    title:string \
+    given_names:string! \
+    family_name:string! \
+    birth_date:date \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    relationship_to_donor:string \
+    is_bankrupt:string \
+    capacity_declared:string \
+    --htmx && \
+cargo loco generate scaffold replacement_attorney \
+    deleted_at:ts \
+    title:string \
+    given_names:string! \
+    family_name:string! \
+    birth_date:date \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    relationship_to_donor:string \
+    is_bankrupt:string \
+    capacity_declared:string \
+    --htmx && \
+cargo loco generate scaffold certificate_provider \
+    deleted_at:ts \
+    title:string \
+    given_names:string! \
+    family_name:string! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    route:string \
+    profession:string \
+    profession_registration_number:string \
+    years_known_donor:double \
+    relationship_to_donor:string \
+    declared_not_family:string \
+    declared_not_employee:string \
+    declared_not_attorney:string \
+    --htmx && \
+cargo loco generate scaffold person_to_notify \
+    deleted_at:ts \
+    title:string \
+    given_names:string \
+    family_name:string \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    relationship_to_donor:string \
+    --htmx && \
+cargo loco generate scaffold lpa \
+    deleted_at:ts \
+    donor:references:donor \
+    certificate_provider:references:certificate_provider \
+    form_version:string \
+    jurisdiction:string \
+    status:string \
+    opg_reference:string \
+    registered_at:ts \
+    effective_from:ts \
+    notes:text \
+    --htmx && \
+cargo loco generate scaffold lpa_attorney \
+    deleted_at:ts \
+    lpa:references:lpa \
+    attorney:references:attorney \
+    order_position:int \
+    --htmx && \
+cargo loco generate scaffold lpa_replacement_attorney \
+    deleted_at:ts \
+    lpa:references:lpa \
+    replacement_attorney:references:replacement_attorney \
+    order_position:int \
+    replacement_trigger:text \
+    --htmx && \
+cargo loco generate scaffold lpa_person_to_notify \
+    deleted_at:ts \
+    lpa:references:lpa \
+    person_to_notify:references:person_to_notify \
+    order_position:int \
+    --htmx && \
+cargo loco generate scaffold lpa_decision_rule \
+    deleted_at:ts \
+    lpa:references:lpa \
+    decision_rule:string \
+    joint_decision_set:text \
+    --htmx && \
+cargo loco generate scaffold lpa_lst_choice \
+    deleted_at:ts \
+    lpa:references:lpa \
+    lst_choice:string \
+    donor_initialled:string \
+    initialled_at:ts \
+    --htmx && \
+cargo loco generate scaffold lpa_preference \
+    deleted_at:ts \
+    lpa:references:lpa \
+    order_position:int \
+    category:string \
+    statement:text \
+    --htmx && \
+cargo loco generate scaffold lpa_instruction \
+    deleted_at:ts \
+    lpa:references:lpa \
+    order_position:int \
+    category:string \
+    statement:text \
+    lawfulness_assessed:string \
+    contradicts_adrt:string \
+    --htmx && \
+cargo loco generate scaffold lpa_signature \
+    deleted_at:ts \
+    lpa:references:lpa \
+    signer_role:string \
+    signer_id:uuid \
+    signed_at:ts \
+    signature_method:string \
+    witness_name:string \
+    witness_address:text \
+    witness_signed_at:ts \
+    witness_is_attorney:string \
+    --htmx && \
+cargo loco generate scaffold lpa_registration_application \
+    deleted_at:ts \
+    lpa:references:lpa \
+    applicant_role:string \
+    applicant_signed_at:ts \
+    fee_amount_pounds:double \
+    fee_remission:string \
+    fee_remission_reason:string \
+    submitted_at:ts \
+    submission_channel:string \
+    --htmx && \
+cargo loco generate scaffold lpa_validity \
+    deleted_at:ts \
+    lpa:references:lpa \
+    validity_status:string \
+    completeness_score:int \
+    effective_date:date \
+    computed_at:ts \
+    engine_version:string \
+    notes:text \
+    --htmx && \
+cargo loco generate scaffold lpa_validity_fired_rule \
+    deleted_at:ts \
+    lpa_validity:references:lpa_validity \
+    rule_id:string \
+    severity:string \
+    rule_family:string \
+    source_citation:string \
+    description:text \
+    suggested_correction:text \
+    --htmx && \
+cargo loco generate scaffold lpa_validity_additional_flag \
+    deleted_at:ts \
+    lpa_validity:references:lpa_validity \
+    flag_id:string \
+    category:string \
+    priority:string \
+    description:text \
+    suggested_action:text \
+    --htmx
+
+echo "==> Scaffolding complete. Run 'cargo loco db migrate' next."

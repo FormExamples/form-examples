@@ -1,0 +1,9 @@
+node_modules
+/.svelte-kit
+/build
+/.vercel
+/.netlify
+.env
+.env.*
+!.env.example
+*.log

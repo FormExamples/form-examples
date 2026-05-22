@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attorney SYSTEM "attorney.dtd">
+<attorney>
+<id>660e8400-e29b-41d4-a716-446655440001</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<title>Example Title</title>
+<given_names>Example</given_names>
+<family_name>Example</family_name>
+<birth_date>2026-01-15</birth_date>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<postcode>SW1A 1AA</postcode>
+<relationship_to_donor>spouse</relationship_to_donor>
+<is_bankrupt>yes</is_bankrupt>
+<capacity_declared>yes</capacity_declared>
+</attorney>

@@ -1,0 +1,19 @@
+# Local configuration with secrets
+**/config/local.yaml
+**/config/*.local.yaml
+**/config/production.yaml
+
+# Cargo
+debug/
+target/
+!Cargo.lock
+
+# rustfmt backups
+**/*.rs.bk
+
+# MSVC debug info
+*.pdb
+
+# SQLite local databases
+*.sqlite
+*.sqlite-*

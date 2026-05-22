@@ -1,0 +1,12 @@
+<!ELEMENT lpa_validity (id,created_at,updated_at,deleted_at,lpa_id,validity_status,completeness_score,effective_date,computed_at,engine_version,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT validity_status (#PCDATA)>
+<!ELEMENT completeness_score (#PCDATA)>
+<!ELEMENT effective_date (#PCDATA)>
+<!ELEMENT computed_at (#PCDATA)>
+<!ELEMENT engine_version (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

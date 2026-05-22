@@ -1,0 +1,49 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: attorney
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum AttorneyRelationshipToDonorEnum {
+  RELATIONSHIPTODONOR_UNSPECIFIED = 0;
+  RELATIONSHIPTODONOR_SPOUSE = 1;  // spouse
+  RELATIONSHIPTODONOR_CIVIL_PARTNER = 2;  // civil-partner
+  RELATIONSHIPTODONOR_CHILD = 3;  // child
+  RELATIONSHIPTODONOR_PARENT = 4;  // parent
+  RELATIONSHIPTODONOR_SIBLING = 5;  // sibling
+  RELATIONSHIPTODONOR_FRIEND = 6;  // friend
+  RELATIONSHIPTODONOR_PROFESSIONAL = 7;  // professional
+  RELATIONSHIPTODONOR_OTHER = 8;  // other
+}
+
+enum AttorneyIsBankruptEnum {
+  ISBANKRUPT_UNSPECIFIED = 0;
+  ISBANKRUPT_YES = 1;  // yes
+  ISBANKRUPT_NO = 2;  // no
+}
+
+enum AttorneyCapacityDeclaredEnum {
+  CAPACITYDECLARED_UNSPECIFIED = 0;
+  CAPACITYDECLARED_YES = 1;  // yes
+  CAPACITYDECLARED_NO = 2;  // no
+}
+
+message Attorney {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string title = 5;  // VARCHAR(20) — max 20 chars
+  string given_names = 6;  // VARCHAR(255) — max 255 chars
+  string family_name = 7;  // VARCHAR(255) — max 255 chars
+  string birth_date = 8;  // DATE — iso 8601 date
+  string email = 9;  // TEXT
+  string phone = 10;  // TEXT
+  string postal_address_as_full_text = 11;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 12;  // CHAR(2) — max 2 chars
+  string postcode = 13;  // TEXT
+  AttorneyRelationshipToDonorEnum relationship_to_donor = 14;  // VARCHAR(30)
+  AttorneyIsBankruptEnum is_bankrupt = 15;  // VARCHAR(5)
+  AttorneyCapacityDeclaredEnum capacity_declared = 16;  // VARCHAR(5)
+}

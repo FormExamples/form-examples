@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_validity
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum LpaValidityValidityStatusEnum {
+  VALIDITYSTATUS_UNSPECIFIED = 0;
+  VALIDITYSTATUS_READY_TO_REGISTER = 1;  // ready-to-register
+  VALIDITYSTATUS_NEEDS_CORRECTION = 2;  // needs-correction
+  VALIDITYSTATUS_INVALID = 3;  // invalid
+}
+
+message LpaValidity {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  LpaValidityValidityStatusEnum validity_status = 6;  // VARCHAR(30)
+  int32 completeness_score = 7;  // INTEGER
+  string effective_date = 8;  // DATE — iso 8601 date
+  string computed_at = 9;  // TIMESTAMPTZ — iso 8601
+  string engine_version = 10;  // VARCHAR(20) — max 20 chars
+  string notes = 11;  // TEXT
+}

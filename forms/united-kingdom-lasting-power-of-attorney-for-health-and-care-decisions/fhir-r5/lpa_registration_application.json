@@ -1,0 +1,170 @@
+{
+  "resourceType": "Observation",
+  "id": "440e8400-e29b-41d4-a716-44665544000e",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+        "code": "lpa_registration_application",
+        "display": "Lpa Registration Application"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/881e8400-e29b-41d4-a716-446655440012"
+  },
+  "encounter": {
+    "reference": "Encounter/991e8400-e29b-41d4-a716-446655440013"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "applicant_role",
+            "display": "Applicant Role"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:applicant_role",
+            "code": "donor",
+            "display": "Donor"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "applicant_signed_at",
+            "display": "Applicant Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "fee_amount_pounds",
+            "display": "Fee Amount Pounds"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "fee_remission",
+            "display": "Fee Remission"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:fee_remission",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "fee_remission_reason",
+            "display": "Fee Remission Reason"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:fee_remission_reason",
+            "code": "low-income",
+            "display": "Low-Income"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "submitted_at",
+            "display": "Submitted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
+            "code": "submission_channel",
+            "display": "Submission Channel"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions:submission_channel",
+            "code": "post",
+            "display": "Post"
+          }
+        ]
+      }
+    }
+  ]
+}

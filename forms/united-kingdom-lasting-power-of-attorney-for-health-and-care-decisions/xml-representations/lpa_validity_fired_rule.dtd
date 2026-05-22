@@ -1,0 +1,12 @@
+<!ELEMENT lpa_validity_fired_rule (id,created_at,updated_at,deleted_at,lpa_validity_id,rule_id,severity,rule_family,source_citation,description,suggested_correction)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_validity_id (#PCDATA)>
+<!ELEMENT rule_id (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT rule_family (#PCDATA)>
+<!ELEMENT source_citation (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT suggested_correction (#PCDATA)>

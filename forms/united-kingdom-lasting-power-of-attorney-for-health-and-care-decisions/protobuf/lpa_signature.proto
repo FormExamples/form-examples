@@ -1,0 +1,44 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lpa_signature
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions;
+
+enum LpaSignatureSignerRoleEnum {
+  SIGNERROLE_UNSPECIFIED = 0;
+  SIGNERROLE_DONOR = 1;  // donor
+  SIGNERROLE_CERTIFICATE_PROVIDER = 2;  // certificate-provider
+  SIGNERROLE_ATTORNEY = 3;  // attorney
+  SIGNERROLE_REPLACEMENT_ATTORNEY = 4;  // replacement-attorney
+}
+
+enum LpaSignatureSignatureMethodEnum {
+  SIGNATUREMETHOD_UNSPECIFIED = 0;
+  SIGNATUREMETHOD_WET_INK = 1;  // wet-ink
+  SIGNATUREMETHOD_ELECTRONIC = 2;  // electronic
+  SIGNATUREMETHOD_MARK_WITH_WITNESS = 3;  // mark-with-witness
+}
+
+enum LpaSignatureWitnessIsAttorneyEnum {
+  WITNESSISATTORNEY_UNSPECIFIED = 0;
+  WITNESSISATTORNEY_YES = 1;  // yes
+  WITNESSISATTORNEY_NO = 2;  // no
+}
+
+message LpaSignature {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string lpa_id = 5;  // UUID — uuid
+  LpaSignatureSignerRoleEnum signer_role = 6;  // VARCHAR(30)
+  string signer_id = 7;  // UUID — uuid
+  string signed_at = 8;  // TIMESTAMPTZ — iso 8601
+  LpaSignatureSignatureMethodEnum signature_method = 9;  // VARCHAR(20)
+  bytes signature_data = 10;  // BYTEA
+  string witness_name = 11;  // VARCHAR(255) — max 255 chars
+  string witness_address = 12;  // TEXT
+  string witness_signed_at = 13;  // TIMESTAMPTZ — iso 8601
+  LpaSignatureWitnessIsAttorneyEnum witness_is_attorney = 14;  // VARCHAR(5)
+}

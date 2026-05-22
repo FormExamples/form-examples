@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE certificate_provider SYSTEM "certificate_provider.dtd">
+<certificate_provider>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<title>Example Title</title>
+<given_names>Example</given_names>
+<family_name>Example</family_name>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<postcode>SW1A 1AA</postcode>
+<route>skill-based</route>
+<profession>solicitor</profession>
+<profession_registration_number></profession_registration_number>
+<years_known_donor>0.0</years_known_donor>
+<relationship_to_donor>professional</relationship_to_donor>
+<declared_not_family>yes</declared_not_family>
+<declared_not_employee>yes</declared_not_employee>
+<declared_not_attorney>yes</declared_not_attorney>
+</certificate_provider>

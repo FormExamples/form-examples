@@ -1,0 +1,9 @@
+<!ELEMENT lpa_lst_choice (id,created_at,updated_at,deleted_at,lpa_id,lst_choice,donor_initialled,initialled_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT lpa_id (#PCDATA)>
+<!ELEMENT lst_choice (#PCDATA)>
+<!ELEMENT donor_initialled (#PCDATA)>
+<!ELEMENT initialled_at (#PCDATA)>
