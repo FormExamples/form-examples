@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE return_to_work_grade SYSTEM "return_to_work_grade.dtd">
+<return_to_work_grade>
+<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<return_to_work_id>880e8400-e29b-41d4-a716-446655440003</return_to_work_id>
+<fitness_statement>fit</fitness_statement>
+<restriction_priority>routine</restriction_priority>
+<rule_count>2</rule_count>
+<flag_count>2</flag_count>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</return_to_work_grade>

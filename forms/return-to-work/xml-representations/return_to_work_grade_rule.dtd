@@ -1,0 +1,13 @@
+<!ELEMENT return_to_work_grade_rule (id,created_at,updated_at,deleted_at,return_to_work_grade_id,rule_code,rule_title,rule_band,rule_priority,rule_kind,rule_evidence,rule_notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT return_to_work_grade_id (#PCDATA)>
+<!ELEMENT rule_code (#PCDATA)>
+<!ELEMENT rule_title (#PCDATA)>
+<!ELEMENT rule_band (#PCDATA)>
+<!ELEMENT rule_priority (#PCDATA)>
+<!ELEMENT rule_kind (#PCDATA)>
+<!ELEMENT rule_evidence (#PCDATA)>
+<!ELEMENT rule_notes (#PCDATA)>

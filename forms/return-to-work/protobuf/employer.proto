@@ -1,0 +1,47 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: employer
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum EmployerIndustrySectorEnum {
+  INDUSTRYSECTOR_UNSPECIFIED = 0;
+  INDUSTRYSECTOR_AGRICULTURE = 1;  // agriculture
+  INDUSTRYSECTOR_CONSTRUCTION = 2;  // construction
+  INDUSTRYSECTOR_EDUCATION = 3;  // education
+  INDUSTRYSECTOR_ENERGY_UTILITIES = 4;  // energy-utilities
+  INDUSTRYSECTOR_FINANCE_INSURANCE = 5;  // finance-insurance
+  INDUSTRYSECTOR_FOOD_HOSPITALITY = 6;  // food-hospitality
+  INDUSTRYSECTOR_GOVERNMENT = 7;  // government
+  INDUSTRYSECTOR_HEALTHCARE = 8;  // healthcare
+  INDUSTRYSECTOR_INFORMATION_TECHNOLOGY = 9;  // information-technology
+  INDUSTRYSECTOR_MANUFACTURING = 10;  // manufacturing
+  INDUSTRYSECTOR_MINING = 11;  // mining
+  INDUSTRYSECTOR_PROFESSIONAL_SERVICES = 12;  // professional-services
+  INDUSTRYSECTOR_PUBLIC_SAFETY_EMERGENCY = 13;  // public-safety-emergency
+  INDUSTRYSECTOR_RETAIL = 14;  // retail
+  INDUSTRYSECTOR_TRANSPORT_LOGISTICS = 15;  // transport-logistics
+  INDUSTRYSECTOR_AVIATION = 16;  // aviation
+  INDUSTRYSECTOR_RAIL = 17;  // rail
+  INDUSTRYSECTOR_MARITIME = 18;  // maritime
+  INDUSTRYSECTOR_MEDIA = 19;  // media
+  INDUSTRYSECTOR_OTHER = 20;  // other
+}
+
+message Employer {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  EmployerIndustrySectorEnum industry_sector = 6;  // VARCHAR(100)
+  string postal_address_as_full_text = 7;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 8;  // CHAR(2) — max 2 chars
+  string postcode = 9;  // TEXT
+  string occupational_health_contact_name = 10;  // TEXT
+  string occupational_health_contact_email = 11;  // TEXT
+  string occupational_health_contact_phone = 12;  // TEXT
+  string hr_contact_name = 13;  // TEXT
+  string hr_contact_email = 14;  // TEXT
+}

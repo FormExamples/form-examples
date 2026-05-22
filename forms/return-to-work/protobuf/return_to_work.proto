@@ -1,0 +1,256 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: return_to_work
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum ReturnToWorkStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_CANCELLED = 4;  // cancelled
+  STATUS_SUPERSEDED = 5;  // superseded
+}
+
+enum ReturnToWorkStatementKindEnum {
+  STATEMENTKIND_UNSPECIFIED = 0;
+  STATEMENTKIND_FIT_NOTE = 1;  // fit-note
+  STATEMENTKIND_MEDICAL_CLEARANCE_LETTER = 2;  // medical-clearance-letter
+  STATEMENTKIND_SPECIALIST_REPORT = 3;  // specialist-report
+}
+
+enum ReturnToWorkMechanismEnum {
+  MECHANISM_UNSPECIFIED = 0;
+  MECHANISM_ILLNESS = 1;  // illness
+  MECHANISM_INJURY = 2;  // injury
+  MECHANISM_SURGERY = 3;  // surgery
+  MECHANISM_MENTAL_HEALTH = 4;  // mental-health
+  MECHANISM_PREGNANCY_RELATED = 5;  // pregnancy-related
+  MECHANISM_CANCER_TREATMENT = 6;  // cancer-treatment
+  MECHANISM_OTHER = 7;  // other
+}
+
+enum ReturnToWorkWorkplaceCauseEnum {
+  WORKPLACECAUSE_UNSPECIFIED = 0;
+  WORKPLACECAUSE_YES = 1;  // yes
+  WORKPLACECAUSE_NO = 2;  // no
+}
+
+enum ReturnToWorkAnticipatedRecoveryTrajectoryEnum {
+  ANTICIPATEDRECOVERYTRAJECTORY_UNSPECIFIED = 0;
+  ANTICIPATEDRECOVERYTRAJECTORY_FULL_RECOVERY_IMMINENT = 1;  // full-recovery-imminent
+  ANTICIPATEDRECOVERYTRAJECTORY_FULL_RECOVERY_EXPECTED = 2;  // full-recovery-expected
+  ANTICIPATEDRECOVERYTRAJECTORY_PARTIAL_RECOVERY_EXPECTED = 3;  // partial-recovery-expected
+  ANTICIPATEDRECOVERYTRAJECTORY_CHRONIC_MANAGED = 4;  // chronic-managed
+  ANTICIPATEDRECOVERYTRAJECTORY_PROGRESSIVE = 5;  // progressive
+  ANTICIPATEDRECOVERYTRAJECTORY_PALLIATIVE = 6;  // palliative
+}
+
+enum ReturnToWorkSpecialistFollowupRequiredEnum {
+  SPECIALISTFOLLOWUPREQUIRED_UNSPECIFIED = 0;
+  SPECIALISTFOLLOWUPREQUIRED_YES = 1;  // yes
+  SPECIALISTFOLLOWUPREQUIRED_NO = 2;  // no
+}
+
+enum ReturnToWorkMobilityEnum {
+  MOBILITY_UNSPECIFIED = 0;
+  MOBILITY_NORMAL = 1;  // normal
+  MOBILITY_REDUCED = 2;  // reduced
+  MOBILITY_SEVERELY_LIMITED = 3;  // severely-limited
+  MOBILITY_WHEELCHAIR = 4;  // wheelchair
+}
+
+enum ReturnToWorkCognitionEnum {
+  COGNITION_UNSPECIFIED = 0;
+  COGNITION_NORMAL = 1;  // normal
+  COGNITION_MILDLY_IMPAIRED = 2;  // mildly-impaired
+  COGNITION_MODERATELY_IMPAIRED = 3;  // moderately-impaired
+  COGNITION_SEVERELY_IMPAIRED = 4;  // severely-impaired
+}
+
+enum ReturnToWorkMoodEnum {
+  MOOD_UNSPECIFIED = 0;
+  MOOD_STABLE = 1;  // stable
+  MOOD_LOW = 2;  // low
+  MOOD_ANXIOUS = 3;  // anxious
+  MOOD_AGITATED = 4;  // agitated
+  MOOD_CRISIS = 5;  // crisis
+}
+
+enum ReturnToWorkSleepEnum {
+  SLEEP_UNSPECIFIED = 0;
+  SLEEP_NORMAL = 1;  // normal
+  SLEEP_DISTURBED = 2;  // disturbed
+  SLEEP_SEVERELY_DISTURBED = 3;  // severely-disturbed
+}
+
+enum ReturnToWorkDrivingCapacityEnum {
+  DRIVINGCAPACITY_UNSPECIFIED = 0;
+  DRIVINGCAPACITY_FIT_TO_DRIVE = 1;  // fit-to-drive
+  DRIVINGCAPACITY_RESTRICTED = 2;  // restricted
+  DRIVINGCAPACITY_NOT_FIT_TO_DRIVE = 3;  // not-fit-to-drive
+}
+
+enum ReturnToWorkAdlIndependenceEnum {
+  ADLINDEPENDENCE_UNSPECIFIED = 0;
+  ADLINDEPENDENCE_INDEPENDENT = 1;  // independent
+  ADLINDEPENDENCE_MINOR_HELP = 2;  // minor-help
+  ADLINDEPENDENCE_MAJOR_HELP = 3;  // major-help
+  ADLINDEPENDENCE_DEPENDENT = 4;  // dependent
+}
+
+enum ReturnToWorkFitnessStatementComputedEnum {
+  FITNESSSTATEMENTCOMPUTED_UNSPECIFIED = 0;
+  FITNESSSTATEMENTCOMPUTED_FIT = 1;  // fit
+  FITNESSSTATEMENTCOMPUTED_MAY_BE_FIT = 2;  // may-be-fit
+  FITNESSSTATEMENTCOMPUTED_NOT_FIT = 3;  // not-fit
+}
+
+enum ReturnToWorkFitnessStatementFinalEnum {
+  FITNESSSTATEMENTFINAL_UNSPECIFIED = 0;
+  FITNESSSTATEMENTFINAL_FIT = 1;  // fit
+  FITNESSSTATEMENTFINAL_MAY_BE_FIT = 2;  // may-be-fit
+  FITNESSSTATEMENTFINAL_NOT_FIT = 3;  // not-fit
+}
+
+enum ReturnToWorkClinicianOverrideEnum {
+  CLINICIANOVERRIDE_UNSPECIFIED = 0;
+  CLINICIANOVERRIDE_YES = 1;  // yes
+  CLINICIANOVERRIDE_NO = 2;  // no
+}
+
+enum ReturnToWorkClinicianConfidenceEnum {
+  CLINICIANCONFIDENCE_UNSPECIFIED = 0;
+  CLINICIANCONFIDENCE_HIGH = 1;  // high
+  CLINICIANCONFIDENCE_MEDIUM = 2;  // medium
+  CLINICIANCONFIDENCE_LOW = 3;  // low
+}
+
+enum ReturnToWorkReassessmentRequiredEnum {
+  REASSESSMENTREQUIRED_UNSPECIFIED = 0;
+  REASSESSMENTREQUIRED_YES = 1;  // yes
+  REASSESSMENTREQUIRED_NO = 2;  // no
+}
+
+enum ReturnToWorkPhasedReturnApplicableEnum {
+  PHASEDRETURNAPPLICABLE_UNSPECIFIED = 0;
+  PHASEDRETURNAPPLICABLE_YES = 1;  // yes
+  PHASEDRETURNAPPLICABLE_NO = 2;  // no
+}
+
+enum ReturnToWorkPhasedReturnTemplateEnum {
+  PHASEDRETURNTEMPLATE_UNSPECIFIED = 0;
+  PHASEDRETURNTEMPLATE_V_2_WEEK = 1;  // 2-week
+  PHASEDRETURNTEMPLATE_V_4_WEEK = 2;  // 4-week
+  PHASEDRETURNTEMPLATE_V_8_WEEK = 3;  // 8-week
+  PHASEDRETURNTEMPLATE_V_12_WEEK = 4;  // 12-week
+  PHASEDRETURNTEMPLATE_CUSTOM = 5;  // custom
+}
+
+enum ReturnToWorkWorkstationReviewRequiredEnum {
+  WORKSTATIONREVIEWREQUIRED_UNSPECIFIED = 0;
+  WORKSTATIONREVIEWREQUIRED_YES = 1;  // yes
+  WORKSTATIONREVIEWREQUIRED_NO = 2;  // no
+}
+
+enum ReturnToWorkReviewLocationEnum {
+  REVIEWLOCATION_UNSPECIFIED = 0;
+  REVIEWLOCATION_GP = 1;  // gp
+  REVIEWLOCATION_OCCUPATIONAL_HEALTH = 2;  // occupational-health
+  REVIEWLOCATION_SPECIALIST = 3;  // specialist
+  REVIEWLOCATION_EMPLOYER_OH = 4;  // employer-oh
+  REVIEWLOCATION_NONE = 5;  // none
+}
+
+enum ReturnToWorkOccupationalHealthReferralMadeEnum {
+  OCCUPATIONALHEALTHREFERRALMADE_UNSPECIFIED = 0;
+  OCCUPATIONALHEALTHREFERRALMADE_YES = 1;  // yes
+  OCCUPATIONALHEALTHREFERRALMADE_NO = 2;  // no
+}
+
+enum ReturnToWorkDvlaNotificationRequiredEnum {
+  DVLANOTIFICATIONREQUIRED_UNSPECIFIED = 0;
+  DVLANOTIFICATIONREQUIRED_YES = 1;  // yes
+  DVLANOTIFICATIONREQUIRED_NO = 2;  // no
+}
+
+enum ReturnToWorkEmployerOhNotifiedEnum {
+  EMPLOYEROHNOTIFIED_UNSPECIFIED = 0;
+  EMPLOYEROHNOTIFIED_YES = 1;  // yes
+  EMPLOYEROHNOTIFIED_NO = 2;  // no
+}
+
+enum ReturnToWorkReturnToWorkMeetingScheduledEnum {
+  RETURNTOWORKMEETINGSCHEDULED_UNSPECIFIED = 0;
+  RETURNTOWORKMEETINGSCHEDULED_YES = 1;  // yes
+  RETURNTOWORKMEETINGSCHEDULED_NO = 2;  // no
+}
+
+message ReturnToWork {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string employer_id = 7;  // UUID — uuid
+  ReturnToWorkStatusEnum status = 8;  // VARCHAR(20)
+  ReturnToWorkStatementKindEnum statement_kind = 9;  // VARCHAR(30)
+  string assessment_date = 10;  // DATE — iso 8601 date
+  string assessment_time = 11;  // TIME — iso 8601 time
+  string absence_first_day = 12;  // DATE — iso 8601 date
+  int32 absence_total_calendar_days = 13;  // INTEGER
+  string prior_med3_reference = 14;  // VARCHAR(50) — max 50 chars
+  string prior_self_certification_reference = 15;  // VARCHAR(50) — max 50 chars
+  string primary_diagnosis_text = 16;  // VARCHAR(500) — max 500 chars
+  string primary_diagnosis_snomed = 17;  // VARCHAR(20) — max 20 chars
+  string primary_diagnosis_icd10 = 18;  // VARCHAR(10) — max 10 chars
+  string comorbid_conditions = 19;  // TEXT
+  ReturnToWorkMechanismEnum mechanism = 20;  // VARCHAR(30)
+  ReturnToWorkWorkplaceCauseEnum workplace_cause = 21;  // VARCHAR(5)
+  string riddor_reference = 22;  // VARCHAR(50) — max 50 chars
+  string current_medications = 23;  // TEXT
+  string ongoing_therapy = 24;  // TEXT
+  string last_consultation_date = 25;  // DATE — iso 8601 date
+  ReturnToWorkAnticipatedRecoveryTrajectoryEnum anticipated_recovery_trajectory = 26;  // VARCHAR(50)
+  ReturnToWorkSpecialistFollowupRequiredEnum specialist_followup_required = 27;  // VARCHAR(5)
+  ReturnToWorkMobilityEnum mobility = 28;  // VARCHAR(20)
+  double manual_handling_capacity_kg = 29;  // NUMERIC(4,1) — numeric(4,1)
+  ReturnToWorkCognitionEnum cognition = 30;  // VARCHAR(20)
+  ReturnToWorkMoodEnum mood = 31;  // VARCHAR(20)
+  ReturnToWorkSleepEnum sleep = 32;  // VARCHAR(20)
+  int32 pain_score_0_10 = 33;  // INTEGER
+  ReturnToWorkDrivingCapacityEnum driving_capacity = 34;  // VARCHAR(20)
+  int32 standing_tolerance_minutes = 35;  // INTEGER
+  int32 sitting_tolerance_minutes = 36;  // INTEGER
+  int32 screen_tolerance_minutes = 37;  // INTEGER
+  ReturnToWorkAdlIndependenceEnum adl_independence = 38;  // VARCHAR(20)
+  ReturnToWorkFitnessStatementComputedEnum fitness_statement_computed = 39;  // VARCHAR(20)
+  ReturnToWorkFitnessStatementFinalEnum fitness_statement_final = 40;  // VARCHAR(20)
+  ReturnToWorkClinicianOverrideEnum clinician_override = 41;  // VARCHAR(5)
+  string clinician_override_reason = 42;  // TEXT
+  ReturnToWorkClinicianConfidenceEnum clinician_confidence = 43;  // VARCHAR(10)
+  string valid_from = 44;  // DATE — iso 8601 date
+  string valid_until = 45;  // DATE — iso 8601 date
+  int32 validity_weeks = 46;  // INTEGER
+  ReturnToWorkReassessmentRequiredEnum reassessment_required = 47;  // VARCHAR(5)
+  ReturnToWorkPhasedReturnApplicableEnum phased_return_applicable = 48;  // VARCHAR(5)
+  ReturnToWorkPhasedReturnTemplateEnum phased_return_template = 49;  // VARCHAR(20)
+  string phased_return_target_date = 50;  // DATE — iso 8601 date
+  string phased_return_schedule_json = 51;  // JSONB — json
+  string phased_return_support_contact = 52;  // TEXT
+  ReturnToWorkWorkstationReviewRequiredEnum workstation_review_required = 53;  // VARCHAR(5)
+  string additional_adjustments_text = 54;  // TEXT
+  ReturnToWorkReviewLocationEnum review_location = 55;  // VARCHAR(30)
+  string review_date = 56;  // DATE — iso 8601 date
+  ReturnToWorkOccupationalHealthReferralMadeEnum occupational_health_referral_made = 57;  // VARCHAR(5)
+  ReturnToWorkDvlaNotificationRequiredEnum dvla_notification_required = 58;  // VARCHAR(5)
+  ReturnToWorkEmployerOhNotifiedEnum employer_oh_notified = 59;  // VARCHAR(5)
+  ReturnToWorkReturnToWorkMeetingScheduledEnum return_to_work_meeting_scheduled = 60;  // VARCHAR(5)
+  string maternity_certificate_reference = 61;  // VARCHAR(50) — max 50 chars
+  string final_notes = 62;  // TEXT
+  string signature_svg = 63;  // TEXT
+  string signed_at = 64;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/return-to-work/full-stack-with-loco-tera-htmx-alpine-new/00-new.sh)",
+      "Bash(chmod +x *)",
+      "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
+      "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
+      "Bash(python3 bin/protobuf/generate-protobuf-representations.py)",
+      "Bash(python3 bin/sql-migrations/generate-sql-combined.py)",
+      "Bash(bin/test-form return-to-work *)",
+      "Bash(loco --version)",
+      "Bash(pg_isready -h localhost -p 5432)",
+      "Bash(./00-new.sh)",
+      "Bash(loco new *)",
+      "Bash(createdb --host=localhost --port=5432 --username=postgres --owner=loco return_to_work_development)",
+      "Bash(createdb --host=localhost --port=5432 --username=postgres --owner=loco return_to_work_test)",
+      "Bash(createdb --host=localhost --port=5432 --username=postgres --owner=loco return_to_work_production)",
+      "Bash(cargo build *)",
+      "Bash(cargo test *)",
+      "Bash(PGPASSWORD=postgres psql --host=localhost --port=5432 --username=postgres -c 'CREATE DATABASE \"return-to-work_test\" OWNER loco;')",
+      "Bash(PGPASSWORD=postgres psql --host=localhost --port=5432 --username=postgres -c 'CREATE DATABASE \"return-to-work_development\" OWNER loco;')",
+      "Bash(PGPASSWORD=postgres psql --host=localhost --port=5432 --username=postgres -c 'CREATE DATABASE \"return-to-work_production\" OWNER loco;')"
+    ]
+  }
+}

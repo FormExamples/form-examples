@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE return_to_work SYSTEM "return_to_work.dtd">
+<return_to_work>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<employer_id>770e8400-e29b-41d4-a716-446655440002</employer_id>
+<status>draft</status>
+<statement_kind>fit-note</statement_kind>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_time></assessment_time>
+<absence_first_day>2026-01-15</absence_first_day>
+<absence_total_calendar_days>1</absence_total_calendar_days>
+<prior_med3_reference></prior_med3_reference>
+<prior_self_certification_reference></prior_self_certification_reference>
+<primary_diagnosis_text>Example text.</primary_diagnosis_text>
+<primary_diagnosis_snomed>Under investigation</primary_diagnosis_snomed>
+<primary_diagnosis_icd10>Under investigation</primary_diagnosis_icd10>
+<comorbid_conditions></comorbid_conditions>
+<mechanism>illness</mechanism>
+<workplace_cause>yes</workplace_cause>
+<riddor_reference></riddor_reference>
+<current_medications>Paracetamol</current_medications>
+<ongoing_therapy>Example treatment</ongoing_therapy>
+<last_consultation_date>2026-01-15</last_consultation_date>
+<anticipated_recovery_trajectory>full-recovery-imminent</anticipated_recovery_trajectory>
+<specialist_followup_required>yes</specialist_followup_required>
+<mobility>normal</mobility>
+<manual_handling_capacity_kg>0.0</manual_handling_capacity_kg>
+<cognition>normal</cognition>
+<mood>stable</mood>
+<sleep>normal</sleep>
+<pain_score_0_10>5</pain_score_0_10>
+<driving_capacity>fit-to-drive</driving_capacity>
+<standing_tolerance_minutes>1</standing_tolerance_minutes>
+<sitting_tolerance_minutes>1</sitting_tolerance_minutes>
+<screen_tolerance_minutes>1</screen_tolerance_minutes>
+<adl_independence>independent</adl_independence>
+<fitness_statement_computed>fit</fitness_statement_computed>
+<fitness_statement_final>fit</fitness_statement_final>
+<clinician_override>yes</clinician_override>
+<clinician_override_reason>Example text.</clinician_override_reason>
+<clinician_confidence>high</clinician_confidence>
+<valid_from>2026-01-15</valid_from>
+<valid_until>2026-01-15</valid_until>
+<validity_weeks>1</validity_weeks>
+<reassessment_required>yes</reassessment_required>
+<phased_return_applicable>yes</phased_return_applicable>
+<phased_return_template>2-week</phased_return_template>
+<phased_return_target_date>2026-01-15</phased_return_target_date>
+<phased_return_schedule_json></phased_return_schedule_json>
+<phased_return_support_contact>07700900001</phased_return_support_contact>
+<workstation_review_required>yes</workstation_review_required>
+<additional_adjustments_text>Example text.</additional_adjustments_text>
+<review_location>gp</review_location>
+<review_date>2026-01-15</review_date>
+<occupational_health_referral_made>yes</occupational_health_referral_made>
+<dvla_notification_required>yes</dvla_notification_required>
+<employer_oh_notified>yes</employer_oh_notified>
+<return_to_work_meeting_scheduled>yes</return_to_work_meeting_scheduled>
+<maternity_certificate_reference></maternity_certificate_reference>
+<final_notes>Example text.</final_notes>
+<signature_svg></signature_svg>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</return_to_work>

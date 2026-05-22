@@ -1,0 +1,46 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: return_to_work_grade_rule
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum ReturnToWorkGradeRuleRuleBandEnum {
+  RULEBAND_UNSPECIFIED = 0;
+  RULEBAND_ROUTINE = 1;  // routine
+  RULEBAND_STANDARD = 2;  // standard
+  RULEBAND_RESTRICTED = 3;  // restricted
+  RULEBAND_HIGH_RISK = 4;  // high-risk
+  RULEBAND_FIT = 5;  // fit
+  RULEBAND_MAY_BE_FIT = 6;  // may-be-fit
+  RULEBAND_NOT_FIT = 7;  // not-fit
+}
+
+enum ReturnToWorkGradeRuleRulePriorityEnum {
+  RULEPRIORITY_UNSPECIFIED = 0;
+  RULEPRIORITY_LOW = 1;  // low
+  RULEPRIORITY_MEDIUM = 2;  // medium
+  RULEPRIORITY_HIGH = 3;  // high
+}
+
+enum ReturnToWorkGradeRuleRuleKindEnum {
+  RULEKIND_UNSPECIFIED = 0;
+  RULEKIND_FITNESS = 1;  // fitness
+  RULEKIND_RESTRICTION = 2;  // restriction
+  RULEKIND_COMPOSITE = 3;  // composite
+}
+
+message ReturnToWorkGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string return_to_work_grade_id = 5;  // UUID — uuid
+  string rule_code = 6;  // VARCHAR(60) — max 60 chars
+  string rule_title = 7;  // VARCHAR(255) — max 255 chars
+  ReturnToWorkGradeRuleRuleBandEnum rule_band = 8;  // VARCHAR(20)
+  ReturnToWorkGradeRuleRulePriorityEnum rule_priority = 9;  // VARCHAR(10)
+  ReturnToWorkGradeRuleRuleKindEnum rule_kind = 10;  // VARCHAR(20)
+  string rule_evidence = 11;  // TEXT
+  string rule_notes = 12;  // TEXT
+}

@@ -1,0 +1,13 @@
+<!ELEMENT return_to_work_restriction (id,created_at,updated_at,deleted_at,return_to_work_id,kind,severity,quantitative_limit,notes,start_date,end_date,priority_rank)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT return_to_work_id (#PCDATA)>
+<!ELEMENT kind (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT quantitative_limit (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>
+<!ELEMENT start_date (#PCDATA)>
+<!ELEMENT end_date (#PCDATA)>
+<!ELEMENT priority_rank (#PCDATA)>

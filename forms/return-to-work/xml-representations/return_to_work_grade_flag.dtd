@@ -1,0 +1,12 @@
+<!ELEMENT return_to_work_grade_flag (id,created_at,updated_at,deleted_at,return_to_work_grade_id,flag_code,flag_title,flag_category,flag_priority,flag_evidence,flag_recommendation)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT return_to_work_grade_id (#PCDATA)>
+<!ELEMENT flag_code (#PCDATA)>
+<!ELEMENT flag_title (#PCDATA)>
+<!ELEMENT flag_category (#PCDATA)>
+<!ELEMENT flag_priority (#PCDATA)>
+<!ELEMENT flag_evidence (#PCDATA)>
+<!ELEMENT flag_recommendation (#PCDATA)>

@@ -1,0 +1,140 @@
+{
+  "resourceType": "Observation",
+  "id": "cc0e8400-e29b-41d4-a716-446655440007",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:return-to-work",
+        "code": "return_to_work_grade_flag",
+        "display": "Return To Work Grade Flag"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/dd0e8400-e29b-41d4-a716-446655440008"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_code",
+            "display": "Flag Code"
+          }
+        ]
+      },
+      "valueString": "ABC123"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_title",
+            "display": "Flag Title"
+          }
+        ]
+      },
+      "valueString": "Example Title"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_category",
+            "display": "Flag Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work:flag_category",
+            "code": "safety-critical-role",
+            "display": "Safety-Critical-Role"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_priority",
+            "display": "Flag Priority"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work:flag_priority",
+            "code": "low",
+            "display": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_evidence",
+            "display": "Flag Evidence"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:return-to-work",
+            "code": "flag_recommendation",
+            "display": "Flag Recommendation"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

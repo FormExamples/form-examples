@@ -1,0 +1,15 @@
+<!ELEMENT employer (id,created_at,updated_at,deleted_at,name,industry_sector,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,occupational_health_contact_name,occupational_health_contact_email,occupational_health_contact_phone,hr_contact_name,hr_contact_email)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT industry_sector (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT occupational_health_contact_name (#PCDATA)>
+<!ELEMENT occupational_health_contact_email (#PCDATA)>
+<!ELEMENT occupational_health_contact_phone (#PCDATA)>
+<!ELEMENT hr_contact_name (#PCDATA)>
+<!ELEMENT hr_contact_email (#PCDATA)>

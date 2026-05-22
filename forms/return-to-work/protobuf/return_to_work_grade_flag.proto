@@ -1,0 +1,42 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: return_to_work_grade_flag
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum ReturnToWorkGradeFlagFlagCategoryEnum {
+  FLAGCATEGORY_UNSPECIFIED = 0;
+  FLAGCATEGORY_SAFETY_CRITICAL_ROLE = 1;  // safety-critical-role
+  FLAGCATEGORY_DVLA_NOTIFIABLE = 2;  // dvla-notifiable
+  FLAGCATEGORY_RIDDOR_REPORTABLE = 3;  // riddor-reportable
+  FLAGCATEGORY_PHASED_RETURN_INCOMPLETE = 4;  // phased-return-incomplete
+  FLAGCATEGORY_RISK_ASSESSMENT_REQUIRED = 5;  // risk-assessment-required
+  FLAGCATEGORY_LONG_TERM_ABSENCE = 6;  // long-term-absence
+  FLAGCATEGORY_MENTAL_HEALTH_NO_FOLLOWUP = 7;  // mental-health-no-followup
+  FLAGCATEGORY_PREGNANCY_NO_MAT_B1 = 8;  // pregnancy-no-mat-b1
+  FLAGCATEGORY_CLINICIAN_LOW_CONFIDENCE = 9;  // clinician-low-confidence
+  FLAGCATEGORY_EQUALITY_ACT_ADJUSTMENT = 10;  // equality-act-adjustment
+  FLAGCATEGORY_OTHER = 11;  // other
+}
+
+enum ReturnToWorkGradeFlagFlagPriorityEnum {
+  FLAGPRIORITY_UNSPECIFIED = 0;
+  FLAGPRIORITY_LOW = 1;  // low
+  FLAGPRIORITY_MEDIUM = 2;  // medium
+  FLAGPRIORITY_HIGH = 3;  // high
+}
+
+message ReturnToWorkGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string return_to_work_grade_id = 5;  // UUID — uuid
+  string flag_code = 6;  // VARCHAR(60) — max 60 chars
+  string flag_title = 7;  // VARCHAR(255) — max 255 chars
+  ReturnToWorkGradeFlagFlagCategoryEnum flag_category = 8;  // VARCHAR(40)
+  ReturnToWorkGradeFlagFlagPriorityEnum flag_priority = 9;  // VARCHAR(10)
+  string flag_evidence = 10;  // TEXT
+  string flag_recommendation = 11;  // TEXT
+}

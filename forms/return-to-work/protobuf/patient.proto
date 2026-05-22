@@ -1,0 +1,66 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: patient
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum PatientSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INTERSEX = 3;  // intersex
+  SEX_UNKNOWN = 4;  // unknown
+  SEX_PREFER_NOT_TO_SAY = 5;  // prefer-not-to-say
+}
+
+enum PatientShiftPatternEnum {
+  SHIFTPATTERN_UNSPECIFIED = 0;
+  SHIFTPATTERN_DAY = 1;  // day
+  SHIFTPATTERN_NIGHT = 2;  // night
+  SHIFTPATTERN_ROTATING = 3;  // rotating
+  SHIFTPATTERN_ON_CALL = 4;  // on-call
+  SHIFTPATTERN_IRREGULAR = 5;  // irregular
+  SHIFTPATTERN_FIXED = 6;  // fixed
+}
+
+enum PatientSafetyCriticalRoleEnum {
+  SAFETYCRITICALROLE_UNSPECIFIED = 0;
+  SAFETYCRITICALROLE_YES = 1;  // yes
+  SAFETYCRITICALROLE_NO = 2;  // no
+}
+
+enum PatientDvlaGroup1LicenceHeldEnum {
+  DVLAGROUP1LICENCEHELD_UNSPECIFIED = 0;
+  DVLAGROUP1LICENCEHELD_YES = 1;  // yes
+  DVLAGROUP1LICENCEHELD_NO = 2;  // no
+}
+
+enum PatientDvlaGroup2LicenceHeldEnum {
+  DVLAGROUP2LICENCEHELD_UNSPECIFIED = 0;
+  DVLAGROUP2LICENCEHELD_YES = 1;  // yes
+  DVLAGROUP2LICENCEHELD_NO = 2;  // no
+}
+
+message Patient {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // VARCHAR(255) — max 255 chars
+  string birth_date = 6;  // DATE — iso 8601 date
+  PatientSexEnum sex = 7;  // VARCHAR(20)
+  string email = 8;  // TEXT
+  string phone = 9;  // TEXT
+  string postal_address_as_full_text = 10;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 11;  // CHAR(2) — max 2 chars
+  string postcode = 12;  // TEXT
+  string united_kingdom_nhs_number = 13;  // VARCHAR(20) — max 20 chars
+  string job_title = 14;  // VARCHAR(255) — max 255 chars
+  string role_description = 15;  // TEXT
+  double contracted_hours_per_week = 16;  // NUMERIC(4,1) — numeric(4,1)
+  PatientShiftPatternEnum shift_pattern = 17;  // VARCHAR(50)
+  PatientSafetyCriticalRoleEnum safety_critical_role = 18;  // VARCHAR(5)
+  PatientDvlaGroup1LicenceHeldEnum dvla_group_1_licence_held = 19;  // VARCHAR(5)
+  PatientDvlaGroup2LicenceHeldEnum dvla_group_2_licence_held = 20;  // VARCHAR(5)
+}

@@ -1,0 +1,11 @@
+<!ELEMENT return_to_work_grade (id,created_at,updated_at,deleted_at,return_to_work_id,fitness_statement,restriction_priority,rule_count,flag_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT return_to_work_id (#PCDATA)>
+<!ELEMENT fitness_statement (#PCDATA)>
+<!ELEMENT restriction_priority (#PCDATA)>
+<!ELEMENT rule_count (#PCDATA)>
+<!ELEMENT flag_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

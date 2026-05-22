@@ -1,0 +1,58 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: return_to_work_restriction
+
+syntax = "proto3";
+
+package form_examples.return_to_work;
+
+enum ReturnToWorkRestrictionKindEnum {
+  KIND_UNSPECIFIED = 0;
+  KIND_ALTERED_HOURS = 1;  // altered-hours
+  KIND_AMENDED_DUTIES = 2;  // amended-duties
+  KIND_WORKPLACE_ADAPTATIONS = 3;  // workplace-adaptations
+  KIND_PHASED_RETURN = 4;  // phased-return
+  KIND_NO_HEAVY_LIFTING = 5;  // no-heavy-lifting
+  KIND_NO_DRIVING = 6;  // no-driving
+  KIND_NO_OPERATING_MACHINERY = 7;  // no-operating-machinery
+  KIND_NO_WORKING_AT_HEIGHT = 8;  // no-working-at-height
+  KIND_NO_LONE_WORKING = 9;  // no-lone-working
+  KIND_NO_NIGHT_SHIFTS = 10;  // no-night-shifts
+  KIND_NO_SHIFT_WORK = 11;  // no-shift-work
+  KIND_NO_PATIENT_CONTACT = 12;  // no-patient-contact
+  KIND_NO_PUBLIC_CONTACT = 13;  // no-public-contact
+  KIND_SEDENTARY_ONLY = 14;  // sedentary-only
+  KIND_NO_EXPOSURE_TO_ALLERGEN = 15;  // no-exposure-to-allergen
+  KIND_NO_EXPOSURE_TO_CHEMICALS = 16;  // no-exposure-to-chemicals
+  KIND_NO_EXPOSURE_TO_TEMPERATURE_EXTREMES = 17;  // no-exposure-to-temperature-extremes
+  KIND_NO_EXPOSURE_TO_NOISE = 18;  // no-exposure-to-noise
+  KIND_NO_FIREARMS_OR_WEAPONS = 19;  // no-firearms-or-weapons
+  KIND_NO_SAFETY_CRITICAL_DUTIES = 20;  // no-safety-critical-duties
+  KIND_SCREEN_BREAK_FREQUENCY = 21;  // screen-break-frequency
+  KIND_WORKSTATION_REVIEW = 22;  // workstation-review
+  KIND_REDUCED_SCREEN_TIME = 23;  // reduced-screen-time
+  KIND_RESTRICTED_TRAVEL = 24;  // restricted-travel
+  KIND_NO_OVERTIME = 25;  // no-overtime
+  KIND_OTHER = 26;  // other
+}
+
+enum ReturnToWorkRestrictionSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_LOW = 1;  // low
+  SEVERITY_MODERATE = 2;  // moderate
+  SEVERITY_HIGH = 3;  // high
+}
+
+message ReturnToWorkRestriction {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string return_to_work_id = 5;  // UUID — uuid
+  ReturnToWorkRestrictionKindEnum kind = 6;  // VARCHAR(40)
+  ReturnToWorkRestrictionSeverityEnum severity = 7;  // VARCHAR(20)
+  string quantitative_limit = 8;  // VARCHAR(50) — max 50 chars
+  string notes = 9;  // VARCHAR(500) — max 500 chars
+  string start_date = 10;  // DATE — iso 8601 date
+  string end_date = 11;  // DATE — iso 8601 date
+  int32 priority_rank = 12;  // INTEGER
+}
