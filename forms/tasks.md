@@ -120,8 +120,23 @@ Build a mechanical refactor tool instead.
 
 ## Phase 3 — Batch migration
 
-For each batch: run generator → spot-check 2 forms in a browser → run
-`bin/test` for every touched form → commit.
+For each batch: run `bin/lily-html-refactor` for the mechanical pass →
+dispatch a subagent for the structural rewrite (using the canonical
+reference as the model) → Playwright smoke-test (form + dashboard) →
+commit per form with `git commit --only forms/<slug>/`.
+
+- [x] **3.0  Pilot: `asthma-assessment`.** End-to-end Phase 3 dry-run.
+  Mechanical pass (commit `a601dfb7`) + structural pass via dispatched
+  subagent (commit `3ea76ccd`). Smoke tests green: 9 step items, 30
+  Lily inputs, 35 radio-groups, empty-submit validation works,
+  dashboard data-table renders 12 rows × 72 cells. **Process lesson:**
+  the worktree at `.claude/worktrees/lily-html-canonical/` was removed
+  from git mid-task by external activity; the subagent worked in the
+  stale path but its output was salvaged by verifying do-not-modify
+  files were byte-equal to main. For future batches, work directly in
+  the main checkout with `git commit --only <path>` to avoid worktree
+  fragility, OR re-add a worktree per batch with explicit
+  documentation of its lifecycle.
 
 - [ ] **3.1  Batch: privacy notices and one-page acknowledgements.**
   `care-privacy-notice`, `legal-requirements-privacy-notice`,
