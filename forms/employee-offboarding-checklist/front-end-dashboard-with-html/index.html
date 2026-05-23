@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-status">Completion Status</label>
-          <select id="filter-status" class="select-input">
+          <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="Complete">Complete</option>
             <option value="Partial">Partial</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-department">Department</label>
-          <select id="filter-department" class="select-input">
+          <select id="filter-department" class="select">
             <option value="">All departments</option>
             <option value="Nursing">Nursing</option>
             <option value="Medical">Medical</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-blocker">Blocker Category</label>
-          <select id="filter-blocker" class="select-input">
+          <select id="filter-blocker" class="select">
             <option value="">All blockers</option>
             <option value="None">None</option>
             <option value="Access Not Revoked">Access Not Revoked</option>
@@ -86,7 +86,7 @@
 
         <div class="filter-field">
           <label for="filter-days">Days Since Leaving</label>
-          <select id="filter-days" class="select-input">
+          <select id="filter-days" class="select">
             <option value="">Any timeframe</option>
             <option value="upcoming">Upcoming (not yet left)</option>
             <option value="0-7">0–7 days</option>
@@ -100,7 +100,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

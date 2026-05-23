@@ -173,7 +173,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () =>
@@ -194,7 +194,7 @@ function selectInput(opts) {
   ].join('');
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">${optionsHtml}</select>
+    <select id="${id}" name="${id}" class="select">${optionsHtml}</select>
   `;
   const sel = wrapper.querySelector('select');
   sel.addEventListener('change', () =>
@@ -492,7 +492,7 @@ function coordinatorBlock(section, headingText) {
     <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
       <input type="datetime-local" id="${stampId}" class="text-input"
              value="${esc(state[section].completedAt || '')}" style="max-width:16rem;">
-      <button type="button" class="btn btn-secondary" data-stamp-now="${section}">
+      <button type="button" class="button" data-variant="secondary" data-stamp-now="${section}">
         Stamp now
       </button>
     </div>
@@ -657,7 +657,7 @@ function renderTeamRoster() {
     ].join('');
     roleCell.innerHTML = `
       <span>Role</span>
-      <select class="select-input">${roleOpts}</select>
+      <select class="select">${roleOpts}</select>
     `;
     roleCell.querySelector('select').addEventListener('change', (e) =>
       setTeamMemberField(idx, 'role', e.target.value));
@@ -672,7 +672,7 @@ function renderTeamRoster() {
     ].join('');
     introCell.innerHTML = `
       <span>Introduced?</span>
-      <select class="select-input">${introOpts}</select>
+      <select class="select">${introOpts}</select>
     `;
     introCell.querySelector('select').addEventListener('change', (e) =>
       setTeamMemberField(idx, 'introducedDuringTimeOut', e.target.value));
@@ -694,7 +694,8 @@ function renderTeamRoster() {
     // Remove
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
-    removeBtn.className = 'btn btn-icon';
+    removeBtn.className = 'button';
+    removeBtn.setAttribute('data-variant', 'icon');
     removeBtn.setAttribute('aria-label', `Remove team member ${idx + 1}`);
     removeBtn.innerHTML = '&times;';
     removeBtn.addEventListener('click', () => removeTeamMember(idx));
@@ -734,7 +735,8 @@ function buildStep2() {
 
   const addBtn = document.createElement('button');
   addBtn.type = 'button';
-  addBtn.className = 'btn btn-add';
+  addBtn.className = 'button';
+  addBtn.setAttribute('data-variant', 'add');
   addBtn.textContent = '+ Add team member';
   addBtn.addEventListener('click', addTeamMember);
   rosterCard.appendChild(addBtn);
@@ -921,11 +923,11 @@ function buildStep4() {
       system, or open a printable summary.
     </p>
     <div class="export-actions">
-      <button type="button" class="btn btn-secondary" data-export="json">Download JSON</button>
-      <button type="button" class="btn btn-secondary" data-export="xml">Download XML</button>
-      <button type="button" class="btn btn-secondary" data-export="csv">Download CSV</button>
-      <button type="button" class="btn btn-secondary" data-export="tsv">Download TSV</button>
-      <button type="button" class="btn btn-primary" data-export="print">Open printable summary</button>
+      <button type="button" class="button" data-variant="secondary" data-export="json">Download JSON</button>
+      <button type="button" class="button" data-variant="secondary" data-export="xml">Download XML</button>
+      <button type="button" class="button" data-variant="secondary" data-export="csv">Download CSV</button>
+      <button type="button" class="button" data-variant="secondary" data-export="tsv">Download TSV</button>
+      <button type="button" class="button" data-variant="primary" data-export="print">Open printable summary</button>
     </div>
   `;
   panel.appendChild(exportSection);

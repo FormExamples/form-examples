@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-outcome">Outcome</label>
-          <select id="filter-outcome" class="select-input">
+          <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Pass">Pass</option>
             <option value="Needs Development">Needs Development</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-venue-type">Venue Type</label>
-          <select id="filter-venue-type" class="select-input">
+          <select id="filter-venue-type" class="select">
             <option value="">All venue types</option>
             <option value="Pool">Pool</option>
             <option value="Beach">Beach</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-currency">Certification</label>
-          <select id="filter-currency" class="select-input">
+          <select id="filter-currency" class="select">
             <option value="">All certifications</option>
             <option value="Current">Current</option>
             <option value="Expiring Soon">Expiring Soon</option>
@@ -85,7 +85,7 @@
 
         <div class="filter-field">
           <label for="filter-examiner">Examiner</label>
-          <select id="filter-examiner" class="select-input">
+          <select id="filter-examiner" class="select">
             <option value="">All examiners</option>
             <!-- Examiner options populated by app.js -->
           </select>
@@ -95,7 +95,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
