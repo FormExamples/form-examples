@@ -215,37 +215,52 @@ main {
   overflow-x: auto;
 }
 
-.staff-table {
+/* -------------------------------------------------------------- *
+ *  Lily: .data-table family
+ * -------------------------------------------------------------- */
+.data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
-.staff-table thead {
+.data-table-head {
   background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
-.staff-table th,
-.staff-table td {
+.data-table-th,
+.data-table-td {
   padding: 0.625rem 0.875rem;
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
   white-space: nowrap;
 }
-.staff-table tbody tr:last-child td {
-  border-bottom: 0;
+.data-table-th {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.staff-table tbody tr:hover {
-  background: #f3f4f6;
+.data-table-body .data-table-row {
+  border-bottom: 1px solid var(--color-border);
 }
+.data-table-body .data-table-row:last-child { border-bottom: 0; }
+.data-table-body .data-table-row:hover { background: #f3f4f6; }
+.data-table-body .data-table-row.row-overdue { background: var(--color-danger-row-bg); }
+.data-table-body .data-table-row.row-overdue:hover { background: var(--color-danger-bg); }
+.data-table-body .data-table-row.row-declined { background: #fef2f2; }
+.data-table-body .data-table-row.row-declined:hover { background: var(--color-danger-bg); }
 
-/* Sortable column header buttons */
+/* Sortable column header buttons (project-local; sits inside .data-table-th) */
 .sort-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
   font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
   background: transparent;
   border: 0;
   padding: 0;
@@ -253,7 +268,7 @@ main {
   user-select: none;
 }
 .sort-btn:hover {
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 .sort-btn:focus-visible {
   outline: 2px solid var(--color-focus);
@@ -261,29 +276,15 @@ main {
   border-radius: 2px;
 }
 .sort-indicator {
-  font-size: 0.6875rem;
-  color: var(--color-muted);
+  font-size: 0.75em;
+  color: var(--color-border-strong);
   width: 0.75rem;
   display: inline-block;
   text-align: center;
 }
-.staff-table th[aria-sort="ascending"] .sort-indicator,
-.staff-table th[aria-sort="descending"] .sort-indicator {
+.data-table-th[aria-sort="ascending"] .sort-indicator,
+.data-table-th[aria-sort="descending"] .sort-indicator {
   color: var(--color-primary);
-}
-
-/* Overdue / declined row emphasis - surfaces high-priority compliance gaps */
-.staff-table tbody tr.row-overdue {
-  background: var(--color-danger-row-bg);
-}
-.staff-table tbody tr.row-overdue:hover {
-  background: #fee2e2;
-}
-.staff-table tbody tr.row-declined {
-  background: #fef2f2;
-}
-.staff-table tbody tr.row-declined:hover {
-  background: #fee2e2;
 }
 
 /* Acknowledgement status badges */

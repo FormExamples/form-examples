@@ -1,10 +1,10 @@
-// Code of Conduct Notice - acknowledgement wizard (vanilla JavaScript, no build).
+// Code of Conduct Notice — acknowledgement wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
-// document order. The user scrolls through them; a sticky top-of-page
-// progress summary reflects how many required fields have been filled.
-// Submission runs the pure validator and renders an inline report. State is
-// persisted to localStorage so a partial fill survives a page reload.
+// document order. The user scrolls through them; a sticky top-of-page native
+// <progress> bar + step list reflects how many required fields have been
+// filled. Submission runs the pure validator and renders an inline report.
+// State is persisted to localStorage so a partial fill survives a reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.CodeOfConductNotice`. Pulling them off here keeps the
@@ -17,7 +17,7 @@ const NS = window.CodeOfConductNotice;
 const {
   emptyAssessment,
   validationRules,
-  validateForm,
+  validateForm: engineValidateForm,
   detectAdditionalFlags,
   acknowledgementStatus,
   acknowledgementStatusLabel,
@@ -30,6 +30,7 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY = 'code-of-conduct-notice.front-end-form-with-html.v1';
+const TOTAL_STEPS = 3;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -115,8 +116,21 @@ function esc(s) {
 }
 
 // ----------------------------------------------------------------------
-// Component builders
+// Component builders (Lily class contract)
 // ----------------------------------------------------------------------
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
 
 /**
  * Build a labelled text input.
@@ -133,50 +147,54 @@ function textInput(opts) {
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
+    `class="${lilyInputClass(type)}"`,
     `value="${esc(value ?? '')}"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  if (opts.required) attrs.push('required', 'data-required');
 
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
+  input.setAttribute('aria-describedby', `${id}-error`);
   input.addEventListener('input', () => {
     setField(opts.section, opts.field, input.value);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 /**
- * Build a section card.
+ * Build a section card as a Lily fieldset with fieldset-legend.
  * @param {{ stepNumber: number, title: string, description?: string }} opts
  */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 3</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
 // ----------------------------------------------------------------------
-// Section renderers (1 per step)
+// Section renderers (one per step)
 // ----------------------------------------------------------------------
 
 // Step 1: Recipient Details
@@ -293,6 +311,7 @@ function renderStep3() {
   ackLabel.innerHTML = `
     <input
       type="checkbox"
+      class="checkbox-input"
       id="acknowledgementSignature-agreed"
       name="acknowledgementSignature-agreed"
       ${state.acknowledgementSignature.agreed ? 'checked' : ''}
@@ -328,14 +347,15 @@ function renderStep3() {
   return card;
 }
 
+const STEP_RENDERERS = [renderStep1, renderStep2, renderStep3];
+
 // ----------------------------------------------------------------------
 // Conditional sections + visual state
 // ----------------------------------------------------------------------
 
 /**
  * Re-evaluate `data-conditional` blocks (none in this form by default,
- * but the helper is provided for symmetry with the canonical reference
- * and so future fields can use `data-conditional="section.field=value"`).
+ * but the helper is provided for symmetry with the canonical reference).
  */
 function updateConditionalSections() {
   document.querySelectorAll('[data-conditional]').forEach((host) => {
@@ -344,14 +364,6 @@ function updateConditionalSections() {
     const [section, field] = path.split('.');
     const current = state[section] && state[section][field];
     host.style.display = String(current) === target ? '' : 'none';
-  });
-  document.querySelectorAll('[data-conditional-any]').forEach((host) => {
-    const expr = host.getAttribute('data-conditional-any');
-    const [path, targetCsv] = expr.split('=');
-    const [section, field] = path.split('.');
-    const current = String((state[section] && state[section][field]) ?? '');
-    const targets = targetCsv.split(',');
-    host.style.display = targets.includes(current) ? '' : 'none';
   });
 }
 
@@ -367,12 +379,89 @@ function updateCheckboxVisual() {
 }
 
 // ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1, section: 'recipientDetails',         title: 'Recipient' },
+  { step: 2, section: 'codeOfConductNotice',      title: 'Principles' },
+  { step: 3, section: 'acknowledgementSignature', title: 'Sign-off' }
+];
+
+// Mapping from STEP_DEFINITIONS.section → set of tracked fields counted for
+// completion of that section. Step 2 (the read-only principles) is treated
+// as auto-complete since the user has nothing to fill in.
+const STEP_SECTION_FIELDS = {
+  recipientDetails: ['organisationName', 'recipientName', 'recipientRole'],
+  codeOfConductNotice: [],
+  acknowledgementSignature: ['agreed', 'recipientTypedFullName', 'recipientTypedDate']
+};
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t === 0) {
+      // Section with no tracked fields (e.g. the read-only principles step)
+      // is considered finished — there's nothing for the user to fill in.
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
 // Progress
 // ----------------------------------------------------------------------
 
 /**
  * Tracked fields = the validation-rule list. Each rule corresponds to a
- * single required field; we count how many are non-empty.
+ * single required field; we count how many are non-empty. The step-list
+ * sub-totals come from STEP_SECTION_FIELDS so that the read-only step 2
+ * is treated as auto-complete.
  */
 function countAnswered() {
   let answered = 0;
@@ -387,13 +476,98 @@ function countAnswered() {
 function updateProgress() {
   const answered = countAnswered();
   const total = validationRules.length;
-  const percent = Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const percent = total === 0 ? 100 : Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
-  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  if (text) {
+    text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  }
+
+  // Per-section step-list status.
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  for (const def of STEP_DEFINITIONS) {
+    const fields = STEP_SECTION_FIELDS[def.section] || [];
+    sectionTotal[def.section] = fields.length;
+    let a = 0;
+    for (const field of fields) {
+      const v = state[def.section] && state[def.section][field];
+      if (v !== '' && v !== null && v !== undefined && v !== false) a++;
+    }
+    sectionAnswered[def.section] = a;
+  }
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+
+  // Acknowledgement checkbox is a separate widget — validate it explicitly.
+  const ackInput = document.getElementById('acknowledgementSignature-agreed');
+  if (ackInput && !ackInput.checked) {
+    errors.push({
+      id: 'acknowledgementSignature-agreed',
+      message: 'Please confirm acknowledgement of the code of conduct.'
+    });
+  }
+
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
 }
 
 // ----------------------------------------------------------------------
@@ -497,7 +671,9 @@ function renderReport() {
 }
 
 function submitForm() {
-  const { completeness, status, firedRules } = validateForm(state);
+  const errors = validateForm();
+  if (errors.length > 0) return;
+  const { completeness, status, firedRules } = engineValidateForm(state);
   const additionalFlags = detectAdditionalFlags(state);
   lastResult = {
     completenessPercent: completeness,
@@ -518,7 +694,9 @@ function startOver() {
     new Date().toISOString().slice(0, 10);
   saveState(state);
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  document.getElementById('report').innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -533,12 +711,11 @@ function startOver() {
 function renderForm() {
   const host = document.getElementById('form-sections');
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();

@@ -220,6 +220,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -264,6 +265,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.acknowledgementStatus === 'Overdue') {
       tr.classList.add('row-overdue');
     } else if (row.acknowledgementStatus === 'Declined') {
@@ -275,18 +277,18 @@ function renderTableBody() {
       : 'signoff-date signoff-date-empty';
 
     tr.innerHTML = `
-      <td>${esc(row.employeeId)}</td>
-      <td>${esc(row.staffName)}</td>
-      <td><span class="dept-badge">${esc(row.department)}</span></td>
-      <td>${esc(row.role)}</td>
-      <td><span class="status-badge ${statusClass(row.acknowledgementStatus)}">${esc(row.acknowledgementStatus)}</span></td>
-      <td><span class="${dateClass}">${esc(formatSignOffDate(row.lastSignOffDate))}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.employeeId)}</td>
+      <td class="data-table-td">${esc(row.staffName)}</td>
+      <td class="data-table-td"><span class="dept-badge">${esc(row.department)}</span></td>
+      <td class="data-table-td">${esc(row.role)}</td>
+      <td class="data-table-td"><span class="status-badge ${statusClass(row.acknowledgementStatus)}">${esc(row.acknowledgementStatus)}</span></td>
+      <td class="data-table-td"><span class="${dateClass}">${esc(formatSignOffDate(row.lastSignOffDate))}</span></td>
+      <td class="data-table-td">
         <span class="coi-badge ${row.conflictOfInterestDeclared ? 'coi-yes' : 'coi-no'}">
           ${row.conflictOfInterestDeclared ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="currency-badge ${currencyClass(row.trainingCurrency)}">${esc(row.trainingCurrency)}</span></td>
+      <td class="data-table-td"><span class="currency-badge ${currencyClass(row.trainingCurrency)}">${esc(row.trainingCurrency)}</span></td>
     `;
     body.appendChild(tr);
   }
