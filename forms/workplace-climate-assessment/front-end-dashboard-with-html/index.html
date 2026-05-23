@@ -48,19 +48,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search department</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search department</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Department name..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-category">Category</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-category">Category</label>
           <select id="filter-category" class="select">
             <option value="">All categories</option>
             <option value="Thriving">Thriving (85-100)</option>
@@ -71,8 +71,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-worst-domain">Worst domain</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-worst-domain">Worst domain</label>
           <select id="filter-worst-domain" class="select">
             <option value="">All domains</option>
             <option value="Leadership">Leadership</option>
@@ -87,8 +87,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-tenure-band">Tenure band</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-tenure-band">Tenure band</label>
           <select id="filter-tenure-band" class="select">
             <option value="">All tenure bands</option>
             <option value="&lt;1 year">&lt;1 year</option>
@@ -125,13 +125,13 @@
       <h2 id="teams-table-heading" class="visually-hidden">Teams and departments</h2>
 
       <div class="table-scroll">
-        <table id="teams-table" class="teams-table">
-          <thead>
-            <tr id="teams-table-head">
+        <table id="teams-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="teams-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="teams-table-body">
+          <tbody id="teams-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
