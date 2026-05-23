@@ -235,6 +235,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -279,6 +280,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.outcome === 'Critical Findings') {
       tr.classList.add('row-critical-findings');
     }
@@ -291,17 +293,17 @@ function renderTableBody() {
       : esc(formatDate(row.lastAuditDate));
 
     tr.innerHTML = `
-      <td>${esc(row.siteName)}</td>
-      <td>${esc(row.location)}</td>
-      <td><span class="site-type-badge">${esc(row.siteType)}</span></td>
-      <td><span class="outcome-badge ${outcomeClass(row.outcome)}">${esc(row.outcome)}</span></td>
-      <td><span class="${dateClass}">${dateLabel}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.siteName)}</td>
+      <td class="data-table-td">${esc(row.location)}</td>
+      <td class="data-table-td"><span class="site-type-badge">${esc(row.siteType)}</span></td>
+      <td class="data-table-td"><span class="outcome-badge ${outcomeClass(row.outcome)}">${esc(row.outcome)}</span></td>
+      <td class="data-table-td"><span class="${dateClass}">${dateLabel}</span></td>
+      <td class="data-table-td">
         <span class="open-actions ${openActionsClass(row.openActions)}">
           ${esc(row.openActions ?? 0)}
         </span>
       </td>
-      <td>${esc(row.auditor)}</td>
+      <td class="data-table-td">${esc(row.auditor)}</td>
     `;
     body.appendChild(tr);
   }

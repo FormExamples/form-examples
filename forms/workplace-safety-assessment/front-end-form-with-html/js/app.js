@@ -1,12 +1,13 @@
 // Workplace Safety Assessment — auditor checklist (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
-// document order. The auditor scrolls through them; a sticky progress bar
-// reflects how many checklist items have been answered. Submission runs the
-// pure safety grading engine and renders an inline report with an outcome
-// badge, findings-by-category table, action-plan summary, and a prioritised
-// flagged-issues list. State is persisted to localStorage so a partial
-// fill survives a page reload.
+// document order as a Lily <fieldset class="fieldset">. The auditor scrolls
+// through them; a native <progress> bar and a clickable step-list at the top
+// of the page reflect how many checklist items have been answered.
+// Submission runs the pure safety grading engine and renders an inline
+// report with an outcome badge, findings-by-category table, action-plan
+// summary, and a prioritised flagged-issues list. State is persisted to
+// localStorage so a partial fill survives a page reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order: types →
 // rules → safety-grader → flagged-issues → app) attach their exports to
@@ -34,6 +35,7 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY = 'workplace-safety-assessment.front-end-form-with-html.v1';
+const TOTAL_STEPS = 10;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -114,28 +116,46 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 // ----------------------------------------------------------------------
 // Component builders
 // ----------------------------------------------------------------------
 
 /**
- * Build a labelled text input.
+ * Build a labelled text input with Lily class contract.
+ *
  * @param {{ label: string, section: string, field: string, type?: string,
- *           placeholder?: string, min?: number, max?: number, step?: number,
- *           unit?: string }} opts
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number, unit?: string }} opts
  */
 function textInput(opts) {
   const id = `${opts.section}-${opts.field}`;
   const value = state[opts.section][opts.field];
   const type = opts.type || 'text';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const attrs = [
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
-    `value="${esc(value == null ? '' : value)}"`
+    `class="${lilyInputClass(type)}"`,
+    `value="${esc(value == null ? '' : value)}"`,
+    `aria-describedby="${id}-error"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required', 'data-required');
   if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
   if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
   if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
@@ -143,24 +163,24 @@ function textInput(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
     ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
     let v = input.value;
-    if (type === 'number') {
-      v = v === '' ? null : Number(v);
-    }
+    if (type === 'number') v = v === '' ? null : Number(v);
     setField(opts.section, opts.field, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 /**
- * Build a labelled multi-line text area.
+ * Build a labelled multi-line text area with Lily class contract.
  */
 function textArea(opts) {
   const id = `${opts.section}-${opts.field}`;
@@ -169,18 +189,23 @@ function textArea(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      aria-describedby="${id}-error"
       class="text-area-input">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  ta.addEventListener('input', () => {
+    setField(opts.section, opts.field, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
 /**
- * Build a select / dropdown input.
+ * Build a select / dropdown input with Lily class contract.
  */
 function selectInput(opts) {
   const id = `${opts.section}-${opts.field}`;
@@ -197,27 +222,84 @@ function selectInput(opts) {
   ].join('');
 
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select">
+    <label class="label" for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select" aria-describedby="${id}-error">
       ${optionsHtml}
     </select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  sel.addEventListener('change', () => {
+    setField(opts.section, opts.field, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-// Yes/No/N/A radio chips for compliance items.
+/**
+ * Build a Lily radio-group fieldset (used by general-purpose radios as well
+ * as the yes/no/N/A checklist items via the `extraClass` hook).
+ *
+ * @param {{ label: string, section: string, field: string,
+ *           options: Array<{ value: string, label: string, optionClass?: string }>,
+ *           extraClass?: string }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
+
+  const legend = document.createElement('legend');
+  legend.className = 'label';
+  legend.innerHTML = opts.label;
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-group' + (opts.extraClass ? ' ' + opts.extraClass : '');
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.htmlFor = radioId;
+    if (option.optionClass) label.className = option.optionClass;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
+  return wrapper;
+}
+
+// Yes/No/N/A radio options used for every checklist item.
 const YES_NO_NA_OPTIONS = [
-  { value: 'yes', label: 'Yes',  cls: 'choice-yes' },
-  { value: 'no',  label: 'No',   cls: 'choice-no' },
-  { value: 'na',  label: 'N/A',  cls: 'choice-na' }
+  { value: 'yes', label: 'Yes',  optionClass: 'choice-yes' },
+  { value: 'no',  label: 'No',   optionClass: 'choice-no' },
+  { value: 'na',  label: 'N/A',  optionClass: 'choice-na' }
 ];
 
 /**
- * Build a checklist item: a yes/no/N/A radio group with a rule id and
- * description. The "good direction" of an answer (yes vs no) varies by rule
- * and is encoded in rules.js — this UI just captures the auditor's answer.
+ * Build a checklist item: a Lily radio-group with yes/no/N/A options plus
+ * a severity-coloured left border. The "good direction" of an answer
+ * (yes vs no) varies by rule and is encoded in rules.js — this UI just
+ * captures the auditor's answer.
  *
  * @param {{ ruleId: string, section: string, field: string, label: string,
  *           severity: number }} opts
@@ -232,58 +314,47 @@ function checklistItem(opts) {
   li.className = `checklist-item ${sevCls}`;
   li.dataset.ruleId = opts.ruleId;
 
-  const groupId = `${opts.section}-${opts.field}`;
-  const current = state[opts.section][opts.field];
+  const idBadge = opts.ruleId
+    ? `<span class="item-id">${esc(opts.ruleId)}</span> `
+    : '';
+  const severityBadge =
+    `<span class="item-severity grade-${opts.severity}">${esc(gradeLabel(opts.severity))}</span>`;
+  const label = idBadge + esc(opts.label) + ' ' + severityBadge;
 
-  const optionsHtml = YES_NO_NA_OPTIONS.map((option) => {
-    const radioId = `${groupId}-${option.value}`;
-    const checked = current === option.value ? ' checked' : '';
-    return `
-      <label class="radio-option ${option.cls}" for="${radioId}">
-        <input type="radio" id="${radioId}" name="${groupId}" value="${option.value}"${checked}>
-        <span>${esc(option.label)}</span>
-      </label>
-    `;
-  }).join('');
-
-  li.innerHTML = `
-    <fieldset class="field radio-group" style="margin:0;">
-      <legend class="item-label">
-        <span class="item-id">${esc(opts.ruleId)}</span>
-        ${esc(opts.label)}
-        <span class="item-severity grade-${opts.severity}">${esc(gradeLabel(opts.severity))}</span>
-      </legend>
-      <div class="radio-options yes-no-na">${optionsHtml}</div>
-    </fieldset>
-  `;
-
-  li.querySelectorAll('input[type="radio"]').forEach((input) => {
-    input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, input.value);
-    });
+  const group = radioGroup({
+    label,
+    section: opts.section,
+    field: opts.field,
+    options: YES_NO_NA_OPTIONS,
+    extraClass: 'yes-no-na'
   });
+  li.appendChild(group);
   return li;
 }
 
 /**
- * Build a section card.
+ * Build a section card as a Lily fieldset.
+ *
+ * @param {{ stepNumber: number, title: string, description?: string,
+ *           conditional?: string }} opts
  */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   if (opts.conditional) card.dataset.conditional = opts.conditional;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 10</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -595,25 +666,25 @@ function actionItemRow(item, index) {
   row.innerHTML = `
     <div class="action-item-grid">
       <div class="field action-desc">
-        <label for="${idBase}-description">Description</label>
+        <label class="label" for="${idBase}-description">Description</label>
         <textarea id="${idBase}-description" class="text-area-input" rows="2"
           placeholder="What corrective action is required?">${esc(item.description)}</textarea>
       </div>
       <div class="field">
-        <label for="${idBase}-owner">Owner</label>
+        <label class="label" for="${idBase}-owner">Owner</label>
         <input id="${idBase}-owner" class="text-input" type="text"
           value="${esc(item.owner)}" placeholder="Named individual or role">
       </div>
       <div class="field">
-        <label for="${idBase}-dueDate">Due date</label>
-        <input id="${idBase}-dueDate" class="text-input" type="date" value="${esc(item.dueDate)}">
+        <label class="label" for="${idBase}-dueDate">Due date</label>
+        <input id="${idBase}-dueDate" class="date-input" type="date" value="${esc(item.dueDate)}">
       </div>
       <div class="field">
-        <label for="${idBase}-priority">Priority</label>
+        <label class="label" for="${idBase}-priority">Priority</label>
         <select id="${idBase}-priority" class="select">${optionsHtml}</select>
       </div>
       <div class="action-item-actions">
-        <button type="button" class="btn btn-tertiary action-remove" aria-label="Remove action item">Remove</button>
+        <button type="button" class="button action-remove" data-variant="danger" aria-label="Remove action item">Remove</button>
       </div>
     </div>
   `;
@@ -673,9 +744,9 @@ function renderStep10() {
   const planWrap = document.createElement('div');
   planWrap.className = 'field';
   planWrap.innerHTML = `
-    <label>Action plan</label>
+    <label class="label">Action plan</label>
     <ol id="action-items-list" class="action-items"></ol>
-    <button type="button" id="add-action-btn" class="button" data-variant="tertiary">+ Add action item</button>
+    <button type="button" id="add-action-btn" class="button" data-variant="secondary">+ Add action item</button>
   `;
   card.appendChild(planWrap);
 
@@ -720,18 +791,20 @@ function renderStep10() {
   return card;
 }
 
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4, renderStep5,
+  renderStep6, renderStep7, renderStep8, renderStep9, renderStep10
+];
+
 // ----------------------------------------------------------------------
-// Conditional sections (placeholder — kept for future expansion)
+// Conditional sections
 // ----------------------------------------------------------------------
 
 /**
- * Show / hide elements marked with `data-conditional`. The current schema has
- * no hard conditional gating, but the hook is wired so future rules can
- * reveal sub-fields based on an answer (e.g. only ask about AED service if
- * AED available === yes).
+ * Show / hide elements based on prior answers. Currently: the AED service
+ * question is moot if the auditor has confirmed there is no AED.
  */
 function updateConditionalSections() {
-  // AED service question is moot if there's no AED available.
   const aedServiceItem = document.querySelector(
     'li.checklist-item[data-rule-id="WS-042"]'
   );
@@ -745,92 +818,213 @@ function updateConditionalSections() {
 }
 
 // ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1,  section: 'siteDetails',                title: 'Site Details' },
+  { step: 2,  section: 'ppeHazardControls',          title: 'PPE & Hazards' },
+  { step: 3,  section: 'chemicalBiologicalHazards',  title: 'Chemical & Biological' },
+  { step: 4,  section: 'electricalSafety',           title: 'Electrical Safety' },
+  { step: 5,  section: 'fireSafety',                 title: 'Fire Safety' },
+  { step: 6,  section: 'ergonomicsManualHandling',   title: 'Ergonomics' },
+  { step: 7,  section: 'emergencyProcedures',        title: 'Emergency Procedures' },
+  { step: 8,  section: 'trainingCompetence',         title: 'Training & Competence' },
+  { step: 9,  section: 'incidentReporting',          title: 'Incident Reporting' },
+  { step: 10, section: 'signoffActionPlan',          title: 'Sign-off & Action Plan' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) =>
+        `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`
+      ).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ----------------------------------------------------------------------
 // Progress
 // ----------------------------------------------------------------------
 
 /**
- * Build the list of fields whose presence drives the progress bar. Includes
- * every yes/no/N/A checklist field plus key narrative / numeric fields.
+ * Tracked fields grouped by section so the step-list can show per-section
+ * completion. Strings/numbers in the site-details paperwork are tracked
+ * alongside checklist items so the step-list reflects paperwork progress.
  */
-function trackedFields() {
-  const fields = [];
-  // Every safety rule maps to a tracked field.
-  for (const rule of safetyRules) {
-    // Find the (section, field) whose value the rule reads. We can recover
-    // that from the rule's `evaluate` source — but it's easier to maintain a
-    // small table by category of the field names. The rules are 1:1 with
-    // schema fields, so derive from the schema instead.
-  }
-  // Tri-state checklist fields, by section:
-  const items = [
-    ['siteDetails', ['previousFindingsClosed']],
-    ['ppeHazardControls', [
-      'ppeAvailable', 'ppeCorrectlyUsed', 'ppeStockMaintained',
-      'hazardSignageVisible', 'signageLegible', 'housekeepingSatisfactory',
-      'slipTripHazardsControlled'
-    ]],
-    ['chemicalBiologicalHazards', [
-      'coshhRegisterPresent', 'sdsAvailable', 'chemicalsLabelledCorrectly',
-      'chemicalsStoredSecurely', 'spillKitsAvailable', 'untreatedSpillsObserved',
-      'sharpsContainersInDate', 'clinicalWasteSegregated',
-      'biologicalRiskAssessmentCurrent'
-    ]],
-    ['electricalSafety', [
-      'patTestingInDate', 'fixedWiringTestInDate', 'damagedEquipmentObserved',
-      'overloadedSocketsObserved', 'extensionLeadsManagedSafely',
-      'consumerUnitAccessible'
-    ]],
-    ['fireSafety', [
-      'fireRiskAssessmentCurrent', 'fireExtinguishersServiced',
-      'fireExtinguishersAccessible', 'fireAlarmTestedWeekly',
-      'emergencyEgressClear', 'emergencyLightingFunctional',
-      'fireDoorsHeldOpenIllegally', 'assemblyPointSignposted'
-    ]],
-    ['ergonomicsManualHandling', [
-      'manualHandlingAssessmentCurrent', 'liftingAidsAvailable',
-      'dseAssessmentsCompleted', 'workstationsAdjustable',
-      'repetitiveStrainConcerns', 'patientHandlingPlansInPlace'
-    ]],
-    ['emergencyProcedures', [
-      'evacuationProcedurePosted', 'firstAidKitsStocked',
-      'firstAiderRosterCurrent', 'aedAvailable', 'aedServiceInDate',
-      'emergencyContactsDisplayed', 'drillConductedLast12Months'
-    ]],
-    ['trainingCompetence', [
-      'mandatoryTrainingUpToDate', 'fireMarshalsTrained',
-      'manualHandlingTrainingCurrent', 'infectionControlTrainingCurrent',
-      'trainingRecordsAccessible', 'inductionForNewStartersCompleted'
-    ]],
-    ['incidentReporting', [
-      'incidentReportingSystemUsed', 'riddorReportableIncidentsReported',
-      'nearMissReportingActive', 'incidentsLast12Months',
-      'nearMissesLast12Months', 'lessonsLearnedShared',
-      'actionsFromIncidentsTracked'
-    ]],
-    ['signoffActionPlan', ['debriefDelivered']]
-  ];
-  for (const [section, fieldList] of items) {
-    for (const field of fieldList) fields.push([section, field]);
-  }
-  return fields;
-}
-
-const TRACKED_FIELDS = trackedFields();
+const TRACKED_SECTIONS = [
+  ['siteDetails', ['previousFindingsClosed']],
+  ['ppeHazardControls', [
+    'ppeAvailable', 'ppeCorrectlyUsed', 'ppeStockMaintained',
+    'hazardSignageVisible', 'signageLegible', 'housekeepingSatisfactory',
+    'slipTripHazardsControlled'
+  ]],
+  ['chemicalBiologicalHazards', [
+    'coshhRegisterPresent', 'sdsAvailable', 'chemicalsLabelledCorrectly',
+    'chemicalsStoredSecurely', 'spillKitsAvailable', 'untreatedSpillsObserved',
+    'sharpsContainersInDate', 'clinicalWasteSegregated',
+    'biologicalRiskAssessmentCurrent'
+  ]],
+  ['electricalSafety', [
+    'patTestingInDate', 'fixedWiringTestInDate', 'damagedEquipmentObserved',
+    'overloadedSocketsObserved', 'extensionLeadsManagedSafely',
+    'consumerUnitAccessible'
+  ]],
+  ['fireSafety', [
+    'fireRiskAssessmentCurrent', 'fireExtinguishersServiced',
+    'fireExtinguishersAccessible', 'fireAlarmTestedWeekly',
+    'emergencyEgressClear', 'emergencyLightingFunctional',
+    'fireDoorsHeldOpenIllegally', 'assemblyPointSignposted'
+  ]],
+  ['ergonomicsManualHandling', [
+    'manualHandlingAssessmentCurrent', 'liftingAidsAvailable',
+    'dseAssessmentsCompleted', 'workstationsAdjustable',
+    'repetitiveStrainConcerns', 'patientHandlingPlansInPlace'
+  ]],
+  ['emergencyProcedures', [
+    'evacuationProcedurePosted', 'firstAidKitsStocked',
+    'firstAiderRosterCurrent', 'aedAvailable', 'aedServiceInDate',
+    'emergencyContactsDisplayed', 'drillConductedLast12Months'
+  ]],
+  ['trainingCompetence', [
+    'mandatoryTrainingUpToDate', 'fireMarshalsTrained',
+    'manualHandlingTrainingCurrent', 'infectionControlTrainingCurrent',
+    'trainingRecordsAccessible', 'inductionForNewStartersCompleted'
+  ]],
+  ['incidentReporting', [
+    'incidentReportingSystemUsed', 'riddorReportableIncidentsReported',
+    'nearMissReportingActive', 'incidentsLast12Months',
+    'nearMissesLast12Months', 'lessonsLearnedShared',
+    'actionsFromIncidentsTracked'
+  ]],
+  ['signoffActionPlan', ['debriefDelivered']]
+];
 
 function updateProgress() {
   let answered = 0;
-  for (const [section, field] of TRACKED_FIELDS) {
-    const v = state[section][field];
-    if (v !== null && v !== undefined && v !== '') answered++;
+  let total = 0;
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  for (const [section, fields] of TRACKED_SECTIONS) {
+    sectionTotal[section] = fields.length;
+    sectionAnswered[section] = 0;
+    for (const field of fields) {
+      total++;
+      const v = state[section][field];
+      if (v !== null && v !== undefined && v !== '') {
+        answered++;
+        sectionAnswered[section]++;
+      }
+    }
   }
-  const total = TRACKED_FIELDS.length;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses(sectionAnswered, sectionTotal);
 }
 
 // ----------------------------------------------------------------------
@@ -978,7 +1172,10 @@ function renderReport() {
       </ul>
     `;
 
-  const totalCount = TRACKED_FIELDS.length;
+  // Count of total tracked fields for the answered/total readout.
+  let totalCount = 0;
+  for (const [, fields] of TRACKED_SECTIONS) totalCount += fields.length;
+
   const site = state.siteDetails;
   const siteHeader = [
     site.siteName,
@@ -986,45 +1183,46 @@ function renderReport() {
   ].filter((s) => s && s.trim() !== '').join(' — ');
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>Workplace Safety Audit Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}${
-          siteHeader ? ` · ${esc(siteHeader)}` : ''
-        }${site.auditorName ? ` · auditor: ${esc(site.auditorName)}` : ''}</p>
-      </header>
+    <h2>Workplace Safety Audit Report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}${
+      siteHeader ? ` · ${esc(siteHeader)}` : ''
+    }${site.auditorName ? ` · auditor: ${esc(site.auditorName)}` : ''}</p>
 
-      <h3>Outcome</h3>
-      <p class="outcome-summary">
-        <span class="outcome-badge ${outcomeClass(outcome)}">${esc(outcomeLabel(outcome) || '—')}</span>
-        <span class="outcome-detail">${esc(actionTimeframe(outcome))}</span>
-      </p>
-      <p class="muted">Based on ${answeredCount} of ${totalCount} checklist items recorded.</p>
+    <h3>Outcome</h3>
+    <p class="outcome-summary">
+      <span class="outcome-badge ${outcomeClass(outcome)}">${esc(outcomeLabel(outcome) || '—')}</span>
+      <span class="outcome-detail">${esc(actionTimeframe(outcome))}</span>
+    </p>
+    <p class="muted">Based on ${answeredCount} of ${totalCount} checklist items recorded.</p>
 
-      <h3>Findings by category</h3>
-      ${findingsTableHtml(findingsByCategory)}
+    <h3>Findings by category</h3>
+    ${findingsTableHtml(findingsByCategory)}
 
-      <h3>Non-compliant items</h3>
-      ${findingsList}
+    <h3>Non-compliant items</h3>
+    ${findingsList}
 
-      <h3>Action plan</h3>
-      ${actionPlanSummaryHtml()}
+    <h3>Action plan</h3>
+    ${actionPlanSummaryHtml()}
 
-      <h3>Flagged issues</h3>
-      ${flagsList}
+    <h3>Flagged issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="print-btn" class="button" data-variant="secondary">Print / save PDF</button>
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const startBtn = document.getElementById('start-over-btn');
   if (startBtn) startBtn.addEventListener('click', startOver);
+  const printBtn = document.getElementById('print-btn');
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   const grading = gradeSafety(state);
   const additionalFlags = detectAdditionalFlags(state);
   lastResult = {
@@ -1044,7 +1242,11 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   const out = document.getElementById('report');
-  if (out) out.innerHTML = '';
+  if (out) {
+    out.innerHTML =
+      '<p class="empty-message">Submit the checklist to see the audit report.</p>';
+  }
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -1059,19 +1261,11 @@ function renderForm() {
   const host = document.getElementById('form-sections');
   if (!host) return;
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
-  host.appendChild(renderStep4());
-  host.appendChild(renderStep5());
-  host.appendChild(renderStep6());
-  host.appendChild(renderStep7());
-  host.appendChild(renderStep8());
-  host.appendChild(renderStep9());
-  host.appendChild(renderStep10());
+  for (const renderer of STEP_RENDERERS) host.appendChild(renderer());
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();
