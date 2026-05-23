@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Patient, procedure, surgeon, anaesthetist, site..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-status">Status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Status</label>
           <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="not-started">Not started</option>
@@ -62,8 +62,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-urgency">Urgency</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-urgency">Urgency</label>
           <select id="filter-urgency" class="select">
             <option value="">All urgencies</option>
             <option value="elective">Elective</option>
@@ -73,16 +73,16 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-specialty">Specialty</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-specialty">Specialty</label>
           <select id="filter-specialty" class="select">
             <option value="">All specialties</option>
             <!-- Options injected by app.js based on data -->
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-flags">Safety Flags</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-flags">Safety Flags</label>
           <select id="filter-flags" class="select">
             <option value="">All</option>
             <option value="yes">With flags</option>
@@ -115,13 +115,13 @@
       <h2 id="checklists-table-heading" class="visually-hidden">Checklists</h2>
 
       <div class="table-scroll">
-        <table id="checklists-table" class="checklists-table">
-          <thead>
-            <tr id="checklists-table-head">
+        <table id="checklists-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="checklists-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="checklists-table-body">
+          <tbody id="checklists-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

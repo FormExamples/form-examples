@@ -210,9 +210,11 @@ function appendRendered(cell, value) {
 function renderHeader() {
   const headRow = $('checklists-table-head');
   clear(headRow);
+  headRow.classList.add('data-table-row');
 
   columns.forEach((col) => {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.setAttribute('data-key', col.key);
 
@@ -319,6 +321,7 @@ function renderBody() {
 
   state.filtered.forEach((row) => {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     tr.setAttribute('data-id', row.id);
     tr.tabIndex = 0;
 
@@ -328,6 +331,7 @@ function renderBody() {
 
     columns.forEach((col) => {
       const td = document.createElement('td');
+      td.className = 'data-table-td';
       appendRendered(td, col.render(row));
       tr.appendChild(td);
     });
