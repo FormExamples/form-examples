@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-control">Control Level</label>
-          <select id="filter-control" class="select-input">
+          <select id="filter-control" class="select">
             <option value="">All control levels</option>
             <option value="Well Controlled">Well Controlled</option>
             <option value="Could Be Better">Could Be Better</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Exacerbation Risk</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-allergy">Allergy</label>
-          <select id="filter-allergy" class="select-input">
+          <select id="filter-allergy" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -83,7 +83,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
