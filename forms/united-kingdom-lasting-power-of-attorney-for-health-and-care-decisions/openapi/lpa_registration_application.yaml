@@ -1,0 +1,186 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_registration_application
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaRegistrationApplication
+  version: 1.0.0
+  description: OPG registration application (LP1H Part C). 1:1 with lpa.
+paths:
+  /lpa-registration-applications:
+    get:
+      summary: List LpaRegistrationApplication records
+      operationId: listLpaRegistrationApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaRegistrationApplication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaRegistrationApplication"
+    post:
+      summary: Create a new LpaRegistrationApplication
+      operationId: createLpaRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationApplication"
+      responses:
+        "201":
+          description: The newly created LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "400":
+          description: Validation error
+  /lpa-registration-applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaRegistrationApplication by id
+      operationId: getLpaRegistrationApplication
+      responses:
+        "200":
+          description: The requested LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "404":
+          description: LpaRegistrationApplication not found
+    patch:
+      summary: Update an existing LpaRegistrationApplication
+      operationId: updateLpaRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationApplication"
+      responses:
+        "200":
+          description: The updated LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "404":
+          description: LpaRegistrationApplication not found
+    delete:
+      summary: Soft-delete a LpaRegistrationApplication
+      operationId: deleteLpaRegistrationApplication
+      responses:
+        "204":
+          description: LpaRegistrationApplication deleted
+        "404":
+          description: LpaRegistrationApplication not found
+components:
+  schemas:
+    LpaRegistrationApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA (unique, 1:1).
+        applicant_role:
+          type: string
+          enum:
+            - donor
+            - attorney
+            - attorneys-jointly
+            - ""
+          description: "Who is applying to register: donor, attorney (one), or attorneys-jointly (all)."
+        applicant_signed_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the applicant signed Part C.
+        fee_amount_pounds:
+          type: number
+          format: double
+          description: Application fee in GBP. Standard £82 (2026); zero when full exemption applies.
+        fee_remission:
+          type: string
+          enum:
+            - none
+            - half
+            - full-exempt
+            - ""
+          description: "Remission level: none, half (50% off), or full-exempt."
+        fee_remission_reason:
+          type: string
+          enum:
+            - low-income
+            - universal-credit
+            - income-support
+            - pension-credit-guarantee
+            - housing-benefit
+            - employment-and-support-allowance
+            - jobseekers-allowance
+            - working-tax-credit
+            - other
+            - ""
+          description: Statutory basis for the remission or exemption claim.
+        submitted_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the application was submitted to the OPG.
+        submission_channel:
+          type: string
+          enum:
+            - post
+            - opg-digital
+            - solicitor-portal
+            - ""
+          description: "Channel: post, opg-digital (Powers of Attorney Act 2023), or solicitor-portal."
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - applicant_role
+        - fee_amount_pounds
+        - fee_remission
+        - fee_remission_reason
+        - submission_channel
+      description: OPG registration application (LP1H Part C). 1:1 with lpa.

@@ -1,0 +1,152 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: building_block
+openapi: 3.1.0
+info:
+  title: Arc42 — BuildingBlock
+  version: 1.0.0
+  description: Building block captured in §5 Building Block View of the arc42 documentation.
+paths:
+  /building-blocks:
+    get:
+      summary: List BuildingBlock records
+      operationId: listBuildingBlock
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BuildingBlock records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildingBlock"
+    post:
+      summary: Create a new BuildingBlock
+      operationId: createBuildingBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BuildingBlock"
+      responses:
+        "201":
+          description: The newly created BuildingBlock
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildingBlock"
+        "400":
+          description: Validation error
+  /building-blocks/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BuildingBlock by id
+      operationId: getBuildingBlock
+      responses:
+        "200":
+          description: The requested BuildingBlock
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildingBlock"
+        "404":
+          description: BuildingBlock not found
+    patch:
+      summary: Update an existing BuildingBlock
+      operationId: updateBuildingBlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BuildingBlock"
+      responses:
+        "200":
+          description: The updated BuildingBlock
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildingBlock"
+        "404":
+          description: BuildingBlock not found
+    delete:
+      summary: Soft-delete a BuildingBlock
+      operationId: deleteBuildingBlock
+      responses:
+        "204":
+          description: BuildingBlock deleted
+        "404":
+          description: BuildingBlock not found
+components:
+  schemas:
+    BuildingBlock:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        parent_id:
+          type: string
+          format: uuid
+          description: Self-referential FK to the parent building block; NULL for top-level blocks (cascade-deleted with parent).
+        name:
+          type: string
+          description: Name of the building block (e.g. component, subsystem, or module name).
+        responsibility:
+          type: string
+          description: Single-sentence description of what this building block is responsible for.
+        interfaces:
+          type: string
+          description: Description of the interfaces this building block exposes or consumes.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - name
+        - responsibility
+        - interfaces
+      description: Building block captured in §5 Building Block View of the arc42 documentation.

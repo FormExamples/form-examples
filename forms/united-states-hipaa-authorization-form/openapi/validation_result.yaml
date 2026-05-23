@@ -1,0 +1,162 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: validation_result
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — ValidationResult
+  version: 1.0.0
+  description: Result of the HIPAA-authorization validity engine. One-to-one child of hipaa_authorization.
+paths:
+  /validation-results:
+    get:
+      summary: List ValidationResult records
+      operationId: listValidationResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ValidationResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidationResult"
+    post:
+      summary: Create a new ValidationResult
+      operationId: createValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationResult"
+      responses:
+        "201":
+          description: The newly created ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "400":
+          description: Validation error
+  /validation-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ValidationResult by id
+      operationId: getValidationResult
+      responses:
+        "200":
+          description: The requested ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "404":
+          description: ValidationResult not found
+    patch:
+      summary: Update an existing ValidationResult
+      operationId: updateValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationResult"
+      responses:
+        "200":
+          description: The updated ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "404":
+          description: ValidationResult not found
+    delete:
+      summary: Soft-delete a ValidationResult
+      operationId: deleteValidationResult
+      responses:
+        "204":
+          description: ValidationResult deleted
+        "404":
+          description: ValidationResult not found
+components:
+  schemas:
+    ValidationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        validity_status:
+          type: string
+          enum:
+            - ""
+            - valid
+            - invalid
+          description: "Overall validity: valid, invalid, or empty if not yet run."
+        completeness_score:
+          type: integer
+          format: int32
+          description: Completeness score 0..100 (ratio of filled to required fields).
+        completeness_status:
+          type: string
+          enum:
+            - ""
+            - complete
+            - partial
+            - empty
+          description: "Human-readable completeness band: complete, partial, empty, or empty if not run."
+        validated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the validation was last run.
+        validator_version:
+          type: string
+          maxLength: 20
+          description: Engine version string (semver) recorded for reproducibility.
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - validity_status
+        - completeness_score
+        - completeness_status
+        - validator_version
+      description: Result of the HIPAA-authorization validity engine. One-to-one child of hipaa_authorization.

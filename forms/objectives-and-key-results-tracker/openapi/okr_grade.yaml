@@ -1,0 +1,210 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: okr_grade
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — OkrGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for an objective. 1:1 with okr_objective.
+paths:
+  /okr-grades:
+    get:
+      summary: List OkrGrade records
+      operationId: listOkrGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OkrGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OkrGrade"
+    post:
+      summary: Create a new OkrGrade
+      operationId: createOkrGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGrade"
+      responses:
+        "201":
+          description: The newly created OkrGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGrade"
+        "400":
+          description: Validation error
+  /okr-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OkrGrade by id
+      operationId: getOkrGrade
+      responses:
+        "200":
+          description: The requested OkrGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGrade"
+        "404":
+          description: OkrGrade not found
+    patch:
+      summary: Update an existing OkrGrade
+      operationId: updateOkrGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGrade"
+      responses:
+        "200":
+          description: The updated OkrGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGrade"
+        "404":
+          description: OkrGrade not found
+    delete:
+      summary: Soft-delete a OkrGrade
+      operationId: deleteOkrGrade
+      responses:
+        "204":
+          description: OkrGrade deleted
+        "404":
+          description: OkrGrade not found
+components:
+  schemas:
+    OkrGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_objective_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent okr_objective row (UNIQUE, 1:1).
+        score_by_progress_percent:
+          type: number
+          format: double
+          description: "Score 1 of 7: echoed from okr_objective for dashboard joins."
+        score_by_confidence_decile:
+          type: integer
+          format: int32
+          description: "Score 2 of 7: echoed from okr_objective."
+        score_by_stretch_tier:
+          type: integer
+          format: int32
+          description: "Score 3 of 7: echoed from okr_objective."
+        score_by_alignment_grade:
+          type: integer
+          format: int32
+          description: "Score 4 of 7: echoed from okr_objective."
+        score_by_impact_tier:
+          type: integer
+          format: int32
+          description: "Score 5 of 7: echoed from okr_objective."
+        score_by_smart_quality:
+          type: integer
+          format: int32
+          description: "Score 6 of 7: echoed from okr_objective."
+        score_by_pace_deviation_percent:
+          type: number
+          format: double
+          description: "Score 7 of 7: echoed from okr_objective."
+        computed_composite_rag:
+          type: string
+          enum:
+            - green
+            - amber
+            - red
+            - ""
+          description: "Composite RAG computed by the engine using the worst-band-finding algorithm: green, amber, or red."
+        final_composite_rag:
+          type: string
+          enum:
+            - green
+            - amber
+            - red
+            - ""
+          description: Composite RAG signed off by the reviewer (may equal or differ from computed).
+        override_reason:
+          type: string
+          description: Reason the reviewer set final differently from computed (mandatory when they differ).
+        recommendation:
+          type: string
+          enum:
+            - continue
+            - escalate
+            - re-scope
+            - retire
+            - split
+            - merge
+            - ""
+          description: "Overall recommendation: continue, escalate, re-scope, retire, split, merge."
+        triage_notes:
+          type: string
+          description: Free-text reviewer summary notes.
+        signed_by:
+          type: string
+          description: Name or identifier of the reviewer who signed off.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the reviewer electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - okr_objective_id
+        - computed_composite_rag
+        - final_composite_rag
+        - override_reason
+        - recommendation
+        - triage_notes
+        - signed_by
+        - graded_at
+      description: Computed and signed-off grading result for an objective. 1:1 with okr_objective.

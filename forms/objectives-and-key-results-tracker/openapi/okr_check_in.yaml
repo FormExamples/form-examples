@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: okr_check_in
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — OkrCheckIn
+  version: 1.0.0
+  description: Periodic progress check-in narrative for an objective. Many rows per okr_objective.
+paths:
+  /okr-check-ins:
+    get:
+      summary: List OkrCheckIn records
+      operationId: listOkrCheckIn
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OkrCheckIn records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OkrCheckIn"
+    post:
+      summary: Create a new OkrCheckIn
+      operationId: createOkrCheckIn
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrCheckIn"
+      responses:
+        "201":
+          description: The newly created OkrCheckIn
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrCheckIn"
+        "400":
+          description: Validation error
+  /okr-check-ins/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OkrCheckIn by id
+      operationId: getOkrCheckIn
+      responses:
+        "200":
+          description: The requested OkrCheckIn
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrCheckIn"
+        "404":
+          description: OkrCheckIn not found
+    patch:
+      summary: Update an existing OkrCheckIn
+      operationId: updateOkrCheckIn
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrCheckIn"
+      responses:
+        "200":
+          description: The updated OkrCheckIn
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrCheckIn"
+        "404":
+          description: OkrCheckIn not found
+    delete:
+      summary: Soft-delete a OkrCheckIn
+      operationId: deleteOkrCheckIn
+      responses:
+        "204":
+          description: OkrCheckIn deleted
+        "404":
+          description: OkrCheckIn not found
+components:
+  schemas:
+    OkrCheckIn:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_objective_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent okr_objective.
+        checked_in_at:
+          type: string
+          format: date-time
+          description: When this check-in was made.
+        narrative:
+          type: string
+          description: Free-text update narrative.
+        since_last_changes:
+          type: string
+          description: Summary of what changed since the previous check-in.
+        blockers:
+          type: string
+          description: Current blockers as of this check-in.
+        asks:
+          type: string
+          description: Asks for help / decisions / resources at this check-in.
+        confidence_decile_at_check_in:
+          type: integer
+          format: int32
+          description: Confidence decile snapshot 1-10 at this check-in; used by the confidence-collapse flag.
+      required:
+        - created_at
+        - updated_at
+        - okr_objective_id
+        - checked_in_at
+        - narrative
+        - since_last_changes
+        - blockers
+        - asks
+      description: Periodic progress check-in narrative for an objective. Many rows per okr_objective.

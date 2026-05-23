@@ -1,0 +1,187 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lasting_power_of_attorney
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LastingPowerOfAttorney
+  version: 1.0.0
+  description: Lasting power of attorney — the top-level LP1F deed (one row per LPA), under the Mental Capacity Act 2005.
+paths:
+  /lasting-power-of-attorneys:
+    get:
+      summary: List LastingPowerOfAttorney records
+      operationId: listLastingPowerOfAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LastingPowerOfAttorney records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LastingPowerOfAttorney"
+    post:
+      summary: Create a new LastingPowerOfAttorney
+      operationId: createLastingPowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LastingPowerOfAttorney"
+      responses:
+        "201":
+          description: The newly created LastingPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LastingPowerOfAttorney"
+        "400":
+          description: Validation error
+  /lasting-power-of-attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LastingPowerOfAttorney by id
+      operationId: getLastingPowerOfAttorney
+      responses:
+        "200":
+          description: The requested LastingPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LastingPowerOfAttorney"
+        "404":
+          description: LastingPowerOfAttorney not found
+    patch:
+      summary: Update an existing LastingPowerOfAttorney
+      operationId: updateLastingPowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LastingPowerOfAttorney"
+      responses:
+        "200":
+          description: The updated LastingPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LastingPowerOfAttorney"
+        "404":
+          description: LastingPowerOfAttorney not found
+    delete:
+      summary: Soft-delete a LastingPowerOfAttorney
+      operationId: deleteLastingPowerOfAttorney
+      responses:
+        "204":
+          description: LastingPowerOfAttorney deleted
+        "404":
+          description: LastingPowerOfAttorney not found
+components:
+  schemas:
+    LastingPowerOfAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        donor_person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the donor making the LPA (LP1F section 1).
+        decision_mode:
+          type: string
+          enum:
+            - single_attorney
+            - jointly_and_severally
+            - jointly
+            - mixed
+            - ""
+          description: "How the attorneys make decisions (LP1F section 3). One of: single_attorney, jointly_and_severally, jointly, mixed."
+        decision_mode_mixed_text:
+          type: string
+          description: "When decision_mode is \"mixed\": free-text listing which decisions are joint and which are joint-and-several (continued on LPC sheet 2 if long)."
+        when_attorneys_can_act:
+          type: string
+          enum:
+            - as_soon_as_registered
+            - only_when_no_capacity
+            - ""
+          description: "When the attorneys may begin acting (LP1F section 5). One of: as_soon_as_registered, only_when_no_capacity."
+        preferences_text:
+          type: string
+          description: Donor preferences for the attorneys to consider (LP1F section 7); non-binding guidance.
+        instructions_text:
+          type: string
+          description: Donor instructions the attorneys must follow (LP1F section 7); legally binding on the attorneys.
+        legal_rights_acknowledged:
+          type: boolean
+          description: TRUE when the donor has read and acknowledged the legal-rights statement in LP1F section 8.
+        opg_reference_number:
+          type: string
+          description: Office of the Public Guardian reference number issued on registration.
+        opg_registration_date:
+          type: string
+          format: date
+          description: Date the OPG registered the LPA (the date the LPA becomes legally usable).
+        status:
+          type: string
+          enum:
+            - draft
+            - ready_for_signing
+            - partially_signed
+            - fully_signed
+            - ready_for_registration
+            - submitted
+            - registered
+            - rejected
+            - ""
+          description: "Lifecycle status. One of: draft, ready_for_signing, partially_signed, fully_signed, ready_for_registration, submitted, registered, rejected."
+      required:
+        - created_at
+        - updated_at
+        - donor_person_id
+        - decision_mode
+        - decision_mode_mixed_text
+        - when_attorneys_can_act
+        - preferences_text
+        - instructions_text
+        - legal_rights_acknowledged
+        - opg_reference_number
+        - status
+      description: Lasting power of attorney — the top-level LP1F deed (one row per LPA), under the Mental Capacity Act 2005.

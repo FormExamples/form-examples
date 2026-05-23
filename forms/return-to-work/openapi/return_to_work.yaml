@@ -1,0 +1,507 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: return_to_work
+openapi: 3.1.0
+info:
+  title: Return To Work — ReturnToWork
+  version: 1.0.0
+  description: Clinician-issued Statement of Fitness for Work (Med 3 / fit note) authorising an employee return to work after illness, injury, or extended absence.
+paths:
+  /return-to-works:
+    get:
+      summary: List ReturnToWork records
+      operationId: listReturnToWork
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReturnToWork records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReturnToWork"
+    post:
+      summary: Create a new ReturnToWork
+      operationId: createReturnToWork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWork"
+      responses:
+        "201":
+          description: The newly created ReturnToWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWork"
+        "400":
+          description: Validation error
+  /return-to-works/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReturnToWork by id
+      operationId: getReturnToWork
+      responses:
+        "200":
+          description: The requested ReturnToWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWork"
+        "404":
+          description: ReturnToWork not found
+    patch:
+      summary: Update an existing ReturnToWork
+      operationId: updateReturnToWork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWork"
+      responses:
+        "200":
+          description: The updated ReturnToWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWork"
+        "404":
+          description: ReturnToWork not found
+    delete:
+      summary: Soft-delete a ReturnToWork
+      operationId: deleteReturnToWork
+      responses:
+        "204":
+          description: ReturnToWork deleted
+        "404":
+          description: ReturnToWork not found
+components:
+  schemas:
+    ReturnToWork:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient (employee) being assessed.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician issuing the statement.
+        employer_id:
+          type: string
+          format: uuid
+          description: Foreign key to the employer receiving the statement.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - cancelled
+            - superseded
+          description: "Lifecycle status: draft, submitted, reviewed, cancelled, or superseded."
+        statement_kind:
+          type: string
+          enum:
+            - fit-note
+            - medical-clearance-letter
+            - specialist-report
+            - ""
+          description: "Statement output style: fit-note (UK Med 3), medical-clearance-letter, or specialist-report."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the assessment was performed.
+        assessment_time:
+          type: string
+          format: time
+          description: Time the assessment was performed.
+        absence_first_day:
+          type: string
+          format: date
+          description: First calendar day of the current absence.
+        absence_total_calendar_days:
+          type: integer
+          format: int32
+          description: Total calendar days absent as of the assessment.
+        prior_med3_reference:
+          type: string
+          maxLength: 50
+          description: Reference identifier of an earlier Med 3 if this is a continuation.
+        prior_self_certification_reference:
+          type: string
+          maxLength: 50
+          description: Reference identifier of an earlier SC2 self-certification if one was filed.
+        primary_diagnosis_text:
+          type: string
+          maxLength: 500
+          description: Free-text primary diagnosis as it will appear on the fit note.
+        primary_diagnosis_snomed:
+          type: string
+          maxLength: 20
+          description: SNOMED CT concept ID for the primary diagnosis.
+        primary_diagnosis_icd10:
+          type: string
+          maxLength: 10
+          description: ICD-10 code for the primary diagnosis.
+        comorbid_conditions:
+          type: string
+          description: Free-text list of comorbid conditions relevant to the return-to-work decision.
+        mechanism:
+          type: string
+          enum:
+            - illness
+            - injury
+            - surgery
+            - mental-health
+            - pregnancy-related
+            - cancer-treatment
+            - other
+            - ""
+          description: "Mechanism of absence: illness, injury, surgery, mental-health, pregnancy-related, cancer-treatment, or other."
+        workplace_cause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the absence has a workplace cause (triggers RIDDOR check).
+        riddor_reference:
+          type: string
+          maxLength: 50
+          description: RIDDOR report reference if one has been filed by the employer.
+        current_medications:
+          type: string
+          description: Current medications relevant to the return-to-work assessment.
+        ongoing_therapy:
+          type: string
+          description: Ongoing non-pharmacological therapy (physiotherapy, counselling, specialist follow-up).
+        last_consultation_date:
+          type: string
+          format: date
+          description: Date of the most recent consultation before this assessment.
+        anticipated_recovery_trajectory:
+          type: string
+          enum:
+            - full-recovery-imminent
+            - full-recovery-expected
+            - partial-recovery-expected
+            - chronic-managed
+            - progressive
+            - palliative
+            - ""
+          description: "Anticipated trajectory: full-recovery-imminent, full-recovery-expected, partial-recovery-expected, chronic-managed, progressive, or palliative."
+        specialist_followup_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether specialist follow-up is required before the next review.
+        mobility:
+          type: string
+          enum:
+            - normal
+            - reduced
+            - severely-limited
+            - wheelchair
+            - ""
+          description: "Mobility: normal, reduced, severely-limited, or wheelchair."
+        manual_handling_capacity_kg:
+          type: number
+          format: double
+          description: Maximum safe manual-handling load in kilograms.
+        cognition:
+          type: string
+          enum:
+            - normal
+            - mildly-impaired
+            - moderately-impaired
+            - severely-impaired
+            - ""
+          description: "Cognition: normal, mildly-impaired, moderately-impaired, or severely-impaired."
+        mood:
+          type: string
+          enum:
+            - stable
+            - low
+            - anxious
+            - agitated
+            - crisis
+            - ""
+          description: "Mood: stable, low, anxious, agitated, or crisis."
+        sleep:
+          type: string
+          enum:
+            - normal
+            - disturbed
+            - severely-disturbed
+            - ""
+          description: "Sleep: normal, disturbed, or severely-disturbed."
+        pain_score_0_10:
+          type: integer
+          format: int32
+          description: Patient-reported pain on a 0-10 numeric rating scale.
+        driving_capacity:
+          type: string
+          enum:
+            - fit-to-drive
+            - restricted
+            - not-fit-to-drive
+            - ""
+          description: "Driving capacity: fit-to-drive, restricted, or not-fit-to-drive."
+        standing_tolerance_minutes:
+          type: integer
+          format: int32
+          description: Continuous standing tolerance in minutes.
+        sitting_tolerance_minutes:
+          type: integer
+          format: int32
+          description: Continuous sitting tolerance in minutes.
+        screen_tolerance_minutes:
+          type: integer
+          format: int32
+          description: Continuous screen-use tolerance in minutes.
+        adl_independence:
+          type: string
+          enum:
+            - independent
+            - minor-help
+            - major-help
+            - dependent
+            - ""
+          description: "Independence in activities of daily living: independent, minor-help, major-help, or dependent."
+        fitness_statement_computed:
+          type: string
+          enum:
+            - fit
+            - may-be-fit
+            - not-fit
+            - ""
+          description: Engine-computed fitness statement before clinician override.
+        fitness_statement_final:
+          type: string
+          enum:
+            - fit
+            - may-be-fit
+            - not-fit
+            - ""
+          description: Final fitness statement after any clinician override.
+        clinician_override:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the clinician overrode the computed fitness statement.
+        clinician_override_reason:
+          type: string
+          description: Documented reason for any clinician override.
+        clinician_confidence:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+            - ""
+          description: "Clinician confidence in the statement: high, medium, or low."
+        valid_from:
+          type: string
+          format: date
+          description: First date the statement is valid.
+        valid_until:
+          type: string
+          format: date
+          description: Last date the statement is valid.
+        validity_weeks:
+          type: integer
+          format: int32
+          description: Number of weeks the statement is valid (alternative expression of valid_until).
+        reassessment_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient must be reassessed at expiry.
+        phased_return_applicable:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a phased return is recommended.
+        phased_return_template:
+          type: string
+          enum:
+            - 2-week
+            - 4-week
+            - 8-week
+            - 12-week
+            - custom
+            - ""
+          description: "Selected phased-return template: 2-week, 4-week, 8-week, 12-week, or custom."
+        phased_return_target_date:
+          type: string
+          format: date
+          description: Target date for full-hours resumption.
+        phased_return_schedule_json:
+          type: object
+          description: Ordered list of {week, hoursPerWeek, daysPerWeek, notes} entries.
+        phased_return_support_contact:
+          type: string
+          description: Workplace support contact during the phased return.
+        workstation_review_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a workstation / ergonomic review is required before return.
+        additional_adjustments_text:
+          type: string
+          description: Free-text additional workplace adjustments not captured in the enumerated restriction list.
+        review_location:
+          type: string
+          enum:
+            - gp
+            - occupational-health
+            - specialist
+            - employer-oh
+            - none
+            - ""
+          description: "Location of the next review: gp, occupational-health, specialist, employer-oh, or none."
+        review_date:
+          type: string
+          format: date
+          description: Scheduled date of the next review.
+        occupational_health_referral_made:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an occupational-health referral has been made.
+        dvla_notification_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient must notify the DVLA of the condition.
+        employer_oh_notified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the employer occupational-health team has been notified.
+        return_to_work_meeting_scheduled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a return-to-work meeting has been scheduled with the employer.
+        maternity_certificate_reference:
+          type: string
+          maxLength: 50
+          description: MAT B1 reference if the absence is pregnancy-related.
+        final_notes:
+          type: string
+          description: Free-text final notes from the clinician.
+        signature_svg:
+          type: string
+          description: Clinician electronic signature captured as an SVG path.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the clinician signed off the statement.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - statement_kind
+        - prior_med3_reference
+        - prior_self_certification_reference
+        - primary_diagnosis_text
+        - primary_diagnosis_snomed
+        - primary_diagnosis_icd10
+        - comorbid_conditions
+        - mechanism
+        - workplace_cause
+        - riddor_reference
+        - current_medications
+        - ongoing_therapy
+        - anticipated_recovery_trajectory
+        - specialist_followup_required
+        - mobility
+        - cognition
+        - mood
+        - sleep
+        - driving_capacity
+        - adl_independence
+        - fitness_statement_computed
+        - fitness_statement_final
+        - clinician_override
+        - clinician_override_reason
+        - clinician_confidence
+        - reassessment_required
+        - phased_return_applicable
+        - phased_return_template
+        - phased_return_schedule_json
+        - phased_return_support_contact
+        - workstation_review_required
+        - additional_adjustments_text
+        - review_location
+        - occupational_health_referral_made
+        - dvla_notification_required
+        - employer_oh_notified
+        - return_to_work_meeting_scheduled
+        - maternity_certificate_reference
+        - final_notes
+        - signature_svg
+      description: Clinician-issued Statement of Fitness for Work (Med 3 / fit note) authorising an employee return to work after illness, injury, or extended absence.

@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: constraint_item
+openapi: 3.1.0
+info:
+  title: Arc42 — ConstraintItem
+  version: 1.0.0
+  description: Constraint item captured in §2 Constraints of the arc42 documentation.
+paths:
+  /constraint-items:
+    get:
+      summary: List ConstraintItem records
+      operationId: listConstraintItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ConstraintItem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConstraintItem"
+    post:
+      summary: Create a new ConstraintItem
+      operationId: createConstraintItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConstraintItem"
+      responses:
+        "201":
+          description: The newly created ConstraintItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConstraintItem"
+        "400":
+          description: Validation error
+  /constraint-items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ConstraintItem by id
+      operationId: getConstraintItem
+      responses:
+        "200":
+          description: The requested ConstraintItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConstraintItem"
+        "404":
+          description: ConstraintItem not found
+    patch:
+      summary: Update an existing ConstraintItem
+      operationId: updateConstraintItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConstraintItem"
+      responses:
+        "200":
+          description: The updated ConstraintItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConstraintItem"
+        "404":
+          description: ConstraintItem not found
+    delete:
+      summary: Soft-delete a ConstraintItem
+      operationId: deleteConstraintItem
+      responses:
+        "204":
+          description: ConstraintItem deleted
+        "404":
+          description: ConstraintItem not found
+components:
+  schemas:
+    ConstraintItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        kind:
+          type: string
+          enum:
+            - technical
+            - organizational
+            - convention
+            - ""
+          description: "Kind of constraint: technical, organizational, or convention."
+        name:
+          type: string
+          description: Short name or title of the constraint.
+        description:
+          type: string
+          description: Detailed description of the constraint and its impact on the architecture.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - kind
+        - name
+        - description
+      description: Constraint item captured in §2 Constraints of the arc42 documentation.

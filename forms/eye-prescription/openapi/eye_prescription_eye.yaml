@@ -1,0 +1,184 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_eye
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionEye
+  version: 1.0.0
+  description: Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.
+paths:
+  /eye-prescription-eyes:
+    get:
+      summary: List EyePrescriptionEye records
+      operationId: listEyePrescriptionEye
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionEye records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionEye"
+    post:
+      summary: Create a new EyePrescriptionEye
+      operationId: createEyePrescriptionEye
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionEye"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionEye
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionEye"
+        "400":
+          description: Validation error
+  /eye-prescription-eyes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionEye by id
+      operationId: getEyePrescriptionEye
+      responses:
+        "200":
+          description: The requested EyePrescriptionEye
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionEye"
+        "404":
+          description: EyePrescriptionEye not found
+    patch:
+      summary: Update an existing EyePrescriptionEye
+      operationId: updateEyePrescriptionEye
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionEye"
+      responses:
+        "200":
+          description: The updated EyePrescriptionEye
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionEye"
+        "404":
+          description: EyePrescriptionEye not found
+    delete:
+      summary: Soft-delete a EyePrescriptionEye
+      operationId: deleteEyePrescriptionEye
+      responses:
+        "204":
+          description: EyePrescriptionEye deleted
+        "404":
+          description: EyePrescriptionEye not found
+components:
+  schemas:
+    EyePrescriptionEye:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_id:
+          type: string
+          format: uuid
+          description: Foreign key to the eye_prescription table.
+        eye:
+          type: string
+          enum:
+            - right
+            - left
+          description: "Which eye: right (OD) or left (OS)."
+        sphere_diopters:
+          type: number
+          format: double
+          description: Sphere power in dioptres. Negative for myopia, positive for hyperopia, range -30.00 to +30.00 in 0.25 steps.
+        cylinder_diopters:
+          type: number
+          format: double
+          description: Cylinder power in dioptres (minus-cylinder convention). Range -10.00 to 0.00 in 0.25 steps.
+        axis_degrees:
+          type: integer
+          format: int32
+          description: Cylinder axis in integer degrees, 1 to 180 (only meaningful when cylinder is non-zero).
+        addition_diopters:
+          type: number
+          format: double
+          description: Reading addition in dioptres (always positive). Range 0.00 to +4.00 in 0.25 steps.
+        intermediate_addition_diopters:
+          type: number
+          format: double
+          description: Intermediate addition for trifocal / occupational varifocal use, in dioptres.
+        prism_horizontal_diopters:
+          type: number
+          format: double
+          description: Horizontal prism magnitude in prism dioptres (PD). 0.00 if no horizontal prism.
+        base_horizontal:
+          type: string
+          enum:
+            - in
+            - out
+            - ""
+          description: "Horizontal prism base direction: in (toward nose) or out (toward temple). Empty if no horizontal prism."
+        prism_vertical_diopters:
+          type: number
+          format: double
+          description: Vertical prism magnitude in prism dioptres (PD). 0.00 if no vertical prism.
+        base_vertical:
+          type: string
+          enum:
+            - up
+            - down
+            - ""
+          description: "Vertical prism base direction: up or down. Empty if no vertical prism."
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_id
+        - eye
+        - prism_horizontal_diopters
+        - base_horizontal
+        - prism_vertical_diopters
+        - base_vertical
+      description: Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.

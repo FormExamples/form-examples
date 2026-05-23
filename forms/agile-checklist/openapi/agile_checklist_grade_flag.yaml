@@ -1,0 +1,184 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_checklist_grade_flag
+openapi: 3.1.0
+info:
+  title: Agile Checklist — AgileChecklistGradeFlag
+  version: 1.0.0
+  description: Operational flags raised by the maturity engine independently of the composite maturity level.
+paths:
+  /agile-checklist-grade-flags:
+    get:
+      summary: List AgileChecklistGradeFlag records
+      operationId: listAgileChecklistGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileChecklistGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileChecklistGradeFlag"
+    post:
+      summary: Create a new AgileChecklistGradeFlag
+      operationId: createAgileChecklistGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGradeFlag"
+      responses:
+        "201":
+          description: The newly created AgileChecklistGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeFlag"
+        "400":
+          description: Validation error
+  /agile-checklist-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileChecklistGradeFlag by id
+      operationId: getAgileChecklistGradeFlag
+      responses:
+        "200":
+          description: The requested AgileChecklistGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeFlag"
+        "404":
+          description: AgileChecklistGradeFlag not found
+    patch:
+      summary: Update an existing AgileChecklistGradeFlag
+      operationId: updateAgileChecklistGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGradeFlag"
+      responses:
+        "200":
+          description: The updated AgileChecklistGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeFlag"
+        "404":
+          description: AgileChecklistGradeFlag not found
+    delete:
+      summary: Soft-delete a AgileChecklistGradeFlag
+      operationId: deleteAgileChecklistGradeFlag
+      responses:
+        "204":
+          description: AgileChecklistGradeFlag deleted
+        "404":
+          description: AgileChecklistGradeFlag not found
+components:
+  schemas:
+    AgileChecklistGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_checklist_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        flag_id:
+          type: string
+          maxLength: 40
+          description: Stable flag identifier (e.g. F-PSYCH-SAFETY).
+        category:
+          type: string
+          enum:
+            - teams-autonomy-risk
+            - stakeholders-trust-risk
+            - practices-discipline-risk
+            - section-imbalance
+            - finished-work-risk
+            - experimentation-blocked
+            - learning-stalled
+            - psychological-safety-risk
+            - insufficient-data
+            - other
+            - ""
+          description: "Flag category: teams-autonomy-risk, stakeholders-trust-risk, practices-discipline-risk, section-imbalance, finished-work-risk, experimentation-blocked, learning-stalled, psychological-safety-risk, insufficient-data, or other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: "Operational priority: low, medium, or high."
+        section:
+          type: string
+          enum:
+            - teams
+            - stakeholders
+            - practices
+            - ""
+          description: "Section the flag is anchored to: teams, stakeholders, or practices. Empty for cross-cutting flags."
+        triggering_items:
+          type: string
+          maxLength: 200
+          description: "Comma-separated list of stable item slugs (e.g. \"t08,p12\") that triggered this flag."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of the operational concern.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested coaching action to address the flag.
+      required:
+        - created_at
+        - updated_at
+        - agile_checklist_grade_id
+        - flag_id
+        - category
+        - priority
+        - section
+        - triggering_items
+        - description
+        - suggested_action
+      description: Operational flags raised by the maturity engine independently of the composite maturity level.

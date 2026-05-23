@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: smoking_alcohol
+openapi: 3.1.0
+info:
+  title: Heart Health Check — SmokingAlcohol
+  version: 1.0.0
+  description: Tobacco and alcohol consumption data.
+paths:
+  /smoking-alcohols:
+    get:
+      summary: List SmokingAlcohol records
+      operationId: listSmokingAlcohol
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SmokingAlcohol records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SmokingAlcohol"
+    post:
+      summary: Create a new SmokingAlcohol
+      operationId: createSmokingAlcohol
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SmokingAlcohol"
+      responses:
+        "201":
+          description: The newly created SmokingAlcohol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SmokingAlcohol"
+        "400":
+          description: Validation error
+  /smoking-alcohols/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SmokingAlcohol by id
+      operationId: getSmokingAlcohol
+      responses:
+        "200":
+          description: The requested SmokingAlcohol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SmokingAlcohol"
+        "404":
+          description: SmokingAlcohol not found
+    patch:
+      summary: Update an existing SmokingAlcohol
+      operationId: updateSmokingAlcohol
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SmokingAlcohol"
+      responses:
+        "200":
+          description: The updated SmokingAlcohol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SmokingAlcohol"
+        "404":
+          description: SmokingAlcohol not found
+    delete:
+      summary: Soft-delete a SmokingAlcohol
+      operationId: deleteSmokingAlcohol
+      responses:
+        "204":
+          description: SmokingAlcohol deleted
+        "404":
+          description: SmokingAlcohol not found
+components:
+  schemas:
+    SmokingAlcohol:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        smoking_status:
+          type: string
+          enum:
+            - nonSmoker
+            - exSmoker
+            - lightSmoker
+            - moderateSmoker
+            - heavySmoker
+            - ""
+          description: "Smoking status: nonSmoker, exSmoker, lightSmoker, moderateSmoker, heavySmoker, or empty."
+        cigarettes_per_day:
+          type: integer
+          format: int32
+          description: Number of cigarettes smoked per day (current smokers only).
+        years_since_quit:
+          type: integer
+          format: int32
+          description: Years since quitting smoking (ex-smokers only).
+        alcohol_units_per_week:
+          type: number
+          format: double
+          description: Alcohol consumption in UK units per week.
+        alcohol_frequency:
+          type: string
+          enum:
+            - never
+            - monthly
+            - twoToFourPerMonth
+            - twoToThreePerWeek
+            - fourOrMorePerWeek
+            - ""
+          description: Frequency of alcohol consumption.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - smoking_status
+        - alcohol_frequency
+      description: Tobacco and alcohol consumption data.

@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_attorney
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaAttorney
+  version: 1.0.0
+  description: Join table linking an LPA to its 1-4 named attorneys, with their order on the form.
+paths:
+  /lpa-attorneys:
+    get:
+      summary: List LpaAttorney records
+      operationId: listLpaAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaAttorney records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaAttorney"
+    post:
+      summary: Create a new LpaAttorney
+      operationId: createLpaAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaAttorney"
+      responses:
+        "201":
+          description: The newly created LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "400":
+          description: Validation error
+  /lpa-attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaAttorney by id
+      operationId: getLpaAttorney
+      responses:
+        "200":
+          description: The requested LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "404":
+          description: LpaAttorney not found
+    patch:
+      summary: Update an existing LpaAttorney
+      operationId: updateLpaAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaAttorney"
+      responses:
+        "200":
+          description: The updated LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "404":
+          description: LpaAttorney not found
+    delete:
+      summary: Soft-delete a LpaAttorney
+      operationId: deleteLpaAttorney
+      responses:
+        "204":
+          description: LpaAttorney deleted
+        "404":
+          description: LpaAttorney not found
+components:
+  schemas:
+    LpaAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA.
+        attorney_id:
+          type: string
+          format: uuid
+          description: Foreign key to the attorney.
+        order_position:
+          type: integer
+          format: int32
+          description: Order position 1-4 in which this attorney appears on the LP1H form.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - attorney_id
+        - order_position
+      description: Join table linking an LPA to its 1-4 named attorneys, with their order on the form.

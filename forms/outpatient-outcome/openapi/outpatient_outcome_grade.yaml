@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_grade
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeGrade
+  version: 1.0.0
+  description: "Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four)."
+paths:
+  /outpatient-outcome-grades:
+    get:
+      summary: List OutpatientOutcomeGrade records
+      operationId: listOutpatientOutcomeGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeGrade"
+    post:
+      summary: Create a new OutpatientOutcomeGrade
+      operationId: createOutpatientOutcomeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGrade"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGrade"
+        "400":
+          description: Validation error
+  /outpatient-outcome-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeGrade by id
+      operationId: getOutpatientOutcomeGrade
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGrade"
+        "404":
+          description: OutpatientOutcomeGrade not found
+    patch:
+      summary: Update an existing OutpatientOutcomeGrade
+      operationId: updateOutpatientOutcomeGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGrade"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGrade"
+        "404":
+          description: OutpatientOutcomeGrade not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeGrade
+      operationId: deleteOutpatientOutcomeGrade
+      responses:
+        "204":
+          description: OutpatientOutcomeGrade deleted
+        "404":
+          description: OutpatientOutcomeGrade not found
+components:
+  schemas:
+    OutpatientOutcomeGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        overall_grade:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: Overall OOCG grade A (best) - E (worst); equals the worst per-domain grade.
+        clinical_grade:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: Clinical-domain grade A-E (A=Resolved, B=Improved, C=Unchanged, D=Worsened, E=Died).
+        prom_grade:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: PROM-domain composite grade A-E over EQ-5D-5L, GRC, and PROMIS.
+        prem_grade:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: PREM-domain grade A-E from FFT response.
+        operational_grade:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: Operational-domain grade A-E from attendance outcome + wait vs target + modality.
+        result_notes:
+          type: string
+          description: Free-text clinician notes accompanying the grading result.
+        graded_at:
+          type: string
+          format: date-time
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - overall_grade
+        - clinical_grade
+        - prom_grade
+        - prem_grade
+        - operational_grade
+        - result_notes
+        - graded_at
+      description: "Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four)."

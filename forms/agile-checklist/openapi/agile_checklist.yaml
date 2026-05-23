@@ -1,0 +1,386 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_checklist
+openapi: 3.1.0
+info:
+  title: Agile Checklist — AgileChecklist
+  version: 1.0.0
+  description: One row per submission. Stores answers to the 57 agile-checklist behaviour items grouped by section (Teams t01-t25, Stakeholders s01-s14, Practices p01-p18). Each column accepts yes / no / not-applicable / empty-string. Composite maturity is computed in agile_checklist_grade.
+paths:
+  /agile-checklists:
+    get:
+      summary: List AgileChecklist records
+      operationId: listAgileChecklist
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileChecklist records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileChecklist"
+    post:
+      summary: Create a new AgileChecklist
+      operationId: createAgileChecklist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklist"
+      responses:
+        "201":
+          description: The newly created AgileChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklist"
+        "400":
+          description: Validation error
+  /agile-checklists/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileChecklist by id
+      operationId: getAgileChecklist
+      responses:
+        "200":
+          description: The requested AgileChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklist"
+        "404":
+          description: AgileChecklist not found
+    patch:
+      summary: Update an existing AgileChecklist
+      operationId: updateAgileChecklist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklist"
+      responses:
+        "200":
+          description: The updated AgileChecklist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklist"
+        "404":
+          description: AgileChecklist not found
+    delete:
+      summary: Soft-delete a AgileChecklist
+      operationId: deleteAgileChecklist
+      responses:
+        "204":
+          description: AgileChecklist deleted
+        "404":
+          description: AgileChecklist not found
+components:
+  schemas:
+    AgileChecklist:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        respondent_id:
+          type: string
+          format: uuid
+          description: Foreign key to the respondent who completed this checklist.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+          description: "Lifecycle status: draft, submitted, or reviewed."
+        assessment_date:
+          type: string
+          format: date
+          description: Date on which the assessment was completed.
+        assessment_period:
+          type: string
+          enum:
+            - sprint
+            - quarter
+            - half-year
+            - annual
+            - ad-hoc
+            - ""
+          description: "Cadence of the assessment: sprint, quarter, half-year, annual, or ad-hoc."
+        t01_problems_to_solve:
+          type: string
+          description: "Teams item 1: teams have problems to solve rather than lists of tasks to perform."
+        t02_decisions_without_manager:
+          type: string
+          description: "Teams item 2: teams generally make decisions without a manager's approval."
+        t03_adopt_and_improve_practices:
+          type: string
+          description: "Teams item 3: teams adopt appropriate practices and improve them over time."
+        t04_actively_coordinate:
+          type: string
+          description: "Teams item 4: teams working on a common product actively coordinate."
+        t05_openly_share_ideas:
+          type: string
+          description: "Teams item 5: teams openly share new ideas and experiences with others."
+        t06_decide_how_to_execute:
+          type: string
+          description: "Teams item 6: teams decide how to execute work."
+        t07_act_on_feedback:
+          type: string
+          description: "Teams item 7: teams quickly act on stakeholder feedback to improve the product."
+        t08_rarely_wait:
+          type: string
+          description: "Teams item 8: teams rarely wait for work to be completed by others."
+        t09_fully_complete_work:
+          type: string
+          description: "Teams item 9: teams make every effort to fully complete all planned work."
+        t10_manage_own_performance:
+          type: string
+          description: "Teams item 10: teams monitor and manage their own performance."
+        t11_understand_agile:
+          type: string
+          description: "Teams item 11: teams understand the benefits and challenges of agile."
+        t12_high_quality:
+          type: string
+          description: "Teams item 12: teams responsibly deliver high quality work."
+        t13_welcome_change:
+          type: string
+          description: "Teams item 13: teams welcome rather than resist changing requirements."
+        t14_collaborate_to_finish:
+          type: string
+          description: "Teams item 14: teams collaborate to finish items."
+        t15_admit_mistakes:
+          type: string
+          description: "Teams item 15: teams admit challenges and mistakes."
+        t16_work_outside_specialty:
+          type: string
+          description: "Teams item 16: teams can work outside their specialties to achieve goals."
+        t17_seek_new_skills:
+          type: string
+          description: "Teams item 17: teams seek to learn relevant, new skills."
+        t18_improve_skills:
+          type: string
+          description: "Teams item 18: teams continue to learn and improve skills."
+        t19_improve_ways_of_working:
+          type: string
+          description: "Teams item 19: teams actively seek ways to improve ways of working."
+        t20_various_ways_communicating:
+          type: string
+          description: "Teams item 20: teams choose and use various ways of communicating."
+        t21_received_basic_training:
+          type: string
+          description: "Teams item 21: teams have all received basic training on agile concepts."
+        t22_safe_to_dissent:
+          type: string
+          description: "Teams item 22: teams feel safe to express dissenting views."
+        t23_start_with_open_issues:
+          type: string
+          description: "Teams item 23: teams start work even when some open issues remain."
+        t24_motivated:
+          type: string
+          description: "Teams item 24: teams are motivated by performing their work."
+        t25_pride_in_craft:
+          type: string
+          description: "Teams item 25: teams take pride in their craft."
+        s01_know_priority_factors:
+          type: string
+          description: "Stakeholders item 1: stakeholders know which factors determine priorities and deadlines."
+        s02_accept_plan_ranges:
+          type: string
+          description: "Stakeholders item 2: stakeholders accept plans that are expressed with ranges."
+        s03_accept_plan_changes:
+          type: string
+          description: "Stakeholders item 3: stakeholders and the team accept that plans may need to change."
+        s04_evaluate_product:
+          type: string
+          description: "Stakeholders item 4: stakeholders have frequent opportunities to evaluate the product."
+        s05_champion_agile:
+          type: string
+          description: "Stakeholders item 5: stakeholders champion agile values and agile principles."
+        s06_respect_quality:
+          type: string
+          description: "Stakeholders item 6: stakeholders see quality as a right that the team has and they respect it."
+        s07_delegate_authority:
+          type: string
+          description: "Stakeholders item 7: stakeholders delegate authority to teams."
+        s08_keep_authority_delegated:
+          type: string
+          description: "Stakeholders item 8: stakeholders don't take authority back at the first sign of trouble."
+        s09_support_experiments:
+          type: string
+          description: "Stakeholders item 9: stakeholders support teams in experimenting."
+        s10_no_punish_experiments:
+          type: string
+          description: "Stakeholders item 10: stakeholders don't punish an unsuccessful experiment."
+        s11_communicate_agile_goals:
+          type: string
+          description: "Stakeholders item 11: stakeholders communicate what they hope to achieve by becoming more agile."
+        s12_encourage_new_skills:
+          type: string
+          description: "Stakeholders item 12: stakeholders actively encourage teams to learn new skills."
+        s13_encourage_new_ways:
+          type: string
+          description: "Stakeholders item 13: stakeholders actively encourage teams to learn new ways of working."
+        s14_develop_people:
+          type: string
+          description: "Stakeholders item 14: stakeholders develop people rather than manage their performance."
+        p01_early_good_release:
+          type: string
+          description: "Practices item 1: the early release of a good product is generally favoured over the later release of a perfect product."
+        p02_educated_sponsor:
+          type: string
+          description: "Practices item 2: an educated executive sponsor ensures the change agent is empowered to make decisions."
+        p03_quick_decisions:
+          type: string
+          description: "Practices item 3: decisions are made quickly, sometimes with incomplete knowledge."
+        p04_plans_data_based:
+          type: string
+          description: "Practices item 4: plans are based on data and experience."
+        p05_proactive_dependencies:
+          type: string
+          description: "Practices item 5: dependencies between teams are proactively identified and addressed."
+        p06_good_intentions:
+          type: string
+          description: "Practices item 6: people are assumed to have acted with good intentions even when something goes wrong."
+        p07_reciprocal_trust:
+          type: string
+          description: "Practices item 7: trust is reciprocal within the team and with stakeholders."
+        p08_docs_plus_conversations:
+          type: string
+          description: "Practices item 8: although formal documentation may exist, it is supplemented by conversations to the extent possible."
+        p09_update_plans:
+          type: string
+          description: "Practices item 9: as more is learned, plans are updated rather than remaining based on outdated information."
+        p10_non_punitive:
+          type: string
+          description: "Practices item 10: a non-punitive attitude leads to the team's willingness to experiment with new tools, technologies, and ways of working."
+        p11_outside_groups_aware:
+          type: string
+          description: "Practices item 11: outside groups that partner with the team are aware of how this new way of working may affect their interactions."
+        p12_finished_over_wip:
+          type: string
+          description: "Practices item 12: the organisation places a higher value on finished work than it does on the number of work items in process."
+        p13_quality_over_deadline:
+          type: string
+          description: "Practices item 13: quality is rarely, if ever, sacrificed to meet a deadline."
+        p14_solution_over_blame:
+          type: string
+          description: "Practices item 14: when problems arise between teams, everyone focuses on a solution rather than blame."
+        p15_change_agents_in_place:
+          type: string
+          description: "Practices item 15: change agents are in place to help support and guide the transition."
+        p16_agile_beyond_origin:
+          type: string
+          description: "Practices item 16: agile practices are being implemented beyond the group in which agile began."
+        p17_one_team:
+          type: string
+          description: "Practices item 17: most people are assigned to only one team."
+        p18_honor_commitments:
+          type: string
+          description: "Practices item 18: people honour commitments and keep promises."
+        overall_notes:
+          type: string
+          description: Free-text overall notes captured on the summary step.
+      required:
+        - created_at
+        - updated_at
+        - respondent_id
+        - status
+        - assessment_period
+        - t01_problems_to_solve
+        - t02_decisions_without_manager
+        - t03_adopt_and_improve_practices
+        - t04_actively_coordinate
+        - t05_openly_share_ideas
+        - t06_decide_how_to_execute
+        - t07_act_on_feedback
+        - t08_rarely_wait
+        - t09_fully_complete_work
+        - t10_manage_own_performance
+        - t11_understand_agile
+        - t12_high_quality
+        - t13_welcome_change
+        - t14_collaborate_to_finish
+        - t15_admit_mistakes
+        - t16_work_outside_specialty
+        - t17_seek_new_skills
+        - t18_improve_skills
+        - t19_improve_ways_of_working
+        - t20_various_ways_communicating
+        - t21_received_basic_training
+        - t22_safe_to_dissent
+        - t23_start_with_open_issues
+        - t24_motivated
+        - t25_pride_in_craft
+        - s01_know_priority_factors
+        - s02_accept_plan_ranges
+        - s03_accept_plan_changes
+        - s04_evaluate_product
+        - s05_champion_agile
+        - s06_respect_quality
+        - s07_delegate_authority
+        - s08_keep_authority_delegated
+        - s09_support_experiments
+        - s10_no_punish_experiments
+        - s11_communicate_agile_goals
+        - s12_encourage_new_skills
+        - s13_encourage_new_ways
+        - s14_develop_people
+        - p01_early_good_release
+        - p02_educated_sponsor
+        - p03_quick_decisions
+        - p04_plans_data_based
+        - p05_proactive_dependencies
+        - p06_good_intentions
+        - p07_reciprocal_trust
+        - p08_docs_plus_conversations
+        - p09_update_plans
+        - p10_non_punitive
+        - p11_outside_groups_aware
+        - p12_finished_over_wip
+        - p13_quality_over_deadline
+        - p14_solution_over_blame
+        - p15_change_agents_in_place
+        - p16_agile_beyond_origin
+        - p17_one_team
+        - p18_honor_commitments
+        - overall_notes
+      description: One row per submission. Stores answers to the 57 agile-checklist behaviour items grouped by section (Teams t01-t25, Stakeholders s01-s14, Practices p01-p18). Each column accepts yes / no / not-applicable / empty-string. Composite maturity is computed in agile_checklist_grade.

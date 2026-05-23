@@ -1,0 +1,482 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: issue_tracker
+openapi: 3.1.0
+info:
+  title: Issue Tracker — IssueTracker
+  version: 1.0.0
+  description: A reportable issue captured via a 10-step single-page wizard. Holds reporter metadata, the nine SOAP-style sections, and the seven raw input scores. Computed scores live in the issue_tracker_grade child table.
+paths:
+  /issue-trackers:
+    get:
+      summary: List IssueTracker records
+      operationId: listIssueTracker
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of IssueTracker records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IssueTracker"
+    post:
+      summary: Create a new IssueTracker
+      operationId: createIssueTracker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTracker"
+      responses:
+        "201":
+          description: The newly created IssueTracker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTracker"
+        "400":
+          description: Validation error
+  /issue-trackers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one IssueTracker by id
+      operationId: getIssueTracker
+      responses:
+        "200":
+          description: The requested IssueTracker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTracker"
+        "404":
+          description: IssueTracker not found
+    patch:
+      summary: Update an existing IssueTracker
+      operationId: updateIssueTracker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTracker"
+      responses:
+        "200":
+          description: The updated IssueTracker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTracker"
+        "404":
+          description: IssueTracker not found
+    delete:
+      summary: Soft-delete a IssueTracker
+      operationId: deleteIssueTracker
+      responses:
+        "204":
+          description: IssueTracker deleted
+        "404":
+          description: IssueTracker not found
+components:
+  schemas:
+    IssueTracker:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        reporter_id:
+          type: string
+          format: uuid
+          description: Foreign key to the reporter who originally raised the issue.
+        status:
+          type: string
+          enum:
+            - draft
+            - open
+            - in-progress
+            - blocked
+            - resolved
+            - closed
+            - duplicate
+            - cancelled
+          description: "Lifecycle status: draft, open, in-progress, blocked, resolved, closed, duplicate, cancelled."
+        reported_at:
+          type: string
+          format: date-time
+          description: Timestamp the issue was first recorded in this tracker.
+        discovered_at:
+          type: string
+          format: date-time
+          description: Timestamp the issue was first discovered in the wild.
+        started_at:
+          type: string
+          format: date-time
+          description: Timestamp work to remediate the issue began.
+        resolved_at:
+          type: string
+          format: date-time
+          description: Timestamp the issue was resolved.
+        issue_category:
+          type: string
+          enum:
+            - software-defect
+            - service-outage
+            - performance
+            - security
+            - data-protection
+            - clinical-safety
+            - workplace-safety
+            - medical-device
+            - regulatory
+            - project-blocker
+            - customer-complaint
+            - hardware-fault
+            - process
+            - other
+            - ""
+          description: "Issue category: software-defect, service-outage, security, clinical-safety, etc."
+        environment:
+          type: string
+          enum:
+            - dev
+            - test
+            - staging
+            - production
+            - on-prem
+            - field
+            - ""
+          description: "Environment where the issue occurred: dev, test, staging, production, on-prem, field."
+        system_name:
+          type: string
+          maxLength: 255
+          description: Name of the affected system or service.
+        component:
+          type: string
+          maxLength: 255
+          description: Specific component within the system that is affected.
+        customer_or_project_tag:
+          type: string
+          maxLength: 255
+          description: Customer name, project tag, or tenant identifier the issue is associated with.
+        external_reference:
+          type: string
+          maxLength: 255
+          description: "External reference: ticket id, incident id, change request, RIDDOR or LFPSE id, etc."
+        cc_summary:
+          type: string
+          maxLength: 500
+          description: "Section CC: one-sentence summary of the problem as reported."
+        cc_long_description:
+          type: string
+          description: "Section CC: free-text long description of the chief complaint."
+        cc_reported_by_name:
+          type: string
+          maxLength: 255
+          description: "Section CC: name of the person who reported the chief complaint (may differ from the reporter row)."
+        cc_reported_via:
+          type: string
+          enum:
+            - self
+            - colleague
+            - customer
+            - monitoring-alert
+            - ticket
+            - phone
+            - email
+            - chat
+            - in-person
+            - other
+            - ""
+          description: "Section CC: channel through which the chief complaint was reported."
+        pt_discoverer_name:
+          type: string
+          maxLength: 255
+          description: "Section Pt: name of the person who discovered the issue."
+        pt_affected_users_count:
+          type: integer
+          format: int32
+          description: "Section Pt: estimated count of users affected."
+        pt_affected_user_groups:
+          type: string
+          maxLength: 500
+          description: "Section Pt: free-text list of affected user groups, customer segments, or cohorts."
+        pt_assignees:
+          type: string
+          maxLength: 500
+          description: "Section Pt: free-text list of assignees responsible for working the issue."
+        pt_stakeholders_to_inform:
+          type: string
+          maxLength: 500
+          description: "Section Pt: free-text list of stakeholders to inform about progress."
+        pt_observers:
+          type: string
+          maxLength: 500
+          description: "Section Pt: free-text list of observers and CC recipients."
+        sx_external_signals:
+          type: string
+          description: "Section Sx: external signals observed by users — what is going wrong on the surface."
+        sx_alert_ids:
+          type: string
+          maxLength: 500
+          description: "Section Sx: identifiers of monitoring alerts that fired (Sentry, PagerDuty, Datadog, CloudWatch)."
+        sx_error_messages:
+          type: string
+          description: "Section Sx: verbatim error messages, status codes, or stack traces."
+        sx_screenshots_url:
+          type: string
+          maxLength: 500
+          description: "Section Sx: URL of an attached screenshot or screen capture."
+        sx_logs_url:
+          type: string
+          maxLength: 500
+          description: "Section Sx: URL of attached log file or log query."
+        sx_first_observed_at:
+          type: string
+          format: date-time
+          description: "Section Sx: timestamp of the first observed symptom."
+        fx_broken_components:
+          type: string
+          description: "Section Fx: free-text list of broken components, services, or pipelines."
+        fx_failed_services:
+          type: string
+          maxLength: 500
+          description: "Section Fx: list of failed services with their statuses."
+        fx_stuck_processes:
+          type: string
+          maxLength: 500
+          description: "Section Fx: list of stuck processes, queues, or batch jobs."
+        fx_hardware_faults:
+          type: string
+          maxLength: 500
+          description: "Section Fx: hardware-level faults — disk, network, sensor, instrument."
+        fx_data_corruption:
+          type: string
+          enum:
+            - none
+            - suspected
+            - confirmed
+            - unknown
+            - ""
+          description: "Section Fx: data-corruption status — none, suspected, confirmed, or unknown."
+        hx_related_issues:
+          type: string
+          maxLength: 500
+          description: "Section Hx: identifiers of related or prior issues."
+        hx_prior_occurrences:
+          type: integer
+          format: int32
+          description: "Section Hx: count of prior occurrences of the same issue."
+        hx_recent_change_url:
+          type: string
+          maxLength: 500
+          description: "Section Hx: URL of a recent change suspected to have caused the issue."
+        hx_references:
+          type: string
+          description: "Section Hx: free-text references — runbooks, RFCs, post-mortems."
+        hx_timeline:
+          type: string
+          description: "Section Hx: free-text timeline of relevant events."
+        ix_hypotheses:
+          type: string
+          description: "Section Ix: hypotheses being investigated."
+        ix_repro_steps:
+          type: string
+          description: "Section Ix: reproduction steps tried so far."
+        ix_diagnostic_queries:
+          type: string
+          description: "Section Ix: diagnostic queries, profiles, traces, or scripts used."
+        ix_tests_run:
+          type: string
+          maxLength: 500
+          description: "Section Ix: list of tests executed during investigation."
+        ix_blocking_unknowns:
+          type: string
+          description: "Section Ix: known unknowns that are blocking diagnosis."
+        dx_root_cause:
+          type: string
+          description: "Section Dx: root-cause statement."
+        dx_contributing_causes:
+          type: string
+          description: "Section Dx: contributing or cascading causes."
+        dx_scope:
+          type: string
+          enum:
+            - single-instance
+            - single-service
+            - multiple-services
+            - whole-system
+            - organisation-wide
+            - ""
+          description: "Section Dx: blast radius — single-instance, single-service, multiple-services, whole-system, or organisation-wide."
+        dx_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - partial
+            - ""
+          description: "Section Dx: whether the diagnosis is confirmed: yes, no, or partial."
+        tx_mitigation_steps:
+          type: string
+          description: "Section Tx: mitigation steps taken to limit impact."
+        tx_fix_plan:
+          type: string
+          description: "Section Tx: planned permanent fix."
+        tx_workaround:
+          type: string
+          description: "Section Tx: workaround applied while the permanent fix is in flight."
+        tx_rollback_plan:
+          type: string
+          description: "Section Tx: rollback plan if the permanent fix fails."
+        tx_communication_plan:
+          type: string
+          maxLength: 500
+          description: "Section Tx: communication plan — who tells whom, when, and through what channel."
+        px_expected_resolution_at:
+          type: string
+          format: date-time
+          description: "Section Px: expected resolution timestamp."
+        px_residual_risk:
+          type: string
+          description: "Section Px: residual risk that remains after the fix."
+        px_monitoring_plan:
+          type: string
+          description: "Section Px: monitoring plan to detect recurrence."
+        px_recurrence_likelihood:
+          type: string
+          enum:
+            - very-low
+            - low
+            - moderate
+            - high
+            - very-high
+            - ""
+          description: "Section Px: likelihood the issue will recur — very-low, low, moderate, high, very-high."
+        px_lessons_learned:
+          type: string
+          description: "Section Px: lessons learned to feed into a post-mortem."
+        score_by_priority_rank:
+          type: integer
+          format: int32
+          description: "Score 1 of 7: priority rank — 1 = do first, 2 = do second, ... (capped at 999)."
+        score_by_severity_of_impact:
+          type: integer
+          format: int32
+          description: "Score 2 of 7: severity of impact 1 (minimal) to 5 (catastrophic), per Saffir-Simpson scale."
+        score_by_magnitude_of_damage:
+          type: integer
+          format: int32
+          description: "Score 3 of 7: magnitude of damage 1 (minor) to 10 (total destruction), per Richter earthquake scale."
+        score_by_harm_grade:
+          type: integer
+          format: int32
+          description: "Score 4 of 7: NHS LFPSE harm grade 0 (no harm) to 4 (fatal)."
+        score_by_failure_condition:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: "Score 5 of 7: aviation FAA / EASA failure condition A (catastrophic) to E (no effect)."
+        score_by_moscow_requirement:
+          type: integer
+          format: int32
+          description: "Score 6 of 7: MoSCoW prioritisation 1 (must) to 4 (won't)."
+        score_by_frequency_percent:
+          type: number
+          format: double
+          description: "Score 7 of 7: frequency of occurrence as a percentage of usage affected, 0 to 100."
+      required:
+        - created_at
+        - updated_at
+        - reporter_id
+        - status
+        - reported_at
+        - issue_category
+        - environment
+        - system_name
+        - component
+        - customer_or_project_tag
+        - external_reference
+        - cc_summary
+        - cc_long_description
+        - cc_reported_by_name
+        - cc_reported_via
+        - pt_discoverer_name
+        - pt_affected_user_groups
+        - pt_assignees
+        - pt_stakeholders_to_inform
+        - pt_observers
+        - sx_external_signals
+        - sx_alert_ids
+        - sx_error_messages
+        - sx_screenshots_url
+        - sx_logs_url
+        - fx_broken_components
+        - fx_failed_services
+        - fx_stuck_processes
+        - fx_hardware_faults
+        - fx_data_corruption
+        - hx_related_issues
+        - hx_recent_change_url
+        - hx_references
+        - hx_timeline
+        - ix_hypotheses
+        - ix_repro_steps
+        - ix_diagnostic_queries
+        - ix_tests_run
+        - ix_blocking_unknowns
+        - dx_root_cause
+        - dx_contributing_causes
+        - dx_scope
+        - dx_confirmed
+        - tx_mitigation_steps
+        - tx_fix_plan
+        - tx_workaround
+        - tx_rollback_plan
+        - tx_communication_plan
+        - px_residual_risk
+        - px_monitoring_plan
+        - px_recurrence_likelihood
+        - px_lessons_learned
+        - score_by_failure_condition
+      description: A reportable issue captured via a 10-step single-page wizard. Holds reporter metadata, the nine SOAP-style sections, and the seven raw input scores. Computed scores live in the issue_tracker_grade child table.

@@ -1,0 +1,206 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: First Responder Assessment — Grade
+  version: 1.0.0
+  description: Computed first responder competency grading result. Domain competency levels and overall fitness decision. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        physical_fitness_level:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Aggregated physical fitness competency level.
+        clinical_skills_level:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Aggregated clinical skills competency level.
+        equipment_vehicle_level:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Aggregated equipment and vehicle competency level.
+        communication_level:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Aggregated communication competency level.
+        psychological_level:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Aggregated psychological readiness competency level.
+        overall_competency:
+          type: string
+          enum:
+            - not-competent
+            - developing
+            - competent
+            - expert
+            - ""
+          description: Overall competency across all domains.
+        overall_fitness:
+          type: string
+          enum:
+            - fit-for-duty
+            - fit-with-restrictions
+            - temporarily-unfit
+            - permanently-unfit
+            - ""
+          description: "Overall fitness decision: fit-for-duty, fit-with-restrictions, temporarily-unfit, permanently-unfit, or empty."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - physical_fitness_level
+        - clinical_skills_level
+        - equipment_vehicle_level
+        - communication_level
+        - psychological_level
+        - overall_competency
+        - overall_fitness
+        - graded_at
+      description: Computed first responder competency grading result. Domain competency levels and overall fitness decision. One-to-one child of assessment.

@@ -1,0 +1,200 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: Medical Information Form For Air Travel — Patient
+  version: 1.0.0
+  description: Passenger (MEDIF subject) demographic and identity information.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Passenger full legal name as on travel document.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth.
+        sex_at_birth:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: "Sex at birth: female, male, intersex, or unknown."
+        nationality_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Nationality as ISO 3166-1 alpha-2 country code.
+        passport_number:
+          type: string
+          description: Passport number used for the booking.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 12
+          description: United Kingdom NHS number, if applicable.
+        national_health_id:
+          type: string
+          description: National health identifier other than UK NHS, if applicable.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number including international dialling code.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country of residence as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code of residence.
+        emergency_contact_name:
+          type: string
+          description: Emergency contact name.
+        emergency_contact_relationship:
+          type: string
+          description: Emergency contact relationship to the passenger.
+        emergency_contact_phone:
+          type: string
+          description: Emergency contact phone number.
+        weight_as_kg:
+          type: number
+          format: double
+          description: Body weight in kilograms (for stretcher / seat planning).
+        height_as_cm:
+          type: number
+          format: double
+          description: Body height in centimetres.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - sex_at_birth
+        - passport_number
+        - national_health_id
+        - email
+        - phone
+        - postal_address_as_full_text
+        - postcode
+        - emergency_contact_name
+        - emergency_contact_relationship
+        - emergency_contact_phone
+      description: Passenger (MEDIF subject) demographic and identity information.

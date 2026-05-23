@@ -1,0 +1,204 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_conditions
+openapi: 3.1.0
+info:
+  title: Heart Health Check — MedicalConditions
+  version: 1.0.0
+  description: Pre-existing medical conditions and medications relevant to cardiovascular risk.
+paths:
+  /medical-conditionses:
+    get:
+      summary: List MedicalConditions records
+      operationId: listMedicalConditions
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalConditions records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalConditions"
+    post:
+      summary: Create a new MedicalConditions
+      operationId: createMedicalConditions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalConditions"
+      responses:
+        "201":
+          description: The newly created MedicalConditions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalConditions"
+        "400":
+          description: Validation error
+  /medical-conditionses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalConditions by id
+      operationId: getMedicalConditions
+      responses:
+        "200":
+          description: The requested MedicalConditions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalConditions"
+        "404":
+          description: MedicalConditions not found
+    patch:
+      summary: Update an existing MedicalConditions
+      operationId: updateMedicalConditions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalConditions"
+      responses:
+        "200":
+          description: The updated MedicalConditions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalConditions"
+        "404":
+          description: MedicalConditions not found
+    delete:
+      summary: Soft-delete a MedicalConditions
+      operationId: deleteMedicalConditions
+      responses:
+        "204":
+          description: MedicalConditions deleted
+        "404":
+          description: MedicalConditions not found
+components:
+  schemas:
+    MedicalConditions:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        has_diabetes:
+          type: string
+          enum:
+            - "no"
+            - type1
+            - type2
+            - ""
+          description: "Diabetes status: no, type1, type2, or empty string."
+        has_atrial_fibrillation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patient has atrial fibrillation.
+        has_rheumatoid_arthritis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Has rheumatoid arthritis. One of: yes, no."
+        has_chronic_kidney_disease:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patient has CKD stage 3+.
+        has_migraine:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Has migraine. One of: yes, no."
+        has_severe_mental_illness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Has severe mental illness. One of: yes, no."
+        has_erectile_dysfunction:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patient has erectile dysfunction (male only).
+        on_atypical_antipsychotic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patient is on atypical antipsychotic medication.
+        on_corticosteroids:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patient is on regular corticosteroids.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - has_diabetes
+        - has_atrial_fibrillation
+        - has_rheumatoid_arthritis
+        - has_chronic_kidney_disease
+        - has_migraine
+        - has_severe_mental_illness
+        - has_erectile_dysfunction
+        - on_atypical_antipsychotic
+        - on_corticosteroids
+      description: Pre-existing medical conditions and medications relevant to cardiovascular risk.

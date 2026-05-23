@@ -1,0 +1,252 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_checklist_grade
+openapi: 3.1.0
+info:
+  title: Agile Checklist — AgileChecklistGrade
+  version: 1.0.0
+  description: Computed grading and signed-off action plan. One-to-one with agile_checklist.
+paths:
+  /agile-checklist-grades:
+    get:
+      summary: List AgileChecklistGrade records
+      operationId: listAgileChecklistGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileChecklistGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileChecklistGrade"
+    post:
+      summary: Create a new AgileChecklistGrade
+      operationId: createAgileChecklistGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGrade"
+      responses:
+        "201":
+          description: The newly created AgileChecklistGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGrade"
+        "400":
+          description: Validation error
+  /agile-checklist-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileChecklistGrade by id
+      operationId: getAgileChecklistGrade
+      responses:
+        "200":
+          description: The requested AgileChecklistGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGrade"
+        "404":
+          description: AgileChecklistGrade not found
+    patch:
+      summary: Update an existing AgileChecklistGrade
+      operationId: updateAgileChecklistGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGrade"
+      responses:
+        "200":
+          description: The updated AgileChecklistGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGrade"
+        "404":
+          description: AgileChecklistGrade not found
+    delete:
+      summary: Soft-delete a AgileChecklistGrade
+      operationId: deleteAgileChecklistGrade
+      responses:
+        "204":
+          description: AgileChecklistGrade deleted
+        "404":
+          description: AgileChecklistGrade not found
+components:
+  schemas:
+    AgileChecklistGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_checklist_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent checklist (unique, 1:1).
+        answered_count:
+          type: integer
+          format: int32
+          description: Total number of items (0-57) that received an answer of yes / no / not-applicable.
+        teams_yes_count:
+          type: integer
+          format: int32
+          description: Number of Teams items (0-25) answered yes.
+        teams_applicable_count:
+          type: integer
+          format: int32
+          description: Number of Teams items (0-25) answered yes or no (excludes not-applicable and unanswered).
+        teams_percent:
+          type: number
+          format: double
+          description: Teams section percentage of yes answers over applicable answers; NULL if no items applicable.
+        stakeholders_yes_count:
+          type: integer
+          format: int32
+          description: Number of Stakeholders items (0-14) answered yes.
+        stakeholders_applicable_count:
+          type: integer
+          format: int32
+          description: Number of Stakeholders items (0-14) answered yes or no.
+        stakeholders_percent:
+          type: number
+          format: double
+          description: Stakeholders section percentage of yes answers over applicable answers; NULL if no items applicable.
+        practices_yes_count:
+          type: integer
+          format: int32
+          description: Number of Practices items (0-18) answered yes.
+        practices_applicable_count:
+          type: integer
+          format: int32
+          description: Number of Practices items (0-18) answered yes or no.
+        practices_percent:
+          type: number
+          format: double
+          description: Practices section percentage of yes answers over applicable answers; NULL if no items applicable.
+        overall_percent:
+          type: number
+          format: double
+          description: Unweighted mean of the three section percentages; NULL when fewer than 30 items have been answered.
+        teams_band:
+          type: string
+          enum:
+            - high
+            - mid
+            - low
+            - unanswered
+            - ""
+          description: "Teams band derived from teams_percent: high (>=75), mid (50-74), low (<50), unanswered."
+        stakeholders_band:
+          type: string
+          enum:
+            - high
+            - mid
+            - low
+            - unanswered
+            - ""
+          description: Stakeholders band derived from stakeholders_percent.
+        practices_band:
+          type: string
+          enum:
+            - high
+            - mid
+            - low
+            - unanswered
+            - ""
+          description: Practices band derived from practices_percent.
+        maturity:
+          type: string
+          enum:
+            - optimising
+            - mature
+            - developing
+            - initial
+            - ad-hoc
+            - insufficient-data
+            - ""
+          description: "Composite maturity level: optimising, mature, developing, initial, ad-hoc, or insufficient-data."
+        top_action_1:
+          type: string
+          maxLength: 500
+          description: First prioritised action drawn from the weakest section.
+        top_action_2:
+          type: string
+          maxLength: 500
+          description: Second prioritised action drawn from the weakest section.
+        top_action_3:
+          type: string
+          maxLength: 500
+          description: Third prioritised action drawn from the weakest section.
+        coach_notes:
+          type: string
+          description: Free-text agile-coach notes accompanying the action plan.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of electronic sign-off.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp the engine last computed this result.
+      required:
+        - created_at
+        - updated_at
+        - agile_checklist_id
+        - answered_count
+        - teams_yes_count
+        - teams_applicable_count
+        - stakeholders_yes_count
+        - stakeholders_applicable_count
+        - practices_yes_count
+        - practices_applicable_count
+        - teams_band
+        - stakeholders_band
+        - practices_band
+        - maturity
+        - top_action_1
+        - top_action_2
+        - top_action_3
+        - coach_notes
+        - graded_at
+      description: Computed grading and signed-off action plan. One-to-one with agile_checklist.

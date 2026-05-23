@@ -1,0 +1,147 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_prem_fft
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomePremFft
+  version: 1.0.0
+  description: NHS Friends and Family Test PREM response and free-text comment. Open Government Licence v3.0.
+paths:
+  /outpatient-outcome-prem-ffts:
+    get:
+      summary: List OutpatientOutcomePremFft records
+      operationId: listOutpatientOutcomePremFft
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomePremFft records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomePremFft"
+    post:
+      summary: Create a new OutpatientOutcomePremFft
+      operationId: createOutpatientOutcomePremFft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePremFft"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomePremFft
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePremFft"
+        "400":
+          description: Validation error
+  /outpatient-outcome-prem-ffts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomePremFft by id
+      operationId: getOutpatientOutcomePremFft
+      responses:
+        "200":
+          description: The requested OutpatientOutcomePremFft
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePremFft"
+        "404":
+          description: OutpatientOutcomePremFft not found
+    patch:
+      summary: Update an existing OutpatientOutcomePremFft
+      operationId: updateOutpatientOutcomePremFft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePremFft"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomePremFft
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePremFft"
+        "404":
+          description: OutpatientOutcomePremFft not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomePremFft
+      operationId: deleteOutpatientOutcomePremFft
+      responses:
+        "204":
+          description: OutpatientOutcomePremFft deleted
+        "404":
+          description: OutpatientOutcomePremFft not found
+components:
+  schemas:
+    OutpatientOutcomePremFft:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        fft_response:
+          type: string
+          enum:
+            - very_good
+            - good
+            - neither
+            - poor
+            - very_poor
+            - dont_know
+            - ""
+          description: "FFT response: very_good, good, neither, poor, very_poor, dont_know, or empty."
+        fft_comment:
+          type: string
+          description: Free-text comment accompanying the FFT response.
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - fft_response
+        - fft_comment
+      description: NHS Friends and Family Test PREM response and free-text comment. Open Government Licence v3.0.

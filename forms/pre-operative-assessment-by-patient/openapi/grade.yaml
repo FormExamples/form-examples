@@ -1,0 +1,222 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Patient — Grade
+  version: 1.0.0
+  description: "Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason."
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        pre_operative_assessment_by_patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the pre_operative_assessment_by_patient table.
+        computed_asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA grade computed by the engine from clinician-observed data.
+        final_asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA grade signed off by the clinician (may equal or differ from computed).
+        asa_emergency_suffix:
+          type: string
+          enum:
+            - E
+            - ""
+          description: "Emergency suffix: E if the procedure is emergency, empty otherwise."
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the clinician set final differently from computed (mandatory when they differ).
+        mallampati_class:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - ""
+          description: Mallampati airway class as per step 4.
+        rcri_score:
+          type: integer
+          format: int32
+          description: Revised Cardiac Risk Index score (0-6).
+        stopbang_score:
+          type: integer
+          format: int32
+          description: STOP-BANG score (0-8).
+        frailty_scale:
+          type: integer
+          format: int32
+          description: Clinical Frailty Scale score (1-9).
+        composite_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: "Composite perioperative risk: low, moderate, high, critical."
+        recommendation:
+          type: string
+          enum:
+            - proceed
+            - optimise-first
+            - mdt-review
+            - cancel
+            - ""
+          description: "Overall recommendation: proceed, optimise-first, mdt-review, cancel."
+        clinician_notes:
+          type: string
+          description: Free-text clinician summary notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - pre_operative_assessment_by_patient_id
+        - computed_asa_grade
+        - final_asa_grade
+        - asa_emergency_suffix
+        - override_reason
+        - mallampati_class
+        - composite_risk
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason."

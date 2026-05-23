@@ -1,0 +1,137 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: bone_marrow_donation_assessment
+openapi: 3.1.0
+info:
+  title: Bone Marrow Donation Assessment — BoneMarrowDonationAssessment
+  version: 1.0.0
+  description: OpenAPI specification for the bone_marrow_donation_assessment resource of the bone-marrow-donation-assessment form.
+paths:
+  /bone-marrow-donation-assessments:
+    get:
+      summary: List BoneMarrowDonationAssessment records
+      operationId: listBoneMarrowDonationAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BoneMarrowDonationAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+    post:
+      summary: Create a new BoneMarrowDonationAssessment
+      operationId: createBoneMarrowDonationAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+      responses:
+        "201":
+          description: The newly created BoneMarrowDonationAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+        "400":
+          description: Validation error
+  /bone-marrow-donation-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BoneMarrowDonationAssessment by id
+      operationId: getBoneMarrowDonationAssessment
+      responses:
+        "200":
+          description: The requested BoneMarrowDonationAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+        "404":
+          description: BoneMarrowDonationAssessment not found
+    patch:
+      summary: Update an existing BoneMarrowDonationAssessment
+      operationId: updateBoneMarrowDonationAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+      responses:
+        "200":
+          description: The updated BoneMarrowDonationAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BoneMarrowDonationAssessment"
+        "404":
+          description: BoneMarrowDonationAssessment not found
+    delete:
+      summary: Soft-delete a BoneMarrowDonationAssessment
+      operationId: deleteBoneMarrowDonationAssessment
+      responses:
+        "204":
+          description: BoneMarrowDonationAssessment deleted
+        "404":
+          description: BoneMarrowDonationAssessment not found
+components:
+  schemas:
+    BoneMarrowDonationAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status

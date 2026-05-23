@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_pupillary_distance
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionPupillaryDistance
+  version: 1.0.0
+  description: "Pupillary distance measurements: distance total and monocular, near total and monocular, segment height for bifocal / varifocal."
+paths:
+  /eye-prescription-pupillary-distances:
+    get:
+      summary: List EyePrescriptionPupillaryDistance records
+      operationId: listEyePrescriptionPupillaryDistance
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionPupillaryDistance records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+    post:
+      summary: Create a new EyePrescriptionPupillaryDistance
+      operationId: createEyePrescriptionPupillaryDistance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionPupillaryDistance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+        "400":
+          description: Validation error
+  /eye-prescription-pupillary-distances/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionPupillaryDistance by id
+      operationId: getEyePrescriptionPupillaryDistance
+      responses:
+        "200":
+          description: The requested EyePrescriptionPupillaryDistance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+        "404":
+          description: EyePrescriptionPupillaryDistance not found
+    patch:
+      summary: Update an existing EyePrescriptionPupillaryDistance
+      operationId: updateEyePrescriptionPupillaryDistance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+      responses:
+        "200":
+          description: The updated EyePrescriptionPupillaryDistance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionPupillaryDistance"
+        "404":
+          description: EyePrescriptionPupillaryDistance not found
+    delete:
+      summary: Soft-delete a EyePrescriptionPupillaryDistance
+      operationId: deleteEyePrescriptionPupillaryDistance
+      responses:
+        "204":
+          description: EyePrescriptionPupillaryDistance deleted
+        "404":
+          description: EyePrescriptionPupillaryDistance not found
+components:
+  schemas:
+    EyePrescriptionPupillaryDistance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription (unique, 1:1).
+        distance_total_mm:
+          type: number
+          format: double
+          description: Total interpupillary distance for distance vision, in mm.
+        distance_right_mm:
+          type: number
+          format: double
+          description: Monocular pupillary distance, right eye to nose bridge, for distance vision, in mm.
+        distance_left_mm:
+          type: number
+          format: double
+          description: Monocular pupillary distance, left eye to nose bridge, for distance vision, in mm.
+        near_total_mm:
+          type: number
+          format: double
+          description: Total interpupillary distance for near vision, in mm (typically distance PD - 3 mm).
+        near_right_mm:
+          type: number
+          format: double
+          description: Monocular pupillary distance, right eye to nose bridge, for near vision, in mm.
+        near_left_mm:
+          type: number
+          format: double
+          description: Monocular pupillary distance, left eye to nose bridge, for near vision, in mm.
+        segment_height_right_mm:
+          type: number
+          format: double
+          description: Segment height for bifocal / varifocal lens, right eye, in mm (typically 16-22 mm).
+        segment_height_left_mm:
+          type: number
+          format: double
+          description: Segment height for bifocal / varifocal lens, left eye, in mm.
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_id
+      description: "Pupillary distance measurements: distance total and monocular, near total and monocular, segment height for bifocal / varifocal."

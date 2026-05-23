@@ -1,0 +1,144 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: glossary_term
+openapi: 3.1.0
+info:
+  title: Arc42 — GlossaryTerm
+  version: 1.0.0
+  description: Glossary term captured in §12 Glossary of the arc42 documentation.
+paths:
+  /glossary-terms:
+    get:
+      summary: List GlossaryTerm records
+      operationId: listGlossaryTerm
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GlossaryTerm records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GlossaryTerm"
+    post:
+      summary: Create a new GlossaryTerm
+      operationId: createGlossaryTerm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlossaryTerm"
+      responses:
+        "201":
+          description: The newly created GlossaryTerm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlossaryTerm"
+        "400":
+          description: Validation error
+  /glossary-terms/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GlossaryTerm by id
+      operationId: getGlossaryTerm
+      responses:
+        "200":
+          description: The requested GlossaryTerm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlossaryTerm"
+        "404":
+          description: GlossaryTerm not found
+    patch:
+      summary: Update an existing GlossaryTerm
+      operationId: updateGlossaryTerm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlossaryTerm"
+      responses:
+        "200":
+          description: The updated GlossaryTerm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlossaryTerm"
+        "404":
+          description: GlossaryTerm not found
+    delete:
+      summary: Soft-delete a GlossaryTerm
+      operationId: deleteGlossaryTerm
+      responses:
+        "204":
+          description: GlossaryTerm deleted
+        "404":
+          description: GlossaryTerm not found
+components:
+  schemas:
+    GlossaryTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        term:
+          type: string
+          description: The domain or architectural term being defined.
+        definition:
+          type: string
+          description: Clear, concise definition of the term as used in this architecture.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - term
+        - definition
+      description: Glossary term captured in §12 Glossary of the arc42 documentation.

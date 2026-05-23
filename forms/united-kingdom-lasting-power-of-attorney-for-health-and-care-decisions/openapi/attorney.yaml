@@ -1,0 +1,196 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: attorney
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — Attorney
+  version: 1.0.0
+  description: A person nominated as an attorney by the donor. Must be ≥ 18 with capacity per MCA 2005 s.10.
+paths:
+  /attorneys:
+    get:
+      summary: List Attorney records
+      operationId: listAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Attorney records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Attorney"
+    post:
+      summary: Create a new Attorney
+      operationId: createAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Attorney"
+      responses:
+        "201":
+          description: The newly created Attorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attorney"
+        "400":
+          description: Validation error
+  /attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Attorney by id
+      operationId: getAttorney
+      responses:
+        "200":
+          description: The requested Attorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attorney"
+        "404":
+          description: Attorney not found
+    patch:
+      summary: Update an existing Attorney
+      operationId: updateAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Attorney"
+      responses:
+        "200":
+          description: The updated Attorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attorney"
+        "404":
+          description: Attorney not found
+    delete:
+      summary: Soft-delete a Attorney
+      operationId: deleteAttorney
+      responses:
+        "204":
+          description: Attorney deleted
+        "404":
+          description: Attorney not found
+components:
+  schemas:
+    Attorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        title:
+          type: string
+          maxLength: 20
+          description: Honorific title.
+        given_names:
+          type: string
+          maxLength: 255
+          description: Given names of the attorney.
+        family_name:
+          type: string
+          maxLength: 255
+          description: Family name of the attorney.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth. Used to verify attorney age ≥ 18 (R-MCA-ATT-AGE).
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code.
+        relationship_to_donor:
+          type: string
+          enum:
+            - spouse
+            - civil-partner
+            - child
+            - parent
+            - sibling
+            - friend
+            - professional
+            - other
+            - ""
+          description: Stated relationship to the donor.
+        is_bankrupt:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the attorney is currently bankrupt. Informational for H&W LPAs (statutory bar applies only to property/financial LPAs).
+        capacity_declared:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the attorney has declared capacity to act.
+      required:
+        - created_at
+        - updated_at
+        - title
+        - given_names
+        - family_name
+        - email
+        - phone
+        - postal_address_as_full_text
+        - country_as_iso_3166_1_alpha_2
+        - postcode
+        - relationship_to_donor
+        - is_bankrupt
+        - capacity_declared
+      description: A person nominated as an attorney by the donor. Must be ≥ 18 with capacity per MCA 2005 s.10.

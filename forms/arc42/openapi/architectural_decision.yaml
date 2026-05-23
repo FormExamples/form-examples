@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: architectural_decision
+openapi: 3.1.0
+info:
+  title: Arc42 — ArchitecturalDecision
+  version: 1.0.0
+  description: Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.
+paths:
+  /architectural-decisions:
+    get:
+      summary: List ArchitecturalDecision records
+      operationId: listArchitecturalDecision
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ArchitecturalDecision records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArchitecturalDecision"
+    post:
+      summary: Create a new ArchitecturalDecision
+      operationId: createArchitecturalDecision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitecturalDecision"
+      responses:
+        "201":
+          description: The newly created ArchitecturalDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitecturalDecision"
+        "400":
+          description: Validation error
+  /architectural-decisions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ArchitecturalDecision by id
+      operationId: getArchitecturalDecision
+      responses:
+        "200":
+          description: The requested ArchitecturalDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitecturalDecision"
+        "404":
+          description: ArchitecturalDecision not found
+    patch:
+      summary: Update an existing ArchitecturalDecision
+      operationId: updateArchitecturalDecision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitecturalDecision"
+      responses:
+        "200":
+          description: The updated ArchitecturalDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitecturalDecision"
+        "404":
+          description: ArchitecturalDecision not found
+    delete:
+      summary: Soft-delete a ArchitecturalDecision
+      operationId: deleteArchitecturalDecision
+      responses:
+        "204":
+          description: ArchitecturalDecision deleted
+        "404":
+          description: ArchitecturalDecision not found
+components:
+  schemas:
+    ArchitecturalDecision:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        title:
+          type: string
+          description: Short title of the architectural decision (e.g. Use PostgreSQL as primary database).
+        status:
+          type: string
+          enum:
+            - draft
+            - proposed
+            - accepted
+            - deprecated
+            - superseded
+            - ""
+          description: "Lifecycle status of the ADR: draft, proposed, accepted, deprecated, or superseded."
+        context:
+          type: string
+          description: Context explaining the problem or force that drove this decision.
+        decision:
+          type: string
+          description: The decision that was made.
+        consequences:
+          type: string
+          description: Consequences — positive and negative — of this decision.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - title
+        - status
+        - context
+        - decision
+        - consequences
+      description: Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.

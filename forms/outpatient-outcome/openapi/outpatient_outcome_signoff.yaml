@@ -1,0 +1,149 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_signoff
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeSignoff
+  version: 1.0.0
+  description: "Reporting clinician sign-off: who completed the report and when."
+paths:
+  /outpatient-outcome-signoffs:
+    get:
+      summary: List OutpatientOutcomeSignoff records
+      operationId: listOutpatientOutcomeSignoff
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeSignoff records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+    post:
+      summary: Create a new OutpatientOutcomeSignoff
+      operationId: createOutpatientOutcomeSignoff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeSignoff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+        "400":
+          description: Validation error
+  /outpatient-outcome-signoffs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeSignoff by id
+      operationId: getOutpatientOutcomeSignoff
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeSignoff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+        "404":
+          description: OutpatientOutcomeSignoff not found
+    patch:
+      summary: Update an existing OutpatientOutcomeSignoff
+      operationId: updateOutpatientOutcomeSignoff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeSignoff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeSignoff"
+        "404":
+          description: OutpatientOutcomeSignoff not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeSignoff
+      operationId: deleteOutpatientOutcomeSignoff
+      responses:
+        "204":
+          description: OutpatientOutcomeSignoff deleted
+        "404":
+          description: OutpatientOutcomeSignoff not found
+components:
+  schemas:
+    OutpatientOutcomeSignoff:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        reporting_clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who signed off; null if not linked.
+        reporting_clinician_name:
+          type: string
+          maxLength: 255
+          description: Typed name of the reporting clinician (redundant with clinician.name for audit).
+        reporting_clinician_role:
+          type: string
+          maxLength: 100
+          description: Role of the reporting clinician at time of sign-off.
+        signed_off_at:
+          type: string
+          format: date-time
+          description: Timestamp of sign-off; null when the report is still a draft.
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - reporting_clinician_name
+        - reporting_clinician_role
+      description: "Reporting clinician sign-off: who completed the report and when."

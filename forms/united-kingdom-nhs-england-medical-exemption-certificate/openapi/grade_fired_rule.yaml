@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade_fired_rule
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — GradeFiredRule
+  version: 1.0.0
+  description: Audit trail of rules that fired when computing an eligibility grade.
+paths:
+  /grade-fired-rules:
+    get:
+      summary: List GradeFiredRule records
+      operationId: listGradeFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradeFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradeFiredRule"
+    post:
+      summary: Create a new GradeFiredRule
+      operationId: createGradeFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradeFiredRule"
+      responses:
+        "201":
+          description: The newly created GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeFiredRule"
+        "400":
+          description: Validation error
+  /grade-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradeFiredRule by id
+      operationId: getGradeFiredRule
+      responses:
+        "200":
+          description: The requested GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeFiredRule"
+        "404":
+          description: GradeFiredRule not found
+    patch:
+      summary: Update an existing GradeFiredRule
+      operationId: updateGradeFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradeFiredRule"
+      responses:
+        "200":
+          description: The updated GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeFiredRule"
+        "404":
+          description: GradeFiredRule not found
+    delete:
+      summary: Soft-delete a GradeFiredRule
+      operationId: deleteGradeFiredRule
+      responses:
+        "204":
+          description: GradeFiredRule deleted
+        "404":
+          description: GradeFiredRule not found
+components:
+  schemas:
+    GradeFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 64
+          description: Stable identifier of the rule that fired.
+        category:
+          type: string
+          enum:
+            - eligible-condition
+            - disqualifying
+            - redirect
+            - completeness
+            - renewal
+            - ""
+          description: "Rule category: eligible-condition, disqualifying, redirect, completeness, renewal."
+        description:
+          type: string
+          description: Human-readable description of why the rule fired.
+        severity_level:
+          type: string
+          enum:
+            - info
+            - low
+            - medium
+            - high
+            - ""
+          description: Severity level for sorting / display.
+        contributing_condition_code:
+          type: string
+          description: Optional eligible-condition code the rule was evaluated against.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - category
+        - description
+        - severity_level
+        - contributing_condition_code
+      description: Audit trail of rules that fired when computing an eligibility grade.

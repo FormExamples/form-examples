@@ -1,0 +1,210 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_visual_acuity
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionVisualAcuity
+  version: 1.0.0
+  description: "Visual acuity measurements: Snellen distance and near, unaided and corrected, per eye and binocular, plus pinhole VA and dominant eye."
+paths:
+  /eye-prescription-visual-acuities:
+    get:
+      summary: List EyePrescriptionVisualAcuity records
+      operationId: listEyePrescriptionVisualAcuity
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionVisualAcuity records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+    post:
+      summary: Create a new EyePrescriptionVisualAcuity
+      operationId: createEyePrescriptionVisualAcuity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionVisualAcuity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+        "400":
+          description: Validation error
+  /eye-prescription-visual-acuities/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionVisualAcuity by id
+      operationId: getEyePrescriptionVisualAcuity
+      responses:
+        "200":
+          description: The requested EyePrescriptionVisualAcuity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+        "404":
+          description: EyePrescriptionVisualAcuity not found
+    patch:
+      summary: Update an existing EyePrescriptionVisualAcuity
+      operationId: updateEyePrescriptionVisualAcuity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+      responses:
+        "200":
+          description: The updated EyePrescriptionVisualAcuity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionVisualAcuity"
+        "404":
+          description: EyePrescriptionVisualAcuity not found
+    delete:
+      summary: Soft-delete a EyePrescriptionVisualAcuity
+      operationId: deleteEyePrescriptionVisualAcuity
+      responses:
+        "204":
+          description: EyePrescriptionVisualAcuity deleted
+        "404":
+          description: EyePrescriptionVisualAcuity not found
+components:
+  schemas:
+    EyePrescriptionVisualAcuity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription (unique, 1:1).
+        distance_right_unaided:
+          type: string
+          maxLength: 20
+          description: "Snellen distance acuity, right eye, unaided (e.g. \"6/12\")."
+        distance_left_unaided:
+          type: string
+          maxLength: 20
+          description: Snellen distance acuity, left eye, unaided.
+        distance_binocular_unaided:
+          type: string
+          maxLength: 20
+          description: Snellen distance acuity, binocular, unaided.
+        distance_right_corrected:
+          type: string
+          maxLength: 20
+          description: Snellen distance acuity, right eye, with this prescription.
+        distance_left_corrected:
+          type: string
+          maxLength: 20
+          description: Snellen distance acuity, left eye, with this prescription.
+        distance_binocular_corrected:
+          type: string
+          maxLength: 20
+          description: Snellen distance acuity, binocular, with this prescription.
+        near_right_unaided:
+          type: string
+          maxLength: 20
+          description: "Near acuity, right eye, unaided (e.g. \"N6\")."
+        near_left_unaided:
+          type: string
+          maxLength: 20
+          description: Near acuity, left eye, unaided.
+        near_binocular_unaided:
+          type: string
+          maxLength: 20
+          description: Near acuity, binocular, unaided.
+        near_right_corrected:
+          type: string
+          maxLength: 20
+          description: Near acuity, right eye, with this prescription.
+        near_left_corrected:
+          type: string
+          maxLength: 20
+          description: Near acuity, left eye, with this prescription.
+        near_binocular_corrected:
+          type: string
+          maxLength: 20
+          description: Near acuity, binocular, with this prescription.
+        pinhole_right:
+          type: string
+          maxLength: 20
+          description: Pinhole visual acuity, right eye.
+        pinhole_left:
+          type: string
+          maxLength: 20
+          description: Pinhole visual acuity, left eye.
+        dominant_eye:
+          type: string
+          enum:
+            - right
+            - left
+            - none
+            - ""
+          description: "Dominant eye: right, left, none."
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_id
+        - distance_right_unaided
+        - distance_left_unaided
+        - distance_binocular_unaided
+        - distance_right_corrected
+        - distance_left_corrected
+        - distance_binocular_corrected
+        - near_right_unaided
+        - near_left_unaided
+        - near_binocular_unaided
+        - near_right_corrected
+        - near_left_corrected
+        - near_binocular_corrected
+        - pinhole_right
+        - pinhole_left
+        - dominant_eye
+      description: "Visual acuity measurements: Snellen distance and near, unaided and corrected, per eye and binocular, plus pinhole VA and dominant eye."

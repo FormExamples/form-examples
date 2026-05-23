@@ -1,0 +1,175 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: authorized_recipient
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — AuthorizedRecipient
+  version: 1.0.0
+  description: Person(s) or class of persons to whom the disclosure may be made. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(iii).
+paths:
+  /authorized-recipients:
+    get:
+      summary: List AuthorizedRecipient records
+      operationId: listAuthorizedRecipient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AuthorizedRecipient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuthorizedRecipient"
+    post:
+      summary: Create a new AuthorizedRecipient
+      operationId: createAuthorizedRecipient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizedRecipient"
+      responses:
+        "201":
+          description: The newly created AuthorizedRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizedRecipient"
+        "400":
+          description: Validation error
+  /authorized-recipients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AuthorizedRecipient by id
+      operationId: getAuthorizedRecipient
+      responses:
+        "200":
+          description: The requested AuthorizedRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizedRecipient"
+        "404":
+          description: AuthorizedRecipient not found
+    patch:
+      summary: Update an existing AuthorizedRecipient
+      operationId: updateAuthorizedRecipient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizedRecipient"
+      responses:
+        "200":
+          description: The updated AuthorizedRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizedRecipient"
+        "404":
+          description: AuthorizedRecipient not found
+    delete:
+      summary: Soft-delete a AuthorizedRecipient
+      operationId: deleteAuthorizedRecipient
+      responses:
+        "204":
+          description: AuthorizedRecipient deleted
+        "404":
+          description: AuthorizedRecipient not found
+components:
+  schemas:
+    AuthorizedRecipient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        recipient_name:
+          type: string
+          maxLength: 255
+          description: Full name of the authorized recipient (individual or organisation contact).
+        recipient_organization:
+          type: string
+          maxLength: 255
+          description: "Organisation the recipient belongs to (e.g. \"Tennessee Department of Human Services\")."
+        recipient_role:
+          type: string
+          maxLength: 255
+          description: Professional role or title of the recipient.
+        recipient_address:
+          type: string
+          description: Postal address of the recipient.
+        recipient_phone:
+          type: string
+          maxLength: 30
+          description: Phone number of the recipient.
+        recipient_email:
+          type: string
+          maxLength: 255
+          description: Email address of the recipient.
+        recipient_relationship_to_patient:
+          type: string
+          enum:
+            - ""
+            - health-plan
+            - state-agency
+            - employer
+            - attorney
+            - researcher
+            - family-member
+            - self
+            - health-care-provider
+            - other
+          description: "Recipient relationship: health-plan, state-agency, employer, attorney, researcher, family-member, self, health-care-provider, other, or empty."
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - recipient_name
+        - recipient_organization
+        - recipient_role
+        - recipient_address
+        - recipient_phone
+        - recipient_email
+        - recipient_relationship_to_patient
+      description: Person(s) or class of persons to whom the disclosure may be made. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(iii).

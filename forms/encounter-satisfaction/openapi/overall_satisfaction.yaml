@@ -1,0 +1,145 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: overall_satisfaction
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — OverallSatisfaction
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Overall Satisfaction domain: 3 Likert-scale questions plus free-text comments."
+paths:
+  /overall-satisfactions:
+    get:
+      summary: List OverallSatisfaction records
+      operationId: listOverallSatisfaction
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OverallSatisfaction records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OverallSatisfaction"
+    post:
+      summary: Create a new OverallSatisfaction
+      operationId: createOverallSatisfaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OverallSatisfaction"
+      responses:
+        "201":
+          description: The newly created OverallSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OverallSatisfaction"
+        "400":
+          description: Validation error
+  /overall-satisfactions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OverallSatisfaction by id
+      operationId: getOverallSatisfaction
+      responses:
+        "200":
+          description: The requested OverallSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OverallSatisfaction"
+        "404":
+          description: OverallSatisfaction not found
+    patch:
+      summary: Update an existing OverallSatisfaction
+      operationId: updateOverallSatisfaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OverallSatisfaction"
+      responses:
+        "200":
+          description: The updated OverallSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OverallSatisfaction"
+        "404":
+          description: OverallSatisfaction not found
+    delete:
+      summary: Soft-delete a OverallSatisfaction
+      operationId: deleteOverallSatisfaction
+      responses:
+        "204":
+          description: OverallSatisfaction deleted
+        "404":
+          description: OverallSatisfaction not found
+components:
+  schemas:
+    OverallSatisfaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        likely_to_recommend:
+          type: integer
+          format: int32
+          description: Likelihood of recommending the provider (1-5 Likert). NULL if unanswered.
+        likely_to_return:
+          type: integer
+          format: int32
+          description: Likelihood of returning for future care (1-5 Likert). NULL if unanswered.
+        comments:
+          type: string
+          description: Free-text additional comments from the patient.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+        - comments
+      description: "1:1 with encounter_satisfaction. Overall Satisfaction domain: 3 Likert-scale questions plus free-text comments."

@@ -1,0 +1,216 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: Return To Work — Patient
+  version: 1.0.0
+  description: Patient (the employee) whose return to work is being assessed.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Full legal name as it appears on identification.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - prefer-not-to-say
+            - ""
+          description: Sex recorded at birth for clinical purposes.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+        postcode:
+          type: string
+          description: Postal code.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: United Kingdom NHS number, unique per person.
+        job_title:
+          type: string
+          maxLength: 255
+          description: Patient job title (e.g. Software Engineer, Healthcare Assistant).
+        role_description:
+          type: string
+          description: Free-text description of the patient day-to-day duties.
+        contracted_hours_per_week:
+          type: number
+          format: double
+          description: Contracted hours per week (full-time UK baseline 37.5).
+        shift_pattern:
+          type: string
+          enum:
+            - day
+            - night
+            - rotating
+            - on-call
+            - irregular
+            - fixed
+            - ""
+          description: "Shift pattern: day, night, rotating, on-call, irregular, or fixed."
+        safety_critical_role:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the role is safety-critical (aviation, rail, healthcare, emergency response, etc.).
+        dvla_group_1_licence_held:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient holds a DVLA Group 1 (car / motorcycle) licence.
+        dvla_group_2_licence_held:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient holds a DVLA Group 2 (HGV / PCV) licence.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - birth_date
+        - sex
+        - job_title
+        - role_description
+        - shift_pattern
+        - safety_critical_role
+        - dvla_group_1_licence_held
+        - dvla_group_2_licence_held
+      description: Patient (the employee) whose return to work is being assessed.

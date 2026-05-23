@@ -1,0 +1,140 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcome
+  version: 1.0.0
+  description: Top-level assessment instance for outpatient-outcome-report. Parent entity for domain-specific sections and the grading result.
+paths:
+  /outpatient-outcomes:
+    get:
+      summary: List OutpatientOutcome records
+      operationId: listOutpatientOutcome
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcome records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcome"
+    post:
+      summary: Create a new OutpatientOutcome
+      operationId: createOutpatientOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcome"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcome"
+        "400":
+          description: Validation error
+  /outpatient-outcomes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcome by id
+      operationId: getOutpatientOutcome
+      responses:
+        "200":
+          description: The requested OutpatientOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcome"
+        "404":
+          description: OutpatientOutcome not found
+    patch:
+      summary: Update an existing OutpatientOutcome
+      operationId: updateOutpatientOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcome"
+      responses:
+        "200":
+          description: The updated OutpatientOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcome"
+        "404":
+          description: OutpatientOutcome not found
+    delete:
+      summary: Soft-delete a OutpatientOutcome
+      operationId: deleteOutpatientOutcome
+      responses:
+        "204":
+          description: OutpatientOutcome deleted
+        "404":
+          description: OutpatientOutcome not found
+components:
+  schemas:
+    OutpatientOutcome:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+      description: Top-level assessment instance for outpatient-outcome-report. Parent entity for domain-specific sections and the grading result.

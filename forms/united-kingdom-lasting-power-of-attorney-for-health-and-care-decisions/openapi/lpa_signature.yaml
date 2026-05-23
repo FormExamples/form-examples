@@ -1,0 +1,183 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_signature
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaSignature
+  version: 1.0.0
+  description: Captured signatures and witness details. Sign-order donor → certificate provider → attorneys is enforced by the validity engine (R-MCA-ORDER).
+paths:
+  /lpa-signatures:
+    get:
+      summary: List LpaSignature records
+      operationId: listLpaSignature
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaSignature records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaSignature"
+    post:
+      summary: Create a new LpaSignature
+      operationId: createLpaSignature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaSignature"
+      responses:
+        "201":
+          description: The newly created LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "400":
+          description: Validation error
+  /lpa-signatures/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaSignature by id
+      operationId: getLpaSignature
+      responses:
+        "200":
+          description: The requested LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "404":
+          description: LpaSignature not found
+    patch:
+      summary: Update an existing LpaSignature
+      operationId: updateLpaSignature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaSignature"
+      responses:
+        "200":
+          description: The updated LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "404":
+          description: LpaSignature not found
+    delete:
+      summary: Soft-delete a LpaSignature
+      operationId: deleteLpaSignature
+      responses:
+        "204":
+          description: LpaSignature deleted
+        "404":
+          description: LpaSignature not found
+components:
+  schemas:
+    LpaSignature:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA.
+        signer_role:
+          type: string
+          enum:
+            - donor
+            - certificate-provider
+            - attorney
+            - replacement-attorney
+            - ""
+          description: "Role of the signer: donor, certificate-provider, attorney, replacement-attorney."
+        signer_id:
+          type: string
+          format: uuid
+          description: UUID of the signer in the corresponding role table (donor, certificate_provider, attorney, replacement_attorney). Not foreign-keyed because the referent table varies by role.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the signer signed. Used by R-MCA-ORDER to verify statutory sign-order.
+        signature_method:
+          type: string
+          enum:
+            - wet-ink
+            - electronic
+            - mark-with-witness
+            - ""
+          description: "How the signature was captured: wet-ink, electronic (post Powers of Attorney Act 2023), or mark-with-witness (donor unable to sign)."
+        signature_data:
+          type: string
+          format: byte
+          description: Raw signature bytes (SVG path, PNG, or PKCS#7 envelope) when signature_method = electronic.
+        witness_name:
+          type: string
+          maxLength: 255
+          description: Name of the witness.
+        witness_address:
+          type: string
+          description: Postal address of the witness.
+        witness_signed_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the witness signed.
+        witness_is_attorney:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the witness is also a named attorney. Must be no (R-MCA-WIT-NOT-ATT).
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - signer_role
+        - signature_method
+        - witness_name
+        - witness_address
+        - witness_is_attorney
+      description: Captured signatures and witness details. Sign-order donor → certificate provider → attorneys is enforced by the validity engine (R-MCA-ORDER).

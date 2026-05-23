@@ -1,0 +1,166 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: prescriber
+openapi: 3.1.0
+info:
+  title: Eye Prescription — Prescriber
+  version: 1.0.0
+  description: GOC-registered prescriber who issued the spectacle prescription.
+paths:
+  /prescribers:
+    get:
+      summary: List Prescriber records
+      operationId: listPrescriber
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Prescriber records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Prescriber"
+    post:
+      summary: Create a new Prescriber
+      operationId: createPrescriber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Prescriber"
+      responses:
+        "201":
+          description: The newly created Prescriber
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescriber"
+        "400":
+          description: Validation error
+  /prescribers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Prescriber by id
+      operationId: getPrescriber
+      responses:
+        "200":
+          description: The requested Prescriber
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescriber"
+        "404":
+          description: Prescriber not found
+    patch:
+      summary: Update an existing Prescriber
+      operationId: updatePrescriber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Prescriber"
+      responses:
+        "200":
+          description: The updated Prescriber
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescriber"
+        "404":
+          description: Prescriber not found
+    delete:
+      summary: Soft-delete a Prescriber
+      operationId: deletePrescriber
+      responses:
+        "204":
+          description: Prescriber deleted
+        "404":
+          description: Prescriber not found
+components:
+  schemas:
+    Prescriber:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: "Prescriber full name (including title, e.g. \"Ms Jane Smith\")."
+        goc_registration_number:
+          type: string
+          maxLength: 20
+          description: General Optical Council registration number (mandatory).
+        role:
+          type: string
+          enum:
+            - optometrist
+            - dispensing-optician
+            - ophthalmologist
+            - student
+            - ""
+          description: "Prescriber role: optometrist, dispensing-optician, ophthalmologist, student."
+        practice_name:
+          type: string
+          description: Name of the practice where the prescription was issued.
+        practice_address:
+          type: string
+          description: Practice address as full text.
+        postcode:
+          type: string
+          description: Practice postcode.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Practice country as ISO 3166-1 alpha-2 (e.g. GB).
+        email:
+          type: string
+          description: Practice contact email.
+        phone:
+          type: string
+          description: Practice contact phone.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - goc_registration_number
+        - role
+        - practice_name
+        - practice_address
+      description: GOC-registered prescriber who issued the spectacle prescription.

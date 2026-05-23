@@ -1,0 +1,290 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: assessment, assessment_current_medications, assessment_medication_item
+openapi: 3.1.0
+info:
+  title: Pulmonology Assessment — Assessment
+  version: 1.0.0
+  description: Pulmonology assessment form. Parent entity for all sections covering GOLD (Global Initiative for Chronic Obstructive Lung Disease) staging.
+paths:
+  /assessments:
+    get:
+      summary: List Assessment records
+      operationId: listAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessment"
+    post:
+      summary: Create a new Assessment
+      operationId: createAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "201":
+          description: The newly created Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "400":
+          description: Validation error
+  /assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessment by id
+      operationId: getAssessment
+      responses:
+        "200":
+          description: The requested Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    patch:
+      summary: Update an existing Assessment
+      operationId: updateAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    delete:
+      summary: Soft-delete a Assessment
+      operationId: deleteAssessment
+      responses:
+        "204":
+          description: Assessment deleted
+        "404":
+          description: Assessment not found
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+        current_medications_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        inhaler_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses inhaler devices.
+        inhaler_technique_assessed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether inhaler technique was assessed during the visit.
+        inhaler_technique_adequate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether inhaler technique is adequate.
+        short_acting_bronchodilator:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses a short-acting bronchodilator (SABA, e.g. salbutamol).
+        saba_frequency:
+          type: string
+          description: Saba frequency.
+        long_acting_bronchodilator:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses a long-acting bronchodilator (LABA or LAMA).
+        inhaled_corticosteroid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses an inhaled corticosteroid (ICS).
+        combination_inhaler:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses a combination inhaler (ICS/LABA or LABA/LAMA).
+        long_term_oxygen_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is on long-term oxygen therapy (LTOT).
+        oxygen_flow_rate_lmin:
+          type: number
+          format: double
+          description: Oxygen flow rate in litres per minute.
+        oxygen_hours_per_day:
+          type: integer
+          format: int32
+          description: Oxygen hours per day.
+        nebuliser_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient uses a nebuliser at home.
+        oral_medications:
+          type: string
+          description: Oral medications.
+        medication_adherence:
+          type: string
+          enum:
+            - good
+            - fair
+            - poor
+            - ""
+          description: "Medication adherence: good, fair, poor, or empty."
+        additional_notes:
+          type: string
+          description: Additional notes.
+        medication_item_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        current_medications_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_current_medications table.
+        medication_name:
+          type: string
+          maxLength: 255
+          description: Name of the medication.
+        dose:
+          type: string
+          maxLength: 100
+          description: Dosage amount and unit (e.g. 200mcg, 500mg).
+        frequency:
+          type: string
+          maxLength: 100
+          description: Dosing frequency (e.g. twice daily, as needed).
+        route:
+          type: string
+          enum:
+            - inhaled
+            - oral
+            - nebulised
+            - subcutaneous
+            - intravenous
+            - other
+            - ""
+          description: "Route of administration: inhaled, oral, nebulised, subcutaneous, intravenous, other, or empty."
+        indication:
+          type: string
+          description: Indication.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the medication in the list.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - inhaler_use
+        - inhaler_technique_assessed
+        - inhaler_technique_adequate
+        - short_acting_bronchodilator
+        - saba_frequency
+        - long_acting_bronchodilator
+        - inhaled_corticosteroid
+        - combination_inhaler
+        - long_term_oxygen_therapy
+        - nebuliser_use
+        - oral_medications
+        - medication_adherence
+        - additional_notes
+        - current_medications_id
+        - medication_name
+        - dose
+        - frequency
+        - route
+        - indication
+        - sort_order
+      description: Pulmonology assessment form. Parent entity for all sections covering GOLD (Global Initiative for Chronic Obstructive Lung Disease) staging.

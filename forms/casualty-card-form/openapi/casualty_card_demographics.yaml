@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_demographics
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardDemographics
+  version: 1.0.0
+  description: 1:1 with casualty_card. Assessment-time demographic data that may differ from the patient record.
+paths:
+  /casualty-card-demographicses:
+    get:
+      summary: List CasualtyCardDemographics records
+      operationId: listCasualtyCardDemographics
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardDemographics records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardDemographics"
+    post:
+      summary: Create a new CasualtyCardDemographics
+      operationId: createCasualtyCardDemographics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardDemographics"
+      responses:
+        "201":
+          description: The newly created CasualtyCardDemographics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDemographics"
+        "400":
+          description: Validation error
+  /casualty-card-demographicses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardDemographics by id
+      operationId: getCasualtyCardDemographics
+      responses:
+        "200":
+          description: The requested CasualtyCardDemographics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDemographics"
+        "404":
+          description: CasualtyCardDemographics not found
+    patch:
+      summary: Update an existing CasualtyCardDemographics
+      operationId: updateCasualtyCardDemographics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardDemographics"
+      responses:
+        "200":
+          description: The updated CasualtyCardDemographics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDemographics"
+        "404":
+          description: CasualtyCardDemographics not found
+    delete:
+      summary: Soft-delete a CasualtyCardDemographics
+      operationId: deleteCasualtyCardDemographics
+      responses:
+        "204":
+          description: CasualtyCardDemographics deleted
+        "404":
+          description: CasualtyCardDemographics not found
+components:
+  schemas:
+    CasualtyCardDemographics:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        address:
+          type: string
+          description: Patient address at time of attendance.
+        postcode:
+          type: string
+          description: Patient postcode at time of attendance.
+        phone:
+          type: string
+          description: Patient phone number at time of attendance.
+        email:
+          type: string
+          description: Patient email address at time of attendance.
+        ethnicity:
+          type: string
+          description: Patient ethnicity at time of attendance.
+        preferred_language:
+          type: string
+          description: Patient preferred language at time of attendance.
+        interpreter_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether an interpreter is required: yes, no, or empty string if unanswered."
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - address
+        - postcode
+        - phone
+        - email
+        - ethnicity
+        - preferred_language
+        - interpreter_required
+      description: 1:1 with casualty_card. Assessment-time demographic data that may differ from the patient record.

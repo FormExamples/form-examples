@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: architecture_decision_record_position
+openapi: 3.1.0
+info:
+  title: Architecture Decision Record — ArchitectureDecisionRecordPosition
+  version: 1.0.0
+  description: "Tyree & Akerman section 7: a viable alternative considered for the decision."
+paths:
+  /architecture-decision-record-positions:
+    get:
+      summary: List ArchitectureDecisionRecordPosition records
+      operationId: listArchitectureDecisionRecordPosition
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ArchitectureDecisionRecordPosition records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+    post:
+      summary: Create a new ArchitectureDecisionRecordPosition
+      operationId: createArchitectureDecisionRecordPosition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+      responses:
+        "201":
+          description: The newly created ArchitectureDecisionRecordPosition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+        "400":
+          description: Validation error
+  /architecture-decision-record-positions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ArchitectureDecisionRecordPosition by id
+      operationId: getArchitectureDecisionRecordPosition
+      responses:
+        "200":
+          description: The requested ArchitectureDecisionRecordPosition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+        "404":
+          description: ArchitectureDecisionRecordPosition not found
+    patch:
+      summary: Update an existing ArchitectureDecisionRecordPosition
+      operationId: updateArchitectureDecisionRecordPosition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+      responses:
+        "200":
+          description: The updated ArchitectureDecisionRecordPosition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordPosition"
+        "404":
+          description: ArchitectureDecisionRecordPosition not found
+    delete:
+      summary: Soft-delete a ArchitectureDecisionRecordPosition
+      operationId: deleteArchitectureDecisionRecordPosition
+      responses:
+        "204":
+          description: ArchitectureDecisionRecordPosition deleted
+        "404":
+          description: ArchitectureDecisionRecordPosition not found
+components:
+  schemas:
+    ArchitectureDecisionRecordPosition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        architecture_decision_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to architecture_decision_record.id.
+        ordinal:
+          type: integer
+          format: int32
+          description: Display order; lower numbers appear first.
+        name:
+          type: string
+          description: "Short name of the position, e.g. \"Use PostgreSQL\"."
+        description:
+          type: string
+          description: Description of what this alternative would entail.
+        model_or_diagram_url:
+          type: string
+          description: URL to a supporting model, diagram, or prototype.
+        is_chosen:
+          type: boolean
+          description: TRUE if this is the position selected by the decision.
+        pros:
+          type: string
+          description: Newline-separated list of advantages.
+        cons:
+          type: string
+          description: Newline-separated list of disadvantages.
+      required:
+        - created_at
+        - updated_at
+        - architecture_decision_record_id
+        - ordinal
+        - name
+        - description
+        - model_or_diagram_url
+        - is_chosen
+        - pros
+        - cons
+      description: "Tyree & Akerman section 7: a viable alternative considered for the decision."

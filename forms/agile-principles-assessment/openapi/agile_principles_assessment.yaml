@@ -1,0 +1,318 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_principles_assessment
+openapi: 3.1.0
+info:
+  title: Agile Principles Assessment — AgilePrinciplesAssessment
+  version: 1.0.0
+  description: One row per submission. Stores the 12 Agile Manifesto principle Likert scores (1-5, nullable when unanswered) and free-text comments per principle. Composite maturity is computed in agile_principles_assessment_grade.
+paths:
+  /agile-principles-assessments:
+    get:
+      summary: List AgilePrinciplesAssessment records
+      operationId: listAgilePrinciplesAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgilePrinciplesAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgilePrinciplesAssessment"
+    post:
+      summary: Create a new AgilePrinciplesAssessment
+      operationId: createAgilePrinciplesAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessment"
+      responses:
+        "201":
+          description: The newly created AgilePrinciplesAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessment"
+        "400":
+          description: Validation error
+  /agile-principles-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgilePrinciplesAssessment by id
+      operationId: getAgilePrinciplesAssessment
+      responses:
+        "200":
+          description: The requested AgilePrinciplesAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessment"
+        "404":
+          description: AgilePrinciplesAssessment not found
+    patch:
+      summary: Update an existing AgilePrinciplesAssessment
+      operationId: updateAgilePrinciplesAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessment"
+      responses:
+        "200":
+          description: The updated AgilePrinciplesAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessment"
+        "404":
+          description: AgilePrinciplesAssessment not found
+    delete:
+      summary: Soft-delete a AgilePrinciplesAssessment
+      operationId: deleteAgilePrinciplesAssessment
+      responses:
+        "204":
+          description: AgilePrinciplesAssessment deleted
+        "404":
+          description: AgilePrinciplesAssessment not found
+components:
+  schemas:
+    AgilePrinciplesAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        respondent_id:
+          type: string
+          format: uuid
+          description: Foreign key to the respondent who completed this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+          description: "Lifecycle status: draft, submitted, or reviewed."
+        is_anonymous:
+          type: boolean
+          description: TRUE when the respondent chose to submit anonymously; renderers must mask name, email, and role for these rows.
+        assessment_date:
+          type: string
+          format: date
+          description: Date on which the assessment was completed.
+        assessment_period:
+          type: string
+          enum:
+            - sprint
+            - quarter
+            - half-year
+            - annual
+            - ad-hoc
+            - ""
+          description: "Cadence of the assessment: sprint, quarter, half-year, annual, or ad-hoc."
+        p01_customer_satisfaction:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 1: highest priority is to satisfy the customer through early and continuous delivery of valuable software."
+        p01_comment:
+          type: string
+          description: Free-text comment for principle 1.
+        p01_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 1, range 0.50-2.00, default 1.00. Affects the weighted-mean composite maturity.
+        p02_welcome_change:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 2: changing requirements are welcomed, even late in development, to harness competitive advantage."
+        p02_comment:
+          type: string
+          description: Free-text comment for principle 2.
+        p02_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 2, range 0.50-2.00, default 1.00.
+        p03_deliver_frequently:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 3: deliver working software frequently, within a few weeks or months."
+        p03_comment:
+          type: string
+          description: Free-text comment for principle 3.
+        p03_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 3, range 0.50-2.00, default 1.00.
+        p04_collaboration:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 4: business stakeholders and developers must work together daily."
+        p04_comment:
+          type: string
+          description: Free-text comment for principle 4.
+        p04_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 4, range 0.50-2.00, default 1.00.
+        p05_motivated_individuals:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 5: build projects around motivated individuals, providing them with the environment and support needed."
+        p05_comment:
+          type: string
+          description: Free-text comment for principle 5.
+        p05_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 5, range 0.50-2.00, default 1.00.
+        p06_face_to_face:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 6: the most efficient method for conveying information within a development team is face-to-face communication."
+        p06_comment:
+          type: string
+          description: Free-text comment for principle 6.
+        p06_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 6, range 0.50-2.00, default 1.00.
+        p07_working_software:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 7: working software is the primary measure of progress."
+        p07_comment:
+          type: string
+          description: Free-text comment for principle 7.
+        p07_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 7, range 0.50-2.00, default 1.00.
+        p08_sustainable_development:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 8: agile processes promote a sustainable, consistent pace for developers and users."
+        p08_comment:
+          type: string
+          description: Free-text comment for principle 8.
+        p08_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 8, range 0.50-2.00, default 1.00.
+        p09_technical_excellence:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 9: continuous attention to technical excellence and good design enhances agility."
+        p09_comment:
+          type: string
+          description: Free-text comment for principle 9.
+        p09_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 9, range 0.50-2.00, default 1.00.
+        p10_simplicity:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 10: the art of maximising the amount of work not done is essential."
+        p10_comment:
+          type: string
+          description: Free-text comment for principle 10.
+        p10_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 10, range 0.50-2.00, default 1.00.
+        p11_self_organising_teams:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 11: the best architectures, requirements, and designs emerge from self-organising teams."
+        p11_comment:
+          type: string
+          description: Free-text comment for principle 11.
+        p11_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 11, range 0.50-2.00, default 1.00.
+        p12_regular_reflection:
+          type: integer
+          format: int32
+          description: "Likert 1-5 for principle 12: at regular intervals, the team reflects on how to become more effective, then adjusts behaviour accordingly."
+        p12_comment:
+          type: string
+          description: Free-text comment for principle 12.
+        p12_weight:
+          type: number
+          format: double
+          description: Configurable weight for principle 12, range 0.50-2.00, default 1.00.
+        overall_notes:
+          type: string
+          description: Free-text overall notes captured on the summary step.
+      required:
+        - created_at
+        - updated_at
+        - respondent_id
+        - status
+        - is_anonymous
+        - assessment_period
+        - p01_comment
+        - p01_weight
+        - p02_comment
+        - p02_weight
+        - p03_comment
+        - p03_weight
+        - p04_comment
+        - p04_weight
+        - p05_comment
+        - p05_weight
+        - p06_comment
+        - p06_weight
+        - p07_comment
+        - p07_weight
+        - p08_comment
+        - p08_weight
+        - p09_comment
+        - p09_weight
+        - p10_comment
+        - p10_weight
+        - p11_comment
+        - p11_weight
+        - p12_comment
+        - p12_weight
+        - overall_notes
+      description: One row per submission. Stores the 12 Agile Manifesto principle Likert scores (1-5, nullable when unanswered) and free-text comments per principle. Composite maturity is computed in agile_principles_assessment_grade.

@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: review_calculate
+openapi: 3.1.0
+info:
+  title: Heart Health Check — ReviewCalculate
+  version: 1.0.0
+  description: Clinician review information and AUDIT alcohol screening score.
+paths:
+  /review-calculates:
+    get:
+      summary: List ReviewCalculate records
+      operationId: listReviewCalculate
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReviewCalculate records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReviewCalculate"
+    post:
+      summary: Create a new ReviewCalculate
+      operationId: createReviewCalculate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewCalculate"
+      responses:
+        "201":
+          description: The newly created ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewCalculate"
+        "400":
+          description: Validation error
+  /review-calculates/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReviewCalculate by id
+      operationId: getReviewCalculate
+      responses:
+        "200":
+          description: The requested ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewCalculate"
+        "404":
+          description: ReviewCalculate not found
+    patch:
+      summary: Update an existing ReviewCalculate
+      operationId: updateReviewCalculate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewCalculate"
+      responses:
+        "200":
+          description: The updated ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewCalculate"
+        "404":
+          description: ReviewCalculate not found
+    delete:
+      summary: Soft-delete a ReviewCalculate
+      operationId: deleteReviewCalculate
+      responses:
+        "204":
+          description: ReviewCalculate deleted
+        "404":
+          description: ReviewCalculate not found
+components:
+  schemas:
+    ReviewCalculate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Name of the reviewing clinician.
+        review_date:
+          type: string
+          format: date
+          description: Date of the clinical review.
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes from the reviewing clinician.
+        audit_score:
+          type: integer
+          format: int32
+          description: AUDIT (Alcohol Use Disorders Identification Test) score (0-40).
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - clinician_name
+        - clinical_notes
+      description: Clinician review information and AUDIT alcohol screening score.

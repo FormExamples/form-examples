@@ -1,0 +1,175 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: meeting_outcome
+openapi: 3.1.0
+info:
+  title: Meeting — MeetingOutcome
+  version: 1.0.0
+  description: "The impact or change resulting from the meeting: goal reached, risk identified, alignment achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes."
+paths:
+  /meeting-outcomes:
+    get:
+      summary: List MeetingOutcome records
+      operationId: listMeetingOutcome
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MeetingOutcome records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeetingOutcome"
+    post:
+      summary: Create a new MeetingOutcome
+      operationId: createMeetingOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingOutcome"
+      responses:
+        "201":
+          description: The newly created MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutcome"
+        "400":
+          description: Validation error
+  /meeting-outcomes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MeetingOutcome by id
+      operationId: getMeetingOutcome
+      responses:
+        "200":
+          description: The requested MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutcome"
+        "404":
+          description: MeetingOutcome not found
+    patch:
+      summary: Update an existing MeetingOutcome
+      operationId: updateMeetingOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingOutcome"
+      responses:
+        "200":
+          description: The updated MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutcome"
+        "404":
+          description: MeetingOutcome not found
+    delete:
+      summary: Soft-delete a MeetingOutcome
+      operationId: deleteMeetingOutcome
+      responses:
+        "204":
+          description: MeetingOutcome deleted
+        "404":
+          description: MeetingOutcome not found
+components:
+  schemas:
+    MeetingOutcome:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the outcome in the list.
+        title:
+          type: string
+          maxLength: 255
+          description: Short title summarising the outcome.
+        category:
+          type: string
+          enum:
+            - goal-reached
+            - risk-identified
+            - risk-mitigated
+            - alignment-achieved
+            - decision
+            - blocker-cleared
+            - blocker-raised
+            - commitment
+            - no-outcome
+            - other
+            - ""
+          description: "Outcome category: goal-reached, risk-identified, risk-mitigated, alignment-achieved, decision, blocker-cleared, blocker-raised, commitment, no-outcome, other."
+        description:
+          type: string
+          description: Free-text description of the outcome.
+        impact:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - strategic
+            - ""
+          description: "Subjective impact rating: low, medium, high, strategic."
+        related_action_item_id:
+          type: string
+          format: uuid
+          description: Optional foreign key to an action_item that captures the follow-up needed for this outcome.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - title
+        - category
+        - description
+        - impact
+      description: "The impact or change resulting from the meeting: goal reached, risk identified, alignment achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes."

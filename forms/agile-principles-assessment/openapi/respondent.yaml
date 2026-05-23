@@ -1,0 +1,164 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: respondent
+openapi: 3.1.0
+info:
+  title: Agile Principles Assessment — Respondent
+  version: 1.0.0
+  description: A single person completing an agile-principles assessment. One respondent may submit multiple assessments over time.
+paths:
+  /respondents:
+    get:
+      summary: List Respondent records
+      operationId: listRespondent
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Respondent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Respondent"
+    post:
+      summary: Create a new Respondent
+      operationId: createRespondent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respondent"
+      responses:
+        "201":
+          description: The newly created Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "400":
+          description: Validation error
+  /respondents/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Respondent by id
+      operationId: getRespondent
+      responses:
+        "200":
+          description: The requested Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "404":
+          description: Respondent not found
+    patch:
+      summary: Update an existing Respondent
+      operationId: updateRespondent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respondent"
+      responses:
+        "200":
+          description: The updated Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "404":
+          description: Respondent not found
+    delete:
+      summary: Soft-delete a Respondent
+      operationId: deleteRespondent
+      responses:
+        "204":
+          description: Respondent deleted
+        "404":
+          description: Respondent not found
+components:
+  schemas:
+    Respondent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        full_name:
+          type: string
+          maxLength: 255
+          description: Full name of the respondent.
+        email:
+          type: string
+          maxLength: 255
+          description: Contact email address.
+        role:
+          type: string
+          enum:
+            - individual-contributor
+            - team-lead
+            - scrum-master
+            - product-owner
+            - engineering-manager
+            - agile-coach
+            - executive-sponsor
+            - other
+            - ""
+          description: "Job role: individual-contributor, team-lead, scrum-master, product-owner, engineering-manager, agile-coach, executive-sponsor, or other."
+        team_name:
+          type: string
+          maxLength: 255
+          description: Name of the team being assessed.
+        organisation_name:
+          type: string
+          maxLength: 255
+          description: Name of the broader organisation, division, or programme.
+        years_in_agile:
+          type: integer
+          format: int32
+          description: Number of years the respondent has worked in agile environments.
+      required:
+        - created_at
+        - updated_at
+        - full_name
+        - email
+        - role
+        - team_name
+        - organisation_name
+      description: A single person completing an agile-principles assessment. One respondent may submit multiple assessments over time.

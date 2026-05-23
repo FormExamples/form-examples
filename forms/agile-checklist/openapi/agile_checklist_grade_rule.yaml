@@ -1,0 +1,160 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_checklist_grade_rule
+openapi: 3.1.0
+info:
+  title: Agile Checklist — AgileChecklistGradeRule
+  version: 1.0.0
+  description: Audit trail of every coaching rule fired by the maturity engine, one row per section that was placed into a band (high / mid / low / unanswered).
+paths:
+  /agile-checklist-grade-rules:
+    get:
+      summary: List AgileChecklistGradeRule records
+      operationId: listAgileChecklistGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileChecklistGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileChecklistGradeRule"
+    post:
+      summary: Create a new AgileChecklistGradeRule
+      operationId: createAgileChecklistGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGradeRule"
+      responses:
+        "201":
+          description: The newly created AgileChecklistGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeRule"
+        "400":
+          description: Validation error
+  /agile-checklist-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileChecklistGradeRule by id
+      operationId: getAgileChecklistGradeRule
+      responses:
+        "200":
+          description: The requested AgileChecklistGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeRule"
+        "404":
+          description: AgileChecklistGradeRule not found
+    patch:
+      summary: Update an existing AgileChecklistGradeRule
+      operationId: updateAgileChecklistGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileChecklistGradeRule"
+      responses:
+        "200":
+          description: The updated AgileChecklistGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileChecklistGradeRule"
+        "404":
+          description: AgileChecklistGradeRule not found
+    delete:
+      summary: Soft-delete a AgileChecklistGradeRule
+      operationId: deleteAgileChecklistGradeRule
+      responses:
+        "204":
+          description: AgileChecklistGradeRule deleted
+        "404":
+          description: AgileChecklistGradeRule not found
+components:
+  schemas:
+    AgileChecklistGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_checklist_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-TEAMS-LOW).
+        section:
+          type: string
+          enum:
+            - teams
+            - stakeholders
+            - practices
+            - ""
+          description: "Section the rule applies to: teams, stakeholders, or practices."
+        band:
+          type: string
+          enum:
+            - high
+            - mid
+            - low
+            - unanswered
+            - ""
+          description: "Band the section was placed into: high, mid, low, or unanswered."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired and its coaching implication.
+      required:
+        - created_at
+        - updated_at
+        - agile_checklist_grade_id
+        - rule_id
+        - section
+        - band
+        - description
+      description: Audit trail of every coaching rule fired by the maturity engine, one row per section that was placed into a band (high / mid / low / unanswered).

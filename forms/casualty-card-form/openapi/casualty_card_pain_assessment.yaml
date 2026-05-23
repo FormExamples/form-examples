@@ -1,0 +1,164 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_pain_assessment
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardPainAssessment
+  version: 1.0.0
+  description: 1:1 with casualty_card. Structured pain assessment using NRS and descriptive characterisation.
+paths:
+  /casualty-card-pain-assessments:
+    get:
+      summary: List CasualtyCardPainAssessment records
+      operationId: listCasualtyCardPainAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardPainAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardPainAssessment"
+    post:
+      summary: Create a new CasualtyCardPainAssessment
+      operationId: createCasualtyCardPainAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPainAssessment"
+      responses:
+        "201":
+          description: The newly created CasualtyCardPainAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPainAssessment"
+        "400":
+          description: Validation error
+  /casualty-card-pain-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardPainAssessment by id
+      operationId: getCasualtyCardPainAssessment
+      responses:
+        "200":
+          description: The requested CasualtyCardPainAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPainAssessment"
+        "404":
+          description: CasualtyCardPainAssessment not found
+    patch:
+      summary: Update an existing CasualtyCardPainAssessment
+      operationId: updateCasualtyCardPainAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPainAssessment"
+      responses:
+        "200":
+          description: The updated CasualtyCardPainAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPainAssessment"
+        "404":
+          description: CasualtyCardPainAssessment not found
+    delete:
+      summary: Soft-delete a CasualtyCardPainAssessment
+      operationId: deleteCasualtyCardPainAssessment
+      responses:
+        "204":
+          description: CasualtyCardPainAssessment deleted
+        "404":
+          description: CasualtyCardPainAssessment not found
+components:
+  schemas:
+    CasualtyCardPainAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        pain_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether pain is present: yes, no, or empty string if unanswered."
+        pain_score:
+          type: integer
+          format: int32
+          description: Numeric Rating Scale 0-10 (0 = no pain, 10 = worst pain imaginable). NULL if not assessed.
+        pain_location:
+          type: string
+          description: Anatomical location of the pain.
+        pain_character:
+          type: string
+          description: Nature of the pain (e.g. sharp, dull, burning, throbbing).
+        pain_onset:
+          type: string
+          description: When the pain started.
+        pain_severity_category:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Severity category: mild, moderate, severe, or empty string if unanswered."
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - pain_present
+        - pain_location
+        - pain_character
+        - pain_onset
+        - pain_severity_category
+      description: 1:1 with casualty_card. Structured pain assessment using NRS and descriptive characterisation.

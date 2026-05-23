@@ -1,0 +1,177 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — Lpa
+  version: 1.0.0
+  description: Header row for a Lasting Power of Attorney for Health and Welfare under the Mental Capacity Act 2005.
+paths:
+  /lpas:
+    get:
+      summary: List Lpa records
+      operationId: listLpa
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Lpa records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lpa"
+    post:
+      summary: Create a new Lpa
+      operationId: createLpa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lpa"
+      responses:
+        "201":
+          description: The newly created Lpa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lpa"
+        "400":
+          description: Validation error
+  /lpas/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Lpa by id
+      operationId: getLpa
+      responses:
+        "200":
+          description: The requested Lpa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lpa"
+        "404":
+          description: Lpa not found
+    patch:
+      summary: Update an existing Lpa
+      operationId: updateLpa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lpa"
+      responses:
+        "200":
+          description: The updated Lpa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lpa"
+        "404":
+          description: Lpa not found
+    delete:
+      summary: Soft-delete a Lpa
+      operationId: deleteLpa
+      responses:
+        "204":
+          description: Lpa deleted
+        "404":
+          description: Lpa not found
+components:
+  schemas:
+    Lpa:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        donor_id:
+          type: string
+          format: uuid
+          description: Foreign key to the donor.
+        certificate_provider_id:
+          type: string
+          format: uuid
+          description: Foreign key to the certificate provider. Nullable while the LPA is still in draft and the certificate provider has not been chosen.
+        form_version:
+          type: string
+          maxLength: 20
+          description: Version of the LP1H form template used (e.g. LP1H-2024).
+        jurisdiction:
+          type: string
+          enum:
+            - england
+            - wales
+            - ""
+          description: "Jurisdiction: england or wales (Mental Capacity Act 2005 applies to both)."
+        status:
+          type: string
+          enum:
+            - draft
+            - awaiting-signatures
+            - ready-to-register
+            - submitted-to-opg
+            - registered
+            - rejected
+            - revoked
+          description: Lifecycle status of the LPA instrument.
+        opg_reference:
+          type: string
+          maxLength: 50
+          description: Office of the Public Guardian reference number once registered.
+        registered_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the OPG registered this LPA.
+        effective_from:
+          type: string
+          format: date-time
+          description: Earliest date the LPA can be used (after registration and loss of capacity).
+        notes:
+          type: string
+          description: Free-text notes from the donor, solicitor, or case manager.
+      required:
+        - created_at
+        - updated_at
+        - donor_id
+        - form_version
+        - jurisdiction
+        - status
+        - opg_reference
+        - notes
+      description: Header row for a Lasting Power of Attorney for Health and Welfare under the Mental Capacity Act 2005.

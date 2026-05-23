@@ -1,0 +1,263 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: arc42_documentation_grade
+openapi: 3.1.0
+info:
+  title: Arc42 — Arc42DocumentationGrade
+  version: 1.0.0
+  description: "Grading result for an arc42 documentation snapshot: computed and final maturity band plus per-section completeness."
+paths:
+  /arc42-documentation-grades:
+    get:
+      summary: List Arc42DocumentationGrade records
+      operationId: listArc42DocumentationGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Arc42DocumentationGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Arc42DocumentationGrade"
+    post:
+      summary: Create a new Arc42DocumentationGrade
+      operationId: createArc42DocumentationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42DocumentationGrade"
+      responses:
+        "201":
+          description: The newly created Arc42DocumentationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGrade"
+        "400":
+          description: Validation error
+  /arc42-documentation-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Arc42DocumentationGrade by id
+      operationId: getArc42DocumentationGrade
+      responses:
+        "200":
+          description: The requested Arc42DocumentationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGrade"
+        "404":
+          description: Arc42DocumentationGrade not found
+    patch:
+      summary: Update an existing Arc42DocumentationGrade
+      operationId: updateArc42DocumentationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42DocumentationGrade"
+      responses:
+        "200":
+          description: The updated Arc42DocumentationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGrade"
+        "404":
+          description: Arc42DocumentationGrade not found
+    delete:
+      summary: Soft-delete a Arc42DocumentationGrade
+      operationId: deleteArc42DocumentationGrade
+      responses:
+        "204":
+          description: Arc42DocumentationGrade deleted
+        "404":
+          description: Arc42DocumentationGrade not found
+components:
+  schemas:
+    Arc42DocumentationGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (1:1, cascade-deleted).
+        computed_maturity:
+          type: string
+          enum:
+            - draft
+            - reviewable
+            - ready
+            - mature
+            - ""
+          description: "Maturity band computed by the scoring engine: draft, reviewable, ready, or mature."
+        final_maturity:
+          type: string
+          enum:
+            - draft
+            - reviewable
+            - ready
+            - mature
+            - ""
+          description: Final maturity band after any author override; equals computed_maturity when no override is applied.
+        override_reason:
+          type: string
+          description: Author-provided reason when final_maturity differs from computed_maturity.
+        completeness_section_1:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§1 Introduction & Goals completeness: empty, partial, or complete."
+        completeness_section_2:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§2 Constraints completeness: empty, partial, or complete."
+        completeness_section_3:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§3 Context & Scope completeness: empty, partial, or complete."
+        completeness_section_4:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§4 Solution Strategy completeness: empty, partial, or complete."
+        completeness_section_5:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§5 Building Block View completeness: empty, partial, or complete."
+        completeness_section_6:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§6 Runtime View completeness: empty, partial, or complete."
+        completeness_section_7:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§7 Deployment View completeness: empty, partial, or complete."
+        completeness_section_8:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§8 Crosscutting Concepts completeness: empty, partial, or complete."
+        completeness_section_9:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§9 Architectural Decisions completeness: empty, partial, or complete."
+        completeness_section_10:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§10 Quality Requirements completeness: empty, partial, or complete."
+        completeness_section_11:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§11 Risks & Technical Debt completeness: empty, partial, or complete."
+        completeness_section_12:
+          type: string
+          enum:
+            - empty
+            - partial
+            - complete
+            - ""
+          description: "§12 Glossary completeness: empty, partial, or complete."
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - computed_maturity
+        - final_maturity
+        - override_reason
+        - completeness_section_1
+        - completeness_section_2
+        - completeness_section_3
+        - completeness_section_4
+        - completeness_section_5
+        - completeness_section_6
+        - completeness_section_7
+        - completeness_section_8
+        - completeness_section_9
+        - completeness_section_10
+        - completeness_section_11
+        - completeness_section_12
+      description: "Grading result for an arc42 documentation snapshot: computed and final maturity band plus per-section completeness."

@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: release_form
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — ReleaseForm
+  version: 1.0.0
+  description: Medical records release permission form. Parent entity for all form sections.
+paths:
+  /release-forms:
+    get:
+      summary: List ReleaseForm records
+      operationId: listReleaseForm
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReleaseForm records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReleaseForm"
+    post:
+      summary: Create a new ReleaseForm
+      operationId: createReleaseForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReleaseForm"
+      responses:
+        "201":
+          description: The newly created ReleaseForm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReleaseForm"
+        "400":
+          description: Validation error
+  /release-forms/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReleaseForm by id
+      operationId: getReleaseForm
+      responses:
+        "200":
+          description: The requested ReleaseForm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReleaseForm"
+        "404":
+          description: ReleaseForm not found
+    patch:
+      summary: Update an existing ReleaseForm
+      operationId: updateReleaseForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReleaseForm"
+      responses:
+        "200":
+          description: The updated ReleaseForm
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReleaseForm"
+        "404":
+          description: ReleaseForm not found
+    delete:
+      summary: Soft-delete a ReleaseForm
+      operationId: deleteReleaseForm
+      responses:
+        "204":
+          description: ReleaseForm deleted
+        "404":
+          description: ReleaseForm not found
+components:
+  schemas:
+    ReleaseForm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this release form.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - approved
+            - expired
+            - revoked
+          description: "Lifecycle status: draft, submitted, approved, expired, or revoked."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+      description: Medical records release permission form. Parent entity for all form sections.

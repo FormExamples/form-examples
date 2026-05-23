@@ -1,0 +1,154 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_grade_flag
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeGradeFlag
+  version: 1.0.0
+  description: Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).
+paths:
+  /outpatient-outcome-grade-flags:
+    get:
+      summary: List OutpatientOutcomeGradeFlag records
+      operationId: listOutpatientOutcomeGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+    post:
+      summary: Create a new OutpatientOutcomeGradeFlag
+      operationId: createOutpatientOutcomeGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+        "400":
+          description: Validation error
+  /outpatient-outcome-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeGradeFlag by id
+      operationId: getOutpatientOutcomeGradeFlag
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+        "404":
+          description: OutpatientOutcomeGradeFlag not found
+    patch:
+      summary: Update an existing OutpatientOutcomeGradeFlag
+      operationId: updateOutpatientOutcomeGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeFlag"
+        "404":
+          description: OutpatientOutcomeGradeFlag not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeGradeFlag
+      operationId: deleteOutpatientOutcomeGradeFlag
+      responses:
+        "204":
+          description: OutpatientOutcomeGradeFlag deleted
+        "404":
+          description: OutpatientOutcomeGradeFlag not found
+components:
+  schemas:
+    OutpatientOutcomeGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grading result.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable identifier of the flag.
+        category:
+          type: string
+          maxLength: 100
+          description: Category / domain of the flag.
+        description:
+          type: string
+          description: Human-readable description of the flag.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+          description: "Priority: low, medium, high, critical."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - flag_id
+        - category
+        - description
+        - priority
+      description: Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).

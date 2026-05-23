@@ -1,0 +1,196 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_registration_recipient
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaRegistrationRecipient
+  version: 1.0.0
+  description: LPA registration recipient — who receives the registered LPA and how (LP1F section 13).
+paths:
+  /lpa-registration-recipients:
+    get:
+      summary: List LpaRegistrationRecipient records
+      operationId: listLpaRegistrationRecipient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaRegistrationRecipient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaRegistrationRecipient"
+    post:
+      summary: Create a new LpaRegistrationRecipient
+      operationId: createLpaRegistrationRecipient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationRecipient"
+      responses:
+        "201":
+          description: The newly created LpaRegistrationRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationRecipient"
+        "400":
+          description: Validation error
+  /lpa-registration-recipients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaRegistrationRecipient by id
+      operationId: getLpaRegistrationRecipient
+      responses:
+        "200":
+          description: The requested LpaRegistrationRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationRecipient"
+        "404":
+          description: LpaRegistrationRecipient not found
+    patch:
+      summary: Update an existing LpaRegistrationRecipient
+      operationId: updateLpaRegistrationRecipient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationRecipient"
+      responses:
+        "200":
+          description: The updated LpaRegistrationRecipient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationRecipient"
+        "404":
+          description: LpaRegistrationRecipient not found
+    delete:
+      summary: Soft-delete a LpaRegistrationRecipient
+      operationId: deleteLpaRegistrationRecipient
+      responses:
+        "204":
+          description: LpaRegistrationRecipient deleted
+        "404":
+          description: LpaRegistrationRecipient not found
+components:
+  schemas:
+    LpaRegistrationRecipient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; UNIQUE so only one recipient block per LPA; cascades on delete.
+        recipient_kind:
+          type: string
+          enum:
+            - donor
+            - attorney
+            - other
+            - ""
+          description: "Who receives the registered LPA. One of: donor, attorney, other."
+        recipient_person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the recipient when recipient_kind is donor, attorney, or a named other individual; nullable when the recipient is a company.
+        company_name:
+          type: string
+          description: Company or organisation name when the recipient is not a natural person (e.g. solicitors' firm acting for the donor).
+        prefers_post:
+          type: boolean
+          description: TRUE if the recipient prefers correspondence by post.
+        prefers_phone:
+          type: boolean
+          description: TRUE if the recipient prefers correspondence by phone.
+        prefers_email:
+          type: boolean
+          description: TRUE if the recipient prefers correspondence by email.
+        prefers_welsh:
+          type: boolean
+          description: TRUE if the recipient prefers correspondence in Welsh (Welsh Language Act 1993).
+        contact_phone:
+          type: string
+          description: Contact phone number used by the OPG to reach the recipient.
+        contact_email:
+          type: string
+          description: Contact email address used by the OPG to reach the recipient.
+        other_first_names:
+          type: string
+          description: "First names of the \"other\" recipient when recipient_kind is \"other\" and the recipient is not represented by a person row (e.g. a one-off named contact at a solicitors' firm)."
+        other_last_name:
+          type: string
+          description: "Last name of the \"other\" recipient when recipient_kind is \"other\"."
+        other_address_line_1:
+          type: string
+          description: "Address line 1 of the \"other\" recipient when recipient_kind is \"other\"."
+        other_address_line_2:
+          type: string
+          description: "Address line 2 of the \"other\" recipient when recipient_kind is \"other\"."
+        other_address_line_3:
+          type: string
+          description: "Address line 3 of the \"other\" recipient when recipient_kind is \"other\"."
+        other_postcode:
+          type: string
+          description: "Postcode of the \"other\" recipient when recipient_kind is \"other\"."
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - recipient_kind
+        - company_name
+        - prefers_post
+        - prefers_phone
+        - prefers_email
+        - prefers_welsh
+        - contact_phone
+        - contact_email
+        - other_first_names
+        - other_last_name
+        - other_address_line_1
+        - other_address_line_2
+        - other_address_line_3
+        - other_postcode
+      description: LPA registration recipient — who receives the registered LPA and how (LP1F section 13).

@@ -1,0 +1,154 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: participant
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — Participant
+  version: 1.0.0
+  description: "A participant linked to an OKR objective: DRI, contributor, reviewer, stakeholder, or observer."
+paths:
+  /participants:
+    get:
+      summary: List Participant records
+      operationId: listParticipant
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Participant records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+    post:
+      summary: Create a new Participant
+      operationId: createParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "201":
+          description: The newly created Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "400":
+          description: Validation error
+  /participants/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Participant by id
+      operationId: getParticipant
+      responses:
+        "200":
+          description: The requested Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    patch:
+      summary: Update an existing Participant
+      operationId: updateParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "200":
+          description: The updated Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    delete:
+      summary: Soft-delete a Participant
+      operationId: deleteParticipant
+      responses:
+        "204":
+          description: Participant deleted
+        "404":
+          description: Participant not found
+components:
+  schemas:
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_objective_id:
+          type: string
+          format: uuid
+          description: Foreign key to okr_objective. The FK constraint is added in the okr_objective migration via ALTER TABLE.
+        role:
+          type: string
+          enum:
+            - dri
+            - contributor
+            - reviewer
+            - stakeholder
+            - observer
+            - ""
+          description: "Participant role: dri (Directly Responsible Individual), contributor, reviewer, stakeholder, or observer."
+        name:
+          type: string
+          description: Display name of the participant.
+        email:
+          type: string
+          description: Email address of the participant.
+        notes:
+          type: string
+          description: Free-text notes about the participant role.
+      required:
+        - created_at
+        - updated_at
+        - okr_objective_id
+        - role
+        - name
+        - email
+        - notes
+      description: "A participant linked to an OKR objective: DRI, contributor, reviewer, stakeholder, or observer."

@@ -1,0 +1,145 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: communication
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — Communication
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions."
+paths:
+  /communications:
+    get:
+      summary: List Communication records
+      operationId: listCommunication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Communication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Communication"
+    post:
+      summary: Create a new Communication
+      operationId: createCommunication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Communication"
+      responses:
+        "201":
+          description: The newly created Communication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Communication"
+        "400":
+          description: Validation error
+  /communications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Communication by id
+      operationId: getCommunication
+      responses:
+        "200":
+          description: The requested Communication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Communication"
+        "404":
+          description: Communication not found
+    patch:
+      summary: Update an existing Communication
+      operationId: updateCommunication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Communication"
+      responses:
+        "200":
+          description: The updated Communication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Communication"
+        "404":
+          description: Communication not found
+    delete:
+      summary: Soft-delete a Communication
+      operationId: deleteCommunication
+      responses:
+        "204":
+          description: Communication deleted
+        "404":
+          description: Communication not found
+components:
+  schemas:
+    Communication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        explaining_condition:
+          type: integer
+          format: int32
+          description: Satisfaction with how clearly the condition was explained (1-5 Likert). NULL if unanswered.
+        answering_questions:
+          type: integer
+          format: int32
+          description: Satisfaction with how thoroughly questions were answered (1-5 Likert). NULL if unanswered.
+        time_spent:
+          type: integer
+          format: int32
+          description: Satisfaction with time the provider spent with patient (1-5 Likert). NULL if unanswered.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+      description: "1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions."

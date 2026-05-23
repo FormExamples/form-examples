@@ -1,0 +1,187 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: administration_record
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — AdministrationRecord
+  version: 1.0.0
+  description: Vaccine administration details including batch, site, and route. One-to-one child of assessment.
+paths:
+  /administration-records:
+    get:
+      summary: List AdministrationRecord records
+      operationId: listAdministrationRecord
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AdministrationRecord records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdministrationRecord"
+    post:
+      summary: Create a new AdministrationRecord
+      operationId: createAdministrationRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdministrationRecord"
+      responses:
+        "201":
+          description: The newly created AdministrationRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdministrationRecord"
+        "400":
+          description: Validation error
+  /administration-records/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AdministrationRecord by id
+      operationId: getAdministrationRecord
+      responses:
+        "200":
+          description: The requested AdministrationRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdministrationRecord"
+        "404":
+          description: AdministrationRecord not found
+    patch:
+      summary: Update an existing AdministrationRecord
+      operationId: updateAdministrationRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdministrationRecord"
+      responses:
+        "200":
+          description: The updated AdministrationRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdministrationRecord"
+        "404":
+          description: AdministrationRecord not found
+    delete:
+      summary: Soft-delete a AdministrationRecord
+      operationId: deleteAdministrationRecord
+      responses:
+        "204":
+          description: AdministrationRecord deleted
+        "404":
+          description: AdministrationRecord not found
+components:
+  schemas:
+    AdministrationRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        vaccine_name:
+          type: string
+          maxLength: 255
+          description: Vaccine name.
+        batch_number:
+          type: string
+          maxLength: 50
+          description: Batch number.
+        expiry_date:
+          type: string
+          format: date
+          description: Expiry date.
+        administration_site:
+          type: string
+          enum:
+            - leftDeltoid
+            - rightDeltoid
+            - leftThigh
+            - rightThigh
+            - oral
+            - nasal
+            - ""
+          description: "Administration site. One of: leftDeltoid, rightDeltoid, leftThigh, rightThigh, oral, nasal."
+        administration_route:
+          type: string
+          enum:
+            - intramuscular
+            - subcutaneous
+            - intradermal
+            - oral
+            - nasal
+            - ""
+          description: "Administration route. One of: intramuscular, subcutaneous, intradermal, oral, nasal."
+        dose_number:
+          type: string
+          enum:
+            - "1"
+            - "2"
+            - "3"
+            - booster
+            - ""
+          description: "Dose number. One of: 1, 2, 3, booster."
+        administered_by:
+          type: string
+          maxLength: 255
+          description: Administered by.
+        administration_date:
+          type: string
+          format: date
+          description: Administration date.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - vaccine_name
+        - batch_number
+        - administration_site
+        - administration_route
+        - dose_number
+        - administered_by
+      description: Vaccine administration details including batch, site, and route. One-to-one child of assessment.

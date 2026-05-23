@@ -1,0 +1,279 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: assessment, assessment_polypharmacy_review, assessment_polypharmacy_review_medication
+openapi: 3.1.0
+info:
+  title: Gerontology Assessment — Assessment
+  version: 1.0.0
+  description: Gerontology assessment using the Clinical Frailty Scale. Parent entity for all assessment sections.
+paths:
+  /assessments:
+    get:
+      summary: List Assessment records
+      operationId: listAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessment"
+    post:
+      summary: Create a new Assessment
+      operationId: createAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "201":
+          description: The newly created Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "400":
+          description: Validation error
+  /assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessment by id
+      operationId: getAssessment
+      responses:
+        "200":
+          description: The requested Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    patch:
+      summary: Update an existing Assessment
+      operationId: updateAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    delete:
+      summary: Soft-delete a Assessment
+      operationId: deleteAssessment
+      responses:
+        "204":
+          description: Assessment deleted
+        "404":
+          description: Assessment not found
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+        polypharmacy_review_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        total_regular_medications:
+          type: integer
+          format: int32
+          description: Total number of regular medications, NULL if unanswered.
+        total_prn_medications:
+          type: integer
+          format: int32
+          description: Total number of as-needed (PRN) medications, NULL if unanswered.
+        polypharmacy_flag:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether polypharmacy is flagged (5+ medications): yes, no, or empty string."
+        medication_review_date:
+          type: string
+          format: date
+          description: Date of last medication review, NULL if unanswered.
+        falls_risk_medications:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient is taking falls-risk medications (e.g. sedatives, antihypertensives): yes, no, or empty string."
+        falls_risk_medication_details:
+          type: string
+          description: Details of falls-risk medications.
+        anticholinergic_burden:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Anticholinergic burden level: low, moderate, high, or empty string."
+        drug_interactions_identified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether significant drug interactions have been identified: yes, no, or empty string."
+        drug_interaction_details:
+          type: string
+          description: Details of significant drug interactions.
+        adherence_concerns:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether there are medication adherence concerns: yes, no, or empty string."
+        adherence_details:
+          type: string
+          description: Details of adherence concerns.
+        stopp_start_review_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a STOPP/START criteria review has been done: yes, no, or empty string."
+        deprescribing_opportunities:
+          type: string
+          description: Free-text description of deprescribing opportunities identified.
+        polypharmacy_notes:
+          type: string
+          description: Free-text notes on polypharmacy review.
+        polypharmacy_review_medication_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        polypharmacy_review_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_polypharmacy_review table.
+        medication_name:
+          type: string
+          maxLength: 255
+          description: Name of the medication.
+        dose:
+          type: string
+          maxLength: 100
+          description: Dose and strength (e.g. 5mg, 10mg/5ml).
+        frequency:
+          type: string
+          maxLength: 100
+          description: Dosing frequency (e.g. once daily, twice daily, PRN).
+        route:
+          type: string
+          enum:
+            - oral
+            - topical
+            - inhaled
+            - injectable
+            - patch
+            - other
+            - ""
+          description: "Route of administration: oral, topical, inhaled, injectable, patch, other, or empty string."
+        indication:
+          type: string
+          maxLength: 255
+          description: Clinical indication for the medication.
+        is_prn:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether this is a PRN (as-needed) medication: yes, no, or empty string."
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order within the medication list.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - polypharmacy_flag
+        - falls_risk_medications
+        - falls_risk_medication_details
+        - anticholinergic_burden
+        - drug_interactions_identified
+        - drug_interaction_details
+        - adherence_concerns
+        - adherence_details
+        - stopp_start_review_done
+        - deprescribing_opportunities
+        - polypharmacy_notes
+        - polypharmacy_review_id
+        - medication_name
+        - dose
+        - frequency
+        - route
+        - indication
+        - is_prn
+        - sort_order
+      description: Gerontology assessment using the Clinical Frailty Scale. Parent entity for all assessment sections.

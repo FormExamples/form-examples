@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: prescription_request_type
+openapi: 3.1.0
+info:
+  title: Prescription Request — PrescriptionRequestType
+  version: 1.0.0
+  description: Request type flags for a prescription request. One-to-one child of prescription_request.
+paths:
+  /prescription-request-types:
+    get:
+      summary: List PrescriptionRequestType records
+      operationId: listPrescriptionRequestType
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PrescriptionRequestType records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PrescriptionRequestType"
+    post:
+      summary: Create a new PrescriptionRequestType
+      operationId: createPrescriptionRequestType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionRequestType"
+      responses:
+        "201":
+          description: The newly created PrescriptionRequestType
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequestType"
+        "400":
+          description: Validation error
+  /prescription-request-types/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PrescriptionRequestType by id
+      operationId: getPrescriptionRequestType
+      responses:
+        "200":
+          description: The requested PrescriptionRequestType
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequestType"
+        "404":
+          description: PrescriptionRequestType not found
+    patch:
+      summary: Update an existing PrescriptionRequestType
+      operationId: updatePrescriptionRequestType
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionRequestType"
+      responses:
+        "200":
+          description: The updated PrescriptionRequestType
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequestType"
+        "404":
+          description: PrescriptionRequestType not found
+    delete:
+      summary: Soft-delete a PrescriptionRequestType
+      operationId: deletePrescriptionRequestType
+      responses:
+        "204":
+          description: PrescriptionRequestType deleted
+        "404":
+          description: PrescriptionRequestType not found
+components:
+  schemas:
+    PrescriptionRequestType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        prescription_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the prescription_request table.
+        is_new_prescription:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether this is a new prescription (yes) or a refill (no).
+        is_emergency:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether this is an emergency prescription request: yes, no, or empty."
+        additional_notes:
+          type: string
+          description: Additional notes about the request.
+      required:
+        - created_at
+        - updated_at
+        - prescription_request_id
+        - is_new_prescription
+        - is_emergency
+        - additional_notes
+      description: Request type flags for a prescription request. One-to-one child of prescription_request.

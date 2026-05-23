@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: validation_fired_rule
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — ValidationFiredRule
+  version: 1.0.0
+  description: Validation rules that fired during the HIPAA-authorization check. Many-to-one child of validation_result.
+paths:
+  /validation-fired-rules:
+    get:
+      summary: List ValidationFiredRule records
+      operationId: listValidationFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ValidationFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidationFiredRule"
+    post:
+      summary: Create a new ValidationFiredRule
+      operationId: createValidationFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationFiredRule"
+      responses:
+        "201":
+          description: The newly created ValidationFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationFiredRule"
+        "400":
+          description: Validation error
+  /validation-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ValidationFiredRule by id
+      operationId: getValidationFiredRule
+      responses:
+        "200":
+          description: The requested ValidationFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationFiredRule"
+        "404":
+          description: ValidationFiredRule not found
+    patch:
+      summary: Update an existing ValidationFiredRule
+      operationId: updateValidationFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationFiredRule"
+      responses:
+        "200":
+          description: The updated ValidationFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationFiredRule"
+        "404":
+          description: ValidationFiredRule not found
+    delete:
+      summary: Soft-delete a ValidationFiredRule
+      operationId: deleteValidationFiredRule
+      responses:
+        "204":
+          description: ValidationFiredRule deleted
+        "404":
+          description: ValidationFiredRule not found
+components:
+  schemas:
+    ValidationFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        validation_result_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent validation result.
+        rule_id:
+          type: string
+          maxLength: 60
+          description: Identifier of the validation rule that fired (e.g. phi-description-specific).
+        citation:
+          type: string
+          maxLength: 80
+          description: Regulatory citation backing the rule (e.g. 45 CFR § 164.508(c)(1)(i)).
+        domain:
+          type: string
+          enum:
+            - ""
+            - core-element
+            - required-statement
+            - sensitive-category
+            - compound
+            - expiration
+            - representative
+          description: "Rule domain: core-element, required-statement, sensitive-category, compound, expiration, representative, or empty."
+        description:
+          type: string
+          description: Human-readable description of what the rule checks.
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Rule priority: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - validation_result_id
+        - rule_id
+        - citation
+        - domain
+        - description
+        - priority
+      description: Validation rules that fired during the HIPAA-authorization check. Many-to-one child of validation_result.

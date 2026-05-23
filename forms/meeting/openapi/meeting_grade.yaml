@@ -1,0 +1,217 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: meeting_grade
+openapi: 3.1.0
+info:
+  title: Meeting — MeetingGrade
+  version: 1.0.0
+  description: Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.
+paths:
+  /meeting-grades:
+    get:
+      summary: List MeetingGrade records
+      operationId: listMeetingGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MeetingGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeetingGrade"
+    post:
+      summary: Create a new MeetingGrade
+      operationId: createMeetingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingGrade"
+      responses:
+        "201":
+          description: The newly created MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGrade"
+        "400":
+          description: Validation error
+  /meeting-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MeetingGrade by id
+      operationId: getMeetingGrade
+      responses:
+        "200":
+          description: The requested MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGrade"
+        "404":
+          description: MeetingGrade not found
+    patch:
+      summary: Update an existing MeetingGrade
+      operationId: updateMeetingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingGrade"
+      responses:
+        "200":
+          description: The updated MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGrade"
+        "404":
+          description: MeetingGrade not found
+    delete:
+      summary: Soft-delete a MeetingGrade
+      operationId: deleteMeetingGrade
+      responses:
+        "204":
+          description: MeetingGrade deleted
+        "404":
+          description: MeetingGrade not found
+components:
+  schemas:
+    MeetingGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting row (unique, 1:1).
+        duration_minutes:
+          type: integer
+          format: int32
+          description: Derived duration in minutes from actual_start_at to actual_end_at, or scheduled fallback.
+        agenda_item_count:
+          type: integer
+          format: int32
+          description: Derived count of agenda_item rows.
+        participant_count:
+          type: integer
+          format: int32
+          description: Derived count of participant rows.
+        accepted_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with response_status = accepted.
+        declined_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with response_status = declined.
+        attended_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with attendance_status = present or late or remote.
+        action_item_count:
+          type: integer
+          format: int32
+          description: Derived count of action_item rows.
+        output_count:
+          type: integer
+          format: int32
+          description: Derived count of meeting_output rows.
+        outcome_count:
+          type: integer
+          format: int32
+          description: Derived count of meeting_outcome rows.
+        completion_status:
+          type: string
+          enum:
+            - planned
+            - in-progress
+            - complete
+            - incomplete
+            - ""
+          description: "Completion status derived by validateMeeting: planned, in-progress, complete, incomplete."
+        overall_health:
+          type: string
+          enum:
+            - green
+            - amber
+            - red
+            - ""
+          description: "Overall health: green (no flags), amber (low/medium flags), red (high-priority flag fired)."
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the organiser overrode the engine-computed completion status, if any.
+        notes:
+          type: string
+          description: Free-text organiser sign-off notes.
+        signed_by:
+          type: string
+          maxLength: 255
+          description: Name or identifier of the organiser who signed off.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the organiser electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - agenda_item_count
+        - participant_count
+        - accepted_count
+        - declined_count
+        - attended_count
+        - action_item_count
+        - output_count
+        - outcome_count
+        - completion_status
+        - overall_health
+        - override_reason
+        - notes
+        - signed_by
+        - graded_at
+      description: Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.

@@ -1,0 +1,179 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_clinical_examination
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardClinicalExamination
+  version: 1.0.0
+  description: 1:1 with casualty_card. Systems-based clinical examination findings.
+paths:
+  /casualty-card-clinical-examinations:
+    get:
+      summary: List CasualtyCardClinicalExamination records
+      operationId: listCasualtyCardClinicalExamination
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardClinicalExamination records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+    post:
+      summary: Create a new CasualtyCardClinicalExamination
+      operationId: createCasualtyCardClinicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+      responses:
+        "201":
+          description: The newly created CasualtyCardClinicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+        "400":
+          description: Validation error
+  /casualty-card-clinical-examinations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardClinicalExamination by id
+      operationId: getCasualtyCardClinicalExamination
+      responses:
+        "200":
+          description: The requested CasualtyCardClinicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+        "404":
+          description: CasualtyCardClinicalExamination not found
+    patch:
+      summary: Update an existing CasualtyCardClinicalExamination
+      operationId: updateCasualtyCardClinicalExamination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+      responses:
+        "200":
+          description: The updated CasualtyCardClinicalExamination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardClinicalExamination"
+        "404":
+          description: CasualtyCardClinicalExamination not found
+    delete:
+      summary: Soft-delete a CasualtyCardClinicalExamination
+      operationId: deleteCasualtyCardClinicalExamination
+      responses:
+        "204":
+          description: CasualtyCardClinicalExamination deleted
+        "404":
+          description: CasualtyCardClinicalExamination not found
+components:
+  schemas:
+    CasualtyCardClinicalExamination:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        general_appearance:
+          type: string
+          description: General appearance (e.g. alert, distressed, comfortable, unwell).
+        head_and_face:
+          type: string
+          description: Head and face examination findings.
+        neck:
+          type: string
+          description: Neck examination findings (e.g. JVP, lymphadenopathy, c-spine tenderness).
+        chest_cardiovascular:
+          type: string
+          description: Cardiovascular examination findings (e.g. heart sounds, murmurs, oedema).
+        chest_respiratory:
+          type: string
+          description: Respiratory examination findings (e.g. air entry, added sounds).
+        abdomen:
+          type: string
+          description: Abdominal examination findings (e.g. soft, tender, guarding, bowel sounds).
+        pelvis:
+          type: string
+          description: Pelvic examination findings (e.g. stable, spring test).
+        musculoskeletal_limbs:
+          type: string
+          description: Musculoskeletal and limb examination findings.
+        neurological:
+          type: string
+          description: Neurological examination findings (e.g. power, sensation, reflexes, cranial nerves).
+        skin:
+          type: string
+          description: Skin examination findings (e.g. rash, wounds, bruising, cellulitis).
+        mental_state:
+          type: string
+          description: Mental state assessment findings.
+        body_diagram_notes:
+          type: string
+          description: Free-text notes to accompany body diagram markings.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - general_appearance
+        - head_and_face
+        - neck
+        - chest_cardiovascular
+        - chest_respiratory
+        - abdomen
+        - pelvis
+        - musculoskeletal_limbs
+        - neurological
+        - skin
+        - mental_state
+        - body_diagram_notes
+      description: 1:1 with casualty_card. Systems-based clinical examination findings.

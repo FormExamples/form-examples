@@ -1,0 +1,179 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient_rights_acknowledgement
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — PatientRightsAcknowledgement
+  version: 1.0.0
+  description: Patient acknowledgement of HIPAA-required statements. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(2).
+paths:
+  /patient-rights-acknowledgements:
+    get:
+      summary: List PatientRightsAcknowledgement records
+      operationId: listPatientRightsAcknowledgement
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PatientRightsAcknowledgement records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientRightsAcknowledgement"
+    post:
+      summary: Create a new PatientRightsAcknowledgement
+      operationId: createPatientRightsAcknowledgement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRightsAcknowledgement"
+      responses:
+        "201":
+          description: The newly created PatientRightsAcknowledgement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRightsAcknowledgement"
+        "400":
+          description: Validation error
+  /patient-rights-acknowledgements/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PatientRightsAcknowledgement by id
+      operationId: getPatientRightsAcknowledgement
+      responses:
+        "200":
+          description: The requested PatientRightsAcknowledgement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRightsAcknowledgement"
+        "404":
+          description: PatientRightsAcknowledgement not found
+    patch:
+      summary: Update an existing PatientRightsAcknowledgement
+      operationId: updatePatientRightsAcknowledgement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRightsAcknowledgement"
+      responses:
+        "200":
+          description: The updated PatientRightsAcknowledgement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRightsAcknowledgement"
+        "404":
+          description: PatientRightsAcknowledgement not found
+    delete:
+      summary: Soft-delete a PatientRightsAcknowledgement
+      operationId: deletePatientRightsAcknowledgement
+      responses:
+        "204":
+          description: PatientRightsAcknowledgement deleted
+        "404":
+          description: PatientRightsAcknowledgement not found
+components:
+  schemas:
+    PatientRightsAcknowledgement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        acknowledged_right_to_revoke:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged the right to revoke the authorization in writing per § 164.508(c)(2)(i): yes, no, or empty."
+        acknowledged_revocation_procedure:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged the procedure for revocation and any exceptions: yes, no, or empty."
+        acknowledged_no_conditioning:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged that treatment, payment, enrolment, or eligibility are not conditioned on signing per § 164.508(c)(2)(ii): yes, no, or empty."
+        acknowledged_redisclosure_warning:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged the potential for the disclosed information to be re-disclosed and no longer protected per § 164.508(c)(2)(iii): yes, no, or empty."
+        acknowledged_right_to_copy:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged the right to receive a copy of the signed authorization per § 164.508(c)(4): yes, no, or empty."
+        acknowledged_right_to_inspect_disclosed:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Patient acknowledged the right to inspect and copy the information that is disclosed: yes, no, or empty."
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - acknowledged_right_to_revoke
+        - acknowledged_revocation_procedure
+        - acknowledged_no_conditioning
+        - acknowledged_redisclosure_warning
+        - acknowledged_right_to_copy
+        - acknowledged_right_to_inspect_disclosed
+      description: Patient acknowledgement of HIPAA-required statements. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(2).

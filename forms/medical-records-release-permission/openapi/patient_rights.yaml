@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient_rights
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — PatientRights
+  version: 1.0.0
+  description: Patient acknowledgements of rights regarding records release. One-to-one child of release_form.
+paths:
+  /patient-rightses:
+    get:
+      summary: List PatientRights records
+      operationId: listPatientRights
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PatientRights records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientRights"
+    post:
+      summary: Create a new PatientRights
+      operationId: createPatientRights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRights"
+      responses:
+        "201":
+          description: The newly created PatientRights
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRights"
+        "400":
+          description: Validation error
+  /patient-rightses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PatientRights by id
+      operationId: getPatientRights
+      responses:
+        "200":
+          description: The requested PatientRights
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRights"
+        "404":
+          description: PatientRights not found
+    patch:
+      summary: Update an existing PatientRights
+      operationId: updatePatientRights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRights"
+      responses:
+        "200":
+          description: The updated PatientRights
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRights"
+        "404":
+          description: PatientRights not found
+    delete:
+      summary: Soft-delete a PatientRights
+      operationId: deletePatientRights
+      responses:
+        "204":
+          description: PatientRights deleted
+        "404":
+          description: PatientRights not found
+components:
+  schemas:
+    PatientRights:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        acknowledged_right_to_revoke:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Patient acknowledged their right to revoke consent: yes, no, or empty string."
+        acknowledged_no_charge_for_access:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Patient acknowledged no charge for access to records: yes, no, or empty string."
+        acknowledged_data_protection:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Patient acknowledged data protection rights: yes, no, or empty string."
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - acknowledged_right_to_revoke
+        - acknowledged_no_charge_for_access
+        - acknowledged_data_protection
+      description: Patient acknowledgements of rights regarding records release. One-to-one child of release_form.

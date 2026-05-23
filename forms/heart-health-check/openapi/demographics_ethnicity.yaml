@@ -1,0 +1,152 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: demographics_ethnicity
+openapi: 3.1.0
+info:
+  title: Heart Health Check — DemographicsEthnicity
+  version: 1.0.0
+  description: Demographics and ethnicity for QRISK3 risk calculation.
+paths:
+  /demographics-ethnicities:
+    get:
+      summary: List DemographicsEthnicity records
+      operationId: listDemographicsEthnicity
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DemographicsEthnicity records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DemographicsEthnicity"
+    post:
+      summary: Create a new DemographicsEthnicity
+      operationId: createDemographicsEthnicity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DemographicsEthnicity"
+      responses:
+        "201":
+          description: The newly created DemographicsEthnicity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DemographicsEthnicity"
+        "400":
+          description: Validation error
+  /demographics-ethnicities/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DemographicsEthnicity by id
+      operationId: getDemographicsEthnicity
+      responses:
+        "200":
+          description: The requested DemographicsEthnicity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DemographicsEthnicity"
+        "404":
+          description: DemographicsEthnicity not found
+    patch:
+      summary: Update an existing DemographicsEthnicity
+      operationId: updateDemographicsEthnicity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DemographicsEthnicity"
+      responses:
+        "200":
+          description: The updated DemographicsEthnicity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DemographicsEthnicity"
+        "404":
+          description: DemographicsEthnicity not found
+    delete:
+      summary: Soft-delete a DemographicsEthnicity
+      operationId: deleteDemographicsEthnicity
+      responses:
+        "204":
+          description: DemographicsEthnicity deleted
+        "404":
+          description: DemographicsEthnicity not found
+components:
+  schemas:
+    DemographicsEthnicity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        age:
+          type: integer
+          format: int32
+          description: Patient age in years.
+        sex:
+          type: string
+          enum:
+            - male
+            - female
+            - ""
+          description: "Patient sex: male, female, or empty string if unanswered."
+        ethnicity:
+          type: string
+          maxLength: 30
+          description: Ethnicity category for risk calculation.
+        townsend_deprivation:
+          type: number
+          format: double
+          description: Townsend deprivation score (-8 to 12).
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - sex
+        - ethnicity
+      description: Demographics and ethnicity for QRISK3 risk calculation.

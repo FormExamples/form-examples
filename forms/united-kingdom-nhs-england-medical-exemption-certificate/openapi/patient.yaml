@@ -1,0 +1,207 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — Patient
+  version: 1.0.0
+  description: Applicant for the FP92A medical exemption certificate.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        title:
+          type: string
+          enum:
+            - Mr
+            - Mrs
+            - Miss
+            - Ms
+            - Mx
+            - Dr
+            - Prof
+            - Rev
+            - Other
+            - ""
+          description: Personal title prefix as printed on the FP92A.
+        surname:
+          type: string
+          maxLength: 255
+          description: Family name (surname) as printed on the FP92A.
+        forenames:
+          type: string
+          maxLength: 255
+          description: Given names (forenames) as printed on the FP92A.
+        name:
+          type: string
+          maxLength: 255
+          description: Full display name composed from forenames + surname.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth - used to derive age and age-based exemption eligibility.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - intersex
+            - unknown
+            - ""
+          description: Sex recorded on the NHS demographic record.
+        email:
+          type: string
+          description: Optional email address for non-statutory contact.
+        phone:
+          type: string
+          description: Optional telephone number.
+        postal_address_as_full_text:
+          type: string
+          description: Full UK postal address as printed on the FP92A.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 (expected GB for FP92A applicants).
+        postcode:
+          type: string
+          description: UK postcode used by NHSBSA to validate the address.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 20
+          description: NHS number (10 digits, Modulus-11 checksum). Required for NHSBSA matching.
+        full_time_education:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a 16-18 year-old is in full-time education (age-exemption check).
+        pregnancy_status:
+          type: string
+          enum:
+            - not-pregnant
+            - pregnant
+            - post-partum-within-12-months
+            - ""
+          description: Pregnancy / post-partum status used to redirect applicants to FW8.
+      required:
+        - created_at
+        - updated_at
+        - title
+        - surname
+        - forenames
+        - name
+        - sex
+        - full_time_education
+        - pregnancy_status
+      description: Applicant for the FP92A medical exemption certificate.

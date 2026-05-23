@@ -1,0 +1,162 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_encounter
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeEncounter
+  version: 1.0.0
+  description: "Outpatient encounter metadata: clinic date, specialty, clinician, modality, appointment type."
+paths:
+  /outpatient-outcome-encounters:
+    get:
+      summary: List OutpatientOutcomeEncounter records
+      operationId: listOutpatientOutcomeEncounter
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeEncounter records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+    post:
+      summary: Create a new OutpatientOutcomeEncounter
+      operationId: createOutpatientOutcomeEncounter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeEncounter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+        "400":
+          description: Validation error
+  /outpatient-outcome-encounters/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeEncounter by id
+      operationId: getOutpatientOutcomeEncounter
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeEncounter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+        "404":
+          description: OutpatientOutcomeEncounter not found
+    patch:
+      summary: Update an existing OutpatientOutcomeEncounter
+      operationId: updateOutpatientOutcomeEncounter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeEncounter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeEncounter"
+        "404":
+          description: OutpatientOutcomeEncounter not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeEncounter
+      operationId: deleteOutpatientOutcomeEncounter
+      responses:
+        "204":
+          description: OutpatientOutcomeEncounter deleted
+        "404":
+          description: OutpatientOutcomeEncounter not found
+components:
+  schemas:
+    OutpatientOutcomeEncounter:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        clinic_date:
+          type: string
+          format: date
+          description: Date of the outpatient clinic attendance.
+        specialty:
+          type: string
+          maxLength: 100
+          description: Clinical specialty (e.g., cardiology, orthopaedics).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who saw the patient.
+        modality:
+          type: string
+          enum:
+            - in_person
+            - telephone
+            - video
+            - ""
+          description: "Consultation modality: in_person, telephone, video, or empty."
+        appointment_type:
+          type: string
+          enum:
+            - new
+            - follow_up
+            - pifu
+            - ""
+          description: "Appointment type: new, follow_up, pifu (patient initiated follow up), or empty."
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - specialty
+        - modality
+        - appointment_type
+      description: "Outpatient encounter metadata: clinic date, specialty, clinician, modality, appointment type."

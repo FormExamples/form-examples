@@ -1,0 +1,146 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: prescription_request
+openapi: 3.1.0
+info:
+  title: Prescription Request — PrescriptionRequest
+  version: 1.0.0
+  description: Top-level prescription request linking patient and clinician. Parent entity for all prescription sections.
+paths:
+  /prescription-requests:
+    get:
+      summary: List PrescriptionRequest records
+      operationId: listPrescriptionRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PrescriptionRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PrescriptionRequest"
+    post:
+      summary: Create a new PrescriptionRequest
+      operationId: createPrescriptionRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionRequest"
+      responses:
+        "201":
+          description: The newly created PrescriptionRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequest"
+        "400":
+          description: Validation error
+  /prescription-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PrescriptionRequest by id
+      operationId: getPrescriptionRequest
+      responses:
+        "200":
+          description: The requested PrescriptionRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequest"
+        "404":
+          description: PrescriptionRequest not found
+    patch:
+      summary: Update an existing PrescriptionRequest
+      operationId: updatePrescriptionRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionRequest"
+      responses:
+        "200":
+          description: The updated PrescriptionRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionRequest"
+        "404":
+          description: PrescriptionRequest not found
+    delete:
+      summary: Soft-delete a PrescriptionRequest
+      operationId: deletePrescriptionRequest
+      responses:
+        "204":
+          description: PrescriptionRequest deleted
+        "404":
+          description: PrescriptionRequest not found
+components:
+  schemas:
+    PrescriptionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient requesting the prescription.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the prescribing clinician.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - approved
+            - rejected
+          description: "Lifecycle status: draft, submitted, reviewed, approved, or rejected."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+      description: Top-level prescription request linking patient and clinician. Parent entity for all prescription sections.

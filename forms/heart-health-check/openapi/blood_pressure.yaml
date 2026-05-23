@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: blood_pressure
+openapi: 3.1.0
+info:
+  title: Heart Health Check — BloodPressure
+  version: 1.0.0
+  description: Blood pressure readings and antihypertensive treatment status.
+paths:
+  /blood-pressures:
+    get:
+      summary: List BloodPressure records
+      operationId: listBloodPressure
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BloodPressure records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodPressure"
+    post:
+      summary: Create a new BloodPressure
+      operationId: createBloodPressure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodPressure"
+      responses:
+        "201":
+          description: The newly created BloodPressure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodPressure"
+        "400":
+          description: Validation error
+  /blood-pressures/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BloodPressure by id
+      operationId: getBloodPressure
+      responses:
+        "200":
+          description: The requested BloodPressure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodPressure"
+        "404":
+          description: BloodPressure not found
+    patch:
+      summary: Update an existing BloodPressure
+      operationId: updateBloodPressure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodPressure"
+      responses:
+        "200":
+          description: The updated BloodPressure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodPressure"
+        "404":
+          description: BloodPressure not found
+    delete:
+      summary: Soft-delete a BloodPressure
+      operationId: deleteBloodPressure
+      responses:
+        "204":
+          description: BloodPressure deleted
+        "404":
+          description: BloodPressure not found
+components:
+  schemas:
+    BloodPressure:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        systolic_bp:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg.
+        systolic_bp_sd:
+          type: number
+          format: double
+          description: Standard deviation of systolic BP readings.
+        diastolic_bp:
+          type: integer
+          format: int32
+          description: Diastolic blood pressure in mmHg.
+        on_bp_treatment:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is on blood pressure treatment.
+        number_of_bp_medications:
+          type: integer
+          format: int32
+          description: Number of concurrent BP medications.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - on_bp_treatment
+      description: Blood pressure readings and antihypertensive treatment status.

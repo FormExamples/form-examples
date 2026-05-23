@@ -1,0 +1,192 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescription
+  version: 1.0.0
+  description: Spectacle prescription header; one row per issued prescription.
+paths:
+  /eye-prescriptions:
+    get:
+      summary: List EyePrescription records
+      operationId: listEyePrescription
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescription records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescription"
+    post:
+      summary: Create a new EyePrescription
+      operationId: createEyePrescription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescription"
+      responses:
+        "201":
+          description: The newly created EyePrescription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescription"
+        "400":
+          description: Validation error
+  /eye-prescriptions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescription by id
+      operationId: getEyePrescription
+      responses:
+        "200":
+          description: The requested EyePrescription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescription"
+        "404":
+          description: EyePrescription not found
+    patch:
+      summary: Update an existing EyePrescription
+      operationId: updateEyePrescription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescription"
+      responses:
+        "200":
+          description: The updated EyePrescription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescription"
+        "404":
+          description: EyePrescription not found
+    delete:
+      summary: Soft-delete a EyePrescription
+      operationId: deleteEyePrescription
+      responses:
+        "204":
+          description: EyePrescription deleted
+        "404":
+          description: EyePrescription not found
+components:
+  schemas:
+    EyePrescription:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient table.
+        prescriber_id:
+          type: string
+          format: uuid
+          description: Foreign key to the prescriber table.
+        status:
+          type: string
+          enum:
+            - draft
+            - active
+            - cancelled
+            - superseded
+            - expired
+            - entered-in-error
+          description: "Prescription lifecycle status: draft, active, cancelled, superseded, expired, entered-in-error."
+        examination_date:
+          type: string
+          format: date
+          description: Date the sight test was performed.
+        examination_time:
+          type: string
+          format: time
+          description: Time of day the sight test was performed.
+        issue_date:
+          type: string
+          format: date
+          description: Date the prescription was issued (usually same day as examination).
+        expiry_date:
+          type: string
+          format: date
+          description: Date the prescription expires (default issue + 2 years; 1 year if age < 16 or >= 70).
+        reason_for_sight_test:
+          type: string
+          enum:
+            - routine
+            - symptoms
+            - follow-up
+            - pre-employment
+            - driving-licence
+            - after-pathology
+            - second-opinion
+            - other
+            - ""
+          description: "Reason for the sight test: routine, symptoms, follow-up, pre-employment, driving-licence, after-pathology, second-opinion, other."
+        prior_prescription_on_file:
+          type: boolean
+          description: Whether a prior prescription is on file for this patient (used to detect significant change).
+        prior_prescription_date:
+          type: string
+          format: date
+          description: Date of the prior prescription, if any.
+        notes:
+          type: string
+          description: Free-text prescriber notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - prescriber_id
+        - status
+        - examination_date
+        - issue_date
+        - expiry_date
+        - reason_for_sight_test
+        - prior_prescription_on_file
+        - notes
+      description: Spectacle prescription header; one row per issued prescription.

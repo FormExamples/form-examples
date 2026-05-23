@@ -1,0 +1,144 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_witness
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaWitness
+  version: 1.0.0
+  description: LPA witness — captures the witness for a donor or attorney signature (LPA Regulations 2007 reg. 9(2)).
+paths:
+  /lpa-witnesses:
+    get:
+      summary: List LpaWitness records
+      operationId: listLpaWitness
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaWitness records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaWitness"
+    post:
+      summary: Create a new LpaWitness
+      operationId: createLpaWitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaWitness"
+      responses:
+        "201":
+          description: The newly created LpaWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaWitness"
+        "400":
+          description: Validation error
+  /lpa-witnesses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaWitness by id
+      operationId: getLpaWitness
+      responses:
+        "200":
+          description: The requested LpaWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaWitness"
+        "404":
+          description: LpaWitness not found
+    patch:
+      summary: Update an existing LpaWitness
+      operationId: updateLpaWitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaWitness"
+      responses:
+        "200":
+          description: The updated LpaWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaWitness"
+        "404":
+          description: LpaWitness not found
+    delete:
+      summary: Soft-delete a LpaWitness
+      operationId: deleteLpaWitness
+      responses:
+        "204":
+          description: LpaWitness deleted
+        "404":
+          description: LpaWitness not found
+components:
+  schemas:
+    LpaWitness:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        signature_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lpa_signature table; UNIQUE so each signature has at most one witness row; cascades on delete.
+        witness_person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the witness. Must not be the donor or an attorney (LPA Regs 2007 reg. 9(2)).
+        witness_signature_blob_path:
+          type: string
+          description: Server-side file reference to the stored witness signature image / blob.
+        witnessed_on:
+          type: string
+          format: date
+          description: Date on which the witness signed.
+      required:
+        - created_at
+        - updated_at
+        - signature_id
+        - witness_person_id
+        - witness_signature_blob_path
+      description: LPA witness — captures the witness for a donor or attorney signature (LPA Regulations 2007 reg. 9(2)).

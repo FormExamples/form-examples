@@ -1,0 +1,140 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: encounter_satisfaction
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — EncounterSatisfaction
+  version: 1.0.0
+  description: A single encounter satisfaction survey record. Child tables hold section-specific data.
+paths:
+  /encounter-satisfactions:
+    get:
+      summary: List EncounterSatisfaction records
+      operationId: listEncounterSatisfaction
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EncounterSatisfaction records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EncounterSatisfaction"
+    post:
+      summary: Create a new EncounterSatisfaction
+      operationId: createEncounterSatisfaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EncounterSatisfaction"
+      responses:
+        "201":
+          description: The newly created EncounterSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncounterSatisfaction"
+        "400":
+          description: Validation error
+  /encounter-satisfactions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EncounterSatisfaction by id
+      operationId: getEncounterSatisfaction
+      responses:
+        "200":
+          description: The requested EncounterSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncounterSatisfaction"
+        "404":
+          description: EncounterSatisfaction not found
+    patch:
+      summary: Update an existing EncounterSatisfaction
+      operationId: updateEncounterSatisfaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EncounterSatisfaction"
+      responses:
+        "200":
+          description: The updated EncounterSatisfaction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncounterSatisfaction"
+        "404":
+          description: EncounterSatisfaction not found
+    delete:
+      summary: Soft-delete a EncounterSatisfaction
+      operationId: deleteEncounterSatisfaction
+      responses:
+        "204":
+          description: EncounterSatisfaction deleted
+        "404":
+          description: EncounterSatisfaction not found
+components:
+  schemas:
+    EncounterSatisfaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: FK to patient. One patient may have many surveys.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - reviewed
+            - ""
+          description: "Workflow status: in_progress, completed, reviewed, or empty string if unanswered."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+      description: A single encounter satisfaction survey record. Child tables hold section-specific data.

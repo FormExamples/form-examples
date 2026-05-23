@@ -1,0 +1,162 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: okr_grade_flag
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — OkrGradeFlag
+  version: 1.0.0
+  description: A risk flag attached to an OKR grade. Computed independently of the composite RAG.
+paths:
+  /okr-grade-flags:
+    get:
+      summary: List OkrGradeFlag records
+      operationId: listOkrGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OkrGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OkrGradeFlag"
+    post:
+      summary: Create a new OkrGradeFlag
+      operationId: createOkrGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGradeFlag"
+      responses:
+        "201":
+          description: The newly created OkrGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeFlag"
+        "400":
+          description: Validation error
+  /okr-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OkrGradeFlag by id
+      operationId: getOkrGradeFlag
+      responses:
+        "200":
+          description: The requested OkrGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeFlag"
+        "404":
+          description: OkrGradeFlag not found
+    patch:
+      summary: Update an existing OkrGradeFlag
+      operationId: updateOkrGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGradeFlag"
+      responses:
+        "200":
+          description: The updated OkrGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeFlag"
+        "404":
+          description: OkrGradeFlag not found
+    delete:
+      summary: Soft-delete a OkrGradeFlag
+      operationId: deleteOkrGradeFlag
+      responses:
+        "204":
+          description: OkrGradeFlag deleted
+        "404":
+          description: OkrGradeFlag not found
+components:
+  schemas:
+    OkrGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent okr_grade.
+        flag_code:
+          type: string
+          enum:
+            - mis-aligned
+            - orphaned
+            - non-smart
+            - unmeasurable
+            - no-dri
+            - committed-at-risk
+            - pace-collapse
+            - confidence-collapse
+            - stale-check-in
+            - cascading-broken
+            - over-scoped
+            - moonshot-progress
+            - ""
+          description: "Flag code: mis-aligned, orphaned, non-smart, unmeasurable, no-dri, committed-at-risk, pace-collapse, confidence-collapse, stale-check-in, cascading-broken, over-scoped, moonshot-progress."
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+            - ""
+          description: "Flag priority: high, medium, low."
+        description:
+          type: string
+          description: Human-readable description of why the flag fired.
+      required:
+        - created_at
+        - updated_at
+        - okr_grade_id
+        - flag_code
+        - priority
+        - description
+      description: A risk flag attached to an OKR grade. Computed independently of the composite RAG.

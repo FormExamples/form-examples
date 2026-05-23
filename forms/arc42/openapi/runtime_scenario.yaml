@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: runtime_scenario
+openapi: 3.1.0
+info:
+  title: Arc42 — RuntimeScenario
+  version: 1.0.0
+  description: Runtime scenario captured in §6 Runtime View of the arc42 documentation.
+paths:
+  /runtime-scenarios:
+    get:
+      summary: List RuntimeScenario records
+      operationId: listRuntimeScenario
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RuntimeScenario records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RuntimeScenario"
+    post:
+      summary: Create a new RuntimeScenario
+      operationId: createRuntimeScenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuntimeScenario"
+      responses:
+        "201":
+          description: The newly created RuntimeScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuntimeScenario"
+        "400":
+          description: Validation error
+  /runtime-scenarios/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RuntimeScenario by id
+      operationId: getRuntimeScenario
+      responses:
+        "200":
+          description: The requested RuntimeScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuntimeScenario"
+        "404":
+          description: RuntimeScenario not found
+    patch:
+      summary: Update an existing RuntimeScenario
+      operationId: updateRuntimeScenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuntimeScenario"
+      responses:
+        "200":
+          description: The updated RuntimeScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuntimeScenario"
+        "404":
+          description: RuntimeScenario not found
+    delete:
+      summary: Soft-delete a RuntimeScenario
+      operationId: deleteRuntimeScenario
+      responses:
+        "204":
+          description: RuntimeScenario deleted
+        "404":
+          description: RuntimeScenario not found
+components:
+  schemas:
+    RuntimeScenario:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        name:
+          type: string
+          description: Name of the runtime scenario (e.g. user login flow, batch job).
+        trigger_description:
+          type: string
+          description: What event or condition triggers this runtime scenario.
+        steps_summary:
+          type: string
+          description: Ordered prose summary of the steps or interactions in this scenario.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - name
+        - trigger_description
+        - steps_summary
+      description: Runtime scenario captured in §6 Runtime View of the arc42 documentation.

@@ -1,0 +1,179 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: immunization_history
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — ImmunizationHistory
+  version: 1.0.0
+  description: Immunization history including record source and adverse reaction screening. One-to-one child of assessment.
+paths:
+  /immunization-histories:
+    get:
+      summary: List ImmunizationHistory records
+      operationId: listImmunizationHistory
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ImmunizationHistory records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ImmunizationHistory"
+    post:
+      summary: Create a new ImmunizationHistory
+      operationId: createImmunizationHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImmunizationHistory"
+      responses:
+        "201":
+          description: The newly created ImmunizationHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImmunizationHistory"
+        "400":
+          description: Validation error
+  /immunization-histories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ImmunizationHistory by id
+      operationId: getImmunizationHistory
+      responses:
+        "200":
+          description: The requested ImmunizationHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImmunizationHistory"
+        "404":
+          description: ImmunizationHistory not found
+    patch:
+      summary: Update an existing ImmunizationHistory
+      operationId: updateImmunizationHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImmunizationHistory"
+      responses:
+        "200":
+          description: The updated ImmunizationHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImmunizationHistory"
+        "404":
+          description: ImmunizationHistory not found
+    delete:
+      summary: Soft-delete a ImmunizationHistory
+      operationId: deleteImmunizationHistory
+      responses:
+        "204":
+          description: ImmunizationHistory deleted
+        "404":
+          description: ImmunizationHistory not found
+components:
+  schemas:
+    ImmunizationHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        has_vaccination_record:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unknown
+            - ""
+          description: "Has vaccination record. One of: yes, no, unknown."
+        record_source:
+          type: string
+          enum:
+            - redBook
+            - gpRecords
+            - nhsApp
+            - patientRecall
+            - other
+            - ""
+          description: "Record source. One of: redBook, gpRecords, nhsApp, patientRecall, other."
+        last_review_date:
+          type: string
+          format: date
+          description: Last review date.
+        previous_adverse_reactions:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Previous adverse reactions. One of: yes, no."
+        adverse_reaction_details:
+          type: string
+          description: Adverse reaction details.
+        immunocompromised:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Immunocompromised. One of: yes, no."
+        immunocompromised_details:
+          type: string
+          description: Immunocompromised details.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - has_vaccination_record
+        - record_source
+        - previous_adverse_reactions
+        - adverse_reaction_details
+        - immunocompromised
+        - immunocompromised_details
+      description: Immunization history including record source and adverse reaction screening. One-to-one child of assessment.

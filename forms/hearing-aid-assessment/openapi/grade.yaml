@@ -1,0 +1,178 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Hearing Aid Assessment — Grade
+  version: 1.0.0
+  description: Computed HHIE-S grading result. 0-8 = No handicap, 10-24 = Mild-moderate, 26-40 = Significant. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        handicap_level:
+          type: string
+          enum:
+            - no-handicap
+            - mild-moderate
+            - significant
+          description: "Hearing handicap classification: no-handicap, mild-moderate, or significant."
+        hhies_total_score:
+          type: integer
+          format: int32
+          description: Total HHIE-S score (0-40).
+        hearing_aid_candidacy:
+          type: string
+          enum:
+            - recommended
+            - consider
+            - not-indicated
+            - ""
+          description: "Overall hearing aid candidacy: recommended, consider, not-indicated, or empty string."
+        left_ear_recommendation:
+          type: string
+          enum:
+            - hearing-aid
+            - medical-referral
+            - monitoring
+            - no-action
+            - ""
+          description: "Left ear recommendation: hearing-aid, medical-referral, monitoring, no-action, or empty string."
+        right_ear_recommendation:
+          type: string
+          enum:
+            - hearing-aid
+            - medical-referral
+            - monitoring
+            - no-action
+            - ""
+          description: "Right ear recommendation: hearing-aid, medical-referral, monitoring, no-action, or empty string."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - handicap_level
+        - hhies_total_score
+        - hearing_aid_candidacy
+        - left_ear_recommendation
+        - right_ear_recommendation
+        - graded_at
+      description: Computed HHIE-S grading result. 0-8 = No handicap, 10-24 = Mild-moderate, 26-40 = Significant. One-to-one child of assessment.

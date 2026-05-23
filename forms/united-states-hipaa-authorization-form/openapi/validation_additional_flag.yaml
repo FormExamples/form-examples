@@ -1,0 +1,161 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: validation_additional_flag
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — ValidationAdditionalFlag
+  version: 1.0.0
+  description: Additional flags raised during HIPAA-authorization validation. Many-to-one child of validation_result.
+paths:
+  /validation-additional-flags:
+    get:
+      summary: List ValidationAdditionalFlag records
+      operationId: listValidationAdditionalFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ValidationAdditionalFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidationAdditionalFlag"
+    post:
+      summary: Create a new ValidationAdditionalFlag
+      operationId: createValidationAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationAdditionalFlag"
+      responses:
+        "201":
+          description: The newly created ValidationAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationAdditionalFlag"
+        "400":
+          description: Validation error
+  /validation-additional-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ValidationAdditionalFlag by id
+      operationId: getValidationAdditionalFlag
+      responses:
+        "200":
+          description: The requested ValidationAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationAdditionalFlag"
+        "404":
+          description: ValidationAdditionalFlag not found
+    patch:
+      summary: Update an existing ValidationAdditionalFlag
+      operationId: updateValidationAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationAdditionalFlag"
+      responses:
+        "200":
+          description: The updated ValidationAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationAdditionalFlag"
+        "404":
+          description: ValidationAdditionalFlag not found
+    delete:
+      summary: Soft-delete a ValidationAdditionalFlag
+      operationId: deleteValidationAdditionalFlag
+      responses:
+        "204":
+          description: ValidationAdditionalFlag deleted
+        "404":
+          description: ValidationAdditionalFlag not found
+components:
+  schemas:
+    ValidationAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        validation_result_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent validation result.
+        flag_id:
+          type: string
+          maxLength: 60
+          description: Identifier of the additional flag.
+        category:
+          type: string
+          enum:
+            - ""
+            - sensitive-category
+            - state-law
+            - representative
+            - minor
+            - language
+            - audit
+            - reproductive-health
+          description: "Flag category: sensitive-category, state-law, representative, minor, language, audit, reproductive-health, or empty."
+        message:
+          type: string
+          description: Human-readable message describing the flag.
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Flag priority: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - validation_result_id
+        - flag_id
+        - category
+        - message
+        - priority
+      description: Additional flags raised during HIPAA-authorization validation. Many-to-one child of validation_result.

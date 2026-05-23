@@ -1,0 +1,146 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_prom_grc
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomePromGrc
+  version: 1.0.0
+  description: Global Rating of Change (7-point -3..+3) and self-rated health (5-level) PROM responses. Unlicensed, public-domain instruments.
+paths:
+  /outpatient-outcome-prom-grcs:
+    get:
+      summary: List OutpatientOutcomePromGrc records
+      operationId: listOutpatientOutcomePromGrc
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomePromGrc records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+    post:
+      summary: Create a new OutpatientOutcomePromGrc
+      operationId: createOutpatientOutcomePromGrc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomePromGrc
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+        "400":
+          description: Validation error
+  /outpatient-outcome-prom-grcs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomePromGrc by id
+      operationId: getOutpatientOutcomePromGrc
+      responses:
+        "200":
+          description: The requested OutpatientOutcomePromGrc
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+        "404":
+          description: OutpatientOutcomePromGrc not found
+    patch:
+      summary: Update an existing OutpatientOutcomePromGrc
+      operationId: updateOutpatientOutcomePromGrc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomePromGrc
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromGrc"
+        "404":
+          description: OutpatientOutcomePromGrc not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomePromGrc
+      operationId: deleteOutpatientOutcomePromGrc
+      responses:
+        "204":
+          description: OutpatientOutcomePromGrc deleted
+        "404":
+          description: OutpatientOutcomePromGrc not found
+components:
+  schemas:
+    OutpatientOutcomePromGrc:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        global_rating_of_change:
+          type: integer
+          format: int32
+          description: "GRC 7-point Likert: -3 much worse, 0 unchanged, +3 much better."
+        self_rated_health:
+          type: string
+          enum:
+            - excellent
+            - very_good
+            - good
+            - fair
+            - poor
+            - ""
+          description: "Self-rated health: excellent, very_good, good, fair, poor, or empty."
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - self_rated_health
+      description: Global Rating of Change (7-point -3..+3) and self-rated health (5-level) PROM responses. Unlicensed, public-domain instruments.

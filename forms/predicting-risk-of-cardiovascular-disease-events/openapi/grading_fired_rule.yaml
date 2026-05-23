@@ -1,0 +1,150 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grading_fired_rule
+openapi: 3.1.0
+info:
+  title: Predicting Risk Of Cardiovascular Disease Events — GradingFiredRule
+  version: 1.0.0
+  description: Many-to-one with grade. Each row is one PVT risk rule that fired. Denormalized for audit.
+paths:
+  /grading-fired-rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradingFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingFiredRule"
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "201":
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "400":
+          description: Validation error
+  /grading-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        "200":
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "200":
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    delete:
+      summary: Soft-delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        "204":
+          description: GradingFiredRule deleted
+        "404":
+          description: GradingFiredRule not found
+components:
+  schemas:
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: FK to grade. One result may have many fired rules.
+        rule_code:
+          type: string
+          description: FK to pvt_rule catalogue. SET NULL on delete so audit rows survive rule removal.
+        rule_category:
+          type: string
+          description: Clinical category at grading time (denormalized from pvt_rule).
+        rule_description:
+          type: string
+          description: Rule description at grading time (denormalized from pvt_rule).
+        rule_risk_level:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Risk level at grading time: high, medium, or low (denormalized from pvt_rule)."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_category
+        - rule_description
+        - rule_risk_level
+      description: Many-to-one with grade. Each row is one PVT risk rule that fired. Denormalized for audit.

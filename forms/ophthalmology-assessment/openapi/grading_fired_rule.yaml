@@ -1,0 +1,157 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grading_fired_rule
+openapi: 3.1.0
+info:
+  title: Ophthalmology Assessment — GradingFiredRule
+  version: 1.0.0
+  description: Individual visual acuity classification rules that evaluated to true during grading of the ophthalmology assessment.
+paths:
+  /grading-fired-rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradingFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingFiredRule"
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "201":
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "400":
+          description: Validation error
+  /grading-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        "200":
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "200":
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    delete:
+      summary: Soft-delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        "204":
+          description: GradingFiredRule deleted
+        "404":
+          description: GradingFiredRule not found
+components:
+  schemas:
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 20
+          description: Identifier of the rule that fired (e.g. VA-ACUITY-001, VA-FIELD-001).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the rule (e.g. Visual Acuity, Visual Field, IOP, Posterior Segment).
+        description:
+          type: string
+          description: Human-readable description of the rule and why it fired.
+        severity_level:
+          type: string
+          enum:
+            - normal
+            - mild-impairment
+            - moderate-impairment
+            - severe-impairment
+            - near-blindness
+            - blindness
+            - ""
+          description: Visual acuity grade contributed by this rule.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - category
+        - description
+        - severity_level
+      description: Individual visual acuity classification rules that evaluated to true during grading of the ophthalmology assessment.

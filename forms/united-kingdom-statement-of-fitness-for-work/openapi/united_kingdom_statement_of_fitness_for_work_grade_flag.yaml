@@ -1,0 +1,180 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: united_kingdom_statement_of_fitness_for_work_grade_flag
+openapi: 3.1.0
+info:
+  title: United Kingdom Statement Of Fitness For Work — UnitedKingdomStatementOfFitnessForWorkGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags fired independently of the fitness category, with priority and suggested action.
+paths:
+  /united-kingdom-statement-of-fitness-for-work-grade-flags:
+    get:
+      summary: List UnitedKingdomStatementOfFitnessForWorkGradeFlag records
+      operationId: listUnitedKingdomStatementOfFitnessForWorkGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UnitedKingdomStatementOfFitnessForWorkGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+    post:
+      summary: Create a new UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      operationId: createUnitedKingdomStatementOfFitnessForWorkGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+      responses:
+        "201":
+          description: The newly created UnitedKingdomStatementOfFitnessForWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+        "400":
+          description: Validation error
+  /united-kingdom-statement-of-fitness-for-work-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGradeFlag by id
+      operationId: getUnitedKingdomStatementOfFitnessForWorkGradeFlag
+      responses:
+        "200":
+          description: The requested UnitedKingdomStatementOfFitnessForWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
+    patch:
+      summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      operationId: updateUnitedKingdomStatementOfFitnessForWorkGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+      responses:
+        "200":
+          description: The updated UnitedKingdomStatementOfFitnessForWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
+    delete:
+      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      operationId: deleteUnitedKingdomStatementOfFitnessForWorkGradeFlag
+      responses:
+        "204":
+          description: UnitedKingdomStatementOfFitnessForWorkGradeFlag deleted
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
+components:
+  schemas:
+    UnitedKingdomStatementOfFitnessForWorkGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        united_kingdom_statement_of_fitness_for_work_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        flag_id:
+          type: string
+          maxLength: 60
+          description: Stable flag identifier (e.g. F-AUTOMATIC-DISABILITY-001).
+        category:
+          type: string
+          enum:
+            - invalid_no_name
+            - invalid_no_profession
+            - invalid_no_practice_address
+            - may_be_fit_no_adaptations
+            - may_be_fit_no_comments
+            - non_medical_reason_detected
+            - automatic_disability
+            - duration_exceeds_3_months_in_first_6_months
+            - self_cert_range
+            - long_absence_four_weeks
+            - long_absence_twelve_weeks
+            - private_practice
+            - secondary_care_discharge
+            - new_authority_hcp
+            - mental_health_condition
+            - driving_restriction_recommended
+            - safeguarding_concern
+            - ongoing_review_required
+            - other
+            - ""
+          description: Flag category — see the eighteen-flag catalogue in index.md.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what triggered the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action (e.g. \"consider Access to Work referral\")."
+      required:
+        - created_at
+        - updated_at
+        - united_kingdom_statement_of_fitness_for_work_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags fired independently of the fitness category, with priority and suggested action.

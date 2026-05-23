@@ -1,0 +1,230 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: united_kingdom_statement_of_fitness_for_work_grade
+openapi: 3.1.0
+info:
+  title: United Kingdom Statement Of Fitness For Work — UnitedKingdomStatementOfFitnessForWorkGrade
+  version: 1.0.0
+  description: "Computed grading result for a fit note: fitness category, adaptation intensity, period compliance, and overall recommendation."
+paths:
+  /united-kingdom-statement-of-fitness-for-work-grades:
+    get:
+      summary: List UnitedKingdomStatementOfFitnessForWorkGrade records
+      operationId: listUnitedKingdomStatementOfFitnessForWorkGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UnitedKingdomStatementOfFitnessForWorkGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+    post:
+      summary: Create a new UnitedKingdomStatementOfFitnessForWorkGrade
+      operationId: createUnitedKingdomStatementOfFitnessForWorkGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+      responses:
+        "201":
+          description: The newly created UnitedKingdomStatementOfFitnessForWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+        "400":
+          description: Validation error
+  /united-kingdom-statement-of-fitness-for-work-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGrade by id
+      operationId: getUnitedKingdomStatementOfFitnessForWorkGrade
+      responses:
+        "200":
+          description: The requested UnitedKingdomStatementOfFitnessForWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGrade not found
+    patch:
+      summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGrade
+      operationId: updateUnitedKingdomStatementOfFitnessForWorkGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+      responses:
+        "200":
+          description: The updated UnitedKingdomStatementOfFitnessForWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGrade not found
+    delete:
+      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWorkGrade
+      operationId: deleteUnitedKingdomStatementOfFitnessForWorkGrade
+      responses:
+        "204":
+          description: UnitedKingdomStatementOfFitnessForWorkGrade deleted
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWorkGrade not found
+components:
+  schemas:
+    UnitedKingdomStatementOfFitnessForWorkGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        united_kingdom_statement_of_fitness_for_work_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent fit note (one-to-one).
+        fitness_category:
+          type: string
+          enum:
+            - not_fit
+            - may_be_fit
+            - ""
+          description: "Fitness category computed from the form: not_fit or may_be_fit."
+        adaptation_intensity:
+          type: string
+          enum:
+            - none
+            - light
+            - moderate
+            - substantial
+            - comprehensive
+            - ""
+          description: Adaptation intensity classification based on the number of tick boxes selected.
+        adaptation_count:
+          type: integer
+          format: int32
+          description: Number of adaptation tick boxes selected (0-4).
+        period_days:
+          type: integer
+          format: int32
+          description: Computed period length in calendar days.
+        period_compliance:
+          type: string
+          enum:
+            - self_cert_range
+            - compliant
+            - exceeds_initial_max
+            - long_term
+            - very_long_term
+            - ""
+          description: "Compliance category for the period: self_cert_range, compliant, exceeds_initial_max, long_term, or very_long_term."
+        recommendation:
+          type: string
+          enum:
+            - standard
+            - refer_occupational_health
+            - refer_access_to_work
+            - refer_employment_advisor
+            - review_for_validity
+            - ""
+          description: "Engine recommendation: standard, refer_occupational_health, refer_access_to_work, refer_employment_advisor, or review_for_validity."
+        is_within_first_six_months_of_condition:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the assessment falls within the first six months of the condition (drives the 3-month max rule).
+        is_valid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the fit note passes the validity checks (name, profession, practice address all present).
+        grader_notes:
+          type: string
+          description: Free-text notes from the engine.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp the engine last computed the result.
+        clinician_override:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the clinician overrode the engine recommendation.
+        clinician_override_reason:
+          type: string
+          maxLength: 500
+          description: Required justification when the clinician overrode the engine recommendation.
+        clinician_final_recommendation:
+          type: string
+          enum:
+            - standard
+            - refer_occupational_health
+            - refer_access_to_work
+            - refer_employment_advisor
+            - review_for_validity
+            - ""
+          description: Clinician-signed-off recommendation (may equal or differ from the engine recommendation).
+      required:
+        - created_at
+        - updated_at
+        - united_kingdom_statement_of_fitness_for_work_id
+        - fitness_category
+        - adaptation_intensity
+        - adaptation_count
+        - period_compliance
+        - recommendation
+        - is_within_first_six_months_of_condition
+        - is_valid
+        - grader_notes
+        - graded_at
+        - clinician_override
+        - clinician_override_reason
+        - clinician_final_recommendation
+      description: "Computed grading result for a fit note: fitness category, adaptation intensity, period compliance, and overall recommendation."

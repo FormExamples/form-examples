@@ -1,0 +1,146 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pvt_rule
+openapi: 3.1.0
+info:
+  title: Predicting Risk Of Cardiovascular Disease Events — PvtRule
+  version: 1.0.0
+  description: Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.
+paths:
+  /pvt-rules:
+    get:
+      summary: List PvtRule records
+      operationId: listPvtRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PvtRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvtRule"
+    post:
+      summary: Create a new PvtRule
+      operationId: createPvtRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PvtRule"
+      responses:
+        "201":
+          description: The newly created PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvtRule"
+        "400":
+          description: Validation error
+  /pvt-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PvtRule by id
+      operationId: getPvtRule
+      responses:
+        "200":
+          description: The requested PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvtRule"
+        "404":
+          description: PvtRule not found
+    patch:
+      summary: Update an existing PvtRule
+      operationId: updatePvtRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PvtRule"
+      responses:
+        "200":
+          description: The updated PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvtRule"
+        "404":
+          description: PvtRule not found
+    delete:
+      summary: Soft-delete a PvtRule
+      operationId: deletePvtRule
+      responses:
+        "204":
+          description: PvtRule deleted
+        "404":
+          description: PvtRule not found
+components:
+  schemas:
+    PvtRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        code:
+          type: string
+          description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.
+        category:
+          type: string
+          description: Clinical category (e.g. Blood Pressure, Cholesterol, Renal Function).
+        description:
+          type: string
+          description: Human-readable description of the rule condition.
+        risk_level:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Risk level: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - code
+        - category
+        - description
+        - risk_level
+      description: Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.

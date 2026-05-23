@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: fired_rule
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — FiredRule
+  version: 1.0.0
+  description: Vaccination rules that fired during assessment grading. Many-to-one child of grade.
+paths:
+  /fired-rules:
+    get:
+      summary: List FiredRule records
+      operationId: listFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FiredRule"
+    post:
+      summary: Create a new FiredRule
+      operationId: createFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FiredRule"
+      responses:
+        "201":
+          description: The newly created FiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FiredRule"
+        "400":
+          description: Validation error
+  /fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FiredRule by id
+      operationId: getFiredRule
+      responses:
+        "200":
+          description: The requested FiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FiredRule"
+        "404":
+          description: FiredRule not found
+    patch:
+      summary: Update an existing FiredRule
+      operationId: updateFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FiredRule"
+      responses:
+        "200":
+          description: The updated FiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FiredRule"
+        "404":
+          description: FiredRule not found
+    delete:
+      summary: Soft-delete a FiredRule
+      operationId: deleteFiredRule
+      responses:
+        "204":
+          description: FiredRule deleted
+        "404":
+          description: FiredRule not found
+components:
+  schemas:
+    FiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the vaccination rule that fired (e.g. VAX-001).
+        category:
+          type: string
+          maxLength: 50
+          description: Category the rule belongs to (e.g. Childhood, Adult, Contraindication).
+        description:
+          type: string
+          description: Description.
+        concern_level:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Concern level: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - category
+        - description
+        - concern_level
+      description: Vaccination rules that fired during assessment grading. Many-to-one child of grade.

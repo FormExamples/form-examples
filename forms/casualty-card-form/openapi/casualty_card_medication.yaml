@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_medication
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardMedication
+  version: 1.0.0
+  description: Many-to-one with casualty_card. Each row is one current medication the patient takes.
+paths:
+  /casualty-card-medications:
+    get:
+      summary: List CasualtyCardMedication records
+      operationId: listCasualtyCardMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardMedication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardMedication"
+    post:
+      summary: Create a new CasualtyCardMedication
+      operationId: createCasualtyCardMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardMedication"
+      responses:
+        "201":
+          description: The newly created CasualtyCardMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedication"
+        "400":
+          description: Validation error
+  /casualty-card-medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardMedication by id
+      operationId: getCasualtyCardMedication
+      responses:
+        "200":
+          description: The requested CasualtyCardMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedication"
+        "404":
+          description: CasualtyCardMedication not found
+    patch:
+      summary: Update an existing CasualtyCardMedication
+      operationId: updateCasualtyCardMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardMedication"
+      responses:
+        "200":
+          description: The updated CasualtyCardMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedication"
+        "404":
+          description: CasualtyCardMedication not found
+    delete:
+      summary: Soft-delete a CasualtyCardMedication
+      operationId: deleteCasualtyCardMedication
+      responses:
+        "204":
+          description: CasualtyCardMedication deleted
+        "404":
+          description: CasualtyCardMedication not found
+components:
+  schemas:
+    CasualtyCardMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card. One casualty card may have many medications.
+        name:
+          type: string
+          description: Medication name (e.g. Metformin, Warfarin).
+        dose:
+          type: string
+          description: Dose (e.g. 500mg, 5mg).
+        frequency:
+          type: string
+          description: Frequency (e.g. once daily, twice daily, PRN).
+        sort_order:
+          type: integer
+          format: int32
+          description: Display ordering for consistent list rendering.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - name
+        - dose
+        - frequency
+        - sort_order
+      description: Many-to-one with casualty_card. Each row is one current medication the patient takes.

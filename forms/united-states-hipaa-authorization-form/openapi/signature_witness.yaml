@@ -1,0 +1,198 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: signature_witness
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — SignatureWitness
+  version: 1.0.0
+  description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
+paths:
+  /signature-witnesses:
+    get:
+      summary: List SignatureWitness records
+      operationId: listSignatureWitness
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SignatureWitness records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SignatureWitness"
+    post:
+      summary: Create a new SignatureWitness
+      operationId: createSignatureWitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignatureWitness"
+      responses:
+        "201":
+          description: The newly created SignatureWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignatureWitness"
+        "400":
+          description: Validation error
+  /signature-witnesses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SignatureWitness by id
+      operationId: getSignatureWitness
+      responses:
+        "200":
+          description: The requested SignatureWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignatureWitness"
+        "404":
+          description: SignatureWitness not found
+    patch:
+      summary: Update an existing SignatureWitness
+      operationId: updateSignatureWitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignatureWitness"
+      responses:
+        "200":
+          description: The updated SignatureWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignatureWitness"
+        "404":
+          description: SignatureWitness not found
+    delete:
+      summary: Soft-delete a SignatureWitness
+      operationId: deleteSignatureWitness
+      responses:
+        "204":
+          description: SignatureWitness deleted
+        "404":
+          description: SignatureWitness not found
+components:
+  schemas:
+    SignatureWitness:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        individual_signature_confirmed:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the individual (or their authorized representative) has confirmed the signature: yes, no, or empty."
+        individual_signature_image_uri:
+          type: string
+          description: URI of the captured electronic signature image (SVG or PNG data URI).
+        signature_date:
+          type: string
+          format: date
+          description: Date the individual signed the authorization. Required by § 164.508(c)(1)(vi).
+        signed_at_location:
+          type: string
+          description: Optional location where the signature was captured (state, facility, or virtual).
+        parent_guardian_co_signature_required:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether a parent or guardian co-signature is required by state law: yes, no, or empty."
+        parent_guardian_name:
+          type: string
+          maxLength: 255
+          description: Name of parent or guardian co-signing where required.
+        parent_guardian_signature_confirmed:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the parent / guardian has confirmed their co-signature: yes, no, or empty."
+        parent_guardian_signature_date:
+          type: string
+          format: date
+          description: Date the parent / guardian co-signed.
+        witness_name:
+          type: string
+          maxLength: 255
+          description: Name of the witness, when required by state law.
+        witness_signature_confirmed:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the witness has confirmed their signature: yes, no, or empty."
+        witness_date:
+          type: string
+          format: date
+          description: Date the witness signed.
+        witness_role:
+          type: string
+          maxLength: 120
+          description: Role of the witness (e.g. notary, agency representative, healthcare professional).
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - individual_signature_confirmed
+        - individual_signature_image_uri
+        - signed_at_location
+        - parent_guardian_co_signature_required
+        - parent_guardian_name
+        - parent_guardian_signature_confirmed
+        - witness_name
+        - witness_signature_confirmed
+        - witness_role
+      description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).

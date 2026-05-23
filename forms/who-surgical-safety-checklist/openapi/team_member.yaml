@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: team_member
+openapi: 3.1.0
+info:
+  title: Who Surgical Safety Checklist — TeamMember
+  version: 1.0.0
+  description: Operating-team roster row captured during the Time Out introductions step. Each row represents one team member present in the operating room for a given case.
+paths:
+  /team-members:
+    get:
+      summary: List TeamMember records
+      operationId: listTeamMember
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TeamMember records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+    post:
+      summary: Create a new TeamMember
+      operationId: createTeamMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMember"
+      responses:
+        "201":
+          description: The newly created TeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "400":
+          description: Validation error
+  /team-members/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TeamMember by id
+      operationId: getTeamMember
+      responses:
+        "200":
+          description: The requested TeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "404":
+          description: TeamMember not found
+    patch:
+      summary: Update an existing TeamMember
+      operationId: updateTeamMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMember"
+      responses:
+        "200":
+          description: The updated TeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "404":
+          description: TeamMember not found
+    delete:
+      summary: Soft-delete a TeamMember
+      operationId: deleteTeamMember
+      responses:
+        "204":
+          description: TeamMember deleted
+        "404":
+          description: TeamMember not found
+components:
+  schemas:
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted (soft delete).
+        checklist_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent who_surgical_safety_checklist row.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Optional foreign key to the clinician table for known staff.
+        name:
+          type: string
+          maxLength: 255
+          description: Team member name as introduced during the Time Out.
+        role:
+          type: string
+          enum:
+            - surgeon
+            - assistant-surgeon
+            - anaesthetist
+            - circulating-nurse
+            - scrub-nurse
+            - anaesthetic-assistant
+            - perfusionist
+            - technician
+            - observer
+            - other
+            - ""
+          description: "Operating-room role. One of: surgeon, assistant-surgeon, anaesthetist, circulating-nurse, scrub-nurse, anaesthetic-assistant, perfusionist, technician, observer, other."
+        introduced_during_time_out:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether this team member was introduced during the Time Out (yes/no).
+        notes:
+          type: string
+          maxLength: 255
+          description: Free-text notes (e.g., trainee, visiting consultant, observer institution).
+      required:
+        - created_at
+        - updated_at
+        - checklist_id
+        - name
+        - role
+        - introduced_during_time_out
+        - notes
+      description: Operating-team roster row captured during the Time Out introductions step. Each row represents one team member present in the operating room for a given case.

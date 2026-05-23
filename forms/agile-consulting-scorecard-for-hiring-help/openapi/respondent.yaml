@@ -1,0 +1,199 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: respondent
+openapi: 3.1.0
+info:
+  title: Agile Consulting Scorecard For Hiring Help — Respondent
+  version: 1.0.0
+  description: Person who fills out the agile-consulting scorecard on behalf of an organization. Typically a buyer-side leader.
+paths:
+  /respondents:
+    get:
+      summary: List Respondent records
+      operationId: listRespondent
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Respondent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Respondent"
+    post:
+      summary: Create a new Respondent
+      operationId: createRespondent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respondent"
+      responses:
+        "201":
+          description: The newly created Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "400":
+          description: Validation error
+  /respondents/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Respondent by id
+      operationId: getRespondent
+      responses:
+        "200":
+          description: The requested Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "404":
+          description: Respondent not found
+    patch:
+      summary: Update an existing Respondent
+      operationId: updateRespondent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Respondent"
+      responses:
+        "200":
+          description: The updated Respondent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Respondent"
+        "404":
+          description: Respondent not found
+    delete:
+      summary: Soft-delete a Respondent
+      operationId: deleteRespondent
+      responses:
+        "204":
+          description: Respondent deleted
+        "404":
+          description: Respondent not found
+components:
+  schemas:
+    Respondent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        organization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the organization this respondent represents.
+        name:
+          type: string
+          maxLength: 255
+          description: Respondent full name.
+        email:
+          type: string
+          description: Respondent email address for follow-up.
+        phone:
+          type: string
+          description: Respondent phone number for follow-up.
+        role:
+          type: string
+          enum:
+            - board-member
+            - cxo
+            - vp
+            - director
+            - head-of-product
+            - head-of-engineering
+            - head-of-delivery
+            - transformation-lead
+            - programme-manager
+            - project-manager
+            - product-manager
+            - engineering-manager
+            - agile-coach
+            - scrum-master
+            - consultant
+            - employee
+            - other
+            - ""
+          description: "Job role: cxo, vp, director, head-of-product, head-of-engineering, transformation-lead, etc."
+        department:
+          type: string
+          maxLength: 255
+          description: Department or function within the organization.
+        seniority:
+          type: string
+          enum:
+            - board
+            - executive
+            - senior-leader
+            - middle-manager
+            - team-lead
+            - individual-contributor
+            - ""
+          description: "Seniority band: board, executive, senior-leader, middle-manager, team-lead, individual-contributor."
+        timezone:
+          type: string
+          maxLength: 64
+          description: IANA timezone identifier (e.g. Europe/London).
+        preferred_contact:
+          type: string
+          enum:
+            - email
+            - phone
+            - chat
+            - in-person
+            - ""
+          description: "Preferred follow-up channel: email, phone, chat, or in-person."
+      required:
+        - created_at
+        - updated_at
+        - organization_id
+        - name
+        - email
+        - phone
+        - role
+        - department
+        - seniority
+        - timezone
+        - preferred_contact
+      description: Person who fills out the agile-consulting scorecard on behalf of an organization. Typically a buyer-side leader.

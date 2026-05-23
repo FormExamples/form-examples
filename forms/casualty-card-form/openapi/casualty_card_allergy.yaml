@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_allergy
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardAllergy
+  version: 1.0.0
+  description: Many-to-one with casualty_card. Each row is one documented allergy.
+paths:
+  /casualty-card-allergies:
+    get:
+      summary: List CasualtyCardAllergy records
+      operationId: listCasualtyCardAllergy
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardAllergy records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardAllergy"
+    post:
+      summary: Create a new CasualtyCardAllergy
+      operationId: createCasualtyCardAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardAllergy"
+      responses:
+        "201":
+          description: The newly created CasualtyCardAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAllergy"
+        "400":
+          description: Validation error
+  /casualty-card-allergies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardAllergy by id
+      operationId: getCasualtyCardAllergy
+      responses:
+        "200":
+          description: The requested CasualtyCardAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAllergy"
+        "404":
+          description: CasualtyCardAllergy not found
+    patch:
+      summary: Update an existing CasualtyCardAllergy
+      operationId: updateCasualtyCardAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardAllergy"
+      responses:
+        "200":
+          description: The updated CasualtyCardAllergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAllergy"
+        "404":
+          description: CasualtyCardAllergy not found
+    delete:
+      summary: Soft-delete a CasualtyCardAllergy
+      operationId: deleteCasualtyCardAllergy
+      responses:
+        "204":
+          description: CasualtyCardAllergy deleted
+        "404":
+          description: CasualtyCardAllergy not found
+components:
+  schemas:
+    CasualtyCardAllergy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card. One casualty card may have many allergies.
+        allergen:
+          type: string
+          description: Name of the allergen (e.g. Penicillin, Latex).
+        reaction:
+          type: string
+          description: Description of the allergic reaction.
+        severity:
+          type: string
+          enum:
+            - mild
+            - moderate
+            - anaphylaxis
+            - ""
+          description: "Allergy severity: mild, moderate, anaphylaxis, or empty string if unanswered."
+        sort_order:
+          type: integer
+          format: int32
+          description: Display ordering for consistent list rendering.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - allergen
+        - reaction
+        - severity
+        - sort_order
+      description: Many-to-one with casualty_card. Each row is one documented allergy.

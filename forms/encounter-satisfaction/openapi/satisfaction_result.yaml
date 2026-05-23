@@ -1,0 +1,158 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: satisfaction_result
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — SatisfactionResult
+  version: 1.0.0
+  description: 1:1 with encounter_satisfaction. Computed ESS score with category and per-domain breakdown.
+paths:
+  /satisfaction-results:
+    get:
+      summary: List SatisfactionResult records
+      operationId: listSatisfactionResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of SatisfactionResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SatisfactionResult"
+    post:
+      summary: Create a new SatisfactionResult
+      operationId: createSatisfactionResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SatisfactionResult"
+      responses:
+        "201":
+          description: The newly created SatisfactionResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SatisfactionResult"
+        "400":
+          description: Validation error
+  /satisfaction-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one SatisfactionResult by id
+      operationId: getSatisfactionResult
+      responses:
+        "200":
+          description: The requested SatisfactionResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SatisfactionResult"
+        "404":
+          description: SatisfactionResult not found
+    patch:
+      summary: Update an existing SatisfactionResult
+      operationId: updateSatisfactionResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SatisfactionResult"
+      responses:
+        "200":
+          description: The updated SatisfactionResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SatisfactionResult"
+        "404":
+          description: SatisfactionResult not found
+    delete:
+      summary: Soft-delete a SatisfactionResult
+      operationId: deleteSatisfactionResult
+      responses:
+        "204":
+          description: SatisfactionResult deleted
+        "404":
+          description: SatisfactionResult not found
+components:
+  schemas:
+    SatisfactionResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        composite_score:
+          type: number
+          format: double
+          description: ESS composite score (1.0-5.0). Mean of all answered Likert questions. 0 if no responses.
+        category:
+          type: string
+          enum:
+            - Excellent
+            - Good
+            - Fair
+            - Poor
+            - Very Poor
+            - No responses
+            - ""
+          description: "Satisfaction category: Excellent (4.5-5.0), Good (3.5-4.4), Fair (2.5-3.4), Poor (1.5-2.4), Very Poor (1.0-1.4), No responses."
+        answered_count:
+          type: integer
+          format: int32
+          description: Number of Likert questions answered out of 19 total.
+        scored_at:
+          type: string
+          format: date-time
+          description: Timestamp when the ESS scoring engine produced this result.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+        - composite_score
+        - category
+        - answered_count
+        - scored_at
+      description: 1:1 with encounter_satisfaction. Computed ESS score with category and per-domain breakdown.

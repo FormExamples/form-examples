@@ -1,0 +1,172 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_grade_rule
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionGradeRule
+  version: 1.0.0
+  description: Audit trail of every sphere / cylinder / addition / anisometropia / prism / change rule that fired during classification.
+paths:
+  /eye-prescription-grade-rules:
+    get:
+      summary: List EyePrescriptionGradeRule records
+      operationId: listEyePrescriptionGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionGradeRule"
+    post:
+      summary: Create a new EyePrescriptionGradeRule
+      operationId: createEyePrescriptionGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionGradeRule"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeRule"
+        "400":
+          description: Validation error
+  /eye-prescription-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionGradeRule by id
+      operationId: getEyePrescriptionGradeRule
+      responses:
+        "200":
+          description: The requested EyePrescriptionGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeRule"
+        "404":
+          description: EyePrescriptionGradeRule not found
+    patch:
+      summary: Update an existing EyePrescriptionGradeRule
+      operationId: updateEyePrescriptionGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionGradeRule"
+      responses:
+        "200":
+          description: The updated EyePrescriptionGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeRule"
+        "404":
+          description: EyePrescriptionGradeRule not found
+    delete:
+      summary: Soft-delete a EyePrescriptionGradeRule
+      operationId: deleteEyePrescriptionGradeRule
+      responses:
+        "204":
+          description: EyePrescriptionGradeRule deleted
+        "404":
+          description: EyePrescriptionGradeRule not found
+components:
+  schemas:
+    EyePrescriptionGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription_grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-SPH-MYO-HIGH-01).
+        instrument:
+          type: string
+          enum:
+            - sphere
+            - cylinder
+            - addition
+            - anisometropia
+            - prism
+            - change
+            - ""
+          description: "Classification instrument: sphere, cylinder, addition, anisometropia, prism, change."
+        eye:
+          type: string
+          enum:
+            - right
+            - left
+            - both
+            - ""
+          description: "Which eye the rule applied to: right, left, both."
+        class:
+          type: string
+          maxLength: 40
+          description: Class contributed by this rule (e.g. high-myopia, mild-astigmatism).
+        category:
+          type: string
+          maxLength: 50
+          description: Risk / classification category (e.g. refraction, alignment).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_grade_id
+        - rule_id
+        - instrument
+        - eye
+        - class
+        - category
+        - description
+      description: Audit trail of every sphere / cylinder / addition / anisometropia / prism / change rule that fired during classification.

@@ -1,0 +1,183 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: okr_key_result
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — OkrKeyResult
+  version: 1.0.0
+  description: A Key Result for an objective. 1-5 rows per okr_objective; UNIQUE on (okr_objective_id, position).
+paths:
+  /okr-key-results:
+    get:
+      summary: List OkrKeyResult records
+      operationId: listOkrKeyResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OkrKeyResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OkrKeyResult"
+    post:
+      summary: Create a new OkrKeyResult
+      operationId: createOkrKeyResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrKeyResult"
+      responses:
+        "201":
+          description: The newly created OkrKeyResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrKeyResult"
+        "400":
+          description: Validation error
+  /okr-key-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OkrKeyResult by id
+      operationId: getOkrKeyResult
+      responses:
+        "200":
+          description: The requested OkrKeyResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrKeyResult"
+        "404":
+          description: OkrKeyResult not found
+    patch:
+      summary: Update an existing OkrKeyResult
+      operationId: updateOkrKeyResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrKeyResult"
+      responses:
+        "200":
+          description: The updated OkrKeyResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrKeyResult"
+        "404":
+          description: OkrKeyResult not found
+    delete:
+      summary: Soft-delete a OkrKeyResult
+      operationId: deleteOkrKeyResult
+      responses:
+        "204":
+          description: OkrKeyResult deleted
+        "404":
+          description: OkrKeyResult not found
+components:
+  schemas:
+    OkrKeyResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_objective_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent okr_objective.
+        position:
+          type: integer
+          format: int32
+          description: Display order 1-5; UNIQUE per objective.
+        title:
+          type: string
+          description: One-sentence Key Result statement.
+        kr_type:
+          type: string
+          enum:
+            - numeric
+            - milestone
+            - binary
+            - ""
+          description: "Key Result type: numeric (start/current/target), milestone (ordered list), or binary (done flag)."
+        unit:
+          type: string
+          description: "Unit of measure for numeric KRs: USD, users, percent, count, etc."
+        start_value:
+          type: number
+          format: double
+          description: "Numeric KR: starting value at cycle start."
+        current_value:
+          type: number
+          format: double
+          description: "Numeric KR: latest observed value."
+        target_value:
+          type: number
+          format: double
+          description: "Numeric KR: target value at cycle end."
+        milestones_json:
+          type: object
+          description: "Milestone KR: ordered JSONB list, each {name, done, completed_at}."
+        binary_done:
+          type: boolean
+          description: "Binary KR: done flag."
+        owner_name:
+          type: string
+          description: Optional KR-level owner name (may differ from objective DRI).
+        due_date:
+          type: string
+          format: date
+          description: Optional due date for this KR (defaults to objective cycle_end_date).
+        progress_fraction:
+          type: number
+          format: double
+          description: Computed progress fraction 0.0-1.0; numeric → (cur-start)/(target-start) clamped, milestone → done/total, binary → 0 or 1.
+      required:
+        - created_at
+        - updated_at
+        - okr_objective_id
+        - position
+        - title
+        - kr_type
+        - unit
+        - owner_name
+      description: A Key Result for an objective. 1-5 rows per okr_objective; UNIQUE on (okr_objective_id, position).

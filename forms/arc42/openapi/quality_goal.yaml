@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: quality_goal
+openapi: 3.1.0
+info:
+  title: Arc42 — QualityGoal
+  version: 1.0.0
+  description: Quality goal captured in §1 Introduction & Goals of the arc42 documentation.
+paths:
+  /quality-goals:
+    get:
+      summary: List QualityGoal records
+      operationId: listQualityGoal
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of QualityGoal records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QualityGoal"
+    post:
+      summary: Create a new QualityGoal
+      operationId: createQualityGoal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QualityGoal"
+      responses:
+        "201":
+          description: The newly created QualityGoal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityGoal"
+        "400":
+          description: Validation error
+  /quality-goals/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one QualityGoal by id
+      operationId: getQualityGoal
+      responses:
+        "200":
+          description: The requested QualityGoal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityGoal"
+        "404":
+          description: QualityGoal not found
+    patch:
+      summary: Update an existing QualityGoal
+      operationId: updateQualityGoal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QualityGoal"
+      responses:
+        "200":
+          description: The updated QualityGoal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityGoal"
+        "404":
+          description: QualityGoal not found
+    delete:
+      summary: Soft-delete a QualityGoal
+      operationId: deleteQualityGoal
+      responses:
+        "204":
+          description: QualityGoal deleted
+        "404":
+          description: QualityGoal not found
+components:
+  schemas:
+    QualityGoal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        name:
+          type: string
+          description: Short name or title of the quality goal (e.g. Performance, Security).
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+            - ""
+          description: "Priority of this quality goal: high, medium, or low."
+        scenario:
+          type: string
+          description: Concrete scenario illustrating when and how this quality goal applies.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - name
+        - priority
+        - scenario
+      description: Quality goal captured in §1 Introduction & Goals of the arc42 documentation.

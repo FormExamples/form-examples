@@ -1,0 +1,176 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: center
+openapi: 3.1.0
+info:
+  title: International Certificate Of Vaccination Or Prophylaxis — Center
+  version: 1.0.0
+  description: WHO-designated vaccination centre that administers vaccinations and validates each certificate entry with its uniform stamp.
+paths:
+  /centers:
+    get:
+      summary: List Center records
+      operationId: listCenter
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Center records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Center"
+    post:
+      summary: Create a new Center
+      operationId: createCenter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Center"
+      responses:
+        "201":
+          description: The newly created Center
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Center"
+        "400":
+          description: Validation error
+  /centers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Center by id
+      operationId: getCenter
+      responses:
+        "200":
+          description: The requested Center
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Center"
+        "404":
+          description: Center not found
+    patch:
+      summary: Update an existing Center
+      operationId: updateCenter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Center"
+      responses:
+        "200":
+          description: The updated Center
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Center"
+        "404":
+          description: Center not found
+    delete:
+      summary: Soft-delete a Center
+      operationId: deleteCenter
+      responses:
+        "204":
+          description: Center deleted
+        "404":
+          description: Center not found
+components:
+  schemas:
+    Center:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Official name of the vaccination centre.
+        who_designation_reference:
+          type: string
+          maxLength: 50
+          description: WHO designation reference number, if listed in the WHO directory of yellow fever vaccinating centres.
+        national_authority_reference:
+          type: string
+          maxLength: 50
+          description: Reference issued by the national health authority designating this centre.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full free-text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country of the centre as ISO 3166-1 alpha-2.
+        country_as_iso_3166_1_alpha_3:
+          type: string
+          maxLength: 3
+          description: Country of the centre as ISO 3166-1 alpha-3 (WHO model uses three-letter form).
+        postcode:
+          type: string
+          description: Postal code for the centre address.
+        uniform_stamp_image_data_url:
+          type: string
+          description: Reference image of the uniform stamp captured as a data URL.
+        authorised_diseases:
+          type: string
+          description: Space-separated list of disease codes the centre is authorised to vaccinate against (default yellow-fever).
+        designation_valid_from:
+          type: string
+          format: date
+          description: Start date of the current WHO designation.
+        designation_valid_until:
+          type: string
+          format: date
+          description: End date of the current WHO designation.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - who_designation_reference
+        - national_authority_reference
+        - uniform_stamp_image_data_url
+        - authorised_diseases
+      description: WHO-designated vaccination centre that administers vaccinations and validates each certificate entry with its uniform stamp.

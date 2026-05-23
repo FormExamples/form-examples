@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_medical_history
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardMedicalHistory
+  version: 1.0.0
+  description: 1:1 with casualty_card. Past medical/surgical history, tetanus status, and social history.
+paths:
+  /casualty-card-medical-histories:
+    get:
+      summary: List CasualtyCardMedicalHistory records
+      operationId: listCasualtyCardMedicalHistory
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardMedicalHistory records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+    post:
+      summary: Create a new CasualtyCardMedicalHistory
+      operationId: createCasualtyCardMedicalHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+      responses:
+        "201":
+          description: The newly created CasualtyCardMedicalHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+        "400":
+          description: Validation error
+  /casualty-card-medical-histories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardMedicalHistory by id
+      operationId: getCasualtyCardMedicalHistory
+      responses:
+        "200":
+          description: The requested CasualtyCardMedicalHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+        "404":
+          description: CasualtyCardMedicalHistory not found
+    patch:
+      summary: Update an existing CasualtyCardMedicalHistory
+      operationId: updateCasualtyCardMedicalHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+      responses:
+        "200":
+          description: The updated CasualtyCardMedicalHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardMedicalHistory"
+        "404":
+          description: CasualtyCardMedicalHistory not found
+    delete:
+      summary: Soft-delete a CasualtyCardMedicalHistory
+      operationId: deleteCasualtyCardMedicalHistory
+      responses:
+        "204":
+          description: CasualtyCardMedicalHistory deleted
+        "404":
+          description: CasualtyCardMedicalHistory not found
+components:
+  schemas:
+    CasualtyCardMedicalHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        past_medical_history:
+          type: string
+          description: Free-text past medical history.
+        past_surgical_history:
+          type: string
+          description: Free-text past surgical history.
+        tetanus_status:
+          type: string
+          enum:
+            - up-to-date
+            - not-up-to-date
+            - unknown
+            - ""
+          description: "Tetanus immunisation status: up-to-date, not-up-to-date, unknown, or empty string if unanswered."
+        smoking_status:
+          type: string
+          enum:
+            - current
+            - ex-smoker
+            - never
+            - ""
+          description: "Smoking status: current, ex-smoker, never, or empty string if unanswered."
+        alcohol_consumption:
+          type: string
+          description: Description of alcohol consumption (e.g. units per week).
+        recreational_drug_use:
+          type: string
+          description: Description of recreational drug use.
+        last_oral_intake:
+          type: string
+          description: Time and nature of last oral intake. Relevant for procedural sedation decisions.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - past_medical_history
+        - past_surgical_history
+        - tetanus_status
+        - smoking_status
+        - alcohol_consumption
+        - recreational_drug_use
+        - last_oral_intake
+      description: 1:1 with casualty_card. Past medical/surgical history, tetanus status, and social history.

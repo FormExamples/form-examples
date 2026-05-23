@@ -1,0 +1,182 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_grade_flag
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the complexity grade, with priority and a suggested action.
+paths:
+  /eye-prescription-grade-flags:
+    get:
+      summary: List EyePrescriptionGradeFlag records
+      operationId: listEyePrescriptionGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+    post:
+      summary: Create a new EyePrescriptionGradeFlag
+      operationId: createEyePrescriptionGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+        "400":
+          description: Validation error
+  /eye-prescription-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionGradeFlag by id
+      operationId: getEyePrescriptionGradeFlag
+      responses:
+        "200":
+          description: The requested EyePrescriptionGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+        "404":
+          description: EyePrescriptionGradeFlag not found
+    patch:
+      summary: Update an existing EyePrescriptionGradeFlag
+      operationId: updateEyePrescriptionGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+      responses:
+        "200":
+          description: The updated EyePrescriptionGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionGradeFlag"
+        "404":
+          description: EyePrescriptionGradeFlag not found
+    delete:
+      summary: Soft-delete a EyePrescriptionGradeFlag
+      operationId: deleteEyePrescriptionGradeFlag
+      responses:
+        "204":
+          description: EyePrescriptionGradeFlag deleted
+        "404":
+          description: EyePrescriptionGradeFlag not found
+components:
+  schemas:
+    EyePrescriptionGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription_grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HIGH-MYOPIA-RIGHT-001).
+        category:
+          type: string
+          enum:
+            - high-myopia
+            - high-hyperopia
+            - high-astigmatism
+            - anisometropia
+            - prism-present
+            - presbyopia
+            - paediatric
+            - prescription-expired
+            - significant-change-from-prior
+            - ocular-pathology
+            - refer-ophthalmology
+            - other
+            - ""
+          description: Flag category.
+        eye:
+          type: string
+          enum:
+            - right
+            - left
+            - both
+            - ""
+          description: "Which eye the flag applies to: right, left, both."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"consider refer for retinal screening\")."
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_grade_id
+        - flag_id
+        - category
+        - eye
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the complexity grade, with priority and a suggested action.

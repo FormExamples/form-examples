@@ -1,0 +1,203 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: International Certificate Of Vaccination Or Prophylaxis — Patient
+  version: 1.0.0
+  description: Vaccinee identified on an International Certificate of Vaccination or Prophylaxis. The vaccinee may be a traveller of any age.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        surname:
+          type: string
+          maxLength: 255
+          description: Surname (family name) exactly as it appears on the travel document.
+        given_names:
+          type: string
+          maxLength: 255
+          description: Given names (one or more) exactly as they appear on the travel document.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth, in the format day in figures, month in letters, year in figures.
+        sex:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+            - unspecified
+            - ""
+          description: "Sex as recorded on the travel document: male, female, other, unspecified."
+        nationality_as_iso_3166_1_alpha_3:
+          type: string
+          maxLength: 3
+          description: Nationality as ISO 3166-1 alpha-3 three-letter country code (WHO model uses three-letter form).
+        travel_document_kind:
+          type: string
+          enum:
+            - passport
+            - national-id
+            - travel-document
+            - other
+            - ""
+          description: "Kind of travel document presented: passport, national-id, travel-document, other."
+        travel_document_number:
+          type: string
+          maxLength: 50
+          description: Number of the travel document presented at the vaccination encounter.
+        travel_document_issuer_as_iso_3166_1_alpha_3:
+          type: string
+          maxLength: 3
+          description: Country that issued the travel document, ISO 3166-1 alpha-3.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full free-text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country of residence for postal validation, ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code for the postal address.
+        consented_to_data_sharing:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vaccinee has consented to onward sharing of the certificate data.
+        signature_image_data_url:
+          type: string
+          description: Vaccinee signature captured as a data URL (PNG) if signed digitally; empty if signed on paper.
+      required:
+        - created_at
+        - updated_at
+        - surname
+        - given_names
+        - sex
+        - nationality_as_iso_3166_1_alpha_3
+        - travel_document_kind
+        - travel_document_number
+        - travel_document_issuer_as_iso_3166_1_alpha_3
+        - consented_to_data_sharing
+        - signature_image_data_url
+      description: Vaccinee identified on an International Certificate of Vaccination or Prophylaxis. The vaccinee may be a traveller of any age.

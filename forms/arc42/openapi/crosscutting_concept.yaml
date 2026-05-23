@@ -1,0 +1,144 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: crosscutting_concept
+openapi: 3.1.0
+info:
+  title: Arc42 — CrosscuttingConcept
+  version: 1.0.0
+  description: Crosscutting concept captured in §8 Crosscutting Concepts of the arc42 documentation.
+paths:
+  /crosscutting-concepts:
+    get:
+      summary: List CrosscuttingConcept records
+      operationId: listCrosscuttingConcept
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CrosscuttingConcept records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CrosscuttingConcept"
+    post:
+      summary: Create a new CrosscuttingConcept
+      operationId: createCrosscuttingConcept
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrosscuttingConcept"
+      responses:
+        "201":
+          description: The newly created CrosscuttingConcept
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrosscuttingConcept"
+        "400":
+          description: Validation error
+  /crosscutting-concepts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CrosscuttingConcept by id
+      operationId: getCrosscuttingConcept
+      responses:
+        "200":
+          description: The requested CrosscuttingConcept
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrosscuttingConcept"
+        "404":
+          description: CrosscuttingConcept not found
+    patch:
+      summary: Update an existing CrosscuttingConcept
+      operationId: updateCrosscuttingConcept
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrosscuttingConcept"
+      responses:
+        "200":
+          description: The updated CrosscuttingConcept
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrosscuttingConcept"
+        "404":
+          description: CrosscuttingConcept not found
+    delete:
+      summary: Soft-delete a CrosscuttingConcept
+      operationId: deleteCrosscuttingConcept
+      responses:
+        "204":
+          description: CrosscuttingConcept deleted
+        "404":
+          description: CrosscuttingConcept not found
+components:
+  schemas:
+    CrosscuttingConcept:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        name:
+          type: string
+          description: Name of the crosscutting concept (e.g. Logging, Security, Internationalisation).
+        description:
+          type: string
+          description: Description of the concept, the pattern or approach used, and which building blocks it applies to.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - name
+        - description
+      description: Crosscutting concept captured in §8 Crosscutting Concepts of the arc42 documentation.

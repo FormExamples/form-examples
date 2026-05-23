@@ -1,0 +1,196 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_arrival_triage
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardArrivalTriage
+  version: 1.0.0
+  description: 1:1 with casualty_card. Arrival mode, referral source, and Manchester Triage System assessment.
+paths:
+  /casualty-card-arrival-triages:
+    get:
+      summary: List CasualtyCardArrivalTriage records
+      operationId: listCasualtyCardArrivalTriage
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardArrivalTriage records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+    post:
+      summary: Create a new CasualtyCardArrivalTriage
+      operationId: createCasualtyCardArrivalTriage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+      responses:
+        "201":
+          description: The newly created CasualtyCardArrivalTriage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+        "400":
+          description: Validation error
+  /casualty-card-arrival-triages/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardArrivalTriage by id
+      operationId: getCasualtyCardArrivalTriage
+      responses:
+        "200":
+          description: The requested CasualtyCardArrivalTriage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+        "404":
+          description: CasualtyCardArrivalTriage not found
+    patch:
+      summary: Update an existing CasualtyCardArrivalTriage
+      operationId: updateCasualtyCardArrivalTriage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+      responses:
+        "200":
+          description: The updated CasualtyCardArrivalTriage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardArrivalTriage"
+        "404":
+          description: CasualtyCardArrivalTriage not found
+    delete:
+      summary: Soft-delete a CasualtyCardArrivalTriage
+      operationId: deleteCasualtyCardArrivalTriage
+      responses:
+        "204":
+          description: CasualtyCardArrivalTriage deleted
+        "404":
+          description: CasualtyCardArrivalTriage not found
+components:
+  schemas:
+    CasualtyCardArrivalTriage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        attendance_category:
+          type: string
+          enum:
+            - first
+            - follow-up
+            - planned
+            - unplanned
+            - ""
+          description: "Attendance classification: first, follow-up, planned, unplanned, or empty string if unanswered."
+        arrival_mode:
+          type: string
+          enum:
+            - ambulance
+            - walk-in
+            - helicopter
+            - police
+            - other
+            - ""
+          description: "How the patient arrived: ambulance, walk-in, helicopter, police, other, or empty string if unanswered."
+        referral_source:
+          type: string
+          enum:
+            - self
+            - gp
+            - "999"
+            - nhs111
+            - other-hospital
+            - police
+            - other
+            - ""
+          description: "Who referred the patient: self, gp, 999, nhs111, other-hospital, police, other, or empty string if unanswered."
+        ambulance_incident_number:
+          type: string
+          description: Ambulance service incident reference number.
+        triage_time:
+          type: string
+          format: date-time
+          description: Timestamp when triage was performed. NULL if not recorded.
+        triage_nurse:
+          type: string
+          description: Name of the triage nurse who assessed the patient.
+        mts_flowchart:
+          type: string
+          description: Manchester Triage System flowchart used for triage assessment.
+        mts_category:
+          type: string
+          enum:
+            - 1-immediate
+            - 2-very-urgent
+            - 3-urgent
+            - 4-standard
+            - 5-non-urgent
+            - ""
+          description: "MTS urgency category: 1-immediate, 2-very-urgent, 3-urgent, 4-standard, 5-non-urgent, or empty string if unanswered."
+        mts_discriminator:
+          type: string
+          description: MTS discriminator that determined the triage category.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - attendance_category
+        - arrival_mode
+        - referral_source
+        - ambulance_incident_number
+        - triage_nurse
+        - mts_flowchart
+        - mts_category
+        - mts_discriminator
+      description: 1:1 with casualty_card. Arrival mode, referral source, and Manchester Triage System assessment.

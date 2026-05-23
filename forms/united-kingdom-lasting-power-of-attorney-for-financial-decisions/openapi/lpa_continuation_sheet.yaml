@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_continuation_sheet
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaContinuationSheet
+  version: 1.0.0
+  description: LPA continuation sheet — one row per LPC continuation sheet (LPC sheets 1, 2, 3, 4) attached to the LP1F deed.
+paths:
+  /lpa-continuation-sheets:
+    get:
+      summary: List LpaContinuationSheet records
+      operationId: listLpaContinuationSheet
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaContinuationSheet records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaContinuationSheet"
+    post:
+      summary: Create a new LpaContinuationSheet
+      operationId: createLpaContinuationSheet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaContinuationSheet"
+      responses:
+        "201":
+          description: The newly created LpaContinuationSheet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaContinuationSheet"
+        "400":
+          description: Validation error
+  /lpa-continuation-sheets/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaContinuationSheet by id
+      operationId: getLpaContinuationSheet
+      responses:
+        "200":
+          description: The requested LpaContinuationSheet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaContinuationSheet"
+        "404":
+          description: LpaContinuationSheet not found
+    patch:
+      summary: Update an existing LpaContinuationSheet
+      operationId: updateLpaContinuationSheet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaContinuationSheet"
+      responses:
+        "200":
+          description: The updated LpaContinuationSheet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaContinuationSheet"
+        "404":
+          description: LpaContinuationSheet not found
+    delete:
+      summary: Soft-delete a LpaContinuationSheet
+      operationId: deleteLpaContinuationSheet
+      responses:
+        "204":
+          description: LpaContinuationSheet deleted
+        "404":
+          description: LpaContinuationSheet not found
+components:
+  schemas:
+    LpaContinuationSheet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        kind:
+          type: string
+          enum:
+            - 1_additional_people
+            - 2_additional_information
+            - 3_donor_cannot_sign
+            - 4_trust_corporation
+          description: "Which LPC sheet this is. One of: 1_additional_people (5+ attorneys / replacements / people-to-notify), 2_additional_information (overflow text for sections 3, 4, 7), 3_donor_cannot_sign, 4_trust_corporation."
+        body_text:
+          type: string
+          description: Free-text body of the continuation sheet (the OPG validates that text on a continuation sheet round-trips to the deed).
+        signed_on:
+          type: string
+          format: date
+          description: Date the continuation sheet was signed (LPC sheets 3 and 4 require their own signature dates).
+        ordinal:
+          type: integer
+          format: int32
+          description: Position when an LPA carries more than one continuation sheet of the same kind (e.g. multiple sheet-2 overflow pages).
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - kind
+        - body_text
+        - ordinal
+      description: LPA continuation sheet — one row per LPC continuation sheet (LPC sheets 1, 2, 3, 4) attached to the LP1F deed.

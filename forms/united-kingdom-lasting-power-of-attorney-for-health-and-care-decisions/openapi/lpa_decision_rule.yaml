@@ -1,0 +1,144 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_decision_rule
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaDecisionRule
+  version: 1.0.0
+  description: How the attorneys must act together when making decisions (LP1H s.3, MCA 2005 s.10(4)).
+paths:
+  /lpa-decision-rules:
+    get:
+      summary: List LpaDecisionRule records
+      operationId: listLpaDecisionRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaDecisionRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaDecisionRule"
+    post:
+      summary: Create a new LpaDecisionRule
+      operationId: createLpaDecisionRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaDecisionRule"
+      responses:
+        "201":
+          description: The newly created LpaDecisionRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaDecisionRule"
+        "400":
+          description: Validation error
+  /lpa-decision-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaDecisionRule by id
+      operationId: getLpaDecisionRule
+      responses:
+        "200":
+          description: The requested LpaDecisionRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaDecisionRule"
+        "404":
+          description: LpaDecisionRule not found
+    patch:
+      summary: Update an existing LpaDecisionRule
+      operationId: updateLpaDecisionRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaDecisionRule"
+      responses:
+        "200":
+          description: The updated LpaDecisionRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaDecisionRule"
+        "404":
+          description: LpaDecisionRule not found
+    delete:
+      summary: Soft-delete a LpaDecisionRule
+      operationId: deleteLpaDecisionRule
+      responses:
+        "204":
+          description: LpaDecisionRule deleted
+        "404":
+          description: LpaDecisionRule not found
+components:
+  schemas:
+    LpaDecisionRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA (unique, 1:1).
+        decision_rule:
+          type: string
+          enum:
+            - jointly
+            - jointly-and-severally
+            - mixed
+            - ""
+          description: "Decision-making rule: jointly, jointly-and-severally, or mixed."
+        joint_decision_set:
+          type: string
+          description: "When decision_rule = mixed: list of decisions that must be made jointly. Required when mixed (R-MCA-JOINT-MIXED-SCOPE)."
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - decision_rule
+        - joint_decision_set
+      description: How the attorneys must act together when making decisions (LP1H s.3, MCA 2005 s.10(4)).

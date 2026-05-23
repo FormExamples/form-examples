@@ -1,0 +1,173 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Mobility Assessment — Grade
+  version: 1.0.0
+  description: Computed Tinetti grading result for the mobility assessment. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        balance_score:
+          type: integer
+          format: int32
+          description: Tinetti Balance sub-score (0-16).
+        gait_score:
+          type: integer
+          format: int32
+          description: Tinetti Gait sub-score (0-12).
+        total_tinetti_score:
+          type: integer
+          format: int32
+          description: Total Tinetti score (balance + gait, 0-28). <19 = high risk, 19-24 = moderate, 25-28 = low.
+        fall_risk_category:
+          type: string
+          enum:
+            - high_fall_risk
+            - moderate_risk
+            - low_risk
+            - ""
+          description: "Fall risk category: high_fall_risk (<19), moderate_risk (19-24), low_risk (25-28)."
+        tug_time_seconds:
+          type: number
+          format: double
+          description: Timed Up and Go test result in seconds.
+        tug_risk_category:
+          type: string
+          enum:
+            - normal
+            - moderate_risk
+            - high_risk
+            - ""
+          description: "TUG risk category: normal (<12s), moderate_risk (12-20s), high_risk (>20s)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - balance_score
+        - gait_score
+        - total_tinetti_score
+        - fall_risk_category
+        - tug_risk_category
+        - graded_at
+      description: Computed Tinetti grading result for the mobility assessment. One-to-one child of assessment.

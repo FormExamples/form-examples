@@ -1,0 +1,180 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: return_to_work_grade_rule
+openapi: 3.1.0
+info:
+  title: Return To Work — ReturnToWorkGradeRule
+  version: 1.0.0
+  description: Individual rules that fired during Return to Work composite grading. Many-to-one child of return_to_work_grade.
+paths:
+  /return-to-work-grade-rules:
+    get:
+      summary: List ReturnToWorkGradeRule records
+      operationId: listReturnToWorkGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReturnToWorkGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReturnToWorkGradeRule"
+    post:
+      summary: Create a new ReturnToWorkGradeRule
+      operationId: createReturnToWorkGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGradeRule"
+      responses:
+        "201":
+          description: The newly created ReturnToWorkGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeRule"
+        "400":
+          description: Validation error
+  /return-to-work-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReturnToWorkGradeRule by id
+      operationId: getReturnToWorkGradeRule
+      responses:
+        "200":
+          description: The requested ReturnToWorkGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeRule"
+        "404":
+          description: ReturnToWorkGradeRule not found
+    patch:
+      summary: Update an existing ReturnToWorkGradeRule
+      operationId: updateReturnToWorkGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGradeRule"
+      responses:
+        "200":
+          description: The updated ReturnToWorkGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeRule"
+        "404":
+          description: ReturnToWorkGradeRule not found
+    delete:
+      summary: Soft-delete a ReturnToWorkGradeRule
+      operationId: deleteReturnToWorkGradeRule
+      responses:
+        "204":
+          description: ReturnToWorkGradeRule deleted
+        "404":
+          description: ReturnToWorkGradeRule not found
+components:
+  schemas:
+    ReturnToWorkGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        return_to_work_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent return_to_work_grade record.
+        rule_code:
+          type: string
+          maxLength: 60
+          description: Stable rule identifier (e.g. RTW-FIT-001, RTW-RES-005).
+        rule_title:
+          type: string
+          maxLength: 255
+          description: Human-readable rule title for display in the fired-rules report.
+        rule_band:
+          type: string
+          enum:
+            - routine
+            - standard
+            - restricted
+            - high-risk
+            - fit
+            - may-be-fit
+            - not-fit
+            - ""
+          description: Band this rule drove (fitness statement value or restriction-priority value).
+        rule_priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority of this rule: low, medium, or high."
+        rule_kind:
+          type: string
+          enum:
+            - fitness
+            - restriction
+            - composite
+            - ""
+          description: Whether the rule contributes to fitness statement, restriction grading, or both (composite).
+        rule_evidence:
+          type: string
+          description: Free-text evidence describing which input field(s) triggered the rule.
+        rule_notes:
+          type: string
+          description: Free-text notes for the clinician reviewing the fired rules.
+      required:
+        - created_at
+        - updated_at
+        - return_to_work_grade_id
+        - rule_code
+        - rule_title
+        - rule_band
+        - rule_priority
+        - rule_kind
+        - rule_evidence
+        - rule_notes
+      description: Individual rules that fired during Return to Work composite grading. Many-to-one child of return_to_work_grade.

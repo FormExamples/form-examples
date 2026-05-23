@@ -1,0 +1,143 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: reba_rule
+openapi: 3.1.0
+info:
+  title: Ergonomic Assessment — RebaRule
+  version: 1.0.0
+  description: Reference table of REBA scoring rules. Each rule has an ID, system, description, and score contribution.
+paths:
+  /reba-rules:
+    get:
+      summary: List RebaRule records
+      operationId: listRebaRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RebaRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RebaRule"
+    post:
+      summary: Create a new RebaRule
+      operationId: createRebaRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RebaRule"
+      responses:
+        "201":
+          description: The newly created RebaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RebaRule"
+        "400":
+          description: Validation error
+  /reba-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RebaRule by id
+      operationId: getRebaRule
+      responses:
+        "200":
+          description: The requested RebaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RebaRule"
+        "404":
+          description: RebaRule not found
+    patch:
+      summary: Update an existing RebaRule
+      operationId: updateRebaRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RebaRule"
+      responses:
+        "200":
+          description: The updated RebaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RebaRule"
+        "404":
+          description: RebaRule not found
+    delete:
+      summary: Soft-delete a RebaRule
+      operationId: deleteRebaRule
+      responses:
+        "204":
+          description: RebaRule deleted
+        "404":
+          description: RebaRule not found
+components:
+  schemas:
+    RebaRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        code:
+          type: string
+          description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.
+        system:
+          type: string
+          description: Body system or assessment category, e.g. Neck, Trunk, Workstation, Repetition, Manual Handling.
+        description:
+          type: string
+          description: Human-readable description of the condition this rule detects.
+        score:
+          type: integer
+          format: int32
+          description: REBA score contribution when the rule fires (0-15).
+      required:
+        - created_at
+        - updated_at
+        - code
+        - system
+        - description
+        - score
+      description: Reference table of REBA scoring rules. Each rule has an ID, system, description, and score contribution.

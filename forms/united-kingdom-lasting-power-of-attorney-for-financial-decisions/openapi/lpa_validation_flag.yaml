@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_validation_flag
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaValidationFlag
+  version: 1.0.0
+  description: LPA validation flag — non-blocking warning flags that fired during validation (e.g. SingleAttorneyNoReplacement, OnlyWhenNoCapacitySelected).
+paths:
+  /lpa-validation-flags:
+    get:
+      summary: List LpaValidationFlag records
+      operationId: listLpaValidationFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaValidationFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaValidationFlag"
+    post:
+      summary: Create a new LpaValidationFlag
+      operationId: createLpaValidationFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationFlag"
+      responses:
+        "201":
+          description: The newly created LpaValidationFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationFlag"
+        "400":
+          description: Validation error
+  /lpa-validation-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaValidationFlag by id
+      operationId: getLpaValidationFlag
+      responses:
+        "200":
+          description: The requested LpaValidationFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationFlag"
+        "404":
+          description: LpaValidationFlag not found
+    patch:
+      summary: Update an existing LpaValidationFlag
+      operationId: updateLpaValidationFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationFlag"
+      responses:
+        "200":
+          description: The updated LpaValidationFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationFlag"
+        "404":
+          description: LpaValidationFlag not found
+    delete:
+      summary: Soft-delete a LpaValidationFlag
+      operationId: deleteLpaValidationFlag
+      responses:
+        "204":
+          description: LpaValidationFlag deleted
+        "404":
+          description: LpaValidationFlag not found
+components:
+  schemas:
+    LpaValidationFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        flag_name:
+          type: string
+          description: Programmatic name of the fired flag (e.g. SingleAttorneyNoReplacement, ReducedFeeWithoutLPA120A).
+        priority:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+          description: "Severity priority of the flag. One of: low, moderate, high (flags never reach critical)."
+        category:
+          type: string
+          description: Free-text category grouping the flag belongs to (e.g. fee, witnesses, attorneys, instructions).
+        remediation_hint:
+          type: string
+          description: User-facing hint explaining how to clear the flag.
+        fired_at:
+          type: string
+          format: date-time
+          description: Timestamp when this flag fired during validation.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - flag_name
+        - priority
+        - category
+        - remediation_hint
+        - fired_at
+      description: LPA validation flag — non-blocking warning flags that fired during validation (e.g. SingleAttorneyNoReplacement, OnlyWhenNoCapacitySelected).

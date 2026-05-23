@@ -1,0 +1,191 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_ocular_health_finding
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionOcularHealthFinding
+  version: 1.0.0
+  description: "Optional ocular health findings recorded during the sight test: slit-lamp, fundus, intraocular pressure, OCT, visual fields, pathology flag."
+paths:
+  /eye-prescription-ocular-health-findings:
+    get:
+      summary: List EyePrescriptionOcularHealthFinding records
+      operationId: listEyePrescriptionOcularHealthFinding
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionOcularHealthFinding records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+    post:
+      summary: Create a new EyePrescriptionOcularHealthFinding
+      operationId: createEyePrescriptionOcularHealthFinding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionOcularHealthFinding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+        "400":
+          description: Validation error
+  /eye-prescription-ocular-health-findings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionOcularHealthFinding by id
+      operationId: getEyePrescriptionOcularHealthFinding
+      responses:
+        "200":
+          description: The requested EyePrescriptionOcularHealthFinding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+        "404":
+          description: EyePrescriptionOcularHealthFinding not found
+    patch:
+      summary: Update an existing EyePrescriptionOcularHealthFinding
+      operationId: updateEyePrescriptionOcularHealthFinding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+      responses:
+        "200":
+          description: The updated EyePrescriptionOcularHealthFinding
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionOcularHealthFinding"
+        "404":
+          description: EyePrescriptionOcularHealthFinding not found
+    delete:
+      summary: Soft-delete a EyePrescriptionOcularHealthFinding
+      operationId: deleteEyePrescriptionOcularHealthFinding
+      responses:
+        "204":
+          description: EyePrescriptionOcularHealthFinding deleted
+        "404":
+          description: EyePrescriptionOcularHealthFinding not found
+components:
+  schemas:
+    EyePrescriptionOcularHealthFinding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription (unique, 1:1).
+        slit_lamp_right:
+          type: string
+          description: Slit-lamp biomicroscopy findings, right eye.
+        slit_lamp_left:
+          type: string
+          description: Slit-lamp biomicroscopy findings, left eye.
+        fundus_right:
+          type: string
+          description: Fundus examination findings, right eye.
+        fundus_left:
+          type: string
+          description: Fundus examination findings, left eye.
+        intraocular_pressure_right_mmhg:
+          type: number
+          format: double
+          description: Intraocular pressure, right eye, in mmHg.
+        intraocular_pressure_left_mmhg:
+          type: number
+          format: double
+          description: Intraocular pressure, left eye, in mmHg.
+        cup_to_disc_ratio_right:
+          type: number
+          format: double
+          description: Optic nerve head cup-to-disc ratio, right eye (0.00 to 1.00).
+        cup_to_disc_ratio_left:
+          type: number
+          format: double
+          description: Optic nerve head cup-to-disc ratio, left eye (0.00 to 1.00).
+        oct_performed:
+          type: boolean
+          description: Whether an OCT scan was performed at this sight test.
+        oct_findings:
+          type: string
+          description: OCT (optical coherence tomography) findings.
+        fields_performed:
+          type: boolean
+          description: Whether a visual fields test was performed at this sight test.
+        fields_findings:
+          type: string
+          description: Visual fields findings.
+        pathology_flag:
+          type: boolean
+          description: Whether any ocular pathology was identified (drives the ocular-pathology safety flag).
+        refer_ophthalmology:
+          type: boolean
+          description: Whether the prescriber recommends referral to ophthalmology.
+        referral_reason:
+          type: string
+          description: Reason for ophthalmology referral, if any.
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_id
+        - slit_lamp_right
+        - slit_lamp_left
+        - fundus_right
+        - fundus_left
+        - oct_performed
+        - oct_findings
+        - fields_performed
+        - fields_findings
+        - pathology_flag
+        - refer_ophthalmology
+        - referral_reason
+      description: "Optional ocular health findings recorded during the sight test: slit-lamp, fundus, intraocular pressure, OCT, visual fields, pathology flag."

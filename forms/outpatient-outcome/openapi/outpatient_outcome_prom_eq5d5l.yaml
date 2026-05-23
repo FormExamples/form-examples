@@ -1,0 +1,131 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_prom_eq5d5l
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomePromEq5d5l
+  version: 1.0.0
+  description: "EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence."
+paths:
+  /outpatient-outcome-prom-eq5d5ls:
+    get:
+      summary: List OutpatientOutcomePromEq5d5l records
+      operationId: listOutpatientOutcomePromEq5d5l
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomePromEq5d5l records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+    post:
+      summary: Create a new OutpatientOutcomePromEq5d5l
+      operationId: createOutpatientOutcomePromEq5d5l
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomePromEq5d5l
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+        "400":
+          description: Validation error
+  /outpatient-outcome-prom-eq5d5ls/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomePromEq5d5l by id
+      operationId: getOutpatientOutcomePromEq5d5l
+      responses:
+        "200":
+          description: The requested OutpatientOutcomePromEq5d5l
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+        "404":
+          description: OutpatientOutcomePromEq5d5l not found
+    patch:
+      summary: Update an existing OutpatientOutcomePromEq5d5l
+      operationId: updateOutpatientOutcomePromEq5d5l
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomePromEq5d5l
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromEq5d5l"
+        "404":
+          description: OutpatientOutcomePromEq5d5l not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomePromEq5d5l
+      operationId: deleteOutpatientOutcomePromEq5d5l
+      responses:
+        "204":
+          description: OutpatientOutcomePromEq5d5l deleted
+        "404":
+          description: OutpatientOutcomePromEq5d5l not found
+components:
+  schemas:
+    OutpatientOutcomePromEq5d5l:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+      description: "EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence."

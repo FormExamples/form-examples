@@ -1,0 +1,188 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: action_item
+openapi: 3.1.0
+info:
+  title: Meeting — ActionItem
+  version: 1.0.0
+  description: A task assigned during the meeting to a named owner with a due date, priority, and status.
+paths:
+  /action-items:
+    get:
+      summary: List ActionItem records
+      operationId: listActionItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ActionItem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActionItem"
+    post:
+      summary: Create a new ActionItem
+      operationId: createActionItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionItem"
+      responses:
+        "201":
+          description: The newly created ActionItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionItem"
+        "400":
+          description: Validation error
+  /action-items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ActionItem by id
+      operationId: getActionItem
+      responses:
+        "200":
+          description: The requested ActionItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionItem"
+        "404":
+          description: ActionItem not found
+    patch:
+      summary: Update an existing ActionItem
+      operationId: updateActionItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionItem"
+      responses:
+        "200":
+          description: The updated ActionItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionItem"
+        "404":
+          description: ActionItem not found
+    delete:
+      summary: Soft-delete a ActionItem
+      operationId: deleteActionItem
+      responses:
+        "204":
+          description: ActionItem deleted
+        "404":
+          description: ActionItem not found
+components:
+  schemas:
+    ActionItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the action item in the list.
+        title:
+          type: string
+          maxLength: 255
+          description: Short imperative title of the action.
+        description:
+          type: string
+          description: Free-text description, acceptance criteria, or context for the action.
+        owner_name:
+          type: string
+          maxLength: 255
+          description: Name of the person responsible for completing the action.
+        owner_email:
+          type: string
+          maxLength: 320
+          description: Email address of the owner for follow-up.
+        due_date:
+          type: string
+          format: date
+          description: Date by which the action should be completed.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - urgent
+            - ""
+          description: "Priority: low, medium, high, urgent."
+        status:
+          type: string
+          enum:
+            - open
+            - in-progress
+            - blocked
+            - done
+            - cancelled
+          description: "Workflow status: open, in-progress, blocked, done, cancelled."
+        completed_at:
+          type: string
+          format: date-time
+          description: Timestamp the action was marked done.
+        external_reference:
+          type: string
+          maxLength: 255
+          description: External ticket or issue reference (e.g. JIRA-1234, GH-456).
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - title
+        - description
+        - owner_name
+        - owner_email
+        - priority
+        - status
+        - external_reference
+      description: A task assigned during the meeting to a named owner with a due date, priority, and status.

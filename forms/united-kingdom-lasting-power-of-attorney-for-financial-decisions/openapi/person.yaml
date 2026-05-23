@@ -1,0 +1,174 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: person
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — Person
+  version: 1.0.0
+  description: Person — every named individual involved in an LPA (donor, attorney, replacement attorney, certificate provider, person to notify, witness, applicant, recipient).
+paths:
+  /persons:
+    get:
+      summary: List Person records
+      operationId: listPerson
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Person records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Person"
+    post:
+      summary: Create a new Person
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: The newly created Person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        "400":
+          description: Validation error
+  /persons/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Person by id
+      operationId: getPerson
+      responses:
+        "200":
+          description: The requested Person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        "404":
+          description: Person not found
+    patch:
+      summary: Update an existing Person
+      operationId: updatePerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "200":
+          description: The updated Person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        "404":
+          description: Person not found
+    delete:
+      summary: Soft-delete a Person
+      operationId: deletePerson
+      responses:
+        "204":
+          description: Person deleted
+        "404":
+          description: Person not found
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        title:
+          type: string
+          description: Honorific title such as Mr, Mrs, Ms, Mx, Dr.
+        first_names:
+          type: string
+          description: First name(s) including any middle names, as written on the LP1F deed.
+        last_name:
+          type: string
+          description: Last name (surname / family name) as written on the LP1F deed.
+        other_names:
+          type: string
+          description: Other names the person is or has been known by, such as a maiden name.
+        date_of_birth:
+          type: string
+          format: date
+          description: Date of birth — used to compute age for the donor (must be 18+) and attorneys (must be 18+).
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        address_id:
+          type: string
+          format: uuid
+          description: Foreign key to the address table; nullable because some persons (witnesses captured only by name and signature) may not have a recorded address.
+        is_trust_corporation:
+          type: boolean
+          description: "TRUE if this \"person\" is a trust corporation appointed as a corporate attorney (LP1F section 2); requires LPC continuation sheet 4."
+        trust_corporation_number:
+          type: string
+          description: Companies House registration number or other corporate identifier of the trust corporation; empty if not a trust corporation.
+        is_bankrupt:
+          type: boolean
+          description: TRUE if the person is currently bankrupt — a bankrupt person cannot be appointed as a financial attorney (MCA 2005 s. 10(2)).
+        has_debt_relief_order:
+          type: boolean
+          description: TRUE if the person is currently subject to a debt relief order — same statutory disqualification as bankruptcy for financial attorneys (MCA 2005 s. 13(8)).
+      required:
+        - created_at
+        - updated_at
+        - title
+        - first_names
+        - last_name
+        - other_names
+        - email
+        - phone
+        - is_trust_corporation
+        - trust_corporation_number
+        - is_bankrupt
+        - has_debt_relief_order
+      description: Person — every named individual involved in an LPA (donor, attorney, replacement attorney, certificate provider, person to notify, witness, applicant, recipient).

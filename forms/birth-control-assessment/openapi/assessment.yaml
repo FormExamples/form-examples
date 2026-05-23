@@ -1,0 +1,140 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: assessment
+openapi: 3.1.0
+info:
+  title: Birth Control Assessment — Assessment
+  version: 1.0.0
+  description: Birth control assessment form using UK MEC categories. Parent entity for all assessment sections.
+paths:
+  /assessments:
+    get:
+      summary: List Assessment records
+      operationId: listAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessment"
+    post:
+      summary: Create a new Assessment
+      operationId: createAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "201":
+          description: The newly created Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "400":
+          description: Validation error
+  /assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessment by id
+      operationId: getAssessment
+      responses:
+        "200":
+          description: The requested Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    patch:
+      summary: Update an existing Assessment
+      operationId: updateAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    delete:
+      summary: Soft-delete a Assessment
+      operationId: deleteAssessment
+      responses:
+        "204":
+          description: Assessment deleted
+        "404":
+          description: Assessment not found
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+      description: Birth control assessment form using UK MEC categories. Parent entity for all assessment sections.

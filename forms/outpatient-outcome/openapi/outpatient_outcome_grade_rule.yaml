@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_grade_rule
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeGradeRule
+  version: 1.0.0
+  description: Individual OOCG rules that evaluated to true during grading.
+paths:
+  /outpatient-outcome-grade-rules:
+    get:
+      summary: List OutpatientOutcomeGradeRule records
+      operationId: listOutpatientOutcomeGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+    post:
+      summary: Create a new OutpatientOutcomeGradeRule
+      operationId: createOutpatientOutcomeGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+        "400":
+          description: Validation error
+  /outpatient-outcome-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeGradeRule by id
+      operationId: getOutpatientOutcomeGradeRule
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+        "404":
+          description: OutpatientOutcomeGradeRule not found
+    patch:
+      summary: Update an existing OutpatientOutcomeGradeRule
+      operationId: updateOutpatientOutcomeGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeGradeRule"
+        "404":
+          description: OutpatientOutcomeGradeRule not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeGradeRule
+      operationId: deleteOutpatientOutcomeGradeRule
+      responses:
+        "204":
+          description: OutpatientOutcomeGradeRule deleted
+        "404":
+          description: OutpatientOutcomeGradeRule not found
+components:
+  schemas:
+    OutpatientOutcomeGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grading result.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable identifier of the rule that fired.
+        category:
+          type: string
+          maxLength: 100
+          description: Category / domain of the rule (clinical, prom, prem, operational).
+        description:
+          type: string
+          description: Human-readable description of the rule condition.
+        severity_level:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+            - ""
+          description: "Severity of the finding: low, medium, high, critical, or empty for non-severity rules."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - category
+        - description
+        - severity_level
+      description: Individual OOCG rules that evaluated to true during grading.

@@ -1,0 +1,145 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_replacement_attorney
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaReplacementAttorney
+  version: 1.0.0
+  description: LPA replacement attorney — join table linking persons appointed as replacement attorneys to an LPA (LP1F section 4).
+paths:
+  /lpa-replacement-attorneys:
+    get:
+      summary: List LpaReplacementAttorney records
+      operationId: listLpaReplacementAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaReplacementAttorney records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaReplacementAttorney"
+    post:
+      summary: Create a new LpaReplacementAttorney
+      operationId: createLpaReplacementAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaReplacementAttorney"
+      responses:
+        "201":
+          description: The newly created LpaReplacementAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaReplacementAttorney"
+        "400":
+          description: Validation error
+  /lpa-replacement-attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaReplacementAttorney by id
+      operationId: getLpaReplacementAttorney
+      responses:
+        "200":
+          description: The requested LpaReplacementAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaReplacementAttorney"
+        "404":
+          description: LpaReplacementAttorney not found
+    patch:
+      summary: Update an existing LpaReplacementAttorney
+      operationId: updateLpaReplacementAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaReplacementAttorney"
+      responses:
+        "200":
+          description: The updated LpaReplacementAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaReplacementAttorney"
+        "404":
+          description: LpaReplacementAttorney not found
+    delete:
+      summary: Soft-delete a LpaReplacementAttorney
+      operationId: deleteLpaReplacementAttorney
+      responses:
+        "204":
+          description: LpaReplacementAttorney deleted
+        "404":
+          description: LpaReplacementAttorney not found
+components:
+  schemas:
+    LpaReplacementAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the appointed replacement attorney.
+        ordinal:
+          type: integer
+          format: int32
+          description: Listing order on the LP1F deed.
+        replacement_step_in_condition:
+          type: string
+          description: "Optional override of when and how this replacement attorney steps in (LP1F section 4 \"when and how\"); continued on LPC sheet 2 if long."
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - person_id
+        - ordinal
+        - replacement_step_in_condition
+      description: LPA replacement attorney — join table linking persons appointed as replacement attorneys to an LPA (LP1F section 4).

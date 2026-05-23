@@ -1,0 +1,263 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: application_eligible_condition
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — ApplicationEligibleCondition
+  version: 1.0.0
+  description: Per-application qualifying conditions with condition-specific detail.
+paths:
+  /application-eligible-conditions:
+    get:
+      summary: List ApplicationEligibleCondition records
+      operationId: listApplicationEligibleCondition
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ApplicationEligibleCondition records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApplicationEligibleCondition"
+    post:
+      summary: Create a new ApplicationEligibleCondition
+      operationId: createApplicationEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationEligibleCondition"
+      responses:
+        "201":
+          description: The newly created ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationEligibleCondition"
+        "400":
+          description: Validation error
+  /application-eligible-conditions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ApplicationEligibleCondition by id
+      operationId: getApplicationEligibleCondition
+      responses:
+        "200":
+          description: The requested ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationEligibleCondition"
+        "404":
+          description: ApplicationEligibleCondition not found
+    patch:
+      summary: Update an existing ApplicationEligibleCondition
+      operationId: updateApplicationEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationEligibleCondition"
+      responses:
+        "200":
+          description: The updated ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationEligibleCondition"
+        "404":
+          description: ApplicationEligibleCondition not found
+    delete:
+      summary: Soft-delete a ApplicationEligibleCondition
+      operationId: deleteApplicationEligibleCondition
+      responses:
+        "204":
+          description: ApplicationEligibleCondition deleted
+        "404":
+          description: ApplicationEligibleCondition not found
+components:
+  schemas:
+    ApplicationEligibleCondition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        application_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent application.
+        eligible_condition_id:
+          type: string
+          format: uuid
+          description: Foreign key to the eligible condition (one of the ten NHSBSA-recognised conditions).
+        diagnosis_date:
+          type: string
+          format: date
+          description: Date the qualifying condition was diagnosed.
+        snomed_ct_code:
+          type: string
+          maxLength: 50
+          description: Optional SNOMED CT code for the patient-specific diagnosis.
+        icd10_code:
+          type: string
+          maxLength: 20
+          description: Optional ICD-10 code for the patient-specific diagnosis.
+        treatment_detail:
+          type: string
+          description: Free-text description of the current treatment regimen.
+        fistula_site:
+          type: string
+          enum:
+            - caecostomy
+            - colostomy
+            - laryngostomy
+            - ileostomy
+            - urostomy
+            - gastrostomy
+            - other
+            - ""
+          description: Anatomical site of the fistula (for the fistula condition).
+        appliance_type:
+          type: string
+          enum:
+            - one-piece-bag
+            - two-piece-bag
+            - continuous-dressing
+            - irrigation-kit
+            - other
+            - ""
+          description: Appliance worn for the fistula (bag, dressing, irrigation kit).
+        substitution_therapy:
+          type: string
+          maxLength: 255
+          description: Substitution therapy drug and dose (e.g. hydrocortisone 20mg AM / 10mg PM).
+        on_substitution_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is on the substitution therapy required for eligibility.
+        diabetes_treatment_mode:
+          type: string
+          enum:
+            - insulin
+            - oral-hypoglycaemic
+            - insulin-and-oral
+            - glp1-agonist
+            - diet-only
+            - ""
+          description: How diabetes is being treated; diet-only excludes the patient from FP92A.
+        anticonvulsant:
+          type: string
+          description: Anticonvulsant drug and dose (for epilepsy).
+        continuous_anticonvulsant_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient receives continuous anticonvulsant therapy.
+        cannot_leave_home_unaided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is unable to leave home without the help of another person.
+        disability_carer_detail:
+          type: string
+          description: Description of the help / carer the patient depends on.
+        disability_expected_to_be_permanent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Practitioner judgement that the disability is permanent, not temporary.
+        cancer_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site or type of cancer.
+        cancer_treatment_phase:
+          type: string
+          enum:
+            - active-treatment
+            - effects-of-cancer
+            - effects-of-treatment
+            - remission-with-ongoing-treatment
+            - palliative
+            - ""
+          description: Phase of cancer care - active treatment, effects of cancer, effects of treatment, etc.
+        histology_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - pending
+            - ""
+          description: Whether a histological diagnosis has been confirmed for the cancer.
+        practitioner_attestation_notes:
+          type: string
+          description: Free-text notes from the practitioner supporting the attestation.
+      required:
+        - created_at
+        - updated_at
+        - application_id
+        - eligible_condition_id
+        - snomed_ct_code
+        - icd10_code
+        - treatment_detail
+        - fistula_site
+        - appliance_type
+        - substitution_therapy
+        - on_substitution_therapy
+        - diabetes_treatment_mode
+        - anticonvulsant
+        - continuous_anticonvulsant_therapy
+        - cannot_leave_home_unaided
+        - disability_carer_detail
+        - disability_expected_to_be_permanent
+        - cancer_site
+        - cancer_treatment_phase
+        - histology_confirmed
+        - practitioner_attestation_notes
+      description: Per-application qualifying conditions with condition-specific detail.

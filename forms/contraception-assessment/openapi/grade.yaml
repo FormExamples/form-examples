@@ -1,0 +1,185 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Contraception Assessment — Grade
+  version: 1.0.0
+  description: Computed UKMEC grading result per contraceptive method. UKMEC 1 = no restriction, 2 = advantages outweigh risks, 3 = risks outweigh advantages, 4 = unacceptable health risk. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        overall_highest_ukmec_category:
+          type: integer
+          format: int32
+          description: Highest UKMEC category across all methods (1-4).
+        ukmec_cocp:
+          type: integer
+          format: int32
+          description: UKMEC category for combined oral contraceptive pill (1-4).
+        ukmec_pop:
+          type: integer
+          format: int32
+          description: UKMEC category for progestogen-only pill (1-4).
+        ukmec_patch:
+          type: integer
+          format: int32
+          description: UKMEC category for contraceptive patch (1-4).
+        ukmec_ring:
+          type: integer
+          format: int32
+          description: UKMEC category for vaginal ring (1-4).
+        ukmec_injection:
+          type: integer
+          format: int32
+          description: UKMEC category for progestogen-only injectable (1-4).
+        ukmec_implant:
+          type: integer
+          format: int32
+          description: UKMEC category for subdermal implant (1-4).
+        ukmec_cu_iud:
+          type: integer
+          format: int32
+          description: UKMEC category for copper intrauterine device (1-4).
+        ukmec_lng_ius:
+          type: integer
+          format: int32
+          description: UKMEC category for levonorgestrel intrauterine system (1-4).
+        ukmec_condom_male:
+          type: integer
+          format: int32
+          description: UKMEC category for male condom (1-4).
+        ukmec_condom_female:
+          type: integer
+          format: int32
+          description: UKMEC category for female condom (1-4).
+        ukmec_diaphragm:
+          type: integer
+          format: int32
+          description: UKMEC category for diaphragm or cap (1-4).
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - overall_highest_ukmec_category
+        - graded_at
+      description: Computed UKMEC grading result per contraceptive method. UKMEC 1 = no restriction, 2 = advantages outweigh risks, 3 = risks outweigh advantages, 4 = unacceptable health risk. One-to-one child of assessment.

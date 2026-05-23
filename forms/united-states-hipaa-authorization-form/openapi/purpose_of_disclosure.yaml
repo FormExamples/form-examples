@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: purpose_of_disclosure
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — PurposeOfDisclosure
+  version: 1.0.0
+  description: Description of each purpose of the requested use or disclosure. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(iv).
+paths:
+  /purpose-of-disclosures:
+    get:
+      summary: List PurposeOfDisclosure records
+      operationId: listPurposeOfDisclosure
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PurposeOfDisclosure records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PurposeOfDisclosure"
+    post:
+      summary: Create a new PurposeOfDisclosure
+      operationId: createPurposeOfDisclosure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurposeOfDisclosure"
+      responses:
+        "201":
+          description: The newly created PurposeOfDisclosure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfDisclosure"
+        "400":
+          description: Validation error
+  /purpose-of-disclosures/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PurposeOfDisclosure by id
+      operationId: getPurposeOfDisclosure
+      responses:
+        "200":
+          description: The requested PurposeOfDisclosure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfDisclosure"
+        "404":
+          description: PurposeOfDisclosure not found
+    patch:
+      summary: Update an existing PurposeOfDisclosure
+      operationId: updatePurposeOfDisclosure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurposeOfDisclosure"
+      responses:
+        "200":
+          description: The updated PurposeOfDisclosure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfDisclosure"
+        "404":
+          description: PurposeOfDisclosure not found
+    delete:
+      summary: Soft-delete a PurposeOfDisclosure
+      operationId: deletePurposeOfDisclosure
+      responses:
+        "204":
+          description: PurposeOfDisclosure deleted
+        "404":
+          description: PurposeOfDisclosure not found
+components:
+  schemas:
+    PurposeOfDisclosure:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        purposes:
+          type: string
+          description: Array of purpose identifiers (multiple purposes are permitted).
+        primary_purpose:
+          type: string
+          enum:
+            - ""
+            - eligibility-determination
+            - continuing-treatment
+            - insurance-claim
+            - legal-proceeding
+            - disability-application
+            - personal-use
+            - research
+            - employment
+            - at-the-request-of-the-individual
+            - other
+          description: "Primary purpose: eligibility-determination, continuing-treatment, insurance-claim, legal-proceeding, disability-application, personal-use, research, employment, at-the-request-of-the-individual, other, or empty."
+        other_details:
+          type: string
+          description: Free-text details when primary_purpose is other. Must not be empty when primary_purpose is other.
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - purposes
+        - primary_purpose
+        - other_details
+      description: Description of each purpose of the requested use or disclosure. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(iv).

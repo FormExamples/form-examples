@@ -1,0 +1,176 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: clinical_review
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — ClinicalReview
+  version: 1.0.0
+  description: Clinical review including post-vaccination observation and referral needs. One-to-one child of assessment.
+paths:
+  /clinical-reviews:
+    get:
+      summary: List ClinicalReview records
+      operationId: listClinicalReview
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ClinicalReview records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClinicalReview"
+    post:
+      summary: Create a new ClinicalReview
+      operationId: createClinicalReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinicalReview"
+      responses:
+        "201":
+          description: The newly created ClinicalReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinicalReview"
+        "400":
+          description: Validation error
+  /clinical-reviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ClinicalReview by id
+      operationId: getClinicalReview
+      responses:
+        "200":
+          description: The requested ClinicalReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinicalReview"
+        "404":
+          description: ClinicalReview not found
+    patch:
+      summary: Update an existing ClinicalReview
+      operationId: updateClinicalReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClinicalReview"
+      responses:
+        "200":
+          description: The updated ClinicalReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinicalReview"
+        "404":
+          description: ClinicalReview not found
+    delete:
+      summary: Soft-delete a ClinicalReview
+      operationId: deleteClinicalReview
+      responses:
+        "204":
+          description: ClinicalReview deleted
+        "404":
+          description: ClinicalReview not found
+components:
+  schemas:
+    ClinicalReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        post_vaccination_observation:
+          type: integer
+          format: int32
+          description: Post vaccination observation.
+        immediate_reaction:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Immediate reaction. One of: yes, no."
+        reaction_details:
+          type: string
+          description: Reaction details.
+        next_dose_due:
+          type: string
+          format: date
+          description: Next dose due.
+        catch_up_schedule_needed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Catch up schedule needed. One of: yes, no."
+        referral_needed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Referral needed. One of: yes, no."
+        clinician_notes:
+          type: string
+          description: Clinician notes.
+        reviewing_clinician:
+          type: string
+          maxLength: 255
+          description: Reviewing clinician.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - immediate_reaction
+        - reaction_details
+        - catch_up_schedule_needed
+        - referral_needed
+        - clinician_notes
+        - reviewing_clinician
+      description: Clinical review including post-vaccination observation and referral needs. One-to-one child of assessment.

@@ -1,0 +1,140 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: architecture_decision_record_note
+openapi: 3.1.0
+info:
+  title: Architecture Decision Record — ArchitectureDecisionRecordNote
+  version: 1.0.0
+  description: "Tyree & Akerman section 14: append-only discussion notes captured during socialisation."
+paths:
+  /architecture-decision-record-notes:
+    get:
+      summary: List ArchitectureDecisionRecordNote records
+      operationId: listArchitectureDecisionRecordNote
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ArchitectureDecisionRecordNote records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+    post:
+      summary: Create a new ArchitectureDecisionRecordNote
+      operationId: createArchitectureDecisionRecordNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+      responses:
+        "201":
+          description: The newly created ArchitectureDecisionRecordNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+        "400":
+          description: Validation error
+  /architecture-decision-record-notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ArchitectureDecisionRecordNote by id
+      operationId: getArchitectureDecisionRecordNote
+      responses:
+        "200":
+          description: The requested ArchitectureDecisionRecordNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+        "404":
+          description: ArchitectureDecisionRecordNote not found
+    patch:
+      summary: Update an existing ArchitectureDecisionRecordNote
+      operationId: updateArchitectureDecisionRecordNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+      responses:
+        "200":
+          description: The updated ArchitectureDecisionRecordNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecordNote"
+        "404":
+          description: ArchitectureDecisionRecordNote not found
+    delete:
+      summary: Soft-delete a ArchitectureDecisionRecordNote
+      operationId: deleteArchitectureDecisionRecordNote
+      responses:
+        "204":
+          description: ArchitectureDecisionRecordNote deleted
+        "404":
+          description: ArchitectureDecisionRecordNote not found
+components:
+  schemas:
+    ArchitectureDecisionRecordNote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        architecture_decision_record_id:
+          type: string
+          format: uuid
+          description: Foreign key to architecture_decision_record.id.
+        noted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the note was made (may differ from created_at if backdated).
+        noted_by:
+          type: string
+          description: Name of the person who made the note.
+        body:
+          type: string
+          description: Note body text.
+      required:
+        - created_at
+        - updated_at
+        - architecture_decision_record_id
+        - noted_at
+        - noted_by
+        - body
+      description: "Tyree & Akerman section 14: append-only discussion notes captured during socialisation."

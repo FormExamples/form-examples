@@ -1,0 +1,278 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: international_certificate_of_vaccination_or_prophylaxis
+openapi: 3.1.0
+info:
+  title: International Certificate Of Vaccination Or Prophylaxis — InternationalCertificateOfVaccinationOrProphylaxis
+  version: 1.0.0
+  description: WHO International Certificate of Vaccination or Prophylaxis (IHR 2005 Annex 6). One row per vaccinee per issued certificate; vaccination entries are recorded in the companion *_entry table.
+paths:
+  /international-certificate-of-vaccination-or-prophylaxises:
+    get:
+      summary: List InternationalCertificateOfVaccinationOrProphylaxis records
+      operationId: listInternationalCertificateOfVaccinationOrProphylaxis
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InternationalCertificateOfVaccinationOrProphylaxis records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+    post:
+      summary: Create a new InternationalCertificateOfVaccinationOrProphylaxis
+      operationId: createInternationalCertificateOfVaccinationOrProphylaxis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+      responses:
+        "201":
+          description: The newly created InternationalCertificateOfVaccinationOrProphylaxis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+        "400":
+          description: Validation error
+  /international-certificate-of-vaccination-or-prophylaxises/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InternationalCertificateOfVaccinationOrProphylaxis by id
+      operationId: getInternationalCertificateOfVaccinationOrProphylaxis
+      responses:
+        "200":
+          description: The requested InternationalCertificateOfVaccinationOrProphylaxis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxis not found
+    patch:
+      summary: Update an existing InternationalCertificateOfVaccinationOrProphylaxis
+      operationId: updateInternationalCertificateOfVaccinationOrProphylaxis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+      responses:
+        "200":
+          description: The updated InternationalCertificateOfVaccinationOrProphylaxis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxis"
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxis not found
+    delete:
+      summary: Soft-delete a InternationalCertificateOfVaccinationOrProphylaxis
+      operationId: deleteInternationalCertificateOfVaccinationOrProphylaxis
+      responses:
+        "204":
+          description: InternationalCertificateOfVaccinationOrProphylaxis deleted
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxis not found
+components:
+  schemas:
+    InternationalCertificateOfVaccinationOrProphylaxis:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the vaccinee.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the supervising clinician for the certificate as a whole.
+        center_id:
+          type: string
+          format: uuid
+          description: Foreign key to the WHO-designated administering centre.
+        status:
+          type: string
+          enum:
+            - draft
+            - issued
+            - reissued
+            - revoked
+          description: "Lifecycle status: draft, issued, reissued, or revoked."
+        issued_at:
+          type: string
+          format: date-time
+          description: Timestamp when the certificate was issued to the vaccinee.
+        revoked_at:
+          type: string
+          format: date-time
+          description: Timestamp when the certificate was revoked, if applicable.
+        revocation_reason:
+          type: string
+          description: Reason the certificate was revoked.
+        certificate_serial_number:
+          type: string
+          maxLength: 50
+          description: Issuing centre's serial number for this certificate.
+        issuing_country_as_iso_3166_1_alpha_3:
+          type: string
+          maxLength: 3
+          description: Issuing country as ISO 3166-1 alpha-3.
+        primary_language_as_bcp_47:
+          type: string
+          maxLength: 10
+          description: Primary language of the printed certificate (BCP 47).
+        secondary_language_as_bcp_47:
+          type: string
+          maxLength: 10
+          description: Secondary language of the printed certificate; IHR Annex 6 requires English or French as one of the two.
+        tertiary_language_as_bcp_47:
+          type: string
+          maxLength: 10
+          description: Optional third language for the printed certificate (issuing country's official language).
+        destination_countries_as_iso_3166_1_alpha_3:
+          type: string
+          description: Space-separated list of destination countries for the trip.
+        planned_arrival_date:
+          type: string
+          format: date
+          description: Planned date of arrival at the primary destination.
+        purpose_of_travel:
+          type: string
+          enum:
+            - tourism
+            - business
+            - study
+            - employment
+            - humanitarian
+            - military
+            - family
+            - medical
+            - other
+            - ""
+          description: "Purpose of travel: tourism, business, study, employment, humanitarian, military, family, medical, other."
+        medical_waiver:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a clinician-signed medical waiver has been issued in lieu of vaccination.
+        medical_waiver_reason:
+          type: string
+          description: Free-text clinical reason for the medical waiver.
+        medical_waiver_signed_by_clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who signed the medical waiver, if any.
+        medical_waiver_signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the medical waiver was signed.
+        declared_pregnancy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vaccinee declared pregnancy at the encounter.
+        declared_breastfeeding:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vaccinee declared breastfeeding at the encounter.
+        declared_immunosuppression:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vaccinee declared immunosuppression at the encounter.
+        electronic_signature_data_url:
+          type: string
+          description: Final electronic signature of the issuing clinician captured as a data URL.
+        electronic_signature_signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the electronic signature was applied.
+        overall_valid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Computed overall validity flag: yes if all entries pass the validation rules."
+        validity_computed_at:
+          type: string
+          format: date-time
+          description: Timestamp at which overall validity was last computed.
+        notes:
+          type: string
+          description: Free-text notes by the issuing clinician.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - center_id
+        - status
+        - revocation_reason
+        - certificate_serial_number
+        - issuing_country_as_iso_3166_1_alpha_3
+        - primary_language_as_bcp_47
+        - secondary_language_as_bcp_47
+        - tertiary_language_as_bcp_47
+        - destination_countries_as_iso_3166_1_alpha_3
+        - purpose_of_travel
+        - medical_waiver
+        - medical_waiver_reason
+        - declared_pregnancy
+        - declared_breastfeeding
+        - declared_immunosuppression
+        - electronic_signature_data_url
+        - overall_valid
+        - notes
+      description: WHO International Certificate of Vaccination or Prophylaxis (IHR 2005 Annex 6). One row per vaccinee per issued certificate; vaccination entries are recorded in the companion *_entry table.

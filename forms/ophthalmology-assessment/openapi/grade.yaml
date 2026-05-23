@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Ophthalmology Assessment — Grade
+  version: 1.0.0
+  description: Computed visual acuity grading result for the ophthalmology assessment. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        visual_acuity_grade:
+          type: string
+          enum:
+            - normal
+            - mild-impairment
+            - moderate-impairment
+            - severe-impairment
+            - near-blindness
+            - blindness
+            - ""
+          description: "Overall visual acuity grade: normal, mild-impairment, moderate-impairment, severe-impairment, near-blindness, blindness, or empty."
+        best_corrected_va_right:
+          type: string
+          maxLength: 20
+          description: Best corrected visual acuity of the right eye used for grading.
+        best_corrected_va_left:
+          type: string
+          maxLength: 20
+          description: Best corrected visual acuity of the left eye used for grading.
+        better_eye_va:
+          type: string
+          maxLength: 20
+          description: Visual acuity of the better eye used for overall grading.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the visual acuity grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - visual_acuity_grade
+        - best_corrected_va_right
+        - best_corrected_va_left
+        - better_eye_va
+        - graded_at
+      description: Computed visual acuity grading result for the ophthalmology assessment. One-to-one child of assessment.

@@ -1,0 +1,188 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_principles_assessment_grade
+openapi: 3.1.0
+info:
+  title: Agile Principles Assessment — AgilePrinciplesAssessmentGrade
+  version: 1.0.0
+  description: Computed grading and signed-off action plan. One-to-one with agile_principles_assessment.
+paths:
+  /agile-principles-assessment-grades:
+    get:
+      summary: List AgilePrinciplesAssessmentGrade records
+      operationId: listAgilePrinciplesAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgilePrinciplesAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+    post:
+      summary: Create a new AgilePrinciplesAssessmentGrade
+      operationId: createAgilePrinciplesAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created AgilePrinciplesAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+        "400":
+          description: Validation error
+  /agile-principles-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgilePrinciplesAssessmentGrade by id
+      operationId: getAgilePrinciplesAssessmentGrade
+      responses:
+        "200":
+          description: The requested AgilePrinciplesAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+        "404":
+          description: AgilePrinciplesAssessmentGrade not found
+    patch:
+      summary: Update an existing AgilePrinciplesAssessmentGrade
+      operationId: updateAgilePrinciplesAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+      responses:
+        "200":
+          description: The updated AgilePrinciplesAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGrade"
+        "404":
+          description: AgilePrinciplesAssessmentGrade not found
+    delete:
+      summary: Soft-delete a AgilePrinciplesAssessmentGrade
+      operationId: deleteAgilePrinciplesAssessmentGrade
+      responses:
+        "204":
+          description: AgilePrinciplesAssessmentGrade deleted
+        "404":
+          description: AgilePrinciplesAssessmentGrade not found
+components:
+  schemas:
+    AgilePrinciplesAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_principles_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, 1:1).
+        answered_count:
+          type: integer
+          format: int32
+          description: Number of principles (0-12) that received a Likert score.
+        mean_score:
+          type: number
+          format: double
+          description: Unweighted mean of answered principle scores; NULL when fewer than 6 principles were answered.
+        weighted_mean_score:
+          type: number
+          format: double
+          description: Weighted mean of answered principle scores using the per-principle weights from the assessment row; equals mean_score when no weight is customised. NULL when fewer than 6 principles were answered.
+        weights_customised:
+          type: boolean
+          description: TRUE when at least one principle weight on the assessment differs from the default 1.00.
+        maturity:
+          type: string
+          enum:
+            - optimising
+            - mature
+            - developing
+            - initial
+            - ad-hoc
+            - insufficient-data
+            - ""
+          description: "Composite maturity level: optimising, mature, developing, initial, ad-hoc, or insufficient-data."
+        top_action_1:
+          type: string
+          maxLength: 500
+          description: First prioritised action drawn from the weakest principles.
+        top_action_2:
+          type: string
+          maxLength: 500
+          description: Second prioritised action drawn from the weakest principles.
+        top_action_3:
+          type: string
+          maxLength: 500
+          description: Third prioritised action drawn from the weakest principles.
+        coach_notes:
+          type: string
+          description: Free-text agile-coach notes accompanying the action plan.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of electronic sign-off.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp the engine last computed this result.
+      required:
+        - created_at
+        - updated_at
+        - agile_principles_assessment_id
+        - answered_count
+        - weights_customised
+        - maturity
+        - top_action_1
+        - top_action_2
+        - top_action_3
+        - coach_notes
+        - graded_at
+      description: Computed grading and signed-off action plan. One-to-one with agile_principles_assessment.

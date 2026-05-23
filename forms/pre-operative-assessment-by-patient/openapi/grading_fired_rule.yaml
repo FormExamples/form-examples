@@ -1,0 +1,161 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grading_fired_rule
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Patient — GradingFiredRule
+  version: 1.0.0
+  description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.
+paths:
+  /grading-fired-rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradingFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingFiredRule"
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "201":
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "400":
+          description: Validation error
+  /grading-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        "200":
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingFiredRule"
+      responses:
+        "200":
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingFiredRule"
+        "404":
+          description: GradingFiredRule not found
+    delete:
+      summary: Soft-delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        "204":
+          description: GradingFiredRule deleted
+        "404":
+          description: GradingFiredRule not found
+components:
+  schemas:
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Stable rule identifier (e.g. R-ASA-III-02).
+        instrument:
+          type: string
+          enum:
+            - asa
+            - mallampati
+            - rcri
+            - stopbang
+            - frailty
+          description: "Scoring instrument the rule belongs to: asa, mallampati, rcri, stopbang, frailty."
+        grade:
+          type: string
+          maxLength: 5
+          description: Grade contributed by this rule (e.g. III for ASA).
+        category:
+          type: string
+          maxLength: 50
+          description: Body-system or risk category (e.g. cardiovascular, respiratory).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - instrument
+        - grade
+        - category
+        - description
+      description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.

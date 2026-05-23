@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: staff_professionalism
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — StaffProfessionalism
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Staff & Professionalism domain: 3 Likert-scale satisfaction questions."
+paths:
+  /staff-professionalisms:
+    get:
+      summary: List StaffProfessionalism records
+      operationId: listStaffProfessionalism
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of StaffProfessionalism records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffProfessionalism"
+    post:
+      summary: Create a new StaffProfessionalism
+      operationId: createStaffProfessionalism
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffProfessionalism"
+      responses:
+        "201":
+          description: The newly created StaffProfessionalism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffProfessionalism"
+        "400":
+          description: Validation error
+  /staff-professionalisms/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one StaffProfessionalism by id
+      operationId: getStaffProfessionalism
+      responses:
+        "200":
+          description: The requested StaffProfessionalism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffProfessionalism"
+        "404":
+          description: StaffProfessionalism not found
+    patch:
+      summary: Update an existing StaffProfessionalism
+      operationId: updateStaffProfessionalism
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffProfessionalism"
+      responses:
+        "200":
+          description: The updated StaffProfessionalism
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffProfessionalism"
+        "404":
+          description: StaffProfessionalism not found
+    delete:
+      summary: Soft-delete a StaffProfessionalism
+      operationId: deleteStaffProfessionalism
+      responses:
+        "204":
+          description: StaffProfessionalism deleted
+        "404":
+          description: StaffProfessionalism not found
+components:
+  schemas:
+    StaffProfessionalism:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        nursing_courtesy:
+          type: integer
+          format: int32
+          description: Satisfaction with nursing staff courtesy (1-5 Likert). NULL if unanswered.
+        respect_shown:
+          type: integer
+          format: int32
+          description: Satisfaction with respect shown during visit (1-5 Likert). NULL if unanswered.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+      description: "1:1 with encounter_satisfaction. Staff & Professionalism domain: 3 Likert-scale satisfaction questions."

@@ -1,0 +1,178 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: participant
+openapi: 3.1.0
+info:
+  title: Issue Tracker — Participant
+  version: 1.0.0
+  description: A person involved with an issue. Multiple roles per person allowed via duplicate rows.
+paths:
+  /participants:
+    get:
+      summary: List Participant records
+      operationId: listParticipant
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Participant records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+    post:
+      summary: Create a new Participant
+      operationId: createParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "201":
+          description: The newly created Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "400":
+          description: Validation error
+  /participants/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Participant by id
+      operationId: getParticipant
+      responses:
+        "200":
+          description: The requested Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    patch:
+      summary: Update an existing Participant
+      operationId: updateParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "200":
+          description: The updated Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    delete:
+      summary: Soft-delete a Participant
+      operationId: deleteParticipant
+      responses:
+        "204":
+          description: Participant deleted
+        "404":
+          description: Participant not found
+components:
+  schemas:
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Participant full name.
+        email:
+          type: string
+          description: Participant email address for notifications.
+        phone:
+          type: string
+          description: Participant phone number for notifications.
+        role:
+          type: string
+          enum:
+            - discoverer
+            - affected-user
+            - assignee
+            - reviewer
+            - stakeholder
+            - subject-matter-expert
+            - manager
+            - on-call
+            - observer
+            - witness
+            - other
+            - ""
+          description: "Participant role on this issue: discoverer, affected-user, assignee, etc."
+        organisation:
+          type: string
+          maxLength: 255
+          description: Organisation the participant belongs to.
+        team:
+          type: string
+          maxLength: 255
+          description: Team or department within the organisation.
+        notify_on:
+          type: string
+          enum:
+            - all-changes
+            - priority-change
+            - flag-fired
+            - resolution
+            - sign-off
+            - never
+            - ""
+          description: "Notification preference: all-changes, priority-change, flag-fired, resolution, sign-off, or never."
+      required:
+        - created_at
+        - updated_at
+        - name
+        - email
+        - phone
+        - role
+        - organisation
+        - team
+        - notify_on
+      description: A person involved with an issue. Multiple roles per person allowed via duplicate rows.

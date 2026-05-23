@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: architecture
+openapi: 3.1.0
+info:
+  title: Arc42 — Architecture
+  version: 1.0.0
+  description: Software architecture being documented with arc42.
+paths:
+  /architectures:
+    get:
+      summary: List Architecture records
+      operationId: listArchitecture
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Architecture records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Architecture"
+    post:
+      summary: Create a new Architecture
+      operationId: createArchitecture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Architecture"
+      responses:
+        "201":
+          description: The newly created Architecture
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Architecture"
+        "400":
+          description: Validation error
+  /architectures/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Architecture by id
+      operationId: getArchitecture
+      responses:
+        "200":
+          description: The requested Architecture
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Architecture"
+        "404":
+          description: Architecture not found
+    patch:
+      summary: Update an existing Architecture
+      operationId: updateArchitecture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Architecture"
+      responses:
+        "200":
+          description: The updated Architecture
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Architecture"
+        "404":
+          description: Architecture not found
+    delete:
+      summary: Soft-delete a Architecture
+      operationId: deleteArchitecture
+      responses:
+        "204":
+          description: Architecture deleted
+        "404":
+          description: Architecture not found
+components:
+  schemas:
+    Architecture:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Architecture name.
+        version:
+          type: string
+          description: Documentation version (free text, e.g. semantic version).
+        owner:
+          type: string
+          description: Person or team responsible for the architecture.
+        status:
+          type: string
+          enum:
+            - draft
+            - active
+            - archived
+            - ""
+          description: "Lifecycle status of the documented architecture: draft, active, or archived."
+        description:
+          type: string
+          description: One-paragraph summary of the architecture.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - version
+        - owner
+        - status
+        - description
+      description: Software architecture being documented with arc42.

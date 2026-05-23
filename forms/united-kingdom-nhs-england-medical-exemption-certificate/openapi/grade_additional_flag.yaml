@@ -1,0 +1,162 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade_additional_flag
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — GradeAdditionalFlag
+  version: 1.0.0
+  description: Per-grade advisory flags surfaced to the practitioner.
+paths:
+  /grade-additional-flags:
+    get:
+      summary: List GradeAdditionalFlag records
+      operationId: listGradeAdditionalFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradeAdditionalFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradeAdditionalFlag"
+    post:
+      summary: Create a new GradeAdditionalFlag
+      operationId: createGradeAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradeAdditionalFlag"
+      responses:
+        "201":
+          description: The newly created GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeAdditionalFlag"
+        "400":
+          description: Validation error
+  /grade-additional-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradeAdditionalFlag by id
+      operationId: getGradeAdditionalFlag
+      responses:
+        "200":
+          description: The requested GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeAdditionalFlag"
+        "404":
+          description: GradeAdditionalFlag not found
+    patch:
+      summary: Update an existing GradeAdditionalFlag
+      operationId: updateGradeAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradeAdditionalFlag"
+      responses:
+        "200":
+          description: The updated GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradeAdditionalFlag"
+        "404":
+          description: GradeAdditionalFlag not found
+    delete:
+      summary: Soft-delete a GradeAdditionalFlag
+      operationId: deleteGradeAdditionalFlag
+      responses:
+        "204":
+          description: GradeAdditionalFlag deleted
+        "404":
+          description: GradeAdditionalFlag not found
+components:
+  schemas:
+    GradeAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 64
+          description: Stable identifier of the flag.
+        category:
+          type: string
+          enum:
+            - completeness
+            - data-quality
+            - workflow
+            - education
+            - safeguarding
+            - pregnancy
+            - age-exemption
+            - ""
+          description: Flag category for grouping in the UI.
+        description:
+          type: string
+          description: Human-readable description shown to the practitioner.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Display priority: low, medium, or high."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - flag_id
+        - category
+        - description
+        - priority
+      description: Per-grade advisory flags surfaced to the practitioner.

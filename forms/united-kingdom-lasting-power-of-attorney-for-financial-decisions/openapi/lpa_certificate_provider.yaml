@@ -1,0 +1,160 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_certificate_provider
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaCertificateProvider
+  version: 1.0.0
+  description: LPA certificate provider — the single person who certifies the donor's capacity and lack of undue pressure (LP1F section 10).
+paths:
+  /lpa-certificate-providers:
+    get:
+      summary: List LpaCertificateProvider records
+      operationId: listLpaCertificateProvider
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaCertificateProvider records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaCertificateProvider"
+    post:
+      summary: Create a new LpaCertificateProvider
+      operationId: createLpaCertificateProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaCertificateProvider"
+      responses:
+        "201":
+          description: The newly created LpaCertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaCertificateProvider"
+        "400":
+          description: Validation error
+  /lpa-certificate-providers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaCertificateProvider by id
+      operationId: getLpaCertificateProvider
+      responses:
+        "200":
+          description: The requested LpaCertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaCertificateProvider"
+        "404":
+          description: LpaCertificateProvider not found
+    patch:
+      summary: Update an existing LpaCertificateProvider
+      operationId: updateLpaCertificateProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaCertificateProvider"
+      responses:
+        "200":
+          description: The updated LpaCertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaCertificateProvider"
+        "404":
+          description: LpaCertificateProvider not found
+    delete:
+      summary: Soft-delete a LpaCertificateProvider
+      operationId: deleteLpaCertificateProvider
+      responses:
+        "204":
+          description: LpaCertificateProvider deleted
+        "404":
+          description: LpaCertificateProvider not found
+components:
+  schemas:
+    LpaCertificateProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; UNIQUE so only one certificate provider per LPA; cascades on delete.
+        person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the certificate provider.
+        knows_donor_as:
+          type: string
+          enum:
+            - friend
+            - professional
+            - ""
+          description: "How the certificate provider knows the donor. One of: friend (known personally for 2+ years), professional (relevant professional skill such as GP, solicitor)."
+        is_over_eighteen:
+          type: boolean
+          description: TRUE when the certificate provider confirms they are aged 18 or over.
+        read_lpa:
+          type: boolean
+          description: TRUE when the certificate provider confirms they have read the LPA.
+        no_restrictions_on_acting:
+          type: boolean
+          description: TRUE when the certificate provider confirms no statutory disqualification applies (not an attorney, not related, not a care-home owner — LPA Regulations 2007 reg. 8).
+        eligibility_confirmation_at:
+          type: string
+          format: date-time
+          description: Timestamp when the certificate provider completed the eligibility confirmation checklist.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - person_id
+        - knows_donor_as
+        - is_over_eighteen
+        - read_lpa
+        - no_restrictions_on_acting
+      description: LPA certificate provider — the single person who certifies the donor's capacity and lack of undue pressure (LP1F section 10).

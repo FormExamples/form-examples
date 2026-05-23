@@ -1,0 +1,181 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — Grade
+  version: 1.0.0
+  description: Computed eligibility determination for an FP92A application.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        application_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent application (one grade per application).
+        outcome:
+          type: string
+          enum:
+            - eligible
+            - ineligible
+            - requires-clarification
+            - ""
+          description: "Eligibility outcome: eligible, ineligible, or requires-clarification."
+        redirect_to:
+          type: string
+          enum:
+            - ""
+            - FW8
+            - age-exemption
+            - low-income-scheme
+            - hc1
+            - hc2
+          description: If ineligible on FP92A, suggested alternative exemption route.
+        result_category:
+          type: string
+          description: Headline category as a human-readable label.
+        result_score:
+          type: number
+          format: double
+          description: Numeric score (always 1.0 for eligible, 0.0 otherwise).
+        result_notes:
+          type: string
+          description: Free-text rationale or summary attached to the grade.
+        valid_from:
+          type: string
+          format: date
+          description: Date the certificate would become valid (typically completed_date).
+        valid_until:
+          type: string
+          format: date
+          description: Date the certificate would expire (typically valid_from + validity_years).
+        validity_years:
+          type: integer
+          format: int32
+          description: "Number of years the certificate is valid for (NHSBSA default: 5)."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp the grade was last (re-)computed.
+      required:
+        - created_at
+        - updated_at
+        - application_id
+        - outcome
+        - redirect_to
+        - result_category
+        - result_notes
+        - validity_years
+        - graded_at
+      description: Computed eligibility determination for an FP92A application.

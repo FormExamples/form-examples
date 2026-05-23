@@ -1,0 +1,183 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: recurring_rule
+openapi: 3.1.0
+info:
+  title: Meeting — RecurringRule
+  version: 1.0.0
+  description: Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.
+paths:
+  /recurring-rules:
+    get:
+      summary: List RecurringRule records
+      operationId: listRecurringRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RecurringRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecurringRule"
+    post:
+      summary: Create a new RecurringRule
+      operationId: createRecurringRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecurringRule"
+      responses:
+        "201":
+          description: The newly created RecurringRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecurringRule"
+        "400":
+          description: Validation error
+  /recurring-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RecurringRule by id
+      operationId: getRecurringRule
+      responses:
+        "200":
+          description: The requested RecurringRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecurringRule"
+        "404":
+          description: RecurringRule not found
+    patch:
+      summary: Update an existing RecurringRule
+      operationId: updateRecurringRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecurringRule"
+      responses:
+        "200":
+          description: The updated RecurringRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecurringRule"
+        "404":
+          description: RecurringRule not found
+    delete:
+      summary: Soft-delete a RecurringRule
+      operationId: deleteRecurringRule
+      responses:
+        "204":
+          description: RecurringRule deleted
+        "404":
+          description: RecurringRule not found
+components:
+  schemas:
+    RecurringRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting; UNIQUE so at most one rule per meeting.
+        frequency:
+          type: string
+          enum:
+            - none
+            - daily
+            - weekday
+            - weekly
+            - monthly
+            - quarterly
+            - yearly
+          description: "Recurrence frequency: none, daily, weekday, weekly, monthly, quarterly, yearly."
+        interval_count:
+          type: integer
+          format: int32
+          description: Interval between occurrences; e.g. interval_count = 2 with frequency = weekly means every fortnight.
+        by_day_of_week:
+          type: string
+          maxLength: 40
+          description: Comma-separated iCalendar weekday codes (MO,TU,WE,TH,FR,SA,SU). Empty when not constrained.
+        by_day_of_month:
+          type: integer
+          format: int32
+          description: Day of month for monthly / quarterly / yearly rules. Negative values count from the end (-1 = last day).
+        by_set_position:
+          type: integer
+          format: int32
+          description: "Set position for the \"nth weekday\" pattern (e.g. by_set_position = 1, by_day_of_week = MO means first Monday)."
+        by_month_of_year:
+          type: integer
+          format: int32
+          description: Month of year for yearly rules (1 = January, 12 = December).
+        series_count:
+          type: integer
+          format: int32
+          description: Total number of occurrences in the series, if known.
+        series_until:
+          type: string
+          format: date-time
+          description: Last possible occurrence in the series, exclusive.
+        timezone:
+          type: string
+          maxLength: 64
+          description: IANA timezone the rule is evaluated in.
+        rrule_text:
+          type: string
+          maxLength: 500
+          description: Full RFC 5545 RRULE string for verbatim round-trip with iCalendar clients.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - frequency
+        - interval_count
+        - by_day_of_week
+        - timezone
+        - rrule_text
+      description: Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.

@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_signature
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaSignature
+  version: 1.0.0
+  description: LPA signature — one row per signing event on the LP1F deed or registration application; the audit trail for sections 9, 10, 11 and 15.
+paths:
+  /lpa-signatures:
+    get:
+      summary: List LpaSignature records
+      operationId: listLpaSignature
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaSignature records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaSignature"
+    post:
+      summary: Create a new LpaSignature
+      operationId: createLpaSignature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaSignature"
+      responses:
+        "201":
+          description: The newly created LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "400":
+          description: Validation error
+  /lpa-signatures/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaSignature by id
+      operationId: getLpaSignature
+      responses:
+        "200":
+          description: The requested LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "404":
+          description: LpaSignature not found
+    patch:
+      summary: Update an existing LpaSignature
+      operationId: updateLpaSignature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaSignature"
+      responses:
+        "200":
+          description: The updated LpaSignature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaSignature"
+        "404":
+          description: LpaSignature not found
+    delete:
+      summary: Soft-delete a LpaSignature
+      operationId: deleteLpaSignature
+      responses:
+        "204":
+          description: LpaSignature deleted
+        "404":
+          description: LpaSignature not found
+components:
+  schemas:
+    LpaSignature:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        signatory_person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the person who signed.
+        role:
+          type: string
+          enum:
+            - donor
+            - certificate_provider
+            - attorney
+            - replacement_attorney
+            - applicant
+            - signing_on_behalf_of_donor
+            - trust_corporation_authorised_person
+          description: "Role under which this signature was given. One of: donor, certificate_provider, attorney, replacement_attorney, applicant, signing_on_behalf_of_donor, trust_corporation_authorised_person."
+        lp1f_section:
+          type: integer
+          format: int32
+          description: "LP1F section in which this signature appears. One of: 9 (donor), 10 (certificate provider), 11 (attorneys and replacements), 15 (registration applicant)."
+        signature_blob_path:
+          type: string
+          description: Server-side file reference to the stored signature image / blob.
+        signed_on:
+          type: string
+          format: date
+          description: Date on which the signature was given; used to enforce the LPA Regulations 2007 reg. 9(6) signing order.
+        signed_on_behalf_full_name:
+          type: string
+          description: Full name of the person who physically signed when role = signing_on_behalf_of_donor (donor cannot sign — requires LPC sheet 3).
+        is_witnessed:
+          type: boolean
+          description: TRUE if this signature requires and has a corresponding lpa_witness row; FALSE for the certificate-provider signature which is not witnessed.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - signatory_person_id
+        - role
+        - lp1f_section
+        - signature_blob_path
+        - signed_on_behalf_full_name
+        - is_witnessed
+      description: LPA signature — one row per signing event on the LP1F deed or registration application; the audit trail for sections 9, 10, 11 and 15.

@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: environment
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — Environment
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Environment domain: 3 Likert-scale satisfaction questions."
+paths:
+  /environments:
+    get:
+      summary: List Environment records
+      operationId: listEnvironment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Environment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Environment"
+    post:
+      summary: Create a new Environment
+      operationId: createEnvironment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Environment"
+      responses:
+        "201":
+          description: The newly created Environment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Environment"
+        "400":
+          description: Validation error
+  /environments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Environment by id
+      operationId: getEnvironment
+      responses:
+        "200":
+          description: The requested Environment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Environment"
+        "404":
+          description: Environment not found
+    patch:
+      summary: Update an existing Environment
+      operationId: updateEnvironment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Environment"
+      responses:
+        "200":
+          description: The updated Environment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Environment"
+        "404":
+          description: Environment not found
+    delete:
+      summary: Soft-delete a Environment
+      operationId: deleteEnvironment
+      responses:
+        "204":
+          description: Environment deleted
+        "404":
+          description: Environment not found
+components:
+  schemas:
+    Environment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        waiting_area_comfort:
+          type: integer
+          format: int32
+          description: Satisfaction with waiting area comfort (1-5 Likert). NULL if unanswered.
+        privacy:
+          type: integer
+          format: int32
+          description: Satisfaction with privacy during visit (1-5 Likert). NULL if unanswered.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+      description: "1:1 with encounter_satisfaction. Environment domain: 3 Likert-scale satisfaction questions."

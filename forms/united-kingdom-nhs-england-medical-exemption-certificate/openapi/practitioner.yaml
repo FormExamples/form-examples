@@ -1,0 +1,192 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: practitioner
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — Practitioner
+  version: 1.0.0
+  description: Practitioner who signs the FP92A and attests to the qualifying condition(s).
+paths:
+  /practitioners:
+    get:
+      summary: List Practitioner records
+      operationId: listPractitioner
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Practitioner records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Practitioner"
+    post:
+      summary: Create a new Practitioner
+      operationId: createPractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Practitioner"
+      responses:
+        "201":
+          description: The newly created Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "400":
+          description: Validation error
+  /practitioners/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Practitioner by id
+      operationId: getPractitioner
+      responses:
+        "200":
+          description: The requested Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "404":
+          description: Practitioner not found
+    patch:
+      summary: Update an existing Practitioner
+      operationId: updatePractitioner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Practitioner"
+      responses:
+        "200":
+          description: The updated Practitioner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Practitioner"
+        "404":
+          description: Practitioner not found
+    delete:
+      summary: Soft-delete a Practitioner
+      operationId: deletePractitioner
+      responses:
+        "204":
+          description: Practitioner deleted
+        "404":
+          description: Practitioner not found
+components:
+  schemas:
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Practitioner full name.
+        email:
+          type: string
+          description: Optional practitioner email.
+        phone:
+          type: string
+          description: Practice telephone number printed on the FP92A.
+        role:
+          type: string
+          enum:
+            - gp
+            - hospital-doctor
+            - nurse-practitioner
+            - pharmacist-prescriber
+            - other
+            - ""
+          description: Practitioner role / job title.
+        registration_body:
+          type: string
+          enum:
+            - GMC
+            - NMC
+            - HCPC
+            - GPhC
+            - other
+            - ""
+          description: Professional registration body (GMC for doctors, NMC for nurses, HCPC, GPhC).
+        registration_number:
+          type: string
+          description: Professional registration number issued by the registration body.
+        practice_name:
+          type: string
+          maxLength: 255
+          description: GP surgery / practice / clinic name printed on the FP92A.
+        practice_code:
+          type: string
+          maxLength: 20
+          description: NHS practice code (where applicable).
+        practitioner_code:
+          type: string
+          maxLength: 20
+          description: NHS practitioner code (where applicable).
+        postal_address_as_full_text:
+          type: string
+          description: Practice postal address as printed on the FP92A.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Practice country as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Practice postcode.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 12
+          description: Optional NHS staff number for the practitioner.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - registration_body
+        - registration_number
+        - practice_name
+        - practice_code
+        - practitioner_code
+      description: Practitioner who signs the FP92A and attests to the qualifying condition(s).

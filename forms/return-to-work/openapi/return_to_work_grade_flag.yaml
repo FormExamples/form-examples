@@ -1,0 +1,175 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: return_to_work_grade_flag
+openapi: 3.1.0
+info:
+  title: Return To Work — ReturnToWorkGradeFlag
+  version: 1.0.0
+  description: Additional safety flags raised during Return to Work composite grading. Many-to-one child of return_to_work_grade.
+paths:
+  /return-to-work-grade-flags:
+    get:
+      summary: List ReturnToWorkGradeFlag records
+      operationId: listReturnToWorkGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReturnToWorkGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+    post:
+      summary: Create a new ReturnToWorkGradeFlag
+      operationId: createReturnToWorkGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+      responses:
+        "201":
+          description: The newly created ReturnToWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+        "400":
+          description: Validation error
+  /return-to-work-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReturnToWorkGradeFlag by id
+      operationId: getReturnToWorkGradeFlag
+      responses:
+        "200":
+          description: The requested ReturnToWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+        "404":
+          description: ReturnToWorkGradeFlag not found
+    patch:
+      summary: Update an existing ReturnToWorkGradeFlag
+      operationId: updateReturnToWorkGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+      responses:
+        "200":
+          description: The updated ReturnToWorkGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGradeFlag"
+        "404":
+          description: ReturnToWorkGradeFlag not found
+    delete:
+      summary: Soft-delete a ReturnToWorkGradeFlag
+      operationId: deleteReturnToWorkGradeFlag
+      responses:
+        "204":
+          description: ReturnToWorkGradeFlag deleted
+        "404":
+          description: ReturnToWorkGradeFlag not found
+components:
+  schemas:
+    ReturnToWorkGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        return_to_work_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent return_to_work_grade record.
+        flag_code:
+          type: string
+          maxLength: 60
+          description: Stable flag identifier (e.g. RTW-FLAG-SAFETY-001).
+        flag_title:
+          type: string
+          maxLength: 255
+          description: Human-readable flag title for display.
+        flag_category:
+          type: string
+          enum:
+            - safety-critical-role
+            - dvla-notifiable
+            - riddor-reportable
+            - phased-return-incomplete
+            - risk-assessment-required
+            - long-term-absence
+            - mental-health-no-followup
+            - pregnancy-no-mat-b1
+            - clinician-low-confidence
+            - equality-act-adjustment
+            - other
+            - ""
+          description: "Flag category: safety-critical-role, dvla-notifiable, riddor-reportable, phased-return-incomplete, risk-assessment-required, long-term-absence, mental-health-no-followup, pregnancy-no-mat-b1, clinician-low-confidence, equality-act-adjustment, or other."
+        flag_priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Flag priority: low, medium, or high."
+        flag_evidence:
+          type: string
+          description: Free-text evidence describing which input field(s) triggered the flag.
+        flag_recommendation:
+          type: string
+          description: Free-text recommended action for the occupational-health reviewer.
+      required:
+        - created_at
+        - updated_at
+        - return_to_work_grade_id
+        - flag_code
+        - flag_title
+        - flag_category
+        - flag_priority
+        - flag_evidence
+        - flag_recommendation
+      description: Additional safety flags raised during Return to Work composite grading. Many-to-one child of return_to_work_grade.

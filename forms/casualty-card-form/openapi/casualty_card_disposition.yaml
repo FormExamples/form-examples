@@ -1,0 +1,198 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_disposition
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardDisposition
+  version: 1.0.0
+  description: 1:1 with casualty_card. Disposition, discharge, admission, or transfer details.
+paths:
+  /casualty-card-dispositions:
+    get:
+      summary: List CasualtyCardDisposition records
+      operationId: listCasualtyCardDisposition
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardDisposition records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardDisposition"
+    post:
+      summary: Create a new CasualtyCardDisposition
+      operationId: createCasualtyCardDisposition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardDisposition"
+      responses:
+        "201":
+          description: The newly created CasualtyCardDisposition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDisposition"
+        "400":
+          description: Validation error
+  /casualty-card-dispositions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardDisposition by id
+      operationId: getCasualtyCardDisposition
+      responses:
+        "200":
+          description: The requested CasualtyCardDisposition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDisposition"
+        "404":
+          description: CasualtyCardDisposition not found
+    patch:
+      summary: Update an existing CasualtyCardDisposition
+      operationId: updateCasualtyCardDisposition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardDisposition"
+      responses:
+        "200":
+          description: The updated CasualtyCardDisposition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardDisposition"
+        "404":
+          description: CasualtyCardDisposition not found
+    delete:
+      summary: Soft-delete a CasualtyCardDisposition
+      operationId: deleteCasualtyCardDisposition
+      responses:
+        "204":
+          description: CasualtyCardDisposition deleted
+        "404":
+          description: CasualtyCardDisposition not found
+components:
+  schemas:
+    CasualtyCardDisposition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        disposition:
+          type: string
+          enum:
+            - admitted
+            - discharged
+            - transferred
+            - left-before-seen
+            - self-discharged
+            - ""
+          description: "Disposition type: admitted, discharged, transferred, left-before-seen, self-discharged, or empty string if unanswered."
+        admitting_specialty:
+          type: string
+          description: Specialty the patient is admitted under (e.g. General Medicine, Orthopaedics). Used when disposition is admitted.
+        admitting_consultant:
+          type: string
+          description: Name of the admitting consultant. Used when disposition is admitted.
+        ward:
+          type: string
+          description: Ward the patient is admitted to. Used when disposition is admitted.
+        level_of_care:
+          type: string
+          description: Level of care required (e.g. Level 0, Level 1, Level 2, Level 3). Used when disposition is admitted.
+        discharge_diagnosis:
+          type: string
+          description: Final diagnosis at discharge. Used when disposition is discharged.
+        discharge_medications:
+          type: string
+          description: Medications prescribed at discharge (TTO). Used when disposition is discharged.
+        discharge_instructions:
+          type: string
+          description: Patient discharge instructions and advice. Used when disposition is discharged.
+        follow_up:
+          type: string
+          description: Follow-up arrangements (e.g. GP in 48 hours, fracture clinic 1 week). Used when disposition is discharged.
+        return_precautions:
+          type: string
+          description: "Safety-net advice: symptoms or signs warranting return to ED. Used when disposition is discharged."
+        receiving_hospital:
+          type: string
+          description: Name of the receiving hospital. Used when disposition is transferred.
+        reason_for_transfer:
+          type: string
+          description: Clinical reason for transfer. Used when disposition is transferred.
+        mode_of_transfer:
+          type: string
+          description: Mode of transfer (e.g. ambulance, helicopter). Used when disposition is transferred.
+        discharge_time:
+          type: string
+          format: date-time
+          description: Timestamp when the patient left the department. NULL if not recorded.
+        total_time_in_department:
+          type: string
+          description: Total time the patient spent in the department.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - disposition
+        - admitting_specialty
+        - admitting_consultant
+        - ward
+        - level_of_care
+        - discharge_diagnosis
+        - discharge_medications
+        - discharge_instructions
+        - follow_up
+        - return_precautions
+        - receiving_hospital
+        - reason_for_transfer
+        - mode_of_transfer
+        - total_time_in_department
+      description: 1:1 with casualty_card. Disposition, discharge, admission, or transfer details.

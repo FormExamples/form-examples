@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: access_scheduling
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — AccessScheduling
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Access & Scheduling domain: 3 Likert-scale satisfaction questions."
+paths:
+  /access-schedulings:
+    get:
+      summary: List AccessScheduling records
+      operationId: listAccessScheduling
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AccessScheduling records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccessScheduling"
+    post:
+      summary: Create a new AccessScheduling
+      operationId: createAccessScheduling
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccessScheduling"
+      responses:
+        "201":
+          description: The newly created AccessScheduling
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessScheduling"
+        "400":
+          description: Validation error
+  /access-schedulings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AccessScheduling by id
+      operationId: getAccessScheduling
+      responses:
+        "200":
+          description: The requested AccessScheduling
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessScheduling"
+        "404":
+          description: AccessScheduling not found
+    patch:
+      summary: Update an existing AccessScheduling
+      operationId: updateAccessScheduling
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccessScheduling"
+      responses:
+        "200":
+          description: The updated AccessScheduling
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessScheduling"
+        "404":
+          description: AccessScheduling not found
+    delete:
+      summary: Soft-delete a AccessScheduling
+      operationId: deleteAccessScheduling
+      responses:
+        "204":
+          description: AccessScheduling deleted
+        "404":
+          description: AccessScheduling not found
+components:
+  schemas:
+    AccessScheduling:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        wait_for_appointment:
+          type: integer
+          format: int32
+          description: Satisfaction with wait time for appointment (1-5 Likert). NULL if unanswered.
+        wait_in_waiting_room:
+          type: integer
+          format: int32
+          description: Satisfaction with wait time in waiting room (1-5 Likert). NULL if unanswered.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+      description: "1:1 with encounter_satisfaction. Access & Scheduling domain: 3 Likert-scale satisfaction questions."

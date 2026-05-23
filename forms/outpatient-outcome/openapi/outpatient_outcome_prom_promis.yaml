@@ -1,0 +1,131 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_prom_promis
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomePromPromis
+  version: 1.0.0
+  description: PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores. Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official IRT calibration tables.
+paths:
+  /outpatient-outcome-prom-promises:
+    get:
+      summary: List OutpatientOutcomePromPromis records
+      operationId: listOutpatientOutcomePromPromis
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomePromPromis records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+    post:
+      summary: Create a new OutpatientOutcomePromPromis
+      operationId: createOutpatientOutcomePromPromis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomePromPromis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+        "400":
+          description: Validation error
+  /outpatient-outcome-prom-promises/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomePromPromis by id
+      operationId: getOutpatientOutcomePromPromis
+      responses:
+        "200":
+          description: The requested OutpatientOutcomePromPromis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+        "404":
+          description: OutpatientOutcomePromPromis not found
+    patch:
+      summary: Update an existing OutpatientOutcomePromPromis
+      operationId: updateOutpatientOutcomePromPromis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomePromPromis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomePromPromis"
+        "404":
+          description: OutpatientOutcomePromPromis not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomePromPromis
+      operationId: deleteOutpatientOutcomePromPromis
+      responses:
+        "204":
+          description: OutpatientOutcomePromPromis deleted
+        "404":
+          description: OutpatientOutcomePromPromis not found
+components:
+  schemas:
+    OutpatientOutcomePromPromis:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+      description: PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores. Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official IRT calibration tables.

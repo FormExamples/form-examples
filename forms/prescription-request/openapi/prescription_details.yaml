@@ -1,0 +1,171 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: prescription_details
+openapi: 3.1.0
+info:
+  title: Prescription Request — PrescriptionDetails
+  version: 1.0.0
+  description: Medication, dosage, and treatment details for a prescription request. One-to-one child of prescription_request.
+paths:
+  /prescription-detailses:
+    get:
+      summary: List PrescriptionDetails records
+      operationId: listPrescriptionDetails
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PrescriptionDetails records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PrescriptionDetails"
+    post:
+      summary: Create a new PrescriptionDetails
+      operationId: createPrescriptionDetails
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionDetails"
+      responses:
+        "201":
+          description: The newly created PrescriptionDetails
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionDetails"
+        "400":
+          description: Validation error
+  /prescription-detailses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PrescriptionDetails by id
+      operationId: getPrescriptionDetails
+      responses:
+        "200":
+          description: The requested PrescriptionDetails
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionDetails"
+        "404":
+          description: PrescriptionDetails not found
+    patch:
+      summary: Update an existing PrescriptionDetails
+      operationId: updatePrescriptionDetails
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionDetails"
+      responses:
+        "200":
+          description: The updated PrescriptionDetails
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionDetails"
+        "404":
+          description: PrescriptionDetails not found
+    delete:
+      summary: Soft-delete a PrescriptionDetails
+      operationId: deletePrescriptionDetails
+      responses:
+        "204":
+          description: PrescriptionDetails deleted
+        "404":
+          description: PrescriptionDetails not found
+components:
+  schemas:
+    PrescriptionDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        prescription_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the prescription_request table.
+        request_date:
+          type: string
+          format: date
+          description: Date the prescription is requested for.
+        medication_name:
+          type: string
+          maxLength: 500
+          description: Name of the medication being prescribed.
+        dosage:
+          type: string
+          maxLength: 255
+          description: Dosage amount and unit (e.g. 500mg, 10ml).
+        frequency:
+          type: string
+          maxLength: 255
+          description: How often the medication should be taken (e.g. BD, TDS, OD).
+        route_of_administration:
+          type: string
+          enum:
+            - oral
+            - topical
+            - intravenous
+            - intramuscular
+            - subcutaneous
+            - inhaled
+            - rectal
+            - sublingual
+            - transdermal
+            - other
+            - ""
+          description: "Route: oral, topical, intravenous, intramuscular, subcutaneous, inhaled, rectal, sublingual, transdermal, other, or empty."
+        treatment_instructions:
+          type: string
+          description: Free-text treatment instructions for the patient.
+      required:
+        - created_at
+        - updated_at
+        - prescription_request_id
+        - request_date
+        - medication_name
+        - dosage
+        - frequency
+        - route_of_administration
+        - treatment_instructions
+      description: Medication, dosage, and treatment details for a prescription request. One-to-one child of prescription_request.

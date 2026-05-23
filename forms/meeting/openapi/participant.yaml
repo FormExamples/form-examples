@@ -1,0 +1,191 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: participant
+openapi: 3.1.0
+info:
+  title: Meeting — Participant
+  version: 1.0.0
+  description: One invited attendee for a meeting. Captures role on the invitation (required/optional/observer), the RSVP response, and the actual attendance status.
+paths:
+  /participants:
+    get:
+      summary: List Participant records
+      operationId: listParticipant
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Participant records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+    post:
+      summary: Create a new Participant
+      operationId: createParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "201":
+          description: The newly created Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "400":
+          description: Validation error
+  /participants/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Participant by id
+      operationId: getParticipant
+      responses:
+        "200":
+          description: The requested Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    patch:
+      summary: Update an existing Participant
+      operationId: updateParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "200":
+          description: The updated Participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          description: Participant not found
+    delete:
+      summary: Soft-delete a Participant
+      operationId: deleteParticipant
+      responses:
+        "204":
+          description: Participant deleted
+        "404":
+          description: Participant not found
+components:
+  schemas:
+    Participant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the participant in the invitation list.
+        name:
+          type: string
+          maxLength: 255
+          description: Participant full name.
+        email:
+          type: string
+          maxLength: 320
+          description: Participant email address.
+        organisation:
+          type: string
+          maxLength: 255
+          description: Participant organisation or team.
+        role:
+          type: string
+          enum:
+            - organizer
+            - chair
+            - required
+            - optional
+            - observer
+            - presenter
+            - note-taker
+            - ""
+          description: "Role on the invitation: organizer, chair, required, optional, observer, presenter, note-taker."
+        response_status:
+          type: string
+          enum:
+            - no-response
+            - accepted
+            - declined
+            - tentative
+            - delegated
+            - ""
+          description: "RSVP response: no-response, accepted, declined, tentative, delegated."
+        attendance_status:
+          type: string
+          enum:
+            - present
+            - late
+            - absent
+            - partial
+            - remote
+            - unknown
+            - ""
+          description: "Actual attendance: present, late, absent, partial, remote, unknown."
+        notes:
+          type: string
+          description: Free-text notes — apologies, delegated representative, partial attendance window.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - name
+        - email
+        - organisation
+        - role
+        - response_status
+        - attendance_status
+        - notes
+      description: One invited attendee for a meeting. Captures role on the invitation (required/optional/observer), the RSVP response, and the actual attendance status.

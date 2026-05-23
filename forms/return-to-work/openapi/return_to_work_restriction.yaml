@@ -1,0 +1,195 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: return_to_work_restriction
+openapi: 3.1.0
+info:
+  title: Return To Work — ReturnToWorkRestriction
+  version: 1.0.0
+  description: Individual workplace restriction or reasonable adjustment associated with a Return to Work record. Many-to-one relation to return_to_work.
+paths:
+  /return-to-work-restrictions:
+    get:
+      summary: List ReturnToWorkRestriction records
+      operationId: listReturnToWorkRestriction
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReturnToWorkRestriction records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReturnToWorkRestriction"
+    post:
+      summary: Create a new ReturnToWorkRestriction
+      operationId: createReturnToWorkRestriction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkRestriction"
+      responses:
+        "201":
+          description: The newly created ReturnToWorkRestriction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkRestriction"
+        "400":
+          description: Validation error
+  /return-to-work-restrictions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReturnToWorkRestriction by id
+      operationId: getReturnToWorkRestriction
+      responses:
+        "200":
+          description: The requested ReturnToWorkRestriction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkRestriction"
+        "404":
+          description: ReturnToWorkRestriction not found
+    patch:
+      summary: Update an existing ReturnToWorkRestriction
+      operationId: updateReturnToWorkRestriction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkRestriction"
+      responses:
+        "200":
+          description: The updated ReturnToWorkRestriction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkRestriction"
+        "404":
+          description: ReturnToWorkRestriction not found
+    delete:
+      summary: Soft-delete a ReturnToWorkRestriction
+      operationId: deleteReturnToWorkRestriction
+      responses:
+        "204":
+          description: ReturnToWorkRestriction deleted
+        "404":
+          description: ReturnToWorkRestriction not found
+components:
+  schemas:
+    ReturnToWorkRestriction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        return_to_work_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent return_to_work record.
+        kind:
+          type: string
+          enum:
+            - altered-hours
+            - amended-duties
+            - workplace-adaptations
+            - phased-return
+            - no-heavy-lifting
+            - no-driving
+            - no-operating-machinery
+            - no-working-at-height
+            - no-lone-working
+            - no-night-shifts
+            - no-shift-work
+            - no-patient-contact
+            - no-public-contact
+            - sedentary-only
+            - no-exposure-to-allergen
+            - no-exposure-to-chemicals
+            - no-exposure-to-temperature-extremes
+            - no-exposure-to-noise
+            - no-firearms-or-weapons
+            - no-safety-critical-duties
+            - screen-break-frequency
+            - workstation-review
+            - reduced-screen-time
+            - restricted-travel
+            - no-overtime
+            - other
+            - ""
+          description: Restriction kind drawn from the enumerated Med 3 adjustments list plus this monorepo extensions.
+        severity:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Severity of the restriction: low, moderate, or high. Drives the composite restriction-priority grade."
+        quantitative_limit:
+          type: string
+          maxLength: 50
+          description: Quantitative limit for the restriction (e.g. 5 kg lifting limit, 30 minute screen break).
+        notes:
+          type: string
+          maxLength: 500
+          description: Free-text clinician notes for this specific restriction.
+        start_date:
+          type: string
+          format: date
+          description: First date this restriction applies (defaults to return_to_work.valid_from).
+        end_date:
+          type: string
+          format: date
+          description: Last date this restriction applies (defaults to return_to_work.valid_until).
+        priority_rank:
+          type: integer
+          format: int32
+          description: Display ordering for the restriction within the fit note (lower = higher on the printed list).
+      required:
+        - created_at
+        - updated_at
+        - return_to_work_id
+        - kind
+        - severity
+        - quantitative_limit
+        - notes
+        - priority_rank
+      description: Individual workplace restriction or reasonable adjustment associated with a Return to Work record. Many-to-one relation to return_to_work.

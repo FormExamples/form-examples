@@ -1,0 +1,184 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_safeguarding_consent
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardSafeguardingConsent
+  version: 1.0.0
+  description: 1:1 with casualty_card. Safeguarding concerns, mental capacity, consent, and completing clinician details.
+paths:
+  /casualty-card-safeguarding-consents:
+    get:
+      summary: List CasualtyCardSafeguardingConsent records
+      operationId: listCasualtyCardSafeguardingConsent
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardSafeguardingConsent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+    post:
+      summary: Create a new CasualtyCardSafeguardingConsent
+      operationId: createCasualtyCardSafeguardingConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+      responses:
+        "201":
+          description: The newly created CasualtyCardSafeguardingConsent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+        "400":
+          description: Validation error
+  /casualty-card-safeguarding-consents/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardSafeguardingConsent by id
+      operationId: getCasualtyCardSafeguardingConsent
+      responses:
+        "200":
+          description: The requested CasualtyCardSafeguardingConsent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+        "404":
+          description: CasualtyCardSafeguardingConsent not found
+    patch:
+      summary: Update an existing CasualtyCardSafeguardingConsent
+      operationId: updateCasualtyCardSafeguardingConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+      responses:
+        "200":
+          description: The updated CasualtyCardSafeguardingConsent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardSafeguardingConsent"
+        "404":
+          description: CasualtyCardSafeguardingConsent not found
+    delete:
+      summary: Soft-delete a CasualtyCardSafeguardingConsent
+      operationId: deleteCasualtyCardSafeguardingConsent
+      responses:
+        "204":
+          description: CasualtyCardSafeguardingConsent deleted
+        "404":
+          description: CasualtyCardSafeguardingConsent not found
+components:
+  schemas:
+    CasualtyCardSafeguardingConsent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        safeguarding_concern:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a safeguarding concern has been identified: yes, no, or empty string if unanswered."
+        safeguarding_type:
+          type: string
+          description: Type of safeguarding concern (e.g. adult at risk, child protection, domestic abuse).
+        referral_made:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a safeguarding referral has been made: yes, no, or empty string if unanswered."
+        mental_capacity_assessment:
+          type: string
+          description: Outcome of mental capacity assessment.
+        mental_health_act_status:
+          type: string
+          description: Mental Health Act section status if applicable (e.g. Section 2, Section 136).
+        consent_for_treatment:
+          type: string
+          enum:
+            - verbal
+            - written
+            - lacks-capacity
+            - ""
+          description: "Type of consent obtained: verbal, written, lacks-capacity, or empty string if unanswered."
+        completed_by_name:
+          type: string
+          description: Name of the clinician who completed the casualty card.
+        completed_by_role:
+          type: string
+          description: Role of the completing clinician (e.g. SHO, Registrar, Consultant).
+        completed_by_gmc_number:
+          type: string
+          description: GMC registration number of the completing clinician.
+        senior_reviewing_clinician:
+          type: string
+          description: Name of the senior clinician who reviewed the case.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - safeguarding_concern
+        - safeguarding_type
+        - referral_made
+        - mental_capacity_assessment
+        - mental_health_act_status
+        - consent_for_treatment
+        - completed_by_name
+        - completed_by_role
+        - completed_by_gmc_number
+        - senior_reviewing_clinician
+      description: 1:1 with casualty_card. Safeguarding concerns, mental capacity, consent, and completing clinician details.

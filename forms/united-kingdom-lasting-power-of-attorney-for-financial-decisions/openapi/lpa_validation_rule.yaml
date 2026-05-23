@@ -1,0 +1,157 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_validation_rule
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaValidationRule
+  version: 1.0.0
+  description: LPA validation rule — statutory blocker rules that fired during validation (e.g. DonorUnderEighteen, NoAttorneyAppointed).
+paths:
+  /lpa-validation-rules:
+    get:
+      summary: List LpaValidationRule records
+      operationId: listLpaValidationRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaValidationRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaValidationRule"
+    post:
+      summary: Create a new LpaValidationRule
+      operationId: createLpaValidationRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationRule"
+      responses:
+        "201":
+          description: The newly created LpaValidationRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationRule"
+        "400":
+          description: Validation error
+  /lpa-validation-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaValidationRule by id
+      operationId: getLpaValidationRule
+      responses:
+        "200":
+          description: The requested LpaValidationRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationRule"
+        "404":
+          description: LpaValidationRule not found
+    patch:
+      summary: Update an existing LpaValidationRule
+      operationId: updateLpaValidationRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationRule"
+      responses:
+        "200":
+          description: The updated LpaValidationRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationRule"
+        "404":
+          description: LpaValidationRule not found
+    delete:
+      summary: Soft-delete a LpaValidationRule
+      operationId: deleteLpaValidationRule
+      responses:
+        "204":
+          description: LpaValidationRule deleted
+        "404":
+          description: LpaValidationRule not found
+components:
+  schemas:
+    LpaValidationRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        rule_name:
+          type: string
+          description: Programmatic name of the fired rule (e.g. DonorUnderEighteen, AttorneyBankruptOrDRO).
+        priority:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+          description: "Severity priority of the rule. One of: low, moderate, high, critical (statutory blockers are always critical)."
+        statutory_citation:
+          type: string
+          description: "Statutory citation for the rule (e.g. \"MCA 2005 s. 9(2)(a)\" for DonorUnderEighteen)."
+        remediation_hint:
+          type: string
+          description: User-facing hint explaining how to fix the LPA so this rule no longer fires.
+        fired_at:
+          type: string
+          format: date-time
+          description: Timestamp when this rule fired during validation.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - rule_name
+        - priority
+        - statutory_citation
+        - remediation_hint
+        - fired_at
+      description: LPA validation rule — statutory blocker rules that fired during validation (e.g. DonorUnderEighteen, NoAttorneyAppointed).

@@ -1,0 +1,183 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_presenting_complaint
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardPresentingComplaint
+  version: 1.0.0
+  description: 1:1 with casualty_card. Chief complaint and structured history using SOCRATES framework.
+paths:
+  /casualty-card-presenting-complaints:
+    get:
+      summary: List CasualtyCardPresentingComplaint records
+      operationId: listCasualtyCardPresentingComplaint
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardPresentingComplaint records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+    post:
+      summary: Create a new CasualtyCardPresentingComplaint
+      operationId: createCasualtyCardPresentingComplaint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+      responses:
+        "201":
+          description: The newly created CasualtyCardPresentingComplaint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+        "400":
+          description: Validation error
+  /casualty-card-presenting-complaints/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardPresentingComplaint by id
+      operationId: getCasualtyCardPresentingComplaint
+      responses:
+        "200":
+          description: The requested CasualtyCardPresentingComplaint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+        "404":
+          description: CasualtyCardPresentingComplaint not found
+    patch:
+      summary: Update an existing CasualtyCardPresentingComplaint
+      operationId: updateCasualtyCardPresentingComplaint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+      responses:
+        "200":
+          description: The updated CasualtyCardPresentingComplaint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPresentingComplaint"
+        "404":
+          description: CasualtyCardPresentingComplaint not found
+    delete:
+      summary: Soft-delete a CasualtyCardPresentingComplaint
+      operationId: deleteCasualtyCardPresentingComplaint
+      responses:
+        "204":
+          description: CasualtyCardPresentingComplaint deleted
+        "404":
+          description: CasualtyCardPresentingComplaint not found
+components:
+  schemas:
+    CasualtyCardPresentingComplaint:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        chief_complaint:
+          type: string
+          description: Brief description of the main reason for attendance.
+        history_of_presenting_complaint:
+          type: string
+          description: Detailed narrative history of the presenting complaint.
+        onset:
+          type: string
+          description: When the symptoms started (e.g. sudden, gradual, 2 hours ago).
+        duration:
+          type: string
+          description: How long the symptoms have been present.
+        character:
+          type: string
+          description: Nature of the symptoms (e.g. sharp, dull, burning, colicky).
+        severity:
+          type: string
+          description: Patient-reported severity of symptoms.
+        location:
+          type: string
+          description: Anatomical location of the symptoms.
+        radiation:
+          type: string
+          description: Whether and where symptoms radiate to.
+        aggravating_factors:
+          type: string
+          description: Factors that worsen the symptoms.
+        relieving_factors:
+          type: string
+          description: Factors that relieve or improve the symptoms.
+        associated_symptoms:
+          type: string
+          description: Other symptoms occurring alongside the chief complaint.
+        previous_episodes:
+          type: string
+          description: History of previous similar episodes.
+        treatment_prior_to_arrival:
+          type: string
+          description: Any treatment received before arriving at the department.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - chief_complaint
+        - history_of_presenting_complaint
+        - onset
+        - duration
+        - character
+        - severity
+        - location
+        - radiation
+        - aggravating_factors
+        - relieving_factors
+        - associated_symptoms
+        - previous_episodes
+        - treatment_prior_to_arrival
+      description: 1:1 with casualty_card. Chief complaint and structured history using SOCRATES framework.

@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_person_to_notify
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaPersonToNotify
+  version: 1.0.0
+  description: LPA person to notify — up to five persons who receive an LP3 notice on registration (LP1F section 6).
+paths:
+  /lpa-person-to-notifies:
+    get:
+      summary: List LpaPersonToNotify records
+      operationId: listLpaPersonToNotify
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaPersonToNotify records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaPersonToNotify"
+    post:
+      summary: Create a new LpaPersonToNotify
+      operationId: createLpaPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPersonToNotify"
+      responses:
+        "201":
+          description: The newly created LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "400":
+          description: Validation error
+  /lpa-person-to-notifies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaPersonToNotify by id
+      operationId: getLpaPersonToNotify
+      responses:
+        "200":
+          description: The requested LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "404":
+          description: LpaPersonToNotify not found
+    patch:
+      summary: Update an existing LpaPersonToNotify
+      operationId: updateLpaPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPersonToNotify"
+      responses:
+        "200":
+          description: The updated LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "404":
+          description: LpaPersonToNotify not found
+    delete:
+      summary: Soft-delete a LpaPersonToNotify
+      operationId: deleteLpaPersonToNotify
+      responses:
+        "204":
+          description: LpaPersonToNotify deleted
+        "404":
+          description: LpaPersonToNotify not found
+components:
+  schemas:
+    LpaPersonToNotify:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the person who will be notified.
+        ordinal:
+          type: integer
+          format: int32
+          description: Position on the LP1F deed, from 1 to 5; the statutory maximum is five (LP1F section 6).
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - person_id
+        - ordinal
+      description: LPA person to notify — up to five persons who receive an LP3 notice on registration (LP1F section 6).

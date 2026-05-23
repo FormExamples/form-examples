@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: travel_vaccinations
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — TravelVaccinations
+  version: 1.0.0
+  description: Travel vaccination status and destination information. One-to-one child of assessment.
+paths:
+  /travel-vaccinationses:
+    get:
+      summary: List TravelVaccinations records
+      operationId: listTravelVaccinations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TravelVaccinations records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TravelVaccinations"
+    post:
+      summary: Create a new TravelVaccinations
+      operationId: createTravelVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TravelVaccinations"
+      responses:
+        "201":
+          description: The newly created TravelVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TravelVaccinations"
+        "400":
+          description: Validation error
+  /travel-vaccinationses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TravelVaccinations by id
+      operationId: getTravelVaccinations
+      responses:
+        "200":
+          description: The requested TravelVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TravelVaccinations"
+        "404":
+          description: TravelVaccinations not found
+    patch:
+      summary: Update an existing TravelVaccinations
+      operationId: updateTravelVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TravelVaccinations"
+      responses:
+        "200":
+          description: The updated TravelVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TravelVaccinations"
+        "404":
+          description: TravelVaccinations not found
+    delete:
+      summary: Soft-delete a TravelVaccinations
+      operationId: deleteTravelVaccinations
+      responses:
+        "204":
+          description: TravelVaccinations deleted
+        "404":
+          description: TravelVaccinations not found
+components:
+  schemas:
+    TravelVaccinations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        travel_planned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Travel planned. One of: yes, no."
+        travel_destination:
+          type: string
+          maxLength: 255
+          description: Travel destination.
+        hepatitis_a:
+          type: integer
+          format: int32
+          description: Hepatitis a.
+        hepatitis_b:
+          type: integer
+          format: int32
+          description: Hepatitis b.
+        typhoid:
+          type: integer
+          format: int32
+          description: Typhoid.
+        yellow_fever:
+          type: integer
+          format: int32
+          description: Yellow fever.
+        rabies:
+          type: integer
+          format: int32
+          description: Rabies.
+        japanese_encephalitis:
+          type: integer
+          format: int32
+          description: Japanese encephalitis.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - travel_planned
+        - travel_destination
+      description: Travel vaccination status and destination information. One-to-one child of assessment.

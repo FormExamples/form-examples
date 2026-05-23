@@ -1,0 +1,207 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: application
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — Application
+  version: 1.0.0
+  description: FP92A medical exemption application instance.
+paths:
+  /applications:
+    get:
+      summary: List Application records
+      operationId: listApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Application records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Application"
+    post:
+      summary: Create a new Application
+      operationId: createApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+      responses:
+        "201":
+          description: The newly created Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          description: Validation error
+  /applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Application by id
+      operationId: getApplication
+      responses:
+        "200":
+          description: The requested Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "404":
+          description: Application not found
+    patch:
+      summary: Update an existing Application
+      operationId: updateApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+      responses:
+        "200":
+          description: The updated Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "404":
+          description: Application not found
+    delete:
+      summary: Soft-delete a Application
+      operationId: deleteApplication
+      responses:
+        "204":
+          description: Application deleted
+        "404":
+          description: Application not found
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant patient.
+        practitioner_id:
+          type: string
+          format: uuid
+          description: Foreign key to the signing practitioner.
+        status:
+          type: string
+          enum:
+            - draft
+            - ready-to-post
+            - posted
+            - issued
+            - rejected
+            - expired
+            - cancelled
+          description: "Lifecycle status: draft, ready-to-post, posted, issued, rejected, expired, cancelled."
+        application_kind:
+          type: string
+          enum:
+            - new
+            - renewal
+            - replacement
+            - ""
+          description: New application, renewal of an expiring certificate, or replacement of a lost certificate.
+        previous_certificate_number:
+          type: string
+          maxLength: 50
+          description: Certificate number of the previous certificate (renewal / replacement).
+        previous_certificate_expiry_date:
+          type: string
+          format: date
+          description: Expiry date of the previous certificate, used for renewal-window checks.
+        completed_date:
+          type: string
+          format: date
+          description: Date the practitioner completed and signed the FP92A.
+        posted_date:
+          type: string
+          format: date
+          description: Date the FP92A was posted to NHSBSA Bridge House.
+        received_by_nhsbsa_date:
+          type: string
+          format: date
+          description: Date the FP92A was acknowledged received by NHSBSA.
+        certificate_number:
+          type: string
+          maxLength: 50
+          description: Issued certificate number (populated once NHSBSA returns the issued certificate).
+        valid_from:
+          type: string
+          format: date
+          description: Date the issued certificate becomes valid.
+        valid_until:
+          type: string
+          format: date
+          description: Date the issued certificate expires (typically valid_from + 5 years).
+        practitioner_signature_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the practitioner has signed in ink before posting.
+        practitioner_declaration_text:
+          type: string
+          description: Free-text declaration as captured from the FP92A signature panel.
+        notes:
+          type: string
+          description: Internal notes about the application.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - practitioner_id
+        - status
+        - application_kind
+        - previous_certificate_number
+        - certificate_number
+        - practitioner_signature_present
+        - practitioner_declaration_text
+        - notes
+      description: FP92A medical exemption application instance.

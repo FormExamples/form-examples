@@ -1,0 +1,158 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_validation_result
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaValidationResult
+  version: 1.0.0
+  description: "LPA validation result — the LPA validator output: registration-readiness band and composite-risk grade."
+paths:
+  /lpa-validation-results:
+    get:
+      summary: List LpaValidationResult records
+      operationId: listLpaValidationResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaValidationResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaValidationResult"
+    post:
+      summary: Create a new LpaValidationResult
+      operationId: createLpaValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationResult"
+      responses:
+        "201":
+          description: The newly created LpaValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationResult"
+        "400":
+          description: Validation error
+  /lpa-validation-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaValidationResult by id
+      operationId: getLpaValidationResult
+      responses:
+        "200":
+          description: The requested LpaValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationResult"
+        "404":
+          description: LpaValidationResult not found
+    patch:
+      summary: Update an existing LpaValidationResult
+      operationId: updateLpaValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidationResult"
+      responses:
+        "200":
+          description: The updated LpaValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidationResult"
+        "404":
+          description: LpaValidationResult not found
+    delete:
+      summary: Soft-delete a LpaValidationResult
+      operationId: deleteLpaValidationResult
+      responses:
+        "204":
+          description: LpaValidationResult deleted
+        "404":
+          description: LpaValidationResult not found
+components:
+  schemas:
+    LpaValidationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; UNIQUE so only one validation result per LPA; cascades on delete.
+        validity_band:
+          type: string
+          enum:
+            - draft
+            - ready_for_signing
+            - partially_signed
+            - fully_signed
+            - ready_for_registration
+            - submitted
+            - registered
+            - rejected
+          description: "Lifecycle band for registration readiness. One of: draft, ready_for_signing, partially_signed, fully_signed, ready_for_registration, submitted, registered, rejected."
+        composite_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+          description: "Overall risk grade computed by max-grade aggregation across fired rules and flags. One of: low, moderate, high, critical."
+        computed_at:
+          type: string
+          format: date-time
+          description: Timestamp when this validation result was computed.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - validity_band
+        - composite_risk
+        - computed_at
+      description: "LPA validation result — the LPA validator output: registration-readiness band and composite-risk grade."

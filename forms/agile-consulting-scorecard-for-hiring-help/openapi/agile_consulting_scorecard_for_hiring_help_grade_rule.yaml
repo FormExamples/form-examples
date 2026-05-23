@@ -1,0 +1,173 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_consulting_scorecard_for_hiring_help_grade_rule
+openapi: 3.1.0
+info:
+  title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelpGradeRule
+  version: 1.0.0
+  description: Audit trail of every scoring rule that fired for an agile-consulting scorecard. Typically 16 rows per grade (one per item) plus optional composite rows for the band determination.
+paths:
+  /agile-consulting-scorecard-for-hiring-help-grade-rules:
+    get:
+      summary: List AgileConsultingScorecardForHiringHelpGradeRule records
+      operationId: listAgileConsultingScorecardForHiringHelpGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileConsultingScorecardForHiringHelpGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+    post:
+      summary: Create a new AgileConsultingScorecardForHiringHelpGradeRule
+      operationId: createAgileConsultingScorecardForHiringHelpGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+      responses:
+        "201":
+          description: The newly created AgileConsultingScorecardForHiringHelpGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+        "400":
+          description: Validation error
+  /agile-consulting-scorecard-for-hiring-help-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileConsultingScorecardForHiringHelpGradeRule by id
+      operationId: getAgileConsultingScorecardForHiringHelpGradeRule
+      responses:
+        "200":
+          description: The requested AgileConsultingScorecardForHiringHelpGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGradeRule not found
+    patch:
+      summary: Update an existing AgileConsultingScorecardForHiringHelpGradeRule
+      operationId: updateAgileConsultingScorecardForHiringHelpGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+      responses:
+        "200":
+          description: The updated AgileConsultingScorecardForHiringHelpGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGradeRule"
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGradeRule not found
+    delete:
+      summary: Soft-delete a AgileConsultingScorecardForHiringHelpGradeRule
+      operationId: deleteAgileConsultingScorecardForHiringHelpGradeRule
+      responses:
+        "204":
+          description: AgileConsultingScorecardForHiringHelpGradeRule deleted
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGradeRule not found
+components:
+  schemas:
+    AgileConsultingScorecardForHiringHelpGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_consulting_scorecard_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-MANIFESTO-1, R-PRINCIPLES-7, R-COMPOSITE-BAND).
+        instrument:
+          type: string
+          enum:
+            - manifesto
+            - principles
+            - composite
+            - ""
+          description: "Scoring instrument: manifesto (items 1-4), principles (items 5-16), or composite (band determination)."
+        item_number:
+          type: integer
+          format: int32
+          description: Item number 1-16; NULL for composite rules.
+        grade:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - unanswered
+            - ""
+          description: "Answer recorded for this item: yes, no, or unanswered."
+        points_awarded:
+          type: integer
+          format: int32
+          description: "Points awarded by this rule: 0 or 1."
+        category:
+          type: string
+          maxLength: 50
+          description: Category for grouping rules in the report (e.g. customer-contact, working-software, leadership-buyin).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of the rule and why it fired.
+      required:
+        - created_at
+        - updated_at
+        - agile_consulting_scorecard_grade_id
+        - rule_id
+        - instrument
+        - grade
+        - points_awarded
+        - category
+        - description
+      description: Audit trail of every scoring rule that fired for an agile-consulting scorecard. Typically 16 rows per grade (one per item) plus optional composite rows for the band determination.

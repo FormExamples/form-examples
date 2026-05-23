@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: context_partner
+openapi: 3.1.0
+info:
+  title: Arc42 — ContextPartner
+  version: 1.0.0
+  description: External context partner captured in §3 Context & Scope of the arc42 documentation.
+paths:
+  /context-partners:
+    get:
+      summary: List ContextPartner records
+      operationId: listContextPartner
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ContextPartner records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContextPartner"
+    post:
+      summary: Create a new ContextPartner
+      operationId: createContextPartner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContextPartner"
+      responses:
+        "201":
+          description: The newly created ContextPartner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContextPartner"
+        "400":
+          description: Validation error
+  /context-partners/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ContextPartner by id
+      operationId: getContextPartner
+      responses:
+        "200":
+          description: The requested ContextPartner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContextPartner"
+        "404":
+          description: ContextPartner not found
+    patch:
+      summary: Update an existing ContextPartner
+      operationId: updateContextPartner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContextPartner"
+      responses:
+        "200":
+          description: The updated ContextPartner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContextPartner"
+        "404":
+          description: ContextPartner not found
+    delete:
+      summary: Soft-delete a ContextPartner
+      operationId: deleteContextPartner
+      responses:
+        "204":
+          description: ContextPartner deleted
+        "404":
+          description: ContextPartner not found
+components:
+  schemas:
+    ContextPartner:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        kind:
+          type: string
+          enum:
+            - business
+            - technical
+            - ""
+          description: "Kind of context partner: business (external business system) or technical (external technical interface)."
+        name:
+          type: string
+          description: Name of the external system, service, or organisation.
+        interface_description:
+          type: string
+          description: Description of the interface between the architecture and this partner.
+        protocol:
+          type: string
+          description: Communication protocol used at this interface (e.g. REST, gRPC, SFTP).
+        direction:
+          type: string
+          enum:
+            - inbound
+            - outbound
+            - bidirectional
+            - ""
+          description: "Direction of data or control flow: inbound, outbound, or bidirectional."
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - kind
+        - name
+        - interface_description
+        - protocol
+        - direction
+      description: External context partner captured in §3 Context & Scope of the arc42 documentation.

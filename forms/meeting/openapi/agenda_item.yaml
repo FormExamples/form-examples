@@ -1,0 +1,164 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agenda_item
+openapi: 3.1.0
+info:
+  title: Meeting — AgendaItem
+  version: 1.0.0
+  description: One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.
+paths:
+  /agenda-items:
+    get:
+      summary: List AgendaItem records
+      operationId: listAgendaItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgendaItem records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgendaItem"
+    post:
+      summary: Create a new AgendaItem
+      operationId: createAgendaItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgendaItem"
+      responses:
+        "201":
+          description: The newly created AgendaItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgendaItem"
+        "400":
+          description: Validation error
+  /agenda-items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgendaItem by id
+      operationId: getAgendaItem
+      responses:
+        "200":
+          description: The requested AgendaItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgendaItem"
+        "404":
+          description: AgendaItem not found
+    patch:
+      summary: Update an existing AgendaItem
+      operationId: updateAgendaItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgendaItem"
+      responses:
+        "200":
+          description: The updated AgendaItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgendaItem"
+        "404":
+          description: AgendaItem not found
+    delete:
+      summary: Soft-delete a AgendaItem
+      operationId: deleteAgendaItem
+      responses:
+        "204":
+          description: AgendaItem deleted
+        "404":
+          description: AgendaItem not found
+components:
+  schemas:
+    AgendaItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the item in the agenda list.
+        title:
+          type: string
+          maxLength: 255
+          description: Title of the agenda topic.
+        duration_minutes:
+          type: integer
+          format: int32
+          description: Planned duration in minutes (0 to 1440).
+        presenter:
+          type: string
+          maxLength: 255
+          description: Name of the person presenting or leading the discussion.
+        notes:
+          type: string
+          description: Free-text notes attached to the agenda item.
+        status:
+          type: string
+          enum:
+            - planned
+            - discussed
+            - skipped
+            - deferred
+            - ""
+          description: "Outcome of the agenda item: planned, discussed, skipped, deferred."
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - title
+        - presenter
+        - notes
+        - status
+      description: One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.

@@ -1,0 +1,147 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_assessment_plan
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardAssessmentPlan
+  version: 1.0.0
+  description: 1:1 with casualty_card. Working diagnosis, differentials, clinical impression, and risk stratification.
+paths:
+  /casualty-card-assessment-plans:
+    get:
+      summary: List CasualtyCardAssessmentPlan records
+      operationId: listCasualtyCardAssessmentPlan
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardAssessmentPlan records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+    post:
+      summary: Create a new CasualtyCardAssessmentPlan
+      operationId: createCasualtyCardAssessmentPlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+      responses:
+        "201":
+          description: The newly created CasualtyCardAssessmentPlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+        "400":
+          description: Validation error
+  /casualty-card-assessment-plans/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardAssessmentPlan by id
+      operationId: getCasualtyCardAssessmentPlan
+      responses:
+        "200":
+          description: The requested CasualtyCardAssessmentPlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+        "404":
+          description: CasualtyCardAssessmentPlan not found
+    patch:
+      summary: Update an existing CasualtyCardAssessmentPlan
+      operationId: updateCasualtyCardAssessmentPlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+      responses:
+        "200":
+          description: The updated CasualtyCardAssessmentPlan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardAssessmentPlan"
+        "404":
+          description: CasualtyCardAssessmentPlan not found
+    delete:
+      summary: Soft-delete a CasualtyCardAssessmentPlan
+      operationId: deleteCasualtyCardAssessmentPlan
+      responses:
+        "204":
+          description: CasualtyCardAssessmentPlan deleted
+        "404":
+          description: CasualtyCardAssessmentPlan not found
+components:
+  schemas:
+    CasualtyCardAssessmentPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        working_diagnosis:
+          type: string
+          description: Primary working diagnosis based on clinical assessment.
+        differential_diagnoses:
+          type: string
+          description: List of differential diagnoses being considered.
+        clinical_impression:
+          type: string
+          description: Overall clinical impression and summary of findings.
+        risk_stratification:
+          type: string
+          description: Risk stratification assessment (e.g. HEART score, Wells score results).
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - working_diagnosis
+        - differential_diagnoses
+        - clinical_impression
+        - risk_stratification
+      description: 1:1 with casualty_card. Working diagnosis, differentials, clinical impression, and risk stratification.

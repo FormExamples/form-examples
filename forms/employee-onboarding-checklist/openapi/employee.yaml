@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: employee
+openapi: 3.1.0
+info:
+  title: Employee Onboarding Checklist — Employee
+  version: 1.0.0
+  description: Employee demographic information for healthcare staff onboarding.
+paths:
+  /employees:
+    get:
+      summary: List Employee records
+      operationId: listEmployee
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Employee records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employee"
+    post:
+      summary: Create a new Employee
+      operationId: createEmployee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      responses:
+        "201":
+          description: The newly created Employee
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        "400":
+          description: Validation error
+  /employees/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Employee by id
+      operationId: getEmployee
+      responses:
+        "200":
+          description: The requested Employee
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        "404":
+          description: Employee not found
+    patch:
+      summary: Update an existing Employee
+      operationId: updateEmployee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      responses:
+        "200":
+          description: The updated Employee
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        "404":
+          description: Employee not found
+    delete:
+      summary: Soft-delete a Employee
+      operationId: deleteEmployee
+      responses:
+        "204":
+          description: Employee deleted
+        "404":
+          description: Employee not found
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        first_name:
+          type: string
+          maxLength: 255
+          description: Employee given name.
+        last_name:
+          type: string
+          maxLength: 255
+          description: Employee family name.
+        date_of_birth:
+          type: string
+          format: date
+          description: Employee date of birth.
+        nhs_number:
+          type: string
+          maxLength: 20
+          description: NHS number, unique per employee.
+        email:
+          type: string
+          maxLength: 255
+          description: Employee email address.
+        phone:
+          type: string
+          maxLength: 30
+          description: Employee phone number.
+        job_title:
+          type: string
+          maxLength: 255
+          description: Job title for the role being onboarded.
+        department:
+          type: string
+          maxLength: 255
+          description: Department or ward the employee will join.
+        start_date:
+          type: string
+          format: date
+          description: Agreed start date for the role.
+      required:
+        - created_at
+        - updated_at
+        - first_name
+        - last_name
+        - date_of_birth
+        - email
+        - phone
+        - job_title
+        - department
+      description: Employee demographic information for healthcare staff onboarding.

@@ -1,0 +1,197 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: contraindications_allergies
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — ContraindicationsAllergies
+  version: 1.0.0
+  description: Contraindication and allergy screening for vaccination. One-to-one child of assessment.
+paths:
+  /contraindications-allergieses:
+    get:
+      summary: List ContraindicationsAllergies records
+      operationId: listContraindicationsAllergies
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ContraindicationsAllergies records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContraindicationsAllergies"
+    post:
+      summary: Create a new ContraindicationsAllergies
+      operationId: createContraindicationsAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContraindicationsAllergies"
+      responses:
+        "201":
+          description: The newly created ContraindicationsAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContraindicationsAllergies"
+        "400":
+          description: Validation error
+  /contraindications-allergieses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ContraindicationsAllergies by id
+      operationId: getContraindicationsAllergies
+      responses:
+        "200":
+          description: The requested ContraindicationsAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContraindicationsAllergies"
+        "404":
+          description: ContraindicationsAllergies not found
+    patch:
+      summary: Update an existing ContraindicationsAllergies
+      operationId: updateContraindicationsAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContraindicationsAllergies"
+      responses:
+        "200":
+          description: The updated ContraindicationsAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContraindicationsAllergies"
+        "404":
+          description: ContraindicationsAllergies not found
+    delete:
+      summary: Soft-delete a ContraindicationsAllergies
+      operationId: deleteContraindicationsAllergies
+      responses:
+        "204":
+          description: ContraindicationsAllergies deleted
+        "404":
+          description: ContraindicationsAllergies not found
+components:
+  schemas:
+    ContraindicationsAllergies:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        egg_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Egg allergy. One of: yes, no."
+        gelatin_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Gelatin allergy. One of: yes, no."
+        latex_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Latex allergy. One of: yes, no."
+        neomycin_allergy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Neomycin allergy. One of: yes, no."
+        pregnant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - notApplicable
+            - ""
+          description: "Pregnant. One of: yes, no, notApplicable."
+        pregnancy_weeks:
+          type: string
+          maxLength: 10
+          description: Pregnancy weeks.
+        severe_illness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Severe illness. One of: yes, no."
+        previous_anaphylaxis:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Previous anaphylaxis. One of: yes, no."
+        anaphylaxis_details:
+          type: string
+          description: Anaphylaxis details.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - egg_allergy
+        - gelatin_allergy
+        - latex_allergy
+        - neomycin_allergy
+        - pregnant
+        - pregnancy_weeks
+        - severe_illness
+        - previous_anaphylaxis
+        - anaphylaxis_details
+      description: Contraindication and allergy screening for vaccination. One-to-one child of assessment.

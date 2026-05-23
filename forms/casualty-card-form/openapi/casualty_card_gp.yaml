@@ -1,0 +1,147 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_gp
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardGp
+  version: 1.0.0
+  description: 1:1 with casualty_card. Registered GP and practice details for communication and follow-up.
+paths:
+  /casualty-card-gps:
+    get:
+      summary: List CasualtyCardGp records
+      operationId: listCasualtyCardGp
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardGp records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardGp"
+    post:
+      summary: Create a new CasualtyCardGp
+      operationId: createCasualtyCardGp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardGp"
+      responses:
+        "201":
+          description: The newly created CasualtyCardGp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardGp"
+        "400":
+          description: Validation error
+  /casualty-card-gps/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardGp by id
+      operationId: getCasualtyCardGp
+      responses:
+        "200":
+          description: The requested CasualtyCardGp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardGp"
+        "404":
+          description: CasualtyCardGp not found
+    patch:
+      summary: Update an existing CasualtyCardGp
+      operationId: updateCasualtyCardGp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardGp"
+      responses:
+        "200":
+          description: The updated CasualtyCardGp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardGp"
+        "404":
+          description: CasualtyCardGp not found
+    delete:
+      summary: Soft-delete a CasualtyCardGp
+      operationId: deleteCasualtyCardGp
+      responses:
+        "204":
+          description: CasualtyCardGp deleted
+        "404":
+          description: CasualtyCardGp not found
+components:
+  schemas:
+    CasualtyCardGp:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        name:
+          type: string
+          description: Full name of the patient registered GP.
+        practice_name:
+          type: string
+          description: Name of the GP practice.
+        practice_address:
+          type: string
+          description: Address of the GP practice.
+        practice_phone:
+          type: string
+          description: Phone number of the GP practice.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - name
+        - practice_name
+        - practice_address
+        - practice_phone
+      description: 1:1 with casualty_card. Registered GP and practice details for communication and follow-up.

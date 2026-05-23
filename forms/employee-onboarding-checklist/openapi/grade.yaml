@@ -1,0 +1,171 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Employee Onboarding Checklist — Grade
+  version: 1.0.0
+  description: Computed onboarding completion grading result. Completion percentage 0-100% with status categories. One-to-one child of assessment.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        completion_percentage:
+          type: number
+          format: double
+          description: Overall completion percentage from 0 to 100.
+        completion_status:
+          type: string
+          enum:
+            - not-started
+            - in-progress
+            - mostly-complete
+            - complete
+            - ""
+          description: "Completion status: not-started (0%), in-progress (1-49%), mostly-complete (50-89%), complete (90-100%), or empty."
+        overall_risk_level:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: "Overall onboarding risk level: low, moderate, high, critical, or empty."
+        items_completed:
+          type: integer
+          format: int32
+          description: Number of checklist items completed.
+        items_total:
+          type: integer
+          format: int32
+          description: Total number of checklist items.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - completion_percentage
+        - completion_status
+        - overall_risk_level
+        - items_completed
+        - items_total
+        - graded_at
+      description: Computed onboarding completion grading result. Completion percentage 0-100% with status categories. One-to-one child of assessment.

@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cholesterol
+openapi: 3.1.0
+info:
+  title: Heart Health Check — Cholesterol
+  version: 1.0.0
+  description: Cholesterol lipid profile and statin therapy status.
+paths:
+  /cholesterols:
+    get:
+      summary: List Cholesterol records
+      operationId: listCholesterol
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Cholesterol records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cholesterol"
+    post:
+      summary: Create a new Cholesterol
+      operationId: createCholesterol
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cholesterol"
+      responses:
+        "201":
+          description: The newly created Cholesterol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cholesterol"
+        "400":
+          description: Validation error
+  /cholesterols/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Cholesterol by id
+      operationId: getCholesterol
+      responses:
+        "200":
+          description: The requested Cholesterol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cholesterol"
+        "404":
+          description: Cholesterol not found
+    patch:
+      summary: Update an existing Cholesterol
+      operationId: updateCholesterol
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cholesterol"
+      responses:
+        "200":
+          description: The updated Cholesterol
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cholesterol"
+        "404":
+          description: Cholesterol not found
+    delete:
+      summary: Soft-delete a Cholesterol
+      operationId: deleteCholesterol
+      responses:
+        "204":
+          description: Cholesterol deleted
+        "404":
+          description: Cholesterol not found
+components:
+  schemas:
+    Cholesterol:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        total_cholesterol:
+          type: number
+          format: double
+          description: Total cholesterol in mmol/L.
+        hdl_cholesterol:
+          type: number
+          format: double
+          description: HDL cholesterol in mmol/L.
+        total_hdl_ratio:
+          type: number
+          format: double
+          description: TC/HDL ratio (can be overridden or calculated).
+        on_statin:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the patient is currently on statin therapy.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - on_statin
+      description: Cholesterol lipid profile and statin therapy status.

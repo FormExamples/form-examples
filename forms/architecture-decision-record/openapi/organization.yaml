@@ -1,0 +1,150 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: organization
+openapi: 3.1.0
+info:
+  title: Architecture Decision Record — Organization
+  version: 1.0.0
+  description: Organization context (company, team, or program) under which an ADR is written.
+paths:
+  /organizations:
+    get:
+      summary: List Organization records
+      operationId: listOrganization
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Organization records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organization"
+    post:
+      summary: Create a new Organization
+      operationId: createOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organization"
+      responses:
+        "201":
+          description: The newly created Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "400":
+          description: Validation error
+  /organizations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Organization by id
+      operationId: getOrganization
+      responses:
+        "200":
+          description: The requested Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "404":
+          description: Organization not found
+    patch:
+      summary: Update an existing Organization
+      operationId: updateOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organization"
+      responses:
+        "200":
+          description: The updated Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "404":
+          description: Organization not found
+    delete:
+      summary: Soft-delete a Organization
+      operationId: deleteOrganization
+      responses:
+        "204":
+          description: Organization deleted
+        "404":
+          description: Organization not found
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Organization display name.
+        legal_name:
+          type: string
+          description: Organization legal name, if different from display name.
+        industry:
+          type: string
+          description: Industry such as healthcare, fintech, retail, public-sector.
+        domain:
+          type: string
+          description: Primary internet domain such as example.com.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country of registration as ISO 3166-1 alpha-2 code.
+        description:
+          type: string
+          description: Free-text description of the organization, e.g. mission or scope.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - legal_name
+        - industry
+        - domain
+        - description
+      description: Organization context (company, team, or program) under which an ADR is written.

@@ -1,0 +1,176 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: meeting_grade_flag
+openapi: 3.1.0
+info:
+  title: Meeting — MeetingGradeFlag
+  version: 1.0.0
+  description: Non-blocking validation flags that fire independently of the completion status. Surfaced in the dashboard for the organiser to address.
+paths:
+  /meeting-grade-flags:
+    get:
+      summary: List MeetingGradeFlag records
+      operationId: listMeetingGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MeetingGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeetingGradeFlag"
+    post:
+      summary: Create a new MeetingGradeFlag
+      operationId: createMeetingGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingGradeFlag"
+      responses:
+        "201":
+          description: The newly created MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGradeFlag"
+        "400":
+          description: Validation error
+  /meeting-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MeetingGradeFlag by id
+      operationId: getMeetingGradeFlag
+      responses:
+        "200":
+          description: The requested MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGradeFlag"
+        "404":
+          description: MeetingGradeFlag not found
+    patch:
+      summary: Update an existing MeetingGradeFlag
+      operationId: updateMeetingGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingGradeFlag"
+      responses:
+        "200":
+          description: The updated MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingGradeFlag"
+        "404":
+          description: MeetingGradeFlag not found
+    delete:
+      summary: Soft-delete a MeetingGradeFlag
+      operationId: deleteMeetingGradeFlag
+      responses:
+        "204":
+          description: MeetingGradeFlag deleted
+        "404":
+          description: MeetingGradeFlag not found
+components:
+  schemas:
+    MeetingGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUMMARY-OVER-LIMIT-001).
+        category:
+          type: string
+          enum:
+            - summary-over-limit
+            - no-organizer
+            - no-participants
+            - no-agenda
+            - no-outcomes
+            - no-summary
+            - start-after-end
+            - recurring-without-until
+            - action-item-overdue
+            - low-acceptance-rate
+            - low-attendance-rate
+            - over-running
+            - conflicting-resource
+            - confidential-content
+            - other
+            - ""
+          description: "Flag category: summary-over-limit, no-participants, no-agenda, start-after-end, etc."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Flag priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action for the organiser (e.g. \"shorten summary to 250 characters\")."
+      required:
+        - created_at
+        - updated_at
+        - meeting_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Non-blocking validation flags that fire independently of the completion status. Surfaced in the dashboard for the organiser to address.

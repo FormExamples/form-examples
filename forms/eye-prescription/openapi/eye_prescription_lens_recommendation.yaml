@@ -1,0 +1,206 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_prescription_lens_recommendation
+openapi: 3.1.0
+info:
+  title: Eye Prescription — EyePrescriptionLensRecommendation
+  version: 1.0.0
+  description: "Lens recommendation: design, material, coatings, tint. One row per prescription."
+paths:
+  /eye-prescription-lens-recommendations:
+    get:
+      summary: List EyePrescriptionLensRecommendation records
+      operationId: listEyePrescriptionLensRecommendation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyePrescriptionLensRecommendation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+    post:
+      summary: Create a new EyePrescriptionLensRecommendation
+      operationId: createEyePrescriptionLensRecommendation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+      responses:
+        "201":
+          description: The newly created EyePrescriptionLensRecommendation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+        "400":
+          description: Validation error
+  /eye-prescription-lens-recommendations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyePrescriptionLensRecommendation by id
+      operationId: getEyePrescriptionLensRecommendation
+      responses:
+        "200":
+          description: The requested EyePrescriptionLensRecommendation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+        "404":
+          description: EyePrescriptionLensRecommendation not found
+    patch:
+      summary: Update an existing EyePrescriptionLensRecommendation
+      operationId: updateEyePrescriptionLensRecommendation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+      responses:
+        "200":
+          description: The updated EyePrescriptionLensRecommendation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionLensRecommendation"
+        "404":
+          description: EyePrescriptionLensRecommendation not found
+    delete:
+      summary: Soft-delete a EyePrescriptionLensRecommendation
+      operationId: deleteEyePrescriptionLensRecommendation
+      responses:
+        "204":
+          description: EyePrescriptionLensRecommendation deleted
+        "404":
+          description: EyePrescriptionLensRecommendation not found
+components:
+  schemas:
+    EyePrescriptionLensRecommendation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_prescription_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent eye_prescription (unique, 1:1).
+        lens_type:
+          type: string
+          enum:
+            - single-vision-distance
+            - single-vision-near
+            - single-vision-intermediate
+            - bifocal
+            - trifocal
+            - varifocal
+            - occupational-varifocal
+            - ""
+          description: "Lens design: single-vision-distance, single-vision-near, single-vision-intermediate, bifocal, trifocal, varifocal, occupational-varifocal."
+        material:
+          type: string
+          enum:
+            - cr-39
+            - trivex
+            - polycarbonate
+            - mid-index-1.60
+            - high-index-1.67
+            - high-index-1.74
+            - glass
+            - ""
+          description: "Lens material: cr-39, trivex, polycarbonate, mid-index-1.60, high-index-1.67, high-index-1.74, glass."
+        refractive_index:
+          type: number
+          format: double
+          description: Refractive index of the lens material (1.498 for CR-39, 1.586 for polycarbonate, etc.).
+        aspheric:
+          type: boolean
+          description: Whether an aspheric lens design is recommended.
+        coating_anti_reflective:
+          type: boolean
+          description: Whether anti-reflective coating is recommended.
+        coating_scratch_resistant:
+          type: boolean
+          description: Whether scratch-resistant coating is recommended.
+        coating_hydrophobic:
+          type: boolean
+          description: Whether hydrophobic coating is recommended.
+        coating_blue_light:
+          type: boolean
+          description: Whether blue-light filter coating is recommended.
+        coating_photochromic:
+          type: boolean
+          description: Whether photochromic (light-reactive) coating is recommended.
+        coating_polarised:
+          type: boolean
+          description: Whether polarised coating is recommended.
+        coating_uv_400:
+          type: boolean
+          description: Whether UV-400 protection is recommended.
+        tint_description:
+          type: string
+          maxLength: 50
+          description: "Tint description (e.g. \"brown\", \"grey\", \"G15\")."
+        tint_percent:
+          type: integer
+          format: int32
+          description: Tint density as a percentage (0 = clear, 85 = sunglass).
+        dispenser_notes:
+          type: string
+          description: Free-text notes for the dispensing optician.
+      required:
+        - created_at
+        - updated_at
+        - eye_prescription_id
+        - lens_type
+        - material
+        - aspheric
+        - coating_anti_reflective
+        - coating_scratch_resistant
+        - coating_hydrophobic
+        - coating_blue_light
+        - coating_photochromic
+        - coating_polarised
+        - coating_uv_400
+        - tint_description
+        - dispenser_notes
+      description: "Lens recommendation: design, material, coatings, tint. One row per prescription."

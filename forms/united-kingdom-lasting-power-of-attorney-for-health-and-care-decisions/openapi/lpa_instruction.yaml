@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_instruction
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaInstruction
+  version: 1.0.0
+  description: Binding instruction the attorneys must follow. LP1H s.7 (instructions), MCA 2005 s.9(4).
+paths:
+  /lpa-instructions:
+    get:
+      summary: List LpaInstruction records
+      operationId: listLpaInstruction
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaInstruction records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaInstruction"
+    post:
+      summary: Create a new LpaInstruction
+      operationId: createLpaInstruction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaInstruction"
+      responses:
+        "201":
+          description: The newly created LpaInstruction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaInstruction"
+        "400":
+          description: Validation error
+  /lpa-instructions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaInstruction by id
+      operationId: getLpaInstruction
+      responses:
+        "200":
+          description: The requested LpaInstruction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaInstruction"
+        "404":
+          description: LpaInstruction not found
+    patch:
+      summary: Update an existing LpaInstruction
+      operationId: updateLpaInstruction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaInstruction"
+      responses:
+        "200":
+          description: The updated LpaInstruction
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaInstruction"
+        "404":
+          description: LpaInstruction not found
+    delete:
+      summary: Soft-delete a LpaInstruction
+      operationId: deleteLpaInstruction
+      responses:
+        "204":
+          description: LpaInstruction deleted
+        "404":
+          description: LpaInstruction not found
+components:
+  schemas:
+    LpaInstruction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA.
+        order_position:
+          type: integer
+          format: int32
+          description: Order in which the instruction appears in the LP1H s.7 block.
+        category:
+          type: string
+          enum:
+            - medical-treatment-limit
+            - residence-restriction
+            - contact-restriction
+            - religion-and-belief
+            - food-and-drink
+            - end-of-life-care
+            - other
+            - ""
+          description: Topical category for the instruction.
+        statement:
+          type: string
+          description: The binding instruction text.
+        lawfulness_assessed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a solicitor or certificate provider has assessed the instruction as lawful (R-MCA-INSTR-LAW).
+        contradicts_adrt:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether this instruction is known to contradict a paired ADRT (R-MCA-INSTR-ADRT fires when yes).
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - order_position
+        - category
+        - statement
+        - lawfulness_assessed
+        - contradicts_adrt
+      description: Binding instruction the attorneys must follow. LP1H s.7 (instructions), MCA 2005 s.9(4).

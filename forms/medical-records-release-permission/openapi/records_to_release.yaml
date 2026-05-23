@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: records_to_release
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — RecordsToRelease
+  version: 1.0.0
+  description: Types and date range of medical records to be released. One-to-one child of release_form.
+paths:
+  /records-to-releases:
+    get:
+      summary: List RecordsToRelease records
+      operationId: listRecordsToRelease
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RecordsToRelease records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecordsToRelease"
+    post:
+      summary: Create a new RecordsToRelease
+      operationId: createRecordsToRelease
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordsToRelease"
+      responses:
+        "201":
+          description: The newly created RecordsToRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToRelease"
+        "400":
+          description: Validation error
+  /records-to-releases/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RecordsToRelease by id
+      operationId: getRecordsToRelease
+      responses:
+        "200":
+          description: The requested RecordsToRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToRelease"
+        "404":
+          description: RecordsToRelease not found
+    patch:
+      summary: Update an existing RecordsToRelease
+      operationId: updateRecordsToRelease
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordsToRelease"
+      responses:
+        "200":
+          description: The updated RecordsToRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToRelease"
+        "404":
+          description: RecordsToRelease not found
+    delete:
+      summary: Soft-delete a RecordsToRelease
+      operationId: deleteRecordsToRelease
+      responses:
+        "204":
+          description: RecordsToRelease deleted
+        "404":
+          description: RecordsToRelease not found
+components:
+  schemas:
+    RecordsToRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        record_types:
+          type: string
+          description: Array of record type identifiers selected for release.
+        specific_date_range:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a specific date range applies: yes, no, or empty string if unanswered."
+        date_from:
+          type: string
+          format: date
+          description: Start date of the records date range (nullable).
+        date_to:
+          type: string
+          format: date
+          description: End date of the records date range (nullable). Must be >= date_from when both are set.
+        specific_record_details:
+          type: string
+          description: Free-text description of specific records requested.
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - record_types
+        - specific_date_range
+        - specific_record_details
+      description: Types and date range of medical records to be released. One-to-one child of release_form.

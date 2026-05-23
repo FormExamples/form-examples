@@ -1,0 +1,154 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_preference
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaPreference
+  version: 1.0.0
+  description: Non-binding preference statement guiding the attorneys. LP1H s.7 (preferences).
+paths:
+  /lpa-preferences:
+    get:
+      summary: List LpaPreference records
+      operationId: listLpaPreference
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaPreference records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaPreference"
+    post:
+      summary: Create a new LpaPreference
+      operationId: createLpaPreference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPreference"
+      responses:
+        "201":
+          description: The newly created LpaPreference
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreference"
+        "400":
+          description: Validation error
+  /lpa-preferences/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaPreference by id
+      operationId: getLpaPreference
+      responses:
+        "200":
+          description: The requested LpaPreference
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreference"
+        "404":
+          description: LpaPreference not found
+    patch:
+      summary: Update an existing LpaPreference
+      operationId: updateLpaPreference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPreference"
+      responses:
+        "200":
+          description: The updated LpaPreference
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreference"
+        "404":
+          description: LpaPreference not found
+    delete:
+      summary: Soft-delete a LpaPreference
+      operationId: deleteLpaPreference
+      responses:
+        "204":
+          description: LpaPreference deleted
+        "404":
+          description: LpaPreference not found
+components:
+  schemas:
+    LpaPreference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA.
+        order_position:
+          type: integer
+          format: int32
+          description: Order in which the preference appears in the LP1H s.7 block.
+        category:
+          type: string
+          enum:
+            - residence
+            - contact-with-others
+            - religion-and-belief
+            - food-and-drink
+            - end-of-life-care
+            - daily-routine
+            - medical-treatment
+            - other
+            - ""
+          description: Topical category for the preference; informational only, not statutory.
+        statement:
+          type: string
+          description: The preference statement itself.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - order_position
+        - category
+        - statement
+      description: Non-binding preference statement guiding the attorneys. LP1H s.7 (preferences).

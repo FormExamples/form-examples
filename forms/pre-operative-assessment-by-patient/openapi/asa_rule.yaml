@@ -1,0 +1,143 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: asa_rule
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Patient — AsaRule
+  version: 1.0.0
+  description: Reference table of ASA grading rules. Seed data mirrors asa-rules.ts. Used for audit trail.
+paths:
+  /asa-rules:
+    get:
+      summary: List AsaRule records
+      operationId: listAsaRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AsaRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AsaRule"
+    post:
+      summary: Create a new AsaRule
+      operationId: createAsaRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AsaRule"
+      responses:
+        "201":
+          description: The newly created AsaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AsaRule"
+        "400":
+          description: Validation error
+  /asa-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AsaRule by id
+      operationId: getAsaRule
+      responses:
+        "200":
+          description: The requested AsaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AsaRule"
+        "404":
+          description: AsaRule not found
+    patch:
+      summary: Update an existing AsaRule
+      operationId: updateAsaRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AsaRule"
+      responses:
+        "200":
+          description: The updated AsaRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AsaRule"
+        "404":
+          description: AsaRule not found
+    delete:
+      summary: Soft-delete a AsaRule
+      operationId: deleteAsaRule
+      responses:
+        "204":
+          description: AsaRule deleted
+        "404":
+          description: AsaRule not found
+components:
+  schemas:
+    AsaRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        code:
+          type: string
+          description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.
+        system:
+          type: string
+          description: Body system or category (e.g. Cardiovascular, Respiratory).
+        description:
+          type: string
+          description: Human-readable condition description (e.g. Controlled hypertension).
+        grade:
+          type: integer
+          format: int32
+          description: "ASA grade assigned when this rule fires: 1 (healthy) to 5 (moribund)."
+      required:
+        - created_at
+        - updated_at
+        - code
+        - system
+        - description
+        - grade
+      description: Reference table of ASA grading rules. Seed data mirrors asa-rules.ts. Used for audit trail.

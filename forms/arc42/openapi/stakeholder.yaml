@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: stakeholder
+openapi: 3.1.0
+info:
+  title: Arc42 — Stakeholder
+  version: 1.0.0
+  description: Stakeholder captured in §1 Introduction & Goals of the arc42 documentation.
+paths:
+  /stakeholders:
+    get:
+      summary: List Stakeholder records
+      operationId: listStakeholder
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Stakeholder records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Stakeholder"
+    post:
+      summary: Create a new Stakeholder
+      operationId: createStakeholder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Stakeholder"
+      responses:
+        "201":
+          description: The newly created Stakeholder
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stakeholder"
+        "400":
+          description: Validation error
+  /stakeholders/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Stakeholder by id
+      operationId: getStakeholder
+      responses:
+        "200":
+          description: The requested Stakeholder
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stakeholder"
+        "404":
+          description: Stakeholder not found
+    patch:
+      summary: Update an existing Stakeholder
+      operationId: updateStakeholder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Stakeholder"
+      responses:
+        "200":
+          description: The updated Stakeholder
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stakeholder"
+        "404":
+          description: Stakeholder not found
+    delete:
+      summary: Soft-delete a Stakeholder
+      operationId: deleteStakeholder
+      responses:
+        "204":
+          description: Stakeholder deleted
+        "404":
+          description: Stakeholder not found
+components:
+  schemas:
+    Stakeholder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        name:
+          type: string
+          description: Name or group name of the stakeholder.
+        role:
+          type: string
+          description: Role or position of the stakeholder in relation to the architecture.
+        concerns:
+          type: string
+          description: Key concerns, expectations, or interests this stakeholder has about the architecture.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - name
+        - role
+        - concerns
+      description: Stakeholder captured in §1 Introduction & Goals of the arc42 documentation.

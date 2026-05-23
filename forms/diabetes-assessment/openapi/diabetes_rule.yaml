@@ -1,0 +1,146 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: diabetes_rule
+openapi: 3.1.0
+info:
+  title: Diabetes Assessment — DiabetesRule
+  version: 1.0.0
+  description: Reference catalogue of all 20 diabetes assessment rules (DM-001 to DM-020). Seeded at deployment.
+paths:
+  /diabetes-rules:
+    get:
+      summary: List DiabetesRule records
+      operationId: listDiabetesRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesRule"
+    post:
+      summary: Create a new DiabetesRule
+      operationId: createDiabetesRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesRule"
+      responses:
+        "201":
+          description: The newly created DiabetesRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesRule"
+        "400":
+          description: Validation error
+  /diabetes-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesRule by id
+      operationId: getDiabetesRule
+      responses:
+        "200":
+          description: The requested DiabetesRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesRule"
+        "404":
+          description: DiabetesRule not found
+    patch:
+      summary: Update an existing DiabetesRule
+      operationId: updateDiabetesRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesRule"
+      responses:
+        "200":
+          description: The updated DiabetesRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesRule"
+        "404":
+          description: DiabetesRule not found
+    delete:
+      summary: Soft-delete a DiabetesRule
+      operationId: deleteDiabetesRule
+      responses:
+        "204":
+          description: DiabetesRule deleted
+        "404":
+          description: DiabetesRule not found
+components:
+  schemas:
+    DiabetesRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        code:
+          type: string
+          description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.
+        category:
+          type: string
+          description: Clinical category the rule evaluates (e.g. Glycaemic Control, Foot, Renal).
+        description:
+          type: string
+          description: Human-readable description of what the rule detects.
+        concern_level:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Clinical concern level when rule fires: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - code
+        - category
+        - description
+        - concern_level
+      description: Reference catalogue of all 20 diabetes assessment rules (DM-001 to DM-020). Seeded at deployment.

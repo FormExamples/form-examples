@@ -1,0 +1,224 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: architecture_decision_record
+openapi: 3.1.0
+info:
+  title: Architecture Decision Record — ArchitectureDecisionRecord
+  version: 1.0.0
+  description: Architecture decision record (Tyree & Akerman 14-section template).
+paths:
+  /architecture-decision-records:
+    get:
+      summary: List ArchitectureDecisionRecord records
+      operationId: listArchitectureDecisionRecord
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ArchitectureDecisionRecord records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArchitectureDecisionRecord"
+    post:
+      summary: Create a new ArchitectureDecisionRecord
+      operationId: createArchitectureDecisionRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecord"
+      responses:
+        "201":
+          description: The newly created ArchitectureDecisionRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecord"
+        "400":
+          description: Validation error
+  /architecture-decision-records/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ArchitectureDecisionRecord by id
+      operationId: getArchitectureDecisionRecord
+      responses:
+        "200":
+          description: The requested ArchitectureDecisionRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecord"
+        "404":
+          description: ArchitectureDecisionRecord not found
+    patch:
+      summary: Update an existing ArchitectureDecisionRecord
+      operationId: updateArchitectureDecisionRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchitectureDecisionRecord"
+      responses:
+        "200":
+          description: The updated ArchitectureDecisionRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchitectureDecisionRecord"
+        "404":
+          description: ArchitectureDecisionRecord not found
+    delete:
+      summary: Soft-delete a ArchitectureDecisionRecord
+      operationId: deleteArchitectureDecisionRecord
+      responses:
+        "204":
+          description: ArchitectureDecisionRecord deleted
+        "404":
+          description: ArchitectureDecisionRecord not found
+components:
+  schemas:
+    ArchitectureDecisionRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        author_id:
+          type: string
+          format: uuid
+          description: Foreign key to author.id; the architect or decision-maker.
+        organization_id:
+          type: string
+          format: uuid
+          description: Foreign key to organization.id; the org context.
+        slug:
+          type: string
+          description: "URL-safe identifier such as \"use-postgres-for-primary-storage\"."
+        number:
+          type: integer
+          format: int32
+          description: Sequential ADR number, e.g. 0042; optional, may be assigned post-merge.
+        title:
+          type: string
+          description: Short human-readable title summarising the decision.
+        decision_date:
+          type: string
+          format: date
+          description: Date on which the decision was made (status transitions to decided/approved).
+        status:
+          type: string
+          enum:
+            - pending
+            - decided
+            - approved
+            - superseded
+            - deprecated
+            - ""
+          description: "Status: pending, decided, approved, superseded, deprecated."
+        decision_group:
+          type: string
+          enum:
+            - business
+            - data
+            - integration
+            - presentation
+            - security
+            - infrastructure
+            - operations
+            - governance
+            - other
+            - ""
+          description: "Tyree & Akerman section 4: organising group such as data, integration, security."
+        issue:
+          type: string
+          description: "Tyree & Akerman section 1: the architectural design issue being addressed."
+        decision:
+          type: string
+          description: "Tyree & Akerman section 2: the position chosen, stated clearly."
+        assumptions:
+          type: string
+          description: "Tyree & Akerman section 5: environmental factors influencing the decision."
+        constraints:
+          type: string
+          description: "Tyree & Akerman section 6: environmental limits imposed by the decision."
+        argument:
+          type: string
+          description: "Tyree & Akerman section 8: rationale for the chosen position."
+        implications:
+          type: string
+          description: "Tyree & Akerman section 9: consequences, follow-on decisions, scope/schedule impact."
+        related_decisions:
+          type: string
+          description: "Tyree & Akerman section 10: other ADRs this one depends on or supersedes."
+        related_requirements:
+          type: string
+          description: "Tyree & Akerman section 11: business or functional requirements addressed."
+        related_artifacts:
+          type: string
+          description: "Tyree & Akerman section 12: designs, models, scope documents impacted."
+        related_principles:
+          type: string
+          description: "Tyree & Akerman section 13: enterprise principles this aligns with or breaks."
+        signed_off_by:
+          type: string
+          description: Name of the person who signed off the decision.
+        signed_off_at:
+          type: string
+          format: date-time
+          description: Timestamp when the decision was signed off.
+      required:
+        - created_at
+        - updated_at
+        - slug
+        - title
+        - status
+        - decision_group
+        - issue
+        - decision
+        - assumptions
+        - constraints
+        - argument
+        - implications
+        - related_decisions
+        - related_requirements
+        - related_artifacts
+        - related_principles
+        - signed_off_by
+      description: Architecture decision record (Tyree & Akerman 14-section template).

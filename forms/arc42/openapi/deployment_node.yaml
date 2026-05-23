@@ -1,0 +1,155 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: deployment_node
+openapi: 3.1.0
+info:
+  title: Arc42 — DeploymentNode
+  version: 1.0.0
+  description: Deployment node captured in §7 Deployment View of the arc42 documentation.
+paths:
+  /deployment-nodes:
+    get:
+      summary: List DeploymentNode records
+      operationId: listDeploymentNode
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DeploymentNode records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeploymentNode"
+    post:
+      summary: Create a new DeploymentNode
+      operationId: createDeploymentNode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentNode"
+      responses:
+        "201":
+          description: The newly created DeploymentNode
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentNode"
+        "400":
+          description: Validation error
+  /deployment-nodes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DeploymentNode by id
+      operationId: getDeploymentNode
+      responses:
+        "200":
+          description: The requested DeploymentNode
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentNode"
+        "404":
+          description: DeploymentNode not found
+    patch:
+      summary: Update an existing DeploymentNode
+      operationId: updateDeploymentNode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentNode"
+      responses:
+        "200":
+          description: The updated DeploymentNode
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentNode"
+        "404":
+          description: DeploymentNode not found
+    delete:
+      summary: Soft-delete a DeploymentNode
+      operationId: deleteDeploymentNode
+      responses:
+        "204":
+          description: DeploymentNode deleted
+        "404":
+          description: DeploymentNode not found
+components:
+  schemas:
+    DeploymentNode:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        environment:
+          type: string
+          enum:
+            - development
+            - staging
+            - production
+            - disaster-recovery
+            - other
+            - ""
+          description: "Target environment for this deployment node: development, staging, production, disaster-recovery, or other."
+        node_name:
+          type: string
+          description: Name of the deployment node (e.g. server hostname, Kubernetes cluster, cloud region).
+        responsibility:
+          type: string
+          description: What this deployment node is responsible for hosting or executing.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - environment
+        - node_name
+        - responsibility
+      description: Deployment node captured in §7 Deployment View of the arc42 documentation.

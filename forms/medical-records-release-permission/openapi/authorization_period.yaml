@@ -1,0 +1,149 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: authorization_period
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — AuthorizationPeriod
+  version: 1.0.0
+  description: Authorization validity period for the records release. One-to-one child of release_form.
+paths:
+  /authorization-periods:
+    get:
+      summary: List AuthorizationPeriod records
+      operationId: listAuthorizationPeriod
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AuthorizationPeriod records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AuthorizationPeriod"
+    post:
+      summary: Create a new AuthorizationPeriod
+      operationId: createAuthorizationPeriod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationPeriod"
+      responses:
+        "201":
+          description: The newly created AuthorizationPeriod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationPeriod"
+        "400":
+          description: Validation error
+  /authorization-periods/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AuthorizationPeriod by id
+      operationId: getAuthorizationPeriod
+      responses:
+        "200":
+          description: The requested AuthorizationPeriod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationPeriod"
+        "404":
+          description: AuthorizationPeriod not found
+    patch:
+      summary: Update an existing AuthorizationPeriod
+      operationId: updateAuthorizationPeriod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationPeriod"
+      responses:
+        "200":
+          description: The updated AuthorizationPeriod
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationPeriod"
+        "404":
+          description: AuthorizationPeriod not found
+    delete:
+      summary: Soft-delete a AuthorizationPeriod
+      operationId: deleteAuthorizationPeriod
+      responses:
+        "204":
+          description: AuthorizationPeriod deleted
+        "404":
+          description: AuthorizationPeriod not found
+components:
+  schemas:
+    AuthorizationPeriod:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        start_date:
+          type: string
+          format: date
+          description: Date from which the authorization is valid.
+        end_date:
+          type: string
+          format: date
+          description: Date until which the authorization is valid. Must be >= start_date.
+        single_use:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the authorization is for a single use only: yes, no, or empty string."
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - start_date
+        - end_date
+        - single_use
+      description: Authorization validity period for the records release. One-to-one child of release_form.

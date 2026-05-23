@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: care_quality
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — CareQuality
+  version: 1.0.0
+  description: "1:1 with encounter_satisfaction. Care Quality domain: 3 Likert-scale satisfaction questions."
+paths:
+  /care-qualities:
+    get:
+      summary: List CareQuality records
+      operationId: listCareQuality
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CareQuality records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareQuality"
+    post:
+      summary: Create a new CareQuality
+      operationId: createCareQuality
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareQuality"
+      responses:
+        "201":
+          description: The newly created CareQuality
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareQuality"
+        "400":
+          description: Validation error
+  /care-qualities/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CareQuality by id
+      operationId: getCareQuality
+      responses:
+        "200":
+          description: The requested CareQuality
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareQuality"
+        "404":
+          description: CareQuality not found
+    patch:
+      summary: Update an existing CareQuality
+      operationId: updateCareQuality
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareQuality"
+      responses:
+        "200":
+          description: The updated CareQuality
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareQuality"
+        "404":
+          description: CareQuality not found
+    delete:
+      summary: Soft-delete a CareQuality
+      operationId: deleteCareQuality
+      responses:
+        "204":
+          description: CareQuality deleted
+        "404":
+          description: CareQuality not found
+components:
+  schemas:
+    CareQuality:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        "NULL":
+          type: string
+        treatment_plan_explanation:
+          type: integer
+          format: int32
+          description: Satisfaction with treatment plan explanation (1-5 Likert). NULL if unanswered.
+        confidence_in_care:
+          type: integer
+          format: int32
+          description: Confidence in the care received (1-5 Likert). NULL if unanswered.
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+      description: "1:1 with encounter_satisfaction. Care Quality domain: 3 Likert-scale satisfaction questions."

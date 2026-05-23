@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: technology_decision
+openapi: 3.1.0
+info:
+  title: Arc42 — TechnologyDecision
+  version: 1.0.0
+  description: Technology decision captured in §4 Solution Strategy of the arc42 documentation.
+paths:
+  /technology-decisions:
+    get:
+      summary: List TechnologyDecision records
+      operationId: listTechnologyDecision
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TechnologyDecision records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TechnologyDecision"
+    post:
+      summary: Create a new TechnologyDecision
+      operationId: createTechnologyDecision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TechnologyDecision"
+      responses:
+        "201":
+          description: The newly created TechnologyDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TechnologyDecision"
+        "400":
+          description: Validation error
+  /technology-decisions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TechnologyDecision by id
+      operationId: getTechnologyDecision
+      responses:
+        "200":
+          description: The requested TechnologyDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TechnologyDecision"
+        "404":
+          description: TechnologyDecision not found
+    patch:
+      summary: Update an existing TechnologyDecision
+      operationId: updateTechnologyDecision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TechnologyDecision"
+      responses:
+        "200":
+          description: The updated TechnologyDecision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TechnologyDecision"
+        "404":
+          description: TechnologyDecision not found
+    delete:
+      summary: Soft-delete a TechnologyDecision
+      operationId: deleteTechnologyDecision
+      responses:
+        "204":
+          description: TechnologyDecision deleted
+        "404":
+          description: TechnologyDecision not found
+components:
+  schemas:
+    TechnologyDecision:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        category:
+          type: string
+          description: Category of the technology decision (e.g. language, database, framework, infrastructure).
+        choice:
+          type: string
+          description: The specific technology or approach chosen.
+        rationale:
+          type: string
+          description: Rationale explaining why this technology was chosen over alternatives.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - category
+        - choice
+        - rationale
+      description: Technology decision captured in §4 Solution Strategy of the arc42 documentation.

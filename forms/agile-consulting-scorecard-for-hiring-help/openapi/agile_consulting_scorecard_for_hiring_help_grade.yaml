@@ -1,0 +1,201 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_consulting_scorecard_for_hiring_help_grade
+openapi: 3.1.0
+info:
+  title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelpGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for an agile-consulting scorecard. One-to-one with agile_consulting_scorecard_for_hiring_help. Stores total score (0-16), manifesto subtotal (0-4), principles subtotal (0-12), the engine-computed and respondent-final readiness bands (low/borderline/medium/high), and a recommendation.
+paths:
+  /agile-consulting-scorecard-for-hiring-help-grades:
+    get:
+      summary: List AgileConsultingScorecardForHiringHelpGrade records
+      operationId: listAgileConsultingScorecardForHiringHelpGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileConsultingScorecardForHiringHelpGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+    post:
+      summary: Create a new AgileConsultingScorecardForHiringHelpGrade
+      operationId: createAgileConsultingScorecardForHiringHelpGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+      responses:
+        "201":
+          description: The newly created AgileConsultingScorecardForHiringHelpGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+        "400":
+          description: Validation error
+  /agile-consulting-scorecard-for-hiring-help-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileConsultingScorecardForHiringHelpGrade by id
+      operationId: getAgileConsultingScorecardForHiringHelpGrade
+      responses:
+        "200":
+          description: The requested AgileConsultingScorecardForHiringHelpGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGrade not found
+    patch:
+      summary: Update an existing AgileConsultingScorecardForHiringHelpGrade
+      operationId: updateAgileConsultingScorecardForHiringHelpGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+      responses:
+        "200":
+          description: The updated AgileConsultingScorecardForHiringHelpGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelpGrade"
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGrade not found
+    delete:
+      summary: Soft-delete a AgileConsultingScorecardForHiringHelpGrade
+      operationId: deleteAgileConsultingScorecardForHiringHelpGrade
+      responses:
+        "204":
+          description: AgileConsultingScorecardForHiringHelpGrade deleted
+        "404":
+          description: AgileConsultingScorecardForHiringHelpGrade not found
+components:
+  schemas:
+    AgileConsultingScorecardForHiringHelpGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_consulting_scorecard_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent agile_consulting_scorecard_for_hiring_help row (unique, 1:1).
+        score_total:
+          type: integer
+          format: int32
+          description: "Total points across all 16 items, 0 to 16. One point per \"yes\" answer."
+        manifesto_subtotal:
+          type: integer
+          format: int32
+          description: Subtotal across the four Manifesto items (m1..m4), 0 to 4.
+        principles_subtotal:
+          type: integer
+          format: int32
+          description: Subtotal across the twelve Principles items (p1..p12), 0 to 12.
+        computed_band:
+          type: string
+          enum:
+            - low
+            - borderline
+            - medium
+            - high
+            - ""
+          description: "Readiness band computed by the engine: low (0-4), borderline (5), medium (6-10), high (11-16)."
+        final_band:
+          type: string
+          enum:
+            - low
+            - borderline
+            - medium
+            - high
+            - ""
+          description: Readiness band signed off by the respondent or sponsor (may equal or differ from computed).
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the final band differs from the computed band (mandatory when they differ).
+        recommendation:
+          type: string
+          enum:
+            - do-not-hire-yet
+            - do-homework-first
+            - trial-engagement
+            - hire-with-focus-areas
+            - reassess-in-3-months
+            - ""
+          description: "Procurement recommendation: do-not-hire-yet, do-homework-first, trial-engagement, hire-with-focus-areas, reassess-in-3-months."
+        recommended_focus_areas:
+          type: string
+          description: Free-text list of focus areas the consultant should prioritize, derived from any flags that fired.
+        review_notes:
+          type: string
+          description: Free-text reviewer summary notes.
+        signed_by:
+          type: string
+          maxLength: 255
+          description: Name or identifier of the person who signed off the grade.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - agile_consulting_scorecard_id
+        - computed_band
+        - final_band
+        - override_reason
+        - recommendation
+        - recommended_focus_areas
+        - review_notes
+        - signed_by
+        - graded_at
+      description: Computed and signed-off grading result for an agile-consulting scorecard. One-to-one with agile_consulting_scorecard_for_hiring_help. Stores total score (0-16), manifesto subtotal (0-4), principles subtotal (0-12), the engine-computed and respondent-final readiness bands (low/borderline/medium/high), and a recommendation.

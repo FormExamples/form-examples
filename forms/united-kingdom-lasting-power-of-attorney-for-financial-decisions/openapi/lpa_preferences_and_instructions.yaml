@@ -1,0 +1,147 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_preferences_and_instructions
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaPreferencesAndInstructions
+  version: 1.0.0
+  description: LPA preferences and instructions — overflow text for LP1F sections 3, 4, 7 when the donor's text exceeds the on-form box (continued on LPC sheet 2).
+paths:
+  /lpa-preferences-and-instructionses:
+    get:
+      summary: List LpaPreferencesAndInstructions records
+      operationId: listLpaPreferencesAndInstructions
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaPreferencesAndInstructions records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+    post:
+      summary: Create a new LpaPreferencesAndInstructions
+      operationId: createLpaPreferencesAndInstructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+      responses:
+        "201":
+          description: The newly created LpaPreferencesAndInstructions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+        "400":
+          description: Validation error
+  /lpa-preferences-and-instructionses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaPreferencesAndInstructions by id
+      operationId: getLpaPreferencesAndInstructions
+      responses:
+        "200":
+          description: The requested LpaPreferencesAndInstructions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+        "404":
+          description: LpaPreferencesAndInstructions not found
+    patch:
+      summary: Update an existing LpaPreferencesAndInstructions
+      operationId: updateLpaPreferencesAndInstructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+      responses:
+        "200":
+          description: The updated LpaPreferencesAndInstructions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPreferencesAndInstructions"
+        "404":
+          description: LpaPreferencesAndInstructions not found
+    delete:
+      summary: Soft-delete a LpaPreferencesAndInstructions
+      operationId: deleteLpaPreferencesAndInstructions
+      responses:
+        "204":
+          description: LpaPreferencesAndInstructions deleted
+        "404":
+          description: LpaPreferencesAndInstructions not found
+components:
+  schemas:
+    LpaPreferencesAndInstructions:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; UNIQUE so only one overflow row per LPA; cascades on delete.
+        preferences_overflow_text:
+          type: string
+          description: "Continuation of LP1F section 7 \"preferences\" text when the section-7 box overflows."
+        instructions_overflow_text:
+          type: string
+          description: "Continuation of LP1F section 7 \"instructions\" text when the section-7 box overflows."
+        decisions_jointly_overflow_text:
+          type: string
+          description: "Continuation of the LP1F section 3 \"mixed\" decision-mode description when the on-form box overflows."
+        replacement_step_in_overflow_text:
+          type: string
+          description: "Continuation of the LP1F section 4 \"when and how\" replacement-step-in description when the on-form box overflows."
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - preferences_overflow_text
+        - instructions_overflow_text
+        - decisions_jointly_overflow_text
+        - replacement_step_in_overflow_text
+      description: LPA preferences and instructions — overflow text for LP1F sections 3, 4, 7 when the donor's text exceeds the on-form box (continued on LPC sheet 2).

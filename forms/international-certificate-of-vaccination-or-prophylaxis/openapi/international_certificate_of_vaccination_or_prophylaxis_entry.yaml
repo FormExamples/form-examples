@@ -1,0 +1,327 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: international_certificate_of_vaccination_or_prophylaxis_entry
+openapi: 3.1.0
+info:
+  title: International Certificate Of Vaccination Or Prophylaxis — InternationalCertificateOfVaccinationOrProphylaxisEntry
+  version: 1.0.0
+  description: One vaccination or prophylaxis entry on an International Certificate of Vaccination or Prophylaxis. Multiple entries may appear on a single certificate for different diseases or booster doses.
+paths:
+  /international-certificate-of-vaccination-or-prophylaxis-entries:
+    get:
+      summary: List InternationalCertificateOfVaccinationOrProphylaxisEntry records
+      operationId: listInternationalCertificateOfVaccinationOrProphylaxisEntry
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of InternationalCertificateOfVaccinationOrProphylaxisEntry records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+    post:
+      summary: Create a new InternationalCertificateOfVaccinationOrProphylaxisEntry
+      operationId: createInternationalCertificateOfVaccinationOrProphylaxisEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+      responses:
+        "201":
+          description: The newly created InternationalCertificateOfVaccinationOrProphylaxisEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+        "400":
+          description: Validation error
+  /international-certificate-of-vaccination-or-prophylaxis-entries/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one InternationalCertificateOfVaccinationOrProphylaxisEntry by id
+      operationId: getInternationalCertificateOfVaccinationOrProphylaxisEntry
+      responses:
+        "200":
+          description: The requested InternationalCertificateOfVaccinationOrProphylaxisEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxisEntry not found
+    patch:
+      summary: Update an existing InternationalCertificateOfVaccinationOrProphylaxisEntry
+      operationId: updateInternationalCertificateOfVaccinationOrProphylaxisEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+      responses:
+        "200":
+          description: The updated InternationalCertificateOfVaccinationOrProphylaxisEntry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry"
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxisEntry not found
+    delete:
+      summary: Soft-delete a InternationalCertificateOfVaccinationOrProphylaxisEntry
+      operationId: deleteInternationalCertificateOfVaccinationOrProphylaxisEntry
+      responses:
+        "204":
+          description: InternationalCertificateOfVaccinationOrProphylaxisEntry deleted
+        "404":
+          description: InternationalCertificateOfVaccinationOrProphylaxisEntry not found
+components:
+  schemas:
+    InternationalCertificateOfVaccinationOrProphylaxisEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        international_certificate_of_vaccination_or_prophylaxis_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent certificate.
+        entry_index:
+          type: integer
+          format: int32
+          description: 1-indexed position of this entry on the certificate (1 to 8 entries per certificate).
+        disease:
+          type: string
+          enum:
+            - yellow-fever
+            - polio
+            - smallpox
+            - cholera
+            - meningococcal
+            - covid-19
+            - other
+            - ""
+          description: "Disease code: yellow-fever, polio, smallpox, cholera, meningococcal, covid-19, or other."
+        disease_other_label:
+          type: string
+          maxLength: 100
+          description: "Free-text disease name when disease is \"other\"."
+        disease_as_snomed_ct:
+          type: string
+          maxLength: 20
+          description: Disease as SNOMED CT concept ID.
+        disease_as_icd_11:
+          type: string
+          maxLength: 20
+          description: Disease as ICD-11 code.
+        vaccine_or_prophylaxis_name:
+          type: string
+          maxLength: 255
+          description: Trade or generic name of the vaccine or prophylaxis administered.
+        vaccine_as_snomed_ct:
+          type: string
+          maxLength: 20
+          description: Vaccine as SNOMED CT concept ID.
+        vaccine_as_atc:
+          type: string
+          maxLength: 20
+          description: Vaccine as WHO ATC classification code.
+        manufacturer:
+          type: string
+          maxLength: 255
+          description: Manufacturer name as printed on the vial label.
+        manufacturer_country_as_iso_3166_1_alpha_3:
+          type: string
+          maxLength: 3
+          description: Country of manufacture as ISO 3166-1 alpha-3.
+        batch_number:
+          type: string
+          maxLength: 50
+          description: Batch or lot number as printed on the vial label.
+        lot_expiry_date:
+          type: string
+          format: date
+          description: Lot expiry date as printed on the vial label.
+        route:
+          type: string
+          enum:
+            - intramuscular
+            - subcutaneous
+            - intradermal
+            - oral
+            - intranasal
+            - other
+            - ""
+          description: "Route of administration: intramuscular, subcutaneous, intradermal, oral, intranasal, or other."
+        anatomical_site:
+          type: string
+          enum:
+            - left-deltoid
+            - right-deltoid
+            - left-thigh
+            - right-thigh
+            - left-gluteus
+            - right-gluteus
+            - oral
+            - nasal
+            - other
+            - ""
+          description: Anatomical site of administration.
+        dose_amount_value:
+          type: number
+          format: double
+          description: Numeric dose amount administered.
+        dose_amount_unit:
+          type: string
+          enum:
+            - mL
+            - mg
+            - IU
+            - drops
+            - ""
+          description: "Unit for the dose amount: mL, mg, IU, drops."
+        dose_sequence:
+          type: integer
+          format: int32
+          description: Dose number in the current vaccination course (1-indexed).
+        dose_sequence_total:
+          type: integer
+          format: int32
+          description: Total doses planned for the current vaccination course.
+        vaccination_date:
+          type: string
+          format: date
+          description: Date the vaccination was administered.
+        vaccination_time:
+          type: string
+          format: time
+          description: Time of day the vaccination was administered.
+        administered_by_clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician who administered this dose.
+        administering_clinician_signature_data_url:
+          type: string
+          description: Handwritten signature of the administering clinician captured as a data URL (PNG). Stamps are not acceptable per IHR Annex 6.
+        administering_clinician_professional_status:
+          type: string
+          maxLength: 50
+          description: Professional status of the administering clinician as printed on the certificate.
+        validity_starts_on:
+          type: string
+          format: date
+          description: "Date from which the entry is valid (for yellow fever: vaccination_date + 10 days)."
+        validity_ends_on:
+          type: string
+          format: date
+          description: "Date on which the entry expires. May be left NULL when validity_is_lifetime is \"yes\"."
+        validity_is_lifetime:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the entry is valid for the lifetime of the vaccinee. Set to \"yes\" for yellow fever per the 2016 IHR amendment."
+        centre_id:
+          type: string
+          format: uuid
+          description: Foreign key to the administering centre for this entry (may differ from the parent certificate centre for travellers vaccinated at multiple centres).
+        centre_stamp_image_data_url:
+          type: string
+          description: Image of the centre's uniform stamp captured on this entry.
+        centre_stamp_applied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the centre's uniform stamp has been applied to this entry.
+        adverse_event:
+          type: string
+          enum:
+            - none
+            - local
+            - systemic
+            - anaphylaxis
+            - other
+            - ""
+          description: "Recorded adverse event following immunisation: none, local, systemic, anaphylaxis, or other."
+        adverse_event_notes:
+          type: string
+          description: Free-text notes describing the adverse event.
+        entry_valid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Computed validity flag for this individual entry.
+        entry_notes:
+          type: string
+          description: Free-text notes for this entry.
+      required:
+        - created_at
+        - updated_at
+        - international_certificate_of_vaccination_or_prophylaxis_id
+        - entry_index
+        - disease
+        - disease_other_label
+        - disease_as_snomed_ct
+        - disease_as_icd_11
+        - vaccine_or_prophylaxis_name
+        - vaccine_as_snomed_ct
+        - vaccine_as_atc
+        - manufacturer
+        - manufacturer_country_as_iso_3166_1_alpha_3
+        - batch_number
+        - route
+        - anatomical_site
+        - dose_amount_unit
+        - administering_clinician_signature_data_url
+        - administering_clinician_professional_status
+        - validity_is_lifetime
+        - centre_stamp_image_data_url
+        - centre_stamp_applied
+        - adverse_event
+        - adverse_event_notes
+        - entry_valid
+        - entry_notes
+      description: One vaccination or prophylaxis entry on an International Certificate of Vaccination or Prophylaxis. Multiple entries may appear on a single certificate for different diseases or booster doses.

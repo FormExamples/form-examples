@@ -1,0 +1,213 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_vital_signs
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardVitalSigns
+  version: 1.0.0
+  description: 1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.
+paths:
+  /casualty-card-vital-signses:
+    get:
+      summary: List CasualtyCardVitalSigns records
+      operationId: listCasualtyCardVitalSigns
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardVitalSigns records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardVitalSigns"
+    post:
+      summary: Create a new CasualtyCardVitalSigns
+      operationId: createCasualtyCardVitalSigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardVitalSigns"
+      responses:
+        "201":
+          description: The newly created CasualtyCardVitalSigns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardVitalSigns"
+        "400":
+          description: Validation error
+  /casualty-card-vital-signses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardVitalSigns by id
+      operationId: getCasualtyCardVitalSigns
+      responses:
+        "200":
+          description: The requested CasualtyCardVitalSigns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardVitalSigns"
+        "404":
+          description: CasualtyCardVitalSigns not found
+    patch:
+      summary: Update an existing CasualtyCardVitalSigns
+      operationId: updateCasualtyCardVitalSigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardVitalSigns"
+      responses:
+        "200":
+          description: The updated CasualtyCardVitalSigns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardVitalSigns"
+        "404":
+          description: CasualtyCardVitalSigns not found
+    delete:
+      summary: Soft-delete a CasualtyCardVitalSigns
+      operationId: deleteCasualtyCardVitalSigns
+      responses:
+        "204":
+          description: CasualtyCardVitalSigns deleted
+        "404":
+          description: CasualtyCardVitalSigns not found
+components:
+  schemas:
+    CasualtyCardVitalSigns:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        heart_rate:
+          type: integer
+          format: int32
+          description: Heart rate in beats per minute. NULL if not recorded.
+        systolic_bp:
+          type: integer
+          format: int32
+          description: Systolic blood pressure in mmHg. NULL if not recorded.
+        diastolic_bp:
+          type: integer
+          format: int32
+          description: Diastolic blood pressure in mmHg. NULL if not recorded.
+        respiratory_rate:
+          type: integer
+          format: int32
+          description: Respiratory rate in breaths per minute. NULL if not recorded.
+        oxygen_saturation:
+          type: integer
+          format: int32
+          description: Peripheral oxygen saturation (SpO2) as a percentage. NULL if not recorded.
+        supplemental_oxygen:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether patient is on supplemental oxygen: yes, no, or empty string if unanswered."
+        oxygen_flow_rate:
+          type: string
+          description: Oxygen flow rate (e.g. 2L/min, 15L NRB).
+        temperature:
+          type: number
+          format: double
+          description: Core temperature in degrees Celsius. NULL if not recorded.
+        blood_glucose:
+          type: number
+          format: double
+          description: Blood glucose in mmol/L. NULL if not recorded.
+        consciousness_level:
+          type: string
+          enum:
+            - alert
+            - verbal
+            - pain
+            - unresponsive
+            - ""
+          description: "AVPU consciousness level: alert, verbal, pain, unresponsive, or empty string if unanswered."
+        pupil_left_size:
+          type: integer
+          format: int32
+          description: Left pupil size in mm (1-9). NULL if not recorded.
+        pupil_left_reactive:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the left pupil is reactive to light: yes, no, or empty string if unanswered."
+        pupil_right_size:
+          type: integer
+          format: int32
+          description: Right pupil size in mm (1-9). NULL if not recorded.
+        pupil_right_reactive:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the right pupil is reactive to light: yes, no, or empty string if unanswered."
+        capillary_refill_time:
+          type: string
+          description: Capillary refill time (e.g. less than 2 seconds, 3 seconds).
+        weight:
+          type: number
+          format: double
+          description: Patient weight in kilograms. NULL if not recorded.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - supplemental_oxygen
+        - oxygen_flow_rate
+        - consciousness_level
+        - pupil_left_reactive
+        - pupil_right_reactive
+        - capillary_refill_time
+      description: 1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.

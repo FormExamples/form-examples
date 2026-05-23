@@ -1,0 +1,161 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: signer
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — Signer
+  version: 1.0.0
+  description: Identification of the individual who signs the HIPAA authorization. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
+paths:
+  /signers:
+    get:
+      summary: List Signer records
+      operationId: listSigner
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Signer records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Signer"
+    post:
+      summary: Create a new Signer
+      operationId: createSigner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Signer"
+      responses:
+        "201":
+          description: The newly created Signer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Signer"
+        "400":
+          description: Validation error
+  /signers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Signer by id
+      operationId: getSigner
+      responses:
+        "200":
+          description: The requested Signer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Signer"
+        "404":
+          description: Signer not found
+    patch:
+      summary: Update an existing Signer
+      operationId: updateSigner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Signer"
+      responses:
+        "200":
+          description: The updated Signer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Signer"
+        "404":
+          description: Signer not found
+    delete:
+      summary: Soft-delete a Signer
+      operationId: deleteSigner
+      responses:
+        "204":
+          description: Signer deleted
+        "404":
+          description: Signer not found
+components:
+  schemas:
+    Signer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        relationship:
+          type: string
+          enum:
+            - ""
+            - self
+            - parent-of-minor
+            - guardian
+            - conservator
+            - power-of-attorney
+            - executor
+            - other-authorized-representative
+          description: "Signer relationship to patient: self, parent-of-minor, guardian, conservator, power-of-attorney, executor, other-authorized-representative, or empty if unanswered."
+        representative_name:
+          type: string
+          maxLength: 255
+          description: Print name of the authorized representative (empty when relationship is self).
+        representative_authority_description:
+          type: string
+          description: Free-text description of the representative's authority to act. Required by § 164.508(c)(1)(vi)(B) when signed by a representative.
+        representative_authority_proof_attached:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether proof of legal authority is attached (e.g. POA, guardianship order): yes, no, or empty."
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - relationship
+        - representative_name
+        - representative_authority_description
+        - representative_authority_proof_attached
+      description: Identification of the individual who signs the HIPAA authorization. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).

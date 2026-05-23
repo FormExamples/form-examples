@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: arc42_documentation_grade_flag
+openapi: 3.1.0
+info:
+  title: Arc42 — Arc42DocumentationGradeFlag
+  version: 1.0.0
+  description: Additional flag fired during arc42 documentation grading, independent of the maturity band.
+paths:
+  /arc42-documentation-grade-flags:
+    get:
+      summary: List Arc42DocumentationGradeFlag records
+      operationId: listArc42DocumentationGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Arc42DocumentationGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+    post:
+      summary: Create a new Arc42DocumentationGradeFlag
+      operationId: createArc42DocumentationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+      responses:
+        "201":
+          description: The newly created Arc42DocumentationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+        "400":
+          description: Validation error
+  /arc42-documentation-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Arc42DocumentationGradeFlag by id
+      operationId: getArc42DocumentationGradeFlag
+      responses:
+        "200":
+          description: The requested Arc42DocumentationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+        "404":
+          description: Arc42DocumentationGradeFlag not found
+    patch:
+      summary: Update an existing Arc42DocumentationGradeFlag
+      operationId: updateArc42DocumentationGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+      responses:
+        "200":
+          description: The updated Arc42DocumentationGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42DocumentationGradeFlag"
+        "404":
+          description: Arc42DocumentationGradeFlag not found
+    delete:
+      summary: Soft-delete a Arc42DocumentationGradeFlag
+      operationId: deleteArc42DocumentationGradeFlag
+      responses:
+        "204":
+          description: Arc42DocumentationGradeFlag deleted
+        "404":
+          description: Arc42DocumentationGradeFlag not found
+components:
+  schemas:
+    Arc42DocumentationGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_grade_id:
+          type: string
+          format: uuid
+          description: Parent grade record (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent grade record.
+        category:
+          type: string
+          description: Category of the flag (e.g. missing-stakeholders, insufficient-adrs, no-deployment-view).
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+            - ""
+          description: "Priority of the flag: high, medium, or low."
+        description:
+          type: string
+          description: Human-readable description of the architectural omission or concern flagged.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_grade_id
+        - ordinal
+        - category
+        - priority
+        - description
+      description: Additional flag fired during arc42 documentation grading, independent of the maturity band.

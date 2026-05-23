@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: issue_tracker_grade_rule
+openapi: 3.1.0
+info:
+  title: Issue Tracker — IssueTrackerGradeRule
+  version: 1.0.0
+  description: Audit trail of every scoring rule that fired for this issue, across the seven scoring instruments plus the composite grader.
+paths:
+  /issue-tracker-grade-rules:
+    get:
+      summary: List IssueTrackerGradeRule records
+      operationId: listIssueTrackerGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of IssueTrackerGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IssueTrackerGradeRule"
+    post:
+      summary: Create a new IssueTrackerGradeRule
+      operationId: createIssueTrackerGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGradeRule"
+      responses:
+        "201":
+          description: The newly created IssueTrackerGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeRule"
+        "400":
+          description: Validation error
+  /issue-tracker-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one IssueTrackerGradeRule by id
+      operationId: getIssueTrackerGradeRule
+      responses:
+        "200":
+          description: The requested IssueTrackerGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeRule"
+        "404":
+          description: IssueTrackerGradeRule not found
+    patch:
+      summary: Update an existing IssueTrackerGradeRule
+      operationId: updateIssueTrackerGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGradeRule"
+      responses:
+        "200":
+          description: The updated IssueTrackerGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeRule"
+        "404":
+          description: IssueTrackerGradeRule not found
+    delete:
+      summary: Soft-delete a IssueTrackerGradeRule
+      operationId: deleteIssueTrackerGradeRule
+      responses:
+        "204":
+          description: IssueTrackerGradeRule deleted
+        "404":
+          description: IssueTrackerGradeRule not found
+components:
+  schemas:
+    IssueTrackerGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        issue_tracker_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-SEVERITY-5, R-HARM-FATAL).
+        instrument:
+          type: string
+          enum:
+            - priority
+            - severity
+            - magnitude
+            - harm
+            - failure
+            - moscow
+            - frequency
+            - composite
+            - ""
+          description: "Scoring instrument the rule belongs to: priority, severity, magnitude, harm, failure, moscow, frequency, composite."
+        grade:
+          type: string
+          maxLength: 10
+          description: Grade contributed by this rule (e.g. 5 for severity, A for failure-condition, critical for composite).
+        category:
+          type: string
+          maxLength: 50
+          description: Category for grouping rules in the report (e.g. user-facing, data-integrity, regulatory).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - issue_tracker_grade_id
+        - rule_id
+        - instrument
+        - grade
+        - category
+        - description
+      description: Audit trail of every scoring rule that fired for this issue, across the seven scoring instruments plus the composite grader.

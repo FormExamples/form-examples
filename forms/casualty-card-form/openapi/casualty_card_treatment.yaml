@@ -1,0 +1,148 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_treatment
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardTreatment
+  version: 1.0.0
+  description: 1:1 with casualty_card. Oxygen therapy and tetanus prophylaxis. Medications, fluids, and procedures are separate tables.
+paths:
+  /casualty-card-treatments:
+    get:
+      summary: List CasualtyCardTreatment records
+      operationId: listCasualtyCardTreatment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardTreatment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardTreatment"
+    post:
+      summary: Create a new CasualtyCardTreatment
+      operationId: createCasualtyCardTreatment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardTreatment"
+      responses:
+        "201":
+          description: The newly created CasualtyCardTreatment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardTreatment"
+        "400":
+          description: Validation error
+  /casualty-card-treatments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardTreatment by id
+      operationId: getCasualtyCardTreatment
+      responses:
+        "200":
+          description: The requested CasualtyCardTreatment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardTreatment"
+        "404":
+          description: CasualtyCardTreatment not found
+    patch:
+      summary: Update an existing CasualtyCardTreatment
+      operationId: updateCasualtyCardTreatment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardTreatment"
+      responses:
+        "200":
+          description: The updated CasualtyCardTreatment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardTreatment"
+        "404":
+          description: CasualtyCardTreatment not found
+    delete:
+      summary: Soft-delete a CasualtyCardTreatment
+      operationId: deleteCasualtyCardTreatment
+      responses:
+        "204":
+          description: CasualtyCardTreatment deleted
+        "404":
+          description: CasualtyCardTreatment not found
+components:
+  schemas:
+    CasualtyCardTreatment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        oxygen_therapy_device:
+          type: string
+          description: Oxygen delivery device (e.g. nasal cannula, simple face mask, non-rebreather mask).
+        oxygen_therapy_flow_rate:
+          type: string
+          description: Oxygen flow rate (e.g. 2L/min, 15L/min).
+        tetanus_prophylaxis:
+          type: string
+          enum:
+            - given
+            - not-indicated
+            - status-checked
+            - ""
+          description: "Tetanus prophylaxis status: given, not-indicated, status-checked, or empty string if unanswered."
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - oxygen_therapy_device
+        - oxygen_therapy_flow_rate
+        - tetanus_prophylaxis
+      description: 1:1 with casualty_card. Oxygen therapy and tetanus prophylaxis. Medications, fluids, and procedures are separate tables.

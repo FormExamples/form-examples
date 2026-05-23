@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: organization
+openapi: 3.1.0
+info:
+  title: Agile Consulting Scorecard For Hiring Help — Organization
+  version: 1.0.0
+  description: Organization being assessed for agile-consulting readiness. The subject of the scorecard.
+paths:
+  /organizations:
+    get:
+      summary: List Organization records
+      operationId: listOrganization
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Organization records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organization"
+    post:
+      summary: Create a new Organization
+      operationId: createOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organization"
+      responses:
+        "201":
+          description: The newly created Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "400":
+          description: Validation error
+  /organizations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Organization by id
+      operationId: getOrganization
+      responses:
+        "200":
+          description: The requested Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "404":
+          description: Organization not found
+    patch:
+      summary: Update an existing Organization
+      operationId: updateOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organization"
+      responses:
+        "200":
+          description: The updated Organization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organization"
+        "404":
+          description: Organization not found
+    delete:
+      summary: Soft-delete a Organization
+      operationId: deleteOrganization
+      responses:
+        "204":
+          description: Organization deleted
+        "404":
+          description: Organization not found
+components:
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Trading name of the organization.
+        legal_name:
+          type: string
+          maxLength: 255
+          description: Registered legal name (may differ from trading name).
+        sector:
+          type: string
+          enum:
+            - healthcare
+            - pharmaceuticals
+            - medtech
+            - public-sector
+            - finance
+            - insurance
+            - retail
+            - manufacturing
+            - logistics
+            - energy
+            - utilities
+            - media
+            - telecommunications
+            - technology
+            - education
+            - charity
+            - agriculture
+            - professional-services
+            - other
+            - ""
+          description: "Sector: healthcare, pharmaceuticals, medtech, public-sector, finance, insurance, retail, manufacturing, etc."
+        size_band:
+          type: string
+          enum:
+            - micro
+            - small
+            - medium
+            - large
+            - enterprise
+            - ""
+          description: "Size band: micro (<10), small (10-49), medium (50-249), large (250-999), enterprise (1000+)."
+        headcount:
+          type: integer
+          format: int32
+          description: Approximate number of staff (full-time-equivalent).
+        country:
+          type: string
+          maxLength: 2
+          description: ISO 3166-1 alpha-2 country code (e.g. GB, US, DE).
+        region:
+          type: string
+          maxLength: 255
+          description: Region, state, or sub-national area within the country.
+        website:
+          type: string
+          description: Public website URL.
+        notes:
+          type: string
+          description: Free-text notes about the organization.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - legal_name
+        - sector
+        - size_band
+        - country
+        - region
+        - website
+        - notes
+      description: Organization being assessed for agile-consulting readiness. The subject of the scorecard.

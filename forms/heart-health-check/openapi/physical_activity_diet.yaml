@@ -1,0 +1,167 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: physical_activity_diet
+openapi: 3.1.0
+info:
+  title: Heart Health Check — PhysicalActivityDiet
+  version: 1.0.0
+  description: Physical activity and dietary habit data.
+paths:
+  /physical-activity-diets:
+    get:
+      summary: List PhysicalActivityDiet records
+      operationId: listPhysicalActivityDiet
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PhysicalActivityDiet records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PhysicalActivityDiet"
+    post:
+      summary: Create a new PhysicalActivityDiet
+      operationId: createPhysicalActivityDiet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhysicalActivityDiet"
+      responses:
+        "201":
+          description: The newly created PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhysicalActivityDiet"
+        "400":
+          description: Validation error
+  /physical-activity-diets/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PhysicalActivityDiet by id
+      operationId: getPhysicalActivityDiet
+      responses:
+        "200":
+          description: The requested PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhysicalActivityDiet"
+        "404":
+          description: PhysicalActivityDiet not found
+    patch:
+      summary: Update an existing PhysicalActivityDiet
+      operationId: updatePhysicalActivityDiet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhysicalActivityDiet"
+      responses:
+        "200":
+          description: The updated PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhysicalActivityDiet"
+        "404":
+          description: PhysicalActivityDiet not found
+    delete:
+      summary: Soft-delete a PhysicalActivityDiet
+      operationId: deletePhysicalActivityDiet
+      responses:
+        "204":
+          description: PhysicalActivityDiet deleted
+        "404":
+          description: PhysicalActivityDiet not found
+components:
+  schemas:
+    PhysicalActivityDiet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        physical_activity_minutes_per_week:
+          type: integer
+          format: int32
+          description: Total minutes of physical activity per week.
+        activity_intensity:
+          type: string
+          enum:
+            - light
+            - moderate
+            - vigorous
+            - ""
+          description: "Typical exercise intensity: light, moderate, vigorous, or empty."
+        fruit_veg_portions_per_day:
+          type: integer
+          format: int32
+          description: Number of fruit and vegetable portions consumed per day.
+        diet_quality:
+          type: string
+          enum:
+            - poor
+            - fair
+            - good
+            - excellent
+            - ""
+          description: Self-reported overall diet quality.
+        salt_intake:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: Self-reported salt intake level.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - activity_intensity
+        - diet_quality
+        - salt_intake
+      description: Physical activity and dietary habit data.

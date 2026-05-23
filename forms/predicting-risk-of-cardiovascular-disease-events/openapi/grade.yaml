@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grade
+openapi: 3.1.0
+info:
+  title: Predicting Risk Of Cardiovascular Disease Events — Grade
+  version: 1.0.0
+  description: 1:1 with assessment. Stores computed PREVENT risk category, 10-year and 30-year risk percentages, and optional clinician override.
+paths:
+  /grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Grade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Grade"
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "201":
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "400":
+          description: Validation error
+  /grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        "200":
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Grade"
+      responses:
+        "200":
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Grade"
+        "404":
+          description: Grade not found
+    delete:
+      summary: Soft-delete a Grade
+      operationId: deleteGrade
+      responses:
+        "204":
+          description: Grade deleted
+        "404":
+          description: Grade not found
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: FK to assessment (UNIQUE = 1:1 relationship).
+        risk_category:
+          type: string
+          enum:
+            - draft
+            - low
+            - borderline
+            - intermediate
+            - high
+          description: "Computed risk category: draft (insufficient data), low (<5%), borderline (5-7.4%), intermediate (7.5-19.9%), high (>=20%)."
+        ten_year_risk_percent:
+          type: number
+          format: double
+          description: Estimated 10-year CVD risk percentage (0.0-95.0).
+        thirty_year_risk_percent:
+          type: number
+          format: double
+          description: Estimated 30-year CVD risk percentage (0.0-95.0). Calculated as 10-year risk * 2.5, capped at 95%.
+        risk_category_override:
+          type: string
+          enum:
+            - low
+            - borderline
+            - intermediate
+            - high
+          description: Clinician-assigned risk category override. NULL means no override.
+        override_reason:
+          type: string
+          description: Free-text justification for overriding the computed risk category. Required when override is set.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading engine produced this result.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - risk_category
+        - ten_year_risk_percent
+        - thirty_year_risk_percent
+        - override_reason
+        - graded_at
+      description: 1:1 with assessment. Stores computed PREVENT risk category, 10-year and 30-year risk percentages, and optional clinician override.

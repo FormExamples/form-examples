@@ -1,0 +1,160 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: occupational_vaccinations
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — OccupationalVaccinations
+  version: 1.0.0
+  description: Occupational vaccination status including healthcare worker screening. One-to-one child of assessment.
+paths:
+  /occupational-vaccinationses:
+    get:
+      summary: List OccupationalVaccinations records
+      operationId: listOccupationalVaccinations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OccupationalVaccinations records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OccupationalVaccinations"
+    post:
+      summary: Create a new OccupationalVaccinations
+      operationId: createOccupationalVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OccupationalVaccinations"
+      responses:
+        "201":
+          description: The newly created OccupationalVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationalVaccinations"
+        "400":
+          description: Validation error
+  /occupational-vaccinationses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OccupationalVaccinations by id
+      operationId: getOccupationalVaccinations
+      responses:
+        "200":
+          description: The requested OccupationalVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationalVaccinations"
+        "404":
+          description: OccupationalVaccinations not found
+    patch:
+      summary: Update an existing OccupationalVaccinations
+      operationId: updateOccupationalVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OccupationalVaccinations"
+      responses:
+        "200":
+          description: The updated OccupationalVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationalVaccinations"
+        "404":
+          description: OccupationalVaccinations not found
+    delete:
+      summary: Soft-delete a OccupationalVaccinations
+      operationId: deleteOccupationalVaccinations
+      responses:
+        "204":
+          description: OccupationalVaccinations deleted
+        "404":
+          description: OccupationalVaccinations not found
+components:
+  schemas:
+    OccupationalVaccinations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        occupation:
+          type: string
+          maxLength: 255
+          description: Occupation.
+        healthcare_worker:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Healthcare worker. One of: yes, no."
+        hepatitis_b_occupational:
+          type: integer
+          format: int32
+          description: Hepatitis b occupational.
+        influenza_occupational:
+          type: integer
+          format: int32
+          description: Influenza occupational.
+        varicella:
+          type: integer
+          format: int32
+          description: Varicella.
+        bcg_tuberculosis:
+          type: integer
+          format: int32
+          description: Bcg tuberculosis.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - occupation
+        - healthcare_worker
+      description: Occupational vaccination status including healthcare worker screening. One-to-one child of assessment.

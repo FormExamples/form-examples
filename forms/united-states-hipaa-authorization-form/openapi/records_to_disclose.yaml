@@ -1,0 +1,251 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: records_to_disclose
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — RecordsToDisclose
+  version: 1.0.0
+  description: Specific and meaningful description of the PHI to be disclosed. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(i).
+paths:
+  /records-to-discloses:
+    get:
+      summary: List RecordsToDisclose records
+      operationId: listRecordsToDisclose
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RecordsToDisclose records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecordsToDisclose"
+    post:
+      summary: Create a new RecordsToDisclose
+      operationId: createRecordsToDisclose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordsToDisclose"
+      responses:
+        "201":
+          description: The newly created RecordsToDisclose
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToDisclose"
+        "400":
+          description: Validation error
+  /records-to-discloses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RecordsToDisclose by id
+      operationId: getRecordsToDisclose
+      responses:
+        "200":
+          description: The requested RecordsToDisclose
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToDisclose"
+        "404":
+          description: RecordsToDisclose not found
+    patch:
+      summary: Update an existing RecordsToDisclose
+      operationId: updateRecordsToDisclose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordsToDisclose"
+      responses:
+        "200":
+          description: The updated RecordsToDisclose
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsToDisclose"
+        "404":
+          description: RecordsToDisclose not found
+    delete:
+      summary: Soft-delete a RecordsToDisclose
+      operationId: deleteRecordsToDisclose
+      responses:
+        "204":
+          description: RecordsToDisclose deleted
+        "404":
+          description: RecordsToDisclose not found
+components:
+  schemas:
+    RecordsToDisclose:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        include_medical_health:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include general medical / health records: yes, no, or empty."
+        medical_health_initials:
+          type: string
+          maxLength: 8
+          description: Patient initials authorising release of general medical / health records.
+        include_mental_health:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include mental-health records: yes, no, or empty."
+        mental_health_initials:
+          type: string
+          maxLength: 8
+          description: Patient initials authorising release of mental-health records.
+        include_substance_use:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include drug or alcohol treatment / referral records: yes, no, or empty."
+        substance_use_initials:
+          type: string
+          maxLength: 8
+          description: Patient initials authorising release of substance-use records.
+        part2_redisclosure_notice_included:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the 42 CFR Part 2 prohibition-on-redisclosure notice is included with the disclosure: yes, no, or empty."
+        include_hiv_aids:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include HIV / AIDS test or treatment records: yes, no, or empty."
+        hiv_aids_initials:
+          type: string
+          maxLength: 8
+          description: Patient initials authorising release of HIV / AIDS records.
+        hiv_aids_state_consent_included:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the state-specific HIV / AIDS consent language is included: yes, no, or empty."
+        include_psychotherapy_notes:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include psychotherapy notes: yes, no, or empty. § 164.508(a)(2) requires these to be authorised on a separate form."
+        include_genetic_information:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include genetic information: yes, no, or empty. Subject to GINA downstream-use restrictions."
+        include_reproductive_health:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Include reproductive-health-care records: yes, no, or empty. Subject to the HHS 2024 reproductive-health-privacy rule."
+        section_7332_notice_included:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the 38 U.S.C. § 7332 notice is included (for VA records): yes, no, or empty."
+        date_range_specified:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the patient has restricted disclosure to a specific date range: yes, no, or empty."
+        date_from:
+          type: string
+          format: date
+          description: Start date of the disclosed records (NULL if no date range).
+        date_to:
+          type: string
+          format: date
+          description: End date of the disclosed records (NULL if no date range). Must be >= date_from when both are set.
+        other_description:
+          type: string
+          description: Free-text description of any other PHI to be disclosed. Required to be specific enough to satisfy § 164.508(c)(1)(i).
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - include_medical_health
+        - medical_health_initials
+        - include_mental_health
+        - mental_health_initials
+        - include_substance_use
+        - substance_use_initials
+        - part2_redisclosure_notice_included
+        - include_hiv_aids
+        - hiv_aids_initials
+        - hiv_aids_state_consent_included
+        - include_psychotherapy_notes
+        - include_genetic_information
+        - include_reproductive_health
+        - section_7332_notice_included
+        - date_range_specified
+        - other_description
+      description: Specific and meaningful description of the PHI to be disclosed. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(i).

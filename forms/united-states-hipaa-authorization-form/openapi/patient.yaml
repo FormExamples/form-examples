@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — Patient
+  version: 1.0.0
+  description: Patient identification fields for the HIPAA authorization form.
+paths:
+  /patients:
+    get:
+      summary: List Patient records
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Create a new Patient
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "201":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: Validation error
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    patch:
+      summary: Update an existing Patient
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+    delete:
+      summary: Soft-delete a Patient
+      operationId: deletePatient
+      responses:
+        "204":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted (soft-delete).
+        name:
+          type: string
+          maxLength: 255
+          description: Patient print name, as it appears on the signed authorization.
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth. Required by 45 CFR § 164.508(c)(1)(vi) for identity-binding the signature.
+        social_security_number:
+          type: string
+          maxLength: 11
+          description: "Social Security Number, optional. State templates such as TN HS-2557 mark this as \"not required\". Format NNN-NN-NNNN."
+        street_address:
+          type: string
+          description: Street address line.
+        city:
+          type: string
+          maxLength: 120
+          description: City.
+        state:
+          type: string
+          maxLength: 2
+          description: US state two-letter abbreviation (e.g. TN, PA, CA).
+        zip_code:
+          type: string
+          maxLength: 10
+          description: US ZIP code (5 or 9 digit).
+        phone:
+          type: string
+          maxLength: 30
+          description: Phone number including area code.
+        email:
+          type: string
+          maxLength: 255
+          description: Email address, optional.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - social_security_number
+        - street_address
+        - city
+        - state
+        - zip_code
+        - phone
+        - email
+      description: Patient identification fields for the HIPAA authorization form.

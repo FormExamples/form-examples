@@ -1,0 +1,177 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: clinician
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — Clinician
+  version: 1.0.0
+  description: Clinician
+paths:
+  /clinicians:
+    get:
+      summary: List Clinician records
+      operationId: listClinician
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Clinician records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Clinician"
+    post:
+      summary: Create a new Clinician
+      operationId: createClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "201":
+          description: The newly created Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "400":
+          description: Validation error
+  /clinicians/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Clinician by id
+      operationId: getClinician
+      responses:
+        "200":
+          description: The requested Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    patch:
+      summary: Update an existing Clinician
+      operationId: updateClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "200":
+          description: The updated Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    delete:
+      summary: Soft-delete a Clinician
+      operationId: deleteClinician
+      responses:
+        "204":
+          description: Clinician deleted
+        "404":
+          description: Clinician not found
+components:
+  schemas:
+    Clinician:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: string
+          description: Postal code, such as for validating the postal address.
+        role:
+          type: string
+          enum:
+            - anaesthetist
+            - surgeon
+            - preop-nurse
+            - perioperative-physician
+            - geriatrician
+            - pharmacist
+            - other
+            - ""
+          description: Clinician role.
+        registration_body:
+          type: string
+          enum:
+            - GMC
+            - NMC
+            - HCPC
+            - GPhC
+            - other
+            - ""
+          description: Clinician registration body.
+        registration_number:
+          type: string
+          description: Clinician registration number.
+        united_kingdom_nhs_number:
+          type: string
+          maxLength: 12
+          description: United Kingdom NHS number, unique per person.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - registration_body
+        - registration_number
+      description: Clinician

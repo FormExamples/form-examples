@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: hipaa_authorization
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — HipaaAuthorization
+  version: 1.0.0
+  description: Parent entity for a single HIPAA authorization document. Every other section table is a one-to-one or one-to-many child.
+paths:
+  /hipaa-authorizations:
+    get:
+      summary: List HipaaAuthorization records
+      operationId: listHipaaAuthorization
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HipaaAuthorization records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HipaaAuthorization"
+    post:
+      summary: Create a new HipaaAuthorization
+      operationId: createHipaaAuthorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipaaAuthorization"
+      responses:
+        "201":
+          description: The newly created HipaaAuthorization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipaaAuthorization"
+        "400":
+          description: Validation error
+  /hipaa-authorizations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HipaaAuthorization by id
+      operationId: getHipaaAuthorization
+      responses:
+        "200":
+          description: The requested HipaaAuthorization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipaaAuthorization"
+        "404":
+          description: HipaaAuthorization not found
+    patch:
+      summary: Update an existing HipaaAuthorization
+      operationId: updateHipaaAuthorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipaaAuthorization"
+      responses:
+        "200":
+          description: The updated HipaaAuthorization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipaaAuthorization"
+        "404":
+          description: HipaaAuthorization not found
+    delete:
+      summary: Soft-delete a HipaaAuthorization
+      operationId: deleteHipaaAuthorization
+      responses:
+        "204":
+          description: HipaaAuthorization deleted
+        "404":
+          description: HipaaAuthorization not found
+components:
+  schemas:
+    HipaaAuthorization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who is authorising the disclosure.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - valid
+            - invalid
+            - expired
+            - revoked
+          description: "Lifecycle status: draft, submitted, valid, invalid, expired, or revoked."
+        state_template:
+          type: string
+          enum:
+            - ""
+            - tn-hs-2557
+            - pa-hs-1549
+            - hhs-ocr-sample
+            - custom
+          description: Source state template the authorization was generated from. Empty when not derived from a known template.
+        revoked_at:
+          type: string
+          format: date-time
+          description: Timestamp when the patient revoked the authorization (NULL if not revoked).
+        revocation_method:
+          type: string
+          enum:
+            - ""
+            - written
+            - electronic
+            - in-person
+          description: "Method of revocation: written, electronic, in-person, or empty if not revoked."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - state_template
+        - revocation_method
+      description: Parent entity for a single HIPAA authorization document. Every other section table is a one-to-one or one-to-many child.

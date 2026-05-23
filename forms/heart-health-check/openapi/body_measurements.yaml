@@ -1,0 +1,147 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: body_measurements
+openapi: 3.1.0
+info:
+  title: Heart Health Check — BodyMeasurements
+  version: 1.0.0
+  description: Body measurements for cardiovascular risk assessment.
+paths:
+  /body-measurementses:
+    get:
+      summary: List BodyMeasurements records
+      operationId: listBodyMeasurements
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BodyMeasurements records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BodyMeasurements"
+    post:
+      summary: Create a new BodyMeasurements
+      operationId: createBodyMeasurements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMeasurements"
+      responses:
+        "201":
+          description: The newly created BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMeasurements"
+        "400":
+          description: Validation error
+  /body-measurementses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BodyMeasurements by id
+      operationId: getBodyMeasurements
+      responses:
+        "200":
+          description: The requested BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMeasurements"
+        "404":
+          description: BodyMeasurements not found
+    patch:
+      summary: Update an existing BodyMeasurements
+      operationId: updateBodyMeasurements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BodyMeasurements"
+      responses:
+        "200":
+          description: The updated BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BodyMeasurements"
+        "404":
+          description: BodyMeasurements not found
+    delete:
+      summary: Soft-delete a BodyMeasurements
+      operationId: deleteBodyMeasurements
+      responses:
+        "204":
+          description: BodyMeasurements deleted
+        "404":
+          description: BodyMeasurements not found
+components:
+  schemas:
+    BodyMeasurements:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        height_cm:
+          type: number
+          format: double
+          description: Patient height in centimetres.
+        weight_kg:
+          type: number
+          format: double
+          description: Patient weight in kilograms.
+        bmi:
+          type: number
+          format: double
+          description: Body mass index (can be overridden or calculated from height/weight).
+        waist_circumference_cm:
+          type: number
+          format: double
+          description: Waist circumference in centimetres.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+      description: Body measurements for cardiovascular risk assessment.

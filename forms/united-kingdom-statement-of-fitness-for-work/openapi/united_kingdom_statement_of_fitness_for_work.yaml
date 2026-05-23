@@ -1,0 +1,358 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: united_kingdom_statement_of_fitness_for_work
+openapi: 3.1.0
+info:
+  title: United Kingdom Statement Of Fitness For Work — UnitedKingdomStatementOfFitnessForWork
+  version: 1.0.0
+  description: UK Statement of Fitness for Work (Med 3 / fit note). A single assessment record covering diagnosis, fitness category, adaptations, period, and follow-up.
+paths:
+  /united-kingdom-statement-of-fitness-for-works:
+    get:
+      summary: List UnitedKingdomStatementOfFitnessForWork records
+      operationId: listUnitedKingdomStatementOfFitnessForWork
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UnitedKingdomStatementOfFitnessForWork records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+    post:
+      summary: Create a new UnitedKingdomStatementOfFitnessForWork
+      operationId: createUnitedKingdomStatementOfFitnessForWork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+      responses:
+        "201":
+          description: The newly created UnitedKingdomStatementOfFitnessForWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+        "400":
+          description: Validation error
+  /united-kingdom-statement-of-fitness-for-works/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomStatementOfFitnessForWork by id
+      operationId: getUnitedKingdomStatementOfFitnessForWork
+      responses:
+        "200":
+          description: The requested UnitedKingdomStatementOfFitnessForWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWork not found
+    patch:
+      summary: Update an existing UnitedKingdomStatementOfFitnessForWork
+      operationId: updateUnitedKingdomStatementOfFitnessForWork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+      responses:
+        "200":
+          description: The updated UnitedKingdomStatementOfFitnessForWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomStatementOfFitnessForWork"
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWork not found
+    delete:
+      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWork
+      operationId: deleteUnitedKingdomStatementOfFitnessForWork
+      responses:
+        "204":
+          description: UnitedKingdomStatementOfFitnessForWork deleted
+        "404":
+          description: UnitedKingdomStatementOfFitnessForWork not found
+components:
+  schemas:
+    UnitedKingdomStatementOfFitnessForWork:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who is the subject of the fit note.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the issuing clinician.
+        medical_practice_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medical practice owning the fit note.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - issued
+            - duplicate
+            - cancelled
+          description: "Lifecycle status: draft, submitted, issued, duplicate, or cancelled."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the assessment was performed (Step 3).
+        assessment_method:
+          type: string
+          enum:
+            - in_person
+            - video_call
+            - telephone
+            - written_report_from_other_hcp
+            - ""
+          description: "Assessment modality (DWP policy 3.1): in_person, video_call, telephone, or written_report_from_other_hcp."
+        general_fitness_considered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the clinician considered fitness for work in general rather than just the current job (DWP policy 5.1).
+        diagnosis_text:
+          type: string
+          description: Free-text description of the condition causing the absence (Step 4).
+        diagnosis_snomed_code:
+          type: string
+          maxLength: 20
+          description: Optional SNOMED CT concept identifier from the NHS Digital fit-note refset.
+        diagnosis_snomed_display:
+          type: string
+          maxLength: 255
+          description: Optional preferred display name for the SNOMED CT concept.
+        diagnosis_category:
+          type: string
+          enum:
+            - mental_health
+            - musculoskeletal
+            - respiratory
+            - cardiovascular
+            - neoplasm
+            - infection
+            - injury
+            - pregnancy
+            - neurological
+            - gastrointestinal
+            - endocrine
+            - other
+            - ""
+          description: Coarse diagnosis category used by the grading engine.
+        condition_first_recorded_date:
+          type: string
+          format: date
+          description: "Date the condition was first recorded; drives the \"first 6 months\" rule (DWP policy 3.3)."
+        is_automatic_disability:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the condition is automatically classed as a disability (HIV / cancer / MS — Equality Act 2010 s.6).
+        is_non_medical:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Clinician flag that the underlying problem is non-medical and not certifiable (DWP policy 3.6).
+        fitness_for_work:
+          type: string
+          enum:
+            - not_fit
+            - may_be_fit
+            - ""
+          description: "Fitness category (Step 5): not_fit or may_be_fit. The form cannot say \"fit for work\" (DWP policy 3.2)."
+        adaptation_phased_return:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Adaptation tick box (Step 6): a phased return to work."
+        adaptation_altered_hours:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Adaptation tick box (Step 6): altered hours."
+        adaptation_amended_duties:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Adaptation tick box (Step 6): amended duties."
+        adaptation_workplace_adaptations:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Adaptation tick box (Step 6): workplace adaptations."
+        comments:
+          type: string
+          description: Free-text advice (Step 7) describing the functional impact of the condition (DWP policy 5.6).
+        period_type:
+          type: string
+          enum:
+            - duration
+            - from_to
+            - ""
+          description: "Period entry mode (Step 8): duration (e.g. 4 weeks) or from_to (e.g. 2026-05-18 to 2026-06-15)."
+        period_duration_value:
+          type: integer
+          format: int32
+          description: Numeric period duration value when period_type = duration.
+        period_duration_unit:
+          type: string
+          enum:
+            - days
+            - weeks
+            - months
+            - ""
+          description: "Period duration unit when period_type = duration: days, weeks, or months."
+        period_from:
+          type: string
+          format: date
+          description: Period start date when period_type = from_to.
+        period_to:
+          type: string
+          format: date
+          description: Period end date when period_type = from_to.
+        will_assess_again:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the clinician intends to reassess at the end of the period (Step 9).
+        planned_review_date:
+          type: string
+          format: date
+          description: Planned date for the follow-up assessment.
+        issued_at:
+          type: string
+          format: date-time
+          description: Timestamp when the fit note was issued to the patient.
+        issued_via:
+          type: string
+          enum:
+            - digital
+            - printed_computer_generated
+            - printed_handwritten
+            - ""
+          description: "Delivery channel: digital, printed_computer_generated, or printed_handwritten."
+        issue_setting:
+          type: string
+          enum:
+            - primary_care
+            - secondary_care_discharge
+            - occupational_health
+            - pharmacy
+            - community
+            - ""
+          description: Care setting in which the fit note was issued.
+        is_duplicate_of:
+          type: string
+          format: uuid
+          description: If this is a duplicate (DWP policy 3.7 — only if the original was lost), points to the original fit note.
+        safeguarding_concern:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the clinician flagged a safeguarding concern during the assessment.
+        safeguarding_notes:
+          type: string
+          description: Free-text notes describing the safeguarding concern (not printed on the fit note).
+        clinician_signature_svg:
+          type: string
+          description: Electronic signature captured as SVG path data, when issued_via = digital.
+        clinician_signed_at:
+          type: string
+          format: date-time
+          description: Timestamp the clinician applied the electronic signature.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - medical_practice_id
+        - status
+        - assessment_method
+        - general_fitness_considered
+        - diagnosis_text
+        - diagnosis_snomed_code
+        - diagnosis_snomed_display
+        - diagnosis_category
+        - is_automatic_disability
+        - is_non_medical
+        - fitness_for_work
+        - adaptation_phased_return
+        - adaptation_altered_hours
+        - adaptation_amended_duties
+        - adaptation_workplace_adaptations
+        - comments
+        - period_type
+        - period_duration_unit
+        - will_assess_again
+        - issued_via
+        - issue_setting
+        - safeguarding_concern
+        - safeguarding_notes
+        - clinician_signature_svg
+      description: UK Statement of Fitness for Work (Med 3 / fit note). A single assessment record covering diagnosis, fitness category, adaptations, period, and follow-up.

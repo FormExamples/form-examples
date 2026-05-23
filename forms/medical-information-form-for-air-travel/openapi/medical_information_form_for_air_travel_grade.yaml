@@ -1,0 +1,178 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_information_form_for_air_travel_grade
+openapi: 3.1.0
+info:
+  title: Medical Information Form For Air Travel — MedicalInformationFormForAirTravelGrade
+  version: 1.0.0
+  description: Computed and signed-off MEDIF result. Stores both the engine-computed fitness-to-fly band and the physician-final band with an override reason.
+paths:
+  /medical-information-form-for-air-travel-grades:
+    get:
+      summary: List MedicalInformationFormForAirTravelGrade records
+      operationId: listMedicalInformationFormForAirTravelGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalInformationFormForAirTravelGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+    post:
+      summary: Create a new MedicalInformationFormForAirTravelGrade
+      operationId: createMedicalInformationFormForAirTravelGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+      responses:
+        "201":
+          description: The newly created MedicalInformationFormForAirTravelGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+        "400":
+          description: Validation error
+  /medical-information-form-for-air-travel-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalInformationFormForAirTravelGrade by id
+      operationId: getMedicalInformationFormForAirTravelGrade
+      responses:
+        "200":
+          description: The requested MedicalInformationFormForAirTravelGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+        "404":
+          description: MedicalInformationFormForAirTravelGrade not found
+    patch:
+      summary: Update an existing MedicalInformationFormForAirTravelGrade
+      operationId: updateMedicalInformationFormForAirTravelGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+      responses:
+        "200":
+          description: The updated MedicalInformationFormForAirTravelGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGrade"
+        "404":
+          description: MedicalInformationFormForAirTravelGrade not found
+    delete:
+      summary: Soft-delete a MedicalInformationFormForAirTravelGrade
+      operationId: deleteMedicalInformationFormForAirTravelGrade
+      responses:
+        "204":
+          description: MedicalInformationFormForAirTravelGrade deleted
+        "404":
+          description: MedicalInformationFormForAirTravelGrade not found
+components:
+  schemas:
+    MedicalInformationFormForAirTravelGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted a.k.a. soft-removed.
+        medical_information_form_for_air_travel_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent MEDIF assessment (unique, 1:1).
+        computed_fitness_band:
+          type: string
+          enum:
+            - fit
+            - fit-with-conditions
+            - requires-review
+            - unfit-to-fly
+            - ""
+          description: Fitness-to-fly band computed by the engine.
+        final_fitness_band:
+          type: string
+          enum:
+            - fit
+            - fit-with-conditions
+            - requires-review
+            - unfit-to-fly
+            - ""
+          description: Fitness-to-fly band signed off by the attending physician.
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the physician set final differently from computed (mandatory when they differ).
+        desk_recommendation:
+          type: string
+          maxLength: 500
+          description: Recommendation for the airline medical desk (free text).
+        physician_notes:
+          type: string
+          description: Free-text physician summary notes.
+        valid_until:
+          type: string
+          format: date
+          description: Date the MEDIF expires.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of physician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - medical_information_form_for_air_travel_id
+        - computed_fitness_band
+        - final_fitness_band
+        - override_reason
+        - desk_recommendation
+        - physician_notes
+        - graded_at
+      description: Computed and signed-off MEDIF result. Stores both the engine-computed fitness-to-fly band and the physician-final band with an override reason.

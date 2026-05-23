@@ -1,0 +1,160 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: outpatient_outcome_operational
+openapi: 3.1.0
+info:
+  title: Outpatient Outcome — OutpatientOutcomeOperational
+  version: 1.0.0
+  description: "Operational efficiency data: referral-to-appointment wait time vs service target, NHS Attendance Outcome code."
+paths:
+  /outpatient-outcome-operationals:
+    get:
+      summary: List OutpatientOutcomeOperational records
+      operationId: listOutpatientOutcomeOperational
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OutpatientOutcomeOperational records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutpatientOutcomeOperational"
+    post:
+      summary: Create a new OutpatientOutcomeOperational
+      operationId: createOutpatientOutcomeOperational
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeOperational"
+      responses:
+        "201":
+          description: The newly created OutpatientOutcomeOperational
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeOperational"
+        "400":
+          description: Validation error
+  /outpatient-outcome-operationals/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OutpatientOutcomeOperational by id
+      operationId: getOutpatientOutcomeOperational
+      responses:
+        "200":
+          description: The requested OutpatientOutcomeOperational
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeOperational"
+        "404":
+          description: OutpatientOutcomeOperational not found
+    patch:
+      summary: Update an existing OutpatientOutcomeOperational
+      operationId: updateOutpatientOutcomeOperational
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutpatientOutcomeOperational"
+      responses:
+        "200":
+          description: The updated OutpatientOutcomeOperational
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutpatientOutcomeOperational"
+        "404":
+          description: OutpatientOutcomeOperational not found
+    delete:
+      summary: Soft-delete a OutpatientOutcomeOperational
+      operationId: deleteOutpatientOutcomeOperational
+      responses:
+        "204":
+          description: OutpatientOutcomeOperational deleted
+        "404":
+          description: OutpatientOutcomeOperational not found
+components:
+  schemas:
+    OutpatientOutcomeOperational:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted i.e. soft-removed.
+        outpatient_outcome_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        referral_date:
+          type: string
+          format: date
+          description: Date the patient was referred to the outpatient service.
+        appointment_date:
+          type: string
+          format: date
+          description: Date of the appointment the patient attended (or was booked for).
+        wait_time_days:
+          type: integer
+          format: int32
+          description: Days between referral and appointment; null if unknown.
+        service_target_days:
+          type: integer
+          format: int32
+          description: Service-level-agreement target wait time in days; null if not set.
+        nhs_attendance_outcome:
+          type: string
+          enum:
+            - attended
+            - attended_late_seen
+            - attended_late_not_seen
+            - did_not_attend
+            - cancelled_by_patient
+            - cancelled_by_provider
+            - rebooked
+            - ""
+          description: NHS Data Dictionary Attendance Outcome classification.
+      required:
+        - created_at
+        - updated_at
+        - outpatient_outcome_id
+        - nhs_attendance_outcome
+      description: "Operational efficiency data: referral-to-appointment wait time vs service target, NHS Attendance Outcome code."

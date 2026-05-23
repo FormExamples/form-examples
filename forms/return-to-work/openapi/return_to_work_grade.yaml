@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: return_to_work_grade
+openapi: 3.1.0
+info:
+  title: Return To Work — ReturnToWorkGrade
+  version: 1.0.0
+  description: "Computed Return to Work grading result: the engine-derived fitness statement plus the composite restriction-priority grade. One-to-one child of return_to_work."
+paths:
+  /return-to-work-grades:
+    get:
+      summary: List ReturnToWorkGrade records
+      operationId: listReturnToWorkGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ReturnToWorkGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReturnToWorkGrade"
+    post:
+      summary: Create a new ReturnToWorkGrade
+      operationId: createReturnToWorkGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGrade"
+      responses:
+        "201":
+          description: The newly created ReturnToWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGrade"
+        "400":
+          description: Validation error
+  /return-to-work-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ReturnToWorkGrade by id
+      operationId: getReturnToWorkGrade
+      responses:
+        "200":
+          description: The requested ReturnToWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGrade"
+        "404":
+          description: ReturnToWorkGrade not found
+    patch:
+      summary: Update an existing ReturnToWorkGrade
+      operationId: updateReturnToWorkGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWorkGrade"
+      responses:
+        "200":
+          description: The updated ReturnToWorkGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWorkGrade"
+        "404":
+          description: ReturnToWorkGrade not found
+    delete:
+      summary: Soft-delete a ReturnToWorkGrade
+      operationId: deleteReturnToWorkGrade
+      responses:
+        "204":
+          description: ReturnToWorkGrade deleted
+        "404":
+          description: ReturnToWorkGrade not found
+components:
+  schemas:
+    ReturnToWorkGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        return_to_work_id:
+          type: string
+          format: uuid
+          description: Foreign key to the return_to_work record.
+        fitness_statement:
+          type: string
+          enum:
+            - fit
+            - may-be-fit
+            - not-fit
+          description: "Engine-computed fitness statement: fit, may-be-fit, or not-fit."
+        restriction_priority:
+          type: string
+          enum:
+            - routine
+            - standard
+            - restricted
+            - high-risk
+          description: "Composite restriction-priority grade: routine, standard, restricted, or high-risk."
+        rule_count:
+          type: integer
+          format: int32
+          description: Total number of grading rules that fired.
+        flag_count:
+          type: integer
+          format: int32
+          description: Total number of additional safety flags raised.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+        - created_at
+        - updated_at
+        - return_to_work_id
+        - fitness_statement
+        - restriction_priority
+        - rule_count
+        - flag_count
+        - graded_at
+      description: "Computed Return to Work grading result: the engine-derived fitness statement plus the composite restriction-priority grade. One-to-one child of return_to_work."

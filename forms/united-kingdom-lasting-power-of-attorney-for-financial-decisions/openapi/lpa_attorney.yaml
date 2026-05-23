@@ -1,0 +1,141 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_attorney
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaAttorney
+  version: 1.0.0
+  description: LPA attorney — join table linking persons appointed as original attorneys to an LPA (LP1F section 2).
+paths:
+  /lpa-attorneys:
+    get:
+      summary: List LpaAttorney records
+      operationId: listLpaAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaAttorney records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaAttorney"
+    post:
+      summary: Create a new LpaAttorney
+      operationId: createLpaAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaAttorney"
+      responses:
+        "201":
+          description: The newly created LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "400":
+          description: Validation error
+  /lpa-attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaAttorney by id
+      operationId: getLpaAttorney
+      responses:
+        "200":
+          description: The requested LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "404":
+          description: LpaAttorney not found
+    patch:
+      summary: Update an existing LpaAttorney
+      operationId: updateLpaAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaAttorney"
+      responses:
+        "200":
+          description: The updated LpaAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaAttorney"
+        "404":
+          description: LpaAttorney not found
+    delete:
+      summary: Soft-delete a LpaAttorney
+      operationId: deleteLpaAttorney
+      responses:
+        "204":
+          description: LpaAttorney deleted
+        "404":
+          description: LpaAttorney not found
+components:
+  schemas:
+    LpaAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; cascades on delete.
+        person_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person table — the appointed attorney.
+        ordinal:
+          type: integer
+          format: int32
+          description: Listing order on the LP1F deed (1, 2, 3, ...) so attorneys round-trip in the same order as they appear on the printed form.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - person_id
+        - ordinal
+      description: LPA attorney — join table linking persons appointed as original attorneys to an LPA (LP1F section 2).

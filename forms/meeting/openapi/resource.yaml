@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: resource
+openapi: 3.1.0
+info:
+  title: Meeting — Resource
+  version: 1.0.0
+  description: "A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status."
+paths:
+  /resources:
+    get:
+      summary: List Resource records
+      operationId: listResource
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Resource records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Resource"
+    post:
+      summary: Create a new Resource
+      operationId: createResource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resource"
+      responses:
+        "201":
+          description: The newly created Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resource"
+        "400":
+          description: Validation error
+  /resources/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Resource by id
+      operationId: getResource
+      responses:
+        "200":
+          description: The requested Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resource"
+        "404":
+          description: Resource not found
+    patch:
+      summary: Update an existing Resource
+      operationId: updateResource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resource"
+      responses:
+        "200":
+          description: The updated Resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resource"
+        "404":
+          description: Resource not found
+    delete:
+      summary: Soft-delete a Resource
+      operationId: deleteResource
+      responses:
+        "204":
+          description: Resource deleted
+        "404":
+          description: Resource not found
+components:
+  schemas:
+    Resource:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the resource in the list.
+        resource_type:
+          type: string
+          enum:
+            - room
+            - equipment
+            - document
+            - link
+            - budget
+            - catering
+            - interpreter
+            - transport
+            - other
+            - ""
+          description: "Type of resource: room, equipment, document, link, budget, catering, interpreter, transport, other."
+        name:
+          type: string
+          maxLength: 255
+          description: Name or short identifier of the resource.
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity required (e.g. 12 chairs, 1 projector).
+        unit:
+          type: string
+          maxLength: 40
+          description: Unit of quantity (e.g. seats, licences, GBP, USD).
+        url:
+          type: string
+          maxLength: 500
+          description: URL of the resource (document link, room booking page, equipment record).
+        cost_amount:
+          type: number
+          format: double
+          description: Cost amount in the cost_currency.
+        cost_currency:
+          type: string
+          maxLength: 3
+          description: ISO 4217 currency code (e.g. GBP, USD, EUR).
+        status:
+          type: string
+          enum:
+            - requested
+            - reserved
+            - confirmed
+            - unavailable
+            - cancelled
+            - ""
+          description: "Reservation status: requested, reserved, confirmed, unavailable, cancelled."
+        notes:
+          type: string
+          description: Free-text notes — e.g. supplier, vendor, point of contact.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - resource_type
+        - name
+        - unit
+        - url
+        - cost_currency
+        - status
+        - notes
+      description: "A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status."

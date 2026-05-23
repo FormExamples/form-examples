@@ -1,0 +1,221 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: issue_tracker_grade
+openapi: 3.1.0
+info:
+  title: Issue Tracker — IssueTrackerGrade
+  version: 1.0.0
+  description: Computed and signed-off grading result for an issue. One-to-one with issue_tracker. Stores both engine-computed and triager-final composite priority, the seven dimension scores, and a triage recommendation.
+paths:
+  /issue-tracker-grades:
+    get:
+      summary: List IssueTrackerGrade records
+      operationId: listIssueTrackerGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of IssueTrackerGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IssueTrackerGrade"
+    post:
+      summary: Create a new IssueTrackerGrade
+      operationId: createIssueTrackerGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGrade"
+      responses:
+        "201":
+          description: The newly created IssueTrackerGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGrade"
+        "400":
+          description: Validation error
+  /issue-tracker-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one IssueTrackerGrade by id
+      operationId: getIssueTrackerGrade
+      responses:
+        "200":
+          description: The requested IssueTrackerGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGrade"
+        "404":
+          description: IssueTrackerGrade not found
+    patch:
+      summary: Update an existing IssueTrackerGrade
+      operationId: updateIssueTrackerGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGrade"
+      responses:
+        "200":
+          description: The updated IssueTrackerGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGrade"
+        "404":
+          description: IssueTrackerGrade not found
+    delete:
+      summary: Soft-delete a IssueTrackerGrade
+      operationId: deleteIssueTrackerGrade
+      responses:
+        "204":
+          description: IssueTrackerGrade deleted
+        "404":
+          description: IssueTrackerGrade not found
+components:
+  schemas:
+    IssueTrackerGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        issue_tracker_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent issue_tracker row (unique, 1:1).
+        score_by_priority_rank:
+          type: integer
+          format: int32
+          description: "Score 1 of 7: priority rank — echoed from issue_tracker for dashboard joins."
+        score_by_severity_of_impact:
+          type: integer
+          format: int32
+          description: "Score 2 of 7: severity of impact 1-5 — echoed from issue_tracker."
+        score_by_magnitude_of_damage:
+          type: integer
+          format: int32
+          description: "Score 3 of 7: magnitude of damage 1-10 — echoed from issue_tracker."
+        score_by_harm_grade:
+          type: integer
+          format: int32
+          description: "Score 4 of 7: NHS LFPSE harm grade 0-4 — echoed from issue_tracker."
+        score_by_failure_condition:
+          type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - ""
+          description: "Score 5 of 7: FAA / EASA failure condition A-E — echoed from issue_tracker."
+        score_by_moscow_requirement:
+          type: integer
+          format: int32
+          description: "Score 6 of 7: MoSCoW prioritisation 1-4 — echoed from issue_tracker."
+        score_by_frequency_percent:
+          type: number
+          format: double
+          description: "Score 7 of 7: frequency percent 0-100 — echoed from issue_tracker."
+        computed_composite_priority:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: "Composite priority computed by the engine using the max-grade algorithm: low, moderate, high, or critical."
+        final_composite_priority:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - critical
+            - ""
+          description: Composite priority signed off by the triager (may equal or differ from computed).
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the triager set final differently from computed (mandatory when they differ).
+        recommendation:
+          type: string
+          enum:
+            - proceed
+            - mitigate-first
+            - escalate
+            - wontfix
+            - duplicate
+            - cancel
+            - ""
+          description: "Overall recommendation: proceed, mitigate-first, escalate, wontfix, duplicate, or cancel."
+        triage_notes:
+          type: string
+          description: Free-text triager summary notes.
+        signed_by:
+          type: string
+          maxLength: 255
+          description: Name or identifier of the triager who signed off.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the triager electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - issue_tracker_id
+        - score_by_failure_condition
+        - computed_composite_priority
+        - final_composite_priority
+        - override_reason
+        - recommendation
+        - triage_notes
+        - signed_by
+        - graded_at
+      description: Computed and signed-off grading result for an issue. One-to-one with issue_tracker. Stores both engine-computed and triager-final composite priority, the seven dimension scores, and a triage recommendation.

@@ -1,0 +1,184 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: grading_additional_flag
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Patient — GradingAdditionalFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.
+paths:
+  /grading-additional-flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GradingAdditionalFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GradingAdditionalFlag"
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingAdditionalFlag"
+      responses:
+        "201":
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "400":
+          description: Validation error
+  /grading-additional-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        "200":
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "404":
+          description: GradingAdditionalFlag not found
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GradingAdditionalFlag"
+      responses:
+        "200":
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GradingAdditionalFlag"
+        "404":
+          description: GradingAdditionalFlag not found
+    delete:
+      summary: Soft-delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        "204":
+          description: GradingAdditionalFlag deleted
+        "404":
+          description: GradingAdditionalFlag not found
+components:
+  schemas:
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).
+        category:
+          type: string
+          enum:
+            - difficult-airway
+            - severe-cardiac
+            - severe-respiratory
+            - severe-renal
+            - severe-hepatic
+            - severe-anaemia
+            - coagulopathy
+            - uncontrolled-diabetes
+            - severe-frailty
+            - recent-covid-19
+            - fasting-violation
+            - missing-crossmatch
+            - high-risk-medication
+            - capacity-concern
+            - paediatric
+            - pregnancy
+            - safeguarding
+            - malignant-hyperthermia
+            - latex-allergy
+            - sux-apnoea
+            - pseudocholinesterase-deficiency
+            - malnutrition-risk
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"prepare difficult-airway trolley\")."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.

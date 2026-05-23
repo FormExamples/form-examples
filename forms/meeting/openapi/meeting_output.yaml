@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: meeting_output
+openapi: 3.1.0
+info:
+  title: Meeting — MeetingOutput
+  version: 1.0.0
+  description: "A tangible deliverable produced by the meeting: document, decision, data, recording, minutes, slides, agreement."
+paths:
+  /meeting-outputs:
+    get:
+      summary: List MeetingOutput records
+      operationId: listMeetingOutput
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MeetingOutput records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeetingOutput"
+    post:
+      summary: Create a new MeetingOutput
+      operationId: createMeetingOutput
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingOutput"
+      responses:
+        "201":
+          description: The newly created MeetingOutput
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutput"
+        "400":
+          description: Validation error
+  /meeting-outputs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MeetingOutput by id
+      operationId: getMeetingOutput
+      responses:
+        "200":
+          description: The requested MeetingOutput
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutput"
+        "404":
+          description: MeetingOutput not found
+    patch:
+      summary: Update an existing MeetingOutput
+      operationId: updateMeetingOutput
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeetingOutput"
+      responses:
+        "200":
+          description: The updated MeetingOutput
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeetingOutput"
+        "404":
+          description: MeetingOutput not found
+    delete:
+      summary: Soft-delete a MeetingOutput
+      operationId: deleteMeetingOutput
+      responses:
+        "204":
+          description: MeetingOutput deleted
+        "404":
+          description: MeetingOutput not found
+components:
+  schemas:
+    MeetingOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the output in the list.
+        title:
+          type: string
+          maxLength: 255
+          description: Short title of the output.
+        kind:
+          type: string
+          enum:
+            - document
+            - decision
+            - data
+            - recording
+            - minutes
+            - slides
+            - agreement
+            - other
+            - ""
+          description: "Kind of output: document, decision, data, recording, minutes, slides, agreement, other."
+        url:
+          type: string
+          maxLength: 500
+          description: URL of the output artefact, if any (document, recording, repository).
+        description:
+          type: string
+          description: Free-text description of the output and its content.
+        owner_name:
+          type: string
+          maxLength: 255
+          description: Person responsible for the output post-meeting.
+      required:
+        - created_at
+        - updated_at
+        - meeting_id
+        - position
+        - title
+        - kind
+        - url
+        - description
+        - owner_name
+      description: "A tangible deliverable produced by the meeting: document, decision, data, recording, minutes, slides, agreement."

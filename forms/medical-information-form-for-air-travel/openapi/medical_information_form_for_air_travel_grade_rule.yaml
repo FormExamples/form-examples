@@ -1,0 +1,171 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_information_form_for_air_travel_grade_rule
+openapi: 3.1.0
+info:
+  title: Medical Information Form For Air Travel — MedicalInformationFormForAirTravelGradeRule
+  version: 1.0.0
+  description: Audit trail of every fitness-to-fly rule that fired for this MEDIF, including the contributing instrument and resulting band.
+paths:
+  /medical-information-form-for-air-travel-grade-rules:
+    get:
+      summary: List MedicalInformationFormForAirTravelGradeRule records
+      operationId: listMedicalInformationFormForAirTravelGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalInformationFormForAirTravelGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+    post:
+      summary: Create a new MedicalInformationFormForAirTravelGradeRule
+      operationId: createMedicalInformationFormForAirTravelGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+      responses:
+        "201":
+          description: The newly created MedicalInformationFormForAirTravelGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+        "400":
+          description: Validation error
+  /medical-information-form-for-air-travel-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalInformationFormForAirTravelGradeRule by id
+      operationId: getMedicalInformationFormForAirTravelGradeRule
+      responses:
+        "200":
+          description: The requested MedicalInformationFormForAirTravelGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+        "404":
+          description: MedicalInformationFormForAirTravelGradeRule not found
+    patch:
+      summary: Update an existing MedicalInformationFormForAirTravelGradeRule
+      operationId: updateMedicalInformationFormForAirTravelGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+      responses:
+        "200":
+          description: The updated MedicalInformationFormForAirTravelGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravelGradeRule"
+        "404":
+          description: MedicalInformationFormForAirTravelGradeRule not found
+    delete:
+      summary: Soft-delete a MedicalInformationFormForAirTravelGradeRule
+      operationId: deleteMedicalInformationFormForAirTravelGradeRule
+      responses:
+        "204":
+          description: MedicalInformationFormForAirTravelGradeRule deleted
+        "404":
+          description: MedicalInformationFormForAirTravelGradeRule not found
+components:
+  schemas:
+    MedicalInformationFormForAirTravelGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted a.k.a. soft-removed.
+        medical_information_form_for_air_travel_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-PNEUMOTHORAX-14D-01).
+        instrument:
+          type: string
+          enum:
+            - cardiovascular
+            - respiratory
+            - recent-event
+            - pregnancy
+            - communicable
+            - equipment
+            - haematology
+            - gas-expansion
+            - composite
+            - ""
+          description: "Source instrument: cardiovascular, respiratory, recent-event, pregnancy, communicable, equipment, haematology, gas-expansion, or composite."
+        fitness_band:
+          type: string
+          enum:
+            - fit
+            - fit-with-conditions
+            - requires-review
+            - unfit-to-fly
+            - ""
+          description: Fitness band contributed by this rule.
+        category:
+          type: string
+          maxLength: 50
+          description: Body-system or risk category (e.g. cardiac, pulmonary).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - medical_information_form_for_air_travel_grade_id
+        - rule_id
+        - instrument
+        - fitness_band
+        - category
+        - description
+      description: Audit trail of every fitness-to-fly rule that fired for this MEDIF, including the contributing instrument and resulting band.

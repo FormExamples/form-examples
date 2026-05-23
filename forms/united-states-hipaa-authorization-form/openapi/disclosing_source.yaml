@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: disclosing_source
+openapi: 3.1.0
+info:
+  title: United States Hipaa Authorization Form — DisclosingSource
+  version: 1.0.0
+  description: Person(s) or class of persons authorized to make the disclosure. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(ii).
+paths:
+  /disclosing-sources:
+    get:
+      summary: List DisclosingSource records
+      operationId: listDisclosingSource
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DisclosingSource records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DisclosingSource"
+    post:
+      summary: Create a new DisclosingSource
+      operationId: createDisclosingSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisclosingSource"
+      responses:
+        "201":
+          description: The newly created DisclosingSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisclosingSource"
+        "400":
+          description: Validation error
+  /disclosing-sources/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DisclosingSource by id
+      operationId: getDisclosingSource
+      responses:
+        "200":
+          description: The requested DisclosingSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisclosingSource"
+        "404":
+          description: DisclosingSource not found
+    patch:
+      summary: Update an existing DisclosingSource
+      operationId: updateDisclosingSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisclosingSource"
+      responses:
+        "200":
+          description: The updated DisclosingSource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DisclosingSource"
+        "404":
+          description: DisclosingSource not found
+    delete:
+      summary: Soft-delete a DisclosingSource
+      operationId: deleteDisclosingSource
+      responses:
+        "204":
+          description: DisclosingSource deleted
+        "404":
+          description: DisclosingSource not found
+components:
+  schemas:
+    DisclosingSource:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        hipaa_authorization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent HIPAA authorization (unique, enforcing 1:1).
+        identification_mode:
+          type: string
+          enum:
+            - ""
+            - specific
+            - class
+          description: "Whether the disclosing source is identified specifically or as a class: specific, class, or empty."
+        specific_persons_or_organizations:
+          type: string
+          description: Free-text list of the specific persons or organizations holding the records. Used when identification_mode is specific.
+        class_description:
+          type: string
+          description: "Free-text description of the class of persons (e.g. \"doctors, hospitals, clinics, nursing homes, …\"). Used when identification_mode is class."
+        is_va_facility:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the disclosing source is a US Department of Veterans Affairs facility: yes, no, or empty. Triggers the 38 U.S.C. § 7332 rule when yes."
+        is_part_2_program:
+          type: string
+          enum:
+            - ""
+            - "yes"
+            - "no"
+          description: "Whether the disclosing source is a federally assisted substance-use-disorder program subject to 42 CFR Part 2: yes, no, or empty."
+      required:
+        - created_at
+        - updated_at
+        - hipaa_authorization_id
+        - identification_mode
+        - specific_persons_or_organizations
+        - class_description
+        - is_va_facility
+        - is_part_2_program
+      description: Person(s) or class of persons authorized to make the disclosure. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(ii).

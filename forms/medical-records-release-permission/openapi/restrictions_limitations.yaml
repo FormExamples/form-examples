@@ -1,0 +1,175 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: restrictions_limitations
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — RestrictionsLimitations
+  version: 1.0.0
+  description: Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.
+paths:
+  /restrictions-limitationses:
+    get:
+      summary: List RestrictionsLimitations records
+      operationId: listRestrictionsLimitations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of RestrictionsLimitations records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RestrictionsLimitations"
+    post:
+      summary: Create a new RestrictionsLimitations
+      operationId: createRestrictionsLimitations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestrictionsLimitations"
+      responses:
+        "201":
+          description: The newly created RestrictionsLimitations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestrictionsLimitations"
+        "400":
+          description: Validation error
+  /restrictions-limitationses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one RestrictionsLimitations by id
+      operationId: getRestrictionsLimitations
+      responses:
+        "200":
+          description: The requested RestrictionsLimitations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestrictionsLimitations"
+        "404":
+          description: RestrictionsLimitations not found
+    patch:
+      summary: Update an existing RestrictionsLimitations
+      operationId: updateRestrictionsLimitations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestrictionsLimitations"
+      responses:
+        "200":
+          description: The updated RestrictionsLimitations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestrictionsLimitations"
+        "404":
+          description: RestrictionsLimitations not found
+    delete:
+      summary: Soft-delete a RestrictionsLimitations
+      operationId: deleteRestrictionsLimitations
+      responses:
+        "204":
+          description: RestrictionsLimitations deleted
+        "404":
+          description: RestrictionsLimitations not found
+components:
+  schemas:
+    RestrictionsLimitations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        exclude_hiv:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Exclude HIV/AIDS-related records: yes, no, or empty string."
+        exclude_substance_abuse:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Exclude substance abuse records: yes, no, or empty string."
+        exclude_mental_health:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Exclude mental health records: yes, no, or empty string."
+        exclude_genetic_info:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Exclude genetic information records: yes, no, or empty string."
+        exclude_sti:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Exclude sexually transmitted infection records: yes, no, or empty string."
+        additional_restrictions:
+          type: string
+          description: Free-text additional restrictions specified by the patient.
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - exclude_hiv
+        - exclude_substance_abuse
+        - exclude_mental_health
+        - exclude_genetic_info
+        - exclude_sti
+        - additional_restrictions
+      description: Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.

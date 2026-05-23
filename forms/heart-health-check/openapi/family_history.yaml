@@ -1,0 +1,157 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: family_history
+openapi: 3.1.0
+info:
+  title: Heart Health Check — FamilyHistory
+  version: 1.0.0
+  description: Family history of cardiovascular disease and diabetes.
+paths:
+  /family-histories:
+    get:
+      summary: List FamilyHistory records
+      operationId: listFamilyHistory
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FamilyHistory records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FamilyHistory"
+    post:
+      summary: Create a new FamilyHistory
+      operationId: createFamilyHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyHistory"
+      responses:
+        "201":
+          description: The newly created FamilyHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FamilyHistory"
+        "400":
+          description: Validation error
+  /family-histories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FamilyHistory by id
+      operationId: getFamilyHistory
+      responses:
+        "200":
+          description: The requested FamilyHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FamilyHistory"
+        "404":
+          description: FamilyHistory not found
+    patch:
+      summary: Update an existing FamilyHistory
+      operationId: updateFamilyHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FamilyHistory"
+      responses:
+        "200":
+          description: The updated FamilyHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FamilyHistory"
+        "404":
+          description: FamilyHistory not found
+    delete:
+      summary: Soft-delete a FamilyHistory
+      operationId: deleteFamilyHistory
+      responses:
+        "204":
+          description: FamilyHistory deleted
+        "404":
+          description: FamilyHistory not found
+components:
+  schemas:
+    FamilyHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        family_cvd_under_60:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a first-degree relative had CVD under age 60.
+        family_cvd_relationship:
+          type: string
+          enum:
+            - parent
+            - sibling
+            - child
+            - multiple
+            - ""
+          description: Relationship of the affected relative.
+        family_diabetes_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there is a family history of diabetes.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - family_cvd_under_60
+        - family_cvd_relationship
+        - family_diabetes_history
+      description: Family history of cardiovascular disease and diabetes.

@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_lst_choice
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaLstChoice
+  version: 1.0.0
+  description: Donor election under MCA 2005 s.11(7) on life-sustaining treatment authority for attorneys.
+paths:
+  /lpa-lst-choices:
+    get:
+      summary: List LpaLstChoice records
+      operationId: listLpaLstChoice
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaLstChoice records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaLstChoice"
+    post:
+      summary: Create a new LpaLstChoice
+      operationId: createLpaLstChoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaLstChoice"
+      responses:
+        "201":
+          description: The newly created LpaLstChoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaLstChoice"
+        "400":
+          description: Validation error
+  /lpa-lst-choices/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaLstChoice by id
+      operationId: getLpaLstChoice
+      responses:
+        "200":
+          description: The requested LpaLstChoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaLstChoice"
+        "404":
+          description: LpaLstChoice not found
+    patch:
+      summary: Update an existing LpaLstChoice
+      operationId: updateLpaLstChoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaLstChoice"
+      responses:
+        "200":
+          description: The updated LpaLstChoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaLstChoice"
+        "404":
+          description: LpaLstChoice not found
+    delete:
+      summary: Soft-delete a LpaLstChoice
+      operationId: deleteLpaLstChoice
+      responses:
+        "204":
+          description: LpaLstChoice deleted
+        "404":
+          description: LpaLstChoice not found
+components:
+  schemas:
+    LpaLstChoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA (unique, 1:1).
+        lst_choice:
+          type: string
+          enum:
+            - option-a
+            - option-b
+            - ""
+          description: "option-a: attorneys may decide; option-b: donor reserves the decision. Empty until donor selects (R-MCA-LST-CHOICE fires fatal until set)."
+        donor_initialled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the donor has personally initialled the chosen option as required by the statutory form.
+        initialled_at:
+          type: string
+          format: date-time
+          description: Timestamp when the donor initialled the option.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - lst_choice
+        - donor_initialled
+      description: Donor election under MCA 2005 s.11(7) on life-sustaining treatment authority for attorneys.

@@ -1,0 +1,179 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_registration_application
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaRegistrationApplication
+  version: 1.0.0
+  description: LPA registration application — the registration block of LP1F (sections 12 and 14) submitted to the OPG.
+paths:
+  /lpa-registration-applications:
+    get:
+      summary: List LpaRegistrationApplication records
+      operationId: listLpaRegistrationApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaRegistrationApplication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaRegistrationApplication"
+    post:
+      summary: Create a new LpaRegistrationApplication
+      operationId: createLpaRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationApplication"
+      responses:
+        "201":
+          description: The newly created LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "400":
+          description: Validation error
+  /lpa-registration-applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaRegistrationApplication by id
+      operationId: getLpaRegistrationApplication
+      responses:
+        "200":
+          description: The requested LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "404":
+          description: LpaRegistrationApplication not found
+    patch:
+      summary: Update an existing LpaRegistrationApplication
+      operationId: updateLpaRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaRegistrationApplication"
+      responses:
+        "200":
+          description: The updated LpaRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaRegistrationApplication"
+        "404":
+          description: LpaRegistrationApplication not found
+    delete:
+      summary: Soft-delete a LpaRegistrationApplication
+      operationId: deleteLpaRegistrationApplication
+      responses:
+        "204":
+          description: LpaRegistrationApplication deleted
+        "404":
+          description: LpaRegistrationApplication not found
+components:
+  schemas:
+    LpaRegistrationApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lasting_power_of_attorney table; UNIQUE so only one registration block per LPA; cascades on delete.
+        applicant_kind:
+          type: string
+          enum:
+            - donor
+            - attorneys
+            - ""
+          description: "Who is applying to register the LPA. One of: donor, attorneys."
+        payment_method:
+          type: string
+          enum:
+            - card
+            - cheque
+            - ""
+          description: "How the OPG fee is paid. One of: card, cheque."
+        card_payment_phone:
+          type: string
+          description: Phone number on which the OPG should contact the applicant to take a card payment (LP1F section 14).
+        reduced_fee_requested:
+          type: boolean
+          description: TRUE if the applicant is asking for a reduced or remitted fee (requires LPA120A and supporting evidence).
+        has_lpa120a_evidence:
+          type: boolean
+          description: TRUE if the LPA120A evidence is attached when a reduced fee is requested.
+        is_repeat_application:
+          type: boolean
+          description: TRUE if this is a repeat application after a previous OPG rejection (entitles the applicant to a discounted second-attempt fee).
+        repeat_case_number:
+          type: string
+          description: OPG case number of the previous (rejected) application when is_repeat_application is TRUE.
+        payment_reference:
+          type: string
+          description: Reference number of the fee payment (card receipt or cheque number).
+        payment_date:
+          type: string
+          format: date
+          description: Date the fee was paid.
+        payment_amount:
+          type: number
+          format: double
+          description: Amount of the fee paid, in GBP (numeric to two decimal places).
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - applicant_kind
+        - payment_method
+        - card_payment_phone
+        - reduced_fee_requested
+        - has_lpa120a_evidence
+        - is_repeat_application
+        - repeat_case_number
+        - payment_reference
+      description: LPA registration application — the registration block of LP1F (sections 12 and 14) submitted to the OPG.

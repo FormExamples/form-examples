@@ -1,0 +1,143 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: acknowledgment
+openapi: 3.1.0
+info:
+  title: Legal Requirements Privacy Notice — Acknowledgment
+  version: 1.0.0
+  description: Patient acknowledgment of the legal requirements privacy notice.
+paths:
+  /acknowledgments:
+    get:
+      summary: List Acknowledgment records
+      operationId: listAcknowledgment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Acknowledgment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Acknowledgment"
+    post:
+      summary: Create a new Acknowledgment
+      operationId: createAcknowledgment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Acknowledgment"
+      responses:
+        "201":
+          description: The newly created Acknowledgment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledgment"
+        "400":
+          description: Validation error
+  /acknowledgments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Acknowledgment by id
+      operationId: getAcknowledgment
+      responses:
+        "200":
+          description: The requested Acknowledgment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledgment"
+        "404":
+          description: Acknowledgment not found
+    patch:
+      summary: Update an existing Acknowledgment
+      operationId: updateAcknowledgment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Acknowledgment"
+      responses:
+        "200":
+          description: The updated Acknowledgment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledgment"
+        "404":
+          description: Acknowledgment not found
+    delete:
+      summary: Soft-delete a Acknowledgment
+      operationId: deleteAcknowledgment
+      responses:
+        "204":
+          description: Acknowledgment deleted
+        "404":
+          description: Acknowledgment not found
+components:
+  schemas:
+    Acknowledgment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key referencing the patient who acknowledged the notice.
+        confirmed:
+          type: boolean
+          description: Whether the patient confirmed they have read and understood the privacy notice.
+        full_name:
+          type: string
+          description: Full name typed by the patient as their acknowledgment signature.
+        acknowledged_date:
+          type: string
+          format: date
+          description: Date the patient acknowledged the privacy notice.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - confirmed
+        - full_name
+      description: Patient acknowledgment of the legal requirements privacy notice.

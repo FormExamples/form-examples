@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: flagged_issue
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — FlaggedIssue
+  version: 1.0.0
+  description: Many-to-one with satisfaction_result. Alerts detected by the flagged issues engine.
+paths:
+  /flagged-issues:
+    get:
+      summary: List FlaggedIssue records
+      operationId: listFlaggedIssue
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FlaggedIssue records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FlaggedIssue"
+    post:
+      summary: Create a new FlaggedIssue
+      operationId: createFlaggedIssue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FlaggedIssue"
+      responses:
+        "201":
+          description: The newly created FlaggedIssue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlaggedIssue"
+        "400":
+          description: Validation error
+  /flagged-issues/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FlaggedIssue by id
+      operationId: getFlaggedIssue
+      responses:
+        "200":
+          description: The requested FlaggedIssue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlaggedIssue"
+        "404":
+          description: FlaggedIssue not found
+    patch:
+      summary: Update an existing FlaggedIssue
+      operationId: updateFlaggedIssue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FlaggedIssue"
+      responses:
+        "200":
+          description: The updated FlaggedIssue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlaggedIssue"
+        "404":
+          description: FlaggedIssue not found
+    delete:
+      summary: Soft-delete a FlaggedIssue
+      operationId: deleteFlaggedIssue
+      responses:
+        "204":
+          description: FlaggedIssue deleted
+        "404":
+          description: FlaggedIssue not found
+components:
+  schemas:
+    FlaggedIssue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        satisfaction_result_id:
+          type: string
+          format: uuid
+          description: FK to satisfaction_result. One result may have many flagged issues.
+        flag_id:
+          type: string
+          description: Application-side flag identifier (e.g. FLAG-VDIS-listening, FLAG-COMM-timeSpent).
+        category:
+          type: string
+          description: Flag category (e.g. Very Dissatisfied Response, Communication Concern, Poor Overall Satisfaction).
+        message:
+          type: string
+          description: Human-readable alert message for the clinician.
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Alert priority: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - satisfaction_result_id
+        - flag_id
+        - category
+        - message
+        - priority
+      description: Many-to-one with satisfaction_result. Alerts detected by the flagged issues engine.

@@ -1,0 +1,195 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eligible_condition
+openapi: 3.1.0
+info:
+  title: United Kingdom Nhs England Medical Exemption Certificate — EligibleCondition
+  version: 1.0.0
+  description: Closed list of the ten NHSBSA-recognised qualifying conditions for FP92A.
+paths:
+  /eligible-conditions:
+    get:
+      summary: List EligibleCondition records
+      operationId: listEligibleCondition
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EligibleCondition records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EligibleCondition"
+    post:
+      summary: Create a new EligibleCondition
+      operationId: createEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EligibleCondition"
+      responses:
+        "201":
+          description: The newly created EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EligibleCondition"
+        "400":
+          description: Validation error
+  /eligible-conditions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EligibleCondition by id
+      operationId: getEligibleCondition
+      responses:
+        "200":
+          description: The requested EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EligibleCondition"
+        "404":
+          description: EligibleCondition not found
+    patch:
+      summary: Update an existing EligibleCondition
+      operationId: updateEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EligibleCondition"
+      responses:
+        "200":
+          description: The updated EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EligibleCondition"
+        "404":
+          description: EligibleCondition not found
+    delete:
+      summary: Soft-delete a EligibleCondition
+      operationId: deleteEligibleCondition
+      responses:
+        "204":
+          description: EligibleCondition deleted
+        "404":
+          description: EligibleCondition not found
+components:
+  schemas:
+    EligibleCondition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        code:
+          type: string
+          enum:
+            - permanent-fistula
+            - hypoadrenalism
+            - diabetes-insipidus-or-hypopituitarism
+            - diabetes-mellitus-not-diet-only
+            - hypoparathyroidism
+            - myasthenia-gravis
+            - myxoedema
+            - epilepsy-on-anticonvulsant
+            - continuing-physical-disability
+            - cancer-or-effects
+          description: Machine-readable condition code from the closed NHSBSA list.
+        label:
+          type: string
+          maxLength: 255
+          description: Human-readable label matching the FP92A wording.
+        description:
+          type: string
+          description: Long-form description with NHSBSA inclusion / exclusion criteria.
+        requires_appliance_detail:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+          description: Whether the application must capture appliance / dressing detail (fistula).
+        requires_substitution_therapy_detail:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+          description: Whether the application must capture substitution-therapy detail (hypoadrenalism, hypopituitarism, hypoparathyroidism, myxoedema).
+        requires_disability_attestation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+          description: Whether the practitioner must attest that the patient cannot leave home unaided.
+        requires_cancer_detail:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+          description: Whether the application must capture cancer site and treatment phase.
+        excludes_diet_only_diabetes:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+          description: Whether diet-only diabetes is explicitly excluded (true for diabetes mellitus).
+        snomed_ct_reference:
+          type: string
+          maxLength: 50
+          description: Optional SNOMED CT concept identifier for the condition.
+        icd10_reference:
+          type: string
+          maxLength: 20
+          description: Optional ICD-10 code for the condition.
+      required:
+        - created_at
+        - updated_at
+        - code
+        - label
+        - description
+        - requires_appliance_detail
+        - requires_substitution_therapy_detail
+        - requires_disability_attestation
+        - requires_cancer_detail
+        - excludes_diet_only_diabetes
+        - snomed_ct_reference
+        - icd10_reference
+      description: Closed list of the ten NHSBSA-recognised qualifying conditions for FP92A.

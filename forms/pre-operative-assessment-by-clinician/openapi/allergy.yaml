@@ -1,0 +1,142 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: allergy
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Clinician — Allergy
+  version: 1.0.0
+  description: Allergy
+paths:
+  /allergies:
+    get:
+      summary: List Allergy records
+      operationId: listAllergy
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Allergy records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Allergy"
+    post:
+      summary: Create a new Allergy
+      operationId: createAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Allergy"
+      responses:
+        "201":
+          description: The newly created Allergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Allergy"
+        "400":
+          description: Validation error
+  /allergies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Allergy by id
+      operationId: getAllergy
+      responses:
+        "200":
+          description: The requested Allergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Allergy"
+        "404":
+          description: Allergy not found
+    patch:
+      summary: Update an existing Allergy
+      operationId: updateAllergy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Allergy"
+      responses:
+        "200":
+          description: The updated Allergy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Allergy"
+        "404":
+          description: Allergy not found
+    delete:
+      summary: Soft-delete a Allergy
+      operationId: deleteAllergy
+      responses:
+        "204":
+          description: Allergy deleted
+        "404":
+          description: Allergy not found
+components:
+  schemas:
+    Allergy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        scientific_name:
+          type: string
+          description: Scientific name of the allergen, following WHO/IUIS taxonomy (e.g. Betula pendula for birch pollen).
+        european_union_name:
+          type: string
+          description: European Union name of the allergen, following EU FSA major food allergen list (e.g. wheat).
+        united_states_name:
+          type: string
+          description: United States name of the allergen, following US FDA major food allergen list (e.g. wheat).
+        cosmetic_name:
+          type: string
+          description: Cosmetic name of the allergen, following cosmetic ingredient regulations (e.g. Limonene).
+      required:
+        - created_at
+        - updated_at
+        - scientific_name
+        - european_union_name
+        - united_states_name
+        - cosmetic_name
+      description: Allergy

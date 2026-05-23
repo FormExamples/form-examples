@@ -1,0 +1,339 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: assessment, assessment_cancer_history, assessment_cancer_history_item, assessment_family_pedigree, assessment_family_pedigree_member
+openapi: 3.1.0
+info:
+  title: Genetic Assessment — Assessment
+  version: 1.0.0
+  description: Genetic counselling referral assessment. Parent entity for all assessment sections.
+paths:
+  /assessments:
+    get:
+      summary: List Assessment records
+      operationId: listAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessment"
+    post:
+      summary: Create a new Assessment
+      operationId: createAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "201":
+          description: The newly created Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "400":
+          description: Validation error
+  /assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessment by id
+      operationId: getAssessment
+      responses:
+        "200":
+          description: The requested Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    patch:
+      summary: Update an existing Assessment
+      operationId: updateAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    delete:
+      summary: Soft-delete a Assessment
+      operationId: deleteAssessment
+      responses:
+        "204":
+          description: Assessment deleted
+        "404":
+          description: Assessment not found
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+        cancer_history_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        family_cancer_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether there is a family history of cancer: yes, no, or empty string."
+        multiple_family_cancers:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether multiple family members have had cancer: yes, no, or empty string."
+        early_onset_cancer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had cancer diagnosed before age 50: yes, no, or empty string."
+        bilateral_cancer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had bilateral cancer (both sides of a paired organ): yes, no, or empty string."
+        rare_tumour_types:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had a rare tumour type: yes, no, or empty string."
+        rare_tumour_details:
+          type: string
+          description: Details of rare tumour types reported.
+        known_cancer_syndrome:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a cancer predisposition syndrome is known in the family (e.g. BRCA, Lynch): yes, no, or empty string."
+        cancer_syndrome_details:
+          type: string
+          description: Details of known cancer predisposition syndromes.
+        cancer_risk_score:
+          type: integer
+          format: int32
+          description: Computed cancer genetics risk sub-score, NULL if not yet scored.
+        cancer_history_item_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        cancer_history_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_cancer_history table.
+        relative_relationship:
+          type: string
+          maxLength: 50
+          description: Relationship to the patient (e.g. mother, father, sister, maternal aunt).
+        cancer_type:
+          type: string
+          maxLength: 255
+          description: Type of cancer diagnosed.
+        age_at_diagnosis:
+          type: integer
+          format: int32
+          description: Age at cancer diagnosis in years, NULL if unknown.
+        outcome:
+          type: string
+          enum:
+            - alive
+            - deceased
+            - unknown
+            - ""
+          description: "Outcome: alive, deceased, unknown, or empty string."
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order within the list.
+        family_pedigree_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        total_first_degree_relatives:
+          type: integer
+          format: int32
+          description: Number of first-degree relatives (parents, siblings, children).
+        total_second_degree_relatives:
+          type: integer
+          format: int32
+          description: Number of second-degree relatives (grandparents, aunts, uncles, nieces, nephews).
+        consanguinity_in_family:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether consanguinity (blood relatives marrying) exists in the family: yes, no, or empty string."
+        consanguinity_details:
+          type: string
+          description: Details of consanguineous relationships.
+        adoption_status:
+          type: string
+          enum:
+            - not-adopted
+            - adopted-known-history
+            - adopted-unknown-history
+            - ""
+          description: "Adoption status: not-adopted, adopted-known-history, adopted-unknown-history, or empty string."
+        pedigree_notes:
+          type: string
+          description: Free-text notes about the family pedigree.
+        three_generation_pedigree_drawn:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a three-generation pedigree has been drawn: yes, no, or empty string."
+        family_pedigree_member_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        family_pedigree_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_family_pedigree table.
+        relationship:
+          type: string
+          maxLength: 50
+          description: Relationship to the patient (e.g. mother, paternal grandfather).
+        sex:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+            - ""
+          description: "Sex: male, female, other, or empty string."
+        age:
+          type: integer
+          format: int32
+          description: Current age in years, NULL if unknown.
+        alive:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the relative is alive: yes, no, or empty string."
+        age_at_death:
+          type: integer
+          format: int32
+          description: Age at death in years, NULL if alive or unknown.
+        cause_of_death:
+          type: string
+          maxLength: 255
+          description: Cause of death if deceased.
+        medical_conditions:
+          type: string
+          description: Free-text list of medical conditions relevant to genetics.
+        family_pedigree_member_sort_order:
+          type: integer
+          format: int32
+          description: Display order within the pedigree list.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - family_cancer_history
+        - multiple_family_cancers
+        - early_onset_cancer
+        - bilateral_cancer
+        - rare_tumour_types
+        - rare_tumour_details
+        - known_cancer_syndrome
+        - cancer_syndrome_details
+        - cancer_history_id
+        - relative_relationship
+        - cancer_type
+        - outcome
+        - sort_order
+        - consanguinity_in_family
+        - consanguinity_details
+        - adoption_status
+        - pedigree_notes
+        - three_generation_pedigree_drawn
+        - family_pedigree_id
+        - relationship
+        - sex
+        - alive
+        - cause_of_death
+        - medical_conditions
+        - family_pedigree_member_sort_order
+      description: Genetic counselling referral assessment. Parent entity for all assessment sections.

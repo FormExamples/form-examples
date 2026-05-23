@@ -1,0 +1,204 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: arc42_documentation
+openapi: 3.1.0
+info:
+  title: Arc42 — Arc42Documentation
+  version: 1.0.0
+  description: Snapshot of arc42 architecture documentation (prose fields and metadata).
+paths:
+  /arc42-documentations:
+    get:
+      summary: List Arc42Documentation records
+      operationId: listArc42Documentation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Arc42Documentation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Arc42Documentation"
+    post:
+      summary: Create a new Arc42Documentation
+      operationId: createArc42Documentation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42Documentation"
+      responses:
+        "201":
+          description: The newly created Arc42Documentation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42Documentation"
+        "400":
+          description: Validation error
+  /arc42-documentations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Arc42Documentation by id
+      operationId: getArc42Documentation
+      responses:
+        "200":
+          description: The requested Arc42Documentation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42Documentation"
+        "404":
+          description: Arc42Documentation not found
+    patch:
+      summary: Update an existing Arc42Documentation
+      operationId: updateArc42Documentation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Arc42Documentation"
+      responses:
+        "200":
+          description: The updated Arc42Documentation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Arc42Documentation"
+        "404":
+          description: Arc42Documentation not found
+    delete:
+      summary: Soft-delete a Arc42Documentation
+      operationId: deleteArc42Documentation
+      responses:
+        "204":
+          description: Arc42Documentation deleted
+        "404":
+          description: Arc42Documentation not found
+components:
+  schemas:
+    Arc42Documentation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        architecture_id:
+          type: string
+          format: uuid
+          description: Parent architecture (cascade-deleted).
+        author_name:
+          type: string
+          description: Name of the person who authored this documentation snapshot.
+        author_role:
+          type: string
+          description: Role of the author (e.g. Lead Architect, Tech Lead).
+        document_date:
+          type: string
+          format: date
+          description: Date this documentation snapshot was produced.
+        introduction:
+          type: string
+          description: §1 Introduction & Goals — free-text introduction to the architecture.
+        business_context_description:
+          type: string
+          description: §3 Context & Scope — prose description of the business context and external business partners.
+        technical_context_description:
+          type: string
+          description: §3 Context & Scope — prose description of the technical context and external interfaces.
+        solution_strategy_summary:
+          type: string
+          description: §4 Solution Strategy — summary of the key solution strategy decisions.
+        top_level_decomposition_summary:
+          type: string
+          description: §4 Solution Strategy — prose summary of the top-level system decomposition approach.
+        building_block_overview:
+          type: string
+          description: §5 Building Block View — prose overview of the top-level building block structure.
+        runtime_overview:
+          type: string
+          description: §6 Runtime View — prose overview of the key runtime scenarios.
+        deployment_overview:
+          type: string
+          description: §7 Deployment View — prose overview of the deployment environment and topology.
+        crosscutting_overview:
+          type: string
+          description: §8 Crosscutting Concepts — prose overview of shared architectural patterns and constraints.
+        quality_tree_summary:
+          type: string
+          description: §10 Quality Requirements — prose summary of the quality attribute tree.
+        recommendation:
+          type: string
+          enum:
+            - proceed
+            - revise-first
+            - block
+            - ""
+          description: "§12 Sign-off — author recommendation: proceed, revise-first, or block."
+        additional_notes:
+          type: string
+          description: §12 Sign-off — free-text additional notes from the author.
+        signed_by:
+          type: string
+          description: §12 Sign-off — name of the person who signed off the documentation.
+        signed_at:
+          type: string
+          format: date-time
+          description: §12 Sign-off — timestamp when the documentation was signed off.
+      required:
+        - created_at
+        - updated_at
+        - architecture_id
+        - author_name
+        - author_role
+        - introduction
+        - business_context_description
+        - technical_context_description
+        - solution_strategy_summary
+        - top_level_decomposition_summary
+        - building_block_overview
+        - runtime_overview
+        - deployment_overview
+        - crosscutting_overview
+        - quality_tree_summary
+        - recommendation
+        - additional_notes
+        - signed_by
+      description: Snapshot of arc42 architecture documentation (prose fields and metadata).

@@ -1,0 +1,188 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: organizer
+openapi: 3.1.0
+info:
+  title: Meeting — Organizer
+  version: 1.0.0
+  description: "Person who schedules a meeting and signs the record. The analogue of patient in a clinical form: the subject of the assessment is the meeting itself, but the organizer is the human who scheduled it."
+paths:
+  /organizers:
+    get:
+      summary: List Organizer records
+      operationId: listOrganizer
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Organizer records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Organizer"
+    post:
+      summary: Create a new Organizer
+      operationId: createOrganizer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organizer"
+      responses:
+        "201":
+          description: The newly created Organizer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organizer"
+        "400":
+          description: Validation error
+  /organizers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Organizer by id
+      operationId: getOrganizer
+      responses:
+        "200":
+          description: The requested Organizer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organizer"
+        "404":
+          description: Organizer not found
+    patch:
+      summary: Update an existing Organizer
+      operationId: updateOrganizer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Organizer"
+      responses:
+        "200":
+          description: The updated Organizer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Organizer"
+        "404":
+          description: Organizer not found
+    delete:
+      summary: Soft-delete a Organizer
+      operationId: deleteOrganizer
+      responses:
+        "204":
+          description: Organizer deleted
+        "404":
+          description: Organizer not found
+components:
+  schemas:
+    Organizer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Organizer full name.
+        email:
+          type: string
+          maxLength: 320
+          description: Organizer email address.
+        phone:
+          type: string
+          maxLength: 64
+          description: Organizer phone number.
+        role:
+          type: string
+          enum:
+            - organizer
+            - secretary
+            - chair
+            - facilitator
+            - project-manager
+            - scrum-master
+            - assistant
+            - team-lead
+            - executive
+            - clinician
+            - other
+            - ""
+          description: "Organizer role: organizer, secretary, chair, facilitator, project-manager, scrum-master, etc."
+        organisation:
+          type: string
+          maxLength: 255
+          description: Organisation, company, or trust the organizer belongs to.
+        team:
+          type: string
+          maxLength: 255
+          description: Team or department within the organisation.
+        location:
+          type: string
+          maxLength: 255
+          description: Physical or virtual base location of the organizer.
+        timezone:
+          type: string
+          maxLength: 64
+          description: IANA timezone identifier (e.g. Europe/London).
+        preferred_contact:
+          type: string
+          enum:
+            - email
+            - phone
+            - chat
+            - in-person
+            - ""
+          description: "Preferred contact channel: email, phone, chat, or in-person."
+      required:
+        - created_at
+        - updated_at
+        - name
+        - email
+        - phone
+        - role
+        - organisation
+        - team
+        - location
+        - timezone
+        - preferred_contact
+      description: "Person who schedules a meeting and signs the record. The analogue of patient in a clinical form: the subject of the assessment is the meeting itself, but the organizer is the human who scheduled it."

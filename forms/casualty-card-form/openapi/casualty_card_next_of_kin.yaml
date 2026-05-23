@@ -1,0 +1,151 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_next_of_kin
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardNextOfKin
+  version: 1.0.0
+  description: 1:1 with casualty_card. Next of kin contact details and notification status.
+paths:
+  /casualty-card-next-of-kins:
+    get:
+      summary: List CasualtyCardNextOfKin records
+      operationId: listCasualtyCardNextOfKin
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardNextOfKin records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardNextOfKin"
+    post:
+      summary: Create a new CasualtyCardNextOfKin
+      operationId: createCasualtyCardNextOfKin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardNextOfKin"
+      responses:
+        "201":
+          description: The newly created CasualtyCardNextOfKin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardNextOfKin"
+        "400":
+          description: Validation error
+  /casualty-card-next-of-kins/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardNextOfKin by id
+      operationId: getCasualtyCardNextOfKin
+      responses:
+        "200":
+          description: The requested CasualtyCardNextOfKin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardNextOfKin"
+        "404":
+          description: CasualtyCardNextOfKin not found
+    patch:
+      summary: Update an existing CasualtyCardNextOfKin
+      operationId: updateCasualtyCardNextOfKin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardNextOfKin"
+      responses:
+        "200":
+          description: The updated CasualtyCardNextOfKin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardNextOfKin"
+        "404":
+          description: CasualtyCardNextOfKin not found
+    delete:
+      summary: Soft-delete a CasualtyCardNextOfKin
+      operationId: deleteCasualtyCardNextOfKin
+      responses:
+        "204":
+          description: CasualtyCardNextOfKin deleted
+        "404":
+          description: CasualtyCardNextOfKin not found
+components:
+  schemas:
+    CasualtyCardNextOfKin:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        name:
+          type: string
+          description: Full name of the next of kin.
+        relationship:
+          type: string
+          description: Relationship to the patient (e.g. spouse, parent, sibling).
+        phone:
+          type: string
+          description: Contact phone number for the next of kin.
+        notified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the next of kin has been notified: yes, no, or empty string if unanswered."
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - name
+        - relationship
+        - phone
+        - notified
+      description: 1:1 with casualty_card. Next of kin contact details and notification status.

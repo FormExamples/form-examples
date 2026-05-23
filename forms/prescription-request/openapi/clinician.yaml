@@ -1,0 +1,150 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: clinician
+openapi: 3.1.0
+info:
+  title: Prescription Request — Clinician
+  version: 1.0.0
+  description: Clinician demographic information for prescription requests.
+paths:
+  /clinicians:
+    get:
+      summary: List Clinician records
+      operationId: listClinician
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Clinician records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Clinician"
+    post:
+      summary: Create a new Clinician
+      operationId: createClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "201":
+          description: The newly created Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "400":
+          description: Validation error
+  /clinicians/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Clinician by id
+      operationId: getClinician
+      responses:
+        "200":
+          description: The requested Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    patch:
+      summary: Update an existing Clinician
+      operationId: updateClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "200":
+          description: The updated Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    delete:
+      summary: Soft-delete a Clinician
+      operationId: deleteClinician
+      responses:
+        "204":
+          description: Clinician deleted
+        "404":
+          description: Clinician not found
+components:
+  schemas:
+    Clinician:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        first_name:
+          type: string
+          maxLength: 255
+          description: Clinician given name.
+        last_name:
+          type: string
+          maxLength: 255
+          description: Clinician family name.
+        nhs_employee_number:
+          type: string
+          maxLength: 20
+          description: NHS employee number, unique per clinician.
+        phone:
+          type: string
+          maxLength: 30
+          description: Clinician phone number.
+        email:
+          type: string
+          maxLength: 255
+          description: Clinician email address.
+      required:
+        - created_at
+        - updated_at
+        - first_name
+        - last_name
+        - phone
+        - email
+      description: Clinician demographic information for prescription requests.

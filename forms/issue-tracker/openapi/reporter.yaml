@@ -1,0 +1,191 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: reporter
+openapi: 3.1.0
+info:
+  title: Issue Tracker — Reporter
+  version: 1.0.0
+  description: Person who reported an issue. Records identity, role, and preferred contact channel.
+paths:
+  /reporters:
+    get:
+      summary: List Reporter records
+      operationId: listReporter
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Reporter records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reporter"
+    post:
+      summary: Create a new Reporter
+      operationId: createReporter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reporter"
+      responses:
+        "201":
+          description: The newly created Reporter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reporter"
+        "400":
+          description: Validation error
+  /reporters/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Reporter by id
+      operationId: getReporter
+      responses:
+        "200":
+          description: The requested Reporter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reporter"
+        "404":
+          description: Reporter not found
+    patch:
+      summary: Update an existing Reporter
+      operationId: updateReporter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reporter"
+      responses:
+        "200":
+          description: The updated Reporter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reporter"
+        "404":
+          description: Reporter not found
+    delete:
+      summary: Soft-delete a Reporter
+      operationId: deleteReporter
+      responses:
+        "204":
+          description: Reporter deleted
+        "404":
+          description: Reporter not found
+components:
+  schemas:
+    Reporter:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Reporter full name.
+        email:
+          type: string
+          description: Reporter email address for follow-up.
+        phone:
+          type: string
+          description: Reporter phone number for follow-up.
+        role:
+          type: string
+          enum:
+            - engineer
+            - sre
+            - on-call
+            - product-manager
+            - project-manager
+            - customer-success
+            - safety-officer
+            - compliance-officer
+            - clinician
+            - patient
+            - employee
+            - contractor
+            - visitor
+            - customer
+            - partner
+            - other
+            - ""
+          description: "Reporter role: engineer, sre, product-manager, customer-success, etc."
+        organisation:
+          type: string
+          maxLength: 255
+          description: Organisation, company, or hospital trust the reporter belongs to.
+        team:
+          type: string
+          maxLength: 255
+          description: Team or department within the organisation.
+        location:
+          type: string
+          maxLength: 255
+          description: Physical or virtual location of the reporter at the time of report.
+        timezone:
+          type: string
+          maxLength: 64
+          description: IANA timezone identifier (e.g. Europe/London).
+        preferred_contact:
+          type: string
+          enum:
+            - email
+            - phone
+            - chat
+            - in-person
+            - ""
+          description: "Preferred follow-up channel: email, phone, chat, or in-person."
+      required:
+        - created_at
+        - updated_at
+        - name
+        - email
+        - phone
+        - role
+        - organisation
+        - team
+        - location
+        - timezone
+        - preferred_contact
+      description: Person who reported an issue. Records identity, role, and preferred contact channel.

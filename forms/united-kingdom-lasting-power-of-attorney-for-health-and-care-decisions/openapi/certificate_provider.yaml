@@ -1,0 +1,230 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: certificate_provider
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — CertificateProvider
+  version: 1.0.0
+  description: Independent certificate provider per Lasting Powers of Attorney Regulations 2007 Sch.1 Pt.2.
+paths:
+  /certificate-providers:
+    get:
+      summary: List CertificateProvider records
+      operationId: listCertificateProvider
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CertificateProvider records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CertificateProvider"
+    post:
+      summary: Create a new CertificateProvider
+      operationId: createCertificateProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CertificateProvider"
+      responses:
+        "201":
+          description: The newly created CertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateProvider"
+        "400":
+          description: Validation error
+  /certificate-providers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CertificateProvider by id
+      operationId: getCertificateProvider
+      responses:
+        "200":
+          description: The requested CertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateProvider"
+        "404":
+          description: CertificateProvider not found
+    patch:
+      summary: Update an existing CertificateProvider
+      operationId: updateCertificateProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CertificateProvider"
+      responses:
+        "200":
+          description: The updated CertificateProvider
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateProvider"
+        "404":
+          description: CertificateProvider not found
+    delete:
+      summary: Soft-delete a CertificateProvider
+      operationId: deleteCertificateProvider
+      responses:
+        "204":
+          description: CertificateProvider deleted
+        "404":
+          description: CertificateProvider not found
+components:
+  schemas:
+    CertificateProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        title:
+          type: string
+          maxLength: 20
+          description: Honorific title.
+        given_names:
+          type: string
+          maxLength: 255
+          description: Given names.
+        family_name:
+          type: string
+          maxLength: 255
+          description: Family name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code.
+        route:
+          type: string
+          enum:
+            - skill-based
+            - knowledge-based
+            - ""
+          description: "Eligibility route: skill-based (registered profession) or knowledge-based (known donor ≥ 2 years)."
+        profession:
+          type: string
+          enum:
+            - solicitor
+            - barrister
+            - general-practitioner
+            - consultant
+            - registered-nurse
+            - registered-social-worker
+            - imca
+            - psychiatrist
+            - psychologist
+            - other-registered-professional
+            - ""
+          description: Profession when route = skill-based.
+        profession_registration_number:
+          type: string
+          maxLength: 50
+          description: Professional registration number (e.g. SRA, GMC, NMC, HCPC number).
+        years_known_donor:
+          type: number
+          format: double
+          description: Years known the donor personally. Must be ≥ 2 when route = knowledge-based (R-MCA-CP-ROUTE).
+        relationship_to_donor:
+          type: string
+          enum:
+            - professional
+            - friend
+            - colleague
+            - neighbour
+            - other
+            - ""
+          description: Nature of the relationship with the donor.
+        declared_not_family:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Self-declaration that the certificate provider is not a family member of donor or attorney (R-MCA-CP-FAM).
+        declared_not_employee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Self-declaration that the certificate provider is not a business partner or employee of donor or attorney (R-MCA-CP-EMP).
+        declared_not_attorney:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Self-declaration that the certificate provider is not an attorney named in this LPA.
+      required:
+        - created_at
+        - updated_at
+        - title
+        - given_names
+        - family_name
+        - email
+        - phone
+        - postal_address_as_full_text
+        - country_as_iso_3166_1_alpha_2
+        - postcode
+        - route
+        - profession
+        - profession_registration_number
+        - relationship_to_donor
+        - declared_not_family
+        - declared_not_employee
+        - declared_not_attorney
+      description: Independent certificate provider per Lasting Powers of Attorney Regulations 2007 Sch.1 Pt.2.

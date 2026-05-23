@@ -1,0 +1,161 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pre_operative_assessment_by_clinician_grade_rule
+openapi: 3.1.0
+info:
+  title: Pre Operative Assessment By Clinician — PreOperativeAssessmentByClinicianGradeRule
+  version: 1.0.0
+  description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.
+paths:
+  /pre-operative-assessment-by-clinician-grade-rules:
+    get:
+      summary: List PreOperativeAssessmentByClinicianGradeRule records
+      operationId: listPreOperativeAssessmentByClinicianGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PreOperativeAssessmentByClinicianGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+    post:
+      summary: Create a new PreOperativeAssessmentByClinicianGradeRule
+      operationId: createPreOperativeAssessmentByClinicianGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+      responses:
+        "201":
+          description: The newly created PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+        "400":
+          description: Validation error
+  /pre-operative-assessment-by-clinician-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PreOperativeAssessmentByClinicianGradeRule by id
+      operationId: getPreOperativeAssessmentByClinicianGradeRule
+      responses:
+        "200":
+          description: The requested PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+        "404":
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+    patch:
+      summary: Update an existing PreOperativeAssessmentByClinicianGradeRule
+      operationId: updatePreOperativeAssessmentByClinicianGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+      responses:
+        "200":
+          description: The updated PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreOperativeAssessmentByClinicianGradeRule"
+        "404":
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+    delete:
+      summary: Soft-delete a PreOperativeAssessmentByClinicianGradeRule
+      operationId: deletePreOperativeAssessmentByClinicianGradeRule
+      responses:
+        "204":
+          description: PreOperativeAssessmentByClinicianGradeRule deleted
+        "404":
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+components:
+  schemas:
+    PreOperativeAssessmentByClinicianGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Stable rule identifier (e.g. R-ASA-III-02).
+        instrument:
+          type: string
+          enum:
+            - asa
+            - mallampati
+            - rcri
+            - stopbang
+            - frailty
+          description: "Scoring instrument the rule belongs to: asa, mallampati, rcri, stopbang, frailty."
+        grade:
+          type: string
+          maxLength: 5
+          description: Grade contributed by this rule (e.g. III for ASA).
+        category:
+          type: string
+          maxLength: 50
+          description: Body-system or risk category (e.g. cardiovascular, respiratory).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - instrument
+        - grade
+        - category
+        - description
+      description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.

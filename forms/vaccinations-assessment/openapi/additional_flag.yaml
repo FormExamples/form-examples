@@ -1,0 +1,153 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: additional_flag
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — AdditionalFlag
+  version: 1.0.0
+  description: Additional flags raised during vaccination assessment. Many-to-one child of grade.
+paths:
+  /additional-flags:
+    get:
+      summary: List AdditionalFlag records
+      operationId: listAdditionalFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AdditionalFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdditionalFlag"
+    post:
+      summary: Create a new AdditionalFlag
+      operationId: createAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdditionalFlag"
+      responses:
+        "201":
+          description: The newly created AdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdditionalFlag"
+        "400":
+          description: Validation error
+  /additional-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AdditionalFlag by id
+      operationId: getAdditionalFlag
+      responses:
+        "200":
+          description: The requested AdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdditionalFlag"
+        "404":
+          description: AdditionalFlag not found
+    patch:
+      summary: Update an existing AdditionalFlag
+      operationId: updateAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdditionalFlag"
+      responses:
+        "200":
+          description: The updated AdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdditionalFlag"
+        "404":
+          description: AdditionalFlag not found
+    delete:
+      summary: Soft-delete a AdditionalFlag
+      operationId: deleteAdditionalFlag
+      responses:
+        "204":
+          description: AdditionalFlag deleted
+        "404":
+          description: AdditionalFlag not found
+components:
+  schemas:
+    AdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the additional flag (e.g. FLAG-VAX-001).
+        category:
+          type: string
+          maxLength: 50
+          description: Category grouping for the flag.
+        message:
+          type: string
+          description: Human-readable message describing the flag.
+        priority:
+          type: string
+          enum:
+            - high
+            - medium
+            - low
+          description: "Flag priority: high, medium, or low."
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - flag_id
+        - category
+        - message
+        - priority
+      description: Additional flags raised during vaccination assessment. Many-to-one child of grade.

@@ -1,0 +1,171 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_validity_fired_rule
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaValidityFiredRule
+  version: 1.0.0
+  description: Audit trail of every statutory rule that fired during the most recent validity computation.
+paths:
+  /lpa-validity-fired-rules:
+    get:
+      summary: List LpaValidityFiredRule records
+      operationId: listLpaValidityFiredRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaValidityFiredRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaValidityFiredRule"
+    post:
+      summary: Create a new LpaValidityFiredRule
+      operationId: createLpaValidityFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidityFiredRule"
+      responses:
+        "201":
+          description: The newly created LpaValidityFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidityFiredRule"
+        "400":
+          description: Validation error
+  /lpa-validity-fired-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaValidityFiredRule by id
+      operationId: getLpaValidityFiredRule
+      responses:
+        "200":
+          description: The requested LpaValidityFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidityFiredRule"
+        "404":
+          description: LpaValidityFiredRule not found
+    patch:
+      summary: Update an existing LpaValidityFiredRule
+      operationId: updateLpaValidityFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidityFiredRule"
+      responses:
+        "200":
+          description: The updated LpaValidityFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidityFiredRule"
+        "404":
+          description: LpaValidityFiredRule not found
+    delete:
+      summary: Soft-delete a LpaValidityFiredRule
+      operationId: deleteLpaValidityFiredRule
+      responses:
+        "204":
+          description: LpaValidityFiredRule deleted
+        "404":
+          description: LpaValidityFiredRule not found
+components:
+  schemas:
+    LpaValidityFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_validity_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent validity result.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-MCA-S9-AGE, R-MCA-CP-FAM, R-MCA-LST-CHOICE).
+        severity:
+          type: string
+          enum:
+            - fatal
+            - high
+            - medium
+            - informational
+            - ""
+          description: "Severity: fatal invalidates the LPA; high requires correction before registration; medium and informational do not block."
+        rule_family:
+          type: string
+          enum:
+            - donor
+            - attorney
+            - certificate-provider
+            - signature-order
+            - instruction
+            - registration
+            - ""
+          description: Engine rule family the rule belongs to.
+        source_citation:
+          type: string
+          maxLength: 255
+          description: "Statute / regulation / OPG note that the rule encodes (e.g. \"MCA 2005 s.9(2)(c)\")."
+        description:
+          type: string
+          description: Human-readable description of why the rule fired.
+        suggested_correction:
+          type: string
+          description: Hint to the user about how to fix the underlying field.
+      required:
+        - created_at
+        - updated_at
+        - lpa_validity_id
+        - rule_id
+        - severity
+        - rule_family
+        - source_citation
+        - description
+        - suggested_correction
+      description: Audit trail of every statutory rule that fired during the most recent validity computation.

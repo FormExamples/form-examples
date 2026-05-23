@@ -1,0 +1,187 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: employer
+openapi: 3.1.0
+info:
+  title: Return To Work — Employer
+  version: 1.0.0
+  description: Employer of the patient. Recipient of the Statement of Fitness for Work.
+paths:
+  /employers:
+    get:
+      summary: List Employer records
+      operationId: listEmployer
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Employer records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employer"
+    post:
+      summary: Create a new Employer
+      operationId: createEmployer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employer"
+      responses:
+        "201":
+          description: The newly created Employer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employer"
+        "400":
+          description: Validation error
+  /employers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Employer by id
+      operationId: getEmployer
+      responses:
+        "200":
+          description: The requested Employer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employer"
+        "404":
+          description: Employer not found
+    patch:
+      summary: Update an existing Employer
+      operationId: updateEmployer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employer"
+      responses:
+        "200":
+          description: The updated Employer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employer"
+        "404":
+          description: Employer not found
+    delete:
+      summary: Soft-delete a Employer
+      operationId: deleteEmployer
+      responses:
+        "204":
+          description: Employer deleted
+        "404":
+          description: Employer not found
+components:
+  schemas:
+    Employer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          maxLength: 255
+          description: Registered employer name.
+        industry_sector:
+          type: string
+          enum:
+            - agriculture
+            - construction
+            - education
+            - energy-utilities
+            - finance-insurance
+            - food-hospitality
+            - government
+            - healthcare
+            - information-technology
+            - manufacturing
+            - mining
+            - professional-services
+            - public-safety-emergency
+            - retail
+            - transport-logistics
+            - aviation
+            - rail
+            - maritime
+            - media
+            - other
+            - ""
+          description: Industry sector for risk-assessment and RIDDOR context.
+        postal_address_as_full_text:
+          type: string
+          description: Employer postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format.
+        postcode:
+          type: string
+          description: Postal code.
+        occupational_health_contact_name:
+          type: string
+          description: Name of the employer occupational-health contact.
+        occupational_health_contact_email:
+          type: string
+          description: Email of the employer occupational-health contact.
+        occupational_health_contact_phone:
+          type: string
+          description: Phone of the employer occupational-health contact.
+        hr_contact_name:
+          type: string
+          description: Name of the employer HR contact.
+        hr_contact_email:
+          type: string
+          description: Email of the employer HR contact.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - industry_sector
+        - occupational_health_contact_name
+        - occupational_health_contact_email
+        - occupational_health_contact_phone
+        - hr_contact_name
+        - hr_contact_email
+      description: Employer of the patient. Recipient of the Statement of Fitness for Work.

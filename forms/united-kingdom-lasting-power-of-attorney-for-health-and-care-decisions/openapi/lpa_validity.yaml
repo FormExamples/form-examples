@@ -1,0 +1,163 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lpa_validity
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaValidity
+  version: 1.0.0
+  description: Computed validity result for an LPA. One row per LPA (1:1). Engine output is reproducible from the LPA inputs and engine_version.
+paths:
+  /lpa-validities:
+    get:
+      summary: List LpaValidity records
+      operationId: listLpaValidity
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LpaValidity records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaValidity"
+    post:
+      summary: Create a new LpaValidity
+      operationId: createLpaValidity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidity"
+      responses:
+        "201":
+          description: The newly created LpaValidity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidity"
+        "400":
+          description: Validation error
+  /lpa-validities/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaValidity by id
+      operationId: getLpaValidity
+      responses:
+        "200":
+          description: The requested LpaValidity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidity"
+        "404":
+          description: LpaValidity not found
+    patch:
+      summary: Update an existing LpaValidity
+      operationId: updateLpaValidity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaValidity"
+      responses:
+        "200":
+          description: The updated LpaValidity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaValidity"
+        "404":
+          description: LpaValidity not found
+    delete:
+      summary: Soft-delete a LpaValidity
+      operationId: deleteLpaValidity
+      responses:
+        "204":
+          description: LpaValidity deleted
+        "404":
+          description: LpaValidity not found
+components:
+  schemas:
+    LpaValidity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA (unique, 1:1).
+        validity_status:
+          type: string
+          enum:
+            - ready-to-register
+            - needs-correction
+            - invalid
+            - ""
+          description: "Overall status: ready-to-register, needs-correction, or invalid."
+        completeness_score:
+          type: integer
+          format: int32
+          description: Percent of statutorily required fields populated, 0..100.
+        effective_date:
+          type: string
+          format: date
+          description: Earliest date the LPA could be submitted to the OPG after the last fatal rule clears.
+        computed_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the engine last computed this result.
+        engine_version:
+          type: string
+          maxLength: 20
+          description: Engine version used for the computation (semver). Lets a future result be recomputed deterministically.
+        notes:
+          type: string
+          description: Human-readable engine notes.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - validity_status
+        - completeness_score
+        - computed_at
+        - engine_version
+        - notes
+      description: Computed validity result for an LPA. One row per LPA (1:1). Engine output is reproducible from the LPA inputs and engine_version.

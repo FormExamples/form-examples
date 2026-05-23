@@ -1,0 +1,238 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_primary_survey
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardPrimarySurvey
+  version: 1.0.0
+  description: 1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.
+paths:
+  /casualty-card-primary-surveys:
+    get:
+      summary: List CasualtyCardPrimarySurvey records
+      operationId: listCasualtyCardPrimarySurvey
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardPrimarySurvey records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+    post:
+      summary: Create a new CasualtyCardPrimarySurvey
+      operationId: createCasualtyCardPrimarySurvey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+      responses:
+        "201":
+          description: The newly created CasualtyCardPrimarySurvey
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+        "400":
+          description: Validation error
+  /casualty-card-primary-surveys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardPrimarySurvey by id
+      operationId: getCasualtyCardPrimarySurvey
+      responses:
+        "200":
+          description: The requested CasualtyCardPrimarySurvey
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+        "404":
+          description: CasualtyCardPrimarySurvey not found
+    patch:
+      summary: Update an existing CasualtyCardPrimarySurvey
+      operationId: updateCasualtyCardPrimarySurvey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+      responses:
+        "200":
+          description: The updated CasualtyCardPrimarySurvey
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+        "404":
+          description: CasualtyCardPrimarySurvey not found
+    delete:
+      summary: Soft-delete a CasualtyCardPrimarySurvey
+      operationId: deleteCasualtyCardPrimarySurvey
+      responses:
+        "204":
+          description: CasualtyCardPrimarySurvey deleted
+        "404":
+          description: CasualtyCardPrimarySurvey not found
+components:
+  schemas:
+    CasualtyCardPrimarySurvey:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        airway_status:
+          type: string
+          enum:
+            - patent
+            - compromised
+            - obstructed
+            - ""
+          description: "Airway status: patent, compromised, obstructed, or empty string if unanswered."
+        airway_adjuncts:
+          type: string
+          description: Airway adjuncts in use (e.g. oropharyngeal, nasopharyngeal, LMA, ETT).
+        c_spine_immobilised:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether cervical spine immobilisation is in place: yes, no, or empty string if unanswered."
+        breathing_effort:
+          type: string
+          enum:
+            - normal
+            - laboured
+            - shallow
+            - absent
+            - ""
+          description: "Breathing effort: normal, laboured, shallow, absent, or empty string if unanswered."
+        chest_movement:
+          type: string
+          description: Description of chest wall movement (e.g. equal bilateral, asymmetric).
+        breath_sounds:
+          type: string
+          description: Auscultation findings (e.g. clear bilateral, wheeze, crackles, absent).
+        trachea_position:
+          type: string
+          description: Trachea position (e.g. central, deviated left, deviated right).
+        pulse_character:
+          type: string
+          description: Pulse character (e.g. regular, irregular, bounding, thready, absent).
+        skin_colour:
+          type: string
+          description: Skin colour (e.g. normal, pale, cyanosed, flushed, mottled).
+        skin_temperature:
+          type: string
+          description: Skin temperature on palpation (e.g. warm, cool, cold, clammy).
+        capillary_refill:
+          type: string
+          description: Capillary refill time assessment.
+        haemorrhage:
+          type: string
+          description: Description of any active haemorrhage and control measures.
+        iv_access:
+          type: string
+          description: IV access details (e.g. 18G left ACF, none).
+        gcs_eye:
+          type: integer
+          format: int32
+          description: Glasgow Coma Scale eye opening component (1-4). NULL if not assessed.
+        gcs_verbal:
+          type: integer
+          format: int32
+          description: Glasgow Coma Scale verbal response component (1-5). NULL if not assessed.
+        gcs_motor:
+          type: integer
+          format: int32
+          description: Glasgow Coma Scale motor response component (1-6). NULL if not assessed.
+        gcs_total:
+          type: integer
+          format: int32
+          description: Glasgow Coma Scale total (3-15), auto-calculated from eye + verbal + motor. NULL if components not complete.
+        pupils:
+          type: string
+          description: Pupil assessment findings.
+        blood_glucose_disability:
+          type: string
+          description: Blood glucose level recorded during disability assessment.
+        limb_movements:
+          type: string
+          description: Limb movement assessment (e.g. all limbs moving spontaneously).
+        skin_examination:
+          type: string
+          description: Skin examination findings on exposure (e.g. rashes, wounds, bruising).
+        injuries_identified:
+          type: string
+          description: Injuries identified on full exposure examination.
+        log_roll_findings:
+          type: string
+          description: Findings from log roll examination (e.g. spinal tenderness, sacral oedema).
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - airway_status
+        - airway_adjuncts
+        - c_spine_immobilised
+        - breathing_effort
+        - chest_movement
+        - breath_sounds
+        - trachea_position
+        - pulse_character
+        - skin_colour
+        - skin_temperature
+        - capillary_refill
+        - haemorrhage
+        - iv_access
+        - pupils
+        - blood_glucose_disability
+        - limb_movements
+        - skin_examination
+        - injuries_identified
+        - log_roll_findings
+      description: 1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.

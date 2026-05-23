@@ -1,0 +1,167 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: visit_information
+openapi: 3.1.0
+info:
+  title: Encounter Satisfaction — VisitInformation
+  version: 1.0.0
+  description: 1:1 with encounter_satisfaction. Details about the healthcare visit being rated.
+paths:
+  /visit-informations:
+    get:
+      summary: List VisitInformation records
+      operationId: listVisitInformation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of VisitInformation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VisitInformation"
+    post:
+      summary: Create a new VisitInformation
+      operationId: createVisitInformation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitInformation"
+      responses:
+        "201":
+          description: The newly created VisitInformation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitInformation"
+        "400":
+          description: Validation error
+  /visit-informations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one VisitInformation by id
+      operationId: getVisitInformation
+      responses:
+        "200":
+          description: The requested VisitInformation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitInformation"
+        "404":
+          description: VisitInformation not found
+    patch:
+      summary: Update an existing VisitInformation
+      operationId: updateVisitInformation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VisitInformation"
+      responses:
+        "200":
+          description: The updated VisitInformation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitInformation"
+        "404":
+          description: VisitInformation not found
+    delete:
+      summary: Soft-delete a VisitInformation
+      operationId: deleteVisitInformation
+      responses:
+        "204":
+          description: VisitInformation deleted
+        "404":
+          description: VisitInformation not found
+components:
+  schemas:
+    VisitInformation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        encounter_satisfaction_id:
+          type: string
+          format: uuid
+          description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
+        visit_date:
+          type: string
+          format: date
+          description: Date of the healthcare visit. NULL if not recorded.
+        department:
+          type: string
+          description: Department or clinic name.
+        provider_name:
+          type: string
+          description: Name of the healthcare provider.
+        visit_type:
+          type: string
+          enum:
+            - routine-checkup
+            - follow-up
+            - urgent-care
+            - specialist-referral
+            - procedure
+            - other
+            - ""
+          description: "Type of visit: routine-checkup, follow-up, urgent-care, specialist-referral, procedure, other, or empty string."
+        reason_for_visit:
+          type: string
+          description: Free-text description of the reason for the visit.
+        first_visit:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether this was the patients first visit to this provider: yes, no, or empty string."
+      required:
+        - created_at
+        - updated_at
+        - encounter_satisfaction_id
+        - department
+        - provider_name
+        - visit_type
+        - reason_for_visit
+        - first_visit
+      description: 1:1 with encounter_satisfaction. Details about the healthcare visit being rated.

@@ -1,0 +1,271 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_consulting_scorecard_for_hiring_help
+openapi: 3.1.0
+info:
+  title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelp
+  version: 1.0.0
+  description: A single agile-consulting readiness scorecard for an organization, captured via a 6-step single-page wizard. Holds organization/respondent FKs, the 16 yes/no items (4 manifesto + 12 principles), and per-item evidence text. Computed scores live in the *_grade child table.
+paths:
+  /agile-consulting-scorecard-for-hiring-helps:
+    get:
+      summary: List AgileConsultingScorecardForHiringHelp records
+      operationId: listAgileConsultingScorecardForHiringHelp
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgileConsultingScorecardForHiringHelp records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+    post:
+      summary: Create a new AgileConsultingScorecardForHiringHelp
+      operationId: createAgileConsultingScorecardForHiringHelp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+      responses:
+        "201":
+          description: The newly created AgileConsultingScorecardForHiringHelp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+        "400":
+          description: Validation error
+  /agile-consulting-scorecard-for-hiring-helps/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgileConsultingScorecardForHiringHelp by id
+      operationId: getAgileConsultingScorecardForHiringHelp
+      responses:
+        "200":
+          description: The requested AgileConsultingScorecardForHiringHelp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+        "404":
+          description: AgileConsultingScorecardForHiringHelp not found
+    patch:
+      summary: Update an existing AgileConsultingScorecardForHiringHelp
+      operationId: updateAgileConsultingScorecardForHiringHelp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+      responses:
+        "200":
+          description: The updated AgileConsultingScorecardForHiringHelp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgileConsultingScorecardForHiringHelp"
+        "404":
+          description: AgileConsultingScorecardForHiringHelp not found
+    delete:
+      summary: Soft-delete a AgileConsultingScorecardForHiringHelp
+      operationId: deleteAgileConsultingScorecardForHiringHelp
+      responses:
+        "204":
+          description: AgileConsultingScorecardForHiringHelp deleted
+        "404":
+          description: AgileConsultingScorecardForHiringHelp not found
+components:
+  schemas:
+    AgileConsultingScorecardForHiringHelp:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        organization_id:
+          type: string
+          format: uuid
+          description: Foreign key to the organization being assessed.
+        respondent_id:
+          type: string
+          format: uuid
+          description: Foreign key to the respondent who filled out the scorecard.
+        status:
+          type: string
+          enum:
+            - draft
+            - in-progress
+            - submitted
+            - finalized
+            - cancelled
+          description: "Lifecycle status: draft, in-progress, submitted, finalized, cancelled."
+        assessment_date:
+          type: string
+          format: date
+          description: Date the scorecard was completed (defaults to today).
+        submitted_at:
+          type: string
+          format: date-time
+          description: Timestamp the respondent submitted the scorecard.
+        finalized_at:
+          type: string
+          format: date-time
+          description: Timestamp the scorecard was finalized (signed off).
+        m1_done:
+          type: boolean
+          description: "Manifesto 1 (Individuals and interactions): every leader is in conversation with customers >=1 hour/week, with weekly results radiated to stakeholders. NULL = unanswered."
+        m1_evidence:
+          type: string
+          description: "Manifesto 1: free-text evidence supporting the answer."
+        m2_done:
+          type: boolean
+          description: "Manifesto 2 (Working software): the team has launched a brand-new \"hello world\" program to production and discussed the experience. NULL = unanswered."
+        m2_evidence:
+          type: string
+          description: "Manifesto 2: free-text evidence supporting the answer."
+        m3_done:
+          type: boolean
+          description: "Manifesto 3 (Customer collaboration): the organization has bought copies of the customer's favourite book and shared with the team (org spend, not personal). NULL = unanswered."
+        m3_evidence:
+          type: string
+          description: "Manifesto 3: free-text evidence supporting the answer."
+        m4_done:
+          type: boolean
+          description: "Manifesto 4 (Responding to change): every senior leader (BoD/CXO/VP/Dir) has read one agile change-management book and shared three takeaways. NULL = unanswered."
+        m4_evidence:
+          type: string
+          description: "Manifesto 4: free-text evidence supporting the answer."
+        p1_done:
+          type: boolean
+          description: "Principle 1 (Customer satisfaction): every product lead measures customer Net Promoter Score (NPS). NULL = unanswered."
+        p1_evidence:
+          type: string
+          description: "Principle 1: free-text evidence supporting the answer."
+        p2_done:
+          type: boolean
+          description: "Principle 2 (Welcome change): the \"hello world\" program has been internationalized to >=1 additional language using the user locale. NULL = unanswered."
+        p2_evidence:
+          type: string
+          description: "Principle 2: free-text evidence supporting the answer."
+        p3_done:
+          type: boolean
+          description: "Principle 3 (Deliver frequently): the internationalized \"hello world\" version has been launched to production and verified by a native speaker. NULL = unanswered."
+        p3_evidence:
+          type: string
+          description: "Principle 3: free-text evidence supporting the answer."
+        p4_done:
+          type: boolean
+          description: "Principle 4 (Business and developers together): commitment is in place from every product/project/programme/practice lead. NULL = unanswered."
+        p4_evidence:
+          type: string
+          description: "Principle 4: free-text evidence supporting the answer."
+        p5_done:
+          type: boolean
+          description: "Principle 5 (Motivated individuals): a 3-amigos team (business+dev+test) has shipped a real new MVP within 30 days and on budget. NULL = unanswered."
+        p5_evidence:
+          type: string
+          description: "Principle 5: free-text evidence supporting the answer."
+        p6_done:
+          type: boolean
+          description: "Principle 6 (Face-to-face): every product owner has committed to >=50% face-to-face time (or weekly-video equivalent for remote teams). NULL = unanswered."
+        p6_evidence:
+          type: string
+          description: "Principle 6: free-text evidence supporting the answer."
+        p7_done:
+          type: boolean
+          description: "Principle 7 (Working software is primary measure): a new \"fizz buzz\" program has been created and shipped to production. NULL = unanswered."
+        p7_evidence:
+          type: string
+          description: "Principle 7: free-text evidence supporting the answer."
+        p8_done:
+          type: boolean
+          description: "Principle 8 (Sustainable pace): all staff have a sustaining budget for >=1 year secured. NULL = unanswered."
+        p8_evidence:
+          type: string
+          description: "Principle 8: free-text evidence supporting the answer."
+        p9_done:
+          type: boolean
+          description: "Principle 9 (Technical excellence): quality-attribute metrics are wired into pre-commit hooks and CI. NULL = unanswered."
+        p9_evidence:
+          type: string
+          description: "Principle 9: free-text evidence supporting the answer."
+        p10_done:
+          type: boolean
+          description: "Principle 10 (Simplicity): every product team has >=2 people with process-improvement skills (Lean/Six Sigma/VSM/TPS/TPC). NULL = unanswered."
+        p10_evidence:
+          type: string
+          description: "Principle 10: free-text evidence supporting the answer."
+        p11_done:
+          type: boolean
+          description: "Principle 11 (Self-organizing teams): a 5-point Likert \"our team is self-organizing\" averages \"Agree\" or better. NULL = unanswered."
+        p11_evidence:
+          type: string
+          description: "Principle 11: free-text evidence supporting the answer."
+        p12_done:
+          type: boolean
+          description: "Principle 12 (Reflection): every leader has shared their previous 2 retrospectives with all stakeholders. NULL = unanswered."
+        p12_evidence:
+          type: string
+          description: "Principle 12: free-text evidence supporting the answer."
+      required:
+        - created_at
+        - updated_at
+        - organization_id
+        - respondent_id
+        - status
+        - assessment_date
+        - m1_evidence
+        - m2_evidence
+        - m3_evidence
+        - m4_evidence
+        - p1_evidence
+        - p2_evidence
+        - p3_evidence
+        - p4_evidence
+        - p5_evidence
+        - p6_evidence
+        - p7_evidence
+        - p8_evidence
+        - p9_evidence
+        - p10_evidence
+        - p11_evidence
+        - p12_evidence
+      description: A single agile-consulting readiness scorecard for an organization, captured via a 6-step single-page wizard. Holds organization/respondent FKs, the 16 yes/no items (4 manifesto + 12 principles), and per-item evidence text. Computed scores live in the *_grade child table.

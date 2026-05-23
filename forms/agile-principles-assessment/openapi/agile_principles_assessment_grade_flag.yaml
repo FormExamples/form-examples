@@ -1,0 +1,179 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: agile_principles_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Agile Principles Assessment — AgilePrinciplesAssessmentGradeFlag
+  version: 1.0.0
+  description: Operational flags raised by the maturity engine independently of the composite maturity level.
+paths:
+  /agile-principles-assessment-grade-flags:
+    get:
+      summary: List AgilePrinciplesAssessmentGradeFlag records
+      operationId: listAgilePrinciplesAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AgilePrinciplesAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+    post:
+      summary: Create a new AgilePrinciplesAssessmentGradeFlag
+      operationId: createAgilePrinciplesAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created AgilePrinciplesAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /agile-principles-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AgilePrinciplesAssessmentGradeFlag by id
+      operationId: getAgilePrinciplesAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested AgilePrinciplesAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+        "404":
+          description: AgilePrinciplesAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing AgilePrinciplesAssessmentGradeFlag
+      operationId: updateAgilePrinciplesAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated AgilePrinciplesAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessmentGradeFlag"
+        "404":
+          description: AgilePrinciplesAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a AgilePrinciplesAssessmentGradeFlag
+      operationId: deleteAgilePrinciplesAssessmentGradeFlag
+      responses:
+        "204":
+          description: AgilePrinciplesAssessmentGradeFlag deleted
+        "404":
+          description: AgilePrinciplesAssessmentGradeFlag not found
+components:
+  schemas:
+    AgilePrinciplesAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        agile_principles_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade row.
+        flag_id:
+          type: string
+          maxLength: 40
+          description: Stable flag identifier (e.g. F-BURNOUT-RISK).
+        category:
+          type: string
+          enum:
+            - customer-disconnect
+            - change-resistance
+            - slow-delivery
+            - silo-collaboration
+            - morale-risk
+            - communication-gap
+            - output-not-outcome
+            - burnout-risk
+            - technical-debt
+            - over-engineering
+            - command-and-control
+            - no-retrospective
+            - critical-principle-gap
+            - insufficient-data
+            - other
+            - ""
+          description: "Flag category: customer-disconnect, change-resistance, burnout-risk, technical-debt, etc."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: "Operational priority: low, medium, or high."
+        principle_number:
+          type: integer
+          format: int32
+          description: Ordinal 1-12 of the principle that triggered this flag, NULL when the flag is cross-cutting.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of the operational concern.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested coaching action to address the flag.
+      required:
+        - created_at
+        - updated_at
+        - agile_principles_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Operational flags raised by the maturity engine independently of the composite maturity level.

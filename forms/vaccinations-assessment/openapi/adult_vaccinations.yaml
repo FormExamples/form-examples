@@ -1,0 +1,159 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: adult_vaccinations
+openapi: 3.1.0
+info:
+  title: Vaccinations Assessment — AdultVaccinations
+  version: 1.0.0
+  description: Adult vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.
+paths:
+  /adult-vaccinationses:
+    get:
+      summary: List AdultVaccinations records
+      operationId: listAdultVaccinations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AdultVaccinations records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdultVaccinations"
+    post:
+      summary: Create a new AdultVaccinations
+      operationId: createAdultVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdultVaccinations"
+      responses:
+        "201":
+          description: The newly created AdultVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdultVaccinations"
+        "400":
+          description: Validation error
+  /adult-vaccinationses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AdultVaccinations by id
+      operationId: getAdultVaccinations
+      responses:
+        "200":
+          description: The requested AdultVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdultVaccinations"
+        "404":
+          description: AdultVaccinations not found
+    patch:
+      summary: Update an existing AdultVaccinations
+      operationId: updateAdultVaccinations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdultVaccinations"
+      responses:
+        "200":
+          description: The updated AdultVaccinations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdultVaccinations"
+        "404":
+          description: AdultVaccinations not found
+    delete:
+      summary: Soft-delete a AdultVaccinations
+      operationId: deleteAdultVaccinations
+      responses:
+        "204":
+          description: AdultVaccinations deleted
+        "404":
+          description: AdultVaccinations not found
+components:
+  schemas:
+    AdultVaccinations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        td_ipv_booster:
+          type: integer
+          format: int32
+          description: Td ipv booster.
+        hpv:
+          type: integer
+          format: int32
+          description: Hpv.
+        meningitis_acwy:
+          type: integer
+          format: int32
+          description: Meningitis acwy.
+        influenza_annual:
+          type: integer
+          format: int32
+          description: Influenza annual.
+        covid19:
+          type: integer
+          format: int32
+          description: Covid19.
+        shingles:
+          type: integer
+          format: int32
+          description: Shingles.
+        pneumococcal_ppv:
+          type: integer
+          format: int32
+          description: Pneumococcal ppv.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+      description: Adult vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.

@@ -1,0 +1,256 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: assessment, assessment_performance_ratings, assessment_performance_rating_item, assessment_satisfaction_ratings, assessment_satisfaction_rating_item
+openapi: 3.1.0
+info:
+  title: Occupational Therapy Assessment — Assessment
+  version: 1.0.0
+  description: Occupational therapy assessment form using COPM. Parent entity for all assessment sections.
+paths:
+  /assessments:
+    get:
+      summary: List Assessment records
+      operationId: listAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessment"
+    post:
+      summary: Create a new Assessment
+      operationId: createAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "201":
+          description: The newly created Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "400":
+          description: Validation error
+  /assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessment by id
+      operationId: getAssessment
+      responses:
+        "200":
+          description: The requested Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    patch:
+      summary: Update an existing Assessment
+      operationId: updateAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+    delete:
+      summary: Soft-delete a Assessment
+      operationId: deleteAssessment
+      responses:
+        "204":
+          description: Assessment deleted
+        "404":
+          description: Assessment not found
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who owns this assessment.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: "Lifecycle status: draft, submitted, reviewed, or urgent."
+        performance_ratings_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        overall_performance_score:
+          type: number
+          format: double
+          description: Overall COPM performance score (1-10), averaged across domains.
+        self_care_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for self-care activities (1 = not able, 10 = able to do extremely well).
+        productivity_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for productivity activities (1 = not able, 10 = able to do extremely well).
+        leisure_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for leisure activities (1 = not able, 10 = able to do extremely well).
+        performance_notes:
+          type: string
+          description: Additional notes on performance ratings and observations.
+        performance_rating_item_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        performance_ratings_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_performance_ratings table.
+        occupational_issue:
+          type: string
+          maxLength: 255
+          description: Description of the specific occupational performance issue.
+        domain:
+          type: string
+          enum:
+            - self-care
+            - productivity
+            - leisure
+            - ""
+          description: "COPM domain: self-care, productivity, leisure, or empty."
+        importance_score:
+          type: integer
+          format: int32
+          description: Patient-rated importance of this issue (1 = not important, 10 = extremely important).
+        performance_score:
+          type: integer
+          format: int32
+          description: Patient-rated performance score (1 = not able, 10 = able to do extremely well).
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the item within the list.
+        satisfaction_ratings_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        overall_satisfaction_score:
+          type: number
+          format: double
+          description: Overall COPM satisfaction score (1-10), averaged across domains.
+        self_care_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for self-care activities (1 = not satisfied, 10 = extremely satisfied).
+        productivity_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for productivity activities (1 = not satisfied, 10 = extremely satisfied).
+        leisure_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for leisure activities (1 = not satisfied, 10 = extremely satisfied).
+        satisfaction_notes:
+          type: string
+          description: Additional notes on satisfaction ratings and observations.
+        satisfaction_rating_item_deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        satisfaction_ratings_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_satisfaction_ratings table.
+        satisfaction_rating_item_occupational_issue:
+          type: string
+          maxLength: 255
+          description: Description of the specific occupational performance issue.
+        satisfaction_rating_item_domain:
+          type: string
+          enum:
+            - self-care
+            - productivity
+            - leisure
+            - ""
+          description: "COPM domain: self-care, productivity, leisure, or empty."
+        satisfaction_score:
+          type: integer
+          format: int32
+          description: Patient-rated satisfaction score (1 = not satisfied, 10 = extremely satisfied).
+        satisfaction_rating_item_sort_order:
+          type: integer
+          format: int32
+          description: Display order of the item within the list.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - status
+        - performance_notes
+        - performance_ratings_id
+        - occupational_issue
+        - domain
+        - sort_order
+        - satisfaction_notes
+        - satisfaction_ratings_id
+        - satisfaction_rating_item_occupational_issue
+        - satisfaction_rating_item_domain
+        - satisfaction_rating_item_sort_order
+      description: Occupational therapy assessment form using COPM. Parent entity for all assessment sections.

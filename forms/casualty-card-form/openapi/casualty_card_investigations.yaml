@@ -1,0 +1,159 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: casualty_card_investigations
+openapi: 3.1.0
+info:
+  title: Casualty Card Form — CasualtyCardInvestigations
+  version: 1.0.0
+  description: 1:1 with casualty_card. Investigations ordered and their results.
+paths:
+  /casualty-card-investigationses:
+    get:
+      summary: List CasualtyCardInvestigations records
+      operationId: listCasualtyCardInvestigations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CasualtyCardInvestigations records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CasualtyCardInvestigations"
+    post:
+      summary: Create a new CasualtyCardInvestigations
+      operationId: createCasualtyCardInvestigations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardInvestigations"
+      responses:
+        "201":
+          description: The newly created CasualtyCardInvestigations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardInvestigations"
+        "400":
+          description: Validation error
+  /casualty-card-investigationses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CasualtyCardInvestigations by id
+      operationId: getCasualtyCardInvestigations
+      responses:
+        "200":
+          description: The requested CasualtyCardInvestigations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardInvestigations"
+        "404":
+          description: CasualtyCardInvestigations not found
+    patch:
+      summary: Update an existing CasualtyCardInvestigations
+      operationId: updateCasualtyCardInvestigations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardInvestigations"
+      responses:
+        "200":
+          description: The updated CasualtyCardInvestigations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardInvestigations"
+        "404":
+          description: CasualtyCardInvestigations not found
+    delete:
+      summary: Soft-delete a CasualtyCardInvestigations
+      operationId: deleteCasualtyCardInvestigations
+      responses:
+        "204":
+          description: CasualtyCardInvestigations deleted
+        "404":
+          description: CasualtyCardInvestigations not found
+components:
+  schemas:
+    CasualtyCardInvestigations:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        casualty_card_id:
+          type: string
+          format: uuid
+          description: FK to casualty_card (UNIQUE = 1:1 relationship).
+        blood_tests:
+          type: string
+          description: Array of blood test types ordered (e.g. FBC, U&E, LFTs, CRP, coagulation, troponin).
+        urinalysis:
+          type: string
+          description: Urinalysis dipstick results.
+        pregnancy_test:
+          type: string
+          description: Pregnancy test result.
+        ecg_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether an ECG was performed: yes, no, or empty string if unanswered."
+        ecg_findings:
+          type: string
+          description: ECG interpretation findings.
+        other_investigations:
+          type: string
+          description: Free-text description of other investigations performed.
+      required:
+        - created_at
+        - updated_at
+        - casualty_card_id
+        - blood_tests
+        - urinalysis
+        - pregnancy_test
+        - ecg_performed
+        - ecg_findings
+        - other_investigations
+      description: 1:1 with casualty_card. Investigations ordered and their results.

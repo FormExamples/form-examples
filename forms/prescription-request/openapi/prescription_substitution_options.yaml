@@ -1,0 +1,159 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: prescription_substitution_options
+openapi: 3.1.0
+info:
+  title: Prescription Request — PrescriptionSubstitutionOptions
+  version: 1.0.0
+  description: Substitution preferences for a prescription request. One-to-one child of prescription_request.
+paths:
+  /prescription-substitution-optionses:
+    get:
+      summary: List PrescriptionSubstitutionOptions records
+      operationId: listPrescriptionSubstitutionOptions
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PrescriptionSubstitutionOptions records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+    post:
+      summary: Create a new PrescriptionSubstitutionOptions
+      operationId: createPrescriptionSubstitutionOptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+      responses:
+        "201":
+          description: The newly created PrescriptionSubstitutionOptions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+        "400":
+          description: Validation error
+  /prescription-substitution-optionses/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PrescriptionSubstitutionOptions by id
+      operationId: getPrescriptionSubstitutionOptions
+      responses:
+        "200":
+          description: The requested PrescriptionSubstitutionOptions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+        "404":
+          description: PrescriptionSubstitutionOptions not found
+    patch:
+      summary: Update an existing PrescriptionSubstitutionOptions
+      operationId: updatePrescriptionSubstitutionOptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+      responses:
+        "200":
+          description: The updated PrescriptionSubstitutionOptions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionSubstitutionOptions"
+        "404":
+          description: PrescriptionSubstitutionOptions not found
+    delete:
+      summary: Soft-delete a PrescriptionSubstitutionOptions
+      operationId: deletePrescriptionSubstitutionOptions
+      responses:
+        "204":
+          description: PrescriptionSubstitutionOptions deleted
+        "404":
+          description: PrescriptionSubstitutionOptions not found
+components:
+  schemas:
+    PrescriptionSubstitutionOptions:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        prescription_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the prescription_request table.
+        allow_brand_substitution:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a different brand name is acceptable: yes, no, or empty."
+        allow_generic_substitution:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a generic equivalent is acceptable: yes, no, or empty."
+        allow_dosage_adjustment:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a different dosage is acceptable: yes, no, or empty."
+        substitution_notes:
+          type: string
+          description: Additional notes about substitution preferences.
+      required:
+        - created_at
+        - updated_at
+        - prescription_request_id
+        - allow_brand_substitution
+        - allow_generic_substitution
+        - allow_dosage_adjustment
+        - substitution_notes
+      description: Substitution preferences for a prescription request. One-to-one child of prescription_request.

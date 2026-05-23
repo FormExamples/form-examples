@@ -1,0 +1,161 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: okr_grade_rule
+openapi: 3.1.0
+info:
+  title: Objectives And Key Results Tracker — OkrGradeRule
+  version: 1.0.0
+  description: A grading rule that fired during composite RAG computation. Many rows per okr_grade.
+paths:
+  /okr-grade-rules:
+    get:
+      summary: List OkrGradeRule records
+      operationId: listOkrGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of OkrGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OkrGradeRule"
+    post:
+      summary: Create a new OkrGradeRule
+      operationId: createOkrGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGradeRule"
+      responses:
+        "201":
+          description: The newly created OkrGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeRule"
+        "400":
+          description: Validation error
+  /okr-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one OkrGradeRule by id
+      operationId: getOkrGradeRule
+      responses:
+        "200":
+          description: The requested OkrGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeRule"
+        "404":
+          description: OkrGradeRule not found
+    patch:
+      summary: Update an existing OkrGradeRule
+      operationId: updateOkrGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGradeRule"
+      responses:
+        "200":
+          description: The updated OkrGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGradeRule"
+        "404":
+          description: OkrGradeRule not found
+    delete:
+      summary: Soft-delete a OkrGradeRule
+      operationId: deleteOkrGradeRule
+      responses:
+        "204":
+          description: OkrGradeRule deleted
+        "404":
+          description: OkrGradeRule not found
+components:
+  schemas:
+    OkrGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was soft-deleted.
+        okr_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent okr_grade.
+        rule_id:
+          type: string
+          description: Stable rule identifier (e.g. R-PROGRESS-RED-COMMITTED).
+        instrument:
+          type: string
+          enum:
+            - progress
+            - confidence
+            - stretch
+            - alignment
+            - impact
+            - smart
+            - pace
+            - composite
+            - ""
+          description: "Which scoring instrument fired the rule: progress, confidence, stretch, alignment, impact, smart, pace, or composite."
+        grade:
+          type: string
+          description: "Grade band the rule attached: green, amber, red."
+        category:
+          type: string
+          description: Free-text category, e.g. progress, alignment, smart.
+        description:
+          type: string
+          description: Human-readable rule description.
+      required:
+        - created_at
+        - updated_at
+        - okr_grade_id
+        - rule_id
+        - instrument
+        - grade
+        - category
+        - description
+      description: A grading rule that fired during composite RAG computation. Many rows per okr_grade.

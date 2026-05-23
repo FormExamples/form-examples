@@ -1,0 +1,150 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: validation_result
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — ValidationResult
+  version: 1.0.0
+  description: Validation result summarizing completeness and status of the release form. One-to-one child of release_form.
+paths:
+  /validation-results:
+    get:
+      summary: List ValidationResult records
+      operationId: listValidationResult
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ValidationResult records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ValidationResult"
+    post:
+      summary: Create a new ValidationResult
+      operationId: createValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationResult"
+      responses:
+        "201":
+          description: The newly created ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "400":
+          description: Validation error
+  /validation-results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ValidationResult by id
+      operationId: getValidationResult
+      responses:
+        "200":
+          description: The requested ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "404":
+          description: ValidationResult not found
+    patch:
+      summary: Update an existing ValidationResult
+      operationId: updateValidationResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationResult"
+      responses:
+        "200":
+          description: The updated ValidationResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResult"
+        "404":
+          description: ValidationResult not found
+    delete:
+      summary: Soft-delete a ValidationResult
+      operationId: deleteValidationResult
+      responses:
+        "204":
+          description: ValidationResult deleted
+        "404":
+          description: ValidationResult not found
+components:
+  schemas:
+    ValidationResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        completeness_score:
+          type: integer
+          format: int32
+          description: Percentage score (0-100) indicating form completeness.
+        completeness_status:
+          type: string
+          maxLength: 30
+          description: Human-readable completeness status label.
+        validation_status:
+          type: string
+          maxLength: 30
+          description: Overall validation status label.
+        validated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the validation was last performed.
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - completeness_score
+        - completeness_status
+        - validation_status
+      description: Validation result summarizing completeness and status of the release form. One-to-one child of release_form.

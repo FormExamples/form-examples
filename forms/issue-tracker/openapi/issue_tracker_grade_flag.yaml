@@ -1,0 +1,174 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: issue_tracker_grade_flag
+openapi: 3.1.0
+info:
+  title: Issue Tracker — IssueTrackerGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the composite priority, with priority and a suggested action for the on-call team.
+paths:
+  /issue-tracker-grade-flags:
+    get:
+      summary: List IssueTrackerGradeFlag records
+      operationId: listIssueTrackerGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of IssueTrackerGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IssueTrackerGradeFlag"
+    post:
+      summary: Create a new IssueTrackerGradeFlag
+      operationId: createIssueTrackerGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGradeFlag"
+      responses:
+        "201":
+          description: The newly created IssueTrackerGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeFlag"
+        "400":
+          description: Validation error
+  /issue-tracker-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one IssueTrackerGradeFlag by id
+      operationId: getIssueTrackerGradeFlag
+      responses:
+        "200":
+          description: The requested IssueTrackerGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeFlag"
+        "404":
+          description: IssueTrackerGradeFlag not found
+    patch:
+      summary: Update an existing IssueTrackerGradeFlag
+      operationId: updateIssueTrackerGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueTrackerGradeFlag"
+      responses:
+        "200":
+          description: The updated IssueTrackerGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IssueTrackerGradeFlag"
+        "404":
+          description: IssueTrackerGradeFlag not found
+    delete:
+      summary: Soft-delete a IssueTrackerGradeFlag
+      operationId: deleteIssueTrackerGradeFlag
+      responses:
+        "204":
+          description: IssueTrackerGradeFlag deleted
+        "404":
+          description: IssueTrackerGradeFlag not found
+components:
+  schemas:
+    IssueTrackerGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        issue_tracker_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-HARM-FATAL-001).
+        category:
+          type: string
+          enum:
+            - harm-fatal
+            - failure-catastrophic
+            - severity-catastrophic
+            - magnitude-total-destruction
+            - frequency-universal
+            - requirement-mandatory
+            - regulatory
+            - safeguarding
+            - data-loss
+            - outage
+            - security
+            - safety
+            - other
+            - ""
+          description: "Flag category: harm-fatal, failure-catastrophic, regulatory, safeguarding, etc."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Flag priority: low, medium, or high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested action for the responder (e.g. \"escalate to LFPSE\", \"trigger incident bridge\")."
+      required:
+        - created_at
+        - updated_at
+        - issue_tracker_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the composite priority, with priority and a suggested action for the on-call team.

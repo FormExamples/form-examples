@@ -1,0 +1,149 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: purpose_of_release
+openapi: 3.1.0
+info:
+  title: Medical Records Release Permission — PurposeOfRelease
+  version: 1.0.0
+  description: Stated purpose for the medical records release. One-to-one child of release_form.
+paths:
+  /purpose-of-releases:
+    get:
+      summary: List PurposeOfRelease records
+      operationId: listPurposeOfRelease
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PurposeOfRelease records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PurposeOfRelease"
+    post:
+      summary: Create a new PurposeOfRelease
+      operationId: createPurposeOfRelease
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurposeOfRelease"
+      responses:
+        "201":
+          description: The newly created PurposeOfRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfRelease"
+        "400":
+          description: Validation error
+  /purpose-of-releases/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PurposeOfRelease by id
+      operationId: getPurposeOfRelease
+      responses:
+        "200":
+          description: The requested PurposeOfRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfRelease"
+        "404":
+          description: PurposeOfRelease not found
+    patch:
+      summary: Update an existing PurposeOfRelease
+      operationId: updatePurposeOfRelease
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurposeOfRelease"
+      responses:
+        "200":
+          description: The updated PurposeOfRelease
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurposeOfRelease"
+        "404":
+          description: PurposeOfRelease not found
+    delete:
+      summary: Soft-delete a PurposeOfRelease
+      operationId: deletePurposeOfRelease
+      responses:
+        "204":
+          description: PurposeOfRelease deleted
+        "404":
+          description: PurposeOfRelease not found
+components:
+  schemas:
+    PurposeOfRelease:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was deleted.
+        release_form_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent release form (unique, enforcing 1:1).
+        purpose:
+          type: string
+          enum:
+            - continuing-care
+            - second-opinion
+            - insurance
+            - legal
+            - personal
+            - research
+            - employment
+            - other
+            - ""
+          description: "Release purpose: continuing-care, second-opinion, insurance, legal, personal, research, employment, other, or empty string."
+        other_details:
+          type: string
+          description: Free-text details required when purpose is other. Must not be NULL when purpose is other.
+      required:
+        - created_at
+        - updated_at
+        - release_form_id
+        - purpose
+        - other_details
+      description: Stated purpose for the medical records release. One-to-one child of release_form.

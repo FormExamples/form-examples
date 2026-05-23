@@ -1,0 +1,176 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: person_to_notify
+openapi: 3.1.0
+info:
+  title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — PersonToNotify
+  version: 1.0.0
+  description: Person to be notified when the LPA is being registered (LP1H s.6, max 5).
+paths:
+  /person-to-notifies:
+    get:
+      summary: List PersonToNotify records
+      operationId: listPersonToNotify
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PersonToNotify records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonToNotify"
+    post:
+      summary: Create a new PersonToNotify
+      operationId: createPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonToNotify"
+      responses:
+        "201":
+          description: The newly created PersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonToNotify"
+        "400":
+          description: Validation error
+  /person-to-notifies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PersonToNotify by id
+      operationId: getPersonToNotify
+      responses:
+        "200":
+          description: The requested PersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonToNotify"
+        "404":
+          description: PersonToNotify not found
+    patch:
+      summary: Update an existing PersonToNotify
+      operationId: updatePersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonToNotify"
+      responses:
+        "200":
+          description: The updated PersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonToNotify"
+        "404":
+          description: PersonToNotify not found
+    delete:
+      summary: Soft-delete a PersonToNotify
+      operationId: deletePersonToNotify
+      responses:
+        "204":
+          description: PersonToNotify deleted
+        "404":
+          description: PersonToNotify not found
+components:
+  schemas:
+    PersonToNotify:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        title:
+          type: string
+          maxLength: 20
+          description: Honorific title.
+        given_names:
+          type: string
+          maxLength: 255
+          description: Given names.
+        family_name:
+          type: string
+          maxLength: 255
+          description: Family name.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2.
+        postcode:
+          type: string
+          description: Postal code.
+        relationship_to_donor:
+          type: string
+          enum:
+            - spouse
+            - civil-partner
+            - child
+            - parent
+            - sibling
+            - friend
+            - professional
+            - other
+            - ""
+          description: Stated relationship to the donor.
+      required:
+        - created_at
+        - updated_at
+        - title
+        - given_names
+        - family_name
+        - email
+        - phone
+        - postal_address_as_full_text
+        - country_as_iso_3166_1_alpha_2
+        - postcode
+        - relationship_to_donor
+      description: Person to be notified when the LPA is being registered (LP1H s.6, max 5).

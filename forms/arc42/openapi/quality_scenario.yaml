@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: quality_scenario
+openapi: 3.1.0
+info:
+  title: Arc42 — QualityScenario
+  version: 1.0.0
+  description: Quality scenario captured in §10 Quality Requirements of the arc42 documentation.
+paths:
+  /quality-scenarios:
+    get:
+      summary: List QualityScenario records
+      operationId: listQualityScenario
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of QualityScenario records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QualityScenario"
+    post:
+      summary: Create a new QualityScenario
+      operationId: createQualityScenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QualityScenario"
+      responses:
+        "201":
+          description: The newly created QualityScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityScenario"
+        "400":
+          description: Validation error
+  /quality-scenarios/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one QualityScenario by id
+      operationId: getQualityScenario
+      responses:
+        "200":
+          description: The requested QualityScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityScenario"
+        "404":
+          description: QualityScenario not found
+    patch:
+      summary: Update an existing QualityScenario
+      operationId: updateQualityScenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QualityScenario"
+      responses:
+        "200":
+          description: The updated QualityScenario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QualityScenario"
+        "404":
+          description: QualityScenario not found
+    delete:
+      summary: Soft-delete a QualityScenario
+      operationId: deleteQualityScenario
+      responses:
+        "204":
+          description: QualityScenario deleted
+        "404":
+          description: QualityScenario not found
+components:
+  schemas:
+    QualityScenario:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        arc42_documentation_id:
+          type: string
+          format: uuid
+          description: Parent documentation (cascade-deleted).
+        ordinal:
+          type: integer
+          format: int32
+          description: Display/order index within the parent documentation.
+        source:
+          type: string
+          description: Source of the stimulus (e.g. end user, external system, time-based event).
+        stimulus:
+          type: string
+          description: The stimulus or event that triggers the scenario.
+        artifact:
+          type: string
+          description: The system artifact or component being stimulated.
+        response:
+          type: string
+          description: The expected response of the system to the stimulus.
+        measure:
+          type: string
+          description: Measurable criterion defining when the response is acceptable.
+      required:
+        - created_at
+        - updated_at
+        - arc42_documentation_id
+        - ordinal
+        - source
+        - stimulus
+        - artifact
+        - response
+        - measure
+      description: Quality scenario captured in §10 Quality Requirements of the arc42 documentation.
