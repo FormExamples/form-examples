@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-status">Completion Status</label>
-          <select id="filter-status" class="select-input">
+          <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-department">Department</label>
-          <select id="filter-department" class="select-input">
+          <select id="filter-department" class="select">
             <option value="">All departments</option>
             <option value="Nursing">Nursing</option>
             <option value="Medical">Medical</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-milestone">Milestone Reached</label>
-          <select id="filter-milestone" class="select-input">
+          <select id="filter-milestone" class="select">
             <option value="">All milestones</option>
             <option value="Pre-arrival">Pre-arrival</option>
             <option value="Day 1">Day 1</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

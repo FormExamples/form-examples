@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-outcome">Outcome</label>
-          <select id="filter-outcome" class="select-input">
+          <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Pass">Pass</option>
             <option value="Needs Development">Needs Development</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-role">Workplace Role</label>
-          <select id="filter-role" class="select-input">
+          <select id="filter-role" class="select">
             <option value="">All roles</option>
             <option value="Designated First Aider">Designated First Aider</option>
             <option value="Manager">Manager</option>
@@ -76,7 +76,7 @@
 
         <div class="filter-field">
           <label for="filter-currency">Certification</label>
-          <select id="filter-currency" class="select-input">
+          <select id="filter-currency" class="select">
             <option value="">All certifications</option>
             <option value="Current">Current</option>
             <option value="Expiring Soon">Expiring Soon</option>
@@ -86,7 +86,7 @@
 
         <div class="filter-field">
           <label for="filter-centre">Training Centre</label>
-          <select id="filter-centre" class="select-input">
+          <select id="filter-centre" class="select">
             <option value="">All training centres</option>
             <!-- Centre options populated by app.js -->
           </select>
@@ -96,7 +96,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -36,8 +36,8 @@
   <main>
     <div id="draft-banner" class="draft-banner" role="status" hidden>
       <p><strong>Draft restored.</strong> A previous in-progress checklist was loaded from this browser.</p>
-      <button type="button" id="draft-keep" class="btn">Keep editing</button>
-      <button type="button" id="draft-discard" class="btn btn-warn">Discard draft</button>
+      <button type="button" id="draft-keep" class="button">Keep editing</button>
+      <button type="button" id="draft-discard" class="button" data-variant="warn">Discard draft</button>
     </div>
 
     <div class="intro">
@@ -67,17 +67,17 @@
     >
       <div id="form-sections" class="form-sections"></div>
 
-      <div class="form-actions">
-        <button type="button" id="submit-btn" class="btn btn-primary">
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
           Generate report
         </button>
-        <button type="button" id="reset-btn" class="btn">Start over</button>
+        <button type="button" id="reset-btn" class="button">Start over</button>
       </div>
     </form>
 
     <div
       id="report"
-      class="report-region"
+      class="panel"
       role="region"
       aria-live="polite"
       aria-label="Checklist report"
