@@ -1,4 +1,4 @@
-// Asthma Assessment - clinician dashboard (vanilla classic-script app).
+// Asthma Assessment — clinician dashboard (vanilla classic-script app).
 //
 // On boot we fetch the patient list from the backend; on any failure (or
 // empty response) we fall back to sample data and show a small banner. The
@@ -111,8 +111,8 @@ function matchesFilters(row) {
   if (filters.search) {
     const term = filters.search.toLowerCase();
     const matches =
-      row.nhsNumber.toLowerCase().includes(term) ||
-      row.patientName.toLowerCase().includes(term);
+      String(row.nhsNumber || '').toLowerCase().includes(term) ||
+      String(row.patientName || '').toLowerCase().includes(term);
     if (!matches) return false;
   }
   if (filters.control && row.controlLevel !== filters.control) {
@@ -158,7 +158,7 @@ function compareRows(a, b) {
   }
 
   // Default: string compare (nhsNumber, patientName)
-  return String(av).localeCompare(String(bv)) * dir;
+  return String(av ?? '').localeCompare(String(bv ?? '')) * dir;
 }
 
 function visibleRows() {
@@ -176,6 +176,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -221,17 +222,18 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.controlLevel === 'Very Poorly Controlled') {
       tr.classList.add('row-very-poorly-controlled');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="act-score">${esc(row.actScore)}/25</span></td>
-      <td><span class="control-badge ${controlClass(row.controlLevel)}">${esc(row.controlLevel)}</span></td>
-      <td><span class="risk-badge ${riskClass(row.exacerbationRisk)}">${esc(row.exacerbationRisk)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td"><span class="act-score">${esc(row.actScore)}/25</span></td>
+      <td class="data-table-td"><span class="control-badge ${controlClass(row.controlLevel)}">${esc(row.controlLevel)}</span></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.exacerbationRisk)}">${esc(row.exacerbationRisk)}</span></td>
+      <td class="data-table-td">
         <span class="allergy-badge ${row.allergyFlag ? 'allergy-yes' : 'allergy-no'}">
           ${row.allergyFlag ? 'Yes' : 'No'}
         </span>
@@ -360,7 +362,9 @@ async function loadPatients() {
     }
   } catch (err) {
     showStatusBanner(
-      'Showing sample data — backend offline (' + (err && err.message ? err.message : 'fetch failed') + ').'
+      'Showing sample data — backend offline (' +
+        (err && err.message ? err.message : 'fetch failed') +
+        ').'
     );
   }
 

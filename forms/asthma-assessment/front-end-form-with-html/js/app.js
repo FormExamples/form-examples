@@ -1,15 +1,16 @@
-// Asthma Assessment - patient wizard (vanilla JavaScript, no build).
+// Asthma Assessment — patient wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a sticky top-of-page
-// progress summary reflects how many fields have been answered. Submission
-// runs the pure ACT scoring engine and renders an inline report. State is
+// progress bar + step list reflects how many fields have been answered.
+// Submission runs the pure ACT grader and renders an inline report. State is
 // persisted to localStorage so a partial fill survives a page reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.AsthmaAssessment`. Pulling them off here keeps the
 // rest of this file referring to short local names. Whole file is wrapped
 // in an IIFE so its top-level identifiers don't leak to the global scope.
+
 (function () {
 'use strict';
 
@@ -32,8 +33,8 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY = 'asthma-assessment.front-end-form-with-html.v1';
+const TOTAL_STEPS = 9;
 
-/** @returns {import('./types.js').AssessmentData} */
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -42,8 +43,11 @@ function loadState() {
     // Merge over a fresh empty so any newly-added fields default correctly.
     const fresh = emptyAssessment();
     for (const key of Object.keys(fresh)) {
-      if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
-        fresh[key] = { ...fresh[key], ...parsed[key] };
+      const v = parsed && parsed[key];
+      if (Array.isArray(fresh[key])) {
+        fresh[key] = Array.isArray(v) ? v : [];
+      } else if (v && typeof v === 'object') {
+        fresh[key] = { ...fresh[key], ...v };
       }
     }
     return fresh;
@@ -53,10 +57,9 @@ function loadState() {
   }
 }
 
-/** @param {import('./types.js').AssessmentData} state */
-function saveState(state) {
+function saveState(s) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
   } catch (e) {
     console.warn('Could not save assessment to localStorage.', e);
   }
@@ -74,25 +77,10 @@ function clearState() {
 // State
 // ----------------------------------------------------------------------
 
-/** @type {import('./types.js').AssessmentData} */
 let state = loadState();
-
 /** @type {import('./types.js').GradingResult | null} */
 let lastResult = null;
 
-// ----------------------------------------------------------------------
-// Helpers
-// ----------------------------------------------------------------------
-
-/**
- * Set a deeply-nested field on the state and persist.
- * Re-runs derived values (BMI, peak flow %), progress, and conditional
- * visibility after each change.
- *
- * @param {string} section
- * @param {string} field
- * @param {*} value
- */
 function setField(section, field, value) {
   state[section][field] = value;
   recomputeDerived();
@@ -114,7 +102,6 @@ function recomputeDerived() {
   );
 }
 
-/** Escape user-entered text for safe rendering. */
 function esc(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -128,12 +115,19 @@ function esc(s) {
 // Component builders
 // ----------------------------------------------------------------------
 
-/**
- * Build a labelled text input.
- * @param {{ label: string, section: string, field: string, type?: string,
- *           placeholder?: string, required?: boolean, min?: number,
- *           max?: number, step?: number, unit?: string }} opts
- */
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 function textInput(opts) {
   const id = `${opts.section}-${opts.field}`;
   const value = state[opts.section][opts.field];
@@ -144,11 +138,11 @@ function textInput(opts) {
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
+    `class="${lilyInputClass(type)}"`,
     `value="${esc(value ?? '')}"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  if (opts.required) attrs.push('required', 'data-required');
   if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
   if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
   if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
@@ -156,48 +150,44 @@ function textInput(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
     ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
+  input.setAttribute('aria-describedby', `${id}-error`);
   input.addEventListener('input', () => {
     let v = input.value;
-    if (type === 'number') {
-      v = v === '' ? null : Number(v);
-    }
+    if (type === 'number') v = v === '' ? null : Number(v);
     setField(opts.section, opts.field, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
-/**
- * Build a labelled multi-line text area.
- * @param {{ label: string, section: string, field: string, rows?: number,
- *           placeholder?: string }} opts
- */
 function textArea(opts) {
   const id = `${opts.section}-${opts.field}`;
   const value = state[opts.section][opts.field] ?? '';
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      aria-describedby="${id}-error"
       class="text-area-input">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  ta.addEventListener('input', () => {
+    setField(opts.section, opts.field, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-/**
- * Build a select / dropdown input.
- * @param {{ label: string, section: string, field: string,
- *           options: { value: string, label: string }[] }} opts
- */
 function selectInput(opts) {
   const id = `${opts.section}-${opts.field}`;
   const current = state[opts.section][opts.field] ?? '';
@@ -212,97 +202,105 @@ function selectInput(opts) {
   ].join('');
 
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select">
+    <label class="label" for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select" aria-describedby="${id}-error">
       ${optionsHtml}
     </select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  sel.addEventListener('change', () => {
+    setField(opts.section, opts.field, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-/**
- * Build a radio group.
- * @param {{ label: string, section: string, field: string,
- *           options: { value: string, label: string }[] }} opts
- */
 function radioGroup(opts) {
   const groupId = `${opts.section}-${opts.field}`;
   const current = state[opts.section][opts.field];
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
   legend.textContent = opts.label;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const label = document.createElement('label');
-    label.className = 'radio-option';
     label.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
     label.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
       <span>${esc(option.label)}</span>
     `;
     const input = label.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, option.value);
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
     });
     list.appendChild(label);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
-/**
- * Read-only auto-calculated readout (e.g. BMI, peak-flow %).
- * @param {{ label: string, id: string, render: () => string }} opts
- */
 function readOnlyReadout(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field readout';
   wrapper.innerHTML = `
-    <label>${esc(opts.label)}</label>
+    <label class="label">${esc(opts.label)}</label>
     <div id="${opts.id}" class="readout-value">${opts.render()}</div>
   `;
   return wrapper;
 }
 
-/**
- * Build a section card.
- * @param {{ stepNumber: number, title: string, description?: string }} opts
- */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 9</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
+
+// ----------------------------------------------------------------------
+// Common option lists
+// ----------------------------------------------------------------------
+
+const yesNo = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
+];
 
 // ----------------------------------------------------------------------
 // Repeating-list editors (medications, allergies, environmental allergies)
 // ----------------------------------------------------------------------
 
-/**
- * Editor for an array of {name, dose, frequency} medication rows.
- * @param {{ section: string, field: string, addLabel: string }} opts
- */
 function medicationListEditor(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'list-editor';
@@ -339,8 +337,7 @@ function medicationListEditor(opts) {
       `;
       r.querySelectorAll('input').forEach((inp) => {
         inp.addEventListener('input', () => {
-          const k = inp.dataset.key;
-          rows[idx][k] = inp.value;
+          rows[idx][inp.dataset.key] = inp.value;
           saveState(state);
           updateProgress();
         });
@@ -411,12 +408,8 @@ function drugAllergyEditor() {
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
-        inp.addEventListener('input', () => {
-          rows[idx][inp.dataset.key] = inp.value;
-          saveState(state);
-          updateProgress();
-        });
-        inp.addEventListener('change', () => {
+        const evt = inp.tagName === 'SELECT' ? 'change' : 'input';
+        inp.addEventListener(evt, () => {
           rows[idx][inp.dataset.key] = inp.value;
           saveState(state);
           updateProgress();
@@ -504,13 +497,8 @@ function environmentalAllergyEditor() {
 }
 
 // ----------------------------------------------------------------------
-// Section renderers (1 per ACT step)
+// Section renderers (1 per step)
 // ----------------------------------------------------------------------
-
-const yesNo = [
-  { value: 'yes', label: 'Yes' },
-  { value: 'no', label: 'No' }
-];
 
 function renderStep1() {
   const card = sectionCard({
@@ -1055,6 +1043,11 @@ function renderStep9() {
   return card;
 }
 
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4, renderStep5,
+  renderStep6, renderStep7, renderStep8, renderStep9
+];
+
 // ----------------------------------------------------------------------
 // Conditional sections + auto-calculated readouts
 // ----------------------------------------------------------------------
@@ -1160,18 +1153,147 @@ const TRACKED_FIELDS = [
 
 function updateProgress() {
   let answered = 0;
+  const sectionAnswered = {};
+  const sectionTotal = {};
   for (const [section, field] of TRACKED_FIELDS) {
+    sectionTotal[section] = (sectionTotal[section] || 0) + 1;
     const v = state[section][field];
-    if (v !== null && v !== undefined && v !== '') answered++;
+    if (v !== null && v !== undefined && v !== '') {
+      answered++;
+      sectionAnswered[section] = (sectionAnswered[section] || 0) + 1;
+    }
   }
   const total = TRACKED_FIELDS.length;
   const percent = Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1, section: 'demographics',         title: 'Demographics' },
+  { step: 2, section: 'symptomFrequency',     title: 'Symptom Frequency' },
+  { step: 3, section: 'lungFunction',         title: 'Lung Function' },
+  { step: 4, section: 'triggers',             title: 'Triggers' },
+  { step: 5, section: 'currentMedications',   title: 'Medications' },
+  { step: 6, section: 'allergies',            title: 'Allergies' },
+  { step: 7, section: 'exacerbationHistory',  title: 'Exacerbations' },
+  { step: 8, section: 'comorbidities',        title: 'Comorbidities' },
+  { step: 9, section: 'socialHistory',        title: 'Social History' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim() : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
 }
 
 // ----------------------------------------------------------------------
@@ -1235,36 +1357,36 @@ function renderReport() {
     `;
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>Asthma Assessment Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
+    <h2>Asthma Assessment Report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
 
-      <h3>ACT Total Score</h3>
-      <p class="act-summary">
-        <span class="act-score-badge ${controlLevelClass(controlLevel)}">${actScore} / 25</span>
-        <span class="control-level">${esc(controlLevelLabel(controlLevel))}</span>
-      </p>
-      <p class="muted">Based on ${answeredCount} of 5 ACT questions answered.</p>
+    <h3>ACT Total Score</h3>
+    <p class="act-summary">
+      <span class="act-score-badge ${controlLevelClass(controlLevel)}">${actScore} / 25</span>
+      <span class="control-level">${esc(controlLevelLabel(controlLevel))}</span>
+    </p>
+    <p class="muted">Based on ${answeredCount} of 5 ACT questions answered.</p>
 
-      <h3>Per-question scores</h3>
-      ${firedTable}
+    <h3>Per-question scores</h3>
+    ${firedTable}
 
-      <h3>Flagged Issues</h3>
-      ${flagsList}
+    <h3>Flagged Issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="print-btn" class="button" data-variant="secondary">Print / save PDF</button>
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   document.getElementById('start-over-btn').addEventListener('click', startOver);
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   recomputeDerived();
   const { actScore, controlLevel, answeredCount, firedRules } = calculateACT(state);
   const additionalFlags = detectAdditionalFlags(state);
@@ -1284,7 +1406,9 @@ function startOver() {
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  document.getElementById('report').innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -1299,19 +1423,12 @@ function startOver() {
 function renderForm() {
   const host = document.getElementById('form-sections');
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
-  host.appendChild(renderStep4());
-  host.appendChild(renderStep5());
-  host.appendChild(renderStep6());
-  host.appendChild(renderStep7());
-  host.appendChild(renderStep8());
-  host.appendChild(renderStep9());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
 }
 
 function init() {
   recomputeDerived();
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();
