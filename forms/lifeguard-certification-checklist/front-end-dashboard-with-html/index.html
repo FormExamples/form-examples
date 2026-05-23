@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#candidates-table">Skip to candidates table</a>
+  <a class="skip-link visually-hidden" href="#candidates-table">Skip to candidates table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -25,7 +25,8 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="alert" data-type="warning"
+      class="alert"
+      data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -39,19 +40,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Candidate name, ID, venue, or examiner..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-outcome">Outcome</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-outcome">Outcome</label>
           <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Pass">Pass</option>
@@ -60,8 +61,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-venue-type">Venue Type</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-venue-type">Venue Type</label>
           <select id="filter-venue-type" class="select">
             <option value="">All venue types</option>
             <option value="Pool">Pool</option>
@@ -73,8 +74,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-currency">Certification</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-currency">Certification</label>
           <select id="filter-currency" class="select">
             <option value="">All certifications</option>
             <option value="Current">Current</option>
@@ -83,8 +84,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-examiner">Examiner</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-examiner">Examiner</label>
           <select id="filter-examiner" class="select">
             <option value="">All examiners</option>
             <!-- Examiner options populated by app.js -->
@@ -95,7 +96,8 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="button" data-variant="secondary"
+            class="button"
+            data-variant="secondary"
             hidden
           >
             Clear filters
@@ -116,13 +118,13 @@
       <h2 id="candidates-table-heading" class="visually-hidden">Candidates</h2>
 
       <div class="table-scroll">
-        <table id="candidates-table" class="candidates-table">
-          <thead>
-            <tr id="candidates-table-head">
+        <table id="candidates-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="candidates-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="candidates-table-body">
+          <tbody id="candidates-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

@@ -313,6 +313,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -357,6 +358,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     const rc = rowClass(row.outcome);
     if (rc) tr.classList.add(rc);
 
@@ -377,28 +379,28 @@ function renderTableBody() {
       : '';
 
     tr.innerHTML = `
-      <td>${esc(row.candidateId)}</td>
-      <td>${esc(row.candidateName)}</td>
-      <td><span class="venue-badge">${esc(row.venueType)}</span></td>
-      <td>${esc(row.venueName)}</td>
-      <td>
+      <td class="data-table-td">${esc(row.candidateId)}</td>
+      <td class="data-table-td">${esc(row.candidateName)}</td>
+      <td class="data-table-td"><span class="venue-badge">${esc(row.venueType)}</span></td>
+      <td class="data-table-td">${esc(row.venueName)}</td>
+      <td class="data-table-td">
         <span class="outcome-badge ${outcomeClass(row.outcome)}">${esc(row.outcome)}</span>
         ${criticalFlag}
       </td>
-      <td><span class="num-cell">${esc(row.timedSwimSeconds)}</span></td>
-      <td><span class="num-cell">${competenciesDisplay}</span></td>
-      <td>
+      <td class="data-table-td"><span class="num-cell">${esc(row.timedSwimSeconds)}</span></td>
+      <td class="data-table-td"><span class="num-cell">${competenciesDisplay}</span></td>
+      <td class="data-table-td">
         <span class="date-cell ${expired ? 'date-expired' : ''}" title="Issued ${esc(issuedDisplay)}">
           ${esc(expiryDisplay)}
         </span>
       </td>
-      <td><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
-      <td>
+      <td class="data-table-td"><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
+      <td class="data-table-td">
         <span class="date-cell ${cprDue ? 'date-expired' : ''}" title="Annual CPR refresher due">
           ${esc(cprDisplay)}
         </span>
       </td>
-      <td>${esc(row.examinerName)}</td>
+      <td class="data-table-td">${esc(row.examinerName)}</td>
     `;
     body.appendChild(tr);
   }

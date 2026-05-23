@@ -1,8 +1,9 @@
 // Lifeguard Certification Checklist — examiner wizard (vanilla JS).
 //
 // Single-page continuous wizard: every section is rendered into the page in
-// document order. The examiner scrolls through them; a sticky top-of-page
-// progress summary reflects how many checklist items have been answered.
+// document order as a Lily <fieldset class="fieldset">. The examiner scrolls
+// through them; a native <progress> bar and a clickable step-list at the top
+// of the page reflect how many checklist items have been answered.
 // Submission runs the pure lifeguard grading engine and renders an inline
 // report with a Pass / Needs Development / Fail badge, critical-skill
 // audit table, deficiency list, and prioritised flagged-issues list.
@@ -92,7 +93,7 @@ function clearState() {
 /** @type {import('./types.js').AssessmentData} */
 let state = loadState();
 
-/** @type {import('./types.js').GradingResult | null} */
+/** @type {object | null} */
 let lastResult = null;
 
 // ----------------------------------------------------------------------
@@ -123,28 +124,46 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 // ----------------------------------------------------------------------
 // Component builders
 // ----------------------------------------------------------------------
 
 /**
- * Build a labelled text input.
+ * Build a labelled text input with Lily class contract.
+ *
  * @param {{ label: string, section: string, field: string, type?: string,
- *           placeholder?: string, min?: number, max?: number, step?: number,
- *           unit?: string }} opts
+ *           placeholder?: string, required?: boolean, min?: number,
+ *           max?: number, step?: number, unit?: string }} opts
  */
 function textInput(opts) {
   const id = `${opts.section}-${opts.field}`;
   const value = state[opts.section][opts.field];
   const type = opts.type || 'text';
+  const labelText = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const attrs = [
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
-    `value="${esc(value ?? '')}"`
+    `class="${lilyInputClass(type)}"`,
+    `value="${esc(value ?? '')}"`,
+    `aria-describedby="${id}-error"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required', 'data-required');
   if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
   if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
   if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
@@ -152,40 +171,49 @@ function textInput(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
     ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
     let v = input.value;
-    if (type === 'number') {
-      v = v === '' ? null : Number(v);
-    }
+    if (type === 'number') v = v === '' ? null : Number(v);
     setField(opts.section, opts.field, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
-/** Build a labelled multi-line text area. */
+/**
+ * Build a labelled multi-line text area with Lily class contract.
+ */
 function textArea(opts) {
   const id = `${opts.section}-${opts.field}`;
   const value = state[opts.section][opts.field] ?? '';
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      aria-describedby="${id}-error"
       class="text-area-input">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  ta.addEventListener('input', () => {
+    setField(opts.section, opts.field, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-/** Build a select / dropdown input. */
+/**
+ * Build a select / dropdown input with Lily class contract.
+ */
 function selectInput(opts) {
   const id = `${opts.section}-${opts.field}`;
   const current = state[opts.section][opts.field] ?? '';
@@ -200,25 +228,83 @@ function selectInput(opts) {
   ].join('');
 
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select">
+    <label class="label" for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select" aria-describedby="${id}-error">
       ${optionsHtml}
     </select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  sel.addEventListener('change', () => {
+    setField(opts.section, opts.field, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-// Tri-state radio set used for every checklist item.
+/**
+ * Build a Lily radio-group fieldset (used by general-purpose radios as well
+ * as the tri-state checklist items via the `extraClass` hook).
+ *
+ * @param {{ label: string, section: string, field: string,
+ *           options: Array<{ value: string, label: string, optionClass?: string }>,
+ *           extraClass?: string }} opts
+ */
+function radioGroup(opts) {
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
+
+  const legend = document.createElement('legend');
+  legend.className = 'label';
+  legend.innerHTML = esc(opts.label);
+  wrapper.appendChild(legend);
+
+  const list = document.createElement('div');
+  list.className = 'radio-group' + (opts.extraClass ? ' ' + opts.extraClass : '');
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.htmlFor = radioId;
+    if (option.optionClass) label.className = option.optionClass;
+    const checked = current === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
+    `;
+    const input = label.querySelector('input');
+    input.addEventListener('change', () => {
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
+    });
+    list.appendChild(label);
+  }
+  wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
+  return wrapper;
+}
+
+// Tri-state radio options used for every checklist item.
 const TRI_STATE_OPTIONS = [
-  { value: 'yes', label: 'Demonstrated correctly', cls: 'choice-yes' },
-  { value: 'no', label: 'Not yet', cls: 'choice-no' },
-  { value: 'na', label: 'Not assessed', cls: 'choice-na' }
+  { value: 'yes', label: 'Demonstrated correctly', optionClass: 'choice-yes' },
+  { value: 'no', label: 'Not yet', optionClass: 'choice-no' },
+  { value: 'na', label: 'Not assessed', optionClass: 'choice-na' }
 ];
 
 /**
- * Build a tri-state checklist item (radio group inside a labelled list row).
+ * Build a tri-state checklist item: a Lily radio-group with the tri-state
+ * options, optionally tagged as critical so it gets the red-left-border
+ * emphasis defined in css/style.css.
  *
  * @param {{ ruleId: string, section: string, field: string, label: string,
  *           critical: boolean }} opts
@@ -226,56 +312,45 @@ const TRI_STATE_OPTIONS = [
 function checklistItem(opts) {
   const li = document.createElement('li');
   li.className = 'checklist-item' + (opts.critical ? ' is-critical' : '');
-  li.dataset.ruleId = opts.ruleId;
+  if (opts.ruleId) li.dataset.ruleId = opts.ruleId;
 
-  const groupId = `${opts.section}-${opts.field}`;
-  const current = state[opts.section][opts.field];
+  const idBadge = opts.ruleId
+    ? `<span class="item-id">${esc(opts.ruleId)}</span> `
+    : '';
+  const label = idBadge + esc(opts.label);
 
-  const optionsHtml = TRI_STATE_OPTIONS.map((option) => {
-    const radioId = `${groupId}-${option.value}`;
-    const checked = current === option.value ? ' checked' : '';
-    return `
-      <label class="radio-option ${option.cls}" for="${radioId}">
-        <input type="radio" id="${radioId}" name="${groupId}" value="${option.value}"${checked}>
-        <span>${esc(option.label)}</span>
-      </label>
-    `;
-  }).join('');
-
-  li.innerHTML = `
-    <fieldset class="field radio-group" style="margin:0;">
-      <legend class="item-label">
-        <span class="item-id">${esc(opts.ruleId)}</span>
-        ${esc(opts.label)}
-      </legend>
-      <div class="radio-options tri-state">${optionsHtml}</div>
-    </fieldset>
-  `;
-
-  li.querySelectorAll('input[type="radio"]').forEach((input) => {
-    input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, input.value);
-    });
+  const group = radioGroup({
+    label,
+    section: opts.section,
+    field: opts.field,
+    options: TRI_STATE_OPTIONS,
+    extraClass: 'tri-state'
   });
+  li.appendChild(group);
   return li;
 }
 
-/** Build a section card. */
+/**
+ * Build a section card as a Lily fieldset.
+ *
+ * @param {{ stepNumber: number, title: string, description?: string }} opts
+ */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -778,95 +853,208 @@ function renderStep10() {
   return card;
 }
 
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4, renderStep5,
+  renderStep6, renderStep7, renderStep8, renderStep9, renderStep10
+];
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1,  section: 'candidateDetails',          title: 'Candidate Details' },
+  { step: 2,  section: 'physicalFitnessSwim',       title: 'Fitness & Swim' },
+  { step: 3,  section: 'supervisionScanningZoning', title: 'Supervision & Scan' },
+  { step: 4,  section: 'rescueConscious',           title: 'Rescue — Conscious' },
+  { step: 5,  section: 'rescueUnconscious',         title: 'Rescue — Unconscious' },
+  { step: 6,  section: 'spinalInjuryManagement',    title: 'Spinal Injury' },
+  { step: 7,  section: 'cprAed',                    title: 'CPR & AED' },
+  { step: 8,  section: 'firstAidOxygen',            title: 'First Aid & Oxygen' },
+  { step: 9,  section: 'legalRegulatoryIncident',   title: 'Legal & Incident' },
+  { step: 10, section: 'overallResultSignoff',      title: 'Result & Signoff' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) =>
+        `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`
+      ).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // ----------------------------------------------------------------------
 // Progress
 // ----------------------------------------------------------------------
 
 /**
- * Track a curated set of fields whose presence drives the progress bar.
- * Includes every checklist tri-state field plus the key numeric
- * measurements. Candidate-detail fields are intentionally excluded so the
- * bar reflects skills assessment, not paperwork.
+ * Tracked fields grouped by section so the step-list can show per-section
+ * completion. Candidate-detail fields (step 1) are intentionally excluded
+ * from the assessment progress total but are tracked per-section so the
+ * step-list reflects paperwork completion.
  */
-const TRACKED_FIELDS = [
-  ['physicalFitnessSwim', 'swim50mTimeSeconds'],
-  ['physicalFitnessSwim', 'swim50mWithinTime'],
-  ['physicalFitnessSwim', 'surfaceDiveDepthMetres'],
-  ['physicalFitnessSwim', 'sustainedSurfaceDive'],
-  ['physicalFitnessSwim', 'swim200mTimeSeconds'],
-  ['physicalFitnessSwim', 'swim200mMixedStrokes'],
-  ['physicalFitnessSwim', 'treadWaterTwoMinutes'],
-  ['physicalFitnessSwim', 'towCasualty50m'],
-
-  ['supervisionScanningZoning', 'understandsZoneOfResponsibility'],
-  ['supervisionScanningZoning', 'effectiveScanningPattern'],
-  ['supervisionScanningZoning', 'tenTwentyScanRule'],
-  ['supervisionScanningZoning', 'recognisesDistressedSwimmer'],
-  ['supervisionScanningZoning', 'appropriateRotation'],
-  ['supervisionScanningZoning', 'usesWhistleAndSignals'],
-
-  ['rescueConscious', 'recognitionAndAlert'],
-  ['rescueConscious', 'entryWithoutLossOfSight'],
-  ['rescueConscious', 'approachWithFloatingAid'],
-  ['rescueConscious', 'reassuresCasualty'],
-  ['rescueConscious', 'towToSafety'],
-  ['rescueConscious', 'extricationFromWater'],
-
-  ['rescueUnconscious', 'recognitionAndAlert'],
-  ['rescueUnconscious', 'safeEntryAndApproach'],
-  ['rescueUnconscious', 'airwayManagementInWater'],
-  ['rescueUnconscious', 'effectiveTowToSafety'],
-  ['rescueUnconscious', 'safeExtrication'],
-  ['rescueUnconscious', 'handoverHandsignal'],
-
-  ['spinalInjuryManagement', 'recognisesMechanism'],
-  ['spinalInjuryManagement', 'headSplintHold'],
-  ['spinalInjuryManagement', 'maintainsInlineStabilisation'],
-  ['spinalInjuryManagement', 'carefulRollIfNeeded'],
-  ['spinalInjuryManagement', 'useOfSpineboard'],
-  ['spinalInjuryManagement', 'secureCasualtyToBoard'],
-
-  ['cprAed', 'compressionRate'],
-  ['cprAed', 'compressionDepth'],
-  ['cprAed', 'effectiveCompressions'],
-  ['cprAed', 'effectiveVentilations'],
-  ['cprAed', 'timeToFirstShockSeconds'],
-  ['cprAed', 'aedDeliveredPromptly'],
-  ['cprAed', 'safeShockNoUnsafeContact'],
-  ['cprAed', 'continuousQualityCpr'],
-
-  ['firstAidOxygen', 'bleedingControl'],
-  ['firstAidOxygen', 'burnsManagement'],
-  ['firstAidOxygen', 'fractureImmobilisation'],
-  ['firstAidOxygen', 'recoveryPositionUse'],
-  ['firstAidOxygen', 'oxygenTherapyAdministration'],
-  ['firstAidOxygen', 'usesPocketMaskOrBVM'],
-
-  ['legalRegulatoryIncident', 'dutyOfCareUnderstood'],
-  ['legalRegulatoryIncident', 'pswpKnowledge'],
-  ['legalRegulatoryIncident', 'eapInvocation'],
-  ['legalRegulatoryIncident', 'incidentReportCompleted'],
-  ['legalRegulatoryIncident', 'riddorAwareness'],
-  ['legalRegulatoryIncident', 'safeguardingChildrenAdults'],
-
-  ['overallResultSignoff', 'examinerOutcome'],
-  ['overallResultSignoff', 'candidateAcknowledged']
+const TRACKED_SECTIONS = [
+  ['candidateDetails', ['firstName', 'lastName', 'candidateId', 'venueType',
+                         'venueName', 'sessionDate', 'examinerName']],
+  ['physicalFitnessSwim', ['swim50mTimeSeconds', 'swim50mWithinTime',
+                            'surfaceDiveDepthMetres', 'sustainedSurfaceDive',
+                            'swim200mTimeSeconds', 'swim200mMixedStrokes',
+                            'treadWaterTwoMinutes', 'towCasualty50m']],
+  ['supervisionScanningZoning', ['understandsZoneOfResponsibility',
+                                  'effectiveScanningPattern',
+                                  'tenTwentyScanRule',
+                                  'recognisesDistressedSwimmer',
+                                  'appropriateRotation',
+                                  'usesWhistleAndSignals']],
+  ['rescueConscious', ['recognitionAndAlert', 'entryWithoutLossOfSight',
+                        'approachWithFloatingAid', 'reassuresCasualty',
+                        'towToSafety', 'extricationFromWater']],
+  ['rescueUnconscious', ['recognitionAndAlert', 'safeEntryAndApproach',
+                          'airwayManagementInWater', 'effectiveTowToSafety',
+                          'safeExtrication', 'handoverHandsignal']],
+  ['spinalInjuryManagement', ['recognisesMechanism', 'headSplintHold',
+                               'maintainsInlineStabilisation',
+                               'carefulRollIfNeeded', 'useOfSpineboard',
+                               'secureCasualtyToBoard']],
+  ['cprAed', ['compressionRate', 'compressionDepth', 'effectiveCompressions',
+              'effectiveVentilations', 'timeToFirstShockSeconds',
+              'aedDeliveredPromptly', 'safeShockNoUnsafeContact',
+              'continuousQualityCpr']],
+  ['firstAidOxygen', ['bleedingControl', 'burnsManagement',
+                       'fractureImmobilisation', 'recoveryPositionUse',
+                       'oxygenTherapyAdministration', 'usesPocketMaskOrBVM']],
+  ['legalRegulatoryIncident', ['dutyOfCareUnderstood', 'pswpKnowledge',
+                                'eapInvocation', 'incidentReportCompleted',
+                                'riddorAwareness', 'safeguardingChildrenAdults']],
+  ['overallResultSignoff', ['examinerOutcome', 'candidateAcknowledged']]
 ];
 
 function updateProgress() {
   let answered = 0;
-  for (const [section, field] of TRACKED_FIELDS) {
-    const v = state[section][field];
-    if (v !== null && v !== undefined && v !== '') answered++;
+  let total = 0;
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  for (const [section, fields] of TRACKED_SECTIONS) {
+    sectionTotal[section] = fields.length;
+    sectionAnswered[section] = 0;
+    for (const field of fields) {
+      total++;
+      const v = state[section][field];
+      if (v !== null && v !== undefined && v !== '') {
+        answered++;
+        sectionAnswered[section]++;
+      }
+    }
   }
-  const total = TRACKED_FIELDS.length;
-  const percent = Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) text.textContent = `${answered} of ${total} items assessed (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses(sectionAnswered, sectionTotal);
 }
 
 // ----------------------------------------------------------------------
@@ -988,42 +1176,42 @@ function renderReport() {
   }
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>Lifeguard Competency Verification Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}${
-          candidateName ? ` for ${esc(candidateName)}` : ''
-        }${examiner ? ` · examiner: ${esc(examiner)}` : ''}</p>
-      </header>
+    <h2>Lifeguard Competency Verification Report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}${
+      candidateName ? ` for ${esc(candidateName)}` : ''
+    }${examiner ? ` · examiner: ${esc(examiner)}` : ''}</p>
 
-      <h3>Outcome</h3>
-      <p class="outcome-summary">
-        <span class="outcome-badge ${outcomeClass(outcome)}">${esc(outcomeLabel(outcome) || '—')}</span>
-        <span class="outcome-detail">${esc(summaryText)}</span>
-      </p>
-      <p class="muted">Based on ${answeredCount} of ${totalRules} checklist items recorded.</p>
-      ${outcomeNote}
+    <h3>Outcome</h3>
+    <p class="outcome-summary">
+      <span class="outcome-badge ${outcomeClass(outcome)}">${esc(outcomeLabel(outcome) || '—')}</span>
+      <span class="outcome-detail">${esc(summaryText)}</span>
+    </p>
+    <p class="muted">Based on ${answeredCount} of ${totalRules} checklist items recorded.</p>
+    ${outcomeNote}
 
-      <h3>Critical-skills audit</h3>
-      ${auditTable}
+    <h3>Critical-skills audit</h3>
+    ${auditTable}
 
-      <h3>Non-critical deficiencies</h3>
-      ${defList}
+    <h3>Non-critical deficiencies</h3>
+    ${defList}
 
-      <h3>Flagged issues</h3>
-      ${flagsList}
+    <h3>Flagged issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="print-btn" class="button" data-variant="secondary">Print / save PDF</button>
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   document.getElementById('start-over-btn').addEventListener('click', startOver);
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   const grading = gradeLifeguard(state);
   const additionalFlags = detectAdditionalFlags(state, grading);
   lastResult = {
@@ -1044,7 +1232,12 @@ function startOver() {
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  const report = document.getElementById('report');
+  if (report) {
+    report.innerHTML =
+      '<p class="empty-message">Submit the checklist to see the report.</p>';
+  }
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   refreshNumericReadouts();
@@ -1057,26 +1250,21 @@ function startOver() {
 
 function renderForm() {
   const host = document.getElementById('form-sections');
+  if (!host) return;
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
-  host.appendChild(renderStep4());
-  host.appendChild(renderStep5());
-  host.appendChild(renderStep6());
-  host.appendChild(renderStep7());
-  host.appendChild(renderStep8());
-  host.appendChild(renderStep9());
-  host.appendChild(renderStep10());
+  for (const renderer of STEP_RENDERERS) host.appendChild(renderer());
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   refreshNumericReadouts();
 
-  document.getElementById('submit-btn').addEventListener('click', submitForm);
-  document.getElementById('reset-btn').addEventListener('click', startOver);
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitBtn) submitBtn.addEventListener('click', submitForm);
+  const resetBtn = document.getElementById('reset-btn');
+  if (resetBtn) resetBtn.addEventListener('click', startOver);
 }
 
 if (document.readyState === 'loading') {
