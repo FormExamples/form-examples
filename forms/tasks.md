@@ -142,15 +142,37 @@ commit per form with `git commit --only forms/<slug>/`.
   `care-privacy-notice`, `legal-requirements-privacy-notice`,
   `research-and-planning-privacy-notice`, `screening-program-privacy-notice`,
   `code-of-conduct-notice`, `united-states-hipaa-authorization-form`.
-- [ ] **3.2  Batch: training and onboarding checklists.**
-  `agile-checklist`, `cardiopulmonary-resuscitation-training`,
-  `employee-offboarding-checklist`, `employee-onboarding-checklist`,
-  `first-aid-training-checklist`, `lifeguard-certification-checklist`,
-  `vaccinations-checklist`, `who-surgical-safety-checklist`.
-- [ ] **3.3  Batch: surveys and feedback.**
-  `employee-satisfaction-survey`, `encounter-satisfaction`,
-  `patient-satisfaction-survey`, `workplace-climate-assessment`,
-  `workplace-safety-assessment`, `workplace-stress-assessment`.
+- [x] **3.2  Batch: training and onboarding checklists** (8 of 8 done).
+  - [x] `agile-checklist` (`b0ed943b` + `865ef165`). 5-step; tri-state
+    Yes/No/N-A radios; 57 radio-groups.
+  - [x] `employee-onboarding-checklist` (`b0ed943b` + `f18b6542`). 10
+    steps, 69 Lily inputs.
+  - [x] `vaccinations-checklist` (`b0ed943b` + `4b6db443`). 10 steps,
+    182 Lily inputs.
+  - [x] `first-aid-training-checklist` (`b0ed943b` + `8fa0cd3d`). 10
+    steps, 155 inputs, tri-state radios.
+  - [x] `cardiopulmonary-resuscitation-training` (`4e2a8ec2` + `75e2c130`).
+    8 steps, 108 inputs.
+  - [x] `employee-offboarding-checklist` (`4e2a8ec2` + `87a764d2`).
+    10 steps, 153 inputs.
+  - [x] `lifeguard-certification-checklist` (`4e2a8ec2` + `367f79d2`).
+    10 steps, 141 radios in 47 groups.
+  - [x] `who-surgical-safety-checklist` (`4e2a8ec2` + `5fffc50d`).
+    5 sections, 1789 LOC pre-refactor; new `datetime-input` Lily class
+    added for coordinator stamps.
+- [x] **3.3  Batch: surveys and feedback** (6 of 6 done).
+  - [x] `employee-satisfaction-survey` (`42033691` + `8c286daf`). 10
+    steps, 204 inputs, Likert + eNPS groups.
+  - [x] `encounter-satisfaction` (`42033691` + `c34f5da3`). 8 steps,
+    100 radios in 21 groups, colored Likert chip scale.
+  - [x] `patient-satisfaction-survey` (`42033691` + `996398da`). 10
+    steps, 227 radios.
+  - [x] `workplace-climate-assessment` (`42033691` + `6f1b0efe`). 10
+    domains, likert-group on Lily contract.
+  - [x] `workplace-safety-assessment` (`42033691` + `fdcb1622`). 10
+    sections, grade-1..4 severity badges preserved.
+  - [x] `workplace-stress-assessment` (`42033691` + `85e7369b`). 9
+    sections, 35 likert-groups (175 radios).
 - [ ] **3.4  Batch: simple single-grader assessments (~30 forms).** Allergy,
   asthma, attention deficit, audiology, autism, dental, dermatology,
   diabetes, dyslexia, ergonomic, fall risk, fertility, gastroenterology,
