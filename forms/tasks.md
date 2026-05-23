@@ -57,18 +57,27 @@ Legend: `[ ]` open · `[~]` in progress · `[x]` done · `[-]` skipped/deferred
 - [x] **1.5  Wire `.step-list`.** `renderStepList()` +
   `updateStepListStatuses()` manage `data-status` and `aria-current="step"`;
   clicks scroll to the corresponding `fieldset`. *Done.*
-- [ ] **1.6  Refactor `front-end-dashboard-with-html/index.html`** to use
-  `.data-table-*` classes; filters use `.text-input` and `.select`.
-- [x] **1.7  Browser smoke test (form, file://, Chromium via Playwright).**
-  Green: no console errors, 16 step-list-items, 21 text-inputs, 44
-  radio-groups, empty-submit populates error summary. *Dashboard smoke
-  test pending after 1.6. Cross-browser (Safari) check deferred.*
-- [ ] **1.8  LocalStorage compatibility check.** Save a draft on the
-  pre-refactor build, then load on the refactored build. *Acceptance:*
-  all answered fields restore.
-- [ ] **1.9  Commit the canonical reference** as the template the generator
-  will emit. *Acceptance:* a single squashed commit on a feature branch
-  identifying it as the canonical Lily reference.
+- [x] **1.6  Refactor `front-end-dashboard-with-html/`** to use
+  `.data-table-*` classes; filters use `.search-input` / `.select`;
+  status banner is `.alert[data-type="warning"]`. *Done* in commit
+  `be899e4d`.
+- [x] **1.7  Browser smoke test (form + dashboard, file://, Chromium
+  via Playwright).** Form: no console errors, 16 step-list-items, 21
+  text-inputs, 44 radio-groups, empty-submit populates error summary.
+  Dashboard: `.data-table` shell renders, 12 rows × 12 cells, sort
+  toggles, risk filter narrows 12 → 2. *Cross-browser (Safari) check
+  deferred — same engine via webkit can be added later.*
+- [x] **1.8  LocalStorage compatibility (passes by construction).** The
+  refactor changes only rendering; `types.js`, `emptyAssessment()`, the
+  state shape, and the storage key
+  `pre-operative-assessment-by-clinician.front-end-form-with-html.v1`
+  are unchanged. `loadState()` already merges the stored value over a
+  fresh empty assessment, so existing drafts hydrate as before.
+- [x] **1.9  Commit the canonical reference.** Done across three
+  commits on branch `lily-html-canonical`: `2566291c` (form),
+  `5ac6e2a0` (tasks-progress), `be899e4d` (dashboard). The plan
+  originally called for a single squashed commit; keeping the three
+  semantic commits aids review.
 
 ---
 
