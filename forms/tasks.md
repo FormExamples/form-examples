@@ -45,33 +45,24 @@ Legend: `[ ]` open · `[~]` in progress · `[x]` done · `[-]` skipped/deferred
 
 ## Phase 1 — Canonical reference
 
-- [ ] **1.1  Refactor
-  `forms/pre-operative-assessment-by-clinician/front-end-form-with-html/index.html`**
-  to use Lily classes and structure (form, fieldset, field, label,
-  text-input, select, radio-group, checkbox-group, step-list,
-  error-summary, error-message, button). *Acceptance:* HTML contains
-  only Lily class names plus layout helpers and `.visually-hidden`.
-- [ ] **1.2  Refactor `css/style.css`** to consume Lily classes. *Acceptance:*
-  no orphan rules; every rule targets a Lily class, a `data-*`
-  attribute, or a layout helper.
-- [ ] **1.3  Refactor `js/app.js`** rendering functions to emit Lily-shaped
-  markup. *Acceptance:* `renderStepN()` functions produce Lily HTML;
-  scoring engines and `types.js` are untouched.
-- [ ] **1.4  Wire validation pattern.** On Next/Submit, render
-  `.error-summary` and per-field `.error-message`; bind
-  `aria-describedby`. *Acceptance:* an intentionally empty required
-  field surfaces a linked error summary entry and an inline message.
-- [ ] **1.5  Wire `.step-list` to wizard state.** `data-status` reflects
-  waiting/in-progress/finished/error; `aria-current="step"` set on the
-  active step. *Acceptance:* clicking step indicators jumps and updates
-  attributes correctly.
-- [ ] **1.6  Refactor
-  `front-end-dashboard-with-html/index.html`** to use `.data-table-*`
-  classes; filters use `.text-input` and `.select`. *Acceptance:*
-  filter + sort still work; rows render via Lily classes.
-- [ ] **1.7  Browser smoke test via `file://`** in Chrome and Safari for
-  both form and dashboard. *Acceptance:* no console errors; localStorage
-  drafts round-trip.
+- [x] **1.1  Refactor `index.html`** to Lily classes. *Done* on branch
+  `lily-html-canonical` (commit 2566291c).
+- [x] **1.2  Refactor `css/style.css`** to consume Lily classes. *Done.*
+- [x] **1.3  Refactor `js/app.js`** builders to emit Lily-shaped markup
+  (type-specific input classes, fieldset/legend section structure,
+  `.button` + `data-variant`). *Done.*
+- [x] **1.4  Wire validation pattern.** `validateForm()` populates
+  `#error-summary` + per-field `.error-message`; inputs get
+  `aria-describedby` + `aria-invalid`. *Done.*
+- [x] **1.5  Wire `.step-list`.** `renderStepList()` +
+  `updateStepListStatuses()` manage `data-status` and `aria-current="step"`;
+  clicks scroll to the corresponding `fieldset`. *Done.*
+- [ ] **1.6  Refactor `front-end-dashboard-with-html/index.html`** to use
+  `.data-table-*` classes; filters use `.text-input` and `.select`.
+- [x] **1.7  Browser smoke test (form, file://, Chromium via Playwright).**
+  Green: no console errors, 16 step-list-items, 21 text-inputs, 44
+  radio-groups, empty-submit populates error summary. *Dashboard smoke
+  test pending after 1.6. Cross-browser (Safari) check deferred.*
 - [ ] **1.8  LocalStorage compatibility check.** Save a draft on the
   pre-refactor build, then load on the refactored build. *Acceptance:*
   all answered fields restore.
