@@ -160,9 +160,16 @@ main {
   color: var(--color-muted);
 }
 
-/* Inputs */
+/* Inputs (Lily class contract) */
 .text-input,
-.select-input {
+.search-input,
+.email-input,
+.number-input,
+.date-input,
+.time-input,
+.tel-input,
+.url-input,
+.select {
   width: 100%;
   font: inherit;
   font-size: 0.9375rem;
@@ -173,46 +180,84 @@ main {
   background: var(--color-surface);
 }
 .text-input:focus,
-.select-input:focus {
+.search-input:focus,
+.email-input:focus,
+.number-input:focus,
+.date-input:focus,
+.time-input:focus,
+.tel-input:focus,
+.url-input:focus,
+.select:focus {
   outline: 2px solid var(--color-focus);
   outline-offset: 1px;
   border-color: var(--color-primary);
 }
 
-/* Buttons */
-.btn {
+/* Label */
+.label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* Buttons (Lily class contract: .button + data-variant) */
+.button {
   display: inline-block;
   padding: 0.5rem 1rem;
   font: inherit;
   font-size: 0.9375rem;
   font-weight: 500;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
   cursor: pointer;
   text-align: center;
   user-select: none;
   transition: background 120ms ease, border 120ms ease;
 }
-.btn:focus-visible {
+.button:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
-.btn-primary {
+.button:hover { background: var(--color-bg); }
+.button[data-variant="primary"] {
   background: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
 }
-.btn-primary:hover {
+.button[data-variant="primary"]:hover {
   background: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
 }
-.btn-secondary {
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-color: var(--color-border-strong);
-}
-.btn-secondary:hover {
+
+/* Lily .alert (used as status banner) */
+.alert {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+.alert[data-type="warning"] {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+  color: #78350f;
+}
+.alert[data-type="error"] {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger);
+}
+.alert[data-type="success"] {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}
+.alert[data-type="info"] {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
 }
 
 /* Teams table card */
@@ -227,25 +272,25 @@ main {
   overflow-x: auto;
 }
 
-.teams-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
-.teams-table thead {
+.data-table-head {
   background: var(--color-bg);
 }
-.teams-table th,
-.teams-table td {
+.data-table-th,
+.data-table-td {
   padding: 0.625rem 0.875rem;
   text-align: left;
   border-bottom: 1px solid var(--color-border);
   white-space: nowrap;
 }
-.teams-table tbody tr:last-child td {
+.data-table-body .data-table-row:last-child .data-table-td {
   border-bottom: 0;
 }
-.teams-table tbody tr:hover {
+.data-table-body .data-table-row:hover {
   background: #f3f4f6;
 }
 
@@ -279,16 +324,16 @@ main {
   display: inline-block;
   text-align: center;
 }
-.teams-table th[aria-sort="ascending"] .sort-indicator,
-.teams-table th[aria-sort="descending"] .sort-indicator {
+.data-table th[aria-sort="ascending"] .sort-indicator,
+.data-table th[aria-sort="descending"] .sort-indicator {
   color: var(--color-primary);
 }
 
 /* Very-high-risk row emphasis (surfaces first by default sort) */
-.teams-table tbody tr.row-very-high {
+.data-table-body .data-table-row.row-very-high {
   background: var(--color-danger-row-bg);
 }
-.teams-table tbody tr.row-very-high:hover {
+.data-table-body .data-table-row.row-very-high:hover {
   background: #fee2e2;
 }
 

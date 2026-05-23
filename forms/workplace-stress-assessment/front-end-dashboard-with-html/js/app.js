@@ -240,6 +240,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
     if (col.align === 'right') {
@@ -288,6 +289,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.overallRisk === 'Very High') {
       tr.classList.add('row-very-high');
     }
@@ -298,17 +300,17 @@ function renderTableBody() {
     const meanCells = domains.map(function (d) {
       const v = row.domainMeans ? row.domainMeans[d.key] : null;
       const isWorst = d.key === worstKey;
-      const cls = 'num-cell mean' + (isWorst ? ' mean-worst' : '');
+      const cls = 'data-table-td num-cell mean' + (isWorst ? ' mean-worst' : '');
       return `<td class="${cls}">${esc(fmtMean(v))}</td>`;
     }).join('');
 
     tr.innerHTML = `
-      <td>${esc(row.department)}</td>
-      <td class="num-cell">${esc(row.responsesCount)}</td>
-      <td><span class="tenure-badge">${esc(row.tenureBand)}</span></td>
+      <td class="data-table-td">${esc(row.department)}</td>
+      <td class="data-table-td num-cell">${esc(row.responsesCount)}</td>
+      <td class="data-table-td"><span class="tenure-badge">${esc(row.tenureBand)}</span></td>
       ${meanCells}
-      <td><span class="domain-badge">${esc(row.worstDomain)}</span></td>
-      <td><span class="risk-badge ${riskClass(row.overallRisk)}">${esc(row.overallRisk)}</span></td>
+      <td class="data-table-td"><span class="domain-badge">${esc(row.worstDomain)}</span></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.overallRisk)}">${esc(row.overallRisk)}</span></td>
     `;
     body.appendChild(tr);
   }
