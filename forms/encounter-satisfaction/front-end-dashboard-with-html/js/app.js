@@ -165,6 +165,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -210,6 +211,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.category === 'Very Poor') {
       tr.classList.add('row-very-poor');
     }
@@ -217,14 +219,14 @@ function renderTableBody() {
     const flagLabel = row.flagCount === 1 ? '1 flag' : (row.flagCount + ' flags');
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.department)}</td>
-      <td>${esc(row.providerName)}</td>
-      <td>${esc(row.visitType)}</td>
-      <td><span class="composite-score">${Number(row.compositeScore).toFixed(1)}</span></td>
-      <td><span class="category-badge ${categoryClass(row.category)}">${esc(row.category)}</span></td>
-      <td><span class="visit-date">${esc(row.visitDate)}</span></td>
-      <td><span class="flag-badge ${flagClass(row.flagCount)}">${esc(flagLabel)}</span></td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td">${esc(row.department)}</td>
+      <td class="data-table-td">${esc(row.providerName)}</td>
+      <td class="data-table-td">${esc(row.visitType)}</td>
+      <td class="data-table-td"><span class="composite-score">${Number(row.compositeScore).toFixed(1)}</span></td>
+      <td class="data-table-td"><span class="category-badge ${categoryClass(row.category)}">${esc(row.category)}</span></td>
+      <td class="data-table-td"><span class="visit-date">${esc(row.visitDate)}</span></td>
+      <td class="data-table-td"><span class="flag-badge ${flagClass(row.flagCount)}">${esc(flagLabel)}</span></td>
     `;
     body.appendChild(tr);
   }
