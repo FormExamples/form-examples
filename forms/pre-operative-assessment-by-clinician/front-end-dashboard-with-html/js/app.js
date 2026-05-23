@@ -226,6 +226,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -281,6 +282,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.composite === 'critical') {
       tr.classList.add('row-critical');
     }
@@ -291,18 +293,18 @@ function renderTableBody() {
         : esc(row.cfs);
 
     tr.innerHTML = `
-      <td><span class="date-cell">${esc(row.date)}</span></td>
-      <td><strong>${esc(row.patient)}</strong></td>
-      <td>${esc(row.nhs)}</td>
-      <td>${esc(row.procedure)}</td>
-      <td><span class="urgency-badge ${urgencyClass(row.urgency)}">${esc(row.urgency)}</span></td>
-      <td><span class="asa-badge ${asaClass(row.asa)}">${esc(row.asa)}</span></td>
-      <td><span class="numeric-cell">${esc(row.rcri)}</span></td>
-      <td><span class="numeric-cell">${esc(row.stopbang)}</span></td>
-      <td><span class="numeric-cell">${cfsDisplay}</span></td>
-      <td><span class="risk-badge ${riskClass(row.composite)}">${esc(row.composite)}</span></td>
-      <td>${renderFlagsCell(row.flags)}</td>
-      <td>${esc(row.clinician)}</td>
+      <td class="data-table-td"><span class="date-cell">${esc(row.date)}</span></td>
+      <td class="data-table-td"><strong>${esc(row.patient)}</strong></td>
+      <td class="data-table-td">${esc(row.nhs)}</td>
+      <td class="data-table-td">${esc(row.procedure)}</td>
+      <td class="data-table-td"><span class="urgency-badge ${urgencyClass(row.urgency)}">${esc(row.urgency)}</span></td>
+      <td class="data-table-td"><span class="asa-badge ${asaClass(row.asa)}">${esc(row.asa)}</span></td>
+      <td class="data-table-td"><span class="numeric-cell">${esc(row.rcri)}</span></td>
+      <td class="data-table-td"><span class="numeric-cell">${esc(row.stopbang)}</span></td>
+      <td class="data-table-td"><span class="numeric-cell">${cfsDisplay}</span></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.composite)}">${esc(row.composite)}</span></td>
+      <td class="data-table-td">${renderFlagsCell(row.flags)}</td>
+      <td class="data-table-td">${esc(row.clinician)}</td>
     `;
     body.appendChild(tr);
   }

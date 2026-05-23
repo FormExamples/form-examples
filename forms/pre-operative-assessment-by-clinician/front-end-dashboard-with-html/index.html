@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#assessments-table">Skip to assessments table</a>
+  <a class="skip-link visually-hidden" href="#assessments-table">Skip to assessments table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -24,7 +24,8 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert"
+      data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -38,20 +39,20 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="NHS number, patient, procedure, or clinician..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-risk">Composite Risk</label>
-          <select id="filter-risk" class="select-input">
+        <div class="filter-field field">
+          <label class="label" for="filter-risk">Composite Risk</label>
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="low">Low</option>
             <option value="moderate">Moderate</option>
@@ -60,9 +61,9 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-asa">ASA Grade</label>
-          <select id="filter-asa" class="select-input">
+        <div class="filter-field field">
+          <label class="label" for="filter-asa">ASA Grade</label>
+          <select id="filter-asa" class="select">
             <option value="">All ASA grades</option>
             <option value="I">I</option>
             <option value="II">II</option>
@@ -73,9 +74,9 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-urgency">Urgency</label>
-          <select id="filter-urgency" class="select-input">
+        <div class="filter-field field">
+          <label class="label" for="filter-urgency">Urgency</label>
+          <select id="filter-urgency" class="select">
             <option value="">All urgency levels</option>
             <option value="elective">Elective</option>
             <option value="urgent">Urgent</option>
@@ -84,9 +85,9 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-flags">Safety Flags</label>
-          <select id="filter-flags" class="select-input">
+        <div class="filter-field field">
+          <label class="label" for="filter-flags">Safety Flags</label>
+          <select id="filter-flags" class="select">
             <option value="">All</option>
             <option value="yes">With flags</option>
             <option value="no">No flags</option>
@@ -97,7 +98,8 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button"
+            data-variant="secondary"
             hidden
           >
             Clear filters
@@ -118,13 +120,13 @@
       <h2 id="assessments-table-heading" class="visually-hidden">Assessments</h2>
 
       <div class="table-scroll">
-        <table id="assessments-table" class="assessments-table">
-          <thead>
-            <tr id="assessments-table-head">
+        <table id="assessments-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="assessments-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="assessments-table-body">
+          <tbody id="assessments-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
