@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+  <a class="skip-link visually-hidden" href="#patients-table">Skip to patients table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -39,19 +39,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="NHS number, patient name, or organisation..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-optin">Opt-In Status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-optin">Opt-In Status</label>
           <select id="filter-optin" class="select">
             <option value="">All opt-in statuses</option>
             <option value="Opted In">Opted In</option>
@@ -62,8 +62,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-basis">Lawful Basis</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-basis">Lawful Basis</label>
           <select id="filter-basis" class="select">
             <option value="">All lawful bases</option>
             <option value="Public Task">Public Task</option>
@@ -72,8 +72,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-completion">Completion Status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-completion">Completion Status</label>
           <select id="filter-completion" class="select">
             <option value="">All</option>
             <option value="Complete">Complete</option>
@@ -106,13 +106,13 @@
       <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
 
       <div class="table-scroll">
-        <table id="patients-table" class="patients-table">
-          <thead>
-            <tr id="patients-table-head">
+        <table id="patients-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="patients-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="patients-table-body">
+          <tbody id="patients-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

@@ -3,9 +3,10 @@
 //
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The user scrolls through them; a sticky top-of-page
-// progress summary reflects how many required fields have been filled.
-// Submission runs the pure validator and renders an inline report. State is
-// persisted to localStorage so a partial fill survives a page reload.
+// progress bar + step list reflects how many required fields have been
+// filled. Submission runs the pure validator and renders an inline report.
+// State is persisted to localStorage so a partial fill survives a page
+// reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.ResearchAndPlanningPrivacyNotice`. Pulling them off
@@ -19,7 +20,7 @@ const NS = window.ResearchAndPlanningPrivacyNotice;
 const {
   emptyAssessment,
   validationRules,
-  validateForm,
+  validateForm: validateAssessment,
   detectAdditionalFlags,
   acknowledgementStatus,
   acknowledgementStatusLabel,
@@ -32,6 +33,7 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY = 'research-and-planning-privacy-notice.front-end-form-with-html.v1';
+const TOTAL_STEPS = 3;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -117,8 +119,21 @@ function esc(s) {
 }
 
 // ----------------------------------------------------------------------
-// Component builders
+// Component builders (Lily class contract)
 // ----------------------------------------------------------------------
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
 
 /**
  * Build a labelled text input.
@@ -135,22 +150,25 @@ function textInput(opts) {
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
+    `class="${lilyInputClass(type)}"`,
     `value="${esc(value ?? '')}"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  if (opts.required) attrs.push('required', 'data-required');
 
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
+  input.setAttribute('aria-describedby', `${id}-error`);
   input.addEventListener('input', () => {
     setField(opts.section, opts.field, input.value);
+    clearFieldError(id);
   });
   return wrapper;
 }
@@ -158,65 +176,77 @@ function textInput(opts) {
 /**
  * Build a radio-group fieldset for an opt-out preference.
  * @param {{
- *   legend: string,
+ *   label: string,
  *   section: string,
  *   field: string,
+ *   required?: boolean,
  *   options: Array<{value: string, label: string}>
  * }} opts
  */
 function radioGroup(opts) {
-  const fs = document.createElement('fieldset');
-  fs.className = 'optout-group';
+  const groupId = `${opts.section}-${opts.field}`;
+  const current = state[opts.section][opts.field];
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
-  legend.innerHTML = `${esc(opts.legend)} <span class="req" aria-hidden="true">*</span>`;
-  fs.appendChild(legend);
+  legend.className = 'label';
+  legend.innerHTML = esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  wrapper.appendChild(legend);
 
-  const groupName = `${opts.section}-${opts.field}`;
-  const current = state[opts.section][opts.field];
-
-  for (const opt of opts.options) {
-    const id = `${groupName}-${opt.value}`;
-    const lbl = document.createElement('label');
-    lbl.className = 'optout-option';
-    lbl.htmlFor = id;
-    lbl.innerHTML = `
-      <input type="radio"
-        id="${id}"
-        name="${groupName}"
-        value="${esc(opt.value)}"
-        ${String(current) === opt.value ? 'checked' : ''}>
-      <span>${esc(opt.label)}</span>
+  const list = document.createElement('div');
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
+  for (const option of opts.options) {
+    const radioId = `${groupId}-${option.value}`;
+    const label = document.createElement('label');
+    label.htmlFor = radioId;
+    const checked = String(current) === option.value ? ' checked' : '';
+    label.innerHTML = `
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <span>${esc(option.label)}</span>
     `;
-    const input = lbl.querySelector('input');
+    const input = label.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, opt.value);
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
     });
-    fs.appendChild(lbl);
+    list.appendChild(label);
   }
+  wrapper.appendChild(list);
 
-  return fs;
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
+  return wrapper;
 }
 
 /**
- * Build a section card.
+ * Build a section card as a Lily fieldset with fieldset-legend.
  * @param {{ stepNumber: number, title: string, description?: string }} opts
  */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 3</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -345,9 +375,10 @@ function renderStep3() {
 
   // Type 1 opt-out fieldset
   card.appendChild(radioGroup({
-    legend: 'Type 1 opt-out (from this practice)',
+    label: 'Type 1 opt-out (from this practice)',
     section: 'acknowledgementSignature',
     field: 'type1OptOut',
+    required: true,
     options: [
       { value: 'opt-in',  label: 'Opt in — I consent to my information being used for research and planning purposes' },
       { value: 'opt-out', label: 'Opt out — I do not want my identifiable information shared from this practice for research or planning' }
@@ -356,9 +387,10 @@ function renderStep3() {
 
   // National Data Opt-Out fieldset
   card.appendChild(radioGroup({
-    legend: 'NHS National Data Opt-Out',
+    label: 'NHS National Data Opt-Out',
     section: 'acknowledgementSignature',
     field: 'nationalDataOptOut',
+    required: true,
     options: [
       { value: 'opt-in',  label: 'Opt in — I allow my confidential patient information to be used for research and planning across the NHS' },
       { value: 'opt-out', label: 'Opt out — I do not want my data used beyond my individual care and treatment' }
@@ -366,18 +398,22 @@ function renderStep3() {
   }));
 
   // Acknowledgement checkbox
+  const ackId = 'acknowledgementSignature-agreed';
+  const ackWrapper = document.createElement('div');
+  ackWrapper.className = 'field';
   const ackLabel = document.createElement('label');
   ackLabel.className = 'ack-checkbox';
   ackLabel.id = 'ack-checkbox-label';
-  ackLabel.htmlFor = 'acknowledgementSignature-agreed';
+  ackLabel.htmlFor = ackId;
   if (state.acknowledgementSignature.agreed) {
     ackLabel.classList.add('is-checked');
   }
   ackLabel.innerHTML = `
     <input
+      class="checkbox-input"
       type="checkbox"
-      id="acknowledgementSignature-agreed"
-      name="acknowledgementSignature-agreed"
+      id="${ackId}"
+      name="${ackId}"
       ${state.acknowledgementSignature.agreed ? 'checked' : ''}
     >
     <span class="ack-checkbox-text">
@@ -389,8 +425,14 @@ function renderStep3() {
   const ackInput = ackLabel.querySelector('input');
   ackInput.addEventListener('change', () => {
     setField('acknowledgementSignature', 'agreed', ackInput.checked);
+    clearFieldError(ackId);
   });
-  card.appendChild(ackLabel);
+  ackWrapper.appendChild(ackLabel);
+  const ackErr = document.createElement('span');
+  ackErr.className = 'error-message';
+  ackErr.id = `${ackId}-error`;
+  ackWrapper.appendChild(ackErr);
+  card.appendChild(ackWrapper);
 
   card.appendChild(textInput({
     label: 'Full Name',
@@ -410,6 +452,8 @@ function renderStep3() {
   return card;
 }
 
+const STEP_RENDERERS = [renderStep1, renderStep2, renderStep3];
+
 // ----------------------------------------------------------------------
 // Conditional sections + visual state
 // ----------------------------------------------------------------------
@@ -426,14 +470,6 @@ function updateConditionalSections() {
     const [section, field] = path.split('.');
     const current = state[section] && state[section][field];
     host.style.display = String(current) === target ? '' : 'none';
-  });
-  document.querySelectorAll('[data-conditional-any]').forEach((host) => {
-    const expr = host.getAttribute('data-conditional-any');
-    const [path, targetCsv] = expr.split('=');
-    const [section, field] = path.split('.');
-    const current = String((state[section] && state[section][field]) ?? '');
-    const targets = targetCsv.split(',');
-    host.style.display = targets.includes(current) ? '' : 'none';
   });
 }
 
@@ -452,30 +488,202 @@ function updateCheckboxVisual() {
 // Progress
 // ----------------------------------------------------------------------
 
-/**
- * Tracked fields = the validation-rule list. Each rule corresponds to a
- * single required field; we count how many are non-empty.
- */
-function countAnswered() {
-  let answered = 0;
-  for (const rule of validationRules) {
-    const v = state[rule.section] && state[rule.section][rule.field];
-    if (v === '' || v === null || v === undefined || v === false) continue;
-    answered++;
-  }
-  return answered;
-}
+// Tracked fields drive the sticky progress bar at the top of the page.
+// We track every required field in `validationRules`, attributed to
+// their step for step-list status.
+const TRACKED_FIELDS = [
+  // Step 1: Recipient Details
+  { section: 'recipientDetails', field: 'organisationName', step: 1 },
+  { section: 'recipientDetails', field: 'recipientName', step: 1 },
+  // Step 3: Opt-Out Preference, Acknowledgement & Signature
+  { section: 'acknowledgementSignature', field: 'type1OptOut', step: 3 },
+  { section: 'acknowledgementSignature', field: 'nationalDataOptOut', step: 3 },
+  { section: 'acknowledgementSignature', field: 'agreed', step: 3 },
+  { section: 'acknowledgementSignature', field: 'recipientTypedFullName', step: 3 },
+  { section: 'acknowledgementSignature', field: 'recipientTypedDate', step: 3 }
+];
 
 function updateProgress() {
-  const answered = countAnswered();
-  const total = validationRules.length;
+  let answered = 0;
+  const stepAnswered = {};
+  const stepTotal = {};
+  for (const t of TRACKED_FIELDS) {
+    stepTotal[t.step] = (stepTotal[t.step] || 0) + 1;
+    const v = state[t.section] && state[t.section][t.field];
+    if (v !== null && v !== undefined && v !== '' && v !== false) {
+      answered++;
+      stepAnswered[t.step] = (stepAnswered[t.step] || 0) + 1;
+    }
+  }
+  // Step 2 is a read-only prose section, so treat it as always "finished".
+  stepTotal[2] = stepTotal[2] || 1;
+  stepAnswered[2] = stepTotal[2];
+
+  const total = TRACKED_FIELDS.length;
   const percent = Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses(stepAnswered, stepTotal);
+}
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1, section: 'recipientDetails',         title: 'Recipient' },
+  { step: 2, section: 'researchPlanningNotice',   title: 'Privacy Notice' },
+  { step: 3, section: 'acknowledgementSignature', title: 'Acknowledge' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(stepAnswered, stepTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = stepAnswered[def.step] || 0;
+    const t = stepTotal[def.step] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+
+  // Native required fields (text inputs).
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim() : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+
+  // Required radio groups: Type 1 and National Data Opt-Out.
+  const radioRules = [
+    {
+      section: 'acknowledgementSignature',
+      field: 'type1OptOut',
+      label: 'Type 1 opt-out preference'
+    },
+    {
+      section: 'acknowledgementSignature',
+      field: 'nationalDataOptOut',
+      label: 'NHS National Data Opt-Out preference'
+    }
+  ];
+  for (const r of radioRules) {
+    const id = `${r.section}-${r.field}`;
+    const value = state[r.section][r.field];
+    if (!value) {
+      errors.push({ id, message: `${r.label} is required` });
+      setFieldError(id, `${r.label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  }
+
+  // Acknowledgement checkbox must be true.
+  const ackId = 'acknowledgementSignature-agreed';
+  if (!state.acknowledgementSignature.agreed) {
+    errors.push({
+      id: ackId,
+      message: 'You must confirm the acknowledgement checkbox'
+    });
+    setFieldError(ackId, 'You must confirm the acknowledgement checkbox');
+  } else {
+    clearFieldError(ackId);
+  }
+
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
 }
 
 // ----------------------------------------------------------------------
@@ -546,31 +754,27 @@ function renderReport() {
     `;
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>Research and Planning Privacy Notice — Acknowledgement Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
+    <h2>Research and Planning Privacy Notice — Acknowledgement Report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
 
-      <h3>Status</h3>
-      <p class="status-summary">
-        <span class="status-badge ${acknowledgementStatusClass(ackStatus)}">${esc(acknowledgementStatusLabel(ackStatus))}</span>
-        <span class="completeness-pct">${esc(completenessLabel(pct))}</span>
-      </p>
-      <p class="muted">
-        Validation status: <strong>${esc(status)}</strong>
-        (${firedRules.length} of ${validationRules.length} required fields outstanding).
-      </p>
+    <h3>Status</h3>
+    <p class="status-summary">
+      <span class="status-badge ${acknowledgementStatusClass(ackStatus)}">${esc(acknowledgementStatusLabel(ackStatus))}</span>
+      <span class="completeness-pct">${esc(completenessLabel(pct))}</span>
+    </p>
+    <p class="muted">
+      Validation status: <strong>${esc(status)}</strong>
+      (${firedRules.length} of ${validationRules.length} required fields outstanding).
+    </p>
 
-      <h3>Validation errors (fired rules)</h3>
-      ${firedTable}
+    <h3>Validation errors (fired rules)</h3>
+    ${firedTable}
 
-      <h3>Flagged Issues</h3>
-      ${flagsList}
+    <h3>Flagged Issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -579,7 +783,9 @@ function renderReport() {
 }
 
 function submitForm() {
-  const { completeness, status, firedRules } = validateForm(state);
+  const errors = validateForm();
+  if (errors.length > 0) return;
+  const { completeness, status, firedRules } = validateAssessment(state);
   const additionalFlags = detectAdditionalFlags(state);
   lastResult = {
     completenessPercent: completeness,
@@ -600,7 +806,9 @@ function startOver() {
     new Date().toISOString().slice(0, 10);
   saveState(state);
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  document.getElementById('report').innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -615,12 +823,11 @@ function startOver() {
 function renderForm() {
   const host = document.getElementById('form-sections');
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();

@@ -229,6 +229,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -289,6 +290,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     const tint = rowTintClass(row);
     if (tint) tr.classList.add(tint);
 
@@ -297,23 +299,23 @@ function renderTableBody() {
       : 'ack-date ack-date-empty';
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.organisationName)}</td>
-      <td><span class="optin-badge ${optInClass(row.optInStatus)}">${esc(row.optInStatus)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(row.organisationName)}</td>
+      <td class="data-table-td"><span class="optin-badge ${optInClass(row.optInStatus)}">${esc(row.optInStatus)}</span></td>
+      <td class="data-table-td">
         <span class="flag-pill ${row.type1OptOut ? 'flag-pill-on' : 'flag-pill-off'}">
           ${row.type1OptOut ? 'Yes' : 'No'}
         </span>
       </td>
-      <td>
+      <td class="data-table-td">
         <span class="flag-pill ${row.nationalDataOptOut ? 'flag-pill-on' : 'flag-pill-off'}">
           ${row.nationalDataOptOut ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="basis-badge">${esc(row.lawfulBasis)}</span></td>
-      <td><span class="completion-badge ${completionClass(row.completionStatus)}">${esc(row.completionStatus)}</span></td>
-      <td><span class="${dateClass}">${esc(formatAckDate(row.acknowledgementDate))}</span></td>
+      <td class="data-table-td"><span class="basis-badge">${esc(row.lawfulBasis)}</span></td>
+      <td class="data-table-td"><span class="completion-badge ${completionClass(row.completionStatus)}">${esc(row.completionStatus)}</span></td>
+      <td class="data-table-td"><span class="${dateClass}">${esc(formatAckDate(row.acknowledgementDate))}</span></td>
     `;
     body.appendChild(tr);
   }
