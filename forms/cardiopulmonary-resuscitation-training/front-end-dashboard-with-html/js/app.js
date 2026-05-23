@@ -303,6 +303,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -347,6 +348,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.outcome === 'Fail') {
       tr.classList.add('row-fail');
     }
@@ -361,23 +363,23 @@ function renderTableBody() {
       : '';
 
     tr.innerHTML = `
-      <td>${esc(row.traineeId)}</td>
-      <td>${esc(row.traineeName)}</td>
-      <td><span class="role-badge">${esc(row.role)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.traineeId)}</td>
+      <td class="data-table-td">${esc(row.traineeName)}</td>
+      <td class="data-table-td"><span class="role-badge">${esc(row.role)}</span></td>
+      <td class="data-table-td">
         <span class="outcome-badge ${outcomeClass(row.outcome)}">${esc(row.outcome)}</span>
         ${criticalFlag}
       </td>
-      <td><span class="num-cell">${esc(row.compressionRate)}</span></td>
-      <td><span class="num-cell">${esc(row.compressionDepthCm.toFixed(1))}</span></td>
-      <td>
+      <td class="data-table-td"><span class="num-cell">${esc(row.compressionRate)}</span></td>
+      <td class="data-table-td"><span class="num-cell">${esc(row.compressionDepthCm.toFixed(1))}</span></td>
+      <td class="data-table-td">
         <span class="date-cell ${expired ? 'date-expired' : ''}" title="Issued ${esc(issuedDisplay)}">
           ${esc(expiryDisplay)}
         </span>
       </td>
-      <td><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
-      <td>${esc(row.instructorName)}</td>
-      <td>${esc(row.trainingCentre)}</td>
+      <td class="data-table-td"><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
+      <td class="data-table-td">${esc(row.instructorName)}</td>
+      <td class="data-table-td">${esc(row.trainingCentre)}</td>
     `;
     body.appendChild(tr);
   }
