@@ -206,6 +206,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -251,6 +252,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.compliance === 'non-compliant') {
       tr.classList.add('row-non-compliant');
     }
@@ -263,13 +265,13 @@ function renderTableBody() {
       : `<span class="missing-cell">${esc(missing.join(', '))}</span>`;
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="age-band">${esc(row.ageYears)}</span></td>
-      <td>${esc(row.ageBand)}</td>
-      <td><span class="schedule-badge ${scheduleClass(row.scheduleType)}">${esc(row.scheduleType)}</span></td>
-      <td><span class="compliance-badge ${complianceClass(row.compliance)}">${esc(complianceLabels[row.compliance] ?? row.compliance)}</span></td>
-      <td>${missingHtml}</td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td"><span class="age-band">${esc(row.ageYears)}</span></td>
+      <td class="data-table-td">${esc(row.ageBand)}</td>
+      <td class="data-table-td"><span class="schedule-badge ${scheduleClass(row.scheduleType)}">${esc(row.scheduleType)}</span></td>
+      <td class="data-table-td"><span class="compliance-badge ${complianceClass(row.compliance)}">${esc(complianceLabels[row.compliance] ?? row.compliance)}</span></td>
+      <td class="data-table-td">${missingHtml}</td>
     `;
     body.appendChild(tr);
   }
