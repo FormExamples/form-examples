@@ -318,37 +318,37 @@
         ev.preventDefault();
         renderDetail(r.id);
       });
-      tbody.appendChild(el('tr', { class: 'maturity-' + r.maturity }, [
-        el('td', null, [r.date]),
-        el('td', null, [respondentText]),
-        el('td', null, [roleText]),
-        el('td', null, [r.team]),
-        el('td', null, [r.organisation]),
-        el('td', null, [r.answered + '/57']),
-        el('td', null, [pct(r.teamsPercent)]),
-        el('td', null, [pct(r.stakeholdersPercent)]),
-        el('td', null, [pct(r.practicesPercent)]),
-        el('td', { class: 'overall' }, [pct(r.overallPercent)]),
-        el('td', { class: 'maturity' }, [r.maturity]),
-        el('td', null, [r.weakSections.join(', ') || '—']),
-        el('td', null, [r.flags.join(', ') || '—']),
-        el('td', null, [detailLink]),
+      tbody.appendChild(el('tr', { class: 'data-table-row maturity-' + r.maturity }, [
+        el('td', { class: 'data-table-td' }, [r.date]),
+        el('td', { class: 'data-table-td' }, [respondentText]),
+        el('td', { class: 'data-table-td' }, [roleText]),
+        el('td', { class: 'data-table-td' }, [r.team]),
+        el('td', { class: 'data-table-td' }, [r.organisation]),
+        el('td', { class: 'data-table-td' }, [r.answered + '/57']),
+        el('td', { class: 'data-table-td' }, [pct(r.teamsPercent)]),
+        el('td', { class: 'data-table-td' }, [pct(r.stakeholdersPercent)]),
+        el('td', { class: 'data-table-td' }, [pct(r.practicesPercent)]),
+        el('td', { class: 'data-table-td overall' }, [pct(r.overallPercent)]),
+        el('td', { class: 'data-table-td maturity' }, [r.maturity]),
+        el('td', { class: 'data-table-td' }, [r.weakSections.join(', ') || '—']),
+        el('td', { class: 'data-table-td' }, [r.flags.join(', ') || '—']),
+        el('td', { class: 'data-table-td' }, [detailLink]),
       ]));
     });
 
     const teamTbody = document.getElementById('team-rows');
     teamTbody.innerHTML = '';
     aggregateByTeam(filtered).forEach(function (t) {
-      const trendCell = el('td', null, []);
+      const trendCell = el('td', { class: 'data-table-td' }, []);
       trendCell.appendChild(sparklineSvg(t.trend, t.maturity));
-      teamTbody.appendChild(el('tr', { class: 'maturity-' + t.maturity }, [
-        el('td', null, [t.team]),
-        el('td', null, [t.organisation]),
-        el('td', null, [String(t.count)]),
-        el('td', null, [t.meanOfMeans !== null ? Math.round(t.meanOfMeans) + '%' : '—']),
-        el('td', { class: 'maturity' }, [t.maturity]),
+      teamTbody.appendChild(el('tr', { class: 'data-table-row maturity-' + t.maturity }, [
+        el('td', { class: 'data-table-td' }, [t.team]),
+        el('td', { class: 'data-table-td' }, [t.organisation]),
+        el('td', { class: 'data-table-td' }, [String(t.count)]),
+        el('td', { class: 'data-table-td' }, [t.meanOfMeans !== null ? Math.round(t.meanOfMeans) + '%' : '—']),
+        el('td', { class: 'data-table-td maturity' }, [t.maturity]),
         trendCell,
-        el('td', null, [t.topFlags.join(', ') || '—']),
+        el('td', { class: 'data-table-td' }, [t.topFlags.join(', ') || '—']),
       ]));
     });
   }

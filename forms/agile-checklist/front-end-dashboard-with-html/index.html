@@ -8,83 +8,99 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="top">
-    <h1>Agile Checklist Dashboard</h1>
-    <p>Recent checklist submissions, composite maturity, and operational flags.</p>
+  <a class="skip-link visually-hidden" href="#individuals-table">Skip to submissions table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Agile Checklist Dashboard</h1>
+      <p class="subtitle">Recent checklist submissions, composite maturity, and operational flags.</p>
+    </div>
   </header>
 
   <main>
     <section id="tile-row" class="tile-row" aria-label="Maturity totals"></section>
 
-    <section class="filter-row" aria-label="Filters">
-      <label>
-        <span>Maturity</span>
-        <select id="filter-maturity"></select>
-      </label>
-      <label>
-        <span>Role</span>
-        <select id="filter-role"></select>
-      </label>
-      <div role="tablist" class="view-tabs">
-        <button type="button" role="tab" id="tab-individuals" class="active" aria-selected="true">Individuals</button>
-        <button type="button" role="tab" id="tab-teams" aria-selected="false">Teams</button>
+    <section class="filter-bar" aria-label="Filters">
+      <div class="filter-grid">
+        <div class="filter-field field">
+          <label class="label" for="filter-maturity">Maturity</label>
+          <select id="filter-maturity" class="select"></select>
+        </div>
+        <div class="filter-field field">
+          <label class="label" for="filter-role">Role</label>
+          <select id="filter-role" class="select"></select>
+        </div>
+        <div class="filter-field filter-field-actions">
+          <div role="tablist" class="view-tabs">
+            <button type="button" role="tab" id="tab-individuals" class="button active" aria-selected="true">Individuals</button>
+            <button type="button" role="tab" id="tab-teams" class="button" aria-selected="false">Teams</button>
+          </div>
+        </div>
+        <div class="filter-field filter-field-actions">
+          <button type="button" id="export-csv" class="button" data-variant="secondary">Export CSV</button>
+          <label class="button" data-variant="secondary" for="import-csv" style="cursor:pointer">
+            Import CSV
+            <input type="file" id="import-csv" accept=".csv,text/csv" hidden />
+          </label>
+          <button type="button" id="reset-sample" class="button" data-variant="secondary">Reset to sample</button>
+        </div>
       </div>
-      <button type="button" id="export-csv" class="btn-csv">Export CSV</button>
-      <label class="btn-csv" for="import-csv" style="cursor:pointer">
-        Import CSV
-        <input type="file" id="import-csv" accept=".csv,text/csv" hidden />
-      </label>
-      <button type="button" id="reset-sample" class="btn-csv">Reset to sample</button>
-      <p id="results-count" class="results-count">0 results</p>
+      <div class="filter-summary">
+        <span id="results-count">0 results</span>
+      </div>
     </section>
 
     <p id="import-status" class="import-status" role="status" aria-live="polite"></p>
 
-    <div class="table-scroll">
-      <table class="assessments" id="individuals-table" aria-label="Checklist submissions">
-        <thead>
-          <tr>
-            <th data-sort="date">Date</th>
-            <th data-sort="respondent">Respondent</th>
-            <th data-sort="role">Role</th>
-            <th data-sort="team">Team</th>
-            <th>Org</th>
-            <th>Answered</th>
-            <th>Teams</th>
-            <th>Stakeholders</th>
-            <th>Practices</th>
-            <th data-sort="overallPercent">Overall</th>
-            <th data-sort="maturity">Maturity</th>
-            <th>Weak</th>
-            <th>Flags</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
+    <section class="table-card" aria-label="Submissions">
+      <div class="table-scroll">
+        <table class="data-table" id="individuals-table" aria-label="Checklist submissions">
+          <thead class="data-table-head">
+            <tr class="data-table-row">
+              <th class="data-table-th" data-sort="date">Date</th>
+              <th class="data-table-th" data-sort="respondent">Respondent</th>
+              <th class="data-table-th" data-sort="role">Role</th>
+              <th class="data-table-th" data-sort="team">Team</th>
+              <th class="data-table-th">Org</th>
+              <th class="data-table-th">Answered</th>
+              <th class="data-table-th">Teams</th>
+              <th class="data-table-th">Stakeholders</th>
+              <th class="data-table-th">Practices</th>
+              <th class="data-table-th" data-sort="overallPercent">Overall</th>
+              <th class="data-table-th" data-sort="maturity">Maturity</th>
+              <th class="data-table-th">Weak</th>
+              <th class="data-table-th">Flags</th>
+              <th class="data-table-th"></th>
+            </tr>
+          </thead>
+          <tbody id="rows" class="data-table-body"></tbody>
+        </table>
 
-      <table class="assessments" id="teams-table" aria-label="Team aggregates" hidden>
-        <thead>
-          <tr>
-            <th>Team</th>
-            <th>Organisation</th>
-            <th>Submissions</th>
-            <th>Mean of overall %</th>
-            <th>Maturity</th>
-            <th>Trend (0–100%)</th>
-            <th>Top flags</th>
-          </tr>
-        </thead>
-        <tbody id="team-rows"></tbody>
-      </table>
-    </div>
+        <table class="data-table" id="teams-table" aria-label="Team aggregates" hidden>
+          <thead class="data-table-head">
+            <tr class="data-table-row">
+              <th class="data-table-th">Team</th>
+              <th class="data-table-th">Organisation</th>
+              <th class="data-table-th">Submissions</th>
+              <th class="data-table-th">Mean of overall %</th>
+              <th class="data-table-th">Maturity</th>
+              <th class="data-table-th">Trend (0–100%)</th>
+              <th class="data-table-th">Top flags</th>
+            </tr>
+          </thead>
+          <tbody id="team-rows" class="data-table-body"></tbody>
+        </table>
+      </div>
+    </section>
 
     <aside id="detail-panel" class="detail-panel" role="region" aria-label="Submission detail"></aside>
 
-    <p class="note">
-      Falls back to sample data when no backend is reachable. In production rows
-      come from the Rust backend's <code>/api/checklists</code> endpoint.
-    </p>
+    <footer class="page-footer">
+      <p>
+        Falls back to sample data when no backend is reachable. In production rows
+        come from the Rust backend's <code>/api/checklists</code> endpoint.
+      </p>
+    </footer>
   </main>
 
   <script src="js/data.js"></script>
