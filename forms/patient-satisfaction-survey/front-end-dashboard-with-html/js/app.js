@@ -160,6 +160,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -205,17 +206,18 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.satisfactionCategory === 'Very Poor') {
       tr.classList.add('row-very-poor');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="department-badge">${esc(row.visitDepartment)}</span></td>
-      <td><span class="satisfaction-score">${esc(row.satisfactionScore)}/100</span></td>
-      <td><span class="category-badge ${categoryClass(row.satisfactionCategory)}">${esc(row.satisfactionCategory)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td"><span class="department-badge">${esc(row.visitDepartment)}</span></td>
+      <td class="data-table-td"><span class="satisfaction-score">${esc(row.satisfactionScore)}/100</span></td>
+      <td class="data-table-td"><span class="category-badge ${categoryClass(row.satisfactionCategory)}">${esc(row.satisfactionCategory)}</span></td>
+      <td class="data-table-td">
         <span class="recommend-badge ${row.recommendFlag ? 'recommend-yes' : 'recommend-no'}">
           ${row.recommendFlag ? 'Yes' : 'No'}
         </span>
