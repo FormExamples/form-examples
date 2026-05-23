@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#trainees-table">Skip to trainees table</a>
+  <a class="skip-link visually-hidden" href="#trainees-table">Skip to trainees table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -24,7 +24,8 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="alert" data-type="warning"
+      class="alert"
+      data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -38,19 +39,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Trainee name, ID, training centre, or assessor..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-outcome">Outcome</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-outcome">Outcome</label>
           <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Pass">Pass</option>
@@ -59,8 +60,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-role">Workplace Role</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-role">Workplace Role</label>
           <select id="filter-role" class="select">
             <option value="">All roles</option>
             <option value="Designated First Aider">Designated First Aider</option>
@@ -74,8 +75,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-currency">Certification</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-currency">Certification</label>
           <select id="filter-currency" class="select">
             <option value="">All certifications</option>
             <option value="Current">Current</option>
@@ -84,8 +85,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-centre">Training Centre</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-centre">Training Centre</label>
           <select id="filter-centre" class="select">
             <option value="">All training centres</option>
             <!-- Centre options populated by app.js -->
@@ -96,7 +97,8 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="button" data-variant="secondary"
+            class="button"
+            data-variant="secondary"
             hidden
           >
             Clear filters
@@ -117,13 +119,13 @@
       <h2 id="trainees-table-heading" class="visually-hidden">Trainees</h2>
 
       <div class="table-scroll">
-        <table id="trainees-table" class="trainees-table">
-          <thead>
-            <tr id="trainees-table-head">
+        <table id="trainees-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="trainees-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="trainees-table-body">
+          <tbody id="trainees-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

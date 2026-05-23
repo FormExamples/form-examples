@@ -312,6 +312,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -356,6 +357,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     const rc = rowClass(row.outcome);
     if (rc) tr.classList.add(rc);
 
@@ -368,21 +370,21 @@ function renderTableBody() {
       `${esc(row.skillsPassed)} / ${esc(row.skillsTotal)}`;
 
     tr.innerHTML = `
-      <td>${esc(row.traineeId)}</td>
-      <td>${esc(row.traineeName)}</td>
-      <td><span class="role-badge">${esc(row.role)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.traineeId)}</td>
+      <td class="data-table-td">${esc(row.traineeName)}</td>
+      <td class="data-table-td"><span class="role-badge">${esc(row.role)}</span></td>
+      <td class="data-table-td">
         <span class="outcome-badge ${outcomeClass(row.outcome)}">${esc(row.outcome)}</span>
       </td>
-      <td><span class="num-cell">${skillsDisplay}</span></td>
-      <td>
+      <td class="data-table-td"><span class="num-cell">${skillsDisplay}</span></td>
+      <td class="data-table-td">
         <span class="date-cell ${expired ? 'date-expired' : ''}" title="Issued ${esc(issuedDisplay)}">
           ${esc(expiryDisplay)}
         </span>
       </td>
-      <td><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
-      <td>${esc(row.assessorName)}</td>
-      <td>${esc(row.trainingCentre)}</td>
+      <td class="data-table-td"><span class="currency-badge ${currencyClass(row.certificationCurrency)}">${esc(row.certificationCurrency)}</span></td>
+      <td class="data-table-td">${esc(row.assessorName)}</td>
+      <td class="data-table-td">${esc(row.trainingCentre)}</td>
     `;
     body.appendChild(tr);
   }
