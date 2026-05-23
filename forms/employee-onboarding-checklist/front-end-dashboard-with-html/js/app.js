@@ -226,6 +226,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -271,6 +272,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.overdue || row.completionStatus === 'Overdue') {
       tr.classList.add('row-overdue');
     }
@@ -279,11 +281,11 @@ function renderTableBody() {
     const fill = fillClass(row.completionStatus);
 
     tr.innerHTML = `
-      <td>${esc(row.employeeId)}</td>
-      <td>${esc(row.employeeName)}</td>
-      <td class="department-cell">${esc(row.department)}</td>
-      <td class="role-cell">${esc(row.role)}</td>
-      <td>
+      <td class="data-table-td">${esc(row.employeeId)}</td>
+      <td class="data-table-td">${esc(row.employeeName)}</td>
+      <td class="data-table-td department-cell">${esc(row.department)}</td>
+      <td class="data-table-td role-cell">${esc(row.role)}</td>
+      <td class="data-table-td">
         <span class="completion-cell">
           <span class="completion-percent">${pct}%</span>
           <span class="completion-bar" role="progressbar"
@@ -292,10 +294,10 @@ function renderTableBody() {
           </span>
         </span>
       </td>
-      <td><span class="status-badge ${statusClass(row.completionStatus)}">${esc(row.completionStatus)}</span></td>
-      <td><span class="milestone-badge ${milestoneClass(row.milestoneReached)}">${esc(row.milestoneReached)}</span></td>
-      <td>${esc(row.startDate)}</td>
-      <td>
+      <td class="data-table-td"><span class="status-badge ${statusClass(row.completionStatus)}">${esc(row.completionStatus)}</span></td>
+      <td class="data-table-td"><span class="milestone-badge ${milestoneClass(row.milestoneReached)}">${esc(row.milestoneReached)}</span></td>
+      <td class="data-table-td">${esc(row.startDate)}</td>
+      <td class="data-table-td">
         <span class="status-badge ${row.overdue ? 'status-overdue' : 'status-not-started'}">
           ${row.overdue ? 'Yes' : 'No'}
         </span>

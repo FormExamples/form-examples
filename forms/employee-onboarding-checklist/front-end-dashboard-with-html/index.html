@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#employees-table">Skip to employees table</a>
+  <a class="skip-link visually-hidden" href="#employees-table">Skip to employees table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -25,7 +25,8 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="alert" data-type="warning"
+      class="alert"
+      data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -39,19 +40,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Employee ID, name, role..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-status">Completion Status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Completion Status</label>
           <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="Not Started">Not Started</option>
@@ -61,8 +62,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-department">Department</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-department">Department</label>
           <select id="filter-department" class="select">
             <option value="">All departments</option>
             <option value="Nursing">Nursing</option>
@@ -73,8 +74,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-milestone">Milestone Reached</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-milestone">Milestone Reached</label>
           <select id="filter-milestone" class="select">
             <option value="">All milestones</option>
             <option value="Pre-arrival">Pre-arrival</option>
@@ -90,7 +91,8 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="button" data-variant="secondary"
+            class="button"
+            data-variant="secondary"
             hidden
           >
             Clear filters
@@ -111,13 +113,13 @@
       <h2 id="employees-table-heading" class="visually-hidden">Employees</h2>
 
       <div class="table-scroll">
-        <table id="employees-table" class="employees-table">
-          <thead>
-            <tr id="employees-table-head">
+        <table id="employees-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="employees-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="employees-table-body">
+          <tbody id="employees-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
