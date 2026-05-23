@@ -74,6 +74,7 @@ multi-page forms.
 
 See the per-stack agent docs:
 
+- [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
 - [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)

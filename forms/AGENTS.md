@@ -1,5 +1,13 @@
 # Forms
 
+Cross-cutting docs:
+
+- [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md) — Lily Design
+  System HTML headless conventions for every form's
+  `front-end-form-with-html/` and `front-end-dashboard-with-html/`.
+- [`plan.md`](plan.md) / [`tasks.md`](tasks.md) — Lily HTML refactor plan
+  and tasks.
+
 Subprojects:
 
 - [advance decision to refuse treatment](advance-decision-to-refuse-treatment)
