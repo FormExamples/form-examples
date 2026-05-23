@@ -145,16 +145,42 @@ to keep 133 frontends in sync with future Lily releases.
 - F1.3  Verify in browser via `file://` (no build step required).
 - F1.4  Lock the resulting HTML/CSS/JS as the template the generator emits.
 
-### Phase 2 — Generator
+### Phase 2 — Refactor tool (was: Generator)
 
-- F2.1  Generator reads per-form spec (SQL schema for field types, AGENTS.md
-  for step structure) and emits `index.html`, `css/style.css`, `js/app.js`,
-  `js/types.js` scaffolds.
-- F2.2  Generator preserves domain files (`*-rules.js`, `*-grader.js`,
-  `flagged-issues.js`) by *not* overwriting them when present.
-- F2.3  Smoke-test generator against the canonical reference: regenerated
-  output must match the hand-refactored version byte-for-byte (modulo
-  scoring rules).
+**Reframed 2026-05-23.** The original plan called for a scaffold
+generator that emits fresh HTML/CSS/JS from a SQL+AGENTS spec. But the
+132 other forms each carry 100–1700 LOC of hand-coded `app.js` — step
+renderers, scoring wiring, conditional logic, list editors, report
+rendering — that a scaffold generator would either clobber or have to
+`--respect-existing` (at which point it isn't really generating).
+
+The lever for migrating 132 existing forms is a **mechanical refactor
+tool**, not a generator. It applies safe regex-level class swaps to
+`index.html`, `css/style.css`, and `js/app.js` while leaving custom
+rendering logic untouched. Semantic restructuring (radio-group
+fieldset shape, `sectionCard` → `<fieldset class="fieldset">`, new
+step-list/validation wiring) needs a parallel subagent pass per
+form — that's Phase 3 batch work, not generator territory.
+
+The scaffold generator stays in scope but is deferred to a later
+phase for new forms.
+
+- F2.1  Add `bin/lily-html-refactor` (Python). Applies safe class
+  swaps in-place. Idempotent; supports `--dry-run`,
+  `--scope=form|dashboard|both`, `--all`.
+- F2.2  Define the safe-swap catalogue: `btn btn-*` →
+  `button` + `data-variant`; `textarea` → `text-area-input`;
+  `select-input` → `select`; `form-actions` → `button-group`;
+  `report-region` → `panel`; `status-banner` → `alert[data-type]`;
+  `<thead>`/`<tbody>` get `data-table-head`/`data-table-body`; JS
+  `className = 'btn btn-*'` variants.
+- F2.3  Risky-change reporting mode. Patterns the tool refuses to
+  touch (`section-card`, `radio-options`, custom progress markup,
+  `assessment-form`) get listed with file:line so a subagent pass can
+  handle them.
+- F2.4  Smoke-test the refactor tool on a held-out simple form
+  (`agile-checklist`).
+- F2.5  Deferred: scaffold generator for new forms.
 
 ### Phase 3 — Batch migration
 

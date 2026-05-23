@@ -1,0 +1,324 @@
+#!/usr/bin/env python3
+"""bin/lily-html-refactor — mechanically refactor a form's
+`front-end-form-with-html/` and/or `front-end-dashboard-with-html/`
+to the Lily Design System HTML headless class contract.
+
+Scope: HTML and JS class swaps only. CSS rewrites and semantic
+restructuring (sectionCard → fieldset, radio-group restructure,
+new step-list/validation wiring) are out of scope — the tool
+reports those locations so a subagent pass can handle them.
+
+See forms/AGENTS-front-end-html.md for the class contract and
+forms/plan.md §7 Phase 2 for the rationale.
+
+Usage:
+  bin/lily-html-refactor <slug>            # one form
+  bin/lily-html-refactor --all             # all forms in forms/
+  bin/lily-html-refactor --dry-run <slug>  # show what would change
+  bin/lily-html-refactor --scope=form <slug>
+  bin/lily-html-refactor --scope=dashboard <slug>
+
+The tool is idempotent: re-running on an already-refactored form
+makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+# ---------------------------------------------------------------------------
+# Safe-swap catalogue.
+#
+# Each entry: (description, regex_pattern, replacement)
+# Patterns are duplicated for double-quote and single-quote forms because
+# Python's re module doesn't support backreferences cleanly in replacements
+# when paired with alternation-captured quote characters. Two passes is
+# simpler and safer than one clever one.
+# ---------------------------------------------------------------------------
+
+# class="btn btn-VARIANT" → class="button" data-variant="VARIANT"
+BUTTON_VARIANTS = [
+    # Semantic role
+    "primary", "secondary", "tertiary",
+    # Action type
+    "icon", "add", "remove", "link",
+    # Severity
+    "danger", "warn", "success",
+]
+SAFE_HTML_SWAPS: list[tuple[str, re.Pattern, str]] = []
+for v in BUTTON_VARIANTS:
+    SAFE_HTML_SWAPS.append((
+        f'btn btn-{v} (double-quoted)',
+        re.compile(rf'class="btn btn-{v}"'),
+        f'class="button" data-variant="{v}"',
+    ))
+    SAFE_HTML_SWAPS.append((
+        f"btn btn-{v} (single-quoted)",
+        re.compile(rf"class='btn btn-{v}'"),
+        f"class='button' data-variant='{v}'",
+    ))
+
+# Bare class="btn" (no variant) — Lily uses .button with no variant.
+# Must come AFTER the variant swaps so we don't strip variants prematurely.
+SAFE_HTML_SWAPS.extend([
+    ('btn bare (double)', re.compile(r'class="btn"'), 'class="button"'),
+    ('btn bare (single)', re.compile(r"class='btn'"), "class='button'"),
+])
+
+# Input/select/textarea
+SAFE_HTML_SWAPS.extend([
+    ('textarea (double)',     re.compile(r'class="textarea"'),     'class="text-area-input"'),
+    ('textarea (single)',     re.compile(r"class='textarea'"),     "class='text-area-input'"),
+    ('select-input (double)', re.compile(r'class="select-input"'), 'class="select"'),
+    ('select-input (single)', re.compile(r"class='select-input'"), "class='select'"),
+])
+
+# Form/report containers
+SAFE_HTML_SWAPS.extend([
+    ('form-actions (double)',   re.compile(r'class="form-actions"'),   'class="button-group"'),
+    ('form-actions (single)',   re.compile(r"class='form-actions'"),   "class='button-group'"),
+    ('report-region (double)',  re.compile(r'class="report-region"'),  'class="panel"'),
+    ('report-region (single)',  re.compile(r"class='report-region'"),  "class='panel'"),
+])
+
+# Dashboard status banner
+SAFE_HTML_SWAPS.extend([
+    ('status-banner (double)', re.compile(r'class="status-banner"'), 'class="alert" data-type="warning"'),
+    ('status-banner (single)', re.compile(r"class='status-banner'"), "class='alert' data-type='warning'"),
+])
+
+# ---------------------------------------------------------------------------
+# JS-specific patterns: `el.className = 'btn btn-VARIANT';` needs both a
+# className rewrite AND a setAttribute call for the data-variant.
+# ---------------------------------------------------------------------------
+
+JS_CLASSNAME_BTN_VARIANT = re.compile(
+    r"""(?P<lead>[\t ]*)(?P<var>\w+)\.className\s*=\s*['"]btn btn-(?P<variant>primary|secondary|tertiary|icon|add|remove|link|danger|warn|success)['"];?"""
+)
+
+
+def _js_classname_replacement(m: re.Match) -> str:
+    lead = m.group("lead")
+    var = m.group("var")
+    variant = m.group("variant")
+    return (
+        f"{lead}{var}.className = 'button';\n"
+        f"{lead}{var}.setAttribute('data-variant', '{variant}');"
+    )
+
+
+JS_CLASSNAME_BTN_BARE = re.compile(
+    r"""(?P<var>\w+)\.className\s*=\s*['"]btn['"];?"""
+)
+
+
+def _js_classname_bare_replacement(m: re.Match) -> str:
+    return f"{m.group('var')}.className = 'button';"
+
+
+# ---------------------------------------------------------------------------
+# Risky patterns: report file:line but don't touch.
+# ---------------------------------------------------------------------------
+
+RISKY_PATTERNS: list[tuple[str, re.Pattern]] = [
+    ("section-card (needs <fieldset class='fieldset'> restructure)",
+     re.compile(r"section-card\b")),
+    ("section-header (fold into <legend class='fieldset-legend'>)",
+     re.compile(r"section-header\b")),
+    ("section-step (rendered as <span class='section-step'> inside legend)",
+     re.compile(r"section-step\b")),
+    ("assessment-form (rename class to .form)",
+     re.compile(r"assessment-form\b")),
+    ("radio-options/radio-option (restructure to .radio-group + .radio-input)",
+     re.compile(r"radio-options?\b")),
+    ("progress-bar / progress-bar-fill (replace with native <progress class='progress'>)",
+     re.compile(r"progress-bar(-fill)?\b")),
+    ("report-card / report-header (fold into <section class='panel'>)",
+     re.compile(r"report-(card|header)\b")),
+    ("step-indicator-* (replace with <ol class='step-list'> + step-list-item)",
+     re.compile(r"step-indicator(-\w+)?\b")),
+]
+
+
+# ---------------------------------------------------------------------------
+# File-level refactor
+# ---------------------------------------------------------------------------
+
+
+def refactor_text(text: str, is_js: bool) -> tuple[str, list[tuple[str, int]]]:
+    """Apply all safe swaps. Returns (new_text, changes)."""
+    changes: list[tuple[str, int]] = []
+    for desc, pat, repl in SAFE_HTML_SWAPS:
+        new_text, n = pat.subn(repl, text)
+        if n:
+            changes.append((desc, n))
+        text = new_text
+
+    if is_js:
+        new_text, n = JS_CLASSNAME_BTN_VARIANT.subn(_js_classname_replacement, text)
+        if n:
+            changes.append(("JS .className = 'btn btn-*'", n))
+        text = new_text
+
+        new_text, n = JS_CLASSNAME_BTN_BARE.subn(_js_classname_bare_replacement, text)
+        if n:
+            changes.append(("JS .className = 'btn' (bare)", n))
+        text = new_text
+
+    return text, changes
+
+
+def find_risky(text: str) -> list[tuple[int, str]]:
+    """Return [(line_no, description), ...] for risky patterns."""
+    found: list[tuple[int, str]] = []
+    seen: set[tuple[int, str]] = set()
+    for desc, pat in RISKY_PATTERNS:
+        for m in pat.finditer(text):
+            line_no = text.count("\n", 0, m.start()) + 1
+            key = (line_no, desc)
+            if key in seen:
+                continue
+            seen.add(key)
+            found.append(key)
+    return sorted(found)
+
+
+def refactor_file(path: Path, dry_run: bool) -> dict | None:
+    if not path.exists():
+        return None
+    text = path.read_text()
+    is_js = path.suffix == ".js"
+    new_text, changes = refactor_text(text, is_js=is_js)
+    risky = find_risky(new_text)
+    if not dry_run and new_text != text:
+        path.write_text(new_text)
+    return {
+        "path": path,
+        "changed": new_text != text,
+        "changes": changes,
+        "risky": risky,
+    }
+
+
+def refactor_subdir(subdir: Path, dry_run: bool) -> list[dict]:
+    """Refactor index.html + all js/*.js files in a front-end-*-with-html dir."""
+    results: list[dict] = []
+    index = subdir / "index.html"
+    if index.exists():
+        r = refactor_file(index, dry_run=dry_run)
+        if r is not None:
+            results.append(r)
+    js_dir = subdir / "js"
+    if js_dir.is_dir():
+        for js_file in sorted(js_dir.glob("*.js")):
+            r = refactor_file(js_file, dry_run=dry_run)
+            if r is not None:
+                results.append(r)
+    return results
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+
+def _print_results(slug: str, scope_label: str, results: list[dict]) -> tuple[int, int]:
+    total_changes = 0
+    total_risky = 0
+    if not results:
+        return 0, 0
+    print(f"  scope: {scope_label}")
+    for r in results:
+        rel = r["path"].relative_to(REPO_ROOT)
+        if r["changes"]:
+            print(f"    {rel}")
+            for desc, n in r["changes"]:
+                print(f"      {n}× {desc}")
+                total_changes += n
+        if r["risky"]:
+            for line_no, desc in r["risky"]:
+                print(f"    ! {rel}:{line_no} risky: {desc}")
+                total_risky += 1
+    return total_changes, total_risky
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("slug", nargs="?", help="Form slug (omit with --all)")
+    parser.add_argument("--all", action="store_true", help="Refactor every form in forms/")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Show what would change; do not write files")
+    parser.add_argument("--scope", choices=["form", "dashboard", "both"], default="both",
+                        help="Which front-end-*-with-html/ subdirectory to refactor")
+    args = parser.parse_args()
+
+    if not args.slug and not args.all:
+        parser.error("provide a slug or --all")
+    if args.slug and args.all:
+        parser.error("provide either a slug or --all, not both")
+
+    if not FORMS_DIR.is_dir():
+        sys.exit(f"forms directory not found: {FORMS_DIR}")
+
+    if args.all:
+        slugs = sorted(
+            d.name for d in FORMS_DIR.iterdir()
+            if d.is_dir() and not d.name.startswith(".") and not d.name.startswith("AGENTS")
+        )
+    else:
+        slugs = [args.slug]
+
+    subdirs: list[str] = []
+    if args.scope in ("form", "both"):
+        subdirs.append("front-end-form-with-html")
+    if args.scope in ("dashboard", "both"):
+        subdirs.append("front-end-dashboard-with-html")
+
+    mode = "DRY-RUN" if args.dry_run else "WRITE"
+    print(f"lily-html-refactor [{mode}] — {len(slugs)} form(s), scope={args.scope}")
+    print()
+
+    grand_changes = 0
+    grand_risky = 0
+    for slug in slugs:
+        form_dir = FORMS_DIR / slug
+        if not form_dir.is_dir():
+            print(f"skip {slug}: directory not found")
+            continue
+        any_output = False
+        for sd in subdirs:
+            sub = form_dir / sd
+            if not sub.is_dir():
+                continue
+            results = refactor_subdir(sub, dry_run=args.dry_run)
+            # Only print form header on first scope with output
+            had_anything = any(r["changes"] or r["risky"] for r in results)
+            if had_anything and not any_output:
+                print(slug)
+                any_output = True
+            if had_anything:
+                ch, ri = _print_results(slug, sd, results)
+                grand_changes += ch
+                grand_risky += ri
+        if any_output:
+            print()
+
+    summary_changes = f"{grand_changes} safe swap{'s' if grand_changes != 1 else ''}"
+    summary_risky = f"{grand_risky} risky line{'s' if grand_risky != 1 else ''}"
+    print(f"summary: {summary_changes}; {summary_risky}")
+    if args.dry_run and grand_changes:
+        print("(dry-run: no files written)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

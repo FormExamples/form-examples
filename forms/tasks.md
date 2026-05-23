@@ -81,30 +81,40 @@ Legend: `[ ]` open · `[~]` in progress · `[x]` done · `[-]` skipped/deferred
 
 ---
 
-## Phase 2 — Generator
+## Phase 2 — Refactor tool (reframed from generator)
 
-- [ ] **2.1  Add `bin/generate-front-end-form-with-html.py`.** Reads
-  per-form SQL schema and `AGENTS.md`, emits `index.html`, `css/style.css`,
-  `js/app.js`, `js/types.js`. *Acceptance:* runs against the canonical
-  form and produces output byte-equivalent to the hand-refactored version
-  (modulo `*-rules.js`, `*-grader.js`, `flagged-issues.js` which it does
-  not touch).
-- [ ] **2.2  Add `bin/generate-front-end-dashboard-with-html.py`.** Same
-  shape for dashboards. *Acceptance:* canonical dashboard regenerates
-  identically.
-- [ ] **2.3  Add `--check` mode** that diffs current files against generator
-  output without writing. *Acceptance:* CI-friendly exit code; used in
-  Phase 4 to detect drift.
-- [ ] **2.4  Add `--respect-existing` mode** that leaves `*-rules.js`,
-  `*-grader.js`, `flagged-issues.js` and any hand-curated step copy
-  unchanged. *Acceptance:* re-running the generator on a previously
-  migrated form does not stomp domain files.
-- [ ] **2.5  Support the no-wizard variant** for privacy notices and other
-  one-pagers (omits step-list and progress, single fieldset). *Acceptance:*
-  generating `care-privacy-notice` produces a valid one-pager.
-- [ ] **2.6  Generator regression test.** `bin/test-front-end-html-generator`
-  regenerates the canonical reference into a tmpdir and diffs against
-  the committed reference. *Acceptance:* zero diff.
+See `plan.md` §7 Phase 2 for the rationale. The 132 other forms carry
+heavy hand-coded `app.js`; a scaffold generator would clobber it.
+Build a mechanical refactor tool instead.
+
+- [ ] **2.1  Add `bin/lily-html-refactor` (Python).** In-place safe
+  class swaps across a form's `front-end-form-with-html/` and
+  `front-end-dashboard-with-html/`. Idempotent. Flags: `--dry-run`,
+  `--scope=form|dashboard|both`, `--all`. *Acceptance:* running on
+  `agile-checklist` (a held-out form) produces a diff that compiles,
+  loads, and renders without console errors when opened via `file://`.
+- [ ] **2.2  Define the safe-swap catalogue.** Documented in
+  `bin/lily-html-refactor` as a constant. Covers the patterns surveyed
+  on 2026-05-23: button classes, textarea class, select-input,
+  form-actions, report-region, status-banner, thead/tbody table-data
+  classes, and the JS `className = 'btn btn-*'` variants. *Acceptance:*
+  catalogue list in the script header matches §3 of
+  `AGENTS-front-end-html.md`.
+- [ ] **2.3  Risky-change reporting mode.** Detect patterns that
+  require structural rewrites the tool won't attempt: `class="section-
+  card"`, `radio-options`/`radio-option`, custom progress-bar markup,
+  `class="assessment-form"`, custom shell layouts. Print each per file
+  with line numbers so a follow-up subagent pass can handle them.
+  *Acceptance:* on `care-privacy-notice` (which has unusual structure),
+  the tool reports the risky patterns instead of attempting them.
+- [ ] **2.4  Smoke-test the refactor tool.** Run on a clean
+  not-yet-refactored form, then open via `file://` in Chromium
+  (Playwright). Confirm: no console errors, button styles render,
+  selects render, form is interactive. *Acceptance:* documented in
+  `tasks.md` and (eventually) wired into `bin/test`.
+- [ ] **2.5  Deferred: scaffold generator for NEW forms.** Out of
+  scope for migration. Will be picked up once Phase 3 batches are
+  underway and the canonical reference is stable enough to template.
 
 ---
 
