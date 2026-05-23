@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-optin">Opt-In Status</label>
-          <select id="filter-optin" class="select-input">
+          <select id="filter-optin" class="select">
             <option value="">All opt-in statuses</option>
             <option value="Opted In">Opted In</option>
             <option value="Type 1 Opt-Out">Type 1 Opt-Out</option>
@@ -64,7 +64,7 @@
 
         <div class="filter-field">
           <label for="filter-basis">Lawful Basis</label>
-          <select id="filter-basis" class="select-input">
+          <select id="filter-basis" class="select">
             <option value="">All lawful bases</option>
             <option value="Public Task">Public Task</option>
             <option value="Consent">Consent</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-completion">Completion Status</label>
-          <select id="filter-completion" class="select-input">
+          <select id="filter-completion" class="select">
             <option value="">All</option>
             <option value="Complete">Complete</option>
             <option value="Incomplete">Incomplete</option>
@@ -85,7 +85,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
