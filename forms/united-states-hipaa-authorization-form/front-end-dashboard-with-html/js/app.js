@@ -1,5 +1,14 @@
 import { sampleAuthorizations } from './sample-data.js';
 
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 async function loadAuthorizations() {
   try {
     const r = await fetch('/api/authorizations', { headers: { Accept: 'application/json' } });
@@ -10,15 +19,16 @@ async function loadAuthorizations() {
 
 function renderRow(a) {
   const tr = document.createElement('tr');
+  tr.className = 'data-table-row';
   tr.innerHTML = `
-    <td>${a.patientName}</td>
-    <td>${a.recipientOrganization}</td>
-    <td>${a.primaryPurpose}</td>
-    <td>${a.categories.join(', ')}</td>
-    <td>${a.expirationDate ?? ''}</td>
-    <td><span class="badge ${a.validityStatus}">${a.validityStatus}</span></td>
-    <td><span class="flag-count ${a.highPriorityFlags > 0 ? 'high' : ''}">${a.highPriorityFlags}</span></td>
-    <td>${a.signatureDate ?? ''}</td>
+    <td class="data-table-td">${esc(a.patientName)}</td>
+    <td class="data-table-td">${esc(a.recipientOrganization)}</td>
+    <td class="data-table-td">${esc(a.primaryPurpose)}</td>
+    <td class="data-table-td">${esc((a.categories || []).join(', '))}</td>
+    <td class="data-table-td">${esc(a.expirationDate ?? '')}</td>
+    <td class="data-table-td"><span class="badge ${esc(a.validityStatus)}">${esc(a.validityStatus)}</span></td>
+    <td class="data-table-td"><span class="flag-count ${a.highPriorityFlags > 0 ? 'high' : ''}">${esc(a.highPriorityFlags)}</span></td>
+    <td class="data-table-td">${esc(a.signatureDate ?? '')}</td>
   `;
   return tr;
 }

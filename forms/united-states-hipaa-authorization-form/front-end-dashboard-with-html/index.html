@@ -8,21 +8,23 @@
 </head>
 <body>
   <header class="page-header">
-    <h1>HIPAA Authorizations</h1>
-    <p class="subtitle">Review dashboard for signed authorizations.</p>
+    <div class="page-header-inner">
+      <h1>HIPAA Authorizations</h1>
+      <p class="subtitle">Review dashboard for signed authorizations.</p>
+    </div>
   </header>
   <main>
-    <table id="authorizations">
+    <table id="authorizations" class="data-table">
       <thead>
-        <tr>
-          <th>Patient</th>
-          <th>Recipient</th>
-          <th>Primary purpose</th>
-          <th>Categories</th>
-          <th>Expiration</th>
-          <th>Validity</th>
-          <th>Flags</th>
-          <th>Signed</th>
+        <tr class="data-table-row">
+          <th class="data-table-th" scope="col">Patient</th>
+          <th class="data-table-th" scope="col">Recipient</th>
+          <th class="data-table-th" scope="col">Primary purpose</th>
+          <th class="data-table-th" scope="col">Categories</th>
+          <th class="data-table-th" scope="col">Expiration</th>
+          <th class="data-table-th" scope="col">Validity</th>
+          <th class="data-table-th" scope="col">Flags</th>
+          <th class="data-table-th" scope="col">Signed</th>
         </tr>
       </thead>
       <tbody id="rows"></tbody>
