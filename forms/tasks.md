@@ -138,10 +138,26 @@ commit per form with `git commit --only forms/<slug>/`.
   fragility, OR re-add a worktree per batch with explicit
   documentation of its lifecycle.
 
-- [ ] **3.1  Batch: privacy notices and one-page acknowledgements.**
-  `care-privacy-notice`, `legal-requirements-privacy-notice`,
-  `research-and-planning-privacy-notice`, `screening-program-privacy-notice`,
-  `code-of-conduct-notice`, `united-states-hipaa-authorization-form`.
+- [x] **3.1  Batch: privacy notices and acknowledgements** (4 migrated +
+  2 N/A out of 6).
+  - [x] `research-and-planning-privacy-notice` (`e58adccc` + `c879c6c2`).
+    3 steps. 23/23 smoke checks.
+  - [x] `code-of-conduct-notice` (`e58adccc` + `a054d210`). 3 steps;
+    step 2 read-only auto-finished.
+  - [x] `united-states-hipaa-authorization-form` (`4ff6510b`). 9 steps,
+    no signature-pad needed (checkbox + date for sig/witness).
+    Engine uses ES modules; needs `--allow-file-access-from-files`
+    flag in Chromium or local http server. Pre-existing divergence
+    from conventions.
+  - [x] `care-privacy-notice` (outlier, `<hash>`). Was bespoke-class
+    multi-stage UI; collapsed to single continuous wizard per AGENTS.md.
+    ES-module engine wrapped in IIFE + `window.CarePrivacyNotice`
+    namespace for file:// portability. 17/17 form + 9/9 dashboard
+    smoke checks.
+  - [-] `legal-requirements-privacy-notice` — **N/A**. Static
+    informational HTML with inline styles, no form, no JS. Lily
+    structural refactor doesn't apply.
+  - [-] `screening-program-privacy-notice` — **N/A**. Same as above.
 - [x] **3.2  Batch: training and onboarding checklists** (8 of 8 done).
   - [x] `agile-checklist` (`b0ed943b` + `865ef165`). 5-step; tri-state
     Yes/No/N-A radios; 57 radio-groups.
