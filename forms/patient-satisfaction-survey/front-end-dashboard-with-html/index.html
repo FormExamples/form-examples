@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-category">Satisfaction Category</label>
-          <select id="filter-category" class="select-input">
+          <select id="filter-category" class="select">
             <option value="">All categories</option>
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
@@ -64,7 +64,7 @@
 
         <div class="filter-field">
           <label for="filter-department">Visit Department</label>
-          <select id="filter-department" class="select-input">
+          <select id="filter-department" class="select">
             <option value="">All departments</option>
             <option value="General Practice">General Practice</option>
             <option value="Emergency">Emergency</option>
@@ -77,7 +77,7 @@
 
         <div class="filter-field">
           <label for="filter-recommend">Would Recommend</label>
-          <select id="filter-recommend" class="select-input">
+          <select id="filter-recommend" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -88,7 +88,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

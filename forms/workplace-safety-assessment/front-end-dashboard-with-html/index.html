@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-outcome">Outcome</label>
-          <select id="filter-outcome" class="select-input">
+          <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Compliant">Compliant</option>
             <option value="Minor Findings">Minor Findings</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-site-type">Site Type</label>
-          <select id="filter-site-type" class="select-input">
+          <select id="filter-site-type" class="select">
             <option value="">All site types</option>
             <option value="NHS Hospital">NHS Hospital</option>
             <option value="GP Practice">GP Practice</option>
@@ -77,7 +77,7 @@
 
         <div class="filter-field">
           <label for="filter-recency">Audit Recency</label>
-          <select id="filter-recency" class="select-input">
+          <select id="filter-recency" class="select">
             <option value="">All</option>
             <option value="30">Last 30 days</option>
             <option value="90">Last 90 days</option>
@@ -91,7 +91,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

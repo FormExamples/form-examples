@@ -27,7 +27,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-overall-risk">Overall risk</label>
-          <select id="filter-overall-risk" class="select-input">
+          <select id="filter-overall-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-worst-domain">Worst domain</label>
-          <select id="filter-worst-domain" class="select-input">
+          <select id="filter-worst-domain" class="select">
             <option value="">All domains</option>
             <option value="Demands">Demands</option>
             <option value="Control">Control</option>
@@ -87,7 +87,7 @@
 
         <div class="filter-field">
           <label for="filter-tenure-band">Tenure band</label>
-          <select id="filter-tenure-band" class="select-input">
+          <select id="filter-tenure-band" class="select">
             <option value="">All tenure bands</option>
             <option value="&lt;1 year">&lt;1 year</option>
             <option value="1-3 years">1-3 years</option>
@@ -102,7 +102,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

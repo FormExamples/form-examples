@@ -26,7 +26,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-category">Category</label>
-          <select id="filter-category" class="select-input">
+          <select id="filter-category" class="select">
             <option value="">All categories</option>
             <option value="Excellent">Excellent (85-100)</option>
             <option value="Good">Good (70-84)</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-worst-domain">Worst domain</label>
-          <select id="filter-worst-domain" class="select-input">
+          <select id="filter-worst-domain" class="select">
             <option value="">All domains</option>
             <option value="Workload">Workload</option>
             <option value="Management">Management</option>
@@ -88,7 +88,7 @@
 
         <div class="filter-field">
           <label for="filter-tenure-band">Tenure band</label>
-          <select id="filter-tenure-band" class="select-input">
+          <select id="filter-tenure-band" class="select">
             <option value="">All tenure bands</option>
             <option value="&lt;1 year">&lt;1 year</option>
             <option value="1-3 years">1-3 years</option>
@@ -103,7 +103,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

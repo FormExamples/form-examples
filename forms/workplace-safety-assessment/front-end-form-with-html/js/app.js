@@ -172,7 +172,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -198,7 +198,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -596,7 +596,7 @@ function actionItemRow(item, index) {
     <div class="action-item-grid">
       <div class="field action-desc">
         <label for="${idBase}-description">Description</label>
-        <textarea id="${idBase}-description" class="textarea" rows="2"
+        <textarea id="${idBase}-description" class="text-area-input" rows="2"
           placeholder="What corrective action is required?">${esc(item.description)}</textarea>
       </div>
       <div class="field">
@@ -610,7 +610,7 @@ function actionItemRow(item, index) {
       </div>
       <div class="field">
         <label for="${idBase}-priority">Priority</label>
-        <select id="${idBase}-priority" class="select-input">${optionsHtml}</select>
+        <select id="${idBase}-priority" class="select">${optionsHtml}</select>
       </div>
       <div class="action-item-actions">
         <button type="button" class="btn btn-tertiary action-remove" aria-label="Remove action item">Remove</button>
@@ -675,7 +675,7 @@ function renderStep10() {
   planWrap.innerHTML = `
     <label>Action plan</label>
     <ol id="action-items-list" class="action-items"></ol>
-    <button type="button" id="add-action-btn" class="btn btn-tertiary">+ Add action item</button>
+    <button type="button" id="add-action-btn" class="button" data-variant="tertiary">+ Add action item</button>
   `;
   card.appendChild(planWrap);
 
@@ -1014,7 +1014,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;
