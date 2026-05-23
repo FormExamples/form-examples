@@ -8,27 +8,28 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Pre-operative Assessment by Clinician</h1>
       <p class="subtitle">ASA Physical Status, Mallampati, RCRI, STOP-BANG, and Clinical Frailty Scale.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Pre-operative assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
@@ -49,13 +50,22 @@
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Pre-operative assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes: -->
         <!-- 1 Clinician, 2 Patient + Surgery, 3 Vitals, 4 Airway, -->
         <!-- 5 Cardiovascular, 6 Respiratory, 7 Neurological, -->
         <!-- 8 Renal/Hepatic, 9 Haematology, 10 Endocrine, -->
@@ -63,23 +73,35 @@
         <!-- 14 Functional Capacity, 15 Anaesthesia Plan, 16 Summary -->
       </div>
 
-      <div class="form-actions">
-        <button type="button" id="submit-btn" class="btn btn-primary">
+      <div class="button-group">
+        <button
+          type="button"
+          id="submit-btn"
+          class="button"
+          data-variant="primary"
+        >
           Submit and view report
         </button>
-        <button type="button" id="reset-btn" class="btn btn-secondary">
+        <button
+          type="button"
+          id="reset-btn"
+          class="button"
+          data-variant="secondary"
+        >
           Start over
         </button>
       </div>
     </form>
 
-    <div
+    <section
       id="report"
-      class="report-region"
+      class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
