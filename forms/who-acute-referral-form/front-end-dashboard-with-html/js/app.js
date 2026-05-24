@@ -213,9 +213,11 @@ function renderTableHead() {
   const head = document.getElementById('patients-table-head');
   if (!head) return;
   head.innerHTML = '';
+  head.classList.add('data-table-row');
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -261,6 +263,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.urgentFlagCount > 0) tr.classList.add('row-urgent');
 
     const modeCell = row.modeOfTransfer
@@ -280,17 +283,17 @@ function renderTableBody() {
       : `<span class="cell-arrival-pending">Pending</span>`;
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(formatDate(row.dateOfBirth))}</td>
-      <td>${esc(row.sex)}</td>
-      <td class="cell-facility">${esc(row.initiatingFacility)}</td>
-      <td class="cell-facility">${esc(row.referralFacility)}</td>
-      <td>${modeCell}</td>
-      <td class="cell-diagnosis">${esc(row.primaryDiagnosis)}</td>
-      <td>${statusCell}</td>
-      <td>${urgentCell}</td>
-      <td>${esc(formatDateTime(row.departureTime))}</td>
-      <td>${arrivalCell}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(formatDate(row.dateOfBirth))}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td cell-facility">${esc(row.initiatingFacility)}</td>
+      <td class="data-table-td cell-facility">${esc(row.referralFacility)}</td>
+      <td class="data-table-td">${modeCell}</td>
+      <td class="data-table-td cell-diagnosis">${esc(row.primaryDiagnosis)}</td>
+      <td class="data-table-td">${statusCell}</td>
+      <td class="data-table-td">${urgentCell}</td>
+      <td class="data-table-td">${esc(formatDateTime(row.departureTime))}</td>
+      <td class="data-table-td">${arrivalCell}</td>
     `;
     body.appendChild(tr);
   }

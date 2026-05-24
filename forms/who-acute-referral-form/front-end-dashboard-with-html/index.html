@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+  <a class="skip-link visually-hidden" href="#patients-table">Skip to patients table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Patient name or facility..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-mode">Mode of transfer</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-mode">Mode of transfer</label>
           <select id="filter-mode" class="select">
             <option value="">All modes</option>
             <option value="road">Road</option>
@@ -59,8 +59,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-status">Transfer status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Transfer status</label>
           <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="initiated">Initiated</option>
@@ -70,8 +70,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-urgent">Urgent flags</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-urgent">Urgent flags</label>
           <select id="filter-urgent" class="select">
             <option value="all">All</option>
             <option value="has">Has urgent flags</option>
@@ -104,13 +104,13 @@
       <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
 
       <div class="table-scroll">
-        <table id="patients-table" class="patients-table">
-          <thead>
-            <tr id="patients-table-head">
+        <table id="patients-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="patients-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="patients-table-body">
+          <tbody id="patients-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
