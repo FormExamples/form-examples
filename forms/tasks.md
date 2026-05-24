@@ -225,16 +225,42 @@ commit per form with `git commit --only forms/<slug>/`.
     different (ES-module app.js, separate report.html); shell + CSS
     converted, step-list/error-summary scaffolded but app.js wiring
     deferred — bin/test-form passes.
-- [ ] **3.5  Batch: multi-grader clinical assessments (~30 forms).** Major
-  clinical assessments with multiple scoring engines: anesthesiology,
-  audio-vestibular, birth control, blood donation, bone marrow donation,
-  cardiology, cognitive, contraception, endocrinology, endometriosis,
-  first responder, hormone replacement therapy, mast cell activation
-  syndrome, mental health, neurology, obstetrics, occupational therapy,
-  oncology, organ donation, palliative, pediatric, plastic surgery,
-  post-traumatic stress, prenatal, psychiatry, psychology, pulmonology,
-  renal, respirology, rheumatology, seasonal affective disorder,
-  semaglutide, stroke, sundowner syndrome.
+- [x] **3.5  Batch: multi-grader clinical assessments** (34 of 34 done).
+  Mechanical pass `84b1ce4a`; structural commits below.
+  - [x] `anesthesiology-assessment` (`84b1ce4a` + `0ae7af`).
+  - [x] `audio-vestibular-assessment` (`84b1ce4a` + `dd1261`).
+  - [x] `birth-control-assessment` (`84b1ce4a` + `c0d8d6`).
+  - [x] `blood-donation-assessment` (`84b1ce4a` + `4ed5f3`).
+  - [x] `bone-marrow-donation-assessment` (`84b1ce4a` + `c482e2`).
+  - [x] `cardiology-assessment` (`84b1ce4a` + `20cecc`).
+  - [x] `cognitive-assessment` (`84b1ce4a` + `b42734`).
+  - [x] `contraception-assessment` (`84b1ce4a` + `9851ad4`).
+  - [x] `endocrinology-assessment` (`84b1ce4a` + `6567425`).
+  - [x] `endometriosis-assessment` (`84b1ce4a` + `fa5f64a`).
+  - [x] `first-responder-assessment` (`84b1ce4a` + `8a2fd52`).
+  - [x] `hormone-replacement-therapy-assessment` (`84b1ce4a` + `bac3c0c`).
+  - [x] `mast-cell-activation-syndrome-assessment` (`84b1ce4a` + `61ff976`).
+  - [x] `mental-health-assessment` (`84b1ce4a` + `3020b38`).
+  - [x] `neurology-assessment` (`84b1ce4a` + `cb4739c`).
+  - [x] `obstetrics-assessment` (`84b1ce4a` + `b260d01`).
+  - [x] `occupational-therapy-assessment` (`84b1ce4a` + `e19fa9b`).
+  - [x] `oncology-assessment` (`84b1ce4a` + `ba9688d`).
+  - [x] `organ-donation-assessment` (`84b1ce4a` + `05d60d2`).
+  - [x] `palliative-assessment` (`84b1ce4a` + `8c7ad4a`).
+  - [x] `pediatric-assessment` (`84b1ce4a` + `c86429f`).
+  - [x] `plastic-surgery-assessment` (`84b1ce4a` + `b2f1a3`).
+  - [x] `post-traumatic-stress-assessment` (`84b1ce4a` + `320869`).
+  - [x] `prenatal-assessment` (`84b1ce4a` + `af9b9f`).
+  - [x] `psychiatry-assessment` (`84b1ce4a` + `d0e280`).
+  - [x] `psychology-assessment` (`84b1ce4a` + `911a92`).
+  - [x] `pulmonology-assessment` (`84b1ce4a` + `480360`).
+  - [x] `renal-assessment` (`84b1ce4a` + `b195e2`).
+  - [x] `respirology-assessment` (`84b1ce4a` + `2e6c8d6`).
+  - [x] `rheumatology-assessment` (`84b1ce4a` + `10c0001`).
+  - [x] `seasonal-affective-disorder-assessment` (`84b1ce4a` + `8fbbac8`).
+  - [x] `semaglutide-assessment` (`84b1ce4a` + `c653db8`).
+  - [x] `stroke-assessment` (`84b1ce4a` + `e132abb`).
+  - [x] `sundowner-syndrome-assessment` (`84b1ce4a` + `b6c74ad`).
 - [x] **3.6  Batch: pre-op, post-op, intake, transfer** (9 of 10 done +
   1 N/A).
   - [x] `consent-to-treatment` (`9bfe03ec` + `24f9da9c`). 8 sections;
