@@ -137,6 +137,15 @@
 
   // -- DOM helpers ---------------------------------------------------------
 
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function el(tag, attrs, children) {
     var node = document.createElement(tag);
     if (attrs) {
@@ -161,38 +170,112 @@
     return node;
   }
 
+  /** Map an <input type=…> to its Lily class name. */
+  function lilyInputClass(type) {
+    switch (type) {
+      case 'email':  return 'email-input';
+      case 'number': return 'number-input';
+      case 'date':   return 'date-input';
+      case 'time':   return 'time-input';
+      case 'tel':    return 'tel-input';
+      case 'url':    return 'url-input';
+      case 'search': return 'search-input';
+      case 'textarea': return 'text-area-input';
+      case 'select': return 'select';
+      default:       return 'text-input';
+    }
+  }
+
+  /**
+   * Build a labelled Lily field.
+   * opts: { id, label, value, type, options, rows, onInput, required }
+   */
   function field(opts) {
-    // opts: { id, label, value, type, options, rows, onInput, required }
     var id = opts.id;
-    var labelEl = el('label', { for: id, class: opts.required ? 'required' : '' }, opts.label);
+    var requiredMark = opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '';
+    var labelEl = el('label', {
+      'for': id,
+      'class': 'label',
+      'data-required': opts.required ? '' : false,
+      'html': esc(opts.label) + requiredMark
+    });
+
+    var inputClass = lilyInputClass(opts.type);
     var input;
     if (opts.type === 'textarea') {
-      input = el('textarea', { id: id, rows: opts.rows || 4 });
+      input = el('textarea', {
+        id: id,
+        rows: opts.rows || 4,
+        'class': inputClass,
+        'aria-describedby': id + '-error',
+        'data-required': opts.required ? '' : false
+      });
       input.value = opts.value || '';
-      input.addEventListener('input', function (e) { opts.onInput(e.target.value); });
+      input.addEventListener('input', function (e) {
+        opts.onInput(e.target.value);
+        clearFieldError(id);
+      });
     } else if (opts.type === 'select') {
-      input = el('select', { id: id });
+      input = el('select', {
+        id: id,
+        'class': inputClass,
+        'aria-describedby': id + '-error',
+        'data-required': opts.required ? '' : false
+      });
       for (var i = 0; i < opts.options.length; i++) {
         var v = opts.options[i];
-        var label = v === '' ? '— select —' : v;
-        var optEl = el('option', { value: v }, label);
+        var labelText = v === '' ? '— select —' : v;
+        var optEl = el('option', { value: v }, labelText);
         if (v === opts.value) optEl.selected = true;
         input.appendChild(optEl);
       }
-      input.addEventListener('change', function (e) { opts.onInput(e.target.value); });
+      input.addEventListener('change', function (e) {
+        opts.onInput(e.target.value);
+        clearFieldError(id);
+      });
     } else {
-      input = el('input', { id: id, type: opts.type || 'text' });
+      input = el('input', {
+        id: id,
+        type: opts.type || 'text',
+        'class': inputClass,
+        'aria-describedby': id + '-error',
+        'data-required': opts.required ? '' : false
+      });
       input.value = opts.value || '';
-      input.addEventListener('input', function (e) { opts.onInput(e.target.value); });
+      input.addEventListener('input', function (e) {
+        opts.onInput(e.target.value);
+        clearFieldError(id);
+      });
     }
-    return el('div', { class: 'field' }, [labelEl, input]);
+    var errEl = el('span', {
+      'class': 'error-message',
+      id: id + '-error',
+      'aria-live': 'polite'
+    });
+    return el('div', { 'class': 'field' }, [labelEl, input, errEl]);
+  }
+
+  /** Build a section card (Lily fieldset). */
+  function sectionCard(stepN, title, help) {
+    var card = document.createElement('fieldset');
+    card.className = 'fieldset';
+    card.id = 'step-' + stepN;
+    card.dataset.step = String(stepN);
+    var legend = document.createElement('legend');
+    legend.className = 'fieldset-legend';
+    legend.innerHTML =
+      '<span class="section-step">Section ' + stepN + ' of 16</span>' +
+      '<span class="section-title">' + esc(title) + '</span>' +
+      (help ? '<span class="section-description">' + esc(help) + '</span>' : '');
+    card.appendChild(legend);
+    return card;
   }
 
   // -- Step renderers ------------------------------------------------------
 
   function renderAuthor() {
     var a = data.author;
-    return el('div', { class: 'field-grid cols-2' }, [
+    return el('div', { 'class': 'two-col' }, [
       field({ id: 'author-name', label: 'Author name', value: a.name, required: true,
               onInput: function (v) { a.name = v; updateProgress(); } }),
       field({ id: 'author-email', label: 'Email', type: 'email', value: a.email,
@@ -210,7 +293,7 @@
 
   function renderOrganization() {
     var o = data.organization;
-    return el('div', { class: 'field-grid cols-2' }, [
+    return el('div', { 'class': 'two-col' }, [
       field({ id: 'org-name', label: 'Organization name', value: o.name,
               onInput: function (v) { o.name = v; updateProgress(); } }),
       field({ id: 'org-legal-name', label: 'Legal name', value: o.legalName,
@@ -227,7 +310,7 @@
   }
 
   function renderTextareaSection(field_, placeholder) {
-    return el('div', { class: 'field-grid' }, [
+    return el('div', null, [
       field({
         id: 'adr-' + field_,
         label: placeholder,
@@ -252,7 +335,7 @@
 
   function renderStatusGroup() {
     var a = data.adr;
-    return el('div', { class: 'field-grid cols-2' }, [
+    return el('div', { 'class': 'two-col' }, [
       field({ id: 'adr-slug', label: 'Slug (URL-safe identifier)', value: a.slug,
               onInput: function (v) { a.slug = v; updateProgress(); } }),
       field({ id: 'adr-number', label: 'Number (sequential, optional)', type: 'number', value: a.number,
@@ -270,14 +353,14 @@
 
   function renderPositions() {
     var wrap = el('div');
-    var list = el('div', { class: 'positions-list' });
+    var list = el('div', { 'class': 'positions-list' });
 
     function addPositionCard(p, idx) {
-      var card = el('div', { class: 'position-card' + (p.isChosen ? ' is-chosen' : '') });
-      var header = el('div', { class: 'position-card-header' }, [
-        el('span', { class: 'position-card-title' }, 'Position ' + (idx + 1)),
+      var card = el('div', { 'class': 'position-card' + (p.isChosen ? ' is-chosen' : '') });
+      var header = el('div', { 'class': 'position-card-header' }, [
+        el('span', { 'class': 'position-card-title' }, 'Position ' + (idx + 1)),
         el('button', {
-          type: 'button', class: 'btn btn-remove',
+          type: 'button', 'class': 'button', 'data-variant': 'remove',
           onclick: function () {
             data.positions.splice(idx, 1);
             if (data.positions.length === 0) {
@@ -289,7 +372,7 @@
       ]);
       card.appendChild(header);
 
-      var grid = el('div', { class: 'field-grid cols-2' }, [
+      var grid = el('div', { 'class': 'two-col' }, [
         field({ id: 'pos-name-' + idx, label: 'Name', required: true, value: p.name,
                 onInput: function (v) { p.name = v; updateProgress(); } }),
         field({ id: 'pos-url-' + idx, label: 'Model or diagram URL', type: 'url', value: p.modelOrDiagramUrl,
@@ -321,7 +404,7 @@
     wrap.appendChild(list);
 
     var addBtn = el('button', {
-      type: 'button', class: 'btn btn-add',
+      type: 'button', 'class': 'button', 'data-variant': 'add',
       style: 'margin-top: 0.5rem;',
       onclick: function () {
         data.positions.push({ name: '', description: '', modelOrDiagramUrl: '', isChosen: false, pros: '', cons: '' });
@@ -334,16 +417,16 @@
 
   function renderNotes() {
     var wrap = el('div');
-    var list = el('div', { class: 'notes-list' });
+    var list = el('div', { 'class': 'notes-list' });
     if (data.notes.length === 0) {
-      list.appendChild(el('p', { class: 'help' }, 'No notes yet. Add one as you socialise the decision.'));
+      list.appendChild(el('p', { 'class': 'hint' }, 'No notes yet. Add one as you socialise the decision.'));
     }
     for (var i = 0; i < data.notes.length; i++) (function (n, idx) {
-      var card = el('div', { class: 'note-card' }, [
-        el('div', { class: 'note-meta' }, n.notedAt + ' — ' + (n.notedBy || 'unknown')),
+      var card = el('div', { 'class': 'note-card' }, [
+        el('div', { 'class': 'note-meta' }, n.notedAt + ' — ' + (n.notedBy || 'unknown')),
         el('div', null, n.body),
         el('button', {
-          type: 'button', class: 'btn btn-remove',
+          type: 'button', 'class': 'button', 'data-variant': 'remove',
           style: 'margin-top: 0.5rem;',
           onclick: function () { data.notes.splice(idx, 1); renderAll(); }
         }, 'Remove')
@@ -352,14 +435,14 @@
     })(data.notes[i], i);
 
     var newNote = { notedBy: '', body: '' };
-    var addPanel = el('div', { class: 'field-grid cols-2', style: 'margin-top: 0.75rem;' }, [
+    var addPanel = el('div', { 'class': 'two-col', style: 'margin-top: 0.75rem;' }, [
       field({ id: 'note-by', label: 'Noted by', value: newNote.notedBy,
               onInput: function (v) { newNote.notedBy = v; } }),
       field({ id: 'note-body', label: 'Body', type: 'textarea', value: newNote.body,
               onInput: function (v) { newNote.body = v; } })
     ]);
     var addBtn = el('button', {
-      type: 'button', class: 'btn btn-add', style: 'margin-top: 0.5rem;',
+      type: 'button', 'class': 'button', 'data-variant': 'add', style: 'margin-top: 0.5rem;',
       onclick: function () {
         if (!newNote.body.trim()) return;
         data.notes.push({
@@ -379,7 +462,7 @@
 
   function renderSummary() {
     var a = data.adr;
-    return el('div', { class: 'field-grid cols-2' }, [
+    return el('div', { 'class': 'two-col' }, [
       field({ id: 'signed-off-by', label: 'Signed off by', value: a.signedOffBy,
               onInput: function (v) { a.signedOffBy = v; updateProgress(); } }),
       field({ id: 'signed-off-at', label: 'Signed off at (ISO timestamp)', value: a.signedOffAt,
@@ -406,6 +489,97 @@
     summary: renderSummary
   };
 
+  // -- Step list (table of contents + completion status) -----------------
+
+  function renderStepList() {
+    var ol = document.getElementById('step-list');
+    if (!ol) return;
+    ol.innerHTML = '';
+    for (var i = 0; i < STEPS.length; i++) {
+      var s = STEPS[i];
+      var li = document.createElement('li');
+      li.className = 'step-list-item';
+      li.dataset.status = 'waiting';
+      li.dataset.step = String(s.n);
+      li.setAttribute('aria-label', 'Step ' + s.n + ': ' + s.title);
+      li.innerHTML = '<span>' + esc(s.title) + '</span>';
+      (function (stepN) {
+        li.addEventListener('click', function () {
+          var target = document.getElementById('step-' + stepN);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      })(s.n);
+      ol.appendChild(li);
+    }
+  }
+
+  /**
+   * Compute per-step completion for the table-of-contents step list.
+   * Each step contributes one or more tracked values; we mark it
+   * `finished` when all are answered, `in-progress` when some are.
+   */
+  function stepCompletionMap() {
+    var a = data.adr;
+    var au = data.author;
+    var org = data.organization;
+    var map = {
+      1:  [au.name, au.email, au.role],
+      2:  [org.name],
+      3:  [a.issue],
+      4:  [a.decision],
+      5:  [a.title, a.status, a.decisionGroup],
+      6:  [a.assumptions],
+      7:  [a.constraints],
+      8:  [data.positions.some(function (p) { return p.name.trim(); }) ? '1' : '',
+           data.positions.some(function (p) { return p.isChosen; }) ? '1' : ''],
+      9:  [a.argument],
+      10: [a.implications],
+      11: [a.relatedDecisions],
+      12: [a.relatedRequirements],
+      13: [a.relatedArtifacts],
+      14: [a.relatedPrinciples],
+      15: [data.notes.length > 0 ? '1' : ''],
+      16: [a.signedOffBy]
+    };
+    return map;
+  }
+
+  function updateStepListStatuses() {
+    var ol = document.getElementById('step-list');
+    if (!ol) return;
+    var map = stepCompletionMap();
+    var firstUnfinished = -1;
+    for (var i = 0; i < STEPS.length; i++) {
+      var n = STEPS[i].n;
+      var li = ol.querySelector('[data-step="' + n + '"]');
+      if (!li) continue;
+      var values = map[n] || [];
+      var answered = 0;
+      for (var k = 0; k < values.length; k++) {
+        if (String(values[k] || '').trim() !== '') answered++;
+      }
+      if (values.length > 0 && answered === values.length) {
+        li.dataset.status = 'finished';
+        li.removeAttribute('aria-current');
+      } else if (answered > 0) {
+        li.dataset.status = 'in-progress';
+        if (firstUnfinished === -1) firstUnfinished = n;
+      } else {
+        li.dataset.status = 'waiting';
+        li.removeAttribute('aria-current');
+      }
+    }
+    if (firstUnfinished === -1) firstUnfinished = STEPS[0].n;
+    var current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+    if (current) {
+      current.setAttribute('aria-current', 'step');
+      if (current.dataset.status === 'waiting') {
+        current.dataset.status = 'in-progress';
+      }
+    }
+    ol.dataset.current = String(firstUnfinished - 1);
+  }
+
   // -- Top-level render ----------------------------------------------------
 
   function renderAll() {
@@ -413,12 +587,9 @@
     sections.innerHTML = '';
     for (var i = 0; i < STEPS.length; i++) {
       var s = STEPS[i];
-      var sec = el('section', { class: 'form-section', id: 'step-' + s.n }, [
-        el('h2', null, [el('span', { class: 'step-number' }, String(s.n)), s.title]),
-        el('p', { class: 'help' }, s.help),
-        STEP_RENDERERS[s.slug]()
-      ]);
-      sections.appendChild(sec);
+      var card = sectionCard(s.n, s.title, s.help);
+      card.appendChild(STEP_RENDERERS[s.slug]());
+      sections.appendChild(card);
     }
     updateProgress();
   }
@@ -446,14 +617,77 @@
   function updateProgress() {
     var c = answeredCount();
     var pct = Math.round((c.answered / c.total) * 100);
-    var bar = document.getElementById('progress-bar-fill');
-    if (bar) bar.style.width = pct + '%';
+    var bar = document.getElementById('progress');
+    if (bar) bar.value = pct;
     var txt = document.getElementById('progress-text');
     if (txt) txt.textContent = c.answered + ' of ' + c.total + ' fields answered (' + pct + '%)';
-    var prog = document.getElementById('progress-bar');
-    if (prog) prog.setAttribute('aria-valuenow', String(pct));
+    updateStepListStatuses();
     // Autosave on every change — emptyData() rendered first counts as a save.
     saveToStorage();
+  }
+
+  // -- Validation (per-field + error summary) ------------------------------
+
+  function clearFieldError(id) {
+    var elErr = document.getElementById(id + '-error');
+    if (elErr) elErr.textContent = '';
+    var input = document.getElementById(id);
+    if (input) input.removeAttribute('aria-invalid');
+  }
+
+  function setFieldError(id, message) {
+    var elErr = document.getElementById(id + '-error');
+    if (elErr) elErr.textContent = message;
+    var input = document.getElementById(id);
+    if (input) input.setAttribute('aria-invalid', 'true');
+  }
+
+  function validateForm() {
+    var errors = [];
+    var form = document.getElementById('adr-form');
+    if (!form) return errors;
+    var required = form.querySelectorAll('[data-required]');
+    var seen = {};
+    for (var i = 0; i < required.length; i++) {
+      var input = required[i];
+      if (input.tagName === 'LABEL' || input.tagName === 'LEGEND') continue;
+      var id = input.id;
+      if (seen[id]) continue;
+      seen[id] = true;
+      var value = (input.value || '').trim();
+      if (!value) {
+        var labelEl = form.querySelector('label[for="' + id + '"]');
+        var labelText = labelEl ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim() : id;
+        errors.push({ id: id, message: labelText + ' is required' });
+        setFieldError(id, labelText + ' is required');
+      } else {
+        clearFieldError(id);
+      }
+    }
+    renderErrorSummary(errors);
+    return errors;
+  }
+
+  function renderErrorSummary(errors) {
+    var summary = document.getElementById('error-summary');
+    if (!summary) return;
+    if (errors.length === 0) {
+      summary.hidden = true;
+      summary.innerHTML = '';
+      return;
+    }
+    summary.hidden = false;
+    var html = '<strong>Please correct the following:</strong><ul>';
+    for (var i = 0; i < errors.length; i++) {
+      html += '<li><a href="#' + esc(errors[i].id) + '">' + esc(errors[i].message) + '</a></li>';
+    }
+    html += '</ul>';
+    summary.innerHTML = html;
+    summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof summary.focus === 'function') {
+      summary.setAttribute('tabindex', '-1');
+      summary.focus({ preventScroll: true });
+    }
   }
 
   // -- Markdown report -----------------------------------------------------
@@ -530,23 +764,25 @@
   }
 
   function renderReport() {
+    var errs = validateForm();
+    if (errs.length > 0) return;
     var md = buildMarkdown();
     var report = document.getElementById('report');
     report.innerHTML = '';
     report.appendChild(el('h2', null, 'Markdown ADR'));
-    report.appendChild(el('p', { class: 'help' },
+    report.appendChild(el('p', { 'class': 'hint' },
       'Copy the Markdown below into your repo at docs/adr/NNNN-' +
       (data.adr.slug || 'your-slug') + '.md.'));
 
-    var actions = el('div', { class: 'report-actions' }, [
+    var actions = el('div', { 'class': 'report-actions' }, [
       el('button', {
-        type: 'button', class: 'btn btn-primary',
+        type: 'button', 'class': 'button', 'data-variant': 'primary',
         onclick: function () {
           if (navigator.clipboard) navigator.clipboard.writeText(md);
         }
       }, 'Copy Markdown to clipboard'),
       el('button', {
-        type: 'button', class: 'btn btn-secondary',
+        type: 'button', 'class': 'button', 'data-variant': 'secondary',
         onclick: function () {
           var blob = new Blob([md], { type: 'text/markdown' });
           var url = URL.createObjectURL(blob);
@@ -562,7 +798,7 @@
     ]);
     report.appendChild(actions);
 
-    var pre = el('pre', { class: 'report-markdown' }, md);
+    var pre = el('pre', { 'class': 'report-markdown' }, md);
     report.appendChild(pre);
     report.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -762,7 +998,8 @@
       if (!confirm('Replace the current draft with the contents of ' + file.name + '?')) return;
       data = parsed;
       saveToStorage();
-      document.getElementById('report').innerHTML = '';
+      var report = document.getElementById('report');
+      if (report) report.innerHTML = '<p class="empty-message">Submit the form to see the rendered Markdown ADR.</p>';
       renderAll();
     };
     reader.readAsText(file);
@@ -770,14 +1007,17 @@
 
   // -- Wiring --------------------------------------------------------------
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function init() {
+    renderStepList();
     renderAll();
     document.getElementById('submit-btn').addEventListener('click', renderReport);
     document.getElementById('reset-btn').addEventListener('click', function () {
       if (!confirm('Discard all entries and start over? This also clears the autosaved draft.')) return;
       clearStorage();
       data = emptyData();
-      document.getElementById('report').innerHTML = '';
+      var report = document.getElementById('report');
+      if (report) report.innerHTML = '<p class="empty-message">Submit the form to see the rendered Markdown ADR.</p>';
+      renderErrorSummary([]);
       renderAll();
     });
     var importInput = document.getElementById('import-input');
@@ -788,5 +1028,11 @@
         e.target.value = ''; // allow re-importing the same file
       });
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
