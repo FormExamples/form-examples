@@ -529,18 +529,156 @@ function evaluateFitness(d) {
 // Rendering
 // ----------------------------------------------------------------------
 
+// Map FIELD_NAMES → step number (1..14). Mirrors index.html step grouping.
+const FIELD_TO_STEP = (() => {
+  const map = {};
+  const groups = [
+    [1, ['submitterName','submitterRole','submitterEmail','submitterPhone','submitterOrganisation','airlineBookingReference']],
+    [2, ['passengerName','passengerDateOfBirth','passengerSex','passengerNationality','passengerPassportNumber','passengerNationalHealthId','passengerAddress','emergencyContact']],
+    [3, ['airlineIataCode','airlineName','outboundFlightNumber','outboundDate','outboundOriginIata','outboundDestinationIata','returnFlightNumber','returnDate','cabinClass','sectorDurationMinutes','transitAirportsIata','specialAssistanceCodes']],
+    [4, ['reasonEquipment','reasonRecentAcuteEvent','reasonUnstableCondition','reasonCommunicableDisease','reasonPregnancy','reasonMobilityEscort','reasonPsychiatric']],
+    [5, ['physicianName','physicianSpecialty','physicianRegistrationNumber','physicianClinic','physicianEmail','physicianPhone','physicianAddress']],
+    [6, ['primaryDiagnosis','icd10Codes','diagnosisDate','currentTreatment','lastAdmissionDate','lastDischargeDate','lastSpecialistReviewDate']],
+    [7, ['restingSystolicBp','restingDiastolicBp','restingHeartRate','nyhaClass','recentMiDate','recentStentDate','onAnticoagulant','pacemakerOrIcd','unstableAngina','exerciseToleranceMetres']],
+    [8, ['restingSpo2Percent','predictedInflightSpo2Percent','hypoxicChallengeResult','recentPneumothoraxDate','asthmaSeverity','copdSeverity','cpapOrBipapUse','recentPulmonaryEmbolismDate']],
+    [9, ['lastSurgeryDate','lastSurgerySite','cabinGasRisk','recentFractureCast','recentDvtDate','scubaDivingWithin24h','recentStrokeDate']],
+    [10, ['isPregnant','gestationWeeks','pregnancyType','pregnancyComplications','expectedDeliveryDate','obstetricianContact']],
+    [11, ['communicableDiseaseStatus','lastSymptomDate','isolationRequired','vaccinationStatus','currentAntimicrobials']],
+    [12, ['requiresSupplementalOxygen','oxygenFlowRateLpm','oxygenDuration','requiresPoc','pocMakeModel','pocBatteryHours','requiresStretcher','requiresIncubator','requiresIvPump','requiresMedicalEscort','requiresExtraSeat','requiresAccessibleLavatory','wheelchairType','accompanyingCarer']],
+    [13, ['regularMedications','controlledDrugs','dangerousGoodsBatteryDeclaration','sharpsInCabin','refrigeratedMedication','customsDocumentationAvailable','haemoglobinGPerL']],
+    [14, ['physicianDeclaration','physicianSignatureName','physicianSignatureDate','validUntilDate','additionalNotes']]
+  ];
+  for (const [step, names] of groups) {
+    for (const n of names) map[n] = step;
+  }
+  return map;
+})();
+
+const STEP_DEFINITIONS = [
+  { step: 1,  title: 'Submitter' },
+  { step: 2,  title: 'Passenger' },
+  { step: 3,  title: 'Trip' },
+  { step: 4,  title: 'Reason' },
+  { step: 5,  title: 'Physician' },
+  { step: 6,  title: 'Diagnosis' },
+  { step: 7,  title: 'Cardiovascular' },
+  { step: 8,  title: 'Respiratory' },
+  { step: 9,  title: 'Recent events' },
+  { step: 10, title: 'Pregnancy' },
+  { step: 11, title: 'Communicable' },
+  { step: 12, title: 'In-flight needs' },
+  { step: 13, title: 'Medications' },
+  { step: 14, title: 'Sign-off' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
 function updateProgress() {
   const data = collectFormData();
   const total = FIELD_NAMES.length;
-  const n = answeredCount(data);
+  let n = 0;
+  const stepAnswered = {};
+  const stepTotal = {};
+  for (const name of FIELD_NAMES) {
+    const step = FIELD_TO_STEP[name];
+    if (step) stepTotal[step] = (stepTotal[step] || 0) + 1;
+    if (isAnswered(name, data[name])) {
+      n++;
+      if (step) stepAnswered[step] = (stepAnswered[step] || 0) + 1;
+    }
+  }
   const pct = total === 0 ? 0 : Math.round((n / total) * 100);
-
-  const fill = document.getElementById('progress-bar-fill');
-  if (fill) fill.style.width = pct + '%';
-  const bar = document.getElementById('progress-bar');
-  if (bar) bar.setAttribute('aria-valuenow', String(pct));
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = pct;
   const text = document.getElementById('progress-text');
   if (text) text.textContent = `${n} of ${total} fields answered (${pct}%)`;
+  updateStepListStatuses(stepAnswered, stepTotal);
+}
+
+function updateStepListStatuses(stepAnswered, stepTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = stepAnswered[def.step] || 0;
+    const t = stepTotal[def.step] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}</ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      input.removeAttribute('aria-invalid');
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
 }
 
 function renderReport(data, result) {
@@ -581,34 +719,36 @@ function renderReport(data, result) {
   }
 
   root.innerHTML = `
-    <div class="report-card">
-      <div class="report-header">
-        <h2>MEDIF fitness-to-fly report</h2>
-        <p class="muted">Computed ${new Date().toLocaleString()} — valid until ${esc(result.validUntil)}.</p>
-      </div>
+    <h2>MEDIF fitness-to-fly report</h2>
+    <p class="muted">Computed ${new Date().toLocaleString()} — valid until ${esc(result.validUntil)}.</p>
 
-      <div class="band-summary">
-        <span class="band-badge ${esc(bandClass)}">${esc(bandLabel)}</span>
-        <span class="muted">${esc(result.firedRules.length)} rule(s) fired, ${esc(result.safetyFlags.length)} safety flag(s).</span>
-      </div>
-      <p class="desk-recommendation"><strong>Airline medical desk:</strong> ${esc(result.deskRecommendation)}</p>
+    <p class="band-summary">
+      <span class="band-badge ${esc(bandClass)}">${esc(bandLabel)}</span>
+      <span class="muted">${esc(result.firedRules.length)} rule(s) fired, ${esc(result.safetyFlags.length)} safety flag(s).</span>
+    </p>
+    <p class="desk-recommendation"><strong>Airline medical desk:</strong> ${esc(result.deskRecommendation)}</p>
 
-      <h3>Fired rules</h3>
-      ${rulesHtml}
+    <h3>Fired rules</h3>
+    ${rulesHtml}
 
-      <h3>Safety flags</h3>
-      ${flagsHtml}
+    <h3>Safety flags</h3>
+    ${flagsHtml}
 
-      <h3>Passenger / trip</h3>
-      <p class="muted">
-        ${esc(data.passengerName || '(passenger)')} —
-        ${esc(data.airlineIataCode || '??')}${esc(data.outboundFlightNumber)}
-        ${esc(data.outboundOriginIata || '???')} &rarr; ${esc(data.outboundDestinationIata || '???')}
-        on ${esc(data.outboundDate || '(date TBD)')}.
-      </p>
+    <h3>Passenger / trip</h3>
+    <p class="muted">
+      ${esc(data.passengerName || '(passenger)')} —
+      ${esc(data.airlineIataCode || '??')}${esc(data.outboundFlightNumber)}
+      ${esc(data.outboundOriginIata || '???')} &rarr; ${esc(data.outboundDestinationIata || '???')}
+      on ${esc(data.outboundDate || '(date TBD)')}.
+    </p>
+
+    <div class="report-actions">
+      <button type="button" id="print-btn" class="button" data-variant="secondary">Print / save PDF</button>
     </div>
   `;
   root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const printBtn = document.getElementById('print-btn');
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
 }
 
 function downloadJson(data, result) {
@@ -639,6 +779,8 @@ function onAnyChange() {
 }
 
 function onSubmit() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   const data = collectFormData();
   saveState(data);
   const result = evaluateFitness(data);
@@ -651,7 +793,8 @@ function onReset() {
   const form = document.getElementById('assessment-form');
   if (form) form.reset();
   const root = document.getElementById('report');
-  if (root) root.innerHTML = '';
+  if (root) root.innerHTML = '<p class="empty-message">Submit the form to see the fitness-to-fly report.</p>';
+  renderErrorSummary([]);
   updateProgress();
 }
 
@@ -662,6 +805,7 @@ function onDownload() {
 }
 
 function init() {
+  renderStepList();
   restoreState();
   updateProgress();
 
