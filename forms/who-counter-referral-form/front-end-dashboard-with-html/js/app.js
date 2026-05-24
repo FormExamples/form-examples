@@ -209,6 +209,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     if (!col.sortable) {
@@ -271,6 +272,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.followUpTimeframe === 'urgent') tr.classList.add('row-urgent');
 
     const priorityClass =
@@ -279,21 +281,21 @@ function renderTableBody() {
         : 'priority-count priority-count-zero';
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(formatDate(row.dateOfBirth))}</td>
-      <td>${esc(row.sex)}</td>
-      <td>${esc(row.referralFacility)}</td>
-      <td>${esc(row.primaryCareFacility)}</td>
-      <td>${esc(row.finalDiagnosis)}</td>
-      <td><span class="timeframe-badge ${timeframeClass(row.followUpTimeframe)}">${esc(formatTimeframe(row.followUpTimeframe))}</span></td>
-      <td>${renderStatusFlagsCell(row.statusFlags)}</td>
-      <td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(formatDate(row.dateOfBirth))}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td">${esc(row.referralFacility)}</td>
+      <td class="data-table-td">${esc(row.primaryCareFacility)}</td>
+      <td class="data-table-td">${esc(row.finalDiagnosis)}</td>
+      <td class="data-table-td"><span class="timeframe-badge ${timeframeClass(row.followUpTimeframe)}">${esc(formatTimeframe(row.followUpTimeframe))}</span></td>
+      <td class="data-table-td">${renderStatusFlagsCell(row.statusFlags)}</td>
+      <td class="data-table-td">
         <span class="informed-badge ${row.patientFamilyInformed ? 'informed-yes' : 'informed-no'}">
           ${row.patientFamilyInformed ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="${priorityClass}">${esc(String(row.highPriorityFlagCount ?? 0))}</span></td>
-      <td>${esc(formatDateTime(row.dischargedAt))}</td>
+      <td class="data-table-td"><span class="${priorityClass}">${esc(String(row.highPriorityFlagCount ?? 0))}</span></td>
+      <td class="data-table-td">${esc(formatDateTime(row.dischargedAt))}</td>
     `;
     body.appendChild(tr);
   }

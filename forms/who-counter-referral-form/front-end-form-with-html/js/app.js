@@ -1,26 +1,26 @@
-// WHO Counter-Referral Form — patient wizard (vanilla JS, classic script).
+// WHO Counter-Referral Form — single-page wizard controller (vanilla JS).
 //
-// Single-page continuous wizard: every section is rendered into the page in
-// document order. The user scrolls through them; a top-of-page progress
-// summary reflects how many fields have been answered. Submission runs the
-// pure validation engine and the flagged-issues detector and renders an
-// inline report. State is persisted to localStorage so a partial fill
-// survives a page reload.
-//
-// Sibling modules loaded as plain `<script>` tags (in order) attach their
-// exports to `window.WhoCounterReferralForm`. Pulling them off here keeps the
-// rest of this file referring to short local names. Whole file wrapped in
-// an IIFE so its top-level identifiers don't leak to the global scope.
+// Renders seven fieldset sections (Patient Identification, Facility Details,
+// Situation, Background, Assessment, Recommendations, Provider Sign-off)
+// into the #form-sections host, wires up navigation via the step-list table
+// of contents, persists state to localStorage on every change, validates
+// required fields on submit, and renders an inline report. Sibling modules
+// (rules / validator / flagged-issues) are loaded as plain <script> tags and
+// attach their public symbols to `window.WhoCounterReferralForm`. The whole
+// file is wrapped in an IIFE so its top-level identifiers do not leak to
+// the global scope.
 
 (function () {
 'use strict';
+
+const NS = window.WhoCounterReferralForm;
 const {
   emptyAssessment,
   validateCounterReferral,
   detectFlaggedIssues,
   sectionLabel,
   priorityLabel
-} = window.WhoCounterReferralForm;
+} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -60,7 +60,7 @@ function loadState() {
   }
 }
 
-function saveState(state) {
+function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (e) {
@@ -81,11 +81,8 @@ function clearState() {
 // ----------------------------------------------------------------------
 
 let state = loadState();
+/** Last grading result rendered into the report region. */
 let lastResult = null;
-
-// ----------------------------------------------------------------------
-// Helpers
-// ----------------------------------------------------------------------
 
 /** Resolve a "section.path.to.field" string against state. */
 function getAt(path) {
@@ -106,7 +103,7 @@ function setAt(path, value) {
     cur = cur[parts[i]];
   }
   cur[parts[parts.length - 1]] = value;
-  saveState(state);
+  saveState();
   updateProgress();
   updateConditionalSections();
 }
@@ -122,99 +119,138 @@ function esc(s) {
 }
 
 // ----------------------------------------------------------------------
-// Component builders
+// Component builders (Lily HTML headless contract)
 // ----------------------------------------------------------------------
 
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':           return 'email-input';
+    case 'number':          return 'number-input';
+    case 'date':            return 'date-input';
+    case 'time':            return 'time-input';
+    case 'datetime-local':  return 'datetime-input';
+    case 'tel':             return 'tel-input';
+    case 'url':             return 'url-input';
+    case 'search':          return 'search-input';
+    default:                return 'text-input';
+  }
+}
+
+function fieldId(path) {
+  return 'f-' + path.replace(/\./g, '-');
+}
+
 function textInput(opts) {
-  const id = 'f-' + opts.path.replace(/\./g, '-');
+  const id = fieldId(opts.path);
   const value = getAt(opts.path) || '';
-  const labelText =
-    esc(opts.label) +
+  const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
   const attrs = [
-    'id="' + id + '"',
-    'name="' + id + '"',
-    'type="' + type + '"',
-    'class="text-input"',
-    'value="' + esc(value) + '"'
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="${lilyInputClass(type)}"`,
+    `value="${esc(value)}"`,
+    `aria-describedby="${id}-error"`
   ];
-  if (opts.placeholder) attrs.push('placeholder="' + esc(opts.placeholder) + '"');
-  if (opts.required) attrs.push('required');
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required', 'data-required');
 
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  wrapper.innerHTML =
-    '<label for="' + id + '">' + labelText + '</label>' +
-    '<input ' + attrs.join(' ') + '>';
-
+  wrapper.innerHTML = `
+    <label class="label" for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    <span class="error-message" id="${id}-error"></span>
+  `;
   const input = wrapper.querySelector('input');
-  input.addEventListener('input', () => setAt(opts.path, input.value));
+  input.addEventListener('input', () => {
+    setAt(opts.path, input.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
 function textArea(opts) {
-  const id = 'f-' + opts.path.replace(/\./g, '-');
+  const id = fieldId(opts.path);
   const value = getAt(opts.path) || '';
-  const labelText =
-    esc(opts.label) +
+  const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  wrapper.innerHTML =
-    '<label for="' + id + '">' + labelText + '</label>' +
-    '<textarea id="' + id + '" name="' + id + '" rows="' + (opts.rows || 3) + '" ' +
-    (opts.placeholder ? 'placeholder="' + esc(opts.placeholder) + '" ' : '') +
-    'class="text-area-input">' + esc(value) + '</textarea>';
+  wrapper.innerHTML = `
+    <label class="label" for="${id}">${labelText}</label>
+    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
+      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      ${opts.required ? 'required data-required' : ''}
+      aria-describedby="${id}-error"
+      class="text-area-input">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
+  `;
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setAt(opts.path, ta.value));
+  ta.addEventListener('input', () => {
+    setAt(opts.path, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
 function radioGroup(opts) {
-  const groupId = 'g-' + opts.path.replace(/\./g, '-');
+  const groupId = fieldId(opts.path);
   const current = getAt(opts.path);
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
-  legend.innerHTML =
-    esc(opts.label) +
+  legend.className = 'label';
+  legend.innerHTML = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
-    const radioId = groupId + '-' + option.value;
+    const radioId = `${groupId}-${option.value}`;
     const label = document.createElement('label');
-    label.className = 'radio-option';
     label.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
-    label.innerHTML =
-      '<input type="radio" id="' + radioId + '" name="' + groupId +
-      '" value="' + esc(option.value) + '"' + checked + '>' +
-      '<span>' + esc(option.label) + '</span>';
+    label.innerHTML = `
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}${opts.required ? ' data-required-radio' : ''}>
+      <span>${esc(option.label)}</span>
+    `;
     const input = label.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setAt(opts.path, option.value);
+      if (input.checked) {
+        setAt(opts.path, option.value);
+        clearFieldError(groupId);
+      }
     });
     list.appendChild(label);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
 function checkbox(opts) {
-  const id = 'f-' + opts.path.replace(/\./g, '-');
+  const id = fieldId(opts.path);
   const checked = !!getAt(opts.path);
-  const wrapper = document.createElement('label');
-  wrapper.className = 'checkbox-row';
-  wrapper.htmlFor = id;
-  wrapper.innerHTML =
-    '<input type="checkbox" id="' + id + '" name="' + id + '"' +
-    (checked ? ' checked' : '') + '>' +
-    '<span>' + esc(opts.label) + '</span>';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field checkbox-field';
+  wrapper.innerHTML = `
+    <label class="checkbox-row" for="${id}">
+      <input class="checkbox-input" type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
+      <span>${esc(opts.label)}</span>
+    </label>
+  `;
   const input = wrapper.querySelector('input');
   input.addEventListener('change', () => setAt(opts.path, input.checked));
   return wrapper;
@@ -222,13 +258,14 @@ function checkbox(opts) {
 
 function subheader(text, note) {
   const wrap = document.createElement('div');
+  wrap.className = 'subheader-block';
   const h = document.createElement('h3');
-  h.className = 'subheader';
+  h.className = 'subsection-heading';
   h.textContent = text;
   wrap.appendChild(h);
   if (note) {
     const p = document.createElement('p');
-    p.className = 'subnote';
+    p.className = 'hint';
     p.textContent = note;
     wrap.appendChild(p);
   }
@@ -236,19 +273,21 @@ function subheader(text, note) {
 }
 
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
-  card.id = 'step-' + opts.stepNumber;
+  card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? '<p class="section-description">' + esc(opts.description) + '</p>'
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML =
-    '<header class="section-header">' +
-    '<span class="section-step">Section ' + opts.stepNumber + ' of 7</span>' +
-    '<h2 class="section-title">' + esc(opts.title) + '</h2>' +
-    desc +
-    '</header>';
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${STEP_DEFINITIONS.length}</span>
+    <span class="section-title">${esc(opts.title)}</span>
+    ${desc}
+  `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -639,13 +678,33 @@ function renderStep7() {
   }));
 
   const note = document.createElement('div');
-  note.className = 'note-box';
+  note.className = 'alert';
+  note.setAttribute('data-type', 'info');
   note.textContent =
     'Note: Attach a copy of the discharge medication chart or current medications list, including doses and time of last dose.';
   card.appendChild(note);
 
   return card;
 }
+
+// ----------------------------------------------------------------------
+// Step renderers and definitions
+// ----------------------------------------------------------------------
+
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4,
+  renderStep5, renderStep6, renderStep7
+];
+
+const STEP_DEFINITIONS = [
+  { step: 1, section: 'patientIdentification', title: 'Patient Identification' },
+  { step: 2, section: 'facilityDetails',       title: 'Facility Details' },
+  { step: 3, section: 'situation',             title: 'Situation' },
+  { step: 4, section: 'background',            title: 'Background' },
+  { step: 5, section: 'assessment',            title: 'Assessment' },
+  { step: 6, section: 'recommendations',       title: 'Recommendations' },
+  { step: 7, section: 'providerSignOff',       title: 'Provider Sign-off' }
+];
 
 // ----------------------------------------------------------------------
 // Conditional sections
@@ -665,7 +724,7 @@ function updateConditionalSections() {
 }
 
 // ----------------------------------------------------------------------
-// Progress
+// Progress (driven by the validator's per-section completeness)
 // ----------------------------------------------------------------------
 
 function updateProgress() {
@@ -673,15 +732,160 @@ function updateProgress() {
   const total = result.totalRequired;
   const answered = result.totalSatisfied;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = percent + '%';
   if (text) {
-    text.textContent =
-      answered + ' of ' + total + ' required fields answered (' + percent + '%)';
+    text.textContent = answered + ' of ' + total + ' required fields answered (' + percent + '%)';
   }
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+
+  // Build per-section answered/required tallies from the validator output.
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  for (const sec of result.sections) {
+    sectionTotal[sec.section] = sec.required;
+    sectionAnswered[sec.section] = sec.satisfied;
+  }
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (t > 0 && firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation (per-field errors + summary)
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+  // For radio groups the input id is the synthetic group id; clear any
+  // marker attribute on the fieldset.
+  const fs = document.getElementById(`${id}-fieldset`);
+  if (fs) fs.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+  const fs = document.getElementById(`${id}-fieldset`);
+  if (fs) fs.setAttribute('aria-invalid', 'true');
+}
+
+/** Map a fired-rule section/id pair to the synthetic DOM id we used when
+ *  rendering the field, when we can. The rules engine already tracks
+ *  which field each rule guards via convention in counter-referral-rules.js;
+ *  for any rule we can't resolve to a concrete input, we fall back to the
+ *  step-N anchor so the user can still jump to the right section. */
+function fieldIdForMissingRule(rule) {
+  // Heuristic: derive from rule id prefix. The rules file uses prefixes
+  // tied to section keys (e.g. PID-, FAC-, SIT-, BG-, ASS-, REC-, SIG-).
+  // Without parsing rule internals, fall back to the section anchor.
+  return null;
+}
+
+function validateForm() {
+  const result = validateCounterReferral(state);
+  const errors = [];
+  // Clear any stale per-field errors first.
+  document.querySelectorAll('.error-message').forEach((el) => { el.textContent = ''; });
+  document.querySelectorAll('[aria-invalid="true"]').forEach((el) =>
+    el.removeAttribute('aria-invalid'));
+
+  for (const m of result.missing) {
+    const targetId = fieldIdForMissingRule(m);
+    const message = m.description;
+    errors.push({
+      id: targetId || `step-${stepNumberForSection(m.section)}`,
+      message: `${sectionLabel(m.section)}: ${message}`,
+      ruleId: m.id
+    });
+    if (targetId) setFieldError(targetId, message);
+  }
+
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function stepNumberForSection(section) {
+  const def = STEP_DEFINITIONS.find((d) => d.section === section);
+  return def ? def.step : 1;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please complete the following before submitting:</strong>
+    <ul>
+      ${errors.map((e) =>
+        `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ----------------------------------------------------------------------
@@ -691,10 +895,10 @@ function updateProgress() {
 function priorityClass(priority) {
   switch (priority) {
     case 'urgent': return 'flag-urgent';
-    case 'high': return 'flag-high';
+    case 'high':   return 'flag-high';
     case 'medium': return 'flag-medium';
-    case 'low': return 'flag-low';
-    default: return '';
+    case 'low':    return 'flag-low';
+    default:       return '';
   }
 }
 
@@ -706,14 +910,14 @@ function renderReport() {
   const { validation, flags, timestamp } = lastResult;
 
   const completenessBadge = validation.complete
-    ? '<span class="completeness-banner completeness-complete">Form complete</span>'
-    : '<span class="completeness-banner completeness-incomplete">' +
+    ? '<span class="status-badge status-complete">Form complete</span>'
+    : '<span class="status-badge status-incomplete">' +
       validation.missing.length + ' field(s) missing</span>';
 
   const sectionRow = (sec) => {
     const status = sec.required === sec.satisfied
-      ? '<span class="section-status-complete">Complete</span>'
-      : '<span class="section-status-incomplete">' +
+      ? '<span class="status-badge status-complete">Complete</span>'
+      : '<span class="status-badge status-incomplete">' +
         (sec.required - sec.satisfied) + ' missing</span>';
     return '<tr>' +
       '<th scope="row">' + esc(sectionLabel(sec.section)) + '</th>' +
@@ -724,7 +928,7 @@ function renderReport() {
 
   const sectionsList = validation.sections.length === 0
     ? '<p class="muted">No required fields were checked.</p>'
-    : '<table class="sections">' +
+    : '<table class="report-table">' +
       '<thead><tr><th scope="col">Section</th><th scope="col">Answered</th><th scope="col">Status</th></tr></thead>' +
       '<tbody>' + validation.sections.map(sectionRow).join('') + '</tbody>' +
       '</table>';
@@ -752,25 +956,23 @@ function renderReport() {
       '</ul>';
 
   out.innerHTML =
-    '<div class="report-card">' +
-      '<header class="report-header">' +
-        '<h2>Counter-Referral Report</h2>' +
-        '<p class="muted">Generated ' + esc(new Date(timestamp).toLocaleString()) + '</p>' +
-        completenessBadge +
-      '</header>' +
+    '<header class="report-header">' +
+      '<h2>Counter-Referral Report</h2>' +
+      '<p class="muted">Generated ' + esc(new Date(timestamp).toLocaleString()) + '</p>' +
+      completenessBadge +
+    '</header>' +
 
-      '<h3>Section completeness</h3>' +
-      sectionsList +
+    '<h3>Section completeness</h3>' +
+    sectionsList +
 
-      '<h3>Missing required fields</h3>' +
-      missingList +
+    '<h3>Missing required fields</h3>' +
+    missingList +
 
-      '<h3>Flagged issues</h3>' +
-      flagsList +
+    '<h3>Flagged issues</h3>' +
+    flagsList +
 
-      '<div class="report-actions">' +
-        '<button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>' +
-      '</div>' +
+    '<div class="report-actions">' +
+      '<button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>' +
     '</div>';
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -779,6 +981,10 @@ function renderReport() {
 }
 
 function submitForm() {
+  // Per Lily flow, run validation and surface errors before generating
+  // the report. We still render the report even when fields are missing
+  // so the user sees the running tally.
+  const errors = validateForm();
   const validation = validateCounterReferral(state);
   const flags = detectFlaggedIssues(state);
   lastResult = {
@@ -787,14 +993,19 @@ function submitForm() {
     timestamp: new Date().toISOString()
   };
   renderReport();
+  // If there were errors, the error summary is already shown and focused.
+  // Returning silently keeps the report visible alongside it for context.
+  void errors;
 }
 
 function startOver() {
-  if (!confirm('Clear all answers and start a fresh counter-referral form?')) return;
+  if (!window.confirm('Clear all answers and start a fresh counter-referral form?')) return;
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  const out = document.getElementById('report');
+  if (out) out.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -807,23 +1018,21 @@ function startOver() {
 
 function renderForm() {
   const host = document.getElementById('form-sections');
+  if (!host) return;
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
-  host.appendChild(renderStep4());
-  host.appendChild(renderStep5());
-  host.appendChild(renderStep6());
-  host.appendChild(renderStep7());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();
 
-  document.getElementById('submit-btn').addEventListener('click', submitForm);
-  document.getElementById('reset-btn').addEventListener('click', startOver);
+  const submit = document.getElementById('submit-btn');
+  const reset = document.getElementById('reset-btn');
+  if (submit) submit.addEventListener('click', submitForm);
+  if (reset) reset.addEventListener('click', startOver);
 }
 
 if (document.readyState === 'loading') {
@@ -831,4 +1040,10 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// Expose a small public surface for debugging in the browser console.
+Object.assign(window.WhoCounterReferralForm, {
+  _getState: () => state,
+  _submitForm: submitForm
+});
 })();
