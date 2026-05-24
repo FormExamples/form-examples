@@ -298,12 +298,24 @@ commit per form with `git commit --only forms/<slug>/`.
     + `4c17c60b`). 5 sections, Welsh strings preserved, 82 rating chips.
   - [x] `medical-language-speaking-assessment-for-english` (`f8aeb9c5`
     + `1a1d468c`). 5 sections, OET-style.
-- [ ] **3.9  Batch: UK statutory forms.** `united-kingdom-driver-and-vehicle-
-  licensing-agency-b1-form`, `…-m1-form`, `…-v1-form`,
-  `united-kingdom-lasting-power-of-attorney-for-financial-decisions`,
-  `…-for-health-and-care-decisions`, `united-kingdom-maternity-certificate-
-  mat-b1`, `united-kingdom-nhs-england-medical-exemption-certificate`,
-  `united-kingdom-statement-of-fitness-for-work`.
+- [x] **3.9  Batch: UK statutory forms** (8 of 8 done). Mechanical pass
+  `5862a30a`; structural commits below.
+  - [x] `united-kingdom-driver-and-vehicle-licensing-agency-b1-form`
+    (`5862a30a` + `df160b5`).
+  - [x] `united-kingdom-driver-and-vehicle-licensing-agency-m1-form`
+    (`5862a30a` + `903ebbe`).
+  - [x] `united-kingdom-driver-and-vehicle-licensing-agency-v1-form`
+    (`5862a30a` + `c9b4219`).
+  - [x] `united-kingdom-lasting-power-of-attorney-for-financial-decisions`
+    (`5862a30a` + `4908c7f`). Special: Alpine.js wizard — kept x-model
+    bindings, added Lily aliases in CSS only.
+  - [x] `united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions`
+    (`5862a30a` + `73ddbe1`). Sticky validity sidebar preserved.
+  - [x] `united-kingdom-maternity-certificate-mat-b1` (`5862a30a` + `e7d10df`).
+  - [x] `united-kingdom-nhs-england-medical-exemption-certificate`
+    (`5862a30a` + `82e07ba`). Special: static HTML (not JS-rendered) —
+    converted each `<section class="step">` to `<fieldset class="step fieldset">`.
+  - [x] `united-kingdom-statement-of-fitness-for-work` (`5862a30a` + `7c170c1`).
 - [x] **3.10  Batch: WHO emergency/referral forms** (6 of 6 done).
   - [x] `who-acute-referral-form` (`b3e14cf3` + `3faec322`). 8-section
     SBAR shape. 61 Lily inputs.
