@@ -239,6 +239,7 @@ function renderTableHead() {
   for (const col of columns) {
     const th = document.createElement('th');
     th.scope = 'col';
+    th.className = 'data-table-th';
     th.dataset.column = col.key;
 
     let ariaSort = 'none';
@@ -283,6 +284,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
 
     // Red-highlight rows with RED triage category.
     if (row.triageCategory === 'red') {
@@ -298,18 +300,18 @@ function renderTableBody() {
       : esc(String(row.gcsTotal));
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td class="cell-numeric">${esc(String(row.age))}</td>
-      <td>${esc(row.sex)}</td>
-      <td><span class="badge ${sceneClass(row.sceneType)}">${esc(formatSceneType(row.sceneType))}</span></td>
-      <td class="cell-complaint">${esc(row.chiefComplaint)}</td>
-      <td><span class="badge ${triageClass(row.triageCategory)}">${esc(formatTriage(row.triageCategory))}</span></td>
-      <td class="cell-numeric">${gcsHtml}</td>
-      <td class="cell-numeric">${esc(String(row.reassessmentCount))}</td>
-      <td class="cell-numeric">${esc(String(row.urgentFlagCount))}</td>
-      <td>${esc(row.providerName)}</td>
-      <td>${esc(formatTimestamp(row.dispatchedAt))}</td>
-      <td>${handoverHtml}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td cell-numeric">${esc(String(row.age))}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td"><span class="badge ${sceneClass(row.sceneType)}">${esc(formatSceneType(row.sceneType))}</span></td>
+      <td class="data-table-td cell-complaint">${esc(row.chiefComplaint)}</td>
+      <td class="data-table-td"><span class="badge ${triageClass(row.triageCategory)}">${esc(formatTriage(row.triageCategory))}</span></td>
+      <td class="data-table-td cell-numeric">${gcsHtml}</td>
+      <td class="data-table-td cell-numeric">${esc(String(row.reassessmentCount))}</td>
+      <td class="data-table-td cell-numeric">${esc(String(row.urgentFlagCount))}</td>
+      <td class="data-table-td">${esc(row.providerName)}</td>
+      <td class="data-table-td">${esc(formatTimestamp(row.dispatchedAt))}</td>
+      <td class="data-table-td">${handoverHtml}</td>
     `;
     body.appendChild(tr);
   }
