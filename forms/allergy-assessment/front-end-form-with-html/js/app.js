@@ -165,7 +165,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -187,7 +187,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}${opts.required ? ' <span class="req" aria-hidden="true">*</span>' : ''}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -302,7 +302,7 @@ function allergyItemEditor(opts) {
           </label>
           <label class="list-cell">
             <span>Severity</span>
-            <select class="select-input" data-key="severity">
+            <select class="select" data-key="severity">
               ${severityOptionsHtml(row.severity || '')}
             </select>
           </label>
@@ -316,7 +316,7 @@ function allergyItemEditor(opts) {
             <input type="text" class="text-input" data-key="alternativesTolerated"
                    value="${esc(row.alternativesTolerated)}" placeholder="e.g. Cephalosporins OK">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove allergy">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove allergy">&times;</button>
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
@@ -338,7 +338,8 @@ function allergyItemEditor(opts) {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = `+ ${opts.addLabel}`;
     addBtn.addEventListener('click', () => {
       rows.push({
@@ -393,7 +394,7 @@ function episodeListEditor() {
             <input type="text" class="text-input" data-key="treatmentRequired"
                    value="${esc(row.treatmentRequired)}" placeholder="e.g. Adrenaline, ED visit">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove episode">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove episode">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -413,7 +414,8 @@ function episodeListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add episode';
     addBtn.addEventListener('click', () => {
       rows.push({ trigger: '', symptoms: '', treatmentRequired: '' });
@@ -462,7 +464,7 @@ function testResultEditor() {
             <input type="text" class="text-input" data-key="result"
                    value="${esc(row.result)}" placeholder="e.g. 8mm wheal, positive">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove test result">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove test result">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -482,7 +484,8 @@ function testResultEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add test result';
     addBtn.addEventListener('click', () => {
       rows.push({ testType: '', allergen: '', result: '' });
@@ -531,7 +534,7 @@ function medicationListEditor() {
             <input type="text" class="text-input" data-key="frequency"
                    value="${esc(row.frequency)}" placeholder="e.g. once daily">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove medication">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove medication">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -551,7 +554,8 @@ function medicationListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add medication';
     addBtn.addEventListener('click', () => {
       rows.push({ name: '', dose: '', frequency: '' });
@@ -1362,7 +1366,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

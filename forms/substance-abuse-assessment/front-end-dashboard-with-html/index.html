@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-audit">AUDIT Category</label>
-          <select id="filter-audit" class="select-input">
+          <select id="filter-audit" class="select">
             <option value="">All AUDIT categories</option>
             <option value="Low Risk">Low Risk</option>
             <option value="Hazardous">Hazardous</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-dast">DAST-10 Category</label>
-          <select id="filter-dast" class="select-input">
+          <select id="filter-dast" class="select">
             <option value="">All DAST-10 categories</option>
             <option value="No Problems">No Problems</option>
             <option value="Low Level">Low Level</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Combined Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -86,7 +86,7 @@
 
         <div class="filter-field">
           <label for="filter-withdrawal">Withdrawal Risk</label>
-          <select id="filter-withdrawal" class="select-input">
+          <select id="filter-withdrawal" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -97,7 +97,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="minimal">Minimal (0-10)</option>
             <option value="mild">Mild (11-20)</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-redflag">Red Flags</label>
-          <select id="filter-redflag" class="select-input">
+          <select id="filter-redflag" class="select">
             <option value="">All</option>
             <option value="yes">Has Red Flags</option>
             <option value="no">No Red Flags</option>
@@ -74,7 +74,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

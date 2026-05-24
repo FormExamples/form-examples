@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="No Risk">No Risk</option>
             <option value="Mild Risk">Mild Risk</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-wound">Wound Present</label>
-          <select id="filter-wound" class="select-input">
+          <select id="filter-wound" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-stage">Wound Stage</label>
-          <select id="filter-stage" class="select-input">
+          <select id="filter-stage" class="select">
             <option value="">All stages</option>
             <option value="None">None</option>
             <option value="Stage 1">Stage 1</option>
@@ -87,7 +87,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

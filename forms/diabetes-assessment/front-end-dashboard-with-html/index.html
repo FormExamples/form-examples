@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-control">Control Level</label>
-          <select id="filter-control" class="select-input">
+          <select id="filter-control" class="select">
             <option value="">All Control Levels</option>
             <option value="wellControlled">Well Controlled</option>
             <option value="suboptimal">Suboptimal</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-type">Diabetes Type</label>
-          <select id="filter-type" class="select-input">
+          <select id="filter-type" class="select">
             <option value="">All Diabetes Types</option>
             <option value="type1">Type 1</option>
             <option value="type2">Type 2</option>
@@ -75,7 +75,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

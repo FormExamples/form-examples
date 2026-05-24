@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-aq10">AQ-10 Score</label>
-          <select id="filter-aq10" class="select-input">
+          <select id="filter-aq10" class="select">
             <option value="">All AQ-10 scores</option>
             <option value="0-3">Low (0-3)</option>
             <option value="4-5">Borderline (4-5)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-outcome">Outcome</label>
-          <select id="filter-outcome" class="select-input">
+          <select id="filter-outcome" class="select">
             <option value="">All outcomes</option>
             <option value="Below threshold">Below threshold</option>
             <option value="At or above threshold">At or above threshold</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-age-group">Age Group</label>
-          <select id="filter-age-group" class="select-input">
+          <select id="filter-age-group" class="select">
             <option value="">All age groups</option>
             <option value="Child">Child</option>
             <option value="Adolescent">Adolescent</option>
@@ -83,7 +83,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

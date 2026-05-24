@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-cfs">CFS Score</label>
-          <select id="filter-cfs" class="select-input">
+          <select id="filter-cfs" class="select">
             <option value="">All CFS scores</option>
             <option value="1">CFS 1 - Very Fit</option>
             <option value="2">CFS 2 - Well</option>
@@ -67,7 +67,7 @@
 
         <div class="filter-field">
           <label for="filter-falls">Falls Risk</label>
-          <select id="filter-falls" class="select-input">
+          <select id="filter-falls" class="select">
             <option value="">All</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -77,7 +77,7 @@
 
         <div class="filter-field">
           <label for="filter-cognitive">Cognitive Status</label>
-          <select id="filter-cognitive" class="select-input">
+          <select id="filter-cognitive" class="select">
             <option value="">All</option>
             <option value="Normal">Normal</option>
             <option value="Mild Impairment">Mild Impairment</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

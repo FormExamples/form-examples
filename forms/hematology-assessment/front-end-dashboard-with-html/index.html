@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-level">Abnormality Level</label>
-          <select id="filter-level" class="select-input">
+          <select id="filter-level" class="select">
             <option value="">All levels</option>
             <option value="normal">Normal</option>
             <option value="mildAbnormality">Mild Abnormality</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-score">Score Range</label>
-          <select id="filter-score" class="select-input">
+          <select id="filter-score" class="select">
             <option value="">All scores</option>
             <option value="0">Normal (0%)</option>
             <option value="1-20">Mild (1-20%)</option>
@@ -77,7 +77,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

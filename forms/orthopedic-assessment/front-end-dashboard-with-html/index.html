@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-dash">DASH Score</label>
-          <select id="filter-dash" class="select-input">
+          <select id="filter-dash" class="select">
             <option value="">All DASH scores</option>
             <option value="0-20">No disability (0-20)</option>
             <option value="21-40">Mild disability (21-40)</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-disability">Disability Level</label>
-          <select id="filter-disability" class="select-input">
+          <select id="filter-disability" class="select">
             <option value="">All disability levels</option>
             <option value="No disability">No disability</option>
             <option value="Mild disability">Mild disability</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-surgical">Surgical Candidate</label>
-          <select id="filter-surgical" class="select-input">
+          <select id="filter-surgical" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -86,7 +86,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

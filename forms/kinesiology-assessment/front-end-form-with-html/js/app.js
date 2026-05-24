@@ -196,7 +196,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -317,7 +317,7 @@ function patternNotes(pattern, label, placeholder) {
     <label for="${id}">${esc(label)}</label>
     <textarea id="${id}" name="${id}" rows="3"
       placeholder="${esc(placeholder)}"
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
@@ -836,7 +836,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

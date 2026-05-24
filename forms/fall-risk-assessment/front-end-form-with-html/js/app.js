@@ -167,7 +167,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -194,7 +194,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -342,7 +342,7 @@ function medicationListEditor() {
             <span>Frequency</span>
             <input type="text" class="text-input" data-key="frequency" value="${esc(row.frequency)}" placeholder="e.g. Daily">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove medication">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove medication">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -363,7 +363,8 @@ function medicationListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add medication';
     addBtn.addEventListener('click', () => {
       rows.push({ name: '', dose: '', frequency: '' });
@@ -1132,7 +1133,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

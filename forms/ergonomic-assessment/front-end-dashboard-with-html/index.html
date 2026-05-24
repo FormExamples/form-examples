@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Negligible risk">Negligible</option>
             <option value="Low risk">Low</option>
@@ -64,7 +64,7 @@
 
         <div class="filter-field">
           <label for="filter-occupation">Occupation</label>
-          <select id="filter-occupation" class="select-input">
+          <select id="filter-occupation" class="select">
             <option value="">All occupations</option>
           </select>
         </div>
@@ -73,7 +73,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

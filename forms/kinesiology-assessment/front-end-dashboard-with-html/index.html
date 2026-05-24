@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-risk-band">Risk Band</label>
-          <select id="filter-risk-band" class="select-input">
+          <select id="filter-risk-band" class="select">
             <option value="">All risk bands</option>
             <option value="low-risk">Low risk</option>
             <option value="at-risk">At risk</option>
@@ -60,7 +60,7 @@
 
         <div class="filter-field">
           <label for="filter-pain">Painful Tests</label>
-          <select id="filter-pain" class="select-input">
+          <select id="filter-pain" class="select">
             <option value="">All</option>
             <option value="yes">Any pain reported</option>
             <option value="no">No pain reported</option>
@@ -69,7 +69,7 @@
 
         <div class="filter-field">
           <label for="filter-asymmetry">Asymmetric Tests</label>
-          <select id="filter-asymmetry" class="select-input">
+          <select id="filter-asymmetry" class="select">
             <option value="">All</option>
             <option value="yes">Any asymmetry</option>
             <option value="no">No asymmetry</option>
@@ -80,7 +80,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

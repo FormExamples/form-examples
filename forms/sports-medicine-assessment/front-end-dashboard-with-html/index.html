@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-clearance">Clearance</label>
-          <select id="filter-clearance" class="select-input">
+          <select id="filter-clearance" class="select">
             <option value="">All clearance categories</option>
             <option value="Cleared">Cleared</option>
             <option value="Cleared with Conditions">Cleared with Conditions</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-sport">Sport</label>
-          <select id="filter-sport" class="select-input">
+          <select id="filter-sport" class="select">
             <option value="">All sports</option>
             <option value="Football">Football</option>
             <option value="Basketball">Basketball</option>
@@ -78,7 +78,7 @@
 
         <div class="filter-field">
           <label for="filter-contact">Contact Level</label>
-          <select id="filter-contact" class="select-input">
+          <select id="filter-contact" class="select">
             <option value="">All contact levels</option>
             <option value="Contact">Contact</option>
             <option value="Limited Contact">Limited Contact</option>
@@ -88,7 +88,7 @@
 
         <div class="filter-field">
           <label for="filter-age-band">Age Band</label>
-          <select id="filter-age-band" class="select-input">
+          <select id="filter-age-band" class="select">
             <option value="">All age bands</option>
             <option value="Youth">Youth</option>
             <option value="Adolescent">Adolescent</option>
@@ -101,7 +101,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="No handicap">No handicap</option>
             <option value="Mild to moderate handicap">Mild to moderate handicap</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-age-band">Age Band</label>
-          <select id="filter-age-band" class="select-input">
+          <select id="filter-age-band" class="select">
             <option value="">All age bands</option>
             <option value="Under 50">Under 50</option>
             <option value="50-64">50-64</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-hearing-aid">Hearing Aid</label>
-          <select id="filter-hearing-aid" class="select-input">
+          <select id="filter-hearing-aid" class="select">
             <option value="">All</option>
             <option value="yes">User</option>
             <option value="no">Non-user</option>
@@ -85,7 +85,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

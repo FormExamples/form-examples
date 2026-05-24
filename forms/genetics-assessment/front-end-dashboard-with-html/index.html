@@ -26,7 +26,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -53,7 +53,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-concern">Presenting Concern</label>
-          <select id="filter-concern" class="select-input">
+          <select id="filter-concern" class="select">
             <option value="">All concerns</option>
             <option value="BRCA / HBOC">BRCA / HBOC</option>
             <option value="Lynch / HNPCC">Lynch / HNPCC</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-testing">Recommended Testing</label>
-          <select id="filter-testing" class="select-input">
+          <select id="filter-testing" class="select">
             <option value="">All testing pathways</option>
             <option value="BRCA1/2 panel">BRCA1/2 panel</option>
             <option value="HBOC extended panel">HBOC extended panel</option>
@@ -92,7 +92,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

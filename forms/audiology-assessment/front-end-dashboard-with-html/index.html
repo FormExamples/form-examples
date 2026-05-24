@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-grade">Hearing Grade</label>
-          <select id="filter-grade" class="select-input">
+          <select id="filter-grade" class="select">
             <option value="">All grades</option>
             <option value="normal">Normal</option>
             <option value="mild">Mild</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-tinnitus">Tinnitus</label>
-          <select id="filter-tinnitus" class="select-input">
+          <select id="filter-tinnitus" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-aid-status">Aid Status</label>
-          <select id="filter-aid-status" class="select-input">
+          <select id="filter-aid-status" class="select">
             <option value="">All statuses</option>
             <option value="None">None</option>
             <option value="Candidate">Candidate</option>
@@ -85,7 +85,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

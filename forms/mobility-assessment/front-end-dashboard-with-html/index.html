@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-tinetti">Tinetti Score</label>
-          <select id="filter-tinetti" class="select-input">
+          <select id="filter-tinetti" class="select">
             <option value="">All Tinetti scores</option>
             <option value="25-28">Low risk (25-28)</option>
             <option value="19-24">Moderate risk (19-24)</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-fallrisk">Fall Risk</label>
-          <select id="filter-fallrisk" class="select-input">
+          <select id="filter-fallrisk" class="select">
             <option value="">All fall risks</option>
             <option value="Low fall risk">Low fall risk</option>
             <option value="Moderate fall risk">Moderate fall risk</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-device">Device</label>
-          <select id="filter-device" class="select-input">
+          <select id="filter-device" class="select">
             <option value="">All devices</option>
             <option value="None">None</option>
             <option value="Cane">Cane</option>
@@ -86,7 +86,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -194,7 +194,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
     ${opts.hint ? `<p class="hint">${esc(opts.hint)}</p>` : ''}
   `;
   const ta = wrapper.querySelector('textarea');
@@ -222,7 +222,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">${optionsHtml}</select>
+    <select id="${id}" name="${id}" class="select">${optionsHtml}</select>
   `;
   const sel = wrapper.querySelector('select');
   sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
@@ -359,7 +359,7 @@ function probandCancerEditor() {
           </label>
           <label class="relative-cell">
             <span>Bilateral?</span>
-            <select class="select-input" data-key="bilateral">
+            <select class="select" data-key="bilateral">
               <option value=""${row.bilateral === '' ? ' selected' : ''}>—</option>
               <option value="yes"${row.bilateral === 'yes' ? ' selected' : ''}>Yes</option>
               <option value="no"${row.bilateral === 'no' ? ' selected' : ''}>No</option>
@@ -398,7 +398,8 @@ function probandCancerEditor() {
 
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-secondary';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'secondary');
     addBtn.textContent = '+ Add cancer';
     addBtn.style.marginTop = '0.5rem';
     addBtn.addEventListener('click', () => {
@@ -438,7 +439,7 @@ function fixedRelativeEditor(opts) {
         </label>
         <label class="relative-cell">
           <span>Affected with cancer?</span>
-          <select class="select-input" data-key="affectedWithCancer">
+          <select class="select" data-key="affectedWithCancer">
             <option value=""${r.affectedWithCancer === '' ? ' selected' : ''}>—</option>
             <option value="yes"${r.affectedWithCancer === 'yes' ? ' selected' : ''}>Yes</option>
             <option value="no"${r.affectedWithCancer === 'no' ? ' selected' : ''}>No</option>
@@ -449,7 +450,7 @@ function fixedRelativeEditor(opts) {
       <div class="relative-grid three">
         <label class="relative-cell">
           <span>Deceased?</span>
-          <select class="select-input" data-key="deceased">
+          <select class="select" data-key="deceased">
             <option value=""${r.deceased === '' ? ' selected' : ''}>—</option>
             <option value="yes"${r.deceased === 'yes' ? ' selected' : ''}>Yes</option>
             <option value="no"${r.deceased === 'no' ? ' selected' : ''}>No</option>
@@ -544,7 +545,8 @@ function relativeCancerEditor(relative) {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-secondary';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'secondary');
     addBtn.style.padding = '0.375rem 0.75rem';
     addBtn.style.fontSize = '0.8125rem';
     addBtn.textContent = '+ Add cancer to this relative';
@@ -615,7 +617,7 @@ function relativeListEditor(opts) {
           </label>
           <label class="relative-cell">
             <span>Sex</span>
-            <select class="select-input" data-key="sex">
+            <select class="select" data-key="sex">
               <option value=""${r.sex === '' ? ' selected' : ''}>—</option>
               <option value="female"${r.sex === 'female' ? ' selected' : ''}>Female</option>
               <option value="male"${r.sex === 'male' ? ' selected' : ''}>Male</option>
@@ -624,7 +626,7 @@ function relativeListEditor(opts) {
           </label>
           <label class="relative-cell">
             <span>Affected with cancer?</span>
-            <select class="select-input" data-key="affectedWithCancer">
+            <select class="select" data-key="affectedWithCancer">
               <option value=""${r.affectedWithCancer === '' ? ' selected' : ''}>—</option>
               <option value="yes"${r.affectedWithCancer === 'yes' ? ' selected' : ''}>Yes</option>
               <option value="no"${r.affectedWithCancer === 'no' ? ' selected' : ''}>No</option>
@@ -635,7 +637,7 @@ function relativeListEditor(opts) {
         <div class="relative-grid three">
           <label class="relative-cell">
             <span>Deceased?</span>
-            <select class="select-input" data-key="deceased">
+            <select class="select" data-key="deceased">
               <option value=""${r.deceased === '' ? ' selected' : ''}>—</option>
               <option value="yes"${r.deceased === 'yes' ? ' selected' : ''}>Yes</option>
               <option value="no"${r.deceased === 'no' ? ' selected' : ''}>No</option>
@@ -688,7 +690,8 @@ function relativeListEditor(opts) {
 
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-secondary';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'secondary');
     addBtn.style.marginTop = '0.5rem';
     addBtn.textContent = `+ ${opts.addLabel}`;
     addBtn.addEventListener('click', () => {
@@ -770,7 +773,8 @@ function priorTestEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-secondary';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'secondary');
     addBtn.style.marginTop = '0.5rem';
     addBtn.textContent = '+ Add prior test';
     addBtn.addEventListener('click', () => {
@@ -1642,7 +1646,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;
