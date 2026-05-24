@@ -84,12 +84,86 @@
   function updateProgress() {
     const answered = countAnswered();
     const pct = Math.round((answered / TOTAL_FIELDS) * 100);
-    const bar = document.getElementById('progress-bar-fill');
-    if (bar) bar.style.width = pct + '%';
-    const meter = document.getElementById('progress-bar');
-    if (meter) meter.setAttribute('aria-valuenow', String(pct));
+    const bar = document.getElementById('progress');
+    if (bar) bar.value = pct;
     const text = document.getElementById('progress-text');
     if (text) text.textContent = answered + ' fields answered (' + pct + '%)';
+    updateStepListStatuses();
+  }
+
+  const STEP_DEFINITIONS = [
+    { step: 1,  title: 'Issuer' },
+    { step: 2,  title: 'Patient' },
+    { step: 3,  title: 'Assessment' },
+    { step: 4,  title: 'Diagnosis' },
+    { step: 5,  title: 'Fitness' },
+    { step: 6,  title: 'Adaptations' },
+    { step: 7,  title: 'Comments' },
+    { step: 8,  title: 'Period' },
+    { step: 9,  title: 'Follow-up' },
+    { step: 10, title: 'Sign-off' }
+  ];
+
+  function renderStepList() {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    ol.innerHTML = '';
+    for (const def of STEP_DEFINITIONS) {
+      const li = document.createElement('li');
+      li.className = 'step-list-item';
+      li.dataset.status = 'waiting';
+      li.dataset.step = String(def.step);
+      li.setAttribute('aria-label', 'Step ' + def.step + ': ' + def.title);
+      const span = document.createElement('span');
+      span.textContent = def.title;
+      li.appendChild(span);
+      li.addEventListener('click', () => {
+        const target = document.getElementById('step-' + def.step);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      ol.appendChild(li);
+    }
+  }
+
+  function updateStepListStatuses() {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    let firstUnfinished = -1;
+    for (const def of STEP_DEFINITIONS) {
+      const li = ol.querySelector('[data-step="' + def.step + '"]');
+      const step = document.getElementById('step-' + def.step);
+      if (!li) continue;
+      if (!step) { li.dataset.status = 'waiting'; continue; }
+      const required = step.querySelectorAll('[data-required]');
+      let answered = 0;
+      required.forEach((r) => {
+        if (r.type === 'radio') {
+          if (document.querySelector('input[type="radio"][name="' + r.name + '"]:checked')) answered++;
+        } else if (r.type === 'checkbox') {
+          if (r.checked) answered++;
+        } else if (r.value && String(r.value).trim() !== '') {
+          answered++;
+        }
+      });
+      if (required.length > 0 && answered >= required.length) {
+        li.dataset.status = 'finished';
+        li.removeAttribute('aria-current');
+      } else if (answered > 0) {
+        li.dataset.status = 'in-progress';
+        if (firstUnfinished === -1) firstUnfinished = def.step;
+      } else {
+        li.dataset.status = 'waiting';
+        li.removeAttribute('aria-current');
+        if (firstUnfinished === -1) firstUnfinished = def.step;
+      }
+    }
+    if (firstUnfinished === -1) firstUnfinished = 1;
+    const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+    if (current) {
+      current.setAttribute('aria-current', 'step');
+      if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+    }
+    ol.dataset.current = String(firstUnfinished - 1);
   }
 
   function el(tag, attrs, ...children) {
@@ -107,14 +181,29 @@
     return node;
   }
 
+  function lilyInputClass(type) {
+    switch (type) {
+      case 'email':  return 'email-input';
+      case 'number': return 'number-input';
+      case 'date':   return 'date-input';
+      case 'time':   return 'time-input';
+      case 'tel':    return 'tel-input';
+      case 'url':    return 'url-input';
+      case 'search': return 'search-input';
+      default:       return 'text-input';
+    }
+  }
+
   function textField(label, getter, setter, help, type) {
     const id = 'fld-' + Math.random().toString(36).slice(2);
+    const t = type || 'text';
     return el('div', { class: 'field' },
-      el('label', { for: id }, label),
+      el('label', { for: id, class: 'label' }, label),
       help ? el('span', { class: 'help' }, help) : null,
       el('input', {
         id,
-        type: type || 'text',
+        type: t,
+        class: lilyInputClass(t),
         value: getter() == null ? '' : String(getter()),
         oninput: (e) => { setter(e.target.value); persist(); }
       })
@@ -125,11 +214,12 @@
     const id = 'fld-' + Math.random().toString(36).slice(2);
     const ta = el('textarea', {
       id,
+      class: 'text-area-input',
       oninput: (e) => { setter(e.target.value); persist(); }
     });
     ta.value = getter() || '';
     return el('div', { class: 'field' },
-      el('label', { for: id }, label),
+      el('label', { for: id, class: 'label' }, label),
       help ? el('span', { class: 'help' }, help) : null,
       ta
     );
@@ -137,7 +227,7 @@
 
   function selectField(label, options, getter, setter, help) {
     const id = 'fld-' + Math.random().toString(36).slice(2);
-    const sel = el('select', { id, onchange: (e) => { setter(e.target.value); persist(); } },
+    const sel = el('select', { id, class: 'select', onchange: (e) => { setter(e.target.value); persist(); } },
       el('option', { value: '' }, '— select —'),
       ...options.map(o => {
         const opt = el('option', { value: o.value || o }, o.label || o);
@@ -146,7 +236,7 @@
       })
     );
     return el('div', { class: 'field' },
-      el('label', { for: id }, label),
+      el('label', { for: id, class: 'label' }, label),
       help ? el('span', { class: 'help' }, help) : null,
       sel
     );
@@ -154,17 +244,17 @@
 
   function yesNoField(label, getter, setter, help) {
     const name = 'rb-' + Math.random().toString(36).slice(2);
-    const group = el('div', { class: 'radio-group' });
+    const group = el('div', { class: 'radio-group', role: 'radiogroup' });
     [['yes', 'Yes'], ['no', 'No']].forEach(([v, l]) => {
       const rb = el('label', {},
-        el('input', { type: 'radio', name, value: v, onchange: () => { setter(v); persist(); } }),
+        el('input', { class: 'radio-input', type: 'radio', name, value: v, onchange: () => { setter(v); persist(); } }),
         ' ' + l
       );
       if (getter() === v) rb.querySelector('input').setAttribute('checked', '');
       group.appendChild(rb);
     });
     return el('div', { class: 'field' },
-      el('label', {}, label),
+      el('label', { class: 'label' }, label),
       help ? el('span', { class: 'help' }, help) : null,
       group
     );
@@ -172,26 +262,26 @@
 
   function radioField(label, options, getter, setter, help) {
     const name = 'rb-' + Math.random().toString(36).slice(2);
-    const group = el('div', { class: 'radio-group' });
+    const group = el('div', { class: 'radio-group', role: 'radiogroup' });
     options.forEach(o => {
       const v = o.value || o;
       const rb = el('label', {},
-        el('input', { type: 'radio', name, value: v, onchange: () => { setter(v); persist(); render(); } }),
+        el('input', { class: 'radio-input', type: 'radio', name, value: v, onchange: () => { setter(v); persist(); render(); } }),
         ' ' + (o.label || o)
       );
       if (getter() === v) rb.querySelector('input').setAttribute('checked', '');
       group.appendChild(rb);
     });
     return el('div', { class: 'field' },
-      el('label', {}, label),
+      el('label', { class: 'label' }, label),
       help ? el('span', { class: 'help' }, help) : null,
       group
     );
   }
 
   function section(num, title, ...fields) {
-    return el('fieldset', {},
-      el('legend', {}, 'Step ' + num + ' — ' + title),
+    return el('fieldset', { class: 'fieldset', id: 'step-' + num, 'data-step': String(num) },
+      el('legend', { class: 'fieldset-legend' }, 'Step ' + num + ' — ' + title),
       ...fields
     );
   }
@@ -331,10 +421,11 @@
     localStorage.removeItem(STORAGE_KEY);
     state = ns.emptyFitNote();
     render();
-    document.getElementById('report').innerHTML = '';
+    document.getElementById('report').innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    renderStepList();
     render();
     document.getElementById('submit-btn').addEventListener('click', renderReport);
     document.getElementById('reset-btn').addEventListener('click', reset);
