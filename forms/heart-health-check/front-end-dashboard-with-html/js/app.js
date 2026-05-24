@@ -197,6 +197,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -242,6 +243,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.riskCategory === 'high') {
       tr.classList.add('row-high-risk');
     }
@@ -251,15 +253,15 @@ function renderTableBody() {
       : esc(Number(row.tenYearRisk).toFixed(1)) + '%';
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="num-cell">${esc(row.age)}</span></td>
-      <td><span class="sex-cell">${esc(row.sex)}</span></td>
-      <td><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
-      <td><span class="num-cell">${tenYearLabel}</span></td>
-      <td>${renderHeartAgeCell(row)}</td>
-      <td><span class="flag-badge ${flagClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
-      <td>${esc(row.submittedDate)}</td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td"><span class="num-cell">${esc(row.age)}</span></td>
+      <td class="data-table-td"><span class="sex-cell">${esc(row.sex)}</span></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
+      <td class="data-table-td"><span class="num-cell">${tenYearLabel}</span></td>
+      <td class="data-table-td">${renderHeartAgeCell(row)}</td>
+      <td class="data-table-td"><span class="flag-badge ${flagClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
+      <td class="data-table-td"><span class="date-cell">${esc(row.submittedDate)}</span></td>
     `;
     body.appendChild(tr);
   }
