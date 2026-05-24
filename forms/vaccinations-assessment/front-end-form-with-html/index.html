@@ -7,29 +7,49 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a href="index.html" class="header-title">Vaccinations Assessment</a>
-      <nav><a href="index.html">Home</a></nav>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Vaccinations Assessment</h1>
+      <p class="subtitle">Immunisation-schedule compliance, contraindication and allergy screening.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Vaccinations Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main class="container main-content">
-    <!-- ─── Landing ────────────────────────────────────── -->
-    <div class="feature-card"><h3>Compliance Score</h3><p>Automated composite scoring (0-100)</p></div>
-        <div class="feature-card"><h3>Safety Flags</h3><p>Contraindication and allergy screening</p></div>
-      </div>
-      <button class="btn btn-primary btn-lg" onclick="startForm()">Begin Assessment</button>
-    </div>
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Vaccinations Assessment"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
 
-    <!-- ─── Form ───────────────────────────────────────── -->
-    <div id="form-container" style="display:none;">
-      <div class="progress-container">
-        <div class="progress-header">
-          <span id="step-label">Step 1 of 10: Patient Information</span>
-          <span id="step-percent">10%</span>
-        </div>
-</div>
+      <div id="form-sections">
 
       <!-- ─── Step 1: Patient Information ──────────────── -->
       <section id="step-1" class="step-section card">
@@ -523,13 +543,30 @@
           <input type="text" data-field="clinicalReview.reviewingClinician" placeholder="e.g. Dr Smith">
         </div>
         <div class="step-nav">
-          <button class="button" data-variant="success" onclick="submitForm()">Submit &amp; View Report</button>
+          <button class="button" data-variant="primary" onclick="submitForm()">Submit &amp; View Report</button>
         </div>
       </section>
-    </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary" onclick="submitForm()">
+          Submit and view report
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Assessment report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
   </main>
 
-  <footer class="footer"><p>Vaccinations Assessment System &copy; 2026. For clinical use only.</p></footer>
+  <footer class="page-footer"><p>Vaccinations Assessment System &copy; 2026. For clinical use only.</p></footer>
 
   <script type="module" src="js/app.js"></script>
 </body>
