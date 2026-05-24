@@ -65,11 +65,11 @@
         <!-- 15 Notes, 16 Summary -->
       </div>
 
-      <div class="form-actions">
-        <button type="button" id="submit-btn" class="btn btn-primary">
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
           Generate Markdown ADR
         </button>
-        <label for="import-input" class="btn btn-secondary" style="cursor: pointer;">
+        <label for="import-input" class="button" data-variant="secondary" style="cursor: pointer;">
           Import .md
         </label>
         <input
@@ -78,7 +78,7 @@
           accept=".md,text/markdown,text/plain"
           style="display: none;"
         >
-        <button type="button" id="reset-btn" class="btn btn-secondary">
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
           Start over
         </button>
       </div>
@@ -86,7 +86,7 @@
 
     <div
       id="report"
-      class="report-region"
+      class="panel"
       role="region"
       aria-live="polite"
       aria-label="ADR report"

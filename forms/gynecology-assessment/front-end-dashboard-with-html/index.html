@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-score">Symptom Score</label>
-          <select id="filter-score" class="select-input">
+          <select id="filter-score" class="select">
             <option value="">All scores</option>
             <option value="0-5">Minimal (0-5)</option>
             <option value="6-10">Mild (6-10)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-menopausal">Menopausal Status</label>
-          <select id="filter-menopausal" class="select-input">
+          <select id="filter-menopausal" class="select">
             <option value="">All statuses</option>
             <option value="Pre-menopausal">Pre-menopausal</option>
             <option value="Peri-menopausal">Peri-menopausal</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-screening">Screening</label>
-          <select id="filter-screening" class="select-input">
+          <select id="filter-screening" class="select">
             <option value="">All screening</option>
             <option value="Up to date">Up to date</option>
             <option value="Overdue">Overdue</option>
@@ -84,7 +84,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
