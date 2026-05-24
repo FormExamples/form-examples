@@ -4,61 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Autism Assessment — patient questionnaire</title>
-  <meta name="description" content="Autism Spectrum Quotient-10 (AQ-10) screening with sensory, social, developmental, and family history.">
+  <meta name="description" content="AQ-10 screening with sensory and developmental profiling.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Autism Assessment</h1>
-      <p class="subtitle">AQ-10 screening plus sensory, social, developmental, and family history.</p>
+      <p class="subtitle">AQ-10 screening with sensory and developmental profiling.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Autism Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main>
     <div class="intro">
       <p>
-        Please answer the questions below about yourself or the person you
-        are completing this for. The first scoring section is the validated
-        ten-question Autism Spectrum Quotient (AQ-10) screen. All answers are
-        saved automatically in your browser as you go.
-      </p>
-      <p>
-        This screening tool is for information only and is not a diagnosis.
-        A score at or above the AQ-10 threshold suggests further evaluation
-        by a qualified clinician may be helpful.
+        Please complete the questions below. All answers are saved automatically
+        in your browser as you go.
       </p>
     </div>
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Autism Assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
-        <!-- 1 Demographics, 2 Screening Purpose, 3 AQ-10 Questionnaire, -->
-        <!-- 4 Social Communication, 5 Repetitive Behaviors, 6 Sensory Profile, -->
-        <!-- 7 Developmental History, 8 Current Support, 9 Family History -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes. -->
       </div>
 
       <div class="button-group">
@@ -71,21 +71,21 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
-        The AQ-10 (Autism Spectrum Quotient-10) is a validated 10-item
-        screening tool. A score of 6 or above is the recommended threshold
-        for considering a referral for full diagnostic assessment. This tool
-        does not diagnose autism; please discuss your results with your
-        clinician.
+        This screening tool is a structured questionnaire. The grading and
+        flagged issues are for information only and are not a diagnosis;
+        please discuss your results with a qualified clinician.
       </p>
     </footer>
   </main>
