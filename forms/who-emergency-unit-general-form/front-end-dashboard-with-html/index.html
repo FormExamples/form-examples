@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-arrival">Arrival mode</label>
-          <select id="filter-arrival" class="select-input">
+          <select id="filter-arrival" class="select">
             <option value="">All arrival modes</option>
             <option value="walking">Walking</option>
             <option value="wheelchair">Wheelchair</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-avpu">AVPU level</label>
-          <select id="filter-avpu" class="select-input">
+          <select id="filter-avpu" class="select">
             <option value="">All AVPU levels</option>
             <option value="A">A &mdash; Alert</option>
             <option value="V">V &mdash; Verbal</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-high-risk">High-risk signs</label>
-          <select id="filter-high-risk" class="select-input">
+          <select id="filter-high-risk" class="select">
             <option value="all">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
 
         <div class="filter-field">
           <label for="filter-disposition">Disposition</label>
-          <select id="filter-disposition" class="select-input">
+          <select id="filter-disposition" class="select">
             <option value="">All dispositions</option>
             <option value="admit">Admit</option>
             <option value="transfer">Transfer</option>
@@ -96,7 +96,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

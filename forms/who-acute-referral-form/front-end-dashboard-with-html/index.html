@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-mode">Mode of transfer</label>
-          <select id="filter-mode" class="select-input">
+          <select id="filter-mode" class="select">
             <option value="">All modes</option>
             <option value="road">Road</option>
             <option value="air">Air</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-status">Transfer status</label>
-          <select id="filter-status" class="select-input">
+          <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="initiated">Initiated</option>
             <option value="in-transit">In transit</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-urgent">Urgent flags</label>
-          <select id="filter-urgent" class="select-input">
+          <select id="filter-urgent" class="select">
             <option value="all">All</option>
             <option value="has">Has urgent flags</option>
             <option value="none">No urgent flags</option>
@@ -83,7 +83,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

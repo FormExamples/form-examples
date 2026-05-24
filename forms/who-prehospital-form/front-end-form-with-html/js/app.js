@@ -231,7 +231,7 @@ function textArea(opts) {
   wrapper.innerHTML = `
     <label for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="textarea"${placeholderAttr}>${esc(value)}</textarea>
+      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
@@ -294,7 +294,7 @@ function selectInput(opts) {
     .join('');
   wrapper.innerHTML = `
     <label for="${id}">${labelText}</label>
-    <select id="${id}" name="${id}" class="select-input">${optionHtml}</select>
+    <select id="${id}" name="${id}" class="select">${optionHtml}</select>
   `;
   const sel = wrapper.querySelector('select');
   sel.addEventListener('change', () => setPath(opts.path, sel.value));
@@ -1208,7 +1208,8 @@ function renderStep15() {
   const canAdd = list.length < 3;
   const addBtn = document.createElement('button');
   addBtn.type = 'button';
-  addBtn.className = 'btn btn-secondary';
+  addBtn.className = 'button';
+  addBtn.setAttribute('data-variant', 'secondary');
   addBtn.textContent = canAdd
     ? '+ Add reassessment'
     : '+ Add reassessment (max 3 reached)';
@@ -1400,7 +1401,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

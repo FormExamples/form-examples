@@ -179,7 +179,7 @@ function textArea(opts) {
   wrapper.innerHTML = `
     <label for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="textarea"${placeholderAttr}>${esc(value)}</textarea>
+      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
@@ -952,7 +952,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

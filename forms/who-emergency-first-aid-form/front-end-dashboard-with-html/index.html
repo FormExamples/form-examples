@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-problem-type">Problem type</label>
-          <select id="filter-problem-type" class="select-input">
+          <select id="filter-problem-type" class="select">
             <option value="">All problem types</option>
             <option value="medical">Medical</option>
             <option value="trauma">Trauma</option>
@@ -60,7 +60,7 @@
 
         <div class="filter-field">
           <label for="filter-major-bleeding">Major bleeding</label>
-          <select id="filter-major-bleeding" class="select-input">
+          <select id="filter-major-bleeding" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -69,7 +69,7 @@
 
         <div class="filter-field">
           <label for="filter-airway">Airway intervention</label>
-          <select id="filter-airway" class="select-input">
+          <select id="filter-airway" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -78,7 +78,7 @@
 
         <div class="filter-field">
           <label for="filter-gcs">GCS level</label>
-          <select id="filter-gcs" class="select-input">
+          <select id="filter-gcs" class="select">
             <option value="">All GCS levels</option>
             <option value="alert">Alert</option>
             <option value="confused">Confused</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
