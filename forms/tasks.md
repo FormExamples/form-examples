@@ -330,14 +330,23 @@ commit per form with `git commit --only forms/<slug>/`.
     error-message spans; app.js compacted 1789→1320 LOC.
   - [x] `who-prehospital-form` (`b3e14cf3` + `c7957f7e`). 16 EMS
     sections; empty-submit → 24 validation errors.
-- [ ] **3.11  Batch: misc / planning / templates.** `arc42`,
-  `agile-consulting-scorecard-for-hiring-help` (if present),
-  `casualty-card-form`, `emergency-medical-technician-psychomotor-
-  examination`, `international-certificate-of-vaccination-or-prophylaxis`,
-  `international-patient-summary`, `issue-tracker`,
-  `medical-information-form-for-air-travel`,
-  `objectives-and-key-results-tracker`, `advance-decision-to-refuse-treatment`,
-  `advance-statement-about-care`.
+- [x] **3.11  Batch: misc / planning / templates** (7 done + 3 N/A).
+  Mechanical pass `592c0963`; structural commits below.
+  - [x] `casualty-card-form` (`592c0963` + `74cfeac5`). NEWS2, 14 steps.
+  - [x] `emergency-medical-technician-psychomotor-examination`
+    (`592c0963` + `664295e6`). Critical-criteria checklist, tri-state.
+  - [x] `international-patient-summary` (`592c0963` + `022d1211`). 10 IPS sections.
+  - [x] `medical-information-form-for-air-travel` (`592c0963` + `4e36a0ef`).
+    Inline-HTML (no JS builders); Alpine.js `x-data` retained.
+  - [x] `advance-decision-to-refuse-treatment` (`592c0963` + `460bf358`).
+    Per-treatment subgroups, life-sustaining subgroup.
+  - [x] `advance-statement-about-care` (`592c0963` + `e8b0e905`).
+    People list editor.
+  - [x] `issue-tracker` (`cfbaf235`). Small (151 LOC) inline-HTML
+    wizard; single-page progress, no step-list needed.
+  - [-] `arc42` — **N/A**. Dir-only, no front-end-form-with-html implementation.
+  - [-] `international-certificate-of-vaccination-or-prophylaxis` — **N/A**.
+  - [-] `objectives-and-key-results-tracker` — **N/A**.
 - [ ] **3.12  Reconcile.** Run `bin/forms-as-kebab-case` and confirm every
   slug appears in exactly one batch above. *Acceptance:* zero forms
   unaccounted for.
