@@ -271,6 +271,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -316,6 +317,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
 
     // Per-spec emphasis: triage RED gets red row background; dead-on-arrival
     // gets a heavy black border around every cell.
@@ -327,27 +329,27 @@ function renderTableBody() {
     }
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.dateOfBirth)}</td>
-      <td>${esc(row.sex)}</td>
-      <td class="cell-injury">${esc(row.injuryLocation)}</td>
-      <td><span class="badge ${triageClass(row.triageCategory)}">${esc(formatTriage(row.triageCategory))}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(row.dateOfBirth)}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td cell-injury">${esc(row.injuryLocation)}</td>
+      <td class="data-table-td"><span class="badge ${triageClass(row.triageCategory)}">${esc(formatTriage(row.triageCategory))}</span></td>
+      <td class="data-table-td">
         <span class="badge ${row.deadOnArrival ? 'doa-yes' : 'doa-no'}">
           ${row.deadOnArrival ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="badge ${mechanismClass(row.mechanism)}">${esc(formatMechanism(row.mechanism))}</span></td>
-      <td class="cell-numeric">${esc(formatGcs(row.gcsTotal))}</td>
-      <td>
+      <td class="data-table-td"><span class="badge ${mechanismClass(row.mechanism)}">${esc(formatMechanism(row.mechanism))}</span></td>
+      <td class="data-table-td cell-numeric">${esc(formatGcs(row.gcsTotal))}</td>
+      <td class="data-table-td">
         <span class="badge ${row.fastPositive ? 'fast-yes' : 'fast-no'}">
           ${row.fastPositive ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="badge ${dispositionClass(row.disposition)}">${esc(formatDisposition(row.disposition))}</span></td>
-      <td class="cell-numeric">${esc(String(row.urgentFlagCount))}</td>
-      <td>${esc(row.providerName)}</td>
-      <td>${esc(formatDispositionAt(row.dispositionAt))}</td>
+      <td class="data-table-td"><span class="badge ${dispositionClass(row.disposition)}">${esc(formatDisposition(row.disposition))}</span></td>
+      <td class="data-table-td cell-numeric">${esc(String(row.urgentFlagCount))}</td>
+      <td class="data-table-td">${esc(row.providerName)}</td>
+      <td class="data-table-td">${esc(formatDispositionAt(row.dispositionAt))}</td>
     `;
     body.appendChild(tr);
   }

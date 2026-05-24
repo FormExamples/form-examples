@@ -1,18 +1,34 @@
 // WHO Emergency Unit Form: Trauma — patient/clinician wizard (vanilla
 // JS, classic <script>). Single-page continuous wizard: every section
-// is rendered into the page in document order. Conditional rules
-// (time of death only when dead-on-arrival; spine stabilisation /
-// GCS only for RED triage; road-traffic mechanism details only when
-// RTI is ticked; with-life-vest only when drowning; FAST side
-// indicator only for matching chest finding; admit ward / transfer
-// destination / cause of death by disposition) are gated by the
-// validator's applies() so the report only counts a rule when its
-// branch is active. Submission runs the pure validator + flagged-
-// issues engine and renders an inline report. State is persisted to
-// localStorage so a partial fill survives a page reload.
+// is rendered into the page in document order. Conditional rules (time
+// of death only when dead-on-arrival; spine stabilisation / GCS only
+// for RED triage; road-traffic mechanism details only when RTI is
+// ticked; with-life-vest only when drowning; FAST side indicator only
+// for matching chest finding; admit ward / transfer destination /
+// cause of death by disposition) are gated by the validator's
+// applies() so the report only counts a rule when its branch is
+// active. Submission runs the pure validator + flagged-issues engine
+// and renders an inline report. State is persisted to localStorage so
+// a partial fill survives a page reload.
+//
+// Structural Lily Design System HTML headless refactor (commit 5fffc50d
+// proven the pattern via who-surgical-safety-checklist). Builders emit
+// Lily classes via lilyInputClass(type); every field has an
+// .error-message + aria-describedby; radioGroup uses fieldset.field +
+// legend.label + div.radio-group[role=radiogroup]; sectionCard uses
+// fieldset.fieldset + legend.fieldset-legend. Native <progress
+// class="progress"> drives completion; <ol id="step-list"
+// class="step-list" data-current> renders a table-of-contents with
+// per-section status. validateForm/renderErrorSummary/setFieldError/
+// clearFieldError gate Submit on required fields.
+//
+// The whole file is wrapped in an IIFE so its locals do not leak to
+// the global scope.
 
 (function () {
 'use strict';
+
+const NS = window.WhoEmergencyUnitTraumaForm;
 const {
   emptyAssessment,
   hasNumber,
@@ -20,7 +36,7 @@ const {
   priorityLabel,
   validateEuTrauma,
   detectFlaggedIssues
-} = window.WhoEmergencyUnitTraumaForm;
+} = NS;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -28,6 +44,8 @@ const {
 
 const STORAGE_KEY =
   'who-emergency-unit-trauma-form.front-end-form-with-html.v1';
+
+const TOTAL_STEPS = 17;
 
 /** Deep-merge persisted state over a fresh empty assessment. */
 function mergeDeep(target, source) {
@@ -45,7 +63,6 @@ function mergeDeep(target, source) {
     ) {
       mergeDeep(t, s);
     } else if (Array.isArray(t) && Array.isArray(s)) {
-      // Arrays: replace items in place up to target length, deep-merging objects.
       for (let i = 0; i < t.length; i++) {
         if (s[i] !== undefined) {
           if (
@@ -132,6 +149,18 @@ function setPath(path, value) {
   updateProgress();
 }
 
+/** Set a dotted path on state without re-rendering (for input events). */
+function setPathSilent(path, value) {
+  const parts = path.split('.');
+  let cur = state;
+  for (let i = 0; i < parts.length - 1; i++) {
+    cur = cur[parts[i]];
+  }
+  cur[parts[parts.length - 1]] = value;
+  saveState();
+  updateProgress();
+}
+
 /** Escape user-entered text for safe rendering. */
 function esc(s) {
   return String(s == null ? '' : s)
@@ -142,136 +171,180 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+/** Generate a safe DOM id from a dotted state path. */
+function idFromPath(path) {
+  return 'f-' + path.replace(/\./g, '-');
+}
+
 // ----------------------------------------------------------------------
-// Field component builders
+// Component builders (Lily HTML headless contract)
 // ----------------------------------------------------------------------
 
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':           return 'email-input';
+    case 'number':          return 'number-input';
+    case 'date':            return 'date-input';
+    case 'time':            return 'time-input';
+    case 'datetime-local':  return 'datetime-input';
+    case 'tel':             return 'tel-input';
+    case 'url':             return 'url-input';
+    case 'search':          return 'search-input';
+    default:                return 'text-input';
+  }
+}
+
 function textInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = idFromPath(opts.path);
   const value = getPath(opts.path) == null ? '' : getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="${type}" class="text-input"
-      value="${esc(value)}"${placeholderAttr}${opts.required ? ' required' : ''}>
+    <label class="label" for="${id}">${labelText}</label>
+    <input id="${id}" name="${id}" type="${type}" class="${lilyInputClass(type)}"
+      value="${esc(value)}"${placeholderAttr}${requiredAttr}
+      aria-describedby="${id}-error">
+    <span class="error-message" id="${id}-error"></span>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
-    cur[parts[parts.length - 1]] = input.value;
-    saveState();
-    updateProgress();
+    setPathSilent(opts.path, input.value);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 function numberInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = idFromPath(opts.path);
   const raw = getPath(opts.path);
   const value = hasNumber(raw) ? String(raw) : '';
   const labelText =
     esc(opts.label) +
     (opts.unit ? ` <span class="unit">${esc(opts.unit)}</span>` : '') +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const minAttr = opts.min !== undefined ? ` min="${opts.min}"` : '';
   const maxAttr = opts.max !== undefined ? ` max="${opts.max}"` : '';
   const stepAttr = opts.step !== undefined ? ` step="${opts.step}"` : '';
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="number" class="text-input"
-      value="${esc(value)}"${minAttr}${maxAttr}${stepAttr} inputmode="decimal">
+    <label class="label" for="${id}">${labelText}</label>
+    <input id="${id}" name="${id}" type="number" class="number-input"
+      value="${esc(value)}"${minAttr}${maxAttr}${stepAttr} inputmode="decimal"${requiredAttr}
+      aria-describedby="${id}-error">
+    <span class="error-message" id="${id}-error"></span>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
     const txt = input.value.trim();
+    let v;
     if (txt === '') {
-      cur[parts[parts.length - 1]] = null;
+      v = null;
     } else {
       const n = Number(txt);
-      cur[parts[parts.length - 1]] = Number.isFinite(n) ? n : null;
+      v = Number.isFinite(n) ? n : null;
     }
-    saveState();
-    updateProgress();
+    setPathSilent(opts.path, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 function textArea(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = idFromPath(opts.path);
   const value = getPath(opts.path) == null ? '' : getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
+      class="text-area-input"${placeholderAttr}${requiredAttr}
+      aria-describedby="${id}-error">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
-    cur[parts[parts.length - 1]] = ta.value;
-    saveState();
-    updateProgress();
+    setPathSilent(opts.path, ta.value);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 function radioGroup(opts) {
-  const groupId = `f-${opts.path.replace(/\./g, '-')}`;
+  const groupId = idFromPath(opts.path);
   const current = getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
   legend.innerHTML = labelText;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const lab = document.createElement('label');
-    lab.className = 'radio-option';
     lab.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
+    const reqAttr = opts.required ? ' data-required' : '';
     lab.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}${reqAttr}>
       <span>${esc(option.label)}</span>
     `;
     const input = lab.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setPath(opts.path, option.value);
+      if (input.checked) {
+        setPath(opts.path, option.value);
+        clearFieldError(groupId);
+      }
     });
     list.appendChild(lab);
   }
   wrapper.appendChild(list);
+
+  // Make the first radio carry the group id so error summary anchor works.
+  const firstInput = list.querySelector('input');
+  if (firstInput) firstInput.setAttribute('id', `${groupId}-${opts.options[0].value}`);
+  // Anchor target for error summary links.
+  const anchor = document.createElement('span');
+  anchor.id = groupId;
+  anchor.hidden = true;
+  wrapper.insertBefore(anchor, legend);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
 function selectInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = idFromPath(opts.path);
   const current = getPath(opts.path) == null ? '' : getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const optionHtml = ['<option value="">— Select —</option>']
@@ -280,24 +353,31 @@ function selectInput(opts) {
       return `<option value="${esc(o.value)}"${sel}>${esc(o.label)}</option>`;
     }))
     .join('');
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <select id="${id}" name="${id}" class="select">${optionHtml}</select>
+    <label class="label" for="${id}">${labelText}</label>
+    <select id="${id}" name="${id}" class="select"${requiredAttr}
+      aria-describedby="${id}-error">${optionHtml}</select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setPath(opts.path, sel.value));
+  sel.addEventListener('change', () => {
+    setPath(opts.path, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
 function checkbox(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = idFromPath(opts.path);
   const checked = !!getPath(opts.path);
-  const wrapper = document.createElement('label');
-  wrapper.className = 'checkbox-field';
-  wrapper.htmlFor = id;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field checkbox-field';
   wrapper.innerHTML = `
-    <input type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
-    <span>${esc(opts.label)}</span>
+    <label class="label" for="${id}">
+      <input class="checkbox-input" type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
+      <span>${esc(opts.label)}</span>
+    </label>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('change', () => {
@@ -307,20 +387,21 @@ function checkbox(opts) {
 }
 
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 17</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <span class="section-title">${esc(opts.title)}</span>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -340,21 +421,21 @@ function fourCol(...children) {
 
 function subsectionTitle(text) {
   const h = document.createElement('h3');
-  h.className = 'subsection-title';
+  h.className = 'subsection-heading';
   h.textContent = text;
   return h;
 }
 
 function smallHeader(text) {
   const h = document.createElement('h4');
-  h.style.margin = '0.75rem 0 0.5rem';
-  h.style.fontSize = '0.9375rem';
-  h.style.fontWeight = '600';
+  h.className = 'inset-block-heading';
   h.textContent = text;
   return h;
 }
 
-// Shared option lists ------------------------------------------------------
+// ----------------------------------------------------------------------
+// Shared option lists
+// ----------------------------------------------------------------------
 
 const SEX_OPTIONS = [
   { value: 'male', label: 'Male' },
@@ -884,8 +965,9 @@ function renderStep4() {
   ));
 
   if (state.triage.category === 'red') {
-    const note = document.createElement('p');
-    note.className = 'info-note';
+    const note = document.createElement('div');
+    note.className = 'alert';
+    note.setAttribute('data-type', 'info');
     note.textContent = 'RED triage selected — spine stabilization status (Airway step) and a GCS total or "Qualified GCS" tick (Disability step) are required.';
     card.appendChild(note);
   }
@@ -1350,6 +1432,7 @@ function renderStep12() {
     const block = document.createElement('div');
     block.className = 'inset-block';
     const h = document.createElement('h4');
+    h.className = 'inset-block-heading';
     h.textContent = sys.label;
     block.appendChild(h);
     block.appendChild(checkbox({
@@ -1617,7 +1700,94 @@ function renderStep17() {
 }
 
 // ----------------------------------------------------------------------
-// Progress
+// Step definitions & renderers
+// ----------------------------------------------------------------------
+
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4,
+  renderStep5, renderStep6, renderStep7, renderStep8,
+  renderStep9, renderStep10, renderStep11, renderStep12,
+  renderStep13, renderStep14, renderStep15, renderStep16,
+  renderStep17
+];
+
+const STEP_DEFINITIONS = [
+  { step: 1,  section: 'patientRegistration',      title: 'Patient Registration' },
+  { step: 2,  section: 'chiefComplaintAndVitals',  title: 'Chief Complaint & Vitals' },
+  { step: 3,  section: 'highRiskSigns',            title: 'High Risk Signs' },
+  { step: 4,  section: 'triage',                   title: 'Triage' },
+  { step: 5,  section: 'airway',                   title: 'Airway (A)' },
+  { step: 6,  section: 'breathing',                title: 'Breathing (B)' },
+  { step: 7,  section: 'circulation',              title: 'Circulation (C)' },
+  { step: 8,  section: 'disability',               title: 'Disability (D)' },
+  { step: 9,  section: 'exposureAndFast',          title: 'Exposure (E) & FAST (F)' },
+  { step: 10, section: 'injuryHistory',            title: 'Injury History' },
+  { step: 11, section: 'pastHistories',            title: 'Past Histories' },
+  { step: 12, section: 'physicalExam',             title: 'Physical Exam' },
+  { step: 13, section: 'assessmentAndPlan',        title: 'Assessment & Plan' },
+  { step: 14, section: 'diagnostics',              title: 'Diagnostics' },
+  { step: 15, section: 'medicationsAndProcedures', title: 'Medications & Procedures' },
+  { step: 16, section: 'reassessment',             title: 'Reassessment' },
+  { step: 17, section: 'disposition',              title: 'Disposition' }
+];
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (t > 0 && firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Progress (native <progress>.value + per-section tallies for step-list)
 // ----------------------------------------------------------------------
 
 function updateProgress() {
@@ -1625,14 +1795,114 @@ function updateProgress() {
   const total = result.totalRequired;
   const answered = result.totalSatisfied;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) {
     text.textContent = `${answered} of ${total} required fields answered (${percent}%)`;
   }
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+
+  // Per-section tallies for step-list status.
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  for (const sec of result.sections) {
+    sectionAnswered[sec.section] = sec.satisfied;
+    sectionTotal[sec.section] = sec.required;
+  }
+  // Ensure every defined step appears even if no rules apply (counts 0/0
+  // — neither waiting nor finished; treated as no-op).
+  for (const def of STEP_DEFINITIONS) {
+    if (sectionTotal[def.section] === undefined) {
+      sectionAnswered[def.section] = 0;
+      sectionTotal[def.section] = 0;
+    }
+  }
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+
+  // Group radio inputs by name to avoid reporting the same group N times.
+  const seenGroups = new Set();
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    // For radios, the group key is the input name; the anchor id is the
+    // group id (== first radio's name).
+    if (input.type === 'radio') {
+      const groupId = input.name;
+      if (seenGroups.has(groupId)) return;
+      seenGroups.add(groupId);
+      const anyChecked = form.querySelector(
+        `input[type="radio"][name="${CSS.escape(groupId)}"]:checked`
+      );
+      const legend = form.querySelector(`#${CSS.escape(groupId)}-fieldset legend`);
+      const label = legend
+        ? legend.textContent.replace(/\s*\*\s*$/, '').trim()
+        : groupId;
+      if (!anyChecked) {
+        errors.push({ id: groupId, message: `${label} is required` });
+        setFieldError(groupId, `${label} is required`);
+      } else {
+        clearFieldError(groupId);
+      }
+      return;
+    }
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${CSS.escape(id)}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) =>
+        `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ----------------------------------------------------------------------
@@ -1642,10 +1912,10 @@ function updateProgress() {
 function priorityClass(priority) {
   switch (priority) {
     case 'urgent': return 'flag-urgent';
-    case 'high': return 'flag-high';
+    case 'high':   return 'flag-high';
     case 'medium': return 'flag-medium';
-    case 'low': return 'flag-low';
-    default: return '';
+    case 'low':    return 'flag-low';
+    default:       return '';
   }
 }
 
@@ -1666,10 +1936,10 @@ function renderReport() {
           (m) => `<li>${esc(m.id)} — ${esc(m.description)}</li>`
         ).join('')}</ul>`;
     return `
-      <tr>
-        <th scope="row">${esc(sectionLabel(s.section))}</th>
-        <td>${s.satisfied} / ${s.required}</td>
-        <td>${missingItems}</td>
+      <tr class="data-table-row">
+        <th class="data-table-th" scope="row">${esc(sectionLabel(s.section))}</th>
+        <td class="data-table-td">${s.satisfied} / ${s.required}</td>
+        <td class="data-table-td">${missingItems}</td>
       </tr>
     `;
   }).join('');
@@ -1689,37 +1959,33 @@ function renderReport() {
     `;
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>WHO Emergency Unit Form: Trauma — submission report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
+    <h2>WHO Emergency Unit Form: Trauma — submission report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
 
-      <div class="completeness">
-        ${completenessBadge}
-        <span>${validation.totalSatisfied} of ${validation.totalRequired} required fields answered.</span>
-      </div>
+    <div class="completeness">
+      ${completenessBadge}
+      <span>${validation.totalSatisfied} of ${validation.totalRequired} required fields answered.</span>
+    </div>
 
-      <h3>Section completeness</h3>
-      <table class="sections-table">
-        <thead>
-          <tr>
-            <th scope="col">Section</th>
-            <th scope="col">Answered</th>
-            <th scope="col">Missing items</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${sectionRows}
-        </tbody>
-      </table>
+    <h3>Section completeness</h3>
+    <table class="data-table sections-table">
+      <thead class="data-table-head">
+        <tr class="data-table-row">
+          <th class="data-table-th" scope="col">Section</th>
+          <th class="data-table-th" scope="col">Answered</th>
+          <th class="data-table-th" scope="col">Missing items</th>
+        </tr>
+      </thead>
+      <tbody class="data-table-body">
+        ${sectionRows}
+      </tbody>
+    </table>
 
-      <h3>Flagged issues</h3>
-      ${flagsList}
+    <h3>Flagged issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1729,6 +1995,9 @@ function renderReport() {
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
+
   const validation = validateEuTrauma(state);
   const flags = detectFlaggedIssues(state);
   lastResult = {
@@ -1745,7 +2014,8 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   const out = document.getElementById('report');
-  if (out) out.innerHTML = '';
+  if (out) out.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1755,30 +2025,25 @@ function startOver() {
 // Bootstrap
 // ----------------------------------------------------------------------
 
-const RENDERERS = [
-  renderStep1, renderStep2, renderStep3, renderStep4,
-  renderStep5, renderStep6, renderStep7, renderStep8,
-  renderStep9, renderStep10, renderStep11, renderStep12,
-  renderStep13, renderStep14, renderStep15, renderStep16,
-  renderStep17
-];
-
 function renderForm() {
   const host = document.getElementById('form-sections');
   if (!host) return;
   // Preserve scroll position across re-renders triggered by setPath().
   const scrollY = window.scrollY;
   host.innerHTML = '';
-  for (const r of RENDERERS) host.appendChild(r());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
   window.scrollTo({ top: scrollY });
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
 
-  document.getElementById('submit-btn').addEventListener('click', submitForm);
-  document.getElementById('reset-btn').addEventListener('click', startOver);
+  const submit = document.getElementById('submit-btn');
+  const reset = document.getElementById('reset-btn');
+  if (submit) submit.addEventListener('click', submitForm);
+  if (reset) reset.addEventListener('click', startOver);
 }
 
 if (document.readyState === 'loading') {
@@ -1786,4 +2051,10 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// Expose a small public surface for debugging in the browser console.
+Object.assign(window.WhoEmergencyUnitTraumaForm, {
+  _getState: () => state,
+  _submitForm: submitForm
+});
 })();
