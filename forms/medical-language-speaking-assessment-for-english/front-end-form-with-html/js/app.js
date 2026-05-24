@@ -3,11 +3,11 @@
 //
 // Single-page continuous wizard: every section is rendered into the page in
 // document order. The examiner scrolls through them; a sticky top-of-page
-// progress summary reflects how many fields have been answered. Submission
-// runs the pure OET scoring engine and renders an inline report with grade
-// badge, scaled-score breakdown, per-criterion table, and flagged-issues
-// list. State is persisted to localStorage so a partial fill survives a
-// page reload.
+// progress summary and a step-list table-of-contents reflect how many
+// fields have been answered. Submission runs the pure OET scoring engine
+// and renders an inline report with grade badge, scaled-score breakdown,
+// per-criterion table, and flagged-issues list. State is persisted to
+// localStorage so a partial fill survives a page reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.MedicalLanguageSpeakingAssessmentForEnglish`. Pulling
@@ -113,8 +113,21 @@ function esc(s) {
 }
 
 // ----------------------------------------------------------------------
-// Component builders
+// Component builders (Lily class contracts)
 // ----------------------------------------------------------------------
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
 
 /**
  * Build a labelled text input.
@@ -132,11 +145,12 @@ function textInput(opts) {
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
-    `value="${esc(value ?? '')}"`
+    `class="${lilyInputClass(type)}"`,
+    `value="${esc(value ?? '')}"`,
+    `aria-describedby="${id}-error"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  if (opts.required) attrs.push('required', 'data-required');
   if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
   if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
   if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
@@ -144,8 +158,9 @@ function textInput(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
@@ -155,6 +170,7 @@ function textInput(opts) {
       v = v === '' ? null : Number(v);
     }
     setField(opts.section, opts.field, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
@@ -170,14 +186,19 @@ function textArea(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
+    <label class="label" for="${id}">${esc(opts.label)}</label>
     ${opts.hint ? `<p class="hint">${esc(opts.hint)}</p>` : ''}
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
+      aria-describedby="${id}-error"
       class="text-area-input">${esc(value)}</textarea>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+  ta.addEventListener('input', () => {
+    setField(opts.section, opts.field, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
@@ -200,13 +221,17 @@ function selectInput(opts) {
   ].join('');
 
   wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select">
+    <label class="label" for="${id}">${esc(opts.label)}</label>
+    <select id="${id}" name="${id}" class="select" aria-describedby="${id}-error">
       ${optionsHtml}
     </select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  sel.addEventListener('change', () => {
+    setField(opts.section, opts.field, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
@@ -219,36 +244,49 @@ function radioGroup(opts) {
   const groupId = `${opts.section}-${opts.field}`;
   const current = state[opts.section][opts.field];
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
   legend.textContent = opts.label;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const label = document.createElement('label');
-    label.className = 'radio-option';
     label.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
     label.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
       <span>${esc(option.label)}</span>
     `;
     const input = label.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, option.value);
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
     });
     list.appendChild(label);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
 /**
- * Compact 0..N rating-chip group used for criterion ratings.
+ * Compact 0..N rating-chip group used for criterion ratings. Built as a
+ * Lily-compatible radio-group internally — chip styling is layered on top
+ * via the `.rating-chips` modifier class.
  *
  * @param {{ section: string, field: string,
  *           anchors: { value: number, label: string, description: string }[],
@@ -257,7 +295,7 @@ function radioGroup(opts) {
 function ratingChips(opts) {
   const current = state[opts.section][opts.field];
   const wrapper = document.createElement('div');
-  wrapper.className = 'rating-chips';
+  wrapper.className = 'radio-group rating-chips';
   wrapper.setAttribute('role', 'radiogroup');
   wrapper.setAttribute('aria-label', opts.ariaLabel);
 
@@ -269,7 +307,7 @@ function ratingChips(opts) {
     label.htmlFor = radioId;
     label.title = `${a.label} — ${a.description}`;
     label.innerHTML = `
-      <input type="radio" id="${radioId}" name="${opts.groupName}" value="${a.value}"${isChecked ? ' checked' : ''}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${opts.groupName}" value="${a.value}"${isChecked ? ' checked' : ''}>
       <span class="chip-value">${a.value}</span>
     `;
     const input = label.querySelector('input');
@@ -282,24 +320,26 @@ function ratingChips(opts) {
 }
 
 /**
- * Build a section card.
+ * Build a section card as a Lily `<fieldset class="fieldset">` with a
+ * `<legend class="fieldset-legend">`.
  * @param {{ stepNumber: number, title: string, description?: string }} opts
  */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Step ${opts.stepNumber} of ${TOTAL_STEPS}</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Step ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -564,8 +604,25 @@ function renderStep5() {
 }
 
 // ----------------------------------------------------------------------
-// Progress
+// Progress + step list
 // ----------------------------------------------------------------------
+
+/**
+ * The five-step table-of-contents shown above the form. Each entry maps to
+ * the section keys used in `TRACKED_FIELDS` so per-step completion status
+ * can be computed by aggregating answered fields per section.
+ *
+ * The linguistic-criteria step rolls two `linguisticRolePlay*` sections
+ * into a single visual step; the clinical-indicators step aggregates the
+ * single `clinicalIndicators` section.
+ */
+const STEP_DEFINITIONS = [
+  { step: 1, sections: ['candidate'],                                      title: 'Candidate' },
+  { step: 2, sections: ['rolePlay1'],                                      title: 'Role-play 1' },
+  { step: 3, sections: ['rolePlay2'],                                      title: 'Role-play 2' },
+  { step: 4, sections: ['linguisticRolePlay1', 'linguisticRolePlay2'],     title: 'Linguistic' },
+  { step: 5, sections: ['clinicalIndicators'],                             title: 'Clinical + Grade' }
+];
 
 /**
  * Build the list of tracked fields for progress accounting. Includes
@@ -613,17 +670,134 @@ function isAnswered(v) {
 
 function updateProgress() {
   let answered = 0;
+  const sectionAnswered = {};
+  const sectionTotal = {};
   for (const [section, field] of TRACKED_FIELDS) {
-    if (isAnswered(state[section]?.[field])) answered++;
+    sectionTotal[section] = (sectionTotal[section] || 0) + 1;
+    if (isAnswered(state[section]?.[field])) {
+      answered++;
+      sectionAnswered[section] = (sectionAnswered[section] || 0) + 1;
+    }
   }
   const total = TRACKED_FIELDS.length;
   const percent = Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    let a = 0;
+    let t = 0;
+    for (const s of def.sections) {
+      a += sectionAnswered[s] || 0;
+      t += sectionTotal[s] || 0;
+    }
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation + error summary
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim() : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
 }
 
 // ----------------------------------------------------------------------
@@ -773,6 +947,8 @@ function renderReport() {
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   const grading = gradeOET(state);
   const additionalFlags = detectAdditionalFlags(state, grading);
   lastResult = {
@@ -788,7 +964,9 @@ function startOver() {
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  document.getElementById('report').innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -809,6 +987,7 @@ function renderForm() {
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
 

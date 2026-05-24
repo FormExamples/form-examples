@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#candidates-table">Skip to candidates table</a>
+  <a class="skip-link visually-hidden" href="#candidates-table">Skip to candidates table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Candidate ID or candidate name..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-grade">Grade</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-grade">Grade</label>
           <select id="filter-grade" class="select">
             <option value="">All grades</option>
             <option value="A">A</option>
@@ -62,8 +62,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-profession">Profession</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-profession">Profession</label>
           <select id="filter-profession" class="select">
             <option value="">All professions</option>
             <option value="Doctor">Doctor</option>
@@ -74,16 +74,16 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-examiner">Examiner</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-examiner">Examiner</label>
           <select id="filter-examiner" class="select">
             <option value="">All examiners</option>
             <!-- Options populated by app.js from candidate data -->
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-registration">Registration Outcome</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-registration">Registration Outcome</label>
           <select id="filter-registration" class="select">
             <option value="">All outcomes</option>
             <option value="Eligible">Eligible</option>
@@ -96,7 +96,8 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="button" data-variant="secondary"
+            class="button"
+            data-variant="secondary"
             hidden
           >
             Clear filters
@@ -117,13 +118,13 @@
       <h2 id="candidates-table-heading" class="visually-hidden">Candidates</h2>
 
       <div class="table-scroll">
-        <table id="candidates-table" class="candidates-table">
-          <thead>
-            <tr id="candidates-table-head">
+        <table id="candidates-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="candidates-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="candidates-table-body">
+          <tbody id="candidates-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
