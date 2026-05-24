@@ -10,6 +10,9 @@ const form = document.getElementById('issue-form');
 const reportEl = document.getElementById('report');
 const reportBodyEl = document.getElementById('report-body');
 const gradeButton = document.getElementById('grade-button');
+const progressEl = document.getElementById('progress');
+const progressTextEl = document.getElementById('progress-text');
+const errorSummary = document.getElementById('error-summary');
 
 const NUMERIC_FIELDS = new Set([
 	'ptAffectedUsersCount',
@@ -137,15 +140,45 @@ function renderReport(data, result) {
 	reportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function updateProgress() {
+	const inputs = form.querySelectorAll('input, select, textarea');
+	let answered = 0;
+	let total = 0;
+	inputs.forEach((el) => {
+		if (el.type === 'reset' || el.type === 'submit' || el.type === 'button') return;
+		total++;
+		const v = (el.value ?? '').toString().trim();
+		if (v !== '') answered++;
+	});
+	const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
+	if (progressEl) progressEl.value = percent;
+	if (progressTextEl) progressTextEl.textContent =
+		`${answered} of ${total} fields answered (${percent}%)`;
+}
+
+form.addEventListener('input', updateProgress);
+form.addEventListener('change', updateProgress);
+
 gradeButton.addEventListener('click', () => {
 	const data = readFormData();
 	const result = gradeIssue(data);
 	renderReport(data, result);
+	if (errorSummary) {
+		errorSummary.hidden = true;
+		errorSummary.innerHTML = '';
+	}
 });
 
 form.addEventListener('reset', () => {
 	reportEl.hidden = true;
 	reportBodyEl.innerHTML = '';
+	if (errorSummary) {
+		errorSummary.hidden = true;
+		errorSummary.innerHTML = '';
+	}
+	setTimeout(updateProgress, 0);
 });
+
+updateProgress();
 
 })();
