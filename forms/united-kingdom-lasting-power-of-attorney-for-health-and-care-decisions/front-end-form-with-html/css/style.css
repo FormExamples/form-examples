@@ -1,4 +1,5 @@
-/* LP1H wizard styles — vanilla CSS, no framework. */
+/* LP1H wizard styles — vanilla CSS targeting the Lily Design System
+ * HTML headless class contract (see forms/AGENTS-front-end-html.md). */
 
 :root {
   --color-primary: #0369a1;
@@ -138,3 +139,266 @@ main { max-width: 80rem; margin: 0 auto; padding: 1.5rem; }
 .export-section pre { background: #0f172a; color: #e2e8f0; padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.7rem; max-height: 16rem; overflow: auto; }
 
 .page-footer { max-width: 80rem; margin: 1.5rem auto 0; padding: 1rem 1.5rem; color: var(--color-muted); font-size: 0.8rem; }
+
+/* -------------------------------------------------------------- *
+ *  Lily Design System HTML headless — class contract.
+ *  Aliases overlaying the existing .step / .field / .yesno markup
+ *  so the page conforms to the Lily contract documented in
+ *  forms/AGENTS-front-end-html.md without rewriting the imperative
+ *  `el()` builder layer.
+ * -------------------------------------------------------------- */
+
+.form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* Native .progress (replaces .progress-bar) */
+.progress {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+  border: 0;
+  background: var(--color-border);
+  border-radius: 9999px;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.progress::-webkit-progress-bar { background: var(--color-border); }
+.progress::-webkit-progress-value {
+  background: var(--color-primary);
+  transition: width 200ms ease-out;
+}
+.progress::-moz-progress-bar { background: var(--color-primary); }
+
+/* .step-list / .step-list-item */
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  counter-reset: step;
+}
+.step-list-item {
+  counter-increment: step;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  user-select: none;
+}
+.step-list-item::before {
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 9999px;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.step-list-item[data-status="finished"] {
+  color: var(--color-ready);
+  border-color: var(--color-ready);
+  background: var(--color-ready-bg);
+}
+.step-list-item[data-status="finished"]::before {
+  background: var(--color-ready);
+  color: white;
+  content: "\2713";
+}
+.step-list-item[aria-current="step"],
+.step-list-item[data-status="in-progress"] {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  font-weight: 600;
+}
+.step-list-item[aria-current="step"]::before,
+.step-list-item[data-status="in-progress"]::before {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Lily .fieldset / .fieldset-legend (alias for existing .step / .step-header) */
+.fieldset {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  margin: 0;
+}
+.fieldset-legend {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  color: var(--color-primary-dark);
+  width: 100%;
+}
+
+/* Lily label */
+.label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+/* Lily input classes (alias to existing .field input styles) */
+.text-input,
+.text-area-input,
+.email-input,
+.number-input,
+.date-input,
+.time-input,
+.tel-input,
+.url-input,
+.search-input,
+.select {
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: white;
+  font: inherit;
+  color: var(--color-text);
+}
+.text-input:focus,
+.text-area-input:focus,
+.email-input:focus,
+.number-input:focus,
+.date-input:focus,
+.time-input:focus,
+.tel-input:focus,
+.url-input:focus,
+.search-input:focus,
+.select:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -1px;
+  border-color: var(--color-focus);
+}
+.text-area-input { min-height: 4.5rem; resize: vertical; }
+
+.text-input[aria-invalid="true"],
+.text-area-input[aria-invalid="true"],
+.email-input[aria-invalid="true"],
+.number-input[aria-invalid="true"],
+.date-input[aria-invalid="true"],
+.select[aria-invalid="true"] {
+  border-color: var(--color-invalid);
+}
+
+/* Lily .radio-group / .checkbox-group */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.radio-group > label,
+.checkbox-group > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  user-select: none;
+  font-weight: 400;
+  margin: 0;
+}
+.radio-group > label:hover,
+.checkbox-group > label:hover {
+  border-color: var(--color-primary);
+}
+.radio-input,
+.checkbox-input {
+  accent-color: var(--color-primary);
+  margin: 0;
+}
+.radio-group > label:has(.radio-input:checked),
+.checkbox-group > label:has(.checkbox-input:checked) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+/* Lily .button (alias for existing .btn / .btn-primary) */
+.button {
+  display: inline-block;
+  padding: 0.5rem 0.875rem;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.button[data-variant="primary"] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+.button[data-variant="primary"]:hover { background: var(--color-primary-dark); }
+.button[data-variant="secondary"] { background: white; color: var(--color-text); border-color: var(--color-border-strong); }
+.button[data-variant="danger"] { color: #b91c1c; border-color: #fca5a5; background: #fee2e2; }
+
+.button-group { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+
+/* Lily .error-summary / .error-message */
+.error-summary {
+  background: var(--color-invalid-bg);
+  border: 1px solid var(--color-invalid);
+  border-left-width: 4px;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin: 0 0 1rem;
+  color: var(--color-text);
+}
+.error-summary[hidden] { display: none; }
+.error-summary :is(h2, strong) { margin: 0 0 0.5rem; font-size: 1rem; color: var(--color-invalid); }
+.error-summary ul { margin: 0; padding-left: 1.25rem; }
+.error-summary a { color: var(--color-invalid); text-decoration: underline; }
+
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--color-invalid);
+}
+.error-message:empty { display: none; }
+
+/* Lily .alert */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  background: var(--color-bg);
+  margin: 0 0 0.875rem;
+}
+.alert[data-type="info"] { background: var(--color-primary-light); border-color: var(--color-primary); }
+.alert[data-type="success"] { background: var(--color-ready-bg); border-color: var(--color-ready); }
+.alert[data-type="warning"] { background: var(--color-correction-bg); border-color: var(--color-correction); }
+.alert[data-type="error"] { background: var(--color-invalid-bg); border-color: var(--color-invalid); }
+
+/* Lily .panel + .empty-message */
+.panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow-sm); }
+.panel .empty-message { margin: 0; color: var(--color-muted); font-style: italic; }
+

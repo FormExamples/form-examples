@@ -108,19 +108,42 @@ function field(labelText, inputEl, opts) {
   opts = opts || {};
   const id = inputEl.id || `f${Math.random().toString(36).slice(2, 8)}`;
   inputEl.id = id;
+  if (opts.required) {
+    inputEl.setAttribute('data-required', '');
+    inputEl.setAttribute('aria-describedby', id + '-error');
+  }
   const wrapper = el('div', { class: opts.full ? 'field field-full' : 'field' });
-  const label = el('label', { for: id }, labelText);
-  if (opts.required) label.appendChild(el('span', { class: 'required-mark' }, ' *'));
+  const labelProps = { for: id, class: 'label' };
+  if (opts.required) labelProps['data-required'] = '';
+  const label = el('label', labelProps, labelText);
+  if (opts.required) label.appendChild(el('span', { class: 'required-mark req' }, ' *'));
   wrapper.appendChild(label);
   wrapper.appendChild(inputEl);
   if (opts.hint) wrapper.appendChild(el('p', { class: 'hint' }, opts.hint));
+  wrapper.appendChild(el('span', { class: 'error-message', id: id + '-error' }));
   return wrapper;
+}
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':          return 'email-input';
+    case 'number':         return 'number-input';
+    case 'date':           return 'date-input';
+    case 'datetime-local': return 'date-input';
+    case 'time':           return 'time-input';
+    case 'tel':            return 'tel-input';
+    case 'url':            return 'url-input';
+    case 'search':         return 'search-input';
+    default:               return 'text-input';
+  }
 }
 
 function textInput(getter, setter, opts) {
   opts = opts || {};
+  const type = opts.type || 'text';
   const input = el('input', {
-    type: opts.type || 'text',
+    type,
+    class: lilyInputClass(type),
     value: getter() || '',
     placeholder: opts.placeholder || '',
   });
@@ -135,6 +158,7 @@ function numberInput(getter, setter, opts) {
   opts = opts || {};
   const input = el('input', {
     type: 'number',
+    class: 'number-input',
     value: getter() == null ? '' : String(getter()),
     min: opts.min, max: opts.max, step: opts.step,
   });
@@ -147,7 +171,7 @@ function numberInput(getter, setter, opts) {
 }
 
 function selectInput(getter, setter, options) {
-  const select = el('select');
+  const select = el('select', { class: 'select' });
   select.appendChild(el('option', { value: '' }, '— select —'));
   for (const opt of options) {
     select.appendChild(el('option', { value: opt.value }, opt.label));
@@ -161,11 +185,11 @@ function selectInput(getter, setter, options) {
 }
 
 function yesnoInput(getter, setter) {
-  const group = el('div', { class: 'yesno' });
+  const group = el('div', { class: 'radio-group', role: 'radiogroup' });
   const name = `yn${Math.random().toString(36).slice(2, 10)}`;
   for (const val of ['yes', 'no']) {
     const id = `${name}-${val}`;
-    const input = el('input', { type: 'radio', name, value: val, id });
+    const input = el('input', { class: 'radio-input', type: 'radio', name, value: val, id });
     if (getter() === val) input.checked = true;
     input.addEventListener('change', () => {
       if (input.checked) { setter(val); recompute(); }
@@ -177,7 +201,7 @@ function yesnoInput(getter, setter) {
 
 function textareaInput(getter, setter, opts) {
   opts = opts || {};
-  const ta = el('textarea', { rows: opts.rows || 3, placeholder: opts.placeholder || '' });
+  const ta = el('textarea', { class: 'text-area-input', rows: opts.rows || 3, placeholder: opts.placeholder || '' });
   ta.value = getter() || '';
   ta.addEventListener('input', () => {
     setter(ta.value);
@@ -191,18 +215,17 @@ function textareaInput(getter, setter, opts) {
 // ---------------------------------------------------------------------------
 
 function renderStep(number, lp1hSection, title, description, contentEl) {
-  return el(
-    'section',
-    { class: 'step', id: `step-${number}` },
-    el(
-      'header',
-      { class: 'step-header' },
-      el('span', { class: 'step-tag' }, `LP1H ${lp1hSection}`),
-      el('h2', { class: 'step-title' }, `Step ${number}. ${title}`),
-      el('p', { class: 'step-desc' }, description),
-    ),
-    contentEl,
+  const card = el('fieldset', { class: 'step fieldset', id: `step-${number}`, 'data-step': String(number) });
+  const legend = el(
+    'legend',
+    { class: 'step-header fieldset-legend' },
+    el('span', { class: 'step-tag' }, `LP1H ${lp1hSection}`),
+    el('h2', { class: 'step-title' }, `Step ${number}. ${title}`),
+    el('p', { class: 'step-desc' }, description),
   );
+  card.appendChild(legend);
+  card.appendChild(contentEl);
+  return card;
 }
 
 function renderStep1() {
@@ -567,12 +590,97 @@ function renderReportAside() {
     aside.appendChild(ul);
   }
 
-  const fill = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = validity.completenessScore;
   const text = document.getElementById('progress-text');
-  if (fill) fill.style.width = validity.completenessScore + '%';
   if (text) text.textContent = validity.completenessScore + '% complete';
-  const bar = document.querySelector('.progress-bar');
-  if (bar) bar.setAttribute('aria-valuenow', String(validity.completenessScore));
+  updateStepListStatuses();
+}
+
+// ---------------------------------------------------------------------------
+// Step-list
+// ---------------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1,  title: 'Donor' },
+  { step: 2,  title: 'Scope' },
+  { step: 3,  title: 'Attorneys' },
+  { step: 4,  title: 'Decisions' },
+  { step: 5,  title: 'Replacements' },
+  { step: 6,  title: 'LST' },
+  { step: 7,  title: 'Preferences' },
+  { step: 8,  title: 'Instructions' },
+  { step: 9,  title: 'Notify' },
+  { step: 10, title: 'Certifier' },
+  { step: 11, title: 'Donor sig' },
+  { step: 12, title: 'Other sigs' },
+  { step: 13, title: 'Register' },
+  { step: 14, title: 'Export' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', 'Step ' + def.step + ': ' + def.title);
+    const span = document.createElement('span');
+    span.textContent = def.title;
+    li.appendChild(span);
+    li.addEventListener('click', () => {
+      const target = document.getElementById('step-' + def.step);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  // Best-effort: use overall completeness to set step states. A finished
+  // step is one whose required inputs in document order are filled. We
+  // approximate by counting [data-required] descendants of each step
+  // element and how many have non-empty value.
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector('[data-step="' + def.step + '"]');
+    const step = document.getElementById('step-' + def.step);
+    if (!li || !step) continue;
+    const required = step.querySelectorAll('[data-required]');
+    let answered = 0;
+    required.forEach((r) => {
+      if (r.type === 'radio') {
+        if (document.querySelector('input[type="radio"][name="' + r.name + '"]:checked')) answered++;
+      } else if (r.type === 'checkbox') {
+        if (r.checked) answered++;
+      } else if (r.value && String(r.value).trim() !== '') {
+        answered++;
+      }
+    });
+    if (required.length > 0 && answered >= required.length) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (answered > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
 }
 
 // ---------------------------------------------------------------------------
@@ -587,7 +695,10 @@ function recompute() {
 function rerenderAll() {
   const root = document.getElementById('form-sections');
   if (!root) return;
+  // Preserve the error-summary div across re-renders.
+  const errorSummary = document.getElementById('error-summary');
   root.innerHTML = '';
+  if (errorSummary) root.appendChild(errorSummary);
   root.appendChild(renderStep1());
   root.appendChild(renderStep2());
   root.appendChild(renderStep3());
@@ -606,6 +717,7 @@ function rerenderAll() {
 }
 
 function boot() {
+  renderStepList();
   rerenderAll();
 }
 

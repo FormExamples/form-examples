@@ -8,18 +8,28 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to wizard</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to wizard</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Lasting Power of Attorney for Health and Welfare (LP1H)</h1>
       <p class="subtitle">Mental Capacity Act 2005 — England and Wales</p>
-      <div class="progress" role="region" aria-label="Form progress">
-        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0% complete</p>
-      </div>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0% complete</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="LP1H steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
@@ -32,12 +42,19 @@
     </div>
 
     <div class="layout">
-      <form id="form-sections" class="form-sections" autocomplete="off" novalidate onsubmit="return false;">
+      <form id="form-sections" class="form" autocomplete="off" novalidate onsubmit="return false;" aria-label="LP1H form">
+        <div
+          id="error-summary"
+          class="error-summary"
+          role="alert"
+          aria-label="Validation errors"
+          hidden
+        ></div>
         <!-- Sections rendered by js/app.js -->
       </form>
 
-      <aside id="report-aside" class="report-aside" aria-live="polite">
-        <!-- Validity summary rendered by js/app.js -->
+      <aside id="report-aside" class="report-aside panel" role="region" aria-live="polite" aria-label="Validity report">
+        <p class="empty-message">Validity will appear here as you complete the form.</p>
       </aside>
     </div>
 
