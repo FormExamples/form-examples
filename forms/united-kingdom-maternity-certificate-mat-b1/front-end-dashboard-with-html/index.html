@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-certificate-type">Certificate Type</label>
-          <select id="filter-certificate-type" class="select-input">
+          <select id="filter-certificate-type" class="select">
             <option value="">All certificate types</option>
             <option value="pre">Pre-confinement (Part A)</option>
             <option value="post">Post-confinement (Part B)</option>
@@ -60,7 +60,7 @@
 
         <div class="filter-field">
           <label for="filter-issuer-type">Issuer Type</label>
-          <select id="filter-issuer-type" class="select-input">
+          <select id="filter-issuer-type" class="select">
             <option value="">All issuers</option>
             <option value="doctor">Doctor</option>
             <option value="midwife">Midwife</option>
@@ -69,7 +69,7 @@
 
         <div class="filter-field">
           <label for="filter-duplicate">Duplicate</label>
-          <select id="filter-duplicate" class="select-input">
+          <select id="filter-duplicate" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -80,7 +80,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

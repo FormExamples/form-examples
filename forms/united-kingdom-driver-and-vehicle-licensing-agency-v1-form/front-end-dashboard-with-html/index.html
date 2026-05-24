@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-monocular">Monocular Vision</label>
-          <select id="filter-monocular" class="select-input">
+          <select id="filter-monocular" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -60,7 +60,7 @@
 
         <div class="filter-field">
           <label for="filter-glaucoma">Glaucoma Declared</label>
-          <select id="filter-glaucoma" class="select-input">
+          <select id="filter-glaucoma" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -69,7 +69,7 @@
 
         <div class="filter-field">
           <label for="filter-diplopia">Diplopia Declared</label>
-          <select id="filter-diplopia" class="select-input">
+          <select id="filter-diplopia" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -78,7 +78,7 @@
 
         <div class="filter-field">
           <label for="filter-completeness">Completeness</label>
-          <select id="filter-completeness" class="select-input">
+          <select id="filter-completeness" class="select">
             <option value="">All</option>
             <option value="complete">Complete (100%)</option>
             <option value="partial">Partial (&lt;100%)</option>
@@ -89,7 +89,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

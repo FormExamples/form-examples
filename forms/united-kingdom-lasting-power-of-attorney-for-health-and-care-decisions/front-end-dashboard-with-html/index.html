@@ -21,7 +21,7 @@
   </header>
 
   <main>
-    <div id="status-banner" class="status-banner" role="status" aria-live="polite" hidden></div>
+    <div id="status-banner" class="alert" data-type="warning" role="status" aria-live="polite" hidden></div>
 
     <section class="filter-bar" aria-labelledby="filter-bar-heading">
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
@@ -40,7 +40,7 @@
 
         <div class="filter-field">
           <label for="filter-status">Validity</label>
-          <select id="filter-status" class="select-input">
+          <select id="filter-status" class="select">
             <option value="">All</option>
             <option value="ready-to-register">Ready to register</option>
             <option value="needs-correction">Needs correction</option>
@@ -50,7 +50,7 @@
 
         <div class="filter-field">
           <label for="filter-stage">Stage</label>
-          <select id="filter-stage" class="select-input">
+          <select id="filter-stage" class="select">
             <option value="">All</option>
             <option value="draft">Draft</option>
             <option value="awaiting-signatures">Awaiting signatures</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-jurisdiction">Jurisdiction</label>
-          <select id="filter-jurisdiction" class="select-input">
+          <select id="filter-jurisdiction" class="select">
             <option value="">All</option>
             <option value="england">England</option>
             <option value="wales">Wales</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-decision">Decision rule</label>
-          <select id="filter-decision" class="select-input">
+          <select id="filter-decision" class="select">
             <option value="">All</option>
             <option value="jointly">Jointly</option>
             <option value="jointly-and-severally">Jointly &amp; severally</option>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="filter-field filter-field-actions">
-          <button type="button" id="filter-clear-btn" class="btn btn-secondary" hidden>
+          <button type="button" id="filter-clear-btn" class="button" data-variant="secondary" hidden>
             Clear filters
           </button>
         </div>

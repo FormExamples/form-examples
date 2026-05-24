@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back. -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -101,7 +101,7 @@
 
         <div class="filter-field">
           <label for="filter-recommendation">Recommendation</label>
-          <select id="filter-recommendation" class="select-input">
+          <select id="filter-recommendation" class="select">
             <option value="">All recommendations</option>
             <option value="standard">Standard</option>
             <option value="refer_occupational_health">Refer to occupational health</option>
@@ -113,7 +113,7 @@
 
         <div class="filter-field">
           <label for="filter-fitness">Fitness category</label>
-          <select id="filter-fitness" class="select-input">
+          <select id="filter-fitness" class="select">
             <option value="">All categories</option>
             <option value="may_be_fit">May be fit</option>
             <option value="not_fit">Not fit</option>
@@ -122,7 +122,7 @@
 
         <div class="filter-field">
           <label for="filter-profession">Issuer profession</label>
-          <select id="filter-profession" class="select-input">
+          <select id="filter-profession" class="select">
             <option value="">All professions</option>
             <option value="doctor">Doctor</option>
             <option value="nurse">Nurse</option>
@@ -136,7 +136,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
