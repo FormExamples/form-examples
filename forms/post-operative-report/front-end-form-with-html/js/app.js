@@ -167,7 +167,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -189,7 +189,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -292,7 +292,7 @@ function teamMemberEditor() {
             <span>Grade</span>
             <input type="text" class="text-input" data-key="grade" value="${esc(row.grade)}" placeholder="e.g. ST6, Consultant">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove team member">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove team member">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -312,7 +312,8 @@ function teamMemberEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add team member';
     addBtn.addEventListener('click', () => {
       rows.push({ name: '', role: '', grade: '' });
@@ -357,7 +358,7 @@ function specimenEditor() {
             <span>Disposition</span>
             <input type="text" class="text-input" data-key="disposition" value="${esc(row.disposition)}" placeholder="e.g. Histology in formalin">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove specimen">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove specimen">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -377,7 +378,8 @@ function specimenEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add specimen';
     addBtn.addEventListener('click', () => {
       rows.push({ description: '', site: '', disposition: '' });
@@ -426,7 +428,7 @@ function implantEditor() {
             <span>Site</span>
             <input type="text" class="text-input" data-key="site" value="${esc(row.site)}" placeholder="e.g. Right hip">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove implant">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove implant">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -446,7 +448,8 @@ function implantEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add implant';
     addBtn.addEventListener('click', () => {
       rows.push({ description: '', manufacturer: '', lotNumber: '', site: '' });
@@ -496,7 +499,7 @@ function complicationEditor() {
           </label>
           <label class="list-cell">
             <span>Clavien-Dindo grade</span>
-            <select class="select-input" data-key="grade">${gradeOptionsHtml}</select>
+            <select class="select" data-key="grade">${gradeOptionsHtml}</select>
           </label>
           <label class="list-cell">
             <span>Intervention</span>
@@ -506,7 +509,7 @@ function complicationEditor() {
             <span>Timing</span>
             <input type="text" class="text-input" data-key="timing" value="${esc(row.timing)}" placeholder="e.g. POD 2">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove complication">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove complication">&times;</button>
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
@@ -531,7 +534,8 @@ function complicationEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add complication';
     addBtn.addEventListener('click', () => {
       rows.push({ description: '', grade: '', interventionRequired: '', timing: '' });
@@ -1366,7 +1370,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

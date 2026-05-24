@@ -159,7 +159,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -181,7 +181,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -274,7 +274,7 @@ function diagnosisListEditor() {
         <div class="list-grid diagnosis-grid">
           <label class="list-cell">
             <span>Type</span>
-            <select class="select-input" data-key="type">
+            <select class="select" data-key="type">
               <option value="">— Select —</option>
               <option value="primary"${row.type === 'primary' ? ' selected' : ''}>Primary</option>
               <option value="secondary"${row.type === 'secondary' ? ' selected' : ''}>Secondary</option>
@@ -291,7 +291,7 @@ function diagnosisListEditor() {
             <input type="text" class="text-input" data-key="icd10"
                    value="${esc(row.icd10)}" placeholder="e.g. J18.9">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove diagnosis">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove diagnosis">&times;</button>
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
@@ -313,7 +313,8 @@ function diagnosisListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add diagnosis';
     addBtn.addEventListener('click', () => {
       rows.push({ description: '', icd10: '', type: '' });
@@ -366,7 +367,7 @@ function procedureListEditor() {
             <input type="text" class="text-input" data-key="performedBy"
                    value="${esc(row.performedBy)}" placeholder="Clinician">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove procedure">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove procedure">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -386,7 +387,8 @@ function procedureListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add procedure';
     addBtn.addEventListener('click', () => {
       rows.push({ description: '', opcs4: '', date: '', performedBy: '' });
@@ -446,7 +448,7 @@ function medicationListEditor() {
           </label>
           <label class="list-cell">
             <span>Status</span>
-            <select class="select-input" data-key="status">
+            <select class="select" data-key="status">
               <option value="">— Select —</option>
               <option value="new"${row.status === 'new' ? ' selected' : ''}>New</option>
               <option value="changed"${row.status === 'changed' ? ' selected' : ''}>Changed</option>
@@ -459,7 +461,7 @@ function medicationListEditor() {
             <input type="text" class="text-input" data-key="indication"
                    value="${esc(row.indication)}" placeholder="e.g. Pneumonia">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove medication">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove medication">&times;</button>
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
@@ -481,7 +483,8 @@ function medicationListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add medication';
     addBtn.addEventListener('click', () => {
       rows.push({
@@ -537,7 +540,7 @@ function appointmentListEditor() {
             <input type="text" class="text-input" data-key="purpose"
                    value="${esc(row.purpose)}" placeholder="e.g. Review CXR">
           </label>
-          <button type="button" class="btn btn-icon" aria-label="Remove appointment">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove appointment">&times;</button>
         </div>
       `;
       r.querySelectorAll('input').forEach((inp) => {
@@ -557,7 +560,8 @@ function appointmentListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add follow-up appointment';
     addBtn.addEventListener('click', () => {
       rows.push({ provider: '', date: '', location: '', purpose: '' });
@@ -592,7 +596,7 @@ function redFlagListEditor() {
         <input type="text" class="text-input"
                value="${esc(value)}"
                placeholder="e.g. Worsening shortness of breath">
-        <button type="button" class="btn btn-icon" aria-label="Remove red-flag symptom">&times;</button>
+        <button type="button" class="button" data-variant="icon" aria-label="Remove red-flag symptom">&times;</button>
       `;
       const inp = r.querySelector('input');
       inp.addEventListener('input', () => {
@@ -610,7 +614,8 @@ function redFlagListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add red-flag symptom';
     addBtn.addEventListener('click', () => {
       rows.push('');
@@ -1425,7 +1430,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

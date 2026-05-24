@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-completeness">Completeness</label>
-          <select id="filter-completeness" class="select-input">
+          <select id="filter-completeness" class="select">
             <option value="">All completeness</option>
             <option value="Complete">Complete</option>
             <option value="Partial">Partial</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-urgency">Urgency</label>
-          <select id="filter-urgency" class="select-input">
+          <select id="filter-urgency" class="select">
             <option value="">All urgency levels</option>
             <option value="Routine">Routine</option>
             <option value="Urgent">Urgent</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-acknowledged">Acknowledged</label>
-          <select id="filter-acknowledged" class="select-input">
+          <select id="filter-acknowledged" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
