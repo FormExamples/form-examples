@@ -52,7 +52,7 @@
             <div class="field"><label for="presc-name">Prescriber name <span class="req">*</span></label><input id="presc-name" class="text-input" data-bind="prescriber.name" required></div>
             <div class="field"><label for="presc-goc">GOC registration number <span class="req">*</span></label><input id="presc-goc" class="text-input" data-bind="prescriber.gocRegistrationNumber" required></div>
             <div class="field"><label for="presc-role">Role</label>
-              <select id="presc-role" class="select-input" data-bind="prescriber.role">
+              <select id="presc-role" class="select" data-bind="prescriber.role">
                 <option value="">—</option>
                 <option value="optometrist">Optometrist</option>
                 <option value="dispensing-optician">Dispensing optician</option>
@@ -79,7 +79,7 @@
             <div class="field"><label for="pt-name">Patient name <span class="req">*</span></label><input id="pt-name" class="text-input" data-bind="patient.name" required></div>
             <div class="field"><label for="pt-birth">Date of birth <span class="req">*</span></label><input id="pt-birth" type="date" class="text-input" data-bind="patient.birthDate" required></div>
             <div class="field"><label for="pt-sex">Sex</label>
-              <select id="pt-sex" class="select-input" data-bind="patient.sex">
+              <select id="pt-sex" class="select" data-bind="patient.sex">
                 <option value="">—</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -109,7 +109,7 @@
             <div class="field"><label for="ex-issue">Issue date <span class="req">*</span></label><input id="ex-issue" type="date" class="text-input" data-bind="examination.issueDate" required></div>
             <div class="field"><label for="ex-expiry">Expiry date <span class="req">*</span></label><input id="ex-expiry" type="date" class="text-input" data-bind="examination.expiryDate" required></div>
             <div class="field"><label for="ex-reason">Reason for sight test</label>
-              <select id="ex-reason" class="select-input" data-bind="examination.reasonForSightTest">
+              <select id="ex-reason" class="select" data-bind="examination.reasonForSightTest">
                 <option value="">—</option>
                 <option value="routine">Routine</option>
                 <option value="symptoms">Symptoms</option>
@@ -125,7 +125,7 @@
             <div class="field"><label for="ex-prior-sph-r">Prior right sphere (for change detection)</label><input id="ex-prior-sph-r" type="number" step="0.25" min="-30" max="30" class="text-input" data-bind="examination.priorSphereRight"></div>
             <div class="field"><label for="ex-prior-sph-l">Prior left sphere</label><input id="ex-prior-sph-l" type="number" step="0.25" min="-30" max="30" class="text-input" data-bind="examination.priorSphereLeft"></div>
           </div>
-          <div class="field"><label for="ex-notes">Notes</label><textarea id="ex-notes" class="textarea" data-bind="examination.notes" rows="2"></textarea></div>
+          <div class="field"><label for="ex-notes">Notes</label><textarea id="ex-notes" class="text-area-input" data-bind="examination.notes" rows="2"></textarea></div>
         </section>
 
         <!-- Step 4 -->
@@ -158,7 +158,7 @@
             <div class="field"><label for="va-pin-r">Pinhole right</label><input id="va-pin-r" class="text-input" data-bind="visualAcuity.pinholeRight"></div>
             <div class="field"><label for="va-pin-l">Pinhole left</label><input id="va-pin-l" class="text-input" data-bind="visualAcuity.pinholeLeft"></div>
             <div class="field"><label for="va-dom">Dominant eye</label>
-              <select id="va-dom" class="select-input" data-bind="visualAcuity.dominantEye">
+              <select id="va-dom" class="select" data-bind="visualAcuity.dominantEye">
                 <option value="">—</option>
                 <option value="right">Right</option>
                 <option value="left">Left</option>
@@ -185,7 +185,7 @@
           <div class="four-col">
             <div class="field"><label for="r-prism-h">Horizontal Δ</label><input id="r-prism-h" type="number" step="0.25" min="0" max="20" class="text-input" data-bind="rightEye.prismHorizontalDiopters"></div>
             <div class="field"><label for="r-base-h">Base</label>
-              <select id="r-base-h" class="select-input" data-bind="rightEye.baseHorizontal">
+              <select id="r-base-h" class="select" data-bind="rightEye.baseHorizontal">
                 <option value="">—</option>
                 <option value="in">In</option>
                 <option value="out">Out</option>
@@ -193,7 +193,7 @@
             </div>
             <div class="field"><label for="r-prism-v">Vertical Δ</label><input id="r-prism-v" type="number" step="0.25" min="0" max="20" class="text-input" data-bind="rightEye.prismVerticalDiopters"></div>
             <div class="field"><label for="r-base-v">Base</label>
-              <select id="r-base-v" class="select-input" data-bind="rightEye.baseVertical">
+              <select id="r-base-v" class="select" data-bind="rightEye.baseVertical">
                 <option value="">—</option>
                 <option value="up">Up</option>
                 <option value="down">Down</option>
@@ -218,7 +218,7 @@
           <div class="four-col">
             <div class="field"><label for="l-prism-h">Horizontal Δ</label><input id="l-prism-h" type="number" step="0.25" min="0" max="20" class="text-input" data-bind="leftEye.prismHorizontalDiopters"></div>
             <div class="field"><label for="l-base-h">Base</label>
-              <select id="l-base-h" class="select-input" data-bind="leftEye.baseHorizontal">
+              <select id="l-base-h" class="select" data-bind="leftEye.baseHorizontal">
                 <option value="">—</option>
                 <option value="in">In</option>
                 <option value="out">Out</option>
@@ -226,7 +226,7 @@
             </div>
             <div class="field"><label for="l-prism-v">Vertical Δ</label><input id="l-prism-v" type="number" step="0.25" min="0" max="20" class="text-input" data-bind="leftEye.prismVerticalDiopters"></div>
             <div class="field"><label for="l-base-v">Base</label>
-              <select id="l-base-v" class="select-input" data-bind="leftEye.baseVertical">
+              <select id="l-base-v" class="select" data-bind="leftEye.baseVertical">
                 <option value="">—</option>
                 <option value="up">Up</option>
                 <option value="down">Down</option>
@@ -284,7 +284,7 @@
           </header>
           <div class="two-col">
             <div class="field"><label for="lens-type">Lens type</label>
-              <select id="lens-type" class="select-input" data-bind="lensRecommendation.lensType">
+              <select id="lens-type" class="select" data-bind="lensRecommendation.lensType">
                 <option value="">—</option>
                 <option value="single-vision-distance">Single vision — distance</option>
                 <option value="single-vision-near">Single vision — near</option>
@@ -296,7 +296,7 @@
               </select>
             </div>
             <div class="field"><label for="lens-mat">Material</label>
-              <select id="lens-mat" class="select-input" data-bind="lensRecommendation.material">
+              <select id="lens-mat" class="select" data-bind="lensRecommendation.material">
                 <option value="">—</option>
                 <option value="cr-39">CR-39 (1.498)</option>
                 <option value="trivex">Trivex (1.532)</option>
@@ -324,7 +324,7 @@
             <div class="field"><label for="lens-tint">Tint description</label><input id="lens-tint" class="text-input" data-bind="lensRecommendation.tintDescription" placeholder="brown / grey / G15"></div>
             <div class="field"><label for="lens-pct">Tint density (%)</label><input id="lens-pct" type="number" step="5" min="0" max="100" class="text-input" data-bind="lensRecommendation.tintPercent"></div>
           </div>
-          <div class="field"><label for="lens-notes">Dispenser notes</label><textarea id="lens-notes" class="textarea" data-bind="lensRecommendation.dispenserNotes" rows="2"></textarea></div>
+          <div class="field"><label for="lens-notes">Dispenser notes</label><textarea id="lens-notes" class="text-area-input" data-bind="lensRecommendation.dispenserNotes" rows="2"></textarea></div>
         </section>
 
         <!-- Step 10 -->
@@ -334,10 +334,10 @@
             <h2 class="section-title">Ocular health findings (optional)</h2>
           </header>
           <div class="two-col">
-            <div class="field"><label for="oh-slit-r">Slit-lamp right</label><textarea id="oh-slit-r" class="textarea" data-bind="ocularHealth.slitLampRight" rows="2"></textarea></div>
-            <div class="field"><label for="oh-slit-l">Slit-lamp left</label><textarea id="oh-slit-l" class="textarea" data-bind="ocularHealth.slitLampLeft" rows="2"></textarea></div>
-            <div class="field"><label for="oh-fund-r">Fundus right</label><textarea id="oh-fund-r" class="textarea" data-bind="ocularHealth.fundusRight" rows="2"></textarea></div>
-            <div class="field"><label for="oh-fund-l">Fundus left</label><textarea id="oh-fund-l" class="textarea" data-bind="ocularHealth.fundusLeft" rows="2"></textarea></div>
+            <div class="field"><label for="oh-slit-r">Slit-lamp right</label><textarea id="oh-slit-r" class="text-area-input" data-bind="ocularHealth.slitLampRight" rows="2"></textarea></div>
+            <div class="field"><label for="oh-slit-l">Slit-lamp left</label><textarea id="oh-slit-l" class="text-area-input" data-bind="ocularHealth.slitLampLeft" rows="2"></textarea></div>
+            <div class="field"><label for="oh-fund-r">Fundus right</label><textarea id="oh-fund-r" class="text-area-input" data-bind="ocularHealth.fundusRight" rows="2"></textarea></div>
+            <div class="field"><label for="oh-fund-l">Fundus left</label><textarea id="oh-fund-l" class="text-area-input" data-bind="ocularHealth.fundusLeft" rows="2"></textarea></div>
             <div class="field"><label for="oh-iop-r">IOP right (mmHg)</label><input id="oh-iop-r" type="number" step="0.1" min="0" max="80" class="text-input" data-bind="ocularHealth.intraocularPressureRightMmhg"></div>
             <div class="field"><label for="oh-iop-l">IOP left (mmHg)</label><input id="oh-iop-l" type="number" step="0.1" min="0" max="80" class="text-input" data-bind="ocularHealth.intraocularPressureLeftMmhg"></div>
             <div class="field"><label for="oh-cd-r">Cup-to-disc ratio right</label><input id="oh-cd-r" type="number" step="0.05" min="0" max="1" class="text-input" data-bind="ocularHealth.cupToDiscRatioRight"></div>
@@ -348,10 +348,10 @@
             <div class="field"><label><input type="checkbox" data-bind-bool="ocularHealth.fieldsPerformed"> Visual fields performed</label></div>
             <div class="field"><label><input type="checkbox" data-bind-bool="ocularHealth.pathologyFlag"> Pathology identified</label></div>
           </div>
-          <div class="field"><label for="oh-oct">OCT findings</label><textarea id="oh-oct" class="textarea" data-bind="ocularHealth.octFindings" rows="2"></textarea></div>
-          <div class="field"><label for="oh-fields">Fields findings</label><textarea id="oh-fields" class="textarea" data-bind="ocularHealth.fieldsFindings" rows="2"></textarea></div>
+          <div class="field"><label for="oh-oct">OCT findings</label><textarea id="oh-oct" class="text-area-input" data-bind="ocularHealth.octFindings" rows="2"></textarea></div>
+          <div class="field"><label for="oh-fields">Fields findings</label><textarea id="oh-fields" class="text-area-input" data-bind="ocularHealth.fieldsFindings" rows="2"></textarea></div>
           <div class="field"><label><input type="checkbox" data-bind-bool="ocularHealth.referOphthalmology"> Refer to ophthalmology</label></div>
-          <div class="field"><label for="oh-refer">Referral reason</label><textarea id="oh-refer" class="textarea" data-bind="ocularHealth.referralReason" rows="2"></textarea></div>
+          <div class="field"><label for="oh-refer">Referral reason</label><textarea id="oh-refer" class="text-area-input" data-bind="ocularHealth.referralReason" rows="2"></textarea></div>
         </section>
 
         <!-- Step 11 -->
@@ -365,7 +365,7 @@
           <div class="two-col">
             <div class="field"><label for="sum-followup">Follow-up interval (months)</label><input id="sum-followup" type="number" step="1" min="1" max="60" class="text-input" data-bind="grade.followUpIntervalMonths"></div>
             <div class="field"><label for="sum-override">Complexity override</label>
-              <select id="sum-override" class="select-input" data-bind="grade.overrideComplexity">
+              <select id="sum-override" class="select" data-bind="grade.overrideComplexity">
                 <option value="">Use computed</option>
                 <option value="simple">Simple</option>
                 <option value="moderate">Moderate</option>
@@ -373,20 +373,20 @@
               </select>
             </div>
           </div>
-          <div class="field"><label for="sum-reason">Override reason</label><textarea id="sum-reason" class="textarea" data-bind="grade.overrideReason" rows="2"></textarea></div>
-          <div class="field"><label for="sum-notes">Prescriber notes</label><textarea id="sum-notes" class="textarea" data-bind="grade.prescriberNotes" rows="3"></textarea></div>
+          <div class="field"><label for="sum-reason">Override reason</label><textarea id="sum-reason" class="text-area-input" data-bind="grade.overrideReason" rows="2"></textarea></div>
+          <div class="field"><label for="sum-notes">Prescriber notes</label><textarea id="sum-notes" class="text-area-input" data-bind="grade.prescriberNotes" rows="3"></textarea></div>
           <div class="field"><label><input type="checkbox" data-bind-bool="grade.signedAt"> I sign this prescription electronically</label></div>
         </section>
 
       </div>
 
-      <div class="form-actions">
-        <button type="button" id="submit-btn" class="btn btn-primary">Generate prescription</button>
-        <button type="button" id="reset-btn" class="btn btn-secondary">Start over</button>
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">Generate prescription</button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </form>
 
-    <div id="report" class="report-region" role="region" aria-live="polite" aria-label="Generated prescription"></div>
+    <div id="report" class="panel" role="region" aria-live="polite" aria-label="Generated prescription"></div>
 
     <footer class="page-footer">
       <p>
