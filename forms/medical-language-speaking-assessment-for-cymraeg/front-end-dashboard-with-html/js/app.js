@@ -208,6 +208,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -253,18 +254,19 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     const rowCls = gradeRowClass(row.grade);
     if (rowCls) tr.classList.add(rowCls);
 
     tr.innerHTML = `
-      <td>${esc(row.candidateNumber)}</td>
-      <td>${esc(row.candidateName)}</td>
-      <td><span class="profession-badge">${esc(row.profession)}</span></td>
-      <td><span class="scaled-score">${esc(row.scaledScore)}/500</span></td>
-      <td><span class="grade-badge ${gradeClass(row.grade)}">${esc(row.grade)}</span></td>
-      <td>${esc(row.examiner)}</td>
-      <td>${esc(row.sittingDate)}</td>
-      <td>
+      <td class="data-table-td">${esc(row.candidateNumber)}</td>
+      <td class="data-table-td">${esc(row.candidateName)}</td>
+      <td class="data-table-td"><span class="profession-badge">${esc(row.profession)}</span></td>
+      <td class="data-table-td"><span class="scaled-score">${esc(row.scaledScore)}/500</span></td>
+      <td class="data-table-td"><span class="grade-badge ${gradeClass(row.grade)}">${esc(row.grade)}</span></td>
+      <td class="data-table-td">${esc(row.examiner)}</td>
+      <td class="data-table-td">${esc(row.sittingDate)}</td>
+      <td class="data-table-td">
         <span class="registration-badge ${registrationClass(row.registrationOutcome)}">
           ${esc(row.registrationOutcome)}
         </span>

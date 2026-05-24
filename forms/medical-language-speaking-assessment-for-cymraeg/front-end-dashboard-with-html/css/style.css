@@ -1,15 +1,19 @@
 /* Medical Language Speaking Assessment For Cymraeg — admin dashboard styles.
- * Mobile-first; no framework dependencies. Adapted from the patient-form
- * stylesheet so the two surfaces share the same visual language.
+ *
+ * Targets Lily Design System HTML headless class contracts. See
+ * forms/AGENTS-front-end-html.md for the class vocabulary.
  *
  * Domain notes:
  *   Welsh-language clinical speaking assessment (NHS Wales Welsh Language
  *   Standards / Iaith Gwaith) using the same A / B / C+ / C / D / E
- *   structural framework as the English (OET) sub-test.
- *   D and E rows surface first (worst grades = top of list = most attention
- *   required by exam admin / training coordinators).
+ *   structural framework as the English (OET) sub-test. D and E rows
+ *   surface first (worst grades = top of list = most attention required
+ *   by exam admin / training coordinators).
  */
 
+/* -------------------------------------------------------------- *
+ *  Design tokens
+ * -------------------------------------------------------------- */
 :root {
   --color-primary: #2563eb;
   --color-primary-dark: #1d4ed8;
@@ -32,13 +36,15 @@
   --radius: 0.5rem;
   --radius-sm: 0.375rem;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
+/* -------------------------------------------------------------- *
+ *  Reset & document
+ * -------------------------------------------------------------- */
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -49,35 +55,27 @@ body {
   background: var(--color-bg);
 }
 
-/* Visually hidden (still readable to assistive tech) */
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
 }
-
-/* Skip link */
 .skip-link {
   position: absolute;
-  left: -9999px;
-  top: 0;
+  left: -9999px; top: 0;
   background: var(--color-primary);
   color: white;
   padding: 0.5rem 1rem;
   z-index: 100;
   text-decoration: none;
 }
-.skip-link:focus {
-  left: 0;
-}
+.skip-link:focus { left: 0; }
 
-/* Header */
+/* -------------------------------------------------------------- *
+ *  Page chrome (project-local)
+ * -------------------------------------------------------------- */
 .page-header {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -99,25 +97,110 @@ body {
   margin: 0;
 }
 
-/* Main */
 main {
   max-width: 76rem;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 4rem;
 }
 
-/* Status banner (sample-data fallback notice) */
-.status-banner {
-  background: var(--color-warning-bg);
-  border: 1px solid #fde68a;
-  color: #78350f;
-  padding: 0.625rem 0.875rem;
+.page-footer {
+  margin-top: 2rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+.page-footer p { margin: 0; }
+
+/* -------------------------------------------------------------- *
+ *  Lily: .alert (status banner)
+ * -------------------------------------------------------------- */
+.alert {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  background: var(--color-bg);
+}
+.alert[data-type="info"] {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.alert[data-type="success"] {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}
+.alert[data-type="warning"] {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+}
+.alert[data-type="error"] {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger);
 }
 
-/* Filter bar */
+/* -------------------------------------------------------------- *
+ *  Lily: .field, .label, .search-input, .select, .button
+ * -------------------------------------------------------------- */
+.field { min-width: 0; }
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+}
+
+.search-input,
+.select {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+.search-input:focus,
+.select:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: background 120ms ease, border 120ms ease;
+}
+.button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.button:hover:not(:disabled) { background: var(--color-bg); }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+.button[data-variant="primary"] {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+.button[data-variant="primary"]:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* -------------------------------------------------------------- *
+ *  Filter bar (project-local)
+ * -------------------------------------------------------------- */
 .filter-bar {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -127,91 +210,35 @@ main {
   margin-bottom: 1rem;
 }
 .filter-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.875rem;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: end;
 }
-.filter-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 9rem;
+@media (min-width: 36rem) {
+  .filter-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+  }
 }
-.filter-field label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-.filter-field-search {
-  flex: 1 1 14rem;
-  min-width: 14rem;
+.filter-field { min-width: 0; }
+.filter-field-search { grid-column: 1 / -1; }
+@media (min-width: 36rem) {
+  .filter-field-search { grid-column: auto; }
 }
 .filter-field-actions {
-  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 .filter-summary {
   margin-top: 0.75rem;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--color-muted);
 }
 
-/* Inputs */
-.text-input,
-.select-input {
-  width: 100%;
-  font: inherit;
-  font-size: 0.9375rem;
-  color: inherit;
-  padding: 0.5rem 0.625rem;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-}
-.text-input:focus,
-.select-input:focus {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 1px;
-  border-color: var(--color-primary);
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  border: 1px solid transparent;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  text-align: center;
-  user-select: none;
-  transition: background 120ms ease, border 120ms ease;
-}
-.btn:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-.btn-primary {
-  background: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-}
-.btn-primary:hover {
-  background: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-}
-.btn-secondary {
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-color: var(--color-border-strong);
-}
-.btn-secondary:hover {
-  background: var(--color-bg);
-}
-
-/* Candidates table card */
+/* -------------------------------------------------------------- *
+ *  Lily: .data-table family
+ * -------------------------------------------------------------- */
 .table-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -219,76 +246,89 @@ main {
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
-.table-scroll {
-  overflow-x: auto;
-}
+.table-scroll { overflow-x: auto; }
 
-.candidates-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
-.candidates-table thead {
+.data-table-head {
   background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
-.candidates-table th,
-.candidates-table td {
+.data-table-th,
+.data-table-td {
   padding: 0.625rem 0.875rem;
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
   white-space: nowrap;
 }
-.candidates-table tbody tr:last-child td {
-  border-bottom: 0;
+.data-table-th {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.candidates-table tbody tr:hover {
-  background: #f3f4f6;
+.data-table-body .data-table-row {
+  border-bottom: 1px solid var(--color-border);
+}
+.data-table-body .data-table-row:last-child { border-bottom: 0; }
+.data-table-body .data-table-row:hover { background: var(--color-bg); }
+
+/* Failing-grade row emphasis (D and E surface first) */
+.data-table-body .data-table-row.row-grade-d,
+.data-table-body .data-table-row.row-grade-e {
+  background: var(--color-danger-row-bg);
+}
+.data-table-body .data-table-row.row-grade-d:hover,
+.data-table-body .data-table-row.row-grade-e:hover {
+  background: #fee2e2;
 }
 
-/* Sortable column header buttons */
+.empty-message {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* -------------------------------------------------------------- *
+ *  Sort button (project-local; sits inside .data-table-th)
+ * -------------------------------------------------------------- */
 .sort-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
   background: transparent;
   border: 0;
   padding: 0;
+  font: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
   cursor: pointer;
-  user-select: none;
 }
-.sort-btn:hover {
-  color: var(--color-primary);
-}
+.sort-btn:hover { color: var(--color-text); }
 .sort-btn:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: 2px;
 }
 .sort-indicator {
-  font-size: 0.6875rem;
-  color: var(--color-muted);
-  width: 0.75rem;
-  display: inline-block;
-  text-align: center;
+  color: var(--color-border-strong);
+  font-size: 0.75em;
 }
-.candidates-table th[aria-sort="ascending"] .sort-indicator,
-.candidates-table th[aria-sort="descending"] .sort-indicator {
+.data-table-th[aria-sort="ascending"] .sort-indicator,
+.data-table-th[aria-sort="descending"] .sort-indicator {
   color: var(--color-primary);
 }
 
-/* Failing-grade row emphasis (D and E surface first) */
-.candidates-table tbody tr.row-grade-d,
-.candidates-table tbody tr.row-grade-e {
-  background: var(--color-danger-row-bg);
-}
-.candidates-table tbody tr.row-grade-d:hover,
-.candidates-table tbody tr.row-grade-e:hover {
-  background: #fee2e2;
-}
+/* -------------------------------------------------------------- *
+ *  Dashboard-specific badges and cells
+ * -------------------------------------------------------------- */
 
 /* Grade badges (A through E) */
 .grade-badge {
@@ -301,12 +341,12 @@ main {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.025em;
 }
-.grade-a   { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.grade-b   { background: #dcfce7; color: #166534; border-color: #86efac; }
+.grade-a      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.grade-b      { background: #dcfce7; color: #166534; border-color: #86efac; }
 .grade-c-plus { background: #fef9c3; color: #713f12; border-color: #fde68a; }
-.grade-c   { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.grade-d   { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.grade-e   { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
+.grade-c      { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.grade-d      { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.grade-e      { background: #fecaca; color: #7f1d1d; border-color: #f87171; }
 
 /* Profession badges */
 .profession-badge {
@@ -350,25 +390,6 @@ main {
   color: #78350f;
   border-color: #fcd34d;
 }
-
-/* Empty filter result message */
-.empty-message {
-  text-align: center;
-  color: var(--color-muted);
-  padding: 1.5rem 1rem;
-  margin: 0;
-  font-size: 0.9375rem;
-}
-
-/* Footer */
-.page-footer {
-  margin-top: 2rem;
-  font-size: 0.8125rem;
-  color: var(--color-muted);
-  border-top: 1px solid var(--color-border);
-  padding-top: 1rem;
-}
-.page-footer p { margin: 0; }
 
 /* Reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
