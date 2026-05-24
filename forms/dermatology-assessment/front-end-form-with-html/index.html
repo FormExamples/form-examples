@@ -4,63 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dermatology Assessment — patient questionnaire</title>
-  <meta name="description" content="Dermatology Life Quality Index (DLQI) and structured dermatological history self-report.">
+  <meta name="description" content="Skin condition assessment using the DLQI (Dermatology Life Quality Index).">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Dermatology Assessment</h1>
-      <p class="subtitle">Dermatology Life Quality Index (DLQI) plus structured dermatological history.</p>
+      <p class="subtitle">Skin condition assessment using the DLQI (Dermatology Life Quality Index).</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Dermatology Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main>
     <div class="intro">
       <p>
-        Please answer the questions below about your skin condition. The
-        central scoring section is the validated 10-question Dermatology Life
-        Quality Index (DLQI), which asks about the impact of your skin over
-        the last week. All answers are saved automatically in your browser
-        as you go.
-      </p>
-      <p>
-        If you have a rapidly spreading rash with fever, blistering of the
-        skin, mucosal involvement (mouth, eyes, genitals), or signs of a
-        severe allergic reaction (swelling of the face/throat, difficulty
-        breathing), seek urgent medical care immediately.
+        Please complete the questions below. All answers are saved automatically
+        in your browser as you go.
       </p>
     </div>
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Dermatology Assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
-        <!-- 1 Demographics, 2 Chief Complaint, 3 DLQI Questionnaire, -->
-        <!-- 4 Lesion Characteristics, 5 Medical History, 6 Current Medications, -->
-        <!-- 7 Allergies, 8 Family History, 9 Social History -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes. -->
       </div>
 
       <div class="button-group">
@@ -73,20 +71,21 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
-        The Dermatology Life Quality Index (DLQI) is a validated 10-item
-        questionnaire for measuring the impact of skin disease on quality of
-        life. This screening tool is for information only and is not a
-        diagnosis; please discuss your results with your clinician.
+        This screening tool is a structured questionnaire. The grading and
+        flagged issues are for information only and are not a diagnosis;
+        please discuss your results with a qualified clinician.
       </p>
     </footer>
   </main>
