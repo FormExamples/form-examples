@@ -171,9 +171,11 @@ function renderTableHead() {
   const head = document.getElementById('patients-table-head');
   if (!head) return;
   head.innerHTML = '';
+  head.classList.add('data-table-row');
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -219,18 +221,19 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.completeness === 'Incomplete') {
       tr.classList.add('row-incomplete');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.requestingProvider)}</td>
-      <td>${esc(row.receivingProvider)}</td>
-      <td><span class="urgency-badge ${urgencyClass(row.urgency)}">${esc(row.urgency)}</span></td>
-      <td><span class="completeness-badge ${completenessClass(row.completeness)}">${esc(row.completeness)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(row.requestingProvider)}</td>
+      <td class="data-table-td">${esc(row.receivingProvider)}</td>
+      <td class="data-table-td"><span class="urgency-badge ${urgencyClass(row.urgency)}">${esc(row.urgency)}</span></td>
+      <td class="data-table-td"><span class="completeness-badge ${completenessClass(row.completeness)}">${esc(row.completeness)}</span></td>
+      <td class="data-table-td">
         <span class="acknowledged-badge ${row.acknowledged ? 'acknowledged-yes' : 'acknowledged-no'}">
           ${row.acknowledged ? 'Yes' : 'No'}
         </span>
