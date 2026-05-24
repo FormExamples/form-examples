@@ -134,25 +134,40 @@ function esc(s) {
  * @param {{ label: string, path: string, type?: string, placeholder?: string,
  *           required?: boolean }} opts
  */
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 function textInput(opts) {
   const id = `f-${opts.path.replace(/\./g, '-')}`;
   const value = getPath(opts.path) == null ? '' : getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
+  const cls = lilyInputClass(type);
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const placeholderAttr = opts.placeholder
     ? ` placeholder="${esc(opts.placeholder)}"`
     : '';
-  wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="${type}" class="text-input"
-      value="${esc(value)}"${placeholderAttr}${opts.required ? ' required' : ''}>
-  `;
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
+  wrapper.innerHTML =
+    `<label class="label" for="${id}"${labelRequired}>${labelText}</label>` +
+    `<input id="${id}" name="${id}" type="${type}" class="${cls}"` +
+    ` value="${esc(value)}"${placeholderAttr}` +
+    ` aria-describedby="${id}-error"${requiredAttrs}>` +
+    `<span class="error-message" id="${id}-error"></span>`;
   const input = wrapper.querySelector('input');
-  // Persist + update progress on every keystroke; defer re-render to `change`
-  // (lost focus) so typing isn't interrupted.
   input.addEventListener('input', () => {
     const parts = opts.path.split('.');
     let cur = state;
@@ -160,6 +175,7 @@ function textInput(opts) {
     cur[parts[parts.length - 1]] = input.value;
     saveState();
     updateProgress();
+    clearFieldError(id);
   });
   input.addEventListener('change', () => {
     renderForm();
@@ -167,10 +183,6 @@ function textInput(opts) {
   return wrapper;
 }
 
-/**
- * @param {{ label: string, path: string, rows?: number, placeholder?: string,
- *           required?: boolean }} opts
- */
 function textArea(opts) {
   const id = `f-${opts.path.replace(/\./g, '-')}`;
   const value = getPath(opts.path) == null ? '' : getPath(opts.path);
@@ -181,11 +193,14 @@ function textArea(opts) {
   const placeholderAttr = opts.placeholder
     ? ` placeholder="${esc(opts.placeholder)}"`
     : '';
-  wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
-  `;
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
+  wrapper.innerHTML =
+    `<label class="label" for="${id}"${labelRequired}>${labelText}</label>` +
+    `<textarea id="${id}" name="${id}" rows="${opts.rows || 3}"` +
+    ` class="text-area-input"${placeholderAttr}` +
+    ` aria-describedby="${id}-error"${requiredAttrs}>${esc(value)}</textarea>` +
+    `<span class="error-message" id="${id}-error"></span>`;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
     const parts = opts.path.split('.');
@@ -194,74 +209,80 @@ function textArea(opts) {
     cur[parts[parts.length - 1]] = ta.value;
     saveState();
     updateProgress();
+    clearFieldError(id);
   });
   return wrapper;
 }
 
-/**
- * @param {{ label: string, path: string,
- *           options: { value: string, label: string }[],
- *           required?: boolean }} opts
- */
 function radioGroup(opts) {
   const groupId = `f-${opts.path.replace(/\./g, '-')}`;
   const current = getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = groupId + '-fieldset';
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
+  if (opts.required) legend.setAttribute('data-required', '');
   legend.innerHTML = labelText;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const lab = document.createElement('label');
-    lab.className = 'radio-option';
     lab.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
-    lab.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
-      <span>${esc(option.label)}</span>
-    `;
+    const requiredAttr = opts.required ? ' data-required' : '';
+    lab.innerHTML =
+      `<input class="radio-input" type="radio" id="${radioId}" name="${groupId}"` +
+      ` value="${esc(option.value)}"${checked}${requiredAttr}>` +
+      `<span>${esc(option.label)}</span>`;
     const input = lab.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setPath(opts.path, option.value);
+      if (input.checked) {
+        clearFieldError(groupId);
+        setPath(opts.path, option.value);
+      }
     });
     list.appendChild(lab);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = groupId + '-error';
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
-/**
- * Build a section card.
- * @param {{ stepNumber: number, title: string, description?: string }} opts
- */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 4</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
-  `;
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML =
+    `<span class="section-step">Section ${opts.stepNumber} of 4</span>` +
+    `<h2 class="section-title">${esc(opts.title)}</h2>` +
+    desc;
+  card.appendChild(legend);
   return card;
 }
 
 function infoNote(text) {
   const note = document.createElement('div');
-  note.className = 'info-note';
+  note.className = 'alert info-note';
+  note.setAttribute('data-type', 'info');
   note.textContent = text;
   return note;
 }
@@ -592,15 +613,167 @@ function computeProgress() {
 function updateProgress() {
   const { required, satisfied } = computeProgress();
   const percent = required === 0 ? 0 : Math.round((satisfied / required) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) {
     text.textContent =
       `${satisfied} of ${required} required fields answered (${percent}%)`;
   }
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  updateStepListStatuses();
+}
+
+// ----------------------------------------------------------------------
+// Step-list
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1, title: 'Patient' },
+  { step: 2, title: 'Part A' },
+  { step: 3, title: 'Part B' },
+  { step: 4, title: 'Issuer' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', 'Section ' + def.step + ': ' + def.title);
+    li.innerHTML = '<span>' + esc(def.title) + '</span>';
+    li.addEventListener('click', () => {
+      const target = document.getElementById('step-' + def.step);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector('[data-step="' + def.step + '"]');
+    const step = document.getElementById('step-' + def.step);
+    if (!li || !step) continue;
+    const required = step.querySelectorAll('[data-required]');
+    let answered = 0;
+    required.forEach((r) => {
+      if (r.type === 'radio') {
+        if (document.querySelector('input[type="radio"][name="' + r.name + '"]:checked')) answered++;
+      } else if (r.type === 'checkbox') {
+        if (r.checked) answered++;
+      } else if (r.value && String(r.value).trim() !== '') {
+        answered++;
+      }
+    });
+    if (required.length > 0 && answered >= required.length) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (answered > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation UI
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+  const fs = document.getElementById(id + '-fieldset');
+  if (fs) fs.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateFormUi() {
+  const errors = [];
+  document.querySelectorAll('[data-required]').forEach((el) => {
+    const tag = (el.tagName || '').toLowerCase();
+    if (tag !== 'input' && tag !== 'select' && tag !== 'textarea') return;
+    const id = el.id;
+    if (!id) return;
+    if (tag === 'input' && el.type === 'radio') {
+      const name = el.name;
+      const checked = document.querySelector('input[type="radio"][name="' + name + '"]:checked');
+      if (!checked) {
+        errors.push({ id: name, message: 'Please answer this question.' });
+        setFieldError(name, 'Please answer this question.');
+      }
+      return;
+    }
+    let missing = false;
+    if (tag === 'input' && el.type === 'checkbox') {
+      if (!el.checked) missing = true;
+    } else if (el.value == null || String(el.value).trim() === '') {
+      missing = true;
+    }
+    if (missing) {
+      errors.push({ id: id, message: 'Please complete this field.' });
+      setFieldError(id, 'Please complete this field.');
+    } else {
+      clearFieldError(id);
+    }
+  });
+  const seen = new Set();
+  const uniq = [];
+  for (const e of errors) {
+    if (seen.has(e.id)) continue;
+    seen.add(e.id);
+    uniq.push(e);
+  }
+  renderErrorSummary(uniq);
+  return uniq;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (!errors || errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML =
+    '<strong>Please correct the following:</strong>' +
+    '<ul>' +
+    errors.map((e) =>
+      '<li><a href="#' + esc(e.id) + '">' + esc(e.message) + '</a></li>'
+    ).join('') +
+    '</ul>';
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (typeof summary.focus === 'function') {
+    summary.setAttribute('tabindex', '-1');
+    summary.focus({ preventScroll: true });
+  }
 }
 
 // ----------------------------------------------------------------------
@@ -710,6 +883,7 @@ function renderReport() {
 }
 
 function submitForm() {
+  validateFormUi();
   lastResult = validateMatB1(state);
   renderReport();
 }
@@ -720,7 +894,8 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   const out = document.getElementById('report');
-  if (out) out.innerHTML = '';
+  if (out) out.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -743,6 +918,7 @@ function renderForm() {
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
 
