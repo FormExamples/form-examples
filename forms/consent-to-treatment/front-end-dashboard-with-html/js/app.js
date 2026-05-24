@@ -158,6 +158,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -203,17 +204,18 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.status === 'expired') {
       tr.classList.add('row-expired');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.procedureName)}</td>
-      <td>${esc(row.department)}</td>
-      <td><span class="status-badge ${statusClass(row.status)}">${esc(row.status)}</span></td>
-      <td><span class="scheduled-date">${esc(row.scheduledDate)}</span></td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td">${esc(row.procedureName)}</td>
+      <td class="data-table-td">${esc(row.department)}</td>
+      <td class="data-table-td"><span class="status-badge ${statusClass(row.status)}">${esc(row.status)}</span></td>
+      <td class="data-table-td"><span class="scheduled-date">${esc(row.scheduledDate)}</span></td>
     `;
     body.appendChild(tr);
   }

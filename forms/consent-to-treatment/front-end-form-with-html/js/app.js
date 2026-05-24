@@ -1,11 +1,11 @@
 // Consent To Treatment - patient wizard (vanilla JavaScript, no build).
 //
 // Single-page continuous wizard: every section is rendered into the page in
-// document order. The user scrolls through them; a sticky top-of-page
-// progress summary reflects how many required fields have been answered.
-// Submission runs the pure form-completeness validator and the additional
-// flag detector and renders an inline report. State is persisted to
-// localStorage so a partial fill survives a page reload.
+// document order. A step-list at the top of the page acts as a table of
+// contents and reflects per-section completion. A native <progress> element
+// reflects overall completion. Submission runs the pure form-completeness
+// validator and the additional flag detector and renders an inline report.
+// State is persisted to localStorage so a partial fill survives a page reload.
 //
 // Sibling files loaded as plain `<script>` tags (in order) attach their
 // exports to `window.ConsentToTreatment`. Pulling them off here keeps the
@@ -19,7 +19,7 @@
     emptyAssessment,
     completenessLabel,
     completenessClass,
-    validateForm,
+    validateForm: validateFormEngine,
     detectAdditionalFlags
   } = NS;
 
@@ -28,6 +28,7 @@
   // ----------------------------------------------------------------------
 
   const STORAGE_KEY = 'consent-to-treatment.front-end-form-with-html.v1';
+  const TOTAL_STEPS = 8;
 
   /** @returns {import('./types.js').AssessmentData} */
   function loadState() {
@@ -108,6 +109,19 @@
   // Component builders
   // ----------------------------------------------------------------------
 
+  function lilyInputClass(type) {
+    switch (type) {
+      case 'email':  return 'email-input';
+      case 'number': return 'number-input';
+      case 'date':   return 'date-input';
+      case 'time':   return 'time-input';
+      case 'tel':    return 'tel-input';
+      case 'url':    return 'url-input';
+      case 'search': return 'search-input';
+      default:       return 'text-input';
+    }
+  }
+
   /**
    * @param {{ label: string, section: string, field: string, type?: string,
    *           placeholder?: string, required?: boolean }} opts
@@ -122,21 +136,24 @@
       'id="' + id + '"',
       'name="' + id + '"',
       'type="' + type + '"',
-      'class="text-input"',
-      'value="' + esc(value || '') + '"'
+      'class="' + lilyInputClass(type) + '"',
+      'value="' + esc(value || '') + '"',
+      'aria-describedby="' + id + '-error"'
     ];
     if (opts.placeholder) attrs.push('placeholder="' + esc(opts.placeholder) + '"');
-    if (opts.required) attrs.push('required');
+    if (opts.required) attrs.push('required', 'data-required');
 
     const wrapper = document.createElement('div');
     wrapper.className = 'field';
     wrapper.innerHTML =
-      '<label for="' + id + '">' + labelText + '</label>' +
-      '<input ' + attrs.join(' ') + '>';
+      '<label class="label" for="' + id + '">' + labelText + '</label>' +
+      '<input ' + attrs.join(' ') + '>' +
+      '<span class="error-message" id="' + id + '-error"></span>';
 
     const input = wrapper.querySelector('input');
     input.addEventListener('input', () => {
       setField(opts.section, opts.field, input.value);
+      clearFieldError(id);
     });
     return wrapper;
   }
@@ -152,13 +169,20 @@
       (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
     const wrapper = document.createElement('div');
     wrapper.className = 'field';
+    const requiredAttr = opts.required ? ' required data-required' : '';
     wrapper.innerHTML =
-      '<label for="' + id + '">' + labelText + '</label>' +
+      '<label class="label" for="' + id + '">' + labelText + '</label>' +
       '<textarea id="' + id + '" name="' + id + '" rows="' + (opts.rows || 3) + '"' +
       (opts.placeholder ? ' placeholder="' + esc(opts.placeholder) + '"' : '') +
-      ' class="text-area-input">' + esc(value) + '</textarea>';
+      ' aria-describedby="' + id + '-error"' +
+      requiredAttr +
+      ' class="text-area-input">' + esc(value) + '</textarea>' +
+      '<span class="error-message" id="' + id + '-error"></span>';
     const ta = wrapper.querySelector('textarea');
-    ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
+    ta.addEventListener('input', () => {
+      setField(opts.section, opts.field, ta.value);
+      clearFieldError(id);
+    });
     return wrapper;
   }
 
@@ -184,12 +208,18 @@
       )
       .join('');
 
+    const requiredAttr = opts.required ? ' required data-required' : '';
     wrapper.innerHTML =
-      '<label for="' + id + '">' + labelText + '</label>' +
-      '<select id="' + id + '" name="' + id + '" class="select">' +
-      optionsHtml + '</select>';
+      '<label class="label" for="' + id + '">' + labelText + '</label>' +
+      '<select id="' + id + '" name="' + id + '" class="select"' +
+      ' aria-describedby="' + id + '-error"' + requiredAttr + '>' +
+      optionsHtml + '</select>' +
+      '<span class="error-message" id="' + id + '-error"></span>';
     const sel = wrapper.querySelector('select');
-    sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+    sel.addEventListener('change', () => {
+      setField(opts.section, opts.field, sel.value);
+      clearFieldError(id);
+    });
     return wrapper;
   }
 
@@ -201,32 +231,44 @@
     const groupId = opts.section + '-' + opts.field;
     const current = state[opts.section][opts.field];
     const wrapper = document.createElement('fieldset');
-    wrapper.className = 'field radio-group';
+    wrapper.className = 'field';
+    wrapper.id = groupId + '-fieldset';
 
     const legend = document.createElement('legend');
+    legend.className = 'label';
     legend.innerHTML = esc(opts.label) +
       (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
     wrapper.appendChild(legend);
 
     const list = document.createElement('div');
-    list.className = 'radio-options';
+    list.className = 'radio-group';
+    list.setAttribute('role', 'radiogroup');
+    list.setAttribute('aria-labelledby', wrapper.id);
     for (const option of opts.options) {
       const radioId = groupId + '-' + option.value;
       const label = document.createElement('label');
-      label.className = 'radio-option';
       label.htmlFor = radioId;
       const checked = current === option.value ? ' checked' : '';
+      const requiredAttr = opts.required ? ' data-required' : '';
       label.innerHTML =
-        '<input type="radio" id="' + radioId + '" name="' + groupId +
-        '" value="' + esc(option.value) + '"' + checked + '>' +
+        '<input class="radio-input" type="radio" id="' + radioId + '" name="' + groupId +
+        '" value="' + esc(option.value) + '"' + checked + requiredAttr + '>' +
         '<span>' + esc(option.label) + '</span>';
       const input = label.querySelector('input');
       input.addEventListener('change', () => {
-        if (input.checked) setField(opts.section, opts.field, option.value);
+        if (input.checked) {
+          setField(opts.section, opts.field, option.value);
+          clearFieldError(groupId);
+        }
       });
       list.appendChild(label);
     }
     wrapper.appendChild(list);
+
+    const errSpan = document.createElement('span');
+    errSpan.className = 'error-message';
+    errSpan.id = groupId + '-error';
+    wrapper.appendChild(errSpan);
     return wrapper;
   }
 
@@ -234,31 +276,37 @@
    * @param {{ stepNumber: number, title: string, description?: string }} opts
    */
   function sectionCard(opts) {
-    const card = document.createElement('section');
-    card.className = 'section-card';
+    const card = document.createElement('fieldset');
+    card.className = 'fieldset';
     card.dataset.step = String(opts.stepNumber);
     card.id = 'step-' + opts.stepNumber;
     const desc = opts.description
-      ? '<p class="section-description">' + esc(opts.description) + '</p>'
+      ? '<span class="section-description">' + esc(opts.description) + '</span>'
       : '';
-    card.innerHTML =
-      '<header class="section-header">' +
-      '<span class="section-step">Section ' + opts.stepNumber + ' of 8</span>' +
+    const legend = document.createElement('legend');
+    legend.className = 'fieldset-legend';
+    legend.innerHTML =
+      '<span class="section-step">Section ' + opts.stepNumber + ' of ' + TOTAL_STEPS + '</span>' +
       '<h2 class="section-title">' + esc(opts.title) + '</h2>' +
-      desc + '</header>';
+      desc;
+    card.appendChild(legend);
     return card;
   }
 
   function subHeader(title) {
-    const wrap = document.createElement('div');
+    const wrap = document.createElement('h3');
     wrap.className = 'sub-header';
-    wrap.innerHTML = '<h3>' + esc(title) + '</h3>';
+    wrap.textContent = title;
     return wrap;
   }
 
   function infoBlock(text, kind) {
     const wrap = document.createElement('div');
-    wrap.className = 'info-block info-' + (kind || 'info');
+    wrap.className = 'alert';
+    const typeAttr = kind === 'warn' ? 'warning'
+      : kind === 'note' ? 'info'
+      : kind || 'info';
+    wrap.setAttribute('data-type', typeAttr);
     wrap.innerHTML = '<p>' + esc(text) + '</p>';
     return wrap;
   }
@@ -688,24 +736,153 @@
   }
 
   // ----------------------------------------------------------------------
-  // Progress
+  // Progress + step-list
   // ----------------------------------------------------------------------
+
+  const STEP_DEFINITIONS = [
+    { step: 1, section: 'patientInformation',      title: 'Patient Information' },
+    { step: 2, section: 'procedureDetails',        title: 'Procedure Details' },
+    { step: 3, section: 'risksBenefits',           title: 'Risks & Benefits' },
+    { step: 4, section: 'alternativeTreatments',   title: 'Alternative Treatments' },
+    { step: 5, section: 'anesthesiaInformation',   title: 'Anesthesia Information' },
+    { step: 6, section: 'questionsUnderstanding',  title: 'Questions & Understanding' },
+    { step: 7, section: 'patientRights',           title: 'Patient Rights' },
+    { step: 8, section: 'signatureConsent',        title: 'Signature & Consent' }
+  ];
+
+  function renderStepList() {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    ol.innerHTML = '';
+    for (const def of STEP_DEFINITIONS) {
+      const li = document.createElement('li');
+      li.className = 'step-list-item';
+      li.dataset.status = 'waiting';
+      li.dataset.step = String(def.step);
+      li.setAttribute('aria-label', 'Step ' + def.step + ': ' + def.title);
+      li.innerHTML = '<span>' + esc(def.title) + '</span>';
+      li.addEventListener('click', () => {
+        const target = document.getElementById('step-' + def.step);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      ol.appendChild(li);
+    }
+  }
 
   function updateProgress() {
     const rules = NS.validationRules;
     const total = rules.length;
     let answered = 0;
+    const sectionAnswered = {};
+    const sectionTotal = {};
     for (const rule of rules) {
+      sectionTotal[rule.section] = (sectionTotal[rule.section] || 0) + 1;
       const v = state[rule.section] ? state[rule.section][rule.field] : undefined;
-      if (v !== '' && v !== null && v !== undefined) answered++;
+      if (v !== '' && v !== null && v !== undefined) {
+        answered++;
+        sectionAnswered[rule.section] = (sectionAnswered[rule.section] || 0) + 1;
+      }
     }
-    const percent = Math.round((answered / total) * 100);
-    const fill = document.getElementById('progress-bar-fill');
+    const percent = total > 0 ? Math.round((answered / total) * 100) : 0;
+    const bar = document.getElementById('progress');
+    if (bar) bar.value = percent;
     const text = document.getElementById('progress-text');
-    if (fill) fill.style.width = percent + '%';
-    if (text) text.textContent = answered + ' of ' + total + ' required fields answered (' + percent + '%)';
-    const aria = document.getElementById('progress-bar');
-    if (aria) aria.setAttribute('aria-valuenow', String(percent));
+    if (text) {
+      text.textContent = answered + ' of ' + total + ' required fields answered (' + percent + '%)';
+    }
+    updateStepListStatuses(sectionAnswered, sectionTotal);
+  }
+
+  function updateStepListStatuses(sectionAnswered, sectionTotal) {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    let firstUnfinished = -1;
+    for (const def of STEP_DEFINITIONS) {
+      const li = ol.querySelector('[data-step="' + def.step + '"]');
+      if (!li) continue;
+      const a = sectionAnswered[def.section] || 0;
+      const t = sectionTotal[def.section] || 0;
+      if (t > 0 && a === t) {
+        li.dataset.status = 'finished';
+        li.removeAttribute('aria-current');
+      } else if (a > 0) {
+        li.dataset.status = 'in-progress';
+        if (firstUnfinished === -1) firstUnfinished = def.step;
+      } else {
+        li.dataset.status = 'waiting';
+        li.removeAttribute('aria-current');
+      }
+    }
+    if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+    const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+    if (current) {
+      current.setAttribute('aria-current', 'step');
+      if (current.dataset.status === 'waiting') {
+        current.dataset.status = 'in-progress';
+      }
+    }
+    ol.dataset.current = String(firstUnfinished - 1);
+  }
+
+  // ----------------------------------------------------------------------
+  // Validation (per-field + error summary)
+  // ----------------------------------------------------------------------
+
+  function clearFieldError(id) {
+    const el = document.getElementById(id + '-error');
+    if (el) el.textContent = '';
+    const input = document.getElementById(id);
+    if (input) input.removeAttribute('aria-invalid');
+    // Also clear on the fieldset wrapper for radio groups
+    const fs = document.getElementById(id + '-fieldset');
+    if (fs) fs.removeAttribute('aria-invalid');
+  }
+
+  function setFieldError(id, message) {
+    const el = document.getElementById(id + '-error');
+    if (el) el.textContent = message;
+    const input = document.getElementById(id);
+    if (input) input.setAttribute('aria-invalid', 'true');
+  }
+
+  function validateForm() {
+    const errors = [];
+    const rules = NS.validationRules;
+    for (const rule of rules) {
+      const value = state[rule.section] ? state[rule.section][rule.field] : undefined;
+      const id = rule.section + '-' + rule.field;
+      if (value === '' || value === null || value === undefined) {
+        errors.push({ id: id, message: rule.message });
+        setFieldError(id, rule.message);
+      } else {
+        clearFieldError(id);
+      }
+    }
+    renderErrorSummary(errors);
+    return errors;
+  }
+
+  function renderErrorSummary(errors) {
+    const summary = document.getElementById('error-summary');
+    if (!summary) return;
+    if (errors.length === 0) {
+      summary.hidden = true;
+      summary.innerHTML = '';
+      return;
+    }
+    summary.hidden = false;
+    summary.innerHTML =
+      '<strong>Please correct the following:</strong>' +
+      '<ul>' +
+      errors.map((e) =>
+        '<li><a href="#' + esc(e.id) + '">' + esc(e.message) + '</a></li>'
+      ).join('') +
+      '</ul>';
+    summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof summary.focus === 'function') {
+      summary.setAttribute('tabindex', '-1');
+      summary.focus({ preventScroll: true });
+    }
   }
 
   // ----------------------------------------------------------------------
@@ -758,11 +935,8 @@
         '</tbody></table>';
 
     out.innerHTML =
-      '<div class="report-card">' +
-      '<header class="report-header">' +
       '<h2>Consent To Treatment Report</h2>' +
       '<p class="muted">Generated ' + esc(new Date(timestamp).toLocaleString()) + '</p>' +
-      '</header>' +
 
       '<h3>Form Completeness</h3>' +
       '<p class="completeness-summary">' +
@@ -779,15 +953,18 @@
 
       '<div class="report-actions">' +
       '<button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>' +
-      '</div>' +
       '</div>';
 
     out.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    document.getElementById('start-over-btn').addEventListener('click', startOver);
+    const startBtn = document.getElementById('start-over-btn');
+    if (startBtn) startBtn.addEventListener('click', startOver);
   }
 
   function submitForm() {
-    const v = validateForm(state);
+    // Run UI-level validation (per-field errors + summary) but do not block
+    // the report — the engine itself reports missing-fields in firedRules.
+    validateForm();
+    const v = validateFormEngine(state);
     const additionalFlags = detectAdditionalFlags(state);
     lastResult = {
       completenessPercent: v.completeness,
@@ -804,7 +981,11 @@
     clearState();
     state = emptyAssessment();
     lastResult = null;
-    document.getElementById('report').innerHTML = '';
+    const report = document.getElementById('report');
+    if (report) {
+      report.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+    }
+    renderErrorSummary([]);
     renderForm();
     updateProgress();
     updateConditionalSections();
@@ -829,6 +1010,7 @@
   }
 
   function init() {
+    renderStepList();
     renderForm();
     updateProgress();
     updateConditionalSections();

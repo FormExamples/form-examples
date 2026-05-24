@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+  <a class="skip-link visually-hidden" href="#patients-table">Skip to patients table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="NHS number, name, procedure, or department..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-status">Status</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-status">Status</label>
           <select id="filter-status" class="select">
             <option value="">All statuses</option>
             <option value="pending">Pending</option>
@@ -59,8 +59,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-department">Department</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-department">Department</label>
           <select id="filter-department" class="select">
             <option value="">All departments</option>
             <!-- Department options populated by app.js from the data set -->
@@ -92,13 +92,13 @@
       <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
 
       <div class="table-scroll">
-        <table id="patients-table" class="patients-table">
-          <thead>
-            <tr id="patients-table-head">
+        <table id="patients-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="patients-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="patients-table-body">
+          <tbody id="patients-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
