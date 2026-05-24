@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#incidents-table">Skip to incidents table</a>
+  <a class="skip-link visually-hidden" href="#incidents-table">Skip to incidents table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Incident ID, NHS number, or patient name..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-severity">WHO Severity</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-severity">WHO Severity</label>
           <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Near Miss">Near Miss</option>
@@ -61,8 +61,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-merp">NCC MERP</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-merp">NCC MERP</label>
           <select id="filter-merp" class="select">
             <option value="">All categories</option>
             <option value="A">A</option>
@@ -77,8 +77,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-reported">Reported</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-reported">Reported</label>
           <select id="filter-reported" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
@@ -111,13 +111,13 @@
       <h2 id="incidents-table-heading" class="visually-hidden">Incidents</h2>
 
       <div class="table-scroll">
-        <table id="incidents-table" class="incidents-table">
-          <thead>
-            <tr id="incidents-table-head">
+        <table id="incidents-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="incidents-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="incidents-table-body">
+          <tbody id="incidents-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

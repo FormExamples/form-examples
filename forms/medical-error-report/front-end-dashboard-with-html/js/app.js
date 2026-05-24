@@ -177,6 +177,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -222,6 +223,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.whoSeverity === 'Critical') {
       tr.classList.add('row-critical');
     } else if (row.whoSeverity === 'Severe') {
@@ -229,14 +231,14 @@ function renderTableBody() {
     }
 
     tr.innerHTML = `
-      <td><span class="incident-id">${esc(row.incidentId)}</span></td>
-      <td><span class="incident-date">${esc(row.incidentDate)}</span></td>
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="severity-badge ${severityClass(row.whoSeverity)}">${esc(row.whoSeverity)}</span></td>
-      <td><span class="merp-badge ${merpClass(row.merpCategory)}">${esc(row.merpCategory)}</span></td>
-      <td>${esc(row.errorType)}</td>
-      <td>
+      <td class="data-table-td"><span class="incident-id">${esc(row.incidentId)}</span></td>
+      <td class="data-table-td"><span class="incident-date">${esc(row.incidentDate)}</span></td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td"><span class="severity-badge ${severityClass(row.whoSeverity)}">${esc(row.whoSeverity)}</span></td>
+      <td class="data-table-td"><span class="merp-badge ${merpClass(row.merpCategory)}">${esc(row.merpCategory)}</span></td>
+      <td class="data-table-td">${esc(row.errorType)}</td>
+      <td class="data-table-td">
         <span class="reported-badge ${row.reportedFlag ? 'reported-yes' : 'reported-no'}">
           ${row.reportedFlag ? 'Yes' : 'No'}
         </span>
