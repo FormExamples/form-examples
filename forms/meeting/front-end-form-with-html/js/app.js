@@ -338,6 +338,92 @@ function updateSummaryCount() {
 	summaryCountEl.parentElement.classList.toggle('over', n > 250);
 }
 
+// ----------------------------------------------------------------------
+// Step list + progress
+// ----------------------------------------------------------------------
+const STEP_DEFS = [
+	{ step: 1,  title: 'Organiser' },
+	{ step: 2,  title: 'Title & purpose' },
+	{ step: 3,  title: 'Invitation' },
+	{ step: 4,  title: 'Agenda' },
+	{ step: 5,  title: 'Participants' },
+	{ step: 6,  title: 'Resources' },
+	{ step: 7,  title: 'Recurrence' },
+	{ step: 8,  title: 'Summary' },
+	{ step: 9,  title: 'Results' },
+	{ step: 10, title: 'Sign-off' },
+];
+
+function renderStepList() {
+	const ol = document.getElementById('step-list');
+	if (!ol) return;
+	ol.innerHTML = '';
+	for (const def of STEP_DEFS) {
+		const li = document.createElement('li');
+		li.className = 'step-list-item';
+		li.dataset.status = 'waiting';
+		li.dataset.step = String(def.step);
+		li.setAttribute('aria-label', 'Step ' + def.step + ': ' + def.title);
+		li.innerHTML = '<span>' + def.title + '</span>';
+		li.addEventListener('click', () => {
+			const target = document.getElementById('step-' + def.step);
+			if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		});
+		ol.appendChild(li);
+	}
+}
+
+function fieldsetAnswered(stepId) {
+	const fs = document.getElementById(stepId);
+	if (!fs) return false;
+	const inputs = fs.querySelectorAll('input, select, textarea');
+	for (const el of inputs) {
+		if (el.type === 'button' || el.type === 'reset' || el.type === 'submit') continue;
+		if (el.type === 'checkbox' || el.type === 'radio') {
+			if (el.checked) return true;
+		} else if (el.value && String(el.value).trim() !== '') {
+			// Skip default "draft" status and default "none"/"1" values; treat
+			// any non-empty as answered for step-list purposes.
+			return true;
+		}
+	}
+	// Also count tables with rows
+	const tables = fs.querySelectorAll('table.rowset tbody');
+	for (const tb of tables) if (tb.rows.length > 0) return true;
+	return false;
+}
+
+function updateStepStatuses() {
+	const ol = document.getElementById('step-list');
+	if (!ol) return;
+	let firstUnfinished = -1;
+	let answered = 0;
+	for (const def of STEP_DEFS) {
+		const li = ol.querySelector('[data-step="' + def.step + '"]');
+		if (!li) continue;
+		if (fieldsetAnswered('step-' + def.step)) {
+			li.dataset.status = 'finished';
+			li.removeAttribute('aria-current');
+			answered += 1;
+		} else {
+			li.dataset.status = 'waiting';
+			if (firstUnfinished === -1) firstUnfinished = def.step;
+		}
+	}
+	if (firstUnfinished === -1) firstUnfinished = 1;
+	const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+	if (current) {
+		current.setAttribute('aria-current', 'step');
+		if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+	}
+	ol.dataset.current = String(firstUnfinished - 1);
+	const pct = Math.round((answered / STEP_DEFS.length) * 100);
+	const progress = document.getElementById('progress');
+	const progressText = document.getElementById('progress-text');
+	if (progress) progress.value = pct;
+	if (progressText) progressText.textContent = answered + ' of ' + STEP_DEFS.length + ' sections answered (' + pct + '%)';
+}
+
 // localStorage autosave — debounced.
 let saveTimer = null;
 function scheduleSave() {
@@ -421,7 +507,10 @@ document.addEventListener('click', (e) => {
 form.addEventListener('input', () => {
 	updateSummaryCount();
 	scheduleSave();
+	updateStepStatuses();
 });
+
+form.addEventListener('change', () => { updateStepStatuses(); });
 
 form.addEventListener('reset', () => {
 	reportEl.hidden = true;
@@ -431,7 +520,7 @@ form.addEventListener('reset', () => {
 		document.getElementById(id).tBodies[0].innerHTML = '';
 	}
 	localStorage.removeItem(DRAFT_KEY);
-	setTimeout(updateSummaryCount, 0);
+	setTimeout(() => { updateSummaryCount(); updateStepStatuses(); }, 0);
 });
 
 validateButton.addEventListener('click', () => {
@@ -455,7 +544,9 @@ exportButton.addEventListener('click', () => {
 	URL.revokeObjectURL(url);
 });
 
+renderStepList();
 restoreDraft();
 updateSummaryCount();
+updateStepStatuses();
 
 })();
