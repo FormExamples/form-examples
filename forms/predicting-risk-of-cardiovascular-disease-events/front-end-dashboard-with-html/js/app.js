@@ -169,6 +169,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -214,6 +215,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.riskCategory === 'high') {
       tr.classList.add('row-high-risk');
     }
@@ -222,16 +224,16 @@ function renderTableBody() {
     const tenYearStr = (row.tenYearRisk ?? 0).toFixed(1) + '%';
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(riskLabel)}</span></td>
-      <td><span class="ten-year-risk">${esc(tenYearStr)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(riskLabel)}</span></td>
+      <td class="data-table-td"><span class="ten-year-risk">${esc(tenYearStr)}</span></td>
+      <td class="data-table-td">
         <span class="diabetes-badge ${row.diabetes ? 'diabetes-yes' : 'diabetes-no'}">
           ${row.diabetes ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="egfr ${egfrClass(row.egfr)}">${esc(row.egfr)}</span></td>
+      <td class="data-table-td"><span class="egfr ${egfrClass(row.egfr)}">${esc(row.egfr)}</span></td>
     `;
     body.appendChild(tr);
   }
