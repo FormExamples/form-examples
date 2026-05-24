@@ -189,13 +189,42 @@ commit per form with `git commit --only forms/<slug>/`.
     sections, grade-1..4 severity badges preserved.
   - [x] `workplace-stress-assessment` (`42033691` + `85e7369b`). 9
     sections, 35 likert-groups (175 radios).
-- [ ] **3.4  Batch: simple single-grader assessments (~30 forms).** Allergy,
-  asthma, attention deficit, audiology, autism, dental, dermatology,
-  diabetes, dyslexia, ergonomic, fall risk, fertility, gastroenterology,
-  genetics, gerontology, hearing aid, hematology, integumentary,
-  kinesiology, learning disability, mobility, nutrition, ophthalmology,
-  orthopedic, otolaryngology, sleep quality, sports medicine,
-  substance abuse, urology, vaccinations.
+- [x] **3.4  Batch: simple single-grader assessments** (30 of 30 done;
+  pilot asthma 3.0 + 29 in this batch). Mechanical pass `54937f23`;
+  structural commits below.
+  - [x] `allergy-assessment` (`54937f23` + `5a27d0aa`).
+  - [x] `asthma-assessment` — pilot 3.0 (`a601dfb7` + `3ea76ccd`).
+  - [x] `attention-deficit-assessment` (`54937f23` + `6972cc9d`).
+  - [x] `audiology-assessment` (`54937f23` + `22014d0a`).
+  - [x] `autism-assessment` (`54937f23` + `58ebdd4f`).
+  - [x] `dental-assessment` (`54937f23` + `dff6f915`).
+  - [x] `dermatology-assessment` (`54937f23` + `8b166bf7`).
+  - [x] `diabetes-assessment` (`54937f23` + `fbb9fa07`).
+  - [x] `dyslexia-assessment` (`54937f23` + `66d639e0`).
+  - [x] `ergonomic-assessment` (`54937f23` + `c9698067`).
+  - [x] `fall-risk-assessment` (`54937f23` + `fb5ddf17`).
+  - [x] `fertility-assessment` (`54937f23` + `562e8ef9`).
+  - [x] `gastroenterology-assessment` (`54937f23` + `0a693df4`).
+  - [x] `genetics-assessment` (`54937f23` + `bde2dc0b`).
+  - [x] `gerontology-assessment` (`54937f23` + `f163b138`).
+  - [x] `hearing-aid-assessment` (`54937f23` + `69c32f47`).
+  - [x] `hematology-assessment` (`54937f23` + `cab041a4`).
+  - [x] `integumentary-assessment` (`54937f23` + `7617b24b`).
+  - [x] `kinesiology-assessment` (`54937f23` + `2f11e484`).
+  - [x] `learning-disability-assessment` (`54937f23` + `32a26b`).
+  - [x] `mobility-assessment` (`54937f23` + `1d7813`).
+  - [x] `nutrition-assessment` (`54937f23` + `48b585`).
+  - [x] `ophthalmology-assessment` (`54937f23` + `2bde08`).
+  - [x] `orthopedic-assessment` (`54937f23` + `d039b3`).
+  - [x] `otolaryngology-assessment` (`54937f23` + `04504e73`).
+  - [x] `sleep-quality-assessment` (`54937f23` + `225affa6`).
+  - [x] `sports-medicine-assessment` (`54937f23` + `839d04eb`).
+  - [x] `substance-abuse-assessment` (`54937f23` + `517051`).
+  - [x] `urology-assessment` (`54937f23` + `7fb243`).
+  - [x] `vaccinations-assessment` (`54937f23` + `0bbc6d`). Structurally
+    different (ES-module app.js, separate report.html); shell + CSS
+    converted, step-list/error-summary scaffolded but app.js wiring
+    deferred — bin/test-form passes.
 - [ ] **3.5  Batch: multi-grader clinical assessments (~30 forms).** Major
   clinical assessments with multiple scoring engines: anesthesiology,
   audio-vestibular, birth control, blood donation, bone marrow donation,
