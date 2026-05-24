@@ -206,12 +206,29 @@ commit per form with `git commit --only forms/<slug>/`.
   post-traumatic stress, prenatal, psychiatry, psychology, pulmonology,
   renal, respirology, rheumatology, seasonal affective disorder,
   semaglutide, stroke, sundowner syndrome.
-- [ ] **3.6  Batch: pre-op, post-op, intake, transfer (~10 forms).**
-  `consent-to-treatment`, `hospital-discharge`, `medical-error-report`,
-  `medical-records-release-permission`, `patient-intake`,
-  `post-operative-report`, `pre-operative-assessment-by-patient`,
-  `prescription-request`, `provider-transfer-request`, `return-to-work`.
-  (Note: pre-op-by-clinician already done as canonical in Phase 1.)
+- [x] **3.6  Batch: pre-op, post-op, intake, transfer** (9 of 10 done +
+  1 N/A).
+  - [x] `consent-to-treatment` (`9bfe03ec` + `24f9da9c`). 8 sections;
+    sig as checkbox+date+name (HIPAA pattern).
+  - [x] `hospital-discharge` (`9bfe03ec` + `5f449312`). 10 sections;
+    list editors with LIST_SLOTS tracking.
+  - [x] `medical-error-report` (`9bfe03ec` + `d1f43499`). 10 sections,
+    conditional visibility honored in validateForm.
+  - [x] `medical-records-release-permission` (`9bfe03ec` + `f9836e46`).
+    8 sections; sig as patientSignatureConfirmed yes/no + date.
+  - [x] `patient-intake` (`9bfe03ec` + `72c6168d`). 10 sections,
+    checkboxGroup builder added for multi-select fields.
+  - [x] `post-operative-report` (`9bfe03ec` + `b941e197`). 10 sections;
+    Clavien-Dindo grade badges preserved.
+  - [x] `pre-operative-assessment-by-patient` (`9bfe03ec` + `a08343c4`).
+    16 sections (patient companion to canonical clinician). 27/27.
+  - [x] `prescription-request` (`9bfe03ec` + `2874e50a`). 5 sections.
+  - [x] `provider-transfer-request` (`9bfe03ec` + `c918f848`). 9
+    sections, SBAR shape. 27/27.
+  - [-] `return-to-work` — **N/A**. `front-end-form-with-html/`
+    contains only docs (no index.html / css / js). Implementation
+    hasn't been built; Lily refactor doesn't apply until the form
+    is implemented.
 - [x] **3.7  Batch: cardiovascular calculators** (4 of 4 done).
   - [x] `framingham-risk-score-for-hard-coronary-heart-disease`
     (`f8aeb9c5` + `826660ee`). 10 steps, 74 inputs.
