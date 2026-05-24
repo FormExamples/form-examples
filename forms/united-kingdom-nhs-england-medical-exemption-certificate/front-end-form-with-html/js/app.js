@@ -13,7 +13,8 @@
   const form = document.getElementById("application-form");
   const steps = Array.from(document.querySelectorAll(".step"));
   const progressText = document.getElementById("progress-text");
-  const progressFill = document.getElementById("progress-bar-fill");
+  const progressBar = document.getElementById("progress");
+  const stepList = document.getElementById("step-list");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const submitBtn = document.getElementById("submit-btn");
@@ -37,14 +38,51 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(collect())); } catch {}
   }
 
+  function renderStepList() {
+    if (!stepList) return;
+    stepList.innerHTML = "";
+    for (let i = 1; i <= TOTAL; i++) {
+      const li = document.createElement("li");
+      li.className = "step-list-item";
+      li.dataset.status = "waiting";
+      li.dataset.step = String(i);
+      li.setAttribute("aria-label", "Step " + i + ": " + (F.STEP_TITLES[i - 1] || ""));
+      const span = document.createElement("span");
+      span.textContent = (F.STEP_TITLES[i - 1] || ("Step " + i));
+      li.appendChild(span);
+      li.addEventListener("click", () => { persist(); showStep(i); });
+      stepList.appendChild(li);
+    }
+  }
+
+  function updateStepListStatuses() {
+    if (!stepList) return;
+    for (let i = 1; i <= TOTAL; i++) {
+      const li = stepList.querySelector('[data-step="' + i + '"]');
+      if (!li) continue;
+      if (i < current) {
+        li.dataset.status = "finished";
+        li.removeAttribute("aria-current");
+      } else if (i === current) {
+        li.dataset.status = "in-progress";
+        li.setAttribute("aria-current", "step");
+      } else {
+        li.dataset.status = "waiting";
+        li.removeAttribute("aria-current");
+      }
+    }
+    stepList.dataset.current = String(current - 1);
+  }
+
   function showStep(n) {
     current = Math.min(TOTAL, Math.max(1, n));
     steps.forEach((s) => { s.hidden = Number(s.dataset.step) !== current; });
     progressText.textContent = `Step ${current} of ${TOTAL} — ${F.STEP_TITLES[current - 1]}`;
-    progressFill.style.width = `${Math.round((current / TOTAL) * 100)}%`;
+    if (progressBar) progressBar.value = Math.round((current / TOTAL) * 100);
     prevBtn.disabled = current === 1;
     nextBtn.hidden = current === TOTAL;
     submitBtn.hidden = current !== TOTAL;
+    updateStepListStatuses();
     if (current === 10) renderSummary();
   }
 
@@ -196,6 +234,7 @@
     if (current === 5) updatePregnancyAdvice();
   });
 
+  renderStepList();
   rehydrate();
   showStep(1);
 })(window);
