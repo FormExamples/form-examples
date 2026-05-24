@@ -222,6 +222,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -267,6 +268,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.status === 'urgent') {
       tr.classList.add('row-urgent');
     } else if (row.riskCategory === 'veryHigh') {
@@ -274,19 +276,19 @@ function renderTableBody() {
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(riskLabel[row.riskCategory] || row.riskCategory)}</span></td>
-      <td><span class="numeric-cell ${hba1cClass(row.hba1cMmolMol)}">${esc(row.hba1cMmolMol)}</span></td>
-      <td><span class="numeric-cell ${bpClass(row.systolicBp)}">${esc(row.systolicBp)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.riskCategory)}">${esc(riskLabel[row.riskCategory] || row.riskCategory)}</span></td>
+      <td class="data-table-td"><span class="numeric-cell ${hba1cClass(row.hba1cMmolMol)}">${esc(row.hba1cMmolMol)}</span></td>
+      <td class="data-table-td"><span class="numeric-cell ${bpClass(row.systolicBp)}">${esc(row.systolicBp)}</span></td>
+      <td class="data-table-td">
         <span class="cvd-badge ${row.hasEstablishedCvd ? 'cvd-yes' : 'cvd-no'}">
           ${row.hasEstablishedCvd ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="flag-count ${flagCountClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
-      <td><span class="status-badge ${statusClass(row.status)}">${esc(statusLabel[row.status] || row.status)}</span></td>
-      <td><span class="date-cell">${esc(row.submittedDate)}</span></td>
+      <td class="data-table-td"><span class="flag-count ${flagCountClass(row.flagCount)}">${esc(row.flagCount)}</span></td>
+      <td class="data-table-td"><span class="status-badge ${statusClass(row.status)}">${esc(statusLabel[row.status] || row.status)}</span></td>
+      <td class="data-table-td"><span class="date-cell">${esc(row.submittedDate)}</span></td>
     `;
     body.appendChild(tr);
   }
