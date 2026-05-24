@@ -8,27 +8,28 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Hematology Assessment</h1>
       <p class="subtitle">CBC interpretation, coagulation review, iron studies, and composite abnormality grading.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Hematology Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
@@ -50,12 +51,21 @@
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Hematology Assessment"
     >
-      <div id="form-sections" class="form-sections">
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
         <!-- Sections rendered by js/app.js: -->
         <!-- 1 Patient Information, 2 Blood Count Analysis, 3 Coagulation Studies, -->
         <!-- 4 Peripheral Blood Film, 5 Iron Studies, 6 Hemoglobinopathy Screening, -->
@@ -73,13 +83,15 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
