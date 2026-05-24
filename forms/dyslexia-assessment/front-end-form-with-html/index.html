@@ -4,63 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dyslexia Assessment — patient questionnaire</title>
-  <meta name="description" content="Dyslexia assessment using standardised scores across reading, writing, spelling, phonological processing, working memory, and processing speed.">
+  <meta name="description" content="Adult dyslexia screening.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Dyslexia Assessment</h1>
-      <p class="subtitle">Standardised score battery for specific learning difficulty evaluation.</p>
+      <p class="subtitle">Adult dyslexia screening.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Dyslexia Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main>
     <div class="intro">
       <p>
-        Please complete this questionnaire to support a structured assessment
-        of specific learning difficulties. Standardised scores have a mean of
-        100 and a standard deviation of 15; the lowest domain score sets the
-        overall severity classification.
-      </p>
-      <p>
-        All answers are saved automatically in your browser as you go. This
-        screening tool is not a substitute for a full diagnostic assessment by
-        a qualified specialist.
+        Please complete the questions below. All answers are saved automatically
+        in your browser as you go.
       </p>
     </div>
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Dyslexia Assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
-        <!-- 1 Demographics, 2 Developmental History, 3 Educational Background, -->
-        <!-- 4 Reading Assessment, 5 Writing & Spelling Assessment, -->
-        <!-- 6 Phonological Processing, 7 Working Memory & Processing Speed, -->
-        <!-- 8 Emotional & Behavioural Impact, 9 Previous Support & Interventions, -->
-        <!-- 10 Recommendations & Support Plan -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes. -->
       </div>
 
       <div class="button-group">
@@ -73,21 +71,21 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
-        Standardised score categories: 85-115 average (no dyslexia), 70-84
-        below average (mild), 55-69 well below average (moderate), &lt;55
-        significantly below average (severe). For information only; please
-        discuss results with a specialist clinician or educational
-        psychologist.
+        This screening tool is a structured questionnaire. The grading and
+        flagged issues are for information only and are not a diagnosis;
+        please discuss your results with a qualified clinician.
       </p>
     </footer>
   </main>
