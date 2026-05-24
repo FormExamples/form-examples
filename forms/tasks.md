@@ -232,10 +232,20 @@ commit per form with `git commit --only forms/<slug>/`.
   `…-for-health-and-care-decisions`, `united-kingdom-maternity-certificate-
   mat-b1`, `united-kingdom-nhs-england-medical-exemption-certificate`,
   `united-kingdom-statement-of-fitness-for-work`.
-- [ ] **3.10  Batch: WHO emergency/referral forms (~6 forms).**
-  `who-acute-referral-form`, `who-counter-referral-form`,
-  `who-emergency-first-aid-form`, `who-emergency-unit-general-form`,
-  `who-emergency-unit-trauma-form`, `who-prehospital-form`.
+- [x] **3.10  Batch: WHO emergency/referral forms** (6 of 6 done).
+  - [x] `who-acute-referral-form` (`b3e14cf3` + `3faec322`). 8-section
+    SBAR shape. 61 Lily inputs.
+  - [x] `who-counter-referral-form` (`b3e14cf3` + `339d3e2b`). 7
+    sections; NHS-blue tokens.
+  - [x] `who-emergency-first-aid-form` (`b3e14cf3` + `fc9b2c91`).
+    12-section CFAR; 30/30 smoke checks.
+  - [x] `who-emergency-unit-general-form` (`b3e14cf3` + `37b667f8`).
+    16 sections; ROS/PE inset-block cards.
+  - [x] `who-emergency-unit-trauma-form` (`b3e14cf3` + `c9865b98`).
+    **17 sections** (largest in corpus by section count); 179
+    error-message spans; app.js compacted 1789→1320 LOC.
+  - [x] `who-prehospital-form` (`b3e14cf3` + `c7957f7e`). 16 EMS
+    sections; empty-submit → 24 validation errors.
 - [ ] **3.11  Batch: misc / planning / templates.** `arc42`,
   `agile-consulting-scorecard-for-hiring-help` (if present),
   `casualty-card-form`, `emergency-medical-technician-psychomotor-
