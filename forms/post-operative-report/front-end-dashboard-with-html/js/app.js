@@ -208,6 +208,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -253,23 +254,24 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (SEVERE_GRADES.has(row.clavienDindoGrade)) {
       tr.classList.add('row-severe');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td class="procedure-cell">
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td procedure-cell">
         <span class="procedure-name">${esc(row.procedureName)}</span>
         <span class="procedure-category">${esc(row.procedureCategory)}</span>
       </td>
-      <td>${esc(row.surgeon)}</td>
-      <td>${esc(row.operationDate)}</td>
-      <td><span class="ebl-value">${esc(formatEbl(row.estimatedBloodLossMl))}</span></td>
-      <td><span class="grade-badge ${gradeClass(row.clavienDindoGrade)}">${esc(row.clavienDindoGrade)}</span></td>
-      <td><span class="disposition-badge ${dispositionClass(row.disposition)}">${esc(row.disposition)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.surgeon)}</td>
+      <td class="data-table-td">${esc(row.operationDate)}</td>
+      <td class="data-table-td"><span class="ebl-value">${esc(formatEbl(row.estimatedBloodLossMl))}</span></td>
+      <td class="data-table-td"><span class="grade-badge ${gradeClass(row.clavienDindoGrade)}">${esc(row.clavienDindoGrade)}</span></td>
+      <td class="data-table-td"><span class="disposition-badge ${dispositionClass(row.disposition)}">${esc(row.disposition)}</span></td>
+      <td class="data-table-td">
         <span class="flagged-badge ${row.flagged ? 'flagged-yes' : 'flagged-no'}">
           ${row.flagged ? 'Yes' : 'No'}
         </span>
