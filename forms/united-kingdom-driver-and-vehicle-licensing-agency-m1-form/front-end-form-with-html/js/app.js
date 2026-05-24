@@ -1,20 +1,16 @@
 // DVLA M1 — patient wizard (vanilla classic <script>).
 //
 // Single-page continuous wizard: every section is rendered into the page in
-// document order. The user scrolls through them; a top-of-page progress
-// summary reflects how many fields have been answered. Submission runs the
-// pure validator and renders an inline report. State is persisted to
-// localStorage so a partial fill survives a page reload.
+// document order. The user scrolls through them; a top-of-page native
+// <progress> + step-list reflects how many fields have been answered.
+// Submission runs the pure validator and renders an inline report. State is
+// persisted to localStorage so a partial fill survives a page reload.
 //
 // Conditional rendering: when Q1 = No, the Q2 (Mental Health Conditions)
 // and Q3 (Recent Contact) section cards are hidden from view entirely; the
 // form ends after Q1 -> Authorisation. When Q1 = Yes, both sections are
 // visible. This mirrors the SvelteKit step components.
 
-// Sibling scripts loaded as plain <script> tags (in dependency order)
-// attach their exports to `window.DvlaM1Form`. Pulling them off here keeps
-// the rest of this file referring to short local names. Whole file wrapped
-// in an IIFE so its top-level identifiers don't leak to the global scope.
 (function () {
 'use strict';
 const {
@@ -29,6 +25,7 @@ const {
 
 const STORAGE_KEY =
   'united-kingdom-driver-and-vehicle-licensing-agency-m1-form.front-end-form-with-html.v1';
+const TOTAL_STEPS = 6;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -36,20 +33,15 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyAssessment();
     const parsed = JSON.parse(raw);
-    // Merge over a fresh empty so any newly-added fields default correctly.
     const fresh = emptyAssessment();
     for (const key of Object.keys(fresh)) {
       if (parsed && typeof parsed[key] === 'object' && parsed[key] !== null) {
-        // Two-level deep merge for healthcareProfessionals.{gp,consultant}.
         if (key === 'healthcareProfessionals') {
           const hp = parsed[key];
-          fresh[key].gp = { ...fresh[key].gp, ...(hp.gp || {}) };
-          fresh[key].consultant = {
-            ...fresh[key].consultant,
-            ...(hp.consultant || {})
-          };
+          fresh[key].gp = Object.assign({}, fresh[key].gp, hp.gp || {});
+          fresh[key].consultant = Object.assign({}, fresh[key].consultant, hp.consultant || {});
         } else {
-          fresh[key] = { ...fresh[key], ...parsed[key] };
+          fresh[key] = Object.assign({}, fresh[key], parsed[key]);
         }
       }
     }
@@ -60,10 +52,10 @@ function loadState() {
   }
 }
 
-/** @param {import('./types.js').AssessmentData} state */
-function saveState(state) {
+/** @param {import('./types.js').AssessmentData} stateArg */
+function saveState(stateArg) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stateArg));
   } catch (e) {
     console.warn('Could not save M1 submission to localStorage.', e);
   }
@@ -91,14 +83,6 @@ let lastResult = null;
 // Helpers
 // ----------------------------------------------------------------------
 
-/**
- * Set a field on the state and persist. `path` is a dotted path inside
- * `state`; e.g. 'personalDetails.fullName' or
- * 'healthcareProfessionals.gp.gpName'.
- *
- * @param {string} path
- * @param {any} value
- */
 function setField(path, value) {
   const parts = path.split('.');
   let node = state;
@@ -109,7 +93,6 @@ function setField(path, value) {
   updateConditionalSections();
 }
 
-/** Read a value from the state via the same dotted-path convention. */
 function getField(path) {
   const parts = path.split('.');
   let node = state;
@@ -120,7 +103,6 @@ function getField(path) {
   return node;
 }
 
-/** Escape user-entered text for safe rendering. */
 function esc(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;')
@@ -130,107 +112,130 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+function pathToId(path) {
+  return path.replace(/\./g, '-');
+}
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 // ----------------------------------------------------------------------
 // Component builders
 // ----------------------------------------------------------------------
 
-/**
- * Build a labelled text input.
- * @param {{ label: string, path: string, type?: string,
- *           placeholder?: string, required?: boolean }} opts
- */
 function textInput(opts) {
-  const id = opts.path.replace(/\./g, '-');
+  const id = pathToId(opts.path);
   const value = getField(opts.path) || '';
   const labelText =
     esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
-  const attrs = [
-    `id="${id}"`,
-    `name="${id}"`,
-    `type="${type}"`,
-    `class="text-input"`,
-    `value="${esc(value)}"`
-  ];
-  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  const cls = lilyInputClass(type);
+  const placeholderAttr = opts.placeholder ? ' placeholder="' + esc(opts.placeholder) + '"' : '';
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
 
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input ${attrs.join(' ')}>
-  `;
+  wrapper.innerHTML =
+    '<label class="label" for="' + id + '"' + labelRequired + '>' + labelText + '</label>' +
+    '<input id="' + id + '" name="' + id + '" type="' + type + '" class="' + cls + '"' +
+    ' value="' + esc(value) + '"' + placeholderAttr +
+    ' aria-describedby="' + id + '-error"' + requiredAttrs + '>' +
+    '<span class="error-message" id="' + id + '-error"></span>';
 
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
     setField(opts.path, input.value);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
-/**
- * Build a labelled multi-line text area.
- * @param {{ label: string, path: string, rows?: number,
- *           placeholder?: string }} opts
- */
 function textArea(opts) {
-  const id = opts.path.replace(/\./g, '-');
+  const id = pathToId(opts.path);
   const value = getField(opts.path) || '';
+  const labelText =
+    esc(opts.label) +
+    (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const placeholderAttr = opts.placeholder ? ' placeholder="' + esc(opts.placeholder) + '"' : '';
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  wrapper.innerHTML = `
-    <label for="${id}">${esc(opts.label)}</label>
-    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="text-area-input">${esc(value)}</textarea>
-  `;
+  wrapper.innerHTML =
+    '<label class="label" for="' + id + '"' + labelRequired + '>' + labelText + '</label>' +
+    '<textarea id="' + id + '" name="' + id + '" rows="' + (opts.rows || 3) + '"' +
+    placeholderAttr + ' class="text-area-input"' +
+    ' aria-describedby="' + id + '-error"' + requiredAttrs + '>' + esc(value) + '</textarea>' +
+    '<span class="error-message" id="' + id + '-error"></span>';
   const ta = wrapper.querySelector('textarea');
-  ta.addEventListener('input', () => setField(opts.path, ta.value));
+  ta.addEventListener('input', () => {
+    setField(opts.path, ta.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
-/**
- * Build a radio group.
- * @param {{ label: string, path: string, required?: boolean,
- *           options: { value: string, label: string }[] }} opts
- */
 function radioGroup(opts) {
-  const groupId = opts.path.replace(/\./g, '-');
+  const groupId = pathToId(opts.path);
   const current = getField(opts.path);
-  const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
-
-  const legend = document.createElement('legend');
-  legend.innerHTML =
+  const labelText =
     esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'field';
+  wrapper.id = groupId + '-fieldset';
+
+  const legend = document.createElement('legend');
+  legend.className = 'label';
+  if (opts.required) legend.setAttribute('data-required', '');
+  legend.innerHTML = labelText;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
-    const radioId = `${groupId}-${option.value || 'blank'}`;
-    const label = document.createElement('label');
-    label.className = 'radio-option';
-    label.htmlFor = radioId;
+    const radioId = groupId + '-' + (option.value || 'blank');
+    const lab = document.createElement('label');
+    lab.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
-    label.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
-      <span>${esc(option.label)}</span>
-    `;
-    const input = label.querySelector('input');
+    const requiredAttr = opts.required ? ' data-required' : '';
+    lab.innerHTML =
+      '<input class="radio-input" type="radio" id="' + radioId + '" name="' + groupId +
+      '" value="' + esc(option.value) + '"' + checked + requiredAttr + '>' +
+      '<span>' + esc(option.label) + '</span>';
+    const input = lab.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setField(opts.path, option.value);
+      if (input.checked) {
+        clearFieldError(groupId);
+        setField(opts.path, option.value);
+      }
     });
-    list.appendChild(label);
+    list.appendChild(lab);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = groupId + '-error';
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
-/** Yes/No question is a 2-option radio group. */
 function yesNoQuestion(opts) {
   return radioGroup({
     label: opts.label,
@@ -243,33 +248,27 @@ function yesNoQuestion(opts) {
   });
 }
 
-/**
- * Build a section card.
- * @param {{ stepNumber: number, title: string, description?: string,
- *           id?: string }} opts
- */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
-  card.id = opts.id || `step-${opts.stepNumber}`;
+  card.id = opts.id || ('step-' + opts.stepNumber);
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? '<span class="section-description">' + esc(opts.description) + '</span>'
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Step ${opts.stepNumber} of 6</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
-  `;
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML =
+    '<span class="section-step">Step ' + opts.stepNumber + ' of ' + TOTAL_STEPS + '</span>' +
+    '<h2 class="section-title">' + esc(opts.title) + '</h2>' +
+    desc;
+  card.appendChild(legend);
   return card;
 }
 
-/** Inline notice element (info / warn / danger). */
 function notice(kind, html) {
   const div = document.createElement('div');
-  div.className = `notice notice-${kind}`;
+  div.className = 'notice notice-' + kind;
   div.innerHTML = html;
   return div;
 }
@@ -349,7 +348,6 @@ function renderStep2() {
     description: 'GP and consultant details for your mental health condition.'
   });
 
-  // GP details ---------------------------------------------------------
   const gpHeader = document.createElement('h3');
   gpHeader.className = 'section-subtitle';
   gpHeader.textContent = 'GP details';
@@ -385,9 +383,10 @@ function renderStep2() {
     type: 'date'
   }));
 
-  card.appendChild(document.createElement('hr')).className = 'section-divider';
+  const hr1 = document.createElement('hr');
+  hr1.className = 'section-divider';
+  card.appendChild(hr1);
 
-  // Consultant details -------------------------------------------------
   const conHeader = document.createElement('h3');
   conHeader.className = 'section-subtitle';
   conHeader.textContent = 'Consultant details';
@@ -446,7 +445,6 @@ function renderStep3() {
     required: true
   }));
 
-  // Conditional: shown only when Q1 === 'no'
   const noNotice = notice(
     'info',
     'You answered <strong>No</strong>. The DVLA instructions ask you not to complete Questions 2 or 3. You may continue directly to the authorisation step, or start over.'
@@ -458,7 +456,6 @@ function renderStep3() {
 }
 
 function renderStep4() {
-  // Whole card is conditional on Q1 !== 'no'.
   const card = sectionCard({
     stepNumber: 4,
     title: 'Question 2 — Mental Health Conditions',
@@ -503,7 +500,6 @@ function renderStep4() {
     path: 'mentalHealthConditions.other'
   }));
 
-  // Sub-conditional: details when "other" === 'yes'
   const detailsHost = document.createElement('div');
   detailsHost.dataset.conditional = 'mentalHealthConditions.other=yes';
   detailsHost.appendChild(textArea({
@@ -513,7 +509,6 @@ function renderStep4() {
   }));
   card.appendChild(detailsHost);
 
-  // Sub-conditional: warn when impairment variant === 'yes'
   const impairWarn = notice(
     'warn',
     'You indicated suicidal thoughts or impairment. If you are in immediate danger, please call your local emergency number (999 in the UK) or contact the Samaritans on 116 123. Your healthcare professional should review this report urgently.'
@@ -525,7 +520,6 @@ function renderStep4() {
 }
 
 function renderStep5() {
-  // Whole card is conditional on Q1 !== 'no'.
   const card = sectionCard({
     stepNumber: 5,
     title: 'Question 3 — Recent Contact',
@@ -540,7 +534,6 @@ function renderStep5() {
     path: 'recentContact.hadRecentContact'
   }));
 
-  // Sub-conditional: dates when hadRecentContact === 'yes'
   const datesHost = document.createElement('div');
   datesHost.dataset.conditional = 'recentContact.hadRecentContact=yes';
   const note = document.createElement('p');
@@ -638,22 +631,18 @@ function renderStep6() {
 // Conditional sections
 // ----------------------------------------------------------------------
 
-/**
- * Hide / show any element with `data-conditional="path=value"` (or
- * `path!=value`) based on the current state. Used both at the section-card
- * level (Q2/Q3 are hidden when Q1 = No) and at the in-section level
- * (Q2 details when "other" = yes, etc.).
- */
 function updateConditionalSections() {
   const hosts = document.querySelectorAll('[data-conditional]');
   hosts.forEach((host) => {
     const expr = host.getAttribute('data-conditional');
     let path, target, negate = false;
     if (expr.includes('!=')) {
-      [path, target] = expr.split('!=');
+      const parts = expr.split('!=');
+      path = parts[0]; target = parts[1];
       negate = true;
     } else {
-      [path, target] = expr.split('=');
+      const parts = expr.split('=');
+      path = parts[0]; target = parts[1];
     }
     const current = getField(path);
     const matches = String(current == null ? '' : current) === target;
@@ -663,68 +652,221 @@ function updateConditionalSections() {
 }
 
 // ----------------------------------------------------------------------
+// Step-list
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1, title: 'About you' },
+  { step: 2, title: 'Healthcare' },
+  { step: 3, title: 'Q1 Diagnosis' },
+  { step: 4, title: 'Q2 Conditions' },
+  { step: 5, title: 'Q3 Recent contact' },
+  { step: 6, title: 'Authorisation' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', 'Step ' + def.step + ': ' + def.title);
+    li.innerHTML = '<span>' + esc(def.title) + '</span>';
+    li.addEventListener('click', () => {
+      const target = document.getElementById('step-' + def.step);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector('[data-step="' + def.step + '"]');
+    if (!li) continue;
+    const a = sectionAnswered[def.step] || 0;
+    const t = sectionTotal[def.step] || 0;
+    if (t > 0 && a >= t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
 // Progress
 // ----------------------------------------------------------------------
 
-/**
- * Tracked fields. The set is dynamic because Q2 and Q3 do not apply when
- * Q1 = No: in that case we only count Personal Details, Q1, and the
- * Authorisation block, so the patient who answers No to Q1 can still reach
- * 100%.
- *
- * @returns {string[]}
- */
-function trackedFieldPaths() {
-  const stoppedAtQ1 = state.diagnosisConfirmation.hasMentalHealthDiagnosis === 'no';
-
-  /** @type {string[]} */
-  const paths = [
-    // Personal details (4 required-ish)
+const TRACKED_FIELDS_BY_STEP = {
+  1: [
     'personalDetails.fullName',
     'personalDetails.dateOfBirth',
     'personalDetails.address',
-    'personalDetails.postcode',
-    // Q1
-    'diagnosisConfirmation.hasMentalHealthDiagnosis',
-    // Authorisation
+    'personalDetails.postcode'
+  ],
+  2: [], // optional
+  3: ['diagnosisConfirmation.hasMentalHealthDiagnosis'],
+  4: [
+    'mentalHealthConditions.anxietyDepressionWithoutImpairment',
+    'mentalHealthConditions.anxietyDepressionWithImpairment',
+    'mentalHealthConditions.bipolarAffectiveDisorder',
+    'mentalHealthConditions.eatingDisorder',
+    'mentalHealthConditions.ocdOrPtsd',
+    'mentalHealthConditions.personalityDisorder',
+    'mentalHealthConditions.schizophreniaOrPsychosis',
+    'mentalHealthConditions.other'
+  ],
+  5: ['recentContact.hadRecentContact'],
+  6: [
     'authorisation.declarationConfirmed',
     'authorisation.signatoryName',
     'authorisation.signatureDate'
-  ];
-  if (!stoppedAtQ1) {
-    // Q2 conditions (8 yes/no items)
-    paths.push(
-      'mentalHealthConditions.anxietyDepressionWithoutImpairment',
-      'mentalHealthConditions.anxietyDepressionWithImpairment',
-      'mentalHealthConditions.bipolarAffectiveDisorder',
-      'mentalHealthConditions.eatingDisorder',
-      'mentalHealthConditions.ocdOrPtsd',
-      'mentalHealthConditions.personalityDisorder',
-      'mentalHealthConditions.schizophreniaOrPsychosis',
-      'mentalHealthConditions.other'
-    );
-    // Q3
-    paths.push('recentContact.hadRecentContact');
-  }
-  return paths;
-}
+  ]
+};
 
 function updateProgress() {
-  const paths = trackedFieldPaths();
+  const stoppedAtQ1 = state.diagnosisConfirmation.hasMentalHealthDiagnosis === 'no';
+  let total = 0;
   let answered = 0;
-  for (const path of paths) {
-    const v = getField(path);
-    const isAnswered = v !== null && v !== undefined && v !== '';
-    if (isAnswered) answered++;
+  const sectionAnswered = {};
+  const sectionTotal = {};
+
+  for (const step of Object.keys(TRACKED_FIELDS_BY_STEP)) {
+    const n = parseInt(step, 10);
+    if (stoppedAtQ1 && (n === 4 || n === 5)) continue;
+    const paths = TRACKED_FIELDS_BY_STEP[step];
+    sectionTotal[n] = paths.length;
+    sectionAnswered[n] = 0;
+    for (const path of paths) {
+      total++;
+      const v = getField(path);
+      if (v !== null && v !== undefined && v !== '') {
+        answered++;
+        sectionAnswered[n]++;
+      }
+    }
   }
-  const total = paths.length;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
-  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  if (text) text.textContent = answered + ' of ' + total + ' fields answered (' + percent + '%)';
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Validation UI
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+  const fs = document.getElementById(id + '-fieldset');
+  if (fs) fs.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function isInsideHiddenConditional(el) {
+  let cur = el;
+  while (cur && cur !== document.body) {
+    if (cur.style && cur.style.display === 'none') return true;
+    cur = cur.parentElement;
+  }
+  return false;
+}
+
+function validateForm() {
+  const errors = [];
+  document.querySelectorAll('[data-required]').forEach((el) => {
+    const tag = (el.tagName || '').toLowerCase();
+    if (tag !== 'input' && tag !== 'select' && tag !== 'textarea') return;
+    if (isInsideHiddenConditional(el)) return;
+    const id = el.id;
+    if (!id) return;
+    if (tag === 'input' && el.type === 'radio') {
+      const name = el.name;
+      const checked = document.querySelector('input[type="radio"][name="' + name + '"]:checked');
+      if (!checked) {
+        errors.push({ id: name, message: 'Please answer this question.' });
+        setFieldError(name, 'Please answer this question.');
+      }
+      return;
+    }
+    let missing = false;
+    if (tag === 'input' && el.type === 'checkbox') {
+      if (!el.checked) missing = true;
+    } else if (el.value == null || String(el.value).trim() === '') {
+      missing = true;
+    }
+    if (missing) {
+      errors.push({ id: id, message: 'Please complete this field.' });
+      setFieldError(id, 'Please complete this field.');
+    } else {
+      clearFieldError(id);
+    }
+  });
+  const seen = new Set();
+  const uniq = [];
+  for (const e of errors) {
+    if (seen.has(e.id)) continue;
+    seen.add(e.id);
+    uniq.push(e);
+  }
+  renderErrorSummary(uniq);
+  return uniq;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (!errors || errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML =
+    '<strong>Please correct the following:</strong>' +
+    '<ul>' +
+    errors.map((e) =>
+      '<li><a href="#' + esc(e.id) + '">' + esc(e.message) + '</a></li>'
+    ).join('') +
+    '</ul>';
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (typeof summary.focus === 'function') {
+    summary.setAttribute('tabindex', '-1');
+    summary.focus({ preventScroll: true });
+  }
 }
 
 // ----------------------------------------------------------------------
@@ -739,6 +881,11 @@ function priorityClass(priority) {
     case 'low': return 'flag-low';
     default: return '';
   }
+}
+
+function capitalise(s) {
+  if (!s) return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function renderReport() {
@@ -762,10 +909,6 @@ function renderReport() {
     ? '<span class="status-badge status-complete">Complete</span>'
     : '<span class="status-badge status-incomplete">Incomplete</span>';
 
-  // Combine fired rules (rendered as flag-style entries) with additional
-  // flags. Fired rules don't carry a separate "category" string for the
-  // user — we re-use their `category` token (completeness/consistency/
-  // safety/declaration) capitalised.
   const ruleItems = firedRules.map((r) => ({
     priority: r.priority,
     category: capitalise(r.category),
@@ -776,60 +919,45 @@ function renderReport() {
     category: f.category,
     message: f.message
   }));
-  const allItems = [...ruleItems, ...flagItems].sort((a, b) => {
+  const allItems = ruleItems.concat(flagItems).sort((a, b) => {
     const order = { urgent: 0, high: 1, medium: 2, low: 3 };
     return (order[a.priority] || 99) - (order[b.priority] || 99);
   });
 
   const flagsList = allItems.length === 0
-    ? `<p class="muted">No flags raised. Submission appears complete.</p>`
-    : `
-      <ul class="flags">
-        ${allItems.map((f) => `
-          <li class="${priorityClass(f.priority)}">
-            <span class="flag-priority">${esc(priorityLabel(f.priority).toUpperCase())}</span>
-            <span class="flag-category">${esc(f.category)}</span>
-            <span class="flag-message">${esc(f.message)}</span>
-          </li>
-        `).join('')}
-      </ul>
-    `;
+    ? '<p class="muted">No flags raised. Submission appears complete.</p>'
+    : '<ul class="flags">' +
+      allItems.map((f) =>
+        '<li class="' + priorityClass(f.priority) + '">' +
+        '<span class="flag-priority">' + esc(priorityLabel(f.priority).toUpperCase()) + '</span>' +
+        '<span class="flag-category">' + esc(f.category) + '</span>' +
+        '<span class="flag-message">' + esc(f.message) + '</span>' +
+        '</li>'
+      ).join('') +
+      '</ul>';
 
-  out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>DVLA M1 Validation Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
-
-      <h3>Submission Status</h3>
-      <dl class="summary-grid">
-        <dt>Status</dt><dd>${statusBadge}</dd>
-        <dt>Q1 (diagnosed)</dt><dd>${esc(stoppedAtQ1 ? 'No' : (state.diagnosisConfirmation.hasMentalHealthDiagnosis === 'yes' ? 'Yes' : 'Unanswered'))}</dd>
-        <dt>Q2 conditions</dt><dd>${stoppedAtQ1 ? 'n/a' : conditionCount}</dd>
-        <dt>Validation problems</dt><dd>${firedRules.length}</dd>
-        <dt>Additional flags</dt><dd>${additionalFlags.length}</dd>
-      </dl>
-
-      <h3>Flagged Issues</h3>
-      ${flagsList}
-
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
-    </div>
-  `;
+  out.innerHTML =
+    '<h2>DVLA M1 Validation Report</h2>' +
+    '<p class="muted">Generated ' + esc(new Date(timestamp).toLocaleString()) + '</p>' +
+    '<h3>Submission Status</h3>' +
+    '<dl class="summary-grid">' +
+    '<dt>Status</dt><dd>' + statusBadge + '</dd>' +
+    '<dt>Q1 (diagnosed)</dt><dd>' + esc(stoppedAtQ1 ? 'No' : (state.diagnosisConfirmation.hasMentalHealthDiagnosis === 'yes' ? 'Yes' : 'Unanswered')) + '</dd>' +
+    '<dt>Q2 conditions</dt><dd>' + (stoppedAtQ1 ? 'n/a' : conditionCount) + '</dd>' +
+    '<dt>Validation problems</dt><dd>' + firedRules.length + '</dd>' +
+    '<dt>Additional flags</dt><dd>' + additionalFlags.length + '</dd>' +
+    '</dl>' +
+    '<h3>Flagged Issues</h3>' + flagsList +
+    '<div class="report-actions">' +
+    '<button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>' +
+    '</div>';
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   document.getElementById('start-over-btn').addEventListener('click', startOver);
 }
 
-function capitalise(s) {
-  if (!s) return '';
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
 function submitForm() {
+  validateForm();
   lastResult = validateM1(state);
   renderReport();
 }
@@ -839,7 +967,9 @@ function startOver() {
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  const out = document.getElementById('report');
+  if (out) out.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -862,6 +992,7 @@ function renderForm() {
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();
