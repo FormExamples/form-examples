@@ -186,6 +186,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -231,20 +232,21 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.priorityLevel === 'emergency') {
       tr.classList.add('row-emergency');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.clinicianName)}</td>
-      <td>${esc(row.medicationName)}</td>
-      <td><span class="dosage">${esc(row.dosage)}</span></td>
-      <td><span class="type-badge ${typeClass(row.requestType)}">${esc(row.requestType)}</span></td>
-      <td><span class="priority-badge ${priorityClass(row.priorityLevel)}">${esc(capitalise(row.priorityLevel))}</span></td>
-      <td><span class="request-date">${esc(row.requestDate)}</span></td>
-      <td><span class="status-badge ${statusClass(row.status)}">${esc(capitalise(row.status))}</span></td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td">${esc(row.clinicianName)}</td>
+      <td class="data-table-td">${esc(row.medicationName)}</td>
+      <td class="data-table-td"><span class="dosage">${esc(row.dosage)}</span></td>
+      <td class="data-table-td"><span class="type-badge ${typeClass(row.requestType)}">${esc(row.requestType)}</span></td>
+      <td class="data-table-td"><span class="priority-badge ${priorityClass(row.priorityLevel)}">${esc(capitalise(row.priorityLevel))}</span></td>
+      <td class="data-table-td"><span class="request-date">${esc(row.requestDate)}</span></td>
+      <td class="data-table-td"><span class="status-badge ${statusClass(row.status)}">${esc(capitalise(row.status))}</span></td>
     `;
     body.appendChild(tr);
   }
