@@ -164,6 +164,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -209,18 +210,19 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.riskCategory === 'High') {
       tr.classList.add('row-high');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="age-cell">${esc(row.age)}</span></td>
-      <td><span class="sex-badge">${esc(row.sex)}</span></td>
-      <td><span class="risk-percent">${esc(formatRiskPercent(row.tenYearRiskPercent))}</span></td>
-      <td><span class="category-badge ${categoryClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td"><span class="age-cell">${esc(row.age)}</span></td>
+      <td class="data-table-td"><span class="sex-badge">${esc(row.sex)}</span></td>
+      <td class="data-table-td"><span class="risk-percent">${esc(formatRiskPercent(row.tenYearRiskPercent))}</span></td>
+      <td class="data-table-td"><span class="category-badge ${categoryClass(row.riskCategory)}">${esc(row.riskCategory)}</span></td>
+      <td class="data-table-td">
         <span class="smoker-badge ${row.smokerFlag ? 'smoker-yes' : 'smoker-no'}">
           ${row.smokerFlag ? 'Yes' : 'No'}
         </span>
