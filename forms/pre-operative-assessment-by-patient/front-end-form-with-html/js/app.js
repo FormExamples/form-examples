@@ -32,6 +32,7 @@ const {
 // ----------------------------------------------------------------------
 
 const STORAGE_KEY = 'pre-operative-assessment-by-patient.front-end-form-with-html.v1';
+const TOTAL_STEPS = 16;
 
 /** @returns {import('./types.js').AssessmentData} */
 function loadState() {
@@ -91,10 +92,6 @@ let lastResult = null;
  * Set a deeply-nested field on the state and persist.
  * Re-runs derived values (BMI, METs), progress, and conditional
  * visibility after each change.
- *
- * @param {string} section
- * @param {string} field
- * @param {*} value
  */
 function setField(section, field, value) {
   state[section][field] = value;
@@ -128,8 +125,22 @@ function esc(s) {
 }
 
 // ----------------------------------------------------------------------
-// Component builders
+// Component builders (Lily-shaped)
 // ----------------------------------------------------------------------
+
+/** Map an HTML input type to its Lily input class. */
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
 
 /**
  * Build a labelled text input.
@@ -147,11 +158,11 @@ function textInput(opts) {
     `id="${id}"`,
     `name="${id}"`,
     `type="${type}"`,
-    `class="text-input"`,
+    `class="${lilyInputClass(type)}"`,
     `value="${esc(value ?? '')}"`
   ];
   if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
-  if (opts.required) attrs.push('required');
+  if (opts.required) attrs.push('required', 'data-required');
   if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
   if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
   if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
@@ -159,27 +170,27 @@ function textInput(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <input ${attrs.join(' ')}>
     ${opts.unit ? `<span class="unit">${esc(opts.unit)}</span>` : ''}
+    <span class="error-message" id="${id}-error"></span>
   `;
 
   const input = wrapper.querySelector('input');
+  input.setAttribute('aria-describedby', `${id}-error`);
   input.addEventListener('input', () => {
     let v = input.value;
     if (type === 'number') {
       v = v === '' ? null : Number(v);
     }
     setField(opts.section, opts.field, v);
+    clearFieldError(id);
   });
   return wrapper;
 }
 
 /**
  * Build a select / dropdown input.
- * @param {{ label: string, section: string, field: string,
- *           options: { value: string, label: string }[],
- *           required?: boolean, placeholder?: string }} opts
  */
 function selectInput(opts) {
   const id = `${opts.section}-${opts.field}`;
@@ -198,50 +209,70 @@ function selectInput(opts) {
   ].join('');
 
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <select id="${id}" name="${id}" class="select">
+    <label class="label" for="${id}">${labelText}</label>
+    <select id="${id}" name="${id}" class="select" aria-describedby="${id}-error">
       ${optionsHtml}
     </select>
+    <span class="error-message" id="${id}-error"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setField(opts.section, opts.field, sel.value));
+  sel.addEventListener('change', () => {
+    setField(opts.section, opts.field, sel.value);
+    clearFieldError(id);
+  });
   return wrapper;
 }
 
 /**
- * Build a radio group.
- * @param {{ label: string, section: string, field: string,
- *           options: { value: string, label: string }[] }} opts
+ * Build a Lily-shaped radio group:
+ * <fieldset class="field">
+ *   <legend class="label">...</legend>
+ *   <div class="radio-group" role="radiogroup">
+ *     <label><input class="radio-input" type="radio"> ...</label>
+ *   </div>
+ *   <span class="error-message"></span>
+ * </fieldset>
  */
 function radioGroup(opts) {
   const groupId = `${opts.section}-${opts.field}`;
   const current = state[opts.section][opts.field];
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
   legend.textContent = opts.label;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const label = document.createElement('label');
-    label.className = 'radio-option';
     label.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
     label.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
       <span>${esc(option.label)}</span>
     `;
     const input = label.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setField(opts.section, opts.field, option.value);
+      if (input.checked) {
+        setField(opts.section, opts.field, option.value);
+        clearFieldError(groupId);
+      }
     });
     list.appendChild(label);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = `${groupId}-error`;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
@@ -255,10 +286,7 @@ function yesNoGroup(label, section, field) {
   return radioGroup({ label, section, field, options: yesNo });
 }
 
-/**
- * Read-only auto-calculated readout (e.g. BMI, METs).
- * @param {{ label: string, id: string, render: () => string }} opts
- */
+/** Read-only auto-calculated readout (e.g. BMI, METs). */
 function readOnlyReadout(opts) {
   const wrapper = document.createElement('div');
   wrapper.className = 'field readout';
@@ -270,32 +298,31 @@ function readOnlyReadout(opts) {
 }
 
 /**
- * Build a section card.
- * @param {{ stepNumber: number, totalSteps: number, title: string, description?: string }} opts
+ * Build a Lily-shaped section card as <fieldset class="fieldset">
+ * with a <legend class="fieldset-legend"> heading.
  */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of ${opts.totalSteps}</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
 /**
  * Conditional sub-block: hidden unless `state[section][field]` matches one
  * of the supplied target values. Re-evaluated in `updateConditionalSections`.
- *
- * @param {{ section: string, field: string, equals: string | string[] }} opts
  */
 function conditionalBlock(opts) {
   const block = document.createElement('div');
@@ -456,11 +483,9 @@ function allergyListEditor() {
 // Section renderers (1 per ASA step)
 // ----------------------------------------------------------------------
 
-const TOTAL_STEPS = 16;
-
 function renderStep1() {
   const card = sectionCard({
-    stepNumber: 1, totalSteps: TOTAL_STEPS,
+    stepNumber: 1,
     title: 'Demographics',
     description: 'Basic patient information and the planned procedure.'
   });
@@ -532,7 +557,7 @@ function renderStep1() {
 
 function renderStep2() {
   const card = sectionCard({
-    stepNumber: 2, totalSteps: TOTAL_STEPS,
+    stepNumber: 2,
     title: 'Cardiovascular',
     description: 'Heart and blood-vessel conditions.'
   });
@@ -587,7 +612,7 @@ function renderStep2() {
 
 function renderStep3() {
   const card = sectionCard({
-    stepNumber: 3, totalSteps: TOTAL_STEPS,
+    stepNumber: 3,
     title: 'Respiratory',
     description: 'Lung and airway conditions.'
   });
@@ -648,7 +673,7 @@ function renderStep3() {
 
 function renderStep4() {
   const card = sectionCard({
-    stepNumber: 4, totalSteps: TOTAL_STEPS,
+    stepNumber: 4,
     title: 'Renal',
     description: 'Kidney function.'
   });
@@ -685,7 +710,7 @@ function renderStep4() {
 
 function renderStep5() {
   const card = sectionCard({
-    stepNumber: 5, totalSteps: TOTAL_STEPS,
+    stepNumber: 5,
     title: 'Hepatic',
     description: 'Liver conditions.'
   });
@@ -720,7 +745,7 @@ function renderStep5() {
 
 function renderStep6() {
   const card = sectionCard({
-    stepNumber: 6, totalSteps: TOTAL_STEPS,
+    stepNumber: 6,
     title: 'Endocrine',
     description: 'Hormonal conditions including diabetes and thyroid.'
   });
@@ -769,7 +794,7 @@ function renderStep6() {
 
 function renderStep7() {
   const card = sectionCard({
-    stepNumber: 7, totalSteps: TOTAL_STEPS,
+    stepNumber: 7,
     title: 'Neurological',
     description: 'Nervous system conditions.'
   });
@@ -800,7 +825,7 @@ function renderStep7() {
 
 function renderStep8() {
   const card = sectionCard({
-    stepNumber: 8, totalSteps: TOTAL_STEPS,
+    stepNumber: 8,
     title: 'Haematological',
     description: 'Blood and clotting disorders.'
   });
@@ -833,7 +858,7 @@ function renderStep8() {
 
 function renderStep9() {
   const card = sectionCard({
-    stepNumber: 9, totalSteps: TOTAL_STEPS,
+    stepNumber: 9,
     title: 'Musculoskeletal & Airway',
     description: 'Joint, neck, mouth, and airway considerations.'
   });
@@ -869,7 +894,7 @@ function renderStep9() {
 
 function renderStep10() {
   const card = sectionCard({
-    stepNumber: 10, totalSteps: TOTAL_STEPS,
+    stepNumber: 10,
     title: 'Gastrointestinal',
     description: 'Stomach and reflux conditions affecting aspiration risk.'
   });
@@ -883,7 +908,7 @@ function renderStep10() {
 
 function renderStep11() {
   const card = sectionCard({
-    stepNumber: 11, totalSteps: TOTAL_STEPS,
+    stepNumber: 11,
     title: 'Current Medications',
     description: 'List every medication you currently take. Skip if you take none.'
   });
@@ -893,7 +918,7 @@ function renderStep11() {
 
 function renderStep12() {
   const card = sectionCard({
-    stepNumber: 12, totalSteps: TOTAL_STEPS,
+    stepNumber: 12,
     title: 'Allergies',
     description: 'List drug, food, and environmental allergies. Skip if you have none.'
   });
@@ -903,7 +928,7 @@ function renderStep12() {
 
 function renderStep13() {
   const card = sectionCard({
-    stepNumber: 13, totalSteps: TOTAL_STEPS,
+    stepNumber: 13,
     title: 'Previous Anaesthesia',
     description: 'Previous experiences with anaesthesia and family history.'
   });
@@ -934,7 +959,7 @@ function renderStep13() {
 
 function renderStep14() {
   const card = sectionCard({
-    stepNumber: 14, totalSteps: TOTAL_STEPS,
+    stepNumber: 14,
     title: 'Social History',
     description: 'Alcohol and recreational drug use.'
   });
@@ -973,7 +998,7 @@ function renderStep14() {
 
 function renderStep15() {
   const card = sectionCard({
-    stepNumber: 15, totalSteps: TOTAL_STEPS,
+    stepNumber: 15,
     title: 'Functional Capacity',
     description: 'How much physical activity you can perform without symptoms.'
   });
@@ -1007,11 +1032,10 @@ function renderStep15() {
 
 function renderStep16() {
   const card = sectionCard({
-    stepNumber: 16, totalSteps: TOTAL_STEPS,
+    stepNumber: 16,
     title: 'Pregnancy',
     description: 'Pregnancy assessment (shown for female patients aged 12-55).'
   });
-  card.id = 'step-16';
 
   card.appendChild(yesNoGroup('Could you be pregnant?', 'pregnancy', 'possiblyPregnant'));
   const pregDetails = conditionalBlock({ section: 'pregnancy', field: 'possiblyPregnant', equals: 'yes' });
@@ -1028,6 +1052,13 @@ function renderStep16() {
 
   return card;
 }
+
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4, renderStep5,
+  renderStep6, renderStep7, renderStep8, renderStep9, renderStep10,
+  renderStep11, renderStep12, renderStep13, renderStep14, renderStep15,
+  renderStep16
+];
 
 // ----------------------------------------------------------------------
 // Conditional sections + auto-calculated readouts
@@ -1062,7 +1093,7 @@ function refreshAutoCalculatedReadouts() {
 }
 
 /**
- * Step 16 (Pregnancy) is conditional — only show for female patients aged
+ * Step 16 (Pregnancy) is conditional - only show for female patients aged
  * 12-55 (matches the SvelteKit `steps.ts` `shouldShow` logic). For everyone
  * else the section is hidden, mirroring the multi-step wizard's behaviour
  * within a single-page layout.
@@ -1078,10 +1109,13 @@ function updatePregnancyStepVisibility() {
   const card = document.getElementById('step-16');
   if (!card) return;
   card.classList.toggle('section-hidden', !isPregnancyStepVisible());
+  // Also hide the step-list entry for step 16 when not applicable.
+  const li = document.querySelector('#step-list [data-step="16"]');
+  if (li) li.classList.toggle('section-hidden', !isPregnancyStepVisible());
 }
 
 // ----------------------------------------------------------------------
-// Progress
+// Progress + step list
 // ----------------------------------------------------------------------
 
 const TRACKED_FIELDS = [
@@ -1158,18 +1192,161 @@ function updateProgress() {
     tracked.push(['pregnancy', 'possiblyPregnant']);
   }
   let answered = 0;
+  const sectionAnswered = {};
+  const sectionTotal = {};
   for (const [section, field] of tracked) {
+    sectionTotal[section] = (sectionTotal[section] || 0) + 1;
     const v = state[section][field];
-    if (v !== null && v !== undefined && v !== '') answered++;
+    if (v !== null && v !== undefined && v !== '') {
+      answered++;
+      sectionAnswered[section] = (sectionAnswered[section] || 0) + 1;
+    }
   }
+  // Repeating-list sections (medications, allergies) count as answered if
+  // they contain any rows, otherwise count toward the total only if they
+  // are intentionally being tracked - we treat them as optional and skip.
   const total = tracked.length;
   const percent = total > 0 ? Math.round((answered / total) * 100) : 0;
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
-  if (text) text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+  if (text) {
+    text.textContent = `${answered} of ${total} fields answered (${percent}%)`;
+  }
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1,  section: 'demographics',           title: 'Demographics' },
+  { step: 2,  section: 'cardiovascular',         title: 'Cardiovascular' },
+  { step: 3,  section: 'respiratory',            title: 'Respiratory' },
+  { step: 4,  section: 'renal',                  title: 'Renal' },
+  { step: 5,  section: 'hepatic',                title: 'Hepatic' },
+  { step: 6,  section: 'endocrine',              title: 'Endocrine' },
+  { step: 7,  section: 'neurological',           title: 'Neurological' },
+  { step: 8,  section: 'haematological',         title: 'Haematological' },
+  { step: 9,  section: 'musculoskeletalAirway',  title: 'MSK & Airway' },
+  { step: 10, section: 'gastrointestinal',       title: 'Gastrointestinal' },
+  { step: 11, section: 'medications',            title: 'Medications' },
+  { step: 12, section: 'allergies',              title: 'Allergies' },
+  { step: 13, section: 'previousAnaesthesia',    title: 'Previous Anaesthesia' },
+  { step: 14, section: 'socialHistory',          title: 'Social History' },
+  { step: 15, section: 'functionalCapacity',     title: 'Functional Capacity' },
+  { step: 16, section: 'pregnancy',              title: 'Pregnancy' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const a = sectionAnswered[def.section] || 0;
+    const t = sectionTotal[def.section] || 0;
+    if (t > 0 && a === t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Validation
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) => `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus({ preventScroll: true });
 }
 
 // ----------------------------------------------------------------------
@@ -1232,28 +1409,24 @@ function renderReport() {
     `;
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>Pre-Operative Assessment Report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
+    <h2>Pre-Operative Assessment Report</h2>
+    <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
 
-      <h3>ASA Physical Status Grade</h3>
-      <p class="asa-summary">
-        <span class="asa-grade-badge ${asaGradeClass(asaGrade)}">ASA ${asaGrade}</span>
-        <span class="grade-label">${esc(asaGradeLabel(asaGrade))}</span>
-      </p>
-      <p class="muted">Maximum-grade rule wins. ${firedRules.length} rule${firedRules.length === 1 ? '' : 's'} fired.</p>
+    <h3>ASA Physical Status Grade</h3>
+    <p class="asa-summary">
+      <span class="asa-grade-badge ${asaGradeClass(asaGrade)}">ASA ${asaGrade}</span>
+      <span class="grade-label">${esc(asaGradeLabel(asaGrade))}</span>
+    </p>
+    <p class="muted">Maximum-grade rule wins. ${firedRules.length} rule${firedRules.length === 1 ? '' : 's'} fired.</p>
 
-      <h3>Fired ASA rules</h3>
-      ${ruleTable}
+    <h3>Fired ASA rules</h3>
+    ${ruleTable}
 
-      <h3>Flagged Issues</h3>
-      ${flagsList}
+    <h3>Flagged Issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1262,6 +1435,8 @@ function renderReport() {
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
   recomputeDerived();
   const { asaGrade, firedRules } = calculateASA(state);
   const additionalFlags = detectAdditionalFlags(state);
@@ -1279,7 +1454,9 @@ function startOver() {
   clearState();
   state = emptyAssessment();
   lastResult = null;
-  document.getElementById('report').innerHTML = '';
+  document.getElementById('report').innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   updateConditionalSections();
@@ -1295,26 +1472,12 @@ function startOver() {
 function renderForm() {
   const host = document.getElementById('form-sections');
   host.innerHTML = '';
-  host.appendChild(renderStep1());
-  host.appendChild(renderStep2());
-  host.appendChild(renderStep3());
-  host.appendChild(renderStep4());
-  host.appendChild(renderStep5());
-  host.appendChild(renderStep6());
-  host.appendChild(renderStep7());
-  host.appendChild(renderStep8());
-  host.appendChild(renderStep9());
-  host.appendChild(renderStep10());
-  host.appendChild(renderStep11());
-  host.appendChild(renderStep12());
-  host.appendChild(renderStep13());
-  host.appendChild(renderStep14());
-  host.appendChild(renderStep15());
-  host.appendChild(renderStep16());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
 }
 
 function init() {
   recomputeDerived();
+  renderStepList();
   renderForm();
   updateProgress();
   updateConditionalSections();

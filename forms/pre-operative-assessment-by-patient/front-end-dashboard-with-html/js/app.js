@@ -173,6 +173,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -218,6 +219,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (highGradeAsa.has(row.asaGrade)) {
       tr.classList.add('row-high-grade');
     }
@@ -225,17 +227,17 @@ function renderTableBody() {
     const fcClass = flagCountClass(row.flagCount);
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.procedure)}</td>
-      <td><span class="asa-badge ${asaClass(row.asaGrade)}">ASA ${esc(row.asaGrade)}</span></td>
-      <td><span class="flag-count ${fcClass}">${esc(row.flagCount)}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(row.procedure)}</td>
+      <td class="data-table-td"><span class="asa-badge ${asaClass(row.asaGrade)}">ASA ${esc(row.asaGrade)}</span></td>
+      <td class="data-table-td"><span class="flag-count ${fcClass}">${esc(row.flagCount)}</span></td>
+      <td class="data-table-td">
         <span class="flag-badge ${row.allergyFlag ? 'flag-yes' : 'flag-no'}">
           ${row.allergyFlag ? 'Yes' : 'No'}
         </span>
       </td>
-      <td>
+      <td class="data-table-td">
         <span class="flag-badge ${row.adverseIncidentFlag ? 'flag-yes' : 'flag-no'}">
           ${row.adverseIncidentFlag ? 'Yes' : 'No'}
         </span>
