@@ -212,13 +212,20 @@ commit per form with `git commit --only forms/<slug>/`.
   `post-operative-report`, `pre-operative-assessment-by-patient`,
   `prescription-request`, `provider-transfer-request`, `return-to-work`.
   (Note: pre-op-by-clinician already done as canonical in Phase 1.)
-- [ ] **3.7  Batch: cardiovascular calculators.**
-  `framingham-risk-score-for-hard-coronary-heart-disease`,
-  `heart-health-check`, `predicting-risk-of-cardiovascular-disease-events`,
-  `systematic-coronary-risk-evaluation-2-diabetes`.
-- [ ] **3.8  Batch: language assessments.**
-  `medical-language-speaking-assessment-for-cymraeg`,
-  `medical-language-speaking-assessment-for-english`.
+- [x] **3.7  Batch: cardiovascular calculators** (4 of 4 done).
+  - [x] `framingham-risk-score-for-hard-coronary-heart-disease`
+    (`f8aeb9c5` + `826660ee`). 10 steps, 74 inputs.
+  - [x] `heart-health-check` (`f8aeb9c5` + `6bafdfda`). 10 steps, 13
+    radio-groups.
+  - [x] `predicting-risk-of-cardiovascular-disease-events`
+    (`f8aeb9c5` + `5e4b4676`). 10 sections, PREVENT calculator.
+  - [x] `systematic-coronary-risk-evaluation-2-diabetes` (`f8aeb9c5` +
+    `e61ba2b8`). 10 sections, SCORE2-Diabetes.
+- [x] **3.8  Batch: language assessments** (2 of 2 done).
+  - [x] `medical-language-speaking-assessment-for-cymraeg` (`f8aeb9c5`
+    + `4c17c60b`). 5 sections, Welsh strings preserved, 82 rating chips.
+  - [x] `medical-language-speaking-assessment-for-english` (`f8aeb9c5`
+    + `1a1d468c`). 5 sections, OET-style.
 - [ ] **3.9  Batch: UK statutory forms.** `united-kingdom-driver-and-vehicle-
   licensing-agency-b1-form`, `…-m1-form`, `…-v1-form`,
   `united-kingdom-lasting-power-of-attorney-for-financial-decisions`,
