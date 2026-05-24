@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#patients-table">Skip to patients table</a>
+  <a class="skip-link visually-hidden" href="#patients-table">Skip to patients table</a>
 
   <header class="page-header">
     <div class="page-header-inner">
@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Patient name or CFAR responder..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-problem-type">Problem type</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-problem-type">Problem type</label>
           <select id="filter-problem-type" class="select">
             <option value="">All problem types</option>
             <option value="medical">Medical</option>
@@ -58,8 +58,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-major-bleeding">Major bleeding</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-major-bleeding">Major bleeding</label>
           <select id="filter-major-bleeding" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
@@ -67,8 +67,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-airway">Airway intervention</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-airway">Airway intervention</label>
           <select id="filter-airway" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
@@ -76,8 +76,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-gcs">GCS level</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-gcs">GCS level</label>
           <select id="filter-gcs" class="select">
             <option value="">All GCS levels</option>
             <option value="alert">Alert</option>
@@ -111,13 +111,13 @@
       <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
 
       <div class="table-scroll">
-        <table id="patients-table" class="patients-table">
-          <thead>
-            <tr id="patients-table-head">
+        <table id="patients-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="patients-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="patients-table-body">
+          <tbody id="patients-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>

@@ -181,9 +181,11 @@ function renderTableHead() {
   const head = document.getElementById('patients-table-head');
   if (!head) return;
   head.innerHTML = '';
+  head.classList.add('data-table-row');
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -252,20 +254,21 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if ((Number(row.urgentFlagCount) || 0) > 0) tr.classList.add('row-urgent');
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${row.age == null ? '' : esc(String(row.age))}</td>
-      <td>${esc(row.sex)}</td>
-      <td>${problemTypeCell(row.problemType)}</td>
-      <td>${boolCell(row.majorBleeding)}</td>
-      <td>${boolCell(row.tourniquetApplied)}</td>
-      <td>${boolCell(row.airwayIntervention)}</td>
-      <td>${gcsCell(row.gcsLevel)}</td>
-      <td>${flagCountCell(row.urgentFlagCount)}</td>
-      <td>${esc(row.recordedBy)}</td>
-      <td>${esc(formatRecordedAt(row.recordedAt))}</td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${row.age == null ? '' : esc(String(row.age))}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td">${problemTypeCell(row.problemType)}</td>
+      <td class="data-table-td">${boolCell(row.majorBleeding)}</td>
+      <td class="data-table-td">${boolCell(row.tourniquetApplied)}</td>
+      <td class="data-table-td">${boolCell(row.airwayIntervention)}</td>
+      <td class="data-table-td">${gcsCell(row.gcsLevel)}</td>
+      <td class="data-table-td">${flagCountCell(row.urgentFlagCount)}</td>
+      <td class="data-table-td">${esc(row.recordedBy)}</td>
+      <td class="data-table-td">${esc(formatRecordedAt(row.recordedAt))}</td>
     `;
     body.appendChild(tr);
   }
