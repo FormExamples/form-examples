@@ -6,81 +6,162 @@
   <title>Agile Consulting Scorecard for Hiring Help</title>
   <meta name="description" content="Sixteen-item self-assessment to decide whether your organization is ready to hire agile consulting help.">
   <style>
+    /* Lily Design System HTML headless contract. See
+     * forms/AGENTS-front-end-html.md for the class vocabulary.
+     * Local helpers (.preview, .item, etc.) are project-local. */
+
+    :root {
+      --color-primary: #4299e1;
+      --color-primary-dark: #2b6cb0;
+      --color-primary-light: #bee3f8;
+      --color-bg: #f7fafc;
+      --color-surface: #ffffff;
+      --color-text: #1a202c;
+      --color-muted: #4a5568;
+      --color-border: #cbd5e0;
+      --color-border-strong: #a0aec0;
+      --color-focus: #3182ce;
+      --color-danger: #e53e3e;
+      --color-danger-bg: #fed7d7;
+      --color-warning: #d69e2e;
+      --color-warning-bg: #fefcbf;
+      --color-success: #38a169;
+      --color-success-bg: #c6f6d5;
+      --radius: 0.5rem;
+      --radius-sm: 0.25rem;
+    }
+
     *, *::before, *::after { box-sizing: border-box; }
+
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       max-width: 880px;
       margin: 0 auto;
       padding: 1.5rem 1rem 4rem;
-      color: #1a202c;
-      background: #f7fafc;
+      color: var(--color-text);
+      background: var(--color-bg);
       line-height: 1.5;
     }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0);
+      white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute;
+      left: -9999px; top: 0;
+      background: var(--color-primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 0; }
+
     h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
-    .subtitle { margin: 0 0 1.5rem; color: #4a5568; }
-    fieldset {
-      background: white;
-      border: 1px solid #cbd5e0;
-      border-radius: 8px;
+    .subtitle { margin: 0 0 1.5rem; color: var(--color-muted); }
+
+    /* Lily: .fieldset / .fieldset-legend */
+    .fieldset {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
       margin: 0 0 1.5rem;
       padding: 1rem 1.25rem 1.25rem;
     }
-    legend {
+    .fieldset-legend {
       font-weight: 600;
       padding: 0 0.5rem;
-      color: #2d3748;
+      color: var(--color-text);
     }
     .field { margin: 0.75rem 0; }
-    label { display: block; font-weight: 500; margin-bottom: 0.25rem; }
-    input[type="text"],
-    input[type="email"],
-    input[type="url"],
-    input[type="number"],
-    input[type="date"],
-    select,
-    textarea {
+    .label { display: block; font-weight: 500; margin-bottom: 0.25rem; }
+
+    /* Lily inputs */
+    .text-input,
+    .text-area-input,
+    .email-input,
+    .number-input,
+    .date-input,
+    .time-input,
+    .tel-input,
+    .url-input,
+    .search-input,
+    .select {
       width: 100%;
       padding: 0.4rem 0.5rem;
-      border: 1px solid #cbd5e0;
-      border-radius: 4px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
       font: inherit;
+      background: var(--color-surface);
     }
-    textarea { resize: vertical; min-height: 2.4rem; }
+    .text-area-input { resize: vertical; min-height: 2.4rem; }
+
+    .text-input:focus,
+    .text-area-input:focus,
+    .email-input:focus,
+    .select:focus {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 1px;
+    }
+
+    .radio-input,
+    .checkbox-input { accent-color: var(--color-primary); }
+
+    /* Project-local item rows */
     .item { padding: 0.75rem; border-top: 1px solid #edf2f7; }
     .item:first-of-type { border-top: 0; }
     .item-prompt { font-weight: 500; }
-    .item-help { font-size: 0.875rem; color: #4a5568; margin: 0.25rem 0 0.5rem; }
-    .answer-row {
+    .item-help { font-size: 0.875rem; color: var(--color-muted); margin: 0.25rem 0 0.5rem; }
+    .radio-group {
       display: flex;
       gap: 1.25rem;
       margin: 0.5rem 0;
       flex-wrap: wrap;
     }
-    .answer-row label {
+    .radio-group > label {
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
       font-weight: normal;
     }
-    .actions {
+
+    /* Lily: .button */
+    .button-group {
       display: flex;
       gap: 0.5rem;
       margin-top: 1rem;
     }
-    button {
+    .button {
       padding: 0.5rem 1rem;
-      border: 1px solid #4299e1;
-      border-radius: 4px;
-      background: #4299e1;
-      color: white;
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-primary);
       font: inherit;
       cursor: pointer;
+      user-select: none;
     }
-    button.secondary { background: white; color: #4299e1; }
-    .preview {
-      background: white;
-      border: 1px solid #cbd5e0;
-      border-radius: 8px;
+    .button:hover:not(:disabled) { background: var(--color-bg); }
+    .button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+    .button[data-variant="primary"] {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    .button[data-variant="primary"]:hover:not(:disabled) {
+      background: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+    }
+
+    /* Lily: .panel (preview region) */
+    .panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
       padding: 1.25rem;
       margin: 0 0 1.5rem;
       position: sticky;
@@ -96,28 +177,30 @@
       font-weight: 600;
       font-size: 0.875rem;
     }
-    .band-low        { background: #fed7d7; color: #742a2a; }
-    .band-borderline { background: #fefcbf; color: #744210; }
-    .band-medium     { background: #bee3f8; color: #2a4365; }
-    .band-high       { background: #c6f6d5; color: #22543d; }
+    .band-low        { background: var(--color-danger-bg);   color: #742a2a; }
+    .band-borderline { background: var(--color-warning-bg);  color: #744210; }
+    .band-medium     { background: var(--color-primary-light); color: #2a4365; }
+    .band-high       { background: var(--color-success-bg);  color: #22543d; }
     .flags-list {
       margin: 0.5rem 0 0;
       padding-left: 1.2rem;
     }
     .flag-priority-high   { color: #742a2a; }
     .flag-priority-medium { color: #744210; }
-    .flag-priority-low    { color: #2d3748; }
+    .flag-priority-low    { color: var(--color-text); }
     code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
   </style>
 </head>
 <body>
+  <a class="skip-link visually-hidden" href="#scorecard-form">Skip to scorecard</a>
+
   <h1>Agile Consulting Scorecard for Hiring Help</h1>
   <p class="subtitle">
     Sixteen yes/no checkpoints from the Agile Manifesto and Principles.
     Score yourself and see whether you are ready to hire agile consulting help.
   </p>
 
-  <section class="preview" aria-live="polite">
+  <section class="panel preview" aria-live="polite" role="region" aria-label="Score preview">
     <div class="preview-row">
       <strong>Total</strong>
       <span><span id="preview-total">0</span> / 16</span>
@@ -141,16 +224,16 @@
     <ul class="flags-list" id="preview-flags" hidden></ul>
   </section>
 
-  <form id="scorecard-form" autocomplete="off" novalidate onsubmit="return false;">
-    <fieldset>
-      <legend>Step 1 — Organization &amp; respondent</legend>
+  <form id="scorecard-form" class="form" autocomplete="off" novalidate onsubmit="return false;" aria-label="Agile Consulting Scorecard">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Step 1 — Organization &amp; respondent</legend>
       <div class="field">
-        <label for="org-name">Organization name</label>
-        <input id="org-name" type="text">
+        <label class="label" for="org-name">Organization name</label>
+        <input id="org-name" type="text" class="text-input">
       </div>
       <div class="field">
-        <label for="org-sector">Sector</label>
-        <select id="org-sector">
+        <label class="label" for="org-sector">Sector</label>
+        <select id="org-sector" class="select">
           <option value="">—</option>
           <option>healthcare</option>
           <option>pharmaceuticals</option>
@@ -174,8 +257,8 @@
         </select>
       </div>
       <div class="field">
-        <label for="org-size">Size band</label>
-        <select id="org-size">
+        <label class="label" for="org-size">Size band</label>
+        <select id="org-size" class="select">
           <option value="">—</option>
           <option value="micro">Micro (&lt; 10)</option>
           <option value="small">Small (10–49)</option>
@@ -185,16 +268,16 @@
         </select>
       </div>
       <div class="field">
-        <label for="resp-name">Respondent name</label>
-        <input id="resp-name" type="text">
+        <label class="label" for="resp-name">Respondent name</label>
+        <input id="resp-name" type="text" class="text-input">
       </div>
       <div class="field">
-        <label for="resp-email">Respondent email</label>
-        <input id="resp-email" type="email">
+        <label class="label" for="resp-email">Respondent email</label>
+        <input id="resp-email" type="email" class="email-input">
       </div>
       <div class="field">
-        <label for="resp-role">Role</label>
-        <select id="resp-role">
+        <label class="label" for="resp-role">Role</label>
+        <select id="resp-role" class="select">
           <option value="">—</option>
           <option>cxo</option>
           <option>vp</option>
@@ -214,30 +297,30 @@
         </select>
       </div>
       <div class="field">
-        <label for="assessment-date">Assessment date</label>
-        <input id="assessment-date" type="date">
+        <label class="label" for="assessment-date">Assessment date</label>
+        <input id="assessment-date" type="date" class="date-input">
       </div>
     </fieldset>
 
-    <fieldset id="manifesto">
-      <legend>Step 2 — Agile Manifesto (4 items)</legend>
+    <fieldset class="fieldset" id="manifesto">
+      <legend class="fieldset-legend">Step 2 — Agile Manifesto (4 items)</legend>
     </fieldset>
-    <fieldset id="principles-a">
-      <legend>Step 3 — Principles 1–4</legend>
+    <fieldset class="fieldset" id="principles-a">
+      <legend class="fieldset-legend">Step 3 — Principles 1–4</legend>
     </fieldset>
-    <fieldset id="principles-b">
-      <legend>Step 4 — Principles 5–8</legend>
+    <fieldset class="fieldset" id="principles-b">
+      <legend class="fieldset-legend">Step 4 — Principles 5–8</legend>
     </fieldset>
-    <fieldset id="principles-c">
-      <legend>Step 5 — Principles 9–12</legend>
+    <fieldset class="fieldset" id="principles-c">
+      <legend class="fieldset-legend">Step 5 — Principles 9–12</legend>
     </fieldset>
 
-    <fieldset>
-      <legend>Step 6 — Score &amp; sign-off</legend>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Step 6 — Score &amp; sign-off</legend>
       <p>Total, band, and flags update live above. Sign off below.</p>
       <div class="field">
-        <label for="reviewer-override">Override band (optional)</label>
-        <select id="reviewer-override">
+        <label class="label" for="reviewer-override">Override band (optional)</label>
+        <select id="reviewer-override" class="select">
           <option value="">— use computed —</option>
           <option value="low">low</option>
           <option value="borderline">borderline</option>
@@ -246,18 +329,18 @@
         </select>
       </div>
       <div class="field">
-        <label for="override-reason">Override reason (required if overriding)</label>
-        <textarea id="override-reason" rows="2"></textarea>
+        <label class="label" for="override-reason">Override reason (required if overriding)</label>
+        <textarea id="override-reason" class="text-area-input" rows="2"></textarea>
       </div>
       <div class="field">
-        <label for="signed-by">Signed by</label>
-        <input id="signed-by" type="text">
+        <label class="label" for="signed-by">Signed by</label>
+        <input id="signed-by" type="text" class="text-input">
       </div>
     </fieldset>
 
-    <div class="actions">
-      <button type="button" id="export-btn">Export JSON</button>
-      <button type="button" class="secondary" id="reset-btn">Reset</button>
+    <div class="button-group">
+      <button type="button" id="export-btn" class="button" data-variant="primary">Export JSON</button>
+      <button type="button" id="reset-btn" class="button" data-variant="secondary">Reset</button>
     </div>
   </form>
 
@@ -306,13 +389,13 @@
       const html = (k, prompt) => `
         <div class="item" id="item-${k}">
           <div class="item-prompt">${prompt}</div>
-          <div class="answer-row">
-            <label><input type="radio" name="${k}-done" value="true">Yes</label>
-            <label><input type="radio" name="${k}-done" value="false">No</label>
-            <label><input type="radio" name="${k}-done" value="" checked>Unanswered</label>
+          <div class="radio-group" role="radiogroup" aria-label="${prompt}">
+            <label><input type="radio" class="radio-input" name="${k}-done" value="true">Yes</label>
+            <label><input type="radio" class="radio-input" name="${k}-done" value="false">No</label>
+            <label><input type="radio" class="radio-input" name="${k}-done" value="" checked>Unanswered</label>
           </div>
-          <label for="${k}-evidence" style="font-size:0.875rem;color:#4a5568;">Evidence (optional)</label>
-          <textarea id="${k}-evidence" rows="2"></textarea>
+          <label class="label" for="${k}-evidence" style="font-size:0.875rem;color:var(--color-muted);font-weight:normal;">Evidence (optional)</label>
+          <textarea id="${k}-evidence" class="text-area-input" rows="2"></textarea>
         </div>`;
       for (const item of ITEMS) {
         const fs = document.getElementById(item.group);
