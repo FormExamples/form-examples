@@ -10,13 +10,50 @@
   <script type="module" defer src="app.js"></script>
 </head>
 <body>
-  <header><h1>OKR Tracker</h1><p class="subtitle">One Objective with its 1–5 Key Results.</p></header>
-  <main id="wizard"></main>
-  <footer>
-    <button id="btn-compute">Compute score</button>
-    <button id="btn-pdf">Download PDF</button>
-    <button id="btn-copy-triage">Copy plain-text triage line</button>
-    <div id="result" aria-live="polite"></div>
+  <a class="skip-link visually-hidden" href="#wizard">Skip to wizard</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>OKR Tracker</h1>
+      <p class="subtitle">One Objective with its 1–5 Key Results.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">Step 0 of 10</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="OKR Tracker steps"
+        data-current="0"
+      ><!-- step-list-items injected by app.js --></ol>
+    </div>
+  </header>
+
+  <main id="wizard" class="form" role="form" aria-label="OKR Tracker"></main>
+
+  <div
+    id="error-summary"
+    class="error-summary"
+    role="alert"
+    aria-label="Validation errors"
+    hidden
+  ></div>
+
+  <footer class="page-footer">
+    <div class="button-group">
+      <button id="btn-compute" class="button" data-variant="primary">Compute score</button>
+      <button id="btn-pdf" class="button" data-variant="secondary">Download PDF</button>
+      <button id="btn-copy-triage" class="button" data-variant="secondary">Copy plain-text triage line</button>
+    </div>
+    <section id="result" class="panel" role="region" aria-live="polite" aria-label="Score result">
+      <p class="empty-message">Compute the score to see the report.</p>
+    </section>
   </footer>
 </body>
 </html>

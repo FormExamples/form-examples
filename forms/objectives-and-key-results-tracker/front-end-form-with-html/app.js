@@ -36,11 +36,69 @@ const STEPS = [
 function renderSteps() {
   const wiz = document.querySelector('#wizard');
   for (const s of STEPS) {
-    const sec = document.createElement('section');
-    sec.className = 'step'; sec.id = `step-${s.id}`;
-    sec.innerHTML = `<h2>${s.id}. ${s.title}</h2><div class="body" data-step="${s.id}"></div>`;
+    const sec = document.createElement('fieldset');
+    sec.className = 'fieldset step'; sec.id = `step-${s.id}`; sec.dataset.step = String(s.id);
+    sec.innerHTML = `<legend class="fieldset-legend">${s.id}. ${s.title}</legend><div class="body" data-step="${s.id}"></div>`;
     wiz.appendChild(sec);
   }
+  renderStepList();
+}
+
+function renderStepList() {
+  const ol = document.querySelector('#step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const s of STEPS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(s.id);
+    li.setAttribute('aria-label', 'Step ' + s.id + ': ' + s.title);
+    li.innerHTML = `<span>${s.title}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${s.id}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepStatuses() {
+  const ol = document.querySelector('#step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  let answered = 0;
+  for (const s of STEPS) {
+    const fs = document.getElementById(`step-${s.id}`);
+    if (!fs) continue;
+    let stepAnswered = false;
+    fs.querySelectorAll('input, textarea, select').forEach((el) => {
+      if (el.value && String(el.value).trim() !== '') stepAnswered = true;
+    });
+    if (s.id === 5 && state.keyResults.length > 0) stepAnswered = true;
+    const li = ol.querySelector(`[data-step="${s.id}"]`);
+    if (!li) continue;
+    if (stepAnswered) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+      answered += 1;
+    } else {
+      li.dataset.status = 'waiting';
+      if (firstUnfinished === -1) firstUnfinished = s.id;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = 1;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+  const pct = Math.round((answered / STEPS.length) * 100);
+  const progress = document.querySelector('#progress');
+  const progressText = document.querySelector('#progress-text');
+  if (progress) progress.value = pct;
+  if (progressText) progressText.textContent = answered + ' of ' + STEPS.length + ' sections answered (' + pct + '%)';
 }
 
 const bind = (selector, path) => {
@@ -303,4 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSteps(); renderStep1(); renderStep2(); renderStep3(); renderStep4(); renderStep5();
   renderStep6(); renderStep7(); renderStep8(); renderStep9(); renderStep10();
   wireCompute(); wirePdf(); wireCopyTriage();
+  const wiz = document.querySelector('#wizard');
+  if (wiz) {
+    wiz.addEventListener('input', updateStepStatuses);
+    wiz.addEventListener('change', updateStepStatuses);
+    wiz.addEventListener('click', () => setTimeout(updateStepStatuses, 0));
+  }
+  updateStepStatuses();
 });
