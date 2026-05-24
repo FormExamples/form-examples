@@ -152,6 +152,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -197,16 +198,17 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
     if (row.riskLevel === 'high') {
       tr.classList.add('row-high-risk');
     }
 
     tr.innerHTML = `
-      <td>${esc(row.nhsNumber)}</td>
-      <td>${esc(row.patientName)}</td>
-      <td><span class="risk-badge ${riskClass(row.riskLevel)}">${esc(capitalize(row.riskLevel))}</span></td>
-      <td class="reason-cell">${esc(row.reasonForVisit)}</td>
-      <td>
+      <td class="data-table-td">${esc(row.nhsNumber)}</td>
+      <td class="data-table-td"><strong>${esc(row.patientName)}</strong></td>
+      <td class="data-table-td"><span class="risk-badge ${riskClass(row.riskLevel)}">${esc(capitalize(row.riskLevel))}</span></td>
+      <td class="data-table-td reason-cell">${esc(row.reasonForVisit)}</td>
+      <td class="data-table-td">
         <span class="allergy-badge ${row.allergyFlag ? 'allergy-yes' : 'allergy-no'}">
           ${row.allergyFlag ? 'Yes' : 'No'}
         </span>
