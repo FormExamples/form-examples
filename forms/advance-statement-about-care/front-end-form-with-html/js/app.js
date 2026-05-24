@@ -172,7 +172,7 @@ function textArea(opts) {
     <label for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
     ${opts.hint ? `<span class="hint">${esc(opts.hint)}</span>` : ''}
   `;
   const ta = wrapper.querySelector('textarea');
@@ -279,7 +279,7 @@ function peopleEditor() {
       r.innerHTML = `
         <div class="person-row-header">
           <span>Person ${idx + 1}</span>
-          <button type="button" class="btn btn-remove" aria-label="Remove person">Remove</button>
+          <button type="button" class="button" data-variant="remove" aria-label="Remove person">Remove</button>
         </div>
         <div class="two-col">
           <div class="field">
@@ -322,7 +322,8 @@ function peopleEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add Person';
     addBtn.addEventListener('click', () => {
       rows.push({ name: '', relationship: '', telephone: '', email: '', role: '' });
@@ -895,7 +896,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

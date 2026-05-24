@@ -187,7 +187,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.path, ta.value));
@@ -208,7 +208,7 @@ function selectInput(opts) {
   ].join('');
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">${optionsHtml}</select>
+    <select id="${id}" name="${id}" class="select">${optionsHtml}</select>
   `;
   const sel = wrapper.querySelector('select');
   sel.addEventListener('change', () => setField(opts.path, sel.value));
@@ -365,7 +365,7 @@ function listEditor(opts) {
                   `<option value="${esc(o.value)}"${row[c.key] === o.value ? ' selected' : ''}>${esc(o.label)}</option>`
               )
             ].join('');
-            return `<label class="list-cell"><span>${esc(c.label)}</span><select class="select-input" data-key="${c.key}">${opts2}</select></label>`;
+            return `<label class="list-cell"><span>${esc(c.label)}</span><select class="select" data-key="${c.key}">${opts2}</select></label>`;
           }
           const t = c.type || 'text';
           const placeholder = c.placeholder ? ` placeholder="${esc(c.placeholder)}"` : '';
@@ -375,7 +375,7 @@ function listEditor(opts) {
       r.innerHTML = `
         <div class="list-grid ${opts.gridClass || ''}">
           ${cellsHtml}
-          <button type="button" class="btn btn-icon" aria-label="Remove">&times;</button>
+          <button type="button" class="button" data-variant="icon" aria-label="Remove">&times;</button>
         </div>
       `;
       r.querySelectorAll('input, select').forEach((inp) => {
@@ -396,7 +396,8 @@ function listEditor(opts) {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = `+ ${opts.addLabel}`;
     addBtn.addEventListener('click', () => {
       rows.push(opts.factory());
@@ -1532,7 +1533,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

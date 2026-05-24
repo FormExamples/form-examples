@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-validity">Validity Status</label>
-          <select id="filter-validity" class="select-input">
+          <select id="filter-validity" class="select">
             <option value="">All statuses</option>
             <option value="Draft">Draft</option>
             <option value="Complete">Complete</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-life-sustaining">Life-Sustaining</label>
-          <select id="filter-life-sustaining" class="select-input">
+          <select id="filter-life-sustaining" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-witnessed">Witnessed</label>
-          <select id="filter-witnessed" class="select-input">
+          <select id="filter-witnessed" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -80,7 +80,7 @@
 
         <div class="filter-field">
           <label for="filter-lpa">LPA Status</label>
-          <select id="filter-lpa" class="select-input">
+          <select id="filter-lpa" class="select">
             <option value="">All LPA statuses</option>
             <option value="None">None</option>
             <option value="Health &amp; Welfare">Health &amp; Welfare</option>
@@ -92,7 +92,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

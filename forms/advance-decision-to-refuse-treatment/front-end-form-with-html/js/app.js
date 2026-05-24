@@ -216,7 +216,7 @@ function textArea(opts) {
     <label for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value ?? '')}</textarea>
+      class="text-area-input">${esc(value ?? '')}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
@@ -257,7 +257,7 @@ function selectInput(opts) {
 
   wrapper.innerHTML = `
     <label for="${id}">${labelText}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -476,10 +476,10 @@ function otherTreatmentsEditor() {
         <div class="list-grid">
           <input type="text" class="text-input" data-key="treatment"
             value="${esc(row.treatment)}" placeholder="Treatment name">
-          <textarea class="textarea" rows="2" data-key="specification"
+          <textarea class="text-area-input" rows="2" data-key="specification"
             placeholder="Specification">${esc(row.specification)}</textarea>
         </div>
-        <button type="button" class="btn btn-icon"
+        <button type="button" class="button" data-variant="icon"
           aria-label="Remove treatment">&times;</button>
       `;
       r.querySelectorAll('input, textarea').forEach((inp) => {
@@ -499,7 +499,8 @@ function otherTreatmentsEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-add';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'add');
     addBtn.textContent = '+ Add Another Treatment';
     addBtn.addEventListener('click', () => {
       rows.push({ treatment: '', refused: 'yes', specification: '' });
@@ -548,10 +549,10 @@ function otherLifeSustainingEditor() {
               </label>
             </div>
           </fieldset>
-          <textarea class="textarea" rows="2" data-key="specification"
+          <textarea class="text-area-input" rows="2" data-key="specification"
             placeholder="Specification">${esc(row.specification)}</textarea>
         </div>
-        <button type="button" class="btn btn-icon"
+        <button type="button" class="button" data-variant="icon"
           aria-label="Remove treatment">&times;</button>
       `;
 
@@ -1329,7 +1330,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;
