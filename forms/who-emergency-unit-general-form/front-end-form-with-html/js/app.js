@@ -1,14 +1,20 @@
 // WHO Emergency Unit Form: General — patient/clinician wizard (vanilla
-// JS, classic <script>). Single-page continuous wizard: every section
-// is rendered into the page in document order. Conditional rules
-// (ambulance level only when arrival mode = ambulance, deficit
-// description only when "Deficit" is checked, admit ward only when
-// disposition = admit, transfer destination only when disposition =
-// transfer, cause of death only when disposition = died) are gated by
-// the validator's applies() so the report only counts a rule when its
-// branch is active. Submission runs the pure validator + flagged-issues
-// engine and renders an inline report. State is persisted to
+// JS, classic <script>). Single-page continuous wizard: all 16 sections
+// rendered into the page in document order as Lily-shaped
+// <fieldset class="fieldset"> blocks. Conditional sub-blocks (ambulance
+// level, deficit description, admit ward, transfer destination, cause
+// of death) only appear when the answers above them require them.
+//
+// On submit the pure validator + flagged-issues engine runs and a
+// report is rendered into the Lily .panel region. State is persisted to
 // localStorage so a partial fill survives a page reload.
+//
+// Lily HTML headless contract: every input uses lilyInputClass(type),
+// every field has .error-message + aria-describedby, every radio group
+// is a fieldset.field with legend.label + div.radio-group[role=radiogroup]
+// + input.radio-input, every section is fieldset.fieldset with
+// legend.fieldset-legend containing section-step + h2.section-title +
+// optional section-description.
 
 (function () {
 'use strict';
@@ -22,6 +28,8 @@ const {
   validateEuGeneral,
   detectFlaggedIssues
 } = window.WhoEmergencyUnitGeneralForm;
+
+const TOTAL_STEPS = 16;
 
 // ----------------------------------------------------------------------
 // Persistence
@@ -104,8 +112,9 @@ function getPath(path) {
   return cur;
 }
 
-/** Set a dotted path on state, persist, and re-render the form. */
-function setPath(path, value) {
+/** Set a dotted path on state and persist. The caller decides whether
+ * to re-render (used for branch-toggling answers like disposition). */
+function writePath(path, value) {
   const parts = path.split('.');
   let cur = state;
   for (let i = 0; i < parts.length - 1; i++) {
@@ -113,6 +122,11 @@ function setPath(path, value) {
   }
   cur[parts[parts.length - 1]] = value;
   saveState();
+}
+
+/** Set + re-render the whole form (used for branch-toggling answers). */
+function setPathAndRerender(path, value) {
+  writePath(path, value);
   renderForm();
   updateProgress();
 }
@@ -127,136 +141,212 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+/** Convert a dotted path to a DOM-safe id token. */
+function pathToId(path) {
+  return 'f-' + path.replace(/\./g, '-');
+}
+
 // ----------------------------------------------------------------------
-// Field component builders
+// Lily input class lookup (per AGENTS-front-end-html.md class vocabulary)
+// ----------------------------------------------------------------------
+
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':           return 'email-input';
+    case 'number':          return 'number-input';
+    case 'date':            return 'date-input';
+    case 'time':            return 'time-input';
+    case 'datetime-local':  return 'datetime-input';
+    case 'tel':             return 'tel-input';
+    case 'url':             return 'url-input';
+    case 'search':          return 'search-input';
+    default:                return 'text-input';
+  }
+}
+
+// ----------------------------------------------------------------------
+// Field component builders (Lily contract: .field + .label + input +
+// .error-message; radioGroup uses fieldset.field + legend.label +
+// div.radio-group[role=radiogroup] + input.radio-input).
 // ----------------------------------------------------------------------
 
 function textInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = pathToId(opts.path);
+  const errId = `${id}-error`;
   const value = getPath(opts.path) ?? '';
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
+  const cls = lilyInputClass(type);
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="${type}"`,
+    `class="${cls}"`,
+    `value="${esc(value)}"`,
+    `aria-describedby="${errId}"`
+  ];
+  if (opts.placeholder) attrs.push(`placeholder="${esc(opts.placeholder)}"`);
+  if (opts.required) attrs.push('required', 'data-required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="${type}" class="text-input"
-      value="${esc(value)}"${placeholderAttr}${opts.required ? ' required' : ''}>
+    <label class="label" for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    <span class="error-message" id="${errId}"></span>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
-    cur[parts[parts.length - 1]] = input.value;
-    saveState();
+    writePath(opts.path, input.value);
+    clearFieldError(id);
     updateProgress();
   });
   return wrapper;
 }
 
 function numberInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = pathToId(opts.path);
+  const errId = `${id}-error`;
   const raw = getPath(opts.path);
   const value = hasNumber(raw) ? String(raw) : '';
   const labelText =
     esc(opts.label) +
     (opts.unit ? ` <span class="unit">${esc(opts.unit)}</span>` : '') +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  const minAttr = opts.min !== undefined ? ` min="${opts.min}"` : '';
-  const maxAttr = opts.max !== undefined ? ` max="${opts.max}"` : '';
-  const stepAttr = opts.step !== undefined ? ` step="${opts.step}"` : '';
+
+  const attrs = [
+    `id="${id}"`,
+    `name="${id}"`,
+    `type="number"`,
+    `class="number-input"`,
+    `value="${esc(value)}"`,
+    `aria-describedby="${errId}"`,
+    'inputmode="decimal"'
+  ];
+  if (opts.required) attrs.push('required', 'data-required');
+  if (opts.min !== undefined) attrs.push(`min="${opts.min}"`);
+  if (opts.max !== undefined) attrs.push(`max="${opts.max}"`);
+  if (opts.step !== undefined) attrs.push(`step="${opts.step}"`);
+
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="number" class="text-input"
-      value="${esc(value)}"${minAttr}${maxAttr}${stepAttr} inputmode="decimal">
+    <label class="label" for="${id}">${labelText}</label>
+    <input ${attrs.join(' ')}>
+    <span class="error-message" id="${errId}"></span>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
     const txt = input.value.trim();
+    let v;
     if (txt === '') {
-      cur[parts[parts.length - 1]] = null;
+      v = null;
     } else {
       const n = Number(txt);
-      cur[parts[parts.length - 1]] = Number.isFinite(n) ? n : null;
+      v = Number.isFinite(n) ? n : null;
     }
-    saveState();
+    writePath(opts.path, v);
+    clearFieldError(id);
     updateProgress();
   });
   return wrapper;
 }
 
 function textArea(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = pathToId(opts.path);
+  const errId = `${id}-error`;
   const value = getPath(opts.path) ?? '';
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  const placeholderAttr = opts.placeholder
+    ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
+    <label class="label" for="${id}">${labelText}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
+      class="text-area-input"
+      aria-describedby="${errId}"${placeholderAttr}${requiredAttr}>${esc(value)}</textarea>
+    <span class="error-message" id="${errId}"></span>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
-    const parts = opts.path.split('.');
-    let cur = state;
-    for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]];
-    cur[parts[parts.length - 1]] = ta.value;
-    saveState();
+    writePath(opts.path, ta.value);
+    clearFieldError(id);
     updateProgress();
   });
   return wrapper;
 }
 
 function radioGroup(opts) {
-  const groupId = `f-${opts.path.replace(/\./g, '-')}`;
+  const groupId = pathToId(opts.path);
+  const errId = `${groupId}-error`;
   const current = getPath(opts.path);
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = `${groupId}-fieldset`;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
   legend.innerHTML = labelText;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options';
+  list.className = 'radio-group';
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
+
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const lab = document.createElement('label');
-    lab.className = 'radio-option';
     lab.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
     lab.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
+      <input class="radio-input" type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
       <span>${esc(option.label)}</span>
     `;
     const input = lab.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setPath(opts.path, option.value);
+      if (input.checked) {
+        if (opts.rerender) {
+          setPathAndRerender(opts.path, option.value);
+        } else {
+          writePath(opts.path, option.value);
+          clearFieldError(groupId);
+          updateProgress();
+        }
+      }
     });
     list.appendChild(lab);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = errId;
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
 function selectInput(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = pathToId(opts.path);
+  const errId = `${id}-error`;
   const current = getPath(opts.path) ?? '';
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
+
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
   const optionHtml = ['<option value="">— Select —</option>']
@@ -265,47 +355,70 @@ function selectInput(opts) {
       return `<option value="${esc(o.value)}"${sel}>${esc(o.label)}</option>`;
     }))
     .join('');
+  const requiredAttr = opts.required ? ' required data-required' : '';
   wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <select id="${id}" name="${id}" class="select">${optionHtml}</select>
+    <label class="label" for="${id}">${labelText}</label>
+    <select id="${id}" name="${id}" class="select"
+      aria-describedby="${errId}"${requiredAttr}>${optionHtml}</select>
+    <span class="error-message" id="${errId}"></span>
   `;
   const sel = wrapper.querySelector('select');
-  sel.addEventListener('change', () => setPath(opts.path, sel.value));
+  sel.addEventListener('change', () => {
+    if (opts.rerender) {
+      setPathAndRerender(opts.path, sel.value);
+    } else {
+      writePath(opts.path, sel.value);
+      clearFieldError(id);
+      updateProgress();
+    }
+  });
   return wrapper;
 }
 
+/** Standalone single-checkbox row (used for "Normal" flags, high-risk
+ * signs and one-off symptom flags). Lily contract: .checkbox-input on
+ * the <input>; wrapper uses local .checkbox-field helper. */
 function checkbox(opts) {
-  const id = `f-${opts.path.replace(/\./g, '-')}`;
+  const id = pathToId(opts.path);
   const checked = !!getPath(opts.path);
   const wrapper = document.createElement('label');
   wrapper.className = 'checkbox-field';
   wrapper.htmlFor = id;
   wrapper.innerHTML = `
-    <input type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
+    <input type="checkbox" class="checkbox-input" id="${id}" name="${id}"${checked ? ' checked' : ''}>
     <span>${esc(opts.label)}</span>
   `;
   const input = wrapper.querySelector('input');
   input.addEventListener('change', () => {
-    setPath(opts.path, input.checked);
+    if (opts.rerender) {
+      setPathAndRerender(opts.path, input.checked);
+    } else {
+      writePath(opts.path, input.checked);
+      updateProgress();
+    }
   });
   return wrapper;
 }
 
+/** Lily-shaped section card: <fieldset class="fieldset"> with a
+ * <legend class="fieldset-legend"> banner containing the section
+ * step badge, title, and optional description. */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 16</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML = `
+    <span class="section-step">Section ${opts.stepNumber} of ${TOTAL_STEPS}</span>
+    <h2 class="section-title">${esc(opts.title)}</h2>
+    ${desc}
   `;
+  card.appendChild(legend);
   return card;
 }
 
@@ -444,8 +557,30 @@ const PE_SYSTEMS = [
   { key: 'skin', label: 'Skin' }
 ];
 
+// Single source of truth for the 16-step table of contents. Each entry
+// maps a step number to the validator section id it owns (used by the
+// step-list status updater).
+const STEP_DEFINITIONS = [
+  { step: 1,  section: 'patientRegistration',     title: 'Patient Registration' },
+  { step: 2,  section: 'chiefComplaintAndVitals', title: 'Chief Complaint & Vitals' },
+  { step: 3,  section: 'highRiskSigns',           title: 'High Risk Signs' },
+  { step: 4,  section: 'airway',                  title: 'Airway (A)' },
+  { step: 5,  section: 'breathing',               title: 'Breathing (B)' },
+  { step: 6,  section: 'circulation',             title: 'Circulation (C)' },
+  { step: 7,  section: 'disability',              title: 'Disability (D)' },
+  { step: 8,  section: 'historyOfPresentIllness', title: 'History of Present Illness' },
+  { step: 9,  section: 'reviewOfSystems',         title: 'Review of Systems' },
+  { step: 10, section: 'pastMedicalHistory',      title: 'Past Medical History' },
+  { step: 11, section: 'physicalExam',            title: 'Physical Exam' },
+  { step: 12, section: 'diagnostics',             title: 'Diagnostics' },
+  { step: 13, section: 'additionalInterventions', title: 'Additional Interventions' },
+  { step: 14, section: 'assessmentAndPlan',       title: 'Assessment & Plan' },
+  { step: 15, section: 'reassessment',            title: 'Reassessment' },
+  { step: 16, section: 'disposition',             title: 'Disposition' }
+];
+
 // ----------------------------------------------------------------------
-// Section renderers
+// Section renderers (1 — 16)
 // ----------------------------------------------------------------------
 
 function renderStep1() {
@@ -527,11 +662,14 @@ function renderStep1() {
     })
   ));
 
+  // Arrival mode is branch-toggling (ambulance reveals level), so it
+  // forces a re-render.
   card.appendChild(selectInput({
     label: 'Arrival mode',
     path: 'patientRegistration.arrivalMode',
     options: ARRIVAL_MODE_OPTIONS,
-    required: true
+    required: true,
+    rerender: true
   }));
 
   if (state.patientRegistration.arrivalMode === 'ambulance') {
@@ -860,7 +998,12 @@ function renderStep7() {
   }));
 
   card.appendChild(checkbox({ label: 'Moves all extremities', path: 'disability.movesAllExtremities' }));
-  card.appendChild(checkbox({ label: 'Deficit (describe below)', path: 'disability.deficit' }));
+  // Deficit toggles a conditional textarea; force re-render.
+  card.appendChild(checkbox({
+    label: 'Deficit (describe below)',
+    path: 'disability.deficit',
+    rerender: true
+  }));
   if (state.disability.deficit) {
     card.appendChild(textArea({
       label: 'Deficit description',
@@ -927,7 +1070,8 @@ function renderStep9() {
     block.appendChild(h);
     block.appendChild(checkbox({
       label: 'Normal',
-      path: `reviewOfSystems.${sys.key}.normal`
+      path: `reviewOfSystems.${sys.key}.normal`,
+      rerender: true
     }));
     if (!state.reviewOfSystems[sys.key].normal) {
       block.appendChild(textArea({
@@ -972,7 +1116,8 @@ function renderStep10() {
   card.appendChild(radioGroup({
     label: 'Pregnant?',
     path: 'pastMedicalHistory.pregnant',
-    options: YES_NO
+    options: YES_NO,
+    rerender: true
   }));
   if (state.pastMedicalHistory.pregnant === 'yes') {
     card.appendChild(checkbox({ label: 'Pregnancy: Reported', path: 'pastMedicalHistory.pregnancyReported' }));
@@ -983,7 +1128,8 @@ function renderStep10() {
   card.appendChild(selectInput({
     label: 'Vaccinations up to date?',
     path: 'pastMedicalHistory.vaccinationsStatus',
-    options: VAX_OPTIONS
+    options: VAX_OPTIONS,
+    rerender: true
   }));
   if (state.pastMedicalHistory.vaccinationsStatus === 'yes') {
     card.appendChild(textInput({
@@ -1033,7 +1179,8 @@ function renderStep11() {
     block.appendChild(h);
     block.appendChild(checkbox({
       label: 'Normal',
-      path: `physicalExam.${sys.key}.normal`
+      path: `physicalExam.${sys.key}.normal`,
+      rerender: true
     }));
     if (!state.physicalExam[sys.key].normal) {
       block.appendChild(textArea({
@@ -1181,7 +1328,11 @@ function renderStep15() {
     numberInput({ label: 'SpO2', path: 'reassessment.spo2', unit: '%', min: 0, max: 100 }),
     textInput({ label: 'SpO2 on (e.g. RA, NC 2L)', path: 'reassessment.spo2OnOxygen' })
   ));
-  card.appendChild(checkbox({ label: 'Condition same', path: 'reassessment.conditionSame' }));
+  card.appendChild(checkbox({
+    label: 'Condition same',
+    path: 'reassessment.conditionSame',
+    rerender: true
+  }));
   if (!state.reassessment.conditionSame) {
     card.appendChild(textArea({
       label: 'Condition changes',
@@ -1221,7 +1372,8 @@ function renderStep16() {
     label: 'Disposition',
     path: 'disposition.disposition',
     options: DISPOSITION_OPTIONS,
-    required: true
+    required: true,
+    rerender: true
   }));
 
   if (state.disposition.disposition === 'admit') {
@@ -1291,8 +1443,78 @@ function renderStep16() {
   return card;
 }
 
+const STEP_RENDERERS = [
+  renderStep1, renderStep2, renderStep3, renderStep4,
+  renderStep5, renderStep6, renderStep7, renderStep8,
+  renderStep9, renderStep10, renderStep11, renderStep12,
+  renderStep13, renderStep14, renderStep15, renderStep16
+];
+
 // ----------------------------------------------------------------------
-// Progress
+// Step list (table of contents + completion status)
+// ----------------------------------------------------------------------
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+    li.innerHTML = `<span>${esc(def.title)}</span>`;
+    li.addEventListener('click', () => {
+      const target = document.getElementById(`step-${def.step}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(validation) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+
+  // Build a per-section lookup from the validator output.
+  const bySection = {};
+  for (const s of validation.sections) {
+    bySection[s.section] = s;
+  }
+
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector(`[data-step="${def.step}"]`);
+    if (!li) continue;
+    const s = bySection[def.section];
+    const required = s ? s.required : 0;
+    const satisfied = s ? s.satisfied : 0;
+    if (required > 0 && satisfied === required) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (satisfied > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (required > 0 && firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
+// Progress (native <progress>) + step-list tally
 // ----------------------------------------------------------------------
 
 function updateProgress() {
@@ -1300,14 +1522,77 @@ function updateProgress() {
   const total = result.totalRequired;
   const answered = result.totalSatisfied;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) {
     text.textContent = `${answered} of ${total} required fields answered (${percent}%)`;
   }
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+
+  updateStepListStatuses(result);
+}
+
+// ----------------------------------------------------------------------
+// Validation: per-field error messages + error summary
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(`${id}-error`);
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function validateForm() {
+  const errors = [];
+  const form = document.getElementById('assessment-form');
+  if (!form) return errors;
+  const required = form.querySelectorAll('[data-required]');
+  required.forEach((input) => {
+    const id = input.id;
+    const value = (input.value || '').trim();
+    if (!value) {
+      const labelEl = form.querySelector(`label[for="${id}"]`)
+        || form.querySelector(`#${id}-fieldset > legend`);
+      const label = labelEl
+        ? labelEl.textContent.replace(/\s*\*\s*$/, '').trim()
+        : id;
+      errors.push({ id, message: `${label} is required` });
+      setFieldError(id, `${label} is required`);
+    } else {
+      clearFieldError(id);
+    }
+  });
+  renderErrorSummary(errors);
+  return errors;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML = `
+    <strong>Please correct the following:</strong>
+    <ul>
+      ${errors.map((e) =>
+        `<li><a href="#${esc(e.id)}">${esc(e.message)}</a></li>`).join('')}
+    </ul>
+  `;
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  summary.focus?.();
 }
 
 // ----------------------------------------------------------------------
@@ -1317,10 +1602,10 @@ function updateProgress() {
 function priorityClass(priority) {
   switch (priority) {
     case 'urgent': return 'flag-urgent';
-    case 'high': return 'flag-high';
+    case 'high':   return 'flag-high';
     case 'medium': return 'flag-medium';
-    case 'low': return 'flag-low';
-    default: return '';
+    case 'low':    return 'flag-low';
+    default:       return '';
   }
 }
 
@@ -1364,37 +1649,35 @@ function renderReport() {
     `;
 
   out.innerHTML = `
-    <div class="report-card">
-      <header class="report-header">
-        <h2>WHO Emergency Unit Form: General — submission report</h2>
-        <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
-      </header>
+    <header class="report-header">
+      <h2>WHO Emergency Unit Form: General &mdash; submission report</h2>
+      <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())}</p>
+    </header>
 
-      <div class="completeness">
-        ${completenessBadge}
-        <span>${validation.totalSatisfied} of ${validation.totalRequired} required fields answered.</span>
-      </div>
+    <div class="completeness">
+      ${completenessBadge}
+      <span>${validation.totalSatisfied} of ${validation.totalRequired} required fields answered.</span>
+    </div>
 
-      <h3>Section completeness</h3>
-      <table class="sections-table">
-        <thead>
-          <tr>
-            <th scope="col">Section</th>
-            <th scope="col">Answered</th>
-            <th scope="col">Missing items</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${sectionRows}
-        </tbody>
-      </table>
+    <h3>Section completeness</h3>
+    <table class="sections-table">
+      <thead>
+        <tr>
+          <th scope="col">Section</th>
+          <th scope="col">Answered</th>
+          <th scope="col">Missing items</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sectionRows}
+      </tbody>
+    </table>
 
-      <h3>Flagged issues</h3>
-      ${flagsList}
+    <h3>Flagged issues</h3>
+    ${flagsList}
 
-      <div class="report-actions">
-        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
-      </div>
+    <div class="report-actions">
+      <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
     </div>
   `;
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1404,6 +1687,9 @@ function renderReport() {
 }
 
 function submitForm() {
+  const errors = validateForm();
+  if (errors.length > 0) return;
+
   const validation = validateEuGeneral(state);
   const flags = detectFlaggedIssues(state);
   lastResult = {
@@ -1420,7 +1706,9 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   const out = document.getElementById('report');
-  if (out) out.innerHTML = '';
+  if (out) out.innerHTML =
+    '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1430,29 +1718,26 @@ function startOver() {
 // Bootstrap
 // ----------------------------------------------------------------------
 
-const RENDERERS = [
-  renderStep1, renderStep2, renderStep3, renderStep4,
-  renderStep5, renderStep6, renderStep7, renderStep8,
-  renderStep9, renderStep10, renderStep11, renderStep12,
-  renderStep13, renderStep14, renderStep15, renderStep16
-];
-
 function renderForm() {
   const host = document.getElementById('form-sections');
   if (!host) return;
-  // Preserve scroll position across re-renders triggered by setPath().
+  // Preserve scroll position across re-renders triggered by branch
+  // toggles (e.g., disposition).
   const scrollY = window.scrollY;
   host.innerHTML = '';
-  for (const r of RENDERERS) host.appendChild(r());
+  for (const r of STEP_RENDERERS) host.appendChild(r());
   window.scrollTo({ top: scrollY });
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
 
-  document.getElementById('submit-btn').addEventListener('click', submitForm);
-  document.getElementById('reset-btn').addEventListener('click', startOver);
+  const submit = document.getElementById('submit-btn');
+  const reset = document.getElementById('reset-btn');
+  if (submit) submit.addEventListener('click', submitForm);
+  if (reset) reset.addEventListener('click', startOver);
 }
 
 if (document.readyState === 'loading') {
@@ -1460,4 +1745,10 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// Expose a small public surface for debugging in the browser console.
+Object.assign(window.WhoEmergencyUnitGeneralForm, {
+  _getState: () => state,
+  _submitForm: submitForm
+});
 })();

@@ -247,6 +247,7 @@ function renderTableHead() {
 
   for (const col of columns) {
     const th = document.createElement('th');
+    th.className = 'data-table-th';
     th.scope = 'col';
     th.dataset.column = col.key;
 
@@ -292,6 +293,7 @@ function renderTableBody() {
 
   for (const row of rows) {
     const tr = document.createElement('tr');
+    tr.className = 'data-table-row';
 
     // Red-highlight rows with critical AVPU (P or U) or disposition died.
     const isCriticalAvpu = row.avpu === 'P' || row.avpu === 'U';
@@ -301,21 +303,21 @@ function renderTableBody() {
     }
 
     tr.innerHTML = `
-      <td>${esc(row.patientName)}</td>
-      <td>${esc(row.dateOfBirth)}</td>
-      <td>${esc(row.sex)}</td>
-      <td><span class="badge ${arrivalClass(row.arrivalMode)}">${esc(formatArrivalMode(row.arrivalMode))}</span></td>
-      <td class="cell-complaint">${esc(row.chiefComplaint)}</td>
-      <td><span class="badge ${avpuClass(row.avpu)}">${esc(formatAvpu(row.avpu))}</span></td>
-      <td>
+      <td class="data-table-td">${esc(row.patientName)}</td>
+      <td class="data-table-td">${esc(row.dateOfBirth)}</td>
+      <td class="data-table-td">${esc(row.sex)}</td>
+      <td class="data-table-td"><span class="badge ${arrivalClass(row.arrivalMode)}">${esc(formatArrivalMode(row.arrivalMode))}</span></td>
+      <td class="data-table-td cell-complaint">${esc(row.chiefComplaint)}</td>
+      <td class="data-table-td"><span class="badge ${avpuClass(row.avpu)}">${esc(formatAvpu(row.avpu))}</span></td>
+      <td class="data-table-td">
         <span class="badge ${row.highRiskSignsPresent ? 'high-risk-yes' : 'high-risk-no'}">
           ${row.highRiskSignsPresent ? 'Yes' : 'No'}
         </span>
       </td>
-      <td><span class="badge ${dispositionClass(row.disposition)}">${esc(formatDisposition(row.disposition))}</span></td>
-      <td class="cell-numeric">${esc(String(row.urgentFlagCount))}</td>
-      <td>${esc(row.providerName)}</td>
-      <td>${esc(formatDispositionAt(row.dispositionAt))}</td>
+      <td class="data-table-td"><span class="badge ${dispositionClass(row.disposition)}">${esc(formatDisposition(row.disposition))}</span></td>
+      <td class="data-table-td cell-numeric">${esc(String(row.urgentFlagCount))}</td>
+      <td class="data-table-td">${esc(row.providerName)}</td>
+      <td class="data-table-td">${esc(formatDispositionAt(row.dispositionAt))}</td>
     `;
     body.appendChild(tr);
   }

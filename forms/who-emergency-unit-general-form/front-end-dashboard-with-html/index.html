@@ -38,19 +38,19 @@
       <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
 
       <div class="filter-grid">
-        <div class="filter-field filter-field-search">
-          <label for="filter-search">Search</label>
+        <div class="filter-field filter-field-search field">
+          <label class="label" for="filter-search">Search</label>
           <input
             id="filter-search"
             type="search"
-            class="text-input"
+            class="search-input"
             placeholder="Patient name or chief complaint..."
             autocomplete="off"
           >
         </div>
 
-        <div class="filter-field">
-          <label for="filter-arrival">Arrival mode</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-arrival">Arrival mode</label>
           <select id="filter-arrival" class="select">
             <option value="">All arrival modes</option>
             <option value="walking">Walking</option>
@@ -60,8 +60,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-avpu">AVPU level</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-avpu">AVPU level</label>
           <select id="filter-avpu" class="select">
             <option value="">All AVPU levels</option>
             <option value="A">A &mdash; Alert</option>
@@ -71,8 +71,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-high-risk">High-risk signs</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-high-risk">High-risk signs</label>
           <select id="filter-high-risk" class="select">
             <option value="all">All</option>
             <option value="yes">Yes</option>
@@ -80,8 +80,8 @@
           </select>
         </div>
 
-        <div class="filter-field">
-          <label for="filter-disposition">Disposition</label>
+        <div class="filter-field field">
+          <label class="label" for="filter-disposition">Disposition</label>
           <select id="filter-disposition" class="select">
             <option value="">All dispositions</option>
             <option value="admit">Admit</option>
@@ -117,13 +117,13 @@
       <h2 id="patients-table-heading" class="visually-hidden">Patients</h2>
 
       <div class="table-scroll">
-        <table id="patients-table" class="patients-table">
-          <thead>
-            <tr id="patients-table-head">
+        <table id="patients-table" class="data-table">
+          <thead class="data-table-head">
+            <tr id="patients-table-head" class="data-table-row">
               <!-- Sortable column headers built by app.js -->
             </tr>
           </thead>
-          <tbody id="patients-table-body">
+          <tbody id="patients-table-body" class="data-table-body">
             <!-- Data rows built by app.js -->
           </tbody>
         </table>
