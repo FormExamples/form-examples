@@ -4,61 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Audiology Assessment — patient questionnaire</title>
-  <meta name="description" content="Comprehensive hearing evaluation covering audiometric testing, tinnitus, vestibular function, and communication impact.">
+  <meta name="description" content="Hearing-loss screening and audiometric thresholds.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Audiology Assessment</h1>
-      <p class="subtitle">Hearing, tinnitus, balance, and communication self-report. Graded by WHO hearing-loss classification.</p>
+      <p class="subtitle">Hearing-loss screening and audiometric thresholds.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Audiology Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main>
     <div class="intro">
       <p>
-        Please answer the questions below about your hearing, tinnitus, balance,
-        and how your hearing affects daily life. Audiometric numbers (such as
-        pure tone averages and word recognition scores) may be left blank if
-        unknown. All answers are saved automatically in your browser as you go.
-      </p>
-      <p>
-        If you have <strong>sudden hearing loss</strong>, severe vertigo, or
-        active ear discharge, please seek urgent care; sudden hearing loss
-        warrants ENT review within 72 hours.
+        Please complete the questions below. All answers are saved automatically
+        in your browser as you go.
       </p>
     </div>
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Audiology Assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
-        <!-- 1 Demographics, 2 Chief Complaint, 3 Hearing History, -->
-        <!-- 4 Audiometric Results, 5 Tinnitus Assessment, 6 Vestibular Symptoms, -->
-        <!-- 7 Otoscopic Findings, 8 Medical History, 9 Functional & Communication -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes. -->
       </div>
 
       <div class="button-group">
@@ -71,21 +71,21 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
-        Hearing-loss grading uses the World Health Organization (WHO)
-        classification by pure tone average (PTA): &le;25 dB normal,
-        26-40 mild, 41-60 moderate, 61-80 severe, &gt;80 profound. This
-        screening tool is for information only and is not a diagnosis;
-        please discuss your results with your audiologist or clinician.
+        This screening tool is a structured questionnaire. The grading and
+        flagged issues are for information only and are not a diagnosis;
+        please discuss your results with a qualified clinician.
       </p>
     </footer>
   </main>
