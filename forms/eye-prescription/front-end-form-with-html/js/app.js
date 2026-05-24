@@ -191,12 +191,83 @@
   function updateProgress() {
     const { total, answered } = countAnswered(state);
     const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
-    const fill = document.getElementById('progress-bar-fill');
-    const bar = document.getElementById('progress-bar');
+    const progress = document.getElementById('progress');
     const txt = document.getElementById('progress-text');
-    if (fill) fill.style.width = pct + '%';
-    if (bar) bar.setAttribute('aria-valuenow', String(pct));
+    if (progress) progress.value = pct;
     if (txt) txt.textContent = `${answered} of ${total} fields answered (${pct}%)`;
+    updateStepListStatuses();
+  }
+
+  // -----------------------------------------------------------------
+  // Step list (table of contents + completion status)
+  // -----------------------------------------------------------------
+  const STEP_DEFINITIONS = [
+    { step: 1, title: 'Prescriber', section: 'prescriber' },
+    { step: 2, title: 'Patient', section: 'patient' },
+    { step: 3, title: 'Examination', section: 'examination' },
+    { step: 4, title: 'Visual acuity', section: 'visualAcuity' },
+    { step: 5, title: 'Right eye', section: 'rightEye' },
+    { step: 6, title: 'Left eye', section: 'leftEye' },
+    { step: 7, title: 'Addition', section: null },
+    { step: 8, title: 'PD', section: 'pupillaryDistance' },
+    { step: 9, title: 'Lens', section: 'lensRecommendation' },
+    { step: 10, title: 'Ocular health', section: 'ocularHealth' },
+    { step: 11, title: 'Summary', section: 'grade' },
+  ];
+
+  function renderStepList() {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    ol.innerHTML = '';
+    for (const def of STEP_DEFINITIONS) {
+      const li = document.createElement('li');
+      li.className = 'step-list-item';
+      li.dataset.status = 'waiting';
+      li.dataset.step = String(def.step);
+      li.setAttribute('aria-label', `Step ${def.step}: ${def.title}`);
+      li.innerHTML = `<span>${def.title}</span>`;
+      li.addEventListener('click', () => {
+        const target = document.getElementById(`step-${def.step}`);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      ol.appendChild(li);
+    }
+  }
+
+  function sectionAnswered(sectionKey) {
+    if (!sectionKey) return false;
+    const sec = state[sectionKey];
+    if (!sec || typeof sec !== 'object') return false;
+    for (const k of Object.keys(sec)) {
+      const v = sec[k];
+      if (typeof v === 'boolean') { if (v) return true; }
+      else if (v !== '' && v !== null && v !== undefined) return true;
+    }
+    return false;
+  }
+
+  function updateStepListStatuses() {
+    const ol = document.getElementById('step-list');
+    if (!ol) return;
+    let firstUnfinished = -1;
+    for (const def of STEP_DEFINITIONS) {
+      const li = ol.querySelector(`[data-step="${def.step}"]`);
+      if (!li) continue;
+      if (sectionAnswered(def.section)) {
+        li.dataset.status = 'finished';
+        li.removeAttribute('aria-current');
+      } else {
+        li.dataset.status = 'waiting';
+        if (firstUnfinished === -1) firstUnfinished = def.step;
+      }
+    }
+    if (firstUnfinished === -1) firstUnfinished = 1;
+    const current = ol.querySelector(`[data-step="${firstUnfinished}"]`);
+    if (current) {
+      current.setAttribute('aria-current', 'step');
+      if (current.dataset.status === 'waiting') current.dataset.status = 'in-progress';
+    }
+    ol.dataset.current = String(firstUnfinished - 1);
   }
 
   // ------------------------------------------------------------------
@@ -351,6 +422,7 @@
   // ------------------------------------------------------------------
   function init() {
     hydrateInputs();
+    renderStepList();
     document.addEventListener('input', onInput, false);
     document.addEventListener('change', onInput, false);
     document.getElementById('submit-btn').addEventListener('click', renderReport);
@@ -359,7 +431,8 @@
       clearState();
       state = emptyPrescription();
       hydrateInputs();
-      document.getElementById('report').innerHTML = '';
+      const report = document.getElementById('report');
+      if (report) report.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
       updateProgress();
       updateLiveSummary();
       window.scrollTo({ top: 0, behavior: 'smooth' });
