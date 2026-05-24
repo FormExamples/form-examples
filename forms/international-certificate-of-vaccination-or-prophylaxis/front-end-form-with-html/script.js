@@ -9,17 +9,33 @@
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
   const progress = document.getElementById('progress');
+  const progressText = document.getElementById('progress-text');
+  const stepList = document.getElementById('step-list');
   const firedRulesList = document.getElementById('firedRules');
   const preview = document.getElementById('preview');
   const generate = document.getElementById('generate');
 
-  // Build the progress dots.
+  const STEP_TITLES = [
+    'Centre & clinician',
+    'Vaccinee identity',
+    'Signature & consent',
+    'Travel context',
+    'Disease & vaccine',
+    'Administration',
+    'Validity & stamp',
+    'Summary & sign-off',
+  ];
+
+  // Build the step-list items.
   for (let i = 1; i <= TOTAL_STEPS; i++) {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.textContent = String(i);
-    dot.addEventListener('click', () => setStep(i));
-    progress.appendChild(dot);
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(i);
+    li.setAttribute('aria-label', 'Step ' + i + ': ' + STEP_TITLES[i - 1]);
+    li.innerHTML = '<span>' + STEP_TITLES[i - 1] + '</span>';
+    li.addEventListener('click', () => setStep(i));
+    stepList.appendChild(li);
   }
 
   function loadState() {
@@ -69,9 +85,23 @@
     document.querySelectorAll('fieldset.step').forEach((el) => {
       el.classList.toggle('is-active', Number(el.dataset.step) === state.step);
     });
-    [...progress.children].forEach((dot, idx) => {
-      dot.classList.toggle('is-active', idx + 1 === state.step);
+    [...stepList.children].forEach((li, idx) => {
+      const stepNum = idx + 1;
+      if (stepNum === state.step) {
+        li.dataset.status = 'in-progress';
+        li.setAttribute('aria-current', 'step');
+      } else if (stepNum < state.step) {
+        li.dataset.status = 'finished';
+        li.removeAttribute('aria-current');
+      } else {
+        li.dataset.status = 'waiting';
+        li.removeAttribute('aria-current');
+      }
     });
+    stepList.dataset.current = String(state.step - 1);
+    const pct = Math.round((state.step / TOTAL_STEPS) * 100);
+    if (progress) progress.value = pct;
+    if (progressText) progressText.textContent = 'Step ' + state.step + ' of ' + TOTAL_STEPS;
     prev.disabled = state.step === 1;
     next.disabled = state.step === TOTAL_STEPS;
     if (state.step === TOTAL_STEPS) renderSummary();

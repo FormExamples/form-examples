@@ -7,73 +7,100 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>International Certificate of Vaccination or Prophylaxis</h1>
-    <p>WHO IHR 2005 Annex 6 — yellow card</p>
-    <nav id="progress" aria-live="polite"></nav>
+  <a class="skip-link visually-hidden" href="#wizard">Skip to certificate wizard</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>International Certificate of Vaccination or Prophylaxis</h1>
+      <p class="subtitle">WHO IHR 2005 Annex 6 — yellow card</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">Step 0 of 8</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="ICVP steps"
+        data-current="0"
+      ><!-- step-list-items injected by script.js --></ol>
+    </div>
   </header>
 
   <main>
-    <form id="wizard">
-      <fieldset class="step is-active" data-step="1">
-        <legend>Step 1 — Centre &amp; clinician</legend>
-        <label>Centre name <input name="centreName" required /></label>
-        <label>WHO designation reference <input name="whoDesignationReference" /></label>
-        <label>Centre country (ISO 3166-1 alpha-3) <input name="centreCountryAlpha3" maxlength="3" /></label>
-        <label>Uniform stamp <input type="file" name="uniformStamp" accept="image/*" /></label>
-        <label>Supervising clinician name <input name="clinicianName" required /></label>
-        <label>Professional status
-          <select name="clinicianProfessionalStatus">
+    <form id="wizard" class="form" novalidate aria-label="ICVP">
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <fieldset class="fieldset step is-active" data-step="1" id="step-1">
+        <legend class="fieldset-legend">Step 1 — Centre &amp; clinician</legend>
+        <label class="label">Centre name <input name="centreName" class="text-input" required /></label>
+        <label class="label">WHO designation reference <input name="whoDesignationReference" class="text-input" /></label>
+        <label class="label">Centre country (ISO 3166-1 alpha-3) <input name="centreCountryAlpha3" class="text-input" maxlength="3" /></label>
+        <label class="label">Uniform stamp <input type="file" name="uniformStamp" class="file-input" accept="image/*" /></label>
+        <label class="label">Supervising clinician name <input name="clinicianName" class="text-input" required /></label>
+        <label class="label">Professional status
+          <select name="clinicianProfessionalStatus" class="select">
             <option value="">Select…</option>
             <option>MD</option><option>DO</option><option>RN</option>
             <option>NP</option><option>PA</option><option>Pharmacist</option>
             <option>Paramedic</option><option>other</option>
           </select>
         </label>
-        <label>Registration body <input name="clinicianRegistrationBody" placeholder="GMC / NMC / HCPC / …" /></label>
-        <label>Registration number <input name="clinicianRegistrationNumber" /></label>
+        <label class="label">Registration body <input name="clinicianRegistrationBody" class="text-input" placeholder="GMC / NMC / HCPC / …" /></label>
+        <label class="label">Registration number <input name="clinicianRegistrationNumber" class="text-input" /></label>
       </fieldset>
 
-      <fieldset class="step" data-step="2">
-        <legend>Step 2 — Vaccinee identity</legend>
-        <label>Surname <input name="patientSurname" required /></label>
-        <label>Given names <input name="patientGivenNames" required /></label>
-        <label>Date of birth <input type="date" name="patientBirthDate" required /></label>
-        <label>Sex
-          <select name="patientSex">
+      <fieldset class="fieldset step" data-step="2" id="step-2">
+        <legend class="fieldset-legend">Step 2 — Vaccinee identity</legend>
+        <label class="label">Surname <input name="patientSurname" class="text-input" required /></label>
+        <label class="label">Given names <input name="patientGivenNames" class="text-input" required /></label>
+        <label class="label">Date of birth <input type="date" name="patientBirthDate" class="date-input" required /></label>
+        <label class="label">Sex
+          <select name="patientSex" class="select">
             <option value="">Select…</option>
             <option>male</option><option>female</option>
             <option>other</option><option>unspecified</option>
           </select>
         </label>
-        <label>Nationality (ISO 3166-1 alpha-3) <input name="patientNationalityAlpha3" maxlength="3" required /></label>
-        <label>Travel-document kind
-          <select name="patientTravelDocumentKind">
+        <label class="label">Nationality (ISO 3166-1 alpha-3) <input name="patientNationalityAlpha3" class="text-input" maxlength="3" required /></label>
+        <label class="label">Travel-document kind
+          <select name="patientTravelDocumentKind" class="select">
             <option value="">Select…</option>
             <option>passport</option><option>national-id</option>
             <option>travel-document</option><option>other</option>
           </select>
         </label>
-        <label>Travel-document number <input name="patientTravelDocumentNumber" /></label>
+        <label class="label">Travel-document number <input name="patientTravelDocumentNumber" class="text-input" /></label>
       </fieldset>
 
-      <fieldset class="step" data-step="3">
-        <legend>Step 3 — Vaccinee signature &amp; consent</legend>
-        <label>Signature (typed)
-          <input name="patientSignature" placeholder="Type your full name to sign" required />
+      <fieldset class="fieldset step" data-step="3" id="step-3">
+        <legend class="fieldset-legend">Step 3 — Vaccinee signature &amp; consent</legend>
+        <label class="label">Signature (typed)
+          <input name="patientSignature" class="text-input" placeholder="Type your full name to sign" required />
         </label>
-        <label>
-          <input type="checkbox" name="consentedToDataSharing" value="yes" />
+        <label class="label">
+          <input type="checkbox" class="checkbox-input" name="consentedToDataSharing" value="yes" />
           I consent to onward sharing of this certificate data with destination health authorities.
         </label>
       </fieldset>
 
-      <fieldset class="step" data-step="4">
-        <legend>Step 4 — Travel context (optional)</legend>
-        <label>Destination countries (space-separated alpha-3) <input name="destinationCountriesAlpha3" /></label>
-        <label>Planned arrival date <input type="date" name="plannedArrivalDate" /></label>
-        <label>Purpose of travel
-          <select name="purposeOfTravel">
+      <fieldset class="fieldset step" data-step="4" id="step-4">
+        <legend class="fieldset-legend">Step 4 — Travel context (optional)</legend>
+        <label class="label">Destination countries (space-separated alpha-3) <input name="destinationCountriesAlpha3" class="text-input" /></label>
+        <label class="label">Planned arrival date <input type="date" name="plannedArrivalDate" class="date-input" /></label>
+        <label class="label">Purpose of travel
+          <select name="purposeOfTravel" class="select">
             <option value="">Select…</option>
             <option>tourism</option><option>business</option>
             <option>study</option><option>employment</option>
@@ -82,27 +109,27 @@
             <option>other</option>
           </select>
         </label>
-        <label>Declared pregnancy?
-          <select name="declaredPregnancy">
+        <label class="label">Declared pregnancy?
+          <select name="declaredPregnancy" class="select">
             <option value="">No</option><option value="yes">Yes</option>
           </select>
         </label>
-        <label>Declared breastfeeding?
-          <select name="declaredBreastfeeding">
+        <label class="label">Declared breastfeeding?
+          <select name="declaredBreastfeeding" class="select">
             <option value="">No</option><option value="yes">Yes</option>
           </select>
         </label>
-        <label>Declared immunosuppression?
-          <select name="declaredImmunosuppression">
+        <label class="label">Declared immunosuppression?
+          <select name="declaredImmunosuppression" class="select">
             <option value="">No</option><option value="yes">Yes</option>
           </select>
         </label>
       </fieldset>
 
-      <fieldset class="step" data-step="5">
-        <legend>Step 5 — Vaccination entry — disease &amp; vaccine</legend>
-        <label>Disease
-          <select name="entryDisease">
+      <fieldset class="fieldset step" data-step="5" id="step-5">
+        <legend class="fieldset-legend">Step 5 — Vaccination entry — disease &amp; vaccine</legend>
+        <label class="label">Disease
+          <select name="entryDisease" class="select">
             <option value="">Select…</option>
             <option>yellow-fever</option><option>polio</option>
             <option>smallpox</option><option>cholera</option>
@@ -110,19 +137,19 @@
             <option>other</option>
           </select>
         </label>
-        <label>Vaccine name <input name="entryVaccineName" /></label>
-        <label>Manufacturer <input name="entryManufacturer" /></label>
-        <label>Batch number <input name="entryBatchNumber" /></label>
-        <label>Route
-          <select name="entryRoute">
+        <label class="label">Vaccine name <input name="entryVaccineName" class="text-input" /></label>
+        <label class="label">Manufacturer <input name="entryManufacturer" class="text-input" /></label>
+        <label class="label">Batch number <input name="entryBatchNumber" class="text-input" /></label>
+        <label class="label">Route
+          <select name="entryRoute" class="select">
             <option value="">Select…</option>
             <option>intramuscular</option><option>subcutaneous</option>
             <option>intradermal</option><option>oral</option>
             <option>intranasal</option><option>other</option>
           </select>
         </label>
-        <label>Anatomical site
-          <select name="entryAnatomicalSite">
+        <label class="label">Anatomical site
+          <select name="entryAnatomicalSite" class="select">
             <option value="">Select…</option>
             <option>left-deltoid</option><option>right-deltoid</option>
             <option>left-thigh</option><option>right-thigh</option>
@@ -130,9 +157,9 @@
             <option>oral</option><option>nasal</option><option>other</option>
           </select>
         </label>
-        <label>Dose amount <input type="number" step="0.001" name="entryDoseAmountValue" /></label>
-        <label>Dose unit
-          <select name="entryDoseAmountUnit">
+        <label class="label">Dose amount <input type="number" step="0.001" name="entryDoseAmountValue" class="number-input" /></label>
+        <label class="label">Dose unit
+          <select name="entryDoseAmountUnit" class="select">
             <option value="">Select…</option>
             <option>mL</option><option>mg</option>
             <option>IU</option><option>drops</option>
@@ -140,15 +167,15 @@
         </label>
       </fieldset>
 
-      <fieldset class="step" data-step="6">
-        <legend>Step 6 — Vaccination entry — administration</legend>
-        <label>Date of vaccination <input type="date" name="entryVaccinationDate" required /></label>
-        <label>Time of vaccination <input type="time" name="entryVaccinationTime" /></label>
-        <label>Administering clinician signature (image)
-          <input type="file" name="entryClinicianSignature" accept="image/*" />
+      <fieldset class="fieldset step" data-step="6" id="step-6">
+        <legend class="fieldset-legend">Step 6 — Vaccination entry — administration</legend>
+        <label class="label">Date of vaccination <input type="date" name="entryVaccinationDate" class="date-input" required /></label>
+        <label class="label">Time of vaccination <input type="time" name="entryVaccinationTime" class="time-input" /></label>
+        <label class="label">Administering clinician signature (image)
+          <input type="file" name="entryClinicianSignature" class="file-input" accept="image/*" />
         </label>
-        <label>Professional status
-          <select name="entryClinicianProfessionalStatus">
+        <label class="label">Professional status
+          <select name="entryClinicianProfessionalStatus" class="select">
             <option value="">Select…</option>
             <option>MD</option><option>DO</option><option>RN</option>
             <option>NP</option><option>PA</option><option>Pharmacist</option>
@@ -157,43 +184,46 @@
         </label>
       </fieldset>
 
-      <fieldset class="step" data-step="7">
-        <legend>Step 7 — Vaccination entry — validity &amp; stamp</legend>
-        <label>Validity starts on <input type="date" name="entryValidityStartsOn" /></label>
-        <label>Validity ends on <input type="date" name="entryValidityEndsOn" /></label>
-        <label>
-          <input type="checkbox" name="entryValidityIsLifetime" value="yes" />
+      <fieldset class="fieldset step" data-step="7" id="step-7">
+        <legend class="fieldset-legend">Step 7 — Vaccination entry — validity &amp; stamp</legend>
+        <label class="label">Validity starts on <input type="date" name="entryValidityStartsOn" class="date-input" /></label>
+        <label class="label">Validity ends on <input type="date" name="entryValidityEndsOn" class="date-input" /></label>
+        <label class="label">
+          <input type="checkbox" class="checkbox-input" name="entryValidityIsLifetime" value="yes" />
           Validity is lifetime (yellow fever per 2016 IHR amendment)
         </label>
-        <label>Centre stamp image <input type="file" name="entryCentreStampImage" accept="image/*" /></label>
-        <label>
-          <input type="checkbox" name="entryCentreStampApplied" value="yes" />
+        <label class="label">Centre stamp image <input type="file" name="entryCentreStampImage" class="file-input" accept="image/*" /></label>
+        <label class="label">
+          <input type="checkbox" class="checkbox-input" name="entryCentreStampApplied" value="yes" />
           Official centre stamp applied
         </label>
       </fieldset>
 
-      <fieldset class="step" data-step="8">
-        <legend>Step 8 — Summary, medical waiver &amp; sign-off</legend>
-        <label>Medical waiver?
-          <select name="medicalWaiver">
+      <fieldset class="fieldset step" data-step="8" id="step-8">
+        <legend class="fieldset-legend">Step 8 — Summary, medical waiver &amp; sign-off</legend>
+        <label class="label">Medical waiver?
+          <select name="medicalWaiver" class="select">
             <option value="">No</option><option value="yes">Yes</option>
           </select>
         </label>
-        <label>Medical waiver reason <textarea name="medicalWaiverReason" rows="3"></textarea></label>
-        <label>Electronic signature (typed) <input name="electronicSignature" /></label>
+        <label class="label">Medical waiver reason <textarea name="medicalWaiverReason" class="text-area-input" rows="3"></textarea></label>
+        <label class="label">Electronic signature (typed) <input name="electronicSignature" class="text-input" /></label>
 
         <h3>Validation report</h3>
         <ul id="firedRules"></ul>
 
-        <button type="button" id="generate">Generate certificate</button>
-        <article id="preview" hidden></article>
+        <button type="button" id="generate" class="button" data-variant="primary">Generate certificate</button>
       </fieldset>
 
-      <nav class="wizard-nav">
-        <button type="button" id="prev" disabled>Previous</button>
-        <button type="button" id="next">Next</button>
+      <nav class="button-group wizard-nav">
+        <button type="button" id="prev" class="button" data-variant="secondary" disabled>Previous</button>
+        <button type="button" id="next" class="button" data-variant="primary">Next</button>
       </nav>
     </form>
+
+    <section id="preview" class="panel" role="region" aria-live="polite" aria-label="Certificate preview" hidden>
+      <p class="empty-message">Generate the certificate to see the preview.</p>
+    </section>
   </main>
 
   <script src="script.js"></script>
