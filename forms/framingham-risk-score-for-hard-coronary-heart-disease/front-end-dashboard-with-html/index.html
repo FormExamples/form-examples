@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-category">Risk Category</label>
-          <select id="filter-category" class="select-input">
+          <select id="filter-category" class="select">
             <option value="">All risk categories</option>
             <option value="Low">Low</option>
             <option value="Intermediate">Intermediate</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-sex">Sex</label>
-          <select id="filter-sex" class="select-input">
+          <select id="filter-sex" class="select">
             <option value="">All</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -70,7 +70,7 @@
 
         <div class="filter-field">
           <label for="filter-smoker">Smoker</label>
-          <select id="filter-smoker" class="select-input">
+          <select id="filter-smoker" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -81,7 +81,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
