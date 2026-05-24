@@ -134,21 +134,38 @@ function esc(s) {
 // Field component builders
 // ----------------------------------------------------------------------
 
+function lilyInputClass(type) {
+  switch (type) {
+    case 'email':  return 'email-input';
+    case 'number': return 'number-input';
+    case 'date':   return 'date-input';
+    case 'time':   return 'time-input';
+    case 'tel':    return 'tel-input';
+    case 'url':    return 'url-input';
+    case 'search': return 'search-input';
+    default:       return 'text-input';
+  }
+}
+
 function textInput(opts) {
   const id = `f-${opts.path.replace(/\./g, '-')}`;
   const value = getPath(opts.path) ?? '';
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const type = opts.type || 'text';
+  const cls = lilyInputClass(type);
   const wrapper = document.createElement('div');
   wrapper.className = 'field';
-  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
   wrapper.dataset.path = opts.path;
-  wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <input id="${id}" name="${id}" type="${type}" class="text-input"
-      value="${esc(value)}"${placeholderAttr}${opts.required ? ' required' : ''}>
-  `;
+  const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
+  wrapper.innerHTML =
+    `<label class="label" for="${id}"${labelRequired}>${labelText}</label>` +
+    `<input id="${id}" name="${id}" type="${type}" class="${cls}"` +
+    ` value="${esc(value)}"${placeholderAttr}` +
+    ` aria-describedby="${id}-error"${requiredAttrs}>` +
+    `<span class="error-message" id="${id}-error"></span>`;
   const input = wrapper.querySelector('input');
   input.addEventListener('input', () => {
     const parts = opts.path.split('.');
@@ -157,6 +174,7 @@ function textInput(opts) {
     cur[parts[parts.length - 1]] = input.value;
     saveState();
     updateProgress();
+    clearFieldError(id);
   });
   input.addEventListener('change', () => {
     renderForm();
@@ -173,11 +191,14 @@ function textArea(opts) {
   wrapper.className = 'field';
   wrapper.dataset.path = opts.path;
   const placeholderAttr = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
-  wrapper.innerHTML = `
-    <label for="${id}">${labelText}</label>
-    <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
-      class="text-area-input"${placeholderAttr}>${esc(value)}</textarea>
-  `;
+  const requiredAttrs = opts.required ? ' required data-required' : '';
+  const labelRequired = opts.required ? ' data-required' : '';
+  wrapper.innerHTML =
+    `<label class="label" for="${id}"${labelRequired}>${labelText}</label>` +
+    `<textarea id="${id}" name="${id}" rows="${opts.rows || 3}"` +
+    ` class="text-area-input"${placeholderAttr}` +
+    ` aria-describedby="${id}-error"${requiredAttrs}>${esc(value)}</textarea>` +
+    `<span class="error-message" id="${id}-error"></span>`;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => {
     const parts = opts.path.split('.');
@@ -186,6 +207,7 @@ function textArea(opts) {
     cur[parts[parts.length - 1]] = ta.value;
     saveState();
     updateProgress();
+    clearFieldError(id);
   });
   return wrapper;
 }
@@ -196,69 +218,85 @@ function radioGroup(opts) {
   const labelText = esc(opts.label) +
     (opts.required ? ' <span class="req" aria-hidden="true">*</span>' : '');
   const wrapper = document.createElement('fieldset');
-  wrapper.className = 'field radio-group';
+  wrapper.className = 'field';
+  wrapper.id = groupId + '-fieldset';
   wrapper.dataset.path = opts.path;
 
   const legend = document.createElement('legend');
+  legend.className = 'label';
+  if (opts.required) legend.setAttribute('data-required', '');
   legend.innerHTML = labelText;
   wrapper.appendChild(legend);
 
   const list = document.createElement('div');
-  list.className = 'radio-options' + (opts.stack ? ' stack' : '');
+  list.className = 'radio-group' + (opts.stack ? ' stack' : '');
+  list.setAttribute('role', 'radiogroup');
+  list.setAttribute('aria-labelledby', wrapper.id);
   for (const option of opts.options) {
     const radioId = `${groupId}-${option.value}`;
     const lab = document.createElement('label');
-    lab.className = 'radio-option';
     lab.htmlFor = radioId;
     const checked = current === option.value ? ' checked' : '';
-    lab.innerHTML = `
-      <input type="radio" id="${radioId}" name="${groupId}" value="${esc(option.value)}"${checked}>
-      <span>${esc(option.label)}</span>
-    `;
+    const requiredAttr = opts.required ? ' data-required' : '';
+    lab.innerHTML =
+      `<input class="radio-input" type="radio" id="${radioId}" name="${groupId}"` +
+      ` value="${esc(option.value)}"${checked}${requiredAttr}>` +
+      `<span>${esc(option.label)}</span>`;
     const input = lab.querySelector('input');
     input.addEventListener('change', () => {
-      if (input.checked) setPath(opts.path, option.value);
+      if (input.checked) {
+        clearFieldError(groupId);
+        setPath(opts.path, option.value);
+      }
     });
     list.appendChild(lab);
   }
   wrapper.appendChild(list);
+
+  const errSpan = document.createElement('span');
+  errSpan.className = 'error-message';
+  errSpan.id = groupId + '-error';
+  wrapper.appendChild(errSpan);
   return wrapper;
 }
 
 function checkbox(opts) {
   const id = `f-${opts.path.replace(/\./g, '-')}`;
   const checked = !!getPath(opts.path);
-  const wrapper = document.createElement('label');
-  wrapper.className = 'checkbox-field';
-  wrapper.htmlFor = id;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'field';
   wrapper.dataset.path = opts.path;
-  wrapper.innerHTML = `
-    <input type="checkbox" id="${id}" name="${id}"${checked ? ' checked' : ''}>
-    <span>${esc(opts.label)}</span>
-  `;
-  const input = wrapper.querySelector('input');
+  const lab = document.createElement('label');
+  lab.htmlFor = id;
+  lab.className = 'checkbox-input-wrap';
+  lab.innerHTML =
+    `<input class="checkbox-input" type="checkbox" id="${id}" name="${id}"` +
+    `${checked ? ' checked' : ''}>` +
+    `<span>${esc(opts.label)}</span>`;
+  const input = lab.querySelector('input');
   input.addEventListener('change', () => {
     setPath(opts.path, input.checked);
   });
+  wrapper.appendChild(lab);
   return wrapper;
 }
 
-/** Build a section card. */
+/** Build a section card as a Lily fieldset. */
 function sectionCard(opts) {
-  const card = document.createElement('section');
-  card.className = 'section-card';
+  const card = document.createElement('fieldset');
+  card.className = 'fieldset';
   card.dataset.step = String(opts.stepNumber);
   card.id = `step-${opts.stepNumber}`;
   const desc = opts.description
-    ? `<p class="section-description">${esc(opts.description)}</p>`
+    ? `<span class="section-description">${esc(opts.description)}</span>`
     : '';
-  card.innerHTML = `
-    <header class="section-header">
-      <span class="section-step">Section ${opts.stepNumber} of 14</span>
-      <h2 class="section-title">${esc(opts.title)}</h2>
-      ${desc}
-    </header>
-  `;
+  const legend = document.createElement('legend');
+  legend.className = 'fieldset-legend';
+  legend.innerHTML =
+    `<span class="section-step">Section ${opts.stepNumber} of 14</span>` +
+    `<h2 class="section-title">${esc(opts.title)}</h2>` +
+    desc;
+  card.appendChild(legend);
   return card;
 }
 
@@ -875,6 +913,78 @@ function renderStep14() {
 }
 
 // ----------------------------------------------------------------------
+// Step-list
+// ----------------------------------------------------------------------
+
+const STEP_DEFINITIONS = [
+  { step: 1,  title: 'Personal' },
+  { step: 2,  title: 'Healthcare' },
+  { step: 3,  title: 'Eyesight' },
+  { step: 4,  title: 'Both eyes' },
+  { step: 5,  title: 'Field' },
+  { step: 6,  title: 'Glaucoma' },
+  { step: 7,  title: 'RP' },
+  { step: 8,  title: 'Laser' },
+  { step: 9,  title: 'Bleph.' },
+  { step: 10, title: 'Night' },
+  { step: 11, title: 'Diplopia' },
+  { step: 12, title: 'Other' },
+  { step: 13, title: 'Contact' },
+  { step: 14, title: 'Authorise' }
+];
+
+function renderStepList() {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  ol.innerHTML = '';
+  for (const def of STEP_DEFINITIONS) {
+    const li = document.createElement('li');
+    li.className = 'step-list-item';
+    li.dataset.status = 'waiting';
+    li.dataset.step = String(def.step);
+    li.setAttribute('aria-label', 'Section ' + def.step + ': ' + def.title);
+    li.innerHTML = '<span>' + esc(def.title) + '</span>';
+    li.addEventListener('click', () => {
+      const target = document.getElementById('step-' + def.step);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    ol.appendChild(li);
+  }
+}
+
+function updateStepListStatuses(sectionAnswered, sectionTotal) {
+  const ol = document.getElementById('step-list');
+  if (!ol) return;
+  let firstUnfinished = -1;
+  for (const def of STEP_DEFINITIONS) {
+    const li = ol.querySelector('[data-step="' + def.step + '"]');
+    if (!li) continue;
+    const a = sectionAnswered[def.step] || 0;
+    const t = sectionTotal[def.step] || 0;
+    if (t > 0 && a >= t) {
+      li.dataset.status = 'finished';
+      li.removeAttribute('aria-current');
+    } else if (a > 0) {
+      li.dataset.status = 'in-progress';
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    } else {
+      li.dataset.status = 'waiting';
+      li.removeAttribute('aria-current');
+      if (firstUnfinished === -1) firstUnfinished = def.step;
+    }
+  }
+  if (firstUnfinished === -1) firstUnfinished = STEP_DEFINITIONS[0].step;
+  const current = ol.querySelector('[data-step="' + firstUnfinished + '"]');
+  if (current) {
+    current.setAttribute('aria-current', 'step');
+    if (current.dataset.status === 'waiting') {
+      current.dataset.status = 'in-progress';
+    }
+  }
+  ol.dataset.current = String(firstUnfinished - 1);
+}
+
+// ----------------------------------------------------------------------
 // Progress
 // ----------------------------------------------------------------------
 
@@ -883,14 +993,135 @@ function updateProgress() {
   const total = result.totalRequired;
   const answered = result.totalSatisfied;
   const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  const bar = document.getElementById('progress-bar-fill');
+  const bar = document.getElementById('progress');
+  if (bar) bar.value = percent;
   const text = document.getElementById('progress-text');
-  if (bar) bar.style.width = `${percent}%`;
   if (text) {
     text.textContent = `${answered} of ${total} required fields answered (${percent}%)`;
   }
-  const aria = document.getElementById('progress-bar');
-  if (aria) aria.setAttribute('aria-valuenow', String(percent));
+
+  // Map section name -> step number
+  const SECTION_TO_STEP = {
+    personalDetails: 1,
+    healthcareProfessionals: 2,
+    eyesightStandards: 3,
+    visionInBothEyes: 4,
+    fieldOfVision: 5,
+    glaucoma: 6,
+    retinitisPigmentosa: 7,
+    laserTreatment: 8,
+    blepharospasm: 9,
+    nightBlindness: 10,
+    doubleVision: 11,
+    otherVisionConditions: 12,
+    recentContact: 13,
+    authorisation: 14
+  };
+  const sectionAnswered = {};
+  const sectionTotal = {};
+  if (result.sections) {
+    for (const s of result.sections) {
+      const step = SECTION_TO_STEP[s.section];
+      if (step) {
+        sectionTotal[step] = (sectionTotal[step] || 0) + (s.required || 0);
+        sectionAnswered[step] = (sectionAnswered[step] || 0) + (s.satisfied || 0);
+      }
+    }
+  }
+  updateStepListStatuses(sectionAnswered, sectionTotal);
+}
+
+// ----------------------------------------------------------------------
+// Validation UI
+// ----------------------------------------------------------------------
+
+function clearFieldError(id) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = '';
+  const input = document.getElementById(id);
+  if (input) input.removeAttribute('aria-invalid');
+  const fs = document.getElementById(id + '-fieldset');
+  if (fs) fs.removeAttribute('aria-invalid');
+}
+
+function setFieldError(id, message) {
+  const el = document.getElementById(id + '-error');
+  if (el) el.textContent = message;
+  const input = document.getElementById(id);
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+
+function isInsideHiddenConditional(el) {
+  let cur = el;
+  while (cur && cur !== document.body) {
+    if (cur.style && cur.style.display === 'none') return true;
+    cur = cur.parentElement;
+  }
+  return false;
+}
+
+function validateFormUi() {
+  const errors = [];
+  document.querySelectorAll('[data-required]').forEach((el) => {
+    const tag = (el.tagName || '').toLowerCase();
+    if (tag !== 'input' && tag !== 'select' && tag !== 'textarea') return;
+    if (isInsideHiddenConditional(el)) return;
+    const id = el.id;
+    if (!id) return;
+    if (tag === 'input' && el.type === 'radio') {
+      const name = el.name;
+      const checked = document.querySelector('input[type="radio"][name="' + name + '"]:checked');
+      if (!checked) {
+        errors.push({ id: name, message: 'Please answer this question.' });
+        setFieldError(name, 'Please answer this question.');
+      }
+      return;
+    }
+    let missing = false;
+    if (tag === 'input' && el.type === 'checkbox') {
+      if (!el.checked) missing = true;
+    } else if (el.value == null || String(el.value).trim() === '') {
+      missing = true;
+    }
+    if (missing) {
+      errors.push({ id: id, message: 'Please complete this field.' });
+      setFieldError(id, 'Please complete this field.');
+    } else {
+      clearFieldError(id);
+    }
+  });
+  const seen = new Set();
+  const uniq = [];
+  for (const e of errors) {
+    if (seen.has(e.id)) continue;
+    seen.add(e.id);
+    uniq.push(e);
+  }
+  renderErrorSummary(uniq);
+  return uniq;
+}
+
+function renderErrorSummary(errors) {
+  const summary = document.getElementById('error-summary');
+  if (!summary) return;
+  if (!errors || errors.length === 0) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+    return;
+  }
+  summary.hidden = false;
+  summary.innerHTML =
+    '<strong>Please correct the following:</strong>' +
+    '<ul>' +
+    errors.map((e) =>
+      '<li><a href="#' + esc(e.id) + '">' + esc(e.message) + '</a></li>'
+    ).join('') +
+    '</ul>';
+  summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (typeof summary.focus === 'function') {
+    summary.setAttribute('tabindex', '-1');
+    summary.focus({ preventScroll: true });
+  }
 }
 
 // ----------------------------------------------------------------------
@@ -987,6 +1218,7 @@ function renderReport() {
 }
 
 function submitForm() {
+  validateFormUi();
   const validation = validateV1(state);
   const flags = detectFlaggedIssues(state);
   lastResult = {
@@ -1003,7 +1235,8 @@ function startOver() {
   state = emptyAssessment();
   lastResult = null;
   const out = document.getElementById('report');
-  if (out) out.innerHTML = '';
+  if (out) out.innerHTML = '<p class="empty-message">Submit the form to see the report.</p>';
+  renderErrorSummary([]);
   renderForm();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1030,6 +1263,7 @@ function renderForm() {
 }
 
 function init() {
+  renderStepList();
   renderForm();
   updateProgress();
 
