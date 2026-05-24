@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-activity">Disease Activity</label>
-          <select id="filter-activity" class="select-input">
+          <select id="filter-activity" class="select">
             <option value="">All activity levels</option>
             <option value="Remission">Remission</option>
             <option value="Low">Low</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-diagnosis">Diagnosis</label>
-          <select id="filter-diagnosis" class="select-input">
+          <select id="filter-diagnosis" class="select">
             <option value="">All diagnoses</option>
             <option value="Rheumatoid Arthritis">Rheumatoid Arthritis</option>
             <option value="Psoriatic Arthritis">Psoriatic Arthritis</option>
@@ -76,7 +76,7 @@
 
         <div class="filter-field">
           <label for="filter-allergy">Allergy</label>
-          <select id="filter-allergy" class="select-input">
+          <select id="filter-allergy" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -87,7 +87,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

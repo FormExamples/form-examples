@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Combined Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="no-sad">No SAD</option>
             <option value="mild">Mild</option>
@@ -64,7 +64,7 @@
 
         <div class="filter-field">
           <label for="filter-season">Seasonal Pattern</label>
-          <select id="filter-season" class="select-input">
+          <select id="filter-season" class="select">
             <option value="">All patterns</option>
             <option value="Winter">Winter</option>
             <option value="Summer">Summer</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-treatment">Treatment Status</label>
-          <select id="filter-treatment" class="select-input">
+          <select id="filter-treatment" class="select">
             <option value="">All treatments</option>
             <option value="None">None</option>
             <option value="Light Therapy">Light Therapy</option>
@@ -85,7 +85,7 @@
 
         <div class="filter-field">
           <label for="filter-suicidal">Suicidal Risk</label>
-          <select id="filter-suicidal" class="select-input">
+          <select id="filter-suicidal" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -96,7 +96,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

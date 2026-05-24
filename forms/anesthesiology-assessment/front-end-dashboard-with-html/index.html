@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Composite Risk</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-asa">ASA Grade</label>
-          <select id="filter-asa" class="select-input">
+          <select id="filter-asa" class="select">
             <option value="">All ASA grades</option>
             <option value="I">I</option>
             <option value="II">II</option>
@@ -76,7 +76,7 @@
 
         <div class="filter-field">
           <label for="filter-mallampati">Mallampati</label>
-          <select id="filter-mallampati" class="select-input">
+          <select id="filter-mallampati" class="select">
             <option value="">All Mallampati</option>
             <option value="I">I</option>
             <option value="II">II</option>
@@ -87,7 +87,7 @@
 
         <div class="filter-field">
           <label for="filter-airway">Difficult Airway</label>
-          <select id="filter-airway" class="select-input">
+          <select id="filter-airway" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -98,7 +98,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

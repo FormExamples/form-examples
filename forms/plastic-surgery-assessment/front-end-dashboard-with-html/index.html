@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-asa">ASA Class</label>
-          <select id="filter-asa" class="select-input">
+          <select id="filter-asa" class="select">
             <option value="">All ASA classes</option>
             <option value="I">ASA I</option>
             <option value="II">ASA II</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-wound">Wound Class</label>
-          <select id="filter-wound" class="select-input">
+          <select id="filter-wound" class="select">
             <option value="">All wound classes</option>
             <option value="I">Class I (Clean)</option>
             <option value="II">Class II (Clean-Contaminated)</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -87,7 +87,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

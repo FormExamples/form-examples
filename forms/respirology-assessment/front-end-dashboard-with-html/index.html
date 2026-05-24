@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-mrc">MRC Grade</label>
-          <select id="filter-mrc" class="select-input">
+          <select id="filter-mrc" class="select">
             <option value="">All MRC grades</option>
             <option value="1">MRC 1</option>
             <option value="2">MRC 2</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-oxygen">Oxygen Status</label>
-          <select id="filter-oxygen" class="select-input">
+          <select id="filter-oxygen" class="select">
             <option value="">All oxygen status</option>
             <option value="room-air">Room air</option>
             <option value="oxygen">On oxygen</option>
@@ -74,7 +74,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

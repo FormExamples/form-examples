@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-eligibility">Eligibility</label>
-          <select id="filter-eligibility" class="select-input">
+          <select id="filter-eligibility" class="select">
             <option value="">All eligibility</option>
             <option value="Suitable">Suitable</option>
             <option value="Conditionally Suitable">Conditionally Suitable</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-donor-type">Donor Type</label>
-          <select id="filter-donor-type" class="select-input">
+          <select id="filter-donor-type" class="select">
             <option value="">All donor types</option>
             <option value="Living">Living</option>
             <option value="DBD">DBD (deceased — brain death)</option>
@@ -82,7 +82,7 @@
 
         <div class="filter-field">
           <label for="filter-organ">Organ</label>
-          <select id="filter-organ" class="select-input">
+          <select id="filter-organ" class="select">
             <option value="">All organs</option>
             <option value="Kidney">Kidney</option>
             <option value="Liver">Liver</option>
@@ -97,7 +97,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

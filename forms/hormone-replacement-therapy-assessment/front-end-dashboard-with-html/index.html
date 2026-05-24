@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-mrs">MRS Severity</label>
-          <select id="filter-mrs" class="select-input">
+          <select id="filter-mrs" class="select">
             <option value="">All MRS scores</option>
             <option value="minimal">No/Minimal (0-4)</option>
             <option value="mild">Mild (5-8)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Classification</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All classifications</option>
             <option value="Favourable">Favourable</option>
             <option value="Acceptable">Acceptable</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-hrt">Current HRT</label>
-          <select id="filter-hrt" class="select-input">
+          <select id="filter-hrt" class="select">
             <option value="">All HRT statuses</option>
             <option value="yes">On HRT</option>
             <option value="no">Not on HRT</option>
@@ -84,7 +84,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

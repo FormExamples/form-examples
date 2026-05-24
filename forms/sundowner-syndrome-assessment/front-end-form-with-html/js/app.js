@@ -220,7 +220,7 @@ function textArea(opts) {
     <label for="${id}">${esc(opts.label)}</label>
     <textarea id="${id}" name="${id}" rows="${opts.rows || 3}"
       ${opts.placeholder ? `placeholder="${esc(opts.placeholder)}"` : ''}
-      class="textarea">${esc(value)}</textarea>
+      class="text-area-input">${esc(value)}</textarea>
   `;
   const ta = wrapper.querySelector('textarea');
   ta.addEventListener('input', () => setField(opts.section, opts.field, ta.value));
@@ -241,7 +241,7 @@ function selectInput(opts) {
   ].join('');
   wrapper.innerHTML = `
     <label for="${id}">${esc(opts.label)}</label>
-    <select id="${id}" name="${id}" class="select-input">
+    <select id="${id}" name="${id}" class="select">
       ${optionsHtml}
     </select>
   `;
@@ -421,7 +421,7 @@ function renderNpiList() {
     const currentFreq = state.behaviouralSymptoms.npi[domain.key]?.frequency || 0;
     freqCell.innerHTML = `
       <span>Frequency</span>
-      <select id="${freqId}" class="select-input">
+      <select id="${freqId}" class="select">
         <option value="0"${currentFreq === 0 ? ' selected' : ''}>— Select —</option>
         ${npiFrequencyOptions.map((o) =>
           `<option value="${o.value}"${currentFreq === o.value ? ' selected' : ''}>${esc(o.label)}</option>`
@@ -440,7 +440,7 @@ function renderNpiList() {
     const currentSev = state.behaviouralSymptoms.npi[domain.key]?.severity || 0;
     sevCell.innerHTML = `
       <span>Severity</span>
-      <select id="${sevId}" class="select-input">
+      <select id="${sevId}" class="select">
         <option value="0"${currentSev === 0 ? ' selected' : ''}>— Select —</option>
         ${npiSeverityOptions.map((o) =>
           `<option value="${o.value}"${currentSev === o.value ? ' selected' : ''}>${esc(o.label)}</option>`
@@ -508,7 +508,7 @@ function medicationListEditor() {
             <input type="text" class="text-input" data-key="indication" value="${esc(row.indication)}" placeholder="e.g. agitation">
           </label>
         </div>
-        <button type="button" class="btn btn-secondary" style="align-self:flex-start;" aria-label="Remove medication">&times;</button>
+        <button type="button" class="button" data-variant="secondary" style="align-self:flex-start;" aria-label="Remove medication">&times;</button>
       `;
       r.querySelectorAll('input').forEach((inp) => {
         inp.addEventListener('input', () => {
@@ -528,7 +528,8 @@ function medicationListEditor() {
     });
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
-    addBtn.className = 'btn btn-secondary';
+    addBtn.className = 'button';
+    addBtn.setAttribute('data-variant', 'secondary');
     addBtn.textContent = '+ Add medication';
     addBtn.style.marginTop = '0.25rem';
     addBtn.addEventListener('click', () => {
@@ -1216,7 +1217,7 @@ function renderReport() {
       ${flagsList}
 
       <div class="report-actions">
-        <button type="button" id="start-over-btn" class="btn btn-secondary">Start over</button>
+        <button type="button" id="start-over-btn" class="button" data-variant="secondary">Start over</button>
       </div>
     </div>
   `;

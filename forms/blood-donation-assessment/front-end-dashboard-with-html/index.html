@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-eligibility">Eligibility</label>
-          <select id="filter-eligibility" class="select-input">
+          <select id="filter-eligibility" class="select">
             <option value="">All eligibility statuses</option>
             <option value="Eligible">Eligible</option>
             <option value="Temporarily Deferred">Temporarily Deferred</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-vitals">Vital Signs</label>
-          <select id="filter-vitals" class="select-input">
+          <select id="filter-vitals" class="select">
             <option value="">All vital-sign statuses</option>
             <option value="Normal">Normal</option>
             <option value="Borderline">Borderline</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Flag</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

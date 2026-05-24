@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-gold">GOLD Stage</label>
-          <select id="filter-gold" class="select-input">
+          <select id="filter-gold" class="select">
             <option value="">All GOLD stages</option>
             <option value="1">GOLD I</option>
             <option value="2">GOLD II</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-abcd">ABCD Group</label>
-          <select id="filter-abcd" class="select-input">
+          <select id="filter-abcd" class="select">
             <option value="">All groups</option>
             <option value="A">Group A</option>
             <option value="B">Group B</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-allergy">Allergy</label>
-          <select id="filter-allergy" class="select-input">
+          <select id="filter-allergy" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
 
         <div class="filter-field">
           <label for="filter-oxygen">O2 Therapy</label>
-          <select id="filter-oxygen" class="select-input">
+          <select id="filter-oxygen" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -93,7 +93,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

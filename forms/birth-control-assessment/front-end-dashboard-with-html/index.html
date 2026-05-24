@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-mec">MEC Category</label>
-          <select id="filter-mec" class="select-input">
+          <select id="filter-mec" class="select">
             <option value="">All MEC categories</option>
             <option value="UK MEC 1">UK MEC 1</option>
             <option value="UK MEC 2">UK MEC 2</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-dvt">DVT Risk</label>
-          <select id="filter-dvt" class="select-input">
+          <select id="filter-dvt" class="select">
             <option value="">All DVT risks</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-cvd">CVD Risk</label>
-          <select id="filter-cvd" class="select-input">
+          <select id="filter-cvd" class="select">
             <option value="">All CVD risks</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -83,7 +83,7 @@
 
         <div class="filter-field">
           <label for="filter-migraine">Migraine with Aura</label>
-          <select id="filter-migraine" class="select-input">
+          <select id="filter-migraine" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -94,7 +94,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

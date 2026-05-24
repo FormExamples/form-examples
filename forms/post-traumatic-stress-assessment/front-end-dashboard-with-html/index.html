@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Minimal">Minimal</option>
             <option value="Mild">Mild</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-diagnosis">Probable DSM-5</label>
-          <select id="filter-diagnosis" class="select-input">
+          <select id="filter-diagnosis" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-ongoing">Ongoing Trauma</label>
-          <select id="filter-ongoing" class="select-input">
+          <select id="filter-ongoing" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-stage">ASRM Stage</label>
-          <select id="filter-stage" class="select-input">
+          <select id="filter-stage" class="select">
             <option value="">All stages</option>
             <option value="Stage I">Stage I (Minimal)</option>
             <option value="Stage II">Stage II (Mild)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Mild">Mild</option>
             <option value="Moderate">Moderate</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-fertility">Fertility Concern</label>
-          <select id="filter-fertility" class="select-input">
+          <select id="filter-fertility" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -84,7 +84,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

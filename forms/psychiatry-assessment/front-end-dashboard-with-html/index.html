@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-gaf">GAF Score</label>
-          <select id="filter-gaf" class="select-input">
+          <select id="filter-gaf" class="select">
             <option value="">All GAF scores</option>
             <option value="91-100">GAF 91-100 (Superior)</option>
             <option value="81-90">GAF 81-90 (Minimal)</option>
@@ -67,7 +67,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="none">None</option>
             <option value="low">Low</option>
@@ -79,7 +79,7 @@
 
         <div class="filter-field">
           <label for="filter-legal">Legal Status</label>
-          <select id="filter-legal" class="select-input">
+          <select id="filter-legal" class="select">
             <option value="">All legal statuses</option>
             <option value="voluntary">Voluntary</option>
             <option value="involuntary">Involuntary</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

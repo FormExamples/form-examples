@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity Band</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severity bands</option>
             <option value="None">None (0-10)</option>
             <option value="Mild">Mild (11-30)</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-diagnosis">Primary Diagnosis</label>
-          <select id="filter-diagnosis" class="select-input">
+          <select id="filter-diagnosis" class="select">
             <option value="">All diagnoses</option>
             <option value="Cancer">Cancer</option>
             <option value="Heart Failure">Heart Failure</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-pps">Performance Status (PPS)</label>
-          <select id="filter-pps" class="select-input">
+          <select id="filter-pps" class="select">
             <option value="">All PPS bands</option>
             <option value="High">High (70-100)</option>
             <option value="Moderate">Moderate (40-60)</option>
@@ -85,7 +85,7 @@
 
         <div class="filter-field">
           <label for="filter-setting">Setting</label>
-          <select id="filter-setting" class="select-input">
+          <select id="filter-setting" class="select">
             <option value="">All settings</option>
             <option value="Home">Home</option>
             <option value="Hospice">Hospice</option>
@@ -98,7 +98,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

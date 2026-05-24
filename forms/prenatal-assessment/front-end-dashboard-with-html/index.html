@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="low">Low Risk</option>
             <option value="moderate">Moderate Risk</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-trimester">Trimester</label>
-          <select id="filter-trimester" class="select-input">
+          <select id="filter-trimester" class="select">
             <option value="">All trimesters</option>
             <option value="1">1st trimester (&lt; 14 weeks)</option>
             <option value="2">2nd trimester (14-27 weeks)</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-referral">Referral</label>
-          <select id="filter-referral" class="select-input">
+          <select id="filter-referral" class="select">
             <option value="">All referral statuses</option>
             <option value="None">No referral</option>
             <option value="referred">Referred</option>
@@ -83,7 +83,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-readiness">Readiness Level</label>
-          <select id="filter-readiness" class="select-input">
+          <select id="filter-readiness" class="select">
             <option value="">All readiness levels</option>
             <option value="Fit for Duty">Fit for Duty</option>
             <option value="Fit with Restrictions">Fit with Restrictions</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-competency">Competency Level</label>
-          <select id="filter-competency" class="select-input">
+          <select id="filter-competency" class="select">
             <option value="">All competency levels</option>
             <option value="Expert">Expert</option>
             <option value="Competent">Competent</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-role">Role</label>
-          <select id="filter-role" class="select-input">
+          <select id="filter-role" class="select">
             <option value="">All roles</option>
             <option value="Paramedic">Paramedic</option>
             <option value="Advanced Paramedic">Advanced Paramedic</option>
@@ -87,7 +87,7 @@
 
         <div class="filter-field">
           <label for="filter-training">Training Status</label>
-          <select id="filter-training" class="select-input">
+          <select id="filter-training" class="select">
             <option value="">All training statuses</option>
             <option value="Current">Current</option>
             <option value="Due Soon">Due Soon</option>
@@ -99,7 +99,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

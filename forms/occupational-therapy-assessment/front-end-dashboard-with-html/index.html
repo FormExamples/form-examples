@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-performance">Performance</label>
-          <select id="filter-performance" class="select-input">
+          <select id="filter-performance" class="select">
             <option value="">All scores</option>
             <option value="significant">Significant issues (&lt;5)</option>
             <option value="moderate">Moderate concerns (5-7)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-satisfaction">Satisfaction</label>
-          <select id="filter-satisfaction" class="select-input">
+          <select id="filter-satisfaction" class="select">
             <option value="">All scores</option>
             <option value="significant">Significant issues (&lt;5)</option>
             <option value="moderate">Moderate concerns (5-7)</option>
@@ -72,7 +72,7 @@
 
         <div class="filter-field">
           <label for="filter-priority">Priority Area</label>
-          <select id="filter-priority" class="select-input">
+          <select id="filter-priority" class="select">
             <option value="">All priority areas</option>
             <option value="Self-care">Self-care</option>
             <option value="Mobility">Mobility</option>
@@ -86,7 +86,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

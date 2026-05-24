@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-eligibility">Eligibility</label>
-          <select id="filter-eligibility" class="select-input">
+          <select id="filter-eligibility" class="select">
             <option value="">All eligibilities</option>
             <option value="Eligible">Eligible</option>
             <option value="Conditional">Conditional</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-bmi-band">BMI Band</label>
-          <select id="filter-bmi-band" class="select-input">
+          <select id="filter-bmi-band" class="select">
             <option value="">All BMI bands</option>
             <option value="Underweight">Underweight (&lt;18.5)</option>
             <option value="Normal">Normal (18.5–24.9)</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-comorbidity">Comorbidity</label>
-          <select id="filter-comorbidity" class="select-input">
+          <select id="filter-comorbidity" class="select">
             <option value="">All comorbidities</option>
             <option value="any">Any present</option>
             <option value="none">None</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

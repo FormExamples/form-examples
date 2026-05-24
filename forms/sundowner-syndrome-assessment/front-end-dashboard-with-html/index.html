@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Mild">Mild</option>
             <option value="Moderate">Moderate</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-dementia">Dementia Type</label>
-          <select id="filter-dementia" class="select-input">
+          <select id="filter-dementia" class="select">
             <option value="">All dementia types</option>
             <option value="Alzheimer's">Alzheimer's</option>
             <option value="Vascular">Vascular</option>
@@ -76,7 +76,7 @@
 
         <div class="filter-field">
           <label for="filter-setting">Residential Setting</label>
-          <select id="filter-setting" class="select-input">
+          <select id="filter-setting" class="select">
             <option value="">All settings</option>
             <option value="Own Home">Own Home</option>
             <option value="Family Carer">Family Carer</option>
@@ -90,7 +90,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

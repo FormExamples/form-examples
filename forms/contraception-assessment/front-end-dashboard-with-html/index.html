@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-ukmec">UKMEC Category</label>
-          <select id="filter-ukmec" class="select-input">
+          <select id="filter-ukmec" class="select">
             <option value="">All UKMEC categories</option>
             <option value="1">UKMEC 1 - No restriction</option>
             <option value="2">UKMEC 2 - Advantages outweigh risks</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-review">Review Status</label>
-          <select id="filter-review" class="select-input">
+          <select id="filter-review" class="select">
             <option value="">All statuses</option>
             <option value="Pending">Pending</option>
             <option value="Requires review">Requires review</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-method">Preferred Method</label>
-          <select id="filter-method" class="select-input">
+          <select id="filter-method" class="select">
             <option value="">All methods</option>
             <option value="Combined oral contraceptive">Combined oral contraceptive</option>
             <option value="Progestogen-only pill">Progestogen-only pill</option>
@@ -93,7 +93,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-nihss">NIHSS Score</label>
-          <select id="filter-nihss" class="select-input">
+          <select id="filter-nihss" class="select">
             <option value="">All NIHSS scores</option>
             <option value="0">No stroke symptoms (0)</option>
             <option value="1-4">Minor stroke (1-4)</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="No stroke symptoms">No stroke symptoms</option>
             <option value="Minor stroke">Minor stroke</option>
@@ -75,7 +75,7 @@
 
         <div class="filter-field">
           <label for="filter-thrombolysis">tPA Eligible</label>
-          <select id="filter-thrombolysis" class="select-input">
+          <select id="filter-thrombolysis" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -86,7 +86,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

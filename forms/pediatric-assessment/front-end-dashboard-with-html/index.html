@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-dev-screen">Dev Screen Result</label>
-          <select id="filter-dev-screen" class="select-input">
+          <select id="filter-dev-screen" class="select">
             <option value="">All Results</option>
             <option value="normal">Normal</option>
             <option value="developmental-concern">Developmental Concern</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-growth">Growth Status</label>
-          <select id="filter-growth" class="select-input">
+          <select id="filter-growth" class="select">
             <option value="">All</option>
             <option value="normal">Normal</option>
             <option value="concern">Concern</option>
@@ -70,7 +70,7 @@
 
         <div class="filter-field">
           <label for="filter-immunization">Immunization</label>
-          <select id="filter-immunization" class="select-input">
+          <select id="filter-immunization" class="select">
             <option value="">All</option>
             <option value="up-to-date">Up to date</option>
             <option value="missing">Missing</option>
@@ -81,7 +81,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

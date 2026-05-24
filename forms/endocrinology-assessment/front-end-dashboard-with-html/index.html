@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-axis">Primary Affected Axis</label>
-          <select id="filter-axis" class="select-input">
+          <select id="filter-axis" class="select">
             <option value="">All axes</option>
             <option value="Thyroid">Thyroid</option>
             <option value="Adrenal">Adrenal</option>
@@ -66,7 +66,7 @@
 
         <div class="filter-field">
           <label for="filter-severity">Disturbance Severity</label>
-          <select id="filter-severity" class="select-input">
+          <select id="filter-severity" class="select">
             <option value="">All severities</option>
             <option value="Normal">Normal</option>
             <option value="Subclinical">Subclinical</option>
@@ -78,7 +78,7 @@
 
         <div class="filter-field">
           <label for="filter-flagged">Flagged Issues</label>
-          <select id="filter-flagged" class="select-input">
+          <select id="filter-flagged" class="select">
             <option value="">All</option>
             <option value="any">Any flagged</option>
             <option value="none">None flagged</option>
@@ -89,7 +89,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

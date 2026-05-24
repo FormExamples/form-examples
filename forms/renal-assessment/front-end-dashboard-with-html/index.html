@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-gfr">GFR Category</label>
-          <select id="filter-gfr" class="select-input">
+          <select id="filter-gfr" class="select">
             <option value="">All GFR categories</option>
             <option value="G1">G1 (>=90)</option>
             <option value="G2">G2 (60-89)</option>
@@ -64,7 +64,7 @@
 
         <div class="filter-field">
           <label for="filter-albuminuria">Albuminuria</label>
-          <select id="filter-albuminuria" class="select-input">
+          <select id="filter-albuminuria" class="select">
             <option value="">All albuminuria categories</option>
             <option value="A1">A1 (<3)</option>
             <option value="A2">A2 (3-30)</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Composite Risk</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low">Low</option>
             <option value="Moderate">Moderate</option>
@@ -87,7 +87,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

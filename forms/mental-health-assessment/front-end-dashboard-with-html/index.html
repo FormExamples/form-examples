@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-phq9">PHQ-9 Severity</label>
-          <select id="filter-phq9" class="select-input">
+          <select id="filter-phq9" class="select">
             <option value="">All PHQ-9</option>
             <option value="minimal">Minimal (0-4)</option>
             <option value="mild">Mild (5-9)</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-allergy">Allergy</label>
-          <select id="filter-allergy" class="select-input">
+          <select id="filter-allergy" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -82,7 +82,7 @@
 
         <div class="filter-field">
           <label for="filter-incident">Prev. Adverse</label>
-          <select id="filter-incident" class="select-input">
+          <select id="filter-incident" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -93,7 +93,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

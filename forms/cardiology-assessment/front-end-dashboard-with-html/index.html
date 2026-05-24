@@ -25,7 +25,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -52,7 +52,7 @@
 
         <div class="filter-field">
           <label for="filter-ccs">CCS Class</label>
-          <select id="filter-ccs" class="select-input">
+          <select id="filter-ccs" class="select">
             <option value="">All CCS Classes</option>
             <option value="1">CCS I</option>
             <option value="2">CCS II</option>
@@ -63,7 +63,7 @@
 
         <div class="filter-field">
           <label for="filter-nyha">NYHA Class</label>
-          <select id="filter-nyha" class="select-input">
+          <select id="filter-nyha" class="select">
             <option value="">All NYHA Classes</option>
             <option value="1">NYHA I</option>
             <option value="2">NYHA II</option>
@@ -74,7 +74,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All Risk Levels</option>
             <option value="low">Low</option>
             <option value="moderate">Moderate</option>
@@ -85,7 +85,7 @@
 
         <div class="filter-field">
           <label for="filter-allergy">Allergy</label>
-          <select id="filter-allergy" class="select-input">
+          <select id="filter-allergy" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -94,7 +94,7 @@
 
         <div class="filter-field">
           <label for="filter-anticoag">Anticoag.</label>
-          <select id="filter-anticoag" class="select-input">
+          <select id="filter-anticoag" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -105,7 +105,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

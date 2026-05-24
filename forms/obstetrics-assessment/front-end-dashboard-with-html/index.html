@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-risk">Risk Level</label>
-          <select id="filter-risk" class="select-input">
+          <select id="filter-risk" class="select">
             <option value="">All risk levels</option>
             <option value="Low Risk">Low Risk</option>
             <option value="Moderate Risk">Moderate Risk</option>
@@ -61,7 +61,7 @@
 
         <div class="filter-field">
           <label for="filter-pathway">Care Pathway</label>
-          <select id="filter-pathway" class="select-input">
+          <select id="filter-pathway" class="select">
             <option value="">All pathways</option>
             <option value="Midwifery-led">Midwifery-led</option>
             <option value="Obstetrician-led">Obstetrician-led</option>
@@ -71,7 +71,7 @@
 
         <div class="filter-field">
           <label for="filter-trimester">Trimester</label>
-          <select id="filter-trimester" class="select-input">
+          <select id="filter-trimester" class="select">
             <option value="">All trimesters</option>
             <option value="1">First (0-13 wks)</option>
             <option value="2">Second (14-27 wks)</option>
@@ -81,7 +81,7 @@
 
         <div class="filter-field">
           <label for="filter-mental">Mental Health Flag</label>
-          <select id="filter-mental" class="select-input">
+          <select id="filter-mental" class="select">
             <option value="">All</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -92,7 +92,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters

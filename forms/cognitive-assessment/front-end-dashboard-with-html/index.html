@@ -24,7 +24,7 @@
     <!-- Status banner: shown when backend fetch fails and we fall back -->
     <div
       id="status-banner"
-      class="status-banner"
+      class="alert" data-type="warning"
       role="status"
       aria-live="polite"
       hidden
@@ -51,7 +51,7 @@
 
         <div class="filter-field">
           <label for="filter-mmse">MMSE Score</label>
-          <select id="filter-mmse" class="select-input">
+          <select id="filter-mmse" class="select">
             <option value="">All MMSE scores</option>
             <option value="24-30">Normal (24-30)</option>
             <option value="18-23">Mild (18-23)</option>
@@ -62,7 +62,7 @@
 
         <div class="filter-field">
           <label for="filter-cognitive">Cognitive Level</label>
-          <select id="filter-cognitive" class="select-input">
+          <select id="filter-cognitive" class="select">
             <option value="">All levels</option>
             <option value="Normal cognition">Normal cognition</option>
             <option value="Mild cognitive impairment">Mild cognitive impairment</option>
@@ -73,7 +73,7 @@
 
         <div class="filter-field">
           <label for="filter-age">Age Group</label>
-          <select id="filter-age" class="select-input">
+          <select id="filter-age" class="select">
             <option value="">All age groups</option>
             <option value="55-64">55-64</option>
             <option value="65-74">65-74</option>
@@ -84,7 +84,7 @@
 
         <div class="filter-field">
           <label for="filter-referral">Referral Source</label>
-          <select id="filter-referral" class="select-input">
+          <select id="filter-referral" class="select">
             <option value="">All referral sources</option>
             <option value="GP">GP</option>
             <option value="Neurologist">Neurologist</option>
@@ -99,7 +99,7 @@
           <button
             type="button"
             id="filter-clear-btn"
-            class="btn btn-secondary"
+            class="button" data-variant="secondary"
             hidden
           >
             Clear filters
