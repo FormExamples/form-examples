@@ -4,61 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dental Assessment — patient questionnaire</title>
-  <meta name="description" content="DMFT (Decayed, Missing, Filled Teeth) Index plus periodontal, oral, medical, and radiographic assessment.">
+  <meta name="description" content="Oral-health assessment using the DMFT index.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#form-sections">Skip to questionnaire</a>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Dental Assessment</h1>
-      <p class="subtitle">DMFT Index plus periodontal, oral, medical, and radiographic findings.</p>
+      <p class="subtitle">Oral-health assessment using the DMFT index.</p>
 
-      <div class="progress" id="progress" role="region" aria-label="Form progress">
-        <div
-          id="progress-bar"
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Form completion"
-        >
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-        <p id="progress-text" class="progress-text">0 fields answered (0%)</p>
-      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Dental Assessment steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
     </div>
   </header>
 
   <main>
     <div class="intro">
       <p>
-        Please answer the questions below about your dental and oral health.
-        The DMFT (Decayed, Missing, Filled Teeth) Index in section 4 is the
-        validated WHO scoring instrument. All answers are saved automatically
+        Please complete the questions below. All answers are saved automatically
         in your browser as you go.
-      </p>
-      <p>
-        If you have severe pain, swelling, uncontrolled bleeding, facial
-        trauma, or difficulty breathing or swallowing, contact your dentist
-        urgently or call your local emergency number.
       </p>
     </div>
 
     <form
       id="assessment-form"
-      class="assessment-form"
+      class="form"
       autocomplete="off"
       novalidate
       onsubmit="return false;"
+      aria-label="Dental Assessment"
     >
-      <div id="form-sections" class="form-sections">
-        <!-- Sections rendered by js/app.js: -->
-        <!-- 1 Demographics, 2 Chief Complaint, 3 Dental History, -->
-        <!-- 4 DMFT Assessment, 5 Periodontal Assessment, 6 Oral Examination, -->
-        <!-- 7 Medical History, 8 Current Medications, 9 Radiographic Findings -->
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes. -->
       </div>
 
       <div class="button-group">
@@ -71,20 +71,21 @@
       </div>
     </form>
 
-    <div
+    <section
       id="report"
       class="panel"
       role="region"
       aria-live="polite"
       aria-label="Assessment report"
-    ></div>
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
 
     <footer class="page-footer">
       <p>
-        The DMFT (Decayed, Missing, Filled Teeth) Index is a WHO-recommended
-        instrument for measuring caries experience in permanent dentition.
-        This screening tool is for information only and is not a diagnosis;
-        please discuss your results with your dentist.
+        This screening tool is a structured questionnaire. The grading and
+        flagged issues are for information only and are not a diagnosis;
+        please discuss your results with a qualified clinician.
       </p>
     </footer>
   </main>
