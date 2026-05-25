@@ -1,36 +1,70 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import { calculateTcHdlRatio } from '$lib/engine/utils';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import Alert from '$lib/components/ui/Alert.svelte';
+  import { calculateTcHdlRatio } from '$lib/engine/utils';
 
-	const d = assessment.data.cholesterol;
+  const d = assessment.data.cholesterol;
 
-	const autoRatio = $derived(
-		d.totalHDLRatio ?? calculateTcHdlRatio(d.totalCholesterol, d.hdlCholesterol)
-	);
+  const autoRatio = $derived(
+    d.totalHDLRatio ?? calculateTcHdlRatio(d.totalCholesterol, d.hdlCholesterol)
+  );
 </script>
 
-<SectionCard title="Cholesterol" description="Lipid profile and statin status">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Total Cholesterol" name="totalCholesterol" bind:value={d.totalCholesterol} min={1} max={15} step={0.1} unit="mmol/L" />
-		<NumberInput label="HDL Cholesterol" name="hdlCholesterol" bind:value={d.hdlCholesterol} min={0.2} max={5} step={0.1} unit="mmol/L" />
-	</div>
-	{#if autoRatio != null}
-		<div class="mb-4 rounded-lg bg-blue-50 p-3 text-sm">
-			<span class="font-medium text-blue-800">TC/HDL Ratio:</span>
-			<span class="text-blue-700">{autoRatio}</span>
-		</div>
-	{/if}
-	<NumberInput label="TC/HDL Ratio (override)" name="totalHDLRatio" bind:value={d.totalHDLRatio} min={1} max={20} step={0.1} />
-	<RadioGroup
-		label="Currently on statin?"
-		name="onStatin"
-		bind:value={d.onStatin}
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-	/>
-</SectionCard>
+<Fieldset legend="Step 4 \u2014 Cholesterol">
+  <p class="hint">Lipid profile and statin status.</p>
+
+  <div class="field-grid">
+    <Field label="Total cholesterol (mmol/L)" inputId="step-4-totalCholesterol">
+      <NumberInput
+        id="step-4-totalCholesterol"
+        label="Total cholesterol"
+        min={1}
+        max={15}
+        step="0.1"
+        bind:value={d.totalCholesterol}
+      />
+    </Field>
+    <Field label="HDL cholesterol (mmol/L)" inputId="step-4-hdlCholesterol">
+      <NumberInput
+        id="step-4-hdlCholesterol"
+        label="HDL cholesterol"
+        min={0.2}
+        max={5}
+        step="0.1"
+        bind:value={d.hdlCholesterol}
+      />
+    </Field>
+  </div>
+
+  {#if autoRatio != null}
+    <Alert type="info">
+      <p><strong>TC/HDL ratio:</strong> {autoRatio}</p>
+    </Alert>
+  {/if}
+
+  <Field label="TC/HDL ratio (override)" inputId="step-4-totalHDLRatio">
+    <NumberInput
+      id="step-4-totalHDLRatio"
+      label="TC/HDL ratio"
+      min={1}
+      max={20}
+      step="0.1"
+      bind:value={d.totalHDLRatio}
+    />
+  </Field>
+
+  <Field label="Currently on statin?">
+    <RadioGroup label="Currently on statin?">
+      <label class="radio-input">
+        <input type="radio" name="onStatin" value="yes" bind:group={d.onStatin} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="onStatin" value="no" bind:group={d.onStatin} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+</Fieldset>

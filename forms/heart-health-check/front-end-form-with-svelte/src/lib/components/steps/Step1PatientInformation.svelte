@@ -1,25 +1,54 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import DateInput from '$lib/components/ui/DateInput.svelte';
+  import EmailInput from '$lib/components/ui/EmailInput.svelte';
+  import TelInput from '$lib/components/ui/TelInput.svelte';
 
-	const d = assessment.data.patientInformation;
+  const d = assessment.data.patientInformation;
 </script>
 
-<SectionCard title="Patient Information" description="Patient identification and contact details">
-	<TextInput label="Full Name" name="fullName" bind:value={d.fullName} required />
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Date of Birth" name="dateOfBirth" bind:value={d.dateOfBirth} type="date" required />
-		<TextInput label="NHS Number" name="nhsNumber" bind:value={d.nhsNumber} placeholder="000 000 0000" />
-	</div>
-	<TextInput label="Address" name="address" bind:value={d.address} />
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Postcode" name="postcode" bind:value={d.postcode} />
-		<TextInput label="Telephone" name="telephone" bind:value={d.telephone} type="tel" />
-	</div>
-	<TextInput label="Email" name="email" bind:value={d.email} type="email" />
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="GP Name" name="gpName" bind:value={d.gpName} />
-		<TextInput label="GP Practice" name="gpPractice" bind:value={d.gpPractice} />
-	</div>
-</SectionCard>
+<Fieldset legend="Step 1 \u2014 Patient information">
+  <p class="hint">Patient identification and contact details.</p>
+
+  <Field label="Full name" inputId="step-1-fullName" required>
+    <TextInput id="step-1-fullName" label="Full name" bind:value={d.fullName} />
+  </Field>
+
+  <div class="field-grid">
+    <Field label="Date of birth" inputId="step-1-dateOfBirth" required>
+      <DateInput id="step-1-dateOfBirth" label="Date of birth" bind:value={d.dateOfBirth} />
+    </Field>
+    <Field label="NHS number" inputId="step-1-nhsNumber">
+      <TextInput id="step-1-nhsNumber" label="NHS number" bind:value={d.nhsNumber} />
+    </Field>
+  </div>
+
+  <Field label="Address" inputId="step-1-address">
+    <TextInput id="step-1-address" label="Address" bind:value={d.address} />
+  </Field>
+
+  <div class="field-grid">
+    <Field label="Postcode" inputId="step-1-postcode">
+      <TextInput id="step-1-postcode" label="Postcode" bind:value={d.postcode} />
+    </Field>
+    <Field label="Telephone" inputId="step-1-telephone">
+      <TelInput id="step-1-telephone" label="Telephone" bind:value={d.telephone} />
+    </Field>
+  </div>
+
+  <Field label="Email" inputId="step-1-email">
+    <EmailInput id="step-1-email" label="Email" bind:value={d.email} />
+  </Field>
+
+  <div class="field-grid">
+    <Field label="GP name" inputId="step-1-gpName">
+      <TextInput id="step-1-gpName" label="GP name" bind:value={d.gpName} />
+    </Field>
+    <Field label="GP practice" inputId="step-1-gpPractice">
+      <TextInput id="step-1-gpPractice" label="GP practice" bind:value={d.gpPractice} />
+    </Field>
+  </div>
+</Fieldset>

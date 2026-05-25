@@ -1,22 +1,48 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import DateInput from '$lib/components/ui/DateInput.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Alert from '$lib/components/ui/Alert.svelte';
 
-	const d = assessment.data.reviewCalculate;
+  const d = assessment.data.reviewCalculate;
 </script>
 
-<SectionCard title="Review & Calculate" description="Clinician details and final review before risk calculation">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Clinician Name" name="clinicianName" bind:value={d.clinicianName} />
-		<TextInput label="Review Date" name="reviewDate" bind:value={d.reviewDate} type="date" />
-	</div>
-	<TextArea label="Clinical Notes" name="clinicalNotes" bind:value={d.clinicalNotes} rows={4} placeholder="Any additional clinical observations..." />
-	<NumberInput label="AUDIT Score" name="auditScore" bind:value={d.auditScore} min={0} max={40} />
-	<div class="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
-		<p class="font-medium">Ready to calculate?</p>
-		<p class="mt-1">Click "Submit Assessment" below to calculate the 10-year CVD risk, heart age, and review any flagged issues.</p>
-	</div>
-</SectionCard>
+<Fieldset legend="Step 10 \u2014 Review and calculate">
+  <p class="hint">Clinician details and final review before risk calculation.</p>
+
+  <div class="field-grid">
+    <Field label="Clinician name" inputId="step-10-clinicianName">
+      <TextInput id="step-10-clinicianName" label="Clinician name" bind:value={d.clinicianName} />
+    </Field>
+    <Field label="Review date" inputId="step-10-reviewDate">
+      <DateInput id="step-10-reviewDate" label="Review date" bind:value={d.reviewDate} />
+    </Field>
+  </div>
+
+  <Field label="Clinical notes" inputId="step-10-clinicalNotes">
+    <TextAreaInput
+      id="step-10-clinicalNotes"
+      label="Clinical notes"
+      rows={4}
+      bind:value={d.clinicalNotes}
+    />
+  </Field>
+
+  <Field label="AUDIT score" inputId="step-10-auditScore">
+    <NumberInput
+      id="step-10-auditScore"
+      label="AUDIT score"
+      min={0}
+      max={40}
+      bind:value={d.auditScore}
+    />
+  </Field>
+
+  <Alert type="info" heading="Ready to calculate?">
+    <p>Click "Submit and view report" below to calculate the 10-year CVD risk, heart age, and review any flagged issues.</p>
+  </Alert>
+</Fieldset>
