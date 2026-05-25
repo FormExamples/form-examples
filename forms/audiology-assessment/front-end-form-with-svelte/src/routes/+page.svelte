@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
 
 	function startAssessment() {
 		assessment.reset();
@@ -19,39 +21,22 @@
 			<h1 class="text-3xl font-bold text-gray-900">Audiology Assessment</h1>
 			<p class="mt-3 text-gray-600">
 				Complete this questionnaire to generate a comprehensive hearing assessment.
-				Your responses will be used to classify hearing loss using the WHO grading system
-				and identify any issues that need to be highlighted for the audiologist.
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm">
+		<Panel label="What to expect" class="text-left">
 			<h2 class="mb-3 font-semibold text-gray-900">What to expect</h2>
 			<ul class="space-y-2 text-sm text-gray-600">
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					9 sections covering your hearing health
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					Takes approximately 10-15 minutes to complete
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					You can navigate back to change answers at any time
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					A report will be generated at the end with a downloadable PDF
-				</li>
+				<li>9 sections covering your hearing health</li>
+				<li>Takes approximately 10–15 minutes to complete</li>
+				<li>You can navigate back to change answers at any time</li>
+				<li>A report will be generated at the end with a downloadable PDF</li>
 			</ul>
-		</div>
+		</Panel>
 
-		<button
-			onclick={startAssessment}
-			class="mt-6 w-full rounded-lg bg-primary px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-primary-dark"
-		>
-			Begin Assessment
-		</button>
+		<div class="button-group justify-center">
+			<Button data-variant="primary" onclick={startAssessment}>Begin Assessment</Button>
+		</div>
 
 		<p class="mt-4 text-xs text-gray-400">
 			This tool is for clinical support only. All assessments must be reviewed by a qualified audiologist.

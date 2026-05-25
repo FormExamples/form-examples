@@ -1,67 +1,133 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const o = assessment.data.otoscopicFindings;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
-
-	const canalOptions = [
-		{ value: 'normal', label: 'Normal' },
-		{ value: 'narrowed', label: 'Narrowed' },
-		{ value: 'inflamed', label: 'Inflamed' },
-		{ value: 'exostosis', label: 'Exostosis' },
-		{ value: 'other', label: 'Other' }
-	];
-
-	const tmOptions = [
-		{ value: 'normal', label: 'Normal' },
-		{ value: 'retracted', label: 'Retracted' },
-		{ value: 'perforated', label: 'Perforated' },
-		{ value: 'scarred', label: 'Scarred' },
-		{ value: 'effusion', label: 'Effusion visible' },
-		{ value: 'other', label: 'Other' }
-	];
 </script>
 
-<SectionCard title="Otoscopic Findings" description="External and middle ear examination">
-	<h3 class="mb-3 font-semibold text-gray-800">Ear Canal</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Right Ear Canal" name="earCanalRight" options={canalOptions} bind:value={o.earCanalRight} />
-		<SelectInput label="Left Ear Canal" name="earCanalLeft" options={canalOptions} bind:value={o.earCanalLeft} />
+<Fieldset legend="Otoscopic Findings">
+	<p class="hint">External and middle ear examination.</p>
+
+	<h3 class="step-subhead">Ear Canal</h3>
+	<div class="field-grid">
+		<Field label="Right Ear Canal" inputId="earCanalRight">
+			<Select id="earCanalRight" label="Right Ear Canal" bind:value={o.earCanalRight}>
+				<option value="">— Select —</option>
+				<option value="normal">Normal</option>
+				<option value="narrowed">Narrowed</option>
+				<option value="inflamed">Inflamed</option>
+				<option value="exostosis">Exostosis</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
+		<Field label="Left Ear Canal" inputId="earCanalLeft">
+			<Select id="earCanalLeft" label="Left Ear Canal" bind:value={o.earCanalLeft}>
+				<option value="">— Select —</option>
+				<option value="normal">Normal</option>
+				<option value="narrowed">Narrowed</option>
+				<option value="inflamed">Inflamed</option>
+				<option value="exostosis">Exostosis</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
 	</div>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Tympanic Membrane</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Right Tympanic Membrane" name="tmRight" options={tmOptions} bind:value={o.tympanicMembraneRight} />
-		<SelectInput label="Left Tympanic Membrane" name="tmLeft" options={tmOptions} bind:value={o.tympanicMembraneLeft} />
+	<h3 class="step-subhead">Tympanic Membrane</h3>
+	<div class="field-grid">
+		<Field label="Right Tympanic Membrane" inputId="tmRight">
+			<Select id="tmRight" label="Right TM" bind:value={o.tympanicMembraneRight}>
+				<option value="">— Select —</option>
+				<option value="normal">Normal</option>
+				<option value="retracted">Retracted</option>
+				<option value="perforated">Perforated</option>
+				<option value="scarred">Scarred</option>
+				<option value="effusion">Effusion visible</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
+		<Field label="Left Tympanic Membrane" inputId="tmLeft">
+			<Select id="tmLeft" label="Left TM" bind:value={o.tympanicMembraneLeft}>
+				<option value="">— Select —</option>
+				<option value="normal">Normal</option>
+				<option value="retracted">Retracted</option>
+				<option value="perforated">Perforated</option>
+				<option value="scarred">Scarred</option>
+				<option value="effusion">Effusion visible</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
 	</div>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Middle Ear</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Right Middle Ear Findings" name="middleEarRight" bind:value={o.middleEarRight} placeholder="e.g., normal, effusion" />
-		<TextInput label="Left Middle Ear Findings" name="middleEarLeft" bind:value={o.middleEarLeft} placeholder="e.g., normal, effusion" />
+	<h3 class="step-subhead">Middle Ear</h3>
+	<div class="field-grid">
+		<Field label="Right Middle Ear Findings" inputId="middleEarRight">
+			<TextInput id="middleEarRight" label="Right middle ear" bind:value={o.middleEarRight} />
+		</Field>
+		<Field label="Left Middle Ear Findings" inputId="middleEarLeft">
+			<TextInput id="middleEarLeft" label="Left middle ear" bind:value={o.middleEarLeft} />
+		</Field>
 	</div>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Ear Wax</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<RadioGroup label="Ear wax present (Right)?" name="earWaxRight" options={yesNo} bind:value={o.earWaxRight} />
-		<RadioGroup label="Ear wax present (Left)?" name="earWaxLeft" options={yesNo} bind:value={o.earWaxLeft} />
+	<h3 class="step-subhead">Ear Wax</h3>
+	<div class="field-grid">
+		<Field label="Ear wax present (Right)?">
+			<RadioGroup label="Ear wax right">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="earWaxRight" value={opt.value} bind:group={o.earWaxRight} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		<Field label="Ear wax present (Left)?">
+			<RadioGroup label="Ear wax left">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="earWaxLeft" value={opt.value} bind:group={o.earWaxLeft} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	</div>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Discharge</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<RadioGroup label="Discharge present (Right)?" name="dischargeRight" options={yesNo} bind:value={o.dischargeRight} />
-		<RadioGroup label="Discharge present (Left)?" name="dischargeLeft" options={yesNo} bind:value={o.dischargeLeft} />
+	<h3 class="step-subhead">Discharge</h3>
+	<div class="field-grid">
+		<Field label="Discharge present (Right)?">
+			<RadioGroup label="Discharge right">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="dischargeRight" value={opt.value} bind:group={o.dischargeRight} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		<Field label="Discharge present (Left)?">
+			<RadioGroup label="Discharge left">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="dischargeLeft" value={opt.value} bind:group={o.dischargeLeft} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	</div>
 
-	<RadioGroup label="Previous ear surgery?" name="previousSurgery" options={yesNo} bind:value={o.previousSurgery} />
+	<Field label="Previous ear surgery?">
+		<RadioGroup label="Previous ear surgery">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="previousSurgery" value={opt.value} bind:group={o.previousSurgery} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if o.previousSurgery === 'yes'}
-		<TextInput label="Surgery details" name="previousSurgeryDetails" bind:value={o.previousSurgeryDetails} />
+		<Field label="Surgery details" inputId="previousSurgeryDetails">
+			<TextInput id="previousSurgeryDetails" label="Surgery details" bind:value={o.previousSurgeryDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+	.step-subhead { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+</style>

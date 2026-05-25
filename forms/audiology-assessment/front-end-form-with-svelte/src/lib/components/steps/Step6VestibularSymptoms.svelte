@@ -1,33 +1,49 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const v = assessment.data.vestibularSymptoms;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const rows: { key: 'vertigo' | 'dizziness' | 'balanceProblems' | 'dixHallpike' | 'nystagmus' | 'fallsHistory'; label: string }[] = [
+		{ key: 'vertigo', label: 'Do you experience vertigo (a spinning sensation)?' },
+		{ key: 'dizziness', label: 'Do you experience dizziness?' },
+		{ key: 'balanceProblems', label: 'Do you have balance problems?' },
+		{ key: 'dixHallpike', label: 'Dix-Hallpike test positive?' },
+		{ key: 'nystagmus', label: 'Nystagmus observed?' },
+		{ key: 'fallsHistory', label: 'Have you had any falls?' }
+	];
 </script>
 
-<SectionCard title="Vestibular Symptoms" description="Balance, vertigo, and dizziness">
-	<RadioGroup label="Do you experience vertigo (a spinning sensation)?" name="vertigo" options={yesNo} bind:value={v.vertigo} />
+<Fieldset legend="Vestibular Symptoms">
+	<p class="hint">Balance, vertigo, and dizziness.</p>
+
+	{#each rows as r (r.key)}
+		<Field label={r.label}>
+			<RadioGroup label={r.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={r.key} value={opt.value} bind:group={v[r.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+
 	{#if v.vertigo === 'yes'}
-		<TextArea label="Describe the vertigo episodes" name="vertigoDetails" bind:value={v.vertigoDetails} placeholder="Frequency, duration, triggers..." />
+		<Field label="Describe the vertigo episodes" inputId="vertigoDetails">
+			<TextAreaInput id="vertigoDetails" label="Vertigo details" rows={3} bind:value={v.vertigoDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you experience dizziness?" name="dizziness" options={yesNo} bind:value={v.dizziness} />
-
-	<RadioGroup label="Do you have balance problems?" name="balanceProblems" options={yesNo} bind:value={v.balanceProblems} />
-
-	<RadioGroup label="Dix-Hallpike test positive?" name="dixHallpike" options={yesNo} bind:value={v.dixHallpike} />
-
-	<RadioGroup label="Nystagmus observed?" name="nystagmus" options={yesNo} bind:value={v.nystagmus} />
-
-	<RadioGroup label="Have you had any falls?" name="fallsHistory" options={yesNo} bind:value={v.fallsHistory} />
 	{#if v.fallsHistory === 'yes'}
-		<TextInput label="How often do falls occur?" name="fallsFrequency" bind:value={v.fallsFrequency} placeholder="e.g., weekly, monthly" />
+		<Field label="How often do falls occur?" inputId="fallsFrequency">
+			<TextInput id="fallsFrequency" label="Falls frequency" bind:value={v.fallsFrequency} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

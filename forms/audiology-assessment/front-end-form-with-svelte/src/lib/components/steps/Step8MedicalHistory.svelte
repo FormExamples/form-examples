@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.medicalHistory;
 	const yesNo = [
@@ -12,25 +13,69 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Conditions and medications affecting hearing">
-	<RadioGroup label="Are you taking any ototoxic medications (e.g., aminoglycosides, cisplatin, loop diuretics, aspirin)?" name="ototoxicMeds" options={yesNo} bind:value={m.ototoxicMedications} />
+<Fieldset legend="Medical History">
+	<p class="hint">Conditions and medications affecting hearing.</p>
+
+	<Field label="Are you taking any ototoxic medications?">
+		<RadioGroup label="Ototoxic medications">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="ototoxicMeds" value={opt.value} bind:group={m.ototoxicMedications} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.ototoxicMedications === 'yes'}
-		<TextInput label="Please list the medications" name="ototoxicDetails" bind:value={m.ototoxicMedicationDetails} />
+		<Field label="Please list the medications" inputId="ototoxicDetails">
+			<TextInput id="ototoxicDetails" label="Ototoxic medication details" bind:value={m.ototoxicMedicationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have an autoimmune condition?" name="autoimmune" options={yesNo} bind:value={m.autoimmune} />
+	<Field label="Do you have an autoimmune condition?">
+		<RadioGroup label="Autoimmune">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="autoimmune" value={opt.value} bind:group={m.autoimmune} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.autoimmune === 'yes'}
-		<TextInput label="Please specify" name="autoimmuneDetails" bind:value={m.autoimmuneDetails} />
+		<Field label="Please specify" inputId="autoimmuneDetails">
+			<TextInput id="autoimmuneDetails" label="Autoimmune details" bind:value={m.autoimmuneDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Have you been diagnosed with Meniere's disease?" name="menieres" options={yesNo} bind:value={m.menieres} />
+	<Field label="Have you been diagnosed with Meniere's disease?">
+		<RadioGroup label="Meniere's">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="menieres" value={opt.value} bind:group={m.menieres} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Have you been diagnosed with otosclerosis?" name="otosclerosis" options={yesNo} bind:value={m.otosclerosis} />
+	<Field label="Have you been diagnosed with otosclerosis?">
+		<RadioGroup label="Otosclerosis">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="otosclerosis" value={opt.value} bind:group={m.otosclerosis} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Have you been diagnosed with an acoustic neuroma (vestibular schwannoma)?" name="acousticNeuroma" options={yesNo} bind:value={m.acousticNeuroma} />
+	<Field label="Have you been diagnosed with an acoustic neuroma?">
+		<RadioGroup label="Acoustic neuroma">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="acousticNeuroma" value={opt.value} bind:group={m.acousticNeuroma} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Have you had ear infections?" name="infections" options={yesNo} bind:value={m.infections} />
+	<Field label="Have you had ear infections?">
+		<RadioGroup label="Ear infections">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="infections" value={opt.value} bind:group={m.infections} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.infections === 'yes'}
-		<TextArea label="Please describe (frequency, type, treatment)" name="infectionDetails" bind:value={m.infectionDetails} />
+		<Field label="Please describe (frequency, type, treatment)" inputId="infectionDetails">
+			<TextAreaInput id="infectionDetails" label="Infection details" rows={3} bind:value={m.infectionDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

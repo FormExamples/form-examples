@@ -1,61 +1,60 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.chiefComplaint;
+
+	const earOptions = [
+		{ value: 'left', label: 'Left' },
+		{ value: 'right', label: 'Right' },
+		{ value: 'both', label: 'Both' }
+	];
+
+	const onsetOptions = [
+		{ value: 'sudden', label: 'Sudden' },
+		{ value: 'gradual', label: 'Gradual' }
+	];
 </script>
 
-<SectionCard title="Chief Complaint" description="Primary hearing concern and symptoms">
-	<TextArea
-		label="What is your primary hearing concern?"
-		name="primaryConcern"
-		bind:value={c.primaryConcern}
-		placeholder="Describe your main hearing difficulty..."
-	/>
+<Fieldset legend="Chief Complaint">
+	<p class="hint">Primary hearing concern and symptoms.</p>
 
-	<RadioGroup
-		label="Which ear is affected?"
-		name="affectedEar"
-		options={[
-			{ value: 'left', label: 'Left' },
-			{ value: 'right', label: 'Right' },
-			{ value: 'both', label: 'Both' }
-		]}
-		bind:value={c.affectedEar}
-		required
-	/>
+	<Field label="What is your primary hearing concern?" inputId="primaryConcern">
+		<TextAreaInput id="primaryConcern" label="Primary hearing concern" rows={3} bind:value={c.primaryConcern} />
+	</Field>
 
-	<RadioGroup
-		label="How did the hearing difficulty start?"
-		name="onset"
-		options={[
-			{ value: 'sudden', label: 'Sudden' },
-			{ value: 'gradual', label: 'Gradual' }
-		]}
-		bind:value={c.onset}
-		required
-	/>
+	<Field label="Which ear is affected?" required>
+		<RadioGroup label="Affected ear">
+			{#each earOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="affectedEar" value={opt.value} bind:group={c.affectedEar} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextInput
-		label="How long have you had this hearing concern?"
-		name="duration"
-		bind:value={c.duration}
-		placeholder="e.g., 6 months, 2 years"
-	/>
+	<Field label="How did the hearing difficulty start?" required>
+		<RadioGroup label="Onset">
+			{#each onsetOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="onset" value={opt.value} bind:group={c.onset} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<SelectInput
-		label="Has the hearing difficulty changed over time?"
-		name="progression"
-		options={[
-			{ value: 'stable', label: 'Stable - no change' },
-			{ value: 'worsening', label: 'Worsening - getting worse' },
-			{ value: 'fluctuating', label: 'Fluctuating - comes and goes' },
-			{ value: 'improving', label: 'Improving - getting better' }
-		]}
-		bind:value={c.progression}
-	/>
-</SectionCard>
+	<Field label="How long have you had this hearing concern?" inputId="duration">
+		<TextInput id="duration" label="Duration" bind:value={c.duration} />
+	</Field>
+
+	<Field label="Has the hearing difficulty changed over time?" inputId="progression">
+		<Select id="progression" label="Progression" bind:value={c.progression}>
+			<option value="">— Select —</option>
+			<option value="stable">Stable — no change</option>
+			<option value="worsening">Worsening</option>
+			<option value="fluctuating">Fluctuating — comes and goes</option>
+			<option value="improving">Improving</option>
+		</Select>
+	</Field>
+</Fieldset>
