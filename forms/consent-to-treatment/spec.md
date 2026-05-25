@@ -52,13 +52,16 @@ Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script)
 
 - `bin/test-form consent-to-treatment` exits cleanly.
 - The scoring engine is pure (no side effects, no I/O) and unit-tested.
-- The HTML front-ends conform to the Lily Design System contract
+- The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../AGENTS-front-end-html.md)).
-- The SvelteKit front-ends pass `pnpm check` and `pnpm test`.
+- The SvelteKit front-ends conform to the Lily Svelte headless contract
+  ([`forms/AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md))
+  and pass `pnpm check` and `pnpm test`.
 - The Rust crate builds (`cargo build`) and tests pass (`cargo test`).
-- LocalStorage key `consent-to-treatment.front-end-form-with-html.v1` (HTML) and
-  `consent-to-treatment.front-end-form-with-svelte.v1` (SvelteKit) preserve draft
-  state across reloads.
+- `bin/lily-html-refactor --check consent-to-treatment` reports no drift.
+- LocalStorage keys preserve draft state across reloads:
+  - `consent-to-treatment.front-end-form-with-html.v1` (HTML)
+  - `consent-to-treatment.front-end-form-with-svelte.v1` (SvelteKit)
 
 ## 7. Compliance
 
@@ -72,6 +75,8 @@ Inherits the monorepo compliance baseline: MDCG 2019-11 Rev.1 (EU MDR), UK Medic
 - [`tasks.md`](tasks.md) — task tracking
 - [`/spec.md`](../../spec.md) — system-level specification
 - [`/AGENTS.md`](../../AGENTS.md) — cross-cutting agent instructions
+- [`../AGENTS-front-end-html.md`](../AGENTS-front-end-html.md) — Lily HTML contract
+- [`../AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md) — Lily Svelte contract
 
 ## 9. Verify
 
