@@ -44,6 +44,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 ### Lily Design System (Svelte front-ends)
 
+- `bin/lily-svelte-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--show-risky] [--all|<slug>]` — mechanical Lily Svelte class swaps + risky-pattern report; `--check` is the CI drift detector
 - `bin/lily-svelte-sync [--check] [--lily-dir PATH]` — snapshot Lily Svelte component sources into `forms/lily-svelte-spec/` and record the pinned upstream commit in `forms/lily-svelte-version.md`
 
 ### Specs
@@ -146,6 +147,7 @@ See the per-stack agent docs:
 bin/test                              # validates every form's structure
 bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
 bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
+bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/generate-spec.py --check          # Per-form spec.md drift detector
 ```
