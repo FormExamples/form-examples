@@ -1,191 +1,252 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { validateForm } from '$lib/engine/form-validator';
-	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { completenessColor } from '$lib/engine/utils';
-	import Step1RecipientDetails from '$lib/components/steps/Step1RecipientDetails.svelte';
-	import Step2CodeOfConductNotice from '$lib/components/steps/Step2CodeOfConductNotice.svelte';
-	import Step3AcknowledgementSignature from '$lib/components/steps/Step3AcknowledgementSignature.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import { validateForm } from '$lib/engine/form-validator';
+  import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
+  import { steps } from '$lib/config/steps';
 
-	const submitted = $derived(assessment.result !== null);
+  // Lily Svelte headless contract — local shape-equivalent components.
+  import Form from '$lib/components/ui/Form.svelte';
+  import Progress from '$lib/components/ui/Progress.svelte';
+  import StepList from '$lib/components/ui/StepList.svelte';
+  import StepListItem from '$lib/components/ui/StepListItem.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import Panel from '$lib/components/ui/Panel.svelte';
+  import Alert from '$lib/components/ui/Alert.svelte';
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+  import Step1RecipientDetails from '$lib/components/steps/Step1RecipientDetails.svelte';
+  import Step2CodeOfConductNotice from '$lib/components/steps/Step2CodeOfConductNotice.svelte';
+  import Step3AcknowledgementSignature from '$lib/components/steps/Step3AcknowledgementSignature.svelte';
 
-	function submitForm() {
-		const { completeness, status, firedRules } = validateForm(assessment.data);
-		const additionalFlags = detectAdditionalFlags(assessment.data);
-		assessment.result = {
-			completenessPercent: completeness,
-			status,
-			firedRules,
-			additionalFlags,
-			timestamp: new Date().toISOString()
-		};
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	}
+  const stepComponents = [
+    Step1RecipientDetails,
+    Step2CodeOfConductNotice,
+    Step3AcknowledgementSignature
+  ];
 
-	function startNew() {
-		assessment.reset();
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	}
+  const title = 'Code of Conduct Notice';
+  const subtitle = 'Read-and-acknowledge notice for medical-service providers.';
+
+  const submitted = $derived(assessment.result !== null);
+
+  const priorityClass: Record<string, 'info' | 'warning' | 'error'> = {
+    high: 'error',
+    medium: 'warning',
+    low: 'info'
+  };
+
+  function submitForm() {
+    const { completeness, status, firedRules } = validateForm(assessment.data);
+    const additionalFlags = detectAdditionalFlags(assessment.data);
+    assessment.result = {
+      completenessPercent: completeness,
+      status,
+      firedRules,
+      additionalFlags,
+      timestamp: new Date().toISOString()
+    };
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function startNew() {
+    assessment.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function gotoStep(n: number) {
+    assessment.currentStep = n;
+    document.getElementById(`step-${n}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function stepStatus(n: number): 'waiting' | 'in-progress' | 'finished' {
+    if (n < assessment.currentStep) return 'finished';
+    if (n === assessment.currentStep) return 'in-progress';
+    return 'waiting';
+  }
 </script>
 
 <svelte:head>
-	<title>Code of Conduct Notice</title>
+  <title>Code of Conduct Notice</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
-	<header class="border-b border-nhs-blue bg-nhs-blue shadow-sm no-print">
-		<div class="mx-auto max-w-2xl px-4 py-4">
-			<h1 class="text-xl font-bold text-white">Code of Conduct Notice</h1>
-			<p class="mt-0.5 text-sm text-blue-100">
-				Read-and-acknowledge notice for medical-service providers
-			</p>
-		</div>
-	</header>
+<a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
-	<main class="mx-auto max-w-2xl px-4 py-8">
-		{#if submitted && assessment.result}
-			<div class="mb-6 flex items-center justify-between">
-				<h2 class="text-2xl font-bold text-gray-900">Acknowledgement Summary</h2>
-				<div class="flex gap-3 no-print">
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						New Form
-					</button>
-				</div>
-			</div>
+<header class="page-header no-print">
+  <div class="page-header-inner">
+    <h1>{title}</h1>
+    <p class="subtitle">{subtitle}</p>
 
-			<div
-				class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(
-					assessment.result.completenessPercent
-				)}"
-			>
-				<div class="text-3xl font-bold">{assessment.result.completenessPercent}% Complete</div>
-				<div class="mt-1 text-lg">{assessment.result.status}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(assessment.result.timestamp).toLocaleString()}
-				</div>
-			</div>
+    {#if submitted && assessment.result}
+      <Progress label="Form completion" max={100} value={assessment.result.completenessPercent} />
+      <p class="subtitle" aria-live="polite">
+        {assessment.result.completenessPercent}% complete · {assessment.result.status}
+      </p>
+    {:else}
+      <Progress label="Form completion" max={steps.length} value={assessment.currentStep} />
+      <p class="subtitle" aria-live="polite">
+        Step {assessment.currentStep} of {steps.length}
+      </p>
+    {/if}
 
-			{#if assessment.result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h3 class="mb-4 text-lg font-bold text-red-800">Flagged Issues</h3>
-					<div class="space-y-2">
-						{#each assessment.result.additionalFlags as flag}
-							<div
-								class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}"
-							>
-								<span
-									class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[
-										flag.priority
-									]}"
-								>
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
-						{/each}
-					</div>
-				</div>
-			{/if}
+    <StepList label={`${title} steps`} current={assessment.currentStep - 1}>
+      {#each steps as s (s.number)}
+        <StepListItem
+          status={stepStatus(s.number)}
+          current={s.number === assessment.currentStep}
+          onclick={() => gotoStep(s.number)}
+        >
+          {s.shortTitle}
+        </StepListItem>
+      {/each}
+    </StepList>
+  </div>
+</header>
 
-			{#if assessment.result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h3 class="mb-4 text-lg font-bold text-gray-900">Missing Required Fields</h3>
-					<table class="w-full text-sm">
-						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Rule</th>
-								<th class="pb-2 pr-4">Section</th>
-								<th class="pb-2 pr-4">Issue</th>
-								<th class="pb-2">Field</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each assessment.result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.section}</td>
-									<td class="py-2 pr-4">{rule.description}</td>
-									<td class="py-2 font-mono text-xs">{rule.field}</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			{/if}
+<main>
+  {#if submitted && assessment.result}
+    <div class="report-actions no-print">
+      <Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+      <Button data-variant="primary" onclick={startNew}>New Form</Button>
+    </div>
 
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h3 class="mb-4 text-lg font-bold text-gray-900">Acknowledgement Summary</h3>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Acknowledged: </span>
-						<span
-							class="{assessment.data.acknowledgementSignature.agreed
-								? 'font-bold text-green-700'
-								: 'font-bold text-red-700'}"
-						>
-							{assessment.data.acknowledgementSignature.agreed ? 'Yes' : 'No'}
-						</span>
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Recipient Name: </span>
-						{assessment.data.acknowledgementSignature.recipientTypedFullName || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Date: </span>
-						{assessment.data.acknowledgementSignature.recipientTypedDate || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Organisation: </span>
-						{assessment.data.recipientDetails.organisationName || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Role: </span>
-						{assessment.data.recipientDetails.recipientRole || 'N/A'}
-					</div>
-				</div>
-			</div>
-		{:else}
-			<div class="mb-8">
-				<Step1RecipientDetails />
-			</div>
+    <Alert
+      type={assessment.result.completenessPercent === 100 ? 'success' : 'warning'}
+      heading={`${assessment.result.completenessPercent}% Complete — ${assessment.result.status}`}
+      role="status"
+    >
+      <p>
+        Generated {new Date(assessment.result.timestamp).toLocaleString()}.
+      </p>
+    </Alert>
 
-			<div class="mb-8">
-				<Step2CodeOfConductNotice />
-			</div>
+    {#if assessment.result.additionalFlags.length > 0}
+      <Panel label="Flagged Issues">
+        <h3>Flagged Issues</h3>
+        {#each assessment.result.additionalFlags as flag}
+          <Alert type={priorityClass[flag.priority]} role="status">
+            <p>
+              <strong>{flag.priority.toUpperCase()} · {flag.category}:</strong>
+              {flag.message}
+            </p>
+          </Alert>
+        {/each}
+      </Panel>
+    {/if}
 
-			<div class="mb-8">
-				<Step3AcknowledgementSignature />
-			</div>
+    {#if assessment.result.firedRules.length > 0}
+      <Panel label="Missing Required Fields">
+        <h3>Missing Required Fields</h3>
+        <table class="fired-rules-table">
+          <thead>
+            <tr>
+              <th>Rule</th>
+              <th>Section</th>
+              <th>Issue</th>
+              <th>Field</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each assessment.result.firedRules as rule}
+              <tr>
+                <td><code>{rule.id}</code></td>
+                <td>{rule.section}</td>
+                <td>{rule.description}</td>
+                <td><code>{rule.field}</code></td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </Panel>
+    {/if}
 
-			<div class="mx-auto max-w-2xl">
-				<button
-					onclick={submitForm}
-					class="w-full rounded-lg bg-primary px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-primary-dark"
-				>
-					Submit Code of Conduct Acknowledgement
-				</button>
-				<p class="mt-3 text-center text-xs text-gray-400">
-					For compliance records. Twelve principles derived from standard medical-service code-of-conduct templates.
-				</p>
-			</div>
-		{/if}
-	</main>
-</div>
+    <Panel label="Acknowledgement Summary">
+      <h3>Acknowledgement Summary</h3>
+      <dl class="summary-grid">
+        <dt>Acknowledged</dt>
+        <dd>{assessment.data.acknowledgementSignature.agreed ? 'Yes' : 'No'}</dd>
+        <dt>Recipient Name</dt>
+        <dd>{assessment.data.acknowledgementSignature.recipientTypedFullName || 'N/A'}</dd>
+        <dt>Date</dt>
+        <dd>{assessment.data.acknowledgementSignature.recipientTypedDate || 'N/A'}</dd>
+        <dt>Organisation</dt>
+        <dd>{assessment.data.recipientDetails.organisationName || 'N/A'}</dd>
+        <dt>Role</dt>
+        <dd>{assessment.data.recipientDetails.recipientRole || 'N/A'}</dd>
+      </dl>
+    </Panel>
+  {:else}
+    <div class="intro">
+      <p>
+        Read the three sections below — recipient details, the twelve Code
+        of Conduct principles, and the acknowledgement — then submit to
+        record your acknowledgement.
+      </p>
+    </div>
+
+    <Form label={title} onsubmit={submitForm} onreset={startNew}>
+      <div id="form-sections">
+        {#each stepComponents as StepComponent, i (i)}
+          <div
+            id={`step-${i + 1}`}
+            class="step-section"
+            onmouseenter={() => (assessment.currentStep = i + 1)}
+            onfocusin={() => (assessment.currentStep = i + 1)}
+            role="region"
+            aria-labelledby={`step-${i + 1}-legend`}
+          >
+            <StepComponent />
+          </div>
+        {/each}
+      </div>
+
+      <div class="button-group">
+        <Button type="submit" data-variant="primary">
+          Submit Code of Conduct Acknowledgement
+        </Button>
+        <Button type="reset" data-variant="secondary">Start over</Button>
+      </div>
+    </Form>
+
+    <footer class="page-footer">
+      <p>
+        For compliance records. Twelve principles derived from standard
+        medical-service code-of-conduct templates.
+      </p>
+    </footer>
+  {/if}
+</main>
+
+<style>
+  .report-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-bottom: 0.75rem;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .fired-rules-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+  }
+  .fired-rules-table th,
+  .fired-rules-table td {
+    text-align: left;
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+  .fired-rules-table th { background: var(--color-bg); font-weight: 600; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 1rem;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+  .summary-grid dt { font-weight: 600; color: var(--color-muted); }
+  .summary-grid dd { margin: 0; }
+</style>
