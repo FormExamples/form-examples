@@ -31,8 +31,9 @@ ai_exists_or_err() (
     symlink_exists_or_err "$1/README.md"
     file_size_or_err "$1/AGENTS.md" && implemented_or_err "$1/AGENTS.md"
     file_size_or_err "$1/CLAUDE.md"
-    file_size_or_err "$1/plan.md" && implemented_or_err "$1/plan.md"
-    task_exists_or_err "$1/tasks.md" && implemented_or_err "$1/tasks.md"
+    f="$1/spec.md"  && file_size_or_err "$f" && implemented_or_err "$f"
+    f="$1/plan.md"  && test -f "$f" && implemented_or_err "$f"
+    f="$1/tasks.md" && test -f "$f" && task_exists_or_err "$f" && implemented_or_err "$f"
 )
 
 ## Main
