@@ -1,0 +1,53 @@
+<!-- government-identifier.html -->
+<!-- GovernmentIdentifier component -->
+<!--
+  Description: an identifier section with a parent agency logo, agency name, and required government links
+
+  HTML tag: <section>
+  CSS class: government-identifier
+  Keyboard: None directly (inner links are focusable as usual)
+  Accessibility:
+    - <section> with a required aria-label provides a region landmark for the identifier
+    - Inner <nav> with aria-label exposes the required-links group as a navigation landmark
+
+  Usage:
+    <section class="government-identifier" aria-label="Agency identifier">
+      <div class="government-identifier-masthead">
+        <img class="government-identifier-logo" src="…" alt="Agency seal">
+        <p class="government-identifier-agency">
+          <a href="https://example.gov">Example Agency</a>
+        </p>
+        <p class="government-identifier-description">Description.</p>
+      </div>
+      <nav class="government-identifier-links" aria-label="Agency identifier">
+        <ul>
+          <li><a href="…">About</a></li>
+          <li><a href="…">Accessibility</a></li>
+          <li><a href="…">FOIA requests</a></li>
+        </ul>
+      </nav>
+    </section>
+-->
+
+<section
+  class="government-identifier"
+  aria-label=""
+>
+  <div class="government-identifier-masthead">
+    <!-- Optional logo:
+         <img class="government-identifier-logo" src="" alt=""> -->
+    <p class="government-identifier-agency">
+      <!-- When agencyHref is provided, wrap agencyName in <a href="…">…</a>;
+           otherwise wrap in <span>…</span>. -->
+    </p>
+    <!-- Optional description:
+         <p class="government-identifier-description"></p> -->
+  </div>
+
+  <nav
+    class="government-identifier-links"
+    aria-label=""
+  >
+    <!-- Consumer provides the required links list (typically a <ul> of <li><a></a></li>) -->
+  </nav>
+</section>

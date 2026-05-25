@@ -1,0 +1,37 @@
+<!-- clipboard-copy-button.html -->
+<!-- ClipboardCopyButton component -->
+<!--
+  Description: a button that copies text to the clipboard
+  HTML tag: <button>
+  CSS class: clipboard-copy-button
+  Keyboard: Tab to focus, Enter or Space to activate
+  Accessibility: Implicit button role, aria-label for accessible name
+  Usage:
+    <button class="clipboard-copy-button" aria-label="Example">
+      ...
+    </button>
+-->
+
+<button
+  class="clipboard-copy-button"
+  aria-label=""
+>
+  <!-- Consumer provides button content -->
+</button>
+
+<script>
+  // ClipboardCopyButton behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.clipboard-copy-button').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var text = el.getAttribute('data-clipboard-text') || el.textContent;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function() {
+            el.setAttribute('data-copied', 'true');
+          });
+        }
+      });
+    });
+  })();
+</script>

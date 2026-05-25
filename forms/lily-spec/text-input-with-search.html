@@ -1,0 +1,44 @@
+<!-- text-input-with-search.html -->
+<!-- TextInputWithSearch component -->
+<!--
+  Description: a single-line text input field with search capability
+  HTML tag: <div>
+  CSS class: text-input-with-search
+  Keyboard: Enter in input triggers search, Tab between input and button
+  Accessibility: role="search", aria-label for accessible names
+  Usage:
+    <div class="text-input-with-search" role="search" aria-label="Site search">
+      <input type="text" aria-label="Search" />
+      <button type="button" aria-label="Search">Search</button>
+    </div>
+-->
+
+<div
+  class="text-input-with-search"
+  role="search"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // TextInputWithSearch behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.text-input-with-search').forEach(function(el) {
+      var input = el.querySelector('input[type="text"]');
+      var searchBtn = el.querySelector('button');
+      if (input && searchBtn) {
+        searchBtn.addEventListener('click', function() {
+          el.dispatchEvent(new CustomEvent('search', { bubbles: true, detail: { value: input.value } }));
+        });
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            el.dispatchEvent(new CustomEvent('search', { bubbles: true, detail: { value: input.value } }));
+          }
+        });
+      }
+    });
+  })();
+</script>

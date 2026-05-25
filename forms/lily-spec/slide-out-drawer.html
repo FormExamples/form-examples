@@ -1,0 +1,32 @@
+<!-- slide-out-drawer.html -->
+<!-- SlideOutDrawer component -->
+<!--
+  Description: a drawer that slides out from the side of the page
+  HTML tag: <div>
+  CSS class: slide-out-drawer
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="slide-out-drawer" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="slide-out-drawer"
+  aria-label=""
+  data-open="false"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // SlideOutDrawer behavior
+  (function() {
+    'use strict';
+    // SlideOutDrawer: consumer implements interactive behavior
+    document.querySelectorAll('.slide-out-drawer').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

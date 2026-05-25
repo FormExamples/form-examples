@@ -1,0 +1,41 @@
+<!-- switch-button.html -->
+<!-- SwitchButton component -->
+<!--
+  Description: a toggle switch for turning a setting on or off
+  HTML tag: <button>
+  CSS class: switch-button
+  Keyboard: Tab to focus, Enter or Space to activate
+  Accessibility: role="switch", Implicit button role, aria-label for accessible name, aria-checked for toggle state
+  Usage:
+    <button class="switch-button" role="switch" aria-label="Example">
+      ...
+    </button>
+-->
+
+<button
+  class="switch-button"
+  role="switch"
+  aria-label=""
+  aria-checked="false"
+>
+  <!-- Consumer provides button content -->
+</button>
+
+<script>
+  // SwitchButton behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.switch-button').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var pressed = el.getAttribute('aria-checked') === 'true';
+        el.setAttribute('aria-checked', String(!pressed));
+      });
+      el.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+  })();
+</script>

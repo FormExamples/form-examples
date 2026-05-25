@@ -1,0 +1,93 @@
+<!-- cascader.html -->
+<!-- Cascader component -->
+<!--
+  Description: a multi-level dropdown for selecting a value from a hierarchy
+
+  HTML tag: <div> with role="combobox"
+  CSS class: cascader
+  Keyboard: Tab to focus the trigger button, Enter or Space to toggle the panel,
+            Escape to close the panel.
+  Accessibility:
+    - role="combobox" on the root container so assistive tech treats it as a combobox
+    - aria-haspopup="tree" indicates the popup is a hierarchical tree
+    - aria-expanded reflects whether the panel is open
+    - aria-label is REQUIRED — provides the accessible name for the cascader
+    - The trigger <button> is a real button so it is focusable, activatable
+      via keyboard, and exposed as a button to assistive tech.
+
+  Behavior:
+    Renders a <div role="combobox"> with a <button class="cascader-trigger"> and
+    a <div class="cascader-panel"> child. The script wires the trigger button to
+    toggle the panel's hidden state and update aria-expanded on the combobox root.
+
+  Usage:
+    <div class="cascader" role="combobox" aria-haspopup="tree" aria-expanded="false" aria-label="Choose region">
+      <button class="cascader-trigger" type="button">Select…</button>
+      <div class="cascader-panel" hidden>
+        <!-- nested option lists supplied by consumer -->
+      </div>
+    </div>
+-->
+
+<div
+  class="cascader"
+  role="combobox"
+  aria-haspopup="tree"
+  aria-expanded="false"
+  aria-label=""
+>
+  <!-- Trigger button: opens and closes the panel -->
+  <button class="cascader-trigger" type="button">
+    <!-- Consumer provides the display value or placeholder text -->
+  </button>
+
+  <!-- Panel: holds the hierarchical option list. Hidden until expanded. -->
+  <div class="cascader-panel" hidden>
+    <!-- Consumer provides the cascading option lists -->
+  </div>
+</div>
+
+<script>
+  // Cascader behavior
+  // Wires up the trigger button to toggle the panel and aria-expanded.
+  (function () {
+    "use strict";
+
+    // Find every cascader on the page and attach behavior to each.
+    var roots = document.querySelectorAll('div.cascader');
+
+    roots.forEach(function (root) {
+      var trigger = root.querySelector('.cascader-trigger');
+      var panel = root.querySelector('.cascader-panel');
+      if (!trigger || !panel) return;
+
+      // Click on the trigger toggles the panel and aria-expanded.
+      trigger.addEventListener('click', function () {
+        // Respect disabled state on the trigger.
+        if (trigger.disabled) return;
+
+        // Read current state from aria-expanded; default to "false".
+        var expanded = root.getAttribute('aria-expanded') === 'true';
+        var next = !expanded;
+
+        // Update ARIA state on the combobox root.
+        root.setAttribute('aria-expanded', next ? 'true' : 'false');
+
+        // Show/hide the panel via the hidden attribute.
+        if (next) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+
+      // Pressing Escape on the trigger closes the panel.
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && root.getAttribute('aria-expanded') === 'true') {
+          root.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('hidden', '');
+        }
+      });
+    });
+  })();
+</script>

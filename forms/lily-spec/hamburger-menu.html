@@ -1,0 +1,37 @@
+<!-- hamburger-menu.html -->
+<!-- HamburgerMenu component -->
+<!--
+  Description: a toggle button that opens a mobile navigation menu
+  HTML tag: <button>
+  CSS class: hamburger-menu
+  Keyboard: Tab to focus, Enter or Space to activate
+  Accessibility: Implicit button role, aria-label for accessible name
+  Usage:
+    <button class="hamburger-menu" aria-label="Example">
+      ...
+    </button>
+-->
+
+<button
+  class="hamburger-menu"
+  aria-label=""
+>
+  <!-- Consumer provides button content -->
+</button>
+
+<script>
+  // HamburgerMenu behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.hamburger-menu').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var expanded = el.getAttribute('aria-expanded') === 'true';
+        el.setAttribute('aria-expanded', String(!expanded));
+        var target = document.getElementById(el.getAttribute('aria-controls'));
+        if (target) {
+          target.setAttribute('aria-hidden', String(expanded));
+        }
+      });
+    });
+  })();
+</script>

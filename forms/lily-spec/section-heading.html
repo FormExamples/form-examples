@@ -1,0 +1,30 @@
+<!-- section-heading.html -->
+<!-- SectionHeading component -->
+<!--
+  Description: a styled heading introducing a major content section, with optional eyebrow and subtitle
+  HTML tag: <header>
+  CSS class: section-heading
+  Keyboard: None (passive element)
+  Accessibility:
+    - <header> provides implicit landmark grouping for the heading set
+    - the heading element (<h2>–<h6>) sets the document outline; consumer chooses the level
+    - eyebrow and subtitle are paragraphs that complement (not replace) the heading
+  Usage:
+    <header class="section-heading">
+      <p class="section-heading-eyebrow">What's new</p>
+      <h2 class="section-heading-heading">Latest releases</h2>
+      <p class="section-heading-subtitle">A quick overview of recent work.</p>
+    </header>
+-->
+
+<header class="section-heading">
+  <p class="section-heading-eyebrow">
+    <!-- Consumer provides eyebrow text (optional) -->
+  </p>
+  <h2 class="section-heading-heading">
+    <!-- Consumer provides heading text. Consumer may swap <h2> for <h3>–<h6>. -->
+  </h2>
+  <p class="section-heading-subtitle">
+    <!-- Consumer provides subtitle text (optional) -->
+  </p>
+</header>

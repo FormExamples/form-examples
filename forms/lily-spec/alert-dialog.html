@@ -1,0 +1,39 @@
+<!-- alert-dialog.html -->
+<!-- AlertDialog component -->
+<!--
+  Description: a modal dialog for urgent messages requiring user acknowledgment
+  HTML tag: <dialog>
+  CSS class: alert-dialog
+  Keyboard: Tab to cycle focus within dialog, Escape to close
+  Accessibility: role="alertdialog", Implicit dialog role, aria-label for accessible name, aria-modal for modal behavior
+  Note: when rendering multiple instances on the same page, give each <dialog>
+        a unique id (and unique ids on the inner title/description elements
+        if you reference them with aria-labelledby/aria-describedby).
+  Usage:
+    <dialog id="alert-dialog-1" class="alert-dialog" role="alertdialog" aria-label="Example">
+      ...
+    </dialog>
+-->
+
+<dialog
+  class="alert-dialog"
+  role="alertdialog"
+  aria-label=""
+  aria-modal="true"
+>
+  <!-- Consumer provides dialog content -->
+</dialog>
+
+<script>
+  // AlertDialog behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.alert-dialog').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          el.close ? el.close() : el.setAttribute('data-open', 'false');
+        }
+      });
+    });
+  })();
+</script>

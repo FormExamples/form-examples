@@ -1,0 +1,34 @@
+<!-- step-list.html -->
+<!-- StepList component -->
+<!--
+  Description: an ordered list of step items showing progress through a multi-step process
+
+  HTML tag: <ol>
+  CSS class: step-list
+  Keyboard: None directly (each step item, if interactive, manages its own focus)
+  Accessibility:
+    - <ol> already provides list semantics — a child step is announced as
+      "1 of N", "2 of N", etc. by screen readers.
+    - aria-label is optional — when present, gives the list an accessible name
+      such as "Checkout steps" or "Onboarding progress".
+    - data-current is an optional 0-based index hook for consumer styling.
+
+  Behavior:
+    Renders an <ol class="step-list"> with consumer-supplied <li class="step-list-item">
+    children. Purely passive: no script.
+
+  Usage:
+    <ol class="step-list" aria-label="Checkout" data-current="1">
+      <li class="step-list-item" data-status="finished">…</li>
+      <li class="step-list-item" data-status="in-progress" aria-current="step">…</li>
+      <li class="step-list-item" data-status="waiting">…</li>
+    </ol>
+-->
+
+<ol
+  class="step-list"
+  aria-label=""
+  data-current=""
+>
+  <!-- Consumer provides one or more <li class="step-list-item"> children -->
+</ol>

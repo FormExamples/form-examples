@@ -1,0 +1,52 @@
+<!-- tab-bar.html -->
+<!-- TabBar component -->
+<!--
+  Description: a group of tabs for switching between content panels
+  HTML tag: <div>
+  CSS class: tab-bar
+  Keyboard: Tab to focus tab list, Arrow Left/Right to navigate tabs, Enter/Space to select
+  Accessibility: role="tablist", aria-label for accessible name
+  Usage:
+    <div class="tab-bar" role="tablist" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="tab-bar"
+  role="tablist"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // TabBar behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.tab-bar').forEach(function(tabBar) {
+      var tabs = tabBar.querySelectorAll('[role="tab"]');
+      tabBar.addEventListener('keydown', function(e) {
+        var index = Array.from(tabs).indexOf(document.activeElement);
+        if (index < 0) return;
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          tabs[(index + 1) % tabs.length].focus();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          tabs[(index - 1 + tabs.length) % tabs.length].focus();
+        }
+      });
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) {
+            t.setAttribute('aria-selected', 'false');
+            t.setAttribute('tabindex', '-1');
+          });
+          tab.setAttribute('aria-selected', 'true');
+          tab.setAttribute('tabindex', '0');
+        });
+      });
+    });
+  })();
+</script>

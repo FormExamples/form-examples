@@ -1,0 +1,52 @@
+<!-- split-view.html -->
+<!-- SplitView component -->
+<!--
+  Description: a two-panel resizable layout container with a draggable divider
+               between them
+
+  HTML tag: <div>
+  CSS class: split-view
+  Keyboard: Tab to focus the divider; consumers may wire arrow keys to resize.
+  Accessibility: The container exposes aria-label and data-orientation. The
+                 divider has role="separator", aria-orientation, aria-valuenow,
+                 aria-valuemin, aria-valuemax, and tabindex="0".
+
+  Usage:
+    <div class="split-view" aria-label="Editor and preview"
+         data-orientation="horizontal" data-split-percent="50">
+      <section class="split-view-primary"><!-- primary content --></section>
+      <div class="split-view-divider"
+           role="separator"
+           aria-orientation="horizontal"
+           aria-valuenow="50"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           tabindex="0"></div>
+      <section class="split-view-secondary"><!-- secondary content --></section>
+    </div>
+-->
+
+<div
+  class="split-view"
+  aria-label=""
+  data-orientation="horizontal"
+  data-split-percent="50"
+>
+  <section class="split-view-primary">
+    <!-- Consumer provides primary panel content -->
+  </section>
+
+  <div
+    class="split-view-divider"
+    role="separator"
+    aria-orientation="horizontal"
+    aria-valuenow="50"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    tabindex="0"
+  ></div>
+
+  <section class="split-view-secondary">
+    <!-- Consumer provides secondary panel content -->
+  </section>
+</div>

@@ -1,0 +1,81 @@
+<!-- float-button.html -->
+<!-- FloatButton component -->
+<!--
+  Description: a floating action button anchored to a viewport corner
+
+  HTML tag: <button>
+  CSS class: float-button
+  Keyboard: Tab to focus, Enter or Space to activate (native <button> behavior)
+  Accessibility:
+    - aria-label is REQUIRED — float buttons are typically icon-only and need
+      an accessible name for screen readers.
+    - implicit "button" role from <button> tag
+    - data-position exposes the corner anchor for consumer styling
+
+  Behavior:
+    Renders a <button class="float-button"> with inline positioning style
+    (position: fixed plus the appropriate corner offsets). The script enforces
+    type="button" by default to prevent accidental form submission and wires
+    up basic click handling that respects the disabled state.
+
+  Inline style use:
+    Inline "style=" is permitted here ONLY because position: fixed plus corner
+    offsets are the documented headless behavior of this component (per the
+    spec). All visual styling (colors, sizes, shapes, shadows) must come from
+    consumer CSS.
+
+  Position options (data-position):
+    - "top-left"     : top: 1rem;    left: 1rem;
+    - "top-right"    : top: 1rem;    right: 1rem;
+    - "bottom-left"  : bottom: 1rem; left: 1rem;
+    - "bottom-right" : bottom: 1rem; right: 1rem;  (default)
+
+  Usage:
+    <button
+      class="float-button"
+      type="button"
+      aria-label="Scroll to top"
+      data-position="bottom-right"
+      style="position: fixed; bottom: 1rem; right: 1rem;"
+    >
+      <!-- icon -->
+    </button>
+-->
+
+<button
+  class="float-button"
+  type="button"
+  aria-label=""
+  data-position="bottom-right"
+  style="position: fixed; bottom: 1rem; right: 1rem;"
+>
+  <!-- Consumer provides icon content (SVG, emoji, or glyph) -->
+</button>
+
+<script>
+  // FloatButton behavior
+  // - Ensures type defaults to "button" to avoid accidental form submission.
+  // - Respects the disabled attribute when handling clicks.
+  (function () {
+    "use strict";
+
+    var nodes = document.querySelectorAll('button.float-button');
+
+    nodes.forEach(function (btn) {
+      // Default to type="button" so the button does not submit a parent form.
+      if (!btn.hasAttribute('type')) {
+        btn.setAttribute('type', 'button');
+      }
+
+      btn.addEventListener('click', function (e) {
+        // If disabled, swallow the event so consumer handlers do not run.
+        if (btn.disabled) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        // Otherwise, the consumer's click handler (if any) runs normally.
+      });
+    });
+  })();
+</script>

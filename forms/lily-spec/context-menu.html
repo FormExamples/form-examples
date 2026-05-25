@@ -1,0 +1,32 @@
+<!-- context-menu.html -->
+<!-- ContextMenu component -->
+<!--
+  Description: a menu that appears on right-click or long-press
+  HTML tag: <div>
+  CSS class: context-menu
+  Keyboard: None (passive element)
+  Accessibility: role="menu", aria-label for accessible name
+  Usage:
+    <div class="context-menu" role="menu" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="context-menu"
+  role="menu"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // ContextMenu behavior
+  (function() {
+    'use strict';
+    // ContextMenu: consumer implements interactive behavior
+    document.querySelectorAll('.context-menu').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

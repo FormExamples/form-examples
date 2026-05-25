@@ -1,0 +1,40 @@
+<!-- medical-banner.html -->
+<!-- MedicalBanner component -->
+<!--
+  Description: a prominent message bar across the top of a page that displays medical information
+  HTML tag: <div>
+  CSS class: medical-banner
+  Keyboard: Tab to dismiss button, Enter/Space to dismiss
+  Accessibility: role="region", aria-live="polite", aria-label, data-context="medical"
+  Usage:
+    <div class="medical-banner" role="region" aria-live="polite" aria-label="Patient alerts" data-type="info" data-context="medical">
+      ...
+    </div>
+-->
+
+<div
+  class="medical-banner"
+  role="region"
+  aria-live="polite"
+  aria-label=""
+  data-type="info"
+  data-context="medical"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // MedicalBanner behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.medical-banner').forEach(function(el) {
+      var dismissBtn = el.querySelector('[data-dismiss]');
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', function() {
+          el.style.display = 'none';
+          el.dispatchEvent(new Event('close', { bubbles: true }));
+        });
+      }
+    });
+  })();
+</script>

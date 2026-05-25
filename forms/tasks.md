@@ -13,12 +13,15 @@ Legend: `[ ]` open · `[~]` in progress · `[x]` done · `[-]` skipped/deferred
   spec, not a runtime. Generators read it at authoring time; no runtime
   dependency on Lily, no vendored runtime files. Recorded in
   [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md) §2.
-- [ ] **0.2  Add `bin/lily-sync`.** Doc-snapshotting helper that copies
-  Lily's spec comments from
+- [x] **0.2  Add `bin/lily-sync`.** Doc-snapshotting helper that copies
+  Lily's component HTML files (with their documentation comment blocks)
+  from
   `~/git/lilydesignsystem/lily-design-system/lily-design-system-html-headless/components/`
-  into `doc/lily-spec/` and records the pinned source commit in
-  `doc/lily-version.md`. **Not** a runtime sync. *Acceptance:* re-running
-  is idempotent and the pinned hash is updated.
+  into `forms/lily-spec/` (407 files) and records the pinned upstream
+  commit hash + date in `forms/lily-version.md`. **Not** a runtime sync.
+  `bin/lily-sync --check` verifies the snapshot matches upstream
+  without writing. Idempotent: re-running with no upstream change is
+  a no-op. Acceptance met.
 - [x] **0.3  Inventory which Lily components every form will need.**
   *Done:* [`doc/lily-components-per-form.md`](doc/lily-components-per-form.md).
   Union of 25 core components covers ~99% of forms; ~12 specialised

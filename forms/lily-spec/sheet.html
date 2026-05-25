@@ -1,0 +1,32 @@
+<!-- sheet.html -->
+<!-- Sheet component -->
+<!--
+  Description: a panel that slides in from a screen edge as an overlay
+  HTML tag: <div>
+  CSS class: sheet
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="sheet" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="sheet"
+  aria-label=""
+  data-open="false"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Sheet behavior
+  (function() {
+    'use strict';
+    // Sheet: consumer implements interactive behavior
+    document.querySelectorAll('.sheet').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

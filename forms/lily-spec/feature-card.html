@@ -1,0 +1,43 @@
+<!-- feature-card.html -->
+<!-- FeatureCard component -->
+<!--
+  Description: a large content card with a prominent image positioned alongside or above the text
+  HTML tag: <article>
+  CSS class: feature-card
+  Keyboard: None (passive container; interactive children manage their own focus)
+  Accessibility:
+    - <article> landmark with aria-label (consumer-provided, defaults to heading text)
+    - data-image-position exposes layout intent ("start" | "end" | "top") for styling
+    - <header> wraps the heading; <h3> by default for the card heading
+    - decorative image uses alt text supplied by the consumer (empty string if purely decorative)
+  Usage:
+    <article
+      class="feature-card"
+      data-image-position="start"
+      aria-label="Feature heading"
+    >
+      <img class="feature-card-image" src="/img/feature.jpg" alt="">
+      <header class="feature-card-header">
+        <h3 class="feature-card-heading">Feature heading</h3>
+      </header>
+      <p class="feature-card-description">Body text describing the feature.</p>
+      <!-- Optional CTAs or other children go here -->
+    </article>
+-->
+
+<article
+  class="feature-card"
+  data-image-position="start"
+  aria-label=""
+>
+  <img class="feature-card-image" src="" alt="">
+  <header class="feature-card-header">
+    <h3 class="feature-card-heading">
+      <!-- Consumer provides heading text -->
+    </h3>
+  </header>
+  <p class="feature-card-description">
+    <!-- Consumer provides description text (optional) -->
+  </p>
+  <!-- Consumer provides additional content (e.g., CTAs) -->
+</article>

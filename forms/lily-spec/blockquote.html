@@ -1,0 +1,33 @@
+<!-- blockquote.html -->
+<!-- Blockquote component -->
+<!--
+  Description: a block-level quotation with optional source citation
+  HTML tag: <blockquote>
+  CSS class: blockquote
+  Keyboard: None (passive element)
+  Accessibility:
+    - implicit <blockquote> semantics
+    - optional aria-label override for the quotation
+    - cite attribute may carry the URL of the source
+    - <footer class="blockquote-citation"> holds the visible attribution text
+  Usage:
+    <blockquote
+      class="blockquote"
+      cite="https://example.com/source"
+      aria-label="Quotation"
+    >
+      <p>Quote text goes here.</p>
+      <footer class="blockquote-citation">— Author Name, Source</footer>
+    </blockquote>
+-->
+
+<blockquote
+  class="blockquote"
+  cite=""
+  aria-label=""
+>
+  <!-- Consumer provides quotation content -->
+  <footer class="blockquote-citation">
+    <!-- Consumer provides citation text (e.g., "— Author Name, Source") -->
+  </footer>
+</blockquote>

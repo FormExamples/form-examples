@@ -1,0 +1,41 @@
+<!-- input-with-mask.html -->
+<!-- InputWithMask component -->
+<!--
+  Description: an input displaying a format mask placeholder for the user to fill in
+
+  HTML tag: <div>
+  CSS class: input-with-mask
+  Keyboard: Native <input type="text"> keyboard behavior
+  Accessibility:
+    - The mask display span is decorative and uses aria-hidden="true"
+    - The accessible name comes from a required aria-label on the inner <input>
+    - The mask string is also exposed via data-mask on the wrapper for consumer styling
+
+  Usage:
+    <div class="input-with-mask" data-mask="(___) ___-____">
+      <span class="input-with-mask-display" aria-hidden="true">(___) ___-____</span>
+      <input class="input-with-mask-control"
+             type="text"
+             aria-label="Phone number"
+             value=""
+             placeholder="">
+    </div>
+-->
+
+<div
+  class="input-with-mask"
+  data-mask=""
+>
+  <span
+    class="input-with-mask-display"
+    aria-hidden="true"
+  >
+    <!-- Consumer renders the mask string here as a decorative overlay/placeholder -->
+  </span>
+  <input
+    class="input-with-mask-control"
+    type="text"
+    aria-label=""
+    value=""
+  >
+</div>

@@ -1,0 +1,87 @@
+<!-- overlay-container.html -->
+<!-- OverlayContainer component -->
+<!--
+  Description: a full-viewport overlay backdrop for modals and sheets
+
+  HTML tag: <div>
+  CSS class: overlay-container
+  Keyboard: None at the backdrop level; the dialog child manages its own focus and Escape behavior
+  Accessibility: role="presentation" because the actual modal child carries role="dialog"; aria-hidden mirrors the open state; the hidden attribute removes the element from the accessibility tree when closed
+
+  Behavior:
+    Renders a <div> overlay wrapper that toggles its visibility via the
+    "hidden" attribute and via aria-hidden, driven by the data-open state.
+    The component itself provides no visual styling — the consumer
+    applies backdrop colors, positioning, etc. A click on the backdrop
+    dispatches a "close" CustomEvent the consumer can listen for.
+
+  Usage:
+    <div class="overlay-container" role="presentation" data-open="false" aria-hidden="true" hidden>
+      <!-- Consumer places modal/sheet content here -->
+    </div>
+-->
+
+<div
+  class="overlay-container"
+  role="presentation"
+  data-open="false"
+  aria-hidden="true"
+  hidden
+>
+  <!-- Consumer provides the overlay child (typically a dialog or sheet) -->
+</div>
+
+<script>
+  // OverlayContainer behavior
+  // Keeps the data-open state, the aria-hidden attribute, and the hidden
+  // attribute in sync. Provides a programmatic API and a backdrop-click
+  // event so consumers can drive the open/close lifecycle declaratively.
+  (function () {
+    "use strict";
+
+    var overlays = document.querySelectorAll('div.overlay-container');
+
+    overlays.forEach(function (overlay) {
+      // Sync ARIA + hidden attribute from the data-open state.
+      // Call this whenever data-open is mutated externally.
+      function syncFromDataOpen() {
+        var isOpen = overlay.getAttribute('data-open') === 'true';
+        overlay.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        if (isOpen) {
+          overlay.removeAttribute('hidden');
+        } else {
+          overlay.setAttribute('hidden', '');
+        }
+      }
+
+      // Public-ish helpers attached to the element so consumers can call them.
+      overlay.openOverlay = function () {
+        overlay.setAttribute('data-open', 'true');
+        syncFromDataOpen();
+      };
+      overlay.closeOverlay = function () {
+        overlay.setAttribute('data-open', 'false');
+        syncFromDataOpen();
+      };
+
+      // Dispatch a "close" CustomEvent if the user clicks the backdrop itself
+      // (not a child). Consumers may listen and call closeOverlay().
+      overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) {
+          overlay.dispatchEvent(new CustomEvent('overlay-close', { bubbles: true }));
+        }
+      });
+
+      // Watch for external mutations to data-open and re-sync.
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName === 'data-open') syncFromDataOpen();
+        });
+      });
+      observer.observe(overlay, { attributes: true, attributeFilter: ['data-open'] });
+
+      // Initial sync to ensure attributes match the starting data-open value.
+      syncFromDataOpen();
+    });
+  })();
+</script>

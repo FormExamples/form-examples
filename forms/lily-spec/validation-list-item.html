@@ -1,0 +1,26 @@
+<!-- validation-list-item.html -->
+<!-- ValidationListItem component -->
+<!--
+  Description: one validation rule in a validation list with a status of pending, passed, or failed
+
+  HTML tag: <li>
+  CSS class: validation-list-item
+  Keyboard: None (passive list item)
+  Accessibility:
+    - data-status conveys the current validation state ("pending" | "passed" | "failed") for consumer styling
+    - aria-label is optional and overrides the computed accessible name
+    - When inside a <ul class="validation-list" aria-live="polite">, status changes are announced
+
+  Usage:
+    <li class="validation-list-item" data-status="pending" aria-label="">
+      At least 8 characters
+    </li>
+-->
+
+<li
+  class="validation-list-item"
+  data-status="pending"
+  aria-label=""
+>
+  <!-- Consumer-provided rule text (e.g. "At least 8 characters") -->
+</li>

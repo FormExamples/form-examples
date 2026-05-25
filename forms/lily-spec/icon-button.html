@@ -1,0 +1,62 @@
+<!-- icon-button.html -->
+<!-- IconButton component -->
+<!--
+  Description: a button containing only an icon with a required accessible label
+
+  HTML tag: <button>
+  CSS class: icon-button
+  Keyboard: Tab to focus, Enter or Space to activate (native <button> behavior)
+  Accessibility: aria-label is REQUIRED — provides the entire accessible name for an icon-only button. aria-pressed is set when the button is a toggle.
+
+  Behavior:
+    Renders a native <button type="button"> with a required aria-label.
+    The icon (svg, glyph, emoji) is supplied by the consumer as inner content.
+    A small script enforces type="button" by default and reads aria-pressed
+    to keep state consistent if the consumer toggles data-pressed.
+
+  Usage:
+    <button class="icon-button" type="button" aria-label="Close" aria-pressed="false">
+      <svg>...</svg>
+    </button>
+-->
+
+<button
+  class="icon-button"
+  type="button"
+  aria-label=""
+>
+  <!-- Consumer provides icon content (SVG, emoji, or glyph) -->
+</button>
+
+<script>
+  // IconButton behavior
+  // Wires up minimal interaction:
+  //   - Ensures type defaults to "button" (so it does not submit a parent form by accident).
+  //   - If the button is configured as a toggle (has aria-pressed), clicking flips the state.
+  (function () {
+    "use strict";
+
+    // Find every icon-button on the page and attach behavior
+    var nodes = document.querySelectorAll('button.icon-button');
+
+    nodes.forEach(function (btn) {
+      // Default type to "button" if the consumer did not specify a type.
+      // This prevents accidental form submission for icon-only buttons.
+      if (!btn.hasAttribute('type')) {
+        btn.setAttribute('type', 'button');
+      }
+
+      // If the button advertises a toggle role via aria-pressed, manage the state.
+      btn.addEventListener('click', function () {
+        // Respect disabled state — do nothing if disabled.
+        if (btn.disabled) return;
+
+        // If aria-pressed is present, treat as a toggle and flip the value.
+        var pressed = btn.getAttribute('aria-pressed');
+        if (pressed === 'true' || pressed === 'false') {
+          btn.setAttribute('aria-pressed', pressed === 'true' ? 'false' : 'true');
+        }
+      });
+    });
+  })();
+</script>

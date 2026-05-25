@@ -1,0 +1,41 @@
+<!-- affix.html -->
+<!-- Affix component -->
+<!--
+  Description: a wrapper that pins its content to a viewport position while the page scrolls
+
+  HTML tag: <div>
+  CSS class: affix
+  Keyboard: None (passive layout container)
+  Accessibility: None — purely structural; no role or ARIA attributes are added.
+
+  Behavior:
+    Renders a <div class="affix"> with inline style "position: sticky;"
+    plus either "top: {offsetTop}px" or "bottom: {offsetBottom}px" to pin
+    the element relative to its scroll container. If neither offset is given,
+    the default is "top: 0".
+
+    The numeric offsets are also exposed via data-offset-top and
+    data-offset-bottom attributes so consumers can hook CSS or JS as needed.
+
+  Inline style use:
+    Inline "style=" is permitted here ONLY because position: sticky is the
+    documented headless behavior of this component (per the spec). All visual
+    styling beyond positioning must come from consumer CSS.
+
+  Usage:
+    <div class="affix" style="position: sticky; top: 0;" data-offset-top="0">
+      ...content to pin...
+    </div>
+
+    <div class="affix" style="position: sticky; bottom: 16px;" data-offset-bottom="16">
+      ...content to pin to the bottom...
+    </div>
+-->
+
+<div
+  class="affix"
+  style="position: sticky; top: 0;"
+  data-offset-top="0"
+>
+  <!-- Consumer provides the content to be pinned to the viewport -->
+</div>

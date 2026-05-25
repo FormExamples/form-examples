@@ -1,0 +1,28 @@
+<!-- status-light.html -->
+<!-- StatusLight component -->
+<!--
+  Description: a small colored dot status indicator paired with a status label
+
+  HTML tag: <span>
+  CSS class: status-light
+  Keyboard: None (passive element)
+  Accessibility: role="status" announces dynamic updates; the dot is
+                 aria-hidden="true" because it conveys no extra information
+                 beyond the label text. The variant is exposed via data-variant
+                 so consumers can style without changing semantics.
+
+  Usage:
+    <span class="status-light" data-variant="positive" role="status">
+      <span class="status-light-dot" aria-hidden="true"></span>
+      <span class="status-light-label">Active</span>
+    </span>
+-->
+
+<span
+  class="status-light"
+  data-variant="neutral"
+  role="status"
+>
+  <span class="status-light-dot" aria-hidden="true"></span>
+  <span class="status-light-label"></span>
+</span>

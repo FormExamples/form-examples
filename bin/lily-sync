@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""bin/lily-sync — Snapshot Lily HTML headless component specs into this repo.
+
+Reads HTML component files from the Lily checkout at
+~/git/lilydesignsystem/lily-design-system/lily-design-system-html-headless/components/,
+copies them into forms/lily-spec/, and records the pinned upstream commit
+hash + today's date in forms/lily-version.md.
+
+Lily is consumed as a *spec* at authoring time. There is no runtime
+dependency on Lily — this tool is a doc-snapshotting helper so a
+contributor can read the class/attribute contract without needing the
+external checkout. See forms/AGENTS-front-end-html.md §2 for context.
+
+Usage:
+  bin/lily-sync                 # snapshot from default Lily checkout
+  bin/lily-sync --lily-dir PATH # use a different Lily checkout location
+  bin/lily-sync --check         # verify snapshot matches upstream (no writes)
+
+The tool is idempotent: re-running with no upstream changes is a no-op.
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import filecmp
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SPEC_DIR = REPO_ROOT / "forms" / "lily-spec"
+VERSION_FILE = REPO_ROOT / "forms" / "lily-version.md"
+
+DEFAULT_LILY_DIR = Path.home() / "git" / "lilydesignsystem" / "lily-design-system" / "lily-design-system-html-headless"
+
+
+def lily_commit_hash(lily_dir: Path) -> str:
+    """Resolve the current HEAD short hash of the Lily checkout."""
+    out = subprocess.check_output(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=lily_dir / ".." if (lily_dir / "..").joinpath(".git").is_dir() else lily_dir.parent.parent,
+        text=True,
+    ).strip()
+    return out
+
+
+def collect_component_files(lily_dir: Path) -> list[Path]:
+    components = lily_dir / "components"
+    if not components.is_dir():
+        sys.exit(f"Lily components dir not found: {components}")
+    return sorted(components.glob("*.html"))
+
+
+def sync_specs(lily_dir: Path, check: bool) -> tuple[int, int, int]:
+    """Copy component HTML files into SPEC_DIR.
+
+    Returns (added, updated, unchanged) counts. In --check mode, no
+    writes happen and added+updated are interpreted as drift counts.
+    """
+    files = collect_component_files(lily_dir)
+    if not check:
+        SPEC_DIR.mkdir(parents=True, exist_ok=True)
+
+    added = updated = unchanged = 0
+    upstream_names = set()
+    for src in files:
+        upstream_names.add(src.name)
+        dst = SPEC_DIR / src.name
+        if not dst.exists():
+            if not check:
+                shutil.copyfile(src, dst)
+            added += 1
+        elif not filecmp.cmp(src, dst, shallow=False):
+            if not check:
+                shutil.copyfile(src, dst)
+            updated += 1
+        else:
+            unchanged += 1
+
+    # Detect any local spec files that no longer exist upstream
+    removed = []
+    if SPEC_DIR.is_dir():
+        for local in SPEC_DIR.glob("*.html"):
+            if local.name not in upstream_names:
+                removed.append(local)
+    if not check:
+        for r in removed:
+            r.unlink()
+
+    return added, updated, unchanged, len(removed)
+
+
+def update_version_file(commit_hash: str) -> bool:
+    """Rewrite the Pinned commit + Date pinned rows in forms/lily-version.md.
+
+    Returns True if the file was modified.
+    """
+    today = datetime.date.today().isoformat()
+    if not VERSION_FILE.is_file():
+        sys.exit(f"version file missing: {VERSION_FILE}")
+    original = VERSION_FILE.read_text()
+    lines = original.splitlines(keepends=True)
+    out = []
+    changed = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("| Pinned commit"):
+            new = f"| Pinned commit    | `{commit_hash}`{' ' * max(0, 71 - len(commit_hash))}|\n"
+            if new != line:
+                changed = True
+            out.append(new)
+        elif stripped.startswith("| Date pinned"):
+            new = f"| Date pinned      | {today}{' ' * max(0, 71 - len(today))}|\n"
+            if new != line:
+                changed = True
+            out.append(new)
+        else:
+            out.append(line)
+    if changed:
+        VERSION_FILE.write_text("".join(out))
+    return changed
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--lily-dir",
+        type=Path,
+        default=DEFAULT_LILY_DIR,
+        help=f"Path to lily-design-system-html-headless checkout (default: {DEFAULT_LILY_DIR})",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Verify snapshot matches upstream without writing (exit non-zero on drift)",
+    )
+    args = parser.parse_args()
+
+    lily_dir = args.lily_dir.expanduser().resolve()
+    if not lily_dir.is_dir():
+        sys.exit(f"Lily checkout not found: {lily_dir}")
+
+    commit_hash = lily_commit_hash(lily_dir)
+
+    added, updated, unchanged, removed = sync_specs(lily_dir, check=args.check)
+    drift = added + updated + removed
+
+    print(f"lily-sync [{'CHECK' if args.check else 'WRITE'}] — upstream {commit_hash}")
+    print(f"  added:     {added}")
+    print(f"  updated:   {updated}")
+    print(f"  removed:   {removed}")
+    print(f"  unchanged: {unchanged}")
+
+    if args.check:
+        if drift:
+            print(
+                f"FAIL: {drift} file(s) drift between upstream and snapshot.",
+                file=sys.stderr,
+            )
+            return 1
+        # In check mode also flag if version-file hash differs
+        version_text = VERSION_FILE.read_text()
+        if f"`{commit_hash}`" not in version_text:
+            print(
+                f"FAIL: forms/lily-version.md does not pin `{commit_hash}`.",
+                file=sys.stderr,
+            )
+            return 1
+        return 0
+
+    version_changed = update_version_file(commit_hash)
+    if version_changed:
+        print(f"  forms/lily-version.md: pinned hash updated to {commit_hash}")
+    else:
+        print("  forms/lily-version.md: no change")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

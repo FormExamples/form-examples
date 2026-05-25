@@ -1,0 +1,74 @@
+<!-- tab-panel.html -->
+<!-- TabPanel component -->
+<!--
+  Description: a content panel associated with a tab in a tab bar
+
+  HTML tag: <div>
+  CSS class: tab-panel
+  Keyboard: Tab to focus the panel (tabindex="0") so keyboard users can move
+            into the panel content from the tab bar.
+  Accessibility: role="tabpanel"; either aria-labelledby (when controlled by a
+                 specific tab button) or aria-label provides the accessible name.
+
+  Behavior:
+    The embedded script syncs the `hidden` attribute to the data-selected
+    state. When a consumer toggles `data-selected="true"` or `"false"`, the
+    panel becomes visible or hidden accordingly. A MutationObserver keeps the
+    two in sync at runtime.
+
+  Usage:
+    <div class="tab-panel" role="tabpanel"
+         aria-labelledby="tab-1"
+         data-selected="true"
+         tabindex="0">
+      <!-- panel content -->
+    </div>
+-->
+
+<div
+  class="tab-panel"
+  role="tabpanel"
+  aria-label=""
+  data-selected="false"
+  tabindex="0"
+  hidden
+>
+  <!-- Consumer provides panel content -->
+</div>
+
+<script>
+  // TabPanel behavior
+  // Keeps the `hidden` attribute synchronized with the `data-selected`
+  // attribute so consumers only need to flip data-selected to show/hide
+  // the panel. Uses MutationObserver — pure vanilla JavaScript.
+  (function () {
+    "use strict";
+
+    var panels = document.querySelectorAll('div.tab-panel');
+
+    function syncHidden(panel) {
+      var selected = panel.getAttribute('data-selected') === 'true';
+      if (selected) {
+        panel.removeAttribute('hidden');
+      } else {
+        panel.setAttribute('hidden', '');
+      }
+    }
+
+    panels.forEach(function (panel) {
+      // Initial sync on load.
+      syncHidden(panel);
+
+      // Observe data-selected changes and re-sync the hidden attribute.
+      var observer = new MutationObserver(function (mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          if (mutations[i].attributeName === 'data-selected') {
+            syncHidden(panel);
+            break;
+          }
+        }
+      });
+      observer.observe(panel, { attributes: true, attributeFilter: ['data-selected'] });
+    });
+  })();
+</script>

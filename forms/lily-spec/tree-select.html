@@ -1,0 +1,96 @@
+<!-- tree-select.html -->
+<!-- TreeSelect component -->
+<!--
+  Description: a select dropdown showing a tree of hierarchical options
+
+  HTML tag: <div> with role="combobox"
+  CSS class: tree-select
+  Keyboard:
+    - Tab to focus the trigger button
+    - Enter or Space to toggle the panel open/closed
+    - Escape to close the panel
+  Accessibility:
+    - role="combobox" on the root container
+    - aria-haspopup="tree" indicates a hierarchical popup
+    - aria-expanded reflects panel visibility
+    - aria-label is REQUIRED — the accessible name
+    - aria-multiselectable="true" is set when the consumer enables multiple
+      selection (omitted otherwise so the default false applies)
+
+  Behavior:
+    Renders a <div role="combobox"> with a <button class="tree-select-trigger">
+    and a <div class="tree-select-panel"> child. The script wires the trigger
+    button to toggle the panel and aria-expanded.
+
+  Usage:
+    <div
+      class="tree-select"
+      role="combobox"
+      aria-haspopup="tree"
+      aria-expanded="false"
+      aria-label="Choose category"
+    >
+      <button class="tree-select-trigger" type="button">Select…</button>
+      <div class="tree-select-panel" hidden>
+        <!-- consumer-supplied tree (e.g. TreeNav / TreeList) -->
+      </div>
+    </div>
+-->
+
+<div
+  class="tree-select"
+  role="combobox"
+  aria-haspopup="tree"
+  aria-expanded="false"
+  aria-label=""
+>
+  <!-- Trigger button: opens and closes the tree panel. -->
+  <button class="tree-select-trigger" type="button">
+    <!-- Consumer provides the display value or placeholder text -->
+  </button>
+
+  <!-- Tree panel: holds the hierarchical selection. Hidden until expanded. -->
+  <div class="tree-select-panel" hidden>
+    <!-- Consumer provides the tree (typically a TreeNav with TreeList) -->
+  </div>
+</div>
+
+<script>
+  // TreeSelect behavior
+  // - Trigger button toggles the panel open/closed and updates aria-expanded.
+  // - Escape on the trigger closes the panel.
+  (function () {
+    "use strict";
+
+    var roots = document.querySelectorAll('div.tree-select');
+
+    roots.forEach(function (root) {
+      var trigger = root.querySelector('.tree-select-trigger');
+      var panel = root.querySelector('.tree-select-panel');
+      if (!trigger || !panel) return;
+
+      trigger.addEventListener('click', function () {
+        // Respect disabled.
+        if (trigger.disabled) return;
+
+        var expanded = root.getAttribute('aria-expanded') === 'true';
+        var next = !expanded;
+
+        root.setAttribute('aria-expanded', next ? 'true' : 'false');
+
+        if (next) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && root.getAttribute('aria-expanded') === 'true') {
+          root.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('hidden', '');
+        }
+      });
+    });
+  })();
+</script>

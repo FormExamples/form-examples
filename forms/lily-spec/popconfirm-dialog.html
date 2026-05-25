@@ -1,0 +1,110 @@
+<!-- popconfirm-dialog.html -->
+<!-- PopconfirmDialog component -->
+<!--
+  Description: a popover dialog with confirm and cancel buttons
+
+  HTML tag: <div> with role="alertdialog"
+  CSS class: popconfirm-dialog
+  Keyboard:
+    - Tab to move between Cancel and Confirm buttons
+    - Enter or Space to activate the focused button
+    - Escape to dismiss (treated as Cancel by consumers)
+  Accessibility:
+    - role="alertdialog" so assistive tech announces it as an alert dialog
+    - aria-modal="false" — popconfirm is intentionally NON-modal (it does not
+      trap focus or block the rest of the page); use AlertDialog for modal flows
+    - aria-labelledby points at the title element
+    - aria-describedby points at the description element (when present)
+    - The hidden attribute is used to show/hide the dialog
+
+  Behavior:
+    Renders a <div role="alertdialog"> containing:
+      - <h2 class="popconfirm-dialog-title"> — REQUIRED title text
+      - <p  class="popconfirm-dialog-description"> — optional description
+      - <button class="popconfirm-dialog-cancel"> — REQUIRED cancel button
+      - <button class="popconfirm-dialog-confirm"> — REQUIRED confirm button
+    The script wires up the two buttons to dispatch custom "lily:cancel" and
+    "lily:confirm" events on the root and to close the dialog (set hidden).
+
+  Usage:
+    <div
+      class="popconfirm-dialog"
+      role="alertdialog"
+      aria-modal="false"
+      aria-labelledby="popconfirm-title"
+      aria-describedby="popconfirm-description"
+      hidden
+    >
+      <h2 class="popconfirm-dialog-title" id="popconfirm-title">Delete file?</h2>
+      <p class="popconfirm-dialog-description" id="popconfirm-description">
+        This action cannot be undone.
+      </p>
+      <button class="popconfirm-dialog-cancel" type="button">Cancel</button>
+      <button class="popconfirm-dialog-confirm" type="button">Delete</button>
+    </div>
+-->
+
+<div
+  class="popconfirm-dialog"
+  role="alertdialog"
+  aria-modal="false"
+  aria-labelledby="popconfirm-dialog-title"
+  aria-describedby="popconfirm-dialog-description"
+  hidden
+>
+  <!-- Title: REQUIRED. The id is referenced by aria-labelledby above. -->
+  <h2 class="popconfirm-dialog-title" id="popconfirm-dialog-title">
+    <!-- Consumer provides the title text -->
+  </h2>
+
+  <!-- Description: optional. The id is referenced by aria-describedby above. -->
+  <p class="popconfirm-dialog-description" id="popconfirm-dialog-description">
+    <!-- Consumer provides the description text (or remove this element if none) -->
+  </p>
+
+  <!-- Cancel button: REQUIRED. -->
+  <button class="popconfirm-dialog-cancel" type="button">
+    <!-- Consumer provides the cancel label text -->
+  </button>
+
+  <!-- Confirm button: REQUIRED. -->
+  <button class="popconfirm-dialog-confirm" type="button">
+    <!-- Consumer provides the confirm label text -->
+  </button>
+</div>
+
+<script>
+  // PopconfirmDialog behavior
+  // - Confirm button: dispatches "lily:confirm" custom event on the root and
+  //   closes the dialog by setting the hidden attribute.
+  // - Cancel button:  dispatches "lily:cancel"  custom event on the root and
+  //   closes the dialog the same way.
+  (function () {
+    "use strict";
+
+    var roots = document.querySelectorAll('div.popconfirm-dialog');
+
+    roots.forEach(function (root) {
+      var confirmBtn = root.querySelector('.popconfirm-dialog-confirm');
+      var cancelBtn = root.querySelector('.popconfirm-dialog-cancel');
+
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', function () {
+          // Notify consumer code that the user confirmed.
+          root.dispatchEvent(new CustomEvent('lily:confirm', { bubbles: true }));
+          // Close the dialog.
+          root.setAttribute('hidden', '');
+        });
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', function () {
+          // Notify consumer code that the user cancelled.
+          root.dispatchEvent(new CustomEvent('lily:cancel', { bubbles: true }));
+          // Close the dialog.
+          root.setAttribute('hidden', '');
+        });
+      }
+    });
+  })();
+</script>

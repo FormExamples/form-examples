@@ -1,0 +1,31 @@
+<!-- sonner.html -->
+<!-- Sonner component -->
+<!--
+  Description: a toast notification manager
+  HTML tag: <div>
+  CSS class: sonner
+  Keyboard: None (passive element)
+  Accessibility: role="status", aria-label for accessible name
+  Usage:
+    <div class="sonner" role="status" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="sonner"
+  role="status"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Sonner behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.sonner').forEach(function(el) {
+      el.setAttribute('aria-live', 'polite');
+    });
+  })();
+</script>

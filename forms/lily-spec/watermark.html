@@ -1,0 +1,51 @@
+<!-- watermark.html -->
+<!-- Watermark component -->
+<!--
+  Description: a decorative repeating overlay text or image marking a page
+
+  HTML tag: <div>
+  CSS class: watermark
+  Keyboard: None (purely decorative)
+  Accessibility:
+    - The overlay carries aria-hidden="true" because the watermark is
+      decorative — its content must not be announced by screen readers.
+    - data-text and data-image-url on the overlay expose the watermark content
+      so consumer CSS can render the repeating pattern (e.g. via
+      background-image with an SVG-encoded text).
+    - data-rotate and data-gap on the wrapper expose layout hints for the
+      repeat pattern (rotation in degrees, spacing between repeats).
+
+  Behavior:
+    Renders a wrapper <div class="watermark"> with two children:
+      - <div class="watermark-overlay" aria-hidden="true">  — the decorative
+        overlay layer; consumer applies the actual repeating-pattern CSS.
+      - the consumer-supplied content rendered beneath the overlay.
+    Purely passive: no script. The headless component just exposes the props
+    via data-* attributes and the right structural ARIA.
+
+  Usage:
+    <div class="watermark" data-rotate="-22" data-gap="100px">
+      <div
+        class="watermark-overlay"
+        aria-hidden="true"
+        data-text="CONFIDENTIAL"
+      ></div>
+      <!-- Consumer-supplied content goes here, beneath the overlay. -->
+    </div>
+-->
+
+<div
+  class="watermark"
+  data-rotate="-22"
+  data-gap="100px"
+>
+  <!-- Decorative repeating overlay layer. aria-hidden so screen readers ignore it. -->
+  <div
+    class="watermark-overlay"
+    aria-hidden="true"
+    data-text=""
+    data-image-url=""
+  ></div>
+
+  <!-- Consumer provides the page content rendered beneath the watermark -->
+</div>

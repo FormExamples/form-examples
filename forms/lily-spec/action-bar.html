@@ -1,0 +1,30 @@
+<!-- action-bar.html -->
+<!-- ActionBar component -->
+<!--
+  Description: a contextual action bar that appears when items are selected,
+               showing the selection count and bulk action buttons
+
+  HTML tag: <div> with role="toolbar"
+  CSS class: action-bar
+  Keyboard: Tab to focus the contained action buttons, Enter or Space to activate
+  Accessibility: role="toolbar" with required aria-label; the count is announced
+                 via a visible span and the optional clear button has an aria-label.
+
+  Usage:
+    <div class="action-bar" role="toolbar" aria-label="Bulk actions" data-selected-count="3">
+      <span class="action-bar-count">3 selected</span>
+      <!-- consumer inserts action-bar-button children here -->
+      <button class="action-bar-clear" type="button" aria-label="Clear selection">×</button>
+    </div>
+-->
+
+<div
+  class="action-bar"
+  role="toolbar"
+  aria-label=""
+  data-selected-count="0"
+>
+  <span class="action-bar-count"></span>
+  <!-- Consumer inserts action-bar-button children here -->
+  <button class="action-bar-clear" type="button" aria-label="">×</button>
+</div>

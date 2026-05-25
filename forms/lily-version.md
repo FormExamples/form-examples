@@ -11,8 +11,8 @@ the consumption model.
 | Field            | Value                                                                  |
 |------------------|------------------------------------------------------------------------|
 | Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-html-headless`) |
-| Pinned commit    | `7a51013`                                                              |
-| Date pinned      | 2026-05-24                                                             |
+| Pinned commit    | `0a24d904`                                                               |
+| Date pinned      | 2026-05-25                                                             |
 | Verified by      | Phase 0.4 component coverage check (every required component present). |
 
 This pin is the contract we built against. Newer Lily commits may

@@ -1,0 +1,32 @@
+<!-- popover.html -->
+<!-- Popover component -->
+<!--
+  Description: a floating content box anchored to a trigger element
+  HTML tag: <div>
+  CSS class: popover
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <div class="popover" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="popover"
+  aria-label=""
+  data-open="false"
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Popover behavior
+  (function() {
+    'use strict';
+    // Popover: consumer implements interactive behavior
+    document.querySelectorAll('.popover').forEach(function(el) {
+      // Interactive behavior initialization
+    });
+  })();
+</script>

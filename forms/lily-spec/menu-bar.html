@@ -1,0 +1,42 @@
+<!-- menu-bar.html -->
+<!-- MenuBar component -->
+<!--
+  Description: a horizontal bar of menu triggers
+  HTML tag: <div>
+  CSS class: menu-bar
+  Keyboard: Tab to focus, Arrow Left/Right to navigate, Enter to activate
+  Accessibility: role="menubar", aria-label for accessible name
+  Usage:
+    <div class="menu-bar" role="menubar" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="menu-bar"
+  role="menubar"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // MenuBar behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.menu-bar').forEach(function(bar) {
+      var items = bar.querySelectorAll('[role="menuitem"]');
+      bar.addEventListener('keydown', function(e) {
+        var index = Array.from(items).indexOf(document.activeElement);
+        if (index < 0) return;
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          items[(index + 1) % items.length].focus();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          items[(index - 1 + items.length) % items.length].focus();
+        }
+      });
+    });
+  })();
+</script>

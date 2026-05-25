@@ -1,0 +1,30 @@
+<!-- character-counter.html -->
+<!-- CharacterCounter component -->
+<!--
+  Description: a counter showing remaining or used characters in a text field
+  HTML tag: <span>
+  CSS class: character-counter
+  Keyboard: None (passive element)
+  Accessibility: aria-label for accessible name
+  Usage:
+    <span class="character-counter" aria-label="Example">
+      ...
+    </span>
+-->
+
+<span
+  class="character-counter"
+  aria-label=""
+>
+  <!-- Consumer provides text content -->
+</span>
+
+<script>
+  // CharacterCounter behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.character-counter').forEach(function(el) {
+      el.setAttribute('aria-live', 'polite');
+    });
+  })();
+</script>

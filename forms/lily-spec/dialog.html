@@ -1,0 +1,36 @@
+<!-- dialog.html -->
+<!-- Dialog component -->
+<!--
+  Description: a modal or non-modal dialog window
+  HTML tag: <dialog>
+  CSS class: dialog
+  Keyboard: Tab to cycle focus within dialog, Escape to close
+  Accessibility: role="dialog", Implicit dialog role, aria-label for accessible name, aria-modal for modal behavior
+  Usage:
+    <dialog class="dialog" role="dialog" aria-label="Example">
+      ...
+    </dialog>
+-->
+
+<dialog
+  class="dialog"
+  role="dialog"
+  aria-label=""
+  aria-modal="true"
+>
+  <!-- Consumer provides dialog content -->
+</dialog>
+
+<script>
+  // Dialog behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.dialog').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          el.close ? el.close() : el.setAttribute('data-open', 'false');
+        }
+      });
+    });
+  })();
+</script>

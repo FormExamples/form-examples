@@ -1,0 +1,112 @@
+<!-- mentions-input.html -->
+<!-- MentionsInput component -->
+<!--
+  Description: a text input with at-mention autocomplete suggestions
+
+  HTML tag: <div> wrapper containing an <input> and a suggestions panel
+  CSS class: mentions-input
+  Keyboard:
+    - Tab to focus the input
+    - Type the trigger character (default "@") to open the suggestions panel
+    - Escape to close the suggestions panel
+  Accessibility:
+    - The <input> has role="combobox" with:
+        aria-haspopup="listbox"
+        aria-expanded reflecting suggestions panel visibility
+        aria-autocomplete="list"
+    - aria-label is REQUIRED on the input — provides the accessible name.
+    - data-trigger-char on the wrapper exposes the configured trigger character
+      to consumers / styling.
+
+  Behavior:
+    Renders a wrapper <div class="mentions-input"> containing:
+      - <input class="mentions-input-control" type="text" role="combobox" …>
+      - <div  class="mentions-input-suggestions" hidden> — the suggestions
+        list (consumer supplies a Listbox or similar inside it).
+    The script opens the suggestions panel when the user types the trigger
+    character and closes it on Escape.
+
+  Usage:
+    <div class="mentions-input" data-trigger-char="@">
+      <input
+        class="mentions-input-control"
+        type="text"
+        role="combobox"
+        aria-label="Comment"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-autocomplete="list"
+      />
+      <div class="mentions-input-suggestions" hidden>
+        <!-- Consumer-provided listbox of mention candidates -->
+      </div>
+    </div>
+-->
+
+<div
+  class="mentions-input"
+  data-trigger-char="@"
+>
+  <!-- The text input. role="combobox" makes this an autocomplete combobox. -->
+  <input
+    class="mentions-input-control"
+    type="text"
+    role="combobox"
+    aria-label=""
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-autocomplete="list"
+  />
+
+  <!-- The suggestions panel. Hidden until the trigger character is typed. -->
+  <div class="mentions-input-suggestions" hidden>
+    <!-- Consumer provides the suggestions (typically a listbox) -->
+  </div>
+</div>
+
+<script>
+  // MentionsInput behavior
+  // - Opens the suggestions panel when the user types the trigger character.
+  // - Closes the suggestions panel on Escape.
+  // - Keeps aria-expanded on the input synchronized with the panel's hidden state.
+  (function () {
+    "use strict";
+
+    var roots = document.querySelectorAll('div.mentions-input');
+
+    roots.forEach(function (root) {
+      var input = root.querySelector('input.mentions-input-control');
+      var panel = root.querySelector('div.mentions-input-suggestions');
+      if (!input || !panel) return;
+
+      // Trigger character is configurable via data-trigger-char (default "@").
+      var trigger = root.getAttribute('data-trigger-char') || '@';
+
+      function open() {
+        input.setAttribute('aria-expanded', 'true');
+        panel.removeAttribute('hidden');
+      }
+
+      function close() {
+        input.setAttribute('aria-expanded', 'false');
+        panel.setAttribute('hidden', '');
+      }
+
+      // Listen for input to detect the trigger character.
+      input.addEventListener('input', function () {
+        // If the most recent character typed is the trigger, open the panel.
+        // Consumers can override this logic by replacing the event handler.
+        if (input.value.indexOf(trigger) !== -1) {
+          open();
+        }
+      });
+
+      // Escape closes the panel.
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          close();
+        }
+      });
+    });
+  })();
+</script>

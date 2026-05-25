@@ -1,0 +1,41 @@
+<!-- collection-list-item.html -->
+<!-- CollectionListItem component -->
+<!--
+  Description: one item in a collection list with optional image, heading, meta, and description
+
+  HTML tag: <li>
+  CSS class: collection-list-item
+  Keyboard: None directly (inner <a> is focusable when href is provided)
+  Accessibility: Heading and link semantics are native. aria-label is optional and overrides the computed accessible name.
+
+  Usage:
+    <li class="collection-list-item">
+      <img class="collection-list-item-image" src="…" alt="…">
+      <h3 class="collection-list-item-heading">
+        <a href="/article/1">Article title</a>
+      </h3>
+      <p class="collection-list-item-meta">January 1, 2026</p>
+      <p class="collection-list-item-description">Short description.</p>
+    </li>
+-->
+
+<li
+  class="collection-list-item"
+  aria-label=""
+>
+  <!-- Optional image:
+       <img class="collection-list-item-image" src="" alt=""> -->
+
+  <h3 class="collection-list-item-heading">
+    <!-- When href is provided, wrap heading text in <a href="…"></a>;
+         otherwise plain text content is used. -->
+  </h3>
+
+  <!-- Optional meta line:
+       <p class="collection-list-item-meta"></p> -->
+
+  <!-- Optional description:
+       <p class="collection-list-item-description"></p> -->
+
+  <!-- Consumer may provide additional children below -->
+</li>

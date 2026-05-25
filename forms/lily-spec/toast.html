@@ -1,0 +1,31 @@
+<!-- toast.html -->
+<!-- Toast component -->
+<!--
+  Description: a brief auto-dismissing notification message
+  HTML tag: <div>
+  CSS class: toast
+  Keyboard: None (passive element)
+  Accessibility: role="status", aria-label for accessible name
+  Usage:
+    <div class="toast" role="status" aria-label="Example">
+      ...
+    </div>
+-->
+
+<div
+  class="toast"
+  role="status"
+  aria-label=""
+>
+  <!-- Consumer provides content -->
+</div>
+
+<script>
+  // Toast behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.toast').forEach(function(el) {
+      el.setAttribute('aria-live', 'polite');
+    });
+  })();
+</script>

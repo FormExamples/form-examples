@@ -1,0 +1,27 @@
+<!-- validation-list.html -->
+<!-- ValidationList component -->
+<!--
+  Description: a live-feedback list of input validation rules with pending, passed, and failed states
+
+  HTML tag: <ul>
+  CSS class: validation-list
+  Keyboard: None (passive list)
+  Accessibility:
+    - aria-label is required and typically describes the field being validated
+    - aria-live="polite" makes status changes on child items announced by screen readers
+
+  Usage:
+    <ul class="validation-list" aria-label="Password requirements" aria-live="polite">
+      <li class="validation-list-item" data-status="pending">At least 8 characters</li>
+      <li class="validation-list-item" data-status="passed">Contains a number</li>
+      <li class="validation-list-item" data-status="failed">Contains a symbol</li>
+    </ul>
+-->
+
+<ul
+  class="validation-list"
+  aria-label=""
+  aria-live="polite"
+>
+  <!-- Consumer provides <li class="validation-list-item"> children -->
+</ul>
