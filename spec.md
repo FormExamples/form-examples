@@ -130,8 +130,12 @@ divergence.
   `front-end-*-with-html/` directory. See
   [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md) for the
   contract (classes, ARIA, validation pattern, accessibility commitments).
-- **Tailwind CSS 4 + SVAR DataGrid (Willow)** is the styling for every
-  `front-end-*-with-svelte/` directory.
+- **Lily Design System Svelte headless** is the component contract for every
+  `front-end-*-with-svelte/` directory. Each form's `src/lib/components/ui/`
+  mirrors the Lily Svelte API and emits the same class vocabulary. See
+  [`forms/AGENTS-front-end-svelte.md`](forms/AGENTS-front-end-svelte.md).
+- **Tailwind CSS 4 + SVAR DataGrid (Willow)** is the styling layer that
+  attaches to the Lily class names in SvelteKit projects.
 - **LocalStorage autosave.** Drafts persist under the key
   `<slug>.front-end-form-with-html.v1` (HTML) or
   `<slug>.front-end-form-with-svelte.v1` (SvelteKit). The shape is the
@@ -171,13 +175,21 @@ declared classification.
 
 ## 8. Versioning and the Lily pin
 
-- The Lily Design System HTML headless contract is consumed as a *spec*,
-  not a runtime library. The pinned upstream commit hash lives in
+Lily Design System is consumed as a **spec** (contract), not a runtime
+library, in both HTML and Svelte flavours.
+
+- **Lily HTML headless.** Pinned upstream commit hash:
   [`forms/lily-version.md`](forms/lily-version.md). Component HTML
-  snapshots live in `forms/lily-spec/` and are refreshed via
-  `bin/lily-sync`.
-- `bin/lily-html-refactor --check --all` is the CI drift detector — it
-  exits non-zero if a hand-edit reintroduces an old class.
+  snapshots: `forms/lily-spec/` (refreshed via `bin/lily-sync`). CI
+  drift detector: `bin/lily-html-refactor --check --all`.
+- **Lily Svelte headless.** Pinned upstream commit hash:
+  [`forms/lily-svelte-version.md`](forms/lily-svelte-version.md).
+  Component source snapshots: `forms/lily-svelte-spec/` (refreshed via
+  `bin/lily-svelte-sync`). Drift detector: `bin/lily-svelte-sync --check`.
+
+Both libraries share one class vocabulary (`text-input`, `radio-group`,
+`button`, `field`, `fieldset`, `step-list`, …) so a single Tailwind/CSS
+stylesheet can serve both stacks.
 
 ## 9. Verification
 
@@ -185,8 +197,10 @@ System-level acceptance:
 
 ```sh
 bin/test                              # validates every form's structure
-bin/lily-html-refactor --check --all  # Lily contract drift
-bin/lily-sync --check                 # Lily spec-snapshot drift
+bin/lily-html-refactor --check --all  # Lily HTML contract drift
+bin/lily-sync --check                 # Lily HTML spec-snapshot drift
+bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift
+bin/generate-spec.py --check          # per-form spec.md drift
 ```
 
 Per-form acceptance:
@@ -223,8 +237,11 @@ cargo build && cargo test && cargo clippy  # Loco/Rust
 ## 11. Where to look next
 
 - Per-stack documentation: [`AGENTS/`](AGENTS/) (one `.md` per stack).
-- Lily Design System contract: [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md).
-- Lily upstream pin: [`forms/lily-version.md`](forms/lily-version.md).
+- Lily Design System HTML contract: [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md).
+- Lily Design System Svelte contract: [`forms/AGENTS-front-end-svelte.md`](forms/AGENTS-front-end-svelte.md).
+- Lily upstream pins:
+  [`forms/lily-version.md`](forms/lily-version.md) (HTML),
+  [`forms/lily-svelte-version.md`](forms/lily-svelte-version.md) (Svelte).
 - Per-form list: [`forms/AGENTS.md`](forms/AGENTS.md).
 - Cross-form Lily refactor plan + tasks: [`forms/plan.md`](forms/plan.md), [`forms/tasks.md`](forms/tasks.md).
 - Repo plan: [`plan.md`](plan.md). Repo tasks: [`tasks.md`](tasks.md).

@@ -409,6 +409,34 @@ commit per form with `git commit --only forms/<slug>/`.
 
 ---
 
+## Phase 5 — Lily Svelte conversion
+
+- [x] **5.1  Add `bin/lily-svelte-sync`** + snapshot the Lily Svelte
+  components into `forms/lily-svelte-spec/` (408 components, 1,628 files);
+  record the pinned upstream commit `68d8081a` in
+  `forms/lily-svelte-version.md`. `--check` mode added for CI drift.
+- [x] **5.2  Write `forms/AGENTS-front-end-svelte.md`** — Lily Svelte
+  contract doc with the component vocabulary, prop conventions, page
+  shell, validation pattern, and accessibility commitments.
+- [x] **5.3  Link the Svelte contract** from top-level `AGENTS.md`,
+  `index.md`, `spec.md`, `forms/AGENTS.md`, and the per-stack
+  `AGENTS/front-end-with-sveltekit-tailwind-svar.md`.
+- [ ] **5.4  Pilot-refactor a canonical Svelte form** (target:
+  `pre-operative-assessment-by-clinician/front-end-form-with-svelte/`).
+  Each of `src/lib/components/ui/*.svelte` rewritten to mirror the Lily
+  Svelte API; `+page.svelte`, store, and StepN components updated.
+- [ ] **5.5  Add `bin/lily-svelte-refactor`** (mechanical refactor tool).
+  Safe class / prop swaps with `--dry-run`, `--check`, `--scope`, `--all`
+  flags. Reports risky patterns for subagent attention.
+- [ ] **5.6  Batch-migrate the remaining ~132 forms.** Group by complexity
+  (privacy notices first, then surveys, single-grader, multi-grader,
+  emergency forms, UK statutory). Per-form `git commit --only forms/<slug>/`.
+- [ ] **5.7  Cleanup.** Remove legacy non-Lily Svelte components; align
+  Tailwind theme tokens to the shared Lily class names; ensure
+  `bin/lily-svelte-sync --check` and `pnpm check` are clean.
+
+---
+
 ## Cross-cutting / nice-to-have
 
 - [ ] **X.1  Storybook-style component browser for forms.** Optional:

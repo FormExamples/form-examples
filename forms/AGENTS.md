@@ -5,8 +5,12 @@ Cross-cutting docs:
 - [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md) — Lily Design
   System HTML headless conventions for every form's
   `front-end-form-with-html/` and `front-end-dashboard-with-html/`.
-- [`plan.md`](plan.md) / [`tasks.md`](tasks.md) — Lily HTML refactor plan
-  and tasks.
+- [`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md) — Lily Design
+  System Svelte headless conventions for every form's
+  `front-end-form-with-svelte/` and `front-end-dashboard-with-svelte/`.
+- [`lily-version.md`](lily-version.md) / [`lily-svelte-version.md`](lily-svelte-version.md) — pinned upstream Lily commit hashes.
+- [`lily-spec/`](lily-spec) / [`lily-svelte-spec/`](lily-svelte-spec) — snapshot directories.
+- [`plan.md`](plan.md) / [`tasks.md`](tasks.md) — Lily refactor plan and tasks.
 
 Subprojects:
 

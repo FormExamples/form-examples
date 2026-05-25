@@ -39,8 +39,16 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 
 ### Lily Design System (HTML front-ends)
 
-- `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily class swaps; `--check` is the CI drift detector
-- `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily component HTML specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
+- `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
+- `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily HTML component specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
+
+### Lily Design System (Svelte front-ends)
+
+- `bin/lily-svelte-sync [--check] [--lily-dir PATH]` — snapshot Lily Svelte component sources into `forms/lily-svelte-spec/` and record the pinned upstream commit in `forms/lily-svelte-version.md`
+
+### Specs
+
+- `bin/generate-spec.py [--check] [<slug>…]` — generate per-form `spec.md` (living domain spec) from each form's `index.md`
 
 ## Form index
 
@@ -103,6 +111,7 @@ multi-page forms.
 See the per-stack agent docs:
 
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
+- [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
 - [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
@@ -135,6 +144,8 @@ See the per-stack agent docs:
 
 ```sh
 bin/test                              # validates every form's structure
-bin/lily-html-refactor --check --all  # Lily contract drift detector
-bin/lily-sync --check                 # Lily spec-snapshot drift detector
+bin/lily-html-refactor --check --all  # Lily HTML contract drift detector
+bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
+bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
+bin/generate-spec.py --check          # Per-form spec.md drift detector
 ```

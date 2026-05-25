@@ -17,6 +17,7 @@ engine, and generates a clinical report with flagged issues.
 - Four front-end implementations per form (form + dashboard, each in HTML and SvelteKit).
 - One Rust full-stack implementation per form (axum + Loco + Tera + HTMX + Alpine.js).
 - Lily Design System HTML headless contract for every HTML front-end.
+- Lily Design System Svelte headless contract for every SvelteKit front-end.
 
 For the full list of form projects, see [`forms/AGENTS.md`](forms/AGENTS.md)
 or run `bin/forms-as-kebab-case`.
@@ -63,8 +64,11 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 ├── forms/                          # All form projects
 │   ├── AGENTS.md                       # Index of all forms
 │   ├── AGENTS-front-end-html.md        # Lily Design System HTML contract
-│   ├── lily-spec/                      # Pinned Lily component HTML snapshots
-│   ├── lily-version.md                 # Pinned Lily upstream commit hash
+│   ├── AGENTS-front-end-svelte.md      # Lily Design System Svelte contract
+│   ├── lily-spec/                      # Pinned Lily HTML component snapshots
+│   ├── lily-svelte-spec/               # Pinned Lily Svelte component snapshots
+│   ├── lily-version.md                 # Pinned Lily HTML upstream commit hash
+│   ├── lily-svelte-version.md          # Pinned Lily Svelte upstream commit hash
 │   ├── plan.md                         # Lily HTML refactor plan
 │   ├── tasks.md                        # Lily HTML refactor tasks
 │   └── <slug>/                         # One directory per form (see below)
@@ -132,6 +136,7 @@ forms/<slug>/
 See the per-stack agent docs:
 
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
+- [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
 - [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
@@ -156,8 +161,10 @@ See the per-stack agent docs:
 - `bin/protobuf/generate-protobuf-representations.py` — Protocol Buffers per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — OpenAPI 3.1 per SQL entity
 - `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` — Loco setup script per form
-- `bin/lily-html-refactor` — mechanical Lily class swaps; `--check` is the CI drift detector
-- `bin/lily-sync` — snapshot Lily component HTML specs and pin the upstream commit
+- `bin/lily-html-refactor` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
+- `bin/lily-sync` — snapshot Lily HTML component specs and pin the upstream commit
+- `bin/lily-svelte-sync` — snapshot Lily Svelte component sources and pin the upstream commit
+- `bin/generate-spec.py` — generate per-form `spec.md` from `index.md`
 
 ## Compliance
 
@@ -232,6 +239,8 @@ assets/i18n/de-DE/main.ftl
 
 ```sh
 bin/test                              # validate every form's structure
-bin/lily-html-refactor --check --all  # Lily contract drift
-bin/lily-sync --check                 # Lily spec-snapshot drift
+bin/lily-html-refactor --check --all  # Lily HTML contract drift
+bin/lily-sync --check                 # Lily HTML spec-snapshot drift
+bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift
+bin/generate-spec.py --check          # Per-form spec.md drift
 ```

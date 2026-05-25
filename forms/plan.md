@@ -200,7 +200,7 @@ Per batch:
 3. Run `bin/test` and `bin/test-form <slug>` per touched form.
 4. Commit.
 
-### Phase 4 — Cleanup
+### Phase 4 — Cleanup (HTML)
 
 - F4.1  Remove obsolete class names from per-form `style.css` files that
   are now superseded by the Lily-based base stylesheet template.
@@ -209,6 +209,38 @@ Per batch:
   conventions.
 - F4.3  Update top-level `AGENTS.md` and the per-stack docs to point at
   the Lily-based layout.
+
+### Phase 5 — Lily Svelte conversion (in progress)
+
+Mirror the Lily HTML refactor in the SvelteKit subprojects: rewrite every
+form's `src/lib/components/ui/*.svelte` to conform to the
+**Lily Design System Svelte headless** contract (same props as the
+upstream component of the same name; same emitted CSS class names; same
+ARIA + keyboard behaviour). Conventions live in
+[`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md).
+
+- F5.1  **[done]** Snapshot Lily Svelte components into
+  `forms/lily-svelte-spec/` (408 components, 1,628 files). Pin the
+  upstream commit in `forms/lily-svelte-version.md`. Tool:
+  `bin/lily-svelte-sync`.
+- F5.2  **[done]** Author the contract doc
+  ([`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md)) covering
+  the component vocabulary, prop conventions, page shell, validation
+  pattern, and accessibility commitments.
+- F5.3  **[done]** Link the contract from top-level `AGENTS.md`,
+  `index.md`, `spec.md`, `forms/AGENTS.md`, and the per-stack
+  `AGENTS/front-end-with-sveltekit-tailwind-svar.md`.
+- F5.4  Pilot-refactor a canonical Svelte form (target:
+  `pre-operative-assessment-by-clinician/front-end-form-with-svelte/`).
+  Lock the resulting layout as the template the batch refactor mirrors.
+- F5.5  Add `bin/lily-svelte-refactor` (analogous to
+  `bin/lily-html-refactor`) — mechanical Svelte prop / class swaps with
+  `--dry-run`, `--check`, `--scope`, `--all` flags.
+- F5.6  Batch migrate the remaining 132 forms via subagent waves,
+  committing per form with `git commit --only forms/<slug>/`.
+- F5.7  Cleanup: ensure no legacy `Badge.svelte`/`SectionCard.svelte`/etc.
+  with non-Lily class output remains; align Tailwind theme tokens to the
+  shared Lily class names.
 
 ## 8. Compatibility
 

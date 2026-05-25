@@ -1,10 +1,14 @@
-# Front-end with SvelteKit Tailwind SVAR
+# Front-end with SvelteKit Tailwind SVAR (Lily Svelte headless)
 
 SvelteKit single-page form and SVAR-based dashboard, styled with Tailwind
-CSS 4 and powered by a pure Svelte 5 reactive scoring engine. The contract
-each implementation must satisfy is documented in the per-form
-[`spec.md`](../forms/AGENTS.md); the system-wide UX rules live in
-[`../spec.md`](../spec.md) §5.
+CSS 4 and powered by a pure Svelte 5 reactive scoring engine. The
+**Lily Design System Svelte headless** library defines the component
+contract every form's `src/lib/components/ui/` must satisfy.
+
+The cross-stack UX rules live in [`../spec.md`](../spec.md) §5; the
+component contract lives in
+[`../forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md).
+The per-form domain spec is at `forms/<slug>/spec.md`.
 
 Slug: front-end-with-sveltekit-tailwind-svar
 
@@ -17,11 +21,12 @@ Slug: front-end-with-sveltekit-tailwind-svar
 | Component                                                 | Version | Purpose                                                         |
 | --------------------------------------------------------- | ------- | --------------------------------------------------------------- |
 | [SvelteKit](https://svelte.dev/docs/kit/introduction)     | 2.x     | Full-stack web framework                                        |
-| [Svelte](https://svelte.dev/)                             | 5.x     | UI reactivity with runes                                        |
+| [Svelte](https://svelte.dev/)                             | 5.x     | UI reactivity with runes (`$state`, `$derived`, `$props`, `$bindable`) |
 | [TypeScript](https://www.typescriptlang.org/)             | 5.x     | Type-safe development                                           |
 | [Tailwind CSS](https://tailwindcss.com/)                  | 4.x     | Utility-first styling with `@import 'tailwindcss'` and `@theme` |
-| [SVAR Svelte Core](https://svar.dev/svelte/core/)         | 2.x     | Base UI components and Willow theme                             |
-| [SVAR Svelte DataGrid](https://svar.dev/svelte/datagrid/) | 2.x     | Data table with sort and filter                                 |
+| [Lily Svelte headless](https://github.com/LilyDesignSystem/lily-design-system-svelte-headless) | pinned (see `forms/lily-svelte-version.md`) | Headless UI component contract (no CSS); shared class vocabulary with Lily HTML |
+| [SVAR Svelte Core](https://svar.dev/svelte/core/)         | 2.x     | Base UI components and Willow theme (dashboards only)           |
+| [SVAR Svelte DataGrid](https://svar.dev/svelte/datagrid/) | 2.x     | Data table with sort and filter (dashboards only)               |
 | [Vite](https://vite.dev/)                                 | 7.x     | Build tool and dev server                                       |
 | [pdfmake](https://pdfmake.github.io/docs/)                | 0.2.x   | Server-side PDF report generation                               |
 | [Vitest](https://vitest.dev/)                             | 3.x     | Unit testing for grading logic                                  |
@@ -46,46 +51,69 @@ Typical fields:
 - `.data` — complete questionnaire responses
 - `.result` — grading result (null until submitted)
 - `.currentStep` — current wizard step
+- `.errors` — validation errors keyed by field id
 - `.reset()` — clear all data
 
 Do not use Svelte 3/4 `writable` stores. Class-based runes stores are the
 convention across this monorepo.
 
+## Lily Svelte component contract
+
+Every `src/lib/components/ui/` component mirrors the Lily Svelte API:
+
+- Same prop signature (`label`, `value = $bindable()`, `required`, `disabled`, `...restProps`).
+- Same emitted CSS class names (`text-input`, `radio-group`, `button`, …).
+- Same accessibility behaviour (ARIA roles, keyboard handling).
+
+The full vocabulary is in
+[`../forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md)
+§3. Component source snapshots live in `forms/lily-svelte-spec/` and the
+pinned upstream commit is in `forms/lily-svelte-version.md`. Refresh via
+`bin/lily-svelte-sync`; drift detection via `bin/lily-svelte-sync --check`.
+
 ## Form pattern
 
-1. Single-page, step-by-step wizard using `StepNavigation` and `ProgressBar` components
-2. Pure scoring engine split into small files: `types.ts` → `*-rules.ts` → `*-grader.ts` → `flagged-issues.ts`
-3. Class-based reactive store (`assessment.svelte.ts`) owns all questionnaire state
-4. PDF report generation via SvelteKit server endpoint (`/report/pdf`) using `pdfmake`
-5. Vitest unit tests cover the grading engine end-to-end
+1. Single-page, step-by-step wizard using Lily `Progress`, `StepList`,
+   `StepListItem`, `Fieldset`, and `Field` components.
+2. Pure scoring engine split into small files: `types.ts` →
+   `*-rules.ts` → `*-grader.ts` → `flagged-issues.ts`.
+3. Class-based reactive store (`assessment.svelte.ts`) owns all
+   questionnaire state.
+4. Submit-time validation populates an `ErrorSummary` and per-field
+   `Field` error slot; `aria-invalid` is set on each erroneous input.
+5. PDF report generation via SvelteKit server endpoint (`/report/pdf`)
+   using `pdfmake`.
+6. Vitest unit tests cover the grading engine end-to-end.
 
 ## Dashboard pattern
 
-- `Willow` theme wrapper for consistent styling
-- `Grid` component with columns, sorting, and filtering
-- API access via `init` callback for programmatic control
-  - `api.exec('sort-rows', ...)` — sort rows programmatically
-  - `api.exec('filter-rows', ...)` — filter rows programmatically
-- Backend API client with in-memory sample data fallback when offline
-- Row list shows computed scores, severities, and safety flags
+- `DataTable` (Lily Svelte) for the row list; OR `Willow`-themed `Grid`
+  (SVAR DataGrid) for forms that need built-in sort/filter ergonomics.
+- Sortable columns, dropdown filters.
+- Backend API client with in-memory sample data fallback.
+- Row list shows computed scores, severities, and safety flags.
 
 ## UI components
 
-Reusable form components in `src/lib/components/ui/`:
+Reusable form components in `src/lib/components/ui/`, one Svelte file
+per Lily class:
 
-- `$bindable()` props for two-way data flow
-- Tailwind utility classes for styling
-- Proper `<label>` associations and accessible ARIA markup
-- Mobile-first responsive design
+- `$bindable()` props for two-way data flow.
+- Tailwind utility classes for styling (the headless Lily contract leaves
+  styling to the consumer).
+- Proper `<label>` associations and accessible ARIA markup.
+- Mobile-first responsive design.
 
 ## Conventions
 
-- Empty string `''` for unanswered text fields
-- `null` for unanswered numeric fields
-- camelCase property names in TypeScript
-- Step components named `StepNName.svelte` (1-indexed; no spaces, ampersands, or parentheses in filename)
-- UI components in `src/lib/components/ui/`
-- Pure scoring engine — no side effects, no network calls, no `$effect`
+- Empty string `''` for unanswered text and enum fields.
+- `null` for unanswered numeric, date, and time fields.
+- camelCase property names in TypeScript.
+- Step components named `StepNName.svelte` (1-indexed; no spaces,
+  ampersands, or parentheses in filename).
+- UI components in `src/lib/components/ui/`.
+- Pure scoring engine — no side effects, no network calls, no `$effect`.
+- LocalStorage persistence key: `<slug>.front-end-form-with-svelte.v1`.
 
 ## Commands
 
@@ -106,4 +134,6 @@ pnpm test                 # Run Vitest unit tests
 for d in forms/*/front-end-*-with-svelte; do
   (cd "$d" && pnpm check && pnpm test) || echo "FAIL: $d"
 done
+
+bin/lily-svelte-sync --check   # Lily Svelte spec-snapshot drift
 ```
