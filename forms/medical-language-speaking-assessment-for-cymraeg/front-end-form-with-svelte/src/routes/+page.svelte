@@ -1,16 +1,68 @@
 <script lang="ts">
-  const title = 'Medical Language Speaking Assessment For Cymraeg';
-  const role = 'patient questionnaire';
+  // Lily Svelte headless contract — local shape-equivalent components.
+  // Implementation pending; this is a Lily-shaped placeholder.
+  import Form from '$lib/components/ui/Form.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import Panel from '$lib/components/ui/Panel.svelte';
+  import Alert from '$lib/components/ui/Alert.svelte';
+
+  const title = 'Medical Language Speaking Assessment for Cymraeg';
+  const subtitle =
+    'NHS Wales clinical Welsh-language speaking assessment \u2014 examiner form (implementation pending).';
+
+  let candidateName = $state('');
+
+  function onSubmit() {
+    /* placeholder */
+  }
 </script>
 
 <svelte:head>
-  <title>{title} — {role}</title>
+  <title>{title}</title>
 </svelte:head>
 
-<main class="mx-auto max-w-3xl p-6">
-  <h1 class="text-2xl font-semibold mb-4">{title}</h1>
-  <p class="text-muted mb-2">This SvelteKit project is the <strong>{role}</strong> for the {title} form.</p>
-  <p class="mb-2">Scoring system, steps, and conventions: see the parent
-    <a class="text-primary underline" href="../../index.md">form specification</a>.</p>
-  <p class="mb-2">Implementation is pending. See <code>../plan.md</code> and <code>../tasks.md</code> at the form root.</p>
+<header class="page-header">
+  <div class="page-header-inner">
+    <h1>{title}</h1>
+    <p class="subtitle">{subtitle}</p>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <p>
+      Clinical Welsh-language (Cymraeg) speaking assessment for healthcare
+      professionals working with Welsh-speaking patients, aligned to the NHS
+      Wales "More Than Just Words" framework and mapped to CEFR levels.
+      Five-step examiner wizard.
+    </p>
+  </div>
+
+  <Alert type="info" role="status">
+    <p>
+      Implementation pending. See the parent <a href="../../index.md">form
+      specification</a>, <code>../plan.md</code>, and <code>../tasks.md</code>.
+    </p>
+  </Alert>
+
+  <Form label={title} onsubmit={onSubmit}>
+    <Fieldset legend="Manylion yr ymgeisydd / Candidate details (placeholder)">
+      <Field label="Enw'r ymgeisydd / Candidate name" inputId="candidateName">
+        <TextInput id="candidateName" label="Candidate name" bind:value={candidateName} />
+      </Field>
+    </Fieldset>
+
+    <div class="button-group">
+      <Button type="submit" data-variant="primary">Cyflwyno / Submit</Button>
+    </div>
+  </Form>
+
+  <Panel label="Adroddiad asesu / Assessment report">
+    <p class="empty-message">
+      Report rendering will be added when the engine and steps are implemented.
+    </p>
+  </Panel>
 </main>
