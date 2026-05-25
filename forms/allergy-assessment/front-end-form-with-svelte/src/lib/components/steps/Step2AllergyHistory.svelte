@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const h = assessment.data.allergyHistory;
 	const yesNo = [
@@ -12,18 +13,40 @@
 	];
 </script>
 
-<SectionCard title="Allergy History" description="Age of onset, known allergens, and family history">
-	<NumberInput label="Age of allergy onset" name="ageOfOnset" bind:value={h.ageOfOnset} unit="years" min={0} max={120} />
+<Fieldset legend="Allergy History">
+	<p class="hint">Age of onset, known allergens, and family history.</p>
 
-	<TextArea label="Known allergens (list all)" name="knownAllergens" bind:value={h.knownAllergens} placeholder="e.g. Penicillin, peanuts, pollen, dust mites..." />
+	<Field label="Age of allergy onset (years)" inputId="ageOfOnset">
+		<NumberInput id="ageOfOnset" label="Age of allergy onset" min={0} max={120} bind:value={h.ageOfOnset} />
+	</Field>
 
-	<RadioGroup label="Family history of atopy (asthma, eczema, hay fever)?" name="familyAtopy" options={yesNo} bind:value={h.familyHistoryOfAtopy} />
+	<Field label="Known allergens (list all)" inputId="knownAllergens">
+		<TextAreaInput id="knownAllergens" label="Known allergens" rows={3} bind:value={h.knownAllergens} />
+	</Field>
+
+	<Field label="Family history of atopy (asthma, eczema, hay fever)?">
+		<RadioGroup label="Family history of atopy">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="familyAtopy" value={opt.value} bind:group={h.familyHistoryOfAtopy} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.familyHistoryOfAtopy === 'yes'}
-		<TextArea label="Atopy details" name="familyAtopyDetails" bind:value={h.familyAtopyDetails} placeholder="Which family members and conditions?" />
+		<Field label="Atopy details" inputId="familyAtopyDetails">
+			<TextAreaInput id="familyAtopyDetails" label="Atopy details" rows={2} bind:value={h.familyAtopyDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Family history of allergy?" name="familyAllergy" options={yesNo} bind:value={h.familyHistoryOfAllergy} />
+	<Field label="Family history of allergy?">
+		<RadioGroup label="Family history of allergy">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="familyAllergy" value={opt.value} bind:group={h.familyHistoryOfAllergy} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.familyHistoryOfAllergy === 'yes'}
-		<TextArea label="Allergy details" name="familyAllergyDetails" bind:value={h.familyAllergyDetails} placeholder="Which family members and allergens?" />
+		<Field label="Allergy details" inputId="familyAllergyDetails">
+			<TextAreaInput id="familyAllergyDetails" label="Allergy details" rows={2} bind:value={h.familyAllergyDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

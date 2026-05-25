@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 
 	const m = assessment.data.currentManagement;
@@ -13,29 +14,69 @@
 	];
 </script>
 
-<SectionCard title="Current Management" description="Medications, immunotherapy, biologics, and avoidance strategies">
-	<RadioGroup label="Taking antihistamines?" name="antihistamines" options={yesNo} bind:value={m.antihistamines} />
+<Fieldset legend="Current Management">
+	<p class="hint">Medications, immunotherapy, biologics, and avoidance strategies.</p>
+
+	<Field label="Taking antihistamines?">
+		<RadioGroup label="Antihistamines">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="antihistamines" value={opt.value} bind:group={m.antihistamines} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.antihistamines === 'yes'}
-		<TextInput label="Antihistamine details" name="antihistamineDetails" bind:value={m.antihistamineDetails} placeholder="e.g. Cetirizine 10mg daily" />
+		<Field label="Antihistamine details" inputId="antihistamineDetails">
+			<TextInput id="antihistamineDetails" label="Antihistamine details" bind:value={m.antihistamineDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Using nasal steroids?" name="nasalSteroids" options={yesNo} bind:value={m.nasalSteroids} />
-	<RadioGroup label="Carry adrenaline auto-injector?" name="autoInjector" options={yesNo} bind:value={m.adrenalineAutoInjector} />
+	<Field label="Using nasal steroids?">
+		<RadioGroup label="Nasal steroids">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="nasalSteroids" value={opt.value} bind:group={m.nasalSteroids} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Receiving immunotherapy?" name="immunotherapy" options={yesNo} bind:value={m.immunotherapy} />
+	<Field label="Carry adrenaline auto-injector?">
+		<RadioGroup label="Auto-injector">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="autoInjectorMgmt" value={opt.value} bind:group={m.adrenalineAutoInjector} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Receiving immunotherapy?">
+		<RadioGroup label="Immunotherapy">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="immunotherapy" value={opt.value} bind:group={m.immunotherapy} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.immunotherapy === 'yes'}
-		<TextInput label="Immunotherapy details" name="immunotherapyDetails" bind:value={m.immunotherapyDetails} placeholder="e.g. Grass pollen SCIT, started 2024" />
+		<Field label="Immunotherapy details" inputId="immunotherapyDetails">
+			<TextInput id="immunotherapyDetails" label="Immunotherapy details" bind:value={m.immunotherapyDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="On biologic therapy?" name="biologics" options={yesNo} bind:value={m.biologics} />
+	<Field label="On biologic therapy?">
+		<RadioGroup label="Biologics">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="biologics" value={opt.value} bind:group={m.biologics} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.biologics === 'yes'}
-		<TextInput label="Biologic details" name="biologicDetails" bind:value={m.biologicDetails} placeholder="e.g. Omalizumab 300mg monthly" />
+		<Field label="Biologic details" inputId="biologicDetails">
+			<TextInput id="biologicDetails" label="Biologic details" bind:value={m.biologicDetails} />
+		</Field>
 	{/if}
 
-	<TextArea label="Allergen avoidance strategies" name="avoidance" bind:value={m.allergenAvoidanceStrategies} placeholder="Describe any allergen avoidance measures in place..." />
+	<Field label="Allergen avoidance strategies" inputId="avoidance">
+		<TextAreaInput id="avoidance" label="Allergen avoidance strategies" rows={3} bind:value={m.allergenAvoidanceStrategies} />
+	</Field>
 
-	<div class="mb-4">
-		<label class="mb-2 block text-sm font-medium text-gray-700">Other medications</label>
+	<Field label="Other medications">
 		<MedicationEntry bind:medications={m.otherMedications} />
-	</div>
-</SectionCard>
+	</Field>
+</Fieldset>

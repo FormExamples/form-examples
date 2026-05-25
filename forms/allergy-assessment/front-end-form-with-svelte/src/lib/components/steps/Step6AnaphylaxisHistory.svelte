@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const a = assessment.data.anaphylaxisHistory;
 	const yesNo = [
@@ -21,59 +20,103 @@
 	}
 </script>
 
-<SectionCard title="Anaphylaxis History" description="Previous anaphylaxis episodes, triggers, and emergency preparedness">
-	<RadioGroup label="Do you have a history of anaphylaxis?" name="hasAnaphylaxis" options={yesNo} bind:value={a.hasAnaphylaxisHistory} />
+<Fieldset legend="Anaphylaxis History">
+	<p class="hint">Previous anaphylaxis episodes, triggers, and emergency preparedness.</p>
+
+	<Field label="Do you have a history of anaphylaxis?">
+		<RadioGroup label="Do you have a history of anaphylaxis?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="hasAnaphylaxis" value={opt.value} bind:group={a.hasAnaphylaxisHistory} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if a.hasAnaphylaxisHistory === 'yes'}
-		<NumberInput label="Number of episodes" name="numEpisodes" bind:value={a.numberOfEpisodes} min={1} max={100} required />
+		<Field label="Number of episodes" required inputId="numEpisodes">
+			<NumberInput id="numEpisodes" label="Number of episodes" min={1} max={100} bind:value={a.numberOfEpisodes} required />
+		</Field>
 
-		<div class="mb-4">
-			<label class="mb-2 block text-sm font-medium text-gray-700">Episode details</label>
-			<div class="space-y-3">
-				{#each a.episodes as episode, i}
-					<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-						<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
+		<Field label="Episode details">
+			<div class="episode-list">
+				{#each a.episodes as episode, i (i)}
+					<div class="episode-row">
+						<div class="episode-fields">
 							<input
 								type="text"
+								class="text-input"
 								placeholder="Trigger"
+								aria-label="Trigger"
 								bind:value={episode.trigger}
-								class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 							/>
 							<input
 								type="text"
+								class="text-input"
 								placeholder="Symptoms"
+								aria-label="Symptoms"
 								bind:value={episode.symptoms}
-								class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 							/>
 							<input
 								type="text"
+								class="text-input"
 								placeholder="Treatment required"
+								aria-label="Treatment required"
 								bind:value={episode.treatmentRequired}
-								class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 							/>
 						</div>
 						<button
 							type="button"
+							class="button"
+							data-variant="danger"
 							onclick={() => removeEpisode(i)}
-							class="mt-1 text-red-500 hover:text-red-700"
 							aria-label="Remove episode"
-						>
-							&times;
-						</button>
+						>×</button>
 					</div>
 				{/each}
 
 				<button
 					type="button"
+					class="button"
 					onclick={addEpisode}
-					class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-				>
-					+ Add Episode
-				</button>
+				>+ Add Episode</button>
 			</div>
-		</div>
+		</Field>
 
-		<RadioGroup label="Has an adrenaline auto-injector been prescribed?" name="autoInjector" options={yesNo} bind:value={a.adrenalineAutoInjectorPrescribed} />
-		<RadioGroup label="Is an action plan in place?" name="actionPlan" options={yesNo} bind:value={a.actionPlanInPlace} />
+		<Field label="Has an adrenaline auto-injector been prescribed?">
+			<RadioGroup label="Adrenaline auto-injector prescribed">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="autoInjector" value={opt.value} bind:group={a.adrenalineAutoInjectorPrescribed} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+
+		<Field label="Is an action plan in place?">
+			<RadioGroup label="Action plan in place">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="actionPlan" value={opt.value} bind:group={a.actionPlanInPlace} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.episode-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.episode-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+	.episode-fields {
+		flex: 1;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.5rem;
+	}
+	@media (max-width: 640px) {
+		.episode-fields { grid-template-columns: 1fr; }
+	}
+</style>

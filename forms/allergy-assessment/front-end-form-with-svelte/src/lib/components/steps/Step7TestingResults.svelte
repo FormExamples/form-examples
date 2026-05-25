@@ -1,12 +1,28 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const t = assessment.data.testingResults;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
+	];
+
+	type TestKey =
+		| 'skinPrickTestsDone'
+		| 'specificIgEDone'
+		| 'componentResolvedDiagnosticsDone'
+		| 'challengeTestsDone'
+		| 'patchTestsDone';
+
+	const testRadios: { key: TestKey; label: string; name: string }[] = [
+		{ key: 'skinPrickTestsDone', label: 'Skin prick tests done?', name: 'skinPrick' },
+		{ key: 'specificIgEDone', label: 'Specific IgE levels done?', name: 'specificIgE' },
+		{ key: 'componentResolvedDiagnosticsDone', label: 'Component-resolved diagnostics done?', name: 'crd' },
+		{ key: 'challengeTestsDone', label: 'Challenge tests done?', name: 'challenge' },
+		{ key: 'patchTestsDone', label: 'Patch tests done?', name: 'patch' }
 	];
 
 	function addTestResult() {
@@ -18,56 +34,79 @@
 	}
 </script>
 
-<SectionCard title="Testing Results" description="Skin prick tests, IgE levels, challenge tests, and patch tests">
-	<RadioGroup label="Skin prick tests done?" name="skinPrick" options={yesNo} bind:value={t.skinPrickTestsDone} />
-	<RadioGroup label="Specific IgE levels done?" name="specificIgE" options={yesNo} bind:value={t.specificIgEDone} />
-	<RadioGroup label="Component-resolved diagnostics done?" name="crd" options={yesNo} bind:value={t.componentResolvedDiagnosticsDone} />
-	<RadioGroup label="Challenge tests done?" name="challenge" options={yesNo} bind:value={t.challengeTestsDone} />
-	<RadioGroup label="Patch tests done?" name="patch" options={yesNo} bind:value={t.patchTestsDone} />
+<Fieldset legend="Testing Results">
+	<p class="hint">Skin prick tests, IgE levels, challenge tests, and patch tests.</p>
 
-	<div class="mb-4">
-		<label class="mb-2 block text-sm font-medium text-gray-700">Test results</label>
-		<div class="space-y-3">
-			{#each t.testResults as result, i}
-				<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-					<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
+	{#each testRadios as r (r.key)}
+		<Field label={r.label}>
+			<RadioGroup label={r.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={r.name} value={opt.value} bind:group={t[r.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+
+	<Field label="Test results">
+		<div class="result-list">
+			{#each t.testResults as result, i (i)}
+				<div class="result-row">
+					<div class="result-fields">
 						<input
 							type="text"
+							class="text-input"
 							placeholder="Test type"
+							aria-label="Test type"
 							bind:value={result.testType}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 						/>
 						<input
 							type="text"
+							class="text-input"
 							placeholder="Allergen"
+							aria-label="Allergen"
 							bind:value={result.allergen}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 						/>
 						<input
 							type="text"
+							class="text-input"
 							placeholder="Result"
+							aria-label="Result"
 							bind:value={result.result}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 						/>
 					</div>
 					<button
 						type="button"
+						class="button"
+						data-variant="danger"
 						onclick={() => removeTestResult(i)}
-						class="mt-1 text-red-500 hover:text-red-700"
 						aria-label="Remove test result"
-					>
-						&times;
-					</button>
+					>×</button>
 				</div>
 			{/each}
 
-			<button
-				type="button"
-				onclick={addTestResult}
-				class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-			>
-				+ Add Test Result
-			</button>
+			<button type="button" class="button" onclick={addTestResult}>+ Add Test Result</button>
 		</div>
-	</div>
-</SectionCard>
+	</Field>
+</Fieldset>
+
+<style>
+	.result-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.result-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+	.result-fields {
+		flex: 1;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.5rem;
+	}
+	@media (max-width: 640px) {
+		.result-fields { grid-template-columns: 1fr; }
+	}
+</style>

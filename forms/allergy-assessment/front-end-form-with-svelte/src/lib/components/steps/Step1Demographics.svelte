@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
@@ -12,42 +14,93 @@
 		const bmi = calculateBMI(d.weight, d.height);
 		assessment.data.demographics.bmi = bmi;
 	});
+
+	const sexOptions = [
+		{ value: 'male', label: 'Male' },
+		{ value: 'female', label: 'Female' },
+		{ value: 'other', label: 'Other' }
+	];
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
+<Fieldset legend="Demographics">
+	<p class="hint">Basic patient information.</p>
+
+	<div class="field-grid">
+		<Field label="First Name" required inputId="firstName">
+			<TextInput id="firstName" label="First Name" required bind:value={d.firstName} />
+		</Field>
+		<Field label="Last Name" required inputId="lastName">
+			<TextInput id="lastName" label="Last Name" required bind:value={d.lastName} />
+		</Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={d.dateOfBirth} required />
-	<TextInput label="NHS Number" name="nhsNumber" bind:value={d.nhsNumber} placeholder="000 000 0000" />
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of Birth" required bind:value={d.dateOfBirth} />
+	</Field>
 
-	<RadioGroup
-		label="Sex"
-		name="sex"
-		options={[
-			{ value: 'male', label: 'Male' },
-			{ value: 'female', label: 'Female' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={d.sex}
-		required
-	/>
+	<Field label="NHS Number" inputId="nhsNumber" description="Format: 000 000 0000">
+		<TextInput id="nhsNumber" label="NHS Number" bind:value={d.nhsNumber} />
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-3">
-		<NumberInput label="Weight" name="weight" bind:value={d.weight} unit="kg" min={1} max={400} required />
-		<NumberInput label="Height" name="height" bind:value={d.height} unit="cm" min={50} max={250} required />
-		<div class="mb-4">
-			<span class="mb-1 block text-sm font-medium text-gray-700">BMI</span>
-			<div class="flex h-[38px] items-center rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm">
-				{#if d.bmi}
-					<span class="font-medium">{d.bmi}</span>
-					<span class="ml-2 text-gray-500">({bmiCategory(d.bmi)})</span>
-				{:else}
-					<span class="text-gray-400">Auto-calculated</span>
-				{/if}
-			</div>
-		</div>
+	<Field label="Sex" required>
+		<RadioGroup label="Sex">
+			{#each sexOptions as opt (opt.value)}
+				<label>
+					<input
+						type="radio"
+						class="radio-input"
+						name="sex"
+						value={opt.value}
+						bind:group={d.sex}
+						required
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<div class="field-grid field-grid-3">
+		<Field label="Weight (kg)" required inputId="weight">
+			<NumberInput id="weight" label="Weight" min={1} max={400} bind:value={d.weight} required />
+		</Field>
+		<Field label="Height (cm)" required inputId="height">
+			<NumberInput id="height" label="Height" min={50} max={250} bind:value={d.height} required />
+		</Field>
+		<Field label="BMI" description="Auto-calculated">
+			{#if d.bmi}
+				<p class="bmi-value">{d.bmi} <span class="bmi-cat">({bmiCategory(d.bmi)})</span></p>
+			{:else}
+				<p class="bmi-value bmi-empty">—</p>
+			{/if}
+		</Field>
 	</div>
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.field-grid.field-grid-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	@media (max-width: 640px) {
+		.field-grid,
+		.field-grid.field-grid-3 {
+			grid-template-columns: 1fr;
+		}
+	}
+	.bmi-value {
+		margin: 0;
+		font-weight: 500;
+	}
+	.bmi-cat {
+		color: var(--color-muted);
+		font-weight: 400;
+	}
+	.bmi-empty {
+		color: var(--color-muted);
+	}
+</style>
