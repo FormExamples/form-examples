@@ -1,46 +1,88 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const v = assessment.data.visitInformation;
 </script>
 
-<SectionCard title="Visit Information" description="Details about your recent healthcare visit">
-	<TextInput label="Visit Date" name="visitDate" type="date" bind:value={v.visitDate} required />
+<Fieldset legend="Visit Information">
+	<p class="hint">Details about your recent healthcare visit.</p>
 
-	<TextInput label="Department / Clinic" name="department" bind:value={v.department} placeholder="e.g. Primary Care, Cardiology" required />
+	<Field label="Visit Date" required inputId="visitDate">
+		<DateInput id="visitDate" label="Visit Date" required bind:value={v.visitDate} />
+	</Field>
 
-	<TextInput label="Provider Name" name="providerName" bind:value={v.providerName} placeholder="e.g. Dr. Smith" required />
+	<Field label="Department / Clinic" required inputId="department">
+		<TextInput
+			id="department"
+			label="Department / Clinic"
+			placeholder="e.g. Primary Care, Cardiology"
+			required
+			bind:value={v.department}
+		/>
+	</Field>
 
-	<SelectInput
-		label="Visit Type"
-		name="visitType"
-		options={[
-			{ value: 'routine-checkup', label: 'Routine Check-up' },
-			{ value: 'follow-up', label: 'Follow-up Visit' },
-			{ value: 'urgent-care', label: 'Urgent Care' },
-			{ value: 'specialist-referral', label: 'Specialist Referral' },
-			{ value: 'procedure', label: 'Procedure' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={v.visitType}
-		required
-	/>
+	<Field label="Provider Name" required inputId="providerName">
+		<TextInput
+			id="providerName"
+			label="Provider Name"
+			placeholder="e.g. Dr. Smith"
+			required
+			bind:value={v.providerName}
+		/>
+	</Field>
 
-	<TextArea label="Reason for Visit" name="reasonForVisit" bind:value={v.reasonForVisit} placeholder="Briefly describe the reason for your visit" />
+	<Field label="Visit Type" required inputId="visitType">
+		<Select id="visitType" label="Visit Type" required bind:value={v.visitType}>
+			<option value="">-- Select --</option>
+			<option value="routine-checkup">Routine Check-up</option>
+			<option value="follow-up">Follow-up Visit</option>
+			<option value="urgent-care">Urgent Care</option>
+			<option value="specialist-referral">Specialist Referral</option>
+			<option value="procedure">Procedure</option>
+			<option value="other">Other</option>
+		</Select>
+	</Field>
 
-	<RadioGroup
-		label="Was this your first visit to this provider?"
-		name="firstVisit"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={v.firstVisit}
-		required
-	/>
-</SectionCard>
+	<Field label="Reason for Visit" inputId="reasonForVisit">
+		<TextAreaInput
+			id="reasonForVisit"
+			label="Reason for Visit"
+			placeholder="Briefly describe the reason for your visit"
+			bind:value={v.reasonForVisit}
+		/>
+	</Field>
+
+	<Field label="Was this your first visit to this provider?" required>
+		<RadioGroup label="Was this your first visit to this provider?">
+			<label>
+				<input
+					type="radio"
+					class="radio-input"
+					name="firstVisit"
+					value="yes"
+					bind:group={v.firstVisit}
+					required
+				/>
+				Yes
+			</label>
+			<label>
+				<input
+					type="radio"
+					class="radio-input"
+					name="firstVisit"
+					value="no"
+					bind:group={v.firstVisit}
+					required
+				/>
+				No
+			</label>
+		</RadioGroup>
+	</Field>
+</Fieldset>

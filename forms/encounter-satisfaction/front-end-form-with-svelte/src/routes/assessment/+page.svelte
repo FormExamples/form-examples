@@ -4,6 +4,9 @@
 	import { calculateSatisfaction } from '$lib/engine/satisfaction-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2VisitInformation from '$lib/components/steps/Step2VisitInformation.svelte';
 	import Step3AccessScheduling from '$lib/components/steps/Step3AccessScheduling.svelte';
@@ -14,42 +17,39 @@
 	import Step8OverallSatisfaction from '$lib/components/steps/Step8OverallSatisfaction.svelte';
 
 	function submitSurvey() {
-			const { compositeScore, category, domainScores, answeredCount } = calculateSatisfaction(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data, compositeScore);
-			assessment.result = {
-				compositeScore,
-				category,
-				domainScores,
-				additionalFlags,
-				answeredCount,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { compositeScore, category, domainScores, answeredCount } = calculateSatisfaction(
+			assessment.data
+		);
+		const additionalFlags = detectAdditionalFlags(assessment.data, compositeScore);
+		assessment.result = {
+			compositeScore,
+			category,
+			domainScores,
+			additionalFlags,
+			answeredCount,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Encounter Satisfaction Survey" onsubmit={submitSurvey}>
+	<Step1Demographics />
+	<Step2VisitInformation />
+	<Step3AccessScheduling />
+	<Step4Communication />
+	<Step5StaffProfessionalism />
+	<Step6CareQuality />
+	<Step7Environment />
+	<Step8OverallSatisfaction />
 
-<Step2VisitInformation />
-
-<Step3AccessScheduling />
-
-<Step4Communication />
-
-<Step5StaffProfessionalism />
-
-<Step6CareQuality />
-
-<Step7Environment />
-
-<Step8OverallSatisfaction />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitSurvey}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

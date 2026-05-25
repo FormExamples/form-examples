@@ -1,30 +1,35 @@
 <script lang="ts">
-  // TextInput — Lily Svelte headless contract.
+  // Select — Lily Svelte headless contract.
   //
-  // Emits: <input class="text-input" type="text">.
-  // Mirrors forms/lily-svelte-spec/TextInput/TextInput.svelte.
+  // Emits: <select class="select">...</select>.
+  // Mirrors forms/lily-svelte-spec/Select/Select.svelte.
+  import type { Snippet } from 'svelte';
+
   let {
     class: className = '',
     label,
-    value = $bindable(''),
+    value = $bindable<string>(''),
     required = false,
     disabled = false,
+    children,
     ...restProps
   }: {
     label: string;
     value?: string;
     required?: boolean;
     disabled?: boolean;
+    children: Snippet;
     [key: string]: unknown;
   } = $props();
 </script>
 
-<input
-  class={`text-input ${className}`}
-  type="text"
+<select
+  class={`select ${className}`}
   aria-label={label}
   bind:value
   {required}
   {disabled}
   {...restProps}
-/>
+>
+  {@render children?.()}
+</select>

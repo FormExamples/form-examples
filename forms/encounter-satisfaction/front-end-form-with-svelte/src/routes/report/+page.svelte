@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { satisfactionScoreColor, calculateAge } from '$lib/engine/utils';
+	import { calculateAge } from '$lib/engine/utils';
+
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -43,11 +47,17 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+	function categoryAlertType(score: number): 'success' | 'warning' | 'error' {
+		if (score >= 3.5) return 'success';
+		if (score >= 2.5) return 'warning';
+		return 'error';
+	}
+
+	function flagAlertType(priority: string): 'info' | 'warning' | 'error' {
+		if (priority === 'high') return 'error';
+		if (priority === 'medium') return 'warning';
+		return 'info';
+	}
 </script>
 
 {#if result}
@@ -55,148 +65,146 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Satisfaction Report</h1>
-				<div class="flex gap-3">
+				<div class="button-group">
 					{#if pdfError}
 						<span class="text-sm text-red-600">{pdfError}</span>
 					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Survey
-					</button>
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Survey</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- Composite Score Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {satisfactionScoreColor(result.compositeScore)}">
-				<div class="text-3xl font-bold">{result.compositeScore.toFixed(1)}/5.0</div>
-				<div class="mt-1 text-lg">{result.category}</div>
-				<div class="mt-2 text-sm opacity-75">
-					{result.answeredCount} of 19 questions answered |
-					Generated {new Date(result.timestamp).toLocaleString()}
-				</div>
-			</div>
+			<Panel label="Satisfaction report" class="report-panel">
+				<Alert
+					type={categoryAlertType(result.compositeScore)}
+					heading={`${result.compositeScore.toFixed(1)}/5.0 — ${result.category}`}
+				>
+					<p>
+						{result.answeredCount} of 19 questions answered · Generated
+						{new Date(result.timestamp).toLocaleString()}
+					</p>
+				</Alert>
 
-			<!-- Flagged Issues -->
-			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
+				{#if result.additionalFlags.length > 0}
+					<h2>Flagged Issues</h2>
+					<ul class="flag-list">
+						{#each result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert type={flagAlertType(flag.priority)}>
+									<p>
+										<strong>[{flag.priority.toUpperCase()}]</strong>
+										{flag.category}: {flag.message}
+									</p>
+								</Alert>
+							</li>
 						{/each}
-					</div>
-				</div>
-			{/if}
+					</ul>
+				{/if}
 
-			<!-- Domain Breakdown -->
-			{#if result.domainScores.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Score Breakdown by Domain</h2>
-					<div class="space-y-4">
-						{#each result.domainScores as domain}
-							<div>
-								<div class="mb-1 flex items-center justify-between">
-									<span class="text-sm font-semibold text-gray-700">{domain.domain}</span>
-									<span class="text-sm font-bold {satisfactionScoreColor(domain.mean)} rounded px-2 py-0.5">
-										{domain.mean.toFixed(1)}/5.0
-									</span>
-								</div>
-								<div class="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-									<div
-										class="h-2 rounded-full bg-primary transition-all duration-300"
-										style="width: {(domain.mean / 5) * 100}%"
-									></div>
-								</div>
-								<table class="mt-2 w-full text-sm">
+				{#if result.domainScores.length > 0}
+					<h2>Score Breakdown by Domain</h2>
+					<div class="domain-stack">
+						{#each result.domainScores as domain (domain.domain)}
+							<section>
+								<h3>{domain.domain} — {domain.mean.toFixed(1)}/5.0</h3>
+								<progress
+									class="progress"
+									aria-label={`${domain.domain} score`}
+									max={5}
+									value={domain.mean}
+								></progress>
+								<table class="domain-table">
 									<tbody>
-										{#each domain.questions as q}
-											<tr class="border-b border-gray-50">
-												<td class="py-1 pr-4 font-mono text-xs text-gray-400">{q.id}</td>
-												<td class="py-1 pr-4 text-gray-600">{q.text}</td>
-												<td class="py-1 font-bold">{q.score}/5</td>
+										{#each domain.questions as q (q.id)}
+											<tr>
+												<td><code>{q.id}</code></td>
+												<td>{q.text}</td>
+												<td>{q.score}/5</td>
 											</tr>
 										{/each}
 									</tbody>
 								</table>
-							</div>
+							</section>
 						{/each}
 					</div>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Patient & Visit Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient & Visit Summary</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Name:</span>
-						{data.demographics.firstName} {data.demographics.lastName}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">DOB:</span>
+				<h2>Patient &amp; Visit Summary</h2>
+				<dl class="summary-grid">
+					<dt>Name</dt>
+					<dd>{data.demographics.firstName} {data.demographics.lastName}</dd>
+					<dt>DOB</dt>
+					<dd>
 						{data.demographics.dateOfBirth}
 						{#if calculateAge(data.demographics.dateOfBirth)}
 							(Age {calculateAge(data.demographics.dateOfBirth)})
 						{/if}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Sex:</span>
-						{data.demographics.sex}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Visit Date:</span>
-						{data.visitInformation.visitDate || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Department:</span>
-						{data.visitInformation.department || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Provider:</span>
-						{data.visitInformation.providerName || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Visit Type:</span>
-						{data.visitInformation.visitType || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">First Visit:</span>
-						{data.visitInformation.firstVisit || 'N/A'}
-					</div>
-				</div>
-			</div>
+					</dd>
+					<dt>Sex</dt>
+					<dd>{data.demographics.sex}</dd>
+					<dt>Visit Date</dt>
+					<dd>{data.visitInformation.visitDate || 'N/A'}</dd>
+					<dt>Department</dt>
+					<dd>{data.visitInformation.department || 'N/A'}</dd>
+					<dt>Provider</dt>
+					<dd>{data.visitInformation.providerName || 'N/A'}</dd>
+					<dt>Visit Type</dt>
+					<dd>{data.visitInformation.visitType || 'N/A'}</dd>
+					<dt>First Visit</dt>
+					<dd>{data.visitInformation.firstVisit || 'N/A'}</dd>
+				</dl>
 
-			<!-- Comments -->
-			{#if data.overallSatisfaction.comments}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Comments</h2>
-					<p class="text-sm text-gray-700 whitespace-pre-wrap">{data.overallSatisfaction.comments}</p>
-				</div>
-			{/if}
+				{#if data.overallSatisfaction.comments}
+					<h2>Patient Comments</h2>
+					<p class="comments">{data.overallSatisfaction.comments}</p>
+				{/if}
+			</Panel>
 		</main>
 	</div>
 {/if}
+
+<style>
+	.flag-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.domain-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.domain-table {
+		width: 100%;
+		font-size: 0.875rem;
+		border-collapse: collapse;
+		margin-top: 0.5rem;
+	}
+	.domain-table td {
+		padding: 0.25rem 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.summary-grid {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0;
+		font-size: 0.9375rem;
+	}
+	.summary-grid dt {
+		font-weight: 500;
+		color: var(--color-muted);
+	}
+	.summary-grid dd {
+		margin: 0;
+	}
+	.comments {
+		white-space: pre-wrap;
+	}
+</style>
