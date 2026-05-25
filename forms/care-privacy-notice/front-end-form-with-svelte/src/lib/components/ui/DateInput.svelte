@@ -1,18 +1,22 @@
 <script lang="ts">
-  // TextInput — Lily Svelte headless contract.
+  // DateInput — Lily Svelte headless contract.
   //
-  // Emits: <input class="text-input" type="text">.
-  // Mirrors forms/lily-svelte-spec/TextInput/TextInput.svelte.
+  // Emits: <input class="date-input" type="date">.
+  // Mirrors forms/lily-svelte-spec/DateInput/DateInput.svelte.
   let {
     class: className = '',
     label,
     value = $bindable(''),
+    min = undefined,
+    max = undefined,
     required = false,
     disabled = false,
     ...restProps
   }: {
     label: string;
     value?: string;
+    min?: string;
+    max?: string;
     required?: boolean;
     disabled?: boolean;
     [key: string]: unknown;
@@ -20,10 +24,12 @@
 </script>
 
 <input
-  class={`text-input ${className}`}
-  type="text"
+  class={`date-input ${className}`}
+  type="date"
   aria-label={label}
   bind:value
+  {min}
+  {max}
   {required}
   {disabled}
   {...restProps}

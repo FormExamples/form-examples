@@ -2,18 +2,17 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { validateForm } from '$lib/engine/form-validator';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { completenessColor } from '$lib/engine/utils';
+
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+
 	import Step1PracticeConfiguration from '$lib/components/steps/Step1PracticeConfiguration.svelte';
 	import Step2PrivacyNotice from '$lib/components/steps/Step2PrivacyNotice.svelte';
 	import Step3AcknowledgmentSignature from '$lib/components/steps/Step3AcknowledgmentSignature.svelte';
 
 	const submitted = $derived(assessment.result !== null);
-
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
 
 	function submitForm() {
 		const { completeness, status, firedRules } = validateForm(assessment.data);
@@ -32,10 +31,15 @@
 		assessment.reset();
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
+
+	function alertTypeFor(percent: number): 'success' | 'warning' | 'error' {
+		if (percent >= 100) return 'success';
+		if (percent >= 60) return 'warning';
+		return 'error';
+	}
 </script>
 
 <div class="min-h-screen bg-gray-50">
-	<!-- Header -->
 	<header class="border-b border-nhs-blue bg-nhs-blue shadow-sm no-print">
 		<div class="mx-auto max-w-2xl px-4 py-4">
 			<h1 class="text-xl font-bold text-white">Care Privacy Notice</h1>
@@ -47,149 +51,150 @@
 
 	<main class="mx-auto max-w-2xl px-4 py-8">
 		{#if submitted && assessment.result}
-			<!-- ─── REPORT VIEW ─────────────────────────────────────────── -->
-			<div class="mb-6 flex items-center justify-between">
-				<h2 class="text-2xl font-bold text-gray-900">Submission Summary</h2>
-				<div class="flex gap-3 no-print">
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						New Form
-					</button>
-				</div>
-			</div>
-
-			<!-- Completeness Banner -->
-			<div
-				class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(
-					assessment.result.completenessPercent
-				)}"
-			>
-				<div class="text-3xl font-bold">{assessment.result.completenessPercent}% Complete</div>
-				<div class="mt-1 text-lg">{assessment.result.status}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(assessment.result.timestamp).toLocaleString()}
-				</div>
-			</div>
-
-			<!-- Flagged Issues -->
-			{#if assessment.result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h3 class="mb-4 text-lg font-bold text-red-800">Flagged Issues</h3>
-					<div class="space-y-2">
-						{#each assessment.result.additionalFlags as flag}
-							<div
-								class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}"
-							>
-								<span
-									class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[
-										flag.priority
-									]}"
-								>
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
-						{/each}
+			<Panel label="Submission summary" class="report-panel">
+				<div class="report-header no-print">
+					<h2>Submission Summary</h2>
+					<div class="button-group">
+						<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+						<Button data-variant="primary" onclick={startNew}>New Form</Button>
 					</div>
 				</div>
-			{/if}
 
-			<!-- Missing Required Fields -->
-			{#if assessment.result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h3 class="mb-4 text-lg font-bold text-gray-900">Missing Required Fields</h3>
-					<table class="w-full text-sm">
+				<Alert
+					type={alertTypeFor(assessment.result.completenessPercent)}
+					heading={`${assessment.result.completenessPercent}% Complete — ${assessment.result.status}`}
+				>
+					<p>Generated {new Date(assessment.result.timestamp).toLocaleString()}</p>
+				</Alert>
+
+				{#if assessment.result.additionalFlags.length > 0}
+					<h3>Flagged Issues</h3>
+					<ul class="flag-list">
+						{#each assessment.result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert type={flag.priority === 'high' ? 'error' : flag.priority === 'medium' ? 'warning' : 'info'}>
+									<p>
+										<strong>[{flag.priority.toUpperCase()}]</strong>
+										{flag.category}: {flag.message}
+									</p>
+								</Alert>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+
+				{#if assessment.result.firedRules.length > 0}
+					<h3>Missing Required Fields</h3>
+					<table class="missing-table">
 						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Rule</th>
-								<th class="pb-2 pr-4">Section</th>
-								<th class="pb-2 pr-4">Issue</th>
-								<th class="pb-2">Field</th>
+							<tr>
+								<th>Rule</th>
+								<th>Section</th>
+								<th>Issue</th>
+								<th>Field</th>
 							</tr>
 						</thead>
 						<tbody>
-							{#each assessment.result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.section}</td>
-									<td class="py-2 pr-4">{rule.description}</td>
-									<td class="py-2 font-mono text-xs">{rule.field}</td>
+							{#each assessment.result.firedRules as rule (rule.id)}
+								<tr>
+									<td><code>{rule.id}</code></td>
+									<td>{rule.section}</td>
+									<td>{rule.description}</td>
+									<td><code>{rule.field}</code></td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Acknowledgment Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h3 class="mb-4 text-lg font-bold text-gray-900">Acknowledgment Summary</h3>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Acknowledged: </span>
-						<span
-							class="{assessment.data.acknowledgmentSignature.agreed
-								? 'font-bold text-green-700'
-								: 'font-bold text-red-700'}"
-						>
-							{assessment.data.acknowledgmentSignature.agreed ? 'Yes' : 'No'}
-						</span>
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Patient Name: </span>
-						{assessment.data.acknowledgmentSignature.patientTypedFullName || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Date: </span>
-						{assessment.data.acknowledgmentSignature.patientTypedDate || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Practice: </span>
-						{assessment.data.practiceConfiguration.practiceName || 'N/A'}
-					</div>
-				</div>
-			</div>
+				<h3>Acknowledgment Summary</h3>
+				<dl class="summary-grid">
+					<dt>Acknowledged</dt>
+					<dd
+						class={assessment.data.acknowledgmentSignature.agreed ? 'positive' : 'negative'}
+					>
+						{assessment.data.acknowledgmentSignature.agreed ? 'Yes' : 'No'}
+					</dd>
+					<dt>Patient Name</dt>
+					<dd>{assessment.data.acknowledgmentSignature.patientTypedFullName || 'N/A'}</dd>
+					<dt>Date</dt>
+					<dd>{assessment.data.acknowledgmentSignature.patientTypedDate || 'N/A'}</dd>
+					<dt>Practice</dt>
+					<dd>{assessment.data.practiceConfiguration.practiceName || 'N/A'}</dd>
+				</dl>
+			</Panel>
 		{:else}
-			<!-- ─── FORM VIEW — single continuous page ──────────────────── -->
-
-			<!-- Section 1: Practice Configuration -->
-			<div class="mb-8">
+			<Form label="Care Privacy Notice" onsubmit={submitForm}>
 				<Step1PracticeConfiguration />
-			</div>
-
-			<!-- Section 2: Privacy Notice -->
-			<div class="mb-8">
 				<Step2PrivacyNotice />
-			</div>
-
-			<!-- Section 3: Acknowledgment & Signature -->
-			<div class="mb-8">
 				<Step3AcknowledgmentSignature />
-			</div>
 
-			<!-- Submit Button -->
-			<div class="mx-auto max-w-2xl">
-				<button
-					onclick={submitForm}
-					class="w-full rounded-lg bg-primary px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-primary-dark"
-				>
-					Submit Privacy Notice Acknowledgment
-				</button>
-				<p class="mt-3 text-center text-xs text-gray-400">
+				<div class="button-group">
+					<Button type="submit" data-variant="primary">
+						Submit Privacy Notice Acknowledgment
+					</Button>
+				</div>
+				<p class="footer-note">
 					For clinical administration only. Based on BMA GDPR template for GP practices.
 				</p>
-			</div>
+			</Form>
 		{/if}
 	</main>
 </div>
+
+<style>
+	.report-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+	.report-header h2 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 0;
+	}
+	.report-header :global(.button-group) {
+		margin-top: 0;
+	}
+	.flag-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.missing-table {
+		width: 100%;
+		font-size: 0.875rem;
+		border-collapse: collapse;
+	}
+	.missing-table th,
+	.missing-table td {
+		text-align: left;
+		padding: 0.375rem 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.missing-table th { color: var(--color-muted); font-weight: 600; }
+	.summary-grid {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0;
+		font-size: 0.9375rem;
+	}
+	.summary-grid dt {
+		font-weight: 500;
+		color: var(--color-muted);
+	}
+	.summary-grid dd { margin: 0; }
+	.positive { color: var(--color-success); font-weight: 600; }
+	.negative { color: var(--color-danger); font-weight: 600; }
+	.footer-note {
+		text-align: center;
+		font-size: 0.75rem;
+		color: var(--color-muted);
+		margin-top: 0.75rem;
+	}
+</style>

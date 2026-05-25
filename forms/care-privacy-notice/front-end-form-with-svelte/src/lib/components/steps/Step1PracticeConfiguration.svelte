@@ -1,17 +1,71 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const pc = assessment.data.practiceConfiguration;
 </script>
 
-<SectionCard title="Practice Configuration" description="Enter the practice details that will appear in the privacy notice.">
-	<TextInput label="Practice Name" name="practiceName" bind:value={pc.practiceName} placeholder="e.g. Riverside Medical Practice" required />
-	<TextArea label="Practice Address" name="practiceAddress" bind:value={pc.practiceAddress} placeholder="e.g. 123 High Street, London, SW1A 1AA" required />
-	<TextInput label="Data Protection Officer Name" name="dpoName" bind:value={pc.dpoName} placeholder="e.g. Jane Smith" required />
-	<TextArea label="DPO Contact Details" name="dpoContactDetails" bind:value={pc.dpoContactDetails} placeholder="e.g. jane.smith@riverside.nhs.uk, 020 7123 4567" required />
-	<TextInput label="Research Organisations" name="researchOrganisations" bind:value={pc.researchOrganisations} placeholder="e.g. Clinical Practice Research Datalink, NHS England" />
-	<TextInput label="Data Sharing Partners" name="dataSharingPartners" bind:value={pc.dataSharingPartners} placeholder="e.g. NHS England, local hospitals" />
-</SectionCard>
+<Fieldset legend="Practice Configuration">
+	<p class="hint">Enter the practice details that will appear in the privacy notice.</p>
+
+	<Field label="Practice Name" required inputId="practiceName">
+		<TextInput
+			id="practiceName"
+			label="Practice Name"
+			placeholder="e.g. Riverside Medical Practice"
+			required
+			bind:value={pc.practiceName}
+		/>
+	</Field>
+
+	<Field label="Practice Address" required inputId="practiceAddress">
+		<TextAreaInput
+			id="practiceAddress"
+			label="Practice Address"
+			placeholder="e.g. 123 High Street, London, SW1A 1AA"
+			required
+			bind:value={pc.practiceAddress}
+		/>
+	</Field>
+
+	<Field label="Data Protection Officer Name" required inputId="dpoName">
+		<TextInput
+			id="dpoName"
+			label="Data Protection Officer Name"
+			placeholder="e.g. Jane Smith"
+			required
+			bind:value={pc.dpoName}
+		/>
+	</Field>
+
+	<Field label="DPO Contact Details" required inputId="dpoContactDetails">
+		<TextAreaInput
+			id="dpoContactDetails"
+			label="DPO Contact Details"
+			placeholder="e.g. jane.smith@riverside.nhs.uk, 020 7123 4567"
+			required
+			bind:value={pc.dpoContactDetails}
+		/>
+	</Field>
+
+	<Field label="Research Organisations" inputId="researchOrganisations">
+		<TextInput
+			id="researchOrganisations"
+			label="Research Organisations"
+			placeholder="e.g. Clinical Practice Research Datalink, NHS England"
+			bind:value={pc.researchOrganisations}
+		/>
+	</Field>
+
+	<Field label="Data Sharing Partners" inputId="dataSharingPartners">
+		<TextInput
+			id="dataSharingPartners"
+			label="Data Sharing Partners"
+			placeholder="e.g. NHS England, local hospitals"
+			bind:value={pc.dataSharingPartners}
+		/>
+	</Field>
+</Fieldset>

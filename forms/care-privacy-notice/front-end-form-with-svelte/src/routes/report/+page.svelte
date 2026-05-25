@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { completenessColor } from '$lib/engine/utils';
+
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -17,11 +20,11 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+	function alertTypeFor(percent: number): 'success' | 'warning' | 'error' {
+		if (percent >= 100) return 'success';
+		if (percent >= 60) return 'warning';
+		return 'error';
+	}
 </script>
 
 {#if result}
@@ -29,104 +32,130 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Privacy Notice Summary</h1>
-				<div class="flex gap-3">
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Form
-					</button>
+				<div class="button-group">
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Form</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- Completeness Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(result.completenessPercent)}">
-				<div class="text-3xl font-bold">{result.completenessPercent}% Complete</div>
-				<div class="mt-1 text-lg">{result.status}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(result.timestamp).toLocaleString()}
-				</div>
-			</div>
+			<Panel label="Privacy notice summary" class="report-panel">
+				<Alert
+					type={alertTypeFor(result.completenessPercent)}
+					heading={`${result.completenessPercent}% Complete — ${result.status}`}
+				>
+					<p>Generated {new Date(result.timestamp).toLocaleString()}</p>
+				</Alert>
 
-			<!-- Additional Flags -->
-			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
+				{#if result.additionalFlags.length > 0}
+					<h2>Flagged Issues</h2>
+					<ul class="flag-list">
+						{#each result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert
+									type={flag.priority === 'high'
+										? 'error'
+										: flag.priority === 'medium'
+											? 'warning'
+											: 'info'}
+								>
+									<p>
+										<strong>[{flag.priority.toUpperCase()}]</strong>
+										{flag.category}: {flag.message}
+									</p>
+								</Alert>
+							</li>
 						{/each}
-					</div>
-				</div>
-			{/if}
+					</ul>
+				{/if}
 
-			<!-- Missing Fields -->
-			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Missing Required Fields</h2>
-					<table class="w-full text-sm">
+				{#if result.firedRules.length > 0}
+					<h2>Missing Required Fields</h2>
+					<table class="missing-table">
 						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Rule</th>
-								<th class="pb-2 pr-4">Section</th>
-								<th class="pb-2 pr-4">Issue</th>
-								<th class="pb-2">Field</th>
+							<tr>
+								<th>Rule</th>
+								<th>Section</th>
+								<th>Issue</th>
+								<th>Field</th>
 							</tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.section}</td>
-									<td class="py-2 pr-4">{rule.description}</td>
-									<td class="py-2 font-mono text-xs">{rule.field}</td>
+							{#each result.firedRules as rule (rule.id)}
+								<tr>
+									<td><code>{rule.id}</code></td>
+									<td>{rule.section}</td>
+									<td>{rule.description}</td>
+									<td><code>{rule.field}</code></td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Acknowledgment Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Acknowledgment Summary</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Acknowledged:</span>
-						<span class="{data.acknowledgmentSignature.agreed ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}">
-							{data.acknowledgmentSignature.agreed ? 'Yes' : 'No'}
-						</span>
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Patient Name:</span>
-						{data.acknowledgmentSignature.patientTypedFullName || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Date:</span>
-						{data.acknowledgmentSignature.patientTypedDate || 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Practice:</span>
-						{data.practiceConfiguration.practiceName || 'N/A'}
-					</div>
-				</div>
-			</div>
+				<h2>Acknowledgment Summary</h2>
+				<dl class="summary-grid">
+					<dt>Acknowledged</dt>
+					<dd class={data.acknowledgmentSignature.agreed ? 'positive' : 'negative'}>
+						{data.acknowledgmentSignature.agreed ? 'Yes' : 'No'}
+					</dd>
+					<dt>Patient Name</dt>
+					<dd>{data.acknowledgmentSignature.patientTypedFullName || 'N/A'}</dd>
+					<dt>Date</dt>
+					<dd>{data.acknowledgmentSignature.patientTypedDate || 'N/A'}</dd>
+					<dt>Practice</dt>
+					<dd>{data.practiceConfiguration.practiceName || 'N/A'}</dd>
+				</dl>
+			</Panel>
 		</main>
 	</div>
 {/if}
+
+<style>
+	.flag-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.missing-table {
+		width: 100%;
+		font-size: 0.875rem;
+		border-collapse: collapse;
+	}
+	.missing-table th,
+	.missing-table td {
+		text-align: left;
+		padding: 0.375rem 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.missing-table th {
+		color: var(--color-muted);
+		font-weight: 600;
+	}
+	.summary-grid {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0;
+		font-size: 0.9375rem;
+	}
+	.summary-grid dt {
+		font-weight: 500;
+		color: var(--color-muted);
+	}
+	.summary-grid dd {
+		margin: 0;
+	}
+	.positive {
+		color: var(--color-success);
+		font-weight: 600;
+	}
+	.negative {
+		color: var(--color-danger);
+		font-weight: 600;
+	}
+</style>
