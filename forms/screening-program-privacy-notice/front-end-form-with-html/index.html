@@ -50,8 +50,8 @@
         }
         .gdpr-basis-consent, .gdpr-basis-research { display: none; }
         .gdpr-basis-consent.active, .gdpr-basis-research.active { display: list-item; }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label {
+        .field { margin-bottom: 1.25rem; }
+        .field .label, .field label {
             display: block;
             font-weight: 600;
             margin-bottom: 0.4rem;
@@ -86,7 +86,7 @@
             border-color: #005eb8;
             box-shadow: 0 0 0 3px rgba(0, 94, 184, 0.2);
         }
-        .btn-submit {
+        .button[data-variant="primary"] {
             width: 100%;
             padding: 0.85rem;
             background: #005eb8;
@@ -98,8 +98,8 @@
             cursor: pointer;
             transition: background 0.15s;
         }
-        .btn-submit:hover:not(:disabled) { background: #003d7a; }
-        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+        .button[data-variant="primary"]:hover:not(:disabled) { background: #003d7a; }
+        .button[data-variant="primary"]:disabled { opacity: 0.5; cursor: not-allowed; }
         .confirmation {
             text-align: center;
             padding: 2rem;
@@ -256,21 +256,21 @@
             <div class="card">
                 <h2>Acknowledgment</h2>
                 <form id="acknowledgment-form" novalidate>
-                    <div class="form-group">
+                    <div class="field">
                         <label class="checkbox-label">
                             <input type="checkbox" id="confirmed" data-field="confirmed">
                             <span>I confirm that I have read and understood this privacy notice about how my information is used for medical research, planning services, and checking the quality of care. <span style="color:#d4351c;">*</span></span>
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="field">
                         <label for="fullName" class="required">Full name</label>
                         <input type="text" id="fullName" data-field="fullName" placeholder="Enter your full name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="field">
                         <label for="acknowledgedDate" class="required">Date</label>
                         <input type="date" id="acknowledgedDate" data-field="acknowledgedDate" required>
                     </div>
-                    <button type="submit" class="btn-submit" id="submitBtn" disabled>Submit Acknowledgment</button>
+                    <button type="submit" class="button" data-variant="primary" id="submitBtn" disabled>Submit Acknowledgment</button>
                 </form>
             </div>
         </div>
