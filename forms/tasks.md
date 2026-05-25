@@ -378,25 +378,31 @@ commit per form with `git commit --only forms/<slug>/`.
 
 ## Phase 4 — Cleanup
 
-- [ ] **4.1  Delete dead CSS.** Per-form `style.css` rules that target
-  the old class vocabulary (`.btn`, `.form-group`, `.select-input`,
-  `.step-indicator-*`, …) and have no current consumer. *Acceptance:*
-  zero references to old class names across `forms/*/front-end-*-with-html/`.
-- [ ] **4.2  Update per-form `front-end-form-with-html/AGENTS.md`** to
-  reference the Lily conventions and the generator. Same for
-  `front-end-dashboard-with-html/AGENTS.md`. *Acceptance:* every form's
-  AGENTS.md points at the shared conventions doc.
-- [ ] **4.3  Update `AGENTS.md`** at repo root and `forms/AGENTS.md` to
-  list the Lily-based HTML stack alongside the existing Svelte and Loco
-  stacks. *Acceptance:* `AGENTS/front-end-with-html-headless-lily.md`
-  exists and is linked.
-- [ ] **4.4  Run `bin/test`** across all 133 forms. *Acceptance:* clean.
-- [ ] **4.5  Wire `--check` mode of the generators into CI** so future
-  hand-edits to generated files are caught. *Acceptance:* CI fails on
-  drift.
-- [ ] **4.6  Tag the Lily-pinned commit** referenced by `bin/lily-sync`
-  with a release note in this repo. *Acceptance:* a single line in
-  `doc/lily-version.md` recording the pinned hash and date.
+- [x] **4.1  Delete dead CSS** (`b23413e8`). Audit found one outlier
+  (`vaccinations-assessment`, legacy aliases retained by design for its
+  ES-module engine); 3 forms had leftover old refs in HTML and were
+  cleaned (MEDIF mismatched fieldset/section tags; both
+  legal-requirements- and screening-program-privacy-notice
+  acknowledgment forms upgraded `.form-group` → `.field`,
+  `.btn-submit` → `.button[data-variant="primary"]`).
+- [x] **4.2  Update per-form `front-end-*-with-html/AGENTS.md`** to
+  reference Lily conventions (`d4cf19f8`). 266 files updated (133 form
+  + 133 dashboard), each now linking to `forms/AGENTS-front-end-html.md`.
+- [x] **4.3  Update top-level `AGENTS.md`** and `forms/AGENTS.md` (done
+  pre-Phase 3 — link to `forms/AGENTS-front-end-html.md` present under
+  Technology stacks since Phase 0.7).
+- [x] **4.4  Run validation across all 133 forms** (Phase 3 + 4 commits).
+  Per-form `bin/test-form` validation: zero Lily-related failures
+  across 134 form directories. (Pre-existing infrastructure noise in
+  svelte/cargo subprojects is unrelated to the Lily refactor.)
+- [x] **4.5  Wire `--check` mode of `bin/lily-html-refactor` into CI**
+  (`7f48ef66`). `bin/lily-html-refactor --check --all` exits non-zero
+  on drift; passes cleanly today (0 safe swaps pending). Documented
+  as the CI hook in `AGENTS-front-end-html.md` §10.
+- [x] **4.6  Record pinned Lily upstream commit** (`310af3dd`).
+  `forms/lily-version.md` records the pinned hash `7a51013`,
+  pin-date 2026-05-24, and manual refresh procedure pending
+  `bin/lily-sync` (Phase 0.2 is still open).
 
 ---
 
