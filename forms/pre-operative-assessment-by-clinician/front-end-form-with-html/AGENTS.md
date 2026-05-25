@@ -46,3 +46,11 @@ canonical TypeScript source. The composite-risk algorithm is the same.
 - Report region uses `role="region"` and `aria-live="polite"`.
 - Skip link at top of page.
 - WCAG 2.2 AA colour contrast.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

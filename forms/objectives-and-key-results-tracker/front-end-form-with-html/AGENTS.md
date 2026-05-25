@@ -22,3 +22,11 @@ Static single-page wizard. No bundler, no framework. Plain HTML + CSS + ES2022 m
 - [`../AGENTS.md`](../AGENTS.md)
 - [Design spec](../../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
 - [HTML-form plan](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-2-html-form.md)
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

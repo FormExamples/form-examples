@@ -28,3 +28,11 @@ score preview script still need to be authored.
 - The score preview on step 6 is a JavaScript port of
   `gradeScorecard()` from
   `../front-end-form-with-svelte/src/lib/engine/score-grader.ts`.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

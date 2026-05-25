@@ -58,3 +58,11 @@ Autosave fires on any state change via Alpine's `$watch('state', ...)`.
 - Labels paired with every input.
 - Sticky validation summary uses live updates (no `aria-live` because the
   panel is always visible).
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

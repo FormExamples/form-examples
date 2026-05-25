@@ -50,3 +50,11 @@ canonical TypeScript source.
 Open `index.html` in any modern browser. Complete the form, click "Submit
 and view report", and verify the rendered fit note matches the data
 entered.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

@@ -36,3 +36,11 @@ identifiers. The two implementations are kept in sync.
 
 WCAG 2.2 AA target. Tested with NVDA and VoiceOver. Keyboard-only
 navigation of every step. ARIA-live announcements on validity changes.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

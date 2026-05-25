@@ -17,3 +17,10 @@ A plain HTML dashboard displaying care privacy notice acknowledgment data in a s
 ## Usage
 
 Open index.html directly in a browser. No build step or server required.
+
+## Lily Design System HTML headless
+
+This dashboard conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) §3
+(`.data-table-*` family) for the shared vocabulary, filter shape
+(`.text-input`, `.select`), and `.alert[data-type]` status messages.

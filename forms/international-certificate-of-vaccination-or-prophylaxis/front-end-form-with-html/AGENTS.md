@@ -30,3 +30,11 @@ dependencies (CDN scripts are permitted only for fonts).
 - Server submission. The form is local-only.
 - PDF export. Use the browser's "Print to PDF" feature on the Step 8
   preview.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.

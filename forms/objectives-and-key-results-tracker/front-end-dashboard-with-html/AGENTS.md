@@ -26,3 +26,10 @@ sample fetch with a backend call.
 - [`../AGENTS.md`](../AGENTS.md)
 - [Design spec](../../../docs/superpowers/specs/2026-05-08-objectives-and-key-results-tracker-design.md)
 - [HTML-dashboard plan](../../../docs/superpowers/plans/2026-05-10-okr-tracker-plan-4-html-dashboard.md)
+
+## Lily Design System HTML headless
+
+This dashboard conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) §3
+(`.data-table-*` family) for the shared vocabulary, filter shape
+(`.text-input`, `.select`), and `.alert[data-type]` status messages.

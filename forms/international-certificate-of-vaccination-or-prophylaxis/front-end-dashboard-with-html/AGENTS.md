@@ -23,3 +23,10 @@ ICVP review dashboard. No build step. No external runtime dependencies.
 - Disease, status, and centre dropdowns plus a free-text search box.
 - Row click opens the detail panel showing the entries for that
   certificate.
+
+## Lily Design System HTML headless
+
+This dashboard conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) §3
+(`.data-table-*` family) for the shared vocabulary, filter shape
+(`.text-input`, `.select`), and `.alert[data-type]` status messages.

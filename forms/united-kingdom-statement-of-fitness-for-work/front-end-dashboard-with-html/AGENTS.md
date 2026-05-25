@@ -62,3 +62,10 @@ CDN, no build step.
 
 Open `index.html` in any modern browser. Use the filter dropdowns and click
 column headers to confirm sorting works.
+
+## Lily Design System HTML headless
+
+This dashboard conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) §3
+(`.data-table-*` family) for the shared vocabulary, filter shape
+(`.text-input`, `.select`), and `.alert[data-type]` status messages.

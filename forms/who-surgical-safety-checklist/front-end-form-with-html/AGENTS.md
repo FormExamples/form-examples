@@ -74,3 +74,11 @@ bin/test-form who-surgical-safety-checklist
 
 Open `index.html` in a browser to smoke-test by hand. All work happens
 client-side; there is no dev server.
+
+## Lily Design System HTML headless
+
+This form conforms to the Lily Design System HTML headless class contract.
+See [`../../AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md) for
+the shared vocabulary (`.field`, `.fieldset`, `.text-input`, `.step-list`,
+`.error-summary`, `.button[data-variant]`, etc.), the page-shell template,
+validation pattern, and accessibility commitments.
