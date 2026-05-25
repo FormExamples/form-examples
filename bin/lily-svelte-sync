@@ -1,0 +1,247 @@
+#!/usr/bin/env python3
+"""bin/lily-svelte-sync — Snapshot Lily Svelte headless component specs into this repo.
+
+Walks the Lily Svelte checkout at
+~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-headless/components/
+and copies each component's source files into forms/lily-svelte-spec/, then
+records the pinned upstream commit hash and today's date in
+forms/lily-svelte-version.md.
+
+Lily Svelte is consumed as a *contract* at authoring time. There is no
+runtime dependency on the upstream package — each form's local
+`src/lib/components/ui/` mirrors the Lily API. See
+forms/AGENTS-front-end-svelte.md §2 for context.
+
+Per component, the following files are snapshotted:
+
+  <Name>.svelte
+  <Name>.stories.svelte   (if present)
+  <Name>.test.ts          (if present)
+  index.md                (if present, copied as <Name>.md)
+
+Usage:
+  bin/lily-svelte-sync                 # snapshot from default checkout
+  bin/lily-svelte-sync --lily-dir PATH # alternate checkout
+  bin/lily-svelte-sync --check         # verify snapshot matches upstream (no writes)
+
+Idempotent: re-running with no upstream change is a no-op.
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import filecmp
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SPEC_DIR = REPO_ROOT / "forms" / "lily-svelte-spec"
+VERSION_FILE = REPO_ROOT / "forms" / "lily-svelte-version.md"
+
+DEFAULT_LILY_DIR = Path.home() / "git" / "lilydesignsystem" / "lily-design-system" / "lily-design-system-svelte-headless"
+
+SNAPSHOT_BASENAMES = (".svelte", ".stories.svelte", ".test.ts")
+
+
+def lily_commit_hash(lily_dir: Path) -> str:
+    parent_with_git = lily_dir
+    while parent_with_git != parent_with_git.parent:
+        if (parent_with_git / ".git").exists():
+            break
+        parent_with_git = parent_with_git.parent
+    return subprocess.check_output(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=parent_with_git,
+        text=True,
+    ).strip()
+
+
+def collect_component_dirs(lily_dir: Path) -> list[Path]:
+    components = lily_dir / "components"
+    if not components.is_dir():
+        sys.exit(f"Lily Svelte components dir not found: {components}")
+    return sorted(p for p in components.iterdir() if p.is_dir())
+
+
+def sync_components(lily_dir: Path, check: bool) -> tuple[int, int, int, int]:
+    """Copy each component's snapshot files into SPEC_DIR/<Name>/.
+
+    Returns (added, updated, unchanged, removed) counts.
+    """
+    component_dirs = collect_component_dirs(lily_dir)
+    if not check:
+        SPEC_DIR.mkdir(parents=True, exist_ok=True)
+
+    added = updated = unchanged = 0
+    upstream_names: set[str] = set()
+
+    for src_dir in component_dirs:
+        name = src_dir.name
+        upstream_names.add(name)
+        dst_dir = SPEC_DIR / name
+        if not check:
+            dst_dir.mkdir(parents=True, exist_ok=True)
+        for src in src_dir.iterdir():
+            if src.is_dir():
+                continue
+            if src.name.endswith(SNAPSHOT_BASENAMES) or src.name == "index.md":
+                dst = dst_dir / src.name
+                if not dst.exists():
+                    if not check:
+                        shutil.copyfile(src, dst)
+                    added += 1
+                elif not filecmp.cmp(src, dst, shallow=False):
+                    if not check:
+                        shutil.copyfile(src, dst)
+                    updated += 1
+                else:
+                    unchanged += 1
+
+    removed = 0
+    if SPEC_DIR.is_dir():
+        for local_dir in SPEC_DIR.iterdir():
+            if local_dir.is_dir() and local_dir.name not in upstream_names:
+                if not check:
+                    shutil.rmtree(local_dir)
+                removed += 1
+
+    return added, updated, unchanged, removed
+
+
+VERSION_TEMPLATE = """# Lily Svelte Headless — pinned version
+
+This monorepo's `front-end-*-with-svelte/` subprojects conform to the
+**Lily Design System Svelte headless** component contract. Lily Svelte is
+consumed as a *specification* at authoring time — there is no runtime
+dependency on the upstream package. See
+[`AGENTS-front-end-svelte.md`](AGENTS-front-end-svelte.md) §2 for the
+consumption model.
+
+## Pinned upstream commit
+
+| Field            | Value                                                                  |
+|------------------|------------------------------------------------------------------------|
+| Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-headless`) |
+| Pinned commit    | `{hash}`{hash_pad}|
+| Date pinned      | {date}{date_pad}|
+| Snapshot         | [`lily-svelte-spec/`](lily-svelte-spec/) — one subdirectory per component |
+
+This pin is the contract our forms build against. Newer Lily Svelte commits
+may introduce breaking API changes; verify with `bin/lily-svelte-sync --check`
+and the per-form Svelte tests before bumping the pin.
+
+## How to refresh
+
+1. Update your local Lily checkout:
+   `git -C ~/git/lilydesignsystem/lily-design-system fetch && git -C ~/git/lilydesignsystem/lily-design-system checkout <new-hash>`
+2. Run `bin/lily-svelte-sync` to copy the new component sources into
+   `forms/lily-svelte-spec/` and update the *Pinned commit* / *Date pinned*
+   rows of this file.
+3. Spot-check a few `front-end-form-with-svelte/` subprojects with
+   `pnpm install && pnpm check && pnpm test`.
+4. Commit with a message referencing the new upstream hash.
+"""
+
+
+def update_version_file(commit_hash: str) -> bool:
+    today = datetime.date.today().isoformat()
+
+    def pad(value: str, total: int = 72) -> str:
+        return " " * max(0, total - len(value))
+
+    if not VERSION_FILE.is_file():
+        VERSION_FILE.write_text(
+            VERSION_TEMPLATE.format(
+                hash=commit_hash,
+                hash_pad=pad(commit_hash + 2 * "`"),
+                date=today,
+                date_pad=pad(today),
+            )
+        )
+        return True
+
+    original = VERSION_FILE.read_text()
+    lines = original.splitlines(keepends=True)
+    out = []
+    changed = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("| Pinned commit"):
+            new = f"| Pinned commit    | `{commit_hash}`{pad('`'+commit_hash+'`')}|\n"
+            if new != line:
+                changed = True
+            out.append(new)
+        elif stripped.startswith("| Date pinned"):
+            new = f"| Date pinned      | {today}{pad(today)}|\n"
+            if new != line:
+                changed = True
+            out.append(new)
+        else:
+            out.append(line)
+    if changed:
+        VERSION_FILE.write_text("".join(out))
+    return changed
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--lily-dir",
+        type=Path,
+        default=DEFAULT_LILY_DIR,
+        help=f"Path to lily-design-system-svelte-headless checkout (default: {DEFAULT_LILY_DIR})",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Verify snapshot matches upstream without writing (exit non-zero on drift)",
+    )
+    args = parser.parse_args()
+
+    lily_dir = args.lily_dir.expanduser().resolve()
+    if not lily_dir.is_dir():
+        sys.exit(f"Lily Svelte checkout not found: {lily_dir}")
+
+    commit_hash = lily_commit_hash(lily_dir)
+    added, updated, unchanged, removed = sync_components(lily_dir, check=args.check)
+    drift = added + updated + removed
+
+    print(f"lily-svelte-sync [{'CHECK' if args.check else 'WRITE'}] — upstream {commit_hash}")
+    print(f"  added:     {added}")
+    print(f"  updated:   {updated}")
+    print(f"  removed:   {removed}")
+    print(f"  unchanged: {unchanged}")
+
+    if args.check:
+        if drift:
+            print(
+                f"FAIL: {drift} file(s) drift between upstream and snapshot.",
+                file=sys.stderr,
+            )
+            return 1
+        if VERSION_FILE.is_file():
+            version_text = VERSION_FILE.read_text()
+            if f"`{commit_hash}`" not in version_text:
+                print(
+                    f"FAIL: forms/lily-svelte-version.md does not pin `{commit_hash}`.",
+                    file=sys.stderr,
+                )
+                return 1
+        return 0
+
+    version_changed = update_version_file(commit_hash)
+    if version_changed:
+        print(f"  forms/lily-svelte-version.md: pinned hash updated to {commit_hash}")
+    else:
+        print("  forms/lily-svelte-version.md: no change")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
