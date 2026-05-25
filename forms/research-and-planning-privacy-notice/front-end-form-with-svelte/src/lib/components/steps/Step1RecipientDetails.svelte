@@ -1,14 +1,50 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import DateInput from '$lib/components/ui/DateInput.svelte';
 
-	const rd = assessment.data.recipientDetails;
+  const rd = assessment.data.recipientDetails;
 </script>
 
-<SectionCard title="Recipient Details" description="Enter the details of the patient acknowledging the research and planning privacy notice.">
-	<TextInput label="Organisation Name" name="organisationName" bind:value={rd.organisationName} placeholder="e.g. Riverside Medical Practice" required />
-	<TextInput label="Recipient Name" name="recipientName" bind:value={rd.recipientName} placeholder="e.g. Mrs Jane Smith" required />
-	<TextInput label="NHS Number (optional)" name="recipientNhsNumber" bind:value={rd.recipientNhsNumber} placeholder="e.g. 943 476 5919" />
-	<TextInput label="Date of Birth (optional)" name="recipientDob" bind:value={rd.recipientDob} type="date" />
-</SectionCard>
+<Fieldset legend="Step 1 — Recipient Details">
+  <p class="hint">
+    Enter the details of the patient acknowledging the research and planning
+    privacy notice.
+  </p>
+
+  <Field label="Organisation Name" inputId="rd-organisationName" required>
+    <TextInput
+      id="rd-organisationName"
+      label="Organisation Name"
+      placeholder="e.g. Riverside Medical Practice"
+      bind:value={rd.organisationName}
+      required
+    />
+  </Field>
+  <Field label="Recipient Name" inputId="rd-recipientName" required>
+    <TextInput
+      id="rd-recipientName"
+      label="Recipient Name"
+      placeholder="e.g. Mrs Jane Smith"
+      bind:value={rd.recipientName}
+      required
+    />
+  </Field>
+  <Field label="NHS Number (optional)" inputId="rd-recipientNhsNumber">
+    <TextInput
+      id="rd-recipientNhsNumber"
+      label="NHS Number"
+      placeholder="e.g. 943 476 5919"
+      bind:value={rd.recipientNhsNumber}
+    />
+  </Field>
+  <Field label="Date of Birth (optional)" inputId="rd-recipientDob">
+    <DateInput
+      id="rd-recipientDob"
+      label="Date of Birth"
+      bind:value={rd.recipientDob}
+    />
+  </Field>
+</Fieldset>
