@@ -3,6 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateASRS } from '$lib/engine/asrs-grader';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ASRSPartA from '$lib/components/steps/Step2ASRSPartA.svelte';
 	import Step3ASRSPartB from '$lib/components/steps/Step3ASRSPartB.svelte';
@@ -15,38 +18,31 @@
 	import Step10SocialSupport from '$lib/components/steps/Step10SocialSupport.svelte';
 
 	function submitAssessment() {
-			const result = calculateASRS(assessment.data);
-			assessment.result = result;
-			goto('/report');
-		}
+		const result = calculateASRS(assessment.data);
+		assessment.result = result;
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="ADHD Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ASRSPartA />
+	<Step3ASRSPartB />
+	<Step4ChildhoodHistory />
+	<Step5FunctionalImpact />
+	<Step6ComorbidConditions />
+	<Step7Medications />
+	<Step8Allergies />
+	<Step9MedicalHistory />
+	<Step10SocialSupport />
 
-<Step2ASRSPartA />
-
-<Step3ASRSPartB />
-
-<Step4ChildhoodHistory />
-
-<Step5FunctionalImpact />
-
-<Step6ComorbidConditions />
-
-<Step7Medications />
-
-<Step8Allergies />
-
-<Step9MedicalHistory />
-
-<Step10SocialSupport />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

@@ -1,68 +1,40 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const mh = assessment.data.medicalHistory;
-
-	const yesNoOptions = [
+	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const rows: { key: 'cardiovascularIssues' | 'seizureHistory' | 'ticDisorder' | 'thyroidDisease' | 'headInjuries'; label: string; detailsKey: keyof typeof mh; required?: boolean }[] = [
+		{ key: 'cardiovascularIssues', label: 'Any cardiovascular issues? (hypertension, heart defects, arrhythmia, chest pain)', detailsKey: 'cardiovascularDetails', required: true },
+		{ key: 'seizureHistory', label: 'Seizure history?', detailsKey: 'seizureDetails', required: true },
+		{ key: 'ticDisorder', label: 'Tic disorder (motor or vocal tics, Tourette syndrome)?', detailsKey: 'ticDetails', required: true },
+		{ key: 'thyroidDisease', label: 'Thyroid disease?', detailsKey: 'thyroidDetails' },
+		{ key: 'headInjuries', label: 'Head injuries or traumatic brain injury?', detailsKey: 'headInjuryDetails' }
+	];
 </script>
 
-<SectionCard title="Medical History" description="Important medical conditions that may affect ADHD treatment, especially cardiovascular screening for stimulant safety.">
-	<RadioGroup
-		label="Any cardiovascular issues? (hypertension, heart defects, arrhythmia, chest pain)"
-		name="cardiovascularIssues"
-		options={yesNoOptions}
-		bind:value={mh.cardiovascularIssues}
-		required
-	/>
-	{#if mh.cardiovascularIssues === 'yes'}
-		<TextArea label="Cardiovascular details" name="cardiovascularDetails" bind:value={mh.cardiovascularDetails} placeholder="Condition, treatment, current status..." />
-	{/if}
+<Fieldset legend="Medical History">
+	<p class="hint">Important medical conditions that may affect ADHD treatment, especially cardiovascular screening for stimulant safety.</p>
 
-	<RadioGroup
-		label="Seizure history?"
-		name="seizureHistory"
-		options={yesNoOptions}
-		bind:value={mh.seizureHistory}
-		required
-	/>
-	{#if mh.seizureHistory === 'yes'}
-		<TextArea label="Seizure details" name="seizureDetails" bind:value={mh.seizureDetails} placeholder="Type, frequency, medication..." />
-	{/if}
-
-	<RadioGroup
-		label="Tic disorder (motor or vocal tics, Tourette syndrome)?"
-		name="ticDisorder"
-		options={yesNoOptions}
-		bind:value={mh.ticDisorder}
-		required
-	/>
-	{#if mh.ticDisorder === 'yes'}
-		<TextArea label="Tic disorder details" name="ticDetails" bind:value={mh.ticDetails} placeholder="Type, severity, onset..." />
-	{/if}
-
-	<RadioGroup
-		label="Thyroid disease?"
-		name="thyroidDisease"
-		options={yesNoOptions}
-		bind:value={mh.thyroidDisease}
-	/>
-	{#if mh.thyroidDisease === 'yes'}
-		<TextArea label="Thyroid details" name="thyroidDetails" bind:value={mh.thyroidDetails} placeholder="Type, treatment..." />
-	{/if}
-
-	<RadioGroup
-		label="Head injuries or traumatic brain injury?"
-		name="headInjuries"
-		options={yesNoOptions}
-		bind:value={mh.headInjuries}
-	/>
-	{#if mh.headInjuries === 'yes'}
-		<TextArea label="Head injury details" name="headInjuryDetails" bind:value={mh.headInjuryDetails} placeholder="When, severity, symptoms..." />
-	{/if}
-</SectionCard>
+	{#each rows as r (r.key)}
+		<Field label={r.label} required={r.required}>
+			<RadioGroup label={r.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={r.key} value={opt.value} bind:group={mh[r.key]} required={r.required} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		{#if mh[r.key] === 'yes'}
+			<Field label={`${r.label} details`} inputId={r.detailsKey as string}>
+				<TextAreaInput id={r.detailsKey as string} label={`${r.label} details`} rows={2} bind:value={mh[r.detailsKey] as string} />
+			</Field>
+		{/if}
+	{/each}
+</Fieldset>

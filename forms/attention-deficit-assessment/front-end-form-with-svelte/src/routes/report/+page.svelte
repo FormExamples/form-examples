@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { asrsClassificationLabel, asrsClassificationColor, adhdSubtypeLabel, calculateAge } from '$lib/engine/utils';
+	import { asrsClassificationLabel, adhdSubtypeLabel, calculateAge } from '$lib/engine/utils';
 	import Badge from '$lib/components/ui/Badge.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -44,11 +47,17 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+	function classifyAlertType(classification: string): 'success' | 'warning' | 'error' {
+		if (classification === 'highly-consistent' || classification === 'highly_consistent') return 'error';
+		if (classification === 'possible' || classification === 'consistent') return 'warning';
+		return 'success';
+	}
+
+	function flagAlertType(priority: string): 'info' | 'warning' | 'error' {
+		if (priority === 'high') return 'error';
+		if (priority === 'medium') return 'warning';
+		return 'info';
+	}
 </script>
 
 {#if result}
@@ -56,175 +65,131 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Assessment Report</h1>
-				<div class="flex gap-3">
-					{#if pdfError}
-						<span class="text-sm text-red-600">{pdfError}</span>
-					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Assessment
-					</button>
+				<div class="button-group">
+					{#if pdfError}<span class="text-sm text-red-600">{pdfError}</span>{/if}
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Assessment</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- Classification Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {asrsClassificationColor(result.classification)}">
-				<div class="text-3xl font-bold">ASRS Total: {result.asrsTotal}/72</div>
-				<div class="mt-1 text-lg">{asrsClassificationLabel(result.classification)}</div>
-				<div class="mt-1 text-sm">{adhdSubtypeLabel(result.subtype)}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(result.timestamp).toLocaleString()}
-				</div>
-			</div>
+			<Panel label="ADHD assessment report" class="report-panel">
+				<Alert
+					type={classifyAlertType(result.classification)}
+					heading={`ASRS Total: ${result.asrsTotal}/72 — ${asrsClassificationLabel(result.classification)}`}
+				>
+					<p>{adhdSubtypeLabel(result.subtype)}</p>
+					<p>Generated {new Date(result.timestamp).toLocaleString()}</p>
+				</Alert>
 
-			<!-- Score Breakdown -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Score Breakdown</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Part A Score:</span>
-						{result.partAScore}/24
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Part B Score:</span>
-						{result.partBScore}/48
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Inattentive Subscore:</span>
-						{result.inattentiveSubscore}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Hyperactive-Impulsive Subscore:</span>
-						{result.hyperactiveImpulsiveSubscore}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Part A Screener:</span>
-						{result.partAScreenerPositive ? 'POSITIVE' : 'Negative'}
-					</div>
-				</div>
-			</div>
+				<h2>Score Breakdown</h2>
+				<dl class="summary-grid">
+					<dt>Part A Score</dt>
+					<dd>{result.partAScore}/24</dd>
+					<dt>Part B Score</dt>
+					<dd>{result.partBScore}/48</dd>
+					<dt>Inattentive Subscore</dt>
+					<dd>{result.inattentiveSubscore}</dd>
+					<dt>Hyperactive-Impulsive Subscore</dt>
+					<dd>{result.hyperactiveImpulsiveSubscore}</dd>
+					<dt>Part A Screener</dt>
+					<dd>{result.partAScreenerPositive ? 'POSITIVE' : 'Negative'}</dd>
+				</dl>
 
-			<!-- Additional Flags -->
-			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues for Clinician</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
+				{#if result.additionalFlags.length > 0}
+					<h2>Flagged Issues for Clinician</h2>
+					<ul class="flag-list">
+						{#each result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert type={flagAlertType(flag.priority)}>
+									<p><strong>[{flag.priority.toUpperCase()}]</strong> {flag.category}: {flag.message}</p>
+								</Alert>
+							</li>
 						{/each}
-					</div>
-				</div>
-			{/if}
+					</ul>
+				{/if}
 
-			<!-- Fired Rules -->
-			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Classification Justification</h2>
-					<table class="w-full text-sm">
+				{#if result.firedRules.length > 0}
+					<h2>Classification Justification</h2>
+					<table class="domain-table">
 						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Rule</th>
-								<th class="pb-2 pr-4">Domain</th>
-								<th class="pb-2 pr-4">Finding</th>
-								<th class="pb-2">Classification</th>
+							<tr>
+								<th>Rule</th>
+								<th>Domain</th>
+								<th>Finding</th>
+								<th>Classification</th>
 							</tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.domain}</td>
-									<td class="py-2 pr-4">{rule.description}</td>
-									<td class="py-2">
-										<Badge classification={rule.classification} />
-									</td>
+							{#each result.firedRules as rule (rule.id)}
+								<tr>
+									<td><code>{rule.id}</code></td>
+									<td>{rule.domain}</td>
+									<td>{rule.description}</td>
+									<td><Badge classification={rule.classification} /></td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Patient Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Summary</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Name:</span>
-						{data.demographics.firstName} {data.demographics.lastName}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">DOB:</span>
+				<h2>Patient Summary</h2>
+				<dl class="summary-grid">
+					<dt>Name</dt>
+					<dd>{data.demographics.firstName} {data.demographics.lastName}</dd>
+					<dt>DOB</dt>
+					<dd>
 						{data.demographics.dateOfBirth}
-						{#if calculateAge(data.demographics.dateOfBirth)}
-							(Age {calculateAge(data.demographics.dateOfBirth)})
-						{/if}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Sex:</span>
-						{data.demographics.sex}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Occupation:</span>
-						{data.demographics.occupation || 'N/A'}
-					</div>
-				</div>
-			</div>
+						{#if calculateAge(data.demographics.dateOfBirth)} (Age {calculateAge(data.demographics.dateOfBirth)}){/if}
+					</dd>
+					<dt>Sex</dt>
+					<dd>{data.demographics.sex}</dd>
+					<dt>Occupation</dt>
+					<dd>{data.demographics.occupation || 'N/A'}</dd>
+				</dl>
 
-			<!-- Medications -->
-			{#if data.medications.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Medications</h2>
-					<ul class="list-disc space-y-1 pl-5 text-sm">
-						{#each data.medications as med}
+				{#if data.medications.length > 0}
+					<h2>Medications</h2>
+					<ul>
+						{#each data.medications as med (med.name)}
 							<li>{med.name} {med.dose} {med.frequency}</li>
 						{/each}
 					</ul>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Allergies -->
-			{#if data.allergies.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Allergies</h2>
-					<ul class="list-disc space-y-1 pl-5 text-sm">
-						{#each data.allergies as allergy}
+				{#if data.allergies.length > 0}
+					<h2>Allergies</h2>
+					<ul>
+						{#each data.allergies as allergy (allergy.allergen)}
 							<li>
-								<strong>{allergy.allergen}</strong> - {allergy.reaction}
-								{#if allergy.severity}
-									<span class="ml-1 rounded px-1.5 py-0.5 text-xs {allergy.severity === 'anaphylaxis' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">
-										{allergy.severity}
-									</span>
-								{/if}
+								<strong>{allergy.allergen}</strong> — {allergy.reaction}
+								{#if allergy.severity}<span class="severity-badge">{allergy.severity}</span>{/if}
 							</li>
 						{/each}
 					</ul>
-				</div>
-			{/if}
+				{/if}
+			</Panel>
 		</main>
 	</div>
 {/if}
+
+<style>
+	.flag-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+	.domain-table { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.5rem; }
+	.domain-table td, .domain-table th { padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+	.summary-grid { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem; margin: 0; font-size: 0.9375rem; }
+	.summary-grid dt { font-weight: 500; color: var(--color-muted); }
+	.summary-grid dd { margin: 0; }
+	.severity-badge {
+		display: inline-block;
+		padding: 0.125rem 0.5rem;
+		background: var(--color-warning-bg);
+		color: var(--color-warning);
+		border-radius: 9999px;
+		font-size: 0.75rem;
+		font-weight: 500;
+		margin-left: 0.25rem;
+	}
+</style>

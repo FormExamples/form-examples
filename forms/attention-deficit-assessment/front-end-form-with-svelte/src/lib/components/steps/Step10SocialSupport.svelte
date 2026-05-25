@@ -1,59 +1,64 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const ss = assessment.data.socialSupport;
-
-	const yesNoOptions = [
+	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
 </script>
 
-<SectionCard title="Social & Support" description="Family history, support systems, and previous assessments">
-	<RadioGroup
-		label="Do any family members have ADHD (diagnosed or suspected)?"
-		name="familyHistoryADHD"
-		options={yesNoOptions}
-		bind:value={ss.familyHistoryADHD}
-	/>
+<Fieldset legend="Social & Support">
+	<p class="hint">Family history, support systems, and previous assessments.</p>
+
+	<Field label="Do any family members have ADHD (diagnosed or suspected)?">
+		<RadioGroup label="Family history of ADHD">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="familyHistoryADHD" value={opt.value} bind:group={ss.familyHistoryADHD} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if ss.familyHistoryADHD === 'yes'}
-		<TextArea label="Family history details" name="familyHistoryDetails" bind:value={ss.familyHistoryDetails} placeholder="Which relatives, diagnosed or suspected..." />
+		<Field label="Family history details" inputId="familyHistoryDetails">
+			<TextAreaInput id="familyHistoryDetails" label="Family history details" rows={2} bind:value={ss.familyHistoryDetails} />
+		</Field>
 	{/if}
 
-	<TextArea
-		label="What support systems do you currently have?"
-		name="supportSystems"
-		bind:value={ss.supportSystems}
-		placeholder="e.g., family support, partner, workplace accommodations, therapy..."
-	/>
+	<Field label="What support systems do you currently have?" inputId="supportSystems">
+		<TextAreaInput id="supportSystems" label="Support systems" rows={3} bind:value={ss.supportSystems} />
+	</Field>
 
-	<TextArea
-		label="What coping strategies do you use for attention/focus difficulties?"
-		name="copingStrategies"
-		bind:value={ss.copingStrategies}
-		placeholder="e.g., lists, alarms, timers, apps, exercise, environment modifications..."
-	/>
+	<Field label="What coping strategies do you use for attention/focus difficulties?" inputId="copingStrategies">
+		<TextAreaInput id="copingStrategies" label="Coping strategies" rows={3} bind:value={ss.copingStrategies} />
+	</Field>
 
-	<RadioGroup
-		label="Have you had any previous ADHD assessments?"
-		name="previousAssessments"
-		options={yesNoOptions}
-		bind:value={ss.previousAssessments}
-	/>
+	<Field label="Have you had any previous ADHD assessments?">
+		<RadioGroup label="Previous assessments">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="previousAssessments" value={opt.value} bind:group={ss.previousAssessments} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if ss.previousAssessments === 'yes'}
-		<TextArea label="Previous assessment details" name="previousAssessmentDetails" bind:value={ss.previousAssessmentDetails} placeholder="When, where, outcome..." />
+		<Field label="Previous assessment details" inputId="previousAssessmentDetails">
+			<TextAreaInput id="previousAssessmentDetails" label="Previous assessment details" rows={2} bind:value={ss.previousAssessmentDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup
-		label="Have you received a previous ADHD diagnosis?"
-		name="previousDiagnosis"
-		options={yesNoOptions}
-		bind:value={ss.previousDiagnosis}
-	/>
+	<Field label="Have you received a previous ADHD diagnosis?">
+		<RadioGroup label="Previous diagnosis">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="previousDiagnosis" value={opt.value} bind:group={ss.previousDiagnosis} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if ss.previousDiagnosis === 'yes'}
-		<TextArea label="Previous diagnosis details" name="previousDiagnosisDetails" bind:value={ss.previousDiagnosisDetails} placeholder="When, by whom, subtype..." />
+		<Field label="Previous diagnosis details" inputId="previousDiagnosisDetails">
+			<TextAreaInput id="previousDiagnosisDetails" label="Previous diagnosis details" rows={2} bind:value={ss.previousDiagnosisDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

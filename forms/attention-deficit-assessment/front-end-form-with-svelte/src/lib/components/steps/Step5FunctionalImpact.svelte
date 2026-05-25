@@ -1,56 +1,32 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const fi = assessment.data.functionalImpact;
 
-	const impactOptions = [
-		{ value: 'none', label: 'No impact' },
-		{ value: 'mild', label: 'Mild - occasional difficulties' },
-		{ value: 'moderate', label: 'Moderate - frequent difficulties' },
-		{ value: 'severe', label: 'Severe - significant impairment' }
+	const rows: { key: keyof typeof fi; label: string }[] = [
+		{ key: 'workAcademicImpact', label: 'Work / Academic performance' },
+		{ key: 'relationshipImpact', label: 'Relationships (family, friends, romantic)' },
+		{ key: 'dailyLivingImpact', label: 'Daily living activities (housework, errands, self-care)' },
+		{ key: 'financialManagementImpact', label: 'Financial management (bills, budgeting, impulse spending)' },
+		{ key: 'timeManagementImpact', label: 'Time management (punctuality, deadlines, planning)' }
 	];
 </script>
 
-<SectionCard title="Functional Impact" description="How do your symptoms affect different areas of your life? ADHD diagnosis requires symptoms to cause significant impairment (DSM-5 criterion D).">
-	<SelectInput
-		label="Work / Academic performance"
-		name="workAcademicImpact"
-		options={impactOptions}
-		bind:value={fi.workAcademicImpact}
-		required
-	/>
+<Fieldset legend="Functional Impact">
+	<p class="hint">How do your symptoms affect different areas of your life? ADHD diagnosis requires symptoms to cause significant impairment (DSM-5 criterion D).</p>
 
-	<SelectInput
-		label="Relationships (family, friends, romantic)"
-		name="relationshipImpact"
-		options={impactOptions}
-		bind:value={fi.relationshipImpact}
-		required
-	/>
-
-	<SelectInput
-		label="Daily living activities (housework, errands, self-care)"
-		name="dailyLivingImpact"
-		options={impactOptions}
-		bind:value={fi.dailyLivingImpact}
-		required
-	/>
-
-	<SelectInput
-		label="Financial management (bills, budgeting, impulse spending)"
-		name="financialManagementImpact"
-		options={impactOptions}
-		bind:value={fi.financialManagementImpact}
-		required
-	/>
-
-	<SelectInput
-		label="Time management (punctuality, deadlines, planning)"
-		name="timeManagementImpact"
-		options={impactOptions}
-		bind:value={fi.timeManagementImpact}
-		required
-	/>
-</SectionCard>
+	{#each rows as r (r.key)}
+		<Field label={r.label} required inputId={r.key as string}>
+			<Select id={r.key as string} label={r.label} required bind:value={fi[r.key]}>
+				<option value="">— Select —</option>
+				<option value="none">No impact</option>
+				<option value="mild">Mild — occasional difficulties</option>
+				<option value="moderate">Moderate — frequent difficulties</option>
+				<option value="severe">Severe — significant impairment</option>
+			</Select>
+		</Field>
+	{/each}
+</Fieldset>

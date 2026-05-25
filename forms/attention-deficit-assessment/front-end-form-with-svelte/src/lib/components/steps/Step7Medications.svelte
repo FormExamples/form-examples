@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 </script>
 
-<SectionCard title="Current Medications" description="List all medications you currently take, including stimulants, non-stimulants, antidepressants, anxiolytics, and supplements">
-	<MedicationEntry bind:medications={assessment.data.medications} />
-	{#if assessment.data.medications.length === 0}
-		<p class="mt-3 text-sm text-gray-500">No medications added. Click the button above to add one, or proceed to next step if you take none.</p>
-	{/if}
-</SectionCard>
+<Fieldset legend="Current Medications">
+	<p class="hint">List all medications you currently take, including stimulants, non-stimulants, antidepressants, anxiolytics, and supplements.</p>
+	<Field label="Medications">
+		<MedicationEntry bind:medications={assessment.data.medications} />
+	</Field>
+</Fieldset>
