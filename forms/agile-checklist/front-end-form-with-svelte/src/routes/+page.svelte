@@ -3,6 +3,16 @@
   import { store } from '$lib/stores/checklist.svelte.js';
   import { STEPS } from '$lib/config/steps.js';
   import { TOTAL_ITEMS } from '$lib/config/items.js';
+
+  // Lily Svelte headless contract — local shape-equivalent components.
+  import Form from '$lib/components/ui/Form.svelte';
+  import Progress from '$lib/components/ui/Progress.svelte';
+  import StepList from '$lib/components/ui/StepList.svelte';
+  import StepListItem from '$lib/components/ui/StepListItem.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import Panel from '$lib/components/ui/Panel.svelte';
+  import Alert from '$lib/components/ui/Alert.svelte';
+
   import Step01 from '$lib/components/steps/Step01Respondent.svelte';
   import Step02 from '$lib/components/steps/Step02Teams.svelte';
   import Step03 from '$lib/components/steps/Step03Stakeholders.svelte';
@@ -23,90 +33,155 @@
       return '';
     }
   }
+
+  function gotoStep(n: number) {
+    store.goto(n);
+    document.getElementById(`step-${n}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function stepStatus(n: number): 'waiting' | 'in-progress' | 'finished' {
+    if (n < store.currentStep) return 'finished';
+    if (n === store.currentStep) return 'in-progress';
+    return 'waiting';
+  }
+
+  function generateReport() {
+    goto('/report');
+  }
 </script>
 
-{#if store.draftRestored}
-  <div
-    class="mb-4 p-3 border-l-4 border-brand-600 bg-brand-50 rounded flex flex-wrap items-center gap-3"
-    role="status"
-  >
-    <p class="text-sm text-slate-800 flex-1">
-      <strong>Draft restored.</strong>
-      A previous in-progress checklist was loaded from this browser.
-    </p>
-    <button
-      type="button"
-      class="px-3 py-1 text-sm rounded border border-slate-300 bg-white hover:bg-slate-100"
-      onclick={() => store.acknowledgeDraft()}
-    >
-      Keep editing
-    </button>
-    <button
-      type="button"
-      class="px-3 py-1 text-sm rounded border border-red-300 bg-white text-red-700 hover:bg-red-50"
-      onclick={() => store.discardDraft()}
-    >
-      Discard draft
-    </button>
-  </div>
-{/if}
+<a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
-<section class="prose max-w-none mb-6">
-  <h2 class="text-xl font-semibold">Self-assessment</h2>
-  <p class="text-slate-700 my-2">
-    Complete all 5 sections below, then generate the report. The tool
-    computes a per-section percentage of "yes" answers, derives a composite
-    agility maturity level, fires coaching rules per section, and surfaces
-    operational flags such as finished-work risk, experimentation-blocked,
-    and psychological-safety risk.
-  </p>
-  <div class="bg-white border border-slate-200 rounded p-3 mt-3">
-    <p class="text-sm font-medium text-slate-700 mb-1">
-      Progress: {result.answeredCount} of {TOTAL_ITEMS} items answered ({progressPct}%)
+<header class="page-header">
+  <div class="page-header-inner">
+    <h1>Agile Checklist</h1>
+    <p class="subtitle">
+      Self-assessment of 57 concrete agile behaviours across Teams, Stakeholders, and Practices.
+    </p>
+
+    <Progress label="Items answered" max={TOTAL_ITEMS} value={result.answeredCount} />
+    <p class="subtitle" aria-live="polite">
+      {result.answeredCount} of {TOTAL_ITEMS} items answered ({progressPct}%)
       {#if store.lastSavedAt}
-        <span class="text-xs text-slate-500 font-normal" data-testid="saved-indicator">
+        <span class="saved-indicator" data-testid="saved-indicator">
           · saved {savedAtLabel(store.lastSavedAt)}
         </span>
       {/if}
     </p>
-    <div class="w-full bg-slate-200 rounded h-2 overflow-hidden">
-      <div class="h-2 bg-brand-600" style="width: {progressPct}%"></div>
-    </div>
+
+    <StepList label="Agile checklist steps" current={store.currentStep - 1}>
+      {#each STEPS as s (s.number)}
+        <StepListItem
+          status={stepStatus(s.number)}
+          current={s.number === store.currentStep}
+          onclick={() => gotoStep(s.number)}
+        >
+          {s.short}
+        </StepListItem>
+      {/each}
+    </StepList>
   </div>
-</section>
+</header>
 
-<nav class="mb-6 flex flex-wrap gap-1 text-xs" aria-label="Step navigation">
-  {#each STEPS as s (s.number)}
-    <a
-      href="#step-{s.number}"
-      class="px-2 py-1 border border-slate-300 rounded bg-white hover:bg-brand-50"
-    >
-      {s.number}. {s.short}
-    </a>
-  {/each}
-</nav>
+<main>
+  {#if store.draftRestored}
+    <Alert type="info" role="status">
+      <p>
+        <strong>Draft restored.</strong>
+        A previous in-progress checklist was loaded from this browser.
+      </p>
+      <div class="button-group">
+        <Button data-variant="secondary" onclick={() => store.acknowledgeDraft()}>
+          Keep editing
+        </Button>
+        <Button data-variant="danger" onclick={() => store.discardDraft()}>
+          Discard draft
+        </Button>
+      </div>
+    </Alert>
+  {/if}
 
-<div class="space-y-6">
-  {#each stepComponents as StepComponent, i (i)}
-    <div id="step-{i + 1}" class="bg-white p-6 rounded-lg shadow-sm scroll-mt-20">
-      <StepComponent />
+  <div class="intro">
+    <p>
+      Complete all 5 sections below, then generate the report. The tool computes
+      a per-section percentage of "yes" answers, derives a composite agility
+      maturity level, fires coaching rules per section, and surfaces operational
+      flags such as finished-work risk, experimentation-blocked, and
+      psychological-safety risk.
+    </p>
+  </div>
+
+  <Form label="Agile Checklist" onsubmit={generateReport} onreset={() => store.reset()}>
+    <div id="form-sections">
+      {#each stepComponents as StepComponent, i (i)}
+        <div
+          id={`step-${i + 1}`}
+          class="step-section"
+          onmouseenter={() => store.goto(i + 1)}
+          onfocusin={() => store.goto(i + 1)}
+          role="region"
+          aria-labelledby={`step-${i + 1}-legend`}
+        >
+          <StepComponent />
+        </div>
+      {/each}
     </div>
-  {/each}
-</div>
 
-<div class="mt-8 pt-4 border-t border-slate-200 flex flex-wrap gap-3 justify-end">
-  <button
-    type="button"
-    class="px-4 py-2 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
-    onclick={() => store.reset()}
-  >
-    Start over
-  </button>
-  <button
-    type="button"
-    class="px-4 py-2 rounded bg-brand-600 text-white hover:bg-brand-700"
-    onclick={() => goto('/report')}
-  >
-    Generate report
-  </button>
-</div>
+    <div class="button-group">
+      <Button type="submit" data-variant="primary">Generate report</Button>
+      <Button type="reset" data-variant="secondary">Start over</Button>
+    </div>
+  </Form>
+
+  <Panel label="Checklist report">
+    <p class="empty-message">
+      Click "Generate report" above to render the full maturity report.
+    </p>
+  </Panel>
+</main>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute;
+    left: -9999px; top: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    z-index: 100;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+  .page-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .page-header-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  .page-header h1 { font-size: 1.25rem; font-weight: 600; margin: 0 0 0.25rem; }
+  .subtitle { color: var(--color-muted); font-size: 0.875rem; margin: 0 0 0.75rem; }
+  .saved-indicator { font-size: 0.75rem; font-weight: 400; }
+  main {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+  }
+  .intro { margin-bottom: 1rem; color: var(--color-text); }
+  .step-section {
+    margin-bottom: 1.25rem;
+    scroll-margin-top: 6rem;
+  }
+</style>

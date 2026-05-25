@@ -1,30 +1,47 @@
 <script lang="ts">
   import { store } from '$lib/stores/checklist.svelte.js';
   import { PRACTICES_ITEMS } from '$lib/config/items.js';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
   import ItemRow from '../ui/ItemRow.svelte';
+
+  const r = $derived(store.result.practices);
 </script>
 
-<section>
-  <h2 class="text-xl font-semibold mb-1">Step 4 — Practices (18 items)</h2>
-  <p class="text-sm text-slate-600 mb-4">
+<Fieldset legend="Step 4 — Practices (18 items)">
+  <p class="hint">
     Operating practices that bind teams and stakeholders together — pace of
     decisions, focus on finished work, transparency, and scope discipline.
   </p>
 
-  <div class="bg-slate-100 p-2 rounded text-sm mb-3">
+  <div class="section-progress">
     <strong>Section progress:</strong>
-    {store.result.practices.yesCount} yes · {store.result.practices.noCount} no
-    · {store.result.practices.notApplicableCount} n/a
-    · {store.result.practices.unansweredCount} unanswered
-    {#if store.result.practices.percent !== null}
-      — <strong>{store.result.practices.percent.toFixed(0)}% yes</strong>
-      ({store.result.practices.band.toUpperCase()})
+    {r.yesCount} yes · {r.noCount} no · {r.notApplicableCount} n/a · {r.unansweredCount}
+    unanswered
+    {#if r.percent !== null}
+      — <strong>{r.percent.toFixed(0)}% yes</strong> ({r.band.toUpperCase()})
     {/if}
   </div>
 
-  <div class="bg-white border border-slate-200 rounded p-2">
+  <div class="item-list">
     {#each PRACTICES_ITEMS as item (item.id)}
       <ItemRow {item} />
     {/each}
   </div>
-</section>
+</Fieldset>
+
+<style>
+  .section-progress {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0.5rem 0 0.75rem;
+    font-size: 0.875rem;
+  }
+  .item-list {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+  }
+</style>
