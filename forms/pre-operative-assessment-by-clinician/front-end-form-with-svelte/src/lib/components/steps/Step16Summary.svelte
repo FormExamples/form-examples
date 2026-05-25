@@ -1,13 +1,17 @@
 <script lang="ts">
   import { store } from '$lib/stores/assessment.svelte.js';
   import FlagBanner from '$lib/components/ui/FlagBanner.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
   const r = $derived(store.result);
 </script>
 
-<section>
-  <h2 class="text-xl font-semibold mb-4">Step 16 — Summary, ASA &amp; sign-off</h2>
-
-  <div class="bg-slate-100 p-4 rounded mb-4">
+<Fieldset legend="Step 16 — Summary, ASA and sign-off">
+  <div class="summary-box">
     <p><strong>Computed ASA grade:</strong> {r.computedAsaGrade}{r.asaEmergencySuffix}</p>
     <p><strong>Mallampati:</strong> {r.mallampatiClass || '—'}</p>
     <p><strong>RCRI score:</strong> {r.rcriScore}</p>
@@ -19,9 +23,9 @@
   <FlagBanner flags={r.additionalFlags} risk={r.compositeRisk} />
 
   {#if r.firedRules.length > 0}
-    <details class="mb-4">
-      <summary class="cursor-pointer text-sm font-medium">Fired rules ({r.firedRules.length})</summary>
-      <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+    <details class="fired-rules">
+      <summary>Fired rules ({r.firedRules.length})</summary>
+      <ul>
         {#each r.firedRules as f}
           <li><code>{f.ruleId}</code> [{f.instrument}] — {f.description}</li>
         {/each}
@@ -29,30 +33,48 @@
     </details>
   {/if}
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <label class="block"><span class="text-sm text-slate-700">Final ASA (override)</span>
-      <select class="w-full border rounded px-2 py-1" bind:value={store.data.summary.finalAsaGrade}>
+  <div class="field-grid">
+    <Field label="Final ASA (override)">
+      <Select label="Final ASA (override)" bind:value={store.data.summary.finalAsaGrade}>
         <option value="">Use computed ({r.computedAsaGrade})</option>
-        <option value="I">I</option><option value="II">II</option><option value="III">III</option>
-        <option value="IV">IV</option><option value="V">V</option><option value="VI">VI</option>
-      </select></label>
-    <label class="block"><span class="text-sm text-slate-700">Recommendation</span>
-      <select class="w-full border rounded px-2 py-1" bind:value={store.data.summary.recommendation}>
+        <option value="I">I</option>
+        <option value="II">II</option>
+        <option value="III">III</option>
+        <option value="IV">IV</option>
+        <option value="V">V</option>
+        <option value="VI">VI</option>
+      </Select>
+    </Field>
+    <Field label="Recommendation">
+      <Select label="Recommendation" bind:value={store.data.summary.recommendation}>
         <option value="">—</option>
         <option value="proceed">Proceed</option>
         <option value="optimise-first">Optimise first</option>
         <option value="mdt-review">MDT review</option>
         <option value="cancel">Cancel</option>
-      </select></label>
-    <label class="block md:col-span-2"><span class="text-sm text-slate-700">Override reason (required if overriding)</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.summary.overrideReason} /></label>
-    <label class="block md:col-span-2"><span class="text-sm text-slate-700">Clinician notes</span>
-      <textarea rows="4" class="w-full border rounded px-2 py-1" bind:value={store.data.summary.clinicianNotes}></textarea></label>
+      </Select>
+    </Field>
+    <Field
+      label="Override reason (required if overriding)"
+      class="field-span-2"
+      inputId="step-16-override-reason"
+      error={store.errors['step-16-override-reason']}
+    >
+      <TextInput
+        id="step-16-override-reason"
+        label="Override reason"
+        bind:value={store.data.summary.overrideReason}
+        aria-invalid={store.errors['step-16-override-reason'] ? 'true' : undefined}
+      />
+    </Field>
+    <Field label="Clinician notes" class="field-span-2">
+      <TextAreaInput label="Clinician notes" rows={4} bind:value={store.data.summary.clinicianNotes} />
+    </Field>
   </div>
 
-  <p class="text-sm text-slate-600 mt-6">
+  <p class="signoff-note">
     By signing, the clinician confirms that the assessment above was made on
     objective findings and that the anaesthesia plan is appropriate. Signed
     timestamp will be added on submission.
   </p>
-</section>
+</Fieldset>

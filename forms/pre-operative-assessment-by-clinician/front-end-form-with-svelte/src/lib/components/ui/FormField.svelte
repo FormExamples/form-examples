@@ -1,15 +1,27 @@
 <script lang="ts">
+  // FormField — thin backwards-compatibility wrapper over Field.svelte.
+  //
+  // The pilot Lily refactor introduced `Field.svelte` which emits the
+  // canonical Lily `field` / `label` / `error-message` markup. New code
+  // should import `Field.svelte` directly. This wrapper preserves the
+  // legacy `label` + `id` + optional `hint` shape used during the
+  // pre-Lily Svelte phase.
   import type { Snippet } from 'svelte';
+  import Field from './Field.svelte';
+
   let {
     label,
     id,
     hint = '',
     children,
-  }: { label: string; id: string; hint?: string; children: Snippet } = $props();
+  }: {
+    label: string;
+    id: string;
+    hint?: string;
+    children: Snippet;
+  } = $props();
 </script>
 
-<div class="mb-4">
-  <label for={id} class="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+<Field {label} inputId={id} description={hint || undefined}>
   {@render children()}
-  {#if hint}<p class="text-xs text-slate-500 mt-1">{hint}</p>{/if}
-</div>
+</Field>
