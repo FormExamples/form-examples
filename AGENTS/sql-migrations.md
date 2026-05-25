@@ -3,25 +3,32 @@
 PostgreSQL 18 with Liquibase SQL format for version-controlled database
 migrations. Each form owns its own schema under `forms/<slug>/sql-migrations/`.
 
+The SQL migrations are the **source of truth for data shape**. XML, FHIR R5,
+Protocol Buffers, and OpenAPI representations are all generated from them
+(see `spec.md` §3.1).
+
 Slug: sql-migrations
 
 - Search pattern: `forms/*/sql-migrations/*.sql`
 
 ## Migration file naming
 
-Two-digit, zero-padded sequence numbers with hyphen-separated descriptions:
+Two-digit, zero-padded sequence numbers with `_create_table_<name>.sql`
+(and analogous `_create_function_<name>.sql`) bodies. Foreign-key targets
+are created before referencing tables.
 
 ```
 sql-migrations/
-  00_extensions.sql          # Required PostgreSQL extensions (pgcrypto, etc.)
-  01_create_function_set_updated_at.sql          # Create function set_updated_at
-  02_create_table_patient.sql             # Shared patient table
-  03_create_table_clinician.sql          # Assessment header / encounter
-  04_create_table_[form_snake_case].sql          # Assessment header / encounter
+  00_extensions.sql                            # Required PostgreSQL extensions (pgcrypto)
+  01_create_function_set_updated_at.sql        # Trigger function for updated_at
+  02_create_table_patient.sql                  # Shared patient table
+  03_create_table_clinician.sql                # Clinician identity (optional, per form)
+  04_create_table_<form_snake_case>.sql        # Assessment header / encounter
+  05_create_table_assessment_<section>.sql     # One per body-system / wizard step
   ...
-  90_create_table_grade.sql      # Computed scoring / grading result
-  91_create_table_grading_fired_rule.sql  # Rules that fired during grading
-  92_create_table_grading_additional_flag.sql # Safety-critical flags
+  90_create_table_grade.sql                    # Computed scoring / grading result
+  91_create_table_grading_fired_rule.sql       # Rules that fired during grading
+  92_create_table_grading_additional_flag.sql  # Safety-critical flags
 ```
 
 Each form must have `00_extensions.sql` as the first migration so that

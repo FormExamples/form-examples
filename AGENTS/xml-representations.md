@@ -2,13 +2,16 @@
 
 Example XML instances and matching DTD schemas for each SQL table entity, so
 that a form's data can be exported, transmitted, or validated outside of the
-PostgreSQL database. Generated from `sql-migrations/`.
+PostgreSQL database. **Generated** from `sql-migrations/` (the source of
+truth — see `spec.md` §3.1). Do not hand-edit; re-run the generator after
+schema changes.
 
 Slug: xml-representations
 
 - Search pattern: `forms/*/sql-migrations/*.sql`
 - Search pattern: `forms/*/xml-representations/*.xml`
 - Search pattern: `forms/*/xml-representations/*.dtd`
+- Generator: `bin/xml-representations/generate-xml-representations.py`
 
 ## Directory structure
 

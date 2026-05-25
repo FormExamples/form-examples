@@ -1,14 +1,17 @@
 # Protocol Buffers representations
 
-Protocol Buffers (`.proto`) schemas for each form, generated from
-`sql-migrations/`. One `.proto` file is produced per top-level SQL table
-entity, so that a form's data can be serialised, transmitted, or
-code-generated into any of the languages the protobuf compiler supports.
+Protocol Buffers (`.proto`) schemas for each form, **generated** from
+`sql-migrations/` (the source of truth — see `spec.md` §3.1). One `.proto`
+file is produced per top-level SQL table entity, so that a form's data can
+be serialised, transmitted, or code-generated into any of the languages the
+protobuf compiler supports. Do not hand-edit; re-run the generator after
+schema changes.
 
 Slug: protobuf
 
 - Search pattern: `forms/*/sql-migrations/*.sql`
 - Search pattern: `forms/*/protobuf/*.proto`
+- Generator: `bin/protobuf/generate-protobuf-representations.py`
 
 ## What is Protocol Buffers?
 

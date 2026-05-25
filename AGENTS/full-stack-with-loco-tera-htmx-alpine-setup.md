@@ -2,7 +2,9 @@
 
 Generates the per-form `full-stack-with-loco-tera-htmx-alpine-setup` shell
 script: an idempotent, ordered list of `cargo loco generate scaffold`
-invocations derived from each form's SQL migrations.
+invocations derived from each form's SQL migrations (the source of truth —
+see `spec.md` §3.1). Do not hand-edit; re-run the generator after schema
+changes.
 
 Slug: full-stack-with-loco-tera-htmx-alpine-setup
 

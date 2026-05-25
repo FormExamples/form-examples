@@ -1,12 +1,15 @@
 # FHIR HL7 R5 representations
 
-FHIR HL7 R5 JSON resources for each form, generated from `sql-migrations/`.
-The directory where the JSON lives is `fhir-r5/` inside each form.
+FHIR HL7 R5 JSON resources for each form, **generated** from `sql-migrations/`
+(the source of truth — see `spec.md` §3.1). The directory where the JSON
+lives is `fhir-r5/` inside each form. Do not hand-edit; re-run the
+generator after schema changes.
 
 Slug: fhir-r5
 
 - Search pattern: `forms/*/sql-migrations/*.sql`
 - Search pattern: `forms/*/fhir-r5/*.json`
+- Generator: `bin/fhir-r5/generate-fhir-r5-representations.py`
 
 ## FHIR R5 resource mapping
 

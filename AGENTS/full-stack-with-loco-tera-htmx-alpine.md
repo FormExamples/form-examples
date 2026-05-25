@@ -2,7 +2,9 @@
 
 Server-rendered Rust web application using the Loco framework with Tera
 templates, HTMX for dynamic page updates, and Alpine.js for light client-side
-interactivity.
+interactivity. The contract each form's backend must satisfy is documented
+in the per-form [`spec.md`](../forms/AGENTS.md); the system-wide backend
+rules live in [`../spec.md`](../spec.md) §6.
 
 Slug: full-stack-with-loco-tera-htmx-alpine
 

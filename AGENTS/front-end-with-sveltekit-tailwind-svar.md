@@ -1,7 +1,10 @@
 # Front-end with SvelteKit Tailwind SVAR
 
 SvelteKit single-page form and SVAR-based dashboard, styled with Tailwind
-CSS 4 and powered by a pure Svelte 5 reactive scoring engine.
+CSS 4 and powered by a pure Svelte 5 reactive scoring engine. The contract
+each implementation must satisfy is documented in the per-form
+[`spec.md`](../forms/AGENTS.md); the system-wide UX rules live in
+[`../spec.md`](../spec.md) §5.
 
 Slug: front-end-with-sveltekit-tailwind-svar
 
