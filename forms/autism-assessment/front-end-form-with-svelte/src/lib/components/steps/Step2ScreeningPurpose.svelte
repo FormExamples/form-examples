@@ -1,63 +1,55 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.screeningPurpose;
+	const yesNo = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 </script>
 
-<SectionCard title="Screening Purpose" description="Reason for this autism screening assessment">
-	<SelectInput
-		label="Referral Source"
-		name="referralSource"
-		options={[
-			{ value: 'self', label: 'Self-referral' },
-			{ value: 'gp', label: 'GP / Primary care' },
-			{ value: 'school', label: 'School / Education' },
-			{ value: 'employer', label: 'Employer / Occupational health' },
-			{ value: 'family', label: 'Family member' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={s.referralSource}
-		required
-	/>
+<Fieldset legend="Screening Purpose">
+	<p class="hint">Reason for this autism screening assessment.</p>
+
+	<Field label="Referral Source" required inputId="referralSource">
+		<Select id="referralSource" label="Referral source" required bind:value={s.referralSource}>
+			<option value="">— Select —</option>
+			<option value="self">Self-referral</option>
+			<option value="gp">GP / Primary care</option>
+			<option value="school">School / Education</option>
+			<option value="employer">Employer / Occupational health</option>
+			<option value="family">Family member</option>
+			<option value="other">Other</option>
+		</Select>
+	</Field>
 
 	{#if s.referralSource === 'other'}
-		<TextInput
-			label="Other referral source"
-			name="referralSourceOther"
-			bind:value={s.referralSourceOther}
-			placeholder="Please specify..."
-		/>
+		<Field label="Other referral source" inputId="referralSourceOther">
+			<TextInput id="referralSourceOther" label="Other referral source" bind:value={s.referralSourceOther} />
+		</Field>
 	{/if}
 
-	<TextArea
-		label="Reason for screening"
-		name="reasonForScreening"
-		bind:value={s.reasonForScreening}
-		placeholder="Describe the primary reason for seeking an autism screening..."
-	/>
+	<Field label="Reason for screening" inputId="reasonForScreening">
+		<TextAreaInput id="reasonForScreening" label="Reason for screening" rows={3} bind:value={s.reasonForScreening} />
+	</Field>
 
-	<RadioGroup
-		label="Have there been any previous autism assessments?"
-		name="previousAssessments"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={s.previousAssessments}
-		required
-	/>
+	<Field label="Have there been any previous autism assessments?" required>
+		<RadioGroup label="Previous assessments">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="previousAssessments" value={opt.value} bind:group={s.previousAssessments} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if s.previousAssessments === 'yes'}
-		<TextArea
-			label="Previous assessment details"
-			name="previousAssessmentDetails"
-			bind:value={s.previousAssessmentDetails}
-			placeholder="Provide details of previous assessments, dates, and outcomes..."
-		/>
+		<Field label="Previous assessment details" inputId="previousAssessmentDetails">
+			<TextAreaInput id="previousAssessmentDetails" label="Previous assessment details" rows={3} bind:value={s.previousAssessmentDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

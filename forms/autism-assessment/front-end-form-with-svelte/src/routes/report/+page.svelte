@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { aq10ScoreLabel, aq10ScoreColor, calculateAge, ageGroupLabel, referralSourceLabel } from '$lib/engine/utils';
+	import { calculateAge, ageGroupLabel, referralSourceLabel } from '$lib/engine/utils';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -43,11 +46,17 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+	function aq10AlertType(score: number): 'success' | 'warning' | 'error' {
+		if (score >= 6) return 'error';
+		if (score >= 4) return 'warning';
+		return 'success';
+	}
+
+	function flagAlertType(priority: string): 'info' | 'warning' | 'error' {
+		if (priority === 'high') return 'error';
+		if (priority === 'medium') return 'warning';
+		return 'info';
+	}
 </script>
 
 {#if result}
@@ -55,145 +64,104 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Assessment Report</h1>
-				<div class="flex gap-3">
-					{#if pdfError}
-						<span class="text-sm text-red-600">{pdfError}</span>
-					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Assessment
-					</button>
+				<div class="button-group">
+					{#if pdfError}<span class="text-sm text-red-600">{pdfError}</span>{/if}
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Assessment</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- AQ-10 Score Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {aq10ScoreColor(result.aq10Score)}">
-				<div class="text-3xl font-bold">AQ-10 {result.aq10Score}/10</div>
-				<div class="mt-1 text-lg">{result.aq10Category}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(result.timestamp).toLocaleString()}
-				</div>
-			</div>
+			<Panel label="Autism screening report" class="report-panel">
+				<Alert type={aq10AlertType(result.aq10Score)} heading={`AQ-10 ${result.aq10Score}/10 — ${result.aq10Category}`}>
+					<p>Generated {new Date(result.timestamp).toLocaleString()}</p>
+				</Alert>
 
-			<!-- Additional Flags -->
-			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues for Clinician</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
+				{#if result.additionalFlags.length > 0}
+					<h2>Flagged Issues for Clinician</h2>
+					<ul class="flag-list">
+						{#each result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert type={flagAlertType(flag.priority)}>
+									<p><strong>[{flag.priority.toUpperCase()}]</strong> {flag.category}: {flag.message}</p>
+								</Alert>
+							</li>
 						{/each}
-					</div>
-				</div>
-			{/if}
+					</ul>
+				{/if}
 
-			<!-- AQ-10 Breakdown -->
-			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">AQ-10 Score Breakdown</h2>
-					<table class="w-full text-sm">
+				{#if result.firedRules.length > 0}
+					<h2>AQ-10 Score Breakdown</h2>
+					<table class="domain-table">
 						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Question</th>
-								<th class="pb-2 pr-4">Domain</th>
-								<th class="pb-2 pr-4">Item</th>
-								<th class="pb-2">Score</th>
-							</tr>
+							<tr><th>Question</th><th>Domain</th><th>Item</th><th>Score</th></tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.domain}</td>
-									<td class="py-2 pr-4">{rule.description}</td>
-									<td class="py-2 font-bold">{rule.score}/1</td>
+							{#each result.firedRules as rule (rule.id)}
+								<tr>
+									<td><code>{rule.id}</code></td>
+									<td>{rule.domain}</td>
+									<td>{rule.description}</td>
+									<td><strong>{rule.score}/1</strong></td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Patient Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Summary</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Name:</span>
-						{data.demographics.firstName} {data.demographics.lastName}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">DOB:</span>
+				<h2>Patient Summary</h2>
+				<dl class="summary-grid">
+					<dt>Name</dt>
+					<dd>{data.demographics.firstName} {data.demographics.lastName}</dd>
+					<dt>DOB</dt>
+					<dd>
 						{data.demographics.dateOfBirth}
-						{#if calculateAge(data.demographics.dateOfBirth)}
-							(Age {calculateAge(data.demographics.dateOfBirth)})
-						{/if}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Sex:</span>
-						{data.demographics.sex}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Age Group:</span>
-						{data.demographics.ageGroup ? ageGroupLabel(data.demographics.ageGroup) : 'N/A'}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Referral Source:</span>
-						{data.screeningPurpose.referralSource ? referralSourceLabel(data.screeningPurpose.referralSource) : 'N/A'}
-					</div>
-					<div class="sm:col-span-2">
-						<span class="font-medium text-gray-600">Reason for Screening:</span>
-						{data.screeningPurpose.reasonForScreening || 'N/A'}
-					</div>
-				</div>
-			</div>
+						{#if calculateAge(data.demographics.dateOfBirth)} (Age {calculateAge(data.demographics.dateOfBirth)}){/if}
+					</dd>
+					<dt>Sex</dt>
+					<dd>{data.demographics.sex}</dd>
+					<dt>Age Group</dt>
+					<dd>{data.demographics.ageGroup ? ageGroupLabel(data.demographics.ageGroup) : 'N/A'}</dd>
+					<dt>Referral Source</dt>
+					<dd>{data.screeningPurpose.referralSource ? referralSourceLabel(data.screeningPurpose.referralSource) : 'N/A'}</dd>
+				</dl>
 
-			<!-- Current Support -->
-			{#if data.currentSupport.currentTherapies.length > 0 || data.currentSupport.medications.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Current Support</h2>
+				{#if data.screeningPurpose.reasonForScreening}
+					<h3>Reason for Screening</h3>
+					<p>{data.screeningPurpose.reasonForScreening}</p>
+				{/if}
+
+				{#if data.currentSupport.currentTherapies.length > 0 || data.currentSupport.medications.length > 0}
+					<h2>Current Support</h2>
 					{#if data.currentSupport.currentTherapies.length > 0}
-						<h3 class="text-sm font-semibold text-gray-600">Therapies</h3>
-						<ul class="list-disc space-y-1 pl-5 text-sm mb-3">
-							{#each data.currentSupport.currentTherapies as therapy}
+						<h3>Therapies</h3>
+						<ul>
+							{#each data.currentSupport.currentTherapies as therapy (therapy)}
 								<li>{therapy}</li>
 							{/each}
 						</ul>
 					{/if}
 					{#if data.currentSupport.medications.length > 0}
-						<h3 class="text-sm font-semibold text-gray-600">Medications</h3>
-						<ul class="list-disc space-y-1 pl-5 text-sm">
-							{#each data.currentSupport.medications as med}
+						<h3>Medications</h3>
+						<ul>
+							{#each data.currentSupport.medications as med (med.name)}
 								<li>{med.name} {med.dose} {med.frequency}</li>
 							{/each}
 						</ul>
 					{/if}
-				</div>
-			{/if}
+				{/if}
+			</Panel>
 		</main>
 	</div>
 {/if}
+
+<style>
+	.flag-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+	.domain-table { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.5rem; }
+	.domain-table td, .domain-table th { padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+	.summary-grid { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem; margin: 0; font-size: 0.9375rem; }
+	.summary-grid dt { font-weight: 500; color: var(--color-muted); }
+	.summary-grid dd { margin: 0; }
+</style>

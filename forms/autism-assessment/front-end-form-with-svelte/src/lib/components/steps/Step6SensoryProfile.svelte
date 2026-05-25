@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const sp = assessment.data.sensoryProfile;
 
@@ -12,53 +13,30 @@
 		{ value: 'moderate', label: 'Moderate' },
 		{ value: 'severe', label: 'Severe' }
 	];
+
+	const rows: { key: 'visualSensitivity' | 'auditorySensitivity' | 'tactileSensitivity' | 'olfactorySensitivity' | 'gustatorySensitivity'; label: string }[] = [
+		{ key: 'visualSensitivity', label: 'Visual sensitivity (e.g., bright lights, certain patterns, visual overload)' },
+		{ key: 'auditorySensitivity', label: 'Auditory sensitivity (e.g., loud sounds, background noise)' },
+		{ key: 'tactileSensitivity', label: 'Tactile sensitivity (e.g., clothing textures, light touch, temperature)' },
+		{ key: 'olfactorySensitivity', label: 'Olfactory sensitivity (e.g., certain smells, perfumes, food odors)' },
+		{ key: 'gustatorySensitivity', label: 'Gustatory sensitivity (e.g., food textures, specific tastes, limited diet)' }
+	];
 </script>
 
-<SectionCard title="Sensory Profile" description="Sensory sensitivities and seeking behaviors">
-	<RadioGroup
-		label="Visual sensitivity (e.g., bright lights, certain patterns, visual overload)"
-		name="visualSensitivity"
-		options={sensoryOptions}
-		bind:value={sp.visualSensitivity}
-		required
-	/>
+<Fieldset legend="Sensory Profile">
+	<p class="hint">Sensory sensitivities and seeking behaviors.</p>
 
-	<RadioGroup
-		label="Auditory sensitivity (e.g., loud sounds, background noise, specific frequencies)"
-		name="auditorySensitivity"
-		options={sensoryOptions}
-		bind:value={sp.auditorySensitivity}
-		required
-	/>
+	{#each rows as r (r.key)}
+		<Field label={r.label} required>
+			<RadioGroup label={r.label}>
+				{#each sensoryOptions as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={r.key} value={opt.value} bind:group={sp[r.key]} required /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
 
-	<RadioGroup
-		label="Tactile sensitivity (e.g., clothing textures, light touch, temperature)"
-		name="tactileSensitivity"
-		options={sensoryOptions}
-		bind:value={sp.tactileSensitivity}
-		required
-	/>
-
-	<RadioGroup
-		label="Olfactory sensitivity (e.g., certain smells, perfumes, food odors)"
-		name="olfactorySensitivity"
-		options={sensoryOptions}
-		bind:value={sp.olfactorySensitivity}
-		required
-	/>
-
-	<RadioGroup
-		label="Gustatory sensitivity (e.g., food textures, specific tastes, limited diet)"
-		name="gustatorySensitivity"
-		options={sensoryOptions}
-		bind:value={sp.gustatorySensitivity}
-		required
-	/>
-
-	<TextArea
-		label="Sensory seeking behaviors"
-		name="sensorySeekingBehaviors"
-		bind:value={sp.sensorySeekingBehaviors}
-		placeholder="Describe any sensory seeking behaviors (e.g., spinning, deep pressure, chewing objects)..."
-	/>
-</SectionCard>
+	<Field label="Sensory seeking behaviors" inputId="sensorySeekingBehaviors">
+		<TextAreaInput id="sensorySeekingBehaviors" label="Sensory seeking behaviors" rows={3} bind:value={sp.sensorySeekingBehaviors} />
+	</Field>
+</Fieldset>

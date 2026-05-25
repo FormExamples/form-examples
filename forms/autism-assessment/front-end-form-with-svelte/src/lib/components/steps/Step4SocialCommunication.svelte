@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const sc = assessment.data.socialCommunication;
 
@@ -15,42 +16,38 @@
 	];
 </script>
 
-<SectionCard title="Social Communication" description="Social interaction and communication patterns">
-	<RadioGroup
-		label="How often do you maintain comfortable eye contact during conversation?"
-		name="eyeContact"
-		options={frequencyOptions}
-		bind:value={sc.eyeContact}
-		required
-	/>
+<Fieldset legend="Social Communication">
+	<p class="hint">Social interaction and communication patterns.</p>
 
-	<RadioGroup
-		label="How often do you engage in social reciprocity (turn-taking in conversation, responding to others' emotions)?"
-		name="socialReciprocity"
-		options={frequencyOptions}
-		bind:value={sc.socialReciprocity}
-		required
-	/>
+	<Field label="How often do you maintain comfortable eye contact during conversation?" required>
+		<RadioGroup label="Eye contact">
+			{#each frequencyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="eyeContact" value={opt.value} bind:group={sc.eyeContact} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="How often do you find it easy to start and maintain conversations?"
-		name="conversationSkills"
-		options={frequencyOptions}
-		bind:value={sc.conversationSkills}
-		required
-	/>
+	<Field label="How often do you engage in social reciprocity?" required>
+		<RadioGroup label="Social reciprocity">
+			{#each frequencyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="socialReciprocity" value={opt.value} bind:group={sc.socialReciprocity} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextArea
-		label="Describe your friendship patterns"
-		name="friendshipPatterns"
-		bind:value={sc.friendshipPatterns}
-		placeholder="e.g., number of close friends, how friendships are maintained, difficulties in social relationships..."
-	/>
+	<Field label="How often do you find it easy to start and maintain conversations?" required>
+		<RadioGroup label="Conversation skills">
+			{#each frequencyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="conversationSkills" value={opt.value} bind:group={sc.conversationSkills} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextArea
-		label="Any additional social communication difficulties"
-		name="socialDifficultiesDetails"
-		bind:value={sc.socialDifficultiesDetails}
-		placeholder="Describe any other social or communication challenges..."
-	/>
-</SectionCard>
+	<Field label="Describe your friendship patterns" inputId="friendshipPatterns">
+		<TextAreaInput id="friendshipPatterns" label="Friendship patterns" rows={3} bind:value={sc.friendshipPatterns} />
+	</Field>
+
+	<Field label="Any additional social communication difficulties" inputId="socialDifficultiesDetails">
+		<TextAreaInput id="socialDifficultiesDetails" label="Social difficulties details" rows={3} bind:value={sc.socialDifficultiesDetails} />
+	</Field>
+</Fieldset>

@@ -1,37 +1,28 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const dh = assessment.data.developmentalHistory;
 </script>
 
-<SectionCard title="Developmental History" description="Early developmental milestones and behaviors">
-	<TextArea
-		label="Language milestones"
-		name="languageMilestones"
-		bind:value={dh.languageMilestones}
-		placeholder="e.g., age of first words, first sentences, any speech delays or regression..."
-	/>
+<Fieldset legend="Developmental History">
+	<p class="hint">Early developmental milestones and behaviors.</p>
 
-	<TextArea
-		label="Motor milestones"
-		name="motorMilestones"
-		bind:value={dh.motorMilestones}
-		placeholder="e.g., age of crawling, walking, fine motor skill development, coordination difficulties..."
-	/>
+	<Field label="Language milestones" inputId="languageMilestones">
+		<TextAreaInput id="languageMilestones" label="Language milestones" rows={3} bind:value={dh.languageMilestones} />
+	</Field>
 
-	<TextArea
-		label="Early social behavior"
-		name="earlySocialBehavior"
-		bind:value={dh.earlySocialBehavior}
-		placeholder="e.g., joint attention, pointing, shared play, response to name, attachment patterns..."
-	/>
+	<Field label="Motor milestones" inputId="motorMilestones">
+		<TextAreaInput id="motorMilestones" label="Motor milestones" rows={3} bind:value={dh.motorMilestones} />
+	</Field>
 
-	<TextArea
-		label="Any developmental concerns noted by parents, teachers, or professionals"
-		name="developmentalConcerns"
-		bind:value={dh.developmentalConcerns}
-		placeholder="Describe any concerns raised during childhood..."
-	/>
-</SectionCard>
+	<Field label="Early social behavior" inputId="earlySocialBehavior">
+		<TextAreaInput id="earlySocialBehavior" label="Early social behavior" rows={3} bind:value={dh.earlySocialBehavior} />
+	</Field>
+
+	<Field label="Any developmental concerns" inputId="developmentalConcerns">
+		<TextAreaInput id="developmentalConcerns" label="Developmental concerns" rows={3} bind:value={dh.developmentalConcerns} />
+	</Field>
+</Fieldset>

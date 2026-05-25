@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const rb = assessment.data.repetitiveBehaviors;
+	const yesNo = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 
 	const frequencyOptions = [
 		{ value: 'never', label: 'Never' },
@@ -15,47 +20,40 @@
 	];
 </script>
 
-<SectionCard title="Repetitive Behaviors" description="Routines, interests, and repetitive patterns">
-	<RadioGroup
-		label="How strongly do you adhere to routines and rituals?"
-		name="routineAdherence"
-		options={frequencyOptions}
-		bind:value={rb.routineAdherence}
-		required
-	/>
+<Fieldset legend="Repetitive Behaviors">
+	<p class="hint">Routines, interests, and repetitive patterns.</p>
 
-	<TextArea
-		label="Describe any special or intense interests"
-		name="specialInterests"
-		bind:value={rb.specialInterests}
-		placeholder="e.g., specific topics, collections, activities that are pursued with unusual intensity..."
-	/>
+	<Field label="How strongly do you adhere to routines and rituals?" required>
+		<RadioGroup label="Routine adherence">
+			{#each frequencyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="routineAdherence" value={opt.value} bind:group={rb.routineAdherence} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Do you engage in repetitive movements (e.g., hand flapping, rocking, spinning)?"
-		name="repetitiveMovements"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={rb.repetitiveMovements}
-		required
-	/>
+	<Field label="Describe any special or intense interests" inputId="specialInterests">
+		<TextAreaInput id="specialInterests" label="Special interests" rows={3} bind:value={rb.specialInterests} />
+	</Field>
+
+	<Field label="Do you engage in repetitive movements?" required>
+		<RadioGroup label="Repetitive movements">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="repetitiveMovements" value={opt.value} bind:group={rb.repetitiveMovements} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if rb.repetitiveMovements === 'yes'}
-		<TextArea
-			label="Describe the repetitive movements"
-			name="repetitiveMovementsDetails"
-			bind:value={rb.repetitiveMovementsDetails}
-			placeholder="Describe the types of repetitive movements and when they occur..."
-		/>
+		<Field label="Describe the repetitive movements" inputId="repetitiveMovementsDetails">
+			<TextAreaInput id="repetitiveMovementsDetails" label="Repetitive movement details" rows={3} bind:value={rb.repetitiveMovementsDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup
-		label="How much do you resist changes to routine or environment?"
-		name="resistanceToChange"
-		options={frequencyOptions}
-		bind:value={rb.resistanceToChange}
-		required
-	/>
-</SectionCard>
+	<Field label="How much do you resist changes to routine or environment?" required>
+		<RadioGroup label="Resistance to change">
+			{#each frequencyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="resistanceToChange" value={opt.value} bind:group={rb.resistanceToChange} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

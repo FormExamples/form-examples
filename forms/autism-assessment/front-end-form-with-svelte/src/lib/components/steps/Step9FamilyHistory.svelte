@@ -1,90 +1,39 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const fh = assessment.data.familyHistory;
+	const yesNo = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
+
+	const rows: { key: 'autismFamily' | 'adhdFamily' | 'learningDisabilities' | 'mentalHealthFamily'; label: string; detailsKey: keyof typeof fh }[] = [
+		{ key: 'autismFamily', label: 'Family history of autism spectrum disorder?', detailsKey: 'autismFamilyDetails' },
+		{ key: 'adhdFamily', label: 'Family history of ADHD?', detailsKey: 'adhdFamilyDetails' },
+		{ key: 'learningDisabilities', label: 'Family history of learning disabilities?', detailsKey: 'learningDisabilitiesDetails' },
+		{ key: 'mentalHealthFamily', label: 'Family history of mental health conditions?', detailsKey: 'mentalHealthFamilyDetails' }
+	];
 </script>
 
-<SectionCard title="Family History" description="Family history of neurodevelopmental and mental health conditions">
-	<RadioGroup
-		label="Family history of autism spectrum disorder?"
-		name="autismFamily"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={fh.autismFamily}
-		required
-	/>
+<Fieldset legend="Family History">
+	<p class="hint">Family history of neurodevelopmental and mental health conditions.</p>
 
-	{#if fh.autismFamily === 'yes'}
-		<TextArea
-			label="Details of autism in family"
-			name="autismFamilyDetails"
-			bind:value={fh.autismFamilyDetails}
-			placeholder="Which family members? Age at diagnosis?"
-		/>
-	{/if}
-
-	<RadioGroup
-		label="Family history of ADHD?"
-		name="adhdFamily"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={fh.adhdFamily}
-		required
-	/>
-
-	{#if fh.adhdFamily === 'yes'}
-		<TextArea
-			label="Details of ADHD in family"
-			name="adhdFamilyDetails"
-			bind:value={fh.adhdFamilyDetails}
-			placeholder="Which family members? Age at diagnosis?"
-		/>
-	{/if}
-
-	<RadioGroup
-		label="Family history of learning disabilities?"
-		name="learningDisabilities"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={fh.learningDisabilities}
-		required
-	/>
-
-	{#if fh.learningDisabilities === 'yes'}
-		<TextArea
-			label="Details of learning disabilities in family"
-			name="learningDisabilitiesDetails"
-			bind:value={fh.learningDisabilitiesDetails}
-			placeholder="Which family members? What type of learning disability?"
-		/>
-	{/if}
-
-	<RadioGroup
-		label="Family history of mental health conditions?"
-		name="mentalHealthFamily"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={fh.mentalHealthFamily}
-		required
-	/>
-
-	{#if fh.mentalHealthFamily === 'yes'}
-		<TextArea
-			label="Details of mental health conditions in family"
-			name="mentalHealthFamilyDetails"
-			bind:value={fh.mentalHealthFamilyDetails}
-			placeholder="Which family members? What conditions (depression, anxiety, bipolar, etc.)?"
-		/>
-	{/if}
-</SectionCard>
+	{#each rows as r (r.key)}
+		<Field label={r.label} required>
+			<RadioGroup label={r.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={r.key} value={opt.value} bind:group={fh[r.key]} required /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		{#if fh[r.key] === 'yes'}
+			<Field label={`${r.label} details`} inputId={r.detailsKey as string}>
+				<TextAreaInput id={r.detailsKey as string} label={`${r.label} details`} rows={2} bind:value={fh[r.detailsKey] as string} />
+			</Field>
+		{/if}
+	{/each}
+</Fieldset>
