@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { actScoreLabel, actScoreColor, bmiCategory, calculateAge, controlLevelLabel, fev1Severity } from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	import { bmiCategory, calculateAge, controlLevelLabel, fev1Severity } from '$lib/engine/utils';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -44,11 +46,17 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
-	};
+	function controlAlertType(score: number): 'success' | 'warning' | 'error' {
+		if (score >= 20) return 'success';
+		if (score >= 16) return 'warning';
+		return 'error';
+	}
+
+	function flagAlertType(priority: string): 'info' | 'warning' | 'error' {
+		if (priority === 'high') return 'error';
+		if (priority === 'medium') return 'warning';
+		return 'info';
+	}
 </script>
 
 {#if result}
@@ -56,196 +64,165 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Asthma Assessment Report</h1>
-				<div class="flex gap-3">
+				<div class="button-group">
 					{#if pdfError}
 						<span class="text-sm text-red-600">{pdfError}</span>
 					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Assessment
-					</button>
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Assessment</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- ACT Score Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {actScoreColor(result.actScore)}">
-				<div class="text-3xl font-bold">ACT Score: {result.actScore}</div>
-				<div class="mt-1 text-lg">{controlLevelLabel(result.controlLevel)}</div>
-				<div class="mt-2 text-sm opacity-75">
-					Generated {new Date(result.timestamp).toLocaleString()}
-				</div>
-			</div>
+			<Panel label="Asthma assessment report" class="report-panel">
+				<Alert
+					type={controlAlertType(result.actScore)}
+					heading={`ACT Score: ${result.actScore} — ${controlLevelLabel(result.controlLevel)}`}
+				>
+					<p>Generated {new Date(result.timestamp).toLocaleString()}</p>
+				</Alert>
 
-			<!-- ACT Question Breakdown -->
-			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">ACT Score Breakdown</h2>
-					<table class="w-full text-sm">
+				{#if result.firedRules.length > 0}
+					<h2>ACT Score Breakdown</h2>
+					<table class="domain-table">
 						<thead>
-							<tr class="border-b text-left text-gray-600">
-								<th class="pb-2 pr-4">Question</th>
-								<th class="pb-2 pr-4">Category</th>
-								<th class="pb-2">Score</th>
+							<tr>
+								<th>Question</th>
+								<th>Category</th>
+								<th>Score</th>
 							</tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
-								<tr class="border-b border-gray-100">
-									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
-									<td class="py-2 pr-4">{rule.category}</td>
-									<td class="py-2">
-										<span class="inline-block rounded-full border px-3 py-1 text-xs font-bold {rule.score >= 4 ? 'bg-green-100 text-green-800 border-green-300' : rule.score >= 3 ? 'bg-yellow-100 text-yellow-800 border-yellow-300' : 'bg-red-100 text-red-800 border-red-300'}">
-											{rule.score}/5
-										</span>
-									</td>
+							{#each result.firedRules as rule (rule.id)}
+								<tr>
+									<td><code>{rule.id}</code></td>
+									<td>{rule.category}</td>
+									<td>{rule.score}/5</td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Additional Flags -->
-			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues for Clinician</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
+				{#if result.additionalFlags.length > 0}
+					<h2>Flagged Issues for Clinician</h2>
+					<ul class="flag-list">
+						{#each result.additionalFlags as flag (flag.category + flag.message)}
+							<li>
+								<Alert type={flagAlertType(flag.priority)}>
+									<p>
+										<strong>[{flag.priority.toUpperCase()}]</strong>
+										{flag.category}: {flag.message}
+									</p>
+								</Alert>
+							</li>
 						{/each}
-					</div>
-				</div>
-			{/if}
+					</ul>
+				{/if}
 
-			<!-- Patient Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Summary</h2>
-				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
-					<div>
-						<span class="font-medium text-gray-600">Name:</span>
-						{data.demographics.firstName} {data.demographics.lastName}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">DOB:</span>
+				<h2>Patient Summary</h2>
+				<dl class="summary-grid">
+					<dt>Name</dt>
+					<dd>{data.demographics.firstName} {data.demographics.lastName}</dd>
+					<dt>DOB</dt>
+					<dd>
 						{data.demographics.dateOfBirth}
 						{#if calculateAge(data.demographics.dateOfBirth)}
 							(Age {calculateAge(data.demographics.dateOfBirth)})
 						{/if}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">Sex:</span>
-						{data.demographics.sex}
-					</div>
-					<div>
-						<span class="font-medium text-gray-600">BMI:</span>
+					</dd>
+					<dt>Sex</dt>
+					<dd>{data.demographics.sex}</dd>
+					<dt>BMI</dt>
+					<dd>
 						{data.demographics.bmi ?? 'N/A'}
 						{#if data.demographics.bmi}
 							({bmiCategory(data.demographics.bmi)})
 						{/if}
-					</div>
-				</div>
-			</div>
+					</dd>
+				</dl>
 
-			<!-- Lung Function Summary -->
-			{#if data.lungFunction.fev1Percent !== null || data.lungFunction.peakFlowPercent !== null}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Lung Function</h2>
-					<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
+				{#if data.lungFunction.fev1Percent !== null || data.lungFunction.peakFlowPercent !== null}
+					<h2>Lung Function</h2>
+					<dl class="summary-grid">
 						{#if data.lungFunction.fev1Percent !== null}
-							<div>
-								<span class="font-medium text-gray-600">FEV1:</span>
-								{data.lungFunction.fev1Percent}% ({fev1Severity(data.lungFunction.fev1Percent)})
-							</div>
+							<dt>FEV1</dt>
+							<dd>{data.lungFunction.fev1Percent}% ({fev1Severity(data.lungFunction.fev1Percent)})</dd>
 						{/if}
 						{#if data.lungFunction.fev1Fvc !== null}
-							<div>
-								<span class="font-medium text-gray-600">FEV1/FVC:</span>
-								{data.lungFunction.fev1Fvc}
-							</div>
+							<dt>FEV1/FVC</dt>
+							<dd>{data.lungFunction.fev1Fvc}</dd>
 						{/if}
 						{#if data.lungFunction.peakFlowPercent !== null}
-							<div>
-								<span class="font-medium text-gray-600">Peak Flow:</span>
-								{data.lungFunction.peakFlowCurrent} L/min ({data.lungFunction.peakFlowPercent}% of best)
-							</div>
+							<dt>Peak Flow</dt>
+							<dd>{data.lungFunction.peakFlowCurrent} L/min ({data.lungFunction.peakFlowPercent}% of best)</dd>
 						{/if}
-					</div>
-				</div>
-			{/if}
+					</dl>
+				{/if}
 
-			<!-- Medications -->
-			{#if data.currentMedications.controllerMedications.length > 0 || data.currentMedications.rescueInhalers.length > 0 || data.currentMedications.biologics.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Medications</h2>
+				{#if data.currentMedications.controllerMedications.length > 0 || data.currentMedications.rescueInhalers.length > 0 || data.currentMedications.biologics.length > 0}
+					<h2>Medications</h2>
 					{#if data.currentMedications.controllerMedications.length > 0}
-						<h3 class="mb-2 text-sm font-semibold text-gray-700">Controllers</h3>
-						<ul class="list-disc space-y-1 pl-5 text-sm">
-							{#each data.currentMedications.controllerMedications as med}
+						<h3>Controllers</h3>
+						<ul>
+							{#each data.currentMedications.controllerMedications as med (med.name)}
 								<li>{med.name} {med.dose} {med.frequency}</li>
 							{/each}
 						</ul>
 					{/if}
 					{#if data.currentMedications.rescueInhalers.length > 0}
-						<h3 class="mt-3 mb-2 text-sm font-semibold text-gray-700">Rescue Inhalers</h3>
-						<ul class="list-disc space-y-1 pl-5 text-sm">
-							{#each data.currentMedications.rescueInhalers as med}
+						<h3>Rescue Inhalers</h3>
+						<ul>
+							{#each data.currentMedications.rescueInhalers as med (med.name)}
 								<li>{med.name} {med.dose} {med.frequency}</li>
 							{/each}
 						</ul>
 					{/if}
 					{#if data.currentMedications.biologics.length > 0}
-						<h3 class="mt-3 mb-2 text-sm font-semibold text-gray-700">Biologics</h3>
-						<ul class="list-disc space-y-1 pl-5 text-sm">
-							{#each data.currentMedications.biologics as med}
+						<h3>Biologics</h3>
+						<ul>
+							{#each data.currentMedications.biologics as med (med.name)}
 								<li>{med.name} {med.dose} {med.frequency}</li>
 							{/each}
 						</ul>
 					{/if}
-				</div>
-			{/if}
+				{/if}
 
-			<!-- Allergies -->
-			{#if data.allergies.drugAllergies.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Drug Allergies</h2>
-					<ul class="list-disc space-y-1 pl-5 text-sm">
-						{#each data.allergies.drugAllergies as allergy}
+				{#if data.allergies.drugAllergies.length > 0}
+					<h2>Drug Allergies</h2>
+					<ul>
+						{#each data.allergies.drugAllergies as allergy (allergy.allergen)}
 							<li>
-								<strong>{allergy.allergen}</strong> - {allergy.reaction}
+								<strong>{allergy.allergen}</strong> — {allergy.reaction}
 								{#if allergy.severity}
-									<span class="ml-1 rounded px-1.5 py-0.5 text-xs {allergy.severity === 'anaphylaxis' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">
-										{allergy.severity}
-									</span>
+									<span class="severity-badge">{allergy.severity}</span>
 								{/if}
 							</li>
 						{/each}
 					</ul>
-				</div>
-			{/if}
+				{/if}
+			</Panel>
 		</main>
 	</div>
 {/if}
+
+<style>
+	.flag-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+	.domain-table { width: 100%; font-size: 0.875rem; border-collapse: collapse; margin-top: 0.5rem; }
+	.domain-table td, .domain-table th { padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+	.summary-grid { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem; margin: 0; font-size: 0.9375rem; }
+	.summary-grid dt { font-weight: 500; color: var(--color-muted); }
+	.summary-grid dd { margin: 0; }
+	.severity-badge {
+		display: inline-block;
+		padding: 0.125rem 0.5rem;
+		background: var(--color-warning-bg);
+		color: var(--color-warning);
+		border-radius: 9999px;
+		font-size: 0.75rem;
+		font-weight: 500;
+		margin-left: 0.25rem;
+	}
+</style>

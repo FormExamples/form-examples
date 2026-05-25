@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
 
 	const a = assessment.data.allergies;
 	const yesNo = [
@@ -20,46 +21,53 @@
 	}
 </script>
 
-<SectionCard title="Allergies" description="Document drug allergies and environmental sensitivities">
-	<h3 class="mb-2 text-sm font-semibold text-gray-700">Drug Allergies</h3>
-	<AllergyEntry bind:allergies={a.drugAllergies} />
-	{#if a.drugAllergies.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No drug allergies added. Click the button above to add one, or proceed if you have none.</p>
+<Fieldset legend="Allergies">
+	<p class="hint">Document drug allergies and environmental sensitivities.</p>
+
+	<Field label="Drug Allergies">
+		<AllergyEntry bind:allergies={a.drugAllergies} />
+	</Field>
+
+	<Field label="Environmental Allergies">
+		<div class="env-list">
+			{#each a.environmentalAllergies as _, i (i)}
+				<div class="env-row">
+					<input
+						type="text"
+						class="text-input"
+						placeholder="e.g., dust mites, pollen, mould, pet dander"
+						aria-label="Environmental allergen"
+						bind:value={a.environmentalAllergies[i]}
+					/>
+					<button
+						type="button"
+						class="button"
+						data-variant="danger"
+						onclick={() => removeEnvironmentalAllergy(i)}
+						aria-label="Remove environmental allergy"
+					>×</button>
+				</div>
+			{/each}
+			<button type="button" class="button" onclick={addEnvironmentalAllergy}>+ Add Environmental Allergy</button>
+		</div>
+	</Field>
+
+	<Field label="Has allergy testing been done?">
+		<RadioGroup label="Allergy testing done">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="allergyTestingDone" value={opt.value} bind:group={a.allergyTestingDone} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	{#if a.allergyTestingDone === 'yes'}
+		<Field label="Allergy Test Results" inputId="allergyTestResults">
+			<TextAreaInput id="allergyTestResults" label="Allergy test results" rows={3} bind:value={a.allergyTestResults} />
+		</Field>
 	{/if}
+</Fieldset>
 
-	<h3 class="mt-6 mb-2 text-sm font-semibold text-gray-700">Environmental Allergies</h3>
-	<div class="space-y-2">
-		{#each a.environmentalAllergies as allergy, i}
-			<div class="flex items-center gap-2">
-				<input
-					type="text"
-					placeholder="e.g., dust mites, pollen, mold, pet dander"
-					bind:value={a.environmentalAllergies[i]}
-					class="flex-1 rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<button
-					type="button"
-					onclick={() => removeEnvironmentalAllergy(i)}
-					class="text-red-500 hover:text-red-700"
-					aria-label="Remove environmental allergy"
-				>
-					&times;
-				</button>
-			</div>
-		{/each}
-		<button
-			type="button"
-			onclick={addEnvironmentalAllergy}
-			class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-		>
-			+ Add Environmental Allergy
-		</button>
-	</div>
-
-	<div class="mt-6">
-		<RadioGroup label="Has allergy testing been done?" name="allergyTestingDone" options={yesNo} bind:value={a.allergyTestingDone} />
-		{#if a.allergyTestingDone === 'yes'}
-			<TextArea label="Allergy Test Results" name="allergyTestResults" bind:value={a.allergyTestResults} placeholder="Describe test results..." />
-		{/if}
-	</div>
-</SectionCard>
+<style>
+	.env-list { display: flex; flex-direction: column; gap: 0.5rem; }
+	.env-row { display: flex; align-items: center; gap: 0.5rem; }
+	.env-row .text-input { flex: 1; }
+</style>

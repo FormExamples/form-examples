@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const t = assessment.data.triggers;
 	const yesNo = [
@@ -12,39 +13,94 @@
 	];
 </script>
 
-<SectionCard title="Triggers" description="What triggers or worsens your asthma symptoms?">
-	<RadioGroup label="Do allergens trigger your asthma? (dust mites, pollen, mold, pet dander)" name="allergens" options={yesNo} bind:value={t.allergens} />
+<Fieldset legend="Triggers">
+	<p class="hint">What triggers or worsens your asthma symptoms?</p>
+
+	<Field label="Do allergens trigger your asthma? (dust mites, pollen, mould, pet dander)">
+		<RadioGroup label="Allergens">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="allergens" value={opt.value} bind:group={t.allergens} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.allergens === 'yes'}
-		<TextInput label="Which allergens?" name="allergenDetails" bind:value={t.allergenDetails} />
+		<Field label="Which allergens?" inputId="allergenDetails">
+			<TextInput id="allergenDetails" label="Allergens" bind:value={t.allergenDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Does exercise trigger your asthma?" name="exercise" options={yesNo} bind:value={t.exercise} />
+	<Field label="Does exercise trigger your asthma?">
+		<RadioGroup label="Exercise">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="exercise" value={opt.value} bind:group={t.exercise} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Does weather or temperature change trigger your asthma?" name="weather" options={yesNo} bind:value={t.weather} />
+	<Field label="Does weather or temperature change trigger your asthma?">
+		<RadioGroup label="Weather">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="weather" value={opt.value} bind:group={t.weather} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.weather === 'yes'}
-		<TextInput label="Details (cold air, humidity, etc.)" name="weatherDetails" bind:value={t.weatherDetails} />
+		<Field label="Details (cold air, humidity, etc.)" inputId="weatherDetails">
+			<TextInput id="weatherDetails" label="Weather details" bind:value={t.weatherDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have occupational triggers?" name="occupational" options={yesNo} bind:value={t.occupational} />
+	<Field label="Do you have occupational triggers?">
+		<RadioGroup label="Occupational">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="occupational" value={opt.value} bind:group={t.occupational} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.occupational === 'yes'}
-		<TextInput label="What are the occupational triggers?" name="occupationalDetails" bind:value={t.occupationalDetails} />
+		<Field label="What are the occupational triggers?" inputId="occupationalDetails">
+			<TextInput id="occupationalDetails" label="Occupational triggers" bind:value={t.occupationalDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do respiratory infections worsen your asthma?" name="infections" options={yesNo} bind:value={t.infections} />
+	<Field label="Do respiratory infections worsen your asthma?">
+		<RadioGroup label="Infections">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="infections" value={opt.value} bind:group={t.infections} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Does smoke exposure trigger your asthma?" name="smoke" options={yesNo} bind:value={t.smoke} />
+	<Field label="Does smoke exposure trigger your asthma?">
+		<RadioGroup label="Smoke">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="smoke" value={opt.value} bind:group={t.smoke} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Does stress or strong emotions trigger your asthma?" name="stress" options={yesNo} bind:value={t.stress} />
+	<Field label="Does stress or strong emotions trigger your asthma?">
+		<RadioGroup label="Stress">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="stress" value={opt.value} bind:group={t.stress} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do any medications trigger your asthma? (e.g., aspirin, beta-blockers)" name="medications" options={yesNo} bind:value={t.medications} />
+	<Field label="Do any medications trigger your asthma? (e.g., aspirin, beta-blockers)">
+		<RadioGroup label="Medications">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="trigMedications" value={opt.value} bind:group={t.medications} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.medications === 'yes'}
-		<TextInput label="Which medications?" name="medicationDetails" bind:value={t.medicationDetails} />
+		<Field label="Which medications?" inputId="medicationDetails">
+			<TextInput id="medicationDetails" label="Medication triggers" bind:value={t.medicationDetails} />
+		</Field>
 	{/if}
 
-	<TextArea
-		label="Other triggers"
-		name="otherTriggers"
-		bind:value={t.otherTriggers}
-		placeholder="Any other triggers not listed above..."
-	/>
-</SectionCard>
+	<Field label="Other triggers" inputId="otherTriggers">
+		<TextAreaInput id="otherTriggers" label="Other triggers" rows={3} bind:value={t.otherTriggers} />
+	</Field>
+</Fieldset>

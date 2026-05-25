@@ -1,62 +1,98 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.socialHistory;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const smokingOptions = [
+		{ value: 'current', label: 'Current smoker' },
+		{ value: 'ex', label: 'Ex-smoker' },
+		{ value: 'never', label: 'Never smoked' }
+	];
+
+	const vapingOptions = [
+		{ value: 'current', label: 'Current vaper' },
+		{ value: 'ex', label: 'Ex-vaper' },
+		{ value: 'never', label: 'Never vaped' }
+	];
 </script>
 
-<SectionCard title="Social History" description="Lifestyle and environmental factors affecting your asthma">
-	<RadioGroup
-		label="Do you smoke?"
-		name="smoking"
-		options={[
-			{ value: 'current', label: 'Current smoker' },
-			{ value: 'ex', label: 'Ex-smoker' },
-			{ value: 'never', label: 'Never smoked' }
-		]}
-		bind:value={s.smoking}
-	/>
+<Fieldset legend="Social History">
+	<p class="hint">Lifestyle and environmental factors affecting your asthma.</p>
+
+	<Field label="Do you smoke?">
+		<RadioGroup label="Smoking">
+			{#each smokingOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="smoking" value={opt.value} bind:group={s.smoking} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.smoking === 'current' || s.smoking === 'ex'}
-		<NumberInput label="Pack-years" name="smokingPackYears" bind:value={s.smokingPackYears} min={0} max={200} />
+		<Field label="Pack-years" inputId="smokingPackYears">
+			<NumberInput id="smokingPackYears" label="Pack years" min={0} max={200} bind:value={s.smokingPackYears} />
+		</Field>
 	{/if}
 
-	<RadioGroup
-		label="Do you vape?"
-		name="vaping"
-		options={[
-			{ value: 'current', label: 'Current vaper' },
-			{ value: 'ex', label: 'Ex-vaper' },
-			{ value: 'never', label: 'Never vaped' }
-		]}
-		bind:value={s.vaping}
-	/>
+	<Field label="Do you vape?">
+		<RadioGroup label="Vaping">
+			{#each vapingOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="vaping" value={opt.value} bind:group={s.vaping} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do you have occupational exposures (chemicals, fumes, dust)?" name="occupationalExposures" options={yesNo} bind:value={s.occupationalExposures} />
+	<Field label="Do you have occupational exposures (chemicals, fumes, dust)?">
+		<RadioGroup label="Occupational exposures">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="occupationalExposures" value={opt.value} bind:group={s.occupationalExposures} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.occupationalExposures === 'yes'}
-		<TextInput label="Details of occupational exposures" name="occupationalExposureDetails" bind:value={s.occupationalExposureDetails} />
+		<Field label="Details of occupational exposures" inputId="occupationalExposureDetails">
+			<TextInput id="occupationalExposureDetails" label="Occupational exposure details" bind:value={s.occupationalExposureDetails} />
+		</Field>
 	{/if}
 
-	<TextArea
-		label="Home environment"
-		name="homeEnvironment"
-		bind:value={s.homeEnvironment}
-		placeholder="Describe your home (e.g., type of housing, ventilation, heating system)..."
-	/>
+	<Field label="Home environment" inputId="homeEnvironment">
+		<TextAreaInput id="homeEnvironment" label="Home environment" rows={3} bind:value={s.homeEnvironment} />
+	</Field>
 
-	<RadioGroup label="Do you have pets?" name="pets" options={yesNo} bind:value={s.pets} />
+	<Field label="Do you have pets?">
+		<RadioGroup label="Pets">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="pets" value={opt.value} bind:group={s.pets} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.pets === 'yes'}
-		<TextInput label="What type of pets?" name="petDetails" bind:value={s.petDetails} />
+		<Field label="What type of pets?" inputId="petDetails">
+			<TextInput id="petDetails" label="Pet details" bind:value={s.petDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have carpet in your bedroom?" name="carpetInBedroom" options={yesNo} bind:value={s.carpetInBedroom} />
+	<Field label="Do you have carpet in your bedroom?">
+		<RadioGroup label="Carpet in bedroom">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="carpetInBedroom" value={opt.value} bind:group={s.carpetInBedroom} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Is there mold in your home?" name="moldExposure" options={yesNo} bind:value={s.moldExposure} />
-</SectionCard>
+	<Field label="Is there mould in your home?">
+		<RadioGroup label="Mould exposure">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="moldExposure" value={opt.value} bind:group={s.moldExposure} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
