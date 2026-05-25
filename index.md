@@ -8,15 +8,25 @@ engine, and generates a clinical report with flagged issues.
 
 ## Contents
 
-- 116 form projects, each in `forms/<slug>/`
-- PostgreSQL SQL migrations (Liquibase SQL format)
-- XML + DTD representations per SQL entity
-- FHIR HL7 R5 JSON resources per SQL entity
-- Four front-end implementations per form (form and dashboard, each in HTML and SvelteKit)
-- Full-stack Rust implementation (axum + Loco + Tera + HTMX + Alpine.js)
+- **134** form project directories under `forms/<slug>/`.
+- PostgreSQL SQL migrations in Liquibase SQL format (source of truth for data shape).
+- XML + DTD representations per SQL entity (generated).
+- FHIR HL7 R5 JSON resources per SQL entity (generated).
+- Protocol Buffers `.proto` schemas per SQL entity (generated).
+- OpenAPI 3.1 `.yaml` specifications per SQL entity (generated).
+- Four front-end implementations per form (form + dashboard, each in HTML and SvelteKit).
+- One Rust full-stack implementation per form (axum + Loco + Tera + HTMX + Alpine.js).
+- Lily Design System HTML headless contract for every HTML front-end.
 
 For the full list of form projects, see [`forms/AGENTS.md`](forms/AGENTS.md)
 or run `bin/forms-as-kebab-case`.
+
+## Spec-driven development
+
+- [`spec.md`](spec.md) — system spec (this monorepo)
+- [`forms/<slug>/spec.md`](forms/AGENTS.md) — per-form domain spec
+
+Update the spec before changing code. See `spec.md` §10 for the workflow.
 
 ## Form categories
 
@@ -33,26 +43,34 @@ or run `bin/forms-as-kebab-case`.
 | Training & certification  | CPR training, First aid, EMT psychomotor, Medical language speaking       |
 | Privacy & legal           | Care privacy notice, Code of conduct notice, Research privacy notice      |
 | WHO referral & emergency  | Acute referral, Counter-referral, Prehospital, Emergency unit forms       |
-| UK statutory              | DVLA B1/M1/V1, MAT B1 maternity certificate                               |
+| UK statutory              | DVLA B1/M1/V1, MAT B1 maternity certificate, LPA, fit-note (Med 3)        |
 
 ## Repository structure
 
 ```
 .
-├── AGENTS.md                       # Cross-cutting agent instructions (this repo)
+├── AGENTS.md                       # Cross-cutting agent instructions
 ├── AGENTS/                         # Per-stack agent documentation
+│   ├── fhir-r5.md
 │   ├── front-end-with-sveltekit-tailwind-svar.md
 │   ├── full-stack-with-loco-tera-htmx-alpine.md
 │   ├── full-stack-with-loco-tera-htmx-alpine-setup.md
+│   ├── openapi.md
+│   ├── protobuf.md
 │   ├── sql-migrations.md
-│   ├── xml-representations.md
-│   └── fhir-r5.md
-├── bin/                            # Tools (forms-as-kebab-case, create-form, test, etc.)
-├── docs/                           # Repo-wide docs (specs, plans)
+│   └── xml-representations.md
+├── bin/                            # Tools: generators, refactor, sync, scaffold, test
 ├── forms/                          # All form projects
-│   ├── AGENTS.md                   # Index of all forms
-│   └── <slug>/                     # One directory per form (see below)
+│   ├── AGENTS.md                       # Index of all forms
+│   ├── AGENTS-front-end-html.md        # Lily Design System HTML contract
+│   ├── lily-spec/                      # Pinned Lily component HTML snapshots
+│   ├── lily-version.md                 # Pinned Lily upstream commit hash
+│   ├── plan.md                         # Lily HTML refactor plan
+│   ├── tasks.md                        # Lily HTML refactor tasks
+│   └── <slug>/                         # One directory per form (see below)
 ├── index.md                        # This file
+├── README.md -> index.md           # Symlink for GitHub rendering
+├── spec.md                         # System spec (spec-driven development)
 ├── plan.md                         # Development plan / roadmap
 └── tasks.md                        # Task tracking
 ```
@@ -67,53 +85,61 @@ forms/<slug>/
   README.md -> index.md                            # Symlink for GitHub rendering
   AGENTS.md                                        # Agent instructions for this form
   CLAUDE.md                                        # Claude Code project instructions
+  spec.md                                          # Living domain spec
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
   doc/                                             # Documentation and references
-  sql-migrations/                                  # PostgreSQL Liquibase migrations
-  xml-representations/                             # XML + DTD per SQL table entity
-  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity
-  front-end-form-with-html/                        # Patient questionnaire (HTML)
+  sql-migrations/                                  # PostgreSQL Liquibase migrations (source of truth)
+  xml-representations/                             # XML + DTD per SQL entity (generated)
+  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
+  protobuf/                                        # Protocol Buffers .proto schemas (generated)
+  openapi/                                         # OpenAPI 3.1 .yaml specifications (generated)
+  front-end-form-with-html/                        # Patient questionnaire (HTML + Lily)
   front-end-form-with-svelte/                      # Patient questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML)
-  front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit)
-  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend (axum + Loco + Tera + HTMX + Alpine.js)
+  front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
+  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend
+  full-stack-with-loco-tera-htmx-alpine-setup      # Scaffold generator (executable script; generated)
 ```
 
 ## Design patterns
 
 ### Form
 
-1. Single-page, step-by-step wizard with `StepNavigation` and `ProgressBar`
-2. Pure scoring engine: `types.ts` → `*-rules.ts` → `*-grader.ts` → `flagged-issues.ts`
-3. Class-based Svelte 5 reactive store (`assessment.svelte.ts`) — no Svelte stores
-4. PDF report generation via SvelteKit server endpoint (`/report/pdf`)
-5. Vitest unit tests for grading logic
+1. Single-page, step-by-step wizard using `StepNavigation` + `ProgressBar` (SvelteKit) or `<progress class="progress">` + `<ol class="step-list">` (HTML / Lily).
+2. Pure scoring engine split into small files: `types.ts` → `*-rules.ts` → `*-grader.ts` → `flagged-issues.ts`.
+3. Class-based Svelte 5 reactive store (`assessment.svelte.ts`) — no Svelte 3/4 stores.
+4. PDF report generation via SvelteKit server endpoint (`/report/pdf`) using `pdfmake`.
+5. Vitest unit tests for grading logic.
 
 ### Dashboard
 
-- SVAR DataGrid with sortable columns and dropdown filters
-- Willow theme wrapper for consistent styling
-- Backend API client with sample data fallback
-- Row list with computed scores, severities, and safety flags
+- SVAR DataGrid with sortable columns and dropdown filters (SvelteKit) or `.data-table-*` family (HTML / Lily).
+- Willow theme wrapper for consistent styling.
+- Backend API client with sample-data fallback.
+- Row list shows computed scores, severities, and safety flags.
 
 ### Backend
 
-- Loco framework with axum routing (port 5150 in development)
-- Rust scoring engine mirrors TypeScript types with `serde(rename_all = "camelCase")`
-- SeaORM entities against PostgreSQL 18
-- Tera templates with `<body hx-boost="true">` for HTMX-driven navigation
+- Loco framework with axum routing (default port 5150).
+- Rust scoring engine mirrors TypeScript types with `serde(rename_all = "camelCase")`.
+- SeaORM entities against PostgreSQL 18.
+- Tera templates with `<body hx-boost="true">` for HTMX-driven navigation.
+- Alpine.js for declarative client-side conditionals inside templates.
 
 ## Technology stacks
 
 See the per-stack agent docs:
 
+- [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
 - [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
 - [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
+- [Protocol Buffers representations](AGENTS/protobuf.md)
+- [OpenAPI representations](AGENTS/openapi.md)
 
 ## Tools
 
@@ -122,10 +148,16 @@ See the per-stack agent docs:
 - `bin/test` — validate structure of all forms
 - `bin/test-form <slug>` — validate one form
 - `bin/update` — run the update/upgrade/fix/harmonize/audit/test prompt via Claude Code
-- `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
-- `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
-- `bin/xml-representations/generate-xml-representations.py` — generate XML + DTD from SQL migrations
-- `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR R5 JSON from SQL migrations
+- `bin/migrate-sql-filenames.py` — canonicalise `sql-migrations/` filenames
+- `bin/sql-migrations/generate-sql-comments.py` — append missing SQL comments
+- `bin/sql-migrations/generate-sql-combined.py` — combine numbered migrations into `schema.sql`
+- `bin/xml-representations/generate-xml-representations.py` — XML + DTD per SQL entity
+- `bin/fhir-r5/generate-fhir-r5-representations.py` — FHIR R5 JSON per SQL entity
+- `bin/protobuf/generate-protobuf-representations.py` — Protocol Buffers per SQL entity
+- `bin/openapi/generate-openapi-representations.py` — OpenAPI 3.1 per SQL entity
+- `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` — Loco setup script per form
+- `bin/lily-html-refactor` — mechanical Lily class swaps; `--check` is the CI drift detector
+- `bin/lily-sync` — snapshot Lily component HTML specs and pin the upstream commit
 
 ## Compliance
 
@@ -168,10 +200,10 @@ Create role if needed via psql:
 
 ```sql
 CREATE USER loco PASSWORD 'loco';
-ALTER USER username CREATEDB; 
+ALTER USER loco CREATEDB;
 ```
 
-Create databases via shell:
+Create databases via shell (example for `pre-operative-assessment-by-clinician`):
 
 ```sh
 createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_development || :
@@ -184,19 +216,22 @@ Create databases via psql:
 ```sql
 CREATE DATABASE pre_operative_assessment_by_clinician_development OWNER loco;
 CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER loco;
+CREATE DATABASE pre_operative_assessment_by_clinician_production OWNER loco;
 ```
 
 Create languages:
 
 ```txt
-assets/i18n/de-DE/main.ftl
-assets/i18n/en-US/main.ftl
 assets/i18n/en-GB/main.ftl
+assets/i18n/en-US/main.ftl
 assets/i18n/cy-GB/main.ftl
+assets/i18n/de-DE/main.ftl
 ```
 
 ## Verify
 
 ```sh
-bin/test
+bin/test                              # validate every form's structure
+bin/lily-html-refactor --check --all  # Lily contract drift
+bin/lily-sync --check                 # Lily spec-snapshot drift
 ```

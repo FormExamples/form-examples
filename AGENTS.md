@@ -6,19 +6,41 @@ notices, and staff training checklists. Each form collects data via a
 single-page, step-by-step questionnaire, applies a validated scoring or grading
 engine, and generates a clinical report with flagged issues.
 
+## Spec-driven development
+
+The system spec lives in [`spec.md`](spec.md) at the repo root. Each form
+has its own domain spec in [`forms/<slug>/spec.md`](forms/AGENTS.md).
+Update specs before changing code; regenerate derived artefacts after
+schema changes. See `spec.md` §10 for the spec-driven workflow.
+
 ## Tools
+
+### Structure and validation
 
 - `bin/forms-as-kebab-case` — list all form directory slugs
 - `bin/test` — run all form validation tests
 - `bin/test-form <slug>` — test a single form by slug
 - `bin/create-form <slug>` — scaffold a new form directory
-- `bin/update` — update, upgrade, fix, harmonize, audit, test (via Claude Code)
-- `bin/migrate-sql-filenames.py` — one-shot migration of each form's sql-migrations/ to the canonical `NN_create_table_<name>.sql` layout
+- `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
+
+### SQL
+
+- `bin/migrate-sql-filenames.py` — one-shot migration of each form's `sql-migrations/` to the canonical `NN_create_table_<name>.sql` layout
 - `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
-- `bin/xml-representations/generate-xml-representations.py` — generate XML and DTD from SQL migrations
-- `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON from SQL migrations
-- `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas from SQL migrations
+
+### Generators (SQL → derived representations)
+
+- `bin/xml-representations/generate-xml-representations.py` — generate XML and DTD per SQL table entity
+- `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
+- `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
+- `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
+- `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` — emit each form's `cargo loco generate scaffold` setup script
+
+### Lily Design System (HTML front-ends)
+
+- `bin/lily-html-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--all|<slug>]` — mechanical Lily class swaps; `--check` is the CI drift detector
+- `bin/lily-sync [--check] [--lily-dir PATH]` — snapshot Lily component HTML specs into `forms/lily-spec/` and record the pinned upstream commit in `forms/lily-version.md`
 
 ## Form index
 
@@ -36,38 +58,44 @@ forms/<slug>/
   README.md -> index.md                            # Symlink for GitHub rendering
   AGENTS.md                                        # Agent instructions for this form
   CLAUDE.md                                        # Claude Code project instructions
+  spec.md                                          # Living spec for spec-driven development
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
   doc/                                             # Documentation and references
-  sql-migrations/                                  # PostgreSQL Liquibase migrations
-  xml-representations/                             # XML + DTD per SQL table entity
-  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity
-  protobuf/                                        # Protocol Buffers .proto schemas per SQL entity
-  front-end-form-with-html/                        # Questionnaire (HTML)
+  sql-migrations/                                  # PostgreSQL Liquibase migrations (source of truth)
+  xml-representations/                             # XML + DTD per SQL table entity (generated)
+  fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
+  protobuf/                                        # Protocol Buffers .proto schemas per SQL entity (generated)
+  openapi/                                         # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
+  front-end-form-with-html/                        # Questionnaire (HTML + Lily Design System)
   front-end-form-with-svelte/                      # Questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML + table)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
   full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend (axum + Loco + Tera + HTMX + Alpine.js)
-  full-stack-with-loco-tera-htmx-alpine-setup     # Scaffold generator (executable shell script of `cargo loco generate scaffold` calls)
+  full-stack-with-loco-tera-htmx-alpine-setup      # Scaffold generator (executable shell script of `cargo loco generate scaffold` calls; generated)
 ```
-
-Generated FHIR HL7 R5 JSON resources live in `fhir-r5/`.
 
 ## Standard workflow for a new form
 
-1. `bin/create-form <slug>` — scaffold the directory
-2. Fill in `forms/<slug>/index.md`, `AGENTS.md`, `plan.md`, `tasks.md` with the design spec
-3. Author SQL migrations in `forms/<slug>/sql-migrations/`
-4. Generate XML + DTD representations (`bin/xml-representations/generate-xml-representations.py`)
-5. Generate FHIR R5 JSON (`bin/fhir-r5/generate-fhir-r5-representations.py`)
-6. Generate Protocol Buffers `.proto` schemas (`bin/protobuf/generate-protobuf-representations.py`)
-7. Build the front-ends (form and dashboard, each in HTML and SvelteKit)
-8. Build the full-stack Rust implementation
-9. `bin/test-form <slug>` — validate structure
+1. `bin/create-form <slug>` — scaffold the directory.
+2. Fill in `forms/<slug>/index.md`, `spec.md`, `AGENTS.md`, `plan.md`,
+   `tasks.md` with the design spec.
+3. Author SQL migrations in `forms/<slug>/sql-migrations/`.
+4. Regenerate derived representations:
+   - `python3 bin/xml-representations/generate-xml-representations.py`
+   - `python3 bin/fhir-r5/generate-fhir-r5-representations.py`
+   - `python3 bin/protobuf/generate-protobuf-representations.py`
+   - `python3 bin/openapi/generate-openapi-representations.py`
+   - `python3 bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py`
+5. Build the front-ends (form and dashboard, each in HTML and SvelteKit).
+6. Build the full-stack Rust implementation.
+7. Run `bin/lily-html-refactor --check --all` to confirm no Lily contract drift.
+8. `bin/test-form <slug>` — validate structure.
+9. Update `forms/<slug>/tasks.md` with the work done.
 
 ## User interface
 
-IMPORTANT: the form must be one continuous single-page wizard. No
+**IMPORTANT:** the form must be one continuous single-page wizard. No
 multi-page forms.
 
 ## Technology stacks
@@ -82,17 +110,19 @@ See the per-stack agent docs:
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
 - [Protocol Buffers representations](AGENTS/protobuf.md)
+- [OpenAPI representations](AGENTS/openapi.md)
 
 ## Conventions
 
-- Empty string `''` for unanswered text fields; `null` for unanswered numeric fields
-- camelCase property names in TypeScript; snake_case in SQL and Rust
-- Step components named `StepNName.svelte` (1-indexed)
-- UI components in `src/lib/components/ui/`
-- `serde(rename_all = "camelCase")` on Rust structs shared with the front-end
-- UUIDv4 primary keys
-- Timestamps on every table: `created_at`, `updated_at`, `deleted_at`
-- Import and export via JSON, XML, CSV (Comma-Separated Values), and TSV (Tab-Separated Values)
+- Empty string `''` for unanswered text and enum fields; `null` for unanswered numeric, date, and time fields.
+- camelCase property names in TypeScript and front-end Rust serde; snake_case in SQL and Rust internals.
+- Step components named `StepNName.svelte` (1-indexed; no spaces, ampersands, or parentheses in filename).
+- UI components in `src/lib/components/ui/`.
+- `serde(rename_all = "camelCase")` on Rust structs shared with the front-end.
+- UUIDv4 primary keys via `gen_random_uuid()`.
+- Timestamps on every table: `created_at`, `updated_at`, `deleted_at`.
+- Import and export via JSON, XML, CSV (Comma-Separated Values), and TSV (Tab-Separated Values).
+- Generated artefacts are never hand-edited (XML, FHIR, protobuf, OpenAPI, Loco setup script).
 
 ## Compliance
 
@@ -104,5 +134,7 @@ See the per-stack agent docs:
 ## Verify
 
 ```sh
-bin/test
+bin/test                              # validates every form's structure
+bin/lily-html-refactor --check --all  # Lily contract drift detector
+bin/lily-sync --check                 # Lily spec-snapshot drift detector
 ```
