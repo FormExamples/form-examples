@@ -1,48 +1,69 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const o = assessment.data.oralExamination;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const hygieneOptions = [
+		{ value: 'good', label: 'Good' },
+		{ value: 'fair', label: 'Fair' },
+		{ value: 'poor', label: 'Poor' }
+	];
 </script>
 
-<SectionCard title="Oral Examination" description="Soft tissue, TMJ, and occlusion findings">
-	<TextArea
-		label="Soft tissue findings"
-		name="softTissueFindings"
-		bind:value={o.softTissueFindings}
-		placeholder="e.g. Normal mucosa, no lesions; or describe any findings"
-	/>
+<Fieldset legend="Oral Examination">
+	<p class="hint">Soft tissue, TMJ, and occlusion findings.</p>
 
-	<RadioGroup label="TMJ pain?" name="tmjPain" options={yesNo} bind:value={o.tmjPain} />
-	<RadioGroup label="TMJ clicking or crepitus?" name="tmjClicking" options={yesNo} bind:value={o.tmjClicking} />
-	<RadioGroup label="Limited jaw opening?" name="tmjLimitedOpening" options={yesNo} bind:value={o.tmjLimitedOpening} />
+	<Field label="Soft tissue findings" inputId="softTissueFindings">
+		<TextAreaInput id="softTissueFindings" label="Soft tissue findings" rows={3} bind:value={o.softTissueFindings} />
+	</Field>
 
-	<SelectInput
-		label="Occlusion classification"
-		name="occlusion"
-		options={[
-			{ value: 'class-I', label: 'Class I - Normal' },
-			{ value: 'class-II', label: 'Class II - Retrognathic' },
-			{ value: 'class-III', label: 'Class III - Prognathic' }
-		]}
-		bind:value={o.occlusion}
-	/>
+	<Field label="TMJ pain?">
+		<RadioGroup label="TMJ pain">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="tmjPain" value={opt.value} bind:group={o.tmjPain} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Oral hygiene index"
-		name="oralHygieneIndex"
-		options={[
-			{ value: 'good', label: 'Good' },
-			{ value: 'fair', label: 'Fair' },
-			{ value: 'poor', label: 'Poor' }
-		]}
-		bind:value={o.oralHygieneIndex}
-	/>
-</SectionCard>
+	<Field label="TMJ clicking or crepitus?">
+		<RadioGroup label="TMJ clicking">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="tmjClicking" value={opt.value} bind:group={o.tmjClicking} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Limited jaw opening?">
+		<RadioGroup label="Limited jaw opening">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="tmjLimitedOpening" value={opt.value} bind:group={o.tmjLimitedOpening} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Occlusion classification" inputId="occlusion">
+		<Select id="occlusion" label="Occlusion" bind:value={o.occlusion}>
+			<option value="">— Select —</option>
+			<option value="class-I">Class I — Normal</option>
+			<option value="class-II">Class II — Retrognathic</option>
+			<option value="class-III">Class III — Prognathic</option>
+		</Select>
+	</Field>
+
+	<Field label="Oral hygiene index">
+		<RadioGroup label="Oral hygiene index">
+			{#each hygieneOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="oralHygieneIndex" value={opt.value} bind:group={o.oralHygieneIndex} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

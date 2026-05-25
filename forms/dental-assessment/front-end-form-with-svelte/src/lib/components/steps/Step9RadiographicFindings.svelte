@@ -1,48 +1,42 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const r = assessment.data.radiographicFindings;
 </script>
 
-<SectionCard title="Radiographic Findings" description="X-ray and imaging results">
-	<TextArea
-		label="Panoramic (OPG) findings"
-		name="panoramicFindings"
-		bind:value={r.panoramicFindings}
-		placeholder="e.g. No significant findings; or describe pathology"
-	/>
+<Fieldset legend="Radiographic Findings">
+	<p class="hint">X-ray and imaging results.</p>
 
-	<TextArea
-		label="Periapical radiograph findings"
-		name="periapicalFindings"
-		bind:value={r.periapicalFindings}
-		placeholder="e.g. Periapical radiolucency at 46; widened PDL space at 36"
-	/>
+	<Field label="Panoramic (OPG) findings" inputId="panoramicFindings">
+		<TextAreaInput id="panoramicFindings" label="Panoramic findings" rows={3} bind:value={r.panoramicFindings} />
+	</Field>
 
-	<TextArea
-		label="Bitewing radiograph findings"
-		name="bitewingFindings"
-		bind:value={r.bitewingFindings}
-		placeholder="e.g. Interproximal caries at 15 mesial; overhanging restoration at 26 distal"
-	/>
+	<Field label="Periapical radiograph findings" inputId="periapicalFindings">
+		<TextAreaInput id="periapicalFindings" label="Periapical findings" rows={3} bind:value={r.periapicalFindings} />
+	</Field>
 
-	<SelectInput
-		label="Bone loss pattern"
-		name="boneLossPattern"
-		options={[
-			{ value: 'none', label: 'No bone loss' },
-			{ value: 'horizontal', label: 'Horizontal bone loss' },
-			{ value: 'vertical', label: 'Vertical (angular) bone loss' },
-			{ value: 'combined', label: 'Combined pattern' }
-		]}
-		bind:value={r.boneLossPattern}
-	/>
+	<Field label="Bitewing radiograph findings" inputId="bitewingFindings">
+		<TextAreaInput id="bitewingFindings" label="Bitewing findings" rows={3} bind:value={r.bitewingFindings} />
+	</Field>
+
+	<Field label="Bone loss pattern" inputId="boneLossPattern">
+		<Select id="boneLossPattern" label="Bone loss pattern" bind:value={r.boneLossPattern}>
+			<option value="">— Select —</option>
+			<option value="none">No bone loss</option>
+			<option value="horizontal">Horizontal bone loss</option>
+			<option value="vertical">Vertical (angular) bone loss</option>
+			<option value="combined">Combined pattern</option>
+		</Select>
+	</Field>
 
 	{#if r.boneLossPattern !== 'none' && r.boneLossPattern !== ''}
-		<TextInput label="Bone loss details" name="boneLossDetails" bind:value={r.boneLossDetails} placeholder="e.g. Generalised horizontal bone loss, 30% in molar regions" />
+		<Field label="Bone loss details" inputId="boneLossDetails">
+			<TextInput id="boneLossDetails" label="Bone loss details" bind:value={r.boneLossDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

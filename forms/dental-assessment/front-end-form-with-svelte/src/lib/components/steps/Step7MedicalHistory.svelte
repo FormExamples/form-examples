@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.medicalHistory;
 	const yesNo = [
@@ -12,44 +13,95 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Relevant medical conditions that may affect dental treatment">
-	<RadioGroup label="Do you have any cardiovascular disease?" name="cardiovascular" options={yesNo} bind:value={m.cardiovascularDisease} />
+<Fieldset legend="Medical History">
+	<p class="hint">Relevant medical conditions that may affect dental treatment.</p>
+
+	<Field label="Do you have any cardiovascular disease?">
+		<RadioGroup label="Cardiovascular">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="cardiovascular" value={opt.value} bind:group={m.cardiovascularDisease} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.cardiovascularDisease === 'yes'}
-		<TextInput label="Please provide details" name="cardiovascularDetails" bind:value={m.cardiovascularDetails} placeholder="e.g. Heart valve replacement, endocarditis history" />
+		<Field label="Please provide details" inputId="cardiovascularDetails">
+			<TextInput id="cardiovascularDetails" label="Cardiovascular details" bind:value={m.cardiovascularDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have diabetes?" name="diabetes" options={yesNo} bind:value={m.diabetes} />
+	<Field label="Do you have diabetes?">
+		<RadioGroup label="Diabetes">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="diabetes" value={opt.value} bind:group={m.diabetes} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.diabetes === 'yes'}
-		<SelectInput
-			label="Diabetes type"
-			name="diabetesType"
-			options={[
-				{ value: 'type1', label: 'Type 1' },
-				{ value: 'type2', label: 'Type 2' }
-			]}
-			bind:value={m.diabetesType}
-			required
-		/>
-		<RadioGroup label="Is your diabetes well controlled?" name="diabetesControlled" options={yesNo} bind:value={m.diabetesControlled} />
+		<Field label="Diabetes type" required inputId="diabetesType">
+			<Select id="diabetesType" label="Diabetes type" required bind:value={m.diabetesType}>
+				<option value="">— Select —</option>
+				<option value="type1">Type 1</option>
+				<option value="type2">Type 2</option>
+			</Select>
+		</Field>
+		<Field label="Is your diabetes well controlled?">
+			<RadioGroup label="Diabetes controlled">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="diabetesControlled" value={opt.value} bind:group={m.diabetesControlled} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have a bleeding disorder?" name="bleedingDisorder" options={yesNo} bind:value={m.bleedingDisorder} />
+	<Field label="Do you have a bleeding disorder?">
+		<RadioGroup label="Bleeding disorder">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="bleedingDisorder" value={opt.value} bind:group={m.bleedingDisorder} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.bleedingDisorder === 'yes'}
-		<TextInput label="Please provide details" name="bleedingDetails" bind:value={m.bleedingDetails} placeholder="e.g. Haemophilia, von Willebrand disease" />
+		<Field label="Please provide details" inputId="bleedingDetails">
+			<TextInput id="bleedingDetails" label="Bleeding details" bind:value={m.bleedingDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Have you ever taken bisphosphonates (e.g. Alendronate, Zoledronic acid)?" name="bisphosphonateUse" options={yesNo} bind:value={m.bisphosphonateUse} />
+	<Field label="Have you ever taken bisphosphonates?">
+		<RadioGroup label="Bisphosphonate use">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="bisphosphonateUse" value={opt.value} bind:group={m.bisphosphonateUse} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.bisphosphonateUse === 'yes'}
-		<TextInput label="Bisphosphonate details" name="bisphosphonateDetails" bind:value={m.bisphosphonateDetails} placeholder="e.g. Drug name, duration of use" />
+		<Field label="Bisphosphonate details" inputId="bisphosphonateDetails">
+			<TextInput id="bisphosphonateDetails" label="Bisphosphonate details" bind:value={m.bisphosphonateDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Have you had radiation therapy to the head or neck?" name="radiationTherapy" options={yesNo} bind:value={m.radiationTherapyHeadNeck} />
+	<Field label="Have you had radiation therapy to the head or neck?">
+		<RadioGroup label="Radiation therapy">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="radiationTherapy" value={opt.value} bind:group={m.radiationTherapyHeadNeck} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.radiationTherapyHeadNeck === 'yes'}
-		<TextInput label="Radiation therapy details" name="radiationDetails" bind:value={m.radiationDetails} placeholder="e.g. Area treated, when completed" />
+		<Field label="Radiation therapy details" inputId="radiationDetails">
+			<TextInput id="radiationDetails" label="Radiation details" bind:value={m.radiationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Are you immunosuppressed?" name="immunosuppression" options={yesNo} bind:value={m.immunosuppression} />
+	<Field label="Are you immunosuppressed?">
+		<RadioGroup label="Immunosuppression">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="immunosuppression" value={opt.value} bind:group={m.immunosuppression} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.immunosuppression === 'yes'}
-		<TextInput label="Please provide details" name="immunosuppressionDetails" bind:value={m.immunosuppressionDetails} placeholder="e.g. HIV, organ transplant, chemotherapy" />
+		<Field label="Please provide details" inputId="immunosuppressionDetails">
+			<TextInput id="immunosuppressionDetails" label="Immunosuppression details" bind:value={m.immunosuppressionDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

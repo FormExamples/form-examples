@@ -1,39 +1,53 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import { dmftScoreLabel, dmftScoreColor } from '$lib/engine/utils';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import { dmftScoreLabel } from '$lib/engine/utils';
 
 	const d = assessment.data.dmftAssessment;
 
 	const dmftScore = $derived(
 		(d.decayedTeeth ?? 0) + (d.missingTeeth ?? 0) + (d.filledTeeth ?? 0)
 	);
+
+	function dmftAlertType(score: number): 'success' | 'warning' | 'error' {
+		if (score < 5) return 'success';
+		if (score < 10) return 'warning';
+		return 'error';
+	}
 </script>
 
-<SectionCard title="DMFT Assessment" description="Decayed, Missing, and Filled Teeth index (maximum 32)">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-3">
-		<NumberInput label="Decayed Teeth (D)" name="decayedTeeth" bind:value={d.decayedTeeth} min={0} max={32} />
-		<NumberInput label="Missing Teeth (M)" name="missingTeeth" bind:value={d.missingTeeth} min={0} max={32} />
-		<NumberInput label="Filled Teeth (F)" name="filledTeeth" bind:value={d.filledTeeth} min={0} max={32} />
+<Fieldset legend="DMFT Assessment">
+	<p class="hint">Decayed, Missing, and Filled Teeth index (maximum 32).</p>
+
+	<div class="field-grid field-grid-3">
+		<Field label="Decayed Teeth (D)" inputId="decayedTeeth">
+			<NumberInput id="decayedTeeth" label="Decayed Teeth" min={0} max={32} bind:value={d.decayedTeeth} />
+		</Field>
+		<Field label="Missing Teeth (M)" inputId="missingTeeth">
+			<NumberInput id="missingTeeth" label="Missing Teeth" min={0} max={32} bind:value={d.missingTeeth} />
+		</Field>
+		<Field label="Filled Teeth (F)" inputId="filledTeeth">
+			<NumberInput id="filledTeeth" label="Filled Teeth" min={0} max={32} bind:value={d.filledTeeth} />
+		</Field>
 	</div>
 
-	<div class="mt-4 rounded-lg border p-4 {dmftScoreColor(dmftScore)}">
-		<div class="text-center">
-			<span class="text-2xl font-bold">DMFT Score: {dmftScore}</span>
-			<span class="ml-2 text-lg">({dmftScoreLabel(dmftScore)})</span>
-		</div>
-		<div class="mt-2 text-center text-sm opacity-75">
-			D = {d.decayedTeeth ?? 0} + M = {d.missingTeeth ?? 0} + F = {d.filledTeeth ?? 0}
-		</div>
-	</div>
+	<Alert type={dmftAlertType(dmftScore)} heading={`DMFT Score: ${dmftScore} (${dmftScoreLabel(dmftScore)})`}>
+		<p>D = {d.decayedTeeth ?? 0} + M = {d.missingTeeth ?? 0} + F = {d.filledTeeth ?? 0}</p>
+	</Alert>
 
-	<TextArea
-		label="Tooth chart notes"
-		name="toothChartNotes"
-		bind:value={d.toothChartNotes}
-		placeholder="Note specific teeth affected using FDI notation (e.g. 16 MOD amalgam, 36 D caries)"
-		rows={4}
-	/>
-</SectionCard>
+	<Field label="Tooth chart notes" inputId="toothChartNotes">
+		<TextAreaInput id="toothChartNotes" label="Tooth chart notes" rows={4} bind:value={d.toothChartNotes} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	.field-grid.field-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	@media (max-width: 640px) {
+		.field-grid, .field-grid.field-grid-3 { grid-template-columns: 1fr; }
+	}
+</style>

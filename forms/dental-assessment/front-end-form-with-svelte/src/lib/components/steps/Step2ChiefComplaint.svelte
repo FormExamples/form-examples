@@ -1,33 +1,34 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const c = assessment.data.chiefComplaint;
 </script>
 
-<SectionCard title="Chief Complaint" description="Primary dental concern and pain assessment">
-	<TextArea
-		label="What is your primary dental concern?"
-		name="primaryConcern"
-		bind:value={c.primaryConcern}
-		placeholder="e.g. Toothache, broken tooth, routine check-up"
-	/>
+<Fieldset legend="Chief Complaint">
+	<p class="hint">Primary dental concern and pain assessment.</p>
 
-	<TextInput label="Pain location (if any)" name="painLocation" bind:value={c.painLocation} placeholder="e.g. Lower right molar" />
+	<Field label="What is your primary dental concern?" inputId="primaryConcern">
+		<TextAreaInput id="primaryConcern" label="Primary concern" rows={3} bind:value={c.primaryConcern} />
+	</Field>
 
-	<NumberInput
-		label="Pain severity"
-		name="painSeverity"
-		bind:value={c.painSeverity}
-		min={0}
-		max={10}
-		unit="0-10 scale"
-	/>
+	<Field label="Pain location (if any)" inputId="painLocation">
+		<TextInput id="painLocation" label="Pain location" bind:value={c.painLocation} />
+	</Field>
 
-	<TextInput label="When did the pain start?" name="painOnset" bind:value={c.painOnset} placeholder="e.g. 3 days ago" />
+	<Field label="Pain severity" inputId="painSeverity" description="0–10 scale">
+		<NumberInput id="painSeverity" label="Pain severity" min={0} max={10} bind:value={c.painSeverity} />
+	</Field>
 
-	<TextInput label="How long does the pain last?" name="painDuration" bind:value={c.painDuration} placeholder="e.g. Constant, intermittent, only when eating" />
-</SectionCard>
+	<Field label="When did the pain start?" inputId="painOnset">
+		<TextInput id="painOnset" label="Pain onset" bind:value={c.painOnset} />
+	</Field>
+
+	<Field label="How long does the pain last?" inputId="painDuration">
+		<TextInput id="painDuration" label="Pain duration" bind:value={c.painDuration} />
+	</Field>
+</Fieldset>

@@ -4,6 +4,9 @@
 	import { calculateDMFT } from '$lib/engine/dmft-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
 	import Step3DentalHistory from '$lib/components/steps/Step3DentalHistory.svelte';
@@ -15,43 +18,37 @@
 	import Step9RadiographicFindings from '$lib/components/steps/Step9RadiographicFindings.svelte';
 
 	function submitAssessment() {
-			const { dmftScore, dmftCategory, firedRules } = calculateDMFT(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				dmftScore,
-				dmftCategory,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { dmftScore, dmftCategory, firedRules } = calculateDMFT(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			dmftScore,
+			dmftCategory,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Dental Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3DentalHistory />
+	<Step4DMFTAssessment />
+	<Step5PeriodontalAssessment />
+	<Step6OralExamination />
+	<Step7MedicalHistory />
+	<Step8CurrentMedications />
+	<Step9RadiographicFindings />
 
-<Step2ChiefComplaint />
-
-<Step3DentalHistory />
-
-<Step4DMFTAssessment />
-
-<Step5PeriodontalAssessment />
-
-<Step6OralExamination />
-
-<Step7MedicalHistory />
-
-<Step8CurrentMedications />
-
-<Step9RadiographicFindings />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>
