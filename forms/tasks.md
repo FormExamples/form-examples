@@ -347,9 +347,32 @@ commit per form with `git commit --only forms/<slug>/`.
   - [-] `arc42` — **N/A**. Dir-only, no front-end-form-with-html implementation.
   - [-] `international-certificate-of-vaccination-or-prophylaxis` — **N/A**.
   - [-] `objectives-and-key-results-tracker` — **N/A**.
-- [ ] **3.12  Reconcile.** Run `bin/forms-as-kebab-case` and confirm every
-  slug appears in exactly one batch above. *Acceptance:* zero forms
-  unaccounted for.
+- [x] **3.12  Reconcile** (9 stragglers + N/A confirmations). Mechanical
+  passes `5c29097c` and `26b19624`. Nine forms not assigned to any
+  earlier 3.x batch were refactored here:
+  - [x] `architecture-decision-record` (`5c29097c` + `77c6cf`).
+  - [x] `genetic-assessment` (`5c29097c` + `19d4f0`). Distinct from
+    `genetics-assessment` (done in 3.4).
+  - [x] `gynecology-assessment` (`5c29097c` + `11e131`).
+  - [x] `agile-principles-assessment` (`26b19624` + `61184a0d`).
+  - [x] `eye-prescription` (`26b19624` + `e38620b4`).
+  - [x] `meeting` (`7ee60cf4`). No mechanical swaps needed.
+  - [x] `agile-consulting-scorecard-for-hiring-help` (`1da183d7`).
+    Static HTML (no JS builders) — Lily classes applied inline.
+  - [x] `international-certificate-of-vaccination-or-prophylaxis`
+    (`5f5b3a1f`). Non-standard `script.js` / `styles.css` paths preserved.
+  - [x] `objectives-and-key-results-tracker` (`420d9ca5`). Non-standard
+    top-level `app.js`/`engine.js` paths preserved; ES-module wiring kept.
+  - Confirmed N/A (static informational HTML, no form/JS):
+    `legal-requirements-privacy-notice`, `screening-program-privacy-notice`.
+  - Confirmed N/A (no front-end-form-with-html implementation):
+    `arc42`, `outpatient-outcome`, `return-to-work`,
+    `uk-nhs-england-medical-exemption-certificate` (note: a stub directory
+    that is not the same as `united-kingdom-nhs-england-medical-exemption-certificate`,
+    which IS implemented and refactored in 3.9).
+  - Canonical reference (already refactored in Phase 1):
+    `pre-operative-assessment-by-clinician` (`2566291c` form,
+    `be899e4d` dashboard, `5ac6e2a0` tasks-progress).
 
 ---
 
