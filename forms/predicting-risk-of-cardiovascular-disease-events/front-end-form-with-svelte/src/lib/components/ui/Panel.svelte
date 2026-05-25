@@ -1,5 +1,5 @@
 <script lang="ts">
-  // RadioGroup — Lily Svelte headless contract.
+  // Panel — Lily Svelte headless contract.
   import type { Snippet } from 'svelte';
 
   let {
@@ -14,11 +14,6 @@
   } = $props();
 </script>
 
-<fieldset
-  class={`radio-group ${className}`}
-  role="radiogroup"
-  aria-label={label}
-  {...restProps}
->
+<section class={`panel ${className}`} aria-label={label} {...restProps}>
   {@render children?.()}
-</fieldset>
+</section>

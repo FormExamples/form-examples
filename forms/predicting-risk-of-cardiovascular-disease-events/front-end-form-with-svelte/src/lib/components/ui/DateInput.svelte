@@ -1,21 +1,19 @@
 <script lang="ts">
-  // NumberInput — Lily Svelte headless contract.
+  // DateInput — Lily Svelte headless contract.
   let {
     class: className = '',
     label,
-    value = $bindable<number | null | undefined>(null),
+    value = $bindable(''),
     min = undefined,
     max = undefined,
-    step = undefined,
     required = false,
     disabled = false,
     ...restProps
   }: {
     label: string;
-    value?: number | null | undefined;
-    min?: number;
-    max?: number;
-    step?: number | string;
+    value?: string;
+    min?: string;
+    max?: string;
     required?: boolean;
     disabled?: boolean;
     [key: string]: unknown;
@@ -23,13 +21,12 @@
 </script>
 
 <input
-  class={`number-input ${className}`}
-  type="number"
+  class={`date-input ${className}`}
+  type="date"
   aria-label={label}
   bind:value
   {min}
   {max}
-  {step}
   {required}
   {disabled}
   {...restProps}

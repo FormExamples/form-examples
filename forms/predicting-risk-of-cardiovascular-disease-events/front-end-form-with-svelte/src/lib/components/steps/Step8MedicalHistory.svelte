@@ -1,55 +1,100 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const mh = assessment.data.medicalHistory;
-
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const mh = assessment.data.medicalHistory;
 </script>
 
-<SectionCard title="Medical History" description="Existing cardiovascular conditions and family history">
-	<RadioGroup
-		label="Has known cardiovascular disease?"
-		name="hasKnownCvd"
-		options={yesNoOptions}
-		bind:value={mh.hasKnownCvd}
-		required
-	/>
+<Fieldset legend="Step 8 \u2014 Medical history">
+  <p class="hint">Existing cardiovascular conditions and family history.</p>
 
-	{#if mh.hasKnownCvd === 'yes'}
-		<div class="ml-4 border-l-2 border-blue-200 pl-4">
-			<RadioGroup label="Previous myocardial infarction (MI)?" name="previousMi" options={yesNoOptions} bind:value={mh.previousMi} />
-			<RadioGroup label="Previous stroke?" name="previousStroke" options={yesNoOptions} bind:value={mh.previousStroke} />
-			<RadioGroup label="Heart failure?" name="heartFailure" options={yesNoOptions} bind:value={mh.heartFailure} />
-			<RadioGroup label="Peripheral arterial disease?" name="peripheralArterialDisease" options={yesNoOptions} bind:value={mh.peripheralArterialDisease} />
-		</div>
-	{/if}
+  <Field label="Has known cardiovascular disease?" required>
+    <RadioGroup label="Has known cardiovascular disease?">
+      <label class="radio-input">
+        <input type="radio" name="hasKnownCvd" value="yes" bind:group={mh.hasKnownCvd} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="hasKnownCvd" value="no" bind:group={mh.hasKnownCvd} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	<RadioGroup
-		label="Atrial fibrillation?"
-		name="atrialFibrillation"
-		options={yesNoOptions}
-		bind:value={mh.atrialFibrillation}
-	/>
+  {#if mh.hasKnownCvd === 'yes'}
+    <Field label="Previous myocardial infarction (MI)?">
+      <RadioGroup label="Previous myocardial infarction (MI)?">
+        <label class="radio-input">
+          <input type="radio" name="previousMi" value="yes" bind:group={mh.previousMi} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="previousMi" value="no" bind:group={mh.previousMi} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+    <Field label="Previous stroke?">
+      <RadioGroup label="Previous stroke?">
+        <label class="radio-input">
+          <input type="radio" name="previousStroke" value="yes" bind:group={mh.previousStroke} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="previousStroke" value="no" bind:group={mh.previousStroke} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+    <Field label="Heart failure?">
+      <RadioGroup label="Heart failure?">
+        <label class="radio-input">
+          <input type="radio" name="heartFailure" value="yes" bind:group={mh.heartFailure} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="heartFailure" value="no" bind:group={mh.heartFailure} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+    <Field label="Peripheral arterial disease?">
+      <RadioGroup label="Peripheral arterial disease?">
+        <label class="radio-input">
+          <input type="radio" name="peripheralArterialDisease" value="yes" bind:group={mh.peripheralArterialDisease} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="peripheralArterialDisease" value="no" bind:group={mh.peripheralArterialDisease} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+  {/if}
 
-	<RadioGroup
-		label="Family history of premature CVD?"
-		name="familyCvdHistory"
-		options={yesNoOptions}
-		bind:value={mh.familyCvdHistory}
-	/>
+  <Field label="Atrial fibrillation?">
+    <RadioGroup label="Atrial fibrillation?">
+      <label class="radio-input">
+        <input type="radio" name="atrialFibrillation" value="yes" bind:group={mh.atrialFibrillation} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="atrialFibrillation" value="no" bind:group={mh.atrialFibrillation} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	{#if mh.familyCvdHistory === 'yes'}
-		<TextArea
-			label="Family CVD Details"
-			name="familyCvdDetails"
-			bind:value={mh.familyCvdDetails}
-			placeholder="Please describe affected family members and conditions"
-		/>
-	{/if}
-</SectionCard>
+  <Field label="Family history of premature CVD?">
+    <RadioGroup label="Family history of premature CVD?">
+      <label class="radio-input">
+        <input type="radio" name="familyCvdHistory" value="yes" bind:group={mh.familyCvdHistory} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="familyCvdHistory" value="no" bind:group={mh.familyCvdHistory} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+
+  {#if mh.familyCvdHistory === 'yes'}
+    <Field label="Family CVD details" inputId="step-8-familyCvdDetails">
+      <TextAreaInput
+        id="step-8-familyCvdDetails"
+        label="Family CVD details"
+        rows={3}
+        bind:value={mh.familyCvdDetails}
+      />
+    </Field>
+  {/if}
+</Fieldset>

@@ -1,58 +1,43 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const cm = assessment.data.currentMedications;
+  const cm = assessment.data.currentMedications;
 
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const yn = [
+    { key: 'onAntihypertensiveDetail', label: 'On antihypertensive medication?' },
+    { key: 'onStatinDetail', label: 'On statin therapy?' },
+    { key: 'onAspirin', label: 'On aspirin?' },
+    { key: 'onAnticoagulant', label: 'On anticoagulant?' },
+    { key: 'onDiabetesMedication', label: 'On diabetes medication?' }
+  ] as const;
 </script>
 
-<SectionCard title="Current Medications" description="Current cardiovascular and metabolic medications">
-	<RadioGroup
-		label="On antihypertensive medication?"
-		name="onAntihypertensiveDetail"
-		options={yesNoOptions}
-		bind:value={cm.onAntihypertensiveDetail}
-	/>
+<Fieldset legend="Step 9 \u2014 Current medications">
+  <p class="hint">Current cardiovascular and metabolic medications.</p>
 
-	<RadioGroup
-		label="On statin therapy?"
-		name="onStatinDetail"
-		options={yesNoOptions}
-		bind:value={cm.onStatinDetail}
-	/>
+  {#each yn as item (item.key)}
+    <Field label={item.label}>
+      <RadioGroup label={item.label}>
+        <label class="radio-input">
+          <input type="radio" name={item.key} value="yes" bind:group={cm[item.key]} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name={item.key} value="no" bind:group={cm[item.key]} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+  {/each}
 
-	<RadioGroup
-		label="On aspirin?"
-		name="onAspirin"
-		options={yesNoOptions}
-		bind:value={cm.onAspirin}
-	/>
-
-	<RadioGroup
-		label="On anticoagulant?"
-		name="onAnticoagulant"
-		options={yesNoOptions}
-		bind:value={cm.onAnticoagulant}
-	/>
-
-	<RadioGroup
-		label="On diabetes medication?"
-		name="onDiabetesMedication"
-		options={yesNoOptions}
-		bind:value={cm.onDiabetesMedication}
-	/>
-
-	<TextArea
-		label="Other Medications"
-		name="otherMedications"
-		bind:value={cm.otherMedications}
-		placeholder="List any other current medications"
-		rows={3}
-	/>
-</SectionCard>
+  <Field label="Other medications" inputId="step-9-otherMedications">
+    <TextAreaInput
+      id="step-9-otherMedications"
+      label="Other medications"
+      rows={3}
+      bind:value={cm.otherMedications}
+    />
+  </Field>
+</Fieldset>

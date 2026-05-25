@@ -1,30 +1,44 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
 
-	const rf = assessment.data.renalFunction;
+  const rf = assessment.data.renalFunction;
 </script>
 
-<SectionCard title="Renal Function" description="Kidney function markers used in PREVENT risk estimation">
-	<NumberInput label="eGFR" name="egfr" bind:value={rf.egfr} min={1} max={200} step={1} unit="mL/min/1.73m2" />
+<Fieldset legend="Step 6 \u2014 Renal function">
+  <p class="hint">Kidney function markers used in PREVENT risk estimation.</p>
 
-	<NumberInput label="Creatinine" name="creatinine" bind:value={rf.creatinine} min={0.1} max={30} step={0.1} unit="mg/dL" />
+  <Field label="eGFR (mL/min/1.73m\u00b2)" inputId="step-6-egfr">
+    <NumberInput id="step-6-egfr" label="eGFR" min={1} max={200} bind:value={rf.egfr} />
+  </Field>
 
-	<NumberInput label="Urine ACR" name="urineAcr" bind:value={rf.urineAcr} min={0} max={5000} step={1} unit="mg/g" />
+  <Field label="Creatinine (mg/dL)" inputId="step-6-creatinine">
+    <NumberInput
+      id="step-6-creatinine"
+      label="Creatinine"
+      min={0.1}
+      max={30}
+      step="0.1"
+      bind:value={rf.creatinine}
+    />
+  </Field>
 
-	<SelectInput
-		label="CKD Stage"
-		name="ckdStage"
-		options={[
-			{ value: '1', label: 'Stage 1 (eGFR >= 90)' },
-			{ value: '2', label: 'Stage 2 (eGFR 60-89)' },
-			{ value: '3a', label: 'Stage 3a (eGFR 45-59)' },
-			{ value: '3b', label: 'Stage 3b (eGFR 30-44)' },
-			{ value: '4', label: 'Stage 4 (eGFR 15-29)' },
-			{ value: '5', label: 'Stage 5 (eGFR < 15)' }
-		]}
-		bind:value={rf.ckdStage}
-	/>
-</SectionCard>
+  <Field label="Urine ACR (mg/g)" inputId="step-6-urineAcr">
+    <NumberInput id="step-6-urineAcr" label="Urine ACR" min={0} max={5000} bind:value={rf.urineAcr} />
+  </Field>
+
+  <Field label="CKD stage" inputId="step-6-ckdStage">
+    <Select id="step-6-ckdStage" label="CKD stage" bind:value={rf.ckdStage}>
+      <option value="">\u2014 Select \u2014</option>
+      <option value="1">Stage 1 (eGFR &gt;= 90)</option>
+      <option value="2">Stage 2 (eGFR 60\u201389)</option>
+      <option value="3a">Stage 3a (eGFR 45\u201359)</option>
+      <option value="3b">Stage 3b (eGFR 30\u201344)</option>
+      <option value="4">Stage 4 (eGFR 15\u201329)</option>
+      <option value="5">Stage 5 (eGFR &lt; 15)</option>
+    </Select>
+  </Field>
+</Fieldset>

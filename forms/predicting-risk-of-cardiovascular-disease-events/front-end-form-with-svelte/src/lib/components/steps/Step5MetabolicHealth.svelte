@@ -1,56 +1,70 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const mh = assessment.data.metabolicHealth;
+  const mh = assessment.data.metabolicHealth;
 </script>
 
-<SectionCard title="Metabolic Health" description="Diabetes status, HbA1c, glucose, BMI, and waist circumference">
-	<RadioGroup
-		label="Has diabetes?"
-		name="hasDiabetes"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={mh.hasDiabetes}
-		required
-	/>
+<Fieldset legend="Step 5 \u2014 Metabolic health">
+  <p class="hint">Diabetes status, HbA1c, glucose, BMI, and waist circumference.</p>
 
-	{#if mh.hasDiabetes === 'yes'}
-		<SelectInput
-			label="Diabetes Type"
-			name="diabetesType"
-			options={[
-				{ value: 'type1', label: 'Type 1' },
-				{ value: 'type2', label: 'Type 2' },
-				{ value: 'gestational', label: 'Gestational' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={mh.diabetesType}
-		/>
-	{/if}
+  <Field label="Has diabetes?" required>
+    <RadioGroup label="Has diabetes?">
+      <label class="radio-input">
+        <input type="radio" name="hasDiabetes" value="yes" bind:group={mh.hasDiabetes} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="hasDiabetes" value="no" bind:group={mh.hasDiabetes} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="HbA1c Value" name="hba1cValue" bind:value={mh.hba1cValue} min={2} max={200} step={0.1} />
-		<SelectInput
-			label="HbA1c Unit"
-			name="hba1cUnit"
-			options={[
-				{ value: 'percent', label: '% (NGSP/DCCT)' },
-				{ value: 'mmolMol', label: 'mmol/mol (IFCC)' }
-			]}
-			bind:value={mh.hba1cUnit}
-		/>
-	</div>
+  {#if mh.hasDiabetes === 'yes'}
+    <Field label="Diabetes type" inputId="step-5-diabetesType">
+      <Select id="step-5-diabetesType" label="Diabetes type" bind:value={mh.diabetesType}>
+        <option value="">\u2014 Select \u2014</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="gestational">Gestational</option>
+        <option value="other">Other</option>
+      </Select>
+    </Field>
+  {/if}
 
-	<NumberInput label="Fasting Glucose" name="fastingGlucose" bind:value={mh.fastingGlucose} min={30} max={600} step={1} unit="mg/dL" />
+  <div class="field-grid">
+    <Field label="HbA1c value" inputId="step-5-hba1cValue">
+      <NumberInput id="step-5-hba1cValue" label="HbA1c value" min={2} max={200} step="0.1" bind:value={mh.hba1cValue} />
+    </Field>
+    <Field label="HbA1c unit" inputId="step-5-hba1cUnit">
+      <Select id="step-5-hba1cUnit" label="HbA1c unit" bind:value={mh.hba1cUnit}>
+        <option value="">\u2014 Select \u2014</option>
+        <option value="percent">% (NGSP/DCCT)</option>
+        <option value="mmolMol">mmol/mol (IFCC)</option>
+      </Select>
+    </Field>
+  </div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="BMI" name="bmi" bind:value={mh.bmi} min={10} max={80} step={0.1} unit="kg/m2" />
-		<NumberInput label="Waist Circumference" name="waistCircumferenceCm" bind:value={mh.waistCircumferenceCm} min={40} max={200} step={0.1} unit="cm" />
-	</div>
-</SectionCard>
+  <Field label="Fasting glucose (mg/dL)" inputId="step-5-fastingGlucose">
+    <NumberInput id="step-5-fastingGlucose" label="Fasting glucose" min={30} max={600} bind:value={mh.fastingGlucose} />
+  </Field>
+
+  <div class="field-grid">
+    <Field label="BMI (kg/m\u00b2)" inputId="step-5-bmi">
+      <NumberInput id="step-5-bmi" label="BMI" min={10} max={80} step="0.1" bind:value={mh.bmi} />
+    </Field>
+    <Field label="Waist circumference (cm)" inputId="step-5-waistCircumferenceCm">
+      <NumberInput
+        id="step-5-waistCircumferenceCm"
+        label="Waist circumference (cm)"
+        min={40}
+        max={200}
+        step="0.1"
+        bind:value={mh.waistCircumferenceCm}
+      />
+    </Field>
+  </div>
+</Fieldset>
