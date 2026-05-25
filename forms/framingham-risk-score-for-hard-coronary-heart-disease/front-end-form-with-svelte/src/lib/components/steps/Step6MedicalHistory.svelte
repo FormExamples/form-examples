@@ -1,26 +1,54 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const m = assessment.data.medicalHistory;
+  const m = assessment.data.medicalHistory;
 
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const yn = [
+    { key: 'hasDiabetes', label: 'Has diabetes?' },
+    { key: 'hasPriorChd', label: 'Has prior coronary heart disease?' },
+    { key: 'hasPeripheralVascularDisease', label: 'Has peripheral vascular disease?' },
+    { key: 'hasCerebrovascularDisease', label: 'Has cerebrovascular disease?' },
+    { key: 'hasHeartFailure', label: 'Has heart failure?' },
+    { key: 'hasAtrialFibrillation', label: 'Has atrial fibrillation?' }
+  ] as const;
 </script>
 
-<SectionCard title="Medical History" description="The Framingham Risk Score is designed for patients without diabetes or prior CHD. These conditions are flagged if present.">
-	<RadioGroup label="Has Diabetes?" name="hasDiabetes" options={yesNoOptions} bind:value={m.hasDiabetes} />
-	<RadioGroup label="Has Prior Coronary Heart Disease?" name="hasPriorChd" options={yesNoOptions} bind:value={m.hasPriorChd} />
-	<RadioGroup label="Has Peripheral Vascular Disease?" name="hasPeripheralVascularDisease" options={yesNoOptions} bind:value={m.hasPeripheralVascularDisease} />
-	<RadioGroup label="Has Cerebrovascular Disease?" name="hasCerebrovascularDisease" options={yesNoOptions} bind:value={m.hasCerebrovascularDisease} />
-	<RadioGroup label="Has Heart Failure?" name="hasHeartFailure" options={yesNoOptions} bind:value={m.hasHeartFailure} />
-	<RadioGroup label="Has Atrial Fibrillation?" name="hasAtrialFibrillation" options={yesNoOptions} bind:value={m.hasAtrialFibrillation} />
+<Fieldset legend="Step 6 \u2014 Medical history">
+  <p class="hint">The Framingham score targets patients without diabetes or prior CHD; flag any pre-existing conditions.</p>
 
-	<div class="mb-4">
-		<label for="otherConditions" class="mb-1 block text-sm font-medium text-gray-700">Other Conditions</label>
-		<textarea id="otherConditions" name="otherConditions" rows="3" bind:value={m.otherConditions} placeholder="List any other relevant medical conditions" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"></textarea>
-	</div>
-</SectionCard>
+  {#each yn as item (item.key)}
+    <Field label={item.label}>
+      <RadioGroup label={item.label}>
+        <label class="radio-input">
+          <input
+            type="radio"
+            name={item.key}
+            value="yes"
+            bind:group={m[item.key]}
+          /> Yes
+        </label>
+        <label class="radio-input">
+          <input
+            type="radio"
+            name={item.key}
+            value="no"
+            bind:group={m[item.key]}
+          /> No
+        </label>
+      </RadioGroup>
+    </Field>
+  {/each}
+
+  <Field label="Other conditions" inputId="step-6-otherConditions">
+    <TextAreaInput
+      id="step-6-otherConditions"
+      label="Other conditions"
+      rows={3}
+      bind:value={m.otherConditions}
+    />
+  </Field>
+</Fieldset>

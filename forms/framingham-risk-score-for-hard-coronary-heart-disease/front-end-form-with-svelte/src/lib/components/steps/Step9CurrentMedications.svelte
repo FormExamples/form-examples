@@ -1,27 +1,55 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const med = assessment.data.currentMedications;
+  const med = assessment.data.currentMedications;
 
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const yn = [
+    { key: 'onStatin', label: 'Currently on statin therapy?' },
+    { key: 'onAspirin', label: 'Currently on aspirin?' },
+    { key: 'onAntihypertensive', label: 'Currently on antihypertensive?' }
+  ] as const;
 </script>
 
-<SectionCard title="Current Medications" description="Current medication use helps identify treatment gaps and informs clinical recommendations.">
-	<RadioGroup label="Currently on Statin Therapy?" name="onStatin" options={yesNoOptions} bind:value={med.onStatin} />
-	<TextInput label="Statin Name (if applicable)" name="statinName" bind:value={med.statinName} placeholder="e.g. Atorvastatin 20mg" />
+<Fieldset legend="Step 9 \u2014 Current medications">
+  <p class="hint">Current medication use helps identify treatment gaps and informs clinical recommendations.</p>
 
-	<RadioGroup label="Currently on Aspirin?" name="onAspirin" options={yesNoOptions} bind:value={med.onAspirin} />
-	<RadioGroup label="Currently on Antihypertensive?" name="onAntihypertensive" options={yesNoOptions} bind:value={med.onAntihypertensive} />
-	<TextInput label="Antihypertensive Name (if applicable)" name="antihypertensiveName" bind:value={med.antihypertensiveName} placeholder="e.g. Lisinopril 10mg" />
+  {#each yn as item (item.key)}
+    <Field label={item.label}>
+      <RadioGroup label={item.label}>
+        <label class="radio-input">
+          <input type="radio" name={item.key} value="yes" bind:group={med[item.key]} /> Yes
+        </label>
+        <label class="radio-input">
+          <input type="radio" name={item.key} value="no" bind:group={med[item.key]} /> No
+        </label>
+      </RadioGroup>
+    </Field>
+  {/each}
 
-	<div class="mb-4">
-		<label for="otherMedications" class="mb-1 block text-sm font-medium text-gray-700">Other Medications</label>
-		<textarea id="otherMedications" name="otherMedications" rows="3" bind:value={med.otherMedications} placeholder="List any other current medications" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"></textarea>
-	</div>
-</SectionCard>
+  <div class="field-grid">
+    <Field label="Statin name (if applicable)" inputId="step-9-statinName">
+      <TextInput id="step-9-statinName" label="Statin name" bind:value={med.statinName} />
+    </Field>
+    <Field label="Antihypertensive name (if applicable)" inputId="step-9-antihypertensiveName">
+      <TextInput
+        id="step-9-antihypertensiveName"
+        label="Antihypertensive name"
+        bind:value={med.antihypertensiveName}
+      />
+    </Field>
+  </div>
+
+  <Field label="Other medications" inputId="step-9-otherMedications">
+    <TextAreaInput
+      id="step-9-otherMedications"
+      label="Other medications"
+      rows={3}
+      bind:value={med.otherMedications}
+    />
+  </Field>
+</Fieldset>

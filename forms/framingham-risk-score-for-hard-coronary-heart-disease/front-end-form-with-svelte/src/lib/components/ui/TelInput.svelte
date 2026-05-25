@@ -1,6 +1,6 @@
 <script lang="ts">
-  // TextInput — Lily Svelte headless contract.
-  // Emits: <input class="text-input" type="text">.
+  // TelInput — Lily Svelte headless contract.
+  // Emits: <input class="tel-input" type="tel">.
   let {
     class: className = '',
     label,
@@ -18,10 +18,11 @@
 </script>
 
 <input
-  class={`text-input ${className}`}
-  type="text"
+  class={`tel-input ${className}`}
+  type="tel"
   aria-label={label}
   bind:value
+  autocomplete="tel"
   {required}
   {disabled}
   {...restProps}

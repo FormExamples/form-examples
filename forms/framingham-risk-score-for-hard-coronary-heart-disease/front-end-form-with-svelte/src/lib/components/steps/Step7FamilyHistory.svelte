@@ -1,32 +1,69 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const f = assessment.data.familyHistory;
-
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const f = assessment.data.familyHistory;
 </script>
 
-<SectionCard title="Family History" description="Family history of premature CHD is an important risk modifier not captured in the core Framingham equation.">
-	<RadioGroup label="Family History of Coronary Heart Disease?" name="familyChdHistory" options={yesNoOptions} bind:value={f.familyChdHistory} />
+<Fieldset legend="Step 7 \u2014 Family history">
+  <p class="hint">Family history of premature CHD is an important risk modifier not captured in the core Framingham equation.</p>
 
-	<div class="mb-4">
-		<label for="familyChdAgeOnset" class="mb-1 block text-sm font-medium text-gray-700">Age of Onset in Family Member</label>
-		<select id="familyChdAgeOnset" name="familyChdAgeOnset" bind:value={f.familyChdAgeOnset} class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
-			<option value="">-- Select --</option>
-			<option value="under55">Under 55</option>
-			<option value="55to65">55 - 65</option>
-			<option value="over65">Over 65</option>
-		</select>
-	</div>
+  <Field label="Family history of coronary heart disease?">
+    <RadioGroup label="Family history of coronary heart disease?">
+      <label class="radio-input">
+        <input type="radio" name="familyChdHistory" value="yes" bind:group={f.familyChdHistory} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="familyChdHistory" value="no" bind:group={f.familyChdHistory} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	<TextInput label="Relationship to Patient" name="familyChdRelationship" bind:value={f.familyChdRelationship} placeholder="e.g. Father, Mother, Sibling" />
+  <div class="field-grid">
+    <Field label="Age of onset in family member" inputId="step-7-familyChdAgeOnset">
+      <Select
+        id="step-7-familyChdAgeOnset"
+        label="Age of onset in family member"
+        bind:value={f.familyChdAgeOnset}
+      >
+        <option value="">\u2014 Select \u2014</option>
+        <option value="under55">Under 55</option>
+        <option value="55to65">55\u201365</option>
+        <option value="over65">Over 65</option>
+      </Select>
+    </Field>
+    <Field label="Relationship to patient" inputId="step-7-familyChdRelationship">
+      <TextInput
+        id="step-7-familyChdRelationship"
+        label="Relationship to patient"
+        bind:value={f.familyChdRelationship}
+      />
+    </Field>
+  </div>
 
-	<RadioGroup label="Family History of Stroke?" name="familyStrokeHistory" options={yesNoOptions} bind:value={f.familyStrokeHistory} />
-	<RadioGroup label="Family History of Diabetes?" name="familyDiabetesHistory" options={yesNoOptions} bind:value={f.familyDiabetesHistory} />
-</SectionCard>
+  <Field label="Family history of stroke?">
+    <RadioGroup label="Family history of stroke?">
+      <label class="radio-input">
+        <input type="radio" name="familyStrokeHistory" value="yes" bind:group={f.familyStrokeHistory} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="familyStrokeHistory" value="no" bind:group={f.familyStrokeHistory} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+
+  <Field label="Family history of diabetes?">
+    <RadioGroup label="Family history of diabetes?">
+      <label class="radio-input">
+        <input type="radio" name="familyDiabetesHistory" value="yes" bind:group={f.familyDiabetesHistory} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="familyDiabetesHistory" value="no" bind:group={f.familyDiabetesHistory} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+</Fieldset>

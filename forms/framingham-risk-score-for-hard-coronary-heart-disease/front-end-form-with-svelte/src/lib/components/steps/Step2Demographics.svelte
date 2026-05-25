@@ -1,50 +1,81 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const d = assessment.data.demographics;
+  const d = assessment.data.demographics;
 </script>
 
-<SectionCard title="Demographics" description="Age and sex are required for the Framingham calculation. Valid age range: 30-79.">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<div class="mb-4">
-			<label for="age" class="mb-1 block text-sm font-medium text-gray-700">Age (years)</label>
-			<input id="age" name="age" type="number" min="1" max="120" bind:value={d.age} placeholder="e.g. 55" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
+<Fieldset legend="Step 2 \u2014 Demographics">
+  <p class="hint">Age and sex are required for the Framingham calculation. Valid age range: 30\u201379.</p>
 
-		<RadioGroup
-			label="Sex"
-			name="sex"
-			options={[
-				{ value: 'male', label: 'Male' },
-				{ value: 'female', label: 'Female' }
-			]}
-			bind:value={d.sex}
-		/>
-	</div>
+  <div class="field-grid">
+    <Field
+      label="Age (years)"
+      inputId="step-2-age"
+      required
+      error={assessment.errors['step-2-age']}
+    >
+      <NumberInput
+        id="step-2-age"
+        label="Age (years)"
+        min={1}
+        max={120}
+        bind:value={d.age}
+        aria-invalid={assessment.errors['step-2-age'] ? 'true' : undefined}
+      />
+    </Field>
+    <Field
+      label="Sex"
+      required
+      error={assessment.errors['step-2-sex']}
+    >
+      <RadioGroup label="Sex">
+        <label class="radio-input">
+          <input type="radio" name="sex" value="male" bind:group={d.sex} /> Male
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="sex" value="female" bind:group={d.sex} /> Female
+        </label>
+      </RadioGroup>
+    </Field>
+  </div>
 
-	<div class="mb-4">
-		<label for="ethnicity" class="mb-1 block text-sm font-medium text-gray-700">Ethnicity</label>
-		<select id="ethnicity" name="ethnicity" bind:value={d.ethnicity} class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
-			<option value="">-- Prefer not to say --</option>
-			<option value="whitebritish">White - British</option>
-			<option value="whiteother">White - Other</option>
-			<option value="asian">Asian or Asian British</option>
-			<option value="black">Black or Black British</option>
-			<option value="mixed">Mixed / Multiple</option>
-			<option value="other">Other</option>
-		</select>
-	</div>
+  <Field label="Ethnicity" inputId="step-2-ethnicity">
+    <Select id="step-2-ethnicity" label="Ethnicity" bind:value={d.ethnicity}>
+      <option value="">\u2014 Prefer not to say \u2014</option>
+      <option value="whitebritish">White \u2014 British</option>
+      <option value="whiteother">White \u2014 Other</option>
+      <option value="asian">Asian or Asian British</option>
+      <option value="black">Black or Black British</option>
+      <option value="mixed">Mixed / Multiple</option>
+      <option value="other">Other</option>
+    </Select>
+  </Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<div class="mb-4">
-			<label for="heightCm" class="mb-1 block text-sm font-medium text-gray-700">Height (cm)</label>
-			<input id="heightCm" name="heightCm" type="number" step="0.1" min="50" max="250" bind:value={d.heightCm} placeholder="e.g. 175" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-		<div class="mb-4">
-			<label for="weightKg" class="mb-1 block text-sm font-medium text-gray-700">Weight (kg)</label>
-			<input id="weightKg" name="weightKg" type="number" step="0.1" min="20" max="300" bind:value={d.weightKg} placeholder="e.g. 80" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-	</div>
-</SectionCard>
+  <div class="field-grid">
+    <Field label="Height (cm)" inputId="step-2-heightCm">
+      <NumberInput
+        id="step-2-heightCm"
+        label="Height (cm)"
+        step="0.1"
+        min={50}
+        max={250}
+        bind:value={d.heightCm}
+      />
+    </Field>
+    <Field label="Weight (kg)" inputId="step-2-weightKg">
+      <NumberInput
+        id="step-2-weightKg"
+        label="Weight (kg)"
+        step="0.1"
+        min={20}
+        max={300}
+        bind:value={d.weightKg}
+      />
+    </Field>
+  </div>
+</Fieldset>

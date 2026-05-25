@@ -1,49 +1,71 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	const c = assessment.data.cholesterol;
+  const c = assessment.data.cholesterol;
 </script>
 
-<SectionCard title="Cholesterol" description="Total cholesterol and HDL are required for the Framingham calculation. Values in mg/dL or mmol/L.">
-	<div class="mb-4">
-		<label for="cholesterolUnit" class="mb-1 block text-sm font-medium text-gray-700">Cholesterol Unit</label>
-		<select id="cholesterolUnit" name="cholesterolUnit" bind:value={c.cholesterolUnit} class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
-			<option value="mgDl">mg/dL</option>
-			<option value="mmolL">mmol/L</option>
-		</select>
-	</div>
+<Fieldset legend="Step 5 \u2014 Cholesterol">
+  <p class="hint">Total cholesterol and HDL are required for the Framingham calculation.</p>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<div class="mb-4">
-			<label for="totalCholesterol" class="mb-1 block text-sm font-medium text-gray-700">Total Cholesterol</label>
-			<input id="totalCholesterol" name="totalCholesterol" type="number" step="0.1" min="0" bind:value={c.totalCholesterol} placeholder="e.g. 220" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-		<div class="mb-4">
-			<label for="hdlCholesterol" class="mb-1 block text-sm font-medium text-gray-700">HDL Cholesterol</label>
-			<input id="hdlCholesterol" name="hdlCholesterol" type="number" step="0.1" min="0" bind:value={c.hdlCholesterol} placeholder="e.g. 50" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-	</div>
+  <Field label="Cholesterol unit" inputId="step-5-cholesterolUnit">
+    <Select id="step-5-cholesterolUnit" label="Cholesterol unit" bind:value={c.cholesterolUnit}>
+      <option value="mgDl">mg/dL</option>
+      <option value="mmolL">mmol/L</option>
+    </Select>
+  </Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<div class="mb-4">
-			<label for="ldlCholesterol" class="mb-1 block text-sm font-medium text-gray-700">LDL Cholesterol (optional)</label>
-			<input id="ldlCholesterol" name="ldlCholesterol" type="number" step="0.1" min="0" bind:value={c.ldlCholesterol} placeholder="e.g. 140" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-		<div class="mb-4">
-			<label for="triglycerides" class="mb-1 block text-sm font-medium text-gray-700">Triglycerides (optional)</label>
-			<input id="triglycerides" name="triglycerides" type="number" step="0.1" min="0" bind:value={c.triglycerides} placeholder="e.g. 150" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" />
-		</div>
-	</div>
+  <div class="field-grid">
+    <Field label="Total cholesterol" inputId="step-5-totalCholesterol">
+      <NumberInput
+        id="step-5-totalCholesterol"
+        label="Total cholesterol"
+        step="0.1"
+        min={0}
+        bind:value={c.totalCholesterol}
+      />
+    </Field>
+    <Field label="HDL cholesterol" inputId="step-5-hdlCholesterol">
+      <NumberInput
+        id="step-5-hdlCholesterol"
+        label="HDL cholesterol"
+        step="0.1"
+        min={0}
+        bind:value={c.hdlCholesterol}
+      />
+    </Field>
+    <Field label="LDL cholesterol (optional)" inputId="step-5-ldlCholesterol">
+      <NumberInput
+        id="step-5-ldlCholesterol"
+        label="LDL cholesterol"
+        step="0.1"
+        min={0}
+        bind:value={c.ldlCholesterol}
+      />
+    </Field>
+    <Field label="Triglycerides (optional)" inputId="step-5-triglycerides">
+      <NumberInput
+        id="step-5-triglycerides"
+        label="Triglycerides"
+        step="0.1"
+        min={0}
+        bind:value={c.triglycerides}
+      />
+    </Field>
+  </div>
 
-	<RadioGroup
-		label="Fasting Sample?"
-		name="fastingSample"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={c.fastingSample}
-	/>
-</SectionCard>
+  <Field label="Fasting sample?">
+    <RadioGroup label="Fasting sample?">
+      <label class="radio-input">
+        <input type="radio" name="fastingSample" value="yes" bind:group={c.fastingSample} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="fastingSample" value="no" bind:group={c.fastingSample} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+</Fieldset>

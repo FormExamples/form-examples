@@ -1,31 +1,44 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+  import { assessment } from '$lib/stores/assessment.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import TextInput from '$lib/components/ui/TextInput.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+  import DateInput from '$lib/components/ui/DateInput.svelte';
+  import EmailInput from '$lib/components/ui/EmailInput.svelte';
+  import TelInput from '$lib/components/ui/TelInput.svelte';
 
-	const p = assessment.data.patientInformation;
+  const p = assessment.data.patientInformation;
 </script>
 
-<SectionCard title="Patient Information" description="Please provide patient identification details.">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Full Name" name="fullName" bind:value={p.fullName} placeholder="e.g. John Smith" />
-		<TextInput label="Date of Birth" name="dateOfBirth" type="date" bind:value={p.dateOfBirth} />
-	</div>
+<Fieldset legend="Step 1 \u2014 Patient information">
+  <p class="hint">Please provide patient identification details.</p>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="NHS Number" name="nhsNumber" bind:value={p.nhsNumber} placeholder="e.g. 123 456 7890" />
-		<TextInput label="Telephone" name="telephone" bind:value={p.telephone} placeholder="e.g. 07700 900000" />
-	</div>
+  <div class="field-grid">
+    <Field label="Full name" inputId="step-1-fullName">
+      <TextInput id="step-1-fullName" label="Full name" bind:value={p.fullName} />
+    </Field>
+    <Field label="Date of birth" inputId="step-1-dateOfBirth">
+      <DateInput id="step-1-dateOfBirth" label="Date of birth" bind:value={p.dateOfBirth} />
+    </Field>
+    <Field label="NHS number" inputId="step-1-nhsNumber">
+      <TextInput id="step-1-nhsNumber" label="NHS number" bind:value={p.nhsNumber} />
+    </Field>
+    <Field label="Telephone" inputId="step-1-telephone">
+      <TelInput id="step-1-telephone" label="Telephone" bind:value={p.telephone} />
+    </Field>
+    <Field label="Email" inputId="step-1-email">
+      <EmailInput id="step-1-email" label="Email" bind:value={p.email} />
+    </Field>
+    <Field label="GP name" inputId="step-1-gpName">
+      <TextInput id="step-1-gpName" label="GP name" bind:value={p.gpName} />
+    </Field>
+    <Field label="GP practice" inputId="step-1-gpPractice">
+      <TextInput id="step-1-gpPractice" label="GP practice" bind:value={p.gpPractice} />
+    </Field>
+  </div>
 
-	<div class="mb-4">
-		<label for="address" class="mb-1 block text-sm font-medium text-gray-700">Address</label>
-		<textarea id="address" name="address" rows="2" bind:value={p.address} placeholder="Full postal address" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"></textarea>
-	</div>
-
-	<TextInput label="Email" name="email" type="email" bind:value={p.email} placeholder="e.g. patient@example.com" />
-
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="GP Name" name="gpName" bind:value={p.gpName} placeholder="e.g. Dr Jones" />
-		<TextInput label="GP Practice" name="gpPractice" bind:value={p.gpPractice} placeholder="e.g. City Health Centre" />
-	</div>
-</SectionCard>
+  <Field label="Address" inputId="step-1-address">
+    <TextAreaInput id="step-1-address" label="Address" rows={2} bind:value={p.address} />
+  </Field>
+</Fieldset>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  // TextInput — Lily Svelte headless contract.
-  // Emits: <input class="text-input" type="text">.
+  // EmailInput — Lily Svelte headless contract.
+  // Emits: <input class="email-input" type="email">.
   let {
     class: className = '',
     label,
@@ -18,8 +18,8 @@
 </script>
 
 <input
-  class={`text-input ${className}`}
-  type="text"
+  class={`email-input ${className}`}
+  type="email"
   aria-label={label}
   bind:value
   {required}
