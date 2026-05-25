@@ -1,110 +1,93 @@
 <script lang="ts">
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import type { DiabetesHistory } from '$lib/engine/types.js';
+  import { assessment } from '$lib/stores/assessment.svelte.js';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	let { data = $bindable() }: { data: DiabetesHistory } = $props();
+  const d = assessment.data.diabetesHistory;
 </script>
 
-<SectionCard title="Diabetes History">
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<div class="mb-4">
-			<label for="diabetesType" class="block text-sm font-medium text-gray-700 mb-1"
-				>Diabetes Type</label
-			>
-			<select
-				id="diabetesType"
-				bind:value={data.diabetesType}
-				class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
-			>
-				<option value="">Select...</option>
-				<option value="type1">Type 1</option>
-				<option value="type2">Type 2</option>
-				<option value="gestational">Gestational</option>
-				<option value="other">Other</option>
-			</select>
-		</div>
-		<TextInput
-			label="Age at Diagnosis (years)"
-			id="ageAtDiagnosis"
-			type="number"
-			bind:value={data.ageAtDiagnosis}
-			min={0}
-			max={120}
-			step={1}
-		/>
-	</div>
+<Fieldset legend="Step 2 \u2014 Diabetes history">
+  <div class="field-grid">
+    <Field label="Diabetes type" inputId="step-2-diabetesType" required error={assessment.errors['step-2-diabetesType']}>
+      <Select id="step-2-diabetesType" label="Diabetes type" bind:value={d.diabetesType}>
+        <option value="">\u2014 Select \u2014</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="gestational">Gestational</option>
+        <option value="other">Other</option>
+      </Select>
+    </Field>
+    <Field label="Age at diagnosis (years)" inputId="step-2-ageAtDiagnosis">
+      <NumberInput
+        id="step-2-ageAtDiagnosis"
+        label="Age at diagnosis"
+        min={0}
+        max={120}
+        bind:value={d.ageAtDiagnosis}
+      />
+    </Field>
+  </div>
 
-	<TextInput
-		label="Diabetes Duration (years)"
-		id="diabetesDurationYears"
-		type="number"
-		bind:value={data.diabetesDurationYears}
-		min={0}
-		max={100}
-		step={0.5}
-	/>
+  <Field label="Diabetes duration (years)" inputId="step-2-diabetesDurationYears">
+    <NumberInput
+      id="step-2-diabetesDurationYears"
+      label="Diabetes duration"
+      min={0}
+      max={100}
+      step="0.5"
+      bind:value={d.diabetesDurationYears}
+    />
+  </Field>
 
-	<h4 class="mt-4 mb-2 text-sm font-semibold text-gray-700">Glycaemic Control</h4>
+  <div class="field-grid">
+    <Field label="HbA1c value" inputId="step-2-hba1cValue">
+      <NumberInput id="step-2-hba1cValue" label="HbA1c value" min={0} step="0.1" bind:value={d.hba1cValue} />
+    </Field>
+    <Field label="HbA1c unit">
+      <RadioGroup label="HbA1c unit">
+        <label class="radio-input">
+          <input type="radio" name="hba1cUnit" value="mmolMol" bind:group={d.hba1cUnit} /> mmol/mol
+        </label>
+        <label class="radio-input">
+          <input type="radio" name="hba1cUnit" value="percent" bind:group={d.hba1cUnit} /> %
+        </label>
+      </RadioGroup>
+    </Field>
+  </div>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<TextInput
-			label="HbA1c Value"
-			id="hba1cValue"
-			type="number"
-			bind:value={data.hba1cValue}
-			min={0}
-			step={0.1}
-		/>
-		<RadioGroup
-			label="HbA1c Unit"
-			name="hba1cUnit"
-			options={[
-				{ value: 'mmolMol', label: 'mmol/mol' },
-				{ value: 'percent', label: '%' }
-			]}
-			bind:value={data.hba1cUnit}
-		/>
-	</div>
+  <Field label="Fasting glucose (mmol/L)" inputId="step-2-fastingGlucose">
+    <NumberInput
+      id="step-2-fastingGlucose"
+      label="Fasting glucose"
+      min={0}
+      step="0.1"
+      bind:value={d.fastingGlucose}
+    />
+  </Field>
 
-	<TextInput
-		label="Fasting Glucose (mmol/L)"
-		id="fastingGlucose"
-		type="number"
-		bind:value={data.fastingGlucose}
-		min={0}
-		step={0.1}
-	/>
+  <Field label="Current diabetes treatment" inputId="step-2-diabetesTreatment">
+    <Select id="step-2-diabetesTreatment" label="Current diabetes treatment" bind:value={d.diabetesTreatment}>
+      <option value="">\u2014 Select \u2014</option>
+      <option value="diet">Diet only</option>
+      <option value="oral">Oral medication only</option>
+      <option value="insulin">Insulin only</option>
+      <option value="combined">Combined (oral + insulin)</option>
+    </Select>
+  </Field>
 
-	<h4 class="mt-4 mb-2 text-sm font-semibold text-gray-700">Diabetes Treatment</h4>
-
-	<div class="mb-4">
-		<label for="diabetesTreatment" class="block text-sm font-medium text-gray-700 mb-1"
-			>Current Treatment</label
-		>
-		<select
-			id="diabetesTreatment"
-			bind:value={data.diabetesTreatment}
-			class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
-		>
-			<option value="">Select...</option>
-			<option value="diet">Diet only</option>
-			<option value="oral">Oral medication only</option>
-			<option value="insulin">Insulin only</option>
-			<option value="combined">Combined (oral + insulin)</option>
-		</select>
-	</div>
-
-	{#if data.diabetesTreatment === 'insulin' || data.diabetesTreatment === 'combined'}
-		<TextInput
-			label="Duration on Insulin (years)"
-			id="insulinDurationYears"
-			type="number"
-			bind:value={data.insulinDurationYears}
-			min={0}
-			max={100}
-			step={0.5}
-		/>
-	{/if}
-</SectionCard>
+  {#if d.diabetesTreatment === 'insulin' || d.diabetesTreatment === 'combined'}
+    <Field label="Duration on insulin (years)" inputId="step-2-insulinDurationYears">
+      <NumberInput
+        id="step-2-insulinDurationYears"
+        label="Duration on insulin"
+        min={0}
+        max={100}
+        step="0.5"
+        bind:value={d.insulinDurationYears}
+      />
+    </Field>
+  {/if}
+</Fieldset>

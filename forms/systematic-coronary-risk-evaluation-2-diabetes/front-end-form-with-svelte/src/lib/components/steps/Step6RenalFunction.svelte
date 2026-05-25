@@ -1,50 +1,48 @@
 <script lang="ts">
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import type { RenalFunction } from '$lib/engine/types.js';
+  import { assessment } from '$lib/stores/assessment.svelte.js';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
 
-	let { data = $bindable() }: { data: RenalFunction } = $props();
+  const d = assessment.data.renalFunction;
 </script>
 
-<SectionCard title="Renal Function">
-	<p class="mb-4 text-sm text-gray-500">Enter the most recent renal function test results.</p>
+<Fieldset legend="Step 6 \u2014 Renal function">
+  <p class="hint">Enter the most recent renal function test results.</p>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<TextInput label="eGFR (mL/min/1.73m2)" id="egfr" type="number" bind:value={data.egfr} min={0} max={200} step={1} />
-		<TextInput label="Creatinine (umol/L)" id="creatinine" type="number" bind:value={data.creatinine} min={0} max={2000} step={1} />
-	</div>
+  <div class="field-grid">
+    <Field label="eGFR (mL/min/1.73m\u00b2)" inputId="step-6-egfr">
+      <NumberInput id="step-6-egfr" label="eGFR" min={0} max={200} bind:value={d.egfr} />
+    </Field>
+    <Field label="Creatinine (\u00b5mol/L)" inputId="step-6-creatinine">
+      <NumberInput id="step-6-creatinine" label="Creatinine" min={0} max={2000} bind:value={d.creatinine} />
+    </Field>
+  </div>
 
-	<TextInput label="Urine Albumin-to-Creatinine Ratio (mg/mmol)" id="urineAcr" type="number" bind:value={data.urineAcr} min={0} step={0.1} />
+  <Field label="Urine ACR (mg/mmol)" inputId="step-6-urineAcr">
+    <NumberInput id="step-6-urineAcr" label="Urine ACR" min={0} step="0.1" bind:value={d.urineAcr} />
+  </Field>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<div class="mb-4">
-			<label for="proteinuria" class="block text-sm font-medium text-gray-700 mb-1">Proteinuria Status</label>
-			<select
-				id="proteinuria"
-				bind:value={data.proteinuria}
-				class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
-			>
-				<option value="">Select...</option>
-				<option value="none">None</option>
-				<option value="microalbuminuria">Microalbuminuria (ACR 3-30 mg/mmol)</option>
-				<option value="macroalbuminuria">Macroalbuminuria (ACR &gt;30 mg/mmol)</option>
-			</select>
-		</div>
-		<div class="mb-4">
-			<label for="ckdStage" class="block text-sm font-medium text-gray-700 mb-1">CKD Stage</label>
-			<select
-				id="ckdStage"
-				bind:value={data.ckdStage}
-				class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary"
-			>
-				<option value="">Select...</option>
-				<option value="G1">G1 (eGFR &ge;90)</option>
-				<option value="G2">G2 (eGFR 60-89)</option>
-				<option value="G3a">G3a (eGFR 45-59)</option>
-				<option value="G3b">G3b (eGFR 30-44)</option>
-				<option value="G4">G4 (eGFR 15-29)</option>
-				<option value="G5">G5 (eGFR &lt;15)</option>
-			</select>
-		</div>
-	</div>
-</SectionCard>
+  <div class="field-grid">
+    <Field label="Proteinuria status" inputId="step-6-proteinuria">
+      <Select id="step-6-proteinuria" label="Proteinuria status" bind:value={d.proteinuria}>
+        <option value="">\u2014 Select \u2014</option>
+        <option value="none">None</option>
+        <option value="microalbuminuria">Microalbuminuria (ACR 3\u201330 mg/mmol)</option>
+        <option value="macroalbuminuria">Macroalbuminuria (ACR &gt;30 mg/mmol)</option>
+      </Select>
+    </Field>
+    <Field label="CKD stage" inputId="step-6-ckdStage">
+      <Select id="step-6-ckdStage" label="CKD stage" bind:value={d.ckdStage}>
+        <option value="">\u2014 Select \u2014</option>
+        <option value="G1">G1 (eGFR \u2265 90)</option>
+        <option value="G2">G2 (eGFR 60\u201389)</option>
+        <option value="G3a">G3a (eGFR 45\u201359)</option>
+        <option value="G3b">G3b (eGFR 30\u201344)</option>
+        <option value="G4">G4 (eGFR 15\u201329)</option>
+        <option value="G5">G5 (eGFR &lt; 15)</option>
+      </Select>
+    </Field>
+  </div>
+</Fieldset>

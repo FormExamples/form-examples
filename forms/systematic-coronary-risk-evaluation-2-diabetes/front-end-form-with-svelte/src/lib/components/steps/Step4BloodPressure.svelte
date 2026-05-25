@@ -1,60 +1,65 @@
 <script lang="ts">
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import type { BloodPressure } from '$lib/engine/types.js';
+  import { assessment } from '$lib/stores/assessment.svelte.js';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
+  import Field from '$lib/components/ui/Field.svelte';
+  import NumberInput from '$lib/components/ui/NumberInput.svelte';
+  import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
-	let { data = $bindable() }: { data: BloodPressure } = $props();
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const d = assessment.data.bloodPressure;
 </script>
 
-<SectionCard title="Blood Pressure">
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<TextInput
-			label="Systolic Blood Pressure (mmHg)"
-			id="systolicBp"
-			type="number"
-			bind:value={data.systolicBp}
-			min={60}
-			max={300}
-			step={1}
-		/>
-		<TextInput
-			label="Diastolic Blood Pressure (mmHg)"
-			id="diastolicBp"
-			type="number"
-			bind:value={data.diastolicBp}
-			min={30}
-			max={200}
-			step={1}
-		/>
-	</div>
+<Fieldset legend="Step 4 \u2014 Blood pressure">
+  <div class="field-grid">
+    <Field label="Systolic BP (mmHg)" inputId="step-4-systolicBp">
+      <NumberInput id="step-4-systolicBp" label="Systolic BP" min={60} max={300} bind:value={d.systolicBp} />
+    </Field>
+    <Field label="Diastolic BP (mmHg)" inputId="step-4-diastolicBp">
+      <NumberInput id="step-4-diastolicBp" label="Diastolic BP" min={30} max={200} bind:value={d.diastolicBp} />
+    </Field>
+  </div>
 
-	<RadioGroup label="On Antihypertensive Medication" name="onAntihypertensive" options={yesNo} bind:value={data.onAntihypertensive} />
+  <Field label="On antihypertensive medication">
+    <RadioGroup label="On antihypertensive medication">
+      <label class="radio-input">
+        <input type="radio" name="onAntihypertensive" value="yes" bind:group={d.onAntihypertensive} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="onAntihypertensive" value="no" bind:group={d.onAntihypertensive} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	{#if data.onAntihypertensive === 'yes'}
-		<TextInput
-			label="Number of BP Medications"
-			id="numberOfBpMedications"
-			type="number"
-			bind:value={data.numberOfBpMedications}
-			min={1}
-			max={10}
-			step={1}
-		/>
-	{/if}
+  {#if d.onAntihypertensive === 'yes'}
+    <Field label="Number of BP medications" inputId="step-4-numberOfBpMedications">
+      <NumberInput
+        id="step-4-numberOfBpMedications"
+        label="Number of BP medications"
+        min={1}
+        max={10}
+        bind:value={d.numberOfBpMedications}
+      />
+    </Field>
+  {/if}
 
-	<RadioGroup
-		label="Blood Pressure at Target"
-		name="bpAtTarget"
-		options={yesNo}
-		bind:value={data.bpAtTarget}
-		hint="Target: <130/80 mmHg for most diabetes patients (ESC 2023)"
-	/>
+  <Field label="Blood pressure at target" description="Target: <130/80 mmHg for most diabetes patients (ESC 2023)">
+    <RadioGroup label="Blood pressure at target">
+      <label class="radio-input">
+        <input type="radio" name="bpAtTarget" value="yes" bind:group={d.bpAtTarget} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="bpAtTarget" value="no" bind:group={d.bpAtTarget} /> No
+      </label>
+    </RadioGroup>
+  </Field>
 
-	<RadioGroup label="Home Blood Pressure Monitoring" name="homeBpMonitoring" options={yesNo} bind:value={data.homeBpMonitoring} />
-</SectionCard>
+  <Field label="Home blood pressure monitoring">
+    <RadioGroup label="Home blood pressure monitoring">
+      <label class="radio-input">
+        <input type="radio" name="homeBpMonitoring" value="yes" bind:group={d.homeBpMonitoring} /> Yes
+      </label>
+      <label class="radio-input">
+        <input type="radio" name="homeBpMonitoring" value="no" bind:group={d.homeBpMonitoring} /> No
+      </label>
+    </RadioGroup>
+  </Field>
+</Fieldset>
