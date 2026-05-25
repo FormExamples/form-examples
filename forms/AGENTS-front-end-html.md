@@ -39,10 +39,11 @@ at runtime. This is consistent with the project-wide no-build constraint.
   directory is self-contained and works via `file://`.
 - **Lily checkout location is `~/git/lilydesignsystem/lily-design-system/lily-design-system-html-headless/`.**
   Generators look there; if absent they fail with a clear error.
-- **Pinned commit recorded in `doc/lily-version.md`.** Re-running
-  `bin/lily-sync` (a doc-snapshotting helper, not a runtime sync)
-  refreshes the pinned hash and copies the spec comments into
-  `doc/lily-spec/` for quick reference without needing the external
+- **Pinned commit recorded in [`lily-version.md`](lily-version.md).**
+  Currently `7a51013` (pinned 2026-05-24). Re-running `bin/lily-sync`
+  (a doc-snapshotting helper, not a runtime sync; planned, not yet
+  implemented) will refresh the pinned hash and copy the spec comments
+  into `doc/lily-spec/` for quick reference without needing the external
   checkout.
 
 ## 3. Class vocabulary (Lily contract)
