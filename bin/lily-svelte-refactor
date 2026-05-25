@@ -1,0 +1,279 @@
+#!/usr/bin/env python3
+"""bin/lily-svelte-refactor — mechanically refactor a form's
+`front-end-form-with-svelte/` and/or `front-end-dashboard-with-svelte/`
+toward the Lily Design System Svelte headless contract.
+
+Scope: safe class-attribute swaps inside Svelte template / TypeScript /
+TSX-like fragments AND a risky-pattern report listing old-style
+components, imports, and markup that require a subagent rewrite (the
+structural rewrite is too varied to mechanise — see Phase 5.4 pilot
+commit for the canonical shape).
+
+See forms/AGENTS-front-end-svelte.md for the class contract, the
+component vocabulary, and the prop conventions; forms/plan.md §7
+Phase 5 for the rationale.
+
+Usage:
+  bin/lily-svelte-refactor <slug>            # one form
+  bin/lily-svelte-refactor --all             # all forms in forms/
+  bin/lily-svelte-refactor --dry-run <slug>  # show what would change
+  bin/lily-svelte-refactor --check --all     # CI drift check (non-zero on drift)
+  bin/lily-svelte-refactor --scope=form <slug>
+  bin/lily-svelte-refactor --scope=dashboard <slug>
+
+The tool is idempotent: re-running on an already-refactored form makes
+no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+# ---------------------------------------------------------------------------
+# Safe-swap catalogue (Svelte template / TypeScript class attributes).
+#
+# Each entry: (description, regex_pattern, replacement).
+#
+# These swaps are safe because they only touch class= attributes (or string
+# literals that are class names) — not component names, prop signatures, or
+# import statements. They mirror the Lily HTML refactor catalogue so that
+# either stack picks up the same Lily vocabulary.
+# ---------------------------------------------------------------------------
+
+BUTTON_VARIANTS = [
+    "primary", "secondary", "tertiary",
+    "icon", "add", "remove", "link",
+    "danger", "warn", "success",
+]
+
+SAFE_SWAPS: list[tuple[str, re.Pattern, str]] = []
+
+# class="btn btn-VARIANT" → class="button" data-variant="VARIANT"
+for v in BUTTON_VARIANTS:
+    SAFE_SWAPS.append((
+        f'btn btn-{v} (double-quoted)',
+        re.compile(rf'class="btn btn-{v}"'),
+        f'class="button" data-variant="{v}"',
+    ))
+    SAFE_SWAPS.append((
+        f"btn btn-{v} (single-quoted)",
+        re.compile(rf"class='btn btn-{v}'"),
+        f"class='button' data-variant='{v}'",
+    ))
+
+# Bare class="btn" (no variant) — Lily uses .button with no variant.
+SAFE_SWAPS.extend([
+    ('btn bare (double)', re.compile(r'class="btn"'), 'class="button"'),
+    ('btn bare (single)', re.compile(r"class='btn'"),  "class='button'"),
+])
+
+# Form / report containers (class-attribute level)
+SAFE_SWAPS.extend([
+    ('form-group (double)',     re.compile(r'class="form-group"'),     'class="field"'),
+    ('form-group (single)',     re.compile(r"class='form-group'"),     "class='field'"),
+    ('form-actions (double)',   re.compile(r'class="form-actions"'),   'class="button-group"'),
+    ('form-actions (single)',   re.compile(r"class='form-actions'"),   "class='button-group'"),
+    ('report-region (double)',  re.compile(r'class="report-region"'),  'class="panel"'),
+    ('report-region (single)',  re.compile(r"class='report-region'"),  "class='panel'"),
+    ('status-banner (double)',  re.compile(r'class="status-banner"'),  'class="alert" data-type="warning"'),
+    ('status-banner (single)',  re.compile(r"class='status-banner'"),  "class='alert' data-type='warning'"),
+    # Input class swaps (when applied directly to native <input>/<select>/<textarea>)
+    ('select-input class (double)', re.compile(r'class="select-input"'), 'class="select"'),
+    ('select-input class (single)', re.compile(r"class='select-input'"), "class='select'"),
+    ('textarea class (double)',     re.compile(r'class="textarea"'),     'class="text-area-input"'),
+    ('textarea class (single)',     re.compile(r"class='textarea'"),     "class='text-area-input'"),
+])
+
+# ---------------------------------------------------------------------------
+# Risky-pattern catalogue.
+#
+# Each entry: (description, regex_pattern). When matched, the tool prints
+# a "risky:" line with file:line so a subagent can handle the structural
+# rewrite. Risky lines never cause a write and never fail --check.
+# ---------------------------------------------------------------------------
+
+RISKY_PATTERNS: list[tuple[str, re.Pattern]] = [
+    ("old SelectInput component import (rename component file to Select.svelte and update imports)",
+     re.compile(r"ui/SelectInput")),
+    ("old TextArea component import (rename to TextAreaInput.svelte)",
+     re.compile(r"ui/TextArea(?!Input)")),
+    ("old ProgressBar component (rename to Progress.svelte)",
+     re.compile(r"ui/ProgressBar")),
+    ("old SectionCard component (rename to Fieldset.svelte)",
+     re.compile(r"ui/SectionCard")),
+    ("old StepNavigation component (rename to StepList + StepListItem)",
+     re.compile(r"ui/StepNavigation")),
+    ("non-Lily div progress markup (replace with native <progress class='progress'>)",
+     re.compile(r'class="progress-bar')),
+    ("non-Lily div progress fill",
+     re.compile(r'class="progress-bar-fill')),
+    ("inline <input> tag in non-ui file (wrap in <TextInput>/<NumberInput>/<DateInput>)",
+     re.compile(r"<input\b")),
+    ("inline <select> tag in non-ui file (wrap in <Select>)",
+     re.compile(r"<select\b")),
+    ("inline <textarea> tag in non-ui file (wrap in <TextAreaInput>)",
+     re.compile(r"<textarea\b")),
+    ("ad-hoc btn-* literal still in source",
+     re.compile(r"['\"`]btn(?:\s|-)")),
+]
+
+# Risky patterns that should NOT fire inside src/lib/components/ui/ — those
+# directories legitimately contain raw <input>/<select>/<textarea> tags (the
+# UI components themselves wrap them).
+RISKY_SKIP_IN_UI: set[str] = {
+    "inline <input> tag in non-ui file (wrap in <TextInput>/<NumberInput>/<DateInput>)",
+    "inline <select> tag in non-ui file (wrap in <Select>)",
+    "inline <textarea> tag in non-ui file (wrap in <TextAreaInput>)",
+}
+
+# Extensions we touch.
+TARGET_EXTENSIONS = (".svelte", ".ts", ".js")
+
+
+def refactor_file(path: Path, dry_run: bool) -> tuple[list[tuple[str, int]], list[tuple[str, int, str]]]:
+    """Return (changes_applied, risky_lines).
+
+    changes_applied: [(description, count), ...]
+    risky_lines:     [(description, line_number, line_text), ...]
+    """
+    try:
+        text = path.read_text()
+    except (OSError, UnicodeDecodeError):
+        return [], []
+
+    new_text = text
+    changes: list[tuple[str, int]] = []
+    for desc, pat, repl in SAFE_SWAPS:
+        new_text, n = pat.subn(repl, new_text)
+        if n:
+            changes.append((desc, n))
+
+    risky: list[tuple[str, int, str]] = []
+    in_ui_dir = "/src/lib/components/ui/" in str(path).replace("\\", "/")
+    for desc, pat in RISKY_PATTERNS:
+        if in_ui_dir and desc in RISKY_SKIP_IN_UI:
+            continue
+        for ln, line in enumerate(new_text.splitlines(), start=1):
+            if pat.search(line):
+                risky.append((desc, ln, line.strip()[:120]))
+
+    if new_text != text and not dry_run:
+        path.write_text(new_text)
+    return changes, risky
+
+
+def iter_target_files(form_dir: Path, scope: str):
+    subdirs: list[str] = []
+    if scope in ("form", "both"):
+        subdirs.append("front-end-form-with-svelte")
+    if scope in ("dashboard", "both"):
+        subdirs.append("front-end-dashboard-with-svelte")
+    for sd in subdirs:
+        sub = form_dir / sd
+        if not sub.is_dir():
+            continue
+        src = sub / "src"
+        if not src.is_dir():
+            continue
+        for p in src.rglob("*"):
+            if p.is_file() and p.suffix in TARGET_EXTENSIONS:
+                yield p
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("slug", nargs="?", help="Form slug (omit with --all)")
+    parser.add_argument("--all", action="store_true", help="Refactor every form in forms/")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Show what would change; do not write files")
+    parser.add_argument("--check", action="store_true",
+                        help="Implies --dry-run; exit non-zero on any drift (CI mode)")
+    parser.add_argument("--scope", choices=["form", "dashboard", "both"], default="both",
+                        help="Which front-end-*-with-svelte/ subdirectory to refactor")
+    parser.add_argument("--show-risky", action="store_true",
+                        help="Print every risky line (off by default; only counts shown)")
+    args = parser.parse_args()
+
+    if args.check:
+        args.dry_run = True
+    if not args.slug and not args.all:
+        parser.error("provide a slug or --all")
+    if args.slug and args.all:
+        parser.error("provide either a slug or --all, not both")
+    if not FORMS_DIR.is_dir():
+        sys.exit(f"forms directory not found: {FORMS_DIR}")
+
+    if args.all:
+        slugs = sorted(
+            d.name for d in FORMS_DIR.iterdir()
+            if d.is_dir() and not d.name.startswith(".") and not d.name.startswith("AGENTS")
+            and d.name not in ("lily-spec", "lily-svelte-spec")
+        )
+    else:
+        slugs = [args.slug]
+
+    mode = "DRY-RUN" if args.dry_run else "WRITE"
+    print(f"lily-svelte-refactor [{mode}] — {len(slugs)} form(s), scope={args.scope}")
+    print()
+
+    grand_changes = 0
+    grand_risky = 0
+    risky_by_pattern: dict[str, int] = {}
+
+    for slug in slugs:
+        form_dir = FORMS_DIR / slug
+        if not form_dir.is_dir():
+            print(f"skip {slug}: directory not found")
+            continue
+        form_changes: list[tuple[Path, list[tuple[str, int]]]] = []
+        form_risky: list[tuple[Path, list[tuple[str, int, str]]]] = []
+        for fp in iter_target_files(form_dir, args.scope):
+            changes, risky = refactor_file(fp, dry_run=args.dry_run)
+            if changes:
+                form_changes.append((fp, changes))
+                grand_changes += sum(n for _, n in changes)
+            if risky:
+                form_risky.append((fp, risky))
+                grand_risky += len(risky)
+                for desc, _, _ in risky:
+                    risky_by_pattern[desc] = risky_by_pattern.get(desc, 0) + 1
+        if form_changes or form_risky:
+            print(slug)
+            for fp, changes in form_changes:
+                rel = fp.relative_to(REPO_ROOT)
+                print(f"    {rel}")
+                for desc, n in changes:
+                    print(f"      {n}× {desc}")
+            if args.show_risky:
+                for fp, risky in form_risky:
+                    rel = fp.relative_to(REPO_ROOT)
+                    for desc, ln, body in risky:
+                        print(f"    ! {rel}:{ln} risky: {desc}")
+                        print(f"        {body}")
+            print()
+
+    print(f"summary: {grand_changes} safe swap(s); {grand_risky} risky line(s)")
+    if grand_risky and not args.show_risky:
+        print("(risky breakdown; pass --show-risky for per-line detail)")
+        for desc, n in sorted(risky_by_pattern.items(), key=lambda kv: -kv[1]):
+            print(f"    {n:6d}× {desc}")
+    if args.dry_run and grand_changes:
+        print("(dry-run: no files written)")
+    if args.check and grand_changes > 0:
+        print(f"FAIL: {grand_changes} safe swap(s) pending — Lily Svelte contract drift detected.",
+              file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

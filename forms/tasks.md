@@ -421,13 +421,38 @@ commit per form with `git commit --only forms/<slug>/`.
 - [x] **5.3  Link the Svelte contract** from top-level `AGENTS.md`,
   `index.md`, `spec.md`, `forms/AGENTS.md`, and the per-stack
   `AGENTS/front-end-with-sveltekit-tailwind-svar.md`.
-- [ ] **5.4  Pilot-refactor a canonical Svelte form** (target:
-  `pre-operative-assessment-by-clinician/front-end-form-with-svelte/`).
-  Each of `src/lib/components/ui/*.svelte` rewritten to mirror the Lily
-  Svelte API; `+page.svelte`, store, and StepN components updated.
-- [ ] **5.5  Add `bin/lily-svelte-refactor`** (mechanical refactor tool).
-  Safe class / prop swaps with `--dry-run`, `--check`, `--scope`, `--all`
-  flags. Reports risky patterns for subagent attention.
+- [x] **5.4  Pilot-refactor canonical Svelte form** (`6fd8a437`).
+  `pre-operative-assessment-by-clinician/front-end-form-with-svelte/`:
+  22 Lily-shape UI components added under `src/lib/components/ui/`
+  (TextInput, NumberInput, DateInput, EmailInput, TelInput, Select,
+  TextAreaInput, RadioGroup, RadioInput, CheckboxGroup, CheckboxInput,
+  Button, Form, Fieldset, Field, ErrorSummary, StepList, StepListItem,
+  Progress, Panel, Hint, Alert), each mirroring the upstream
+  `forms/lily-svelte-spec/<Name>/<Name>.svelte` API. `+page.svelte`
+  rewritten to the AGENTS-front-end-svelte §5 page shell (native
+  `<progress>`, `<ol class="step-list">`, `<Form>`, `<ErrorSummary>`,
+  Lily `Button` variants, `<Panel>`). `assessment.svelte.ts` extended
+  with `errors`, `errorSummaryHidden`, `submitted`, derived
+  `percentComplete`, derived `steps[]` with per-step status, and a
+  `validate()` method gating Submit on required fields. All 16
+  `StepNN*.svelte` rewritten to use Lily `Fieldset` + `Field` +
+  `TextInput`/`NumberInput`/`DateInput`/`Select`/`TextAreaInput`.
+  `report/+page.svelte` wraps the report in `<Panel>` and uses
+  `<Alert data-type>` for the composite-risk callout. `app.css`
+  extended with minimal CSS rules for every Lily class name,
+  tokenised through Tailwind 4 `@theme`. `pnpm check`: 0 errors,
+  0 warnings. `pnpm test`: 16/16 passing. `pnpm build`: succeeds.
+  Engine, store internals, and report content unchanged.
+- [x] **5.5  Add `bin/lily-svelte-refactor`** (mechanical refactor tool).
+  Safe class-attribute swaps with `--dry-run`, `--check`, `--scope`,
+  `--all`, `--show-risky` flags. Reports risky-pattern catalogue per
+  form (renames needed, raw `<input>` / `<select>` / `<textarea>`
+  tags outside `src/lib/components/ui/`, non-Lily progress markup).
+  Skips raw-tag detection inside `src/lib/components/ui/` because the
+  Lily UI components legitimately wrap native inputs there. Total
+  drift across the corpus: 2,003 risky lines — 661× SectionCard,
+  421× inline `<input>`, 320× TextArea, 318× inline `<select>`,
+  193× SelectInput, 83× inline `<textarea>`, plus a long tail.
 - [ ] **5.6  Batch-migrate the remaining ~132 forms.** Group by complexity
   (privacy notices first, then surveys, single-grader, multi-grader,
   emergency forms, UK statutory). Per-form `git commit --only forms/<slug>/`.
