@@ -281,7 +281,23 @@ The `bin/generate-front-end-form-with-html.py` and
 `bin/generate-front-end-dashboard-with-html.py` generators emit output
 equivalent to the canonical form for any other form's spec.
 
-## 10. Out of scope here
+## 10. CI drift check
+
+`bin/lily-html-refactor --check --all` is the CI hook. It runs every safe
+class-swap pattern in dry-run mode and exits non-zero if any swap would
+land — i.e. a hand-edit has reintroduced an old class. Risky lines
+(structural patterns the tool won't auto-fix) are reported but do not
+fail `--check`; those require a subagent pass.
+
+Local usage:
+
+```sh
+bin/lily-html-refactor --check --all
+```
+
+Wire it into your CI step or into `bin/test` as appropriate.
+
+## 11. Out of scope here
 
 - SvelteKit subprojects (`front-end-*-with-svelte/`) — covered by a
   separate plan.

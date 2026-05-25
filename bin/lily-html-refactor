@@ -15,11 +15,17 @@ Usage:
   bin/lily-html-refactor <slug>            # one form
   bin/lily-html-refactor --all             # all forms in forms/
   bin/lily-html-refactor --dry-run <slug>  # show what would change
+  bin/lily-html-refactor --check --all     # CI drift check (non-zero on drift)
   bin/lily-html-refactor --scope=form <slug>
   bin/lily-html-refactor --scope=dashboard <slug>
 
 The tool is idempotent: re-running on an already-refactored form
 makes no further changes.
+
+--check implies --dry-run and exits non-zero if any safe swaps would
+be applied. Risky lines (structural patterns the tool won't auto-fix)
+are reported but do not fail --check, since they require subagent
+attention rather than mechanical correction.
 """
 
 from __future__ import annotations
@@ -257,9 +263,14 @@ def main() -> int:
     parser.add_argument("--all", action="store_true", help="Refactor every form in forms/")
     parser.add_argument("--dry-run", action="store_true",
                         help="Show what would change; do not write files")
+    parser.add_argument("--check", action="store_true",
+                        help="Implies --dry-run; exit non-zero on any drift (CI mode)")
     parser.add_argument("--scope", choices=["form", "dashboard", "both"], default="both",
                         help="Which front-end-*-with-html/ subdirectory to refactor")
     args = parser.parse_args()
+
+    if args.check:
+        args.dry_run = True
 
     if not args.slug and not args.all:
         parser.error("provide a slug or --all")
@@ -317,6 +328,10 @@ def main() -> int:
     print(f"summary: {summary_changes}; {summary_risky}")
     if args.dry_run and grand_changes:
         print("(dry-run: no files written)")
+    if args.check and grand_changes > 0:
+        print(f"FAIL: {grand_changes} safe swap(s) pending — Lily contract drift detected.",
+              file=sys.stderr)
+        return 1
     return 0
 
 
