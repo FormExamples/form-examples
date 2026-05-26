@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const p = assessment.data.fmsPatterns.hurdleStep;
 
@@ -16,68 +18,75 @@
 	function setRight(s: 0 | 1 | 2 | 3) { p.rightScore = s; }
 </script>
 
-<SectionCard title="Hurdle Step" description="Assesses bilateral functional mobility and stability of the hips, knees, and ankles. Challenges step and stride mechanics.">
-	<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-		<fieldset>
-			<legend class="mb-2 block text-sm font-medium text-gray-700">Left Side Score</legend>
-			<div class="flex flex-col gap-2">
+<Fieldset legend="Hurdle Step">
+	<p class="hint">
+		Assesses bilateral functional mobility and stability of the hips, knees, and ankles.
+		Challenges step and stride mechanics.
+	</p>
+
+	<div class="field-grid">
+		<Field label="Left Side Score" required>
+			<RadioGroup label="Hurdle Step Left Side Score">
 				{#each scoreOptions as opt (opt.value)}
-					<label
-						class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors
-							{p.leftScore === opt.value ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-					>
+					<label>
 						<input
 							type="radio"
+							class="radio-input"
 							name="hurdleStepLeft"
 							value={opt.value}
 							checked={p.leftScore === opt.value}
 							onchange={() => setLeft(opt.value as 0 | 1 | 2 | 3)}
-							class="text-primary accent-primary"
 						/>
 						{opt.label}
 					</label>
 				{/each}
-			</div>
-		</fieldset>
+			</RadioGroup>
+		</Field>
 
-		<fieldset>
-			<legend class="mb-2 block text-sm font-medium text-gray-700">Right Side Score</legend>
-			<div class="flex flex-col gap-2">
+		<Field label="Right Side Score" required>
+			<RadioGroup label="Hurdle Step Right Side Score">
 				{#each scoreOptions as opt (opt.value)}
-					<label
-						class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors
-							{p.rightScore === opt.value ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-					>
+					<label>
 						<input
 							type="radio"
+							class="radio-input"
 							name="hurdleStepRight"
 							value={opt.value}
 							checked={p.rightScore === opt.value}
 							onchange={() => setRight(opt.value as 0 | 1 | 2 | 3)}
-							class="text-primary accent-primary"
 						/>
 						{opt.label}
 					</label>
 				{/each}
-			</div>
-		</fieldset>
+			</RadioGroup>
+		</Field>
 	</div>
 
-	<div class="mt-4 mb-4">
-		<label class="flex items-center gap-2 text-sm font-medium text-gray-700">
-			<input
-				type="checkbox"
-				bind:checked={p.painDuringMovement}
-				class="accent-primary"
-			/>
+	<Field label="Pain reported during this movement">
+		<label>
+			<input type="checkbox" class="checkbox-input" bind:checked={p.painDuringMovement} />
 			Pain reported during this movement
 		</label>
-	</div>
+	</Field>
 
-	<TextArea
-		label="Asymmetry Notes / Observations"
-		name="hurdleStepNotes"
-		bind:value={p.asymmetryNotes}
-		placeholder="Note any left-right differences, compensations, or relevant observations..."
-	/>
-</SectionCard>
+	<Field label="Asymmetry Notes / Observations" inputId="hurdleStepNotes">
+		<TextAreaInput
+			id="hurdleStepNotes"
+			label="Asymmetry Notes"
+			rows={3}
+			placeholder="Note any left-right differences, compensations, or relevant observations..."
+			bind:value={p.asymmetryNotes}
+		/>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid { grid-template-columns: 1fr; }
+	}
+</style>

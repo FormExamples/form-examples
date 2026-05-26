@@ -1,40 +1,48 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	const r = assessment.data.referralInfo;
 </script>
 
-<SectionCard title="Referral Information" description="Details about the referral and sport/activity">
-	<TextInput
-		label="Referring Provider"
-		name="referringProvider"
-		bind:value={r.referringProvider}
-		placeholder="e.g., Dr. Smith, GP"
-		required
-	/>
+<Fieldset legend="Referral Information">
+	<p class="hint">Details about the referral and sport/activity.</p>
 
-	<TextArea
-		label="Reason for Referral"
-		name="referralReason"
-		bind:value={r.referralReason}
-		placeholder="e.g., Pre-season screening, injury prevention, return-to-sport clearance"
-	/>
+	<Field label="Referring Provider" required inputId="referringProvider">
+		<TextInput
+			id="referringProvider"
+			label="Referring Provider"
+			placeholder="e.g., Dr. Smith, GP"
+			required
+			bind:value={r.referringProvider}
+		/>
+	</Field>
 
-	<TextInput
-		label="Referral Date"
-		name="referralDate"
-		type="date"
-		bind:value={r.referralDate}
-	/>
+	<Field label="Reason for Referral" inputId="referralReason">
+		<TextAreaInput
+			id="referralReason"
+			label="Reason for Referral"
+			rows={3}
+			placeholder="e.g., Pre-season screening, injury prevention, return-to-sport clearance"
+			bind:value={r.referralReason}
+		/>
+	</Field>
 
-	<TextInput
-		label="Primary Sport or Activity"
-		name="sportOrActivity"
-		bind:value={r.sportOrActivity}
-		placeholder="e.g., Football, Running, Basketball, CrossFit"
-		required
-	/>
-</SectionCard>
+	<Field label="Referral Date" inputId="referralDate">
+		<DateInput id="referralDate" label="Referral Date" bind:value={r.referralDate} />
+	</Field>
+
+	<Field label="Primary Sport or Activity" required inputId="sportOrActivity">
+		<TextInput
+			id="sportOrActivity"
+			label="Primary Sport or Activity"
+			placeholder="e.g., Football, Running, Basketball, CrossFit"
+			required
+			bind:value={r.sportOrActivity}
+		/>
+	</Field>
+</Fieldset>

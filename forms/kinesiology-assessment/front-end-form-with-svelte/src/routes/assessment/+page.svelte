@@ -4,6 +4,9 @@
 	import { calculateFMS } from '$lib/engine/fms-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ReferralInformation from '$lib/components/steps/Step2ReferralInformation.svelte';
 	import Step3MovementHistory from '$lib/components/steps/Step3MovementHistory.svelte';
@@ -16,45 +19,38 @@
 	import Step10RotaryStability from '$lib/components/steps/Step10RotaryStability.svelte';
 
 	function submitAssessment() {
-			const { fmsScore, fmsCategoryLabel, firedRules } = calculateFMS(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				fmsScore,
-				fmsCategory: fmsCategoryLabel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { fmsScore, fmsCategoryLabel, firedRules } = calculateFMS(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			fmsScore,
+			fmsCategory: fmsCategoryLabel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Kinesiology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ReferralInformation />
+	<Step3MovementHistory />
+	<Step4DeepSquat />
+	<Step5HurdleStep />
+	<Step6InLineLunge />
+	<Step7ShoulderMobility />
+	<Step8ActiveStraightLegRaise />
+	<Step9TrunkStabilityPushUp />
+	<Step10RotaryStability />
 
-<Step2ReferralInformation />
-
-<Step3MovementHistory />
-
-<Step4DeepSquat />
-
-<Step5HurdleStep />
-
-<Step6InLineLunge />
-
-<Step7ShoulderMobility />
-
-<Step8ActiveStraightLegRaise />
-
-<Step9TrunkStabilityPushUp />
-
-<Step10RotaryStability />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

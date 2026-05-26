@@ -1,66 +1,103 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.movementHistory;
+
+	const activityOptions = [
+		{ value: 'sedentary', label: 'Sedentary' },
+		{ value: 'light', label: 'Light' },
+		{ value: 'moderate', label: 'Moderate' },
+		{ value: 'vigorous', label: 'Vigorous' },
+		{ value: 'elite', label: 'Elite' }
+	];
+	const painOptions = [
+		{ value: 'none', label: 'None' },
+		{ value: 'mild', label: 'Mild' },
+		{ value: 'moderate', label: 'Moderate' },
+		{ value: 'severe', label: 'Severe' }
+	];
 </script>
 
-<SectionCard title="Movement History" description="Previous injuries, activity level, and current pain status">
-	<TextArea
-		label="Injury History"
-		name="injuryHistory"
-		bind:value={m.injuryHistory}
-		placeholder="Describe any previous musculoskeletal injuries, surgeries, or chronic conditions..."
-	/>
+<Fieldset legend="Movement History">
+	<p class="hint">Previous injuries, activity level, and current pain status.</p>
 
-	<RadioGroup
-		label="Current Activity Level"
-		name="activityLevel"
-		options={[
-			{ value: 'sedentary', label: 'Sedentary' },
-			{ value: 'light', label: 'Light' },
-			{ value: 'moderate', label: 'Moderate' },
-			{ value: 'vigorous', label: 'Vigorous' },
-			{ value: 'elite', label: 'Elite' }
-		]}
-		bind:value={m.activityLevel}
-		required
-	/>
+	<Field label="Injury History" inputId="injuryHistory">
+		<TextAreaInput
+			id="injuryHistory"
+			label="Injury History"
+			rows={3}
+			placeholder="Describe any previous musculoskeletal injuries, surgeries, or chronic conditions..."
+			bind:value={m.injuryHistory}
+		/>
+	</Field>
 
-	<TextArea
-		label="Sport/Exercise Participation"
-		name="sportParticipation"
-		bind:value={m.sportParticipation}
-		placeholder="Describe current sport/exercise participation, frequency, and duration..."
-	/>
+	<Field label="Current Activity Level" required>
+		<RadioGroup label="Current Activity Level">
+			{#each activityOptions as opt (opt.value)}
+				<label>
+					<input
+						type="radio"
+						class="radio-input"
+						name="activityLevel"
+						value={opt.value}
+						bind:group={m.activityLevel}
+						required
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Current Pain Level"
-		name="currentPain"
-		options={[
-			{ value: 'none', label: 'None' },
-			{ value: 'mild', label: 'Mild' },
-			{ value: 'moderate', label: 'Moderate' },
-			{ value: 'severe', label: 'Severe' }
-		]}
-		bind:value={m.currentPain}
-		required
-	/>
+	<Field label="Sport/Exercise Participation" inputId="sportParticipation">
+		<TextAreaInput
+			id="sportParticipation"
+			label="Sport/Exercise Participation"
+			rows={3}
+			placeholder="Describe current sport/exercise participation, frequency, and duration..."
+			bind:value={m.sportParticipation}
+		/>
+	</Field>
 
-	<TextArea
-		label="Pain Details"
-		name="currentPainDetails"
-		bind:value={m.currentPainDetails}
-		placeholder="If pain is present, describe location, nature, and aggravating/easing factors..."
-	/>
+	<Field label="Current Pain Level" required>
+		<RadioGroup label="Current Pain Level">
+			{#each painOptions as opt (opt.value)}
+				<label>
+					<input
+						type="radio"
+						class="radio-input"
+						name="currentPain"
+						value={opt.value}
+						bind:group={m.currentPain}
+						required
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextArea
-		label="Previous Treatments"
-		name="previousTreatments"
-		bind:value={m.previousTreatments}
-		placeholder="List any previous physiotherapy, chiropractic, or other treatments..."
-	/>
-</SectionCard>
+	<Field label="Pain Details" inputId="currentPainDetails">
+		<TextAreaInput
+			id="currentPainDetails"
+			label="Pain Details"
+			rows={3}
+			placeholder="If pain is present, describe location, nature, and aggravating/easing factors..."
+			bind:value={m.currentPainDetails}
+		/>
+	</Field>
+
+	<Field label="Previous Treatments" inputId="previousTreatments">
+		<TextAreaInput
+			id="previousTreatments"
+			label="Previous Treatments"
+			rows={3}
+			placeholder="List any previous physiotherapy, chiropractic, or other treatments..."
+			bind:value={m.previousTreatments}
+		/>
+	</Field>
+</Fieldset>
