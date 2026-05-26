@@ -3,6 +3,15 @@
 	import { validateCounterReferral } from '$lib/engine/counter-referral-validator';
 	import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
 
+	// Lily Svelte headless contract — local shape-equivalent components.
+	import Form from '$lib/components/ui/Form.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Progress from '$lib/components/ui/Progress.svelte';
+	import StepList from '$lib/components/ui/StepList.svelte';
+	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+
 	import Step1PatientIdentification from '$lib/components/steps/Step1PatientIdentification.svelte';
 	import Step2FacilityDetails from '$lib/components/steps/Step2FacilityDetails.svelte';
 	import Step3Situation from '$lib/components/steps/Step3Situation.svelte';
@@ -11,9 +20,33 @@
 	import Step6Recommendations from '$lib/components/steps/Step6Recommendations.svelte';
 	import Step7ProviderSignoff from '$lib/components/steps/Step7ProviderSignoff.svelte';
 
-	let submitted = $state(false);
+	const title = 'WHO Counter-Referral Form';
+	const subtitle =
+		'SBAR communication framework for returning patients to primary care.';
 
-	function submitForm() {
+	const stepTitles = [
+		'Patient',
+		'Facility',
+		'Situation',
+		'Background',
+		'Assessment',
+		'Recommendations',
+		'Sign-off'
+	];
+
+	let submitted = $state(false);
+	const percentComplete = $derived(
+		assessment.validation
+			? Math.round(
+				(assessment.validation.totalSatisfied /
+					Math.max(1, assessment.validation.totalRequired)) *
+					100
+			)
+			: 0
+	);
+
+	function submitForm(e?: SubmitEvent) {
+		if (e) e.preventDefault?.();
 		assessment.validation = validateCounterReferral(assessment.data);
 		assessment.flags = detectFlaggedIssues(assessment.data);
 		submitted = true;
@@ -29,94 +62,91 @@
 </script>
 
 <svelte:head>
-	<title>WHO Counter-Referral Form</title>
+	<title>{title}</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
-	<header class="border-b border-gray-200 bg-white shadow-sm no-print">
-		<div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-			<h1 class="text-lg font-bold text-gray-900">
-				WHO Counter-Referral Form
-			</h1>
-			<button
-				type="button"
-				onclick={startOver}
-				class="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
-			>
-				Start over
-			</button>
-		</div>
-	</header>
+<a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
-	<main class="mx-auto max-w-3xl px-4 py-6">
-		<div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+<header class="page-header no-print">
+	<div class="page-header-inner">
+		<h1>{title}</h1>
+		<p class="subtitle">{subtitle}</p>
+
+		<Progress label="Form completion" max={100} value={percentComplete} />
+		<p class="subtitle" aria-live="polite">{percentComplete}% complete</p>
+
+		<StepList label={`${title} steps`}>
+			{#each stepTitles as t, i (i)}
+				<StepListItem status={submitted ? 'finished' : 'waiting'}>
+					{t}
+				</StepListItem>
+			{/each}
+		</StepList>
+	</div>
+</header>
+
+<main>
+	<div class="intro">
+		<Alert type="info">
 			This single-page form follows the SBAR (Situation, Background, Assessment,
 			Recommendations) communication framework for counter-referral, returning the
 			patient from the referral facility back to primary care. Complete all sections
 			and submit to see a completeness summary and flagged clinical issues.
+		</Alert>
+	</div>
+
+	<Form label={title} onsubmit={submitForm}>
+		<div id="form-sections">
+			<div class="step-section"><Step1PatientIdentification /></div>
+			<div class="step-section"><Step2FacilityDetails /></div>
+			<div class="step-section"><Step3Situation /></div>
+			<div class="step-section"><Step4Background /></div>
+			<div class="step-section"><Step5Assessment /></div>
+			<div class="step-section"><Step6Recommendations /></div>
+			<div class="step-section"><Step7ProviderSignoff /></div>
 		</div>
 
-		{#if submitted && assessment.validation}
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-				<h2 class="mb-3 text-xl font-bold text-gray-900">Submission summary</h2>
-				<p class="mb-3 text-sm text-gray-700">
-					{assessment.validation.totalSatisfied} of
-					{assessment.validation.totalRequired} required fields completed.
-				</p>
-				{#if assessment.validation.complete}
-					<p class="rounded-md bg-green-100 px-3 py-2 text-sm font-medium text-green-900">
-						Counter-referral form is complete. A copy should be sent with the patient to
-						the primary care facility.
-					</p>
-				{:else}
-					<div class="rounded-md bg-amber-100 px-3 py-2 text-sm text-amber-900">
-						<p class="mb-2 font-medium">
-							The counter-referral form is incomplete. Please review the missing items
-							below:
-						</p>
-						<ul class="ml-5 list-disc space-y-1">
-							{#each assessment.validation.missing as miss (miss.id)}
-								<li><strong>{miss.id}</strong> — {miss.description}</li>
-							{/each}
-						</ul>
-					</div>
-				{/if}
+		<div class="button-group">
+			<Button type="submit" data-variant="primary">Submit form</Button>
+			<Button type="button" data-variant="secondary" onclick={startOver}>Start over</Button>
+		</div>
+	</Form>
 
-				{#if assessment.flags.length > 0}
-					<h3 class="mt-5 mb-2 text-base font-semibold text-gray-900">
-						Flagged issues for clinician review
-					</h3>
-					<ul class="space-y-2">
-						{#each assessment.flags as flag (flag.id)}
-							<li class="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm">
-								<span class="font-semibold text-gray-800">[{flag.priority}]</span>
-								<span class="ml-1 text-gray-700">{flag.category}:</span>
-								<span class="ml-1 text-gray-700">{flag.message}</span>
-							</li>
+	<Panel label="Submission summary" aria-live="polite">
+		{#if !submitted || !assessment.validation}
+			<p class="empty-message">Submit the form to see the completeness summary and flagged issues.</p>
+		{:else}
+			<h2>Submission summary</h2>
+			<p>
+				{assessment.validation.totalSatisfied} of
+				{assessment.validation.totalRequired} required fields completed.
+			</p>
+			{#if assessment.validation.complete}
+				<Alert type="success">
+					Counter-referral form is complete. A copy should be sent with the patient to
+					the primary care facility.
+				</Alert>
+			{:else}
+				<Alert type="warning" heading="The counter-referral form is incomplete">
+					<ul>
+						{#each assessment.validation.missing as miss (miss.id)}
+							<li><strong>{miss.id}</strong> — {miss.description}</li>
 						{/each}
 					</ul>
-				{/if}
-			</div>
+				</Alert>
+			{/if}
+
+			{#if assessment.flags.length > 0}
+				<h3>Flagged issues for clinician review</h3>
+				<ul>
+					{#each assessment.flags as flag (flag.id)}
+						<li>
+							<strong>[{flag.priority}]</strong>
+							{flag.category}: {flag.message}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		{/if}
-
-		<div class="space-y-8">
-			<Step1PatientIdentification />
-			<Step2FacilityDetails />
-			<Step3Situation />
-			<Step4Background />
-			<Step5Assessment />
-			<Step6Recommendations />
-			<Step7ProviderSignoff />
-		</div>
-
-		<div class="mt-10 flex justify-end">
-			<button
-				type="button"
-				onclick={submitForm}
-				class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-			>
-				Submit Form
-			</button>
-		</div>
-	</main>
-</div>
+	</Panel>
+</main>
