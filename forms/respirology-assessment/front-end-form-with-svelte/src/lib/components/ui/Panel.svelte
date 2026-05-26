@@ -3,4 +3,4 @@
 	let { class: className = '', label, children, ...restProps }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<fieldset class={`radio-group ${className}`} role="radiogroup" aria-label={label} {...restProps}>{@render children?.()}</fieldset>
+<section class={`panel ${className}`} aria-label={label} {...restProps}>{@render children?.()}</section>

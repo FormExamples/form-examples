@@ -1,60 +1,28 @@
 <script lang="ts">
 	import type { Medication } from '$lib/engine/types';
 
-	let {
-		medications = $bindable<Medication[]>([])
-	}: {
-		medications: Medication[];
-	} = $props();
-
-	function addMedication() {
-		medications = [...medications, { name: '', dose: '', frequency: '' }];
-	}
-
-	function removeMedication(index: number) {
-		medications = medications.filter((_, i) => i !== index);
-	}
+	let { medications = $bindable<Medication[]>([]) }: { medications: Medication[] } = $props();
+	function addMedication() { medications = [...medications, { name: '', dose: '', frequency: '' }]; }
+	function removeMedication(index: number) { medications = medications.filter((_, i) => i !== index); }
 </script>
 
-<div class="space-y-3">
+<div class="entry-list">
 	{#each medications as med, i}
-		<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-			<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
-				<input
-					type="text"
-					placeholder="Medication name"
-					bind:value={med.name}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<input
-					type="text"
-					placeholder="Dose"
-					bind:value={med.dose}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<input
-					type="text"
-					placeholder="Frequency"
-					bind:value={med.frequency}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
+		<div class="entry-row">
+			<div class="entry-grid">
+				<input class="text-input" type="text" placeholder="Medication name" bind:value={med.name} />
+				<input class="text-input" type="text" placeholder="Dose" bind:value={med.dose} />
+				<input class="text-input" type="text" placeholder="Frequency" bind:value={med.frequency} />
 			</div>
-			<button
-				type="button"
-				onclick={() => removeMedication(i)}
-				class="mt-1 text-red-500 hover:text-red-700"
-				aria-label="Remove medication"
-			>
-				&times;
-			</button>
+			<button class="button" type="button" data-variant="danger" onclick={() => removeMedication(i)} aria-label="Remove medication">&times;</button>
 		</div>
 	{/each}
-
-	<button
-		type="button"
-		onclick={addMedication}
-		class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-	>
-		+ Add Medication
-	</button>
+	<button class="button" type="button" onclick={addMedication}>+ Add Medication</button>
 </div>
+
+<style>
+	.entry-list { display: flex; flex-direction: column; gap: 0.75rem; }
+	.entry-row { display: flex; align-items: flex-start; gap: 0.5rem; border: 1px solid var(--color-border); background: var(--color-bg); border-radius: 0.5rem; padding: 0.75rem; }
+	.entry-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; flex: 1; }
+	@media (max-width: 640px) { .entry-grid { grid-template-columns: 1fr; } }
+</style>
