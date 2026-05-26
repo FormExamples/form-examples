@@ -3,7 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateDLQI } from '$lib/engine/dlqi-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { dlqiCategory } from '$lib/engine/utils';
+
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
@@ -16,43 +18,37 @@
 	import Step9SocialHistory from '$lib/components/steps/Step9SocialHistory.svelte';
 
 	function submitAssessment() {
-			const { dlqiScore, dlqiCategoryLabel, firedRules } = calculateDLQI(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				dlqiScore,
-				dlqiCategory: dlqiCategoryLabel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { dlqiScore, dlqiCategoryLabel, firedRules } = calculateDLQI(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			dlqiScore,
+			dlqiCategory: dlqiCategoryLabel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Dermatology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3DLQIQuestionnaire />
+	<Step4LesionCharacteristics />
+	<Step5MedicalHistory />
+	<Step6CurrentMedications />
+	<Step7Allergies />
+	<Step8FamilyHistory />
+	<Step9SocialHistory />
 
-<Step2ChiefComplaint />
-
-<Step3DLQIQuestionnaire />
-
-<Step4LesionCharacteristics />
-
-<Step5MedicalHistory />
-
-<Step6CurrentMedications />
-
-<Step7Allergies />
-
-<Step8FamilyHistory />
-
-<Step9SocialHistory />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

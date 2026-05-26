@@ -1,37 +1,38 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const med = assessment.data.currentMedications;
 </script>
 
-<SectionCard title="Current Medications" description="List all current treatments for your skin condition">
-	<h3 class="mb-2 text-sm font-semibold text-gray-700">Topical Medications</h3>
-	<MedicationEntry bind:medications={med.topicals} />
-	{#if med.topicals.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No topical medications added.</p>
-	{/if}
+<Fieldset legend="Current Medications">
+	<p class="hint">List all current treatments for your skin condition.</p>
 
-	<h3 class="mb-2 mt-6 text-sm font-semibold text-gray-700">Systemic Medications</h3>
-	<MedicationEntry bind:medications={med.systemics} />
-	{#if med.systemics.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No systemic medications added.</p>
-	{/if}
+	<Field label="Topical Medications">
+		<MedicationEntry bind:medications={med.topicals} />
+		{#if med.topicals.length === 0}
+			<p class="hint">No topical medications added.</p>
+		{/if}
+	</Field>
 
-	<h3 class="mb-2 mt-6 text-sm font-semibold text-gray-700">Biologic Therapies</h3>
-	<MedicationEntry bind:medications={med.biologics} />
-	{#if med.biologics.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No biologic therapies added.</p>
-	{/if}
+	<Field label="Systemic Medications">
+		<MedicationEntry bind:medications={med.systemics} />
+		{#if med.systemics.length === 0}
+			<p class="hint">No systemic medications added.</p>
+		{/if}
+	</Field>
 
-	<div class="mt-6">
-		<TextArea
-			label="Over-the-counter products currently in use"
-			name="otcProducts"
-			bind:value={med.otcProducts}
-			placeholder="e.g., moisturisers, sunscreen, medicated shampoos..."
-		/>
-	</div>
-</SectionCard>
+	<Field label="Biologic Therapies">
+		<MedicationEntry bind:medications={med.biologics} />
+		{#if med.biologics.length === 0}
+			<p class="hint">No biologic therapies added.</p>
+		{/if}
+	</Field>
+
+	<Field label="Over-the-counter products currently in use" inputId="otcProducts">
+		<TextAreaInput id="otcProducts" label="OTC products" rows={3} placeholder="e.g., moisturisers, sunscreen, medicated shampoos..." bind:value={med.otcProducts} />
+	</Field>
+</Fieldset>
