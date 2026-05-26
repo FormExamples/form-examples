@@ -4,6 +4,10 @@
 	import { calculateDass21 } from '$lib/engine/dass21-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ReasonForAssessment from '$lib/components/steps/Step2ReasonForAssessment.svelte';
 	import Step3DassDepression from '$lib/components/steps/Step3DassDepression.svelte';
@@ -15,12 +19,7 @@
 
 	function submitAssessment() {
 		const { depression, anxiety, stress, firedRules } = calculateDass21(assessment.data);
-		const additionalFlags = detectAdditionalFlags(
-			assessment.data,
-			depression,
-			anxiety,
-			stress
-		);
+		const additionalFlags = detectAdditionalFlags(assessment.data, depression, anxiety, stress);
 		assessment.result = {
 			depression,
 			anxiety,
@@ -41,25 +40,16 @@
 	<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 		<div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
 			<h1 class="text-lg font-bold text-gray-900">Psychology Assessment (DASS-21)</h1>
-			<button
-				type="button"
-				onclick={startOver}
-				class="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
-			>
-				Start over
-			</button>
+			<Button onclick={startOver}>Start over</Button>
 		</div>
 	</header>
 
 	<main class="mx-auto max-w-3xl px-4 py-6">
-		<div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
-			This single-page questionnaire collects your demographics, the DASS-21 (a
-			validated screen of depression, anxiety, and stress), and a brief safety screen.
-			It takes about 10 minutes. Your responses generate a clinical report; if any
-			urgent concerns are flagged, your clinician will be alerted.
-		</div>
+		<Alert type="info">
+			This single-page questionnaire collects your demographics, the DASS-21 (a validated screen of depression, anxiety, and stress), and a brief safety screen. It takes about 10 minutes. Your responses generate a clinical report; if any urgent concerns are flagged, your clinician will be alerted.
+		</Alert>
 
-		<div class="space-y-8">
+		<Form label="Psychology Assessment" onsubmit={submitAssessment}>
 			<Step1Demographics />
 			<Step2ReasonForAssessment />
 			<Step3DassDepression />
@@ -68,16 +58,10 @@
 			<Step6FunctionalImpact />
 			<Step7RiskScreen />
 			<Step8SupportAndHistory />
-		</div>
 
-		<div class="mt-10 flex justify-end">
-			<button
-				type="button"
-				onclick={submitAssessment}
-				class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-			>
-				Submit Assessment
-			</button>
-		</div>
+			<div class="button-group">
+				<Button type="submit" data-variant="primary">Submit Assessment</Button>
+			</div>
+		</Form>
 	</main>
 </div>
