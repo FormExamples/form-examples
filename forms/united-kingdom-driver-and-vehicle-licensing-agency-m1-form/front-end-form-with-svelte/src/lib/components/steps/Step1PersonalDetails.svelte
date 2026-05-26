@@ -1,53 +1,67 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import EmailInput from '$lib/components/ui/EmailInput.svelte';
+	import TelInput from '$lib/components/ui/TelInput.svelte';
 
 	const p = assessment.data.personalDetails;
 </script>
 
-<SectionCard
-	title="Part A — About You"
-	description="Current driving licence details and any change of details"
->
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput
-			label="Title"
-			name="title"
-			bind:value={p.title}
-			placeholder="e.g. Mr, Mrs, Ms, Dr"
-		/>
-		<TextInput label="Full name" name="fullName" bind:value={p.fullName} required />
+<Fieldset legend="Part A — About You">
+	<p class="hint">Current driving licence details and any change of details.</p>
+
+	<div class="field-grid">
+		<Field label="Title" inputId="title">
+			<TextInput id="title" label="Title" placeholder="e.g. Mr, Mrs, Ms, Dr" bind:value={p.title} />
+		</Field>
+		<Field label="Full name" required inputId="fullName">
+			<TextInput id="fullName" label="Full name" required bind:value={p.fullName} />
+		</Field>
 	</div>
 
-	<TextInput
-		label="Date of birth"
-		name="dob"
-		type="date"
-		bind:value={p.dateOfBirth}
-		required
-	/>
+	<Field label="Date of birth" required inputId="dob">
+		<DateInput id="dob" label="Date of birth" required bind:value={p.dateOfBirth} />
+	</Field>
 
-	<TextArea label="Address" name="address" bind:value={p.address} rows={3} />
+	<Field label="Address" inputId="address">
+		<TextAreaInput id="address" label="Address" rows={3} bind:value={p.address} />
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Postcode" name="postcode" bind:value={p.postcode} required />
-		<TextInput
-			label="Contact number"
-			name="contactNumber"
-			type="tel"
-			bind:value={p.contactNumber}
-		/>
+	<div class="field-grid">
+		<Field label="Postcode" required inputId="postcode">
+			<TextInput id="postcode" label="Postcode" required bind:value={p.postcode} />
+		</Field>
+		<Field label="Contact number" inputId="contactNumber">
+			<TelInput id="contactNumber" label="Contact number" bind:value={p.contactNumber} />
+		</Field>
 	</div>
 
-	<TextInput label="Email" name="email" type="email" bind:value={p.email} />
+	<Field label="Email" inputId="email">
+		<EmailInput id="email" label="Email" bind:value={p.email} />
+	</Field>
 
-	<TextArea
-		label="Change of details (optional)"
-		name="changeOfDetails"
-		bind:value={p.changeOfDetails}
-		placeholder="Note any changes (name, address, etc.) since your last licence"
-		rows={3}
-	/>
-</SectionCard>
+	<Field label="Change of details (optional)" inputId="changeOfDetails">
+		<TextAreaInput
+			id="changeOfDetails"
+			label="Change of details"
+			rows={3}
+			placeholder="Note any changes (name, address, etc.) since your last licence"
+			bind:value={p.changeOfDetails}
+		/>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid { grid-template-columns: 1fr; }
+	}
+</style>

@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import YesNoQuestion from '$lib/components/ui/YesNoQuestion.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const r = assessment.data.recentContact;
 	const stoppedAtQ1 = $derived(
@@ -10,15 +12,16 @@
 	);
 </script>
 
-<SectionCard
-	title="Question 3 — Recent Contact"
-	description="Recent contact with your healthcare professional about your mental health condition"
->
+<Fieldset legend="Question 3 — Recent Contact">
+	<p class="hint">Recent contact with your healthcare professional about your mental health condition.</p>
+
 	{#if stoppedAtQ1}
-		<div class="rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-900">
-			You answered <strong>No</strong> to Question 1. The DVLA instructions ask you
-			not to complete this question.
-		</div>
+		<Alert type="info">
+			<p>
+				You answered <strong>No</strong> to Question 1. The DVLA instructions ask you
+				not to complete this question.
+			</p>
+		</Alert>
 	{:else}
 		<YesNoQuestion
 			label="Have you had any contact (any phone, video or face-to-face consultation) with your healthcare professional about your mental health condition in the last 12 months?"
@@ -27,27 +30,16 @@
 		/>
 
 		{#if r.hadRecentContact === 'yes'}
-			<p class="mt-2 mb-2 text-sm text-gray-700">
-				If yes, supply the last date of any contact (DD/MM/YYYY):
-			</p>
-			<TextInput
-				label="Doctor — date last seen"
-				name="doctorLastDate"
-				type="date"
-				bind:value={r.doctorLastDate}
-			/>
-			<TextInput
-				label="Consultant — date last seen"
-				name="consultantLastDate"
-				type="date"
-				bind:value={r.consultantLastDate}
-			/>
-			<TextInput
-				label="Community psychiatric nurse — date last seen"
-				name="cpnLastDate"
-				type="date"
-				bind:value={r.communityPsychiatricNurseLastDate}
-			/>
+			<p class="hint">If yes, supply the last date of any contact (DD/MM/YYYY):</p>
+			<Field label="Doctor — date last seen" inputId="doctorLastDate">
+				<DateInput id="doctorLastDate" label="Doctor — date last seen" bind:value={r.doctorLastDate} />
+			</Field>
+			<Field label="Consultant — date last seen" inputId="consultantLastDate">
+				<DateInput id="consultantLastDate" label="Consultant — date last seen" bind:value={r.consultantLastDate} />
+			</Field>
+			<Field label="Community psychiatric nurse — date last seen" inputId="cpnLastDate">
+				<DateInput id="cpnLastDate" label="CPN — date last seen" bind:value={r.communityPsychiatricNurseLastDate} />
+			</Field>
 		{/if}
 	{/if}
-</SectionCard>
+</Fieldset>

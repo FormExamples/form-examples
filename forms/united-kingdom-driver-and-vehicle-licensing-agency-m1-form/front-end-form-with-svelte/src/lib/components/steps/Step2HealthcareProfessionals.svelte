@@ -1,103 +1,109 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import EmailInput from '$lib/components/ui/EmailInput.svelte';
+	import TelInput from '$lib/components/ui/TelInput.svelte';
 
 	const gp = assessment.data.healthcareProfessionals.gp;
 	const con = assessment.data.healthcareProfessionals.consultant;
 </script>
 
-<SectionCard
-	title="Part B — Healthcare Professional"
-	description="GP and consultant details for your mental health condition"
->
-	<h3 class="mb-3 text-base font-semibold text-gray-900">GP details</h3>
+<Fieldset legend="Part B — Healthcare Professional">
+	<p class="hint">GP and consultant details for your mental health condition.</p>
 
-	<TextInput label="GP name" name="gpName" bind:value={gp.gpName} />
-	<TextInput label="Surgery name" name="gpSurgeryName" bind:value={gp.surgeryName} />
-	<TextArea label="Address" name="gpAddress" bind:value={gp.address} rows={2} />
+	<h3 class="step-subhead">GP details</h3>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Town" name="gpTown" bind:value={gp.town} />
-		<TextInput label="Postcode" name="gpPostcode" bind:value={gp.postcode} />
+	<Field label="GP name" inputId="gpName">
+		<TextInput id="gpName" label="GP name" bind:value={gp.gpName} />
+	</Field>
+	<Field label="Surgery name" inputId="gpSurgeryName">
+		<TextInput id="gpSurgeryName" label="Surgery name" bind:value={gp.surgeryName} />
+	</Field>
+	<Field label="Address" inputId="gpAddress">
+		<TextAreaInput id="gpAddress" label="Address" rows={2} bind:value={gp.address} />
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Town" inputId="gpTown">
+			<TextInput id="gpTown" label="Town" bind:value={gp.town} />
+		</Field>
+		<Field label="Postcode" inputId="gpPostcode">
+			<TextInput id="gpPostcode" label="Postcode" bind:value={gp.postcode} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput
-			label="Contact number"
-			name="gpContactNumber"
-			type="tel"
-			bind:value={gp.contactNumber}
-		/>
-		<TextInput
-			label="Email (if known)"
-			name="gpEmail"
-			type="email"
-			bind:value={gp.email}
-		/>
+	<div class="field-grid">
+		<Field label="Contact number" inputId="gpContactNumber">
+			<TelInput id="gpContactNumber" label="Contact number" bind:value={gp.contactNumber} />
+		</Field>
+		<Field label="Email (if known)" inputId="gpEmail">
+			<EmailInput id="gpEmail" label="Email" bind:value={gp.email} />
+		</Field>
 	</div>
 
-	<TextInput
-		label="Date last seen for this condition"
-		name="gpDateLastSeen"
-		type="date"
-		bind:value={gp.dateLastSeen}
-	/>
+	<Field label="Date last seen for this condition" inputId="gpDateLastSeen">
+		<DateInput id="gpDateLastSeen" label="Date last seen" bind:value={gp.dateLastSeen} />
+	</Field>
 
-	<hr class="my-6 border-gray-200" />
+	<h3 class="step-subhead">Consultant details</h3>
 
-	<h3 class="mb-3 text-base font-semibold text-gray-900">Consultant details</h3>
-
-	<TextInput
-		label="Consultant name"
-		name="consultantName"
-		bind:value={con.consultantName}
-	/>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Speciality" name="speciality" bind:value={con.speciality} />
-		<TextInput label="Department" name="department" bind:value={con.department} />
+	<Field label="Consultant name" inputId="consultantName">
+		<TextInput id="consultantName" label="Consultant name" bind:value={con.consultantName} />
+	</Field>
+	<div class="field-grid">
+		<Field label="Speciality" inputId="speciality">
+			<TextInput id="speciality" label="Speciality" bind:value={con.speciality} />
+		</Field>
+		<Field label="Department" inputId="department">
+			<TextInput id="department" label="Department" bind:value={con.department} />
+		</Field>
 	</div>
-	<TextInput
-		label="Hospital name"
-		name="hospitalName"
-		bind:value={con.hospitalName}
-	/>
-	<TextArea
-		label="Address"
-		name="consultantAddress"
-		bind:value={con.address}
-		rows={2}
-	/>
+	<Field label="Hospital name" inputId="hospitalName">
+		<TextInput id="hospitalName" label="Hospital name" bind:value={con.hospitalName} />
+	</Field>
+	<Field label="Address" inputId="consultantAddress">
+		<TextAreaInput id="consultantAddress" label="Address" rows={2} bind:value={con.address} />
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Town" name="consultantTown" bind:value={con.town} />
-		<TextInput
-			label="Postcode"
-			name="consultantPostcode"
-			bind:value={con.postcode}
-		/>
+	<div class="field-grid">
+		<Field label="Town" inputId="consultantTown">
+			<TextInput id="consultantTown" label="Town" bind:value={con.town} />
+		</Field>
+		<Field label="Postcode" inputId="consultantPostcode">
+			<TextInput id="consultantPostcode" label="Postcode" bind:value={con.postcode} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput
-			label="Contact number"
-			name="consultantContactNumber"
-			type="tel"
-			bind:value={con.contactNumber}
-		/>
-		<TextInput
-			label="Email (if known)"
-			name="consultantEmail"
-			type="email"
-			bind:value={con.email}
-		/>
+	<div class="field-grid">
+		<Field label="Contact number" inputId="consultantContactNumber">
+			<TelInput id="consultantContactNumber" label="Contact number" bind:value={con.contactNumber} />
+		</Field>
+		<Field label="Email (if known)" inputId="consultantEmail">
+			<EmailInput id="consultantEmail" label="Email" bind:value={con.email} />
+		</Field>
 	</div>
 
-	<TextInput
-		label="Date last seen for this condition"
-		name="consultantDateLastSeen"
-		type="date"
-		bind:value={con.dateLastSeen}
-	/>
-</SectionCard>
+	<Field label="Date last seen for this condition" inputId="consultantDateLastSeen">
+		<DateInput id="consultantDateLastSeen" label="Date last seen" bind:value={con.dateLastSeen} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.step-subhead {
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 1.25rem 0 0.5rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid { grid-template-columns: 1fr; }
+	}
+</style>
