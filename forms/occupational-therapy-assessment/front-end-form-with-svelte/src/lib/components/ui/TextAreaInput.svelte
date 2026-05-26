@@ -3,16 +3,18 @@
 		class: className = '',
 		label,
 		value = $bindable(''),
+		rows = undefined,
 		required = false,
 		disabled = false,
 		...restProps
 	}: {
 		label: string;
 		value?: string;
+		rows?: number;
 		required?: boolean;
 		disabled?: boolean;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<input class={`text-input ${className}`} type="text" aria-label={label} bind:value {required} {disabled} {...restProps} />
+<textarea class={`text-area-input ${className}`} aria-label={label} bind:value {rows} {required} {disabled} {...restProps}></textarea>

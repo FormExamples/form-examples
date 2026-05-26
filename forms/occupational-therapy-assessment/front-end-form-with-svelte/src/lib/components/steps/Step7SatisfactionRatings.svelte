@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
@@ -15,31 +16,15 @@
 	];
 </script>
 
-<SectionCard title="Satisfaction Ratings" description="Rate how satisfied you are with your performance in each activity (COPM Satisfaction Scale 1-10)">
-	<p class="mb-4 text-sm text-gray-500">
-		For each activity you identified, rate how satisfied you are with your current performance
-		on a scale of 1 (not satisfied at all) to 10 (extremely satisfied).
-	</p>
+<Fieldset legend="Satisfaction Ratings">
+	<p class="hint">Rate how satisfied you are with your performance in each activity (COPM Satisfaction Scale 1-10).</p>
 
-	<div class="space-y-6">
-		{#each activities as activity}
-			<div class="rounded-lg border border-gray-100 bg-gray-50 p-4">
-				<h3 class="mb-3 text-sm font-semibold text-gray-800">{activity.label}</h3>
-				<TextInput
-					label="Activity Name"
-					name="{activity.key}SatName"
-					bind:value={s[activity.key].name}
-					placeholder="e.g., Dressing, Cooking, Driving"
-				/>
-				<NumberInput
-					label="Satisfaction Score"
-					name="{activity.key}Satisfaction"
-					bind:value={s[activity.key].satisfactionScore}
-					min={1}
-					max={10}
-					unit="1-10"
-				/>
-			</div>
-		{/each}
-	</div>
-</SectionCard>
+	{#each activities as activity (activity.key)}
+		<Field label={`${activity.label} - Name`} inputId={`${activity.key}SatName`}>
+			<TextInput id={`${activity.key}SatName`} label={`${activity.label} name`} placeholder="e.g., Dressing, Cooking, Driving" bind:value={s[activity.key].name} />
+		</Field>
+		<Field label={`${activity.label} - Satisfaction Score (1-10)`} inputId={`${activity.key}Satisfaction`}>
+			<NumberInput id={`${activity.key}Satisfaction`} label="Satisfaction Score" min={1} max={10} bind:value={s[activity.key].satisfactionScore} />
+		</Field>
+	{/each}
+</Fieldset>

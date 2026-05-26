@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const l = assessment.data.leisureActivities;
 
@@ -12,62 +13,27 @@
 		{ value: 'significant', label: 'Significant difficulty' },
 		{ value: 'unable', label: 'Unable to perform' }
 	];
+
+	const areas = [
+		{ key: 'quietRecreation', label: 'Quiet Recreation', desc: 'Reading, crafts, puzzles, watching TV, hobbies' },
+		{ key: 'activeRecreation', label: 'Active Recreation', desc: 'Sports, exercise, gardening, walking, physical activities' },
+		{ key: 'socialParticipation', label: 'Social Participation', desc: 'Visiting friends/family, community events, social gatherings' }
+	] as const;
 </script>
 
-<SectionCard title="Leisure Activities" description="Assess your ability to participate in leisure and social activities">
-	<div class="space-y-6">
-		<div class="rounded-lg border border-gray-100 bg-gray-50 p-4">
-			<h3 class="mb-3 text-sm font-semibold text-gray-800">Quiet Recreation</h3>
-			<p class="mb-3 text-xs text-gray-500">Reading, crafts, puzzles, watching TV, hobbies</p>
-			<RadioGroup
-				label="Level of difficulty"
-				name="quietRecreationDifficulty"
-				options={difficultyOptions}
-				bind:value={l.quietRecreation.difficulty}
-				required
-			/>
-			<TextArea
-				label="Details"
-				name="quietRecreationDetails"
-				bind:value={l.quietRecreation.details}
-				placeholder="Describe any specific difficulties..."
-			/>
-		</div>
+<Fieldset legend="Leisure Activities">
+	<p class="hint">Assess your ability to participate in leisure and social activities.</p>
 
-		<div class="rounded-lg border border-gray-100 bg-gray-50 p-4">
-			<h3 class="mb-3 text-sm font-semibold text-gray-800">Active Recreation</h3>
-			<p class="mb-3 text-xs text-gray-500">Sports, exercise, gardening, walking, physical activities</p>
-			<RadioGroup
-				label="Level of difficulty"
-				name="activeRecreationDifficulty"
-				options={difficultyOptions}
-				bind:value={l.activeRecreation.difficulty}
-				required
-			/>
-			<TextArea
-				label="Details"
-				name="activeRecreationDetails"
-				bind:value={l.activeRecreation.details}
-				placeholder="Describe any specific difficulties..."
-			/>
-		</div>
-
-		<div class="rounded-lg border border-gray-100 bg-gray-50 p-4">
-			<h3 class="mb-3 text-sm font-semibold text-gray-800">Social Participation</h3>
-			<p class="mb-3 text-xs text-gray-500">Visiting friends/family, community events, social gatherings</p>
-			<RadioGroup
-				label="Level of difficulty"
-				name="socialParticipationDifficulty"
-				options={difficultyOptions}
-				bind:value={l.socialParticipation.difficulty}
-				required
-			/>
-			<TextArea
-				label="Details"
-				name="socialParticipationDetails"
-				bind:value={l.socialParticipation.details}
-				placeholder="Describe any specific difficulties..."
-			/>
-		</div>
-	</div>
-</SectionCard>
+	{#each areas as area (area.key)}
+		<Field label={area.label} description={area.desc} required>
+			<RadioGroup label={`${area.label} difficulty`}>
+				{#each difficultyOptions as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={`${area.key}Difficulty`} value={opt.value} bind:group={l[area.key].difficulty} required />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		<Field label={`${area.label} details`} inputId={`${area.key}Details`}>
+			<TextAreaInput id={`${area.key}Details`} label={`${area.label} details`} rows={2} placeholder="Describe any specific difficulties..." bind:value={l[area.key].details} />
+		</Field>
+	{/each}
+</Fieldset>

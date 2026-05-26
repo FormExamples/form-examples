@@ -1,65 +1,40 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const pc = assessment.data.physicalCognitiveStatus;
 </script>
 
-<SectionCard title="Physical & Cognitive Status" description="Current physical and cognitive abilities relevant to occupational performance">
-	<TextArea
-		label="Upper Extremity Function"
-		name="upperExtremity"
-		bind:value={pc.upperExtremity}
-		placeholder="Describe upper extremity strength, range of motion, fine motor skills..."
-		rows={2}
-	/>
+<Fieldset legend="Physical and Cognitive Status">
+	<p class="hint">Current physical and cognitive abilities relevant to occupational performance.</p>
 
-	<TextArea
-		label="Lower Extremity Function"
-		name="lowerExtremity"
-		bind:value={pc.lowerExtremity}
-		placeholder="Describe lower extremity strength, range of motion, weight-bearing status..."
-		rows={2}
-	/>
+	<Field label="Upper Extremity Function" inputId="upperExtremity">
+		<TextAreaInput id="upperExtremity" label="Upper Extremity" rows={2} placeholder="Describe upper extremity strength, range of motion, fine motor skills..." bind:value={pc.upperExtremity} />
+	</Field>
 
-	<TextArea
-		label="Coordination"
-		name="coordination"
-		bind:value={pc.coordination}
-		placeholder="Describe gross and fine motor coordination, balance..."
-		rows={2}
-	/>
+	<Field label="Lower Extremity Function" inputId="lowerExtremity">
+		<TextAreaInput id="lowerExtremity" label="Lower Extremity" rows={2} placeholder="Describe lower extremity strength, range of motion, weight-bearing status..." bind:value={pc.lowerExtremity} />
+	</Field>
 
-	<TextArea
-		label="Cognition"
-		name="cognition"
-		bind:value={pc.cognition}
-		placeholder="Describe cognitive function: memory, attention, problem-solving, orientation..."
-		rows={2}
-	/>
+	<Field label="Coordination" inputId="coordination">
+		<TextAreaInput id="coordination" label="Coordination" rows={2} placeholder="Describe gross and fine motor coordination, balance..." bind:value={pc.coordination} />
+	</Field>
 
-	<TextArea
-		label="Vision"
-		name="vision"
-		bind:value={pc.vision}
-		placeholder="Describe visual function, any impairments, use of corrective lenses..."
-		rows={2}
-	/>
+	<Field label="Cognition" inputId="cognition">
+		<TextAreaInput id="cognition" label="Cognition" rows={2} placeholder="Describe cognitive function: memory, attention, problem-solving, orientation..." bind:value={pc.cognition} />
+	</Field>
 
-	<TextArea
-		label="Fatigue"
-		name="fatigue"
-		bind:value={pc.fatigue}
-		placeholder="Describe fatigue levels, impact on daily activities, patterns..."
-		rows={2}
-	/>
+	<Field label="Vision" inputId="vision">
+		<TextAreaInput id="vision" label="Vision" rows={2} placeholder="Describe visual function, any impairments..." bind:value={pc.vision} />
+	</Field>
 
-	<TextArea
-		label="Pain"
-		name="pain"
-		bind:value={pc.pain}
-		placeholder="Describe pain: location, intensity, frequency, impact on function..."
-		rows={2}
-	/>
-</SectionCard>
+	<Field label="Fatigue" inputId="fatigue">
+		<TextAreaInput id="fatigue" label="Fatigue" rows={2} placeholder="Describe fatigue levels, impact on daily activities..." bind:value={pc.fatigue} />
+	</Field>
+
+	<Field label="Pain" inputId="pain">
+		<TextAreaInput id="pain" label="Pain" rows={2} placeholder="Describe pain: location, intensity, frequency, impact on function..." bind:value={pc.pain} />
+	</Field>
+</Fieldset>

@@ -4,6 +4,9 @@
 	import { calculateCOPM } from '$lib/engine/copm-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ReferralInfo from '$lib/components/steps/Step2ReferralInfo.svelte';
 	import Step3SelfCareActivities from '$lib/components/steps/Step3SelfCareActivities.svelte';
@@ -16,47 +19,40 @@
 	import Step10GoalsPriorities from '$lib/components/steps/Step10GoalsPriorities.svelte';
 
 	function submitAssessment() {
-			const { performanceScore, satisfactionScore, performanceCategoryLabel, satisfactionCategoryLabel, firedRules } = calculateCOPM(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				performanceScore,
-				satisfactionScore,
-				performanceCategory: performanceCategoryLabel,
-				satisfactionCategory: satisfactionCategoryLabel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { performanceScore, satisfactionScore, performanceCategoryLabel, satisfactionCategoryLabel, firedRules } = calculateCOPM(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			performanceScore,
+			satisfactionScore,
+			performanceCategory: performanceCategoryLabel,
+			satisfactionCategory: satisfactionCategoryLabel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Occupational Therapy Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ReferralInfo />
+	<Step3SelfCareActivities />
+	<Step4ProductivityActivities />
+	<Step5LeisureActivities />
+	<Step6PerformanceRatings />
+	<Step7SatisfactionRatings />
+	<Step8EnvironmentalFactors />
+	<Step9PhysicalCognitiveStatus />
+	<Step10GoalsPriorities />
 
-<Step2ReferralInfo />
-
-<Step3SelfCareActivities />
-
-<Step4ProductivityActivities />
-
-<Step5LeisureActivities />
-
-<Step6PerformanceRatings />
-
-<Step7SatisfactionRatings />
-
-<Step8EnvironmentalFactors />
-
-<Step9PhysicalCognitiveStatus />
-
-<Step10GoalsPriorities />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

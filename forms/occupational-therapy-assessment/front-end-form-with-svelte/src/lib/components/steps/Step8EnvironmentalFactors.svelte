@@ -1,49 +1,32 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const e = assessment.data.environmentalFactors;
 </script>
 
-<SectionCard title="Environmental Factors" description="Describe the environments where you live, work, and participate in the community">
-	<TextArea
-		label="Home Environment"
-		name="homeEnvironment"
-		bind:value={e.homeEnvironment}
-		placeholder="Describe your home setup, accessibility, any barriers or hazards (e.g., stairs, bathroom access, doorway width)..."
-		rows={3}
-	/>
+<Fieldset legend="Environmental Factors">
+	<p class="hint">Describe the environments where you live, work, and participate in the community.</p>
 
-	<TextArea
-		label="Work/School Environment"
-		name="workEnvironment"
-		bind:value={e.workEnvironment}
-		placeholder="Describe your workplace/school setup, accessibility, ergonomics..."
-		rows={3}
-	/>
+	<Field label="Home Environment" inputId="homeEnvironment">
+		<TextAreaInput id="homeEnvironment" label="Home Environment" rows={3} placeholder="Describe your home setup, accessibility, any barriers or hazards..." bind:value={e.homeEnvironment} />
+	</Field>
 
-	<TextArea
-		label="Community Access"
-		name="communityAccess"
-		bind:value={e.communityAccess}
-		placeholder="Describe your access to community resources, transportation, shops, healthcare..."
-		rows={3}
-	/>
+	<Field label="Work/School Environment" inputId="workEnvironment">
+		<TextAreaInput id="workEnvironment" label="Work/School Environment" rows={3} placeholder="Describe your workplace/school setup, accessibility, ergonomics..." bind:value={e.workEnvironment} />
+	</Field>
 
-	<TextArea
-		label="Assistive Devices"
-		name="assistiveDevices"
-		bind:value={e.assistiveDevices}
-		placeholder="List any assistive devices currently used or needed (e.g., wheelchair, walker, grab bars, shower chair)..."
-		rows={3}
-	/>
+	<Field label="Community Access" inputId="communityAccess">
+		<TextAreaInput id="communityAccess" label="Community Access" rows={3} placeholder="Describe your access to community resources, transportation, shops, healthcare..." bind:value={e.communityAccess} />
+	</Field>
 
-	<TextArea
-		label="Social Support"
-		name="socialSupport"
-		bind:value={e.socialSupport}
-		placeholder="Describe available social support (family, friends, carers, community services)..."
-		rows={3}
-	/>
-</SectionCard>
+	<Field label="Assistive Devices" inputId="assistiveDevices">
+		<TextAreaInput id="assistiveDevices" label="Assistive Devices" rows={3} placeholder="List any assistive devices currently used or needed..." bind:value={e.assistiveDevices} />
+	</Field>
+
+	<Field label="Social Support" inputId="socialSupport">
+		<TextAreaInput id="socialSupport" label="Social Support" rows={3} placeholder="Describe available social support..." bind:value={e.socialSupport} />
+	</Field>
+</Fieldset>
