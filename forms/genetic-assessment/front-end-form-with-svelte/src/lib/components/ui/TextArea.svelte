@@ -1,27 +1,42 @@
 <script lang="ts">
-	let {
-		label,
-		name,
-		value = $bindable(''),
-		placeholder = '',
-		rows = 3
-	}: {
-		label: string;
-		name: string;
-		value: string;
-		placeholder?: string;
-		rows?: number;
-	} = $props();
+  // TextArea — Lily Svelte headless contract.
+  // Emits: <textarea class="text-area-input">.
+  let {
+    class: className = '',
+    label = '',
+    name = undefined,
+    value = $bindable(''),
+    placeholder = '',
+    rows = 3,
+    required = false,
+    disabled = false,
+    ...restProps
+  }: {
+    label?: string;
+    name?: string;
+    value?: string;
+    placeholder?: string;
+    rows?: number;
+    required?: boolean;
+    disabled?: boolean;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">{label}</label>
-	<textarea
-		id={name}
-		{name}
-		{placeholder}
-		{rows}
-		bind:value
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
-	></textarea>
+<div class="field">
+  {#if label}
+    <label class="label" for={name} data-required={required || undefined}>{label}</label>
+  {/if}
+  <textarea
+    class={`text-area-input ${className}`}
+    id={name}
+    {name}
+    aria-label={label || undefined}
+    bind:value
+    {placeholder}
+    {rows}
+    {required}
+    {disabled}
+    {...restProps}
+  ></textarea>
 </div>
