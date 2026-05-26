@@ -1,41 +1,88 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const p = assessment.data.patientInformation;
+
+	const sexOptions = [
+		{ value: 'male', label: 'Male' },
+		{ value: 'female', label: 'Female' },
+		{ value: 'other', label: 'Other' }
+	];
 </script>
 
-<SectionCard title="Patient Information" description="Personal details and emergency contact information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={p.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={p.lastName} required />
+<Fieldset legend="Patient Information">
+	<p class="hint">Personal details and emergency contact information.</p>
+
+	<div class="field-grid">
+		<Field label="First Name" required inputId="firstName">
+			<TextInput id="firstName" label="First Name" required bind:value={p.firstName} />
+		</Field>
+		<Field label="Last Name" required inputId="lastName">
+			<TextInput id="lastName" label="Last Name" required bind:value={p.lastName} />
+		</Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={p.dob} required />
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of Birth" required bind:value={p.dob} />
+	</Field>
 
-	<RadioGroup
-		label="Sex"
-		name="sex"
-		options={[
-			{ value: 'male', label: 'Male' },
-			{ value: 'female', label: 'Female' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={p.sex}
-		required
-	/>
+	<Field label="Sex" required>
+		<RadioGroup label="Sex">
+			{#each sexOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="sex" value={opt.value} bind:group={p.sex} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextInput label="NHS Number" name="nhsNumber" bind:value={p.nhsNumber} placeholder="000 000 0000" required />
+	<Field label="NHS Number" required inputId="nhsNumber" description="Format: 000 000 0000">
+		<TextInput id="nhsNumber" label="NHS Number" required bind:value={p.nhsNumber} />
+	</Field>
 
-	<TextInput label="Address" name="address" bind:value={p.address} required />
+	<Field label="Address" required inputId="address">
+		<TextInput id="address" label="Address" required bind:value={p.address} />
+	</Field>
 
-	<TextInput label="Phone Number" name="phone" bind:value={p.phone} required />
+	<Field label="Phone Number" required inputId="phone">
+		<TextInput id="phone" label="Phone Number" required bind:value={p.phone} />
+	</Field>
 
-	<div class="mt-4 border-t border-gray-200 pt-4">
-		<h3 class="mb-3 text-sm font-semibold text-gray-700">Emergency Contact</h3>
-		<TextInput label="Emergency Contact Name" name="emergencyContact" bind:value={p.emergencyContact} required />
-		<TextInput label="Emergency Contact Phone" name="emergencyContactPhone" bind:value={p.emergencyContactPhone} required />
+	<div class="field-grid">
+		<Field label="Emergency Contact Name" required inputId="emergencyContact">
+			<TextInput
+				id="emergencyContact"
+				label="Emergency Contact Name"
+				required
+				bind:value={p.emergencyContact}
+			/>
+		</Field>
+		<Field label="Emergency Contact Phone" required inputId="emergencyContactPhone">
+			<TextInput
+				id="emergencyContactPhone"
+				label="Emergency Contact Phone"
+				required
+				bind:value={p.emergencyContactPhone}
+			/>
+		</Field>
 	</div>
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

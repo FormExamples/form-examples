@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const q = assessment.data.questionsUnderstanding;
@@ -10,54 +11,55 @@
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const rows: { key: keyof typeof q; label: string; name: string }[] = [
+		{ key: 'understandsProcedure', label: 'Patient understands the procedure', name: 'understandsProcedure' },
+		{ key: 'understandsRisks', label: 'Patient understands the risks', name: 'understandsRisks' },
+		{ key: 'understandsAlternatives', label: 'Patient understands the alternatives', name: 'understandsAlternatives' },
+		{ key: 'understandsRecovery', label: 'Patient understands the recovery process', name: 'understandsRecovery' }
+	];
 </script>
 
-<SectionCard title="Questions & Understanding" description="Confirm patient understanding and record any questions">
-	<TextArea
-		label="Questions Asked by Patient"
-		name="questionsAsked"
-		bind:value={q.questionsAsked}
-		placeholder="Record any questions the patient has asked..."
-		rows={3}
-	/>
+<Fieldset legend="Questions & Understanding">
+	<p class="hint">Confirm patient understanding and record any questions.</p>
 
-	<RadioGroup
-		label="Patient understands the procedure"
-		name="understandsProcedure"
-		options={yesNoOptions}
-		bind:value={q.understandsProcedure}
-		required
-	/>
+	<Field label="Questions Asked by Patient" inputId="questionsAsked">
+		<TextAreaInput
+			id="questionsAsked"
+			label="Questions Asked by Patient"
+			rows={3}
+			placeholder="Record any questions the patient has asked..."
+			bind:value={q.questionsAsked}
+		/>
+	</Field>
 
-	<RadioGroup
-		label="Patient understands the risks"
-		name="understandsRisks"
-		options={yesNoOptions}
-		bind:value={q.understandsRisks}
-		required
-	/>
+	{#each rows as row (row.key)}
+		<Field label={row.label} required>
+			<RadioGroup label={row.label}>
+				{#each yesNoOptions as opt (opt.value)}
+					<label>
+						<input
+							type="radio"
+							class="radio-input"
+							name={row.name}
+							value={opt.value}
+							bind:group={q[row.key]}
+							required
+						/>
+						{opt.label}
+					</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
 
-	<RadioGroup
-		label="Patient understands the alternatives"
-		name="understandsAlternatives"
-		options={yesNoOptions}
-		bind:value={q.understandsAlternatives}
-		required
-	/>
-
-	<RadioGroup
-		label="Patient understands the recovery process"
-		name="understandsRecovery"
-		options={yesNoOptions}
-		bind:value={q.understandsRecovery}
-		required
-	/>
-
-	<TextArea
-		label="Additional Concerns"
-		name="additionalConcerns"
-		bind:value={q.additionalConcerns}
-		placeholder="Record any additional concerns raised by the patient..."
-		rows={3}
-	/>
-</SectionCard>
+	<Field label="Additional Concerns" inputId="additionalConcerns">
+		<TextAreaInput
+			id="additionalConcerns"
+			label="Additional Concerns"
+			rows={3}
+			placeholder="Record any additional concerns raised by the patient..."
+			bind:value={q.additionalConcerns}
+		/>
+	</Field>
+</Fieldset>

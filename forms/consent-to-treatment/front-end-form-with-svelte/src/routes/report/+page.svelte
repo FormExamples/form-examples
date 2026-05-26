@@ -2,6 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { completenessColor, calculateAge } from '$lib/engine/utils';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -43,10 +46,10 @@
 		goto('/');
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
+	const priorityType: Record<string, 'error' | 'warning' | 'info'> = {
+		high: 'error',
+		medium: 'warning',
+		low: 'info'
 	};
 </script>
 
@@ -55,35 +58,24 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Consent Form Summary</h1>
-				<div class="flex gap-3">
+				<div class="button-group">
 					{#if pdfError}
 						<span class="text-sm text-red-600">{pdfError}</span>
 					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Form
-					</button>
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Form</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
 			<!-- Completeness Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(result.completenessPercent)}">
+			<div
+				class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(
+					result.completenessPercent
+				)}"
+			>
 				<div class="text-3xl font-bold">{result.completenessPercent}% Complete</div>
 				<div class="mt-1 text-lg">{result.status}</div>
 				<div class="mt-2 text-sm opacity-75">
@@ -93,27 +85,19 @@
 
 			<!-- Additional Flags -->
 			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
+				<Panel label="Flagged Issues" class="mb-6">
 					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
-						{/each}
-					</div>
-				</div>
+					{#each result.additionalFlags as flag (flag.category + flag.message)}
+						<Alert type={priorityType[flag.priority] ?? 'info'} heading={`${flag.priority.toUpperCase()} — ${flag.category}`}>
+							<p>{flag.message}</p>
+						</Alert>
+					{/each}
+				</Panel>
 			{/if}
 
 			<!-- Missing Fields -->
 			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+				<Panel label="Missing Required Fields" class="mb-6">
 					<h2 class="mb-4 text-lg font-bold text-gray-900">Missing Required Fields</h2>
 					<table class="w-full text-sm">
 						<thead>
@@ -125,7 +109,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
+							{#each result.firedRules as rule (rule.id)}
 								<tr class="border-b border-gray-100">
 									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
 									<td class="py-2 pr-4">{rule.section}</td>
@@ -135,16 +119,17 @@
 							{/each}
 						</tbody>
 					</table>
-				</div>
+				</Panel>
 			{/if}
 
 			<!-- Patient Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Patient Summary" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Summary</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div>
 						<span class="font-medium text-gray-600">Name:</span>
-						{data.patientInformation.firstName} {data.patientInformation.lastName}
+						{data.patientInformation.firstName}
+						{data.patientInformation.lastName}
 					</div>
 					<div>
 						<span class="font-medium text-gray-600">DOB:</span>
@@ -166,10 +151,10 @@
 						{data.patientInformation.address || 'N/A'}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
 			<!-- Procedure Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Procedure Summary" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Procedure Summary</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div class="sm:col-span-2">
@@ -193,16 +178,24 @@
 						{data.procedureDetails.admissionRequired || 'N/A'}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
 			<!-- Consent Status -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Consent Status" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Consent Status</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div>
 						<span class="font-medium text-gray-600">Patient Consent:</span>
-						<span class="{data.signatureConsent.patientConsent === 'yes' ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}">
-							{data.signatureConsent.patientConsent === 'yes' ? 'Given' : data.signatureConsent.patientConsent === 'no' ? 'Refused' : 'Pending'}
+						<span
+							class={data.signatureConsent.patientConsent === 'yes'
+								? 'text-green-700 font-bold'
+								: 'text-red-700 font-bold'}
+						>
+							{data.signatureConsent.patientConsent === 'yes'
+								? 'Given'
+								: data.signatureConsent.patientConsent === 'no'
+									? 'Refused'
+									: 'Pending'}
 						</span>
 					</div>
 					<div>
@@ -211,14 +204,16 @@
 					</div>
 					<div>
 						<span class="font-medium text-gray-600">Witness:</span>
-						{data.signatureConsent.witnessName || 'N/A'} ({data.signatureConsent.witnessRole || 'N/A'})
+						{data.signatureConsent.witnessName || 'N/A'} ({data.signatureConsent.witnessRole ||
+							'N/A'})
 					</div>
 					<div>
 						<span class="font-medium text-gray-600">Clinician:</span>
-						{data.signatureConsent.clinicianName || 'N/A'} ({data.signatureConsent.clinicianRole || 'N/A'})
+						{data.signatureConsent.clinicianName || 'N/A'} ({data.signatureConsent.clinicianRole ||
+							'N/A'})
 					</div>
 				</div>
-			</div>
+			</Panel>
 		</main>
 	</div>
 {/if}

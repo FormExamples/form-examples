@@ -1,42 +1,93 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const p = assessment.data.procedureDetails;
+
+	const yesNoOptions = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 </script>
 
-<SectionCard title="Procedure Details" description="Information about the planned procedure">
-	<TextInput label="Procedure Name" name="procedureName" bind:value={p.procedureName} required />
+<Fieldset legend="Procedure Details">
+	<p class="hint">Information about the planned procedure.</p>
 
-	<TextArea
-		label="Procedure Description"
-		name="procedureDescription"
-		bind:value={p.procedureDescription}
-		placeholder="Describe the procedure in terms the patient can understand..."
-		rows={4}
-	/>
+	<Field label="Procedure Name" required inputId="procedureName">
+		<TextInput id="procedureName" label="Procedure Name" required bind:value={p.procedureName} />
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Treating Clinician" name="treatingClinician" bind:value={p.treatingClinician} required />
-		<TextInput label="Department" name="department" bind:value={p.department} required />
+	<Field label="Procedure Description" inputId="procedureDescription">
+		<TextAreaInput
+			id="procedureDescription"
+			label="Procedure Description"
+			rows={4}
+			placeholder="Describe the procedure in terms the patient can understand..."
+			bind:value={p.procedureDescription}
+		/>
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Treating Clinician" required inputId="treatingClinician">
+			<TextInput
+				id="treatingClinician"
+				label="Treating Clinician"
+				required
+				bind:value={p.treatingClinician}
+			/>
+		</Field>
+		<Field label="Department" required inputId="department">
+			<TextInput id="department" label="Department" required bind:value={p.department} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Scheduled Date" name="scheduledDate" type="date" bind:value={p.scheduledDate} required />
-		<TextInput label="Estimated Duration" name="estimatedDuration" bind:value={p.estimatedDuration} placeholder="e.g., 1-2 hours" />
+	<div class="field-grid">
+		<Field label="Scheduled Date" required inputId="scheduledDate">
+			<DateInput id="scheduledDate" label="Scheduled Date" required bind:value={p.scheduledDate} />
+		</Field>
+		<Field label="Estimated Duration" inputId="estimatedDuration">
+			<TextInput
+				id="estimatedDuration"
+				label="Estimated Duration"
+				placeholder="e.g., 1-2 hours"
+				bind:value={p.estimatedDuration}
+			/>
+		</Field>
 	</div>
 
-	<RadioGroup
-		label="Admission Required"
-		name="admissionRequired"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={p.admissionRequired}
-		required
-	/>
-</SectionCard>
+	<Field label="Admission Required" required>
+		<RadioGroup label="Admission Required">
+			{#each yesNoOptions as opt (opt.value)}
+				<label>
+					<input
+						type="radio"
+						class="radio-input"
+						name="admissionRequired"
+						value={opt.value}
+						bind:group={p.admissionRequired}
+						required
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

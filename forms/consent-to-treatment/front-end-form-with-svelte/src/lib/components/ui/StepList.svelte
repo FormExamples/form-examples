@@ -1,24 +1,26 @@
 <script lang="ts">
-	// RadioGroup — Lily Svelte headless contract.
+	// StepList — Lily Svelte headless contract.
 	import type { Snippet } from 'svelte';
 
 	let {
 		class: className = '',
-		label,
+		label = undefined,
+		current = undefined,
 		children,
 		...restProps
 	}: {
-		label: string;
+		label?: string;
+		current?: number;
 		children: Snippet;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<fieldset
-	class={`radio-group ${className}`}
-	role="radiogroup"
+<ol
+	class={`step-list ${className}`}
 	aria-label={label}
+	data-current={current}
 	{...restProps}
 >
 	{@render children?.()}
-</fieldset>
+</ol>

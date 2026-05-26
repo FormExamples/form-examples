@@ -1,33 +1,42 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const a = assessment.data.alternativeTreatments;
 </script>
 
-<SectionCard title="Alternative Treatments" description="Document alternative options and consequences of no treatment">
-	<TextArea
-		label="Alternative Treatment Options"
-		name="alternativeOptions"
-		bind:value={a.alternativeOptions}
-		placeholder="Describe alternative treatments available (e.g., conservative management, different surgical approach)..."
-		rows={4}
-	/>
+<Fieldset legend="Alternative Treatments">
+	<p class="hint">Document alternative options and consequences of no treatment.</p>
 
-	<TextArea
-		label="Consequences of No Treatment"
-		name="noTreatmentConsequences"
-		bind:value={a.noTreatmentConsequences}
-		placeholder="Describe what may happen if the patient chooses not to proceed with treatment..."
-		rows={4}
-	/>
+	<Field label="Alternative Treatment Options" inputId="alternativeOptions">
+		<TextAreaInput
+			id="alternativeOptions"
+			label="Alternative Treatment Options"
+			rows={4}
+			placeholder="Describe alternative treatments available..."
+			bind:value={a.alternativeOptions}
+		/>
+	</Field>
 
-	<TextArea
-		label="Patient Preference"
-		name="patientPreference"
-		bind:value={a.patientPreference}
-		placeholder="Record the patient's stated preference regarding treatment options..."
-		rows={3}
-	/>
-</SectionCard>
+	<Field label="Consequences of No Treatment" inputId="noTreatmentConsequences">
+		<TextAreaInput
+			id="noTreatmentConsequences"
+			label="Consequences of No Treatment"
+			rows={4}
+			placeholder="Describe what may happen if the patient chooses not to proceed with treatment..."
+			bind:value={a.noTreatmentConsequences}
+		/>
+	</Field>
+
+	<Field label="Patient Preference" inputId="patientPreference">
+		<TextAreaInput
+			id="patientPreference"
+			label="Patient Preference"
+			rows={3}
+			placeholder="Record the patient's stated preference regarding treatment options..."
+			bind:value={a.patientPreference}
+		/>
+	</Field>
+</Fieldset>
