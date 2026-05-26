@@ -3,6 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { abnormalityLevelLabel, abnormalityLevelColor } from '$lib/engine/utils';
 
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
 
@@ -36,18 +39,8 @@
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Hematology Assessment Report</h1>
 				<div class="flex gap-3">
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Assessment
-					</button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Assessment</Button>
 				</div>
 			</div>
 		</header>

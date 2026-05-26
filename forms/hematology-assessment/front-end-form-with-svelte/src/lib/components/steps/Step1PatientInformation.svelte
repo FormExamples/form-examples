@@ -1,38 +1,37 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const d = assessment.data.patientInformation;
 </script>
 
-<SectionCard title="Patient Information" description="Patient demographic and specimen details">
+<Fieldset legend="Patient Information">
+	<p class="hint">Patient demographic and specimen details</p>
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Patient Name" name="patientName" bind:value={d.patientName} placeholder="e.g. Jane Smith" required />
-		<TextInput label="Date of Birth" name="dateOfBirth" type="date" bind:value={d.dateOfBirth} required />
+		<Field label="Patient Name" required inputId="patientName"><TextInput id="patientName" label="Patient Name" required placeholder="e.g. Jane Smith" bind:value={d.patientName} /></Field>
+		<Field label="Date of Birth" required inputId="dateOfBirth"><DateInput id="dateOfBirth" label="Date of Birth" required bind:value={d.dateOfBirth} /></Field>
 	</div>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Medical Record Number" name="medicalRecordNumber" bind:value={d.medicalRecordNumber} placeholder="e.g. MRN-123456" />
-		<TextInput label="Referring Physician" name="referringPhysician" bind:value={d.referringPhysician} placeholder="e.g. Dr Johnson" />
+		<Field label="Medical Record Number" inputId="medicalRecordNumber"><TextInput id="medicalRecordNumber" label="Medical Record Number" placeholder="e.g. MRN-123456" bind:value={d.medicalRecordNumber} /></Field>
+		<Field label="Referring Physician" inputId="referringPhysician"><TextInput id="referringPhysician" label="Referring Physician" placeholder="e.g. Dr Johnson" bind:value={d.referringPhysician} /></Field>
 	</div>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Clinical Indication" name="clinicalIndication" bind:value={d.clinicalIndication} placeholder="e.g. Suspected anemia, fatigue" />
-		<TextInput label="Specimen Date" name="specimenDate" type="date" bind:value={d.specimenDate} />
+		<Field label="Clinical Indication" inputId="clinicalIndication"><TextInput id="clinicalIndication" label="Clinical Indication" placeholder="e.g. Suspected anemia, fatigue" bind:value={d.clinicalIndication} /></Field>
+		<Field label="Specimen Date" inputId="specimenDate"><DateInput id="specimenDate" label="Specimen Date" bind:value={d.specimenDate} /></Field>
 	</div>
 
-	<SelectInput
-		label="Specimen Type"
-		name="specimenType"
-		bind:value={d.specimenType}
-		options={[
+	<Field label="Specimen Type" inputId="specimenType"><Select id="specimenType" label="Specimen Type" bind:value={d.specimenType}><option value="">-- Select --</option>{#each [
 			{ value: 'edtaBlood', label: 'EDTA Blood' },
 			{ value: 'citratedBlood', label: 'Citrated Blood' },
 			{ value: 'serumSample', label: 'Serum Sample' },
 			{ value: 'boneMarrow', label: 'Bone Marrow' },
 			{ value: 'other', label: 'Other' }
-		]}
-	/>
-</SectionCard>
+		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+</Fieldset>

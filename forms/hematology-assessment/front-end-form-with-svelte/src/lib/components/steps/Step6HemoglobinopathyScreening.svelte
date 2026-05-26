@@ -1,8 +1,10 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
 
 	const d = assessment.data.hemoglobinopathyScreening;
 
@@ -13,14 +15,15 @@
 	];
 </script>
 
-<SectionCard title="Hemoglobinopathy Screening" description="Enter hemoglobinopathy screening and genetic testing results">
-	<TextArea label="Hemoglobin Electrophoresis" name="hemoglobinElectrophoresis" bind:value={d.hemoglobinElectrophoresis} placeholder="e.g. HbA 97%, HbA2 2.5%, HbF 0.5%" />
+<Fieldset legend="Hemoglobinopathy Screening">
+	<p class="hint">Enter hemoglobinopathy screening and genetic testing results</p>
+	<Field label="Hemoglobin Electrophoresis" inputId="hemoglobinElectrophoresis"><TextAreaInput id="hemoglobinElectrophoresis" label="Hemoglobin Electrophoresis" placeholder="e.g. HbA 97%, HbA2 2.5%, HbF 0.5%" bind:value={d.hemoglobinElectrophoresis} /></Field>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Sickle Cell Screen" name="sickleCellScreen" bind:value={d.sickleCellScreen} options={screenOptions} />
-		<SelectInput label="Thalassemia Screen" name="thalassemiaScreen" bind:value={d.thalassemiaScreen} options={screenOptions} />
+		<Field label="Sickle Cell Screen" inputId="sickleCellScreen"><Select id="sickleCellScreen" label="Sickle Cell Screen" bind:value={d.sickleCellScreen}><option value="">-- Select --</option>{#each screenOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+		<Field label="Thalassemia Screen" inputId="thalassemiaScreen"><Select id="thalassemiaScreen" label="Thalassemia Screen" bind:value={d.thalassemiaScreen}><option value="">-- Select --</option>{#each screenOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
 	</div>
 
-	<TextArea label="HPLC Results" name="hplcResults" rows={2} bind:value={d.hplcResults} placeholder="e.g. Normal pattern, no variant hemoglobins detected" />
-	<TextArea label="Genetic Testing Notes" name="geneticTestingNotes" rows={2} bind:value={d.geneticTestingNotes} placeholder="Any relevant genetic testing findings" />
-</SectionCard>
+	<Field label="HPLC Results" inputId="hplcResults"><TextAreaInput id="hplcResults" label="HPLC Results" rows={2} placeholder="e.g. Normal pattern, no variant hemoglobins detected" bind:value={d.hplcResults} /></Field>
+	<Field label="Genetic Testing Notes" inputId="geneticTestingNotes"><TextAreaInput id="geneticTestingNotes" label="Genetic Testing Notes" rows={2} placeholder="Any relevant genetic testing findings" bind:value={d.geneticTestingNotes} /></Field>
+</Fieldset>
