@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -13,42 +14,44 @@
 	];
 </script>
 
-<SectionCard title="Mobility & Falls" description="Gait, balance, fall history, and mobility assessment">
-	<SelectInput
-		label="Gait Assessment"
-		name="gaitAssessment"
-		options={[
-			{ value: 'normal', label: 'Normal gait' },
-			{ value: 'unsteady', label: 'Unsteady gait' },
-			{ value: 'unable', label: 'Unable to walk' }
-		]}
-		bind:value={m.gaitAssessment}
-		required
-	/>
+<Fieldset legend="Mobility & Falls">
+	<p class="hint">Gait, balance, fall history, and mobility assessment.</p>
 
-	<SelectInput
-		label="Balance Assessment"
-		name="balanceAssessment"
-		options={[
-			{ value: 'normal', label: 'Normal balance' },
-			{ value: 'impaired', label: 'Impaired balance' },
-			{ value: 'severely-impaired', label: 'Severely impaired balance' }
-		]}
-		bind:value={m.balanceAssessment}
-		required
-	/>
+	<Field label="Gait Assessment" required inputId="gaitAssessment">
+		<Select id="gaitAssessment" label="Gait Assessment" required bind:value={m.gaitAssessment}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal gait</option>
+			<option value="unsteady">Unsteady gait</option>
+			<option value="unable">Unable to walk</option>
+		</Select>
+	</Field>
 
-	<RadioGroup label="Any falls in the past 12 months?" name="fallHistory" options={yesNo} bind:value={m.fallHistory} />
+	<Field label="Balance Assessment" required inputId="balanceAssessment">
+		<Select id="balanceAssessment" label="Balance Assessment" required bind:value={m.balanceAssessment}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal balance</option>
+			<option value="impaired">Impaired balance</option>
+			<option value="severely-impaired">Severely impaired balance</option>
+		</Select>
+	</Field>
+
+	<Field label="Any falls in the past 12 months?">
+		<RadioGroup label="Fall history">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="fallHistory" value={opt.value} bind:group={m.fallHistory} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if m.fallHistory === 'yes'}
-		<NumberInput label="Number of falls in the past year" name="fallsLastYear" bind:value={m.fallsLastYear} min={0} max={100} required />
+		<Field label="Number of falls in the past year" required inputId="fallsLastYear"><NumberInput id="fallsLastYear" label="Falls in past year" min={0} max={100} required bind:value={m.fallsLastYear} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have a fear of falling?" name="fearOfFalling" options={yesNo} bind:value={m.fearOfFalling} />
+	<Field label="Do you have a fear of falling?">
+		<RadioGroup label="Fear of falling">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="fearOfFalling" value={opt.value} bind:group={m.fearOfFalling} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do you use any mobility aids?" name="mobilityAids" options={yesNo} bind:value={m.mobilityAids} />
+	<Field label="Do you use any mobility aids?">
+		<RadioGroup label="Mobility aids">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mobilityAids" value={opt.value} bind:group={m.mobilityAids} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if m.mobilityAids === 'yes'}
-		<TextInput label="Type of mobility aid (e.g., walking stick, frame, wheelchair)" name="mobilityAidType" bind:value={m.mobilityAidType} />
+		<Field label="Type of mobility aid" inputId="mobilityAidType"><TextInput id="mobilityAidType" label="Mobility aid type" placeholder="e.g., walking stick, frame, wheelchair" bind:value={m.mobilityAidType} /></Field>
 	{/if}
 
-	<NumberInput label="Timed Up and Go" name="timedUpAndGo" bind:value={m.timedUpAndGo} unit="seconds" min={0} max={300} step={0.1} />
-</SectionCard>
+	<Field label="Timed Up and Go (seconds)" inputId="timedUpAndGo"><NumberInput id="timedUpAndGo" label="Timed Up and Go" min={0} max={300} step={0.1} bind:value={m.timedUpAndGo} /></Field>
+</Fieldset>

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const c = assessment.data.continenceSkin;
@@ -12,75 +13,68 @@
 	];
 </script>
 
-<SectionCard title="Continence & Skin" description="Urinary and faecal incontinence, pressure injury risk, and skin integrity">
-	<SelectInput
-		label="Urinary Incontinence"
-		name="urinaryIncontinence"
-		options={[
-			{ value: 'none', label: 'None' },
-			{ value: 'stress', label: 'Stress incontinence' },
-			{ value: 'urge', label: 'Urge incontinence' },
-			{ value: 'mixed', label: 'Mixed incontinence' },
-			{ value: 'functional', label: 'Functional incontinence' }
-		]}
-		bind:value={c.urinaryIncontinence}
-	/>
+<Fieldset legend="Continence & Skin">
+	<p class="hint">Urinary and faecal incontinence, pressure injury risk, and skin integrity.</p>
+
+	<Field label="Urinary Incontinence" inputId="urinaryIncontinence">
+		<Select id="urinaryIncontinence" label="Urinary Incontinence" bind:value={c.urinaryIncontinence}>
+			<option value="">-- Select --</option>
+			<option value="none">None</option>
+			<option value="stress">Stress incontinence</option>
+			<option value="urge">Urge incontinence</option>
+			<option value="mixed">Mixed incontinence</option>
+			<option value="functional">Functional incontinence</option>
+		</Select>
+	</Field>
 
 	{#if c.urinaryIncontinence !== 'none' && c.urinaryIncontinence !== ''}
-		<SelectInput
-			label="Urinary Incontinence Frequency"
-			name="urinaryIncontinenceFrequency"
-			options={[
-				{ value: 'occasional', label: 'Occasional' },
-				{ value: 'frequent', label: 'Frequent' },
-				{ value: 'continuous', label: 'Continuous' }
-			]}
-			bind:value={c.urinaryIncontinenceFrequency}
-			required
-		/>
+		<Field label="Urinary Incontinence Frequency" required inputId="urinaryIncontinenceFrequency">
+			<Select id="urinaryIncontinenceFrequency" label="Urinary Incontinence Frequency" required bind:value={c.urinaryIncontinenceFrequency}>
+				<option value="">-- Select --</option>
+				<option value="occasional">Occasional</option>
+				<option value="frequent">Frequent</option>
+				<option value="continuous">Continuous</option>
+			</Select>
+		</Field>
 	{/if}
 
-	<RadioGroup label="Any faecal incontinence?" name="faecalIncontinence" options={yesNo} bind:value={c.faecalIncontinence} />
+	<Field label="Any faecal incontinence?">
+		<RadioGroup label="Faecal incontinence">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="faecalIncontinence" value={opt.value} bind:group={c.faecalIncontinence} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if c.faecalIncontinence === 'yes'}
-		<SelectInput
-			label="Faecal Incontinence Frequency"
-			name="faecalIncontinenceFrequency"
-			options={[
-				{ value: 'occasional', label: 'Occasional' },
-				{ value: 'frequent', label: 'Frequent' },
-				{ value: 'continuous', label: 'Continuous' }
-			]}
-			bind:value={c.faecalIncontinenceFrequency}
-			required
-		/>
+		<Field label="Faecal Incontinence Frequency" required inputId="faecalIncontinenceFrequency">
+			<Select id="faecalIncontinenceFrequency" label="Faecal Incontinence Frequency" required bind:value={c.faecalIncontinenceFrequency}>
+				<option value="">-- Select --</option>
+				<option value="occasional">Occasional</option>
+				<option value="frequent">Frequent</option>
+				<option value="continuous">Continuous</option>
+			</Select>
+		</Field>
 	{/if}
 
-	<NumberInput label="Braden Scale Score (pressure injury risk)" name="bradenScale" bind:value={c.bradenScale} min={6} max={23} />
+	<Field label="Braden Scale Score (pressure injury risk)" inputId="bradenScale"><NumberInput id="bradenScale" label="Braden Scale" min={6} max={23} bind:value={c.bradenScale} /></Field>
 
-	<RadioGroup label="Are there any pressure injuries present?" name="pressureInjuryPresent" options={yesNo} bind:value={c.pressureInjuryPresent} />
+	<Field label="Are there any pressure injuries present?">
+		<RadioGroup label="Pressure injury">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="pressureInjuryPresent" value={opt.value} bind:group={c.pressureInjuryPresent} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if c.pressureInjuryPresent === 'yes'}
-		<SelectInput
-			label="Pressure Injury Stage"
-			name="pressureInjuryStage"
-			options={[
-				{ value: '1', label: 'Stage 1 - Non-blanchable erythema' },
-				{ value: '2', label: 'Stage 2 - Partial thickness skin loss' },
-				{ value: '3', label: 'Stage 3 - Full thickness skin loss' },
-				{ value: '4', label: 'Stage 4 - Full thickness tissue loss' }
-			]}
-			bind:value={c.pressureInjuryStage}
-			required
-		/>
+		<Field label="Pressure Injury Stage" required inputId="pressureInjuryStage">
+			<Select id="pressureInjuryStage" label="Pressure Injury Stage" required bind:value={c.pressureInjuryStage}>
+				<option value="">-- Select --</option>
+				<option value="1">Stage 1 - Non-blanchable erythema</option>
+				<option value="2">Stage 2 - Partial thickness skin loss</option>
+				<option value="3">Stage 3 - Full thickness skin loss</option>
+				<option value="4">Stage 4 - Full thickness tissue loss</option>
+			</Select>
+		</Field>
 	{/if}
 
-	<SelectInput
-		label="Overall Skin Integrity"
-		name="skinIntegrity"
-		options={[
-			{ value: 'intact', label: 'Intact' },
-			{ value: 'impaired', label: 'Impaired' },
-			{ value: 'wound-present', label: 'Wound present' }
-		]}
-		bind:value={c.skinIntegrity}
-	/>
-</SectionCard>
+	<Field label="Overall Skin Integrity" inputId="skinIntegrity">
+		<Select id="skinIntegrity" label="Skin Integrity" bind:value={c.skinIntegrity}>
+			<option value="">-- Select --</option>
+			<option value="intact">Intact</option>
+			<option value="impaired">Impaired</option>
+			<option value="wound-present">Wound present</option>
+		</Select>
+	</Field>
+</Fieldset>

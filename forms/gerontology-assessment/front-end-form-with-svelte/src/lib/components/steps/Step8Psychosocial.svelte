@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const p = assessment.data.psychosocial;
 	const yesNo = [
@@ -13,40 +14,42 @@
 	];
 </script>
 
-<SectionCard title="Psychosocial" description="Depression screening, social isolation, caregiver status, and advance directives">
-	<SelectInput
-		label="Depression Screen (GDS-15) Result"
-		name="depressionScreen"
-		options={[
-			{ value: 'normal', label: 'Normal (0-4)' },
-			{ value: 'mild', label: 'Mild depression (5-8)' },
-			{ value: 'moderate', label: 'Moderate depression (9-11)' },
-			{ value: 'severe', label: 'Severe depression (12-15)' }
-		]}
-		bind:value={p.depressionScreen}
-	/>
+<Fieldset legend="Psychosocial">
+	<p class="hint">Depression screening, social isolation, caregiver status, and advance directives.</p>
 
-	<NumberInput label="GDS-15 Score" name="gds15Score" bind:value={p.gds15Score} min={0} max={15} />
+	<Field label="Depression Screen (GDS-15) Result" inputId="depressionScreen">
+		<Select id="depressionScreen" label="Depression Screen" bind:value={p.depressionScreen}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal (0-4)</option>
+			<option value="mild">Mild depression (5-8)</option>
+			<option value="moderate">Moderate depression (9-11)</option>
+			<option value="severe">Severe depression (12-15)</option>
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Social Isolation Level"
-		name="socialIsolation"
-		options={[
-			{ value: 'none', label: 'No isolation - regular social contact' },
-			{ value: 'mild', label: 'Mild - some social contact' },
-			{ value: 'moderate', label: 'Moderate - limited social contact' },
-			{ value: 'severe', label: 'Severe - very isolated, minimal contact' }
-		]}
-		bind:value={p.socialIsolation}
-	/>
+	<Field label="GDS-15 Score" inputId="gds15Score"><NumberInput id="gds15Score" label="GDS-15 Score" min={0} max={15} bind:value={p.gds15Score} /></Field>
 
-	<RadioGroup label="Does the patient have a caregiver?" name="hasCaregiver" options={yesNo} bind:value={p.hasCaregiver} />
+	<Field label="Social Isolation Level" inputId="socialIsolation">
+		<Select id="socialIsolation" label="Social Isolation" bind:value={p.socialIsolation}>
+			<option value="">-- Select --</option>
+			<option value="none">No isolation - regular social contact</option>
+			<option value="mild">Mild - some social contact</option>
+			<option value="moderate">Moderate - limited social contact</option>
+			<option value="severe">Severe - very isolated, minimal contact</option>
+		</Select>
+	</Field>
+
+	<Field label="Does the patient have a caregiver?">
+		<RadioGroup label="Has caregiver">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hasCaregiver" value={opt.value} bind:group={p.hasCaregiver} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if p.hasCaregiver === 'yes'}
-		<TextArea label="Caregiver details" name="caregiverDetails" bind:value={p.caregiverDetails} placeholder="e.g., spouse, adult child, paid carer, hours per week" />
+		<Field label="Caregiver details" inputId="caregiverDetails"><TextAreaInput id="caregiverDetails" label="Caregiver details" rows={3} placeholder="e.g., spouse, adult child, paid carer, hours per week" bind:value={p.caregiverDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Are there any advance directives, DNAR, or living wills in place?" name="advanceDirectives" options={yesNo} bind:value={p.advanceDirectives} />
+	<Field label="Are there any advance directives, DNAR, or living wills in place?">
+		<RadioGroup label="Advance directives">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="advanceDirectives" value={opt.value} bind:group={p.advanceDirectives} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if p.advanceDirectives === 'yes'}
-		<TextArea label="Advance directive details" name="advanceDirectiveDetails" bind:value={p.advanceDirectiveDetails} placeholder="e.g., DNAR, power of attorney, treatment preferences" />
+		<Field label="Advance directive details" inputId="advanceDirectiveDetails"><TextAreaInput id="advanceDirectiveDetails" label="Advance directive details" rows={3} placeholder="e.g., DNAR, power of attorney, treatment preferences" bind:value={p.advanceDirectiveDetails} /></Field>
 	{/if}
-</SectionCard>
+</Fieldset>

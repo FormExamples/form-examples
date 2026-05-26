@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 
 	const p = assessment.data.polypharmacyReview;
@@ -14,31 +15,35 @@
 	];
 </script>
 
-<SectionCard title="Polypharmacy Review" description="Medication count, high-risk medications, Beers criteria, and adherence">
-	<NumberInput label="Total number of regular medications" name="numberOfMedications" bind:value={p.numberOfMedications} min={0} max={50} />
+<Fieldset legend="Polypharmacy Review">
+	<p class="hint">Medication count, high-risk medications, Beers criteria, and adherence.</p>
 
-	<RadioGroup label="Are there any high-risk medications (e.g., anticoagulants, sedatives, opioids)?" name="highRiskMedications" options={yesNo} bind:value={p.highRiskMedications} />
+	<Field label="Total number of regular medications" inputId="numberOfMedications"><NumberInput id="numberOfMedications" label="Number of medications" min={0} max={50} bind:value={p.numberOfMedications} /></Field>
+
+	<Field label="Are there any high-risk medications (e.g., anticoagulants, sedatives, opioids)?">
+		<RadioGroup label="High-risk medications">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="highRiskMedications" value={opt.value} bind:group={p.highRiskMedications} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if p.highRiskMedications === 'yes'}
-		<TextArea label="High-risk medication details" name="highRiskMedicationDetails" bind:value={p.highRiskMedicationDetails} placeholder="List the high-risk medications" />
+		<Field label="High-risk medication details" inputId="highRiskMedicationDetails"><TextAreaInput id="highRiskMedicationDetails" label="High-risk details" rows={3} placeholder="List the high-risk medications" bind:value={p.highRiskMedicationDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Any Beers criteria flags (potentially inappropriate medications for older adults)?" name="beersCriteriaFlags" options={yesNo} bind:value={p.beersCriteriaFlags} />
+	<Field label="Any Beers criteria flags (potentially inappropriate medications for older adults)?">
+		<RadioGroup label="Beers criteria flags">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="beersCriteriaFlags" value={opt.value} bind:group={p.beersCriteriaFlags} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 	{#if p.beersCriteriaFlags === 'yes'}
-		<TextArea label="Beers criteria details" name="beersCriteriaDetails" bind:value={p.beersCriteriaDetails} placeholder="List the flagged medications" />
+		<Field label="Beers criteria details" inputId="beersCriteriaDetails"><TextAreaInput id="beersCriteriaDetails" label="Beers details" rows={3} placeholder="List the flagged medications" bind:value={p.beersCriteriaDetails} /></Field>
 	{/if}
 
-	<SelectInput
-		label="Medication Adherence"
-		name="medicationAdherence"
-		options={[
-			{ value: 'good', label: 'Good' },
-			{ value: 'fair', label: 'Fair' },
-			{ value: 'poor', label: 'Poor' }
-		]}
-		bind:value={p.medicationAdherence}
-	/>
+	<Field label="Medication Adherence" inputId="medicationAdherence">
+		<Select id="medicationAdherence" label="Medication Adherence" bind:value={p.medicationAdherence}>
+			<option value="">-- Select --</option>
+			<option value="good">Good</option>
+			<option value="fair">Fair</option>
+			<option value="poor">Poor</option>
+		</Select>
+	</Field>
 
-	<hr class="my-4 border-gray-200" />
-	<h3 class="mb-3 text-sm font-semibold text-gray-800 uppercase tracking-wide">Current Medications List</h3>
-	<MedicationEntry bind:medications={assessment.data.medications} />
-</SectionCard>
+	<Field label="Current Medications List">
+		<MedicationEntry bind:medications={assessment.data.medications} />
+	</Field>
+</Fieldset>
