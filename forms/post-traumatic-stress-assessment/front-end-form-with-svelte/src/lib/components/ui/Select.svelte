@@ -1,27 +1,32 @@
 <script lang="ts">
-	// TextInput — Lily Svelte headless contract.
+	// Select — Lily Svelte headless contract.
+	import type { Snippet } from 'svelte';
+
 	let {
 		class: className = '',
 		label,
-		value = $bindable(''),
+		value = $bindable<string>(''),
 		required = false,
 		disabled = false,
+		children,
 		...restProps
 	}: {
 		label: string;
 		value?: string;
 		required?: boolean;
 		disabled?: boolean;
+		children: Snippet;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<input
-	class={`text-input ${className}`}
-	type="text"
+<select
+	class={`select ${className}`}
 	aria-label={label}
 	bind:value
 	{required}
 	{disabled}
 	{...restProps}
-/>
+>
+	{@render children?.()}
+</select>

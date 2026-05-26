@@ -20,14 +20,56 @@
 	];
 </script>
 
-<fieldset class="mb-4 rounded-lg border border-gray-200 p-4">
-	<legend class="px-2 text-sm font-medium text-gray-800">{label}</legend>
-	<div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-5">
-		{#each choices as c}
-			<label class="flex cursor-pointer items-center gap-2 rounded border p-2 text-xs {value === c.score ? 'border-primary bg-blue-50 font-semibold' : 'border-gray-200 bg-white hover:bg-gray-50'}">
-				<input type="radio" {name} bind:group={value} value={c.score} class="accent-primary" />
-				<span><span class="font-mono text-gray-500">{c.score}</span> {c.label}</span>
+<fieldset class="pcl-fieldset" aria-label={label}>
+	<legend class="pcl-legend">{label}</legend>
+	<div class="pcl-grid">
+		{#each choices as c (c.score)}
+			<label class="pcl-choice" class:pcl-choice--selected={value === c.score}>
+				<input type="radio" class="radio-input" {name} bind:group={value} value={c.score} />
+				<span><span class="pcl-score">{c.score}</span> {c.label}</span>
 			</label>
 		{/each}
 	</div>
 </fieldset>
+
+<style>
+	.pcl-fieldset {
+		border: 1px solid var(--color-border);
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+		margin: 0 0 0.75rem;
+	}
+	.pcl-legend {
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding: 0 0.25rem;
+		color: var(--color-text);
+	}
+	.pcl-grid {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+	}
+	@media (max-width: 640px) {
+		.pcl-grid { grid-template-columns: 1fr; }
+	}
+	.pcl-choice {
+		display: flex; align-items: center; gap: 0.375rem;
+		border: 1px solid var(--color-border-strong);
+		background: var(--color-surface);
+		padding: 0.375rem 0.5rem;
+		border-radius: 0.375rem;
+		font-size: 0.75rem;
+		cursor: pointer;
+	}
+	.pcl-choice--selected {
+		border-color: var(--color-primary);
+		background: var(--color-primary-light);
+		font-weight: 600;
+	}
+	.pcl-score {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		color: var(--color-muted);
+	}
+</style>

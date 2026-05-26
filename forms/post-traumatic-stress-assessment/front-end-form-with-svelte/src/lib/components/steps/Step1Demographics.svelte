@@ -1,24 +1,35 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.demographics;
+	const sexOptions = ['male', 'female', 'other'] as const;
 </script>
 
-<SectionCard title="Demographics" description="Your details. Used to contextualise the PCL-5 score for clinical records.">
-	<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
-	<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
-	<TextInput label="Date of Birth" name="dateOfBirth" bind:value={d.dateOfBirth} type="date" required />
-	<fieldset class="mb-4">
-		<legend class="mb-1 block text-sm font-medium text-gray-700">Sex</legend>
-		<div class="flex gap-4 text-sm">
-			{#each ['male', 'female', 'other'] as opt}
-				<label class="flex items-center gap-2">
-					<input type="radio" name="sex" bind:group={d.sex} value={opt} class="accent-primary" />
+<Fieldset legend="Demographics">
+	<p class="hint">Your details. Used to contextualise the PCL-5 score for clinical records.</p>
+
+	<Field label="First Name" required inputId="firstName">
+		<TextInput id="firstName" label="First name" required bind:value={d.firstName} />
+	</Field>
+	<Field label="Last Name" required inputId="lastName">
+		<TextInput id="lastName" label="Last name" required bind:value={d.lastName} />
+	</Field>
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of birth" required bind:value={d.dateOfBirth} />
+	</Field>
+	<Field label="Sex">
+		<RadioGroup label="Sex">
+			{#each sexOptions as opt (opt)}
+				<label>
+					<input type="radio" class="radio-input" name="sex" value={opt} bind:group={d.sex} />
 					<span class="capitalize">{opt}</span>
 				</label>
 			{/each}
-		</div>
-	</fieldset>
-</SectionCard>
+		</RadioGroup>
+	</Field>
+</Fieldset>
