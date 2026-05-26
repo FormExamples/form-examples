@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const bc = assessment.data.bodyComposition;
 
@@ -10,21 +12,36 @@
 	const computedCategory = $derived(computedBMI !== null ? bmiCategory(computedBMI) : '');
 </script>
 
-<SectionCard title="Body Composition" description="Anthropometric measurements for eligibility assessment">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Height" name="heightCm" bind:value={bc.heightCm} min={50} max={250} step={0.1} unit="cm" required />
-		<NumberInput label="Weight" name="weightKg" bind:value={bc.weightKg} min={20} max={300} step={0.1} unit="kg" required />
+<Fieldset legend="Body Composition">
+	<p class="hint">Anthropometric measurements for eligibility assessment.</p>
+
+	<div class="field-grid">
+		<Field label="Height (cm)" required inputId="heightCm">
+			<NumberInput id="heightCm" label="Height" min={50} max={250} step={0.1} required bind:value={bc.heightCm} />
+		</Field>
+		<Field label="Weight (kg)" required inputId="weightKg">
+			<NumberInput id="weightKg" label="Weight" min={20} max={300} step={0.1} required bind:value={bc.weightKg} />
+		</Field>
 	</div>
 
 	{#if computedBMI !== null}
-		<div class="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
-			<div class="text-sm font-medium text-gray-700">Calculated BMI</div>
-			<div class="text-2xl font-bold text-blue-800">{computedBMI.toFixed(1)}</div>
-			<div class="text-sm text-blue-600">{computedCategory}</div>
-		</div>
+		<Alert type="info" heading="Calculated BMI">
+			<p>{computedBMI.toFixed(1)} ({computedCategory})</p>
+		</Alert>
 	{/if}
 
-	<NumberInput label="Waist Circumference" name="waistCircumference" bind:value={bc.waistCircumference} min={40} max={200} step={0.1} unit="cm" />
-	<NumberInput label="Body Fat Percentage" name="bodyFatPercent" bind:value={bc.bodyFatPercent} min={3} max={60} step={0.1} unit="%" />
-	<NumberInput label="Previous Maximum Weight" name="previousMaxWeight" bind:value={bc.previousMaxWeight} min={20} max={400} step={0.1} unit="kg" />
-</SectionCard>
+	<Field label="Waist Circumference (cm)" inputId="waistCircumference">
+		<NumberInput id="waistCircumference" label="Waist" min={40} max={200} step={0.1} bind:value={bc.waistCircumference} />
+	</Field>
+	<Field label="Body Fat Percentage (%)" inputId="bodyFatPercent">
+		<NumberInput id="bodyFatPercent" label="Body fat" min={3} max={60} step={0.1} bind:value={bc.bodyFatPercent} />
+	</Field>
+	<Field label="Previous Maximum Weight (kg)" inputId="previousMaxWeight">
+		<NumberInput id="previousMaxWeight" label="Previous max weight" min={20} max={400} step={0.1} bind:value={bc.previousMaxWeight} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

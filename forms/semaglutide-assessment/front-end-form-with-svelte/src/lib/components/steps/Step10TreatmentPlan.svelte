@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
@@ -12,62 +13,66 @@
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+
+	const formulationOptions = [
+		{ value: 'subcutaneous-weekly', label: 'Subcutaneous (weekly injection)' },
+		{ value: 'oral-daily', label: 'Oral (daily tablet)' }
+	];
 </script>
 
-<SectionCard title="Treatment Plan" description="Proposed semaglutide treatment plan and monitoring schedule">
-	<RadioGroup
-		label="Selected Formulation"
-		name="selectedFormulation"
-		options={[
-			{ value: 'subcutaneous-weekly', label: 'Subcutaneous (weekly injection)' },
-			{ value: 'oral-daily', label: 'Oral (daily tablet)' }
-		]}
-		bind:value={tp.selectedFormulation}
-	/>
+<Fieldset legend="Treatment Plan">
+	<p class="hint">Proposed semaglutide treatment plan and monitoring schedule.</p>
 
-	<SelectInput
-		label="Starting Dose"
-		name="startingDose"
-		options={[
-			{ value: '0.25mg', label: '0.25 mg (initiation dose)' },
-			{ value: '0.5mg', label: '0.5 mg' },
-			{ value: '1mg', label: '1 mg' },
-			{ value: '3mg-oral', label: '3 mg oral (initiation dose)' },
-			{ value: '7mg-oral', label: '7 mg oral' },
-			{ value: '14mg-oral', label: '14 mg oral' }
-		]}
-		bind:value={tp.startingDose}
-	/>
+	<Field label="Selected Formulation">
+		<RadioGroup label="Selected formulation">
+			{#each formulationOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="selectedFormulation" value={opt.value} bind:group={tp.selectedFormulation} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextInput
-		label="Titration Schedule"
-		name="titrationSchedule"
-		bind:value={tp.titrationSchedule}
-		placeholder="e.g., Increase dose every 4 weeks per standard protocol"
-	/>
+	<Field label="Starting Dose" inputId="startingDose">
+		<Select id="startingDose" label="Starting dose" bind:value={tp.startingDose}>
+			<option value="">-- Select --</option>
+			<option value="0.25mg">0.25 mg (initiation dose)</option>
+			<option value="0.5mg">0.5 mg</option>
+			<option value="1mg">1 mg</option>
+			<option value="3mg-oral">3 mg oral (initiation dose)</option>
+			<option value="7mg-oral">7 mg oral</option>
+			<option value="14mg-oral">14 mg oral</option>
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Monitoring Frequency"
-		name="monitoringFrequency"
-		options={[
-			{ value: 'Weekly', label: 'Weekly' },
-			{ value: 'Fortnightly', label: 'Fortnightly' },
-			{ value: 'Monthly', label: 'Monthly' },
-			{ value: 'Quarterly', label: 'Quarterly' }
-		]}
-		bind:value={tp.monitoringFrequency}
-	/>
+	<Field label="Titration Schedule" inputId="titrationSchedule">
+		<TextInput id="titrationSchedule" label="Titration schedule" placeholder="e.g., Increase dose every 4 weeks per standard protocol" bind:value={tp.titrationSchedule} />
+	</Field>
 
-	<RadioGroup label="Dietary guidance provided?" name="dietaryGuidance" options={yesNoOptions} bind:value={tp.dietaryGuidance} />
-	<RadioGroup label="Exercise plan discussed?" name="exercisePlan" options={yesNoOptions} bind:value={tp.exercisePlan} />
+	<Field label="Monitoring Frequency" inputId="monitoringFrequency">
+		<Select id="monitoringFrequency" label="Monitoring frequency" bind:value={tp.monitoringFrequency}>
+			<option value="">-- Select --</option>
+			<option value="Weekly">Weekly</option>
+			<option value="Fortnightly">Fortnightly</option>
+			<option value="Monthly">Monthly</option>
+			<option value="Quarterly">Quarterly</option>
+		</Select>
+	</Field>
 
-	<NumberInput
-		label="Follow-up Appointment"
-		name="followUpWeeks"
-		bind:value={tp.followUpWeeks}
-		min={1}
-		max={52}
-		step={1}
-		unit="weeks"
-	/>
-</SectionCard>
+	<Field label="Dietary guidance provided?">
+		<RadioGroup label="Dietary guidance">
+			{#each yesNoOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="dietaryGuidance" value={opt.value} bind:group={tp.dietaryGuidance} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	<Field label="Exercise plan discussed?">
+		<RadioGroup label="Exercise plan">
+			{#each yesNoOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="exercisePlan" value={opt.value} bind:group={tp.exercisePlan} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Follow-up Appointment (weeks)" inputId="followUpWeeks">
+		<NumberInput id="followUpWeeks" label="Follow-up weeks" min={1} max={52} step={1} bind:value={tp.followUpWeeks} />
+	</Field>
+</Fieldset>

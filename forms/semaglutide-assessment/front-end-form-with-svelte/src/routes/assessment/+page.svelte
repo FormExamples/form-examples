@@ -4,6 +4,9 @@
 	import { evaluateEligibility } from '$lib/engine/eligibility-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2IndicationGoals from '$lib/components/steps/Step2IndicationGoals.svelte';
 	import Step3BodyComposition from '$lib/components/steps/Step3BodyComposition.svelte';
@@ -16,47 +19,40 @@
 	import Step10TreatmentPlan from '$lib/components/steps/Step10TreatmentPlan.svelte';
 
 	function submitAssessment() {
-			const { eligibilityStatus, bmi, bmiCategoryLabel, absoluteContraindications, relativeContraindications } = evaluateEligibility(assessment.data);
-			const monitoringFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				eligibilityStatus,
-				bmi,
-				bmiCategory: bmiCategoryLabel,
-				absoluteContraindications,
-				relativeContraindications,
-				monitoringFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { eligibilityStatus, bmi, bmiCategoryLabel, absoluteContraindications, relativeContraindications } = evaluateEligibility(assessment.data);
+		const monitoringFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			eligibilityStatus,
+			bmi,
+			bmiCategory: bmiCategoryLabel,
+			absoluteContraindications,
+			relativeContraindications,
+			monitoringFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Semaglutide Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2IndicationGoals />
+	<Step3BodyComposition />
+	<Step4MetabolicProfile />
+	<Step5CardiovascularRisk />
+	<Step6ContraindicationsScreening />
+	<Step7GastrointestinalHistory />
+	<Step8CurrentMedications />
+	<Step9MentalHealthScreening />
+	<Step10TreatmentPlan />
 
-<Step2IndicationGoals />
-
-<Step3BodyComposition />
-
-<Step4MetabolicProfile />
-
-<Step5CardiovascularRisk />
-
-<Step6ContraindicationsScreening />
-
-<Step7GastrointestinalHistory />
-
-<Step8CurrentMedications />
-
-<Step9MentalHealthScreening />
-
-<Step10TreatmentPlan />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>
