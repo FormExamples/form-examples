@@ -16,45 +16,56 @@
 	}
 </script>
 
-<div class="space-y-3">
-	{#each medications as med, i}
-		<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-			<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
-				<input
-					type="text"
-					placeholder="Medication name"
-					bind:value={med.name}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<input
-					type="text"
-					placeholder="Dose"
-					bind:value={med.dose}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<input
-					type="text"
-					placeholder="Frequency"
-					bind:value={med.frequency}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-			</div>
+<div class="entry-list">
+	{#each medications as med, i (i)}
+		<div class="entry-row">
+			<input
+				type="text"
+				class="text-input"
+				placeholder="Medication name"
+				aria-label="Medication name"
+				bind:value={med.name}
+			/>
+			<input
+				type="text"
+				class="text-input"
+				placeholder="Dose"
+				aria-label="Dose"
+				bind:value={med.dose}
+			/>
+			<input
+				type="text"
+				class="text-input"
+				placeholder="Frequency"
+				aria-label="Frequency"
+				bind:value={med.frequency}
+			/>
 			<button
 				type="button"
+				class="button"
+				data-variant="danger"
 				onclick={() => removeMedication(i)}
-				class="mt-1 text-red-500 hover:text-red-700"
 				aria-label="Remove medication"
 			>
-				&times;
+				Remove
 			</button>
 		</div>
 	{/each}
 
-	<button
-		type="button"
-		onclick={addMedication}
-		class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-	>
+	<button type="button" class="button" onclick={addMedication}>
 		+ Add Medication
 	</button>
 </div>
+
+<style>
+	.entry-list { display: flex; flex-direction: column; gap: 0.5rem; }
+	.entry-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr auto;
+		gap: 0.5rem;
+		align-items: end;
+	}
+	@media (max-width: 640px) {
+		.entry-row { grid-template-columns: 1fr; }
+	}
+</style>

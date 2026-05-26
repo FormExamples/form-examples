@@ -1,70 +1,44 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const d = assessment.data.jointAssessment;
 </script>
 
-<SectionCard title="Joint Assessment" description="28-joint count assessment for DAS28 calculation">
-	<p class="mb-4 text-sm text-gray-500">
-		The 28-joint count includes bilateral shoulders, elbows, wrists, MCP joints (1-5),
-		PIP joints (1-5), and knees. Count each tender or swollen joint.
-	</p>
+<Fieldset legend="Joint Assessment">
+	<p class="hint">28-joint count assessment for DAS28 calculation. Includes bilateral shoulders, elbows, wrists, MCP joints (1-5), PIP joints (1-5), and knees. Count each tender or swollen joint.</p>
 
-	<NumberInput
-		label="Tender Joint Count (TJC28)"
-		name="tenderJointCount28"
-		bind:value={d.tenderJointCount28}
-		min={0}
-		max={28}
-		required
-	/>
+	<Field label="Tender Joint Count (TJC28)" required inputId="tenderJointCount28">
+		<NumberInput id="tenderJointCount28" label="Tender joint count" min={0} max={28} required bind:value={d.tenderJointCount28} />
+	</Field>
 
-	<NumberInput
-		label="Swollen Joint Count (SJC28)"
-		name="swollenJointCount28"
-		bind:value={d.swollenJointCount28}
-		min={0}
-		max={28}
-		required
-	/>
+	<Field label="Swollen Joint Count (SJC28)" required inputId="swollenJointCount28">
+		<NumberInput id="swollenJointCount28" label="Swollen joint count" min={0} max={28} required bind:value={d.swollenJointCount28} />
+	</Field>
 
-	<div class="mb-4">
-		<label for="painVAS" class="mb-1 block text-sm font-medium text-gray-700">
-			Pain VAS (0-100mm) <span class="text-red-500">*</span>
-		</label>
-		<input
-			id="painVAS"
-			type="range"
-			min={0}
-			max={100}
-			bind:value={d.painVAS}
-			class="w-full accent-primary"
-		/>
-		<div class="mt-1 flex justify-between text-xs text-gray-500">
+	<Field label="Pain VAS (0-100mm)" required inputId="painVAS">
+		<input id="painVAS" type="range" class="range-input" min={0} max={100} bind:value={d.painVAS} aria-label="Pain VAS" />
+		<div class="range-legend">
 			<span>0 - No pain</span>
-			<span class="font-medium text-gray-900">{d.painVAS ?? 0}mm</span>
+			<span class="range-current">{d.painVAS ?? 0}mm</span>
 			<span>100 - Worst pain</span>
 		</div>
-	</div>
+	</Field>
 
-	<div class="mb-4">
-		<label for="patientGlobalVAS" class="mb-1 block text-sm font-medium text-gray-700">
-			Patient Global Assessment VAS (0-100mm) <span class="text-red-500">*</span>
-		</label>
-		<input
-			id="patientGlobalVAS"
-			type="range"
-			min={0}
-			max={100}
-			bind:value={d.patientGlobalVAS}
-			class="w-full accent-primary"
-		/>
-		<div class="mt-1 flex justify-between text-xs text-gray-500">
+	<Field label="Patient Global Assessment VAS (0-100mm)" required inputId="patientGlobalVAS">
+		<input id="patientGlobalVAS" type="range" class="range-input" min={0} max={100} bind:value={d.patientGlobalVAS} aria-label="Patient global VAS" />
+		<div class="range-legend">
 			<span>0 - Very well</span>
-			<span class="font-medium text-gray-900">{d.patientGlobalVAS ?? 0}mm</span>
+			<span class="range-current">{d.patientGlobalVAS ?? 0}mm</span>
 			<span>100 - Very poor</span>
 		</div>
-	</div>
-</SectionCard>
+	</Field>
+</Fieldset>
+
+<style>
+	.range-input { width: 100%; accent-color: var(--color-primary); }
+	.range-legend { margin-top: 0.25rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--color-muted); }
+	.range-current { color: var(--color-text); font-weight: 500; }
+</style>

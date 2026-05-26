@@ -1,73 +1,67 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.diseaseHistory;
+
+	const yesNoOptions = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 </script>
 
-<SectionCard title="Disease History" description="Rheumatological diagnosis and treatment history">
-	<SelectInput
-		label="Primary Diagnosis"
-		name="primaryDiagnosis"
-		options={[
-			{ value: 'rheumatoid-arthritis', label: 'Rheumatoid Arthritis' },
-			{ value: 'psoriatic-arthritis', label: 'Psoriatic Arthritis' },
-			{ value: 'ankylosing-spondylitis', label: 'Ankylosing Spondylitis' },
-			{ value: 'systemic-lupus', label: 'Systemic Lupus Erythematosus' },
-			{ value: 'gout', label: 'Gout' },
-			{ value: 'osteoarthritis', label: 'Osteoarthritis' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={d.primaryDiagnosis}
-		required
-	/>
+<Fieldset legend="Disease History">
+	<p class="hint">Rheumatological diagnosis and treatment history.</p>
 
-	<TextInput label="Date of Diagnosis" name="diagnosisDate" type="date" bind:value={d.diagnosisDate} />
+	<Field label="Primary Diagnosis" required inputId="primaryDiagnosis">
+		<Select id="primaryDiagnosis" label="Primary diagnosis" required bind:value={d.primaryDiagnosis}>
+			<option value="">-- Select --</option>
+			<option value="rheumatoid-arthritis">Rheumatoid Arthritis</option>
+			<option value="psoriatic-arthritis">Psoriatic Arthritis</option>
+			<option value="ankylosing-spondylitis">Ankylosing Spondylitis</option>
+			<option value="systemic-lupus">Systemic Lupus Erythematosus</option>
+			<option value="gout">Gout</option>
+			<option value="osteoarthritis">Osteoarthritis</option>
+			<option value="other">Other</option>
+		</Select>
+	</Field>
 
-	<NumberInput
-		label="Disease Duration"
-		name="diseaseDurationYears"
-		bind:value={d.diseaseDurationYears}
-		unit="years"
-		min={0}
-		max={80}
-	/>
+	<Field label="Date of Diagnosis" inputId="diagnosisDate">
+		<DateInput id="diagnosisDate" label="Date of diagnosis" bind:value={d.diagnosisDate} />
+	</Field>
 
-	<TextArea
-		label="Previous DMARDs"
-		name="previousDMARDs"
-		bind:value={d.previousDMARDs}
-		placeholder="e.g., Methotrexate, Sulfasalazine, Hydroxychloroquine..."
-	/>
+	<Field label="Disease Duration (years)" inputId="diseaseDurationYears">
+		<NumberInput id="diseaseDurationYears" label="Disease duration" min={0} max={80} bind:value={d.diseaseDurationYears} />
+	</Field>
 
-	<TextArea
-		label="Previous Biologics"
-		name="previousBiologics"
-		bind:value={d.previousBiologics}
-		placeholder="e.g., Adalimumab, Etanercept, Rituximab..."
-	/>
+	<Field label="Previous DMARDs" inputId="previousDMARDs">
+		<TextAreaInput id="previousDMARDs" label="Previous DMARDs" placeholder="e.g., Methotrexate, Sulfasalazine, Hydroxychloroquine..." bind:value={d.previousDMARDs} />
+	</Field>
 
-	<RadioGroup
-		label="Any Remission Periods?"
-		name="remissionPeriods"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={d.remissionPeriods}
-	/>
+	<Field label="Previous Biologics" inputId="previousBiologics">
+		<TextAreaInput id="previousBiologics" label="Previous biologics" placeholder="e.g., Adalimumab, Etanercept, Rituximab..." bind:value={d.previousBiologics} />
+	</Field>
+
+	<Field label="Any Remission Periods?">
+		<RadioGroup label="Remission periods">
+			{#each yesNoOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="remissionPeriods" value={opt.value} bind:group={d.remissionPeriods} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if d.remissionPeriods === 'yes'}
-		<TextArea
-			label="Remission Details"
-			name="remissionDetails"
-			bind:value={d.remissionDetails}
-			placeholder="Duration, how achieved, any relapses..."
-		/>
+		<Field label="Remission Details" inputId="remissionDetails">
+			<TextAreaInput id="remissionDetails" label="Remission details" placeholder="Duration, how achieved, any relapses..." bind:value={d.remissionDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

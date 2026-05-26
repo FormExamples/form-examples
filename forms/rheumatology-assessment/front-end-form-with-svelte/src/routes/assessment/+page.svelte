@@ -4,6 +4,9 @@
 	import { calculateDAS28 } from '$lib/engine/das28-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
 	import Step3JointAssessment from '$lib/components/steps/Step3JointAssessment.svelte';
@@ -16,45 +19,38 @@
 	import Step10ComorbiditiesSocial from '$lib/components/steps/Step10ComorbiditiesSocial.svelte';
 
 	function submitAssessment() {
-			const { das28Score, diseaseActivity, firedRules } = calculateDAS28(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				das28Score,
-				diseaseActivity,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { das28Score, diseaseActivity, firedRules } = calculateDAS28(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			das28Score,
+			diseaseActivity,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Rheumatology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3JointAssessment />
+	<Step4DiseaseHistory />
+	<Step5ExtraArticular />
+	<Step6LaboratoryResults />
+	<Step7CurrentMedications />
+	<Step8Allergies />
+	<Step9FunctionalAssessment />
+	<Step10ComorbiditiesSocial />
 
-<Step2ChiefComplaint />
-
-<Step3JointAssessment />
-
-<Step4DiseaseHistory />
-
-<Step5ExtraArticular />
-
-<Step6LaboratoryResults />
-
-<Step7CurrentMedications />
-
-<Step8Allergies />
-
-<Step9FunctionalAssessment />
-
-<Step10ComorbiditiesSocial />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

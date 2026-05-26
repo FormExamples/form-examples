@@ -22,48 +22,55 @@
 	}
 </script>
 
-<div class="space-y-3">
-	{#each allergies as allergy, i}
-		<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-			<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
-				<input
-					type="text"
-					placeholder="Allergen"
-					bind:value={allergy.allergen}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<input
-					type="text"
-					placeholder="Reaction"
-					bind:value={allergy.reaction}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				/>
-				<select
-					bind:value={allergy.severity}
-					class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-				>
-					<option value="">Severity</option>
-					{#each severityOptions as opt}
-						<option value={opt.value}>{opt.label}</option>
-					{/each}
-				</select>
-			</div>
+<div class="entry-list">
+	{#each allergies as allergy, i (i)}
+		<div class="entry-row">
+			<input
+				type="text"
+				class="text-input"
+				placeholder="Allergen"
+				aria-label="Allergen"
+				bind:value={allergy.allergen}
+			/>
+			<input
+				type="text"
+				class="text-input"
+				placeholder="Reaction"
+				aria-label="Reaction"
+				bind:value={allergy.reaction}
+			/>
+			<select class="select" aria-label="Severity" bind:value={allergy.severity}>
+				<option value="">Severity</option>
+				{#each severityOptions as opt}
+					<option value={opt.value}>{opt.label}</option>
+				{/each}
+			</select>
 			<button
 				type="button"
+				class="button"
+				data-variant="danger"
 				onclick={() => removeAllergy(i)}
-				class="mt-1 text-red-500 hover:text-red-700"
 				aria-label="Remove allergy"
 			>
-				&times;
+				Remove
 			</button>
 		</div>
 	{/each}
 
-	<button
-		type="button"
-		onclick={addAllergy}
-		class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-	>
+	<button type="button" class="button" onclick={addAllergy}>
 		+ Add Allergy
 	</button>
 </div>
+
+<style>
+	.entry-list { display: flex; flex-direction: column; gap: 0.5rem; }
+	.entry-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr auto;
+		gap: 0.5rem;
+		align-items: end;
+	}
+	@media (max-width: 640px) {
+		.entry-row { grid-template-columns: 1fr; }
+	}
+</style>

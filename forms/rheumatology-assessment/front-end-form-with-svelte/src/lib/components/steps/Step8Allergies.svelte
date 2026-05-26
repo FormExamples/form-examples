@@ -1,28 +1,34 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.allergies;
+
+	const yesNoOptions = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
 </script>
 
-<SectionCard title="Allergies" description="Drug allergies and latex sensitivity">
-	<h3 class="mb-2 font-semibold text-gray-800">Drug Allergies</h3>
+<Fieldset legend="Allergies">
+	<p class="hint">Drug allergies and latex sensitivity.</p>
+
+	<h3 class="section-h">Drug Allergies</h3>
 	<AllergyEntry bind:allergies={d.drugAllergies} />
 	{#if d.drugAllergies.length === 0}
-		<p class="mt-3 mb-4 text-sm text-gray-500">No drug allergies added. Click the button above to add one, or proceed to next step if you have none.</p>
+		<p class="hint">No drug allergies added.</p>
 	{/if}
 
-	<div class="mt-6">
-		<RadioGroup
-			label="Latex Allergy"
-			name="latexAllergy"
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' }
-			]}
-			bind:value={d.latexAllergy}
-		/>
-	</div>
-</SectionCard>
+	<Field label="Latex Allergy">
+		<RadioGroup label="Latex allergy">
+			{#each yesNoOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="latexAllergy" value={opt.value} bind:group={d.latexAllergy} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>.section-h { font-weight: 600; margin: 1rem 0 0.5rem; color: var(--color-text); }</style>
