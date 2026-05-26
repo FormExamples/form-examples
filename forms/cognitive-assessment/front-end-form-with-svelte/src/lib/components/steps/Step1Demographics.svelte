@@ -1,63 +1,84 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = assessment.data.demographics;
+
+	const sexOptions = [
+		{ value: 'male', label: 'Male' },
+		{ value: 'female', label: 'Female' },
+		{ value: 'other', label: 'Other' }
+	];
+
+	const handednessOptions = [
+		{ value: 'right', label: 'Right' },
+		{ value: 'left', label: 'Left' },
+		{ value: 'ambidextrous', label: 'Ambidextrous' }
+	];
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
+<Fieldset legend="Demographics">
+	<p class="hint">Basic patient information.</p>
+
+	<div class="field-grid">
+		<Field label="First Name" required inputId="firstName">
+			<TextInput id="firstName" label="First Name" required bind:value={d.firstName} />
+		</Field>
+		<Field label="Last Name" required inputId="lastName">
+			<TextInput id="lastName" label="Last Name" required bind:value={d.lastName} />
+		</Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={d.dateOfBirth} required />
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of Birth" required bind:value={d.dateOfBirth} />
+	</Field>
 
-	<RadioGroup
-		label="Sex"
-		name="sex"
-		options={[
-			{ value: 'male', label: 'Male' },
-			{ value: 'female', label: 'Female' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={d.sex}
-		required
-	/>
+	<Field label="Sex" required>
+		<RadioGroup label="Sex">
+			{#each sexOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="sex" value={opt.value} bind:group={d.sex} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<SelectInput
-		label="Education Level"
-		name="educationLevel"
-		options={[
-			{ value: 'none', label: 'No formal education' },
-			{ value: 'primary', label: 'Primary school' },
-			{ value: 'secondary', label: 'Secondary school' },
-			{ value: 'university', label: 'University/College' },
-			{ value: 'postgraduate', label: 'Postgraduate' }
-		]}
-		bind:value={d.educationLevel}
-		required
-	/>
+	<Field label="Education Level" required inputId="educationLevel">
+		<Select id="educationLevel" label="Education Level" required bind:value={d.educationLevel}>
+			<option value="">-- Select --</option>
+			<option value="none">No formal education</option>
+			<option value="primary">Primary school</option>
+			<option value="secondary">Secondary school</option>
+			<option value="university">University/College</option>
+			<option value="postgraduate">Postgraduate</option>
+		</Select>
+	</Field>
 
-	<TextInput
-		label="Primary Language"
-		name="primaryLanguage"
-		bind:value={d.primaryLanguage}
-		placeholder="e.g., English, Spanish, Mandarin..."
-		required
-	/>
+	<Field label="Primary Language" required inputId="primaryLanguage">
+		<TextInput id="primaryLanguage" label="Primary Language" required placeholder="e.g., English, Spanish, Mandarin..." bind:value={d.primaryLanguage} />
+	</Field>
 
-	<RadioGroup
-		label="Handedness"
-		name="handedness"
-		options={[
-			{ value: 'right', label: 'Right' },
-			{ value: 'left', label: 'Left' },
-			{ value: 'ambidextrous', label: 'Ambidextrous' }
-		]}
-		bind:value={d.handedness}
-	/>
-</SectionCard>
+	<Field label="Handedness">
+		<RadioGroup label="Handedness">
+			{#each handednessOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="handedness" value={opt.value} bind:group={d.handedness} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

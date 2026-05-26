@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 
 	const o = assessment.data.orientationScores;
 
@@ -27,74 +27,50 @@
 	}
 </script>
 
-<SectionCard title="Orientation" description="Orientation to time and place (10 points total)">
-	<h3 class="mb-3 text-sm font-semibold text-gray-700">Orientation to Time (5 points)</h3>
-	{#each timeItems as item}
-		<div class="mb-4 border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-			<p class="mb-2 text-sm font-medium text-gray-700">{item.label}</p>
-			<div class="flex gap-3">
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{o[item.key] === 1 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="orient-{item.key}"
-						checked={o[item.key] === 1}
-						onchange={() => setScore(item.key, 1)}
-						class="accent-primary"
-					/>
-					Correct (1)
-				</label>
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{o[item.key] === 0 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="orient-{item.key}"
-						checked={o[item.key] === 0}
-						onchange={() => setScore(item.key, 0)}
-						class="accent-primary"
-					/>
-					Incorrect (0)
-				</label>
-			</div>
+<Fieldset legend="Orientation">
+	<p class="hint">Orientation to time and place (10 points total).</p>
+
+	<h3 class="mmse-subhead">Orientation to Time (5 points)</h3>
+	{#each timeItems as item (item.key)}
+		<div class="mmse-item">
+			<p class="mmse-q">{item.label}</p>
+			<fieldset class="radio-group" aria-label={item.label}>
+				<label><input type="radio" class="radio-input" name="orient-{item.key}" checked={o[item.key] === 1} onchange={() => setScore(item.key, 1)} /> Correct (1)</label>
+				<label><input type="radio" class="radio-input" name="orient-{item.key}" checked={o[item.key] === 0} onchange={() => setScore(item.key, 0)} /> Incorrect (0)</label>
+			</fieldset>
 		</div>
 	{/each}
 
-	<h3 class="mb-3 mt-6 text-sm font-semibold text-gray-700">Orientation to Place (5 points)</h3>
-	{#each placeItems as item}
-		<div class="mb-4 border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-			<p class="mb-2 text-sm font-medium text-gray-700">{item.label}</p>
-			<div class="flex gap-3">
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{o[item.key] === 1 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="orient-{item.key}"
-						checked={o[item.key] === 1}
-						onchange={() => setScore(item.key, 1)}
-						class="accent-primary"
-					/>
-					Correct (1)
-				</label>
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{o[item.key] === 0 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="orient-{item.key}"
-						checked={o[item.key] === 0}
-						onchange={() => setScore(item.key, 0)}
-						class="accent-primary"
-					/>
-					Incorrect (0)
-				</label>
-			</div>
+	<h3 class="mmse-subhead">Orientation to Place (5 points)</h3>
+	{#each placeItems as item (item.key)}
+		<div class="mmse-item">
+			<p class="mmse-q">{item.label}</p>
+			<fieldset class="radio-group" aria-label={item.label}>
+				<label><input type="radio" class="radio-input" name="orient-{item.key}" checked={o[item.key] === 1} onchange={() => setScore(item.key, 1)} /> Correct (1)</label>
+				<label><input type="radio" class="radio-input" name="orient-{item.key}" checked={o[item.key] === 0} onchange={() => setScore(item.key, 0)} /> Incorrect (0)</label>
+			</fieldset>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.mmse-subhead {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 1rem 0 0.5rem;
+	}
+	.mmse-item {
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.mmse-item:last-child {
+		border-bottom: 0;
+	}
+	.mmse-q {
+		margin: 0 0 0.375rem;
+		font-size: 0.9375rem;
+		font-weight: 500;
+	}
+</style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 
 	const att = assessment.data.attentionScores;
 
@@ -19,38 +19,32 @@
 	}
 </script>
 
-<SectionCard title="Attention & Calculation" description="Serial 7s: Ask the patient to subtract 7 from 100 repeatedly (5 points). Alternative: spell WORLD backwards.">
-	{#each items as item}
-		<div class="mb-4 border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-			<p class="mb-2 text-sm font-medium text-gray-700">{item.label}</p>
-			<div class="flex gap-3">
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{att[item.key] === 1 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="att-{item.key}"
-						checked={att[item.key] === 1}
-						onchange={() => setScore(item.key, 1)}
-						class="accent-primary"
-					/>
-					Correct (1)
-				</label>
-				<label
-					class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-1.5 text-sm transition-colors
-						{att[item.key] === 0 ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-				>
-					<input
-						type="radio"
-						name="att-{item.key}"
-						checked={att[item.key] === 0}
-						onchange={() => setScore(item.key, 0)}
-						class="accent-primary"
-					/>
-					Incorrect (0)
-				</label>
-			</div>
+<Fieldset legend="Attention & Calculation">
+	<p class="hint">Serial 7s: Ask the patient to subtract 7 from 100 repeatedly (5 points). Alternative: spell WORLD backwards.</p>
+
+	{#each items as item (item.key)}
+		<div class="mmse-item">
+			<p class="mmse-q">{item.label}</p>
+			<fieldset class="radio-group" aria-label={item.label}>
+				<label><input type="radio" class="radio-input" name="att-{item.key}" checked={att[item.key] === 1} onchange={() => setScore(item.key, 1)} /> Correct (1)</label>
+				<label><input type="radio" class="radio-input" name="att-{item.key}" checked={att[item.key] === 0} onchange={() => setScore(item.key, 0)} /> Incorrect (0)</label>
+			</fieldset>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.mmse-item {
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.mmse-item:last-child {
+		border-bottom: 0;
+	}
+	.mmse-q {
+		margin: 0 0 0.375rem;
+		font-size: 0.9375rem;
+		font-weight: 500;
+	}
+</style>
