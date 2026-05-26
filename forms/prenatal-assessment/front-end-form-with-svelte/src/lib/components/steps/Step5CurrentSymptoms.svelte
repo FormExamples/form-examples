@@ -1,62 +1,33 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.currentSymptoms;
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+
+	const symptoms: { key: 'nausea' | 'bleeding' | 'headache' | 'visionChanges' | 'edema' | 'abdominalPain' | 'reducedFetalMovement'; label: string }[] = [
+		{ key: 'nausea', label: 'Nausea or vomiting' },
+		{ key: 'bleeding', label: 'Vaginal bleeding' },
+		{ key: 'headache', label: 'Persistent or severe headache' },
+		{ key: 'visionChanges', label: 'Vision changes (blurring, flashing lights, spots)' },
+		{ key: 'edema', label: 'Swelling / edema (face, hands, or feet)' },
+		{ key: 'abdominalPain', label: 'Abdominal pain or cramping' },
+		{ key: 'reducedFetalMovement', label: 'Reduced fetal movement' }
 	];
 </script>
 
-<SectionCard title="Current Symptoms" description="Report any symptoms you are currently experiencing">
-	<RadioGroup
-		label="Nausea or vomiting"
-		name="nausea"
-		options={yesNoOptions}
-		bind:value={s.nausea}
-	/>
+<Fieldset legend="Current Symptoms">
+	<p class="hint">Report any symptoms you are currently experiencing.</p>
 
-	<RadioGroup
-		label="Vaginal bleeding"
-		name="bleeding"
-		options={yesNoOptions}
-		bind:value={s.bleeding}
-	/>
-
-	<RadioGroup
-		label="Persistent or severe headache"
-		name="headache"
-		options={yesNoOptions}
-		bind:value={s.headache}
-	/>
-
-	<RadioGroup
-		label="Vision changes (blurring, flashing lights, spots)"
-		name="visionChanges"
-		options={yesNoOptions}
-		bind:value={s.visionChanges}
-	/>
-
-	<RadioGroup
-		label="Swelling / edema (face, hands, or feet)"
-		name="edema"
-		options={yesNoOptions}
-		bind:value={s.edema}
-	/>
-
-	<RadioGroup
-		label="Abdominal pain or cramping"
-		name="abdominalPain"
-		options={yesNoOptions}
-		bind:value={s.abdominalPain}
-	/>
-
-	<RadioGroup
-		label="Reduced fetal movement"
-		name="reducedFetalMovement"
-		options={yesNoOptions}
-		bind:value={s.reducedFetalMovement}
-	/>
-</SectionCard>
+	{#each symptoms as sym (sym.key)}
+		<Field label={sym.label}>
+			<RadioGroup label={sym.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={sym.key} value={opt.value} bind:group={s[sym.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+</Fieldset>

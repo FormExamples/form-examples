@@ -1,56 +1,52 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.mentalHealthScreening;
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const anxietyOptions = [
+		{ value: 'none', label: 'None' },
+		{ value: 'mild', label: 'Mild' },
+		{ value: 'moderate', label: 'Moderate' },
+		{ value: 'severe', label: 'Severe' }
+	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const safetyOptions = [
+		{ value: 'no', label: 'Yes, I feel safe' },
+		{ value: 'yes', label: 'No, I do not feel safe' }
 	];
 </script>
 
-<SectionCard title="Mental Health Screening" description="Edinburgh Postnatal Depression Scale and wellbeing assessment">
-	<NumberInput
-		label="Edinburgh Postnatal Depression Scale (EPDS) Score"
-		name="edinburghScore"
-		bind:value={m.edinburghScore}
-		min={0}
-		max={30}
-		required
-	/>
-	<p class="mb-4 -mt-2 text-xs text-gray-500">
-		Score 0-9: Low risk | Score 10-12: Possible depression | Score 13+: Probable depression
-	</p>
+<Fieldset legend="Mental Health Screening">
+	<p class="hint">Edinburgh Postnatal Depression Scale and wellbeing assessment.</p>
 
-	<SelectInput
-		label="Anxiety Level"
-		name="anxietyLevel"
-		options={[
-			{ value: 'none', label: 'None' },
-			{ value: 'mild', label: 'Mild' },
-			{ value: 'moderate', label: 'Moderate' },
-			{ value: 'severe', label: 'Severe' }
-		]}
-		bind:value={m.anxietyLevel}
-	/>
+	<Field label="Edinburgh Postnatal Depression Scale (EPDS) Score" required inputId="edinburghScore" description="0-9 Low risk · 10-12 Possible depression · 13+ Probable depression">
+		<NumberInput id="edinburghScore" label="EPDS score" min={0} max={30} required bind:value={m.edinburghScore} />
+	</Field>
 
-	<RadioGroup
-		label="Do you have a support system (partner, family, friends)?"
-		name="supportSystem"
-		options={yesNoOptions}
-		bind:value={m.supportSystem}
-	/>
+	<Field label="Anxiety Level" inputId="anxietyLevel">
+		<Select id="anxietyLevel" label="Anxiety level" bind:value={m.anxietyLevel}>
+			<option value="">-- Select --</option>
+			{#each anxietyOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<RadioGroup
-		label="Domestic violence screening: Do you feel safe at home?"
-		name="domesticViolenceScreen"
-		options={[
-			{ value: 'no', label: 'Yes, I feel safe' },
-			{ value: 'yes', label: 'No, I do not feel safe' }
-		]}
-		bind:value={m.domesticViolenceScreen}
-	/>
-</SectionCard>
+	<Field label="Do you have a support system (partner, family, friends)?">
+		<RadioGroup label="Support system">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="supportSystem" value={opt.value} bind:group={m.supportSystem} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Domestic violence screening: Do you feel safe at home?">
+		<RadioGroup label="Safety at home">
+			{#each safetyOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="domesticViolenceScreen" value={opt.value} bind:group={m.domesticViolenceScreen} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

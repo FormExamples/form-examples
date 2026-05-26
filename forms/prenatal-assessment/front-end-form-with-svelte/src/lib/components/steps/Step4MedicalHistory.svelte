@@ -1,49 +1,34 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.medicalHistory;
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const flags: { key: 'autoimmune' | 'thyroid' | 'diabetes' | 'hypertension'; label: string }[] = [
+		{ key: 'autoimmune', label: 'Autoimmune disease (e.g., lupus, rheumatoid arthritis)' },
+		{ key: 'thyroid', label: 'Thyroid disorder (hypo- or hyperthyroidism)' },
+		{ key: 'diabetes', label: 'Pre-existing diabetes (Type 1 or Type 2)' },
+		{ key: 'hypertension', label: 'Pre-existing hypertension' }
 	];
 </script>
 
-<SectionCard title="Medical History" description="Pre-existing conditions and chronic diseases">
-	<TextArea
-		label="Chronic Conditions"
-		name="chronicConditions"
-		bind:value={m.chronicConditions}
-		placeholder="List any chronic conditions (e.g., asthma, epilepsy, kidney disease)..."
-	/>
+<Fieldset legend="Medical History">
+	<p class="hint">Pre-existing conditions and chronic diseases.</p>
 
-	<RadioGroup
-		label="Autoimmune disease (e.g., lupus, rheumatoid arthritis)"
-		name="autoimmune"
-		options={yesNoOptions}
-		bind:value={m.autoimmune}
-	/>
+	<Field label="Chronic Conditions" inputId="chronicConditions">
+		<TextAreaInput id="chronicConditions" label="Chronic conditions" rows={3} bind:value={m.chronicConditions} />
+	</Field>
 
-	<RadioGroup
-		label="Thyroid disorder (hypo- or hyperthyroidism)"
-		name="thyroid"
-		options={yesNoOptions}
-		bind:value={m.thyroid}
-	/>
-
-	<RadioGroup
-		label="Pre-existing diabetes (Type 1 or Type 2)"
-		name="diabetes"
-		options={yesNoOptions}
-		bind:value={m.diabetes}
-	/>
-
-	<RadioGroup
-		label="Pre-existing hypertension"
-		name="hypertension"
-		options={yesNoOptions}
-		bind:value={m.hypertension}
-	/>
-</SectionCard>
+	{#each flags as f (f.key)}
+		<Field label={f.label}>
+			<RadioGroup label={f.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={f.key} value={opt.value} bind:group={m[f.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+</Fieldset>

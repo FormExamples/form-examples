@@ -1,71 +1,64 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const p = assessment.data.pregnancyDetails;
+
+	const conceptionOptions = [
+		{ value: 'natural', label: 'Natural conception' },
+		{ value: 'ivf', label: 'IVF (In vitro fertilisation)' },
+		{ value: 'iui', label: 'IUI (Intrauterine insemination)' },
+		{ value: 'icsi', label: 'ICSI (Intracytoplasmic sperm injection)' },
+		{ value: 'donor-egg', label: 'Donor egg' },
+		{ value: 'donor-embryo', label: 'Donor embryo' },
+		{ value: 'other', label: 'Other' }
+	];
+	const placentaOptions = [
+		{ value: 'anterior', label: 'Anterior' },
+		{ value: 'posterior', label: 'Posterior' },
+		{ value: 'fundal', label: 'Fundal' },
+		{ value: 'lateral', label: 'Lateral' },
+		{ value: 'low-lying', label: 'Low-lying' },
+		{ value: 'previa', label: 'Previa' }
+	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Pregnancy Details" description="Current pregnancy information">
-	<NumberInput
-		label="Gestational Age"
-		name="gestationalWeeks"
-		bind:value={p.gestationalWeeks}
-		min={1}
-		max={45}
-		unit="weeks"
-		required
-	/>
+<Fieldset legend="Pregnancy Details">
+	<p class="hint">Current pregnancy information.</p>
 
-	<TextInput
-		label="Estimated Due Date"
-		name="estimatedDueDate"
-		type="date"
-		bind:value={p.estimatedDueDate}
-		required
-	/>
+	<Field label="Gestational Age (weeks)" required inputId="gestationalWeeks">
+		<NumberInput id="gestationalWeeks" label="Gestational age" min={1} max={45} required bind:value={p.gestationalWeeks} />
+	</Field>
 
-	<SelectInput
-		label="Conception Method"
-		name="conceptionMethod"
-		options={[
-			{ value: 'natural', label: 'Natural conception' },
-			{ value: 'ivf', label: 'IVF (In vitro fertilisation)' },
-			{ value: 'iui', label: 'IUI (Intrauterine insemination)' },
-			{ value: 'icsi', label: 'ICSI (Intracytoplasmic sperm injection)' },
-			{ value: 'donor-egg', label: 'Donor egg' },
-			{ value: 'donor-embryo', label: 'Donor embryo' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={p.conceptionMethod}
-		required
-	/>
+	<Field label="Estimated Due Date" required inputId="estimatedDueDate">
+		<DateInput id="estimatedDueDate" label="Estimated due date" required bind:value={p.estimatedDueDate} />
+	</Field>
 
-	<RadioGroup
-		label="Multiple Gestation (twins, triplets, etc.)"
-		name="multipleGestation"
-		options={[
-			{ value: 'yes', label: 'Yes' },
-			{ value: 'no', label: 'No' }
-		]}
-		bind:value={p.multipleGestation}
-		required
-	/>
+	<Field label="Conception Method" required inputId="conceptionMethod">
+		<Select id="conceptionMethod" label="Conception method" required bind:value={p.conceptionMethod}>
+			<option value="">-- Select --</option>
+			{#each conceptionOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Placenta Location"
-		name="placentaLocation"
-		options={[
-			{ value: 'anterior', label: 'Anterior' },
-			{ value: 'posterior', label: 'Posterior' },
-			{ value: 'fundal', label: 'Fundal' },
-			{ value: 'lateral', label: 'Lateral' },
-			{ value: 'low-lying', label: 'Low-lying' },
-			{ value: 'previa', label: 'Previa' }
-		]}
-		bind:value={p.placentaLocation}
-	/>
-</SectionCard>
+	<Field label="Multiple Gestation (twins, triplets, etc.)" required>
+		<RadioGroup label="Multiple gestation">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="multipleGestation" value={opt.value} bind:group={p.multipleGestation} required /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Placenta Location" inputId="placentaLocation">
+		<Select id="placentaLocation" label="Placenta location" bind:value={p.placentaLocation}>
+			<option value="">-- Select --</option>
+			{#each placentaOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
+</Fieldset>

@@ -1,23 +1,36 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	const d = assessment.data.demographics;
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
+<Fieldset legend="Demographics">
+	<p class="hint">Basic patient information.</p>
+
+	<div class="field-grid">
+		<Field label="First Name" required inputId="firstName">
+			<TextInput id="firstName" label="First name" required bind:value={d.firstName} />
+		</Field>
+		<Field label="Last Name" required inputId="lastName">
+			<TextInput id="lastName" label="Last name" required bind:value={d.lastName} />
+		</Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={d.dateOfBirth} required />
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of birth" required bind:value={d.dateOfBirth} />
+	</Field>
 
-	<div class="mb-4">
-		<label class="mb-1 block text-sm font-medium text-gray-700">Sex</label>
-		<div class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-600">
-			Female (prenatal assessment)
-		</div>
-	</div>
-</SectionCard>
+	<Field label="Sex" description="Female (prenatal assessment)">
+		<p class="static-value">Female</p>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+	.static-value { margin: 0; padding: 0.5rem 0.625rem; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 0.375rem; color: var(--color-muted); }
+</style>

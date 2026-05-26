@@ -1,56 +1,56 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const o = assessment.data.obstetricHistory;
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+
+	const prevs: { key: 'preeclampsia' | 'gestationalDiabetes' | 'pretermBirth' | 'cesareanSection'; name: string; label: string }[] = [
+		{ key: 'preeclampsia', name: 'prevPreeclampsia', label: 'Previous preeclampsia' },
+		{ key: 'gestationalDiabetes', name: 'prevGDM', label: 'Previous gestational diabetes' },
+		{ key: 'pretermBirth', name: 'prevPreterm', label: 'Previous preterm birth (before 37 weeks)' },
+		{ key: 'cesareanSection', name: 'prevCesarean', label: 'Previous cesarean section' }
 	];
 </script>
 
-<SectionCard title="Obstetric History" description="Previous pregnancies and complications">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Gravida (total pregnancies)" name="gravida" bind:value={o.gravida} min={0} max={20} required />
-		<NumberInput label="Para (births after 24 weeks)" name="para" bind:value={o.para} min={0} max={20} required />
+<Fieldset legend="Obstetric History">
+	<p class="hint">Previous pregnancies and complications.</p>
+
+	<div class="field-grid">
+		<Field label="Gravida (total pregnancies)" required inputId="gravida">
+			<NumberInput id="gravida" label="Gravida" min={0} max={20} required bind:value={o.gravida} />
+		</Field>
+		<Field label="Para (births after 24 weeks)" required inputId="para">
+			<NumberInput id="para" label="Para" min={0} max={20} required bind:value={o.para} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Abortions / Miscarriages" name="abortions" bind:value={o.abortions} min={0} max={20} />
-		<NumberInput label="Living Children" name="livingChildren" bind:value={o.livingChildren} min={0} max={20} />
+	<div class="field-grid">
+		<Field label="Abortions / Miscarriages" inputId="abortions">
+			<NumberInput id="abortions" label="Abortions" min={0} max={20} bind:value={o.abortions} />
+		</Field>
+		<Field label="Living Children" inputId="livingChildren">
+			<NumberInput id="livingChildren" label="Living children" min={0} max={20} bind:value={o.livingChildren} />
+		</Field>
 	</div>
 
-	<div class="mt-4 border-t border-gray-200 pt-4">
-		<h3 class="mb-3 text-sm font-semibold text-gray-700">Previous Complications</h3>
+	<h3 class="step-subhead">Previous Complications</h3>
+	{#each prevs as p (p.key)}
+		<Field label={p.label}>
+			<RadioGroup label={p.label}>
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={p.name} value={opt.value} bind:group={o.previousComplications[p.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+</Fieldset>
 
-		<RadioGroup
-			label="Previous preeclampsia"
-			name="prevPreeclampsia"
-			options={yesNoOptions}
-			bind:value={o.previousComplications.preeclampsia}
-		/>
-
-		<RadioGroup
-			label="Previous gestational diabetes"
-			name="prevGDM"
-			options={yesNoOptions}
-			bind:value={o.previousComplications.gestationalDiabetes}
-		/>
-
-		<RadioGroup
-			label="Previous preterm birth (before 37 weeks)"
-			name="prevPreterm"
-			options={yesNoOptions}
-			bind:value={o.previousComplications.pretermBirth}
-		/>
-
-		<RadioGroup
-			label="Previous cesarean section"
-			name="prevCesarean"
-			options={yesNoOptions}
-			bind:value={o.previousComplications.cesareanSection}
-		/>
-	</div>
-</SectionCard>
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+	.step-subhead { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+</style>
