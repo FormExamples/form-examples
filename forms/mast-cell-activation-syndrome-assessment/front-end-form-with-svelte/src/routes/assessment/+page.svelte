@@ -4,6 +4,9 @@
 	import { calculateMCASScore } from '$lib/engine/symptom-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2SymptomOverview from '$lib/components/steps/Step2SymptomOverview.svelte';
 	import Step3DermatologicalSymptoms from '$lib/components/steps/Step3DermatologicalSymptoms.svelte';
@@ -16,46 +19,39 @@
 	import Step10CurrentTreatment from '$lib/components/steps/Step10CurrentTreatment.svelte';
 
 	function submitAssessment() {
-			const { symptomScore, mcasCategoryLabel, organSystemsAffected, firedRules } = calculateMCASScore(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				symptomScore,
-				mcasCategory: mcasCategoryLabel,
-				organSystemsAffected,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { symptomScore, mcasCategoryLabel, organSystemsAffected, firedRules } = calculateMCASScore(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			symptomScore,
+			mcasCategory: mcasCategoryLabel,
+			organSystemsAffected,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="MCAS Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2SymptomOverview />
+	<Step3DermatologicalSymptoms />
+	<Step4GastrointestinalSymptoms />
+	<Step5CardiovascularSymptoms />
+	<Step6RespiratorySymptoms />
+	<Step7NeurologicalSymptoms />
+	<Step8TriggersPatterns />
+	<Step9LaboratoryResults />
+	<Step10CurrentTreatment />
 
-<Step2SymptomOverview />
-
-<Step3DermatologicalSymptoms />
-
-<Step4GastrointestinalSymptoms />
-
-<Step5CardiovascularSymptoms />
-
-<Step6RespiratorySymptoms />
-
-<Step7NeurologicalSymptoms />
-
-<Step8TriggersPatterns />
-
-<Step9LaboratoryResults />
-
-<Step10CurrentTreatment />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

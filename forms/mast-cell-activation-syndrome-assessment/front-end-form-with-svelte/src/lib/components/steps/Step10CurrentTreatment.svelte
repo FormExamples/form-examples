@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const t = assessment.data.currentTreatment;
@@ -10,32 +11,50 @@
 	];
 </script>
 
-<SectionCard title="Current Treatment" description="Indicate which treatments you are currently receiving for MCAS">
-	<RadioGroup
-		label="Are you taking antihistamines (H1 and/or H2 blockers)?"
-		name="antihistamines"
-		options={yesNo}
-		bind:value={t.antihistamines}
-	/>
+<Fieldset legend="Current Treatment">
+	<p class="hint">Indicate which treatments you are currently receiving for MCAS.</p>
 
-	<RadioGroup
-		label="Are you taking mast cell stabilizers (e.g., cromolyn sodium, ketotifen)?"
-		name="mastCellStabilizers"
-		options={yesNo}
-		bind:value={t.mastCellStabilizers}
-	/>
+	<Field label="Are you taking antihistamines (H1 and/or H2 blockers)?">
+		<RadioGroup label="Antihistamines">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="antihistamines" value={opt.value} bind:group={t.antihistamines} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Are you taking leukotriene inhibitors (e.g., montelukast, zafirlukast)?"
-		name="leukotrienInhibitors"
-		options={yesNo}
-		bind:value={t.leukotrienInhibitors}
-	/>
+	<Field label="Are you taking mast cell stabilizers (e.g., cromolyn sodium, ketotifen)?">
+		<RadioGroup label="Mast cell stabilizers">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="mastCellStabilizers" value={opt.value} bind:group={t.mastCellStabilizers} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Do you have an epinephrine auto-injector (e.g., EpiPen) prescribed?"
-		name="epinephrine"
-		options={yesNo}
-		bind:value={t.epinephrine}
-	/>
-</SectionCard>
+	<Field label="Are you taking leukotriene inhibitors (e.g., montelukast, zafirlukast)?">
+		<RadioGroup label="Leukotriene inhibitors">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="leukotrienInhibitors" value={opt.value} bind:group={t.leukotrienInhibitors} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Do you have an epinephrine auto-injector (e.g., EpiPen) prescribed?">
+		<RadioGroup label="Epinephrine">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="epinephrine" value={opt.value} bind:group={t.epinephrine} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

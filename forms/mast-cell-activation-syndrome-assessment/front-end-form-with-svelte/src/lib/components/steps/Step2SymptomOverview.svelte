@@ -1,52 +1,48 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const s = assessment.data.symptomOverview;
 </script>
 
-<SectionCard title="Symptom Overview" description="General information about your symptoms and their impact">
-	<TextInput
-		label="When did your symptoms first begin?"
-		name="onsetDate"
-		type="date"
-		bind:value={s.onsetDate}
-		required
-	/>
+<Fieldset legend="Symptom Overview">
+	<p class="hint">General information about your symptoms and their impact.</p>
 
-	<TextInput
-		label="How long have you had symptoms?"
-		name="symptomDuration"
-		bind:value={s.symptomDuration}
-		placeholder="e.g., 6 months, 2 years, since childhood"
-		required
-	/>
+	<Field label="When did your symptoms first begin?" required inputId="onsetDate">
+		<DateInput id="onsetDate" label="Onset date" required bind:value={s.onsetDate} />
+	</Field>
 
-	<SelectInput
-		label="How often do you experience symptoms?"
-		name="symptomFrequency"
-		options={[
-			{ value: 'rarely', label: 'Rarely (less than monthly)' },
-			{ value: 'sometimes', label: 'Sometimes (monthly)' },
-			{ value: 'often', label: 'Often (weekly)' },
-			{ value: 'daily', label: 'Daily' }
-		]}
-		bind:value={s.symptomFrequency}
-		required
-	/>
+	<Field label="How long have you had symptoms?" required inputId="symptomDuration">
+		<TextInput
+			id="symptomDuration"
+			label="Symptom duration"
+			required
+			placeholder="e.g., 6 months, 2 years, since childhood"
+			bind:value={s.symptomDuration}
+		/>
+	</Field>
 
-	<SelectInput
-		label="How much do symptoms affect your quality of life?"
-		name="qualityOfLife"
-		options={[
-			{ value: 'none', label: 'No impact' },
-			{ value: 'mild', label: 'Mild impact - can manage daily activities' },
-			{ value: 'moderate', label: 'Moderate impact - some activities limited' },
-			{ value: 'severe', label: 'Severe impact - significantly limited' }
-		]}
-		bind:value={s.qualityOfLife}
-		required
-	/>
-</SectionCard>
+	<Field label="How often do you experience symptoms?" required inputId="symptomFrequency">
+		<Select id="symptomFrequency" label="Symptom frequency" required bind:value={s.symptomFrequency}>
+			<option value="">-- Select --</option>
+			<option value="rarely">Rarely (less than monthly)</option>
+			<option value="sometimes">Sometimes (monthly)</option>
+			<option value="often">Often (weekly)</option>
+			<option value="daily">Daily</option>
+		</Select>
+	</Field>
+
+	<Field label="How much do symptoms affect your quality of life?" required inputId="qualityOfLife">
+		<Select id="qualityOfLife" label="Quality of life impact" required bind:value={s.qualityOfLife}>
+			<option value="">-- Select --</option>
+			<option value="none">No impact</option>
+			<option value="mild">Mild impact - can manage daily activities</option>
+			<option value="moderate">Moderate impact - some activities limited</option>
+			<option value="severe">Severe impact - significantly limited</option>
+		</Select>
+	</Field>
+</Fieldset>

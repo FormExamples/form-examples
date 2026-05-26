@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { severityOptions, frequencyOptions } from '$lib/engine/symptom-rules';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import type { SymptomSeverity } from '$lib/engine/types';
 
 	const d = assessment.data.dermatologicalSymptoms;
@@ -19,40 +21,42 @@
 	}
 </script>
 
-<SectionCard title="Dermatological Symptoms" description="Rate the severity and frequency of your skin-related symptoms">
-	{#each symptoms as symptom}
-		<div class="mb-6 border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-			<p class="mb-1 text-sm font-medium text-gray-700">{symptom.label}</p>
-			<p class="mb-3 text-xs text-gray-400">{symptom.desc}</p>
+<Fieldset legend="Dermatological Symptoms">
+	<p class="hint">Rate the severity and frequency of your skin-related symptoms.</p>
 
-			<div class="mb-2">
-				<p class="mb-2 text-xs font-medium text-gray-600">Severity</p>
-				<div class="flex flex-wrap gap-2">
-					{#each severityOptions as opt}
-						<label
-							class="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors
-								{d[symptom.key].severity === opt.value ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-						>
+	{#each symptoms as symptom (symptom.key)}
+		<div class="symptom-row">
+			<Field label={symptom.label} description={symptom.desc}>
+				<RadioGroup label={`${symptom.label} severity`}>
+					{#each severityOptions as opt (opt.value)}
+						<label>
 							<input
 								type="radio"
-								name="severity-{symptom.key}"
+								class="radio-input"
+								name={`severity-${symptom.key}`}
 								value={opt.value}
 								checked={d[symptom.key].severity === opt.value}
 								onchange={() => setSeverity(symptom.key, opt.value)}
-								class="text-primary accent-primary"
 							/>
 							{opt.label}
 						</label>
 					{/each}
-				</div>
-			</div>
+				</RadioGroup>
+			</Field>
 
-			<SelectInput
-				label="Frequency"
-				name="freq-{symptom.key}"
-				options={frequencyOptions.map(o => ({ value: o.value, label: o.label }))}
-				bind:value={d[symptom.key].frequency}
-			/>
+			<Field label={`${symptom.label} frequency`} inputId={`freq-${symptom.key}`}>
+				<Select id={`freq-${symptom.key}`} label="Frequency" bind:value={d[symptom.key].frequency}>
+					<option value="">-- Select --</option>
+					{#each frequencyOptions as opt (opt.value)}
+						<option value={opt.value}>{opt.label}</option>
+					{/each}
+				</Select>
+			</Field>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.symptom-row { padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); margin-bottom: 1rem; }
+	.symptom-row:last-child { border-bottom: 0; margin-bottom: 0; }
+</style>

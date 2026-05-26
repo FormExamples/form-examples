@@ -1,28 +1,22 @@
 <script lang="ts">
-	// CheckboxGroup — Lily Svelte headless contract.
+	// Fieldset — Lily Svelte headless contract.
 	import type { Snippet } from 'svelte';
 
 	let {
 		class: className = '',
-		label,
+		legend,
 		disabled = false,
 		children,
 		...restProps
 	}: {
-		label: string;
+		legend: string;
 		disabled?: boolean;
 		children: Snippet;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<!-- svelte-ignore a11y_no_redundant_roles -->
-<fieldset
-	class={`checkbox-group ${className}`}
-	role="group"
-	aria-label={label}
-	{disabled}
-	{...restProps}
->
+<fieldset class={`fieldset ${className}`} {disabled} {...restProps}>
+	<legend class="fieldset-legend">{legend}</legend>
 	{@render children?.()}
 </fieldset>
