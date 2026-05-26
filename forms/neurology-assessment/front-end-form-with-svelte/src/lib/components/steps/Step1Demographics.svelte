@@ -1,33 +1,58 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+
+	const d = assessment.data.demographics;
+	const sexOptions = [
+		{ value: 'male', label: 'Male' },
+		{ value: 'female', label: 'Female' },
+		{ value: 'other', label: 'Other' }
+	];
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={assessment.data.demographics.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={assessment.data.demographics.lastName} required />
+<Fieldset legend="Demographics">
+	<p class="hint">Basic patient information.</p>
+
+	<div class="field-grid">
+		<Field label="First Name" required inputId="firstName">
+			<TextInput id="firstName" label="First Name" required bind:value={d.firstName} />
+		</Field>
+		<Field label="Last Name" required inputId="lastName">
+			<TextInput id="lastName" label="Last Name" required bind:value={d.lastName} />
+		</Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={assessment.data.demographics.dateOfBirth} required />
+	<Field label="Date of Birth" required inputId="dob">
+		<DateInput id="dob" label="Date of Birth" required bind:value={d.dateOfBirth} />
+	</Field>
 
-	<RadioGroup
-		label="Sex"
-		name="sex"
-		options={[
-			{ value: 'male', label: 'Male' },
-			{ value: 'female', label: 'Female' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={assessment.data.demographics.sex}
-		required
-	/>
+	<Field label="Sex" required>
+		<RadioGroup label="Sex">
+			{#each sexOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="sex" value={opt.value} bind:group={d.sex} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Weight" name="weight" bind:value={assessment.data.demographics.weight} unit="kg" min={1} max={400} />
-		<NumberInput label="Height" name="height" bind:value={assessment.data.demographics.height} unit="cm" min={50} max={250} />
+	<div class="field-grid">
+		<Field label="Weight (kg)" inputId="weight">
+			<NumberInput id="weight" label="Weight" min={1} max={400} bind:value={d.weight} />
+		</Field>
+		<Field label="Height (cm)" inputId="height">
+			<NumberInput id="height" label="Height" min={50} max={250} bind:value={d.height} />
+		</Field>
 	</div>
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

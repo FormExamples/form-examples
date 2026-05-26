@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const m = assessment.data.motorSensoryExam;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 
 	const strengthOptions = [
 		{ value: '0', label: '0 - No contraction' },
@@ -21,92 +19,116 @@
 	];
 </script>
 
-<SectionCard title="Motor & Sensory Examination" description="Strength, tone, reflexes, sensation, coordination, and gait">
-	<h3 class="mb-3 font-semibold text-gray-800">Muscle Strength (MRC Scale)</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Upper limb - Left" name="strengthUL" options={strengthOptions} bind:value={m.strengthUpperLeft} />
-		<SelectInput label="Upper limb - Right" name="strengthUR" options={strengthOptions} bind:value={m.strengthUpperRight} />
-		<SelectInput label="Lower limb - Left" name="strengthLL" options={strengthOptions} bind:value={m.strengthLowerLeft} />
-		<SelectInput label="Lower limb - Right" name="strengthLR" options={strengthOptions} bind:value={m.strengthLowerRight} />
+<Fieldset legend="Motor and Sensory Examination">
+	<p class="hint">Strength, tone, reflexes, sensation, coordination, and gait.</p>
+
+	<div class="field-grid">
+		<Field label="Upper limb - Left" inputId="strengthUL">
+			<Select id="strengthUL" label="Upper limb left" bind:value={m.strengthUpperLeft}>
+				<option value="">-- Select --</option>
+				{#each strengthOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Upper limb - Right" inputId="strengthUR">
+			<Select id="strengthUR" label="Upper limb right" bind:value={m.strengthUpperRight}>
+				<option value="">-- Select --</option>
+				{#each strengthOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Lower limb - Left" inputId="strengthLL">
+			<Select id="strengthLL" label="Lower limb left" bind:value={m.strengthLowerLeft}>
+				<option value="">-- Select --</option>
+				{#each strengthOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Lower limb - Right" inputId="strengthLR">
+			<Select id="strengthLR" label="Lower limb right" bind:value={m.strengthLowerRight}>
+				<option value="">-- Select --</option>
+				{#each strengthOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
 	</div>
 
-	<SelectInput
-		label="Tone"
-		name="tone"
-		options={[
-			{ value: 'normal', label: 'Normal' },
-			{ value: 'increased', label: 'Increased (spasticity/rigidity)' },
-			{ value: 'decreased', label: 'Decreased (flaccid)' },
-			{ value: 'rigid', label: 'Rigid (lead-pipe/cogwheel)' }
-		]}
-		bind:value={m.tone}
-	/>
+	<Field label="Tone" inputId="tone">
+		<Select id="tone" label="Tone" bind:value={m.tone}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal</option>
+			<option value="increased">Increased (spasticity/rigidity)</option>
+			<option value="decreased">Decreased (flaccid)</option>
+			<option value="rigid">Rigid (lead-pipe/cogwheel)</option>
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Reflexes"
-		name="reflexes"
-		options={[
-			{ value: '0', label: '0 - Absent' },
-			{ value: '1', label: '1 - Diminished' },
-			{ value: '2', label: '2 - Normal' },
-			{ value: '3', label: '3 - Brisk' },
-			{ value: '4', label: '4 - Clonus' }
-		]}
-		bind:value={m.reflexes}
-	/>
+	<Field label="Reflexes" inputId="reflexes">
+		<Select id="reflexes" label="Reflexes" bind:value={m.reflexes}>
+			<option value="">-- Select --</option>
+			<option value="0">0 - Absent</option>
+			<option value="1">1 - Diminished</option>
+			<option value="2">2 - Normal</option>
+			<option value="3">3 - Brisk</option>
+			<option value="4">4 - Clonus</option>
+		</Select>
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
-			label="Plantar response - Left"
-			name="plantarLeft"
-			options={[
-				{ value: 'flexor', label: 'Flexor (normal)' },
-				{ value: 'extensor', label: 'Extensor (Babinski positive)' }
-			]}
-			bind:value={m.plantarResponseLeft}
-		/>
-		<SelectInput
-			label="Plantar response - Right"
-			name="plantarRight"
-			options={[
-				{ value: 'flexor', label: 'Flexor (normal)' },
-				{ value: 'extensor', label: 'Extensor (Babinski positive)' }
-			]}
-			bind:value={m.plantarResponseRight}
-		/>
+	<div class="field-grid">
+		<Field label="Plantar response - Left" inputId="plantarLeft">
+			<Select id="plantarLeft" label="Plantar left" bind:value={m.plantarResponseLeft}>
+				<option value="">-- Select --</option>
+				<option value="flexor">Flexor (normal)</option>
+				<option value="extensor">Extensor (Babinski positive)</option>
+			</Select>
+		</Field>
+		<Field label="Plantar response - Right" inputId="plantarRight">
+			<Select id="plantarRight" label="Plantar right" bind:value={m.plantarResponseRight}>
+				<option value="">-- Select --</option>
+				<option value="flexor">Flexor (normal)</option>
+				<option value="extensor">Extensor (Babinski positive)</option>
+			</Select>
+		</Field>
 	</div>
 
-	<SelectInput
-		label="Sensation"
-		name="sensation"
-		options={[
-			{ value: 'normal', label: 'Normal' },
-			{ value: 'decreased', label: 'Decreased' },
-			{ value: 'absent', label: 'Absent' },
-			{ value: 'paraesthesia', label: 'Paraesthesia (tingling/pins and needles)' }
-		]}
-		bind:value={m.sensation}
-	/>
+	<Field label="Sensation" inputId="sensation">
+		<Select id="sensation" label="Sensation" bind:value={m.sensation}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal</option>
+			<option value="decreased">Decreased</option>
+			<option value="absent">Absent</option>
+			<option value="paraesthesia">Paraesthesia</option>
+		</Select>
+	</Field>
 	{#if m.sensation !== 'normal' && m.sensation !== ''}
-		<TextArea label="Sensory details (distribution)" name="sensationDetails" bind:value={m.sensationDetails} />
+		<Field label="Sensory details (distribution)" inputId="sensationDetails">
+			<TextAreaInput id="sensationDetails" label="Sensation details" rows={2} bind:value={m.sensationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Coordination normal?" name="coordination" options={yesNo} bind:value={m.coordination} />
+	<Field label="Coordination normal?">
+		<RadioGroup label="Coordination">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="coordination" value={opt.value} bind:group={m.coordination} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.coordination === 'no'}
-		<TextArea label="Coordination details" name="coordDetails" bind:value={m.coordinationDetails} placeholder="e.g., finger-nose, heel-shin abnormalities" />
+		<Field label="Coordination details" inputId="coordDetails">
+			<TextAreaInput id="coordDetails" label="Coordination details" rows={2} placeholder="e.g., finger-nose, heel-shin abnormalities" bind:value={m.coordinationDetails} />
+		</Field>
 	{/if}
 
-	<SelectInput
-		label="Gait"
-		name="gait"
-		options={[
-			{ value: 'normal', label: 'Normal' },
-			{ value: 'ataxic', label: 'Ataxic (unsteady/broad-based)' },
-			{ value: 'spastic', label: 'Spastic (stiff/scissoring)' },
-			{ value: 'steppage', label: 'Steppage (high-stepping/foot drop)' },
-			{ value: 'antalgic', label: 'Antalgic (limping)' },
-			{ value: 'unable', label: 'Unable to walk' }
-		]}
-		bind:value={m.gait}
-	/>
-</SectionCard>
+	<Field label="Gait" inputId="gait">
+		<Select id="gait" label="Gait" bind:value={m.gait}>
+			<option value="">-- Select --</option>
+			<option value="normal">Normal</option>
+			<option value="ataxic">Ataxic</option>
+			<option value="spastic">Spastic</option>
+			<option value="steppage">Steppage</option>
+			<option value="antalgic">Antalgic</option>
+			<option value="unable">Unable to walk</option>
+		</Select>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

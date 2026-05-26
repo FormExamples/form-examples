@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
 
 	function startAssessment() {
 		assessment.reset();
@@ -18,43 +20,24 @@
 			</div>
 			<h1 class="text-3xl font-bold text-gray-900">Neurology Assessment</h1>
 			<p class="mt-3 text-gray-600">
-				Complete this questionnaire to generate a neurological assessment report.
-				Your responses will be used to calculate an NIHSS score and identify any
-				issues that need to be highlighted for the neurologist.
+				NIHSS-based neurological evaluation with headache, seizure, motor/sensory, and cognitive sub-assessments.
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm">
+		<Panel label="What to expect" class="text-left">
 			<h2 class="mb-3 font-semibold text-gray-900">What to expect</h2>
 			<ul class="space-y-2 text-sm text-gray-600">
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					10 sections covering your neurological assessment
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					Includes NIHSS stroke scale scoring (0-42)
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					You can navigate back to change answers at any time
-				</li>
-				<li class="flex items-start gap-2">
-					<span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>
-					A report will be generated at the end with a downloadable PDF
-				</li>
+				<li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>10 sections covering neurological assessment</li>
+				<li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>Takes approximately 15-20 minutes</li>
+				<li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>You can navigate back to change answers</li>
+				<li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span>PDF report generated at the end</li>
 			</ul>
+		</Panel>
+
+		<div class="button-group justify-center">
+			<Button data-variant="primary" onclick={startAssessment}>Begin Assessment</Button>
 		</div>
 
-		<button
-			onclick={startAssessment}
-			class="mt-6 w-full rounded-lg bg-primary px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-primary-dark"
-		>
-			Begin Assessment
-		</button>
-
-		<p class="mt-4 text-xs text-gray-400">
-			This tool is for clinical support only. All assessments must be reviewed by a qualified neurologist.
-		</p>
+		<p class="mt-4 text-xs text-gray-400">This tool is for clinical support only.</p>
 	</div>
 </div>

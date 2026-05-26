@@ -1,46 +1,75 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	const s = assessment.data.seizureHistory;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Seizure History" description="Seizure type, frequency, and management">
-	<RadioGroup label="Do you have a history of seizures?" name="seizureHistory" options={yesNo} bind:value={s.seizureHistory} />
+<Fieldset legend="Seizure History">
+	<p class="hint">Seizure type, frequency, and management.</p>
+
+	<Field label="Do you have a history of seizures?">
+		<RadioGroup label="Seizure history">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="seizureHistory" value={opt.value} bind:group={s.seizureHistory} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if s.seizureHistory === 'yes'}
-		<SelectInput
-			label="Seizure type"
-			name="seizureType"
-			options={[
-				{ value: 'focal', label: 'Focal (partial)' },
-				{ value: 'generalised-tonic-clonic', label: 'Generalised tonic-clonic' },
-				{ value: 'absence', label: 'Absence' },
-				{ value: 'myoclonic', label: 'Myoclonic' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={s.seizureType}
-		/>
+		<Field label="Seizure type" inputId="seizureType">
+			<Select id="seizureType" label="Seizure type" bind:value={s.seizureType}>
+				<option value="">-- Select --</option>
+				<option value="focal">Focal (partial)</option>
+				<option value="generalised-tonic-clonic">Generalised tonic-clonic</option>
+				<option value="absence">Absence</option>
+				<option value="myoclonic">Myoclonic</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
 
-		<TextInput label="Frequency" name="seizureFreq" bind:value={s.frequency} placeholder="e.g., 2 per month, 1 per year" />
-		<TextInput label="Date of last seizure" name="lastSeizure" type="date" bind:value={s.lastSeizureDate} />
-		<TextArea label="Known triggers" name="seizureTriggers" bind:value={s.triggers} placeholder="e.g., sleep deprivation, alcohol, flashing lights" />
+		<Field label="Frequency" inputId="seizureFreq">
+			<TextInput id="seizureFreq" label="Frequency" placeholder="e.g., 2 per month, 1 per year" bind:value={s.frequency} />
+		</Field>
 
-		<RadioGroup label="Do you experience an aura before seizures?" name="seizureAura" options={yesNo} bind:value={s.aura} />
+		<Field label="Date of last seizure" inputId="lastSeizure">
+			<DateInput id="lastSeizure" label="Last seizure" bind:value={s.lastSeizureDate} />
+		</Field>
+
+		<Field label="Known triggers" inputId="seizureTriggers">
+			<TextAreaInput id="seizureTriggers" label="Triggers" rows={3} placeholder="e.g., sleep deprivation, alcohol, flashing lights" bind:value={s.triggers} />
+		</Field>
+
+		<Field label="Do you experience an aura before seizures?">
+			<RadioGroup label="Seizure aura">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="seizureAura" value={opt.value} bind:group={s.aura} />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 		{#if s.aura === 'yes'}
-			<TextArea label="Describe the aura" name="seizureAuraDesc" bind:value={s.auraDescription} />
+			<Field label="Describe the aura" inputId="seizureAuraDesc">
+				<TextAreaInput id="seizureAuraDesc" label="Aura description" rows={2} bind:value={s.auraDescription} />
+			</Field>
 		{/if}
 
-		<TextArea label="Post-ictal state" name="postIctal" bind:value={s.postIctalState} placeholder="e.g., confusion, drowsiness, duration" />
+		<Field label="Post-ictal state" inputId="postIctal">
+			<TextAreaInput id="postIctal" label="Post-ictal state" rows={2} placeholder="e.g., confusion, drowsiness, duration" bind:value={s.postIctalState} />
+		</Field>
 
-		<RadioGroup label="History of status epilepticus?" name="statusEpilepticus" options={yesNo} bind:value={s.statusEpilepticus} />
+		<Field label="History of status epilepticus?">
+			<RadioGroup label="Status epilepticus">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="statusEpilepticus" value={opt.value} bind:group={s.statusEpilepticus} />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

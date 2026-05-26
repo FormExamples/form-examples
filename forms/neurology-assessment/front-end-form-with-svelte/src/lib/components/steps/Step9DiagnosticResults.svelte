@@ -1,61 +1,89 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.diagnosticResults;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Diagnostic Results" description="Imaging, EEG, EMG/NCS, and lumbar puncture findings">
-	<RadioGroup label="Has MRI/CT brain been performed?" name="mriCt" options={yesNo} bind:value={d.mriCtPerformed} />
+<Fieldset legend="Diagnostic Results">
+	<p class="hint">Imaging, EEG, EMG/NCS, and lumbar puncture findings.</p>
+
+	<Field label="Has MRI/CT brain been performed?">
+		<RadioGroup label="MRI/CT performed">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="mriCt" value={opt.value} bind:group={d.mriCtPerformed} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.mriCtPerformed === 'yes'}
-		<SelectInput
-			label="MRI/CT finding"
-			name="mriCtFinding"
-			options={[
-				{ value: 'normal', label: 'Normal' },
-				{ value: 'infarct', label: 'Infarct' },
-				{ value: 'haemorrhage', label: 'Haemorrhage' },
-				{ value: 'mass', label: 'Mass/tumour' },
-				{ value: 'demyelination', label: 'Demyelination' },
-				{ value: 'atrophy', label: 'Atrophy' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={d.mriCtFinding}
-		/>
-		<TextArea label="Imaging details" name="mriCtDetails" bind:value={d.mriCtDetails} placeholder="Location, size, and clinical correlation" />
+		<Field label="MRI/CT finding" inputId="mriCtFinding">
+			<Select id="mriCtFinding" label="MRI/CT finding" bind:value={d.mriCtFinding}>
+				<option value="">-- Select --</option>
+				<option value="normal">Normal</option>
+				<option value="infarct">Infarct</option>
+				<option value="haemorrhage">Haemorrhage</option>
+				<option value="mass">Mass/tumour</option>
+				<option value="demyelination">Demyelination</option>
+				<option value="atrophy">Atrophy</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
+		<Field label="Imaging details" inputId="mriCtDetails">
+			<TextAreaInput id="mriCtDetails" label="MRI/CT details" rows={2} placeholder="Location, size, and clinical correlation" bind:value={d.mriCtDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has EEG been performed?" name="eeg" options={yesNo} bind:value={d.eegPerformed} />
+	<Field label="Has EEG been performed?">
+		<RadioGroup label="EEG performed">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="eeg" value={opt.value} bind:group={d.eegPerformed} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.eegPerformed === 'yes'}
-		<SelectInput
-			label="EEG finding"
-			name="eegFinding"
-			options={[
-				{ value: 'normal', label: 'Normal' },
-				{ value: 'epileptiform', label: 'Epileptiform discharges' },
-				{ value: 'slow-wave', label: 'Generalised slowing' },
-				{ value: 'focal-abnormality', label: 'Focal abnormality' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={d.eegFinding}
-		/>
-		<TextArea label="EEG details" name="eegDetails" bind:value={d.eegDetails} />
+		<Field label="EEG finding" inputId="eegFinding">
+			<Select id="eegFinding" label="EEG finding" bind:value={d.eegFinding}>
+				<option value="">-- Select --</option>
+				<option value="normal">Normal</option>
+				<option value="epileptiform">Epileptiform discharges</option>
+				<option value="slow-wave">Generalised slowing</option>
+				<option value="focal-abnormality">Focal abnormality</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
+		<Field label="EEG details" inputId="eegDetails">
+			<TextAreaInput id="eegDetails" label="EEG details" rows={2} bind:value={d.eegDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has EMG/nerve conduction study been performed?" name="emgNcs" options={yesNo} bind:value={d.emgNcsPerformed} />
+	<Field label="Has EMG/nerve conduction study been performed?">
+		<RadioGroup label="EMG/NCS performed">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="emgNcs" value={opt.value} bind:group={d.emgNcsPerformed} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.emgNcsPerformed === 'yes'}
-		<TextArea label="EMG/NCS findings" name="emgNcsDetails" bind:value={d.emgNcsDetails} placeholder="e.g., demyelinating neuropathy, axonal loss, myopathic changes" />
+		<Field label="EMG/NCS findings" inputId="emgNcsDetails">
+			<TextAreaInput id="emgNcsDetails" label="EMG/NCS details" rows={2} placeholder="e.g., demyelinating neuropathy..." bind:value={d.emgNcsDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has lumbar puncture been performed?" name="lp" options={yesNo} bind:value={d.lumbarPuncturePerformed} />
+	<Field label="Has lumbar puncture been performed?">
+		<RadioGroup label="LP performed">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="lp" value={opt.value} bind:group={d.lumbarPuncturePerformed} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.lumbarPuncturePerformed === 'yes'}
-		<TextArea label="Lumbar puncture findings" name="lpDetails" bind:value={d.lumbarPunctureDetails} placeholder="e.g., opening pressure, CSF analysis, oligoclonal bands" />
+		<Field label="Lumbar puncture findings" inputId="lpDetails">
+			<TextAreaInput id="lpDetails" label="LP details" rows={2} placeholder="e.g., opening pressure, CSF analysis..." bind:value={d.lumbarPunctureDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

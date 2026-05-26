@@ -1,42 +1,63 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.chiefComplaint;
+	const onsetOptions = [{ value: 'sudden', label: 'Sudden' }, { value: 'gradual', label: 'Gradual' }];
+	const progressionOptions = [
+		{ value: 'improving', label: 'Improving' },
+		{ value: 'stable', label: 'Stable' },
+		{ value: 'worsening', label: 'Worsening' }
+	];
 </script>
 
-<SectionCard title="Chief Complaint" description="Primary neurological symptom and presentation">
-	<TextArea label="Primary neurological symptom" name="primarySymptom" bind:value={c.primarySymptom} placeholder="Describe the main symptom (e.g., weakness, numbness, headache, seizure)" required />
+<Fieldset legend="Chief Complaint">
+	<p class="hint">Primary neurological symptom and presentation.</p>
 
-	<TextInput label="Onset date" name="onsetDate" type="date" bind:value={c.onsetDate} />
+	<Field label="Primary neurological symptom" required inputId="primarySymptom">
+		<TextAreaInput id="primarySymptom" label="Primary symptom" rows={3} required placeholder="Describe the main symptom..." bind:value={c.primarySymptom} />
+	</Field>
 
-	<RadioGroup
-		label="Onset type"
-		name="onsetType"
-		options={[
-			{ value: 'sudden', label: 'Sudden' },
-			{ value: 'gradual', label: 'Gradual' }
-		]}
-		bind:value={c.onsetType}
-	/>
+	<Field label="Onset date" inputId="onsetDate">
+		<DateInput id="onsetDate" label="Onset date" bind:value={c.onsetDate} />
+	</Field>
 
-	<TextInput label="Duration" name="duration" bind:value={c.duration} placeholder="e.g., 2 hours, 3 days, ongoing" />
+	<Field label="Onset type">
+		<RadioGroup label="Onset type">
+			{#each onsetOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="onsetType" value={opt.value} bind:group={c.onsetType} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Progression"
-		name="progression"
-		options={[
-			{ value: 'improving', label: 'Improving' },
-			{ value: 'stable', label: 'Stable' },
-			{ value: 'worsening', label: 'Worsening' }
-		]}
-		bind:value={c.progression}
-	/>
+	<Field label="Duration" inputId="duration">
+		<TextInput id="duration" label="Duration" placeholder="e.g., 2 hours, 3 days, ongoing" bind:value={c.duration} />
+	</Field>
 
-	<TextArea label="Associated symptoms" name="associatedSymptoms" bind:value={c.associatedSymptoms} placeholder="e.g., nausea, vomiting, vision changes, speech difficulty" />
+	<Field label="Progression">
+		<RadioGroup label="Progression">
+			{#each progressionOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="progression" value={opt.value} bind:group={c.progression} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextArea label="Precipitating event" name="precipitatingEvent" bind:value={c.precipitatingEvent} placeholder="e.g., trauma, exertion, stress, none" />
-</SectionCard>
+	<Field label="Associated symptoms" inputId="associatedSymptoms">
+		<TextAreaInput id="associatedSymptoms" label="Associated symptoms" rows={3} placeholder="e.g., nausea, vomiting, vision changes..." bind:value={c.associatedSymptoms} />
+	</Field>
+
+	<Field label="Precipitating event" inputId="precipitatingEvent">
+		<TextAreaInput id="precipitatingEvent" label="Precipitating event" rows={2} placeholder="e.g., trauma, exertion, stress, none" bind:value={c.precipitatingEvent} />
+	</Field>
+</Fieldset>
