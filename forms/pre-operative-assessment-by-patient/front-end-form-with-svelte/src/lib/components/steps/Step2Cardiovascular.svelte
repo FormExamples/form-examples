@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextInput from '$lib/components/ui/TextInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const c = assessment.data.cardiovascular;
 	const yesNo = [
@@ -13,47 +15,42 @@
 	];
 </script>
 
-<SectionCard title="Cardiovascular" description="Heart and blood vessel conditions">
-	<RadioGroup label="Do you have high blood pressure (hypertension)?" name="htn" options={yesNo} bind:value={c.hypertension} />
+<Fieldset legend="Cardiovascular">
+	<p class="hint">Heart and blood vessel conditions</p>
+	<Field label="Do you have high blood pressure (hypertension)?"><RadioGroup label="Do you have high blood pressure (hypertension)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="htn" value={opt.value} bind:group={c.hypertension}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.hypertension === 'yes'}
-		<RadioGroup label="Is it well controlled with medication?" name="htnCtrl" options={yesNo} bind:value={c.hypertensionControlled} required />
+		<Field label="Is it well controlled with medication?" required><RadioGroup label="Is it well controlled with medication?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="htnCtrl" value={opt.value} bind:group={c.hypertensionControlled} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{/if}
 
-	<RadioGroup label="Do you have ischaemic heart disease (angina, previous heart attack)?" name="ihd" options={yesNo} bind:value={c.ischemicHeartDisease} />
+	<Field label="Do you have ischaemic heart disease (angina, previous heart attack)?"><RadioGroup label="Do you have ischaemic heart disease (angina, previous heart attack)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="ihd" value={opt.value} bind:group={c.ischemicHeartDisease}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.ischemicHeartDisease === 'yes'}
-		<TextInput label="Please provide details" name="ihdDetails" bind:value={c.ihdDetails} />
+		<Field label="Please provide details" inputId="ihdDetails"><TextInput id="ihdDetails" label="Please provide details" bind:value={c.ihdDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have heart failure?" name="hf" options={yesNo} bind:value={c.heartFailure} />
+	<Field label="Do you have heart failure?"><RadioGroup label="Do you have heart failure?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hf" value={opt.value} bind:group={c.heartFailure}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.heartFailure === 'yes'}
-		<SelectInput
-			label="NYHA Class"
-			name="nyha"
-			options={[
+		<Field label="NYHA Class" required inputId="nyha"><Select id="nyha" label="NYHA Class" required bind:value={c.heartFailureNYHA}><option value="">-- Select --</option>{#each [
 				{ value: '1', label: 'Class I - No limitation' },
 				{ value: '2', label: 'Class II - Mild limitation' },
 				{ value: '3', label: 'Class III - Marked limitation' },
 				{ value: '4', label: 'Class IV - Severe limitation' }
-			]}
-			bind:value={c.heartFailureNYHA}
-			required
-		/>
+			] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
 	{/if}
 
-	<RadioGroup label="Do you have any heart valve problems?" name="valve" options={yesNo} bind:value={c.valvularDisease} />
+	<Field label="Do you have any heart valve problems?"><RadioGroup label="Do you have any heart valve problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="valve" value={opt.value} bind:group={c.valvularDisease}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.valvularDisease === 'yes'}
-		<TextInput label="Please provide details" name="valveDetails" bind:value={c.valvularDetails} />
+		<Field label="Please provide details" inputId="valveDetails"><TextInput id="valveDetails" label="Please provide details" bind:value={c.valvularDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have an irregular heartbeat (arrhythmia)?" name="arrhy" options={yesNo} bind:value={c.arrhythmia} />
+	<Field label="Do you have an irregular heartbeat (arrhythmia)?"><RadioGroup label="Do you have an irregular heartbeat (arrhythmia)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="arrhy" value={opt.value} bind:group={c.arrhythmia}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.arrhythmia === 'yes'}
-		<TextInput label="Type of arrhythmia" name="arrhyType" bind:value={c.arrhythmiaType} />
+		<Field label="Type of arrhythmia" inputId="arrhyType"><TextInput id="arrhyType" label="Type of arrhythmia" bind:value={c.arrhythmiaType} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have a pacemaker or defibrillator?" name="pacemaker" options={yesNo} bind:value={c.pacemaker} />
+	<Field label="Do you have a pacemaker or defibrillator?"><RadioGroup label="Do you have a pacemaker or defibrillator?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="pacemaker" value={opt.value} bind:group={c.pacemaker}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Have you had a heart attack in the last 6 months?" name="recentMI" options={yesNo} bind:value={c.recentMI} />
+	<Field label="Have you had a heart attack in the last 6 months?"><RadioGroup label="Have you had a heart attack in the last 6 months?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="recentMI" value={opt.value} bind:group={c.recentMI}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if c.recentMI === 'yes'}
 		<NumberInput label="How many weeks ago?" name="miWeeks" bind:value={c.recentMIWeeks} min={0} max={26} required />
 	{/if}
-</SectionCard>
+</Fieldset>

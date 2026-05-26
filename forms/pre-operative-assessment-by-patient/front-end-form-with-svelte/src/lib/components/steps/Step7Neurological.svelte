@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const n = assessment.data.neurological;
 	const yesNo = [
@@ -11,21 +13,22 @@
 	];
 </script>
 
-<SectionCard title="Neurological" description="Brain and nerve conditions">
-	<RadioGroup label="Have you had a stroke or TIA (mini-stroke)?" name="stroke" options={yesNo} bind:value={n.strokeOrTIA} />
+<Fieldset legend="Neurological">
+	<p class="hint">Brain and nerve conditions</p>
+	<Field label="Have you had a stroke or TIA (mini-stroke)?"><RadioGroup label="Have you had a stroke or TIA (mini-stroke)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="stroke" value={opt.value} bind:group={n.strokeOrTIA}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if n.strokeOrTIA === 'yes'}
-		<TextInput label="Please provide details (when, residual effects)" name="strokeDetails" bind:value={n.strokeDetails} />
+		<Field label="Please provide details (when, residual effects)" inputId="strokeDetails"><TextInput id="strokeDetails" label="Please provide details (when, residual effects)" bind:value={n.strokeDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have epilepsy?" name="epilepsy" options={yesNo} bind:value={n.epilepsy} />
+	<Field label="Do you have epilepsy?"><RadioGroup label="Do you have epilepsy?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="epilepsy" value={opt.value} bind:group={n.epilepsy}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if n.epilepsy === 'yes'}
-		<RadioGroup label="Is your epilepsy well controlled?" name="epilepsyCtrl" options={yesNo} bind:value={n.epilepsyControlled} required />
+		<Field label="Is your epilepsy well controlled?" required><RadioGroup label="Is your epilepsy well controlled?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="epilepsyCtrl" value={opt.value} bind:group={n.epilepsyControlled} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{/if}
 
-	<RadioGroup label="Do you have any neuromuscular disease (e.g. MS, MND, myasthenia)?" name="neuromusc" options={yesNo} bind:value={n.neuromuscularDisease} />
+	<Field label="Do you have any neuromuscular disease (e.g. MS, MND, myasthenia)?"><RadioGroup label="Do you have any neuromuscular disease (e.g. MS, MND, myasthenia)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="neuromusc" value={opt.value} bind:group={n.neuromuscularDisease}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if n.neuromuscularDisease === 'yes'}
-		<TextInput label="Please provide details" name="neuroDetails" bind:value={n.neuromuscularDetails} />
+		<Field label="Please provide details" inputId="neuroDetails"><TextInput id="neuroDetails" label="Please provide details" bind:value={n.neuromuscularDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Do you have raised intracranial pressure?" name="icp" options={yesNo} bind:value={n.raisedICP} />
-</SectionCard>
+	<Field label="Do you have raised intracranial pressure?"><RadioGroup label="Do you have raised intracranial pressure?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="icp" value={opt.value} bind:group={n.raisedICP}/> {opt.label}</label>{/each}</RadioGroup></Field>
+</Fieldset>

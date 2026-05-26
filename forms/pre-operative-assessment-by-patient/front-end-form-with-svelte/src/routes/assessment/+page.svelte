@@ -4,6 +4,9 @@
 	import { calculateASA } from '$lib/engine/asa-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2Cardiovascular from '$lib/components/steps/Step2Cardiovascular.svelte';
 	import Step3Respiratory from '$lib/components/steps/Step3Respiratory.svelte';
@@ -22,56 +25,43 @@
 	import Step16Pregnancy from '$lib/components/steps/Step16Pregnancy.svelte';
 
 	function submitAssessment() {
-			const { asaGrade, firedRules } = calculateASA(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				asaGrade,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { asaGrade, firedRules } = calculateASA(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			asaGrade,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Pre-Operative Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2Cardiovascular />
+	<Step3Respiratory />
+	<Step4Renal />
+	<Step5Hepatic />
+	<Step6Endocrine />
+	<Step7Neurological />
+	<Step8Haematological />
+	<Step9MusculoskeletalAirway />
+	<Step10Gastrointestinal />
+	<Step11Medications />
+	<Step12Allergies />
+	<Step13PreviousAnaesthesia />
+	<Step14SocialHistory />
+	<Step15FunctionalCapacity />
+	<Step16Pregnancy />
 
-<Step2Cardiovascular />
-
-<Step3Respiratory />
-
-<Step4Renal />
-
-<Step5Hepatic />
-
-<Step6Endocrine />
-
-<Step7Neurological />
-
-<Step8Haematological />
-
-<Step9MusculoskeletalAirway />
-
-<Step10Gastrointestinal />
-
-<Step11Medications />
-
-<Step12Allergies />
-
-<Step13PreviousAnaesthesia />
-
-<Step14SocialHistory />
-
-<Step15FunctionalCapacity />
-
-<Step16Pregnancy />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

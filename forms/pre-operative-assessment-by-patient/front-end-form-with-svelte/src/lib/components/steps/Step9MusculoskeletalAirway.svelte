@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const m = assessment.data.musculoskeletalAirway;
 	const yesNo = [
@@ -12,31 +14,27 @@
 	];
 </script>
 
-<SectionCard title="Musculoskeletal & Airway" description="Joint, spine and airway assessment">
-	<RadioGroup label="Do you have rheumatoid arthritis?" name="ra" options={yesNo} bind:value={m.rheumatoidArthritis} />
+<Fieldset legend="Musculoskeletal & Airway">
+	<p class="hint">Joint, spine and airway assessment</p>
+	<Field label="Do you have rheumatoid arthritis?"><RadioGroup label="Do you have rheumatoid arthritis?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="ra" value={opt.value} bind:group={m.rheumatoidArthritis}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Do you have any cervical spine (neck) problems?" name="cspine" options={yesNo} bind:value={m.cervicalSpineIssues} />
+	<Field label="Do you have any cervical spine (neck) problems?"><RadioGroup label="Do you have any cervical spine (neck) problems?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="cspine" value={opt.value} bind:group={m.cervicalSpineIssues}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Do you have limited neck movement?" name="neckMov" options={yesNo} bind:value={m.limitedNeckMovement} />
+	<Field label="Do you have limited neck movement?"><RadioGroup label="Do you have limited neck movement?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="neckMov" value={opt.value} bind:group={m.limitedNeckMovement}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Do you have limited mouth opening?" name="mouthOpen" options={yesNo} bind:value={m.limitedMouthOpening} />
+	<Field label="Do you have limited mouth opening?"><RadioGroup label="Do you have limited mouth opening?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mouthOpen" value={opt.value} bind:group={m.limitedMouthOpening}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Do you have any dental issues (loose/capped teeth, dentures)?" name="dental" options={yesNo} bind:value={m.dentalIssues} />
+	<Field label="Do you have any dental issues (loose/capped teeth, dentures)?"><RadioGroup label="Do you have any dental issues (loose/capped teeth, dentures)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="dental" value={opt.value} bind:group={m.dentalIssues}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if m.dentalIssues === 'yes'}
-		<TextInput label="Please provide details" name="dentalDetails" bind:value={m.dentalDetails} />
+		<Field label="Please provide details" inputId="dentalDetails"><TextInput id="dentalDetails" label="Please provide details" bind:value={m.dentalDetails} /></Field>
 	{/if}
 
-	<RadioGroup label="Have you ever been told you had a difficult airway?" name="diffAirway" options={yesNo} bind:value={m.previousDifficultAirway} />
+	<Field label="Have you ever been told you had a difficult airway?"><RadioGroup label="Have you ever been told you had a difficult airway?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="diffAirway" value={opt.value} bind:group={m.previousDifficultAirway}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<SelectInput
-		label="Mallampati Score (if known)"
-		name="mallampati"
-		options={[
+	<Field label="Mallampati Score (if known)" inputId="mallampati"><Select id="mallampati" label="Mallampati Score (if known)" bind:value={m.mallampatiScore}><option value="">-- Select --</option>{#each [
 			{ value: '1', label: 'Class 1' },
 			{ value: '2', label: 'Class 2' },
 			{ value: '3', label: 'Class 3' },
 			{ value: '4', label: 'Class 4' }
-		]}
-		bind:value={m.mallampatiScore}
-	/>
-</SectionCard>
+		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+</Fieldset>

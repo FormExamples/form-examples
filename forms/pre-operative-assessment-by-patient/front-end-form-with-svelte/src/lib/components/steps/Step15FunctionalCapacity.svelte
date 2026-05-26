@@ -1,9 +1,11 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { estimateMETs } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
 
 	const f = assessment.data.functionalCapacity;
 	const yesNo = [
@@ -16,19 +18,15 @@
 	});
 </script>
 
-<SectionCard title="Functional Capacity" description="Your ability to perform daily activities and exercise">
-	<SelectInput
-		label="What is the most strenuous activity you can do without becoming short of breath?"
-		name="exercise"
-		options={[
+<Fieldset legend="Functional Capacity">
+	<p class="hint">Your ability to perform daily activities and exercise</p>
+	<Field label="What is the most strenuous activity you can do without becoming short of breath?" inputId="exercise"><Select id="exercise" label="What is the most strenuous activity you can do without becoming short of breath?" bind:value={f.exerciseTolerance}><option value="">-- Select --</option>{#each [
 			{ value: 'unable', label: 'Unable to perform daily activities' },
 			{ value: 'light-housework', label: 'Light housework / walking around the house' },
 			{ value: 'climb-stairs', label: 'Climb a flight of stairs / walk uphill' },
 			{ value: 'moderate-exercise', label: 'Moderate exercise (jogging, cycling)' },
 			{ value: 'vigorous-exercise', label: 'Vigorous exercise (running, swimming laps)' }
-		]}
-		bind:value={f.exerciseTolerance}
-	/>
+		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
 
 	{#if f.estimatedMETs !== null}
 		<div class="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm">
@@ -41,7 +39,7 @@
 		</div>
 	{/if}
 
-	<RadioGroup label="Do you use any mobility aids (wheelchair, walker, stick)?" name="mobilityAids" options={yesNo} bind:value={f.mobilityAids} />
+	<Field label="Do you use any mobility aids (wheelchair, walker, stick)?"><RadioGroup label="Do you use any mobility aids (wheelchair, walker, stick)?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mobilityAids" value={opt.value} bind:group={f.mobilityAids}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup label="Has your ability to exercise declined recently?" name="recentDecline" options={yesNo} bind:value={f.recentDecline} />
-</SectionCard>
+	<Field label="Has your ability to exercise declined recently?"><RadioGroup label="Has your ability to exercise declined recently?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="recentDecline" value={opt.value} bind:group={f.recentDecline}/> {opt.label}</label>{/each}</RadioGroup></Field>
+</Fieldset>

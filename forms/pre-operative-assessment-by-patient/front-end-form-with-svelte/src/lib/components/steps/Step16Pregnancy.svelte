@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const p = assessment.data.pregnancy;
 	const yesNo = [
@@ -11,12 +13,13 @@
 	];
 </script>
 
-<SectionCard title="Pregnancy" description="This section applies to females of childbearing age">
-	<RadioGroup label="Is there any possibility you could be pregnant?" name="possPregnant" options={yesNo} bind:value={p.possiblyPregnant} />
+<Fieldset legend="Pregnancy">
+	<p class="hint">This section applies to females of childbearing age</p>
+	<Field label="Is there any possibility you could be pregnant?"><RadioGroup label="Is there any possibility you could be pregnant?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="possPregnant" value={opt.value} bind:group={p.possiblyPregnant}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if p.possiblyPregnant === 'yes'}
-		<RadioGroup label="Has pregnancy been confirmed?" name="pregConfirmed" options={yesNo} bind:value={p.pregnancyConfirmed} />
+		<Field label="Has pregnancy been confirmed?"><RadioGroup label="Has pregnancy been confirmed?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="pregConfirmed" value={opt.value} bind:group={p.pregnancyConfirmed}/> {opt.label}</label>{/each}</RadioGroup></Field>
 		{#if p.pregnancyConfirmed === 'yes'}
 			<NumberInput label="Gestation" name="gestWeeks" bind:value={p.gestationWeeks} unit="weeks" min={1} max={42} />
 		{/if}
 	{/if}
-</SectionCard>
+</Fieldset>

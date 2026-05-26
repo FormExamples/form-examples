@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextInput from '$lib/components/ui/TextInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
+	import { calculateBMI, bmiCategory } from '$lib/engine/utils';
 
 	const d = assessment.data.demographics;
 
@@ -15,25 +18,20 @@
 	});
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information">
+<Fieldset legend="Demographics">
+	<p class="hint">Basic patient information</p>
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
-		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
+		<Field label="First Name" required inputId="firstName"><TextInput id="firstName" label="First Name" required bind:value={d.firstName} /></Field>
+		<Field label="Last Name" required inputId="lastName"><TextInput id="lastName" label="Last Name" required bind:value={d.lastName} /></Field>
 	</div>
 
-	<TextInput label="Date of Birth" name="dob" type="date" bind:value={d.dateOfBirth} required />
+	<Field label="Date of Birth" required inputId="dob"><DateInput id="dob" label="Date of Birth" required bind:value={d.dateOfBirth} /></Field>
 
-	<RadioGroup
-		label="Sex"
-		name="sex"
-		options={[
+	<Field label="Sex" required><RadioGroup label="Sex">{#each [
 			{ value: 'male', label: 'Male' },
 			{ value: 'female', label: 'Female' },
 			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={d.sex}
-		required
-	/>
+		] as opt (opt.value)}<label><input type="radio" class="radio-input" name="sex" value={opt.value} bind:group={d.sex} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-3">
 		<NumberInput label="Weight" name="weight" bind:value={d.weight} unit="kg" min={1} max={400} required />
@@ -51,17 +49,11 @@
 		</div>
 	</div>
 
-	<TextInput label="Planned Procedure" name="procedure" bind:value={d.plannedProcedure} required />
+	<Field label="Planned Procedure" required inputId="procedure"><TextInput id="procedure" label="Planned Procedure" required bind:value={d.plannedProcedure} /></Field>
 
-	<SelectInput
-		label="Procedure Urgency"
-		name="urgency"
-		options={[
+	<Field label="Procedure Urgency" required inputId="urgency"><Select id="urgency" label="Procedure Urgency" required bind:value={d.procedureUrgency}><option value="">-- Select --</option>{#each [
 			{ value: 'elective', label: 'Elective' },
 			{ value: 'urgent', label: 'Urgent' },
 			{ value: 'emergency', label: 'Emergency' }
-		]}
-		bind:value={d.procedureUrgency}
-		required
-	/>
-</SectionCard>
+		] as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}</Select></Field>
+</Fieldset>
