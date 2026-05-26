@@ -1,4 +1,10 @@
 <script lang="ts">
+	// SectionCard — Lily Svelte headless contract.
+	//
+	// Renders the form's section as a <fieldset class="fieldset"> with a
+	// fieldset-legend so that the Lily HTML class contract applies. The
+	// optional `description` becomes a Lily <p class="hint"> directly below
+	// the legend.
 	import type { Snippet } from 'svelte';
 
 	let {
@@ -12,14 +18,10 @@
 	} = $props();
 </script>
 
-<div class="mx-auto max-w-2xl">
-	<div class="mb-6">
-		<h2 class="text-2xl font-bold text-gray-900">{title}</h2>
-		{#if description}
-			<p class="mt-1 text-sm text-gray-500">{description}</p>
-		{/if}
-	</div>
-	<div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-		{@render children()}
-	</div>
-</div>
+<fieldset class="fieldset">
+	<legend class="fieldset-legend">{title}</legend>
+	{#if description}
+		<p class="hint">{description}</p>
+	{/if}
+	{@render children()}
+</fieldset>

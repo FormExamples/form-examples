@@ -1,4 +1,8 @@
 <script lang="ts">
+	// NumberInput — Lily Svelte headless contract.
+	//
+	// Renders a Lily .field wrapper around a Lily .number-input. Preserves
+	// the explicit null handling for empty input values.
 	let {
 		label,
 		name,
@@ -30,11 +34,11 @@
 	}
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
-		{label}
-		{#if unit}<span class="text-gray-500">({unit})</span>{/if}
-		{#if required}<span class="text-red-500">*</span>{/if}
+<div class="field">
+	<label class="label" for={name} data-required={required || undefined}>
+		{label}{#if unit}
+			<span class="hint" style="display:inline; margin-left:0.25rem">({unit})</span>
+		{/if}
 	</label>
 	<input
 		id={name}
@@ -44,8 +48,8 @@
 		{max}
 		{step}
 		{required}
+		class="number-input"
 		value={value ?? ''}
 		oninput={handleInput}
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
 	/>
 </div>
