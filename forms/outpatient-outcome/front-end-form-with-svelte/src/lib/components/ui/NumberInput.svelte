@@ -1,54 +1,62 @@
 <script lang="ts">
-	let {
-		label,
-		name,
-		value = $bindable<number | null>(null),
-		min,
-		max,
-		step = 1,
-		unit = '',
-		required = false,
-		placeholder = ''
-	}: {
-		label: string;
-		name: string;
-		value: number | null;
-		min?: number;
-		max?: number;
-		step?: number;
-		unit?: string;
-		required?: boolean;
-		placeholder?: string;
-	} = $props();
+  // NumberInput — Lily Svelte headless contract.
+  let {
+    class: className = '',
+    label = '',
+    name = undefined,
+    value = $bindable<number | null>(null),
+    min = undefined,
+    max = undefined,
+    step = 1 as number | string,
+    unit = '',
+    required = false,
+    disabled = false,
+    placeholder = '',
+    ...restProps
+  }: {
+    label?: string;
+    name?: string;
+    value?: number | null;
+    min?: number;
+    max?: number;
+    step?: number | string;
+    unit?: string;
+    required?: boolean;
+    disabled?: boolean;
+    placeholder?: string;
+    [key: string]: unknown;
+  } = $props();
 
-	function handleInput(e: Event) {
-		const target = e.target as HTMLInputElement;
-		if (target.value === '') {
-			value = null;
-		} else {
-			const num = Number(target.value);
-			value = isNaN(num) ? null : num;
-		}
-	}
+  function handleInput(e: Event) {
+    const target = e.target as HTMLInputElement;
+    if (target.value === '') value = null;
+    else {
+      const num = Number(target.value);
+      value = isNaN(num) ? null : num;
+    }
+  }
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
-		{label}
-		{#if unit}<span class="text-gray-500">({unit})</span>{/if}
-		{#if required}<span class="text-red-500">*</span>{/if}
-	</label>
-	<input
-		id={name}
-		{name}
-		type="number"
-		{min}
-		{max}
-		{step}
-		{required}
-		{placeholder}
-		value={value ?? ''}
-		oninput={handleInput}
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
-	/>
+<div class="field">
+  {#if label}
+    <label class="label" for={name} data-required={required || undefined}>
+      {label}{#if unit}<span class="hint" style="display:inline; margin-left:0.25rem;">({unit})</span>{/if}
+    </label>
+  {/if}
+  <input
+    class={`number-input ${className}`}
+    id={name}
+    {name}
+    type="number"
+    aria-label={label || undefined}
+    {min}
+    {max}
+    {step}
+    {required}
+    {disabled}
+    {placeholder}
+    value={value ?? ''}
+    oninput={handleInput}
+    {...restProps}
+  />
 </div>

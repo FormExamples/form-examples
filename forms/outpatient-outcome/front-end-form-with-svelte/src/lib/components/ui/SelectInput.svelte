@@ -1,38 +1,43 @@
 <script lang="ts">
-	interface Option {
-		value: string;
-		label: string;
-	}
-	let {
-		label,
-		name,
-		options,
-		value = $bindable(''),
-		required = false
-	}: {
-		label: string;
-		name: string;
-		options: Option[];
-		value: string;
-		required?: boolean;
-	} = $props();
+  // SelectInput — Lily Svelte headless contract.
+  interface Option { value: string; label: string }
+  let {
+    class: className = '',
+    label = '',
+    name = undefined,
+    options,
+    value = $bindable(''),
+    required = false,
+    disabled = false,
+    ...restProps
+  }: {
+    label?: string;
+    name?: string;
+    options: Option[];
+    value?: string;
+    required?: boolean;
+    disabled?: boolean;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
-		{label}
-		{#if required}<span class="text-red-500">*</span>{/if}
-	</label>
-	<select
-		id={name}
-		{name}
-		{required}
-		bind:value
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
-	>
-		<option value="">-- Select --</option>
-		{#each options as opt}
-			<option value={opt.value}>{opt.label}</option>
-		{/each}
-	</select>
+<div class="field">
+  {#if label}
+    <label class="label" for={name} data-required={required || undefined}>{label}</label>
+  {/if}
+  <select
+    class={`select ${className}`}
+    id={name}
+    {name}
+    aria-label={label || undefined}
+    bind:value
+    {required}
+    {disabled}
+    {...restProps}
+  >
+    <option value="">-- Select --</option>
+    {#each options as opt (opt.value)}
+      <option value={opt.value}>{opt.label}</option>
+    {/each}
+  </select>
 </div>
