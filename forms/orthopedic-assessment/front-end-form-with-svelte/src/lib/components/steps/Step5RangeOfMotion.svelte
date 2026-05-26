@@ -1,83 +1,60 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const rom = assessment.data.rangeOfMotion;
 </script>
 
-<SectionCard title="Range of Motion" description="Joint-specific range of motion measurements (in degrees)">
-	<TextInput
-		label="Joint Assessed"
-		name="romJoint"
-		bind:value={rom.joint}
-		placeholder="e.g., Right shoulder, Left knee"
-		required
-	/>
+<Fieldset legend="Range of Motion">
+	<p class="hint">Joint-specific range of motion measurements (in degrees).</p>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput
-			label="Flexion"
-			name="flexion"
-			bind:value={rom.flexion}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
-		<NumberInput
-			label="Extension"
-			name="extension"
-			bind:value={rom.extension}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
+	<Field label="Joint Assessed" required inputId="romJoint" description="e.g., Right shoulder, Left knee">
+		<TextInput id="romJoint" label="Joint" required bind:value={rom.joint} />
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Flexion (degrees)" inputId="flexion">
+			<NumberInput id="flexion" label="Flexion" min={0} max={360} bind:value={rom.flexion} />
+		</Field>
+		<Field label="Extension (degrees)" inputId="extension">
+			<NumberInput id="extension" label="Extension" min={0} max={360} bind:value={rom.extension} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput
-			label="Abduction"
-			name="abduction"
-			bind:value={rom.abduction}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
-		<NumberInput
-			label="Adduction"
-			name="adduction"
-			bind:value={rom.adduction}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
+	<div class="field-grid">
+		<Field label="Abduction (degrees)" inputId="abduction">
+			<NumberInput id="abduction" label="Abduction" min={0} max={360} bind:value={rom.abduction} />
+		</Field>
+		<Field label="Adduction (degrees)" inputId="adduction">
+			<NumberInput id="adduction" label="Adduction" min={0} max={360} bind:value={rom.adduction} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput
-			label="Internal Rotation"
-			name="internalRotation"
-			bind:value={rom.internalRotation}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
-		<NumberInput
-			label="External Rotation"
-			name="externalRotation"
-			bind:value={rom.externalRotation}
-			min={0}
-			max={360}
-			unit="degrees"
-		/>
+	<div class="field-grid">
+		<Field label="Internal Rotation (degrees)" inputId="internalRotation">
+			<NumberInput id="internalRotation" label="Internal Rotation" min={0} max={360} bind:value={rom.internalRotation} />
+		</Field>
+		<Field label="External Rotation (degrees)" inputId="externalRotation">
+			<NumberInput id="externalRotation" label="External Rotation" min={0} max={360} bind:value={rom.externalRotation} />
+		</Field>
 	</div>
 
-	<TextArea
-		label="Additional Notes"
-		name="romNotes"
-		bind:value={rom.notes}
-		placeholder="Any additional observations about range of motion..."
-	/>
-</SectionCard>
+	<Field label="Additional Notes" inputId="romNotes">
+		<TextAreaInput id="romNotes" label="Additional Notes" rows={3} bind:value={rom.notes} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid { grid-template-columns: 1fr; }
+	}
+</style>

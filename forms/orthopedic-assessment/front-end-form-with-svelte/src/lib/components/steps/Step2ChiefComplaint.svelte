@@ -1,91 +1,107 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const c = assessment.data.chiefComplaint;
+
+	const jointOptions = [
+		'Shoulder', 'Elbow', 'Wrist', 'Hand', 'Hip', 'Knee', 'Ankle', 'Foot',
+		'Spine - Cervical', 'Spine - Thoracic', 'Spine - Lumbar', 'Other'
+	];
+	const sideOptions = [
+		{ value: 'left', label: 'Left' },
+		{ value: 'right', label: 'Right' },
+		{ value: 'bilateral', label: 'Bilateral' }
+	];
+	const onsetOptions = [
+		{ value: 'acute', label: 'Acute' },
+		{ value: 'gradual', label: 'Gradual' },
+		{ value: 'traumatic', label: 'Traumatic' },
+		{ value: 'overuse', label: 'Overuse' }
+	];
+	const aggravatingOptions = [
+		{ value: 'movement', label: 'Movement' },
+		{ value: 'weight-bearing', label: 'Weight bearing' },
+		{ value: 'lifting', label: 'Lifting' },
+		{ value: 'gripping', label: 'Gripping' },
+		{ value: 'overhead-activity', label: 'Overhead activity' },
+		{ value: 'prolonged-sitting', label: 'Prolonged sitting' },
+		{ value: 'prolonged-standing', label: 'Prolonged standing' },
+		{ value: 'swelling', label: 'Swelling' },
+		{ value: 'redness', label: 'Redness' },
+		{ value: 'cold-weather', label: 'Cold weather' }
+	];
+
+	function toggleAggravating(val: string) {
+		if (c.aggravatingFactors.includes(val)) {
+			c.aggravatingFactors = c.aggravatingFactors.filter((v) => v !== val);
+		} else {
+			c.aggravatingFactors = [...c.aggravatingFactors, val];
+		}
+	}
 </script>
 
-<SectionCard title="Chief Complaint" description="Describe your primary orthopedic concern">
-	<TextArea
-		label="What is your primary concern?"
-		name="primaryConcern"
-		bind:value={c.primaryConcern}
-		placeholder="Describe your main orthopedic problem..."
-	/>
+<Fieldset legend="Chief Complaint">
+	<p class="hint">Describe your primary orthopedic concern.</p>
 
-	<SelectInput
-		label="Affected Joint / Region"
-		name="affectedJoint"
-		options={[
-			{ value: 'Shoulder', label: 'Shoulder' },
-			{ value: 'Elbow', label: 'Elbow' },
-			{ value: 'Wrist', label: 'Wrist' },
-			{ value: 'Hand', label: 'Hand' },
-			{ value: 'Hip', label: 'Hip' },
-			{ value: 'Knee', label: 'Knee' },
-			{ value: 'Ankle', label: 'Ankle' },
-			{ value: 'Foot', label: 'Foot' },
-			{ value: 'Spine - Cervical', label: 'Spine - Cervical' },
-			{ value: 'Spine - Thoracic', label: 'Spine - Thoracic' },
-			{ value: 'Spine - Lumbar', label: 'Spine - Lumbar' },
-			{ value: 'Other', label: 'Other' }
-		]}
-		bind:value={c.affectedJoint}
-		required
-	/>
+	<Field label="What is your primary concern?" inputId="primaryConcern">
+		<TextAreaInput id="primaryConcern" label="Primary concern" rows={3} bind:value={c.primaryConcern} />
+	</Field>
 
-	<RadioGroup
-		label="Side"
-		name="side"
-		options={[
-			{ value: 'left', label: 'Left' },
-			{ value: 'right', label: 'Right' },
-			{ value: 'bilateral', label: 'Bilateral' }
-		]}
-		bind:value={c.side}
-		required
-	/>
+	<Field label="Affected Joint / Region" required inputId="affectedJoint">
+		<Select id="affectedJoint" label="Affected Joint / Region" required bind:value={c.affectedJoint}>
+			<option value="">-- Select --</option>
+			{#each jointOptions as j}
+				<option value={j}>{j}</option>
+			{/each}
+		</Select>
+	</Field>
 
-	<TextInput
-		label="Duration"
-		name="duration"
-		bind:value={c.duration}
-		placeholder="e.g., 2 weeks, 3 months, 5 years"
-		required
-	/>
+	<Field label="Side" required>
+		<RadioGroup label="Side">
+			{#each sideOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="side" value={opt.value} bind:group={c.side} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Onset Type"
-		name="onsetType"
-		options={[
-			{ value: 'acute', label: 'Acute' },
-			{ value: 'gradual', label: 'Gradual' },
-			{ value: 'traumatic', label: 'Traumatic' },
-			{ value: 'overuse', label: 'Overuse' }
-		]}
-		bind:value={c.onsetType}
-		required
-	/>
+	<Field label="Duration" required inputId="duration" description="e.g., 2 weeks, 3 months, 5 years">
+		<TextInput id="duration" label="Duration" required bind:value={c.duration} />
+	</Field>
 
-	<CheckboxGroup
-		label="Aggravating Factors"
-		options={[
-			{ value: 'movement', label: 'Movement' },
-			{ value: 'weight-bearing', label: 'Weight bearing' },
-			{ value: 'lifting', label: 'Lifting' },
-			{ value: 'gripping', label: 'Gripping' },
-			{ value: 'overhead-activity', label: 'Overhead activity' },
-			{ value: 'prolonged-sitting', label: 'Prolonged sitting' },
-			{ value: 'prolonged-standing', label: 'Prolonged standing' },
-			{ value: 'swelling', label: 'Swelling' },
-			{ value: 'redness', label: 'Redness' },
-			{ value: 'cold-weather', label: 'Cold weather' }
-		]}
-		bind:values={c.aggravatingFactors}
-	/>
-</SectionCard>
+	<Field label="Onset Type" required>
+		<RadioGroup label="Onset Type">
+			{#each onsetOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="onsetType" value={opt.value} bind:group={c.onsetType} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Aggravating Factors">
+		<CheckboxGroup label="Aggravating Factors">
+			{#each aggravatingOptions as opt (opt.value)}
+				<label>
+					<input
+						type="checkbox"
+						class="checkbox-input"
+						checked={c.aggravatingFactors.includes(opt.value)}
+						onchange={() => toggleAggravating(opt.value)}
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</CheckboxGroup>
+	</Field>
+</Fieldset>

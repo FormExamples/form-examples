@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const p = assessment.data.painAssessment;
 
@@ -11,82 +12,70 @@
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+	const painCharacterOptions = [
+		'sharp', 'dull', 'aching', 'burning', 'throbbing', 'stabbing', 'radiating'
+	];
+	const painFrequencyOptions = [
+		{ value: 'constant', label: 'Constant' },
+		{ value: 'intermittent', label: 'Intermittent' },
+		{ value: 'activity-related', label: 'Activity-related' },
+		{ value: 'night-only', label: 'Night only' },
+		{ value: 'morning-stiffness', label: 'Morning stiffness' }
+	];
 </script>
 
-<SectionCard title="Pain Assessment" description="Rate your pain levels and describe the character of your pain">
-	<NumberInput
-		label="Current Pain Level"
-		name="currentPainLevel"
-		bind:value={p.currentPainLevel}
-		min={0}
-		max={10}
-		unit="0-10"
-		required
-	/>
+<Fieldset legend="Pain Assessment">
+	<p class="hint">Rate your pain levels and describe the character of your pain.</p>
 
-	<NumberInput
-		label="Worst Pain (in the past week)"
-		name="worstPain"
-		bind:value={p.worstPain}
-		min={0}
-		max={10}
-		unit="0-10"
-		required
-	/>
+	<Field label="Current Pain Level (0-10)" required inputId="currentPainLevel">
+		<NumberInput id="currentPainLevel" label="Current pain level" min={0} max={10} required bind:value={p.currentPainLevel} />
+	</Field>
 
-	<NumberInput
-		label="Best Pain (in the past week)"
-		name="bestPain"
-		bind:value={p.bestPain}
-		min={0}
-		max={10}
-		unit="0-10"
-		required
-	/>
+	<Field label="Worst Pain in the past week (0-10)" required inputId="worstPain">
+		<NumberInput id="worstPain" label="Worst pain" min={0} max={10} required bind:value={p.worstPain} />
+	</Field>
 
-	<SelectInput
-		label="Pain Character"
-		name="painCharacter"
-		options={[
-			{ value: 'sharp', label: 'Sharp' },
-			{ value: 'dull', label: 'Dull' },
-			{ value: 'aching', label: 'Aching' },
-			{ value: 'burning', label: 'Burning' },
-			{ value: 'throbbing', label: 'Throbbing' },
-			{ value: 'stabbing', label: 'Stabbing' },
-			{ value: 'radiating', label: 'Radiating' }
-		]}
-		bind:value={p.painCharacter}
-		required
-	/>
+	<Field label="Best Pain in the past week (0-10)" required inputId="bestPain">
+		<NumberInput id="bestPain" label="Best pain" min={0} max={10} required bind:value={p.bestPain} />
+	</Field>
 
-	<SelectInput
-		label="Pain Frequency"
-		name="painFrequency"
-		options={[
-			{ value: 'constant', label: 'Constant' },
-			{ value: 'intermittent', label: 'Intermittent' },
-			{ value: 'activity-related', label: 'Activity-related' },
-			{ value: 'night-only', label: 'Night only' },
-			{ value: 'morning-stiffness', label: 'Morning stiffness' }
-		]}
-		bind:value={p.painFrequency}
-		required
-	/>
+	<Field label="Pain Character" required inputId="painCharacter">
+		<Select id="painCharacter" label="Pain Character" required bind:value={p.painCharacter}>
+			<option value="">-- Select --</option>
+			{#each painCharacterOptions as opt}
+				<option value={opt}>{opt[0].toUpperCase() + opt.slice(1)}</option>
+			{/each}
+		</Select>
+	</Field>
 
-	<RadioGroup
-		label="Do you experience night pain?"
-		name="nightPain"
-		options={yesNo}
-		bind:value={p.nightPain}
-		required
-	/>
+	<Field label="Pain Frequency" required inputId="painFrequency">
+		<Select id="painFrequency" label="Pain Frequency" required bind:value={p.painFrequency}>
+			<option value="">-- Select --</option>
+			{#each painFrequencyOptions as opt}
+				<option value={opt.value}>{opt.label}</option>
+			{/each}
+		</Select>
+	</Field>
 
-	<RadioGroup
-		label="Do you have pain with weight bearing?"
-		name="painWithWeightBearing"
-		options={yesNo}
-		bind:value={p.painWithWeightBearing}
-		required
-	/>
-</SectionCard>
+	<Field label="Do you experience night pain?" required>
+		<RadioGroup label="Night pain">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="nightPain" value={opt.value} bind:group={p.nightPain} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Do you have pain with weight bearing?" required>
+		<RadioGroup label="Pain with weight bearing">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="painWithWeightBearing" value={opt.value} bind:group={p.painWithWeightBearing} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

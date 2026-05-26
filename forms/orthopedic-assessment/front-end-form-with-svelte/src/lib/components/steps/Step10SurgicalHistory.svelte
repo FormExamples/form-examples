@@ -1,15 +1,22 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import type { PreviousSurgery } from '$lib/engine/types';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const sh = assessment.data.surgicalHistory;
 
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
+	];
+
+	const willingOptions = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' },
+		{ value: 'undecided', label: 'Undecided' }
 	];
 
 	function addSurgery() {
@@ -21,87 +28,82 @@
 	}
 </script>
 
-<SectionCard title="Surgical History" description="Previous orthopedic surgeries and anesthesia history">
-	<RadioGroup
-		label="Have you had any previous orthopedic surgery?"
-		name="previousOrthopedicSurgery"
-		options={yesNo}
-		bind:value={sh.previousOrthopedicSurgery}
-		required
-	/>
+<Fieldset legend="Surgical History">
+	<p class="hint">Previous orthopedic surgeries and anesthesia history.</p>
+
+	<Field label="Have you had any previous orthopedic surgery?" required>
+		<RadioGroup label="Previous orthopedic surgery">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="previousOrthopedicSurgery" value={opt.value} bind:group={sh.previousOrthopedicSurgery} required />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if sh.previousOrthopedicSurgery === 'yes'}
-		<div class="mt-4 space-y-3">
-			{#each sh.surgeries as surgery, i}
-				<div class="flex items-start gap-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
-					<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
-						<input
-							type="text"
-							placeholder="Procedure"
-							bind:value={surgery.procedure}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-						/>
-						<input
-							type="date"
-							placeholder="Date"
-							bind:value={surgery.date}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-						/>
-						<input
-							type="text"
-							placeholder="Outcome"
-							bind:value={surgery.outcome}
-							class="rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
-						/>
+		<Field label="Previous Surgeries">
+			<div class="entry-list">
+				{#each sh.surgeries as surgery, i}
+					<div class="entry-row">
+						<div class="entry-grid">
+							<input class="text-input" type="text" placeholder="Procedure" bind:value={surgery.procedure} />
+							<input class="date-input" type="date" bind:value={surgery.date} />
+							<input class="text-input" type="text" placeholder="Outcome" bind:value={surgery.outcome} />
+						</div>
+						<button class="button" type="button" data-variant="danger" onclick={() => removeSurgery(i)} aria-label="Remove surgery">&times;</button>
 					</div>
-					<button
-						type="button"
-						onclick={() => removeSurgery(i)}
-						class="mt-1 text-red-500 hover:text-red-700"
-						aria-label="Remove surgery"
-					>
-						&times;
-					</button>
-				</div>
-			{/each}
-
-			<button
-				type="button"
-				onclick={addSurgery}
-				class="rounded-lg border-2 border-dashed border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
-			>
-				+ Add Surgery
-			</button>
-		</div>
+				{/each}
+				<button class="button" type="button" onclick={addSurgery}>+ Add Surgery</button>
+			</div>
+		</Field>
 	{/if}
 
-	<div class="mt-6">
-		<RadioGroup
-			label="Have you had any complications with anesthesia?"
-			name="anesthesiaComplications"
-			options={yesNo}
-			bind:value={sh.anesthesiaComplications}
-		/>
-		{#if sh.anesthesiaComplications === 'yes'}
-			<TextArea
-				label="Anesthesia Complication Details"
-				name="anesthesiaDetails"
-				bind:value={sh.anesthesiaDetails}
-				placeholder="Describe the complications..."
-			/>
-		{/if}
-	</div>
+	<Field label="Have you had any complications with anesthesia?">
+		<RadioGroup label="Anesthesia complications">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="anesthesiaComplications" value={opt.value} bind:group={sh.anesthesiaComplications} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	{#if sh.anesthesiaComplications === 'yes'}
+		<Field label="Anesthesia Complication Details" inputId="anesthesiaDetails">
+			<TextAreaInput id="anesthesiaDetails" label="Anesthesia Details" rows={3} bind:value={sh.anesthesiaDetails} />
+		</Field>
+	{/if}
 
-	<div class="mt-4">
-		<RadioGroup
-			label="Would you be willing to consider surgery if recommended?"
-			name="willingToConsiderSurgery"
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' },
-				{ value: 'undecided', label: 'Undecided' }
-			]}
-			bind:value={sh.willingToConsiderSurgery}
-		/>
-	</div>
-</SectionCard>
+	<Field label="Would you be willing to consider surgery if recommended?">
+		<RadioGroup label="Willing to consider surgery">
+			{#each willingOptions as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="willingToConsiderSurgery" value={opt.value} bind:group={sh.willingToConsiderSurgery} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>
+	.entry-list { display: flex; flex-direction: column; gap: 0.75rem; }
+	.entry-row {
+		display: flex; align-items: flex-start; gap: 0.5rem;
+		border: 1px solid var(--color-border);
+		background: var(--color-bg);
+		border-radius: 0.5rem;
+		padding: 0.75rem;
+	}
+	.entry-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.5rem;
+		flex: 1;
+	}
+	@media (max-width: 640px) {
+		.entry-grid { grid-template-columns: 1fr; }
+	}
+</style>

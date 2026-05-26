@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
-	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const tx = assessment.data.currentTreatment;
 
@@ -14,78 +15,66 @@
 	];
 </script>
 
-<SectionCard title="Current Treatment" description="Current medications, therapies, and allergy information">
-	<h3 class="mb-2 text-sm font-semibold text-gray-700">Current Medications</h3>
-	<MedicationEntry bind:medications={tx.medications} />
-	{#if tx.medications.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No medications added.</p>
+<Fieldset legend="Current Treatment">
+	<p class="hint">Current medications, therapies, and allergy information.</p>
+
+	<Field label="Current Medications">
+		<MedicationEntry bind:medications={tx.medications} />
+	</Field>
+
+	<Field label="Are you currently having physical therapy?">
+		<RadioGroup label="Physical therapy">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="physicalTherapy" value={opt.value} bind:group={tx.physicalTherapy} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	{#if tx.physicalTherapy === 'yes'}
+		<Field label="Physical Therapy Details" inputId="physicalTherapyDetails">
+			<TextAreaInput id="physicalTherapyDetails" label="Physical Therapy Details" rows={3} bind:value={tx.physicalTherapyDetails} />
+		</Field>
 	{/if}
 
-	<div class="mt-6">
-		<RadioGroup
-			label="Are you currently having physical therapy?"
-			name="physicalTherapy"
-			options={yesNo}
-			bind:value={tx.physicalTherapy}
-		/>
-		{#if tx.physicalTherapy === 'yes'}
-			<TextArea
-				label="Physical Therapy Details"
-				name="physicalTherapyDetails"
-				bind:value={tx.physicalTherapyDetails}
-				placeholder="Describe your physical therapy regimen..."
-			/>
-		{/if}
-	</div>
+	<Field label="Have you had any joint injections?">
+		<RadioGroup label="Joint injections">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="injections" value={opt.value} bind:group={tx.injections} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	{#if tx.injections === 'yes'}
+		<Field label="Injection Details" inputId="injectionDetails">
+			<TextAreaInput id="injectionDetails" label="Injection Details" rows={3} bind:value={tx.injectionDetails} />
+		</Field>
+	{/if}
 
-	<div class="mt-4">
-		<RadioGroup
-			label="Have you had any joint injections?"
-			name="injections"
-			options={yesNo}
-			bind:value={tx.injections}
-		/>
-		{#if tx.injections === 'yes'}
-			<TextArea
-				label="Injection Details"
-				name="injectionDetails"
-				bind:value={tx.injectionDetails}
-				placeholder="Describe injections received (type, location, date)..."
-			/>
-		{/if}
-	</div>
+	<Field label="Are you using a brace or splint?">
+		<RadioGroup label="Brace or splint">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="braceOrSplint" value={opt.value} bind:group={tx.braceOrSplint} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+	{#if tx.braceOrSplint === 'yes'}
+		<Field label="Brace/Splint Details" inputId="braceDetails">
+			<TextAreaInput id="braceDetails" label="Brace details" rows={3} bind:value={tx.braceDetails} />
+		</Field>
+	{/if}
 
-	<div class="mt-4">
-		<RadioGroup
-			label="Are you using a brace or splint?"
-			name="braceOrSplint"
-			options={yesNo}
-			bind:value={tx.braceOrSplint}
-		/>
-		{#if tx.braceOrSplint === 'yes'}
-			<TextArea
-				label="Brace/Splint Details"
-				name="braceDetails"
-				bind:value={tx.braceDetails}
-				placeholder="Describe the brace or splint and usage..."
-			/>
-		{/if}
-	</div>
+	<Field label="Other Treatments" inputId="otherTreatments" description="e.g., acupuncture, TENS, ice/heat therapy">
+		<TextAreaInput id="otherTreatments" label="Other Treatments" rows={3} bind:value={tx.otherTreatments} />
+	</Field>
 
-	<div class="mt-4">
-		<TextArea
-			label="Other Treatments"
-			name="otherTreatments"
-			bind:value={tx.otherTreatments}
-			placeholder="e.g., acupuncture, TENS, ice/heat therapy..."
-		/>
-	</div>
-
-	<div class="mt-6">
-		<h3 class="mb-2 text-sm font-semibold text-gray-700">Drug Allergies</h3>
+	<Field label="Drug Allergies">
 		<AllergyEntry bind:allergies={tx.allergies} />
-		{#if tx.allergies.length === 0}
-			<p class="mt-2 text-sm text-gray-500">No drug allergies added. Click the button above to add one, or proceed if you have none.</p>
-		{/if}
-	</div>
-</SectionCard>
+	</Field>
+</Fieldset>

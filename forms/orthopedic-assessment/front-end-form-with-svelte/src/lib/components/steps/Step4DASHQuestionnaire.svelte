@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { dashQuestions, getResponseOptions } from '$lib/engine/dash-rules';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import type { DASHScore } from '$lib/engine/types';
 
 	const q = assessment.data.dashQuestionnaire;
@@ -16,45 +16,53 @@
 		assessment.data.dashQuestionnaire[key] = value as DASHScore;
 	}
 
-	let currentDomain = $state('');
-
 	function isDomainChange(i: number): boolean {
 		if (i === 0) return true;
 		return dashQuestions[i].domain !== dashQuestions[i - 1].domain;
 	}
 </script>
 
-<SectionCard title="DASH Questionnaire" description="Disabilities of the Arm, Shoulder and Hand - rate your ability to perform the following activities in the past week (minimum 27 of 30 items required)">
+<Fieldset legend="DASH Questionnaire">
+	<p class="hint">Disabilities of the Arm, Shoulder and Hand — rate your ability to perform the following activities in the past week (minimum 27 of 30 items required).</p>
+
 	{#each dashQuestions as question, i}
 		{#if isDomainChange(i)}
-			<div class="mb-4 mt-6 first:mt-0">
-				<h3 class="text-sm font-bold uppercase tracking-wide text-primary">{question.domain}</h3>
-				<hr class="mt-1 border-gray-200" />
-			</div>
+			<h3 class="step-subhead">{question.domain}</h3>
 		{/if}
-		<div class="mb-6 border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-			<p class="mb-3 text-sm font-medium text-gray-700">
-				<span class="mr-1 text-primary font-bold">{i + 1}.</span>
-				{question.text}
-			</p>
-			<div class="flex flex-wrap gap-2">
+		<div class="dash-row">
+			<p class="dash-q-text"><span class="dash-q-num">{i + 1}.</span> {question.text}</p>
+			<fieldset class="radio-group" role="radiogroup" aria-label={`Question ${i + 1}`}>
 				{#each getResponseOptions(question.questionNumber) as opt}
-					<label
-						class="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors
-							{q[questionKeys[i]] === opt.value ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-					>
+					<label>
 						<input
 							type="radio"
+							class="radio-input"
 							name="dash-q{i + 1}"
 							value={opt.value}
 							checked={q[questionKeys[i]] === opt.value}
 							onchange={() => setScore(questionKeys[i], opt.value)}
-							class="text-primary accent-primary"
 						/>
 						{opt.label}
 					</label>
 				{/each}
-			</div>
+			</fieldset>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.step-subhead {
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-primary);
+		margin: 1.25rem 0 0.5rem;
+		padding-bottom: 0.25rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.dash-row { margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border); }
+	.dash-row:last-child { border-bottom: 0; }
+	.dash-q-text { margin: 0 0 0.5rem; font-size: 0.9375rem; }
+	.dash-q-num { color: var(--color-primary); font-weight: 700; margin-right: 0.25rem; }
+</style>

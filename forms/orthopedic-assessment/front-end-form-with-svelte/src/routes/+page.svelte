@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
 
 	function startAssessment() {
 		assessment.reset();
@@ -24,7 +26,7 @@
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm">
+		<Panel label="What to expect" class="text-left">
 			<h2 class="mb-3 font-semibold text-gray-900">What to expect</h2>
 			<ul class="space-y-2 text-sm text-gray-600">
 				<li class="flex items-start gap-2">
@@ -44,14 +46,11 @@
 					A report will be generated at the end with a downloadable PDF
 				</li>
 			</ul>
-		</div>
+		</Panel>
 
-		<button
-			onclick={startAssessment}
-			class="mt-6 w-full rounded-lg bg-primary px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-primary-dark"
-		>
-			Begin Assessment
-		</button>
+		<div class="button-group justify-center">
+			<Button data-variant="primary" onclick={startAssessment}>Begin Assessment</Button>
+		</div>
 
 		<p class="mt-4 text-xs text-gray-400">
 			This tool is for clinical support only. All assessments must be reviewed by a qualified orthopedic surgeon.
