@@ -4,6 +4,9 @@
 	import { validityStatusLabel, validityStatusColor, calculateAge, hasLifeSustainingRefusal } from '$lib/engine/utils';
 	import Badge from '$lib/components/ui/Badge.svelte';
 
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
 
@@ -66,24 +69,9 @@
 					{#if pdfError}
 						<span class="text-sm text-red-600">{pdfError}</span>
 					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New ADRT
-					</button>
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New ADRT</Button>
 				</div>
 			</div>
 		</header>

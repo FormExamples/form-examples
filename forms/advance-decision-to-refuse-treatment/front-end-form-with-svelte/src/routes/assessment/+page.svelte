@@ -4,6 +4,9 @@
 	import { calculateValidity } from '$lib/engine/validity-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1PersonalInformation from '$lib/components/steps/Step1PersonalInformation.svelte';
 	import Step2CapacityDeclaration from '$lib/components/steps/Step2CapacityDeclaration.svelte';
 	import Step3Circumstances from '$lib/components/steps/Step3Circumstances.svelte';
@@ -16,44 +19,37 @@
 	import Step10LegalSignatures from '$lib/components/steps/Step10LegalSignatures.svelte';
 
 	function submitAssessment() {
-			const { validityStatus, firedRules } = calculateValidity(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				validityStatus,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { validityStatus, firedRules } = calculateValidity(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			validityStatus,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1PersonalInformation />
+<Form label="Advance Decision to Refuse Treatment" onsubmit={submitAssessment}>
+	<Step1PersonalInformation />
+	<Step2CapacityDeclaration />
+	<Step3Circumstances />
+	<Step4TreatmentsRefusedGeneral />
+	<Step5TreatmentsRefusedLifeSustaining />
+	<Step6ExceptionsConditions />
+	<Step7OtherWishes />
+	<Step8LastingPowerOfAttorney />
+	<Step9HealthcareProfessionalReview />
+	<Step10LegalSignatures />
 
-<Step2CapacityDeclaration />
-
-<Step3Circumstances />
-
-<Step4TreatmentsRefusedGeneral />
-
-<Step5TreatmentsRefusedLifeSustaining />
-
-<Step6ExceptionsConditions />
-
-<Step7OtherWishes />
-
-<Step8LastingPowerOfAttorney />
-
-<Step9HealthcareProfessionalReview />
-
-<Step10LegalSignatures />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

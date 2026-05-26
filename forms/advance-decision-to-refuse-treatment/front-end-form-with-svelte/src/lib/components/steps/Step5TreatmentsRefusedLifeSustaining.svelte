@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const ls = assessment.data.treatmentsRefusedLifeSustaining;
 	const yesNo = [
@@ -23,7 +25,8 @@
 	}
 </script>
 
-<SectionCard title="Treatments Refused - Life-Sustaining" description="Refusal of life-sustaining treatment has additional legal requirements">
+<Fieldset legend="Treatments Refused - Life-Sustaining">
+	<p class="hint">Refusal of life-sustaining treatment has additional legal requirements</p>
 	<div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
 		<p class="font-bold">IMPORTANT LEGAL REQUIREMENT</p>
 		<p class="mt-1">Under the Mental Capacity Act 2005, for an ADRT to be legally valid for life-sustaining treatment, you <strong>MUST</strong>:</p>
@@ -38,50 +41,32 @@
 
 	<div class="space-y-6">
 		<div class="rounded-lg border-2 border-red-200 p-4">
-			<RadioGroup label="Cardiopulmonary Resuscitation (CPR)" name="cpr" options={yesNo} bind:value={ls.cpr.refused} />
+			<Field label="Cardiopulmonary Resuscitation (CPR)"><RadioGroup label="Cardiopulmonary Resuscitation (CPR)">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="cpr" value={opt.value} bind:group={ls.cpr.refused}/> {opt.label}</label>{/each}</RadioGroup></Field>
 			{#if ls.cpr.refused === 'yes'}
 				<div class="ml-4 mt-2 rounded border border-red-100 bg-red-50 p-3">
-					<RadioGroup
-						label="I confirm this refusal applies even if my life is at risk as a result"
-						name="cprLifeRisk"
-						options={yesNoLifeRisk}
-						bind:value={ls.cpr.evenIfLifeAtRisk}
-						required
-					/>
+					<Field label="I confirm this refusal applies even if my life is at risk as a result" required><RadioGroup label="I confirm this refusal applies even if my life is at risk as a result">{#each yesNoLifeRisk as opt (opt.value)}<label><input type="radio" class="radio-input" name="cprLifeRisk" value={opt.value} bind:group={ls.cpr.evenIfLifeAtRisk} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 				</div>
-				<TextArea label="Specification" name="cprSpec" bind:value={ls.cpr.specification} placeholder="Any specific conditions or details about your CPR refusal" />
+				<Field label="Specification" inputId="cprSpec"><TextAreaInput id="cprSpec" label="Specification" placeholder="Any specific conditions or details about your CPR refusal" bind:value={ls.cpr.specification} /></Field>
 			{/if}
 		</div>
 
 		<div class="rounded-lg border-2 border-red-200 p-4">
-			<RadioGroup label="Mechanical Ventilation (life support machine)" name="mechVent" options={yesNo} bind:value={ls.mechanicalVentilation.refused} />
+			<Field label="Mechanical Ventilation (life support machine)"><RadioGroup label="Mechanical Ventilation (life support machine)">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="mechVent" value={opt.value} bind:group={ls.mechanicalVentilation.refused}/> {opt.label}</label>{/each}</RadioGroup></Field>
 			{#if ls.mechanicalVentilation.refused === 'yes'}
 				<div class="ml-4 mt-2 rounded border border-red-100 bg-red-50 p-3">
-					<RadioGroup
-						label="I confirm this refusal applies even if my life is at risk as a result"
-						name="mechVentLifeRisk"
-						options={yesNoLifeRisk}
-						bind:value={ls.mechanicalVentilation.evenIfLifeAtRisk}
-						required
-					/>
+					<Field label="I confirm this refusal applies even if my life is at risk as a result" required><RadioGroup label="I confirm this refusal applies even if my life is at risk as a result">{#each yesNoLifeRisk as opt (opt.value)}<label><input type="radio" class="radio-input" name="mechVentLifeRisk" value={opt.value} bind:group={ls.mechanicalVentilation.evenIfLifeAtRisk} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 				</div>
-				<TextArea label="Specification" name="mechVentSpec" bind:value={ls.mechanicalVentilation.specification} placeholder="Any specific conditions or details" />
+				<Field label="Specification" inputId="mechVentSpec"><TextAreaInput id="mechVentSpec" label="Specification" placeholder="Any specific conditions or details" bind:value={ls.mechanicalVentilation.specification} /></Field>
 			{/if}
 		</div>
 
 		<div class="rounded-lg border-2 border-red-200 p-4">
-			<RadioGroup label="Artificial Nutrition and Hydration (including tube feeding and IV nutrition)" name="anh" options={yesNo} bind:value={ls.artificialNutritionHydration.refused} />
+			<Field label="Artificial Nutrition and Hydration (including tube feeding and IV nutrition)"><RadioGroup label="Artificial Nutrition and Hydration (including tube feeding and IV nutrition)">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="anh" value={opt.value} bind:group={ls.artificialNutritionHydration.refused}/> {opt.label}</label>{/each}</RadioGroup></Field>
 			{#if ls.artificialNutritionHydration.refused === 'yes'}
 				<div class="ml-4 mt-2 rounded border border-red-100 bg-red-50 p-3">
-					<RadioGroup
-						label="I confirm this refusal applies even if my life is at risk as a result"
-						name="anhLifeRisk"
-						options={yesNoLifeRisk}
-						bind:value={ls.artificialNutritionHydration.evenIfLifeAtRisk}
-						required
-					/>
+					<Field label="I confirm this refusal applies even if my life is at risk as a result" required><RadioGroup label="I confirm this refusal applies even if my life is at risk as a result">{#each yesNoLifeRisk as opt (opt.value)}<label><input type="radio" class="radio-input" name="anhLifeRisk" value={opt.value} bind:group={ls.artificialNutritionHydration.evenIfLifeAtRisk} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 				</div>
-				<TextArea label="Specification" name="anhSpec" bind:value={ls.artificialNutritionHydration.specification} placeholder="Any specific conditions or details" />
+				<Field label="Specification" inputId="anhSpec"><TextAreaInput id="anhSpec" label="Specification" placeholder="Any specific conditions or details" bind:value={ls.artificialNutritionHydration.specification} /></Field>
 			{/if}
 		</div>
 	</div>
@@ -99,12 +84,7 @@
 							bind:value={other.treatment}
 							class="mb-2 w-full rounded border border-gray-300 px-2 py-1.5 text-sm focus:border-primary focus:outline-none"
 						/>
-						<RadioGroup
-							label="This refusal applies even if my life is at risk"
-							name="otherLSLifeRisk-{i}"
-							options={yesNoLifeRisk}
-							bind:value={other.evenIfLifeAtRisk}
-						/>
+						<Field label="This refusal applies even if my life is at risk"><RadioGroup label="This refusal applies even if my life is at risk">{#each yesNoLifeRisk as opt (opt.value)}<label><input type="radio" class="radio-input" name="otherLSLifeRisk-{i}" value={opt.value} bind:group={other.evenIfLifeAtRisk}/> {opt.label}</label>{/each}</RadioGroup></Field>
 						<textarea
 							placeholder="Specification"
 							bind:value={other.specification}
@@ -131,4 +111,4 @@
 			+ Add Another Life-Sustaining Treatment
 		</button>
 	</div>
-</SectionCard>
+</Fieldset>

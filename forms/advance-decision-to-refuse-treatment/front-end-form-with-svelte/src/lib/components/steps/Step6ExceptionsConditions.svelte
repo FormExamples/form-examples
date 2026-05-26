@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const e = assessment.data.exceptionsConditions;
 	const yesNo = [
@@ -11,49 +13,22 @@
 	];
 </script>
 
-<SectionCard title="Exceptions & Conditions" description="Circumstances where your treatment refusals would NOT apply">
+<Fieldset legend="Exceptions & Conditions">
+	<p class="hint">Circumstances where your treatment refusals would NOT apply</p>
 	<div class="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
 		<p class="font-semibold">Guidance</p>
 		<p class="mt-1">You may wish to specify circumstances where your refusal of treatment does NOT apply. For example, you might refuse treatment in the case of advanced dementia but not in the case of a temporary illness from which you could recover.</p>
 	</div>
 
-	<RadioGroup
-		label="Are there any circumstances where your treatment refusals would NOT apply?"
-		name="hasExceptions"
-		options={yesNo}
-		bind:value={e.hasExceptions}
-	/>
+	<Field label="Are there any circumstances where your treatment refusals would NOT apply?"><RadioGroup label="Are there any circumstances where your treatment refusals would NOT apply?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hasExceptions" value={opt.value} bind:group={e.hasExceptions}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if e.hasExceptions === 'yes'}
-		<TextArea
-			label="Describe the exceptions"
-			name="exceptionsDescription"
-			bind:value={e.exceptionsDescription}
-			rows={4}
-			placeholder="Describe the circumstances in which your treatment refusals would NOT apply"
-		/>
+		<Field label="Describe the exceptions" inputId="exceptionsDescription"><TextAreaInput id="exceptionsDescription" label="Describe the exceptions" rows={4} placeholder="Describe the circumstances in which your treatment refusals would NOT apply" bind:value={e.exceptionsDescription} /></Field>
 	{/if}
 
-	<RadioGroup
-		label="Does this ADRT have any time limitations?"
-		name="hasTimeLimitations"
-		options={yesNo}
-		bind:value={e.hasTimeLimitations}
-	/>
+	<Field label="Does this ADRT have any time limitations?"><RadioGroup label="Does this ADRT have any time limitations?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="hasTimeLimitations" value={opt.value} bind:group={e.hasTimeLimitations}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if e.hasTimeLimitations === 'yes'}
-		<TextArea
-			label="Time limitations"
-			name="timeLimitationsDescription"
-			bind:value={e.timeLimitationsDescription}
-			rows={3}
-			placeholder="e.g. 'This ADRT is valid for 5 years from the date of signing'"
-		/>
+		<Field label="Time limitations" inputId="timeLimitationsDescription"><TextAreaInput id="timeLimitationsDescription" label="Time limitations" rows={3} placeholder="e.g. 'This ADRT is valid for 5 years from the date of signing'" bind:value={e.timeLimitationsDescription} /></Field>
 	{/if}
 
-	<TextArea
-		label="Conditions that would invalidate this ADRT (optional)"
-		name="invalidatingConditions"
-		bind:value={e.invalidatingConditions}
-		rows={3}
-		placeholder="e.g. 'This ADRT is invalidated if a new treatment becomes available for my condition'"
-	/>
-</SectionCard>
+	<Field label="Conditions that would invalidate this ADRT (optional)" inputId="invalidatingConditions"><TextAreaInput id="invalidatingConditions" label="Conditions that would invalidate this ADRT (optional)" rows={3} placeholder="e.g. 'This ADRT is invalidated if a new treatment becomes available for my condition'" bind:value={e.invalidatingConditions} /></Field>
+</Fieldset>
