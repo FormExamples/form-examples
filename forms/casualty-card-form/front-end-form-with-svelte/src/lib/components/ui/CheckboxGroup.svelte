@@ -1,43 +1,54 @@
 <script lang="ts">
-	interface Option {
-		value: string;
-		label: string;
-	}
-	let {
-		label,
-		options,
-		values = $bindable([])
-	}: {
-		label: string;
-		options: Option[];
-		values: string[];
-	} = $props();
+  // CheckboxGroup — Lily Svelte headless contract.
+  // Emits: <fieldset class="checkbox-group" role="group"> with labelled
+  // <input class="checkbox-input"> children.
+  interface Option {
+    value: string;
+    label: string;
+  }
+  let {
+    class: className = '',
+    label,
+    options,
+    values = $bindable<string[]>([]),
+    disabled = false,
+    ...restProps
+  }: {
+    label: string;
+    options: Option[];
+    values?: string[];
+    disabled?: boolean;
+    [key: string]: unknown;
+  } = $props();
 
-	function toggle(val: string) {
-		if (values.includes(val)) {
-			values = values.filter((v) => v !== val);
-		} else {
-			values = [...values, val];
-		}
-	}
+  function toggle(val: string) {
+    if (values.includes(val)) {
+      values = values.filter((v) => v !== val);
+    } else {
+      values = [...values, val];
+    }
+  }
 </script>
 
-<fieldset class="mb-4">
-	<legend class="mb-2 block text-sm font-medium text-gray-700">{label}</legend>
-	<div class="flex flex-wrap gap-3">
-		{#each options as opt (opt.value)}
-			<label
-				class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors
-					{values.includes(opt.value) ? 'border-primary bg-blue-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-			>
-				<input
-					type="checkbox"
-					checked={values.includes(opt.value)}
-					onchange={() => toggle(opt.value)}
-					class="accent-primary"
-				/>
-				{opt.label}
-			</label>
-		{/each}
-	</div>
+<!-- svelte-ignore a11y_no_redundant_roles -->
+<fieldset
+  class={`checkbox-group ${className}`}
+  role="group"
+  aria-label={label}
+  {disabled}
+  {...restProps}
+>
+  <legend class="label">{label}</legend>
+  {#each options as opt (opt.value)}
+    <label>
+      <input
+        type="checkbox"
+        class="checkbox-input"
+        checked={values.includes(opt.value)}
+        onchange={() => toggle(opt.value)}
+        {disabled}
+      />
+      {opt.label}
+    </label>
+  {/each}
 </fieldset>
