@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const a = assessment.data.arrhythmiaConduction;
 	const yesNo = [
@@ -13,46 +14,77 @@
 	];
 </script>
 
-<SectionCard title="Arrhythmia & Conduction" description="Atrial fibrillation, pacemaker, syncope, and palpitations">
-	<RadioGroup label="Have you been diagnosed with atrial fibrillation?" name="af" options={yesNo} bind:value={a.atrialFibrillation} />
+<Fieldset legend="Arrhythmia & Conduction">
+	<p class="hint">Atrial fibrillation, pacemaker, syncope, and palpitations.</p>
+
+	<Field label="Have you been diagnosed with atrial fibrillation?">
+		<RadioGroup label="Have you been diagnosed with atrial fibrillation?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="af" value={opt.value} bind:group={a.atrialFibrillation} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if a.atrialFibrillation === 'yes'}
-		<SelectInput
-			label="Type of atrial fibrillation"
-			name="afType"
-			options={[
-				{ value: 'paroxysmal', label: 'Paroxysmal (intermittent)' },
-				{ value: 'persistent', label: 'Persistent' },
-				{ value: 'permanent', label: 'Permanent' }
-			]}
-			bind:value={a.afType}
-			required
-		/>
+		<Field label="Type of atrial fibrillation" required inputId="afType">
+			<Select id="afType" label="Type of atrial fibrillation" required bind:value={a.afType}>
+				<option value="">-- Select --</option>
+				<option value="paroxysmal">Paroxysmal (intermittent)</option>
+				<option value="persistent">Persistent</option>
+				<option value="permanent">Permanent</option>
+			</Select>
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have any other arrhythmia?" name="otherArrhythmia" options={yesNo} bind:value={a.otherArrhythmia} />
+	<Field label="Do you have any other arrhythmia?">
+		<RadioGroup label="Do you have any other arrhythmia?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="otherArrhythmia" value={opt.value} bind:group={a.otherArrhythmia} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if a.otherArrhythmia === 'yes'}
-		<TextInput label="Type of arrhythmia" name="otherArrhythmiaType" bind:value={a.otherArrhythmiaType} />
+		<Field label="Type of arrhythmia" inputId="otherArrhythmiaType">
+			<TextInput id="otherArrhythmiaType" label="Type of arrhythmia" bind:value={a.otherArrhythmiaType} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have a pacemaker or ICD (implantable cardioverter-defibrillator)?" name="pacemaker" options={yesNo} bind:value={a.pacemaker} />
+	<Field label="Do you have a pacemaker or ICD (implantable cardioverter-defibrillator)?">
+		<RadioGroup label="Do you have a pacemaker or ICD (implantable cardioverter-defibrillator)?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="pacemaker" value={opt.value} bind:group={a.pacemaker} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if a.pacemaker === 'yes'}
-		<SelectInput
-			label="Device type"
-			name="pacemakerType"
-			options={[
-				{ value: 'single-chamber', label: 'Single chamber pacemaker' },
-				{ value: 'dual-chamber', label: 'Dual chamber pacemaker' },
-				{ value: 'biventricular', label: 'Biventricular (CRT)' },
-				{ value: 'icd', label: 'ICD' }
-			]}
-			bind:value={a.pacemakerType}
-		/>
+		<Field label="Device type" inputId="pacemakerType">
+			<Select id="pacemakerType" label="Device type" bind:value={a.pacemakerType}>
+				<option value="">-- Select --</option>
+				<option value="single-chamber">Single chamber pacemaker</option>
+				<option value="dual-chamber">Dual chamber pacemaker</option>
+				<option value="biventricular">Biventricular (CRT)</option>
+				<option value="icd">ICD</option>
+			</Select>
+		</Field>
 	{/if}
 
-	<RadioGroup label="Have you experienced syncope (fainting/blackouts)?" name="syncope" options={yesNo} bind:value={a.syncope} />
+	<Field label="Have you experienced syncope (fainting/blackouts)?">
+		<RadioGroup label="Have you experienced syncope (fainting/blackouts)?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="syncope" value={opt.value} bind:group={a.syncope} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if a.syncope === 'yes'}
-		<TextArea label="Syncope details" name="syncopeDetails" bind:value={a.syncopeDetails} placeholder="Describe circumstances, frequency" />
+		<Field label="Syncope details" inputId="syncopeDetails">
+			<TextAreaInput id="syncopeDetails" label="Syncope details" rows={3} placeholder="Describe circumstances, frequency" bind:value={a.syncopeDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you experience palpitations?" name="palpitations" options={yesNo} bind:value={a.palpitations} />
-</SectionCard>
+	<Field label="Do you experience palpitations?">
+		<RadioGroup label="Do you experience palpitations?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="palpitations" value={opt.value} bind:group={a.palpitations} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

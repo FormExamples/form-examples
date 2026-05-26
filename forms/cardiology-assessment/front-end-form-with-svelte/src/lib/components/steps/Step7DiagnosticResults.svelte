@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const d = assessment.data.diagnosticResults;
@@ -13,36 +14,69 @@
 	];
 </script>
 
-<SectionCard title="Diagnostic Results" description="ECG, echocardiography, stress test, and catheterization findings">
-	<RadioGroup label="Is the ECG normal?" name="ecgNormal" options={yesNo} bind:value={d.ecgNormal} />
+<Fieldset legend="Diagnostic Results">
+	<p class="hint">ECG, echocardiography, stress test, and catheterization findings.</p>
+
+	<Field label="Is the ECG normal?">
+		<RadioGroup label="Is the ECG normal?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="ecgNormal" value={opt.value} bind:group={d.ecgNormal} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.ecgNormal === 'no'}
-		<TextArea label="ECG findings" name="ecgFindings" bind:value={d.ecgFindings} placeholder="e.g. ST depression, LBBB, AF" />
+		<Field label="ECG findings" inputId="ecgFindings">
+			<TextAreaInput id="ecgFindings" label="ECG findings" rows={3} placeholder="e.g. ST depression, LBBB, AF" bind:value={d.ecgFindings} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has an echocardiogram been performed?" name="echoPerformed" options={yesNo} bind:value={d.echoPerformed} />
+	<Field label="Has an echocardiogram been performed?">
+		<RadioGroup label="Has an echocardiogram been performed?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="echoPerformed" value={opt.value} bind:group={d.echoPerformed} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.echoPerformed === 'yes'}
-		<NumberInput label="Left ventricular ejection fraction (LVEF)" name="echoLVEF" bind:value={d.echoLVEF} unit="%" min={5} max={80} />
-		<TextArea label="Echocardiogram findings" name="echoFindings" bind:value={d.echoFindings} placeholder="e.g. Wall motion abnormalities, valve issues" />
+		<Field label="Left ventricular ejection fraction (LVEF) (%)" inputId="echoLVEF">
+			<NumberInput id="echoLVEF" label="Left ventricular ejection fraction (LVEF)" min={5} max={80} bind:value={d.echoLVEF} />
+		</Field>
+		<Field label="Echocardiogram findings" inputId="echoFindings">
+			<TextAreaInput id="echoFindings" label="Echocardiogram findings" rows={3} placeholder="e.g. Wall motion abnormalities, valve issues" bind:value={d.echoFindings} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has a stress test been performed?" name="stressTest" options={yesNo} bind:value={d.stressTestPerformed} />
+	<Field label="Has a stress test been performed?">
+		<RadioGroup label="Has a stress test been performed?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="stressTest" value={opt.value} bind:group={d.stressTestPerformed} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.stressTestPerformed === 'yes'}
-		<SelectInput
-			label="Stress test result"
-			name="stressTestResult"
-			options={[
-				{ value: 'normal', label: 'Normal' },
-				{ value: 'abnormal', label: 'Abnormal' },
-				{ value: 'inconclusive', label: 'Inconclusive' }
-			]}
-			bind:value={d.stressTestResult}
-			required
-		/>
-		<TextArea label="Stress test details" name="stressTestDetails" bind:value={d.stressTestDetails} placeholder="e.g. Ischaemic changes, METs achieved" />
+		<Field label="Stress test result" required inputId="stressTestResult">
+			<Select id="stressTestResult" label="Stress test result" required bind:value={d.stressTestResult}>
+				<option value="">-- Select --</option>
+				<option value="normal">Normal</option>
+				<option value="abnormal">Abnormal</option>
+				<option value="inconclusive">Inconclusive</option>
+			</Select>
+		</Field>
+		<Field label="Stress test details" inputId="stressTestDetails">
+			<TextAreaInput id="stressTestDetails" label="Stress test details" rows={3} placeholder="e.g. Ischaemic changes, METs achieved" bind:value={d.stressTestDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has cardiac catheterization been performed?" name="cathPerformed" options={yesNo} bind:value={d.cathPerformed} />
+	<Field label="Has cardiac catheterization been performed?">
+		<RadioGroup label="Has cardiac catheterization been performed?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="cathPerformed" value={opt.value} bind:group={d.cathPerformed} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if d.cathPerformed === 'yes'}
-		<TextArea label="Catheterization findings" name="cathFindings" bind:value={d.cathFindings} placeholder="e.g. LAD 80% stenosis, RCA 50% stenosis" />
+		<Field label="Catheterization findings" inputId="cathFindings">
+			<TextAreaInput id="cathFindings" label="Catheterization findings" rows={3} placeholder="e.g. LAD 80% stenosis, RCA 50% stenosis" bind:value={d.cathFindings} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

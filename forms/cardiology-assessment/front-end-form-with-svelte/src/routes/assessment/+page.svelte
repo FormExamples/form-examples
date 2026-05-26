@@ -3,6 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateCardioGrade } from '$lib/engine/cardio-grader';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChestPainAngina from '$lib/components/steps/Step2ChestPainAngina.svelte';
 	import Step3HeartFailureSymptoms from '$lib/components/steps/Step3HeartFailureSymptoms.svelte';
@@ -15,38 +18,31 @@
 	import Step10SocialFunctional from '$lib/components/steps/Step10SocialFunctional.svelte';
 
 	function submitAssessment() {
-			const result = calculateCardioGrade(assessment.data);
-			assessment.result = result;
-			goto('/report');
-		}
+		const result = calculateCardioGrade(assessment.data);
+		assessment.result = result;
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Cardiology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChestPainAngina />
+	<Step3HeartFailureSymptoms />
+	<Step4CardiacHistory />
+	<Step5ArrhythmiaConduction />
+	<Step6RiskFactors />
+	<Step7DiagnosticResults />
+	<Step8CurrentMedications />
+	<Step9Allergies />
+	<Step10SocialFunctional />
 
-<Step2ChestPainAngina />
-
-<Step3HeartFailureSymptoms />
-
-<Step4CardiacHistory />
-
-<Step5ArrhythmiaConduction />
-
-<Step6RiskFactors />
-
-<Step7DiagnosticResults />
-
-<Step8CurrentMedications />
-
-<Step9Allergies />
-
-<Step10SocialFunctional />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

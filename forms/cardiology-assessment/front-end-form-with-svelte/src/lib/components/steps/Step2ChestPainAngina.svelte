@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const c = assessment.data.chestPainAngina;
@@ -12,74 +13,79 @@
 	];
 </script>
 
-<SectionCard title="Chest Pain / Angina" description="Character, location, radiation, and classification of chest pain">
-	<RadioGroup label="Do you experience chest pain?" name="chestPain" options={yesNo} bind:value={c.chestPain} />
+<Fieldset legend="Chest Pain / Angina">
+	<p class="hint">Character, location, radiation, and classification of chest pain.</p>
+
+	<Field label="Do you experience chest pain?">
+		<RadioGroup label="Do you experience chest pain?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="chestPain" value={opt.value} bind:group={c.chestPain} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if c.chestPain === 'yes'}
-		<SelectInput
-			label="Pain character"
-			name="painCharacter"
-			options={[
-				{ value: 'crushing', label: 'Crushing / Heavy' },
-				{ value: 'pressure', label: 'Pressure / Tightness' },
-				{ value: 'sharp', label: 'Sharp / Stabbing' },
-				{ value: 'burning', label: 'Burning' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={c.painCharacter}
-		/>
+		<Field label="Pain character" inputId="painCharacter">
+			<Select id="painCharacter" label="Pain character" bind:value={c.painCharacter}>
+				<option value="">-- Select --</option>
+				<option value="crushing">Crushing / Heavy</option>
+				<option value="pressure">Pressure / Tightness</option>
+				<option value="sharp">Sharp / Stabbing</option>
+				<option value="burning">Burning</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
 
-		<TextInput label="Pain location" name="painLocation" bind:value={c.painLocation} placeholder="e.g. Central chest, left-sided" />
+		<Field label="Pain location" inputId="painLocation">
+			<TextInput id="painLocation" label="Pain location" placeholder="e.g. Central chest, left-sided" bind:value={c.painLocation} />
+		</Field>
 
-		<SelectInput
-			label="Pain radiation"
-			name="painRadiation"
-			options={[
-				{ value: 'left-arm', label: 'Left arm' },
-				{ value: 'jaw', label: 'Jaw' },
-				{ value: 'back', label: 'Back' },
-				{ value: 'none', label: 'None' },
-				{ value: 'other', label: 'Other' }
-			]}
-			bind:value={c.painRadiation}
-		/>
+		<Field label="Pain radiation" inputId="painRadiation">
+			<Select id="painRadiation" label="Pain radiation" bind:value={c.painRadiation}>
+				<option value="">-- Select --</option>
+				<option value="left-arm">Left arm</option>
+				<option value="jaw">Jaw</option>
+				<option value="back">Back</option>
+				<option value="none">None</option>
+				<option value="other">Other</option>
+			</Select>
+		</Field>
 
-		<SelectInput
-			label="CCS Angina Class"
-			name="ccsClass"
-			options={[
-				{ value: '1', label: 'Class I - Angina only with strenuous exertion' },
-				{ value: '2', label: 'Class II - Slight limitation of ordinary activity' },
-				{ value: '3', label: 'Class III - Marked limitation of ordinary activity' },
-				{ value: '4', label: 'Class IV - Angina at rest' }
-			]}
-			bind:value={c.ccsClass}
-			required
-		/>
+		<Field label="CCS Angina Class" required inputId="ccsClass">
+			<Select id="ccsClass" label="CCS Angina Class" required bind:value={c.ccsClass}>
+				<option value="">-- Select --</option>
+				<option value="1">Class I - Angina only with strenuous exertion</option>
+				<option value="2">Class II - Slight limitation of ordinary activity</option>
+				<option value="3">Class III - Marked limitation of ordinary activity</option>
+				<option value="4">Class IV - Angina at rest</option>
+			</Select>
+		</Field>
 
-		<SelectInput
-			label="Angina frequency"
-			name="anginaFrequency"
-			options={[
-				{ value: 'daily', label: 'Daily' },
-				{ value: 'weekly', label: 'Weekly' },
-				{ value: 'monthly', label: 'Monthly' },
-				{ value: 'rarely', label: 'Rarely' }
-			]}
-			bind:value={c.anginaFrequency}
-		/>
+		<Field label="Angina frequency" inputId="anginaFrequency">
+			<Select id="anginaFrequency" label="Angina frequency" bind:value={c.anginaFrequency}>
+				<option value="">-- Select --</option>
+				<option value="daily">Daily</option>
+				<option value="weekly">Weekly</option>
+				<option value="monthly">Monthly</option>
+				<option value="rarely">Rarely</option>
+			</Select>
+		</Field>
 
-		<SelectInput
-			label="Angina duration"
-			name="anginaDuration"
-			options={[
-				{ value: 'less-5-min', label: 'Less than 5 minutes' },
-				{ value: '5-20-min', label: '5-20 minutes' },
-				{ value: 'greater-20-min', label: 'Greater than 20 minutes' }
-			]}
-			bind:value={c.anginaDuration}
-		/>
+		<Field label="Angina duration" inputId="anginaDuration">
+			<Select id="anginaDuration" label="Angina duration" bind:value={c.anginaDuration}>
+				<option value="">-- Select --</option>
+				<option value="less-5-min">Less than 5 minutes</option>
+				<option value="5-20-min">5-20 minutes</option>
+				<option value="greater-20-min">Greater than 20 minutes</option>
+			</Select>
+		</Field>
 
-		<RadioGroup label="Unstable angina (pain at rest or worsening pattern)?" name="unstableAngina" options={yesNo} bind:value={c.unstableAngina} />
+		<Field label="Unstable angina (pain at rest or worsening pattern)?">
+			<RadioGroup label="Unstable angina (pain at rest or worsening pattern)?">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="unstableAngina" value={opt.value} bind:group={c.unstableAngina} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
