@@ -1,73 +1,28 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const pm = assessment.data.practicalMatters;
 </script>
 
-<SectionCard title="Practical Matters" description="Practical arrangements and wishes for your affairs">
-	<TextArea
-		label="Financial arrangements"
-		name="financialArrangements"
-		bind:value={pm.financialArrangements}
-		placeholder="e.g. Who manages your finances? Bank details location, direct debits..."
-		rows={3}
-	/>
+<Fieldset legend="Practical Matters">
+	<p class="hint">Practical arrangements and wishes for your affairs</p>
+	<Field label="Financial arrangements" inputId="financialArrangements"><TextAreaInput id="financialArrangements" label="Financial arrangements" rows={3} placeholder="e.g. Who manages your finances? Bank details location, direct debits..." bind:value={pm.financialArrangements} /></Field>
 
-	<TextArea
-		label="Property matters"
-		name="propertyMatters"
-		bind:value={pm.propertyMatters}
-		placeholder="e.g. Ownership details, mortgage, keys location..."
-		rows={3}
-	/>
+	<Field label="Property matters" inputId="propertyMatters"><TextAreaInput id="propertyMatters" label="Property matters" rows={3} placeholder="e.g. Ownership details, mortgage, keys location..." bind:value={pm.propertyMatters} /></Field>
 
-	<TextArea
-		label="Pet care instructions"
-		name="petCareInstructions"
-		bind:value={pm.petCareInstructions}
-		placeholder="Detailed instructions for ongoing pet care..."
-		rows={3}
-	/>
+	<Field label="Pet care instructions" inputId="petCareInstructions"><TextAreaInput id="petCareInstructions" label="Pet care instructions" rows={3} placeholder="Detailed instructions for ongoing pet care..." bind:value={pm.petCareInstructions} /></Field>
 
-	<TextArea
-		label="Social media wishes"
-		name="socialMediaWishes"
-		bind:value={pm.socialMediaWishes}
-		placeholder="What should happen to your social media accounts?"
-		rows={2}
-	/>
+	<Field label="Social media wishes" inputId="socialMediaWishes"><TextAreaInput id="socialMediaWishes" label="Social media wishes" rows={2} placeholder="What should happen to your social media accounts?" bind:value={pm.socialMediaWishes} /></Field>
 
-	<TextArea
-		label="Personal belongings"
-		name="personalBelongings"
-		bind:value={pm.personalBelongings}
-		placeholder="Any specific wishes about personal items, keepsakes, or belongings..."
-		rows={3}
-	/>
+	<Field label="Personal belongings" inputId="personalBelongings"><TextAreaInput id="personalBelongings" label="Personal belongings" rows={3} placeholder="Any specific wishes about personal items, keepsakes, or belongings..." bind:value={pm.personalBelongings} /></Field>
 
-	<TextArea
-		label="Funeral wishes"
-		name="funeralWishes"
-		bind:value={pm.funeralWishes}
-		placeholder="Your preferences for funeral arrangements, burial vs cremation, service details..."
-		rows={4}
-	/>
+	<Field label="Funeral wishes" inputId="funeralWishes"><TextAreaInput id="funeralWishes" label="Funeral wishes" rows={4} placeholder="Your preferences for funeral arrangements, burial vs cremation, service details..." bind:value={pm.funeralWishes} /></Field>
 
-	<TextArea
-		label="Will details"
-		name="willDetails"
-		bind:value={pm.willDetails}
-		placeholder="Where is your will held? Who is the executor? Solicitor details..."
-		rows={3}
-	/>
+	<Field label="Will details" inputId="willDetails"><TextAreaInput id="willDetails" label="Will details" rows={3} placeholder="Where is your will held? Who is the executor? Solicitor details..." bind:value={pm.willDetails} /></Field>
 
-	<TextArea
-		label="Power of Attorney details"
-		name="powerOfAttorneyDetails"
-		bind:value={pm.powerOfAttorneyDetails}
-		placeholder="Details of any Lasting Power of Attorney (health and welfare, or property and financial affairs)..."
-		rows={4}
-	/>
-</SectionCard>
+	<Field label="Power of Attorney details" inputId="powerOfAttorneyDetails"><TextAreaInput id="powerOfAttorneyDetails" label="Power of Attorney details" rows={4} placeholder="Details of any Lasting Power of Attorney (health and welfare, or property and financial affairs)..." bind:value={pm.powerOfAttorneyDetails} /></Field>
+</Fieldset>

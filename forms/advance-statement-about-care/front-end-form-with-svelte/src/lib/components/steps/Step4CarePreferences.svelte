@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const c = assessment.data.carePreferences;
 
@@ -15,67 +17,21 @@
 	];
 </script>
 
-<SectionCard title="Care Preferences" description="Where and how you would like to be cared for">
-	<RadioGroup
-		label="Preferred place of care"
-		name="preferredPlaceOfCare"
-		options={placeOptions}
-		bind:value={c.preferredPlaceOfCare}
-		required
-	/>
+<Fieldset legend="Care Preferences">
+	<p class="hint">Where and how you would like to be cared for</p>
+	<Field label="Preferred place of care" required><RadioGroup label="Preferred place of care">{#each placeOptions as opt (opt.value)}<label><input type="radio" class="radio-input" name="preferredPlaceOfCare" value={opt.value} bind:group={c.preferredPlaceOfCare} required/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<RadioGroup
-		label="Preferred place of death"
-		name="preferredPlaceOfDeath"
-		options={placeOptions}
-		bind:value={c.preferredPlaceOfDeath}
-	/>
+	<Field label="Preferred place of death"><RadioGroup label="Preferred place of death">{#each placeOptions as opt (opt.value)}<label><input type="radio" class="radio-input" name="preferredPlaceOfDeath" value={opt.value} bind:group={c.preferredPlaceOfDeath}/> {opt.label}</label>{/each}</RadioGroup></Field>
 
-	<TextArea
-		label="Personal comfort preferences"
-		name="personalComfortPreferences"
-		bind:value={c.personalComfortPreferences}
-		placeholder="e.g. I like to have music playing, a particular blanket, scented candles..."
-		rows={4}
-	/>
+	<Field label="Personal comfort preferences" inputId="personalComfortPreferences"><TextAreaInput id="personalComfortPreferences" label="Personal comfort preferences" rows={4} placeholder="e.g. I like to have music playing, a particular blanket, scented candles..." bind:value={c.personalComfortPreferences} /></Field>
 
-	<TextArea
-		label="Daily routine preferences"
-		name="dailyRoutinePreferences"
-		bind:value={c.dailyRoutinePreferences}
-		placeholder="e.g. I like to wake early, have tea at certain times, watch particular TV programmes..."
-		rows={4}
-	/>
+	<Field label="Daily routine preferences" inputId="dailyRoutinePreferences"><TextAreaInput id="dailyRoutinePreferences" label="Daily routine preferences" rows={4} placeholder="e.g. I like to wake early, have tea at certain times, watch particular TV programmes..." bind:value={c.dailyRoutinePreferences} /></Field>
 
-	<TextArea
-		label="Dietary requirements and preferences"
-		name="dietaryRequirements"
-		bind:value={c.dietaryRequirements}
-		placeholder="Any dietary requirements, favourite foods, or things you dislike..."
-		rows={3}
-	/>
+	<Field label="Dietary requirements and preferences" inputId="dietaryRequirements"><TextAreaInput id="dietaryRequirements" label="Dietary requirements and preferences" rows={3} placeholder="Any dietary requirements, favourite foods, or things you dislike..." bind:value={c.dietaryRequirements} /></Field>
 
-	<TextArea
-		label="Clothing preferences"
-		name="clothingPreferences"
-		bind:value={c.clothingPreferences}
-		placeholder="What you prefer to wear, items that are important to you..."
-		rows={3}
-	/>
+	<Field label="Clothing preferences" inputId="clothingPreferences"><TextAreaInput id="clothingPreferences" label="Clothing preferences" rows={3} placeholder="What you prefer to wear, items that are important to you..." bind:value={c.clothingPreferences} /></Field>
 
-	<TextArea
-		label="Hygiene and personal care preferences"
-		name="hygienePreferences"
-		bind:value={c.hygienePreferences}
-		placeholder="e.g. Bath vs shower preference, products you use, hair care..."
-		rows={3}
-	/>
+	<Field label="Hygiene and personal care preferences" inputId="hygienePreferences"><TextAreaInput id="hygienePreferences" label="Hygiene and personal care preferences" rows={3} placeholder="e.g. Bath vs shower preference, products you use, hair care..." bind:value={c.hygienePreferences} /></Field>
 
-	<TextArea
-		label="Environment preferences"
-		name="environmentPreferences"
-		bind:value={c.environmentPreferences}
-		placeholder="e.g. Temperature, lighting, noise level, having a window open..."
-		rows={3}
-	/>
-</SectionCard>
+	<Field label="Environment preferences" inputId="environmentPreferences"><TextAreaInput id="environmentPreferences" label="Environment preferences" rows={3} placeholder="e.g. Temperature, lighting, noise level, having a window open..." bind:value={c.environmentPreferences} /></Field>
+</Fieldset>

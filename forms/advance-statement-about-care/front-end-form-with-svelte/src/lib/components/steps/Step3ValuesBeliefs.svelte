@@ -1,65 +1,26 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const v = assessment.data.valuesBeliefs;
 </script>
 
-<SectionCard title="Values & Beliefs" description="Share what matters most to you - your beliefs, values and what gives your life meaning">
-	<TextArea
-		label="Religious beliefs"
-		name="religiousBeliefs"
-		bind:value={v.religiousBeliefs}
-		placeholder="Describe any religious beliefs that are important to you and may affect your care..."
-		rows={3}
-	/>
+<Fieldset legend="Values & Beliefs">
+	<p class="hint">Share what matters most to you - your beliefs, values and what gives your life meaning</p>
+	<Field label="Religious beliefs" inputId="religiousBeliefs"><TextAreaInput id="religiousBeliefs" label="Religious beliefs" rows={3} placeholder="Describe any religious beliefs that are important to you and may affect your care..." bind:value={v.religiousBeliefs} /></Field>
 
-	<TextArea
-		label="Spiritual beliefs"
-		name="spiritualBeliefs"
-		bind:value={v.spiritualBeliefs}
-		placeholder="Describe any spiritual beliefs or practices important to you..."
-		rows={3}
-	/>
+	<Field label="Spiritual beliefs" inputId="spiritualBeliefs"><TextAreaInput id="spiritualBeliefs" label="Spiritual beliefs" rows={3} placeholder="Describe any spiritual beliefs or practices important to you..." bind:value={v.spiritualBeliefs} /></Field>
 
-	<TextArea
-		label="Cultural values"
-		name="culturalValues"
-		bind:value={v.culturalValues}
-		placeholder="Describe any cultural values or practices that are important to you..."
-		rows={3}
-	/>
+	<Field label="Cultural values" inputId="culturalValues"><TextAreaInput id="culturalValues" label="Cultural values" rows={3} placeholder="Describe any cultural values or practices that are important to you..." bind:value={v.culturalValues} /></Field>
 
-	<TextArea
-		label="Quality of life priorities"
-		name="qualityOfLifePriorities"
-		bind:value={v.qualityOfLifePriorities}
-		placeholder="What does quality of life mean to you? What would make life no longer worth living?"
-		rows={4}
-	/>
+	<Field label="Quality of life priorities" inputId="qualityOfLifePriorities"><TextAreaInput id="qualityOfLifePriorities" label="Quality of life priorities" rows={4} placeholder="What does quality of life mean to you? What would make life no longer worth living?" bind:value={v.qualityOfLifePriorities} /></Field>
 
-	<TextArea
-		label="What makes life meaningful to you?"
-		name="whatMakesLifeMeaningful"
-		bind:value={v.whatMakesLifeMeaningful}
-		placeholder="e.g. Family, hobbies, music, nature, social connections..."
-		rows={4}
-	/>
+	<Field label="What makes life meaningful to you?" inputId="whatMakesLifeMeaningful"><TextAreaInput id="whatMakesLifeMeaningful" label="What makes life meaningful to you?" rows={4} placeholder="e.g. Family, hobbies, music, nature, social connections..." bind:value={v.whatMakesLifeMeaningful} /></Field>
 
-	<TextArea
-		label="Important traditions or rituals"
-		name="importantTraditions"
-		bind:value={v.importantTraditions}
-		placeholder="Any traditions, celebrations, or rituals that are important to maintain..."
-		rows={3}
-	/>
+	<Field label="Important traditions or rituals" inputId="importantTraditions"><TextAreaInput id="importantTraditions" label="Important traditions or rituals" rows={3} placeholder="Any traditions, celebrations, or rituals that are important to maintain..." bind:value={v.importantTraditions} /></Field>
 
-	<TextArea
-		label="Views on dying and death"
-		name="viewsOnDying"
-		bind:value={v.viewsOnDying}
-		placeholder="How you feel about dying and what you would wish for at end of life..."
-		rows={4}
-	/>
-</SectionCard>
+	<Field label="Views on dying and death" inputId="viewsOnDying"><TextAreaInput id="viewsOnDying" label="Views on dying and death" rows={4} placeholder="How you feel about dying and what you would wish for at end of life..." bind:value={v.viewsOnDying} /></Field>
+</Fieldset>

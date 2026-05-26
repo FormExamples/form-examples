@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const s = assessment.data.statementContext;
 	const yesNo = [
@@ -11,52 +13,18 @@
 	];
 </script>
 
-<SectionCard title="Statement Context" description="Help us understand why you are making this advance statement and when it should apply">
-	<TextArea
-		label="Why are you making this advance statement?"
-		name="reasonForStatement"
-		bind:value={s.reasonForStatement}
-		placeholder="e.g. I have been diagnosed with a progressive condition and wish to record my preferences while I have capacity..."
-		rows={4}
-	/>
+<Fieldset legend="Statement Context">
+	<p class="hint">Help us understand why you are making this advance statement and when it should apply</p>
+	<Field label="Why are you making this advance statement?" inputId="reasonForStatement"><TextAreaInput id="reasonForStatement" label="Why are you making this advance statement?" rows={4} placeholder="e.g. I have been diagnosed with a progressive condition and wish to record my preferences while I have capacity..." bind:value={s.reasonForStatement} /></Field>
 
-	<TextArea
-		label="Current diagnosis or medical conditions"
-		name="currentDiagnosis"
-		bind:value={s.currentDiagnosis}
-		placeholder="List any current medical conditions or diagnoses..."
-		rows={3}
-	/>
+	<Field label="Current diagnosis or medical conditions" inputId="currentDiagnosis"><TextAreaInput id="currentDiagnosis" label="Current diagnosis or medical conditions" rows={3} placeholder="List any current medical conditions or diagnoses..." bind:value={s.currentDiagnosis} /></Field>
 
-	<TextArea
-		label="Your understanding of your condition"
-		name="understandingOfCondition"
-		bind:value={s.understandingOfCondition}
-		placeholder="Describe what you understand about your condition and its likely progression..."
-		rows={4}
-	/>
+	<Field label="Your understanding of your condition" inputId="understandingOfCondition"><TextAreaInput id="understandingOfCondition" label="Your understanding of your condition" rows={4} placeholder="Describe what you understand about your condition and its likely progression..." bind:value={s.understandingOfCondition} /></Field>
 
-	<TextArea
-		label="When should this statement apply?"
-		name="whenStatementShouldApply"
-		bind:value={s.whenStatementShouldApply}
-		placeholder="e.g. When I am no longer able to make decisions for myself, or when I can no longer communicate my wishes..."
-		rows={4}
-	/>
+	<Field label="When should this statement apply?" inputId="whenStatementShouldApply"><TextAreaInput id="whenStatementShouldApply" label="When should this statement apply?" rows={4} placeholder="e.g. When I am no longer able to make decisions for myself, or when I can no longer communicate my wishes..." bind:value={s.whenStatementShouldApply} /></Field>
 
-	<RadioGroup
-		label="Have you made any previous advance statements?"
-		name="previousStatements"
-		options={yesNo}
-		bind:value={s.previousAdvanceStatements}
-	/>
+	<Field label="Have you made any previous advance statements?"><RadioGroup label="Have you made any previous advance statements?">{#each yesNo as opt (opt.value)}<label><input type="radio" class="radio-input" name="previousStatements" value={opt.value} bind:group={s.previousAdvanceStatements}/> {opt.label}</label>{/each}</RadioGroup></Field>
 	{#if s.previousAdvanceStatements === 'yes'}
-		<TextArea
-			label="Details of previous advance statements"
-			name="previousStatementDetails"
-			bind:value={s.previousStatementDetails}
-			placeholder="Where are they held? This statement supersedes any previous versions."
-			rows={3}
-		/>
+		<Field label="Details of previous advance statements" inputId="previousStatementDetails"><TextAreaInput id="previousStatementDetails" label="Details of previous advance statements" rows={3} placeholder="Where are they held? This statement supersedes any previous versions." bind:value={s.previousStatementDetails} /></Field>
 	{/if}
-</SectionCard>
+</Fieldset>

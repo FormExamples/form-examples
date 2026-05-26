@@ -3,6 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateCompleteness } from '$lib/engine/completeness-grader';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1PersonalInformation from '$lib/components/steps/Step1PersonalInformation.svelte';
 	import Step2StatementContext from '$lib/components/steps/Step2StatementContext.svelte';
 	import Step3ValuesBeliefs from '$lib/components/steps/Step3ValuesBeliefs.svelte';
@@ -14,36 +17,30 @@
 	import Step9SignaturesWitnesses from '$lib/components/steps/Step9SignaturesWitnesses.svelte';
 
 	function submitStatement() {
-			const result = calculateCompleteness(assessment.data);
-			assessment.result = result;
-			goto('/report');
-		}
+		const result = calculateCompleteness(assessment.data);
+		assessment.result = result;
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1PersonalInformation />
+<Form label="Advance Statement About Care" onsubmit={submitStatement}>
+	<Step1PersonalInformation />
+	<Step2StatementContext />
+	<Step3ValuesBeliefs />
+	<Step4CarePreferences />
+	<Step5MedicalTreatmentWishes />
+	<Step6CommunicationPreferences />
+	<Step7PeopleImportantToMe />
+	<Step8PracticalMatters />
+	<Step9SignaturesWitnesses />
 
-<Step2StatementContext />
-
-<Step3ValuesBeliefs />
-
-<Step4CarePreferences />
-
-<Step5MedicalTreatmentWishes />
-
-<Step6CommunicationPreferences />
-
-<Step7PeopleImportantToMe />
-
-<Step8PracticalMatters />
-
-<Step9SignaturesWitnesses />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitStatement}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

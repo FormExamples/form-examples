@@ -1,8 +1,10 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+
 	import type { PersonImportantToMe } from '$lib/engine/types';
 
 	const p = assessment.data.peopleImportantToMe;
@@ -19,7 +21,8 @@
 	}
 </script>
 
-<SectionCard title="People Important to Me" description="Family, friends, and others who are important in your life and care">
+<Fieldset legend="People Important to Me">
+	<p class="hint">Family, friends, and others who are important in your life and care</p>
 	<div class="space-y-4">
 		{#each p.people as person, i}
 			<div class="rounded-lg border border-gray-200 bg-gray-50 p-4">
@@ -104,19 +107,7 @@
 
 	<div class="mt-6 border-t border-gray-200 pt-4">
 		<h3 class="mb-3 text-sm font-semibold text-gray-700">Pets</h3>
-		<TextArea
-			label="Details of any pets"
-			name="petsDetails"
-			bind:value={p.petsDetails}
-			placeholder="e.g. Labrador called Rosie, 5 years old..."
-			rows={2}
-		/>
-		<TextArea
-			label="Pet care arrangements"
-			name="petCareArrangements"
-			bind:value={p.petCareArrangements}
-			placeholder="Who will care for your pets if you are unable to?"
-			rows={2}
-		/>
+		<Field label="Details of any pets" inputId="petsDetails"><TextAreaInput id="petsDetails" label="Details of any pets" rows={2} placeholder="e.g. Labrador called Rosie, 5 years old..." bind:value={p.petsDetails} /></Field>
+		<Field label="Pet care arrangements" inputId="petCareArrangements"><TextAreaInput id="petCareArrangements" label="Pet care arrangements" rows={2} placeholder="Who will care for your pets if you are unable to?" bind:value={p.petCareArrangements} /></Field>
 	</div>
-</SectionCard>
+</Fieldset>
