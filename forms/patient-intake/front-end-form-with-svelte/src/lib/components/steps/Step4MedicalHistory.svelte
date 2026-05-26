@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	import { assessment } from '$lib/stores/assessment.svelte';
 
 	const h = assessment.data.medicalHistory;
 
@@ -27,31 +29,13 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Your past and current medical conditions">
-	<CheckboxGroup
-		label="Do you have any of the following chronic conditions?"
-		options={chronicConditionOptions}
-		bind:values={h.chronicConditions}
-	/>
+<Fieldset legend="Medical History">
+	<p class="hint">Your past and current medical conditions</p>
+	<Field label="Do you have any of the following chronic conditions?"><CheckboxGroup label="Do you have any of the following chronic conditions?">{#each chronicConditionOptions as opt (opt.value)}<label><input type="checkbox" class="checkbox-input" value={opt.value} bind:group={h.chronicConditions}/> {opt.label}</label>{/each}</CheckboxGroup></Field>
 
-	<TextArea
-		label="Previous Surgeries"
-		name="surgeries"
-		bind:value={h.previousSurgeries}
-		placeholder="List any previous surgeries with approximate dates"
-	/>
+	<Field label="Previous Surgeries" inputId="surgeries"><TextAreaInput id="surgeries" label="Previous Surgeries" placeholder="List any previous surgeries with approximate dates" bind:value={h.previousSurgeries} /></Field>
 
-	<TextArea
-		label="Previous Hospitalizations"
-		name="hospitalizations"
-		bind:value={h.previousHospitalizations}
-		placeholder="List any previous hospital stays with approximate dates and reasons"
-	/>
+	<Field label="Previous Hospitalizations" inputId="hospitalizations"><TextAreaInput id="hospitalizations" label="Previous Hospitalizations" placeholder="List any previous hospital stays with approximate dates and reasons" bind:value={h.previousHospitalizations} /></Field>
 
-	<TextArea
-		label="Ongoing Treatments"
-		name="treatments"
-		bind:value={h.ongoingTreatments}
-		placeholder="Describe any ongoing treatments or therapies"
-	/>
-</SectionCard>
+	<Field label="Ongoing Treatments" inputId="treatments"><TextAreaInput id="treatments" label="Ongoing Treatments" placeholder="Describe any ongoing treatments or therapies" bind:value={h.ongoingTreatments} /></Field>
+</Fieldset>

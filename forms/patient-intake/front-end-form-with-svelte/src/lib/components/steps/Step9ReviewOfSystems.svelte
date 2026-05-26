@@ -1,29 +1,32 @@
 <script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	const ros = assessment.data.reviewOfSystems;
 </script>
 
-<SectionCard title="Review of Systems" description="Please note any current symptoms in each area. Leave blank if none.">
-	<TextArea label="Constitutional (fever, weight changes, fatigue)" name="constitutional" bind:value={ros.constitutional} placeholder="e.g. unexplained weight loss, persistent fatigue" />
+<Fieldset legend="Review of Systems">
+	<p class="hint">Please note any current symptoms in each area. Leave blank if none.</p>
+	<Field label="Constitutional (fever, weight changes, fatigue)" inputId="constitutional"><TextAreaInput id="constitutional" label="Constitutional (fever, weight changes, fatigue)" placeholder="e.g. unexplained weight loss, persistent fatigue" bind:value={ros.constitutional} /></Field>
 
-	<TextArea label="HEENT (Head, Eyes, Ears, Nose, Throat)" name="heent" bind:value={ros.heent} placeholder="e.g. headaches, vision changes, hearing loss" />
+	<Field label="HEENT (Head, Eyes, Ears, Nose, Throat)" inputId="heent"><TextAreaInput id="heent" label="HEENT (Head, Eyes, Ears, Nose, Throat)" placeholder="e.g. headaches, vision changes, hearing loss" bind:value={ros.heent} /></Field>
 
-	<TextArea label="Cardiovascular" name="cardiovascular" bind:value={ros.cardiovascular} placeholder="e.g. chest pain, palpitations, shortness of breath on exertion" />
+	<Field label="Cardiovascular" inputId="cardiovascular"><TextAreaInput id="cardiovascular" label="Cardiovascular" placeholder="e.g. chest pain, palpitations, shortness of breath on exertion" bind:value={ros.cardiovascular} /></Field>
 
-	<TextArea label="Respiratory" name="respiratory" bind:value={ros.respiratory} placeholder="e.g. cough, wheezing, shortness of breath" />
+	<Field label="Respiratory" inputId="respiratory"><TextAreaInput id="respiratory" label="Respiratory" placeholder="e.g. cough, wheezing, shortness of breath" bind:value={ros.respiratory} /></Field>
 
-	<TextArea label="Gastrointestinal" name="gastrointestinal" bind:value={ros.gastrointestinal} placeholder="e.g. nausea, abdominal pain, changes in bowel habits" />
+	<Field label="Gastrointestinal" inputId="gastrointestinal"><TextAreaInput id="gastrointestinal" label="Gastrointestinal" placeholder="e.g. nausea, abdominal pain, changes in bowel habits" bind:value={ros.gastrointestinal} /></Field>
 
-	<TextArea label="Genitourinary" name="genitourinary" bind:value={ros.genitourinary} placeholder="e.g. urinary frequency, pain, blood in urine" />
+	<Field label="Genitourinary" inputId="genitourinary"><TextAreaInput id="genitourinary" label="Genitourinary" placeholder="e.g. urinary frequency, pain, blood in urine" bind:value={ros.genitourinary} /></Field>
 
-	<TextArea label="Musculoskeletal" name="musculoskeletal" bind:value={ros.musculoskeletal} placeholder="e.g. joint pain, stiffness, swelling" />
+	<Field label="Musculoskeletal" inputId="musculoskeletal"><TextAreaInput id="musculoskeletal" label="Musculoskeletal" placeholder="e.g. joint pain, stiffness, swelling" bind:value={ros.musculoskeletal} /></Field>
 
-	<TextArea label="Neurological" name="neurological" bind:value={ros.neurological} placeholder="e.g. numbness, tingling, weakness, seizures" />
+	<Field label="Neurological" inputId="neurological"><TextAreaInput id="neurological" label="Neurological" placeholder="e.g. numbness, tingling, weakness, seizures" bind:value={ros.neurological} /></Field>
 
-	<TextArea label="Psychiatric" name="psychiatric" bind:value={ros.psychiatric} placeholder="e.g. anxiety, depression, sleep disturbance" />
+	<Field label="Psychiatric" inputId="psychiatric"><TextAreaInput id="psychiatric" label="Psychiatric" placeholder="e.g. anxiety, depression, sleep disturbance" bind:value={ros.psychiatric} /></Field>
 
-	<TextArea label="Skin" name="skin" bind:value={ros.skin} placeholder="e.g. rashes, lesions, changes in moles" />
-</SectionCard>
+	<Field label="Skin" inputId="skin"><TextAreaInput id="skin" label="Skin" placeholder="e.g. rashes, lesions, changes in moles" bind:value={ros.skin} /></Field>
+</Fieldset>
