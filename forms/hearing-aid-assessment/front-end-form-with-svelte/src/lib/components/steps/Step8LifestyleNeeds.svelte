@@ -1,65 +1,44 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const l = assessment.data.lifestyleNeeds;
+
+	const techOptions = [
+		{ value: 'very-comfortable', label: 'Very comfortable' },
+		{ value: 'comfortable', label: 'Comfortable' },
+		{ value: 'somewhat-comfortable', label: 'Somewhat comfortable' },
+		{ value: 'uncomfortable', label: 'Uncomfortable' }
+	];
+
+	const dexOptions = [
+		{ value: 'good', label: 'Good' },
+		{ value: 'fair', label: 'Fair' },
+		{ value: 'poor', label: 'Poor' }
+	];
 </script>
 
-<SectionCard title="Lifestyle & Needs" description="Help us understand your daily life and hearing needs">
-	<TextArea
-		label="Describe your social activity level"
-		name="socialActivity"
-		bind:value={l.socialActivity}
-		placeholder="e.g., very active social life, regular church attendance, frequent dining out..."
-	/>
+<Fieldset legend="Lifestyle & Needs">
+	<p class="hint">Help us understand your daily life and hearing needs.</p>
 
-	<TextArea
-		label="Occupation or daily activity requirements"
-		name="occupationRequirements"
-		bind:value={l.occupationRequirements}
-		placeholder="e.g., retired, office environment, meetings, phone calls..."
-	/>
+	<Field label="Describe your social activity level" inputId="socialActivity"><TextAreaInput id="socialActivity" label="Social activity" rows={3} placeholder="e.g., very active social life, regular church attendance, frequent dining out..." bind:value={l.socialActivity} /></Field>
 
-	<TextArea
-		label="Hobbies and leisure activities"
-		name="hobbies"
-		bind:value={l.hobbies}
-		placeholder="e.g., music, theatre, sports, gardening..."
-	/>
+	<Field label="Occupation or daily activity requirements" inputId="occupationRequirements"><TextAreaInput id="occupationRequirements" label="Occupation requirements" rows={3} placeholder="e.g., retired, office environment, meetings, phone calls..." bind:value={l.occupationRequirements} /></Field>
 
-	<RadioGroup
-		label="How comfortable are you with technology?"
-		name="technologyComfort"
-		options={[
-			{ value: 'very-comfortable', label: 'Very comfortable' },
-			{ value: 'comfortable', label: 'Comfortable' },
-			{ value: 'somewhat-comfortable', label: 'Somewhat comfortable' },
-			{ value: 'uncomfortable', label: 'Uncomfortable' }
-		]}
-		bind:value={l.technologyComfort}
-	/>
+	<Field label="Hobbies and leisure activities" inputId="hobbies"><TextAreaInput id="hobbies" label="Hobbies" rows={3} placeholder="e.g., music, theatre, sports, gardening..." bind:value={l.hobbies} /></Field>
 
-	<RadioGroup
-		label="Manual dexterity (ability to handle small objects)"
-		name="dexterity"
-		options={[
-			{ value: 'good', label: 'Good' },
-			{ value: 'fair', label: 'Fair' },
-			{ value: 'poor', label: 'Poor' }
-		]}
-		bind:value={l.dexterity}
-	/>
+	<Field label="How comfortable are you with technology?">
+		<RadioGroup label="Technology comfort">{#each techOptions as opt (opt.value)}<label><input type="radio" class="radio-input" name="technologyComfort" value={opt.value} bind:group={l.technologyComfort} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
 
-	<RadioGroup
-		label="Vision status"
-		name="visionStatus"
-		options={[
-			{ value: 'good', label: 'Good' },
-			{ value: 'fair', label: 'Fair' },
-			{ value: 'poor', label: 'Poor' }
-		]}
-		bind:value={l.visionStatus}
-	/>
-</SectionCard>
+	<Field label="Manual dexterity (ability to handle small objects)">
+		<RadioGroup label="Dexterity">{#each dexOptions as opt (opt.value)}<label><input type="radio" class="radio-input" name="dexterity" value={opt.value} bind:group={l.dexterity} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
+
+	<Field label="Vision status">
+		<RadioGroup label="Vision status">{#each dexOptions as opt (opt.value)}<label><input type="radio" class="radio-input" name="visionStatus" value={opt.value} bind:group={l.visionStatus} /> {opt.label}</label>{/each}</RadioGroup>
+	</Field>
+</Fieldset>

@@ -3,7 +3,9 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calculateHHIES } from '$lib/engine/hhies-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-	import { hhiesCategory } from '$lib/engine/utils';
+
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2HearingHistory from '$lib/components/steps/Step2HearingHistory.svelte';
@@ -16,43 +18,37 @@
 	import Step9ExpectationsGoals from '$lib/components/steps/Step9ExpectationsGoals.svelte';
 
 	function submitAssessment() {
-			const { hhiesScore, hhiesCategoryLabel, firedRules } = calculateHHIES(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				hhiesScore,
-				hhiesCategory: hhiesCategoryLabel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { hhiesScore, hhiesCategoryLabel, firedRules } = calculateHHIES(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			hhiesScore,
+			hhiesCategory: hhiesCategoryLabel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Hearing Aid Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2HearingHistory />
+	<Step3HHIESQuestionnaire />
+	<Step4CommunicationDifficulties />
+	<Step5CurrentHearingAids />
+	<Step6EarExamination />
+	<Step7AudiogramResults />
+	<Step8LifestyleNeeds />
+	<Step9ExpectationsGoals />
 
-<Step2HearingHistory />
-
-<Step3HHIESQuestionnaire />
-
-<Step4CommunicationDifficulties />
-
-<Step5CurrentHearingAids />
-
-<Step6EarExamination />
-
-<Step7AudiogramResults />
-
-<Step8LifestyleNeeds />
-
-<Step9ExpectationsGoals />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

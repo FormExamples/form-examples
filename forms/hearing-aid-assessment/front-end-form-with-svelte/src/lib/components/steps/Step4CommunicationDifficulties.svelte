@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.communicationDifficulties;
@@ -11,48 +12,27 @@
 		{ value: 'moderate', label: 'Moderate' },
 		{ value: 'severe', label: 'Severe' }
 	];
+
+	const questions: { key: keyof typeof c; label: string; name: string }[] = [
+		{ key: 'quietConversation', label: 'Conversation in a quiet room (one-to-one)', name: 'quietConversation' },
+		{ key: 'groupConversation', label: 'Group conversation (3 or more people)', name: 'groupConversation' },
+		{ key: 'telephone', label: 'Telephone conversations', name: 'telephone' },
+		{ key: 'television', label: 'Listening to television or radio', name: 'television' },
+		{ key: 'publicPlaces', label: 'Hearing in public places (shops, restaurants, etc.)', name: 'publicPlaces' },
+		{ key: 'workDifficulty', label: 'Hearing difficulty at work or during regular activities', name: 'workDifficulty' }
+	];
 </script>
 
-<SectionCard title="Communication Difficulties" description="Rate your difficulty in the following listening situations">
-	<RadioGroup
-		label="Conversation in a quiet room (one-to-one)"
-		name="quietConversation"
-		options={difficultyOptions}
-		bind:value={c.quietConversation}
-	/>
+<Fieldset legend="Communication Difficulties">
+	<p class="hint">Rate your difficulty in the following listening situations.</p>
 
-	<RadioGroup
-		label="Group conversation (3 or more people)"
-		name="groupConversation"
-		options={difficultyOptions}
-		bind:value={c.groupConversation}
-	/>
-
-	<RadioGroup
-		label="Telephone conversations"
-		name="telephone"
-		options={difficultyOptions}
-		bind:value={c.telephone}
-	/>
-
-	<RadioGroup
-		label="Listening to television or radio"
-		name="television"
-		options={difficultyOptions}
-		bind:value={c.television}
-	/>
-
-	<RadioGroup
-		label="Hearing in public places (shops, restaurants, etc.)"
-		name="publicPlaces"
-		options={difficultyOptions}
-		bind:value={c.publicPlaces}
-	/>
-
-	<RadioGroup
-		label="Hearing difficulty at work or during regular activities"
-		name="workDifficulty"
-		options={difficultyOptions}
-		bind:value={c.workDifficulty}
-	/>
-</SectionCard>
+	{#each questions as q (q.key)}
+		<Field label={q.label}>
+			<RadioGroup label={q.label}>
+				{#each difficultyOptions as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={q.name} value={opt.value} bind:group={c[q.key]} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+</Fieldset>
