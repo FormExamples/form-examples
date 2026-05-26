@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Legacy TextInput adapted to emit Lily .field + .label + .text-input markup.
 	let {
 		label,
 		name,
@@ -14,12 +15,18 @@
 		required?: boolean;
 		type?: 'text' | 'date' | 'email' | 'tel';
 	} = $props();
+
+	const inputClass = $derived(
+		type === 'date' ? 'date-input' :
+		type === 'email' ? 'email-input' :
+		type === 'tel' ? 'tel-input' :
+		'text-input'
+	);
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
+<div class="field" data-required={required || undefined}>
+	<label class="label" for={name} data-required={required || undefined}>
 		{label}
-		{#if required}<span class="text-red-500">*</span>{/if}
 	</label>
 	<input
 		id={name}
@@ -28,6 +35,6 @@
 		{placeholder}
 		{required}
 		bind:value
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
+		class={inputClass}
 	/>
 </div>
