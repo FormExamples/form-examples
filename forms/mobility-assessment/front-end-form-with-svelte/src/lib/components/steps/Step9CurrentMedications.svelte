@@ -1,44 +1,52 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const med = assessment.data.currentMedications;
+	const fallRisk = [
+		{ value: 'benzodiazepine', label: 'Benzodiazepines' },
+		{ value: 'opioid', label: 'Opioids' },
+		{ value: 'antihistamine', label: 'Antihistamines' },
+		{ value: 'antipsychotic', label: 'Antipsychotics' },
+		{ value: 'antihypertensive', label: 'Antihypertensives' },
+		{ value: 'diuretic', label: 'Diuretics' },
+		{ value: 'sedative', label: 'Sedatives/Hypnotics' },
+		{ value: 'antidepressant', label: 'Antidepressants' },
+		{ value: 'anticonvulsant', label: 'Anticonvulsants' }
+	];
+
+	function toggleClass(val: string) {
+		if (med.fallRiskMedications.includes(val)) {
+			med.fallRiskMedications = med.fallRiskMedications.filter((v) => v !== val);
+		} else {
+			med.fallRiskMedications = [...med.fallRiskMedications, val];
+		}
+	}
 </script>
 
-<SectionCard title="Current Medications" description="List all current medications, especially those affecting fall risk">
-	<h3 class="mb-2 text-sm font-semibold text-gray-700">All Current Medications</h3>
-	<MedicationEntry bind:medications={med.medications} />
-	{#if med.medications.length === 0}
-		<p class="mt-2 mb-4 text-sm text-gray-500">No medications added.</p>
-	{/if}
+<Fieldset legend="Current Medications">
+	<p class="hint">List all current medications, especially those affecting fall risk.</p>
 
-	<div class="mt-6">
-		<CheckboxGroup
-			label="Fall-Risk Medication Classes"
-			options={[
-				{ value: 'benzodiazepine', label: 'Benzodiazepines' },
-				{ value: 'opioid', label: 'Opioids' },
-				{ value: 'antihistamine', label: 'Antihistamines' },
-				{ value: 'antipsychotic', label: 'Antipsychotics' },
-				{ value: 'antihypertensive', label: 'Antihypertensives' },
-				{ value: 'diuretic', label: 'Diuretics' },
-				{ value: 'sedative', label: 'Sedatives/Hypnotics' },
-				{ value: 'antidepressant', label: 'Antidepressants' },
-				{ value: 'anticonvulsant', label: 'Anticonvulsants' }
-			]}
-			bind:values={med.fallRiskMedications}
-		/>
-	</div>
+	<Field label="All Current Medications">
+		<MedicationEntry bind:medications={med.medications} />
+	</Field>
 
-	<div class="mt-4">
-		<TextArea
-			label="Recent Medication Changes"
-			name="recentMedicationChanges"
-			bind:value={med.recentMedicationChanges}
-			placeholder="Describe any recent changes to medications..."
-		/>
-	</div>
-</SectionCard>
+	<Field label="Fall-Risk Medication Classes">
+		<CheckboxGroup label="Fall-Risk Medication Classes">
+			{#each fallRisk as opt (opt.value)}
+				<label>
+					<input type="checkbox" class="checkbox-input" checked={med.fallRiskMedications.includes(opt.value)} onchange={() => toggleClass(opt.value)} />
+					{opt.label}
+				</label>
+			{/each}
+		</CheckboxGroup>
+	</Field>
+
+	<Field label="Recent Medication Changes" inputId="recentMedicationChanges">
+		<TextAreaInput id="recentMedicationChanges" label="Recent Medication Changes" rows={3} placeholder="Describe any recent changes to medications..." bind:value={med.recentMedicationChanges} />
+	</Field>
+</Fieldset>

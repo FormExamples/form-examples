@@ -13,6 +13,6 @@
 	} = $props();
 </script>
 
-<fieldset class={`radio-group ${className}`} role="radiogroup" aria-label={label} {...restProps}>
+<section class={`panel ${className}`} aria-label={label} {...restProps}>
 	{@render children?.()}
-</fieldset>
+</section>

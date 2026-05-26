@@ -4,6 +4,9 @@
 	import { calculateTinetti } from '$lib/engine/tinetti-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ReferralInfo from '$lib/components/steps/Step2ReferralInfo.svelte';
 	import Step3FallHistory from '$lib/components/steps/Step3FallHistory.svelte';
@@ -16,47 +19,40 @@
 	import Step10FunctionalIndependence from '$lib/components/steps/Step10FunctionalIndependence.svelte';
 
 	function submitAssessment() {
-			const { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules } = calculateTinetti(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				tinettiTotal,
-				balanceScore,
-				gaitScore,
-				tinettiCategory: tinettiCategoryLabel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules } = calculateTinetti(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			tinettiTotal,
+			balanceScore,
+			gaitScore,
+			tinettiCategory: tinettiCategoryLabel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Mobility Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ReferralInfo />
+	<Step3FallHistory />
+	<Step4BalanceAssessment />
+	<Step5GaitAssessment />
+	<Step6TimedUpAndGo />
+	<Step7RangeOfMotion />
+	<Step8AssistiveDevices />
+	<Step9CurrentMedications />
+	<Step10FunctionalIndependence />
 
-<Step2ReferralInfo />
-
-<Step3FallHistory />
-
-<Step4BalanceAssessment />
-
-<Step5GaitAssessment />
-
-<Step6TimedUpAndGo />
-
-<Step7RangeOfMotion />
-
-<Step8AssistiveDevices />
-
-<Step9CurrentMedications />
-
-<Step10FunctionalIndependence />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const fi = assessment.data.functionalIndependence;
 
@@ -17,46 +18,45 @@
 	];
 </script>
 
-<SectionCard title="Functional Independence" description="Assess level of independence in daily mobility tasks">
-	<SelectInput
-		label="Transfers (bed, chair, toilet)"
-		name="transfers"
-		options={independenceLevels}
-		bind:value={fi.transfers}
-	/>
+<Fieldset legend="Functional Independence">
+	<p class="hint">Assess level of independence in daily mobility tasks.</p>
 
-	<SelectInput
-		label="Ambulation"
-		name="ambulation"
-		options={independenceLevels}
-		bind:value={fi.ambulation}
-	/>
+	<Field label="Transfers (bed, chair, toilet)" inputId="transfers">
+		<Select id="transfers" label="Transfers" bind:value={fi.transfers}>
+			<option value="">-- Select --</option>
+			{#each independenceLevels as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Stairs"
-		name="stairs"
-		options={independenceLevels}
-		bind:value={fi.stairs}
-	/>
+	<Field label="Ambulation" inputId="ambulation">
+		<Select id="ambulation" label="Ambulation" bind:value={fi.ambulation}>
+			<option value="">-- Select --</option>
+			{#each independenceLevels as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Bathing"
-		name="bathing"
-		options={independenceLevels}
-		bind:value={fi.bathing}
-	/>
+	<Field label="Stairs" inputId="stairs">
+		<Select id="stairs" label="Stairs" bind:value={fi.stairs}>
+			<option value="">-- Select --</option>
+			{#each independenceLevels as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Dressing (lower body)"
-		name="dressing"
-		options={independenceLevels}
-		bind:value={fi.dressing}
-	/>
+	<Field label="Bathing" inputId="bathing">
+		<Select id="bathing" label="Bathing" bind:value={fi.bathing}>
+			<option value="">-- Select --</option>
+			{#each independenceLevels as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<TextArea
-		label="Additional Notes"
-		name="additionalNotes"
-		bind:value={fi.additionalNotes}
-		placeholder="Any additional observations about functional independence..."
-	/>
-</SectionCard>
+	<Field label="Dressing (lower body)" inputId="dressing">
+		<Select id="dressing" label="Dressing" bind:value={fi.dressing}>
+			<option value="">-- Select --</option>
+			{#each independenceLevels as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
+
+	<Field label="Additional Notes" inputId="additionalNotes">
+		<TextAreaInput id="additionalNotes" label="Additional Notes" rows={3} placeholder="Any additional observations about functional independence..." bind:value={fi.additionalNotes} />
+	</Field>
+</Fieldset>

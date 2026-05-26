@@ -1,55 +1,44 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const t = assessment.data.timedUpAndGo;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Timed Up and Go (TUG)" description="Patient rises from chair, walks 3 metres, turns, walks back, and sits down">
-	<NumberInput
-		label="Time to Complete"
-		name="timeSeconds"
-		bind:value={t.timeSeconds}
-		min={0}
-		max={300}
-		step={0.1}
-		unit="seconds"
-		required
-	/>
+<Fieldset legend="Timed Up and Go (TUG)">
+	<p class="hint">Patient rises from chair, walks 3 metres, turns, walks back, and sits down.</p>
 
-	<div class="mt-2 rounded-lg bg-blue-50 p-3 text-sm text-blue-800">
-		<p class="font-medium">TUG Interpretation:</p>
-		<ul class="mt-1 list-disc pl-5 space-y-1">
-			<li>&lt;10 seconds: Freely mobile</li>
-			<li>10-14 seconds: Mostly independent</li>
-			<li>14-20 seconds: Variable mobility</li>
-			<li>&gt;20 seconds: Impaired mobility</li>
-		</ul>
-	</div>
+	<Field label="Time to Complete (seconds)" required inputId="timeSeconds">
+		<NumberInput id="timeSeconds" label="TUG time" min={0} max={300} step={0.1} required bind:value={t.timeSeconds} />
+	</Field>
 
-	<div class="mt-4">
-		<RadioGroup
-			label="Did the patient use an assistive device?"
-			name="usedAssistiveDevice"
-			options={yesNo}
-			bind:value={t.usedAssistiveDevice}
-		/>
-	</div>
+	<Alert type="info" heading="TUG Interpretation">
+		<p>&lt;10 seconds: Freely mobile</p>
+		<p>10-14 seconds: Mostly independent</p>
+		<p>14-20 seconds: Variable mobility</p>
+		<p>&gt;20 seconds: Impaired mobility</p>
+	</Alert>
+
+	<Field label="Did the patient use an assistive device?">
+		<RadioGroup label="Used assistive device">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="usedAssistiveDevice" value={opt.value} bind:group={t.usedAssistiveDevice} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if t.usedAssistiveDevice === 'yes'}
-		<TextInput
-			label="Device Type"
-			name="deviceType"
-			bind:value={t.deviceType}
-			placeholder="e.g., cane, walker, rollator..."
-		/>
+		<Field label="Device Type" inputId="deviceType">
+			<TextInput id="deviceType" label="Device Type" placeholder="e.g., cane, walker, rollator..." bind:value={t.deviceType} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

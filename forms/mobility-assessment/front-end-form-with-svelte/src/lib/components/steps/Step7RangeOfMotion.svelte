@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const rom = assessment.data.rangeOfMotion;
 
@@ -14,31 +15,62 @@
 	];
 </script>
 
-<SectionCard title="Range of Motion" description="Assess range of motion in lower extremities">
-	<h3 class="mb-3 text-sm font-semibold text-gray-700">Hip</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Hip Flexion" name="hipFlexion" options={romOptions} bind:value={rom.hipFlexion} />
-		<SelectInput label="Hip Extension" name="hipExtension" options={romOptions} bind:value={rom.hipExtension} />
+<Fieldset legend="Range of Motion - Hip">
+	<div class="field-grid">
+		<Field label="Hip Flexion" inputId="hipFlexion">
+			<Select id="hipFlexion" label="Hip Flexion" bind:value={rom.hipFlexion}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Hip Extension" inputId="hipExtension">
+			<Select id="hipExtension" label="Hip Extension" bind:value={rom.hipExtension}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+	</div>
+</Fieldset>
+
+<Fieldset legend="Range of Motion - Knee">
+	<div class="field-grid">
+		<Field label="Knee Flexion" inputId="kneeFlexion">
+			<Select id="kneeFlexion" label="Knee Flexion" bind:value={rom.kneeFlexion}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Knee Extension" inputId="kneeExtension">
+			<Select id="kneeExtension" label="Knee Extension" bind:value={rom.kneeExtension}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+	</div>
+</Fieldset>
+
+<Fieldset legend="Range of Motion - Ankle">
+	<div class="field-grid">
+		<Field label="Ankle Dorsiflexion" inputId="ankleFlexion">
+			<Select id="ankleFlexion" label="Ankle Dorsiflexion" bind:value={rom.ankleFlexion}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
+		<Field label="Ankle Plantarflexion" inputId="ankleExtension">
+			<Select id="ankleExtension" label="Ankle Plantarflexion" bind:value={rom.ankleExtension}>
+				<option value="">-- Select --</option>
+				{#each romOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+			</Select>
+		</Field>
 	</div>
 
-	<h3 class="mb-3 mt-4 text-sm font-semibold text-gray-700">Knee</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Knee Flexion" name="kneeFlexion" options={romOptions} bind:value={rom.kneeFlexion} />
-		<SelectInput label="Knee Extension" name="kneeExtension" options={romOptions} bind:value={rom.kneeExtension} />
-	</div>
+	<Field label="Additional ROM Notes" inputId="romNotes">
+		<TextAreaInput id="romNotes" label="ROM Notes" rows={3} placeholder="Any additional observations about range of motion..." bind:value={rom.notes} />
+	</Field>
+</Fieldset>
 
-	<h3 class="mb-3 mt-4 text-sm font-semibold text-gray-700">Ankle</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput label="Ankle Dorsiflexion" name="ankleFlexion" options={romOptions} bind:value={rom.ankleFlexion} />
-		<SelectInput label="Ankle Plantarflexion" name="ankleExtension" options={romOptions} bind:value={rom.ankleExtension} />
-	</div>
-
-	<div class="mt-4">
-		<TextArea
-			label="Additional ROM Notes"
-			name="romNotes"
-			bind:value={rom.notes}
-			placeholder="Any additional observations about range of motion..."
-		/>
-	</div>
-</SectionCard>
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

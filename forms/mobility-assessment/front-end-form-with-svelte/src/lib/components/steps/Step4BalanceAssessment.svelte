@@ -1,26 +1,17 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const b = assessment.data.balanceAssessment;
-
-	const score01 = [
-		{ value: '0', label: '0' },
-		{ value: '1', label: '1' }
-	];
-
-	const score02 = [
-		{ value: '0', label: '0' },
-		{ value: '1', label: '1' },
-		{ value: '2', label: '2' }
-	];
+	const score01 = [{ value: '0', label: '0' }, { value: '1', label: '1' }];
+	const score02 = [{ value: '0', label: '0' }, { value: '1', label: '1' }, { value: '2', label: '2' }];
 
 	function toTinettiScore(val: string): 0 | 1 | 2 | null {
 		if (val === '') return null;
 		return Number(val) as 0 | 1 | 2;
 	}
-
 	function fromTinettiScore(val: 0 | 1 | 2 | null): string {
 		return val === null ? '' : String(val);
 	}
@@ -44,71 +35,56 @@
 	$effect(() => { b.eyesClosed = toTinettiScore(eyesClosed); });
 	$effect(() => { b.turning360 = toTinettiScore(turning360); });
 	$effect(() => { b.sittingDown = toTinettiScore(sittingDown); });
+
+	const items: { name: string; label: string; opts: typeof score01; binding: 'sittingBalance' | 'risesFromChair' | 'attemptingToRise' | 'immediateStandingBalance' | 'standingBalance' | 'nudgedBalance' | 'eyesClosed' | 'turning360' | 'sittingDown' }[] = [
+		{ name: 'sittingBalance', label: '1. Sitting Balance (0 = leans/slides, 1 = steady/safe)', opts: score01, binding: 'sittingBalance' },
+		{ name: 'risesFromChair', label: '2. Rises from Chair (0 = unable, 1 = uses arms, 2 = without arms)', opts: score02, binding: 'risesFromChair' },
+		{ name: 'attemptingToRise', label: '3. Attempting to Rise (0 = unable, 1 = >1 attempt, 2 = first attempt)', opts: score02, binding: 'attemptingToRise' },
+		{ name: 'immediateStandingBalance', label: '4. Immediate Standing Balance (0 = unsteady, 1 = steady with aid, 2 = without aid)', opts: score02, binding: 'immediateStandingBalance' },
+		{ name: 'standingBalance', label: '5. Standing Balance (0 = unsteady, 1 = wide stance, 2 = narrow without support)', opts: score02, binding: 'standingBalance' },
+		{ name: 'nudgedBalance', label: '6. Nudged (0 = begins to fall, 1 = staggers, 2 = steady)', opts: score02, binding: 'nudgedBalance' },
+		{ name: 'eyesClosed', label: '7. Eyes Closed (0 = unsteady, 1 = steady)', opts: score01, binding: 'eyesClosed' },
+		{ name: 'turning360', label: '8. Turning 360 degrees (0 = discontinuous, 1 = continuous or steady, 2 = continuous and steady)', opts: score02, binding: 'turning360' },
+		{ name: 'sittingDown', label: '9. Sitting Down (0 = unsafe, 1 = uses arms, 2 = safe/smooth)', opts: score02, binding: 'sittingDown' }
+	];
+
+	function setValue(binding: typeof items[number]['binding'], v: string) {
+		if (binding === 'sittingBalance') sittingBalance = v;
+		else if (binding === 'risesFromChair') risesFromChair = v;
+		else if (binding === 'attemptingToRise') attemptingToRise = v;
+		else if (binding === 'immediateStandingBalance') immediateStandingBalance = v;
+		else if (binding === 'standingBalance') standingBalance = v;
+		else if (binding === 'nudgedBalance') nudgedBalance = v;
+		else if (binding === 'eyesClosed') eyesClosed = v;
+		else if (binding === 'turning360') turning360 = v;
+		else if (binding === 'sittingDown') sittingDown = v;
+	}
+	function getValue(binding: typeof items[number]['binding']): string {
+		if (binding === 'sittingBalance') return sittingBalance;
+		if (binding === 'risesFromChair') return risesFromChair;
+		if (binding === 'attemptingToRise') return attemptingToRise;
+		if (binding === 'immediateStandingBalance') return immediateStandingBalance;
+		if (binding === 'standingBalance') return standingBalance;
+		if (binding === 'nudgedBalance') return nudgedBalance;
+		if (binding === 'eyesClosed') return eyesClosed;
+		if (binding === 'turning360') return turning360;
+		return sittingDown;
+	}
 </script>
 
-<SectionCard title="Balance Assessment (Tinetti)" description="Tinetti Balance Test - 9 items, maximum 16 points">
-	<div class="space-y-6">
-		<RadioGroup
-			label="1. Sitting Balance (0 = leans/slides, 1 = steady/safe)"
-			name="sittingBalance"
-			options={score01}
-			bind:value={sittingBalance}
-		/>
+<Fieldset legend="Balance Assessment (Tinetti)">
+	<p class="hint">Tinetti Balance Test - 9 items, maximum 16 points.</p>
 
-		<RadioGroup
-			label="2. Rises from Chair (0 = unable without help, 1 = uses arms, 2 = without arms)"
-			name="risesFromChair"
-			options={score02}
-			bind:value={risesFromChair}
-		/>
-
-		<RadioGroup
-			label="3. Attempting to Rise (0 = unable without help, 1 = requires >1 attempt, 2 = first attempt)"
-			name="attemptingToRise"
-			options={score02}
-			bind:value={attemptingToRise}
-		/>
-
-		<RadioGroup
-			label="4. Immediate Standing Balance (0 = unsteady, 1 = steady with aid, 2 = steady without aid)"
-			name="immediateStandingBalance"
-			options={score02}
-			bind:value={immediateStandingBalance}
-		/>
-
-		<RadioGroup
-			label="5. Standing Balance (0 = unsteady, 1 = wide stance/uses support, 2 = narrow stance without support)"
-			name="standingBalance"
-			options={score02}
-			bind:value={standingBalance}
-		/>
-
-		<RadioGroup
-			label="6. Nudged (sternum push x3) (0 = begins to fall, 1 = staggers/grabs, 2 = steady)"
-			name="nudgedBalance"
-			options={score02}
-			bind:value={nudgedBalance}
-		/>
-
-		<RadioGroup
-			label="7. Eyes Closed (same position) (0 = unsteady, 1 = steady)"
-			name="eyesClosed"
-			options={score01}
-			bind:value={eyesClosed}
-		/>
-
-		<RadioGroup
-			label="8. Turning 360 degrees (0 = discontinuous/unsteady, 1 = continuous or steady, 2 = continuous and steady)"
-			name="turning360"
-			options={score02}
-			bind:value={turning360}
-		/>
-
-		<RadioGroup
-			label="9. Sitting Down (0 = unsafe, 1 = uses arms/not smooth, 2 = safe/smooth)"
-			name="sittingDown"
-			options={score02}
-			bind:value={sittingDown}
-		/>
-	</div>
-</SectionCard>
+	{#each items as item (item.name)}
+		<Field label={item.label}>
+			<RadioGroup label={item.label}>
+				{#each item.opts as opt (opt.value)}
+					<label>
+						<input type="radio" class="radio-input" name={item.name} value={opt.value} checked={getValue(item.binding) === opt.value} onchange={() => setValue(item.binding, opt.value)} />
+						{opt.label}
+					</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+	{/each}
+</Fieldset>
