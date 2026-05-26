@@ -1,8 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import { completenessLabel, completenessColor, calculateAge, formatDate, formatNhsNumber } from '$lib/engine/utils';
+	import {
+		completenessColor,
+		calculateAge,
+		formatDate,
+		formatNhsNumber
+	} from '$lib/engine/utils';
 	import { recordTypeOptions, purposeOptions } from '$lib/engine/validation-rules';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	const data = $derived(assessment.data);
 	const result = $derived(assessment.result);
@@ -52,10 +60,10 @@
 		return recordTypeOptions.find((o) => o.value === value)?.label ?? value;
 	}
 
-	const priorityColor: Record<string, string> = {
-		high: 'bg-red-100 text-red-800 border-red-300',
-		medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-		low: 'bg-gray-100 text-gray-700 border-gray-300'
+	const priorityType: Record<string, 'error' | 'warning' | 'info'> = {
+		high: 'error',
+		medium: 'warning',
+		low: 'info'
 	};
 </script>
 
@@ -64,65 +72,48 @@
 		<header class="border-b border-gray-200 bg-white shadow-sm no-print">
 			<div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
 				<h1 class="text-lg font-bold text-gray-900">Release Authorization Summary</h1>
-				<div class="flex gap-3">
+				<div class="button-group">
 					{#if pdfError}
 						<span class="text-sm text-red-600">{pdfError}</span>
 					{/if}
-					<button
-						onclick={downloadPDF}
-						class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark"
-					>
-						Download PDF
-					</button>
-					<button
-						onclick={() => window.print()}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						Print
-					</button>
-					<button
-						onclick={startNew}
-						class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					>
-						New Form
-					</button>
+					<Button data-variant="primary" onclick={downloadPDF}>Download PDF</Button>
+					<Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
+					<Button data-variant="secondary" onclick={startNew}>New Form</Button>
 				</div>
 			</div>
 		</header>
 
 		<main class="mx-auto max-w-4xl px-4 py-6">
-			<!-- Completeness Banner -->
-			<div class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(result.completenessScore)}">
+			<div
+				class="mb-6 rounded-xl border-2 p-6 text-center {completenessColor(
+					result.completenessScore
+				)}"
+			>
 				<div class="text-3xl font-bold">{result.completenessScore}% Complete</div>
-				<div class="mt-1 text-lg">{result.completenessStatus} - {result.validationStatus}</div>
+				<div class="mt-1 text-lg">
+					{result.completenessStatus} - {result.validationStatus}
+				</div>
 				<div class="mt-2 text-sm opacity-75">
 					Generated {new Date(result.timestamp).toLocaleString()}
 				</div>
 			</div>
 
-			<!-- Additional Flags -->
 			{#if result.additionalFlags.length > 0}
-				<div class="mb-6 rounded-xl border border-red-200 bg-white p-6">
+				<Panel label="Flagged Issues for Review" class="mb-6">
 					<h2 class="mb-4 text-lg font-bold text-red-800">Flagged Issues for Review</h2>
-					<div class="space-y-2">
-						{#each result.additionalFlags as flag}
-							<div class="flex items-start gap-3 rounded-lg border p-3 {priorityColor[flag.priority]}">
-								<span class="mt-0.5 rounded px-2 py-0.5 text-xs font-bold uppercase {priorityColor[flag.priority]}">
-									{flag.priority}
-								</span>
-								<div>
-									<span class="font-medium">{flag.category}:</span>
-									{flag.message}
-								</div>
-							</div>
-						{/each}
-					</div>
-				</div>
+					{#each result.additionalFlags as flag (flag.category + flag.message)}
+						<Alert
+							type={priorityType[flag.priority] ?? 'info'}
+							heading={`${flag.priority.toUpperCase()} — ${flag.category}`}
+						>
+							<p>{flag.message}</p>
+						</Alert>
+					{/each}
+				</Panel>
 			{/if}
 
-			<!-- Validation Issues -->
 			{#if result.firedRules.length > 0}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+				<Panel label="Validation Issues" class="mb-6">
 					<h2 class="mb-4 text-lg font-bold text-gray-900">Validation Issues</h2>
 					<table class="w-full text-sm">
 						<thead>
@@ -133,7 +124,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{#each result.firedRules as rule}
+							{#each result.firedRules as rule (rule.id)}
 								<tr class="border-b border-gray-100">
 									<td class="py-2 pr-4 font-mono text-xs text-gray-500">{rule.id}</td>
 									<td class="py-2 pr-4">{rule.domain}</td>
@@ -142,16 +133,16 @@
 							{/each}
 						</tbody>
 					</table>
-				</div>
+				</Panel>
 			{/if}
 
-			<!-- Patient Summary -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Patient Details" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Patient Details</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div>
 						<span class="font-medium text-gray-600">Name:</span>
-						{data.patientInformation.firstName} {data.patientInformation.lastName}
+						{data.patientInformation.firstName}
+						{data.patientInformation.lastName}
 					</div>
 					<div>
 						<span class="font-medium text-gray-600">DOB:</span>
@@ -181,10 +172,9 @@
 						{data.patientInformation.gpPractice || 'N/A'}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
-			<!-- Recipient Details -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Authorized Recipient" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Authorized Recipient</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div>
@@ -208,17 +198,16 @@
 						{data.authorizedRecipient.recipientEmail || 'N/A'}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
-			<!-- Records & Purpose -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Records & Purpose" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Records & Purpose</h2>
 				<div class="text-sm">
 					<div class="mb-3">
 						<span class="font-medium text-gray-600">Record Types:</span>
 						{#if data.recordsToRelease.recordTypes.length > 0}
 							<ul class="mt-1 list-disc pl-5">
-								{#each data.recordsToRelease.recordTypes as rt}
+								{#each data.recordsToRelease.recordTypes as rt (rt)}
 									<li>{getRecordTypeLabel(rt)}</li>
 								{/each}
 							</ul>
@@ -229,21 +218,23 @@
 					{#if data.recordsToRelease.specificDateRange === 'yes'}
 						<div class="mb-3">
 							<span class="font-medium text-gray-600">Date Range:</span>
-							{formatDate(data.recordsToRelease.dateFrom)} to {formatDate(data.recordsToRelease.dateTo)}
+							{formatDate(data.recordsToRelease.dateFrom)} to
+							{formatDate(data.recordsToRelease.dateTo)}
 						</div>
 					{/if}
 					<div>
 						<span class="font-medium text-gray-600">Purpose:</span>
-						{data.purposeOfRelease.purpose ? getPurposeLabel(data.purposeOfRelease.purpose) : 'N/A'}
+						{data.purposeOfRelease.purpose
+							? getPurposeLabel(data.purposeOfRelease.purpose)
+							: 'N/A'}
 						{#if data.purposeOfRelease.purpose === 'other' && data.purposeOfRelease.otherDetails}
 							- {data.purposeOfRelease.otherDetails}
 						{/if}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
-			<!-- Authorization Period -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Authorization Period" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Authorization Period</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-3">
 					<div>
@@ -256,54 +247,28 @@
 					</div>
 					<div>
 						<span class="font-medium text-gray-600">Single Use:</span>
-						{data.authorizationPeriod.singleUse === 'yes' ? 'Yes' : data.authorizationPeriod.singleUse === 'no' ? 'No' : 'N/A'}
+						{data.authorizationPeriod.singleUse === 'yes'
+							? 'Yes'
+							: data.authorizationPeriod.singleUse === 'no'
+								? 'No'
+								: 'N/A'}
 					</div>
 				</div>
-			</div>
+			</Panel>
 
-			<!-- Restrictions -->
-			{#if data.restrictionsLimitations.excludeHIV || data.restrictionsLimitations.excludeSubstanceAbuse || data.restrictionsLimitations.excludeMentalHealth || data.restrictionsLimitations.excludeGeneticInfo || data.restrictionsLimitations.excludeSTI || data.restrictionsLimitations.additionalRestrictions}
-				<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
-					<h2 class="mb-4 text-lg font-bold text-gray-900">Restrictions & Limitations</h2>
-					<div class="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-						<div>
-							<span class="font-medium text-gray-600">HIV Records:</span>
-							{data.restrictionsLimitations.excludeHIV === 'yes' ? 'Excluded' : data.restrictionsLimitations.excludeHIV === 'no' ? 'Included' : 'Not specified'}
-						</div>
-						<div>
-							<span class="font-medium text-gray-600">Substance Abuse:</span>
-							{data.restrictionsLimitations.excludeSubstanceAbuse === 'yes' ? 'Excluded' : data.restrictionsLimitations.excludeSubstanceAbuse === 'no' ? 'Included' : 'Not specified'}
-						</div>
-						<div>
-							<span class="font-medium text-gray-600">Mental Health:</span>
-							{data.restrictionsLimitations.excludeMentalHealth === 'yes' ? 'Excluded' : data.restrictionsLimitations.excludeMentalHealth === 'no' ? 'Included' : 'Not specified'}
-						</div>
-						<div>
-							<span class="font-medium text-gray-600">Genetic Info:</span>
-							{data.restrictionsLimitations.excludeGeneticInfo === 'yes' ? 'Excluded' : data.restrictionsLimitations.excludeGeneticInfo === 'no' ? 'Included' : 'Not specified'}
-						</div>
-						<div>
-							<span class="font-medium text-gray-600">STI Records:</span>
-							{data.restrictionsLimitations.excludeSTI === 'yes' ? 'Excluded' : data.restrictionsLimitations.excludeSTI === 'no' ? 'Included' : 'Not specified'}
-						</div>
-					</div>
-					{#if data.restrictionsLimitations.additionalRestrictions}
-						<div class="mt-3 text-sm">
-							<span class="font-medium text-gray-600">Additional:</span>
-							{data.restrictionsLimitations.additionalRestrictions}
-						</div>
-					{/if}
-				</div>
-			{/if}
-
-			<!-- Consent Status -->
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+			<Panel label="Consent & Signature" class="mb-6">
 				<h2 class="mb-4 text-lg font-bold text-gray-900">Consent & Signature</h2>
 				<div class="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
 					<div>
 						<span class="font-medium text-gray-600">Patient Consent:</span>
-						<span class="{data.signatureConsent.patientSignatureConfirmed === 'yes' ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}">
-							{data.signatureConsent.patientSignatureConfirmed === 'yes' ? 'Confirmed' : 'Not Confirmed'}
+						<span
+							class={data.signatureConsent.patientSignatureConfirmed === 'yes'
+								? 'text-green-700 font-bold'
+								: 'text-red-700 font-bold'}
+						>
+							{data.signatureConsent.patientSignatureConfirmed === 'yes'
+								? 'Confirmed'
+								: 'Not Confirmed'}
 						</span>
 					</div>
 					<div>
@@ -327,7 +292,7 @@
 						</div>
 					{/if}
 				</div>
-			</div>
+			</Panel>
 		</main>
 	</div>
 {/if}

@@ -1,45 +1,65 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const a = assessment.data.authorizationPeriod;
+
+	const singleUseOptions = [
+		{ value: 'yes', label: 'Yes - One-time release only' },
+		{ value: 'no', label: 'No - Ongoing within the authorization period' }
+	];
 </script>
 
-<SectionCard title="Authorization Period" description="Specify the time period for which this authorization is valid">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput
-			label="Start Date"
-			name="startDate"
-			type="date"
-			bind:value={a.startDate}
-			required
-		/>
-		<TextInput
-			label="End Date"
-			name="endDate"
-			type="date"
-			bind:value={a.endDate}
-			required
-		/>
+<Fieldset legend="Authorization Period">
+	<p class="hint">Specify the time period for which this authorization is valid.</p>
+
+	<div class="field-grid">
+		<Field label="Start Date" required inputId="startDate">
+			<DateInput id="startDate" label="Start Date" required bind:value={a.startDate} />
+		</Field>
+		<Field label="End Date" required inputId="endDate">
+			<DateInput id="endDate" label="End Date" required bind:value={a.endDate} />
+		</Field>
 	</div>
 
-	<RadioGroup
-		label="Is this a single-use authorization?"
-		name="singleUse"
-		options={[
-			{ value: 'yes', label: 'Yes - One-time release only' },
-			{ value: 'no', label: 'No - Ongoing within the authorization period' }
-		]}
-		bind:value={a.singleUse}
-	/>
+	<Field label="Is this a single-use authorization?">
+		<RadioGroup label="Is this a single-use authorization?">
+			{#each singleUseOptions as opt (opt.value)}
+				<label>
+					<input
+						type="radio"
+						class="radio-input"
+						name="singleUse"
+						value={opt.value}
+						bind:group={a.singleUse}
+					/>
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<div class="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
-		<p class="font-medium">Important</p>
-		<p class="mt-1">
-			This authorization will automatically expire on the end date specified above.
-			You may revoke this authorization at any time by contacting your healthcare provider in writing.
+	<Alert type="info" heading="Important">
+		<p>
+			This authorization will automatically expire on the end date specified above. You may revoke
+			this authorization at any time by contacting your healthcare provider in writing.
 		</p>
-	</div>
-</SectionCard>
+	</Alert>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

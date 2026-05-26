@@ -1,56 +1,63 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import EmailInput from '$lib/components/ui/EmailInput.svelte';
 
 	const r = assessment.data.authorizedRecipient;
 </script>
 
-<SectionCard title="Authorized Recipient" description="Details of the person or organization who will receive the medical records">
-	<TextInput
-		label="Recipient Name"
-		name="recipientName"
-		bind:value={r.recipientName}
-		placeholder="e.g., Dr James Wilson"
-		required
-	/>
+<Fieldset legend="Authorized Recipient">
+	<p class="hint">Details of the person or organization who will receive the medical records.</p>
 
-	<TextInput
-		label="Organization"
-		name="recipientOrganization"
-		bind:value={r.recipientOrganization}
-		placeholder="e.g., Royal London Hospital"
-		required
-	/>
+	<Field label="Recipient Name" required inputId="recipientName">
+		<TextInput id="recipientName" label="Recipient Name" required placeholder="e.g., Dr James Wilson" bind:value={r.recipientName} />
+	</Field>
 
-	<TextInput
-		label="Address"
-		name="recipientAddress"
-		bind:value={r.recipientAddress}
-		placeholder="Full postal address of the recipient"
-		required
-	/>
-
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+	<Field label="Organization" required inputId="recipientOrganization">
 		<TextInput
-			label="Phone Number"
-			name="recipientPhone"
-			bind:value={r.recipientPhone}
-			placeholder="e.g., 020 7377 7000"
+			id="recipientOrganization"
+			label="Organization"
+			required
+			placeholder="e.g., Royal London Hospital"
+			bind:value={r.recipientOrganization}
 		/>
+	</Field>
+
+	<Field label="Address" required inputId="recipientAddress">
 		<TextInput
-			label="Email Address"
-			name="recipientEmail"
-			type="email"
-			bind:value={r.recipientEmail}
-			placeholder="e.g., recipient@nhs.uk"
+			id="recipientAddress"
+			label="Address"
+			required
+			placeholder="Full postal address of the recipient"
+			bind:value={r.recipientAddress}
 		/>
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Phone Number" inputId="recipientPhone">
+			<TextInput id="recipientPhone" label="Phone Number" placeholder="e.g., 020 7377 7000" bind:value={r.recipientPhone} />
+		</Field>
+		<Field label="Email Address" inputId="recipientEmail">
+			<EmailInput id="recipientEmail" label="Email Address" placeholder="e.g., recipient@nhs.uk" bind:value={r.recipientEmail} />
+		</Field>
 	</div>
 
-	<TextInput
-		label="Role / Title"
-		name="recipientRole"
-		bind:value={r.recipientRole}
-		placeholder="e.g., Consultant Neurologist"
-	/>
-</SectionCard>
+	<Field label="Role / Title" inputId="recipientRole">
+		<TextInput id="recipientRole" label="Role / Title" placeholder="e.g., Consultant Neurologist" bind:value={r.recipientRole} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
