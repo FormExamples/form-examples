@@ -1,46 +1,58 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.spirometry;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 
 	$effect(() => {
 		if (s.fev1 !== null && s.fvc !== null && s.fvc > 0) {
 			assessment.data.spirometry.fev1FvcRatio = Math.round((s.fev1 / s.fvc) * 100) / 100;
 		}
 	});
+
+	const ratioDesc = $derived(
+		s.fev1FvcRatio !== null
+			? `${s.fev1FvcRatio} (${s.fev1FvcRatio < 0.7 ? 'Obstructive pattern' : 'Normal'})`
+			: 'Auto-calculated from FEV1/FVC'
+	);
 </script>
 
-<SectionCard title="Spirometry Results" description="Lung function test measurements">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="FEV1" name="fev1" bind:value={s.fev1} unit="litres" min={0} max={10} step={0.01} />
-		<NumberInput label="FVC" name="fvc" bind:value={s.fvc} unit="litres" min={0} max={10} step={0.01} />
+<Fieldset legend="Spirometry Results">
+	<p class="hint">Lung function test measurements.</p>
+
+	<div class="field-grid">
+		<Field label="FEV1 (litres)" inputId="fev1">
+			<NumberInput id="fev1" label="FEV1" min={0} max={10} step={0.01} bind:value={s.fev1} />
+		</Field>
+		<Field label="FVC (litres)" inputId="fvc">
+			<NumberInput id="fvc" label="FVC" min={0} max={10} step={0.01} bind:value={s.fvc} />
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<div class="mb-4">
-			<span class="mb-1 block text-sm font-medium text-gray-700">FEV1/FVC Ratio</span>
-			<div class="flex h-[38px] items-center rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm">
-				{#if s.fev1FvcRatio !== null}
-					<span class="font-medium">{s.fev1FvcRatio}</span>
-					{#if s.fev1FvcRatio < 0.7}
-						<span class="ml-2 text-red-600">(Obstructive pattern)</span>
-					{:else}
-						<span class="ml-2 text-green-600">(Normal)</span>
-					{/if}
-				{:else}
-					<span class="text-gray-400">Auto-calculated from FEV1/FVC</span>
-				{/if}
-			</div>
-		</div>
-		<NumberInput label="FEV1 % Predicted" name="fev1Pct" bind:value={s.fev1PercentPredicted} unit="%" min={0} max={150} />
+	<div class="field-grid">
+		<Field label="FEV1/FVC Ratio" description={ratioDesc}>
+			<p class="static-value">{s.fev1FvcRatio ?? '—'}</p>
+		</Field>
+		<Field label="FEV1 % Predicted" inputId="fev1Pct">
+			<NumberInput id="fev1Pct" label="FEV1 percent predicted" min={0} max={150} bind:value={s.fev1PercentPredicted} />
+		</Field>
 	</div>
 
-	<RadioGroup label="Significant bronchodilator response?" name="bdr" options={yesNo} bind:value={s.bronchodilatorResponse} />
-</SectionCard>
+	<Field label="Significant bronchodilator response?">
+		<RadioGroup label="Bronchodilator response">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="bdr" value={opt.value} bind:group={s.bronchodilatorResponse} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+	.static-value { margin: 0; font-weight: 500; }
+</style>

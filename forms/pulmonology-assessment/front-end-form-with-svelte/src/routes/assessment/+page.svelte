@@ -4,6 +4,9 @@
 	import { calculateGold } from '$lib/engine/gold-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
 	import Step3Spirometry from '$lib/components/steps/Step3Spirometry.svelte';
@@ -16,45 +19,38 @@
 	import Step10FunctionalStatus from '$lib/components/steps/Step10FunctionalStatus.svelte';
 
 	function submitAssessment() {
-			const { goldStage, abcdGroup, firedRules } = calculateGold(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				goldStage,
-				abcdGroup,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { goldStage, abcdGroup, firedRules } = calculateGold(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			goldStage,
+			abcdGroup,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Pulmonology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3Spirometry />
+	<Step4SymptomAssessment />
+	<Step5ExacerbationHistory />
+	<Step6CurrentMedications />
+	<Step7Allergies />
+	<Step8Comorbidities />
+	<Step9SmokingExposures />
+	<Step10FunctionalStatus />
 
-<Step2ChiefComplaint />
-
-<Step3Spirometry />
-
-<Step4SymptomAssessment />
-
-<Step5ExacerbationHistory />
-
-<Step6CurrentMedications />
-
-<Step7Allergies />
-
-<Step8Comorbidities />
-
-<Step9SmokingExposures />
-
-<Step10FunctionalStatus />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

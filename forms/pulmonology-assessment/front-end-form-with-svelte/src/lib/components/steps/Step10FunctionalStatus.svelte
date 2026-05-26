@@ -1,41 +1,61 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const f = assessment.data.functionalStatus;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const exerciseOptions = [
+		{ value: 'unable', label: 'Unable to exercise' },
+		{ value: 'light-housework', label: 'Light housework only' },
+		{ value: 'climb-stairs', label: 'Can climb stairs' },
+		{ value: 'moderate-exercise', label: 'Moderate exercise' },
+		{ value: 'vigorous-exercise', label: 'Vigorous exercise' }
 	];
 </script>
 
-<SectionCard title="Functional Status" description="Exercise capacity and daily living assessment">
-	<SelectInput
-		label="Exercise tolerance"
-		name="exerciseTolerance"
-		options={[
-			{ value: 'unable', label: 'Unable to exercise' },
-			{ value: 'light-housework', label: 'Light housework only' },
-			{ value: 'climb-stairs', label: 'Can climb stairs' },
-			{ value: 'moderate-exercise', label: 'Moderate exercise' },
-			{ value: 'vigorous-exercise', label: 'Vigorous exercise' }
-		]}
-		bind:value={f.exerciseTolerance}
-	/>
+<Fieldset legend="Functional Status">
+	<p class="hint">Exercise capacity and daily living assessment.</p>
 
-	<NumberInput label="6-Minute Walk Test distance" name="sixMWT" bind:value={f.sixMinuteWalkDistance} unit="metres" min={0} max={1000} />
+	<Field label="Exercise tolerance" inputId="exerciseTolerance">
+		<Select id="exerciseTolerance" label="Exercise tolerance" bind:value={f.exerciseTolerance}>
+			<option value="">-- Select --</option>
+			{#each exerciseOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Resting SpO2" name="spo2Rest" bind:value={f.oxygenSaturationRest} unit="%" min={50} max={100} />
-		<NumberInput label="SpO2 on exertion" name="spo2Exertion" bind:value={f.oxygenSaturationExertion} unit="%" min={50} max={100} />
+	<Field label="6-Minute Walk Test distance (metres)" inputId="sixMWT">
+		<NumberInput id="sixMWT" label="Six-minute walk test" min={0} max={1000} bind:value={f.sixMinuteWalkDistance} />
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Resting SpO2 (%)" inputId="spo2Rest">
+			<NumberInput id="spo2Rest" label="Resting SpO2" min={50} max={100} bind:value={f.oxygenSaturationRest} />
+		</Field>
+		<Field label="SpO2 on exertion (%)" inputId="spo2Exertion">
+			<NumberInput id="spo2Exertion" label="SpO2 exertion" min={50} max={100} bind:value={f.oxygenSaturationExertion} />
+		</Field>
 	</div>
 
-	<RadioGroup label="Do you have limitations in activities of daily living (ADLs)?" name="adl" options={yesNo} bind:value={f.adlLimitations} />
+	<Field label="Do you have limitations in activities of daily living (ADLs)?">
+		<RadioGroup label="ADL limitations">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="adl" value={opt.value} bind:group={f.adlLimitations} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if f.adlLimitations === 'yes'}
-		<TextArea label="Please describe your ADL limitations" name="adlDetails" bind:value={f.adlDetails} placeholder="e.g., difficulty dressing, bathing, cooking..." />
+		<Field label="Please describe your ADL limitations" inputId="adlDetails">
+			<TextAreaInput id="adlDetails" label="ADL details" rows={3} bind:value={f.adlDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>
