@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""bin/lily-svelte-status — Report each form's Lily Svelte conformance level.
+
+Inspects every `forms/<slug>/front-end-form-with-svelte/` and emits a
+status line:
+
+  PASS    — canonical Lily UI components present (Form, Fieldset, Field,
+            Button, ErrorSummary, Panel, Progress) AND no legacy
+            SectionCard/SelectInput/TextArea/ProgressBar/StepNavigation.
+  PARTIAL — emits Lily classes but retains legacy component filenames.
+  EMPTY   — no real implementation (no src/lib/components/steps/ or
+            placeholder +page.svelte only).
+  TODO    — has implementation, no Lily conversion yet.
+
+Usage:
+  bin/lily-svelte-status                # full report
+  bin/lily-svelte-status --counts       # just the totals
+  bin/lily-svelte-status --slugs-only   # one slug per line, filterable by --status=<value>
+  bin/lily-svelte-status --status=TODO  # only forms needing work
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+CANONICAL_UI = (
+    "Form.svelte",
+    "Fieldset.svelte",
+    "Field.svelte",
+    "Button.svelte",
+    "ErrorSummary.svelte",
+    "Panel.svelte",
+    "Progress.svelte",
+)
+
+LEGACY_UI = (
+    "SectionCard.svelte",
+    "SelectInput.svelte",
+    "TextArea.svelte",
+    "ProgressBar.svelte",
+    "StepNavigation.svelte",
+)
+
+
+def classify(slug: str) -> tuple[str, str]:
+    """Return (status, note)."""
+    form_dir = FORMS_DIR / slug / "front-end-form-with-svelte"
+    if not form_dir.is_dir():
+        return "EMPTY", "no front-end-form-with-svelte dir"
+
+    src_lib = form_dir / "src" / "lib"
+    if not src_lib.is_dir():
+        return "EMPTY", "no src/lib"
+
+    steps_dir = src_lib / "components" / "steps"
+    step_count = len(list(steps_dir.glob("*.svelte"))) if steps_dir.is_dir() else 0
+    page_svelte = form_dir / "src" / "routes" / "+page.svelte"
+
+    if step_count < 3 and page_svelte.is_file():
+        try:
+            size = page_svelte.stat().st_size
+        except OSError:
+            size = 0
+        if size < 800:
+            return "EMPTY", f"placeholder page ({size}B), {step_count} steps"
+
+    ui_dir = src_lib / "components" / "ui"
+    canonical_present = []
+    legacy_present = []
+    if ui_dir.is_dir():
+        names = {p.name for p in ui_dir.glob("*.svelte")}
+        canonical_present = [n for n in CANONICAL_UI if n in names]
+        legacy_present = [n for n in LEGACY_UI if n in names]
+    else:
+        return "TODO", f"{step_count} steps, no ui/ dir"
+
+    if len(canonical_present) >= 5 and not legacy_present:
+        return "PASS", f"canonical UI ({len(canonical_present)}/7), {step_count} steps"
+
+    if len(canonical_present) >= 5 and legacy_present:
+        return "PARTIAL", f"canonical UI present + legacy retained: {', '.join(legacy_present)}"
+
+    if legacy_present:
+        # Check if legacy components emit Lily class names (partial refactor)
+        for fname in legacy_present:
+            text = (ui_dir / fname).read_text(errors="ignore")
+            if any(c in text for c in ('class="text-input"', 'class="fieldset"', 'class="field"', 'class="label"')):
+                return "PARTIAL", f"legacy UI emits Lily classes: {', '.join(legacy_present)}"
+        return "TODO", f"legacy UI, no Lily classes: {', '.join(legacy_present)}"
+
+    return "TODO", f"no canonical, no legacy ({step_count} steps)"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--counts", action="store_true", help="only show totals")
+    parser.add_argument("--slugs-only", action="store_true", help="one slug per line")
+    parser.add_argument("--status",
+                        choices=["PASS", "PARTIAL", "TODO", "EMPTY"],
+                        help="filter to this status")
+    args = parser.parse_args()
+
+    if not FORMS_DIR.is_dir():
+        sys.exit(f"forms directory not found: {FORMS_DIR}")
+
+    slugs = sorted(
+        d.name for d in FORMS_DIR.iterdir()
+        if d.is_dir()
+        and not d.name.startswith(".")
+        and not d.name.startswith("AGENTS")
+        and d.name not in ("lily-spec", "lily-svelte-spec")
+        and (d / "front-end-form-with-svelte").is_dir()
+    )
+
+    counts: dict[str, int] = {"PASS": 0, "PARTIAL": 0, "TODO": 0, "EMPTY": 0}
+    rows: list[tuple[str, str, str]] = []
+    for slug in slugs:
+        status, note = classify(slug)
+        counts[status] += 1
+        rows.append((slug, status, note))
+
+    if args.status:
+        rows = [(s, st, n) for s, st, n in rows if st == args.status]
+
+    if args.counts:
+        for k in ("PASS", "PARTIAL", "TODO", "EMPTY"):
+            print(f"{k:8s} {counts[k]:4d}")
+        print(f"{'TOTAL':8s} {sum(counts.values()):4d}")
+        return 0
+
+    if args.slugs_only:
+        for slug, _, _ in rows:
+            print(slug)
+        return 0
+
+    for slug, status, note in rows:
+        print(f"{status:8s} {slug:60s} {note}")
+    print()
+    print(
+        "totals: "
+        + " ".join(f"{k}={counts[k]}" for k in ("PASS", "PARTIAL", "TODO", "EMPTY"))
+        + f" of {sum(counts.values())}"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

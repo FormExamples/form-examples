@@ -45,6 +45,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### Lily Design System (Svelte front-ends)
 
 - `bin/lily-svelte-refactor [--check] [--dry-run] [--scope=form|dashboard|both] [--show-risky] [--all|<slug>]` — mechanical Lily Svelte class swaps + risky-pattern report; `--check` is the CI drift detector
+- `bin/lily-svelte-status [--counts] [--slugs-only] [--status=PASS|PARTIAL|TODO|EMPTY]` — per-form Lily Svelte conformance report (PASS = canonical UI; PARTIAL = legacy names but Lily classes; TODO = no Lily yet; EMPTY = no implementation)
 - `bin/lily-svelte-sync [--check] [--lily-dir PATH]` — snapshot Lily Svelte component sources into `forms/lily-svelte-spec/` and record the pinned upstream commit in `forms/lily-svelte-version.md`
 
 ### Specs
