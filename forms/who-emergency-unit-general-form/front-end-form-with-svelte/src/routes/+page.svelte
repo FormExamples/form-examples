@@ -3,6 +3,15 @@
 	import { validateEuGeneral } from '$lib/engine/eu-general-validator';
 	import { detectFlaggedIssues } from '$lib/engine/flagged-issues';
 
+	// Lily Svelte headless contract — local shape-equivalent components.
+	import Form from '$lib/components/ui/Form.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Progress from '$lib/components/ui/Progress.svelte';
+	import StepList from '$lib/components/ui/StepList.svelte';
+	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+
 	import Step1PatientRegistration from '$lib/components/steps/Step1PatientRegistration.svelte';
 	import Step2ChiefComplaintAndVitals from '$lib/components/steps/Step2ChiefComplaintAndVitals.svelte';
 	import Step3HighRiskSigns from '$lib/components/steps/Step3HighRiskSigns.svelte';
@@ -20,9 +29,42 @@
 	import Step15Reassessment from '$lib/components/steps/Step15Reassessment.svelte';
 	import Step16Disposition from '$lib/components/steps/Step16Disposition.svelte';
 
-	let submitted = $state(false);
+	const title = 'WHO Emergency Unit Form: General';
+	const subtitle =
+		'Non-trauma emergency unit encounter from arrival through disposition.';
 
-	function submitForm() {
+	const stepTitles = [
+		'Registration',
+		'Complaint',
+		'High-risk',
+		'Airway',
+		'Breathing',
+		'Circulation',
+		'Disability',
+		'HPI',
+		'ROS',
+		'PMH',
+		'Exam',
+		'Dx',
+		'Interventions',
+		'Plan',
+		'Reassess',
+		'Disposition'
+	];
+
+	let submitted = $state(false);
+	const percentComplete = $derived(
+		assessment.validation
+			? Math.round(
+				(assessment.validation.totalSatisfied /
+					Math.max(1, assessment.validation.totalRequired)) *
+					100
+			)
+			: 0
+	);
+
+	function submitForm(e?: SubmitEvent) {
+		if (e) e.preventDefault?.();
 		assessment.validation = validateEuGeneral(assessment.data);
 		assessment.flags = detectFlaggedIssues(assessment.data);
 		submitted = true;
@@ -38,102 +80,98 @@
 </script>
 
 <svelte:head>
-	<title>WHO Emergency Unit Form: General</title>
+	<title>{title}</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
-	<header class="border-b border-gray-200 bg-white shadow-sm no-print">
-		<div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-			<h1 class="text-lg font-bold text-gray-900">
-				WHO Emergency Unit Form: General
-			</h1>
-			<button
-				type="button"
-				onclick={startOver}
-				class="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
-			>
-				Start over
-			</button>
-		</div>
-	</header>
+<a class="skip-link visually-hidden" href="#form-sections">Skip to questionnaire</a>
 
-	<main class="mx-auto max-w-3xl px-4 py-6">
-		<div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+<header class="page-header no-print">
+	<div class="page-header-inner">
+		<h1>{title}</h1>
+		<p class="subtitle">{subtitle}</p>
+
+		<Progress label="Form completion" max={100} value={percentComplete} />
+		<p class="subtitle" aria-live="polite">{percentComplete}% complete</p>
+
+		<StepList label={`${title} steps`}>
+			{#each stepTitles as t, i (i)}
+				<StepListItem status={submitted ? 'finished' : 'waiting'}>
+					{t}
+				</StepListItem>
+			{/each}
+		</StepList>
+	</div>
+</header>
+
+<main>
+	<div class="intro">
+		<Alert type="info">
 			This single-page form documents a non-trauma emergency unit encounter from
 			arrival through disposition: registration, vitals, ABCD primary survey, history,
 			review of systems, past medical history, physical exam, diagnostics, interventions,
 			assessment and plan, reassessment, and final disposition. Submit when complete to see
 			a completeness summary and any flagged clinical issues.
+		</Alert>
+	</div>
+
+	<Form label={title} onsubmit={submitForm}>
+		<div id="form-sections">
+			<div class="step-section"><Step1PatientRegistration /></div>
+			<div class="step-section"><Step2ChiefComplaintAndVitals /></div>
+			<div class="step-section"><Step3HighRiskSigns /></div>
+			<div class="step-section"><Step4Airway /></div>
+			<div class="step-section"><Step5Breathing /></div>
+			<div class="step-section"><Step6Circulation /></div>
+			<div class="step-section"><Step7Disability /></div>
+			<div class="step-section"><Step8HistoryOfPresentIllness /></div>
+			<div class="step-section"><Step9ReviewOfSystems /></div>
+			<div class="step-section"><Step10PastMedicalHistory /></div>
+			<div class="step-section"><Step11PhysicalExam /></div>
+			<div class="step-section"><Step12Diagnostics /></div>
+			<div class="step-section"><Step13AdditionalInterventions /></div>
+			<div class="step-section"><Step14AssessmentAndPlan /></div>
+			<div class="step-section"><Step15Reassessment /></div>
+			<div class="step-section"><Step16Disposition /></div>
 		</div>
 
-		{#if submitted && assessment.validation}
-			<div class="mb-6 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-				<h2 class="mb-3 text-xl font-bold text-gray-900">Submission summary</h2>
-				<p class="mb-3 text-sm text-gray-700">
-					{assessment.validation.totalSatisfied} of
-					{assessment.validation.totalRequired} required fields completed.
-				</p>
-				{#if assessment.validation.complete}
-					<p class="rounded-md bg-green-100 px-3 py-2 text-sm font-medium text-green-900">
-						The encounter record is complete.
-					</p>
-				{:else}
-					<div class="rounded-md bg-amber-100 px-3 py-2 text-sm text-amber-900">
-						<p class="mb-2 font-medium">
-							The encounter record is incomplete. Please review the missing items below:
-						</p>
-						<ul class="ml-5 list-disc space-y-1">
-							{#each assessment.validation.missing as miss (miss.id)}
-								<li><strong>{miss.id}</strong> — {miss.description}</li>
-							{/each}
-						</ul>
-					</div>
-				{/if}
+		<div class="button-group">
+			<Button type="submit" data-variant="primary">Submit form</Button>
+			<Button type="button" data-variant="secondary" onclick={startOver}>Start over</Button>
+		</div>
+	</Form>
 
-				{#if assessment.flags.length > 0}
-					<h3 class="mt-5 mb-2 text-base font-semibold text-gray-900">
-						Flagged issues for clinician review
-					</h3>
-					<ul class="space-y-2">
-						{#each assessment.flags as flag (flag.id)}
-							<li class="rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm">
-								<span class="font-semibold text-gray-800">[{flag.priority}]</span>
-								<span class="ml-1 text-gray-700">{flag.category}:</span>
-								<span class="ml-1 text-gray-700">{flag.message}</span>
-							</li>
+	<Panel label="Submission summary" aria-live="polite">
+		{#if !submitted || !assessment.validation}
+			<p class="empty-message">Submit the form to see the completeness summary and flagged issues.</p>
+		{:else}
+			<h2>Submission summary</h2>
+			<p>
+				{assessment.validation.totalSatisfied} of
+				{assessment.validation.totalRequired} required fields completed.
+			</p>
+			{#if assessment.validation.complete}
+				<Alert type="success">The encounter record is complete.</Alert>
+			{:else}
+				<Alert type="warning" heading="The encounter record is incomplete">
+					<ul>
+						{#each assessment.validation.missing as miss (miss.id)}
+							<li><strong>{miss.id}</strong> — {miss.description}</li>
 						{/each}
 					</ul>
-				{/if}
-			</div>
+				</Alert>
+			{/if}
+
+			{#if assessment.flags.length > 0}
+				<h3>Flagged issues for clinician review</h3>
+				<ul>
+					{#each assessment.flags as flag (flag.id)}
+						<li>
+							<strong>[{flag.priority}]</strong>
+							{flag.category}: {flag.message}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		{/if}
-
-		<div class="space-y-8">
-			<Step1PatientRegistration />
-			<Step2ChiefComplaintAndVitals />
-			<Step3HighRiskSigns />
-			<Step4Airway />
-			<Step5Breathing />
-			<Step6Circulation />
-			<Step7Disability />
-			<Step8HistoryOfPresentIllness />
-			<Step9ReviewOfSystems />
-			<Step10PastMedicalHistory />
-			<Step11PhysicalExam />
-			<Step12Diagnostics />
-			<Step13AdditionalInterventions />
-			<Step14AssessmentAndPlan />
-			<Step15Reassessment />
-			<Step16Disposition />
-		</div>
-
-		<div class="mt-10 flex justify-end">
-			<button
-				type="button"
-				onclick={submitForm}
-				class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-			>
-				Submit Form
-			</button>
-		</div>
-	</main>
-</div>
+	</Panel>
+</main>
