@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.reproductiveHistory;
 	const yesNo = [
@@ -13,42 +14,44 @@
 	];
 </script>
 
-<SectionCard title="Reproductive History" description="Pregnancy and reproductive background">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput
-			label="Gravida (total pregnancies)"
-			name="gravida"
-			bind:value={r.gravida}
-			min={0}
-			max={20}
-		/>
-		<NumberInput
-			label="Para (births past 24 weeks)"
-			name="para"
-			bind:value={r.para}
-			min={0}
-			max={20}
-		/>
+<Fieldset legend="Reproductive History">
+	<p class="hint">Pregnancy and reproductive background.</p>
+
+	<div class="field-grid">
+		<Field label="Gravida (total pregnancies)" inputId="gravida">
+			<NumberInput id="gravida" label="Gravida" min={0} max={20} bind:value={r.gravida} />
+		</Field>
+		<Field label="Para (births past 24 weeks)" inputId="para">
+			<NumberInput id="para" label="Para" min={0} max={20} bind:value={r.para} />
+		</Field>
 	</div>
 
-	<TextInput
-		label="Date of last delivery"
-		name="lastDeliveryDate"
-		type="date"
-		bind:value={r.lastDeliveryDate}
-	/>
+	<Field label="Date of last delivery" inputId="lastDeliveryDate">
+		<DateInput id="lastDeliveryDate" label="Date of last delivery" bind:value={r.lastDeliveryDate} />
+	</Field>
 
-	<RadioGroup
-		label="Are you currently breastfeeding?"
-		name="breastfeeding"
-		options={yesNo}
-		bind:value={r.breastfeeding}
-	/>
+	<Field label="Are you currently breastfeeding?">
+		<RadioGroup label="Are you currently breastfeeding?">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="breastfeeding" value={opt.value} bind:group={r.breastfeeding} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<TextArea
-		label="Pregnancy intention"
-		name="pregnancyIntention"
-		bind:value={r.pregnancyIntention}
-		placeholder="Describe your plans regarding future pregnancies..."
-	/>
-</SectionCard>
+	<Field label="Pregnancy intention" inputId="pregnancyIntention">
+		<TextAreaInput id="pregnancyIntention" label="Pregnancy intention" rows={3} placeholder="Describe your plans regarding future pregnancies..." bind:value={r.pregnancyIntention} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,53 +1,44 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const c = assessment.data.currentContraception;
 </script>
 
-<SectionCard title="Current Contraception" description="Your current or most recent method of contraception">
-	<SelectInput
-		label="Current contraceptive method"
-		name="currentMethod"
-		options={[
-			{ value: 'combined-oral', label: 'Combined oral contraceptive (COC)' },
-			{ value: 'progestogen-only-pill', label: 'Progestogen-only pill (POP)' },
-			{ value: 'injectable', label: 'Injectable (e.g., Depo-Provera)' },
-			{ value: 'implant', label: 'Subdermal implant (e.g., Nexplanon)' },
-			{ value: 'copper-iud', label: 'Copper IUD (non-hormonal coil)' },
-			{ value: 'lng-ius', label: 'LNG-IUS (hormonal coil, e.g., Mirena)' },
-			{ value: 'patch', label: 'Contraceptive patch' },
-			{ value: 'vaginal-ring', label: 'Vaginal ring (e.g., NuvaRing)' },
-			{ value: 'barrier', label: 'Barrier method (condoms, diaphragm)' },
-			{ value: 'natural-methods', label: 'Natural family planning / fertility awareness' },
-			{ value: 'sterilisation', label: 'Sterilisation' },
-			{ value: 'none', label: 'None / not currently using' }
-		]}
-		bind:value={c.currentMethod}
-		required
-	/>
+<Fieldset legend="Current Contraception">
+	<p class="hint">Your current or most recent method of contraception.</p>
 
-	<TextInput
-		label="How long have you been using this method?"
-		name="durationOfUse"
-		bind:value={c.durationOfUse}
-		placeholder="e.g., 6 months, 2 years, 5 years"
-	/>
+	<Field label="Current contraceptive method" required inputId="currentMethod">
+		<Select id="currentMethod" label="Current contraceptive method" required bind:value={c.currentMethod}>
+			<option value="">-- Select --</option>
+			<option value="combined-oral">Combined oral contraceptive (COC)</option>
+			<option value="progestogen-only-pill">Progestogen-only pill (POP)</option>
+			<option value="injectable">Injectable (e.g., Depo-Provera)</option>
+			<option value="implant">Subdermal implant (e.g., Nexplanon)</option>
+			<option value="copper-iud">Copper IUD (non-hormonal coil)</option>
+			<option value="lng-ius">LNG-IUS (hormonal coil, e.g., Mirena)</option>
+			<option value="patch">Contraceptive patch</option>
+			<option value="vaginal-ring">Vaginal ring (e.g., NuvaRing)</option>
+			<option value="barrier">Barrier method (condoms, diaphragm)</option>
+			<option value="natural-methods">Natural family planning / fertility awareness</option>
+			<option value="sterilisation">Sterilisation</option>
+			<option value="none">None / not currently using</option>
+		</Select>
+	</Field>
 
-	<TextArea
-		label="Reason for change or review"
-		name="reasonForChange"
-		bind:value={c.reasonForChange}
-		placeholder="Why are you considering changing or reviewing your contraception?"
-	/>
+	<Field label="How long have you been using this method?" inputId="durationOfUse">
+		<TextInput id="durationOfUse" label="Duration of use" placeholder="e.g., 6 months, 2 years, 5 years" bind:value={c.durationOfUse} />
+	</Field>
 
-	<TextArea
-		label="Side effects experienced"
-		name="sideEffects"
-		bind:value={c.sideEffects}
-		placeholder="List any side effects you have experienced with your current or previous methods..."
-	/>
-</SectionCard>
+	<Field label="Reason for change or review" inputId="reasonForChange">
+		<TextAreaInput id="reasonForChange" label="Reason for change or review" rows={3} placeholder="Why are you considering changing or reviewing your contraception?" bind:value={c.reasonForChange} />
+	</Field>
+
+	<Field label="Side effects experienced" inputId="sideEffects">
+		<TextAreaInput id="sideEffects" label="Side effects experienced" rows={3} placeholder="List any side effects you have experienced with your current or previous methods..." bind:value={c.sideEffects} />
+	</Field>
+</Fieldset>

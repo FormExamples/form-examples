@@ -4,6 +4,9 @@
 	import { evaluateUKMEC } from '$lib/engine/ukmec-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ReproductiveHistory from '$lib/components/steps/Step2ReproductiveHistory.svelte';
 	import Step3MenstrualHistory from '$lib/components/steps/Step3MenstrualHistory.svelte';
@@ -16,54 +19,47 @@
 	import Step10FamilyPlanningGoals from '$lib/components/steps/Step10FamilyPlanningGoals.svelte';
 
 	function submitAssessment() {
-			const { ukmecResults, firedRules } = evaluateUKMEC(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data, ukmecResults);
-	
-			const overallHighest = Math.max(...ukmecResults.map((r) => r.category)) as 1 | 2 | 3 | 4;
-	
-			const preferredMethod = assessment.data.preferencesPriorities.preferredMethod;
-			const preferredResult = preferredMethod
-				? ukmecResults.find((r) => r.method === preferredMethod)
-				: null;
-	
-			assessment.result = {
-				ukmecResults,
-				overallHighestCategory: overallHighest,
-				preferredMethodCategory: preferredResult ? preferredResult.category : null,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { ukmecResults, firedRules } = evaluateUKMEC(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data, ukmecResults);
+
+		const overallHighest = Math.max(...ukmecResults.map((r) => r.category)) as 1 | 2 | 3 | 4;
+
+		const preferredMethod = assessment.data.preferencesPriorities.preferredMethod;
+		const preferredResult = preferredMethod
+			? ukmecResults.find((r) => r.method === preferredMethod)
+			: null;
+
+		assessment.result = {
+			ukmecResults,
+			overallHighestCategory: overallHighest,
+			preferredMethodCategory: preferredResult ? preferredResult.category : null,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Contraception Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ReproductiveHistory />
+	<Step3MenstrualHistory />
+	<Step4CurrentContraception />
+	<Step5MedicalHistory />
+	<Step6CardiovascularRisk />
+	<Step7LifestyleFactors />
+	<Step8PreferencesPriorities />
+	<Step9BreastCervicalScreening />
+	<Step10FamilyPlanningGoals />
 
-<Step2ReproductiveHistory />
-
-<Step3MenstrualHistory />
-
-<Step4CurrentContraception />
-
-<Step5MedicalHistory />
-
-<Step6CardiovascularRisk />
-
-<Step7LifestyleFactors />
-
-<Step8PreferencesPriorities />
-
-<Step9BreastCervicalScreening />
-
-<Step10FamilyPlanningGoals />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

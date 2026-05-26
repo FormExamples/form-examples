@@ -1,36 +1,31 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const s = assessment.data.breastCervicalScreening;
 </script>
 
-<SectionCard title="Breast & Cervical Screening" description="Screening history relevant to contraceptive counselling">
-	<TextInput
-		label="Date of last breast screening"
-		name="lastBreastScreening"
-		type="date"
-		bind:value={s.lastBreastScreening}
-	/>
+<Fieldset legend="Breast & Cervical Screening">
+	<p class="hint">Screening history relevant to contraceptive counselling.</p>
 
-	<TextInput
-		label="Date of last cervical screening (smear test)"
-		name="lastCervicalScreening"
-		type="date"
-		bind:value={s.lastCervicalScreening}
-	/>
+	<Field label="Date of last breast screening" inputId="lastBreastScreening">
+		<DateInput id="lastBreastScreening" label="Date of last breast screening" bind:value={s.lastBreastScreening} />
+	</Field>
 
-	<SelectInput
-		label="HPV vaccination status"
-		name="hpvVaccination"
-		options={[
-			{ value: 'completed', label: 'Completed (all doses)' },
-			{ value: 'partial', label: 'Partially vaccinated' },
-			{ value: 'none', label: 'Not vaccinated' },
-			{ value: 'unsure', label: 'Unsure' }
-		]}
-		bind:value={s.hpvVaccination}
-	/>
-</SectionCard>
+	<Field label="Date of last cervical screening (smear test)" inputId="lastCervicalScreening">
+		<DateInput id="lastCervicalScreening" label="Date of last cervical screening" bind:value={s.lastCervicalScreening} />
+	</Field>
+
+	<Field label="HPV vaccination status" inputId="hpvVaccination">
+		<Select id="hpvVaccination" label="HPV vaccination status" bind:value={s.hpvVaccination}>
+			<option value="">-- Select --</option>
+			<option value="completed">Completed (all doses)</option>
+			<option value="partial">Partially vaccinated</option>
+			<option value="none">Not vaccinated</option>
+			<option value="unsure">Unsure</option>
+		</Select>
+	</Field>
+</Fieldset>
