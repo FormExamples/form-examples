@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const t = assessment.data.treatmentHistory;
 	const yesNo = [
@@ -11,39 +12,48 @@
 	];
 </script>
 
-<SectionCard title="Treatment History" description="Your previous and current mental health treatment">
-	<RadioGroup
-		label="Have you previously received therapy or counselling?"
-		name="previousTherapy"
-		options={yesNo}
-		bind:value={t.previousTherapy}
-	/>
+<Fieldset legend="Treatment History">
+	<p class="hint">Your previous and current mental health treatment.</p>
+
+	<Field label="Have you previously received therapy or counselling?">
+		<RadioGroup label="Previous therapy">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="previousTherapy" value={opt.value} bind:group={t.previousTherapy} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.previousTherapy === 'yes'}
-		<TextArea
-			label="Please describe (type of therapy, duration, outcome)"
-			name="therapyDetails"
-			bind:value={t.therapyDetails}
-		/>
+		<Field label="Please describe (type of therapy, duration, outcome)" inputId="therapyDetails">
+			<TextAreaInput id="therapyDetails" label="Therapy details" rows={3} bind:value={t.therapyDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup
-		label="Have you ever been hospitalised for mental health reasons?"
-		name="previousHospitalizations"
-		options={yesNo}
-		bind:value={t.previousHospitalizations}
-	/>
+	<Field label="Have you ever been hospitalised for mental health reasons?">
+		<RadioGroup label="Previous hospitalizations">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="previousHospitalizations" value={opt.value} bind:group={t.previousHospitalizations} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if t.previousHospitalizations === 'yes'}
-		<TextArea
-			label="Please describe (when, where, reason)"
-			name="hospitalizationDetails"
-			bind:value={t.hospitalizationDetails}
-		/>
+		<Field label="Please describe (when, where, reason)" inputId="hospitalizationDetails">
+			<TextAreaInput id="hospitalizationDetails" label="Hospitalization details" rows={3} bind:value={t.hospitalizationDetails} />
+		</Field>
 	{/if}
 
-	<TextArea
-		label="Current mental health providers (therapist, psychiatrist, etc.)"
-		name="currentProviders"
-		bind:value={t.currentProviders}
-		placeholder="List any current providers and their roles"
-	/>
-</SectionCard>
+	<Field label="Current mental health providers (therapist, psychiatrist, etc.)" inputId="currentProviders">
+		<TextAreaInput
+			id="currentProviders"
+			label="Current providers"
+			rows={3}
+			placeholder="List any current providers and their roles"
+			bind:value={t.currentProviders}
+		/>
+	</Field>
+</Fieldset>
