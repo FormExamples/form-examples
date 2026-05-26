@@ -1,24 +1,31 @@
 <script lang="ts">
+  // SelectField — Lily Svelte headless contract.
+  // Emits: <div class="field"><label class="label">...</label>
+  //        <select class="select">...</select></div>.
   let {
     label,
     value = $bindable(),
     options,
     hint = '',
+    required = false,
   }: {
     label: string;
     value: string;
     options: { value: string; label: string }[];
     hint?: string;
+    required?: boolean;
   } = $props();
 </script>
 
-<label class="block">
-  <span class="text-sm text-slate-700">{label}</span>
-  <select class="w-full border rounded px-2 py-1" bind:value>
-    <option value="">—</option>
-    {#each options as o (o.value)}
-      <option value={o.value}>{o.label}</option>
-    {/each}
-  </select>
-  {#if hint}<p class="text-xs text-slate-500 mt-1">{hint}</p>{/if}
-</label>
+<div class="field" data-required={required || undefined}>
+  <label class="label" data-required={required || undefined}>
+    <span>{label}</span>
+    <select class="select" aria-label={label} bind:value {required}>
+      <option value="">—</option>
+      {#each options as o (o.value)}
+        <option value={o.value}>{o.label}</option>
+      {/each}
+    </select>
+  </label>
+  {#if hint}<p class="hint">{hint}</p>{/if}
+</div>

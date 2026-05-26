@@ -1,4 +1,7 @@
 <script lang="ts">
+  // NumberField — Lily Svelte headless contract.
+  // Emits: <div class="field"><label class="label">...</label>
+  //        <input class="number-input"></div>.
   let {
     label,
     value = $bindable(),
@@ -7,6 +10,7 @@
     step = 'any',
     unit = '',
     hint = '',
+    required = false,
   }: {
     label: string;
     value: number | null;
@@ -15,18 +19,23 @@
     step?: number | 'any';
     unit?: string;
     hint?: string;
+    required?: boolean;
   } = $props();
 </script>
 
-<label class="block">
-  <span class="text-sm text-slate-700">{label}{unit ? ` (${unit})` : ''}</span>
-  <input
-    type="number"
-    {min}
-    {max}
-    {step}
-    class="w-full border rounded px-2 py-1"
-    bind:value
-  />
-  {#if hint}<p class="text-xs text-slate-500 mt-1">{hint}</p>{/if}
-</label>
+<div class="field" data-required={required || undefined}>
+  <label class="label" data-required={required || undefined}>
+    <span>{label}{unit ? ` (${unit})` : ''}</span>
+    <input
+      type="number"
+      {min}
+      {max}
+      {step}
+      class="number-input"
+      aria-label={label}
+      bind:value
+      {required}
+    />
+  </label>
+  {#if hint}<p class="hint">{hint}</p>{/if}
+</div>

@@ -1,26 +1,44 @@
 <script lang="ts">
+  // TextField — Lily Svelte headless contract.
+  // Emits: <div class="field"><label class="label">...</label>
+  //        <input class="text-input"></div>. Multiple input types are
+  // supported via `type`; the corresponding Lily class is emitted.
   let {
     label,
     value = $bindable(),
     type = 'text',
     placeholder = '',
     hint = '',
+    required = false,
   }: {
     label: string;
     value: string;
     type?: 'text' | 'email' | 'tel' | 'date' | 'time';
     placeholder?: string;
     hint?: string;
+    required?: boolean;
   } = $props();
+
+  const lilyClass = $derived(
+    type === 'email' ? 'email-input' :
+    type === 'date' ? 'date-input' :
+    type === 'time' ? 'time-input' :
+    type === 'tel' ? 'tel-input' :
+    'text-input',
+  );
 </script>
 
-<label class="block">
-  <span class="text-sm text-slate-700">{label}</span>
-  <input
-    {type}
-    {placeholder}
-    class="w-full border rounded px-2 py-1"
-    bind:value
-  />
-  {#if hint}<p class="text-xs text-slate-500 mt-1">{hint}</p>{/if}
-</label>
+<div class="field" data-required={required || undefined}>
+  <label class="label" data-required={required || undefined}>
+    <span>{label}</span>
+    <input
+      {type}
+      {placeholder}
+      class={lilyClass}
+      aria-label={label}
+      bind:value
+      {required}
+    />
+  </label>
+  {#if hint}<p class="hint">{hint}</p>{/if}
+</div>
