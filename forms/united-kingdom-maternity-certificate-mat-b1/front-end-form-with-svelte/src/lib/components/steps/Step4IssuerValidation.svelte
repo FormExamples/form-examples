@@ -1,142 +1,101 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const issuer = assessment.data.issuer;
-
-	const yesNoOptions = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
 </script>
 
-<SectionCard
-	title="Issuer Validation"
-	description="The MAT B1 must be signed by either a registered doctor or a registered midwife. Doctors apply a name-and-address stamp; midwives provide their NMC personal identification number and registration expiry date."
->
-	<RadioGroup
-		label="Issuer type"
-		name="issuerType"
-		options={[
-			{ value: 'doctor', label: 'Doctor' },
-			{ value: 'midwife', label: 'Registered midwife' }
-		]}
-		bind:value={issuer.issuerType}
-		required
-	/>
+<Fieldset legend="Issuer Validation">
+	<p class="hint">
+		The MAT B1 must be signed by either a registered doctor or a registered
+		midwife. Doctors apply a name-and-address stamp; midwives provide their
+		NMC personal identification number and registration expiry date.
+	</p>
+
+	<Field label="Issuer type" required>
+		<RadioGroup label="Issuer type">
+			<label><input type="radio" class="radio-input" name="issuerType" value="doctor" bind:group={issuer.issuerType} /> Doctor</label>
+			<label><input type="radio" class="radio-input" name="issuerType" value="midwife" bind:group={issuer.issuerType} /> Registered midwife</label>
+		</RadioGroup>
+	</Field>
 
 	{#if issuer.issuerType === 'doctor'}
-		<div class="mt-2 mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-900">
-			DWP guidance: doctors must apply their official name-and-address stamp to
-			every MAT B1 they issue.
-		</div>
+		<Alert type="info">
+			<p>DWP guidance: doctors must apply their official name-and-address stamp to every MAT B1 they issue.</p>
+		</Alert>
 
-		<TextInput
-			label="Doctor's name"
-			name="doctorName"
-			bind:value={issuer.doctor.doctorName}
-			required
-		/>
+		<Field label="Doctor's name" required inputId="doctorName">
+			<TextInput id="doctorName" label="Doctor's name" required bind:value={issuer.doctor.doctorName} />
+		</Field>
 
-		<TextInput
-			label="Practice name"
-			name="practiceName"
-			bind:value={issuer.doctor.practiceName}
-			required
-		/>
+		<Field label="Practice name" required inputId="practiceName">
+			<TextInput id="practiceName" label="Practice name" required bind:value={issuer.doctor.practiceName} />
+		</Field>
 
-		<TextArea
-			label="Practice address"
-			name="practiceAddress"
-			bind:value={issuer.doctor.practiceAddress}
-			rows={2}
-		/>
+		<Field label="Practice address" inputId="practiceAddress">
+			<TextAreaInput id="practiceAddress" label="Practice address" rows={2} bind:value={issuer.doctor.practiceAddress} />
+		</Field>
 
-		<RadioGroup
-			label="Has the official name-and-address stamp been applied?"
-			name="stampApplied"
-			options={yesNoOptions}
-			bind:value={issuer.doctor.stampApplied}
-			required
-		/>
+		<Field label="Has the official name-and-address stamp been applied?" required>
+			<RadioGroup label="Stamp applied">
+				<label><input type="radio" class="radio-input" name="stampApplied" value="yes" bind:group={issuer.doctor.stampApplied} /> Yes</label>
+				<label><input type="radio" class="radio-input" name="stampApplied" value="no" bind:group={issuer.doctor.stampApplied} /> No</label>
+			</RadioGroup>
+		</Field>
 	{:else if issuer.issuerType === 'midwife'}
-		<div class="mt-2 mb-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-900">
-			DWP guidance: registered midwives must record their NMC personal
-			identification number (PIN) and the expiry date of their NMC registration
-			on every MAT B1 they sign.
-		</div>
+		<Alert type="info">
+			<p>DWP guidance: registered midwives must record their NMC personal identification number (PIN) and the expiry date of their NMC registration on every MAT B1 they sign.</p>
+		</Alert>
 
-		<TextInput
-			label="Midwife's full name"
-			name="midwifeName"
-			bind:value={issuer.midwife.midwifeName}
-			required
-		/>
+		<Field label="Midwife's full name" required inputId="midwifeName">
+			<TextInput id="midwifeName" label="Midwife's full name" required bind:value={issuer.midwife.midwifeName} />
+		</Field>
 
-		<TextInput
-			label="NMC personal identification number (PIN)"
-			name="nmcPin"
-			bind:value={issuer.midwife.nmcPin}
-			placeholder="e.g. 12A3456E"
-			required
-		/>
+		<Field label="NMC personal identification number (PIN)" required inputId="nmcPin">
+			<TextInput id="nmcPin" label="NMC PIN" required placeholder="e.g. 12A3456E" bind:value={issuer.midwife.nmcPin} />
+		</Field>
 
-		<TextInput
-			label="NMC registration expiry date"
-			name="nmcExpiryDate"
-			type="date"
-			bind:value={issuer.midwife.nmcExpiryDate}
-			required
-		/>
+		<Field label="NMC registration expiry date" required inputId="nmcExpiryDate">
+			<DateInput id="nmcExpiryDate" label="NMC registration expiry date" required bind:value={issuer.midwife.nmcExpiryDate} />
+		</Field>
 	{:else}
-		<p class="mb-4 text-sm text-gray-500">
-			Select an issuer type above to continue.
-		</p>
+		<p class="hint">Select an issuer type above to continue.</p>
 	{/if}
 
-	<hr class="my-6 border-gray-200" />
+	<Field label="Pre-printed unique certificate number" required inputId="certificateNumber" description="From the official MAT B1 form">
+		<TextInput id="certificateNumber" label="Pre-printed unique certificate number" required bind:value={issuer.certificateNumber} />
+	</Field>
 
-	<TextInput
-		label="Pre-printed unique certificate number"
-		name="certificateNumber"
-		bind:value={issuer.certificateNumber}
-		placeholder="From the official MAT B1 form"
-		required
-	/>
+	<Field label="Issue date (date the certificate is signed)" required inputId="issueDate">
+		<DateInput id="issueDate" label="Issue date" required bind:value={issuer.issueDate} />
+	</Field>
 
-	<TextInput
-		label="Issue date (date the certificate is signed)"
-		name="issueDate"
-		type="date"
-		bind:value={issuer.issueDate}
-		required
-	/>
-
-	<RadioGroup
-		label="Is this certificate a duplicate replacement?"
-		name="isDuplicate"
-		options={yesNoOptions}
-		bind:value={issuer.isDuplicate}
-	/>
+	<Field label="Is this certificate a duplicate replacement?">
+		<RadioGroup label="Duplicate?">
+			<label><input type="radio" class="radio-input" name="isDuplicate" value="yes" bind:group={issuer.isDuplicate} /> Yes</label>
+			<label><input type="radio" class="radio-input" name="isDuplicate" value="no" bind:group={issuer.isDuplicate} /> No</label>
+		</RadioGroup>
+	</Field>
 
 	{#if issuer.isDuplicate === 'yes'}
-		<RadioGroup
-			label='Has the form been marked "DUPLICATE"?'
-			name="duplicateMarkerApplied"
-			options={yesNoOptions}
-			bind:value={issuer.duplicateMarkerApplied}
-			required
-		/>
+		<Field label={'Has the form been marked "DUPLICATE"?'} required>
+			<RadioGroup label="Duplicate marker applied?">
+				<label><input type="radio" class="radio-input" name="duplicateMarkerApplied" value="yes" bind:group={issuer.duplicateMarkerApplied} /> Yes</label>
+				<label><input type="radio" class="radio-input" name="duplicateMarkerApplied" value="no" bind:group={issuer.duplicateMarkerApplied} /> No</label>
+			</RadioGroup>
+		</Field>
 	{/if}
 
-	<RadioGroup
-		label="Has the certificate been completed in ink (not pencil)?"
-		name="completedInInk"
-		options={yesNoOptions}
-		bind:value={issuer.completedInInk}
-		required
-	/>
-</SectionCard>
+	<Field label="Has the certificate been completed in ink (not pencil)?" required>
+		<RadioGroup label="Completed in ink?">
+			<label><input type="radio" class="radio-input" name="completedInInk" value="yes" bind:group={issuer.completedInInk} /> Yes</label>
+			<label><input type="radio" class="radio-input" name="completedInInk" value="no" bind:group={issuer.completedInInk} /> No</label>
+		</RadioGroup>
+	</Field>
+</Fieldset>

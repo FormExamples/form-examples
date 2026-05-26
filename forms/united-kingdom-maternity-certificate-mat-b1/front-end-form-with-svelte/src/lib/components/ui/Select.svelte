@@ -1,24 +1,32 @@
 <script lang="ts">
-	// RadioGroup — Lily Svelte headless contract.
+	// Select — Lily Svelte headless contract.
 	import type { Snippet } from 'svelte';
 
 	let {
 		class: className = '',
 		label,
+		value = $bindable<string>(''),
+		required = false,
+		disabled = false,
 		children,
 		...restProps
 	}: {
 		label: string;
+		value?: string;
+		required?: boolean;
+		disabled?: boolean;
 		children: Snippet;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<fieldset
-	class={`radio-group ${className}`}
-	role="radiogroup"
+<select
+	class={`select ${className}`}
 	aria-label={label}
+	bind:value
+	{required}
+	{disabled}
 	{...restProps}
 >
 	{@render children?.()}
-</fieldset>
+</select>

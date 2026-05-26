@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { validateMatB1 } from '$lib/engine/mat-b1-validator';
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Progress from '$lib/components/ui/Progress.svelte';
+	import StepList from '$lib/components/ui/StepList.svelte';
+	import StepListItem from '$lib/components/ui/StepListItem.svelte';
+	import Panel from '$lib/components/ui/Panel.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 	import Badge from '$lib/components/ui/Badge.svelte';
 
 	import Step1PatientIdentification from '$lib/components/steps/Step1PatientIdentification.svelte';
@@ -8,9 +15,18 @@
 	import Step3PostConfinement from '$lib/components/steps/Step3PostConfinement.svelte';
 	import Step4IssuerValidation from '$lib/components/steps/Step4IssuerValidation.svelte';
 
+	const title = 'UK Maternity Certificate (MAT B1)';
+	const subtitle = 'DWP MAT B1 — completeness validation and credential check';
+
+	const steps = [
+		{ step: 1, title: 'Patient Identification' },
+		{ step: 2, title: 'Pre-Confinement Certificate (Part A)' },
+		{ step: 3, title: 'Post-Confinement Certificate (Part B)' },
+		{ step: 4, title: 'Issuer Validation' }
+	];
+
 	function submitForm() {
 		assessment.result = validateMatB1(assessment.data);
-		// Scroll to the result panel.
 		if (typeof document !== 'undefined') {
 			requestAnimationFrame(() => {
 				document.getElementById('mat-b1-result')?.scrollIntoView({ behavior: 'smooth' });
@@ -23,127 +39,179 @@
 	}
 </script>
 
-<div class="min-h-screen bg-gray-50">
-	<header class="border-b border-gray-200 bg-white shadow-sm no-print">
-		<div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-			<h1 class="text-lg font-bold text-gray-900">
-				UK Maternity Certificate (MAT B1)
-			</h1>
-			<button
-				type="button"
-				onclick={startOver}
-				class="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
-			>
-				Start over
-			</button>
+<header class="page-header no-print">
+	<div class="page-header-inner">
+		<h1>{title}</h1>
+		<p class="subtitle">{subtitle}</p>
+		<Progress label="Form completion" max={100} value={0} />
+		<StepList label="MAT B1 steps">
+			{#each steps as s (s.step)}
+				<StepListItem status="waiting">{s.title}</StepListItem>
+			{/each}
+		</StepList>
+	</div>
+</header>
+
+<main>
+	<Alert type="info">
+		<p>
+			This single-page form captures the data needed to issue an official UK
+			DWP MAT B1 maternity certificate. Choose either Part A (pre-confinement)
+			or Part B (post-confinement) — they are mutually exclusive — and provide
+			the issuer details for the doctor or registered midwife signing the
+			certificate.
+		</p>
+	</Alert>
+
+	<Form label={title} onsubmit={submitForm}>
+		<Step1PatientIdentification />
+		<Step2PreConfinement />
+		<Step3PostConfinement />
+		<Step4IssuerValidation />
+
+		<div class="button-group">
+			<Button type="submit" data-variant="primary">Validate Certificate</Button>
+			<Button data-variant="secondary" onclick={startOver}>Start over</Button>
 		</div>
-	</header>
+	</Form>
 
-	<main class="mx-auto max-w-3xl px-4 py-6">
-		<div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
-			This single-page form captures the data needed to issue an official UK DWP
-			MAT B1 maternity certificate. Choose either Part A (pre-confinement) or
-			Part B (post-confinement) — they are mutually exclusive — and provide the
-			issuer details for the doctor or registered midwife signing the certificate.
-		</div>
+	<Panel label="Validation Result" class="report-panel">
+		<div id="mat-b1-result">
+			{#if !assessment.result}
+				<p class="empty-message">Submit the form to see the validation result.</p>
+			{:else}
+				{@const result = assessment.result}
+				<h2>Validation Result</h2>
 
-		<div class="space-y-8">
-			<Step1PatientIdentification />
-			<Step2PreConfinement />
-			<Step3PostConfinement />
-			<Step4IssuerValidation />
-		</div>
-
-		<div class="mt-10 flex justify-end">
-			<button
-				type="button"
-				onclick={submitForm}
-				class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-			>
-				Validate Certificate
-			</button>
-		</div>
-
-		{#if assessment.result}
-			{@const result = assessment.result}
-			<section
-				id="mat-b1-result"
-				class="mt-10 rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
-			>
-				<h2 class="mb-4 text-xl font-bold text-gray-900">Validation Result</h2>
-
-				<div class="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-					<div class="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm">
-						<div class="text-gray-500">Status</div>
-						<div class="mt-1 font-medium">
+				<div class="report-grid">
+					<div class="summary-box">
+						<p class="subtle">Status</p>
+						<p>
 							{#if result.complete}
-								<span class="text-green-700">Complete</span>
+								<strong style="color: var(--color-success);">Complete</strong>
 							{:else}
-								<span class="text-red-700">Incomplete</span>
+								<strong style="color: var(--color-danger);">Incomplete</strong>
 							{/if}
-						</div>
+						</p>
 					</div>
-					<div class="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm">
-						<div class="text-gray-500">Branch</div>
-						<div class="mt-1 font-medium">
-							{result.certificateType === 'pre'
-								? 'Part A — pre-confinement'
-								: result.certificateType === 'post'
-									? 'Part B — post-confinement'
-									: 'Not selected'}
+					<div class="summary-box">
+						<p class="subtle">Branch</p>
+						<p>
+							<strong>
+								{result.certificateType === 'pre'
+									? 'Part A — pre-confinement'
+									: result.certificateType === 'post'
+										? 'Part B — post-confinement'
+										: 'Not selected'}
+							</strong>
 							{#if result.issuerType}
-								<span class="text-gray-500"> · </span>
-								{result.issuerType === 'doctor' ? 'Doctor' : 'Midwife'}
+								· {result.issuerType === 'doctor' ? 'Doctor' : 'Midwife'}
 							{/if}
-						</div>
+						</p>
 					</div>
 				</div>
 
 				{#if result.weeksBeforeEwc !== null}
-					<p class="mb-4 text-sm text-gray-700">
-						Examination is <strong>{result.weeksBeforeEwc}</strong> weeks before the
-						expected date of confinement.
+					<p>
+						Examination is <strong>{result.weeksBeforeEwc}</strong> weeks before
+						the expected date of confinement.
 					</p>
 				{/if}
 
 				{#if result.firedRules.length > 0}
-					<h3 class="mb-2 text-sm font-semibold text-gray-900">
-						Issues to resolve ({result.firedRules.length})
-					</h3>
-					<ul class="mb-4 space-y-2">
+					<h3>Issues to resolve ({result.firedRules.length})</h3>
+					<ul>
 						{#each result.firedRules as r (r.id)}
-							<li class="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm">
-								<div class="mb-1 flex items-center gap-2">
-									<Badge priority={r.priority} />
-									<span class="text-xs text-gray-500">{r.id} · {r.category}</span>
-								</div>
-								<div class="text-gray-800">{r.message}</div>
+							<li>
+								<Badge priority={r.priority} />
+								<span class="subtle"> {r.id} · {r.category}</span><br />
+								{r.message}
 							</li>
 						{/each}
 					</ul>
 				{:else}
-					<p class="mb-4 rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800">
-						No completeness or consistency issues detected.
-					</p>
+					<Alert type="success">
+						<p>No completeness or consistency issues detected.</p>
+					</Alert>
 				{/if}
 
 				{#if result.additionalFlags.length > 0}
-					<h3 class="mb-2 text-sm font-semibold text-gray-900">
-						Additional flags ({result.additionalFlags.length})
-					</h3>
-					<ul class="space-y-2">
+					<h3>Additional flags ({result.additionalFlags.length})</h3>
+					<ul>
 						{#each result.additionalFlags as f (f.id)}
-							<li class="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm">
-								<div class="mb-1 flex items-center gap-2">
-									<Badge priority={f.priority} />
-									<span class="text-xs text-gray-500">{f.id} · {f.category}</span>
-								</div>
-								<div class="text-gray-800">{f.message}</div>
+							<li>
+								<Badge priority={f.priority} />
+								<span class="subtle"> {f.id} · {f.category}</span><br />
+								{f.message}
 							</li>
 						{/each}
 					</ul>
 				{/if}
-			</section>
-		{/if}
-	</main>
-</div>
+			{/if}
+		</div>
+	</Panel>
+</main>
+
+<style>
+	.page-header {
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	}
+	.page-header-inner {
+		max-width: 56rem;
+		margin: 0 auto;
+		padding: 1rem;
+	}
+	.page-header h1 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 0 0 0.25rem;
+	}
+	.subtitle {
+		color: var(--color-muted);
+		font-size: 0.875rem;
+		margin: 0 0 0.75rem;
+	}
+	main {
+		max-width: 56rem;
+		margin: 0 auto;
+		padding: 1.5rem 1rem 4rem;
+	}
+	.report-panel h2 {
+		margin: 0 0 0.75rem;
+		font-size: 1.5rem;
+	}
+	.report-panel h3 {
+		font-size: 1.0625rem;
+		margin: 1rem 0 0.5rem;
+	}
+	.report-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+	@media (max-width: 640px) {
+		.report-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+	.subtle {
+		color: var(--color-muted);
+		font-size: 0.875rem;
+		margin: 0;
+	}
+	.summary-box {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: 0.375rem;
+		padding: 0.75rem;
+	}
+	.summary-box p {
+		margin: 0 0 0.25rem;
+	}
+</style>
