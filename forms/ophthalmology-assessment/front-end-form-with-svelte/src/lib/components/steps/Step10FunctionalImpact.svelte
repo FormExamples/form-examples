@@ -1,57 +1,79 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const f = assessment.data.functionalImpact;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Functional Impact" description="How your vision affects daily activities">
-	<SelectInput
-		label="Driving status"
-		name="drivingStatus"
-		options={[
-			{ value: 'current-driver', label: 'Current driver' },
-			{ value: 'ceased-driving', label: 'Ceased driving (vision-related)' },
-			{ value: 'never-driven', label: 'Never driven' }
-		]}
-		bind:value={f.drivingStatus}
-	/>
+<Fieldset legend="Functional Impact">
+	<p class="hint">How your vision affects daily activities.</p>
+
+	<Field label="Driving status" inputId="drivingStatus">
+		<Select id="drivingStatus" label="Driving status" bind:value={f.drivingStatus}>
+			<option value="">-- Select --</option>
+			<option value="current-driver">Current driver</option>
+			<option value="ceased-driving">Ceased driving (vision-related)</option>
+			<option value="never-driven">Never driven</option>
+		</Select>
+	</Field>
 	{#if f.drivingStatus === 'ceased-driving'}
-		<TextArea label="Driving concerns" name="drivingConcerns" bind:value={f.drivingConcerns} />
+		<Field label="Driving concerns" inputId="drivingConcerns">
+			<TextAreaInput id="drivingConcerns" label="Driving concerns" rows={2} bind:value={f.drivingConcerns} />
+		</Field>
 	{/if}
 
-	<SelectInput
-		label="Reading ability"
-		name="readingAbility"
-		options={[
-			{ value: 'no-difficulty', label: 'No difficulty' },
-			{ value: 'mild-difficulty', label: 'Mild difficulty' },
-			{ value: 'moderate-difficulty', label: 'Moderate difficulty' },
-			{ value: 'severe-difficulty', label: 'Severe difficulty' },
-			{ value: 'unable', label: 'Unable to read' }
-		]}
-		bind:value={f.readingAbility}
-	/>
+	<Field label="Reading ability" inputId="readingAbility">
+		<Select id="readingAbility" label="Reading ability" bind:value={f.readingAbility}>
+			<option value="">-- Select --</option>
+			<option value="no-difficulty">No difficulty</option>
+			<option value="mild-difficulty">Mild difficulty</option>
+			<option value="moderate-difficulty">Moderate difficulty</option>
+			<option value="severe-difficulty">Severe difficulty</option>
+			<option value="unable">Unable to read</option>
+		</Select>
+	</Field>
 
-	<RadioGroup label="Any limitations in activities of daily living (ADL) due to vision?" name="adl" options={yesNo} bind:value={f.adlLimitations} />
+	<Field label="Any limitations in activities of daily living (ADL) due to vision?">
+		<RadioGroup label="ADL limitations">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="adl" value={opt.value} bind:group={f.adlLimitations} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if f.adlLimitations === 'yes'}
-		<TextArea label="Please describe limitations" name="adlDetails" bind:value={f.adlLimitationDetails} />
+		<Field label="Please describe limitations" inputId="adlDetails">
+			<TextAreaInput id="adlDetails" label="ADL details" rows={2} bind:value={f.adlLimitationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Have you had falls or near-falls related to your vision?" name="falls" options={yesNo} bind:value={f.fallsRisk} />
+	<Field label="Have you had falls or near-falls related to your vision?">
+		<RadioGroup label="Falls risk">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="falls" value={opt.value} bind:group={f.fallsRisk} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if f.fallsRisk === 'yes'}
-		<TextArea label="Falls details" name="fallsDetails" bind:value={f.fallsDetails} />
+		<Field label="Falls details" inputId="fallsDetails">
+			<TextAreaInput id="fallsDetails" label="Falls details" rows={2} bind:value={f.fallsDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you need additional support services for your vision?" name="support" options={yesNo} bind:value={f.supportNeeds} />
+	<Field label="Do you need additional support services for your vision?">
+		<RadioGroup label="Support needs">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="support" value={opt.value} bind:group={f.supportNeeds} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if f.supportNeeds === 'yes'}
-		<TextArea label="Support needs details" name="supportDetails" bind:value={f.supportDetails} />
+		<Field label="Support needs details" inputId="supportDetails">
+			<TextAreaInput id="supportDetails" label="Support details" rows={2} bind:value={f.supportDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

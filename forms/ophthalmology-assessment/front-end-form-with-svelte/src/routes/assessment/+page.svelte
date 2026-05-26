@@ -4,6 +4,9 @@
 	import { calculateVisualAcuityGrade } from '$lib/engine/va-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
 	import Step3VisualAcuity from '$lib/components/steps/Step3VisualAcuity.svelte';
@@ -16,44 +19,37 @@
 	import Step10FunctionalImpact from '$lib/components/steps/Step10FunctionalImpact.svelte';
 
 	function submitAssessment() {
-			const { vaGrade, firedRules } = calculateVisualAcuityGrade(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				vaGrade,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { vaGrade, firedRules } = calculateVisualAcuityGrade(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			vaGrade,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Ophthalmology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3VisualAcuity />
+	<Step4OcularHistory />
+	<Step5AnteriorSegment />
+	<Step6PosteriorSegment />
+	<Step7VisualFieldPupils />
+	<Step8CurrentMedications />
+	<Step9SystemicConditions />
+	<Step10FunctionalImpact />
 
-<Step2ChiefComplaint />
-
-<Step3VisualAcuity />
-
-<Step4OcularHistory />
-
-<Step5AnteriorSegment />
-
-<Step6PosteriorSegment />
-
-<Step7VisualFieldPupils />
-
-<Step8CurrentMedications />
-
-<Step9SystemicConditions />
-
-<Step10FunctionalImpact />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

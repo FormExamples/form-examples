@@ -1,64 +1,62 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const a = assessment.data.anteriorSegment;
-	const normalAbnormal = [
-		{ value: 'yes', label: 'Normal' },
-		{ value: 'no', label: 'Abnormal' }
-	];
+	const normalAbnormal = [{ value: 'yes', label: 'Normal' }, { value: 'no', label: 'Abnormal' }];
+
+	const sections = [
+		{ key: 'lidsNormal', detailsKey: 'lidsDetails', label: 'Lids' },
+		{ key: 'conjunctivaNormal', detailsKey: 'conjunctivaDetails', label: 'Conjunctiva' },
+		{ key: 'corneaNormal', detailsKey: 'corneaDetails', label: 'Cornea' },
+		{ key: 'anteriorChamberNormal', detailsKey: 'anteriorChamberDetails', label: 'Anterior Chamber' },
+		{ key: 'irisNormal', detailsKey: 'irisDetails', label: 'Iris' },
+		{ key: 'lensNormal', detailsKey: 'lensDetails', label: 'Lens' }
+	] as const;
 </script>
 
-<SectionCard title="Anterior Segment" description="Slit lamp examination findings">
-	<RadioGroup label="Lids" name="lids" options={normalAbnormal} bind:value={a.lidsNormal} />
-	{#if a.lidsNormal === 'no'}
-		<TextArea label="Lid findings" name="lidsDetails" bind:value={a.lidsDetails} />
-	{/if}
+<Fieldset legend="Anterior Segment">
+	<p class="hint">Slit lamp examination findings.</p>
 
-	<RadioGroup label="Conjunctiva" name="conj" options={normalAbnormal} bind:value={a.conjunctivaNormal} />
-	{#if a.conjunctivaNormal === 'no'}
-		<TextArea label="Conjunctival findings" name="conjDetails" bind:value={a.conjunctivaDetails} />
-	{/if}
+	{#each sections as section (section.key)}
+		<Field label={section.label}>
+			<RadioGroup label={section.label}>
+				{#each normalAbnormal as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name={section.key} value={opt.value} bind:group={a[section.key]} />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		{#if a[section.key] === 'no'}
+			<Field label={`${section.label} findings`} inputId={section.detailsKey}>
+				<TextAreaInput id={section.detailsKey} label={`${section.label} findings`} rows={2} bind:value={a[section.detailsKey]} />
+			</Field>
+		{/if}
+	{/each}
 
-	<RadioGroup label="Cornea" name="cornea" options={normalAbnormal} bind:value={a.corneaNormal} />
-	{#if a.corneaNormal === 'no'}
-		<TextArea label="Corneal findings" name="corneaDetails" bind:value={a.corneaDetails} />
-	{/if}
+	<Fieldset legend="Intraocular Pressure (IOP)">
+		<div class="field-grid">
+			<Field label="Right Eye IOP (mmHg)" inputId="iopRight"><NumberInput id="iopRight" label="Right Eye IOP" min={0} max={80} bind:value={a.iopRight} /></Field>
+			<Field label="Left Eye IOP (mmHg)" inputId="iopLeft"><NumberInput id="iopLeft" label="Left Eye IOP" min={0} max={80} bind:value={a.iopLeft} /></Field>
+		</div>
 
-	<RadioGroup label="Anterior Chamber" name="ac" options={normalAbnormal} bind:value={a.anteriorChamberNormal} />
-	{#if a.anteriorChamberNormal === 'no'}
-		<TextArea label="Anterior chamber findings" name="acDetails" bind:value={a.anteriorChamberDetails} />
-	{/if}
+		<Field label="IOP Measurement Method" inputId="iopMethod">
+			<Select id="iopMethod" label="IOP method" bind:value={a.iopMethod}>
+				<option value="">-- Select --</option>
+				<option value="goldmann">Goldmann applanation</option>
+				<option value="tonopen">Tonopen</option>
+				<option value="icare">iCare rebound</option>
+				<option value="non-contact">Non-contact (air puff)</option>
+			</Select>
+		</Field>
+	</Fieldset>
+</Fieldset>
 
-	<RadioGroup label="Iris" name="iris" options={normalAbnormal} bind:value={a.irisNormal} />
-	{#if a.irisNormal === 'no'}
-		<TextArea label="Iris findings" name="irisDetails" bind:value={a.irisDetails} />
-	{/if}
-
-	<RadioGroup label="Lens" name="lens" options={normalAbnormal} bind:value={a.lensNormal} />
-	{#if a.lensNormal === 'no'}
-		<TextArea label="Lens findings (e.g. cataract type/grade)" name="lensDetails" bind:value={a.lensDetails} />
-	{/if}
-
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Intraocular Pressure (IOP)</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<NumberInput label="Right Eye IOP" name="iopRight" bind:value={a.iopRight} unit="mmHg" min={0} max={80} />
-		<NumberInput label="Left Eye IOP" name="iopLeft" bind:value={a.iopLeft} unit="mmHg" min={0} max={80} />
-	</div>
-
-	<SelectInput
-		label="IOP Measurement Method"
-		name="iopMethod"
-		options={[
-			{ value: 'goldmann', label: 'Goldmann applanation' },
-			{ value: 'tonopen', label: 'Tonopen' },
-			{ value: 'icare', label: 'iCare rebound' },
-			{ value: 'non-contact', label: 'Non-contact (air puff)' }
-		]}
-		bind:value={a.iopMethod}
-	/>
-</SectionCard>
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

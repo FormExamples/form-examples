@@ -1,48 +1,84 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const h = assessment.data.ocularHistory;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const eyeOptions = [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }, { value: 'both', label: 'Both' }];
 </script>
 
-<SectionCard title="Ocular History" description="Previous eye conditions and treatments">
-	<RadioGroup label="Any previous eye conditions?" name="prevConditions" options={yesNo} bind:value={h.previousEyeConditions} />
+<Fieldset legend="Ocular History">
+	<p class="hint">Previous eye conditions and treatments.</p>
+
+	<Field label="Any previous eye conditions?">
+		<RadioGroup label="Previous eye conditions">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="prevConditions" value={opt.value} bind:group={h.previousEyeConditions} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.previousEyeConditions === 'yes'}
-		<TextArea label="Please provide details" name="prevConditionDetails" bind:value={h.previousEyeConditionDetails} />
+		<Field label="Please provide details" inputId="prevConditionDetails">
+			<TextAreaInput id="prevConditionDetails" label="Previous condition details" rows={2} bind:value={h.previousEyeConditionDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Any previous eye surgery?" name="prevSurgery" options={yesNo} bind:value={h.previousEyeSurgery} />
+	<Field label="Any previous eye surgery?">
+		<RadioGroup label="Previous eye surgery">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="prevSurgery" value={opt.value} bind:group={h.previousEyeSurgery} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.previousEyeSurgery === 'yes'}
-		<TextArea label="Please provide details (type, date, eye)" name="prevSurgeryDetails" bind:value={h.previousEyeSurgeryDetails} />
+		<Field label="Please provide details (type, date, eye)" inputId="prevSurgeryDetails">
+			<TextAreaInput id="prevSurgeryDetails" label="Surgery details" rows={2} bind:value={h.previousEyeSurgeryDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Any previous laser treatment?" name="laserTx" options={yesNo} bind:value={h.laserTreatment} />
+	<Field label="Any previous laser treatment?">
+		<RadioGroup label="Laser treatment">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="laserTx" value={opt.value} bind:group={h.laserTreatment} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.laserTreatment === 'yes'}
-		<TextArea label="Please provide details" name="laserDetails" bind:value={h.laserTreatmentDetails} />
+		<Field label="Please provide details" inputId="laserDetails">
+			<TextAreaInput id="laserDetails" label="Laser details" rows={2} bind:value={h.laserTreatmentDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Any history of eye trauma?" name="trauma" options={yesNo} bind:value={h.ocularTrauma} />
+	<Field label="Any history of eye trauma?">
+		<RadioGroup label="Ocular trauma">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="trauma" value={opt.value} bind:group={h.ocularTrauma} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.ocularTrauma === 'yes'}
-		<TextArea label="Please provide details" name="traumaDetails" bind:value={h.ocularTraumaDetails} />
+		<Field label="Please provide details" inputId="traumaDetails">
+			<TextAreaInput id="traumaDetails" label="Trauma details" rows={2} bind:value={h.ocularTraumaDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have amblyopia (lazy eye)?" name="amblyopia" options={yesNo} bind:value={h.amblyopia} />
+	<Field label="Do you have amblyopia (lazy eye)?">
+		<RadioGroup label="Amblyopia">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="amblyopia" value={opt.value} bind:group={h.amblyopia} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.amblyopia === 'yes'}
-		<RadioGroup
-			label="Which eye?"
-			name="amblyopiaEye"
-			options={[
-				{ value: 'left', label: 'Left' },
-				{ value: 'right', label: 'Right' },
-				{ value: 'both', label: 'Both' }
-			]}
-			bind:value={h.amblyopiaEye}
-		/>
+		<Field label="Which eye?">
+			<RadioGroup label="Amblyopia eye">
+				{#each eyeOptions as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="amblyopiaEye" value={opt.value} bind:group={h.amblyopiaEye} />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

@@ -1,39 +1,48 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const va = assessment.data.visualAcuity;
 </script>
 
-<SectionCard title="Visual Acuity" description="Distance and near visual acuity measurements (Snellen notation, e.g. 6/6, 6/12, 6/60)">
-	<h3 class="mb-3 font-semibold text-gray-800">Distance VA - Right Eye</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Uncorrected" name="distVaRightUncorrected" bind:value={va.distanceVaRightUncorrected} placeholder="e.g. 6/12" />
-		<TextInput label="Best Corrected" name="distVaRightCorrected" bind:value={va.distanceVaRightCorrected} placeholder="e.g. 6/6" />
+<Fieldset legend="Visual Acuity - Distance VA Right Eye">
+	<div class="field-grid">
+		<Field label="Uncorrected" inputId="distVaRightUncorrected"><TextInput id="distVaRightUncorrected" label="Uncorrected right" placeholder="e.g. 6/12" bind:value={va.distanceVaRightUncorrected} /></Field>
+		<Field label="Best Corrected" inputId="distVaRightCorrected"><TextInput id="distVaRightCorrected" label="Best Corrected right" placeholder="e.g. 6/6" bind:value={va.distanceVaRightCorrected} /></Field>
 	</div>
+</Fieldset>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Distance VA - Left Eye</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Uncorrected" name="distVaLeftUncorrected" bind:value={va.distanceVaLeftUncorrected} placeholder="e.g. 6/12" />
-		<TextInput label="Best Corrected" name="distVaLeftCorrected" bind:value={va.distanceVaLeftCorrected} placeholder="e.g. 6/6" />
+<Fieldset legend="Visual Acuity - Distance VA Left Eye">
+	<div class="field-grid">
+		<Field label="Uncorrected" inputId="distVaLeftUncorrected"><TextInput id="distVaLeftUncorrected" label="Uncorrected left" placeholder="e.g. 6/12" bind:value={va.distanceVaLeftUncorrected} /></Field>
+		<Field label="Best Corrected" inputId="distVaLeftCorrected"><TextInput id="distVaLeftCorrected" label="Best Corrected left" placeholder="e.g. 6/6" bind:value={va.distanceVaLeftCorrected} /></Field>
 	</div>
+</Fieldset>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Near VA</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Right Eye" name="nearVaRight" bind:value={va.nearVaRight} placeholder="e.g. N5" />
-		<TextInput label="Left Eye" name="nearVaLeft" bind:value={va.nearVaLeft} placeholder="e.g. N5" />
+<Fieldset legend="Visual Acuity - Near VA">
+	<div class="field-grid">
+		<Field label="Right Eye" inputId="nearVaRight"><TextInput id="nearVaRight" label="Near VA Right" placeholder="e.g. N5" bind:value={va.nearVaRight} /></Field>
+		<Field label="Left Eye" inputId="nearVaLeft"><TextInput id="nearVaLeft" label="Near VA Left" placeholder="e.g. N5" bind:value={va.nearVaLeft} /></Field>
 	</div>
+</Fieldset>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Pinhole</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Right Eye" name="pinholeRight" bind:value={va.pinholeRight} placeholder="e.g. 6/6" />
-		<TextInput label="Left Eye" name="pinholeLeft" bind:value={va.pinholeLeft} placeholder="e.g. 6/6" />
+<Fieldset legend="Visual Acuity - Pinhole">
+	<div class="field-grid">
+		<Field label="Right Eye" inputId="pinholeRight"><TextInput id="pinholeRight" label="Pinhole right" placeholder="e.g. 6/6" bind:value={va.pinholeRight} /></Field>
+		<Field label="Left Eye" inputId="pinholeLeft"><TextInput id="pinholeLeft" label="Pinhole left" placeholder="e.g. 6/6" bind:value={va.pinholeLeft} /></Field>
 	</div>
+</Fieldset>
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Refraction</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Right Eye" name="refractionRight" bind:value={va.refractionRight} placeholder="e.g. -2.50/-1.00x180" />
-		<TextInput label="Left Eye" name="refractionLeft" bind:value={va.refractionLeft} placeholder="e.g. -2.00/-0.75x170" />
+<Fieldset legend="Refraction">
+	<div class="field-grid">
+		<Field label="Right Eye" inputId="refractionRight"><TextInput id="refractionRight" label="Refraction right" placeholder="e.g. -2.50/-1.00x180" bind:value={va.refractionRight} /></Field>
+		<Field label="Left Eye" inputId="refractionLeft"><TextInput id="refractionLeft" label="Refraction left" placeholder="e.g. -2.00/-0.75x170" bind:value={va.refractionLeft} /></Field>
 	</div>
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

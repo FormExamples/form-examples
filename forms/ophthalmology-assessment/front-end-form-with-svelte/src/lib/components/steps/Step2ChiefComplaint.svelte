@@ -1,77 +1,69 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const c = assessment.data.chiefComplaint;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const eyeOptions = [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }, { value: 'both', label: 'Both' }];
+	const onsetOptions = [{ value: 'sudden', label: 'Sudden' }, { value: 'gradual', label: 'Gradual' }];
 </script>
 
-<SectionCard title="Chief Complaint" description="Primary eye concern and symptom details">
-	<TextArea label="What is your primary eye concern?" name="primaryConcern" bind:value={c.primaryConcern} placeholder="Describe your main eye problem or reason for visit" required />
+<Fieldset legend="Chief Complaint">
+	<p class="hint">Primary eye concern and symptom details.</p>
 
-	<RadioGroup
-		label="Which eye is affected?"
-		name="affectedEye"
-		options={[
-			{ value: 'left', label: 'Left' },
-			{ value: 'right', label: 'Right' },
-			{ value: 'both', label: 'Both' }
-		]}
-		bind:value={c.affectedEye}
-		required
-	/>
+	<Field label="What is your primary eye concern?" required inputId="primaryConcern">
+		<TextAreaInput id="primaryConcern" label="Primary concern" rows={3} required placeholder="Describe your main eye problem or reason for visit" bind:value={c.primaryConcern} />
+	</Field>
 
-	<RadioGroup
-		label="How did the symptoms start?"
-		name="onsetType"
-		options={[
-			{ value: 'sudden', label: 'Sudden' },
-			{ value: 'gradual', label: 'Gradual' }
-		]}
-		bind:value={c.onsetType}
-	/>
+	<Field label="Which eye is affected?" required>
+		<RadioGroup label="Affected eye">
+			{#each eyeOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="affectedEye" value={opt.value} bind:group={c.affectedEye} required />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<TextInput label="Duration" name="durationValue" bind:value={c.durationValue} placeholder="e.g. 3" />
-		<SelectInput
-			label="Duration unit"
-			name="durationUnit"
-			options={[
-				{ value: 'hours', label: 'Hours' },
-				{ value: 'days', label: 'Days' },
-				{ value: 'weeks', label: 'Weeks' },
-				{ value: 'months', label: 'Months' },
-				{ value: 'years', label: 'Years' }
-			]}
-			bind:value={c.durationUnit}
-		/>
+	<Field label="How did the symptoms start?">
+		<RadioGroup label="Onset type">
+			{#each onsetOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="onsetType" value={opt.value} bind:group={c.onsetType} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<div class="field-grid">
+		<Field label="Duration" inputId="durationValue"><TextInput id="durationValue" label="Duration value" placeholder="e.g. 3" bind:value={c.durationValue} /></Field>
+		<Field label="Duration unit" inputId="durationUnit">
+			<Select id="durationUnit" label="Duration unit" bind:value={c.durationUnit}>
+				<option value="">-- Select --</option>
+				<option value="hours">Hours</option><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option>
+			</Select>
+		</Field>
 	</div>
 
-	<RadioGroup label="Is there any eye pain?" name="painPresent" options={yesNo} bind:value={c.painPresent} />
+	<Field label="Is there any eye pain?">
+		<RadioGroup label="Pain present">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="painPresent" value={opt.value} bind:group={c.painPresent} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if c.painPresent === 'yes'}
-		<SelectInput
-			label="Pain severity (1-10)"
-			name="painSeverity"
-			options={[
-				{ value: '1', label: '1 - Minimal' },
-				{ value: '2', label: '2' },
-				{ value: '3', label: '3' },
-				{ value: '4', label: '4' },
-				{ value: '5', label: '5 - Moderate' },
-				{ value: '6', label: '6' },
-				{ value: '7', label: '7' },
-				{ value: '8', label: '8' },
-				{ value: '9', label: '9' },
-				{ value: '10', label: '10 - Worst possible' }
-			]}
-			bind:value={c.painSeverity}
-		/>
+		<Field label="Pain severity (1-10)" inputId="painSeverity">
+			<Select id="painSeverity" label="Pain severity" bind:value={c.painSeverity}>
+				<option value="">-- Select --</option>
+				<option value="1">1 - Minimal</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5 - Moderate</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10 - Worst possible</option>
+			</Select>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

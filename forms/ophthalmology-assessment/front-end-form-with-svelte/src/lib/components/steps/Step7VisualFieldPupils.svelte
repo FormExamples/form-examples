@@ -1,100 +1,113 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const vf = assessment.data.visualFieldPupils;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const eyeOptions = [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }, { value: 'both', label: 'Both' }];
 </script>
 
-<SectionCard title="Visual Field & Pupils" description="Visual field testing and pupil reactions">
-	<RadioGroup label="Was a visual field test performed?" name="vfPerformed" options={yesNo} bind:value={vf.visualFieldTestPerformed} />
+<Fieldset legend="Visual Field and Pupils">
+	<p class="hint">Visual field testing and pupil reactions.</p>
+
+	<Field label="Was a visual field test performed?">
+		<RadioGroup label="VF test performed">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="vfPerformed" value={opt.value} bind:group={vf.visualFieldTestPerformed} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
 	{#if vf.visualFieldTestPerformed === 'yes'}
-		<SelectInput
-			label="Test type"
-			name="vfTestType"
-			options={[
-				{ value: 'confrontation', label: 'Confrontation' },
-				{ value: 'humphrey', label: 'Humphrey' },
-				{ value: 'goldmann', label: 'Goldmann' },
-				{ value: 'octopus', label: 'Octopus' }
-			]}
-			bind:value={vf.visualFieldTestType}
-		/>
+		<Field label="Test type" inputId="vfTestType">
+			<Select id="vfTestType" label="VF Test type" bind:value={vf.visualFieldTestType}>
+				<option value="">-- Select --</option>
+				<option value="confrontation">Confrontation</option>
+				<option value="humphrey">Humphrey</option>
+				<option value="goldmann">Goldmann</option>
+				<option value="octopus">Octopus</option>
+			</Select>
+		</Field>
 
-		<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-			<SelectInput
-				label="Right eye result"
-				name="vfResultRight"
-				options={[
-					{ value: 'normal', label: 'Normal' },
-					{ value: 'abnormal', label: 'Abnormal' }
-				]}
-				bind:value={vf.visualFieldResultRight}
-			/>
-			<SelectInput
-				label="Left eye result"
-				name="vfResultLeft"
-				options={[
-					{ value: 'normal', label: 'Normal' },
-					{ value: 'abnormal', label: 'Abnormal' }
-				]}
-				bind:value={vf.visualFieldResultLeft}
-			/>
+		<div class="field-grid">
+			<Field label="Right eye result" inputId="vfResultRight">
+				<Select id="vfResultRight" label="VF right" bind:value={vf.visualFieldResultRight}>
+					<option value="">-- Select --</option>
+					<option value="normal">Normal</option>
+					<option value="abnormal">Abnormal</option>
+				</Select>
+			</Field>
+			<Field label="Left eye result" inputId="vfResultLeft">
+				<Select id="vfResultLeft" label="VF left" bind:value={vf.visualFieldResultLeft}>
+					<option value="">-- Select --</option>
+					<option value="normal">Normal</option>
+					<option value="abnormal">Abnormal</option>
+				</Select>
+			</Field>
 		</div>
 
 		{#if vf.visualFieldResultRight === 'abnormal' || vf.visualFieldResultLeft === 'abnormal'}
-			<TextArea label="Visual field defect details" name="vfDetails" bind:value={vf.visualFieldDetails} />
+			<Field label="Visual field defect details" inputId="vfDetails">
+				<TextAreaInput id="vfDetails" label="VF details" rows={2} bind:value={vf.visualFieldDetails} />
+			</Field>
 		{/if}
 	{/if}
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Pupil Reactions</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
-			label="Right pupil reaction"
-			name="pupilRight"
-			options={[
-				{ value: 'normal', label: 'Normal' },
-				{ value: 'sluggish', label: 'Sluggish' },
-				{ value: 'fixed', label: 'Fixed' }
-			]}
-			bind:value={vf.pupilReactionRight}
-		/>
-		<SelectInput
-			label="Left pupil reaction"
-			name="pupilLeft"
-			options={[
-				{ value: 'normal', label: 'Normal' },
-				{ value: 'sluggish', label: 'Sluggish' },
-				{ value: 'fixed', label: 'Fixed' }
-			]}
-			bind:value={vf.pupilReactionLeft}
-		/>
+	<div class="field-grid">
+		<Field label="Right pupil reaction" inputId="pupilRight">
+			<Select id="pupilRight" label="Right pupil" bind:value={vf.pupilReactionRight}>
+				<option value="">-- Select --</option>
+				<option value="normal">Normal</option>
+				<option value="sluggish">Sluggish</option>
+				<option value="fixed">Fixed</option>
+			</Select>
+		</Field>
+		<Field label="Left pupil reaction" inputId="pupilLeft">
+			<Select id="pupilLeft" label="Left pupil" bind:value={vf.pupilReactionLeft}>
+				<option value="">-- Select --</option>
+				<option value="normal">Normal</option>
+				<option value="sluggish">Sluggish</option>
+				<option value="fixed">Fixed</option>
+			</Select>
+		</Field>
 	</div>
 
-	<RadioGroup label="Is a relative afferent pupillary defect (RAPD) present?" name="rapd" options={yesNo} bind:value={vf.rapdPresent} />
+	<Field label="Is a relative afferent pupillary defect (RAPD) present?">
+		<RadioGroup label="RAPD">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="rapd" value={opt.value} bind:group={vf.rapdPresent} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if vf.rapdPresent === 'yes'}
-		<RadioGroup
-			label="Which eye?"
-			name="rapdEye"
-			options={[
-				{ value: 'left', label: 'Left' },
-				{ value: 'right', label: 'Right' },
-				{ value: 'both', label: 'Both' }
-			]}
-			bind:value={vf.rapdEye}
-		/>
+		<Field label="Which eye?">
+			<RadioGroup label="RAPD eye">
+				{#each eyeOptions as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="rapdEye" value={opt.value} bind:group={vf.rapdEye} />{opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	{/if}
 
-	<h3 class="mb-3 mt-4 font-semibold text-gray-800">Colour Vision</h3>
-	<RadioGroup label="Is colour vision normal?" name="colourVision" options={yesNo} bind:value={vf.colourVisionNormal} />
+	<Field label="Is colour vision normal?">
+		<RadioGroup label="Colour vision">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="colourVision" value={opt.value} bind:group={vf.colourVisionNormal} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if vf.colourVisionNormal === 'no'}
-		<TextArea label="Colour vision test details" name="colourDetails" bind:value={vf.colourVisionDetails} />
+		<Field label="Colour vision test details" inputId="colourDetails">
+			<TextAreaInput id="colourDetails" label="Colour vision details" rows={2} bind:value={vf.colourVisionDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>
