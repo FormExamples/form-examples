@@ -87,9 +87,15 @@ def classify(slug: str) -> tuple[str, str]:
 
     if legacy_present:
         # Check if legacy components emit Lily class names (partial refactor)
+        lily_markers = (
+            'text-input', 'text-area-input', 'date-input', 'number-input',
+            'email-input', 'tel-input', 'fieldset"', 'fieldset-legend',
+            'field"', 'label"', 'radio-group', 'radio-input',
+            'checkbox-group', 'checkbox-input',
+        )
         for fname in legacy_present:
             text = (ui_dir / fname).read_text(errors="ignore")
-            if any(c in text for c in ('class="text-input"', 'class="fieldset"', 'class="field"', 'class="label"')):
+            if any(c in text for c in lily_markers):
                 return "PARTIAL", f"legacy UI emits Lily classes: {', '.join(legacy_present)}"
         return "TODO", f"legacy UI, no Lily classes: {', '.join(legacy_present)}"
 
