@@ -453,9 +453,50 @@ commit per form with `git commit --only forms/<slug>/`.
   drift across the corpus: 2,003 risky lines — 661× SectionCard,
   421× inline `<input>`, 320× TextArea, 318× inline `<select>`,
   193× SelectInput, 83× inline `<textarea>`, plus a long tail.
-- [ ] **5.6  Batch-migrate the remaining ~132 forms.** Group by complexity
-  (privacy notices first, then surveys, single-grader, multi-grader,
-  emergency forms, UK statutory). Per-form `git commit --only forms/<slug>/`.
+- [~] **5.6  Batch-migrate the remaining forms** (66 of 79 implemented
+  forms done; ~13 still pending; ~54 are empty scaffolds out of scope).
+  - **wave 0** (3 forms): agile-checklist `621f0c86`, care-privacy-notice
+    `647418d3`, encounter-satisfaction `4a21c35b`.
+  - **wave 1** (14 forms): research-and-planning-privacy-notice
+    `ebef5ade`, code-of-conduct-notice `2e891181`, framingham
+    `3d03932b`, heart-health-check `c3426498`, predicting-cvd
+    `3f7903af`, score2-diabetes `4d9325c3`, medical-language-english
+    `103426c0` (placeholder shell), medical-language-cymraeg `595e738b`
+    (placeholder shell), allergy `8f763f08`, asthma `c273fa4e`,
+    attention-deficit `ef1482ee`, audiology `08c89535`, autism
+    `106cce34`, dental `01117b2b`. Skipped 8 empty scaffolds (HIPAA,
+    employee-onboarding-checklist, vaccinations-checklist, first-aid-
+    training-checklist, all 5 wave-1B surveys + CPR-training).
+  - **wave 2** (31 forms): consent-to-treatment `b7cb4f86`, medical-
+    records-release-permission `099ac2a3`, patient-intake `2aeca781`,
+    advance-decision `d4ed710b`, advance-statement `607c128b`,
+    pre-op-by-patient `914e5d0d`, hematology `36217d56`, cardiology
+    `357be484`, cognitive `410cbf48`, contraception `9765e9a9`,
+    dermatology `a5592e0f`, diabetes `dfd88de7`, gastroenterology
+    `dad222f9`, gerontology `a7fbebb6`, hearing-aid `5db30e88`,
+    kinesiology `ad829630`, mast-cell `694a10ef`, mental-health
+    `051216b7`, mobility `5c975902`, neurology `e1cce2b6`,
+    occupational-therapy `984f839e`, oncology `f0ee8fe2`, ophthalmology
+    `57f6f634`, orthopedic `eda1c37f`, pediatric `064ee14a`,
+    post-traumatic-stress `5a3bf347`, prenatal `4203dcc4`, psychiatry
+    `c2263c81`, psychology `b16807e3`, pulmonology `8a177e6a`,
+    respirology `56036abf`. Skipped: ergonomic (empty).
+  - **wave 3** (17 forms; partial — subagent quota exhausted):
+    rheumatology `a69d90a9`, semaglutide `76cb5f3f`, casualty-card
+    `1f33e799`/`abcea0f2`, MEDIF `919426be`, genetic `9c3f0fb5`,
+    gynecology `65b97d83`, agile-principles `06a2f7af`, outpatient-
+    outcome `6d114c03`, UK DVLA B1 `7c6f10a4`, UK DVLA M1 `aca9f3de`,
+    UK MAT B1 `286262c8`, WHO acute-referral `b7c1c0a3`, WHO counter-
+    referral `1518a81a`, WHO emergency-first-aid `efbba49d`, WHO
+    emergency-unit-general `b8a97a5e`, WHO emergency-unit-trauma
+    `069fe1e8`.
+  - **Still pending** (subagent quota exhaustion; resume after reset):
+    sleep-quality, stroke, urology, vaccinations, hormone-replacement-
+    therapy, UK DVLA V1, UK LPA-financial, UK LPA-health-care, UK
+    NHS-medical-exemption, UK fit-note, who-prehospital-form (partial
+    WIP in working tree), architecture-decision-record (partial WIP),
+    eye-prescription, arc42 (likely empty scaffold). Plus ICVP not yet
+    tackled. Total ~13 forms.
 - [ ] **5.7  Cleanup.** Remove legacy non-Lily Svelte components; align
   Tailwind theme tokens to the shared Lily class names; ensure
   `bin/lily-svelte-sync --check` and `pnpm check` are clean.
