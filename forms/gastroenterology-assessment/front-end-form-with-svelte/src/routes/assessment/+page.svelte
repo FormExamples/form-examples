@@ -4,6 +4,9 @@
 	import { calculateGISeverity } from '$lib/engine/gi-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2ChiefComplaint from '$lib/components/steps/Step2ChiefComplaint.svelte';
 	import Step3UpperGISymptoms from '$lib/components/steps/Step3UpperGISymptoms.svelte';
@@ -16,45 +19,38 @@
 	import Step10RedFlagsSocial from '$lib/components/steps/Step10RedFlagsSocial.svelte';
 
 	function submitAssessment() {
-			const { severityScore, severityLevel, firedRules } = calculateGISeverity(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				severityScore,
-				severityLevel,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { severityScore, severityLevel, firedRules } = calculateGISeverity(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			severityScore,
+			severityLevel,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Gastroenterology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2ChiefComplaint />
+	<Step3UpperGISymptoms />
+	<Step4LowerGISymptoms />
+	<Step5AbdominalPain />
+	<Step6LiverPancreas />
+	<Step7PreviousGIHistory />
+	<Step8CurrentMedications />
+	<Step9AllergiesDiet />
+	<Step10RedFlagsSocial />
 
-<Step2ChiefComplaint />
-
-<Step3UpperGISymptoms />
-
-<Step4LowerGISymptoms />
-
-<Step5AbdominalPain />
-
-<Step6LiverPancreas />
-
-<Step7PreviousGIHistory />
-
-<Step8CurrentMedications />
-
-<Step9AllergiesDiet />
-
-<Step10RedFlagsSocial />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

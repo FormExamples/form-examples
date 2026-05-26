@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const u = assessment.data.upperGISymptoms;
 	const yesNo = [
@@ -12,25 +13,69 @@
 	];
 </script>
 
-<SectionCard title="Upper GI Symptoms" description="Symptoms affecting the oesophagus and stomach">
-	<RadioGroup label="Do you have difficulty swallowing (dysphagia)?" name="dysphagia" options={yesNo} bind:value={u.dysphagia} />
+<Fieldset legend="Upper GI Symptoms">
+	<p class="hint">Symptoms affecting the oesophagus and stomach.</p>
+
+	<Field label="Do you have difficulty swallowing (dysphagia)?">
+		<RadioGroup label="Dysphagia">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="dysphagia" value={opt.value} bind:group={u.dysphagia} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if u.dysphagia === 'yes'}
-		<TextInput label="Please describe (solids, liquids, or both)" name="dysphagiaDetails" bind:value={u.dysphagiaDetails} />
+		<Field label="Please describe (solids, liquids, or both)" inputId="dysphagiaDetails">
+			<TextInput id="dysphagiaDetails" label="Dysphagia details" bind:value={u.dysphagiaDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you have pain on swallowing (odynophagia)?" name="odynophagia" options={yesNo} bind:value={u.odynophagia} />
+	<Field label="Do you have pain on swallowing (odynophagia)?">
+		<RadioGroup label="Odynophagia">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="odynophagia" value={opt.value} bind:group={u.odynophagia} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do you experience heartburn or acid reflux?" name="heartburn" options={yesNo} bind:value={u.heartburn} />
+	<Field label="Do you experience heartburn or acid reflux?">
+		<RadioGroup label="Heartburn">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="heartburn" value={opt.value} bind:group={u.heartburn} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if u.heartburn === 'yes'}
-		<TextInput label="How often?" name="heartburnFrequency" bind:value={u.heartburnFrequency} placeholder="e.g. daily, weekly" />
+		<Field label="How often?" inputId="heartburnFrequency">
+			<TextInput id="heartburnFrequency" label="Heartburn frequency" placeholder="e.g. daily, weekly" bind:value={u.heartburnFrequency} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you experience nausea?" name="nausea" options={yesNo} bind:value={u.nausea} />
+	<Field label="Do you experience nausea?">
+		<RadioGroup label="Nausea">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="nausea" value={opt.value} bind:group={u.nausea} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do you experience vomiting?" name="vomiting" options={yesNo} bind:value={u.vomiting} />
+	<Field label="Do you experience vomiting?">
+		<RadioGroup label="Vomiting">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="vomiting" value={opt.value} bind:group={u.vomiting} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if u.vomiting === 'yes'}
-		<TextArea label="Describe the vomiting (frequency, blood present, etc.)" name="vomitingDetails" bind:value={u.vomitingDetails} />
+		<Field label="Describe the vomiting (frequency, blood present, etc.)" inputId="vomitingDetails">
+			<TextAreaInput id="vomitingDetails" label="Vomiting details" rows={3} bind:value={u.vomitingDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Do you feel full quickly after eating (early satiety)?" name="earlySatiety" options={yesNo} bind:value={u.earlySatiety} />
-</SectionCard>
+	<Field label="Do you feel full quickly after eating (early satiety)?">
+		<RadioGroup label="Early satiety">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="earlySatiety" value={opt.value} bind:group={u.earlySatiety} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

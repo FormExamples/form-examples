@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
 
 	const a = assessment.data.allergiesDiet;
@@ -12,30 +13,37 @@
 	];
 </script>
 
-<SectionCard title="Allergies & Diet" description="Drug allergies, food intolerances, and dietary restrictions">
-	<div class="mb-6">
-		<h3 class="mb-3 text-sm font-medium text-gray-700">Drug Allergies</h3>
+<Fieldset legend="Allergies & Diet">
+	<p class="hint">Drug allergies, food intolerances, and dietary restrictions.</p>
+
+	<Field label="Drug Allergies">
 		<AllergyEntry bind:allergies={a.drugAllergies} />
 		{#if a.drugAllergies.length === 0}
-			<p class="mt-3 text-sm text-gray-500">No drug allergies added. Click the button above to add one, or proceed if you have none.</p>
+			<p class="hint">No drug allergies added. Click the button above to add one, or proceed if you have none.</p>
 		{/if}
-	</div>
+	</Field>
 
-	<TextArea
-		label="Do you have any food intolerances?"
-		name="foodIntolerances"
-		bind:value={a.foodIntolerances}
-		placeholder="e.g. spicy food, dairy, wheat"
-	/>
+	<Field label="Do you have any food intolerances?" inputId="foodIntolerances">
+		<TextAreaInput id="foodIntolerances" label="Food intolerances" rows={3} placeholder="e.g. spicy food, dairy, wheat" bind:value={a.foodIntolerances} />
+	</Field>
 
-	<TextArea
-		label="Do you have any dietary restrictions?"
-		name="dietaryRestrictions"
-		bind:value={a.dietaryRestrictions}
-		placeholder="e.g. vegetarian, vegan, halal, kosher"
-	/>
+	<Field label="Do you have any dietary restrictions?" inputId="dietaryRestrictions">
+		<TextAreaInput id="dietaryRestrictions" label="Dietary restrictions" rows={3} placeholder="e.g. vegetarian, vegan, halal, kosher" bind:value={a.dietaryRestrictions} />
+	</Field>
 
-	<RadioGroup label="Do you have a gluten intolerance?" name="glutenIntolerance" options={yesNo} bind:value={a.glutenIntolerance} />
+	<Field label="Do you have a gluten intolerance?">
+		<RadioGroup label="Gluten intolerance">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="glutenIntolerance" value={opt.value} bind:group={a.glutenIntolerance} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Do you have a lactose intolerance?" name="lactoseIntolerance" options={yesNo} bind:value={a.lactoseIntolerance} />
-</SectionCard>
+	<Field label="Do you have a lactose intolerance?">
+		<RadioGroup label="Lactose intolerance">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="lactoseIntolerance" value={opt.value} bind:group={a.lactoseIntolerance} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
