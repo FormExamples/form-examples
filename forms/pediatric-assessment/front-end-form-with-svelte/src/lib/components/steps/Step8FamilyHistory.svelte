@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const fh = assessment.data.familyHistory;
 	const yesNo = [
@@ -11,21 +12,53 @@
 	];
 </script>
 
-<SectionCard title="Family History" description="Hereditary and genetic factors">
-	<RadioGroup label="Are there any known genetic conditions in the family?" name="genetic" options={yesNo} bind:value={fh.geneticConditions} />
+<Fieldset legend="Family History">
+	<p class="hint">Hereditary and genetic factors.</p>
+
+	<Field label="Are there any known genetic conditions in the family?">
+		<RadioGroup label="Genetic conditions">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="genetic" value={opt.value} bind:group={fh.geneticConditions} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if fh.geneticConditions === 'yes'}
-		<TextArea label="Please describe genetic conditions" name="geneticDetails" bind:value={fh.geneticConditionDetails} placeholder="e.g., Down syndrome, cystic fibrosis, sickle cell..." />
+		<Field label="Please describe genetic conditions" inputId="geneticDetails">
+			<TextAreaInput id="geneticDetails" label="Genetic condition details" rows={3} bind:value={fh.geneticConditionDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Are there any chronic diseases in the family?" name="chronicFamily" options={yesNo} bind:value={fh.chronicDiseases} />
+	<Field label="Are there any chronic diseases in the family?">
+		<RadioGroup label="Chronic family diseases">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="chronicFamily" value={opt.value} bind:group={fh.chronicDiseases} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if fh.chronicDiseases === 'yes'}
-		<TextArea label="Please describe chronic diseases" name="chronicFamilyDetails" bind:value={fh.chronicDiseaseDetails} placeholder="e.g., diabetes, heart disease, cancer..." />
+		<Field label="Please describe chronic diseases" inputId="chronicFamilyDetails">
+			<TextAreaInput id="chronicFamilyDetails" label="Chronic disease details" rows={3} bind:value={fh.chronicDiseaseDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Are there any developmental disorders in the family?" name="devDisorders" options={yesNo} bind:value={fh.developmentalDisorders} />
+	<Field label="Are there any developmental disorders in the family?">
+		<RadioGroup label="Developmental disorders">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="devDisorders" value={opt.value} bind:group={fh.developmentalDisorders} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if fh.developmentalDisorders === 'yes'}
-		<TextArea label="Please describe developmental disorders" name="devDisorderDetails" bind:value={fh.developmentalDisorderDetails} placeholder="e.g., autism, ADHD, speech delay..." />
+		<Field label="Please describe developmental disorders" inputId="devDisorderDetails">
+			<TextAreaInput id="devDisorderDetails" label="Developmental disorder details" rows={3} bind:value={fh.developmentalDisorderDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Is there consanguinity (parents are related)?" name="consanguinity" options={yesNo} bind:value={fh.consanguinity} />
-</SectionCard>
+	<Field label="Is there consanguinity (parents are related)?">
+		<RadioGroup label="Consanguinity">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="consanguinity" value={opt.value} bind:group={fh.consanguinity} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>

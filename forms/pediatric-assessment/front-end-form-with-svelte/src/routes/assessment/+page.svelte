@@ -4,6 +4,9 @@
 	import { calculateDevelopmentalScreen } from '$lib/engine/dev-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2BirthHistory from '$lib/components/steps/Step2BirthHistory.svelte';
 	import Step3GrowthNutrition from '$lib/components/steps/Step3GrowthNutrition.svelte';
@@ -15,43 +18,37 @@
 	import Step9SocialEnvironmental from '$lib/components/steps/Step9SocialEnvironmental.svelte';
 
 	function submitAssessment() {
-			const { overallResult, domainResults, firedRules } = calculateDevelopmentalScreen(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				overallResult,
-				domainResults,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { overallResult, domainResults, firedRules } = calculateDevelopmentalScreen(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			overallResult,
+			domainResults,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Pediatric Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2BirthHistory />
+	<Step3GrowthNutrition />
+	<Step4DevelopmentalMilestones />
+	<Step5ImmunizationStatus />
+	<Step6MedicalHistory />
+	<Step7CurrentMedications />
+	<Step8FamilyHistory />
+	<Step9SocialEnvironmental />
 
-<Step2BirthHistory />
-
-<Step3GrowthNutrition />
-
-<Step4DevelopmentalMilestones />
-
-<Step5ImmunizationStatus />
-
-<Step6MedicalHistory />
-
-<Step7CurrentMedications />
-
-<Step8FamilyHistory />
-
-<Step9SocialEnvironmental />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

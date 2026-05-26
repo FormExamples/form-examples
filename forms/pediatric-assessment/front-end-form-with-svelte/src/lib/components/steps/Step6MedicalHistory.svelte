@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const mh = assessment.data.medicalHistory;
 	const yesNo = [
@@ -11,24 +12,58 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Previous and ongoing medical conditions">
-	<RadioGroup label="Does the child have any chronic conditions?" name="chronic" options={yesNo} bind:value={mh.chronicConditions} />
+<Fieldset legend="Medical History">
+	<p class="hint">Previous and ongoing medical conditions.</p>
+
+	<Field label="Does the child have any chronic conditions?">
+		<RadioGroup label="Chronic conditions">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="chronic" value={opt.value} bind:group={mh.chronicConditions} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if mh.chronicConditions === 'yes'}
-		<TextArea label="Please describe chronic conditions" name="chronicDetails" bind:value={mh.chronicConditionDetails} placeholder="e.g., asthma, eczema, epilepsy..." />
+		<Field label="Please describe chronic conditions" inputId="chronicDetails">
+			<TextAreaInput id="chronicDetails" label="Chronic condition details" rows={3} bind:value={mh.chronicConditionDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has the child had any previous hospitalizations?" name="hospitalizations" options={yesNo} bind:value={mh.previousHospitalizations} />
+	<Field label="Has the child had any previous hospitalizations?">
+		<RadioGroup label="Hospitalizations">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="hospitalizations" value={opt.value} bind:group={mh.previousHospitalizations} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if mh.previousHospitalizations === 'yes'}
-		<TextArea label="Please describe hospitalizations" name="hospitalDetails" bind:value={mh.hospitalizationDetails} placeholder="Reason, duration, and dates..." />
+		<Field label="Please describe hospitalizations" inputId="hospitalDetails">
+			<TextAreaInput id="hospitalDetails" label="Hospitalization details" rows={3} bind:value={mh.hospitalizationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has the child had any previous surgeries?" name="surgeries" options={yesNo} bind:value={mh.previousSurgeries} />
+	<Field label="Has the child had any previous surgeries?">
+		<RadioGroup label="Previous surgeries">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="surgeries" value={opt.value} bind:group={mh.previousSurgeries} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if mh.previousSurgeries === 'yes'}
-		<TextArea label="Please describe surgeries" name="surgeryDetails" bind:value={mh.surgeryDetails} placeholder="Type of surgery and date..." />
+		<Field label="Please describe surgeries" inputId="surgeryDetails">
+			<TextAreaInput id="surgeryDetails" label="Surgery details" rows={3} bind:value={mh.surgeryDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Does the child have recurring infections?" name="infections" options={yesNo} bind:value={mh.recurringInfections} />
+	<Field label="Does the child have recurring infections?">
+		<RadioGroup label="Recurring infections">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="infections" value={opt.value} bind:group={mh.recurringInfections} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if mh.recurringInfections === 'yes'}
-		<TextArea label="Please describe recurring infections" name="infectionDetails" bind:value={mh.infectionDetails} placeholder="e.g., ear infections, tonsillitis..." />
+		<Field label="Please describe recurring infections" inputId="infectionDetails">
+			<TextAreaInput id="infectionDetails" label="Infection details" rows={3} bind:value={mh.infectionDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

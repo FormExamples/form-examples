@@ -1,57 +1,86 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { percentileCategory } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const g = assessment.data.growthNutrition;
 	const yesNo = [
 		{ value: 'yes', label: 'Yes' },
 		{ value: 'no', label: 'No' }
 	];
+	const feedingOptions = [
+		{ value: 'breast', label: 'Breastfed' },
+		{ value: 'formula', label: 'Formula Fed' },
+		{ value: 'mixed', label: 'Mixed Feeding' },
+		{ value: 'solid', label: 'Solid Foods' }
+	];
 </script>
 
-<SectionCard title="Growth & Nutrition" description="Growth percentiles and feeding information">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-3">
-		<div>
-			<NumberInput label="Weight Percentile" name="weightPct" bind:value={g.weightPercentile} min={0} max={100} step={1} />
-			{#if g.weightPercentile !== null}
-				<p class="mt-[-12px] mb-4 text-xs text-gray-500">{percentileCategory(g.weightPercentile)}</p>
-			{/if}
-		</div>
-		<div>
-			<NumberInput label="Height Percentile" name="heightPct" bind:value={g.heightPercentile} min={0} max={100} step={1} />
-			{#if g.heightPercentile !== null}
-				<p class="mt-[-12px] mb-4 text-xs text-gray-500">{percentileCategory(g.heightPercentile)}</p>
-			{/if}
-		</div>
-		<div>
-			<NumberInput label="Head Circ. Percentile" name="headPct" bind:value={g.headCircumferencePercentile} min={0} max={100} step={1} />
-			{#if g.headCircumferencePercentile !== null}
-				<p class="mt-[-12px] mb-4 text-xs text-gray-500">{percentileCategory(g.headCircumferencePercentile)}</p>
-			{/if}
-		</div>
+<Fieldset legend="Growth & Nutrition">
+	<p class="hint">Growth percentiles and feeding information.</p>
+
+	<div class="field-grid field-grid-3">
+		<Field label="Weight Percentile" inputId="weightPct" description={g.weightPercentile !== null ? percentileCategory(g.weightPercentile) : undefined}>
+			<NumberInput id="weightPct" label="Weight percentile" min={0} max={100} step={1} bind:value={g.weightPercentile} />
+		</Field>
+		<Field label="Height Percentile" inputId="heightPct" description={g.heightPercentile !== null ? percentileCategory(g.heightPercentile) : undefined}>
+			<NumberInput id="heightPct" label="Height percentile" min={0} max={100} step={1} bind:value={g.heightPercentile} />
+		</Field>
+		<Field label="Head Circ. Percentile" inputId="headPct" description={g.headCircumferencePercentile !== null ? percentileCategory(g.headCircumferencePercentile) : undefined}>
+			<NumberInput id="headPct" label="Head circumference percentile" min={0} max={100} step={1} bind:value={g.headCircumferencePercentile} />
+		</Field>
 	</div>
 
-	<SelectInput
-		label="Feeding Type"
-		name="feedingType"
-		options={[
-			{ value: 'breast', label: 'Breastfed' },
-			{ value: 'formula', label: 'Formula Fed' },
-			{ value: 'mixed', label: 'Mixed Feeding' },
-			{ value: 'solid', label: 'Solid Foods' }
-		]}
-		bind:value={g.feedingType}
-	/>
+	<Field label="Feeding Type" inputId="feedingType">
+		<Select id="feedingType" label="Feeding type" bind:value={g.feedingType}>
+			<option value="">-- Select --</option>
+			{#each feedingOptions as opt}
+				<option value={opt.value}>{opt.label}</option>
+			{/each}
+		</Select>
+	</Field>
 
-	<RadioGroup label="Are there any dietary concerns?" name="dietConcerns" options={yesNo} bind:value={g.dietaryConcerns} />
+	<Field label="Are there any dietary concerns?">
+		<RadioGroup label="Dietary concerns">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="dietConcerns" value={opt.value} bind:group={g.dietaryConcerns} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if g.dietaryConcerns === 'yes'}
-		<TextArea label="Please describe dietary concerns" name="dietConcernDetails" bind:value={g.dietaryConcernDetails} />
+		<Field label="Please describe dietary concerns" inputId="dietConcernDetails">
+			<TextAreaInput id="dietConcernDetails" label="Dietary concerns" rows={3} bind:value={g.dietaryConcernDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Has failure to thrive been identified?" name="ftt" options={yesNo} bind:value={g.failureToThrive} />
-</SectionCard>
+	<Field label="Has failure to thrive been identified?">
+		<RadioGroup label="Failure to thrive">
+			{#each yesNo as opt (opt.value)}
+				<label>
+					<input type="radio" class="radio-input" name="ftt" value={opt.value} bind:group={g.failureToThrive} />
+					{opt.label}
+				</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.field-grid.field-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	@media (max-width: 640px) {
+		.field-grid, .field-grid.field-grid-3 { grid-template-columns: 1fr; }
+	}
+</style>
