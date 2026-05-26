@@ -1,40 +1,5 @@
 <script lang="ts">
-	let {
-		label,
-		name,
-		value = $bindable(null),
-		placeholder = '',
-		required = false,
-		min,
-		max,
-		step = 'any'
-	}: {
-		label: string;
-		name: string;
-		value: number | null;
-		placeholder?: string;
-		required?: boolean;
-		min?: number;
-		max?: number;
-		step?: string;
-	} = $props();
+	let { class: className = '', label, value = $bindable<number | null | undefined>(null), min = undefined, max = undefined, step = undefined, required = false, disabled = false, ...restProps }: { label: string; value?: number | null | undefined; min?: number; max?: number; step?: number | string; required?: boolean; disabled?: boolean; [key: string]: unknown } = $props();
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
-		{label}
-		{#if required}<span class="text-red-500">*</span>{/if}
-	</label>
-	<input
-		id={name}
-		{name}
-		type="number"
-		{placeholder}
-		{required}
-		{min}
-		{max}
-		{step}
-		bind:value
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
-	/>
-</div>
+<input class={`number-input ${className}`} type="number" aria-label={label} bind:value {min} {max} {step} {required} {disabled} {...restProps} />

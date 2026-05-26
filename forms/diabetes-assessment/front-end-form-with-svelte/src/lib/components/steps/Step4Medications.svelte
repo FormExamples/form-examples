@@ -1,110 +1,119 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import LikertGroup from '$lib/components/ui/LikertGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.medications;
+	const yesNo = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	];
+
+	const adherenceOptions = [
+		{ value: 1, label: 'Very Poor' },
+		{ value: 2, label: 'Poor' },
+		{ value: 3, label: 'Fair' },
+		{ value: 4, label: 'Good' },
+		{ value: 5, label: 'Excellent' }
+	];
 </script>
 
-<SectionCard title="Medications" description="Record current diabetes medications and adherence.">
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<RadioGroup
-			label="Metformin"
-			name="metformin"
-			bind:value={d.metformin}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' }
-			]}
-		/>
-		<SelectInput
-			label="Sulfonylurea"
-			name="sulfonylurea"
-			bind:value={d.sulfonylurea}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' },
-				{ value: 'previouslyUsed', label: 'Previously Used' }
-			]}
-		/>
+<Fieldset legend="Medications">
+	<p class="hint">Record current diabetes medications and adherence.</p>
+
+	<div class="field-grid">
+		<Field label="Metformin">
+			<RadioGroup label="Metformin">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="metformin" value={opt.value} bind:group={d.metformin} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
+		<Field label="Sulfonylurea" inputId="sulfonylurea">
+			<Select id="sulfonylurea" label="Sulfonylurea" bind:value={d.sulfonylurea}>
+				<option value="">-- Select --</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+				<option value="previouslyUsed">Previously Used</option>
+			</Select>
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
-			label="SGLT2 Inhibitor"
-			name="sglt2Inhibitor"
-			bind:value={d.sglt2Inhibitor}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' },
-				{ value: 'contraindicated', label: 'Contraindicated' }
-			]}
-		/>
-		<SelectInput
-			label="GLP-1 Receptor Agonist"
-			name="glp1Agonist"
-			bind:value={d.glp1Agonist}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' },
-				{ value: 'previouslyUsed', label: 'Previously Used' }
-			]}
-		/>
+	<div class="field-grid">
+		<Field label="SGLT2 Inhibitor" inputId="sglt2Inhibitor">
+			<Select id="sglt2Inhibitor" label="SGLT2 Inhibitor" bind:value={d.sglt2Inhibitor}>
+				<option value="">-- Select --</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+				<option value="contraindicated">Contraindicated</option>
+			</Select>
+		</Field>
+		<Field label="GLP-1 Receptor Agonist" inputId="glp1Agonist">
+			<Select id="glp1Agonist" label="GLP-1 Receptor Agonist" bind:value={d.glp1Agonist}>
+				<option value="">-- Select --</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+				<option value="previouslyUsed">Previously Used</option>
+			</Select>
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
-			label="DPP-4 Inhibitor"
-			name="dpp4Inhibitor"
-			bind:value={d.dpp4Inhibitor}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' }
-			]}
-		/>
-		<RadioGroup
-			label="Insulin"
-			name="insulin"
-			bind:value={d.insulin}
-			options={[
-				{ value: 'yes', label: 'Yes' },
-				{ value: 'no', label: 'No' }
-			]}
-		/>
+	<div class="field-grid">
+		<Field label="DPP-4 Inhibitor" inputId="dpp4Inhibitor">
+			<Select id="dpp4Inhibitor" label="DPP-4 Inhibitor" bind:value={d.dpp4Inhibitor}>
+				<option value="">-- Select --</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			</Select>
+		</Field>
+		<Field label="Insulin">
+			<RadioGroup label="Insulin">
+				{#each yesNo as opt (opt.value)}
+					<label><input type="radio" class="radio-input" name="insulin" value={opt.value} bind:group={d.insulin} /> {opt.label}</label>
+				{/each}
+			</RadioGroup>
+		</Field>
 	</div>
 
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
-			label="Insulin Regimen"
-			name="insulinRegimen"
-			bind:value={d.insulinRegimen}
-			options={[
-				{ value: 'basalOnly', label: 'Basal Only' },
-				{ value: 'basalBolus', label: 'Basal-Bolus' },
-				{ value: 'mixedInsulin', label: 'Mixed Insulin' },
-				{ value: 'pump', label: 'Insulin Pump' },
-				{ value: 'notApplicable', label: 'Not Applicable' }
-			]}
-		/>
-		<NumberInput label="Insulin Total Daily Dose (units)" name="insulinDailyDose" bind:value={d.insulinDailyDose} step="0.5" min={0} placeholder="e.g. 42" />
+	<div class="field-grid">
+		<Field label="Insulin Regimen" inputId="insulinRegimen">
+			<Select id="insulinRegimen" label="Insulin Regimen" bind:value={d.insulinRegimen}>
+				<option value="">-- Select --</option>
+				<option value="basalOnly">Basal Only</option>
+				<option value="basalBolus">Basal-Bolus</option>
+				<option value="mixedInsulin">Mixed Insulin</option>
+				<option value="pump">Insulin Pump</option>
+				<option value="notApplicable">Not Applicable</option>
+			</Select>
+		</Field>
+		<Field label="Insulin Total Daily Dose (units)" inputId="insulinDailyDose">
+			<NumberInput id="insulinDailyDose" label="Insulin Total Daily Dose" step={0.5} min={0} placeholder="e.g. 42" bind:value={d.insulinDailyDose} />
+		</Field>
 	</div>
 
-	<LikertGroup
-		label="Medication Adherence (self-reported)"
-		name="medicationAdherence"
-		bind:value={d.medicationAdherence}
-		options={[
-			{ value: 1, label: 'Very Poor' },
-			{ value: 2, label: 'Poor' },
-			{ value: 3, label: 'Fair' },
-			{ value: 4, label: 'Good' },
-			{ value: 5, label: 'Excellent' }
-		]}
-	/>
+	<Field label="Medication Adherence (self-reported)">
+		<LikertGroup label="Medication Adherence" name="medicationAdherence" options={adherenceOptions} bind:value={d.medicationAdherence} />
+	</Field>
 
-	<TextArea label="Other Medications" name="otherMedications" bind:value={d.otherMedications} rows={3} placeholder="List any other medications (non-diabetes)" />
-</SectionCard>
+	<Field label="Other Medications" inputId="otherMedications">
+		<TextAreaInput id="otherMedications" label="Other Medications" rows={3} placeholder="List any other medications (non-diabetes)" bind:value={d.otherMedications} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	@media (max-width: 640px) {
+		.field-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
