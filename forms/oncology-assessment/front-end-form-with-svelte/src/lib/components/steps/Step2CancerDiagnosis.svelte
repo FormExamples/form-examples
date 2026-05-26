@@ -1,119 +1,111 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import HistologySelect from '$lib/components/ui/HistologySelect.svelte';
 
 	const c = assessment.data.cancerDiagnosis;
 </script>
 
-<SectionCard title="Cancer Diagnosis" description="Cancer type, staging, and diagnosis details">
-	<SelectInput
-		label="Cancer Type"
-		name="cancerType"
-		options={[
-			{ value: 'breast', label: 'Breast' },
-			{ value: 'lung', label: 'Lung' },
-			{ value: 'colorectal', label: 'Colorectal' },
-			{ value: 'prostate', label: 'Prostate' },
-			{ value: 'melanoma', label: 'Melanoma' },
-			{ value: 'lymphoma', label: 'Lymphoma' },
-			{ value: 'leukaemia', label: 'Leukaemia' },
-			{ value: 'pancreatic', label: 'Pancreatic' },
-			{ value: 'ovarian', label: 'Ovarian' },
-			{ value: 'bladder', label: 'Bladder' },
-			{ value: 'renal', label: 'Renal' },
-			{ value: 'hepatocellular', label: 'Hepatocellular' },
-			{ value: 'gastric', label: 'Gastric' },
-			{ value: 'oesophageal', label: 'Oesophageal' },
-			{ value: 'head-and-neck', label: 'Head and Neck' },
-			{ value: 'brain', label: 'Brain' },
-			{ value: 'sarcoma', label: 'Sarcoma' },
-			{ value: 'thyroid', label: 'Thyroid' },
-			{ value: 'cervical', label: 'Cervical' },
-			{ value: 'endometrial', label: 'Endometrial' },
-			{ value: 'other', label: 'Other' }
-		]}
-		bind:value={c.cancerType}
-		required
-	/>
+<Fieldset legend="Cancer Diagnosis">
+	<p class="hint">Cancer type, staging, and diagnosis details.</p>
+
+	<Field label="Cancer Type" required inputId="cancerType">
+		<Select id="cancerType" label="Cancer Type" required bind:value={c.cancerType}>
+			<option value="">-- Select --</option>
+			<option value="breast">Breast</option>
+			<option value="lung">Lung</option>
+			<option value="colorectal">Colorectal</option>
+			<option value="prostate">Prostate</option>
+			<option value="melanoma">Melanoma</option>
+			<option value="lymphoma">Lymphoma</option>
+			<option value="leukaemia">Leukaemia</option>
+			<option value="pancreatic">Pancreatic</option>
+			<option value="ovarian">Ovarian</option>
+			<option value="bladder">Bladder</option>
+			<option value="renal">Renal</option>
+			<option value="hepatocellular">Hepatocellular</option>
+			<option value="gastric">Gastric</option>
+			<option value="oesophageal">Oesophageal</option>
+			<option value="head-and-neck">Head and Neck</option>
+			<option value="brain">Brain</option>
+			<option value="sarcoma">Sarcoma</option>
+			<option value="thyroid">Thyroid</option>
+			<option value="cervical">Cervical</option>
+			<option value="endometrial">Endometrial</option>
+			<option value="other">Other</option>
+		</Select>
+	</Field>
 
 	{#if c.cancerType === 'other'}
-		<TextInput label="Specify Cancer Type" name="cancerTypeOther" bind:value={c.cancerTypeOther} required />
+		<Field label="Specify Cancer Type" required inputId="cancerTypeOther">
+			<TextInput id="cancerTypeOther" label="Specify Cancer Type" required bind:value={c.cancerTypeOther} />
+		</Field>
 	{/if}
 
-	<TextInput label="Primary Site" name="primarySite" bind:value={c.primarySite} placeholder="e.g., Left breast, Right upper lobe" />
-	<HistologySelect bind:value={c.histology} />
+	<Field label="Primary Site" inputId="primarySite">
+		<TextInput id="primarySite" label="Primary Site" placeholder="e.g., Left breast, Right upper lobe" bind:value={c.primarySite} />
+	</Field>
+
+	<Field label="Histology" inputId="histology">
+		<HistologySelect id="histology" bind:value={c.histology} />
+	</Field>
 
 	{#if c.histology === 'other'}
-		<TextInput label="Specify Histology" name="histologyOther" bind:value={c.histologyOther} required />
+		<Field label="Specify Histology" required inputId="histologyOther">
+			<TextInput id="histologyOther" label="Specify Histology" required bind:value={c.histologyOther} />
+		</Field>
 	{/if}
 
-	<h3 class="mt-4 mb-2 text-sm font-semibold text-gray-700">TNM Staging</h3>
-	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-3">
-		<SelectInput
-			label="T Stage (Tumour)"
-			name="stageT"
-			options={[
-				{ value: '0', label: 'T0' },
-				{ value: '1', label: 'T1' },
-				{ value: '2', label: 'T2' },
-				{ value: '3', label: 'T3' },
-				{ value: '4', label: 'T4' },
-				{ value: 'X', label: 'TX' }
-			]}
-			bind:value={c.stageT}
-		/>
-		<SelectInput
-			label="N Stage (Nodes)"
-			name="stageN"
-			options={[
-				{ value: '0', label: 'N0' },
-				{ value: '1', label: 'N1' },
-				{ value: '2', label: 'N2' },
-				{ value: '3', label: 'N3' },
-				{ value: 'X', label: 'NX' }
-			]}
-			bind:value={c.stageN}
-		/>
-		<SelectInput
-			label="M Stage (Metastasis)"
-			name="stageM"
-			options={[
-				{ value: '0', label: 'M0' },
-				{ value: '1', label: 'M1' },
-				{ value: 'X', label: 'MX' }
-			]}
-			bind:value={c.stageM}
-		/>
+	<div class="field-grid field-grid-3">
+		<Field label="T Stage (Tumour)" inputId="stageT">
+			<Select id="stageT" label="T Stage" bind:value={c.stageT}>
+				<option value="">-- Select --</option>
+				<option value="0">T0</option><option value="1">T1</option><option value="2">T2</option><option value="3">T3</option><option value="4">T4</option><option value="X">TX</option>
+			</Select>
+		</Field>
+		<Field label="N Stage (Nodes)" inputId="stageN">
+			<Select id="stageN" label="N Stage" bind:value={c.stageN}>
+				<option value="">-- Select --</option>
+				<option value="0">N0</option><option value="1">N1</option><option value="2">N2</option><option value="3">N3</option><option value="X">NX</option>
+			</Select>
+		</Field>
+		<Field label="M Stage (Metastasis)" inputId="stageM">
+			<Select id="stageM" label="M Stage" bind:value={c.stageM}>
+				<option value="">-- Select --</option>
+				<option value="0">M0</option><option value="1">M1</option><option value="X">MX</option>
+			</Select>
+		</Field>
 	</div>
 
-	<SelectInput
-		label="Overall Stage"
-		name="overallStage"
-		options={[
-			{ value: 'I', label: 'Stage I' },
-			{ value: 'II', label: 'Stage II' },
-			{ value: 'III', label: 'Stage III' },
-			{ value: 'IV', label: 'Stage IV' }
-		]}
-		bind:value={c.overallStage}
-		required
-	/>
+	<Field label="Overall Stage" required inputId="overallStage">
+		<Select id="overallStage" label="Overall Stage" required bind:value={c.overallStage}>
+			<option value="">-- Select --</option>
+			<option value="I">Stage I</option><option value="II">Stage II</option><option value="III">Stage III</option><option value="IV">Stage IV</option>
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Tumour Grade"
-		name="grade"
-		options={[
-			{ value: '1', label: 'Grade 1 - Well differentiated' },
-			{ value: '2', label: 'Grade 2 - Moderately differentiated' },
-			{ value: '3', label: 'Grade 3 - Poorly differentiated' },
-			{ value: '4', label: 'Grade 4 - Undifferentiated' },
-			{ value: 'X', label: 'GX - Grade cannot be assessed' }
-		]}
-		bind:value={c.grade}
-	/>
+	<Field label="Tumour Grade" inputId="grade">
+		<Select id="grade" label="Tumour Grade" bind:value={c.grade}>
+			<option value="">-- Select --</option>
+			<option value="1">Grade 1 - Well differentiated</option>
+			<option value="2">Grade 2 - Moderately differentiated</option>
+			<option value="3">Grade 3 - Poorly differentiated</option>
+			<option value="4">Grade 4 - Undifferentiated</option>
+			<option value="X">GX - Grade cannot be assessed</option>
+		</Select>
+	</Field>
 
-	<TextInput label="Date of Diagnosis" name="diagnosisDate" type="date" bind:value={c.dateOfDiagnosis} required />
-</SectionCard>
+	<Field label="Date of Diagnosis" required inputId="diagnosisDate">
+		<DateInput id="diagnosisDate" label="Date of Diagnosis" required bind:value={c.dateOfDiagnosis} />
+	</Field>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; gap: 1rem; }
+	.field-grid.field-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	@media (max-width: 640px) { .field-grid.field-grid-3 { grid-template-columns: 1fr; } }
+</style>

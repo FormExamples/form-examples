@@ -1,59 +1,72 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const p = assessment.data.psychosocial;
-
 	const severityOptions = [
 		{ value: 'none', label: 'None' },
 		{ value: 'mild', label: 'Mild' },
 		{ value: 'moderate', label: 'Moderate' },
 		{ value: 'severe', label: 'Severe' }
 	];
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Psychosocial" description="Emotional wellbeing, coping, and support">
-	<NumberInput label="Distress Thermometer" name="distress" bind:value={p.distressThermometer} min={0} max={10} step={1} />
-	<p class="mt-[-12px] mb-4 text-xs text-gray-500">0 = no distress, 10 = extreme distress</p>
+<Fieldset legend="Psychosocial">
+	<p class="hint">Emotional wellbeing, coping, and support.</p>
 
-	<SelectInput label="Anxiety" name="anxiety" options={severityOptions} bind:value={p.anxiety} />
+	<Field label="Distress Thermometer (0-10)" description="0 = no distress, 10 = extreme distress" inputId="distress">
+		<NumberInput id="distress" label="Distress" min={0} max={10} step={1} bind:value={p.distressThermometer} />
+	</Field>
 
-	<SelectInput label="Depression" name="depression" options={severityOptions} bind:value={p.depression} />
+	<Field label="Anxiety" inputId="anxiety">
+		<Select id="anxiety" label="Anxiety" bind:value={p.anxiety}>
+			<option value="">-- Select --</option>
+			{#each severityOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Coping Ability"
-		name="copingAbility"
-		options={[
-			{ value: 'coping-well', label: 'Coping well' },
-			{ value: 'some-difficulty', label: 'Some difficulty coping' },
-			{ value: 'significant-difficulty', label: 'Significant difficulty coping' }
-		]}
-		bind:value={p.copingAbility}
-	/>
+	<Field label="Depression" inputId="depression">
+		<Select id="depression" label="Depression" bind:value={p.depression}>
+			<option value="">-- Select --</option>
+			{#each severityOptions as opt (opt.value)}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Support System"
-		name="supportSystem"
-		options={[
-			{ value: 'strong', label: 'Strong support' },
-			{ value: 'moderate', label: 'Moderate support' },
-			{ value: 'limited', label: 'Limited support' },
-			{ value: 'none', label: 'No support' }
-		]}
-		bind:value={p.supportSystem}
-	/>
+	<Field label="Coping Ability" inputId="copingAbility">
+		<Select id="copingAbility" label="Coping Ability" bind:value={p.copingAbility}>
+			<option value="">-- Select --</option>
+			<option value="coping-well">Coping well</option>
+			<option value="some-difficulty">Some difficulty coping</option>
+			<option value="significant-difficulty">Significant difficulty coping</option>
+		</Select>
+	</Field>
 
-	<RadioGroup label="Advance care planning documented?" name="advanceCare" options={yesNo} bind:value={p.advanceCarePlanning} />
+	<Field label="Support System" inputId="supportSystem">
+		<Select id="supportSystem" label="Support System" bind:value={p.supportSystem}>
+			<option value="">-- Select --</option>
+			<option value="strong">Strong support</option>
+			<option value="moderate">Moderate support</option>
+			<option value="limited">Limited support</option>
+			<option value="none">No support</option>
+		</Select>
+	</Field>
+
+	<Field label="Advance care planning documented?">
+		<RadioGroup label="Advance care planning">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="advanceCare" value={opt.value} bind:group={p.advanceCarePlanning} />{opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if p.advanceCarePlanning === 'yes'}
-		<TextArea label="Advance care planning details" name="advanceCareDetails" bind:value={p.advanceCareDetails} placeholder="e.g., DNACPR, preferred place of care" />
+		<Field label="Advance care planning details" inputId="advanceCareDetails">
+			<TextAreaInput id="advanceCareDetails" label="Advance care details" rows={2} placeholder="e.g., DNACPR, preferred place of care" bind:value={p.advanceCareDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

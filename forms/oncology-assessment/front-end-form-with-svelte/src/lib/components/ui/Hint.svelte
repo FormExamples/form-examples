@@ -3,16 +3,16 @@
 
 	let {
 		class: className = '',
-		label,
+		id = undefined,
 		children,
 		...restProps
 	}: {
-		label: string;
+		id?: string;
 		children: Snippet;
 		[key: string]: unknown;
 	} = $props();
 </script>
 
-<fieldset class={`radio-group ${className}`} role="radiogroup" aria-label={label} {...restProps}>
+<p class={`hint ${className}`} {id} {...restProps}>
 	{@render children?.()}
-</fieldset>
+</p>

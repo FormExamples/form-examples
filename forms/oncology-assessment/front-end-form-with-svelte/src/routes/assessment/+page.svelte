@@ -4,6 +4,9 @@
 	import { calculateECOG } from '$lib/engine/ecog-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2CancerDiagnosis from '$lib/components/steps/Step2CancerDiagnosis.svelte';
 	import Step3TreatmentHistory from '$lib/components/steps/Step3TreatmentHistory.svelte';
@@ -16,44 +19,37 @@
 	import Step10FunctionalNutritional from '$lib/components/steps/Step10FunctionalNutritional.svelte';
 
 	function submitAssessment() {
-			const { ecogGrade, firedRules } = calculateECOG(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				ecogGrade,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { ecogGrade, firedRules } = calculateECOG(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			ecogGrade,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Oncology Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2CancerDiagnosis />
+	<Step3TreatmentHistory />
+	<Step4CurrentTreatment />
+	<Step5SymptomAssessment />
+	<Step6SideEffects />
+	<Step7LaboratoryResults />
+	<Step8CurrentMedications />
+	<Step9Psychosocial />
+	<Step10FunctionalNutritional />
 
-<Step2CancerDiagnosis />
-
-<Step3TreatmentHistory />
-
-<Step4CurrentTreatment />
-
-<Step5SymptomAssessment />
-
-<Step6SideEffects />
-
-<Step7LaboratoryResults />
-
-<Step8CurrentMedications />
-
-<Step9Psychosocial />
-
-<Step10FunctionalNutritional />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

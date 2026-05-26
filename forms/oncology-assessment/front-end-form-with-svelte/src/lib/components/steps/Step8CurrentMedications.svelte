@@ -1,24 +1,18 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 
 	const meds = assessment.data.currentMedications;
 </script>
 
-<SectionCard title="Current Medications" description="All current medications by category">
-	<h3 class="mb-2 text-sm font-semibold text-gray-700">Chemotherapy Agents</h3>
-	<MedicationEntry bind:medications={meds.chemotherapyAgents} />
+<Fieldset legend="Current Medications">
+	<p class="hint">All current medications by category.</p>
 
-	<h3 class="mt-6 mb-2 text-sm font-semibold text-gray-700">Antiemetics</h3>
-	<MedicationEntry bind:medications={meds.antiemetics} />
-
-	<h3 class="mt-6 mb-2 text-sm font-semibold text-gray-700">Pain Medications</h3>
-	<MedicationEntry bind:medications={meds.painMedications} />
-
-	<h3 class="mt-6 mb-2 text-sm font-semibold text-gray-700">Growth Factors</h3>
-	<MedicationEntry bind:medications={meds.growthFactors} />
-
-	<h3 class="mt-6 mb-2 text-sm font-semibold text-gray-700">Supportive Care</h3>
-	<MedicationEntry bind:medications={meds.supportiveCare} />
-</SectionCard>
+	<Field label="Chemotherapy Agents"><MedicationEntry bind:medications={meds.chemotherapyAgents} /></Field>
+	<Field label="Antiemetics"><MedicationEntry bind:medications={meds.antiemetics} /></Field>
+	<Field label="Pain Medications"><MedicationEntry bind:medications={meds.painMedications} /></Field>
+	<Field label="Growth Factors"><MedicationEntry bind:medications={meds.growthFactors} /></Field>
+	<Field label="Supportive Care"><MedicationEntry bind:medications={meds.supportiveCare} /></Field>
+</Fieldset>
