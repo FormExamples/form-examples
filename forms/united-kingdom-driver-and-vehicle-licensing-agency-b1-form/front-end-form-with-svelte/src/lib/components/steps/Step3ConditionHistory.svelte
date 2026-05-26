@@ -1,92 +1,76 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	const c = assessment.data.conditionHistory;
 </script>
 
-<SectionCard
-	title="Question 1 — Condition history"
-	description="Please tick the appropriate box(es) if you have ever had any of the following. Provide the date for each condition you tick."
->
-	<Checkbox
-		label="a) Brain haemorrhage (including subarachnoid, aneurysm and AVM)"
-		name="brainHaemorrhage"
-		bind:checked={c.brainHaemorrhage}
-	/>
+<Fieldset legend="Question 1 — Condition history">
+	<p class="hint">Please tick the appropriate box(es) if you have ever had any of the following. Provide the date for each condition you tick.</p>
+
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="brainHaemorrhage" bind:checked={c.brainHaemorrhage} />
+		<span>a) Brain haemorrhage (including subarachnoid, aneurysm and AVM)</span>
+	</label>
 	{#if c.brainHaemorrhage}
-		<TextInput
-			label="Date of brain haemorrhage"
-			name="brainHaemorrhageDate"
-			type="date"
-			bind:value={c.brainHaemorrhageDate}
-			required
-		/>
-		<TextArea
-			label="Brain haemorrhage details"
-			name="brainHaemorrhageDetails"
-			bind:value={c.brainHaemorrhageDetails}
-			rows={2}
-		/>
+		<Field label="Date of brain haemorrhage" required inputId="brainHaemorrhageDate">
+			<DateInput id="brainHaemorrhageDate" label="Date" required bind:value={c.brainHaemorrhageDate} />
+		</Field>
+		<Field label="Brain haemorrhage details" inputId="brainHaemorrhageDetails">
+			<TextAreaInput id="brainHaemorrhageDetails" label="Brain haemorrhage details" rows={2} bind:value={c.brainHaemorrhageDetails} />
+		</Field>
 	{/if}
 
-	<Checkbox
-		label="b) Severe head injury involving in-patient treatment"
-		name="severeHeadInjury"
-		bind:checked={c.severeHeadInjury}
-	/>
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="severeHeadInjury" bind:checked={c.severeHeadInjury} />
+		<span>b) Severe head injury involving in-patient treatment</span>
+	</label>
 	{#if c.severeHeadInjury}
-		<TextInput
-			label="Date of severe head injury"
-			name="severeHeadInjuryDate"
-			type="date"
-			bind:value={c.severeHeadInjuryDate}
-			required
-		/>
-		<TextArea
-			label="Severe head injury details"
-			name="severeHeadInjuryDetails"
-			bind:value={c.severeHeadInjuryDetails}
-			rows={2}
-		/>
+		<Field label="Date of severe head injury" required inputId="severeHeadInjuryDate">
+			<DateInput id="severeHeadInjuryDate" label="Date" required bind:value={c.severeHeadInjuryDate} />
+		</Field>
+		<Field label="Severe head injury details" inputId="severeHeadInjuryDetails">
+			<TextAreaInput id="severeHeadInjuryDetails" label="Severe head injury details" rows={2} bind:value={c.severeHeadInjuryDetails} />
+		</Field>
 	{/if}
 
-	<Checkbox
-		label="c) Any other condition (e.g. subdural haematoma, brain abscess/cyst, encephalitis, hydrocephalus, hypoxic brain damage, Lewy body dementia, transient global amnesia, VP shunt, etc.)"
-		name="otherCondition"
-		bind:checked={c.otherCondition}
-	/>
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="otherCondition" bind:checked={c.otherCondition} />
+		<span>c) Any other condition (e.g. subdural haematoma, brain abscess/cyst, encephalitis, hydrocephalus, hypoxic brain damage, Lewy body dementia, transient global amnesia, VP shunt, etc.)</span>
+	</label>
 	{#if c.otherCondition}
-		<TextInput
-			label="Date of other condition"
-			name="otherConditionDate"
-			type="date"
-			bind:value={c.otherConditionDate}
-		/>
-		<TextArea
-			label="Other condition details"
-			name="otherConditionDetails"
-			bind:value={c.otherConditionDetails}
-			rows={3}
-			required
-		/>
+		<Field label="Date of other condition" inputId="otherConditionDate">
+			<DateInput id="otherConditionDate" label="Date" bind:value={c.otherConditionDate} />
+		</Field>
+		<Field label="Other condition details" required inputId="otherConditionDetails">
+			<TextAreaInput id="otherConditionDetails" label="Other condition details" rows={3} required bind:value={c.otherConditionDetails} />
+		</Field>
 	{/if}
 
-	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">d) Brain surgery</h3>
-	<Checkbox
-		label="Not applicable — I have never had brain surgery"
-		name="brainSurgeryNotApplicable"
-		bind:checked={c.brainSurgeryNotApplicable}
-	/>
+	<h3 class="step-subhead">d) Brain surgery</h3>
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="brainSurgeryNotApplicable" bind:checked={c.brainSurgeryNotApplicable} />
+		<span>Not applicable — I have never had brain surgery</span>
+	</label>
 	{#if !c.brainSurgeryNotApplicable}
-		<TextInput
-			label="Date of any brain surgery"
-			name="brainSurgeryDate"
-			type="date"
-			bind:value={c.brainSurgeryDate}
-		/>
+		<Field label="Date of any brain surgery" inputId="brainSurgeryDate">
+			<DateInput id="brainSurgeryDate" label="Date of brain surgery" bind:value={c.brainSurgeryDate} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.checkbox-row {
+		display: flex; align-items: flex-start; gap: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--color-border-strong);
+		border-radius: 0.375rem;
+		background: var(--color-surface);
+		margin: 0 0 0.75rem;
+		cursor: pointer;
+	}
+	.step-subhead { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+</style>

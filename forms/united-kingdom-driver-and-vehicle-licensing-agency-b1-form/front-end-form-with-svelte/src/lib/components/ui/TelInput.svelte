@@ -1,5 +1,5 @@
 <script lang="ts">
-	// TextInput — Lily Svelte headless contract.
+	// TelInput — Lily Svelte headless contract.
 	let {
 		class: className = '',
 		label,
@@ -16,4 +16,4 @@
 	} = $props();
 </script>
 
-<input class={`text-input ${className}`} type="text" aria-label={label} bind:value {required} {disabled} {...restProps} />
+<input class={`tel-input ${className}`} type="tel" aria-label={label} bind:value {required} {disabled} {...restProps} />

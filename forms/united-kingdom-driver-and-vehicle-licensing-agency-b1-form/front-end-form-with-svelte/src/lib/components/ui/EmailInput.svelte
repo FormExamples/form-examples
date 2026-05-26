@@ -1,5 +1,5 @@
 <script lang="ts">
-	// TextInput — Lily Svelte headless contract.
+	// EmailInput — Lily Svelte headless contract.
 	let {
 		class: className = '',
 		label,
@@ -16,4 +16,4 @@
 	} = $props();
 </script>
 
-<input class={`text-input ${className}`} type="text" aria-label={label} bind:value {required} {disabled} {...restProps} />
+<input class={`email-input ${className}`} type="email" aria-label={label} bind:value {required} {disabled} {...restProps} />

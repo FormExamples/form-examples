@@ -1,36 +1,26 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const dl = assessment.data.dailyLiving;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
 </script>
 
-<SectionCard
-	title="Question 9 — Daily living"
-	description="Tell us whether you need help from another person with everyday tasks."
->
-	<RadioGroup
-		label="Do you need help from another person with your day-to-day living?"
-		name="needsHelp"
-		options={yesNo}
-		bind:value={dl.needsHelp}
-		required
-	/>
+<Fieldset legend="Question 9 — Daily living">
+	<p class="hint">Tell us whether you need help from another person with everyday tasks.</p>
+
+	<Field label="Do you need help from another person with your day-to-day living?" required>
+		<RadioGroup label="Needs help?">
+			<label><input type="radio" class="radio-input" name="needsHelp" value="yes" bind:group={dl.needsHelp} required /> Yes</label>
+			<label><input type="radio" class="radio-input" name="needsHelp" value="no" bind:group={dl.needsHelp} required /> No</label>
+		</RadioGroup>
+	</Field>
 
 	{#if dl.needsHelp === 'yes'}
-		<TextArea
-			label="If Yes, please give details of how they help you"
-			name="helpDetails"
-			bind:value={dl.helpDetails}
-			rows={3}
-			required
-		/>
+		<Field label="If Yes, please give details of how they help you" required inputId="helpDetails">
+			<TextAreaInput id="helpDetails" label="Help details" rows={3} required bind:value={dl.helpDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

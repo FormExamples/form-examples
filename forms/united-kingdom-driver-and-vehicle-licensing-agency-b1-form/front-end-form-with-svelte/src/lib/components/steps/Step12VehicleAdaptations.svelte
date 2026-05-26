@@ -1,50 +1,42 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const v = assessment.data.vehicleAdaptations;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
 </script>
 
-<SectionCard
-	title="Question 12 — Vehicle adaptations"
-	description="Tell us about any special controls or automatic transmission you require."
->
-	<RadioGroup
-		label="Do you need to drive a vehicle fitted with special controls or automatic transmission?"
-		name="needsAdaptations"
-		options={yesNo}
-		bind:value={v.needsAdaptations}
-		required
-	/>
+<Fieldset legend="Question 12 — Vehicle adaptations">
+	<p class="hint">Tell us about any special controls or automatic transmission you require.</p>
+
+	<Field label="Do you need to drive a vehicle fitted with special controls or automatic transmission?" required>
+		<RadioGroup label="Needs adaptations?">
+			<label><input type="radio" class="radio-input" name="needsAdaptations" value="yes" bind:group={v.needsAdaptations} required /> Yes</label>
+			<label><input type="radio" class="radio-input" name="needsAdaptations" value="no" bind:group={v.needsAdaptations} required /> No</label>
+		</RadioGroup>
+	</Field>
 
 	{#if v.needsAdaptations === 'yes'}
-		<RadioGroup
-			label="a) Have you told us before that you need special controls or automatic transmission?"
-			name="previouslyDeclared"
-			options={yesNo}
-			bind:value={v.previouslyDeclared}
-			required
-		/>
+		<Field label="a) Have you told us before that you need special controls or automatic transmission?" required>
+			<RadioGroup label="Previously declared?">
+				<label><input type="radio" class="radio-input" name="previouslyDeclared" value="yes" bind:group={v.previouslyDeclared} required /> Yes</label>
+				<label><input type="radio" class="radio-input" name="previouslyDeclared" value="no" bind:group={v.previouslyDeclared} required /> No</label>
+			</RadioGroup>
+		</Field>
 
 		{#if v.previouslyDeclared === 'yes'}
-			<RadioGroup
-				label="b) Since your last licence was issued, have you had any additional controls fitted to your vehicle?"
-				name="additionalControlsFitted"
-				options={yesNo}
-				bind:value={v.additionalControlsFitted}
-				required
-			/>
+			<Field label="b) Since your last licence was issued, have you had any additional controls fitted to your vehicle?" required>
+				<RadioGroup label="Additional controls fitted?">
+					<label><input type="radio" class="radio-input" name="additionalControlsFitted" value="yes" bind:group={v.additionalControlsFitted} required /> Yes</label>
+					<label><input type="radio" class="radio-input" name="additionalControlsFitted" value="no" bind:group={v.additionalControlsFitted} required /> No</label>
+				</RadioGroup>
+			</Field>
 		{/if}
 	{/if}
 
-	<p class="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-900">
-		If you have any relevant hospital notes about your medical condition, please send
-		copies with this form.
-	</p>
-</SectionCard>
+	<Alert type="info">
+		<p>If you have any relevant hospital notes about your medical condition, please send copies with this form.</p>
+	</Alert>
+</Fieldset>

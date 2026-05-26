@@ -1,65 +1,71 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 
 	const m = assessment.data.medication;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
 </script>
 
-<SectionCard
-	title="Question 7 — Medication"
-	description="Please list any medication that you take or have taken for this condition. If you take none, tick the box below."
->
-	<Checkbox
-		label="No medication taken"
-		name="noMedicationTaken"
-		bind:checked={m.noMedicationTaken}
-	/>
+<Fieldset legend="Question 7 — Medication">
+	<p class="hint">Please list any medication that you take or have taken for this condition. If you take none, tick the box below.</p>
+
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="noMedicationTaken" bind:checked={m.noMedicationTaken} />
+		<span>No medication taken</span>
+	</label>
 
 	{#if !m.noMedicationTaken}
-		<div class="space-y-4">
-			{#each m.entries as entry, i (i)}
-				<div class="rounded-lg border border-gray-200 bg-gray-50 p-4">
-					<h4 class="mb-2 text-sm font-semibold text-gray-700">Medication {i + 1}</h4>
-					<TextInput
-						label="Name of medication"
-						name={`medName${i}`}
-						bind:value={entry.name}
-						placeholder="e.g. Levetiracetam 500mg twice daily"
-					/>
-					<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-						<TextInput
-							label="Start date"
-							name={`medStart${i}`}
-							type="date"
-							bind:value={entry.startDate}
-						/>
-						<TextInput
-							label="End date (leave blank if ongoing)"
-							name={`medEnd${i}`}
-							type="date"
-							bind:value={entry.endDate}
-						/>
-					</div>
+		{#each m.entries as entry, i (i)}
+			<div class="medication-card">
+				<h4 class="medication-title">Medication {i + 1}</h4>
+				<Field label="Name of medication" inputId={`medName${i}`}>
+					<TextInput id={`medName${i}`} label="Name of medication" placeholder="e.g. Levetiracetam 500mg twice daily" bind:value={entry.name} />
+				</Field>
+				<div class="field-grid">
+					<Field label="Start date" inputId={`medStart${i}`}>
+						<DateInput id={`medStart${i}`} label="Start date" bind:value={entry.startDate} />
+					</Field>
+					<Field label="End date (leave blank if ongoing)" inputId={`medEnd${i}`}>
+						<DateInput id={`medEnd${i}`} label="End date" bind:value={entry.endDate} />
+					</Field>
 				</div>
-			{/each}
-		</div>
+			</div>
+		{/each}
 
-		<div class="mt-6">
-			<RadioGroup
-				label="a) Does your medication make you drowsy or confused when driving?"
-				name="medMakesDrowsy"
-				options={yesNo}
-				bind:value={m.makesDrowsyOrConfused}
-				required
-			/>
-		</div>
+		<Field label="a) Does your medication make you drowsy or confused when driving?" required>
+			<RadioGroup label="Drowsy?">
+				<label><input type="radio" class="radio-input" name="medMakesDrowsy" value="yes" bind:group={m.makesDrowsyOrConfused} required /> Yes</label>
+				<label><input type="radio" class="radio-input" name="medMakesDrowsy" value="no" bind:group={m.makesDrowsyOrConfused} required /> No</label>
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+	.checkbox-row {
+		display: flex; align-items: flex-start; gap: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--color-border-strong);
+		border-radius: 0.375rem;
+		background: var(--color-surface);
+		margin: 0 0 0.75rem;
+		cursor: pointer;
+	}
+	.medication-card {
+		padding: 0.75rem 1rem;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: 0.375rem;
+		margin: 0 0 0.75rem;
+	}
+	.medication-title {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		margin: 0 0 0.5rem;
+	}
+	@media (max-width: 640px) { .field-grid { grid-template-columns: 1fr; } }
+</style>

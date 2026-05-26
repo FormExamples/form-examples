@@ -1,60 +1,46 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const dv = assessment.data.doubleVision;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
 </script>
 
-<SectionCard
-	title="Question 10 — Double vision (diplopia)"
-	description="Diplopia means seeing two of an object."
->
-	<RadioGroup
-		label="Do you have double vision?"
-		name="hasDoubleVision"
-		options={yesNo}
-		bind:value={dv.hasDoubleVision}
-		required
-	/>
+<Fieldset legend="Question 10 — Double vision (diplopia)">
+	<p class="hint">Diplopia means seeing two of an object.</p>
+
+	<Field label="Do you have double vision?" required>
+		<RadioGroup label="Double vision?">
+			<label><input type="radio" class="radio-input" name="hasDoubleVision" value="yes" bind:group={dv.hasDoubleVision} required /> Yes</label>
+			<label><input type="radio" class="radio-input" name="hasDoubleVision" value="no" bind:group={dv.hasDoubleVision} required /> No</label>
+		</RadioGroup>
+	</Field>
 
 	{#if dv.hasDoubleVision === 'yes'}
-		<RadioGroup
-			label="a) Is your double vision suppressed or controlled?"
-			name="suppressedOrControlled"
-			options={yesNo}
-			bind:value={dv.suppressedOrControlled}
-			required
-		/>
+		<Field label="a) Is your double vision suppressed or controlled?" required>
+			<RadioGroup label="Suppressed or controlled?">
+				<label><input type="radio" class="radio-input" name="suppressedOrControlled" value="yes" bind:group={dv.suppressedOrControlled} required /> Yes</label>
+				<label><input type="radio" class="radio-input" name="suppressedOrControlled" value="no" bind:group={dv.suppressedOrControlled} required /> No</label>
+			</RadioGroup>
+		</Field>
 
 		{#if dv.suppressedOrControlled === 'yes'}
-			<RadioGroup
-				label="b) If Yes, how is it controlled?"
-				name="correctionMethod"
-				options={[
-					{ value: 'patch', label: 'Patch' },
-					{ value: 'prism', label: 'Prism' },
-					{ value: 'glasses-or-lenses', label: 'Glasses or lenses' },
-					{ value: 'other', label: 'Other' }
-				]}
-				bind:value={dv.correctionMethod}
-				required
-			/>
+			<Field label="b) If Yes, how is it controlled?" required>
+				<RadioGroup label="Correction method">
+					<label><input type="radio" class="radio-input" name="correctionMethod" value="patch" bind:group={dv.correctionMethod} required /> Patch</label>
+					<label><input type="radio" class="radio-input" name="correctionMethod" value="prism" bind:group={dv.correctionMethod} required /> Prism</label>
+					<label><input type="radio" class="radio-input" name="correctionMethod" value="glasses-or-lenses" bind:group={dv.correctionMethod} required /> Glasses or lenses</label>
+					<label><input type="radio" class="radio-input" name="correctionMethod" value="other" bind:group={dv.correctionMethod} required /> Other</label>
+				</RadioGroup>
+			</Field>
 
 			{#if dv.correctionMethod === 'other'}
-				<TextInput
-					label="Please describe the other method"
-					name="correctionMethodOther"
-					bind:value={dv.correctionMethodOther}
-					required
-				/>
+				<Field label="Please describe the other method" required inputId="correctionMethodOther">
+					<TextInput id="correctionMethodOther" label="Other method" required bind:value={dv.correctionMethodOther} />
+				</Field>
 			{/if}
 		{/if}
 	{/if}
-</SectionCard>
+</Fieldset>

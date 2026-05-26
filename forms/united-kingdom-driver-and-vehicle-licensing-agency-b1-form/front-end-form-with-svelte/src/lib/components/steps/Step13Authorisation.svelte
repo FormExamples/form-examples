@@ -1,79 +1,77 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Checkbox from '$lib/components/ui/Checkbox.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
+	import Alert from '$lib/components/ui/Alert.svelte';
 
 	const a = assessment.data.authorisation;
-
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
-
-	const channelOptions = [
-		{ value: 'email', label: 'Email' },
-		{ value: 'sms', label: 'SMS (Text)' }
-	];
 </script>
 
-<SectionCard
-	title="Applicant's authorisation"
-	description="Please read the declaration carefully before signing."
->
-	<div class="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-800">
-		<p class="mb-2">
-			I authorise my doctor(s) and other healthcare professionals who have or have had
-			involvement in my care to release reports and medical information about me to
-			medical advisers at the DVLA, and I authorise the DVLA's medical advisers to share
-			relevant information with my doctor(s).
+<Fieldset legend="Applicant's authorisation">
+	<p class="hint">Please read the declaration carefully before signing.</p>
+
+	<Alert type="info">
+		<p>
+			I authorise my doctor(s) and other healthcare professionals who have or
+			have had involvement in my care to release reports and medical information
+			about me to medical advisers at the DVLA, and I authorise the DVLA's
+			medical advisers to share relevant information with my doctor(s).
 		</p>
 		<p>
-			I declare that the information I have given is true and complete to the best of my
-			knowledge and belief. I understand that it is a criminal offence to make a false
-			declaration to obtain a driving licence.
+			I declare that the information I have given is true and complete to the
+			best of my knowledge and belief. I understand that it is a criminal
+			offence to make a false declaration to obtain a driving licence.
 		</p>
-	</div>
+	</Alert>
 
-	<Checkbox
-		label="I have read and accept the declaration above."
-		name="declarationAccepted"
-		bind:checked={a.declarationAccepted}
-	/>
+	<label class="checkbox-row">
+		<input type="checkbox" class="checkbox-input" name="declarationAccepted" bind:checked={a.declarationAccepted} />
+		<span>I have read and accept the declaration above.</span>
+	</label>
 
-	<TextInput label="Name" name="authName" bind:value={a.name} required />
-	<TextInput
-		label="Date"
-		name="authDate"
-		type="date"
-		bind:value={a.signatureDate}
-		required
-	/>
+	<Field label="Name" required inputId="authName">
+		<TextInput id="authName" label="Name" required bind:value={a.name} />
+	</Field>
+	<Field label="Date" required inputId="authDate">
+		<DateInput id="authDate" label="Date" required bind:value={a.signatureDate} />
+	</Field>
 
-	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Correspondence</h3>
-	<RadioGroup
-		label="Do you consent to electronic correspondence (email)?"
-		name="electronicCorrespondenceConsent"
-		options={yesNo}
-		bind:value={a.electronicCorrespondenceConsent}
-		required
-	/>
+	<h3 class="step-subhead">Correspondence</h3>
+	<Field label="Do you consent to electronic correspondence (email)?" required>
+		<RadioGroup label="Electronic correspondence?">
+			<label><input type="radio" class="radio-input" name="electronicCorrespondenceConsent" value="yes" bind:group={a.electronicCorrespondenceConsent} required /> Yes</label>
+			<label><input type="radio" class="radio-input" name="electronicCorrespondenceConsent" value="no" bind:group={a.electronicCorrespondenceConsent} required /> No</label>
+		</RadioGroup>
+	</Field>
 
 	{#if a.electronicCorrespondenceConsent === 'yes'}
-		<RadioGroup
-			label="Contact preference from DVLA"
-			name="dvlaContactPreference"
-			options={channelOptions}
-			bind:value={a.dvlaContactPreference}
-			required
-		/>
-		<RadioGroup
-			label="Contact preference from a healthcare professional on behalf of DVLA"
-			name="healthcareContactPreference"
-			options={channelOptions}
-			bind:value={a.healthcareContactPreference}
-			required
-		/>
+		<Field label="Contact preference from DVLA" required>
+			<RadioGroup label="DVLA contact preference">
+				<label><input type="radio" class="radio-input" name="dvlaContactPreference" value="email" bind:group={a.dvlaContactPreference} required /> Email</label>
+				<label><input type="radio" class="radio-input" name="dvlaContactPreference" value="sms" bind:group={a.dvlaContactPreference} required /> SMS (Text)</label>
+			</RadioGroup>
+		</Field>
+		<Field label="Contact preference from a healthcare professional on behalf of DVLA" required>
+			<RadioGroup label="Healthcare contact preference">
+				<label><input type="radio" class="radio-input" name="healthcareContactPreference" value="email" bind:group={a.healthcareContactPreference} required /> Email</label>
+				<label><input type="radio" class="radio-input" name="healthcareContactPreference" value="sms" bind:group={a.healthcareContactPreference} required /> SMS (Text)</label>
+			</RadioGroup>
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
+
+<style>
+	.step-subhead { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+	.checkbox-row {
+		display: flex; align-items: flex-start; gap: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--color-border-strong);
+		border-radius: 0.375rem;
+		background: var(--color-surface);
+		margin: 0 0 0.75rem;
+		cursor: pointer;
+	}
+</style>
