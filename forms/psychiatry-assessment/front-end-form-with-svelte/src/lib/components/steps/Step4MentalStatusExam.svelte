@@ -1,98 +1,125 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.mentalStatusExam;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const moodOptions = [
+		{ value: 'euthymic', label: 'Euthymic (normal)' },
+		{ value: 'depressed', label: 'Depressed' },
+		{ value: 'elevated', label: 'Elevated' },
+		{ value: 'irritable', label: 'Irritable' },
+		{ value: 'anxious', label: 'Anxious' },
+		{ value: 'flat', label: 'Flat' }
+	];
+	const affectOptions = [
+		{ value: 'congruent', label: 'Congruent' },
+		{ value: 'incongruent', label: 'Incongruent' },
+		{ value: 'restricted', label: 'Restricted' },
+		{ value: 'blunted', label: 'Blunted' },
+		{ value: 'flat', label: 'Flat' },
+		{ value: 'labile', label: 'Labile' }
+	];
+	const thoughtProcessOptions = [
+		{ value: 'linear', label: 'Linear and goal-directed' },
+		{ value: 'circumstantial', label: 'Circumstantial' },
+		{ value: 'tangential', label: 'Tangential' },
+		{ value: 'loosening', label: 'Loosening of associations' },
+		{ value: 'flight-of-ideas', label: 'Flight of ideas' },
+		{ value: 'thought-blocking', label: 'Thought blocking' }
+	];
+	const insightOptions = [
+		{ value: 'full', label: 'Full insight' },
+		{ value: 'partial', label: 'Partial insight' },
+		{ value: 'none', label: 'No insight' }
+	];
+	const judgementOptions = [
+		{ value: 'intact', label: 'Intact' },
+		{ value: 'impaired', label: 'Impaired' },
+		{ value: 'poor', label: 'Poor' }
 	];
 </script>
 
-<SectionCard title="Mental Status Examination" description="Systematic assessment of mental state">
-	<TextInput label="Appearance" name="appearance" bind:value={m.appearance} placeholder="e.g. well-groomed, dishevelled, unkempt" />
+<Fieldset legend="Mental Status Examination">
+	<p class="hint">Systematic assessment of mental state.</p>
 
-	<TextInput label="Behaviour" name="behaviour" bind:value={m.behaviour} placeholder="e.g. cooperative, agitated, guarded, withdrawn" />
+	<Field label="Appearance" inputId="appearance">
+		<TextInput id="appearance" label="Appearance" bind:value={m.appearance} />
+	</Field>
+	<Field label="Behaviour" inputId="behaviour">
+		<TextInput id="behaviour" label="Behaviour" bind:value={m.behaviour} />
+	</Field>
+	<Field label="Speech" inputId="speech">
+		<TextInput id="speech" label="Speech" bind:value={m.speech} />
+	</Field>
 
-	<TextInput label="Speech" name="speech" bind:value={m.speech} placeholder="e.g. normal rate/volume, pressured, slowed, mute" />
+	<Field label="Mood (patient-reported)" inputId="mood">
+		<Select id="mood" label="Mood" bind:value={m.mood}>
+			<option value="">-- Select --</option>
+			{#each moodOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Mood (patient-reported)"
-		name="mood"
-		options={[
-			{ value: 'euthymic', label: 'Euthymic (normal)' },
-			{ value: 'depressed', label: 'Depressed' },
-			{ value: 'elevated', label: 'Elevated' },
-			{ value: 'irritable', label: 'Irritable' },
-			{ value: 'anxious', label: 'Anxious' },
-			{ value: 'flat', label: 'Flat' }
-		]}
-		bind:value={m.mood}
-	/>
+	<Field label="Affect (observed)" inputId="affect">
+		<Select id="affect" label="Affect" bind:value={m.affect}>
+			<option value="">-- Select --</option>
+			{#each affectOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Affect (observed)"
-		name="affect"
-		options={[
-			{ value: 'congruent', label: 'Congruent' },
-			{ value: 'incongruent', label: 'Incongruent' },
-			{ value: 'restricted', label: 'Restricted' },
-			{ value: 'blunted', label: 'Blunted' },
-			{ value: 'flat', label: 'Flat' },
-			{ value: 'labile', label: 'Labile' }
-		]}
-		bind:value={m.affect}
-	/>
+	<Field label="Thought Process" inputId="thoughtProcess">
+		<Select id="thoughtProcess" label="Thought process" bind:value={m.thoughtProcess}>
+			<option value="">-- Select --</option>
+			{#each thoughtProcessOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Thought Process"
-		name="thoughtProcess"
-		options={[
-			{ value: 'linear', label: 'Linear and goal-directed' },
-			{ value: 'circumstantial', label: 'Circumstantial' },
-			{ value: 'tangential', label: 'Tangential' },
-			{ value: 'loosening', label: 'Loosening of associations' },
-			{ value: 'flight-of-ideas', label: 'Flight of ideas' },
-			{ value: 'thought-blocking', label: 'Thought blocking' }
-		]}
-		bind:value={m.thoughtProcess}
-	/>
+	<Field label="Thought Content" inputId="thoughtContent">
+		<TextAreaInput id="thoughtContent" label="Thought content" rows={3} bind:value={m.thoughtContent} />
+	</Field>
 
-	<TextArea label="Thought Content" name="thoughtContent" bind:value={m.thoughtContent} placeholder="e.g. delusions, obsessions, overvalued ideas, ruminations" />
-
-	<RadioGroup label="Perceptual disturbances (hallucinations, illusions)?" name="perceptual" options={yesNo} bind:value={m.perceptualDisturbances} />
+	<Field label="Perceptual disturbances (hallucinations, illusions)?">
+		<RadioGroup label="Perceptual disturbances">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="perceptual" value={opt.value} bind:group={m.perceptualDisturbances} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.perceptualDisturbances === 'yes'}
-		<TextArea label="Perceptual Disturbance Details" name="perceptualDetails" bind:value={m.perceptualDetails} placeholder="Type (auditory, visual, tactile), content, frequency" />
+		<Field label="Perceptual Disturbance Details" inputId="perceptualDetails">
+			<TextAreaInput id="perceptualDetails" label="Perceptual details" rows={3} bind:value={m.perceptualDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Is cognition intact?" name="cognition" options={yesNo} bind:value={m.cognitionIntact} />
+	<Field label="Is cognition intact?">
+		<RadioGroup label="Cognition intact">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="cognition" value={opt.value} bind:group={m.cognitionIntact} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if m.cognitionIntact === 'no'}
-		<TextArea label="Cognitive Impairment Details" name="cognitionDetails" bind:value={m.cognitionDetails} placeholder="Orientation, attention, memory, executive function" />
+		<Field label="Cognitive Impairment Details" inputId="cognitionDetails">
+			<TextAreaInput id="cognitionDetails" label="Cognition details" rows={3} bind:value={m.cognitionDetails} />
+		</Field>
 	{/if}
 
-	<SelectInput
-		label="Insight"
-		name="insight"
-		options={[
-			{ value: 'full', label: 'Full insight' },
-			{ value: 'partial', label: 'Partial insight' },
-			{ value: 'none', label: 'No insight' }
-		]}
-		bind:value={m.insight}
-	/>
+	<Field label="Insight" inputId="insight">
+		<Select id="insight" label="Insight" bind:value={m.insight}>
+			<option value="">-- Select --</option>
+			{#each insightOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
 
-	<SelectInput
-		label="Judgement"
-		name="judgement"
-		options={[
-			{ value: 'intact', label: 'Intact' },
-			{ value: 'impaired', label: 'Impaired' },
-			{ value: 'poor', label: 'Poor' }
-		]}
-		bind:value={m.judgement}
-	/>
-</SectionCard>
+	<Field label="Judgement" inputId="judgement">
+		<Select id="judgement" label="Judgement" bind:value={m.judgement}>
+			<option value="">-- Select --</option>
+			{#each judgementOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
+</Fieldset>

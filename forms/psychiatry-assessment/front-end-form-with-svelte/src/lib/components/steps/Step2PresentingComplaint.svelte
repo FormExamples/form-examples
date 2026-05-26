@@ -1,30 +1,44 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import DateInput from '$lib/components/ui/DateInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const p = assessment.data.presentingComplaint;
+	const severityOptions = [
+		{ value: 'mild', label: 'Mild' },
+		{ value: 'moderate', label: 'Moderate' },
+		{ value: 'severe', label: 'Severe' }
+	];
 </script>
 
-<SectionCard title="Presenting Complaint" description="Current reason for assessment">
-	<TextArea label="Chief Complaint" name="chiefComplaint" bind:value={p.chiefComplaint} placeholder="Describe the primary reason for presentation" rows={4} />
+<Fieldset legend="Presenting Complaint">
+	<p class="hint">Current reason for assessment.</p>
 
-	<TextInput label="Onset Date" name="onsetDate" type="date" bind:value={p.onsetDate} />
+	<Field label="Chief Complaint" inputId="chiefComplaint">
+		<TextAreaInput id="chiefComplaint" label="Chief complaint" rows={4} bind:value={p.chiefComplaint} />
+	</Field>
 
-	<TextInput label="Duration" name="duration" bind:value={p.duration} placeholder="e.g. 3 weeks, 6 months" />
+	<Field label="Onset Date" inputId="onsetDate">
+		<DateInput id="onsetDate" label="Onset date" bind:value={p.onsetDate} />
+	</Field>
 
-	<RadioGroup
-		label="Severity"
-		name="severity"
-		options={[
-			{ value: 'mild', label: 'Mild' },
-			{ value: 'moderate', label: 'Moderate' },
-			{ value: 'severe', label: 'Severe' }
-		]}
-		bind:value={p.severity}
-	/>
+	<Field label="Duration" inputId="duration" description="e.g. 3 weeks, 6 months">
+		<TextInput id="duration" label="Duration" bind:value={p.duration} />
+	</Field>
 
-	<TextArea label="Precipitating Factors" name="precipitatingFactors" bind:value={p.precipitatingFactors} placeholder="Events or circumstances leading to current presentation" />
-</SectionCard>
+	<Field label="Severity">
+		<RadioGroup label="Severity">
+			{#each severityOptions as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="severity" value={opt.value} bind:group={p.severity} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
+
+	<Field label="Precipitating Factors" inputId="precipitatingFactors">
+		<TextAreaInput id="precipitatingFactors" label="Precipitating factors" rows={3} bind:value={p.precipitatingFactors} />
+	</Field>
+</Fieldset>

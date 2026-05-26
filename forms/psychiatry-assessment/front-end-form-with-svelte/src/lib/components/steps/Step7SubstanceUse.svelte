@@ -1,49 +1,81 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const s = assessment.data.substanceUse;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
+	const alcoholFreq = [
+		{ value: 'none', label: 'None' },
+		{ value: 'occasional', label: 'Occasional' },
+		{ value: 'regular', label: 'Regular' },
+		{ value: 'daily', label: 'Daily' },
+		{ value: 'dependent', label: 'Dependent' }
 	];
 </script>
 
-<SectionCard title="Substance Use" description="Alcohol, drugs, tobacco, and gambling assessment">
-	<NumberInput label="AUDIT Score (Alcohol Use Disorders Identification Test)" name="audit" bind:value={s.alcoholAuditScore} min={0} max={40} />
-	<p class="mb-4 -mt-2 text-xs text-gray-500">0-7 low risk, 8-15 hazardous, 16-19 harmful, 20-40 possible dependence</p>
+<Fieldset legend="Substance Use">
+	<p class="hint">Alcohol, drugs, tobacco, and gambling assessment.</p>
 
-	<SelectInput
-		label="Alcohol Frequency"
-		name="alcoholFreq"
-		options={[
-			{ value: 'none', label: 'None' },
-			{ value: 'occasional', label: 'Occasional' },
-			{ value: 'regular', label: 'Regular' },
-			{ value: 'daily', label: 'Daily' },
-			{ value: 'dependent', label: 'Dependent' }
-		]}
-		bind:value={s.alcoholFrequency}
-	/>
+	<Field label="AUDIT Score (Alcohol Use Disorders Identification Test)" inputId="audit" description="0-7 low risk, 8-15 hazardous, 16-19 harmful, 20-40 possible dependence">
+		<NumberInput id="audit" label="AUDIT score" min={0} max={40} bind:value={s.alcoholAuditScore} />
+	</Field>
 
-	<RadioGroup label="Illicit drug use?" name="drugUse" options={yesNo} bind:value={s.drugUse} />
+	<Field label="Alcohol Frequency" inputId="alcoholFreq">
+		<Select id="alcoholFreq" label="Alcohol frequency" bind:value={s.alcoholFrequency}>
+			<option value="">-- Select --</option>
+			{#each alcoholFreq as opt}<option value={opt.value}>{opt.label}</option>{/each}
+		</Select>
+	</Field>
+
+	<Field label="Illicit drug use?">
+		<RadioGroup label="Drug use">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="drugUse" value={opt.value} bind:group={s.drugUse} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.drugUse === 'yes'}
-		<TextArea label="Drug Use Details" name="drugDetails" bind:value={s.drugDetails} placeholder="Substance(s), route, frequency, last use" />
+		<Field label="Drug Use Details" inputId="drugDetails">
+			<TextAreaInput id="drugDetails" label="Drug details" rows={3} bind:value={s.drugDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Tobacco use?" name="tobacco" options={yesNo} bind:value={s.tobaccoUse} />
+	<Field label="Tobacco use?">
+		<RadioGroup label="Tobacco use">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="tobacco" value={opt.value} bind:group={s.tobaccoUse} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.tobaccoUse === 'yes'}
-		<TextArea label="Tobacco Details" name="tobaccoDetails" bind:value={s.tobaccoDetails} placeholder="Type, amount, duration" />
+		<Field label="Tobacco Details" inputId="tobaccoDetails">
+			<TextAreaInput id="tobaccoDetails" label="Tobacco details" rows={3} bind:value={s.tobaccoDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Problem gambling?" name="gambling" options={yesNo} bind:value={s.gamblingProblem} />
+	<Field label="Problem gambling?">
+		<RadioGroup label="Problem gambling">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="gambling" value={opt.value} bind:group={s.gamblingProblem} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 
-	<RadioGroup label="Withdrawal risk?" name="withdrawal" options={yesNo} bind:value={s.withdrawalRisk} />
+	<Field label="Withdrawal risk?">
+		<RadioGroup label="Withdrawal risk">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="withdrawal" value={opt.value} bind:group={s.withdrawalRisk} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if s.withdrawalRisk === 'yes'}
-		<TextArea label="Withdrawal Risk Details" name="withdrawalDetails" bind:value={s.withdrawalDetails} placeholder="Expected withdrawal symptoms, timeline, severity" />
+		<Field label="Withdrawal Risk Details" inputId="withdrawalDetails">
+			<TextAreaInput id="withdrawalDetails" label="Withdrawal details" rows={3} bind:value={s.withdrawalDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

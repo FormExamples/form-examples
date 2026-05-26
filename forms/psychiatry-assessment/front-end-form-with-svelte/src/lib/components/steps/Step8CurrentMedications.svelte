@@ -1,29 +1,36 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const c = assessment.data.currentMedications;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Current Medications" description="Antipsychotics, antidepressants, mood stabilizers, anxiolytics, and others">
-	<MedicationEntry bind:medications={c.medications} />
-	{#if c.medications.length === 0}
-		<p class="mt-3 text-sm text-gray-500">No medications added. Click the button above to add one, or proceed to next step if the patient takes none.</p>
-	{/if}
+<Fieldset legend="Current Medications">
+	<p class="hint">Antipsychotics, antidepressants, mood stabilizers, anxiolytics, and others.</p>
 
-	<div class="mt-4">
-		<TextArea label="Side Effects" name="sideEffects" bind:value={c.sideEffects} placeholder="Any reported side effects from current medications" />
-	</div>
+	<Field label="Medications">
+		<MedicationEntry bind:medications={c.medications} />
+	</Field>
 
-	<RadioGroup label="Is the patient compliant with medications?" name="compliance" options={yesNo} bind:value={c.compliance} />
+	<Field label="Side Effects" inputId="sideEffects">
+		<TextAreaInput id="sideEffects" label="Side effects" rows={3} bind:value={c.sideEffects} />
+	</Field>
+
+	<Field label="Is the patient compliant with medications?">
+		<RadioGroup label="Compliance">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="compliance" value={opt.value} bind:group={c.compliance} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if c.compliance === 'no'}
-		<TextArea label="Non-Compliance Details" name="complianceDetails" bind:value={c.complianceDetails} placeholder="Reasons for non-compliance, which medications affected" />
+		<Field label="Non-Compliance Details" inputId="complianceDetails">
+			<TextAreaInput id="complianceDetails" label="Compliance details" rows={3} bind:value={c.complianceDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>

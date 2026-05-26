@@ -4,6 +4,9 @@
 	import { calculateGAF } from '$lib/engine/gaf-grader';
 	import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
 
+	import Form from '$lib/components/ui/Form.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+
 	import Step1Demographics from '$lib/components/steps/Step1Demographics.svelte';
 	import Step2PresentingComplaint from '$lib/components/steps/Step2PresentingComplaint.svelte';
 	import Step3PsychiatricHistory from '$lib/components/steps/Step3PsychiatricHistory.svelte';
@@ -17,46 +20,38 @@
 	import Step11CapacityAndConsent from '$lib/components/steps/Step11CapacityAndConsent.svelte';
 
 	function submitAssessment() {
-			const { gafScore, firedRules } = calculateGAF(assessment.data);
-			const additionalFlags = detectAdditionalFlags(assessment.data);
-			assessment.result = {
-				gafScore,
-				firedRules,
-				additionalFlags,
-				timestamp: new Date().toISOString()
-			};
-			goto('/report');
-		}
+		const { gafScore, firedRules } = calculateGAF(assessment.data);
+		const additionalFlags = detectAdditionalFlags(assessment.data);
+		assessment.result = {
+			gafScore,
+			firedRules,
+			additionalFlags,
+			timestamp: new Date().toISOString()
+		};
+		goto('/report');
+	}
+
+	function startOver() {
+		assessment.reset();
+		goto('/');
+	}
 </script>
 
-<Step1Demographics />
+<Form label="Psychiatry Assessment" onsubmit={submitAssessment}>
+	<Step1Demographics />
+	<Step2PresentingComplaint />
+	<Step3PsychiatricHistory />
+	<Step4MentalStatusExam />
+	<Step5RiskAssessment />
+	<Step6MoodAndAnxiety />
+	<Step7SubstanceUse />
+	<Step8CurrentMedications />
+	<Step9MedicalHistory />
+	<Step10SocialHistory />
+	<Step11CapacityAndConsent />
 
-<Step2PresentingComplaint />
-
-<Step3PsychiatricHistory />
-
-<Step4MentalStatusExam />
-
-<Step5RiskAssessment />
-
-<Step6MoodAndAnxiety />
-
-<Step7SubstanceUse />
-
-<Step8CurrentMedications />
-
-<Step9MedicalHistory />
-
-<Step10SocialHistory />
-
-<Step11CapacityAndConsent />
-
-<div class="mt-8 flex justify-end">
-	<button
-		type="button"
-		onclick={submitAssessment}
-		class="rounded-lg bg-primary px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-	>
-		Submit
-	</button>
-</div>
+	<div class="button-group">
+		<Button type="submit" data-variant="primary">Submit</Button>
+		<Button data-variant="secondary" onclick={startOver}>Start over</Button>
+	</div>
+</Form>

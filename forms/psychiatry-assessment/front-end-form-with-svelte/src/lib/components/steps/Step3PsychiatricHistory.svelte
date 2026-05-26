@@ -1,31 +1,57 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Field from '$lib/components/ui/Field.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const h = assessment.data.psychiatricHistory;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
 </script>
 
-<SectionCard title="Psychiatric History" description="Previous psychiatric diagnoses and treatment history">
-	<TextArea label="Previous Diagnoses" name="previousDiagnoses" bind:value={h.previousDiagnoses} placeholder="List any previous psychiatric diagnoses" />
+<Fieldset legend="Psychiatric History">
+	<p class="hint">Previous psychiatric diagnoses and treatment history.</p>
 
-	<RadioGroup label="Previous psychiatric hospitalizations?" name="prevHosp" options={yesNo} bind:value={h.previousHospitalizations} />
+	<Field label="Previous Diagnoses" inputId="previousDiagnoses">
+		<TextAreaInput id="previousDiagnoses" label="Previous diagnoses" rows={3} bind:value={h.previousDiagnoses} />
+	</Field>
+
+	<Field label="Previous psychiatric hospitalizations?">
+		<RadioGroup label="Previous hospitalizations">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="prevHosp" value={opt.value} bind:group={h.previousHospitalizations} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.previousHospitalizations === 'yes'}
-		<TextArea label="Hospitalization Details" name="hospDetails" bind:value={h.hospitalizationDetails} placeholder="Number of admissions, dates, reasons, duration" />
+		<Field label="Hospitalization Details" inputId="hospDetails">
+			<TextAreaInput id="hospDetails" label="Hospitalization details" rows={3} bind:value={h.hospitalizationDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="Previous suicide attempts?" name="prevSuicide" options={yesNo} bind:value={h.previousSuicideAttempts} />
+	<Field label="Previous suicide attempts?">
+		<RadioGroup label="Previous suicide attempts">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="prevSuicide" value={opt.value} bind:group={h.previousSuicideAttempts} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.previousSuicideAttempts === 'yes'}
-		<TextArea label="Suicide Attempt Details" name="suicideDetails" bind:value={h.suicideAttemptDetails} placeholder="Number, method, circumstances, outcome" />
+		<Field label="Suicide Attempt Details" inputId="suicideDetails">
+			<TextAreaInput id="suicideDetails" label="Suicide attempt details" rows={3} bind:value={h.suicideAttemptDetails} />
+		</Field>
 	{/if}
 
-	<RadioGroup label="History of self-harm?" name="selfHarmHx" options={yesNo} bind:value={h.selfHarmHistory} />
+	<Field label="History of self-harm?">
+		<RadioGroup label="Self-harm history">
+			{#each yesNo as opt (opt.value)}
+				<label><input type="radio" class="radio-input" name="selfHarmHx" value={opt.value} bind:group={h.selfHarmHistory} /> {opt.label}</label>
+			{/each}
+		</RadioGroup>
+	</Field>
 	{#if h.selfHarmHistory === 'yes'}
-		<TextArea label="Self-Harm Details" name="selfHarmDetails" bind:value={h.selfHarmDetails} placeholder="Type, frequency, most recent episode" />
+		<Field label="Self-Harm Details" inputId="selfHarmDetails">
+			<TextAreaInput id="selfHarmDetails" label="Self-harm details" rows={3} bind:value={h.selfHarmDetails} />
+		</Field>
 	{/if}
-</SectionCard>
+</Fieldset>
