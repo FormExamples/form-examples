@@ -1,4 +1,5 @@
 <script lang="ts">
+	// CheckboxGroup — Lily Svelte headless contract.
 	interface Option {
 		value: string;
 		label: string;
@@ -22,22 +23,16 @@
 	}
 </script>
 
-<fieldset class="mb-4">
-	<legend class="mb-2 block text-sm font-medium text-gray-700">{label}</legend>
-	<div class="flex flex-wrap gap-3">
-		{#each options as opt}
-			<label
-				class="flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 transition-colors
-					{values.includes(opt.value) ? 'border-primary bg-purple-50 font-medium' : 'border-gray-300 bg-white hover:bg-gray-50'}"
-			>
-				<input
-					type="checkbox"
-					checked={values.includes(opt.value)}
-					onchange={() => toggle(opt.value)}
-					class="accent-primary"
-				/>
-				{opt.label}
-			</label>
-		{/each}
-	</div>
+<fieldset class="field checkbox-group" role="group" aria-label={label}>
+	<legend class="label">{label}</legend>
+	{#each options as opt}
+		<label class="checkbox-input" data-checked={values.includes(opt.value) || undefined}>
+			<input
+				type="checkbox"
+				checked={values.includes(opt.value)}
+				onchange={() => toggle(opt.value)}
+			/>
+			<span>{opt.label}</span>
+		</label>
+	{/each}
 </fieldset>
