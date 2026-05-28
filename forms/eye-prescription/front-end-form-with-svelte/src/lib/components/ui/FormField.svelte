@@ -1,4 +1,6 @@
 <script lang="ts">
+  // FormField — Lily Svelte headless contract.
+  // Emits <div class="field"><label class="label">…</label>…</div>.
   import type { Snippet } from 'svelte';
   let {
     label,
@@ -13,13 +15,12 @@
   } = $props();
 </script>
 
-<label class="block mb-3">
-  <span class="block text-sm font-medium text-slate-700 mb-1">
-    {label}
-    {#if required}<span class="text-red-600 ml-0.5">*</span>{/if}
-  </span>
-  {@render children()}
+<div class="field">
+  <label class="label" data-required={required || undefined}>
+    <span>{label}</span>
+    {@render children()}
+  </label>
   {#if hint}
-    <span class="block text-xs text-slate-500 mt-1">{hint}</span>
+    <span class="hint">{hint}</span>
   {/if}
-</label>
+</div>

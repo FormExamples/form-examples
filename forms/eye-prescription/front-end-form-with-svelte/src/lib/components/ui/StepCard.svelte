@@ -1,4 +1,5 @@
 <script lang="ts">
+  // StepCard — Lily Svelte headless contract (fieldset shape with step header).
   import type { Snippet } from 'svelte';
   let {
     step,
@@ -13,13 +14,13 @@
   } = $props();
 </script>
 
-<section id="step-{step}" class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 scroll-mt-20">
-  <header class="mb-4 pb-3 border-b border-slate-200">
-    <p class="text-xs font-semibold uppercase tracking-wide text-brand-600">Step {step} of 11</p>
-    <h2 class="text-xl font-semibold text-slate-900 mt-1">{title}</h2>
-    {#if description}
-      <p class="text-sm text-slate-600 mt-1">{description}</p>
-    {/if}
-  </header>
+<fieldset id="step-{step}" class="fieldset step-section">
+  <legend class="fieldset-legend">
+    <span class="hint">Step {step} of 11</span>
+    <span>{title}</span>
+  </legend>
+  {#if description}
+    <p class="hint">{description}</p>
+  {/if}
   {@render children()}
-</section>
+</fieldset>
