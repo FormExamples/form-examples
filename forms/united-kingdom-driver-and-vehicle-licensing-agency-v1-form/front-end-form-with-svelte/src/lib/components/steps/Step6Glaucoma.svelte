@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const g = assessment.data.glaucoma;
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 4 — Glaucoma"
 	description="Glaucoma is an eye condition that causes damage to the optic nerve, often from increased eye pressure."
 >
@@ -38,4 +38,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

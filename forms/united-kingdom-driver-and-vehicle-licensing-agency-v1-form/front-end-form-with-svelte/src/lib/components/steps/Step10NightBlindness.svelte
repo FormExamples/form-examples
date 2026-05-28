@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const n = assessment.data.nightBlindness;
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 8 — Night Blindness (Nyctalopia)"
 	description="Night blindness is difficulty seeing in low light or darkness."
 >
@@ -38,4 +38,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

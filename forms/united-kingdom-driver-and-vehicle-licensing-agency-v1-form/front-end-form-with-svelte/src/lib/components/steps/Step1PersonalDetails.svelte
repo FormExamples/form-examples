@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const p = assessment.data.personalDetails;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Part A — About You"
 	description="Your current personal details. Use the change-of-details box if anything has recently changed."
 >
@@ -26,7 +26,7 @@
 		required
 	/>
 
-	<TextArea label="Address" name="address" bind:value={p.address} rows={3} required />
+	<TextAreaInput label="Address" name="address" bind:value={p.address} rows={3} required />
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Postcode" name="postcode" bind:value={p.postcode} required />
@@ -40,11 +40,11 @@
 
 	<TextInput label="Email" name="email" type="email" bind:value={p.email} />
 
-	<TextArea
+	<TextAreaInput
 		label="Change of details (optional)"
 		name="changeOfDetails"
 		bind:value={p.changeOfDetails}
 		placeholder="If your name, address, or contact details have changed, write the changes here."
 		rows={3}
 	/>
-</SectionCard>
+</Fieldset>

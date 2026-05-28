@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const gp = assessment.data.healthcareProfessionals.gp;
 	const con = assessment.data.healthcareProfessionals.consultant;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Part B — Healthcare Professionals"
 	description="Details of the healthcare professionals who care for the condition you are declaring. Provide your GP at minimum; consultant details are optional but helpful."
 >
@@ -20,7 +20,7 @@
 		bind:value={gp.surgeryName}
 		required
 	/>
-	<TextArea label="Address" name="gpAddress" bind:value={gp.address} rows={2} />
+	<TextAreaInput label="Address" name="gpAddress" bind:value={gp.address} rows={2} />
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Town" name="gpTown" bind:value={gp.town} />
 		<TextInput label="Postcode" name="gpPostcode" bind:value={gp.postcode} />
@@ -57,7 +57,7 @@
 		<TextInput label="Department" name="conDepartment" bind:value={con.department} />
 		<TextInput label="Hospital name" name="conHospitalName" bind:value={con.hospitalName} />
 	</div>
-	<TextArea label="Address" name="conAddress" bind:value={con.address} rows={2} />
+	<TextAreaInput label="Address" name="conAddress" bind:value={con.address} rows={2} />
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Town" name="conTown" bind:value={con.town} />
 		<TextInput label="Postcode" name="conPostcode" bind:value={con.postcode} />
@@ -77,4 +77,4 @@
 		type="date"
 		bind:value={con.dateLastSeen}
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 6 — Laser Treatment"
 	description="Do not include treatment for long or short sightedness, or for cataracts."
 >
@@ -59,4 +59,4 @@
 			</div>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const r = assessment.data.retinitisPigmentosa;
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 5 — Retinitis Pigmentosa"
 	description="Retinitis pigmentosa is an inherited eye condition that causes progressive vision loss, especially in low light or peripheral vision."
 >
@@ -38,4 +38,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

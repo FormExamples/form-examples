@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 9 — Double Vision (Diplopia)"
 	description="Double vision is seeing two of a single object at the same time."
 >
@@ -76,4 +76,4 @@
 			</div>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

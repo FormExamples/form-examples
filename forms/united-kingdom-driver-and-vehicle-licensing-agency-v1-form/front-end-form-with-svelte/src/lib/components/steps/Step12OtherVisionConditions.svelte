@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const o = assessment.data.otherVisionConditions;
 
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 10 — Other Vision Conditions"
 	description="Any other vision condition not already covered above."
 >
@@ -26,7 +26,7 @@
 
 	{#if o.hasOther === 'yes'}
 		<div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-			<TextArea
+			<TextAreaInput
 				label="10a) Please describe the condition(s) and which eye(s) are affected"
 				name="otherDetails"
 				bind:value={o.details}
@@ -35,4 +35,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

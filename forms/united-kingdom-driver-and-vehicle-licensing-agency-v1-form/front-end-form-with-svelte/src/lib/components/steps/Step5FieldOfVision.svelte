@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const f = assessment.data.fieldOfVision;
 
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 3 — Field of Vision"
 	description="Field of vision is the total area you can see when looking straight ahead, including peripheral (side) vision."
 >
@@ -50,7 +50,7 @@
 				/>
 
 				{#if f.cause === 'other'}
-					<TextArea
+					<TextAreaInput
 						label="Please describe the other cause"
 						name="vfCauseOtherDetails"
 						bind:value={f.causeOtherDetails}
@@ -61,4 +61,4 @@
 			{/if}
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

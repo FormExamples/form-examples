@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const b = assessment.data.blepharospasm;
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Question 7 — Blepharospasm"
 	description="Blepharospasm is an involuntary spasm of the eyelid muscles."
 >
@@ -54,4 +54,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>
