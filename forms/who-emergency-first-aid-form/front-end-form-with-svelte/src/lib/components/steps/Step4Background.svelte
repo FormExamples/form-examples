@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const b = assessment.data.background;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Background"
 	description="Past medical and surgical history, current medications, and known allergies. Write &quot;None&quot; if there is nothing relevant."
 >
-	<TextArea
+	<TextAreaInput
 		label="Past medical & surgical history"
 		name="pastHistory"
 		bind:value={b.pastMedicalAndSurgicalHistory}
@@ -18,7 +18,7 @@
 		rows={4}
 		required
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Current medications or allergies"
 		name="medsAllergies"
 		bind:value={b.currentMedicationsOrAllergies}
@@ -26,4 +26,4 @@
 		rows={4}
 		required
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const mb = assessment.data.majorBleeding;
 </script>
 
-<SectionCard
+<Fieldset
 	title="C — Major Bleeding"
 	description="Catastrophic haemorrhage assessment and intervention."
 >
@@ -18,7 +18,7 @@
 		name="mbNormal"
 		bind:checked={mb.assessmentNormal}
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Findings (describe location, severity, mechanism)"
 		name="mbFindings"
 		bind:value={mb.assessmentFindings}
@@ -58,4 +58,4 @@
 		bind:checked={mb.interventions.uterineMassage}
 	/>
 	<Checkbox label="None" name="mbNone" bind:checked={mb.interventions.none} />
-</SectionCard>
+</Fieldset>

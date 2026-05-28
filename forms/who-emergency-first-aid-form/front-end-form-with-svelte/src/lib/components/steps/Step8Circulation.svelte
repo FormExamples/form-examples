@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const c = assessment.data.circulation;
 </script>
 
-<SectionCard
+<Fieldset
 	title="C — Circulation"
 	description="Circulation assessment and intervention."
 >
@@ -17,7 +17,7 @@
 		name="crNormal"
 		bind:checked={c.assessmentNormal}
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Findings (e.g. pulse, skin colour, capillary refill, minor bleeding)"
 		name="crFindings"
 		bind:value={c.assessmentFindings}
@@ -51,4 +51,4 @@
 		bind:checked={c.interventions.leftLateralPosition}
 	/>
 	<Checkbox label="None" name="crNone" bind:checked={c.interventions.none} />
-</SectionCard>
+</Fieldset>

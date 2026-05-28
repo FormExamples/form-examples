@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.disability;
 </script>
 
-<SectionCard
+<Fieldset
 	title="D — Disability"
 	description="Neurological assessment and intervention."
 >
@@ -17,7 +17,7 @@
 		name="dsNormal"
 		bind:checked={d.assessmentNormal}
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Findings (e.g. AVPU level, pupils, focal deficit, glucose, temperature)"
 		name="dsFindings"
 		bind:value={d.assessmentFindings}
@@ -51,4 +51,4 @@
 		bind:checked={d.interventions.lowTemperatureCare}
 	/>
 	<Checkbox label="None" name="dsNone" bind:checked={d.interventions.none} />
-</SectionCard>
+</Fieldset>

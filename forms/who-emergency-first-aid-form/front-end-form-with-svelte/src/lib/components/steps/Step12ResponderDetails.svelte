@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const r = assessment.data.responderDetails;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Community First Aid Responder"
 	description="Identification of the CFAR completing this form."
 >
@@ -31,4 +31,4 @@
 		bind:value={r.cfarOrganization}
 		required
 	/>
-</SectionCard>
+</Fieldset>

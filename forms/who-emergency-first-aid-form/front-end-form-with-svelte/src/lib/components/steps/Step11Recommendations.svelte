@@ -1,31 +1,31 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.recommendations;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Recommendations"
 	description="Plan for ongoing care, anticipated problems, and precautions to flag for the receiving facility."
 >
-	<TextArea
+	<TextAreaInput
 		label="Next steps in transport plan"
 		name="transportPlan"
 		bind:value={r.transportPlan}
 		rows={3}
 		required
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Any problems anticipated"
 		name="problemsAnticipated"
 		bind:value={r.problemsAnticipated}
 		rows={3}
 	/>
-	<TextArea
+	<TextAreaInput
 		label="Any other concerns"
 		name="otherConcerns"
 		bind:value={r.otherConcerns}
@@ -70,4 +70,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

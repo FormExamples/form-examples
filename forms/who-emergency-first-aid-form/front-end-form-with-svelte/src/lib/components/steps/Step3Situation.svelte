@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const s = assessment.data.situation;
 
@@ -14,7 +14,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Situation"
 	description="Classify the problem (medical, trauma or both), pregnancy status, and what happened."
 >
@@ -34,7 +34,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="What happened to the patient"
 		name="whatHappened"
 		bind:value={s.whatHappened}
@@ -42,4 +42,4 @@
 		rows={4}
 		required
 	/>
-</SectionCard>
+</Fieldset>

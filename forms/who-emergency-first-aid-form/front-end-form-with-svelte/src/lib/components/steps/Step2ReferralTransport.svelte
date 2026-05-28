@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const r = assessment.data.referralTransport;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Referral & Transport"
 	description="Where the patient is being sent, the ambulance service if available, and key times for the encounter."
 >
@@ -64,4 +64,4 @@
 		bind:value={r.departureDateTime}
 		required
 	/>
-</SectionCard>
+</Fieldset>
