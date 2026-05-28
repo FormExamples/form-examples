@@ -1,33 +1,47 @@
 <script lang="ts">
-	let {
-		label,
-		name,
-		value = $bindable(''),
-		placeholder = '',
-		required = false,
-		type = 'text'
-	}: {
-		label: string;
-		name: string;
-		value: string;
-		placeholder?: string;
-		required?: boolean;
-		type?: 'text' | 'date' | 'email';
-	} = $props();
+  // TextInput — Lily Svelte headless contract.
+  let {
+    label,
+    name,
+    value = $bindable(''),
+    placeholder = '',
+    required = false,
+    type = 'text'
+  }: {
+    label: string;
+    name: string;
+    value: string;
+    placeholder?: string;
+    required?: boolean;
+    type?: 'text' | 'date' | 'datetime-local' | 'time' | 'email' | 'tel';
+  } = $props();
+
+  const inputClass = $derived.by(() => {
+    switch (type) {
+      case 'date':
+      case 'datetime-local':
+        return 'date-input';
+      case 'time':
+        return 'time-input';
+      case 'email':
+        return 'email-input';
+      case 'tel':
+        return 'tel-input';
+      default:
+        return 'text-input';
+    }
+  });
 </script>
 
-<div class="mb-4">
-	<label for={name} class="mb-1 block text-sm font-medium text-gray-700">
-		{label}
-		{#if required}<span class="text-red-500">*</span>{/if}
-	</label>
-	<input
-		id={name}
-		{name}
-		{type}
-		{placeholder}
-		{required}
-		bind:value
-		class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none"
-	/>
+<div class="field">
+  <label class="label" for={name} data-required={required || undefined}>{label}</label>
+  <input
+    id={name}
+    {name}
+    {type}
+    {placeholder}
+    {required}
+    class={inputClass}
+    bind:value
+  />
 </div>

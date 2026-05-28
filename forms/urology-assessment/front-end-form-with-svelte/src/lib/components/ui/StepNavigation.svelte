@@ -1,4 +1,5 @@
 <script lang="ts">
+	// StepNavigation — Lily button-group + button[data-variant] contract.
 	let {
 		prevHref,
 		nextHref,
@@ -12,32 +13,18 @@
 	} = $props();
 </script>
 
-<div class="mt-8 flex justify-between">
+<div class="button-group">
 	{#if prevHref}
-		<a
-			href={prevHref}
-			class="rounded-lg border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-		>
-			&larr; Previous
-		</a>
+		<a class="button" data-variant="secondary" href={prevHref}>&larr; Previous</a>
 	{:else}
-		<div></div>
+		<span></span>
 	{/if}
 
 	{#if isLast}
-		<button
-			type="button"
-			onclick={onsubmit}
-			class="rounded-lg bg-primary px-8 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-		>
-			Submit Assessment
+		<button class="button" data-variant="primary" type="button" onclick={onsubmit}>
+			Submit
 		</button>
 	{:else if nextHref}
-		<a
-			href={nextHref}
-			class="rounded-lg bg-primary px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-		>
-			Next &rarr;
-		</a>
+		<a class="button" data-variant="primary" href={nextHref}>Next &rarr;</a>
 	{/if}
 </div>
