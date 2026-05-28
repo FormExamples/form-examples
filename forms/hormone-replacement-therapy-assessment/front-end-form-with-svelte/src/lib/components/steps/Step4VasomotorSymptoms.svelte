@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const v = assessment.data.vasomotorSymptoms;
 	const yesNo = [
@@ -12,8 +12,8 @@
 	];
 </script>
 
-<SectionCard title="Vasomotor Symptoms" description="Detailed assessment of hot flushes and night sweats">
-	<SelectInput
+<Fieldset title="Vasomotor Symptoms" description="Detailed assessment of hot flushes and night sweats">
+	<Select
 		label="How often do you experience hot flushes?"
 		name="hotFlushFrequency"
 		options={[
@@ -25,7 +25,7 @@
 		bind:value={v.hotFlushFrequency}
 	/>
 
-	<SelectInput
+	<Select
 		label="How severe are your hot flushes?"
 		name="hotFlushSeverity"
 		options={[
@@ -39,7 +39,7 @@
 
 	<RadioGroup label="Do you experience night sweats?" name="nightSweats" options={yesNo} bind:value={v.nightSweats} />
 	{#if v.nightSweats === 'yes'}
-		<SelectInput
+		<Select
 			label="How often do night sweats occur?"
 			name="nightSweatsFrequency"
 			options={[
@@ -51,5 +51,5 @@
 		/>
 	{/if}
 
-	<TextArea label="Do you notice any triggers for your symptoms?" name="triggers" bind:value={v.triggers} placeholder="e.g., stress, caffeine, alcohol, spicy food, warm environments..." />
-</SectionCard>
+	<TextAreaInput label="Do you notice any triggers for your symptoms?" name="triggers" bind:value={v.triggers} placeholder="e.g., stress, caffeine, alcohol, spicy food, warm environments..." />
+</Fieldset>

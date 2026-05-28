@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard title="Contraindications Screen" description="Screening for conditions that may affect HRT prescribing">
+<Fieldset title="Contraindications Screen" description="Screening for conditions that may affect HRT prescribing">
 	<div class="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-3">
 		<p class="text-sm text-amber-800">
 			Please answer the following questions carefully. Some conditions may mean that HRT is not suitable for you,
@@ -42,4 +42,4 @@
 	{#if c.activeCardiovascularDisease === 'yes'}
 		<TextInput label="Please provide details" name="activeCardiovascularDetails" bind:value={c.activeCardiovascularDetails} />
 	{/if}
-</SectionCard>
+</Fieldset>

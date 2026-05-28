@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Menopause Status" description="Current menopausal stage and history">
+<Fieldset title="Menopause Status" description="Current menopausal stage and history">
 	<RadioGroup
 		label="What is your current menopausal status?"
 		name="menopausalStatus"
@@ -37,4 +37,4 @@
 	{/if}
 
 	<RadioGroup label="Have you been diagnosed with premature ovarian insufficiency (POI)?" name="poi" options={yesNo} bind:value={m.prematureOvarianInsufficiency} />
-</SectionCard>
+</Fieldset>

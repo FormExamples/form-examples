@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const c = assessment.data.cardiovascularRisk;
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Cardiovascular Risk" description="Blood pressure, lipid profile, and cardiovascular risk factors">
+<Fieldset title="Cardiovascular Risk" description="Blood pressure, lipid profile, and cardiovascular risk factors">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<NumberInput label="Systolic Blood Pressure" name="systolicBP" bind:value={c.systolicBP} unit="mmHg" min={60} max={250} />
 		<NumberInput label="Diastolic Blood Pressure" name="diastolicBP" bind:value={c.diastolicBP} unit="mmHg" min={30} max={150} />
@@ -32,7 +32,7 @@
 
 	<RadioGroup label="Do you have diabetes?" name="diabetes" options={yesNo} bind:value={c.diabetes} />
 	{#if c.diabetes === 'yes'}
-		<SelectInput
+		<Select
 			label="Type of diabetes"
 			name="diabetesType"
 			options={[
@@ -55,4 +55,4 @@
 	/>
 
 	<NumberInput label="QRISK Score (if known)" name="qriskScore" bind:value={c.qriskScore} unit="%" min={0} max={100} step={0.1} />
-</SectionCard>
+</Fieldset>

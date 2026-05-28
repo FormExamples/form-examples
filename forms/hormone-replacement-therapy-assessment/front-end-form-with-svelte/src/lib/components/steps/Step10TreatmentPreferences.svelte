@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const t = assessment.data.treatmentPreferences;
 </script>
 
-<SectionCard title="Treatment Preferences" description="Your preferences and goals for HRT treatment">
+<Fieldset title="Treatment Preferences" description="Your preferences and goals for HRT treatment">
 	<RadioGroup
 		label="Do you have a preference for HRT route of administration?"
 		name="routePreference"
@@ -20,7 +20,7 @@
 	/>
 
 	{#if t.routePreference}
-		<TextArea
+		<TextAreaInput
 			label="Why do you prefer this route?"
 			name="routePreferenceReason"
 			bind:value={t.routePreferenceReason}
@@ -28,24 +28,24 @@
 		/>
 	{/if}
 
-	<TextArea
+	<TextAreaInput
 		label="Do you have any concerns about HRT?"
 		name="concernsAboutHRT"
 		bind:value={t.concernsAboutHRT}
 		placeholder="e.g., cancer risk, weight gain, side effects, long-term use..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Relevant lifestyle factors"
 		name="lifestyleFactors"
 		bind:value={t.lifestyleFactors}
 		placeholder="e.g., exercise frequency, diet, stress levels, work demands..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="What are your main goals for treatment?"
 		name="treatmentGoals"
 		bind:value={t.treatmentGoals}
 		placeholder="e.g., reduce hot flushes, improve sleep, protect bone health, improve quality of life..."
 	/>
-</SectionCard>
+</Fieldset>

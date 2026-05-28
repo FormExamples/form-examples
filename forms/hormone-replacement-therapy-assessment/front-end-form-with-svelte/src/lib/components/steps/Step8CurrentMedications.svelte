@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 
 	const m = assessment.data.currentMedications;
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard title="Current Medications" description="HRT history and other medications">
+<Fieldset title="Current Medications" description="HRT history and other medications">
 	<RadioGroup label="Are you currently taking HRT?" name="currentHRT" options={yesNo} bind:value={m.currentHRT} />
 	{#if m.currentHRT === 'yes'}
 		<TextInput label="Current HRT details (name, type, dose)" name="currentHRTDetails" bind:value={m.currentHRTDetails} />
@@ -32,5 +32,5 @@
 		<p class="mt-3 text-sm text-gray-500">No other medications added. Click the button above to add one, or proceed to next step if you take none.</p>
 	{/if}
 
-	<TextArea label="Supplements (vitamins, herbal remedies, etc.)" name="supplements" bind:value={m.supplements} placeholder="e.g., vitamin D, calcium, evening primrose oil, black cohosh..." />
-</SectionCard>
+	<TextAreaInput label="Supplements (vitamins, herbal remedies, etc.)" name="supplements" bind:value={m.supplements} placeholder="e.g., vitamin D, calcium, evening primrose oil, black cohosh..." />
+</Fieldset>

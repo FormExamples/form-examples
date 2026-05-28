@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const s = assessment.data.mrsSymptomScale;
 
@@ -28,7 +28,7 @@
 	}
 </script>
 
-<SectionCard title="Menopause Rating Scale (MRS)" description="Rate each symptom from 0 (none) to 4 (very severe). This standardised scale measures symptom burden.">
+<Fieldset title="Menopause Rating Scale (MRS)" description="Rate each symptom from 0 (none) to 4 (very severe). This standardised scale measures symptom burden.">
 	<p class="mb-4 text-sm text-gray-500">
 		Which of the following symptoms apply to you at this time? Please mark the appropriate box for each symptom.
 	</p>
@@ -126,4 +126,4 @@
 			{#each scoreOptions as opt}<option value={opt.value}>{opt.label}</option>{/each}
 		</select>
 	</div>
-</SectionCard>
+</Fieldset>

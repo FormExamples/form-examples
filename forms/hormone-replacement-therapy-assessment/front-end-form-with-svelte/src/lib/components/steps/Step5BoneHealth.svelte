@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const b = assessment.data.boneHealth;
@@ -14,10 +14,10 @@
 	];
 </script>
 
-<SectionCard title="Bone Health" description="Assessment of bone density and fracture risk">
+<Fieldset title="Bone Health" description="Assessment of bone density and fracture risk">
 	<RadioGroup label="Have you had a DEXA (bone density) scan?" name="dexaScan" options={yesNo} bind:value={b.dexaScan} />
 	{#if b.dexaScan === 'yes'}
-		<SelectInput
+		<Select
 			label="DEXA result"
 			name="dexaResult"
 			options={[
@@ -40,9 +40,9 @@
 		<NumberInput label="Approximate height loss" name="heightLossCm" bind:value={b.heightLossCm} unit="cm" min={0} max={20} step={0.5} />
 	{/if}
 
-	<TextArea label="Other bone health risk factors" name="riskFactors" bind:value={b.riskFactors} placeholder="e.g., family history of osteoporosis, low body weight, corticosteroid use, early menopause..." />
+	<TextAreaInput label="Other bone health risk factors" name="riskFactors" bind:value={b.riskFactors} placeholder="e.g., family history of osteoporosis, low body weight, corticosteroid use, early menopause..." />
 
-	<SelectInput
+	<Select
 		label="Calcium intake"
 		name="calciumIntake"
 		options={[
@@ -53,7 +53,7 @@
 		bind:value={b.calciumIntake}
 	/>
 
-	<SelectInput
+	<Select
 		label="Vitamin D intake"
 		name="vitaminDIntake"
 		options={[
@@ -63,4 +63,4 @@
 		]}
 		bind:value={b.vitaminDIntake}
 	/>
-</SectionCard>
+</Fieldset>
