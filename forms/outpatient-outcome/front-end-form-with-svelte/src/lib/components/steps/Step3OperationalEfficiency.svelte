@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { calcWaitDays } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = assessment.data.operationalEfficiency;
 
@@ -17,7 +17,7 @@
 	});
 </script>
 
-<SectionCard title="Operational Efficiency" description="Referral and appointment timing">
+<Fieldset title="Operational Efficiency" description="Referral and appointment timing">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Referral Date" name="referralDate" type="date" bind:value={d.referralDate} />
 		<TextInput label="Appointment Date" name="appointmentDate" type="date" bind:value={d.appointmentDate} />
@@ -49,7 +49,7 @@
 		placeholder="e.g. 18 for 18-week RTT"
 	/>
 
-	<SelectInput
+	<Select
 		label="NHS Attendance Outcome"
 		name="nhsAttendanceOutcome"
 		options={[
@@ -63,4 +63,4 @@
 		]}
 		bind:value={d.nhsAttendanceOutcome}
 	/>
-</SectionCard>
+</Fieldset>

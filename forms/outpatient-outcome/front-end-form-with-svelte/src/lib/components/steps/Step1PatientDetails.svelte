@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.patientDetails;
 </script>
 
-<SectionCard title="Patient Details" description="Patient identification and demographics">
+<Fieldset title="Patient Details" description="Patient identification and demographics">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Given Name" name="givenName" bind:value={d.givenName} required />
 		<TextInput label="Family Name" name="familyName" bind:value={d.familyName} required />
@@ -33,4 +33,4 @@
 		]}
 		bind:value={d.sex}
 	/>
-</SectionCard>
+</Fieldset>

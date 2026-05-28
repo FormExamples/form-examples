@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = assessment.data.promGrc;
 
@@ -26,7 +26,7 @@
 	});
 </script>
 
-<SectionCard title="PROM — Global Rating of Change" description="Patient's overall assessment of change since the start of this episode of care">
+<Fieldset title="PROM — Global Rating of Change" description="Patient's overall assessment of change since the start of this episode of care">
 	<div class="mb-6">
 		<label for="grc" class="mb-2 block text-sm font-medium text-gray-700">
 			Compared to before this episode of care began, how would you describe your overall health now?
@@ -44,7 +44,7 @@
 		</select>
 	</div>
 
-	<SelectInput
+	<Select
 		label="How would you rate your health in general right now?"
 		name="selfRatedHealth"
 		options={[
@@ -56,4 +56,4 @@
 		]}
 		bind:value={d.selfRatedHealth}
 	/>
-</SectionCard>
+</Fieldset>

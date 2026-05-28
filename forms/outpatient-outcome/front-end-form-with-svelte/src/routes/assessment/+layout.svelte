@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { steps } from '$lib/config/steps';
-	import ProgressBar from '$lib/components/ui/ProgressBar.svelte';
+	import ProgressBar from '$lib/components/StepProgressBar.svelte';
 
 	let { children }: { children: Snippet } = $props();
 </script>

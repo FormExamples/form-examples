@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { promisGphTScore, promisMhTScore } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 
 	// NOTE: PROMIS Global Health v1.2 items are paraphrased. Official wording
 	// and IRT-based scoring are available from healthmeasures.net.
@@ -40,7 +40,7 @@
 	});
 </script>
 
-<SectionCard title="PROM — PROMIS Global Health" description="PROMIS Global Health v1.2 (paraphrased). See doc/licensing.md for attribution and scoring notes.">
+<Fieldset title="PROM — PROMIS Global Health" description="PROMIS Global Health v1.2 (paraphrased). See doc/licensing.md for attribution and scoring notes.">
 
 	<p class="mb-4 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
 		Please answer the following questions about your health <strong>over the past 7 days</strong>.
@@ -157,4 +157,4 @@
 			<p class="mt-2 text-xs text-gray-400">Population norm = 50. Note: these are approximate values only.</p>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

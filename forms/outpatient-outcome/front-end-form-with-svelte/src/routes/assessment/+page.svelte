@@ -3,7 +3,7 @@
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { gradeOOCG } from '$lib/engine/oocg-grader';
 	import { TOTAL_STEPS } from '$lib/config/steps';
-	import StepNavigation from '$lib/components/ui/StepNavigation.svelte';
+	import StepNavigation from '$lib/components/StepNavigationButtons.svelte';
 
 	import Step1PatientDetails from '$lib/components/steps/Step1PatientDetails.svelte';
 	import Step2EncounterDetails from '$lib/components/steps/Step2EncounterDetails.svelte';

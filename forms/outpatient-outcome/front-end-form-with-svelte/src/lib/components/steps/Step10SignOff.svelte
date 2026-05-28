@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const d = assessment.data.signOff;
@@ -10,7 +10,7 @@
 	}
 </script>
 
-<SectionCard title="Sign-off" description="Clinician completing this report">
+<Fieldset title="Sign-off" description="Clinician completing this report">
 	<TextInput
 		label="Reporting Clinician Name"
 		name="reportingClinicianName"
@@ -48,4 +48,4 @@
 			</button>
 		</div>
 	</div>
-</SectionCard>
+</Fieldset>

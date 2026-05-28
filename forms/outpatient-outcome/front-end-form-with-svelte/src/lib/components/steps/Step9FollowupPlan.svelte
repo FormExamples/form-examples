@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.followupPlan;
 </script>
 
-<SectionCard title="Follow-up Plan" description="Disposition and next steps following this encounter">
-	<SelectInput
+<Fieldset title="Follow-up Plan" description="Disposition and next steps following this encounter">
+	<Select
 		label="Disposition"
 		name="disposition"
 		options={[
@@ -39,11 +39,11 @@
 		/>
 	{/if}
 
-	<TextArea
+	<TextAreaInput
 		label="Follow-up Notes"
 		name="followupNotes"
 		bind:value={d.followupNotes}
 		placeholder="Any additional instructions, safety-netting advice, or relevant notes"
 		rows={3}
 	/>
-</SectionCard>
+</Fieldset>

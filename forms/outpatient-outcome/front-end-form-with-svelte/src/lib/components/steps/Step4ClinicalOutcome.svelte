@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = assessment.data.clinicalOutcome;
 </script>
 
-<SectionCard title="Clinical Outcome" description="Clinician-rated assessment of the consultation outcome">
-	<TextArea
+<Fieldset title="Clinical Outcome" description="Clinician-rated assessment of the consultation outcome">
+	<TextAreaInput
 		label="Presenting Complaint"
 		name="presentingComplaint"
 		bind:value={d.presentingComplaint}
@@ -16,7 +16,7 @@
 		rows={2}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Diagnosis (confirmed or updated)"
 		name="diagnosis"
 		bind:value={d.diagnosis}
@@ -24,7 +24,7 @@
 		rows={2}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Treatment Delivered"
 		name="treatmentDelivered"
 		bind:value={d.treatmentDelivered}
@@ -32,7 +32,7 @@
 		rows={2}
 	/>
 
-	<SelectInput
+	<Select
 		label="Outcome Classification"
 		name="outcomeClassification"
 		options={[
@@ -45,4 +45,4 @@
 		bind:value={d.outcomeClassification}
 		required
 	/>
-</SectionCard>
+</Fieldset>

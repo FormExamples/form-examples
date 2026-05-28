@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	// NOTE: EQ-5D-5L item wording is paraphrased. Official wording requires a
@@ -25,7 +25,7 @@
 	}
 </script>
 
-<SectionCard title="PROM — EQ-5D-5L" description="Patient-reported health status before and after this episode of care. (Paraphrased item wording — see doc/licensing.md)">
+<Fieldset title="PROM — EQ-5D-5L" description="Patient-reported health status before and after this episode of care. (Paraphrased item wording — see doc/licensing.md)">
 
 	<p class="mb-4 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
 		For each dimension, rate how things were <strong>before</strong> the start of this episode of care
@@ -153,4 +153,4 @@
 			<NumberInput label="Now (0–100)" name="afterVas" bind:value={d.afterVas} min={0} max={100} />
 		</div>
 	</div>
-</SectionCard>
+</Fieldset>
