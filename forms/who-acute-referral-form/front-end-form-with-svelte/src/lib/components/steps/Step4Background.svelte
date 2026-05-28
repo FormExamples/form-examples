@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const b = assessment.data.background;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Background"
 	description="The second part of the SBAR framework. Briefly describe the relevant history and the ABCDE assessment with interventions."
 >
-	<TextArea
+	<TextAreaInput
 		label="Brief history of present illness"
 		name="historyOfPresentIllness"
 		bind:value={b.historyOfPresentIllness}
@@ -19,7 +19,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Relevant past medical & surgical history"
 		name="pastMedicalAndSurgicalHistory"
 		bind:value={b.pastMedicalAndSurgicalHistory}
@@ -43,7 +43,7 @@
 			bind:checked={b.airway.findingNormal}
 		/>
 		{#if !b.airway.findingNormal}
-			<TextArea
+			<TextAreaInput
 				label="Finding (describe abnormality)"
 				name="airwayFindingDetails"
 				bind:value={b.airway.findingDetails}
@@ -56,7 +56,7 @@
 			bind:checked={b.airway.interventionNone}
 		/>
 		{#if !b.airway.interventionNone}
-			<TextArea
+			<TextAreaInput
 				label="Intervention performed"
 				name="airwayInterventionDetails"
 				bind:value={b.airway.interventionDetails}
@@ -74,7 +74,7 @@
 			bind:checked={b.breathing.findingNormal}
 		/>
 		{#if !b.breathing.findingNormal}
-			<TextArea
+			<TextAreaInput
 				label="Finding (describe abnormality)"
 				name="breathingFindingDetails"
 				bind:value={b.breathing.findingDetails}
@@ -87,7 +87,7 @@
 			bind:checked={b.breathing.interventionNone}
 		/>
 		{#if !b.breathing.interventionNone}
-			<TextArea
+			<TextAreaInput
 				label="Intervention performed"
 				name="breathingInterventionDetails"
 				bind:value={b.breathing.interventionDetails}
@@ -105,7 +105,7 @@
 			bind:checked={b.circulation.findingNormal}
 		/>
 		{#if !b.circulation.findingNormal}
-			<TextArea
+			<TextAreaInput
 				label="Finding (describe abnormality)"
 				name="circulationFindingDetails"
 				bind:value={b.circulation.findingDetails}
@@ -118,7 +118,7 @@
 			bind:checked={b.circulation.interventionNone}
 		/>
 		{#if !b.circulation.interventionNone}
-			<TextArea
+			<TextAreaInput
 				label="Intervention performed"
 				name="circulationInterventionDetails"
 				bind:value={b.circulation.interventionDetails}
@@ -138,7 +138,7 @@
 			bind:checked={b.disability.findingNormal}
 		/>
 		{#if !b.disability.findingNormal}
-			<TextArea
+			<TextAreaInput
 				label="Finding (describe abnormality)"
 				name="disabilityFindingDetails"
 				bind:value={b.disability.findingDetails}
@@ -151,7 +151,7 @@
 			bind:checked={b.disability.interventionNone}
 		/>
 		{#if !b.disability.interventionNone}
-			<TextArea
+			<TextAreaInput
 				label="Intervention performed"
 				name="disabilityInterventionDetails"
 				bind:value={b.disability.interventionDetails}
@@ -169,7 +169,7 @@
 			bind:checked={b.exposure.findingNormal}
 		/>
 		{#if !b.exposure.findingNormal}
-			<TextArea
+			<TextAreaInput
 				label="Finding (describe abnormality)"
 				name="exposureFindingDetails"
 				bind:value={b.exposure.findingDetails}
@@ -182,7 +182,7 @@
 			bind:checked={b.exposure.interventionNone}
 		/>
 		{#if !b.exposure.interventionNone}
-			<TextArea
+			<TextAreaInput
 				label="Intervention performed"
 				name="exposureInterventionDetails"
 				bind:value={b.exposure.interventionDetails}
@@ -191,10 +191,10 @@
 		{/if}
 	</div>
 
-	<TextArea
+	<TextAreaInput
 		label="Any other significant treatments or procedures"
 		name="otherSignificantTreatments"
 		bind:value={b.otherSignificantTreatments}
 		rows={3}
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.referralFacilityReceipt;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Referral Facility Receipt"
 	description="To be completed by the receiving (referral) facility upon arrival of the patient."
 >
@@ -35,4 +35,4 @@
 		name="feedbackProvidedToInitiatingFacility"
 		bind:checked={r.feedbackProvidedToInitiatingFacility}
 	/>
-</SectionCard>
+</Fieldset>

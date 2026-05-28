@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
@@ -15,7 +15,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Facility & Transport"
 	description="Details of the initiating facility, the referral facility, the ambulance, and the timing and mode of transfer."
 >
@@ -42,7 +42,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Reason for referral"
 		name="reasonForReferral"
 		bind:value={f.reasonForReferral}
@@ -117,4 +117,4 @@
 		bind:value={f.modeOfTransfer}
 		required
 	/>
-</SectionCard>
+</Fieldset>

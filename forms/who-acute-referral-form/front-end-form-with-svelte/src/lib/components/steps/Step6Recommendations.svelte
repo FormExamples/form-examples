@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.recommendations;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Recommendations"
 	description="The fourth part of the SBAR framework. Treatment plan during transport, anticipated worsening, cautions and precautions."
 >
-	<TextArea
+	<TextAreaInput
 		label="Next steps in treatment plan, including therapies continued during transport"
 		name="treatmentPlanDuringTransport"
 		bind:value={r.treatmentPlanDuringTransport}
@@ -19,14 +19,14 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Potential worsening of patient condition (anticipated deterioration during transit)"
 		name="potentialWorseningOfCondition"
 		bind:value={r.potentialWorseningOfCondition}
 		rows={3}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Cautions regarding prior therapies or interventions"
 		name="cautionsRegardingPriorTherapies"
 		bind:value={r.cautionsRegardingPriorTherapies}
@@ -59,7 +59,7 @@
 	<Checkbox label="Other" name="otherPrecaution" bind:checked={r.precautions.other} />
 
 	{#if r.precautions.other}
-		<TextArea
+		<TextAreaInput
 			label="Describe other precaution"
 			name="otherPrecautionDetails"
 			bind:value={r.precautions.otherDetails}
@@ -67,4 +67,4 @@
 			required
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

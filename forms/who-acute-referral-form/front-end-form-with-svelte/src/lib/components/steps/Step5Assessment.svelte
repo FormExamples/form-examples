@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const a = assessment.data.assessment;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Assessment"
 	description="The third part of the SBAR framework. Describe what is wrong with the patient and the need for referral. Include current vital signs."
 >
-	<TextArea
+	<TextAreaInput
 		label="Clinical assessment & need for referral"
 		name="clinicalAssessment"
 		bind:value={a.clinicalAssessment}
@@ -79,4 +79,4 @@
 			max={15}
 		/>
 	</div>
-</SectionCard>
+</Fieldset>

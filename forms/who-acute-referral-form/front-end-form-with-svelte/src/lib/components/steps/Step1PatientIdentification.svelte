@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Patient Identification"
 	description="Identify the patient being referred. This information must be sent with the patient to the referral facility."
 >
@@ -63,4 +63,4 @@
 		bind:value={p.emergencyContact.contactInformation}
 		placeholder="Phone, relationship, etc."
 	/>
-</SectionCard>
+</Fieldset>

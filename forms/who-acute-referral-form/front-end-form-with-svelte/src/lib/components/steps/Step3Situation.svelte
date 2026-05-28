@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const s = assessment.data.situation;
@@ -13,11 +13,11 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Situation"
 	description="The first part of the SBAR communication framework. Describe what is currently going on with the patient."
 >
-	<TextArea
+	<TextAreaInput
 		label="Chief complaint"
 		name="chiefComplaint"
 		bind:value={s.chiefComplaint}
@@ -26,7 +26,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Primary diagnosis"
 		name="primaryDiagnosis"
 		bind:value={s.primaryDiagnosis}
@@ -42,18 +42,18 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Other acute diagnoses"
 		name="otherAcuteDiagnoses"
 		bind:value={s.otherAcuteDiagnoses}
 		rows={3}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Treatments initiated"
 		name="treatmentsInitiated"
 		bind:value={s.treatmentsInitiated}
 		rows={3}
 		placeholder="Therapies, medications, procedures, fluids initiated at the initiating facility."
 	/>
-</SectionCard>
+</Fieldset>
