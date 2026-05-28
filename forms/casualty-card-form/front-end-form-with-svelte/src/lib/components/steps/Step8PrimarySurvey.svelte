@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const ps = casualtyCard.data.primarySurvey;
 
@@ -18,10 +18,10 @@
 	});
 </script>
 
-<SectionCard title="Primary Survey (ABCDE)" description="Systematic ABCDE assessment">
+<Fieldset title="Primary Survey (ABCDE)" description="Systematic ABCDE assessment">
 	<!-- Airway -->
 	<h3 class="mb-3 text-lg font-semibold text-gray-800">A — Airway</h3>
-	<SelectInput
+	<Select
 		label="Airway Status"
 		name="airwayStatus"
 		bind:value={ps.airway.status}
@@ -46,7 +46,7 @@
 
 	<!-- Breathing -->
 	<h3 class="mb-3 text-lg font-semibold text-gray-800">B — Breathing</h3>
-	<SelectInput
+	<Select
 		label="Breathing Effort"
 		name="breathingEffort"
 		bind:value={ps.breathing.effort}
@@ -71,7 +71,7 @@
 		<TextInput label="Skin Temperature" name="skinTemperature" bind:value={ps.circulation.skinTemperature} placeholder="e.g. warm, cool, clammy" />
 	</div>
 	<TextInput label="Capillary Refill" name="capillaryRefill" bind:value={ps.circulation.capillaryRefill} placeholder="e.g. < 2 seconds" />
-	<TextArea label="Haemorrhage" name="haemorrhage" bind:value={ps.circulation.haemorrhage} placeholder="Describe any bleeding" rows={2} />
+	<TextAreaInput label="Haemorrhage" name="haemorrhage" bind:value={ps.circulation.haemorrhage} placeholder="Describe any bleeding" rows={2} />
 	<TextInput label="IV Access" name="ivAccess" bind:value={ps.circulation.ivAccess} placeholder="e.g. 18G left ACF" />
 
 	<hr class="my-6 border-gray-200" />
@@ -99,7 +99,7 @@
 
 	<!-- Exposure -->
 	<h3 class="mb-3 text-lg font-semibold text-gray-800">E — Exposure</h3>
-	<TextArea label="Skin Examination" name="skinExamination" bind:value={ps.exposure.skinExamination} rows={2} />
-	<TextArea label="Injuries Identified" name="injuriesIdentified" bind:value={ps.exposure.injuriesIdentified} rows={2} />
-	<TextArea label="Log Roll Findings" name="logRollFindings" bind:value={ps.exposure.logRollFindings} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Skin Examination" name="skinExamination" bind:value={ps.exposure.skinExamination} rows={2} />
+	<TextAreaInput label="Injuries Identified" name="injuriesIdentified" bind:value={ps.exposure.injuriesIdentified} rows={2} />
+	<TextAreaInput label="Log Roll Findings" name="logRollFindings" bind:value={ps.exposure.logRollFindings} rows={2} />
+</Fieldset>

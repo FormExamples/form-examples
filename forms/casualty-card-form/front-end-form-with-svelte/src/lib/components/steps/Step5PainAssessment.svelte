@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
@@ -8,7 +8,7 @@
 	const p = casualtyCard.data.painAssessment;
 </script>
 
-<SectionCard title="Pain Assessment" description="Numeric Rating Scale (NRS) pain evaluation">
+<Fieldset title="Pain Assessment" description="Numeric Rating Scale (NRS) pain evaluation">
 	<RadioGroup
 		label="Is the patient in pain?"
 		name="painPresent"
@@ -35,4 +35,4 @@
 			]}
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

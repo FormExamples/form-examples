@@ -2,10 +2,10 @@
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
 	import { calculateNEWS2 } from '$lib/engine/news2-calculator';
 	import { news2ResponseLabel, news2ResponseColor } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const v = casualtyCard.data.vitalSigns;
 
@@ -20,7 +20,7 @@
 	);
 </script>
 
-<SectionCard title="Vital Signs" description="Observations and NEWS2 auto-calculation">
+<Fieldset title="Vital Signs" description="Observations and NEWS2 auto-calculation">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<NumberInput label="Heart Rate" name="heartRate" bind:value={v.heartRate} min={0} max={300} unit="bpm" />
 		<NumberInput label="Respiratory Rate" name="respiratoryRate" bind:value={v.respiratoryRate} min={0} max={60} unit="/min" />
@@ -45,7 +45,7 @@
 	{#if v.supplementalOxygen === 'yes'}
 		<NumberInput label="Oxygen Flow Rate" name="oxygenFlowRate" bind:value={v.oxygenFlowRate} min={0} max={15} unit="L/min" />
 	{/if}
-	<SelectInput
+	<Select
 		label="Consciousness Level (ACVPU)"
 		name="consciousnessLevel"
 		bind:value={v.consciousnessLevel}
@@ -108,4 +108,4 @@
 			</div>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

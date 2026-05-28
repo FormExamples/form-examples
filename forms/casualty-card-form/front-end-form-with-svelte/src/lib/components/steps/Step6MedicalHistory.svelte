@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import type { Medication, Allergy, AllergySeverity } from '$lib/engine/types';
@@ -31,9 +31,9 @@
 	}
 </script>
 
-<SectionCard title="Medical History" description="Past medical history, medications, allergies, and social history">
-	<TextArea label="Past Medical History" name="pastMedicalHistory" bind:value={mh.pastMedicalHistory} rows={3} />
-	<TextArea label="Past Surgical History" name="pastSurgicalHistory" bind:value={mh.pastSurgicalHistory} rows={2} />
+<Fieldset title="Medical History" description="Past medical history, medications, allergies, and social history">
+	<TextAreaInput label="Past Medical History" name="pastMedicalHistory" bind:value={mh.pastMedicalHistory} rows={3} />
+	<TextAreaInput label="Past Surgical History" name="pastSurgicalHistory" bind:value={mh.pastSurgicalHistory} rows={2} />
 
 	<hr class="my-6 border-gray-200" />
 
@@ -104,4 +104,4 @@
 	<TextInput label="Alcohol Consumption" name="alcoholConsumption" bind:value={mh.alcoholConsumption} placeholder="e.g. 10 units/week" />
 	<TextInput label="Recreational Drug Use" name="recreationalDrugUse" bind:value={mh.recreationalDrugUse} />
 	<TextInput label="Last Oral Intake" name="lastOralIntake" bind:value={mh.lastOralIntake} placeholder="Time and type of last food/drink" />
-</SectionCard>
+</Fieldset>

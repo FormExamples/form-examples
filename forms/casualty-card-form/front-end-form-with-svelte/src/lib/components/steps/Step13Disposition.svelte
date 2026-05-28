@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = casualtyCard.data.disposition;
 </script>
 
-<SectionCard title="Disposition" description="Patient outcome and discharge details">
+<Fieldset title="Disposition" description="Patient outcome and discharge details">
 	<RadioGroup
 		label="Disposition"
 		name="disposition"
@@ -33,10 +33,10 @@
 	{#if d.disposition === 'discharged'}
 		<h3 class="mb-3 mt-4 text-lg font-semibold text-gray-800">Discharge Details</h3>
 		<TextInput label="Discharge Diagnosis" name="dischargeDiagnosis" bind:value={d.dischargeDiagnosis} />
-		<TextArea label="Discharge Medications" name="dischargeMedications" bind:value={d.dischargeMedications} rows={2} />
-		<TextArea label="Discharge Instructions" name="dischargeInstructions" bind:value={d.dischargeInstructions} rows={3} />
+		<TextAreaInput label="Discharge Medications" name="dischargeMedications" bind:value={d.dischargeMedications} rows={2} />
+		<TextAreaInput label="Discharge Instructions" name="dischargeInstructions" bind:value={d.dischargeInstructions} rows={3} />
 		<TextInput label="Follow-up" name="followUp" bind:value={d.followUp} placeholder="e.g. GP in 48 hours, fracture clinic 1 week" />
-		<TextArea label="Return Precautions" name="returnPrecautions" bind:value={d.returnPrecautions} rows={2} placeholder="Safety-net advice for patient" />
+		<TextAreaInput label="Return Precautions" name="returnPrecautions" bind:value={d.returnPrecautions} rows={2} placeholder="Safety-net advice for patient" />
 	{/if}
 
 	{#if d.disposition === 'transferred'}
@@ -52,4 +52,4 @@
 		<TextInput label="Discharge/Transfer Time" name="dischargeTime" bind:value={d.dischargeTime} type="time" />
 		<TextInput label="Total Time in Department" name="totalTimeInDepartment" bind:value={d.totalTimeInDepartment} placeholder="e.g. 4h 30m" />
 	</div>
-</SectionCard>
+</Fieldset>

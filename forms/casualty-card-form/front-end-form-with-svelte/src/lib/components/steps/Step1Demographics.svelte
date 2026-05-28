@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = casualtyCard.data.demographics;
 </script>
 
-<SectionCard title="Patient Demographics" description="Patient identification and contact details">
+<Fieldset title="Patient Demographics" description="Patient identification and contact details">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
 		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
@@ -34,7 +34,7 @@
 	</div>
 	<TextInput label="Email" name="email" bind:value={d.email} type="email" />
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
+		<Select
 			label="Ethnicity"
 			name="ethnicity"
 			bind:value={d.ethnicity}
@@ -69,4 +69,4 @@
 			{ value: 'no', label: 'No' }
 		]}
 	/>
-</SectionCard>
+</Fieldset>

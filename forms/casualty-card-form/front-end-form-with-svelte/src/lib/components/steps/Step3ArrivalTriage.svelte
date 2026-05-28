@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const t = casualtyCard.data.arrivalTriage;
 </script>
 
-<SectionCard title="Arrival & Triage" description="Attendance details and Manchester Triage System assessment">
+<Fieldset title="Arrival & Triage" description="Attendance details and Manchester Triage System assessment">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Attendance Date" name="attendanceDate" bind:value={t.attendanceDate} type="date" />
 		<TextInput label="Arrival Time" name="arrivalTime" bind:value={t.arrivalTime} type="time" />
@@ -24,7 +24,7 @@
 			{ value: 'unplanned', label: 'Unplanned' }
 		]}
 	/>
-	<SelectInput
+	<Select
 		label="Arrival Mode"
 		name="arrivalMode"
 		bind:value={t.arrivalMode}
@@ -36,7 +36,7 @@
 			{ value: 'other', label: 'Other' }
 		]}
 	/>
-	<SelectInput
+	<Select
 		label="Referral Source"
 		name="referralSource"
 		bind:value={t.referralSource}
@@ -61,7 +61,7 @@
 		<TextInput label="Triage Time" name="triageTime" bind:value={t.triageTime} type="time" />
 		<TextInput label="Triage Nurse" name="triageNurse" bind:value={t.triageNurse} />
 	</div>
-	<SelectInput
+	<Select
 		label="MTS Flowchart"
 		name="mtsFlowchart"
 		bind:value={t.mtsFlowchart}
@@ -98,7 +98,7 @@
 			{ value: 'other', label: 'Other' }
 		]}
 	/>
-	<SelectInput
+	<Select
 		label="MTS Category"
 		name="mtsCategory"
 		bind:value={t.mtsCategory}
@@ -111,4 +111,4 @@
 		]}
 	/>
 	<TextInput label="MTS Discriminator" name="mtsDiscriminator" bind:value={t.mtsDiscriminator} />
-</SectionCard>
+</Fieldset>

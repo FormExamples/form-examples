@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const sc = casualtyCard.data.safeguardingConsent;
 </script>
 
-<SectionCard title="Safeguarding & Consent" description="Safeguarding concerns, mental capacity, and completion details">
+<Fieldset title="Safeguarding & Consent" description="Safeguarding concerns, mental capacity, and completion details">
 	<RadioGroup
 		label="Safeguarding Concern?"
 		name="safeguardingConcern"
@@ -34,7 +34,7 @@
 
 	<hr class="my-6 border-gray-200" />
 
-	<TextArea label="Mental Capacity Assessment" name="mentalCapacityAssessment" bind:value={sc.mentalCapacityAssessment} rows={2} placeholder="Assessment of capacity to make decisions" />
+	<TextAreaInput label="Mental Capacity Assessment" name="mentalCapacityAssessment" bind:value={sc.mentalCapacityAssessment} rows={2} placeholder="Assessment of capacity to make decisions" />
 	<TextInput label="Mental Health Act Status" name="mentalHealthActStatus" bind:value={sc.mentalHealthActStatus} placeholder="e.g. Section 136, Section 2, informal" />
 
 	<RadioGroup
@@ -57,4 +57,4 @@
 	</div>
 	<TextInput label="GMC Number" name="completedByGmcNumber" bind:value={sc.completedByGmcNumber} />
 	<TextInput label="Senior Reviewing Clinician" name="seniorReviewingClinician" bind:value={sc.seniorReviewingClinician} />
-</SectionCard>
+</Fieldset>

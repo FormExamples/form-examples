@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import type { MedicationAdministered, FluidTherapy, Procedure } from '$lib/engine/types';
@@ -29,7 +29,7 @@
 	}
 </script>
 
-<SectionCard title="Treatment & Interventions" description="Medications administered, fluids, procedures, and other treatments">
+<Fieldset title="Treatment & Interventions" description="Medications administered, fluids, procedures, and other treatments">
 	<h3 class="mb-3 text-lg font-semibold text-gray-800">Medications Administered</h3>
 	<div class="space-y-3">
 		{#each tx.medicationsAdministered as med, i (i)}
@@ -105,4 +105,4 @@
 			{ value: 'status-checked', label: 'Status Checked' }
 		]}
 	/>
-</SectionCard>
+</Fieldset>

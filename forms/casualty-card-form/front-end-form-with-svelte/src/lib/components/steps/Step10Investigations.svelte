@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { casualtyCard } from '$lib/stores/casualtyCard.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import type { ImagingStudy } from '$lib/engine/types';
@@ -18,7 +18,7 @@
 	}
 </script>
 
-<SectionCard title="Investigations" description="Blood tests, imaging, ECG, and other investigations">
+<Fieldset title="Investigations" description="Blood tests, imaging, ECG, and other investigations">
 	<CheckboxGroup
 		label="Blood Tests Requested"
 		bind:values={inv.bloodTests}
@@ -40,7 +40,7 @@
 
 	<hr class="my-6 border-gray-200" />
 
-	<TextArea label="Urinalysis (Dipstick Results)" name="urinalysis" bind:value={inv.urinalysis} rows={2} />
+	<TextAreaInput label="Urinalysis (Dipstick Results)" name="urinalysis" bind:value={inv.urinalysis} rows={2} />
 	<TextInput label="Pregnancy Test" name="pregnancyTest" bind:value={inv.pregnancyTest} placeholder="e.g. positive, negative, not indicated" />
 
 	<hr class="my-6 border-gray-200" />
@@ -74,8 +74,8 @@
 		]}
 	/>
 	{#if inv.ecgPerformed === 'yes'}
-		<TextArea label="ECG Findings" name="ecgFindings" bind:value={inv.ecgFindings} rows={2} />
+		<TextAreaInput label="ECG Findings" name="ecgFindings" bind:value={inv.ecgFindings} rows={2} />
 	{/if}
 
-	<TextArea label="Other Investigations" name="otherInvestigations" bind:value={inv.otherInvestigations} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Other Investigations" name="otherInvestigations" bind:value={inv.otherInvestigations} rows={2} />
+</Fieldset>
