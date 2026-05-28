@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 
 	const med = assessment.data.currentMedications;
 </script>
 
-<SectionCard title="Current Medications" description="List all current medications relevant to your urological condition">
+<Fieldset title="Current Medications" description="List all current medications relevant to your urological condition">
 	<h3 class="mb-2 text-sm font-semibold text-gray-700">Alpha-Blockers</h3>
 	<MedicationEntry bind:medications={med.alphaBlockers} />
 	{#if med.alphaBlockers.length === 0}
@@ -30,4 +30,4 @@
 	{#if med.otherMedications.length === 0}
 		<p class="mt-2 mb-4 text-sm text-gray-500">No other medications added.</p>
 	{/if}
-</SectionCard>
+</Fieldset>

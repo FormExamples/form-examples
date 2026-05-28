@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const m = assessment.data.medicalHistory;
 	const yesNo = [
@@ -11,15 +11,15 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Previous urological conditions and relevant medical history">
-	<TextArea
+<Fieldset title="Medical History" description="Previous urological conditions and relevant medical history">
+	<TextAreaInput
 		label="Previous urological conditions"
 		name="previousUrologic"
 		bind:value={m.previousUrologicConditions}
 		placeholder="e.g., kidney stones, UTIs, BPH, prostatitis..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Surgical history"
 		name="surgicalHistory"
 		bind:value={m.surgicalHistory}
@@ -32,6 +32,6 @@
 
 	<RadioGroup label="Do you have any neurological conditions?" name="neurologicConditions" options={yesNo} bind:value={m.neurologicConditions} />
 	{#if m.neurologicConditions === 'yes'}
-		<TextArea label="Please provide details" name="neurologicDetails" bind:value={m.neurologicConditionDetails} />
+		<TextAreaInput label="Please provide details" name="neurologicDetails" bind:value={m.neurologicConditionDetails} />
 	{/if}
-</SectionCard>
+</Fieldset>
