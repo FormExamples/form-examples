@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
@@ -13,10 +13,10 @@
 	];
 </script>
 
-<SectionCard title="Repetitive Tasks" description="Tasks performed repeatedly during work">
-	<TextArea label="Describe the main repetitive task(s)" name="taskDesc" bind:value={r.taskDescription} placeholder="e.g., typing, mouse clicking, assembly line work..." />
+<Fieldset title="Repetitive Tasks" description="Tasks performed repeatedly during work">
+	<TextAreaInput label="Describe the main repetitive task(s)" name="taskDesc" bind:value={r.taskDescription} placeholder="e.g., typing, mouse clicking, assembly line work..." />
 
-	<SelectInput
+	<Select
 		label="How often do you perform this task?"
 		name="frequency"
 		options={[
@@ -28,7 +28,7 @@
 		bind:value={r.frequency}
 	/>
 
-	<SelectInput
+	<Select
 		label="Duration per session"
 		name="duration"
 		options={[
@@ -40,7 +40,7 @@
 		bind:value={r.durationPerSession}
 	/>
 
-	<SelectInput
+	<Select
 		label="Force required for the task"
 		name="force"
 		options={[
@@ -55,4 +55,4 @@
 	<RadioGroup label="Is there vibration exposure (e.g., power tools)?" name="vibration" options={yesNo} bind:value={r.vibrationExposure} />
 
 	<NumberInput label="Cycle time (seconds per repetition)" name="cycleTime" bind:value={r.cycleTimeSeconds} min={0} max={3600} unit="seconds" />
-</SectionCard>
+</Fieldset>

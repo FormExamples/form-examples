@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const w = assessment.data.workstationSetup;
 </script>
 
-<SectionCard title="Workstation Setup" description="Evaluate your workstation configuration">
-	<SelectInput
+<Fieldset title="Workstation Setup" description="Evaluate your workstation configuration">
+	<Select
 		label="Desk Height"
 		name="deskHeight"
 		options={[
@@ -19,7 +19,7 @@
 		bind:value={w.deskHeight}
 	/>
 
-	<SelectInput
+	<Select
 		label="Chair Type"
 		name="chairType"
 		options={[
@@ -41,7 +41,7 @@
 		bind:value={w.chairAdjustability}
 	/>
 
-	<SelectInput
+	<Select
 		label="Monitor Position (distance)"
 		name="monitorPos"
 		options={[
@@ -52,7 +52,7 @@
 		bind:value={w.monitorPosition}
 	/>
 
-	<SelectInput
+	<Select
 		label="Monitor Distance"
 		name="monitorDist"
 		options={[
@@ -63,7 +63,7 @@
 		bind:value={w.monitorDistance}
 	/>
 
-	<SelectInput
+	<Select
 		label="Monitor Height"
 		name="monitorHeight"
 		options={[
@@ -74,7 +74,7 @@
 		bind:value={w.monitorHeight}
 	/>
 
-	<SelectInput
+	<Select
 		label="Keyboard Placement"
 		name="keyboardPlace"
 		options={[
@@ -86,7 +86,7 @@
 		bind:value={w.keyboardPlacement}
 	/>
 
-	<SelectInput
+	<Select
 		label="Mouse Placement"
 		name="mousePlace"
 		options={[
@@ -97,7 +97,7 @@
 		bind:value={w.mousePlacement}
 	/>
 
-	<SelectInput
+	<Select
 		label="Lighting"
 		name="lighting"
 		options={[
@@ -109,7 +109,7 @@
 		bind:value={w.lighting}
 	/>
 
-	<SelectInput
+	<Select
 		label="Temperature"
 		name="temperature"
 		options={[
@@ -119,4 +119,4 @@
 		]}
 		bind:value={w.temperature}
 	/>
-</SectionCard>
+</Fieldset>

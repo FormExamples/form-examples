@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const s = assessment.data.currentSymptoms;
 
@@ -40,7 +40,7 @@
 	}
 </script>
 
-<SectionCard title="Current Symptoms" description="Pain and discomfort you are currently experiencing">
+<Fieldset title="Current Symptoms" description="Pain and discomfort you are currently experiencing">
 	<CheckboxGroup label="Where do you experience pain or discomfort? (select all that apply)" options={bodyLocations} bind:values={s.painLocations} />
 
 	<div class="mb-4">
@@ -67,7 +67,7 @@
 
 	<TextInput label="When did symptoms start?" name="onsetDate" type="date" bind:value={s.onsetDate} />
 
-	<SelectInput
+	<Select
 		label="How long have you had these symptoms?"
 		name="duration"
 		options={[
@@ -80,11 +80,11 @@
 		bind:value={s.duration}
 	/>
 
-	<TextArea label="What makes the symptoms worse?" name="aggravating" bind:value={s.aggravatingFactors} placeholder="e.g., prolonged sitting, typing, lifting..." />
+	<TextAreaInput label="What makes the symptoms worse?" name="aggravating" bind:value={s.aggravatingFactors} placeholder="e.g., prolonged sitting, typing, lifting..." />
 
-	<TextArea label="What helps relieve the symptoms?" name="relieving" bind:value={s.relievingFactors} placeholder="e.g., stretching, breaks, heat packs..." />
+	<TextAreaInput label="What helps relieve the symptoms?" name="relieving" bind:value={s.relievingFactors} placeholder="e.g., stretching, breaks, heat packs..." />
 
-	<SelectInput
+	<Select
 		label="Impact on your ability to work"
 		name="impactOnWork"
 		options={[
@@ -96,4 +96,4 @@
 		]}
 		bind:value={s.impactOnWork}
 	/>
-</SectionCard>
+</Fieldset>

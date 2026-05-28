@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
@@ -12,8 +12,8 @@
 	];
 </script>
 
-<SectionCard title="Manual Handling" description="Lifting, carrying, pushing and pulling tasks">
-	<SelectInput
+<Fieldset title="Manual Handling" description="Lifting, carrying, pushing and pulling tasks">
+	<Select
 		label="How often do you lift objects?"
 		name="liftFreq"
 		options={[
@@ -29,7 +29,7 @@
 
 	<NumberInput label="Typical carry distance" name="carryDist" bind:value={m.carryDistanceMetres} min={0} max={500} unit="metres" />
 
-	<SelectInput
+	<Select
 		label="Push/pull forces required"
 		name="pushPull"
 		options={[
@@ -44,4 +44,4 @@
 	<RadioGroup label="Is team lifting available when needed?" name="teamLift" options={yesNo} bind:value={m.teamLifting} />
 
 	<RadioGroup label="Are mechanical aids available (trolleys, hoists, etc.)?" name="mechAids" options={yesNo} bind:value={m.mechanicalAidsAvailable} />
-</SectionCard>
+</Fieldset>

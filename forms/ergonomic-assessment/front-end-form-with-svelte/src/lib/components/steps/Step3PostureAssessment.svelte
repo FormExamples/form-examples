@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const p = assessment.data.postureAssessment;
 </script>
 
-<SectionCard title="Posture Assessment" description="REBA body region scoring">
-	<SelectInput
+<Fieldset title="Posture Assessment" description="REBA body region scoring">
+	<Select
 		label="Sitting Posture"
 		name="sittingPosture"
 		options={[
@@ -20,7 +20,7 @@
 		bind:value={p.sittingPosture}
 	/>
 
-	<SelectInput
+	<Select
 		label="Standing Posture"
 		name="standingPosture"
 		options={[
@@ -32,7 +32,7 @@
 		bind:value={p.standingPosture}
 	/>
 
-	<SelectInput
+	<Select
 		label="Neck Angle"
 		name="neckAngle"
 		options={[
@@ -45,7 +45,7 @@
 		bind:value={p.neckAngle}
 	/>
 
-	<SelectInput
+	<Select
 		label="Trunk Angle"
 		name="trunkAngle"
 		options={[
@@ -58,7 +58,7 @@
 		bind:value={p.trunkAngle}
 	/>
 
-	<SelectInput
+	<Select
 		label="Shoulder Position"
 		name="shoulderPos"
 		options={[
@@ -70,7 +70,7 @@
 		bind:value={p.shoulderPosition}
 	/>
 
-	<SelectInput
+	<Select
 		label="Wrist Deviation"
 		name="wristDev"
 		options={[
@@ -94,4 +94,4 @@
 			<NumberInput label="Wrist Score" name="wristScore" bind:value={p.wristScore} min={1} max={4} />
 		</div>
 	</div>
-</SectionCard>
+</Fieldset>
