@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+  // RepeatList — Lily Svelte headless contract.
+  // Emits a fieldset section with button (data-variant="add") for items.
   import type { Snippet } from 'svelte';
   let {
     items = $bindable(),
@@ -24,20 +26,30 @@
   }
 </script>
 
-<section class="mb-6">
-  <header class="flex items-center justify-between mb-2">
-    <h3 class="text-md font-semibold text-slate-700">{title}</h3>
-    <button type="button"
-            class="text-sm px-2 py-1 rounded bg-slate-200 hover:bg-slate-300 disabled:opacity-50"
-            disabled={items.length >= max}
-            onclick={add}>
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">{title}</legend>
+  <div class="button-group">
+    <button
+      type="button"
+      class="button"
+      data-variant="add"
+      disabled={items.length >= max}
+      onclick={add}
+    >
       {addLabel} ({items.length}/{max})
     </button>
-  </header>
+  </div>
   {#each items as item, i (i)}
-    <div class="border border-slate-200 rounded p-3 mb-2">
+    <div class="field">
       {@render children(item, i)}
-      <button type="button" class="text-xs text-red-600 mt-2" onclick={() => remove(i)}>Remove</button>
+      <button
+        type="button"
+        class="button"
+        data-variant="remove"
+        onclick={() => remove(i)}
+      >
+        Remove
+      </button>
     </div>
   {/each}
-</section>
+</fieldset>
