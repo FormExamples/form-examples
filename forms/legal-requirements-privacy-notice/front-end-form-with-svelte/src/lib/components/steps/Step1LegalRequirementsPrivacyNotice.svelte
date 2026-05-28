@@ -1,8 +1,8 @@
 <script lang="ts">
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 </script>
 
-<SectionCard title="Legal Requirements Privacy Notice" description="How your personal information is shared to meet legal requirements of the NHS and UK regulators.">
+<Fieldset title="Legal Requirements Privacy Notice" description="How your personal information is shared to meet legal requirements of the NHS and UK regulators.">
 	<div class="prose prose-sm max-w-none text-gray-800">
 		<p>
 			The practice is required by law to share certain information about you with other organisations. This is sometimes called a "statutory disclosure" — we have to share it whether you agree or not, because Parliament has said so.
@@ -39,4 +39,4 @@
 			Please read this notice carefully before proceeding to acknowledge and sign.
 		</p>
 	</div>
-</SectionCard>
+</Fieldset>
