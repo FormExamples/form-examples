@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.demographics;
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Demographics" description="Reporter information and facility details">
+<Fieldset title="Demographics" description="Reporter information and facility details">
 	<RadioGroup
 		label="Submit this report anonymously?"
 		name="anonymousReport"
@@ -26,7 +26,7 @@
 			<TextInput label="Reporter Last Name" name="reporterLastName" bind:value={d.reporterLastName} required />
 		</div>
 
-		<SelectInput
+		<Select
 			label="Reporter Role"
 			name="reporterRole"
 			options={[
@@ -53,4 +53,4 @@
 	<TextInput label="Facility Name" name="facilityName" bind:value={d.facilityName} required />
 	<TextInput label="Ward / Unit" name="facilityWard" bind:value={d.facilityWard} />
 	<TextInput label="Report Date" name="reportDate" type="date" bind:value={d.reportDate} required />
-</SectionCard>
+</Fieldset>
