@@ -1,0 +1,112 @@
+#!/bin/sh
+# bin/test-tools — exercise every Lily-system tool's --check / --counts /
+# --help modes and confirm contract drift is zero across the corpus.
+#
+# A green run means:
+#   • every per-form Lily HTML conforms to the class contract,
+#   • every per-form Lily Svelte conforms to the canonical UI shape,
+#   • the Lily HTML + Svelte upstream snapshots match what is pinned,
+#   • every form has an up-to-date spec.md,
+#   • the conformance tracker reports 0 PARTIAL and 0 TODO.
+#
+# Usage: bin/test-tools
+#
+# Exits non-zero on first failing check.
+
+set -eu
+
+top="$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")"
+cd "$top"
+
+ok=0
+fail=0
+log() { printf "%s %s\n" "$1" "$2"; }
+green() { ok=$((ok + 1)); log "PASS" "$1"; }
+red()   { fail=$((fail + 1)); log "FAIL" "$1"; }
+
+# ---------------------------------------------------------------------------
+# 1. Each tool surfaces a --help string.
+# ---------------------------------------------------------------------------
+
+for tool in lily-html-refactor lily-svelte-refactor lily-sync lily-svelte-sync \
+            lily-svelte-status generate-spec.py; do
+    if bin/"$tool" --help >/dev/null 2>&1; then
+        green "$tool --help"
+    else
+        red "$tool --help"
+    fi
+done
+
+# ---------------------------------------------------------------------------
+# 2. Contract drift detectors return exit 0.
+# ---------------------------------------------------------------------------
+
+if bin/lily-html-refactor --check --all >/tmp/test-tools-lily-html.log 2>&1; then
+    green "lily-html-refactor --check --all (no HTML class drift)"
+else
+    red "lily-html-refactor --check --all (drift detected — see /tmp/test-tools-lily-html.log)"
+fi
+
+# Svelte refactor --check counts safe swaps only; risky-line reports never
+# fail --check. Still confirm exit 0.
+if bin/lily-svelte-refactor --check --all >/tmp/test-tools-lily-svelte.log 2>&1; then
+    green "lily-svelte-refactor --check --all (no Svelte class drift)"
+else
+    red "lily-svelte-refactor --check --all (drift detected — see /tmp/test-tools-lily-svelte.log)"
+fi
+
+if bin/lily-sync --check >/tmp/test-tools-lily-sync.log 2>&1; then
+    green "lily-sync --check (HTML spec snapshot in sync)"
+else
+    red "lily-sync --check (snapshot drift — see /tmp/test-tools-lily-sync.log)"
+fi
+
+if bin/lily-svelte-sync --check >/tmp/test-tools-lily-svelte-sync.log 2>&1; then
+    green "lily-svelte-sync --check (Svelte spec snapshot in sync)"
+else
+    red "lily-svelte-sync --check (snapshot drift — see /tmp/test-tools-lily-svelte-sync.log)"
+fi
+
+if bin/generate-spec.py --check >/tmp/test-tools-spec.log 2>&1; then
+    green "generate-spec.py --check (per-form spec.md in sync)"
+else
+    red "generate-spec.py --check (spec drift — see /tmp/test-tools-spec.log)"
+fi
+
+# ---------------------------------------------------------------------------
+# 3. Conformance tracker reports the expected milestone.
+# ---------------------------------------------------------------------------
+
+counts=$(bin/lily-svelte-status --counts 2>&1)
+if echo "$counts" | grep -qE '^PARTIAL +0$'; then
+    green "lily-svelte-status: zero PARTIAL forms"
+else
+    red "lily-svelte-status: non-zero PARTIAL"
+fi
+if echo "$counts" | grep -qE '^TODO +0$'; then
+    green "lily-svelte-status: zero TODO forms"
+else
+    red "lily-svelte-status: non-zero TODO"
+fi
+
+# ---------------------------------------------------------------------------
+# 4. forms-as-kebab-case enumerates the same forms the status tool sees.
+# ---------------------------------------------------------------------------
+
+slug_count=$(bin/forms-as-kebab-case | wc -l | tr -d ' ')
+total_status=$(echo "$counts" | awk '/^TOTAL/ {print $2}')
+if [ -n "$total_status" ] && [ "$total_status" -ge "$slug_count" ]; then
+    green "forms-as-kebab-case + lily-svelte-status agree on form count"
+else
+    red "forms-as-kebab-case=$slug_count vs lily-svelte-status TOTAL=$total_status"
+fi
+
+# ---------------------------------------------------------------------------
+# Summary.
+# ---------------------------------------------------------------------------
+
+echo
+echo "test-tools: $ok ok, $fail failed"
+if [ "$fail" -ne 0 ]; then
+    exit 1
+fi

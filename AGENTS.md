@@ -20,6 +20,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/forms-as-kebab-case` — list all form directory slugs
 - `bin/test` — run all form validation tests
 - `bin/test-form <slug>` — test a single form by slug
+- `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
 
