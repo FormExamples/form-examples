@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const las = assessment.data.limbAtaxiaSensory;
 </script>
 
-<SectionCard title="Limb Ataxia & Sensory" description="NIHSS Items 7 and 8">
+<Fieldset title="Limb Ataxia & Sensory" description="NIHSS Items 7 and 8">
 	<RadioGroup
 		label="7. Limb Ataxia (finger-nose-finger, heel-shin)"
 		name="limbAtaxia"
@@ -30,4 +30,4 @@
 		bind:value={las.sensory as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>

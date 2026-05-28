@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const fp = assessment.data.facialPalsy;
 </script>
 
-<SectionCard title="Facial Palsy & Motor" description="NIHSS Items 4, 5a, 5b, 6a, 6b">
+<Fieldset title="Facial Palsy & Motor" description="NIHSS Items 4, 5a, 5b, 6a, 6b">
 	<RadioGroup
 		label="4. Facial Palsy"
 		name="facialPalsy"
@@ -75,4 +75,4 @@
 		bind:value={fp.rightLeg as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>

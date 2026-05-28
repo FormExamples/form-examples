@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const gv = assessment.data.bestGazeVisual;
 </script>
 
-<SectionCard title="Best Gaze & Visual" description="NIHSS Items 2 and 3">
+<Fieldset title="Best Gaze & Visual" description="NIHSS Items 2 and 3">
 	<RadioGroup
 		label="2. Best Gaze (horizontal eye movements)"
 		name="bestGaze"
@@ -31,4 +31,4 @@
 		bind:value={gv.visual as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const s = assessment.data.symptomOnset;
 </script>
 
-<SectionCard title="Symptom Onset" description="Time and manner of symptom presentation">
+<Fieldset title="Symptom Onset" description="Time and manner of symptom presentation">
 	<TextInput
 		label="Symptom Onset Time"
 		name="onsetTime"
@@ -39,7 +39,7 @@
 		required
 	/>
 
-	<SelectInput
+	<Select
 		label="Mode of Arrival"
 		name="modeOfArrival"
 		options={[
@@ -51,4 +51,4 @@
 		bind:value={s.modeOfArrival}
 		required
 	/>
-</SectionCard>
+</Fieldset>

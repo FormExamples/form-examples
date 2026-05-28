@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const loc = assessment.data.levelOfConsciousness;
 </script>
 
-<SectionCard title="Level of Consciousness" description="NIHSS Items 1a, 1b, 1c">
+<Fieldset title="Level of Consciousness" description="NIHSS Items 1a, 1b, 1c">
 	<RadioGroup
 		label="1a. Level of Consciousness"
 		name="loc"
@@ -43,4 +43,4 @@
 		bind:value={loc.locCommands as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>
