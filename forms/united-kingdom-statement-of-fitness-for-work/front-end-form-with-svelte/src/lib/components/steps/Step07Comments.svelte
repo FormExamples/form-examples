@@ -1,6 +1,6 @@
 <script lang="ts">
   import Field from '$lib/components/ui/Field.svelte';
-  import TextArea from '$lib/components/ui/TextArea.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import { store } from '$lib/store.svelte.js';
 </script>
 
@@ -11,7 +11,7 @@
     advice. Avoid medical jargon. Do not record personal opinions.
   </p>
   <Field id="comments" label="Comments / functional advice">
-    <TextArea
+    <TextAreaInput
       id="comments"
       name="comments"
       rows={6}

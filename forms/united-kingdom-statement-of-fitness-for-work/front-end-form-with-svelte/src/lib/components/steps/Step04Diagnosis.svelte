@@ -1,6 +1,6 @@
 <script lang="ts">
   import Field from '$lib/components/ui/Field.svelte';
-  import TextArea from '$lib/components/ui/TextArea.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import YesNoToggle from '$lib/components/ui/YesNoToggle.svelte';
   import { store } from '$lib/store.svelte.js';
   import { DIAGNOSIS_CATEGORIES } from '$lib/types.js';
@@ -10,7 +10,7 @@
   <h2 id="step4-heading" class="text-xl font-semibold mb-4">Step 4 — Diagnosis</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <Field id="diagnosis-text" label="Condition (free text)">
-      <TextArea
+      <TextAreaInput
         id="diagnosis-text"
         name="diagnosisText"
         rows={3}

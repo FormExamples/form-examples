@@ -1,7 +1,7 @@
 <script lang="ts">
   import Field from '$lib/components/ui/Field.svelte';
   import Report from '$lib/components/Report.svelte';
-  import TextArea from '$lib/components/ui/TextArea.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import YesNoToggle from '$lib/components/ui/YesNoToggle.svelte';
   import { store } from '$lib/store.svelte.js';
   import { ISSUED_VIA_OPTIONS, PRACTICE_SETTINGS } from '$lib/types.js';
@@ -50,7 +50,7 @@
       />
     </Field>
     <Field id="safeguarding-notes" label="Safeguarding notes (not printed on fit note)">
-      <TextArea
+      <TextAreaInput
         id="safeguarding-notes"
         name="safeguardingNotes"
         rows={3}
