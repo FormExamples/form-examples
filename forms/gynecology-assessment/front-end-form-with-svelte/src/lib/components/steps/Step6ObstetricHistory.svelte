@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const ob = assessment.data.obstetricHistory;
 </script>
 
-<SectionCard title="Obstetric History" description="Pregnancy and birth history">
+<Fieldset title="Obstetric History" description="Pregnancy and birth history">
 	<NumberInput
 		label="Gravida (total pregnancies)"
 		name="gravida"
@@ -26,10 +26,10 @@
 		step={1}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Pregnancy/delivery complications"
 		name="complications"
 		bind:value={ob.complications}
 		placeholder="e.g., pre-eclampsia, gestational diabetes, caesarean sections, miscarriages, ectopic pregnancies..."
 	/>
-</SectionCard>
+</Fieldset>

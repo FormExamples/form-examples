@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const sh = assessment.data.sexualHealth;
 	const yesNo = [
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Sexual Health" description="Sexual activity, contraception, and STI history">
+<Fieldset title="Sexual Health" description="Sexual activity, contraception, and STI history">
 	<RadioGroup
 		label="Are you currently sexually active?"
 		name="sexuallyActive"
@@ -35,11 +35,11 @@
 	/>
 
 	{#if sh.stiHistory === 'yes'}
-		<TextArea
+		<TextAreaInput
 			label="Please provide details"
 			name="stiDetails"
 			bind:value={sh.stiDetails}
 			placeholder="e.g., chlamydia 2020, treated with antibiotics..."
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

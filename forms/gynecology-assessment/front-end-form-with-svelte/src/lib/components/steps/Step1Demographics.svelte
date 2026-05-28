@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const d = assessment.data.demographics;
 </script>
 
-<SectionCard title="Demographics" description="Basic patient information and menopausal status">
+<Fieldset title="Demographics" description="Basic patient information and menopausal status">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="First Name" name="firstName" bind:value={d.firstName} required />
 		<TextInput label="Last Name" name="lastName" bind:value={d.lastName} required />
@@ -27,7 +27,7 @@
 		required
 	/>
 
-	<SelectInput
+	<Select
 		label="Menopausal Status"
 		name="menopausalStatus"
 		options={[
@@ -39,4 +39,4 @@
 		bind:value={d.menopausalStatus}
 		required
 	/>
-</SectionCard>
+</Fieldset>

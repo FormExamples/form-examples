@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { symptomResponseOptions } from '$lib/engine/symptom-rules';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import type { SymptomScore } from '$lib/engine/types';
 
 	const gs = assessment.data.gynecologicalSymptoms;
@@ -18,7 +18,7 @@
 	}
 </script>
 
-<SectionCard title="Gynaecological Symptoms" description="Rate the severity of your current gynaecological symptoms">
+<Fieldset title="Gynaecological Symptoms" description="Rate the severity of your current gynaecological symptoms">
 	{#each symptomQuestions as question, i}
 		<div class="mb-6 border-b border-gray-100 pb-4 last:border-0 last:pb-0">
 			<p class="mb-3 text-sm font-medium text-gray-700">
@@ -45,4 +45,4 @@
 			</div>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>

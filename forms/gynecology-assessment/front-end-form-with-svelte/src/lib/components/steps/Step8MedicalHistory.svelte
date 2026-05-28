@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const m = assessment.data.medicalHistory;
 	const yesNo = [
@@ -11,22 +11,22 @@
 	];
 </script>
 
-<SectionCard title="Medical History" description="Previous gynaecological conditions and relevant medical history">
-	<TextArea
+<Fieldset title="Medical History" description="Previous gynaecological conditions and relevant medical history">
+	<TextAreaInput
 		label="Previous gynaecological conditions"
 		name="previousGynConditions"
 		bind:value={m.previousGynConditions}
 		placeholder="e.g., endometriosis, fibroids, ovarian cysts, PCOS..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Chronic diseases"
 		name="chronicDiseases"
 		bind:value={m.chronicDiseases}
 		placeholder="e.g., diabetes, hypertension, thyroid disease..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Surgical history"
 		name="surgicalHistory"
 		bind:value={m.surgicalHistory}
@@ -35,6 +35,6 @@
 
 	<RadioGroup label="Do you have any autoimmune diseases?" name="autoimmune" options={yesNo} bind:value={m.autoimmuneDiseases} />
 	{#if m.autoimmuneDiseases === 'yes'}
-		<TextArea label="Please provide details" name="autoimmuneDetails" bind:value={m.autoimmuneDiseaseDetails} />
+		<TextAreaInput label="Please provide details" name="autoimmuneDetails" bind:value={m.autoimmuneDiseaseDetails} />
 	{/if}
-</SectionCard>
+</Fieldset>

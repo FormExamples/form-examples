@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const cs = assessment.data.cervicalScreening;
 </script>
 
-<SectionCard title="Cervical Screening" description="Cervical smear and HPV vaccination history">
+<Fieldset title="Cervical Screening" description="Cervical smear and HPV vaccination history">
 	<TextInput
 		label="Date of Last Cervical Smear"
 		name="lastSmearDate"
@@ -15,7 +15,7 @@
 		bind:value={cs.lastSmearDate}
 	/>
 
-	<SelectInput
+	<Select
 		label="Last Smear Result"
 		name="lastSmearResult"
 		options={[
@@ -28,7 +28,7 @@
 		bind:value={cs.lastSmearResult}
 	/>
 
-	<SelectInput
+	<Select
 		label="HPV Vaccination Status"
 		name="hpvVaccination"
 		options={[
@@ -39,4 +39,4 @@
 		]}
 		bind:value={cs.hpvVaccination}
 	/>
-</SectionCard>
+</Fieldset>

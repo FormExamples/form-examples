@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import { symptomResponseOptions } from '$lib/engine/symptom-rules';
@@ -15,7 +15,7 @@
 	}
 </script>
 
-<SectionCard title="Menstrual History" description="Details about your menstrual cycle and symptoms">
+<Fieldset title="Menstrual History" description="Details about your menstrual cycle and symptoms">
 	<NumberInput
 		label="Cycle Length"
 		name="cycleLength"
@@ -36,7 +36,7 @@
 		step={1}
 	/>
 
-	<SelectInput
+	<Select
 		label="Flow Heaviness"
 		name="flowHeaviness"
 		options={[
@@ -91,4 +91,4 @@
 		type="date"
 		bind:value={m.lastMenstrualPeriod}
 	/>
-</SectionCard>
+</Fieldset>

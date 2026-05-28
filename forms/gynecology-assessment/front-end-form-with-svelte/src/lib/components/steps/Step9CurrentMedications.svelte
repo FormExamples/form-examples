@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const med = assessment.data.currentMedications;
 </script>
 
-<SectionCard title="Current Medications" description="List all current medications and supplements">
+<Fieldset title="Current Medications" description="List all current medications and supplements">
 	<h3 class="mb-2 text-sm font-semibold text-gray-700">Hormonal Medications</h3>
 	<MedicationEntry bind:medications={med.hormonal} />
 	{#if med.hormonal.length === 0}
@@ -21,11 +21,11 @@
 	{/if}
 
 	<div class="mt-6">
-		<TextArea
+		<TextAreaInput
 			label="Supplements and over-the-counter products"
 			name="supplements"
 			bind:value={med.supplements}
 			placeholder="e.g., iron supplements, folic acid, vitamins..."
 		/>
 	</div>
-</SectionCard>
+</Fieldset>
