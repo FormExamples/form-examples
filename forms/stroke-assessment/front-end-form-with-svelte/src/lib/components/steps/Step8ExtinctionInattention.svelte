@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const ei = assessment.data.extinctionInattention;
 </script>
 
-<SectionCard title="Extinction & Inattention" description="NIHSS Item 11">
+<Fieldset title="Extinction & Inattention" description="NIHSS Item 11">
 	<RadioGroup
 		label="11. Extinction and Inattention (formerly Neglect)"
 		name="extinctionInattention"
@@ -18,4 +18,4 @@
 		bind:value={ei.extinctionInattention as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>

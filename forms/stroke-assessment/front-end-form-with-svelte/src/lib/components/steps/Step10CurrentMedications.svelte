@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import MedicationEntry from '$lib/components/ui/MedicationEntry.svelte';
 	import AllergyEntry from '$lib/components/ui/AllergyEntry.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
@@ -14,7 +14,7 @@
 	];
 </script>
 
-<SectionCard title="Current Medications" description="List all current medications and allergies">
+<Fieldset title="Current Medications" description="List all current medications and allergies">
 	<h3 class="mb-2 text-sm font-semibold text-gray-700">Current Medications</h3>
 	<MedicationEntry bind:medications={med.medications} />
 	{#if med.medications.length === 0}
@@ -60,4 +60,4 @@
 	{#if med.allergies.length === 0}
 		<p class="mt-2 mb-4 text-sm text-gray-500">No allergies added.</p>
 	{/if}
-</SectionCard>
+</Fieldset>

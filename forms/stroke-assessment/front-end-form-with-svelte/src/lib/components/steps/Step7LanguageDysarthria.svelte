@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const ld = assessment.data.languageDysarthria;
 </script>
 
-<SectionCard title="Language & Dysarthria" description="NIHSS Items 9 and 10">
+<Fieldset title="Language & Dysarthria" description="NIHSS Items 9 and 10">
 	<RadioGroup
 		label="9. Best Language"
 		name="bestLanguage"
@@ -31,4 +31,4 @@
 		bind:value={ld.dysarthria as any}
 		required
 	/>
-</SectionCard>
+</Fieldset>
