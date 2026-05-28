@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
@@ -16,11 +16,11 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Chief Complaint & Vitals"
 	description="Capture chief complaint, injury flag, initial vital signs, pregnancy status and pain score."
 >
-	<TextArea
+	<TextAreaInput
 		label="Chief complaint"
 		name="chiefComplaint"
 		bind:value={c.chiefComplaint}
@@ -99,7 +99,7 @@
 		/>
 	</div>
 
-	<TextArea
+	<TextAreaInput
 		label="Care in progress on arrival"
 		name="careInProgressOnArrival"
 		bind:value={c.careInProgressOnArrival}
@@ -121,4 +121,4 @@
 		min={0}
 		max={10}
 	/>
-</SectionCard>
+</Fieldset>

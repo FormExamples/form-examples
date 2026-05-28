@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const a = assessment.data.airway;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Airway (A)"
 	description="Primary survey: airway assessment and interventions."
 >
@@ -79,5 +79,5 @@
 		<Checkbox label="Done" name="cSpineDone" bind:checked={a.cSpineDone} />
 	</div>
 
-	<TextArea label="Notes" name="airwayNotes" bind:value={a.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="airwayNotes" bind:value={a.notes} rows={2} />
+</Fieldset>

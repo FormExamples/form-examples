@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
 	const s = assessment.data.sampleHistory;
 </script>
 
-<SectionCard
+<Fieldset
 	title="SAMPLE History"
 	description="Signs / symptoms, Allergies, Medications, Past medical & surgical history, Last ate, Events (and ROS)."
 >
-	<TextArea
+	<TextAreaInput
 		label="S — Signs / symptoms"
 		name="signsSymptoms"
 		bind:value={s.signsSymptoms}
@@ -24,14 +24,14 @@
 		bind:checked={s.signsSymptomsUnknown}
 	/>
 
-	<TextArea label="A — Allergies" name="allergies" bind:value={s.allergies} rows={2} />
+	<TextAreaInput label="A — Allergies" name="allergies" bind:value={s.allergies} rows={2} />
 	<Checkbox
 		label="Allergies: Unknown"
 		name="allergiesUnknown"
 		bind:checked={s.allergiesUnknown}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="M — Medications"
 		name="medications"
 		bind:value={s.medications}
@@ -43,7 +43,7 @@
 		bind:checked={s.medicationsUnknown}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="P — Past medical"
 		name="pastMedical"
 		bind:value={s.pastMedical}
@@ -55,7 +55,7 @@
 		bind:checked={s.pastMedicalUnknown}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="P — Past surgeries"
 		name="pastSurgeries"
 		bind:value={s.pastSurgeries}
@@ -81,11 +81,11 @@
 		bind:checked={s.lastAteUnknown}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="E — Events (and ROS)"
 		name="events"
 		bind:value={s.events}
 		rows={3}
 	/>
 	<Checkbox label="Events: Unknown" name="eventsUnknown" bind:checked={s.eventsUnknown} />
-</SectionCard>
+</Fieldset>

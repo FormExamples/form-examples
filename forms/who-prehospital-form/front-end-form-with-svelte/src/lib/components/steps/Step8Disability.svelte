@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { gcsTotal } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.disability;
 
@@ -20,7 +20,7 @@
 	const gcs = $derived(gcsTotal(assessment.data));
 </script>
 
-<SectionCard
+<Fieldset
 	title="Disability (D)"
 	description="Primary survey: neurological assessment, GCS, pupils and interventions."
 >
@@ -120,5 +120,5 @@
 		/>
 	</div>
 
-	<TextArea label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
+</Fieldset>

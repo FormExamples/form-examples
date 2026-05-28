@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const b = assessment.data.breathing;
 
@@ -15,7 +15,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Breathing (B)"
 	description="Primary survey: breathing assessment and interventions."
 >
@@ -60,7 +60,7 @@
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">Breath sounds</h3>
 	<Checkbox label="Normal (NML)" name="breathSoundsNormal" bind:checked={b.breathSoundsNormal} />
-	<TextArea
+	<TextAreaInput
 		label="Breath sounds notes"
 		name="breathSoundsNotes"
 		bind:value={b.breathSoundsNotes}
@@ -106,5 +106,5 @@
 		bind:value={b.oxygenOther}
 	/>
 
-	<TextArea label="Notes" name="breathingNotes" bind:value={b.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="breathingNotes" bind:value={b.notes} rows={2} />
+</Fieldset>

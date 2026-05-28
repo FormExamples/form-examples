@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
@@ -17,7 +17,7 @@
 	}
 </script>
 
-<SectionCard
+<Fieldset
 	title="Reassessment"
 	description="Up to 3 reassessment vital sign sets recorded during transport."
 >
@@ -119,4 +119,4 @@
 	>
 		+ Add reassessment{#if !canAdd} (max 3 reached){/if}
 	</button>
-</SectionCard>
+</Fieldset>

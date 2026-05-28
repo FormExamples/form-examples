@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const i = assessment.data.injuryDetails;
 	const cv = assessment.data.chiefComplaintAndVitals;
@@ -28,7 +28,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Injury Details"
 	description='Complete this section when "Injury" is checked. Capture intent, mechanism, road traffic details, and safety equipment.'
 >
@@ -120,7 +120,7 @@
 		/>
 	</div>
 
-	<SelectInput
+	<Select
 		label="Vehicle"
 		name="vehicleType"
 		options={vehicleOptions}
@@ -141,4 +141,4 @@
 		name="safetyOtherRestraint"
 		bind:value={i.safetyOtherRestraint}
 	/>
-</SectionCard>
+</Fieldset>

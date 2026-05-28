@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const a = assessment.data.additionalInterventions;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Additional Interventions"
 	description="Medications given and procedures performed during prehospital care."
 >
@@ -55,4 +55,4 @@
 		<Checkbox label="ECG" name="procEcg" bind:checked={a.procEcg} />
 	</div>
 	<TextInput label="Other procedures" name="procOther" bind:value={a.procOther} />
-</SectionCard>
+</Fieldset>

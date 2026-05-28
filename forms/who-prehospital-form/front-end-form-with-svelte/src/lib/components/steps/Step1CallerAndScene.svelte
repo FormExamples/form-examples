@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const c = assessment.data.callerAndScene;
@@ -28,7 +28,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Caller & Scene"
 	description="Caller information, patient identification, scene details, and run timestamps."
 >
@@ -69,7 +69,7 @@
 	/>
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Scene</h3>
-	<SelectInput
+	<Select
 		label="Scene location & type"
 		name="sceneLocationType"
 		options={sceneLocationOptions}
@@ -125,4 +125,4 @@
 			bind:value={c.timeInService}
 		/>
 	</div>
-</SectionCard>
+</Fieldset>

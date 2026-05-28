@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const e = assessment.data.exposure;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Exposure (E)"
 	description="Primary survey: exposure assessment. Additional exam findings are captured under Physical Exam."
 >
@@ -17,5 +17,5 @@
 		name="exposedCompletely"
 		bind:checked={e.exposedCompletely}
 	/>
-	<TextArea label="Notes" name="exposureNotes" bind:value={e.notes} rows={3} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="exposureNotes" bind:value={e.notes} rows={3} />
+</Fieldset>

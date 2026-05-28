@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Triage"
 	description="Assign a triage category and record the reasoning."
 >
@@ -25,4 +25,4 @@
 		required
 	/>
 	<TextInput label="Triaged for" name="triagedFor" bind:value={t.triagedFor} />
-</SectionCard>
+</Fieldset>

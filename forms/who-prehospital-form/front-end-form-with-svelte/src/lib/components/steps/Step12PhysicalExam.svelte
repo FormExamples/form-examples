@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const pe = assessment.data.physicalExam;
 
@@ -20,7 +20,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Physical Exam"
 	description="Tick Normal or note findings for each body system."
 >
@@ -32,7 +32,7 @@
 				name="pe-{sys.key}-normal"
 				bind:checked={pe[sys.key].normal}
 			/>
-			<TextArea
+			<TextAreaInput
 				label="Notes"
 				name="pe-{sys.key}-notes"
 				bind:value={pe[sys.key].notes}
@@ -40,4 +40,4 @@
 			/>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>
