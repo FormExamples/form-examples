@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const p = application.data.patient;
 
@@ -27,12 +27,12 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Patient identification"
 	description="The patient is the prospective holder of the medical exemption certificate. Capture the full UK postal address and NHS number so NHSBSA can match the patient record."
 >
 	<div class="grid grid-cols-1 gap-x-4 md:grid-cols-[120px_1fr]">
-		<SelectInput label="Title" name="patientTitle" options={titleOptions} bind:value={p.title} />
+		<Select label="Title" name="patientTitle" options={titleOptions} bind:value={p.title} />
 		<TextInput label="Forenames" name="patientForenames" bind:value={p.forenames} required />
 	</div>
 
@@ -46,10 +46,10 @@
 			bind:value={p.birthDate}
 			required
 		/>
-		<SelectInput label="Sex" name="patientSex" options={sexOptions} bind:value={p.sex} />
+		<Select label="Sex" name="patientSex" options={sexOptions} bind:value={p.sex} />
 	</div>
 
-	<TextArea
+	<TextAreaInput
 		label="Full UK postal address"
 		name="patientAddress"
 		bind:value={p.postalAddressAsFullText}
@@ -76,4 +76,4 @@
 			bind:value={p.email}
 		/>
 	</div>
-</SectionCard>
+</Fieldset>

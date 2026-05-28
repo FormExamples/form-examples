@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import { ageInYears } from '$lib/engine/utils';
 
@@ -24,7 +24,7 @@
 	});
 </script>
 
-<SectionCard
+<Fieldset
 	title="Age-based exclusion check"
 	description="Some applicants are already entitled to free NHS prescriptions on age grounds and do not need an FP92A."
 >
@@ -83,4 +83,4 @@
 			bind:value={ageCheck.practitionerAcknowledgedAgeAdvice}
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

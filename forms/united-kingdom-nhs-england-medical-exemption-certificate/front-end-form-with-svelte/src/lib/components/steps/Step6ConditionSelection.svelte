@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import CheckboxGroup from '$lib/components/ui/CheckboxGroup.svelte';
 	import type { EligibleConditionCode } from '$lib/engine/types';
 
@@ -86,7 +86,7 @@
 	});
 </script>
 
-<SectionCard
+<Fieldset
 	title="Qualifying condition selection"
 	description="The NHSBSA recognises exactly ten qualifying conditions. Select every condition that applies to this patient — the practitioner attests to each one selected."
 >
@@ -97,4 +97,4 @@
 		bind:values={proxyValues}
 		required
 	/>
-</SectionCard>
+</Fieldset>

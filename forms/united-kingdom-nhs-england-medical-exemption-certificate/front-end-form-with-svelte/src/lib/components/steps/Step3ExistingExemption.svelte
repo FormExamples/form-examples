@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -18,7 +18,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Existing exemption check"
 	description="Does the patient already hold a valid medical exemption certificate? Renewals should be timed within the NHSBSA renewal window."
 >
@@ -53,4 +53,4 @@
 			bind:value={e.previousCertificateExpiryDate}
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

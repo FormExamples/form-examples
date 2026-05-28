@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Badge from '$lib/components/ui/Badge.svelte';
 	import { conditionLabel } from '$lib/engine/utils';
 </script>
 
-<SectionCard
+<Fieldset
 	title="Summary, eligibility result &amp; sign-off"
 	description="Press 'Evaluate eligibility' below to run the FP92A grading engine and display the computed outcome, fired rules, and advisory flags."
 >
@@ -107,4 +107,4 @@
 			</ul>
 		{/if}
 	{/if}
-</SectionCard>
+</Fieldset>

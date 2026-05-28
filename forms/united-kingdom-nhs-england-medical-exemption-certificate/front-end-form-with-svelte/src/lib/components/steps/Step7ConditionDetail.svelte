@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import { conditionLabel } from '$lib/engine/utils';
 
@@ -39,7 +39,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Qualifying condition detail"
 	description="Provide the clinical detail required by NHSBSA for each selected qualifying condition."
 >
@@ -74,7 +74,7 @@
 					/>
 				</div>
 
-				<TextArea
+				<TextAreaInput
 					label="Treatment detail"
 					name={`treatment-${c.code}`}
 					bind:value={c.treatmentDetail}
@@ -127,7 +127,7 @@
 						bind:value={c.cancerSite}
 						placeholder="e.g. breast, colorectal"
 					/>
-					<SelectInput
+					<Select
 						label="Treatment phase"
 						name={`cancerTreatmentPhase-${c.code}`}
 						options={cancerPhaseOptions}
@@ -141,7 +141,7 @@
 					/>
 				{/if}
 
-				<TextArea
+				<TextAreaInput
 					label="Practitioner attestation notes"
 					name={`attestation-${c.code}`}
 					bind:value={c.practitionerAttestationNotes}
@@ -150,4 +150,4 @@
 			</div>
 		{/each}
 	{/if}
-</SectionCard>
+</Fieldset>

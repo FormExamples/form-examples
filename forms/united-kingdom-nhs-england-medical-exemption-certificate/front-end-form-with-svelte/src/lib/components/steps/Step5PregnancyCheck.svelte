@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const data = application.data;
@@ -27,7 +27,7 @@
 	);
 </script>
 
-<SectionCard
+<Fieldset
 	title="Pregnancy / maternity check"
 	description="Pregnant patients (and those within 12 months post-partum) qualify for the maternity exemption certificate (FW8) rather than the FP92A."
 >
@@ -51,4 +51,4 @@
 			bind:value={pregnancyCheck.practitionerAcknowledgedFw8Redirect}
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

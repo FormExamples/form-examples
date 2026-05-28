@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const dec = application.data.declaration;
 
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Practitioner declaration"
 	description="The FP92A must be signed in ink by a practitioner with access to the patient's medical records. NHSBSA Bridge House does not accept scans, photocopies, or printouts."
 >
@@ -46,11 +46,11 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Practitioner declaration text (optional)"
 		name="practitionerDeclarationText"
 		bind:value={dec.practitionerDeclarationText}
 		placeholder="Free-text declaration captured from the FP92A signature panel."
 		rows={3}
 	/>
-</SectionCard>
+</Fieldset>

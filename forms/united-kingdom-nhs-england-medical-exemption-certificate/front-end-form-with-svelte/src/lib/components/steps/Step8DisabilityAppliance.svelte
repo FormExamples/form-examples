@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { application } from '$lib/stores/application.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const data = application.data;
 
@@ -40,7 +40,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Disability / appliance attestation"
 	description="Capture the appliance / dressing detail for a permanent fistula, and the home-care attestation for a continuing physical disability."
 >
@@ -57,7 +57,7 @@
 				Permanent fistula — appliance attestation
 			</h3>
 
-			<SelectInput
+			<Select
 				label="Anatomical site of the fistula"
 				name="fistulaSite"
 				options={fistulaSiteOptions}
@@ -65,7 +65,7 @@
 				required
 			/>
 
-			<SelectInput
+			<Select
 				label="Appliance type"
 				name="applianceType"
 				options={applianceTypeOptions}
@@ -97,7 +97,7 @@
 				required
 			/>
 
-			<TextArea
+			<TextAreaInput
 				label="Description of the help / carer the patient depends on"
 				name="disabilityCarerDetail"
 				bind:value={disability.disabilityCarerDetail}
@@ -105,4 +105,4 @@
 			/>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>
