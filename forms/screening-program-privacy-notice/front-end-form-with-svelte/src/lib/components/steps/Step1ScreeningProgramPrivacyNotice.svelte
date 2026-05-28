@@ -1,8 +1,8 @@
 <script lang="ts">
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 </script>
 
-<SectionCard title="Screening Program Privacy Notice" description="How your information is used in NHS national screening programmes to identify early signs of disease or risk.">
+<Fieldset title="Screening Program Privacy Notice" description="How your information is used in NHS national screening programmes to identify early signs of disease or risk.">
 	<div class="prose prose-sm max-w-none text-gray-800">
 		<p>
 			The NHS runs national screening programmes to look for early signs of disease, or to identify people at higher risk, so that earlier treatment can be offered. Screening is offered to eligible people at specific ages or in specific situations.
@@ -43,4 +43,4 @@
 			Please read this notice carefully before proceeding to acknowledge and sign.
 		</p>
 	</div>
-</SectionCard>
+</Fieldset>
