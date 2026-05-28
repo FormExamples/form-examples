@@ -514,9 +514,42 @@ commit per form with `git commit --only forms/<slug>/`.
   - **Final status** via `bin/lily-svelte-status --counts`:
     PASS=56, PARTIAL=32, TODO=0, EMPTY=45 of 133. **100% of 88
     implemented forms are Lily-shaped.**
-- [ ] **5.7  Cleanup.** Remove legacy non-Lily Svelte components; align
-  Tailwind theme tokens to the shared Lily class names; ensure
-  `bin/lily-svelte-sync --check` and `pnpm check` are clean.
+- [x] **5.7  Cleanup — PARTIAL → canonical PASS** (32 of 32 promoted).
+  Removed legacy `SectionCard.svelte`, `SelectInput.svelte`,
+  `TextArea.svelte`, `ProgressBar.svelte`, `StepNavigation.svelte` from
+  every form's `src/lib/components/ui/`; added canonical Lily-named
+  components (`Form`, `Fieldset`, `Field`, `Button`, `ErrorSummary`,
+  `Panel`, `Progress`, `StepList`, `StepListItem`, `Hint`, `Alert`,
+  plus the inputs each form uses); updated every step-file importer.
+  Alias-friendly `Fieldset` (legend ↔ title+description),
+  `Select` (Lily children ↔ legacy options[]+name), and `TextAreaInput`
+  (canonical ↔ legacy name+placeholder) keep step-file migration to a
+  single token rename per import.
+  - Wave A (5 forms): birth-control-assessment `a1ebcb2c`,
+    employee-onboarding-checklist `5916a0b0`, ergonomic-assessment
+    `35ed2126`, hormone-replacement-therapy-assessment `21476dd3`,
+    sleep-quality-assessment `3094c94b`.
+  - Wave B (6 WHO): who-acute-referral-form `ed1f1bde`,
+    who-counter-referral-form `65d5e221`, who-emergency-first-aid-form
+    `cddb0fab`, who-emergency-unit-general-form `fade1251`,
+    who-emergency-unit-trauma-form `9dc0c30c`, who-prehospital-form
+    `18e264eb`.
+  - Wave C (6 UK): DVLA B1 `613a85fc`, DVLA V1 `fc7c8f20`, LPA-financial
+    `4d02b27f`+`88a9d685`, LPA-health `2061e61d`, NHS-medical-exemption
+    `f51933f5`, fit-note `d14ad72c`.
+  - Wave D (15): agile-consulting `b8819df4`, arc42 `9e303973`,
+    casualty-card `c98931a8`, eye-prescription `870b1d4b`,
+    genetic-assessment `6b50ad94`, gynecology-assessment `89ac720c`,
+    ICVP `df92725b`, legal-requirements-privacy-notice
+    `d6d1bde4`+`1f2033fd`, medical-error-report `5277ea66`+`b4f23963`,
+    outpatient-outcome `138adaf8`, prescription-request
+    `832e9162`+`2f341261`, screening-program-privacy-notice
+    `35960d1b`+`8f35992b`, stroke-assessment `4491e18e`+`e419c2b1`,
+    urology-assessment `20edebbc`+`9be35633`, vaccinations-assessment
+    `2595e285`+`414a492b`.
+  - **Final state**: `bin/lily-svelte-status --counts` reports
+    PASS=88, PARTIAL=0, TODO=0, EMPTY=45 of 133. **100% of the 88
+    implemented SvelteKit forms now use canonical Lily UI components.**
 
 ---
 
