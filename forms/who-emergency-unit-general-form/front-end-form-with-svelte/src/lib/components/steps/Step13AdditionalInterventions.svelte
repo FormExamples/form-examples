@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const m = assessment.data.additionalInterventions.medications;
 	const p = assessment.data.additionalInterventions.procedures;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Additional Interventions"
 	description="Medications / fluids and procedures performed during the encounter, with times."
 >
@@ -32,19 +32,19 @@
 
 	<h4 class="mt-2 mb-1 text-sm font-semibold text-gray-700">Intubation</h4>
 	<TextInput label="Time (24h)" name="intubationTime" type="time" bind:value={p.intubationTime} />
-	<TextArea label="Outcome" name="intubationOutcome" bind:value={p.intubationOutcome} rows={2} />
+	<TextAreaInput label="Outcome" name="intubationOutcome" bind:value={p.intubationOutcome} rows={2} />
 
 	<h4 class="mt-3 mb-1 text-sm font-semibold text-gray-700">Chest tube</h4>
 	<TextInput label="Time (24h)" name="chestTubeTime" type="time" bind:value={p.chestTubeTime} />
-	<TextArea label="Outcome" name="chestTubeOutcome" bind:value={p.chestTubeOutcome} rows={2} />
+	<TextAreaInput label="Outcome" name="chestTubeOutcome" bind:value={p.chestTubeOutcome} rows={2} />
 
 	<h4 class="mt-3 mb-1 text-sm font-semibold text-gray-700">Lumbar puncture</h4>
 	<TextInput label="Time (24h)" name="lumbarPunctureTime" type="time" bind:value={p.lumbarPunctureTime} />
-	<TextArea label="Outcome" name="lumbarPunctureOutcome" bind:value={p.lumbarPunctureOutcome} rows={2} />
+	<TextAreaInput label="Outcome" name="lumbarPunctureOutcome" bind:value={p.lumbarPunctureOutcome} rows={2} />
 
 	<h4 class="mt-3 mb-1 text-sm font-semibold text-gray-700">Simple / complex laceration repair</h4>
 	<TextInput label="Time (24h)" name="lacerationRepairTime" type="time" bind:value={p.lacerationRepairTime} />
-	<TextArea label="Outcome" name="lacerationRepairOutcome" bind:value={p.lacerationRepairOutcome} rows={2} />
+	<TextAreaInput label="Outcome" name="lacerationRepairOutcome" bind:value={p.lacerationRepairOutcome} rows={2} />
 
-	<TextArea label="Other procedures" name="proceduresOther" bind:value={p.other} rows={3} />
-</SectionCard>
+	<TextAreaInput label="Other procedures" name="proceduresOther" bind:value={p.other} rows={3} />
+</Fieldset>

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const m = assessment.data.pastMedicalHistory;
 
@@ -22,7 +22,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Past Medical History"
 	description="Medications, allergies, pregnancy, vaccinations, substance use, surgical and family history."
 >
@@ -34,10 +34,10 @@
 		required
 	/>
 
-	<TextArea label="Medications" name="medications" bind:value={m.medications} rows={3} />
+	<TextAreaInput label="Medications" name="medications" bind:value={m.medications} rows={3} />
 	<Checkbox label="Medications: Unknown" name="medicationsUnknown" bind:checked={m.medicationsUnknown} />
 
-	<TextArea label="Allergies" name="allergies" bind:value={m.allergies} rows={2} />
+	<TextAreaInput label="Allergies" name="allergies" bind:value={m.allergies} rows={2} />
 	<Checkbox label="Allergies: Unknown" name="allergiesUnknown" bind:checked={m.allergiesUnknown} />
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">Reproductive history</h3>
@@ -55,7 +55,7 @@
 	{/if}
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">Vaccinations</h3>
-	<SelectInput label="Vaccinations up to date?" name="vaccinationsStatus" options={vaxOptions} bind:value={m.vaccinationsStatus} />
+	<Select label="Vaccinations up to date?" name="vaccinationsStatus" options={vaxOptions} bind:value={m.vaccinationsStatus} />
 	{#if m.vaccinationsStatus === 'yes'}
 		<TextInput label="Last vaccination date" name="vaccinationsDate" type="date" bind:value={m.vaccinationsDate} />
 	{/if}
@@ -74,12 +74,12 @@
 	<Checkbox label="Psychiatric" name="pmhPsych" bind:checked={m.pmhPsych} />
 	<Checkbox label="Renal disease" name="pmhRenalDisease" bind:checked={m.pmhRenalDisease} />
 	<Checkbox label="Past medical history: Unknown" name="pmhUnknown" bind:checked={m.pmhUnknown} />
-	<TextArea label="Other past medical conditions" name="pmhOther" bind:value={m.pmhOther} rows={2} />
+	<TextAreaInput label="Other past medical conditions" name="pmhOther" bind:value={m.pmhOther} rows={2} />
 
-	<TextArea label="Family history" name="familyHistory" bind:value={m.familyHistory} rows={2} />
+	<TextAreaInput label="Family history" name="familyHistory" bind:value={m.familyHistory} rows={2} />
 	<Checkbox label="Family history: Unknown" name="familyHistoryUnknown" bind:checked={m.familyHistoryUnknown} />
 
-	<TextArea
+	<TextAreaInput
 		label="Past surgeries (type & date)"
 		name="pastSurgeries"
 		bind:value={m.pastSurgeries}
@@ -87,5 +87,5 @@
 	/>
 	<Checkbox label="Past surgeries: Unknown" name="pastSurgeriesUnknown" bind:checked={m.pastSurgeriesUnknown} />
 
-	<TextArea label="Safe at home?" name="safeAtHome" bind:value={m.safeAtHome} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Safe at home?" name="safeAtHome" bind:value={m.safeAtHome} rows={2} />
+</Fieldset>

@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const b = assessment.data.breathing;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Breathing (B)"
 	description="Primary survey — chest rise, trachea, breath sounds, oxygenation and ventilation interventions."
 >
@@ -58,5 +58,5 @@
 		<TextInput label="R — Depth (cm)" name="chestNeedleRightDepth" bind:value={b.chestNeedleRightDepth} />
 	</div>
 
-	<TextArea label="Notes" name="breathingNotes" bind:value={b.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="breathingNotes" bind:value={b.notes} rows={2} />
+</Fieldset>

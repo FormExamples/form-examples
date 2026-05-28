@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.reassessment;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Reassessment"
 	description="Repeat vital signs and condition update."
 >
@@ -27,6 +27,6 @@
 
 	<Checkbox label="Condition same" name="conditionSame" bind:checked={r.conditionSame} />
 	{#if !r.conditionSame}
-		<TextArea label="Condition changes" name="conditionChanges" bind:value={r.conditionChanges} rows={3} />
+		<TextAreaInput label="Condition changes" name="conditionChanges" bind:value={r.conditionChanges} rows={3} />
 	{/if}
-</SectionCard>
+</Fieldset>

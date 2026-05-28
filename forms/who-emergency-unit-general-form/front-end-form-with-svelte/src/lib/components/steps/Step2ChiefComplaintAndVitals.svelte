@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
@@ -17,11 +17,11 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Chief Complaint & Vitals"
 	description="Capture the chief complaint, triage category, initial vital signs and treating provider assessment time."
 >
-	<TextArea
+	<TextAreaInput
 		label="Chief complaint"
 		name="chiefComplaint"
 		bind:value={c.chiefComplaint}
@@ -64,4 +64,4 @@
 		<TextInput label="Time (24h)" name="providerAssessmentTime" type="time" bind:value={c.providerAssessmentTime} />
 	</div>
 	<Checkbox label="Dead on arrival" name="deadOnArrival" bind:checked={c.deadOnArrival} />
-</SectionCard>
+</Fieldset>

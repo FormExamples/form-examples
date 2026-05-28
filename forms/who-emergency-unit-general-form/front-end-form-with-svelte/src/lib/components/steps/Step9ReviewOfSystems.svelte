@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import type { RosEntry } from '$lib/engine/types';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.reviewOfSystems;
 
@@ -25,7 +25,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Review of Systems"
 	description="Tick 'Normal' or describe abnormal findings for each of the 14 systems."
 >
@@ -35,7 +35,7 @@
 			<h4 class="mb-2 text-sm font-semibold text-gray-700">{sys.label}</h4>
 			<Checkbox label="Normal" name={`ros-${sys.key}-normal`} bind:checked={entry.normal} />
 			{#if !entry.normal}
-				<TextArea
+				<TextAreaInput
 					label="Notes"
 					name={`ros-${sys.key}-notes`}
 					bind:value={entry.notes}
@@ -44,4 +44,4 @@
 			{/if}
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>

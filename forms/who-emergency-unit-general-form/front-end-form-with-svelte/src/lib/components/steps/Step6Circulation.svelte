@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.circulation;
@@ -15,7 +15,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Circulation (C)"
 	description="Primary survey — skin, perfusion, pulses, JVD, vascular access and fluids."
 >
@@ -65,5 +65,5 @@
 	<Checkbox label="Blood ordered" name="bloodOrdered" bind:checked={c.bloodOrdered} />
 	<Checkbox label="Epinephrine given" name="epinephrineGiven" bind:checked={c.epinephrineGiven} />
 
-	<TextArea label="Notes" name="circulationNotes" bind:value={c.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="circulationNotes" bind:value={c.notes} rows={2} />
+</Fieldset>

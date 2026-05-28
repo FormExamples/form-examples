@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.diagnostics;
@@ -21,7 +21,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Diagnostics"
 	description="Labs (CBC, electrolytes, UPT, malaria, HIV, urine dip), ECG and other imaging."
 >
@@ -61,11 +61,11 @@
 	<Checkbox label="Blood" name="urineBlood" bind:checked={d.urineDip.blood} />
 	<Checkbox label="Protein" name="urineProtein" bind:checked={d.urineDip.protein} />
 
-	<TextArea label="Other labs / imaging" name="otherLabsImaging" bind:value={d.otherLabsImaging} rows={3} />
+	<TextAreaInput label="Other labs / imaging" name="otherLabsImaging" bind:value={d.otherLabsImaging} rows={3} />
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">ECG</h3>
 	<NumberInput label="Rate" name="ecgRate" bind:value={d.ecg.rate} unit="bpm" min={0} max={300} />
 	<RadioGroup label="Sinus rhythm?" name="sinusRhythm" options={yesNo} bind:value={d.ecg.sinusRhythm} />
 	<RadioGroup label="Ischemia?" name="ischemia" options={yesNo} bind:value={d.ecg.ischemia} />
-	<TextArea label="Interpretation" name="ecgInterpretation" bind:value={d.ecg.interpretation} rows={3} />
-</SectionCard>
+	<TextAreaInput label="Interpretation" name="ecgInterpretation" bind:value={d.ecg.interpretation} rows={3} />
+</Fieldset>

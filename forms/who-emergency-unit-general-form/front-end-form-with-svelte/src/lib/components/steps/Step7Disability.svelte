@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.disability;
@@ -17,7 +17,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Disability (D)"
 	description="Primary survey — neurological status (AVPU), motor exam, pupils, blood glucose and interventions."
 >
@@ -28,7 +28,7 @@
 	<Checkbox label="Moves all extremities" name="movesAllExtremities" bind:checked={d.movesAllExtremities} />
 	<Checkbox label="Deficit (describe below)" name="deficit" bind:checked={d.deficit} />
 	{#if d.deficit}
-		<TextArea label="Deficit description" name="deficitDescription" bind:value={d.deficitDescription} rows={2} required />
+		<TextAreaInput label="Deficit description" name="deficitDescription" bind:value={d.deficitDescription} rows={2} required />
 	{/if}
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">Pupils</h3>
@@ -55,5 +55,5 @@
 	<Checkbox label="Naloxone" name="interventionNaloxone" bind:checked={d.interventionNaloxone} />
 	<TextInput label="Other interventions" name="interventionOthers" bind:value={d.interventionOthers} />
 
-	<TextArea label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
+</Fieldset>

@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const h = assessment.data.historyOfPresentIllness;
 </script>
 
-<SectionCard
+<Fieldset
 	title="History of Present Illness"
 	description="Document symptoms, time course, exacerbating and alleviating factors, prior episodes and prior interventions (including any primary health care)."
 >
-	<TextArea
+	<TextAreaInput
 		label="Narrative"
 		name="hpiNarrative"
 		bind:value={h.narrative}
@@ -18,4 +18,4 @@
 		required
 		placeholder="Onset, character, radiation, associated symptoms, timing, prior treatment etc."
 	/>
-</SectionCard>
+</Fieldset>

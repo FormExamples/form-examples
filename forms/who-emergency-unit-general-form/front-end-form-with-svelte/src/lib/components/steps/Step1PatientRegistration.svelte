@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const p = assessment.data.patientRegistration;
@@ -43,7 +43,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Patient Registration"
 	description="Demographics, arrival mode, ambulance details and emergency-system timestamps."
 >
@@ -83,7 +83,7 @@
 		<NumberInput label="Age" name="age" bind:value={p.age} min={0} max={130} />
 	</div>
 
-	<SelectInput
+	<Select
 		label="Age category"
 		name="ageCategory"
 		options={ageCategoryOptions}
@@ -98,7 +98,7 @@
 		<TextInput label="Time of arrival (24h)" name="timeOfArrival" type="time" bind:value={p.timeOfArrival} required />
 	</div>
 
-	<SelectInput
+	<Select
 		label="Arrival mode"
 		name="arrivalMode"
 		options={arrivalModeOptions}
@@ -158,4 +158,4 @@
 		options={yesNo}
 		bind:value={p.dailyActivitiesLimited}
 	/>
-</SectionCard>
+</Fieldset>

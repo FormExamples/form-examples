@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.highRiskSigns;
 </script>
 
-<SectionCard
+<Fieldset
 	title="High Risk Signs"
 	description="Tick any high-risk signs identified at triage. These guide rapid clinical escalation."
 >
@@ -42,4 +42,4 @@
 		name="vomitsEverythingOrCannotFeed"
 		bind:checked={r.vomitsEverythingOrCannotFeed}
 	/>
-</SectionCard>
+</Fieldset>
