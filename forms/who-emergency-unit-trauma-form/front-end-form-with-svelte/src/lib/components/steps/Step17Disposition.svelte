@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
@@ -28,7 +28,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Disposition"
 	description="Admit / transfer / discharge / died, departure timestamps, final vital signs, and provider sign-off."
 >
@@ -50,7 +50,7 @@
 		<TextInput label="SpO2 on (e.g. RA, NC 2L)" name="finalSpo2OnOxygen" bind:value={d.finalVitals.spo2OnOxygen} />
 	</div>
 
-	<TextArea
+	<TextAreaInput
 		label="Diagnoses / Impressions (list all)"
 		name="diagnosesImpressions"
 		bind:value={d.diagnosesImpressions}
@@ -103,4 +103,4 @@
 	/>
 	<TextInput label="Signature" name="signature" bind:value={d.signature} required />
 	<TextInput label="Signature date" name="signatureDate" type="date" bind:value={d.signatureDate} required />
-</SectionCard>
+</Fieldset>

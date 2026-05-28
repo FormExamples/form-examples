@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Triage"
 	description="Assign a triage category and record what triage was based on. Treating provider assessment date and time may also be recorded here."
 >
@@ -37,4 +37,4 @@
 		<TextInput label="Date" name="providerAssessmentDate" type="date" bind:value={t.providerAssessmentDate} />
 		<TextInput label="Time (24h)" name="providerAssessmentTime" type="time" bind:value={t.providerAssessmentTime} />
 	</div>
-</SectionCard>
+</Fieldset>

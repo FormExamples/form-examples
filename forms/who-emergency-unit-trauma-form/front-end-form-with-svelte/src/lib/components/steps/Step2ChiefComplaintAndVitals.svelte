@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const c = assessment.data.chiefComplaintAndVitals;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Chief Complaint & Vitals"
 	description="Capture chief complaint, allergies, initial vital signs, and dead-on-arrival status."
 >
-	<TextArea
+	<TextAreaInput
 		label="Chief complaint"
 		name="chiefComplaint"
 		bind:value={c.chiefComplaint}
@@ -22,7 +22,7 @@
 		required
 	/>
 
-	<TextArea label="Allergies" name="allergies" bind:value={c.allergies} rows={2} />
+	<TextAreaInput label="Allergies" name="allergies" bind:value={c.allergies} rows={2} />
 	<Checkbox label="Allergies: Unknown" name="allergiesUnknown" bind:checked={c.allergiesUnknown} />
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Initial vital signs</h3>
@@ -50,4 +50,4 @@
 	{#if c.deadOnArrival}
 		<TextInput label="Time of death (24h)" name="timeOfDeath" type="time" bind:value={c.timeOfDeath} required />
 	{/if}
-</SectionCard>
+</Fieldset>

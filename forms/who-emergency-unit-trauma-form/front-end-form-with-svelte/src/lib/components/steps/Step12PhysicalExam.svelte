@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import type { PeEntry } from '$lib/engine/types';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const pe = assessment.data.physicalExam;
 
@@ -22,7 +22,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Physical Exam"
 	description="For each of the 11 body systems: tick 'Normal' or describe findings (specify L or R if needed). Use the 'Detail area of injury' field to describe location of injuries (anterior / posterior body diagram)."
 >
@@ -32,7 +32,7 @@
 			<h4 class="mb-2 text-sm font-semibold text-gray-700">{sys.label}</h4>
 			<Checkbox label="Normal" name={`pe-${sys.key}-normal`} bind:checked={entry.normal} />
 			{#if !entry.normal}
-				<TextArea
+				<TextAreaInput
 					label="Notes"
 					name={`pe-${sys.key}-notes`}
 					bind:value={entry.notes}
@@ -43,10 +43,10 @@
 	{/each}
 
 	<h3 class="mt-4 mb-2 text-base font-semibold text-gray-800">Detail area of injury</h3>
-	<TextArea
+	<TextAreaInput
 		label="Describe location, side and depth of injuries (anterior / posterior body diagram)"
 		name="areaOfInjuryDetail"
 		bind:value={pe.areaOfInjuryDetail}
 		rows={4}
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.disability;
@@ -17,7 +17,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Disability (D)"
 	description="Neurological status — AVPU, GCS, motor exam in 4 extremities, pupils, blood glucose and interventions."
 >
@@ -69,5 +69,5 @@
 	<Checkbox label="Raise head of bed" name="interventionRaiseHeadOfBed" bind:checked={d.interventionRaiseHeadOfBed} />
 	<TextInput label="Other interventions" name="interventionOther" bind:value={d.interventionOther} />
 
-	<TextArea label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="Notes" name="disabilityNotes" bind:value={d.notes} rows={2} />
+</Fieldset>

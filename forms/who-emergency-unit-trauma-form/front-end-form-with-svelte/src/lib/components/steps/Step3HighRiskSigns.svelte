@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.highRiskSigns;
 </script>
 
-<SectionCard
+<Fieldset
 	title="High Risk Signs"
 	description="Tick any high-risk red signs (A/B, C, D, Other) and trauma indicators (general trauma, road traffic). These guide rapid clinical escalation."
 >
@@ -80,4 +80,4 @@
 	<Checkbox label="Motor vehicle crash without a seatbelt" name="rtNoSeatbelt" bind:checked={r.rtNoSeatbelt} />
 	<Checkbox label="Trapped or thrown from vehicle (incl. motorcycle)" name="rtTrappedOrThrown" bind:checked={r.rtTrappedOrThrown} />
 	<Checkbox label="Dead on arrival" name="rtDeadOnArrival" bind:checked={r.rtDeadOnArrival} />
-</SectionCard>
+</Fieldset>

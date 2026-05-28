@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const p = assessment.data.patientRegistration;
@@ -44,7 +44,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Patient Registration"
 	description="Demographics, arrival mode, residence and injury location."
 >
@@ -82,7 +82,7 @@
 		<NumberInput label="Age" name="age" bind:value={p.age} min={0} max={130} />
 	</div>
 
-	<SelectInput
+	<Select
 		label="Age category (if age unavailable)"
 		name="ageCategory"
 		options={ageCategoryOptions}
@@ -109,7 +109,7 @@
 		<TextInput label="Time of arrival (24h)" name="timeOfArrival" type="time" bind:value={p.timeOfArrival} required />
 	</div>
 
-	<SelectInput
+	<Select
 		label="Arrival mode"
 		name="arrivalMode"
 		options={arrivalModeOptions}
@@ -132,7 +132,7 @@
 	<NumberInput label="Weight" name="weightKg" bind:value={p.weightKg} unit="kg" min={0} step={0.1} />
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Vaccinations</h3>
-	<SelectInput label="Vaccinations up to date?" name="vaccinationsStatus" options={vaxOptions} bind:value={p.vaccinationsStatus} />
+	<Select label="Vaccinations up to date?" name="vaccinationsStatus" options={vaxOptions} bind:value={p.vaccinationsStatus} />
 	{#if p.vaccinationsStatus === 'yes'}
 		<TextInput label="Last vaccination date" name="vaccinationsDate" type="date" bind:value={p.vaccinationsDate} />
 	{/if}
@@ -156,4 +156,4 @@
 	<Checkbox label="Drugs" name="drugUse" bind:checked={p.drugUse} />
 	<Checkbox label="IV drug use" name="ivDrugUse" bind:checked={p.ivDrugUse} />
 	<Checkbox label="Substance use: Unknown" name="substanceUseUnknown" bind:checked={p.substanceUseUnknown} />
-</SectionCard>
+</Fieldset>

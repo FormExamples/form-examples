@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import type { LabEntry, ImagingEntry } from '$lib/engine/types';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const d = assessment.data.diagnostics;
 
@@ -27,7 +27,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Diagnostics"
 	description="Tick the labs and imaging ordered, and record results when available."
 >
@@ -37,7 +37,7 @@
 		<div class="mb-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
 			<Checkbox label={`Ordered: ${l.label}`} name={`${l.key}-ordered`} bind:checked={entry.ordered} />
 			{#if entry.ordered}
-				<TextArea label="Result" name={`${l.key}-result`} bind:value={entry.result} rows={2} />
+				<TextAreaInput label="Result" name={`${l.key}-result`} bind:value={entry.result} rows={2} />
 			{/if}
 		</div>
 	{/each}
@@ -48,8 +48,8 @@
 		<div class="mb-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
 			<Checkbox label={`Ordered: ${im.label}`} name={`${im.key}-ordered`} bind:checked={entry.ordered} />
 			{#if entry.ordered}
-				<TextArea label="Result" name={`${im.key}-result`} bind:value={entry.result} rows={2} />
+				<TextAreaInput label="Result" name={`${im.key}-result`} bind:value={entry.result} rows={2} />
 			{/if}
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>

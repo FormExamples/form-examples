@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
@@ -8,7 +8,7 @@
 	const m = assessment.data.medicationsAndProcedures;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Medications & Procedures"
 	description="Pre-printed medication categories, free-text medication entries, procedures performed and a procedure log (each row with time given and clinician initials)."
 >
@@ -52,4 +52,4 @@
 			</div>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>

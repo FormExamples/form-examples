@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const i = assessment.data.injuryHistory;
 
@@ -49,7 +49,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Injury History"
 	description="Place, activity, mechanism, prehospital care, intent, fasting status and substance use within 6 hours of injury."
 >
@@ -98,7 +98,7 @@
 		bind:value={i.prehospitalCareProvider}
 		required
 	/>
-	<TextArea label="Prehospital care given" name="prehospitalCareGiven" bind:value={i.prehospitalCareGiven} rows={2} />
+	<TextAreaInput label="Prehospital care given" name="prehospitalCareGiven" bind:value={i.prehospitalCareGiven} rows={2} />
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Date / time of injury</h3>
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
@@ -115,7 +115,7 @@
 	/>
 	<Checkbox label="Head trauma" name="headTrauma" bind:checked={i.headTrauma} />
 	<Checkbox label="Neck trauma" name="neckTrauma" bind:checked={i.neckTrauma} />
-	<TextArea label="Other details" name="otherTraumaDetails" bind:value={i.otherTraumaDetails} rows={2} />
+	<TextAreaInput label="Other details" name="otherTraumaDetails" bind:value={i.otherTraumaDetails} rows={2} />
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">Intent</h3>
 	<RadioGroup label="Intent of injury" name="intent" options={intentOptions} bind:value={i.intent} required />
@@ -135,4 +135,4 @@
 	/>
 	<Checkbox label="Alcohol" name="substanceAlcohol" bind:checked={i.substanceAlcohol} />
 	<TextInput label="Other substance" name="substanceOther" bind:value={i.substanceOther} />
-</SectionCard>
+</Fieldset>

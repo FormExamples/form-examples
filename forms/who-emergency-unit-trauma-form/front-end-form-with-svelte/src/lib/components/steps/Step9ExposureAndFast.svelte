@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const e = assessment.data.exposureAndFast;
 
@@ -28,13 +28,13 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Exposure (E) & FAST (F)"
 	description="Exposure (full undressing) and Focused Assessment with Sonography for Trauma."
 >
 	<h3 class="mb-2 text-base font-semibold text-gray-800">Exposure</h3>
 	<Checkbox label="Patient exposed completely" name="exposedCompletely" bind:checked={e.exposedCompletely} />
-	<TextArea label="Exposure notes" name="exposureNotes" bind:value={e.exposureNotes} rows={2} />
+	<TextAreaInput label="Exposure notes" name="exposureNotes" bind:value={e.exposureNotes} rows={2} />
 
 	<h3 class="mt-6 mb-2 text-base font-semibold text-gray-800">FAST</h3>
 	<Checkbox label="Normal (no abnormal findings)" name="fastNormal" bind:checked={e.fastNormal} />
@@ -73,5 +73,5 @@
 		/>
 	{/if}
 
-	<TextArea label="FAST notes" name="fastNotes" bind:value={e.fastNotes} rows={2} />
-</SectionCard>
+	<TextAreaInput label="FAST notes" name="fastNotes" bind:value={e.fastNotes} rows={2} />
+</Fieldset>
