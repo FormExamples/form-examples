@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const h = assessment.data.immunizationHistory;
 </script>
 
-<SectionCard title="Immunization History" description="Please provide details about the patient's vaccination history and records.">
+<Fieldset title="Immunization History" description="Please provide details about the patient's vaccination history and records.">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<RadioGroup
 			label="Does the patient have a vaccination record?"
@@ -21,7 +21,7 @@
 			]}
 			bind:value={h.hasVaccinationRecord}
 		/>
-		<SelectInput
+		<Select
 			label="Record Source"
 			name="recordSource"
 			options={[
@@ -47,7 +47,7 @@
 			]}
 			bind:value={h.previousAdverseReactions}
 		/>
-		<TextArea label="If yes, please describe" name="adverseReactionDetails" bind:value={h.adverseReactionDetails} placeholder="Describe any adverse reactions..." />
+		<TextAreaInput label="If yes, please describe" name="adverseReactionDetails" bind:value={h.adverseReactionDetails} placeholder="Describe any adverse reactions..." />
 	</div>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
@@ -60,6 +60,6 @@
 			]}
 			bind:value={h.immunocompromised}
 		/>
-		<TextArea label="If yes, please describe" name="immunocompromisedDetails" bind:value={h.immunocompromisedDetails} placeholder="Describe immunocompromised condition..." />
+		<TextAreaInput label="If yes, please describe" name="immunocompromisedDetails" bind:value={h.immunocompromisedDetails} placeholder="Describe immunocompromised condition..." />
 	</div>
-</SectionCard>
+</Fieldset>

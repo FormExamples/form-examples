@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumericSelect from '$lib/components/ui/NumericSelect.svelte';
@@ -14,7 +14,7 @@
 	];
 </script>
 
-<SectionCard title="Occupational Vaccinations" description="Record occupation-related vaccination requirements and status.">
+<Fieldset title="Occupational Vaccinations" description="Record occupation-related vaccination requirements and status.">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Occupation" name="occupation" bind:value={o.occupation} placeholder="e.g. Nurse, Teacher, Laboratory Worker" />
 		<RadioGroup
@@ -32,4 +32,4 @@
 	<NumericSelect label="Influenza (Occupational)" name="influenzaOccupational" options={statusOptions} bind:numericValue={o.influenzaOccupational} />
 	<NumericSelect label="Varicella (Chickenpox)" name="varicella" options={statusOptions} bind:numericValue={o.varicella} />
 	<NumericSelect label="BCG (Tuberculosis)" name="bcgTuberculosis" options={statusOptions} bind:numericValue={o.bcgTuberculosis} />
-</SectionCard>
+</Fieldset>

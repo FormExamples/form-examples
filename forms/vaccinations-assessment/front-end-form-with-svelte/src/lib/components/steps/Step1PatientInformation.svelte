@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const p = assessment.data.patientInformation;
 </script>
 
-<SectionCard title="Patient Information" description="Please provide the patient's personal details.">
+<Fieldset title="Patient Information" description="Please provide the patient's personal details.">
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
 		<TextInput label="Patient Name" name="patientName" bind:value={p.patientName} placeholder="e.g. John Smith" required />
 		<TextInput label="Date of Birth" name="dateOfBirth" type="date" bind:value={p.dateOfBirth} required />
 	</div>
 
 	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-		<SelectInput
+		<Select
 			label="Sex"
 			name="patientSex"
 			options={[
@@ -36,4 +36,4 @@
 		<TextInput label="Contact Phone" name="contactPhone" type="tel" bind:value={p.contactPhone} placeholder="e.g. 07700 900000" />
 		<TextInput label="Contact Email" name="contactEmail" type="email" bind:value={p.contactEmail} placeholder="e.g. patient@example.com" />
 	</div>
-</SectionCard>
+</Fieldset>
