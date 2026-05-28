@@ -69,6 +69,12 @@ def classify(slug: str) -> tuple[str, str]:
         if size < 800:
             return "EMPTY", f"placeholder page ({size}B), {step_count} steps"
 
+    # Forms with zero .svelte files anywhere under src/ are functionally
+    # empty even if a few engine .ts files exist.
+    total_svelte = sum(1 for _ in (form_dir / "src").rglob("*.svelte")) if (form_dir / "src").is_dir() else 0
+    if total_svelte == 0:
+        return "EMPTY", "no .svelte files under src/"
+
     ui_dir = src_lib / "components" / "ui"
     canonical_present = []
     legacy_present = []

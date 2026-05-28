@@ -504,15 +504,16 @@ commit per form with `git commit --only forms/<slug>/`.
       vaccinations-assessment
     - Plus pre-quota partial commits `d7a1f8ab` (ADR),
       `1c4c7bfc` (UK DVLA V1), `05572406` (who-prehospital-form).
-  - **Live status** via `bin/lily-svelte-status --counts`:
-    PASS=56, PARTIAL=25, TODO=16, EMPTY=36 of 133 (81 of 97
-    implemented = 83.5% Lily-shaped).
-  - **Still pending** (16 TODO): mostly empty scaffolds (no `ui/` dir)
-    plus the UK LPA pair, UK fit-note, eye-prescription, arc42, the
-    last 4 assessments (bone-marrow-donation, endometriosis,
-    first-responder, plastic-surgery, seasonal-affective-disorder,
-    substance-abuse, patient-satisfaction-survey, vaccinations-checklist),
-    ICVP, agile-consulting-scorecard, issue-tracker.
+  - **Wave 4** (subagent post-reset; 6 TODO-able forms):
+    agile-consulting-scorecard-for-hiring-help `4412b7c7`+`82292d5c`,
+    arc42 `8f9f863d`+`b0fa4293`, eye-prescription `84644f0d`+`408fa9ca`,
+    international-certificate-of-vaccination-or-prophylaxis `5a22838a`,
+    united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    `e21d8e98`+`24997489`, united-kingdom-lasting-power-of-attorney-for-
+    health-and-care-decisions `6a82edc9`. Plus UK fit-note `659eb569`.
+  - **Final status** via `bin/lily-svelte-status --counts`:
+    PASS=56, PARTIAL=32, TODO=0, EMPTY=45 of 133. **100% of 88
+    implemented forms are Lily-shaped.**
 - [ ] **5.7  Cleanup.** Remove legacy non-Lily Svelte components; align
   Tailwind theme tokens to the shared Lily class names; ensure
   `bin/lily-svelte-sync --check` and `pnpm check` are clean.
