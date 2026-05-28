@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
@@ -14,11 +14,11 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Situation"
 	description="The first part of the SBAR communication framework. Describe what brought the patient in and what care was delivered at the referral facility."
 >
-	<TextArea
+	<TextAreaInput
 		label="Chief complaint"
 		name="chiefComplaint"
 		bind:value={s.chiefComplaint}
@@ -27,7 +27,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Primary diagnosis"
 		name="primaryDiagnosis"
 		bind:value={s.primaryDiagnosis}
@@ -43,7 +43,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Treatments initiated"
 		name="treatmentsInitiated"
 		bind:value={s.treatmentsInitiated}
@@ -57,4 +57,4 @@
 	<Checkbox label="ICU stay" name="icuStay" bind:checked={s.icuStay} />
 	<Checkbox label="Surgery performed" name="surgery" bind:checked={s.surgery} />
 	<Checkbox label="Hospitalised" name="hospitalized" bind:checked={s.hospitalized} />
-</SectionCard>
+</Fieldset>

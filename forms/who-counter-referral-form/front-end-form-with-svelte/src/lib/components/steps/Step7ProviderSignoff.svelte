@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
 	const s = assessment.data.providerSignOff;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Referral Facility Provider Sign-off"
 	description="The provider at the referral facility certifies the information on this counter-referral form."
 >
@@ -35,4 +35,4 @@
 		Note: Attach a copy of the discharge medication chart or current medications list,
 		including doses and time of last dose.
 	</div>
-</SectionCard>
+</Fieldset>

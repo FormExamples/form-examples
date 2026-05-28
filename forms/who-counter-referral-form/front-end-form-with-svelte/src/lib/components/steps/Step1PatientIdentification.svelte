@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard
+<Fieldset
 	title="Patient Identification"
 	description="Identify the patient being discharged from the referral facility back to primary care."
 >
@@ -57,4 +57,4 @@
 		placeholder="Phone, relationship, etc."
 		required
 	/>
-</SectionCard>
+</Fieldset>

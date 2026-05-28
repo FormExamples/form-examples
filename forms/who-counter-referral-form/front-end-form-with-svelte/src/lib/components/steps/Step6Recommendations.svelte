@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import Checkbox from '$lib/components/ui/Checkbox.svelte';
 
 	const r = assessment.data.recommendations;
 </script>
 
-<SectionCard
+<Fieldset
 	title="Recommendations"
 	description="The fourth part of the SBAR framework. Follow-up plan, pending investigations, deterioration instructions, and status flags."
 >
-	<TextArea
+	<TextAreaInput
 		label="Next steps in follow-up plan"
 		name="followUpPlan"
 		bind:value={r.followUpPlan}
@@ -20,7 +20,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Pending investigations (results awaited)"
 		name="pendingInvestigations"
 		bind:value={r.pendingInvestigations}
@@ -28,7 +28,7 @@
 		placeholder="List any results that are not yet available."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Follow-up arrangements (when, where, with whom)"
 		name="followUpArrangements"
 		bind:value={r.followUpArrangements}
@@ -36,7 +36,7 @@
 		required
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Instructions if patient's condition deteriorates"
 		name="deteriorationInstructions"
 		bind:value={r.deteriorationInstructions}
@@ -86,4 +86,4 @@
 		name="palliativeCare"
 		bind:checked={r.statusFlags.palliativeCare}
 	/>
-</SectionCard>
+</Fieldset>
