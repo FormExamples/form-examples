@@ -1,4 +1,5 @@
 <script lang="ts">
+  // Field — Lily Svelte headless contract.
   import type { Snippet } from 'svelte';
 
   let {
@@ -16,10 +17,8 @@
   } = $props();
 </script>
 
-<div class="mb-4">
-  <label for={id} class="block text-sm font-medium text-slate-700 mb-1">
-    {label}{#if required}<span class="text-red-600" aria-hidden="true"> *</span>{/if}
-  </label>
+<div class="field">
+  <label class="label" for={id} data-required={required || undefined}>{label}</label>
   {@render children()}
-  {#if hint}<p class="text-xs text-slate-500 mt-1">{hint}</p>{/if}
+  {#if hint}<span class="hint">{hint}</span>{/if}
 </div>

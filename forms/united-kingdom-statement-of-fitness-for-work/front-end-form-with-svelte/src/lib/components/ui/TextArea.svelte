@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TextArea — Lily Svelte headless contract.
   let {
     id,
     name,
@@ -19,6 +20,6 @@
   {name}
   {rows}
   {placeholder}
-  class="w-full border rounded px-2 py-1 text-sm leading-snug"
+  class="text-area-input"
   bind:value
 ></textarea>

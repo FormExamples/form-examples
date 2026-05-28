@@ -1,4 +1,5 @@
 <script lang="ts">
+  // YesNoToggle — toggle-button pair using the Lily .button[data-variant] + aria-pressed pattern.
   import type { YesNo } from '$lib/types.js';
 
   let {
@@ -12,10 +13,11 @@
   } = $props();
 </script>
 
-<div {id} class="inline-flex rounded border overflow-hidden" role="radiogroup">
+<div {id} class="button-group" role="radiogroup">
   <button
     type="button"
-    class="px-4 py-1.5 text-sm border-r {value === 'yes' ? 'bg-brand-600 text-white' : 'bg-white text-slate-700 hover:bg-slate-50'}"
+    class="button"
+    data-variant={value === 'yes' ? 'primary' : 'secondary'}
     onclick={() => (value = 'yes')}
     aria-pressed={value === 'yes'}
   >
@@ -23,7 +25,8 @@
   </button>
   <button
     type="button"
-    class="px-4 py-1.5 text-sm {value === 'no' ? 'bg-brand-600 text-white' : 'bg-white text-slate-700 hover:bg-slate-50'}"
+    class="button"
+    data-variant={value === 'no' ? 'primary' : 'secondary'}
     onclick={() => (value = 'no')}
     aria-pressed={value === 'no'}
   >
