@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Cancer History" description="Personal cancer history relevant to hereditary cancer syndromes">
+<Fieldset title="Cancer History" description="Personal cancer history relevant to hereditary cancer syndromes">
 	<RadioGroup label="Do you have a personal history of cancer?" name="personalCancerHistory" options={yesNo} bind:value={c.personalCancerHistory} />
 
 	{#if c.personalCancerHistory === 'yes'}
@@ -35,4 +35,4 @@
 	{/if}
 
 	<RadioGroup label="Have you had multiple primary cancers (different types)?" name="multiplePrimaryCancers" options={yesNo} bind:value={c.multiplePrimaryCancers} />
-</SectionCard>
+</Fieldset>

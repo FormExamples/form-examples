@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const e = assessment.data.ethnicBackground;
 	const yesNo = [
@@ -12,7 +12,7 @@
 	];
 </script>
 
-<SectionCard title="Ethnic Background & Consanguinity" description="Ethnic heritage and family relationships relevant to genetic risk">
+<Fieldset title="Ethnic Background & Consanguinity" description="Ethnic heritage and family relationships relevant to genetic risk">
 	<TextInput
 		label="Ethnicity / ancestral background"
 		name="ethnicity"
@@ -24,11 +24,11 @@
 
 	<RadioGroup label="Is there consanguinity (blood relationship) in your family?" name="ethnicConsanguinity" options={yesNo} bind:value={e.consanguinity} />
 	{#if e.consanguinity === 'yes'}
-		<TextArea
+		<TextAreaInput
 			label="Please provide details"
 			name="consanguinityDetails"
 			bind:value={e.consanguinityDetails}
 			placeholder="Describe the relationship (e.g., first cousins, second cousins)..."
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>

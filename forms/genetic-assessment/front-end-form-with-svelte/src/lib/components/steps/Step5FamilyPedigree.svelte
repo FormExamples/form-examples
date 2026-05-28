@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const f = assessment.data.familyPedigree;
@@ -21,12 +21,12 @@
 	] as const;
 </script>
 
-<SectionCard title="Family Pedigree" description="Three-generation family history of medical conditions and cancers">
+<Fieldset title="Family Pedigree" description="Three-generation family history of medical conditions and cancers">
 	{#each familyMembers as member}
 		<div class="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
 			<h3 class="mb-3 text-sm font-bold text-gray-800">{member.label}</h3>
 
-			<TextArea
+			<TextAreaInputInput
 				label="Medical conditions"
 				name="{member.key}Conditions"
 				bind:value={member.data.conditions}
@@ -66,7 +66,7 @@
 		</div>
 	{/each}
 
-	<TextArea
+	<TextAreaInput
 		label="Siblings (conditions, cancers, age at diagnosis)"
 		name="siblings"
 		bind:value={f.siblings}
@@ -74,11 +74,11 @@
 		rows={3}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Children (conditions, cancers, age at diagnosis)"
 		name="children"
 		bind:value={f.children}
 		placeholder="List children and any relevant medical history..."
 		rows={3}
 	/>
-</SectionCard>
+</Fieldset>

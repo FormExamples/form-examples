@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const g = assessment.data.geneticTestingHistory;
 	const yesNo = [
@@ -11,17 +11,17 @@
 	];
 </script>
 
-<SectionCard title="Genetic Testing History" description="Previous genetic tests and counseling history">
+<Fieldset title="Genetic Testing History" description="Previous genetic tests and counseling history">
 	<RadioGroup label="Have you had any previous genetic tests?" name="previousGeneticTests" options={yesNo} bind:value={g.previousGeneticTests} />
 	{#if g.previousGeneticTests === 'yes'}
-		<TextArea
+		<TextAreaInput
 			label="What tests were performed?"
 			name="previousGeneticTestsDetails"
 			bind:value={g.previousGeneticTestsDetails}
 			placeholder="e.g., BRCA panel, carrier screening, whole exome sequencing..."
 		/>
 
-		<TextArea
+		<TextAreaInput
 			label="Test results"
 			name="testResults"
 			bind:value={g.testResults}
@@ -33,11 +33,11 @@
 
 	<RadioGroup label="Have any variants of uncertain significance (VUS) been identified?" name="variantsOfUncertainSignificance" options={yesNo} bind:value={g.variantsOfUncertainSignificance} />
 	{#if g.variantsOfUncertainSignificance === 'yes'}
-		<TextArea
+		<TextAreaInput
 			label="Please provide details about the VUS"
 			name="variantsOfUncertainSignificanceDetails"
 			bind:value={g.variantsOfUncertainSignificanceDetails}
 			placeholder="Gene name, variant, classification..."
 		/>
 	{/if}
-</SectionCard>
+</Fieldset>
