@@ -1,4 +1,5 @@
 <script lang="ts">
+  // SelectField — Lily Svelte headless contract (select).
   interface Option {
     value: string;
     label: string;
@@ -23,20 +24,20 @@
   const id = `s-${Math.random().toString(36).slice(2, 10)}`;
 </script>
 
-<label for={id} class="block">
-  <span class="mb-1 block text-sm font-medium text-slate-700">
-    {label}{#if required}<span class="text-red-600" aria-label="required"> *</span>{/if}
-  </span>
+<div class="field">
+  <label for={id} class="label" data-required={required || undefined}>
+    {label}
+  </label>
   <select
     {id}
     bind:value
     onchange={() => onchange?.()}
-    class="w-full rounded border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+    class="select"
   >
     <option value="">— select —</option>
     {#each options as opt (opt.value)}
       <option value={opt.value}>{opt.label}</option>
     {/each}
   </select>
-  {#if hint}<p class="mt-1 text-xs text-slate-500">{hint}</p>{/if}
-</label>
+  {#if hint}<span class="hint">{hint}</span>{/if}
+</div>

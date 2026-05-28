@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TextAreaField — Lily Svelte headless contract (text-area-input).
   interface Props {
     label: string;
     value: string;
@@ -18,15 +19,15 @@
   const id = `t-${Math.random().toString(36).slice(2, 10)}`;
 </script>
 
-<label for={id} class="block">
-  <span class="mb-1 block text-sm font-medium text-slate-700">{label}</span>
+<div class="field">
+  <label for={id} class="label">{label}</label>
   <textarea
     {id}
     {rows}
     {placeholder}
     bind:value
     oninput={() => onchange?.()}
-    class="w-full rounded border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+    class="text-area-input"
   ></textarea>
-  {#if hint}<p class="mt-1 text-xs text-slate-500">{hint}</p>{/if}
-</label>
+  {#if hint}<span class="hint">{hint}</span>{/if}
+</div>

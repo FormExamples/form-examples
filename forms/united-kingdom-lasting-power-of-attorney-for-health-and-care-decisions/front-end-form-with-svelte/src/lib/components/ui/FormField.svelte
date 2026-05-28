@@ -1,4 +1,7 @@
 <script lang="ts">
+  // FormField — Lily Svelte headless contract.
+  // Emits the Lily class vocabulary: field / label / text-input / date-input /
+  // email-input / tel-input / hint.
   interface Props {
     label: string;
     value: string;
@@ -19,19 +22,33 @@
   }: Props = $props();
 
   const id = `f-${Math.random().toString(36).slice(2, 10)}`;
+
+  const inputClass = $derived.by(() => {
+    switch (type) {
+      case 'date':
+      case 'datetime-local':
+        return 'date-input';
+      case 'email':
+        return 'email-input';
+      case 'tel':
+        return 'tel-input';
+      default:
+        return 'text-input';
+    }
+  });
 </script>
 
-<label for={id} class="block">
-  <span class="mb-1 block text-sm font-medium text-slate-700">
-    {label}{#if required}<span class="text-red-600" aria-label="required"> *</span>{/if}
-  </span>
+<div class="field">
+  <label for={id} class="label" data-required={required || undefined}>
+    {label}
+  </label>
   <input
     {id}
     {type}
     {placeholder}
     bind:value
     oninput={() => onchange?.()}
-    class="w-full rounded border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+    class={inputClass}
   />
-  {#if hint}<p class="mt-1 text-xs text-slate-500">{hint}</p>{/if}
-</label>
+  {#if hint}<span class="hint">{hint}</span>{/if}
+</div>

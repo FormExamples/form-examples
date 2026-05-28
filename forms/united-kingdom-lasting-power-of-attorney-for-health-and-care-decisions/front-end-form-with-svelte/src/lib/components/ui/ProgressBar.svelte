@@ -1,4 +1,5 @@
 <script lang="ts">
+  // ProgressBar — Lily Svelte headless contract (emits class="progress").
   interface Props {
     current: number;
     total: number;
@@ -7,12 +8,15 @@
   const percent = $derived(Math.round((current / total) * 100));
 </script>
 
-<div class="w-full" aria-live="polite">
-  <div class="mb-1 flex items-center justify-between text-xs text-slate-600">
+<div class="field" aria-live="polite">
+  <div class="hint">
     <span>Step {current} of {total}</span>
-    <span>{percent}%</span>
+    <span> · {percent}%</span>
   </div>
-  <div class="h-2 w-full rounded-full bg-slate-200">
-    <div class="h-2 rounded-full bg-brand-500 transition-all" style="width: {percent}%"></div>
-  </div>
+  <progress
+    class="progress"
+    value={percent}
+    max="100"
+    aria-label="Wizard progress"
+  ></progress>
 </div>
