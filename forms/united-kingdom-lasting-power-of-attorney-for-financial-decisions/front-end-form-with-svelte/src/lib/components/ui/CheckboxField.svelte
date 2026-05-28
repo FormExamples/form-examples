@@ -1,4 +1,5 @@
 <script lang="ts">
+  // CheckboxField — Lily Svelte headless contract (checkbox-input).
   let {
     label,
     checked = $bindable(false),
@@ -8,7 +9,7 @@
   } = $props();
 </script>
 
-<label class="inline-flex items-start gap-2">
-  <input type="checkbox" bind:checked class="mt-1" />
-  <span class="text-sm text-slate-700">{label}</span>
+<label class="checkbox-input">
+  <input type="checkbox" bind:checked />
+  <span>{label}</span>
 </label>

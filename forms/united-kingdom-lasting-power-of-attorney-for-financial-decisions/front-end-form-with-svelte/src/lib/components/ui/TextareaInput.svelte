@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TextareaInput — Lily Svelte headless contract (text-area-input).
   let {
     value = $bindable(''),
     rows = 4,
@@ -17,6 +18,6 @@
   {maxlength}
   {placeholder}
   bind:value
-  class="w-full border border-slate-300 rounded px-2 py-1 focus:outline-none focus:ring focus:ring-brand-500"
+  class="text-area-input"
 ></textarea>
-<span class="text-xs text-slate-500">{value.length} / {maxlength}</span>
+<span class="hint">{value.length} / {maxlength}</span>
