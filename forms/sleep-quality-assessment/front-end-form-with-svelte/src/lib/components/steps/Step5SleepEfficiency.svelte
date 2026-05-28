@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { sleepEfficiencyCalc } from '$lib/engine/utils';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 
@@ -10,7 +10,7 @@
 	const efficiency = $derived(sleepEfficiencyCalc(e.hoursAsleep, e.hoursInBed));
 </script>
 
-<SectionCard title="Sleep Efficiency" description="The proportion of time in bed spent actually sleeping">
+<Fieldset title="Sleep Efficiency" description="The proportion of time in bed spent actually sleeping">
 	<TextInput
 		label="What time do you go to bed?"
 		name="effBedtime"
@@ -67,4 +67,4 @@
 			</p>
 		</div>
 	{/if}
-</SectionCard>
+</Fieldset>

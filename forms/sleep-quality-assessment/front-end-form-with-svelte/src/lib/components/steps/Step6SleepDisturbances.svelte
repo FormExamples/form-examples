@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const s = assessment.data.sleepDisturbances;
 
@@ -14,7 +14,7 @@
 	];
 </script>
 
-<SectionCard title="Sleep Disturbances" description="Factors that have disrupted your sleep during the past month">
+<Fieldset title="Sleep Disturbances" description="Factors that have disrupted your sleep during the past month">
 	<RadioGroup
 		label="Wake up in the middle of the night or early morning"
 		name="wakeUpMiddleNight"
@@ -71,10 +71,10 @@
 		bind:value={s.pain}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Any other disturbances not listed above?"
 		name="otherDisturbances"
 		bind:value={s.otherDisturbances}
 		placeholder="Describe any other reasons that have disturbed your sleep..."
 	/>
-</SectionCard>
+</Fieldset>

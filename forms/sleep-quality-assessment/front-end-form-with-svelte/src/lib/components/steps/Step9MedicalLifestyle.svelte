@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const m = assessment.data.medicalLifestyle;
 
@@ -13,8 +13,8 @@
 	];
 </script>
 
-<SectionCard title="Medical & Lifestyle Factors" description="Lifestyle habits and medical conditions that may affect sleep">
-	<SelectInput
+<Fieldset title="Medical & Lifestyle Factors" description="Lifestyle habits and medical conditions that may affect sleep">
+	<Select
 		label="Daily caffeine intake (coffee, tea, energy drinks)"
 		name="caffeineIntake"
 		options={[
@@ -26,7 +26,7 @@
 		bind:value={m.caffeineIntake}
 	/>
 
-	<SelectInput
+	<Select
 		label="Alcohol use"
 		name="alcoholUse"
 		options={[
@@ -38,7 +38,7 @@
 		bind:value={m.alcoholUse}
 	/>
 
-	<SelectInput
+	<Select
 		label="Exercise frequency"
 		name="exerciseFrequency"
 		options={[
@@ -50,7 +50,7 @@
 		bind:value={m.exerciseFrequency}
 	/>
 
-	<SelectInput
+	<Select
 		label="Screen time before bed (phone, tablet, computer, TV)"
 		name="screenTimeBeforeBed"
 		options={[
@@ -69,17 +69,17 @@
 		bind:value={m.shiftWork}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Medical conditions that may affect sleep"
 		name="medicalConditions"
 		bind:value={m.medicalConditions}
 		placeholder="e.g., chronic pain, GERD, depression, anxiety, restless legs..."
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Current medications (that may affect sleep)"
 		name="currentMedications"
 		bind:value={m.currentMedications}
 		placeholder="List any medications you are currently taking..."
 	/>
-</SectionCard>
+</Fieldset>

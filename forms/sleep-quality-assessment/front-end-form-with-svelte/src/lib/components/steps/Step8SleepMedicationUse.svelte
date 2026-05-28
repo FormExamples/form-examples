@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const m = assessment.data.sleepMedicationUse;
@@ -18,7 +18,7 @@
 	];
 </script>
 
-<SectionCard title="Sleep Medication Use" description="Medication used to help you sleep">
+<Fieldset title="Sleep Medication Use" description="Medication used to help you sleep">
 	<RadioGroup
 		label="Do you currently use prescription sleep medications?"
 		name="prescriptionSleepMeds"
@@ -42,4 +42,4 @@
 		bind:value={m.frequency}
 		required
 	/>
-</SectionCard>
+</Fieldset>

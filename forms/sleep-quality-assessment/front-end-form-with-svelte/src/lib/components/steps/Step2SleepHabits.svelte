@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const h = assessment.data.sleepHabits;
 </script>
 
-<SectionCard title="Sleep Habits" description="Your typical sleep patterns over the past month">
+<Fieldset title="Sleep Habits" description="Your typical sleep patterns over the past month">
 	<TextInput
 		label="What time do you usually go to bed?"
 		name="usualBedtime"
@@ -47,7 +47,7 @@
 		required
 	/>
 
-	<SelectInput
+	<Select
 		label="How would you rate your overall sleep environment?"
 		name="sleepEnvironment"
 		options={[
@@ -59,4 +59,4 @@
 		bind:value={h.sleepEnvironment}
 		required
 	/>
-</SectionCard>
+</Fieldset>

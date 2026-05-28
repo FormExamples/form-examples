@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const l = assessment.data.sleepLatency;
@@ -13,7 +13,7 @@
 	];
 </script>
 
-<SectionCard title="Sleep Latency" description="How easily you fall asleep and stay asleep">
+<Fieldset title="Sleep Latency" description="How easily you fall asleep and stay asleep">
 	<RadioGroup
 		label="During the past month, how often have you had trouble falling asleep within 30 minutes?"
 		name="timeToFallAsleep"
@@ -29,4 +29,4 @@
 		bind:value={l.wakeUpDuringNight}
 		required
 	/>
-</SectionCard>
+</Fieldset>

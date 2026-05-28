@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.daytimeDysfunction;
@@ -18,7 +18,7 @@
 	];
 </script>
 
-<SectionCard title="Daytime Dysfunction" description="How your sleep quality affects your daily life">
+<Fieldset title="Daytime Dysfunction" description="How your sleep quality affects your daily life">
 	<RadioGroup
 		label="During the past month, how often have you had trouble staying awake while driving, eating, or engaging in social activity?"
 		name="troubleStayingAwake"
@@ -42,4 +42,4 @@
 		bind:value={d.drivingDrowsiness}
 		required
 	/>
-</SectionCard>
+</Fieldset>
