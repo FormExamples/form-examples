@@ -3,11 +3,11 @@
   import { assessment } from '$lib/stores/assessment.svelte';
   import { calculatePriorityLevel } from '$lib/engine/prescription-grader';
   import { detectAdditionalFlags } from '$lib/engine/flagged-issues';
-  import SectionCard from '$lib/components/ui/SectionCard.svelte';
+  import Fieldset from '$lib/components/ui/Fieldset.svelte';
   import TextInput from '$lib/components/ui/TextInput.svelte';
-  import TextArea from '$lib/components/ui/TextArea.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-  import SelectInput from '$lib/components/ui/SelectInput.svelte';
+  import Select from '$lib/components/ui/Select.svelte';
 
   const p = assessment.data.patientInformation;
   const c = assessment.data.clinicianInformation;
@@ -66,7 +66,7 @@
 
   <main class="mx-auto max-w-3xl px-4 py-6">
     <!-- Section 1: Patient Information -->
-    <SectionCard title="Patient Information" description="Details of the patient requesting the prescription">
+    <Fieldset title="Patient Information" description="Details of the patient requesting the prescription">
       <div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
         <TextInput label="First Name" name="firstName" bind:value={p.firstName} required />
         <TextInput label="Last Name" name="lastName" bind:value={p.lastName} required />
@@ -76,10 +76,10 @@
         <TextInput label="Phone" name="phone" bind:value={p.phone} required />
         <TextInput label="Email" name="email" type="email" bind:value={p.email} />
       </div>
-    </SectionCard>
+    </Fieldset>
 
     <!-- Section 2: Clinician Information -->
-    <SectionCard title="Clinician Information" description="Details of the prescribing clinician">
+    <Fieldset title="Clinician Information" description="Details of the prescribing clinician">
       <div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
         <TextInput label="First Name" name="clinFirstName" bind:value={c.firstName} required />
         <TextInput label="Last Name" name="clinLastName" bind:value={c.lastName} required />
@@ -89,34 +89,34 @@
         <TextInput label="Phone" name="clinPhone" bind:value={c.phone} required />
         <TextInput label="Email" name="clinEmail" type="email" bind:value={c.email} />
       </div>
-    </SectionCard>
+    </Fieldset>
 
     <!-- Section 3: Prescription Details -->
-    <SectionCard title="Prescription Details" description="Medication and dosage information">
+    <Fieldset title="Prescription Details" description="Medication and dosage information">
       <TextInput label="Request Date" name="requestDate" type="date" bind:value={d.requestDate} required />
       <TextInput label="Medication Name" name="medicationName" bind:value={d.medicationName} required placeholder="e.g. Amoxicillin" />
       <div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
         <TextInput label="Dosage" name="dosage" bind:value={d.dosage} required placeholder="e.g. 500mg" />
         <TextInput label="Frequency" name="frequency" bind:value={d.frequency} placeholder="e.g. TDS, BD, OD" />
       </div>
-      <SelectInput label="Route of Administration" name="route" options={routeOptions} bind:value={d.routeOfAdministration} />
-      <TextArea label="Treatment Instructions" name="treatmentInstructions" bind:value={d.treatmentInstructions} placeholder="Instructions for the patient..." />
-    </SectionCard>
+      <Selectlabel="Route of Administration" name="route" options={routeOptions} bind:value={d.routeOfAdministration} />
+      <TextAreaInputlabel="Treatment Instructions" name="treatmentInstructions" bind:value={d.treatmentInstructions} placeholder="Instructions for the patient..." />
+    </Fieldset>
 
     <!-- Section 4: Substitution Options -->
-    <SectionCard title="Substitution Options" description="Indicate whether alternatives are acceptable">
+    <Fieldset title="Substitution Options" description="Indicate whether alternatives are acceptable">
       <RadioGroup label="Allow brand name substitution?" name="allowBrand" options={yesNoOptions} bind:value={s.allowBrandSubstitution} />
       <RadioGroup label="Allow generic substitution?" name="allowGeneric" options={yesNoOptions} bind:value={s.allowGenericSubstitution} />
       <RadioGroup label="Allow dosage adjustment?" name="allowDosage" options={yesNoOptions} bind:value={s.allowDosageAdjustment} />
-      <TextArea label="Substitution Notes" name="substitutionNotes" bind:value={s.substitutionNotes} placeholder="Any additional notes about substitution preferences..." />
-    </SectionCard>
+      <TextAreaInputlabel="Substitution Notes" name="substitutionNotes" bind:value={s.substitutionNotes} placeholder="Any additional notes about substitution preferences..." />
+    </Fieldset>
 
     <!-- Section 5: Request Type -->
-    <SectionCard title="Request Type" description="Classify this prescription request">
+    <Fieldset title="Request Type" description="Classify this prescription request">
       <RadioGroup label="Is this a new prescription or a refill?" name="isNew" options={newRefillOptions} bind:value={r.isNewPrescription} required />
       <RadioGroup label="Is this an emergency request?" name="isEmergency" options={emergencyOptions} bind:value={r.isEmergency} required />
-      <TextArea label="Additional Notes" name="additionalNotes" bind:value={r.additionalNotes} placeholder="Any other information relevant to this request..." />
-    </SectionCard>
+      <TextAreaInputlabel="Additional Notes" name="additionalNotes" bind:value={r.additionalNotes} placeholder="Any other information relevant to this request..." />
+    </Fieldset>
 
     <!-- Submit -->
     <div class="mt-4 mb-12 flex justify-end">
