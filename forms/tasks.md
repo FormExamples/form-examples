@@ -490,13 +490,29 @@ commit per form with `git commit --only forms/<slug>/`.
     referral `1518a81a`, WHO emergency-first-aid `efbba49d`, WHO
     emergency-unit-general `b8a97a5e`, WHO emergency-unit-trauma
     `069fe1e8`.
-  - **Still pending** (subagent quota exhaustion; resume after reset):
-    sleep-quality, stroke, urology, vaccinations, hormone-replacement-
-    therapy, UK DVLA V1, UK LPA-financial, UK LPA-health-care, UK
-    NHS-medical-exemption, UK fit-note, who-prehospital-form (partial
-    WIP in working tree), architecture-decision-record (partial WIP),
-    eye-prescription, arc42 (likely empty scaffold). Plus ICVP not yet
-    tackled. Total ~13 forms.
+  - **Manual session work** after subagent quota exhausted (in-place
+    Lily-class refactors; legacy component names retained):
+    - prescription-request `f23ebe6e`
+    - screening-program-privacy-notice `92a34e88`
+    - legal-requirements-privacy-notice `9a57a2b1`
+    - medical-error-report `5b9ddb05`
+    - birth-control-assessment `c3f95e20`
+    - bulk batch `7ab7f7be`: employee-onboarding-checklist,
+      ergonomic-assessment, hormone-replacement-therapy-assessment,
+      sleep-quality-assessment, stroke-assessment, urology-assessment
+    - `e063a075`: united-kingdom-nhs-england-medical-exemption-certificate,
+      vaccinations-assessment
+    - Plus pre-quota partial commits `d7a1f8ab` (ADR),
+      `1c4c7bfc` (UK DVLA V1), `05572406` (who-prehospital-form).
+  - **Live status** via `bin/lily-svelte-status --counts`:
+    PASS=56, PARTIAL=25, TODO=16, EMPTY=36 of 133 (81 of 97
+    implemented = 83.5% Lily-shaped).
+  - **Still pending** (16 TODO): mostly empty scaffolds (no `ui/` dir)
+    plus the UK LPA pair, UK fit-note, eye-prescription, arc42, the
+    last 4 assessments (bone-marrow-donation, endometriosis,
+    first-responder, plastic-surgery, seasonal-affective-disorder,
+    substance-abuse, patient-satisfaction-survey, vaccinations-checklist),
+    ICVP, agile-consulting-scorecard, issue-tracker.
 - [ ] **5.7  Cleanup.** Remove legacy non-Lily Svelte components; align
   Tailwind theme tokens to the shared Lily class names; ensure
   `bin/lily-svelte-sync --check` and `pnpm check` are clean.
