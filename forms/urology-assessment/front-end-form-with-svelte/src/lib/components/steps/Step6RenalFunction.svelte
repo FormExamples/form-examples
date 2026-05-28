@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import NumberInput from '$lib/components/ui/NumberInput.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 
 	const r = assessment.data.renalFunction;
 </script>
 
-<SectionCard title="Renal Function" description="Laboratory results and prostate-specific antigen levels">
+<Fieldset title="Renal Function" description="Laboratory results and prostate-specific antigen levels">
 	<NumberInput
 		label="Creatinine"
 		name="creatinine"
@@ -29,7 +29,7 @@
 		step={1}
 	/>
 
-	<TextArea
+	<TextAreaInput
 		label="Urinalysis results"
 		name="urinalysis"
 		bind:value={r.urinalysis}
@@ -52,4 +52,4 @@
 		type="date"
 		bind:value={r.psaDate}
 	/>
-</SectionCard>
+</Fieldset>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
-	import SelectInput from '$lib/components/ui/SelectInput.svelte';
+	import Select from '$lib/components/ui/Select.svelte';
 
 	const u = assessment.data.urinarySymptoms;
 	const yesNo = [
@@ -11,7 +11,7 @@
 	];
 </script>
 
-<SectionCard title="Urinary Symptoms" description="Detailed urinary symptom assessment">
+<Fieldset title="Urinary Symptoms" description="Detailed urinary symptom assessment">
 	<RadioGroup label="Do you experience increased urinary frequency?" name="frequency" options={yesNo} bind:value={u.frequency} />
 
 	<RadioGroup label="Do you experience urinary urgency?" name="urgency" options={yesNo} bind:value={u.urgency} />
@@ -20,7 +20,7 @@
 
 	<RadioGroup label="Do you experience hesitancy when starting to urinate?" name="hesitancy" options={yesNo} bind:value={u.hesitancy} />
 
-	<SelectInput
+	<Select
 		label="How would you describe your urinary stream?"
 		name="stream"
 		options={[
@@ -37,7 +37,7 @@
 
 	<RadioGroup label="Do you experience pain or burning during urination (dysuria)?" name="dysuria" options={yesNo} bind:value={u.dysuria} />
 
-	<SelectInput
+	<Select
 		label="Do you experience urinary incontinence?"
 		name="incontinence"
 		options={[
@@ -49,4 +49,4 @@
 		]}
 		bind:value={u.incontinence}
 	/>
-</SectionCard>
+</Fieldset>

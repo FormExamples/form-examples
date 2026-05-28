@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
 	import { ipssQuestions, ipssResponseOptions } from '$lib/engine/ipss-rules';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import type { IPSSScore } from '$lib/engine/types';
 
 	const q = assessment.data.ipssQuestionnaire;
@@ -13,7 +13,7 @@
 	}
 </script>
 
-<SectionCard title="IPSS Questionnaire" description="International Prostate Symptom Score - rate your urinary symptoms over the past month">
+<Fieldset title="IPSS Questionnaire" description="International Prostate Symptom Score - rate your urinary symptoms over the past month">
 	{#each ipssQuestions as question, i}
 		<div class="mb-6 border-b border-gray-100 pb-4 last:border-0 last:pb-0">
 			<p class="mb-3 text-sm font-medium text-gray-700">
@@ -41,4 +41,4 @@
 			</div>
 		</div>
 	{/each}
-</SectionCard>
+</Fieldset>

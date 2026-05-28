@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import TextArea from '$lib/components/ui/TextArea.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 
 	const c = assessment.data.chiefComplaint;
 </script>
 
-<SectionCard title="Chief Complaint" description="Describe your primary urological concern">
-	<TextArea
+<Fieldset title="Chief Complaint" description="Describe your primary urological concern">
+	<TextAreaInput
 		label="What is your primary urological concern?"
 		name="primaryConcern"
 		bind:value={c.primaryConcern}
@@ -35,4 +35,4 @@
 		bind:value={c.urgency}
 		required
 	/>
-</SectionCard>
+</Fieldset>
