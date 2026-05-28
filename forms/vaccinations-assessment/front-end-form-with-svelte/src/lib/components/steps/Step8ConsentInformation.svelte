@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { assessment } from '$lib/stores/assessment.svelte';
-	import SectionCard from '$lib/components/ui/SectionCard.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import RadioGroup from '$lib/components/ui/RadioGroup.svelte';
 	import NumericSelect from '$lib/components/ui/NumericSelect.svelte';
@@ -16,7 +16,7 @@
 	];
 </script>
 
-<SectionCard title="Consent & Information" description="Record consent quality and information provision. Rate 1 (Very Poor) to 5 (Excellent).">
+<Fieldset title="Consent & Information" description="Record consent quality and information provision. Rate 1 (Very Poor) to 5 (Excellent).">
 	<NumericSelect label="Information provided about the vaccine" name="informationProvided" options={likertOptions} bind:numericValue={ci.informationProvided} />
 	<NumericSelect label="Risks explained" name="risksExplained" options={likertOptions} bind:numericValue={ci.risksExplained} />
 	<NumericSelect label="Benefits explained" name="benefitsExplained" options={likertOptions} bind:numericValue={ci.benefitsExplained} />
@@ -37,4 +37,4 @@
 		]}
 		bind:value={ci.guardianConsent}
 	/>
-</SectionCard>
+</Fieldset>
