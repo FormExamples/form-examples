@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import ProgressBar from '$lib/components/ui/ProgressBar.svelte';
+  import Progress from '$lib/components/ui/Progress.svelte';
   import Step01Donor from '$lib/components/steps/Step01Donor.svelte';
   import Step02Scope from '$lib/components/steps/Step02Scope.svelte';
   import Step03Attorneys from '$lib/components/steps/Step03Attorneys.svelte';
@@ -29,7 +29,7 @@
 </script>
 
 <div class="mb-6">
-  <ProgressBar current={stepNumber} total={STEP_COUNT} />
+  <Progress current={stepNumber} total={STEP_COUNT} />
 </div>
 
 <nav class="mb-6 flex items-center justify-between text-sm">
