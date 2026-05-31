@@ -1,1 +1,0 @@
-import{V as p,l as o,e as t,ax as l}from"./CIVlgTU4.js";import{B as c}from"./CGZcaLJv.js";function u(a,s,...e){var r=new c(a);p(()=>{const n=s()??null;t&&n==null&&l(),r.ensure(n,n&&(i=>n(i,...e)))},o)}export{u as s};
