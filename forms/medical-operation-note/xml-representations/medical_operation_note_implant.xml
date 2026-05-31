@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note_implant SYSTEM "medical_operation_note_implant.dtd">
+<medical_operation_note_implant>
+<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_operation_note_id>770e8400-e29b-41d4-a716-446655440002</medical_operation_note_id>
+<category>suture</category>
+<name>Example</name>
+<size_or_gauge></size_or_gauge>
+<quantity>1</quantity>
+<manufacturer></manufacturer>
+<lot_number></lot_number>
+<serial_number></serial_number>
+<batch_number></batch_number>
+<expiry_date>2026-01-15</expiry_date>
+<udi_di></udi_di>
+<implant_site>Example text.</implant_site>
+<registry_required>yes</registry_required>
+<registry_submitted>yes</registry_submitted>
+<notes>Example text.</notes>
+</medical_operation_note_implant>

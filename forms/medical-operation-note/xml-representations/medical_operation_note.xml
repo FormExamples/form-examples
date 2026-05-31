@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note SYSTEM "medical_operation_note.dtd">
+<medical_operation_note>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<lead_surgeon_id>660e8400-e29b-41d4-a716-446655440001</lead_surgeon_id>
+<status>draft</status>
+<hospital_name>Example</hospital_name>
+<theatre_number></theatre_number>
+<list_type>elective</list_type>
+<case_start_at>2026-04-09T10:00:00Z</case_start_at>
+<anaesthesia_start_at>2026-04-09T10:00:00Z</anaesthesia_start_at>
+<knife_to_skin_at>2026-04-09T10:00:00Z</knife_to_skin_at>
+<end_of_surgery_at>2026-04-09T10:00:00Z</end_of_surgery_at>
+<case_end_at>2026-04-09T10:00:00Z</case_end_at>
+<consent_status>written</consent_status>
+<side_marked>yes</side_marked>
+<sign_in_completed>yes</sign_in_completed>
+<asa_physical_status>I</asa_physical_status>
+<pre_operative_diagnosis>Under investigation</pre_operative_diagnosis>
+<post_operative_diagnosis>Under investigation</post_operative_diagnosis>
+<indication></indication>
+<urgency>elective</urgency>
+<laterality>left</laterality>
+<anaesthesia_type>general</anaesthesia_type>
+<airway_management>face-mask</airway_management>
+<induction_agent></induction_agent>
+<maintenance_agent></maintenance_agent>
+<neuromuscular_blockade></neuromuscular_blockade>
+<regional_block_description>Example text.</regional_block_description>
+<invasive_monitoring></invasive_monitoring>
+<intraop_crystalloid_ml>1</intraop_crystalloid_ml>
+<intraop_colloid_ml>1</intraop_colloid_ml>
+<intraop_blood_ml>1</intraop_blood_ml>
+<intraop_urine_ml>1</intraop_urine_ml>
+<anaesthetic_event>none</anaesthetic_event>
+<anaesthetic_event_description>Example text.</anaesthetic_event_description>
+<patient_position>supine</patient_position>
+<pressure_area_protection_notes>Example text.</pressure_area_protection_notes>
+<prep_solution>chlorhexidine-alcohol</prep_solution>
+<drape_type>standard</drape_type>
+<surgical_approach>open</surgical_approach>
+<incision_type>standard</incision_type>
+<incision_length_cm>0.0</incision_length_cm>
+<table_tilt>neutral</table_tilt>
+<tourniquet_used>yes</tourniquet_used>
+<tourniquet_site>Example location</tourniquet_site>
+<tourniquet_pressure_mmhg>1</tourniquet_pressure_mmhg>
+<tourniquet_on_at>2026-04-09T10:00:00Z</tourniquet_on_at>
+<tourniquet_off_at>2026-04-09T10:00:00Z</tourniquet_off_at>
+<converted_to_open>yes</converted_to_open>
+<conversion_reason>Example text.</conversion_reason>
+<operative_findings_summary>Example text.</operative_findings_summary>
+<pathology_found></pathology_found>
+<anatomical_anomalies></anatomical_anomalies>
+<intraop_photographs_taken>yes</intraop_photographs_taken>
+<frozen_section_requested>yes</frozen_section_requested>
+<swab_count_first_agreed>yes</swab_count_first_agreed>
+<swab_count_final_agreed>yes</swab_count_final_agreed>
+<needle_count_first_agreed>yes</needle_count_first_agreed>
+<needle_count_final_agreed>yes</needle_count_final_agreed>
+<instrument_count_first_agreed>yes</instrument_count_first_agreed>
+<instrument_count_final_agreed>yes</instrument_count_final_agreed>
+<count_discrepancy_resolution></count_discrepancy_resolution>
+<estimated_blood_loss_ml>1</estimated_blood_loss_ml>
+<transfusion_given>yes</transfusion_given>
+<prbc_units>1</prbc_units>
+<ffp_units>1</ffp_units>
+<platelet_units>1</platelet_units>
+<cryoprecipitate_units>1</cryoprecipitate_units>
+<cell_salvage_ml>45</cell_salvage_ml>
+<massive_haemorrhage_protocol_activated>yes</massive_haemorrhage_protocol_activated>
+<never_event_flagged>yes</never_event_flagged>
+<never_event_description>Example text.</never_event_description>
+<equipment_problem>yes</equipment_problem>
+<equipment_problem_description>Example text.</equipment_problem_description>
+<recovery_destination>pacu</recovery_destination>
+<monitoring_frequency>twice daily</monitoring_frequency>
+<iv_fluids_plan>Example text.</iv_fluids_plan>
+<analgesia_plan>Example text.</analgesia_plan>
+<antibiotic_plan>Example text.</antibiotic_plan>
+<vte_prophylaxis_plan>Example text.</vte_prophylaxis_plan>
+<diet_plan>nbm</diet_plan>
+<mobilisation_plan>Example text.</mobilisation_plan>
+<wound_care_plan>Example text.</wound_care_plan>
+<follow_up_plan>Example text.</follow_up_plan>
+<special_instructions>Example text.</special_instructions>
+<sign_out_completed>yes</sign_out_completed>
+<debrief_completed>yes</debrief_completed>
+<surgeon_override_grade>routine</surgeon_override_grade>
+<surgeon_override_reason>Example text.</surgeon_override_reason>
+<attestation_text>Example text.</attestation_text>
+<electronic_signature></electronic_signature>
+<dictated_at>2026-04-09T10:00:00Z</dictated_at>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</medical_operation_note>

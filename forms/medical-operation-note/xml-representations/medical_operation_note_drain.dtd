@@ -1,0 +1,15 @@
+<!ELEMENT medical_operation_note_drain (id,created_at,updated_at,deleted_at,medical_operation_note_id,device_type,name,site,size_or_gauge,output_target,removal_plan,removal_by_date,quantity,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_operation_note_id (#PCDATA)>
+<!ELEMENT device_type (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT site (#PCDATA)>
+<!ELEMENT size_or_gauge (#PCDATA)>
+<!ELEMENT output_target (#PCDATA)>
+<!ELEMENT removal_plan (#PCDATA)>
+<!ELEMENT removal_by_date (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

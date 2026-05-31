@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit medical_operation_note_step: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+Edit medical_operation_note_step: {{ item.id }}
+{% endblock page_title %}
+
+{% block content %}
+<div class="mb-10">
+    <div id="error-message" class="mt-4 text-sm text-red-600"></div>
+    <form hx-put="/medical_operation_note_steps/{{ item.id }}" hx-ext="submitjson" hx-target="#success-message" class="flex-1 lg:max-w-2xl">
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">deleted_at</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="deleted_at" name="deleted_at" type="datetime-local" value="{{item.deleted_at}}"  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">medical_operation_note_id</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" min="-2147483648" max="2147483647" id="medical_operation_note_id" name="medical_operation_note_id" type="number" value="{{item.medical_operation_note_id}}"  step="1" />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">step_number</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" min="-2147483648" max="2147483647" id="step_number" name="step_number" type="number" value="{{item.step_number}}" required step="1" />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">title</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="title" name="title" type="text" value="{{item.title}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">description</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="description" name="description" type="text" value="{{item.description}}" required />
+</div>
+        <div>
+            <div class="mt-5">
+                <button class=" text-xs py-3 px-6 rounded-lg bg-gray-900 text-white" type="submit">Submit</button>
+                <button class="text-xs py-3 px-6 rounded-lg bg-red-600 text-white"
+                            onclick="confirmDelete(event, '/medical_operation_note_steps/{{ item.id }}', '/medical_operation_note_steps' )">Delete</button>
+            </div>
+        </div>
+    </form>
+    <div id="success-message" class="mt-4"></div>
+    <br />
+    <a href="/medical_operation_note_steps">Back to medical_operation_note_step</a>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

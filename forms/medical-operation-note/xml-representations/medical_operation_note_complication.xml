@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note_complication SYSTEM "medical_operation_note_complication.dtd">
+<medical_operation_note_complication>
+<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_operation_note_id>770e8400-e29b-41d4-a716-446655440002</medical_operation_note_id>
+<category>haemorrhage</category>
+<description>Example text.</description>
+<clavien_dindo_grade>0</clavien_dindo_grade>
+<onset_at>2026-04-09T10:00:00Z</onset_at>
+<action_taken></action_taken>
+<resolved_in_theatre>yes</resolved_in_theatre>
+<reported_to_governance>yes</reported_to_governance>
+</medical_operation_note_complication>

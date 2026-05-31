@@ -1,0 +1,377 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_AMENDED = 3;  // amended
+  STATUS_SIGNED = 4;  // signed
+  STATUS_URGENT = 5;  // urgent
+}
+
+enum MedicalOperationNoteListTypeEnum {
+  LISTTYPE_UNSPECIFIED = 0;
+  LISTTYPE_ELECTIVE = 1;  // elective
+  LISTTYPE_CEPOD = 2;  // cepod
+  LISTTYPE_TRAUMA = 3;  // trauma
+  LISTTYPE_OBSTETRIC = 4;  // obstetric
+  LISTTYPE_DAY_CASE = 5;  // day-case
+  LISTTYPE_ENDOSCOPY = 6;  // endoscopy
+}
+
+enum MedicalOperationNoteConsentStatusEnum {
+  CONSENTSTATUS_UNSPECIFIED = 0;
+  CONSENTSTATUS_WRITTEN = 1;  // written
+  CONSENTSTATUS_VERBAL = 2;  // verbal
+  CONSENTSTATUS_LASTING_POWER_OF_ATTORNEY = 3;  // lasting-power-of-attorney
+  CONSENTSTATUS_EMERGENCY_NO_CONSENT = 4;  // emergency-no-consent
+  CONSENTSTATUS_DECLINED = 5;  // declined
+}
+
+enum MedicalOperationNoteSideMarkedEnum {
+  SIDEMARKED_UNSPECIFIED = 0;
+  SIDEMARKED_YES = 1;  // yes
+  SIDEMARKED_NO = 2;  // no
+  SIDEMARKED_NA = 3;  // na
+}
+
+enum MedicalOperationNoteSignInCompletedEnum {
+  SIGNINCOMPLETED_UNSPECIFIED = 0;
+  SIGNINCOMPLETED_YES = 1;  // yes
+  SIGNINCOMPLETED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteAsaPhysicalStatusEnum {
+  ASAPHYSICALSTATUS_UNSPECIFIED = 0;
+  ASAPHYSICALSTATUS_I = 1;  // I
+  ASAPHYSICALSTATUS_II = 2;  // II
+  ASAPHYSICALSTATUS_III = 3;  // III
+  ASAPHYSICALSTATUS_IV = 4;  // IV
+  ASAPHYSICALSTATUS_V = 5;  // V
+  ASAPHYSICALSTATUS_VI = 6;  // VI
+}
+
+enum MedicalOperationNoteUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ELECTIVE = 1;  // elective
+  URGENCY_EXPEDITED = 2;  // expedited
+  URGENCY_URGENT = 3;  // urgent
+  URGENCY_EMERGENCY = 4;  // emergency
+  URGENCY_IMMEDIATE = 5;  // immediate
+}
+
+enum MedicalOperationNoteLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_MIDLINE = 4;  // midline
+  LATERALITY_NA = 5;  // na
+}
+
+enum MedicalOperationNoteAnaesthesiaTypeEnum {
+  ANAESTHESIATYPE_UNSPECIFIED = 0;
+  ANAESTHESIATYPE_GENERAL = 1;  // general
+  ANAESTHESIATYPE_REGIONAL = 2;  // regional
+  ANAESTHESIATYPE_NEURAXIAL = 3;  // neuraxial
+  ANAESTHESIATYPE_SEDATION = 4;  // sedation
+  ANAESTHESIATYPE_MAC = 5;  // mac
+  ANAESTHESIATYPE_LOCAL = 6;  // local
+  ANAESTHESIATYPE_COMBINED_GA_REGIONAL = 7;  // combined-ga-regional
+}
+
+enum MedicalOperationNoteAirwayManagementEnum {
+  AIRWAYMANAGEMENT_UNSPECIFIED = 0;
+  AIRWAYMANAGEMENT_FACE_MASK = 1;  // face-mask
+  AIRWAYMANAGEMENT_SUPRAGLOTTIC = 2;  // supraglottic
+  AIRWAYMANAGEMENT_ETT = 3;  // ett
+  AIRWAYMANAGEMENT_AWAKE_FIBREOPTIC = 4;  // awake-fibreoptic
+  AIRWAYMANAGEMENT_SURGICAL_AIRWAY = 5;  // surgical-airway
+  AIRWAYMANAGEMENT_NONE = 6;  // none
+}
+
+enum MedicalOperationNoteAnaestheticEventEnum {
+  ANAESTHETICEVENT_UNSPECIFIED = 0;
+  ANAESTHETICEVENT_NONE = 1;  // none
+  ANAESTHETICEVENT_FAILED_INTUBATION = 2;  // failed-intubation
+  ANAESTHETICEVENT_AWARENESS = 3;  // awareness
+  ANAESTHETICEVENT_ANAPHYLAXIS = 4;  // anaphylaxis
+  ANAESTHETICEVENT_MALIGNANT_HYPERTHERMIA = 5;  // malignant-hyperthermia
+  ANAESTHETICEVENT_SUXAMETHONIUM_APNOEA = 6;  // suxamethonium-apnoea
+  ANAESTHETICEVENT_HYPOXIA = 7;  // hypoxia
+  ANAESTHETICEVENT_ARRHYTHMIA = 8;  // arrhythmia
+  ANAESTHETICEVENT_HYPOTENSION = 9;  // hypotension
+  ANAESTHETICEVENT_OTHER = 10;  // other
+}
+
+enum MedicalOperationNotePatientPositionEnum {
+  PATIENTPOSITION_UNSPECIFIED = 0;
+  PATIENTPOSITION_SUPINE = 1;  // supine
+  PATIENTPOSITION_PRONE = 2;  // prone
+  PATIENTPOSITION_LATERAL_LEFT = 3;  // lateral-left
+  PATIENTPOSITION_LATERAL_RIGHT = 4;  // lateral-right
+  PATIENTPOSITION_LITHOTOMY = 5;  // lithotomy
+  PATIENTPOSITION_SITTING = 6;  // sitting
+  PATIENTPOSITION_LLOYD_DAVIES = 7;  // lloyd-davies
+  PATIENTPOSITION_JACKKNIFE = 8;  // jackknife
+  PATIENTPOSITION_OTHER = 9;  // other
+}
+
+enum MedicalOperationNotePrepSolutionEnum {
+  PREPSOLUTION_UNSPECIFIED = 0;
+  PREPSOLUTION_CHLORHEXIDINE_ALCOHOL = 1;  // chlorhexidine-alcohol
+  PREPSOLUTION_POVIDONE_IODINE = 2;  // povidone-iodine
+  PREPSOLUTION_AQUEOUS_CHLORHEXIDINE = 3;  // aqueous-chlorhexidine
+  PREPSOLUTION_AQUEOUS_IODINE = 4;  // aqueous-iodine
+  PREPSOLUTION_OTHER = 5;  // other
+}
+
+enum MedicalOperationNoteSurgicalApproachEnum {
+  SURGICALAPPROACH_UNSPECIFIED = 0;
+  SURGICALAPPROACH_OPEN = 1;  // open
+  SURGICALAPPROACH_LAPAROSCOPIC = 2;  // laparoscopic
+  SURGICALAPPROACH_ROBOTIC = 3;  // robotic
+  SURGICALAPPROACH_ENDOSCOPIC = 4;  // endoscopic
+  SURGICALAPPROACH_ARTHROSCOPIC = 5;  // arthroscopic
+  SURGICALAPPROACH_THORACOSCOPIC = 6;  // thoracoscopic
+  SURGICALAPPROACH_PERCUTANEOUS = 7;  // percutaneous
+  SURGICALAPPROACH_TRANSLUMINAL = 8;  // transluminal
+  SURGICALAPPROACH_OTHER = 9;  // other
+}
+
+enum MedicalOperationNoteTableTiltEnum {
+  TABLETILT_UNSPECIFIED = 0;
+  TABLETILT_NEUTRAL = 1;  // neutral
+  TABLETILT_TRENDELENBURG = 2;  // trendelenburg
+  TABLETILT_REVERSE_TRENDELENBURG = 3;  // reverse-trendelenburg
+  TABLETILT_LATERAL_LEFT = 4;  // lateral-left
+  TABLETILT_LATERAL_RIGHT = 5;  // lateral-right
+  TABLETILT_OTHER = 6;  // other
+}
+
+enum MedicalOperationNoteTourniquetUsedEnum {
+  TOURNIQUETUSED_UNSPECIFIED = 0;
+  TOURNIQUETUSED_YES = 1;  // yes
+  TOURNIQUETUSED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteConvertedToOpenEnum {
+  CONVERTEDTOOPEN_UNSPECIFIED = 0;
+  CONVERTEDTOOPEN_YES = 1;  // yes
+  CONVERTEDTOOPEN_NO = 2;  // no
+}
+
+enum MedicalOperationNoteIntraopPhotographsTakenEnum {
+  INTRAOPPHOTOGRAPHSTAKEN_UNSPECIFIED = 0;
+  INTRAOPPHOTOGRAPHSTAKEN_YES = 1;  // yes
+  INTRAOPPHOTOGRAPHSTAKEN_NO = 2;  // no
+}
+
+enum MedicalOperationNoteFrozenSectionRequestedEnum {
+  FROZENSECTIONREQUESTED_UNSPECIFIED = 0;
+  FROZENSECTIONREQUESTED_YES = 1;  // yes
+  FROZENSECTIONREQUESTED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteSwabCountFirstAgreedEnum {
+  SWABCOUNTFIRSTAGREED_UNSPECIFIED = 0;
+  SWABCOUNTFIRSTAGREED_YES = 1;  // yes
+  SWABCOUNTFIRSTAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteSwabCountFinalAgreedEnum {
+  SWABCOUNTFINALAGREED_UNSPECIFIED = 0;
+  SWABCOUNTFINALAGREED_YES = 1;  // yes
+  SWABCOUNTFINALAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteNeedleCountFirstAgreedEnum {
+  NEEDLECOUNTFIRSTAGREED_UNSPECIFIED = 0;
+  NEEDLECOUNTFIRSTAGREED_YES = 1;  // yes
+  NEEDLECOUNTFIRSTAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteNeedleCountFinalAgreedEnum {
+  NEEDLECOUNTFINALAGREED_UNSPECIFIED = 0;
+  NEEDLECOUNTFINALAGREED_YES = 1;  // yes
+  NEEDLECOUNTFINALAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteInstrumentCountFirstAgreedEnum {
+  INSTRUMENTCOUNTFIRSTAGREED_UNSPECIFIED = 0;
+  INSTRUMENTCOUNTFIRSTAGREED_YES = 1;  // yes
+  INSTRUMENTCOUNTFIRSTAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteInstrumentCountFinalAgreedEnum {
+  INSTRUMENTCOUNTFINALAGREED_UNSPECIFIED = 0;
+  INSTRUMENTCOUNTFINALAGREED_YES = 1;  // yes
+  INSTRUMENTCOUNTFINALAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteTransfusionGivenEnum {
+  TRANSFUSIONGIVEN_UNSPECIFIED = 0;
+  TRANSFUSIONGIVEN_YES = 1;  // yes
+  TRANSFUSIONGIVEN_NO = 2;  // no
+}
+
+enum MedicalOperationNoteMassiveHaemorrhageProtocolActivatedEnum {
+  MASSIVEHAEMORRHAGEPROTOCOLACTIVATED_UNSPECIFIED = 0;
+  MASSIVEHAEMORRHAGEPROTOCOLACTIVATED_YES = 1;  // yes
+  MASSIVEHAEMORRHAGEPROTOCOLACTIVATED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteNeverEventFlaggedEnum {
+  NEVEREVENTFLAGGED_UNSPECIFIED = 0;
+  NEVEREVENTFLAGGED_YES = 1;  // yes
+  NEVEREVENTFLAGGED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteEquipmentProblemEnum {
+  EQUIPMENTPROBLEM_UNSPECIFIED = 0;
+  EQUIPMENTPROBLEM_YES = 1;  // yes
+  EQUIPMENTPROBLEM_NO = 2;  // no
+}
+
+enum MedicalOperationNoteRecoveryDestinationEnum {
+  RECOVERYDESTINATION_UNSPECIFIED = 0;
+  RECOVERYDESTINATION_PACU = 1;  // pacu
+  RECOVERYDESTINATION_WARD = 2;  // ward
+  RECOVERYDESTINATION_ENHANCED_CARE = 3;  // enhanced-care
+  RECOVERYDESTINATION_HDU = 4;  // hdu
+  RECOVERYDESTINATION_ICU = 5;  // icu
+  RECOVERYDESTINATION_DAY_CASE_DISCHARGE = 6;  // day-case-discharge
+}
+
+enum MedicalOperationNoteDietPlanEnum {
+  DIETPLAN_UNSPECIFIED = 0;
+  DIETPLAN_NBM = 1;  // nbm
+  DIETPLAN_SIPS = 2;  // sips
+  DIETPLAN_FLUIDS = 3;  // fluids
+  DIETPLAN_SOFT = 4;  // soft
+  DIETPLAN_NORMAL = 5;  // normal
+  DIETPLAN_AS_TOLERATED = 6;  // as-tolerated
+}
+
+enum MedicalOperationNoteSignOutCompletedEnum {
+  SIGNOUTCOMPLETED_UNSPECIFIED = 0;
+  SIGNOUTCOMPLETED_YES = 1;  // yes
+  SIGNOUTCOMPLETED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteDebriefCompletedEnum {
+  DEBRIEFCOMPLETED_UNSPECIFIED = 0;
+  DEBRIEFCOMPLETED_YES = 1;  // yes
+  DEBRIEFCOMPLETED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteSurgeonOverrideGradeEnum {
+  SURGEONOVERRIDEGRADE_UNSPECIFIED = 0;
+  SURGEONOVERRIDEGRADE_ROUTINE = 1;  // routine
+  SURGEONOVERRIDEGRADE_COMPLICATED = 2;  // complicated
+  SURGEONOVERRIDEGRADE_HIGH_RISK = 3;  // high-risk
+  SURGEONOVERRIDEGRADE_CRITICAL = 4;  // critical
+}
+
+message MedicalOperationNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string lead_surgeon_id = 6;  // UUID — uuid
+  MedicalOperationNoteStatusEnum status = 7;  // VARCHAR(20)
+  string hospital_name = 8;  // VARCHAR(255) — max 255 chars
+  string theatre_number = 9;  // VARCHAR(20) — max 20 chars
+  MedicalOperationNoteListTypeEnum list_type = 10;  // VARCHAR(20)
+  string case_start_at = 11;  // TIMESTAMPTZ — iso 8601
+  string anaesthesia_start_at = 12;  // TIMESTAMPTZ — iso 8601
+  string knife_to_skin_at = 13;  // TIMESTAMPTZ — iso 8601
+  string end_of_surgery_at = 14;  // TIMESTAMPTZ — iso 8601
+  string case_end_at = 15;  // TIMESTAMPTZ — iso 8601
+  MedicalOperationNoteConsentStatusEnum consent_status = 16;  // VARCHAR(20)
+  MedicalOperationNoteSideMarkedEnum side_marked = 17;  // VARCHAR(10)
+  MedicalOperationNoteSignInCompletedEnum sign_in_completed = 18;  // VARCHAR(5)
+  MedicalOperationNoteAsaPhysicalStatusEnum asa_physical_status = 19;  // VARCHAR(5)
+  string pre_operative_diagnosis = 20;  // TEXT
+  string post_operative_diagnosis = 21;  // TEXT
+  string indication = 22;  // TEXT
+  MedicalOperationNoteUrgencyEnum urgency = 23;  // VARCHAR(20)
+  MedicalOperationNoteLateralityEnum laterality = 24;  // VARCHAR(10)
+  MedicalOperationNoteAnaesthesiaTypeEnum anaesthesia_type = 25;  // VARCHAR(30)
+  MedicalOperationNoteAirwayManagementEnum airway_management = 26;  // VARCHAR(30)
+  string induction_agent = 27;  // VARCHAR(255) — max 255 chars
+  string maintenance_agent = 28;  // VARCHAR(255) — max 255 chars
+  string neuromuscular_blockade = 29;  // VARCHAR(255) — max 255 chars
+  string regional_block_description = 30;  // VARCHAR(500) — max 500 chars
+  string invasive_monitoring = 31;  // TEXT
+  int32 intraop_crystalloid_ml = 32;  // INTEGER
+  int32 intraop_colloid_ml = 33;  // INTEGER
+  int32 intraop_blood_ml = 34;  // INTEGER
+  int32 intraop_urine_ml = 35;  // INTEGER
+  MedicalOperationNoteAnaestheticEventEnum anaesthetic_event = 36;  // VARCHAR(30)
+  string anaesthetic_event_description = 37;  // TEXT
+  MedicalOperationNotePatientPositionEnum patient_position = 38;  // VARCHAR(30)
+  string pressure_area_protection_notes = 39;  // TEXT
+  MedicalOperationNotePrepSolutionEnum prep_solution = 40;  // VARCHAR(40)
+  string drape_type = 41;  // VARCHAR(255) — max 255 chars
+  MedicalOperationNoteSurgicalApproachEnum surgical_approach = 42;  // VARCHAR(60)
+  string incision_type = 43;  // VARCHAR(255) — max 255 chars
+  double incision_length_cm = 44;  // NUMERIC(5,1) — numeric(5,1)
+  MedicalOperationNoteTableTiltEnum table_tilt = 45;  // VARCHAR(30)
+  MedicalOperationNoteTourniquetUsedEnum tourniquet_used = 46;  // VARCHAR(5)
+  string tourniquet_site = 47;  // VARCHAR(60) — max 60 chars
+  int32 tourniquet_pressure_mmhg = 48;  // INTEGER
+  string tourniquet_on_at = 49;  // TIMESTAMPTZ — iso 8601
+  string tourniquet_off_at = 50;  // TIMESTAMPTZ — iso 8601
+  MedicalOperationNoteConvertedToOpenEnum converted_to_open = 51;  // VARCHAR(5)
+  string conversion_reason = 52;  // TEXT
+  string operative_findings_summary = 53;  // TEXT
+  string pathology_found = 54;  // TEXT
+  string anatomical_anomalies = 55;  // TEXT
+  MedicalOperationNoteIntraopPhotographsTakenEnum intraop_photographs_taken = 56;  // VARCHAR(5)
+  MedicalOperationNoteFrozenSectionRequestedEnum frozen_section_requested = 57;  // VARCHAR(5)
+  MedicalOperationNoteSwabCountFirstAgreedEnum swab_count_first_agreed = 58;  // VARCHAR(5)
+  MedicalOperationNoteSwabCountFinalAgreedEnum swab_count_final_agreed = 59;  // VARCHAR(5)
+  MedicalOperationNoteNeedleCountFirstAgreedEnum needle_count_first_agreed = 60;  // VARCHAR(5)
+  MedicalOperationNoteNeedleCountFinalAgreedEnum needle_count_final_agreed = 61;  // VARCHAR(5)
+  MedicalOperationNoteInstrumentCountFirstAgreedEnum instrument_count_first_agreed = 62;  // VARCHAR(5)
+  MedicalOperationNoteInstrumentCountFinalAgreedEnum instrument_count_final_agreed = 63;  // VARCHAR(5)
+  string count_discrepancy_resolution = 64;  // TEXT
+  int32 estimated_blood_loss_ml = 65;  // INTEGER
+  MedicalOperationNoteTransfusionGivenEnum transfusion_given = 66;  // VARCHAR(5)
+  int32 prbc_units = 67;  // INTEGER
+  int32 ffp_units = 68;  // INTEGER
+  int32 platelet_units = 69;  // INTEGER
+  int32 cryoprecipitate_units = 70;  // INTEGER
+  int32 cell_salvage_ml = 71;  // INTEGER
+  MedicalOperationNoteMassiveHaemorrhageProtocolActivatedEnum massive_haemorrhage_protocol_activated = 72;  // VARCHAR(5)
+  MedicalOperationNoteNeverEventFlaggedEnum never_event_flagged = 73;  // VARCHAR(5)
+  string never_event_description = 74;  // TEXT
+  MedicalOperationNoteEquipmentProblemEnum equipment_problem = 75;  // VARCHAR(5)
+  string equipment_problem_description = 76;  // TEXT
+  MedicalOperationNoteRecoveryDestinationEnum recovery_destination = 77;  // VARCHAR(20)
+  string monitoring_frequency = 78;  // VARCHAR(60) — max 60 chars
+  string iv_fluids_plan = 79;  // VARCHAR(255) — max 255 chars
+  string analgesia_plan = 80;  // TEXT
+  string antibiotic_plan = 81;  // VARCHAR(255) — max 255 chars
+  string vte_prophylaxis_plan = 82;  // VARCHAR(255) — max 255 chars
+  MedicalOperationNoteDietPlanEnum diet_plan = 83;  // VARCHAR(255)
+  string mobilisation_plan = 84;  // VARCHAR(255) — max 255 chars
+  string wound_care_plan = 85;  // TEXT
+  string follow_up_plan = 86;  // TEXT
+  string special_instructions = 87;  // TEXT
+  MedicalOperationNoteSignOutCompletedEnum sign_out_completed = 88;  // VARCHAR(5)
+  MedicalOperationNoteDebriefCompletedEnum debrief_completed = 89;  // VARCHAR(5)
+  MedicalOperationNoteSurgeonOverrideGradeEnum surgeon_override_grade = 90;  // VARCHAR(20)
+  string surgeon_override_reason = 91;  // TEXT
+  string attestation_text = 92;  // TEXT
+  string electronic_signature = 93;  // TEXT
+  string dictated_at = 94;  // TIMESTAMPTZ — iso 8601
+  string signed_at = 95;  // TIMESTAMPTZ — iso 8601
+}

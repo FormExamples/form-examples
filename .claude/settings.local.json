@@ -481,7 +481,25 @@
       "Bash(cargo --version)",
       "Bash(loco --version)",
       "Bash(bin/test-form objectives-and-key-results-tracker *)",
-      "Bash(echo \"Exit: $?\")"
+      "Bash(echo \"Exit: $?\")",
+      "Bash(bin/lily-svelte-status --counts)",
+      "Bash(bin/lily-svelte-status --slugs-only --status=TODO)",
+      "Bash(bin/lily-svelte-status --slugs-only --status=PARTIAL)",
+      "Bash(bin/lily-svelte-status --status=PARTIAL --slugs-only)",
+      "Bash(bin/lily-svelte-status --status=TODO --slugs-only)",
+      "Bash(bin/test-tools)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(bin/lily-html-refactor --help)",
+      "Write(/Users/jph/git/formexamples/form-examples/forms/medical-operation-note/**)",
+      "Edit(/Users/jph/git/formexamples/form-examples/forms/medical-operation-note/**)",
+      "Bash(pnpm:*)",
+      "Bash(npm:*)",
+      "Bash(cargo:*)",
+      "Bash(loco:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(ln:*)",
+      "Bash(chmod:*)"
     ]
   }
 }

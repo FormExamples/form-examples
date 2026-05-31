@@ -1,0 +1,273 @@
+// Sample operation-note data for the theatre dashboard.
+//
+// Mirrors the SvelteKit dashboard's `src/lib/data/sample.ts` so the two
+// implementations show identical demo content when the backend is offline.
+// Twelve realistic rows: spans every composite risk band
+// (routine / complicated / high-risk / critical), every NCEPOD urgency
+// category, several surgical specialties (orthopaedics, general,
+// vascular, cardiothoracic, obstetrics, ENT, ophthalmology, neuro), and
+// a representative spread of Clavien-Dindo grades and safety flags.
+//
+// All patient identifiers are synthetic placeholders - no real patient
+// data appears anywhere in this file. NHS numbers follow the canonical
+// "NNN NNN NNNN" display form.
+
+(function () {
+'use strict';
+window.MedicalOperationNoteDashboard =
+  window.MedicalOperationNoteDashboard || {};
+
+/** @type {import('./types.js').OperationNoteRow[]} */
+const sampleOperationNotes = [
+  // --- Routine ----------------------------------------------------------
+  {
+    id: 'OP-2026-0001',
+    date: '2026-05-20',
+    hospital: 'St Mary\u2019s Hospital',
+    theatre: 'OR 3',
+    listType: 'elective',
+    surgeon: 'Mr A Patel',
+    patient: 'Patient 0001',
+    nhs: '111 222 3331',
+    procedure: 'Inguinal hernia repair (open)',
+    opcs: 'T20.3',
+    urgency: 'elective',
+    compositeRisk: 'routine',
+    clavienDindo: '0',
+    estimatedBloodLoss: 40,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'day-case-discharge',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0002',
+    date: '2026-05-20',
+    hospital: 'St Mary\u2019s Hospital',
+    theatre: 'Ophth 1',
+    listType: 'day-case',
+    surgeon: 'Ms B Nakamura',
+    patient: 'Patient 0002',
+    nhs: '111 222 3332',
+    procedure: 'Phacoemulsification with IOL (right)',
+    opcs: 'C75.1',
+    urgency: 'elective',
+    compositeRisk: 'routine',
+    clavienDindo: '0',
+    estimatedBloodLoss: 5,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'day-case-discharge',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0003',
+    date: '2026-05-21',
+    hospital: 'Royal Infirmary',
+    theatre: 'ENT 2',
+    listType: 'elective',
+    surgeon: 'Mr C Okafor',
+    patient: 'Patient 0003',
+    nhs: '111 222 3333',
+    procedure: 'Tonsillectomy',
+    opcs: 'F34.1',
+    urgency: 'elective',
+    compositeRisk: 'routine',
+    clavienDindo: '0',
+    estimatedBloodLoss: 60,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ward',
+    signed: true
+  },
+
+  // --- Complicated ------------------------------------------------------
+  {
+    id: 'OP-2026-0004',
+    date: '2026-05-21',
+    hospital: 'Royal Infirmary',
+    theatre: 'OR 1',
+    listType: 'elective',
+    surgeon: 'Ms D Williams',
+    patient: 'Patient 0004',
+    nhs: '111 222 3334',
+    procedure: 'Laparoscopic cholecystectomy',
+    opcs: 'J18.3',
+    urgency: 'elective',
+    compositeRisk: 'complicated',
+    clavienDindo: 'II',
+    estimatedBloodLoss: 350,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ward',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0005',
+    date: '2026-05-22',
+    hospital: 'University Hospital',
+    theatre: 'Ortho 2',
+    listType: 'elective',
+    surgeon: 'Mr E Khan',
+    patient: 'Patient 0005',
+    nhs: '111 222 3335',
+    procedure: 'Total knee replacement (right)',
+    opcs: 'W40.1',
+    urgency: 'elective',
+    compositeRisk: 'complicated',
+    clavienDindo: 'I',
+    estimatedBloodLoss: 700,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'enhanced-care',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0006',
+    date: '2026-05-22',
+    hospital: 'University Hospital',
+    theatre: 'Obs 1',
+    listType: 'obstetric',
+    surgeon: 'Ms F O\u2019Connor',
+    patient: 'Patient 0006',
+    nhs: '111 222 3336',
+    procedure: 'Emergency lower-segment caesarean section',
+    opcs: 'R18.2',
+    urgency: 'urgent',
+    compositeRisk: 'complicated',
+    clavienDindo: 'II',
+    estimatedBloodLoss: 900,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ward',
+    signed: true
+  },
+
+  // --- High-risk --------------------------------------------------------
+  {
+    id: 'OP-2026-0007',
+    date: '2026-05-23',
+    hospital: 'University Hospital',
+    theatre: 'OR 4',
+    listType: 'CEPOD',
+    surgeon: 'Mr G Hassan',
+    patient: 'Patient 0007',
+    nhs: '111 222 3337',
+    procedure: 'Hartmann\u2019s procedure (converted to open)',
+    opcs: 'H33.5',
+    urgency: 'urgent',
+    compositeRisk: 'high-risk',
+    clavienDindo: 'IIIa',
+    estimatedBloodLoss: 1800,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'HDU',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0008',
+    date: '2026-05-23',
+    hospital: 'Cardiothoracic Centre',
+    theatre: 'CT 1',
+    listType: 'elective',
+    surgeon: 'Mr H Ito',
+    patient: 'Patient 0008',
+    nhs: '111 222 3338',
+    procedure: 'Coronary artery bypass graft x3',
+    opcs: 'K40.4',
+    urgency: 'scheduled',
+    compositeRisk: 'high-risk',
+    clavienDindo: 'IIIb',
+    estimatedBloodLoss: 2200,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ICU',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0009',
+    date: '2026-05-24',
+    hospital: 'Royal Infirmary',
+    theatre: 'Neuro 1',
+    listType: 'elective',
+    surgeon: 'Ms I Johansson',
+    patient: 'Patient 0009',
+    nhs: '111 222 3339',
+    procedure: 'Lumbar spinal decompression L4\u2013L5',
+    opcs: 'V25.4',
+    urgency: 'elective',
+    compositeRisk: 'high-risk',
+    clavienDindo: 'IIIa',
+    estimatedBloodLoss: 1600,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'HDU',
+    signed: false
+  },
+
+  // --- Critical ---------------------------------------------------------
+  {
+    id: 'OP-2026-0010',
+    date: '2026-05-24',
+    hospital: 'University Hospital',
+    theatre: 'OR 2',
+    listType: 'trauma',
+    surgeon: 'Mr J Kowalski',
+    patient: 'Patient 0010',
+    nhs: '111 222 3340',
+    procedure: 'Ruptured abdominal aortic aneurysm repair',
+    opcs: 'L19.1',
+    urgency: 'immediate',
+    compositeRisk: 'critical',
+    clavienDindo: 'IVb',
+    estimatedBloodLoss: 4500,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ICU',
+    signed: true
+  },
+  {
+    id: 'OP-2026-0011',
+    date: '2026-05-25',
+    hospital: 'University Hospital',
+    theatre: 'OR 5',
+    listType: 'elective',
+    surgeon: 'Ms K Lopez',
+    patient: 'Patient 0011',
+    nhs: '111 222 3341',
+    procedure: 'Right hemicolectomy (laparoscopic, retained swab suspected)',
+    opcs: 'H07.3',
+    urgency: 'elective',
+    compositeRisk: 'critical',
+    clavienDindo: 'IIIb',
+    estimatedBloodLoss: 850,
+    countsAgreed: false,
+    neverEventFlag: true,
+    recoveryDestination: 'HDU',
+    signed: false
+  },
+  {
+    id: 'OP-2026-0012',
+    date: '2026-05-25',
+    hospital: 'St Mary\u2019s Hospital',
+    theatre: 'OR 6',
+    listType: 'trauma',
+    surgeon: 'Mr L Martinez',
+    patient: 'Patient 0012',
+    nhs: '111 222 3342',
+    procedure: 'Emergency laparotomy for haemorrhage (intra-op arrest)',
+    opcs: 'T30.1',
+    urgency: 'immediate',
+    compositeRisk: 'critical',
+    clavienDindo: 'V',
+    estimatedBloodLoss: 6200,
+    countsAgreed: true,
+    neverEventFlag: false,
+    recoveryDestination: 'ICU',
+    signed: true
+  }
+];
+
+window.MedicalOperationNoteDashboard.sampleOperationNotes =
+  sampleOperationNotes;
+})();

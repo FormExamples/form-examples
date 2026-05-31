@@ -1,0 +1,11 @@
+<!ELEMENT medical_operation_note_team_member (id,created_at,updated_at,deleted_at,medical_operation_note_id,clinician_id,team_role,arrived_at,left_at,notes)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_operation_note_id (#PCDATA)>
+<!ELEMENT clinician_id (#PCDATA)>
+<!ELEMENT team_role (#PCDATA)>
+<!ELEMENT arrived_at (#PCDATA)>
+<!ELEMENT left_at (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>

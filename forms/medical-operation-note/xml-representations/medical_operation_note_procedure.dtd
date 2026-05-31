@@ -1,0 +1,12 @@
+<!ELEMENT medical_operation_note_procedure (id,created_at,updated_at,deleted_at,medical_operation_note_id,role,opcs4_code,name,description,laterality,sequence_index)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_operation_note_id (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT opcs4_code (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT laterality (#PCDATA)>
+<!ELEMENT sequence_index (#PCDATA)>

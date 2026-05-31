@@ -1,0 +1,94 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_grade
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteGradeComputedCompositeRiskEnum {
+  COMPUTEDCOMPOSITERISK_UNSPECIFIED = 0;
+  COMPUTEDCOMPOSITERISK_ROUTINE = 1;  // routine
+  COMPUTEDCOMPOSITERISK_COMPLICATED = 2;  // complicated
+  COMPUTEDCOMPOSITERISK_HIGH_RISK = 3;  // high-risk
+  COMPUTEDCOMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+enum MedicalOperationNoteGradeFinalCompositeRiskEnum {
+  FINALCOMPOSITERISK_UNSPECIFIED = 0;
+  FINALCOMPOSITERISK_ROUTINE = 1;  // routine
+  FINALCOMPOSITERISK_COMPLICATED = 2;  // complicated
+  FINALCOMPOSITERISK_HIGH_RISK = 3;  // high-risk
+  FINALCOMPOSITERISK_CRITICAL = 4;  // critical
+}
+
+enum MedicalOperationNoteGradeWorstClavienDindoGradeEnum {
+  WORSTCLAVIENDINDOGRADE_UNSPECIFIED = 0;
+  WORSTCLAVIENDINDOGRADE_V_0 = 1;  // 0
+  WORSTCLAVIENDINDOGRADE_I = 2;  // I
+  WORSTCLAVIENDINDOGRADE_II = 3;  // II
+  WORSTCLAVIENDINDOGRADE_IIIA = 4;  // IIIa
+  WORSTCLAVIENDINDOGRADE_IIIB = 5;  // IIIb
+  WORSTCLAVIENDINDOGRADE_IVA = 6;  // IVa
+  WORSTCLAVIENDINDOGRADE_IVB = 7;  // IVb
+  WORSTCLAVIENDINDOGRADE_V = 8;  // V
+}
+
+enum MedicalOperationNoteGradeAsaPhysicalStatusEnum {
+  ASAPHYSICALSTATUS_UNSPECIFIED = 0;
+  ASAPHYSICALSTATUS_I = 1;  // I
+  ASAPHYSICALSTATUS_II = 2;  // II
+  ASAPHYSICALSTATUS_III = 3;  // III
+  ASAPHYSICALSTATUS_IV = 4;  // IV
+  ASAPHYSICALSTATUS_V = 5;  // V
+  ASAPHYSICALSTATUS_VI = 6;  // VI
+}
+
+enum MedicalOperationNoteGradeBloodLossBandEnum {
+  BLOODLOSSBAND_UNSPECIFIED = 0;
+  BLOODLOSSBAND_MINIMAL = 1;  // minimal
+  BLOODLOSSBAND_MILD = 2;  // mild
+  BLOODLOSSBAND_MODERATE = 3;  // moderate
+  BLOODLOSSBAND_SEVERE = 4;  // severe
+  BLOODLOSSBAND_MASSIVE = 5;  // massive
+}
+
+enum MedicalOperationNoteGradeCountsAgreedEnum {
+  COUNTSAGREED_UNSPECIFIED = 0;
+  COUNTSAGREED_YES = 1;  // yes
+  COUNTSAGREED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteGradeNeverEventSuspectedEnum {
+  NEVEREVENTSUSPECTED_UNSPECIFIED = 0;
+  NEVEREVENTSUSPECTED_YES = 1;  // yes
+  NEVEREVENTSUSPECTED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ROUTINE_RECOVERY = 1;  // routine-recovery
+  RECOMMENDATION_ENHANCED_MONITORING = 2;  // enhanced-monitoring
+  RECOMMENDATION_CRITICAL_CARE = 3;  // critical-care
+  RECOMMENDATION_URGENT_REVIEW = 4;  // urgent-review
+  RECOMMENDATION_DATIX_REQUIRED = 5;  // datix-required
+}
+
+message MedicalOperationNoteGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  MedicalOperationNoteGradeComputedCompositeRiskEnum computed_composite_risk = 6;  // VARCHAR(15)
+  MedicalOperationNoteGradeFinalCompositeRiskEnum final_composite_risk = 7;  // VARCHAR(15)
+  string override_reason = 8;  // VARCHAR(500) — max 500 chars
+  MedicalOperationNoteGradeWorstClavienDindoGradeEnum worst_clavien_dindo_grade = 9;  // VARCHAR(5)
+  MedicalOperationNoteGradeAsaPhysicalStatusEnum asa_physical_status = 10;  // VARCHAR(5)
+  MedicalOperationNoteGradeBloodLossBandEnum blood_loss_band = 11;  // VARCHAR(15)
+  MedicalOperationNoteGradeCountsAgreedEnum counts_agreed = 12;  // VARCHAR(5)
+  MedicalOperationNoteGradeNeverEventSuspectedEnum never_event_suspected = 13;  // VARCHAR(5)
+  MedicalOperationNoteGradeRecommendationEnum recommendation = 14;  // VARCHAR(30)
+  string surgeon_notes = 15;  // TEXT
+  string signed_at = 16;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 17;  // TIMESTAMPTZ — iso 8601
+}

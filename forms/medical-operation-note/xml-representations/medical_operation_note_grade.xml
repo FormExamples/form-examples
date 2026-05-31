@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note_grade SYSTEM "medical_operation_note_grade.dtd">
+<medical_operation_note_grade>
+<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_operation_note_id>770e8400-e29b-41d4-a716-446655440002</medical_operation_note_id>
+<computed_composite_risk>routine</computed_composite_risk>
+<final_composite_risk>routine</final_composite_risk>
+<override_reason>Example text.</override_reason>
+<worst_clavien_dindo_grade>0</worst_clavien_dindo_grade>
+<asa_physical_status>I</asa_physical_status>
+<blood_loss_band>minimal</blood_loss_band>
+<counts_agreed>yes</counts_agreed>
+<never_event_suspected>yes</never_event_suspected>
+<recommendation>routine-recovery</recommendation>
+<surgeon_notes>Example text.</surgeon_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</medical_operation_note_grade>

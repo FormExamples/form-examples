@@ -1,0 +1,29 @@
+# Tasks: SvelteKit operating-team front-end
+
+- [x] `package.json` with SvelteKit 2, Svelte 5, Tailwind 4, pdfmake, Vitest.
+- [x] `svelte.config.js` + `vite.config.ts` + `tsconfig.json`.
+- [x] `src/app.html`, `src/app.css`, `src/app.d.ts`.
+- [x] `src/params/step.ts` — route matcher 1–12.
+- [x] `src/lib/engine/types.ts` — OperationNote + sub-types + GradingResult.
+- [x] `src/lib/engine/utils.ts` — risk ordering, blood-loss banding.
+- [x] `src/lib/engine/factory.ts` — `createEmptyOperationNote()`.
+- [x] `src/lib/engine/clavien-dindo-rules.ts`.
+- [x] `src/lib/engine/blood-loss-rules.ts`.
+- [x] `src/lib/engine/count-rules.ts`.
+- [x] `src/lib/engine/never-event-rules.ts`.
+- [x] `src/lib/engine/anaesthetic-event-rules.ts`.
+- [x] `src/lib/engine/flagged-issues.ts`.
+- [x] `src/lib/engine/composite-grader.ts`.
+- [x] `src/lib/engine/composite-grader.test.ts` — Vitest.
+- [x] `src/lib/engine/clavien-dindo-rules.test.ts` — Vitest.
+- [x] `src/lib/state.svelte.ts` — reactive store with runes.
+- [x] `src/lib/config/steps.ts` — 12-step definitions.
+- [x] `src/lib/components/ui/*.svelte` — Lily-shaped primitives.
+- [x] `src/lib/steps/Step1Identification.svelte` … `Step12SignOff.svelte`.
+- [x] `src/lib/report.ts` — pdfmake doc + HTML preview.
+- [x] `src/routes/+layout.svelte`, `+page.svelte`.
+- [x] `src/routes/operation-note/[step=step]/+page.svelte`.
+- [ ] FHIR R5 Procedure bundle emitter (deferred).
+- [ ] Zod runtime validation (deferred).
+- [ ] Axe-core audit (deferred).
+- [ ] Playwright end-to-end (deferred).

@@ -1,0 +1,112 @@
+<section class="border rounded p-4 space-y-2">
+  <h2 class="text-xl font-semibold">10. Safety, counts, EBL &amp; complications</h2>
+  <div class="grid grid-cols-3 gap-2">
+    <label>Swab count first agreed
+      <select name="swab_count_first_agreed" class="border rounded px-2 py-1 w-full">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <label>Swab count final agreed
+      <select name="swab_count_final_agreed" class="border rounded px-2 py-1 w-full"
+              x-model="swabAgreedStr"
+              x-on:change="swabAgreed = (swabAgreedStr === 'yes')">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <label>Count discrepancy resolution
+      <input type="text" name="count_discrepancy_resolution" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Needle count first agreed
+      <select name="needle_count_first_agreed" class="border rounded px-2 py-1 w-full">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <label>Needle count final agreed
+      <select name="needle_count_final_agreed" class="border rounded px-2 py-1 w-full"
+              x-model="needleAgreedStr"
+              x-on:change="needleAgreed = (needleAgreedStr === 'yes')">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <span></span>
+    <label>Instrument count first agreed
+      <select name="instrument_count_first_agreed" class="border rounded px-2 py-1 w-full">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <label>Instrument count final agreed
+      <select name="instrument_count_final_agreed" class="border rounded px-2 py-1 w-full"
+              x-model="instrumentAgreedStr"
+              x-on:change="instrumentAgreed = (instrumentAgreedStr === 'yes')">
+        <option value="yes">Yes</option><option value="no">No</option>
+      </select>
+    </label>
+    <span></span>
+    <label>Estimated blood loss (mL)
+      <input type="number" name="estimated_blood_loss_ml" class="border rounded px-2 py-1 w-full" x-model.number="ebl" />
+    </label>
+    <label>Transfusion given?
+      <select name="transfusion_given" class="border rounded px-2 py-1 w-full">
+        <option value="no">No</option><option value="yes">Yes</option>
+      </select>
+    </label>
+    <label>Massive haemorrhage protocol activated?
+      <select name="massive_haemorrhage_protocol_activated" class="border rounded px-2 py-1 w-full">
+        <option value="no">No</option><option value="yes">Yes</option>
+      </select>
+    </label>
+    <label>PRBC units
+      <input type="number" name="prbc_units" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>FFP units
+      <input type="number" name="ffp_units" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Platelet units
+      <input type="number" name="platelet_units" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Cryoprecipitate units
+      <input type="number" name="cryoprecipitate_units" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Cell salvage (mL)
+      <input type="number" name="cell_salvage_ml" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Worst Clavien-Dindo
+      <select name="worst_clavien_dindo" class="border rounded px-2 py-1 w-full" x-model="clavien">
+        <option value="0">0 (none)</option>
+        <option value="I">I</option>
+        <option value="II">II</option>
+        <option value="IIIa">IIIa</option>
+        <option value="IIIb">IIIb</option>
+        <option value="IVa">IVa</option>
+        <option value="IVb">IVb</option>
+        <option value="V">V (death)</option>
+      </select>
+    </label>
+    <label>Never-event flagged?
+      <select name="never_event_flagged" class="border rounded px-2 py-1 w-full"
+              x-model="neverEventStr"
+              x-on:change="neverEvent = (neverEventStr === 'yes')">
+        <option value="no">No</option><option value="yes">Yes</option>
+      </select>
+    </label>
+    <label>Equipment problem?
+      <select name="equipment_problem" class="border rounded px-2 py-1 w-full">
+        <option value="no">No</option><option value="yes">Yes</option>
+      </select>
+    </label>
+  </div>
+  <label>Never-event description
+    <textarea name="never_event_description" rows="2" class="border rounded px-2 py-1 w-full"></textarea>
+  </label>
+  <label>Equipment problem description
+    <textarea name="equipment_problem_description" rows="2" class="border rounded px-2 py-1 w-full"></textarea>
+  </label>
+  <label class="flex items-center gap-2">
+    <input type="checkbox" name="retained_foreign_body" value="yes" x-model="retained" />
+    Retained foreign body declared
+  </label>
+  <label class="flex items-center gap-2">
+    <input type="checkbox" name="intra_operative_arrest" value="yes" x-model="arrest" />
+    Cardiac or respiratory arrest in theatre
+  </label>
+</section>

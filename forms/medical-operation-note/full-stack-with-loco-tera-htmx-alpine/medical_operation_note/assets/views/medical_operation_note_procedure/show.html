@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_procedure: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_procedure: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_id" | capitalize }}:</b> {{item.medical_operation_note_id}}</label>
+    </div>
+<div>
+    <label><b>{{"role" | capitalize }}:</b> {{item.role}}</label>
+    </div>
+<div>
+    <label><b>{{"opcs4_code" | capitalize }}:</b> {{item.opcs4_code}}</label>
+    </div>
+<div>
+    <label><b>{{"name" | capitalize }}:</b> {{item.name}}</label>
+    </div>
+<div>
+    <label><b>{{"description" | capitalize }}:</b> {{item.description}}</label>
+    </div>
+<div>
+    <label><b>{{"laterality" | capitalize }}:</b> {{item.laterality}}</label>
+    </div>
+<div>
+    <label><b>{{"sequence_index" | capitalize }}:</b> {{item.sequence_index}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_procedures">Back to medical_operation_note_procedures</a>
+</div>
+{% endblock content %}

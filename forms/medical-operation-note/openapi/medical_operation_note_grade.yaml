@@ -1,0 +1,233 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_grade
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteGrade
+  version: 1.0.0
+  description: Computed and signed-off operative-risk grading result. Stores both the engine-computed composite risk grade and the surgeon-final grade with an override reason.
+paths:
+  /medical-operation-note-grades:
+    get:
+      summary: List MedicalOperationNoteGrade records
+      operationId: listMedicalOperationNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteGrade"
+    post:
+      summary: Create a new MedicalOperationNoteGrade
+      operationId: createMedicalOperationNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGrade"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGrade"
+        "400":
+          description: Validation error
+  /medical-operation-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteGrade by id
+      operationId: getMedicalOperationNoteGrade
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGrade"
+        "404":
+          description: MedicalOperationNoteGrade not found
+    patch:
+      summary: Update an existing MedicalOperationNoteGrade
+      operationId: updateMedicalOperationNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGrade"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGrade"
+        "404":
+          description: MedicalOperationNoteGrade not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteGrade
+      operationId: deleteMedicalOperationNoteGrade
+      responses:
+        "204":
+          description: MedicalOperationNoteGrade deleted
+        "404":
+          description: MedicalOperationNoteGrade not found
+components:
+  schemas:
+    MedicalOperationNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note (unique, 1:1).
+        computed_composite_risk:
+          type: string
+          enum:
+            - routine
+            - complicated
+            - high-risk
+            - critical
+            - ""
+          description: Composite operative risk computed by the engine from operative-team data.
+        final_composite_risk:
+          type: string
+          enum:
+            - routine
+            - complicated
+            - high-risk
+            - critical
+            - ""
+          description: Composite operative risk signed off by the surgeon (may equal or differ from computed).
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the surgeon set final differently from computed (mandatory when they differ).
+        worst_clavien_dindo_grade:
+          type: string
+          enum:
+            - "0"
+            - I
+            - II
+            - IIIa
+            - IIIb
+            - IVa
+            - IVb
+            - V
+            - ""
+          description: Worst Clavien-Dindo grade across all complications recorded for this case.
+        asa_physical_status:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA Physical Status carried over from pre-op assessment.
+        blood_loss_band:
+          type: string
+          enum:
+            - minimal
+            - mild
+            - moderate
+            - severe
+            - massive
+            - ""
+          description: "Blood loss band: minimal (<= 100 mL), mild (101-500 mL), moderate (501-1500 mL), severe (1501-3000 mL), massive (> 3000 mL)."
+        counts_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether swab, needle, and instrument final counts were all agreed.
+        never_event_suspected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any never-event candidate is suspected.
+        recommendation:
+          type: string
+          enum:
+            - routine-recovery
+            - enhanced-monitoring
+            - critical-care
+            - urgent-review
+            - datix-required
+            - ""
+          description: "Overall recommendation: routine-recovery, enhanced-monitoring, critical-care, urgent-review, or datix-required."
+        surgeon_notes:
+          type: string
+          description: Free-text surgeon summary notes for the report.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of surgeon electronic signature on the grade.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the grade.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - computed_composite_risk
+        - final_composite_risk
+        - override_reason
+        - worst_clavien_dindo_grade
+        - asa_physical_status
+        - blood_loss_band
+        - counts_agreed
+        - never_event_suspected
+        - recommendation
+        - surgeon_notes
+        - graded_at
+      description: Computed and signed-off operative-risk grading result. Stores both the engine-computed composite risk grade and the surgeon-final grade with an override reason.

@@ -1,0 +1,13 @@
+<!ELEMENT medical_operation_note_complication (id,created_at,updated_at,deleted_at,medical_operation_note_id,category,description,clavien_dindo_grade,onset_at,action_taken,resolved_in_theatre,reported_to_governance)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_operation_note_id (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT clavien_dindo_grade (#PCDATA)>
+<!ELEMENT onset_at (#PCDATA)>
+<!ELEMENT action_taken (#PCDATA)>
+<!ELEMENT resolved_in_theatre (#PCDATA)>
+<!ELEMENT reported_to_governance (#PCDATA)>

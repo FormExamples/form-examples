@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_grade_flag: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_grade_flag: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_grade_id" | capitalize }}:</b> {{item.medical_operation_note_grade_id}}</label>
+    </div>
+<div>
+    <label><b>{{"flag_id" | capitalize }}:</b> {{item.flag_id}}</label>
+    </div>
+<div>
+    <label><b>{{"category" | capitalize }}:</b> {{item.category}}</label>
+    </div>
+<div>
+    <label><b>{{"priority" | capitalize }}:</b> {{item.priority}}</label>
+    </div>
+<div>
+    <label><b>{{"description" | capitalize }}:</b> {{item.description}}</label>
+    </div>
+<div>
+    <label><b>{{"suggested_action" | capitalize }}:</b> {{item.suggested_action}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_grade_flags">Back to medical_operation_note_grade_flags</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,225 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_implant
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteImplant
+  version: 1.0.0
+  description: Implants, prostheses, sutures, and other materials applied to or left in the patient during a procedure, with regulatory traceability.
+paths:
+  /medical-operation-note-implants:
+    get:
+      summary: List MedicalOperationNoteImplant records
+      operationId: listMedicalOperationNoteImplant
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteImplant records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteImplant"
+    post:
+      summary: Create a new MedicalOperationNoteImplant
+      operationId: createMedicalOperationNoteImplant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteImplant"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteImplant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteImplant"
+        "400":
+          description: Validation error
+  /medical-operation-note-implants/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteImplant by id
+      operationId: getMedicalOperationNoteImplant
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteImplant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteImplant"
+        "404":
+          description: MedicalOperationNoteImplant not found
+    patch:
+      summary: Update an existing MedicalOperationNoteImplant
+      operationId: updateMedicalOperationNoteImplant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteImplant"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteImplant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteImplant"
+        "404":
+          description: MedicalOperationNoteImplant not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteImplant
+      operationId: deleteMedicalOperationNoteImplant
+      responses:
+        "204":
+          description: MedicalOperationNoteImplant deleted
+        "404":
+          description: MedicalOperationNoteImplant not found
+components:
+  schemas:
+    MedicalOperationNoteImplant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        category:
+          type: string
+          enum:
+            - suture
+            - staple
+            - clip
+            - mesh
+            - screw
+            - plate
+            - rod
+            - pin
+            - wire
+            - prosthetic-joint
+            - cardiac-device
+            - vascular-graft
+            - stent
+            - lens
+            - cochlear-implant
+            - breast-implant
+            - pacemaker
+            - icd
+            - other
+            - ""
+          description: "Implant or material category: suture, staple, clip, mesh, screw, plate, rod, pin, wire, prosthetic-joint, cardiac-device, vascular-graft, stent, lens, cochlear-implant, breast-implant, pacemaker, icd, or other."
+        name:
+          type: string
+          maxLength: 255
+          description: Item product name.
+        size_or_gauge:
+          type: string
+          maxLength: 60
+          description: Item size, gauge, or dimensions.
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity used (positive integer).
+        manufacturer:
+          type: string
+          maxLength: 255
+          description: Item manufacturer.
+        lot_number:
+          type: string
+          maxLength: 60
+          description: Manufacturer lot number for traceability.
+        serial_number:
+          type: string
+          maxLength: 60
+          description: Manufacturer serial number for unique-instance traceability.
+        batch_number:
+          type: string
+          maxLength: 60
+          description: Manufacturer batch number.
+        expiry_date:
+          type: string
+          format: date
+          description: Item expiry date.
+        udi_di:
+          type: string
+          maxLength: 120
+          description: Unique Device Identifier (UDI-DI) for regulated medical devices.
+        implant_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site where the implant was placed.
+        registry_required:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether submission to a national implant registry (e.g. NJR, BCIS) is required.
+        registry_submitted:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether registry submission has been completed.
+        notes:
+          type: string
+          description: Free-text notes about the implant or its placement.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - category
+        - name
+        - size_or_gauge
+        - quantity
+        - manufacturer
+        - lot_number
+        - serial_number
+        - batch_number
+        - udi_di
+        - implant_site
+        - registry_required
+        - registry_submitted
+        - notes
+      description: Implants, prostheses, sutures, and other materials applied to or left in the patient during a procedure, with regulatory traceability.

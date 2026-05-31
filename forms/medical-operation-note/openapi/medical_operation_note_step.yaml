@@ -1,0 +1,145 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_step
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteStep
+  version: 1.0.0
+  description: Numbered free-text operative technique steps for an operation note.
+paths:
+  /medical-operation-note-steps:
+    get:
+      summary: List MedicalOperationNoteStep records
+      operationId: listMedicalOperationNoteStep
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteStep records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteStep"
+    post:
+      summary: Create a new MedicalOperationNoteStep
+      operationId: createMedicalOperationNoteStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteStep"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteStep
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteStep"
+        "400":
+          description: Validation error
+  /medical-operation-note-steps/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteStep by id
+      operationId: getMedicalOperationNoteStep
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteStep
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteStep"
+        "404":
+          description: MedicalOperationNoteStep not found
+    patch:
+      summary: Update an existing MedicalOperationNoteStep
+      operationId: updateMedicalOperationNoteStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteStep"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteStep
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteStep"
+        "404":
+          description: MedicalOperationNoteStep not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteStep
+      operationId: deleteMedicalOperationNoteStep
+      responses:
+        "204":
+          description: MedicalOperationNoteStep deleted
+        "404":
+          description: MedicalOperationNoteStep not found
+components:
+  schemas:
+    MedicalOperationNoteStep:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        step_number:
+          type: integer
+          format: int32
+          description: Step ordinal within the case (1-based).
+        title:
+          type: string
+          maxLength: 255
+          description: "Short step title (e.g. \"Incision\", \"Mobilisation\", \"Closure\")."
+        description:
+          type: string
+          description: Free-text description of what was done at this step.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - step_number
+        - title
+        - description
+      description: Numbered free-text operative technique steps for an operation note.

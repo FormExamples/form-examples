@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_procedure
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteProcedureRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_PLANNED_PRIMARY = 1;  // planned-primary
+  ROLE_PLANNED_SECONDARY = 2;  // planned-secondary
+  ROLE_PERFORMED_PRIMARY = 3;  // performed-primary
+  ROLE_PERFORMED_SECONDARY = 4;  // performed-secondary
+  ROLE_UNPLANNED = 5;  // unplanned
+}
+
+enum MedicalOperationNoteProcedureLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_MIDLINE = 4;  // midline
+  LATERALITY_NA = 5;  // na
+}
+
+message MedicalOperationNoteProcedure {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  MedicalOperationNoteProcedureRoleEnum role = 6;  // VARCHAR(20)
+  string opcs4_code = 7;  // VARCHAR(10) — max 10 chars
+  string name = 8;  // VARCHAR(255) — max 255 chars
+  string description = 9;  // TEXT
+  MedicalOperationNoteProcedureLateralityEnum laterality = 10;  // VARCHAR(10)
+  int32 sequence_index = 11;  // INTEGER
+}

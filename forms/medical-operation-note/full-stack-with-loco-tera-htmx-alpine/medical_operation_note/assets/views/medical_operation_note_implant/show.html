@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_implant: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_implant: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_id" | capitalize }}:</b> {{item.medical_operation_note_id}}</label>
+    </div>
+<div>
+    <label><b>{{"category" | capitalize }}:</b> {{item.category}}</label>
+    </div>
+<div>
+    <label><b>{{"name" | capitalize }}:</b> {{item.name}}</label>
+    </div>
+<div>
+    <label><b>{{"size_or_gauge" | capitalize }}:</b> {{item.size_or_gauge}}</label>
+    </div>
+<div>
+    <label><b>{{"quantity" | capitalize }}:</b> {{item.quantity}}</label>
+    </div>
+<div>
+    <label><b>{{"manufacturer" | capitalize }}:</b> {{item.manufacturer}}</label>
+    </div>
+<div>
+    <label><b>{{"lot_number" | capitalize }}:</b> {{item.lot_number}}</label>
+    </div>
+<div>
+    <label><b>{{"serial_number" | capitalize }}:</b> {{item.serial_number}}</label>
+    </div>
+<div>
+    <label><b>{{"batch_number" | capitalize }}:</b> {{item.batch_number}}</label>
+    </div>
+<div>
+    <label><b>{{"expiry_date" | capitalize }}:</b> {{item.expiry_date}}</label>
+    </div>
+<div>
+    <label><b>{{"udi_di" | capitalize }}:</b> {{item.udi_di}}</label>
+    </div>
+<div>
+    <label><b>{{"implant_site" | capitalize }}:</b> {{item.implant_site}}</label>
+    </div>
+<div>
+    <label><b>{{"registry_required" | capitalize }}:</b> {{item.registry_required}}</label>
+    </div>
+<div>
+    <label><b>{{"registry_submitted" | capitalize }}:</b> {{item.registry_submitted}}</label>
+    </div>
+<div>
+    <label><b>{{"notes" | capitalize }}:</b> {{item.notes}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_implants">Back to medical_operation_note_implants</a>
+</div>
+{% endblock content %}

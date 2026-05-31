@@ -1,0 +1,21 @@
+# Tasks: HTML operation-note wizard
+
+- [x] `index.html`
+- [x] `css/style.css`
+- [x] `js/types.js`
+- [x] `js/utils.js`
+- [x] `js/clavien-dindo-rules.js`
+- [x] `js/blood-loss-rules.js`
+- [x] `js/count-rules.js`
+- [x] `js/never-event-rules.js`
+- [x] `js/anaesthetic-event-rules.js`
+- [x] `js/composite-grader.js`
+- [x] `js/flagged-issues.js`
+- [x] `js/wizard.js`
+- [x] `js/report.js`
+- [x] localStorage autosave
+- [x] Sticky progress bar and step-list ToC
+- [x] aria-live report region
+- [x] pdfmake PDF download
+- [ ] Service worker for offline (deferred)
+- [ ] FHIR R5 bundle download (deferred)

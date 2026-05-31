@@ -1,0 +1,9 @@
+<!ELEMENT medical_operation_note_step (id,created_at,updated_at,deleted_at,medical_operation_note_id,step_number,title,description)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT medical_operation_note_id (#PCDATA)>
+<!ELEMENT step_number (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT description (#PCDATA)>

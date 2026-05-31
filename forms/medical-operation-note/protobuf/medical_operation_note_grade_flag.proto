@@ -1,0 +1,50 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_grade_flag
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_INCORRECT_COUNT = 1;  // incorrect-count
+  CATEGORY_RETAINED_FOREIGN_BODY = 2;  // retained-foreign-body
+  CATEGORY_NEVER_EVENT = 3;  // never-event
+  CATEGORY_WRONG_SITE = 4;  // wrong-site
+  CATEGORY_WRONG_SIDE = 5;  // wrong-side
+  CATEGORY_WRONG_PATIENT = 6;  // wrong-patient
+  CATEGORY_WRONG_PROCEDURE = 7;  // wrong-procedure
+  CATEGORY_WRONG_IMPLANT = 8;  // wrong-implant
+  CATEGORY_UNPLANNED_ICU_ADMISSION = 9;  // unplanned-icu-admission
+  CATEGORY_MASSIVE_HAEMORRHAGE = 10;  // massive-haemorrhage
+  CATEGORY_MASSIVE_TRANSFUSION = 11;  // massive-transfusion
+  CATEGORY_CONVERSION_TO_OPEN = 12;  // conversion-to-open
+  CATEGORY_INTRA_OPERATIVE_ARREST = 13;  // intra-operative-arrest
+  CATEGORY_ANAESTHETIC_INCIDENT = 14;  // anaesthetic-incident
+  CATEGORY_IMPLANT_REGISTRY_PENDING = 15;  // implant-registry-pending
+  CATEGORY_SPECIMEN_LABELLING_ISSUE = 16;  // specimen-labelling-issue
+  CATEGORY_EQUIPMENT_PROBLEM = 17;  // equipment-problem
+  CATEGORY_DOCUMENTATION_GAP = 18;  // documentation-gap
+  CATEGORY_GOVERNANCE_REPORT_REQUIRED = 19;  // governance-report-required
+  CATEGORY_OTHER = 20;  // other
+}
+
+enum MedicalOperationNoteGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MedicalOperationNoteGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MedicalOperationNoteGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  MedicalOperationNoteGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

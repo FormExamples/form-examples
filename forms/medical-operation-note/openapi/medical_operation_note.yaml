@@ -1,0 +1,710 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNote
+  version: 1.0.0
+  description: "Operating-team contemporaneous record of a surgical procedure: identification, timing, diagnoses, anaesthesia summary, approach, counts, EBL, complications summary, and post-operative plan."
+paths:
+  /medical-operation-notes:
+    get:
+      summary: List MedicalOperationNote records
+      operationId: listMedicalOperationNote
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNote records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNote"
+    post:
+      summary: Create a new MedicalOperationNote
+      operationId: createMedicalOperationNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNote"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNote"
+        "400":
+          description: Validation error
+  /medical-operation-notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNote by id
+      operationId: getMedicalOperationNote
+      responses:
+        "200":
+          description: The requested MedicalOperationNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNote"
+        "404":
+          description: MedicalOperationNote not found
+    patch:
+      summary: Update an existing MedicalOperationNote
+      operationId: updateMedicalOperationNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNote"
+      responses:
+        "200":
+          description: The updated MedicalOperationNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNote"
+        "404":
+          description: MedicalOperationNote not found
+    delete:
+      summary: Soft-delete a MedicalOperationNote
+      operationId: deleteMedicalOperationNote
+      responses:
+        "204":
+          description: MedicalOperationNote deleted
+        "404":
+          description: MedicalOperationNote not found
+components:
+  schemas:
+    MedicalOperationNote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient who underwent the procedure.
+        lead_surgeon_id:
+          type: string
+          format: uuid
+          description: Foreign key to the lead operating surgeon (primary author of the note).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - amended
+            - signed
+            - urgent
+          description: "Lifecycle status: draft, submitted, amended, signed, or urgent."
+        hospital_name:
+          type: string
+          maxLength: 255
+          description: Hospital or site where the procedure was performed.
+        theatre_number:
+          type: string
+          maxLength: 20
+          description: Operating theatre or OR identifier.
+        list_type:
+          type: string
+          enum:
+            - elective
+            - cepod
+            - trauma
+            - obstetric
+            - day-case
+            - endoscopy
+            - ""
+          description: "Theatre list type: elective, cepod, trauma, obstetric, day-case, or endoscopy."
+        case_start_at:
+          type: string
+          format: date-time
+          description: Timestamp the patient arrived in theatre.
+        anaesthesia_start_at:
+          type: string
+          format: date-time
+          description: Timestamp anaesthesia induction began.
+        knife_to_skin_at:
+          type: string
+          format: date-time
+          description: Timestamp of first surgical incision.
+        end_of_surgery_at:
+          type: string
+          format: date-time
+          description: Timestamp of last surgical action (closure complete).
+        case_end_at:
+          type: string
+          format: date-time
+          description: Timestamp the patient left theatre.
+        consent_status:
+          type: string
+          enum:
+            - written
+            - verbal
+            - lasting-power-of-attorney
+            - emergency-no-consent
+            - declined
+            - ""
+          description: "Consent status at WHO Sign-In: written, verbal, lasting-power-of-attorney, emergency-no-consent, or declined."
+        side_marked:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - na
+            - ""
+          description: "Whether the operative side was marked pre-induction: yes, no, or na."
+        sign_in_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the WHO Sign-In checklist was completed.
+        asa_physical_status:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - VI
+            - ""
+          description: ASA Physical Status carried over from pre-op assessment (I-VI).
+        pre_operative_diagnosis:
+          type: string
+          description: Pre-operative diagnosis or working diagnosis.
+        post_operative_diagnosis:
+          type: string
+          description: Post-operative diagnosis or revised diagnosis after operative findings.
+        indication:
+          type: string
+          description: Clinical indication for the procedure.
+        urgency:
+          type: string
+          enum:
+            - elective
+            - expedited
+            - urgent
+            - emergency
+            - immediate
+            - ""
+          description: "NCEPOD Classification of Intervention: elective, expedited, urgent, emergency, or immediate."
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - midline
+            - na
+            - ""
+          description: "Operative side: left, right, bilateral, midline, or na."
+        anaesthesia_type:
+          type: string
+          enum:
+            - general
+            - regional
+            - neuraxial
+            - sedation
+            - mac
+            - local
+            - combined-ga-regional
+            - ""
+          description: Primary anaesthetic technique used.
+        airway_management:
+          type: string
+          enum:
+            - face-mask
+            - supraglottic
+            - ett
+            - awake-fibreoptic
+            - surgical-airway
+            - none
+            - ""
+          description: "Airway management used: face-mask, supraglottic, ett, awake-fibreoptic, surgical-airway, or none."
+        induction_agent:
+          type: string
+          maxLength: 255
+          description: Anaesthetic induction agent(s) used.
+        maintenance_agent:
+          type: string
+          maxLength: 255
+          description: Anaesthetic maintenance agent(s) used.
+        neuromuscular_blockade:
+          type: string
+          maxLength: 255
+          description: Neuromuscular blocking agent(s) used.
+        regional_block_description:
+          type: string
+          maxLength: 500
+          description: Regional or neuraxial block details, if performed.
+        invasive_monitoring:
+          type: string
+          description: "Invasive monitoring lines: arterial, CVC, PA, cardiac output, others."
+        intraop_crystalloid_ml:
+          type: integer
+          format: int32
+          description: Intra-operative crystalloid given in mL.
+        intraop_colloid_ml:
+          type: integer
+          format: int32
+          description: Intra-operative colloid given in mL.
+        intraop_blood_ml:
+          type: integer
+          format: int32
+          description: Intra-operative blood products given in mL (sum across components).
+        intraop_urine_ml:
+          type: integer
+          format: int32
+          description: Intra-operative urine output in mL.
+        anaesthetic_event:
+          type: string
+          enum:
+            - none
+            - failed-intubation
+            - awareness
+            - anaphylaxis
+            - malignant-hyperthermia
+            - suxamethonium-apnoea
+            - hypoxia
+            - arrhythmia
+            - hypotension
+            - other
+            - ""
+          description: Most significant intra-operative anaesthetic event, if any.
+        anaesthetic_event_description:
+          type: string
+          description: Free-text description of the anaesthetic event.
+        patient_position:
+          type: string
+          enum:
+            - supine
+            - prone
+            - lateral-left
+            - lateral-right
+            - lithotomy
+            - sitting
+            - lloyd-davies
+            - jackknife
+            - other
+            - ""
+          description: Patient position on the operating table.
+        pressure_area_protection_notes:
+          type: string
+          description: Notes on pressure-area protection and padding used.
+        prep_solution:
+          type: string
+          enum:
+            - chlorhexidine-alcohol
+            - povidone-iodine
+            - aqueous-chlorhexidine
+            - aqueous-iodine
+            - other
+            - ""
+          description: Skin preparation solution used.
+        drape_type:
+          type: string
+          maxLength: 255
+          description: Drape type and arrangement used.
+        surgical_approach:
+          type: string
+          enum:
+            - open
+            - laparoscopic
+            - robotic
+            - endoscopic
+            - arthroscopic
+            - thoracoscopic
+            - percutaneous
+            - transluminal
+            - other
+            - ""
+          description: "Surgical approach: open, laparoscopic, robotic, endoscopic, arthroscopic, thoracoscopic, percutaneous, transluminal, or other."
+        incision_type:
+          type: string
+          maxLength: 255
+          description: Incision type and location (e.g. midline laparotomy, Pfannenstiel, lateral).
+        incision_length_cm:
+          type: number
+          format: double
+          description: Incision length in centimetres.
+        table_tilt:
+          type: string
+          enum:
+            - neutral
+            - trendelenburg
+            - reverse-trendelenburg
+            - lateral-left
+            - lateral-right
+            - other
+            - ""
+          description: Table tilt used during the procedure.
+        tourniquet_used:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a tourniquet was used.
+        tourniquet_site:
+          type: string
+          maxLength: 60
+          description: Tourniquet site on the limb.
+        tourniquet_pressure_mmhg:
+          type: integer
+          format: int32
+          description: Tourniquet inflation pressure in mmHg.
+        tourniquet_on_at:
+          type: string
+          format: date-time
+          description: Timestamp tourniquet was inflated.
+        tourniquet_off_at:
+          type: string
+          format: date-time
+          description: Timestamp tourniquet was deflated.
+        converted_to_open:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a minimally-invasive case was converted to open.
+        conversion_reason:
+          type: string
+          description: Reason a minimally-invasive case was converted to open.
+        operative_findings_summary:
+          type: string
+          description: Free-text summary of operative findings (the narrative; numbered steps are in medical_operation_note_step).
+        pathology_found:
+          type: string
+          description: Significant pathology encountered intra-operatively.
+        anatomical_anomalies:
+          type: string
+          description: Anatomical anomalies encountered intra-operatively.
+        intraop_photographs_taken:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether intra-operative photographs were taken for the record.
+        frozen_section_requested:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a frozen-section histology request was made.
+        swab_count_first_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first (initial) swab count was agreed between scrub and circulating staff.
+        swab_count_final_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the final (closing) swab count was agreed.
+        needle_count_first_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first needle count was agreed.
+        needle_count_final_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the final needle count was agreed.
+        instrument_count_first_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first instrument count was agreed.
+        instrument_count_final_agreed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the final instrument count was agreed.
+        count_discrepancy_resolution:
+          type: string
+          description: Free-text record of how any count discrepancy was investigated and resolved.
+        estimated_blood_loss_ml:
+          type: integer
+          format: int32
+          description: Estimated intra-operative blood loss in millilitres.
+        transfusion_given:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any blood product transfusion was given intra-operatively.
+        prbc_units:
+          type: integer
+          format: int32
+          description: Units of packed red blood cells transfused.
+        ffp_units:
+          type: integer
+          format: int32
+          description: Units of fresh frozen plasma transfused.
+        platelet_units:
+          type: integer
+          format: int32
+          description: Units of platelets transfused.
+        cryoprecipitate_units:
+          type: integer
+          format: int32
+          description: Units of cryoprecipitate transfused.
+        cell_salvage_ml:
+          type: integer
+          format: int32
+          description: Volume of cell-salvaged blood returned to the patient in millilitres.
+        massive_haemorrhage_protocol_activated:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the hospital massive haemorrhage protocol was activated.
+        never_event_flagged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a never-event candidate (wrong site, wrong procedure, wrong implant, retained foreign object) was flagged.
+        never_event_description:
+          type: string
+          description: Free-text description of the never-event candidate.
+        equipment_problem:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an equipment failure or sterility breach occurred.
+        equipment_problem_description:
+          type: string
+          description: Free-text description of the equipment problem.
+        recovery_destination:
+          type: string
+          enum:
+            - pacu
+            - ward
+            - enhanced-care
+            - hdu
+            - icu
+            - day-case-discharge
+            - ""
+          description: "Post-operative destination: pacu, ward, enhanced-care, hdu, icu, or day-case-discharge."
+        monitoring_frequency:
+          type: string
+          maxLength: 60
+          description: Post-operative monitoring frequency instructions.
+        iv_fluids_plan:
+          type: string
+          maxLength: 255
+          description: Post-operative IV fluid prescription (type and rate).
+        analgesia_plan:
+          type: string
+          description: Post-operative analgesia plan.
+        antibiotic_plan:
+          type: string
+          maxLength: 255
+          description: Post-operative antibiotic plan.
+        vte_prophylaxis_plan:
+          type: string
+          maxLength: 255
+          description: Post-operative venous thromboembolism prophylaxis plan.
+        diet_plan:
+          type: string
+          enum:
+            - nbm
+            - sips
+            - fluids
+            - soft
+            - normal
+            - as-tolerated
+            - ""
+          description: "Post-operative diet plan: nbm, sips, fluids, soft, normal, or as-tolerated."
+        mobilisation_plan:
+          type: string
+          maxLength: 255
+          description: Post-operative mobilisation instructions.
+        wound_care_plan:
+          type: string
+          description: Wound care, dressing change, and suture removal plan.
+        follow_up_plan:
+          type: string
+          description: Outpatient follow-up plan.
+        special_instructions:
+          type: string
+          description: Free-text special instructions for the receiving team.
+        sign_out_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the WHO Sign-Out was completed before the team left theatre.
+        debrief_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a team debrief was held at the end of the case.
+        surgeon_override_grade:
+          type: string
+          enum:
+            - routine
+            - complicated
+            - high-risk
+            - critical
+            - ""
+          description: Lead surgeon override of the computed composite risk grade, if applied.
+        surgeon_override_reason:
+          type: string
+          description: Reason for the surgeon override of the computed composite risk grade.
+        attestation_text:
+          type: string
+          description: Final attestation statement entered by the surgeon at sign-off.
+        electronic_signature:
+          type: string
+          description: Electronic signature string for the signed note.
+        dictated_at:
+          type: string
+          format: date-time
+          description: Timestamp the note was dictated.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp the note was electronically signed.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - lead_surgeon_id
+        - status
+        - hospital_name
+        - theatre_number
+        - list_type
+        - consent_status
+        - side_marked
+        - sign_in_completed
+        - asa_physical_status
+        - pre_operative_diagnosis
+        - post_operative_diagnosis
+        - indication
+        - urgency
+        - laterality
+        - anaesthesia_type
+        - airway_management
+        - induction_agent
+        - maintenance_agent
+        - neuromuscular_blockade
+        - regional_block_description
+        - invasive_monitoring
+        - anaesthetic_event
+        - anaesthetic_event_description
+        - patient_position
+        - pressure_area_protection_notes
+        - prep_solution
+        - drape_type
+        - surgical_approach
+        - incision_type
+        - table_tilt
+        - tourniquet_used
+        - tourniquet_site
+        - converted_to_open
+        - conversion_reason
+        - operative_findings_summary
+        - pathology_found
+        - anatomical_anomalies
+        - intraop_photographs_taken
+        - frozen_section_requested
+        - swab_count_first_agreed
+        - swab_count_final_agreed
+        - needle_count_first_agreed
+        - needle_count_final_agreed
+        - instrument_count_first_agreed
+        - instrument_count_final_agreed
+        - count_discrepancy_resolution
+        - transfusion_given
+        - massive_haemorrhage_protocol_activated
+        - never_event_flagged
+        - never_event_description
+        - equipment_problem
+        - equipment_problem_description
+        - recovery_destination
+        - monitoring_frequency
+        - iv_fluids_plan
+        - analgesia_plan
+        - antibiotic_plan
+        - vte_prophylaxis_plan
+        - diet_plan
+        - mobilisation_plan
+        - wound_care_plan
+        - follow_up_plan
+        - special_instructions
+        - sign_out_completed
+        - debrief_completed
+        - surgeon_override_grade
+        - surgeon_override_reason
+        - attestation_text
+        - electronic_signature
+      description: "Operating-team contemporaneous record of a surgical procedure: identification, timing, diagnoses, anaesthesia summary, approach, counts, EBL, complications summary, and post-operative plan."

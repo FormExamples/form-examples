@@ -1,0 +1,165 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_team_member
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteTeamMember
+  version: 1.0.0
+  description: "Members of the operating team for an operation note: clinician plus team role and time present."
+paths:
+  /medical-operation-note-team-members:
+    get:
+      summary: List MedicalOperationNoteTeamMember records
+      operationId: listMedicalOperationNoteTeamMember
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteTeamMember records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+    post:
+      summary: Create a new MedicalOperationNoteTeamMember
+      operationId: createMedicalOperationNoteTeamMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteTeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+        "400":
+          description: Validation error
+  /medical-operation-note-team-members/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteTeamMember by id
+      operationId: getMedicalOperationNoteTeamMember
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteTeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+        "404":
+          description: MedicalOperationNoteTeamMember not found
+    patch:
+      summary: Update an existing MedicalOperationNoteTeamMember
+      operationId: updateMedicalOperationNoteTeamMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteTeamMember
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteTeamMember"
+        "404":
+          description: MedicalOperationNoteTeamMember not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteTeamMember
+      operationId: deleteMedicalOperationNoteTeamMember
+      responses:
+        "204":
+          description: MedicalOperationNoteTeamMember deleted
+        "404":
+          description: MedicalOperationNoteTeamMember not found
+components:
+  schemas:
+    MedicalOperationNoteTeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the clinician filling this team role.
+        team_role:
+          type: string
+          enum:
+            - lead-surgeon
+            - first-assistant
+            - second-assistant
+            - lead-anaesthetist
+            - anaesthetic-assistant
+            - odp
+            - scrub-nurse
+            - circulating-nurse
+            - theatre-coordinator
+            - medical-student
+            - observer
+            - ""
+          description: "Role of this clinician on this case: lead-surgeon, first-assistant, second-assistant, lead-anaesthetist, anaesthetic-assistant, odp, scrub-nurse, circulating-nurse, theatre-coordinator, medical-student, or observer."
+        arrived_at:
+          type: string
+          format: date-time
+          description: Timestamp the team member arrived in theatre for this case.
+        left_at:
+          type: string
+          format: date-time
+          description: Timestamp the team member left theatre for this case (e.g. shift change).
+        notes:
+          type: string
+          description: Free-text notes (e.g. handover details, supervision arrangement).
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - clinician_id
+        - team_role
+        - notes
+      description: "Members of the operating team for an operation note: clinician plus team role and time present."

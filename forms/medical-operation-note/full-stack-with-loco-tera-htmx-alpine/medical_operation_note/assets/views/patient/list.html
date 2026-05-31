@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}
+List of patient
+{% endblock title %}
+
+{% block page_title %}
+patient
+{% endblock page_title %}
+
+{% block content %}
+<div class="mb-10">
+
+    {% if items %}
+
+    <div class="mb-5">
+        <div class="relative w-full overflow-auto">
+            <table class="w-full caption-bottom text-sm">
+                <thead class="[&amp;_tr]:border-b">
+                    <tr class="border-b transition-colors hover:bg-muted/50">
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"deleted_at" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"name" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"birth_date" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"sex" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"email" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"phone" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"postal_address_as_full_text" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"country_as_iso_3166_1_alpha_2" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"postcode" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"united_kingdom_nhs_number" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"hospital_mrn" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"height_as_cm" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"weight_as_kg" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"body_mass_index" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"allergies_summary" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                           Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="[&amp;_tr:last-child]:border-0">
+                   {% for item in items %}
+                    <tr class="border-b transition-colors hover:bg-muted/50">
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.deleted_at | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.name | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.birth_date | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.sex | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.email | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.phone | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.postal_address_as_full_text | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.country_as_iso_3166_1_alpha_2 | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.postcode | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.united_kingdom_nhs_number | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.hospital_mrn | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.height_as_cm | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.weight_as_kg | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.body_mass_index | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.allergies_summary | escape }}
+                        </td>
+                        <td>
+                            <a href="/patients/{{ item.id }}/edit">Edit</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="flex">
+            <div class="ml-auto  p-4">
+                <a href="/patients/new"
+                    class="mt-5 bg-blue-500 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Create
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="mt-10 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col items-center">
+            <h3 class="font-bold text-lg">Nothing Here Yet</h3>
+            There are no records to display. Add a new record to get started!
+            <a href="/patients/new"
+            class="mt-5 bg-blue-500 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            Create
+        </a>
+        </div>
+    </div>
+   
+    {% endif %}
+
+    
+</div>
+{% endblock content %}

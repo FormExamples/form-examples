@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_specimen: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_specimen: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_id" | capitalize }}:</b> {{item.medical_operation_note_id}}</label>
+    </div>
+<div>
+    <label><b>{{"label" | capitalize }}:</b> {{item.label}}</label>
+    </div>
+<div>
+    <label><b>{{"specimen_type" | capitalize }}:</b> {{item.specimen_type}}</label>
+    </div>
+<div>
+    <label><b>{{"anatomical_site" | capitalize }}:</b> {{item.anatomical_site}}</label>
+    </div>
+<div>
+    <label><b>{{"container" | capitalize }}:</b> {{item.container}}</label>
+    </div>
+<div>
+    <label><b>{{"fixative" | capitalize }}:</b> {{item.fixative}}</label>
+    </div>
+<div>
+    <label><b>{{"destination" | capitalize }}:</b> {{item.destination}}</label>
+    </div>
+<div>
+    <label><b>{{"urgency" | capitalize }}:</b> {{item.urgency}}</label>
+    </div>
+<div>
+    <label><b>{{"label_verified" | capitalize }}:</b> {{item.label_verified}}</label>
+    </div>
+<div>
+    <label><b>{{"chain_of_custody_documented" | capitalize }}:</b> {{item.chain_of_custody_documented}}</label>
+    </div>
+<div>
+    <label><b>{{"notes" | capitalize }}:</b> {{item.notes}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_specimens">Back to medical_operation_note_specimens</a>
+</div>
+{% endblock content %}

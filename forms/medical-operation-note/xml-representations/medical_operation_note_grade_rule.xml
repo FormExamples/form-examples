@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note_grade_rule SYSTEM "medical_operation_note_grade_rule.dtd">
+<medical_operation_note_grade_rule>
+<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_operation_note_grade_id>ff0e8400-e29b-41d4-a716-44665544000a</medical_operation_note_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<instrument>blood-loss</instrument>
+<band>routine</band>
+<category>General</category>
+<description>Example text.</description>
+</medical_operation_note_grade_rule>

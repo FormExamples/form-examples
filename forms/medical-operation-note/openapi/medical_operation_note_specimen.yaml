@@ -1,0 +1,227 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_specimen
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteSpecimen
+  version: 1.0.0
+  description: Specimens sent from theatre with container, fixative, destination, urgency, and labelling/chain-of-custody status.
+paths:
+  /medical-operation-note-specimens:
+    get:
+      summary: List MedicalOperationNoteSpecimen records
+      operationId: listMedicalOperationNoteSpecimen
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteSpecimen records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+    post:
+      summary: Create a new MedicalOperationNoteSpecimen
+      operationId: createMedicalOperationNoteSpecimen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteSpecimen
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+        "400":
+          description: Validation error
+  /medical-operation-note-specimens/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteSpecimen by id
+      operationId: getMedicalOperationNoteSpecimen
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteSpecimen
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+        "404":
+          description: MedicalOperationNoteSpecimen not found
+    patch:
+      summary: Update an existing MedicalOperationNoteSpecimen
+      operationId: updateMedicalOperationNoteSpecimen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteSpecimen
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteSpecimen"
+        "404":
+          description: MedicalOperationNoteSpecimen not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteSpecimen
+      operationId: deleteMedicalOperationNoteSpecimen
+      responses:
+        "204":
+          description: MedicalOperationNoteSpecimen deleted
+        "404":
+          description: MedicalOperationNoteSpecimen not found
+components:
+  schemas:
+    MedicalOperationNoteSpecimen:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        label:
+          type: string
+          maxLength: 255
+          description: Specimen label as written on the container.
+        specimen_type:
+          type: string
+          enum:
+            - tissue
+            - fluid
+            - pus
+            - swab
+            - bone
+            - stone
+            - foreign-body
+            - biopsy
+            - resection
+            - other
+            - ""
+          description: "Specimen type: tissue, fluid, pus, swab, bone, stone, foreign-body, biopsy, resection, or other."
+        anatomical_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site of origin.
+        container:
+          type: string
+          enum:
+            - histology-pot
+            - csf-bottle
+            - sterile-pot
+            - culture-bottle
+            - cytology-fluid
+            - frozen-section-bag
+            - biobank-tube
+            - other
+            - ""
+          description: "Container: histology-pot, csf-bottle, sterile-pot, culture-bottle, cytology-fluid, frozen-section-bag, biobank-tube, or other."
+        fixative:
+          type: string
+          enum:
+            - formalin
+            - saline
+            - rpmi
+            - cytology-fixative
+            - none-fresh
+            - liquid-nitrogen
+            - other
+            - ""
+          description: "Fixative: formalin, saline, rpmi, cytology-fixative, none-fresh, liquid-nitrogen, or other."
+        destination:
+          type: string
+          enum:
+            - histopathology
+            - microbiology
+            - cytology
+            - frozen-section
+            - biobank
+            - research
+            - other
+            - ""
+          description: "Destination laboratory: histopathology, microbiology, cytology, frozen-section, biobank, research, or other."
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - frozen-section
+            - mdt
+            - ""
+          description: "Specimen urgency: routine, urgent, frozen-section, or mdt."
+        label_verified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the label was read back and verified at the trolley before leaving theatre.
+        chain_of_custody_documented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the chain-of-custody paperwork was completed.
+        notes:
+          type: string
+          description: Free-text notes about the specimen or its handling.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - label
+        - specimen_type
+        - anatomical_site
+        - container
+        - fixative
+        - destination
+        - urgency
+        - label_verified
+        - chain_of_custody_documented
+        - notes
+      description: Specimens sent from theatre with container, fixative, destination, urgency, and labelling/chain-of-custody status.

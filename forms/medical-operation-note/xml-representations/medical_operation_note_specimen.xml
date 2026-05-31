@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_operation_note_specimen SYSTEM "medical_operation_note_specimen.dtd">
+<medical_operation_note_specimen>
+<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_operation_note_id>770e8400-e29b-41d4-a716-446655440002</medical_operation_note_id>
+<label></label>
+<specimen_type>tissue</specimen_type>
+<anatomical_site>Example location</anatomical_site>
+<container>histology-pot</container>
+<fixative>formalin</fixative>
+<destination>histopathology</destination>
+<urgency>routine</urgency>
+<label_verified>yes</label_verified>
+<chain_of_custody_documented>yes</chain_of_custody_documented>
+<notes>Example text.</notes>
+</medical_operation_note_specimen>

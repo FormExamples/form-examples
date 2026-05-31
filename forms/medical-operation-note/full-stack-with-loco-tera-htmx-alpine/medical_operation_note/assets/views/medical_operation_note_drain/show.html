@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_drain: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_drain: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_id" | capitalize }}:</b> {{item.medical_operation_note_id}}</label>
+    </div>
+<div>
+    <label><b>{{"device_type" | capitalize }}:</b> {{item.device_type}}</label>
+    </div>
+<div>
+    <label><b>{{"name" | capitalize }}:</b> {{item.name}}</label>
+    </div>
+<div>
+    <label><b>{{"site" | capitalize }}:</b> {{item.site}}</label>
+    </div>
+<div>
+    <label><b>{{"size_or_gauge" | capitalize }}:</b> {{item.size_or_gauge}}</label>
+    </div>
+<div>
+    <label><b>{{"output_target" | capitalize }}:</b> {{item.output_target}}</label>
+    </div>
+<div>
+    <label><b>{{"removal_plan" | capitalize }}:</b> {{item.removal_plan}}</label>
+    </div>
+<div>
+    <label><b>{{"removal_by_date" | capitalize }}:</b> {{item.removal_by_date}}</label>
+    </div>
+<div>
+    <label><b>{{"quantity" | capitalize }}:</b> {{item.quantity}}</label>
+    </div>
+<div>
+    <label><b>{{"notes" | capitalize }}:</b> {{item.notes}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_drains">Back to medical_operation_note_drains</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+View medical_operation_note_complication: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+View medical_operation_note_complication: {{ item.id }}
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="mb-10">
+    <div>
+    <label><b>{{"deleted_at" | capitalize }}:</b> {{item.deleted_at}}</label>
+    </div>
+<div>
+    <label><b>{{"medical_operation_note_id" | capitalize }}:</b> {{item.medical_operation_note_id}}</label>
+    </div>
+<div>
+    <label><b>{{"category" | capitalize }}:</b> {{item.category}}</label>
+    </div>
+<div>
+    <label><b>{{"description" | capitalize }}:</b> {{item.description}}</label>
+    </div>
+<div>
+    <label><b>{{"clavien_dindo_grade" | capitalize }}:</b> {{item.clavien_dindo_grade}}</label>
+    </div>
+<div>
+    <label><b>{{"onset_at" | capitalize }}:</b> {{item.onset_at}}</label>
+    </div>
+<div>
+    <label><b>{{"action_taken" | capitalize }}:</b> {{item.action_taken}}</label>
+    </div>
+<div>
+    <label><b>{{"resolved_in_theatre" | capitalize }}:</b> {{item.resolved_in_theatre}}</label>
+    </div>
+<div>
+    <label><b>{{"reported_to_governance" | capitalize }}:</b> {{item.reported_to_governance}}</label>
+    </div>
+<br />
+<a href="/medical_operation_note_complications">Back to medical_operation_note_complications</a>
+</div>
+{% endblock content %}

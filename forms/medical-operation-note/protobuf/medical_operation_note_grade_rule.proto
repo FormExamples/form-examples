@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_grade_rule
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_BLOOD_LOSS = 1;  // blood-loss
+  INSTRUMENT_TRANSFUSION = 2;  // transfusion
+  INSTRUMENT_CLAVIEN_DINDO = 3;  // clavien-dindo
+  INSTRUMENT_COUNTS = 4;  // counts
+  INSTRUMENT_NEVER_EVENT = 5;  // never-event
+  INSTRUMENT_ANAESTHETIC_EVENT = 6;  // anaesthetic-event
+  INSTRUMENT_CONVERSION = 7;  // conversion
+  INSTRUMENT_ASA = 8;  // asa
+  INSTRUMENT_COMPOSITE = 9;  // composite
+}
+
+enum MedicalOperationNoteGradeRuleBandEnum {
+  BAND_UNSPECIFIED = 0;
+  BAND_ROUTINE = 1;  // routine
+  BAND_COMPLICATED = 2;  // complicated
+  BAND_HIGH_RISK = 3;  // high-risk
+  BAND_CRITICAL = 4;  // critical
+}
+
+message MedicalOperationNoteGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  MedicalOperationNoteGradeRuleInstrumentEnum instrument = 7;  // VARCHAR(30)
+  MedicalOperationNoteGradeRuleBandEnum band = 8;  // VARCHAR(15)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

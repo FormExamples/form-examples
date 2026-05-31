@@ -1,0 +1,228 @@
+{
+  "resourceType": "Observation",
+  "id": "dd0e8400-e29b-41d4-a716-446655440008",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-operation-note",
+        "code": "medical_operation_note_specimen",
+        "display": "Medical Operation Note Specimen"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "label",
+            "display": "Label"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "specimen_type",
+            "display": "Specimen Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:specimen_type",
+            "code": "tissue",
+            "display": "Tissue"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "anatomical_site",
+            "display": "Anatomical Site"
+          }
+        ]
+      },
+      "valueString": "Example location"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "container",
+            "display": "Container"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:container",
+            "code": "histology-pot",
+            "display": "Histology-Pot"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "fixative",
+            "display": "Fixative"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:fixative",
+            "code": "formalin",
+            "display": "Formalin"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "destination",
+            "display": "Destination"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:destination",
+            "code": "histopathology",
+            "display": "Histopathology"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "urgency",
+            "display": "Urgency"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:urgency",
+            "code": "routine",
+            "display": "Routine"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "label_verified",
+            "display": "Label Verified"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:label_verified",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "chain_of_custody_documented",
+            "display": "Chain Of Custody Documented"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:chain_of_custody_documented",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_step
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+message MedicalOperationNoteStep {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  int32 step_number = 6;  // INTEGER
+  string title = 7;  // VARCHAR(255) — max 255 chars
+  string description = 8;  // TEXT
+}

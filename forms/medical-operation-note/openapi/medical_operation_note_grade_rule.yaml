@@ -1,0 +1,170 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_grade_rule
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteGradeRule
+  version: 1.0.0
+  description: "Audit trail of every grading rule that fired during composite-risk computation: instrument, band, category, and description."
+paths:
+  /medical-operation-note-grade-rules:
+    get:
+      summary: List MedicalOperationNoteGradeRule records
+      operationId: listMedicalOperationNoteGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+    post:
+      summary: Create a new MedicalOperationNoteGradeRule
+      operationId: createMedicalOperationNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+        "400":
+          description: Validation error
+  /medical-operation-note-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteGradeRule by id
+      operationId: getMedicalOperationNoteGradeRule
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+        "404":
+          description: MedicalOperationNoteGradeRule not found
+    patch:
+      summary: Update an existing MedicalOperationNoteGradeRule
+      operationId: updateMedicalOperationNoteGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeRule"
+        "404":
+          description: MedicalOperationNoteGradeRule not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteGradeRule
+      operationId: deleteMedicalOperationNoteGradeRule
+      responses:
+        "204":
+          description: MedicalOperationNoteGradeRule deleted
+        "404":
+          description: MedicalOperationNoteGradeRule not found
+components:
+  schemas:
+    MedicalOperationNoteGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-BLOOD-LOSS-MASSIVE-01).
+        instrument:
+          type: string
+          enum:
+            - blood-loss
+            - transfusion
+            - clavien-dindo
+            - counts
+            - never-event
+            - anaesthetic-event
+            - conversion
+            - asa
+            - composite
+          description: "Scoring instrument the rule belongs to: blood-loss, transfusion, clavien-dindo, counts, never-event, anaesthetic-event, conversion, asa, or composite."
+        band:
+          type: string
+          enum:
+            - routine
+            - complicated
+            - high-risk
+            - critical
+            - ""
+          description: "Composite-risk band contributed by this rule: routine, complicated, high-risk, or critical."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. haemorrhage, count-discrepancy, anaesthetic-incident).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_grade_id
+        - rule_id
+        - instrument
+        - band
+        - category
+        - description
+      description: "Audit trail of every grading rule that fired during composite-risk computation: instrument, band, category, and description."

@@ -1,0 +1,53 @@
+<section class="border rounded p-4 space-y-2">
+  <h2 class="text-xl font-semibold">2. Patient identification</h2>
+  <div class="grid grid-cols-2 gap-2">
+    <label>NHS number
+      <input type="text" name="patient_nhs_number" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Hospital MRN
+      <input type="text" name="patient_mrn" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Full name
+      <input type="text" name="patient_name" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Date of birth
+      <input type="date" name="patient_birth_date" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Sex
+      <select name="patient_sex" class="border rounded px-2 py-1 w-full">
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+    <label>Weight (kg)
+      <input type="number" step="0.1" name="patient_weight_kg" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Height (cm)
+      <input type="number" step="0.1" name="patient_height_cm" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Consent status
+      <select name="consent_status" class="border rounded px-2 py-1 w-full">
+        <option value="signed">Signed and witnessed</option>
+        <option value="emergency">Emergency consent</option>
+        <option value="incapacitated">Best-interests decision</option>
+      </select>
+    </label>
+    <label>Side marked
+      <select name="side_marked" class="border rounded px-2 py-1 w-full">
+        <option value="not-applicable">Not applicable</option>
+        <option value="marked">Marked and confirmed</option>
+        <option value="not-marked">Not marked</option>
+      </select>
+    </label>
+    <label>WHO Sign-In completed
+      <select name="sign_in_completed" class="border rounded px-2 py-1 w-full">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </label>
+  </div>
+  <label>Allergy summary
+    <textarea name="allergies_summary" rows="2" class="border rounded px-2 py-1 w-full"></textarea>
+  </label>
+</section>

@@ -1,0 +1,192 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_complication
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteComplication
+  version: 1.0.0
+  description: Intra-operative complications classified by Clavien-Dindo with description, action taken, and governance reporting status.
+paths:
+  /medical-operation-note-complications:
+    get:
+      summary: List MedicalOperationNoteComplication records
+      operationId: listMedicalOperationNoteComplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteComplication records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteComplication"
+    post:
+      summary: Create a new MedicalOperationNoteComplication
+      operationId: createMedicalOperationNoteComplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteComplication"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteComplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteComplication"
+        "400":
+          description: Validation error
+  /medical-operation-note-complications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteComplication by id
+      operationId: getMedicalOperationNoteComplication
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteComplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteComplication"
+        "404":
+          description: MedicalOperationNoteComplication not found
+    patch:
+      summary: Update an existing MedicalOperationNoteComplication
+      operationId: updateMedicalOperationNoteComplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteComplication"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteComplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteComplication"
+        "404":
+          description: MedicalOperationNoteComplication not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteComplication
+      operationId: deleteMedicalOperationNoteComplication
+      responses:
+        "204":
+          description: MedicalOperationNoteComplication deleted
+        "404":
+          description: MedicalOperationNoteComplication not found
+components:
+  schemas:
+    MedicalOperationNoteComplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        category:
+          type: string
+          enum:
+            - haemorrhage
+            - visceral-injury
+            - vascular-injury
+            - nerve-injury
+            - cardiac-arrhythmia
+            - cardiac-arrest
+            - respiratory-arrest
+            - anaesthetic
+            - positioning-pressure
+            - infection-suspected
+            - equipment-failure
+            - medication-error
+            - other
+            - ""
+          description: "Complication category: haemorrhage, visceral-injury, vascular-injury, nerve-injury, cardiac-arrhythmia, cardiac-arrest, respiratory-arrest, anaesthetic, positioning-pressure, infection-suspected, equipment-failure, medication-error, or other."
+        description:
+          type: string
+          description: Free-text description of the complication.
+        clavien_dindo_grade:
+          type: string
+          enum:
+            - "0"
+            - I
+            - II
+            - IIIa
+            - IIIb
+            - IVa
+            - IVb
+            - V
+            - ""
+          description: "Clavien-Dindo classification grade: 0, I, II, IIIa, IIIb, IVa, IVb, or V."
+        onset_at:
+          type: string
+          format: date-time
+          description: Timestamp the complication was identified.
+        action_taken:
+          type: string
+          description: Action taken to manage the complication.
+        resolved_in_theatre:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the complication was resolved before the patient left theatre.
+        reported_to_governance:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the complication has been entered into the clinical governance / Datix system.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - category
+        - description
+        - clavien_dindo_grade
+        - action_taken
+        - resolved_in_theatre
+        - reported_to_governance
+      description: Intra-operative complications classified by Clavien-Dindo with description, action taken, and governance reporting status.

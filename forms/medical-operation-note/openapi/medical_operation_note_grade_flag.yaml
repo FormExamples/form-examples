@@ -1,0 +1,181 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_grade_flag
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the composite-risk grade, with priority and a suggested action for the recovery and governance team.
+paths:
+  /medical-operation-note-grade-flags:
+    get:
+      summary: List MedicalOperationNoteGradeFlag records
+      operationId: listMedicalOperationNoteGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+    post:
+      summary: Create a new MedicalOperationNoteGradeFlag
+      operationId: createMedicalOperationNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+        "400":
+          description: Validation error
+  /medical-operation-note-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteGradeFlag by id
+      operationId: getMedicalOperationNoteGradeFlag
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+        "404":
+          description: MedicalOperationNoteGradeFlag not found
+    patch:
+      summary: Update an existing MedicalOperationNoteGradeFlag
+      operationId: updateMedicalOperationNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteGradeFlag"
+        "404":
+          description: MedicalOperationNoteGradeFlag not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteGradeFlag
+      operationId: deleteMedicalOperationNoteGradeFlag
+      responses:
+        "204":
+          description: MedicalOperationNoteGradeFlag deleted
+        "404":
+          description: MedicalOperationNoteGradeFlag not found
+components:
+  schemas:
+    MedicalOperationNoteGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-RETAINED-FOREIGN-BODY-001).
+        category:
+          type: string
+          enum:
+            - incorrect-count
+            - retained-foreign-body
+            - never-event
+            - wrong-site
+            - wrong-side
+            - wrong-patient
+            - wrong-procedure
+            - wrong-implant
+            - unplanned-icu-admission
+            - massive-haemorrhage
+            - massive-transfusion
+            - conversion-to-open
+            - intra-operative-arrest
+            - anaesthetic-incident
+            - implant-registry-pending
+            - specimen-labelling-issue
+            - equipment-problem
+            - documentation-gap
+            - governance-report-required
+            - other
+            - ""
+          description: Flag category (see CHECK constraint for enumeration).
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical or governance action (e.g. \"submit Datix report\", \"x-ray to exclude retained item\")."
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the composite-risk grade, with priority and a suggested action for the recovery and governance team.

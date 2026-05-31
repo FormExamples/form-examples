@@ -1,0 +1,62 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_complication
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteComplicationCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HAEMORRHAGE = 1;  // haemorrhage
+  CATEGORY_VISCERAL_INJURY = 2;  // visceral-injury
+  CATEGORY_VASCULAR_INJURY = 3;  // vascular-injury
+  CATEGORY_NERVE_INJURY = 4;  // nerve-injury
+  CATEGORY_CARDIAC_ARRHYTHMIA = 5;  // cardiac-arrhythmia
+  CATEGORY_CARDIAC_ARREST = 6;  // cardiac-arrest
+  CATEGORY_RESPIRATORY_ARREST = 7;  // respiratory-arrest
+  CATEGORY_ANAESTHETIC = 8;  // anaesthetic
+  CATEGORY_POSITIONING_PRESSURE = 9;  // positioning-pressure
+  CATEGORY_INFECTION_SUSPECTED = 10;  // infection-suspected
+  CATEGORY_EQUIPMENT_FAILURE = 11;  // equipment-failure
+  CATEGORY_MEDICATION_ERROR = 12;  // medication-error
+  CATEGORY_OTHER = 13;  // other
+}
+
+enum MedicalOperationNoteComplicationClavienDindoGradeEnum {
+  CLAVIENDINDOGRADE_UNSPECIFIED = 0;
+  CLAVIENDINDOGRADE_V_0 = 1;  // 0
+  CLAVIENDINDOGRADE_I = 2;  // I
+  CLAVIENDINDOGRADE_II = 3;  // II
+  CLAVIENDINDOGRADE_IIIA = 4;  // IIIa
+  CLAVIENDINDOGRADE_IIIB = 5;  // IIIb
+  CLAVIENDINDOGRADE_IVA = 6;  // IVa
+  CLAVIENDINDOGRADE_IVB = 7;  // IVb
+  CLAVIENDINDOGRADE_V = 8;  // V
+}
+
+enum MedicalOperationNoteComplicationResolvedInTheatreEnum {
+  RESOLVEDINTHEATRE_UNSPECIFIED = 0;
+  RESOLVEDINTHEATRE_YES = 1;  // yes
+  RESOLVEDINTHEATRE_NO = 2;  // no
+}
+
+enum MedicalOperationNoteComplicationReportedToGovernanceEnum {
+  REPORTEDTOGOVERNANCE_UNSPECIFIED = 0;
+  REPORTEDTOGOVERNANCE_YES = 1;  // yes
+  REPORTEDTOGOVERNANCE_NO = 2;  // no
+}
+
+message MedicalOperationNoteComplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  MedicalOperationNoteComplicationCategoryEnum category = 6;  // VARCHAR(40)
+  string description = 7;  // TEXT
+  MedicalOperationNoteComplicationClavienDindoGradeEnum clavien_dindo_grade = 8;  // VARCHAR(5)
+  string onset_at = 9;  // TIMESTAMPTZ — iso 8601
+  string action_taken = 10;  // TEXT
+  MedicalOperationNoteComplicationResolvedInTheatreEnum resolved_in_theatre = 11;  // VARCHAR(5)
+  MedicalOperationNoteComplicationReportedToGovernanceEnum reported_to_governance = 12;  // VARCHAR(5)
+}

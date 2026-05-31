@@ -1,0 +1,61 @@
+<section class="border rounded p-4 space-y-2" x-data="{ tourniquet: false }">
+  <h2 class="text-xl font-semibold">6. Position, prep &amp; approach</h2>
+  <div class="grid grid-cols-2 gap-2">
+    <label>Patient position
+      <select name="patient_position" class="border rounded px-2 py-1 w-full">
+        <option value="supine">Supine</option>
+        <option value="prone">Prone</option>
+        <option value="lateral">Lateral</option>
+        <option value="lithotomy">Lithotomy</option>
+        <option value="beach-chair">Beach chair</option>
+        <option value="trendelenburg">Trendelenburg</option>
+      </select>
+    </label>
+    <label>Table tilt
+      <select name="table_tilt" class="border rounded px-2 py-1 w-full">
+        <option value="neutral">Neutral</option>
+        <option value="head-up">Head up</option>
+        <option value="head-down">Head down</option>
+        <option value="lateral">Lateral</option>
+      </select>
+    </label>
+    <label>Prep solution
+      <input type="text" name="prep_solution" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Drape type
+      <input type="text" name="drape_type" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Surgical approach
+      <input type="text" name="surgical_approach" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Incision type
+      <input type="text" name="incision_type" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Incision length (cm)
+      <input type="number" step="0.1" name="incision_length_cm" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Tourniquet used?
+      <select name="tourniquet_used" class="border rounded px-2 py-1 w-full" @change="tourniquet = ($event.target.value === 'yes')">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </label>
+  </div>
+  <div class="grid grid-cols-2 gap-2" x-show="tourniquet">
+    <label>Tourniquet site
+      <input type="text" name="tourniquet_site" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Tourniquet pressure (mmHg)
+      <input type="number" name="tourniquet_pressure_mmhg" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Tourniquet on
+      <input type="datetime-local" name="tourniquet_on_at" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Tourniquet off
+      <input type="datetime-local" name="tourniquet_off_at" class="border rounded px-2 py-1 w-full" />
+    </label>
+  </div>
+  <label>Pressure-area protection notes
+    <textarea name="pressure_area_protection_notes" rows="2" class="border rounded px-2 py-1 w-full"></textarea>
+  </label>
+</section>

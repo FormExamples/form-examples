@@ -1,0 +1,189 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: medical_operation_note_drain
+openapi: 3.1.0
+info:
+  title: Medical Operation Note — MedicalOperationNoteDrain
+  version: 1.0.0
+  description: Drains, packs, urinary catheters, NG tubes, and other devices left in situ at the end of the procedure.
+paths:
+  /medical-operation-note-drains:
+    get:
+      summary: List MedicalOperationNoteDrain records
+      operationId: listMedicalOperationNoteDrain
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalOperationNoteDrain records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalOperationNoteDrain"
+    post:
+      summary: Create a new MedicalOperationNoteDrain
+      operationId: createMedicalOperationNoteDrain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteDrain"
+      responses:
+        "201":
+          description: The newly created MedicalOperationNoteDrain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteDrain"
+        "400":
+          description: Validation error
+  /medical-operation-note-drains/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalOperationNoteDrain by id
+      operationId: getMedicalOperationNoteDrain
+      responses:
+        "200":
+          description: The requested MedicalOperationNoteDrain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteDrain"
+        "404":
+          description: MedicalOperationNoteDrain not found
+    patch:
+      summary: Update an existing MedicalOperationNoteDrain
+      operationId: updateMedicalOperationNoteDrain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalOperationNoteDrain"
+      responses:
+        "200":
+          description: The updated MedicalOperationNoteDrain
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalOperationNoteDrain"
+        "404":
+          description: MedicalOperationNoteDrain not found
+    delete:
+      summary: Soft-delete a MedicalOperationNoteDrain
+      operationId: deleteMedicalOperationNoteDrain
+      responses:
+        "204":
+          description: MedicalOperationNoteDrain deleted
+        "404":
+          description: MedicalOperationNoteDrain not found
+components:
+  schemas:
+    MedicalOperationNoteDrain:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        medical_operation_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent operation note.
+        device_type:
+          type: string
+          enum:
+            - closed-suction
+            - open-corrugated
+            - jackson-pratt
+            - penrose
+            - redivac
+            - chest-drain
+            - pack
+            - urinary-catheter
+            - suprapubic-catheter
+            - ng-tube
+            - rectal-tube
+            - biliary-drain
+            - pigtail
+            - other
+            - ""
+          description: "Device type: closed-suction, open-corrugated, jackson-pratt, penrose, redivac, chest-drain, pack, urinary-catheter, suprapubic-catheter, ng-tube, rectal-tube, biliary-drain, pigtail, or other."
+        name:
+          type: string
+          maxLength: 255
+          description: Device product name or short description.
+        site:
+          type: string
+          maxLength: 255
+          description: Anatomical site or insertion location.
+        size_or_gauge:
+          type: string
+          maxLength: 60
+          description: Device size, French gauge, or dimensions.
+        output_target:
+          type: string
+          maxLength: 255
+          description: Expected output character (serous, sanguineous, biliary, faecal, urine) and volume range.
+        removal_plan:
+          type: string
+          maxLength: 255
+          description: "Planned criteria for removal (e.g. \"remove when < 30 mL/24h\")."
+        removal_by_date:
+          type: string
+          format: date
+          description: Date by which the device should be removed (e.g. pack removal-by deadline).
+        quantity:
+          type: integer
+          format: int32
+          description: Quantity of devices placed (positive integer).
+        notes:
+          type: string
+          description: Free-text notes about the device.
+      required:
+        - created_at
+        - updated_at
+        - medical_operation_note_id
+        - device_type
+        - name
+        - site
+        - size_or_gauge
+        - output_target
+        - removal_plan
+        - quantity
+        - notes
+      description: Drains, packs, urinary catheters, NG tubes, and other devices left in situ at the end of the procedure.

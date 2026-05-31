@@ -1,0 +1,63 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_implant
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteImplantCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUTURE = 1;  // suture
+  CATEGORY_STAPLE = 2;  // staple
+  CATEGORY_CLIP = 3;  // clip
+  CATEGORY_MESH = 4;  // mesh
+  CATEGORY_SCREW = 5;  // screw
+  CATEGORY_PLATE = 6;  // plate
+  CATEGORY_ROD = 7;  // rod
+  CATEGORY_PIN = 8;  // pin
+  CATEGORY_WIRE = 9;  // wire
+  CATEGORY_PROSTHETIC_JOINT = 10;  // prosthetic-joint
+  CATEGORY_CARDIAC_DEVICE = 11;  // cardiac-device
+  CATEGORY_VASCULAR_GRAFT = 12;  // vascular-graft
+  CATEGORY_STENT = 13;  // stent
+  CATEGORY_LENS = 14;  // lens
+  CATEGORY_COCHLEAR_IMPLANT = 15;  // cochlear-implant
+  CATEGORY_BREAST_IMPLANT = 16;  // breast-implant
+  CATEGORY_PACEMAKER = 17;  // pacemaker
+  CATEGORY_ICD = 18;  // icd
+  CATEGORY_OTHER = 19;  // other
+}
+
+enum MedicalOperationNoteImplantRegistryRequiredEnum {
+  REGISTRYREQUIRED_UNSPECIFIED = 0;
+  REGISTRYREQUIRED_YES = 1;  // yes
+  REGISTRYREQUIRED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteImplantRegistrySubmittedEnum {
+  REGISTRYSUBMITTED_UNSPECIFIED = 0;
+  REGISTRYSUBMITTED_YES = 1;  // yes
+  REGISTRYSUBMITTED_NO = 2;  // no
+}
+
+message MedicalOperationNoteImplant {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  MedicalOperationNoteImplantCategoryEnum category = 6;  // VARCHAR(30)
+  string name = 7;  // VARCHAR(255) — max 255 chars
+  string size_or_gauge = 8;  // VARCHAR(60) — max 60 chars
+  int32 quantity = 9;  // INTEGER
+  string manufacturer = 10;  // VARCHAR(255) — max 255 chars
+  string lot_number = 11;  // VARCHAR(60) — max 60 chars
+  string serial_number = 12;  // VARCHAR(60) — max 60 chars
+  string batch_number = 13;  // VARCHAR(60) — max 60 chars
+  string expiry_date = 14;  // DATE — iso 8601 date
+  string udi_di = 15;  // VARCHAR(120) — max 120 chars
+  string implant_site = 16;  // VARCHAR(255) — max 255 chars
+  MedicalOperationNoteImplantRegistryRequiredEnum registry_required = 17;  // VARCHAR(5)
+  MedicalOperationNoteImplantRegistrySubmittedEnum registry_submitted = 18;  // VARCHAR(5)
+  string notes = 19;  // TEXT
+}

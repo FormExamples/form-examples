@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Medical Operation Note{% endblock title %}</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  {% block head %}{% endblock head %}
+</head>
+<body hx-boost="true" class="min-h-screen bg-background font-sans antialiased">
+  <div class="relative flex min-h-screen flex-col bg-background">
+    <header class="border-b">
+      <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
+        <a href="/operation-note" class="font-semibold text-lg">Medical Operation Note</a>
+        <nav class="text-sm flex gap-3">
+          <a href="/operation-note">Wizard</a>
+          <a href="/medical_operation_notes">CRUD</a>
+        </nav>
+      </div>
+    </header>
+    <main class="flex flex-1 flex-col gap-4 p-5 pt-5 mx-auto max-w-7xl w-full">
+      <h1 class="scroll-m-20 text-3xl font-bold tracking-tight">
+        {% block page_title %}{% endblock page_title %}
+      </h1>
+      <div id="error-message" class="hidden text-red-700"></div>
+      {% block content %}{% endblock content %}
+    </main>
+    <footer class="border-t mt-auto">
+      <div class="mx-auto max-w-7xl px-4 py-3 text-xs text-gray-500">
+        Royal College of Surgeons-aligned operation note. UK NHS reference implementation.
+      </div>
+    </footer>
+  </div>
+  {% block js %}{% endblock js %}
+  <script>
+    document.body.addEventListener('htmx:responseError', function (event) {
+      const target = document.querySelector('#error-message');
+      if (target) {
+        target.classList.remove('hidden');
+        target.innerHTML = event.detail.xhr.response || 'Request failed.';
+      }
+    });
+  </script>
+</body>
+</html>

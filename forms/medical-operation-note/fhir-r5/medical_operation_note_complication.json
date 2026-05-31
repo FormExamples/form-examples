@@ -1,0 +1,168 @@
+{
+  "resourceType": "Observation",
+  "id": "ee0e8400-e29b-41d4-a716-446655440009",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-operation-note",
+        "code": "medical_operation_note_complication",
+        "display": "Medical Operation Note Complication"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/330e8400-e29b-41d4-a716-44665544000d"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "category",
+            "display": "Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:category",
+            "code": "haemorrhage",
+            "display": "Haemorrhage"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "clavien_dindo_grade",
+            "display": "Clavien Dindo Grade"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:clavien_dindo_grade",
+            "code": "0",
+            "display": "0"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "onset_at",
+            "display": "Onset At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "action_taken",
+            "display": "Action Taken"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "resolved_in_theatre",
+            "display": "Resolved In Theatre"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:resolved_in_theatre",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note",
+            "code": "reported_to_governance",
+            "display": "Reported To Governance"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-operation-note:reported_to_governance",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    }
+  ]
+}

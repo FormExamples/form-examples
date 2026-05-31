@@ -1,0 +1,34 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_team_member
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteTeamMemberTeamRoleEnum {
+  TEAMROLE_UNSPECIFIED = 0;
+  TEAMROLE_LEAD_SURGEON = 1;  // lead-surgeon
+  TEAMROLE_FIRST_ASSISTANT = 2;  // first-assistant
+  TEAMROLE_SECOND_ASSISTANT = 3;  // second-assistant
+  TEAMROLE_LEAD_ANAESTHETIST = 4;  // lead-anaesthetist
+  TEAMROLE_ANAESTHETIC_ASSISTANT = 5;  // anaesthetic-assistant
+  TEAMROLE_ODP = 6;  // odp
+  TEAMROLE_SCRUB_NURSE = 7;  // scrub-nurse
+  TEAMROLE_CIRCULATING_NURSE = 8;  // circulating-nurse
+  TEAMROLE_THEATRE_COORDINATOR = 9;  // theatre-coordinator
+  TEAMROLE_MEDICAL_STUDENT = 10;  // medical-student
+  TEAMROLE_OBSERVER = 11;  // observer
+}
+
+message MedicalOperationNoteTeamMember {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MedicalOperationNoteTeamMemberTeamRoleEnum team_role = 7;  // VARCHAR(40)
+  string arrived_at = 8;  // TIMESTAMPTZ — iso 8601
+  string left_at = 9;  // TIMESTAMPTZ — iso 8601
+  string notes = 10;  // TEXT
+}

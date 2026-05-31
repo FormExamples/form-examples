@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit medical_operation_note_specimen: {{ item.id }}
+{% endblock title %}
+
+{% block page_title %}
+Edit medical_operation_note_specimen: {{ item.id }}
+{% endblock page_title %}
+
+{% block content %}
+<div class="mb-10">
+    <div id="error-message" class="mt-4 text-sm text-red-600"></div>
+    <form hx-put="/medical_operation_note_specimens/{{ item.id }}" hx-ext="submitjson" hx-target="#success-message" class="flex-1 lg:max-w-2xl">
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">deleted_at</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="deleted_at" name="deleted_at" type="datetime-local" value="{{item.deleted_at}}"  />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">medical_operation_note_id</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" min="-2147483648" max="2147483647" id="medical_operation_note_id" name="medical_operation_note_id" type="number" value="{{item.medical_operation_note_id}}"  step="1" />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">label</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="label" name="label" type="text" value="{{item.label}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">specimen_type</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="specimen_type" name="specimen_type" type="text" value="{{item.specimen_type}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">anatomical_site</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="anatomical_site" name="anatomical_site" type="text" value="{{item.anatomical_site}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">container</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="container" name="container" type="text" value="{{item.container}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">fixative</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="fixative" name="fixative" type="text" value="{{item.fixative}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">destination</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="destination" name="destination" type="text" value="{{item.destination}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">urgency</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="urgency" name="urgency" type="text" value="{{item.urgency}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">label_verified</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="label_verified" name="label_verified" type="text" value="{{item.label_verified}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">chain_of_custody_documented</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="chain_of_custody_documented" name="chain_of_custody_documented" type="text" value="{{item.chain_of_custody_documented}}" required />
+</div>
+        <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r2l:-form-item">notes</label>
+    <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm md:text-sm" id="notes" name="notes" type="text" value="{{item.notes}}" required />
+</div>
+        <div>
+            <div class="mt-5">
+                <button class=" text-xs py-3 px-6 rounded-lg bg-gray-900 text-white" type="submit">Submit</button>
+                <button class="text-xs py-3 px-6 rounded-lg bg-red-600 text-white"
+                            onclick="confirmDelete(event, '/medical_operation_note_specimens/{{ item.id }}', '/medical_operation_note_specimens' )">Delete</button>
+            </div>
+        </div>
+    </form>
+    <div id="success-message" class="mt-4"></div>
+    <br />
+    <a href="/medical_operation_note_specimens">Back to medical_operation_note_specimen</a>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

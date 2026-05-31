@@ -1,0 +1,43 @@
+<section class="border rounded p-4 space-y-2">
+  <h2 class="text-xl font-semibold">12. Summary, grade &amp; sign-off</h2>
+  <div class="grid grid-cols-2 gap-2">
+    <label>ASA Physical Status
+      <select name="asa_physical_status" class="border rounded px-2 py-1 w-full">
+        <option value="1">I</option>
+        <option value="2">II</option>
+        <option value="3">III</option>
+        <option value="4">IV</option>
+        <option value="5">V</option>
+        <option value="6">VI</option>
+      </select>
+    </label>
+    <label>Surgeon override grade
+      <select name="surgeon_override_grade" class="border rounded px-2 py-1 w-full">
+        <option value="">(none — accept computed)</option>
+        <option value="routine">Routine</option>
+        <option value="complicated">Complicated</option>
+        <option value="high-risk">High-risk</option>
+        <option value="critical">Critical</option>
+      </select>
+    </label>
+  </div>
+  <label>Surgeon override reason
+    <textarea name="surgeon_override_reason" rows="2" class="border rounded px-2 py-1 w-full"></textarea>
+  </label>
+  <label>Attestation
+    <textarea name="attestation_text" rows="3" class="border rounded px-2 py-1 w-full"
+              placeholder="I confirm this is a true and contemporaneous record of the operation."></textarea>
+  </label>
+  <label>Electronic signature
+    <input type="text" name="electronic_signature" class="border rounded px-2 py-1 w-full"
+           placeholder="Type your full name as electronic signature" />
+  </label>
+  <div class="grid grid-cols-2 gap-2">
+    <label>Dictated at
+      <input type="datetime-local" name="dictated_at" class="border rounded px-2 py-1 w-full" />
+    </label>
+    <label>Signed at
+      <input type="datetime-local" name="signed_at" class="border rounded px-2 py-1 w-full" />
+    </label>
+  </div>
+</section>

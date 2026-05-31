@@ -1,0 +1,92 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: medical_operation_note_specimen
+
+syntax = "proto3";
+
+package form_examples.medical_operation_note;
+
+enum MedicalOperationNoteSpecimenSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_TISSUE = 1;  // tissue
+  SPECIMENTYPE_FLUID = 2;  // fluid
+  SPECIMENTYPE_PUS = 3;  // pus
+  SPECIMENTYPE_SWAB = 4;  // swab
+  SPECIMENTYPE_BONE = 5;  // bone
+  SPECIMENTYPE_STONE = 6;  // stone
+  SPECIMENTYPE_FOREIGN_BODY = 7;  // foreign-body
+  SPECIMENTYPE_BIOPSY = 8;  // biopsy
+  SPECIMENTYPE_RESECTION = 9;  // resection
+  SPECIMENTYPE_OTHER = 10;  // other
+}
+
+enum MedicalOperationNoteSpecimenContainerEnum {
+  CONTAINER_UNSPECIFIED = 0;
+  CONTAINER_HISTOLOGY_POT = 1;  // histology-pot
+  CONTAINER_CSF_BOTTLE = 2;  // csf-bottle
+  CONTAINER_STERILE_POT = 3;  // sterile-pot
+  CONTAINER_CULTURE_BOTTLE = 4;  // culture-bottle
+  CONTAINER_CYTOLOGY_FLUID = 5;  // cytology-fluid
+  CONTAINER_FROZEN_SECTION_BAG = 6;  // frozen-section-bag
+  CONTAINER_BIOBANK_TUBE = 7;  // biobank-tube
+  CONTAINER_OTHER = 8;  // other
+}
+
+enum MedicalOperationNoteSpecimenFixativeEnum {
+  FIXATIVE_UNSPECIFIED = 0;
+  FIXATIVE_FORMALIN = 1;  // formalin
+  FIXATIVE_SALINE = 2;  // saline
+  FIXATIVE_RPMI = 3;  // rpmi
+  FIXATIVE_CYTOLOGY_FIXATIVE = 4;  // cytology-fixative
+  FIXATIVE_NONE_FRESH = 5;  // none-fresh
+  FIXATIVE_LIQUID_NITROGEN = 6;  // liquid-nitrogen
+  FIXATIVE_OTHER = 7;  // other
+}
+
+enum MedicalOperationNoteSpecimenDestinationEnum {
+  DESTINATION_UNSPECIFIED = 0;
+  DESTINATION_HISTOPATHOLOGY = 1;  // histopathology
+  DESTINATION_MICROBIOLOGY = 2;  // microbiology
+  DESTINATION_CYTOLOGY = 3;  // cytology
+  DESTINATION_FROZEN_SECTION = 4;  // frozen-section
+  DESTINATION_BIOBANK = 5;  // biobank
+  DESTINATION_RESEARCH = 6;  // research
+  DESTINATION_OTHER = 7;  // other
+}
+
+enum MedicalOperationNoteSpecimenUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_FROZEN_SECTION = 3;  // frozen-section
+  URGENCY_MDT = 4;  // mdt
+}
+
+enum MedicalOperationNoteSpecimenLabelVerifiedEnum {
+  LABELVERIFIED_UNSPECIFIED = 0;
+  LABELVERIFIED_YES = 1;  // yes
+  LABELVERIFIED_NO = 2;  // no
+}
+
+enum MedicalOperationNoteSpecimenChainOfCustodyDocumentedEnum {
+  CHAINOFCUSTODYDOCUMENTED_UNSPECIFIED = 0;
+  CHAINOFCUSTODYDOCUMENTED_YES = 1;  // yes
+  CHAINOFCUSTODYDOCUMENTED_NO = 2;  // no
+}
+
+message MedicalOperationNoteSpecimen {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_operation_note_id = 5;  // UUID — uuid
+  string label = 6;  // VARCHAR(255) — max 255 chars
+  MedicalOperationNoteSpecimenSpecimenTypeEnum specimen_type = 7;  // VARCHAR(30)
+  string anatomical_site = 8;  // VARCHAR(255) — max 255 chars
+  MedicalOperationNoteSpecimenContainerEnum container = 9;  // VARCHAR(60)
+  MedicalOperationNoteSpecimenFixativeEnum fixative = 10;  // VARCHAR(40)
+  MedicalOperationNoteSpecimenDestinationEnum destination = 11;  // VARCHAR(40)
+  MedicalOperationNoteSpecimenUrgencyEnum urgency = 12;  // VARCHAR(20)
+  MedicalOperationNoteSpecimenLabelVerifiedEnum label_verified = 13;  // VARCHAR(5)
+  MedicalOperationNoteSpecimenChainOfCustodyDocumentedEnum chain_of_custody_documented = 14;  // VARCHAR(5)
+  string notes = 15;  // TEXT
+}

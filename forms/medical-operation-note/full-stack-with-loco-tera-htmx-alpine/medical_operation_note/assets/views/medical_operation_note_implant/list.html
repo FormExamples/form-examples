@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}
+List of medical_operation_note_implant
+{% endblock title %}
+
+{% block page_title %}
+medical_operation_note_implant
+{% endblock page_title %}
+
+{% block content %}
+<div class="mb-10">
+
+    {% if items %}
+
+    <div class="mb-5">
+        <div class="relative w-full overflow-auto">
+            <table class="w-full caption-bottom text-sm">
+                <thead class="[&amp;_tr]:border-b">
+                    <tr class="border-b transition-colors hover:bg-muted/50">
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"deleted_at" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"medical_operation_note_id" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"category" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"name" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"size_or_gauge" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"quantity" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"manufacturer" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"lot_number" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"serial_number" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"batch_number" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"expiry_date" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"udi_di" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"implant_site" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"registry_required" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"registry_submitted" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                            {{"notes" | capitalize }}
+                        </th>
+                        <th class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;>[role=checkbox]]:translate-y-[2px] w-[100px]">
+                           Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="[&amp;_tr:last-child]:border-0">
+                   {% for item in items %}
+                    <tr class="border-b transition-colors hover:bg-muted/50">
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.deleted_at | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.medical_operation_note_id | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.category | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.name | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.size_or_gauge | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.quantity | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.manufacturer | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.lot_number | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.serial_number | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.batch_number | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.expiry_date | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.udi_di | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.implant_site | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.registry_required | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.registry_submitted | escape }}
+                        </td>
+                        <td
+                            class="p-2 align-middle  font-medium">
+                            {{item.notes | escape }}
+                        </td>
+                        <td>
+                            <a href="/medical_operation_note_implants/{{ item.id }}/edit">Edit</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="flex">
+            <div class="ml-auto  p-4">
+                <a href="/medical_operation_note_implants/new"
+                    class="mt-5 bg-blue-500 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    Create
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="mt-10 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col items-center">
+            <h3 class="font-bold text-lg">Nothing Here Yet</h3>
+            There are no records to display. Add a new record to get started!
+            <a href="/medical_operation_note_implants/new"
+            class="mt-5 bg-blue-500 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            Create
+        </a>
+        </div>
+    </div>
+   
+    {% endif %}
+
+    
+</div>
+{% endblock content %}
