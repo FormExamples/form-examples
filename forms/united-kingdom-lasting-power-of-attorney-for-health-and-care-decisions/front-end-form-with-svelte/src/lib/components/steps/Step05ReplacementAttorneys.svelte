@@ -1,7 +1,7 @@
 <script lang="ts">
   import FormField from '$lib/components/ui/FormField.svelte';
   import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaField from '$lib/components/ui/TextAreaField.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import YesNoField from '$lib/components/ui/YesNoField.svelte';
   import { lpaStore } from '$lib/stores/lpa.svelte.js';
   import { emptyReplacementAttorney } from '$lib/engine/factory.js';
@@ -62,7 +62,7 @@
           onchange={changed}
         />
         <div class="sm:col-span-2">
-          <TextAreaField
+          <TextAreaInput
             label="When does this replacement take over?"
             bind:value={r.replacementTrigger}
             rows={2}

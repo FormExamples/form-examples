@@ -1,6 +1,6 @@
 <script lang="ts">
   import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaField from '$lib/components/ui/TextAreaField.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import { lpaStore } from '$lib/stores/lpa.svelte.js';
 
   const prefs = $derived(lpaStore.application.preferences);
@@ -43,7 +43,7 @@
         </button>
       </header>
       <SelectField label="Category" bind:value={p.category} options={CATEGORIES} onchange={changed} />
-      <TextAreaField label="Statement" bind:value={p.statement} rows={3} onchange={changed} />
+      <TextAreaInput label="Statement" bind:value={p.statement} rows={3} onchange={changed} />
     </section>
   {/each}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaField from '$lib/components/ui/TextAreaField.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import YesNoField from '$lib/components/ui/YesNoField.svelte';
   import { lpaStore } from '$lib/stores/lpa.svelte.js';
 
@@ -48,7 +48,7 @@
         </button>
       </header>
       <SelectField label="Category" bind:value={ins.category} options={CATEGORIES} onchange={changed} />
-      <TextAreaField label="Statement" bind:value={ins.statement} rows={3} onchange={changed} />
+      <TextAreaInput label="Statement" bind:value={ins.statement} rows={3} onchange={changed} />
       <YesNoField
         label="Lawfulness assessed by solicitor or certificate provider?"
         bind:value={ins.lawfulnessAssessed}

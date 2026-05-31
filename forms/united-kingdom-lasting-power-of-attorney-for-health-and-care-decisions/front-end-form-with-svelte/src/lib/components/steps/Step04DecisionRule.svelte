@@ -1,6 +1,6 @@
 <script lang="ts">
   import SelectField from '$lib/components/ui/SelectField.svelte';
-  import TextAreaField from '$lib/components/ui/TextAreaField.svelte';
+  import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
   import { lpaStore } from '$lib/stores/lpa.svelte.js';
 
   const app = $derived(lpaStore.application);
@@ -24,7 +24,7 @@
   />
 
   {#if app.decisionRule === 'mixed'}
-    <TextAreaField
+    <TextAreaInput
       label="Which decisions must be made jointly?"
       bind:value={app.jointDecisionSet}
       rows={4}

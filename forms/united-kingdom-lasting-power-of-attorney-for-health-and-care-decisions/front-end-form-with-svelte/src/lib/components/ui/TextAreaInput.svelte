@@ -1,5 +1,5 @@
 <script lang="ts">
-  // TextAreaField — Lily Svelte headless contract (text-area-input).
+  // TextAreaInput — Lily Svelte headless contract (text-area-input).
   interface Props {
     label: string;
     value: string;
