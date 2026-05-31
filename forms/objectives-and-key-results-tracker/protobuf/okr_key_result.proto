@@ -1,0 +1,33 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_key_result
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum OkrKeyResultKrTypeEnum {
+  KRTYPE_UNSPECIFIED = 0;
+  KRTYPE_NUMERIC = 1;  // numeric
+  KRTYPE_MILESTONE = 2;  // milestone
+  KRTYPE_BINARY = 3;  // binary
+}
+
+message OkrKeyResult {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_objective_id = 5;  // UUID — uuid
+  int32 position = 6;  // INTEGER
+  string title = 7;  // TEXT
+  OkrKeyResultKrTypeEnum kr_type = 8;  // TEXT
+  string unit = 9;  // TEXT
+  double start_value = 10;  // NUMERIC(20,4) — numeric(20,4)
+  double current_value = 11;  // NUMERIC(20,4) — numeric(20,4)
+  double target_value = 12;  // NUMERIC(20,4) — numeric(20,4)
+  string milestones_json = 13;  // JSONB — json
+  bool binary_done = 14;  // BOOLEAN
+  string owner_name = 15;  // TEXT
+  string due_date = 16;  // DATE — iso 8601 date
+  double progress_fraction = 17;  // NUMERIC(6,4) — numeric(6,4)
+}

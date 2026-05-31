@@ -1,0 +1,53 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_grade
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum OkrGradeComputedCompositeRagEnum {
+  COMPUTEDCOMPOSITERAG_UNSPECIFIED = 0;
+  COMPUTEDCOMPOSITERAG_GREEN = 1;  // green
+  COMPUTEDCOMPOSITERAG_AMBER = 2;  // amber
+  COMPUTEDCOMPOSITERAG_RED = 3;  // red
+}
+
+enum OkrGradeFinalCompositeRagEnum {
+  FINALCOMPOSITERAG_UNSPECIFIED = 0;
+  FINALCOMPOSITERAG_GREEN = 1;  // green
+  FINALCOMPOSITERAG_AMBER = 2;  // amber
+  FINALCOMPOSITERAG_RED = 3;  // red
+}
+
+enum OkrGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_CONTINUE = 1;  // continue
+  RECOMMENDATION_ESCALATE = 2;  // escalate
+  RECOMMENDATION_RE_SCOPE = 3;  // re-scope
+  RECOMMENDATION_RETIRE = 4;  // retire
+  RECOMMENDATION_SPLIT = 5;  // split
+  RECOMMENDATION_MERGE = 6;  // merge
+}
+
+message OkrGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_objective_id = 5;  // UUID — uuid
+  double score_by_progress_percent = 6;  // NUMERIC(5,2) — numeric(5,2)
+  int32 score_by_confidence_decile = 7;  // INTEGER
+  int32 score_by_stretch_tier = 8;  // INTEGER
+  int32 score_by_alignment_grade = 9;  // INTEGER
+  int32 score_by_impact_tier = 10;  // INTEGER
+  int32 score_by_smart_quality = 11;  // INTEGER
+  double score_by_pace_deviation_percent = 12;  // NUMERIC(5,2) — numeric(5,2)
+  OkrGradeComputedCompositeRagEnum computed_composite_rag = 13;  // TEXT
+  OkrGradeFinalCompositeRagEnum final_composite_rag = 14;  // TEXT
+  string override_reason = 15;  // TEXT
+  OkrGradeRecommendationEnum recommendation = 16;  // TEXT
+  string triage_notes = 17;  // TEXT
+  string signed_by = 18;  // TEXT
+  string signed_at = 19;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
+}

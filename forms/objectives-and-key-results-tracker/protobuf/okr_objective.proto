@@ -1,0 +1,70 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_objective
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum OkrObjectiveStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_ACTIVE = 2;  // active
+  STATUS_AT_RISK = 3;  // at-risk
+  STATUS_ACHIEVED = 4;  // achieved
+  STATUS_MISSED = 5;  // missed
+  STATUS_RETIRED = 6;  // retired
+  STATUS_CANCELLED = 7;  // cancelled
+}
+
+enum OkrObjectiveLevelEnum {
+  LEVEL_UNSPECIFIED = 0;
+  LEVEL_INDIVIDUAL = 1;  // individual
+  LEVEL_TEAM = 2;  // team
+  LEVEL_DEPARTMENT = 3;  // department
+  LEVEL_COMPANY = 4;  // company
+}
+
+enum OkrObjectiveCycleEnum {
+  CYCLE_UNSPECIFIED = 0;
+  CYCLE_MONTHLY = 1;  // monthly
+  CYCLE_QUARTERLY = 2;  // quarterly
+  CYCLE_HALF_YEARLY = 3;  // half-yearly
+  CYCLE_ANNUAL = 4;  // annual
+  CYCLE_CUSTOM = 5;  // custom
+}
+
+message OkrObjective {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string reporter_id = 5;  // UUID — uuid
+  string parent_objective_id = 6;  // UUID — uuid
+  OkrObjectiveStatusEnum status = 7;  // TEXT
+  OkrObjectiveLevelEnum level = 8;  // TEXT
+  OkrObjectiveCycleEnum cycle = 9;  // TEXT
+  string cycle_start_date = 10;  // DATE — iso 8601 date
+  string cycle_end_date = 11;  // DATE — iso 8601 date
+  string team_or_org_name = 12;  // TEXT
+  string strategic_theme = 13;  // TEXT
+  string external_reference = 14;  // TEXT
+  string obj_title = 15;  // TEXT
+  string obj_long_description = 16;  // TEXT
+  string sa_parent_summary = 17;  // TEXT
+  string sa_business_value_statement = 18;  // TEXT
+  string in_initiatives = 19;  // TEXT
+  string in_supporting_links = 20;  // TEXT
+  string rk_known_risks = 21;  // TEXT
+  string rk_dependencies = 22;  // TEXT
+  string rk_blockers = 23;  // TEXT
+  string rk_mitigation_plans = 24;  // TEXT
+  string fc_expected_end_state = 25;  // TEXT
+  string fc_residual_risk = 26;  // TEXT
+  double score_by_progress_percent = 27;  // NUMERIC(5,2) — numeric(5,2)
+  int32 score_by_confidence_decile = 28;  // INTEGER
+  int32 score_by_stretch_tier = 29;  // INTEGER
+  int32 score_by_alignment_grade = 30;  // INTEGER
+  int32 score_by_impact_tier = 31;  // INTEGER
+  int32 score_by_smart_quality = 32;  // INTEGER
+  double score_by_pace_deviation_percent = 33;  // NUMERIC(5,2) — numeric(5,2)
+}

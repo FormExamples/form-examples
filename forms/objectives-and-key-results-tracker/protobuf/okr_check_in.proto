@@ -1,0 +1,20 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_check_in
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+message OkrCheckIn {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_objective_id = 5;  // UUID — uuid
+  string checked_in_at = 6;  // TIMESTAMPTZ — iso 8601
+  string narrative = 7;  // TEXT
+  string since_last_changes = 8;  // TEXT
+  string blockers = 9;  // TEXT
+  string asks = 10;  // TEXT
+  int32 confidence_decile_at_check_in = 11;  // INTEGER
+}

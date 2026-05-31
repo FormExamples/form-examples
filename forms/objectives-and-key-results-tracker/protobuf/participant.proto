@@ -1,0 +1,27 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: participant
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum ParticipantRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_DRI = 1;  // dri
+  ROLE_CONTRIBUTOR = 2;  // contributor
+  ROLE_REVIEWER = 3;  // reviewer
+  ROLE_STAKEHOLDER = 4;  // stakeholder
+  ROLE_OBSERVER = 5;  // observer
+}
+
+message Participant {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_objective_id = 5;  // UUID — uuid
+  ParticipantRoleEnum role = 6;  // TEXT
+  string name = 7;  // TEXT
+  string email = 8;  // TEXT
+  string notes = 9;  // TEXT
+}

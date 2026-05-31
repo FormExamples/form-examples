@@ -1,0 +1,31 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_grade_rule
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum OkrGradeRuleInstrumentEnum {
+  INSTRUMENT_UNSPECIFIED = 0;
+  INSTRUMENT_PROGRESS = 1;  // progress
+  INSTRUMENT_CONFIDENCE = 2;  // confidence
+  INSTRUMENT_STRETCH = 3;  // stretch
+  INSTRUMENT_ALIGNMENT = 4;  // alignment
+  INSTRUMENT_IMPACT = 5;  // impact
+  INSTRUMENT_SMART = 6;  // smart
+  INSTRUMENT_PACE = 7;  // pace
+  INSTRUMENT_COMPOSITE = 8;  // composite
+}
+
+message OkrGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // TEXT
+  OkrGradeRuleInstrumentEnum instrument = 7;  // TEXT
+  string grade = 8;  // TEXT
+  string category = 9;  // TEXT
+  string description = 10;  // TEXT
+}

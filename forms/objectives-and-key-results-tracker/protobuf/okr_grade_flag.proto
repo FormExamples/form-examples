@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: okr_grade_flag
+
+syntax = "proto3";
+
+package form_examples.objectives_and_key_results_tracker;
+
+enum OkrGradeFlagFlagCodeEnum {
+  FLAGCODE_UNSPECIFIED = 0;
+  FLAGCODE_MIS_ALIGNED = 1;  // mis-aligned
+  FLAGCODE_ORPHANED = 2;  // orphaned
+  FLAGCODE_NON_SMART = 3;  // non-smart
+  FLAGCODE_UNMEASURABLE = 4;  // unmeasurable
+  FLAGCODE_NO_DRI = 5;  // no-dri
+  FLAGCODE_COMMITTED_AT_RISK = 6;  // committed-at-risk
+  FLAGCODE_PACE_COLLAPSE = 7;  // pace-collapse
+  FLAGCODE_CONFIDENCE_COLLAPSE = 8;  // confidence-collapse
+  FLAGCODE_STALE_CHECK_IN = 9;  // stale-check-in
+  FLAGCODE_CASCADING_BROKEN = 10;  // cascading-broken
+  FLAGCODE_OVER_SCOPED = 11;  // over-scoped
+  FLAGCODE_MOONSHOT_PROGRESS = 12;  // moonshot-progress
+}
+
+enum OkrGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_HIGH = 1;  // high
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_LOW = 3;  // low
+}
+
+message OkrGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string okr_grade_id = 5;  // UUID — uuid
+  OkrGradeFlagFlagCodeEnum flag_code = 6;  // TEXT
+  OkrGradeFlagPriorityEnum priority = 7;  // TEXT
+  string description = 8;  // TEXT
+}
