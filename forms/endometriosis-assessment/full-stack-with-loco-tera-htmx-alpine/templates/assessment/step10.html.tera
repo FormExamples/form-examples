@@ -1,0 +1,59 @@
+<div class="card">
+    <h2>Step 10: Treatment Planning</h2>
+    <p class="form-hint">Patient preferences and referral planning.</p>
+
+    <div class="form-group">
+        <label for="treatment_goals">Treatment goals</label>
+        <textarea id="treatment_goals" name="treatment_planning.treatment_goals">{{ treatment_planning.treatmentGoals }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_approach">Preferred approach</label>
+            <select id="preferred_approach" name="treatment_planning.preferred_approach">
+                <option value="" {% if treatment_planning.preferredApproach == "" %}selected{% endif %}>&mdash;</option>
+                <option value="medical" {% if treatment_planning.preferredApproach == "medical" %}selected{% endif %}>Medical</option>
+                <option value="surgical" {% if treatment_planning.preferredApproach == "surgical" %}selected{% endif %}>Surgical</option>
+                <option value="combined" {% if treatment_planning.preferredApproach == "combined" %}selected{% endif %}>Combined</option>
+                <option value="undecided" {% if treatment_planning.preferredApproach == "undecided" %}selected{% endif %}>Undecided</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="surgery_considered">Surgery considered?</label>
+            <select id="surgery_considered" name="treatment_planning.surgery_considered">
+                <option value="" {% if treatment_planning.surgeryConsidered == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_planning.surgeryConsidered == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_planning.surgeryConsidered == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fertility_clinic_referral">Fertility clinic referral?</label>
+            <select id="fertility_clinic_referral" name="treatment_planning.fertility_clinic_referral">
+                <option value="" {% if treatment_planning.fertilityClinicReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_planning.fertilityClinicReferral == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_planning.fertilityClinicReferral == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="mdt_referral_needed">MDT referral needed?</label>
+            <select id="mdt_referral_needed" name="treatment_planning.mdt_referral_needed">
+                <option value="" {% if treatment_planning.mdtReferralNeeded == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_planning.mdtReferralNeeded == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_planning.mdtReferralNeeded == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="follow_up_interval">Follow-up interval</label>
+            <input type="text" id="follow_up_interval" name="treatment_planning.follow_up_interval"
+                   value="{{ treatment_planning.followUpInterval }}" placeholder="e.g. 3 months">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="planning_notes">Notes</label>
+        <textarea id="planning_notes" name="treatment_planning.planning_notes">{{ treatment_planning.planningNotes }}</textarea>
+    </div>
+</div>

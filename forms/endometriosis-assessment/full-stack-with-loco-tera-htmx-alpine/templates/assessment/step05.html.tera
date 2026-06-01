@@ -1,0 +1,55 @@
+<div class="card">
+    <h2>Step 5: Urinary Symptoms</h2>
+    <p class="form-hint">Bladder and urinary symptoms that may indicate bladder endometriosis.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="urinary_obstruction_symptoms">Urinary obstruction symptoms?</label>
+            <select id="urinary_obstruction_symptoms" name="urinary_symptoms.urinary_obstruction_symptoms">
+                <option value="" {% if urinary_symptoms.urinaryObstructionSymptoms == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if urinary_symptoms.urinaryObstructionSymptoms == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if urinary_symptoms.urinaryObstructionSymptoms == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="haematuria">Haematuria (blood in urine)</label>
+            <select id="haematuria" name="urinary_symptoms.haematuria">
+                <option value="" {% if urinary_symptoms.haematuria == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if urinary_symptoms.haematuria == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if urinary_symptoms.haematuria == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="haematuria_cyclical">Cyclical haematuria?</label>
+            <select id="haematuria_cyclical" name="urinary_symptoms.haematuria_cyclical">
+                <option value="" {% if urinary_symptoms.haematuriaCyclical == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if urinary_symptoms.haematuriaCyclical == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if urinary_symptoms.haematuriaCyclical == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dysuria">Dysuria (painful urination)</label>
+            <select id="dysuria" name="urinary_symptoms.dysuria">
+                <option value="" {% if urinary_symptoms.dysuria == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if urinary_symptoms.dysuria == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if urinary_symptoms.dysuria == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recurrent_utis">Recurrent UTIs?</label>
+            <select id="recurrent_utis" name="urinary_symptoms.recurrent_utis">
+                <option value="" {% if urinary_symptoms.recurrentUtis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if urinary_symptoms.recurrentUtis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if urinary_symptoms.recurrentUtis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="urinary_notes">Notes</label>
+        <textarea id="urinary_notes" name="urinary_symptoms.urinary_notes">{{ urinary_symptoms.urinaryNotes }}</textarea>
+    </div>
+</div>

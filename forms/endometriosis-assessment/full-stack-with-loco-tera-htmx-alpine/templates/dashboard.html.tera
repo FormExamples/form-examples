@@ -1,0 +1,95 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Endometriosis Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Endometriosis Assessment Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient first or last name...">
+    </div>
+    <div class="form-group">
+        <label for="overall_severity">Severity</label>
+        <select id="overall_severity" name="overall_severity">
+            <option value="">All</option>
+            <option value="mild" {% if overall_severity == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if overall_severity == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if overall_severity == "severe" %}selected{% endif %}>Severe</option>
+            <option value="critical" {% if overall_severity == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="asrm_stage">ASRM stage</label>
+        <select id="asrm_stage" name="asrm_stage">
+            <option value="">All</option>
+            <option value="1" {% if asrm_stage == "1" %}selected{% endif %}>Stage I</option>
+            <option value="2" {% if asrm_stage == "2" %}selected{% endif %}>Stage II</option>
+            <option value="3" {% if asrm_stage == "3" %}selected{% endif %}>Stage III</option>
+            <option value="4" {% if asrm_stage == "4" %}selected{% endif %}>Stage IV</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Created</th>
+            <th>Patient</th>
+            <th>Date of birth</th>
+            <th>ASRM stage</th>
+            <th>ASRM points</th>
+            <th>EHP-30</th>
+            <th>Severity</th>
+            <th>Findings</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.createdAt }}</a></td>
+            <td>{{ c.firstName }} {{ c.lastName }}</td>
+            <td>{{ c.dateOfBirth }}</td>
+            <td>{{ c.asrmStage }}</td>
+            <td>{{ c.asrmPoints }}</td>
+            <td>{{ c.ehp30Score }}</td>
+            <td><span class="severity-badge severity-{{ c.overallSeverity }}">{{ c.overallSeverity }}</span></td>
+            <td>{{ c.firedRuleCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

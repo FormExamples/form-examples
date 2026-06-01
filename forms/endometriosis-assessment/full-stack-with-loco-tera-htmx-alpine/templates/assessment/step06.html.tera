@@ -1,0 +1,51 @@
+<div class="card">
+    <h2>Step 6: Fertility Assessment</h2>
+    <p class="form-hint">Conception efforts, history, and ovarian reserve markers.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="trying_to_conceive">Currently trying to conceive?</label>
+            <select id="trying_to_conceive" name="fertility_assessment.trying_to_conceive">
+                <option value="" {% if fertility_assessment.tryingToConceive == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if fertility_assessment.tryingToConceive == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if fertility_assessment.tryingToConceive == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duration_trying_months">Months trying</label>
+            <input type="number" id="duration_trying_months" name="fertility_assessment.duration_trying_months"
+                   value="{{ fertility_assessment.durationTryingMonths }}">
+        </div>
+        <div class="form-group">
+            <label for="amh_level">AMH level (pmol/L)</label>
+            <input type="number" step="0.1" id="amh_level" name="fertility_assessment.amh_level"
+                   value="{{ fertility_assessment.amhLevel }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="previous_pregnancies">Previous pregnancies</label>
+            <input type="number" id="previous_pregnancies" name="fertility_assessment.previous_pregnancies"
+                   value="{{ fertility_assessment.previousPregnancies }}">
+        </div>
+        <div class="form-group">
+            <label for="ectopic_pregnancies">Ectopic pregnancies</label>
+            <input type="number" id="ectopic_pregnancies" name="fertility_assessment.ectopic_pregnancies"
+                   value="{{ fertility_assessment.ectopicPregnancies }}">
+        </div>
+        <div class="form-group">
+            <label for="future_fertility_concerns">Future fertility concerns?</label>
+            <select id="future_fertility_concerns" name="fertility_assessment.future_fertility_concerns">
+                <option value="" {% if fertility_assessment.futureFertilityConcerns == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if fertility_assessment.futureFertilityConcerns == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if fertility_assessment.futureFertilityConcerns == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fertility_notes">Notes</label>
+        <textarea id="fertility_notes" name="fertility_assessment.fertility_notes">{{ fertility_assessment.fertilityNotes }}</textarea>
+    </div>
+</div>
