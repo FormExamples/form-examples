@@ -1,0 +1,39 @@
+<div class="card">
+    <h2>Step 3: High Risk Signs</h2>
+    <p class="form-hint">Tick all that apply.</p>
+
+    <h3>A / B (Airway / Breathing)</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="high_risk_signs.stridor" value="on" {% if high_risk_signs.stridor %}checked{% endif %}> Stridor</label>
+        <label><input type="checkbox" name="high_risk_signs.cyanosis" value="on" {% if high_risk_signs.cyanosis %}checked{% endif %}> Cyanosis</label>
+        <label><input type="checkbox" name="high_risk_signs.respiratory_distress" value="on" {% if high_risk_signs.respiratoryDistress %}checked{% endif %}> Respiratory distress</label>
+    </div>
+
+    <h3>C (Circulation)</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="high_risk_signs.poor_perfusion" value="on" {% if high_risk_signs.poorPerfusion %}checked{% endif %}> Poor perfusion</label>
+        <label><input type="checkbox" name="high_risk_signs.weak_fast_pulse" value="on" {% if high_risk_signs.weakFastPulse %}checked{% endif %}> Weak fast pulse</label>
+        <label><input type="checkbox" name="high_risk_signs.capillary_refill_over3s" value="on" {% if high_risk_signs.capillaryRefillOver3s %}checked{% endif %}> Cap refill &gt; 3s</label>
+        <label><input type="checkbox" name="high_risk_signs.heavy_bleeding" value="on" {% if high_risk_signs.heavyBleeding %}checked{% endif %}> Heavy bleeding</label>
+        <label><input type="checkbox" name="high_risk_signs.adult_hr_under50_or_over150" value="on" {% if high_risk_signs.adultHrUnder50OrOver150 %}checked{% endif %}> Adult HR &lt; 50 or &gt; 150</label>
+    </div>
+
+    <h3>D (Disability)</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="high_risk_signs.unresponsive" value="on" {% if high_risk_signs.unresponsive %}checked{% endif %}> Unresponsive</label>
+        <label><input type="checkbox" name="high_risk_signs.acute_convulsions" value="on" {% if high_risk_signs.acuteConvulsions %}checked{% endif %}> Acute convulsions</label>
+        <label><input type="checkbox" name="high_risk_signs.hypoglycaemia" value="on" {% if high_risk_signs.hypoglycaemia %}checked{% endif %}> Hypoglycaemia</label>
+        <label><input type="checkbox" name="high_risk_signs.acute_focal_neurologic_deficit" value="on" {% if high_risk_signs.acuteFocalNeurologicDeficit %}checked{% endif %}> Focal neuro deficit</label>
+        <label><input type="checkbox" name="high_risk_signs.altered_mental_status_with_fever_hypothermia_stiff_neck_headache" value="on" {% if high_risk_signs.alteredMentalStatusWithFeverHypothermiaStiffNeckHeadache %}checked{% endif %}> Altered MS + fever/hypothermia/stiff neck/headache</label>
+    </div>
+
+    <h3>Other</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="high_risk_signs.high_risk_trauma" value="on" {% if high_risk_signs.highRiskTrauma %}checked{% endif %}> High risk trauma</label>
+        <label><input type="checkbox" name="high_risk_signs.threatened_limb" value="on" {% if high_risk_signs.threatenedLimb %}checked{% endif %}> Threatened limb</label>
+        <label><input type="checkbox" name="high_risk_signs.snake_bite" value="on" {% if high_risk_signs.snakeBite %}checked{% endif %}> Snake bite</label>
+        <label><input type="checkbox" name="high_risk_signs.poisoning_ingestion_chemical_exposure" value="on" {% if high_risk_signs.poisoningIngestionChemicalExposure %}checked{% endif %}> Poisoning / chemical exposure</label>
+        <label><input type="checkbox" name="high_risk_signs.violent_or_aggressive" value="on" {% if high_risk_signs.violentOrAggressive %}checked{% endif %}> Violent or aggressive</label>
+        <label><input type="checkbox" name="high_risk_signs.pregnant_with_high_risk_findings" value="on" {% if high_risk_signs.pregnantWithHighRiskFindings %}checked{% endif %}> Pregnant with high-risk findings</label>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="card">
+    <h2>Step 14: Assessment &amp; Plan</h2>
+
+    <div class="form-group">
+        <label for="summary">Summary</label>
+        <textarea id="summary" name="assessment_and_plan.summary">{{ assessment_and_plan.summary }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="differential">Differential</label>
+        <textarea id="differential" name="assessment_and_plan.differential">{{ assessment_and_plan.differential }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="presumptive_diagnoses">Presumptive diagnoses</label>
+        <textarea id="presumptive_diagnoses" name="assessment_and_plan.presumptive_diagnoses">{{ assessment_and_plan.presumptiveDiagnoses }}</textarea>
+    </div>
+</div>

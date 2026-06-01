@@ -1,0 +1,113 @@
+<div class="card">
+    <h2>Step 1: Caller &amp; Scene</h2>
+    <p class="form-hint">Caller info, patient identification, scene location and type, and run timestamps.</p>
+
+    <div class="form-group">
+        <label><input type="checkbox" name="caller_and_scene.mass_casualty" value="on"
+               {% if caller_and_scene.massCasualty %}checked{% endif %}> Mass casualty incident</label>
+    </div>
+
+    <h3>Caller</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="caller_name">Caller name</label>
+            <input type="text" id="caller_name" name="caller_and_scene.caller_name" value="{{ caller_and_scene.callerName }}">
+        </div>
+        <div class="form-group">
+            <label for="caller_phone">Caller phone</label>
+            <input type="text" id="caller_phone" name="caller_and_scene.caller_phone" value="{{ caller_and_scene.callerPhone }}">
+        </div>
+    </div>
+
+    <h3>Patient</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_name">Patient name</label>
+            <input type="text" id="patient_name" name="caller_and_scene.patient_name" value="{{ caller_and_scene.patientName }}">
+        </div>
+        <div class="form-group">
+            <label for="date_of_birth_or_age">Date of birth or age</label>
+            <input type="text" id="date_of_birth_or_age" name="caller_and_scene.date_of_birth_or_age" value="{{ caller_and_scene.dateOfBirthOrAge }}">
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="caller_and_scene.sex">
+                <option value="" {% if caller_and_scene.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="male" {% if caller_and_scene.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="female" {% if caller_and_scene.sex == "female" %}selected{% endif %}>Female</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_address">Patient address</label>
+            <input type="text" id="patient_address" name="caller_and_scene.patient_address" value="{{ caller_and_scene.patientAddress }}">
+        </div>
+        <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" name="caller_and_scene.occupation" value="{{ caller_and_scene.occupation }}">
+        </div>
+    </div>
+
+    <h3>Scene</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date">Run date</label>
+            <input type="date" id="date" name="caller_and_scene.date" value="{{ caller_and_scene.date }}">
+        </div>
+        <div class="form-group">
+            <label for="run_number">Run number</label>
+            <input type="text" id="run_number" name="caller_and_scene.run_number" value="{{ caller_and_scene.runNumber }}">
+        </div>
+        <div class="form-group">
+            <label for="scene_call_type">Scene call type</label>
+            <select id="scene_call_type" name="caller_and_scene.scene_call_type">
+                <option value="" {% if caller_and_scene.sceneCallType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="scene" {% if caller_and_scene.sceneCallType == "scene" %}selected{% endif %}>Scene call</option>
+                <option value="inter-facility-transfer" {% if caller_and_scene.sceneCallType == "inter-facility-transfer" %}selected{% endif %}>Inter-Facility Transfer</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="scene_location_type">Scene location &amp; type</label>
+        <select id="scene_location_type" name="caller_and_scene.scene_location_type">
+            <option value="" {% if caller_and_scene.sceneLocationType == "" %}selected{% endif %}>&mdash;</option>
+            <option value="residence" {% if caller_and_scene.sceneLocationType == "residence" %}selected{% endif %}>Residence</option>
+            <option value="school" {% if caller_and_scene.sceneLocationType == "school" %}selected{% endif %}>School</option>
+            <option value="public-building" {% if caller_and_scene.sceneLocationType == "public-building" %}selected{% endif %}>Public building</option>
+            <option value="health-facility" {% if caller_and_scene.sceneLocationType == "health-facility" %}selected{% endif %}>Health facility</option>
+            <option value="street" {% if caller_and_scene.sceneLocationType == "street" %}selected{% endif %}>Street</option>
+            <option value="other" {% if caller_and_scene.sceneLocationType == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <h3>Timestamps</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="time_call_received">Call received</label>
+            <input type="time" id="time_call_received" name="caller_and_scene.time_call_received" value="{{ caller_and_scene.timeCallReceived }}">
+        </div>
+        <div class="form-group">
+            <label for="time_en_route_to_scene">En route to scene</label>
+            <input type="time" id="time_en_route_to_scene" name="caller_and_scene.time_en_route_to_scene" value="{{ caller_and_scene.timeEnRouteToScene }}">
+        </div>
+        <div class="form-group">
+            <label for="time_arrived_at_scene">Arrived at scene</label>
+            <input type="time" id="time_arrived_at_scene" name="caller_and_scene.time_arrived_at_scene" value="{{ caller_and_scene.timeArrivedAtScene }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="time_transporting">Transporting</label>
+            <input type="time" id="time_transporting" name="caller_and_scene.time_transporting" value="{{ caller_and_scene.timeTransporting }}">
+        </div>
+        <div class="form-group">
+            <label for="time_at_facility">At facility</label>
+            <input type="time" id="time_at_facility" name="caller_and_scene.time_at_facility" value="{{ caller_and_scene.timeAtFacility }}">
+        </div>
+        <div class="form-group">
+            <label for="time_in_service">In service</label>
+            <input type="time" id="time_in_service" name="caller_and_scene.time_in_service" value="{{ caller_and_scene.timeInService }}">
+        </div>
+    </div>
+</div>

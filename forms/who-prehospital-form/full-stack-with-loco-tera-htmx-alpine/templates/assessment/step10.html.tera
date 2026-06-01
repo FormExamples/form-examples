@@ -1,0 +1,41 @@
+<div class="card">
+    <h2>Step 10: SAMPLE History</h2>
+
+    <div class="form-group">
+        <label for="signs_symptoms">S — Signs / symptoms</label>
+        <textarea id="signs_symptoms" name="sample_history.signs_symptoms">{{ sample_history.signsSymptoms }}</textarea>
+        <label><input type="checkbox" name="sample_history.signs_symptoms_unknown" value="on" {% if sample_history.signsSymptomsUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+    <div class="form-group">
+        <label for="allergies">A — Allergies</label>
+        <textarea id="allergies" name="sample_history.allergies">{{ sample_history.allergies }}</textarea>
+        <label><input type="checkbox" name="sample_history.allergies_unknown" value="on" {% if sample_history.allergiesUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+    <div class="form-group">
+        <label for="medications">M — Medications</label>
+        <textarea id="medications" name="sample_history.medications">{{ sample_history.medications }}</textarea>
+        <label><input type="checkbox" name="sample_history.medications_unknown" value="on" {% if sample_history.medicationsUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+    <div class="form-group">
+        <label for="past_medical">P — Past medical</label>
+        <textarea id="past_medical" name="sample_history.past_medical">{{ sample_history.pastMedical }}</textarea>
+        <label><input type="checkbox" name="sample_history.past_medical_unknown" value="on" {% if sample_history.pastMedicalUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+    <div class="form-group">
+        <label for="past_surgeries">P — Past surgeries</label>
+        <textarea id="past_surgeries" name="sample_history.past_surgeries">{{ sample_history.pastSurgeries }}</textarea>
+        <label><input type="checkbox" name="sample_history.past_surgeries_unknown" value="on" {% if sample_history.pastSurgeriesUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_ate_hours">L — Last ate (hrs)</label>
+            <input type="number" step="0.5" id="last_ate_hours" name="sample_history.last_ate_hours" value="{{ sample_history.lastAteHours }}">
+            <label><input type="checkbox" name="sample_history.last_ate_unknown" value="on" {% if sample_history.lastAteUnknown %}checked{% endif %}> Unknown</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="events">E — Events (and ROS)</label>
+        <textarea id="events" name="sample_history.events">{{ sample_history.events }}</textarea>
+        <label><input type="checkbox" name="sample_history.events_unknown" value="on" {% if sample_history.eventsUnknown %}checked{% endif %}> Unknown</label>
+    </div>
+</div>

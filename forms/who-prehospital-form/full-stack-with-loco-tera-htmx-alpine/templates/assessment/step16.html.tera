@@ -1,0 +1,88 @@
+<div class="card">
+    <h2>Step 16: Disposition</h2>
+
+    <div class="form-group">
+        <label for="disposition">Disposition</label>
+        <textarea id="disposition" name="disposition.disposition">{{ disposition.disposition }}</textarea>
+    </div>
+
+    <h3>Handover</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="handover_time">Handover time</label>
+            <input type="time" id="handover_time" name="disposition.handover_time" value="{{ disposition.handoverTime }}">
+        </div>
+        <div class="form-group">
+            <label for="handover_to_name">Recipient name</label>
+            <input type="text" id="handover_to_name" name="disposition.handover_to_name" value="{{ disposition.handoverToName }}">
+        </div>
+        <div class="form-group">
+            <label for="handover_to_cadre">Recipient cadre</label>
+            <input type="text" id="handover_to_cadre" name="disposition.handover_to_cadre" value="{{ disposition.handoverToCadre }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="handover_to_signature">Recipient signature</label>
+        <input type="text" id="handover_to_signature" name="disposition.handover_to_signature" value="{{ disposition.handoverToSignature }}">
+    </div>
+
+    <h3>Vitals at handover</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fv_time">Time</label>
+            <input type="time" id="fv_time" name="disposition.final_vitals.time" value="{{ disposition.finalVitals.time }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_hr">HR</label>
+            <input type="number" id="fv_hr" name="disposition.final_vitals.hr" value="{{ disposition.finalVitals.hr }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_rr">RR</label>
+            <input type="number" id="fv_rr" name="disposition.final_vitals.rr" value="{{ disposition.finalVitals.rr }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fv_temp_c">Temp (°C)</label>
+            <input type="number" step="0.1" id="fv_temp_c" name="disposition.final_vitals.temp_c" value="{{ disposition.finalVitals.tempC }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_bp">BP</label>
+            <input type="text" id="fv_bp" name="disposition.final_vitals.bp" value="{{ disposition.finalVitals.bp }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_spo2">SpO2</label>
+            <input type="number" id="fv_spo2" name="disposition.final_vitals.spo2" value="{{ disposition.finalVitals.spo2 }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_spo2_on_oxygen">SpO2 on oxygen</label>
+            <input type="text" id="fv_spo2_on_oxygen" name="disposition.final_vitals.spo2_on_oxygen" value="{{ disposition.finalVitals.spo2OnOxygen }}">
+        </div>
+    </div>
+
+    <h3>Plan</h3>
+    <div class="form-group">
+        <label for="plan_discussed_with_patient">Plan discussed with patient?</label>
+        <select id="plan_discussed_with_patient" name="disposition.plan_discussed_with_patient">
+            <option value="" {% if disposition.planDiscussedWithPatient == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if disposition.planDiscussedWithPatient == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if disposition.planDiscussedWithPatient == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <h3>Provider sign-off</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="provider_name">Provider name</label>
+            <input type="text" id="provider_name" name="disposition.provider_name" value="{{ disposition.providerName }}">
+        </div>
+        <div class="form-group">
+            <label for="provider_signature">Provider signature</label>
+            <input type="text" id="provider_signature" name="disposition.provider_signature" value="{{ disposition.providerSignature }}">
+        </div>
+        <div class="form-group">
+            <label for="provider_signature_date">Signature date</label>
+            <input type="date" id="provider_signature_date" name="disposition.provider_signature_date" value="{{ disposition.providerSignatureDate }}">
+        </div>
+    </div>
+</div>

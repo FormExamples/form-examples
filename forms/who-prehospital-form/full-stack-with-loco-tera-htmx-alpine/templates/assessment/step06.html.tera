@@ -1,0 +1,63 @@
+<div class="card">
+    <h2>Step 6: Breathing (B)</h2>
+
+    <div class="form-group">
+        <label><input type="checkbox" name="breathing.normal" value="on" {% if breathing.normal %}checked{% endif %}> Normal</label>
+    </div>
+
+    <div class="form-group">
+        <label for="spontaneous_respiration">Spontaneous respiration</label>
+        <select id="spontaneous_respiration" name="breathing.spontaneous_respiration">
+            <option value="" {% if breathing.spontaneousRespiration == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if breathing.spontaneousRespiration == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if breathing.spontaneousRespiration == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <h3>Chest rise</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="breathing.chest_rise_shallow" value="on" {% if breathing.chestRiseShallow %}checked{% endif %}> Shallow</label>
+        <label><input type="checkbox" name="breathing.chest_rise_retractions" value="on" {% if breathing.chestRiseRetractions %}checked{% endif %}> Retractions</label>
+        <label><input type="checkbox" name="breathing.chest_rise_paradoxical" value="on" {% if breathing.chestRiseParadoxical %}checked{% endif %}> Paradoxical</label>
+    </div>
+
+    <h3>Trachea</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="breathing.trachea_midline" value="on" {% if breathing.tracheaMidline %}checked{% endif %}> Midline</label>
+        <label><input type="checkbox" name="breathing.trachea_deviated_left" value="on" {% if breathing.tracheaDeviatedLeft %}checked{% endif %}> Deviated L</label>
+        <label><input type="checkbox" name="breathing.trachea_deviated_right" value="on" {% if breathing.tracheaDeviatedRight %}checked{% endif %}> Deviated R</label>
+    </div>
+
+    <h3>Breath sounds</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="breathing.breath_sounds_normal" value="on" {% if breathing.breathSoundsNormal %}checked{% endif %}> Normal</label>
+    </div>
+    <div class="form-group">
+        <label for="breath_sounds_notes">Breath sounds notes</label>
+        <input type="text" id="breath_sounds_notes" name="breathing.breath_sounds_notes" value="{{ breathing.breathSoundsNotes }}">
+    </div>
+
+    <h3>Oxygen / Ventilation</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="oxygen_litres">Oxygen (L/min)</label>
+            <input type="number" step="0.1" id="oxygen_litres" name="breathing.oxygen_litres" value="{{ breathing.oxygenLitres }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="breathing.oxygen_nasal_cannula" value="on" {% if breathing.oxygenNasalCannula %}checked{% endif %}> Nasal cannula</label>
+        <label><input type="checkbox" name="breathing.oxygen_face_mask" value="on" {% if breathing.oxygenFaceMask %}checked{% endif %}> Face mask</label>
+        <label><input type="checkbox" name="breathing.oxygen_non_rebreather" value="on" {% if breathing.oxygenNonRebreather %}checked{% endif %}> Non-rebreather</label>
+        <label><input type="checkbox" name="breathing.oxygen_bvm" value="on" {% if breathing.oxygenBvm %}checked{% endif %}> BVM</label>
+        <label><input type="checkbox" name="breathing.oxygen_bipap_cpap" value="on" {% if breathing.oxygenBipapCpap %}checked{% endif %}> BiPAP / CPAP</label>
+    </div>
+    <div class="form-group">
+        <label for="oxygen_other">Other (free text)</label>
+        <input type="text" id="oxygen_other" name="breathing.oxygen_other" value="{{ breathing.oxygenOther }}">
+    </div>
+
+    <div class="form-group">
+        <label for="breathing_notes">Notes</label>
+        <textarea id="breathing_notes" name="breathing.notes">{{ breathing.notes }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="card">
+    <h2>Step 8: Disability (D)</h2>
+
+    <div class="form-group">
+        <label><input type="checkbox" name="disability.normal" value="on" {% if disability.normal %}checked{% endif %}> Normal</label>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="blood_glucose">Blood glucose (mmol/L)</label>
+            <input type="number" step="0.1" id="blood_glucose" name="disability.blood_glucose" value="{{ disability.bloodGlucose }}">
+        </div>
+        <div class="form-group">
+            <label for="avpu">AVPU</label>
+            <select id="avpu" name="disability.avpu">
+                <option value="" {% if disability.avpu == "" %}selected{% endif %}>&mdash;</option>
+                <option value="A" {% if disability.avpu == "A" %}selected{% endif %}>A (Alert)</option>
+                <option value="V" {% if disability.avpu == "V" %}selected{% endif %}>V (Voice)</option>
+                <option value="P" {% if disability.avpu == "P" %}selected{% endif %}>P (Pain)</option>
+                <option value="U" {% if disability.avpu == "U" %}selected{% endif %}>U (Unresponsive)</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>GCS</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gcs_eye">E (1-4)</label>
+            <input type="number" min="1" max="4" id="gcs_eye" name="disability.gcs_eye" value="{{ disability.gcsEye }}">
+        </div>
+        <div class="form-group">
+            <label for="gcs_verbal">V (1-5)</label>
+            <input type="number" min="1" max="5" id="gcs_verbal" name="disability.gcs_verbal" value="{{ disability.gcsVerbal }}">
+        </div>
+        <div class="form-group">
+            <label for="gcs_motor">M (1-6)</label>
+            <input type="number" min="1" max="6" id="gcs_motor" name="disability.gcs_motor" value="{{ disability.gcsMotor }}">
+        </div>
+    </div>
+
+    <h3>Moves extremities</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="disability.moves_left_arm" value="on" {% if disability.movesLeftArm %}checked{% endif %}> L arm</label>
+        <label><input type="checkbox" name="disability.moves_right_arm" value="on" {% if disability.movesRightArm %}checked{% endif %}> R arm</label>
+        <label><input type="checkbox" name="disability.moves_left_leg" value="on" {% if disability.movesLeftLeg %}checked{% endif %}> L leg</label>
+        <label><input type="checkbox" name="disability.moves_right_leg" value="on" {% if disability.movesRightLeg %}checked{% endif %}> R leg</label>
+    </div>
+
+    <h3>Pupils</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pupil_size_left">Size L</label>
+            <input type="number" step="0.1" id="pupil_size_left" name="disability.pupil_size_left" value="{{ disability.pupilSizeLeft }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_size_right">Size R</label>
+            <input type="number" step="0.1" id="pupil_size_right" name="disability.pupil_size_right" value="{{ disability.pupilSizeRight }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_reactivity_left">Reactivity L</label>
+            <input type="text" id="pupil_reactivity_left" name="disability.pupil_reactivity_left" value="{{ disability.pupilReactivityLeft }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_reactivity_right">Reactivity R</label>
+            <input type="text" id="pupil_reactivity_right" name="disability.pupil_reactivity_right" value="{{ disability.pupilReactivityRight }}">
+        </div>
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="disability.intervention_glucose_checked" value="on" {% if disability.interventionGlucoseChecked %}checked{% endif %}> Glucose checked</label>
+        <label><input type="checkbox" name="disability.intervention_glucose_given" value="on" {% if disability.interventionGlucoseGiven %}checked{% endif %}> Glucose given</label>
+        <label><input type="checkbox" name="disability.intervention_naloxone_given" value="on" {% if disability.interventionNaloxoneGiven %}checked{% endif %}> Naloxone given</label>
+    </div>
+
+    <div class="form-group">
+        <label for="disability_notes">Notes</label>
+        <textarea id="disability_notes" name="disability.notes">{{ disability.notes }}</textarea>
+    </div>
+</div>

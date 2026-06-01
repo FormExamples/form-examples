@@ -1,0 +1,17 @@
+<div class="card">
+    <h2>Step 4: Triage</h2>
+
+    <div class="form-group">
+        <label for="triage_category">Triage category</label>
+        <select id="triage_category" name="triage.category">
+            <option value="" {% if triage.category == "" %}selected{% endif %}>&mdash;</option>
+            <option value="red" {% if triage.category == "red" %}selected{% endif %}>RED (immediate)</option>
+            <option value="yellow" {% if triage.category == "yellow" %}selected{% endif %}>YELLOW (urgent)</option>
+            <option value="green" {% if triage.category == "green" %}selected{% endif %}>GREEN (non-urgent)</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="triaged_for">Triaged for</label>
+        <input type="text" id="triaged_for" name="triage.triaged_for" value="{{ triage.triagedFor }}">
+    </div>
+</div>

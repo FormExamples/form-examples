@@ -1,0 +1,140 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Prehospital Run Sheet Report{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>WHO Prehospital Form &mdash; Run Sheet Report</h1>
+    <div class="checklist-badge checklist-{% if validation.complete %}complete{% else %}incomplete{% endif %}">
+        {% if validation.complete %}Complete{% else %}Incomplete{% endif %}
+    </div>
+    <div class="checklist-label">
+        Required items satisfied: {{ validation.totalSatisfied }} / {{ validation.totalRequired }}
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Run ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient &amp; Scene</h2>
+    <div class="form-row">
+        <div>
+            <strong>Patient:</strong> {{ data.callerAndScene.patientName }}<br>
+            <strong>DOB / Age:</strong> {{ data.callerAndScene.dateOfBirthOrAge }}<br>
+            <strong>Sex:</strong> {{ data.callerAndScene.sex }}<br>
+            <strong>Run Date:</strong> {{ data.callerAndScene.date }}<br>
+            <strong>Run #:</strong> {{ data.callerAndScene.runNumber }}
+        </div>
+        <div>
+            <strong>Scene Call Type:</strong> {{ data.callerAndScene.sceneCallType }}<br>
+            <strong>Scene Location:</strong> {{ data.callerAndScene.sceneLocationType }}<br>
+            <strong>Chief Complaint:</strong> {{ data.chiefComplaintAndVitals.chiefComplaint }}<br>
+            <strong>Triage:</strong> {{ data.triage.category | upper }}<br>
+            <strong>Disposition:</strong> {{ data.disposition.disposition }}
+        </div>
+    </div>
+</div>
+
+<!-- Initial Vitals -->
+<div class="card">
+    <h2>Initial Vital Signs</h2>
+    <table class="phase-table">
+        <thead>
+            <tr><th>HR</th><th>RR</th><th>BP</th><th>Temp °C</th><th>SpO2</th><th>RBS</th><th>Pain</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.hr }}</td>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.rr }}</td>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.bp }}</td>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.tempC }}</td>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.spo2 }}</td>
+                <td>{{ data.chiefComplaintAndVitals.initialVitals.rbs }}</td>
+                <td>{{ data.chiefComplaintAndVitals.painScore }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Flagged Issues -->
+{% if flagged_issues | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ flagged_issues | length }})</h2>
+    <div class="flags-section">
+        {% for flag in flagged_issues %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Section completeness -->
+<div class="card">
+    <h2>Section Completeness</h2>
+    <table class="phase-table">
+        <thead>
+            <tr><th>Section</th><th>Satisfied</th><th>Required</th></tr>
+        </thead>
+        <tbody>
+            {% for section in validation.sections %}
+            <tr>
+                <td>{{ section.sectionLabel }}</td>
+                <td>{{ section.satisfied }}</td>
+                <td>{{ section.required }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Missing items -->
+{% if validation.missing | length > 0 %}
+<div class="card">
+    <h2>Missing or Outstanding Items ({{ validation.missing | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr><th>ID</th><th>Section</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+            {% for rule in validation.missing %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.section }}</td>
+                <td>{{ rule.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Disposition / Handover -->
+<div class="card">
+    <h2>Disposition &amp; Handover</h2>
+    <div class="form-row">
+        <div>
+            <strong>Disposition:</strong> {{ data.disposition.disposition }}<br>
+            <strong>Handover Time:</strong> {{ data.disposition.handoverTime }}<br>
+            <strong>Handover To:</strong> {{ data.disposition.handoverToName }} ({{ data.disposition.handoverToCadre }})
+        </div>
+        <div>
+            <strong>Provider:</strong> {{ data.disposition.providerName }}<br>
+            <strong>Provider Signature:</strong> {{ data.disposition.providerSignature }}<br>
+            <strong>Signed:</strong> {{ data.disposition.providerSignatureDate }}
+        </div>
+    </div>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

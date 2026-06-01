@@ -1,332 +1,296 @@
-//! HTTP routes for the WHO Prehospital Form (SCF Prehospital) assessment.
-//!
-//! Endpoints:
-//!
-//! - `GET  /`                          → landing
-//! - `POST /assessment/new`            → create a new assessment, redirect
-//! - `GET  /assessment/{id}`           → single-page wizard
-//! - `POST /assessment/{id}/submit`    → save form data, redirect to report
-//! - `GET  /assessment/{id}/report`    → render validated report
-
-use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
-use crate::engine::types::{AssessmentData, Reassessment};
-use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
+use crate::engine::{
+    flagged_issues::detect_flagged_issues, prehospital_validator::validate_prehospital,
+    types::AssessmentData,
+};
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::{PersistedResult, build_assessment_context};
+
+/// POST /assessment/new — create a new draft and redirect to the wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
+}
+
+/// GET /assessment/{id} — render the single-page wizard.
+#[debug_handler]
+async fn show_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
+
+    let context = build_assessment_context(&data, id);
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+/// Convert form section name (snake_case) to JSON key (camelCase).
+fn section_to_json(section: &str) -> &str {
+    match section {
+        "caller_and_scene" => "callerAndScene",
+        "chief_complaint_and_vitals" => "chiefComplaintAndVitals",
+        "high_risk_signs" => "highRiskSigns",
+        "triage" => "triage",
+        "airway" => "airway",
+        "breathing" => "breathing",
+        "circulation" => "circulation",
+        "disability" => "disability",
+        "exposure" => "exposure",
+        "sample_history" => "sampleHistory",
+        "injury_details" => "injuryDetails",
+        "physical_exam" => "physicalExam",
+        "additional_interventions" => "additionalInterventions",
+        "assessment_and_plan" => "assessmentAndPlan",
+        "disposition" => "disposition",
+        "initial_vitals" => "initialVitals",
+        "final_vitals" => "finalVitals",
+        other => other,
+    }
+}
+
+/// Convert form field name (snake_case) to JSON key (camelCase).
+fn field_to_json(field: &str) -> String {
+    let parts: Vec<&str> = field.split('_').collect();
+    let mut result = String::new();
+    for (i, part) in parts.iter().enumerate() {
+        if i == 0 {
+            result.push_str(part);
+        } else {
+            let mut chars = part.chars();
+            if let Some(first) = chars.next() {
+                result.push(first.to_ascii_uppercase());
+                result.extend(chars);
+            }
+        }
+    }
+    result
+}
+
+/// Parse a form value string. Empty strings stay as `""`; numeric strings
+/// become JSON numbers; the literal "on"/"true" / "off"/"false" tokens for
+/// checkbox inputs become JSON booleans.
+fn parse_form_value(value: &serde_json::Value) -> serde_json::Value {
+    if let Some(s) = value.as_str() {
+        if s.is_empty() {
+            serde_json::Value::String(String::new())
+        } else if s == "on" || s == "true" {
+            serde_json::Value::Bool(true)
+        } else if s == "off" || s == "false" {
+            serde_json::Value::Bool(false)
+        } else if let Ok(n) = s.parse::<f64>() {
+            serde_json::json!(n)
+        } else {
+            value.clone()
+        }
+    } else {
+        value.clone()
+    }
+}
+
+/// Walk a JSON object down a dotted path, creating intermediate objects as
+/// needed, and insert the value at the leaf.
+fn insert_at_path(
+    root: &mut serde_json::Map<String, serde_json::Value>,
+    path: &[String],
+    value: serde_json::Value,
+) {
+    if path.is_empty() {
+        return;
+    }
+    if path.len() == 1 {
+        root.insert(path[0].clone(), value);
+        return;
+    }
+    let head = &path[0];
+    let entry = root
+        .entry(head.clone())
+        .or_insert_with(|| serde_json::Value::Object(serde_json::Map::new()));
+    if let Some(obj) = entry.as_object_mut() {
+        insert_at_path(obj, &path[1..], value);
+    }
+}
+
+/// POST /assessment/{id}/submit — merge form data into the JSONB blob and
+/// redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form_data): axum::extract::Form<serde_json::Value>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let mut data_value = item.data.clone();
+    if let Some(obj) = data_value.as_object_mut() {
+        if let Some(form_obj) = form_data.as_object() {
+            // Collect dynamic reassessments[idx].field entries.
+            let mut reassessments: std::collections::BTreeMap<
+                usize,
+                serde_json::Map<String, serde_json::Value>,
+            > = std::collections::BTreeMap::new();
+
+            for (key, value) in form_obj {
+                // reassessments[0].field — dynamic vital-sign rows.
+                if let Some(rest) = key.strip_prefix("reassessments[") {
+                    if let Some(bracket_end) = rest.find(']') {
+                        if let Ok(idx) = rest[..bracket_end].parse::<usize>() {
+                            if let Some(dot_pos) = rest.find("].") {
+                                let field_name = &rest[dot_pos + 2..];
+                                let json_field = field_to_json(field_name);
+                                let parsed = parse_form_value(value);
+                                reassessments
+                                    .entry(idx)
+                                    .or_default()
+                                    .insert(json_field, parsed);
+                            }
+                        }
+                    }
+                    continue;
+                }
+
+                // section.field[.subfield] — standard dotted name pattern.
+                let parts: Vec<&str> = key.split('.').collect();
+                if parts.len() >= 2 {
+                    let json_path: Vec<String> = std::iter::once(section_to_json(parts[0]).to_string())
+                        .chain(parts[1..].iter().map(|p| {
+                            // Nested field segment: lower-snake -> camel.
+                            // The very last segment is always a field, intermediate
+                            // segments (e.g. initial_vitals) are section-like.
+                            field_to_json(p)
+                        }))
+                        .collect();
+                    insert_at_path(obj, &json_path, parse_form_value(value));
+                }
+            }
+
+            // Materialise reassessments as an array (drop empty rows).
+            if !reassessments.is_empty() {
+                let items: Vec<serde_json::Value> = reassessments
+                    .values()
+                    .filter(|entry| {
+                        // Keep rows where any field is non-empty.
+                        entry.iter().any(|(_, v)| match v {
+                            serde_json::Value::String(s) => !s.is_empty(),
+                            serde_json::Value::Number(_) => true,
+                            serde_json::Value::Bool(b) => *b,
+                            _ => false,
+                        })
+                    })
+                    .map(|entry| serde_json::Value::Object(entry.clone()))
+                    .collect();
+                obj.insert("reassessments".to_string(), serde_json::Value::Array(items));
+            }
+        }
+    }
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
+}
+
+/// GET /assessment/{id}/report — run the validator + flagged-issue engine,
+/// persist the result, and render the report.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let assessment_data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let validation = validate_prehospital(&assessment_data);
+    let flagged_issues = detect_flagged_issues(&assessment_data);
+    let timestamp = Utc::now().to_rfc3339();
+
+    let persisted = PersistedResult {
+        validation: validation.clone(),
+        flagged_issues: flagged_issues.clone(),
+        timestamp: timestamp.clone(),
+    };
+
+    // Persist the grading result.
+    let result_json = serde_json::to_value(&persisted).map_err(Error::wrap)?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("data", &assessment_data);
+    context.insert("validation", &validation);
+    context.insert("flagged_issues", &flagged_issues);
+    context.insert("timestamp", &timestamp);
+
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
 
 /// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
     let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
-}
-
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
-}
-
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
-    }
-    Redirect::to(&format!("/assessment/{id}/report"))
-}
-
-/// GET /assessment/{id}/report — render the validated report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
-}
-
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
-/// strongly-typed `AssessmentData`. Field names mirror the camelCase JSON
-/// form used by the SvelteKit front-end. Unknown / blank fields fall back
-/// to defaults.
-fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
-    let mut data = AssessmentData::default();
-
-    let s = |k: &str| form.get(k).cloned().unwrap_or_default();
-    let b = |k: &str| {
-        let v = form.get(k).cloned().unwrap_or_default();
-        v == "on" || v == "true" || v == "yes" || v == "1"
-    };
-    let n = |k: &str| -> Option<f64> {
-        let v = form.get(k).cloned().unwrap_or_default();
-        if v.trim().is_empty() {
-            None
-        } else {
-            v.trim().parse::<f64>().ok()
-        }
-    };
-
-    // ─── Step 1 — Caller & Scene ───────────────────────────
-    let cs = &mut data.caller_and_scene;
-    cs.mass_casualty = b("massCasualty");
-    cs.caller_name = s("callerName");
-    cs.caller_phone = s("callerPhone");
-    cs.patient_name = s("patientName");
-    cs.date_of_birth_or_age = s("dateOfBirthOrAge");
-    cs.sex = s("sex");
-    cs.patient_address = s("patientAddress");
-    cs.occupation = s("occupation");
-    cs.date = s("date");
-    cs.scene_call_type = s("sceneCallType");
-    cs.run_number = s("runNumber");
-    cs.scene_location_type = s("sceneLocationType");
-    cs.scene_location_other = s("sceneLocationOther");
-    cs.time_call_received = s("timeCallReceived");
-    cs.time_en_route_to_scene = s("timeEnRouteToScene");
-    cs.time_arrived_at_scene = s("timeArrivedAtScene");
-    cs.time_transporting = s("timeTransporting");
-    cs.time_at_facility = s("timeAtFacility");
-    cs.time_in_service = s("timeInService");
-
-    // ─── Step 2 — Chief Complaint & Vitals ────────────────
-    let cv = &mut data.chief_complaint_and_vitals;
-    cv.chief_complaint = s("chiefComplaint");
-    cv.injury = b("injury");
-    cv.initial_vitals.time = s("initialVitalsTime");
-    cv.initial_vitals.hr = n("initialHr");
-    cv.initial_vitals.rr = n("initialRr");
-    cv.initial_vitals.bp = s("initialBp");
-    cv.initial_vitals.temp_c = n("initialTempC");
-    cv.initial_vitals.rbs = n("initialRbs");
-    cv.initial_vitals.spo2 = n("initialSpo2");
-    cv.initial_vitals.spo2_on_oxygen = s("initialSpo2OnOxygen");
-    cv.care_in_progress_on_arrival = s("careInProgressOnArrival");
-    cv.pregnant = s("pregnant");
-    cv.pain_score = n("painScore");
-
-    // ─── Step 4 — Triage ──────────────────────────────────
-    data.triage.category = s("triageCategory");
-    data.triage.triaged_for = s("triagedFor");
-
-    // ─── Step 5 — Airway ──────────────────────────────────
-    let a = &mut data.airway;
-    a.normal = b("airwayNormal");
-    a.voice_changes = b("airwayVoiceChanges");
-    a.stridor = b("airwayStridor");
-    a.intervention_repositioning = b("airwayInterventionRepositioning");
-    a.intervention_suction = b("airwayInterventionSuction");
-    a.intervention_opa = b("airwayInterventionOpa");
-    a.intervention_npa = b("airwayInterventionNpa");
-    a.intervention_lma = b("airwayInterventionLma");
-    a.intervention_bvm = b("airwayInterventionBvm");
-    a.intervention_ett = b("airwayInterventionEtt");
-    a.notes = s("airwayNotes");
-
-    // ─── Step 6 — Breathing ───────────────────────────────
-    let br = &mut data.breathing;
-    br.normal = b("breathingNormal");
-    br.spontaneous_respiration = s("breathingSpontaneousRespiration");
-    br.oxygen_litres = n("breathingOxygenLitres");
-    br.oxygen_nasal_cannula = b("breathingOxygenNasalCannula");
-    br.oxygen_face_mask = b("breathingOxygenFaceMask");
-    br.oxygen_non_rebreather = b("breathingOxygenNonRebreather");
-    br.oxygen_bvm = b("breathingOxygenBvm");
-    br.oxygen_bipap_cpap = b("breathingOxygenBipapCpap");
-    br.notes = s("breathingNotes");
-
-    // ─── Step 7 — Circulation ─────────────────────────────
-    let c = &mut data.circulation;
-    c.normal = b("circulationNormal");
-    c.active_bleeding_site = s("circulationActiveBleedingSite");
-    c.bleeding_controlled_bandage = b("circulationBleedingControlledBandage");
-    c.bleeding_controlled_tourniquet = b("circulationBleedingControlledTourniquet");
-    c.bleeding_controlled_direct_pressure = b("circulationBleedingControlledDirectPressure");
-    c.access_iv_site = s("circulationAccessIvSite");
-    c.access_io_site = s("circulationAccessIoSite");
-    c.ivf_mls = n("circulationIvfMls");
-    c.ivf_ns = b("circulationIvfNs");
-    c.ivf_lr = b("circulationIvfLr");
-    c.notes = s("circulationNotes");
-
-    // ─── Step 8 — Disability ──────────────────────────────
-    let d = &mut data.disability;
-    d.normal = b("disabilityNormal");
-    d.blood_glucose = n("disabilityBloodGlucose");
-    d.avpu = s("avpu");
-    d.gcs_eye = n("gcsEye");
-    d.gcs_verbal = n("gcsVerbal");
-    d.gcs_motor = n("gcsMotor");
-    d.intervention_glucose_given = b("disabilityInterventionGlucoseGiven");
-    d.intervention_naloxone_given = b("disabilityInterventionNaloxoneGiven");
-    d.notes = s("disabilityNotes");
-
-    // ─── Step 9 — Exposure ────────────────────────────────
-    data.exposure.normal = b("exposureNormal");
-    data.exposure.exposed_completely = b("exposureExposedCompletely");
-    data.exposure.notes = s("exposureNotes");
-
-    // ─── Step 10 — SAMPLE History ─────────────────────────
-    let sh = &mut data.sample_history;
-    sh.signs_symptoms = s("signsSymptoms");
-    sh.signs_symptoms_unknown = b("signsSymptomsUnknown");
-    sh.allergies = s("allergies");
-    sh.allergies_unknown = b("allergiesUnknown");
-    sh.medications = s("medications");
-    sh.medications_unknown = b("medicationsUnknown");
-    sh.past_medical = s("pastMedical");
-    sh.past_medical_unknown = b("pastMedicalUnknown");
-    sh.past_surgeries = s("pastSurgeries");
-    sh.past_surgeries_unknown = b("pastSurgeriesUnknown");
-    sh.last_ate_hours = n("lastAteHours");
-    sh.last_ate_unknown = b("lastAteUnknown");
-    sh.events = s("events");
-    sh.events_unknown = b("eventsUnknown");
-
-    // ─── Step 11 — Injury Details ─────────────────────────
-    let inj = &mut data.injury_details;
-    inj.intent = s("injuryIntent");
-    inj.mechanism_fall = b("mechanismFall");
-    inj.mechanism_hit_by_falling_object = b("mechanismHitByFallingObject");
-    inj.mechanism_stab_cut = b("mechanismStabCut");
-    inj.mechanism_gunshot = b("mechanismGunshot");
-    inj.mechanism_sexual_assault = b("mechanismSexualAssault");
-    inj.mechanism_other_blunt_force = b("mechanismOtherBluntForce");
-    inj.mechanism_suffocation_choking_hanging = b("mechanismSuffocationChokingHanging");
-    inj.mechanism_drowning = b("mechanismDrowning");
-    inj.mechanism_burn_caused_by = s("mechanismBurnCausedBy");
-    inj.mechanism_poisoning_toxic_exposure = b("mechanismPoisoningToxicExposure");
-    inj.mechanism_unknown = b("mechanismUnknown");
-    inj.mechanism_other = s("mechanismOther");
-
-    // ─── Step 14 — Assessment & Plan ──────────────────────
-    data.assessment_and_plan.summary = s("assessmentSummary");
-    data.assessment_and_plan.differential = s("assessmentDifferential");
-    data.assessment_and_plan.presumptive_diagnoses = s("assessmentPresumptiveDiagnoses");
-
-    // ─── Step 15 — Reassessments (0..=3) ──────────────────
-    let mut reassessments: Vec<Reassessment> = Vec::new();
-    for i in 0..3usize {
-        // We treat an entry as "filled" if any of its fields has a non-empty
-        // value submitted, mirroring the SvelteKit array pattern.
-        let time = form
-            .get(&format!("reassessment{i}Time"))
-            .cloned()
-            .unwrap_or_default();
-        let hr = n(&format!("reassessment{i}Hr"));
-        let rr = n(&format!("reassessment{i}Rr"));
-        let temp_c = n(&format!("reassessment{i}TempC"));
-        let spo2 = n(&format!("reassessment{i}Spo2"));
-        let rbs = n(&format!("reassessment{i}Rbs"));
-        let pain = n(&format!("reassessment{i}Pain"));
-        let unchanged = b(&format!("reassessment{i}Unchanged"));
-        let spo2_on_oxygen = form
-            .get(&format!("reassessment{i}Spo2OnOxygen"))
-            .cloned()
-            .unwrap_or_default();
-
-        let any = !time.trim().is_empty()
-            || hr.is_some()
-            || rr.is_some()
-            || temp_c.is_some()
-            || spo2.is_some()
-            || rbs.is_some()
-            || pain.is_some()
-            || unchanged
-            || !spo2_on_oxygen.trim().is_empty();
-
-        if any {
-            reassessments.push(Reassessment {
-                time,
-                hr,
-                rr,
-                temp_c,
-                spo2,
-                spo2_on_oxygen,
-                rbs,
-                pain,
-                unchanged,
-            });
-        }
-    }
-    data.reassessments = reassessments;
-
-    // ─── Step 16 — Disposition ────────────────────────────
-    let dp = &mut data.disposition;
-    dp.disposition = s("disposition");
-    dp.handover_time = s("handoverTime");
-    dp.handover_to_name = s("handoverToName");
-    dp.handover_to_cadre = s("handoverToCadre");
-    dp.handover_to_signature = s("handoverToSignature");
-    dp.final_vitals.time = s("finalVitalsTime");
-    dp.final_vitals.hr = n("finalHr");
-    dp.final_vitals.rr = n("finalRr");
-    dp.final_vitals.temp_c = n("finalTempC");
-    dp.final_vitals.bp = s("finalBp");
-    dp.final_vitals.spo2 = n("finalSpo2");
-    dp.final_vitals.spo2_on_oxygen = s("finalSpo2OnOxygen");
-    dp.plan_discussed_with_patient = s("planDiscussedWithPatient");
-    dp.provider_name = s("providerName");
-    dp.provider_signature = s("providerSignature");
-    dp.provider_signature_date = s("providerSignatureDate");
-
-    data
-}
-
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
-        }
-    }
-}
-
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

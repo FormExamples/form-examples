@@ -1,37 +1,40 @@
 {% extends "base.html.tera" %}
 
-{% block title %}WHO Prehospital Form{% endblock %}
+{% block title %}WHO Prehospital Form - Home{% endblock %}
 
 {% block content %}
-<div style="max-width:760px;margin:2rem auto;padding:1rem;">
-  <h1>WHO Prehospital Form (SCF Prehospital)</h1>
-  <p>
-    World Health Organization standardised prehospital clinical
-    documentation form for emergency medical services. Captures caller and
-    scene information, vitals, high-risk signs, triage, primary survey
-    (ABCDE), SAMPLE history, injury details, physical exam, interventions,
-    assessment and plan, reassessments, and disposition.
-  </p>
+<div class="landing">
+    <div class="card landing-card">
+        <h1>WHO Prehospital Form</h1>
+        <p class="landing-description">
+            Digital implementation of the World Health Organization
+            standardised prehospital clinical documentation form (SCF
+            Prehospital) for emergency medical services. Captures caller and
+            scene information, vital signs, high-risk signs, triage category,
+            ABCDE primary survey, SAMPLE history, injury details, physical
+            exam, interventions, reassessments, and disposition / handover.
+        </p>
 
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>16 Steps</h3>
-      <p>Caller &amp; Scene, Vitals, High Risk Signs, Triage, ABCDE, SAMPLE, Injury, Exam, Interventions, A&amp;P, Reassessments, Disposition.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Triage RED</h3>
-      <p>RED triage ratchets up requirements: GCS components, IV/IO access or fluids, and an airway intervention when the airway is abnormal.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Flagged Issues</h3>
-      <p>GCS &lt; 8 without airway intervention, critical SpO2, hypotension, hypoglycaemia, uncontrolled bleeding and other findings escalate for review.</p>
-    </div>
-  </div>
+        <div class="landing-features">
+            <div class="feature">
+                <h3>16 Steps</h3>
+                <p>Caller &amp; Scene, Vitals, High Risk Signs, Triage, ABCDE primary survey, SAMPLE, Injury, Exam, Interventions, A&amp;P, Reassessments, Disposition</p>
+            </div>
+            <div class="feature">
+                <h3>Triage RED</h3>
+                <p>RED triage ratchets up requirements: GCS components, IV/IO access or fluids, and an airway intervention when the airway is abnormal</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Real-time alerts for AVPU U/P, GCS &lt; 8, critical SpO2, hypotension, hypoglycaemia, uncontrolled bleeding, and other findings</p>
+            </div>
+        </div>
 
-  <form method="POST" action="/assessment/new">
-    <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
-      Begin New Assessment
-    </button>
-  </form>
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}
