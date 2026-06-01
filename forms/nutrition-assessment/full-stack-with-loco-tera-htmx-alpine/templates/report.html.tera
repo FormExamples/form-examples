@@ -1,0 +1,99 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Nutrition Assessment Report - {{ severity_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Nutrition Assessment &mdash; Report</h1>
+    <div class="severity-badge {{ severity_class }}">{{ severity_label }}</div>
+    <div class="checklist-label">
+        MUST Score: <strong>{{ must_score }} / 6</strong> &mdash; {{ must_risk_label }}
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        Based on {{ answered_count }} of 3 MUST screening steps answered.
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>Ethnicity:</strong> {{ data.demographics.ethnicity }}<br>
+            <strong>Primary Language:</strong> {{ data.demographics.primaryLanguage }}
+        </div>
+        <div>
+            <strong>Weight:</strong> {{ data.anthropometricMeasurements.weightKg }} kg<br>
+            <strong>Height:</strong> {{ data.anthropometricMeasurements.heightCm }} cm<br>
+            <strong>BMI:</strong> {{ data.anthropometricMeasurements.bmi }}<br>
+            <strong>Usual weight:</strong> {{ data.anthropometricMeasurements.usualWeightKg }} kg<br>
+            <strong>Weight loss:</strong> {{ data.anthropometricMeasurements.weightLossPercent }}%
+        </div>
+    </div>
+</div>
+
+<!-- MUST Per-Step Scores -->
+<div class="card">
+    <h2>MUST Per-Step Scores</h2>
+    {% if fired_rules | length > 0 %}
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Step</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{{ rule.score }} / 2</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No MUST screening steps answered.</p>
+    {% endif %}
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-priority">{{ flag.priority }}</span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Care plan summary -->
+<div class="card">
+    <h2>Care Plan</h2>
+    <p><strong>Nutrition goals:</strong> {{ data.carePlanMonitoring.nutritionGoals }}</p>
+    <p><strong>Planned interventions:</strong> {{ data.carePlanMonitoring.interventionsPlanned }}</p>
+    <p><strong>Follow-up:</strong> {{ data.carePlanMonitoring.followUpDate }}</p>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

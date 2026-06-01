@@ -1,0 +1,40 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Nutrition Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Nutrition Assessment</h1>
+        <p class="landing-description">
+            Nutritional-status evaluation using the Malnutrition Universal Screening Tool
+            (<strong>MUST</strong>) combined with a comprehensive dietary, swallowing,
+            gastrointestinal, allergy, and nutritional-support assessment. The single-page
+            wizard produces a MUST total score (0&ndash;6), a risk band (low / medium / high)
+            and an overall severity (well-nourished &rarr; severe malnutrition with
+            complications), plus a list of clinician-facing safety flags.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Sections</h3>
+                <p>Demographics, anthropometrics, dietary history, MUST screening, swallowing, GI, allergies, requirements, support, care plan</p>
+            </div>
+            <div class="feature">
+                <h3>MUST Score</h3>
+                <p>3-step screening (BMI, weight loss, acute disease effect) producing the validated MUST risk band</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for severe underweight, dysphagia, anaphylaxis, dehydration, parenteral feeding, and more</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

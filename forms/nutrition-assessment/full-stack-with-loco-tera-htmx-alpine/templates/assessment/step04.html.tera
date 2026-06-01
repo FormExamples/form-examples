@@ -1,0 +1,61 @@
+<div class="card">
+    <h2>Step 4: Nutritional Screening (MUST)</h2>
+    <p class="form-hint">
+        Malnutrition Universal Screening Tool &mdash; three-step screen producing an
+        overall risk score (0&ndash;6). Suggested category values are auto-prefilled
+        from the anthropometrics above when available; clinicians may override them.
+    </p>
+
+    <div class="form-group">
+        <label for="bmi_category">Step 1: BMI category</label>
+        <select id="bmi_category" name="nutritional_screening.bmi_category">
+            <option value="" {% if nutritional_screening.bmiCategory == "" %}selected{% endif %}>&mdash;</option>
+            <option value=">=20" {% if nutritional_screening.bmiCategory == ">=20" %}selected{% endif %}>BMI &gt; 20 (score 0)</option>
+            <option value="18.5-20" {% if nutritional_screening.bmiCategory == "18.5-20" %}selected{% endif %}>BMI 18.5&ndash;20 (score 1)</option>
+            <option value="<18.5" {% if nutritional_screening.bmiCategory == "<18.5" %}selected{% endif %}>BMI &lt; 18.5 (score 2)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="weight_loss_category">Step 2: Unplanned weight loss (3-6 mo)</label>
+        <select id="weight_loss_category" name="nutritional_screening.weight_loss_category">
+            <option value="" {% if nutritional_screening.weightLossCategory == "" %}selected{% endif %}>&mdash;</option>
+            <option value="<5" {% if nutritional_screening.weightLossCategory == "<5" %}selected{% endif %}>&lt; 5% (score 0)</option>
+            <option value="5-10" {% if nutritional_screening.weightLossCategory == "5-10" %}selected{% endif %}>5&ndash;10% (score 1)</option>
+            <option value=">10" {% if nutritional_screening.weightLossCategory == ">10" %}selected{% endif %}>&gt; 10% (score 2)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="acute_disease">Step 3: Acute disease effect</label>
+        <select id="acute_disease" name="nutritional_screening.acute_disease">
+            <option value="" {% if nutritional_screening.acuteDisease == "" %}selected{% endif %}>&mdash;</option>
+            <option value="none" {% if nutritional_screening.acuteDisease == "none" %}selected{% endif %}>None / not acutely ill (score 0)</option>
+            <option value="acutely-ill-no-intake-5d" {% if nutritional_screening.acuteDisease == "acutely-ill-no-intake-5d" %}selected{% endif %}>Acutely ill AND no nutritional intake &gt; 5 days (score 2)</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="unintentional_weight_loss">Any other unintentional weight loss?</label>
+            <select id="unintentional_weight_loss" name="nutritional_screening.unintentional_weight_loss">
+                <option value="" {% if nutritional_screening.unintentionalWeightLoss == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if nutritional_screening.unintentionalWeightLoss == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if nutritional_screening.unintentionalWeightLoss == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reduced_appetite7_days">Reduced appetite in the past 7 days?</label>
+            <select id="reduced_appetite7_days" name="nutritional_screening.reduced_appetite7_days">
+                <option value="" {% if nutritional_screening.reducedAppetite7Days == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if nutritional_screening.reducedAppetite7Days == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if nutritional_screening.reducedAppetite7Days == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_screening_notes">Additional screening notes</label>
+        <textarea id="additional_screening_notes" name="nutritional_screening.additional_screening_notes">{{ nutritional_screening.additionalScreeningNotes }}</textarea>
+    </div>
+</div>

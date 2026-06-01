@@ -1,0 +1,73 @@
+<div class="card">
+    <h2>Step 10: Care Plan &amp; Monitoring</h2>
+    <p class="form-hint">Goals, planned interventions, monitoring, and follow-up.</p>
+
+    <div class="form-group">
+        <label for="nutrition_goals">Nutrition goals</label>
+        <textarea id="nutrition_goals" name="care_plan_monitoring.nutrition_goals"
+                  placeholder="e.g. weight gain of 0.5 kg/week, maintain hydration...">{{ care_plan_monitoring.nutritionGoals }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="interventions_planned">Planned interventions</label>
+        <textarea id="interventions_planned" name="care_plan_monitoring.interventions_planned"
+                  placeholder="e.g. food fortification, ONS twice daily, SLT review...">{{ care_plan_monitoring.interventionsPlanned }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="weight_monitoring_planned">Weight monitoring planned?</label>
+            <select id="weight_monitoring_planned" name="care_plan_monitoring.weight_monitoring_planned">
+                <option value="" {% if care_plan_monitoring.weightMonitoringPlanned == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if care_plan_monitoring.weightMonitoringPlanned == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if care_plan_monitoring.weightMonitoringPlanned == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="weight_monitoring_frequency">Frequency</label>
+            <select id="weight_monitoring_frequency" name="care_plan_monitoring.weight_monitoring_frequency">
+                <option value="" {% if care_plan_monitoring.weightMonitoringFrequency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="daily" {% if care_plan_monitoring.weightMonitoringFrequency == "daily" %}selected{% endif %}>Daily</option>
+                <option value="twice-weekly" {% if care_plan_monitoring.weightMonitoringFrequency == "twice-weekly" %}selected{% endif %}>Twice weekly</option>
+                <option value="weekly" {% if care_plan_monitoring.weightMonitoringFrequency == "weekly" %}selected{% endif %}>Weekly</option>
+                <option value="fortnightly" {% if care_plan_monitoring.weightMonitoringFrequency == "fortnightly" %}selected{% endif %}>Fortnightly</option>
+                <option value="monthly" {% if care_plan_monitoring.weightMonitoringFrequency == "monthly" %}selected{% endif %}>Monthly</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="food_intake_monitoring_planned">Food-intake monitoring planned?</label>
+        <select id="food_intake_monitoring_planned" name="care_plan_monitoring.food_intake_monitoring_planned">
+            <option value="" {% if care_plan_monitoring.foodIntakeMonitoringPlanned == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if care_plan_monitoring.foodIntakeMonitoringPlanned == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if care_plan_monitoring.foodIntakeMonitoringPlanned == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_required">Referral to another service required?</label>
+        <select id="referral_required" name="care_plan_monitoring.referral_required">
+            <option value="" {% if care_plan_monitoring.referralRequired == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if care_plan_monitoring.referralRequired == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if care_plan_monitoring.referralRequired == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="referral_details">Referral details</label>
+        <textarea id="referral_details" name="care_plan_monitoring.referral_details">{{ care_plan_monitoring.referralDetails }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="follow_up_date">Follow-up date</label>
+            <input type="date" id="follow_up_date"
+                   name="care_plan_monitoring.follow_up_date"
+                   value="{{ care_plan_monitoring.followUpDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_notes">Additional notes</label>
+        <textarea id="additional_notes" name="care_plan_monitoring.additional_notes">{{ care_plan_monitoring.additionalNotes }}</textarea>
+    </div>
+</div>
