@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 7: Mental Health Assessment</h2>
+
+    <div class="form-group">
+        <label>Whooley 1 - During the past month, have you often been bothered by feeling down, depressed, or hopeless?</label>
+        <select name="mental_health_assessment.whooley1">
+            <option value="" {% if mental_health_assessment.whooley1 == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_health_assessment.whooley1 == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_health_assessment.whooley1 == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Whooley 2 - During the past month, have you often been bothered by having little interest or pleasure in doing things?</label>
+        <select name="mental_health_assessment.whooley2">
+            <option value="" {% if mental_health_assessment.whooley2 == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_health_assessment.whooley2 == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_health_assessment.whooley2 == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    {% set gad_options = ["not-at-all","several-days","more-than-half","nearly-every-day"] %}
+    {% set gad_labels = ["Not at all","Several days","More than half","Nearly every day"] %}
+    <div class="form-group">
+        <label>GAD-2 Q1 - Feeling nervous, anxious, or on edge</label>
+        <select name="mental_health_assessment.gad2_q1">
+            <option value="" {% if mental_health_assessment.gad2Q1 == "" %}selected{% endif %}>&mdash;</option>
+            {% for i in range(end=4) %}
+            <option value="{{ gad_options[i] }}" {% if mental_health_assessment.gad2Q1 == gad_options[i] %}selected{% endif %}>{{ gad_labels[i] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>GAD-2 Q2 - Not being able to stop or control worrying</label>
+        <select name="mental_health_assessment.gad2_q2">
+            <option value="" {% if mental_health_assessment.gad2Q2 == "" %}selected{% endif %}>&mdash;</option>
+            {% for i in range(end=4) %}
+            <option value="{{ gad_options[i] }}" {% if mental_health_assessment.gad2Q2 == gad_options[i] %}selected{% endif %}>{{ gad_labels[i] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    {% set yn = ["previous_postnatal_depression","previous_severe_mental_illness","currently_on_psychotropic_meds","self_harm_ideation"] %}
+    {% set yn_c = ["previousPostnatalDepression","previousSevereMentalIllness","currentlyOnPsychotropicMeds","selfHarmIdeation"] %}
+    {% set yn_l = ["Previous postnatal depression","Previous severe mental illness","Currently on psychotropic meds","Self-harm or suicidal ideation"] %}
+
+    {% for i in range(end=4) %}
+    <div class="form-group">
+        <label>{{ yn_l[i] }}</label>
+        <select name="mental_health_assessment.{{ yn[i] }}">
+            {% set v = mental_health_assessment[yn_c[i]] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="mental_health_notes">Mental Health Notes</label>
+        <textarea id="mental_health_notes" name="mental_health_assessment.mental_health_notes">{{ mental_health_assessment.mentalHealthNotes }}</textarea>
+    </div>
+</div>

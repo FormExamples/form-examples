@@ -1,0 +1,82 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Obstetrics Assessment - Report ({{ risk_level_label }}){% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Obstetrics Assessment &mdash; Case Report</h1>
+    <div class="checklist-badge {{ risk_level_class }}">{{ risk_level_label }}</div>
+    <div class="checklist-label">{{ answered_count }} fields answered</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Case ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Maternal Summary -->
+<div class="card">
+    <h2>Maternal Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Patient:</strong> {{ data.maternalDemographics.firstName }} {{ data.maternalDemographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.maternalDemographics.dateOfBirth }}<br>
+            <strong>Ethnicity:</strong> {{ data.maternalDemographics.ethnicity }}<br>
+            <strong>BMI:</strong> {% if data.maternalDemographics.bmi %}{{ data.maternalDemographics.bmi }}{% endif %}
+        </div>
+        <div>
+            <strong>Booking date:</strong> {{ data.currentPregnancy.bookingDate }}<br>
+            <strong>EDD:</strong> {{ data.currentPregnancy.estimatedDueDate }}<br>
+            <strong>Gestation (wks):</strong> {% if data.currentPregnancy.gestationWeeks %}{{ data.currentPregnancy.gestationWeeks }}{% endif %}<br>
+            <strong>Care pathway:</strong> {{ data.carePlanFollowup.recommendedCarePathway }}
+        </div>
+    </div>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Clinical Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired NG201 rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>NG201 Fired Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Risk</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge risk-{{ rule.risk }}">{{ rule.risk }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

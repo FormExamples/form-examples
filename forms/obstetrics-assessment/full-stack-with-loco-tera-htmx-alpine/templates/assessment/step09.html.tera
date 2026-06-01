@@ -1,0 +1,41 @@
+<div class="card">
+    <h2>Step 9: Birth Preferences</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_birth_setting">Preferred Birth Setting</label>
+            <select id="preferred_birth_setting" name="birth_preferences.preferred_birth_setting">
+                <option value="" {% if birth_preferences.preferredBirthSetting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="home" {% if birth_preferences.preferredBirthSetting == "home" %}selected{% endif %}>Home</option>
+                <option value="midwifery-unit" {% if birth_preferences.preferredBirthSetting == "midwifery-unit" %}selected{% endif %}>Midwifery unit</option>
+                <option value="obstetric-unit" {% if birth_preferences.preferredBirthSetting == "obstetric-unit" %}selected{% endif %}>Obstetric unit</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="preferred_analgesia">Preferred Analgesia</label>
+            <input type="text" id="preferred_analgesia" name="birth_preferences.preferred_analgesia"
+                   value="{{ birth_preferences.preferredAnalgesia }}">
+        </div>
+    </div>
+
+    {% set yn = ["birth_partner_planned","birth_plan_completed","feeding_choice_breast","feeding_choice_formula","vbac_requested"] %}
+    {% set yn_c = ["birthPartnerPlanned","birthPlanCompleted","feedingChoiceBreast","feedingChoiceFormula","vbacRequested"] %}
+    {% set yn_l = ["Birth partner planned","Birth plan completed","Feeding choice: breast","Feeding choice: formula","VBAC requested"] %}
+
+    {% for i in range(end=5) %}
+    <div class="form-group">
+        <label>{{ yn_l[i] }}</label>
+        <select name="birth_preferences.{{ yn[i] }}">
+            {% set v = birth_preferences[yn_c[i]] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="birth_preference_notes">Birth Preference Notes</label>
+        <textarea id="birth_preference_notes" name="birth_preferences.birth_preference_notes">{{ birth_preferences.birthPreferenceNotes }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Obstetrics Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Obstetrics Assessment</h1>
+        <p class="landing-description">
+            Antenatal obstetric risk assessment aligned with NICE NG201,
+            stratifying pregnancies into <strong>low</strong>, <strong>moderate</strong>,
+            and <strong>high</strong> risk to allocate the care pathway
+            (midwifery-led, obstetrician-led, or multidisciplinary) and to
+            schedule surveillance, screening, and birth planning.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Sections</h3>
+                <p>Demographics, obstetric and medical history, current pregnancy, lifestyle, screening, mental health, fetal assessment, birth preferences, and care plan.</p>
+            </div>
+            <div class="feature">
+                <h3>NG201 Risk Stratification</h3>
+                <p>Rule-based risk grading with audit trail of every fired rule.</p>
+            </div>
+            <div class="feature">
+                <h3>Clinician Flags</h3>
+                <p>Urgent safeguarding, mental-health, fetal, screening, and prophylaxis alerts.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

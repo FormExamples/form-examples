@@ -1,0 +1,28 @@
+<div class="card">
+    <h2>Step 3: Medical History</h2>
+
+    {% set fields = ["chronic_hypertension","cardiac_disease","pre_existing_diabetes","thyroid_disease","renal_disease","epilepsy","asthma","autoimmune_disease","hiv_positive","hepatitis","previous_vte","thrombophilia","mental_health_history","bariatric_surgery"] %}
+    {% set camel = ["chronicHypertension","cardiacDisease","preExistingDiabetes","thyroidDisease","renalDisease","epilepsy","asthma","autoimmuneDisease","hivPositive","hepatitis","previousVte","thrombophilia","mentalHealthHistory","bariatricSurgery"] %}
+    {% set labels = ["Chronic hypertension","Cardiac disease","Pre-existing diabetes (T1/T2)","Thyroid disease","Renal disease","Epilepsy","Asthma","Autoimmune disease","HIV positive","Hepatitis B or C","Previous VTE","Thrombophilia","Mental health history","Bariatric surgery"] %}
+
+    {% for i in range(end=14) %}
+    <div class="form-group">
+        <label>{{ labels[i] }}</label>
+        <select name="medical_history.{{ fields[i] }}">
+            {% set v = medical_history[camel[i]] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="other_medical_conditions">Other Medical Conditions</label>
+        <textarea id="other_medical_conditions" name="medical_history.other_medical_conditions">{{ medical_history.otherMedicalConditions }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="current_medications">Current Medications</label>
+        <textarea id="current_medications" name="medical_history.current_medications">{{ medical_history.currentMedications }}</textarea>
+    </div>
+</div>

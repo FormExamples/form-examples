@@ -1,0 +1,82 @@
+<div class="card">
+    <h2>Step 4: Current Pregnancy</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_menstrual_period">LMP</label>
+            <input type="date" id="last_menstrual_period" name="current_pregnancy.last_menstrual_period"
+                   value="{{ current_pregnancy.lastMenstrualPeriod }}">
+        </div>
+        <div class="form-group">
+            <label for="estimated_due_date">EDD</label>
+            <input type="date" id="estimated_due_date" name="current_pregnancy.estimated_due_date"
+                   value="{{ current_pregnancy.estimatedDueDate }}">
+        </div>
+        <div class="form-group">
+            <label for="dating_scan_date">Dating Scan Date</label>
+            <input type="date" id="dating_scan_date" name="current_pregnancy.dating_scan_date"
+                   value="{{ current_pregnancy.datingScanDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gestation_weeks">Gestation (weeks)</label>
+            <input type="number" id="gestation_weeks" name="current_pregnancy.gestation_weeks"
+                   value="{% if current_pregnancy.gestationWeeks %}{{ current_pregnancy.gestationWeeks }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="gestation_days">Gestation (days)</label>
+            <input type="number" id="gestation_days" name="current_pregnancy.gestation_days"
+                   value="{% if current_pregnancy.gestationDays %}{{ current_pregnancy.gestationDays }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="booking_date">Booking Date</label>
+            <input type="date" id="booking_date" name="current_pregnancy.booking_date"
+                   value="{{ current_pregnancy.bookingDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="multiple_pregnancy">Multiple Pregnancy?</label>
+            <select id="multiple_pregnancy" name="current_pregnancy.multiple_pregnancy">
+                <option value="" {% if current_pregnancy.multiplePregnancy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if current_pregnancy.multiplePregnancy == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if current_pregnancy.multiplePregnancy == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chorionicity">Chorionicity (if multiple)</label>
+            <input type="text" id="chorionicity" name="current_pregnancy.chorionicity"
+                   value="{{ current_pregnancy.chorionicity }}">
+        </div>
+        <div class="form-group">
+            <label for="ivf_conception">IVF / assisted?</label>
+            <select id="ivf_conception" name="current_pregnancy.ivf_conception">
+                <option value="" {% if current_pregnancy.ivfConception == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if current_pregnancy.ivfConception == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if current_pregnancy.ivfConception == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="folic_acid_preconception">Folic Acid Pre-conception?</label>
+            <select id="folic_acid_preconception" name="current_pregnancy.folic_acid_preconception">
+                <option value="" {% if current_pregnancy.folicAcidPreconception == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if current_pregnancy.folicAcidPreconception == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if current_pregnancy.folicAcidPreconception == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="first_antenatal_contact">First Antenatal Contact?</label>
+            <select id="first_antenatal_contact" name="current_pregnancy.first_antenatal_contact">
+                <option value="" {% if current_pregnancy.firstAntenatalContact == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if current_pregnancy.firstAntenatalContact == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if current_pregnancy.firstAntenatalContact == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+</div>

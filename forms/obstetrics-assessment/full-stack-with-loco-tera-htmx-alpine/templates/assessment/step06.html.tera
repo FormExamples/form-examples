@@ -1,0 +1,107 @@
+<div class="card">
+    <h2>Step 6: Screening Test Results</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="combined_test_result">Combined Test Result</label>
+            <select id="combined_test_result" name="screening_results.combined_test_result">
+                <option value="" {% if screening_results.combinedTestResult == "" %}selected{% endif %}>&mdash;</option>
+                <option value="lower-chance" {% if screening_results.combinedTestResult == "lower-chance" %}selected{% endif %}>Lower chance</option>
+                <option value="higher-chance" {% if screening_results.combinedTestResult == "higher-chance" %}selected{% endif %}>Higher chance</option>
+                <option value="not-done" {% if screening_results.combinedTestResult == "not-done" %}selected{% endif %}>Not done</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="combined_test_risk">Combined Test Risk (1:N)</label>
+            <input type="text" id="combined_test_risk" name="screening_results.combined_test_risk"
+                   value="{{ screening_results.combinedTestRisk }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="anomaly_scan_completed">Anomaly Scan Completed?</label>
+            <select id="anomaly_scan_completed" name="screening_results.anomaly_scan_completed">
+                <option value="" {% if screening_results.anomalyScanCompleted == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if screening_results.anomalyScanCompleted == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if screening_results.anomalyScanCompleted == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anomaly_scan_findings">Anomaly Scan Findings</label>
+            <select id="anomaly_scan_findings" name="screening_results.anomaly_scan_findings">
+                <option value="" {% if screening_results.anomalyScanFindings == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if screening_results.anomalyScanFindings == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if screening_results.anomalyScanFindings == "abnormal" %}selected{% endif %}>Abnormal</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gtt_result">GTT Result</label>
+            <select id="gtt_result" name="screening_results.gtt_result">
+                <option value="" {% if screening_results.gttResult == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if screening_results.gttResult == "normal" %}selected{% endif %}>Normal</option>
+                <option value="gdm-confirmed" {% if screening_results.gttResult == "gdm-confirmed" %}selected{% endif %}>GDM confirmed</option>
+                <option value="not-done" {% if screening_results.gttResult == "not-done" %}selected{% endif %}>Not done</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gtt_fasting">GTT Fasting (mmol/L)</label>
+            <input type="number" step="0.1" id="gtt_fasting" name="screening_results.gtt_fasting"
+                   value="{% if screening_results.gttFasting %}{{ screening_results.gttFasting }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="gtt_two_hour">GTT 2-hour (mmol/L)</label>
+            <input type="number" step="0.1" id="gtt_two_hour" name="screening_results.gtt_two_hour"
+                   value="{% if screening_results.gttTwoHour %}{{ screening_results.gttTwoHour }}{% endif %}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="blood_group">Blood Group</label>
+            <input type="text" id="blood_group" name="screening_results.blood_group"
+                   value="{{ screening_results.bloodGroup }}">
+        </div>
+        <div class="form-group">
+            <label for="rhesus_status">Rhesus Status</label>
+            <input type="text" id="rhesus_status" name="screening_results.rhesus_status"
+                   value="{{ screening_results.rhesusStatus }}">
+        </div>
+        <div class="form-group">
+            <label for="haemoglobin">Haemoglobin</label>
+            <input type="text" id="haemoglobin" name="screening_results.haemoglobin"
+                   value="{{ screening_results.haemoglobin }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antibody_screen_positive">Antibody screen positive?</label>
+            <select id="antibody_screen_positive" name="screening_results.antibody_screen_positive">
+                <option value="" {% if screening_results.antibodyScreenPositive == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if screening_results.antibodyScreenPositive == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if screening_results.antibodyScreenPositive == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="infection_screen_abnormal">Infection screen abnormal?</label>
+            <select id="infection_screen_abnormal" name="screening_results.infection_screen_abnormal">
+                <option value="" {% if screening_results.infectionScreenAbnormal == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if screening_results.infectionScreenAbnormal == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if screening_results.infectionScreenAbnormal == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="infection_screen_details">Infection Screen Details</label>
+        <textarea id="infection_screen_details" name="screening_results.infection_screen_details">{{ screening_results.infectionScreenDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="screening_notes">Screening Notes</label>
+        <textarea id="screening_notes" name="screening_results.screening_notes">{{ screening_results.screeningNotes }}</textarea>
+    </div>
+</div>

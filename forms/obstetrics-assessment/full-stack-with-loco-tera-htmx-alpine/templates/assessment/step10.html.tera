@@ -1,0 +1,40 @@
+<div class="card">
+    <h2>Step 10: Care Plan &amp; Follow-up</h2>
+
+    <div class="form-group">
+        <label for="recommended_care_pathway">Recommended Care Pathway</label>
+        <select id="recommended_care_pathway" name="care_plan_followup.recommended_care_pathway">
+            <option value="" {% if care_plan_followup.recommendedCarePathway == "" %}selected{% endif %}>&mdash;</option>
+            <option value="midwifery-led" {% if care_plan_followup.recommendedCarePathway == "midwifery-led" %}selected{% endif %}>Midwifery-led</option>
+            <option value="obstetric-led" {% if care_plan_followup.recommendedCarePathway == "obstetric-led" %}selected{% endif %}>Obstetric-led</option>
+            <option value="multidisciplinary" {% if care_plan_followup.recommendedCarePathway == "multidisciplinary" %}selected{% endif %}>Multidisciplinary</option>
+        </select>
+    </div>
+
+    {% set yn = ["consultant_referral_required","mental_health_referral_required","safeguarding_referral_required","aspirin_prophylaxis_indicated","vte_prophylaxis_indicated"] %}
+    {% set yn_c = ["consultantReferralRequired","mentalHealthReferralRequired","safeguardingReferralRequired","aspirinProphylaxisIndicated","vteProphylaxisIndicated"] %}
+    {% set yn_l = ["Consultant referral required","Mental health referral required","Safeguarding referral required","Aspirin prophylaxis indicated","VTE prophylaxis indicated"] %}
+
+    {% for i in range(end=5) %}
+    <div class="form-group">
+        <label>{{ yn_l[i] }}</label>
+        <select name="care_plan_followup.{{ yn[i] }}">
+            {% set v = care_plan_followup[yn_c[i]] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="next_appointment_date">Next Appointment Date</label>
+        <input type="date" id="next_appointment_date" name="care_plan_followup.next_appointment_date"
+               value="{{ care_plan_followup.nextAppointmentDate }}">
+    </div>
+
+    <div class="form-group">
+        <label for="care_plan_notes">Care Plan Notes</label>
+        <textarea id="care_plan_notes" name="care_plan_followup.care_plan_notes">{{ care_plan_followup.carePlanNotes }}</textarea>
+    </div>
+</div>
