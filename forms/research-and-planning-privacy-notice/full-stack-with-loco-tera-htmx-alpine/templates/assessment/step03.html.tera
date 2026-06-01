@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 3: Opt-Out Preference, Acknowledgement &amp; Signature</h2>
+    <p class="form-hint">
+        Record your Type 1 and National Data Opt-Out preferences, then
+        acknowledge and sign.
+    </p>
+
+    <fieldset class="form-group">
+        <legend>Type 1 opt-out (from this practice) <span class="req" aria-hidden="true">*</span></legend>
+        <label>
+            <input type="radio" name="acknowledgement_signature.type1_opt_out" value="opt-in"
+                   {% if acknowledgement_signature.type1OptOut == "opt-in" %}checked{% endif %}>
+            Opt in &mdash; I consent to my information being used for research and planning purposes
+        </label>
+        <label>
+            <input type="radio" name="acknowledgement_signature.type1_opt_out" value="opt-out"
+                   {% if acknowledgement_signature.type1OptOut == "opt-out" %}checked{% endif %}>
+            Opt out &mdash; I do not want my identifiable information shared from this practice for research or planning
+        </label>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <legend>NHS National Data Opt-Out <span class="req" aria-hidden="true">*</span></legend>
+        <label>
+            <input type="radio" name="acknowledgement_signature.national_data_opt_out" value="opt-in"
+                   {% if acknowledgement_signature.nationalDataOptOut == "opt-in" %}checked{% endif %}>
+            Opt in &mdash; I allow my confidential patient information to be used for research and planning across the NHS
+        </label>
+        <label>
+            <input type="radio" name="acknowledgement_signature.national_data_opt_out" value="opt-out"
+                   {% if acknowledgement_signature.nationalDataOptOut == "opt-out" %}checked{% endif %}>
+            Opt out &mdash; I do not want my data used beyond my individual care and treatment
+        </label>
+    </fieldset>
+
+    <div class="form-group">
+        <label for="acknowledgement_signature_agreed" class="ack-checkbox">
+            <input type="checkbox" id="acknowledgement_signature_agreed"
+                   name="acknowledgement_signature.agreed" value="true"
+                   {% if acknowledgement_signature.agreed %}checked{% endif %}>
+            <span>
+                I confirm I have read and understood the research and planning
+                privacy notice and my opt-out choices above.
+                <span class="req" aria-hidden="true">*</span>
+            </span>
+        </label>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="acknowledgement_signature_recipient_typed_full_name">Full Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="acknowledgement_signature_recipient_typed_full_name"
+                   name="acknowledgement_signature.recipient_typed_full_name"
+                   value="{{ acknowledgement_signature.recipientTypedFullName }}"
+                   placeholder="Type your full name" required>
+        </div>
+        <div class="form-group">
+            <label for="acknowledgement_signature_recipient_typed_date">Today's Date <span class="req" aria-hidden="true">*</span></label>
+            <input type="date" id="acknowledgement_signature_recipient_typed_date"
+                   name="acknowledgement_signature.recipient_typed_date"
+                   value="{{ acknowledgement_signature.recipientTypedDate }}" required>
+        </div>
+    </div>
+</div>

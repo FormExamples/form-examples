@@ -1,0 +1,99 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Research and Planning Privacy Notice - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Information-Governance Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Acknowledgement</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Organisation, recipient, or NHS number...">
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="">All</option>
+            <option value="Complete" {% if status == "Complete" %}selected{% endif %}>Complete</option>
+            <option value="Incomplete" {% if status == "Incomplete" %}selected{% endif %}>Incomplete</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="type1_opt_out">Type 1 Opt-Out</label>
+        <select id="type1_opt_out" name="type1_opt_out">
+            <option value="">All</option>
+            <option value="opt-in" {% if type1_opt_out == "opt-in" %}selected{% endif %}>Opt in</option>
+            <option value="opt-out" {% if type1_opt_out == "opt-out" %}selected{% endif %}>Opt out</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="national_data_opt_out">National Data Opt-Out</label>
+        <select id="national_data_opt_out" name="national_data_opt_out">
+            <option value="">All</option>
+            <option value="opt-in" {% if national_data_opt_out == "opt-in" %}selected{% endif %}>Opt in</option>
+            <option value="opt-out" {% if national_data_opt_out == "opt-out" %}selected{% endif %}>Opt out</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} acknowledgement{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Organisation</th>
+            <th>Recipient</th>
+            <th>NHS Number</th>
+            <th>Type 1</th>
+            <th>National</th>
+            <th>Status</th>
+            <th>Completeness</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.recipientTypedDate }}</a></td>
+            <td>{{ r.organisationName }}</td>
+            <td>{{ r.recipientName }}<br><small>{{ r.recipientTypedFullName }}</small></td>
+            <td>{{ r.recipientNhsNumber }}</td>
+            <td>{{ r.type1OptOut }}</td>
+            <td>{{ r.nationalDataOptOut }}</td>
+            <td><span class="status-badge status-{{ r.status }}">{{ r.status }}</span></td>
+            <td>{{ r.completenessPercent }}%</td>
+            <td>
+                {% if r.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No acknowledgements found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}
