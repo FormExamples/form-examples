@@ -1,0 +1,23 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Code of Conduct Notice - Acknowledgement{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Code of Conduct Notice</h1>
+    <p class="form-hint">
+        Complete all three sections (Recipient Details, the Code of Conduct Notice,
+        and Acknowledgement &amp; Signature) and submit to record your acknowledgement.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Acknowledgement</button>
+    </div>
+</form>
+{% endblock %}
