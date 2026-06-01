@@ -1,0 +1,118 @@
+<div class="card">
+    <h2>Step 7: Community Care Instructions</h2>
+    <p class="form-hint">Destination, transport, community referrals, and ongoing care instructions.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="community_care_instructions_discharge_destination">Discharge Destination</label>
+            {% set dd = community_care_instructions.dischargeDestination %}
+            <select id="community_care_instructions_discharge_destination" name="community_care_instructions.discharge_destination">
+                <option value="" {% if dd == "" %}selected{% endif %}>&mdash;</option>
+                <option value="home" {% if dd == "home" %}selected{% endif %}>Home</option>
+                <option value="care-home" {% if dd == "care-home" %}selected{% endif %}>Care home</option>
+                <option value="nursing-home" {% if dd == "nursing-home" %}selected{% endif %}>Nursing home</option>
+                <option value="rehab" {% if dd == "rehab" %}selected{% endif %}>Rehab</option>
+                <option value="hospice" {% if dd == "hospice" %}selected{% endif %}>Hospice</option>
+                <option value="other-hospital" {% if dd == "other-hospital" %}selected{% endif %}>Other hospital</option>
+                <option value="other" {% if dd == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_other_destination_details">Other destination details</label>
+            <input type="text" id="community_care_instructions_other_destination_details" name="community_care_instructions.other_destination_details"
+                   value="{{ community_care_instructions.otherDestinationDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="community_care_instructions_care_responsibility">Care Responsibility</label>
+            {% set cr = community_care_instructions.careResponsibility %}
+            <select id="community_care_instructions_care_responsibility" name="community_care_instructions.care_responsibility">
+                <option value="" {% if cr == "" %}selected{% endif %}>&mdash;</option>
+                <option value="self" {% if cr == "self" %}selected{% endif %}>Self</option>
+                <option value="family" {% if cr == "family" %}selected{% endif %}>Family</option>
+                <option value="carer" {% if cr == "carer" %}selected{% endif %}>Carer</option>
+                <option value="community-team" {% if cr == "community-team" %}selected{% endif %}>Community team</option>
+                <option value="care-home-staff" {% if cr == "care-home-staff" %}selected{% endif %}>Care-home staff</option>
+                <option value="other" {% if cr == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_transport_mode">Transport Mode</label>
+            {% set tm = community_care_instructions.transportMode %}
+            <select id="community_care_instructions_transport_mode" name="community_care_instructions.transport_mode">
+                <option value="" {% if tm == "" %}selected{% endif %}>&mdash;</option>
+                <option value="walking" {% if tm == "walking" %}selected{% endif %}>Walking</option>
+                <option value="wheelchair" {% if tm == "wheelchair" %}selected{% endif %}>Wheelchair</option>
+                <option value="stretcher" {% if tm == "stretcher" %}selected{% endif %}>Stretcher</option>
+                <option value="ambulance" {% if tm == "ambulance" %}selected{% endif %}>Ambulance</option>
+                <option value="unknown" {% if tm == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Community Referrals</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="community_care_instructions_district_nurse_referral">District nurse?</label>
+            <select id="community_care_instructions_district_nurse_referral" name="community_care_instructions.district_nurse_referral">
+                <option value="" {% if community_care_instructions.districtNurseReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if community_care_instructions.districtNurseReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if community_care_instructions.districtNurseReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_social_services_referral">Social services?</label>
+            <select id="community_care_instructions_social_services_referral" name="community_care_instructions.social_services_referral">
+                <option value="" {% if community_care_instructions.socialServicesReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if community_care_instructions.socialServicesReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if community_care_instructions.socialServicesReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_physiotherapy_referral">Physiotherapy?</label>
+            <select id="community_care_instructions_physiotherapy_referral" name="community_care_instructions.physiotherapy_referral">
+                <option value="" {% if community_care_instructions.physiotherapyReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if community_care_instructions.physiotherapyReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if community_care_instructions.physiotherapyReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_occupational_therapy_referral">Occupational therapy?</label>
+            <select id="community_care_instructions_occupational_therapy_referral" name="community_care_instructions.occupational_therapy_referral">
+                <option value="" {% if community_care_instructions.occupationalTherapyReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if community_care_instructions.occupationalTherapyReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if community_care_instructions.occupationalTherapyReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="community_care_instructions_package_of_care_in_place">Package of care?</label>
+            <select id="community_care_instructions_package_of_care_in_place" name="community_care_instructions.package_of_care_in_place">
+                <option value="" {% if community_care_instructions.packageOfCareInPlace == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if community_care_instructions.packageOfCareInPlace == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if community_care_instructions.packageOfCareInPlace == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="community_care_instructions_mobility_status">Mobility Status</label>
+        <input type="text" id="community_care_instructions_mobility_status" name="community_care_instructions.mobility_status"
+               value="{{ community_care_instructions.mobilityStatus }}">
+    </div>
+    <div class="form-group">
+        <label for="community_care_instructions_dietary_requirements">Dietary Requirements</label>
+        <input type="text" id="community_care_instructions_dietary_requirements" name="community_care_instructions.dietary_requirements"
+               value="{{ community_care_instructions.dietaryRequirements }}">
+    </div>
+    <div class="form-group">
+        <label for="community_care_instructions_wound_care_instructions">Wound Care Instructions</label>
+        <textarea id="community_care_instructions_wound_care_instructions" name="community_care_instructions.wound_care_instructions">{{ community_care_instructions.woundCareInstructions }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="community_care_instructions_equipment_provided">Equipment Provided</label>
+        <input type="text" id="community_care_instructions_equipment_provided" name="community_care_instructions.equipment_provided"
+               value="{{ community_care_instructions.equipmentProvided }}">
+    </div>
+</div>

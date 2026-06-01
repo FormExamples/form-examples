@@ -1,0 +1,85 @@
+<div class="card">
+    <h2>Step 6: Follow-up Arrangements</h2>
+    <p class="form-hint">GP and outpatient follow-up plans, plus any pending investigation results.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="followup_arrangements_gp_followup_required">GP follow-up required?</label>
+            <select id="followup_arrangements_gp_followup_required" name="followup_arrangements.gp_followup_required">
+                <option value="" {% if followup_arrangements.gpFollowupRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if followup_arrangements.gpFollowupRequired == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if followup_arrangements.gpFollowupRequired == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="followup_arrangements_gp_followup_timeframe">GP follow-up timeframe</label>
+            <input type="text" id="followup_arrangements_gp_followup_timeframe" name="followup_arrangements.gp_followup_timeframe"
+                   value="{{ followup_arrangements.gpFollowupTimeframe }}"
+                   placeholder="e.g. within 2 weeks">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="followup_arrangements_outpatient_followup_required">Outpatient follow-up required?</label>
+        <select id="followup_arrangements_outpatient_followup_required" name="followup_arrangements.outpatient_followup_required">
+            <option value="" {% if followup_arrangements.outpatientFollowupRequired == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if followup_arrangements.outpatientFollowupRequired == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if followup_arrangements.outpatientFollowupRequired == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="followup_arrangements_investigations_pending">Investigations pending?</label>
+            <select id="followup_arrangements_investigations_pending" name="followup_arrangements.investigations_pending">
+                <option value="" {% if followup_arrangements.investigationsPending == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if followup_arrangements.investigationsPending == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if followup_arrangements.investigationsPending == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="followup_arrangements_results_to_be_chased_by_gp">Results to be chased by GP?</label>
+            <select id="followup_arrangements_results_to_be_chased_by_gp" name="followup_arrangements.results_to_be_chased_by_gp">
+                <option value="" {% if followup_arrangements.resultsToBeChasedByGp == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if followup_arrangements.resultsToBeChasedByGp == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if followup_arrangements.resultsToBeChasedByGp == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="followup_arrangements_pending_investigation_details">Pending Investigation Details</label>
+        <textarea id="followup_arrangements_pending_investigation_details" name="followup_arrangements.pending_investigation_details">{{ followup_arrangements.pendingInvestigationDetails }}</textarea>
+    </div>
+
+    <h3>Scheduled Appointments</h3>
+    {% for i in range(end=4) %}
+    <fieldset class="appointment-row">
+        <legend>Appointment {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="appointments_{{ i }}_provider">Provider</label>
+                <input type="text" id="appointments_{{ i }}_provider" name="appointments[{{ i }}].provider"
+                       value="{% if followup_arrangements.appointments | length > i %}{{ followup_arrangements.appointments[i].provider }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="appointments_{{ i }}_date">Date</label>
+                <input type="date" id="appointments_{{ i }}_date" name="appointments[{{ i }}].date"
+                       value="{% if followup_arrangements.appointments | length > i %}{{ followup_arrangements.appointments[i].date }}{% endif %}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="appointments_{{ i }}_location">Location</label>
+                <input type="text" id="appointments_{{ i }}_location" name="appointments[{{ i }}].location"
+                       value="{% if followup_arrangements.appointments | length > i %}{{ followup_arrangements.appointments[i].location }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="appointments_{{ i }}_purpose">Purpose</label>
+                <input type="text" id="appointments_{{ i }}_purpose" name="appointments[{{ i }}].purpose"
+                       value="{% if followup_arrangements.appointments | length > i %}{{ followup_arrangements.appointments[i].purpose }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+</div>

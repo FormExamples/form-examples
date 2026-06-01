@@ -1,0 +1,95 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Hospital Discharge - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Discharge Summary Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Discharge Summary</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, NHS number, ward, or consultant...">
+    </div>
+    <div class="form-group">
+        <label for="completeness_level">Completeness</label>
+        <select id="completeness_level" name="completeness_level">
+            <option value="">All</option>
+            <option value="complete" {% if completeness_level == "complete" %}selected{% endif %}>Complete</option>
+            <option value="partial" {% if completeness_level == "partial" %}selected{% endif %}>Partial</option>
+            <option value="incomplete" {% if completeness_level == "incomplete" %}selected{% endif %}>Incomplete</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="discharge_destination">Destination</label>
+        <select id="discharge_destination" name="discharge_destination">
+            <option value="">All</option>
+            <option value="home" {% if discharge_destination == "home" %}selected{% endif %}>Home</option>
+            <option value="care-home" {% if discharge_destination == "care-home" %}selected{% endif %}>Care home</option>
+            <option value="nursing-home" {% if discharge_destination == "nursing-home" %}selected{% endif %}>Nursing home</option>
+            <option value="rehab" {% if discharge_destination == "rehab" %}selected{% endif %}>Rehab</option>
+            <option value="hospice" {% if discharge_destination == "hospice" %}selected{% endif %}>Hospice</option>
+            <option value="other-hospital" {% if discharge_destination == "other-hospital" %}selected{% endif %}>Other hospital</option>
+            <option value="other" {% if discharge_destination == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_urgent_flags">Urgent flags</label>
+        <select id="has_urgent_flags" name="has_urgent_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_urgent_flags == "yes" %}selected{% endif %}>With urgent flags</option>
+            <option value="no" {% if has_urgent_flags == "no" %}selected{% endif %}>Without urgent flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed discharge summar{% if total == 1 %}y{% else %}ies{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Discharge Date</th>
+            <th>Patient</th>
+            <th>Ward / Consultant</th>
+            <th>Specialty</th>
+            <th>Destination</th>
+            <th>Completeness</th>
+            <th>Mandatory</th>
+            <th>Urgent flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in discharges %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.dischargeDate }}</a></td>
+            <td>{{ r.patientName }}<br><small>{{ r.nhsNumber }}</small></td>
+            <td>{{ r.ward }}<br><small>{{ r.consultant }}</small></td>
+            <td>{{ r.specialty }}</td>
+            <td>{{ r.dischargeDestination }}</td>
+            <td><span class="completeness-badge completeness-{{ r.completenessLevel }}">{{ r.completenessLevel }}</span></td>
+            <td>{{ r.mandatorySatisfied }} / {{ r.mandatoryTotal }}</td>
+            <td>
+                {% if r.urgentFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.urgentFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed discharge summaries found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}
