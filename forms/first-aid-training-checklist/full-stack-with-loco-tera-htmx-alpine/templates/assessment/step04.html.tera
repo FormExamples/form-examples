@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 4: CPR &amp; AED</h2>
+    <p class="form-hint">Effective compressions, effective ventilations, and AED safe shock delivery are <strong>critical</strong> skills.</p>
+
+    <div class="form-group">
+        <label for="effective_compressions">Effective chest compressions, 100&ndash;120/min, 5&ndash;6 cm depth <strong>critical</strong></label>
+        <select id="effective_compressions" name="cpr_aed.effective_compressions">
+            <option value="" {% if cpr_aed.effectiveCompressions == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.effectiveCompressions == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.effectiveCompressions == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.effectiveCompressions == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="effective_ventilations">Effective rescue breaths producing visible chest rise <strong>critical</strong></label>
+        <select id="effective_ventilations" name="cpr_aed.effective_ventilations">
+            <option value="" {% if cpr_aed.effectiveVentilations == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.effectiveVentilations == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.effectiveVentilations == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.effectiveVentilations == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ratio30to2">Maintains 30:2 compression-to-ventilation ratio</label>
+        <select id="ratio30to2" name="cpr_aed.ratio30to2">
+            <option value="" {% if cpr_aed.ratio30to2 == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.ratio30to2 == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.ratio30to2 == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.ratio30to2 == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aed_power_on_promptly">Powers on AED promptly and follows voice prompts</label>
+        <select id="aed_power_on_promptly" name="cpr_aed.aed_power_on_promptly">
+            <option value="" {% if cpr_aed.aedPowerOnPromptly == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.aedPowerOnPromptly == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.aedPowerOnPromptly == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.aedPowerOnPromptly == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aed_pad_placement">Places AED pads correctly (anterolateral, bare chest)</label>
+        <select id="aed_pad_placement" name="cpr_aed.aed_pad_placement">
+            <option value="" {% if cpr_aed.aedPadPlacement == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.aedPadPlacement == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.aedPadPlacement == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.aedPadPlacement == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aed_safe_shock_delivery">Delivers shock safely with verbal "stand clear" <strong>critical</strong></label>
+        <select id="aed_safe_shock_delivery" name="cpr_aed.aed_safe_shock_delivery">
+            <option value="" {% if cpr_aed.aedSafeShockDelivery == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.aedSafeShockDelivery == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if cpr_aed.aedSafeShockDelivery == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if cpr_aed.aedSafeShockDelivery == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

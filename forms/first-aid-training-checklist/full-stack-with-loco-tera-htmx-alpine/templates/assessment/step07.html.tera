@@ -1,0 +1,54 @@
+<div class="card">
+    <h2>Step 7: Burns &amp; Scalds</h2>
+    <p class="form-hint">Cool, remove constrictions, cover, avoid creams/ice, and refer when serious.</p>
+
+    <div class="form-group">
+        <label for="cooled_for_twenty_minutes">Cools the burn with running cool water for at least 20 minutes</label>
+        <select id="cooled_for_twenty_minutes" name="burns_scalds.cooled_for_twenty_minutes">
+            <option value="" {% if burns_scalds.cooledForTwentyMinutes == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if burns_scalds.cooledForTwentyMinutes == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if burns_scalds.cooledForTwentyMinutes == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if burns_scalds.cooledForTwentyMinutes == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="removed_jewellery_and_loose_clothing">Removes jewellery and loose clothing before swelling</label>
+        <select id="removed_jewellery_and_loose_clothing" name="burns_scalds.removed_jewellery_and_loose_clothing">
+            <option value="" {% if burns_scalds.removedJewelleryAndLooseClothing == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if burns_scalds.removedJewelleryAndLooseClothing == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if burns_scalds.removedJewelleryAndLooseClothing == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if burns_scalds.removedJewelleryAndLooseClothing == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="covered_with_cling_film_or_sterile_dressing">Covers loosely with cling film or sterile non-adherent dressing</label>
+        <select id="covered_with_cling_film_or_sterile_dressing" name="burns_scalds.covered_with_cling_film_or_sterile_dressing">
+            <option value="" {% if burns_scalds.coveredWithClingFilmOrSterileDressing == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if burns_scalds.coveredWithClingFilmOrSterileDressing == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if burns_scalds.coveredWithClingFilmOrSterileDressing == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if burns_scalds.coveredWithClingFilmOrSterileDressing == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="avoided_creams_or_ice">Avoids creams, butter, ice, or bursting blisters</label>
+        <select id="avoided_creams_or_ice" name="burns_scalds.avoided_creams_or_ice">
+            <option value="" {% if burns_scalds.avoidedCreamsOrIce == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if burns_scalds.avoidedCreamsOrIce == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if burns_scalds.avoidedCreamsOrIce == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if burns_scalds.avoidedCreamsOrIce == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="referred_appropriately">Refers serious burns to hospital (size, depth, age, location)</label>
+        <select id="referred_appropriately" name="burns_scalds.referred_appropriately">
+            <option value="" {% if burns_scalds.referredAppropriately == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if burns_scalds.referredAppropriately == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if burns_scalds.referredAppropriately == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if burns_scalds.referredAppropriately == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

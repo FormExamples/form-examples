@@ -1,0 +1,54 @@
+<div class="card">
+    <h2>Step 8: Fractures, Sprains &amp; Spinal Injury</h2>
+    <p class="form-hint">Immobilise, RICE for sprains, manual in-line support for suspected spinal injury, log roll where indicated.</p>
+
+    <div class="form-group">
+        <label for="immobilised_injured_limb">Immobilises a suspected fracture in the position found</label>
+        <select id="immobilised_injured_limb" name="fractures_sprains_spinal.immobilised_injured_limb">
+            <option value="" {% if fractures_sprains_spinal.immobilisedInjuredLimb == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if fractures_sprains_spinal.immobilisedInjuredLimb == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if fractures_sprains_spinal.immobilisedInjuredLimb == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if fractures_sprains_spinal.immobilisedInjuredLimb == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="applied_rice_for_sprains">Applies RICE (Rest, Ice, Compression, Elevation) for sprains and strains</label>
+        <select id="applied_rice_for_sprains" name="fractures_sprains_spinal.applied_rice_for_sprains">
+            <option value="" {% if fractures_sprains_spinal.appliedRiceForSprains == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if fractures_sprains_spinal.appliedRiceForSprains == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if fractures_sprains_spinal.appliedRiceForSprains == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if fractures_sprains_spinal.appliedRiceForSprains == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="suspected_spinal_manual_support">Manual in-line head/neck support when spinal injury is suspected</label>
+        <select id="suspected_spinal_manual_support" name="fractures_sprains_spinal.suspected_spinal_manual_support">
+            <option value="" {% if fractures_sprains_spinal.suspectedSpinalManualSupport == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if fractures_sprains_spinal.suspectedSpinalManualSupport == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if fractures_sprains_spinal.suspectedSpinalManualSupport == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if fractures_sprains_spinal.suspectedSpinalManualSupport == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="performed_log_roll_with_team">Performs coordinated log roll with team members where indicated</label>
+        <select id="performed_log_roll_with_team" name="fractures_sprains_spinal.performed_log_roll_with_team">
+            <option value="" {% if fractures_sprains_spinal.performedLogRollWithTeam == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if fractures_sprains_spinal.performedLogRollWithTeam == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if fractures_sprains_spinal.performedLogRollWithTeam == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if fractures_sprains_spinal.performedLogRollWithTeam == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="avoided_unnecessary_movement">Avoids unnecessary movement of suspected spinal / unstable fractures</label>
+        <select id="avoided_unnecessary_movement" name="fractures_sprains_spinal.avoided_unnecessary_movement">
+            <option value="" {% if fractures_sprains_spinal.avoidedUnnecessaryMovement == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if fractures_sprains_spinal.avoidedUnnecessaryMovement == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if fractures_sprains_spinal.avoidedUnnecessaryMovement == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if fractures_sprains_spinal.avoidedUnnecessaryMovement == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

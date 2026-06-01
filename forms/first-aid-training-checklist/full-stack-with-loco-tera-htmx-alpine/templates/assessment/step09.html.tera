@@ -1,0 +1,74 @@
+<div class="card">
+    <h2>Step 9: Medical Emergencies</h2>
+    <p class="form-hint">Anaphylaxis recognition is a <strong>critical</strong> skill. Cover anaphylaxis, asthma, hypoglycaemia, seizure, stroke (FAST), and chest pain.</p>
+
+    <div class="form-group">
+        <label for="recognised_anaphylaxis">Recognises anaphylaxis (ABC symptoms) <strong>critical</strong></label>
+        <select id="recognised_anaphylaxis" name="medical_emergencies.recognised_anaphylaxis">
+            <option value="" {% if medical_emergencies.recognisedAnaphylaxis == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.recognisedAnaphylaxis == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.recognisedAnaphylaxis == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.recognisedAnaphylaxis == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="administered_epi_pen_safely">Administers EpiPen / adrenaline auto-injector safely into outer thigh</label>
+        <select id="administered_epi_pen_safely" name="medical_emergencies.administered_epi_pen_safely">
+            <option value="" {% if medical_emergencies.administeredEpiPenSafely == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.administeredEpiPenSafely == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.administeredEpiPenSafely == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.administeredEpiPenSafely == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="assisted_asthma_inhaler">Assists casualty with reliever inhaler during asthma attack</label>
+        <select id="assisted_asthma_inhaler" name="medical_emergencies.assisted_asthma_inhaler">
+            <option value="" {% if medical_emergencies.assistedAsthmaInhaler == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.assistedAsthmaInhaler == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.assistedAsthmaInhaler == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.assistedAsthmaInhaler == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="managed_hypoglycaemia">Manages hypoglycaemia with sugary drink / glucose if conscious</label>
+        <select id="managed_hypoglycaemia" name="medical_emergencies.managed_hypoglycaemia">
+            <option value="" {% if medical_emergencies.managedHypoglycaemia == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.managedHypoglycaemia == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.managedHypoglycaemia == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.managedHypoglycaemia == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="managed_seizure_safely">Manages a seizure: protect head, time it, recovery position after</label>
+        <select id="managed_seizure_safely" name="medical_emergencies.managed_seizure_safely">
+            <option value="" {% if medical_emergencies.managedSeizureSafely == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.managedSeizureSafely == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.managedSeizureSafely == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.managedSeizureSafely == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recognised_stroke_fast">Recognises stroke using FAST (Face, Arms, Speech, Time)</label>
+        <select id="recognised_stroke_fast" name="medical_emergencies.recognised_stroke_fast">
+            <option value="" {% if medical_emergencies.recognisedStrokeFAST == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.recognisedStrokeFAST == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.recognisedStrokeFAST == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.recognisedStrokeFAST == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recognised_chest_pain">Recognises chest pain / suspected MI and provides appropriate care</label>
+        <select id="recognised_chest_pain" name="medical_emergencies.recognised_chest_pain">
+            <option value="" {% if medical_emergencies.recognisedChestPain == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medical_emergencies.recognisedChestPain == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if medical_emergencies.recognisedChestPain == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if medical_emergencies.recognisedChestPain == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

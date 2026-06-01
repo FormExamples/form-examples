@@ -1,0 +1,54 @@
+<div class="card">
+    <h2>Step 5: Choking Management</h2>
+    <p class="form-hint">Cough &rarr; back blows &rarr; abdominal thrusts &rarr; CPR if unconscious. Unconscious-choking CPR is a <strong>critical</strong> skill.</p>
+
+    <div class="form-group">
+        <label for="encouraged_coughing">Encourages an effective cough for partial obstruction</label>
+        <select id="encouraged_coughing" name="choking_management.encouraged_coughing">
+            <option value="" {% if choking_management.encouragedCoughing == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if choking_management.encouragedCoughing == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if choking_management.encouragedCoughing == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if choking_management.encouragedCoughing == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="five_back_blows">Delivers up to 5 firm back blows between the shoulder blades</label>
+        <select id="five_back_blows" name="choking_management.five_back_blows">
+            <option value="" {% if choking_management.fiveBackBlows == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if choking_management.fiveBackBlows == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if choking_management.fiveBackBlows == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if choking_management.fiveBackBlows == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="five_abdominal_thrusts">Delivers up to 5 abdominal thrusts (Heimlich) correctly</label>
+        <select id="five_abdominal_thrusts" name="choking_management.five_abdominal_thrusts">
+            <option value="" {% if choking_management.fiveAbdominalThrusts == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if choking_management.fiveAbdominalThrusts == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if choking_management.fiveAbdominalThrusts == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if choking_management.fiveAbdominalThrusts == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="alternates_until_dislodged">Alternates back blows and abdominal thrusts until obstruction is dislodged</label>
+        <select id="alternates_until_dislodged" name="choking_management.alternates_until_dislodged">
+            <option value="" {% if choking_management.alternatesUntilDislodged == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if choking_management.alternatesUntilDislodged == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if choking_management.alternatesUntilDislodged == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if choking_management.alternatesUntilDislodged == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="unconscious_choking_cpr">Begins CPR immediately if the choking casualty becomes unconscious <strong>critical</strong></label>
+        <select id="unconscious_choking_cpr" name="choking_management.unconscious_choking_cpr">
+            <option value="" {% if choking_management.unconsciousChokingCpr == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if choking_management.unconsciousChokingCpr == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if choking_management.unconsciousChokingCpr == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if choking_management.unconsciousChokingCpr == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

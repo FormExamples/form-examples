@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}First Aid Training Checklist - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>First Aid Training Checklist</h1>
+        <p class="landing-description">
+            First Aid at Work (FAW) competency assessment aligned with UK HSE guidance and the
+            St John Ambulance syllabus. Covers scene assessment, primary survey, life-threatening
+            emergencies, and injury management with a <strong>Pass</strong> / <strong>Needs
+            Development</strong> / <strong>Fail</strong> outcome.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Trainee details, scene safety, DRABC, CPR &amp; AED, choking, bleeding, burns, fractures, medical emergencies, and handover</p>
+            </div>
+            <div class="feature">
+                <h3>Critical Skills</h3>
+                <p>Any critical-skill failure (CPR, AED safe shock, anaphylaxis, major bleed, unconscious choking, AVPU) forces an overall Fail</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Real-time prioritised alerts for critical failures, expired certifications, and domain weaknesses</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

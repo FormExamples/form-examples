@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 10: Recording, Reporting &amp; Handover</h2>
+    <p class="form-hint">Accident book, RIDDOR awareness, structured SBAR handover, confidentiality, and debrief notes.</p>
+
+    <div class="form-group">
+        <label for="accident_book_entry">Completes a clear accident book entry</label>
+        <select id="accident_book_entry" name="recording_reporting_handover.accident_book_entry">
+            <option value="" {% if recording_reporting_handover.accidentBookEntry == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if recording_reporting_handover.accidentBookEntry == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if recording_reporting_handover.accidentBookEntry == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if recording_reporting_handover.accidentBookEntry == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="riddor_awareness">Demonstrates RIDDOR awareness (reportable incidents)</label>
+        <select id="riddor_awareness" name="recording_reporting_handover.riddor_awareness">
+            <option value="" {% if recording_reporting_handover.riddorAwareness == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if recording_reporting_handover.riddorAwareness == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if recording_reporting_handover.riddorAwareness == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if recording_reporting_handover.riddorAwareness == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="structured_handoff_sbar">Provides structured SBAR handover to arriving paramedics</label>
+        <select id="structured_handoff_sbar" name="recording_reporting_handover.structured_handoff_sbar">
+            <option value="" {% if recording_reporting_handover.structuredHandoffSbar == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if recording_reporting_handover.structuredHandoffSbar == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if recording_reporting_handover.structuredHandoffSbar == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if recording_reporting_handover.structuredHandoffSbar == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="confidentiality_maintained">Maintains casualty confidentiality throughout</label>
+        <select id="confidentiality_maintained" name="recording_reporting_handover.confidentiality_maintained">
+            <option value="" {% if recording_reporting_handover.confidentialityMaintained == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if recording_reporting_handover.confidentialityMaintained == "yes" %}selected{% endif %}>Demonstrated</option>
+            <option value="no" {% if recording_reporting_handover.confidentialityMaintained == "no" %}selected{% endif %}>Not yet</option>
+            <option value="na" {% if recording_reporting_handover.confidentialityMaintained == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="examiner_notes">Examiner Notes</label>
+        <textarea id="examiner_notes" name="recording_reporting_handover.examiner_notes"
+                  placeholder="Observed strengths, technique corrections, performance context">{{ recording_reporting_handover.examinerNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="trainee_feedback">Trainee Self-Feedback</label>
+        <textarea id="trainee_feedback" name="recording_reporting_handover.trainee_feedback"
+                  placeholder="What the trainee felt went well / would improve">{{ recording_reporting_handover.traineeFeedback }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="debrief_notes">Debrief Notes</label>
+        <textarea id="debrief_notes" name="recording_reporting_handover.debrief_notes"
+                  placeholder="Structured debrief and improvement plan for the training file">{{ recording_reporting_handover.debriefNotes }}</textarea>
+    </div>
+</div>
