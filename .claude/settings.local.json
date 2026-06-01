@@ -492,6 +492,12 @@
       "Bash(bin/lily-html-refactor --help)",
       "Write(/Users/jph/git/formexamples/form-examples/forms/medical-operation-note/**)",
       "Edit(/Users/jph/git/formexamples/form-examples/forms/medical-operation-note/**)",
+      "Write(/Users/jph/git/formexamples/form-examples/forms/medical-waiting-list-card/**)",
+      "Edit(/Users/jph/git/formexamples/form-examples/forms/medical-waiting-list-card/**)",
+      "Write(/Users/jph/git/formexamples/form-examples/forms/who-surgical-safety-checklist/**)",
+      "Edit(/Users/jph/git/formexamples/form-examples/forms/who-surgical-safety-checklist/**)",
+      "Write(/Users/jph/git/formexamples/form-examples/forms/**)",
+      "Edit(/Users/jph/git/formexamples/form-examples/forms/**)",
       "Bash(pnpm:*)",
       "Bash(npm:*)",
       "Bash(cargo:*)",
@@ -499,7 +505,18 @@
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(ln:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(bin/generate-spec.py --check)",
+      "Bash(bin/lily-html-refactor --check --all)",
+      "Bash(bin/lily-svelte-refactor --check --all)",
+      "Bash(bin/lily-sync --check)",
+      "Bash(bin/lily-svelte-sync --check)",
+      "Bash(bin/lily-html-refactor medical-waiting-list-card *)",
+      "Bash(sysctl kern.maxsymlinks)",
+      "Bash(bin/loco-config-refactor --check medical-waiting-list-card)",
+      "Bash(bin/loco-config-refactor --help)",
+      "Bash(bin/loco-config-refactor --check --all)",
+      "Bash(echo \"EXIT $?\")"
     ]
   }
 }
