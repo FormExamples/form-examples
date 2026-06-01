@@ -15,10 +15,10 @@
 <prefers_welsh>true</prefers_welsh>
 <contact_phone>07700900001</contact_phone>
 <contact_email>07700900001</contact_email>
-<other_first_names>Jane</other_first_names>
-<other_last_name>Doe</other_last_name>
-<other_address_line_1>10 High Street</other_address_line_1>
-<other_address_line_2>Westminster</other_address_line_2>
-<other_address_line_3>London</other_address_line_3>
-<other_postcode>SW1A 1AA</other_postcode>
+<other_first_names>Example</other_first_names>
+<other_last_name>Example</other_last_name>
+<other_address_line_1></other_address_line_1>
+<other_address_line_2></other_address_line_2>
+<other_address_line_3></other_address_line_3>
+<other_postcode>ABC123</other_postcode>
 </lpa_registration_recipient>
