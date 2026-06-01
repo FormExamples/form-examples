@@ -1,0 +1,110 @@
+<div class="card">
+    <h2>Step 4: Issuer Validation</h2>
+    <p class="form-hint">
+        Healthcare professional credentials. Doctors apply a name-and-address
+        stamp; midwives provide their NMC PIN and registration expiry date.
+    </p>
+
+    <h3>Issuer type</h3>
+    <div class="form-group">
+        <label>
+            <input type="radio" name="issuer.issuer_type" value="doctor"
+                   {% if issuer.issuerType == "doctor" %}checked{% endif %}>
+            Doctor
+        </label>
+        <label>
+            <input type="radio" name="issuer.issuer_type" value="midwife"
+                   {% if issuer.issuerType == "midwife" %}checked{% endif %}>
+            Registered midwife
+        </label>
+    </div>
+
+    <!-- Doctor branch -->
+    <h3>Doctor details (complete if issuer is a doctor)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="doctor_name">Doctor name</label>
+            <input type="text" id="doctor_name" name="issuer.doctor.doctor_name"
+                   value="{{ issuer.doctor.doctorName }}">
+        </div>
+        <div class="form-group">
+            <label for="practice_name">Practice / surgery name</label>
+            <input type="text" id="practice_name" name="issuer.doctor.practice_name"
+                   value="{{ issuer.doctor.practiceName }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="practice_address">Practice address</label>
+        <textarea id="practice_address" name="issuer.doctor.practice_address"
+                  rows="2">{{ issuer.doctor.practiceAddress }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="stamp_applied">Name-and-address stamp applied?</label>
+        <select id="stamp_applied" name="issuer.doctor.stamp_applied">
+            <option value="" {% if issuer.doctor.stampApplied == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if issuer.doctor.stampApplied == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if issuer.doctor.stampApplied == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <!-- Midwife branch -->
+    <h3>Midwife details (complete if issuer is a registered midwife)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="midwife_name">Midwife name</label>
+            <input type="text" id="midwife_name" name="issuer.midwife.midwife_name"
+                   value="{{ issuer.midwife.midwifeName }}">
+        </div>
+        <div class="form-group">
+            <label for="nmc_pin">NMC PIN</label>
+            <input type="text" id="nmc_pin" name="issuer.midwife.nmc_pin"
+                   value="{{ issuer.midwife.nmcPin }}">
+        </div>
+        <div class="form-group">
+            <label for="nmc_expiry_date">NMC registration expiry date</label>
+            <input type="date" id="nmc_expiry_date" name="issuer.midwife.nmc_expiry_date"
+                   value="{{ issuer.midwife.nmcExpiryDate }}">
+        </div>
+    </div>
+
+    <!-- Certificate-level fields -->
+    <h3>Certificate</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="certificate_number">Unique certificate number</label>
+            <input type="text" id="certificate_number" name="issuer.certificate_number"
+                   value="{{ issuer.certificateNumber }}">
+        </div>
+        <div class="form-group">
+            <label for="issue_date">Issue date</label>
+            <input type="date" id="issue_date" name="issuer.issue_date"
+                   value="{{ issuer.issueDate }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="is_duplicate">Is this a duplicate?</label>
+            <select id="is_duplicate" name="issuer.is_duplicate">
+                <option value="" {% if issuer.isDuplicate == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if issuer.isDuplicate == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if issuer.isDuplicate == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duplicate_marker_applied">Duplicate marker applied?</label>
+            <select id="duplicate_marker_applied" name="issuer.duplicate_marker_applied">
+                <option value="" {% if issuer.duplicateMarkerApplied == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if issuer.duplicateMarkerApplied == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if issuer.duplicateMarkerApplied == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="completed_in_ink">Completed in ink?</label>
+            <select id="completed_in_ink" name="issuer.completed_in_ink">
+                <option value="" {% if issuer.completedInInk == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if issuer.completedInInk == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if issuer.completedInInk == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+</div>

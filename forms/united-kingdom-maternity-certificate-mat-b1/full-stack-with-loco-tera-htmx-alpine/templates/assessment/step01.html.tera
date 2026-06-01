@@ -1,0 +1,38 @@
+<div class="card">
+    <h2>Step 1: Patient Identification</h2>
+    <p class="form-hint">Front-page details for the patient on the MAT B1 certificate.</p>
+
+    <div class="form-group">
+        <label for="patient_name">Patient name (as it should appear above Part A)</label>
+        <input type="text" id="patient_name" name="patient_identification.patient_name"
+               value="{{ patient_identification.patientName }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of birth (optional)</label>
+            <input type="date" id="date_of_birth" name="patient_identification.date_of_birth"
+                   value="{{ patient_identification.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="nhs_number">NHS number (optional)</label>
+            <input type="text" id="nhs_number" name="patient_identification.nhs_number"
+                   value="{{ patient_identification.nhsNumber }}" placeholder="e.g. 943 476 5919">
+        </div>
+    </div>
+
+    <h3>Certificate Type</h3>
+    <p class="form-hint">Part A and Part B are mutually exclusive.</p>
+    <div class="form-group">
+        <label>
+            <input type="radio" name="certificate_type" value="pre"
+                   {% if certificate_type == "pre" %}checked{% endif %}>
+            Part A &mdash; Pre-confinement (EWC only)
+        </label>
+        <label>
+            <input type="radio" name="certificate_type" value="post"
+                   {% if certificate_type == "post" %}checked{% endif %}>
+            Part B &mdash; Post-confinement (actual DOB + EWC)
+        </label>
+    </div>
+</div>

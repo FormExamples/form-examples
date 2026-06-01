@@ -1,42 +1,22 @@
-//! Tera context builders for the UK MAT B1 assessment.
-
-use serde::{Deserialize, Serialize};
 use tera::Context;
 use uuid::Uuid;
 
-use crate::engine::mat_b1_validator::validate_mat_b1;
-use crate::engine::types::{AssessmentData, ValidationResult};
+use crate::engine::types::AssessmentData;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ReportResult {
-    pub validation: ValidationResult,
-    pub timestamp: String,
-}
+/// Total wizard steps: 1 Patient ID, 2 Part A, 3 Part B, 4 Issuer.
+pub const TOTAL_STEPS: u32 = 4;
 
-/// Build the Tera context for the single-page wizard.
+/// Build a Tera context for rendering the single-page MAT B1 wizard.
+/// All section partials share the same context.
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &4usize);
-    ctx.insert("data", data);
-    ctx
-}
-
-/// Build the Tera context for the report after submission.
-pub fn build_report_context(data: &AssessmentData, id: Uuid) -> Context {
-    let validation = validate_mat_b1(data);
-    let timestamp = validation.timestamp.clone();
-
-    let result = ReportResult {
-        validation,
-        timestamp: timestamp.clone(),
-    };
-
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("data", data);
-    ctx.insert("result", &result);
-    ctx.insert("timestamp", &timestamp);
-    ctx
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("total_steps", &TOTAL_STEPS);
+    context.insert("data", data);
+    context.insert("patient_identification", &data.patient_identification);
+    context.insert("certificate_type", &data.certificate_type);
+    context.insert("pre_confinement", &data.pre_confinement);
+    context.insert("post_confinement", &data.post_confinement);
+    context.insert("issuer", &data.issuer);
+    context
 }
