@@ -1,18 +1,28 @@
-# Medical Waiting List Card — specification
+# Medical Operation Note — specification
 
 This file is the **living domain spec** for this form. It captures the contract each implementation (SQL schema, generated representations, front-ends, and Rust backend) must satisfy. Treat it as the source of truth for behaviour — update the spec before changing code.
 
-Slug: `medical-waiting-list-card`
+Slug: `medical-operation-note`
 
 ## 1. Purpose
 
-A practitioner-completed administrative card that places a patient on a
-medical waiting list and gives the patient a transparent, easy-to-use view of
-their referral, expected wait, and upcoming appointment(s).
+A surgical operation note ("op note") is the legal contemporaneous record
+written by the operating team immediately after a procedure. It documents
+who did what, what was found, what was used, what was left behind, what
+went wrong, and what the post-operative plan is. It supports continuity
+of care, anaesthetic recovery, ward handover, theatre auditing, and
+medico-legal defence.
 
-The card is aligned with NHS England's *Referral to Treatment (RTT)*
-patient-pathway rules and the *Elective recovery* / *Clinical Prioritisation*
-framework (P1–P5 / P6). It serves as the single record that records:
+This form is a UK NHS– and Royal College of Surgeons–aligned structured
+op note implemented as a single-page step-by-step wizard. It collects
+**operative findings recorded by the operating team** (lead surgeon,
+assistant, anaesthetist, scrub nurse), computes a **composite operative
+risk grade** (Routine / Complicated / High-risk / Critical) and a set of
+safety flags (incorrect count, retained item, conversion to open,
+unplanned ICU admission, intra-operative complication, EBL exceeding
+1.5 L, transfusion required, anaesthetic incident, never-event suspicion),
+and emits a signed PDF report and FHIR R5 `Procedure` bundle suitable
+for the electronic health record.
 
 Full design description: [`index.md`](index.md).
 
@@ -22,23 +32,32 @@ In scope: the schema, scoring engine, four front-ends (form + dashboard, each in
 
 ## 3. Scoring system
 
-- **Primary instrument:** Waiting Time Status (WTS), a four-band category
-  computed from the RTT clock-start date, the clinical priority, and the
-  scheduled appointment date.
-- **Secondary instrument:** Clinical Priority per NHS England clinical
-  prioritisation (P1 / P2 / P3 / P4 / P5 / P6).
-- **Algorithm:** the worst-band finding sets the overall Waiting Time Status.
+- **Primary instrument:** composite operative risk grade
+  (Routine / Complicated / High-risk / Critical), driven by the
+  worst-band finding across estimated blood loss, complications,
+  conversion to open, swab/needle/instrument count discrepancies,
+  retained items, unplanned post-op disposition, and anaesthetic
+  events. Algorithm is **max-grade** — the worst finding sets the
+  composite grade; Routine is the default when no rules fire.
+- **Secondary instruments:**
+  - **WHO Surgical Safety Checklist** sign-out items (count
+    confirmed, specimen labelled, equipment problems addressed,
+    key concerns for recovery communicated).
+  - **Clavien–Dindo** classification for any intra-operative
+    complication (I, II, IIIa, IIIb, IVa, IVb, V).
+  - **ASA Physical Status** carried over from the pre-operative
+    assessment (I–VI), used as a context modifier for composite risk.
 
-| Category | Drivers |
+| Band | Drivers |
 | --- | --- |
-| Within Target | Days waited ≤ priority target and ≤ 18 weeks; routine tracking only |
-| Approaching Breach | Within 4 weeks of priority target or the 18-week RTT standard; booking team review |
-| Breached | Past priority target or > 18 weeks since clock-start; RTT validation and patient contact required |
-| Long Wait | > 52 weeks since clock-start; mandatory long-waiter review, harm-review trigger |
+| Routine | EBL ≤ 500 mL, no complications, counts correct, no conversion, planned disposition, Clavien–Dindo 0, ASA I–II |
+| Complicated | EBL 500–1500 mL, Clavien–Dindo I–II, minor anaesthetic event, planned step-up to enhanced care |
+| High-risk | EBL 1500–3000 mL, Clavien–Dindo IIIa–IIIb, transfusion required, conversion to open, unplanned HDU/ICU admission, ASA IV |
+| Critical | EBL > 3000 mL, Clavien–Dindo IVa–V, count discrepancy unresolved, retained foreign body suspected, never-event suspicion, intra-operative arrest, ASA V–VI |
 
 ## 4. Inputs and outputs
 
-**Inputs.** A typed assessment object whose shape mirrors the SQL schema in `sql-migrations/` (9 migration files). Unanswered text and enum fields default to `''`; unanswered numeric, date, and time fields default to `null`.
+**Inputs.** A typed assessment object whose shape mirrors the SQL schema in `sql-migrations/` (15 migration files). Unanswered text and enum fields default to `''`; unanswered numeric, date, and time fields default to `null`.
 
 **Outputs.** A grading object emitted by the engine: scoring result (per the instrument named in §3), `firedRules[]`, `additionalFlags[]`, and a clinical / administrative report. Rendered as HTML in the browser, exported as PDF via the SvelteKit endpoint, and convertible to FHIR R5 Bundle, XML, JSON, CSV, or TSV.
 
@@ -64,7 +83,7 @@ Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script)
 
 ## 6. Acceptance criteria
 
-- `bin/test-form medical-waiting-list-card` exits cleanly.
+- `bin/test-form medical-operation-note` exits cleanly.
 - The scoring engine is pure (no side effects, no I/O) and unit-tested.
 - The HTML front-ends conform to the Lily HTML headless contract
   ([`forms/AGENTS-front-end-html.md`](../AGENTS-front-end-html.md)).
@@ -72,10 +91,10 @@ Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script)
   ([`forms/AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md))
   and pass `pnpm check` and `pnpm test`.
 - The Rust crate builds (`cargo build`) and tests pass (`cargo test`).
-- `bin/lily-html-refactor --check medical-waiting-list-card` reports no drift.
+- `bin/lily-html-refactor --check medical-operation-note` reports no drift.
 - LocalStorage keys preserve draft state across reloads:
-  - `medical-waiting-list-card.front-end-form-with-html.v1` (HTML)
-  - `medical-waiting-list-card.front-end-form-with-svelte.v1` (SvelteKit)
+  - `medical-operation-note.front-end-form-with-html.v1` (HTML)
+  - `medical-operation-note.front-end-form-with-svelte.v1` (SvelteKit)
 
 ## 7. Compliance
 
@@ -95,5 +114,5 @@ Inherits the monorepo compliance baseline: MDCG 2019-11 Rev.1 (EU MDR), UK Medic
 ## 9. Verify
 
 ```sh
-bin/test-form medical-waiting-list-card
+bin/test-form medical-operation-note
 ```

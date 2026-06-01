@@ -42,7 +42,7 @@ Required artefacts and their current status:
 | `sql-migrations` | source of truth |
 | `xml-representations` | generated |
 | `fhir-r5` | generated |
-| `protobuf` | generated — not implemented |
+| `protobuf` | generated |
 | `openapi` | generated |
 | `front-end-form-with-html` | Lily contract |
 | `front-end-form-with-svelte` | SvelteKit |
