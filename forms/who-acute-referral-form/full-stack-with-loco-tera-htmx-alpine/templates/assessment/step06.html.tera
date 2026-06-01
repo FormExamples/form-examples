@@ -1,0 +1,34 @@
+<div class="card" x-show="step === 6">
+  <h2>Step 6: Recommendations</h2>
+
+  <div class="form-group">
+    <label for="treatmentPlanDuringTransport">Treatment plan during transport</label>
+    <textarea id="treatmentPlanDuringTransport" name="treatmentPlanDuringTransport" rows="3">{{ recommendations.treatmentPlanDuringTransport }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="potentialWorseningOfCondition">Potential worsening of condition</label>
+    <textarea id="potentialWorseningOfCondition" name="potentialWorseningOfCondition" rows="2">{{ recommendations.potentialWorseningOfCondition }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="cautionsRegardingPriorTherapies">Cautions regarding prior therapies</label>
+    <textarea id="cautionsRegardingPriorTherapies" name="cautionsRegardingPriorTherapies" rows="2">{{ recommendations.cautionsRegardingPriorTherapies }}</textarea>
+  </div>
+
+  <h3>Precautions</h3>
+  <div class="form-group">
+    <label><input type="checkbox" name="highlyInfectiousDisease" value="on" {% if recommendations.precautions.highlyInfectiousDisease %}checked{% endif %}> Highly infectious disease</label><br>
+    <label><input type="checkbox" name="spinalPrecautions" value="on" {% if recommendations.precautions.spinalPrecautions %}checked{% endif %}> Spinal precautions</label><br>
+    <label><input type="checkbox" name="weightBearingRestrictions" value="on" {% if recommendations.precautions.weightBearingRestrictions %}checked{% endif %}> Weight-bearing restrictions</label><br>
+    <label><input type="checkbox" name="fallRisk" value="on" {% if recommendations.precautions.fallRisk %}checked{% endif %}> Fall risk</label><br>
+    <label><input type="checkbox" name="aspirationRisk" value="on" {% if recommendations.precautions.aspirationRisk %}checked{% endif %}> Aspiration risk</label><br>
+    <label><input type="checkbox" name="precautionOther" value="on" {% if recommendations.precautions.other %}checked{% endif %}> Other</label>
+  </div>
+
+  <div class="form-group">
+    <label for="precautionOtherDetails">Other precaution details (required if "Other" ticked)</label>
+    <input type="text" id="precautionOtherDetails" name="precautionOtherDetails"
+           value="{{ recommendations.precautions.otherDetails }}">
+  </div>
+</div>

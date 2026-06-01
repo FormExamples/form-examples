@@ -257,3 +257,12 @@ pub struct FlaggedIssue {
     pub message: String,
     pub priority: FlagPriority,
 }
+
+/// The full report result persisted into the JSONB `result` column.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ReportResult {
+    pub validation: ValidationResult,
+    pub flagged_issues: Vec<FlaggedIssue>,
+    pub timestamp: String,
+}

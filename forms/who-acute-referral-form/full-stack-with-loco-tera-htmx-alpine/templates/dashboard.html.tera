@@ -1,0 +1,98 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Acute Referral Form - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+  <h1>Referral Dashboard</h1>
+  <a href="/" class="btn btn-primary">New Referral</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input type="text" id="search" name="search" value="{{ search }}"
+           placeholder="Patient name, diagnosis, or complaint...">
+  </div>
+  <div class="form-group">
+    <label for="mode_of_transfer">Mode of transfer</label>
+    <select id="mode_of_transfer" name="mode_of_transfer">
+      <option value="">All</option>
+      <option value="ground" {% if mode_of_transfer == "ground" %}selected{% endif %}>Ground</option>
+      <option value="air" {% if mode_of_transfer == "air" %}selected{% endif %}>Air</option>
+      <option value="sea" {% if mode_of_transfer == "sea" %}selected{% endif %}>Sea</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="complete">Completeness</label>
+    <select id="complete" name="complete">
+      <option value="">All</option>
+      <option value="yes" {% if complete == "yes" %}selected{% endif %}>Complete</option>
+      <option value="no" {% if complete == "no" %}selected{% endif %}>Incomplete</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="has_flags">Flags (urgent/high)</label>
+    <select id="has_flags" name="has_flags">
+      <option value="">All</option>
+      <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+      <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+    </select>
+  </div>
+  <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a href="/dashboard" class="btn btn-secondary">Clear</a>
+  </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed referral{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+  <thead>
+    <tr>
+      <th>Departure</th>
+      <th>Patient</th>
+      <th>Initiating facility</th>
+      <th>Referral facility</th>
+      <th>Mode</th>
+      <th>Chief complaint</th>
+      <th>Completeness</th>
+      <th>Flags</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in referrals %}
+    <tr>
+      <td><a href="/assessment/{{ r.id }}/report">{{ r.departureDateTime }}</a></td>
+      <td>{{ r.patientLastName }}, {{ r.patientFirstName }}<br><small>{{ r.dateOfBirth }} &mdash; {{ r.sex }}</small></td>
+      <td>{{ r.initiatingFacilityName }}</td>
+      <td>{{ r.referralFacilityName }}</td>
+      <td>{{ r.modeOfTransfer }}</td>
+      <td>{{ r.chiefComplaint }}</td>
+      <td>
+        {% if r.complete %}
+          <span class="badge badge-yes">{{ r.totalSatisfied }}/{{ r.totalRequired }}</span>
+        {% else %}
+          <span class="badge badge-no">{{ r.totalSatisfied }}/{{ r.totalRequired }}</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if r.urgentFlagCount > 0 %}
+          <span class="badge badge-no">{{ r.urgentFlagCount }} urgent</span>
+        {% elif r.highFlagCount > 0 %}
+          <span class="badge badge-no">{{ r.highFlagCount }} high</span>
+        {% else %}
+          <span class="badge badge-yes">0</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+  <p>No completed referrals found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,46 +1,34 @@
 //! Tera context builders for the WHO Acute Referral Form assessment.
 
-use serde::{Deserialize, Serialize};
 use tera::Context;
 use uuid::Uuid;
 
-use crate::engine::flagged_issues::detect_flagged_issues;
-use crate::engine::referral_validator::validate_referral;
-use crate::engine::types::{AssessmentData, FlaggedIssue, ValidationResult};
+use crate::engine::types::AssessmentData;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ReportResult {
-    pub validation: ValidationResult,
-    pub flagged_issues: Vec<FlaggedIssue>,
-    pub timestamp: String,
-}
+/// Total wizard steps (PID, F&T, Situation, Background, Assessment,
+/// Recommendations, Provider Sign-off, Receipt).
+pub const TOTAL_STEPS: u32 = 8;
 
-/// Build the Tera context for the single-page wizard.
+/// Build a Tera context for rendering the single-page wizard. All step
+/// partials share the same context.
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
     let mut ctx = Context::new();
     ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &8usize);
+    ctx.insert("total_steps", &TOTAL_STEPS);
     ctx.insert("data", data);
-    ctx
-}
-
-/// Build the Tera context for the report after submission.
-pub fn build_report_context(data: &AssessmentData, id: Uuid) -> Context {
-    let validation = validate_referral(data);
-    let flagged_issues = detect_flagged_issues(data);
-    let timestamp = chrono::Utc::now().to_rfc3339();
-
-    let result = ReportResult {
-        validation,
-        flagged_issues,
-        timestamp: timestamp.clone(),
-    };
-
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("data", data);
-    ctx.insert("result", &result);
-    ctx.insert("timestamp", &timestamp);
+    ctx.insert("patient_identification", &data.patient_identification);
+    ctx.insert("facility_and_transport", &data.facility_and_transport);
+    ctx.insert("situation", &data.situation);
+    ctx.insert("background", &data.background);
+    ctx.insert("assessment", &data.assessment);
+    ctx.insert("recommendations", &data.recommendations);
+    ctx.insert(
+        "initiating_provider_signoff",
+        &data.initiating_provider_signoff,
+    );
+    ctx.insert(
+        "referral_facility_receipt",
+        &data.referral_facility_receipt,
+    );
     ctx
 }

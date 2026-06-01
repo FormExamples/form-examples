@@ -1,0 +1,54 @@
+<div class="card" x-show="step === 1">
+  <h2>Step 1: Patient Identification</h2>
+  <p class="form-hint">Patient name, date of birth, sex, and emergency contact.</p>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="patientLastName">Last name (family name)</label>
+      <input type="text" id="patientLastName" name="patientLastName"
+             value="{{ patient_identification.patientLastName }}">
+    </div>
+    <div class="form-group">
+      <label for="patientFirstName">First name (given name)</label>
+      <input type="text" id="patientFirstName" name="patientFirstName"
+             value="{{ patient_identification.patientFirstName }}">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="dateOfBirth">Date of birth</label>
+      <input type="date" id="dateOfBirth" name="dateOfBirth"
+             value="{{ patient_identification.dateOfBirth }}">
+    </div>
+    <div class="form-group">
+      <label for="sex">Sex</label>
+      <select id="sex" name="sex">
+        <option value="" {% if patient_identification.sex == "" %}selected{% endif %}>&mdash;</option>
+        <option value="male" {% if patient_identification.sex == "male" %}selected{% endif %}>Male</option>
+        <option value="female" {% if patient_identification.sex == "female" %}selected{% endif %}>Female</option>
+        <option value="unknown" {% if patient_identification.sex == "unknown" %}selected{% endif %}>Unknown</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="patientContactInformation">Patient contact information</label>
+    <input type="text" id="patientContactInformation" name="patientContactInformation"
+           value="{{ patient_identification.patientContactInformation }}">
+  </div>
+
+  <h3>Emergency contact</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="emergencyContactName">Name</label>
+      <input type="text" id="emergencyContactName" name="emergencyContactName"
+             value="{{ patient_identification.emergencyContact.name }}">
+    </div>
+    <div class="form-group">
+      <label for="emergencyContactInformation">Contact information</label>
+      <input type="text" id="emergencyContactInformation" name="emergencyContactInformation"
+             value="{{ patient_identification.emergencyContact.contactInformation }}">
+    </div>
+  </div>
+</div>
