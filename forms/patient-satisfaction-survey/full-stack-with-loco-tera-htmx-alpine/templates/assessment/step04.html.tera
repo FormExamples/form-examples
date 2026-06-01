@@ -1,0 +1,18 @@
+{% import "assessment/_likert.html.tera" as macros %}
+<div class="card">
+    <h2>Step 4: Communication &amp; Information</h2>
+    <p class="form-hint">How well did clinicians and staff explain things to you?</p>
+
+    <div class="form-row">
+        {{ macros::likert(name="communication_information.explanation_of_condition", label="Explanation of your condition", value=communication_information.explanationOfCondition) }}
+        {{ macros::likert(name="communication_information.explanation_of_treatment", label="Explanation of treatment", value=communication_information.explanationOfTreatment) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="communication_information.opportunity_to_ask_questions", label="Opportunity to ask questions", value=communication_information.opportunityToAskQuestions) }}
+        {{ macros::likert(name="communication_information.listened_to", label="Felt listened to", value=communication_information.listenedTo) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="communication_information.informed_about_medication", label="Informed about medication", value=communication_information.informedAboutMedication) }}
+        {{ macros::likert(name="communication_information.written_information_quality", label="Quality of written information", value=communication_information.writtenInformationQuality) }}
+    </div>
+</div>

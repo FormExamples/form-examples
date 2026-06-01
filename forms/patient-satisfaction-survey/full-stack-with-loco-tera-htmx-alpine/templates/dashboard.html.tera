@@ -1,0 +1,96 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Patient Satisfaction Survey - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Patient Satisfaction Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Survey</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, department, or site...">
+    </div>
+    <div class="form-group">
+        <label for="satisfaction_category">Satisfaction</label>
+        <select id="satisfaction_category" name="satisfaction_category">
+            <option value="">All</option>
+            <option value="excellent" {% if satisfaction_category == "excellent" %}selected{% endif %}>Excellent</option>
+            <option value="good" {% if satisfaction_category == "good" %}selected{% endif %}>Good</option>
+            <option value="satisfactory" {% if satisfaction_category == "satisfactory" %}selected{% endif %}>Satisfactory</option>
+            <option value="poor" {% if satisfaction_category == "poor" %}selected{% endif %}>Poor</option>
+            <option value="very-poor" {% if satisfaction_category == "very-poor" %}selected{% endif %}>Very Poor</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="visit_type">Visit Type</label>
+        <select id="visit_type" name="visit_type">
+            <option value="">All</option>
+            <option value="outpatient" {% if visit_type == "outpatient" %}selected{% endif %}>Outpatient</option>
+            <option value="inpatient" {% if visit_type == "inpatient" %}selected{% endif %}>Inpatient</option>
+            <option value="day-case" {% if visit_type == "day-case" %}selected{% endif %}>Day case</option>
+            <option value="emergency" {% if visit_type == "emergency" %}selected{% endif %}>Emergency</option>
+            <option value="telehealth" {% if visit_type == "telehealth" %}selected{% endif %}>Telehealth</option>
+            <option value="home-visit" {% if visit_type == "home-visit" %}selected{% endif %}>Home visit</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed surve{% if total == 1 %}y{% else %}ys{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Visit Date</th>
+            <th>Site / Department</th>
+            <th>Patient</th>
+            <th>Visit Type</th>
+            <th>Referral</th>
+            <th>Satisfaction</th>
+            <th>Score</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.visitDate }}</a></td>
+            <td>{{ c.hospitalSite }}<br><small>{{ c.department }}</small></td>
+            <td>{{ c.patientName }}</td>
+            <td>{{ c.visitType }}</td>
+            <td>{{ c.referralSource }}</td>
+            <td><span class="checklist-badge checklist-{{ c.satisfactionCategory }}" style="font-size: 0.75rem; padding: 0.15rem 0.5rem;">{{ c.satisfactionCategory }}</span></td>
+            <td>{{ c.normalizedScore }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed surveys found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

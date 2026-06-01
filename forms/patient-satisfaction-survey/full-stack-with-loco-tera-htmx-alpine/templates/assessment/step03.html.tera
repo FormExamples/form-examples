@@ -1,0 +1,25 @@
+{% import "assessment/_likert.html.tera" as macros %}
+<div class="card">
+    <h2>Step 3: Access &amp; Waiting Times</h2>
+    <p class="form-hint">Rate your experience getting to and being seen for this visit.</p>
+
+    <div class="form-row">
+        {{ macros::likert(name="access_waiting_times.ease_of_booking", label="Ease of booking the appointment", value=access_waiting_times.easeOfBooking) }}
+        {{ macros::likert(name="access_waiting_times.waiting_time_for_appointment", label="Waiting time for the appointment", value=access_waiting_times.waitingTimeForAppointment) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="access_waiting_times.waiting_time_on_day", label="Waiting time on the day", value=access_waiting_times.waitingTimeOnDay) }}
+        {{ macros::likert(name="access_waiting_times.reception_service", label="Reception service", value=access_waiting_times.receptionService) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="access_waiting_times.signage_wayfinding", label="Signage and wayfinding", value=access_waiting_times.signageWayfinding) }}
+        {{ macros::likert(name="access_waiting_times.parking_transport", label="Parking and transport", value=access_waiting_times.parkingTransport) }}
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="actual_wait_minutes">Actual wait on the day (minutes)</label>
+            <input type="number" min="0" id="actual_wait_minutes" name="access_waiting_times.actual_wait_minutes"
+                   value="{{ access_waiting_times.actualWaitMinutes }}">
+        </div>
+    </div>
+</div>

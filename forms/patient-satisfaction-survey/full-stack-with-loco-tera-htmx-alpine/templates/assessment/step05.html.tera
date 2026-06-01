@@ -1,0 +1,18 @@
+{% import "assessment/_likert.html.tera" as macros %}
+<div class="card">
+    <h2>Step 5: Clinical Care Quality</h2>
+    <p class="form-hint">Rate the clinical aspects of your care.</p>
+
+    <div class="form-row">
+        {{ macros::likert(name="clinical_care_quality.confidence_in_clinician", label="Confidence in the clinician", value=clinical_care_quality.confidenceInClinician) }}
+        {{ macros::likert(name="clinical_care_quality.thoroughness_of_examination", label="Thoroughness of examination", value=clinical_care_quality.thoroughnessOfExamination) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="clinical_care_quality.pain_management", label="Pain management", value=clinical_care_quality.painManagement) }}
+        {{ macros::likert(name="clinical_care_quality.involvement_in_decisions", label="Involvement in decisions", value=clinical_care_quality.involvementInDecisions) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="clinical_care_quality.privacy_during_examination", label="Privacy during examination", value=clinical_care_quality.privacyDuringExamination) }}
+        {{ macros::likert(name="clinical_care_quality.coordination_of_care", label="Coordination of care", value=clinical_care_quality.coordinationOfCare) }}
+    </div>
+</div>

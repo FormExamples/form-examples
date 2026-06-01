@@ -1,0 +1,58 @@
+<div class="card">
+    <h2>Step 10: Comments &amp; Suggestions</h2>
+    <p class="form-hint">Open-text comments and optional contact details for follow-up.</p>
+
+    <div class="form-group">
+        <label for="what_went_well">What went well?</label>
+        <textarea id="what_went_well" name="comments_suggestions.what_went_well" rows="3">{{ comments_suggestions.whatWentWell }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="what_could_improve">What could be improved?</label>
+        <textarea id="what_could_improve" name="comments_suggestions.what_could_improve" rows="3">{{ comments_suggestions.whatCouldImprove }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="specific_staff_praise">Specific staff praise</label>
+        <textarea id="specific_staff_praise" name="comments_suggestions.specific_staff_praise" rows="2">{{ comments_suggestions.specificStaffPraise }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="complaint_raised">Did you raise a formal complaint?</label>
+            <select id="complaint_raised" name="comments_suggestions.complaint_raised">
+                <option value="" {% if comments_suggestions.complaintRaised == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if comments_suggestions.complaintRaised == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if comments_suggestions.complaintRaised == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="consent_to_contact">May we contact you about this feedback?</label>
+            <select id="consent_to_contact" name="comments_suggestions.consent_to_contact">
+                <option value="" {% if comments_suggestions.consentToContact == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if comments_suggestions.consentToContact == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if comments_suggestions.consentToContact == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="complaint_details">Complaint details (if any)</label>
+        <textarea id="complaint_details" name="comments_suggestions.complaint_details" rows="3">{{ comments_suggestions.complaintDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="additional_comments">Additional comments</label>
+        <textarea id="additional_comments" name="comments_suggestions.additional_comments" rows="3">{{ comments_suggestions.additionalComments }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="contact_email">Contact email (optional)</label>
+            <input type="email" id="contact_email" name="comments_suggestions.contact_email"
+                   value="{{ comments_suggestions.contactEmail }}">
+        </div>
+        <div class="form-group">
+            <label for="contact_phone">Contact phone (optional)</label>
+            <input type="tel" id="contact_phone" name="comments_suggestions.contact_phone"
+                   value="{{ comments_suggestions.contactPhone }}">
+        </div>
+    </div>
+</div>

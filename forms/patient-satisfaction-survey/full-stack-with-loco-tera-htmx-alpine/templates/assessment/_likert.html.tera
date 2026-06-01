@@ -1,0 +1,13 @@
+{% macro likert(name, label, value) %}
+<div class="form-group">
+    <label for="{{ name | replace(from='.', to='_') }}">{{ label }}</label>
+    <select id="{{ name | replace(from='.', to='_') }}" name="{{ name }}">
+        <option value="" {% if value == "" or value == 0 %}selected{% endif %}>&mdash;</option>
+        <option value="1" {% if value == 1 %}selected{% endif %}>1 &mdash; Very Dissatisfied</option>
+        <option value="2" {% if value == 2 %}selected{% endif %}>2 &mdash; Dissatisfied</option>
+        <option value="3" {% if value == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+        <option value="4" {% if value == 4 %}selected{% endif %}>4 &mdash; Satisfied</option>
+        <option value="5" {% if value == 5 %}selected{% endif %}>5 &mdash; Very Satisfied</option>
+    </select>
+</div>
+{% endmacro likert %}

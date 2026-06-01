@@ -1,0 +1,32 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Patient Satisfaction Survey - Questionnaire{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Patient Satisfaction Survey</h1>
+    <p class="form-hint">
+        Please share your honest feedback about your recent visit. Each question
+        uses a five-point Likert scale from <em>Very Dissatisfied</em> (1) to
+        <em>Very Satisfied</em> (5). All ten sections appear on this single page;
+        complete and submit when ready.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Survey</button>
+    </div>
+</form>
+{% endblock %}

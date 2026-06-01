@@ -1,0 +1,18 @@
+{% import "assessment/_likert.html.tera" as macros %}
+<div class="card">
+    <h2>Step 8: Discharge &amp; Follow-up</h2>
+    <p class="form-hint">Rate the discharge and follow-up process.</p>
+
+    <div class="form-row">
+        {{ macros::likert(name="discharge_follow_up.discharge_information", label="Discharge information", value=discharge_follow_up.dischargeInformation) }}
+        {{ macros::likert(name="discharge_follow_up.medication_explanation", label="Medication explanation", value=discharge_follow_up.medicationExplanation) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="discharge_follow_up.follow_up_arrangements", label="Follow-up arrangements", value=discharge_follow_up.followUpArrangements) }}
+        {{ macros::likert(name="discharge_follow_up.knew_who_to_contact", label="Knew who to contact afterwards", value=discharge_follow_up.knewWhoToContact) }}
+    </div>
+    <div class="form-row">
+        {{ macros::likert(name="discharge_follow_up.recovery_information", label="Recovery information", value=discharge_follow_up.recoveryInformation) }}
+        {{ macros::likert(name="discharge_follow_up.care_plan_clarity", label="Care plan clarity", value=discharge_follow_up.carePlanClarity) }}
+    </div>
+</div>

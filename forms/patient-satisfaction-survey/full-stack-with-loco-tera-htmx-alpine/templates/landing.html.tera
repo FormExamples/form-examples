@@ -1,0 +1,37 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Patient Satisfaction Survey - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Patient Satisfaction Survey</h1>
+        <p class="landing-description">
+            Likert-scale survey measuring healthcare experience quality across seven care
+            domains: access, communication, clinical care, staff attitude, environment,
+            discharge, and overall experience. Composite score normalised to 0&ndash;100.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Seven Domains</h3>
+                <p>Per-domain normalized scores and overall composite, mapped to five satisfaction categories (Excellent &rarr; Very Poor)</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Real-time alerts for safety, dignity, complaints, privacy, and service-quality concerns</p>
+            </div>
+            <div class="feature">
+                <h3>Patient Voice</h3>
+                <p>Free-text praise, suggestions, and optional contact details for service quality improvement</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Survey
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

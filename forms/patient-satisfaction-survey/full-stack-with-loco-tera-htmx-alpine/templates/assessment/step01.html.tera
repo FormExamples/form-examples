@@ -1,0 +1,68 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Optional demographic context. The survey is anonymous unless you also complete the contact section in Step 10.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="demographics.sex">
+                <option value="" {% if demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.sex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.sex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age_range">Age Range</label>
+            <select id="age_range" name="demographics.age_range">
+                <option value="" {% if demographics.ageRange == "" %}selected{% endif %}>&mdash;</option>
+                <option value="18-24" {% if demographics.ageRange == "18-24" %}selected{% endif %}>18&ndash;24</option>
+                <option value="25-34" {% if demographics.ageRange == "25-34" %}selected{% endif %}>25&ndash;34</option>
+                <option value="35-44" {% if demographics.ageRange == "35-44" %}selected{% endif %}>35&ndash;44</option>
+                <option value="45-54" {% if demographics.ageRange == "45-54" %}selected{% endif %}>45&ndash;54</option>
+                <option value="55-64" {% if demographics.ageRange == "55-64" %}selected{% endif %}>55&ndash;64</option>
+                <option value="65-74" {% if demographics.ageRange == "65-74" %}selected{% endif %}>65&ndash;74</option>
+                <option value="75-plus" {% if demographics.ageRange == "75-plus" %}selected{% endif %}>75+</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ethnicity">Ethnicity</label>
+            <input type="text" id="ethnicity" name="demographics.ethnicity"
+                   value="{{ demographics.ethnicity }}">
+        </div>
+        <div class="form-group">
+            <label for="preferred_language">Preferred Language</label>
+            <input type="text" id="preferred_language" name="demographics.preferred_language"
+                   value="{{ demographics.preferredLanguage }}">
+        </div>
+        <div class="form-group">
+            <label for="interpreter_required">Interpreter Required?</label>
+            <select id="interpreter_required" name="demographics.interpreter_required">
+                <option value="" {% if demographics.interpreterRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if demographics.interpreterRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if demographics.interpreterRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>
