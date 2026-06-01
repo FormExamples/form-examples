@@ -1,0 +1,97 @@
+{% extends "base.html.tera" %}
+
+{% block title %}EMT Psychomotor Examination - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Training Coordinator Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Examination</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Candidate name, ID, or examiner...">
+    </div>
+    <div class="form-group">
+        <label for="outcome">Outcome</label>
+        <select id="outcome" name="outcome">
+            <option value="">All</option>
+            <option value="pass" {% if outcome == "pass" %}selected{% endif %}>Pass</option>
+            <option value="fail" {% if outcome == "fail" %}selected{% endif %}>Fail</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="attempt">Attempt</label>
+        <select id="attempt" name="attempt">
+            <option value="">All</option>
+            <option value="first-attempt" {% if attempt == "first-attempt" %}selected{% endif %}>First attempt</option>
+            <option value="retest" {% if attempt == "retest" %}selected{% endif %}>Retest</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed examination{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Session Date</th>
+            <th>Candidate</th>
+            <th>Attempt</th>
+            <th>Examiner</th>
+            <th>Station</th>
+            <th>Outcome</th>
+            <th>Score</th>
+            <th>Critical</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.sessionDate }}</a></td>
+            <td>{{ c.candidateFirstName }} {{ c.candidateLastName }}<br><small>{{ c.candidateId }}</small></td>
+            <td>{{ c.attempt }}</td>
+            <td>{{ c.examinerName }}</td>
+            <td>{{ c.stationLocation }}</td>
+            <td><span class="outcome-{{ c.outcome }}">{{ c.outcome }}</span></td>
+            <td>{{ c.points }} / {{ c.maxPoints }} ({{ c.percent | round(precision=0) }}%)</td>
+            <td>
+                {% if c.criticalFailureCount > 0 %}
+                    <span class="badge badge-no">{{ c.criticalFailureCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed examinations found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

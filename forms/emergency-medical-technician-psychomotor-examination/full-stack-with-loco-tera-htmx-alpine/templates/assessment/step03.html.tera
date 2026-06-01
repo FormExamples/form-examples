@@ -1,0 +1,74 @@
+<div class="card">
+    <h2>Step 3: Primary Survey</h2>
+    <p class="form-hint">Airway, breathing, oxygen, circulation, and transport priority are <strong>critical criteria</strong>.</p>
+
+    <div class="form-group">
+        <label for="general_impression">General impression of the patient</label>
+        <select id="general_impression" name="primary_survey.general_impression">
+            <option value="" {% if primary_survey.generalImpression == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.generalImpression == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.generalImpression == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.generalImpression == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mental_status">Responsiveness / mental status (AVPU)</label>
+        <select id="mental_status" name="primary_survey.mental_status">
+            <option value="" {% if primary_survey.mentalStatus == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.mentalStatus == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.mentalStatus == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.mentalStatus == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="airway">Airway assessment &amp; management (critical)</label>
+        <select id="airway" name="primary_survey.airway">
+            <option value="" {% if primary_survey.airway == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.airway == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.airway == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.airway == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="breathing">Breathing assessment &amp; ventilatory support (critical)</label>
+        <select id="breathing" name="primary_survey.breathing">
+            <option value="" {% if primary_survey.breathing == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.breathing == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.breathing == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.breathing == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="oxygen_therapy">Appropriate oxygen therapy (critical)</label>
+        <select id="oxygen_therapy" name="primary_survey.oxygen_therapy">
+            <option value="" {% if primary_survey.oxygenTherapy == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.oxygenTherapy == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.oxygenTherapy == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.oxygenTherapy == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="circulation">Circulation, bleeding control, shock management (critical)</label>
+        <select id="circulation" name="primary_survey.circulation">
+            <option value="" {% if primary_survey.circulation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.circulation == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.circulation == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.circulation == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="transport_priority">Transport priority decision (critical)</label>
+        <select id="transport_priority" name="primary_survey.transport_priority">
+            <option value="" {% if primary_survey.transportPriority == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if primary_survey.transportPriority == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if primary_survey.transportPriority == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if primary_survey.transportPriority == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+</div>

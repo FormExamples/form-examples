@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}EMT Psychomotor Examination - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>EMT Psychomotor Examination</h1>
+        <p class="landing-description">
+            NREMT Psychomotor Skills Examination &mdash; Medical Patient station.
+            An examiner-completed checklist that scores candidate performance across
+            <strong>Scene Size-Up</strong>, <strong>Primary Survey</strong>,
+            <strong>History &amp; Secondary Assessment</strong>, and
+            <strong>Reassessment</strong>, with explicit critical-criteria audit.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Point-based scoring</h3>
+                <p>Each scored item awards points when performed correctly; 80% of available points is required to pass.</p>
+            </div>
+            <div class="feature">
+                <h3>Critical criteria</h3>
+                <p>Any critical-criterion failure (PPE, scene safety, airway, breathing, oxygen, circulation, transport, dangerous intervention, spinal protection, 15-minute call) results in an automatic Fail.</p>
+            </div>
+            <div class="feature">
+                <h3>Examiner debrief</h3>
+                <p>Prioritised flags surface domain weaknesses, incomplete primary surveys, missed reassessment, and improvement areas for the post-station debrief.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Examination
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

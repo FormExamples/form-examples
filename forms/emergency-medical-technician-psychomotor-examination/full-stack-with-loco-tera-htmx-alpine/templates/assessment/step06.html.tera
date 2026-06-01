@@ -1,0 +1,40 @@
+<div class="card">
+    <h2>Step 6: Critical Criteria Review</h2>
+    <p class="form-hint">
+        Both items below are <strong>critical criteria</strong> — any "Not performed"
+        triggers an automatic Fail regardless of point total.
+    </p>
+
+    <div class="form-group">
+        <label for="dangerous_intervention">Did NOT perform any dangerous or harmful intervention (critical)</label>
+        <select id="dangerous_intervention" name="critical_criteria_review.dangerous_intervention">
+            <option value="" {% if critical_criteria_review.dangerousIntervention == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if critical_criteria_review.dangerousIntervention == "yes" %}selected{% endif %}>Yes (no dangerous intervention)</option>
+            <option value="no" {% if critical_criteria_review.dangerousIntervention == "no" %}selected{% endif %}>No (dangerous intervention performed)</option>
+            <option value="na" {% if critical_criteria_review.dangerousIntervention == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="spinal_protection">Provided spinal protection when indicated by MOI (critical)</label>
+        <select id="spinal_protection" name="critical_criteria_review.spinal_protection">
+            <option value="" {% if critical_criteria_review.spinalProtection == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if critical_criteria_review.spinalProtection == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if critical_criteria_review.spinalProtection == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if critical_criteria_review.spinalProtection == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <h3>Examiner Notes</h3>
+    <div class="form-group">
+        <label for="examiner_notes">Examiner notes (for the candidate record)</label>
+        <textarea id="examiner_notes" name="critical_criteria_review.examiner_notes"
+                  placeholder="Observations on candidate performance">{{ critical_criteria_review.examinerNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="debrief_notes">Debrief notes (for the improvement plan)</label>
+        <textarea id="debrief_notes" name="critical_criteria_review.debrief_notes"
+                  placeholder="Points discussed during candidate debrief">{{ critical_criteria_review.debriefNotes }}</textarea>
+    </div>
+</div>

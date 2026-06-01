@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 1: Candidate, Examiner &amp; Scenario</h2>
+    <p class="form-hint">Candidate identity, examiner identity, and the scenario brief.</p>
+
+    <h3>Candidate</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="candidate_first_name">First Name</label>
+            <input type="text" id="candidate_first_name" name="candidate_examiner_scenario.candidate_first_name"
+                   value="{{ candidate_examiner_scenario.candidateFirstName }}">
+        </div>
+        <div class="form-group">
+            <label for="candidate_last_name">Last Name</label>
+            <input type="text" id="candidate_last_name" name="candidate_examiner_scenario.candidate_last_name"
+                   value="{{ candidate_examiner_scenario.candidateLastName }}">
+        </div>
+        <div class="form-group">
+            <label for="candidate_id">Candidate ID</label>
+            <input type="text" id="candidate_id" name="candidate_examiner_scenario.candidate_id"
+                   value="{{ candidate_examiner_scenario.candidateId }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="attempt">Attempt</label>
+            <select id="attempt" name="candidate_examiner_scenario.attempt">
+                <option value="" {% if candidate_examiner_scenario.attempt == "" %}selected{% endif %}>&mdash;</option>
+                <option value="first-attempt" {% if candidate_examiner_scenario.attempt == "first-attempt" %}selected{% endif %}>First attempt</option>
+                <option value="retest" {% if candidate_examiner_scenario.attempt == "retest" %}selected{% endif %}>Retest</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="examiner_name">Examiner Name</label>
+            <input type="text" id="examiner_name" name="candidate_examiner_scenario.examiner_name"
+                   value="{{ candidate_examiner_scenario.examinerName }}">
+        </div>
+        <div class="form-group">
+            <label for="session_date">Session Date</label>
+            <input type="date" id="session_date" name="candidate_examiner_scenario.session_date"
+                   value="{{ candidate_examiner_scenario.sessionDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="station_location">Station Location</label>
+        <input type="text" id="station_location" name="candidate_examiner_scenario.station_location"
+               value="{{ candidate_examiner_scenario.stationLocation }}">
+    </div>
+
+    <h3>Scenario</h3>
+    <div class="form-group">
+        <label for="scenario_summary">Scenario Summary</label>
+        <textarea id="scenario_summary" name="candidate_examiner_scenario.scenario_summary"
+                  placeholder="Brief description of the patient and scenario given to the candidate">{{ candidate_examiner_scenario.scenarioSummary }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="chief_complaint_given">Chief Complaint (from scenario brief)</label>
+        <input type="text" id="chief_complaint_given" name="candidate_examiner_scenario.chief_complaint_given"
+               value="{{ candidate_examiner_scenario.chiefComplaintGiven }}">
+    </div>
+</div>

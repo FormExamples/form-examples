@@ -1,0 +1,94 @@
+<div class="card">
+    <h2>Step 5: Reassessment</h2>
+    <p class="form-hint">The 15-minute transport / radio call is a <strong>critical criterion</strong>.</p>
+
+    <div class="form-group">
+        <label for="repeats_mental_status">Repeats mental-status assessment</label>
+        <select id="repeats_mental_status" name="reassessment.repeats_mental_status">
+            <option value="" {% if reassessment.repeatsMentalStatus == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsMentalStatus == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsMentalStatus == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsMentalStatus == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="repeats_airway">Repeats airway assessment</label>
+        <select id="repeats_airway" name="reassessment.repeats_airway">
+            <option value="" {% if reassessment.repeatsAirway == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsAirway == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsAirway == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsAirway == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="repeats_breathing">Repeats breathing assessment</label>
+        <select id="repeats_breathing" name="reassessment.repeats_breathing">
+            <option value="" {% if reassessment.repeatsBreathing == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsBreathing == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsBreathing == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsBreathing == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="repeats_circulation">Repeats circulation assessment</label>
+        <select id="repeats_circulation" name="reassessment.repeats_circulation">
+            <option value="" {% if reassessment.repeatsCirculation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsCirculation == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsCirculation == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsCirculation == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="repeats_vitals">Repeats and records vital signs</label>
+        <select id="repeats_vitals" name="reassessment.repeats_vitals">
+            <option value="" {% if reassessment.repeatsVitals == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsVitals == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsVitals == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsVitals == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="repeats_focused_exam">Repeats focused assessment for complaint / injuries</label>
+        <select id="repeats_focused_exam" name="reassessment.repeats_focused_exam">
+            <option value="" {% if reassessment.repeatsFocusedExam == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.repeatsFocusedExam == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.repeatsFocusedExam == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.repeatsFocusedExam == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="evaluates_interventions">Evaluates effectiveness of interventions</label>
+        <select id="evaluates_interventions" name="reassessment.evaluates_interventions">
+            <option value="" {% if reassessment.evaluatesInterventions == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.evaluatesInterventions == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.evaluatesInterventions == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.evaluatesInterventions == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="transport_interventions">Manages / reassesses transport interventions en route</label>
+        <select id="transport_interventions" name="reassessment.transport_interventions">
+            <option value="" {% if reassessment.transportInterventions == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.transportInterventions == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.transportInterventions == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.transportInterventions == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fifteen_minute_call">15-minute hand-off / radio report (critical)</label>
+        <select id="fifteen_minute_call" name="reassessment.fifteen_minute_call">
+            <option value="" {% if reassessment.fifteenMinuteCall == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reassessment.fifteenMinuteCall == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if reassessment.fifteenMinuteCall == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if reassessment.fifteenMinuteCall == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 2: Scene Size-Up</h2>
+    <p class="form-hint">Before approaching the patient. PPE precautions and scene safety are <strong>critical criteria</strong>.</p>
+
+    <div class="form-group">
+        <label for="ppe_precautions">PPE / body-substance precautions (critical)</label>
+        <select id="ppe_precautions" name="scene_size_up.ppe_precautions">
+            <option value="" {% if scene_size_up.ppePrecautions == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.ppePrecautions == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.ppePrecautions == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.ppePrecautions == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="scene_safe">Scene / situation safe (critical)</label>
+        <select id="scene_safe" name="scene_size_up.scene_safe">
+            <option value="" {% if scene_size_up.sceneSafe == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.sceneSafe == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.sceneSafe == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.sceneSafe == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mechanism_or_nature">Mechanism of injury / nature of illness</label>
+        <select id="mechanism_or_nature" name="scene_size_up.mechanism_or_nature">
+            <option value="" {% if scene_size_up.mechanismOrNature == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.mechanismOrNature == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.mechanismOrNature == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.mechanismOrNature == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="number_of_patients">Determines number of patients</label>
+        <select id="number_of_patients" name="scene_size_up.number_of_patients">
+            <option value="" {% if scene_size_up.numberOfPatients == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.numberOfPatients == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.numberOfPatients == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.numberOfPatients == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_resources">Requests additional resources (ALS / fire / law)</label>
+        <select id="additional_resources" name="scene_size_up.additional_resources">
+            <option value="" {% if scene_size_up.additionalResources == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.additionalResources == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.additionalResources == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.additionalResources == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="considers_cspine">Considers c-spine stabilization if indicated</label>
+        <select id="considers_cspine" name="scene_size_up.considers_cspine">
+            <option value="" {% if scene_size_up.considersCspine == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if scene_size_up.considersCspine == "yes" %}selected{% endif %}>Performed</option>
+            <option value="no" {% if scene_size_up.considersCspine == "no" %}selected{% endif %}>Not performed</option>
+            <option value="na" {% if scene_size_up.considersCspine == "na" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+</div>
