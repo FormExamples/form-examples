@@ -1,0 +1,157 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Cymraeg Speaking Assessment Report - {{ grading.grade }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Medical Language Speaking Assessment for Cymraeg &mdash; Report</h1>
+    <div class="grade-badge {{ grade_class }}">{{ grading.grade }}</div>
+    <div class="grade-label">{{ grade_label }}</div>
+    <div class="grade-label">Scaled score: {{ grading.scaledScore }} / 500</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        {% if at_or_above_threshold %}
+            At or above the typical Welsh-medium clinical threshold (Grade B / CEFR C1).
+        {% else %}
+            Below the typical Welsh-medium clinical threshold (Grade B / CEFR C1).
+        {% endif %}
+    </p>
+</div>
+
+<!-- Candidate Summary -->
+<div class="card">
+    <h2>Candidate Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Candidate ID:</strong> {{ data.candidate.candidateId }}<br>
+            <strong>Name:</strong> {{ data.candidate.candidateName }}<br>
+            <strong>Examiner:</strong> {{ data.candidate.examinerName }}<br>
+            <strong>Centre:</strong> {{ data.candidate.testCentre }}<br>
+            <strong>Test Date:</strong> {{ data.candidate.testDate }}
+        </div>
+        <div>
+            <strong>Profession:</strong> {{ data.candidate.profession }}<br>
+            <strong>First Language:</strong> {{ data.candidate.firstLanguage }}<br>
+            <strong>Country of Training:</strong> {{ data.candidate.countryOfTraining }}<br>
+            <strong>Years of Experience:</strong> {{ data.candidate.yearsOfExperience }}
+        </div>
+    </div>
+</div>
+
+<!-- Totals -->
+<div class="card">
+    <h2>Scoring Summary</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Domain</th>
+                <th>Total</th>
+                <th>Maximum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Linguistic (mean across role-plays)</td>
+                <td>{{ grading.linguisticTotal }}</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td>Clinical Communication</td>
+                <td>{{ grading.clinicalTotal }}</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td><strong>Raw Total</strong></td>
+                <td><strong>{{ grading.rawTotal }}</strong></td>
+                <td>39</td>
+            </tr>
+            <tr>
+                <td><strong>Scaled Score</strong></td>
+                <td><strong>{{ grading.scaledScore }}</strong></td>
+                <td>500</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Per-criterion audit trail -->
+<div class="card">
+    <h2>Per-Criterion Scores</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Domain</th>
+                <th>Criterion</th>
+                <th>Role-play 1</th>
+                <th>Role-play 2</th>
+                <th>Mean</th>
+                <th>Max</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in grading.perCriterionScores %}
+            <tr>
+                <td><code>{{ s.id }}</code></td>
+                <td>{{ s.domain }}</td>
+                <td>{{ s.label }}</td>
+                <td>{% if s.rolePlay1Score is null %}&mdash;{% else %}{{ s.rolePlay1Score }}{% endif %}</td>
+                <td>{% if s.rolePlay2Score is null %}&mdash;{% else %}{{ s.rolePlay2Score }}{% endif %}</td>
+                <td>{% if s.meanScore is null %}&mdash;{% else %}{{ s.meanScore }}{% endif %}</td>
+                <td>{{ s.maxScore }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety / improvement flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Examiner Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules (criterion-level audit) -->
+{% if grading.firedRules | length > 0 %}
+<div class="card">
+    <h2>Criterion Audit Trail ({{ grading.firedRules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in grading.firedRules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{{ rule.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

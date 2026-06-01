@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Medical Language Speaking Assessment for Cymraeg - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Medical Language Speaking Assessment for Cymraeg</h1>
+        <p class="landing-description">
+            Clinical Welsh-language (Cymraeg) speaking assessment for healthcare professionals
+            working with Welsh-speaking patients, aligned to the NHS Wales
+            <em>More Than Just Words</em> framework and mapped to CEFR levels A1 through C2
+            with criteria covering fluency, grammar, pronunciation, and clinical appropriateness.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Two Role-plays</h3>
+                <p>Sgwrs gyda Chlaf (patient conversation) and Esboniad Clinigol (clinical explanation), each rated 0&ndash;6 on four linguistic criteria.</p>
+            </div>
+            <div class="feature">
+                <h3>Clinical Communication</h3>
+                <p>Five communication indicators rated 0&ndash;3 across the whole assessment (relationship, perspective, structure, gathering, giving).</p>
+            </div>
+            <div class="feature">
+                <h3>CEFR Grade</h3>
+                <p>Scaled to 0&ndash;500 and reported as Grade A&ndash;E with NHS Wales clinical-threshold guidance (Grade B / CEFR C1 typical target).</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
