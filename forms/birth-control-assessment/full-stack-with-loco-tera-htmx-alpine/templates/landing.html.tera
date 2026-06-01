@@ -1,0 +1,40 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Birth Control Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Birth Control Assessment</h1>
+        <p class="landing-description">
+            Contraceptive suitability evaluation against the UK Medical Eligibility Criteria
+            (UK MEC). Captures demographics, menstrual and contraceptive history, medical
+            history, cardiovascular and thromboembolism risk, current medications, lifestyle,
+            and contraceptive preferences. The output is a per-method UK MEC classification
+            (1-4) plus safety-critical flagged issues such as DVT history, migraine with aura,
+            and severe hypertension.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>UK MEC 1-4</h3>
+                <p>Per-method MEC category (COC, POP, implant, injection, IUD, IUS) derived from the worst fired rule</p>
+            </div>
+            <div class="feature">
+                <h3>10-step Wizard</h3>
+                <p>Single-page wizard covering demographics, history, risk profile, medications, lifestyle, and preferences</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for DVT/PE, migraine with aura, severe hypertension, breast cancer, and breastfeeding</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

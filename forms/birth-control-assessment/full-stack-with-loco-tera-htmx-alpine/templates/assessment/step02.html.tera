@@ -1,0 +1,92 @@
+<div class="card">
+    <h2>Step 2: Menstrual History</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="menarche_age">Menarche age (years)</label>
+            <input type="number" min="0" id="menarche_age" name="menstrual_history.menarche_age"
+                   value="{{ menstrual_history.menarcheAge }}">
+        </div>
+        <div class="form-group">
+            <label for="cycle_regularity">Cycle regularity</label>
+            <select id="cycle_regularity" name="menstrual_history.cycle_regularity">
+                <option value="" {% if menstrual_history.cycleRegularity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="regular" {% if menstrual_history.cycleRegularity == "regular" %}selected{% endif %}>Regular</option>
+                <option value="irregular" {% if menstrual_history.cycleRegularity == "irregular" %}selected{% endif %}>Irregular</option>
+                <option value="absent" {% if menstrual_history.cycleRegularity == "absent" %}selected{% endif %}>Absent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cycle_length_days">Cycle length (days)</label>
+            <input type="number" min="0" id="cycle_length_days" name="menstrual_history.cycle_length_days"
+                   value="{{ menstrual_history.cycleLengthDays }}">
+        </div>
+        <div class="form-group">
+            <label for="period_duration_days">Period duration (days)</label>
+            <input type="number" min="0" id="period_duration_days" name="menstrual_history.period_duration_days"
+                   value="{{ menstrual_history.periodDurationDays }}">
+        </div>
+        <div class="form-group">
+            <label for="flow_heaviness">Flow heaviness</label>
+            <select id="flow_heaviness" name="menstrual_history.flow_heaviness">
+                <option value="" {% if menstrual_history.flowHeaviness == "" %}selected{% endif %}>&mdash;</option>
+                <option value="light" {% if menstrual_history.flowHeaviness == "light" %}selected{% endif %}>Light</option>
+                <option value="moderate" {% if menstrual_history.flowHeaviness == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="heavy" {% if menstrual_history.flowHeaviness == "heavy" %}selected{% endif %}>Heavy</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="intermenstrual_bleeding">Intermenstrual bleeding</label>
+            <select id="intermenstrual_bleeding" name="menstrual_history.intermenstrual_bleeding">
+                <option value="" {% if menstrual_history.intermenstrualBleeding == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if menstrual_history.intermenstrualBleeding == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if menstrual_history.intermenstrualBleeding == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="postcoital_bleeding">Postcoital bleeding</label>
+            <select id="postcoital_bleeding" name="menstrual_history.postcoital_bleeding">
+                <option value="" {% if menstrual_history.postcoitalBleeding == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if menstrual_history.postcoitalBleeding == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if menstrual_history.postcoitalBleeding == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dysmenorrhoea">Dysmenorrhoea</label>
+            <select id="dysmenorrhoea" name="menstrual_history.dysmenorrhoea">
+                <option value="" {% if menstrual_history.dysmenorrhoea == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if menstrual_history.dysmenorrhoea == "none" %}selected{% endif %}>None</option>
+                <option value="mild" {% if menstrual_history.dysmenorrhoea == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if menstrual_history.dysmenorrhoea == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if menstrual_history.dysmenorrhoea == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_menstrual_period">Last menstrual period</label>
+            <input type="date" id="last_menstrual_period" name="menstrual_history.last_menstrual_period"
+                   value="{{ menstrual_history.lastMenstrualPeriod }}">
+        </div>
+        <div class="form-group">
+            <label for="amenorrhoea">Amenorrhoea</label>
+            <select id="amenorrhoea" name="menstrual_history.amenorrhoea">
+                <option value="" {% if menstrual_history.amenorrhoea == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if menstrual_history.amenorrhoea == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if menstrual_history.amenorrhoea == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amenorrhoea_duration_months">Amenorrhoea duration (months)</label>
+            <input type="number" min="0" id="amenorrhoea_duration_months" name="menstrual_history.amenorrhoea_duration_months"
+                   value="{{ menstrual_history.amenorrhoeaDurationMonths }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="card">
+    <h2>Step 10: Clinical Recommendation</h2>
+    <p class="form-hint">Free-text clinical notes from the prescriber summarising the recommended contraceptive plan.</p>
+
+    <div class="form-group">
+        <label for="clinical_notes">Clinical notes</label>
+        <textarea id="clinical_notes" name="clinical_recommendation.clinical_notes"
+                  rows="6"
+                  placeholder="Document the agreed contraceptive plan, follow-up arrangements, and counselling provided">{{ clinical_recommendation.clinicalNotes }}</textarea>
+    </div>
+</div>

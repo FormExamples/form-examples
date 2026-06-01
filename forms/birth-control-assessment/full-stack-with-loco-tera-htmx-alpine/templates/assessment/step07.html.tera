@@ -1,0 +1,136 @@
+<div class="card">
+    <h2>Step 7: Current Medications</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="enzyme_inducing_drugs">Enzyme-inducing drugs</label>
+            <select id="enzyme_inducing_drugs" name="current_medications.enzyme_inducing_drugs">
+                <option value="" {% if current_medications.enzymeInducingDrugs == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.enzymeInducingDrugs == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.enzymeInducingDrugs == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="enzyme_inducing_details">Enzyme-inducing details</label>
+            <input type="text" id="enzyme_inducing_details" name="current_medications.enzyme_inducing_details"
+                   value="{{ current_medications.enzymeInducingDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="anticoagulants">Anticoagulants</label>
+            <select id="anticoagulants" name="current_medications.anticoagulants">
+                <option value="" {% if current_medications.anticoagulants == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.anticoagulants == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.anticoagulants == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anticoagulant_details">Anticoagulant details</label>
+            <input type="text" id="anticoagulant_details" name="current_medications.anticoagulant_details"
+                   value="{{ current_medications.anticoagulantDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antiepileptics">Antiepileptics</label>
+            <select id="antiepileptics" name="current_medications.antiepileptics">
+                <option value="" {% if current_medications.antiepileptics == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.antiepileptics == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.antiepileptics == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antiepileptic_details">Antiepileptic details</label>
+            <input type="text" id="antiepileptic_details" name="current_medications.antiepileptic_details"
+                   value="{{ current_medications.antiepilepticDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antiretrovirals">Antiretrovirals</label>
+            <select id="antiretrovirals" name="current_medications.antiretrovirals">
+                <option value="" {% if current_medications.antiretrovirals == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.antiretrovirals == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.antiretrovirals == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antiretroviral_details">Antiretroviral details</label>
+            <input type="text" id="antiretroviral_details" name="current_medications.antiretroviral_details"
+                   value="{{ current_medications.antiretroviralDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antibiotics">Antibiotics</label>
+            <select id="antibiotics" name="current_medications.antibiotics">
+                <option value="" {% if current_medications.antibiotics == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.antibiotics == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.antibiotics == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antibiotic_details">Antibiotic details</label>
+            <input type="text" id="antibiotic_details" name="current_medications.antibiotic_details"
+                   value="{{ current_medications.antibioticDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ssri_snri">SSRI / SNRI</label>
+            <select id="ssri_snri" name="current_medications.ssri_snri">
+                <option value="" {% if current_medications.ssriSnri == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.ssriSnri == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.ssriSnri == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ssri_snri_details">SSRI/SNRI details</label>
+            <input type="text" id="ssri_snri_details" name="current_medications.ssri_snri_details"
+                   value="{{ current_medications.ssriSnriDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="herbal_remedies">Herbal remedies</label>
+            <select id="herbal_remedies" name="current_medications.herbal_remedies">
+                <option value="" {% if current_medications.herbalRemedies == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.herbalRemedies == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.herbalRemedies == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="herbal_details">Herbal details</label>
+            <input type="text" id="herbal_details" name="current_medications.herbal_details"
+                   value="{{ current_medications.herbalDetails }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="other_medications">Other medications</label>
+        <textarea id="other_medications" name="current_medications.other_medications">{{ current_medications.otherMedications }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="drug_allergies">Drug allergies</label>
+            <select id="drug_allergies" name="current_medications.drug_allergies">
+                <option value="" {% if current_medications.drugAllergies == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_medications.drugAllergies == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_medications.drugAllergies == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="drug_allergy_details">Drug allergy details</label>
+            <input type="text" id="drug_allergy_details" name="current_medications.drug_allergy_details"
+                   value="{{ current_medications.drugAllergyDetails }}">
+        </div>
+    </div>
+</div>

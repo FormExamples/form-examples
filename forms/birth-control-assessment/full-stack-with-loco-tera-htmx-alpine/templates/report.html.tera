@@ -1,0 +1,129 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Birth Control Assessment - Report{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Birth Control Assessment &mdash; Clinical Report</h1>
+    <div class="risk-badge risk-{{ overall_risk }}">{{ overall_risk_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.lastName }}, {{ data.demographics.firstName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}
+        </div>
+        <div>
+            <strong>Weight:</strong> {{ data.demographics.weight }} kg<br>
+            <strong>Height:</strong> {{ data.demographics.height }} cm<br>
+            <strong>BMI:</strong> {{ data.demographics.bmi }}
+        </div>
+    </div>
+</div>
+
+<!-- Per-method MEC -->
+<div class="card">
+    <h2>UK MEC by Method</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>UK MEC Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Combined Oral Contraception (COC)</td>
+                <td><span class="mec-badge mec-{{ method_mec.coc }}">MEC {{ method_mec.coc }}</span></td>
+            </tr>
+            <tr>
+                <td>Progestogen-Only Pill (POP)</td>
+                <td><span class="mec-badge mec-{{ method_mec.pop }}">MEC {{ method_mec.pop }}</span></td>
+            </tr>
+            <tr>
+                <td>Contraceptive Implant</td>
+                <td><span class="mec-badge mec-{{ method_mec.implant }}">MEC {{ method_mec.implant }}</span></td>
+            </tr>
+            <tr>
+                <td>Injectable Contraception</td>
+                <td><span class="mec-badge mec-{{ method_mec.injection }}">MEC {{ method_mec.injection }}</span></td>
+            </tr>
+            <tr>
+                <td>Copper IUD</td>
+                <td><span class="mec-badge mec-{{ method_mec.iud }}">MEC {{ method_mec.iud }}</span></td>
+            </tr>
+            <tr>
+                <td>Hormonal IUS (Mirena)</td>
+                <td><span class="mec-badge mec-{{ method_mec.ius }}">MEC {{ method_mec.ius }}</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired Rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired UK MEC Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>MEC</th>
+                <th>Affected methods</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="mec-badge mec-{{ rule.mecCategory }}">MEC {{ rule.mecCategory }}</span></td>
+                <td>{{ rule.affectedMethods | join(sep=", ") }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Clinical Notes -->
+{% if data.clinicalRecommendation.clinicalNotes %}
+<div class="card">
+    <h2>Clinical Notes</h2>
+    <p>{{ data.clinicalRecommendation.clinicalNotes }}</p>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
