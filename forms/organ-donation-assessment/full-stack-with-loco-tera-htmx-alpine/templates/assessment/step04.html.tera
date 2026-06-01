@@ -1,0 +1,147 @@
+<div class="card">
+    <h2>Step 4: Organ Function Assessment</h2>
+    <p class="form-hint">Renal, hepatic, cardiac, pulmonary, and pancreatic function indicators.</p>
+
+    <h3>Renal</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_creatinine">Creatinine (µmol/L)</label>
+            <input type="number" step="0.1" id="organ_function_creatinine" name="organ_function.creatinine"
+                   value="{{ organ_function.creatinine }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_egfr">eGFR (mL/min/1.73m²)</label>
+            <input type="number" step="0.1" id="organ_function_egfr" name="organ_function.egfr"
+                   value="{{ organ_function.egfr }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_kidney_imaging">Kidney imaging</label>
+            <select id="organ_function_kidney_imaging" name="organ_function.kidney_imaging">
+                <option value="" {% if organ_function.kidneyImaging == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if organ_function.kidneyImaging == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if organ_function.kidneyImaging == "abnormal" %}selected{% endif %}>Abnormal</option>
+                <option value="pending" {% if organ_function.kidneyImaging == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organ_function_kidney_notes">Kidney notes</label>
+        <input type="text" id="organ_function_kidney_notes" name="organ_function.kidney_notes"
+               value="{{ organ_function.kidneyNotes }}">
+    </div>
+
+    <h3>Hepatic</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_alt">ALT (U/L)</label>
+            <input type="number" step="0.1" id="organ_function_alt" name="organ_function.alt"
+                   value="{{ organ_function.alt }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_ast">AST (U/L)</label>
+            <input type="number" step="0.1" id="organ_function_ast" name="organ_function.ast"
+                   value="{{ organ_function.ast }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_bilirubin">Bilirubin (µmol/L)</label>
+            <input type="number" step="0.1" id="organ_function_bilirubin" name="organ_function.bilirubin"
+                   value="{{ organ_function.bilirubin }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_liver_imaging">Liver imaging</label>
+            <select id="organ_function_liver_imaging" name="organ_function.liver_imaging">
+                <option value="" {% if organ_function.liverImaging == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if organ_function.liverImaging == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if organ_function.liverImaging == "abnormal" %}selected{% endif %}>Abnormal</option>
+                <option value="pending" {% if organ_function.liverImaging == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organ_function_liver_notes">Liver notes</label>
+        <input type="text" id="organ_function_liver_notes" name="organ_function.liver_notes"
+               value="{{ organ_function.liverNotes }}">
+    </div>
+
+    <h3>Cardiac</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_ejection_fraction">Ejection fraction (%)</label>
+            <input type="number" step="0.1" id="organ_function_ejection_fraction" name="organ_function.ejection_fraction"
+                   value="{{ organ_function.ejectionFraction }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_echocardiogram">Echocardiogram</label>
+            <select id="organ_function_echocardiogram" name="organ_function.echocardiogram">
+                <option value="" {% if organ_function.echocardiogram == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if organ_function.echocardiogram == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if organ_function.echocardiogram == "abnormal" %}selected{% endif %}>Abnormal</option>
+                <option value="pending" {% if organ_function.echocardiogram == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organ_function_cardiac_notes">Cardiac notes</label>
+        <input type="text" id="organ_function_cardiac_notes" name="organ_function.cardiac_notes"
+               value="{{ organ_function.cardiacNotes }}">
+    </div>
+
+    <h3>Pulmonary</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_pao2_fio2_ratio">PaO2/FiO2 ratio</label>
+            <input type="number" step="0.1" id="organ_function_pao2_fio2_ratio" name="organ_function.pao2_fio2_ratio"
+                   value="{{ organ_function.pao2Fio2Ratio }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_chest_imaging">Chest imaging</label>
+            <select id="organ_function_chest_imaging" name="organ_function.chest_imaging">
+                <option value="" {% if organ_function.chestImaging == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if organ_function.chestImaging == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if organ_function.chestImaging == "abnormal" %}selected{% endif %}>Abnormal</option>
+                <option value="pending" {% if organ_function.chestImaging == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organ_function_pulmonary_notes">Pulmonary notes</label>
+        <input type="text" id="organ_function_pulmonary_notes" name="organ_function.pulmonary_notes"
+               value="{{ organ_function.pulmonaryNotes }}">
+    </div>
+
+    <h3>Pancreas / metabolic</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_fasting_glucose">Fasting glucose (mmol/L)</label>
+            <input type="number" step="0.1" id="organ_function_fasting_glucose" name="organ_function.fasting_glucose"
+                   value="{{ organ_function.fastingGlucose }}">
+        </div>
+        <div class="form-group">
+            <label for="organ_function_hba1c">HbA1c (%)</label>
+            <input type="number" step="0.1" id="organ_function_hba1c" name="organ_function.hba1c"
+                   value="{{ organ_function.hba1c }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organ_function_pancreatic_notes">Pancreatic notes</label>
+        <input type="text" id="organ_function_pancreatic_notes" name="organ_function.pancreatic_notes"
+               value="{{ organ_function.pancreaticNotes }}">
+    </div>
+
+    <h3>Severe organ failure</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="organ_function_severe_organ_failure">Severe organ failure incompatible with donation?</label>
+            <select id="organ_function_severe_organ_failure" name="organ_function.severe_organ_failure">
+                <option value="" {% if organ_function.severeOrganFailure == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if organ_function.severeOrganFailure == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if organ_function.severeOrganFailure == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="organ_function_severe_organ_failure_details">Details</label>
+            <input type="text" id="organ_function_severe_organ_failure_details" name="organ_function.severe_organ_failure_details"
+                   value="{{ organ_function.severeOrganFailureDetails }}">
+        </div>
+    </div>
+</div>

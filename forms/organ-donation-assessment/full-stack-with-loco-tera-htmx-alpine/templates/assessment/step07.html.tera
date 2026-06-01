@@ -1,0 +1,111 @@
+<div class="card">
+    <h2>Step 7: Surgical Assessment</h2>
+    <p class="form-hint">ASA grade, airway, fitness, lifestyle.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="su_asa_grade">ASA Grade</label>
+            <select id="su_asa_grade" name="surgical_assessment.asa_grade">
+                <option value="" {% if surgical_assessment.asaGrade == "" %}selected{% endif %}>&mdash;</option>
+                <option value="I" {% if surgical_assessment.asaGrade == "I" %}selected{% endif %}>I &mdash; healthy</option>
+                <option value="II" {% if surgical_assessment.asaGrade == "II" %}selected{% endif %}>II &mdash; mild disease</option>
+                <option value="III" {% if surgical_assessment.asaGrade == "III" %}selected{% endif %}>III &mdash; severe disease</option>
+                <option value="IV" {% if surgical_assessment.asaGrade == "IV" %}selected{% endif %}>IV &mdash; life-threatening</option>
+                <option value="V" {% if surgical_assessment.asaGrade == "V" %}selected{% endif %}>V &mdash; moribund</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_previous_anaesthetic">Previous anaesthetic?</label>
+            <select id="su_previous_anaesthetic" name="surgical_assessment.previous_anaesthetic">
+                <option value="" {% if surgical_assessment.previousAnaesthetic == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if surgical_assessment.previousAnaesthetic == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if surgical_assessment.previousAnaesthetic == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_complications">Previous anaesthetic complications?</label>
+            <select id="su_complications" name="surgical_assessment.anaesthetic_complications">
+                <option value="" {% if surgical_assessment.anaestheticComplications == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if surgical_assessment.anaestheticComplications == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if surgical_assessment.anaestheticComplications == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="su_complication_details">Complication details</label>
+        <input type="text" id="su_complication_details" name="surgical_assessment.complication_details"
+               value="{{ surgical_assessment.complicationDetails }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="su_mallampati">Mallampati score</label>
+            <select id="su_mallampati" name="surgical_assessment.mallampati_score">
+                <option value="" {% if surgical_assessment.mallampatiScore == "" %}selected{% endif %}>&mdash;</option>
+                <option value="I" {% if surgical_assessment.mallampatiScore == "I" %}selected{% endif %}>I</option>
+                <option value="II" {% if surgical_assessment.mallampatiScore == "II" %}selected{% endif %}>II</option>
+                <option value="III" {% if surgical_assessment.mallampatiScore == "III" %}selected{% endif %}>III</option>
+                <option value="IV" {% if surgical_assessment.mallampatiScore == "IV" %}selected{% endif %}>IV</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_airway_concerns">Airway concerns?</label>
+            <select id="su_airway_concerns" name="surgical_assessment.airway_concerns">
+                <option value="" {% if surgical_assessment.airwayConcerns == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if surgical_assessment.airwayConcerns == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if surgical_assessment.airwayConcerns == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_airway_details">Airway details</label>
+            <input type="text" id="su_airway_details" name="surgical_assessment.airway_details"
+                   value="{{ surgical_assessment.airwayDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="su_surgical_fitness">Surgical fitness</label>
+            <select id="su_surgical_fitness" name="surgical_assessment.surgical_fitness">
+                <option value="" {% if surgical_assessment.surgicalFitness == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if surgical_assessment.surgicalFitness == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if surgical_assessment.surgicalFitness == "abnormal" %}selected{% endif %}>Abnormal</option>
+                <option value="pending" {% if surgical_assessment.surgicalFitness == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_surgical_fitness_notes">Surgical fitness notes</label>
+            <input type="text" id="su_surgical_fitness_notes" name="surgical_assessment.surgical_fitness_notes"
+                   value="{{ surgical_assessment.surgicalFitnessNotes }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="su_planned_procedure">Planned procedure</label>
+        <input type="text" id="su_planned_procedure" name="surgical_assessment.planned_procedure"
+               value="{{ surgical_assessment.plannedProcedure }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="su_smoking_status">Smoking status</label>
+            <select id="su_smoking_status" name="surgical_assessment.smoking_status">
+                <option value="" {% if surgical_assessment.smokingStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="never" {% if surgical_assessment.smokingStatus == "never" %}selected{% endif %}>Never</option>
+                <option value="ex" {% if surgical_assessment.smokingStatus == "ex" %}selected{% endif %}>Ex-smoker</option>
+                <option value="current" {% if surgical_assessment.smokingStatus == "current" %}selected{% endif %}>Current</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="su_alcohol_use">Alcohol use</label>
+            <select id="su_alcohol_use" name="surgical_assessment.alcohol_use">
+                <option value="" {% if surgical_assessment.alcoholUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if surgical_assessment.alcoholUse == "none" %}selected{% endif %}>None</option>
+                <option value="occasional" {% if surgical_assessment.alcoholUse == "occasional" %}selected{% endif %}>Occasional</option>
+                <option value="moderate" {% if surgical_assessment.alcoholUse == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="heavy" {% if surgical_assessment.alcoholUse == "heavy" %}selected{% endif %}>Heavy</option>
+            </select>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="card">
+    <h2>Step 8: Psychological Assessment (Living Donor)</h2>
+    <p class="form-hint">Applies only when donor type is "living". Mental capacity, voluntariness, coercion screening.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ps_mental_capacity_confirmed">Mental capacity confirmed?</label>
+            <select id="ps_mental_capacity_confirmed" name="psychological_assessment.mental_capacity_confirmed">
+                <option value="" {% if psychological_assessment.mentalCapacityConfirmed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.mentalCapacityConfirmed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.mentalCapacityConfirmed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_understands_procedure">Understands procedure?</label>
+            <select id="ps_understands_procedure" name="psychological_assessment.understands_procedure">
+                <option value="" {% if psychological_assessment.understandsProcedure == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.understandsProcedure == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.understandsProcedure == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_understands_risks">Understands risks?</label>
+            <select id="ps_understands_risks" name="psychological_assessment.understands_risks">
+                <option value="" {% if psychological_assessment.understandsRisks == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.understandsRisks == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.understandsRisks == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ps_voluntary_decision">Voluntary decision?</label>
+            <select id="ps_voluntary_decision" name="psychological_assessment.voluntary_decision">
+                <option value="" {% if psychological_assessment.voluntaryDecision == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.voluntaryDecision == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.voluntaryDecision == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_coercion_concerns">Coercion concerns?</label>
+            <select id="ps_coercion_concerns" name="psychological_assessment.coercion_concerns">
+                <option value="" {% if psychological_assessment.coercionConcerns == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.coercionConcerns == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.coercionConcerns == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_coercion_details">Coercion details</label>
+            <input type="text" id="ps_coercion_details" name="psychological_assessment.coercion_details"
+                   value="{{ psychological_assessment.coercionDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ps_ambivalence">Ambivalence?</label>
+            <select id="ps_ambivalence" name="psychological_assessment.ambivalence">
+                <option value="" {% if psychological_assessment.ambivalence == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.ambivalence == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.ambivalence == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_ambivalence_details">Ambivalence details</label>
+            <input type="text" id="ps_ambivalence_details" name="psychological_assessment.ambivalence_details"
+                   value="{{ psychological_assessment.ambivalenceDetails }}">
+        </div>
+        <div class="form-group">
+            <label for="ps_anxiety">Anxiety about procedure</label>
+            <select id="ps_anxiety" name="psychological_assessment.anxiety_about_procedure">
+                <option value="" {% if psychological_assessment.anxietyAboutProcedure == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if psychological_assessment.anxietyAboutProcedure == "none" %}selected{% endif %}>None</option>
+                <option value="mild" {% if psychological_assessment.anxietyAboutProcedure == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if psychological_assessment.anxietyAboutProcedure == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if psychological_assessment.anxietyAboutProcedure == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ps_previous_issues">Previous psychological issues?</label>
+            <select id="ps_previous_issues" name="psychological_assessment.previous_psychological_issues">
+                <option value="" {% if psychological_assessment.previousPsychologicalIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.previousPsychologicalIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.previousPsychologicalIssues == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_psychological_issue_details">Psychological issue details</label>
+            <input type="text" id="ps_psychological_issue_details" name="psychological_assessment.psychological_issue_details"
+                   value="{{ psychological_assessment.psychologicalIssueDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ps_support_network">Support network?</label>
+            <select id="ps_support_network" name="psychological_assessment.support_network">
+                <option value="" {% if psychological_assessment.supportNetwork == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.supportNetwork == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.supportNetwork == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ps_willing_to_proceed">Willing to proceed?</label>
+            <select id="ps_willing_to_proceed" name="psychological_assessment.willing_to_proceed">
+                <option value="" {% if psychological_assessment.willingToProceed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if psychological_assessment.willingToProceed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if psychological_assessment.willingToProceed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>

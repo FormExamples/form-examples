@@ -1,0 +1,73 @@
+<div class="card">
+    <h2>Step 10: Eligibility &amp; Allocation Decision</h2>
+    <p class="form-hint">Final assessor decision, conditions, allocated organs, and signatures.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ea_eligibility_decision">Eligibility decision</label>
+            <select id="ea_eligibility_decision" name="eligibility_allocation.eligibility_decision">
+                <option value="" {% if eligibility_allocation.eligibilityDecision == "" %}selected{% endif %}>&mdash;</option>
+                <option value="suitable" {% if eligibility_allocation.eligibilityDecision == "suitable" %}selected{% endif %}>Suitable</option>
+                <option value="conditionally-suitable" {% if eligibility_allocation.eligibilityDecision == "conditionally-suitable" %}selected{% endif %}>Conditionally Suitable</option>
+                <option value="unsuitable" {% if eligibility_allocation.eligibilityDecision == "unsuitable" %}selected{% endif %}>Unsuitable</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ea_deferral_duration">Deferral duration</label>
+            <select id="ea_deferral_duration" name="eligibility_allocation.deferral_duration">
+                <option value="" {% if eligibility_allocation.deferralDuration == "" %}selected{% endif %}>&mdash;</option>
+                <option value="temporary" {% if eligibility_allocation.deferralDuration == "temporary" %}selected{% endif %}>Temporary</option>
+                <option value="permanent" {% if eligibility_allocation.deferralDuration == "permanent" %}selected{% endif %}>Permanent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ea_eligibility_conditions">Eligibility conditions</label>
+        <input type="text" id="ea_eligibility_conditions" name="eligibility_allocation.eligibility_conditions"
+               value="{{ eligibility_allocation.eligibilityConditions }}">
+    </div>
+
+    <div class="form-group">
+        <label for="ea_deferral_reason">Deferral reason</label>
+        <input type="text" id="ea_deferral_reason" name="eligibility_allocation.deferral_reason"
+               value="{{ eligibility_allocation.deferralReason }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ea_allocated_organs">Allocated organs</label>
+            <input type="text" id="ea_allocated_organs" name="eligibility_allocation.allocated_organs"
+                   value="{{ eligibility_allocation.allocatedOrgans }}">
+        </div>
+        <div class="form-group">
+            <label for="ea_intended_centre">Intended recipient centre</label>
+            <input type="text" id="ea_intended_centre" name="eligibility_allocation.intended_recipient_centre"
+                   value="{{ eligibility_allocation.intendedRecipientCentre }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ea_assessor_name">Assessor name</label>
+            <input type="text" id="ea_assessor_name" name="eligibility_allocation.assessor_name"
+                   value="{{ eligibility_allocation.assessorName }}">
+        </div>
+        <div class="form-group">
+            <label for="ea_assessor_role">Assessor role</label>
+            <input type="text" id="ea_assessor_role" name="eligibility_allocation.assessor_role"
+                   value="{{ eligibility_allocation.assessorRole }}">
+        </div>
+        <div class="form-group">
+            <label for="ea_assessment_date">Assessment date</label>
+            <input type="date" id="ea_assessment_date" name="eligibility_allocation.assessment_date"
+                   value="{{ eligibility_allocation.assessmentDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ea_additional_notes">Additional notes</label>
+        <textarea id="ea_additional_notes" name="eligibility_allocation.additional_notes"
+                  placeholder="Any additional notes for the record">{{ eligibility_allocation.additionalNotes }}</textarea>
+    </div>
+</div>

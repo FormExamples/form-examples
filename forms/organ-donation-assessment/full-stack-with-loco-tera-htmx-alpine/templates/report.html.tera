@@ -1,0 +1,119 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Assessment Report - {{ eligibility_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Organ Donation Assessment &mdash; Report</h1>
+    <div class="eligibility-badge {{ eligibility_class }}">{{ eligibility_label }}</div>
+    <div class="risk-badge {{ risk_level_class }}">{{ risk_level_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Donor summary -->
+<div class="card">
+    <h2>Donor Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>Ethnicity:</strong> {{ data.demographics.ethnicity }}<br>
+            <strong>BMI:</strong> {{ data.demographics.bmi }}
+        </div>
+        <div>
+            <strong>Donor type:</strong> {{ donor_type_label }}<br>
+            <strong>Registered on register:</strong> {{ data.donorTypeRegistration.registeredOnDonorRegister }}<br>
+            <strong>Intended organs:</strong> {{ data.donorTypeRegistration.intendedOrgans }}<br>
+            <strong>Recipient:</strong> {{ data.donorTypeRegistration.recipientName }} ({{ data.donorTypeRegistration.recipientRelationship }})
+        </div>
+    </div>
+</div>
+
+<!-- Grading summary -->
+<div class="card">
+    <h2>Grading Summary</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Engine-suggested eligibility</td>
+                <td><span class="eligibility-badge">{{ suggested_eligibility }}</span></td>
+            </tr>
+            <tr>
+                <td>Assessor decision</td>
+                <td>{{ data.eligibilityAllocation.eligibilityDecision }}</td>
+            </tr>
+            <tr>
+                <td>Risk level</td>
+                <td><span class="risk-badge {{ risk_level_class }}">{{ risk_level_label }}</span></td>
+            </tr>
+            <tr>
+                <td>Assessor</td>
+                <td>{{ data.eligibilityAllocation.assessorName }} &mdash; {{ data.eligibilityAllocation.assessorRole }}</td>
+            </tr>
+            <tr>
+                <td>Assessment date</td>
+                <td>{{ data.eligibilityAllocation.assessmentDate }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired Donor Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="grade-badge grade-{{ rule.grade }}">Grade {{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

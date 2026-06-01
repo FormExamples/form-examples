@@ -1,0 +1,71 @@
+<div class="card">
+    <h2>Step 2: Donor Type &amp; Registration</h2>
+    <p class="form-hint">Living vs deceased donor; registry status; intended recipient and organs.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donor_type_registration_donor_type">Donor Type</label>
+            <select id="donor_type_registration_donor_type" name="donor_type_registration.donor_type">
+                <option value="" {% if donor_type_registration.donorType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="living" {% if donor_type_registration.donorType == "living" %}selected{% endif %}>Living donor</option>
+                <option value="deceased" {% if donor_type_registration.donorType == "deceased" %}selected{% endif %}>Deceased donor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="donor_type_registration_registered_on_donor_register">Registered on donor register?</label>
+            <select id="donor_type_registration_registered_on_donor_register" name="donor_type_registration.registered_on_donor_register">
+                <option value="" {% if donor_type_registration.registeredOnDonorRegister == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if donor_type_registration.registeredOnDonorRegister == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if donor_type_registration.registeredOnDonorRegister == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donor_type_registration_registry_name">Registry Name</label>
+            <input type="text" id="donor_type_registration_registry_name" name="donor_type_registration.registry_name"
+                   value="{{ donor_type_registration.registryName }}">
+        </div>
+        <div class="form-group">
+            <label for="donor_type_registration_registration_date">Registration Date</label>
+            <input type="date" id="donor_type_registration_registration_date" name="donor_type_registration.registration_date"
+                   value="{{ donor_type_registration.registrationDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donor_type_registration_recipient_relationship">Recipient Relationship</label>
+            <input type="text" id="donor_type_registration_recipient_relationship" name="donor_type_registration.recipient_relationship"
+                   value="{{ donor_type_registration.recipientRelationship }}" placeholder="e.g. spouse, sibling, altruistic, n/a">
+        </div>
+        <div class="form-group">
+            <label for="donor_type_registration_recipient_name">Recipient Name</label>
+            <input type="text" id="donor_type_registration_recipient_name" name="donor_type_registration.recipient_name"
+                   value="{{ donor_type_registration.recipientName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donor_type_registration_previous_donation">Previous donation?</label>
+            <select id="donor_type_registration_previous_donation" name="donor_type_registration.previous_donation">
+                <option value="" {% if donor_type_registration.previousDonation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if donor_type_registration.previousDonation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if donor_type_registration.previousDonation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="donor_type_registration_previous_donation_details">Previous donation details</label>
+            <input type="text" id="donor_type_registration_previous_donation_details" name="donor_type_registration.previous_donation_details"
+                   value="{{ donor_type_registration.previousDonationDetails }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="donor_type_registration_intended_organs">Intended Organs</label>
+        <input type="text" id="donor_type_registration_intended_organs" name="donor_type_registration.intended_organs"
+               value="{{ donor_type_registration.intendedOrgans }}" placeholder="e.g. kidney; liver lobe; heart; lung; pancreas">
+    </div>
+</div>

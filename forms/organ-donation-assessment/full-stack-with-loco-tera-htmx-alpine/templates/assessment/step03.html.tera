@@ -1,0 +1,163 @@
+<div class="card">
+    <h2>Step 3: Medical History</h2>
+    <p class="form-hint">Comorbidities and risk markers used by the donor-rule engine.</p>
+
+    {% set yn = ['', 'no', 'yes'] %}
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_malignancy">Active malignancy?</label>
+            <select id="medical_history_has_malignancy" name="medical_history.has_malignancy">
+                <option value="" {% if medical_history.hasMalignancy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasMalignancy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasMalignancy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_has_cns_malignancy">Is the malignancy CNS-restricted?</label>
+            <select id="medical_history_has_cns_malignancy" name="medical_history.has_cns_malignancy">
+                <option value="" {% if medical_history.hasCnsMalignancy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasCnsMalignancy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasCnsMalignancy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_malignancy_details">Malignancy details</label>
+            <input type="text" id="medical_history_malignancy_details" name="medical_history.malignancy_details"
+                   value="{{ medical_history.malignancyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_autoimmune_disease">Autoimmune disease?</label>
+            <select id="medical_history_has_autoimmune_disease" name="medical_history.has_autoimmune_disease">
+                <option value="" {% if medical_history.hasAutoimmuneDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasAutoimmuneDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasAutoimmuneDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_autoimmune_details">Autoimmune details</label>
+            <input type="text" id="medical_history_autoimmune_details" name="medical_history.autoimmune_details"
+                   value="{{ medical_history.autoimmuneDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_diabetes">Diabetes?</label>
+            <select id="medical_history_has_diabetes" name="medical_history.has_diabetes">
+                <option value="" {% if medical_history.hasDiabetes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasDiabetes == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasDiabetes == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_diabetes_details">Diabetes details</label>
+            <input type="text" id="medical_history_diabetes_details" name="medical_history.diabetes_details"
+                   value="{{ medical_history.diabetesDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_hypertension">Hypertension?</label>
+            <select id="medical_history_has_hypertension" name="medical_history.has_hypertension">
+                <option value="" {% if medical_history.hasHypertension == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasHypertension == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasHypertension == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_hypertension_details">Hypertension details</label>
+            <input type="text" id="medical_history_hypertension_details" name="medical_history.hypertension_details"
+                   value="{{ medical_history.hypertensionDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_cardiovascular_disease">Cardiovascular disease?</label>
+            <select id="medical_history_has_cardiovascular_disease" name="medical_history.has_cardiovascular_disease">
+                <option value="" {% if medical_history.hasCardiovascularDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasCardiovascularDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasCardiovascularDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_cardiovascular_details">Cardiovascular details</label>
+            <input type="text" id="medical_history_cardiovascular_details" name="medical_history.cardiovascular_details"
+                   value="{{ medical_history.cardiovascularDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_active_infection">Active infection?</label>
+            <select id="medical_history_has_active_infection" name="medical_history.has_active_infection">
+                <option value="" {% if medical_history.hasActiveInfection == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasActiveInfection == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasActiveInfection == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_active_infection_details">Active infection details</label>
+            <input type="text" id="medical_history_active_infection_details" name="medical_history.active_infection_details"
+                   value="{{ medical_history.activeInfectionDetails }}">
+        </div>
+        <div class="form-group">
+            <label for="medical_history_has_uncontrolled_sepsis">Uncontrolled sepsis?</label>
+            <select id="medical_history_has_uncontrolled_sepsis" name="medical_history.has_uncontrolled_sepsis">
+                <option value="" {% if medical_history.hasUncontrolledSepsis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasUncontrolledSepsis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasUncontrolledSepsis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_has_cjd_risk">CJD risk?</label>
+            <select id="medical_history_has_cjd_risk" name="medical_history.has_cjd_risk">
+                <option value="" {% if medical_history.hasCjdRisk == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.hasCjdRisk == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.hasCjdRisk == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_cjd_details">CJD details</label>
+            <input type="text" id="medical_history_cjd_details" name="medical_history.cjd_details"
+                   value="{{ medical_history.cjdDetails }}">
+        </div>
+        <div class="form-group">
+            <label for="medical_history_iv_drug_use_history">IV drug use history?</label>
+            <select id="medical_history_iv_drug_use_history" name="medical_history.iv_drug_use_history">
+                <option value="" {% if medical_history.ivDrugUseHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.ivDrugUseHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.ivDrugUseHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_history_current_medications">Current medications</label>
+            <input type="text" id="medical_history_current_medications" name="medical_history.current_medications"
+                   value="{{ medical_history.currentMedications }}">
+        </div>
+        <div class="form-group">
+            <label for="medical_history_previous_surgery">Previous surgery?</label>
+            <select id="medical_history_previous_surgery" name="medical_history.previous_surgery">
+                <option value="" {% if medical_history.previousSurgery == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_history.previousSurgery == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_history.previousSurgery == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medical_history_surgery_details">Surgery details</label>
+            <input type="text" id="medical_history_surgery_details" name="medical_history.surgery_details"
+                   value="{{ medical_history.surgeryDetails }}">
+        </div>
+    </div>
+</div>
