@@ -1,0 +1,107 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Anesthesiology Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Anaesthetist Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, NHS number, or procedure...">
+    </div>
+    <div class="form-group">
+        <label for="overall_risk">Overall Risk</label>
+        <select id="overall_risk" name="overall_risk">
+            <option value="">All</option>
+            <option value="low" {% if overall_risk == "low" %}selected{% endif %}>Low</option>
+            <option value="medium" {% if overall_risk == "medium" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if overall_risk == "high" %}selected{% endif %}>High</option>
+            <option value="critical" {% if overall_risk == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="asa_class">ASA Class</label>
+        <select id="asa_class" name="asa_class">
+            <option value="">All</option>
+            <option value="i" {% if asa_class == "i" %}selected{% endif %}>I</option>
+            <option value="ii" {% if asa_class == "ii" %}selected{% endif %}>II</option>
+            <option value="iii" {% if asa_class == "iii" %}selected{% endif %}>III</option>
+            <option value="iv" {% if asa_class == "iv" %}selected{% endif %}>IV</option>
+            <option value="v" {% if asa_class == "v" %}selected{% endif %}>V</option>
+            <option value="vi" {% if asa_class == "vi" %}selected{% endif %}>VI</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="surgery_grade">Surgery Grade</label>
+        <select id="surgery_grade" name="surgery_grade">
+            <option value="">All</option>
+            <option value="minor" {% if surgery_grade == "minor" %}selected{% endif %}>Minor</option>
+            <option value="intermediate" {% if surgery_grade == "intermediate" %}selected{% endif %}>Intermediate</option>
+            <option value="major" {% if surgery_grade == "major" %}selected{% endif %}>Major</option>
+            <option value="complex" {% if surgery_grade == "complex" %}selected{% endif %}>Complex</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Safety Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Surgery Date</th>
+            <th>Patient</th>
+            <th>Procedure</th>
+            <th>Grade</th>
+            <th>ASA</th>
+            <th>Overall Risk</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.surgeryDate }}</a></td>
+            <td>{{ c.patientName }}<br><small>{{ c.patientNhsNumber }}</small></td>
+            <td>{{ c.procedureName }}</td>
+            <td>{{ c.surgeryGrade }}</td>
+            <td>{{ c.asaClass }}</td>
+            <td><span class="risk-badge risk-{{ c.overallRisk }}">{{ c.overallRisk }}</span></td>
+            <td>
+                {% if c.urgentFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.urgentFlagCount }} urgent</span>
+                {% endif %}
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }} high</span>
+                {% endif %}
+                {% if c.urgentFlagCount == 0 and c.highPriorityFlagCount == 0 %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

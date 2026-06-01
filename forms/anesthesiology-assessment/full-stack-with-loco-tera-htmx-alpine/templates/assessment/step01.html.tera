@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 1: Patient Demographics</h2>
+    <p class="form-hint">Patient identification, contact, and next-of-kin details.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="demographics.sex">
+                <option value="" {% if demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.sex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.sex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nhs_number">NHS Number</label>
+            <input type="text" id="nhs_number" name="demographics.nhs_number"
+                   value="{{ demographics.nhsNumber }}" placeholder="e.g. 943 476 5919">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="demographics.phone" value="{{ demographics.phone }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="demographics.email" value="{{ demographics.email }}">
+        </div>
+    </div>
+
+    <h3>Emergency Contact</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="emergency_name">Name</label>
+            <input type="text" id="emergency_name" name="demographics.emergency_name"
+                   value="{{ demographics.emergencyName }}">
+        </div>
+        <div class="form-group">
+            <label for="emergency_phone">Phone</label>
+            <input type="tel" id="emergency_phone" name="demographics.emergency_phone"
+                   value="{{ demographics.emergencyPhone }}">
+        </div>
+        <div class="form-group">
+            <label for="emergency_relationship">Relationship</label>
+            <input type="text" id="emergency_relationship" name="demographics.emergency_relationship"
+                   value="{{ demographics.emergencyRelationship }}">
+        </div>
+    </div>
+</div>

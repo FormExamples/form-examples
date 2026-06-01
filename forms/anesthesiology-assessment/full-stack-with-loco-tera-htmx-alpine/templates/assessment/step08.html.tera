@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 8: Vital Signs &amp; Investigations</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="systolic_bp">Systolic BP (mmHg)</label>
+            <input type="number" id="systolic_bp" name="vital_signs.systolic_bp"
+                   value="{{ vital_signs.systolicBp }}">
+        </div>
+        <div class="form-group">
+            <label for="diastolic_bp">Diastolic BP (mmHg)</label>
+            <input type="number" id="diastolic_bp" name="vital_signs.diastolic_bp"
+                   value="{{ vital_signs.diastolicBp }}">
+        </div>
+        <div class="form-group">
+            <label for="heart_rate">Heart Rate (bpm)</label>
+            <input type="number" id="heart_rate" name="vital_signs.heart_rate"
+                   value="{{ vital_signs.heartRate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="spo2">SpO2 (%)</label>
+            <input type="number" id="spo2" name="vital_signs.spo2"
+                   value="{{ vital_signs.spo2 }}">
+        </div>
+        <div class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" step="0.1" id="height" name="vital_signs.height"
+                   value="{{ vital_signs.height }}">
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" step="0.1" id="weight" name="vital_signs.weight"
+                   value="{{ vital_signs.weight }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bmi">BMI</label>
+            <input type="number" step="0.1" id="bmi" name="vital_signs.bmi"
+                   value="{{ vital_signs.bmi }}">
+        </div>
+        <div class="form-group">
+            <label for="neck_circumference">Neck circumference (cm)</label>
+            <input type="number" step="0.1" id="neck_circumference" name="vital_signs.neck_circumference"
+                   value="{{ vital_signs.neckCircumference }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="card">
+    <h2>Step 6: Previous Anaesthesia &amp; Surgery History</h2>
+    <p class="form-hint">Personal and family anaesthetic history; these feed directly into airway and MH risk flags.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="malignant_hyperthermia">Personal MH history?</label>
+            <select id="malignant_hyperthermia" name="previous_anaesthesia.malignant_hyperthermia">
+                <option value="" {% if previous_anaesthesia.malignantHyperthermia == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_anaesthesia.malignantHyperthermia == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_anaesthesia.malignantHyperthermia == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="family_anaesthetic_complications">Family anaesthetic complications?</label>
+            <select id="family_anaesthetic_complications" name="previous_anaesthesia.family_anaesthetic_complications">
+                <option value="" {% if previous_anaesthesia.familyAnaestheticComplications == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_anaesthesia.familyAnaestheticComplications == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_anaesthesia.familyAnaestheticComplications == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Previous Complications</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="previous_anaesthesia.difficult_intubation" value="true"
+                       {% if previous_anaesthesia.difficultIntubation %}checked{% endif %}>
+                Previous difficult intubation
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="previous_anaesthesia.ponv" value="true"
+                       {% if previous_anaesthesia.ponv %}checked{% endif %}>
+                Postoperative nausea / vomiting
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="previous_anaesthesia.awareness" value="true"
+                       {% if previous_anaesthesia.awareness %}checked{% endif %}>
+                Awareness under anaesthesia
+            </label>
+        </div>
+    </div>
+</div>

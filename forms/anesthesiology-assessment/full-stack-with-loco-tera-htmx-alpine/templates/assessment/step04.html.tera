@@ -1,0 +1,50 @@
+<div class="card">
+    <h2>Step 4: Medications</h2>
+    <p class="form-hint">Drug-class flags that drive RCRI scoring and perioperative planning.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_anticoagulants">On anticoagulants?</label>
+            <select id="on_anticoagulants" name="medications.on_anticoagulants">
+                <option value="" {% if medications.onAnticoagulants == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications.onAnticoagulants == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications.onAnticoagulants == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="on_antiplatelets">On antiplatelets?</label>
+            <select id="on_antiplatelets" name="medications.on_antiplatelets">
+                <option value="" {% if medications.onAntiplatelets == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications.onAntiplatelets == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications.onAntiplatelets == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_insulin">On insulin?</label>
+            <select id="on_insulin" name="medications.on_insulin">
+                <option value="" {% if medications.onInsulin == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications.onInsulin == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications.onInsulin == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="on_steroids">On long-term steroids?</label>
+            <select id="on_steroids" name="medications.on_steroids">
+                <option value="" {% if medications.onSteroids == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications.onSteroids == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications.onSteroids == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="on_maois">On MAOIs?</label>
+            <select id="on_maois" name="medications.on_maois">
+                <option value="" {% if medications.onMaois == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications.onMaois == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications.onMaois == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>

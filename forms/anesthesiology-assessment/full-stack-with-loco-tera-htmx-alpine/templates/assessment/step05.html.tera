@@ -1,0 +1,16 @@
+<div class="card">
+    <h2>Step 5: Allergies &amp; Adverse Reactions</h2>
+
+    <div class="form-group">
+        <label for="latex_allergy">Latex allergy?</label>
+        <select id="latex_allergy" name="allergies.latex_allergy">
+            <option value="" {% if allergies.latexAllergy == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if allergies.latexAllergy == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if allergies.latexAllergy == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <p class="form-hint">Detailed allergy list entries are captured via the SvelteKit
+        front-end. This single-page wizard records the latex-allergy flag here for
+        FLAG-LATEX detection; additional allergens can be added via the dashboard.</p>
+</div>

@@ -1,0 +1,67 @@
+<div class="card">
+    <h2>Step 9: ASA / Mallampati / RCRI / STOP-BANG Scoring</h2>
+    <p class="form-hint">Clinician-confirmed inputs to the composite grading engine.</p>
+
+    <h3>ASA Physical Status</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="asa_class">ASA Class</label>
+            <select id="asa_class" name="investigations_and_plan.asa_class">
+                <option value="" {% if investigations_and_plan.asaClass == "" %}selected{% endif %}>&mdash;</option>
+                <option value="i" {% if investigations_and_plan.asaClass == "i" %}selected{% endif %}>I &mdash; Healthy</option>
+                <option value="ii" {% if investigations_and_plan.asaClass == "ii" %}selected{% endif %}>II &mdash; Mild systemic disease</option>
+                <option value="iii" {% if investigations_and_plan.asaClass == "iii" %}selected{% endif %}>III &mdash; Severe systemic disease</option>
+                <option value="iv" {% if investigations_and_plan.asaClass == "iv" %}selected{% endif %}>IV &mdash; Constant threat to life</option>
+                <option value="v" {% if investigations_and_plan.asaClass == "v" %}selected{% endif %}>V &mdash; Moribund</option>
+                <option value="vi" {% if investigations_and_plan.asaClass == "vi" %}selected{% endif %}>VI &mdash; Brain-dead organ donor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="emergency_case">Emergency case?</label>
+            <select id="emergency_case" name="investigations_and_plan.emergency_case">
+                <option value="" {% if investigations_and_plan.emergencyCase == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if investigations_and_plan.emergencyCase == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if investigations_and_plan.emergencyCase == "yes" %}selected{% endif %}>Yes (E suffix)</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>RCRI Clinician Confirmations</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rcri_ischaemic_heart_disease">RCRI 2 &mdash; Ischaemic heart disease</label>
+            <select id="rcri_ischaemic_heart_disease" name="investigations_and_plan.rcri_ischaemic_heart_disease">
+                <option value="" {% if investigations_and_plan.rcriIschaemicHeartDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if investigations_and_plan.rcriIschaemicHeartDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if investigations_and_plan.rcriIschaemicHeartDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rcri_congestive_heart_failure">RCRI 3 &mdash; Congestive heart failure</label>
+            <select id="rcri_congestive_heart_failure" name="investigations_and_plan.rcri_congestive_heart_failure">
+                <option value="" {% if investigations_and_plan.rcriCongestiveHeartFailure == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if investigations_and_plan.rcriCongestiveHeartFailure == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if investigations_and_plan.rcriCongestiveHeartFailure == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rcri_cerebrovascular_disease">RCRI 4 &mdash; Cerebrovascular disease</label>
+            <select id="rcri_cerebrovascular_disease" name="investigations_and_plan.rcri_cerebrovascular_disease">
+                <option value="" {% if investigations_and_plan.rcriCerebrovascularDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if investigations_and_plan.rcriCerebrovascularDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if investigations_and_plan.rcriCerebrovascularDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rcri_high_creatinine">RCRI 6 &mdash; Creatinine &gt;177 µmol/L</label>
+            <select id="rcri_high_creatinine" name="investigations_and_plan.rcri_high_creatinine">
+                <option value="" {% if investigations_and_plan.rcriHighCreatinine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if investigations_and_plan.rcriHighCreatinine == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if investigations_and_plan.rcriHighCreatinine == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>
