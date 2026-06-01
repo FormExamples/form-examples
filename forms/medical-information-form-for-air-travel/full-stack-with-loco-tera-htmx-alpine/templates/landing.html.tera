@@ -1,0 +1,40 @@
+{% extends "base.html.tera" %}
+
+{% block title %}MEDIF - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Medical Information Form for Air Travel (MEDIF)</h1>
+        <p class="landing-description">
+            Standardised airline document used to determine whether a passenger with
+            specific health needs is fit to fly and whether in-flight medical support
+            (supplemental oxygen, stretcher, incubator, medical escort, battery-powered
+            medical device) must be arranged in advance. Completed in two parts:
+            Part 1 by the passenger or booking agent and Part 2 by the attending
+            physician, then forwarded to the airline's medical desk for clearance.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>14-Step Wizard</h3>
+                <p>One continuous single-page wizard covering submitter, passenger, trip, clinical evaluation, and in-flight needs</p>
+            </div>
+            <div class="feature">
+                <h3>Fitness-to-Fly Band</h3>
+                <p>Deterministic max-grade engine yielding <code>fit</code>, <code>fit-with-conditions</code>, <code>requires-review</code>, or <code>unfit-to-fly</code></p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for cardiac, pulmonary, gas-expansion, pregnancy, communicable disease, and equipment risks</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New MEDIF
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+<div class="card" x-data="{
+    o2: '{{ inflight_needs.requiresSupplementalOxygen }}',
+    poc: '{{ inflight_needs.requiresPoc }}'
+}">
+    <h2>Step 12: In-Flight Medical Requirements</h2>
+    <p class="form-hint">Supplemental oxygen, POC, stretcher, incubator, escort, and wheelchair needs.</p>
+
+    <h3>Supplemental Oxygen</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requires_supplemental_oxygen">Requires Supplemental Oxygen?</label>
+            <select id="requires_supplemental_oxygen" name="inflight_needs.requires_supplemental_oxygen" x-model="o2">
+                <option value="" {% if inflight_needs.requiresSupplementalOxygen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if inflight_needs.requiresSupplementalOxygen == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if inflight_needs.requiresSupplementalOxygen == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group" x-show="o2 === 'yes'">
+            <label for="oxygen_flow_rate_lpm">Oxygen Flow Rate (L/min)</label>
+            <input type="number" step="0.1" min="0" id="oxygen_flow_rate_lpm" name="inflight_needs.oxygen_flow_rate_lpm"
+                   value="{{ inflight_needs.oxygenFlowRateLpm }}">
+        </div>
+        <div class="form-group" x-show="o2 === 'yes'">
+            <label for="oxygen_duration">Oxygen Duration</label>
+            <select id="oxygen_duration" name="inflight_needs.oxygen_duration">
+                <option value="" {% if inflight_needs.oxygenDuration == "" %}selected{% endif %}>&mdash;</option>
+                <option value="continuous" {% if inflight_needs.oxygenDuration == "continuous" %}selected{% endif %}>Continuous</option>
+                <option value="as-required" {% if inflight_needs.oxygenDuration == "as-required" %}selected{% endif %}>As required</option>
+                <option value="on-exertion" {% if inflight_needs.oxygenDuration == "on-exertion" %}selected{% endif %}>On exertion</option>
+                <option value="sleep-only" {% if inflight_needs.oxygenDuration == "sleep-only" %}selected{% endif %}>Sleep only</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Portable Oxygen Concentrator (POC)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requires_poc">Requires POC?</label>
+            <select id="requires_poc" name="inflight_needs.requires_poc" x-model="poc">
+                <option value="" {% if inflight_needs.requiresPoc == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if inflight_needs.requiresPoc == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if inflight_needs.requiresPoc == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group" x-show="poc === 'yes'">
+            <label for="poc_make_model">POC Make and Model</label>
+            <input type="text" id="poc_make_model" name="inflight_needs.poc_make_model"
+                   value="{{ inflight_needs.pocMakeModel }}">
+        </div>
+        <div class="form-group" x-show="poc === 'yes'">
+            <label for="poc_battery_hours">POC Battery Hours</label>
+            <input type="number" step="0.1" min="0" id="poc_battery_hours" name="inflight_needs.poc_battery_hours"
+                   value="{{ inflight_needs.pocBatteryHours }}">
+        </div>
+    </div>
+
+    <h3>Other Equipment and Assistance</h3>
+    {% set yn_fields = [
+        ["requires_stretcher", "requiresStretcher", "Requires stretcher?"],
+        ["requires_incubator", "requiresIncubator", "Requires infant incubator?"],
+        ["requires_iv_pump", "requiresIvPump", "Requires IV pump?"],
+        ["requires_medical_escort", "requiresMedicalEscort", "Requires medical escort?"],
+        ["requires_extra_seat", "requiresExtraSeat", "Requires extra seat?"],
+        ["requires_accessible_lavatory", "requiresAccessibleLavatory", "Requires accessible lavatory?"],
+        ["accompanying_carer", "accompanyingCarer", "Accompanying non-medical carer?"]
+    ] %}
+    {% for entry in yn_fields %}
+    {% set field = entry.0 %}
+    {% set json_field = entry.1 %}
+    {% set label = entry.2 %}
+    <div class="form-group">
+        <label for="{{ field }}">{{ label }}</label>
+        <select id="{{ field }}" name="inflight_needs.{{ field }}">
+            {% set v = inflight_needs[json_field] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="wheelchair_type">Wheelchair Type</label>
+        <select id="wheelchair_type" name="inflight_needs.wheelchair_type">
+            <option value="" {% if inflight_needs.wheelchairType == "" %}selected{% endif %}>&mdash;</option>
+            <option value="none" {% if inflight_needs.wheelchairType == "none" %}selected{% endif %}>None</option>
+            <option value="WCHR" {% if inflight_needs.wheelchairType == "WCHR" %}selected{% endif %}>WCHR (ramp)</option>
+            <option value="WCHS" {% if inflight_needs.wheelchairType == "WCHS" %}selected{% endif %}>WCHS (steps)</option>
+            <option value="WCHC" {% if inflight_needs.wheelchairType == "WCHC" %}selected{% endif %}>WCHC (cabin)</option>
+        </select>
+    </div>
+</div>

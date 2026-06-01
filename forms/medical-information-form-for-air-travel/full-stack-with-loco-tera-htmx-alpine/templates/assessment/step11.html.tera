@@ -1,0 +1,41 @@
+<div class="card">
+    <h2>Step 11: Communicable Disease Screening</h2>
+    <p class="form-hint">Infectious-period status, isolation precautions, and vaccination history.</p>
+
+    <div class="form-group">
+        <label for="communicable_disease_status">Communicable Disease Status</label>
+        <select id="communicable_disease_status" name="communicable.communicable_disease_status">
+            <option value="" {% if communicable.communicableDiseaseStatus == "" %}selected{% endif %}>&mdash;</option>
+            <option value="none" {% if communicable.communicableDiseaseStatus == "none" %}selected{% endif %}>None</option>
+            <option value="infectious" {% if communicable.communicableDiseaseStatus == "infectious" %}selected{% endif %}>Infectious</option>
+            <option value="convalescent" {% if communicable.communicableDiseaseStatus == "convalescent" %}selected{% endif %}>Convalescent</option>
+            <option value="cleared" {% if communicable.communicableDiseaseStatus == "cleared" %}selected{% endif %}>Cleared</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_symptom_date">Last Symptom Date</label>
+            <input type="date" id="last_symptom_date" name="communicable.last_symptom_date"
+                   value="{{ communicable.lastSymptomDate }}">
+        </div>
+        <div class="form-group">
+            <label for="isolation_required">Isolation Required?</label>
+            <select id="isolation_required" name="communicable.isolation_required">
+                <option value="" {% if communicable.isolationRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if communicable.isolationRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if communicable.isolationRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="vaccination_status">Vaccination Status</label>
+        <textarea id="vaccination_status" name="communicable.vaccination_status">{{ communicable.vaccinationStatus }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="current_antimicrobials">Current Antimicrobials</label>
+        <textarea id="current_antimicrobials" name="communicable.current_antimicrobials">{{ communicable.currentAntimicrobials }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+{% extends "base.html.tera" %}
+
+{% block title %}MEDIF - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Airline Medical-Desk Dashboard</h1>
+    <a href="/" class="btn btn-primary">New MEDIF</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Passenger name, flight number, or diagnosis...">
+    </div>
+    <div class="form-group">
+        <label for="fitness_band">Fitness Band</label>
+        <select id="fitness_band" name="fitness_band">
+            <option value="">All</option>
+            <option value="fit" {% if fitness_band == "fit" %}selected{% endif %}>Fit</option>
+            <option value="fit-with-conditions" {% if fitness_band == "fit-with-conditions" %}selected{% endif %}>Fit with conditions</option>
+            <option value="requires-review" {% if fitness_band == "requires-review" %}selected{% endif %}>Requires review</option>
+            <option value="unfit-to-fly" {% if fitness_band == "unfit-to-fly" %}selected{% endif %}>Unfit to fly</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="airline_iata_code">Airline (IATA)</label>
+        <input type="text" id="airline_iata_code" name="airline_iata_code"
+               value="{{ airline_iata_code }}" maxlength="2" placeholder="e.g. BA">
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed MEDIF{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Outbound</th>
+            <th>Airline / Flight</th>
+            <th>Route</th>
+            <th>Passenger</th>
+            <th>Diagnosis</th>
+            <th>Physician</th>
+            <th>Fitness Band</th>
+            <th>Rules</th>
+            <th>High Flags</th>
+            <th>Valid Until</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.outboundDate }}</a></td>
+            <td>{{ c.airlineIataCode }} / {{ c.outboundFlightNumber }}</td>
+            <td>{{ c.outboundOriginIata }} &rarr; {{ c.outboundDestinationIata }}</td>
+            <td>{{ c.passengerName }}<br><small>{{ c.passengerDateOfBirth }}</small></td>
+            <td>{{ c.primaryDiagnosis }}</td>
+            <td>{{ c.physicianName }}</td>
+            <td><span class="band-badge band-{{ c.fitnessBand }}" style="font-size: 0.75rem; padding: 0.15rem 0.5rem;">{{ c.fitnessBand }}</span></td>
+            <td>{{ c.firedRuleCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+            <td>{{ c.validUntil }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed MEDIF assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

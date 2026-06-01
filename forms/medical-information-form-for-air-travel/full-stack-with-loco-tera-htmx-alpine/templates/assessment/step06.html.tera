@@ -1,0 +1,47 @@
+<div class="card">
+    <h2>Step 6: Diagnosis and Clinical History</h2>
+    <p class="form-hint">Primary diagnosis, ICD-10 codes, and recent admissions.</p>
+
+    <div class="form-group">
+        <label for="primary_diagnosis">Primary Diagnosis</label>
+        <input type="text" id="primary_diagnosis" name="diagnosis.primary_diagnosis"
+               value="{{ diagnosis.primaryDiagnosis }}">
+    </div>
+
+    <div class="form-group">
+        <label for="icd10_codes">ICD-10 Codes (comma-separated)</label>
+        <input type="text" id="icd10_codes" name="diagnosis.icd10_codes"
+               value="{{ diagnosis.icd10Codes }}" placeholder="e.g. I21.9,I50.9">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="diagnosis_date">Date of Onset</label>
+            <input type="date" id="diagnosis_date" name="diagnosis.diagnosis_date"
+                   value="{{ diagnosis.diagnosisDate }}">
+        </div>
+        <div class="form-group">
+            <label for="last_specialist_review_date">Last Specialist Review</label>
+            <input type="date" id="last_specialist_review_date" name="diagnosis.last_specialist_review_date"
+                   value="{{ diagnosis.lastSpecialistReviewDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="current_treatment">Current Treatment</label>
+        <textarea id="current_treatment" name="diagnosis.current_treatment">{{ diagnosis.currentTreatment }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_admission_date">Last Admission</label>
+            <input type="date" id="last_admission_date" name="diagnosis.last_admission_date"
+                   value="{{ diagnosis.lastAdmissionDate }}">
+        </div>
+        <div class="form-group">
+            <label for="last_discharge_date">Last Discharge</label>
+            <input type="date" id="last_discharge_date" name="diagnosis.last_discharge_date"
+                   value="{{ diagnosis.lastDischargeDate }}">
+        </div>
+    </div>
+</div>

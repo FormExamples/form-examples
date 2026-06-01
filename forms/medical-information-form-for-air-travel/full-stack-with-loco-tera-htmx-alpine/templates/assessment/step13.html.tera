@@ -1,0 +1,42 @@
+<div class="card">
+    <h2>Step 13: Medications and Equipment in Cabin</h2>
+    <p class="form-hint">Regular and controlled drugs, dangerous-goods declarations, refrigeration, and haemoglobin.</p>
+
+    <div class="form-group">
+        <label for="regular_medications">Regular Medications</label>
+        <textarea id="regular_medications" name="medications.regular_medications"
+                  placeholder="Drug, dose, frequency, route">{{ medications.regularMedications }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="controlled_drugs">Controlled Drugs (with customs documentation)</label>
+        <textarea id="controlled_drugs" name="medications.controlled_drugs">{{ medications.controlledDrugs }}</textarea>
+    </div>
+
+    {% set yn_fields = [
+        ["dangerous_goods_battery_declaration", "dangerousGoodsBatteryDeclaration", "Dangerous-goods battery declaration required?"],
+        ["sharps_in_cabin", "sharpsInCabin", "Syringes / sharps in cabin?"],
+        ["refrigerated_medication", "refrigeratedMedication", "Refrigerated medication?"],
+        ["customs_documentation_available", "customsDocumentationAvailable", "Customs documentation available?"]
+    ] %}
+    {% for entry in yn_fields %}
+    {% set field = entry.0 %}
+    {% set json_field = entry.1 %}
+    {% set label = entry.2 %}
+    <div class="form-group">
+        <label for="{{ field }}">{{ label }}</label>
+        <select id="{{ field }}" name="medications.{{ field }}">
+            {% set v = medications[json_field] %}
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="haemoglobin_g_per_l">Haemoglobin (g/L)</label>
+        <input type="number" min="0" id="haemoglobin_g_per_l" name="medications.haemoglobin_g_per_l"
+               value="{{ medications.haemoglobinGPerL }}" placeholder="< 75 triggers unfit-to-fly">
+    </div>
+</div>
