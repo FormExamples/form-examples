@@ -1,0 +1,82 @@
+<div class="card">
+    <h2>Step 6: Urine Tests</h2>
+    <p class="form-hint">Urinary albumin / protein quantification and dipstick analysis.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="acr">Urine ACR (mg/mmol)</label>
+            <input type="number" step="0.1" min="0" max="1000" id="acr"
+                   name="urine_tests.acr" value="{{ urine_tests.acr }}">
+        </div>
+        <div class="form-group">
+            <label for="pcr">Urine PCR (mg/mmol)</label>
+            <input type="number" step="0.1" min="0" max="1000" id="pcr"
+                   name="urine_tests.pcr" value="{{ urine_tests.pcr }}">
+        </div>
+    </div>
+
+    {% set dipstick_options = [
+        {"value": "negative", "label": "Negative"},
+        {"value": "trace", "label": "Trace"},
+        {"value": "1+", "label": "1+"},
+        {"value": "2+", "label": "2+"},
+        {"value": "3+", "label": "3+"},
+        {"value": "4+", "label": "4+"}
+    ] %}
+
+    {% set dipstick_fields = [
+        {"name": "dipstick_protein", "camel": "dipstickProtein", "label": "Dipstick protein"},
+        {"name": "dipstick_blood", "camel": "dipstickBlood", "label": "Dipstick blood"},
+        {"name": "dipstick_glucose", "camel": "dipstickGlucose", "label": "Dipstick glucose"},
+        {"name": "dipstick_leukocytes", "camel": "dipstickLeukocytes", "label": "Dipstick leukocytes"}
+    ] %}
+
+    {% for d in dipstick_fields %}
+    <div class="form-group">
+        <label for="ut_{{ d.name }}">{{ d.label }}</label>
+        <select id="ut_{{ d.name }}" name="urine_tests.{{ d.name }}">
+            <option value="" {% if urine_tests[d.camel] == "" %}selected{% endif %}>&mdash;</option>
+            {% for opt in dipstick_options %}
+            <option value="{{ opt.value }}" {% if urine_tests[d.camel] == opt.value %}selected{% endif %}>{{ opt.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="ut_dipstick_nitrites">Dipstick nitrites</label>
+        <select id="ut_dipstick_nitrites" name="urine_tests.dipstick_nitrites">
+            <option value="" {% if urine_tests.dipstickNitrites == "" %}selected{% endif %}>&mdash;</option>
+            <option value="negative" {% if urine_tests.dipstickNitrites == "negative" %}selected{% endif %}>Negative</option>
+            <option value="positive" {% if urine_tests.dipstickNitrites == "positive" %}selected{% endif %}>Positive</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="microscopy_casts">Microscopy: urinary casts present?</label>
+        <select id="microscopy_casts" name="urine_tests.microscopy_casts">
+            <option value="" {% if urine_tests.microscopyCasts == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if urine_tests.microscopyCasts == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if urine_tests.microscopyCasts == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="cast_type">Predominant cast type</label>
+        <select id="cast_type" name="urine_tests.cast_type">
+            <option value="" {% if urine_tests.castType == "" %}selected{% endif %}>&mdash;</option>
+            <option value="hyaline" {% if urine_tests.castType == "hyaline" %}selected{% endif %}>Hyaline</option>
+            <option value="granular" {% if urine_tests.castType == "granular" %}selected{% endif %}>Granular</option>
+            <option value="red-cell" {% if urine_tests.castType == "red-cell" %}selected{% endif %}>Red-cell</option>
+            <option value="white-cell" {% if urine_tests.castType == "white-cell" %}selected{% endif %}>White-cell</option>
+            <option value="fatty" {% if urine_tests.castType == "fatty" %}selected{% endif %}>Fatty</option>
+            <option value="waxy" {% if urine_tests.castType == "waxy" %}selected{% endif %}>Waxy</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ut_test_date">Urine test date</label>
+        <input type="date" id="ut_test_date" name="urine_tests.test_date"
+               value="{{ urine_tests.testDate }}">
+    </div>
+</div>

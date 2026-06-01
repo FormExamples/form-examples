@@ -1,0 +1,112 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Renal Assessment Report - {{ risk_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Renal Assessment Report</h1>
+    <div class="risk-badge {{ risk_class }}">{{ risk_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Case ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>Ethnicity:</strong> {{ data.demographics.ethnicity }}
+        </div>
+        <div>
+            <strong>GFR category:</strong> {{ gfr_category }}<br>
+            <strong>Albuminuria category:</strong> {{ albuminuria_category }}<br>
+            <strong>eGFR:</strong> {% if egfr %}{{ egfr }} mL/min/1.73 m&sup2;{% else %}unavailable{% endif %}<br>
+            <strong>ACR:</strong> {% if acr %}{{ acr }} mg/mmol{% else %}unavailable{% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-priority">{{ flag.priority | upper }}</span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- KDIGO rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>KDIGO Rule Audit Trail</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{{ rule.value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="card">
+    <p class="muted">No KDIGO classification possible &mdash; supply eGFR (or creatinine + age + sex) and urine ACR.</p>
+</div>
+{% endif %}
+
+<!-- Current medications -->
+{% if data.medicationReview.currentMedications and data.medicationReview.currentMedications | length > 0 %}
+<div class="card">
+    <h2>Current Medications ({{ data.medicationReview.currentMedications | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dose</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med in data.medicationReview.currentMedications %}
+            <tr>
+                <td>{{ med.name }}</td>
+                <td>{{ med.dose }}</td>
+                <td>{{ med.frequency }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Renal Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Renal Clinic Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient first or last name...">
+    </div>
+    <div class="form-group">
+        <label for="risk_level">KDIGO Risk Level</label>
+        <select id="risk_level" name="risk_level">
+            <option value="">All</option>
+            <option value="low" {% if risk_level == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if risk_level == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if risk_level == "high" %}selected{% endif %}>High</option>
+            <option value="very-high" {% if risk_level == "very-high" %}selected{% endif %}>Very High</option>
+            <option value="unknown" {% if risk_level == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="gfr_category">GFR Stage</label>
+        <select id="gfr_category" name="gfr_category">
+            <option value="">All</option>
+            <option value="G1" {% if gfr_category == "G1" %}selected{% endif %}>G1</option>
+            <option value="G2" {% if gfr_category == "G2" %}selected{% endif %}>G2</option>
+            <option value="G3a" {% if gfr_category == "G3a" %}selected{% endif %}>G3a</option>
+            <option value="G3b" {% if gfr_category == "G3b" %}selected{% endif %}>G3b</option>
+            <option value="G4" {% if gfr_category == "G4" %}selected{% endif %}>G4</option>
+            <option value="G5" {% if gfr_category == "G5" %}selected{% endif %}>G5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Urgent / High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Generated</th>
+            <th>Patient</th>
+            <th>DOB / Sex</th>
+            <th>GFR</th>
+            <th>Albuminuria</th>
+            <th>Risk</th>
+            <th>eGFR</th>
+            <th>ACR</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.timestamp }}</a></td>
+            <td>{{ c.patientFirstName }} {{ c.patientLastName }}</td>
+            <td>{{ c.dateOfBirth }}<br><small>{{ c.sex }}</small></td>
+            <td>{{ c.gfrCategory }}</td>
+            <td>{{ c.albuminuriaCategory }}</td>
+            <td><span class="risk-badge risk-{{ c.riskLevel }}">{{ c.riskLevel }}</span></td>
+            <td>{% if c.egfr %}{{ c.egfr }}{% else %}-{% endif %}</td>
+            <td>{% if c.acr %}{{ c.acr }}{% else %}-{% endif %}</td>
+            <td>
+                {% if c.urgentFlagCount > 0 %}
+                    <span class="badge badge-urgent">{{ c.urgentFlagCount }} urgent</span>
+                {% endif %}
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }} high</span>
+                {% endif %}
+                {% if c.urgentFlagCount == 0 and c.highPriorityFlagCount == 0 %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

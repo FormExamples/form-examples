@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 7: Imaging &amp; Biopsy Review</h2>
+    <p class="form-hint">Ultrasound, CT/MRI, and biopsy results if performed.</p>
+
+    {% set imaging_fields = [
+        {"name": "renal_ultrasound_done", "camel": "renalUltrasoundDone", "label": "Renal ultrasound performed?"},
+        {"name": "cysts", "camel": "cysts", "label": "Cysts seen?"},
+        {"name": "hydronephrosis", "camel": "hydronephrosis", "label": "Hydronephrosis?"},
+        {"name": "stones", "camel": "stones", "label": "Stones?"},
+        {"name": "ct_or_mri", "camel": "ctOrMri", "label": "CT or MRI performed?"},
+        {"name": "biopsy_done", "camel": "biopsyDone", "label": "Renal biopsy performed?"}
+    ] %}
+
+    {% for q in imaging_fields %}
+    <div class="form-group">
+        <label for="ib_{{ q.name }}">{{ q.label }}</label>
+        <select id="ib_{{ q.name }}" name="imaging_biopsy.{{ q.name }}">
+            <option value="" {% if imaging_biopsy[q.camel] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if imaging_biopsy[q.camel] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if imaging_biopsy[q.camel] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="right_kidney_length_mm">Right kidney length (mm)</label>
+            <input type="number" min="0" max="250" id="right_kidney_length_mm"
+                   name="imaging_biopsy.right_kidney_length_mm" value="{{ imaging_biopsy.rightKidneyLengthMm }}">
+        </div>
+        <div class="form-group">
+            <label for="left_kidney_length_mm">Left kidney length (mm)</label>
+            <input type="number" min="0" max="250" id="left_kidney_length_mm"
+                   name="imaging_biopsy.left_kidney_length_mm" value="{{ imaging_biopsy.leftKidneyLengthMm }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ultrasound_findings">Ultrasound findings</label>
+        <textarea id="ultrasound_findings" name="imaging_biopsy.ultrasound_findings"
+                  placeholder="Echogenicity, corticomedullary differentiation, etc.">{{ imaging_biopsy.ultrasoundFindings }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ct_mri_findings">CT / MRI findings</label>
+        <textarea id="ct_mri_findings" name="imaging_biopsy.ct_mri_findings">{{ imaging_biopsy.ctMriFindings }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="biopsy_date">Biopsy date</label>
+            <input type="date" id="biopsy_date" name="imaging_biopsy.biopsy_date"
+                   value="{{ imaging_biopsy.biopsyDate }}">
+        </div>
+        <div class="form-group" style="flex: 2;">
+            <label for="biopsy_result">Biopsy result / histopathology</label>
+            <input type="text" id="biopsy_result" name="imaging_biopsy.biopsy_result"
+                   value="{{ imaging_biopsy.biopsyResult }}"
+                   placeholder="e.g. IgA nephropathy, FSGS, diabetic glomerulosclerosis">
+        </div>
+    </div>
+</div>

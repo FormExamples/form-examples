@@ -1,0 +1,43 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Renal Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Renal Assessment</h1>
+        <p class="landing-description">
+            KDIGO-aligned chronic kidney disease assessment. The nine-section
+            single-page wizard captures demographics, presenting symptoms, CKD
+            risk factors, physical examination, blood and urine tests, imaging
+            and biopsy review, medication review, and the clinician's
+            impression with KDIGO stage. The grader computes the composite
+            risk level (Low / Moderate / High / Very High) from the
+            GFR &times; Albuminuria heatmap and surfaces real-time safety
+            flags for severe biochemical derangements, advanced CKD, anemia,
+            mineral-bone disorder, AKI on CKD, and prescribing gaps.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>KDIGO Classification</h3>
+                <p>GFR stage (G1-G5) and albuminuria stage (A1-A3) combined into a composite risk level</p>
+            </div>
+            <div class="feature">
+                <h3>Auto-Calculated eGFR</h3>
+                <p>CKD-EPI 2021 race-free equation from creatinine, age, and sex when an eGFR is not entered</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Hyperkalemia, acidosis, anemia, AKI on CKD, hypertension, nephrotoxic exposure, and prescribing gaps</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

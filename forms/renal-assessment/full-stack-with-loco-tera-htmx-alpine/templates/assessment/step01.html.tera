@@ -1,0 +1,61 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Basic patient information.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="demographics.sex">
+                <option value="" {% if demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.sex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.sex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ethnicity">Ethnicity</label>
+            <select id="ethnicity" name="demographics.ethnicity">
+                <option value="" {% if demographics.ethnicity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="white" {% if demographics.ethnicity == "white" %}selected{% endif %}>White</option>
+                <option value="black" {% if demographics.ethnicity == "black" %}selected{% endif %}>Black / African / Caribbean</option>
+                <option value="asian" {% if demographics.ethnicity == "asian" %}selected{% endif %}>Asian</option>
+                <option value="hispanic" {% if demographics.ethnicity == "hispanic" %}selected{% endif %}>Hispanic / Latino</option>
+                <option value="middle-eastern" {% if demographics.ethnicity == "middle-eastern" %}selected{% endif %}>Middle Eastern</option>
+                <option value="mixed" {% if demographics.ethnicity == "mixed" %}selected{% endif %}>Mixed / Multiple</option>
+                <option value="other" {% if demographics.ethnicity == "other" %}selected{% endif %}>Other</option>
+                <option value="prefer-not-to-say" {% if demographics.ethnicity == "prefer-not-to-say" %}selected{% endif %}>Prefer not to say</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" step="0.1" min="1" max="400" id="weight" name="demographics.weight"
+                   value="{{ demographics.weight }}">
+        </div>
+        <div class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" step="0.1" min="50" max="250" id="height" name="demographics.height"
+                   value="{{ demographics.height }}">
+        </div>
+    </div>
+</div>

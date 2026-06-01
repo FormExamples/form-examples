@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 8: Medication Review &amp; Dose Adjustment</h2>
+    <p class="form-hint">
+        Renal-relevant medications and any required dose adjustments. Up to
+        six medications may be added.
+    </p>
+
+    <h3>Current medications</h3>
+    {% for i in range(end=6) %}
+    {% set med = false %}
+    {% if medication_review.currentMedications and medication_review.currentMedications | length > i %}
+        {% set_global med = medication_review.currentMedications[i] %}
+    {% endif %}
+    <fieldset class="medication-row">
+        <legend>Medication {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="med_{{ i }}_name">Name</label>
+                <input type="text" id="med_{{ i }}_name" name="medications[{{ i }}].name"
+                       value="{% if med %}{{ med.name }}{% endif %}" placeholder="e.g. Lisinopril">
+            </div>
+            <div class="form-group">
+                <label for="med_{{ i }}_dose">Dose</label>
+                <input type="text" id="med_{{ i }}_dose" name="medications[{{ i }}].dose"
+                       value="{% if med %}{{ med.dose }}{% endif %}" placeholder="e.g. 10 mg">
+            </div>
+            <div class="form-group">
+                <label for="med_{{ i }}_frequency">Frequency</label>
+                <input type="text" id="med_{{ i }}_frequency" name="medications[{{ i }}].frequency"
+                       value="{% if med %}{{ med.frequency }}{% endif %}" placeholder="e.g. OD, BD">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    {% set rx_fields = [
+        {"name": "acei_arb", "camel": "aceiArb", "label": "On ACEi or ARB?"},
+        {"name": "sglt2_inhibitor", "camel": "sglt2Inhibitor", "label": "On SGLT2 inhibitor?"},
+        {"name": "diuretic", "camel": "diuretic", "label": "On loop or thiazide diuretic?"},
+        {"name": "statin", "camel": "statin", "label": "On statin?"},
+        {"name": "phosphate_binder", "camel": "phosphateBinder", "label": "On phosphate binder?"},
+        {"name": "erythropoietin_agent", "camel": "erythropoietinAgent", "label": "On erythropoiesis-stimulating agent (ESA)?"},
+        {"name": "dose_adjustments_needed", "camel": "doseAdjustmentsNeeded", "label": "Dose adjustments needed for renal impairment?"},
+        {"name": "contrast_imaging_planned", "camel": "contrastImagingPlanned", "label": "Contrast-enhanced imaging planned?"}
+    ] %}
+
+    {% for q in rx_fields %}
+    <div class="form-group">
+        <label for="mr_{{ q.name }}">{{ q.label }}</label>
+        <select id="mr_{{ q.name }}" name="medication_review.{{ q.name }}">
+            <option value="" {% if medication_review[q.camel] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if medication_review[q.camel] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if medication_review[q.camel] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="dose_adjustment_details">Dose adjustment details</label>
+        <textarea id="dose_adjustment_details" name="medication_review.dose_adjustment_details"
+                  placeholder="List drugs and revised doses">{{ medication_review.doseAdjustmentDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="medication_notes">Medication notes</label>
+        <textarea id="medication_notes" name="medication_review.medication_notes"
+                  placeholder="Adherence concerns, side effects, deprescribing decisions">{{ medication_review.medicationNotes }}</textarea>
+    </div>
+</div>
