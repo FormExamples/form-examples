@@ -1,0 +1,87 @@
+<div class="card">
+    <h2>Step 4: Mobility &amp; Gait</h2>
+    <p class="form-hint">Functional mobility and orthostatic profile.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="mobility_level">Mobility level</label>
+            <input type="text" id="mobility_level" name="mobility_gait.mobility_level"
+                   value="{{ mobility_gait.mobilityLevel }}"
+                   placeholder="e.g. independent, assist x1, dependent">
+        </div>
+        <div class="form-group">
+            <label for="assistive_device_used">Assistive device used</label>
+            <input type="text" id="assistive_device_used" name="mobility_gait.assistive_device_used"
+                   value="{{ mobility_gait.assistiveDeviceUsed }}"
+                   placeholder="e.g. cane, walker, wheelchair">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="unsteady_gait">Unsteady gait?</label>
+            <select id="unsteady_gait" name="mobility_gait.unsteady_gait">
+                <option value="" {% if mobility_gait.unsteadyGait == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.unsteadyGait == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.unsteadyGait == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="difficulty_rising_from_chair">Difficulty rising from chair?</label>
+            <select id="difficulty_rising_from_chair" name="mobility_gait.difficulty_rising_from_chair">
+                <option value="" {% if mobility_gait.difficultyRisingFromChair == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.difficultyRisingFromChair == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.difficultyRisingFromChair == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="balance_impairment">Balance impairment?</label>
+            <select id="balance_impairment" name="mobility_gait.balance_impairment">
+                <option value="" {% if mobility_gait.balanceImpairment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.balanceImpairment == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.balanceImpairment == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="weakness_lower_extremity">Lower-extremity weakness?</label>
+            <select id="weakness_lower_extremity" name="mobility_gait.weakness_lower_extremity">
+                <option value="" {% if mobility_gait.weaknessLowerExtremity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.weaknessLowerExtremity == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.weaknessLowerExtremity == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="orthostatic_hypotension">Orthostatic hypotension?</label>
+            <select id="orthostatic_hypotension" name="mobility_gait.orthostatic_hypotension">
+                <option value="" {% if mobility_gait.orthostaticHypotension == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.orthostaticHypotension == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.orthostaticHypotension == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="orthostatic_hypotension_severe">Severe orthostatic hypotension?</label>
+            <select id="orthostatic_hypotension_severe" name="mobility_gait.orthostatic_hypotension_severe">
+                <option value="" {% if mobility_gait.orthostaticHypotensionSevere == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mobility_gait.orthostaticHypotensionSevere == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mobility_gait.orthostaticHypotensionSevere == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="timed_up_and_go_seconds">Timed Up &amp; Go (seconds)</label>
+            <input type="text" id="timed_up_and_go_seconds"
+                   name="mobility_gait.timed_up_and_go_seconds"
+                   value="{{ mobility_gait.timedUpAndGoSeconds }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="mobility_notes">Mobility notes</label>
+        <textarea id="mobility_notes" name="mobility_gait.mobility_notes">{{ mobility_gait.mobilityNotes }}</textarea>
+    </div>
+</div>

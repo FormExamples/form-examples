@@ -1,0 +1,79 @@
+<div class="card">
+    <h2>Step 6: Vision &amp; Sensory</h2>
+    <p class="form-hint">Sensory impairments contribute to fall risk.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="vision_impairment">Vision impairment?</label>
+            <select id="vision_impairment" name="vision_sensory.vision_impairment">
+                <option value="" {% if vision_sensory.visionImpairment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.visionImpairment == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.visionImpairment == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vision_corrected">Vision corrected?</label>
+            <select id="vision_corrected" name="vision_sensory.vision_corrected">
+                <option value="" {% if vision_sensory.visionCorrected == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.visionCorrected == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.visionCorrected == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hearing_impairment">Hearing impairment?</label>
+            <select id="hearing_impairment" name="vision_sensory.hearing_impairment">
+                <option value="" {% if vision_sensory.hearingImpairment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.hearingImpairment == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.hearingImpairment == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="peripheral_neuropathy">Peripheral neuropathy?</label>
+            <select id="peripheral_neuropathy" name="vision_sensory.peripheral_neuropathy">
+                <option value="" {% if vision_sensory.peripheralNeuropathy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.peripheralNeuropathy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.peripheralNeuropathy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cataracts">Cataracts?</label>
+            <select id="cataracts" name="vision_sensory.cataracts">
+                <option value="" {% if vision_sensory.cataracts == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.cataracts == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.cataracts == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="glaucoma">Glaucoma?</label>
+            <select id="glaucoma" name="vision_sensory.glaucoma">
+                <option value="" {% if vision_sensory.glaucoma == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.glaucoma == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.glaucoma == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="macular_degeneration">Macular degeneration?</label>
+            <select id="macular_degeneration" name="vision_sensory.macular_degeneration">
+                <option value="" {% if vision_sensory.macularDegeneration == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if vision_sensory.macularDegeneration == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if vision_sensory.macularDegeneration == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vision_last_checked">Vision last checked</label>
+            <input type="date" id="vision_last_checked" name="vision_sensory.vision_last_checked"
+                   value="{{ vision_sensory.visionLastChecked }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sensory_notes">Sensory notes</label>
+        <textarea id="sensory_notes" name="vision_sensory.sensory_notes">{{ vision_sensory.sensoryNotes }}</textarea>
+    </div>
+</div>

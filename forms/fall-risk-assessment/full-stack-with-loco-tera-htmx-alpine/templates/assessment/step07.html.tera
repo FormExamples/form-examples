@@ -1,0 +1,82 @@
+<div class="card">
+    <h2>Step 7: Environmental Assessment</h2>
+    <p class="form-hint">Home and ward environmental hazards.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="loos_throw_rugs">Loose throw rugs?</label>
+            <select id="loos_throw_rugs" name="environmental.loos_throw_rugs">
+                <option value="" {% if environmental.loosThrowRugs == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.loosThrowRugs == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.loosThrowRugs == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cluttered_walkways">Cluttered walkways?</label>
+            <select id="cluttered_walkways" name="environmental.cluttered_walkways">
+                <option value="" {% if environmental.clutteredWalkways == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.clutteredWalkways == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.clutteredWalkways == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="poor_lighting">Poor lighting?</label>
+            <select id="poor_lighting" name="environmental.poor_lighting">
+                <option value="" {% if environmental.poorLighting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.poorLighting == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.poorLighting == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="stairs_without_handrails">Stairs without handrails?</label>
+            <select id="stairs_without_handrails" name="environmental.stairs_without_handrails">
+                <option value="" {% if environmental.stairsWithoutHandrails == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.stairsWithoutHandrails == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.stairsWithoutHandrails == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="bathroom_grab_bars_absent">Bathroom grab bars absent?</label>
+            <select id="bathroom_grab_bars_absent" name="environmental.bathroom_grab_bars_absent">
+                <option value="" {% if environmental.bathroomGrabBarsAbsent == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.bathroomGrabBarsAbsent == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.bathroomGrabBarsAbsent == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="unsuitable_footwear">Unsuitable footwear?</label>
+            <select id="unsuitable_footwear" name="environmental.unsuitable_footwear">
+                <option value="" {% if environmental.unsuitableFootwear == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.unsuitableFootwear == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.unsuitableFootwear == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bed_height_problem">Bed height problem?</label>
+            <select id="bed_height_problem" name="environmental.bed_height_problem">
+                <option value="" {% if environmental.bedHeightProblem == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.bedHeightProblem == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.bedHeightProblem == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hip_protectors_used">Hip protectors used?</label>
+            <select id="hip_protectors_used" name="environmental.hip_protectors_used">
+                <option value="" {% if environmental.hipProtectorsUsed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if environmental.hipProtectorsUsed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if environmental.hipProtectorsUsed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="environmental_notes">Environmental notes</label>
+        <textarea id="environmental_notes" name="environmental.environmental_notes">{{ environmental.environmentalNotes }}</textarea>
+    </div>
+</div>

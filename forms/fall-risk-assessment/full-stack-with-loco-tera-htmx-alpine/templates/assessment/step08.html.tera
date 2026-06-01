@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 8: Cognitive Assessment</h2>
+    <p class="form-hint">Cognition and behavioural risk factors.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dementia_diagnosis">Dementia diagnosis?</label>
+            <select id="dementia_diagnosis" name="cognitive.dementia_diagnosis">
+                <option value="" {% if cognitive.dementiaDiagnosis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cognitive.dementiaDiagnosis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cognitive.dementiaDiagnosis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="confusion_or_disorientation">Confusion or disorientation?</label>
+            <select id="confusion_or_disorientation" name="cognitive.confusion_or_disorientation">
+                <option value="" {% if cognitive.confusionOrDisorientation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cognitive.confusionOrDisorientation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cognitive.confusionOrDisorientation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="impulsivity">Impulsivity?</label>
+            <select id="impulsivity" name="cognitive.impulsivity">
+                <option value="" {% if cognitive.impulsivity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cognitive.impulsivity == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cognitive.impulsivity == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="overestimates_ability">Overestimates ability?</label>
+            <select id="overestimates_ability" name="cognitive.overestimates_ability">
+                <option value="" {% if cognitive.overestimatesAbility == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cognitive.overestimatesAbility == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cognitive.overestimatesAbility == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="delirium">Delirium?</label>
+            <select id="delirium" name="cognitive.delirium">
+                <option value="" {% if cognitive.delirium == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cognitive.delirium == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cognitive.delirium == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cognitive_screen_tool">Cognitive screening tool</label>
+            <input type="text" id="cognitive_screen_tool" name="cognitive.cognitive_screen_tool"
+                   value="{{ cognitive.cognitiveScreenTool }}"
+                   placeholder="e.g. MMSE, MoCA, AMT-4">
+        </div>
+        <div class="form-group">
+            <label for="cognitive_screen_score">Cognitive screening score</label>
+            <input type="text" id="cognitive_screen_score" name="cognitive.cognitive_screen_score"
+                   value="{{ cognitive.cognitiveScreenScore }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cognitive_notes">Cognitive notes</label>
+        <textarea id="cognitive_notes" name="cognitive.cognitive_notes">{{ cognitive.cognitiveNotes }}</textarea>
+    </div>
+</div>
