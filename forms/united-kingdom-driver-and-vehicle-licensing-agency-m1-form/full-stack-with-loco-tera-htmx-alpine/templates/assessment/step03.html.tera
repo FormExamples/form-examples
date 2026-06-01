@@ -1,0 +1,19 @@
+<div class="card">
+    <h2>Step 3: Diagnosis Confirmation (Q1)</h2>
+    <p class="form-hint">
+        If you answer <strong>No</strong>, you do not need to complete Questions 2 and 3 &mdash;
+        skip to the Authorisation page.
+    </p>
+
+    <div class="form-group">
+        <label for="has_mental_health_diagnosis">
+            1. Have you been diagnosed with a mental health condition?
+        </label>
+        <select id="has_mental_health_diagnosis"
+                name="diagnosis_confirmation.has_mental_health_diagnosis">
+            <option value="" {% if diagnosis_confirmation.hasMentalHealthDiagnosis == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if diagnosis_confirmation.hasMentalHealthDiagnosis == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if diagnosis_confirmation.hasMentalHealthDiagnosis == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+</div>

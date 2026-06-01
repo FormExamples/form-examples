@@ -1,0 +1,29 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA M1 Form - Submission{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>DVLA M1 Form</h1>
+    <p class="form-hint">
+        Complete all six sections (Personal Details, Healthcare Professionals,
+        Diagnosis Confirmation, Mental Health Conditions, Recent Contact, Authorisation)
+        and submit. If you have not been diagnosed with a mental health condition
+        (Q1 = No), the questionnaire stops at Q1 &mdash; only the Authorisation page
+        is then required.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit M1 Form</button>
+    </div>
+</form>
+{% endblock %}

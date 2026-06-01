@@ -1,35 +1,15 @@
-//! Core types for the DVLA M1 form validation engine.
-//!
-//! `serde(rename_all = "camelCase")` is applied to all structs that may be
-//! shared with the front-end (the canonical wire format is camelCase).
-
 use serde::{Deserialize, Serialize};
 
-/// Priority level for a fired rule or additional flag.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum RulePriority {
-    Urgent,
-    High,
-    Medium,
-    Low,
-}
+// Type aliases matching the frontend union types.
+// Empty string `''` indicates an unanswered enum / text field.
+// Unanswered date fields default to `''`.
+pub type YesNo = String;
+pub type ContactPreference = String;
+pub type RulePriority = String;
+pub type RuleCategory = String;
 
-/// Category of a validation rule.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum RuleCategory {
-    Completeness,
-    Consistency,
-    Safety,
-    Declaration,
-}
-
-// ──────────────────────────────────────────────
-// Part A — About You
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part A — Personal Details (current driving licence details and change of details).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PersonalDetails {
     pub title: String,
@@ -42,11 +22,8 @@ pub struct PersonalDetails {
     pub change_of_details: String,
 }
 
-// ──────────────────────────────────────────────
-// Part B — Healthcare Professionals
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part B — GP details.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GpDetails {
     pub gp_name: String,
@@ -59,7 +36,8 @@ pub struct GpDetails {
     pub date_last_seen: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part B — Consultant details.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ConsultantDetails {
     pub consultant_name: String,
@@ -74,77 +52,61 @@ pub struct ConsultantDetails {
     pub date_last_seen: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part B — Healthcare professionals (GP + Consultant).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HealthcareProfessionals {
     pub gp: GpDetails,
     pub consultant: ConsultantDetails,
 }
 
-// ──────────────────────────────────────────────
-// Q1 — Diagnosis confirmation
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q1 — Diagnosis confirmation.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DiagnosisConfirmation {
-    /// Q1: Have you been diagnosed with a mental health condition?
-    /// "yes" | "no" | "" (unanswered).
-    pub has_mental_health_diagnosis: String,
+    pub has_mental_health_diagnosis: YesNo,
 }
 
-// ──────────────────────────────────────────────
-// Q2 — Mental health conditions
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q2 — Mental health conditions diagnosed (Yes/No per condition).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MentalHealthConditions {
-    pub anxiety_depression_without_impairment: String,
-    pub anxiety_depression_with_impairment: String,
-    pub bipolar_affective_disorder: String,
-    pub eating_disorder: String,
-    pub ocd_or_ptsd: String,
-    pub personality_disorder: String,
-    pub schizophrenia_or_psychosis: String,
-    pub other: String,
+    pub anxiety_depression_without_impairment: YesNo,
+    pub anxiety_depression_with_impairment: YesNo,
+    pub bipolar_affective_disorder: YesNo,
+    pub eating_disorder: YesNo,
+    pub ocd_or_ptsd: YesNo,
+    pub personality_disorder: YesNo,
+    pub schizophrenia_or_psychosis: YesNo,
+    pub other: YesNo,
     pub other_details: String,
 }
 
-// ──────────────────────────────────────────────
-// Q3 — Recent contact with healthcare professionals
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q3 — Recent contact with healthcare professional in the last 12 months.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecentContact {
-    pub had_recent_contact: String,
+    pub had_recent_contact: YesNo,
     pub doctor_last_date: String,
     pub consultant_last_date: String,
     pub community_psychiatric_nurse_last_date: String,
 }
 
-// ──────────────────────────────────────────────
-// Applicant's Authorisation
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Applicant's Authorisation (declaration, signatory, contact preferences).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Authorisation {
-    pub declaration_confirmed: String,
+    pub declaration_confirmed: YesNo,
     pub signatory_name: String,
     pub signature_text: String,
     pub signature_date: String,
-    pub electronic_correspondence_consent: String,
-    pub dvla_contact_preference: String,
-    pub healthcare_professional_contact_preference: String,
+    pub electronic_correspondence_consent: YesNo,
+    pub dvla_contact_preference: ContactPreference,
+    pub healthcare_professional_contact_preference: ContactPreference,
 }
 
-// ──────────────────────────────────────────────
-// Full form data
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Full DVLA M1 assessment data.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AssessmentData {
     pub personal_details: PersonalDetails,
@@ -155,10 +117,7 @@ pub struct AssessmentData {
     pub authorisation: Authorisation,
 }
 
-// ──────────────────────────────────────────────
-// Validation engine outputs
-// ──────────────────────────────────────────────
-
+/// A rule that fired during validation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
@@ -169,6 +128,7 @@ pub struct FiredRule {
     pub message: String,
 }
 
+/// A clinical or safety flag raised independently of completeness validation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdditionalFlag {
@@ -178,42 +138,14 @@ pub struct AdditionalFlag {
     pub priority: RulePriority,
 }
 
+/// Validation output for a DVLA M1 assessment.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ValidationResult {
-    /// True when no completeness rules fired for the active branch.
     pub complete: bool,
-    /// True when patient answered Q1 = No (form stops there).
     pub stopped_at_q1: bool,
     pub fired_rules: Vec<FiredRule>,
     pub additional_flags: Vec<AdditionalFlag>,
     pub condition_count: u32,
     pub timestamp: String,
-}
-
-impl RulePriority {
-    /// Numeric ordering for priority sort: urgent < high < medium < low.
-    pub fn order(self) -> u8 {
-        match self {
-            RulePriority::Urgent => 0,
-            RulePriority::High => 1,
-            RulePriority::Medium => 2,
-            RulePriority::Low => 3,
-        }
-    }
-
-    #[allow(dead_code)]
-    pub fn label(self) -> &'static str {
-        match self {
-            RulePriority::Urgent => "Urgent",
-            RulePriority::High => "High",
-            RulePriority::Medium => "Medium",
-            RulePriority::Low => "Low",
-        }
-    }
-}
-
-/// Trim-aware non-empty check, mirrors `isFilled` from the TypeScript engine.
-pub fn is_filled(value: &str) -> bool {
-    !value.trim().is_empty()
 }

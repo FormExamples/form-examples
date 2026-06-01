@@ -1,0 +1,97 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA M1 Form - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>M1 Assessor Dashboard</h1>
+    <a href="/" class="btn btn-primary">New M1 Submission</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Applicant name, signatory, GP or consultant...">
+    </div>
+    <div class="form-group">
+        <label for="diagnosis">Diagnosis (Q1)</label>
+        <select id="diagnosis" name="diagnosis">
+            <option value="">All</option>
+            <option value="yes" {% if diagnosis == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if diagnosis == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Urgent/High flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="complete">Completeness</label>
+        <select id="complete" name="complete">
+            <option value="">All</option>
+            <option value="yes" {% if complete == "yes" %}selected{% endif %}>Complete</option>
+            <option value="no" {% if complete == "no" %}selected{% endif %}>Incomplete</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} submission{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Signature Date</th>
+            <th>Applicant</th>
+            <th>Date of Birth</th>
+            <th>GP</th>
+            <th>Consultant</th>
+            <th>Q1 Diagnosis</th>
+            <th>Conditions</th>
+            <th>Complete</th>
+            <th>Flags (urgent / high)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.signatureDate }}</a></td>
+            <td>{{ r.fullName }}<br><small>{{ r.signatoryName }}</small></td>
+            <td>{{ r.dateOfBirth }}</td>
+            <td>{{ r.gpName }}</td>
+            <td>{{ r.consultantName }}</td>
+            <td>{{ r.hasMentalHealthDiagnosis }}</td>
+            <td>{{ r.conditionCount }}</td>
+            <td>
+                {% if r.complete %}
+                    <span class="badge badge-yes">yes</span>
+                {% else %}
+                    <span class="badge badge-no">no</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if r.urgentFlagCount + r.highFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.urgentFlagCount }} / {{ r.highFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0 / 0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No M1 submissions found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

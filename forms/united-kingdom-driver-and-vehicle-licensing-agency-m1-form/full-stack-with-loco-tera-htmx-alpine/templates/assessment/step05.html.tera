@@ -1,0 +1,41 @@
+<div class="card">
+    <h2>Step 5: Recent Contact (Q3)</h2>
+    <p class="form-hint">
+        Have you had any contact (phone, video, or face-to-face consultation) with your
+        healthcare professional about your mental health condition in the last 12 months?
+        If Yes, supply the last date of any contact for each professional below.
+    </p>
+
+    <div class="form-group">
+        <label for="had_recent_contact">
+            3. Have you had any contact with your healthcare professional about your mental health condition in the last 12 months?
+        </label>
+        <select id="had_recent_contact"
+                name="recent_contact.had_recent_contact">
+            <option value="" {% if recent_contact.hadRecentContact == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if recent_contact.hadRecentContact == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if recent_contact.hadRecentContact == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="doctor_last_date">Doctor &mdash; last contact date</label>
+            <input type="date" id="doctor_last_date"
+                   name="recent_contact.doctor_last_date"
+                   value="{{ recent_contact.doctorLastDate }}">
+        </div>
+        <div class="form-group">
+            <label for="consultant_last_date">Consultant &mdash; last contact date</label>
+            <input type="date" id="consultant_last_date"
+                   name="recent_contact.consultant_last_date"
+                   value="{{ recent_contact.consultantLastDate }}">
+        </div>
+        <div class="form-group">
+            <label for="community_psychiatric_nurse_last_date">Community psychiatric nurse &mdash; last contact date</label>
+            <input type="date" id="community_psychiatric_nurse_last_date"
+                   name="recent_contact.community_psychiatric_nurse_last_date"
+                   value="{{ recent_contact.communityPsychiatricNurseLastDate }}">
+        </div>
+    </div>
+</div>
