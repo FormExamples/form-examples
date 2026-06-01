@@ -1,0 +1,40 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Seasonal Affective Disorder Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Seasonal Affective Disorder Assessment</h1>
+        <p class="landing-description">
+            A combined screening tool using the <strong>SPAQ Global Seasonality Score</strong>
+            (six items, 0-24) and the <strong>PHQ-9</strong> depression-severity questionnaire
+            (nine items, 0-27). The patient answers about mood, sleep, energy, appetite,
+            light exposure, previous treatments, and self-harm risk. The system computes
+            SPAQ and PHQ-9 bands and a combined severity classification, and surfaces
+            prioritised clinician-facing flags.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>SPAQ GSS</h3>
+                <p>Six seasonal-change items scored 0-4 each. Bands: no SAD (0-7), subsyndromal (8-10), SAD likely (11-24).</p>
+            </div>
+            <div class="feature">
+                <h3>PHQ-9</h3>
+                <p>Nine depression items scored 0-3 each. Bands: minimal, mild, moderate, moderately severe, severe.</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for suicidal ideation, intent, self-harm, severe depression, and gaps in care.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

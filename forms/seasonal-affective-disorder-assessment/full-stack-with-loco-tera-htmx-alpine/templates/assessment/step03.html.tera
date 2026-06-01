@@ -1,0 +1,42 @@
+<div class="card">
+    <h2>Step 3: Current Mood (PHQ-9)</h2>
+    <p class="form-hint">Over the past two weeks, how often have you been bothered by any of the following problems? (0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day)</p>
+
+    {% set phq9 = current_mood.phq9 %}
+    {% set phq9_items = [
+        {"id": "q1", "label": "Little interest or pleasure in doing things"},
+        {"id": "q2", "label": "Feeling down, depressed, or hopeless"},
+        {"id": "q3", "label": "Trouble falling or staying asleep, or sleeping too much"},
+        {"id": "q4", "label": "Feeling tired or having little energy"},
+        {"id": "q5", "label": "Poor appetite or overeating"},
+        {"id": "q6", "label": "Feeling bad about yourself - or that you are a failure or have let yourself or your family down"},
+        {"id": "q7", "label": "Trouble concentrating on things, such as reading the newspaper or watching television"},
+        {"id": "q8", "label": "Moving or speaking so slowly that other people could have noticed; or the opposite - being so fidgety or restless that you have been moving around a lot more than usual"},
+        {"id": "q9", "label": "Thoughts that you would be better off dead, or of hurting yourself in some way"}
+    ] %}
+
+    {% for item in phq9_items %}
+    {% set current = phq9[item.id] %}
+    <div class="form-group">
+        <label for="phq9_{{ item.id }}">{{ item.label }}</label>
+        <select id="phq9_{{ item.id }}" name="current_mood.phq9.{{ item.id }}">
+            <option value="" {% if current is null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if current == 0 %}selected{% endif %}>0 - Not at all</option>
+            <option value="1" {% if current == 1 %}selected{% endif %}>1 - Several days</option>
+            <option value="2" {% if current == 2 %}selected{% endif %}>2 - More than half the days</option>
+            <option value="3" {% if current == 3 %}selected{% endif %}>3 - Nearly every day</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="difficulty_level">How difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?</label>
+        <select id="difficulty_level" name="current_mood.difficulty_level">
+            <option value="" {% if current_mood.difficultyLevel == "" %}selected{% endif %}>&mdash;</option>
+            <option value="not-difficult" {% if current_mood.difficultyLevel == "not-difficult" %}selected{% endif %}>Not difficult at all</option>
+            <option value="somewhat" {% if current_mood.difficultyLevel == "somewhat" %}selected{% endif %}>Somewhat difficult</option>
+            <option value="very" {% if current_mood.difficultyLevel == "very" %}selected{% endif %}>Very difficult</option>
+            <option value="extremely" {% if current_mood.difficultyLevel == "extremely" %}selected{% endif %}>Extremely difficult</option>
+        </select>
+    </div>
+</div>

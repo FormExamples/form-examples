@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 7: Light Exposure</h2>
+    <p class="form-hint">Daily light exposure and access to light therapy.</p>
+
+    <div class="form-group">
+        <label for="daily_outdoor_minutes">Daily outdoor minutes</label>
+        <input type="number" min="0" id="daily_outdoor_minutes"
+               name="light_exposure.daily_outdoor_minutes"
+               value="{{ light_exposure.dailyOutdoorMinutes | default(value="") }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="work_indoors">Works predominantly indoors?</label>
+            <select id="work_indoors" name="light_exposure.work_indoors">
+                <option value="" {% if light_exposure.workIndoors == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if light_exposure.workIndoors == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if light_exposure.workIndoors == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="curtains_closed_daytime">Curtains closed during daytime?</label>
+            <select id="curtains_closed_daytime" name="light_exposure.curtains_closed_daytime">
+                <option value="" {% if light_exposure.curtainsClosedDaytime == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if light_exposure.curtainsClosedDaytime == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if light_exposure.curtainsClosedDaytime == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sunrise_exposure">Regular sunrise exposure?</label>
+            <select id="sunrise_exposure" name="light_exposure.sunrise_exposure">
+                <option value="" {% if light_exposure.sunriseExposure == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if light_exposure.sunriseExposure == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if light_exposure.sunriseExposure == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="uses_light_therapy_box">Currently uses a light-therapy box?</label>
+            <select id="uses_light_therapy_box" name="light_exposure.uses_light_therapy_box">
+                <option value="" {% if light_exposure.usesLightTherapyBox == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if light_exposure.usesLightTherapyBox == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if light_exposure.usesLightTherapyBox == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="light_therapy_access">Has access to light therapy if needed?</label>
+            <select id="light_therapy_access" name="light_exposure.light_therapy_access">
+                <option value="" {% if light_exposure.lightTherapyAccess == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if light_exposure.lightTherapyAccess == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if light_exposure.lightTherapyAccess == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="light_therapy_details">Light therapy details</label>
+        <textarea id="light_therapy_details" name="light_exposure.light_therapy_details" rows="2">{{ light_exposure.lightTherapyDetails }}</textarea>
+    </div>
+</div>

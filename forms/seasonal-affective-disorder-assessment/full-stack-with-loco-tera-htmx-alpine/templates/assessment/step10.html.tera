@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 10: Treatment Plan &amp; Monitoring</h2>
+    <p class="form-hint">Clinician treatment plan and follow-up interval.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="plan_light_therapy">Plan: light therapy?</label>
+            <select id="plan_light_therapy" name="treatment_plan.plan_light_therapy">
+                <option value="" {% if treatment_plan.planLightTherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_plan.planLightTherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_plan.planLightTherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="plan_antidepressant">Plan: antidepressant?</label>
+            <select id="plan_antidepressant" name="treatment_plan.plan_antidepressant">
+                <option value="" {% if treatment_plan.planAntidepressant == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_plan.planAntidepressant == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_plan.planAntidepressant == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="plan_psychotherapy">Plan: psychotherapy?</label>
+            <select id="plan_psychotherapy" name="treatment_plan.plan_psychotherapy">
+                <option value="" {% if treatment_plan.planPsychotherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_plan.planPsychotherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_plan.planPsychotherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="plan_lifestyle">Plan: lifestyle / exercise / daylight?</label>
+            <select id="plan_lifestyle" name="treatment_plan.plan_lifestyle">
+                <option value="" {% if treatment_plan.planLifestyle == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_plan.planLifestyle == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_plan.planLifestyle == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="plan_crisis_referral">Plan: crisis referral?</label>
+            <select id="plan_crisis_referral" name="treatment_plan.plan_crisis_referral">
+                <option value="" {% if treatment_plan.planCrisisReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if treatment_plan.planCrisisReferral == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if treatment_plan.planCrisisReferral == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="follow_up_interval">Follow-up interval</label>
+            <select id="follow_up_interval" name="treatment_plan.follow_up_interval">
+                <option value="" {% if treatment_plan.followUpInterval == "" %}selected{% endif %}>&mdash;</option>
+                <option value="2-weeks" {% if treatment_plan.followUpInterval == "2-weeks" %}selected{% endif %}>2 weeks</option>
+                <option value="4-weeks" {% if treatment_plan.followUpInterval == "4-weeks" %}selected{% endif %}>4 weeks</option>
+                <option value="8-weeks" {% if treatment_plan.followUpInterval == "8-weeks" %}selected{% endif %}>8 weeks</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="clinician_notes">Clinician notes</label>
+        <textarea id="clinician_notes" name="treatment_plan.clinician_notes" rows="3">{{ treatment_plan.clinicianNotes }}</textarea>
+    </div>
+</div>

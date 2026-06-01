@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 4: Sleep &amp; Energy</h2>
+    <p class="form-hint">SPAQ items for sleep-length and energy-level change with the seasons (each 0-4), plus winter/summer sleep duration and seasonal sleep/energy patterns.</p>
+
+    {% set spaq = sleep_energy.spaq %}
+
+    <div class="form-group">
+        <label for="spaq_sleep_length">SPAQ-001: Sleep length &mdash; how much do the seasons change your sleep length? (0-4)</label>
+        <select id="spaq_sleep_length" name="sleep_energy.spaq.sleep_length">
+            <option value="" {% if spaq.sleepLength is null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if spaq.sleepLength == 0 %}selected{% endif %}>0 - No change</option>
+            <option value="1" {% if spaq.sleepLength == 1 %}selected{% endif %}>1 - Slight change</option>
+            <option value="2" {% if spaq.sleepLength == 2 %}selected{% endif %}>2 - Moderate change</option>
+            <option value="3" {% if spaq.sleepLength == 3 %}selected{% endif %}>3 - Marked change</option>
+            <option value="4" {% if spaq.sleepLength == 4 %}selected{% endif %}>4 - Extremely marked change</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="spaq_energy_level">SPAQ-006: Energy level &mdash; how much does your energy change with the seasons? (0-4)</label>
+        <select id="spaq_energy_level" name="sleep_energy.spaq.energy_level">
+            <option value="" {% if spaq.energyLevel is null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if spaq.energyLevel == 0 %}selected{% endif %}>0 - No change</option>
+            <option value="1" {% if spaq.energyLevel == 1 %}selected{% endif %}>1 - Slight change</option>
+            <option value="2" {% if spaq.energyLevel == 2 %}selected{% endif %}>2 - Moderate change</option>
+            <option value="3" {% if spaq.energyLevel == 3 %}selected{% endif %}>3 - Marked change</option>
+            <option value="4" {% if spaq.energyLevel == 4 %}selected{% endif %}>4 - Extremely marked change</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hours_slept_winter">Hours slept (winter)</label>
+            <input type="number" step="0.1" min="0" id="hours_slept_winter"
+                   name="sleep_energy.hours_slept_winter"
+                   value="{{ sleep_energy.hoursSleptWinter | default(value="") }}">
+        </div>
+        <div class="form-group">
+            <label for="hours_slept_summer">Hours slept (summer)</label>
+            <input type="number" step="0.1" min="0" id="hours_slept_summer"
+                   name="sleep_energy.hours_slept_summer"
+                   value="{{ sleep_energy.hoursSleptSummer | default(value="") }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hypersomnia">Hypersomnia in winter?</label>
+            <select id="hypersomnia" name="sleep_energy.hypersomnia">
+                <option value="" {% if sleep_energy.hypersomnia == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if sleep_energy.hypersomnia == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if sleep_energy.hypersomnia == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="morning_fatigue">Morning fatigue / difficulty waking?</label>
+            <select id="morning_fatigue" name="sleep_energy.morning_fatigue">
+                <option value="" {% if sleep_energy.morningFatigue == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if sleep_energy.morningFatigue == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if sleep_energy.morningFatigue == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="energy_notes">Energy / sleep notes</label>
+        <textarea id="energy_notes" name="sleep_energy.energy_notes" rows="2">{{ sleep_energy.energyNotes }}</textarea>
+    </div>
+</div>

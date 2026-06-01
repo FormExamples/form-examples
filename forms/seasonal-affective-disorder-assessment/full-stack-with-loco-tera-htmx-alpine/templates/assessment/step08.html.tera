@@ -1,0 +1,68 @@
+<div class="card">
+    <h2>Step 8: Previous Treatments</h2>
+    <p class="form-hint">History of antidepressants, psychotherapy, light therapy, and current treatment.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antidepressants">Antidepressants tried?</label>
+            <select id="antidepressants" name="previous_treatments.antidepressants">
+                <option value="" {% if previous_treatments.antidepressants == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_treatments.antidepressants == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_treatments.antidepressants == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antidepressant_details">Antidepressant details</label>
+            <input type="text" id="antidepressant_details" name="previous_treatments.antidepressant_details"
+                   value="{{ previous_treatments.antidepressantDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="psychotherapy">Psychotherapy tried?</label>
+            <select id="psychotherapy" name="previous_treatments.psychotherapy">
+                <option value="" {% if previous_treatments.psychotherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_treatments.psychotherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_treatments.psychotherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="psychotherapy_details">Psychotherapy details</label>
+            <input type="text" id="psychotherapy_details" name="previous_treatments.psychotherapy_details"
+                   value="{{ previous_treatments.psychotherapyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="light_therapy_history">Light therapy tried previously?</label>
+            <select id="light_therapy_history" name="previous_treatments.light_therapy_history">
+                <option value="" {% if previous_treatments.lightTherapyHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_treatments.lightTherapyHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_treatments.lightTherapyHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="light_therapy_history_details">Light therapy history details</label>
+            <input type="text" id="light_therapy_history_details" name="previous_treatments.light_therapy_history_details"
+                   value="{{ previous_treatments.lightTherapyHistoryDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="current_treatment">Currently in treatment?</label>
+            <select id="current_treatment" name="previous_treatments.current_treatment">
+                <option value="" {% if previous_treatments.currentTreatment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if previous_treatments.currentTreatment == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if previous_treatments.currentTreatment == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="current_treatment_details">Current treatment details</label>
+            <input type="text" id="current_treatment_details" name="previous_treatments.current_treatment_details"
+                   value="{{ previous_treatments.currentTreatmentDetails }}">
+        </div>
+    </div>
+</div>

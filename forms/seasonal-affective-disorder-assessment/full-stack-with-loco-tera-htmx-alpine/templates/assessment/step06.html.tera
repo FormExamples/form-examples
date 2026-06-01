@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 6: Social &amp; Occupational Impact</h2>
+    <p class="form-hint">SPAQ items for mood and social-activity change with the seasons (each 0-4), plus functional impairment.</p>
+
+    {% set spaq = social_occupational.spaq %}
+
+    <div class="form-group">
+        <label for="spaq_mood">SPAQ-003: Mood (general well-being) &mdash; how much does it change with the seasons? (0-4)</label>
+        <select id="spaq_mood" name="social_occupational.spaq.mood">
+            <option value="" {% if spaq.mood is null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if spaq.mood == 0 %}selected{% endif %}>0 - No change</option>
+            <option value="1" {% if spaq.mood == 1 %}selected{% endif %}>1 - Slight change</option>
+            <option value="2" {% if spaq.mood == 2 %}selected{% endif %}>2 - Moderate change</option>
+            <option value="3" {% if spaq.mood == 3 %}selected{% endif %}>3 - Marked change</option>
+            <option value="4" {% if spaq.mood == 4 %}selected{% endif %}>4 - Extremely marked change</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="spaq_social_activity">SPAQ-002: Social activity &mdash; how much do the seasons change your level of social activity? (0-4)</label>
+        <select id="spaq_social_activity" name="social_occupational.spaq.social_activity">
+            <option value="" {% if spaq.socialActivity is null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if spaq.socialActivity == 0 %}selected{% endif %}>0 - No change</option>
+            <option value="1" {% if spaq.socialActivity == 1 %}selected{% endif %}>1 - Slight change</option>
+            <option value="2" {% if spaq.socialActivity == 2 %}selected{% endif %}>2 - Moderate change</option>
+            <option value="3" {% if spaq.socialActivity == 3 %}selected{% endif %}>3 - Marked change</option>
+            <option value="4" {% if spaq.socialActivity == 4 %}selected{% endif %}>4 - Extremely marked change</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="work_impaired">Work performance impaired?</label>
+            <select id="work_impaired" name="social_occupational.work_impaired">
+                <option value="" {% if social_occupational.workImpaired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if social_occupational.workImpaired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if social_occupational.workImpaired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="relationships_impaired">Relationships impaired?</label>
+            <select id="relationships_impaired" name="social_occupational.relationships_impaired">
+                <option value="" {% if social_occupational.relationshipsImpaired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if social_occupational.relationshipsImpaired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if social_occupational.relationshipsImpaired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="social_withdrawal">Social withdrawal?</label>
+            <select id="social_withdrawal" name="social_occupational.social_withdrawal">
+                <option value="" {% if social_occupational.socialWithdrawal == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if social_occupational.socialWithdrawal == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if social_occupational.socialWithdrawal == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="occupational_notes">Occupational / social notes</label>
+        <textarea id="occupational_notes" name="social_occupational.occupational_notes" rows="2">{{ social_occupational.occupationalNotes }}</textarea>
+    </div>
+</div>
