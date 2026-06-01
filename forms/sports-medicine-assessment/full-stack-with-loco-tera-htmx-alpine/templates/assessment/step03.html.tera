@@ -1,0 +1,135 @@
+<div class="card">
+    <h2>Step 3: Medical History</h2>
+    <p class="form-hint">Chronic illness, medications, allergies, asthma, diabetes, and other risk factors.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="chronic_illness">Chronic illness?</label>
+            <select id="chronic_illness" name="medical_history.chronic_illness">
+                <option value="" {% if medical_history.chronicIllness == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.chronicIllness == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.chronicIllness == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.chronicIllness == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chronic_illness_details">Details</label>
+            <input type="text" id="chronic_illness_details" name="medical_history.chronic_illness_details"
+                   value="{{ medical_history.chronicIllnessDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="current_medications">Current medications?</label>
+            <select id="current_medications" name="medical_history.current_medications">
+                <option value="" {% if medical_history.currentMedications == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.currentMedications == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.currentMedications == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.currentMedications == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="current_medication_details">Details</label>
+            <input type="text" id="current_medication_details" name="medical_history.current_medication_details"
+                   value="{{ medical_history.currentMedicationDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="allergies_known">Known allergies?</label>
+            <select id="allergies_known" name="medical_history.allergies_known">
+                <option value="" {% if medical_history.allergiesKnown == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.allergiesKnown == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.allergiesKnown == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.allergiesKnown == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="allergy_details">Allergy details</label>
+            <input type="text" id="allergy_details" name="medical_history.allergy_details"
+                   value="{{ medical_history.allergyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="prior_surgery">Prior surgery?</label>
+            <select id="prior_surgery" name="medical_history.prior_surgery">
+                <option value="" {% if medical_history.priorSurgery == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.priorSurgery == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.priorSurgery == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.priorSurgery == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="prior_surgery_details">Surgery details</label>
+            <input type="text" id="prior_surgery_details" name="medical_history.prior_surgery_details"
+                   value="{{ medical_history.priorSurgeryDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hospitalised_last_year">Hospitalised in the last 12 months?</label>
+            <select id="hospitalised_last_year" name="medical_history.hospitalised_last_year">
+                <option value="" {% if medical_history.hospitalisedLastYear == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.hospitalisedLastYear == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.hospitalisedLastYear == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.hospitalisedLastYear == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="asthma_or_exercise_induced_bronchospasm">Asthma / exercise-induced bronchospasm?</label>
+            <select id="asthma_or_exercise_induced_bronchospasm" name="medical_history.asthma_or_exercise_induced_bronchospasm">
+                <option value="" {% if medical_history.asthmaOrExerciseInducedBronchospasm == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.asthmaOrExerciseInducedBronchospasm == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.asthmaOrExerciseInducedBronchospasm == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.asthmaOrExerciseInducedBronchospasm == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="diabetes">Diabetes?</label>
+            <select id="diabetes" name="medical_history.diabetes">
+                <option value="" {% if medical_history.diabetes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.diabetes == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.diabetes == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.diabetes == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sickle_cell_trait_or_disease">Sickle cell trait or disease?</label>
+            <select id="sickle_cell_trait_or_disease" name="medical_history.sickle_cell_trait_or_disease">
+                <option value="" {% if medical_history.sickleCellTraitOrDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.sickleCellTraitOrDisease == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.sickleCellTraitOrDisease == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.sickleCellTraitOrDisease == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="heat_illness_history">Heat illness history?</label>
+            <select id="heat_illness_history" name="medical_history.heat_illness_history">
+                <option value="" {% if medical_history.heatIllnessHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.heatIllnessHistory == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.heatIllnessHistory == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.heatIllnessHistory == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="eating_disorder_history">Eating disorder history?</label>
+            <select id="eating_disorder_history" name="medical_history.eating_disorder_history">
+                <option value="" {% if medical_history.eatingDisorderHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medical_history.eatingDisorderHistory == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medical_history.eatingDisorderHistory == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if medical_history.eatingDisorderHistory == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+</div>

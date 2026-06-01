@@ -1,0 +1,92 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Sports Medicine Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Clinician Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Athlete name, sport, or clinician...">
+    </div>
+    <div class="form-group">
+        <label for="clearance">Clearance</label>
+        <select id="clearance" name="clearance">
+            <option value="">All</option>
+            <option value="cleared" {% if clearance == "cleared" %}selected{% endif %}>Cleared</option>
+            <option value="conditional" {% if clearance == "conditional" %}selected{% endif %}>Cleared with Conditions</option>
+            <option value="pending" {% if clearance == "pending" %}selected{% endif %}>Pending Further Evaluation</option>
+            <option value="not-cleared" {% if clearance == "not-cleared" %}selected{% endif %}>Not Cleared</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="contact_level">Contact Level</label>
+        <select id="contact_level" name="contact_level">
+            <option value="">All</option>
+            <option value="low" {% if contact_level == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if contact_level == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if contact_level == "high" %}selected{% endif %}>High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Signed</th>
+            <th>Athlete</th>
+            <th>Sport / Position</th>
+            <th>Contact</th>
+            <th>Clinician</th>
+            <th>Clearance</th>
+            <th>Rules</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.clinicianSignatureDate }}</a></td>
+            <td>{{ r.athleteName }}<br><small>{{ r.dateOfBirth }}</small></td>
+            <td>{{ r.primarySport }}<br><small>{{ r.primaryPosition }}</small></td>
+            <td>{{ r.contactLevel }}</td>
+            <td>{{ r.clinicianName }}</td>
+            <td><span class="clearance-badge clearance-{{ r.clearance }}">{{ r.clearance }}</span></td>
+            <td>{{ r.firedRuleCount }}</td>
+            <td>
+                {% if r.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+<div class="card">
+    <h2>Step 10: Clearance Decision</h2>
+    <p class="form-hint">Supervising clinician's draft clearance and notes.</p>
+
+    <div class="form-group">
+        <label for="preferred_clearance">Preferred clearance</label>
+        <select id="preferred_clearance" name="clearance_decision.preferred_clearance">
+            <option value="" {% if clearance_decision.preferredClearance == "" %}selected{% endif %}>&mdash;</option>
+            <option value="cleared" {% if clearance_decision.preferredClearance == "cleared" %}selected{% endif %}>Cleared</option>
+            <option value="conditional" {% if clearance_decision.preferredClearance == "conditional" %}selected{% endif %}>Cleared with Conditions</option>
+            <option value="pending" {% if clearance_decision.preferredClearance == "pending" %}selected{% endif %}>Pending Further Evaluation</option>
+            <option value="not-cleared" {% if clearance_decision.preferredClearance == "not-cleared" %}selected{% endif %}>Not Cleared for Sport</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="clearance_conditions">Conditions / restrictions</label>
+        <textarea id="clearance_conditions" name="clearance_decision.clearance_conditions">{{ clearance_decision.clearanceConditions }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="follow_up_required">Follow-up required</label>
+        <textarea id="follow_up_required" name="clearance_decision.follow_up_required">{{ clearance_decision.followUpRequired }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_name">Clinician name</label>
+            <input type="text" id="clinician_name" name="clearance_decision.clinician_name"
+                   value="{{ clearance_decision.clinicianName }}">
+        </div>
+        <div class="form-group">
+            <label for="clinician_signature_date">Signature date</label>
+            <input type="date" id="clinician_signature_date" name="clearance_decision.clinician_signature_date"
+                   value="{{ clearance_decision.clinicianSignatureDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_notes">Additional notes</label>
+        <textarea id="additional_notes" name="clearance_decision.additional_notes">{{ clearance_decision.additionalNotes }}</textarea>
+    </div>
+</div>

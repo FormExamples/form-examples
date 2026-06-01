@@ -1,0 +1,73 @@
+<div class="card">
+    <h2>Step 4: Family History</h2>
+    <p class="form-hint">Sudden cardiac death and inherited cardiac conditions.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="sudden_cardiac_death_under_50">Family sudden cardiac death under 50?</label>
+            <select id="sudden_cardiac_death_under_50" name="family_history.sudden_cardiac_death_under_50">
+                <option value="" {% if family_history.suddenCardiacDeathUnder50 == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if family_history.suddenCardiacDeathUnder50 == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if family_history.suddenCardiacDeathUnder50 == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if family_history.suddenCardiacDeathUnder50 == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sudden_cardiac_death_relation">Relation</label>
+            <input type="text" id="sudden_cardiac_death_relation" name="family_history.sudden_cardiac_death_relation"
+                   value="{{ family_history.suddenCardiacDeathRelation }}" placeholder="e.g. father">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hypertrophic_cardiomyopathy">Family hypertrophic cardiomyopathy?</label>
+            <select id="hypertrophic_cardiomyopathy" name="family_history.hypertrophic_cardiomyopathy">
+                <option value="" {% if family_history.hypertrophicCardiomyopathy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if family_history.hypertrophicCardiomyopathy == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if family_history.hypertrophicCardiomyopathy == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if family_history.hypertrophicCardiomyopathy == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="marfan_syndrome">Family Marfan syndrome?</label>
+            <select id="marfan_syndrome" name="family_history.marfan_syndrome">
+                <option value="" {% if family_history.marfanSyndrome == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if family_history.marfanSyndrome == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if family_history.marfanSyndrome == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if family_history.marfanSyndrome == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="long_qt_syndrome">Family long-QT syndrome?</label>
+            <select id="long_qt_syndrome" name="family_history.long_qt_syndrome">
+                <option value="" {% if family_history.longQtSyndrome == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if family_history.longQtSyndrome == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if family_history.longQtSyndrome == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if family_history.longQtSyndrome == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="arrhythmia_or_pacemaker">Family arrhythmia / pacemaker?</label>
+            <select id="arrhythmia_or_pacemaker" name="family_history.arrhythmia_or_pacemaker">
+                <option value="" {% if family_history.arrhythmiaOrPacemaker == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if family_history.arrhythmiaOrPacemaker == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if family_history.arrhythmiaOrPacemaker == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if family_history.arrhythmiaOrPacemaker == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="unexplained_seizure_or_fainting">Family unexplained seizure or fainting?</label>
+        <select id="unexplained_seizure_or_fainting" name="family_history.unexplained_seizure_or_fainting">
+            <option value="" {% if family_history.unexplainedSeizureOrFainting == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if family_history.unexplainedSeizureOrFainting == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if family_history.unexplainedSeizureOrFainting == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if family_history.unexplainedSeizureOrFainting == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+</div>

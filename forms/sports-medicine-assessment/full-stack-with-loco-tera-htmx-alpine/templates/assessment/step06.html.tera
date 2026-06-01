@@ -1,0 +1,96 @@
+<div class="card">
+    <h2>Step 6: Cardiovascular Screening (14-point AHA)</h2>
+    <p class="form-hint">Cardiac red flags and resting vitals.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="chest_pain_with_exertion">Chest pain with exertion?</label>
+            <select id="chest_pain_with_exertion" name="cardiovascular_screening.chest_pain_with_exertion">
+                <option value="" {% if cardiovascular_screening.chestPainWithExertion == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.chestPainWithExertion == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.chestPainWithExertion == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.chestPainWithExertion == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="unexplained_syncope">Unexplained syncope?</label>
+            <select id="unexplained_syncope" name="cardiovascular_screening.unexplained_syncope">
+                <option value="" {% if cardiovascular_screening.unexplainedSyncope == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.unexplainedSyncope == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.unexplainedSyncope == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.unexplainedSyncope == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="excessive_breathlessness">Excessive exertional breathlessness?</label>
+            <select id="excessive_breathlessness" name="cardiovascular_screening.excessive_breathlessness">
+                <option value="" {% if cardiovascular_screening.excessiveBreathlessness == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.excessiveBreathlessness == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.excessiveBreathlessness == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.excessiveBreathlessness == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="palpitations_or_irregular_beat">Palpitations / irregular heartbeat?</label>
+            <select id="palpitations_or_irregular_beat" name="cardiovascular_screening.palpitations_or_irregular_beat">
+                <option value="" {% if cardiovascular_screening.palpitationsOrIrregularBeat == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.palpitationsOrIrregularBeat == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.palpitationsOrIrregularBeat == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.palpitationsOrIrregularBeat == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="high_blood_pressure_diagnosis">High blood pressure diagnosis?</label>
+            <select id="high_blood_pressure_diagnosis" name="cardiovascular_screening.high_blood_pressure_diagnosis">
+                <option value="" {% if cardiovascular_screening.highBloodPressureDiagnosis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.highBloodPressureDiagnosis == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.highBloodPressureDiagnosis == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.highBloodPressureDiagnosis == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="heart_murmur_detected">Heart murmur detected?</label>
+            <select id="heart_murmur_detected" name="cardiovascular_screening.heart_murmur_detected">
+                <option value="" {% if cardiovascular_screening.heartMurmurDetected == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if cardiovascular_screening.heartMurmurDetected == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if cardiovascular_screening.heartMurmurDetected == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if cardiovascular_screening.heartMurmurDetected == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="restricted_activity_for_heart">Previously restricted for cardiac reasons?</label>
+        <select id="restricted_activity_for_heart" name="cardiovascular_screening.restricted_activity_for_heart">
+            <option value="" {% if cardiovascular_screening.restrictedActivityForHeart == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cardiovascular_screening.restrictedActivityForHeart == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cardiovascular_screening.restrictedActivityForHeart == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if cardiovascular_screening.restrictedActivityForHeart == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+
+    <h3>Resting vitals</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="resting_systolic">Resting systolic (mmHg)</label>
+            <input type="number" id="resting_systolic" name="cardiovascular_screening.resting_systolic"
+                   value="{{ cardiovascular_screening.restingSystolic }}">
+        </div>
+        <div class="form-group">
+            <label for="resting_diastolic">Resting diastolic (mmHg)</label>
+            <input type="number" id="resting_diastolic" name="cardiovascular_screening.resting_diastolic"
+                   value="{{ cardiovascular_screening.restingDiastolic }}">
+        </div>
+        <div class="form-group">
+            <label for="resting_heart_rate">Resting heart rate (bpm)</label>
+            <input type="number" id="resting_heart_rate" name="cardiovascular_screening.resting_heart_rate"
+                   value="{{ cardiovascular_screening.restingHeartRate }}">
+        </div>
+    </div>
+</div>

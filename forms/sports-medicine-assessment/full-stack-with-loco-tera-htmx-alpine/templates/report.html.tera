@@ -1,0 +1,97 @@
+{% extends "base.html.tera" %}
+
+{% block title %}PPE Report - {{ clearance_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Sports Medicine Assessment &mdash; Clearance Report</h1>
+    <div class="clearance-badge {{ clearance_class }}">{{ clearance_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        Answered fields: {{ answered_count }}
+    </p>
+</div>
+
+<!-- Athlete summary -->
+<div class="card">
+    <h2>Athlete Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>BMI:</strong> {{ data.demographics.bmi }} {% if bmi_category %}({{ bmi_category }}){% endif %}
+        </div>
+        <div>
+            <strong>Sport:</strong> {{ data.sportPositionDetails.primarySport }}<br>
+            <strong>Position:</strong> {{ data.sportPositionDetails.primaryPosition }}<br>
+            <strong>Contact level:</strong> {{ data.sportPositionDetails.contactLevel }}<br>
+            <strong>Competitive level:</strong> {{ data.sportPositionDetails.competitiveLevel }}
+        </div>
+    </div>
+</div>
+
+<!-- Clearance decision -->
+<div class="card">
+    <h2>Clearance Decision</h2>
+    <p><strong>Preferred clearance (clinician):</strong> {{ data.clearanceDecision.preferredClearance }}</p>
+    <p><strong>Computed clearance (engine):</strong> {{ clearance_label }}</p>
+    <p><strong>Conditions:</strong> {{ data.clearanceDecision.clearanceConditions }}</p>
+    <p><strong>Follow-up required:</strong> {{ data.clearanceDecision.followUpRequired }}</p>
+    <p><strong>Clinician:</strong> {{ data.clearanceDecision.clinicianName }} &mdash; {{ data.clearanceDecision.clinicianSignatureDate }}</p>
+    {% if data.clearanceDecision.additionalNotes %}
+    <p><strong>Notes:</strong> {{ data.clearanceDecision.additionalNotes }}</p>
+    {% endif %}
+</div>
+
+<!-- Safety flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-id"><code>{{ flag.id }}</code></span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired PPE rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired PPE Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="grade-badge grade-{{ rule.grade }}">{{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
