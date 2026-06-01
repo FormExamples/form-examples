@@ -1,0 +1,31 @@
+{% extends "base.html.tera" %}
+
+{% block title %}FP92A Medical Exemption Certificate - Application{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>FP92A &mdash; Medical Exemption Certificate</h1>
+    <p class="form-hint">
+        Complete all ten steps in this single-page wizard. The completed form
+        must be printed, signed in ink by the practitioner, and posted to
+        NHSBSA Bridge House.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit FP92A Application</button>
+    </div>
+</form>
+{% endblock %}

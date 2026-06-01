@@ -1,0 +1,13 @@
+<div class="card">
+    <h2>Step 4: Age Exemption Check</h2>
+    <p class="form-hint">Patients under 16, 16-18 in full-time education, or aged 60+ are already entitled to free NHS prescriptions on age grounds and do not need FP92A.</p>
+
+    <div class="form-group">
+        <label for="patientFullTimeEducation">Patient is 16-18 and in full-time education?</label>
+        <select id="patientFullTimeEducation" name="patientFullTimeEducation">
+            <option value="" {% if patient.fullTimeEducation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if patient.fullTimeEducation == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if patient.fullTimeEducation == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+</div>

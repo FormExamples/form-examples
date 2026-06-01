@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 7: Condition Detail (Part 1)</h2>
+    <p class="form-hint">Provide condition-specific detail for each selected condition.</p>
+
+    <h3>Permanent fistula</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_permanent_fistula_fistulaSite">Fistula site</label>
+            <input type="text" id="condition_permanent_fistula_fistulaSite" name="condition_permanent_fistula_fistulaSite" value="{{ cond_permanent_fistula.fistulaSite }}">
+        </div>
+        <div class="form-group">
+            <label for="condition_permanent_fistula_applianceType">Appliance type</label>
+            <input type="text" id="condition_permanent_fistula_applianceType" name="condition_permanent_fistula_applianceType" value="{{ cond_permanent_fistula.applianceType }}">
+        </div>
+    </div>
+
+    <h3>Hypoadrenalism / Diabetes insipidus / Hypoparathyroidism / Myxoedema</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_hypoadrenalism_substitutionTherapy">Hypoadrenalism substitution therapy</label>
+            <input type="text" id="condition_hypoadrenalism_substitutionTherapy" name="condition_hypoadrenalism_substitutionTherapy" value="{{ cond_hypoadrenalism.substitutionTherapy }}">
+        </div>
+        <div class="form-group">
+            <label for="condition_hypoadrenalism_onSubstitutionTherapy">On substitution therapy?</label>
+            <select id="condition_hypoadrenalism_onSubstitutionTherapy" name="condition_hypoadrenalism_onSubstitutionTherapy">
+                <option value="" {% if cond_hypoadrenalism.onSubstitutionTherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cond_hypoadrenalism.onSubstitutionTherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cond_hypoadrenalism.onSubstitutionTherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_diabetes_insipidus_substitutionTherapy">Diabetes insipidus substitution therapy</label>
+            <input type="text" id="condition_diabetes_insipidus_substitutionTherapy" name="condition_diabetes_insipidus_substitutionTherapy" value="{{ cond_diabetes_insipidus.substitutionTherapy }}">
+        </div>
+        <div class="form-group">
+            <label for="condition_diabetes_insipidus_onSubstitutionTherapy">On substitution therapy?</label>
+            <select id="condition_diabetes_insipidus_onSubstitutionTherapy" name="condition_diabetes_insipidus_onSubstitutionTherapy">
+                <option value="" {% if cond_diabetes_insipidus.onSubstitutionTherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if cond_diabetes_insipidus.onSubstitutionTherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if cond_diabetes_insipidus.onSubstitutionTherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_hypoparathyroidism_substitutionTherapy">Hypoparathyroidism substitution therapy</label>
+            <input type="text" id="condition_hypoparathyroidism_substitutionTherapy" name="condition_hypoparathyroidism_substitutionTherapy" value="{{ cond_hypoparathyroidism.substitutionTherapy }}">
+        </div>
+        <div class="form-group">
+            <label for="condition_myxoedema_substitutionTherapy">Myxoedema replacement therapy</label>
+            <input type="text" id="condition_myxoedema_substitutionTherapy" name="condition_myxoedema_substitutionTherapy" value="{{ cond_myxoedema.substitutionTherapy }}">
+        </div>
+    </div>
+
+    <h3>Diabetes mellitus</h3>
+    <div class="form-group">
+        <label for="condition_diabetes_mellitus_treatmentMode">Treatment mode</label>
+        <select id="condition_diabetes_mellitus_treatmentMode" name="condition_diabetes_mellitus_treatmentMode">
+            <option value="" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "" %}selected{% endif %}>&mdash;</option>
+            <option value="insulin" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "insulin" %}selected{% endif %}>Insulin</option>
+            <option value="oral-hypoglycaemic" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "oral-hypoglycaemic" %}selected{% endif %}>Oral hypoglycaemic</option>
+            <option value="insulin-and-oral" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "insulin-and-oral" %}selected{% endif %}>Insulin and oral</option>
+            <option value="glp1-agonist" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "glp1-agonist" %}selected{% endif %}>GLP-1 agonist</option>
+            <option value="diet-only" {% if cond_diabetes_mellitus.diabetesTreatmentMode == "diet-only" %}selected{% endif %}>Diet only (NOT eligible)</option>
+        </select>
+    </div>
+</div>

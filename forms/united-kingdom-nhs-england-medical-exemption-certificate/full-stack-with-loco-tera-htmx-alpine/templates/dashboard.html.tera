@@ -1,0 +1,95 @@
+{% extends "base.html.tera" %}
+
+{% block title %}FP92A Medical Exemption Certificate - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>FP92A Application Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Application</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, NHS number, practitioner...">
+    </div>
+    <div class="form-group">
+        <label for="outcome">Outcome</label>
+        <select id="outcome" name="outcome">
+            <option value="">All</option>
+            <option value="eligible" {% if outcome == "eligible" %}selected{% endif %}>Eligible</option>
+            <option value="ineligible" {% if outcome == "ineligible" %}selected{% endif %}>Ineligible</option>
+            <option value="requires-clarification" {% if outcome == "requires-clarification" %}selected{% endif %}>Requires clarification</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="redirect_to">Redirect</label>
+        <select id="redirect_to" name="redirect_to">
+            <option value="">All</option>
+            <option value="FW8" {% if redirect_to == "FW8" %}selected{% endif %}>FW8 (pregnancy)</option>
+            <option value="age-exemption" {% if redirect_to == "age-exemption" %}selected{% endif %}>Age exemption</option>
+            <option value="low-income-scheme" {% if redirect_to == "low-income-scheme" %}selected{% endif %}>Low-income scheme</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-priority flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed application{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>NHS number</th>
+            <th>Birth date</th>
+            <th>Practitioner</th>
+            <th>Practice</th>
+            <th>Outcome</th>
+            <th>Redirect</th>
+            <th>Valid from</th>
+            <th>Valid until</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in applications %}
+        <tr>
+            <td><a href="/assessment/{{ a.id }}/report">{{ a.patientName }}</a></td>
+            <td>{{ a.patientNhsNumber }}</td>
+            <td>{{ a.patientBirthDate }}</td>
+            <td>{{ a.practitionerName }}</td>
+            <td>{{ a.practiceName }}</td>
+            <td><span class="outcome-badge outcome-{{ a.outcome }}">{{ a.outcome }}</span></td>
+            <td>{{ a.redirectTo }}</td>
+            <td>{{ a.validFrom }}</td>
+            <td>{{ a.validUntil }}</td>
+            <td>
+                {% if a.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ a.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed applications found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

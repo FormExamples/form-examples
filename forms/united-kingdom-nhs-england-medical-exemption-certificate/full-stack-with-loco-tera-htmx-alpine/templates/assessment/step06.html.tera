@@ -1,0 +1,35 @@
+<div class="card">
+    <h2>Step 6: Qualifying Condition Selection</h2>
+    <p class="form-hint">Select every qualifying condition that applies. The FP92A requires at least one of the ten NHSBSA-recognised conditions.</p>
+
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_permanent_fistula_selected" value="yes" {% if cond_permanent_fistula.selected == "yes" %}checked{% endif %}> Permanent fistula (continuous surgical dressing / appliance)</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_hypoadrenalism_selected" value="yes" {% if cond_hypoadrenalism.selected == "yes" %}checked{% endif %}> Hypoadrenalism (e.g. Addison's disease) on substitution therapy</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_diabetes_insipidus_selected" value="yes" {% if cond_diabetes_insipidus.selected == "yes" %}checked{% endif %}> Diabetes insipidus / hypopituitarism</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_diabetes_mellitus_selected" value="yes" {% if cond_diabetes_mellitus.selected == "yes" %}checked{% endif %}> Diabetes mellitus (insulin / oral hypoglycaemic)</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_hypoparathyroidism_selected" value="yes" {% if cond_hypoparathyroidism.selected == "yes" %}checked{% endif %}> Hypoparathyroidism</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_myasthenia_gravis_selected" value="yes" {% if cond_myasthenia_gravis.selected == "yes" %}checked{% endif %}> Myasthenia gravis</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_myxoedema_selected" value="yes" {% if cond_myxoedema.selected == "yes" %}checked{% endif %}> Myxoedema (hypothyroidism on thyroid replacement)</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_epilepsy_selected" value="yes" {% if cond_epilepsy.selected == "yes" %}checked{% endif %}> Epilepsy on continuous anticonvulsant</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_disability_selected" value="yes" {% if cond_disability.selected == "yes" %}checked{% endif %}> Continuing physical disability (cannot leave home unaided)</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="condition_cancer_selected" value="yes" {% if cond_cancer.selected == "yes" %}checked{% endif %}> Cancer or effects of cancer / treatment</label>
+    </div>
+</div>

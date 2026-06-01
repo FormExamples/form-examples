@@ -1,37 +1,42 @@
 {% extends "base.html.tera" %}
 
-{% block title %}FP92A — Medical Exemption Certificate{% endblock %}
+{% block title %}FP92A Medical Exemption Certificate - Home{% endblock %}
 
 {% block content %}
-<div style="max-width:780px;margin:2rem auto;padding:1rem;">
-  <h1>FP92A — Medical Exemption Certificate</h1>
-  <p>
-    UK NHS Business Services Authority (NHSBSA) application for a medical
-    exemption certificate (MedEx). Captures patient and practitioner details,
-    one or more of the ten qualifying medical conditions, and the
-    practitioner's signed declaration. A successful application entitles the
-    holder to five years of free NHS prescriptions in England.
-  </p>
+<div class="landing">
+    <div class="card landing-card">
+        <h1>UK NHS England FP92A &mdash; Medical Exemption Certificate</h1>
+        <p class="landing-description">
+            UK NHS Business Services Authority (NHSBSA) application for a medical
+            exemption certificate (MedEx). Captures patient and practitioner
+            details, one or more of the ten qualifying medical conditions, and
+            the practitioner's signed declaration. A successful application
+            entitles the holder to five years of free NHS prescriptions in
+            England. The form must be printed, signed in ink by the
+            practitioner, and posted to NHSBSA Bridge House &mdash; NHSBSA
+            does not accept scans, photocopies, or emailed copies.
+        </p>
 
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>10 Steps</h3>
-      <p>Practitioner, patient, existing exemption check, age check, pregnancy check, condition selection, condition detail, attestation, declaration, sign-off.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>10 Conditions</h3>
-      <p>Closed list defined by NHSBSA — fistula, hypoadrenalism, diabetes insipidus, diabetes mellitus, hypoparathyroidism, myasthenia gravis, myxoedema, epilepsy, disability, cancer.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Flagged Issues</h3>
-      <p>Missing NHS number, missing signature, pregnancy (FW8), age exemption, active certificate already on file, diet-only diabetes, pending histology.</p>
-    </div>
-  </div>
+        <div class="landing-features">
+            <div class="feature">
+                <h3>10 Steps</h3>
+                <p>Practitioner, patient, existing exemption check, age check, pregnancy check, condition selection, condition detail, attestation, declaration, sign-off</p>
+            </div>
+            <div class="feature">
+                <h3>10 Conditions</h3>
+                <p>Closed NHSBSA list &mdash; fistula, hypoadrenalism, diabetes insipidus, diabetes mellitus, hypoparathyroidism, myasthenia gravis, myxoedema, epilepsy, disability, cancer</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Missing NHS number, missing signature, pregnancy (FW8), age exemption, active certificate, diet-only diabetes, pending histology</p>
+            </div>
+        </div>
 
-  <form method="POST" action="/application/new">
-    <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
-      Begin New FP92A Application
-    </button>
-  </form>
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New FP92A Application
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

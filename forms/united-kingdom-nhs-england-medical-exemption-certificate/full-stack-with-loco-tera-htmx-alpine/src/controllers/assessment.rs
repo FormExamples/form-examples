@@ -1,104 +1,63 @@
-//! HTTP routes for the UK NHS England FP92A medical exemption application.
-//!
-//! Endpoints:
-//!
-//! - `GET  /`                          → landing
-//! - `POST /application/new`           → create a new application, redirect
-//! - `GET  /application/{id}`          → single-page 10-step wizard
-//! - `POST /application/{id}/submit`   → save form data, redirect to report
-//! - `GET  /application/{id}/report`   → render eligibility report
-
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
 use crate::engine::fp92a_rules::ELIGIBLE_CONDITION_CODES;
+use crate::engine::fp92a_validator::validate_fp92a;
 use crate::engine::types::{ApplicationData, QualifyingCondition};
-use crate::views::application::{build_application_context, build_report_context};
-use crate::Store;
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::{build_assessment_context, build_report_context};
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
-    let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+/// POST /assessment/new -- create a new draft FP92A application, redirect to wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create application: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// POST /application/new — create a new application, redirect to its wizard.
-async fn new_application(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut data = ApplicationData::default();
-    // Pre-seed an entry for every NHSBSA-recognised condition so that the
-    // wizard can render a checkbox for each, and so that `selected = ""`
-    // distinguishes "not chosen" from "chosen with empty detail".
-    for code in ELIGIBLE_CONDITION_CODES.iter() {
-        data.conditions.push(QualifyingCondition {
-            code: (*code).to_string(),
-            ..Default::default()
-        });
-    }
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, data);
-    Redirect::to(&format!("/application/{id}"))
-}
-
-/// GET /application/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page 10-step FP92A wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_application_context(&data, id);
-    render(&tera, "application/index.html.tera", &context)
-}
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
 
-/// POST /application/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_application_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
-    }
-    Redirect::to(&format!("/application/{id}/report"))
-}
+    let data: ApplicationData = item.application_data().unwrap_or_default();
 
-/// GET /application/{id}/report — render the validated report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "application/report.html.tera", &context)
+    let context = build_assessment_context(&data, id);
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
 /// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
 /// strongly-typed `ApplicationData`. Unknown / blank fields fall back to
-/// defaults.
+/// defaults. Form field names are flat camelCase, matching the wizard
+/// template's `name=` attributes.
 fn form_to_application_data(form: &HashMap<String, String>) -> ApplicationData {
     let mut data = ApplicationData::default();
     let s = |k: &str| form.get(k).cloned().unwrap_or_default();
 
-    // ─── Practitioner (Step 1) ──────────────────────────
+    // Practitioner (Step 1)
     data.practitioner.name = s("practitionerName");
     data.practitioner.role = s("practitionerRole");
     data.practitioner.registration_body = s("practitionerRegistrationBody");
@@ -111,7 +70,7 @@ fn form_to_application_data(form: &HashMap<String, String>) -> ApplicationData {
     data.practitioner.email = s("practitionerEmail");
     data.practitioner.completed_date = s("practitionerCompletedDate");
 
-    // ─── Patient (Step 2 / 4 / 5) ───────────────────────
+    // Patient (Step 2 / 4 / 5)
     data.patient.title = s("patientTitle");
     data.patient.surname = s("patientSurname");
     data.patient.forenames = s("patientForenames");
@@ -125,14 +84,14 @@ fn form_to_application_data(form: &HashMap<String, String>) -> ApplicationData {
     data.patient.full_time_education = s("patientFullTimeEducation");
     data.patient.pregnancy_status = s("patientPregnancyStatus");
 
-    // ─── Existing exemption (Step 3) ────────────────────
+    // Existing exemption (Step 3)
     data.existing_exemption.application_kind = s("applicationKind");
     data.existing_exemption.has_existing_certificate = s("hasExistingCertificate");
     data.existing_exemption.previous_certificate_number = s("previousCertificateNumber");
     data.existing_exemption.previous_certificate_expiry_date =
         s("previousCertificateExpiryDate");
 
-    // ─── Qualifying conditions (Step 6 / 7 / 8) ─────────
+    // Qualifying conditions (Step 6 / 7 / 8)
     for code in ELIGIBLE_CONDITION_CODES.iter() {
         let prefix = condition_form_prefix(code);
         let selected = s(&format!("condition_{prefix}_selected"));
@@ -145,7 +104,6 @@ fn form_to_application_data(form: &HashMap<String, String>) -> ApplicationData {
             treatment_detail: s(&format!("condition_{prefix}_treatmentDetail")),
             ..Default::default()
         };
-        // Condition-specific fields:
         match *code {
             "permanent-fistula" => {
                 c.fistula_site = s("condition_permanent_fistula_fistulaSite");
@@ -185,21 +143,20 @@ fn form_to_application_data(form: &HashMap<String, String>) -> ApplicationData {
         data.conditions.push(c);
     }
 
-    // ─── Declaration (Step 9) ───────────────────────────
+    // Declaration (Step 9)
     data.declaration.signature_present = s("declarationSignaturePresent");
     data.declaration.access_to_medical_records = s("declarationAccessToMedicalRecords");
     data.declaration.declaration_text = s("declarationText");
     data.declaration.signature_date = s("declarationSignatureDate");
 
-    // ─── Step 10 notes ──────────────────────────────────
+    // Step 10 notes
     data.notes = s("applicationNotes");
 
     data
 }
 
-/// Map a condition code (kebab-case) to the form-name prefix (snake_case-ish
-/// short form). These prefixes match the `name=` attributes used in the
-/// template inputs.
+/// Map a condition code (kebab-case) to the form-name prefix used in `name=`
+/// attributes within the wizard template.
 fn condition_form_prefix(code: &str) -> &'static str {
     match code {
         "permanent-fistula" => "permanent_fistula",
@@ -216,26 +173,89 @@ fn condition_form_prefix(code: &str) -> &'static str {
     }
 }
 
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
-        }
-    }
+/// POST /assessment/{id}/submit -- merge form data into the JSONB blob,
+/// redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form): axum::extract::Form<HashMap<String, String>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let new_data = form_to_application_data(&form);
+    let data_value = serde_json::to_value(&new_data)
+        .map_err(|e| Error::BadRequest(format!("Failed to serialise application data: {e}")))?;
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
 }
 
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/application/new", post(new_application))
-        .route("/application/{id}", get(show))
-        .route("/application/{id}/submit", post(submit))
-        .route("/application/{id}/report", get(report))
+/// GET /assessment/{id}/report -- run the grading engine, persist the
+/// result, and render the report template.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let application_data: ApplicationData = item
+        .application_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid application data: {e}")))?;
+
+    let grade = validate_fp92a(&application_data);
+
+    // Persist the grading result.
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let context = build_report_context(&application_data, &grade, id);
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
+    let context = Context::new();
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

@@ -1,0 +1,32 @@
+<div class="card">
+    <h2>Step 9: Practitioner Declaration</h2>
+    <p class="form-hint">NHSBSA only accepts FP92A forms signed in ink by the practitioner who has access to the patient's medical records.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="declarationSignaturePresent">Signed in ink?</label>
+            <select id="declarationSignaturePresent" name="declarationSignaturePresent">
+                <option value="" {% if declaration.signaturePresent == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if declaration.signaturePresent == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if declaration.signaturePresent == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="declarationAccessToMedicalRecords">Access to patient medical records?</label>
+            <select id="declarationAccessToMedicalRecords" name="declarationAccessToMedicalRecords">
+                <option value="" {% if declaration.accessToMedicalRecords == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if declaration.accessToMedicalRecords == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if declaration.accessToMedicalRecords == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="declarationSignatureDate">Signature date</label>
+            <input type="date" id="declarationSignatureDate" name="declarationSignatureDate" value="{{ declaration.signatureDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="declarationText">Declaration text (optional)</label>
+        <textarea id="declarationText" name="declarationText" rows="3">{{ declaration.declarationText }}</textarea>
+    </div>
+</div>
