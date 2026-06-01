@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Pre-Operative Assessment by Clinician{% endblock title %}</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="/static/site.css" />
+  {% block head %}{% endblock head %}
+</head>
+<body hx-boost="true">
+  <header class="site-header">
+    <a class="brand" href="/assessment">Pre-Operative Assessment by Clinician</a>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock content %}
+  </main>
+  <footer class="site-footer">
+    <p>Clinician-led pre-operative assessment for the operating team. UK NHS reference implementation.</p>
+  </footer>
+</body>
+</html>
