@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 6: Collaboration &amp; Teamwork</h2>
+    <p class="form-hint">Whether teams cooperate effectively across boundaries and resolve conflict constructively.</p>
+
+    <div class="form-group">
+        <label for="collaboration_cl1">1. My colleagues collaborate well with each other.</label>
+        <select id="collaboration_cl1" name="collaboration.cl1">
+            <option value="" {% if collaboration.cl1 == "" or collaboration.cl1 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if collaboration.cl1 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if collaboration.cl1 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if collaboration.cl1 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if collaboration.cl1 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if collaboration.cl1 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="collaboration_cl2">2. Teams across the organisation cooperate effectively.</label>
+        <select id="collaboration_cl2" name="collaboration.cl2">
+            <option value="" {% if collaboration.cl2 == "" or collaboration.cl2 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if collaboration.cl2 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if collaboration.cl2 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if collaboration.cl2 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if collaboration.cl2 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if collaboration.cl2 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="collaboration_cl3">3. Conflict is handled constructively when it arises.</label>
+        <select id="collaboration_cl3" name="collaboration.cl3">
+            <option value="" {% if collaboration.cl3 == "" or collaboration.cl3 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if collaboration.cl3 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if collaboration.cl3 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if collaboration.cl3 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if collaboration.cl3 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if collaboration.cl3 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="collaboration_cl4">4. People here are willing to help each other when needed.</label>
+        <select id="collaboration_cl4" name="collaboration.cl4">
+            <option value="" {% if collaboration.cl4 == "" or collaboration.cl4 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if collaboration.cl4 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if collaboration.cl4 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if collaboration.cl4 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if collaboration.cl4 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if collaboration.cl4 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+</div>

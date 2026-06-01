@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 4: Inclusion &amp; Belonging</h2>
+    <p class="form-hint">Whether everyone is treated with respect, has equal opportunity, and feels they belong.</p>
+
+    <div class="form-group">
+        <label for="inclusion_in1">1. People from all backgrounds are treated fairly here.</label>
+        <select id="inclusion_in1" name="inclusion.in1">
+            <option value="" {% if inclusion.in1 == "" or inclusion.in1 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if inclusion.in1 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if inclusion.in1 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if inclusion.in1 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if inclusion.in1 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if inclusion.in1 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="inclusion_in2">2. I feel a genuine sense of belonging at this organisation.</label>
+        <select id="inclusion_in2" name="inclusion.in2">
+            <option value="" {% if inclusion.in2 == "" or inclusion.in2 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if inclusion.in2 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if inclusion.in2 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if inclusion.in2 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if inclusion.in2 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if inclusion.in2 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="inclusion_in3">3. My voice is heard and considered, regardless of my role or background.</label>
+        <select id="inclusion_in3" name="inclusion.in3">
+            <option value="" {% if inclusion.in3 == "" or inclusion.in3 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if inclusion.in3 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if inclusion.in3 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if inclusion.in3 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if inclusion.in3 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if inclusion.in3 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="inclusion_in4">4. Inappropriate or disrespectful behaviour is addressed promptly when it occurs.</label>
+        <select id="inclusion_in4" name="inclusion.in4">
+            <option value="" {% if inclusion.in4 == "" or inclusion.in4 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if inclusion.in4 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if inclusion.in4 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if inclusion.in4 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if inclusion.in4 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if inclusion.in4 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="inclusion_in5">5. Hiring, development and promotion decisions are made fairly.</label>
+        <select id="inclusion_in5" name="inclusion.in5">
+            <option value="" {% if inclusion.in5 == "" or inclusion.in5 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if inclusion.in5 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if inclusion.in5 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if inclusion.in5 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if inclusion.in5 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if inclusion.in5 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+</div>

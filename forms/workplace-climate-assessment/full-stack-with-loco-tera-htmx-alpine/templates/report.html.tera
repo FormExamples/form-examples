@@ -1,0 +1,174 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Climate Assessment Report - {{ category_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Workplace Climate Assessment &mdash; Report</h1>
+    <div class="checklist-badge checklist-{{ category }} {{ category_class }}">{{ category_label }}</div>
+    <div class="checklist-label">
+        Composite Workplace Climate Index:
+        {% if composite_score %}{{ composite_score }}{% else %}&mdash;{% endif %} / 100
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        Items answered: {{ answered_count }} / {{ total_count }}
+    </p>
+</div>
+
+<!-- Per-Domain Scores -->
+<div class="card">
+    <h2>Domain Scores</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Domain</th>
+                <th>Mean (1&ndash;5)</th>
+                <th>Score (0&ndash;100)</th>
+                <th>Answered</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Leadership &amp; Management</td>
+                <td>{% if domain_scores.leadership.mean %}{{ domain_scores.leadership.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.leadership.score %}{{ domain_scores.leadership.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.leadership.answeredCount }} / {{ domain_scores.leadership.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.leadership.category }}">{{ domain_scores.leadership.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Psychological Safety</td>
+                <td>{% if domain_scores.psychSafety.mean %}{{ domain_scores.psychSafety.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.psychSafety.score %}{{ domain_scores.psychSafety.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.psychSafety.answeredCount }} / {{ domain_scores.psychSafety.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.psychSafety.category }}">{{ domain_scores.psychSafety.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Inclusion &amp; Belonging</td>
+                <td>{% if domain_scores.inclusion.mean %}{{ domain_scores.inclusion.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.inclusion.score %}{{ domain_scores.inclusion.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.inclusion.answeredCount }} / {{ domain_scores.inclusion.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.inclusion.category }}">{{ domain_scores.inclusion.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Communication</td>
+                <td>{% if domain_scores.communication.mean %}{{ domain_scores.communication.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.communication.score %}{{ domain_scores.communication.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.communication.answeredCount }} / {{ domain_scores.communication.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.communication.category }}">{{ domain_scores.communication.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Collaboration &amp; Teamwork</td>
+                <td>{% if domain_scores.collaboration.mean %}{{ domain_scores.collaboration.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.collaboration.score %}{{ domain_scores.collaboration.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.collaboration.answeredCount }} / {{ domain_scores.collaboration.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.collaboration.category }}">{{ domain_scores.collaboration.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Recognition &amp; Reward</td>
+                <td>{% if domain_scores.recognition.mean %}{{ domain_scores.recognition.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.recognition.score %}{{ domain_scores.recognition.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.recognition.answeredCount }} / {{ domain_scores.recognition.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.recognition.category }}">{{ domain_scores.recognition.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Wellbeing</td>
+                <td>{% if domain_scores.wellbeing.mean %}{{ domain_scores.wellbeing.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.wellbeing.score %}{{ domain_scores.wellbeing.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.wellbeing.answeredCount }} / {{ domain_scores.wellbeing.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.wellbeing.category }}">{{ domain_scores.wellbeing.category }}</span></td>
+            </tr>
+            <tr>
+                <td>Career Development</td>
+                <td>{% if domain_scores.career.mean %}{{ domain_scores.career.mean }}{% else %}&mdash;{% endif %}</td>
+                <td>{% if domain_scores.career.score %}{{ domain_scores.career.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_scores.career.answeredCount }} / {{ domain_scores.career.totalCount }}</td>
+                <td><span class="checklist-badge checklist-{{ domain_scores.career.category }}">{{ domain_scores.career.category }}</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Demographics -->
+<div class="card">
+    <h2>Respondent context (anonymised)</h2>
+    <p>
+        <strong>Department:</strong> {{ data.demographics.department }}<br>
+        <strong>Tenure:</strong> {{ data.demographics.tenureBand }}<br>
+        <strong>Hours:</strong> {{ data.demographics.hoursBand }}<br>
+        <strong>Role level:</strong> {{ data.demographics.roleLevel }}<br>
+        <strong>Work location:</strong> {{ data.demographics.workLocation }}
+    </p>
+</div>
+
+<!-- Overall climate items + recommend choice + free text -->
+<div class="card">
+    <h2>Overall climate &amp; recommendations</h2>
+    <p>
+        <strong>Overall climate is positive (oc1):</strong> {{ data.overall.oc1 }}<br>
+        <strong>Would recommend as a place to work (oc2):</strong> {{ data.overall.oc2 }}<br>
+        <strong>Organisation lives its values (oc3):</strong> {{ data.overall.oc3 }}<br>
+        <strong>Recommend as place to work (explicit choice):</strong> {{ data.overall.recommendAsPlaceToWork }}
+    </p>
+    {% if data.overall.biggestStrength %}
+    <p><strong>Biggest strength:</strong><br>{{ data.overall.biggestStrength }}</p>
+    {% endif %}
+    {% if data.overall.biggestImprovement %}
+    <p><strong>Biggest improvement:</strong><br>{{ data.overall.biggestImprovement }}</p>
+    {% endif %}
+    {% if data.overall.otherComments %}
+    <p><strong>Other comments:</strong><br>{{ data.overall.otherComments }}</p>
+    {% endif %}
+</div>
+
+<!-- Flagged Issues -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Per-item responses -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Per-item responses ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Domain</th>
+                <th>Statement</th>
+                <th>Response (1&ndash;5)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.domain }}</td>
+                <td>{{ rule.label }}</td>
+                <td>{{ rule.rawValue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

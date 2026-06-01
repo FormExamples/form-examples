@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 7: Recognition &amp; Reward</h2>
+    <p class="form-hint">Whether good work is noticed, appreciated and rewarded fairly.</p>
+
+    <div class="form-group">
+        <label for="recognition_re1">1. I receive meaningful recognition when I do good work.</label>
+        <select id="recognition_re1" name="recognition.re1">
+            <option value="" {% if recognition.re1 == "" or recognition.re1 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if recognition.re1 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if recognition.re1 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if recognition.re1 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if recognition.re1 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if recognition.re1 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recognition_re2">2. Pay decisions in this organisation are made fairly.</label>
+        <select id="recognition_re2" name="recognition.re2">
+            <option value="" {% if recognition.re2 == "" or recognition.re2 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if recognition.re2 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if recognition.re2 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if recognition.re2 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if recognition.re2 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if recognition.re2 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recognition_re3">3. High performers are recognised and rewarded appropriately.</label>
+        <select id="recognition_re3" name="recognition.re3">
+            <option value="" {% if recognition.re3 == "" or recognition.re3 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if recognition.re3 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if recognition.re3 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if recognition.re3 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if recognition.re3 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if recognition.re3 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="recognition_re4">4. My contributions are valued by my team and manager.</label>
+        <select id="recognition_re4" name="recognition.re4">
+            <option value="" {% if recognition.re4 == "" or recognition.re4 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if recognition.re4 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if recognition.re4 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if recognition.re4 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if recognition.re4 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if recognition.re4 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+</div>

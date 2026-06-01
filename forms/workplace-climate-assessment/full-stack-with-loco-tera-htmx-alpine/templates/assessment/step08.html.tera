@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 8: Wellbeing</h2>
+    <p class="form-hint">Whether the workload, hours and culture support physical and mental wellbeing.</p>
+
+    <div class="form-group">
+        <label for="wellbeing_we1">1. My workload is manageable.</label>
+        <select id="wellbeing_we1" name="wellbeing.we1">
+            <option value="" {% if wellbeing.we1 == "" or wellbeing.we1 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if wellbeing.we1 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if wellbeing.we1 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if wellbeing.we1 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if wellbeing.we1 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if wellbeing.we1 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="wellbeing_we2">2. I am able to maintain a healthy balance between work and my personal life.</label>
+        <select id="wellbeing_we2" name="wellbeing.we2">
+            <option value="" {% if wellbeing.we2 == "" or wellbeing.we2 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if wellbeing.we2 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if wellbeing.we2 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if wellbeing.we2 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if wellbeing.we2 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if wellbeing.we2 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="wellbeing_we3">3. I rarely feel exhausted or burnt out at the end of the working week.</label>
+        <select id="wellbeing_we3" name="wellbeing.we3">
+            <option value="" {% if wellbeing.we3 == "" or wellbeing.we3 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if wellbeing.we3 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if wellbeing.we3 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if wellbeing.we3 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if wellbeing.we3 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if wellbeing.we3 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="wellbeing_we4">4. This organisation actively supports employee mental health.</label>
+        <select id="wellbeing_we4" name="wellbeing.we4">
+            <option value="" {% if wellbeing.we4 == "" or wellbeing.we4 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if wellbeing.we4 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if wellbeing.we4 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if wellbeing.we4 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if wellbeing.we4 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if wellbeing.we4 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="wellbeing_we5">5. I am able to take time off when I need it.</label>
+        <select id="wellbeing_we5" name="wellbeing.we5">
+            <option value="" {% if wellbeing.we5 == "" or wellbeing.we5 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if wellbeing.we5 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if wellbeing.we5 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if wellbeing.we5 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if wellbeing.we5 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if wellbeing.we5 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 3: Psychological Safety</h2>
+    <p class="form-hint">Whether people can speak up, raise concerns and admit mistakes without fear of being punished or humiliated.</p>
+
+    <div class="form-group">
+        <label for="psych_safety_ps1">1. I can raise difficult issues at work without fear of negative consequences.</label>
+        <select id="psych_safety_ps1" name="psych_safety.ps1">
+            <option value="" {% if psych_safety.ps1 == "" or psych_safety.ps1 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if psych_safety.ps1 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if psych_safety.ps1 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if psych_safety.ps1 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if psych_safety.ps1 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if psych_safety.ps1 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="psych_safety_ps2">2. I can admit a mistake here without being humiliated or punished.</label>
+        <select id="psych_safety_ps2" name="psych_safety.ps2">
+            <option value="" {% if psych_safety.ps2 == "" or psych_safety.ps2 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if psych_safety.ps2 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if psych_safety.ps2 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if psych_safety.ps2 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if psych_safety.ps2 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if psych_safety.ps2 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="psych_safety_ps3">3. My colleagues respect different opinions, including disagreement.</label>
+        <select id="psych_safety_ps3" name="psych_safety.ps3">
+            <option value="" {% if psych_safety.ps3 == "" or psych_safety.ps3 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if psych_safety.ps3 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if psych_safety.ps3 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if psych_safety.ps3 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if psych_safety.ps3 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if psych_safety.ps3 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="psych_safety_ps4">4. When I raise a concern, it is taken seriously.</label>
+        <select id="psych_safety_ps4" name="psych_safety.ps4">
+            <option value="" {% if psych_safety.ps4 == "" or psych_safety.ps4 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if psych_safety.ps4 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if psych_safety.ps4 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if psych_safety.ps4 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if psych_safety.ps4 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if psych_safety.ps4 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="psych_safety_ps5">5. I feel safe being myself at work.</label>
+        <select id="psych_safety_ps5" name="psych_safety.ps5">
+            <option value="" {% if psych_safety.ps5 == "" or psych_safety.ps5 == null %}selected{% endif %}>&mdash;</option>
+            <option value="1" {% if psych_safety.ps5 == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+            <option value="2" {% if psych_safety.ps5 == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+            <option value="3" {% if psych_safety.ps5 == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+            <option value="4" {% if psych_safety.ps5 == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+            <option value="5" {% if psych_safety.ps5 == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+        </select>
+    </div>
+</div>

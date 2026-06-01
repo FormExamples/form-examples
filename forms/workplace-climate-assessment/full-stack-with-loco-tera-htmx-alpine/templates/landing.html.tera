@@ -1,0 +1,40 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Climate Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Workplace Climate Assessment</h1>
+        <p class="landing-description">
+            Anonymous Likert-scale (1&ndash;5) survey of organisational climate, culture,
+            psychological safety, inclusion, communication, collaboration, recognition,
+            wellbeing, and career development. Generates a 0&ndash;100 composite
+            <strong>Workplace Climate Index</strong> with five categories
+            (Thriving / Healthy / Developing / Strained / Critical) and a triage
+            report of flagged issues for HR and leadership review.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Eight Graded Domains</h3>
+                <p>Leadership, Psychological Safety, Inclusion, Communication, Collaboration, Recognition, Wellbeing, Career &mdash; each scored 0&ndash;100</p>
+            </div>
+            <div class="feature">
+                <h3>Anonymous</h3>
+                <p>Captures broad demographic banding only; free-text fields are scanned for accidental identifying details</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>High / medium / low triage for critical scores, strong-disagree signals, retention risk, and suggestion-box feedback</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
