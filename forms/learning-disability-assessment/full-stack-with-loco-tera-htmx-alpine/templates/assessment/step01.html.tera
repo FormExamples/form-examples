@@ -1,0 +1,60 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Basic patient information.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="preferred_name">Preferred name (what the person likes to be called)</label>
+        <input type="text" id="preferred_name" name="demographics.preferred_name"
+               value="{{ demographics.preferredName }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="nhs_number">NHS Number</label>
+            <input type="text" id="nhs_number" name="demographics.nhs_number"
+                   value="{{ demographics.nhsNumber }}" placeholder="000 000 0000">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sex">Sex</label>
+        <select id="sex" name="demographics.sex">
+            <option value="" {% if demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+            <option value="male" {% if demographics.sex == "male" %}selected{% endif %}>Male</option>
+            <option value="female" {% if demographics.sex == "female" %}selected{% endif %}>Female</option>
+            <option value="other" {% if demographics.sex == "other" %}selected{% endif %}>Other</option>
+            <option value="prefer-not-to-say" {% if demographics.sex == "prefer-not-to-say" %}selected{% endif %}>Prefer not to say</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gp_practice">GP practice</label>
+            <input type="text" id="gp_practice" name="demographics.gp_practice"
+                   value="{{ demographics.gpPractice }}">
+        </div>
+        <div class="form-group">
+            <label for="ethnicity">Ethnicity</label>
+            <input type="text" id="ethnicity" name="demographics.ethnicity"
+                   value="{{ demographics.ethnicity }}">
+        </div>
+    </div>
+</div>

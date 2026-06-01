@@ -1,0 +1,84 @@
+<div class="card">
+    <h2>Step 3: Communication Needs</h2>
+    <p class="form-hint">How the person prefers to communicate (Easy Read, Makaton, AAC).</p>
+
+    <div class="form-group">
+        <label for="verbal_ability">Verbal ability</label>
+        <select id="verbal_ability" name="communication_needs.verbal_ability">
+            <option value="" {% if communication_needs.verbalAbility == "" %}selected{% endif %}>&mdash;</option>
+            <option value="verbal" {% if communication_needs.verbalAbility == "verbal" %}selected{% endif %}>Verbal</option>
+            <option value="limited-verbal" {% if communication_needs.verbalAbility == "limited-verbal" %}selected{% endif %}>Limited verbal</option>
+            <option value="non-verbal" {% if communication_needs.verbalAbility == "non-verbal" %}selected{% endif %}>Non-verbal</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="uses_easy_read">Uses Easy Read materials?</label>
+        <select id="uses_easy_read" name="communication_needs.uses_easy_read">
+            <option value="" {% if communication_needs.usesEasyRead == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if communication_needs.usesEasyRead == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if communication_needs.usesEasyRead == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="uses_makaton">Uses Makaton signing?</label>
+        <select id="uses_makaton" name="communication_needs.uses_makaton">
+            <option value="" {% if communication_needs.usesMakaton == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if communication_needs.usesMakaton == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if communication_needs.usesMakaton == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="uses_pictures">Uses pictures or symbols?</label>
+        <select id="uses_pictures" name="communication_needs.uses_pictures">
+            <option value="" {% if communication_needs.usesPictures == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if communication_needs.usesPictures == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if communication_needs.usesPictures == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="uses_aac">Uses AAC device?</label>
+        <select id="uses_aac" name="communication_needs.uses_aac">
+            <option value="" {% if communication_needs.usesAac == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if communication_needs.usesAac == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if communication_needs.usesAac == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aac_details">AAC details (device, app, vocabulary)</label>
+        <input type="text" id="aac_details" name="communication_needs.aac_details"
+               value="{{ communication_needs.aacDetails }}">
+    </div>
+
+    <div class="form-group">
+        <label for="needs_interpreter">Does the person need a language interpreter?</label>
+        <select id="needs_interpreter" name="communication_needs.needs_interpreter">
+            <option value="" {% if communication_needs.needsInterpreter == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if communication_needs.needsInterpreter == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if communication_needs.needsInterpreter == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="interpreter_language">Interpreter language</label>
+        <input type="text" id="interpreter_language" name="communication_needs.interpreter_language"
+               value="{{ communication_needs.interpreterLanguage }}">
+    </div>
+
+    <div class="form-group">
+        <label for="preferred_communication_method">Preferred communication method</label>
+        <input type="text" id="preferred_communication_method" name="communication_needs.preferred_communication_method"
+               value="{{ communication_needs.preferredCommunicationMethod }}"
+               placeholder="e.g. short sentences, picture cards, calm voice">
+    </div>
+
+    <div class="form-group">
+        <label for="communication_notes">Communication notes</label>
+        <textarea id="communication_notes" name="communication_needs.communication_notes"
+                  placeholder="Anything else clinicians should know about communication&hellip;">{{ communication_needs.communicationNotes }}</textarea>
+    </div>
+</div>

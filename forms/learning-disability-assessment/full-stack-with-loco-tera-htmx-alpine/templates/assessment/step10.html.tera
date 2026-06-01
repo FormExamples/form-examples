@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 10: Health Action Plan</h2>
+    <p class="form-hint">
+        List actions agreed with the person, who owns each, and when they are due. Add up to six
+        actions below.
+    </p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="action-row">
+        <legend>Action {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="actions_{{ i }}_action">Action</label>
+                <input type="text" id="actions_{{ i }}_action" name="actions[{{ i }}].action"
+                       value="{% if health_action_plan.actions | length > i %}{{ health_action_plan.actions[i].action }}{% endif %}"
+                       placeholder="e.g. Refer to dietitian">
+            </div>
+            <div class="form-group">
+                <label for="actions_{{ i }}_owner">Owner</label>
+                <input type="text" id="actions_{{ i }}_owner" name="actions[{{ i }}].owner"
+                       value="{% if health_action_plan.actions | length > i %}{{ health_action_plan.actions[i].owner }}{% endif %}"
+                       placeholder="e.g. GP, carer">
+            </div>
+            <div class="form-group">
+                <label for="actions_{{ i }}_due_date">Due date</label>
+                <input type="date" id="actions_{{ i }}_due_date" name="actions[{{ i }}].due_date"
+                       value="{% if health_action_plan.actions | length > i %}{{ health_action_plan.actions[i].dueDate }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="next_review_date">Next review date</label>
+            <input type="date" id="next_review_date" name="health_action_plan.next_review_date"
+                   value="{{ health_action_plan.nextReviewDate }}">
+        </div>
+        <div class="form-group">
+            <label for="shared_with">Plan shared with</label>
+            <input type="text" id="shared_with" name="health_action_plan.shared_with"
+                   value="{{ health_action_plan.sharedWith }}"
+                   placeholder="e.g. carer, GP, day service">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="plan_notes">Plan notes</label>
+        <textarea id="plan_notes" name="health_action_plan.plan_notes"
+                  placeholder="Anything else that supports the plan&hellip;">{{ health_action_plan.planNotes }}</textarea>
+    </div>
+</div>

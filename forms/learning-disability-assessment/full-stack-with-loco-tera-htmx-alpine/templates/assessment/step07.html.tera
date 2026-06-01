@@ -1,0 +1,57 @@
+<div class="card">
+    <h2>Step 7: Behavioural Concerns &amp; Triggers</h2>
+    <p class="form-hint">Behaviours of concern and what helps when they occur.</p>
+
+    {% for item in [
+        {"id": "self_injurious", "name": "selfInjurious", "label": "Self-injurious behaviour?"},
+        {"id": "aggression", "name": "aggression", "label": "Aggression toward others?"},
+        {"id": "property_damage", "name": "propertyDamage", "label": "Property damage?"},
+        {"id": "absconding", "name": "absconding", "label": "Absconding?"},
+        {"id": "sexualised_behaviour", "name": "sexualisedBehaviour", "label": "Inappropriate sexualised behaviour?"}
+    ] %}
+    <div class="form-group">
+        <label for="{{ item.id }}">{{ item.label }}</label>
+        <select id="{{ item.id }}" name="behavioural_concerns.{{ item.id }}">
+            <option value="" {% if behavioural_concerns[item.name] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if behavioural_concerns[item.name] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if behavioural_concerns[item.name] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="known_triggers">Known triggers</label>
+        <textarea id="known_triggers" name="behavioural_concerns.known_triggers"
+                  placeholder="e.g. crowded places, loud noises, changes in routine">{{ behavioural_concerns.knownTriggers }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="calming_strategies">Calming strategies that help</label>
+        <textarea id="calming_strategies" name="behavioural_concerns.calming_strategies"
+                  placeholder="e.g. quiet space, sensory toys, familiar objects">{{ behavioural_concerns.calmingStrategies }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="has_behaviour_support_plan">Is there a positive behaviour support plan?</label>
+        <select id="has_behaviour_support_plan" name="behavioural_concerns.has_behaviour_support_plan">
+            <option value="" {% if behavioural_concerns.hasBehaviourSupportPlan == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if behavioural_concerns.hasBehaviourSupportPlan == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if behavioural_concerns.hasBehaviourSupportPlan == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="uses_prn">Does the person receive PRN sedative or psychotropic medication?</label>
+        <select id="uses_prn" name="behavioural_concerns.uses_prn">
+            <option value="" {% if behavioural_concerns.usesPrn == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if behavioural_concerns.usesPrn == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if behavioural_concerns.usesPrn == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="prn_details">PRN details (medication, dose, indication)</label>
+        <input type="text" id="prn_details" name="behavioural_concerns.prn_details"
+               value="{{ behavioural_concerns.prnDetails }}">
+    </div>
+</div>

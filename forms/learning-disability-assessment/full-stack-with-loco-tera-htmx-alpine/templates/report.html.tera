@@ -1,0 +1,120 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Assessment Report - {{ severity_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Learning Disability Assessment &mdash; Report</h1>
+    <div class="severity-badge {{ severity_class }}">{{ severity_label }}</div>
+    <div class="severity-description">{{ severity_description }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Case ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Preferred name:</strong> {{ data.demographics.preferredName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>NHS Number:</strong> {{ data.demographics.nhsNumber }}
+        </div>
+        <div>
+            <strong>GP Practice:</strong> {{ data.demographics.gpPractice }}<br>
+            <strong>Ethnicity:</strong> {{ data.demographics.ethnicity }}<br>
+            <strong>Primary carer:</strong> {{ data.carerSupport.primaryCarerName }}<br>
+            <strong>Relationship:</strong> {{ data.carerSupport.primaryCarerRelationship }}
+        </div>
+    </div>
+</div>
+
+<!-- Adaptive Functioning Summary -->
+<div class="card">
+    <h2>Adaptive Functioning</h2>
+    <p>
+        <strong>Mean adaptive support:</strong> {{ adaptive_score }} / 3<br>
+        <strong>Items answered:</strong> {{ answered_count }} / 10
+    </p>
+    {% if fired_rules | length > 0 %}
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Domain</th>
+                <th>Item</th>
+                <th>Support Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{{ rule.score }} / 3</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No adaptive-functioning items answered.</p>
+    {% endif %}
+</div>
+
+<!-- Flagged Issues -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-priority">{{ flag.priority | upper }}</span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Health Action Plan -->
+{% if data.healthActionPlan.actions and data.healthActionPlan.actions | length > 0 %}
+<div class="card">
+    <h2>Health Action Plan ({{ data.healthActionPlan.actions | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Owner</th>
+                <th>Due date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in data.healthActionPlan.actions %}
+            <tr>
+                <td>{{ a.action }}</td>
+                <td>{{ a.owner }}</td>
+                <td>{{ a.dueDate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        <strong>Next review date:</strong> {{ data.healthActionPlan.nextReviewDate }}<br>
+        <strong>Plan shared with:</strong> {{ data.healthActionPlan.sharedWith }}
+    </p>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

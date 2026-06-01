@@ -1,0 +1,59 @@
+<div class="card">
+    <h2>Step 8: Mental Capacity &amp; Consent</h2>
+    <p class="form-hint">Decision-specific capacity under the Mental Capacity Act 2005.</p>
+
+    {% for item in [
+        {"id": "can_consent_to_health_check", "name": "canConsentToHealthCheck", "label": "Can the person consent to this health check?"},
+        {"id": "can_consent_to_medication", "name": "canConsentToMedication", "label": "Can the person consent to medication decisions?"},
+        {"id": "can_consent_to_finances", "name": "canConsentToFinances", "label": "Can the person make decisions about finances?"}
+    ] %}
+    <div class="form-group">
+        <label for="{{ item.id }}">{{ item.label }}</label>
+        <select id="{{ item.id }}" name="mental_capacity_consent.{{ item.id }}">
+            <option value="" {% if mental_capacity_consent[item.name] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_capacity_consent[item.name] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_capacity_consent[item.name] == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if mental_capacity_consent[item.name] == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="has_lpa">Is there a Lasting Power of Attorney (health and welfare)?</label>
+        <select id="has_lpa" name="mental_capacity_consent.has_lpa">
+            <option value="" {% if mental_capacity_consent.hasLpa == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_capacity_consent.hasLpa == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_capacity_consent.hasLpa == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="lpa_details">LPA holder details</label>
+        <input type="text" id="lpa_details" name="mental_capacity_consent.lpa_details"
+               value="{{ mental_capacity_consent.lpaDetails }}">
+    </div>
+
+    <div class="form-group">
+        <label for="has_dols">Is a Deprivation of Liberty Safeguard (DoLS) in place?</label>
+        <select id="has_dols" name="mental_capacity_consent.has_dols">
+            <option value="" {% if mental_capacity_consent.hasDols == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_capacity_consent.hasDols == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_capacity_consent.hasDols == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="best_interests_required">Is a best-interests decision required for any item?</label>
+        <select id="best_interests_required" name="mental_capacity_consent.best_interests_required">
+            <option value="" {% if mental_capacity_consent.bestInterestsRequired == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if mental_capacity_consent.bestInterestsRequired == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if mental_capacity_consent.bestInterestsRequired == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="best_interests_notes">Best-interests decision notes</label>
+        <textarea id="best_interests_notes" name="mental_capacity_consent.best_interests_notes"
+                  placeholder="Who was consulted; what was decided; why it is in the person's best interests&hellip;">{{ mental_capacity_consent.bestInterestsNotes }}</textarea>
+    </div>
+</div>
