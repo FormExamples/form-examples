@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Cardiopulmonary Resuscitation Training - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Cardiopulmonary Resuscitation Training</h1>
+        <p class="landing-description">
+            Basic Life Support (BLS) cardiopulmonary resuscitation competency assessment
+            aligned with AHA/Resuscitation Council (UK) guidelines. Used by certified
+            examiners to verify a rescuer's adult BLS and AED skills with pass/fail
+            criteria and critical-action review.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Eight Steps</h3>
+                <p>Trainee details, scene safety, responsiveness, emergency activation, compressions, airway, AED, and team dynamics</p>
+            </div>
+            <div class="feature">
+                <h3>Critical Actions</h3>
+                <p>Compression rate &amp; depth, effective ventilation, and safe AED delivery &mdash; any failure forces Fail</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Real-time prioritised alerts for critical failures, expired certifications, and clustered deficiencies</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

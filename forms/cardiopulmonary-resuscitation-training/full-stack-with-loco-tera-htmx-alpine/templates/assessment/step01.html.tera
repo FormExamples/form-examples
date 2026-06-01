@@ -1,0 +1,55 @@
+<div class="card">
+    <h2>Step 1: Trainee Details</h2>
+    <p class="form-hint">Identify the trainee and the examiner running this session.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="trainee_details.first_name"
+                   value="{{ trainee_details.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="trainee_details.last_name"
+                   value="{{ trainee_details.lastName }}">
+        </div>
+        <div class="form-group">
+            <label for="trainee_id">Trainee ID</label>
+            <input type="text" id="trainee_id" name="trainee_details.trainee_id"
+                   value="{{ trainee_details.traineeId }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" name="trainee_details.role">
+                <option value="" {% if trainee_details.role == "" %}selected{% endif %}>&mdash;</option>
+                <option value="instructor" {% if trainee_details.role == "instructor" %}selected{% endif %}>Instructor</option>
+                <option value="first-responder" {% if trainee_details.role == "first-responder" %}selected{% endif %}>First Responder</option>
+                <option value="nurse" {% if trainee_details.role == "nurse" %}selected{% endif %}>Nurse</option>
+                <option value="paramedic" {% if trainee_details.role == "paramedic" %}selected{% endif %}>Paramedic</option>
+                <option value="physician" {% if trainee_details.role == "physician" %}selected{% endif %}>Physician</option>
+                <option value="other" {% if trainee_details.role == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="prior_certification_expiry">Prior Certification Expiry</label>
+            <input type="date" id="prior_certification_expiry" name="trainee_details.prior_certification_expiry"
+                   value="{{ trainee_details.priorCertificationExpiry }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="session_date">Session Date</label>
+            <input type="date" id="session_date" name="trainee_details.session_date"
+                   value="{{ trainee_details.sessionDate }}">
+        </div>
+        <div class="form-group">
+            <label for="examiner_name">Examiner Name</label>
+            <input type="text" id="examiner_name" name="trainee_details.examiner_name"
+                   value="{{ trainee_details.examinerName }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="card">
+    <h2>Step 7: AED Use &amp; Shock Delivery</h2>
+    <p class="form-hint">
+        Safe shock delivery is a <strong>critical action</strong>. Record time to first shock
+        in seconds.
+    </p>
+
+    <div class="form-group">
+        <label for="powered_on_promptly">AED powered on as soon as available</label>
+        <select id="powered_on_promptly" name="aed_shock_delivery.powered_on_promptly">
+            <option value="" {% if aed_shock_delivery.poweredOnPromptly == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if aed_shock_delivery.poweredOnPromptly == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if aed_shock_delivery.poweredOnPromptly == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if aed_shock_delivery.poweredOnPromptly == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="correct_pad_placement">Pads in correct anterolateral position on bare chest</label>
+        <select id="correct_pad_placement" name="aed_shock_delivery.correct_pad_placement">
+            <option value="" {% if aed_shock_delivery.correctPadPlacement == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if aed_shock_delivery.correctPadPlacement == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if aed_shock_delivery.correctPadPlacement == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if aed_shock_delivery.correctPadPlacement == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="cleared_during_analysis">Everyone clear during rhythm analysis</label>
+        <select id="cleared_during_analysis" name="aed_shock_delivery.cleared_during_analysis">
+            <option value="" {% if aed_shock_delivery.clearedDuringAnalysis == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if aed_shock_delivery.clearedDuringAnalysis == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if aed_shock_delivery.clearedDuringAnalysis == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if aed_shock_delivery.clearedDuringAnalysis == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="delivered_shock_safely"><strong>Critical:</strong> Shock delivered with no unsafe contact</label>
+        <select id="delivered_shock_safely" name="aed_shock_delivery.delivered_shock_safely">
+            <option value="" {% if aed_shock_delivery.deliveredShockSafely == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if aed_shock_delivery.deliveredShockSafely == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if aed_shock_delivery.deliveredShockSafely == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if aed_shock_delivery.deliveredShockSafely == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="resumed_compressions_immediately">Resumed compressions immediately after shock</label>
+        <select id="resumed_compressions_immediately" name="aed_shock_delivery.resumed_compressions_immediately">
+            <option value="" {% if aed_shock_delivery.resumedCompressionsImmediately == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if aed_shock_delivery.resumedCompressionsImmediately == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if aed_shock_delivery.resumedCompressionsImmediately == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if aed_shock_delivery.resumedCompressionsImmediately == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="time_to_first_shock_seconds">Time to first shock (seconds)</label>
+        <input type="number" step="1" id="time_to_first_shock_seconds" name="aed_shock_delivery.time_to_first_shock_seconds"
+               value="{{ aed_shock_delivery.timeToFirstShockSeconds }}" placeholder="Target &lt; 90 s">
+    </div>
+</div>
