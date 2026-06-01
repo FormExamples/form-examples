@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 7: Working Memory &amp; Processing Speed</h2>
+    <p class="form-hint">Standardised memory and speed scores plus observational indicators.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="working_memory_score">Working memory standardised score (DYS-008)</label>
+            <input type="number" min="40" max="160" id="working_memory_score"
+                   name="working_memory_processing_speed.working_memory_score"
+                   value="{{ working_memory_processing_speed.workingMemoryScore }}">
+        </div>
+        <div class="form-group">
+            <label for="processing_speed_score">Processing speed standardised score (DYS-009)</label>
+            <input type="number" min="40" max="160" id="processing_speed_score"
+                   name="working_memory_processing_speed.processing_speed_score"
+                   value="{{ working_memory_processing_speed.processingSpeedScore }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="difficulty_following_instructions">Difficulty following instructions?</label>
+            <select id="difficulty_following_instructions" name="working_memory_processing_speed.difficulty_following_instructions">
+                <option value="" {% if working_memory_processing_speed.difficultyFollowingInstructions == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if working_memory_processing_speed.difficultyFollowingInstructions == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if working_memory_processing_speed.difficultyFollowingInstructions == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="difficulty_remembering_sequences">Difficulty remembering sequences?</label>
+            <select id="difficulty_remembering_sequences" name="working_memory_processing_speed.difficulty_remembering_sequences">
+                <option value="" {% if working_memory_processing_speed.difficultyRememberingSequences == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if working_memory_processing_speed.difficultyRememberingSequences == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if working_memory_processing_speed.difficultyRememberingSequences == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="slow_to_complete_tasks">Slow to complete tasks?</label>
+            <select id="slow_to_complete_tasks" name="working_memory_processing_speed.slow_to_complete_tasks">
+                <option value="" {% if working_memory_processing_speed.slowToCompleteTasks == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if working_memory_processing_speed.slowToCompleteTasks == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if working_memory_processing_speed.slowToCompleteTasks == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="difficulty_taking_notes">Difficulty taking notes?</label>
+            <select id="difficulty_taking_notes" name="working_memory_processing_speed.difficulty_taking_notes">
+                <option value="" {% if working_memory_processing_speed.difficultyTakingNotes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if working_memory_processing_speed.difficultyTakingNotes == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if working_memory_processing_speed.difficultyTakingNotes == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="memory_notes">Memory notes</label>
+        <textarea id="memory_notes" name="working_memory_processing_speed.memory_notes">{{ working_memory_processing_speed.memoryNotes }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Dyslexia Assessment - Wizard{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Dyslexia Assessment</h1>
+    <p class="form-hint">
+        Complete all ten sections (demographics, developmental history, educational background,
+        reading, writing &amp; spelling, phonological processing, working memory &amp; processing
+        speed, emotional &amp; behavioural impact, previous support, and recommendations) and
+        submit to grade the assessment.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}

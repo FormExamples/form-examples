@@ -1,0 +1,67 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Basic identifying information and referral context.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="demographics.sex">
+                <option value="" {% if demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.sex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.sex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age_years">Age (years)</label>
+            <input type="number" min="0" id="age_years" name="demographics.age_years"
+                   value="{{ demographics.ageYears }}">
+        </div>
+        <div class="form-group">
+            <label for="handedness">Handedness</label>
+            <input type="text" id="handedness" name="demographics.handedness"
+                   value="{{ demographics.handedness }}" placeholder="right / left / mixed">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_language">Preferred Language</label>
+            <input type="text" id="preferred_language" name="demographics.preferred_language"
+                   value="{{ demographics.preferredLanguage }}">
+        </div>
+        <div class="form-group">
+            <label for="first_language">First Language</label>
+            <input type="text" id="first_language" name="demographics.first_language"
+                   value="{{ demographics.firstLanguage }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_source">Referral Source</label>
+        <input type="text" id="referral_source" name="demographics.referral_source"
+               value="{{ demographics.referralSource }}" placeholder="e.g. School SENCO, GP, parent">
+    </div>
+    <div class="form-group">
+        <label for="referral_reason">Referral Reason</label>
+        <textarea id="referral_reason" name="demographics.referral_reason">{{ demographics.referralReason }}</textarea>
+    </div>
+</div>

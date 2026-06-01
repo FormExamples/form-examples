@@ -1,0 +1,82 @@
+<div class="card">
+    <h2>Step 3: Educational Background</h2>
+    <p class="form-hint">Schooling, attendance, and previous assessments.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="school_type">School type</label>
+            <input type="text" id="school_type" name="educational_background.school_type"
+                   value="{{ educational_background.schoolType }}" placeholder="e.g. state primary, independent">
+        </div>
+        <div class="form-group">
+            <label for="current_year_group">Current year group</label>
+            <input type="text" id="current_year_group" name="educational_background.current_year_group"
+                   value="{{ educational_background.currentYearGroup }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="school_changes">School changes?</label>
+            <select id="school_changes" name="educational_background.school_changes">
+                <option value="" {% if educational_background.schoolChanges == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if educational_background.schoolChanges == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if educational_background.schoolChanges == "yes" %}selected{% endif %}>Yes</option>
+                <option value="unsure" {% if educational_background.schoolChanges == "unsure" %}selected{% endif %}>Unsure</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="school_change_count">Number of school changes</label>
+            <input type="number" min="0" id="school_change_count" name="educational_background.school_change_count"
+                   value="{{ educational_background.schoolChangeCount }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="attendance_issues">Attendance issues?</label>
+            <select id="attendance_issues" name="educational_background.attendance_issues">
+                <option value="" {% if educational_background.attendanceIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if educational_background.attendanceIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if educational_background.attendanceIssues == "yes" %}selected{% endif %}>Yes</option>
+                <option value="unsure" {% if educational_background.attendanceIssues == "unsure" %}selected{% endif %}>Unsure</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="esl_learner">English as a second language?</label>
+            <select id="esl_learner" name="educational_background.esl_learner">
+                <option value="" {% if educational_background.eslLearner == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if educational_background.eslLearner == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if educational_background.eslLearner == "yes" %}selected{% endif %}>Yes</option>
+                <option value="unsure" {% if educational_background.eslLearner == "unsure" %}selected{% endif %}>Unsure</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="attendance_details">Attendance details</label>
+        <textarea id="attendance_details" name="educational_background.attendance_details">{{ educational_background.attendanceDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="academic_strengths">Academic strengths</label>
+        <textarea id="academic_strengths" name="educational_background.academic_strengths">{{ educational_background.academicStrengths }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="academic_weaknesses">Academic weaknesses</label>
+        <textarea id="academic_weaknesses" name="educational_background.academic_weaknesses">{{ educational_background.academicWeaknesses }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="previous_assessments">Previous assessments?</label>
+        <select id="previous_assessments" name="educational_background.previous_assessments">
+            <option value="" {% if educational_background.previousAssessments == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if educational_background.previousAssessments == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if educational_background.previousAssessments == "yes" %}selected{% endif %}>Yes</option>
+            <option value="unsure" {% if educational_background.previousAssessments == "unsure" %}selected{% endif %}>Unsure</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="previous_assessment_details">Previous assessment details</label>
+        <textarea id="previous_assessment_details" name="educational_background.previous_assessment_details">{{ educational_background.previousAssessmentDetails }}</textarea>
+    </div>
+</div>

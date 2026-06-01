@@ -1,0 +1,83 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Dyslexia Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Dyslexia Assessment Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Name or referral source...">
+    </div>
+    <div class="form-group">
+        <label for="overall_severity">Overall Severity</label>
+        <select id="overall_severity" name="overall_severity">
+            <option value="">All</option>
+            <option value="none" {% if overall_severity == "none" %}selected{% endif %}>No dyslexia</option>
+            <option value="mild" {% if overall_severity == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if overall_severity == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if overall_severity == "severe" %}selected{% endif %}>Severe</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Created</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Referral</th>
+            <th>Severity</th>
+            <th>Lowest Score</th>
+            <th>Domains Answered</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.createdAt }}</a></td>
+            <td>{{ c.firstName }} {{ c.lastName }}</td>
+            <td>{{ c.dateOfBirth }}</td>
+            <td>{{ c.referralSource }}</td>
+            <td><span class="severity-badge severity-{{ c.overallSeverity }}">{{ c.overallSeverityLabel }}</span></td>
+            <td>{% if c.lowestScore %}{{ c.lowestScore }}{% else %}&mdash;{% endif %}</td>
+            <td>{{ c.answeredCount }} / 9</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Dyslexia Assessment Report - {{ overall_severity_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Dyslexia Assessment &mdash; Report</h1>
+    <div class="severity-badge severity-{{ overall_severity }}">{{ overall_severity_label }}</div>
+    {% if lowest_score %}
+    <div class="severity-label">Lowest standardised score: {{ lowest_score }}</div>
+    {% endif %}
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        Domains answered: {{ answered_count }} / 9
+    </p>
+</div>
+
+<!-- Demographics -->
+<div class="card">
+    <h2>Demographics</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>Handedness:</strong> {{ data.demographics.handedness }}
+        </div>
+        <div>
+            <strong>Preferred Language:</strong> {{ data.demographics.preferredLanguage }}<br>
+            <strong>First Language:</strong> {{ data.demographics.firstLanguage }}<br>
+            <strong>Referral Source:</strong> {{ data.demographics.referralSource }}<br>
+            <strong>Referral Reason:</strong> {{ data.demographics.referralReason }}
+        </div>
+    </div>
+</div>
+
+<!-- Per-domain scores -->
+<div class="card">
+    <h2>Domain Scores</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Score</th>
+                <th>Band</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in domain_scores %}
+            <tr>
+                <td><code>{{ d.id }}</code></td>
+                <td>{{ d.category }}</td>
+                <td>{{ d.description }}</td>
+                <td>{% if d.score %}{{ d.score }}{% else %}&mdash;{% endif %}</td>
+                <td>{{ domain_score_bands[loop.index0] }}</td>
+                <td><span class="severity-badge severity-{{ d.severity }}">{{ d.severity }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Additional flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Clinical Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Recommendations summary -->
+<div class="card">
+    <h2>Recommendations &amp; Support Plan</h2>
+    <p><strong>Structured Literacy:</strong> {{ data.recommendationsSupportPlan.structuredLiteracyRecommended }}</p>
+    <p><strong>Assistive Technology:</strong> {{ data.recommendationsSupportPlan.assistiveTechRecommended }}</p>
+    <p><strong>Extra Time:</strong> {{ data.recommendationsSupportPlan.extraTimeRecommended }}</p>
+    <p><strong>Specialist Assessment:</strong> {{ data.recommendationsSupportPlan.specialistAssessmentRecommended }}</p>
+    <p><strong>Parent Training:</strong> {{ data.recommendationsSupportPlan.parentTrainingRecommended }}</p>
+    <p><strong>Key Goals:</strong> {{ data.recommendationsSupportPlan.keyGoals }}</p>
+    <p><strong>Review Timeframe:</strong> {{ data.recommendationsSupportPlan.reviewTimeframe }}</p>
+    {% if data.recommendationsSupportPlan.additionalRecommendations %}
+    <p><strong>Additional Recommendations:</strong> {{ data.recommendationsSupportPlan.additionalRecommendations }}</p>
+    {% endif %}
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

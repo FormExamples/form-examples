@@ -1,0 +1,68 @@
+<div class="card">
+    <h2>Step 6: Phonological Processing</h2>
+    <p class="form-hint">Standardised phonological scores and observational indicators.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="phonological_awareness_score">Phonological awareness standardised score (DYS-005)</label>
+            <input type="number" min="40" max="160" id="phonological_awareness_score"
+                   name="phonological_processing.phonological_awareness_score"
+                   value="{{ phonological_processing.phonologicalAwarenessScore }}">
+        </div>
+        <div class="form-group">
+            <label for="phonological_memory_score">Phonological memory standardised score (DYS-006)</label>
+            <input type="number" min="40" max="160" id="phonological_memory_score"
+                   name="phonological_processing.phonological_memory_score"
+                   value="{{ phonological_processing.phonologicalMemoryScore }}">
+        </div>
+        <div class="form-group">
+            <label for="rapid_naming_score">Rapid naming standardised score (DYS-007)</label>
+            <input type="number" min="40" max="160" id="rapid_naming_score"
+                   name="phonological_processing.rapid_naming_score"
+                   value="{{ phonological_processing.rapidNamingScore }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="difficulty_rhyming">Difficulty rhyming?</label>
+            <select id="difficulty_rhyming" name="phonological_processing.difficulty_rhyming">
+                <option value="" {% if phonological_processing.difficultyRhyming == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if phonological_processing.difficultyRhyming == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if phonological_processing.difficultyRhyming == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="difficulty_segmenting_sounds">Difficulty segmenting sounds?</label>
+            <select id="difficulty_segmenting_sounds" name="phonological_processing.difficulty_segmenting_sounds">
+                <option value="" {% if phonological_processing.difficultySegmentingSounds == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if phonological_processing.difficultySegmentingSounds == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if phonological_processing.difficultySegmentingSounds == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="difficulty_blending_sounds">Difficulty blending sounds?</label>
+            <select id="difficulty_blending_sounds" name="phonological_processing.difficulty_blending_sounds">
+                <option value="" {% if phonological_processing.difficultyBlendingSounds == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if phonological_processing.difficultyBlendingSounds == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if phonological_processing.difficultyBlendingSounds == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="difficulty_learning_letter_sounds">Difficulty learning letter sounds?</label>
+            <select id="difficulty_learning_letter_sounds" name="phonological_processing.difficulty_learning_letter_sounds">
+                <option value="" {% if phonological_processing.difficultyLearningLetterSounds == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if phonological_processing.difficultyLearningLetterSounds == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if phonological_processing.difficultyLearningLetterSounds == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phonological_notes">Phonological notes</label>
+        <textarea id="phonological_notes" name="phonological_processing.phonological_notes">{{ phonological_processing.phonologicalNotes }}</textarea>
+    </div>
+</div>

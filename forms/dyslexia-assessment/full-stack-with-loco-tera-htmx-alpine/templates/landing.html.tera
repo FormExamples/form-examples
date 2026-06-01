@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Dyslexia Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Dyslexia Assessment</h1>
+        <p class="landing-description">
+            Specific learning difficulty evaluation using standardised scores (mean 100, SD 15)
+            across reading, writing, spelling, phonological processing, working memory, and
+            processing speed. The output is a severity classification (no / mild / moderate /
+            severe dyslexia) together with clinician-facing flags for sensory, developmental,
+            educational, and emotional contributors.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Demographics, developmental, educational, reading, writing, phonological, memory, emotional, support, recommendations</p>
+            </div>
+            <div class="feature">
+                <h3>Standardised Scoring</h3>
+                <p>Severity driven by the most-impaired domain across nine standardised score fields</p>
+            </div>
+            <div class="feature">
+                <h3>Clinical Flags</h3>
+                <p>Real-time alerts for hearing, vision, family history, ESL learners, and emotional impact</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
