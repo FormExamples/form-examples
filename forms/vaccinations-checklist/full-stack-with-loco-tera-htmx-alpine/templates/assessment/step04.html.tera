@@ -1,0 +1,139 @@
+<div class="card">
+    <h2>Step 4: Occupational Vaccines</h2>
+    <p class="form-hint">Vaccines required by occupational health (Hepatitis B, BCG, Varicella, Hep A, Typhoid, Rabies).</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hepatitis_b_course">Hepatitis B course</label>
+            <select id="hepatitis_b_course" name="occupationalVaccines.hepatitisBCourse">
+                <option value="" {% if occupational_vaccines.hepatitisBCourse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.hepatitisBCourse == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.hepatitisBCourse == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.hepatitisBCourse == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_course_date">Hep B course date</label>
+            <input type="date" id="hepatitis_b_course_date" name="occupationalVaccines.hepatitisBCourseDate"
+                   value="{{ occupational_vaccines.hepatitisBCourseDate }}">
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_doses_received">Hep B doses received</label>
+            <input type="number" min="0" id="hepatitis_b_doses_received" name="occupationalVaccines.hepatitisBDosesReceived"
+                   value="{{ occupational_vaccines.hepatitisBDosesReceived }}">
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_anti_body_level">Hep B antibody level</label>
+            <select id="hepatitis_b_anti_body_level" name="occupationalVaccines.hepatitisBAntiBodyLevel">
+                <option value="" {% if occupational_vaccines.hepatitisBAntiBodyLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="adequate" {% if occupational_vaccines.hepatitisBAntiBodyLevel == "adequate" %}selected{% endif %}>Adequate</option>
+                <option value="inadequate" {% if occupational_vaccines.hepatitisBAntiBodyLevel == "inadequate" %}selected{% endif %}>Inadequate</option>
+                <option value="not-tested" {% if occupational_vaccines.hepatitisBAntiBodyLevel == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bcg_vaccine">BCG vaccine</label>
+            <select id="bcg_vaccine" name="occupationalVaccines.bcgVaccine">
+                <option value="" {% if occupational_vaccines.bcgVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.bcgVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.bcgVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.bcgVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="bcg_vaccine_date">BCG vaccine date</label>
+            <input type="date" id="bcg_vaccine_date" name="occupationalVaccines.bcgVaccineDate"
+                   value="{{ occupational_vaccines.bcgVaccineDate }}">
+        </div>
+        <div class="form-group">
+            <label for="bcg_scar_present">BCG scar present?</label>
+            <select id="bcg_scar_present" name="occupationalVaccines.bcgScarPresent">
+                <option value="" {% if occupational_vaccines.bcgScarPresent == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.bcgScarPresent == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.bcgScarPresent == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="varicella_vaccine">Varicella vaccine</label>
+            <select id="varicella_vaccine" name="occupationalVaccines.varicellaVaccine">
+                <option value="" {% if occupational_vaccines.varicellaVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.varicellaVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.varicellaVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.varicellaVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="varicella_vaccine_date">Varicella vaccine date</label>
+            <input type="date" id="varicella_vaccine_date" name="occupationalVaccines.varicellaVaccineDate"
+                   value="{{ occupational_vaccines.varicellaVaccineDate }}">
+        </div>
+        <div class="form-group">
+            <label for="varicella_history">Varicella history (chickenpox)</label>
+            <select id="varicella_history" name="occupationalVaccines.varicellaHistory">
+                <option value="" {% if occupational_vaccines.varicellaHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.varicellaHistory == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.varicellaHistory == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.varicellaHistory == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hepatitis_a_vaccine">Hepatitis A vaccine</label>
+            <select id="hepatitis_a_vaccine" name="occupationalVaccines.hepatitisAVaccine">
+                <option value="" {% if occupational_vaccines.hepatitisAVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.hepatitisAVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.hepatitisAVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.hepatitisAVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_a_vaccine_date">Hep A vaccine date</label>
+            <input type="date" id="hepatitis_a_vaccine_date" name="occupationalVaccines.hepatitisAVaccineDate"
+                   value="{{ occupational_vaccines.hepatitisAVaccineDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="typhoid_vaccine">Typhoid vaccine</label>
+            <select id="typhoid_vaccine" name="occupationalVaccines.typhoidVaccine">
+                <option value="" {% if occupational_vaccines.typhoidVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.typhoidVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.typhoidVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.typhoidVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="typhoid_vaccine_date">Typhoid vaccine date</label>
+            <input type="date" id="typhoid_vaccine_date" name="occupationalVaccines.typhoidVaccineDate"
+                   value="{{ occupational_vaccines.typhoidVaccineDate }}">
+        </div>
+        <div class="form-group">
+            <label for="rabies_vaccine">Rabies vaccine</label>
+            <select id="rabies_vaccine" name="occupationalVaccines.rabiesVaccine">
+                <option value="" {% if occupational_vaccines.rabiesVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_vaccines.rabiesVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_vaccines.rabiesVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if occupational_vaccines.rabiesVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rabies_vaccine_date">Rabies vaccine date</label>
+            <input type="date" id="rabies_vaccine_date" name="occupationalVaccines.rabiesVaccineDate"
+                   value="{{ occupational_vaccines.rabiesVaccineDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="occ_notes">Notes</label>
+        <textarea id="occ_notes" name="occupationalVaccines.notes">{{ occupational_vaccines.notes }}</textarea>
+    </div>
+</div>

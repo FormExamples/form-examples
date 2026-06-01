@@ -1,0 +1,141 @@
+<div class="card">
+    <h2>Step 3: Childhood Immunisations</h2>
+    <p class="form-hint">UK routine childhood immunisation schedule (MMR, DTP, Polio, Hib, Men, PCV).</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="mmr_dose1">MMR dose 1</label>
+            <select id="mmr_dose1" name="childhoodImmunisations.mmrDose1">
+                <option value="" {% if childhood_immunisations.mmrDose1 == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.mmrDose1 == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.mmrDose1 == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.mmrDose1 == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mmr_dose1_date">MMR dose 1 date</label>
+            <input type="date" id="mmr_dose1_date" name="childhoodImmunisations.mmrDose1Date"
+                   value="{{ childhood_immunisations.mmrDose1Date }}">
+        </div>
+        <div class="form-group">
+            <label for="mmr_dose2">MMR dose 2</label>
+            <select id="mmr_dose2" name="childhoodImmunisations.mmrDose2">
+                <option value="" {% if childhood_immunisations.mmrDose2 == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.mmrDose2 == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.mmrDose2 == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.mmrDose2 == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mmr_dose2_date">MMR dose 2 date</label>
+            <input type="date" id="mmr_dose2_date" name="childhoodImmunisations.mmrDose2Date"
+                   value="{{ childhood_immunisations.mmrDose2Date }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dtp_primary_course">DTP primary course</label>
+            <select id="dtp_primary_course" name="childhoodImmunisations.dtpPrimaryCourse">
+                <option value="" {% if childhood_immunisations.dtpPrimaryCourse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.dtpPrimaryCourse == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.dtpPrimaryCourse == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.dtpPrimaryCourse == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dtp_primary_date">DTP primary date</label>
+            <input type="date" id="dtp_primary_date" name="childhoodImmunisations.dtpPrimaryDate"
+                   value="{{ childhood_immunisations.dtpPrimaryDate }}">
+        </div>
+        <div class="form-group">
+            <label for="dtp_booster">DTP booster</label>
+            <select id="dtp_booster" name="childhoodImmunisations.dtpBooster">
+                <option value="" {% if childhood_immunisations.dtpBooster == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.dtpBooster == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.dtpBooster == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.dtpBooster == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dtp_booster_date">DTP booster date</label>
+            <input type="date" id="dtp_booster_date" name="childhoodImmunisations.dtpBoosterDate"
+                   value="{{ childhood_immunisations.dtpBoosterDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="polio_primary_course">Polio primary course</label>
+            <select id="polio_primary_course" name="childhoodImmunisations.polioPrimaryCourse">
+                <option value="" {% if childhood_immunisations.polioPrimaryCourse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.polioPrimaryCourse == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.polioPrimaryCourse == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.polioPrimaryCourse == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="polio_primary_date">Polio primary date</label>
+            <input type="date" id="polio_primary_date" name="childhoodImmunisations.polioPrimaryDate"
+                   value="{{ childhood_immunisations.polioPrimaryDate }}">
+        </div>
+        <div class="form-group">
+            <label for="polio_booster">Polio booster</label>
+            <select id="polio_booster" name="childhoodImmunisations.polioBooster">
+                <option value="" {% if childhood_immunisations.polioBooster == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.polioBooster == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.polioBooster == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.polioBooster == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="polio_booster_date">Polio booster date</label>
+            <input type="date" id="polio_booster_date" name="childhoodImmunisations.polioBoosterDate"
+                   value="{{ childhood_immunisations.polioBoosterDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hib_vaccine">Hib vaccine</label>
+            <select id="hib_vaccine" name="childhoodImmunisations.hibVaccine">
+                <option value="" {% if childhood_immunisations.hibVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.hibVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.hibVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.hibVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="men_c_vaccine">MenC vaccine</label>
+            <select id="men_c_vaccine" name="childhoodImmunisations.menCVaccine">
+                <option value="" {% if childhood_immunisations.menCVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.menCVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.menCVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.menCVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="men_acwy_vaccine">MenACWY vaccine</label>
+            <select id="men_acwy_vaccine" name="childhoodImmunisations.menACWYVaccine">
+                <option value="" {% if childhood_immunisations.menACWYVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.menACWYVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.menACWYVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.menACWYVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pcv_vaccine">PCV vaccine</label>
+            <select id="pcv_vaccine" name="childhoodImmunisations.pcvVaccine">
+                <option value="" {% if childhood_immunisations.pcvVaccine == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if childhood_immunisations.pcvVaccine == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if childhood_immunisations.pcvVaccine == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if childhood_immunisations.pcvVaccine == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ch_notes">Notes</label>
+        <textarea id="ch_notes" name="childhoodImmunisations.notes">{{ childhood_immunisations.notes }}</textarea>
+    </div>
+</div>

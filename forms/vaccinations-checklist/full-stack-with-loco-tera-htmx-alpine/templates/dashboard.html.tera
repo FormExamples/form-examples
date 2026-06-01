@@ -1,0 +1,110 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Vaccinations Checklist - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Vaccinations Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Checklist</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Name, occupation, or employer...">
+    </div>
+    <div class="form-group">
+        <label for="compliance_status">Compliance Status</label>
+        <select id="compliance_status" name="compliance_status">
+            <option value="">All</option>
+            <option value="fully-immunised" {% if compliance_status == "fully-immunised" %}selected{% endif %}>Fully Immunised</option>
+            <option value="partially-immunised" {% if compliance_status == "partially-immunised" %}selected{% endif %}>Partially Immunised</option>
+            <option value="non-compliant" {% if compliance_status == "non-compliant" %}selected{% endif %}>Non-Compliant</option>
+            <option value="contraindicated" {% if compliance_status == "contraindicated" %}selected{% endif %}>Contraindicated</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="overall_risk">Risk Level</label>
+        <select id="overall_risk" name="overall_risk">
+            <option value="">All</option>
+            <option value="low" {% if overall_risk == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if overall_risk == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if overall_risk == "high" %}selected{% endif %}>High</option>
+            <option value="critical" {% if overall_risk == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="occupation_category">Occupation Category</label>
+        <select id="occupation_category" name="occupation_category">
+            <option value="">All</option>
+            <option value="healthcare" {% if occupation_category == "healthcare" %}selected{% endif %}>Healthcare</option>
+            <option value="education" {% if occupation_category == "education" %}selected{% endif %}>Education</option>
+            <option value="social-care" {% if occupation_category == "social-care" %}selected{% endif %}>Social Care</option>
+            <option value="laboratory" {% if occupation_category == "laboratory" %}selected{% endif %}>Laboratory</option>
+            <option value="travel" {% if occupation_category == "travel" %}selected{% endif %}>Travel</option>
+            <option value="military" {% if occupation_category == "military" %}selected{% endif %}>Military</option>
+            <option value="other" {% if occupation_category == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed checklist{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Occupation</th>
+            <th>Category</th>
+            <th>Employer</th>
+            <th>Compliance</th>
+            <th>Risk</th>
+            <th>Rules</th>
+            <th>Flags</th>
+            <th>Missing</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.firstName }} {{ c.lastName }}</a></td>
+            <td>{{ c.dateOfBirth }}</td>
+            <td>{{ c.occupation }}</td>
+            <td>{{ c.occupationCategory }}</td>
+            <td>{{ c.employer }}</td>
+            <td><span class="compliance-badge compliance-{{ c.complianceStatus }}">{{ c.complianceStatus }}</span></td>
+            <td><span class="risk-badge risk-{{ c.overallRisk }}">{{ c.overallRisk }}</span></td>
+            <td>{{ c.firedRuleCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+            <td>{{ c.missingVaccinationCount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed checklists found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

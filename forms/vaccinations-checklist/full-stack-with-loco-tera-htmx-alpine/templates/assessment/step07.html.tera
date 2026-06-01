@@ -1,0 +1,101 @@
+<div class="card">
+    <h2>Step 7: Influenza Vaccination</h2>
+    <p class="form-hint">Current and previous season flu vaccination plus risk-group eligibility.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="flu_vaccine_current_season">Current season flu vaccine?</label>
+            <select id="flu_vaccine_current_season" name="influenzaVaccination.fluVaccineCurrentSeason">
+                <option value="" {% if influenza_vaccination.fluVaccineCurrentSeason == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if influenza_vaccination.fluVaccineCurrentSeason == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if influenza_vaccination.fluVaccineCurrentSeason == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="flu_vaccine_current_date">Current vaccine date</label>
+            <input type="date" id="flu_vaccine_current_date" name="influenzaVaccination.fluVaccineCurrentDate"
+                   value="{{ influenza_vaccination.fluVaccineCurrentDate }}">
+        </div>
+        <div class="form-group">
+            <label for="flu_vaccine_type">Vaccine type</label>
+            <select id="flu_vaccine_type" name="influenzaVaccination.fluVaccineType">
+                <option value="" {% if influenza_vaccination.fluVaccineType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="standard" {% if influenza_vaccination.fluVaccineType == "standard" %}selected{% endif %}>Standard</option>
+                <option value="adjuvanted" {% if influenza_vaccination.fluVaccineType == "adjuvanted" %}selected{% endif %}>Adjuvanted</option>
+                <option value="cell-based" {% if influenza_vaccination.fluVaccineType == "cell-based" %}selected{% endif %}>Cell-based</option>
+                <option value="recombinant" {% if influenza_vaccination.fluVaccineType == "recombinant" %}selected{% endif %}>Recombinant</option>
+                <option value="nasal-spray" {% if influenza_vaccination.fluVaccineType == "nasal-spray" %}selected{% endif %}>Nasal spray</option>
+                <option value="other" {% if influenza_vaccination.fluVaccineType == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="flu_vaccine_previous_season">Previous season vaccine?</label>
+            <select id="flu_vaccine_previous_season" name="influenzaVaccination.fluVaccinePreviousSeason">
+                <option value="" {% if influenza_vaccination.fluVaccinePreviousSeason == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if influenza_vaccination.fluVaccinePreviousSeason == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if influenza_vaccination.fluVaccinePreviousSeason == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if influenza_vaccination.fluVaccinePreviousSeason == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="flu_vaccine_annual_recipient">Annual recipient?</label>
+            <select id="flu_vaccine_annual_recipient" name="influenzaVaccination.fluVaccineAnnualRecipient">
+                <option value="" {% if influenza_vaccination.fluVaccineAnnualRecipient == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if influenza_vaccination.fluVaccineAnnualRecipient == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if influenza_vaccination.fluVaccineAnnualRecipient == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="flu_high_risk_group">High-risk group?</label>
+            <select id="flu_high_risk_group" name="influenzaVaccination.fluHighRiskGroup">
+                <option value="" {% if influenza_vaccination.fluHighRiskGroup == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if influenza_vaccination.fluHighRiskGroup == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if influenza_vaccination.fluHighRiskGroup == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="flu_high_risk_reason">High-risk reason</label>
+            <select id="flu_high_risk_reason" name="influenzaVaccination.fluHighRiskReason">
+                <option value="" {% if influenza_vaccination.fluHighRiskReason == "" %}selected{% endif %}>&mdash;</option>
+                <option value="age-65-plus" {% if influenza_vaccination.fluHighRiskReason == "age-65-plus" %}selected{% endif %}>Age 65+</option>
+                <option value="chronic-respiratory" {% if influenza_vaccination.fluHighRiskReason == "chronic-respiratory" %}selected{% endif %}>Chronic respiratory</option>
+                <option value="chronic-heart" {% if influenza_vaccination.fluHighRiskReason == "chronic-heart" %}selected{% endif %}>Chronic heart</option>
+                <option value="chronic-kidney" {% if influenza_vaccination.fluHighRiskReason == "chronic-kidney" %}selected{% endif %}>Chronic kidney</option>
+                <option value="chronic-liver" {% if influenza_vaccination.fluHighRiskReason == "chronic-liver" %}selected{% endif %}>Chronic liver</option>
+                <option value="diabetes" {% if influenza_vaccination.fluHighRiskReason == "diabetes" %}selected{% endif %}>Diabetes</option>
+                <option value="immunosuppressed" {% if influenza_vaccination.fluHighRiskReason == "immunosuppressed" %}selected{% endif %}>Immunosuppressed</option>
+                <option value="pregnant" {% if influenza_vaccination.fluHighRiskReason == "pregnant" %}selected{% endif %}>Pregnant</option>
+                <option value="healthcare-worker" {% if influenza_vaccination.fluHighRiskReason == "healthcare-worker" %}selected{% endif %}>Healthcare worker</option>
+                <option value="carer" {% if influenza_vaccination.fluHighRiskReason == "carer" %}selected{% endif %}>Carer</option>
+                <option value="other" {% if influenza_vaccination.fluHighRiskReason == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="flu_adverse_reaction">Adverse reaction?</label>
+            <select id="flu_adverse_reaction" name="influenzaVaccination.fluAdverseReaction">
+                <option value="" {% if influenza_vaccination.fluAdverseReaction == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if influenza_vaccination.fluAdverseReaction == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if influenza_vaccination.fluAdverseReaction == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="flu_adverse_reaction_details">Adverse reaction details</label>
+            <input type="text" id="flu_adverse_reaction_details" name="influenzaVaccination.fluAdverseReactionDetails"
+                   value="{{ influenza_vaccination.fluAdverseReactionDetails }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="flu_notes">Notes</label>
+        <textarea id="flu_notes" name="influenzaVaccination.notes">{{ influenza_vaccination.notes }}</textarea>
+    </div>
+</div>

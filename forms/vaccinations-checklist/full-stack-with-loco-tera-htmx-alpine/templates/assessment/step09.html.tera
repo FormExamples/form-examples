@@ -1,0 +1,160 @@
+<div class="card">
+    <h2>Step 9: Serology &amp; Immunity Testing</h2>
+    <p class="form-hint">Antibody results: Hep B, Varicella, Measles, Rubella, Mumps, Hep A, Tetanus, TB IGRA / Mantoux.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hep_b_surface_antibody">Hep B surface Ab</label>
+            <select id="hep_b_surface_antibody" name="serologyImmunityTesting.hepBSurfaceAntibody">
+                <option value="" {% if serology_immunity_testing.hepBSurfaceAntibody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.hepBSurfaceAntibody == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.hepBSurfaceAntibody == "negative" %}selected{% endif %}>Negative</option>
+                <option value="not-tested" {% if serology_immunity_testing.hepBSurfaceAntibody == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hep_b_surface_antibody_level">Anti-HBs level (mIU/mL)</label>
+            <input type="number" step="0.1" id="hep_b_surface_antibody_level" name="serologyImmunityTesting.hepBSurfaceAntibodyLevel"
+                   value="{{ serology_immunity_testing.hepBSurfaceAntibodyLevel }}">
+        </div>
+        <div class="form-group">
+            <label for="hep_b_surface_antibody_date">Anti-HBs date</label>
+            <input type="date" id="hep_b_surface_antibody_date" name="serologyImmunityTesting.hepBSurfaceAntibodyDate"
+                   value="{{ serology_immunity_testing.hepBSurfaceAntibodyDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="varicella_ig_g">Varicella IgG</label>
+            <select id="varicella_ig_g" name="serologyImmunityTesting.varicellaIgG">
+                <option value="" {% if serology_immunity_testing.varicellaIgG == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.varicellaIgG == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.varicellaIgG == "negative" %}selected{% endif %}>Negative</option>
+                <option value="equivocal" {% if serology_immunity_testing.varicellaIgG == "equivocal" %}selected{% endif %}>Equivocal</option>
+                <option value="not-tested" {% if serology_immunity_testing.varicellaIgG == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="varicella_ig_g_date">Varicella IgG date</label>
+            <input type="date" id="varicella_ig_g_date" name="serologyImmunityTesting.varicellaIgGDate"
+                   value="{{ serology_immunity_testing.varicellaIgGDate }}">
+        </div>
+        <div class="form-group">
+            <label for="measles_ig_g">Measles IgG</label>
+            <select id="measles_ig_g" name="serologyImmunityTesting.measlesIgG">
+                <option value="" {% if serology_immunity_testing.measlesIgG == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.measlesIgG == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.measlesIgG == "negative" %}selected{% endif %}>Negative</option>
+                <option value="equivocal" {% if serology_immunity_testing.measlesIgG == "equivocal" %}selected{% endif %}>Equivocal</option>
+                <option value="not-tested" {% if serology_immunity_testing.measlesIgG == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="measles_ig_g_date">Measles IgG date</label>
+            <input type="date" id="measles_ig_g_date" name="serologyImmunityTesting.measlesIgGDate"
+                   value="{{ serology_immunity_testing.measlesIgGDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rubella_ig_g">Rubella IgG</label>
+            <select id="rubella_ig_g" name="serologyImmunityTesting.rubellaIgG">
+                <option value="" {% if serology_immunity_testing.rubellaIgG == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.rubellaIgG == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.rubellaIgG == "negative" %}selected{% endif %}>Negative</option>
+                <option value="equivocal" {% if serology_immunity_testing.rubellaIgG == "equivocal" %}selected{% endif %}>Equivocal</option>
+                <option value="not-tested" {% if serology_immunity_testing.rubellaIgG == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rubella_ig_g_date">Rubella IgG date</label>
+            <input type="date" id="rubella_ig_g_date" name="serologyImmunityTesting.rubellaIgGDate"
+                   value="{{ serology_immunity_testing.rubellaIgGDate }}">
+        </div>
+        <div class="form-group">
+            <label for="mumps_ig_g">Mumps IgG</label>
+            <select id="mumps_ig_g" name="serologyImmunityTesting.mumpsIgG">
+                <option value="" {% if serology_immunity_testing.mumpsIgG == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.mumpsIgG == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.mumpsIgG == "negative" %}selected{% endif %}>Negative</option>
+                <option value="equivocal" {% if serology_immunity_testing.mumpsIgG == "equivocal" %}selected{% endif %}>Equivocal</option>
+                <option value="not-tested" {% if serology_immunity_testing.mumpsIgG == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mumps_ig_g_date">Mumps IgG date</label>
+            <input type="date" id="mumps_ig_g_date" name="serologyImmunityTesting.mumpsIgGDate"
+                   value="{{ serology_immunity_testing.mumpsIgGDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hep_a_ig_g">Hep A IgG</label>
+            <select id="hep_a_ig_g" name="serologyImmunityTesting.hepAIgG">
+                <option value="" {% if serology_immunity_testing.hepAIgG == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.hepAIgG == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.hepAIgG == "negative" %}selected{% endif %}>Negative</option>
+                <option value="not-tested" {% if serology_immunity_testing.hepAIgG == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hep_a_ig_g_date">Hep A IgG date</label>
+            <input type="date" id="hep_a_ig_g_date" name="serologyImmunityTesting.hepAIgGDate"
+                   value="{{ serology_immunity_testing.hepAIgGDate }}">
+        </div>
+        <div class="form-group">
+            <label for="tetanus_antibody">Tetanus antibody</label>
+            <select id="tetanus_antibody" name="serologyImmunityTesting.tetanusAntibody">
+                <option value="" {% if serology_immunity_testing.tetanusAntibody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.tetanusAntibody == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.tetanusAntibody == "negative" %}selected{% endif %}>Negative</option>
+                <option value="not-tested" {% if serology_immunity_testing.tetanusAntibody == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tetanus_antibody_date">Tetanus antibody date</label>
+            <input type="date" id="tetanus_antibody_date" name="serologyImmunityTesting.tetanusAntibodyDate"
+                   value="{{ serology_immunity_testing.tetanusAntibodyDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tb_igra_result">TB IGRA result</label>
+            <select id="tb_igra_result" name="serologyImmunityTesting.tbIGRAResult">
+                <option value="" {% if serology_immunity_testing.tbIGRAResult == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.tbIGRAResult == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.tbIGRAResult == "negative" %}selected{% endif %}>Negative</option>
+                <option value="indeterminate" {% if serology_immunity_testing.tbIGRAResult == "indeterminate" %}selected{% endif %}>Indeterminate</option>
+                <option value="not-tested" {% if serology_immunity_testing.tbIGRAResult == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tb_igra_date">TB IGRA date</label>
+            <input type="date" id="tb_igra_date" name="serologyImmunityTesting.tbIGRADate"
+                   value="{{ serology_immunity_testing.tbIGRADate }}">
+        </div>
+        <div class="form-group">
+            <label for="mantoux_result">Mantoux result</label>
+            <select id="mantoux_result" name="serologyImmunityTesting.mantouxResult">
+                <option value="" {% if serology_immunity_testing.mantouxResult == "" %}selected{% endif %}>&mdash;</option>
+                <option value="positive" {% if serology_immunity_testing.mantouxResult == "positive" %}selected{% endif %}>Positive</option>
+                <option value="negative" {% if serology_immunity_testing.mantouxResult == "negative" %}selected{% endif %}>Negative</option>
+                <option value="not-tested" {% if serology_immunity_testing.mantouxResult == "not-tested" %}selected{% endif %}>Not tested</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mantoux_induration_mm">Mantoux induration (mm)</label>
+            <input type="number" step="0.1" id="mantoux_induration_mm" name="serologyImmunityTesting.mantouxIndurationMm"
+                   value="{{ serology_immunity_testing.mantouxIndurationMm }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ser_notes">Notes</label>
+        <textarea id="ser_notes" name="serologyImmunityTesting.notes">{{ serology_immunity_testing.notes }}</textarea>
+    </div>
+</div>

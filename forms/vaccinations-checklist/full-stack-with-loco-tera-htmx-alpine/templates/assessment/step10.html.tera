@@ -1,0 +1,120 @@
+<div class="card">
+    <h2>Step 10: Schedule &amp; Compliance</h2>
+    <p class="form-hint">Compliance status, catch-up plan, occupational health clearance, exposure incidents, and consent.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="compliance_status">Compliance status</label>
+            <select id="compliance_status" name="scheduleCompliance.complianceStatus">
+                <option value="" {% if schedule_compliance.complianceStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="fully-immunised" {% if schedule_compliance.complianceStatus == "fully-immunised" %}selected{% endif %}>Fully immunised</option>
+                <option value="partially-immunised" {% if schedule_compliance.complianceStatus == "partially-immunised" %}selected{% endif %}>Partially immunised</option>
+                <option value="non-compliant" {% if schedule_compliance.complianceStatus == "non-compliant" %}selected{% endif %}>Non-compliant</option>
+                <option value="contraindicated" {% if schedule_compliance.complianceStatus == "contraindicated" %}selected{% endif %}>Contraindicated</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exposure_risk_level">Exposure risk level</label>
+            <select id="exposure_risk_level" name="scheduleCompliance.exposureRiskLevel">
+                <option value="" {% if schedule_compliance.exposureRiskLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if schedule_compliance.exposureRiskLevel == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if schedule_compliance.exposureRiskLevel == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if schedule_compliance.exposureRiskLevel == "high" %}selected{% endif %}>High</option>
+                <option value="critical" {% if schedule_compliance.exposureRiskLevel == "critical" %}selected{% endif %}>Critical</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="vaccines_due">Vaccines due</label>
+        <textarea id="vaccines_due" name="scheduleCompliance.vaccinesDue">{{ schedule_compliance.vaccinesDue }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="vaccines_overdue">Vaccines overdue</label>
+        <textarea id="vaccines_overdue" name="scheduleCompliance.vaccinesOverdue">{{ schedule_compliance.vaccinesOverdue }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="catch_up_plan_required">Catch-up plan required?</label>
+            <select id="catch_up_plan_required" name="scheduleCompliance.catchUpPlanRequired">
+                <option value="" {% if schedule_compliance.catchUpPlanRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if schedule_compliance.catchUpPlanRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if schedule_compliance.catchUpPlanRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="catch_up_plan_details">Catch-up plan details</label>
+            <input type="text" id="catch_up_plan_details" name="scheduleCompliance.catchUpPlanDetails"
+                   value="{{ schedule_compliance.catchUpPlanDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="next_vaccination_date">Next vaccination date</label>
+            <input type="date" id="next_vaccination_date" name="scheduleCompliance.nextVaccinationDate"
+                   value="{{ schedule_compliance.nextVaccinationDate }}">
+        </div>
+        <div class="form-group">
+            <label for="next_vaccination_type">Next vaccination type</label>
+            <input type="text" id="next_vaccination_type" name="scheduleCompliance.nextVaccinationType"
+                   value="{{ schedule_compliance.nextVaccinationType }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="occupational_health_clearance">Occupational health clearance</label>
+            <select id="occupational_health_clearance" name="scheduleCompliance.occupationalHealthClearance">
+                <option value="" {% if schedule_compliance.occupationalHealthClearance == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if schedule_compliance.occupationalHealthClearance == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if schedule_compliance.occupationalHealthClearance == "no" %}selected{% endif %}>No</option>
+                <option value="pending" {% if schedule_compliance.occupationalHealthClearance == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="occupational_health_clearance_date">Clearance date</label>
+            <input type="date" id="occupational_health_clearance_date" name="scheduleCompliance.occupationalHealthClearanceDate"
+                   value="{{ schedule_compliance.occupationalHealthClearanceDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="active_exposure_incident">Active exposure incident?</label>
+            <select id="active_exposure_incident" name="scheduleCompliance.activeExposureIncident">
+                <option value="" {% if schedule_compliance.activeExposureIncident == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if schedule_compliance.activeExposureIncident == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if schedule_compliance.activeExposureIncident == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="active_exposure_details">Exposure details</label>
+            <input type="text" id="active_exposure_details" name="scheduleCompliance.activeExposureDetails"
+                   value="{{ schedule_compliance.activeExposureDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="consent_for_vaccination">Consent for vaccination?</label>
+            <select id="consent_for_vaccination" name="scheduleCompliance.consentForVaccination">
+                <option value="" {% if schedule_compliance.consentForVaccination == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if schedule_compliance.consentForVaccination == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if schedule_compliance.consentForVaccination == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="consent_date">Consent date</label>
+            <input type="date" id="consent_date" name="scheduleCompliance.consentDate"
+                   value="{{ schedule_compliance.consentDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sched_notes">Notes</label>
+        <textarea id="sched_notes" name="scheduleCompliance.notes">{{ schedule_compliance.notes }}</textarea>
+    </div>
+</div>

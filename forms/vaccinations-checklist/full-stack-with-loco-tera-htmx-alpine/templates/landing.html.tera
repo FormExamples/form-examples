@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Vaccinations Checklist - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Vaccinations Checklist</h1>
+        <p class="landing-description">
+            Immunisation status tracking for healthcare workers and patients covering
+            routine, occupational, travel, and special-circumstance vaccines. The wizard
+            captures vaccination history, childhood immunisations, occupational and travel
+            vaccines, COVID-19 and influenza status, contraindications, serology, and
+            schedule / compliance.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>10-step Wizard</h3>
+                <p>Demographics, vaccination history, childhood, occupational, travel, COVID-19, influenza, contraindications, serology, schedule</p>
+            </div>
+            <div class="feature">
+                <h3>Compliance Grading</h3>
+                <p>Fully Immunised, Partially Immunised, Non-Compliant, or Contraindicated &mdash; with Low / Moderate / High / Critical risk stratification</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for anaphylaxis history, immunocompromised status, pregnancy, allergies, exposure incidents, and clearance gaps</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Checklist
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
