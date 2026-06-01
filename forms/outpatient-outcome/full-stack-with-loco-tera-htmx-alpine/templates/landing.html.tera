@@ -1,41 +1,39 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Outpatient Outcome Report — Home{% endblock %}
+{% block title %}Outpatient Outcome Report - Home{% endblock %}
 
 {% block content %}
-<div style="max-width:700px;margin:2rem auto;padding:1rem;">
-  <h1>Outpatient Outcome Report</h1>
-  <p>
-    Record encounter details, operational efficiency, clinical outcome,
-    patient-reported outcome measures (PROMs), patient-reported experience
-    measures (PREMs), and a follow-up plan. The system produces a four-domain
-    Outpatient Outcome Composite Grade (OOCG) — A (best) through E (worst).
-  </p>
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Outpatient Outcome Report</h1>
+        <p class="landing-description">
+            Structured outpatient outcome report documenting encounter details, operational
+            efficiency, clinical outcome, patient-reported outcome measures (PROMs),
+            patient-reported experience measures (PREMs), and follow-up plan. The output is
+            an Outpatient Outcome Composite Grade (OOCG) &mdash; A (best) through E (worst)
+            &mdash; computed as the worst of four domain grades.
+        </p>
 
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>11 Steps</h3>
-      <p>Patient details, encounter, clinical outcome, EQ-5D-5L, GRC, PROMIS, FFT, follow-up, sign-off.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Four Domains</h3>
-      <p>Clinical, PROM, PREM, and Operational — worst domain sets the composite grade.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Dashboard</h3>
-      <p>Review all submitted assessments at a glance.</p>
-    </div>
-  </div>
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Four Domains</h3>
+                <p>Clinical, PROM (EQ-5D-5L + GRC + PROMIS), PREM (FFT), and Operational (NHS Attendance Outcome)</p>
+            </div>
+            <div class="feature">
+                <h3>PROM Composite</h3>
+                <p>EQ-5D-5L before/after, Global Rating of Change, and PROMIS Global Health v1.2 T-scores</p>
+            </div>
+            <div class="feature">
+                <h3>Flagged Issues</h3>
+                <p>Critical/high/medium/low alerts for DNA, worsened outcomes, FFT concerns, and missed wait-time targets</p>
+            </div>
+        </div>
 
-  <div style="display:flex;gap:1rem;">
-    <form method="POST" action="/assessments/new">
-      <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
-        Begin New Report
-      </button>
-    </form>
-    <a href="/assessments" style="padding:0.6rem 1.4rem;background:#eee;color:#333;border-radius:4px;text-decoration:none;font-size:1rem;display:inline-block;">
-      View All Reports
-    </a>
-  </div>
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

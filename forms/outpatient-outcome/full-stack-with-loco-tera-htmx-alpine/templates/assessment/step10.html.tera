@@ -1,0 +1,22 @@
+<div class="card">
+    <h2>Step 10: Sign-off</h2>
+    <p class="form-hint">Reporting clinician and timestamp.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporting_clinician_name">Reporting Clinician</label>
+            <input type="text" id="reporting_clinician_name" name="sign_off.reporting_clinician_name"
+                   value="{{ sign_off.reportingClinicianName }}">
+        </div>
+        <div class="form-group">
+            <label for="reporting_clinician_role">Reporting Clinician Role</label>
+            <input type="text" id="reporting_clinician_role" name="sign_off.reporting_clinician_role"
+                   value="{{ sign_off.reportingClinicianRole }}">
+        </div>
+        <div class="form-group">
+            <label for="signed_off_at">Signed Off At</label>
+            <input type="datetime-local" id="signed_off_at" name="sign_off.signed_off_at"
+                   value="{{ sign_off.signedOffAt }}">
+        </div>
+    </div>
+</div>

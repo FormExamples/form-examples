@@ -1,0 +1,32 @@
+<div class="card">
+    <h2>Step 9: Follow-up Plan</h2>
+    <p class="form-hint">Disposition, follow-up appointment, and onward referral details.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="disposition">Disposition</label>
+            <select id="disposition" name="followup_plan.disposition">
+                <option value="" {% if followup_plan.disposition == "" %}selected{% endif %}>&mdash;</option>
+                <option value="discharge" {% if followup_plan.disposition == "discharge" %}selected{% endif %}>Discharge</option>
+                <option value="pifu" {% if followup_plan.disposition == "pifu" %}selected{% endif %}>PIFU (Patient-Initiated Follow-Up)</option>
+                <option value="follow_up_booked" {% if followup_plan.disposition == "follow_up_booked" %}selected{% endif %}>Follow-up booked</option>
+                <option value="onward_referral" {% if followup_plan.disposition == "onward_referral" %}selected{% endif %}>Onward referral</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="next_appointment_date">Next Appointment Date</label>
+            <input type="date" id="next_appointment_date" name="followup_plan.next_appointment_date"
+                   value="{{ followup_plan.nextAppointmentDate }}">
+        </div>
+        <div class="form-group">
+            <label for="onward_referral_specialty">Onward Referral Specialty</label>
+            <input type="text" id="onward_referral_specialty" name="followup_plan.onward_referral_specialty"
+                   value="{{ followup_plan.onwardReferralSpecialty }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="followup_notes">Follow-up Notes</label>
+        <textarea id="followup_notes" name="followup_plan.followup_notes">{{ followup_plan.followupNotes }}</textarea>
+    </div>
+</div>

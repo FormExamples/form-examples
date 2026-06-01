@@ -1,0 +1,32 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Outpatient Outcome - Assessment{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Outpatient Outcome Report</h1>
+    <p class="form-hint">
+        Single-page wizard. Complete all eleven sections (Patient, Encounter, Operational,
+        Clinical, EQ-5D-5L, GRC, PROMIS, FFT, Follow-up, Sign-off, Review) and submit to
+        compute the four-domain OOCG grade.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+    {% include "assessment/step11.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}

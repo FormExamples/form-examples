@@ -1,0 +1,31 @@
+<div class="card">
+    <h2>Step 4: Clinical Outcome</h2>
+    <p class="form-hint">Clinician-rated outcome classification.</p>
+
+    <div class="form-group">
+        <label for="presenting_complaint">Presenting Complaint</label>
+        <textarea id="presenting_complaint" name="clinical_outcome.presenting_complaint">{{ clinical_outcome.presentingComplaint }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="diagnosis">Diagnosis</label>
+        <textarea id="diagnosis" name="clinical_outcome.diagnosis">{{ clinical_outcome.diagnosis }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="treatment_delivered">Treatment Delivered</label>
+        <textarea id="treatment_delivered" name="clinical_outcome.treatment_delivered">{{ clinical_outcome.treatmentDelivered }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="outcome_classification">Outcome Classification</label>
+        <select id="outcome_classification" name="clinical_outcome.outcome_classification">
+            <option value="" {% if clinical_outcome.outcomeClassification == "" %}selected{% endif %}>&mdash;</option>
+            <option value="resolved" {% if clinical_outcome.outcomeClassification == "resolved" %}selected{% endif %}>Resolved</option>
+            <option value="improved" {% if clinical_outcome.outcomeClassification == "improved" %}selected{% endif %}>Improved</option>
+            <option value="unchanged" {% if clinical_outcome.outcomeClassification == "unchanged" %}selected{% endif %}>Unchanged</option>
+            <option value="worsened" {% if clinical_outcome.outcomeClassification == "worsened" %}selected{% endif %}>Worsened</option>
+            <option value="died" {% if clinical_outcome.outcomeClassification == "died" %}selected{% endif %}>Died</option>
+        </select>
+    </div>
+</div>

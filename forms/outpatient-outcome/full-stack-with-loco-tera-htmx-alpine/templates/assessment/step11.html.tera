@@ -1,0 +1,8 @@
+<div class="card">
+    <h2>Step 11: Review &amp; Submit</h2>
+    <p class="form-hint">
+        Review the captured values above and submit to compute the Outpatient Outcome
+        Composite Grade (OOCG). The grading engine derives Clinical, PROM, PREM, and
+        Operational domain grades; the overall grade is the worst of the four.
+    </p>
+</div>
