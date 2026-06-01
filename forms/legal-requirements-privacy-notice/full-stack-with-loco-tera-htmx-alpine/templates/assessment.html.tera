@@ -1,0 +1,22 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Legal Requirements Privacy Notice - Acknowledge{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Legal Requirements Privacy Notice</h1>
+    <p class="form-hint">
+        Please read the privacy notice carefully, then confirm your acknowledgment
+        by ticking the box, entering your full name, and recording today's date.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Acknowledgment</button>
+    </div>
+</form>
+{% endblock %}

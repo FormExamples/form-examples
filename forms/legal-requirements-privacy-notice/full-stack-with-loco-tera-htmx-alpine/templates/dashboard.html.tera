@@ -1,0 +1,95 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Legal Requirements Privacy Notice - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Acknowledgment Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Acknowledgment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, NHS number, or full name...">
+    </div>
+    <div class="form-group">
+        <label for="acknowledgment_status">Status</label>
+        <select id="acknowledgment_status" name="acknowledgment_status">
+            <option value="">All</option>
+            <option value="not-started" {% if acknowledgment_status == "not-started" %}selected{% endif %}>Not Started</option>
+            <option value="in-progress" {% if acknowledgment_status == "in-progress" %}selected{% endif %}>In Progress</option>
+            <option value="complete" {% if acknowledgment_status == "complete" %}selected{% endif %}>Complete</option>
+            <option value="incomplete" {% if acknowledgment_status == "incomplete" %}selected{% endif %}>Incomplete</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="confirmed">Confirmed?</label>
+        <select id="confirmed" name="confirmed">
+            <option value="">All</option>
+            <option value="yes" {% if confirmed == "yes" %}selected{% endif %}>Confirmed</option>
+            <option value="no" {% if confirmed == "no" %}selected{% endif %}>Not confirmed</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed acknowledgment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Patient</th>
+            <th>Full Name</th>
+            <th>Status</th>
+            <th>Confirmed</th>
+            <th>Completion</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in acknowledgments %}
+        <tr>
+            <td><a href="/assessment/{{ a.id }}/report">{{ a.acknowledgedDate }}</a></td>
+            <td>{{ a.patientName }}<br><small>{{ a.patientNhsNumber }}</small></td>
+            <td>{{ a.fullName }}</td>
+            <td><span class="status-badge status-{{ a.acknowledgmentStatus }}" style="font-size: 0.75rem; padding: 0.15rem 0.5rem;">{{ a.acknowledgmentStatus }}</span></td>
+            <td>
+                {% if a.confirmed %}
+                    <span class="badge badge-yes">Yes</span>
+                {% else %}
+                    <span class="badge badge-no">No</span>
+                {% endif %}
+            </td>
+            <td>{{ a.overallPercent }}%</td>
+            <td>
+                {% if a.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ a.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed acknowledgments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}
