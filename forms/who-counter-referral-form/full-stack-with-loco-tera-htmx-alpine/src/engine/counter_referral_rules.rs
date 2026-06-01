@@ -2,13 +2,13 @@
 //!
 //! The counter-referral form is a structured data-collection document, not a
 //! scoring instrument. Each rule below identifies a single field that must be
-//! completed for the discharge back to the primary care facility to be safe and
-//! actionable. Conditional follow-ups (e.g. patient/family informed → "explain"
-//! text) are gated by the `applies` predicate so the validator only counts a
-//! rule when the conditional branch is active.
+//! completed for the discharge back to the primary care facility to be safe
+//! and actionable. Conditional follow-ups (e.g. patient/family informed →
+//! "explain" text) are gated by the `applies` predicate so the validator
+//! only counts a rule when the conditional branch is active.
 //!
-//! Rule IDs follow the pattern <SECTION>-<NN>; the prefix lets the report group
-//! fired rules by section.
+//! Rule IDs follow the pattern <SECTION>-<NN>; the prefix lets the report
+//! group fired rules by section.
 
 use crate::engine::types::AssessmentData;
 

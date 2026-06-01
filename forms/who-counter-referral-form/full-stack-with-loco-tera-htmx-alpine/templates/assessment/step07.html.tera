@@ -1,0 +1,28 @@
+<div class="card">
+    <h2>Step 7: Referral Facility Provider Sign-off</h2>
+    <p class="form-hint">Provider name, signature, and signature date for the counter-referral.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="provider_name">Provider name</label>
+            <input type="text" id="provider_name" name="providerName"
+                   value="{{ provider_sign_off.providerName }}">
+        </div>
+        <div class="form-group">
+            <label for="signature_date">Signature date</label>
+            <input type="date" id="signature_date" name="signatureDate"
+                   value="{{ provider_sign_off.signatureDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="signature">Provider signature</label>
+        <input type="text" id="signature" name="signature"
+               value="{{ provider_sign_off.signature }}">
+    </div>
+
+    <p class="form-hint" style="margin-top:1rem;">
+        Note: Attach a copy of the medication chart at discharge or list of current medications
+        (including additions, changes, or deletions). Assessment ID: {{ id }}
+    </p>
+</div>

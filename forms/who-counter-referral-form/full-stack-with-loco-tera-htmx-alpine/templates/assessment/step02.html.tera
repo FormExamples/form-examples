@@ -1,0 +1,109 @@
+<div class="card">
+    <h2>Step 2: Facility Details</h2>
+    <p class="form-hint">Initiating, referral, and primary care facility details; communication; follow-up timeframe.</p>
+
+    <h3>Initiating Facility (referred patient for care)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="initiating_facility_name">Name</label>
+            <input type="text" id="initiating_facility_name" name="initiatingFacilityName"
+                   value="{{ facility_details.initiatingFacility.name }}">
+        </div>
+        <div class="form-group">
+            <label for="initiating_facility_focal_point">Focal point</label>
+            <input type="text" id="initiating_facility_focal_point" name="initiatingFacilityFocalPoint"
+                   value="{{ facility_details.initiatingFacility.focalPoint }}">
+        </div>
+        <div class="form-group">
+            <label for="initiating_facility_phone_number">Phone number</label>
+            <input type="text" id="initiating_facility_phone_number" name="initiatingFacilityPhoneNumber"
+                   value="{{ facility_details.initiatingFacility.phoneNumber }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="referral_date">Date of original referral</label>
+            <input type="date" id="referral_date" name="referralDate"
+                   value="{{ facility_details.referralDate }}">
+        </div>
+        <div class="form-group">
+            <label for="acuity">Acuity</label>
+            <select id="acuity" name="acuity">
+                <option value="" {% if facility_details.acuity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="acute" {% if facility_details.acuity == "acute" %}selected{% endif %}>Acute</option>
+                <option value="non-acute" {% if facility_details.acuity == "non-acute" %}selected{% endif %}>Non-acute</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_reason">Reason for original referral</label>
+        <textarea id="referral_reason" name="referralReason">{{ facility_details.referralReason }}</textarea>
+    </div>
+
+    <h3>Referral Facility (received patient and provided referral care)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="referral_facility_name">Name</label>
+            <input type="text" id="referral_facility_name" name="referralFacilityName"
+                   value="{{ facility_details.referralFacility.name }}">
+        </div>
+        <div class="form-group">
+            <label for="referral_facility_focal_point">Focal point</label>
+            <input type="text" id="referral_facility_focal_point" name="referralFacilityFocalPoint"
+                   value="{{ facility_details.referralFacility.focalPoint }}">
+        </div>
+        <div class="form-group">
+            <label for="referral_facility_phone_number">Phone number</label>
+            <input type="text" id="referral_facility_phone_number" name="referralFacilityPhoneNumber"
+                   value="{{ facility_details.referralFacility.phoneNumber }}">
+        </div>
+    </div>
+
+    <h3>Communication About Patient Care</h3>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="discussedWithPrimaryCareProvider" value="on"
+                   {% if facility_details.communication.discussedWithPrimaryCareProvider %}checked{% endif %}>
+            Discussed follow-up care with primary care provider
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="discussedWithInitiatingFacility" value="on"
+                   {% if facility_details.communication.discussedWithInitiatingFacility %}checked{% endif %}>
+            Discussed follow-up care with initiating facility
+        </label>
+    </div>
+
+    <h3>Primary Care Facility (if different from initiating facility)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="primary_care_facility_name">Name</label>
+            <input type="text" id="primary_care_facility_name" name="primaryCareFacilityName"
+                   value="{{ facility_details.primaryCareFacility.name }}">
+        </div>
+        <div class="form-group">
+            <label for="primary_care_facility_focal_point">Focal point</label>
+            <input type="text" id="primary_care_facility_focal_point" name="primaryCareFacilityFocalPoint"
+                   value="{{ facility_details.primaryCareFacility.focalPoint }}">
+        </div>
+        <div class="form-group">
+            <label for="primary_care_facility_phone_number">Phone number</label>
+            <input type="text" id="primary_care_facility_phone_number" name="primaryCareFacilityPhoneNumber"
+                   value="{{ facility_details.primaryCareFacility.phoneNumber }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="follow_up_timeframe">Time frame for primary care follow-up with patient</label>
+        <select id="follow_up_timeframe" name="followUpTimeframe">
+            <option value="" {% if facility_details.followUpTimeframe == "" %}selected{% endif %}>&mdash;</option>
+            <option value="urgent-within-24-hours" {% if facility_details.followUpTimeframe == "urgent-within-24-hours" %}selected{% endif %}>Urgent (within 24 hours)</option>
+            <option value="2-to-6-days" {% if facility_details.followUpTimeframe == "2-to-6-days" %}selected{% endif %}>2 to 6 days</option>
+            <option value="1-to-2-weeks" {% if facility_details.followUpTimeframe == "1-to-2-weeks" %}selected{% endif %}>1 to 2 weeks</option>
+            <option value="more-than-2-weeks" {% if facility_details.followUpTimeframe == "more-than-2-weeks" %}selected{% endif %}>More than 2 weeks</option>
+        </select>
+    </div>
+</div>

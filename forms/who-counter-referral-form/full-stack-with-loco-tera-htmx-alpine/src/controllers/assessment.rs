@@ -1,189 +1,247 @@
-//! HTTP routes for the WHO Counter-Referral Form assessment.
-//!
-//! Endpoints:
-//!
-//! - `GET  /`                          → landing
-//! - `POST /assessment/new`            → create a new assessment, redirect
-//! - `GET  /assessment/{id}`           → single-page wizard
-//! - `POST /assessment/{id}/submit`    → save form data, redirect to report
-//! - `GET  /assessment/{id}/report`    → render validated report
-
-use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
-use crate::engine::types::AssessmentData;
-use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
+use crate::engine::{counter_referral_grader, types::AssessmentData};
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::build_assessment_context;
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
-    let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+/// POST /assessment/new -- create a new draft counter-referral form,
+/// redirect to the wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
-}
-
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page counter-referral wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
+
     let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
+/// Extract a string field from the form payload.
+fn s(form: &serde_json::Value, key: &str) -> String {
+    form.get(key)
+        .and_then(|v| v.as_str())
+        .unwrap_or("")
+        .to_string()
+}
+
+/// Extract a checkbox field (HTML form sends "on" when ticked, absent when
+/// not). Treat the presence of any non-empty string as `true`.
+fn cb(form: &serde_json::Value, key: &str) -> bool {
+    form.get(key)
+        .and_then(|v| v.as_str())
+        .map(|s| !s.is_empty())
+        .unwrap_or(false)
+}
+
+/// Map a flat form payload into the nested AssessmentData structure.
+fn form_to_assessment(form: &serde_json::Value) -> AssessmentData {
+    use crate::engine::types::*;
+
+    AssessmentData {
+        patient_identification: PatientIdentification {
+            patient_name: s(form, "patientName"),
+            date_of_birth: s(form, "dateOfBirth"),
+            sex: s(form, "sex"),
+            patient_contact: s(form, "patientContact"),
+            emergency_contact: EmergencyContact {
+                name: s(form, "emergencyContactName"),
+                contact_information: s(form, "emergencyContactInformation"),
+            },
+        },
+        facility_details: FacilityDetails {
+            initiating_facility: FacilityContact {
+                name: s(form, "initiatingFacilityName"),
+                focal_point: s(form, "initiatingFacilityFocalPoint"),
+                phone_number: s(form, "initiatingFacilityPhoneNumber"),
+            },
+            referral_date: s(form, "referralDate"),
+            referral_reason: s(form, "referralReason"),
+            acuity: s(form, "acuity"),
+            referral_facility: FacilityContact {
+                name: s(form, "referralFacilityName"),
+                focal_point: s(form, "referralFacilityFocalPoint"),
+                phone_number: s(form, "referralFacilityPhoneNumber"),
+            },
+            communication: FacilityCommunication {
+                discussed_with_primary_care_provider: cb(form, "discussedWithPrimaryCareProvider"),
+                discussed_with_initiating_facility: cb(form, "discussedWithInitiatingFacility"),
+            },
+            primary_care_facility: FacilityContact {
+                name: s(form, "primaryCareFacilityName"),
+                focal_point: s(form, "primaryCareFacilityFocalPoint"),
+                phone_number: s(form, "primaryCareFacilityPhoneNumber"),
+            },
+            follow_up_timeframe: s(form, "followUpTimeframe"),
+        },
+        situation: Situation {
+            chief_complaint: s(form, "chiefComplaint"),
+            primary_diagnosis: s(form, "primaryDiagnosis"),
+            pregnant: s(form, "pregnant"),
+            treatments_initiated: s(form, "treatmentsInitiated"),
+            icu_stay: cb(form, "icuStay"),
+            surgery: cb(form, "surgery"),
+            hospitalized: cb(form, "hospitalized"),
+        },
+        background: Background {
+            history_of_present_illness: s(form, "historyOfPresentIllness"),
+            past_medical_history: s(form, "pastMedicalHistory"),
+            significant_events: s(form, "significantEvents"),
+        },
+        assessment: Assessment {
+            final_diagnoses: s(form, "finalDiagnoses"),
+            prognosis_and_goals_of_care: s(form, "prognosisAndGoalsOfCare"),
+            patient_family_informed: s(form, "patientFamilyInformed"),
+            informed_explanation: s(form, "informedExplanation"),
+        },
+        recommendations: Recommendations {
+            follow_up_plan: s(form, "followUpPlan"),
+            pending_investigations: s(form, "pendingInvestigations"),
+            follow_up_arrangements: s(form, "followUpArrangements"),
+            deterioration_instructions: s(form, "deteriorationInstructions"),
+            contact_name: s(form, "contactName"),
+            contact_information: s(form, "contactInformation"),
+            status_flags: StatusFlags {
+                cognitive_impairment: cb(form, "cognitiveImpairment"),
+                carer_dependent: cb(form, "carerDependent"),
+                spinal_precautions: cb(form, "spinalPrecautions"),
+                weight_bearing_restrictions: cb(form, "weightBearingRestrictions"),
+                palliative_care: cb(form, "palliativeCare"),
+            },
+        },
+        provider_sign_off: ProviderSignOff {
+            provider_name: s(form, "providerName"),
+            signature: s(form, "signature"),
+            signature_date: s(form, "signatureDate"),
+        },
     }
-    Redirect::to(&format!("/assessment/{id}/report"))
 }
 
-/// GET /assessment/{id}/report — render the validated report.
-async fn report(
+/// POST /assessment/{id}/submit -- merge form data into the JSONB blob,
+/// redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form_data): axum::extract::Form<serde_json::Value>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data = form_to_assessment(&form_data);
+    let data_value =
+        serde_json::to_value(&data).map_err(|e| Error::BadRequest(format!("Encode: {e}")))?;
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
+}
+
+/// GET /assessment/{id}/report -- run the grading engine, persist the
+/// result, and render the report template.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let assessment_data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let grade = counter_referral_grader::grade(&assessment_data);
+
+    // Persist the grading result.
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("data", &assessment_data);
+    context.insert("form_status", &grade.form_status);
+    context.insert(
+        "form_status_label",
+        &crate::engine::utils::form_status_label(&grade.form_status),
+    );
+    context.insert("validation", &grade.validation);
+    context.insert("overall_percent", &grade.overall_percent);
+    context.insert("flagged_issues", &grade.flagged_issues);
+    context.insert("timestamp", &grade.timestamp);
+
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
-/// strongly-typed `AssessmentData`. Unknown / blank fields fall back to
-/// defaults.
-fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
-    let mut data = AssessmentData::default();
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
+    let context = Context::new();
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
 
-    let s = |k: &str| form.get(k).cloned().unwrap_or_default();
-    let b = |k: &str| {
-        let v = form.get(k).cloned().unwrap_or_default();
-        v == "on" || v == "true" || v == "yes" || v == "1"
-    };
-
-    // ─── Step 1 — Patient Identification ──────────────────
-    data.patient_identification.patient_name = s("patientName");
-    data.patient_identification.date_of_birth = s("dateOfBirth");
-    data.patient_identification.sex = s("sex");
-    data.patient_identification.patient_contact = s("patientContact");
-    data.patient_identification.emergency_contact.name = s("emergencyContactName");
-    data.patient_identification
-        .emergency_contact
-        .contact_information = s("emergencyContactInformation");
-
-    // ─── Step 2 — Facility Details ────────────────────────
-    data.facility_details.initiating_facility.name = s("initiatingFacilityName");
-    data.facility_details.initiating_facility.focal_point = s("initiatingFacilityFocalPoint");
-    data.facility_details.initiating_facility.phone_number = s("initiatingFacilityPhoneNumber");
-    data.facility_details.referral_date = s("referralDate");
-    data.facility_details.referral_reason = s("referralReason");
-    data.facility_details.acuity = s("acuity");
-    data.facility_details.referral_facility.name = s("referralFacilityName");
-    data.facility_details.referral_facility.focal_point = s("referralFacilityFocalPoint");
-    data.facility_details.referral_facility.phone_number = s("referralFacilityPhoneNumber");
-    data.facility_details
-        .communication
-        .discussed_with_primary_care_provider = b("discussedWithPrimaryCareProvider");
-    data.facility_details
-        .communication
-        .discussed_with_initiating_facility = b("discussedWithInitiatingFacility");
-    data.facility_details.primary_care_facility.name = s("primaryCareFacilityName");
-    data.facility_details.primary_care_facility.focal_point = s("primaryCareFacilityFocalPoint");
-    data.facility_details.primary_care_facility.phone_number = s("primaryCareFacilityPhoneNumber");
-    data.facility_details.follow_up_timeframe = s("followUpTimeframe");
-
-    // ─── Step 3 — Situation ───────────────────────────────
-    data.situation.chief_complaint = s("chiefComplaint");
-    data.situation.primary_diagnosis = s("primaryDiagnosis");
-    data.situation.pregnant = s("pregnant");
-    data.situation.treatments_initiated = s("treatmentsInitiated");
-    data.situation.icu_stay = b("icuStay");
-    data.situation.surgery = b("surgery");
-    data.situation.hospitalized = b("hospitalized");
-
-    // ─── Step 4 — Background ──────────────────────────────
-    data.background.history_of_present_illness = s("historyOfPresentIllness");
-    data.background.past_medical_history = s("pastMedicalHistory");
-    data.background.significant_events = s("significantEvents");
-
-    // ─── Step 5 — Assessment ──────────────────────────────
-    data.assessment.final_diagnoses = s("finalDiagnoses");
-    data.assessment.prognosis_and_goals_of_care = s("prognosisAndGoalsOfCare");
-    data.assessment.patient_family_informed = s("patientFamilyInformed");
-    data.assessment.informed_explanation = s("informedExplanation");
-
-    // ─── Step 6 — Recommendations ─────────────────────────
-    data.recommendations.follow_up_plan = s("followUpPlan");
-    data.recommendations.pending_investigations = s("pendingInvestigations");
-    data.recommendations.follow_up_arrangements = s("followUpArrangements");
-    data.recommendations.deterioration_instructions = s("deteriorationInstructions");
-    data.recommendations.contact_name = s("contactName");
-    data.recommendations.contact_information = s("contactInformation");
-    data.recommendations.status_flags.cognitive_impairment = b("cognitiveImpairment");
-    data.recommendations.status_flags.carer_dependent = b("carerDependent");
-    data.recommendations.status_flags.spinal_precautions = b("spinalPrecautions");
-    data.recommendations.status_flags.weight_bearing_restrictions = b("weightBearingRestrictions");
-    data.recommendations.status_flags.palliative_care = b("palliativeCare");
-
-    // ─── Step 7 — Provider Sign-off ───────────────────────
-    data.provider_sign_off.provider_name = s("providerName");
-    data.provider_sign_off.signature = s("signature");
-    data.provider_sign_off.signature_date = s("signatureDate");
-
-    data
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
-        }
-    }
-}
-
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

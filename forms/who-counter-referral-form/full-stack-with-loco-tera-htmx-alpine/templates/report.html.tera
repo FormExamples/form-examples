@@ -1,0 +1,185 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Counter-Referral Report - {{ form_status_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>WHO Counter-Referral Form &mdash; Report</h1>
+    <div class="checklist-badge checklist-{{ form_status }}">{{ form_status_label }}</div>
+    <div class="checklist-label">Overall completion: {{ overall_percent }}%</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.patientIdentification.patientName }}<br>
+            <strong>Date of Birth:</strong> {{ data.patientIdentification.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.patientIdentification.sex }}<br>
+            <strong>Contact:</strong> {{ data.patientIdentification.patientContact }}
+        </div>
+        <div>
+            <strong>Emergency Contact:</strong> {{ data.patientIdentification.emergencyContact.name }}<br>
+            <strong>Emergency Contact Info:</strong> {{ data.patientIdentification.emergencyContact.contactInformation }}<br>
+            <strong>Follow-up Timeframe:</strong> {{ data.facilityDetails.followUpTimeframe }}<br>
+            <strong>Acuity:</strong> {{ data.facilityDetails.acuity }}
+        </div>
+    </div>
+</div>
+
+<!-- Facilities -->
+<div class="card">
+    <h2>Facilities</h2>
+    <div class="form-row">
+        <div>
+            <strong>Initiating Facility:</strong><br>
+            {{ data.facilityDetails.initiatingFacility.name }}<br>
+            Focal point: {{ data.facilityDetails.initiatingFacility.focalPoint }}<br>
+            Phone: {{ data.facilityDetails.initiatingFacility.phoneNumber }}
+        </div>
+        <div>
+            <strong>Referral Facility:</strong><br>
+            {{ data.facilityDetails.referralFacility.name }}<br>
+            Focal point: {{ data.facilityDetails.referralFacility.focalPoint }}<br>
+            Phone: {{ data.facilityDetails.referralFacility.phoneNumber }}
+        </div>
+        <div>
+            <strong>Primary Care Facility:</strong><br>
+            {{ data.facilityDetails.primaryCareFacility.name }}<br>
+            Focal point: {{ data.facilityDetails.primaryCareFacility.focalPoint }}<br>
+            Phone: {{ data.facilityDetails.primaryCareFacility.phoneNumber }}
+        </div>
+    </div>
+</div>
+
+<!-- SBAR -->
+<div class="card">
+    <h2>Situation</h2>
+    <p><strong>Chief complaint:</strong> {{ data.situation.chiefComplaint }}</p>
+    <p><strong>Primary diagnosis:</strong> {{ data.situation.primaryDiagnosis }}</p>
+    <p><strong>Pregnancy:</strong> {{ data.situation.pregnant }}</p>
+    <p><strong>Treatments initiated:</strong> {{ data.situation.treatmentsInitiated }}</p>
+    <p>
+        {% if data.situation.icuStay %}ICU stay {% endif %}
+        {% if data.situation.surgery %}Surgery {% endif %}
+        {% if data.situation.hospitalized %}Hospitalised {% endif %}
+    </p>
+</div>
+
+<div class="card">
+    <h2>Background</h2>
+    <p><strong>History of present illness:</strong> {{ data.background.historyOfPresentIllness }}</p>
+    <p><strong>Past medical history:</strong> {{ data.background.pastMedicalHistory }}</p>
+    <p><strong>Significant events:</strong> {{ data.background.significantEvents }}</p>
+</div>
+
+<div class="card">
+    <h2>Assessment</h2>
+    <p><strong>Final diagnoses:</strong> {{ data.assessment.finalDiagnoses }}</p>
+    <p><strong>Prognosis and goals of care:</strong> {{ data.assessment.prognosisAndGoalsOfCare }}</p>
+    <p><strong>Patient/family informed:</strong> {{ data.assessment.patientFamilyInformed }}</p>
+    {% if data.assessment.patientFamilyInformed == "yes" %}
+    <p><strong>Explanation:</strong> {{ data.assessment.informedExplanation }}</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>Recommendations</h2>
+    <p><strong>Follow-up plan:</strong> {{ data.recommendations.followUpPlan }}</p>
+    <p><strong>Pending investigations:</strong> {{ data.recommendations.pendingInvestigations }}</p>
+    <p><strong>Follow-up arrangements:</strong> {{ data.recommendations.followUpArrangements }}</p>
+    <p><strong>Deterioration instructions:</strong> {{ data.recommendations.deteriorationInstructions }}</p>
+    <p><strong>Contact:</strong> {{ data.recommendations.contactName }} &mdash; {{ data.recommendations.contactInformation }}</p>
+    <p>
+        <strong>Status flags:</strong>
+        {% if data.recommendations.statusFlags.cognitiveImpairment %}Cognitive impairment; {% endif %}
+        {% if data.recommendations.statusFlags.carerDependent %}Carer-dependent; {% endif %}
+        {% if data.recommendations.statusFlags.spinalPrecautions %}Spinal precautions; {% endif %}
+        {% if data.recommendations.statusFlags.weightBearingRestrictions %}Weight-bearing restrictions; {% endif %}
+        {% if data.recommendations.statusFlags.palliativeCare %}Palliative care{% endif %}
+    </p>
+</div>
+
+<!-- Section completeness -->
+<div class="card">
+    <h2>Section Completeness</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Section</th>
+                <th>Satisfied</th>
+                <th>Required</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sec in validation.sections %}
+            <tr>
+                <td>{{ sec.sectionLabel }}</td>
+                <td>{{ sec.satisfied }}</td>
+                <td>{{ sec.required }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Flagged issues -->
+{% if flagged_issues | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ flagged_issues | length }})</h2>
+    <div class="flags-section">
+        {% for flag in flagged_issues %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Missing fields -->
+{% if validation.missing | length > 0 %}
+<div class="card">
+    <h2>Missing or Outstanding Items ({{ validation.missing | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Section</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in validation.missing %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.section }}</td>
+                <td>{{ rule.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Provider sign-off -->
+<div class="card">
+    <h2>Referral Facility Provider Sign-off</h2>
+    <p><strong>Provider name:</strong> {{ data.providerSignOff.providerName }}</p>
+    <p><strong>Signature:</strong> {{ data.providerSignOff.signature }}</p>
+    <p><strong>Signature date:</strong> {{ data.providerSignOff.signatureDate }}</p>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Counter-Referral</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<div class="card">
+    <h2>Step 4: Background (B of SBAR)</h2>
+    <p class="form-hint">History of present illness, past medical history, significant events.</p>
+
+    <div class="form-group">
+        <label for="history_of_present_illness">Brief history of present illness</label>
+        <textarea id="history_of_present_illness" name="historyOfPresentIllness">{{ background.historyOfPresentIllness }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="past_medical_history">Relevant past medical history</label>
+        <textarea id="past_medical_history" name="pastMedicalHistory">{{ background.pastMedicalHistory }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="significant_events">Significant investigations / events</label>
+        <textarea id="significant_events" name="significantEvents"
+                  placeholder="Abnormal lab data, allergic reaction, cardiac arrest, other complications">{{ background.significantEvents }}</textarea>
+    </div>
+</div>

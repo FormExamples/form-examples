@@ -1,37 +1,40 @@
 {% extends "base.html.tera" %}
 
-{% block title %}WHO Counter-Referral Form{% endblock %}
+{% block title %}WHO Counter-Referral Form - Home{% endblock %}
 
 {% block content %}
-<div style="max-width:760px;margin:2rem auto;padding:1rem;">
-  <h1>WHO Counter-Referral Form</h1>
-  <p>
-    Structured data-collection questionnaire for the World Health Organization
-    Counter-Referral Form. Captures patient identification, facility details,
-    and the SBAR clinical handover (Situation, Background, Assessment,
-    Recommendations) plus the referral-facility provider sign-off, for safe
-    discharge of a patient back to their primary care provider.
-  </p>
+<div class="landing">
+    <div class="card landing-card">
+        <h1>WHO Counter-Referral Form</h1>
+        <p class="landing-description">
+            World Health Organization standardised counter-referral form for discharging
+            patients back from a referral facility to their primary care facility. The form
+            follows the <strong>SBAR</strong> communication framework &mdash; Situation,
+            Background, Assessment, Recommendations &mdash; and captures patient identification,
+            facility details, treatments initiated during stay, diagnoses, and recommendations
+            for follow-up care.
+        </p>
 
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>7 Steps</h3>
-      <p>Patient ID, Facility Details, Situation, Background, Assessment, Recommendations, Provider Sign-off.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Completeness</h3>
-      <p>Validation rules with conditional <em>applies</em> predicates check the form for missing answers.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Flagged Issues</h3>
-      <p>Urgent follow-up windows, missing deterioration plans, palliative-care pathways and other clinically significant items escalate for clinician review.</p>
-    </div>
-  </div>
+        <div class="landing-features">
+            <div class="feature">
+                <h3>SBAR Framework</h3>
+                <p>Situation, Background, Assessment, and Recommendations &mdash; a structured handover for clinical safety</p>
+            </div>
+            <div class="feature">
+                <h3>Follow-up Timeframes</h3>
+                <p>Urgent (within 24 hours), 2-6 days, 1-2 weeks, or &gt; 2 weeks</p>
+            </div>
+            <div class="feature">
+                <h3>Clinical Flags</h3>
+                <p>Real-time alerts for urgent follow-up, missing deterioration plan, communication breakdown, and palliative care</p>
+            </div>
+        </div>
 
-  <form method="POST" action="/assessment/new">
-    <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
-      Begin New Assessment
-    </button>
-  </form>
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Counter-Referral
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

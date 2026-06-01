@@ -222,3 +222,15 @@ pub struct FlaggedIssue {
     pub message: String,
     pub priority: FlagPriority,
 }
+
+/// Grading output for a counter-referral form. Wraps the validation result,
+/// flagged issues, and a timestamp for the report view.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradingResult {
+    pub validation: ValidationResult,
+    pub flagged_issues: Vec<FlaggedIssue>,
+    pub overall_percent: u32,
+    pub form_status: String,
+    pub timestamp: String,
+}

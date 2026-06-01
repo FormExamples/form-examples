@@ -1,0 +1,50 @@
+<div class="card">
+    <h2>Step 3: Situation (S of SBAR)</h2>
+    <p class="form-hint">Chief complaint, primary diagnosis, pregnancy status, treatments initiated during the stay.</p>
+
+    <div class="form-group">
+        <label for="chief_complaint">Chief complaint</label>
+        <textarea id="chief_complaint" name="chiefComplaint">{{ situation.chiefComplaint }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="primary_diagnosis">Primary diagnosis</label>
+        <textarea id="primary_diagnosis" name="primaryDiagnosis">{{ situation.primaryDiagnosis }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="pregnant">Pregnancy status</label>
+        <select id="pregnant" name="pregnant">
+            <option value="" {% if situation.pregnant == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if situation.pregnant == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if situation.pregnant == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if situation.pregnant == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="treatments_initiated">Treatments initiated</label>
+        <textarea id="treatments_initiated" name="treatmentsInitiated"
+                  placeholder="Procedures performed, medication changes, consultations made">{{ situation.treatmentsInitiated }}</textarea>
+    </div>
+
+    <h3>During Admission</h3>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="icuStay" value="on" {% if situation.icuStay %}checked{% endif %}>
+            Patient was admitted to ICU
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="surgery" value="on" {% if situation.surgery %}checked{% endif %}>
+            Patient underwent surgery
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="hospitalized" value="on" {% if situation.hospitalized %}checked{% endif %}>
+            Patient was hospitalised
+        </label>
+    </div>
+</div>

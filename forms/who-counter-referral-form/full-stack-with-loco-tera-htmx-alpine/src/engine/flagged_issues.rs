@@ -1,11 +1,12 @@
 //! Detects clinically significant issues in a WHO Counter-Referral Form
-//! submission. These are independent of pure completeness — for example, the
-//! patient may have an urgent follow-up timeframe (which still requires the
-//! primary care facility to be alerted in <24h), or the referral facility may
-//! have failed to discuss the patient's care with the receiving primary care
-//! provider before discharge.
+//! submission. These are independent of pure completeness — for example,
+//! the patient may have an urgent follow-up timeframe (which still requires
+//! the primary care facility to be alerted in <24h), or the referral
+//! facility may have failed to discuss the patient's care with the
+//! receiving primary care provider before discharge.
 //!
-//! Priorities (urgent → high → medium → low) drive sort order in the report.
+//! Priorities (urgent → high → medium → low) drive sort order in the
+//! report.
 
 use crate::engine::counter_referral_rules::{has_any_status_flag, has_text};
 use crate::engine::types::{AssessmentData, FlagPriority, FlaggedIssue};
@@ -182,9 +183,10 @@ pub fn detect_flagged_issues(data: &AssessmentData) -> Vec<FlaggedIssue> {
         });
     }
 
-    // ─── Any other status flag (low summary) — only emit when nothing else covered them. ──
-    // Skip: cognitive/carer/spinal/wb/palliative are already individually flagged above.
-    // Kept as a safety net for future status flag additions.
+    // ─── Any other status flag (low summary) — only emit when nothing
+    // else covered them. Skip: cognitive/carer/spinal/wb/palliative are
+    // already individually flagged above. Kept as a safety net for future
+    // status flag additions.
     if has_any_status_flag(data)
         && !data.recommendations.status_flags.cognitive_impairment
         && !data.recommendations.status_flags.carer_dependent
