@@ -1,0 +1,31 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Audio-Vestibular Assessment - Wizard{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Audio-Vestibular Assessment</h1>
+    <p class="form-hint">
+        Complete all nine sections (demographics, symptoms, otoscopy, pure-tone
+        audiometry, speech audiometry, tympanometry, vestibular screening, DHI,
+        clinical impression) and submit to compute the WHO hearing-loss grade and
+        the DHI handicap level.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}

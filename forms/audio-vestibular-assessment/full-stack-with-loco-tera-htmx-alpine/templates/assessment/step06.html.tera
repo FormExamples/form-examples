@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 6: Tympanometry &amp; Acoustic Reflexes</h2>
+    <p class="form-hint">Jerger tympanogram type and acoustic-reflex status per ear.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="right_tympanogram">Right tympanogram</label>
+            <select id="right_tympanogram" name="tympanometry_acoustic_reflexes.right_tympanogram">
+                <option value="" {% if tympanometry_acoustic_reflexes.rightTympanogram == "" %}selected{% endif %}>&mdash;</option>
+                <option value="A" {% if tympanometry_acoustic_reflexes.rightTympanogram == "A" %}selected{% endif %}>A &mdash; normal</option>
+                <option value="As" {% if tympanometry_acoustic_reflexes.rightTympanogram == "As" %}selected{% endif %}>As &mdash; shallow</option>
+                <option value="Ad" {% if tympanometry_acoustic_reflexes.rightTympanogram == "Ad" %}selected{% endif %}>Ad &mdash; deep</option>
+                <option value="B" {% if tympanometry_acoustic_reflexes.rightTympanogram == "B" %}selected{% endif %}>B &mdash; flat</option>
+                <option value="C" {% if tympanometry_acoustic_reflexes.rightTympanogram == "C" %}selected{% endif %}>C &mdash; negative peak</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="left_tympanogram">Left tympanogram</label>
+            <select id="left_tympanogram" name="tympanometry_acoustic_reflexes.left_tympanogram">
+                <option value="" {% if tympanometry_acoustic_reflexes.leftTympanogram == "" %}selected{% endif %}>&mdash;</option>
+                <option value="A" {% if tympanometry_acoustic_reflexes.leftTympanogram == "A" %}selected{% endif %}>A &mdash; normal</option>
+                <option value="As" {% if tympanometry_acoustic_reflexes.leftTympanogram == "As" %}selected{% endif %}>As &mdash; shallow</option>
+                <option value="Ad" {% if tympanometry_acoustic_reflexes.leftTympanogram == "Ad" %}selected{% endif %}>Ad &mdash; deep</option>
+                <option value="B" {% if tympanometry_acoustic_reflexes.leftTympanogram == "B" %}selected{% endif %}>B &mdash; flat</option>
+                <option value="C" {% if tympanometry_acoustic_reflexes.leftTympanogram == "C" %}selected{% endif %}>C &mdash; negative peak</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="right_acoustic_reflexes">Right acoustic reflexes</label>
+            <select id="right_acoustic_reflexes" name="tympanometry_acoustic_reflexes.right_acoustic_reflexes">
+                <option value="" {% if tympanometry_acoustic_reflexes.rightAcousticReflexes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="present" {% if tympanometry_acoustic_reflexes.rightAcousticReflexes == "present" %}selected{% endif %}>Present</option>
+                <option value="absent" {% if tympanometry_acoustic_reflexes.rightAcousticReflexes == "absent" %}selected{% endif %}>Absent</option>
+                <option value="partial" {% if tympanometry_acoustic_reflexes.rightAcousticReflexes == "partial" %}selected{% endif %}>Partial</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="left_acoustic_reflexes">Left acoustic reflexes</label>
+            <select id="left_acoustic_reflexes" name="tympanometry_acoustic_reflexes.left_acoustic_reflexes">
+                <option value="" {% if tympanometry_acoustic_reflexes.leftAcousticReflexes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="present" {% if tympanometry_acoustic_reflexes.leftAcousticReflexes == "present" %}selected{% endif %}>Present</option>
+                <option value="absent" {% if tympanometry_acoustic_reflexes.leftAcousticReflexes == "absent" %}selected{% endif %}>Absent</option>
+                <option value="partial" {% if tympanometry_acoustic_reflexes.leftAcousticReflexes == "partial" %}selected{% endif %}>Partial</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="tympanometry_notes">Notes</label>
+        <textarea id="tympanometry_notes" name="tympanometry_acoustic_reflexes.notes">{{ tympanometry_acoustic_reflexes.notes }}</textarea>
+    </div>
+</div>

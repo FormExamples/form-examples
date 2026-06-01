@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Audio-Vestibular Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Audio-Vestibular Assessment</h1>
+        <p class="landing-description">
+            Combined audiology and vestibular (balance) assessment capturing presenting
+            symptoms, otoscopic and audiometric findings, tympanometry, vestibular
+            screening tests, and the Dizziness Handicap Inventory (DHI). Two instruments
+            are computed: the WHO pure-tone audiometry hearing-loss grade and the DHI
+            total (0&ndash;100) with handicap level.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Nine Steps</h3>
+                <p>Demographics, symptoms, otoscopy, pure-tone audiometry, speech audiometry, tympanometry, vestibular screening, DHI, clinical impression</p>
+            </div>
+            <div class="feature">
+                <h3>Two Instruments</h3>
+                <p>WHO better-ear PTA hearing-loss grade (normal &rarr; profound) and DHI total with no-handicap / mild / moderate / severe levels</p>
+            </div>
+            <div class="feature">
+                <h3>Clinical Flags</h3>
+                <p>Sudden hearing loss, asymmetric loss (retrocochlear screen), positive Dix-Hallpike, neurological symptoms, falls, and tympanogram findings</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

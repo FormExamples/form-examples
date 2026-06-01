@@ -1,0 +1,99 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Audio-Vestibular Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Audio-Vestibular Assessment Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name or diagnosis...">
+    </div>
+    <div class="form-group">
+        <label for="hearing_loss_grade">Hearing-Loss Grade</label>
+        <select id="hearing_loss_grade" name="hearing_loss_grade">
+            <option value="">All</option>
+            <option value="normal" {% if hearing_loss_grade == "normal" %}selected{% endif %}>Normal</option>
+            <option value="mild" {% if hearing_loss_grade == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if hearing_loss_grade == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="moderately-severe" {% if hearing_loss_grade == "moderately-severe" %}selected{% endif %}>Moderately severe</option>
+            <option value="severe" {% if hearing_loss_grade == "severe" %}selected{% endif %}>Severe</option>
+            <option value="profound" {% if hearing_loss_grade == "profound" %}selected{% endif %}>Profound</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="dhi_handicap_level">DHI Handicap</label>
+        <select id="dhi_handicap_level" name="dhi_handicap_level">
+            <option value="">All</option>
+            <option value="no-handicap" {% if dhi_handicap_level == "no-handicap" %}selected{% endif %}>No handicap</option>
+            <option value="mild" {% if dhi_handicap_level == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if dhi_handicap_level == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if dhi_handicap_level == "severe" %}selected{% endif %}>Severe</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Urgent / High Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Patient</th>
+            <th>Provisional Diagnosis</th>
+            <th>Hearing-Loss Grade</th>
+            <th>Better-Ear PTA</th>
+            <th>Asymmetry</th>
+            <th>DHI</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.assessmentDate }}</a></td>
+            <td>{{ c.patientName }}<br><small>{{ c.patientDateOfBirth }} / {{ c.patientSex }}</small></td>
+            <td>{{ c.provisionalDiagnosis }}</td>
+            <td>{{ c.hearingLossGrade }}</td>
+            <td>{% if c.betterEarPta %}{{ c.betterEarPta }} dB{% else %}&mdash;{% endif %}</td>
+            <td>{% if c.asymmetry %}{{ c.asymmetry }} dB{% else %}&mdash;{% endif %}</td>
+            <td>{{ c.dhiTotal }} ({{ c.dhiHandicapLevel }})</td>
+            <td>
+                {% if c.urgentFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.urgentFlagCount }} urgent</span>
+                {% endif %}
+                {% if c.highFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highFlagCount }} high</span>
+                {% endif %}
+                {% if c.urgentFlagCount == 0 and c.highFlagCount == 0 %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

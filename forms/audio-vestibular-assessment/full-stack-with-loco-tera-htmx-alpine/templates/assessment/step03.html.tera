@@ -1,0 +1,65 @@
+<div class="card">
+    <h2>Step 3: Otoscopic Examination</h2>
+    <p class="form-hint">External ear canal and tympanic membrane findings.</p>
+
+    <h3>Right Ear</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="right_canal_status">Canal status</label>
+            <select id="right_canal_status" name="otoscopic_examination.right_ear.canal_status">
+                <option value="" {% if otoscopic_examination.rightEar.canalStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="clear" {% if otoscopic_examination.rightEar.canalStatus == "clear" %}selected{% endif %}>Clear</option>
+                <option value="wax" {% if otoscopic_examination.rightEar.canalStatus == "wax" %}selected{% endif %}>Wax</option>
+                <option value="debris" {% if otoscopic_examination.rightEar.canalStatus == "debris" %}selected{% endif %}>Debris</option>
+                <option value="edema" {% if otoscopic_examination.rightEar.canalStatus == "edema" %}selected{% endif %}>Edema</option>
+                <option value="otorrhea" {% if otoscopic_examination.rightEar.canalStatus == "otorrhea" %}selected{% endif %}>Otorrhea</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="right_tympanic_membrane">Tympanic membrane</label>
+            <select id="right_tympanic_membrane" name="otoscopic_examination.right_ear.tympanic_membrane">
+                <option value="" {% if otoscopic_examination.rightEar.tympanicMembrane == "" %}selected{% endif %}>&mdash;</option>
+                <option value="intact" {% if otoscopic_examination.rightEar.tympanicMembrane == "intact" %}selected{% endif %}>Intact</option>
+                <option value="retracted" {% if otoscopic_examination.rightEar.tympanicMembrane == "retracted" %}selected{% endif %}>Retracted</option>
+                <option value="bulging" {% if otoscopic_examination.rightEar.tympanicMembrane == "bulging" %}selected{% endif %}>Bulging</option>
+                <option value="perforation" {% if otoscopic_examination.rightEar.tympanicMembrane == "perforation" %}selected{% endif %}>Perforation</option>
+                <option value="effusion" {% if otoscopic_examination.rightEar.tympanicMembrane == "effusion" %}selected{% endif %}>Effusion</option>
+                <option value="tube" {% if otoscopic_examination.rightEar.tympanicMembrane == "tube" %}selected{% endif %}>Tube</option>
+                <option value="scarred" {% if otoscopic_examination.rightEar.tympanicMembrane == "scarred" %}selected{% endif %}>Scarred</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Left Ear</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="left_canal_status">Canal status</label>
+            <select id="left_canal_status" name="otoscopic_examination.left_ear.canal_status">
+                <option value="" {% if otoscopic_examination.leftEar.canalStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="clear" {% if otoscopic_examination.leftEar.canalStatus == "clear" %}selected{% endif %}>Clear</option>
+                <option value="wax" {% if otoscopic_examination.leftEar.canalStatus == "wax" %}selected{% endif %}>Wax</option>
+                <option value="debris" {% if otoscopic_examination.leftEar.canalStatus == "debris" %}selected{% endif %}>Debris</option>
+                <option value="edema" {% if otoscopic_examination.leftEar.canalStatus == "edema" %}selected{% endif %}>Edema</option>
+                <option value="otorrhea" {% if otoscopic_examination.leftEar.canalStatus == "otorrhea" %}selected{% endif %}>Otorrhea</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="left_tympanic_membrane">Tympanic membrane</label>
+            <select id="left_tympanic_membrane" name="otoscopic_examination.left_ear.tympanic_membrane">
+                <option value="" {% if otoscopic_examination.leftEar.tympanicMembrane == "" %}selected{% endif %}>&mdash;</option>
+                <option value="intact" {% if otoscopic_examination.leftEar.tympanicMembrane == "intact" %}selected{% endif %}>Intact</option>
+                <option value="retracted" {% if otoscopic_examination.leftEar.tympanicMembrane == "retracted" %}selected{% endif %}>Retracted</option>
+                <option value="bulging" {% if otoscopic_examination.leftEar.tympanicMembrane == "bulging" %}selected{% endif %}>Bulging</option>
+                <option value="perforation" {% if otoscopic_examination.leftEar.tympanicMembrane == "perforation" %}selected{% endif %}>Perforation</option>
+                <option value="effusion" {% if otoscopic_examination.leftEar.tympanicMembrane == "effusion" %}selected{% endif %}>Effusion</option>
+                <option value="tube" {% if otoscopic_examination.leftEar.tympanicMembrane == "tube" %}selected{% endif %}>Tube</option>
+                <option value="scarred" {% if otoscopic_examination.leftEar.tympanicMembrane == "scarred" %}selected{% endif %}>Scarred</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="otoscopic_notes">Notes</label>
+        <textarea id="otoscopic_notes" name="otoscopic_examination.notes">{{ otoscopic_examination.notes }}</textarea>
+    </div>
+</div>

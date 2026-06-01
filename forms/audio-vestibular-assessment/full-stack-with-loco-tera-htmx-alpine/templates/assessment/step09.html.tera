@@ -1,0 +1,66 @@
+<div class="card">
+    <h2>Step 9: Clinical Impression &amp; Referral</h2>
+    <p class="form-hint">Provisional diagnosis and onward referrals.</p>
+
+    <div class="form-group">
+        <label for="provisional_diagnosis">Provisional diagnosis</label>
+        <input type="text" id="provisional_diagnosis" name="clinical_impression_referral.provisional_diagnosis" value="{{ clinical_impression_referral.provisionalDiagnosis }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hearing_aid_candidate">Hearing-aid candidate?</label>
+            <select id="hearing_aid_candidate" name="clinical_impression_referral.hearing_aid_candidate">
+                <option value="" {% if clinical_impression_referral.hearingAidCandidate == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if clinical_impression_referral.hearingAidCandidate == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if clinical_impression_referral.hearingAidCandidate == "no" %}selected{% endif %}>No</option>
+                <option value="already-fitted" {% if clinical_impression_referral.hearingAidCandidate == "already-fitted" %}selected{% endif %}>Already fitted</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vestibular_rehab_indicated">Vestibular rehab indicated?</label>
+            <select id="vestibular_rehab_indicated" name="clinical_impression_referral.vestibular_rehab_indicated">
+                <option value="" {% if clinical_impression_referral.vestibularRehabIndicated == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if clinical_impression_referral.vestibularRehabIndicated == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if clinical_impression_referral.vestibularRehabIndicated == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ent_referral">ENT referral?</label>
+            <select id="ent_referral" name="clinical_impression_referral.ent_referral">
+                <option value="" {% if clinical_impression_referral.entReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if clinical_impression_referral.entReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if clinical_impression_referral.entReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="neurology_referral">Neurology referral?</label>
+            <select id="neurology_referral" name="clinical_impression_referral.neurology_referral">
+                <option value="" {% if clinical_impression_referral.neurologyReferral == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if clinical_impression_referral.neurologyReferral == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if clinical_impression_referral.neurologyReferral == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="imaging_requested">Imaging requested</label>
+            <select id="imaging_requested" name="clinical_impression_referral.imaging_requested">
+                <option value="" {% if clinical_impression_referral.imagingRequested == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if clinical_impression_referral.imagingRequested == "none" %}selected{% endif %}>None</option>
+                <option value="mri" {% if clinical_impression_referral.imagingRequested == "mri" %}selected{% endif %}>MRI</option>
+                <option value="ct" {% if clinical_impression_referral.imagingRequested == "ct" %}selected{% endif %}>CT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="follow_up_weeks">Follow-up (weeks)</label>
+            <input type="number" id="follow_up_weeks" name="clinical_impression_referral.follow_up_weeks" min="0" value="{% if clinical_impression_referral.followUpWeeks %}{{ clinical_impression_referral.followUpWeeks }}{% endif %}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_notes">Additional notes</label>
+        <textarea id="additional_notes" name="clinical_impression_referral.additional_notes">{{ clinical_impression_referral.additionalNotes }}</textarea>
+    </div>
+</div>
