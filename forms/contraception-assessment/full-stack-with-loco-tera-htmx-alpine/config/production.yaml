@@ -12,6 +12,15 @@ server:
       allow_origins:
         - $FRONTEND_URL
 
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: $DATABASE_URL
+  dangerously_flush: false
+  num_workers: 4
+
 database:
   uri: $DATABASE_URL
   enable_logging: false

@@ -2,7 +2,13 @@
 members = [".", "migration"]
 
 [workspace.dependencies]
-loco-rs = { version = "0.16" }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 
 [package]
 name = "objectives_and_key_results_tracker"
@@ -30,6 +36,11 @@ chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.6", features = ["v4", "serde"] }
 tracing = { version = "0.1" }
 include_dir = { version = "0.7" }
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
 
 [dev-dependencies]
 loco-rs = { workspace = true, features = ["testing"] }

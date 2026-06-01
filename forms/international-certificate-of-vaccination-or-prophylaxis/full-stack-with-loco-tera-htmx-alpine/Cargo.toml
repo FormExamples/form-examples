@@ -10,7 +10,13 @@ publish = false
 default-run = "international_certificate_of_vaccination_or_prophylaxis-cli"
 
 [dependencies]
-loco-rs = { version = "0.16", features = ["with-db"] }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 sea-orm = { version = "1.1", features = [
   "sqlx-postgres",
   "runtime-tokio-rustls",
@@ -30,9 +36,20 @@ chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.6", features = ["v4", "serde"] }
 thiserror = "1"
 include_dir = "0.7"
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
 
 [dev-dependencies]
-loco-rs = { version = "0.16", features = ["testing"] }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 serial_test = "3.1"
 assertables = "9.8"
 insta = { version = "1.40", features = ["redactions", "yaml"] }

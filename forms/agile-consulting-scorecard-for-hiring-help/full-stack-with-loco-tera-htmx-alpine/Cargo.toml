@@ -9,7 +9,13 @@ publish = false
 default-run = "agile-consulting-scorecard-cli"
 
 [workspace.dependencies]
-loco-rs = { version = "0.16" }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 
 [dependencies]
 async-trait = { version = "0.1" }
@@ -32,6 +38,11 @@ tower = { version = "0.5" }
 tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 uuid = { version = "1.6", features = ["v4", "serde"] }
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
 
 [lib]
 name = "agile_consulting_scorecard_for_hiring_help"

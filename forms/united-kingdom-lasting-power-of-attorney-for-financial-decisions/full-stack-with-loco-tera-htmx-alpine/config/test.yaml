@@ -23,10 +23,17 @@ server:
       fallback: "assets/static/404.html"
 
 # Worker Configuration
-workers:
-  mode: ForegroundBlocking
-
 # Mailer Configuration.
+
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: {{ get_env(name="DATABASE_URL", default="postgres://loco:loco@localhost:5432/united_kingdom_lasting_power_of_attorney_for_financial_decisions_test") }}
+  dangerously_flush: true
+  num_workers: 1
+
 mailer:
   smtp:
     enable: false

@@ -7,6 +7,15 @@ server:
   port: '{{ get_env(name="PORT", default=5150) }}'
   host: '{{ get_env(name="HOST", default="http://localhost") }}'
 
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: '{{ get_env(name="DATABASE_URL") }}'
+  dangerously_flush: false
+  num_workers: 4
+
 database:
   uri: '{{ get_env(name="DATABASE_URL") }}'
   enable_logging: false
@@ -18,5 +27,3 @@ database:
   dangerously_truncate: false
   dangerously_recreate: false
 
-workers:
-  mode: BackgroundQueue

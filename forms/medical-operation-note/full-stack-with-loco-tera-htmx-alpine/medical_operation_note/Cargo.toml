@@ -10,7 +10,13 @@ default-run = "medical_operation_note-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-loco-rs = { version = "0.16" }
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
 
 [dependencies]
 loco-rs = { workspace = true  }
@@ -40,6 +46,11 @@ fluent-templates = { version = "0.13", features = ["tera"] }
 unic-langid = { version = "0.9" }
 # /view engine
 axum-extra = { version = "0.10", features = ["form"] }
+opentelemetry = "0.27"
+opentelemetry_sdk = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry = "0.28"
+axum-prometheus = "0.7"
 
 [[bin]]
 name = "medical_operation_note-cli"

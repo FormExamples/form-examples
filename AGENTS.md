@@ -30,6 +30,10 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 
+### Loco backend refactor
+
+- `bin/loco-config-refactor [--check] [--dry-run] [--all|<slug>]` — mechanical Loco crate refactor for the canonical background-queue (Postgres only; drops `bg_sqlt` / `bg_redis`) and observability (OpenTelemetry + Prometheus `/metrics`) conventions; `--check` is the CI drift detector
+
 ### Generators (SQL → derived representations)
 
 - `bin/xml-representations/generate-xml-representations.py` — generate XML and DTD per SQL table entity
@@ -152,4 +156,5 @@ bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/generate-spec.py --check          # Per-form spec.md drift detector
+bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 ```

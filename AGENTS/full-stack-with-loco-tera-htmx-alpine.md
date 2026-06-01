@@ -29,14 +29,24 @@ Slug: full-stack-with-loco-tera-htmx-alpine
 | [Alpine.js](https://alpinejs.dev/)                  | 3.14.8           | Client-side conditional fields and dynamic lists |
 | [Criterion](https://crates.io/crates/criterion)     | 0.8.2            | Benchmarks                                       |
 | [Tantivy](https://crates.io/crates/tantivy)         | 0.26.1           | Full-text search engine                          |
+| [opentelemetry](https://crates.io/crates/opentelemetry)             | 0.27 | Vendor-neutral observability API           |
+| [opentelemetry_sdk](https://crates.io/crates/opentelemetry_sdk)     | 0.27 | OpenTelemetry SDK (metrics + tracing)      |
+| [opentelemetry-otlp](https://crates.io/crates/opentelemetry-otlp)   | 0.27 | OTLP gRPC/HTTP exporter to a collector     |
+| [tracing-opentelemetry](https://crates.io/crates/tracing-opentelemetry) | 0.28 | Bridge `tracing` spans → OpenTelemetry  |
+| [axum-prometheus](https://crates.io/crates/axum-prometheus)         | 0.7  | Prometheus `/metrics` endpoint for axum    |
 
 ## Loco
 
 Create app:
 
 ```sh
-loco new --name [form] --db postgres --bg async --assets serverside
+loco new --name [form] --db postgres --bg pg --assets serverside
 ```
+
+The `--bg pg` flag selects the **Postgres-backed background queue**. Loco's
+SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues are
+**not** used in this monorepo — every backend runs on Postgres, so we keep
+exactly one queue backend and drop the others (see [Background queue](#background-queue)).
 
 Create cargo dependencies:
 
@@ -175,6 +185,131 @@ Environment variables for production:
 - `HOST` — server host URL
 - `DATABASE_URL` — PostgreSQL connection string
 - `FRONTEND_URL` — allowed CORS origin
+- `OTEL_EXPORTER_OTLP_ENDPOINT` — OTLP collector endpoint (e.g. `http://otel-collector:4317`)
+- `OTEL_SERVICE_NAME` — overrides the default service name (defaults to the form slug)
+
+## Background queue
+
+Every Loco crate uses the **Postgres-backed** background queue and **only**
+the Postgres-backed queue. The SQLite-backed (`bg_sqlt`) and Redis-backed
+(`bg_redis`) backends are disabled to keep the runtime footprint identical
+to the primary datastore (no extra service to operate, no second source of
+truth for job state).
+
+### Cargo.toml
+
+In every form's Loco crate `Cargo.toml`, declare `loco-rs` with
+`default-features = false` and enable only the features actually used. The
+`bg_pg` feature is required; `bg_sqlt` and `bg_redis` MUST NOT appear:
+
+```toml
+loco-rs = { version = "0.16", default-features = false, features = [
+  "auth_jwt",
+  "bg_pg",        # Postgres-backed background queue (REQUIRED)
+  "cache_inmem",
+  "cli",
+  "with-db",
+] }
+```
+
+Forbidden features (drift detector flags these):
+
+- `bg_sqlt` — SQLite-backed queue (not used)
+- `bg_redis` — Redis-backed queue (not used)
+
+### YAML config
+
+`config/development.yaml`, `config/test.yaml`, and `config/production.yaml`
+all carry a `workers:` block in `BackgroundQueue` mode and a `queue:` block
+pointing at Postgres. Reuse the same Postgres URI as the main `database:`
+block — Loco creates its own `loco_jobs` table on first start.
+
+`config/development.yaml`:
+
+```yaml
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://postgres:postgres@localhost:5432/[form]_development
+  dangerously_flush: false
+  num_workers: 2
+```
+
+`config/test.yaml`:
+
+```yaml
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://postgres:postgres@localhost:5432/[form]_test
+  dangerously_flush: true
+  num_workers: 1
+```
+
+`config/production.yaml`:
+
+```yaml
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: '{{ get_env(name="DATABASE_URL") }}'
+  dangerously_flush: false
+  num_workers: 4
+```
+
+## Observability
+
+Every Loco crate emits **OpenTelemetry metrics + traces over OTLP** and
+exposes a **Prometheus `/metrics` endpoint** on the same axum router. The
+two are complementary:
+
+- **OTLP exporter** → ships metrics + traces to an external OpenTelemetry
+  collector for centralised aggregation (Tempo, Jaeger, Mimir, …).
+- **`/metrics` endpoint** → in-process Prometheus scrape target for local
+  development and Prometheus-native deployments.
+
+### Cargo.toml
+
+```toml
+opentelemetry            = "0.27"
+opentelemetry_sdk        = { version = "0.27", features = ["rt-tokio", "metrics"] }
+opentelemetry-otlp       = { version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }
+tracing-opentelemetry    = "0.28"
+axum-prometheus          = "0.7"
+```
+
+### Initializer
+
+Each crate wires a `src/initializers/observability.rs` Loco `Initializer`
+that:
+
+1. Builds an OTLP `SpanExporter` and `MetricExporter` from
+   `OTEL_EXPORTER_OTLP_ENDPOINT` (defaults to `http://localhost:4317`).
+2. Sets the global `TracerProvider` and `MeterProvider`, tagged with
+   `service.name = OTEL_SERVICE_NAME` (defaulting to the form slug).
+3. Layers the `tracing-opentelemetry` `OpenTelemetryLayer` onto the
+   existing `tracing-subscriber` so every Loco/axum span is exported.
+4. Mounts `axum-prometheus`'s `PrometheusMetricLayer` and registers a
+   `GET /metrics` route that returns the Prometheus text format.
+
+### `/metrics` endpoint
+
+- Path: `/metrics`
+- Method: `GET`
+- Format: Prometheus text (`text/plain; version=0.0.4`)
+- Unauthenticated by default; production deployments restrict access at
+  the ingress / network-policy level.
+- Excluded from the standard CORS allow-list.
+
+`bin/loco-config-refactor` is the drift detector for the background-queue
+and observability conventions — it edits `Cargo.toml` and `config/*.yaml`
+in place and exits non-zero in `--check` mode if anything is missing.
 
 ## Database
 

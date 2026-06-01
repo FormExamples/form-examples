@@ -18,7 +18,13 @@ server:
         path: "assets/static"
 
 workers:
-  mode: BackgroundAsync
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://loco:loco@localhost:5432/issue_tracker_development
+  dangerously_flush: false
+  num_workers: 2
 
 mailer:
   smtp:
@@ -34,11 +40,6 @@ database:
   auto_migrate: true
   dangerously_truncate: false
   dangerously_recreate: false
-
-queue:
-  kind: Postgres
-  uri: postgres://loco:loco@localhost:5432/issue_tracker_development
-  dangerously_flush: false
 
 auth:
   jwt:

@@ -10,7 +10,13 @@ server:
   host: http://localhost
 
 workers:
-  mode: BackgroundAsync
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://loco:loco@localhost:5432/objectives_and_key_results_tracker_test
+  dangerously_flush: true
+  num_workers: 1
 
 mailer:
   smtp:

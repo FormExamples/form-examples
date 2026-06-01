@@ -20,6 +20,15 @@ server:
       allow_origins:
         - http://localhost:5590
 
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://postgres:postgres@localhost:5432/rheumatology_assessment_development
+  dangerously_flush: false
+  num_workers: 2
+
 database:
   uri: postgres://postgres:postgres@localhost:5432/rheumatology_assessment_development
   enable_logging: false

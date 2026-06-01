@@ -10,7 +10,13 @@ server:
   host: {{ get_env(name="HOST", default="http://localhost") }}
 
 workers:
-  mode: BackgroundAsync
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: {{ get_env(name="DATABASE_URL") }}
+  dangerously_flush: false
+  num_workers: 4
 
 mailer:
   smtp:

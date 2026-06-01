@@ -23,6 +23,15 @@ server:
         - Content-Type
         - Authorization
 
+workers:
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://postgres:postgres@localhost:5432/patient_intake_test
+  dangerously_flush: true
+  num_workers: 1
+
 database:
   uri: postgres://postgres:postgres@localhost:5432/patient_intake_test
   enable_logging: false

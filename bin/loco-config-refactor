@@ -1,0 +1,475 @@
+#!/usr/bin/env python3
+"""bin/loco-config-refactor — mechanically refactor each form's
+`full-stack-with-loco-tera-htmx-alpine/` Loco crate to the canonical
+background-queue and observability conventions documented in
+`AGENTS/full-stack-with-loco-tera-htmx-alpine.md`:
+
+  - Postgres-backed background queue (`bg_pg`)
+  - SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues removed
+  - OpenTelemetry OTLP exporter dependencies
+  - Prometheus `/metrics` dependency (`axum-prometheus`)
+
+Edits per Loco crate (a crate is any dir containing a `Cargo.toml` whose
+contents reference `loco-rs`):
+
+  Cargo.toml:
+    - Rewrite the `loco-rs = { ... }` declaration to set
+      `default-features = false` and an explicit features list that
+      includes `bg_pg` and excludes `bg_sqlt` / `bg_redis`.
+    - Append OTel + Prometheus deps under `[dependencies]` if missing.
+
+  config/development.yaml, config/test.yaml, config/production.yaml:
+    - Set `workers.mode: BackgroundQueue`.
+    - Insert/replace a `queue:` block with `kind: Postgres`, reusing the
+      same Postgres URI as the existing `database.uri` and setting
+      `dangerously_flush` and `num_workers` per environment.
+
+The tool is idempotent: re-running on an already-refactored crate
+makes no further changes.
+
+Usage:
+  bin/loco-config-refactor <slug>              # one form
+  bin/loco-config-refactor --all               # every form's Loco crate
+  bin/loco-config-refactor --dry-run <slug>    # show what would change
+  bin/loco-config-refactor --check --all       # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+LOCO_DIR_NAME = "full-stack-with-loco-tera-htmx-alpine"
+
+# --- loco-rs Cargo features -------------------------------------------------
+
+# Canonical feature set. `bg_pg` is required; `bg_sqlt` and `bg_redis` MUST NOT
+# appear (we run the queue on Postgres only).
+LOCO_FEATURES_ALLOWED = ["auth_jwt", "bg_pg", "cache_inmem", "cli", "with-db"]
+LOCO_FEATURES_FORBIDDEN = {"bg_sqlt", "bg_redis"}
+
+# --- Observability dependencies --------------------------------------------
+
+# (crate_name, full TOML right-hand-side as it should appear)
+OBSERVABILITY_DEPS: list[tuple[str, str]] = [
+    ("opentelemetry", '"0.27"'),
+    ("opentelemetry_sdk", '{ version = "0.27", features = ["rt-tokio", "metrics"] }'),
+    (
+        "opentelemetry-otlp",
+        '{ version = "0.27", features = ["grpc-tonic", "metrics", "trace"] }',
+    ),
+    ("tracing-opentelemetry", '"0.28"'),
+    ("axum-prometheus", '"0.7"'),
+]
+
+# --- Per-environment queue knobs -------------------------------------------
+
+QUEUE_PROFILES = {
+    "development": {"dangerously_flush": "false", "num_workers": "2"},
+    "test": {"dangerously_flush": "true", "num_workers": "1"},
+    "production": {"dangerously_flush": "false", "num_workers": "4"},
+}
+
+# ---------------------------------------------------------------------------
+# Discovery
+# ---------------------------------------------------------------------------
+
+
+def find_loco_crates(slug_filter: str | None) -> list[Path]:
+    """Return every directory that is a Loco crate root.
+
+    A Loco crate root is a directory containing a `Cargo.toml` whose text
+    contains `loco-rs`, located anywhere inside
+    `forms/<slug>/full-stack-with-loco-tera-htmx-alpine/`.
+    """
+    roots: list[Path] = []
+    seen_real: set[Path] = set()
+    for form_dir in sorted(FORMS_DIR.iterdir()):
+        if not form_dir.is_dir():
+            continue
+        if slug_filter and form_dir.name != slug_filter:
+            continue
+        loco_dir = form_dir / LOCO_DIR_NAME
+        if not loco_dir.is_dir():
+            continue
+        # Walk up to one level deep for the nested-crate pattern
+        # (e.g. forms/medical-operation-note/.../medical_operation_note/).
+        candidates = [loco_dir]
+        for child in loco_dir.iterdir():
+            if child.is_dir() and (child / "Cargo.toml").is_file():
+                candidates.append(child)
+            elif child.is_dir() and (child / "config").is_dir():
+                candidates.append(child)
+        for c in candidates:
+            cargo = c / "Cargo.toml"
+            config_dir = c / "config"
+
+            cargo_is_loco = False
+            if cargo.is_file():
+                text = cargo.read_text(encoding="utf-8", errors="replace")
+                if "loco-rs" in text:
+                    cargo_is_loco = True
+                    # Skip SeaORM migration sub-crates.
+                    if c.name == "migration":
+                        cargo_is_loco = False
+                    if re.search(r'name\s*=\s*"migration"', text):
+                        cargo_is_loco = False
+
+            # A directory qualifies as a Loco root if either:
+            #   - its Cargo.toml is a Loco app, OR
+            #   - it has a config/ directory with Loco-shaped YAML files
+            #     (so config drift is fixed even when the crate is still
+            #     in "engine only" mode awaiting Loco promotion).
+            config_is_loco = (
+                config_dir.is_dir()
+                and any(config_dir.glob("*.yaml"))
+            )
+
+            if not (cargo_is_loco or config_is_loco):
+                continue
+
+            # Some forms (e.g. medical-operation-note) keep the runtime
+            # crate in a nested directory and expose it via symlinks at
+            # the form's top-level full-stack dir. Resolve symlinks so we
+            # don't process the same crate twice.
+            real_root = c.resolve()
+            if real_root in seen_real:
+                continue
+            seen_real.add(real_root)
+            roots.append(real_root)
+    return roots
+
+
+# ---------------------------------------------------------------------------
+# Cargo.toml editing
+# ---------------------------------------------------------------------------
+
+
+# Match a non-workspace loco-rs declaration: either `loco-rs = "0.16"` or
+# `loco-rs = { version = "0.16", ... }`. Critically, this does NOT match
+# `loco-rs = { workspace = true, ... }`, which inherits from
+# [workspace.dependencies] and must be left alone.
+LOCO_RS_VERSION_LINE_RE = re.compile(
+    r'^[ \t]*loco-rs[ \t]*=[ \t]*'
+    r'(?:"[^"\n]*"|\{[ \t]*version[ \t]*=[ \t]*"[^"\n]*"[^\n}]*\})'
+    r'[ \t]*$',
+    re.MULTILINE,
+)
+
+
+def canonical_loco_rs_line() -> str:
+    feats = ",\n  ".join(f'"{f}"' for f in LOCO_FEATURES_ALLOWED)
+    return (
+        'loco-rs = { version = "0.16", default-features = false, features = [\n'
+        f"  {feats},\n"
+        "] }"
+    )
+
+
+def rewrite_loco_rs(text: str) -> tuple[str, bool]:
+    """Rewrite every concrete `loco-rs = "..." | { version = "...", ... }`
+    declaration to the canonical form. Leaves `{ workspace = true }`
+    declarations alone so feature additions like `["testing"]` survive.
+
+    Returns (new_text, changed).
+    """
+    canonical = canonical_loco_rs_line()
+    new_text, _ = LOCO_RS_VERSION_LINE_RE.subn(canonical, text)
+    return new_text, new_text != text
+
+
+def has_dep(text: str, dep: str) -> bool:
+    """True if `dep = ...` appears as a top-level Cargo dep line anywhere."""
+    pat = re.compile(rf"^[ \t]*{re.escape(dep)}[ \t]*=", re.MULTILINE)
+    return bool(pat.search(text))
+
+
+def ensure_dependencies_section(text: str) -> tuple[str, int]:
+    """Return (text, insertion_index) where new deps should be appended.
+
+    Insertion index is the byte offset where new `name = ...` lines should
+    be inserted (right after the [dependencies] header and any existing
+    lines in that section, but before the next `[...]` header). If no
+    [dependencies] section exists, one is appended to the end of the file.
+    """
+    m = re.search(r"^\[dependencies\][ \t]*\n", text, re.MULTILINE)
+    if not m:
+        if not text.endswith("\n"):
+            text += "\n"
+        text += "\n[dependencies]\n"
+        return text, len(text)
+    # Find the end of this section (next [header] or EOF)
+    start = m.end()
+    nxt = re.search(r"^\[", text[start:], re.MULTILINE)
+    if nxt:
+        end = start + nxt.start()
+    else:
+        end = len(text)
+    # Trim trailing blank lines inside the section so appends are tidy.
+    while end > start and text[end - 1] == "\n" and text[end - 2 : end] == "\n\n":
+        end -= 1
+    return text, end
+
+
+def add_observability_deps(text: str) -> tuple[str, bool]:
+    missing = [(n, rhs) for (n, rhs) in OBSERVABILITY_DEPS if not has_dep(text, n)]
+    if not missing:
+        return text, False
+    text, ins = ensure_dependencies_section(text)
+    block = "".join(f"{n} = {rhs}\n" for (n, rhs) in missing)
+    if ins < len(text) and not text[:ins].endswith("\n"):
+        block = "\n" + block
+    new_text = text[:ins] + block + text[ins:]
+    return new_text, True
+
+
+def edit_cargo_toml(path: Path) -> tuple[str, list[str]]:
+    """Return (new_text, change_summary_lines)."""
+    text = path.read_text(encoding="utf-8")
+    notes: list[str] = []
+
+    new_text, changed = rewrite_loco_rs(text)
+    if changed:
+        notes.append("rewrote loco-rs features (drop bg_sqlt, bg_redis; keep bg_pg)")
+
+    new_text, added = add_observability_deps(new_text)
+    if added:
+        notes.append("added OpenTelemetry + Prometheus dependencies")
+
+    # Sanity: ensure no forbidden features survived.
+    for bad in LOCO_FEATURES_FORBIDDEN:
+        if re.search(rf'"\s*{re.escape(bad)}\s*"', new_text):
+            notes.append(f"warning: feature {bad!r} still present after rewrite")
+
+    return new_text, notes
+
+
+# ---------------------------------------------------------------------------
+# YAML editing
+# ---------------------------------------------------------------------------
+
+
+def detect_env(yaml_path: Path) -> str:
+    name = yaml_path.stem
+    if name in QUEUE_PROFILES:
+        return name
+    # Fallback: anything we don't recognise is treated as development.
+    return "development"
+
+
+WORKERS_BLOCK_RE = re.compile(
+    r"^workers:[ \t]*\n((?:[ \t]+[^\n]*\n|[ \t]*\n)+)",
+    re.MULTILINE,
+)
+
+QUEUE_BLOCK_RE = re.compile(
+    r"^queue:[ \t]*\n((?:[ \t]+[^\n]*\n|[ \t]*\n)+)",
+    re.MULTILINE,
+)
+
+DATABASE_URI_RE = re.compile(
+    r"^database:[ \t]*\n(?:[ \t]+[^\n]*\n)*?[ \t]+uri:[ \t]*([^\n]+)",
+    re.MULTILINE,
+)
+
+
+def extract_database_uri(text: str) -> str | None:
+    m = DATABASE_URI_RE.search(text)
+    if not m:
+        return None
+    return m.group(1).strip()
+
+
+def canonical_workers_block() -> str:
+    return "workers:\n  mode: BackgroundQueue\n"
+
+
+def canonical_queue_block(env: str, uri: str) -> str:
+    profile = QUEUE_PROFILES[env]
+    return (
+        "queue:\n"
+        "  kind: Postgres\n"
+        f"  uri: {uri}\n"
+        f"  dangerously_flush: {profile['dangerously_flush']}\n"
+        f"  num_workers: {profile['num_workers']}\n"
+    )
+
+
+def rewrite_workers_and_queue(text: str, env: str) -> tuple[str, list[str], str | None]:
+    """Idempotently ensure canonical `workers:` and `queue:` blocks exist.
+
+    The two blocks are written together as a single contiguous group with
+    exactly one blank line between them, separated from neighbouring
+    sections by one blank line on each side.
+
+    Returns (new_text, change_notes, error_message_or_none).
+    """
+    uri = extract_database_uri(text)
+    if not uri:
+        return text, [], "no database.uri found — cannot derive queue uri"
+
+    workers_canonical = canonical_workers_block()
+    queue_canonical = canonical_queue_block(env, uri)
+    combined = workers_canonical + "\n" + queue_canonical
+
+    # Strip any existing workers: and queue: blocks. We rebuild from
+    # scratch — simpler than trying to in-place edit fields.
+    notes: list[str] = []
+    existing_workers = WORKERS_BLOCK_RE.search(text)
+    existing_queue = QUEUE_BLOCK_RE.search(text)
+
+    workers_was_canonical = False
+    queue_was_canonical = False
+
+    if existing_workers and text[existing_workers.start() : existing_workers.end()] == workers_canonical:
+        workers_was_canonical = True
+    if existing_queue and text[existing_queue.start() : existing_queue.end()] == queue_canonical:
+        queue_was_canonical = True
+
+    # Strip existing blocks (highest start position first so indices stay valid).
+    spans = []
+    if existing_workers:
+        spans.append((existing_workers.start(), existing_workers.end()))
+    if existing_queue:
+        spans.append((existing_queue.start(), existing_queue.end()))
+    spans.sort(reverse=True)
+    stripped = text
+    for s, e in spans:
+        stripped = stripped[:s] + stripped[e:]
+    # Collapse runs of 3+ newlines (caused by stripping) down to 2.
+    stripped = re.sub(r"\n{3,}", "\n\n", stripped)
+
+    # Pick insertion anchor: before mailer: / database: / auth:, whichever
+    # comes first. Falls back to end-of-file.
+    anchor = re.search(r"^(mailer:|database:|auth:)", stripped, re.MULTILINE)
+    if anchor:
+        insert_at = anchor.start()
+        # Trim trailing blanks just before insert_at so we control spacing.
+        i = insert_at
+        while i > 0 and stripped[i - 1] == "\n":
+            i -= 1
+        head = stripped[:i]
+        tail = stripped[insert_at:]
+        new_text = head + "\n\n" + combined + "\n" + tail
+    else:
+        body = stripped.rstrip("\n")
+        new_text = body + "\n\n" + combined
+
+    if not workers_was_canonical:
+        notes.append("workers.mode → BackgroundQueue")
+    if not queue_was_canonical:
+        notes.append(f"queue: → Postgres ({env})")
+
+    # If both were already canonical and no other change is needed, we
+    # may still have moved/normalized whitespace. Compare final text.
+    if new_text == text:
+        return text, [], None
+    return new_text, notes, None
+
+
+def edit_yaml(path: Path) -> tuple[str, list[str]]:
+    env = detect_env(path)
+    text = path.read_text(encoding="utf-8")
+
+    new_text, notes, err = rewrite_workers_and_queue(text, env)
+    if err:
+        return text, [f"skipped: {err}"]
+    return new_text, notes
+
+
+# ---------------------------------------------------------------------------
+# Per-crate orchestration
+# ---------------------------------------------------------------------------
+
+
+def process_crate(
+    crate_root: Path, dry_run: bool, check: bool
+) -> tuple[bool, list[str]]:
+    """Edit one crate. Returns (changed, log_lines)."""
+    changed = False
+    log: list[str] = []
+
+    cargo = crate_root / "Cargo.toml"
+    if cargo.is_file() and "loco-rs" in cargo.read_text(encoding="utf-8", errors="replace"):
+        new_text, notes = edit_cargo_toml(cargo)
+        if new_text != cargo.read_text(encoding="utf-8"):
+            changed = True
+            for n in notes:
+                log.append(f"  Cargo.toml: {n}")
+            if not (dry_run or check):
+                cargo.write_text(new_text, encoding="utf-8")
+
+    config_dir = crate_root / "config"
+    if config_dir.is_dir():
+        for yaml_path in sorted(config_dir.glob("*.yaml")):
+            new_text, notes = edit_yaml(yaml_path)
+            if new_text != yaml_path.read_text(encoding="utf-8"):
+                changed = True
+                for n in notes:
+                    log.append(f"  {yaml_path.relative_to(crate_root)}: {n}")
+                if not (dry_run or check):
+                    yaml_path.write_text(new_text, encoding="utf-8")
+
+    return changed, log
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+
+def main(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="bin/loco-config-refactor")
+    p.add_argument("slug", nargs="?", help="Single form slug to refactor")
+    p.add_argument("--all", action="store_true", help="Refactor every form")
+    p.add_argument(
+        "--dry-run", action="store_true", help="Print changes but do not write"
+    )
+    p.add_argument(
+        "--check",
+        action="store_true",
+        help="Exit non-zero if any edits would be made (implies --dry-run)",
+    )
+    args = p.parse_args(argv)
+
+    if not args.all and not args.slug:
+        p.error("specify a slug or --all")
+    if args.all and args.slug:
+        p.error("--all and <slug> are mutually exclusive")
+
+    dry_run = args.dry_run or args.check
+    crates = find_loco_crates(slug_filter=None if args.all else args.slug)
+    if not crates:
+        print(
+            "No Loco crates found"
+            + (f" for slug {args.slug!r}" if args.slug else ""),
+            file=sys.stderr,
+        )
+        return 1
+
+    any_changed = False
+    for crate in crates:
+        rel = crate.relative_to(REPO_ROOT)
+        changed, log = process_crate(crate, dry_run=dry_run, check=args.check)
+        if changed:
+            any_changed = True
+            print(f"{rel}")
+            for line in log:
+                print(line)
+
+    if args.check and any_changed:
+        print(
+            "\nloco-config-refactor: drift detected — run `bin/loco-config-refactor --all` to fix",
+            file=sys.stderr,
+        )
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

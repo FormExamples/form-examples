@@ -11,7 +11,13 @@ server:
   middlewares: {}
 
 workers:
-  mode: ForegroundBlocking
+  mode: BackgroundQueue
+
+queue:
+  kind: Postgres
+  uri: postgres://loco:loco@localhost:5432/medical_information_form_for_air_travel_test
+  dangerously_flush: true
+  num_workers: 1
 
 mailer:
   smtp:
