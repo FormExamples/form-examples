@@ -1,0 +1,108 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Emergency First Aid Form - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>CFAR Encounter Dashboard</h1>
+    <a href="/" class="btn btn-primary">New First Aid Form</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, referral facility, or responder...">
+    </div>
+    <div class="form-group">
+        <label for="problem_type">Problem type</label>
+        <select id="problem_type" name="problem_type">
+            <option value="">All</option>
+            <option value="medical" {% if problem_type == "medical" %}selected{% endif %}>Medical</option>
+            <option value="trauma" {% if problem_type == "trauma" %}selected{% endif %}>Trauma</option>
+            <option value="medical+trauma" {% if problem_type == "medical+trauma" %}selected{% endif %}>Medical + Trauma</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="pregnant">Pregnant</label>
+        <select id="pregnant" name="pregnant">
+            <option value="">All</option>
+            <option value="yes" {% if pregnant == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if pregnant == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if pregnant == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="urgent" {% if has_flags == "urgent" %}selected{% endif %}>With urgent flags</option>
+            <option value="high" {% if has_flags == "high" %}selected{% endif %}>With high flags</option>
+            <option value="none" {% if has_flags == "none" %}selected{% endif %}>No urgent/high flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed encounter{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Event Date/Time</th>
+            <th>Patient</th>
+            <th>Sex</th>
+            <th>Problem</th>
+            <th>Pregnant</th>
+            <th>Referral Facility</th>
+            <th>Responder</th>
+            <th>Complete</th>
+            <th>Urgent</th>
+            <th>High</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.eventDateTime }}</a></td>
+            <td>{{ c.patientName }}</td>
+            <td>{{ c.patientSex }}</td>
+            <td>{{ c.problemType }}</td>
+            <td>{{ c.pregnant }}</td>
+            <td>{{ c.referralFacility }}</td>
+            <td>{{ c.responderName }}<br><small>{{ c.cfarOrganization }}</small></td>
+            <td>
+                {% if c.complete %}
+                    <span class="badge badge-yes">Complete</span>
+                {% else %}
+                    <span class="badge badge-no">{{ c.totalSatisfied }} / {{ c.totalRequired }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if c.urgentFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.urgentFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if c.highFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed encounters found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+<div class="card">
+    <h2>Step 8: Circulation (C)</h2>
+    <p class="form-hint">Circulation assessment and intervention.</p>
+
+    <h3>Assessment</h3>
+    <label><input type="checkbox" name="circulation.assessment_normal" value="on" {% if circulation.assessmentNormal %}checked{% endif %}> Normal</label>
+    <div class="form-group">
+        <label for="circulation_assessment_findings">Findings (if not normal)</label>
+        <textarea id="circulation_assessment_findings" name="circulation.assessment_findings">{{ circulation.assessmentFindings }}</textarea>
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="circulation.interventions.pelvic_binder" value="on" {% if circulation.interventions.pelvicBinder %}checked{% endif %}> Pelvic Binder</label>
+        <label><input type="checkbox" name="circulation.interventions.control_minor_bleeding" value="on" {% if circulation.interventions.controlMinorBleeding %}checked{% endif %}> Control minor bleeding</label>
+        <label><input type="checkbox" name="circulation.interventions.fracture_care" value="on" {% if circulation.interventions.fractureCare %}checked{% endif %}> Fracture Care</label>
+        <label><input type="checkbox" name="circulation.interventions.oral_hydration" value="on" {% if circulation.interventions.oralHydration %}checked{% endif %}> Oral Hydration</label>
+        <label><input type="checkbox" name="circulation.interventions.left_lateral_position" value="on" {% if circulation.interventions.leftLateralPosition %}checked{% endif %}> Left-lateral position</label>
+        <label><input type="checkbox" name="circulation.interventions.none" value="on" {% if circulation.interventions.none %}checked{% endif %}> None</label>
+    </div>
+</div>

@@ -1,46 +1,29 @@
-//! Tera context builders for the WHO Emergency First Aid Form assessment.
-
-use serde::{Deserialize, Serialize};
 use tera::Context;
 use uuid::Uuid;
 
-use crate::engine::cfar_validator::validate_cfar;
-use crate::engine::flagged_issues::detect_flagged_issues;
-use crate::engine::types::{AssessmentData, FlaggedIssue, ValidationResult};
+use crate::engine::types::AssessmentData;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ReportResult {
-    pub validation: ValidationResult,
-    pub flagged_issues: Vec<FlaggedIssue>,
-    pub timestamp: String,
-}
+/// Total wizard steps for the WHO Emergency First Aid Form.
+pub const TOTAL_STEPS: u32 = 12;
 
-/// Build the Tera context for the single-page wizard.
+/// Build a Tera context for rendering the single-page assessment wizard.
+/// All step partials share the same context.
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &12usize);
-    ctx.insert("data", data);
-    ctx
-}
-
-/// Build the Tera context for the report after submission.
-pub fn build_report_context(data: &AssessmentData, id: Uuid) -> Context {
-    let validation = validate_cfar(data);
-    let flagged_issues = detect_flagged_issues(data);
-    let timestamp = chrono::Utc::now().to_rfc3339();
-
-    let result = ReportResult {
-        validation,
-        flagged_issues,
-        timestamp: timestamp.clone(),
-    };
-
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("data", data);
-    ctx.insert("result", &result);
-    ctx.insert("timestamp", &timestamp);
-    ctx
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("total_steps", &TOTAL_STEPS);
+    context.insert("data", data);
+    context.insert("patient_identification", &data.patient_identification);
+    context.insert("referral_transport", &data.referral_transport);
+    context.insert("situation", &data.situation);
+    context.insert("background", &data.background);
+    context.insert("major_bleeding", &data.major_bleeding);
+    context.insert("airway", &data.airway);
+    context.insert("breathing", &data.breathing);
+    context.insert("circulation", &data.circulation);
+    context.insert("disability", &data.disability);
+    context.insert("exposure", &data.exposure);
+    context.insert("recommendations", &data.recommendations);
+    context.insert("responder_details", &data.responder_details);
+    context
 }

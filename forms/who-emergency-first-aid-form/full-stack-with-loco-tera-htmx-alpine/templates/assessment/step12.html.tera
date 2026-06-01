@@ -1,0 +1,29 @@
+<div class="card">
+    <h2>Step 12: Community First Aid Responder (CFAR)</h2>
+    <p class="form-hint">Responder identification, signature, contact information, and organisation.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="responder_name">Responder name</label>
+            <input type="text" id="responder_name" name="responder_details.name"
+                   value="{{ responder_details.name }}">
+        </div>
+        <div class="form-group">
+            <label for="responder_signature">Signature</label>
+            <input type="text" id="responder_signature" name="responder_details.signature"
+                   value="{{ responder_details.signature }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="responder_contact_information">Contact information</label>
+        <input type="text" id="responder_contact_information" name="responder_details.contact_information"
+               value="{{ responder_details.contactInformation }}">
+    </div>
+
+    <div class="form-group">
+        <label for="cfar_organization">CFAR organisation</label>
+        <input type="text" id="cfar_organization" name="responder_details.cfar_organization"
+               value="{{ responder_details.cfarOrganization }}">
+    </div>
+</div>

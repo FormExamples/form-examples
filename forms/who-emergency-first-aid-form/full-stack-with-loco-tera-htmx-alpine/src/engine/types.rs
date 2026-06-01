@@ -340,3 +340,12 @@ pub struct FlaggedIssue {
     pub message: String,
     pub priority: FlagPriority,
 }
+
+/// Top-level grading result persisted to the JSONB `result` column.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradingResult {
+    pub validation: ValidationResult,
+    pub flagged_issues: Vec<FlaggedIssue>,
+    pub timestamp: String,
+}

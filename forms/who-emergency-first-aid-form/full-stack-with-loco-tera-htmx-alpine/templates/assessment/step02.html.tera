@@ -1,0 +1,55 @@
+<div class="card">
+    <h2>Step 2: Referral &amp; Transport</h2>
+    <p class="form-hint">Referral facility, ambulance service, event time, and departure time.</p>
+
+    <h3>Referral facility</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="referral_facility_name">Name of facility</label>
+            <input type="text" id="referral_facility_name" name="referral_transport.referral_facility.name"
+                   value="{{ referral_transport.referralFacility.name }}">
+        </div>
+        <div class="form-group">
+            <label for="referral_facility_focal_point">Focal point</label>
+            <input type="text" id="referral_facility_focal_point" name="referral_transport.referral_facility.focal_point"
+                   value="{{ referral_transport.referralFacility.focalPoint }}">
+        </div>
+        <div class="form-group">
+            <label for="referral_facility_phone_number">Phone number</label>
+            <input type="text" id="referral_facility_phone_number" name="referral_transport.referral_facility.phone_number"
+                   value="{{ referral_transport.referralFacility.phoneNumber }}">
+        </div>
+    </div>
+
+    <h3>Ambulance / transport vehicle</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ambulance_name">Name / unit</label>
+            <input type="text" id="ambulance_name" name="referral_transport.ambulance.name"
+                   value="{{ referral_transport.ambulance.name }}">
+        </div>
+        <div class="form-group">
+            <label for="ambulance_focal_point">Focal point</label>
+            <input type="text" id="ambulance_focal_point" name="referral_transport.ambulance.focal_point"
+                   value="{{ referral_transport.ambulance.focalPoint }}">
+        </div>
+        <div class="form-group">
+            <label for="ambulance_phone_number">Phone number</label>
+            <input type="text" id="ambulance_phone_number" name="referral_transport.ambulance.phone_number"
+                   value="{{ referral_transport.ambulance.phoneNumber }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="event_date_time">Date &amp; time of event</label>
+            <input type="datetime-local" id="event_date_time" name="referral_transport.event_date_time"
+                   value="{{ referral_transport.eventDateTime }}">
+        </div>
+        <div class="form-group">
+            <label for="departure_date_time">Date &amp; time of departure from scene</label>
+            <input type="datetime-local" id="departure_date_time" name="referral_transport.departure_date_time"
+                   value="{{ referral_transport.departureDateTime }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="card">
+    <h2>Step 5: Major Bleeding (C)</h2>
+    <p class="form-hint">Catastrophic haemorrhage assessment and intervention.</p>
+
+    <h3>Assessment</h3>
+    <label><input type="checkbox" name="major_bleeding.assessment_normal" value="on" {% if major_bleeding.assessmentNormal %}checked{% endif %}> Normal</label>
+    <div class="form-group">
+        <label for="major_bleeding_assessment_findings">Findings (if not normal)</label>
+        <textarea id="major_bleeding_assessment_findings" name="major_bleeding.assessment_findings">{{ major_bleeding.assessmentFindings }}</textarea>
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="major_bleeding.interventions.direct_pressure" value="on" {% if major_bleeding.interventions.directPressure %}checked{% endif %}> Direct Pressure</label>
+        <label><input type="checkbox" name="major_bleeding.interventions.deep_wound_packing" value="on" {% if major_bleeding.interventions.deepWoundPacking %}checked{% endif %}> Deep Wound Packing</label>
+        <label><input type="checkbox" name="major_bleeding.interventions.tourniquet" value="on" {% if major_bleeding.interventions.tourniquet %}checked{% endif %}> Tourniquet (life-threatening only)</label>
+        <label><input type="checkbox" name="major_bleeding.interventions.uterine_massage" value="on" {% if major_bleeding.interventions.uterineMassage %}checked{% endif %}> Uterine Massage</label>
+        <label><input type="checkbox" name="major_bleeding.interventions.none" value="on" {% if major_bleeding.interventions.none %}checked{% endif %}> None</label>
+    </div>
+
+    <div class="form-group">
+        <label for="tourniquet_application_time">Tourniquet application time (required if tourniquet applied)</label>
+        <input type="text" id="tourniquet_application_time"
+               name="major_bleeding.interventions.tourniquet_application_time"
+               value="{{ major_bleeding.interventions.tourniquetApplicationTime }}"
+               placeholder="e.g. 14:32">
+    </div>
+</div>

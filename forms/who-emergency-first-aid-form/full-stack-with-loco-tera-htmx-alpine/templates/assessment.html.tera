@@ -1,0 +1,33 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Emergency First Aid Form - Encounter{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>WHO Emergency First Aid Form</h1>
+    <p class="form-hint">
+        Complete all {{ total_steps }} sections (Patient Identification, Referral &amp;
+        Transport, Situation, Background, CABCDE, Recommendations, Responder Details)
+        and submit to record the encounter. A copy should be sent to the referral facility.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+    {% include "assessment/step11.html.tera" %}
+    {% include "assessment/step12.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit First Aid Form</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,20 @@
+<div class="card">
+    <h2>Step 6: Airway (A)</h2>
+    <p class="form-hint">Airway assessment and intervention.</p>
+
+    <h3>Assessment</h3>
+    <label><input type="checkbox" name="airway.assessment_normal" value="on" {% if airway.assessmentNormal %}checked{% endif %}> Normal</label>
+    <div class="form-group">
+        <label for="airway_assessment_findings">Findings (if not normal)</label>
+        <textarea id="airway_assessment_findings" name="airway.assessment_findings">{{ airway.assessmentFindings }}</textarea>
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-group">
+        <label><input type="checkbox" name="airway.interventions.neck_immobilization" value="on" {% if airway.interventions.neckImmobilization %}checked{% endif %}> Neck Immobilization</label>
+        <label><input type="checkbox" name="airway.interventions.head_tilt_chin_lift" value="on" {% if airway.interventions.headTiltChinLift %}checked{% endif %}> Head-Tilt Chin-Lift</label>
+        <label><input type="checkbox" name="airway.interventions.jaw_thrust" value="on" {% if airway.interventions.jawThrust %}checked{% endif %}> Jaw Thrust</label>
+        <label><input type="checkbox" name="airway.interventions.choking_care" value="on" {% if airway.interventions.chokingCare %}checked{% endif %}> Choking Care</label>
+        <label><input type="checkbox" name="airway.interventions.none" value="on" {% if airway.interventions.none %}checked{% endif %}> None</label>
+    </div>
+</div>

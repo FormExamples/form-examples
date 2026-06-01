@@ -1,237 +1,329 @@
-//! HTTP routes for the WHO Emergency First Aid Form assessment.
-//!
-//! Endpoints:
-//!
-//! - `GET  /`                          → landing
-//! - `POST /assessment/new`            → create a new assessment, redirect
-//! - `GET  /assessment/{id}`           → single-page wizard
-//! - `POST /assessment/{id}/submit`    → save form data, redirect to report
-//! - `GET  /assessment/{id}/report`    → render validated report
-
-use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
-use crate::engine::types::AssessmentData;
-use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
+use crate::engine::cfar_validator::validate_cfar;
+use crate::engine::flagged_issues::detect_flagged_issues;
+use crate::engine::types::{AssessmentData, GradingResult};
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::build_assessment_context;
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
-    let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+/// POST /assessment/new -- create a new draft assessment, redirect to the wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
-}
-
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page assessment wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
+
     let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
+/// Convert form section name (snake_case) to JSON key (camelCase).
+fn section_to_json(section: &str) -> &str {
+    match section {
+        "patient_identification" => "patientIdentification",
+        "referral_transport" => "referralTransport",
+        "situation" => "situation",
+        "background" => "background",
+        "major_bleeding" => "majorBleeding",
+        "airway" => "airway",
+        "breathing" => "breathing",
+        "circulation" => "circulation",
+        "disability" => "disability",
+        "exposure" => "exposure",
+        "recommendations" => "recommendations",
+        "responder_details" => "responderDetails",
+        other => other,
     }
-    Redirect::to(&format!("/assessment/{id}/report"))
 }
 
-/// GET /assessment/{id}/report — render the validated report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
-}
-
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
-/// strongly-typed `AssessmentData`. Unknown / blank fields fall back to
-/// defaults.
-fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
-    let mut data = AssessmentData::default();
-
-    let s = |k: &str| form.get(k).cloned().unwrap_or_default();
-    let b = |k: &str| {
-        let v = form.get(k).cloned().unwrap_or_default();
-        v == "on" || v == "true" || v == "yes" || v == "1"
-    };
-    let n = |k: &str| -> Option<f64> {
-        let v = form.get(k).cloned().unwrap_or_default();
-        if v.trim().is_empty() {
-            None
+/// Convert form field name (snake_case) to JSON key (camelCase).
+fn field_to_json(field: &str) -> String {
+    let parts: Vec<&str> = field.split('_').collect();
+    let mut result = String::new();
+    for (i, part) in parts.iter().enumerate() {
+        if i == 0 {
+            result.push_str(part);
         } else {
-            v.trim().parse::<f64>().ok()
+            let mut chars = part.chars();
+            if let Some(first) = chars.next() {
+                result.push(first.to_ascii_uppercase());
+                result.extend(chars);
+            }
         }
-    };
-
-    // ─── Step 1 — Patient Identification ──────────────────
-    data.patient_identification.patient_name = s("patientName");
-    data.patient_identification.date_of_birth = s("dateOfBirth");
-    data.patient_identification.age = n("age");
-    data.patient_identification.sex = s("sex");
-    data.patient_identification.patient_contact_information = s("patientContactInformation");
-    data.patient_identification.contact_person.name = s("contactPersonName");
-    data.patient_identification
-        .contact_person
-        .contact_information = s("contactPersonContactInformation");
-
-    // ─── Step 2 — Referral & Transport ────────────────────
-    data.referral_transport.referral_facility.name = s("referralFacilityName");
-    data.referral_transport.referral_facility.focal_point = s("referralFacilityFocalPoint");
-    data.referral_transport.referral_facility.phone_number = s("referralFacilityPhoneNumber");
-    data.referral_transport.ambulance.name = s("ambulanceName");
-    data.referral_transport.ambulance.focal_point = s("ambulanceFocalPoint");
-    data.referral_transport.ambulance.phone_number = s("ambulancePhoneNumber");
-    data.referral_transport.event_date_time = s("eventDateTime");
-    data.referral_transport.departure_date_time = s("departureDateTime");
-
-    // ─── Step 3 — Situation ───────────────────────────────
-    data.situation.medical = b("situationMedical");
-    data.situation.trauma = b("situationTrauma");
-    data.situation.pregnant = s("pregnant");
-    data.situation.what_happened = s("whatHappened");
-
-    // ─── Step 4 — Background ──────────────────────────────
-    data.background.past_medical_and_surgical_history = s("pastMedicalAndSurgicalHistory");
-    data.background.current_medications_or_allergies = s("currentMedicationsOrAllergies");
-
-    // ─── Step 5 — Major Bleeding (C) ──────────────────────
-    data.major_bleeding.assessment_normal = b("majorBleedingAssessmentNormal");
-    data.major_bleeding.assessment_findings = s("majorBleedingAssessmentFindings");
-    data.major_bleeding.interventions.direct_pressure = b("majorBleedingDirectPressure");
-    data.major_bleeding.interventions.deep_wound_packing = b("majorBleedingDeepWoundPacking");
-    data.major_bleeding.interventions.tourniquet = b("majorBleedingTourniquet");
-    data.major_bleeding.interventions.tourniquet_application_time =
-        s("majorBleedingTourniquetApplicationTime");
-    data.major_bleeding.interventions.uterine_massage = b("majorBleedingUterineMassage");
-    data.major_bleeding.interventions.none = b("majorBleedingNone");
-
-    // ─── Step 6 — Airway (A) ──────────────────────────────
-    data.airway.assessment_normal = b("airwayAssessmentNormal");
-    data.airway.assessment_findings = s("airwayAssessmentFindings");
-    data.airway.interventions.neck_immobilization = b("airwayNeckImmobilization");
-    data.airway.interventions.head_tilt_chin_lift = b("airwayHeadTiltChinLift");
-    data.airway.interventions.jaw_thrust = b("airwayJawThrust");
-    data.airway.interventions.choking_care = b("airwayChokingCare");
-    data.airway.interventions.none = b("airwayNone");
-
-    // ─── Step 7 — Breathing (B) ───────────────────────────
-    data.breathing.assessment_normal = b("breathingAssessmentNormal");
-    data.breathing.assessment_findings = s("breathingAssessmentFindings");
-    data.breathing.interventions.maintained_position_of_comfort =
-        b("breathingMaintainedPositionOfComfort");
-    data.breathing.interventions.none = b("breathingNone");
-
-    // ─── Step 8 — Circulation (C) ─────────────────────────
-    data.circulation.assessment_normal = b("circulationAssessmentNormal");
-    data.circulation.assessment_findings = s("circulationAssessmentFindings");
-    data.circulation.interventions.pelvic_binder = b("circulationPelvicBinder");
-    data.circulation.interventions.control_minor_bleeding = b("circulationControlMinorBleeding");
-    data.circulation.interventions.fracture_care = b("circulationFractureCare");
-    data.circulation.interventions.oral_hydration = b("circulationOralHydration");
-    data.circulation.interventions.left_lateral_position = b("circulationLeftLateralPosition");
-    data.circulation.interventions.none = b("circulationNone");
-
-    // ─── Step 9 — Disability (D) ──────────────────────────
-    data.disability.assessment_normal = b("disabilityAssessmentNormal");
-    data.disability.assessment_findings = s("disabilityAssessmentFindings");
-    data.disability.interventions.spinal_immobilisation = b("disabilitySpinalImmobilisation");
-    data.disability.interventions.glucose_given = b("disabilityGlucoseGiven");
-    data.disability.interventions.seizure_care = b("disabilitySeizureCare");
-    data.disability.interventions.high_temperature_care = b("disabilityHighTemperatureCare");
-    data.disability.interventions.low_temperature_care = b("disabilityLowTemperatureCare");
-    data.disability.interventions.none = b("disabilityNone");
-
-    // ─── Step 10 — Exposure / Other (E) ───────────────────
-    data.exposure.assessment_normal = b("exposureAssessmentNormal");
-    data.exposure.assessment_findings = s("exposureAssessmentFindings");
-    data.exposure.interventions.recovery_position = b("exposureRecoveryPosition");
-    data.exposure.interventions.burn_care = b("exposureBurnCare");
-    data.exposure.interventions.wound_care = b("exposureWoundCare");
-    data.exposure.interventions.drowning_care = b("exposureDrowningCare");
-    data.exposure.interventions.snakebite_care = b("exposureSnakebiteCare");
-    data.exposure.interventions.none = b("exposureNone");
-    data.exposure.medication_taken_none = b("medicationTakenNone");
-    data.exposure.medication_taken_details = s("medicationTakenDetails");
-
-    // ─── Step 11 — Recommendations ────────────────────────
-    data.recommendations.transport_plan = s("transportPlan");
-    data.recommendations.problems_anticipated = s("problemsAnticipated");
-    data.recommendations.other_concerns = s("otherConcerns");
-    data.recommendations.precautions.highly_infectious_disease = b("highlyInfectiousDisease");
-    data.recommendations.precautions.spinal_immobilization =
-        b("precautionsSpinalImmobilization");
-    data.recommendations.precautions.possible_fracture = b("possibleFracture");
-    data.recommendations.precautions.fall_risk = b("fallRisk");
-    data.recommendations.precautions.altered_mental_status = b("alteredMentalStatus");
-    data.recommendations.precautions.other = b("precautionOther");
-    data.recommendations.precautions.other_details = s("precautionOtherDetails");
-
-    // ─── Step 12 — Responder Details (CFAR) ───────────────
-    data.responder_details.name = s("responderName");
-    data.responder_details.signature = s("responderSignature");
-    data.responder_details.contact_information = s("responderContactInformation");
-    data.responder_details.cfar_organization = s("cfarOrganization");
-
-    data
+    }
+    result
 }
 
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
+/// Parse a form value string. Empty strings stay as `""`; numbers are
+/// converted to JSON numbers so the typed engine deserializes them as
+/// `Option<f64>` / `Option<i32>`. Checkbox values `"on"` become `true`.
+fn parse_form_value(value: &serde_json::Value, as_bool: bool) -> serde_json::Value {
+    if let Some(s) = value.as_str() {
+        if as_bool {
+            let truthy = s == "on" || s == "true" || s == "yes" || s == "1";
+            return serde_json::Value::Bool(truthy);
         }
+        if s.is_empty() {
+            serde_json::Value::String(String::new())
+        } else if let Ok(n) = s.parse::<f64>() {
+            serde_json::json!(n)
+        } else {
+            value.clone()
+        }
+    } else {
+        value.clone()
     }
 }
 
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+/// Determine whether a JSON key in a section is a boolean checkbox field.
+///
+/// We treat any field that ends with `Normal`, `None`, intervention-checkbox
+/// names, precaution flag names, and the situation problem-type flags as
+/// booleans. Everything else stays as a string / number.
+fn is_bool_field(section: &str, key: &str) -> bool {
+    if key.ends_with("Normal") || key == "none" || key.ends_with("None") {
+        return true;
+    }
+    match section {
+        "situation" => matches!(key, "medical" | "trauma"),
+        "majorBleeding" => matches!(
+            key,
+            "assessmentNormal" | "directPressure" | "deepWoundPacking" | "tourniquet" | "uterineMassage" | "none"
+        ),
+        "airway" => matches!(
+            key,
+            "assessmentNormal"
+                | "neckImmobilization"
+                | "headTiltChinLift"
+                | "jawThrust"
+                | "chokingCare"
+                | "none"
+        ),
+        "breathing" => matches!(
+            key,
+            "assessmentNormal" | "maintainedPositionOfComfort" | "none"
+        ),
+        "circulation" => matches!(
+            key,
+            "assessmentNormal"
+                | "pelvicBinder"
+                | "controlMinorBleeding"
+                | "fractureCare"
+                | "oralHydration"
+                | "leftLateralPosition"
+                | "none"
+        ),
+        "disability" => matches!(
+            key,
+            "assessmentNormal"
+                | "spinalImmobilisation"
+                | "glucoseGiven"
+                | "seizureCare"
+                | "highTemperatureCare"
+                | "lowTemperatureCare"
+                | "none"
+        ),
+        "exposure" => matches!(
+            key,
+            "assessmentNormal"
+                | "recoveryPosition"
+                | "burnCare"
+                | "woundCare"
+                | "drowningCare"
+                | "snakebiteCare"
+                | "none"
+                | "medicationTakenNone"
+        ),
+        "recommendations" => matches!(
+            key,
+            "highlyInfectiousDisease"
+                | "spinalImmobilization"
+                | "possibleFracture"
+                | "fallRisk"
+                | "alteredMentalStatus"
+                | "other"
+        ),
+        _ => false,
+    }
+}
+
+/// Merge a single dotted form key into the JSON `data` object.
+fn merge_field(
+    obj: &mut serde_json::Map<String, serde_json::Value>,
+    section: &str,
+    sub_path: &[&str],
+    value: &serde_json::Value,
+) {
+    if sub_path.is_empty() {
+        return;
+    }
+    let section_key = section_to_json(section);
+
+    // Drill down into the section object, creating nested objects as needed.
+    let section_obj = obj
+        .entry(section_key.to_string())
+        .or_insert_with(|| serde_json::Value::Object(serde_json::Map::new()));
+
+    let Some(mut cur) = section_obj.as_object_mut() else {
+        return;
+    };
+
+    let last_index = sub_path.len() - 1;
+    for (i, part) in sub_path.iter().enumerate() {
+        let camel = field_to_json(part);
+        if i == last_index {
+            let as_bool = is_bool_field(section_key, &camel);
+            cur.insert(camel, parse_form_value(value, as_bool));
+            return;
+        }
+        let entry = cur
+            .entry(camel.clone())
+            .or_insert_with(|| serde_json::Value::Object(serde_json::Map::new()));
+        if !entry.is_object() {
+            *entry = serde_json::Value::Object(serde_json::Map::new());
+        }
+        cur = entry.as_object_mut().unwrap();
+    }
+}
+
+/// POST /assessment/{id}/submit -- merge form data into the JSONB blob,
+/// redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form_data): axum::extract::Form<serde_json::Value>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let mut data_value = item.data.clone();
+    if let Some(obj) = data_value.as_object_mut() {
+        if let Some(form_obj) = form_data.as_object() {
+            for (key, value) in form_obj {
+                // section.subfield[.subfield...]
+                let parts: Vec<&str> = key.split('.').collect();
+                if parts.len() < 2 {
+                    continue;
+                }
+                let section = parts[0];
+                let sub_path = &parts[1..];
+                merge_field(obj, section, sub_path, value);
+            }
+        }
+    }
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
+}
+
+/// GET /assessment/{id}/report -- run the grading engine, persist the
+/// result, and render the report template.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let assessment_data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let validation = validate_cfar(&assessment_data);
+    let flagged_issues = detect_flagged_issues(&assessment_data);
+    let timestamp = Utc::now().to_rfc3339();
+
+    let grade = GradingResult {
+        validation,
+        flagged_issues,
+        timestamp: timestamp.clone(),
+    };
+
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("data", &assessment_data);
+    context.insert("result", &grade);
+    context.insert("timestamp", &timestamp);
+
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
+    let context = Context::new();
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }
