@@ -1,0 +1,57 @@
+<div class="card">
+    <h2>Step 4: Performance Status</h2>
+    <p class="form-hint">Record at least one performance-status score (PPS, AKPS, or ECOG).</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pps_score">PPS Score (0-100)</label>
+            <input type="number" min="0" max="100" step="10" id="pps_score" name="performance_status.pps_score"
+                   value="{{ performance_status.ppsScore }}">
+        </div>
+        <div class="form-group">
+            <label for="akps_score">AKPS Score (0-100)</label>
+            <input type="number" min="0" max="100" step="10" id="akps_score" name="performance_status.akps_score"
+                   value="{{ performance_status.akpsScore }}">
+        </div>
+        <div class="form-group">
+            <label for="ecog_score">ECOG Score (0-5)</label>
+            <input type="number" min="0" max="5" id="ecog_score" name="performance_status.ecog_score"
+                   value="{{ performance_status.ecogScore }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="mobility_notes">Mobility Notes</label>
+        <textarea id="mobility_notes" name="performance_status.mobility_notes">{{ performance_status.mobilityNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="activity_level">Activity Level</label>
+        <input type="text" id="activity_level" name="performance_status.activity_level"
+               value="{{ performance_status.activityLevel }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bed_bound">Bed-Bound?</label>
+            <select id="bed_bound" name="performance_status.bed_bound">
+                <option value="" {% if performance_status.bedBound == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if performance_status.bedBound == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if performance_status.bedBound == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="requires_assistance_with_adls">Requires Assistance with ADLs?</label>
+            <select id="requires_assistance_with_adls" name="performance_status.requires_assistance_with_adls">
+                <option value="" {% if performance_status.requiresAssistanceWithAdls == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if performance_status.requiresAssistanceWithAdls == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if performance_status.requiresAssistanceWithAdls == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="adl_notes">ADL Notes</label>
+        <textarea id="adl_notes" name="performance_status.adl_notes">{{ performance_status.adlNotes }}</textarea>
+    </div>
+</div>

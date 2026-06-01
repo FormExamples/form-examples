@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Palliative Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Palliative Assessment</h1>
+        <p class="landing-description">
+            Symptom-focused palliative care assessment using the Edmonton Symptom Assessment
+            System-revised (<strong>ESAS-r</strong>) alongside performance status,
+            goals-of-care documentation, medication and symptom-control planning, and
+            psychosocial and spiritual review to guide individualised palliative management.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>ESAS-r 0-100</h3>
+                <p>Ten symptoms rated 0-10. Bands: None 0-10, Mild 11-30, Moderate 31-60, Severe 61-100.</p>
+            </div>
+            <div class="feature">
+                <h3>Holistic Review</h3>
+                <p>Performance status, ACP documents, medications, psychosocial and carer support, MDT plan.</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for uncontrolled severe symptoms, missing DNACPR, carer overwhelm, and more.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

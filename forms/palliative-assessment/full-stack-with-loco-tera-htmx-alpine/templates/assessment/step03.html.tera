@@ -1,0 +1,80 @@
+<div class="card">
+    <h2>Step 3: ESAS-r Symptom Scoring</h2>
+    <p class="form-hint">
+        Rate each symptom on a 0-10 scale (0 = no symptom, 10 = worst possible).
+        Leave blank if the patient cannot rate that symptom. Total is summed
+        across the ten items (0-100).
+    </p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="esas_pain">Pain (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_pain" name="esasr_symptoms.pain"
+                   value="{{ esasr_symptoms.pain }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_tiredness">Tiredness (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_tiredness" name="esasr_symptoms.tiredness"
+                   value="{{ esasr_symptoms.tiredness }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_drowsiness">Drowsiness (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_drowsiness" name="esasr_symptoms.drowsiness"
+                   value="{{ esasr_symptoms.drowsiness }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="esas_nausea">Nausea (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_nausea" name="esasr_symptoms.nausea"
+                   value="{{ esasr_symptoms.nausea }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_lack_of_appetite">Lack of Appetite (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_lack_of_appetite" name="esasr_symptoms.lack_of_appetite"
+                   value="{{ esasr_symptoms.lackOfAppetite }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_shortness_of_breath">Shortness of Breath (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_shortness_of_breath" name="esasr_symptoms.shortness_of_breath"
+                   value="{{ esasr_symptoms.shortnessOfBreath }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="esas_depression">Depression (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_depression" name="esasr_symptoms.depression"
+                   value="{{ esasr_symptoms.depression }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_anxiety">Anxiety (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_anxiety" name="esasr_symptoms.anxiety"
+                   value="{{ esasr_symptoms.anxiety }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_wellbeing">Wellbeing (0-10; higher = worse)</label>
+            <input type="number" min="0" max="10" id="esas_wellbeing" name="esasr_symptoms.wellbeing"
+                   value="{{ esasr_symptoms.wellbeing }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="esas_other">Other Symptom (0-10)</label>
+            <input type="number" min="0" max="10" id="esas_other" name="esasr_symptoms.other"
+                   value="{{ esasr_symptoms.other }}">
+        </div>
+        <div class="form-group">
+            <label for="esas_other_label">Other Symptom Label</label>
+            <input type="text" id="esas_other_label" name="esasr_symptoms.other_label"
+                   value="{{ esasr_symptoms.otherLabel }}" placeholder="e.g. Constipation, Sleep, Itch">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="esas_symptom_notes">Symptom Notes</label>
+        <textarea id="esas_symptom_notes" name="esasr_symptoms.symptom_notes">{{ esasr_symptoms.symptomNotes }}</textarea>
+    </div>
+</div>

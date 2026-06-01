@@ -1,0 +1,99 @@
+<div class="card">
+    <h2>Step 8: Carer &amp; Family Support</h2>
+    <p class="form-hint">Primary carer, strain level, respite needs, dependants, and bereavement risk.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="primary_carer_name">Primary Carer Name</label>
+            <input type="text" id="primary_carer_name" name="carer_family_support.primary_carer_name"
+                   value="{{ carer_family_support.primaryCarerName }}">
+        </div>
+        <div class="form-group">
+            <label for="primary_carer_relationship">Relationship to Patient</label>
+            <input type="text" id="primary_carer_relationship" name="carer_family_support.primary_carer_relationship"
+                   value="{{ carer_family_support.primaryCarerRelationship }}">
+        </div>
+        <div class="form-group">
+            <label for="carer_lives_with_patient">Carer Lives with Patient?</label>
+            <select id="carer_lives_with_patient" name="carer_family_support.carer_lives_with_patient">
+                <option value="" {% if carer_family_support.carerLivesWithPatient == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if carer_family_support.carerLivesWithPatient == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if carer_family_support.carerLivesWithPatient == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Strain</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="carer_strain_reported">Carer Strain Reported?</label>
+            <select id="carer_strain_reported" name="carer_family_support.carer_strain_reported">
+                <option value="" {% if carer_family_support.carerStrainReported == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if carer_family_support.carerStrainReported == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if carer_family_support.carerStrainReported == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="carer_strain_level">Carer Strain Level</label>
+            <select id="carer_strain_level" name="carer_family_support.carer_strain_level">
+                <option value="" {% if carer_family_support.carerStrainLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if carer_family_support.carerStrainLevel == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if carer_family_support.carerStrainLevel == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if carer_family_support.carerStrainLevel == "high" %}selected{% endif %}>High</option>
+                <option value="overwhelmed" {% if carer_family_support.carerStrainLevel == "overwhelmed" %}selected{% endif %}>Overwhelmed</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="carer_strain_notes">Carer Strain Notes</label>
+        <textarea id="carer_strain_notes" name="carer_family_support.carer_strain_notes">{{ carer_family_support.carerStrainNotes }}</textarea>
+    </div>
+
+    <h3>Respite</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="respite_required">Respite Required?</label>
+            <select id="respite_required" name="carer_family_support.respite_required">
+                <option value="" {% if carer_family_support.respiteRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if carer_family_support.respiteRequired == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if carer_family_support.respiteRequired == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="respite_notes">Respite Notes</label>
+        <textarea id="respite_notes" name="carer_family_support.respite_notes">{{ carer_family_support.respiteNotes }}</textarea>
+    </div>
+
+    <h3>Children in Household</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="children_in_household">Children in Household?</label>
+            <select id="children_in_household" name="carer_family_support.children_in_household">
+                <option value="" {% if carer_family_support.childrenInHousehold == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if carer_family_support.childrenInHousehold == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if carer_family_support.childrenInHousehold == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="children_support_notes">Children Support Notes</label>
+        <textarea id="children_support_notes" name="carer_family_support.children_support_notes">{{ carer_family_support.childrenSupportNotes }}</textarea>
+    </div>
+
+    <h3>Bereavement</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bereavement_risk_identified">Bereavement Risk Identified?</label>
+            <select id="bereavement_risk_identified" name="carer_family_support.bereavement_risk_identified">
+                <option value="" {% if carer_family_support.bereavementRiskIdentified == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if carer_family_support.bereavementRiskIdentified == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if carer_family_support.bereavementRiskIdentified == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bereavement_notes">Bereavement Notes</label>
+        <textarea id="bereavement_notes" name="carer_family_support.bereavement_notes">{{ carer_family_support.bereavementNotes }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="card">
+    <h2>Step 2: Primary Diagnosis &amp; Prognosis</h2>
+    <p class="form-hint">Diagnosis, stage, prognosis horizon, and the surprise question.</p>
+
+    <div class="form-group">
+        <label for="primary_diagnosis">Primary Diagnosis</label>
+        <input type="text" id="primary_diagnosis" name="primary_diagnosis_prognosis.primary_diagnosis"
+               value="{{ primary_diagnosis_prognosis.primaryDiagnosis }}">
+    </div>
+
+    <div class="form-group">
+        <label for="secondary_diagnoses">Secondary Diagnoses</label>
+        <textarea id="secondary_diagnoses" name="primary_diagnosis_prognosis.secondary_diagnoses">{{ primary_diagnosis_prognosis.secondaryDiagnoses }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_diagnosis">Date of Diagnosis</label>
+            <input type="date" id="date_of_diagnosis" name="primary_diagnosis_prognosis.date_of_diagnosis"
+                   value="{{ primary_diagnosis_prognosis.dateOfDiagnosis }}">
+        </div>
+        <div class="form-group">
+            <label for="stage_or_severity">Stage / Severity</label>
+            <input type="text" id="stage_or_severity" name="primary_diagnosis_prognosis.stage_or_severity"
+                   value="{{ primary_diagnosis_prognosis.stageOrSeverity }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="disease_progressing">Disease Progressing?</label>
+            <select id="disease_progressing" name="primary_diagnosis_prognosis.disease_progressing">
+                <option value="" {% if primary_diagnosis_prognosis.diseaseProgressing == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if primary_diagnosis_prognosis.diseaseProgressing == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if primary_diagnosis_prognosis.diseaseProgressing == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="prognosis_horizon">Prognosis Horizon</label>
+            <select id="prognosis_horizon" name="primary_diagnosis_prognosis.prognosis_horizon">
+                <option value="" {% if primary_diagnosis_prognosis.prognosisHorizon == "" %}selected{% endif %}>&mdash;</option>
+                <option value="days" {% if primary_diagnosis_prognosis.prognosisHorizon == "days" %}selected{% endif %}>Days</option>
+                <option value="weeks" {% if primary_diagnosis_prognosis.prognosisHorizon == "weeks" %}selected{% endif %}>Weeks</option>
+                <option value="months" {% if primary_diagnosis_prognosis.prognosisHorizon == "months" %}selected{% endif %}>Months</option>
+                <option value="years" {% if primary_diagnosis_prognosis.prognosisHorizon == "years" %}selected{% endif %}>Years</option>
+                <option value="uncertain" {% if primary_diagnosis_prognosis.prognosisHorizon == "uncertain" %}selected{% endif %}>Uncertain</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="surprise_question">Surprise Question (would you be surprised if the patient died in the next 12 months?)</label>
+            <select id="surprise_question" name="primary_diagnosis_prognosis.surprise_question">
+                <option value="" {% if primary_diagnosis_prognosis.surpriseQuestion == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if primary_diagnosis_prognosis.surpriseQuestion == "yes" %}selected{% endif %}>Yes (would be surprised)</option>
+                <option value="no" {% if primary_diagnosis_prognosis.surpriseQuestion == "no" %}selected{% endif %}>No (would not be surprised)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="prognostic_indicators">Prognostic Indicators</label>
+        <textarea id="prognostic_indicators" name="primary_diagnosis_prognosis.prognostic_indicators">{{ primary_diagnosis_prognosis.prognosticIndicators }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="relevant_treatment_history">Relevant Treatment History</label>
+        <textarea id="relevant_treatment_history" name="primary_diagnosis_prognosis.relevant_treatment_history">{{ primary_diagnosis_prognosis.relevantTreatmentHistory }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="card">
+    <h2>Step 5: Goals of Care &amp; ACP Documents</h2>
+    <p class="form-hint">Patient wishes, preferred place of care/death, and advance care planning documents.</p>
+
+    <div class="form-group">
+        <label for="patient_priorities_and_wishes">Patient Priorities and Wishes</label>
+        <textarea id="patient_priorities_and_wishes" name="goals_of_care_acp.patient_priorities_and_wishes">{{ goals_of_care_acp.patientPrioritiesAndWishes }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_place_of_care">Preferred Place of Care</label>
+            <input type="text" id="preferred_place_of_care" name="goals_of_care_acp.preferred_place_of_care"
+                   value="{{ goals_of_care_acp.preferredPlaceOfCare }}">
+        </div>
+        <div class="form-group">
+            <label for="preferred_place_of_death">Preferred Place of Death</label>
+            <input type="text" id="preferred_place_of_death" name="goals_of_care_acp.preferred_place_of_death"
+                   value="{{ goals_of_care_acp.preferredPlaceOfDeath }}">
+        </div>
+    </div>
+
+    <h3>RESPECT</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="respect_form_completed">RESPECT Form Completed?</label>
+            <select id="respect_form_completed" name="goals_of_care_acp.respect_form_completed">
+                <option value="" {% if goals_of_care_acp.respectFormCompleted == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if goals_of_care_acp.respectFormCompleted == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if goals_of_care_acp.respectFormCompleted == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if goals_of_care_acp.respectFormCompleted == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="respect_form_date">RESPECT Date</label>
+            <input type="date" id="respect_form_date" name="goals_of_care_acp.respect_form_date"
+                   value="{{ goals_of_care_acp.respectFormDate }}">
+        </div>
+    </div>
+
+    <h3>ADRT</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="adrt_completed">ADRT Completed?</label>
+            <select id="adrt_completed" name="goals_of_care_acp.adrt_completed">
+                <option value="" {% if goals_of_care_acp.adrtCompleted == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if goals_of_care_acp.adrtCompleted == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if goals_of_care_acp.adrtCompleted == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if goals_of_care_acp.adrtCompleted == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="adrt_date">ADRT Date</label>
+            <input type="date" id="adrt_date" name="goals_of_care_acp.adrt_date"
+                   value="{{ goals_of_care_acp.adrtDate }}">
+        </div>
+    </div>
+
+    <h3>LPA — Health &amp; Welfare</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="lpa_health_and_welfare">LPA in Place?</label>
+            <select id="lpa_health_and_welfare" name="goals_of_care_acp.lpa_health_and_welfare">
+                <option value="" {% if goals_of_care_acp.lpaHealthAndWelfare == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if goals_of_care_acp.lpaHealthAndWelfare == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if goals_of_care_acp.lpaHealthAndWelfare == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if goals_of_care_acp.lpaHealthAndWelfare == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="lpa_name">LPA Attorney Name</label>
+            <input type="text" id="lpa_name" name="goals_of_care_acp.lpa_name"
+                   value="{{ goals_of_care_acp.lpaName }}">
+        </div>
+    </div>
+
+    <h3>DNACPR</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dnacpr_documented">DNACPR Documented?</label>
+            <select id="dnacpr_documented" name="goals_of_care_acp.dnacpr_documented">
+                <option value="" {% if goals_of_care_acp.dnacprDocumented == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if goals_of_care_acp.dnacprDocumented == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if goals_of_care_acp.dnacprDocumented == "no" %}selected{% endif %}>No</option>
+                <option value="unknown" {% if goals_of_care_acp.dnacprDocumented == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dnacpr_date">DNACPR Date</label>
+            <input type="date" id="dnacpr_date" name="goals_of_care_acp.dnacpr_date"
+                   value="{{ goals_of_care_acp.dnacprDate }}">
+        </div>
+    </div>
+
+    <h3>Ceiling of Treatment</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ceiling_of_treatment_discussed">Ceiling of Treatment Discussed?</label>
+            <select id="ceiling_of_treatment_discussed" name="goals_of_care_acp.ceiling_of_treatment_discussed">
+                <option value="" {% if goals_of_care_acp.ceilingOfTreatmentDiscussed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if goals_of_care_acp.ceilingOfTreatmentDiscussed == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if goals_of_care_acp.ceilingOfTreatmentDiscussed == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ceiling_of_treatment_notes">Ceiling of Treatment Notes</label>
+        <textarea id="ceiling_of_treatment_notes" name="goals_of_care_acp.ceiling_of_treatment_notes">{{ goals_of_care_acp.ceilingOfTreatmentNotes }}</textarea>
+    </div>
+</div>

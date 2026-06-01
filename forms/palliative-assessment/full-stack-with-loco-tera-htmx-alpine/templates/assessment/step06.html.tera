@@ -1,0 +1,123 @@
+<div class="card">
+    <h2>Step 6: Medications &amp; Symptom Control Plan</h2>
+    <p class="form-hint">
+        List regular and as-needed (PRN) medications. Up to six rows of each are accepted;
+        leave name blank to skip a row.
+    </p>
+
+    <h3>Regular Medications</h3>
+    {% for i in range(end=6) %}
+    <fieldset class="med-row">
+        <legend>Regular Medication {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="reg_med_{{ i }}_name">Name</label>
+                <input type="text" id="reg_med_{{ i }}_name" name="regular_medications[{{ i }}].name"
+                       value="{% if medications_symptom_control.regularMedications | length > i %}{{ medications_symptom_control.regularMedications[i].name }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="reg_med_{{ i }}_dose">Dose</label>
+                <input type="text" id="reg_med_{{ i }}_dose" name="regular_medications[{{ i }}].dose"
+                       value="{% if medications_symptom_control.regularMedications | length > i %}{{ medications_symptom_control.regularMedications[i].dose }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="reg_med_{{ i }}_route">Route</label>
+                <input type="text" id="reg_med_{{ i }}_route" name="regular_medications[{{ i }}].route"
+                       value="{% if medications_symptom_control.regularMedications | length > i %}{{ medications_symptom_control.regularMedications[i].route }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="reg_med_{{ i }}_frequency">Frequency</label>
+                <input type="text" id="reg_med_{{ i }}_frequency" name="regular_medications[{{ i }}].frequency"
+                       value="{% if medications_symptom_control.regularMedications | length > i %}{{ medications_symptom_control.regularMedications[i].frequency }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="reg_med_{{ i }}_indication">Indication</label>
+                <input type="text" id="reg_med_{{ i }}_indication" name="regular_medications[{{ i }}].indication"
+                       value="{% if medications_symptom_control.regularMedications | length > i %}{{ medications_symptom_control.regularMedications[i].indication }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    <h3>As-Needed Medications</h3>
+    {% for i in range(end=6) %}
+    <fieldset class="med-row">
+        <legend>PRN Medication {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="prn_med_{{ i }}_name">Name</label>
+                <input type="text" id="prn_med_{{ i }}_name" name="as_needed_medications[{{ i }}].name"
+                       value="{% if medications_symptom_control.asNeededMedications | length > i %}{{ medications_symptom_control.asNeededMedications[i].name }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="prn_med_{{ i }}_dose">Dose</label>
+                <input type="text" id="prn_med_{{ i }}_dose" name="as_needed_medications[{{ i }}].dose"
+                       value="{% if medications_symptom_control.asNeededMedications | length > i %}{{ medications_symptom_control.asNeededMedications[i].dose }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="prn_med_{{ i }}_route">Route</label>
+                <input type="text" id="prn_med_{{ i }}_route" name="as_needed_medications[{{ i }}].route"
+                       value="{% if medications_symptom_control.asNeededMedications | length > i %}{{ medications_symptom_control.asNeededMedications[i].route }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="prn_med_{{ i }}_frequency">Frequency</label>
+                <input type="text" id="prn_med_{{ i }}_frequency" name="as_needed_medications[{{ i }}].frequency"
+                       value="{% if medications_symptom_control.asNeededMedications | length > i %}{{ medications_symptom_control.asNeededMedications[i].frequency }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="prn_med_{{ i }}_indication">Indication</label>
+                <input type="text" id="prn_med_{{ i }}_indication" name="as_needed_medications[{{ i }}].indication"
+                       value="{% if medications_symptom_control.asNeededMedications | length > i %}{{ medications_symptom_control.asNeededMedications[i].indication }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    <h3>Syringe Driver &amp; Anticipatory Medications</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="syringe_driver_in_use">Syringe Driver In Use?</label>
+            <select id="syringe_driver_in_use" name="medications_symptom_control.syringe_driver_in_use">
+                <option value="" {% if medications_symptom_control.syringeDriverInUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medications_symptom_control.syringeDriverInUse == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medications_symptom_control.syringeDriverInUse == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anticipatory_meds_prescribed">Anticipatory Meds Prescribed?</label>
+            <select id="anticipatory_meds_prescribed" name="medications_symptom_control.anticipatory_meds_prescribed">
+                <option value="" {% if medications_symptom_control.anticipatoryMedsPrescribed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if medications_symptom_control.anticipatoryMedsPrescribed == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if medications_symptom_control.anticipatoryMedsPrescribed == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="syringe_driver_details">Syringe Driver Details</label>
+        <textarea id="syringe_driver_details" name="medications_symptom_control.syringe_driver_details">{{ medications_symptom_control.syringeDriverDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="anticipatory_meds_notes">Anticipatory Meds Notes</label>
+        <textarea id="anticipatory_meds_notes" name="medications_symptom_control.anticipatory_meds_notes">{{ medications_symptom_control.anticipatoryMedsNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="symptom_control_overall">Symptom Control Overall</label>
+        <select id="symptom_control_overall" name="medications_symptom_control.symptom_control_overall">
+            <option value="" {% if medications_symptom_control.symptomControlOverall == "" %}selected{% endif %}>&mdash;</option>
+            <option value="good" {% if medications_symptom_control.symptomControlOverall == "good" %}selected{% endif %}>Good</option>
+            <option value="partial" {% if medications_symptom_control.symptomControlOverall == "partial" %}selected{% endif %}>Partial</option>
+            <option value="poor" {% if medications_symptom_control.symptomControlOverall == "poor" %}selected{% endif %}>Poor</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="barriers_to_control">Barriers to Control</label>
+        <textarea id="barriers_to_control" name="medications_symptom_control.barriers_to_control">{{ medications_symptom_control.barriersToControl }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="plan_notes">Symptom-Control Plan Notes</label>
+        <textarea id="plan_notes" name="medications_symptom_control.plan_notes">{{ medications_symptom_control.planNotes }}</textarea>
+    </div>
+</div>

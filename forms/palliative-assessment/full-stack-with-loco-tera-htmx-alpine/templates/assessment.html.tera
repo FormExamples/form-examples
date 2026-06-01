@@ -1,0 +1,30 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Palliative Assessment - Wizard{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Palliative Assessment</h1>
+    <p class="form-hint">
+        Complete all nine sections (Demographics, Diagnosis &amp; Prognosis, ESAS-r symptoms,
+        Performance Status, Goals of Care, Medications, Psychosocial &amp; Spiritual,
+        Carer &amp; Family, Multidisciplinary Plan) and submit to grade the assessment.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}
