@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 7: Braden Scale Scoring</h2>
+    <p class="form-hint">Score each of the six subscales. Subscales 1&ndash;5 use a 1&ndash;4 range; friction &amp; shear uses 1&ndash;3. Lower total = higher pressure-ulcer risk (6&ndash;23).</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="sensory_perception">Sensory Perception (1&ndash;4)</label>
+            <select id="sensory_perception" name="braden_scale.sensory_perception">
+                <option value="" {% if braden_scale.sensoryPerception == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.sensoryPerception == 1 %}selected{% endif %}>1 &mdash; Completely limited</option>
+                <option value="2" {% if braden_scale.sensoryPerception == 2 %}selected{% endif %}>2 &mdash; Very limited</option>
+                <option value="3" {% if braden_scale.sensoryPerception == 3 %}selected{% endif %}>3 &mdash; Slightly limited</option>
+                <option value="4" {% if braden_scale.sensoryPerception == 4 %}selected{% endif %}>4 &mdash; No impairment</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="moisture">Moisture (1&ndash;4)</label>
+            <select id="moisture" name="braden_scale.moisture">
+                <option value="" {% if braden_scale.moisture == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.moisture == 1 %}selected{% endif %}>1 &mdash; Constantly moist</option>
+                <option value="2" {% if braden_scale.moisture == 2 %}selected{% endif %}>2 &mdash; Often moist</option>
+                <option value="3" {% if braden_scale.moisture == 3 %}selected{% endif %}>3 &mdash; Occasionally moist</option>
+                <option value="4" {% if braden_scale.moisture == 4 %}selected{% endif %}>4 &mdash; Rarely moist</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="activity">Activity (1&ndash;4)</label>
+            <select id="activity" name="braden_scale.activity">
+                <option value="" {% if braden_scale.activity == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.activity == 1 %}selected{% endif %}>1 &mdash; Bedfast</option>
+                <option value="2" {% if braden_scale.activity == 2 %}selected{% endif %}>2 &mdash; Chairfast</option>
+                <option value="3" {% if braden_scale.activity == 3 %}selected{% endif %}>3 &mdash; Walks occasionally</option>
+                <option value="4" {% if braden_scale.activity == 4 %}selected{% endif %}>4 &mdash; Walks frequently</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="mobility">Mobility (1&ndash;4)</label>
+            <select id="mobility" name="braden_scale.mobility">
+                <option value="" {% if braden_scale.mobility == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.mobility == 1 %}selected{% endif %}>1 &mdash; Completely immobile</option>
+                <option value="2" {% if braden_scale.mobility == 2 %}selected{% endif %}>2 &mdash; Very limited</option>
+                <option value="3" {% if braden_scale.mobility == 3 %}selected{% endif %}>3 &mdash; Slightly limited</option>
+                <option value="4" {% if braden_scale.mobility == 4 %}selected{% endif %}>4 &mdash; No limitations</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nutrition">Nutrition (1&ndash;4)</label>
+            <select id="nutrition" name="braden_scale.nutrition">
+                <option value="" {% if braden_scale.nutrition == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.nutrition == 1 %}selected{% endif %}>1 &mdash; Very poor</option>
+                <option value="2" {% if braden_scale.nutrition == 2 %}selected{% endif %}>2 &mdash; Probably inadequate</option>
+                <option value="3" {% if braden_scale.nutrition == 3 %}selected{% endif %}>3 &mdash; Adequate</option>
+                <option value="4" {% if braden_scale.nutrition == 4 %}selected{% endif %}>4 &mdash; Excellent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="friction_shear">Friction &amp; Shear (1&ndash;3)</label>
+            <select id="friction_shear" name="braden_scale.friction_shear">
+                <option value="" {% if braden_scale.frictionShear == null %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if braden_scale.frictionShear == 1 %}selected{% endif %}>1 &mdash; Problem</option>
+                <option value="2" {% if braden_scale.frictionShear == 2 %}selected{% endif %}>2 &mdash; Potential problem</option>
+                <option value="3" {% if braden_scale.frictionShear == 3 %}selected{% endif %}>3 &mdash; No apparent problem</option>
+            </select>
+        </div>
+    </div>
+</div>

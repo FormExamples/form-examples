@@ -1,0 +1,31 @@
+<div class="card">
+    <h2>Step 5: Nail Examination</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="nail_colour">Nail Colour</label>
+            <input type="text" id="nail_colour" name="nail_examination.nail_colour"
+                   value="{{ nail_examination.nailColour }}" placeholder="e.g. normal, pale, cyanotic">
+        </div>
+        <div class="form-group">
+            <label for="nail_shape">Nail Shape</label>
+            <input type="text" id="nail_shape" name="nail_examination.nail_shape"
+                   value="{{ nail_examination.nailShape }}" placeholder="e.g. normal, clubbed, spooned">
+        </div>
+        <div class="form-group">
+            <label for="nail_capillary_refill">Capillary Refill</label>
+            <select id="nail_capillary_refill" name="nail_examination.nail_capillary_refill">
+                <option value="" {% if nail_examination.nailCapillaryRefill == "" %}selected{% endif %}>&mdash;</option>
+                <option value="brisk" {% if nail_examination.nailCapillaryRefill == "brisk" %}selected{% endif %}>Brisk (&lt; 2 s)</option>
+                <option value="sluggish" {% if nail_examination.nailCapillaryRefill == "sluggish" %}selected{% endif %}>Sluggish</option>
+                <option value="absent" {% if nail_examination.nailCapillaryRefill == "absent" %}selected{% endif %}>Absent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nail_notes">Nail Notes</label>
+        <textarea id="nail_notes" name="nail_examination.nail_notes"
+                  rows="2">{{ nail_examination.nailNotes }}</textarea>
+    </div>
+</div>

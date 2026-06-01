@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Integumentary Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Integumentary Assessment</h1>
+        <p class="landing-description">
+            Structured integumentary (skin, hair, nails) clinical assessment combining a
+            head-to-toe skin inspection with the <strong>Braden Scale</strong> for pressure-ulcer
+            risk and a wound <strong>TIME</strong> assessment (Tissue, Infection, Moisture, Edge).
+            Output: a graded risk level (No Risk &rarr; Very High Risk) and clinician-facing
+            flags for staging, infection, perfusion, nutrition, and care-plan gaps.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Nine Wizard Steps</h3>
+                <p>Demographics, Concern, Skin, Hair &amp; Scalp, Nails, Wound, Braden, Photography, Impression &amp; Plan</p>
+            </div>
+            <div class="feature">
+                <h3>Braden Scale</h3>
+                <p>Six subscales (sensory, moisture, activity, mobility, nutrition, friction &amp; shear) yielding a 6&ndash;23 total</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Pressure-injury staging, wound infection, suspicious pigmented lesion, severe pain, photographic-consent gaps</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
