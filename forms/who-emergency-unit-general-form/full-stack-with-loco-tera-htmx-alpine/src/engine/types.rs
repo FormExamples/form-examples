@@ -594,3 +594,22 @@ pub struct FlaggedIssue {
     pub message: String,
     pub priority: FlagPriority,
 }
+
+/// Overall encounter status string.
+/// "not-started" | "in-progress" | "complete" | "complete-with-concerns" | "abandoned"
+pub type EncounterStatus = String;
+
+/// Grading output for an encounter.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradingResult {
+    pub encounter_status: EncounterStatus,
+    pub complete: bool,
+    pub total_required: u32,
+    pub total_satisfied: u32,
+    pub overall_percent: u32,
+    pub sections: Vec<SectionCompleteness>,
+    pub fired_rules: Vec<FiredRule>,
+    pub flagged_issues: Vec<FlaggedIssue>,
+    pub timestamp: String,
+}

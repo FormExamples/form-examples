@@ -1,0 +1,77 @@
+<div class="card">
+    <h2>Step 9: Review of Systems</h2>
+    <p class="form-hint">14 body systems. Tick "Normal" or add notes per system.</p>
+
+    {% set ros_systems = ["general", "heent", "respiratory", "cardiovascular", "gastrointestinal", "pelvis_gu_rectal", "female_reproductive", "male_reproductive", "skin", "musculoskeletal", "hematologic", "neurological", "psychiatric", "pediatric_specific"] %}
+
+    <fieldset class="ros-row">
+        <legend>General</legend>
+        <label><input type="checkbox" name="review_of_systems.general.normal__cb" value="on" {% if review_of_systems.general.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.general.notes" value="{{ review_of_systems.general.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>HEENT</legend>
+        <label><input type="checkbox" name="review_of_systems.heent.normal__cb" value="on" {% if review_of_systems.heent.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.heent.notes" value="{{ review_of_systems.heent.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Respiratory</legend>
+        <label><input type="checkbox" name="review_of_systems.respiratory.normal__cb" value="on" {% if review_of_systems.respiratory.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.respiratory.notes" value="{{ review_of_systems.respiratory.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Cardiovascular</legend>
+        <label><input type="checkbox" name="review_of_systems.cardiovascular.normal__cb" value="on" {% if review_of_systems.cardiovascular.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.cardiovascular.notes" value="{{ review_of_systems.cardiovascular.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Gastrointestinal</legend>
+        <label><input type="checkbox" name="review_of_systems.gastrointestinal.normal__cb" value="on" {% if review_of_systems.gastrointestinal.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.gastrointestinal.notes" value="{{ review_of_systems.gastrointestinal.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Pelvis / GU / Rectal</legend>
+        <label><input type="checkbox" name="review_of_systems.pelvis_gu_rectal.normal__cb" value="on" {% if review_of_systems.pelvisGuRectal.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.pelvis_gu_rectal.notes" value="{{ review_of_systems.pelvisGuRectal.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Female Reproductive</legend>
+        <label><input type="checkbox" name="review_of_systems.female_reproductive.normal__cb" value="on" {% if review_of_systems.femaleReproductive.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.female_reproductive.notes" value="{{ review_of_systems.femaleReproductive.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Male Reproductive</legend>
+        <label><input type="checkbox" name="review_of_systems.male_reproductive.normal__cb" value="on" {% if review_of_systems.maleReproductive.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.male_reproductive.notes" value="{{ review_of_systems.maleReproductive.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Skin</legend>
+        <label><input type="checkbox" name="review_of_systems.skin.normal__cb" value="on" {% if review_of_systems.skin.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.skin.notes" value="{{ review_of_systems.skin.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Musculoskeletal</legend>
+        <label><input type="checkbox" name="review_of_systems.musculoskeletal.normal__cb" value="on" {% if review_of_systems.musculoskeletal.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.musculoskeletal.notes" value="{{ review_of_systems.musculoskeletal.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Hematologic</legend>
+        <label><input type="checkbox" name="review_of_systems.hematologic.normal__cb" value="on" {% if review_of_systems.hematologic.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.hematologic.notes" value="{{ review_of_systems.hematologic.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Neurological</legend>
+        <label><input type="checkbox" name="review_of_systems.neurological.normal__cb" value="on" {% if review_of_systems.neurological.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.neurological.notes" value="{{ review_of_systems.neurological.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Psychiatric</legend>
+        <label><input type="checkbox" name="review_of_systems.psychiatric.normal__cb" value="on" {% if review_of_systems.psychiatric.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.psychiatric.notes" value="{{ review_of_systems.psychiatric.notes }}" placeholder="Notes">
+    </fieldset>
+    <fieldset class="ros-row">
+        <legend>Pediatric Specific</legend>
+        <label><input type="checkbox" name="review_of_systems.pediatric_specific.normal__cb" value="on" {% if review_of_systems.pediatricSpecific.normal %}checked{% endif %}> Normal</label>
+        <input type="text" name="review_of_systems.pediatric_specific.notes" value="{{ review_of_systems.pediatricSpecific.notes }}" placeholder="Notes">
+    </fieldset>
+</div>

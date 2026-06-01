@@ -1,0 +1,37 @@
+<div class="card">
+    <h2>Step 4: Airway (A)</h2>
+    <p class="form-hint">Tick "Normal" or describe an abnormal finding; record interventions.</p>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="airway.normal__cb" value="on" {% if airway.normal %}checked{% endif %}> Normal</label>
+        <label><input type="checkbox" name="airway.angioedema__cb" value="on" {% if airway.angioedema %}checked{% endif %}> Angioedema</label>
+        <label><input type="checkbox" name="airway.stridor__cb" value="on" {% if airway.stridor %}checked{% endif %}> Stridor</label>
+        <label><input type="checkbox" name="airway.voice_changes__cb" value="on" {% if airway.voiceChanges %}checked{% endif %}> Voice changes</label>
+        <label><input type="checkbox" name="airway.oral_airway_burns__cb" value="on" {% if airway.oralAirwayBurns %}checked{% endif %}> Oral / airway burns</label>
+    </div>
+
+    <h3>Obstructed by</h3>
+    <div class="form-row">
+        <label><input type="checkbox" name="airway.obstructed_by_tongue__cb" value="on" {% if airway.obstructedByTongue %}checked{% endif %}> Tongue</label>
+        <label><input type="checkbox" name="airway.obstructed_by_blood__cb" value="on" {% if airway.obstructedByBlood %}checked{% endif %}> Blood</label>
+        <label><input type="checkbox" name="airway.obstructed_by_secretions__cb" value="on" {% if airway.obstructedBySecretions %}checked{% endif %}> Secretions</label>
+        <label><input type="checkbox" name="airway.obstructed_by_vomit__cb" value="on" {% if airway.obstructedByVomit %}checked{% endif %}> Vomit</label>
+        <label><input type="checkbox" name="airway.obstructed_by_foreign_body__cb" value="on" {% if airway.obstructedByForeignBody %}checked{% endif %}> Foreign body</label>
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-row">
+        <label><input type="checkbox" name="airway.intervention_repositioning__cb" value="on" {% if airway.interventionRepositioning %}checked{% endif %}> Repositioning</label>
+        <label><input type="checkbox" name="airway.intervention_suction__cb" value="on" {% if airway.interventionSuction %}checked{% endif %}> Suction</label>
+        <label><input type="checkbox" name="airway.intervention_opa__cb" value="on" {% if airway.interventionOpa %}checked{% endif %}> OPA</label>
+        <label><input type="checkbox" name="airway.intervention_npa__cb" value="on" {% if airway.interventionNpa %}checked{% endif %}> NPA</label>
+        <label><input type="checkbox" name="airway.intervention_lma__cb" value="on" {% if airway.interventionLma %}checked{% endif %}> LMA</label>
+        <label><input type="checkbox" name="airway.intervention_bvm__cb" value="on" {% if airway.interventionBvm %}checked{% endif %}> BVM</label>
+        <label><input type="checkbox" name="airway.intervention_ett__cb" value="on" {% if airway.interventionEtt %}checked{% endif %}> ETT</label>
+    </div>
+
+    <div class="form-group">
+        <label for="airway_notes">Airway notes</label>
+        <textarea id="airway_notes" name="airway.notes" rows="2">{{ airway.notes }}</textarea>
+    </div>
+</div>

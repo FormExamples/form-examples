@@ -1,0 +1,119 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Encounter Report - {{ encounter_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>WHO Emergency Unit Form: General &mdash; Encounter Report</h1>
+    <div class="checklist-badge checklist-{{ encounter_status }}">{{ encounter_label }}</div>
+    <div class="checklist-label">Overall completion: {{ overall_percent }}% ({{ total_satisfied }} / {{ total_required }})</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Encounter ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.patientRegistration.firstName }} {{ data.patientRegistration.surname }}<br>
+            <strong>Sex:</strong> {{ data.patientRegistration.sex }}<br>
+            <strong>Date of birth:</strong> {{ data.patientRegistration.dateOfBirth }}<br>
+            <strong>Hospital reg.:</strong> {{ data.patientRegistration.hospitalRegistrationNumber }}
+        </div>
+        <div>
+            <strong>Date / time of arrival:</strong> {{ data.patientRegistration.dateOfArrival }} {{ data.patientRegistration.timeOfArrival }}<br>
+            <strong>Arrival mode:</strong> {{ data.patientRegistration.arrivalMode }}<br>
+            <strong>Triage:</strong> {{ data.chiefComplaintAndVitals.triageCategory }}<br>
+            <strong>Chief complaint:</strong> {{ data.chiefComplaintAndVitals.chiefComplaint }}
+        </div>
+    </div>
+</div>
+
+<!-- Section progress -->
+<div class="card">
+    <h2>Section Completeness</h2>
+    {% if sections | length > 0 %}
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Section</th>
+                <th>Required</th>
+                <th>Satisfied</th>
+                <th>Missing</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in sections %}
+            <tr>
+                <td>{{ s.sectionLabel }}</td>
+                <td>{{ s.required }}</td>
+                <td>{{ s.satisfied }}</td>
+                <td>{{ s.missing | length }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No sections evaluated.</p>
+    {% endif %}
+</div>
+
+<!-- Flagged issues -->
+{% if flagged_issues | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ flagged_issues | length }})</h2>
+    <div class="flags-section">
+        {% for flag in flagged_issues %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired (unanswered) rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Missing Fields ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Section</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.section }}</td>
+                <td>{{ rule.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Disposition -->
+<div class="card">
+    <h2>Disposition</h2>
+    <p><strong>Disposition:</strong> {{ data.disposition.disposition }}</p>
+    <p><strong>Diagnoses / Impressions:</strong> {{ data.disposition.diagnosesImpressions }}</p>
+    <p><strong>Provider:</strong> {{ data.disposition.emergencyUnitProvider }}</p>
+    <p><strong>Signed at:</strong> {{ data.disposition.signatureDate }}</p>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Encounter</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

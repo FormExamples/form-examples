@@ -1,0 +1,149 @@
+<div class="card">
+    <h2>Step 12: Diagnostics</h2>
+    <p class="form-hint">CBC, electrolytes, urine pregnancy test, malaria, HIV, urine dip, ECG, imaging.</p>
+
+    <h3>CBC</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cbc_wbc">WBC</label>
+            <input type="number" step="any" id="cbc_wbc" name="diagnostics.cbc.wbc"
+                   value="{{ diagnostics.cbc.wbc | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="cbc_hgb">Hgb</label>
+            <input type="number" step="any" id="cbc_hgb" name="diagnostics.cbc.hgb"
+                   value="{{ diagnostics.cbc.hgb | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="cbc_plt">Plt</label>
+            <input type="number" step="any" id="cbc_plt" name="diagnostics.cbc.plt"
+                   value="{{ diagnostics.cbc.plt | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="cbc_hct">Hct</label>
+            <input type="number" step="any" id="cbc_hct" name="diagnostics.cbc.hct"
+                   value="{{ diagnostics.cbc.hct | default(value='') }}">
+        </div>
+        <label><input type="checkbox" name="diagnostics.cbc.pending__cb" value="on" {% if diagnostics.cbc.pending %}checked{% endif %}> Pending</label>
+    </div>
+
+    <h3>Electrolytes / Cr / Glucose</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="lytes_na">Na</label>
+            <input type="number" step="any" id="lytes_na" name="diagnostics.lytes.na"
+                   value="{{ diagnostics.lytes.na | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_k">K</label>
+            <input type="number" step="any" id="lytes_k" name="diagnostics.lytes.k"
+                   value="{{ diagnostics.lytes.k | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_cl">Cl</label>
+            <input type="number" step="any" id="lytes_cl" name="diagnostics.lytes.cl"
+                   value="{{ diagnostics.lytes.cl | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_hco3">HCO3</label>
+            <input type="number" step="any" id="lytes_hco3" name="diagnostics.lytes.hco3"
+                   value="{{ diagnostics.lytes.hco3 | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_bun">BUN</label>
+            <input type="number" step="any" id="lytes_bun" name="diagnostics.lytes.bun"
+                   value="{{ diagnostics.lytes.bun | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_cr">Cr</label>
+            <input type="number" step="any" id="lytes_cr" name="diagnostics.lytes.cr"
+                   value="{{ diagnostics.lytes.cr | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="lytes_glucose">Glucose</label>
+            <input type="number" step="any" id="lytes_glucose" name="diagnostics.lytes.glucose"
+                   value="{{ diagnostics.lytes.glucose | default(value='') }}">
+        </div>
+        <label><input type="checkbox" name="diagnostics.lytes.pending__cb" value="on" {% if diagnostics.lytes.pending %}checked{% endif %}> Pending</label>
+    </div>
+
+    <h3>Rapid tests</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="upt">UPT</label>
+            <select id="upt" name="diagnostics.upt">
+                <option value="" {% if diagnostics.upt == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pos" {% if diagnostics.upt == "pos" %}selected{% endif %}>Pos</option>
+                <option value="neg" {% if diagnostics.upt == "neg" %}selected{% endif %}>Neg</option>
+                <option value="pending" {% if diagnostics.upt == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="malaria">Malaria</label>
+            <select id="malaria" name="diagnostics.malaria">
+                <option value="" {% if diagnostics.malaria == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pos" {% if diagnostics.malaria == "pos" %}selected{% endif %}>Pos</option>
+                <option value="neg" {% if diagnostics.malaria == "neg" %}selected{% endif %}>Neg</option>
+                <option value="pending" {% if diagnostics.malaria == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hiv_rapid">HIV Rapid</label>
+            <select id="hiv_rapid" name="diagnostics.hiv_rapid">
+                <option value="" {% if diagnostics.hivRapid == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pos" {% if diagnostics.hivRapid == "pos" %}selected{% endif %}>Pos</option>
+                <option value="neg" {% if diagnostics.hivRapid == "neg" %}selected{% endif %}>Neg</option>
+                <option value="pending" {% if diagnostics.hivRapid == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="blood_type">Blood type</label>
+            <input type="text" id="blood_type" name="diagnostics.blood_type"
+                   value="{{ diagnostics.bloodType }}">
+        </div>
+    </div>
+
+    <h3>Urine dip</h3>
+    <div class="form-row">
+        <label><input type="checkbox" name="diagnostics.urine_dip.glucose__cb" value="on" {% if diagnostics.urineDip.glucose %}checked{% endif %}> Glu</label>
+        <label><input type="checkbox" name="diagnostics.urine_dip.nitrites__cb" value="on" {% if diagnostics.urineDip.nitrites %}checked{% endif %}> Nitr</label>
+        <label><input type="checkbox" name="diagnostics.urine_dip.ketones__cb" value="on" {% if diagnostics.urineDip.ketones %}checked{% endif %}> Ket</label>
+        <label><input type="checkbox" name="diagnostics.urine_dip.leukocytes__cb" value="on" {% if diagnostics.urineDip.leukocytes %}checked{% endif %}> Leuk</label>
+        <label><input type="checkbox" name="diagnostics.urine_dip.blood__cb" value="on" {% if diagnostics.urineDip.blood %}checked{% endif %}> Blood</label>
+        <label><input type="checkbox" name="diagnostics.urine_dip.protein__cb" value="on" {% if diagnostics.urineDip.protein %}checked{% endif %}> Prot</label>
+    </div>
+
+    <div class="form-group">
+        <label for="other_labs_imaging">Other labs / imaging</label>
+        <textarea id="other_labs_imaging" name="diagnostics.other_labs_imaging" rows="2">{{ diagnostics.otherLabsImaging }}</textarea>
+    </div>
+
+    <h3>ECG</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ecg_rate">Rate</label>
+            <input type="number" step="any" id="ecg_rate" name="diagnostics.ecg.rate"
+                   value="{{ diagnostics.ecg.rate | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="ecg_sinus">Sinus rhythm?</label>
+            <select id="ecg_sinus" name="diagnostics.ecg.sinus_rhythm">
+                <option value="" {% if diagnostics.ecg.sinusRhythm == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if diagnostics.ecg.sinusRhythm == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if diagnostics.ecg.sinusRhythm == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ecg_ischemia">Ischemia?</label>
+            <select id="ecg_ischemia" name="diagnostics.ecg.ischemia">
+                <option value="" {% if diagnostics.ecg.ischemia == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if diagnostics.ecg.ischemia == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if diagnostics.ecg.ischemia == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ecg_interpretation">Interpretation</label>
+        <textarea id="ecg_interpretation" name="diagnostics.ecg.interpretation" rows="2">{{ diagnostics.ecg.interpretation }}</textarea>
+    </div>
+</div>

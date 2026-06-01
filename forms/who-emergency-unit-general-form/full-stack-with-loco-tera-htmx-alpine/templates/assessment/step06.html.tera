@@ -1,0 +1,90 @@
+<div class="card">
+    <h2>Step 6: Circulation (C)</h2>
+    <p class="form-hint">Tick "Normal" or record skin / capillary-refill / pulse findings; record access and fluids.</p>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="circulation.normal__cb" value="on" {% if circulation.normal %}checked{% endif %}> Normal</label>
+    </div>
+
+    <h3>Skin</h3>
+    <div class="form-row">
+        <label><input type="checkbox" name="circulation.skin_warm__cb" value="on" {% if circulation.skinWarm %}checked{% endif %}> Warm</label>
+        <label><input type="checkbox" name="circulation.skin_dry__cb" value="on" {% if circulation.skinDry %}checked{% endif %}> Dry</label>
+        <label><input type="checkbox" name="circulation.skin_pale__cb" value="on" {% if circulation.skinPale %}checked{% endif %}> Pale</label>
+        <label><input type="checkbox" name="circulation.skin_cyanotic__cb" value="on" {% if circulation.skinCyanotic %}checked{% endif %}> Cyanotic</label>
+        <label><input type="checkbox" name="circulation.skin_moist__cb" value="on" {% if circulation.skinMoist %}checked{% endif %}> Moist</label>
+        <label><input type="checkbox" name="circulation.skin_cool__cb" value="on" {% if circulation.skinCool %}checked{% endif %}> Cool</label>
+    </div>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="circulation.capillary_refill_under3__cb" value="on" {% if circulation.capillaryRefillUnder3 %}checked{% endif %}> CR &lt;3s</label>
+        <div class="form-group">
+            <label for="capillary_refill_seconds">CR (seconds)</label>
+            <input type="number" step="any" id="capillary_refill_seconds" name="circulation.capillary_refill_seconds"
+                   value="{{ circulation.capillaryRefillSeconds | default(value='') }}">
+        </div>
+        <label><input type="checkbox" name="circulation.pulses_weak__cb" value="on" {% if circulation.pulsesWeak %}checked{% endif %}> Pulses weak</label>
+        <label><input type="checkbox" name="circulation.pulses_asymmetric__cb" value="on" {% if circulation.pulsesAsymmetric %}checked{% endif %}> Pulses asymmetric</label>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="jvd">JVD</label>
+            <select id="jvd" name="circulation.jvd">
+                <option value="" {% if circulation.jvd == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if circulation.jvd == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if circulation.jvd == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Access</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="access_iv_location">IV location</label>
+            <input type="text" id="access_iv_location" name="circulation.access_iv_location"
+                   value="{{ circulation.accessIvLocation }}">
+        </div>
+        <div class="form-group">
+            <label for="access_iv_size">IV size</label>
+            <input type="text" id="access_iv_size" name="circulation.access_iv_size"
+                   value="{{ circulation.accessIvSize }}">
+        </div>
+        <div class="form-group">
+            <label for="access_cvl_location">CVL location</label>
+            <input type="text" id="access_cvl_location" name="circulation.access_cvl_location"
+                   value="{{ circulation.accessCvlLocation }}">
+        </div>
+        <div class="form-group">
+            <label for="access_io_location">IO location</label>
+            <input type="text" id="access_io_location" name="circulation.access_io_location"
+                   value="{{ circulation.accessIoLocation }}">
+        </div>
+    </div>
+
+    <h3>IV fluids</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ivf_mls">IVF (mL)</label>
+            <input type="number" step="any" id="ivf_mls" name="circulation.ivf_mls"
+                   value="{{ circulation.ivfMls | default(value='') }}">
+        </div>
+        <label><input type="checkbox" name="circulation.ivf_ns__cb" value="on" {% if circulation.ivfNs %}checked{% endif %}> NS</label>
+        <label><input type="checkbox" name="circulation.ivf_lr__cb" value="on" {% if circulation.ivfLr %}checked{% endif %}> LR</label>
+        <div class="form-group">
+            <label for="ivf_other">Other</label>
+            <input type="text" id="ivf_other" name="circulation.ivf_other"
+                   value="{{ circulation.ivfOther }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="circulation.blood_ordered__cb" value="on" {% if circulation.bloodOrdered %}checked{% endif %}> Blood ordered</label>
+        <label><input type="checkbox" name="circulation.epinephrine_given__cb" value="on" {% if circulation.epinephrineGiven %}checked{% endif %}> Epinephrine given</label>
+    </div>
+
+    <div class="form-group">
+        <label for="circulation_notes">Circulation notes</label>
+        <textarea id="circulation_notes" name="circulation.notes" rows="2">{{ circulation.notes }}</textarea>
+    </div>
+</div>

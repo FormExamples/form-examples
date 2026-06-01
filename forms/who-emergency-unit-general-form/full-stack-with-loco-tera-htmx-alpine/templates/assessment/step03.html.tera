@@ -1,0 +1,25 @@
+<div class="card">
+    <h2>Step 3: High Risk Signs</h2>
+    <p class="form-hint">Tick any high-risk indicators present at arrival.</p>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="high_risk_signs.abnormal_avpu__cb" value="on"
+                      {% if high_risk_signs.abnormalAvpu %}checked{% endif %}> Abnormal AVPU</label>
+        <label><input type="checkbox" name="high_risk_signs.abnormal_heart_rate__cb" value="on"
+                      {% if high_risk_signs.abnormalHeartRate %}checked{% endif %}> Abnormal heart rate (&lt;55 or &gt;130)</label>
+        <label><input type="checkbox" name="high_risk_signs.stridor_or_voice_change__cb" value="on"
+                      {% if high_risk_signs.stridorOrVoiceChange %}checked{% endif %}> Stridor / voice change / cannot swallow</label>
+        <label><input type="checkbox" name="high_risk_signs.poor_perfusion__cb" value="on"
+                      {% if high_risk_signs.poorPerfusion %}checked{% endif %}> Poor perfusion / weak pulse / CR &gt;3s</label>
+    </div>
+    <div class="form-row">
+        <label><input type="checkbox" name="high_risk_signs.abnormal_temperature__cb" value="on"
+                      {% if high_risk_signs.abnormalTemperature %}checked{% endif %}> Temp &gt;39°C or &lt;36°C</label>
+        <label><input type="checkbox" name="high_risk_signs.low_spo2__cb" value="on"
+                      {% if high_risk_signs.lowSpo2 %}checked{% endif %}> SpO2 &lt;90% on RA</label>
+        <label><input type="checkbox" name="high_risk_signs.respiratory_distress__cb" value="on"
+                      {% if high_risk_signs.respiratoryDistress %}checked{% endif %}> Respiratory distress (grunting / retractions / cyanosis)</label>
+        <label><input type="checkbox" name="high_risk_signs.vomits_everything_or_cannot_feed__cb" value="on"
+                      {% if high_risk_signs.vomitsEverythingOrCannotFeed %}checked{% endif %}> Vomits everything / cannot drink or feed</label>
+    </div>
+</div>

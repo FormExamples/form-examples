@@ -1,0 +1,72 @@
+<div class="card">
+    <h2>Step 2: Chief Complaint &amp; Vitals</h2>
+    <p class="form-hint">Chief complaint, triage category, and initial vital signs.</p>
+
+    <div class="form-group">
+        <label for="chief_complaint">Chief complaint</label>
+        <textarea id="chief_complaint" name="chief_complaint_and_vitals.chief_complaint" rows="2">{{ chief_complaint_and_vitals.chiefComplaint }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="triage_category">Triage category</label>
+            <select id="triage_category" name="chief_complaint_and_vitals.triage_category">
+                <option value="" {% if chief_complaint_and_vitals.triageCategory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="red" {% if chief_complaint_and_vitals.triageCategory == "red" %}selected{% endif %}>Red</option>
+                <option value="orange" {% if chief_complaint_and_vitals.triageCategory == "orange" %}selected{% endif %}>Orange</option>
+                <option value="yellow" {% if chief_complaint_and_vitals.triageCategory == "yellow" %}selected{% endif %}>Yellow</option>
+                <option value="green" {% if chief_complaint_and_vitals.triageCategory == "green" %}selected{% endif %}>Green</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label><input type="checkbox" name="chief_complaint_and_vitals.dead_on_arrival__cb" value="on"
+                          {% if chief_complaint_and_vitals.deadOnArrival %}checked{% endif %}> Dead on arrival</label>
+        </div>
+    </div>
+
+    <h3>Initial vital signs</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="iv_time">Time (24h)</label>
+            <input type="time" id="iv_time" name="chief_complaint_and_vitals.initial_vitals.time"
+                   value="{{ chief_complaint_and_vitals.initialVitals.time }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_temp_c">Temp (°C)</label>
+            <input type="number" step="0.1" id="iv_temp_c" name="chief_complaint_and_vitals.initial_vitals.temp_c"
+                   value="{{ chief_complaint_and_vitals.initialVitals.tempC | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_bp_systolic">SBP</label>
+            <input type="number" step="any" id="iv_bp_systolic" name="chief_complaint_and_vitals.initial_vitals.bp_systolic"
+                   value="{{ chief_complaint_and_vitals.initialVitals.bpSystolic | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_bp_diastolic">DBP</label>
+            <input type="number" step="any" id="iv_bp_diastolic" name="chief_complaint_and_vitals.initial_vitals.bp_diastolic"
+                   value="{{ chief_complaint_and_vitals.initialVitals.bpDiastolic | default(value='') }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="iv_pulse">Pulse</label>
+            <input type="number" step="any" id="iv_pulse" name="chief_complaint_and_vitals.initial_vitals.pulse"
+                   value="{{ chief_complaint_and_vitals.initialVitals.pulse | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_rr">RR</label>
+            <input type="number" step="any" id="iv_rr" name="chief_complaint_and_vitals.initial_vitals.respiratory_rate"
+                   value="{{ chief_complaint_and_vitals.initialVitals.respiratoryRate | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_spo2">SpO2 (%)</label>
+            <input type="number" step="any" id="iv_spo2" name="chief_complaint_and_vitals.initial_vitals.spo2"
+                   value="{{ chief_complaint_and_vitals.initialVitals.spo2 | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="iv_pain">Pain (0-10)</label>
+            <input type="number" step="any" min="0" max="10" id="iv_pain" name="chief_complaint_and_vitals.initial_vitals.pain_score"
+                   value="{{ chief_complaint_and_vitals.initialVitals.painScore | default(value='') }}">
+        </div>
+    </div>
+</div>

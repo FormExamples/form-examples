@@ -1,0 +1,76 @@
+<div class="card">
+    <h2>Step 7: Disability (D)</h2>
+    <p class="form-hint">AVPU level, pupils, blood glucose, interventions.</p>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="disability.normal__cb" value="on" {% if disability.normal %}checked{% endif %}> Normal</label>
+        <div class="form-group">
+            <label for="avpu">AVPU level</label>
+            <select id="avpu" name="disability.avpu">
+                <option value="" {% if disability.avpu == "" %}selected{% endif %}>&mdash;</option>
+                <option value="A" {% if disability.avpu == "A" %}selected{% endif %}>A &mdash; Alert</option>
+                <option value="V" {% if disability.avpu == "V" %}selected{% endif %}>V &mdash; Verbal</option>
+                <option value="P" {% if disability.avpu == "P" %}selected{% endif %}>P &mdash; Pain</option>
+                <option value="U" {% if disability.avpu == "U" %}selected{% endif %}>U &mdash; Unresponsive</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="disability.moves_all_extremities__cb" value="on" {% if disability.movesAllExtremities %}checked{% endif %}> Moves all extremities</label>
+        <label><input type="checkbox" name="disability.deficit__cb" value="on" {% if disability.deficit %}checked{% endif %}> Deficit</label>
+    </div>
+
+    <div class="form-group">
+        <label for="deficit_description">Deficit description (required if Deficit checked)</label>
+        <input type="text" id="deficit_description" name="disability.deficit_description"
+               value="{{ disability.deficitDescription }}">
+    </div>
+
+    <h3>Pupils</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pupil_size_left">Size L</label>
+            <input type="number" step="0.1" id="pupil_size_left" name="disability.pupil_size_left"
+                   value="{{ disability.pupilSizeLeft | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_size_right">Size R</label>
+            <input type="number" step="0.1" id="pupil_size_right" name="disability.pupil_size_right"
+                   value="{{ disability.pupilSizeRight | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_reactivity_left">Reactivity L</label>
+            <input type="text" id="pupil_reactivity_left" name="disability.pupil_reactivity_left"
+                   value="{{ disability.pupilReactivityLeft }}">
+        </div>
+        <div class="form-group">
+            <label for="pupil_reactivity_right">Reactivity R</label>
+            <input type="text" id="pupil_reactivity_right" name="disability.pupil_reactivity_right"
+                   value="{{ disability.pupilReactivityRight }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="blood_glucose">Blood glucose (mmol/L)</label>
+        <input type="number" step="0.1" id="blood_glucose" name="disability.blood_glucose_mmol"
+               value="{{ disability.bloodGlucoseMmol | default(value='') }}">
+    </div>
+
+    <h3>Interventions</h3>
+    <div class="form-row">
+        <label><input type="checkbox" name="disability.intervention_glucose__cb" value="on" {% if disability.interventionGlucose %}checked{% endif %}> Glucose</label>
+        <label><input type="checkbox" name="disability.intervention_antiepileptic__cb" value="on" {% if disability.interventionAntiepileptic %}checked{% endif %}> Antiepileptic</label>
+        <label><input type="checkbox" name="disability.intervention_naloxone__cb" value="on" {% if disability.interventionNaloxone %}checked{% endif %}> Naloxone</label>
+    </div>
+    <div class="form-group">
+        <label for="intervention_others">Other interventions</label>
+        <input type="text" id="intervention_others" name="disability.intervention_others"
+               value="{{ disability.interventionOthers }}">
+    </div>
+
+    <div class="form-group">
+        <label for="disability_notes">Disability notes</label>
+        <textarea id="disability_notes" name="disability.notes" rows="2">{{ disability.notes }}</textarea>
+    </div>
+</div>

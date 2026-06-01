@@ -1,0 +1,136 @@
+<div class="card">
+    <h2>Step 16: Disposition</h2>
+    <p class="form-hint">ED departure, diagnoses / impressions, disposition (admit / transfer / discharge / died), final vitals, provider signature.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="checklist_completed">Checklist completed?</label>
+            <select id="checklist_completed" name="disposition.checklist_completed">
+                <option value="" {% if disposition.checklistCompleted == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if disposition.checklistCompleted == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if disposition.checklistCompleted == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ed_departure_date">ED departure date</label>
+            <input type="date" id="ed_departure_date" name="disposition.ed_departure_date"
+                   value="{{ disposition.edDepartureDate }}">
+        </div>
+        <div class="form-group">
+            <label for="ed_departure_time">ED departure time (24h)</label>
+            <input type="time" id="ed_departure_time" name="disposition.ed_departure_time"
+                   value="{{ disposition.edDepartureTime }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="diagnoses_impressions">Diagnoses / impressions</label>
+        <textarea id="diagnoses_impressions" name="disposition.diagnoses_impressions" rows="3">{{ disposition.diagnosesImpressions }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="disp_choice">Disposition</label>
+            <select id="disp_choice" name="disposition.disposition">
+                <option value="" {% if disposition.disposition == "" %}selected{% endif %}>&mdash;</option>
+                <option value="admit" {% if disposition.disposition == "admit" %}selected{% endif %}>Admit</option>
+                <option value="transfer" {% if disposition.disposition == "transfer" %}selected{% endif %}>Transfer</option>
+                <option value="discharge" {% if disposition.disposition == "discharge" %}selected{% endif %}>Discharge</option>
+                <option value="died" {% if disposition.disposition == "died" %}selected{% endif %}>Died</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="admit_ward">Admit ward (if Admit)</label>
+            <select id="admit_ward" name="disposition.admit_ward">
+                <option value="" {% if disposition.admitWard == "" %}selected{% endif %}>&mdash;</option>
+                <option value="ward" {% if disposition.admitWard == "ward" %}selected{% endif %}>Ward</option>
+                <option value="icu" {% if disposition.admitWard == "icu" %}selected{% endif %}>ICU</option>
+                <option value="ot" {% if disposition.admitWard == "ot" %}selected{% endif %}>OT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="discharge_plan">Discharge plan discussed?</label>
+            <select id="discharge_plan" name="disposition.discharge_plan_discussed">
+                <option value="" {% if disposition.dischargePlanDiscussed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if disposition.dischargePlanDiscussed == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if disposition.dischargePlanDiscussed == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="transfer_to">Transfer destination (if Transfer)</label>
+        <input type="text" id="transfer_to" name="disposition.transfer_to"
+               value="{{ disposition.transferTo }}">
+    </div>
+
+    <div class="form-group">
+        <label for="died_cause">Cause of death (if Died, NOT cardiopulmonary arrest)</label>
+        <input type="text" id="died_cause" name="disposition.died_cause"
+               value="{{ disposition.diedCause }}">
+    </div>
+
+    <div class="form-row">
+        <label><input type="checkbox" name="disposition.left_without_being_seen__cb" value="on" {% if disposition.leftWithoutBeingSeen %}checked{% endif %}> Left without being seen (LWBS)</label>
+    </div>
+
+    <h3>Final vitals</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fv_temp_c">Temp (°C)</label>
+            <input type="number" step="0.1" id="fv_temp_c" name="disposition.final_vitals.temp_c"
+                   value="{{ disposition.finalVitals.tempC | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_pulse">Pulse</label>
+            <input type="number" step="any" id="fv_pulse" name="disposition.final_vitals.pulse"
+                   value="{{ disposition.finalVitals.pulse | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_sbp">SBP</label>
+            <input type="number" step="any" id="fv_sbp" name="disposition.final_vitals.bp_systolic"
+                   value="{{ disposition.finalVitals.bpSystolic | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_dbp">DBP</label>
+            <input type="number" step="any" id="fv_dbp" name="disposition.final_vitals.bp_diastolic"
+                   value="{{ disposition.finalVitals.bpDiastolic | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_rr">RR</label>
+            <input type="number" step="any" id="fv_rr" name="disposition.final_vitals.respiratory_rate"
+                   value="{{ disposition.finalVitals.respiratoryRate | default(value='') }}">
+        </div>
+        <div class="form-group">
+            <label for="fv_spo2">SpO2 (%)</label>
+            <input type="number" step="any" id="fv_spo2" name="disposition.final_vitals.spo2"
+                   value="{{ disposition.finalVitals.spo2 | default(value='') }}">
+        </div>
+    </div>
+
+    <h3>Provider</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="accepting_provider">Accepting provider</label>
+            <input type="text" id="accepting_provider" name="disposition.accepting_provider"
+                   value="{{ disposition.acceptingProvider }}">
+        </div>
+        <div class="form-group">
+            <label for="emergency_unit_provider">Emergency unit provider (name / title)</label>
+            <input type="text" id="emergency_unit_provider" name="disposition.emergency_unit_provider"
+                   value="{{ disposition.emergencyUnitProvider }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="signature">Signature</label>
+            <input type="text" id="signature" name="disposition.signature"
+                   value="{{ disposition.signature }}">
+        </div>
+        <div class="form-group">
+            <label for="signature_date">Signature date</label>
+            <input type="date" id="signature_date" name="disposition.signature_date"
+                   value="{{ disposition.signatureDate }}">
+        </div>
+    </div>
+</div>

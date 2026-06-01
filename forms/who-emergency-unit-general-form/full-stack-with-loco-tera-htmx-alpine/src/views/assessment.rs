@@ -1,46 +1,33 @@
-//! Tera context builders for the WHO Emergency Unit (General) Form assessment.
-
-use serde::{Deserialize, Serialize};
 use tera::Context;
 use uuid::Uuid;
 
-use crate::engine::eu_general_validator::validate_eu_general;
-use crate::engine::flagged_issues::detect_flagged_issues;
-use crate::engine::types::{AssessmentData, FlaggedIssue, ValidationResult};
+use crate::engine::types::AssessmentData;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ReportResult {
-    pub validation: ValidationResult,
-    pub flagged_issues: Vec<FlaggedIssue>,
-    pub timestamp: String,
-}
+/// Total wizard steps (1-indexed). 16 steps per `index.md`.
+pub const TOTAL_STEPS: u32 = 16;
 
-/// Build the Tera context for the single-page wizard.
+/// Build a Tera context for rendering the single-page WHO Emergency Unit
+/// (General) wizard. All section partials share the same context.
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &16usize);
-    ctx.insert("data", data);
-    ctx
-}
-
-/// Build the Tera context for the report after submission.
-pub fn build_report_context(data: &AssessmentData, id: Uuid) -> Context {
-    let validation = validate_eu_general(data);
-    let flagged_issues = detect_flagged_issues(data);
-    let timestamp = chrono::Utc::now().to_rfc3339();
-
-    let result = ReportResult {
-        validation,
-        flagged_issues,
-        timestamp: timestamp.clone(),
-    };
-
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("data", data);
-    ctx.insert("result", &result);
-    ctx.insert("timestamp", &timestamp);
-    ctx
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("total_steps", &TOTAL_STEPS);
+    context.insert("data", data);
+    context.insert("patient_registration", &data.patient_registration);
+    context.insert("chief_complaint_and_vitals", &data.chief_complaint_and_vitals);
+    context.insert("high_risk_signs", &data.high_risk_signs);
+    context.insert("airway", &data.airway);
+    context.insert("breathing", &data.breathing);
+    context.insert("circulation", &data.circulation);
+    context.insert("disability", &data.disability);
+    context.insert("history_of_present_illness", &data.history_of_present_illness);
+    context.insert("review_of_systems", &data.review_of_systems);
+    context.insert("past_medical_history", &data.past_medical_history);
+    context.insert("physical_exam", &data.physical_exam);
+    context.insert("diagnostics", &data.diagnostics);
+    context.insert("additional_interventions", &data.additional_interventions);
+    context.insert("assessment_and_plan", &data.assessment_and_plan);
+    context.insert("reassessment", &data.reassessment);
+    context.insert("disposition", &data.disposition);
+    context
 }
