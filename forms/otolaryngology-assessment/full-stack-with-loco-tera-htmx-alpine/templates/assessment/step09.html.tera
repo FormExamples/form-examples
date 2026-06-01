@@ -1,0 +1,89 @@
+<div class="card">
+    <h2>Step 9: Oropharyngeal &amp; Neck Examination</h2>
+    <p class="form-hint">Mouth, throat, palate, and neck assessment.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="oral_mucosa">Oral Mucosa</label>
+            <select id="oral_mucosa" name="oropharyngeal_neck_examination.oral_mucosa">
+                <option value="" {% if oropharyngeal_neck_examination.oralMucosa == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if oropharyngeal_neck_examination.oralMucosa == "normal" %}selected{% endif %}>Normal</option>
+                <option value="erythematous" {% if oropharyngeal_neck_examination.oralMucosa == "erythematous" %}selected{% endif %}>Erythematous</option>
+                <option value="exudate" {% if oropharyngeal_neck_examination.oralMucosa == "exudate" %}selected{% endif %}>Exudate</option>
+                <option value="ulcerated" {% if oropharyngeal_neck_examination.oralMucosa == "ulcerated" %}selected{% endif %}>Ulcerated</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tonsils">Tonsils</label>
+            <select id="tonsils" name="oropharyngeal_neck_examination.tonsils">
+                <option value="" {% if oropharyngeal_neck_examination.tonsils == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if oropharyngeal_neck_examination.tonsils == "normal" %}selected{% endif %}>Normal</option>
+                <option value="enlarged" {% if oropharyngeal_neck_examination.tonsils == "enlarged" %}selected{% endif %}>Enlarged</option>
+                <option value="absent" {% if oropharyngeal_neck_examination.tonsils == "absent" %}selected{% endif %}>Absent</option>
+                <option value="asymmetric" {% if oropharyngeal_neck_examination.tonsils == "asymmetric" %}selected{% endif %}>Asymmetric</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pharynx">Pharynx</label>
+            <select id="pharynx" name="oropharyngeal_neck_examination.pharynx">
+                <option value="" {% if oropharyngeal_neck_examination.pharynx == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if oropharyngeal_neck_examination.pharynx == "normal" %}selected{% endif %}>Normal</option>
+                <option value="erythematous" {% if oropharyngeal_neck_examination.pharynx == "erythematous" %}selected{% endif %}>Erythematous</option>
+                <option value="cobblestone" {% if oropharyngeal_neck_examination.pharynx == "cobblestone" %}selected{% endif %}>Cobblestone</option>
+                <option value="postNasalDrip" {% if oropharyngeal_neck_examination.pharynx == "postNasalDrip" %}selected{% endif %}>Post-nasal drip</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="palate_movement">Palate Movement</label>
+            <select id="palate_movement" name="oropharyngeal_neck_examination.palate_movement">
+                <option value="" {% if oropharyngeal_neck_examination.palateMovement == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if oropharyngeal_neck_examination.palateMovement == "normal" %}selected{% endif %}>Normal</option>
+                <option value="asymmetric" {% if oropharyngeal_neck_examination.palateMovement == "asymmetric" %}selected{% endif %}>Asymmetric</option>
+                <option value="limited" {% if oropharyngeal_neck_examination.palateMovement == "limited" %}selected{% endif %}>Limited</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cervical_lymphadenopathy">Cervical Lymphadenopathy</label>
+            <select id="cervical_lymphadenopathy" name="oropharyngeal_neck_examination.cervical_lymphadenopathy">
+                <option value="" {% if oropharyngeal_neck_examination.cervicalLymphadenopathy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if oropharyngeal_neck_examination.cervicalLymphadenopathy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if oropharyngeal_neck_examination.cervicalLymphadenopathy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="thyroid_enlarged">Thyroid Enlarged</label>
+            <select id="thyroid_enlarged" name="oropharyngeal_neck_examination.thyroid_enlarged">
+                <option value="" {% if oropharyngeal_neck_examination.thyroidEnlarged == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if oropharyngeal_neck_examination.thyroidEnlarged == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if oropharyngeal_neck_examination.thyroidEnlarged == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="neck_mass">Neck Mass</label>
+            <select id="neck_mass" name="oropharyngeal_neck_examination.neck_mass">
+                <option value="" {% if oropharyngeal_neck_examination.neckMass == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if oropharyngeal_neck_examination.neckMass == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if oropharyngeal_neck_examination.neckMass == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cervical_lymphadenopathy_details">Lymphadenopathy Details</label>
+        <textarea id="cervical_lymphadenopathy_details" name="oropharyngeal_neck_examination.cervical_lymphadenopathy_details"
+                  rows="2">{{ oropharyngeal_neck_examination.cervicalLymphadenopathyDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="neck_mass_details">Neck Mass Details</label>
+        <textarea id="neck_mass_details" name="oropharyngeal_neck_examination.neck_mass_details"
+                  rows="2">{{ oropharyngeal_neck_examination.neckMassDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="examination_notes_oro">Examination Notes</label>
+        <textarea id="examination_notes_oro" name="oropharyngeal_neck_examination.examination_notes"
+                  rows="2">{{ oropharyngeal_neck_examination.examinationNotes }}</textarea>
+    </div>
+</div>

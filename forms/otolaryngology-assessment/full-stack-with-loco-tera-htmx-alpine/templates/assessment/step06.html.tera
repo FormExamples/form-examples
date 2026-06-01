@@ -1,0 +1,47 @@
+<div class="card">
+    <h2>Step 6: External Examination</h2>
+    <p class="form-hint">Inspection of face, external ear, and external nose.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="facial_asymmetry">Facial Asymmetry</label>
+            <select id="facial_asymmetry" name="external_examination.facial_asymmetry">
+                <option value="" {% if external_examination.facialAsymmetry == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if external_examination.facialAsymmetry == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if external_examination.facialAsymmetry == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="facial_swelling">Facial Swelling</label>
+            <select id="facial_swelling" name="external_examination.facial_swelling">
+                <option value="" {% if external_examination.facialSwelling == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if external_examination.facialSwelling == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if external_examination.facialSwelling == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="skin_lesions">Skin Lesions</label>
+            <select id="skin_lesions" name="external_examination.skin_lesions">
+                <option value="" {% if external_examination.skinLesions == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if external_examination.skinLesions == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if external_examination.skinLesions == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="external_ear_findings">External Ear Findings</label>
+        <textarea id="external_ear_findings" name="external_examination.external_ear_findings"
+                  rows="2">{{ external_examination.externalEarFindings }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="external_nose_findings">External Nose Findings</label>
+        <textarea id="external_nose_findings" name="external_examination.external_nose_findings"
+                  rows="2">{{ external_examination.externalNoseFindings }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="examination_notes_ext">Notes</label>
+        <textarea id="examination_notes_ext" name="external_examination.examination_notes"
+                  rows="2">{{ external_examination.examinationNotes }}</textarea>
+    </div>
+</div>

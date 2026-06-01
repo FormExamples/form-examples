@@ -1,0 +1,45 @@
+<div class="card">
+    <h2>Step 2: Presenting Complaint</h2>
+    <p class="form-hint">Anatomic system(s) implicated in the chief complaint.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ear_symptoms">Ear Symptoms</label>
+            <select id="ear_symptoms" name="presenting_complaint.ear_symptoms">
+                <option value="" {% if presenting_complaint.earSymptoms == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if presenting_complaint.earSymptoms == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if presenting_complaint.earSymptoms == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nose_symptoms">Nose Symptoms</label>
+            <select id="nose_symptoms" name="presenting_complaint.nose_symptoms">
+                <option value="" {% if presenting_complaint.noseSymptoms == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if presenting_complaint.noseSymptoms == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if presenting_complaint.noseSymptoms == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="throat_symptoms">Throat Symptoms</label>
+            <select id="throat_symptoms" name="presenting_complaint.throat_symptoms">
+                <option value="" {% if presenting_complaint.throatSymptoms == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if presenting_complaint.throatSymptoms == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if presenting_complaint.throatSymptoms == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="neck_symptoms">Neck Symptoms</label>
+            <select id="neck_symptoms" name="presenting_complaint.neck_symptoms">
+                <option value="" {% if presenting_complaint.neckSymptoms == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if presenting_complaint.neckSymptoms == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if presenting_complaint.neckSymptoms == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="chief_complaint">Chief Complaint</label>
+        <textarea id="chief_complaint" name="presenting_complaint.chief_complaint"
+                  rows="3">{{ presenting_complaint.chiefComplaint }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="card">
+    <h2>Step 10: Clinical Impression &amp; Management Plan</h2>
+    <p class="form-hint">Working diagnosis, planned investigations, treatment, and follow-up.</p>
+
+    <div class="form-group">
+        <label for="working_diagnosis">Working Diagnosis</label>
+        <textarea id="working_diagnosis" name="clinical_impression_plan.working_diagnosis"
+                  rows="2">{{ clinical_impression_plan.workingDiagnosis }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="differential_diagnosis">Differential Diagnosis</label>
+        <textarea id="differential_diagnosis" name="clinical_impression_plan.differential_diagnosis"
+                  rows="2">{{ clinical_impression_plan.differentialDiagnosis }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="investigations_required">Investigations Required</label>
+            <select id="investigations_required" name="clinical_impression_plan.investigations_required">
+                <option value="" {% if clinical_impression_plan.investigationsRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if clinical_impression_plan.investigationsRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if clinical_impression_plan.investigationsRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medication_prescribed">Medication Prescribed</label>
+            <select id="medication_prescribed" name="clinical_impression_plan.medication_prescribed">
+                <option value="" {% if clinical_impression_plan.medicationPrescribed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if clinical_impression_plan.medicationPrescribed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if clinical_impression_plan.medicationPrescribed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="referral_required">Referral Required</label>
+            <select id="referral_required" name="clinical_impression_plan.referral_required">
+                <option value="" {% if clinical_impression_plan.referralRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if clinical_impression_plan.referralRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if clinical_impression_plan.referralRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="surgery_considered">Surgery Considered</label>
+            <select id="surgery_considered" name="clinical_impression_plan.surgery_considered">
+                <option value="" {% if clinical_impression_plan.surgeryConsidered == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if clinical_impression_plan.surgeryConsidered == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if clinical_impression_plan.surgeryConsidered == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="investigations_details">Investigations Details</label>
+        <textarea id="investigations_details" name="clinical_impression_plan.investigations_details"
+                  rows="2">{{ clinical_impression_plan.investigationsDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="medication_details">Medication Details</label>
+        <textarea id="medication_details" name="clinical_impression_plan.medication_details"
+                  rows="2">{{ clinical_impression_plan.medicationDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="referral_details">Referral Details</label>
+        <textarea id="referral_details" name="clinical_impression_plan.referral_details"
+                  rows="2">{{ clinical_impression_plan.referralDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="surgery_details">Surgery Details</label>
+        <textarea id="surgery_details" name="clinical_impression_plan.surgery_details"
+                  rows="2">{{ clinical_impression_plan.surgeryDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="follow_up_plan">Follow-up Plan</label>
+        <textarea id="follow_up_plan" name="clinical_impression_plan.follow_up_plan"
+                  rows="2">{{ clinical_impression_plan.followUpPlan }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="patient_education">Patient Education</label>
+        <textarea id="patient_education" name="clinical_impression_plan.patient_education"
+                  rows="2">{{ clinical_impression_plan.patientEducation }}</textarea>
+    </div>
+</div>

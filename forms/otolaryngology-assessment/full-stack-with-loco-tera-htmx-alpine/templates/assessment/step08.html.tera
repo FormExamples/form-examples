@@ -1,0 +1,124 @@
+<div class="card">
+    <h2>Step 8: Anterior Rhinoscopy</h2>
+    <p class="form-hint">Per-side examination of the nasal cavity.</p>
+
+    <h3>Right Naris</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rhino_right_septum">Septum</label>
+            <select id="rhino_right_septum" name="anterior_rhinoscopy.right.septum">
+                <option value="" {% if anterior_rhinoscopy.right.septum == "" %}selected{% endif %}>&mdash;</option>
+                <option value="midline" {% if anterior_rhinoscopy.right.septum == "midline" %}selected{% endif %}>Midline</option>
+                <option value="deviated-left" {% if anterior_rhinoscopy.right.septum == "deviated-left" %}selected{% endif %}>Deviated left</option>
+                <option value="deviated-right" {% if anterior_rhinoscopy.right.septum == "deviated-right" %}selected{% endif %}>Deviated right</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_right_mucosa">Mucosa</label>
+            <select id="rhino_right_mucosa" name="anterior_rhinoscopy.right.mucosa">
+                <option value="" {% if anterior_rhinoscopy.right.mucosa == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if anterior_rhinoscopy.right.mucosa == "normal" %}selected{% endif %}>Normal</option>
+                <option value="pale" {% if anterior_rhinoscopy.right.mucosa == "pale" %}selected{% endif %}>Pale</option>
+                <option value="congested" {% if anterior_rhinoscopy.right.mucosa == "congested" %}selected{% endif %}>Congested</option>
+                <option value="pale-boggy" {% if anterior_rhinoscopy.right.mucosa == "pale-boggy" %}selected{% endif %}>Pale and boggy</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_right_polyps">Polyps</label>
+            <select id="rhino_right_polyps" name="anterior_rhinoscopy.right.polyps">
+                <option value="" {% if anterior_rhinoscopy.right.polyps == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if anterior_rhinoscopy.right.polyps == "none" %}selected{% endif %}>None</option>
+                <option value="small" {% if anterior_rhinoscopy.right.polyps == "small" %}selected{% endif %}>Small</option>
+                <option value="medium" {% if anterior_rhinoscopy.right.polyps == "medium" %}selected{% endif %}>Medium</option>
+                <option value="large" {% if anterior_rhinoscopy.right.polyps == "large" %}selected{% endif %}>Large</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rhino_right_discharge">Discharge</label>
+            <select id="rhino_right_discharge" name="anterior_rhinoscopy.right.discharge">
+                <option value="" {% if anterior_rhinoscopy.right.discharge == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if anterior_rhinoscopy.right.discharge == "none" %}selected{% endif %}>None</option>
+                <option value="clear" {% if anterior_rhinoscopy.right.discharge == "clear" %}selected{% endif %}>Clear</option>
+                <option value="mucoid" {% if anterior_rhinoscopy.right.discharge == "mucoid" %}selected{% endif %}>Mucoid</option>
+                <option value="purulent" {% if anterior_rhinoscopy.right.discharge == "purulent" %}selected{% endif %}>Purulent</option>
+                <option value="blood" {% if anterior_rhinoscopy.right.discharge == "blood" %}selected{% endif %}>Blood</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_right_turbinate">Turbinate Hypertrophy</label>
+            <select id="rhino_right_turbinate" name="anterior_rhinoscopy.right.turbinate_hypertrophy">
+                <option value="" {% if anterior_rhinoscopy.right.turbinateHypertrophy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if anterior_rhinoscopy.right.turbinateHypertrophy == "normal" %}selected{% endif %}>Normal</option>
+                <option value="mild" {% if anterior_rhinoscopy.right.turbinateHypertrophy == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if anterior_rhinoscopy.right.turbinateHypertrophy == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if anterior_rhinoscopy.right.turbinateHypertrophy == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Left Naris</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rhino_left_septum">Septum</label>
+            <select id="rhino_left_septum" name="anterior_rhinoscopy.left.septum">
+                <option value="" {% if anterior_rhinoscopy.left.septum == "" %}selected{% endif %}>&mdash;</option>
+                <option value="midline" {% if anterior_rhinoscopy.left.septum == "midline" %}selected{% endif %}>Midline</option>
+                <option value="deviated-left" {% if anterior_rhinoscopy.left.septum == "deviated-left" %}selected{% endif %}>Deviated left</option>
+                <option value="deviated-right" {% if anterior_rhinoscopy.left.septum == "deviated-right" %}selected{% endif %}>Deviated right</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_left_mucosa">Mucosa</label>
+            <select id="rhino_left_mucosa" name="anterior_rhinoscopy.left.mucosa">
+                <option value="" {% if anterior_rhinoscopy.left.mucosa == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if anterior_rhinoscopy.left.mucosa == "normal" %}selected{% endif %}>Normal</option>
+                <option value="pale" {% if anterior_rhinoscopy.left.mucosa == "pale" %}selected{% endif %}>Pale</option>
+                <option value="congested" {% if anterior_rhinoscopy.left.mucosa == "congested" %}selected{% endif %}>Congested</option>
+                <option value="pale-boggy" {% if anterior_rhinoscopy.left.mucosa == "pale-boggy" %}selected{% endif %}>Pale and boggy</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_left_polyps">Polyps</label>
+            <select id="rhino_left_polyps" name="anterior_rhinoscopy.left.polyps">
+                <option value="" {% if anterior_rhinoscopy.left.polyps == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if anterior_rhinoscopy.left.polyps == "none" %}selected{% endif %}>None</option>
+                <option value="small" {% if anterior_rhinoscopy.left.polyps == "small" %}selected{% endif %}>Small</option>
+                <option value="medium" {% if anterior_rhinoscopy.left.polyps == "medium" %}selected{% endif %}>Medium</option>
+                <option value="large" {% if anterior_rhinoscopy.left.polyps == "large" %}selected{% endif %}>Large</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rhino_left_discharge">Discharge</label>
+            <select id="rhino_left_discharge" name="anterior_rhinoscopy.left.discharge">
+                <option value="" {% if anterior_rhinoscopy.left.discharge == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if anterior_rhinoscopy.left.discharge == "none" %}selected{% endif %}>None</option>
+                <option value="clear" {% if anterior_rhinoscopy.left.discharge == "clear" %}selected{% endif %}>Clear</option>
+                <option value="mucoid" {% if anterior_rhinoscopy.left.discharge == "mucoid" %}selected{% endif %}>Mucoid</option>
+                <option value="purulent" {% if anterior_rhinoscopy.left.discharge == "purulent" %}selected{% endif %}>Purulent</option>
+                <option value="blood" {% if anterior_rhinoscopy.left.discharge == "blood" %}selected{% endif %}>Blood</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rhino_left_turbinate">Turbinate Hypertrophy</label>
+            <select id="rhino_left_turbinate" name="anterior_rhinoscopy.left.turbinate_hypertrophy">
+                <option value="" {% if anterior_rhinoscopy.left.turbinateHypertrophy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if anterior_rhinoscopy.left.turbinateHypertrophy == "normal" %}selected{% endif %}>Normal</option>
+                <option value="mild" {% if anterior_rhinoscopy.left.turbinateHypertrophy == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if anterior_rhinoscopy.left.turbinateHypertrophy == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if anterior_rhinoscopy.left.turbinateHypertrophy == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="rhinoscopy_notes">Notes</label>
+        <textarea id="rhinoscopy_notes" name="anterior_rhinoscopy.rhinoscopy_notes"
+                  rows="2">{{ anterior_rhinoscopy.rhinoscopyNotes }}</textarea>
+    </div>
+</div>

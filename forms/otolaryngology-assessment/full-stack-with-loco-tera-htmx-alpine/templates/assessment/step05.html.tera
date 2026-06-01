@@ -1,0 +1,129 @@
+<div class="card">
+    <h2>Step 5: SNOT-22 Questionnaire</h2>
+    <p class="form-hint">
+        Sino-Nasal Outcome Test (SNOT-22). Rate each item 0 (no problem) to 5 (problem as bad
+        as it can be). Leave blank if unanswered.
+    </p>
+
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Score (0&ndash;5)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td><td>Need to blow nose</td>
+                <td><input type="number" min="0" max="5" name="snot22.need_to_blow_nose"
+                           value="{% if snot22.needToBlowNose is number %}{{ snot22.needToBlowNose }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>2</td><td>Sneezing</td>
+                <td><input type="number" min="0" max="5" name="snot22.sneezing"
+                           value="{% if snot22.sneezing is number %}{{ snot22.sneezing }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>3</td><td>Runny nose</td>
+                <td><input type="number" min="0" max="5" name="snot22.runny_nose"
+                           value="{% if snot22.runnyNose is number %}{{ snot22.runnyNose }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>4</td><td>Nasal blockage</td>
+                <td><input type="number" min="0" max="5" name="snot22.nasal_blockage"
+                           value="{% if snot22.nasalBlockage is number %}{{ snot22.nasalBlockage }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>5</td><td>Loss of smell or taste</td>
+                <td><input type="number" min="0" max="5" name="snot22.loss_of_smell_taste"
+                           value="{% if snot22.lossOfSmellTaste is number %}{{ snot22.lossOfSmellTaste }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>6</td><td>Cough</td>
+                <td><input type="number" min="0" max="5" name="snot22.coughing"
+                           value="{% if snot22.coughing is number %}{{ snot22.coughing }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>7</td><td>Post-nasal discharge</td>
+                <td><input type="number" min="0" max="5" name="snot22.post_nasal_discharge"
+                           value="{% if snot22.postNasalDischarge is number %}{{ snot22.postNasalDischarge }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>8</td><td>Thick nasal discharge</td>
+                <td><input type="number" min="0" max="5" name="snot22.thick_nasal_discharge"
+                           value="{% if snot22.thickNasalDischarge is number %}{{ snot22.thickNasalDischarge }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>9</td><td>Ear fullness</td>
+                <td><input type="number" min="0" max="5" name="snot22.ear_fullness"
+                           value="{% if snot22.earFullness is number %}{{ snot22.earFullness }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>10</td><td>Dizziness</td>
+                <td><input type="number" min="0" max="5" name="snot22.dizziness"
+                           value="{% if snot22.dizziness is number %}{{ snot22.dizziness }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>11</td><td>Ear pain</td>
+                <td><input type="number" min="0" max="5" name="snot22.ear_pain"
+                           value="{% if snot22.earPain is number %}{{ snot22.earPain }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>12</td><td>Facial pain or pressure</td>
+                <td><input type="number" min="0" max="5" name="snot22.facial_pain_pressure"
+                           value="{% if snot22.facialPainPressure is number %}{{ snot22.facialPainPressure }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>13</td><td>Difficulty falling asleep</td>
+                <td><input type="number" min="0" max="5" name="snot22.difficulty_falling_asleep"
+                           value="{% if snot22.difficultyFallingAsleep is number %}{{ snot22.difficultyFallingAsleep }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>14</td><td>Waking up at night</td>
+                <td><input type="number" min="0" max="5" name="snot22.waking_up_at_night"
+                           value="{% if snot22.wakingUpAtNight is number %}{{ snot22.wakingUpAtNight }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>15</td><td>Lack of a good night&rsquo;s sleep</td>
+                <td><input type="number" min="0" max="5" name="snot22.lack_of_good_nights_sleep"
+                           value="{% if snot22.lackOfGoodNightsSleep is number %}{{ snot22.lackOfGoodNightsSleep }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>16</td><td>Waking up tired</td>
+                <td><input type="number" min="0" max="5" name="snot22.waking_up_tired"
+                           value="{% if snot22.wakingUpTired is number %}{{ snot22.wakingUpTired }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>17</td><td>Fatigue</td>
+                <td><input type="number" min="0" max="5" name="snot22.fatigue"
+                           value="{% if snot22.fatigue is number %}{{ snot22.fatigue }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>18</td><td>Reduced productivity</td>
+                <td><input type="number" min="0" max="5" name="snot22.reduced_productivity"
+                           value="{% if snot22.reducedProductivity is number %}{{ snot22.reducedProductivity }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>19</td><td>Reduced concentration</td>
+                <td><input type="number" min="0" max="5" name="snot22.reduced_concentration"
+                           value="{% if snot22.reducedConcentration is number %}{{ snot22.reducedConcentration }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>20</td><td>Frustrated, restless, or irritable</td>
+                <td><input type="number" min="0" max="5" name="snot22.frustrated_restless_irritable"
+                           value="{% if snot22.frustratedRestlessIrritable is number %}{{ snot22.frustratedRestlessIrritable }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>21</td><td>Sad</td>
+                <td><input type="number" min="0" max="5" name="snot22.sad"
+                           value="{% if snot22.sad is number %}{{ snot22.sad }}{% endif %}"></td>
+            </tr>
+            <tr>
+                <td>22</td><td>Embarrassed</td>
+                <td><input type="number" min="0" max="5" name="snot22.embarrassed"
+                           value="{% if snot22.embarrassed is number %}{{ snot22.embarrassed }}{% endif %}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
