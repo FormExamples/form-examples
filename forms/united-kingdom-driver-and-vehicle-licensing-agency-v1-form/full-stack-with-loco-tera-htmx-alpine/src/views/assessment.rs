@@ -1,46 +1,31 @@
-//! Tera context builders for the DVLA V1 (vision) assessment.
-
-use serde::{Deserialize, Serialize};
 use tera::Context;
 use uuid::Uuid;
 
-use crate::engine::flagged_issues::detect_flagged_issues;
-use crate::engine::types::{AssessmentData, FlaggedIssue, ValidationResult};
-use crate::engine::v1_validator::validate_v1;
+use crate::engine::types::AssessmentData;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ReportResult {
-    pub validation: ValidationResult,
-    pub flagged_issues: Vec<FlaggedIssue>,
-    pub timestamp: String,
-}
+/// Total wizard steps for the DVLA V1 form (14).
+pub const TOTAL_STEPS: u32 = 14;
 
-/// Build the Tera context for the single-page wizard.
+/// Build a Tera context for rendering the single-page DVLA V1 wizard.
+/// All section partials share the same context.
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &14usize);
-    ctx.insert("data", data);
-    ctx
-}
-
-/// Build the Tera context for the report after submission.
-pub fn build_report_context(data: &AssessmentData, id: Uuid) -> Context {
-    let validation = validate_v1(data);
-    let flagged_issues = detect_flagged_issues(data);
-    let timestamp = chrono::Utc::now().to_rfc3339();
-
-    let result = ReportResult {
-        validation,
-        flagged_issues,
-        timestamp: timestamp.clone(),
-    };
-
-    let mut ctx = Context::new();
-    ctx.insert("id", &id.to_string());
-    ctx.insert("data", data);
-    ctx.insert("result", &result);
-    ctx.insert("timestamp", &timestamp);
-    ctx
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("total_steps", &TOTAL_STEPS);
+    context.insert("data", data);
+    context.insert("personal_details", &data.personal_details);
+    context.insert("healthcare_professionals", &data.healthcare_professionals);
+    context.insert("eyesight_standards", &data.eyesight_standards);
+    context.insert("vision_in_both_eyes", &data.vision_in_both_eyes);
+    context.insert("field_of_vision", &data.field_of_vision);
+    context.insert("glaucoma", &data.glaucoma);
+    context.insert("retinitis_pigmentosa", &data.retinitis_pigmentosa);
+    context.insert("laser_treatment", &data.laser_treatment);
+    context.insert("blepharospasm", &data.blepharospasm);
+    context.insert("night_blindness", &data.night_blindness);
+    context.insert("double_vision", &data.double_vision);
+    context.insert("other_vision_conditions", &data.other_vision_conditions);
+    context.insert("recent_contact", &data.recent_contact);
+    context.insert("authorisation", &data.authorisation);
+    context
 }

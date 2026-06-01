@@ -1,0 +1,25 @@
+<div class="card" x-data="{ gla: '{{ glaucoma.hasCondition }}' }">
+    <h2>Step 6: Q4 — Glaucoma</h2>
+    <p class="form-hint">Have you been diagnosed with glaucoma?</p>
+
+    <div class="form-group">
+        <label for="gla_has">Glaucoma?</label>
+        <select id="gla_has" name="glaucoma.has_condition" x-model="gla">
+            <option value="" {% if glaucoma.hasCondition == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if glaucoma.hasCondition == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if glaucoma.hasCondition == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div x-show="gla === 'yes'" x-cloak>
+        <div class="form-group">
+            <label for="gla_which_eyes">Which eye(s)?</label>
+            <select id="gla_which_eyes" name="glaucoma.which_eyes">
+                <option value="" {% if glaucoma.whichEyes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="both" {% if glaucoma.whichEyes == "both" %}selected{% endif %}>Both eyes</option>
+                <option value="left" {% if glaucoma.whichEyes == "left" %}selected{% endif %}>Left eye</option>
+                <option value="right" {% if glaucoma.whichEyes == "right" %}selected{% endif %}>Right eye</option>
+            </select>
+        </div>
+    </div>
+</div>

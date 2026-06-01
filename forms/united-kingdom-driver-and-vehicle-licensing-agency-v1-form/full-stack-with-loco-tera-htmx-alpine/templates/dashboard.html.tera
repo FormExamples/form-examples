@@ -1,0 +1,84 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA V1 — Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>DVLA V1 — Assessments Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Name, postcode, or GP name...">
+    </div>
+    <div class="form-group">
+        <label for="meets_standard">Eyesight Standard</label>
+        <select id="meets_standard" name="meets_standard">
+            <option value="">All</option>
+            <option value="yes-without-correction" {% if meets_standard == "yes-without-correction" %}selected{% endif %}>Yes — without correction</option>
+            <option value="yes-with-correction" {% if meets_standard == "yes-with-correction" %}selected{% endif %}>Yes — with correction</option>
+            <option value="no" {% if meets_standard == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_urgent_flags">Urgent Flags</label>
+        <select id="has_urgent_flags" name="has_urgent_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_urgent_flags == "yes" %}selected{% endif %}>With urgent flags</option>
+            <option value="no" {% if has_urgent_flags == "no" %}selected{% endif %}>Without urgent flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Applicant</th>
+            <th>Date of Birth</th>
+            <th>Postcode</th>
+            <th>GP</th>
+            <th>Eyesight Std</th>
+            <th>Completion</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.createdAt | truncate(length=10, end="") }}</a></td>
+            <td>{{ c.fullName }}</td>
+            <td>{{ c.dateOfBirth }}</td>
+            <td>{{ c.postcode }}</td>
+            <td>{{ c.gpName }}</td>
+            <td>{{ c.meetsStandard }}</td>
+            <td>{{ c.overallPercent }}%</td>
+            <td>
+                {% if c.urgentFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.urgentFlagCount }} urgent</span>
+                {% elif c.flaggedIssueCount > 0 %}
+                    <span class="badge badge-warn">{{ c.flaggedIssueCount }} flags</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

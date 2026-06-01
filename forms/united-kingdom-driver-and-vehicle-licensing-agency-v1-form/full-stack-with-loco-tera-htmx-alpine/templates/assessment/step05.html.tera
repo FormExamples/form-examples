@@ -1,0 +1,46 @@
+<div class="card"
+     x-data="{ vf: '{{ field_of_vision.hasProblem }}', vfCause: '{{ field_of_vision.causedSolelyByEyeCondition }}', vfCauseSel: '{{ field_of_vision.cause }}' }">
+    <h2>Step 5: Q3 — Field of Vision</h2>
+    <p class="form-hint">
+        Have you been told by your healthcare professional or optician/optometrist that you have a
+        problem with your field of vision (the total area visible when looking straight ahead,
+        including peripheral / side vision)?
+    </p>
+
+    <div class="form-group">
+        <label for="vf_has_problem">Visual-field problem?</label>
+        <select id="vf_has_problem" name="field_of_vision.has_problem" x-model="vf">
+            <option value="" {% if field_of_vision.hasProblem == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if field_of_vision.hasProblem == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if field_of_vision.hasProblem == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div x-show="vf === 'yes'" x-cloak>
+        <div class="form-group">
+            <label for="vf_caused_by_eye">Is the problem caused solely by an eye condition?</label>
+            <select id="vf_caused_by_eye" name="field_of_vision.caused_solely_by_eye_condition" x-model="vfCause">
+                <option value="" {% if field_of_vision.causedSolelyByEyeCondition == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if field_of_vision.causedSolelyByEyeCondition == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if field_of_vision.causedSolelyByEyeCondition == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div x-show="vfCause === 'no'" x-cloak>
+            <div class="form-group">
+                <label for="vf_cause">Cause</label>
+                <select id="vf_cause" name="field_of_vision.cause" x-model="vfCauseSel">
+                    <option value="" {% if field_of_vision.cause == "" %}selected{% endif %}>&mdash;</option>
+                    <option value="brain-tumour" {% if field_of_vision.cause == "brain-tumour" %}selected{% endif %}>Brain tumour</option>
+                    <option value="head-injury" {% if field_of_vision.cause == "head-injury" %}selected{% endif %}>Head injury</option>
+                    <option value="stroke" {% if field_of_vision.cause == "stroke" %}selected{% endif %}>Stroke</option>
+                    <option value="other" {% if field_of_vision.cause == "other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div class="form-group" x-show="vfCauseSel === 'other'" x-cloak>
+                <label for="vf_cause_other_details">Other cause &mdash; details</label>
+                <textarea id="vf_cause_other_details" name="field_of_vision.cause_other_details" placeholder="Describe the other cause">{{ field_of_vision.causeOtherDetails }}</textarea>
+            </div>
+        </div>
+    </div>
+</div>

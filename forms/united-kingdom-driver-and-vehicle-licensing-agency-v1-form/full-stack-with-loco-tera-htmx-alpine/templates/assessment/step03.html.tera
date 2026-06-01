@@ -1,0 +1,18 @@
+<div class="card">
+    <h2>Step 3: Q1 — Eyesight Standards</h2>
+    <p class="form-hint">
+        Eyesight must not be worse than 6/12 (decimal 0.5) on the Snellen scale. You must be
+        able to read a number plate from 20 metres (about five parked cars' length), with or
+        without glasses or corrective lenses.
+    </p>
+
+    <div class="form-group">
+        <label for="eye_meets_standard">Do you meet the eyesight standard for driving?</label>
+        <select id="eye_meets_standard" name="eyesight_standards.meets_standard">
+            <option value="" {% if eyesight_standards.meetsStandard == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes-without-correction" {% if eyesight_standards.meetsStandard == "yes-without-correction" %}selected{% endif %}>Yes &mdash; without glasses or corrective lenses</option>
+            <option value="yes-with-correction" {% if eyesight_standards.meetsStandard == "yes-with-correction" %}selected{% endif %}>Yes &mdash; with glasses or corrective lenses</option>
+            <option value="no" {% if eyesight_standards.meetsStandard == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+</div>

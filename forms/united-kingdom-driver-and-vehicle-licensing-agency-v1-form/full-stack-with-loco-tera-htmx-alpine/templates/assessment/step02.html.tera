@@ -1,0 +1,114 @@
+<div class="card">
+    <h2>Step 2: Healthcare Professionals (Part B)</h2>
+    <p class="form-hint">Your GP and (if any) consultant details for the vision condition.</p>
+
+    <h3>GP Details</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gp_name">GP Name</label>
+            <input type="text" id="gp_name" name="healthcare_professionals.gp.name"
+                   value="{{ healthcare_professionals.gp.name }}">
+        </div>
+        <div class="form-group">
+            <label for="gp_surgery_name">Surgery Name</label>
+            <input type="text" id="gp_surgery_name" name="healthcare_professionals.gp.surgery_name"
+                   value="{{ healthcare_professionals.gp.surgeryName }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="gp_address">Address</label>
+        <textarea id="gp_address" name="healthcare_professionals.gp.address">{{ healthcare_professionals.gp.address }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gp_town">Town</label>
+            <input type="text" id="gp_town" name="healthcare_professionals.gp.town"
+                   value="{{ healthcare_professionals.gp.town }}">
+        </div>
+        <div class="form-group">
+            <label for="gp_postcode">Postcode</label>
+            <input type="text" id="gp_postcode" name="healthcare_professionals.gp.postcode"
+                   value="{{ healthcare_professionals.gp.postcode }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gp_contact_number">Contact Number</label>
+            <input type="tel" id="gp_contact_number" name="healthcare_professionals.gp.contact_number"
+                   value="{{ healthcare_professionals.gp.contactNumber }}">
+        </div>
+        <div class="form-group">
+            <label for="gp_email">Email</label>
+            <input type="email" id="gp_email" name="healthcare_professionals.gp.email"
+                   value="{{ healthcare_professionals.gp.email }}">
+        </div>
+        <div class="form-group">
+            <label for="gp_date_last_seen">Date last seen for this condition</label>
+            <input type="date" id="gp_date_last_seen" name="healthcare_professionals.gp.date_last_seen"
+                   value="{{ healthcare_professionals.gp.dateLastSeen }}">
+        </div>
+    </div>
+
+    <h3>Consultant Details (optional)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cons_name">Consultant Name</label>
+            <input type="text" id="cons_name" name="healthcare_professionals.consultant.name"
+                   value="{{ healthcare_professionals.consultant.name }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_speciality">Speciality</label>
+            <input type="text" id="cons_speciality" name="healthcare_professionals.consultant.speciality"
+                   value="{{ healthcare_professionals.consultant.speciality }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_department">Department</label>
+            <input type="text" id="cons_department" name="healthcare_professionals.consultant.department"
+                   value="{{ healthcare_professionals.consultant.department }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cons_hospital_name">Hospital Name</label>
+            <input type="text" id="cons_hospital_name" name="healthcare_professionals.consultant.hospital_name"
+                   value="{{ healthcare_professionals.consultant.hospitalName }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_town">Town</label>
+            <input type="text" id="cons_town" name="healthcare_professionals.consultant.town"
+                   value="{{ healthcare_professionals.consultant.town }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_postcode">Postcode</label>
+            <input type="text" id="cons_postcode" name="healthcare_professionals.consultant.postcode"
+                   value="{{ healthcare_professionals.consultant.postcode }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cons_address">Address</label>
+        <textarea id="cons_address" name="healthcare_professionals.consultant.address">{{ healthcare_professionals.consultant.address }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cons_contact_number">Contact Number</label>
+            <input type="tel" id="cons_contact_number" name="healthcare_professionals.consultant.contact_number"
+                   value="{{ healthcare_professionals.consultant.contactNumber }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_email">Email</label>
+            <input type="email" id="cons_email" name="healthcare_professionals.consultant.email"
+                   value="{{ healthcare_professionals.consultant.email }}">
+        </div>
+        <div class="form-group">
+            <label for="cons_date_last_seen">Date last seen for this condition</label>
+            <input type="date" id="cons_date_last_seen" name="healthcare_professionals.consultant.date_last_seen"
+                   value="{{ healthcare_professionals.consultant.dateLastSeen }}">
+        </div>
+    </div>
+</div>

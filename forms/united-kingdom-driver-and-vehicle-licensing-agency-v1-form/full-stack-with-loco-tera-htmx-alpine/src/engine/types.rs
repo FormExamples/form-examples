@@ -1,37 +1,17 @@
-//! Core types for the DVLA V1 (vision) data-collection engine.
-//!
-//! `serde(rename_all = "camelCase")` is applied to all structs that may be
-//! shared with the front-end (the canonical wire format is camelCase).
-
 use serde::{Deserialize, Serialize};
 
-/// Priority for a clinician-facing flag.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum FlagPriority {
-    Urgent,
-    High,
-    Medium,
-    Low,
-}
+// Type aliases. Empty string `''` indicates an unanswered enum / text field.
+pub type YesNo = String;
+pub type EyesightStandard = String;
+pub type WhichEye = String;
+pub type WhichEyes = String;
+pub type MonocularDuration = String;
+pub type MonocularAdaptation = String;
+pub type VisualFieldCause = String;
+pub type ContactPreference = String;
 
-impl FlagPriority {
-    #[allow(dead_code)]
-    pub fn label(self) -> &'static str {
-        match self {
-            FlagPriority::Urgent => "Urgent",
-            FlagPriority::High => "High",
-            FlagPriority::Medium => "Medium",
-            FlagPriority::Low => "Low",
-        }
-    }
-}
-
-// ──────────────────────────────────────────────
-// Step 1 — Personal Details (Part A)
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part A — Personal Details.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PersonalDetails {
     pub title: String,
@@ -44,11 +24,8 @@ pub struct PersonalDetails {
     pub change_of_details: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 2 — Healthcare Professionals (Part B)
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part B — GP details.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GpDetails {
     pub name: String,
@@ -61,7 +38,8 @@ pub struct GpDetails {
     pub date_last_seen: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Part B — Consultant details.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ConsultantDetails {
     pub name: String,
@@ -76,178 +54,129 @@ pub struct ConsultantDetails {
     pub date_last_seen: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HealthcareProfessionals {
     pub gp: GpDetails,
     pub consultant: ConsultantDetails,
 }
 
-// ──────────────────────────────────────────────
-// Step 3 — Q1 Eyesight Standards
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q1 — Eyesight standards.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EyesightStandards {
-    /// "" | "yes-without-correction" | "yes-with-correction" | "no"
-    pub meets_standard: String,
+    pub meets_standard: EyesightStandard,
 }
 
-// ──────────────────────────────────────────────
-// Step 4 — Q2 Vision in Both Eyes / Monocular
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q2 — Vision in both eyes (monocular branch).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct VisionInBothEyes {
-    /// "" | "yes" | "no"
-    pub has_vision_in_both_eyes: String,
-    /// "" | "left" | "right"
-    pub which_eye: String,
-    /// "" | "since-birth-or-childhood" | "health-or-injury"
-    pub duration: String,
-    /// "" | "adapted-advised" | "adapted-self" | "not-adapted"
-    pub adaptation: String,
+    pub has_vision_in_both_eyes: YesNo,
+    pub which_eye: WhichEye,
+    pub duration: MonocularDuration,
+    pub adaptation: MonocularAdaptation,
     pub monocular_declaration_confirmed: bool,
 }
 
-// ──────────────────────────────────────────────
-// Step 5 — Q3 Field of Vision
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q3 — Field of vision.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FieldOfVision {
-    pub has_problem: String,
-    pub caused_solely_by_eye_condition: String,
-    /// "" | "brain-tumour" | "head-injury" | "stroke" | "other"
-    pub cause: String,
+    pub has_problem: YesNo,
+    pub caused_solely_by_eye_condition: YesNo,
+    pub cause: VisualFieldCause,
     pub cause_other_details: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 6 — Q4 Glaucoma
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q4 — Glaucoma.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Glaucoma {
-    pub has_condition: String,
-    /// "" | "both" | "left" | "right"
-    pub which_eyes: String,
+    pub has_condition: YesNo,
+    pub which_eyes: WhichEyes,
 }
 
-// ──────────────────────────────────────────────
-// Step 7 — Q5 Retinitis Pigmentosa
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q5 — Retinitis pigmentosa.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RetinitisPigmentosa {
-    pub has_condition: String,
-    pub which_eyes: String,
+    pub has_condition: YesNo,
+    pub which_eyes: WhichEyes,
 }
 
-// ──────────────────────────────────────────────
-// Step 8 — Q6 Laser Treatment
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q6 — Laser treatment.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LaserTreatment {
-    pub has_had_treatment: String,
+    pub has_had_treatment: YesNo,
     pub left_eye_first_date: String,
     pub right_eye_first_date: String,
     pub left_eye_last_date: String,
     pub right_eye_last_date: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 9 — Q7 Blepharospasm
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q7 — Blepharospasm.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Blepharospasm {
-    pub has_condition: String,
-    pub which_eyes: String,
-    pub has_had_treatment: String,
-    pub adequately_controlled: String,
+    pub has_condition: YesNo,
+    pub which_eyes: WhichEyes,
+    pub has_had_treatment: YesNo,
+    pub adequately_controlled: YesNo,
 }
 
-// ──────────────────────────────────────────────
-// Step 10 — Q8 Night Blindness
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q8 — Night blindness.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NightBlindness {
-    pub has_condition: String,
-    pub which_eyes: String,
+    pub has_condition: YesNo,
+    pub which_eyes: WhichEyes,
 }
 
-// ──────────────────────────────────────────────
-// Step 11 — Q9 Double Vision
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q9 — Double vision.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DoubleVision {
-    pub has_condition: String,
-    pub controlled: String,
-    pub same_for_six_months_or_more: String,
+    pub has_condition: YesNo,
+    pub controlled: YesNo,
+    pub same_for_six_months_or_more: YesNo,
     pub double_vision_declaration_confirmed: bool,
     pub declaration_signature_name: String,
     pub declaration_date: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 12 — Q10 Other Vision Conditions
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q10 — Other vision conditions.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OtherVisionConditions {
-    pub has_other: String,
+    pub has_other: YesNo,
     pub details: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 13 — Q11 Recent Contact
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Q11 — Recent contact.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecentContact {
-    pub had_contact: String,
+    pub had_contact: YesNo,
     pub date_of_contact: String,
 }
 
-// ──────────────────────────────────────────────
-// Step 14 — Authorisation
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Applicant's Authorisation.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Authorisation {
     pub declaration_confirmed: bool,
     pub name: String,
     pub signature: String,
     pub date: String,
-    /// "" | "yes" | "no"
-    pub authorise_electronic_correspondence: String,
-    /// "" | "email" | "sms"
-    pub contact_preference_from_healthcare_professional: String,
-    /// "" | "email" | "sms"
-    pub contact_preference_from_dvla: String,
+    pub authorise_electronic_correspondence: YesNo,
+    pub contact_preference_from_healthcare_professional: ContactPreference,
+    pub contact_preference_from_dvla: ContactPreference,
 }
 
-// ──────────────────────────────────────────────
-// Full assessment data model
-// ──────────────────────────────────────────────
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Full DVLA V1 assessment record.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AssessmentData {
     pub personal_details: PersonalDetails,
@@ -266,11 +195,7 @@ pub struct AssessmentData {
     pub authorisation: Authorisation,
 }
 
-// ──────────────────────────────────────────────
-// Validation engine types
-// ──────────────────────────────────────────────
-
-/// A fired rule: a required field that has not been satisfied.
+/// A rule that fired (i.e. an unsatisfied required field).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
@@ -280,32 +205,37 @@ pub struct FiredRule {
     pub message: String,
 }
 
-/// Per-section completeness summary.
+/// Per-section completeness breakdown.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SectionCompleteness {
     pub section: String,
-    pub section_label: String,
     pub required: u32,
     pub satisfied: u32,
     pub missing: Vec<FiredRule>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ValidationResult {
-    pub complete: bool,
-    pub total_required: u32,
-    pub total_satisfied: u32,
-    pub sections: Vec<SectionCompleteness>,
-    pub missing: Vec<FiredRule>,
-}
-
+/// A flagged clinical / administrative issue. Priority ladder:
+/// `urgent` > `high` > `medium` > `low`.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FlaggedIssue {
     pub id: String,
     pub category: String,
     pub message: String,
-    pub priority: FlagPriority,
+    pub priority: String,
+}
+
+/// Grading output for a DVLA V1 case.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradingResult {
+    pub complete: bool,
+    pub total_required: u32,
+    pub total_satisfied: u32,
+    pub overall_percent: u32,
+    pub sections: Vec<SectionCompleteness>,
+    pub missing: Vec<FiredRule>,
+    pub flagged_issues: Vec<FlaggedIssue>,
+    pub timestamp: String,
 }

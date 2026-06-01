@@ -1,0 +1,25 @@
+<div class="card" x-data="{ nb: '{{ night_blindness.hasCondition }}' }">
+    <h2>Step 10: Q8 — Night Blindness (Nyctalopia)</h2>
+    <p class="form-hint">Have you been diagnosed with night blindness?</p>
+
+    <div class="form-group">
+        <label for="nb_has">Night blindness?</label>
+        <select id="nb_has" name="night_blindness.has_condition" x-model="nb">
+            <option value="" {% if night_blindness.hasCondition == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if night_blindness.hasCondition == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if night_blindness.hasCondition == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div x-show="nb === 'yes'" x-cloak>
+        <div class="form-group">
+            <label for="nb_which_eyes">Which eye(s)?</label>
+            <select id="nb_which_eyes" name="night_blindness.which_eyes">
+                <option value="" {% if night_blindness.whichEyes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="both" {% if night_blindness.whichEyes == "both" %}selected{% endif %}>Both eyes</option>
+                <option value="left" {% if night_blindness.whichEyes == "left" %}selected{% endif %}>Left eye</option>
+                <option value="right" {% if night_blindness.whichEyes == "right" %}selected{% endif %}>Right eye</option>
+            </select>
+        </div>
+    </div>
+</div>

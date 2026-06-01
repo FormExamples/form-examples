@@ -1,0 +1,121 @@
+{% extends "base.html.tera" %}
+
+{% block title %}DVLA V1 — Assessment Report{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>DVLA V1 &mdash; Vision Self-Declaration Report</h1>
+    {% if complete %}
+        <div class="checklist-badge checklist-complete">Complete</div>
+    {% else %}
+        <div class="checklist-badge checklist-in-progress">Incomplete</div>
+    {% endif %}
+    <div class="checklist-label">Overall completion: {{ overall_percent }}% ({{ total_satisfied }}/{{ total_required }} required fields)</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Applicant Summary -->
+<div class="card">
+    <h2>Applicant Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Title:</strong> {{ data.personalDetails.title }}<br>
+            <strong>Full Name:</strong> {{ data.personalDetails.fullName }}<br>
+            <strong>Date of Birth:</strong> {{ data.personalDetails.dateOfBirth }}<br>
+            <strong>Address:</strong> {{ data.personalDetails.address }}<br>
+            <strong>Postcode:</strong> {{ data.personalDetails.postcode }}
+        </div>
+        <div>
+            <strong>Email:</strong> {{ data.personalDetails.email }}<br>
+            <strong>Contact Number:</strong> {{ data.personalDetails.contactNumber }}<br>
+            <strong>GP:</strong> {{ data.healthcareProfessionals.gp.name }}<br>
+            <strong>GP Surgery:</strong> {{ data.healthcareProfessionals.gp.surgeryName }}<br>
+            <strong>Consultant:</strong> {{ data.healthcareProfessionals.consultant.name }}
+        </div>
+    </div>
+</div>
+
+<!-- Per-Section Progress -->
+<div class="card">
+    <h2>Section Completeness</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Section</th>
+                <th>Required</th>
+                <th>Satisfied</th>
+                <th>Missing</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in sections %}
+            <tr>
+                <td>{{ s.section }}</td>
+                <td>{{ s.required }}</td>
+                <td>{{ s.satisfied }}</td>
+                <td>
+                    {% if s.missing | length > 0 %}
+                        <span class="badge badge-no">{{ s.missing | length }}</span>
+                    {% else %}
+                        <span class="badge badge-yes">0</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Flagged Issues -->
+{% if flagged_issues | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ flagged_issues | length }})</h2>
+    <div class="flags-section">
+        {% for flag in flagged_issues %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-id"><code>{{ flag.id }}</code></span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Missing / unsatisfied fields -->
+{% if missing | length > 0 %}
+<div class="card">
+    <h2>Outstanding Items ({{ missing | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Rule ID</th>
+                <th>Section</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in missing %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.section }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{{ rule.message }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
