@@ -1,0 +1,102 @@
+<div class="card">
+    <h2>Step 4: Medical &amp; Surgical History</h2>
+    <p class="form-hint">Pelvic, endocrine, and surgical history relevant to fertility.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pelvic_inflammatory_disease">Pelvic Inflammatory Disease</label>
+            <select id="pelvic_inflammatory_disease" name="medical_surgical_history.pelvic_inflammatory_disease">
+                <option value="" {% if medical_surgical_history.pelvicInflammatoryDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.pelvicInflammatoryDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.pelvicInflammatoryDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="endometriosis">Endometriosis</label>
+            <select id="endometriosis" name="medical_surgical_history.endometriosis">
+                <option value="" {% if medical_surgical_history.endometriosis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.endometriosis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.endometriosis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="polycystic_ovary_syndrome">PCOS</label>
+            <select id="polycystic_ovary_syndrome" name="medical_surgical_history.polycystic_ovary_syndrome">
+                <option value="" {% if medical_surgical_history.polycysticOvarySyndrome == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.polycysticOvarySyndrome == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.polycysticOvarySyndrome == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fibroids">Fibroids</label>
+            <select id="fibroids" name="medical_surgical_history.fibroids">
+                <option value="" {% if medical_surgical_history.fibroids == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.fibroids == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.fibroids == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="thyroid_disorder">Thyroid Disorder</label>
+            <select id="thyroid_disorder" name="medical_surgical_history.thyroid_disorder">
+                <option value="" {% if medical_surgical_history.thyroidDisorder == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.thyroidDisorder == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.thyroidDisorder == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="diabetes">Diabetes</label>
+            <select id="diabetes" name="medical_surgical_history.diabetes">
+                <option value="" {% if medical_surgical_history.diabetes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.diabetes == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.diabetes == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cancer_history">Cancer History</label>
+            <select id="cancer_history" name="medical_surgical_history.cancer_history">
+                <option value="" {% if medical_surgical_history.cancerHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.cancerHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.cancerHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pelvic_surgery">Prior Pelvic Surgery</label>
+            <select id="pelvic_surgery" name="medical_surgical_history.pelvic_surgery">
+                <option value="" {% if medical_surgical_history.pelvicSurgery == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.pelvicSurgery == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.pelvicSurgery == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sexually_transmitted_infections">STIs</label>
+            <select id="sexually_transmitted_infections" name="medical_surgical_history.sexually_transmitted_infections">
+                <option value="" {% if medical_surgical_history.sexuallyTransmittedInfections == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medical_surgical_history.sexuallyTransmittedInfections == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medical_surgical_history.sexuallyTransmittedInfections == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cancer_treatment_details">Cancer Treatment Details</label>
+        <textarea id="cancer_treatment_details" name="medical_surgical_history.cancer_treatment_details">{{ medical_surgical_history.cancerTreatmentDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="pelvic_surgery_details">Pelvic Surgery Details</label>
+        <textarea id="pelvic_surgery_details" name="medical_surgical_history.pelvic_surgery_details">{{ medical_surgical_history.pelvicSurgeryDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="sti_details">STI Details</label>
+        <textarea id="sti_details" name="medical_surgical_history.sti_details">{{ medical_surgical_history.stiDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="other_conditions">Other Conditions</label>
+        <textarea id="other_conditions" name="medical_surgical_history.other_conditions">{{ medical_surgical_history.otherConditions }}</textarea>
+    </div>
+</div>

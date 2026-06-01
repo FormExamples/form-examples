@@ -1,0 +1,90 @@
+use std::sync::Arc;
+
+use axum::{Extension, debug_handler};
+use loco_rs::prelude::*;
+use serde::Deserialize;
+use tera::{Context, Tera};
+
+use crate::models::assessments::list_completed;
+use crate::views::dashboard::CaseRow;
+
+#[derive(Debug, Deserialize)]
+struct DashboardParams {
+    search: Option<String>,
+    concern_level: Option<String>,
+    referral_urgency: Option<String>,
+    has_flags: Option<String>,
+}
+
+/// GET /dashboard -- render the fertility-clinic dashboard with filters.
+#[debug_handler]
+async fn dashboard(
+    State(ctx): State<AppContext>,
+    Query(params): Query<DashboardParams>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let models = list_completed(&ctx.db).await?;
+
+    let mut items: Vec<CaseRow> = models.iter().filter_map(CaseRow::from_model).collect();
+
+    // Server-side search across patient name, partner name, clinician.
+    if let Some(ref term) = params.search {
+        let term = term.to_lowercase();
+        items.retain(|row| {
+            row.patient_name.to_lowercase().contains(&term)
+                || row.partner_name.to_lowercase().contains(&term)
+                || row.clinician_name.to_lowercase().contains(&term)
+        });
+    }
+
+    if let Some(ref level) = params.concern_level {
+        if !level.is_empty() {
+            items.retain(|row| row.concern_level == *level);
+        }
+    }
+
+    if let Some(ref urg) = params.referral_urgency {
+        if !urg.is_empty() {
+            items.retain(|row| row.referral_urgency == *urg);
+        }
+    }
+
+    if let Some(ref hf) = params.has_flags {
+        match hf.as_str() {
+            "yes" => items.retain(|row| row.urgent_flag_count > 0 || row.high_flag_count > 0),
+            "no" => items.retain(|row| row.urgent_flag_count == 0 && row.high_flag_count == 0),
+            _ => {}
+        }
+    }
+
+    // Sort by assessment date descending (most recent first).
+    items.sort_by(|a, b| b.assessment_date.cmp(&a.assessment_date));
+
+    let total = items.len();
+    let mut context = Context::new();
+    context.insert("cases", &items);
+    context.insert("total", &total);
+    context.insert("search", &params.search.unwrap_or_default());
+    context.insert("concern_level", &params.concern_level.unwrap_or_default());
+    context.insert(
+        "referral_urgency",
+        &params.referral_urgency.unwrap_or_default(),
+    );
+    context.insert("has_flags", &params.has_flags.unwrap_or_default());
+
+    let rendered = tera
+        .render("dashboard.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("dashboard", get(dashboard))
+        .layer(Extension(tera))
+}

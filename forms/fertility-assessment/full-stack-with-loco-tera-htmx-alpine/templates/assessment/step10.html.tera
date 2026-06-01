@@ -1,0 +1,45 @@
+<div class="card">
+    <h2>Step 10: Clinical Recommendation</h2>
+    <p class="form-hint">Recommendation and referral urgency from the assessing clinician.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_name">Clinician Name</label>
+            <input type="text" id="clinician_name" name="clinical_recommendation.clinician_name"
+                   value="{{ clinical_recommendation.clinicianName }}">
+        </div>
+        <div class="form-group">
+            <label for="assessment_date">Assessment Date</label>
+            <input type="date" id="assessment_date" name="clinical_recommendation.assessment_date"
+                   value="{{ clinical_recommendation.assessmentDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="recommendation">Recommendation</label>
+            <select id="recommendation" name="clinical_recommendation.recommendation">
+                <option value="" {% if clinical_recommendation.recommendation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="continue-attempts" {% if clinical_recommendation.recommendation == "continue-attempts" %}selected{% endif %}>Continue attempts</option>
+                <option value="lifestyle-optimisation" {% if clinical_recommendation.recommendation == "lifestyle-optimisation" %}selected{% endif %}>Lifestyle optimisation</option>
+                <option value="targeted-treatment" {% if clinical_recommendation.recommendation == "targeted-treatment" %}selected{% endif %}>Targeted treatment</option>
+                <option value="specialist-referral" {% if clinical_recommendation.recommendation == "specialist-referral" %}selected{% endif %}>Specialist referral</option>
+                <option value="art-referral" {% if clinical_recommendation.recommendation == "art-referral" %}selected{% endif %}>ART referral</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="referral_urgency">Referral Urgency</label>
+            <select id="referral_urgency" name="clinical_recommendation.referral_urgency">
+                <option value="" {% if clinical_recommendation.referralUrgency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="routine" {% if clinical_recommendation.referralUrgency == "routine" %}selected{% endif %}>Routine</option>
+                <option value="soon" {% if clinical_recommendation.referralUrgency == "soon" %}selected{% endif %}>Soon</option>
+                <option value="urgent" {% if clinical_recommendation.referralUrgency == "urgent" %}selected{% endif %}>Urgent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_notes">Additional Notes</label>
+        <textarea id="additional_notes" name="clinical_recommendation.additional_notes">{{ clinical_recommendation.additionalNotes }}</textarea>
+    </div>
+</div>

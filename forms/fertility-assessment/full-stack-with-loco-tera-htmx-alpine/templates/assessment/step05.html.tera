@@ -1,0 +1,99 @@
+<div class="card">
+    <h2>Step 5: Lifestyle Factors</h2>
+    <p class="form-hint">BMI, smoking, alcohol, caffeine, exercise, occupational hazards.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" step="0.1" id="weight" name="lifestyle_factors.weight"
+                   value="{{ lifestyle_factors.weight }}">
+        </div>
+        <div class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" step="0.1" id="height" name="lifestyle_factors.height"
+                   value="{{ lifestyle_factors.height }}">
+        </div>
+        <div class="form-group">
+            <label for="bmi">BMI</label>
+            <input type="number" step="0.1" id="bmi" name="lifestyle_factors.bmi"
+                   value="{{ lifestyle_factors.bmi }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tobacco_status">Tobacco Status</label>
+            <select id="tobacco_status" name="lifestyle_factors.tobacco_status">
+                <option value="" {% if lifestyle_factors.tobaccoStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="never" {% if lifestyle_factors.tobaccoStatus == "never" %}selected{% endif %}>Never</option>
+                <option value="former" {% if lifestyle_factors.tobaccoStatus == "former" %}selected{% endif %}>Former</option>
+                <option value="current" {% if lifestyle_factors.tobaccoStatus == "current" %}selected{% endif %}>Current</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cigarettes_per_day">Cigarettes / Day</label>
+            <input type="number" id="cigarettes_per_day" name="lifestyle_factors.cigarettes_per_day"
+                   value="{{ lifestyle_factors.cigarettesPerDay }}">
+        </div>
+        <div class="form-group">
+            <label for="alcohol_level">Alcohol Level</label>
+            <select id="alcohol_level" name="lifestyle_factors.alcohol_level">
+                <option value="" {% if lifestyle_factors.alcoholLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if lifestyle_factors.alcoholLevel == "none" %}selected{% endif %}>None</option>
+                <option value="low" {% if lifestyle_factors.alcoholLevel == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if lifestyle_factors.alcoholLevel == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="heavy" {% if lifestyle_factors.alcoholLevel == "heavy" %}selected{% endif %}>Heavy</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="alcohol_units_per_week">Alcohol Units / Week</label>
+            <input type="number" id="alcohol_units_per_week" name="lifestyle_factors.alcohol_units_per_week"
+                   value="{{ lifestyle_factors.alcoholUnitsPerWeek }}">
+        </div>
+        <div class="form-group">
+            <label for="caffeine_level">Caffeine Level</label>
+            <select id="caffeine_level" name="lifestyle_factors.caffeine_level">
+                <option value="" {% if lifestyle_factors.caffeineLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if lifestyle_factors.caffeineLevel == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if lifestyle_factors.caffeineLevel == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if lifestyle_factors.caffeineLevel == "high" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recreational_drugs">Recreational Drugs</label>
+            <select id="recreational_drugs" name="lifestyle_factors.recreational_drugs">
+                <option value="" {% if lifestyle_factors.recreationalDrugs == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if lifestyle_factors.recreationalDrugs == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if lifestyle_factors.recreationalDrugs == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="exercise_frequency">Exercise Frequency</label>
+            <input type="text" id="exercise_frequency" name="lifestyle_factors.exercise_frequency"
+                   value="{{ lifestyle_factors.exerciseFrequency }}">
+        </div>
+        <div class="form-group">
+            <label for="occupational_hazards">Occupational Hazards</label>
+            <select id="occupational_hazards" name="lifestyle_factors.occupational_hazards">
+                <option value="" {% if lifestyle_factors.occupationalHazards == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if lifestyle_factors.occupationalHazards == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if lifestyle_factors.occupationalHazards == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="recreational_drug_details">Recreational Drug Details</label>
+        <textarea id="recreational_drug_details" name="lifestyle_factors.recreational_drug_details">{{ lifestyle_factors.recreationalDrugDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="occupational_hazard_details">Occupational Hazard Details</label>
+        <textarea id="occupational_hazard_details" name="lifestyle_factors.occupational_hazard_details">{{ lifestyle_factors.occupationalHazardDetails }}</textarea>
+    </div>
+</div>

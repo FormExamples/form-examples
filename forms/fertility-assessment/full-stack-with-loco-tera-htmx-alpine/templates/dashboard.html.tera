@@ -1,0 +1,93 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Fertility Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Fertility Clinic Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient, partner, or clinician name...">
+    </div>
+    <div class="form-group">
+        <label for="concern_level">Concern</label>
+        <select id="concern_level" name="concern_level">
+            <option value="">All</option>
+            <option value="low" {% if concern_level == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if concern_level == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if concern_level == "high" %}selected{% endif %}>High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="referral_urgency">Referral Urgency</label>
+        <select id="referral_urgency" name="referral_urgency">
+            <option value="">All</option>
+            <option value="routine" {% if referral_urgency == "routine" %}selected{% endif %}>Routine</option>
+            <option value="soon" {% if referral_urgency == "soon" %}selected{% endif %}>Soon</option>
+            <option value="urgent" {% if referral_urgency == "urgent" %}selected{% endif %}>Urgent</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Urgent/High Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Assessment Date</th>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Partner</th>
+            <th>Clinician</th>
+            <th>Recommendation</th>
+            <th>Concern</th>
+            <th>Score</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.assessmentDate }}</a></td>
+            <td>{{ c.patientName }}</td>
+            <td>{% if c.patientAge %}{{ c.patientAge }}{% endif %}</td>
+            <td>{{ c.partnerName }}</td>
+            <td>{{ c.clinicianName }}</td>
+            <td>{{ c.recommendation }}<br><small>{{ c.referralUrgency }}</small></td>
+            <td><span class="concern-badge concern-{{ c.concernLevel }}">{{ c.concernLevel }}</span></td>
+            <td>{{ c.concernScore }}</td>
+            <td>
+                {% if c.urgentFlagCount > 0 or c.highFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.urgentFlagCount }} urgent / {{ c.highFlagCount }} high</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

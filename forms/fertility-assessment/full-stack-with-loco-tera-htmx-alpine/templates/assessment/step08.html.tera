@@ -1,0 +1,54 @@
+<div class="card">
+    <h2>Step 8: Hormone Profile</h2>
+    <p class="form-hint">FSH, LH, AMH, oestradiol, TSH, prolactin, testosterone, day-21 progesterone.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fsh">FSH (IU/L)</label>
+            <input type="number" step="0.1" id="fsh" name="hormone_profile.fsh" value="{{ hormone_profile.fsh }}">
+        </div>
+        <div class="form-group">
+            <label for="lh">LH (IU/L)</label>
+            <input type="number" step="0.1" id="lh" name="hormone_profile.lh" value="{{ hormone_profile.lh }}">
+        </div>
+        <div class="form-group">
+            <label for="amh">AMH (pmol/L)</label>
+            <input type="number" step="0.1" id="amh" name="hormone_profile.amh" value="{{ hormone_profile.amh }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="oestradiol">Oestradiol (pmol/L)</label>
+            <input type="number" step="0.1" id="oestradiol" name="hormone_profile.oestradiol" value="{{ hormone_profile.oestradiol }}">
+        </div>
+        <div class="form-group">
+            <label for="tsh">TSH (mIU/L)</label>
+            <input type="number" step="0.01" id="tsh" name="hormone_profile.tsh" value="{{ hormone_profile.tsh }}">
+        </div>
+        <div class="form-group">
+            <label for="prolactin">Prolactin (mIU/L)</label>
+            <input type="number" step="0.1" id="prolactin" name="hormone_profile.prolactin" value="{{ hormone_profile.prolactin }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="testosterone">Testosterone (nmol/L)</label>
+            <input type="number" step="0.01" id="testosterone" name="hormone_profile.testosterone" value="{{ hormone_profile.testosterone }}">
+        </div>
+        <div class="form-group">
+            <label for="progesterone_day21">Day-21 Progesterone (nmol/L)</label>
+            <input type="number" step="0.1" id="progesterone_day21" name="hormone_profile.progesterone_day21" value="{{ hormone_profile.progesteroneDay21 }}">
+        </div>
+        <div class="form-group">
+            <label for="hormone_test_date">Hormone Test Date</label>
+            <input type="date" id="hormone_test_date" name="hormone_profile.hormone_test_date" value="{{ hormone_profile.hormoneTestDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="hormone_notes">Hormone Notes</label>
+        <textarea id="hormone_notes" name="hormone_profile.hormone_notes">{{ hormone_profile.hormoneNotes }}</textarea>
+    </div>
+</div>

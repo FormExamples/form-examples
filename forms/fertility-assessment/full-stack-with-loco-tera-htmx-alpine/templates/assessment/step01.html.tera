@@ -1,0 +1,76 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Identification of both partners.</p>
+
+    <h3>Patient</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_first_name">First Name</label>
+            <input type="text" id="patient_first_name" name="demographics.patient_first_name"
+                   value="{{ demographics.patientFirstName }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_last_name">Last Name</label>
+            <input type="text" id="patient_last_name" name="demographics.patient_last_name"
+                   value="{{ demographics.patientLastName }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_date_of_birth">Date of Birth</label>
+            <input type="date" id="patient_date_of_birth" name="demographics.patient_date_of_birth"
+                   value="{{ demographics.patientDateOfBirth }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_sex">Sex</label>
+            <select id="patient_sex" name="demographics.patient_sex">
+                <option value="" {% if demographics.patientSex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.patientSex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.patientSex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.patientSex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ethnicity">Ethnicity</label>
+            <input type="text" id="ethnicity" name="demographics.ethnicity"
+                   value="{{ demographics.ethnicity }}">
+        </div>
+    </div>
+
+    <h3>Partner</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="partner_first_name">First Name</label>
+            <input type="text" id="partner_first_name" name="demographics.partner_first_name"
+                   value="{{ demographics.partnerFirstName }}">
+        </div>
+        <div class="form-group">
+            <label for="partner_last_name">Last Name</label>
+            <input type="text" id="partner_last_name" name="demographics.partner_last_name"
+                   value="{{ demographics.partnerLastName }}">
+        </div>
+        <div class="form-group">
+            <label for="partner_date_of_birth">Date of Birth</label>
+            <input type="date" id="partner_date_of_birth" name="demographics.partner_date_of_birth"
+                   value="{{ demographics.partnerDateOfBirth }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="partner_sex">Sex</label>
+            <select id="partner_sex" name="demographics.partner_sex">
+                <option value="" {% if demographics.partnerSex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="female" {% if demographics.partnerSex == "female" %}selected{% endif %}>Female</option>
+                <option value="male" {% if demographics.partnerSex == "male" %}selected{% endif %}>Male</option>
+                <option value="other" {% if demographics.partnerSex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="relationship_duration">Relationship Duration (years)</label>
+            <input type="number" id="relationship_duration" name="demographics.relationship_duration"
+                   value="{{ demographics.relationshipDuration }}">
+        </div>
+    </div>
+</div>
