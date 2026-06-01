@@ -1,0 +1,34 @@
+<div class="card">
+    <h2>Step 8: Environmental Assessment</h2>
+    <p class="form-hint">Physical and social environment factors.</p>
+
+    {% set env_items = [
+        ["adequate_daylight", "Adequate daylight exposure during the day?"],
+        ["excessive_noise", "Excessive noise in the environment?"],
+        ["unfamiliar_environment", "Unfamiliar environment (recent move, hospital admission)?"],
+        ["cluttered", "Cluttered or visually busy environment?"],
+        ["mirrors_or_shadows", "Mirrors or strong shadows that may cause misperceptions?"],
+        ["consistent_routine", "Consistent daily routine?"],
+        ["adequate_social_contact", "Adequate social contact during the day?"]
+    ] %}
+
+    {% for it in env_items %}
+    {% set field = it[0] %}
+    {% set label = it[1] %}
+    {% set current = environmental_assessment[field] | default(value="") %}
+    <div class="form-group">
+        <label for="env_{{ field }}">{{ label }}</label>
+        <select id="env_{{ field }}" name="environmental_assessment.{{ field }}">
+            <option value="" {% if current == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if current == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if current == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="environmental_notes">Environmental notes</label>
+        <textarea id="environmental_notes" name="environmental_assessment.environmental_notes"
+                  placeholder="Layout of bedroom, lighting, signage, orientation aids&hellip;">{{ environmental_assessment.environmentalNotes }}</textarea>
+    </div>
+</div>

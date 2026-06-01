@@ -1,0 +1,56 @@
+<div class="card">
+    <h2>Step 9: Carer Impact &amp; Support</h2>
+    <p class="form-hint">Effect on the primary carer and current support arrangements.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="primary_carer">Primary carer name</label>
+            <input type="text" id="primary_carer" name="carer_impact.primary_carer"
+                   value="{{ carer_impact.primaryCarer }}">
+        </div>
+        <div class="form-group">
+            <label for="carer_relationship">Relationship to patient</label>
+            <input type="text" id="carer_relationship" name="carer_impact.carer_relationship"
+                   value="{{ carer_impact.carerRelationship }}"
+                   placeholder="e.g. spouse, daughter, professional">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="carer_strain_level">Carer strain level</label>
+        <select id="carer_strain_level" name="carer_impact.carer_strain_level">
+            <option value="" {% if carer_impact.carerStrainLevel == "" %}selected{% endif %}>&mdash;</option>
+            <option value="none" {% if carer_impact.carerStrainLevel == "none" %}selected{% endif %}>None</option>
+            <option value="minimal" {% if carer_impact.carerStrainLevel == "minimal" %}selected{% endif %}>Minimal</option>
+            <option value="moderate" {% if carer_impact.carerStrainLevel == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if carer_impact.carerStrainLevel == "severe" %}selected{% endif %}>Severe</option>
+        </select>
+    </div>
+
+    {% set yesno_items = [
+        ["carer_sleep_disturbed", "Is the carer's sleep disturbed by the patient?"],
+        ["carer_burnout_signs", "Signs of carer burnout (exhaustion, low mood, withdrawal)?"],
+        ["respite_care_in_place", "Respite care arrangements in place?"],
+        ["formal_support_engaged", "Engaged with formal support services (memory clinic, day centre)?"]
+    ] %}
+
+    {% for it in yesno_items %}
+    {% set field = it[0] %}
+    {% set label = it[1] %}
+    {% set current = carer_impact[field] | default(value="") %}
+    <div class="form-group">
+        <label for="carer_{{ field }}">{{ label }}</label>
+        <select id="carer_{{ field }}" name="carer_impact.{{ field }}">
+            <option value="" {% if current == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if current == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if current == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="carer_notes">Carer notes</label>
+        <textarea id="carer_notes" name="carer_impact.carer_notes"
+                  placeholder="Carer concerns, requests, family dynamics&hellip;">{{ carer_impact.carerNotes }}</textarea>
+    </div>
+</div>

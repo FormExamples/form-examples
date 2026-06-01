@@ -1,0 +1,71 @@
+<div class="card">
+    <h2>Step 10: Management Plan</h2>
+    <p class="form-hint">Proposed plan, referrals, and review.</p>
+
+    <div class="form-group">
+        <label for="non_pharmacological_plan">Non-pharmacological plan in place?</label>
+        <select id="non_pharmacological_plan" name="management_plan.non_pharmacological_plan">
+            <option value="" {% if management_plan.nonPharmacologicalPlan == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if management_plan.nonPharmacologicalPlan == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if management_plan.nonPharmacologicalPlan == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="non_pharmacological_details">Non-pharmacological plan details</label>
+        <textarea id="non_pharmacological_details" name="management_plan.non_pharmacological_details"
+                  placeholder="Routine, activities, validation therapy, reminiscence&hellip;">{{ management_plan.nonPharmacologicalDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="environmental_modifications">Environmental modifications planned?</label>
+        <select id="environmental_modifications" name="management_plan.environmental_modifications">
+            <option value="" {% if management_plan.environmentalModifications == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if management_plan.environmentalModifications == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if management_plan.environmentalModifications == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="environmental_modification_details">Environmental modification details</label>
+        <textarea id="environmental_modification_details" name="management_plan.environmental_modification_details"
+                  placeholder="Lighting, signage, declutter, bright-light therapy&hellip;">{{ management_plan.environmentalModificationDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="medication_review_required">Medication review required?</label>
+        <select id="medication_review_required" name="management_plan.medication_review_required">
+            <option value="" {% if management_plan.medicationReviewRequired == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if management_plan.medicationReviewRequired == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if management_plan.medicationReviewRequired == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_required">Referral required?</label>
+        <select id="referral_required" name="management_plan.referral_required">
+            <option value="" {% if management_plan.referralRequired == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if management_plan.referralRequired == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if management_plan.referralRequired == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_details">Referral details</label>
+        <input type="text" id="referral_details" name="management_plan.referral_details"
+               value="{{ management_plan.referralDetails }}"
+               placeholder="e.g. memory clinic, old-age psychiatry, social services">
+    </div>
+
+    <div class="form-group">
+        <label for="review_date">Planned review date</label>
+        <input type="date" id="review_date" name="management_plan.review_date"
+               value="{{ management_plan.reviewDate }}">
+    </div>
+
+    <div class="form-group">
+        <label for="plan_summary">Plan summary</label>
+        <textarea id="plan_summary" name="management_plan.plan_summary" rows="4"
+                  placeholder="Overall plan and goals to share with the team and family&hellip;">{{ management_plan.planSummary }}</textarea>
+    </div>
+</div>

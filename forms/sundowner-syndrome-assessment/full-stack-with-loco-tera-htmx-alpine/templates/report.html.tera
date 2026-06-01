@@ -1,0 +1,91 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Sundowner Assessment Report &mdash; {{ severity_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Sundowner Syndrome Assessment Report</h1>
+    <div class="severity-badge severity-{{ severity }}">{{ severity_label }}</div>
+    <div class="score-row">
+        <span class="score-badge">CMAI {{ cmai_score }} / 203</span>
+        <span class="score-badge">NPI {{ npi_score }} / 144</span>
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+    <p class="form-hint">
+        Based on {{ cmai_answered_count }} of 29 CMAI items observed and
+        {{ npi_answered_count }} of 12 NPI domains endorsed. CMAI thresholds:
+        29-45 mild, 46-75 moderate, 76-120 severe, &gt;120 critical.
+    </p>
+</div>
+
+<div class="card">
+    <h2>Patient summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Age:</strong> {{ data.demographics.ageYears }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}
+        </div>
+        <div>
+            <strong>Primary diagnosis:</strong> {{ data.demographics.primaryDiagnosis }}<br>
+            <strong>Care setting:</strong> {{ data.demographics.careSetting }}<br>
+            <strong>Dementia stage:</strong> {{ data.cognitiveStatus.dementiaStage }}<br>
+            <strong>Cognitive impairment:</strong> {{ data.cognitiveStatus.cognitiveImpairment }}
+        </div>
+    </div>
+</div>
+
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Finding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}<br><small>{{ rule.detail }}</small></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-priority">{{ flag.priority | upper }}</span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="card">
+    <h2>Flagged issues</h2>
+    <p class="form-hint">No additional flags raised.</p>
+</div>
+{% endif %}
+
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
