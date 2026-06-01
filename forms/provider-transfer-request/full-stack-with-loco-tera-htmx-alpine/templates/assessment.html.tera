@@ -1,0 +1,32 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Provider Transfer Request - Case{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Provider Transfer Request</h1>
+    <p class="form-hint">
+        Complete all nine sections of the SBAR handover. Steps 1&ndash;8 are
+        filled in by the requesting provider; step 9 carries the
+        receiving-provider acknowledgement (two-party gating &mdash; the
+        receiving-side rules only fire once any acknowledgement field is
+        touched).
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Transfer Request</button>
+    </div>
+</form>
+{% endblock %}

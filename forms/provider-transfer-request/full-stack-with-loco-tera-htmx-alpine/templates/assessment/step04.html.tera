@@ -1,0 +1,44 @@
+<div class="card">
+    <h2>Step 4: Situation (S) &mdash; Reason for Transfer</h2>
+    <p class="form-hint">Briefly state why the patient needs to be transferred now.</p>
+
+    <div class="form-group">
+        <label for="situation_reason_for_transfer">Reason for transfer</label>
+        <textarea id="situation_reason_for_transfer" name="situation.reason_for_transfer"
+                  placeholder="e.g. Specialist input required for acute pancreatitis with rising amylase.">{{ situation.reasonForTransfer }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="situation_primary_diagnosis">Primary diagnosis</label>
+        <input type="text" id="situation_primary_diagnosis" name="situation.primary_diagnosis"
+               value="{{ situation.primaryDiagnosis }}" placeholder="e.g. Acute pancreatitis">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="situation_urgency">Transfer urgency</label>
+            <select id="situation_urgency" name="situation.urgency">
+                <option value="" {% if situation.urgency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="routine" {% if situation.urgency == "routine" %}selected{% endif %}>Routine</option>
+                <option value="urgent" {% if situation.urgency == "urgent" %}selected{% endif %}>Urgent</option>
+                <option value="emergent" {% if situation.urgency == "emergent" %}selected{% endif %}>Emergent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="situation_transfer_type">Transfer type</label>
+            <select id="situation_transfer_type" name="situation.transfer_type">
+                <option value="" {% if situation.transferType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="ward-to-ward" {% if situation.transferType == "ward-to-ward" %}selected{% endif %}>Ward to ward (same site)</option>
+                <option value="inter-hospital" {% if situation.transferType == "inter-hospital" %}selected{% endif %}>Inter-hospital</option>
+                <option value="inter-organisation" {% if situation.transferType == "inter-organisation" %}selected{% endif %}>Inter-organisation</option>
+                <option value="community" {% if situation.transferType == "community" %}selected{% endif %}>To community / home</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="situation_requested_date_time">Requested transfer date / time</label>
+        <input type="datetime-local" id="situation_requested_date_time" name="situation.requested_date_time"
+               value="{{ situation.requestedDateTime }}">
+    </div>
+</div>

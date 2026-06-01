@@ -1,0 +1,104 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Provider Transfer Request - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Transfer Request Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Transfer Request</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient, NHS number, diagnosis, organisation...">
+    </div>
+    <div class="form-group">
+        <label for="completeness">Completeness</label>
+        <select id="completeness" name="completeness">
+            <option value="">All</option>
+            <option value="complete" {% if completeness == "complete" %}selected{% endif %}>Complete</option>
+            <option value="partial" {% if completeness == "partial" %}selected{% endif %}>Partial</option>
+            <option value="incomplete" {% if completeness == "incomplete" %}selected{% endif %}>Incomplete</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="urgency">Urgency</label>
+        <select id="urgency" name="urgency">
+            <option value="">All</option>
+            <option value="routine" {% if urgency == "routine" %}selected{% endif %}>Routine</option>
+            <option value="urgent" {% if urgency == "urgent" %}selected{% endif %}>Urgent</option>
+            <option value="emergent" {% if urgency == "emergent" %}selected{% endif %}>Emergent</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="transfer_type">Transfer Type</label>
+        <select id="transfer_type" name="transfer_type">
+            <option value="">All</option>
+            <option value="ward-to-ward" {% if transfer_type == "ward-to-ward" %}selected{% endif %}>Ward to ward</option>
+            <option value="inter-hospital" {% if transfer_type == "inter-hospital" %}selected{% endif %}>Inter-hospital</option>
+            <option value="inter-organisation" {% if transfer_type == "inter-organisation" %}selected{% endif %}>Inter-organisation</option>
+            <option value="community" {% if transfer_type == "community" %}selected{% endif %}>To community / home</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">Urgent / High Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed transfer request{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Primary diagnosis</th>
+            <th>Urgency</th>
+            <th>Type</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Completeness</th>
+            <th>Mandatory</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in transfers %}
+        <tr>
+            <td><a href="/assessment/{{ t.id }}/report">{{ t.patientName }}</a><br><small>{{ t.patientNhsNumber }}</small></td>
+            <td>{{ t.primaryDiagnosis }}</td>
+            <td>{{ t.urgency }}</td>
+            <td>{{ t.transferType }}</td>
+            <td>{{ t.requestingClinician }}<br><small>{{ t.requestingOrganisation }}</small></td>
+            <td>{{ t.receivingClinician }}<br><small>{{ t.receivingOrganisation }}</small></td>
+            <td><span class="checklist-badge checklist-{{ t.completeness }}">{{ t.completeness }}</span></td>
+            <td>{{ t.mandatorySatisfied }} / {{ t.mandatoryRequired }}</td>
+            <td>
+                {% set urgent_high = t.urgentFlagCount + t.highFlagCount %}
+                {% if urgent_high > 0 %}
+                    <span class="badge badge-no">{{ urgent_high }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed transfer requests found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

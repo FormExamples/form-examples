@@ -1,0 +1,62 @@
+<div class="card">
+    <h2>Step 1: Requesting Provider Details</h2>
+    <p class="form-hint">The clinician initiating this transfer. Used by the receiving team for clarification and feedback.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requesting_provider_clinician_name">Clinician name</label>
+            <input type="text" id="requesting_provider_clinician_name" name="requesting_provider.clinician_name"
+                   value="{{ requesting_provider.clinicianName }}">
+        </div>
+        <div class="form-group">
+            <label for="requesting_provider_clinician_role">Role / job title</label>
+            <input type="text" id="requesting_provider_clinician_role" name="requesting_provider.clinician_role"
+                   value="{{ requesting_provider.clinicianRole }}" placeholder="e.g. Registrar, Charge Nurse">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requesting_provider_organisation">Organisation</label>
+            <input type="text" id="requesting_provider_organisation" name="requesting_provider.organisation"
+                   value="{{ requesting_provider.organisation }}" placeholder="e.g. NHS Trust, hospital, GP practice">
+        </div>
+        <div class="form-group">
+            <label for="requesting_provider_ward">Ward / unit</label>
+            <input type="text" id="requesting_provider_ward" name="requesting_provider.ward"
+                   value="{{ requesting_provider.ward }}" placeholder="e.g. AMU, Ward 7">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requesting_provider_phone">Phone</label>
+            <input type="tel" id="requesting_provider_phone" name="requesting_provider.phone"
+                   value="{{ requesting_provider.phone }}">
+        </div>
+        <div class="form-group">
+            <label for="requesting_provider_email">Email</label>
+            <input type="email" id="requesting_provider_email" name="requesting_provider.email"
+                   value="{{ requesting_provider.email }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="requesting_provider_registration_body">Registration body</label>
+            <select id="requesting_provider_registration_body" name="requesting_provider.registration_body">
+                <option value="" {% if requesting_provider.registrationBody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="GMC" {% if requesting_provider.registrationBody == "GMC" %}selected{% endif %}>GMC (General Medical Council)</option>
+                <option value="NMC" {% if requesting_provider.registrationBody == "NMC" %}selected{% endif %}>NMC (Nursing &amp; Midwifery Council)</option>
+                <option value="HCPC" {% if requesting_provider.registrationBody == "HCPC" %}selected{% endif %}>HCPC (Health &amp; Care Professions Council)</option>
+                <option value="GPhC" {% if requesting_provider.registrationBody == "GPhC" %}selected{% endif %}>GPhC (General Pharmaceutical Council)</option>
+                <option value="other" {% if requesting_provider.registrationBody == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="requesting_provider_registration_number">Registration number</label>
+            <input type="text" id="requesting_provider_registration_number" name="requesting_provider.registration_number"
+                   value="{{ requesting_provider.registrationNumber }}" placeholder="e.g. GMC 1234567">
+        </div>
+    </div>
+</div>
