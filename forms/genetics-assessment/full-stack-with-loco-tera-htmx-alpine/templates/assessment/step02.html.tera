@@ -1,0 +1,40 @@
+<div class="card">
+    <h2>Step 2: Presenting Concern</h2>
+    <p class="form-hint">Referral context: why is the proband being seen?</p>
+
+    <div class="form-group">
+        <label for="chief_concern">Chief Concern</label>
+        <textarea id="chief_concern" name="presenting_concern.chief_concern"
+                  placeholder="Proband's chief concern in their own words">{{ presenting_concern.chiefConcern }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="referral_reason">Referral Reason</label>
+        <textarea id="referral_reason" name="presenting_concern.referral_reason"
+                  placeholder="Why the referring clinician sent the proband to genetics">{{ presenting_concern.referralReason }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="referring_clinician">Referring Clinician</label>
+            <input type="text" id="referring_clinician" name="presenting_concern.referring_clinician"
+                   value="{{ presenting_concern.referringClinician }}">
+        </div>
+        <div class="form-group">
+            <label for="referral_urgency">Referral Urgency</label>
+            <select id="referral_urgency" name="presenting_concern.urgency">
+                <option value="" {% if presenting_concern.urgency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="routine" {% if presenting_concern.urgency == "routine" %}selected{% endif %}>Routine</option>
+                <option value="soon" {% if presenting_concern.urgency == "soon" %}selected{% endif %}>Soon</option>
+                <option value="urgent" {% if presenting_concern.urgency == "urgent" %}selected{% endif %}>Urgent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="suspected_syndrome">Suspected Syndrome (referrer's hypothesis)</label>
+        <input type="text" id="suspected_syndrome" name="presenting_concern.suspected_syndrome"
+               value="{{ presenting_concern.suspectedSyndrome }}"
+               placeholder="e.g. HBOC, Lynch syndrome, Li-Fraumeni">
+    </div>
+</div>

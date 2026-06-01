@@ -1,0 +1,186 @@
+<div class="card">
+    <h2>Step 6: Targeted Risk Scoring</h2>
+    <p class="form-hint">
+        Manchester Score (BRCA), Revised Bethesda (Lynch), Tyrer-Cuzick (breast lifetime), and PREMM5 (Lynch).
+    </p>
+
+    <h3>Manchester Score &mdash; per-cancer counts</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="proband_female_breast_under30">Proband female breast &lt; 30</label>
+            <input type="number" min="0" id="proband_female_breast_under30"
+                   name="targeted_risk_scoring.manchester.proband_female_breast_under30"
+                   value="{{ targeted_risk_scoring.manchester.probandFemaleBreastUnder30 }}">
+        </div>
+        <div class="form-group">
+            <label for="proband_female_breast30to39">Proband female breast 30&ndash;39</label>
+            <input type="number" min="0" id="proband_female_breast30to39"
+                   name="targeted_risk_scoring.manchester.proband_female_breast30to39"
+                   value="{{ targeted_risk_scoring.manchester.probandFemaleBreast30to39 }}">
+        </div>
+        <div class="form-group">
+            <label for="proband_female_breast40to49">Proband female breast 40&ndash;49</label>
+            <input type="number" min="0" id="proband_female_breast40to49"
+                   name="targeted_risk_scoring.manchester.proband_female_breast40to49"
+                   value="{{ targeted_risk_scoring.manchester.probandFemaleBreast40to49 }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="proband_ovarian_under60">Proband ovarian &lt; 60</label>
+            <input type="number" min="0" id="proband_ovarian_under60"
+                   name="targeted_risk_scoring.manchester.proband_ovarian_under60"
+                   value="{{ targeted_risk_scoring.manchester.probandOvarianUnder60 }}">
+        </div>
+        <div class="form-group">
+            <label for="proband_male_breast">Proband male breast</label>
+            <input type="number" min="0" id="proband_male_breast"
+                   name="targeted_risk_scoring.manchester.proband_male_breast"
+                   value="{{ targeted_risk_scoring.manchester.probandMaleBreast }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="relative_female_breast_under30">Relative female breast &lt; 30</label>
+            <input type="number" min="0" id="relative_female_breast_under30"
+                   name="targeted_risk_scoring.manchester.relative_female_breast_under30"
+                   value="{{ targeted_risk_scoring.manchester.relativeFemaleBreastUnder30 }}">
+        </div>
+        <div class="form-group">
+            <label for="relative_female_breast30to39">Relative female breast 30&ndash;39</label>
+            <input type="number" min="0" id="relative_female_breast30to39"
+                   name="targeted_risk_scoring.manchester.relative_female_breast30to39"
+                   value="{{ targeted_risk_scoring.manchester.relativeFemaleBreast30to39 }}">
+        </div>
+        <div class="form-group">
+            <label for="relative_female_breast40to49">Relative female breast 40&ndash;49</label>
+            <input type="number" min="0" id="relative_female_breast40to49"
+                   name="targeted_risk_scoring.manchester.relative_female_breast40to49"
+                   value="{{ targeted_risk_scoring.manchester.relativeFemaleBreast40to49 }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="relative_ovarian_under60">Relative ovarian &lt; 60</label>
+            <input type="number" min="0" id="relative_ovarian_under60"
+                   name="targeted_risk_scoring.manchester.relative_ovarian_under60"
+                   value="{{ targeted_risk_scoring.manchester.relativeOvarianUnder60 }}">
+        </div>
+        <div class="form-group">
+            <label for="relative_male_breast">Relative male breast</label>
+            <input type="number" min="0" id="relative_male_breast"
+                   name="targeted_risk_scoring.manchester.relative_male_breast"
+                   value="{{ targeted_risk_scoring.manchester.relativeMaleBreast }}">
+        </div>
+        <div class="form-group">
+            <label for="relative_pancreatic_under60">Relative pancreatic &lt; 60</label>
+            <input type="number" min="0" id="relative_pancreatic_under60"
+                   name="targeted_risk_scoring.manchester.relative_pancreatic_under60"
+                   value="{{ targeted_risk_scoring.manchester.relativePancreaticUnder60 }}">
+        </div>
+        <div class="form-group">
+            <label for="relative_prostate_under60">Relative prostate &lt; 60</label>
+            <input type="number" min="0" id="relative_prostate_under60"
+                   name="targeted_risk_scoring.manchester.relative_prostate_under60"
+                   value="{{ targeted_risk_scoring.manchester.relativeProstateUnder60 }}">
+        </div>
+    </div>
+
+    <h3>Revised Bethesda criteria</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="crc_under50">CRC &lt; 50?</label>
+            <select id="crc_under50" name="targeted_risk_scoring.bethesda.crc_under50">
+                <option value="" {% if targeted_risk_scoring.bethesda.crcUnder50 == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.bethesda.crcUnder50 == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.bethesda.crcUnder50 == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="synchronous_metachronous">Synchronous / metachronous Lynch tumour?</label>
+            <select id="synchronous_metachronous" name="targeted_risk_scoring.bethesda.synchronous_metachronous">
+                <option value="" {% if targeted_risk_scoring.bethesda.synchronousMetachronous == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.bethesda.synchronousMetachronous == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.bethesda.synchronousMetachronous == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="msi_histology">CRC &lt; 60 with MSI-H histology?</label>
+            <select id="msi_histology" name="targeted_risk_scoring.bethesda.msi_histology">
+                <option value="" {% if targeted_risk_scoring.bethesda.msiHistology == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.bethesda.msiHistology == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.bethesda.msiHistology == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_degree_lynch_tumour">CRC + first-degree Lynch tumour (one &lt; 50)?</label>
+            <select id="first_degree_lynch_tumour" name="targeted_risk_scoring.bethesda.first_degree_lynch_tumour">
+                <option value="" {% if targeted_risk_scoring.bethesda.firstDegreeLynchTumour == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.bethesda.firstDegreeLynchTumour == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.bethesda.firstDegreeLynchTumour == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="multiple_relatives_lynch">&ge; 2 relatives with Lynch tumour at any age?</label>
+            <select id="multiple_relatives_lynch" name="targeted_risk_scoring.bethesda.multiple_relatives_lynch">
+                <option value="" {% if targeted_risk_scoring.bethesda.multipleRelativesLynch == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.bethesda.multipleRelativesLynch == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.bethesda.multipleRelativesLynch == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Tyrer-Cuzick (IBIS) &mdash; external risk values</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tc_ten_year">External 10-year risk (%)</label>
+            <input type="number" step="0.1" min="0" id="tc_ten_year"
+                   name="targeted_risk_scoring.tyrer_cuzick.external_ten_year_risk"
+                   value="{{ targeted_risk_scoring.tyrerCuzick.externalTenYearRisk }}">
+        </div>
+        <div class="form-group">
+            <label for="tc_lifetime">External lifetime risk (%)</label>
+            <input type="number" step="0.1" min="0" id="tc_lifetime"
+                   name="targeted_risk_scoring.tyrer_cuzick.external_lifetime_risk"
+                   value="{{ targeted_risk_scoring.tyrerCuzick.externalLifetimeRisk }}">
+        </div>
+        <div class="form-group">
+            <label for="tc_atypical">Atypical hyperplasia?</label>
+            <select id="tc_atypical" name="targeted_risk_scoring.tyrer_cuzick.atypical_hyperplasia">
+                <option value="" {% if targeted_risk_scoring.tyrerCuzick.atypicalHyperplasia == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.tyrerCuzick.atypicalHyperplasia == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.tyrerCuzick.atypicalHyperplasia == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tc_lcis">LCIS?</label>
+            <select id="tc_lcis" name="targeted_risk_scoring.tyrer_cuzick.lcis">
+                <option value="" {% if targeted_risk_scoring.tyrerCuzick.lcis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.tyrerCuzick.lcis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.tyrerCuzick.lcis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tc_dense">Dense mammographic tissue?</label>
+            <select id="tc_dense" name="targeted_risk_scoring.tyrer_cuzick.dense">
+                <option value="" {% if targeted_risk_scoring.tyrerCuzick.dense == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if targeted_risk_scoring.tyrerCuzick.dense == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if targeted_risk_scoring.tyrerCuzick.dense == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>PREMM5</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="premm5_external">External PREMM5 (%)</label>
+            <input type="number" step="0.1" min="0" id="premm5_external"
+                   name="targeted_risk_scoring.premm5.external_premm5_percent"
+                   value="{{ targeted_risk_scoring.premm5.externalPREMM5Percent }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="card">
+    <h2>Step 3: Personal Medical History</h2>
+    <p class="form-hint">Proband's own cancer history, congenital anomalies, developmental delay, and prior radiation exposure.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="personal_cancer_history">Personal cancer history?</label>
+            <select id="personal_cancer_history" name="personal_medical_history.personal_cancer_history">
+                <option value="" {% if personal_medical_history.personalCancerHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if personal_medical_history.personalCancerHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if personal_medical_history.personalCancerHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="multiple_primary_cancers">Multiple primary cancers?</label>
+            <select id="multiple_primary_cancers" name="personal_medical_history.multiple_primary_cancers">
+                <option value="" {% if personal_medical_history.multiplePrimaryCancers == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if personal_medical_history.multiplePrimaryCancers == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if personal_medical_history.multiplePrimaryCancers == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="congenital_anomalies">Congenital anomalies?</label>
+            <select id="congenital_anomalies" name="personal_medical_history.congenital_anomalies">
+                <option value="" {% if personal_medical_history.congenitalAnomalies == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if personal_medical_history.congenitalAnomalies == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if personal_medical_history.congenitalAnomalies == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="developmental_delay">Developmental delay?</label>
+            <select id="developmental_delay" name="personal_medical_history.developmental_delay">
+                <option value="" {% if personal_medical_history.developmentalDelay == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if personal_medical_history.developmentalDelay == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if personal_medical_history.developmentalDelay == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="prior_radiation">Prior therapeutic radiation?</label>
+            <select id="prior_radiation" name="personal_medical_history.prior_radiation">
+                <option value="" {% if personal_medical_history.priorRadiation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if personal_medical_history.priorRadiation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if personal_medical_history.priorRadiation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="congenital_anomalies_details">Congenital anomalies detail</label>
+        <textarea id="congenital_anomalies_details" name="personal_medical_history.congenital_anomalies_details">{{ personal_medical_history.congenitalAnomaliesDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="other_significant_history">Other significant medical history</label>
+        <textarea id="other_significant_history" name="personal_medical_history.other_significant_history">{{ personal_medical_history.otherSignificantHistory }}</textarea>
+    </div>
+</div>

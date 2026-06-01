@@ -1,0 +1,150 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Genetics Report - {{ risk_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Genetics Assessment &mdash; Report</h1>
+    <div class="risk-badge {{ risk_class }}">{{ risk_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Summary -->
+<div class="card">
+    <h2>Proband Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.probandDemographics.firstName }} {{ data.probandDemographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.probandDemographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.probandDemographics.sex }}<br>
+            <strong>MRN:</strong> {{ data.probandDemographics.mrn }}
+        </div>
+        <div>
+            <strong>Chief Concern:</strong> {{ data.presentingConcern.chiefConcern }}<br>
+            <strong>Referral Reason:</strong> {{ data.presentingConcern.referralReason }}<br>
+            <strong>Referring Clinician:</strong> {{ data.presentingConcern.referringClinician }}<br>
+            <strong>Suspected Syndrome:</strong> {{ data.presentingConcern.suspectedSyndrome }}
+        </div>
+    </div>
+</div>
+
+<!-- Scores -->
+<div class="card">
+    <h2>Targeted Risk Scores</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Instrument</th>
+                <th>Value</th>
+                <th>Interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Manchester Score (BRCA1/2)</td>
+                <td>{{ manchester_score }}</td>
+                <td>
+                    {% if manchester_score >= 30 %}High mutation probability
+                    {% elif manchester_score >= 20 %}Moderate mutation probability
+                    {% elif manchester_score >= 15 %}Consider BRCA testing
+                    {% else %}Below testing threshold
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Revised Bethesda (Lynch)</td>
+                <td>{{ bethesda_met }} / 5</td>
+                <td>
+                    {% if bethesda_met >= 2 %}Strong Lynch indication
+                    {% elif bethesda_met >= 1 %}MMR IHC / MSI indicated
+                    {% else %}No Bethesda criterion met
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>PREMM5</td>
+                <td>{% if premm5_score %}{{ premm5_score }}%{% else %}&mdash;{% endif %}</td>
+                <td>
+                    {% if premm5_score and premm5_score >= 5 %}Lynch testing indicated{% else %}Below threshold{% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Tyrer-Cuzick lifetime breast risk</td>
+                <td>{{ tyrer_cuzick_lifetime }}%</td>
+                <td>
+                    {% if tyrer_cuzick_lifetime >= 30 %}High-risk surveillance
+                    {% elif tyrer_cuzick_lifetime >= 17 %}Moderate-risk surveillance
+                    {% else %}Population risk
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge severity-{{ rule.severity }}">{{ rule.severity }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Recommendation -->
+<div class="card">
+    <h2>Recommendation &amp; Referral Plan</h2>
+    <p><strong>Clinician-assigned risk:</strong> {{ data.recommendationReferralPlan.clinicianAssignedRisk }}</p>
+    <p><strong>Recommended panel:</strong> {{ data.recommendationReferralPlan.recommendedPanel }}</p>
+    <p><strong>Referral urgency:</strong> {{ data.recommendationReferralPlan.referralUrgency }}</p>
+    <p><strong>Clinician summary:</strong> {{ data.recommendationReferralPlan.clinicianSummary }}</p>
+    <p>
+        <strong>Signed:</strong> {{ data.recommendationReferralPlan.clinicianName }}
+        ({{ data.recommendationReferralPlan.clinicianRole }})
+        &mdash; {{ data.recommendationReferralPlan.signatureDate }}
+    </p>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+<div class="card">
+    <h2>Step 9: Recommendation &amp; Referral Plan</h2>
+    <p class="form-hint">Clinician's risk stratification, testing recommendations, and onward referrals.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_assigned_risk">Clinician-assigned risk</label>
+            <select id="clinician_assigned_risk" name="recommendation_referral_plan.clinician_assigned_risk">
+                <option value="" {% if recommendation_referral_plan.clinicianAssignedRisk == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if recommendation_referral_plan.clinicianAssignedRisk == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if recommendation_referral_plan.clinicianAssignedRisk == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if recommendation_referral_plan.clinicianAssignedRisk == "high" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="referral_urgency_plan">Referral urgency</label>
+            <select id="referral_urgency_plan" name="recommendation_referral_plan.referral_urgency">
+                <option value="" {% if recommendation_referral_plan.referralUrgency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="routine" {% if recommendation_referral_plan.referralUrgency == "routine" %}selected{% endif %}>Routine</option>
+                <option value="soon" {% if recommendation_referral_plan.referralUrgency == "soon" %}selected{% endif %}>Soon</option>
+                <option value="urgent" {% if recommendation_referral_plan.referralUrgency == "urgent" %}selected{% endif %}>Urgent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="recommend_brca_testing">Recommend BRCA testing?</label>
+            <select id="recommend_brca_testing" name="recommendation_referral_plan.recommend_brca_testing">
+                <option value="" {% if recommendation_referral_plan.recommendBRCATesting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.recommendBRCATesting == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.recommendBRCATesting == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recommend_lynch_testing">Recommend Lynch testing?</label>
+            <select id="recommend_lynch_testing" name="recommendation_referral_plan.recommend_lynch_testing">
+                <option value="" {% if recommendation_referral_plan.recommendLynchTesting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.recommendLynchTesting == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.recommendLynchTesting == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recommend_panel_testing">Recommend panel testing?</label>
+            <select id="recommend_panel_testing" name="recommendation_referral_plan.recommend_panel_testing">
+                <option value="" {% if recommendation_referral_plan.recommendPanelTesting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.recommendPanelTesting == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.recommendPanelTesting == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recommend_mmr_ihc">Recommend MMR IHC?</label>
+            <select id="recommend_mmr_ihc" name="recommendation_referral_plan.recommend_mmr_ihc">
+                <option value="" {% if recommendation_referral_plan.recommendMMRIHC == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.recommendMMRIHC == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.recommendMMRIHC == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="recommended_panel">Recommended panel (gene list)</label>
+        <input type="text" id="recommended_panel" name="recommendation_referral_plan.recommended_panel"
+               value="{{ recommendation_referral_plan.recommendedPanel }}"
+               placeholder="e.g. BRCA1, BRCA2, PALB2, ATM, CHEK2">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="refer_clinical_genetics">Refer to clinical genetics?</label>
+            <select id="refer_clinical_genetics" name="recommendation_referral_plan.refer_clinical_genetics">
+                <option value="" {% if recommendation_referral_plan.referClinicalGenetics == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.referClinicalGenetics == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.referClinicalGenetics == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="refer_breast_surveillance">Refer for breast surveillance?</label>
+            <select id="refer_breast_surveillance" name="recommendation_referral_plan.refer_breast_surveillance">
+                <option value="" {% if recommendation_referral_plan.referBreastSurveillance == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.referBreastSurveillance == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.referBreastSurveillance == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="refer_colonoscopy">Refer for colonoscopy?</label>
+            <select id="refer_colonoscopy" name="recommendation_referral_plan.refer_colonoscopy">
+                <option value="" {% if recommendation_referral_plan.referColonoscopy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.referColonoscopy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.referColonoscopy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="refer_psychological_support">Refer for psychological support?</label>
+            <select id="refer_psychological_support" name="recommendation_referral_plan.refer_psychological_support">
+                <option value="" {% if recommendation_referral_plan.referPsychologicalSupport == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if recommendation_referral_plan.referPsychologicalSupport == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if recommendation_referral_plan.referPsychologicalSupport == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="clinician_summary">Clinician summary / impression</label>
+        <textarea id="clinician_summary" name="recommendation_referral_plan.clinician_summary">{{ recommendation_referral_plan.clinicianSummary }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_name">Clinician Name</label>
+            <input type="text" id="clinician_name" name="recommendation_referral_plan.clinician_name"
+                   value="{{ recommendation_referral_plan.clinicianName }}">
+        </div>
+        <div class="form-group">
+            <label for="clinician_role">Clinician Role</label>
+            <input type="text" id="clinician_role" name="recommendation_referral_plan.clinician_role"
+                   value="{{ recommendation_referral_plan.clinicianRole }}"
+                   placeholder="e.g. Clinical Geneticist">
+        </div>
+        <div class="form-group">
+            <label for="signature_date">Signature Date</label>
+            <input type="date" id="signature_date" name="recommendation_referral_plan.signature_date"
+                   value="{{ recommendation_referral_plan.signatureDate }}">
+        </div>
+    </div>
+</div>
