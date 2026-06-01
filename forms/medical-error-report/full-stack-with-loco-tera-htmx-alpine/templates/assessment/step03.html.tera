@@ -1,0 +1,95 @@
+<div class="card">
+    <h2>Step 3: Patient Involvement</h2>
+    <p class="form-hint">Identify the patient and track duty-of-candour obligations.</p>
+
+    <div class="form-group">
+        <label for="patient_involvement_patient_involved">Was a patient involved?</label>
+        <select id="patient_involvement_patient_involved" name="patient_involvement.patient_involved">
+            <option value="" {% if patient_involvement.patientInvolved == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if patient_involvement.patientInvolved == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if patient_involvement.patientInvolved == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_involvement_patient_first_name">Patient First Name</label>
+            <input type="text" id="patient_involvement_patient_first_name" name="patient_involvement.patient_first_name"
+                   value="{{ patient_involvement.patientFirstName }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_involvement_patient_last_name">Patient Last Name</label>
+            <input type="text" id="patient_involvement_patient_last_name" name="patient_involvement.patient_last_name"
+                   value="{{ patient_involvement.patientLastName }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="patient_involvement_patient_nhs_number">NHS Number / MRN</label>
+        <input type="text" id="patient_involvement_patient_nhs_number" name="patient_involvement.patient_nhs_number"
+               value="{{ patient_involvement.patientNhsNumber }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_involvement_patient_date_of_birth">Date of Birth</label>
+            <input type="date" id="patient_involvement_patient_date_of_birth" name="patient_involvement.patient_date_of_birth"
+                   value="{{ patient_involvement.patientDateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_involvement_patient_age_at_incident">Age at Incident</label>
+            <input type="number" id="patient_involvement_patient_age_at_incident" name="patient_involvement.patient_age_at_incident"
+                   value="{% if patient_involvement.patientAgeAtIncident %}{{ patient_involvement.patientAgeAtIncident }}{% endif %}" min="0" max="130">
+        </div>
+        <div class="form-group">
+            <label for="patient_involvement_patient_sex">Sex</label>
+            <select id="patient_involvement_patient_sex" name="patient_involvement.patient_sex">
+                <option value="" {% if patient_involvement.patientSex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="male" {% if patient_involvement.patientSex == "male" %}selected{% endif %}>Male</option>
+                <option value="female" {% if patient_involvement.patientSex == "female" %}selected{% endif %}>Female</option>
+                <option value="other" {% if patient_involvement.patientSex == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="patient_involvement_patient_informed">Has the patient been informed?</label>
+        <select id="patient_involvement_patient_informed" name="patient_involvement.patient_informed">
+            <option value="" {% if patient_involvement.patientInformed == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if patient_involvement.patientInformed == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if patient_involvement.patientInformed == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_involvement_patient_informed_date">Informed Date</label>
+            <input type="date" id="patient_involvement_patient_informed_date" name="patient_involvement.patient_informed_date"
+                   value="{{ patient_involvement.patientInformedDate }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_involvement_patient_informed_by">Informed By</label>
+            <input type="text" id="patient_involvement_patient_informed_by" name="patient_involvement.patient_informed_by"
+                   value="{{ patient_involvement.patientInformedBy }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_involvement_duty_of_candour_applies">Duty of candour applies?</label>
+            <select id="patient_involvement_duty_of_candour_applies" name="patient_involvement.duty_of_candour_applies">
+                <option value="" {% if patient_involvement.dutyOfCandourApplies == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if patient_involvement.dutyOfCandourApplies == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if patient_involvement.dutyOfCandourApplies == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="patient_involvement_duty_of_candour_completed">Duty of candour completed?</label>
+            <select id="patient_involvement_duty_of_candour_completed" name="patient_involvement.duty_of_candour_completed">
+                <option value="" {% if patient_involvement.dutyOfCandourCompleted == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if patient_involvement.dutyOfCandourCompleted == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if patient_involvement.dutyOfCandourCompleted == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+</div>

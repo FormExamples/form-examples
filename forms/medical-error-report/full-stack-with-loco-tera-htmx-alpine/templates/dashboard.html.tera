@@ -1,0 +1,114 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Medical Error Report - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Medical Error Report Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Report</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Facility, ward, location, error type...">
+    </div>
+    <div class="form-group">
+        <label for="error_type">Error Type</label>
+        <select id="error_type" name="error_type">
+            <option value="">All</option>
+            <option value="medication" {% if error_type == "medication" %}selected{% endif %}>Medication</option>
+            <option value="surgical" {% if error_type == "surgical" %}selected{% endif %}>Surgical</option>
+            <option value="diagnostic" {% if error_type == "diagnostic" %}selected{% endif %}>Diagnostic</option>
+            <option value="treatment" {% if error_type == "treatment" %}selected{% endif %}>Treatment</option>
+            <option value="communication" {% if error_type == "communication" %}selected{% endif %}>Communication</option>
+            <option value="equipment" {% if error_type == "equipment" %}selected{% endif %}>Equipment</option>
+            <option value="fall" {% if error_type == "fall" %}selected{% endif %}>Fall</option>
+            <option value="infection" {% if error_type == "infection" %}selected{% endif %}>Infection</option>
+            <option value="transfusion" {% if error_type == "transfusion" %}selected{% endif %}>Transfusion</option>
+            <option value="other" {% if error_type == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="who_severity">WHO Severity</label>
+        <select id="who_severity" name="who_severity">
+            <option value="">All</option>
+            <option value="near-miss" {% if who_severity == "near-miss" %}selected{% endif %}>Near Miss</option>
+            <option value="mild" {% if who_severity == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if who_severity == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if who_severity == "severe" %}selected{% endif %}>Severe</option>
+            <option value="critical" {% if who_severity == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="overall_risk">Overall Risk</label>
+        <select id="overall_risk" name="overall_risk">
+            <option value="">All</option>
+            <option value="low" {% if overall_risk == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if overall_risk == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if overall_risk == "high" %}selected{% endif %}>High</option>
+            <option value="critical" {% if overall_risk == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed report{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Report Date</th>
+            <th>Incident Date</th>
+            <th>Facility / Ward</th>
+            <th>Location</th>
+            <th>Error Type</th>
+            <th>WHO Severity</th>
+            <th>NCC MERP</th>
+            <th>Risk</th>
+            <th>Status</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reports %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.reportDate }}</a></td>
+            <td>{{ r.incidentDate }}</td>
+            <td>{{ r.facilityName }}<br><small>{{ r.facilityWard }}</small></td>
+            <td>{{ r.locationType }}</td>
+            <td>{{ r.errorType }}</td>
+            <td><span class="severity-badge severity-{{ r.whoSeverity }}">{{ r.whoSeverity }}</span></td>
+            <td>{{ r.nccMerpCategory }}</td>
+            <td><span class="risk-badge risk-{{ r.overallRisk }}">{{ r.overallRisk }}</span></td>
+            <td>{{ r.finalStatus }}</td>
+            <td>
+                {% if r.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed reports found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

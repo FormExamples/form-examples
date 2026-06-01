@@ -1,0 +1,100 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Medical Error Report - {{ risk_level_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Medical Error Report &mdash; Grading</h1>
+    <div class="risk-badge risk-{{ overall_risk }}">{{ risk_level_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Report ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Classification -->
+<div class="card">
+    <h2>Classification</h2>
+    <dl class="classification-list">
+        <dt>WHO Severity</dt><dd>{{ who_severity_label }}</dd>
+        <dt>NCC MERP Category</dt><dd>{{ ncc_merp_label }}</dd>
+        <dt>Error Type</dt><dd>{{ data.errorClassification.errorType }}</dd>
+        <dt>Preventability</dt><dd>{{ data.errorClassification.preventability }}</dd>
+        <dt>Recurrence likelihood</dt><dd>{{ data.errorClassification.recurrenceLikelihood }}</dd>
+    </dl>
+</div>
+
+<!-- Incident summary -->
+<div class="card">
+    <h2>Incident Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Facility:</strong> {{ data.demographics.facilityName }}<br>
+            <strong>Ward / Unit:</strong> {{ data.demographics.facilityWard }}<br>
+            <strong>Report Date:</strong> {{ data.demographics.reportDate }}<br>
+            <strong>Reporter Role:</strong> {{ data.demographics.reporterRole }}
+        </div>
+        <div>
+            <strong>Incident Date:</strong> {{ data.incidentDetails.incidentDate }} {{ data.incidentDetails.incidentTime }}<br>
+            <strong>Location:</strong> {{ data.incidentDetails.locationType }} &mdash; {{ data.incidentDetails.locationDetails }}<br>
+            <strong>Shift:</strong> {{ data.incidentDetails.shiftType }}<br>
+            <strong>Staffing:</strong> {{ data.incidentDetails.staffingLevel }}
+        </div>
+    </div>
+    <p><strong>Summary:</strong> {{ data.incidentDetails.incidentSummary }}</p>
+</div>
+
+<!-- Safety flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired Grading Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="grade-badge grade-{{ rule.grade }}">G{{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="card">
+    <h2>Fired Grading Rules (0)</h2>
+    <p>No grading rules fired. Consider completing the Error Classification and Patient Outcome sections.</p>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Report</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

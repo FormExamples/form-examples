@@ -1,0 +1,87 @@
+<div class="card">
+    <h2>Step 10: Reporting &amp; Follow-up</h2>
+    <p class="form-hint">External reporting, lessons learned, and final status.</p>
+
+    <div class="form-group">
+        <label for="reporting_followup_internal_reference">Internal reference</label>
+        <input type="text" id="reporting_followup_internal_reference" name="reporting_followup.internal_reference"
+               value="{{ reporting_followup.internalReference }}">
+    </div>
+
+    {% set ext_reports = [
+        ["reported_to_datix", "Reported to Datix", reporting_followup.reportedToDatix],
+        ["reported_to_nrls", "Reported to NRLS", reporting_followup.reportedToNrls],
+        ["reported_to_cqc", "Reported to CQC", reporting_followup.reportedToCqc],
+        ["reported_to_hsib", "Reported to HSIB", reporting_followup.reportedToHsib],
+        ["reported_to_coroner", "Reported to Coroner", reporting_followup.reportedToCoroner],
+        ["safeguarding_referral", "Safeguarding referral made", reporting_followup.safeguardingReferral]
+    ] %}
+
+    {% for r in ext_reports %}
+    <div class="form-group">
+        <label for="reporting_followup_{{ r[0] }}">{{ r[1] }}?</label>
+        <select id="reporting_followup_{{ r[0] }}" name="reporting_followup.{{ r[0] }}">
+            <option value="" {% if r[2] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if r[2] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if r[2] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporting_followup_datix_reference">Datix reference</label>
+            <input type="text" id="reporting_followup_datix_reference" name="reporting_followup.datix_reference"
+                   value="{{ reporting_followup.datixReference }}">
+        </div>
+        <div class="form-group">
+            <label for="reporting_followup_nrls_reference">NRLS reference</label>
+            <input type="text" id="reporting_followup_nrls_reference" name="reporting_followup.nrls_reference"
+                   value="{{ reporting_followup.nrlsReference }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reporting_followup_lessons_learned">Lessons learned</label>
+        <textarea id="reporting_followup_lessons_learned" name="reporting_followup.lessons_learned" rows="3">{{ reporting_followup.lessonsLearned }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="reporting_followup_shared_with_team">Shared with team?</label>
+        <select id="reporting_followup_shared_with_team" name="reporting_followup.shared_with_team">
+            <option value="" {% if reporting_followup.sharedWithTeam == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if reporting_followup.sharedWithTeam == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if reporting_followup.sharedWithTeam == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporting_followup_follow_up_review_date">Follow-up review date</label>
+            <input type="date" id="reporting_followup_follow_up_review_date" name="reporting_followup.follow_up_review_date"
+                   value="{{ reporting_followup.followUpReviewDate }}">
+        </div>
+        <div class="form-group">
+            <label for="reporting_followup_follow_up_reviewer">Follow-up reviewer</label>
+            <input type="text" id="reporting_followup_follow_up_reviewer" name="reporting_followup.follow_up_reviewer"
+                   value="{{ reporting_followup.followUpReviewer }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporting_followup_final_status">Final Status</label>
+            <select id="reporting_followup_final_status" name="reporting_followup.final_status">
+                <option value="" {% if reporting_followup.finalStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="open" {% if reporting_followup.finalStatus == "open" %}selected{% endif %}>Open</option>
+                <option value="under-review" {% if reporting_followup.finalStatus == "under-review" %}selected{% endif %}>Under review</option>
+                <option value="closed" {% if reporting_followup.finalStatus == "closed" %}selected{% endif %}>Closed</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reporting_followup_closure_date">Closure date</label>
+            <input type="date" id="reporting_followup_closure_date" name="reporting_followup.closure_date"
+                   value="{{ reporting_followup.closureDate }}">
+        </div>
+    </div>
+</div>

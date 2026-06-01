@@ -1,0 +1,97 @@
+<div class="card">
+    <h2>Step 2: Incident Details</h2>
+    <p class="form-hint">When, where, and how the incident occurred.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="incident_details_incident_date">Incident Date</label>
+            <input type="date" id="incident_details_incident_date" name="incident_details.incident_date"
+                   value="{{ incident_details.incidentDate }}">
+        </div>
+        <div class="form-group">
+            <label for="incident_details_incident_time">Incident Time</label>
+            <input type="time" id="incident_details_incident_time" name="incident_details.incident_time"
+                   value="{{ incident_details.incidentTime }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="incident_details_discovery_date">Discovery Date</label>
+            <input type="date" id="incident_details_discovery_date" name="incident_details.discovery_date"
+                   value="{{ incident_details.discoveryDate }}">
+        </div>
+        <div class="form-group">
+            <label for="incident_details_discovery_time">Discovery Time</label>
+            <input type="time" id="incident_details_discovery_time" name="incident_details.discovery_time"
+                   value="{{ incident_details.discoveryTime }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="incident_details_location_type">Location Type</label>
+        <select id="incident_details_location_type" name="incident_details.location_type">
+            <option value="" {% if incident_details.locationType == "" %}selected{% endif %}>&mdash;</option>
+            <option value="inpatient-ward" {% if incident_details.locationType == "inpatient-ward" %}selected{% endif %}>Inpatient Ward</option>
+            <option value="outpatient-clinic" {% if incident_details.locationType == "outpatient-clinic" %}selected{% endif %}>Outpatient Clinic</option>
+            <option value="emergency-department" {% if incident_details.locationType == "emergency-department" %}selected{% endif %}>Emergency Department</option>
+            <option value="operating-theatre" {% if incident_details.locationType == "operating-theatre" %}selected{% endif %}>Operating Theatre</option>
+            <option value="pharmacy" {% if incident_details.locationType == "pharmacy" %}selected{% endif %}>Pharmacy</option>
+            <option value="laboratory" {% if incident_details.locationType == "laboratory" %}selected{% endif %}>Laboratory</option>
+            <option value="radiology" {% if incident_details.locationType == "radiology" %}selected{% endif %}>Radiology</option>
+            <option value="community" {% if incident_details.locationType == "community" %}selected{% endif %}>Community</option>
+            <option value="other" {% if incident_details.locationType == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="incident_details_location_details">Location Details</label>
+        <input type="text" id="incident_details_location_details" name="incident_details.location_details"
+               value="{{ incident_details.locationDetails }}" placeholder="Room, bay, etc.">
+    </div>
+
+    <div class="form-group">
+        <label for="incident_details_incident_summary">Incident Summary</label>
+        <textarea id="incident_details_incident_summary" name="incident_details.incident_summary"
+                  rows="5" placeholder="Describe what happened in factual, objective terms&hellip;">{{ incident_details.incidentSummary }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="incident_details_incident_witnessed">Was the incident witnessed?</label>
+        <select id="incident_details_incident_witnessed" name="incident_details.incident_witnessed">
+            <option value="" {% if incident_details.incidentWitnessed == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if incident_details.incidentWitnessed == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if incident_details.incidentWitnessed == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="incident_details_witness_details">Witness Details</label>
+        <textarea id="incident_details_witness_details" name="incident_details.witness_details"
+                  rows="2" placeholder="Names, roles, contact">{{ incident_details.witnessDetails }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="incident_details_shift_type">Shift Type</label>
+            <select id="incident_details_shift_type" name="incident_details.shift_type">
+                <option value="" {% if incident_details.shiftType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="day" {% if incident_details.shiftType == "day" %}selected{% endif %}>Day</option>
+                <option value="evening" {% if incident_details.shiftType == "evening" %}selected{% endif %}>Evening</option>
+                <option value="night" {% if incident_details.shiftType == "night" %}selected{% endif %}>Night</option>
+                <option value="weekend" {% if incident_details.shiftType == "weekend" %}selected{% endif %}>Weekend</option>
+                <option value="bank-holiday" {% if incident_details.shiftType == "bank-holiday" %}selected{% endif %}>Bank Holiday</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="incident_details_staffing_level">Staffing Level</label>
+            <select id="incident_details_staffing_level" name="incident_details.staffing_level">
+                <option value="" {% if incident_details.staffingLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="adequate" {% if incident_details.staffingLevel == "adequate" %}selected{% endif %}>Adequate</option>
+                <option value="understaffed" {% if incident_details.staffingLevel == "understaffed" %}selected{% endif %}>Understaffed</option>
+                <option value="overstaffed" {% if incident_details.staffingLevel == "overstaffed" %}selected{% endif %}>Overstaffed</option>
+                <option value="unknown" {% if incident_details.staffingLevel == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+</div>

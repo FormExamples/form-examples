@@ -1,0 +1,89 @@
+<div class="card">
+    <h2>Step 8: Root Cause Analysis</h2>
+    <p class="form-hint">Investigation findings and systemic vulnerabilities.</p>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_rca_conducted">RCA Conducted?</label>
+        <select id="root_cause_analysis_rca_conducted" name="root_cause_analysis.rca_conducted">
+            <option value="" {% if root_cause_analysis.rcaConducted == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if root_cause_analysis.rcaConducted == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if root_cause_analysis.rcaConducted == "no" %}selected{% endif %}>No</option>
+            <option value="pending" {% if root_cause_analysis.rcaConducted == "pending" %}selected{% endif %}>Pending</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="root_cause_analysis_rca_date">RCA Date</label>
+            <input type="date" id="root_cause_analysis_rca_date" name="root_cause_analysis.rca_date"
+                   value="{{ root_cause_analysis.rcaDate }}">
+        </div>
+        <div class="form-group">
+            <label for="root_cause_analysis_rca_lead">RCA Lead</label>
+            <input type="text" id="root_cause_analysis_rca_lead" name="root_cause_analysis.rca_lead"
+                   value="{{ root_cause_analysis.rcaLead }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_rca_team_members">RCA Team Members</label>
+        <textarea id="root_cause_analysis_rca_team_members" name="root_cause_analysis.rca_team_members" rows="2">{{ root_cause_analysis.rcaTeamMembers }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_root_cause_category">Root Cause Category</label>
+        <select id="root_cause_analysis_root_cause_category" name="root_cause_analysis.root_cause_category">
+            <option value="" {% if root_cause_analysis.rootCauseCategory == "" %}selected{% endif %}>&mdash;</option>
+            <option value="human-error" {% if root_cause_analysis.rootCauseCategory == "human-error" %}selected{% endif %}>Human error</option>
+            <option value="system-failure" {% if root_cause_analysis.rootCauseCategory == "system-failure" %}selected{% endif %}>System failure</option>
+            <option value="process-failure" {% if root_cause_analysis.rootCauseCategory == "process-failure" %}selected{% endif %}>Process failure</option>
+            <option value="communication" {% if root_cause_analysis.rootCauseCategory == "communication" %}selected{% endif %}>Communication</option>
+            <option value="training" {% if root_cause_analysis.rootCauseCategory == "training" %}selected{% endif %}>Training</option>
+            <option value="equipment" {% if root_cause_analysis.rootCauseCategory == "equipment" %}selected{% endif %}>Equipment</option>
+            <option value="environmental" {% if root_cause_analysis.rootCauseCategory == "environmental" %}selected{% endif %}>Environmental</option>
+            <option value="organisational" {% if root_cause_analysis.rootCauseCategory == "organisational" %}selected{% endif %}>Organisational</option>
+            <option value="multiple" {% if root_cause_analysis.rootCauseCategory == "multiple" %}selected{% endif %}>Multiple</option>
+            <option value="other" {% if root_cause_analysis.rootCauseCategory == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_root_cause_description">Root cause description</label>
+        <textarea id="root_cause_analysis_root_cause_description" name="root_cause_analysis.root_cause_description" rows="3">{{ root_cause_analysis.rootCauseDescription }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_five_whys_analysis">Five whys analysis</label>
+        <textarea id="root_cause_analysis_five_whys_analysis" name="root_cause_analysis.five_whys_analysis" rows="4">{{ root_cause_analysis.fiveWhysAnalysis }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_fishbone_factors">Fishbone factors</label>
+        <textarea id="root_cause_analysis_fishbone_factors" name="root_cause_analysis.fishbone_factors" rows="3">{{ root_cause_analysis.fishboneFactors }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_system_vulnerabilities">System vulnerabilities</label>
+        <textarea id="root_cause_analysis_system_vulnerabilities" name="root_cause_analysis.system_vulnerabilities" rows="3">{{ root_cause_analysis.systemVulnerabilities }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_similar_incidents">Similar incidents previously?</label>
+        <select id="root_cause_analysis_similar_incidents" name="root_cause_analysis.similar_incidents">
+            <option value="" {% if root_cause_analysis.similarIncidents == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if root_cause_analysis.similarIncidents == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if root_cause_analysis.similarIncidents == "no" %}selected{% endif %}>No</option>
+            <option value="unknown" {% if root_cause_analysis.similarIncidents == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_similar_incidents_details">Similar incidents details</label>
+        <textarea id="root_cause_analysis_similar_incidents_details" name="root_cause_analysis.similar_incidents_details" rows="3">{{ root_cause_analysis.similarIncidentsDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="root_cause_analysis_rca_findings_summary">RCA findings summary</label>
+        <textarea id="root_cause_analysis_rca_findings_summary" name="root_cause_analysis.rca_findings_summary" rows="3">{{ root_cause_analysis.rcaFindingsSummary }}</textarea>
+    </div>
+</div>

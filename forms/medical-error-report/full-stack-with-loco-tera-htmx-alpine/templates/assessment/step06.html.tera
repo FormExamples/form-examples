@@ -1,0 +1,93 @@
+<div class="card">
+    <h2>Step 6: Immediate Actions Taken</h2>
+    <p class="form-hint">Immediate response after the incident was identified.</p>
+
+    <div class="form-group">
+        <label for="immediate_actions_patient_assessed">Was the patient assessed?</label>
+        <select id="immediate_actions_patient_assessed" name="immediate_actions.patient_assessed">
+            <option value="" {% if immediate_actions.patientAssessed == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.patientAssessed == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.patientAssessed == "no" %}selected{% endif %}>No</option>
+            <option value="not-applicable" {% if immediate_actions.patientAssessed == "not-applicable" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_treatment_provided">Was treatment provided?</label>
+        <select id="immediate_actions_treatment_provided" name="immediate_actions.treatment_provided">
+            <option value="" {% if immediate_actions.treatmentProvided == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.treatmentProvided == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.treatmentProvided == "no" %}selected{% endif %}>No</option>
+            <option value="not-applicable" {% if immediate_actions.treatmentProvided == "not-applicable" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_treatment_details">Treatment details</label>
+        <textarea id="immediate_actions_treatment_details" name="immediate_actions.treatment_details" rows="2">{{ immediate_actions.treatmentDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_error_contained">Was the error contained?</label>
+        <select id="immediate_actions_error_contained" name="immediate_actions.error_contained">
+            <option value="" {% if immediate_actions.errorContained == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.errorContained == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.errorContained == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_containment_details">Containment details</label>
+        <textarea id="immediate_actions_containment_details" name="immediate_actions.containment_details" rows="2">{{ immediate_actions.containmentDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_senior_staff_notified">Were senior staff notified?</label>
+        <select id="immediate_actions_senior_staff_notified" name="immediate_actions.senior_staff_notified">
+            <option value="" {% if immediate_actions.seniorStaffNotified == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.seniorStaffNotified == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.seniorStaffNotified == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="immediate_actions_senior_staff_name">Senior staff name</label>
+            <input type="text" id="immediate_actions_senior_staff_name" name="immediate_actions.senior_staff_name"
+                   value="{{ immediate_actions.seniorStaffName }}">
+        </div>
+        <div class="form-group">
+            <label for="immediate_actions_senior_staff_role">Senior staff role</label>
+            <input type="text" id="immediate_actions_senior_staff_role" name="immediate_actions.senior_staff_role"
+                   value="{{ immediate_actions.seniorStaffRole }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_risk_team_notified">Was the risk team notified?</label>
+        <select id="immediate_actions_risk_team_notified" name="immediate_actions.risk_team_notified">
+            <option value="" {% if immediate_actions.riskTeamNotified == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.riskTeamNotified == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.riskTeamNotified == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_additional_monitoring">Is additional monitoring required?</label>
+        <select id="immediate_actions_additional_monitoring" name="immediate_actions.additional_monitoring">
+            <option value="" {% if immediate_actions.additionalMonitoring == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if immediate_actions.additionalMonitoring == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if immediate_actions.additionalMonitoring == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_monitoring_details">Monitoring details</label>
+        <textarea id="immediate_actions_monitoring_details" name="immediate_actions.monitoring_details" rows="2">{{ immediate_actions.monitoringDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="immediate_actions_immediate_actions_summary">Summary of immediate actions</label>
+        <textarea id="immediate_actions_immediate_actions_summary" name="immediate_actions.immediate_actions_summary" rows="3">{{ immediate_actions.immediateActionsSummary }}</textarea>
+    </div>
+</div>

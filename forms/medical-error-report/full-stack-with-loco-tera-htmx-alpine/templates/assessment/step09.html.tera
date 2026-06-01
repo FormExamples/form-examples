@@ -1,0 +1,76 @@
+<div class="card">
+    <h2>Step 9: Corrective Actions</h2>
+    <p class="form-hint">Immediate fixes and longer-term system changes.</p>
+
+    <div class="form-group">
+        <label for="corrective_actions_immediate_corrective_actions">Immediate corrective actions</label>
+        <textarea id="corrective_actions_immediate_corrective_actions" name="corrective_actions.immediate_corrective_actions" rows="3">{{ corrective_actions.immediateCorrectiveActions }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="corrective_actions_long_term_corrective_actions">Long-term corrective actions</label>
+        <textarea id="corrective_actions_long_term_corrective_actions" name="corrective_actions.long_term_corrective_actions" rows="3">{{ corrective_actions.longTermCorrectiveActions }}</textarea>
+    </div>
+
+    {% set yes_no_changes = [
+        ["policy_change_required", "Policy change required", corrective_actions.policyChangeRequired],
+        ["training_required", "Training required", corrective_actions.trainingRequired],
+        ["equipment_change_required", "Equipment change required", corrective_actions.equipmentChangeRequired],
+        ["process_redesign_required", "Process redesign required", corrective_actions.processRedesignRequired]
+    ] %}
+
+    {% for c in yes_no_changes %}
+    <div class="form-group">
+        <label for="corrective_actions_{{ c[0] }}">{{ c[1] }}?</label>
+        <select id="corrective_actions_{{ c[0] }}" name="corrective_actions.{{ c[0] }}">
+            <option value="" {% if c[2] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if c[2] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if c[2] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="corrective_actions_policy_change_details">Policy change details</label>
+        <textarea id="corrective_actions_policy_change_details" name="corrective_actions.policy_change_details" rows="2">{{ corrective_actions.policyChangeDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="corrective_actions_training_details">Training details</label>
+        <textarea id="corrective_actions_training_details" name="corrective_actions.training_details" rows="2">{{ corrective_actions.trainingDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="corrective_actions_equipment_change_details">Equipment change details</label>
+        <textarea id="corrective_actions_equipment_change_details" name="corrective_actions.equipment_change_details" rows="2">{{ corrective_actions.equipmentChangeDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="corrective_actions_process_redesign_details">Process redesign details</label>
+        <textarea id="corrective_actions_process_redesign_details" name="corrective_actions.process_redesign_details" rows="2">{{ corrective_actions.processRedesignDetails }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="corrective_actions_responsible_person">Responsible person</label>
+            <input type="text" id="corrective_actions_responsible_person" name="corrective_actions.responsible_person"
+                   value="{{ corrective_actions.responsiblePerson }}">
+        </div>
+        <div class="form-group">
+            <label for="corrective_actions_target_completion_date">Target completion date</label>
+            <input type="date" id="corrective_actions_target_completion_date" name="corrective_actions.target_completion_date"
+                   value="{{ corrective_actions.targetCompletionDate }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="corrective_actions_actions_status">Actions Status</label>
+        <select id="corrective_actions_actions_status" name="corrective_actions.actions_status">
+            <option value="" {% if corrective_actions.actionsStatus == "" %}selected{% endif %}>&mdash;</option>
+            <option value="planned" {% if corrective_actions.actionsStatus == "planned" %}selected{% endif %}>Planned</option>
+            <option value="in-progress" {% if corrective_actions.actionsStatus == "in-progress" %}selected{% endif %}>In progress</option>
+            <option value="completed" {% if corrective_actions.actionsStatus == "completed" %}selected{% endif %}>Completed</option>
+            <option value="overdue" {% if corrective_actions.actionsStatus == "overdue" %}selected{% endif %}>Overdue</option>
+        </select>
+    </div>
+</div>

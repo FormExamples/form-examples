@@ -1,0 +1,91 @@
+<div class="card">
+    <h2>Step 4: Error Classification</h2>
+    <p class="form-hint">WHO severity, NCC MERP category, preventability, and recurrence.</p>
+
+    <div class="form-group">
+        <label for="error_classification_error_type">Error Type</label>
+        <select id="error_classification_error_type" name="error_classification.error_type">
+            <option value="" {% if error_classification.errorType == "" %}selected{% endif %}>&mdash;</option>
+            <option value="medication" {% if error_classification.errorType == "medication" %}selected{% endif %}>Medication Error</option>
+            <option value="surgical" {% if error_classification.errorType == "surgical" %}selected{% endif %}>Surgical Error</option>
+            <option value="diagnostic" {% if error_classification.errorType == "diagnostic" %}selected{% endif %}>Diagnostic Error</option>
+            <option value="treatment" {% if error_classification.errorType == "treatment" %}selected{% endif %}>Treatment Error</option>
+            <option value="communication" {% if error_classification.errorType == "communication" %}selected{% endif %}>Communication Error</option>
+            <option value="equipment" {% if error_classification.errorType == "equipment" %}selected{% endif %}>Equipment Error</option>
+            <option value="fall" {% if error_classification.errorType == "fall" %}selected{% endif %}>Fall</option>
+            <option value="infection" {% if error_classification.errorType == "infection" %}selected{% endif %}>Healthcare-Associated Infection</option>
+            <option value="transfusion" {% if error_classification.errorType == "transfusion" %}selected{% endif %}>Transfusion Error</option>
+            <option value="other" {% if error_classification.errorType == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_error_type_details">Error Type Details</label>
+        <input type="text" id="error_classification_error_type_details" name="error_classification.error_type_details"
+               value="{{ error_classification.errorTypeDetails }}">
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_medication_error_stage">Medication Error Stage (if medication)</label>
+        <select id="error_classification_medication_error_stage" name="error_classification.medication_error_stage">
+            <option value="" {% if error_classification.medicationErrorStage == "" %}selected{% endif %}>&mdash;</option>
+            <option value="prescribing" {% if error_classification.medicationErrorStage == "prescribing" %}selected{% endif %}>Prescribing</option>
+            <option value="dispensing" {% if error_classification.medicationErrorStage == "dispensing" %}selected{% endif %}>Dispensing</option>
+            <option value="administration" {% if error_classification.medicationErrorStage == "administration" %}selected{% endif %}>Administration</option>
+            <option value="monitoring" {% if error_classification.medicationErrorStage == "monitoring" %}selected{% endif %}>Monitoring</option>
+            <option value="other" {% if error_classification.medicationErrorStage == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_who_severity">WHO Severity</label>
+        <select id="error_classification_who_severity" name="error_classification.who_severity">
+            <option value="" {% if error_classification.whoSeverity == "" %}selected{% endif %}>&mdash;</option>
+            <option value="near-miss" {% if error_classification.whoSeverity == "near-miss" %}selected{% endif %}>Near Miss</option>
+            <option value="mild" {% if error_classification.whoSeverity == "mild" %}selected{% endif %}>Mild</option>
+            <option value="moderate" {% if error_classification.whoSeverity == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="severe" {% if error_classification.whoSeverity == "severe" %}selected{% endif %}>Severe</option>
+            <option value="critical" {% if error_classification.whoSeverity == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_ncc_merp_category">NCC MERP Category</label>
+        <select id="error_classification_ncc_merp_category" name="error_classification.ncc_merp_category">
+            <option value="" {% if error_classification.nccMerpCategory == "" %}selected{% endif %}>&mdash;</option>
+            <option value="A" {% if error_classification.nccMerpCategory == "A" %}selected{% endif %}>A &mdash; Capacity to cause error</option>
+            <option value="B" {% if error_classification.nccMerpCategory == "B" %}selected{% endif %}>B &mdash; Did not reach patient</option>
+            <option value="C" {% if error_classification.nccMerpCategory == "C" %}selected{% endif %}>C &mdash; Reached patient, no harm</option>
+            <option value="D" {% if error_classification.nccMerpCategory == "D" %}selected{% endif %}>D &mdash; Required monitoring</option>
+            <option value="E" {% if error_classification.nccMerpCategory == "E" %}selected{% endif %}>E &mdash; Temporary harm, intervention</option>
+            <option value="F" {% if error_classification.nccMerpCategory == "F" %}selected{% endif %}>F &mdash; Temporary harm, hospitalisation</option>
+            <option value="G" {% if error_classification.nccMerpCategory == "G" %}selected{% endif %}>G &mdash; Permanent harm</option>
+            <option value="H" {% if error_classification.nccMerpCategory == "H" %}selected{% endif %}>H &mdash; Intervention to sustain life</option>
+            <option value="I" {% if error_classification.nccMerpCategory == "I" %}selected{% endif %}>I &mdash; Patient death</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_preventability">Preventability</label>
+        <select id="error_classification_preventability" name="error_classification.preventability">
+            <option value="" {% if error_classification.preventability == "" %}selected{% endif %}>&mdash;</option>
+            <option value="clearly-preventable" {% if error_classification.preventability == "clearly-preventable" %}selected{% endif %}>Clearly preventable</option>
+            <option value="probably-preventable" {% if error_classification.preventability == "probably-preventable" %}selected{% endif %}>Probably preventable</option>
+            <option value="probably-not-preventable" {% if error_classification.preventability == "probably-not-preventable" %}selected{% endif %}>Probably not preventable</option>
+            <option value="clearly-not-preventable" {% if error_classification.preventability == "clearly-not-preventable" %}selected{% endif %}>Clearly not preventable</option>
+            <option value="unknown" {% if error_classification.preventability == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="error_classification_recurrence_likelihood">Recurrence Likelihood</label>
+        <select id="error_classification_recurrence_likelihood" name="error_classification.recurrence_likelihood">
+            <option value="" {% if error_classification.recurrenceLikelihood == "" %}selected{% endif %}>&mdash;</option>
+            <option value="very-likely" {% if error_classification.recurrenceLikelihood == "very-likely" %}selected{% endif %}>Very likely</option>
+            <option value="likely" {% if error_classification.recurrenceLikelihood == "likely" %}selected{% endif %}>Likely</option>
+            <option value="unlikely" {% if error_classification.recurrenceLikelihood == "unlikely" %}selected{% endif %}>Unlikely</option>
+            <option value="very-unlikely" {% if error_classification.recurrenceLikelihood == "very-unlikely" %}selected{% endif %}>Very unlikely</option>
+            <option value="unknown" {% if error_classification.recurrenceLikelihood == "unknown" %}selected{% endif %}>Unknown</option>
+        </select>
+    </div>
+</div>
