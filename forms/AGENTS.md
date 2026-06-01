@@ -77,6 +77,7 @@ Subprojects:
 - [medical language speaking assessment for Cymraeg](medical-language-speaking-assessment-for-cymraeg)
 - [medical language speaking assessment for English](medical-language-speaking-assessment-for-english)
 - [medical records release permission](medical-records-release-permission)
+- [medical waiting list card](medical-waiting-list-card)
 - [mental health assessment](mental-health-assessment)
 - [mobility assessment](mobility-assessment)
 - [neurology assessment](neurology-assessment)

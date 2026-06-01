@@ -1,0 +1,26 @@
+# medical-waiting-list-card — sql-migrations
+
+PostgreSQL migrations for this form. See
+[`AGENTS/sql-migrations.md`](../../../AGENTS/sql-migrations.md) for conventions.
+
+## Canonical files
+
+- `00_create_extensions.sql` — required extensions (pgcrypto).
+- `01_create_function_set_updated_at.sql` — trigger function used by every
+  `updated_at` column.
+- `02_create_table_patient.sql` — patient table.
+- `03_create_table_practitioner.sql` — practitioner table.
+
+## Form-specific tables
+
+- `medical_waiting_list_card` — top-level waiting list card.
+- `medical_waiting_list_card_appointment` — scheduled / upcoming appointments
+  attached to the card.
+- `medical_waiting_list_card_grade` — computed grading result.
+- `medical_waiting_list_card_grade_rule` — audit trail of fired grading rules.
+- `medical_waiting_list_card_grade_flag` — safety / operational flags fired
+  independently of the Waiting Time Status.
+
+## Derived artefacts
+
+- `09_schema.sql` — every migration concatenated (generated).
