@@ -1,0 +1,65 @@
+<div class="card">
+    <h2>Step 4: Linguistic Criteria Rating</h2>
+    <p class="form-hint">
+        Rate each linguistic criterion <strong>0 to 6</strong> independently for
+        each role-play. Leave blank if not rated. The grader takes the mean
+        across role-plays (or the single rated value if only one role-play has
+        been rated).
+    </p>
+
+    <h3>Role-play 1 &mdash; Linguistic ratings (0-6)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rp1_intelligibility">Intelligibility (LING-INT)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp1_intelligibility" name="linguistic_role_play1.intelligibility"
+                   value="{% if linguistic_role_play1.intelligibility is null %}{% else %}{{ linguistic_role_play1.intelligibility }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp1_fluency">Fluency (LING-FLU)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp1_fluency" name="linguistic_role_play1.fluency"
+                   value="{% if linguistic_role_play1.fluency is null %}{% else %}{{ linguistic_role_play1.fluency }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp1_appropriateness">Appropriateness of Language (LING-APP)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp1_appropriateness" name="linguistic_role_play1.appropriateness_of_language"
+                   value="{% if linguistic_role_play1.appropriatenessOfLanguage is null %}{% else %}{{ linguistic_role_play1.appropriatenessOfLanguage }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp1_grammar">Resources of Grammar &amp; Expression (LING-GRM)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp1_grammar" name="linguistic_role_play1.resources_of_grammar_and_expression"
+                   value="{% if linguistic_role_play1.resourcesOfGrammarAndExpression is null %}{% else %}{{ linguistic_role_play1.resourcesOfGrammarAndExpression }}{% endif %}">
+        </div>
+    </div>
+
+    <h3>Role-play 2 &mdash; Linguistic ratings (0-6)</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rp2_intelligibility">Intelligibility (LING-INT)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp2_intelligibility" name="linguistic_role_play2.intelligibility"
+                   value="{% if linguistic_role_play2.intelligibility is null %}{% else %}{{ linguistic_role_play2.intelligibility }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp2_fluency">Fluency (LING-FLU)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp2_fluency" name="linguistic_role_play2.fluency"
+                   value="{% if linguistic_role_play2.fluency is null %}{% else %}{{ linguistic_role_play2.fluency }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp2_appropriateness">Appropriateness of Language (LING-APP)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp2_appropriateness" name="linguistic_role_play2.appropriateness_of_language"
+                   value="{% if linguistic_role_play2.appropriatenessOfLanguage is null %}{% else %}{{ linguistic_role_play2.appropriatenessOfLanguage }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rp2_grammar">Resources of Grammar &amp; Expression (LING-GRM)</label>
+            <input type="number" min="0" max="6" step="1"
+                   id="rp2_grammar" name="linguistic_role_play2.resources_of_grammar_and_expression"
+                   value="{% if linguistic_role_play2.resourcesOfGrammarAndExpression is null %}{% else %}{{ linguistic_role_play2.resourcesOfGrammarAndExpression }}{% endif %}">
+        </div>
+    </div>
+</div>

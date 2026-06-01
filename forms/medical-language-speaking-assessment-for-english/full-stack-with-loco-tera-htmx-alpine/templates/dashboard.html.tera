@@ -1,0 +1,95 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Medical Language Speaking Assessment for English - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>OET Examiner Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Candidate name, candidate ID, or examiner...">
+    </div>
+    <div class="form-group">
+        <label for="grade">Grade</label>
+        <select id="grade" name="grade">
+            <option value="">All</option>
+            <option value="A" {% if grade == "A" %}selected{% endif %}>A</option>
+            <option value="B" {% if grade == "B" %}selected{% endif %}>B</option>
+            <option value="C+" {% if grade == "C+" %}selected{% endif %}>C+</option>
+            <option value="C" {% if grade == "C" %}selected{% endif %}>C</option>
+            <option value="D" {% if grade == "D" %}selected{% endif %}>D</option>
+            <option value="E" {% if grade == "E" %}selected{% endif %}>E</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="first_language">First Language</label>
+        <input type="text" id="first_language" name="first_language" value="{{ first_language }}">
+    </div>
+    <div class="form-group">
+        <label for="country_of_training">Country of Training</label>
+        <input type="text" id="country_of_training" name="country_of_training" value="{{ country_of_training }}">
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Test Date</th>
+            <th>Centre</th>
+            <th>Candidate</th>
+            <th>Examiner</th>
+            <th>First Language</th>
+            <th>Country of Training</th>
+            <th>Scaled Score</th>
+            <th>Grade</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.testDate }}</a></td>
+            <td>{{ c.testCentre }}</td>
+            <td>{{ c.candidateName }}<br><small>{{ c.candidateId }}</small></td>
+            <td>{{ c.examinerName }}</td>
+            <td>{{ c.firstLanguage }}</td>
+            <td>{{ c.countryOfTraining }}</td>
+            <td>{{ c.scaledScore }} / 500</td>
+            <td><span class="grade-badge grade-{{ c.grade | lower }}">{{ c.grade }}</span></td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

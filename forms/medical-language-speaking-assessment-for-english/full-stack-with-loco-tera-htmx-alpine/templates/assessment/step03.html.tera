@@ -1,0 +1,48 @@
+<div class="card">
+    <h2>Step 3: Role-play 2 &mdash; Clinical Explanation</h2>
+    <p class="form-hint">
+        Examiner-supplied scenario context for the second role-play. The
+        candidate explains a diagnosis, procedure, or treatment plan to the
+        patient or carer.
+    </p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rp2_scenario_title">Scenario Title</label>
+            <input type="text" id="rp2_scenario_title" name="role_play2.scenario_title"
+                   value="{{ role_play2.scenarioTitle }}">
+        </div>
+        <div class="form-group">
+            <label for="rp2_setting">Setting</label>
+            <input type="text" id="rp2_setting" name="role_play2.setting"
+                   value="{{ role_play2.setting }}" placeholder="e.g. GP clinic, outpatient, ward">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="rp2_scenario_summary">Scenario Summary</label>
+        <textarea id="rp2_scenario_summary" name="role_play2.scenario_summary">{{ role_play2.scenarioSummary }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="rp2_patient_role">Patient Role</label>
+            <input type="text" id="rp2_patient_role" name="role_play2.patient_role"
+                   value="{{ role_play2.patientRole }}">
+        </div>
+        <div class="form-group">
+            <label for="rp2_safety_criticality">Safety Criticality</label>
+            <select id="rp2_safety_criticality" name="role_play2.safety_criticality">
+                <option value="" {% if role_play2.safetyCriticality == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if role_play2.safetyCriticality == "low" %}selected{% endif %}>Low</option>
+                <option value="standard" {% if role_play2.safetyCriticality == "standard" %}selected{% endif %}>Standard</option>
+                <option value="high" {% if role_play2.safetyCriticality == "high" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="rp2_examiner_notes">Examiner Notes (Role-play 2)</label>
+        <textarea id="rp2_examiner_notes" name="role_play2.examiner_notes">{{ role_play2.examinerNotes }}</textarea>
+    </div>
+</div>
