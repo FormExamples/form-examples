@@ -1,0 +1,74 @@
+<div class="card">
+    <h2>Step 8: Non-Disclosure &amp; Post-Employment</h2>
+    <p class="form-hint">Reaffirm confidentiality, restrictive covenants, IP assignment, and data destruction.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="confidentiality_reaffirmed">Confidentiality reaffirmed?</label>
+            <select id="confidentiality_reaffirmed" name="non_disclosure_post_employment.confidentiality_reaffirmed">
+                <option value="" {% if non_disclosure_post_employment.confidentialityReaffirmed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.confidentialityReaffirmed == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.confidentialityReaffirmed == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nda_signed">NDA signed?</label>
+            <select id="nda_signed" name="non_disclosure_post_employment.nda_signed">
+                <option value="" {% if non_disclosure_post_employment.ndaSigned == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.ndaSigned == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.ndaSigned == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="restrictive_covenants_explained">Restrictive covenants explained?</label>
+            <select id="restrictive_covenants_explained" name="non_disclosure_post_employment.restrictive_covenants_explained">
+                <option value="" {% if non_disclosure_post_employment.restrictiveCovenantsExplained == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.restrictiveCovenantsExplained == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.restrictiveCovenantsExplained == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="restrictive_covenants_acknowledged">Restrictive covenants acknowledged?</label>
+            <select id="restrictive_covenants_acknowledged" name="non_disclosure_post_employment.restrictive_covenants_acknowledged">
+                <option value="" {% if non_disclosure_post_employment.restrictiveCovenantsAcknowledged == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.restrictiveCovenantsAcknowledged == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.restrictiveCovenantsAcknowledged == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="intellectual_property_assigned">IP assigned to employer?</label>
+            <select id="intellectual_property_assigned" name="non_disclosure_post_employment.intellectual_property_assigned">
+                <option value="" {% if non_disclosure_post_employment.intellectualPropertyAssigned == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.intellectualPropertyAssigned == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.intellectualPropertyAssigned == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="data_returned_or_destroyed">Organisational data returned or destroyed?</label>
+            <select id="data_returned_or_destroyed" name="non_disclosure_post_employment.data_returned_or_destroyed">
+                <option value="" {% if non_disclosure_post_employment.dataReturnedOrDestroyed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.dataReturnedOrDestroyed == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.dataReturnedOrDestroyed == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="post_employment_obligations_explained">Post-employment obligations explained?</label>
+            <select id="post_employment_obligations_explained" name="non_disclosure_post_employment.post_employment_obligations_explained">
+                <option value="" {% if non_disclosure_post_employment.postEmploymentObligationsExplained == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if non_disclosure_post_employment.postEmploymentObligationsExplained == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if non_disclosure_post_employment.postEmploymentObligationsExplained == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nda_notes">Notes</label>
+        <textarea id="nda_notes" name="non_disclosure_post_employment.nda_notes">{{ non_disclosure_post_employment.ndaNotes }}</textarea>
+    </div>
+</div>

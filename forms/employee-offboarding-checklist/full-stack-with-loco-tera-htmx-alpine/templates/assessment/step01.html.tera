@@ -1,0 +1,87 @@
+<div class="card">
+    <h2>Step 1: Employee Details</h2>
+    <p class="form-hint">Identification and employment summary for the departing employee.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="employee_details.first_name"
+                   value="{{ employee_details.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="employee_details.last_name"
+                   value="{{ employee_details.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="employee_id">Employee ID</label>
+            <input type="text" id="employee_id" name="employee_details.employee_id"
+                   value="{{ employee_details.employeeId }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Work Email</label>
+            <input type="email" id="email" name="employee_details.email"
+                   value="{{ employee_details.email }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="job_title">Job Title</label>
+            <input type="text" id="job_title" name="employee_details.job_title"
+                   value="{{ employee_details.jobTitle }}">
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" id="department" name="employee_details.department"
+                   value="{{ employee_details.department }}">
+        </div>
+        <div class="form-group">
+            <label for="line_manager">Line Manager</label>
+            <input type="text" id="line_manager" name="employee_details.line_manager"
+                   value="{{ employee_details.lineManager }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="date" id="start_date" name="employee_details.start_date"
+                   value="{{ employee_details.startDate }}">
+        </div>
+        <div class="form-group">
+            <label for="last_working_day">Last Working Day</label>
+            <input type="date" id="last_working_day" name="employee_details.last_working_day"
+                   value="{{ employee_details.lastWorkingDay }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reason_for_leaving">Reason for Leaving</label>
+            <select id="reason_for_leaving" name="employee_details.reason_for_leaving">
+                <option value="" {% if employee_details.reasonForLeaving == "" %}selected{% endif %}>&mdash;</option>
+                <option value="resignation" {% if employee_details.reasonForLeaving == "resignation" %}selected{% endif %}>Resignation</option>
+                <option value="retirement" {% if employee_details.reasonForLeaving == "retirement" %}selected{% endif %}>Retirement</option>
+                <option value="redundancy" {% if employee_details.reasonForLeaving == "redundancy" %}selected{% endif %}>Redundancy</option>
+                <option value="dismissal" {% if employee_details.reasonForLeaving == "dismissal" %}selected{% endif %}>Dismissal</option>
+                <option value="end-of-fixed-term" {% if employee_details.reasonForLeaving == "end-of-fixed-term" %}selected{% endif %}>End of fixed term</option>
+                <option value="transfer" {% if employee_details.reasonForLeaving == "transfer" %}selected{% endif %}>Transfer</option>
+                <option value="other" {% if employee_details.reasonForLeaving == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reason_for_leaving_other">Reason (if "other")</label>
+            <input type="text" id="reason_for_leaving_other" name="employee_details.reason_for_leaving_other"
+                   value="{{ employee_details.reasonForLeavingOther }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="employee_details_notes">Notes</label>
+        <textarea id="employee_details_notes" name="employee_details.employee_details_notes">{{ employee_details.employeeDetailsNotes }}</textarea>
+    </div>
+</div>

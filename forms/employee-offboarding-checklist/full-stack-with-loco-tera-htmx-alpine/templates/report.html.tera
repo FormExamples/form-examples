@@ -1,0 +1,112 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Offboarding Report - {{ outcome_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Employee Offboarding Checklist &mdash; Report</h1>
+    <div class="outcome-{{ outcome }}">{{ outcome_label }}</div>
+    <div class="outcome-label">Completion: {{ completion_percent }}% ({{ mandatory_satisfied }} / {{ mandatory_total }} mandatory items)</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Case ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Employee Summary -->
+<div class="card">
+    <h2>Employee Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.employeeDetails.firstName }} {{ data.employeeDetails.lastName }}<br>
+            <strong>Employee ID:</strong> {{ data.employeeDetails.employeeId }}<br>
+            <strong>Email:</strong> {{ data.employeeDetails.email }}<br>
+            <strong>Start Date:</strong> {{ data.employeeDetails.startDate }}<br>
+            <strong>Last Working Day:</strong> {{ data.employeeDetails.lastWorkingDay }}
+        </div>
+        <div>
+            <strong>Job Title:</strong> {{ data.employeeDetails.jobTitle }}<br>
+            <strong>Department:</strong> {{ data.employeeDetails.department }}<br>
+            <strong>Line Manager:</strong> {{ data.employeeDetails.lineManager }}<br>
+            <strong>Reason for Leaving:</strong> {{ data.employeeDetails.reasonForLeaving }}
+        </div>
+    </div>
+</div>
+
+<!-- Blockers -->
+{% if blockers | length > 0 %}
+<div class="card">
+    <h2>Blockers ({{ blockers | length }})</h2>
+    <p class="form-hint">Mandatory items that must be cleared before exit can proceed.</p>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in blockers %}
+            <tr>
+                <td><code>{{ b.id }}</code></td>
+                <td>{{ b.category }}</td>
+                <td>{{ b.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Safety / HR Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>HR / Security Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Outstanding items -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Outstanding Items ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Mandatory</th>
+                <th>Blocker</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td>{% if rule.mandatory %}Yes{% else %}No{% endif %}</td>
+                <td>{% if rule.blocker %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Checklist</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
