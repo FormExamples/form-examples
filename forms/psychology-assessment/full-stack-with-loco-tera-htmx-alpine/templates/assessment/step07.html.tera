@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 7: Risk Screen</h2>
+    <p class="form-hint">
+        These questions help identify any urgent safety needs. Honest answers
+        ensure you receive the right support promptly.
+    </p>
+
+    <div class="form-group">
+        <label for="risk_screen_suicidal_ideation">
+            In the past two weeks, have you had thoughts of suicide or ending your life?
+        </label>
+        <select id="risk_screen_suicidal_ideation" name="risk_screen.suicidal_ideation">
+            <option value="" {% if risk_screen.suicidalIdeation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if risk_screen.suicidalIdeation == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if risk_screen.suicidalIdeation == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="risk_screen_suicidal_ideation_details">
+            Suicidal ideation details (required when answer = yes)
+        </label>
+        <textarea id="risk_screen_suicidal_ideation_details" name="risk_screen.suicidal_ideation_details"
+                  placeholder="Describe frequency, plan, and any protective factors.">{{ risk_screen.suicidalIdeationDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="risk_screen_self_harm">Have you engaged in self-harm recently?</label>
+        <select id="risk_screen_self_harm" name="risk_screen.self_harm">
+            <option value="" {% if risk_screen.selfHarm == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if risk_screen.selfHarm == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if risk_screen.selfHarm == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="risk_screen_harm_to_others">Have you had thoughts of harming someone else?</label>
+        <select id="risk_screen_harm_to_others" name="risk_screen.harm_to_others">
+            <option value="" {% if risk_screen.harmToOthers == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if risk_screen.harmToOthers == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if risk_screen.harmToOthers == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="risk_screen_psychiatric_emergency_history">
+            Have you been hospitalised or attended a psychiatric emergency before?
+        </label>
+        <select id="risk_screen_psychiatric_emergency_history" name="risk_screen.psychiatric_emergency_history">
+            <option value="" {% if risk_screen.psychiatricEmergencyHistory == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if risk_screen.psychiatricEmergencyHistory == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if risk_screen.psychiatricEmergencyHistory == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="risk_screen_has_safety_plan">Do you currently have a safety plan?</label>
+        <select id="risk_screen_has_safety_plan" name="risk_screen.has_safety_plan">
+            <option value="" {% if risk_screen.hasSafetyPlan == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if risk_screen.hasSafetyPlan == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if risk_screen.hasSafetyPlan == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+</div>

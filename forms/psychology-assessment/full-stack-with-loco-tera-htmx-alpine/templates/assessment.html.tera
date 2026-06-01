@@ -1,0 +1,29 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Psychology Assessment - Case{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Psychology Assessment (DASS-21)</h1>
+    <p class="form-hint">
+        Complete all eight sections (Demographics, Reason, DASS-21 Depression /
+        Anxiety / Stress, Functional Impact, Risk Screen, Support and History)
+        and submit to receive your severity report.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}

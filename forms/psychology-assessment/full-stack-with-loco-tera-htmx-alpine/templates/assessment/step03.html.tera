@@ -1,0 +1,35 @@
+<div class="card">
+    <h2>Step 3: DASS-21 Depression</h2>
+    <p class="form-hint">
+        Read each statement and select the number that indicates how much the
+        statement applied to you over <strong>the past week</strong>.
+        0 = did not apply, 1 = applied to some degree or some of the time,
+        2 = applied to a considerable degree or a good part of time,
+        3 = applied very much or most of the time.
+    </p>
+
+    {% set d = dass_depression %}
+    {% set items = [
+        ["item3_could_not_experience_positive",  "item3CouldNotExperiencePositive",  "3. I couldn't seem to experience any positive feeling at all."],
+        ["item5_difficult_initiating",            "item5DifficultInitiating",          "5. I found it difficult to work up the initiative to do things."],
+        ["item10_nothing_to_look_forward_to",     "item10NothingToLookForwardTo",      "10. I felt that I had nothing to look forward to."],
+        ["item13_downhearted_blue",               "item13DownheartedBlue",             "13. I felt down-hearted and blue."],
+        ["item16_unable_to_become_enthusiastic",  "item16UnableToBecomeEnthusiastic",  "16. I was unable to become enthusiastic about anything."],
+        ["item17_not_worth_much",                 "item17NotWorthMuch",                "17. I felt I wasn't worth much as a person."],
+        ["item21_life_meaningless",               "item21LifeMeaningless",             "21. I felt that life was meaningless."]
+    ] %}
+
+    {% for row in items %}
+    {% set snake = row[0] %}{% set camel = row[1] %}{% set label = row[2] %}
+    <div class="form-group">
+        <label for="dass_depression_{{ snake }}">{{ label }}</label>
+        <select id="dass_depression_{{ snake }}" name="dass_depression.{{ snake }}">
+            <option value="" {% if d[camel] == null %}selected{% endif %}>&mdash;</option>
+            <option value="0" {% if d[camel] == 0 %}selected{% endif %}>0 &mdash; Did not apply</option>
+            <option value="1" {% if d[camel] == 1 %}selected{% endif %}>1 &mdash; Some degree / some of the time</option>
+            <option value="2" {% if d[camel] == 2 %}selected{% endif %}>2 &mdash; Considerable degree / good part of time</option>
+            <option value="3" {% if d[camel] == 3 %}selected{% endif %}>3 &mdash; Very much / most of the time</option>
+        </select>
+    </div>
+    {% endfor %}
+</div>

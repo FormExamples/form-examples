@@ -1,0 +1,88 @@
+<div class="card">
+    <h2>Step 8: Support and History</h2>
+    <p class="form-hint">
+        Background information about your support network and any prior mental
+        health care helps clinicians tailor recommendations.
+    </p>
+
+    <div class="form-group">
+        <label for="support_and_history_previous_mental_health_care">
+            Have you received mental health care in the past?
+        </label>
+        <select id="support_and_history_previous_mental_health_care" name="support_and_history.previous_mental_health_care">
+            <option value="" {% if support_and_history.previousMentalHealthCare == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if support_and_history.previousMentalHealthCare == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if support_and_history.previousMentalHealthCare == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_previous_mental_health_details">
+            Previous mental health details (optional)
+        </label>
+        <textarea id="support_and_history_previous_mental_health_details" name="support_and_history.previous_mental_health_details"
+                  placeholder="Diagnoses, dates, treating clinicians, response to treatment.">{{ support_and_history.previousMentalHealthDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_currently_in_treatment">
+            Are you currently in mental health treatment?
+        </label>
+        <select id="support_and_history_currently_in_treatment" name="support_and_history.currently_in_treatment">
+            <option value="" {% if support_and_history.currentlyInTreatment == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if support_and_history.currentlyInTreatment == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if support_and_history.currentlyInTreatment == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_current_treatment_details">Current treatment details</label>
+        <textarea id="support_and_history_current_treatment_details" name="support_and_history.current_treatment_details"
+                  placeholder="Therapy, frequency, and any medication regimens.">{{ support_and_history.currentTreatmentDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_current_medications">Current medications</label>
+        <textarea id="support_and_history_current_medications" name="support_and_history.current_medications"
+                  placeholder="List medication names and doses.">{{ support_and_history.currentMedications }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_family_mental_health_history">
+            Family history of mental health concerns?
+        </label>
+        <select id="support_and_history_family_mental_health_history" name="support_and_history.family_mental_health_history">
+            <option value="" {% if support_and_history.familyMentalHealthHistory == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if support_and_history.familyMentalHealthHistory == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if support_and_history.familyMentalHealthHistory == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_family_mental_health_details">Family mental health details</label>
+        <textarea id="support_and_history_family_mental_health_details" name="support_and_history.family_mental_health_details"
+                  placeholder="Which relatives, what conditions, and how they were treated.">{{ support_and_history.familyMentalHealthDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_social_support">Social support</label>
+        <select id="support_and_history_social_support" name="support_and_history.social_support">
+            <option value="" {% if support_and_history.socialSupport == "" %}selected{% endif %}>&mdash;</option>
+            <option value="strong" {% if support_and_history.socialSupport == "strong" %}selected{% endif %}>Strong</option>
+            <option value="adequate" {% if support_and_history.socialSupport == "adequate" %}selected{% endif %}>Adequate</option>
+            <option value="limited" {% if support_and_history.socialSupport == "limited" %}selected{% endif %}>Limited</option>
+            <option value="isolated" {% if support_and_history.socialSupport == "isolated" %}selected{% endif %}>Isolated</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="support_and_history_substance_use_concern">
+            Do you have any concerns about your alcohol or substance use?
+        </label>
+        <select id="support_and_history_substance_use_concern" name="support_and_history.substance_use_concern">
+            <option value="" {% if support_and_history.substanceUseConcern == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if support_and_history.substanceUseConcern == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if support_and_history.substanceUseConcern == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+</div>

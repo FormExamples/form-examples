@@ -1,0 +1,36 @@
+<div class="card">
+    <h2>Step 2: Reason for Assessment</h2>
+    <p class="form-hint">Why are you completing this assessment today?</p>
+
+    <div class="form-group">
+        <label for="reason_for_assessment_reason">Reason</label>
+        <select id="reason_for_assessment_reason" name="reason_for_assessment.reason">
+            <option value="" {% if reason_for_assessment.reason == "" %}selected{% endif %}>&mdash;</option>
+            <option value="self-referral" {% if reason_for_assessment.reason == "self-referral" %}selected{% endif %}>Self-referral</option>
+            <option value="gp-referral" {% if reason_for_assessment.reason == "gp-referral" %}selected{% endif %}>GP referral</option>
+            <option value="employer-referral" {% if reason_for_assessment.reason == "employer-referral" %}selected{% endif %}>Employer referral</option>
+            <option value="follow-up" {% if reason_for_assessment.reason == "follow-up" %}selected{% endif %}>Follow-up</option>
+            <option value="screening" {% if reason_for_assessment.reason == "screening" %}selected{% endif %}>Screening</option>
+            <option value="other" {% if reason_for_assessment.reason == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="reason_for_assessment_reason_details">Reason Details</label>
+        <textarea id="reason_for_assessment_reason_details" name="reason_for_assessment.reason_details"
+                  placeholder="Optional additional context for the referral.">{{ reason_for_assessment.reasonDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="reason_for_assessment_primary_concern">Primary Concern</label>
+        <textarea id="reason_for_assessment_primary_concern" name="reason_for_assessment.primary_concern"
+                  placeholder="In your own words, the main difficulty you're experiencing.">{{ reason_for_assessment.primaryConcern }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="reason_for_assessment_symptom_duration_weeks">Symptom Duration (weeks)</label>
+        <input type="number" id="reason_for_assessment_symptom_duration_weeks"
+               name="reason_for_assessment.symptom_duration_weeks" min="0"
+               value="{{ reason_for_assessment.symptomDurationWeeks }}">
+    </div>
+</div>

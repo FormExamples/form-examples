@@ -1,64 +1,41 @@
-//! Core types for the DASS-21 scoring engine.
-//!
-//! `serde(rename_all = "camelCase")` is applied to all structs that may be
-//! shared with the front-end (the canonical wire format is camelCase).
-
 use serde::{Deserialize, Serialize};
 
-/// DASS-21 item response: 0..=3, or `None` when unanswered.
-pub type DassItem = Option<u8>;
+// Type aliases matching the frontend union types.
+// Empty string `''` indicates an unanswered enum / text field.
+// `Option<i32>` with None indicates an unanswered DASS item / numeric field.
+pub type YesNo = String;
+pub type Sex = String;
+pub type AssessmentReason = String;
+pub type ImpactLevel = String;
+pub type DassSeverity = String;
+pub type SocialSupport = String;
 
-/// DASS-21 severity category for a subscale.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "kebab-case")]
-pub enum DassSeverity {
-    Normal,
-    Mild,
-    Moderate,
-    Severe,
-    ExtremelySevere,
-}
+/// DASS-21 Likert item response: 0..=3, or `None` if unanswered.
+pub type DassItem = Option<i32>;
 
-/// Which subscale a rule belongs to.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum Subscale {
-    Depression,
-    Anxiety,
-    Stress,
-}
-
-/// Priority level for a clinician-facing flag.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum FlagPriority {
-    Urgent,
-    High,
-    Medium,
-    Low,
-}
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 1 — Demographics.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Demographics {
     pub first_name: String,
     pub last_name: String,
     pub date_of_birth: String,
-    pub sex: String,
+    pub sex: Sex,
     pub occupation: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 2 — Reason for Assessment.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReasonForAssessment {
-    pub reason: String,
+    pub reason: AssessmentReason,
     pub reason_details: String,
     pub primary_concern: String,
-    pub symptom_duration_weeks: Option<u32>,
+    pub symptom_duration_weeks: Option<i32>,
 }
 
-/// DASS-21 Depression subscale items (3, 5, 10, 13, 16, 17, 21).
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 3 — DASS-21 Depression subscale (items 3, 5, 10, 13, 16, 17, 21).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DassDepression {
     pub item3_could_not_experience_positive: DassItem,
@@ -70,8 +47,8 @@ pub struct DassDepression {
     pub item21_life_meaningless: DassItem,
 }
 
-/// DASS-21 Anxiety subscale items (2, 4, 7, 9, 15, 19, 20).
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 4 — DASS-21 Anxiety subscale (items 2, 4, 7, 9, 15, 19, 20).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DassAnxiety {
     pub item2_dryness_of_mouth: DassItem,
@@ -83,8 +60,8 @@ pub struct DassAnxiety {
     pub item20_scared_without_reason: DassItem,
 }
 
-/// DASS-21 Stress subscale items (1, 6, 8, 11, 12, 14, 18).
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 5 — DASS-21 Stress subscale (items 1, 6, 8, 11, 12, 14, 18).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DassStress {
     pub item1_hard_to_wind_down: DassItem,
@@ -96,42 +73,46 @@ pub struct DassStress {
     pub item18_touchy_easily: DassItem,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 6 — Functional Impact.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FunctionalImpact {
-    pub work_impact: String,
-    pub relationship_impact: String,
-    pub daily_activities_impact: String,
-    pub sleep_impact: String,
+    pub work_impact: ImpactLevel,
+    pub relationship_impact: ImpactLevel,
+    pub daily_activities_impact: ImpactLevel,
+    pub sleep_impact: ImpactLevel,
     pub notes: String,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 7 — Risk Screen.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RiskScreen {
-    pub suicidal_ideation: String,
+    pub suicidal_ideation: YesNo,
     pub suicidal_ideation_details: String,
-    pub self_harm: String,
-    pub harm_to_others: String,
-    pub psychiatric_emergency_history: String,
-    pub has_safety_plan: String,
+    pub self_harm: YesNo,
+    pub harm_to_others: YesNo,
+    pub psychiatric_emergency_history: YesNo,
+    pub has_safety_plan: YesNo,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Step 8 — Support and History.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SupportAndHistory {
-    pub previous_mental_health_care: String,
+    pub previous_mental_health_care: YesNo,
     pub previous_mental_health_details: String,
-    pub currently_in_treatment: String,
+    pub currently_in_treatment: YesNo,
     pub current_treatment_details: String,
     pub current_medications: String,
-    pub family_mental_health_history: String,
+    pub family_mental_health_history: YesNo,
     pub family_mental_health_details: String,
-    pub social_support: String,
-    pub substance_use_concern: String,
+    pub social_support: SocialSupport,
+    pub substance_use_concern: YesNo,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+/// Full psychology-assessment case record.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AssessmentData {
     pub demographics: Demographics,
@@ -144,38 +125,43 @@ pub struct AssessmentData {
     pub support_and_history: SupportAndHistory,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct SubscaleScore {
-    /// Sum of the seven raw item scores (0..=21).
-    pub raw: u32,
-    /// Doubled raw score, aligning with DASS-42 norms (0..=42).
-    pub scaled: u32,
-    /// Severity category derived from `scaled`.
-    pub severity: DassSeverity,
-    /// Number of items answered out of 7.
-    pub answered: u32,
-}
-
+/// A DASS-21 rule that was answered (i.e. the item has a 0..=3 score).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
     pub id: String,
-    pub subscale: Subscale,
-    pub item_number: u32,
+    pub subscale: String,
+    pub item_number: i32,
     pub description: String,
-    pub score: u32,
+    pub score: i32,
 }
 
+/// A safety / clinical flag computed by the engine (independent of DASS-21
+/// scoring). Priority: urgent > high > medium > low.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdditionalFlag {
     pub id: String,
     pub category: String,
     pub message: String,
-    pub priority: FlagPriority,
+    pub priority: String,
 }
 
+/// Per-subscale DASS-21 score.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SubscaleScore {
+    /// Sum of seven raw 0..=3 item responses (0..=21).
+    pub raw: i32,
+    /// Doubled raw, aligned with DASS-42 normative cutoffs (0..=42).
+    pub scaled: i32,
+    /// `normal` | `mild` | `moderate` | `severe` | `extremely-severe`.
+    pub severity: DassSeverity,
+    /// Count of items answered out of 7.
+    pub answered: i32,
+}
+
+/// Grading output for a psychology-assessment case.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradingResult {
@@ -185,27 +171,4 @@ pub struct GradingResult {
     pub fired_rules: Vec<FiredRule>,
     pub additional_flags: Vec<AdditionalFlag>,
     pub timestamp: String,
-}
-
-impl DassSeverity {
-    /// Human-readable label for a DASS severity category.
-    pub fn label(self) -> &'static str {
-        match self {
-            DassSeverity::Normal => "Normal",
-            DassSeverity::Mild => "Mild",
-            DassSeverity::Moderate => "Moderate",
-            DassSeverity::Severe => "Severe",
-            DassSeverity::ExtremelySevere => "Extremely Severe",
-        }
-    }
-}
-
-impl Subscale {
-    pub fn label(self) -> &'static str {
-        match self {
-            Subscale::Depression => "Depression",
-            Subscale::Anxiety => "Anxiety",
-            Subscale::Stress => "Stress",
-        }
-    }
 }

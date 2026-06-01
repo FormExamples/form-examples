@@ -1,178 +1,215 @@
-//! HTTP routes for the psychology assessment.
-//!
-//! Endpoints:
-//!
-//! - `GET  /`                          → landing
-//! - `POST /assessment/new`            → create a new assessment, redirect
-//! - `GET  /assessment/{id}`           → single-page wizard
-//! - `POST /assessment/{id}/submit`    → save form data, redirect to report
-//! - `GET  /assessment/{id}/report`    → render scored report
-
-use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
-use crate::engine::types::AssessmentData;
-use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
+use crate::engine::{dass21_grader, types::AssessmentData};
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::build_assessment_context;
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
-    let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+/// POST /assessment/new -- create a new draft assessment, redirect to the wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
-}
-
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page assessment wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
+
     let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
+/// Convert form section name (snake_case) to JSON key (camelCase).
+fn section_to_json(section: &str) -> &str {
+    match section {
+        "demographics" => "demographics",
+        "reason_for_assessment" => "reasonForAssessment",
+        "dass_depression" => "dassDepression",
+        "dass_anxiety" => "dassAnxiety",
+        "dass_stress" => "dassStress",
+        "functional_impact" => "functionalImpact",
+        "risk_screen" => "riskScreen",
+        "support_and_history" => "supportAndHistory",
+        other => other,
     }
-    Redirect::to(&format!("/assessment/{id}/report"))
 }
 
-/// GET /assessment/{id}/report — render the scored report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
-}
-
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
-/// strongly-typed `AssessmentData`. Unknown / blank fields fall back to
-/// defaults.
-fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
-    let mut data = AssessmentData::default();
-
-    let s = |k: &str| form.get(k).cloned().unwrap_or_default();
-    let item = |k: &str| -> Option<u8> {
-        form.get(k).and_then(|v| v.parse::<u8>().ok())
-    };
-
-    data.demographics.first_name = s("firstName");
-    data.demographics.last_name = s("lastName");
-    data.demographics.date_of_birth = s("dateOfBirth");
-    data.demographics.sex = s("sex");
-    data.demographics.occupation = s("occupation");
-
-    data.reason_for_assessment.reason = s("reason");
-    data.reason_for_assessment.reason_details = s("reasonDetails");
-    data.reason_for_assessment.primary_concern = s("primaryConcern");
-    data.reason_for_assessment.symptom_duration_weeks =
-        form.get("symptomDurationWeeks").and_then(|v| v.parse::<u32>().ok());
-
-    data.dass_depression.item3_could_not_experience_positive = item("item3CouldNotExperiencePositive");
-    data.dass_depression.item5_difficult_initiating = item("item5DifficultInitiating");
-    data.dass_depression.item10_nothing_to_look_forward_to = item("item10NothingToLookForwardTo");
-    data.dass_depression.item13_downhearted_blue = item("item13DownheartedBlue");
-    data.dass_depression.item16_unable_to_become_enthusiastic = item("item16UnableToBecomeEnthusiastic");
-    data.dass_depression.item17_not_worth_much = item("item17NotWorthMuch");
-    data.dass_depression.item21_life_meaningless = item("item21LifeMeaningless");
-
-    data.dass_anxiety.item2_dryness_of_mouth = item("item2DrynessOfMouth");
-    data.dass_anxiety.item4_breathing_difficulty = item("item4BreathingDifficulty");
-    data.dass_anxiety.item7_trembling = item("item7Trembling");
-    data.dass_anxiety.item9_panic_worry = item("item9PanicWorry");
-    data.dass_anxiety.item15_closed_to_panic = item("item15ClosedToPanic");
-    data.dass_anxiety.item19_heart_action_aware = item("item19HeartActionAware");
-    data.dass_anxiety.item20_scared_without_reason = item("item20ScaredWithoutReason");
-
-    data.dass_stress.item1_hard_to_wind_down = item("item1HardToWindDown");
-    data.dass_stress.item6_over_react = item("item6OverReact");
-    data.dass_stress.item8_nervous_energy = item("item8NervousEnergy");
-    data.dass_stress.item11_agitated_easily = item("item11AgitatedEasily");
-    data.dass_stress.item12_difficult_to_relax = item("item12DifficultToRelax");
-    data.dass_stress.item14_intolerant = item("item14Intolerant");
-    data.dass_stress.item18_touchy_easily = item("item18TouchyEasily");
-
-    data.functional_impact.work_impact = s("workImpact");
-    data.functional_impact.relationship_impact = s("relationshipImpact");
-    data.functional_impact.daily_activities_impact = s("dailyActivitiesImpact");
-    data.functional_impact.sleep_impact = s("sleepImpact");
-    data.functional_impact.notes = s("notes");
-
-    data.risk_screen.suicidal_ideation = s("suicidalIdeation");
-    data.risk_screen.suicidal_ideation_details = s("suicidalIdeationDetails");
-    data.risk_screen.self_harm = s("selfHarm");
-    data.risk_screen.harm_to_others = s("harmToOthers");
-    data.risk_screen.psychiatric_emergency_history = s("psychiatricEmergencyHistory");
-    data.risk_screen.has_safety_plan = s("hasSafetyPlan");
-
-    data.support_and_history.previous_mental_health_care = s("previousMentalHealthCare");
-    data.support_and_history.previous_mental_health_details = s("previousMentalHealthDetails");
-    data.support_and_history.currently_in_treatment = s("currentlyInTreatment");
-    data.support_and_history.current_treatment_details = s("currentTreatmentDetails");
-    data.support_and_history.current_medications = s("currentMedications");
-    data.support_and_history.family_mental_health_history = s("familyMentalHealthHistory");
-    data.support_and_history.family_mental_health_details = s("familyMentalHealthDetails");
-    data.support_and_history.social_support = s("socialSupport");
-    data.support_and_history.substance_use_concern = s("substanceUseConcern");
-
-    data
-}
-
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
+/// Convert form field name (snake_case) to JSON key (camelCase).
+fn field_to_json(field: &str) -> String {
+    let parts: Vec<&str> = field.split('_').collect();
+    let mut result = String::new();
+    for (i, part) in parts.iter().enumerate() {
+        if i == 0 {
+            result.push_str(part);
+        } else {
+            let mut chars = part.chars();
+            if let Some(first) = chars.next() {
+                result.push(first.to_ascii_uppercase());
+                result.extend(chars);
+            }
         }
     }
+    result
 }
 
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+/// Parse a form value string. Empty strings stay as `""`; numbers are
+/// converted to JSON numbers so the typed engine deserializes them as
+/// `Option<i32>` or `Option<f64>`.
+fn parse_form_value(value: &serde_json::Value) -> serde_json::Value {
+    if let Some(s) = value.as_str() {
+        if s.is_empty() {
+            serde_json::Value::String(String::new())
+        } else if let Ok(n) = s.parse::<f64>() {
+            serde_json::json!(n)
+        } else {
+            value.clone()
+        }
+    } else {
+        value.clone()
+    }
+}
+
+/// POST /assessment/{id}/submit -- merge form data into the JSONB blob,
+/// redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form_data): axum::extract::Form<serde_json::Value>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let mut data_value = item.data.clone();
+    if let Some(obj) = data_value.as_object_mut() {
+        if let Some(form_obj) = form_data.as_object() {
+            for (key, value) in form_obj {
+                // section.field -- the standard dotted name pattern.
+                let parts: Vec<&str> = key.split('.').collect();
+                if parts.len() == 2 {
+                    let section = section_to_json(parts[0]);
+                    let field = field_to_json(parts[1]);
+                    if let Some(section_obj) =
+                        obj.get_mut(section).and_then(|s| s.as_object_mut())
+                    {
+                        section_obj.insert(field, parse_form_value(value));
+                    }
+                }
+            }
+        }
+    }
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
+}
+
+/// GET /assessment/{id}/report -- run the grading engine, persist the
+/// result, and render the report template.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let assessment_data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let grade = dass21_grader::grade(&assessment_data);
+
+    // Persist the grading result.
+    let result_json = serde_json::to_value(&grade).map_err(Error::wrap)?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let depression_label = crate::engine::utils::severity_label(&grade.depression.severity);
+    let anxiety_label = crate::engine::utils::severity_label(&grade.anxiety.severity);
+    let stress_label = crate::engine::utils::severity_label(&grade.stress.severity);
+
+    let mut context = Context::new();
+    context.insert("id", &id.to_string());
+    context.insert("data", &assessment_data);
+    context.insert("depression", &grade.depression);
+    context.insert("anxiety", &grade.anxiety);
+    context.insert("stress", &grade.stress);
+    context.insert("depression_label", &depression_label);
+    context.insert("anxiety_label", &anxiety_label);
+    context.insert("stress_label", &stress_label);
+    context.insert("fired_rules", &grade.fired_rules);
+    context.insert("additional_flags", &grade.additional_flags);
+    context.insert("timestamp", &grade.timestamp);
+
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
+    let context = Context::new();
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

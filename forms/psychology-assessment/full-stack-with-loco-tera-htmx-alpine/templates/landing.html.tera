@@ -1,36 +1,39 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Psychology Assessment — Home{% endblock %}
+{% block title %}Psychology Assessment - Home{% endblock %}
 
 {% block content %}
-<div style="max-width:700px;margin:2rem auto;padding:1rem;">
-  <h1>Psychology Assessment</h1>
-  <p>
-    Self-report psychological screening using the DASS-21 (Depression, Anxiety,
-    Stress Scales — 21 item) instrument. Each subscale is summed and doubled to
-    align with the DASS-42 normative cutoffs, producing a severity category of
-    Normal, Mild, Moderate, Severe, or Extremely Severe.
-  </p>
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Psychology Assessment</h1>
+        <p class="landing-description">
+            General psychological screening using the <strong>DASS-21</strong>
+            (Depression Anxiety Stress Scales &mdash; 21 item) instrument.
+            Collects self-reported data on depression, anxiety, and stress
+            symptoms, computes severity categories per subscale, and flags
+            safety-critical items (e.g. suicidal ideation) for clinician review.
+        </p>
 
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;">
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>8 Steps</h3>
-      <p>Demographics, reason, DASS-21 (Depression, Anxiety, Stress), functional impact, risk screen, support &amp; history.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Three Subscales</h3>
-      <p>Depression, Anxiety, Stress — 7 items each, scored 0–3.</p>
-    </div>
-    <div style="border:1px solid #ccc;border-radius:4px;padding:1rem;flex:1;min-width:180px;">
-      <h3>Safety Flags</h3>
-      <p>Suicidal ideation, severe symptom levels, and functional impairment escalate to clinician review.</p>
-    </div>
-  </div>
+        <div class="landing-features">
+            <div class="feature">
+                <h3>DASS-21 Scoring</h3>
+                <p>21 items across three subscales (Depression, Anxiety, Stress); doubled raw aligned with DASS-42 norms.</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Urgent escalation for suicidal ideation and harm-to-others reports; high-priority flags for severe scores.</p>
+            </div>
+            <div class="feature">
+                <h3>Eight Steps</h3>
+                <p>Demographics, reason, three DASS subscales, functional impact, risk screen, support and history.</p>
+            </div>
+        </div>
 
-  <form method="POST" action="/assessment/new">
-    <button type="submit" style="padding:0.6rem 1.4rem;background:#0070f3;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1rem;">
-      Begin New Assessment
-    </button>
-  </form>
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}
