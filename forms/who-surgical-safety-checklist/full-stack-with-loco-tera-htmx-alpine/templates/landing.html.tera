@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Surgical Safety Checklist - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>WHO Surgical Safety Checklist</h1>
+        <p class="landing-description">
+            Digital implementation of the World Health Organization Surgical Safety Checklist
+            (WHO/IER/PSP/2008.05, <em>Safe Surgery Saves Lives</em>). Completed by the operating-team
+            &mdash; typically the circulating nurse, anaesthetist, and surgeon &mdash; for every
+            surgical case. The output is a signed, timestamped record of the three phases:
+            <strong>Sign In</strong> (before induction of anaesthesia), <strong>Time Out</strong>
+            (before skin incision), and <strong>Sign Out</strong> (before the patient leaves the
+            operating room).
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Three Phases</h3>
+                <p>Sign In, Time Out, and Sign Out &mdash; each with a designated coordinator and sign-off timestamp</p>
+            </div>
+            <div class="feature">
+                <h3>Operating-Team Roster</h3>
+                <p>Captured during Time Out introductions, recording every team member by name and role</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for allergies, airway risk, blood-loss risk, count discrepancy, and equipment problems</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Checklist
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

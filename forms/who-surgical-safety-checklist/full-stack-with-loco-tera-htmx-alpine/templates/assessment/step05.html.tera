@@ -1,0 +1,66 @@
+<div class="card">
+    <h2>Step 5: Summary &amp; Abandonment</h2>
+    <p class="form-hint">
+        Final case-level entries. The operating-team roster captured during the
+        Time Out introductions is recorded here. If the case was abandoned
+        before Sign Out, record the reason.
+    </p>
+
+    <h3>Operating-Team Roster</h3>
+    <p class="form-hint">
+        Record each team member introduced during Time Out. Add up to six members below.
+    </p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="team-member-row">
+        <legend>Team Member {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="team_members_{{ i }}_name">Name</label>
+                <input type="text" id="team_members_{{ i }}_name" name="team_members[{{ i }}].name"
+                       value="{% if team_members | length > i %}{{ team_members[i].name }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="team_members_{{ i }}_role">Role</label>
+                <select id="team_members_{{ i }}_role" name="team_members[{{ i }}].role">
+                    {% set r = "" %}{% if team_members | length > i %}{% set_global r = team_members[i].role %}{% endif %}
+                    <option value="" {% if r == "" %}selected{% endif %}>&mdash;</option>
+                    <option value="surgeon" {% if r == "surgeon" %}selected{% endif %}>Surgeon</option>
+                    <option value="assistant-surgeon" {% if r == "assistant-surgeon" %}selected{% endif %}>Assistant Surgeon</option>
+                    <option value="anaesthetist" {% if r == "anaesthetist" %}selected{% endif %}>Anaesthetist</option>
+                    <option value="circulating-nurse" {% if r == "circulating-nurse" %}selected{% endif %}>Circulating Nurse</option>
+                    <option value="scrub-nurse" {% if r == "scrub-nurse" %}selected{% endif %}>Scrub Nurse</option>
+                    <option value="anaesthetic-assistant" {% if r == "anaesthetic-assistant" %}selected{% endif %}>Anaesthetic Assistant</option>
+                    <option value="perfusionist" {% if r == "perfusionist" %}selected{% endif %}>Perfusionist</option>
+                    <option value="technician" {% if r == "technician" %}selected{% endif %}>Technician</option>
+                    <option value="observer" {% if r == "observer" %}selected{% endif %}>Observer</option>
+                    <option value="other" {% if r == "other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="team_members_{{ i }}_introduced_during_time_out">Introduced during Time Out?</label>
+                {% set v = "" %}{% if team_members | length > i %}{% set_global v = team_members[i].introducedDuringTimeOut %}{% endif %}
+                <select id="team_members_{{ i }}_introduced_during_time_out" name="team_members[{{ i }}].introduced_during_time_out">
+                    <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+                    <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+                    <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="team_members_{{ i }}_notes">Notes</label>
+            <input type="text" id="team_members_{{ i }}_notes" name="team_members[{{ i }}].notes"
+                   value="{% if team_members | length > i %}{{ team_members[i].notes }}{% endif %}">
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    <h3>Case Abandonment</h3>
+    <div class="form-group">
+        <label for="abandoned_reason">
+            Reason for abandonment (leave blank if the case was completed normally)
+        </label>
+        <textarea id="abandoned_reason" name="case_details.abandoned_reason"
+                  placeholder="Reason the case was cancelled before Sign Out, if applicable">{{ case_details.abandonedReason }}</textarea>
+    </div>
+</div>

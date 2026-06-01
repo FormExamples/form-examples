@@ -1,0 +1,25 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Surgical Safety Checklist - Case{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>WHO Surgical Safety Checklist</h1>
+    <p class="form-hint">
+        Complete all five sections (Case details, Sign In, Time Out, Sign Out, Summary)
+        and submit to record the case. Each phase requires a designated coordinator sign-off.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Checklist</button>
+    </div>
+</form>
+{% endblock %}
