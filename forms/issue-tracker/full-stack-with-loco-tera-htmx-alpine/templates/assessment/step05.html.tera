@@ -1,16 +1,40 @@
-<fieldset class="step">
-  <legend>Step 5 — Fractures (Fx)</legend>
-  <label>Broken components <textarea name="fx_broken_components" rows="3">{{ data.fx_broken_components | default(value='') }}</textarea></label>
-  <label>Failed services <input name="fx_failed_services" type="text" value="{{ data.fx_failed_services | default(value='') }}"></label>
-  <label>Stuck processes <input name="fx_stuck_processes" type="text" value="{{ data.fx_stuck_processes | default(value='') }}"></label>
-  <label>Hardware faults <input name="fx_hardware_faults" type="text" value="{{ data.fx_hardware_faults | default(value='') }}"></label>
-  <label>Data corruption
-    <select name="fx_data_corruption">
-      {% set dc = data.fx_data_corruption | default(value='') %}
-      <option value="" {% if dc == '' %}selected{% endif %}>(unspecified)</option>
-      {% for v in ['none','suspected','confirmed','unknown'] %}
-        <option value="{{ v }}" {% if dc == v %}selected{% endif %}>{{ v }}</option>
-      {% endfor %}
-    </select>
-  </label>
-</fieldset>
+<div class="card">
+    <h2>Step 5: Fractures (Fx)</h2>
+    <p class="form-hint">Broken components, failed services, stuck processes, hardware faults.</p>
+
+    <div class="form-group">
+        <label for="fx_fx_broken_components">Broken components</label>
+        <textarea id="fx_fx_broken_components" name="fx.fx_broken_components"
+                  rows="3">{{ fx.fxBrokenComponents }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="fx_fx_failed_services">Failed services</label>
+        <input type="text" id="fx_fx_failed_services" name="fx.fx_failed_services"
+               value="{{ fx.fxFailedServices }}" maxlength="500">
+    </div>
+
+    <div class="form-group">
+        <label for="fx_fx_stuck_processes">Stuck processes / queues / batch jobs</label>
+        <input type="text" id="fx_fx_stuck_processes" name="fx.fx_stuck_processes"
+               value="{{ fx.fxStuckProcesses }}" maxlength="500">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fx_fx_hardware_faults">Hardware faults</label>
+            <input type="text" id="fx_fx_hardware_faults" name="fx.fx_hardware_faults"
+                   value="{{ fx.fxHardwareFaults }}" maxlength="500">
+        </div>
+        <div class="form-group">
+            <label for="fx_fx_data_corruption">Data corruption</label>
+            <select id="fx_fx_data_corruption" name="fx.fx_data_corruption">
+                <option value="" {% if fx.fxDataCorruption == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if fx.fxDataCorruption == "none" %}selected{% endif %}>None</option>
+                <option value="suspected" {% if fx.fxDataCorruption == "suspected" %}selected{% endif %}>Suspected</option>
+                <option value="confirmed" {% if fx.fxDataCorruption == "confirmed" %}selected{% endif %}>Confirmed</option>
+                <option value="unknown" {% if fx.fxDataCorruption == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+</div>

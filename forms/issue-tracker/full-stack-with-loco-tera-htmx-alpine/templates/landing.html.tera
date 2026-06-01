@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Issue Tracker - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Issue Tracker</h1>
+        <p class="landing-description">
+            A general-purpose issue tracker that borrows the structure of a clinical
+            <strong>SOAP-style assessment</strong> and applies it to any reportable
+            problem &mdash; software defects, operational incidents, safety events,
+            project blockers, customer complaints. Each issue is captured through a
+            single-page 10-step wizard with nine SOAP-style sections (CC / Pt / Sx /
+            Fx / Hx / Ix / Dx / Tx / Px) and graded with seven independent scoring
+            scales.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Nine SOAP-style sections</h3>
+                <p>Chief Complaint, Participants, Symptoms, Fractures, History, Investigations, Diagnosis, Treatments, Prognosis</p>
+            </div>
+            <div class="feature">
+                <h3>Seven scoring scales</h3>
+                <p>Priority rank, severity, magnitude, harm grade, failure condition, MoSCoW requirement, frequency percent</p>
+            </div>
+            <div class="feature">
+                <h3>Composite priority</h3>
+                <p>Max-grade algorithm &mdash; the worst single dimension drives the issue to the top of the queue</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Report New Issue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

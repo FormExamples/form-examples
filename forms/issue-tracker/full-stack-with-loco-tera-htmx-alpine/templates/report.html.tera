@@ -1,69 +1,123 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Issue {{ id }} report — Issue Tracker{% endblock %}
+{% block title %}Issue Report - {{ composite_label }}{% endblock %}
 
 {% block content %}
-<article class="report">
+<div class="report-header">
+    <h1>Issue Tracker &mdash; Graded Report</h1>
+    <div class="composite composite-{{ composite_priority }}">Composite priority: {{ composite_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Issue ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
 
-  <h2>Report — issue {{ id }}</h2>
+<!-- Reporter and metadata -->
+<div class="card">
+    <h2>Reporter</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.reporter.reporterName }}<br>
+            <strong>Email:</strong> {{ data.reporter.reporterEmail }}<br>
+            <strong>Role:</strong> {{ data.reporter.reporterRole }}<br>
+            <strong>Reported at:</strong> {{ data.reporter.reportedAt }}<br>
+            <strong>Discovered at:</strong> {{ data.reporter.discoveredAt }}
+        </div>
+        <div>
+            <strong>Category:</strong> {{ data.reporter.issueCategory }}<br>
+            <strong>Environment:</strong> {{ data.reporter.environment }}<br>
+            <strong>System:</strong> {{ data.reporter.systemName }}<br>
+            <strong>Component:</strong> {{ data.reporter.component }}<br>
+            <strong>Customer / project:</strong> {{ data.reporter.customerOrProjectTag }}<br>
+            <strong>External reference:</strong> {{ data.reporter.externalReference }}
+        </div>
+    </div>
+</div>
 
-  <p>
-    Composite priority:
-    <span class="badge {{ result.composite_priority }}">{{ result.composite_priority | upper }}</span>
-  </p>
+<!-- Chief complaint -->
+<div class="card">
+    <h2>Chief Complaint (CC)</h2>
+    <p><strong>Summary:</strong> {{ data.cc.ccSummary }}</p>
+    <p><strong>Long description:</strong> {{ data.cc.ccLongDescription }}</p>
+    <p>
+        <strong>Reported by:</strong> {{ data.cc.ccReportedByName }} &mdash;
+        <strong>via:</strong> {{ data.cc.ccReportedVia }}
+    </p>
+</div>
 
-  <section>
-    <h3>Chief complaint</h3>
-    <p>{{ data.cc_summary | default(value='(none)') }}</p>
-  </section>
+<!-- Seven scores -->
+<div class="card">
+    <h2>Seven scores</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Instrument</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Priority rank</td><td>{{ score_by_priority_rank }}</td></tr>
+            <tr><td>Severity of impact (1&ndash;5)</td><td>{{ score_by_severity_of_impact }}</td></tr>
+            <tr><td>Magnitude of damage (1&ndash;10)</td><td>{{ score_by_magnitude_of_damage }}</td></tr>
+            <tr><td>Harm grade (0&ndash;4)</td><td>{{ score_by_harm_grade }}</td></tr>
+            <tr><td>Failure condition (A&ndash;E)</td><td>{{ score_by_failure_condition }}</td></tr>
+            <tr><td>MoSCoW requirement (1&ndash;4)</td><td>{{ score_by_moscow_requirement }}</td></tr>
+            <tr><td>Frequency percent (0&ndash;100)</td><td>{{ score_by_frequency_percent }}</td></tr>
+        </tbody>
+    </table>
+</div>
 
-  <section>
-    <h3>Seven scores</h3>
-    <dl class="scores">
-      <dt>Priority rank</dt><dd>{{ result.score_by_priority_rank | default(value='—') }}</dd>
-      <dt>Severity of impact</dt><dd>{{ result.score_by_severity_of_impact | default(value='—') }}</dd>
-      <dt>Magnitude of damage</dt><dd>{{ result.score_by_magnitude_of_damage | default(value='—') }}</dd>
-      <dt>Harm grade</dt><dd>{{ result.score_by_harm_grade | default(value='—') }}</dd>
-      <dt>Failure condition</dt><dd>{{ result.score_by_failure_condition | default(value='—') }}</dd>
-      <dt>MoSCoW</dt><dd>{{ result.score_by_moscow_requirement | default(value='—') }}</dd>
-      <dt>Frequency %</dt><dd>{{ result.score_by_frequency_percent | default(value='—') }}</dd>
-    </dl>
-  </section>
+<!-- Safety flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.description }}</span>
+            <div><em>{{ flag.suggestedAction }}</em></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
-  <section>
-    <h3>Fired rules ({{ result.fired_rules | length }})</h3>
-    <ul>
-    {% for rule in result.fired_rules %}
-      <li>
-        <code>{{ rule.rule_id }}</code> ({{ rule.instrument }})
-        — {{ rule.description }}
-      </li>
-    {% endfor %}
-    </ul>
-  </section>
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Instrument</th>
+                <th>Grade</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Band</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.ruleId }}</code></td>
+                <td>{{ rule.instrument }}</td>
+                <td>{{ rule.grade }}</td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge severity-{{ rule.band }}">{{ rule.band }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
 
-  <section>
-    <h3>Safety flags ({{ result.additional_flags | length }})</h3>
-    {% if result.additional_flags | length == 0 %}
-      <p>(none)</p>
-    {% else %}
-      <ul>
-      {% for flag in result.additional_flags %}
-        <li class="flag-{{ flag.priority }}">
-          <strong>[{{ flag.category }}]</strong>
-          {{ flag.description }}
-          <br><em>{{ flag.suggested_action }}</em>
-        </li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  </section>
-
-  <p class="actions">
-    <a href="/issue-tracker/{{ id }}" hx-boost="true">Edit</a>
-    <a href="/issue-tracker/{{ id }}/report.pdf">Download PDF</a>
-    <a href="/dashboard" hx-boost="true">Back to dashboard</a>
-  </p>
-
-</article>
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">Report new issue</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print report</button>
+</div>
 {% endblock %}

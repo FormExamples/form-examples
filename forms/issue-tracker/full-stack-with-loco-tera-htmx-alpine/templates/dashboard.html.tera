@@ -1,98 +1,121 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Dashboard — Issue Tracker{% endblock %}
+{% block title %}Issue Tracker - Dashboard{% endblock %}
 
 {% block content %}
-<article class="dashboard">
+<div class="dashboard-header">
+    <h1>Issue Tracker Dashboard</h1>
+    <a href="/" class="btn btn-primary">Report New Issue</a>
+</div>
 
-  <h2>Dashboard</h2>
-  <p class="muted">Triage view across composite priority, severity, harm, failure-condition, environment, and free-text search.</p>
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Reporter, system, or chief complaint summary...">
+    </div>
+    <div class="form-group">
+        <label for="composite_priority">Composite priority</label>
+        <select id="composite_priority" name="composite_priority">
+            <option value="">All</option>
+            <option value="low" {% if composite_priority == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if composite_priority == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if composite_priority == "high" %}selected{% endif %}>High</option>
+            <option value="critical" {% if composite_priority == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="issue_category">Issue category</label>
+        <select id="issue_category" name="issue_category">
+            <option value="">All</option>
+            <option value="software-defect" {% if issue_category == "software-defect" %}selected{% endif %}>Software defect</option>
+            <option value="service-outage" {% if issue_category == "service-outage" %}selected{% endif %}>Service outage</option>
+            <option value="performance" {% if issue_category == "performance" %}selected{% endif %}>Performance</option>
+            <option value="security" {% if issue_category == "security" %}selected{% endif %}>Security</option>
+            <option value="data-protection" {% if issue_category == "data-protection" %}selected{% endif %}>Data protection</option>
+            <option value="clinical-safety" {% if issue_category == "clinical-safety" %}selected{% endif %}>Clinical safety</option>
+            <option value="workplace-safety" {% if issue_category == "workplace-safety" %}selected{% endif %}>Workplace safety</option>
+            <option value="medical-device" {% if issue_category == "medical-device" %}selected{% endif %}>Medical device</option>
+            <option value="regulatory" {% if issue_category == "regulatory" %}selected{% endif %}>Regulatory</option>
+            <option value="project-blocker" {% if issue_category == "project-blocker" %}selected{% endif %}>Project blocker</option>
+            <option value="customer-complaint" {% if issue_category == "customer-complaint" %}selected{% endif %}>Customer complaint</option>
+            <option value="hardware-fault" {% if issue_category == "hardware-fault" %}selected{% endif %}>Hardware fault</option>
+            <option value="process" {% if issue_category == "process" %}selected{% endif %}>Process</option>
+            <option value="other" {% if issue_category == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="environment">Environment</label>
+        <select id="environment" name="environment">
+            <option value="">All</option>
+            <option value="dev" {% if environment == "dev" %}selected{% endif %}>Dev</option>
+            <option value="test" {% if environment == "test" %}selected{% endif %}>Test</option>
+            <option value="staging" {% if environment == "staging" %}selected{% endif %}>Staging</option>
+            <option value="production" {% if environment == "production" %}selected{% endif %}>Production</option>
+            <option value="on-prem" {% if environment == "on-prem" %}selected{% endif %}>On-prem</option>
+            <option value="field" {% if environment == "field" %}selected{% endif %}>Field</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-priority flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
 
-  <form id="filters" method="GET" action="/dashboard"
-        hx-get="/dashboard/rows" hx-target="#issues-body" hx-trigger="change, search delay:200ms from:#search">
-    <label>Search
-      <input id="search" name="q" type="search" value="{{ filters.q | default(value='') }}" placeholder="Search CC, system, assignee">
-    </label>
-    <label>Composite
-      <select name="composite">
-        {% set comp = filters.composite | default(value='') %}
-        <option value="" {% if comp == '' %}selected{% endif %}>All</option>
-        {% for v in ['critical','high','moderate','low'] %}
-          <option value="{{ v }}" {% if comp == v %}selected{% endif %}>{{ v }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <label>Severity
-      <select name="severity">
-        {% set sev = filters.severity | default(value='') %}
-        <option value="" {% if sev == '' %}selected{% endif %}>All</option>
-        {% for v in [5,4,3,2,1] %}
-          <option value="{{ v }}" {% if sev == v %}selected{% endif %}>{{ v }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <label>Harm
-      <select name="harm">
-        {% set h = filters.harm | default(value='') %}
-        <option value="" {% if h == '' %}selected{% endif %}>All</option>
-        {% for v in [4,3,2,1,0] %}
-          <option value="{{ v }}" {% if h == v %}selected{% endif %}>{{ v }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <label>Failure
-      <select name="failure">
-        {% set f = filters.failure | default(value='') %}
-        <option value="" {% if f == '' %}selected{% endif %}>All</option>
-        {% for v in ['A','B','C','D','E'] %}
-          <option value="{{ v }}" {% if f == v %}selected{% endif %}>{{ v }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <label>Environment
-      <select name="environment">
-        {% set env = filters.environment | default(value='') %}
-        <option value="" {% if env == '' %}selected{% endif %}>All</option>
-        {% for v in ['production','staging','test','dev','on-prem','field'] %}
-          <option value="{{ v }}" {% if env == v %}selected{% endif %}>{{ v }}</option>
-        {% endfor %}
-      </select>
-    </label>
-  </form>
+<p class="total-count">Showing {{ total }} completed issue{% if total != 1 %}s{% endif %}.</p>
 
-  <p class="row-count">Showing {{ rows | length }} of {{ total | default(value=rows | length) }} issues.</p>
-
-  <table>
+{% if total > 0 %}
+<table class="patient-table">
     <thead>
-      <tr>
-        <th>ID</th><th>Status</th><th>Composite</th>
-        <th>Sev</th><th>Harm</th><th>Fail</th><th>Pri</th><th>Freq %</th>
-        <th>Chief complaint</th><th>System</th><th>Env</th><th>Assignee</th><th>Reported</th>
-      </tr>
+        <tr>
+            <th>Reported at</th>
+            <th>Reporter</th>
+            <th>Category</th>
+            <th>System / Environment</th>
+            <th>Chief complaint</th>
+            <th>Composite</th>
+            <th>Priority</th>
+            <th>Severity</th>
+            <th>Harm</th>
+            <th>Failure</th>
+            <th>Flags</th>
+        </tr>
     </thead>
-    <tbody id="issues-body">
-    {% for r in rows %}
-      <tr>
-        <td><a href="/issue-tracker/{{ r.id }}/report" hx-boost="true">{{ r.id }}</a></td>
-        <td>{{ r.status }}</td>
-        <td><span class="badge {{ r.composite_priority }}">{{ r.composite_priority }}</span></td>
-        <td>{{ r.score_by_severity_of_impact | default(value='—') }}</td>
-        <td>{{ r.score_by_harm_grade | default(value='—') }}</td>
-        <td>{{ r.score_by_failure_condition | default(value='—') }}</td>
-        <td>{{ r.score_by_priority_rank | default(value='—') }}</td>
-        <td>{{ r.score_by_frequency_percent | default(value='—') }}</td>
-        <td>{{ r.cc_summary }}</td>
-        <td>{{ r.system_name }}</td>
-        <td>{{ r.environment }}</td>
-        <td>{{ r.pt_assignees }}</td>
-        <td>{{ r.reported_at | truncate(length=10, end='') }}</td>
-      </tr>
-    {% endfor %}
-    {% if rows | length == 0 %}
-      <tr><td colspan="13" class="no-results">No matching issues.</td></tr>
-    {% endif %}
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.reportedAt }}</a></td>
+            <td>{{ c.reporterName }}</td>
+            <td>{{ c.issueCategory }}</td>
+            <td>{{ c.systemName }}<br><small>{{ c.environment }}</small></td>
+            <td>{{ c.ccSummary }}</td>
+            <td><span class="composite composite-{{ c.compositePriority }}">{{ c.compositePriority }}</span></td>
+            <td>{{ c.scoreByPriorityRank }}</td>
+            <td>{{ c.scoreBySeverityOfImpact }}</td>
+            <td>{{ c.scoreByHarmGrade }}</td>
+            <td>{{ c.scoreByFailureCondition }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
-  </table>
-
-</article>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed issues found matching your filters.</p>
+</div>
+{% endif %}
 {% endblock %}

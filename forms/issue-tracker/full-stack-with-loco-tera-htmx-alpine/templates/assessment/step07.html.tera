@@ -1,8 +1,34 @@
-<fieldset class="step">
-  <legend>Step 7 — Investigations (Ix)</legend>
-  <label>Hypotheses <textarea name="ix_hypotheses" rows="3">{{ data.ix_hypotheses | default(value='') }}</textarea></label>
-  <label>Repro steps <textarea name="ix_repro_steps" rows="3">{{ data.ix_repro_steps | default(value='') }}</textarea></label>
-  <label>Diagnostic queries <textarea name="ix_diagnostic_queries" rows="3">{{ data.ix_diagnostic_queries | default(value='') }}</textarea></label>
-  <label>Tests run <input name="ix_tests_run" type="text" value="{{ data.ix_tests_run | default(value='') }}"></label>
-  <label>Blocking unknowns <textarea name="ix_blocking_unknowns" rows="3">{{ data.ix_blocking_unknowns | default(value='') }}</textarea></label>
-</fieldset>
+<div class="card">
+    <h2>Step 7: Investigations (Ix)</h2>
+    <p class="form-hint">Hypotheses, reproduction steps, diagnostic queries, blocking unknowns.</p>
+
+    <div class="form-group">
+        <label for="ix_ix_hypotheses">Hypotheses</label>
+        <textarea id="ix_ix_hypotheses" name="ix.ix_hypotheses"
+                  rows="3">{{ ix.ixHypotheses }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ix_ix_repro_steps">Reproduction steps</label>
+        <textarea id="ix_ix_repro_steps" name="ix.ix_repro_steps"
+                  rows="3">{{ ix.ixReproSteps }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ix_ix_diagnostic_queries">Diagnostic queries / profiles / traces</label>
+        <textarea id="ix_ix_diagnostic_queries" name="ix.ix_diagnostic_queries"
+                  rows="3">{{ ix.ixDiagnosticQueries }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ix_ix_tests_run">Tests run</label>
+        <input type="text" id="ix_ix_tests_run" name="ix.ix_tests_run"
+               value="{{ ix.ixTestsRun }}" maxlength="500">
+    </div>
+
+    <div class="form-group">
+        <label for="ix_ix_blocking_unknowns">Blocking unknowns</label>
+        <textarea id="ix_ix_blocking_unknowns" name="ix.ix_blocking_unknowns"
+                  rows="3">{{ ix.ixBlockingUnknowns }}</textarea>
+    </div>
+</div>

@@ -5,33 +5,40 @@ logger:
   format: json
 
 server:
-  port: {{ get_env(name="PORT", default="5150") }}
+  port: $PORT
   binding: 0.0.0.0
-  host: {{ get_env(name="HOST", default="http://localhost") }}
+  host: $HOST
+  middlewares:
+    cors:
+      enable: true
+      allow_origins:
+        - $FRONTEND_URL
+      allow_methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      allow_headers:
+        - Content-Type
+        - Authorization
 
 workers:
   mode: BackgroundQueue
 
 queue:
   kind: Postgres
-  uri: {{ get_env(name="DATABASE_URL") }}
+  uri: $DATABASE_URL
   dangerously_flush: false
   num_workers: 4
 
-mailer:
-  smtp:
-    enable: false
-
 database:
-  uri: {{ get_env(name="DATABASE_URL") }}
+  uri: $DATABASE_URL
   enable_logging: false
   connect_timeout: 500
   idle_timeout: 500
   min_connections: 1
   max_connections: 10
-  auto_migrate: false
-
-auth:
-  jwt:
-    secret: {{ get_env(name="JWT_SECRET") }}
-    expiration: 604800
+  auto_migrate: true
+  dangerously_truncate: false
+  dangerously_recreate: false

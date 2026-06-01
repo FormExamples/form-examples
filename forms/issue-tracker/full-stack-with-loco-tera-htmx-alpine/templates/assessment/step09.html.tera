@@ -1,21 +1,71 @@
-<fieldset class="step">
-  <legend>Step 9 — Treatments &amp; Prognosis (Tx, Px)</legend>
-  <label>Mitigation steps <textarea name="tx_mitigation_steps" rows="3">{{ data.tx_mitigation_steps | default(value='') }}</textarea></label>
-  <label>Fix plan <textarea name="tx_fix_plan" rows="3">{{ data.tx_fix_plan | default(value='') }}</textarea></label>
-  <label>Workaround <textarea name="tx_workaround" rows="2">{{ data.tx_workaround | default(value='') }}</textarea></label>
-  <label>Rollback plan <textarea name="tx_rollback_plan" rows="2">{{ data.tx_rollback_plan | default(value='') }}</textarea></label>
-  <label>Communication plan <input name="tx_communication_plan" type="text" value="{{ data.tx_communication_plan | default(value='') }}"></label>
-  <label>Expected resolution at <input name="px_expected_resolution_at" type="datetime-local" value="{{ data.px_expected_resolution_at | default(value='') }}"></label>
-  <label>Residual risk <textarea name="px_residual_risk" rows="2">{{ data.px_residual_risk | default(value='') }}</textarea></label>
-  <label>Monitoring plan <textarea name="px_monitoring_plan" rows="2">{{ data.px_monitoring_plan | default(value='') }}</textarea></label>
-  <label>Recurrence likelihood
-    <select name="px_recurrence_likelihood">
-      {% set rl = data.px_recurrence_likelihood | default(value='') %}
-      <option value="" {% if rl == '' %}selected{% endif %}>(unspecified)</option>
-      {% for v in ['very-low','low','moderate','high','very-high'] %}
-        <option value="{{ v }}" {% if rl == v %}selected{% endif %}>{{ v }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <label>Lessons learned <textarea name="px_lessons_learned" rows="2">{{ data.px_lessons_learned | default(value='') }}</textarea></label>
-</fieldset>
+<div class="card">
+    <h2>Step 9: Treatments &amp; Prognosis (Tx / Px)</h2>
+    <p class="form-hint">Mitigations, fix plan, workaround, rollback, expected resolution, residual risk.</p>
+
+    <div class="form-group">
+        <label for="txpx_tx_mitigation_steps">Mitigation steps</label>
+        <textarea id="txpx_tx_mitigation_steps" name="txpx.tx_mitigation_steps"
+                  rows="3">{{ txpx.txMitigationSteps }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_tx_fix_plan">Permanent fix plan</label>
+        <textarea id="txpx_tx_fix_plan" name="txpx.tx_fix_plan"
+                  rows="3">{{ txpx.txFixPlan }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_tx_workaround">Workaround</label>
+        <textarea id="txpx_tx_workaround" name="txpx.tx_workaround"
+                  rows="2">{{ txpx.txWorkaround }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_tx_rollback_plan">Rollback plan</label>
+        <textarea id="txpx_tx_rollback_plan" name="txpx.tx_rollback_plan"
+                  rows="2">{{ txpx.txRollbackPlan }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_tx_communication_plan">Communication plan</label>
+        <input type="text" id="txpx_tx_communication_plan" name="txpx.tx_communication_plan"
+               value="{{ txpx.txCommunicationPlan }}" maxlength="500">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="txpx_px_expected_resolution_at">Expected resolution at</label>
+            <input type="datetime-local" id="txpx_px_expected_resolution_at" name="txpx.px_expected_resolution_at"
+                   value="{{ txpx.pxExpectedResolutionAt }}">
+        </div>
+        <div class="form-group">
+            <label for="txpx_px_recurrence_likelihood">Recurrence likelihood</label>
+            <select id="txpx_px_recurrence_likelihood" name="txpx.px_recurrence_likelihood">
+                <option value="" {% if txpx.pxRecurrenceLikelihood == "" %}selected{% endif %}>&mdash;</option>
+                <option value="very-low" {% if txpx.pxRecurrenceLikelihood == "very-low" %}selected{% endif %}>Very low</option>
+                <option value="low" {% if txpx.pxRecurrenceLikelihood == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if txpx.pxRecurrenceLikelihood == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if txpx.pxRecurrenceLikelihood == "high" %}selected{% endif %}>High</option>
+                <option value="very-high" {% if txpx.pxRecurrenceLikelihood == "very-high" %}selected{% endif %}>Very high</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_px_residual_risk">Residual risk</label>
+        <textarea id="txpx_px_residual_risk" name="txpx.px_residual_risk"
+                  rows="2">{{ txpx.pxResidualRisk }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_px_monitoring_plan">Monitoring plan</label>
+        <textarea id="txpx_px_monitoring_plan" name="txpx.px_monitoring_plan"
+                  rows="2">{{ txpx.pxMonitoringPlan }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="txpx_px_lessons_learned">Lessons learned</label>
+        <textarea id="txpx_px_lessons_learned" name="txpx.px_lessons_learned"
+                  rows="3">{{ txpx.pxLessonsLearned }}</textarea>
+    </div>
+</div>

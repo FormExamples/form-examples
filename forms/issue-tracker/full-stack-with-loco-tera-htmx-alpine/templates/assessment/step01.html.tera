@@ -1,38 +1,94 @@
-<fieldset class="step">
-  <legend>Step 1 — Reporter &amp; metadata</legend>
-  <label>Reporter name <input name="reporter_name" type="text" value="{{ data.reporter_name | default(value='') }}"></label>
-  <label>Reporter email <input name="reporter_email" type="email" value="{{ data.reporter_email | default(value='') }}"></label>
-  <label>Reporter role
-    <select name="reporter_role">
-      {% set role = data.reporter_role | default(value='') %}
-      <option value="" {% if role == '' %}selected{% endif %}>(unspecified)</option>
-      {% for r in ['engineer','sre','on-call','product-manager','project-manager','customer-success','safety-officer','compliance-officer','clinician','patient','employee','customer','other'] %}
-        <option value="{{ r }}" {% if role == r %}selected{% endif %}>{{ r }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <label>Reported at <input name="reported_at" type="datetime-local" value="{{ data.reported_at | default(value='') }}"></label>
-  <label>Discovered at <input name="discovered_at" type="datetime-local" value="{{ data.discovered_at | default(value='') }}"></label>
-  <label>Issue category
-    <select name="issue_category">
-      {% set cat = data.issue_category | default(value='') %}
-      <option value="" {% if cat == '' %}selected{% endif %}>(unspecified)</option>
-      {% for c in ['software-defect','service-outage','performance','security','data-protection','clinical-safety','workplace-safety','medical-device','regulatory','project-blocker','customer-complaint','hardware-fault','process','other'] %}
-        <option value="{{ c }}" {% if cat == c %}selected{% endif %}>{{ c }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <label>Environment
-    <select name="environment">
-      {% set env = data.environment | default(value='') %}
-      <option value="" {% if env == '' %}selected{% endif %}>(unspecified)</option>
-      {% for e in ['dev','test','staging','production','on-prem','field'] %}
-        <option value="{{ e }}" {% if env == e %}selected{% endif %}>{{ e }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <label>System name <input name="system_name" type="text" value="{{ data.system_name | default(value='') }}"></label>
-  <label>Component <input name="component" type="text" value="{{ data.component | default(value='') }}"></label>
-  <label>Customer / project tag <input name="customer_or_project_tag" type="text" value="{{ data.customer_or_project_tag | default(value='') }}"></label>
-  <label>External reference <input name="external_reference" type="text" value="{{ data.external_reference | default(value='') }}"></label>
-</fieldset>
+<div class="card">
+    <h2>Step 1: Reporter &amp; metadata</h2>
+    <p class="form-hint">Who is reporting the issue, when, where, and in which system.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporter_reporter_name">Reporter name</label>
+            <input type="text" id="reporter_reporter_name" name="reporter.reporter_name"
+                   value="{{ reporter.reporterName }}">
+        </div>
+        <div class="form-group">
+            <label for="reporter_reporter_email">Reporter email</label>
+            <input type="email" id="reporter_reporter_email" name="reporter.reporter_email"
+                   value="{{ reporter.reporterEmail }}">
+        </div>
+        <div class="form-group">
+            <label for="reporter_reporter_role">Reporter role</label>
+            <input type="text" id="reporter_reporter_role" name="reporter.reporter_role"
+                   value="{{ reporter.reporterRole }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporter_reported_at">Reported at</label>
+            <input type="datetime-local" id="reporter_reported_at" name="reporter.reported_at"
+                   value="{{ reporter.reportedAt }}">
+        </div>
+        <div class="form-group">
+            <label for="reporter_discovered_at">Discovered at</label>
+            <input type="datetime-local" id="reporter_discovered_at" name="reporter.discovered_at"
+                   value="{{ reporter.discoveredAt }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporter_issue_category">Issue category</label>
+            <select id="reporter_issue_category" name="reporter.issue_category">
+                <option value="" {% if reporter.issueCategory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="software-defect" {% if reporter.issueCategory == "software-defect" %}selected{% endif %}>Software defect</option>
+                <option value="service-outage" {% if reporter.issueCategory == "service-outage" %}selected{% endif %}>Service outage</option>
+                <option value="performance" {% if reporter.issueCategory == "performance" %}selected{% endif %}>Performance</option>
+                <option value="security" {% if reporter.issueCategory == "security" %}selected{% endif %}>Security</option>
+                <option value="data-protection" {% if reporter.issueCategory == "data-protection" %}selected{% endif %}>Data protection</option>
+                <option value="clinical-safety" {% if reporter.issueCategory == "clinical-safety" %}selected{% endif %}>Clinical safety</option>
+                <option value="workplace-safety" {% if reporter.issueCategory == "workplace-safety" %}selected{% endif %}>Workplace safety</option>
+                <option value="medical-device" {% if reporter.issueCategory == "medical-device" %}selected{% endif %}>Medical device</option>
+                <option value="regulatory" {% if reporter.issueCategory == "regulatory" %}selected{% endif %}>Regulatory</option>
+                <option value="project-blocker" {% if reporter.issueCategory == "project-blocker" %}selected{% endif %}>Project blocker</option>
+                <option value="customer-complaint" {% if reporter.issueCategory == "customer-complaint" %}selected{% endif %}>Customer complaint</option>
+                <option value="hardware-fault" {% if reporter.issueCategory == "hardware-fault" %}selected{% endif %}>Hardware fault</option>
+                <option value="process" {% if reporter.issueCategory == "process" %}selected{% endif %}>Process</option>
+                <option value="other" {% if reporter.issueCategory == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reporter_environment">Environment</label>
+            <select id="reporter_environment" name="reporter.environment">
+                <option value="" {% if reporter.environment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="dev" {% if reporter.environment == "dev" %}selected{% endif %}>Dev</option>
+                <option value="test" {% if reporter.environment == "test" %}selected{% endif %}>Test</option>
+                <option value="staging" {% if reporter.environment == "staging" %}selected{% endif %}>Staging</option>
+                <option value="production" {% if reporter.environment == "production" %}selected{% endif %}>Production</option>
+                <option value="on-prem" {% if reporter.environment == "on-prem" %}selected{% endif %}>On-prem</option>
+                <option value="field" {% if reporter.environment == "field" %}selected{% endif %}>Field</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="reporter_system_name">System name</label>
+            <input type="text" id="reporter_system_name" name="reporter.system_name"
+                   value="{{ reporter.systemName }}">
+        </div>
+        <div class="form-group">
+            <label for="reporter_component">Component</label>
+            <input type="text" id="reporter_component" name="reporter.component"
+                   value="{{ reporter.component }}">
+        </div>
+        <div class="form-group">
+            <label for="reporter_customer_or_project_tag">Customer / project tag</label>
+            <input type="text" id="reporter_customer_or_project_tag" name="reporter.customer_or_project_tag"
+                   value="{{ reporter.customerOrProjectTag }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reporter_external_reference">External reference</label>
+        <input type="text" id="reporter_external_reference" name="reporter.external_reference"
+               value="{{ reporter.externalReference }}" placeholder="ticket, incident, change request, LFPSE / RIDDOR ID">
+    </div>
+</div>

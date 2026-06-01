@@ -1,15 +1,18 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Issue {{ id | default(value="new") }} — Issue Tracker{% endblock %}
+{% block title %}Issue Tracker - Issue{% endblock %}
 
 {% block content %}
-<article class="assessment" x-data="{ section: 1 }">
+<div class="assessment-header">
+    <h1>Issue Tracker</h1>
+    <p class="form-hint">
+        Complete all 10 steps (Reporter, Chief complaint, Participants, Symptoms,
+        Fractures, History, Investigations, Diagnosis, Treatments &amp; prognosis,
+        Score &amp; sign-off) and submit to grade the issue.
+    </p>
+</div>
 
-  <h2>Report an issue</h2>
-  <p class="muted">Single-page wizard. Each section corresponds to one row in the SOAP-style assessment table. The seven scoring scales feed the composite priority on submit.</p>
-
-  <form method="POST" action="/issue-tracker/{{ id | default(value='new') }}/submit" class="wizard">
-
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
     {% include "assessment/step01.html.tera" %}
     {% include "assessment/step02.html.tera" %}
     {% include "assessment/step03.html.tera" %}
@@ -21,12 +24,8 @@
     {% include "assessment/step09.html.tera" %}
     {% include "assessment/step10.html.tera" %}
 
-    <div class="actions">
-      <button type="submit">Grade and submit</button>
-      <button type="reset">Reset</button>
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Grade Issue</button>
     </div>
-
-  </form>
-
-</article>
+</form>
 {% endblock %}
