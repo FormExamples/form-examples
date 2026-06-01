@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Blood Donation Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Blood Donation Assessment</h1>
+        <p class="landing-description">
+            JPAC Donor Selection Guidelines (UK NHSBT) eligibility screening. Completed by the
+            donor at registration and reviewed by the donor-session clinician. The output is a
+            timestamped eligibility decision: <strong>Eligible</strong>,
+            <strong>Temporarily Deferred</strong>, or <strong>Permanently Deferred</strong>.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>10 Steps</h3>
+                <p>Demographics, health, history, illness, travel, lifestyle, pregnancy, vitals, consent, donation plan</p>
+            </div>
+            <div class="feature">
+                <h3>JPAC DSG Rules</h3>
+                <p>Automated evaluation against the JPAC Donor Selection Guidelines used by UK NHSBT</p>
+            </div>
+            <div class="feature">
+                <h3>Clinician Flags</h3>
+                <p>Urgent alerts for vCJD risk, transfusion-transmissible infection, vital-sign breaches and consent gaps</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

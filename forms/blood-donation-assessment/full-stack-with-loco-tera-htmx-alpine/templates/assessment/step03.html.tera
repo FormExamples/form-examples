@@ -1,0 +1,47 @@
+<div class="card">
+    <h2>Step 3: Medical History</h2>
+    <p class="form-hint">Chronic conditions, infections, vCJD risk factors and current medications.</p>
+
+    {% set yesno = [
+        ["heart_or_circulatory_disease", "heartOrCirculatoryDisease", "Heart or circulatory disease?"],
+        ["cancer", "cancer", "Active or recent malignancy?"],
+        ["bleeding_or_clotting_disorder", "bleedingOrClottingDisorder", "Bleeding or clotting disorder?"],
+        ["diabetes_on_insulin", "diabetesOnInsulin", "Insulin-treated diabetes?"],
+        ["epilepsy_or_seizures", "epilepsyOrSeizures", "Epilepsy or history of seizures?"],
+        ["hiv_positive", "hivPositive", "HIV positive?"],
+        ["hepatitis_b_or_c", "hepatitisBOrC", "Hepatitis B or C history?"],
+        ["htlv", "htlv", "HTLV positive?"],
+        ["cjd_family_history", "cjdFamilyHistory", "Family history of CJD?"],
+        ["received_pituitary_hormone", "receivedPituitaryHormone", "Received human pituitary hormone?"],
+        ["received_dura_mater_graft", "receivedDuraMaterGraft", "Received a dura mater graft?"]
+    ] %}
+
+    {% for q in yesno %}
+    <div class="form-group">
+        <label for="{{ q[0] }}">{{ q[2] }}</label>
+        <select id="{{ q[0] }}" name="medical_history.{{ q[0] }}">
+            <option value="" {% if medical_history[q[1]] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if medical_history[q[1]] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if medical_history[q[1]] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <h3>Current Medications</h3>
+    <p class="form-hint">List up to 5 medications you take regularly.</p>
+    {% for i in range(end=5) %}
+    {% set existing = medical_history.currentMedications | nth(n=i) %}
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medication_name_{{ i }}">Medication {{ i + 1 }}</label>
+            <input type="text" id="medication_name_{{ i }}" name="medications[{{ i }}].name"
+                   value="{% if existing %}{{ existing.name }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="medication_reason_{{ i }}">Reason</label>
+            <input type="text" id="medication_reason_{{ i }}" name="medications[{{ i }}].reason"
+                   value="{% if existing %}{{ existing.reason }}{% endif %}">
+        </div>
+    </div>
+    {% endfor %}
+</div>

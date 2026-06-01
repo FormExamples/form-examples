@@ -1,0 +1,45 @@
+<div class="card">
+    <h2>Step 5: Travel History</h2>
+    <p class="form-hint">Malaria, West Nile virus, vCJD-risk UK residence, transfusion abroad.</p>
+
+    {% set yesno = [
+        ["malaria_area_past_twelve_months", "malariaAreaPastTwelveMonths", "Travel to a malaria-risk area in the past 12 months?"],
+        ["west_nile_virus_area_past_twenty_eight_days", "westNileVirusAreaPastTwentyEightDays", "Travel to a West Nile virus area in the past 28 days?"],
+        ["uk_residence_1980_to_1996_over_12_months", "ukResidence1980To1996Over12Months", "Cumulative UK residence ≥ 12 months between 1980 and 1996?"],
+        ["blood_transfusion_in_uk", "bloodTransfusionInUk", "Received a blood transfusion in the UK since 1980?"]
+    ] %}
+
+    {% for q in yesno %}
+    <div class="form-group">
+        <label for="{{ q[0] }}">{{ q[2] }}</label>
+        <select id="{{ q[0] }}" name="travel_history.{{ q[0] }}">
+            <option value="" {% if travel_history[q[1]] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if travel_history[q[1]] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if travel_history[q[1]] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <h3>Recent Travel Itinerary</h3>
+    <p class="form-hint">List up to 5 trips outside your country of residence in the past 12 months.</p>
+    {% for i in range(end=5) %}
+    {% set existing = travel_history.recentTravel | nth(n=i) %}
+    <div class="form-row">
+        <div class="form-group">
+            <label for="travel_country_{{ i }}">Country {{ i + 1 }}</label>
+            <input type="text" id="travel_country_{{ i }}" name="recent_travel[{{ i }}].country"
+                   value="{% if existing %}{{ existing.country }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="travel_return_date_{{ i }}">Return Date</label>
+            <input type="date" id="travel_return_date_{{ i }}" name="recent_travel[{{ i }}].return_date"
+                   value="{% if existing %}{{ existing.returnDate }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="travel_duration_{{ i }}">Duration</label>
+            <input type="text" id="travel_duration_{{ i }}" name="recent_travel[{{ i }}].duration"
+                   value="{% if existing %}{{ existing.duration }}{% endif %}">
+        </div>
+    </div>
+    {% endfor %}
+</div>

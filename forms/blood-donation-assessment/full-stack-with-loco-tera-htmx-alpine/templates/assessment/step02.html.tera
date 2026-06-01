@@ -1,0 +1,40 @@
+<div class="card">
+    <h2>Step 2: General Health &amp; Wellbeing</h2>
+    <p class="form-hint">Same-day wellbeing checks.</p>
+
+    <div class="form-group">
+        <label for="feeling_well_today">Are you feeling well today?</label>
+        <select id="feeling_well_today" name="general_health.feeling_well_today">
+            <option value="" {% if general_health.feelingWellToday == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if general_health.feelingWellToday == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if general_health.feelingWellToday == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="adequate_sleep">Did you sleep adequately last night?</label>
+        <select id="adequate_sleep" name="general_health.adequate_sleep">
+            <option value="" {% if general_health.adequateSleep == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if general_health.adequateSleep == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if general_health.adequateSleep == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="adequate_meal_and_fluids">Have you eaten and drunk adequately today?</label>
+        <select id="adequate_meal_and_fluids" name="general_health.adequate_meal_and_fluids">
+            <option value="" {% if general_health.adequateMealAndFluids == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if general_health.adequateMealAndFluids == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if general_health.adequateMealAndFluids == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="feeling_faint_or_unwell">Are you currently feeling faint or unwell?</label>
+        <select id="feeling_faint_or_unwell" name="general_health.feeling_faint_or_unwell">
+            <option value="" {% if general_health.feelingFaintOrUnwell == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if general_health.feelingFaintOrUnwell == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if general_health.feelingFaintOrUnwell == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+</div>

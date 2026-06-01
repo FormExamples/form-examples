@@ -1,0 +1,32 @@
+<div class="card">
+    <h2>Step 10: Donation Plan</h2>
+    <p class="form-hint">Planned donation type and preferred session.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="planned_donation_type">Donation Type</label>
+            <select id="planned_donation_type" name="donation_plan.planned_donation_type">
+                <option value="" {% if donation_plan.plannedDonationType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="whole-blood" {% if donation_plan.plannedDonationType == "whole-blood" %}selected{% endif %}>Whole Blood</option>
+                <option value="plasma" {% if donation_plan.plannedDonationType == "plasma" %}selected{% endif %}>Plasma</option>
+                <option value="platelets" {% if donation_plan.plannedDonationType == "platelets" %}selected{% endif %}>Platelets</option>
+                <option value="red-cells" {% if donation_plan.plannedDonationType == "red-cells" %}selected{% endif %}>Red Cells</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="preferred_donation_date">Preferred Donation Date</label>
+            <input type="date" id="preferred_donation_date" name="donation_plan.preferred_donation_date"
+                   value="{{ donation_plan.preferredDonationDate }}">
+        </div>
+        <div class="form-group">
+            <label for="session">Session</label>
+            <input type="text" id="session" name="donation_plan.session"
+                   value="{{ donation_plan.session }}" placeholder="e.g. Morning / Afternoon">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Notes for the clinician</label>
+        <textarea id="notes" name="donation_plan.notes" rows="3">{{ donation_plan.notes }}</textarea>
+    </div>
+</div>

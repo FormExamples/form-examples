@@ -1,0 +1,22 @@
+<div class="card">
+    <h2>Step 9: Informed Consent</h2>
+    <p class="form-hint">Required acknowledgements before the donation can proceed.</p>
+
+    {% set yesno = [
+        ["understood_information", "understoodInformation", "I have understood the donation information."],
+        ["consent_to_donate", "consentToDonate", "I consent to donating blood today."],
+        ["consent_to_testing", "consentToTesting", "I consent to the mandatory infection-screening tests."],
+        ["consent_to_contact", "consentToContact", "I consent to be contacted about future donation sessions."]
+    ] %}
+
+    {% for q in yesno %}
+    <div class="form-group">
+        <label for="{{ q[0] }}">{{ q[2] }}</label>
+        <select id="{{ q[0] }}" name="informed_consent.{{ q[0] }}">
+            <option value="" {% if informed_consent[q[1]] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if informed_consent[q[1]] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if informed_consent[q[1]] == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+</div>

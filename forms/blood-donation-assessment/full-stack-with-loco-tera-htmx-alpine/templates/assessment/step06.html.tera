@@ -1,0 +1,27 @@
+<div class="card">
+    <h2>Step 6: Lifestyle &amp; Risk Behaviours</h2>
+    <p class="form-hint">JPAC individual donor risk assessment (IDRA) items.</p>
+
+    {% set yesno = [
+        ["iv_drug_use_ever", "ivDrugUseEver", "Have you ever injected drugs not prescribed to you?"],
+        ["sex_with_iv_drug_user", "sexWithIvDrugUser", "Sex with someone who has injected drugs?"],
+        ["sex_in_exchange_past_twelve_months", "sexInExchangePastTwelveMonths", "Sex in exchange for money/drugs in the past 12 months?"],
+        ["sex_with_new_partner_past_three_months", "sexWithNewPartnerPastThreeMonths", "Sex with a new partner in the past 3 months?"],
+        ["multiple_sexual_partners_past_three_months", "multipleSexualPartnersPastThreeMonths", "Multiple sexual partners in the past 3 months?"],
+        ["tattoo_or_piercing_past_four_months", "tattooOrPiercingPastFourMonths", "Tattoo or semi-permanent make-up in the past 4 months?"],
+        ["acupuncture_past_four_months", "acupuncturePastFourMonths", "Non-NHS acupuncture in the past 4 months?"],
+        ["body_or_ear_piercing_past_four_months", "bodyOrEarPiercingPastFourMonths", "Body or ear piercing in the past 4 months?"],
+        ["incarcerated_past_twelve_months", "incarceratedPastTwelveMonths", "Incarcerated in the past 12 months?"]
+    ] %}
+
+    {% for q in yesno %}
+    <div class="form-group">
+        <label for="{{ q[0] }}">{{ q[2] }}</label>
+        <select id="{{ q[0] }}" name="lifestyle_risk.{{ q[0] }}">
+            <option value="" {% if lifestyle_risk[q[1]] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if lifestyle_risk[q[1]] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if lifestyle_risk[q[1]] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+</div>

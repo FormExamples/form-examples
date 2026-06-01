@@ -1,0 +1,35 @@
+<div class="card">
+    <h2>Step 8: Vital Signs</h2>
+    <p class="form-hint">Recorded by the donor-session nurse before draw.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hemoglobin">Haemoglobin (g/dL)</label>
+            <input type="number" step="0.1" id="hemoglobin" name="vital_signs.hemoglobin"
+                   value="{{ vital_signs.hemoglobin }}" placeholder="Min 13.5 men / 12.5 women">
+        </div>
+        <div class="form-group">
+            <label for="temperature_celsius">Temperature (°C)</label>
+            <input type="number" step="0.1" id="temperature_celsius" name="vital_signs.temperature_celsius"
+                   value="{{ vital_signs.temperatureCelsius }}" placeholder="Must be ≤ 37.5">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="systolic_bp">Systolic BP (mmHg)</label>
+            <input type="number" id="systolic_bp" name="vital_signs.systolic_bp"
+                   value="{{ vital_signs.systolicBp }}" placeholder="100–180">
+        </div>
+        <div class="form-group">
+            <label for="diastolic_bp">Diastolic BP (mmHg)</label>
+            <input type="number" id="diastolic_bp" name="vital_signs.diastolic_bp"
+                   value="{{ vital_signs.diastolicBp }}" placeholder="60–100">
+        </div>
+        <div class="form-group">
+            <label for="pulse_bpm">Pulse (bpm)</label>
+            <input type="number" id="pulse_bpm" name="vital_signs.pulse_bpm"
+                   value="{{ vital_signs.pulseBpm }}" placeholder="50–100">
+        </div>
+    </div>
+</div>
