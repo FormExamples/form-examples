@@ -1,0 +1,5 @@
+<!-- Step 16 — Reassessment -->
+<div x-show="step === 16" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 16: Reassessment</h2>
+  <p style="color:#666;">Repeat vital signs and condition status are captured in the SvelteKit form.</p>
+</div>

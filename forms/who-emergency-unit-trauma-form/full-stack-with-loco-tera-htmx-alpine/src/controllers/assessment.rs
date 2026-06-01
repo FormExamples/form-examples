@@ -7,80 +7,61 @@
 //! - `GET  /assessment/{id}`           → single-page wizard
 //! - `POST /assessment/{id}/submit`    → save form data, redirect to report
 //! - `GET  /assessment/{id}/report`    → render validated report
+//!
+//! The form is submitted as `application/x-www-form-urlencoded` (one flat
+//! map). `form_to_assessment_data` maps the camelCase form field names onto
+//! the strongly-typed `AssessmentData`.
 
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
 use crate::engine::types::AssessmentData;
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
 use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
-    let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+/// POST /assessment/new -- create a new draft assessment, redirect to the wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
-}
-
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
+
     let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
-    }
-    Redirect::to(&format!("/assessment/{id}/report"))
-}
-
-/// GET /assessment/{id}/report — render the validated report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
-}
-
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
+/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto the
 /// strongly-typed `AssessmentData`. Unknown / blank fields fall back to
 /// defaults. Field names mirror the camelCase JSON form used by the
 /// SvelteKit front-end.
@@ -277,26 +258,88 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data
 }
 
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
-        }
-    }
+/// POST /assessment/{id}/submit -- replace the JSONB blob with the new
+/// form data and redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form): axum::extract::Form<HashMap<String, String>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data = form_to_assessment_data(&form);
+    let data_value =
+        serde_json::to_value(&data).map_err(|e| Error::BadRequest(format!("Encode error: {e}")))?;
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_value);
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
 }
 
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+/// GET /assessment/{id}/report -- run the engine, persist the result,
+/// render the report template.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let assessment_data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let (context, result) = build_report_context(&assessment_data, id);
+
+    let result_json =
+        serde_json::to_value(&result).map_err(|e| Error::BadRequest(format!("Encode: {e}")))?;
+    let mut active: ActiveModel = item.into_active_model();
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
+    let context = Context::new();
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

@@ -1,0 +1,31 @@
+<!-- Step 6 — Breathing -->
+<div x-show="step === 6" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 6: Breathing (B)</h2>
+  <label><input type="checkbox" name="breathingNormal" value="on" {% if data.breathing.normal %}checked{% endif %}> Normal</label><br>
+  <label><input type="checkbox" name="breathingCyanosis" value="on" {% if data.breathing.cyanosis %}checked{% endif %}> Cyanosis</label>
+  <div style="margin-top:0.6rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px;">
+      <label>Spontaneous RR (/min)</label>
+      <input type="number" name="breathingSpontaneousRespiratoryRate"
+             value="{{ data.breathing.spontaneousRespiratoryRate | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:140px;">
+      <label>Oxygen (L/min)</label>
+      <input type="number" step="any" name="breathingOxygenLitres"
+             value="{{ data.breathing.oxygenLitres | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <h3 style="margin-top:0.8rem;">Oxygen delivery</h3>
+  <label><input type="checkbox" name="breathingOxygenNasalCannula" value="on" {% if data.breathing.oxygenNasalCannula %}checked{% endif %}> Nasal cannula</label><br>
+  <label><input type="checkbox" name="breathingOxygenMask" value="on" {% if data.breathing.oxygenMask %}checked{% endif %}> Mask</label><br>
+  <label><input type="checkbox" name="breathingOxygenNonRebreather" value="on" {% if data.breathing.oxygenNonRebreather %}checked{% endif %}> Non-rebreather</label><br>
+  <label><input type="checkbox" name="breathingOxygenBvm" value="on" {% if data.breathing.oxygenBvm %}checked{% endif %}> BVM</label><br>
+  <label><input type="checkbox" name="breathingOxygenCpapBipap" value="on" {% if data.breathing.oxygenCpapBipap %}checked{% endif %}> CPAP / BiPAP</label><br>
+  <label><input type="checkbox" name="breathingOxygenVentilator" value="on" {% if data.breathing.oxygenVentilator %}checked{% endif %}> Ventilator</label>
+  <div style="margin-top:0.6rem;">
+    <label>Notes</label>
+    <textarea name="breathingNotes" rows="2" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.breathing.notes }}</textarea>
+  </div>
+</div>

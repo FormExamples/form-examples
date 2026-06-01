@@ -1,0 +1,60 @@
+{% extends "base.html.tera" %}
+
+{% block title %}WHO Emergency Unit (Trauma) - Wizard{% endblock %}
+
+{% block content %}
+<div style="max-width:880px;margin:2rem auto;padding:1rem;" x-data="{ step: 1, totalSteps: {{ total_steps }} }">
+  <h1>WHO Emergency Unit Form: Trauma</h1>
+  <p style="color:#555;">Complete all {{ total_steps }} steps, then submit.</p>
+
+  <!-- Progress -->
+  <div style="margin-bottom:1.5rem;">
+    <span x-text="`Step ${step} of ${totalSteps}`" style="font-weight:bold;"></span>
+    <div style="background:#eee;height:8px;border-radius:4px;margin-top:0.4rem;">
+      <div :style="`width:${(step/totalSteps)*100}%;background:#0070f3;height:100%;border-radius:4px;transition:width 0.3s;`"></div>
+    </div>
+  </div>
+
+  <form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+    {% include "assessment/step11.html.tera" %}
+    {% include "assessment/step12.html.tera" %}
+    {% include "assessment/step13.html.tera" %}
+    {% include "assessment/step14.html.tera" %}
+    {% include "assessment/step15.html.tera" %}
+    {% include "assessment/step16.html.tera" %}
+    {% include "assessment/step17.html.tera" %}
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+      <button type="button" x-show="step > 1" @click="step--"
+              style="padding:0.5rem 1.2rem;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;">
+        Previous
+      </button>
+      <span></span>
+      <button type="button" x-show="step < totalSteps" @click="step++"
+              style="padding:0.5rem 1.2rem;border:1px solid #0070f3;background:#0070f3;color:#fff;border-radius:4px;cursor:pointer;">
+        Next
+      </button>
+      <button type="submit" x-show="step === totalSteps"
+              style="padding:0.5rem 1.2rem;border:1px solid #080;background:#080;color:#fff;border-radius:4px;cursor:pointer;">
+        Submit Assessment
+      </button>
+    </div>
+  </form>
+
+  <p style="margin-top:1rem;">
+    <a href="/" style="color:#0070f3;">Cancel and return to home</a>
+  </p>
+</div>
+{% endblock %}

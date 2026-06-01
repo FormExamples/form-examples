@@ -3,11 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{% block title %}{{ form_title | default(value="Form") }}{% endblock %}</title>
+  <title>{% block title %}WHO Emergency Unit Form: Trauma{% endblock %}</title>
   <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
 <body hx-boost="true">
-  {% block content %}{% endblock %}
+  <header style="border-bottom:1px solid #ddd;padding:0.8rem 1.2rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:auto;">
+      <a href="/" style="font-weight:bold;color:#0070f3;text-decoration:none;">WHO Emergency Unit Form: Trauma</a>
+      <nav>
+        <a href="/" style="margin-right:0.8rem;">Home</a>
+        <a href="/dashboard">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer style="border-top:1px solid #ddd;padding:0.8rem 1.2rem;margin-top:2rem;font-size:0.85rem;color:#555;">
+    <div style="max-width:1100px;margin:auto;">
+      <p>WHO Emergency Unit Form: Trauma &mdash; standardised clinical documentation for emergency unit trauma encounters. Process-adherence record; not clinical decision support.</p>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
 </body>
 </html>

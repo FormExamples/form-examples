@@ -1,0 +1,80 @@
+<!-- Step 17 — Disposition -->
+<div x-show="step === 17" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 17: Disposition</h2>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:160px;">
+      <label>ED departure date</label>
+      <input type="date" name="edDepartureDate" value="{{ data.disposition.edDepartureDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>ED departure time</label>
+      <input type="time" name="edDepartureTime" value="{{ data.disposition.edDepartureTime }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Diagnoses / Impressions</label>
+    <textarea name="diagnosesImpressions" rows="3" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.disposition.diagnosesImpressions }}</textarea>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:1;min-width:160px;">
+      <label>Disposition</label>
+      <select name="disposition" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        <option value=""          {% if data.disposition.disposition == "" %}selected{% endif %}>-- Select --</option>
+        <option value="admit"     {% if data.disposition.disposition == "admit" %}selected{% endif %}>Admit</option>
+        <option value="transfer"  {% if data.disposition.disposition == "transfer" %}selected{% endif %}>Transfer</option>
+        <option value="discharge" {% if data.disposition.disposition == "discharge" %}selected{% endif %}>Discharge</option>
+        <option value="died"      {% if data.disposition.disposition == "died" %}selected{% endif %}>Died</option>
+      </select>
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Admit ward (if Admit)</label>
+      <select name="admitWard" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        <option value=""     {% if data.disposition.admitWard == "" %}selected{% endif %}>-- Select --</option>
+        <option value="ward" {% if data.disposition.admitWard == "ward" %}selected{% endif %}>Ward</option>
+        <option value="icu"  {% if data.disposition.admitWard == "icu" %}selected{% endif %}>ICU</option>
+        <option value="ot"   {% if data.disposition.admitWard == "ot" %}selected{% endif %}>OT</option>
+      </select>
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Discharge plan discussed</label>
+      <select name="dischargePlanDiscussed" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+        <option value=""    {% if data.disposition.dischargePlanDiscussed == "" %}selected{% endif %}>-- Select --</option>
+        <option value="yes" {% if data.disposition.dischargePlanDiscussed == "yes" %}selected{% endif %}>Yes</option>
+        <option value="no"  {% if data.disposition.dischargePlanDiscussed == "no" %}selected{% endif %}>No</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Transfer destination (if Transfer)</label>
+    <input type="text" name="transferTo" value="{{ data.disposition.transferTo }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Cause of death (if Died — NOT cardiopulmonary arrest)</label>
+    <input type="text" name="diedCause" value="{{ data.disposition.diedCause }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <label style="display:block;margin-top:0.4rem;">
+    <input type="checkbox" name="leftWithoutBeingSeen" value="on" {% if data.disposition.leftWithoutBeingSeen %}checked{% endif %}>
+    Left without being seen
+  </label>
+  <div style="margin-top:0.6rem;">
+    <label>Emergency unit provider</label>
+    <input type="text" name="emergencyUnitProvider" value="{{ data.disposition.emergencyUnitProvider }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:1;min-width:160px;">
+      <label>Signature</label>
+      <input type="text" name="signature" value="{{ data.disposition.signature }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Signature date</label>
+      <input type="date" name="signatureDate" value="{{ data.disposition.signatureDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- Step 3 — High Risk Signs -->
+<div x-show="step === 3" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 3: High Risk Signs</h2>
+  <p style="color:#666;">Tick any RED signs and trauma indicators present.</p>
+  <fieldset style="border:1px solid #eee;border-radius:4px;padding:0.6rem;margin-bottom:0.6rem;">
+    <legend>RED signs</legend>
+    <label><input type="checkbox" name="redStridor" value="on" {% if data.highRiskSigns.redStridor %}checked{% endif %}> Stridor</label><br>
+    <label><input type="checkbox" name="redCyanosis" value="on" {% if data.highRiskSigns.redCyanosis %}checked{% endif %}> Cyanosis</label><br>
+    <label><input type="checkbox" name="redRespiratoryDistress" value="on" {% if data.highRiskSigns.redRespiratoryDistress %}checked{% endif %}> Respiratory distress</label><br>
+    <label><input type="checkbox" name="redPoorPerfusion" value="on" {% if data.highRiskSigns.redPoorPerfusion %}checked{% endif %}> Poor perfusion</label><br>
+    <label><input type="checkbox" name="redHeavyBleeding" value="on" {% if data.highRiskSigns.redHeavyBleeding %}checked{% endif %}> Heavy bleeding</label><br>
+    <label><input type="checkbox" name="redUnresponsive" value="on" {% if data.highRiskSigns.redUnresponsive %}checked{% endif %}> Unresponsive</label>
+  </fieldset>
+  <fieldset style="border:1px solid #eee;border-radius:4px;padding:0.6rem;margin-bottom:0.6rem;">
+    <legend>Trauma indicators</legend>
+    <label><input type="checkbox" name="traumaPolytrauma" value="on" {% if data.highRiskSigns.traumaPolytrauma %}checked{% endif %}> Polytrauma</label><br>
+    <label><input type="checkbox" name="traumaAllPenetrating" value="on" {% if data.highRiskSigns.traumaAllPenetrating %}checked{% endif %}> Penetrating trauma</label><br>
+    <label><input type="checkbox" name="traumaCrushInjury" value="on" {% if data.highRiskSigns.traumaCrushInjury %}checked{% endif %}> Crush injury</label><br>
+    <label><input type="checkbox" name="traumaBleedingDisorderOrAnticoag" value="on" {% if data.highRiskSigns.traumaBleedingDisorderOrAnticoag %}checked{% endif %}> Bleeding disorder / anticoagulation</label><br>
+    <label><input type="checkbox" name="traumaPregnant" value="on" {% if data.highRiskSigns.traumaPregnant %}checked{% endif %}> Pregnant trauma patient</label>
+  </fieldset>
+  <fieldset style="border:1px solid #eee;border-radius:4px;padding:0.6rem;">
+    <legend>Road traffic</legend>
+    <label><input type="checkbox" name="rtHighSpeedCrash" value="on" {% if data.highRiskSigns.rtHighSpeedCrash %}checked{% endif %}> High-speed crash</label><br>
+    <label><input type="checkbox" name="rtPedestrianOrCyclistHit" value="on" {% if data.highRiskSigns.rtPedestrianOrCyclistHit %}checked{% endif %}> Pedestrian / cyclist hit by vehicle</label>
+  </fieldset>
+</div>

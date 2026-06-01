@@ -1,0 +1,5 @@
+<!-- Step 14 — Diagnostics -->
+<div x-show="step === 14" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 14: Diagnostics</h2>
+  <p style="color:#666;">Order labs (Hgb, Blood Type, Chemistry, Hepatic, UPT) and imaging (CXR, Pelvis XR, Head CT, C-spine, Chest/Abdomen CT, Extremity XR) as clinically indicated. Detailed entry is captured in the SvelteKit form.</p>
+</div>

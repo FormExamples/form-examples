@@ -77,6 +77,9 @@
     <a href="/assessment/{{ id }}" style="padding:0.5rem 1.2rem;border:1px solid #0070f3;color:#0070f3;border-radius:4px;text-decoration:none;">
       Edit Assessment
     </a>
+    <a href="/dashboard" style="padding:0.5rem 1.2rem;border:1px solid #ccc;color:#333;border-radius:4px;text-decoration:none;">
+      Dashboard
+    </a>
     <a href="/" style="padding:0.5rem 1.2rem;border:1px solid #ccc;color:#333;border-radius:4px;text-decoration:none;">
       Home
     </a>

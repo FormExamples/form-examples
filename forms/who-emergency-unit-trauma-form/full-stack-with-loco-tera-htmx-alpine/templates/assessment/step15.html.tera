@@ -1,0 +1,5 @@
+<!-- Step 15 — Medications & Procedures -->
+<div x-show="step === 15" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 15: Medications &amp; Procedures</h2>
+  <p style="color:#666;">Timed medication entries and procedure log are captured in the SvelteKit form.</p>
+</div>

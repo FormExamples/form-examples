@@ -1,0 +1,55 @@
+<!-- Step 8 — Disability -->
+<div x-show="step === 8" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 8: Disability (D)</h2>
+  <div>
+    <label>AVPU</label>
+    <select name="avpu" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value=""  {% if data.disability.avpu == "" %}selected{% endif %}>-- Select --</option>
+      <option value="A" {% if data.disability.avpu == "A" %}selected{% endif %}>A — Alert</option>
+      <option value="V" {% if data.disability.avpu == "V" %}selected{% endif %}>V — Verbal</option>
+      <option value="P" {% if data.disability.avpu == "P" %}selected{% endif %}>P — Pain</option>
+      <option value="U" {% if data.disability.avpu == "U" %}selected{% endif %}>U — Unresponsive</option>
+    </select>
+  </div>
+  <div style="margin-top:0.6rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:120px;">
+      <label>GCS total</label>
+      <input type="number" min="3" max="15" name="gcsTotal"
+             value="{{ data.disability.gcsTotal | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>GCS Eye</label>
+      <input type="number" min="1" max="4" name="gcsEye"
+             value="{{ data.disability.gcsEye | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>GCS Verbal</label>
+      <input type="number" min="1" max="5" name="gcsVerbal"
+             value="{{ data.disability.gcsVerbal | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>GCS Motor</label>
+      <input type="number" min="1" max="6" name="gcsMotor"
+             value="{{ data.disability.gcsMotor | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <label style="display:block;margin-top:0.4rem;">
+    <input type="checkbox" name="gcsQualified" value="on" {% if data.disability.gcsQualified %}checked{% endif %}>
+    GCS qualified (sedated / intubated / vision obstructed)
+  </label>
+  <div style="margin-top:0.6rem;">
+    <label>Blood glucose (mg/dL)</label>
+    <input type="number" step="any" name="bloodGlucose"
+           value="{{ data.disability.bloodGlucose | default(value='') }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <label style="display:block;margin-top:0.4rem;"><input type="checkbox" name="disabilityInterventionGlucose" value="on" {% if data.disability.interventionGlucose %}checked{% endif %}> Glucose given</label>
+  <div style="margin-top:0.6rem;">
+    <label>Notes</label>
+    <textarea name="disabilityNotes" rows="2" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.disability.notes }}</textarea>
+  </div>
+</div>

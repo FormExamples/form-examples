@@ -1,0 +1,81 @@
+<!-- Step 2 — Chief Complaint & Vitals -->
+<div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 2: Chief Complaint &amp; Vitals</h2>
+  <div>
+    <label>Chief complaint</label>
+    <textarea name="chiefComplaint" rows="2" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.chiefComplaintAndVitals.chiefComplaint }}</textarea>
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Allergies</label>
+    <input type="text" name="allergies" value="{{ data.chiefComplaintAndVitals.allergies }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    <label style="display:block;margin-top:0.3rem;">
+      <input type="checkbox" name="allergiesUnknown" value="on"
+             {% if data.chiefComplaintAndVitals.allergiesUnknown %}checked{% endif %}>
+      Unknown
+    </label>
+  </div>
+  <div style="margin-top:0.6rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px;">
+      <label>Vitals time (24h)</label>
+      <input type="time" name="initialVitalsTime" value="{{ data.chiefComplaintAndVitals.initialVitals.time }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>Temp (C)</label>
+      <input type="number" step="0.1" name="initialTempC"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.tempC | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>Pulse (bpm)</label>
+      <input type="number" name="initialPulse"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.pulse | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>RR (/min)</label>
+      <input type="number" name="initialRespiratoryRate"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.respiratoryRate | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="margin-top:0.6rem;display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px;">
+      <label>SBP (mmHg)</label>
+      <input type="number" name="initialBpSystolic"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.bpSystolic | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:140px;">
+      <label>DBP (mmHg)</label>
+      <input type="number" name="initialBpDiastolic"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.bpDiastolic | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>SpO2 (%)</label>
+      <input type="number" name="initialSpo2"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.spo2 | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>Pain score (0-10)</label>
+      <input type="number" min="0" max="10" name="initialPainScore"
+             value="{{ data.chiefComplaintAndVitals.initialVitals.painScore | default(value='') }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>
+      <input type="checkbox" name="deadOnArrival" value="on"
+             {% if data.chiefComplaintAndVitals.deadOnArrival %}checked{% endif %}>
+      Dead on arrival
+    </label>
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Time of death (if DOA)</label>
+    <input type="time" name="timeOfDeath" value="{{ data.chiefComplaintAndVitals.timeOfDeath }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+</div>
