@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Plastic Surgery Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Plastic Surgery Assessment</h1>
+        <p class="landing-description">
+            Structured clinical assessment for reconstructive and aesthetic
+            surgery candidates. Combines ASA Physical Status (I-V), wound
+            classification (Clean / Clean-Contaminated / Contaminated / Dirty),
+            and surgical complexity scoring (1-4) into an overall risk band
+            (low / moderate / high / critical) with clinician-facing safety
+            flags for body dysmorphic concern, difficult airway, malignant
+            hyperthermia, anaphylaxis, and more.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Demographics, referral, medical history, condition, wound, psychology, anaesthetic, photography, medications, procedure planning</p>
+            </div>
+            <div class="feature">
+                <h3>Three Classifications</h3>
+                <p>ASA class, wound class, and surgical complexity score reduced to a single overall risk band</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for body dysmorphia, difficult airway, malignant hyperthermia, dirty wound, anaphylaxis, anticoagulants</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

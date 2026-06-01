@@ -1,0 +1,87 @@
+<div class="card">
+    <h2>Step 4: Current Condition Assessment</h2>
+    <p class="form-hint">Lesion dimensions, tissue loss, functional and pain impact.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_category">Condition Category</label>
+            <input type="text" id="condition_category" name="current_condition.condition_category"
+                   value="{{ current_condition.conditionCategory }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="condition_description">Condition Description</label>
+        <textarea id="condition_description" name="current_condition.condition_description">{{ current_condition.conditionDescription }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="lesion_length_mm">Lesion length (mm)</label>
+            <input type="number" step="0.1" id="lesion_length_mm" name="current_condition.lesion_length_mm"
+                   value="{{ current_condition.lesionLengthMm }}">
+        </div>
+        <div class="form-group">
+            <label for="lesion_width_mm">Lesion width (mm)</label>
+            <input type="number" step="0.1" id="lesion_width_mm" name="current_condition.lesion_width_mm"
+                   value="{{ current_condition.lesionWidthMm }}">
+        </div>
+        <div class="form-group">
+            <label for="lesion_depth_mm">Lesion depth (mm)</label>
+            <input type="number" step="0.1" id="lesion_depth_mm" name="current_condition.lesion_depth_mm"
+                   value="{{ current_condition.lesionDepthMm }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tissue_loss">Tissue loss?</label>
+            <select id="tissue_loss" name="current_condition.tissue_loss">
+                <option value="" {% if current_condition.tissueLoss == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if current_condition.tissueLoss == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if current_condition.tissueLoss == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tissue_loss_percentage">Tissue loss percentage</label>
+            <input type="number" step="0.1" id="tissue_loss_percentage" name="current_condition.tissue_loss_percentage"
+                   value="{{ current_condition.tissueLossPercentage }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="functional_impairment">Functional impairment</label>
+            <select id="functional_impairment" name="current_condition.functional_impairment">
+                <option value="" {% if current_condition.functionalImpairment == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if current_condition.functionalImpairment == "none" %}selected{% endif %}>None</option>
+                <option value="mild" {% if current_condition.functionalImpairment == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if current_condition.functionalImpairment == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if current_condition.functionalImpairment == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="functional_impairment_details">Functional impairment details</label>
+            <input type="text" id="functional_impairment_details" name="current_condition.functional_impairment_details"
+                   value="{{ current_condition.functionalImpairmentDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pain_level">Pain level (NRS 0-10)</label>
+            <input type="number" min="0" max="10" id="pain_level" name="current_condition.pain_level"
+                   value="{{ current_condition.painLevel }}">
+        </div>
+        <div class="form-group">
+            <label for="cosmetic_concern">Cosmetic concern</label>
+            <input type="text" id="cosmetic_concern" name="current_condition.cosmetic_concern"
+                   value="{{ current_condition.cosmeticConcern }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="impact_on_daily_activities">Impact on daily activities</label>
+        <textarea id="impact_on_daily_activities" name="current_condition.impact_on_daily_activities">{{ current_condition.impactOnDailyActivities }}</textarea>
+    </div>
+</div>

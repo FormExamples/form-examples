@@ -1,0 +1,83 @@
+<div class="card">
+    <h2>Step 2: Reason for Referral</h2>
+    <p class="form-hint">Referral source, urgency, and presenting complaint.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="referral_type">Referral Type</label>
+            <select id="referral_type" name="reason_for_referral.referral_type">
+                <option value="" {% if reason_for_referral.referralType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="reconstructive" {% if reason_for_referral.referralType == "reconstructive" %}selected{% endif %}>Reconstructive</option>
+                <option value="aesthetic" {% if reason_for_referral.referralType == "aesthetic" %}selected{% endif %}>Aesthetic</option>
+                <option value="trauma" {% if reason_for_referral.referralType == "trauma" %}selected{% endif %}>Trauma</option>
+                <option value="burn" {% if reason_for_referral.referralType == "burn" %}selected{% endif %}>Burn</option>
+                <option value="cancer" {% if reason_for_referral.referralType == "cancer" %}selected{% endif %}>Cancer</option>
+                <option value="other" {% if reason_for_referral.referralType == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="referral_type_other">Referral Type (other)</label>
+            <input type="text" id="referral_type_other" name="reason_for_referral.referral_type_other"
+                   value="{{ reason_for_referral.referralTypeOther }}">
+        </div>
+        <div class="form-group">
+            <label for="urgency">Urgency</label>
+            <select id="urgency" name="reason_for_referral.urgency">
+                <option value="" {% if reason_for_referral.urgency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="routine" {% if reason_for_referral.urgency == "routine" %}selected{% endif %}>Routine</option>
+                <option value="urgent" {% if reason_for_referral.urgency == "urgent" %}selected{% endif %}>Urgent</option>
+                <option value="emergency" {% if reason_for_referral.urgency == "emergency" %}selected{% endif %}>Emergency</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="primary_complaint">Primary Complaint</label>
+        <textarea id="primary_complaint" name="reason_for_referral.primary_complaint">{{ reason_for_referral.primaryComplaint }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="affected_body_area">Affected Body Area</label>
+            <input type="text" id="affected_body_area" name="reason_for_referral.affected_body_area"
+                   value="{{ reason_for_referral.affectedBodyArea }}">
+        </div>
+        <div class="form-group">
+            <label for="affected_body_area_other">Affected Body Area (other)</label>
+            <input type="text" id="affected_body_area_other" name="reason_for_referral.affected_body_area_other"
+                   value="{{ reason_for_referral.affectedBodyAreaOther }}">
+        </div>
+        <div class="form-group">
+            <label for="laterality">Laterality</label>
+            <select id="laterality" name="reason_for_referral.laterality">
+                <option value="" {% if reason_for_referral.laterality == "" %}selected{% endif %}>&mdash;</option>
+                <option value="left" {% if reason_for_referral.laterality == "left" %}selected{% endif %}>Left</option>
+                <option value="right" {% if reason_for_referral.laterality == "right" %}selected{% endif %}>Right</option>
+                <option value="bilateral" {% if reason_for_referral.laterality == "bilateral" %}selected{% endif %}>Bilateral</option>
+                <option value="midline" {% if reason_for_referral.laterality == "midline" %}selected{% endif %}>Midline</option>
+                <option value="na" {% if reason_for_referral.laterality == "na" %}selected{% endif %}>Not applicable</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="duration_of_condition">Duration of Condition</label>
+            <input type="text" id="duration_of_condition" name="reason_for_referral.duration_of_condition"
+                   value="{{ reason_for_referral.durationOfCondition }}">
+        </div>
+        <div class="form-group">
+            <label for="previous_consultations">Previous Consultations?</label>
+            <select id="previous_consultations" name="reason_for_referral.previous_consultations">
+                <option value="" {% if reason_for_referral.previousConsultations == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if reason_for_referral.previousConsultations == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if reason_for_referral.previousConsultations == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="previous_consultations_details">Previous Consultations Details</label>
+        <textarea id="previous_consultations_details" name="reason_for_referral.previous_consultations_details">{{ reason_for_referral.previousConsultationsDetails }}</textarea>
+    </div>
+</div>

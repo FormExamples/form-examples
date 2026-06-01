@@ -1,0 +1,97 @@
+<div class="card">
+    <h2>Step 8: Photography &amp; Documentation</h2>
+    <p class="form-hint">Clinical photography, measurements, diagrams, prior imaging.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinical_photos_taken">Clinical photos taken?</label>
+            <select id="clinical_photos_taken" name="photography_documentation.clinical_photos_taken">
+                <option value="" {% if photography_documentation.clinicalPhotosTaken == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.clinicalPhotosTaken == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.clinicalPhotosTaken == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="photo_consent_obtained">Photo consent obtained?</label>
+            <select id="photo_consent_obtained" name="photography_documentation.photo_consent_obtained">
+                <option value="" {% if photography_documentation.photoConsentObtained == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.photoConsentObtained == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.photoConsentObtained == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="number_of_photos">Number of photos</label>
+            <input type="number" min="0" id="number_of_photos" name="photography_documentation.number_of_photos"
+                   value="{{ photography_documentation.numberOfPhotos }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="photo_views_taken">Photo views taken</label>
+            <input type="text" id="photo_views_taken" name="photography_documentation.photo_views_taken"
+                   value="{{ photography_documentation.photoViewsTaken }}">
+        </div>
+        <div class="form-group">
+            <label for="standardised_views">Standardised views?</label>
+            <select id="standardised_views" name="photography_documentation.standardised_views">
+                <option value="" {% if photography_documentation.standardisedViews == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.standardisedViews == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.standardisedViews == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="measurements_recorded">Measurements recorded?</label>
+            <select id="measurements_recorded" name="photography_documentation.measurements_recorded">
+                <option value="" {% if photography_documentation.measurementsRecorded == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.measurementsRecorded == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.measurementsRecorded == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="measurement_details">Measurement details</label>
+            <input type="text" id="measurement_details" name="photography_documentation.measurement_details"
+                   value="{{ photography_documentation.measurementDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="diagrams_drawn">Diagrams drawn?</label>
+            <select id="diagrams_drawn" name="photography_documentation.diagrams_drawn">
+                <option value="" {% if photography_documentation.diagramsDrawn == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.diagramsDrawn == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.diagramsDrawn == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="diagram_notes">Diagram notes</label>
+            <input type="text" id="diagram_notes" name="photography_documentation.diagram_notes"
+                   value="{{ photography_documentation.diagramNotes }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="previous_imaging">Previous imaging?</label>
+            <select id="previous_imaging" name="photography_documentation.previous_imaging">
+                <option value="" {% if photography_documentation.previousImaging == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if photography_documentation.previousImaging == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if photography_documentation.previousImaging == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="previous_imaging_type">Imaging type</label>
+            <input type="text" id="previous_imaging_type" name="photography_documentation.previous_imaging_type"
+                   value="{{ photography_documentation.previousImagingType }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="previous_imaging_findings">Previous imaging findings</label>
+        <textarea id="previous_imaging_findings" name="photography_documentation.previous_imaging_findings">{{ photography_documentation.previousImagingFindings }}</textarea>
+    </div>
+</div>

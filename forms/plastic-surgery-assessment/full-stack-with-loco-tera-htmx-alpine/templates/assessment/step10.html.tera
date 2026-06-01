@@ -1,0 +1,134 @@
+<div class="card">
+    <h2>Step 10: Procedure Planning &amp; Consent</h2>
+    <p class="form-hint">Proposed procedure, complexity, VTE risk, and consent.</p>
+
+    <div class="form-group">
+        <label for="proposed_procedure">Proposed procedure</label>
+        <input type="text" id="proposed_procedure" name="procedure_planning_consent.proposed_procedure"
+               value="{{ procedure_planning_consent.proposedProcedure }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="procedure_complexity">Procedure complexity</label>
+            <select id="procedure_complexity" name="procedure_planning_consent.procedure_complexity">
+                <option value="" {% if procedure_planning_consent.procedureComplexity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if procedure_planning_consent.procedureComplexity == "1" %}selected{% endif %}>1 - Minor</option>
+                <option value="2" {% if procedure_planning_consent.procedureComplexity == "2" %}selected{% endif %}>2 - Intermediate</option>
+                <option value="3" {% if procedure_planning_consent.procedureComplexity == "3" %}selected{% endif %}>3 - Major</option>
+                <option value="4" {% if procedure_planning_consent.procedureComplexity == "4" %}selected{% endif %}>4 - Major Plus / Emergency</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="surgical_approach">Surgical approach</label>
+            <select id="surgical_approach" name="procedure_planning_consent.surgical_approach">
+                <option value="" {% if procedure_planning_consent.surgicalApproach == "" %}selected{% endif %}>&mdash;</option>
+                <option value="open" {% if procedure_planning_consent.surgicalApproach == "open" %}selected{% endif %}>Open</option>
+                <option value="endoscopic" {% if procedure_planning_consent.surgicalApproach == "endoscopic" %}selected{% endif %}>Endoscopic</option>
+                <option value="microsurgical" {% if procedure_planning_consent.surgicalApproach == "microsurgical" %}selected{% endif %}>Microsurgical</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="expected_duration_minutes">Expected duration (minutes)</label>
+            <input type="number" min="0" id="expected_duration_minutes" name="procedure_planning_consent.expected_duration_minutes"
+                   value="{{ procedure_planning_consent.expectedDurationMinutes }}">
+        </div>
+        <div class="form-group">
+            <label for="expected_hospital_stay">Expected hospital stay</label>
+            <input type="text" id="expected_hospital_stay" name="procedure_planning_consent.expected_hospital_stay"
+                   value="{{ procedure_planning_consent.expectedHospitalStay }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="flap_type">Flap type</label>
+            <select id="flap_type" name="procedure_planning_consent.flap_type">
+                <option value="" {% if procedure_planning_consent.flapType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if procedure_planning_consent.flapType == "none" %}selected{% endif %}>None</option>
+                <option value="local" {% if procedure_planning_consent.flapType == "local" %}selected{% endif %}>Local</option>
+                <option value="pedicled" {% if procedure_planning_consent.flapType == "pedicled" %}selected{% endif %}>Pedicled</option>
+                <option value="free" {% if procedure_planning_consent.flapType == "free" %}selected{% endif %}>Free</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="implant_required">Implant required?</label>
+            <select id="implant_required" name="procedure_planning_consent.implant_required">
+                <option value="" {% if procedure_planning_consent.implantRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if procedure_planning_consent.implantRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if procedure_planning_consent.implantRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="implant_details">Implant details</label>
+            <input type="text" id="implant_details" name="procedure_planning_consent.implant_details"
+                   value="{{ procedure_planning_consent.implantDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="vte_risk">VTE risk</label>
+            <select id="vte_risk" name="procedure_planning_consent.vte_risk">
+                <option value="" {% if procedure_planning_consent.vteRisk == "" %}selected{% endif %}>&mdash;</option>
+                <option value="low" {% if procedure_planning_consent.vteRisk == "low" %}selected{% endif %}>Low</option>
+                <option value="moderate" {% if procedure_planning_consent.vteRisk == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="high" {% if procedure_planning_consent.vteRisk == "high" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antibiotic_prophylaxis">Antibiotic prophylaxis?</label>
+            <select id="antibiotic_prophylaxis" name="procedure_planning_consent.antibiotic_prophylaxis">
+                <option value="" {% if procedure_planning_consent.antibioticProphylaxis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if procedure_planning_consent.antibioticProphylaxis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if procedure_planning_consent.antibioticProphylaxis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="anticipated_risks">Anticipated risks</label>
+        <textarea id="anticipated_risks" name="procedure_planning_consent.anticipated_risks">{{ procedure_planning_consent.anticipatedRisks }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="alternative_treatments">Alternative treatments</label>
+        <textarea id="alternative_treatments" name="procedure_planning_consent.alternative_treatments">{{ procedure_planning_consent.alternativeTreatments }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="consent_discussion">Consent discussion held?</label>
+            <select id="consent_discussion" name="procedure_planning_consent.consent_discussion">
+                <option value="" {% if procedure_planning_consent.consentDiscussion == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if procedure_planning_consent.consentDiscussion == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if procedure_planning_consent.consentDiscussion == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="consent_form_signed">Consent form signed?</label>
+            <select id="consent_form_signed" name="procedure_planning_consent.consent_form_signed">
+                <option value="" {% if procedure_planning_consent.consentFormSigned == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if procedure_planning_consent.consentFormSigned == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if procedure_planning_consent.consentFormSigned == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cooling_off_period_offered">Cooling-off period offered?</label>
+            <select id="cooling_off_period_offered" name="procedure_planning_consent.cooling_off_period_offered">
+                <option value="" {% if procedure_planning_consent.coolingOffPeriodOffered == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if procedure_planning_consent.coolingOffPeriodOffered == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if procedure_planning_consent.coolingOffPeriodOffered == "no" %}selected{% endif %}>No</option>
+                <option value="n-a" {% if procedure_planning_consent.coolingOffPeriodOffered == "n-a" %}selected{% endif %}>N/A</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="follow_up_plan">Follow-up plan</label>
+        <textarea id="follow_up_plan" name="procedure_planning_consent.follow_up_plan">{{ procedure_planning_consent.followUpPlan }}</textarea>
+    </div>
+</div>

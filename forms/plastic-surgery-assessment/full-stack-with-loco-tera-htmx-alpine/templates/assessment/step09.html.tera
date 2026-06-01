@@ -1,0 +1,164 @@
+<div class="card">
+    <h2>Step 9: Current Medications &amp; Allergies</h2>
+    <p class="form-hint">Anticoagulants, steroids, immunosuppressants, and drug/latex allergies.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_anticoagulants">On anticoagulants?</label>
+            <select id="on_anticoagulants" name="medications_allergies.on_anticoagulants">
+                <option value="" {% if medications_allergies.onAnticoagulants == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onAnticoagulants == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onAnticoagulants == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anticoagulant_details">Anticoagulant details</label>
+            <input type="text" id="anticoagulant_details" name="medications_allergies.anticoagulant_details"
+                   value="{{ medications_allergies.anticoagulantDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_antiplatelets">On antiplatelets?</label>
+            <select id="on_antiplatelets" name="medications_allergies.on_antiplatelets">
+                <option value="" {% if medications_allergies.onAntiplatelets == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onAntiplatelets == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onAntiplatelets == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antiplatelet_details">Antiplatelet details</label>
+            <input type="text" id="antiplatelet_details" name="medications_allergies.antiplatelet_details"
+                   value="{{ medications_allergies.antiplateletDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_steroids">On steroids?</label>
+            <select id="on_steroids" name="medications_allergies.on_steroids">
+                <option value="" {% if medications_allergies.onSteroids == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onSteroids == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onSteroids == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="steroid_details">Steroid details</label>
+            <input type="text" id="steroid_details" name="medications_allergies.steroid_details"
+                   value="{{ medications_allergies.steroidDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_immunosuppressants">On immunosuppressants?</label>
+            <select id="on_immunosuppressants" name="medications_allergies.on_immunosuppressants">
+                <option value="" {% if medications_allergies.onImmunosuppressants == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onImmunosuppressants == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onImmunosuppressants == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="immunosuppressant_details">Immunosuppressant details</label>
+            <input type="text" id="immunosuppressant_details" name="medications_allergies.immunosuppressant_details"
+                   value="{{ medications_allergies.immunosuppressantDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_chemotherapy">On chemotherapy?</label>
+            <select id="on_chemotherapy" name="medications_allergies.on_chemotherapy">
+                <option value="" {% if medications_allergies.onChemotherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onChemotherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onChemotherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chemotherapy_details">Chemotherapy details</label>
+            <input type="text" id="chemotherapy_details" name="medications_allergies.chemotherapy_details"
+                   value="{{ medications_allergies.chemotherapyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="on_hormone_therapy">On hormone therapy?</label>
+            <select id="on_hormone_therapy" name="medications_allergies.on_hormone_therapy">
+                <option value="" {% if medications_allergies.onHormoneTherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.onHormoneTherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.onHormoneTherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hormone_therapy_details">Hormone therapy details</label>
+            <input type="text" id="hormone_therapy_details" name="medications_allergies.hormone_therapy_details"
+                   value="{{ medications_allergies.hormoneTherapyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="other_medications">Other medications</label>
+        <textarea id="other_medications" name="medications_allergies.other_medications">{{ medications_allergies.otherMedications }}</textarea>
+    </div>
+
+    <h3>Allergies</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="has_drug_allergies">Has drug allergies?</label>
+            <select id="has_drug_allergies" name="medications_allergies.has_drug_allergies">
+                <option value="" {% if medications_allergies.hasDrugAllergies == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.hasDrugAllergies == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.hasDrugAllergies == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="latex_allergy">Latex allergy?</label>
+            <select id="latex_allergy" name="medications_allergies.latex_allergy">
+                <option value="" {% if medications_allergies.latexAllergy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.latexAllergy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.latexAllergy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="adhesive_allergy">Adhesive allergy?</label>
+            <select id="adhesive_allergy" name="medications_allergies.adhesive_allergy">
+                <option value="" {% if medications_allergies.adhesiveAllergy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_allergies.adhesiveAllergy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_allergies.adhesiveAllergy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <p class="form-hint">Drug allergies (add up to four rows; leave allergen blank to skip a row).</p>
+    {% for i in range(end=4) %}
+    {% set existing = medications_allergies.allergies | nth(n=i) %}
+    <div class="form-row">
+        <div class="form-group">
+            <label for="allergies_{{ i }}_allergen">Allergen #{{ i + 1 }}</label>
+            <input type="text" id="allergies_{{ i }}_allergen" name="allergies[{{ i }}].allergen"
+                   value="{% if existing %}{{ existing.allergen }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="allergies_{{ i }}_reaction">Reaction</label>
+            <input type="text" id="allergies_{{ i }}_reaction" name="allergies[{{ i }}].reaction"
+                   value="{% if existing %}{{ existing.reaction }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="allergies_{{ i }}_severity">Severity</label>
+            <select id="allergies_{{ i }}_severity" name="allergies[{{ i }}].severity">
+                <option value="" {% if not existing or existing.severity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="mild" {% if existing and existing.severity == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if existing and existing.severity == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="anaphylaxis" {% if existing and existing.severity == "anaphylaxis" %}selected{% endif %}>Anaphylaxis</option>
+            </select>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="other_allergies">Other allergies (free text)</label>
+        <textarea id="other_allergies" name="medications_allergies.other_allergies">{{ medications_allergies.otherAllergies }}</textarea>
+    </div>
+</div>
