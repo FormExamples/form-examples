@@ -1,0 +1,86 @@
+<div class="card">
+    <h2>Step 5: Haematological Assessment</h2>
+    <p class="form-hint">Full blood count, blood group, coagulation, and biochemistry.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="haemoglobin">Haemoglobin (g/dL)</label>
+            <input type="number" step="0.1" id="haemoglobin" name="haematological_assessment.haemoglobin"
+                   value="{{ haematological_assessment.haemoglobin }}">
+        </div>
+        <div class="form-group">
+            <label for="white_cell_count">WCC (x10^9/L)</label>
+            <input type="number" step="0.1" id="white_cell_count" name="haematological_assessment.white_cell_count"
+                   value="{{ haematological_assessment.whiteCellCount }}">
+        </div>
+        <div class="form-group">
+            <label for="platelet_count">Platelets (x10^9/L)</label>
+            <input type="number" step="0.1" id="platelet_count" name="haematological_assessment.platelet_count"
+                   value="{{ haematological_assessment.plateletCount }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="neutrophil_count">Neutrophils (x10^9/L)</label>
+            <input type="number" step="0.1" id="neutrophil_count" name="haematological_assessment.neutrophil_count"
+                   value="{{ haematological_assessment.neutrophilCount }}">
+        </div>
+        <div class="form-group">
+            <label for="lymphocyte_count">Lymphocytes (x10^9/L)</label>
+            <input type="number" step="0.1" id="lymphocyte_count" name="haematological_assessment.lymphocyte_count"
+                   value="{{ haematological_assessment.lymphocyteCount }}">
+        </div>
+        <div class="form-group">
+            <label for="haematocrit">Haematocrit</label>
+            <input type="number" step="0.01" id="haematocrit" name="haematological_assessment.haematocrit"
+                   value="{{ haematological_assessment.haematocrit }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="blood_group">Blood Group</label>
+            <select id="blood_group" name="haematological_assessment.blood_group">
+                <option value="" {% if haematological_assessment.bloodGroup == "" %}selected{% endif %}>&mdash;</option>
+                <option value="O-positive" {% if haematological_assessment.bloodGroup == "O-positive" %}selected{% endif %}>O+</option>
+                <option value="O-negative" {% if haematological_assessment.bloodGroup == "O-negative" %}selected{% endif %}>O-</option>
+                <option value="A-positive" {% if haematological_assessment.bloodGroup == "A-positive" %}selected{% endif %}>A+</option>
+                <option value="A-negative" {% if haematological_assessment.bloodGroup == "A-negative" %}selected{% endif %}>A-</option>
+                <option value="B-positive" {% if haematological_assessment.bloodGroup == "B-positive" %}selected{% endif %}>B+</option>
+                <option value="B-negative" {% if haematological_assessment.bloodGroup == "B-negative" %}selected{% endif %}>B-</option>
+                <option value="AB-positive" {% if haematological_assessment.bloodGroup == "AB-positive" %}selected{% endif %}>AB+</option>
+                <option value="AB-negative" {% if haematological_assessment.bloodGroup == "AB-negative" %}selected{% endif %}>AB-</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="coagulation_screen">Coagulation Screen</label>
+            <select id="coagulation_screen" name="haematological_assessment.coagulation_screen">
+                <option value="" {% if haematological_assessment.coagulationScreen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if haematological_assessment.coagulationScreen == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if haematological_assessment.coagulationScreen == "abnormal" %}selected{% endif %}>Abnormal</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="liver_function">Liver Function</label>
+            <select id="liver_function" name="haematological_assessment.liver_function">
+                <option value="" {% if haematological_assessment.liverFunction == "" %}selected{% endif %}>&mdash;</option>
+                <option value="normal" {% if haematological_assessment.liverFunction == "normal" %}selected{% endif %}>Normal</option>
+                <option value="abnormal" {% if haematological_assessment.liverFunction == "abnormal" %}selected{% endif %}>Abnormal</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ferritin">Ferritin (ug/L)</label>
+            <input type="number" step="0.1" id="ferritin" name="haematological_assessment.ferritin"
+                   value="{{ haematological_assessment.ferritin }}">
+        </div>
+        <div class="form-group">
+            <label for="creatinine">Creatinine (umol/L)</label>
+            <input type="number" step="0.1" id="creatinine" name="haematological_assessment.creatinine"
+                   value="{{ haematological_assessment.creatinine }}">
+        </div>
+    </div>
+</div>

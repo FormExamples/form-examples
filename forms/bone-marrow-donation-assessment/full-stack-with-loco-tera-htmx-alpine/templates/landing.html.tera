@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Bone Marrow Donation Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Bone Marrow Donation Assessment</h1>
+        <p class="landing-description">
+            Haematopoietic stem cell donor evaluation assessing HLA typing, health
+            screening, anaesthetic fitness, and collection method suitability
+            (peripheral blood stem cells vs bone marrow harvest). The output is a
+            donor eligibility classification with HLA match grading and an overall
+            risk level.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Demographics, HLA typing, medical history, physical exam, haematology, infection screening, anaesthetic, collection method, psychological readiness, consent</p>
+            </div>
+            <div class="feature">
+                <h3>Eligibility Grading</h3>
+                <p>Donor classified as suitable, conditionally suitable, or unsuitable, with low / moderate / high / critical risk levels</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for positive infection screens, low Hb, difficult airway, coercion concerns, and missing consent</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

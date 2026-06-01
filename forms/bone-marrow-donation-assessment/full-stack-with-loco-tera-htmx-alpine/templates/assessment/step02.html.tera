@@ -1,0 +1,112 @@
+<div class="card">
+    <h2>Step 2: Donor Registration &amp; HLA Typing</h2>
+    <p class="form-hint">Registry details, donation context, and HLA match level.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donor_registry">Donor Registry</label>
+            <input type="text" id="donor_registry" name="donor_registration_hla_typing.donor_registry"
+                   value="{{ donor_registration_hla_typing.donorRegistry }}" placeholder="e.g. NHS Blood &amp; Transplant, DKMS">
+        </div>
+        <div class="form-group">
+            <label for="donor_registry_id">Registry ID</label>
+            <input type="text" id="donor_registry_id" name="donor_registration_hla_typing.donor_registry_id"
+                   value="{{ donor_registration_hla_typing.donorRegistryId }}">
+        </div>
+        <div class="form-group">
+            <label for="registration_date">Registration Date</label>
+            <input type="date" id="registration_date" name="donor_registration_hla_typing.registration_date"
+                   value="{{ donor_registration_hla_typing.registrationDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="donation_type">Donation Type</label>
+            <select id="donation_type" name="donor_registration_hla_typing.donation_type">
+                <option value="" {% if donor_registration_hla_typing.donationType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="related" {% if donor_registration_hla_typing.donationType == "related" %}selected{% endif %}>Related</option>
+                <option value="unrelated" {% if donor_registration_hla_typing.donationType == "unrelated" %}selected{% endif %}>Unrelated</option>
+                <option value="autologous" {% if donor_registration_hla_typing.donationType == "autologous" %}selected{% endif %}>Autologous</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recipient_relationship">Recipient Relationship</label>
+            <input type="text" id="recipient_relationship" name="donor_registration_hla_typing.recipient_relationship"
+                   value="{{ donor_registration_hla_typing.recipientRelationship }}" placeholder="e.g. sibling, parent">
+        </div>
+    </div>
+
+    <h3>HLA Typing</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hla_a">HLA-A</label>
+            <input type="text" id="hla_a" name="donor_registration_hla_typing.hla_a"
+                   value="{{ donor_registration_hla_typing.hlaA }}">
+        </div>
+        <div class="form-group">
+            <label for="hla_b">HLA-B</label>
+            <input type="text" id="hla_b" name="donor_registration_hla_typing.hla_b"
+                   value="{{ donor_registration_hla_typing.hlaB }}">
+        </div>
+        <div class="form-group">
+            <label for="hla_c">HLA-C</label>
+            <input type="text" id="hla_c" name="donor_registration_hla_typing.hla_c"
+                   value="{{ donor_registration_hla_typing.hlaC }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hla_drb1">HLA-DRB1</label>
+            <input type="text" id="hla_drb1" name="donor_registration_hla_typing.hla_drb1"
+                   value="{{ donor_registration_hla_typing.hlaDrb1 }}">
+        </div>
+        <div class="form-group">
+            <label for="hla_dqb1">HLA-DQB1</label>
+            <input type="text" id="hla_dqb1" name="donor_registration_hla_typing.hla_dqb1"
+                   value="{{ donor_registration_hla_typing.hlaDqb1 }}">
+        </div>
+        <div class="form-group">
+            <label for="hla_dpb1">HLA-DPB1</label>
+            <input type="text" id="hla_dpb1" name="donor_registration_hla_typing.hla_dpb1"
+                   value="{{ donor_registration_hla_typing.hlaDpb1 }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hla_match_level">HLA Match Level</label>
+            <select id="hla_match_level" name="donor_registration_hla_typing.hla_match_level">
+                <option value="" {% if donor_registration_hla_typing.hlaMatchLevel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="10-of-10" {% if donor_registration_hla_typing.hlaMatchLevel == "10-of-10" %}selected{% endif %}>10/10 (Full match)</option>
+                <option value="9-of-10" {% if donor_registration_hla_typing.hlaMatchLevel == "9-of-10" %}selected{% endif %}>9/10 (Single mismatch)</option>
+                <option value="8-of-10" {% if donor_registration_hla_typing.hlaMatchLevel == "8-of-10" %}selected{% endif %}>8/10 (Two mismatch)</option>
+                <option value="7-of-10" {% if donor_registration_hla_typing.hlaMatchLevel == "7-of-10" %}selected{% endif %}>7/10 (Three mismatch)</option>
+                <option value="haploidentical" {% if donor_registration_hla_typing.hlaMatchLevel == "haploidentical" %}selected{% endif %}>Haploidentical</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="crossmatch_result">Crossmatch Result</label>
+            <select id="crossmatch_result" name="donor_registration_hla_typing.crossmatch_result">
+                <option value="" {% if donor_registration_hla_typing.crossmatchResult == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if donor_registration_hla_typing.crossmatchResult == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if donor_registration_hla_typing.crossmatchResult == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if donor_registration_hla_typing.crossmatchResult == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="previous_donation">Previous Donation</label>
+            <select id="previous_donation" name="donor_registration_hla_typing.previous_donation">
+                <option value="" {% if donor_registration_hla_typing.previousDonation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if donor_registration_hla_typing.previousDonation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if donor_registration_hla_typing.previousDonation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="previous_donation_details">Previous Donation Details</label>
+        <textarea id="previous_donation_details" name="donor_registration_hla_typing.previous_donation_details">{{ donor_registration_hla_typing.previousDonationDetails }}</textarea>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="card">
+    <h2>Step 8: Collection Method Assessment</h2>
+    <p class="form-hint">PBSC vs bone marrow harvest decision and supporting parameters.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_method">Donor Preferred Method</label>
+            <select id="preferred_method" name="collection_method_assessment.preferred_method">
+                <option value="" {% if collection_method_assessment.preferredMethod == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pbsc" {% if collection_method_assessment.preferredMethod == "pbsc" %}selected{% endif %}>PBSC</option>
+                <option value="bone-marrow" {% if collection_method_assessment.preferredMethod == "bone-marrow" %}selected{% endif %}>Bone Marrow Harvest</option>
+                <option value="either" {% if collection_method_assessment.preferredMethod == "either" %}selected{% endif %}>Either</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recipient_preference">Recipient Preference</label>
+            <select id="recipient_preference" name="collection_method_assessment.recipient_preference">
+                <option value="" {% if collection_method_assessment.recipientPreference == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pbsc" {% if collection_method_assessment.recipientPreference == "pbsc" %}selected{% endif %}>PBSC</option>
+                <option value="bone-marrow" {% if collection_method_assessment.recipientPreference == "bone-marrow" %}selected{% endif %}>Bone Marrow Harvest</option>
+                <option value="either" {% if collection_method_assessment.recipientPreference == "either" %}selected{% endif %}>Either</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="final_collection_method">Final Collection Method</label>
+            <select id="final_collection_method" name="collection_method_assessment.final_collection_method">
+                <option value="" {% if collection_method_assessment.finalCollectionMethod == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pbsc" {% if collection_method_assessment.finalCollectionMethod == "pbsc" %}selected{% endif %}>PBSC</option>
+                <option value="bone-marrow" {% if collection_method_assessment.finalCollectionMethod == "bone-marrow" %}selected{% endif %}>Bone Marrow Harvest</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gcsf_eligible">G-CSF eligible?</label>
+            <select id="gcsf_eligible" name="collection_method_assessment.gcsf_eligible">
+                <option value="" {% if collection_method_assessment.gcsfEligible == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if collection_method_assessment.gcsfEligible == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if collection_method_assessment.gcsfEligible == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="venous_access_suitable_for_apheresis">Venous access suitable for apheresis?</label>
+            <select id="venous_access_suitable_for_apheresis" name="collection_method_assessment.venous_access_suitable_for_apheresis">
+                <option value="" {% if collection_method_assessment.venousAccessSuitableForApheresis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if collection_method_assessment.venousAccessSuitableForApheresis == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if collection_method_assessment.venousAccessSuitableForApheresis == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="central_line_required">Central line required?</label>
+            <select id="central_line_required" name="collection_method_assessment.central_line_required">
+                <option value="" {% if collection_method_assessment.centralLineRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if collection_method_assessment.centralLineRequired == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if collection_method_assessment.centralLineRequired == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="gcsf_contraindications">G-CSF Contraindications</label>
+        <textarea id="gcsf_contraindications" name="collection_method_assessment.gcsf_contraindications">{{ collection_method_assessment.gcsfContraindications }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="estimated_donor_weight_kg">Estimated Donor Weight (kg)</label>
+            <input type="number" step="0.1" id="estimated_donor_weight_kg" name="collection_method_assessment.estimated_donor_weight_kg"
+                   value="{{ collection_method_assessment.estimatedDonorWeightKg }}">
+        </div>
+        <div class="form-group">
+            <label for="target_cd34_dose">Target CD34+ Dose (x10^6/kg)</label>
+            <input type="number" step="0.1" id="target_cd34_dose" name="collection_method_assessment.target_cd34_dose"
+                   value="{{ collection_method_assessment.targetCd34Dose }}">
+        </div>
+        <div class="form-group">
+            <label for="estimated_collection_days">Estimated Collection Days</label>
+            <input type="number" id="estimated_collection_days" name="collection_method_assessment.estimated_collection_days"
+                   value="{{ collection_method_assessment.estimatedCollectionDays }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bone_marrow_harvest_volume_ml">Marrow Harvest Volume (ml)</label>
+            <input type="number" step="1" id="bone_marrow_harvest_volume_ml" name="collection_method_assessment.bone_marrow_harvest_volume_ml"
+                   value="{{ collection_method_assessment.boneMarrowHarvestVolumeMl }}">
+        </div>
+        <div class="form-group">
+            <label for="autologous_blood_donation">Autologous blood donation?</label>
+            <select id="autologous_blood_donation" name="collection_method_assessment.autologous_blood_donation">
+                <option value="" {% if collection_method_assessment.autologousBloodDonation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if collection_method_assessment.autologousBloodDonation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if collection_method_assessment.autologousBloodDonation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>

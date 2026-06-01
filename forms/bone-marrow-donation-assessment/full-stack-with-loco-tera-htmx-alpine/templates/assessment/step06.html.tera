@@ -1,0 +1,132 @@
+<div class="card">
+    <h2>Step 6: Infectious Disease Screening</h2>
+    <p class="form-hint">Mandatory serology, viral, and exposure screening for stem cell donation.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hiv_status">HIV</label>
+            <select id="hiv_status" name="infectious_disease_screening.hiv_status">
+                <option value="" {% if infectious_disease_screening.hivStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.hivStatus == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.hivStatus == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.hivStatus == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_surface_antigen">HBsAg</label>
+            <select id="hepatitis_b_surface_antigen" name="infectious_disease_screening.hepatitis_b_surface_antigen">
+                <option value="" {% if infectious_disease_screening.hepatitisBSurfaceAntigen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.hepatitisBSurfaceAntigen == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.hepatitisBSurfaceAntigen == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.hepatitisBSurfaceAntigen == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_core_antibody">anti-HBc</label>
+            <select id="hepatitis_b_core_antibody" name="infectious_disease_screening.hepatitis_b_core_antibody">
+                <option value="" {% if infectious_disease_screening.hepatitisBCoreAntibody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.hepatitisBCoreAntibody == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.hepatitisBCoreAntibody == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.hepatitisBCoreAntibody == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hepatitis_c_abntibody">HCV antibody</label>
+            <select id="hepatitis_c_abntibody" name="infectious_disease_screening.hepatitis_c_abntibody">
+                <option value="" {% if infectious_disease_screening.hepatitisCAbntibody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.hepatitisCAbntibody == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.hepatitisCAbntibody == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.hepatitisCAbntibody == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="htlv_status">HTLV</label>
+            <select id="htlv_status" name="infectious_disease_screening.htlv_status">
+                <option value="" {% if infectious_disease_screening.htlvStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.htlvStatus == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.htlvStatus == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.htlvStatus == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="syphilis_screen">Syphilis</label>
+            <select id="syphilis_screen" name="infectious_disease_screening.syphilis_screen">
+                <option value="" {% if infectious_disease_screening.syphilisScreen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.syphilisScreen == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.syphilisScreen == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.syphilisScreen == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cmv_status">CMV</label>
+            <select id="cmv_status" name="infectious_disease_screening.cmv_status">
+                <option value="" {% if infectious_disease_screening.cmvStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.cmvStatus == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.cmvStatus == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.cmvStatus == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ebv_status">EBV</label>
+            <select id="ebv_status" name="infectious_disease_screening.ebv_status">
+                <option value="" {% if infectious_disease_screening.ebvStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.ebvStatus == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.ebvStatus == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.ebvStatus == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tuberculosis_screen">TB Screen</label>
+            <select id="tuberculosis_screen" name="infectious_disease_screening.tuberculosis_screen">
+                <option value="" {% if infectious_disease_screening.tuberculosisScreen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if infectious_disease_screening.tuberculosisScreen == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if infectious_disease_screening.tuberculosisScreen == "positive" %}selected{% endif %}>Positive</option>
+                <option value="pending" {% if infectious_disease_screening.tuberculosisScreen == "pending" %}selected{% endif %}>Pending</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="recent_travel">Recent travel?</label>
+            <select id="recent_travel" name="infectious_disease_screening.recent_travel">
+                <option value="" {% if infectious_disease_screening.recentTravel == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if infectious_disease_screening.recentTravel == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if infectious_disease_screening.recentTravel == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recent_infection">Recent infection?</label>
+            <select id="recent_infection" name="infectious_disease_screening.recent_infection">
+                <option value="" {% if infectious_disease_screening.recentInfection == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if infectious_disease_screening.recentInfection == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if infectious_disease_screening.recentInfection == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vaccination_up_to_date">Vaccinations up to date?</label>
+            <select id="vaccination_up_to_date" name="infectious_disease_screening.vaccination_up_to_date">
+                <option value="" {% if infectious_disease_screening.vaccinationUpToDate == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if infectious_disease_screening.vaccinationUpToDate == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if infectious_disease_screening.vaccinationUpToDate == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="travel_details">Travel Details</label>
+            <textarea id="travel_details" name="infectious_disease_screening.travel_details">{{ infectious_disease_screening.travelDetails }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="infection_details">Infection Details</label>
+            <textarea id="infection_details" name="infectious_disease_screening.infection_details">{{ infectious_disease_screening.infectionDetails }}</textarea>
+        </div>
+    </div>
+</div>

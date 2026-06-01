@@ -1,0 +1,102 @@
+<div class="card">
+    <h2>Step 7: Anaesthetic Assessment</h2>
+    <p class="form-hint">ASA grade, airway, previous complications, and lifestyle factors.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="asa_grade">ASA Grade</label>
+            <select id="asa_grade" name="anaesthetic_assessment.asa_grade">
+                <option value="" {% if anaesthetic_assessment.asaGrade == "" %}selected{% endif %}>&mdash;</option>
+                <option value="I" {% if anaesthetic_assessment.asaGrade == "I" %}selected{% endif %}>ASA I (healthy)</option>
+                <option value="II" {% if anaesthetic_assessment.asaGrade == "II" %}selected{% endif %}>ASA II (mild systemic disease)</option>
+                <option value="III" {% if anaesthetic_assessment.asaGrade == "III" %}selected{% endif %}>ASA III (severe systemic disease)</option>
+                <option value="IV" {% if anaesthetic_assessment.asaGrade == "IV" %}selected{% endif %}>ASA IV (life-threatening)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="previous_anaesthetic">Previous anaesthetic?</label>
+            <select id="previous_anaesthetic" name="anaesthetic_assessment.previous_anaesthetic">
+                <option value="" {% if anaesthetic_assessment.previousAnaesthetic == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if anaesthetic_assessment.previousAnaesthetic == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if anaesthetic_assessment.previousAnaesthetic == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anaesthetic_complications">Previous complications?</label>
+            <select id="anaesthetic_complications" name="anaesthetic_assessment.anaesthetic_complications">
+                <option value="" {% if anaesthetic_assessment.anaestheticComplications == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if anaesthetic_assessment.anaestheticComplications == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if anaesthetic_assessment.anaestheticComplications == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="complication_details">Complication Details</label>
+        <textarea id="complication_details" name="anaesthetic_assessment.complication_details">{{ anaesthetic_assessment.complicationDetails }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="family_anaesthetic_problems">Family history of anaesthetic problems?</label>
+            <select id="family_anaesthetic_problems" name="anaesthetic_assessment.family_anaesthetic_problems">
+                <option value="" {% if anaesthetic_assessment.familyAnaestheticProblems == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if anaesthetic_assessment.familyAnaestheticProblems == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if anaesthetic_assessment.familyAnaestheticProblems == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mallampati_score">Mallampati Score</label>
+            <select id="mallampati_score" name="anaesthetic_assessment.mallampati_score">
+                <option value="" {% if anaesthetic_assessment.mallampatiScore == "" %}selected{% endif %}>&mdash;</option>
+                <option value="I" {% if anaesthetic_assessment.mallampatiScore == "I" %}selected{% endif %}>I</option>
+                <option value="II" {% if anaesthetic_assessment.mallampatiScore == "II" %}selected{% endif %}>II</option>
+                <option value="III" {% if anaesthetic_assessment.mallampatiScore == "III" %}selected{% endif %}>III</option>
+                <option value="IV" {% if anaesthetic_assessment.mallampatiScore == "IV" %}selected{% endif %}>IV</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="airway_concerns">Airway concerns?</label>
+            <select id="airway_concerns" name="anaesthetic_assessment.airway_concerns">
+                <option value="" {% if anaesthetic_assessment.airwayConcerns == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if anaesthetic_assessment.airwayConcerns == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if anaesthetic_assessment.airwayConcerns == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="smoking_status">Smoking Status</label>
+            <select id="smoking_status" name="anaesthetic_assessment.smoking_status">
+                <option value="" {% if anaesthetic_assessment.smokingStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="never" {% if anaesthetic_assessment.smokingStatus == "never" %}selected{% endif %}>Never</option>
+                <option value="ex" {% if anaesthetic_assessment.smokingStatus == "ex" %}selected{% endif %}>Ex</option>
+                <option value="current" {% if anaesthetic_assessment.smokingStatus == "current" %}selected{% endif %}>Current</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="alcohol_use">Alcohol Use</label>
+            <select id="alcohol_use" name="anaesthetic_assessment.alcohol_use">
+                <option value="" {% if anaesthetic_assessment.alcoholUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="none" {% if anaesthetic_assessment.alcoholUse == "none" %}selected{% endif %}>None</option>
+                <option value="occasional" {% if anaesthetic_assessment.alcoholUse == "occasional" %}selected{% endif %}>Occasional</option>
+                <option value="moderate" {% if anaesthetic_assessment.alcoholUse == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="heavy" {% if anaesthetic_assessment.alcoholUse == "heavy" %}selected{% endif %}>Heavy</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nil_by_mouth_confirmed">Nil by mouth confirmed?</label>
+            <select id="nil_by_mouth_confirmed" name="anaesthetic_assessment.nil_by_mouth_confirmed">
+                <option value="" {% if anaesthetic_assessment.nilByMouthConfirmed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if anaesthetic_assessment.nilByMouthConfirmed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if anaesthetic_assessment.nilByMouthConfirmed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="anaesthetic_plan">Anaesthetic Plan</label>
+        <textarea id="anaesthetic_plan" name="anaesthetic_assessment.anaesthetic_plan">{{ anaesthetic_assessment.anaestheticPlan }}</textarea>
+    </div>
+</div>
