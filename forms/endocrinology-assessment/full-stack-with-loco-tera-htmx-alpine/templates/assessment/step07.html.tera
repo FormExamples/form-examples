@@ -1,0 +1,45 @@
+<div class="card">
+    <h2>Step 7: Pituitary Function</h2>
+    <p class="form-hint">Reference ranges: prolactin &lt;500 mU/L (women non-pregnant), &lt;325 (men); IGF-1 age-dependent.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="prolactin">Prolactin (mU/L)</label>
+            <input type="number" step="0.1" id="prolactin" name="pituitary_function.prolactin" value="{{ pituitary_function.prolactin }}">
+        </div>
+        <div class="form-group">
+            <label for="igf1">IGF-1 (nmol/L)</label>
+            <input type="number" step="0.1" id="igf1" name="pituitary_function.igf1" value="{{ pituitary_function.igf1 }}">
+        </div>
+        <div class="form-group">
+            <label for="growth_hormone">Growth hormone (ng/mL)</label>
+            <input type="number" step="0.1" id="growth_hormone" name="pituitary_function.growth_hormone" value="{{ pituitary_function.growthHormone }}">
+        </div>
+    </div>
+
+    {% set pitfields = [
+        ["headaches", "Headaches", pituitary_function.headaches],
+        ["visual_disturbance", "Visual disturbance", pituitary_function.visualDisturbance],
+        ["acromegalic_features", "Acromegalic features", pituitary_function.acromegalicFeatures],
+        ["pituitary_imaging_done", "Pituitary imaging performed?", pituitary_function.pituitaryImagingDone]
+    ] %}
+    {% for f in pitfields %}
+    <div class="form-group">
+        <label for="pit_{{ f[0] }}">{{ f[1] }}</label>
+        <select id="pit_{{ f[0] }}" name="pituitary_function.{{ f[0] }}">
+            <option value="" {% if f[2] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if f[2] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if f[2] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="pituitary_imaging_findings">Imaging findings</label>
+        <textarea id="pituitary_imaging_findings" name="pituitary_function.pituitary_imaging_findings">{{ pituitary_function.pituitaryImagingFindings }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="pituitary_notes">Notes</label>
+        <textarea id="pituitary_notes" name="pituitary_function.pituitary_notes">{{ pituitary_function.pituitaryNotes }}</textarea>
+    </div>
+</div>

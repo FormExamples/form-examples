@@ -1,0 +1,116 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Assessment Report - {{ overall_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Endocrinology Assessment &mdash; Report</h1>
+    <div class="status-badge status-{{ overall_status }}">{{ overall_label }}</div>
+    <div class="status-label">Axes assessed: {{ answered_count }} / 6</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Case ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}<br>
+            <strong>Ethnicity:</strong> {{ data.demographics.ethnicity }}
+        </div>
+        <div>
+            <strong>Weight:</strong> {{ data.demographics.weight }} kg<br>
+            <strong>Height:</strong> {{ data.demographics.height }} cm<br>
+            <strong>BMI:</strong> {{ data.demographics.bmi }}
+        </div>
+    </div>
+</div>
+
+<!-- Per-Axis Grades -->
+<div class="card">
+    <h2>Per-Axis Grades</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Axis</th>
+                <th>Status</th>
+                <th>Rationale</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ag in axis_grades %}
+            <tr>
+                <td>{{ ag.axis }}</td>
+                <td><span class="status-badge status-{{ ag.status }}">{{ ag.status }}</span></td>
+                <td>{{ ag.rationale }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Clinician Alerts ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired Rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired Axis Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Axis</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="status-badge status-{{ rule.status }}">{{ rule.status }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Clinical Impression -->
+<div class="card">
+    <h2>Clinical Impression &amp; Management Plan</h2>
+    <p><strong>Working Diagnosis:</strong> {{ data.clinicalImpression.workingDiagnosis }}</p>
+    <p><strong>Differential Diagnoses:</strong> {{ data.clinicalImpression.differentialDiagnoses }}</p>
+    <p><strong>Investigations Requested:</strong> {{ data.clinicalImpression.investigationsRequested }}</p>
+    <p><strong>Management Plan:</strong> {{ data.clinicalImpression.managementPlan }}</p>
+    <p><strong>Follow-up:</strong> {{ data.clinicalImpression.followUpPlan }}</p>
+    <p><strong>Referral required:</strong> {{ data.clinicalImpression.referralRequired }} ({{ data.clinicalImpression.referralSpecialty }})</p>
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

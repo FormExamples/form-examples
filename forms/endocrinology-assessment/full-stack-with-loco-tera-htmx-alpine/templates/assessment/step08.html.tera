@@ -1,0 +1,48 @@
+<div class="card">
+    <h2>Step 8: Bone &amp; Calcium</h2>
+    <p class="form-hint">Reference ranges: PTH 1.6&ndash;6.9 pmol/L; vitamin D &ge;50 sufficient; corrected calcium 2.20&ndash;2.60 mmol/L.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="pth">PTH (pmol/L)</label>
+            <input type="number" step="0.01" id="pth" name="bone_calcium.pth" value="{{ bone_calcium.pth }}">
+        </div>
+        <div class="form-group">
+            <label for="vitamin_d">Vitamin D (nmol/L)</label>
+            <input type="number" step="0.1" id="vitamin_d" name="bone_calcium.vitamin_d" value="{{ bone_calcium.vitaminD }}">
+        </div>
+        <div class="form-group">
+            <label for="calcium_corrected">Corrected calcium (mmol/L)</label>
+            <input type="number" step="0.01" id="calcium_corrected" name="bone_calcium.calcium_corrected" value="{{ bone_calcium.calciumCorrected }}">
+        </div>
+        <div class="form-group">
+            <label for="phosphate">Phosphate (mmol/L)</label>
+            <input type="number" step="0.01" id="phosphate" name="bone_calcium.phosphate" value="{{ bone_calcium.phosphate }}">
+        </div>
+    </div>
+
+    {% set bonefields = [
+        ["fragility_fracture", "Fragility fracture history", bone_calcium.fragilityFracture],
+        ["bone_pain", "Bone pain", bone_calcium.bonePain],
+        ["dexa_scan_done", "DEXA scan performed?", bone_calcium.dexaScanDone]
+    ] %}
+    {% for f in bonefields %}
+    <div class="form-group">
+        <label for="bone_{{ f[0] }}">{{ f[1] }}</label>
+        <select id="bone_{{ f[0] }}" name="bone_calcium.{{ f[0] }}">
+            <option value="" {% if f[2] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if f[2] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if f[2] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="dexa_result">DEXA result</label>
+        <input type="text" id="dexa_result" name="bone_calcium.dexa_result" value="{{ bone_calcium.dexaResult }}">
+    </div>
+    <div class="form-group">
+        <label for="bone_notes">Notes</label>
+        <textarea id="bone_notes" name="bone_calcium.bone_notes">{{ bone_calcium.boneNotes }}</textarea>
+    </div>
+</div>

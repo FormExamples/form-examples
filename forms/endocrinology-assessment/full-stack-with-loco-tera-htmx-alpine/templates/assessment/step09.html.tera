@@ -1,0 +1,89 @@
+<div class="card">
+    <h2>Step 9: Medications &amp; Lifestyle Review</h2>
+    <p class="form-hint">Current medications, steroid use, hormone therapy, smoking, alcohol, exercise, diet, and family history.</p>
+
+    <h3>Current Medications</h3>
+    <p class="form-hint">Add up to six current medications below.</p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="medication-row">
+        <legend>Medication {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="med_{{ i }}_name">Name</label>
+                <input type="text" id="med_{{ i }}_name" name="current_medications[{{ i }}].name"
+                       value="{% if medications_lifestyle.currentMedications | length > i %}{{ medications_lifestyle.currentMedications[i].name }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="med_{{ i }}_dose">Dose</label>
+                <input type="text" id="med_{{ i }}_dose" name="current_medications[{{ i }}].dose"
+                       value="{% if medications_lifestyle.currentMedications | length > i %}{{ medications_lifestyle.currentMedications[i].dose }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="med_{{ i }}_frequency">Frequency</label>
+                <input type="text" id="med_{{ i }}_frequency" name="current_medications[{{ i }}].frequency"
+                       value="{% if medications_lifestyle.currentMedications | length > i %}{{ medications_lifestyle.currentMedications[i].frequency }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="steroid_use">Systemic steroid use?</label>
+            <select id="steroid_use" name="medications_lifestyle.steroid_use">
+                <option value="" {% if medications_lifestyle.steroidUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_lifestyle.steroidUse == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_lifestyle.steroidUse == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="steroid_details">Steroid details</label>
+            <input type="text" id="steroid_details" name="medications_lifestyle.steroid_details" value="{{ medications_lifestyle.steroidDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hormone_therapy">Hormone therapy?</label>
+            <select id="hormone_therapy" name="medications_lifestyle.hormone_therapy">
+                <option value="" {% if medications_lifestyle.hormoneTherapy == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if medications_lifestyle.hormoneTherapy == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if medications_lifestyle.hormoneTherapy == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hormone_therapy_details">Hormone therapy details</label>
+            <input type="text" id="hormone_therapy_details" name="medications_lifestyle.hormone_therapy_details" value="{{ medications_lifestyle.hormoneTherapyDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="smoking">Smoking</label>
+            <select id="smoking" name="medications_lifestyle.smoking">
+                <option value="" {% if medications_lifestyle.smoking == "" %}selected{% endif %}>&mdash;</option>
+                <option value="never" {% if medications_lifestyle.smoking == "never" %}selected{% endif %}>Never</option>
+                <option value="ex" {% if medications_lifestyle.smoking == "ex" %}selected{% endif %}>Ex-smoker</option>
+                <option value="current" {% if medications_lifestyle.smoking == "current" %}selected{% endif %}>Current</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="alcohol_units">Alcohol (units/week)</label>
+            <input type="text" id="alcohol_units" name="medications_lifestyle.alcohol_units" value="{{ medications_lifestyle.alcoholUnits }}">
+        </div>
+        <div class="form-group">
+            <label for="exercise_level">Exercise level</label>
+            <input type="text" id="exercise_level" name="medications_lifestyle.exercise_level" value="{{ medications_lifestyle.exerciseLevel }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="diet_pattern">Diet pattern</label>
+        <input type="text" id="diet_pattern" name="medications_lifestyle.diet_pattern" value="{{ medications_lifestyle.dietPattern }}">
+    </div>
+    <div class="form-group">
+        <label for="family_history_endocrine">Family history of endocrine disease</label>
+        <textarea id="family_history_endocrine" name="medications_lifestyle.family_history_endocrine">{{ medications_lifestyle.familyHistoryEndocrine }}</textarea>
+    </div>
+</div>

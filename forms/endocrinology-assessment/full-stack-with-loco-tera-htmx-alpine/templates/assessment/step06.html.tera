@@ -1,0 +1,45 @@
+<div class="card">
+    <h2>Step 6: Reproductive Axis</h2>
+    <p class="form-hint">Gonadotropins and sex steroids.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="fsh">FSH (IU/L)</label>
+            <input type="number" step="0.1" id="fsh" name="reproductive_axis.fsh" value="{{ reproductive_axis.fsh }}">
+        </div>
+        <div class="form-group">
+            <label for="lh">LH (IU/L)</label>
+            <input type="number" step="0.1" id="lh" name="reproductive_axis.lh" value="{{ reproductive_axis.lh }}">
+        </div>
+        <div class="form-group">
+            <label for="testosterone">Testosterone (nmol/L)</label>
+            <input type="number" step="0.1" id="testosterone" name="reproductive_axis.testosterone" value="{{ reproductive_axis.testosterone }}">
+        </div>
+        <div class="form-group">
+            <label for="oestradiol">Oestradiol (pmol/L)</label>
+            <input type="number" step="0.1" id="oestradiol" name="reproductive_axis.oestradiol" value="{{ reproductive_axis.oestradiol }}">
+        </div>
+    </div>
+
+    {% set repfields = [
+        ["menstrual_irregularity", "Menstrual irregularity", reproductive_axis.menstrualIrregularity],
+        ["infertility", "Infertility concern", reproductive_axis.infertility],
+        ["libido_change", "Libido change", reproductive_axis.libidoChange],
+        ["galactorrhoea", "Galactorrhoea", reproductive_axis.galactorrhoea]
+    ] %}
+    {% for f in repfields %}
+    <div class="form-group">
+        <label for="rep_{{ f[0] }}">{{ f[1] }}?</label>
+        <select id="rep_{{ f[0] }}" name="reproductive_axis.{{ f[0] }}">
+            <option value="" {% if f[2] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if f[2] == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if f[2] == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="reproductive_notes">Notes</label>
+        <textarea id="reproductive_notes" name="reproductive_axis.reproductive_notes">{{ reproductive_axis.reproductiveNotes }}</textarea>
+    </div>
+</div>
