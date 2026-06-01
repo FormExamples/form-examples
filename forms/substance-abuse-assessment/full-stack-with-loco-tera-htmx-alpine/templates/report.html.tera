@@ -1,0 +1,106 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Assessment Report - {{ overall_risk_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Substance Abuse Assessment &mdash; Report</h1>
+    <div class="risk-badge risk-{{ overall_risk }}">{{ overall_risk_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.demographics.sex }}
+        </div>
+        <div>
+            <strong>Primary Substance:</strong> {{ data.substanceUseHistory.primarySubstance }}<br>
+            <strong>Current Use Status:</strong> {{ data.substanceUseHistory.currentUseStatus }}<br>
+            <strong>Route:</strong> {{ data.substanceUseHistory.routeOfAdministration }}
+        </div>
+    </div>
+</div>
+
+<!-- AUDIT / DAST Scores -->
+<div class="card">
+    <h2>Screening Scores</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Instrument</th>
+                <th>Score</th>
+                <th>Risk Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AUDIT (Alcohol)</td>
+                <td>{{ audit_score }} / 40</td>
+                <td>{{ audit_risk_label }}</td>
+            </tr>
+            <tr>
+                <td>DAST-10 (Drug)</td>
+                <td>{{ dast_score }} / 10</td>
+                <td>{{ dast_risk_label }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Findings ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge severity-grade-{{ rule.grade }}">Grade {{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

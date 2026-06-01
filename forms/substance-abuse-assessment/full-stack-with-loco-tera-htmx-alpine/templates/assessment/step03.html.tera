@@ -1,0 +1,97 @@
+<div class="card">
+    <h2>Step 3: Drug Use (DAST-10)</h2>
+    <p class="form-hint">
+        Ten yes/no questions about drug use in the past 12 months. Q3 is
+        inversely scored (a "no" answer adds 1 point).
+    </p>
+
+    <div class="form-group">
+        <label for="dast_q1_non_medical_use">1. Have you used drugs other than those required for medical reasons?</label>
+        <select id="dast_q1_non_medical_use" name="drug_use_dast.dast_q1_non_medical_use">
+            <option value="" {% if drug_use_dast.dastQ1NonMedicalUse == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ1NonMedicalUse == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ1NonMedicalUse == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q2_poly_drug">2. Do you abuse more than one drug at a time?</label>
+        <select id="dast_q2_poly_drug" name="drug_use_dast.dast_q2_poly_drug">
+            <option value="" {% if drug_use_dast.dastQ2PolyDrug == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ2PolyDrug == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ2PolyDrug == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q3_able_to_stop">3. Are you always able to stop using drugs when you want to? <em>(inversely scored)</em></label>
+        <select id="dast_q3_able_to_stop" name="drug_use_dast.dast_q3_able_to_stop">
+            <option value="" {% if drug_use_dast.dastQ3AbleToStop == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if drug_use_dast.dastQ3AbleToStop == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if drug_use_dast.dastQ3AbleToStop == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q4_blackouts">4. Have you had "blackouts" or "flashbacks" as a result of drug use?</label>
+        <select id="dast_q4_blackouts" name="drug_use_dast.dast_q4_blackouts">
+            <option value="" {% if drug_use_dast.dastQ4Blackouts == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ4Blackouts == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ4Blackouts == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q5_guilt">5. Do you ever feel bad or guilty about your drug use?</label>
+        <select id="dast_q5_guilt" name="drug_use_dast.dast_q5_guilt">
+            <option value="" {% if drug_use_dast.dastQ5Guilt == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ5Guilt == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ5Guilt == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q6_complaints">6. Does your spouse, parent, or others ever complain about your involvement with drugs?</label>
+        <select id="dast_q6_complaints" name="drug_use_dast.dast_q6_complaints">
+            <option value="" {% if drug_use_dast.dastQ6Complaints == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ6Complaints == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ6Complaints == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q7_neglect">7. Have you neglected your family because of drug use?</label>
+        <select id="dast_q7_neglect" name="drug_use_dast.dast_q7_neglect">
+            <option value="" {% if drug_use_dast.dastQ7Neglect == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ7Neglect == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ7Neglect == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q8_illegal_activities">8. Have you engaged in illegal activities in order to obtain drugs?</label>
+        <select id="dast_q8_illegal_activities" name="drug_use_dast.dast_q8_illegal_activities">
+            <option value="" {% if drug_use_dast.dastQ8IllegalActivities == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ8IllegalActivities == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ8IllegalActivities == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q9_withdrawal">9. Have you ever experienced withdrawal symptoms when you stopped taking drugs?</label>
+        <select id="dast_q9_withdrawal" name="drug_use_dast.dast_q9_withdrawal">
+            <option value="" {% if drug_use_dast.dastQ9Withdrawal == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ9Withdrawal == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ9Withdrawal == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dast_q10_medical_problems">10. Have you had medical problems as a result of your drug use?</label>
+        <select id="dast_q10_medical_problems" name="drug_use_dast.dast_q10_medical_problems">
+            <option value="" {% if drug_use_dast.dastQ10MedicalProblems == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if drug_use_dast.dastQ10MedicalProblems == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if drug_use_dast.dastQ10MedicalProblems == "yes" %}selected{% endif %}>Yes</option>
+        </select>
+    </div>
+</div>

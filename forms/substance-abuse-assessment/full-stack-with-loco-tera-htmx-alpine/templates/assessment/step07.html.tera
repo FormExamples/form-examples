@@ -1,0 +1,160 @@
+<div class="card">
+    <h2>Step 7: Physical Health Impact</h2>
+    <p class="form-hint">Physical sequelae of substance use including BBV, organ damage, overdose.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="liver_disease">Liver disease</label>
+            <select id="liver_disease" name="physical_health_impact.liver_disease">
+                <option value="" {% if physical_health_impact.liverDisease == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.liverDisease == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.liverDisease == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="liver_disease_type">Liver disease type</label>
+            <select id="liver_disease_type" name="physical_health_impact.liver_disease_type">
+                <option value="" {% if physical_health_impact.liverDiseaseType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="fatty-liver" {% if physical_health_impact.liverDiseaseType == "fatty-liver" %}selected{% endif %}>Fatty liver</option>
+                <option value="hepatitis" {% if physical_health_impact.liverDiseaseType == "hepatitis" %}selected{% endif %}>Hepatitis</option>
+                <option value="cirrhosis" {% if physical_health_impact.liverDiseaseType == "cirrhosis" %}selected{% endif %}>Cirrhosis</option>
+                <option value="other" {% if physical_health_impact.liverDiseaseType == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hepatitis_b">Hepatitis B</label>
+            <select id="hepatitis_b" name="physical_health_impact.hepatitis_b">
+                <option value="" {% if physical_health_impact.hepatitisB == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.hepatitisB == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.hepatitisB == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_c">Hepatitis C</label>
+            <select id="hepatitis_c" name="physical_health_impact.hepatitis_c">
+                <option value="" {% if physical_health_impact.hepatitisC == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.hepatitisC == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.hepatitisC == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hiv_status">HIV status</label>
+            <select id="hiv_status" name="physical_health_impact.hiv_status">
+                <option value="" {% if physical_health_impact.hivStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if physical_health_impact.hivStatus == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if physical_health_impact.hivStatus == "positive" %}selected{% endif %}>Positive</option>
+                <option value="unknown" {% if physical_health_impact.hivStatus == "unknown" %}selected{% endif %}>Unknown / not tested</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="cardiovascular_issues">Cardiovascular issues</label>
+            <select id="cardiovascular_issues" name="physical_health_impact.cardiovascular_issues">
+                <option value="" {% if physical_health_impact.cardiovascularIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.cardiovascularIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.cardiovascularIssues == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cardiovascular_details">Cardiovascular details</label>
+            <input type="text" id="cardiovascular_details" name="physical_health_impact.cardiovascular_details"
+                   value="{{ physical_health_impact.cardiovascularDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="respiratory_issues">Respiratory issues</label>
+            <select id="respiratory_issues" name="physical_health_impact.respiratory_issues">
+                <option value="" {% if physical_health_impact.respiratoryIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.respiratoryIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.respiratoryIssues == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="respiratory_details">Respiratory details</label>
+            <input type="text" id="respiratory_details" name="physical_health_impact.respiratory_details"
+                   value="{{ physical_health_impact.respiratoryDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="gastrointestinal_issues">GI issues</label>
+            <select id="gastrointestinal_issues" name="physical_health_impact.gastrointestinal_issues">
+                <option value="" {% if physical_health_impact.gastrointestinalIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.gastrointestinalIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.gastrointestinalIssues == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gastrointestinal_details">GI details</label>
+            <input type="text" id="gastrointestinal_details" name="physical_health_impact.gastrointestinal_details"
+                   value="{{ physical_health_impact.gastrointestinalDetails }}">
+        </div>
+        <div class="form-group">
+            <label for="neurological_issues">Neurological issues</label>
+            <select id="neurological_issues" name="physical_health_impact.neurological_issues">
+                <option value="" {% if physical_health_impact.neurologicalIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.neurologicalIssues == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.neurologicalIssues == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="neurological_details">Neurological details</label>
+            <input type="text" id="neurological_details" name="physical_health_impact.neurological_details"
+                   value="{{ physical_health_impact.neurologicalDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="nutritional_deficiency">Nutritional deficiency</label>
+            <select id="nutritional_deficiency" name="physical_health_impact.nutritional_deficiency">
+                <option value="" {% if physical_health_impact.nutritionalDeficiency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.nutritionalDeficiency == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.nutritionalDeficiency == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chronic_pain">Chronic pain</label>
+            <select id="chronic_pain" name="physical_health_impact.chronic_pain">
+                <option value="" {% if physical_health_impact.chronicPain == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.chronicPain == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.chronicPain == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="chronic_pain_details">Chronic pain details</label>
+            <input type="text" id="chronic_pain_details" name="physical_health_impact.chronic_pain_details"
+                   value="{{ physical_health_impact.chronicPainDetails }}">
+        </div>
+    </div>
+
+    <h3>Overdose history</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="overdose_history">Any previous overdose?</label>
+            <select id="overdose_history" name="physical_health_impact.overdose_history">
+                <option value="" {% if physical_health_impact.overdoseHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if physical_health_impact.overdoseHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if physical_health_impact.overdoseHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="overdose_count">Number of overdoses</label>
+            <input type="number" min="0" id="overdose_count" name="physical_health_impact.overdose_count"
+                   value="{{ physical_health_impact.overdoseCount }}">
+        </div>
+        <div class="form-group">
+            <label for="last_overdose_date">Last overdose date</label>
+            <input type="date" id="last_overdose_date" name="physical_health_impact.last_overdose_date"
+                   value="{{ physical_health_impact.lastOverdoseDate }}">
+        </div>
+    </div>
+</div>

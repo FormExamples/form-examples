@@ -1,0 +1,154 @@
+<div class="card">
+    <h2>Step 6: Mental Health Comorbidities</h2>
+    <p class="form-hint">Co-occurring psychiatric conditions and suicide-risk screen.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="depression">Depression</label>
+            <select id="depression" name="mental_health_comorbidities.depression">
+                <option value="" {% if mental_health_comorbidities.depression == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.depression == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.depression == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="depression_severity">Depression severity</label>
+            <select id="depression_severity" name="mental_health_comorbidities.depression_severity">
+                <option value="" {% if mental_health_comorbidities.depressionSeverity == "" %}selected{% endif %}>&mdash;</option>
+                <option value="mild" {% if mental_health_comorbidities.depressionSeverity == "mild" %}selected{% endif %}>Mild</option>
+                <option value="moderate" {% if mental_health_comorbidities.depressionSeverity == "moderate" %}selected{% endif %}>Moderate</option>
+                <option value="severe" {% if mental_health_comorbidities.depressionSeverity == "severe" %}selected{% endif %}>Severe</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="anxiety_disorder">Anxiety disorder</label>
+            <select id="anxiety_disorder" name="mental_health_comorbidities.anxiety_disorder">
+                <option value="" {% if mental_health_comorbidities.anxietyDisorder == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.anxietyDisorder == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.anxietyDisorder == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="anxiety_disorder_type">Anxiety disorder type</label>
+            <input type="text" id="anxiety_disorder_type" name="mental_health_comorbidities.anxiety_disorder_type"
+                   value="{{ mental_health_comorbidities.anxietyDisorderType }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ptsd">PTSD</label>
+            <select id="ptsd" name="mental_health_comorbidities.ptsd">
+                <option value="" {% if mental_health_comorbidities.ptsd == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.ptsd == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.ptsd == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ptsd_details">PTSD details</label>
+            <input type="text" id="ptsd_details" name="mental_health_comorbidities.ptsd_details"
+                   value="{{ mental_health_comorbidities.ptsdDetails }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="bipolar_disorder">Bipolar disorder</label>
+            <select id="bipolar_disorder" name="mental_health_comorbidities.bipolar_disorder">
+                <option value="" {% if mental_health_comorbidities.bipolarDisorder == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.bipolarDisorder == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.bipolarDisorder == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="psychosis">Psychosis</label>
+            <select id="psychosis" name="mental_health_comorbidities.psychosis">
+                <option value="" {% if mental_health_comorbidities.psychosis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.psychosis == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.psychosis == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="personality_disorder">Personality disorder</label>
+            <select id="personality_disorder" name="mental_health_comorbidities.personality_disorder">
+                <option value="" {% if mental_health_comorbidities.personalityDisorder == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.personalityDisorder == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.personalityDisorder == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="eating_disorder">Eating disorder</label>
+            <select id="eating_disorder" name="mental_health_comorbidities.eating_disorder">
+                <option value="" {% if mental_health_comorbidities.eatingDisorder == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.eatingDisorder == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.eatingDisorder == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="adhd">ADHD</label>
+            <select id="adhd" name="mental_health_comorbidities.adhd">
+                <option value="" {% if mental_health_comorbidities.adhd == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.adhd == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.adhd == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Suicide-risk screen</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="suicidal_ideation">Lifetime suicidal ideation</label>
+            <select id="suicidal_ideation" name="mental_health_comorbidities.suicidal_ideation">
+                <option value="" {% if mental_health_comorbidities.suicidalIdeation == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.suicidalIdeation == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.suicidalIdeation == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="suicidal_ideation_current">Current suicidal ideation</label>
+            <select id="suicidal_ideation_current" name="mental_health_comorbidities.suicidal_ideation_current">
+                <option value="" {% if mental_health_comorbidities.suicidalIdeationCurrent == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.suicidalIdeationCurrent == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.suicidalIdeationCurrent == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="self_harm_history">Self-harm history</label>
+            <select id="self_harm_history" name="mental_health_comorbidities.self_harm_history">
+                <option value="" {% if mental_health_comorbidities.selfHarmHistory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.selfHarmHistory == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.selfHarmHistory == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="previous_suicide_attempts">Previous suicide attempts</label>
+            <select id="previous_suicide_attempts" name="mental_health_comorbidities.previous_suicide_attempts">
+                <option value="" {% if mental_health_comorbidities.previousSuicideAttempts == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.previousSuicideAttempts == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.previousSuicideAttempts == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="psychiatric_medication">Currently on psychiatric medication?</label>
+            <select id="psychiatric_medication" name="mental_health_comorbidities.psychiatric_medication">
+                <option value="" {% if mental_health_comorbidities.psychiatricMedication == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if mental_health_comorbidities.psychiatricMedication == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if mental_health_comorbidities.psychiatricMedication == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="psychiatric_medication_details">Medication details</label>
+            <input type="text" id="psychiatric_medication_details" name="mental_health_comorbidities.psychiatric_medication_details"
+                   value="{{ mental_health_comorbidities.psychiatricMedicationDetails }}">
+        </div>
+    </div>
+</div>

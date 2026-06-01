@@ -1,0 +1,100 @@
+<div class="card">
+    <h2>Step 4: Substance Use History</h2>
+    <p class="form-hint">History and patterns of substance use, with BBV risk screening.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="age_first_alcohol_use">Age at first alcohol use</label>
+            <input type="number" min="0" max="120" id="age_first_alcohol_use" name="substance_use_history.age_first_alcohol_use"
+                   value="{{ substance_use_history.ageFirstAlcoholUse }}">
+        </div>
+        <div class="form-group">
+            <label for="age_first_drug_use">Age at first drug use</label>
+            <input type="number" min="0" max="120" id="age_first_drug_use" name="substance_use_history.age_first_drug_use"
+                   value="{{ substance_use_history.ageFirstDrugUse }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="primary_substance">Primary substance</label>
+        <input type="text" id="primary_substance" name="substance_use_history.primary_substance"
+               value="{{ substance_use_history.primarySubstance }}" placeholder="e.g. alcohol, opioids, cocaine, cannabis">
+    </div>
+
+    <div class="form-group">
+        <label for="secondary_substances">Secondary substances</label>
+        <input type="text" id="secondary_substances" name="substance_use_history.secondary_substances"
+               value="{{ substance_use_history.secondarySubstances }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="route_of_administration">Route of administration</label>
+            <select id="route_of_administration" name="substance_use_history.route_of_administration">
+                <option value="" {% if substance_use_history.routeOfAdministration == "" %}selected{% endif %}>&mdash;</option>
+                <option value="oral" {% if substance_use_history.routeOfAdministration == "oral" %}selected{% endif %}>Oral</option>
+                <option value="inhaled" {% if substance_use_history.routeOfAdministration == "inhaled" %}selected{% endif %}>Inhaled</option>
+                <option value="smoked" {% if substance_use_history.routeOfAdministration == "smoked" %}selected{% endif %}>Smoked</option>
+                <option value="intranasal" {% if substance_use_history.routeOfAdministration == "intranasal" %}selected{% endif %}>Intranasal</option>
+                <option value="intravenous" {% if substance_use_history.routeOfAdministration == "intravenous" %}selected{% endif %}>Intravenous</option>
+                <option value="other" {% if substance_use_history.routeOfAdministration == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="frequency_of_use">Frequency of use</label>
+            <select id="frequency_of_use" name="substance_use_history.frequency_of_use">
+                <option value="" {% if substance_use_history.frequencyOfUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="less-than-monthly" {% if substance_use_history.frequencyOfUse == "less-than-monthly" %}selected{% endif %}>Less than monthly</option>
+                <option value="monthly" {% if substance_use_history.frequencyOfUse == "monthly" %}selected{% endif %}>Monthly</option>
+                <option value="weekly" {% if substance_use_history.frequencyOfUse == "weekly" %}selected{% endif %}>Weekly</option>
+                <option value="daily" {% if substance_use_history.frequencyOfUse == "daily" %}selected{% endif %}>Daily</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duration_of_use">Duration of use</label>
+            <select id="duration_of_use" name="substance_use_history.duration_of_use">
+                <option value="" {% if substance_use_history.durationOfUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="less-than-1-year" {% if substance_use_history.durationOfUse == "less-than-1-year" %}selected{% endif %}>Less than 1 year</option>
+                <option value="1-to-5-years" {% if substance_use_history.durationOfUse == "1-to-5-years" %}selected{% endif %}>1-5 years</option>
+                <option value="5-to-10-years" {% if substance_use_history.durationOfUse == "5-to-10-years" %}selected{% endif %}>5-10 years</option>
+                <option value="greater-10-years" {% if substance_use_history.durationOfUse == "greater-10-years" %}selected{% endif %}>More than 10 years</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="last_use_date">Last use date</label>
+            <input type="date" id="last_use_date" name="substance_use_history.last_use_date"
+                   value="{{ substance_use_history.lastUseDate }}">
+        </div>
+        <div class="form-group">
+            <label for="current_use_status">Current use status</label>
+            <select id="current_use_status" name="substance_use_history.current_use_status">
+                <option value="" {% if substance_use_history.currentUseStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="actively-using" {% if substance_use_history.currentUseStatus == "actively-using" %}selected{% endif %}>Actively using</option>
+                <option value="reduced-use" {% if substance_use_history.currentUseStatus == "reduced-use" %}selected{% endif %}>Reduced use</option>
+                <option value="abstinent" {% if substance_use_history.currentUseStatus == "abstinent" %}selected{% endif %}>Abstinent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="iv_drug_use">Intravenous drug use?</label>
+            <select id="iv_drug_use" name="substance_use_history.iv_drug_use">
+                <option value="" {% if substance_use_history.ivDrugUse == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if substance_use_history.ivDrugUse == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if substance_use_history.ivDrugUse == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="needle_sharing">Needle sharing?</label>
+            <select id="needle_sharing" name="substance_use_history.needle_sharing">
+                <option value="" {% if substance_use_history.needleSharing == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if substance_use_history.needleSharing == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if substance_use_history.needleSharing == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+    </div>
+</div>
