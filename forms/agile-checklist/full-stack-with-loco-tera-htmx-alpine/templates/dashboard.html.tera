@@ -1,150 +1,102 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Agile Checklist — Dashboard{% endblock %}
+{% block title %}Agile Checklist - Dashboard{% endblock %}
 
 {% block content %}
-<style>
-  table.assessments { width: 100%; background: var(--color-card); border-collapse: collapse;
-    font-size: 0.875rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-  table.assessments thead th { background: #f1f5f9; text-align: left; padding: 8px;
-    border-bottom: 1px solid var(--color-border); white-space: nowrap; }
-  table.assessments tbody td { padding: 8px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
-  tr.maturity-optimising { background: #ecfdf5; }
-  tr.maturity-mature { background: #f0fdf4; }
-  tr.maturity-developing { background: #fefce8; }
-  tr.maturity-initial { background: #fff7ed; }
-  tr.maturity-ad-hoc { background: #fef2f2; }
-  tr.maturity-insufficient-data { background: #f8fafc; }
-  td.maturity { text-transform: uppercase; font-weight: 600; }
-  td.overall { font-weight: 600; }
-  .tile-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-  @media (min-width: 720px) { .tile-row { grid-template-columns: repeat(6, 1fr); } }
-  .tile { background: var(--color-card); border: 1px solid var(--color-border);
-    border-radius: 6px; padding: 10px 12px; }
-  .tile p.label { margin: 0; font-size: 0.7rem; color: var(--color-muted);
-    text-transform: uppercase; letter-spacing: 0.04em; }
-  .tile p.value { margin: 0; font-size: 1.5rem; font-weight: 600; }
-  .table-scroll { overflow-x: auto; }
-  .nav-tabs { display: inline-flex; gap: 4px; margin-bottom: 12px; }
-  .nav-tabs a { background: var(--color-card); color: var(--color-text);
-    border: 1px solid var(--color-border); padding: 4px 12px; border-radius: 4px;
-    text-decoration: none; font-size: 0.85rem; }
-  .nav-tabs a.active { background: var(--color-brand); color: #fff; border-color: var(--color-brand); }
-</style>
+<div class="dashboard-header">
+    <h1>Agile Checklist Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
 
-<header class="top">
-  <h1>Agile Checklist — Dashboard</h1>
-  <p>Recent checklist submissions, composite maturity, and operational flags. Server-rendered by axum + Tera with sample data (Rust full-stack demo).</p>
-</header>
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Respondent, team, or organisation...">
+    </div>
+    <div class="form-group">
+        <label for="maturity">Maturity</label>
+        <select id="maturity" name="maturity">
+            <option value="">All</option>
+            <option value="optimising" {% if maturity == "optimising" %}selected{% endif %}>Optimising</option>
+            <option value="mature" {% if maturity == "mature" %}selected{% endif %}>Mature</option>
+            <option value="developing" {% if maturity == "developing" %}selected{% endif %}>Developing</option>
+            <option value="initial" {% if maturity == "initial" %}selected{% endif %}>Initial</option>
+            <option value="ad-hoc" {% if maturity == "ad-hoc" %}selected{% endif %}>Ad-hoc</option>
+            <option value="insufficient-data" {% if maturity == "insufficient-data" %}selected{% endif %}>Insufficient data</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" name="role">
+            <option value="">All</option>
+            <option value="team-member" {% if role == "team-member" %}selected{% endif %}>Team member</option>
+            <option value="team-lead" {% if role == "team-lead" %}selected{% endif %}>Team lead</option>
+            <option value="scrum-master" {% if role == "scrum-master" %}selected{% endif %}>Scrum master</option>
+            <option value="product-owner" {% if role == "product-owner" %}selected{% endif %}>Product owner</option>
+            <option value="engineering-manager" {% if role == "engineering-manager" %}selected{% endif %}>Engineering manager</option>
+            <option value="agile-coach" {% if role == "agile-coach" %}selected{% endif %}>Agile coach</option>
+            <option value="executive-sponsor" {% if role == "executive-sponsor" %}selected{% endif %}>Executive sponsor</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-priority flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
 
-<main>
-  <nav class="nav-tabs" aria-label="View">
-    <a href="/">Form</a>
-    <a href="/dashboard" class="active">Dashboard</a>
-  </nav>
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
 
-  <section class="tile-row" aria-label="Maturity totals">
-    <div class="tile"><p class="label">optimising</p><p class="value">{{ totals.optimising }}</p></div>
-    <div class="tile"><p class="label">mature</p><p class="value">{{ totals.mature }}</p></div>
-    <div class="tile"><p class="label">developing</p><p class="value">{{ totals.developing }}</p></div>
-    <div class="tile"><p class="label">initial</p><p class="value">{{ totals.initial }}</p></div>
-    <div class="tile"><p class="label">ad-hoc</p><p class="value">{{ totals.adHoc }}</p></div>
-    <div class="tile"><p class="label">insufficient-data</p><p class="value">{{ totals.insufficientData }}</p></div>
-  </section>
-
-  <h2 style="font-size:1rem;margin:16px 0 8px">Individuals ({{ rows | length }})</h2>
-  <div class="table-scroll">
-    <table class="assessments" aria-label="Checklist submissions">
-      <thead>
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
         <tr>
-          <th>Date</th>
-          <th>Respondent</th>
-          <th>Role</th>
-          <th>Team</th>
-          <th>Org</th>
-          <th>Answered</th>
-          <th>Teams</th>
-          <th>Stakeholders</th>
-          <th>Practices</th>
-          <th>Overall</th>
-          <th>Maturity</th>
-          <th>Weak</th>
-          <th>Flags</th>
-          <th></th>
+            <th>Date</th>
+            <th>Respondent</th>
+            <th>Team / Org</th>
+            <th>Period</th>
+            <th>Maturity</th>
+            <th>Overall</th>
+            <th>Teams</th>
+            <th>Stakeholders</th>
+            <th>Practices</th>
+            <th>Flags</th>
         </tr>
-      </thead>
-      <tbody>
-        {% for r in rows %}
-          <tr class="maturity-{{ r.maturityClass }}">
-            <td>{{ r.date }}</td>
-            <td>{% if r.isAnonymous %}Anonymous 🔒{% else %}{{ r.respondent }}{% endif %}</td>
-            <td>{% if r.isAnonymous %}—{% else %}{{ r.role }}{% endif %}</td>
-            <td>{{ r.team }}</td>
-            <td>{{ r.organisation }}</td>
-            <td>{{ r.answered }}/57</td>
-            <td>{% if r.teamsPercent %}{{ r.teamsPercent }}%{% else %}—{% endif %}</td>
-            <td>{% if r.stakeholdersPercent %}{{ r.stakeholdersPercent }}%{% else %}—{% endif %}</td>
-            <td>{% if r.practicesPercent %}{{ r.practicesPercent }}%{% else %}—{% endif %}</td>
-            <td class="overall">{% if r.overallPercent %}{{ r.overallPercent }}%{% else %}—{% endif %}</td>
-            <td class="maturity">{{ r.maturity }}</td>
-            <td>{{ r.weakSections | join(sep=", ") | default(value="—") }}</td>
-            <td>{{ r.flags | join(sep=", ") | default(value="—") }}</td>
-            <td>
-              <a href="/submission/{{ r.id }}"
-                 style="color: var(--color-brand); text-decoration: none; white-space: nowrap"
-              >Detail →</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  <h2 style="font-size:1rem;margin:24px 0 8px">Teams ({{ teams | length }})</h2>
-  <div class="table-scroll">
-    <table class="assessments" aria-label="Team aggregates">
-      <thead>
+    </thead>
+    <tbody>
+        {% for a in assessments %}
         <tr>
-          <th>Team</th>
-          <th>Organisation</th>
-          <th>Submissions</th>
-          <th>Mean of overall %</th>
-          <th>Maturity</th>
-          <th>Trend (0–100%)</th>
-          <th>Top flags</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for t in teams %}
-          <tr class="maturity-{{ t.maturityClass }}">
-            <td>{{ t.team }}</td>
-            <td>{{ t.organisation }}</td>
-            <td>{{ t.count }}</td>
-            <td>{% if t.meanOfMeans %}{{ t.meanOfMeans | round }}%{% else %}—{% endif %}</td>
-            <td class="maturity">{{ t.maturity }}</td>
+            <td><a href="/assessment/{{ a.id }}/report">{{ a.assessmentDate }}</a></td>
+            <td>{{ a.respondentName }}<br><small>{{ a.respondentRole }}</small></td>
+            <td>{{ a.team }}<br><small>{{ a.organisation }}</small></td>
+            <td>{{ a.assessmentPeriod }}</td>
+            <td><span class="checklist-badge checklist-{{ a.maturity }}">{{ a.maturityLabel }}</span></td>
+            <td>{% if a.overallPercent %}{{ a.overallPercent }}%{% else %}&mdash;{% endif %}</td>
+            <td>{% if a.teamsPercent %}{{ a.teamsPercent }}%{% else %}&mdash;{% endif %}</td>
+            <td>{% if a.stakeholdersPercent %}{{ a.stakeholdersPercent }}%{% else %}&mdash;{% endif %}</td>
+            <td>{% if a.practicesPercent %}{{ a.practicesPercent }}%{% else %}&mdash;{% endif %}</td>
             <td>
-              {% if t.sparkPath %}
-                <svg width="100" height="28" viewBox="0 0 100 28" role="img" aria-label="Trend">
-                  <title>{% for p in t.trend %}{{ p.date }}: {{ p.overallPercent }}%{% if not loop.last %} · {% endif %}{% endfor %}</title>
-                  <path d="{{ t.sparkPath }}" fill="none" stroke="{{ t.sparkColor }}" stroke-width="1.5" />
-                  <circle cx="{{ t.sparkLastX }}" cy="{{ t.sparkLastY }}" r="2" fill="{{ t.sparkColor }}" />
-                </svg>
-              {% else %}
-                <span style="color:#94a3b8">—</span>
-              {% endif %}
+                {% if a.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ a.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
             </td>
-            <td>{{ t.topFlags | join(sep=", ") | default(value="—") }}</td>
-          </tr>
+        </tr>
         {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  <p class="description" style="margin-top:16px">
-    Server-rendered demo using a baked-in sample data set
-    (15 rows, 6 teams) identical to the SvelteKit and static-HTML
-    dashboards. In production this view would query the
-    <code>agile_checklist_grade</code> table via SeaORM.
-  </p>
-</main>
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
 {% endblock %}

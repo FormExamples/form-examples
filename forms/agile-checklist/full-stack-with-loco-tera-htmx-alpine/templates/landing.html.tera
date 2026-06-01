@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Agile Checklist - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Agile Checklist</h1>
+        <p class="landing-description">
+            A team / organisation self-assessment that audits <strong>57 concrete behaviours</strong>
+            of an agile way-of-working across three sections &mdash; <strong>Teams</strong>,
+            <strong>Stakeholders</strong>, and <strong>Practices</strong> &mdash; and produces a
+            composite agility maturity level (Ad-hoc / Initial / Developing / Mature / Optimising),
+            per-section sub-scores, weak-section flags, and a coaching action plan.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>57 Items</h3>
+                <p>Each item is answered <em>yes</em>, <em>no</em>, or <em>not-applicable</em>; not-applicable items are excluded from the denominator.</p>
+            </div>
+            <div class="feature">
+                <h3>Maturity Level</h3>
+                <p>Composite maturity from the unweighted mean of the three section percentages, with band thresholds at 25%, 50%, 75%, 90%.</p>
+            </div>
+            <div class="feature">
+                <h3>Operational Flags</h3>
+                <p>Independent flags for autonomy risk, stakeholder trust, finished-work, experimentation, psychological safety, and more.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

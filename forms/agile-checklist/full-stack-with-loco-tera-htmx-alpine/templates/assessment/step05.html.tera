@@ -1,0 +1,26 @@
+<div class="card">
+    <h2>Step 5: Summary &amp; Action Plan</h2>
+    <p class="form-hint">Record the top three coaching actions, optional coach notes, and any sign-off comments.</p>
+
+    <div class="form-group">
+        <label for="top_action_1">Top action #1</label>
+        <input type="text" id="top_action_1" name="action_plan.top_action_1" value="{{ action_plan.topAction1 }}">
+    </div>
+    <div class="form-group">
+        <label for="top_action_2">Top action #2</label>
+        <input type="text" id="top_action_2" name="action_plan.top_action_2" value="{{ action_plan.topAction2 }}">
+    </div>
+    <div class="form-group">
+        <label for="top_action_3">Top action #3</label>
+        <input type="text" id="top_action_3" name="action_plan.top_action_3" value="{{ action_plan.topAction3 }}">
+    </div>
+
+    <div class="form-group">
+        <label for="coach_notes">Coach notes</label>
+        <textarea id="coach_notes" name="action_plan.coach_notes" rows="3">{{ action_plan.coachNotes }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="overall_notes">Overall notes / sign-off</label>
+        <textarea id="overall_notes" name="action_plan.overall_notes" rows="3">{{ action_plan.overallNotes }}</textarea>
+    </div>
+</div>

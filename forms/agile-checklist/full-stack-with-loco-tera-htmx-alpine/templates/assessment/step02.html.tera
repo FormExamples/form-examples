@@ -1,0 +1,18 @@
+<div class="card">
+    <h2>Step 2: Teams (25 items)</h2>
+    <p class="form-hint">Autonomy, collaboration, learning, motivation, delivery. Each item is yes / no / not-applicable.</p>
+
+    {% for item in teams_items %}
+    <div class="form-group item-row">
+        <label for="answer_{{ item.id }}">
+            <code>{{ item.id }}</code> {{ item.text }}
+        </label>
+        <select id="answer_{{ item.id }}" name="answers.{{ item.id }}">
+            <option value="" {% if answers[item.id] is undefined or answers[item.id] == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if answers[item.id] == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if answers[item.id] == "no" %}selected{% endif %}>No</option>
+            <option value="not-applicable" {% if answers[item.id] == "not-applicable" %}selected{% endif %}>Not applicable</option>
+        </select>
+    </div>
+    {% endfor %}
+</div>

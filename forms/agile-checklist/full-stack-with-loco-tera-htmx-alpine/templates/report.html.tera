@@ -1,0 +1,144 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Assessment Report - {{ maturity_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Agile Checklist &mdash; Assessment Report</h1>
+    <div class="checklist-badge checklist-{{ maturity }}">{{ maturity_label }}</div>
+    <div class="checklist-label">
+        Overall: {% if overall_percent %}{{ overall_percent }}%{% else %}insufficient data{% endif %}
+        &mdash; {{ answered_count }} of 57 items answered
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Respondent -->
+<div class="card">
+    <h2>Respondent</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ respondent.respondentName }}<br>
+            <strong>Role:</strong> {{ respondent.respondentRole }}<br>
+            <strong>Anonymous:</strong> {{ respondent.isAnonymous }}
+        </div>
+        <div>
+            <strong>Team:</strong> {{ respondent.team }}<br>
+            <strong>Organisation:</strong> {{ respondent.organisation }}<br>
+            <strong>Period:</strong> {{ respondent.assessmentPeriod }} ({{ respondent.assessmentDate }})
+        </div>
+    </div>
+</div>
+
+<!-- Per-section scores -->
+<div class="card">
+    <h2>Section Scores</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Section</th>
+                <th>Yes</th>
+                <th>No</th>
+                <th>N/A</th>
+                <th>Applicable</th>
+                <th>Percent</th>
+                <th>Band</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Teams</td>
+                <td>{{ teams.yesCount }}</td>
+                <td>{{ teams.noCount }}</td>
+                <td>{{ teams.notApplicableCount }}</td>
+                <td>{{ teams.applicableCount }}</td>
+                <td>{% if teams.percent %}{{ teams.percent }}%{% else %}&mdash;{% endif %}</td>
+                <td><span class="badge badge-{{ teams.band }}">{{ teams.band }}</span></td>
+            </tr>
+            <tr>
+                <td>Stakeholders</td>
+                <td>{{ stakeholders.yesCount }}</td>
+                <td>{{ stakeholders.noCount }}</td>
+                <td>{{ stakeholders.notApplicableCount }}</td>
+                <td>{{ stakeholders.applicableCount }}</td>
+                <td>{% if stakeholders.percent %}{{ stakeholders.percent }}%{% else %}&mdash;{% endif %}</td>
+                <td><span class="badge badge-{{ stakeholders.band }}">{{ stakeholders.band }}</span></td>
+            </tr>
+            <tr>
+                <td>Practices</td>
+                <td>{{ practices.yesCount }}</td>
+                <td>{{ practices.noCount }}</td>
+                <td>{{ practices.notApplicableCount }}</td>
+                <td>{{ practices.applicableCount }}</td>
+                <td>{% if practices.percent %}{{ practices.percent }}%{% else %}&mdash;{% endif %}</td>
+                <td><span class="badge badge-{{ practices.band }}">{{ practices.band }}</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Fired maturity rules (coaching narrative) -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Coaching Narrative ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Rule</th>
+                <th>Section</th>
+                <th>Band</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.ruleId }}</code></td>
+                <td>{{ rule.section }}</td>
+                <td><span class="badge badge-{{ rule.band }}">{{ rule.band }}</span></td>
+                <td>{{ rule.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Additional flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Operational Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.description }}</span>
+            <div><em>Suggested action:</em> {{ flag.suggestedAction }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Action plan -->
+{% if action_plan.topAction1 or action_plan.topAction2 or action_plan.topAction3 or action_plan.coachNotes or action_plan.overallNotes %}
+<div class="card">
+    <h2>Action Plan</h2>
+    {% if action_plan.topAction1 %}<p><strong>Top action #1:</strong> {{ action_plan.topAction1 }}</p>{% endif %}
+    {% if action_plan.topAction2 %}<p><strong>Top action #2:</strong> {{ action_plan.topAction2 }}</p>{% endif %}
+    {% if action_plan.topAction3 %}<p><strong>Top action #3:</strong> {{ action_plan.topAction3 }}</p>{% endif %}
+    {% if action_plan.coachNotes %}<p><strong>Coach notes:</strong> {{ action_plan.coachNotes }}</p>{% endif %}
+    {% if action_plan.overallNotes %}<p><strong>Overall notes:</strong> {{ action_plan.overallNotes }}</p>{% endif %}
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
