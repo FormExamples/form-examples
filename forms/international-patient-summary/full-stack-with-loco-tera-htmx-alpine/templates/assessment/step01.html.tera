@@ -1,0 +1,78 @@
+<div class="card">
+    <h2>Section 1: Patient Demographics <span class="mandatory-badge">Mandatory</span></h2>
+    <p class="form-hint">Identifying details for the patient. Required for cross-border patient matching.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="given_name">Given name(s)</label>
+            <input type="text" id="given_name" name="patient_demographics.given_name"
+                   value="{{ patient_demographics.givenName }}">
+        </div>
+        <div class="form-group">
+            <label for="family_name">Family name</label>
+            <input type="text" id="family_name" name="patient_demographics.family_name"
+                   value="{{ patient_demographics.familyName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="patient_demographics.date_of_birth"
+                   value="{{ patient_demographics.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <select id="sex" name="patient_demographics.sex">
+                <option value="" {% if patient_demographics.sex == "" %}selected{% endif %}>&mdash;</option>
+                <option value="male" {% if patient_demographics.sex == "male" %}selected{% endif %}>Male</option>
+                <option value="female" {% if patient_demographics.sex == "female" %}selected{% endif %}>Female</option>
+                <option value="other" {% if patient_demographics.sex == "other" %}selected{% endif %}>Other</option>
+                <option value="unknown" {% if patient_demographics.sex == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="national_identifier">National Identifier (NHS, EHIC, NIE)</label>
+        <input type="text" id="national_identifier" name="patient_demographics.national_identifier"
+               value="{{ patient_demographics.nationalIdentifier }}" placeholder="Country-specific patient ID">
+    </div>
+
+    <div class="form-group">
+        <label for="address_line">Address line</label>
+        <input type="text" id="address_line" name="patient_demographics.address_line"
+               value="{{ patient_demographics.addressLine }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="patient_demographics.city"
+                   value="{{ patient_demographics.city }}">
+        </div>
+        <div class="form-group">
+            <label for="postal_code">Postal code</label>
+            <input type="text" id="postal_code" name="patient_demographics.postal_code"
+                   value="{{ patient_demographics.postalCode }}">
+        </div>
+        <div class="form-group">
+            <label for="country">Country (ISO 3166)</label>
+            <input type="text" id="country" name="patient_demographics.country"
+                   value="{{ patient_demographics.country }}" placeholder="e.g. GB, IE, DE">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="preferred_language">Preferred language (BCP-47)</label>
+            <input type="text" id="preferred_language" name="patient_demographics.preferred_language"
+                   value="{{ patient_demographics.preferredLanguage }}" placeholder="e.g. en-GB, fr-FR">
+        </div>
+        <div class="form-group">
+            <label for="contact_phone">Contact phone</label>
+            <input type="tel" id="contact_phone" name="patient_demographics.contact_phone"
+                   value="{{ patient_demographics.contactPhone }}">
+        </div>
+    </div>
+</div>

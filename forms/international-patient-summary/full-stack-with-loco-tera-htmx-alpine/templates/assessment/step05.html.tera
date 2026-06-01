@@ -1,0 +1,29 @@
+<div class="card">
+    <h2>Section 5: Immunisations <span class="mandatory-badge">Mandatory</span></h2>
+    <p class="form-hint">Vaccinations administered. Required for cross-border occupational and travel care. Up to six rows.</p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="list-row">
+        <legend>Immunisation {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="immunisations_{{ i }}_vaccine">Vaccine</label>
+                <input type="text" id="immunisations_{{ i }}_vaccine" name="immunisations[{{ i }}].vaccine"
+                       value="{% if immunisations | length > i %}{{ immunisations[i].vaccine }}{% endif %}"
+                       placeholder="e.g. Influenza">
+            </div>
+            <div class="form-group">
+                <label for="immunisations_{{ i }}_date">Date administered</label>
+                <input type="date" id="immunisations_{{ i }}_date" name="immunisations[{{ i }}].date"
+                       value="{% if immunisations | length > i %}{{ immunisations[i].date }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="immunisations_{{ i }}_lot_number">Lot number</label>
+                <input type="text" id="immunisations_{{ i }}_lot_number" name="immunisations[{{ i }}].lot_number"
+                       value="{% if immunisations | length > i %}{{ immunisations[i].lotNumber }}{% endif %}"
+                       placeholder="Optional">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+</div>

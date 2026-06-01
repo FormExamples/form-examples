@@ -1,0 +1,39 @@
+<div class="card">
+    <h2>Section 2: Problem List <span class="mandatory-badge">Mandatory</span></h2>
+    <p class="form-hint">Active and past problems. Use ICD-10 (or SNOMED CT) coding where possible. Up to six rows.</p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="list-row">
+        <legend>Problem {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="problem_list_{{ i }}_description">Description</label>
+                <input type="text" id="problem_list_{{ i }}_description" name="problem_list[{{ i }}].description"
+                       value="{% if problem_list | length > i %}{{ problem_list[i].description }}{% endif %}"
+                       placeholder="e.g. Type 2 diabetes">
+            </div>
+            <div class="form-group">
+                <label for="problem_list_{{ i }}_icd10_code">ICD-10 code</label>
+                <input type="text" id="problem_list_{{ i }}_icd10_code" name="problem_list[{{ i }}].icd10_code"
+                       value="{% if problem_list | length > i %}{{ problem_list[i].icd10Code }}{% endif %}"
+                       placeholder="e.g. E11.9">
+            </div>
+            <div class="form-group">
+                <label for="problem_list_{{ i }}_onset_date">Onset date</label>
+                <input type="date" id="problem_list_{{ i }}_onset_date" name="problem_list[{{ i }}].onset_date"
+                       value="{% if problem_list | length > i %}{{ problem_list[i].onsetDate }}{% endif %}">
+            </div>
+            <div class="form-group">
+                <label for="problem_list_{{ i }}_status">Status</label>
+                {% set s = "" %}{% if problem_list | length > i %}{% set_global s = problem_list[i].status %}{% endif %}
+                <select id="problem_list_{{ i }}_status" name="problem_list[{{ i }}].status">
+                    <option value="" {% if s == "" %}selected{% endif %}>&mdash;</option>
+                    <option value="active" {% if s == "active" %}selected{% endif %}>Active</option>
+                    <option value="inactive" {% if s == "inactive" %}selected{% endif %}>Inactive</option>
+                    <option value="resolved" {% if s == "resolved" %}selected{% endif %}>Resolved</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+</div>

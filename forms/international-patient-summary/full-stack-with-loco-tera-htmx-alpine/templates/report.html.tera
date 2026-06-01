@@ -1,0 +1,201 @@
+{% extends "base.html.tera" %}
+
+{% block title %}IPS Report - {{ completeness_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>International Patient Summary &mdash; Record</h1>
+    <div class="completeness-badge {{ completeness_class }}">{{ completeness_label }}</div>
+    <div class="completeness-level">
+        {{ mandatory_populated }} / {{ mandatory_total }} mandatory sections,
+        {{ optional_populated }} / {{ optional_total }} optional sections populated
+    </div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Record ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient Summary -->
+<div class="card">
+    <h2>Patient</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.patientDemographics.givenName }} {{ data.patientDemographics.familyName }}<br>
+            <strong>Date of Birth:</strong> {{ data.patientDemographics.dateOfBirth }}<br>
+            <strong>Sex:</strong> {{ data.patientDemographics.sex }}<br>
+            <strong>National Identifier:</strong> {{ data.patientDemographics.nationalIdentifier }}
+        </div>
+        <div>
+            <strong>Country:</strong> {{ data.patientDemographics.country }}<br>
+            <strong>Preferred Language:</strong> {{ data.patientDemographics.preferredLanguage }}<br>
+            <strong>Contact:</strong> {{ data.patientDemographics.contactPhone }}<br>
+            <strong>Address:</strong> {{ data.patientDemographics.addressLine }}, {{ data.patientDemographics.city }} {{ data.patientDemographics.postalCode }}
+        </div>
+    </div>
+</div>
+
+<!-- Authoring Clinician -->
+<div class="card">
+    <h2>Authoring Clinician</h2>
+    <p>
+        <strong>{{ data.authoringClinician.clinicianName }}</strong>
+        &mdash; {{ data.authoringClinician.clinicianRole }}<br>
+        {{ data.authoringClinician.organisation }} ({{ data.authoringClinician.country }})<br>
+        Status: <strong>{{ data.authoringClinician.authoringStatus }}</strong>
+        {% if data.authoringClinician.signoffDate %} &mdash; signed {{ data.authoringClinician.signoffDate }}{% endif %}
+    </p>
+</div>
+
+<!-- Per-section audit -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Per-Section Validation</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Section</th>
+                <th>Requirement</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>
+                    {{ rule.category }}
+                    {% if not rule.mandatory %} <span class="optional-badge">Optional</span>{% endif %}
+                </td>
+                <td>{{ rule.description }}</td>
+                <td><span class="status-pill status-{{ rule.status }}">{{ rule.status }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Safety / clinician flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-priority">{{ flag.priority | upper }}</span>
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Clinical sections -->
+{% if data.problemList | length > 0 %}
+<div class="card">
+    <h2>Problems ({{ data.problemList | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Description</th><th>ICD-10</th><th>Onset</th><th>Status</th></tr></thead>
+        <tbody>
+            {% for p in data.problemList %}
+            <tr><td>{{ p.description }}</td><td>{{ p.icd10Code }}</td><td>{{ p.onsetDate }}</td><td>{{ p.status }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.medicationSummary | length > 0 %}
+<div class="card">
+    <h2>Medications ({{ data.medicationSummary | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Name</th><th>ATC</th><th>Dose</th><th>Frequency</th><th>Route</th></tr></thead>
+        <tbody>
+            {% for m in data.medicationSummary %}
+            <tr><td>{{ m.name }}</td><td>{{ m.atcCode }}</td><td>{{ m.dose }}</td><td>{{ m.frequency }}</td><td>{{ m.route }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.allergiesIntolerances | length > 0 %}
+<div class="card">
+    <h2>Allergies &amp; Intolerances ({{ data.allergiesIntolerances | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Substance</th><th>Reaction</th><th>Severity</th><th>Criticality</th></tr></thead>
+        <tbody>
+            {% for a in data.allergiesIntolerances %}
+            <tr><td>{{ a.substance }}</td><td>{{ a.reaction }}</td><td>{{ a.severity }}</td><td>{{ a.criticality }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.immunisations | length > 0 %}
+<div class="card">
+    <h2>Immunisations ({{ data.immunisations | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Vaccine</th><th>Date</th><th>Lot</th></tr></thead>
+        <tbody>
+            {% for i in data.immunisations %}
+            <tr><td>{{ i.vaccine }}</td><td>{{ i.date }}</td><td>{{ i.lotNumber }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.procedures | length > 0 %}
+<div class="card">
+    <h2>Procedures ({{ data.procedures | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Description</th><th>Date</th><th>Performer</th></tr></thead>
+        <tbody>
+            {% for p in data.procedures %}
+            <tr><td>{{ p.description }}</td><td>{{ p.date }}</td><td>{{ p.performer }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.resultsInvestigations | length > 0 %}
+<div class="card">
+    <h2>Results &amp; Investigations ({{ data.resultsInvestigations | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Test</th><th>Value</th><th>Unit</th><th>Interpretation</th><th>Date</th></tr></thead>
+        <tbody>
+            {% for r in data.resultsInvestigations %}
+            <tr><td>{{ r.testName }}</td><td>{{ r.value }}</td><td>{{ r.unit }}</td><td>{{ r.interpretation }}</td><td>{{ r.date }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if data.medicalDevices | length > 0 %}
+<div class="card">
+    <h2>Medical Devices / Implants ({{ data.medicalDevices | length }})</h2>
+    <table class="rules-table">
+        <thead><tr><th>Description</th><th>UDI</th><th>Implant date</th></tr></thead>
+        <tbody>
+            {% for d in data.medicalDevices %}
+            <tr><td>{{ d.description }}</td><td>{{ d.udi }}</td><td>{{ d.implantDate }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New IPS</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

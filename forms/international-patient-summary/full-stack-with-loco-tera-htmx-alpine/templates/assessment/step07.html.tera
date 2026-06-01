@@ -1,0 +1,46 @@
+<div class="card">
+    <h2>Section 7: Results &amp; Investigations <span class="mandatory-badge">Mandatory</span></h2>
+    <p class="form-hint">Recent diagnostic results and investigations relevant to ongoing care. Up to six rows.</p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="list-row">
+        <legend>Result {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="results_investigations_{{ i }}_test_name">Test</label>
+                <input type="text" id="results_investigations_{{ i }}_test_name" name="results_investigations[{{ i }}].test_name"
+                       value="{% if results_investigations | length > i %}{{ results_investigations[i].testName }}{% endif %}"
+                       placeholder="e.g. HbA1c">
+            </div>
+            <div class="form-group">
+                <label for="results_investigations_{{ i }}_value">Value</label>
+                <input type="text" id="results_investigations_{{ i }}_value" name="results_investigations[{{ i }}].value"
+                       value="{% if results_investigations | length > i %}{{ results_investigations[i].value }}{% endif %}"
+                       placeholder="e.g. 58">
+            </div>
+            <div class="form-group">
+                <label for="results_investigations_{{ i }}_unit">Unit</label>
+                <input type="text" id="results_investigations_{{ i }}_unit" name="results_investigations[{{ i }}].unit"
+                       value="{% if results_investigations | length > i %}{{ results_investigations[i].unit }}{% endif %}"
+                       placeholder="e.g. mmol/mol">
+            </div>
+            <div class="form-group">
+                <label for="results_investigations_{{ i }}_interpretation">Interpretation</label>
+                {% set interp = "" %}{% if results_investigations | length > i %}{% set_global interp = results_investigations[i].interpretation %}{% endif %}
+                <select id="results_investigations_{{ i }}_interpretation" name="results_investigations[{{ i }}].interpretation">
+                    <option value="" {% if interp == "" %}selected{% endif %}>&mdash;</option>
+                    <option value="low" {% if interp == "low" %}selected{% endif %}>Low</option>
+                    <option value="normal" {% if interp == "normal" %}selected{% endif %}>Normal</option>
+                    <option value="high" {% if interp == "high" %}selected{% endif %}>High</option>
+                    <option value="critical" {% if interp == "critical" %}selected{% endif %}>Critical</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="results_investigations_{{ i }}_date">Date</label>
+                <input type="date" id="results_investigations_{{ i }}_date" name="results_investigations[{{ i }}].date"
+                       value="{% if results_investigations | length > i %}{{ results_investigations[i].date }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+</div>

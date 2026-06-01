@@ -1,0 +1,29 @@
+<div class="card">
+    <h2>Section 8: Medical Devices / Implants <span class="optional-badge">Optional</span></h2>
+    <p class="form-hint">Implanted devices and assistive medical equipment. Optional but relevant for imaging and surgery. Up to six rows.</p>
+
+    {% for i in range(end=6) %}
+    <fieldset class="list-row">
+        <legend>Device {{ i + 1 }}</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="medical_devices_{{ i }}_description">Description</label>
+                <input type="text" id="medical_devices_{{ i }}_description" name="medical_devices[{{ i }}].description"
+                       value="{% if medical_devices | length > i %}{{ medical_devices[i].description }}{% endif %}"
+                       placeholder="e.g. Cardiac pacemaker">
+            </div>
+            <div class="form-group">
+                <label for="medical_devices_{{ i }}_udi">UDI</label>
+                <input type="text" id="medical_devices_{{ i }}_udi" name="medical_devices[{{ i }}].udi"
+                       value="{% if medical_devices | length > i %}{{ medical_devices[i].udi }}{% endif %}"
+                       placeholder="Unique Device Identifier">
+            </div>
+            <div class="form-group">
+                <label for="medical_devices_{{ i }}_implant_date">Implant date</label>
+                <input type="date" id="medical_devices_{{ i }}_implant_date" name="medical_devices[{{ i }}].implant_date"
+                       value="{% if medical_devices | length > i %}{{ medical_devices[i].implantDate }}{% endif %}">
+            </div>
+        </div>
+    </fieldset>
+    {% endfor %}
+</div>
