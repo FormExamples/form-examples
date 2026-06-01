@@ -1,0 +1,72 @@
+<div class="card">
+    <h2>Step 1: Demographics</h2>
+    <p class="form-hint">Employee identification, contact, and emergency-contact information.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="demographics.first_name"
+                   value="{{ demographics.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="demographics.last_name"
+                   value="{{ demographics.lastName }}">
+        </div>
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" id="date_of_birth" name="demographics.date_of_birth"
+                   value="{{ demographics.dateOfBirth }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="demographics.email"
+                   value="{{ demographics.email }}">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="demographics.phone"
+                   value="{{ demographics.phone }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="job_title">Job Title</label>
+            <input type="text" id="job_title" name="demographics.job_title"
+                   value="{{ demographics.jobTitle }}">
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" id="department" name="demographics.department"
+                   value="{{ demographics.department }}">
+        </div>
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="date" id="start_date" name="demographics.start_date"
+                   value="{{ demographics.startDate }}">
+        </div>
+    </div>
+
+    <h3>Emergency Contact</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="emergency_contact_name">Name</label>
+            <input type="text" id="emergency_contact_name" name="demographics.emergency_contact_name"
+                   value="{{ demographics.emergencyContactName }}">
+        </div>
+        <div class="form-group">
+            <label for="emergency_contact_phone">Phone</label>
+            <input type="tel" id="emergency_contact_phone" name="demographics.emergency_contact_phone"
+                   value="{{ demographics.emergencyContactPhone }}">
+        </div>
+        <div class="form-group">
+            <label for="emergency_contact_relationship">Relationship</label>
+            <input type="text" id="emergency_contact_relationship" name="demographics.emergency_contact_relationship"
+                   value="{{ demographics.emergencyContactRelationship }}">
+        </div>
+    </div>
+</div>

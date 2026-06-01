@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 10: Sign-off &amp; Compliance</h2>
+    <p class="form-hint">Confidentiality, code of conduct, GDPR, and sign-off.</p>
+
+    {% set items = [
+        ["confidentiality_agreement_signed", "Confidentiality Agreement Signed", "confidentialityAgreementSigned"],
+        ["code_of_conduct_signed", "Code of Conduct Signed", "codeOfConductSigned"],
+        ["social_media_policy_acknowledged", "Social Media Policy Acknowledged", "socialMediaPolicyAcknowledged"],
+        ["it_acceptable_use_signed", "IT Acceptable Use Signed", "itAcceptableUseSigned"],
+        ["gdpr_training_completed", "GDPR Training Completed", "gdprTrainingCompleted"],
+        ["duty_of_candour_briefed", "Duty of Candour Briefed", "dutyOfCandourBriefed"],
+        ["whistleblowing_policy_briefed", "Whistleblowing Policy Briefed", "whistleblowingPolicyBriefed"]
+    ] %}
+
+    {% for item in items %}
+    <div class="form-group">
+        <label for="{{ item[0] }}">{{ item[1] }}</label>
+        {% set v = sign_off_compliance[item[2]] %}
+        <select id="{{ item[0] }}" name="sign_off_compliance.{{ item[0] }}">
+            <option value="" {% if v == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+    {% endfor %}
+
+    <h3>Sign-off</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="employee_signed_off">Employee Signed Off</label>
+            <select id="employee_signed_off" name="sign_off_compliance.employee_signed_off">
+                <option value="" {% if sign_off_compliance.employeeSignedOff == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if sign_off_compliance.employeeSignedOff == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if sign_off_compliance.employeeSignedOff == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="employee_sign_off_date">Employee Sign-off Date</label>
+            <input type="date" id="employee_sign_off_date" name="sign_off_compliance.employee_sign_off_date"
+                   value="{{ sign_off_compliance.employeeSignOffDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="manager_signed_off">Manager Signed Off</label>
+            <select id="manager_signed_off" name="sign_off_compliance.manager_signed_off">
+                <option value="" {% if sign_off_compliance.managerSignedOff == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if sign_off_compliance.managerSignedOff == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if sign_off_compliance.managerSignedOff == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="manager_sign_off_date">Manager Sign-off Date</label>
+            <input type="date" id="manager_sign_off_date" name="sign_off_compliance.manager_sign_off_date"
+                   value="{{ sign_off_compliance.managerSignOffDate }}">
+        </div>
+        <div class="form-group">
+            <label for="manager_sign_off_name">Manager Name</label>
+            <input type="text" id="manager_sign_off_name" name="sign_off_compliance.manager_sign_off_name"
+                   value="{{ sign_off_compliance.managerSignOffName }}">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Onboarding Report - {{ completion_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Employee Onboarding Checklist &mdash; Report</h1>
+    <div class="checklist-badge checklist-{{ completion_status }}">{{ completion_label }}</div>
+    <div class="risk-badge risk-{{ overall_risk }}">{{ overall_risk_label }}</div>
+    <div class="checklist-label">Completion: {{ completion_percentage }}% ({{ items_completed }} / {{ items_total }} items)</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Onboarding ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Employee Summary -->
+<div class="card">
+    <h2>Employee</h2>
+    <div class="form-row">
+        <div>
+            <strong>Name:</strong> {{ data.demographics.firstName }} {{ data.demographics.lastName }}<br>
+            <strong>Date of Birth:</strong> {{ data.demographics.dateOfBirth }}<br>
+            <strong>Email:</strong> {{ data.demographics.email }}<br>
+            <strong>Phone:</strong> {{ data.demographics.phone }}
+        </div>
+        <div>
+            <strong>Job Title:</strong> {{ data.demographics.jobTitle }}<br>
+            <strong>Department:</strong> {{ data.demographics.department }}<br>
+            <strong>Start Date:</strong> {{ data.demographics.startDate }}<br>
+            <strong>Emergency Contact:</strong> {{ data.demographics.emergencyContactName }} ({{ data.demographics.emergencyContactPhone }})
+        </div>
+    </div>
+</div>
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Compliance Issues ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge severity-grade-{{ rule.grade }}">Grade {{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Checklist</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

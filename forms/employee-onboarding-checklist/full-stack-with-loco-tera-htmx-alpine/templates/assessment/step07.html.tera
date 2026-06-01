@@ -1,0 +1,79 @@
+<div class="card">
+    <h2>Step 7: Uniform &amp; ID Badge</h2>
+    <p class="form-hint">Uniform, ID badge, access card, and locker.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="uniform_required">Uniform Required</label>
+            <select id="uniform_required" name="uniform_id_badge.uniform_required">
+                <option value="" {% if uniform_id_badge.uniformRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.uniformRequired == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.uniformRequired == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="uniform_ordered">Uniform Ordered</label>
+            <select id="uniform_ordered" name="uniform_id_badge.uniform_ordered">
+                <option value="" {% if uniform_id_badge.uniformOrdered == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.uniformOrdered == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.uniformOrdered == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="uniform_received">Uniform Received</label>
+            <select id="uniform_received" name="uniform_id_badge.uniform_received">
+                <option value="" {% if uniform_id_badge.uniformReceived == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.uniformReceived == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.uniformReceived == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="id_badge_photo_taken">ID Badge Photo Taken</label>
+            <select id="id_badge_photo_taken" name="uniform_id_badge.id_badge_photo_taken">
+                <option value="" {% if uniform_id_badge.idBadgePhotoTaken == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.idBadgePhotoTaken == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.idBadgePhotoTaken == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_badge_issued">ID Badge Issued</label>
+            <select id="id_badge_issued" name="uniform_id_badge.id_badge_issued">
+                <option value="" {% if uniform_id_badge.idBadgeIssued == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.idBadgeIssued == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.idBadgeIssued == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_badge_number">ID Badge Number</label>
+            <input type="text" id="id_badge_number" name="uniform_id_badge.id_badge_number"
+                   value="{{ uniform_id_badge.idBadgeNumber }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="access_card_issued">Access Card Issued</label>
+            <select id="access_card_issued" name="uniform_id_badge.access_card_issued">
+                <option value="" {% if uniform_id_badge.accessCardIssued == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.accessCardIssued == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.accessCardIssued == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="locker_allocated">Locker Allocated</label>
+            <select id="locker_allocated" name="uniform_id_badge.locker_allocated">
+                <option value="" {% if uniform_id_badge.lockerAllocated == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if uniform_id_badge.lockerAllocated == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if uniform_id_badge.lockerAllocated == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="locker_number">Locker Number</label>
+            <input type="text" id="locker_number" name="uniform_id_badge.locker_number"
+                   value="{{ uniform_id_badge.lockerNumber }}">
+        </div>
+    </div>
+</div>

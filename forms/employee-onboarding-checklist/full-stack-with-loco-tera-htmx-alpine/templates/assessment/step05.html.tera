@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 5: Professional Registration</h2>
+    <p class="form-hint">Statutory professional registration (NMC, GMC, HCPC, etc.).</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="registration_required">Registration Required?</label>
+            <select id="registration_required" name="professional_registration.registration_required">
+                <option value="" {% if professional_registration.registrationRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if professional_registration.registrationRequired == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if professional_registration.registrationRequired == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="regulatory_body">Regulatory Body</label>
+            <select id="regulatory_body" name="professional_registration.regulatory_body">
+                <option value="" {% if professional_registration.regulatoryBody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="nmc" {% if professional_registration.regulatoryBody == "nmc" %}selected{% endif %}>NMC</option>
+                <option value="gmc" {% if professional_registration.regulatoryBody == "gmc" %}selected{% endif %}>GMC</option>
+                <option value="hcpc" {% if professional_registration.regulatoryBody == "hcpc" %}selected{% endif %}>HCPC</option>
+                <option value="gdc" {% if professional_registration.regulatoryBody == "gdc" %}selected{% endif %}>GDC</option>
+                <option value="gphc" {% if professional_registration.regulatoryBody == "gphc" %}selected{% endif %}>GPhC</option>
+                <option value="other" {% if professional_registration.regulatoryBody == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="registration_number">Registration Number</label>
+            <input type="text" id="registration_number" name="professional_registration.registration_number"
+                   value="{{ professional_registration.registrationNumber }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="registration_verified">Registration Verified</label>
+            <select id="registration_verified" name="professional_registration.registration_verified">
+                <option value="" {% if professional_registration.registrationVerified == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if professional_registration.registrationVerified == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if professional_registration.registrationVerified == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="registration_expiry_date">Expiry Date</label>
+            <input type="date" id="registration_expiry_date" name="professional_registration.registration_expiry_date"
+                   value="{{ professional_registration.registrationExpiryDate }}">
+        </div>
+        <div class="form-group">
+            <label for="revalidation_date">Revalidation Date</label>
+            <input type="date" id="revalidation_date" name="professional_registration.revalidation_date"
+                   value="{{ professional_registration.revalidationDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="registration_conditions">Conditions on Registration?</label>
+            <select id="registration_conditions" name="professional_registration.registration_conditions">
+                <option value="" {% if professional_registration.registrationConditions == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if professional_registration.registrationConditions == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if professional_registration.registrationConditions == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="registration_condition_details">Condition Details</label>
+            <textarea id="registration_condition_details" name="professional_registration.registration_condition_details"
+                      placeholder="Describe any conditions">{{ professional_registration.registrationConditionDetails }}</textarea>
+        </div>
+    </div>
+</div>
