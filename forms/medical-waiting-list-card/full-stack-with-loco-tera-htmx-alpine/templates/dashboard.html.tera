@@ -1,0 +1,89 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Waiting List Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Waiting List Dashboard</h1>
+    <a href="/" class="btn btn-primary">New waiting list card</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="NHS number or patient name...">
+    </div>
+    <div class="form-group">
+        <label for="waiting_time_status">Waiting Time Status</label>
+        <select id="waiting_time_status" name="waiting_time_status">
+            <option value="">All</option>
+            <option value="within-target" {% if waiting_time_status == "within-target" %}selected{% endif %}>Within target</option>
+            <option value="approaching-breach" {% if waiting_time_status == "approaching-breach" %}selected{% endif %}>Approaching breach</option>
+            <option value="breached" {% if waiting_time_status == "breached" %}selected{% endif %}>Breached</option>
+            <option value="long-wait" {% if waiting_time_status == "long-wait" %}selected{% endif %}>Long wait (> 52 weeks)</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="clinical_priority">Clinical Priority</label>
+        <select id="clinical_priority" name="clinical_priority">
+            <option value="">All</option>
+            <option value="P1a" {% if clinical_priority == "P1a" %}selected{% endif %}>P1a (24 hours)</option>
+            <option value="P1b" {% if clinical_priority == "P1b" %}selected{% endif %}>P1b (72 hours)</option>
+            <option value="P2" {% if clinical_priority == "P2" %}selected{% endif %}>P2 (4 weeks)</option>
+            <option value="P3" {% if clinical_priority == "P3" %}selected{% endif %}>P3 (12 weeks)</option>
+            <option value="P4" {% if clinical_priority == "P4" %}selected{% endif %}>P4 (18 weeks)</option>
+            <option value="P5" {% if clinical_priority == "P5" %}selected{% endif %}>P5 (26 weeks)</option>
+            <option value="P6" {% if clinical_priority == "P6" %}selected{% endif %}>P6 (removed)</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="specialty">Specialty</label>
+        <input type="text" id="specialty" name="specialty" value="{{ specialty }}"
+               placeholder="e.g. cardiology">
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} card{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>NHS Number</th>
+            <th>Patient Name</th>
+            <th>Specialty</th>
+            <th>Procedure</th>
+            <th>Priority</th>
+            <th>Waiting Time Status</th>
+            <th>Clock Start</th>
+            <th>Days Waited</th>
+            <th>Appointment</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for patient in patients %}
+        <tr>
+            <td><a href="/assessment/{{ patient.id }}/report">{{ patient.nhsNumber }}</a></td>
+            <td>{{ patient.patientName }}</td>
+            <td>{{ patient.specialty }}</td>
+            <td>{{ patient.procedureDescription }}</td>
+            <td><span class="badge priority-{{ patient.clinicalPriority }}">{{ patient.clinicalPriority }}</span></td>
+            <td><span class="status-badge status-{{ patient.waitingTimeStatus }}">{{ patient.waitingTimeStatus }}</span></td>
+            <td>{{ patient.rttClockStartDate }}</td>
+            <td>{% if patient.daysWaited %}{{ patient.daysWaited }}{% else %}&mdash;{% endif %}</td>
+            <td>{{ patient.appointmentDate }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed waiting list cards match the current filters.</p>
+</div>
+{% endif %}
+{% endblock %}

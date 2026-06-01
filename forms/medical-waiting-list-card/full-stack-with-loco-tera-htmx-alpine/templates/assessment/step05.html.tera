@@ -1,0 +1,99 @@
+<div class="card">
+    <h2>Step 5: Upcoming appointment</h2>
+    <p class="form-hint">Record the next scheduled contact, even if provisional.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="appointment_date">Appointment date</label>
+            <input type="date" id="appointment_date" name="appointment.appointment_date"
+                   value="{{ appointment.appointmentDate }}">
+        </div>
+        <div class="form-group">
+            <label for="appointment_time">Appointment time</label>
+            <input type="time" id="appointment_time" name="appointment.appointment_time"
+                   value="{{ appointment.appointmentTime }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="duration_minutes">Duration (minutes)</label>
+            <input type="number" id="duration_minutes" name="appointment.duration_minutes"
+                   min="0" step="5"
+                   value="{% if appointment.durationMinutes %}{{ appointment.durationMinutes }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="appointment_type">Appointment type</label>
+            <select id="appointment_type" name="appointment.appointment_type">
+                <option value="" {% if appointment.appointmentType == "" %}selected{% endif %}>Select...</option>
+                <option value="first" {% if appointment.appointmentType == "first" %}selected{% endif %}>First outpatient</option>
+                <option value="follow-up" {% if appointment.appointmentType == "follow-up" %}selected{% endif %}>Follow-up</option>
+                <option value="pre-assessment" {% if appointment.appointmentType == "pre-assessment" %}selected{% endif %}>Pre-assessment</option>
+                <option value="treatment" {% if appointment.appointmentType == "treatment" %}selected{% endif %}>Treatment / procedure</option>
+                <option value="telephone" {% if appointment.appointmentType == "telephone" %}selected{% endif %}>Telephone consultation</option>
+                <option value="video" {% if appointment.appointmentType == "video" %}selected{% endif %}>Video consultation</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="appt_site_name">Site</label>
+            <input type="text" id="appt_site_name" name="appointment.site_name"
+                   value="{{ appointment.siteName }}">
+        </div>
+        <div class="form-group">
+            <label for="appt_clinic_name">Clinic</label>
+            <input type="text" id="appt_clinic_name" name="appointment.clinic_name"
+                   value="{{ appointment.clinicName }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="appt_site_address">Site address</label>
+        <textarea id="appt_site_address" name="appointment.site_address">{{ appointment.siteAddress }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="appt_room">Room</label>
+            <input type="text" id="appt_room" name="appointment.room"
+                   value="{{ appointment.room }}">
+        </div>
+        <div class="form-group">
+            <label for="appt_clinician_name">Clinician</label>
+            <input type="text" id="appt_clinician_name" name="appointment.clinician_name"
+                   value="{{ appointment.clinicianName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="appt_clinician_team">Clinician team</label>
+            <input type="text" id="appt_clinician_team" name="appointment.clinician_team"
+                   value="{{ appointment.clinicianTeam }}">
+        </div>
+        <div class="form-group">
+            <label for="appt_status">Appointment status</label>
+            <select id="appt_status" name="appointment.status">
+                <option value="scheduled" {% if appointment.status == "scheduled" %}selected{% endif %}>Scheduled</option>
+                <option value="confirmed" {% if appointment.status == "confirmed" %}selected{% endif %}>Confirmed</option>
+                <option value="provisional" {% if appointment.status == "provisional" %}selected{% endif %}>Provisional</option>
+                <option value="cancelled" {% if appointment.status == "cancelled" %}selected{% endif %}>Cancelled</option>
+                <option value="rebooking" {% if appointment.status == "rebooking" %}selected{% endif %}>Rebooking</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="travel_notes">Travel notes</label>
+        <textarea id="travel_notes" name="appointment.travel_notes"
+                  placeholder="Parking, public transport, patient transport service...">{{ appointment.travelNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="access_notes">Access &amp; accessibility notes</label>
+        <textarea id="access_notes" name="appointment.access_notes"
+                  placeholder="Interpreter booking ref, step-free route, hearing loop, BSL, large print...">{{ appointment.accessNotes }}</textarea>
+    </div>
+</div>
