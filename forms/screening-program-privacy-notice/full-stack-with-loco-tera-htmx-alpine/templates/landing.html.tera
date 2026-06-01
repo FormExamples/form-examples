@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Screening Program Privacy Notice - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Screening Program Privacy Notice</h1>
+        <p class="landing-description">
+            A UK NHS GP practice privacy notice informing patients how their information
+            is used for medical research, planning services, and checking the quality of
+            care (national clinical audits). The patient reads the notice, confirms
+            understanding and agreement, then provides their full name and date.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Privacy Notice</h3>
+                <p>Medical research and service planning, national clinical audits, and national screening programmes &mdash; with the lawful basis under UK GDPR</p>
+            </div>
+            <div class="feature">
+                <h3>Acknowledgment</h3>
+                <p>Patient confirms understanding and agreement, then signs with full name and date</p>
+            </div>
+            <div class="feature">
+                <h3>Practice Customisation</h3>
+                <p>Practice name, Data Protection Officer, research / audit organisations, and GDPR Article 9 basis (consent or research)</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Acknowledgment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

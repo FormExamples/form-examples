@@ -1,0 +1,93 @@
+<div class="card">
+    <h2>Step 1: Privacy Notice</h2>
+    <p class="form-hint">Please read the full notice below. The acknowledgment form is in Step 2.</p>
+
+    <h3>Patient details</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_name">Patient Name</label>
+            <input type="text" id="patient_name" name="patient.name"
+                   value="{{ patient.name }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_birth_date">Date of Birth</label>
+            <input type="date" id="patient_birth_date" name="patient.birth_date"
+                   value="{{ patient.birthDate }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_united_kingdom_nhs_number">NHS Number</label>
+            <input type="text" id="patient_united_kingdom_nhs_number" name="patient.united_kingdom_nhs_number"
+                   value="{{ patient.unitedKingdomNhsNumber }}" placeholder="e.g. 943 476 5919">
+        </div>
+    </div>
+
+    <h3>Practice configuration</h3>
+    <p class="form-hint">Edit these fields to match your practice. They appear inside the notice text below.</p>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="practice_name">Practice Name</label>
+            <input type="text" id="practice_name" name="practice_config.practice_name"
+                   value="{{ practice_config.practiceName }}" placeholder="[Insert name of practice]">
+        </div>
+        <div class="form-group">
+            <label for="data_protection_officer">Data Protection Officer</label>
+            <input type="text" id="data_protection_officer" name="practice_config.data_protection_officer"
+                   value="{{ practice_config.dataProtectionOfficer }}" placeholder="[Insert DPO name and contact details]">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="research_organisations">Research Organisations</label>
+            <input type="text" id="research_organisations" name="practice_config.research_organisations"
+                   value="{{ practice_config.researchOrganisations }}">
+        </div>
+        <div class="form-group">
+            <label for="audit_body">Audit Body</label>
+            <input type="text" id="audit_body" name="practice_config.audit_body"
+                   value="{{ practice_config.auditBody }}" placeholder="e.g. Healthcare Quality Improvements Partnership">
+        </div>
+        <div class="form-group">
+            <label for="gdpr_basis">GDPR Article 9 Basis</label>
+            <select id="gdpr_basis" name="practice_config.gdpr_basis">
+                <option value="" {% if practice_config.gdprBasis == "" %}selected{% endif %}>&mdash;</option>
+                <option value="consent" {% if practice_config.gdprBasis == "consent" %}selected{% endif %}>Consent &mdash; Article 9(2)(a)</option>
+                <option value="research" {% if practice_config.gdprBasis == "research" %}selected{% endif %}>Research &mdash; Article 9(2)(j)</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Medical research and service planning</h3>
+    <p>
+        {{ practice_config.practiceName | default(value="[Insert name of practice]") }} uses and shares
+        information from your medical records to support medical research and to help plan NHS services.
+        Information is shared with {{ practice_config.researchOrganisations | default(value="[Insert research organisations]") }}
+        and national NHS organisations, either with your explicit consent or where the law allows.
+    </p>
+
+    <h3>Checking quality of care &mdash; national clinical audits</h3>
+    <p>
+        {{ practice_config.practiceName | default(value="[Insert name of practice]") }} contributes to
+        national clinical audits, which are used to check and improve the quality of care provided to
+        patients across the NHS. Data is sent to {{ practice_config.auditBody | default(value="[Insert audit body]") }}
+        for this purpose.
+    </p>
+
+    <h3>National screening programmes</h3>
+    <p>
+        The NHS provides national screening programmes so that certain diseases can be detected at an
+        early stage. These include bowel cancer, breast cancer, cervical cancer, aortic aneurysms, and
+        a diabetic eye screening service. The law allows us to share your contact information with
+        the UK Health Security Agency so that you can be invited to the appropriate screening programmes.
+    </p>
+
+    <h3>Lawful basis under UK GDPR</h3>
+    <ul>
+        <li><strong>Article 6(1)(e)</strong> &mdash; processing necessary for a task carried out in the public interest.</li>
+        {% if practice_config.gdprBasis == "research" %}
+        <li><strong>Article 9(2)(j)</strong> &mdash; processing for scientific research purposes.</li>
+        {% else %}
+        <li><strong>Article 9(2)(a)</strong> &mdash; the data subject has given explicit consent.</li>
+        {% endif %}
+        <li><strong>Article 9(2)(h)</strong> &mdash; preventative medicine and the management of health-care systems.</li>
+    </ul>
+</div>
