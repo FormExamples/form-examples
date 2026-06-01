@@ -14,7 +14,7 @@ Slug: full-stack-with-loco-tera-htmx-alpine
 
 | Component                                           | Version          | Purpose                                          |
 | --------------------------------------------------- | ---------------- | ------------------------------------------------ |
-| [Rust](https://rust-lang.org/)                      | 1.85+ (ed. 2024) | Systems programming language                     |
+| [Rust](https://rust-lang.org/)                      | 1.96+ (ed. 2024) | Systems programming language                     |
 | [axum](https://crates.io/crates/axum)               | 0.8              | Web application framework                        |
 | [Loco](https://loco.rs/)                            | 0.16             | Rails-like framework on axum                     |
 | [Tera](https://keats.github.io/tera/)               | 1.20             | Template engine                                  |
@@ -27,14 +27,39 @@ Slug: full-stack-with-loco-tera-htmx-alpine
 | [Assertables](https://crates.io/crates/assertables) | 9.8              | Assertion testing macros                         |
 | [HTMX](https://htmx.org/)                           | 2.0.8            | AJAX navigation via `hx-boost`, live filtering   |
 | [Alpine.js](https://alpinejs.dev/)                  | 3.14.8           | Client-side conditional fields and dynamic lists |
-
-Rust edition 2024 requires Rust 1.85 or newer.
+| [Criterion](https://crates.io/crates/criterion)     | 0.8.2            | Benchmarks                                       |
+| [Tantivy](https://crates.io/crates/tantivy)         | 0.26.1           | Full-text search engine                          |
 
 ## Loco
 
-Create app: `loco new --name [form] --db postgres --bg async --assets serverside`
+Create app:
 
-Create scaffold: `cargo loco generate scaffold [model] [field]:[type] [field]:[type] [field]:[type]`
+```sh
+loco new --name [form] --db postgres --bg async --assets serverside
+```
+
+Create cargo dependencies:
+
+```sh
+cargo add loco@0
+cargo add axum@0
+cargo add tera@1
+cargo add SeaORM@1.1
+cargo add PostgreSQL@18
+cargo add serde@1
+cargo add uuid@1
+cargo add tokio@1
+cargo add chrono@0
+cargo add assertables@10
+cargo add criterion@0
+cargo add tantivy@0
+```
+
+Create scaffold:
+
+```sh
+cargo loco generate scaffold [model] [field]:[type] [field]:[type] [field]:[type]
+```
 
 ## Crate layout
 
@@ -108,11 +133,11 @@ The `<body>` tag must use `hx-boost="true"` for HTMX-driven navigation:
 Every form is a **single-page wizard** (per the monorepo rule). The Rust
 controller exposes three routes for the data-entry flow:
 
-| Method | Route                       | Handler               | Purpose                                              |
-| ------ | --------------------------- | --------------------- | ---------------------------------------------------- |
-| GET    | `/assessment/{id}`          | `show_assessment`     | Render `assessment.html.tera` with all sections      |
-| POST   | `/assessment/{id}/submit`   | `submit_assessment`   | Merge every field into JSONB, redirect to report     |
-| GET    | `/assessment/{id}/report`   | `show_report`         | Run grading engine, render `report.html.tera`        |
+| Method | Route                     | Handler             | Purpose                                          |
+| ------ | ------------------------- | ------------------- | ------------------------------------------------ |
+| GET    | `/assessment/{id}`        | `show_assessment`   | Render `assessment.html.tera` with all sections  |
+| POST   | `/assessment/{id}/submit` | `submit_assessment` | Merge every field into JSONB, redirect to report |
+| GET    | `/assessment/{id}/report` | `show_report`       | Run grading engine, render `report.html.tera`    |
 
 The top-level `templates/assessment.html.tera` extends `base.html.tera`,
 opens one `<form method="POST" action="/assessment/{id}/submit">`, and
@@ -155,7 +180,7 @@ Environment variables for production:
 
 ### Development database
 
-Development database name is [form]_development snake case; example patient_intake_development
+Development database name is [form]\_development snake case; example patient_intake_development
 
 File `config/development.yaml`:
 
@@ -166,7 +191,7 @@ database:
 
 ### Test database
 
-- Test database name is [form]_test snake case; example patient_intake_test
+- Test database name is [form]\_test snake case; example patient_intake_test
 
 File `config/test.yaml`:
 
@@ -177,7 +202,7 @@ database:
 
 ### Production database
 
-- Production database name is [form]_production snake case; example patient_intake_production
+- Production database name is [form]\_production snake case; example patient_intake_production
 - Connection string is supplied via `DATABASE_URL`; never hard-code credentials
 
 File `config/production.yaml`:
