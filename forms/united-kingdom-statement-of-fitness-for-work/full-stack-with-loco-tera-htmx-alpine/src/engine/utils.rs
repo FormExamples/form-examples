@@ -2,10 +2,10 @@
 
 use chrono::NaiveDate;
 
-use crate::grading::types::FitNote;
+use crate::engine::types::AssessmentData;
 
 /// Count how many of the four adaptation tick boxes are set to "yes".
-pub fn count_adaptations(fit_note: &FitNote) -> u32 {
+pub fn count_adaptations(fit_note: &AssessmentData) -> u32 {
     let yes = |s: &str| if s == "yes" { 1 } else { 0 };
     yes(&fit_note.adaptation_phased_return)
         + yes(&fit_note.adaptation_altered_hours)
@@ -19,7 +19,7 @@ pub fn count_adaptations(fit_note: &FitNote) -> u32 {
 ///   `weeks`, or `months` rounded at 30.4375 days/month).
 /// - `period_type == "from_to"`: difference between the two ISO-8601 dates.
 /// - Otherwise: `None`.
-pub fn compute_period_days(fit_note: &FitNote) -> Option<i64> {
+pub fn compute_period_days(fit_note: &AssessmentData) -> Option<i64> {
     if fit_note.period_type == "duration" {
         let n = fit_note.period_duration_value?;
         return match fit_note.period_duration_unit.as_str() {
@@ -40,7 +40,7 @@ pub fn compute_period_days(fit_note: &FitNote) -> Option<i64> {
 /// Classify whether the assessment is within the first six months of the
 /// condition (drives DWP policy 3.3 — 3-month maximum on the initial fit
 /// note). Returns "yes" / "no" / "" if either date is missing or unparseable.
-pub fn classify_first_six_months(fit_note: &FitNote) -> String {
+pub fn classify_first_six_months(fit_note: &AssessmentData) -> String {
     if fit_note.condition_first_recorded_date.is_empty() || fit_note.assessment_date.is_empty() {
         return String::new();
     }
@@ -53,5 +53,17 @@ pub fn classify_first_six_months(fit_note: &FitNote) -> String {
             if diff_days <= 183 { "yes".into() } else { "no".into() }
         }
         _ => String::new(),
+    }
+}
+
+/// Display label for the recommendation enum.
+pub fn recommendation_label(recommendation: &str) -> String {
+    match recommendation {
+        "standard" => "Standard".to_string(),
+        "refer_occupational_health" => "Refer to Occupational Health".to_string(),
+        "refer_access_to_work" => "Refer to Access to Work".to_string(),
+        "refer_employment_advisor" => "Refer to Employment Advisor".to_string(),
+        "review_for_validity" => "Review for Validity".to_string(),
+        _ => format!("Recommendation: {recommendation}"),
     }
 }

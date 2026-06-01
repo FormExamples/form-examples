@@ -1,0 +1,46 @@
+<div class="card">
+    <h2>Step 10: Sign-off</h2>
+    <p class="form-hint">Issue date, delivery channel, setting, and any safeguarding concern.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="issued_at">Issued At</label>
+            <input type="text" id="issued_at" name="issued_at" value="{{ data.issuedAt }}" placeholder="YYYY-MM-DDTHH:MM:SSZ">
+        </div>
+        <div class="form-group">
+            <label for="issued_via">Issued Via</label>
+            <select id="issued_via" name="issued_via">
+                <option value="" {% if data.issuedVia == "" %}selected{% endif %}>&mdash;</option>
+                <option value="digital" {% if data.issuedVia == "digital" %}selected{% endif %}>Digital</option>
+                <option value="printed_computer_generated" {% if data.issuedVia == "printed_computer_generated" %}selected{% endif %}>Printed (computer-generated)</option>
+                <option value="printed_handwritten" {% if data.issuedVia == "printed_handwritten" %}selected{% endif %}>Printed (handwritten)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="issue_setting">Issue Setting</label>
+            <select id="issue_setting" name="issue_setting">
+                <option value="" {% if data.issueSetting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="primary_care" {% if data.issueSetting == "primary_care" %}selected{% endif %}>Primary care</option>
+                <option value="secondary_care_discharge" {% if data.issueSetting == "secondary_care_discharge" %}selected{% endif %}>Secondary care discharge</option>
+                <option value="occupational_health" {% if data.issueSetting == "occupational_health" %}selected{% endif %}>Occupational health</option>
+                <option value="pharmacy" {% if data.issueSetting == "pharmacy" %}selected{% endif %}>Pharmacy</option>
+                <option value="community" {% if data.issueSetting == "community" %}selected{% endif %}>Community</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="safeguarding_concern">Safeguarding concern?</label>
+            <select id="safeguarding_concern" name="safeguarding_concern">
+                <option value="" {% if data.safeguardingConcern == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if data.safeguardingConcern == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if data.safeguardingConcern == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="safeguarding_notes">Safeguarding Notes (not printed on fit note)</label>
+            <textarea id="safeguarding_notes" name="safeguarding_notes" rows="2">{{ data.safeguardingNotes }}</textarea>
+        </div>
+    </div>
+</div>

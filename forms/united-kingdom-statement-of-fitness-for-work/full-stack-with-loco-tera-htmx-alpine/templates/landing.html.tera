@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}UK Statement of Fitness for Work - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>UK Statement of Fitness for Work</h1>
+        <p class="landing-description">
+            A digital implementation of the UK Med 3 (fit note) issued by a
+            healthcare professional to record the impact of a patient's health
+            condition on their fitness for work. The wizard captures the fit
+            note via a single-page, ten-step questionnaire, applies a
+            rule-based policy-compliance grader, computes safety flags drawn
+            from DWP policy, and generates a clinical report for the patient,
+            employer, and DWP.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Issuer, Patient, Assessment, Diagnosis, Fitness, Adaptations, Comments, Period, Follow-up, Sign-off.</p>
+            </div>
+            <div class="feature">
+                <h3>Policy Compliance</h3>
+                <p>Validity, adaptation, period, and safety rule sets drive a single overall recommendation.</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Eighteen-flag catalogue covering automatic disability, mental health, safeguarding, and DWP policy 3.3 / 3.6 / 3.7.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin a New Fit Note
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

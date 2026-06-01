@@ -1,0 +1,92 @@
+<div class="card">
+    <h2>Step 1: Issuer (clinician + medical practice)</h2>
+    <p class="form-hint">DWP policy 3.7 requires the clinician name, profession, and practice address.</p>
+
+    <h3>Clinician</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_name">Clinician Name</label>
+            <input type="text" id="clinician_name" name="clinician.name"
+                   value="{{ data.clinician.name }}">
+        </div>
+        <div class="form-group">
+            <label for="clinician_profession">Profession</label>
+            <select id="clinician_profession" name="clinician.profession">
+                <option value="" {% if data.clinician.profession == "" %}selected{% endif %}>&mdash;</option>
+                <option value="doctor" {% if data.clinician.profession == "doctor" %}selected{% endif %}>Doctor (GMC)</option>
+                <option value="nurse" {% if data.clinician.profession == "nurse" %}selected{% endif %}>Nurse (NMC)</option>
+                <option value="occupational_therapist" {% if data.clinician.profession == "occupational_therapist" %}selected{% endif %}>Occupational therapist (HCPC)</option>
+                <option value="pharmacist" {% if data.clinician.profession == "pharmacist" %}selected{% endif %}>Pharmacist (GPhC)</option>
+                <option value="physiotherapist" {% if data.clinician.profession == "physiotherapist" %}selected{% endif %}>Physiotherapist (HCPC)</option>
+                <option value="other" {% if data.clinician.profession == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="clinician_registration_body">Registration Body</label>
+            <select id="clinician_registration_body" name="clinician.registration_body">
+                <option value="" {% if data.clinician.registrationBody == "" %}selected{% endif %}>&mdash;</option>
+                <option value="GMC" {% if data.clinician.registrationBody == "GMC" %}selected{% endif %}>GMC</option>
+                <option value="NMC" {% if data.clinician.registrationBody == "NMC" %}selected{% endif %}>NMC</option>
+                <option value="HCPC" {% if data.clinician.registrationBody == "HCPC" %}selected{% endif %}>HCPC</option>
+                <option value="GPhC" {% if data.clinician.registrationBody == "GPhC" %}selected{% endif %}>GPhC</option>
+                <option value="other" {% if data.clinician.registrationBody == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="clinician_registration_number">Registration Number</label>
+            <input type="text" id="clinician_registration_number" name="clinician.registration_number"
+                   value="{{ data.clinician.registrationNumber }}">
+        </div>
+        <div class="form-group">
+            <label for="clinician_is_private_practice">Private practice?</label>
+            <select id="clinician_is_private_practice" name="clinician.is_private_practice">
+                <option value="" {% if data.clinician.isPrivatePractice == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if data.clinician.isPrivatePractice == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if data.clinician.isPrivatePractice == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <h3>Medical Practice</h3>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_practice_name">Practice Name</label>
+            <input type="text" id="medical_practice_name" name="medical_practice.name"
+                   value="{{ data.medicalPractice.name }}">
+        </div>
+        <div class="form-group">
+            <label for="medical_practice_ods_code">ODS Code</label>
+            <input type="text" id="medical_practice_ods_code" name="medical_practice.ods_code"
+                   value="{{ data.medicalPractice.odsCode }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="medical_practice_postal_address_as_full_text">Practice Address (full)</label>
+        <textarea id="medical_practice_postal_address_as_full_text" name="medical_practice.postal_address_as_full_text" rows="2">{{ data.medicalPractice.postalAddressAsFullText }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="medical_practice_postcode">Postcode</label>
+            <input type="text" id="medical_practice_postcode" name="medical_practice.postcode"
+                   value="{{ data.medicalPractice.postcode }}">
+        </div>
+        <div class="form-group">
+            <label for="medical_practice_setting">Setting</label>
+            <select id="medical_practice_setting" name="medical_practice.setting">
+                <option value="" {% if data.medicalPractice.setting == "" %}selected{% endif %}>&mdash;</option>
+                <option value="primary_care" {% if data.medicalPractice.setting == "primary_care" %}selected{% endif %}>Primary care</option>
+                <option value="secondary_care_inpatient" {% if data.medicalPractice.setting == "secondary_care_inpatient" %}selected{% endif %}>Secondary care (inpatient)</option>
+                <option value="secondary_care_discharge" {% if data.medicalPractice.setting == "secondary_care_discharge" %}selected{% endif %}>Secondary care (discharge)</option>
+                <option value="occupational_health" {% if data.medicalPractice.setting == "occupational_health" %}selected{% endif %}>Occupational health</option>
+                <option value="pharmacy" {% if data.medicalPractice.setting == "pharmacy" %}selected{% endif %}>Pharmacy</option>
+                <option value="community_clinic" {% if data.medicalPractice.setting == "community_clinic" %}selected{% endif %}>Community clinic</option>
+                <option value="private_practice" {% if data.medicalPractice.setting == "private_practice" %}selected{% endif %}>Private practice</option>
+            </select>
+        </div>
+    </div>
+</div>

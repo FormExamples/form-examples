@@ -3,8 +3,8 @@
 //! and classifies the intensity. DWP policy 5.6 also requires advice in
 //! the comments box when "may be fit" is selected.
 
-use crate::grading::types::{FiredRule, FitNote, SafetyFlag};
-use crate::grading::utils::count_adaptations;
+use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
+use crate::engine::utils::count_adaptations;
 
 /// Map an adaptation count (0..=4) to its policy intensity label.
 pub fn classify_adaptation(count: u32) -> String {
@@ -21,7 +21,7 @@ pub fn classify_adaptation(count: u32) -> String {
 /// Returns (intensity, count). The fired rules and flags are pushed
 /// into the caller's accumulators.
 pub fn evaluate(
-    fit_note: &FitNote,
+    fit_note: &AssessmentData,
     fired: &mut Vec<FiredRule>,
     flags: &mut Vec<SafetyFlag>,
 ) -> (String, u32) {

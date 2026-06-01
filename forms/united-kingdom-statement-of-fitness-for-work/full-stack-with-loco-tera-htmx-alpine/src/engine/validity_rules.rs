@@ -2,9 +2,9 @@
 //! name, profession, or practice address is invalid; a fit note for a
 //! non-medical problem cannot be issued.
 
-use crate::grading::types::{FiredRule, FitNote, SafetyFlag};
+use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
 
-pub fn evaluate(fit_note: &FitNote, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
+pub fn evaluate(fit_note: &AssessmentData, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
     if fit_note.clinician.name.is_empty() {
         fired.push(FiredRule {
             rule_id: "R-VALID-NAME-001".into(),

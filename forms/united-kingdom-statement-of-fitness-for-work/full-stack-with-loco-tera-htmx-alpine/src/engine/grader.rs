@@ -2,10 +2,10 @@
 //! adaptation, period, and safety rule sets and reduces the result to an
 //! overall recommendation.
 
-use crate::grading::types::{FitNote, Grade};
-use crate::grading::{adaptation_rules, period_rules, safety_flag_rules, validity_rules};
+use crate::engine::types::{AssessmentData, Grade};
+use crate::engine::{adaptation_rules, period_rules, safety_flag_rules, validity_rules};
 
-pub fn grade_fit_note(fit_note: &FitNote) -> Grade {
+pub fn grade_fit_note(fit_note: &AssessmentData) -> Grade {
     let mut fired_rules = Vec::new();
     let mut safety_flags = Vec::new();
 
@@ -40,6 +40,8 @@ pub fn grade_fit_note(fit_note: &FitNote) -> Grade {
         "standard".into()
     };
 
+    let timestamp = chrono::Utc::now().to_rfc3339();
+
     Grade {
         fitness_category: fit_note.fitness_for_work.clone(),
         adaptation_intensity,
@@ -51,5 +53,6 @@ pub fn grade_fit_note(fit_note: &FitNote) -> Grade {
         recommendation,
         fired_rules,
         safety_flags,
+        timestamp,
     }
 }

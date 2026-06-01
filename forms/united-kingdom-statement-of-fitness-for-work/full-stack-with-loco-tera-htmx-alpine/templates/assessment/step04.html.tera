@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 4: Diagnosis</h2>
+    <p class="form-hint">The medical condition and SNOMED CT code (if known).</p>
+
+    <div class="form-group">
+        <label for="diagnosis_text">Diagnosis Text</label>
+        <textarea id="diagnosis_text" name="diagnosis_text" rows="3">{{ data.diagnosisText }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="diagnosis_snomed_code">SNOMED CT Code</label>
+            <input type="text" id="diagnosis_snomed_code" name="diagnosis_snomed_code"
+                   value="{{ data.diagnosisSnomedCode }}">
+        </div>
+        <div class="form-group">
+            <label for="diagnosis_snomed_display">SNOMED CT Display</label>
+            <input type="text" id="diagnosis_snomed_display" name="diagnosis_snomed_display"
+                   value="{{ data.diagnosisSnomedDisplay }}">
+        </div>
+        <div class="form-group">
+            <label for="diagnosis_category">Category</label>
+            <select id="diagnosis_category" name="diagnosis_category">
+                <option value="" {% if data.diagnosisCategory == "" %}selected{% endif %}>&mdash;</option>
+                <option value="mental_health" {% if data.diagnosisCategory == "mental_health" %}selected{% endif %}>Mental health</option>
+                <option value="musculoskeletal" {% if data.diagnosisCategory == "musculoskeletal" %}selected{% endif %}>Musculoskeletal</option>
+                <option value="respiratory" {% if data.diagnosisCategory == "respiratory" %}selected{% endif %}>Respiratory</option>
+                <option value="cardiovascular" {% if data.diagnosisCategory == "cardiovascular" %}selected{% endif %}>Cardiovascular</option>
+                <option value="neoplasm" {% if data.diagnosisCategory == "neoplasm" %}selected{% endif %}>Neoplasm</option>
+                <option value="infection" {% if data.diagnosisCategory == "infection" %}selected{% endif %}>Infection</option>
+                <option value="injury" {% if data.diagnosisCategory == "injury" %}selected{% endif %}>Injury</option>
+                <option value="pregnancy" {% if data.diagnosisCategory == "pregnancy" %}selected{% endif %}>Pregnancy</option>
+                <option value="neurological" {% if data.diagnosisCategory == "neurological" %}selected{% endif %}>Neurological</option>
+                <option value="gastrointestinal" {% if data.diagnosisCategory == "gastrointestinal" %}selected{% endif %}>Gastrointestinal</option>
+                <option value="endocrine" {% if data.diagnosisCategory == "endocrine" %}selected{% endif %}>Endocrine</option>
+                <option value="other" {% if data.diagnosisCategory == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="condition_first_recorded_date">Condition First Recorded Date</label>
+            <input type="date" id="condition_first_recorded_date" name="condition_first_recorded_date"
+                   value="{{ data.conditionFirstRecordedDate }}">
+        </div>
+        <div class="form-group">
+            <label for="is_automatic_disability">Automatic disability? (HIV / cancer / MS)</label>
+            <select id="is_automatic_disability" name="is_automatic_disability">
+                <option value="" {% if data.isAutomaticDisability == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if data.isAutomaticDisability == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if data.isAutomaticDisability == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="is_non_medical">Non-medical reason?</label>
+            <select id="is_non_medical" name="is_non_medical">
+                <option value="" {% if data.isNonMedical == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if data.isNonMedical == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if data.isNonMedical == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+</div>

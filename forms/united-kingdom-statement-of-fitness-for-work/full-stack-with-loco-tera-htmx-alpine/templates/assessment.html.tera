@@ -1,0 +1,30 @@
+{% extends "base.html.tera" %}
+
+{% block title %}UK Fit Note - Wizard{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>UK Statement of Fitness for Work</h1>
+    <p class="form-hint">
+        Complete all {{ total_steps }} sections and submit to record the fit note. Step 6
+        (Adaptations) applies only when "may be fit" is selected on Step 5.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Fit Note</button>
+    </div>
+</form>
+{% endblock %}

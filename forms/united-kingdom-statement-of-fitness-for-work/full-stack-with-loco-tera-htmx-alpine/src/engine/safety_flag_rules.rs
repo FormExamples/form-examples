@@ -3,7 +3,7 @@
 
 use regex::Regex;
 
-use crate::grading::types::{FiredRule, FitNote, SafetyFlag};
+use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
 
 fn auto_disability_regex() -> Regex {
     Regex::new(r"(?i)\b(hiv|human immunodeficiency virus|cancer|carcinoma|malignan|neoplasm|multiple sclerosis|\bms\b)\b").unwrap()
@@ -13,7 +13,7 @@ fn driving_regex() -> Regex {
     Regex::new(r"(?i)\b(should not drive|must not drive|do not drive|no driving)\b").unwrap()
 }
 
-pub fn evaluate(fit_note: &FitNote, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
+pub fn evaluate(fit_note: &AssessmentData, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
     let auto = auto_disability_regex();
     let driving = driving_regex();
 

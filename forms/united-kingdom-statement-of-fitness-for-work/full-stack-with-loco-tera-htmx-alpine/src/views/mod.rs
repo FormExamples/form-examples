@@ -1,1 +1,2 @@
-pub mod fit_note;
+pub mod assessment;
+pub mod dashboard;

@@ -1,0 +1,30 @@
+<div class="card">
+    <h2>Step 3: Assessment</h2>
+    <p class="form-hint">The date, method, and scope of the fitness assessment.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="assessment_date">Assessment Date</label>
+            <input type="date" id="assessment_date" name="assessment_date"
+                   value="{{ data.assessmentDate }}">
+        </div>
+        <div class="form-group">
+            <label for="assessment_method">Method</label>
+            <select id="assessment_method" name="assessment_method">
+                <option value="" {% if data.assessmentMethod == "" %}selected{% endif %}>&mdash;</option>
+                <option value="in_person" {% if data.assessmentMethod == "in_person" %}selected{% endif %}>In person (face-to-face)</option>
+                <option value="video_call" {% if data.assessmentMethod == "video_call" %}selected{% endif %}>Video call</option>
+                <option value="telephone" {% if data.assessmentMethod == "telephone" %}selected{% endif %}>Telephone</option>
+                <option value="written_report_from_other_hcp" {% if data.assessmentMethod == "written_report_from_other_hcp" %}selected{% endif %}>Written report from another HCP</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="general_fitness_considered">General fitness considered?</label>
+            <select id="general_fitness_considered" name="general_fitness_considered">
+                <option value="" {% if data.generalFitnessConsidered == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if data.generalFitnessConsidered == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if data.generalFitnessConsidered == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+</div>

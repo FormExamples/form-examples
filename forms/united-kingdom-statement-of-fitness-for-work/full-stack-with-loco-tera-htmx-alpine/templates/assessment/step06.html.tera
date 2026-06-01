@@ -1,0 +1,30 @@
+<div class="card">
+    <h2>Step 6: Adaptations</h2>
+    <p class="form-hint">
+        Only applies when "may be fit" was selected on Step 5. Tick all
+        adaptations that the clinician advises.
+    </p>
+
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="adaptation_phased_return" value="yes"
+                   {% if data.adaptationPhasedReturn == "yes" %}checked{% endif %}>
+            A phased return to work
+        </label>
+        <label>
+            <input type="checkbox" name="adaptation_altered_hours" value="yes"
+                   {% if data.adaptationAlteredHours == "yes" %}checked{% endif %}>
+            Altered hours
+        </label>
+        <label>
+            <input type="checkbox" name="adaptation_amended_duties" value="yes"
+                   {% if data.adaptationAmendedDuties == "yes" %}checked{% endif %}>
+            Amended duties
+        </label>
+        <label>
+            <input type="checkbox" name="adaptation_workplace_adaptations" value="yes"
+                   {% if data.adaptationWorkplaceAdaptations == "yes" %}checked{% endif %}>
+            Workplace adaptations
+        </label>
+    </div>
+</div>

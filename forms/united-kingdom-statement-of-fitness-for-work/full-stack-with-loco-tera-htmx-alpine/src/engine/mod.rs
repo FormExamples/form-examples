@@ -13,4 +13,4 @@ pub mod utils;
 pub mod validity_rules;
 
 pub use grader::grade_fit_note;
-pub use types::{FitNote, Grade};
+pub use types::{AssessmentData, Grade};

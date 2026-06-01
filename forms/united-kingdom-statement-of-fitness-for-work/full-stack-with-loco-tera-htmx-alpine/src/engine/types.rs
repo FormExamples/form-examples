@@ -1,8 +1,8 @@
 //! Core types for the UK fit-note grading engine.
 //!
-//! `serde(rename_all = "camelCase")` is applied to every struct that may
-//! be shared with the front-end (the canonical wire format is camelCase)
-//! and that is serialised into the Tera template context.
+//! `serde(rename_all = "camelCase")` is applied to every struct shared
+//! with the front-end (the canonical wire format is camelCase) and
+//! serialised into the Tera template context.
 
 use serde::{Deserialize, Serialize};
 
@@ -59,7 +59,7 @@ pub struct Patient {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct FitNote {
+pub struct AssessmentData {
     // Step 1 — Issuer
     pub clinician: Clinician,
     pub medical_practice: MedicalPractice,
@@ -160,4 +160,5 @@ pub struct Grade {
     pub recommendation: String,
     pub fired_rules: Vec<FiredRule>,
     pub safety_flags: Vec<SafetyFlag>,
+    pub timestamp: String,
 }

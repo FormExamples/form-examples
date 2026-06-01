@@ -1,0 +1,17 @@
+<div class="card">
+    <h2>Step 5: Fitness for Work</h2>
+    <p class="form-hint">Per DWP policy 3.2 the fit note cannot certify the patient as "fit for work".</p>
+
+    <div class="form-group">
+        <label>
+            <input type="radio" name="fitness_for_work" value="not_fit"
+                   {% if data.fitnessForWork == "not_fit" %}checked{% endif %}>
+            Not fit for work
+        </label>
+        <label>
+            <input type="radio" name="fitness_for_work" value="may_be_fit"
+                   {% if data.fitnessForWork == "may_be_fit" %}checked{% endif %}>
+            May be fit for work (with adaptations)
+        </label>
+    </div>
+</div>

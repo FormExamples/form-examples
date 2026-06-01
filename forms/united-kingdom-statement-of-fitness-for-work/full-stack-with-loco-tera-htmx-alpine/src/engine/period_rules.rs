@@ -9,8 +9,8 @@
 //! Two flags are also computed: `long_absence_four_weeks` (> 28 days)
 //! and `long_absence_twelve_weeks` (> 84 days).
 
-use crate::grading::types::{FiredRule, FitNote, SafetyFlag};
-use crate::grading::utils::{classify_first_six_months, compute_period_days};
+use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
+use crate::engine::utils::{classify_first_six_months, compute_period_days};
 
 pub fn classify_period(days: Option<i64>, within_first_six_months: bool) -> String {
     match days {
@@ -25,7 +25,7 @@ pub fn classify_period(days: Option<i64>, within_first_six_months: bool) -> Stri
 
 /// Returns `(period_days, period_compliance, within_first_six_months)`.
 pub fn evaluate(
-    fit_note: &FitNote,
+    fit_note: &AssessmentData,
     fired: &mut Vec<FiredRule>,
     flags: &mut Vec<SafetyFlag>,
 ) -> (Option<i64>, String, String) {
