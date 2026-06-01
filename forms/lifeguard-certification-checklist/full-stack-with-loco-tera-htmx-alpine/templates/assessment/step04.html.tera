@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 4: Rescue Scenario &mdash; Conscious Casualty</h2>
+    <p class="form-hint">Casualty calls for help; lifeguard performs an aided rescue.</p>
+
+    <div class="form-group">
+        <label for="rc_recognition_and_alert">Recognition and alert?</label>
+        <select id="rc_recognition_and_alert" name="rescue_conscious.recognition_and_alert">
+            <option value="" {% if rescue_conscious.recognitionAndAlert == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.recognitionAndAlert == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.recognitionAndAlert == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.recognitionAndAlert == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rc_entry_without_loss_of_sight">Entry without loss of sight?</label>
+        <select id="rc_entry_without_loss_of_sight" name="rescue_conscious.entry_without_loss_of_sight">
+            <option value="" {% if rescue_conscious.entryWithoutLossOfSight == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.entryWithoutLossOfSight == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.entryWithoutLossOfSight == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.entryWithoutLossOfSight == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rc_approach_with_floating_aid">Approaches with floating aid?</label>
+        <select id="rc_approach_with_floating_aid" name="rescue_conscious.approach_with_floating_aid">
+            <option value="" {% if rescue_conscious.approachWithFloatingAid == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.approachWithFloatingAid == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.approachWithFloatingAid == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.approachWithFloatingAid == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rc_reassures_casualty">Reassures casualty?</label>
+        <select id="rc_reassures_casualty" name="rescue_conscious.reassures_casualty">
+            <option value="" {% if rescue_conscious.reassuresCasualty == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.reassuresCasualty == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.reassuresCasualty == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.reassuresCasualty == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rc_tow_to_safety">Tows to safety?</label>
+        <select id="rc_tow_to_safety" name="rescue_conscious.tow_to_safety">
+            <option value="" {% if rescue_conscious.towToSafety == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.towToSafety == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.towToSafety == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.towToSafety == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rc_extrication_from_water">Extrication from water?</label>
+        <select id="rc_extrication_from_water" name="rescue_conscious.extrication_from_water">
+            <option value="" {% if rescue_conscious.extricationFromWater == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if rescue_conscious.extricationFromWater == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if rescue_conscious.extricationFromWater == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if rescue_conscious.extricationFromWater == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

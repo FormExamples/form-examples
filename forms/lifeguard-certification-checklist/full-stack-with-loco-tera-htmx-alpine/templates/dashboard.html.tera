@@ -1,0 +1,107 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Lifeguard Certification Checklist - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Training Coordinator Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Candidate name, ID, or venue...">
+    </div>
+    <div class="form-group">
+        <label for="outcome">Outcome</label>
+        <select id="outcome" name="outcome">
+            <option value="">All</option>
+            <option value="pass" {% if outcome == "pass" %}selected{% endif %}>Pass</option>
+            <option value="needs-development" {% if outcome == "needs-development" %}selected{% endif %}>Needs Development</option>
+            <option value="fail" {% if outcome == "fail" %}selected{% endif %}>Fail</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="venue_type">Venue</label>
+        <select id="venue_type" name="venue_type">
+            <option value="">All</option>
+            <option value="pool" {% if venue_type == "pool" %}selected{% endif %}>Pool</option>
+            <option value="beach" {% if venue_type == "beach" %}selected{% endif %}>Beach</option>
+            <option value="inland-water" {% if venue_type == "inland-water" %}selected{% endif %}>Inland Water</option>
+            <option value="water-park" {% if venue_type == "water-park" %}selected{% endif %}>Water Park</option>
+            <option value="leisure" {% if venue_type == "leisure" %}selected{% endif %}>Leisure</option>
+            <option value="other" {% if venue_type == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="assessment_type">Type</label>
+        <select id="assessment_type" name="assessment_type">
+            <option value="">All</option>
+            <option value="initial" {% if assessment_type == "initial" %}selected{% endif %}>Initial</option>
+            <option value="requalification" {% if assessment_type == "requalification" %}selected{% endif %}>Requalification</option>
+            <option value="cross-over" {% if assessment_type == "cross-over" %}selected{% endif %}>Cross-over</option>
+            <option value="in-service" {% if assessment_type == "in-service" %}selected{% endif %}>In-service</option>
+            <option value="other" {% if assessment_type == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Session Date</th>
+            <th>Candidate</th>
+            <th>Candidate ID</th>
+            <th>Venue</th>
+            <th>Type</th>
+            <th>Examiner</th>
+            <th>Outcome</th>
+            <th>Critical / Deficiency</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in candidates %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.sessionDate }}</a></td>
+            <td>{{ c.candidateFirstName }} {{ c.candidateLastName }}</td>
+            <td>{{ c.candidateId }}</td>
+            <td>{{ c.venueName }}<br><small>{{ c.venueType }}</small></td>
+            <td>{{ c.assessmentType }}</td>
+            <td>{{ c.examinerName }}</td>
+            <td><span class="checklist-badge checklist-{{ c.outcome }}" style="font-size: 0.75rem; padding: 0.15rem 0.5rem;">{{ c.outcome }}</span></td>
+            <td>{{ c.criticalFailureCount }} / {{ c.deficiencyCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

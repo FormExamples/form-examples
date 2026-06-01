@@ -1,0 +1,74 @@
+<div class="card">
+    <h2>Step 7: CPR &amp; AED</h2>
+    <p class="form-hint">
+        Critical competencies: effective compressions (rate 100-120/min, depth 5-6 cm) and prompt AED delivery.
+    </p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="compression_rate">Compression rate (per minute)</label>
+            <input type="number" step="1" min="0" id="compression_rate" name="cpr_aed.compression_rate"
+                   value="{{ cpr_aed.compressionRate }}">
+        </div>
+        <div class="form-group">
+            <label for="compression_depth">Compression depth (cm)</label>
+            <input type="number" step="0.1" min="0" id="compression_depth" name="cpr_aed.compression_depth"
+                   value="{{ cpr_aed.compressionDepth }}">
+        </div>
+        <div class="form-group">
+            <label for="time_to_first_shock_seconds">Time to first AED shock (seconds)</label>
+            <input type="number" step="1" min="0" id="time_to_first_shock_seconds" name="cpr_aed.time_to_first_shock_seconds"
+                   value="{{ cpr_aed.timeToFirstShockSeconds }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="effective_compressions">Effective compressions? (critical)</label>
+        <select id="effective_compressions" name="cpr_aed.effective_compressions">
+            <option value="" {% if cpr_aed.effectiveCompressions == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.effectiveCompressions == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cpr_aed.effectiveCompressions == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if cpr_aed.effectiveCompressions == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="effective_ventilations">Effective ventilations?</label>
+        <select id="effective_ventilations" name="cpr_aed.effective_ventilations">
+            <option value="" {% if cpr_aed.effectiveVentilations == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.effectiveVentilations == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cpr_aed.effectiveVentilations == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if cpr_aed.effectiveVentilations == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aed_delivered_promptly">AED delivered promptly? (critical)</label>
+        <select id="aed_delivered_promptly" name="cpr_aed.aed_delivered_promptly">
+            <option value="" {% if cpr_aed.aedDeliveredPromptly == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.aedDeliveredPromptly == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cpr_aed.aedDeliveredPromptly == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if cpr_aed.aedDeliveredPromptly == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="safe_shock_no_unsafe_contact">Safe shock (no unsafe contact)?</label>
+        <select id="safe_shock_no_unsafe_contact" name="cpr_aed.safe_shock_no_unsafe_contact">
+            <option value="" {% if cpr_aed.safeShockNoUnsafeContact == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.safeShockNoUnsafeContact == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cpr_aed.safeShockNoUnsafeContact == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if cpr_aed.safeShockNoUnsafeContact == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="continuous_quality_cpr">Continuous quality CPR?</label>
+        <select id="continuous_quality_cpr" name="cpr_aed.continuous_quality_cpr">
+            <option value="" {% if cpr_aed.continuousQualityCpr == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if cpr_aed.continuousQualityCpr == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if cpr_aed.continuousQualityCpr == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if cpr_aed.continuousQualityCpr == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

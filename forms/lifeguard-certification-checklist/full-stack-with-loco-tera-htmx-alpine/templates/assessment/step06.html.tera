@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 6: Spinal Injury Management</h2>
+    <p class="form-hint">Critical competencies: head-splint hold and use of spineboard.</p>
+
+    <div class="form-group">
+        <label for="sp_recognises_mechanism">Recognises mechanism of injury?</label>
+        <select id="sp_recognises_mechanism" name="spinal_injury_management.recognises_mechanism">
+            <option value="" {% if spinal_injury_management.recognisesMechanism == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.recognisesMechanism == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.recognisesMechanism == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.recognisesMechanism == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sp_head_splint_hold">Head-splint hold? (critical)</label>
+        <select id="sp_head_splint_hold" name="spinal_injury_management.head_splint_hold">
+            <option value="" {% if spinal_injury_management.headSplintHold == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.headSplintHold == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.headSplintHold == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.headSplintHold == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sp_maintains_inline_stabilisation">Maintains in-line stabilisation?</label>
+        <select id="sp_maintains_inline_stabilisation" name="spinal_injury_management.maintains_inline_stabilisation">
+            <option value="" {% if spinal_injury_management.maintainsInlineStabilisation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.maintainsInlineStabilisation == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.maintainsInlineStabilisation == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.maintainsInlineStabilisation == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sp_careful_roll_if_needed">Performs careful roll if needed?</label>
+        <select id="sp_careful_roll_if_needed" name="spinal_injury_management.careful_roll_if_needed">
+            <option value="" {% if spinal_injury_management.carefulRollIfNeeded == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.carefulRollIfNeeded == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.carefulRollIfNeeded == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.carefulRollIfNeeded == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sp_use_of_spineboard">Use of spineboard? (critical)</label>
+        <select id="sp_use_of_spineboard" name="spinal_injury_management.use_of_spineboard">
+            <option value="" {% if spinal_injury_management.useOfSpineboard == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.useOfSpineboard == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.useOfSpineboard == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.useOfSpineboard == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sp_secure_casualty_to_board">Secures casualty to board?</label>
+        <select id="sp_secure_casualty_to_board" name="spinal_injury_management.secure_casualty_to_board">
+            <option value="" {% if spinal_injury_management.secureCasualtyToBoard == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if spinal_injury_management.secureCasualtyToBoard == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if spinal_injury_management.secureCasualtyToBoard == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if spinal_injury_management.secureCasualtyToBoard == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

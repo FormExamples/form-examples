@@ -1,0 +1,84 @@
+<div class="card">
+    <h2>Step 1: Candidate Details</h2>
+    <p class="form-hint">Identification of the candidate, venue, and examiner.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First name</label>
+            <input type="text" id="first_name" name="candidate_details.first_name"
+                   value="{{ candidate_details.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="candidate_details.last_name"
+                   value="{{ candidate_details.lastName }}">
+        </div>
+        <div class="form-group">
+            <label for="candidate_id">Candidate ID</label>
+            <input type="text" id="candidate_id" name="candidate_details.candidate_id"
+                   value="{{ candidate_details.candidateId }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_birth">Date of birth</label>
+            <input type="date" id="date_of_birth" name="candidate_details.date_of_birth"
+                   value="{{ candidate_details.dateOfBirth }}">
+        </div>
+        <div class="form-group">
+            <label for="venue_type">Venue type</label>
+            <select id="venue_type" name="candidate_details.venue_type">
+                <option value="" {% if candidate_details.venueType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pool" {% if candidate_details.venueType == "pool" %}selected{% endif %}>Pool</option>
+                <option value="beach" {% if candidate_details.venueType == "beach" %}selected{% endif %}>Beach</option>
+                <option value="inland-water" {% if candidate_details.venueType == "inland-water" %}selected{% endif %}>Inland water</option>
+                <option value="water-park" {% if candidate_details.venueType == "water-park" %}selected{% endif %}>Water park</option>
+                <option value="leisure" {% if candidate_details.venueType == "leisure" %}selected{% endif %}>Leisure centre</option>
+                <option value="other" {% if candidate_details.venueType == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="venue_name">Venue name</label>
+            <input type="text" id="venue_name" name="candidate_details.venue_name"
+                   value="{{ candidate_details.venueName }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="assessment_type">Assessment type</label>
+            <select id="assessment_type" name="candidate_details.assessment_type">
+                <option value="" {% if candidate_details.assessmentType == "" %}selected{% endif %}>&mdash;</option>
+                <option value="initial" {% if candidate_details.assessmentType == "initial" %}selected{% endif %}>Initial qualification</option>
+                <option value="requalification" {% if candidate_details.assessmentType == "requalification" %}selected{% endif %}>Requalification</option>
+                <option value="cross-over" {% if candidate_details.assessmentType == "cross-over" %}selected{% endif %}>Cross-over</option>
+                <option value="in-service" {% if candidate_details.assessmentType == "in-service" %}selected{% endif %}>In-service</option>
+                <option value="other" {% if candidate_details.assessmentType == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="prior_certification_expiry">Prior certification expiry</label>
+            <input type="date" id="prior_certification_expiry" name="candidate_details.prior_certification_expiry"
+                   value="{{ candidate_details.priorCertificationExpiry }}">
+        </div>
+        <div class="form-group">
+            <label for="session_date">Session date</label>
+            <input type="date" id="session_date" name="candidate_details.session_date"
+                   value="{{ candidate_details.sessionDate }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="examiner_name">Examiner name</label>
+            <input type="text" id="examiner_name" name="candidate_details.examiner_name"
+                   value="{{ candidate_details.examinerName }}">
+        </div>
+        <div class="form-group">
+            <label for="examiner_licence_number">Examiner licence number</label>
+            <input type="text" id="examiner_licence_number" name="candidate_details.examiner_licence_number"
+                   value="{{ candidate_details.examinerLicenceNumber }}">
+        </div>
+    </div>
+</div>

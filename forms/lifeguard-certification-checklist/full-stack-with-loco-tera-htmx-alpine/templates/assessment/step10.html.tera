@@ -1,0 +1,48 @@
+<div class="card">
+    <h2>Step 10: Overall Result, Feedback &amp; Signoff</h2>
+    <p class="form-hint">Examiner recommended outcome, strengths, development areas, and candidate sign-off.</p>
+
+    <div class="form-group">
+        <label for="examiner_outcome">Examiner outcome (advisory)</label>
+        <select id="examiner_outcome" name="overall_result_signoff.examiner_outcome">
+            <option value="" {% if overall_result_signoff.examinerOutcome == "" %}selected{% endif %}>&mdash;</option>
+            <option value="pass" {% if overall_result_signoff.examinerOutcome == "pass" %}selected{% endif %}>Pass</option>
+            <option value="needs-development" {% if overall_result_signoff.examinerOutcome == "needs-development" %}selected{% endif %}>Needs Development</option>
+            <option value="fail" {% if overall_result_signoff.examinerOutcome == "fail" %}selected{% endif %}>Fail</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="strengths">Strengths</label>
+        <textarea id="strengths" name="overall_result_signoff.strengths"
+                  placeholder="Candidate strengths observed during the session">{{ overall_result_signoff.strengths }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="development_areas">Development areas</label>
+        <textarea id="development_areas" name="overall_result_signoff.development_areas"
+                  placeholder="Areas the candidate needs to work on">{{ overall_result_signoff.developmentAreas }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="examiner_notes">Examiner notes</label>
+        <textarea id="examiner_notes" name="overall_result_signoff.examiner_notes"
+                  placeholder="Free-text notes for the record">{{ overall_result_signoff.examinerNotes }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="candidate_feedback">Candidate feedback</label>
+        <textarea id="candidate_feedback" name="overall_result_signoff.candidate_feedback"
+                  placeholder="Candidate's own reflection on the session">{{ overall_result_signoff.candidateFeedback }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="candidate_acknowledged">Candidate acknowledged result?</label>
+        <select id="candidate_acknowledged" name="overall_result_signoff.candidate_acknowledged">
+            <option value="" {% if overall_result_signoff.candidateAcknowledged == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if overall_result_signoff.candidateAcknowledged == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if overall_result_signoff.candidateAcknowledged == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if overall_result_signoff.candidateAcknowledged == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>

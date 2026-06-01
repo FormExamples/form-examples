@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Lifeguard Certification Checklist - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Lifeguard Certification Checklist</h1>
+        <p class="landing-description">
+            Pool / beach lifeguard certification checklist aligned with the
+            <strong>RLSS UK National Pool Lifeguard Qualification (NPLQ)</strong>
+            and <strong>International Life Saving Federation (ILSF)</strong>
+            competencies. Covers supervision and scanning, physical fitness,
+            rescue scenarios, CPR / AED, first aid, and legal / regulatory knowledge.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Sections</h3>
+                <p>Candidate details, physical fitness, scanning, rescue, spinal, CPR/AED, first aid, regulatory, and sign-off</p>
+            </div>
+            <div class="feature">
+                <h3>Critical Competencies</h3>
+                <p>Timed swim, unconscious rescue, spinal handling, effective CPR, prompt AED, and scanning effectiveness</p>
+            </div>
+            <div class="feature">
+                <h3>Pass / Needs Development / Fail</h3>
+                <p>Single-page wizard producing a graded, timestamped examiner record with prioritised safety flags</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+<div class="card">
+    <h2>Step 2: Physical Fitness &amp; Swim Competency</h2>
+    <p class="form-hint">
+        RLSS NPLQ physical fitness standards. Critical: 50 m swim within 60 s.
+    </p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="swim50m_time_seconds">50 m swim time (seconds) &mdash; NPLQ &le; 60 s</label>
+            <input type="number" step="0.1" min="0" id="swim50m_time_seconds" name="physical_fitness_swim.swim50m_time_seconds"
+                   value="{{ physical_fitness_swim.swim50mTimeSeconds }}">
+        </div>
+        <div class="form-group">
+            <label for="swim50m_within_time">50 m within target time?</label>
+            <select id="swim50m_within_time" name="physical_fitness_swim.swim50m_within_time">
+                <option value="" {% if physical_fitness_swim.swim50mWithinTime == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if physical_fitness_swim.swim50mWithinTime == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if physical_fitness_swim.swim50mWithinTime == "no" %}selected{% endif %}>No</option>
+                <option value="na" {% if physical_fitness_swim.swim50mWithinTime == "na" %}selected{% endif %}>Not assessed</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="surface_dive_depth_metres">Surface dive depth (metres)</label>
+            <input type="number" step="0.1" min="0" id="surface_dive_depth_metres" name="physical_fitness_swim.surface_dive_depth_metres"
+                   value="{{ physical_fitness_swim.surfaceDiveDepthMetres }}">
+        </div>
+        <div class="form-group">
+            <label for="sustained_surface_dive">Sustained surface dive demonstrated?</label>
+            <select id="sustained_surface_dive" name="physical_fitness_swim.sustained_surface_dive">
+                <option value="" {% if physical_fitness_swim.sustainedSurfaceDive == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if physical_fitness_swim.sustainedSurfaceDive == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if physical_fitness_swim.sustainedSurfaceDive == "no" %}selected{% endif %}>No</option>
+                <option value="na" {% if physical_fitness_swim.sustainedSurfaceDive == "na" %}selected{% endif %}>Not assessed</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="swim200m_time_seconds">200 m swim time (seconds)</label>
+            <input type="number" step="0.1" min="0" id="swim200m_time_seconds" name="physical_fitness_swim.swim200m_time_seconds"
+                   value="{{ physical_fitness_swim.swim200mTimeSeconds }}">
+        </div>
+        <div class="form-group">
+            <label for="swim200m_mixed_strokes">200 m mixed strokes demonstrated?</label>
+            <select id="swim200m_mixed_strokes" name="physical_fitness_swim.swim200m_mixed_strokes">
+                <option value="" {% if physical_fitness_swim.swim200mMixedStrokes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if physical_fitness_swim.swim200mMixedStrokes == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if physical_fitness_swim.swim200mMixedStrokes == "no" %}selected{% endif %}>No</option>
+                <option value="na" {% if physical_fitness_swim.swim200mMixedStrokes == "na" %}selected{% endif %}>Not assessed</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tread_water_two_minutes">Treads water for 2 minutes?</label>
+            <select id="tread_water_two_minutes" name="physical_fitness_swim.tread_water_two_minutes">
+                <option value="" {% if physical_fitness_swim.treadWaterTwoMinutes == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if physical_fitness_swim.treadWaterTwoMinutes == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if physical_fitness_swim.treadWaterTwoMinutes == "no" %}selected{% endif %}>No</option>
+                <option value="na" {% if physical_fitness_swim.treadWaterTwoMinutes == "na" %}selected{% endif %}>Not assessed</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tow_casualty50m">Tows casualty 50 m?</label>
+            <select id="tow_casualty50m" name="physical_fitness_swim.tow_casualty50m">
+                <option value="" {% if physical_fitness_swim.towCasualty50m == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if physical_fitness_swim.towCasualty50m == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if physical_fitness_swim.towCasualty50m == "no" %}selected{% endif %}>No</option>
+                <option value="na" {% if physical_fitness_swim.towCasualty50m == "na" %}selected{% endif %}>Not assessed</option>
+            </select>
+        </div>
+    </div>
+</div>

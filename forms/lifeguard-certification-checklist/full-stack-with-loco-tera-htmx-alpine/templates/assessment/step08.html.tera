@@ -1,0 +1,64 @@
+<div class="card">
+    <h2>Step 8: First Aid &amp; Oxygen Therapy</h2>
+    <p class="form-hint">First-aid competencies and supplementary oxygen.</p>
+
+    <div class="form-group">
+        <label for="fa_bleeding_control">Controls bleeding?</label>
+        <select id="fa_bleeding_control" name="first_aid_oxygen.bleeding_control">
+            <option value="" {% if first_aid_oxygen.bleedingControl == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.bleedingControl == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.bleedingControl == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.bleedingControl == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fa_burns_management">Burns management?</label>
+        <select id="fa_burns_management" name="first_aid_oxygen.burns_management">
+            <option value="" {% if first_aid_oxygen.burnsManagement == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.burnsManagement == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.burnsManagement == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.burnsManagement == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fa_fracture_immobilisation">Fracture immobilisation?</label>
+        <select id="fa_fracture_immobilisation" name="first_aid_oxygen.fracture_immobilisation">
+            <option value="" {% if first_aid_oxygen.fractureImmobilisation == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.fractureImmobilisation == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.fractureImmobilisation == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.fractureImmobilisation == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fa_recovery_position_use">Recovery position use?</label>
+        <select id="fa_recovery_position_use" name="first_aid_oxygen.recovery_position_use">
+            <option value="" {% if first_aid_oxygen.recoveryPositionUse == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.recoveryPositionUse == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.recoveryPositionUse == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.recoveryPositionUse == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fa_oxygen_therapy_administration">Oxygen therapy administration?</label>
+        <select id="fa_oxygen_therapy_administration" name="first_aid_oxygen.oxygen_therapy_administration">
+            <option value="" {% if first_aid_oxygen.oxygenTherapyAdministration == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.oxygenTherapyAdministration == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.oxygenTherapyAdministration == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.oxygenTherapyAdministration == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fa_uses_pocket_mask_or_bvm">Uses pocket mask or BVM?</label>
+        <select id="fa_uses_pocket_mask_or_bvm" name="first_aid_oxygen.uses_pocket_mask_or_bvm">
+            <option value="" {% if first_aid_oxygen.usesPocketMaskOrBvm == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if first_aid_oxygen.usesPocketMaskOrBvm == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if first_aid_oxygen.usesPocketMaskOrBvm == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if first_aid_oxygen.usesPocketMaskOrBvm == "na" %}selected{% endif %}>Not assessed</option>
+        </select>
+    </div>
+</div>
