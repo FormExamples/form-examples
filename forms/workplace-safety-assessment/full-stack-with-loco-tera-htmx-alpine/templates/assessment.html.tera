@@ -1,0 +1,31 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Safety Assessment - Audit{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Workplace Safety Assessment</h1>
+    <p class="form-hint">
+        Complete all ten sections of the HSE-aligned workplace safety audit. Yes/No/N/A
+        responses feed the scoring engine; free-text observations record context. Submit
+        to generate the signed audit record with categorised findings and action plan.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+    {% include "assessment/step10.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Audit</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Safety Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Safety-Officer Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Audit</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Site, department, or auditor...">
+    </div>
+    <div class="form-group">
+        <label for="outcome">Outcome</label>
+        <select id="outcome" name="outcome">
+            <option value="">All</option>
+            <option value="compliant" {% if outcome == "compliant" %}selected{% endif %}>Compliant</option>
+            <option value="minor" {% if outcome == "minor" %}selected{% endif %}>Minor Findings</option>
+            <option value="major" {% if outcome == "major" %}selected{% endif %}>Major Findings</option>
+            <option value="critical" {% if outcome == "critical" %}selected{% endif %}>Critical Findings</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed audit{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Audit Date</th>
+            <th>Site</th>
+            <th>Department / Area</th>
+            <th>Auditor</th>
+            <th>Site Manager</th>
+            <th>Outcome</th>
+            <th>Findings</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.auditDate }}</a></td>
+            <td>{{ c.siteName }}</td>
+            <td>{{ c.departmentArea }}</td>
+            <td>{{ c.auditorName }}</td>
+            <td>{{ c.siteManager }}</td>
+            <td><span class="outcome-badge outcome-{{ c.outcome }}">{{ c.outcome }}</span></td>
+            <td>{{ c.firedRuleCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed audits found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

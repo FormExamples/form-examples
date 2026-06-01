@@ -1,0 +1,69 @@
+<div class="card">
+    <h2>Step 6: Ergonomics &amp; Manual Handling</h2>
+    <p class="form-hint">Manual handling assessment, lifting aids, DSE, workstations and patient handling.</p>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_manual_handling_assessment_current">Manual handling risk assessment current</label>
+        <select id="ergonomics_manual_handling_manual_handling_assessment_current" name="ergonomics_manual_handling.manual_handling_assessment_current">
+            <option value="" {% if ergonomics_manual_handling.manualHandlingAssessmentCurrent == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if ergonomics_manual_handling.manualHandlingAssessmentCurrent == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if ergonomics_manual_handling.manualHandlingAssessmentCurrent == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if ergonomics_manual_handling.manualHandlingAssessmentCurrent == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_lifting_aids_available">Lifting aids and hoists available and serviced</label>
+        <select id="ergonomics_manual_handling_lifting_aids_available" name="ergonomics_manual_handling.lifting_aids_available">
+            <option value="" {% if ergonomics_manual_handling.liftingAidsAvailable == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if ergonomics_manual_handling.liftingAidsAvailable == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if ergonomics_manual_handling.liftingAidsAvailable == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if ergonomics_manual_handling.liftingAidsAvailable == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_dse_assessments_completed">DSE assessments completed for staff</label>
+        <select id="ergonomics_manual_handling_dse_assessments_completed" name="ergonomics_manual_handling.dse_assessments_completed">
+            <option value="" {% if ergonomics_manual_handling.dseAssessmentsCompleted == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if ergonomics_manual_handling.dseAssessmentsCompleted == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if ergonomics_manual_handling.dseAssessmentsCompleted == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if ergonomics_manual_handling.dseAssessmentsCompleted == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_workstations_adjustable">Workstations appropriately adjustable</label>
+        <select id="ergonomics_manual_handling_workstations_adjustable" name="ergonomics_manual_handling.workstations_adjustable">
+            <option value="" {% if ergonomics_manual_handling.workstationsAdjustable == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if ergonomics_manual_handling.workstationsAdjustable == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if ergonomics_manual_handling.workstationsAdjustable == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if ergonomics_manual_handling.workstationsAdjustable == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_repetitive_strain_concerns">Any repetitive strain / postural concerns reported?</label>
+        <select id="ergonomics_manual_handling_repetitive_strain_concerns" name="ergonomics_manual_handling.repetitive_strain_concerns">
+            <option value="" {% if ergonomics_manual_handling.repetitiveStrainConcerns == "" %}selected{% endif %}>&mdash;</option>
+            <option value="no" {% if ergonomics_manual_handling.repetitiveStrainConcerns == "no" %}selected{% endif %}>No</option>
+            <option value="yes" {% if ergonomics_manual_handling.repetitiveStrainConcerns == "yes" %}selected{% endif %}>Yes</option>
+            <option value="na" {% if ergonomics_manual_handling.repetitiveStrainConcerns == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_patient_handling_plans_in_place">Patient handling plans in place where applicable</label>
+        <select id="ergonomics_manual_handling_patient_handling_plans_in_place" name="ergonomics_manual_handling.patient_handling_plans_in_place">
+            <option value="" {% if ergonomics_manual_handling.patientHandlingPlansInPlace == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if ergonomics_manual_handling.patientHandlingPlansInPlace == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if ergonomics_manual_handling.patientHandlingPlansInPlace == "no" %}selected{% endif %}>No</option>
+            <option value="na" {% if ergonomics_manual_handling.patientHandlingPlansInPlace == "na" %}selected{% endif %}>N/A</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ergonomics_manual_handling_observations">Observations</label>
+        <textarea id="ergonomics_manual_handling_observations" name="ergonomics_manual_handling.observations">{{ ergonomics_manual_handling.observations }}</textarea>
+    </div>
+</div>

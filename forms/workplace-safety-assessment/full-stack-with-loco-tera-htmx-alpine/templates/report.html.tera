@@ -1,0 +1,153 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Audit Report - {{ outcome_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Workplace Safety Assessment &mdash; Audit Report</h1>
+    <div class="outcome-badge {{ outcome_class }}">{{ outcome_label }}</div>
+    <div class="outcome-label">{{ action_timeframe }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Audit ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        Answered items: {{ answered_count }}
+    </p>
+</div>
+
+<!-- Site Summary -->
+<div class="card">
+    <h2>Site Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Site:</strong> {{ data.siteDetails.siteName }}<br>
+            <strong>Address:</strong> {{ data.siteDetails.siteAddress }}<br>
+            <strong>Department / Area:</strong> {{ data.siteDetails.departmentArea }}<br>
+            <strong>Audit Date:</strong> {{ data.siteDetails.auditDate }}
+        </div>
+        <div>
+            <strong>Auditor:</strong> {{ data.siteDetails.auditorName }}<br>
+            <strong>Auditor Role:</strong> {{ data.siteDetails.auditorRole }}<br>
+            <strong>Site Manager:</strong> {{ data.siteDetails.siteManager }}<br>
+            <strong>Previous Audit:</strong> {{ data.siteDetails.previousAuditDate }}
+        </div>
+    </div>
+</div>
+
+<!-- Findings by category -->
+{% if findings_by_category %}
+<div class="card">
+    <h2>Findings by Category</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Compliant</th>
+                <th>Minor</th>
+                <th>Major</th>
+                <th>Critical</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, cat in findings_by_category %}
+            <tr>
+                <td>{{ cat.category }}</td>
+                <td>{{ cat.compliant }}</td>
+                <td>{{ cat.minor }}</td>
+                <td>{{ cat.major }}</td>
+                <td>{{ cat.critical }}</td>
+                <td>{{ cat.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Safety Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Safety Flags ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Action plan -->
+{% if data.signoffActionPlan.actionItems and data.signoffActionPlan.actionItems | length > 0 %}
+<div class="card">
+    <h2>Action Plan ({{ data.signoffActionPlan.actionItems | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ai in data.signoffActionPlan.actionItems %}
+            <tr>
+                <td>{{ ai.description }}</td>
+                <td>{{ ai.owner }}</td>
+                <td>{{ ai.dueDate }}</td>
+                <td>{{ ai.priority }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Audit Findings ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="severity-badge severity-{{ rule.grade }}">{{ rule.grade }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Sign-off -->
+<div class="card">
+    <h2>Sign-off</h2>
+    <p><strong>Auditor signature:</strong> {{ data.signoffActionPlan.auditorSignature }}</p>
+    <p><strong>Sign-off date:</strong> {{ data.signoffActionPlan.signoffDate }}</p>
+    <p><strong>Debrief delivered:</strong> {{ data.signoffActionPlan.debriefDelivered }}</p>
+    {% if data.signoffActionPlan.overallSummary %}
+    <p><strong>Summary:</strong> {{ data.signoffActionPlan.overallSummary }}</p>
+    {% endif %}
+</div>
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Audit</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}
