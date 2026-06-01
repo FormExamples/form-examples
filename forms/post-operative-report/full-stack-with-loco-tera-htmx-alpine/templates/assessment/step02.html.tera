@@ -1,0 +1,82 @@
+<div class="card">
+    <h2>Step 2: Procedure Details</h2>
+    <p class="form-hint">Capture the planned and performed procedure, scheduling, and theatre.</p>
+
+    <div class="form-group">
+        <label for="procedure_name">Procedure Name</label>
+        <input type="text" id="procedure_name" name="procedure_details.procedure_name"
+               value="{{ procedure_details.procedureName }}">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="procedure_code">Procedure Code (OPCS-4 / CPT)</label>
+            <input type="text" id="procedure_code" name="procedure_details.procedure_code"
+                   value="{{ procedure_details.procedureCode }}">
+        </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" name="procedure_details.priority">
+                <option value="" {% if procedure_details.priority == "" %}selected{% endif %}>&mdash;</option>
+                <option value="elective" {% if procedure_details.priority == "elective" %}selected{% endif %}>Elective</option>
+                <option value="urgent" {% if procedure_details.priority == "urgent" %}selected{% endif %}>Urgent</option>
+                <option value="emergency" {% if procedure_details.priority == "emergency" %}selected{% endif %}>Emergency</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="indication">Indication</label>
+        <textarea id="indication" name="procedure_details.indication" rows="2">{{ procedure_details.indication }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="surgical_approach">Surgical Approach</label>
+            <input type="text" id="surgical_approach" name="procedure_details.surgical_approach"
+                   value="{{ procedure_details.surgicalApproach }}" placeholder="e.g. laparoscopic, open, robotic">
+        </div>
+        <div class="form-group">
+            <label for="laterality">Laterality</label>
+            <select id="laterality" name="procedure_details.laterality">
+                <option value="" {% if procedure_details.laterality == "" %}selected{% endif %}>&mdash;</option>
+                <option value="left" {% if procedure_details.laterality == "left" %}selected{% endif %}>Left</option>
+                <option value="right" {% if procedure_details.laterality == "right" %}selected{% endif %}>Right</option>
+                <option value="bilateral" {% if procedure_details.laterality == "bilateral" %}selected{% endif %}>Bilateral</option>
+                <option value="midline" {% if procedure_details.laterality == "midline" %}selected{% endif %}>Midline</option>
+                <option value="na" {% if procedure_details.laterality == "na" %}selected{% endif %}>Not applicable</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="date_of_surgery">Date of Surgery</label>
+            <input type="date" id="date_of_surgery" name="procedure_details.date_of_surgery"
+                   value="{{ procedure_details.dateOfSurgery }}">
+        </div>
+        <div class="form-group">
+            <label for="start_time">Start Time</label>
+            <input type="time" id="start_time" name="procedure_details.start_time"
+                   value="{{ procedure_details.startTime }}">
+        </div>
+        <div class="form-group">
+            <label for="end_time">End Time</label>
+            <input type="time" id="end_time" name="procedure_details.end_time"
+                   value="{{ procedure_details.endTime }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="duration_minutes">Duration (minutes)</label>
+            <input type="number" id="duration_minutes" name="procedure_details.duration_minutes"
+                   value="{{ procedure_details.durationMinutes }}">
+        </div>
+        <div class="form-group">
+            <label for="operating_room">Operating Room</label>
+            <input type="text" id="operating_room" name="procedure_details.operating_room"
+                   value="{{ procedure_details.operatingRoom }}">
+        </div>
+    </div>
+</div>

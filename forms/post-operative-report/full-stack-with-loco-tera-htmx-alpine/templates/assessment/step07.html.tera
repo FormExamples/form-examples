@@ -1,0 +1,97 @@
+<div class="card">
+    <h2>Step 7: Specimens &amp; Implants</h2>
+    <p class="form-hint">Tissue specimens sent to pathology and implants placed during surgery.</p>
+
+    <h3>Specimens</h3>
+    {% for s in specimens_implants.specimens %}
+    <div class="form-row">
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="specimens[{{ loop.index0 }}].description" value="{{ s.description }}">
+        </div>
+        <div class="form-group">
+            <label>Site</label>
+            <input type="text" name="specimens[{{ loop.index0 }}].site" value="{{ s.site }}">
+        </div>
+        <div class="form-group">
+            <label>Disposition</label>
+            <input type="text" name="specimens[{{ loop.index0 }}].disposition" value="{{ s.disposition }}">
+        </div>
+    </div>
+    {% endfor %}
+    <div class="form-row">
+        <div class="form-group">
+            <label>Description (new)</label>
+            <input type="text" name="specimens[{{ specimens_implants.specimens | length }}].description" value="">
+        </div>
+        <div class="form-group">
+            <label>Site</label>
+            <input type="text" name="specimens[{{ specimens_implants.specimens | length }}].site" value="">
+        </div>
+        <div class="form-group">
+            <label>Disposition</label>
+            <input type="text" name="specimens[{{ specimens_implants.specimens | length }}].disposition" value="">
+        </div>
+    </div>
+
+    <h3>Implants</h3>
+    {% for i in specimens_implants.implants %}
+    <div class="form-row">
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="implants[{{ loop.index0 }}].description" value="{{ i.description }}">
+        </div>
+        <div class="form-group">
+            <label>Manufacturer</label>
+            <input type="text" name="implants[{{ loop.index0 }}].manufacturer" value="{{ i.manufacturer }}">
+        </div>
+        <div class="form-group">
+            <label>Lot Number</label>
+            <input type="text" name="implants[{{ loop.index0 }}].lot_number" value="{{ i.lotNumber }}">
+        </div>
+        <div class="form-group">
+            <label>Site</label>
+            <input type="text" name="implants[{{ loop.index0 }}].site" value="{{ i.site }}">
+        </div>
+    </div>
+    {% endfor %}
+    <div class="form-row">
+        <div class="form-group">
+            <label>Description (new)</label>
+            <input type="text" name="implants[{{ specimens_implants.implants | length }}].description" value="">
+        </div>
+        <div class="form-group">
+            <label>Manufacturer</label>
+            <input type="text" name="implants[{{ specimens_implants.implants | length }}].manufacturer" value="">
+        </div>
+        <div class="form-group">
+            <label>Lot Number</label>
+            <input type="text" name="implants[{{ specimens_implants.implants | length }}].lot_number" value="">
+        </div>
+        <div class="form-group">
+            <label>Site</label>
+            <input type="text" name="implants[{{ specimens_implants.implants | length }}].site" value="">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="prosthesis_used">Prosthesis Used?</label>
+            <select id="prosthesis_used" name="specimens_implants.prosthesis_used">
+                <option value="" {% if specimens_implants.prosthesisUsed == "" %}selected{% endif %}>&mdash;</option>
+                <option value="no" {% if specimens_implants.prosthesisUsed == "no" %}selected{% endif %}>No</option>
+                <option value="yes" {% if specimens_implants.prosthesisUsed == "yes" %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="drains_placed">Drains Placed</label>
+            <input type="text" id="drains_placed" name="specimens_implants.drains_placed"
+                   value="{{ specimens_implants.drainsPlaced }}">
+        </div>
+        <div class="form-group">
+            <label for="catheters_placed">Catheters Placed</label>
+            <input type="text" id="catheters_placed" name="specimens_implants.catheters_placed"
+                   value="{{ specimens_implants.cathetersPlaced }}">
+        </div>
+    </div>
+</div>

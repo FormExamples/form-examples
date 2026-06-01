@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Post-Operative Report - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Post-Operative Report</h1>
+        <p class="landing-description">
+            Structured post-operative (operation note) report documenting the procedure,
+            intra-operative findings, anaesthesia summary, specimens and implants, immediate
+            recovery status, complications, and onward plan, with complication grading by
+            the <strong>Clavien-Dindo classification</strong>.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Patient details, procedure, team, intra-op findings, anaesthesia, fluids, specimens, post-op status, complications, and plan</p>
+            </div>
+            <div class="feature">
+                <h3>Clavien-Dindo Grading</h3>
+                <p>Per-complication grading (Grade 0 through Grade V) with overall worst-grade summary</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for high ASA class, conversion to open, massive blood loss, abnormal vitals, and missing critical post-op instructions</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Report
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

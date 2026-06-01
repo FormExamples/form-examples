@@ -1,0 +1,66 @@
+<div class="card">
+    <h2>Step 10: Post-op Plan &amp; Instructions</h2>
+    <p class="form-hint">Onward plan, prescriptions, observations, and follow-up.</p>
+
+    <div class="form-group">
+        <label for="medications_prescribed">Medications Prescribed</label>
+        <textarea id="medications_prescribed" name="postop_plan_instructions.medications_prescribed" rows="2">{{ postop_plan_instructions.medicationsPrescribed }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="antibiotic_plan">Antibiotic Plan</label>
+            <input type="text" id="antibiotic_plan" name="postop_plan_instructions.antibiotic_plan"
+                   value="{{ postop_plan_instructions.antibioticPlan }}">
+        </div>
+        <div class="form-group">
+            <label for="thromboprophylaxis">Thromboprophylaxis</label>
+            <input type="text" id="thromboprophylaxis" name="postop_plan_instructions.thromboprophylaxis"
+                   value="{{ postop_plan_instructions.thromboprophylaxis }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="analgesia_plan">Analgesia Plan</label>
+            <input type="text" id="analgesia_plan" name="postop_plan_instructions.analgesia_plan"
+                   value="{{ postop_plan_instructions.analgesiaPlan }}">
+        </div>
+        <div class="form-group">
+            <label for="diet_plan">Diet Plan</label>
+            <input type="text" id="diet_plan" name="postop_plan_instructions.diet_plan"
+                   value="{{ postop_plan_instructions.dietPlan }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="mobilisation_plan">Mobilisation Plan</label>
+            <input type="text" id="mobilisation_plan" name="postop_plan_instructions.mobilisation_plan"
+                   value="{{ postop_plan_instructions.mobilisationPlan }}">
+        </div>
+        <div class="form-group">
+            <label for="wound_care_instructions">Wound Care Instructions</label>
+            <input type="text" id="wound_care_instructions" name="postop_plan_instructions.wound_care_instructions"
+                   value="{{ postop_plan_instructions.woundCareInstructions }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="follow_up_plan">Follow-up Plan</label>
+            <input type="text" id="follow_up_plan" name="postop_plan_instructions.follow_up_plan"
+                   value="{{ postop_plan_instructions.followUpPlan }}">
+        </div>
+        <div class="form-group">
+            <label for="discharge_criteria">Discharge Criteria</label>
+            <input type="text" id="discharge_criteria" name="postop_plan_instructions.discharge_criteria"
+                   value="{{ postop_plan_instructions.dischargeCriteria }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="alerts_and_escalation">Alerts &amp; Escalation</label>
+        <textarea id="alerts_and_escalation" name="postop_plan_instructions.alerts_and_escalation" rows="2">{{ postop_plan_instructions.alertsAndEscalation }}</textarea>
+    </div>
+</div>
