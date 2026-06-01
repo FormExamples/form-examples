@@ -1,0 +1,116 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Prescription Request Report - {{ priority_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Prescription Request &mdash; Report</h1>
+    <div class="priority-badge {{ priority_class }}">{{ priority_label }}</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Request ID: {{ id }}<br>
+        Generated: {{ timestamp }}
+    </p>
+</div>
+
+<!-- Patient + Clinician Summary -->
+<div class="card">
+    <h2>Request Summary</h2>
+    <div class="form-row">
+        <div>
+            <strong>Patient:</strong> {{ data.patientInformation.firstName }} {{ data.patientInformation.lastName }}<br>
+            <strong>NHS Number:</strong> {{ data.patientInformation.nhsNumber }}<br>
+            <strong>Phone:</strong> {{ data.patientInformation.phone }}<br>
+            <strong>Email:</strong> {{ data.patientInformation.email }}
+        </div>
+        <div>
+            <strong>Clinician:</strong> {{ data.clinicianInformation.firstName }} {{ data.clinicianInformation.lastName }}<br>
+            <strong>NHS Employee #:</strong> {{ data.clinicianInformation.nhsEmployeeNumber }}<br>
+            <strong>Phone:</strong> {{ data.clinicianInformation.phone }}<br>
+            <strong>Email:</strong> {{ data.clinicianInformation.email }}
+        </div>
+    </div>
+</div>
+
+<!-- Prescription Details -->
+<div class="card">
+    <h2>Prescription</h2>
+    <div class="form-row">
+        <div>
+            <strong>Request Date:</strong> {{ data.prescriptionDetails.requestDate }}<br>
+            <strong>Medication:</strong> {{ data.prescriptionDetails.medicationName }}<br>
+            <strong>Dosage:</strong> {{ data.prescriptionDetails.dosage }}<br>
+            <strong>Frequency:</strong> {{ data.prescriptionDetails.frequency }}<br>
+            <strong>Route:</strong> {{ data.prescriptionDetails.routeOfAdministration }}
+        </div>
+        <div>
+            <strong>New Prescription:</strong> {{ data.requestType.isNewPrescription }}<br>
+            <strong>Emergency:</strong> {{ data.requestType.isEmergency }}<br>
+            <strong>Allow Brand Sub:</strong> {{ data.substitutionOptions.allowBrandSubstitution }}<br>
+            <strong>Allow Generic Sub:</strong> {{ data.substitutionOptions.allowGenericSubstitution }}<br>
+            <strong>Allow Dosage Adj:</strong> {{ data.substitutionOptions.allowDosageAdjustment }}
+        </div>
+    </div>
+    {% if data.prescriptionDetails.treatmentInstructions %}
+    <p><strong>Treatment Instructions:</strong> {{ data.prescriptionDetails.treatmentInstructions }}</p>
+    {% endif %}
+    {% if data.substitutionOptions.substitutionNotes %}
+    <p><strong>Substitution Notes:</strong> {{ data.substitutionOptions.substitutionNotes }}</p>
+    {% endif %}
+    {% if data.requestType.additionalNotes %}
+    <p><strong>Additional Notes:</strong> {{ data.requestType.additionalNotes }}</p>
+    {% endif %}
+</div>
+
+<!-- Additional Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged Issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fired rules -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Fired Rules ({{ fired_rules | length }})</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in fired_rules %}
+            <tr>
+                <td><code>{{ rule.id }}</code></td>
+                <td>{{ rule.category }}</td>
+                <td>{{ rule.description }}</td>
+                <td><span class="priority-badge priority-{{ rule.priorityLevel }}">{{ rule.priorityLevel }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="card">
+    <p class="muted">No classification rules fired &mdash; default routine processing.</p>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Prescription Request</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+<div class="card">
+    <h2>Step 4: Substitution Options</h2>
+    <p class="form-hint">Indicate whether alternatives are acceptable.</p>
+
+    <div class="form-group">
+        <label for="allow_brand_substitution">Allow brand name substitution?</label>
+        <select id="allow_brand_substitution" name="substitution_options.allow_brand_substitution">
+            <option value="" {% if substitution_options.allowBrandSubstitution == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if substitution_options.allowBrandSubstitution == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if substitution_options.allowBrandSubstitution == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="allow_generic_substitution">Allow generic substitution?</label>
+        <select id="allow_generic_substitution" name="substitution_options.allow_generic_substitution">
+            <option value="" {% if substitution_options.allowGenericSubstitution == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if substitution_options.allowGenericSubstitution == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if substitution_options.allowGenericSubstitution == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="allow_dosage_adjustment">Allow dosage adjustment?</label>
+        <select id="allow_dosage_adjustment" name="substitution_options.allow_dosage_adjustment">
+            <option value="" {% if substitution_options.allowDosageAdjustment == "" %}selected{% endif %}>&mdash;</option>
+            <option value="yes" {% if substitution_options.allowDosageAdjustment == "yes" %}selected{% endif %}>Yes</option>
+            <option value="no" {% if substitution_options.allowDosageAdjustment == "no" %}selected{% endif %}>No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="substitution_notes">Substitution Notes</label>
+        <textarea id="substitution_notes" name="substitution_options.substitution_notes"
+                  placeholder="Any additional notes about substitution preferences…" rows="3">{{ substitution_options.substitutionNotes }}</textarea>
+    </div>
+</div>

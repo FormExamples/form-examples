@@ -1,0 +1,52 @@
+<div class="card">
+    <h2>Step 3: Prescription Details</h2>
+    <p class="form-hint">Medication and dosage information.</p>
+
+    <div class="form-group">
+        <label for="request_date">Request Date</label>
+        <input type="date" id="request_date" name="prescription_details.request_date"
+               value="{{ prescription_details.requestDate }}">
+    </div>
+
+    <div class="form-group">
+        <label for="medication_name">Medication Name</label>
+        <input type="text" id="medication_name" name="prescription_details.medication_name"
+               value="{{ prescription_details.medicationName }}" placeholder="e.g. Amoxicillin">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dosage">Dosage</label>
+            <input type="text" id="dosage" name="prescription_details.dosage"
+                   value="{{ prescription_details.dosage }}" placeholder="e.g. 500mg">
+        </div>
+        <div class="form-group">
+            <label for="frequency">Frequency</label>
+            <input type="text" id="frequency" name="prescription_details.frequency"
+                   value="{{ prescription_details.frequency }}" placeholder="e.g. TDS, BD, OD">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="route_of_administration">Route of Administration</label>
+        <select id="route_of_administration" name="prescription_details.route_of_administration">
+            <option value="" {% if prescription_details.routeOfAdministration == "" %}selected{% endif %}>&mdash;</option>
+            <option value="oral" {% if prescription_details.routeOfAdministration == "oral" %}selected{% endif %}>Oral</option>
+            <option value="topical" {% if prescription_details.routeOfAdministration == "topical" %}selected{% endif %}>Topical</option>
+            <option value="intravenous" {% if prescription_details.routeOfAdministration == "intravenous" %}selected{% endif %}>Intravenous</option>
+            <option value="intramuscular" {% if prescription_details.routeOfAdministration == "intramuscular" %}selected{% endif %}>Intramuscular</option>
+            <option value="subcutaneous" {% if prescription_details.routeOfAdministration == "subcutaneous" %}selected{% endif %}>Subcutaneous</option>
+            <option value="inhaled" {% if prescription_details.routeOfAdministration == "inhaled" %}selected{% endif %}>Inhaled</option>
+            <option value="rectal" {% if prescription_details.routeOfAdministration == "rectal" %}selected{% endif %}>Rectal</option>
+            <option value="sublingual" {% if prescription_details.routeOfAdministration == "sublingual" %}selected{% endif %}>Sublingual</option>
+            <option value="transdermal" {% if prescription_details.routeOfAdministration == "transdermal" %}selected{% endif %}>Transdermal</option>
+            <option value="other" {% if prescription_details.routeOfAdministration == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="treatment_instructions">Treatment Instructions</label>
+        <textarea id="treatment_instructions" name="prescription_details.treatment_instructions"
+                  placeholder="Instructions for the patient…" rows="3">{{ prescription_details.treatmentInstructions }}</textarea>
+    </div>
+</div>

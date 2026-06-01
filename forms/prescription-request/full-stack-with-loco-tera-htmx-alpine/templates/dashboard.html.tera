@@ -1,0 +1,82 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Prescription Request - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Prescription Request Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Prescription Request</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Patient name, NHS number, or medication...">
+    </div>
+    <div class="form-group">
+        <label for="priority_level">Priority</label>
+        <select id="priority_level" name="priority_level">
+            <option value="">All</option>
+            <option value="routine" {% if priority_level == "routine" %}selected{% endif %}>Routine</option>
+            <option value="urgent" {% if priority_level == "urgent" %}selected{% endif %}>Urgent</option>
+            <option value="emergency" {% if priority_level == "emergency" %}selected{% endif %}>Emergency</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed prescription request{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Request Date</th>
+            <th>Patient</th>
+            <th>Clinician</th>
+            <th>Medication</th>
+            <th>Dosage</th>
+            <th>Priority</th>
+            <th>Rules</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cases %}
+        <tr>
+            <td><a href="/assessment/{{ c.id }}/report">{{ c.requestDate }}</a></td>
+            <td>{{ c.patientFirstName }} {{ c.patientLastName }}<br><small>{{ c.patientNhsNumber }}</small></td>
+            <td>{{ c.clinicianFirstName }} {{ c.clinicianLastName }}</td>
+            <td>{{ c.medicationName }}</td>
+            <td>{{ c.dosage }}</td>
+            <td><span class="priority-badge priority-{{ c.priorityLevel }}">{{ c.priorityLevel }}</span></td>
+            <td>{{ c.firedRuleCount }}</td>
+            <td>
+                {% if c.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ c.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed prescription requests found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

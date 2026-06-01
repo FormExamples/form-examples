@@ -1,0 +1,36 @@
+<div class="card">
+    <h2>Step 1: Patient Information</h2>
+    <p class="form-hint">Details of the patient requesting the prescription.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_first_name">First Name</label>
+            <input type="text" id="patient_first_name" name="patient_information.first_name"
+                   value="{{ patient_information.firstName }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_last_name">Last Name</label>
+            <input type="text" id="patient_last_name" name="patient_information.last_name"
+                   value="{{ patient_information.lastName }}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="patient_nhs_number">NHS Patient Number</label>
+        <input type="text" id="patient_nhs_number" name="patient_information.nhs_number"
+               value="{{ patient_information.nhsNumber }}" placeholder="e.g. 943 476 5919">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="patient_phone">Phone</label>
+            <input type="text" id="patient_phone" name="patient_information.phone"
+                   value="{{ patient_information.phone }}">
+        </div>
+        <div class="form-group">
+            <label for="patient_email">Email</label>
+            <input type="email" id="patient_email" name="patient_information.email"
+                   value="{{ patient_information.email }}">
+        </div>
+    </div>
+</div>
