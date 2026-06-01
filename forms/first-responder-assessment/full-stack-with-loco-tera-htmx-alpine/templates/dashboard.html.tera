@@ -1,0 +1,107 @@
+{% extends "base.html.tera" %}
+
+{% block title %}First Responder Assessment - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>First Responder Dashboard</h1>
+    <a href="/" class="btn btn-primary">New Assessment</a>
+</div>
+
+<form method="GET" action="/dashboard" class="filter-bar">
+    <div class="form-group">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" value="{{ search }}"
+               placeholder="Name or employer...">
+    </div>
+    <div class="form-group">
+        <label for="overall_fitness">Fitness Decision</label>
+        <select id="overall_fitness" name="overall_fitness">
+            <option value="">All</option>
+            <option value="fit-for-duty" {% if overall_fitness == "fit-for-duty" %}selected{% endif %}>Fit for Duty</option>
+            <option value="fit-with-restrictions" {% if overall_fitness == "fit-with-restrictions" %}selected{% endif %}>Fit with Restrictions</option>
+            <option value="temporarily-unfit" {% if overall_fitness == "temporarily-unfit" %}selected{% endif %}>Temporarily Unfit</option>
+            <option value="permanently-unfit" {% if overall_fitness == "permanently-unfit" %}selected{% endif %}>Permanently Unfit</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="overall_risk">Risk</label>
+        <select id="overall_risk" name="overall_risk">
+            <option value="">All</option>
+            <option value="low" {% if overall_risk == "low" %}selected{% endif %}>Low</option>
+            <option value="moderate" {% if overall_risk == "moderate" %}selected{% endif %}>Moderate</option>
+            <option value="high" {% if overall_risk == "high" %}selected{% endif %}>High</option>
+            <option value="critical" {% if overall_risk == "critical" %}selected{% endif %}>Critical</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="role_type">Role Type</label>
+        <select id="role_type" name="role_type">
+            <option value="">All</option>
+            <option value="paramedic" {% if role_type == "paramedic" %}selected{% endif %}>Paramedic</option>
+            <option value="emt" {% if role_type == "emt" %}selected{% endif %}>EMT</option>
+            <option value="first-aider" {% if role_type == "first-aider" %}selected{% endif %}>First Aider</option>
+            <option value="advanced-paramedic" {% if role_type == "advanced-paramedic" %}selected{% endif %}>Advanced Paramedic</option>
+            <option value="community-responder" {% if role_type == "community-responder" %}selected{% endif %}>Community Responder</option>
+            <option value="other" {% if role_type == "other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="has_flags">High-Priority Flags</label>
+        <select id="has_flags" name="has_flags">
+            <option value="">All</option>
+            <option value="yes" {% if has_flags == "yes" %}selected{% endif %}>With flags</option>
+            <option value="no" {% if has_flags == "no" %}selected{% endif %}>Without flags</option>
+        </select>
+    </div>
+    <div class="form-group" style="display: flex; gap: 0.5rem; align-items: flex-end;">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/dashboard" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<p class="total-count">Showing {{ total }} completed assessment{% if total != 1 %}s{% endif %}.</p>
+
+{% if total > 0 %}
+<table class="patient-table">
+    <thead>
+        <tr>
+            <th>Assessment Date</th>
+            <th>Responder</th>
+            <th>Role</th>
+            <th>Employer</th>
+            <th>Competency</th>
+            <th>Fitness</th>
+            <th>Risk</th>
+            <th>Rules</th>
+            <th>Flags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in responders %}
+        <tr>
+            <td><a href="/assessment/{{ r.id }}/report">{{ r.assessmentDate }}</a></td>
+            <td>{{ r.firstName }} {{ r.lastName }}<br><small>DOB {{ r.dateOfBirth }}</small></td>
+            <td>{{ r.roleType }}</td>
+            <td>{{ r.employerOrganisation }}</td>
+            <td><span class="badge badge-yes">{{ r.overallCompetency }}</span></td>
+            <td><span class="badge">{{ r.overallFitness }}</span></td>
+            <td><span class="badge">{{ r.overallRisk }}</span></td>
+            <td>{{ r.firedRuleCount }}</td>
+            <td>
+                {% if r.highPriorityFlagCount > 0 %}
+                    <span class="badge badge-no">{{ r.highPriorityFlagCount }}</span>
+                {% else %}
+                    <span class="badge badge-yes">0</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card" style="text-align: center; color: var(--gray-500);">
+    <p>No completed assessments found matching your filters.</p>
+</div>
+{% endif %}
+{% endblock %}

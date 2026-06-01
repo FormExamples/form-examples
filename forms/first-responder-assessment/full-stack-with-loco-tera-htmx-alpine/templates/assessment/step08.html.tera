@@ -1,0 +1,131 @@
+<div class="card">
+    <h2>Step 8: Occupational Health</h2>
+    <p class="form-hint">Vision, hearing, immunisation, medications, substance screen, musculoskeletal, respiratory, skin.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="vision_test">Vision Test</label>
+            <select id="vision_test" name="occupational_health.vision_test">
+                <option value="" {% if occupational_health.visionTest == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pass" {% if occupational_health.visionTest == "pass" %}selected{% endif %}>Pass</option>
+                <option value="fail" {% if occupational_health.visionTest == "fail" %}selected{% endif %}>Fail</option>
+                <option value="refer" {% if occupational_health.visionTest == "refer" %}selected{% endif %}>Refer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vision_corrected">Vision Corrected?</label>
+            <select id="vision_corrected" name="occupational_health.vision_corrected">
+                <option value="" {% if occupational_health.visionCorrected == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.visionCorrected == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.visionCorrected == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="hearing_test">Hearing Test</label>
+            <select id="hearing_test" name="occupational_health.hearing_test">
+                <option value="" {% if occupational_health.hearingTest == "" %}selected{% endif %}>&mdash;</option>
+                <option value="pass" {% if occupational_health.hearingTest == "pass" %}selected{% endif %}>Pass</option>
+                <option value="fail" {% if occupational_health.hearingTest == "fail" %}selected{% endif %}>Fail</option>
+                <option value="refer" {% if occupational_health.hearingTest == "refer" %}selected{% endif %}>Refer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hearing_aid_required">Hearing Aid Required?</label>
+            <select id="hearing_aid_required" name="occupational_health.hearing_aid_required">
+                <option value="" {% if occupational_health.hearingAidRequired == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.hearingAidRequired == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.hearingAidRequired == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="immunisation_status">Immunisation Status</label>
+            <select id="immunisation_status" name="occupational_health.immunisation_status">
+                <option value="" {% if occupational_health.immunisationStatus == "" %}selected{% endif %}>&mdash;</option>
+                <option value="up-to-date" {% if occupational_health.immunisationStatus == "up-to-date" %}selected{% endif %}>Up to date</option>
+                <option value="incomplete" {% if occupational_health.immunisationStatus == "incomplete" %}selected{% endif %}>Incomplete</option>
+                <option value="unknown" {% if occupational_health.immunisationStatus == "unknown" %}selected{% endif %}>Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hepatitis_b_immune">Hepatitis B Immune?</label>
+            <select id="hepatitis_b_immune" name="occupational_health.hepatitis_b_immune">
+                <option value="" {% if occupational_health.hepatitisBImmune == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.hepatitisBImmune == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.hepatitisBImmune == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="current_medications">Current Medications</label>
+        <textarea id="current_medications" name="occupational_health.current_medications">{{ occupational_health.currentMedications }}</textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="substance_misuse_screen">Substance Misuse Screen</label>
+            <select id="substance_misuse_screen" name="occupational_health.substance_misuse_screen">
+                <option value="" {% if occupational_health.substanceMisuseScreen == "" %}selected{% endif %}>&mdash;</option>
+                <option value="negative" {% if occupational_health.substanceMisuseScreen == "negative" %}selected{% endif %}>Negative</option>
+                <option value="positive" {% if occupational_health.substanceMisuseScreen == "positive" %}selected{% endif %}>Positive</option>
+                <option value="not-done" {% if occupational_health.substanceMisuseScreen == "not-done" %}selected{% endif %}>Not done</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sickness_absence_days">Sickness Absence (days)</label>
+            <input type="number" min="0" id="sickness_absence_days" name="occupational_health.sickness_absence_days"
+                   value="{{ occupational_health.sicknessAbsenceDays }}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="musculoskeletal_issues">Musculoskeletal Issues?</label>
+            <select id="musculoskeletal_issues" name="occupational_health.musculoskeletal_issues">
+                <option value="" {% if occupational_health.musculoskeletalIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.musculoskeletalIssues == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.musculoskeletalIssues == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="respiratory_issues">Respiratory Issues?</label>
+            <select id="respiratory_issues" name="occupational_health.respiratory_issues">
+                <option value="" {% if occupational_health.respiratoryIssues == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.respiratoryIssues == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.respiratoryIssues == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="skin_conditions">Skin Conditions?</label>
+            <select id="skin_conditions" name="occupational_health.skin_conditions">
+                <option value="" {% if occupational_health.skinConditions == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if occupational_health.skinConditions == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if occupational_health.skinConditions == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="musculoskeletal_details">Musculoskeletal Details</label>
+        <textarea id="musculoskeletal_details" name="occupational_health.musculoskeletal_details">{{ occupational_health.musculoskeletalDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="respiratory_details">Respiratory Details</label>
+        <textarea id="respiratory_details" name="occupational_health.respiratory_details">{{ occupational_health.respiratoryDetails }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="skin_condition_details">Skin Condition Details</label>
+        <textarea id="skin_condition_details" name="occupational_health.skin_condition_details">{{ occupational_health.skinConditionDetails }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="occupational_health_notes">Notes</label>
+        <textarea id="occupational_health_notes" name="occupational_health.occupational_health_notes">{{ occupational_health.occupationalHealthNotes }}</textarea>
+    </div>
+</div>

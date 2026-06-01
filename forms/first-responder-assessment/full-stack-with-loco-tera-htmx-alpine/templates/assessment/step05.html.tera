@@ -1,0 +1,129 @@
+<div class="card">
+    <h2>Step 5: Equipment &amp; Vehicle Competency</h2>
+    <p class="form-hint">Defibrillator, monitor, ventilator, suction, stretcher, scoop, driving, vehicle inspection.</p>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="defibrillator_competency">Defibrillator</label>
+            <select id="defibrillator_competency" name="equipment_vehicle.defibrillator_competency">
+                <option value="" {% if equipment_vehicle.defibrillatorCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.defibrillatorCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.defibrillatorCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.defibrillatorCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.defibrillatorCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="monitor_competency">Monitor</label>
+            <select id="monitor_competency" name="equipment_vehicle.monitor_competency">
+                <option value="" {% if equipment_vehicle.monitorCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.monitorCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.monitorCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.monitorCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.monitorCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ventilator_competency">Ventilator</label>
+            <select id="ventilator_competency" name="equipment_vehicle.ventilator_competency">
+                <option value="" {% if equipment_vehicle.ventilatorCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.ventilatorCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.ventilatorCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.ventilatorCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.ventilatorCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="suction_competency">Suction</label>
+            <select id="suction_competency" name="equipment_vehicle.suction_competency">
+                <option value="" {% if equipment_vehicle.suctionCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.suctionCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.suctionCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.suctionCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.suctionCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="stretcher_competency">Stretcher</label>
+            <select id="stretcher_competency" name="equipment_vehicle.stretcher_competency">
+                <option value="" {% if equipment_vehicle.stretcherCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.stretcherCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.stretcherCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.stretcherCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.stretcherCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="scoop_competency">Scoop</label>
+            <select id="scoop_competency" name="equipment_vehicle.scoop_competency">
+                <option value="" {% if equipment_vehicle.scoopCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.scoopCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.scoopCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.scoopCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.scoopCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="ambulance_driving">Ambulance Driving</label>
+            <select id="ambulance_driving" name="equipment_vehicle.ambulance_driving">
+                <option value="" {% if equipment_vehicle.ambulanceDriving == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.ambulanceDriving == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.ambulanceDriving == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.ambulanceDriving == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.ambulanceDriving == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="emergency_driving">Emergency Driving</label>
+            <select id="emergency_driving" name="equipment_vehicle.emergency_driving">
+                <option value="" {% if equipment_vehicle.emergencyDriving == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.emergencyDriving == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.emergencyDriving == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.emergencyDriving == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.emergencyDriving == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vehicle_daily_inspection">Daily Vehicle Inspection?</label>
+            <select id="vehicle_daily_inspection" name="equipment_vehicle.vehicle_daily_inspection">
+                <option value="" {% if equipment_vehicle.vehicleDailyInspection == "" %}selected{% endif %}>&mdash;</option>
+                <option value="yes" {% if equipment_vehicle.vehicleDailyInspection == "yes" %}selected{% endif %}>Yes</option>
+                <option value="no" {% if equipment_vehicle.vehicleDailyInspection == "no" %}selected{% endif %}>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="equipment_check_competency">Equipment Checks</label>
+            <select id="equipment_check_competency" name="equipment_vehicle.equipment_check_competency">
+                <option value="" {% if equipment_vehicle.equipmentCheckCompetency == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.equipmentCheckCompetency == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.equipmentCheckCompetency == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.equipmentCheckCompetency == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.equipmentCheckCompetency == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="radio_communications">Radio Communications</label>
+            <select id="radio_communications" name="equipment_vehicle.radio_communications">
+                <option value="" {% if equipment_vehicle.radioCommunications == "" %}selected{% endif %}>&mdash;</option>
+                <option value="not-competent" {% if equipment_vehicle.radioCommunications == "not-competent" %}selected{% endif %}>Not Competent</option>
+                <option value="developing" {% if equipment_vehicle.radioCommunications == "developing" %}selected{% endif %}>Developing</option>
+                <option value="competent" {% if equipment_vehicle.radioCommunications == "competent" %}selected{% endif %}>Competent</option>
+                <option value="expert" {% if equipment_vehicle.radioCommunications == "expert" %}selected{% endif %}>Expert</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="equipment_vehicle_notes">Notes</label>
+        <textarea id="equipment_vehicle_notes" name="equipment_vehicle.equipment_vehicle_notes">{{ equipment_vehicle.equipmentVehicleNotes }}</textarea>
+    </div>
+</div>

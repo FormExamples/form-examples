@@ -1,0 +1,38 @@
+{% extends "base.html.tera" %}
+
+{% block title %}First Responder Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>First Responder Assessment</h1>
+        <p class="landing-description">
+            First responder fitness and competency evaluation for paramedics, EMTs, and first aiders.
+            The assessment covers physical fitness, clinical skills, equipment competency, communication,
+            psychological readiness, occupational health, and CPD &mdash; producing a documented overall
+            fitness decision.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Steps</h3>
+                <p>Demographics, role, fitness, clinical skills, equipment, communication, psychology, occupational health, CPD, and fitness decision</p>
+            </div>
+            <div class="feature">
+                <h3>Competency Framework</h3>
+                <p>Not Competent &mdash; Developing &mdash; Competent &mdash; Expert across every domain</p>
+            </div>
+            <div class="feature">
+                <h3>Safety Flags</h3>
+                <p>Real-time alerts for BLS gaps, defibrillator gaps, PTSD screening, substance misuse, and other critical findings</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
