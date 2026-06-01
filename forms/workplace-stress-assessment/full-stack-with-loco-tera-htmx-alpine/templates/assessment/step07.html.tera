@@ -1,0 +1,13 @@
+{% import "assessment/_macros.html.tera" as m %}
+<div class="card">
+    <h2>Step 7: Role Clarity</h2>
+    <p class="form-hint">
+        Whether you understand your role and the organisation ensures roles do not conflict.
+    </p>
+
+    {{ m::agreement(name="role.role1", id="role1", label="I am clear what is expected of me at work.", value=role.role1) }}
+    {{ m::agreement(name="role.role2", id="role2", label="I know how to go about getting my job done.", value=role.role2) }}
+    {{ m::agreement(name="role.role3", id="role3", label="I am clear what my duties and responsibilities are.", value=role.role3) }}
+    {{ m::agreement(name="role.role4", id="role4", label="I am clear about the goals and objectives for my department.", value=role.role4) }}
+    {{ m::agreement(name="role.role5", id="role5", label="I understand how my work fits into the overall aim of the organisation.", value=role.role5) }}
+</div>

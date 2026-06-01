@@ -1,0 +1,12 @@
+{% import "assessment/_macros.html.tera" as m %}
+<div class="card">
+    <h2>Step 5: Peer Support</h2>
+    <p class="form-hint">
+        Encouragement, sponsorship and resources provided by colleagues.
+    </p>
+
+    {{ m::frequency(name="peer_support.ps1", id="ps1", label="If work gets difficult, my colleagues will help me.", value=peer_support.ps1) }}
+    {{ m::frequency(name="peer_support.ps2", id="ps2", label="I get help and support I need from colleagues.", value=peer_support.ps2) }}
+    {{ m::frequency(name="peer_support.ps3", id="ps3", label="I receive the respect at work I deserve from my colleagues.", value=peer_support.ps3) }}
+    {{ m::frequency(name="peer_support.ps4", id="ps4", label="My colleagues are willing to listen to my work-related problems.", value=peer_support.ps4) }}
+</div>

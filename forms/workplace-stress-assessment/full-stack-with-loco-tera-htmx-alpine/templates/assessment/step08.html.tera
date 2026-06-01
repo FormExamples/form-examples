@@ -1,0 +1,11 @@
+{% import "assessment/_macros.html.tera" as m %}
+<div class="card">
+    <h2>Step 8: Organisational Change</h2>
+    <p class="form-hint">
+        How organisational change (large or small) is managed and communicated.
+    </p>
+
+    {{ m::agreement(name="change.chg1", id="chg1", label="I have sufficient opportunities to question managers about change at work.", value=change.chg1) }}
+    {{ m::agreement(name="change.chg2", id="chg2", label="Staff are always consulted about change at work.", value=change.chg2) }}
+    {{ m::agreement(name="change.chg3", id="chg3", label="When changes are made at work, I am clear how they will work out in practice.", value=change.chg3) }}
+</div>

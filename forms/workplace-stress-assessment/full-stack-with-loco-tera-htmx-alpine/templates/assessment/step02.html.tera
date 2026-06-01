@@ -1,0 +1,16 @@
+{% import "assessment/_macros.html.tera" as m %}
+<div class="card">
+    <h2>Step 2: Demands</h2>
+    <p class="form-hint">
+        Workload, work patterns, and the physical or emotional demands placed on you.
+    </p>
+
+    {{ m::frequency(name="demands.dem1", id="dem1", label="Different groups at work demand things from me that are hard to combine.", value=demands.dem1) }}
+    {{ m::frequency(name="demands.dem2", id="dem2", label="I have unachievable deadlines.", value=demands.dem2) }}
+    {{ m::frequency(name="demands.dem3", id="dem3", label="I have to work very intensively.", value=demands.dem3) }}
+    {{ m::frequency(name="demands.dem4", id="dem4", label="I have to neglect some tasks because I have too much to do.", value=demands.dem4) }}
+    {{ m::frequency(name="demands.dem5", id="dem5", label="I am unable to take sufficient breaks.", value=demands.dem5) }}
+    {{ m::frequency(name="demands.dem6", id="dem6", label="I am pressured to work long hours.", value=demands.dem6) }}
+    {{ m::frequency(name="demands.dem7", id="dem7", label="I have to work very fast.", value=demands.dem7) }}
+    {{ m::frequency(name="demands.dem8", id="dem8", label="I have unrealistic time pressures.", value=demands.dem8) }}
+</div>

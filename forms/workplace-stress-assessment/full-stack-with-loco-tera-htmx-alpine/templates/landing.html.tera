@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Stress Assessment - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Workplace Stress Assessment</h1>
+        <p class="landing-description">
+            Anonymous assessment of perceived stress across the seven UK HSE
+            Management Standards: <strong>Demands</strong>, <strong>Control</strong>,
+            <strong>Manager Support</strong>, <strong>Peer Support</strong>,
+            <strong>Relationships</strong>, <strong>Role Clarity</strong>, and
+            <strong>Organisational Change</strong>. Thirty-five Likert-scale items,
+            benchmarked against the HSE 2007 norms. Responses are not linked to
+            named individuals.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Seven HSE Domains</h3>
+                <p>Each domain scored 1.0 - 5.0 against published HSE percentile cut-offs (20th, 50th, 80th)</p>
+            </div>
+            <div class="feature">
+                <h3>Anonymous Demographics</h3>
+                <p>Broad department / tenure / hours bands only &mdash; no names, no identifiers</p>
+            </div>
+            <div class="feature">
+                <h3>Safeguarding Flags</h3>
+                <p>Real-time alerts for very-high concern, bullying / harassment, or distress wording in free-text</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Assessment
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

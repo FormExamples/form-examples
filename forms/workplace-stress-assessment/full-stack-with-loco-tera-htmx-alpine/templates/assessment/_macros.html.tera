@@ -1,0 +1,25 @@
+{# Likert macros for the 1-5 HSE Management Standards scales. #}
+
+{% macro frequency(name, id, label, value) %}
+<fieldset class="form-group likert-group">
+    <legend><strong>{{ id | upper }}.</strong> {{ label }}</legend>
+    {% set v = value %}
+    <label><input type="radio" name="{{ name }}" value="1"{% if v == 1 %} checked{% endif %}> 1 &mdash; Never</label>
+    <label><input type="radio" name="{{ name }}" value="2"{% if v == 2 %} checked{% endif %}> 2 &mdash; Seldom</label>
+    <label><input type="radio" name="{{ name }}" value="3"{% if v == 3 %} checked{% endif %}> 3 &mdash; Sometimes</label>
+    <label><input type="radio" name="{{ name }}" value="4"{% if v == 4 %} checked{% endif %}> 4 &mdash; Often</label>
+    <label><input type="radio" name="{{ name }}" value="5"{% if v == 5 %} checked{% endif %}> 5 &mdash; Always</label>
+</fieldset>
+{% endmacro %}
+
+{% macro agreement(name, id, label, value) %}
+<fieldset class="form-group likert-group">
+    <legend><strong>{{ id | upper }}.</strong> {{ label }}</legend>
+    {% set v = value %}
+    <label><input type="radio" name="{{ name }}" value="1"{% if v == 1 %} checked{% endif %}> 1 &mdash; Strongly disagree</label>
+    <label><input type="radio" name="{{ name }}" value="2"{% if v == 2 %} checked{% endif %}> 2 &mdash; Disagree</label>
+    <label><input type="radio" name="{{ name }}" value="3"{% if v == 3 %} checked{% endif %}> 3 &mdash; Neutral</label>
+    <label><input type="radio" name="{{ name }}" value="4"{% if v == 4 %} checked{% endif %}> 4 &mdash; Agree</label>
+    <label><input type="radio" name="{{ name }}" value="5"{% if v == 5 %} checked{% endif %}> 5 &mdash; Strongly agree</label>
+</fieldset>
+{% endmacro %}

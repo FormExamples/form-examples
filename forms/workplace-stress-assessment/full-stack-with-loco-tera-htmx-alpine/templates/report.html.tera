@@ -1,0 +1,140 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Stress Assessment Report - {{ overall_risk_label }}{% endblock %}
+
+{% block content %}
+<div class="report-header">
+    <h1>Workplace Stress Assessment &mdash; Report</h1>
+    <div class="risk-badge {{ overall_risk_class }}">{{ overall_risk_label }}</div>
+    <div class="risk-label">{{ answered_count }} of 35 items answered</div>
+    <p style="color: var(--gray-500); font-size: 0.85rem;">
+        Assessment ID: {{ id }}<br>
+        Generated: {{ timestamp }}<br>
+        <em>Overall risk reflects the worst-performing of the seven HSE domains.</em>
+    </p>
+</div>
+
+<!-- Anonymous demographic summary -->
+<div class="card">
+    <h2>Anonymous response context</h2>
+    <p>
+        Department: <strong>{{ data.demographics.department }}</strong><br>
+        Tenure: <strong>{{ data.demographics.tenureBand }}</strong><br>
+        Working hours: <strong>{{ data.demographics.hoursBand }}</strong>
+    </p>
+</div>
+
+<!-- Per-domain breakdown -->
+<div class="card">
+    <h2>Per-domain breakdown</h2>
+    <table class="phase-table">
+        <thead>
+            <tr>
+                <th>Domain</th>
+                <th>Mean (1 - 5)</th>
+                <th>Answered</th>
+                <th>Concern</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set domain_rows = [
+                ["Demands", domains.demands],
+                ["Control", domains.control],
+                ["Manager Support", domains.managerSupport],
+                ["Peer Support", domains.peerSupport],
+                ["Relationships", domains.relationships],
+                ["Role Clarity", domains.role],
+                ["Organisational Change", domains.change]
+            ] %}
+            {% for row in domain_rows %}
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>
+                    {% if row.1.mean %}{{ row.1.mean }}{% else %}&mdash;{% endif %}
+                </td>
+                <td>{{ row.1.answeredCount }} / {{ row.1.totalCount }}</td>
+                <td>
+                    {% if row.1.category %}
+                        <span class="risk-badge risk-{{ row.1.category }}">{{ row.1.category }}</span>
+                    {% else %}
+                        <span class="muted">&mdash;</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Safety / Safeguarding Flags -->
+{% if additional_flags | length > 0 %}
+<div class="card">
+    <h2>Flagged issues ({{ additional_flags | length }})</h2>
+    <div class="flags-section">
+        {% for flag in additional_flags %}
+        <div class="flag-item flag-{{ flag.priority }}">
+            <span class="flag-category">{{ flag.category }}</span>
+            <span class="flag-message">{{ flag.message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Free-text comments -->
+{% if data.additionalComments.mostStressfulAspect or data.additionalComments.suggestionsForImprovement or data.additionalComments.otherComments %}
+<div class="card">
+    <h2>Additional comments</h2>
+    {% if data.additionalComments.mostStressfulAspect %}
+    <h3>Most stressful aspect</h3>
+    <p>{{ data.additionalComments.mostStressfulAspect }}</p>
+    {% endif %}
+    {% if data.additionalComments.suggestionsForImprovement %}
+    <h3>Suggestions for improvement</h3>
+    <p>{{ data.additionalComments.suggestionsForImprovement }}</p>
+    {% endif %}
+    {% if data.additionalComments.otherComments %}
+    <h3>Other comments</h3>
+    <p>{{ data.additionalComments.otherComments }}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Item-level audit trail -->
+{% if fired_rules | length > 0 %}
+<div class="card">
+    <h2>Item-level audit trail ({{ fired_rules | length }} answered)</h2>
+    <table class="rules-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Domain</th>
+                <th>Statement</th>
+                <th>Raw</th>
+                <th>Effective</th>
+                <th>Reverse-scored?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in fired_rules %}
+            <tr>
+                <td><code>{{ r.id }}</code></td>
+                <td>{{ r.domain }}</td>
+                <td>{{ r.label }}</td>
+                <td>{{ r.rawValue }}</td>
+                <td>{{ r.effectiveValue }}</td>
+                <td>{% if r.reverseScored %}yes{% else %}no{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<!-- Actions -->
+<div class="card" style="text-align: center;">
+    <a href="/" class="btn btn-primary">New Assessment</a>
+    <a href="/dashboard" class="btn btn-secondary" style="margin-left: 1rem;">View Dashboard</a>
+    <button onclick="window.print()" class="btn btn-secondary" style="margin-left: 1rem;">Print Report</button>
+</div>
+{% endblock %}

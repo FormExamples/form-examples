@@ -1,0 +1,13 @@
+{% import "assessment/_macros.html.tera" as m %}
+<div class="card">
+    <h2>Step 4: Manager Support</h2>
+    <p class="form-hint">
+        Encouragement, sponsorship and resources provided by line management.
+    </p>
+
+    {{ m::frequency(name="manager_support.ms1", id="ms1", label="I am given supportive feedback on the work I do.", value=manager_support.ms1) }}
+    {{ m::agreement(name="manager_support.ms2", id="ms2", label="I can rely on my line manager to help me out with a work problem.", value=manager_support.ms2) }}
+    {{ m::agreement(name="manager_support.ms3", id="ms3", label="I can talk to my line manager about something that has upset or annoyed me about work.", value=manager_support.ms3) }}
+    {{ m::agreement(name="manager_support.ms4", id="ms4", label="I am supported through emotionally demanding work.", value=manager_support.ms4) }}
+    {{ m::frequency(name="manager_support.ms5", id="ms5", label="My line manager encourages me at work.", value=manager_support.ms5) }}
+</div>

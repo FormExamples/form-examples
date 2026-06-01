@@ -1,0 +1,32 @@
+<div class="card">
+    <h2>Step 9: Additional comments</h2>
+    <p class="form-hint">
+        Optional free-text feedback. Please do not include names or contact
+        details &mdash; your responses are anonymous.
+    </p>
+
+    <div class="form-group">
+        <label for="additional_comments_most_stressful_aspect">
+            What is the most stressful aspect of your work right now?
+        </label>
+        <textarea id="additional_comments_most_stressful_aspect" name="additional_comments.most_stressful_aspect"
+                  rows="3"
+                  placeholder="Describe the situation, not the people involved">{{ additional_comments.mostStressfulAspect }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_comments_suggestions_for_improvement">
+            What changes would most reduce work-related stress for you?
+        </label>
+        <textarea id="additional_comments_suggestions_for_improvement" name="additional_comments.suggestions_for_improvement"
+                  rows="3"
+                  placeholder="e.g. clearer priorities, smaller meetings, better tools">{{ additional_comments.suggestionsForImprovement }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="additional_comments_other_comments">Any other comments?</label>
+        <textarea id="additional_comments_other_comments" name="additional_comments.other_comments"
+                  rows="3"
+                  placeholder="Anything else you would like occupational health to know">{{ additional_comments.otherComments }}</textarea>
+    </div>
+</div>

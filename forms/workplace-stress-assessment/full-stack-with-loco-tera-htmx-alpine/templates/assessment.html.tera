@@ -1,0 +1,30 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Workplace Stress Assessment - Questionnaire{% endblock %}
+
+{% block content %}
+<div class="assessment-header">
+    <h1>Workplace Stress Assessment</h1>
+    <p class="form-hint">
+        Complete all nine sections (Demographics, the seven HSE domains, and Comments)
+        and submit. Responses are anonymous &mdash; please do not include names or
+        contact details in the free-text comments.
+    </p>
+</div>
+
+<form method="POST" action="/assessment/{{ id }}/submit" hx-boost="false">
+    {% include "assessment/step01.html.tera" %}
+    {% include "assessment/step02.html.tera" %}
+    {% include "assessment/step03.html.tera" %}
+    {% include "assessment/step04.html.tera" %}
+    {% include "assessment/step05.html.tera" %}
+    {% include "assessment/step06.html.tera" %}
+    {% include "assessment/step07.html.tera" %}
+    {% include "assessment/step08.html.tera" %}
+    {% include "assessment/step09.html.tera" %}
+
+    <div class="submit-row">
+        <button type="submit" class="btn btn-success">Submit Assessment</button>
+    </div>
+</form>
+{% endblock %}
