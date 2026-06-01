@@ -1,0 +1,61 @@
+<div class="card">
+    <h2>Step 10: Overall Experience &amp; Retention Intent</h2>
+    <p class="form-hint">Your overall view of working here, including an eNPS-style recommendation and retention intent.</p>
+
+    {% set likert_items = [
+        ["ov1", "I am proud to tell people I work here.",                                    overall.ov1],
+        ["ov2", "I would recommend this organisation as a great place to work.",             overall.ov2],
+        ["ov3", "Knowing what I know now, I would still choose to join this organisation.",  overall.ov3],
+        ["ov4", "I expect to still be working here in twelve months.",                       overall.ov4]
+    ] %}
+    {% for item in likert_items %}
+        {% set fid = item[0] %}
+        {% set label = item[1] %}
+        {% set val = item[2] %}
+        <div class="form-group">
+            <label for="overall_{{ fid }}">{{ label }}</label>
+            <select id="overall_{{ fid }}" name="overall.{{ fid }}">
+                <option value="" {% if val is null or val == "" %}selected{% endif %}>&mdash;</option>
+                <option value="1" {% if val == 1 %}selected{% endif %}>1 &mdash; Strongly disagree</option>
+                <option value="2" {% if val == 2 %}selected{% endif %}>2 &mdash; Disagree</option>
+                <option value="3" {% if val == 3 %}selected{% endif %}>3 &mdash; Neutral</option>
+                <option value="4" {% if val == 4 %}selected{% endif %}>4 &mdash; Agree</option>
+                <option value="5" {% if val == 5 %}selected{% endif %}>5 &mdash; Strongly agree</option>
+            </select>
+        </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="overall_recommend_score">On a scale of 0&ndash;10, how likely are you to recommend this organisation as a place to work? (eNPS)</label>
+        <select id="overall_recommend_score" name="overall.recommend_score">
+            <option value="" {% if overall.recommendScore is null %}selected{% endif %}>&mdash;</option>
+            {% for n in range(end=11) %}
+                <option value="{{ n }}" {% if overall.recommendScore == n %}selected{% endif %}>{{ n }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="overall_retention_intent">Retention intent</label>
+        <select id="overall_retention_intent" name="overall.retention_intent">
+            <option value="" {% if overall.retentionIntent == "" %}selected{% endif %}>&mdash;</option>
+            <option value="definitely-stay" {% if overall.retentionIntent == "definitely-stay" %}selected{% endif %}>I definitely plan to stay</option>
+            <option value="probably-stay" {% if overall.retentionIntent == "probably-stay" %}selected{% endif %}>I probably plan to stay</option>
+            <option value="unsure" {% if overall.retentionIntent == "unsure" %}selected{% endif %}>I am unsure</option>
+            <option value="probably-leave-12-months" {% if overall.retentionIntent == "probably-leave-12-months" %}selected{% endif %}>I will probably leave within 12 months</option>
+            <option value="leaving-within-6-months" {% if overall.retentionIntent == "leaving-within-6-months" %}selected{% endif %}>I am actively planning to leave within 6 months</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="overall_suggestions_for_improvement">Suggestions for improvement</label>
+        <textarea id="overall_suggestions_for_improvement" name="overall.suggestions_for_improvement"
+                  placeholder="One change that would make the biggest difference">{{ overall.suggestionsForImprovement }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="overall_other_comments">Other comments</label>
+        <textarea id="overall_other_comments" name="overall.other_comments"
+                  placeholder="Anything else you would like HR / leadership to know">{{ overall.otherComments }}</textarea>
+    </div>
+</div>

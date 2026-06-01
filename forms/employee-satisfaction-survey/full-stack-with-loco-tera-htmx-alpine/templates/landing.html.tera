@@ -1,0 +1,39 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Employee Satisfaction Survey - Home{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <div class="card landing-card">
+        <h1>Employee Satisfaction Survey</h1>
+        <p class="landing-description">
+            Anonymous Likert-scale employee satisfaction survey covering workload,
+            management, growth, compensation, culture, environment, recognition, and
+            overall experience. Responses produce a 0&ndash;100 composite score and a
+            classified report with flagged retention or culture concerns to inform
+            HR, engagement, and leadership programmes.
+        </p>
+
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Ten Domains</h3>
+                <p>Eight graded employment domains plus demographics and role/tenure context.</p>
+            </div>
+            <div class="feature">
+                <h3>Composite Score</h3>
+                <p>Mean &times; 20 normalisation across answered Likert items, averaged into a 0&ndash;100 composite with five satisfaction bands.</p>
+            </div>
+            <div class="feature">
+                <h3>Retention & Flags</h3>
+                <p>eNPS classification, retention-intent capture, and prioritised flags for management, culture, and anonymity risks.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/assessment/new">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Begin New Survey
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
