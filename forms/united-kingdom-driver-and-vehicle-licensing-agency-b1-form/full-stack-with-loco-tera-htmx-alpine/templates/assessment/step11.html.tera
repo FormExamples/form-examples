@@ -1,0 +1,18 @@
+<!-- Step 11 — Q11 Eyesight -->
+<div x-show="step === 11" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 11: Eyesight (Q11)</h2>
+  <div>
+    <label>Are there eyesight problems caused by your condition?</label>
+    {% set v = data.eyesight.hasEyesightProblems %}
+    <select name="hasEyesightProblems" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>If Yes, please describe</label>
+    <textarea name="eyesightDetails" rows="3"
+              style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.eyesight.details }}</textarea>
+  </div>
+</div>

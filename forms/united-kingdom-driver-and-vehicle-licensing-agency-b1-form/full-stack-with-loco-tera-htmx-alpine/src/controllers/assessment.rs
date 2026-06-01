@@ -2,87 +2,80 @@
 //!
 //! Endpoints:
 //!
-//! - `GET  /`                          → landing
-//! - `POST /assessment/new`            → create a new assessment, redirect
-//! - `GET  /assessment/{id}`           → single-page wizard
-//! - `POST /assessment/{id}/submit`    → save form data, redirect to report
-//! - `GET  /assessment/{id}/report`    → render validated report
+//! - `GET  /`                          -> landing
+//! - `POST /assessment/new`            -> create a new assessment, redirect
+//! - `GET  /assessment/{id}`           -> single-page wizard
+//! - `POST /assessment/{id}/submit`    -> save form data, render report
+//! - `GET  /assessment/{id}/report`    -> render validated report
 
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use axum::{
-    extract::{Form, Path},
-    response::{Html, IntoResponse, Redirect, Response},
-    routing::{get, post},
-    Extension, Router,
-};
+use axum::{Extension, debug_handler, response::Redirect};
+use chrono::Utc;
+use loco_rs::prelude::*;
+use sea_orm::{ActiveValue, IntoActiveModel};
 use tera::{Context, Tera};
 use uuid::Uuid;
 
+use crate::engine::b1_validator::validate_b1;
+use crate::engine::flagged_issues::detect_flagged_issues;
 use crate::engine::types::{AssessmentData, MedicationEntry};
-use crate::views::assessment::{build_assessment_context, build_report_context};
-use crate::Store;
+use crate::models::{_entities::assessments::ActiveModel, assessments::find_by_id};
+use crate::views::assessment::{ReportResult, build_assessment_context, build_report_context};
 
-/// GET / — landing page.
-async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Response {
+/// GET / -- landing page.
+#[debug_handler]
+async fn landing(Extension(tera): Extension<Arc<Tera>>) -> Result<Response> {
     let context = Context::new();
-    render(&tera, "landing.html.tera", &context)
+    let rendered = tera
+        .render("landing.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/new — create a new assessment, redirect to its form.
-async fn new_assessment(Extension(store): Extension<Store>) -> Redirect {
-    let id = Uuid::new_v4();
-    let mut guard = store.lock().expect("store poisoned");
-    guard.insert(id, AssessmentData::default());
-    Redirect::to(&format!("/assessment/{id}"))
+/// POST /assessment/new -- create a new draft assessment, redirect to wizard.
+#[debug_handler]
+async fn create_new(State(ctx): State<AppContext>) -> Result<Response> {
+    let item = ActiveModel::new_draft()
+        .map_err(|e| Error::BadRequest(format!("Failed to create assessment: {e}")))?;
+    let item = item.insert(&ctx.db).await?;
+    let id = item.id;
+    Ok(Redirect::to(&format!("/assessment/{id}")).into_response())
 }
 
-/// GET /assessment/{id} — single-page wizard.
-async fn show(
+/// GET /assessment/{id} -- render the single-page wizard.
+#[debug_handler]
+async fn show_assessment(
     Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
     Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item.assessment_data().unwrap_or_default();
     let context = build_assessment_context(&data, id);
-    render(&tera, "assessment/index.html.tera", &context)
+    let rendered = tera
+        .render("assessment.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
 }
 
-/// POST /assessment/{id}/submit — save raw form data, redirect to report.
-async fn submit(
-    Path(id): Path<Uuid>,
-    Extension(store): Extension<Store>,
-    Form(form): Form<HashMap<String, String>>,
-) -> Redirect {
-    let data = form_to_assessment_data(&form);
-    {
-        let mut guard = store.lock().expect("store poisoned");
-        guard.insert(id, data);
-    }
-    Redirect::to(&format!("/assessment/{id}/report"))
-}
-
-/// GET /assessment/{id}/report — render the validated report.
-async fn report(
-    Path(id): Path<Uuid>,
-    Extension(tera): Extension<Arc<Tera>>,
-    Extension(store): Extension<Store>,
-) -> Response {
-    let data = {
-        let guard = store.lock().expect("store poisoned");
-        guard.get(&id).cloned().unwrap_or_default()
-    };
-    let context = build_report_context(&data, id);
-    render(&tera, "assessment/report.html.tera", &context)
-}
-
-/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto our
+/// Map a flat HashMap (from `application/x-www-form-urlencoded`) onto the
 /// strongly-typed `AssessmentData`. Unknown / blank fields fall back to
-/// defaults.
+/// defaults. The form field names follow camelCase to match the front-end.
 fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     let mut data = AssessmentData::default();
 
@@ -92,7 +85,7 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
         v == "on" || v == "true" || v == "yes" || v == "1"
     };
 
-    // ─── Personal Details ──────────────────────────────
+    // Personal Details
     data.personal_details.title = s("title");
     data.personal_details.full_name = s("fullName");
     data.personal_details.date_of_birth = s("dateOfBirth");
@@ -104,7 +97,7 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data.personal_details.contact_number = s("contactNumber");
     data.personal_details.change_of_details = s("changeOfDetails");
 
-    // ─── Healthcare Professionals ──────────────────────
+    // Healthcare Professionals
     data.healthcare_professionals.gp.gp_name = s("gpName");
     data.healthcare_professionals.gp.surgery_name = s("gpSurgeryName");
     data.healthcare_professionals.gp.address_line1 = s("gpAddressLine1");
@@ -127,7 +120,7 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data.healthcare_professionals.consultant.email = s("consultantEmail");
     data.healthcare_professionals.consultant.date_last_seen = s("consultantDateLastSeen");
 
-    // ─── Q1 Condition History ──────────────────────────
+    // Q1 Condition History
     data.condition_history.brain_haemorrhage = b("brainHaemorrhage");
     data.condition_history.brain_haemorrhage_date = s("brainHaemorrhageDate");
     data.condition_history.brain_haemorrhage_details = s("brainHaemorrhageDetails");
@@ -140,18 +133,18 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data.condition_history.brain_surgery_date = s("brainSurgeryDate");
     data.condition_history.brain_surgery_not_applicable = b("brainSurgeryNotApplicable");
 
-    // ─── Q2 Treatment Provider ─────────────────────────
+    // Q2 Treatment Provider
     data.treatment_provider.last_seen = s("lastSeen");
     data.treatment_provider.gp_last_contact_date = s("gpLastContactDate");
     data.treatment_provider.gp_next_contact_date = s("gpNextContactDate");
     data.treatment_provider.consultant_last_contact_date = s("consultantLastContactDate");
     data.treatment_provider.consultant_next_contact_date = s("consultantNextContactDate");
 
-    // ─── Q3 Blackouts ──────────────────────────────────
+    // Q3 Blackouts
     data.blackouts.had_blackouts = s("hadBlackouts");
     data.blackouts.blackout_date = s("blackoutDate");
 
-    // ─── Q4–Q6 Seizures ────────────────────────────────
+    // Q4-Q6 Seizures
     data.seizures.had_seizures = s("hadSeizures");
     data.seizures.diagnosis = s("seizureDiagnosis");
     data.seizures.first_ever.date = s("firstEverSeizureDate");
@@ -181,10 +174,9 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data.seizures.epilepsy_declaration.signed_name = s("epilepsySignedName");
     data.seizures.epilepsy_declaration.signature_date = s("epilepsySignatureDate");
 
-    // ─── Q7 Medication ─────────────────────────────────
+    // Q7 Medication
     data.medication.no_medication_taken = b("noMedicationTaken");
     data.medication.makes_drowsy_or_confused = s("makesDrowsyOrConfused");
-    // Up to three medication entries from the form (medName1..medName3 etc).
     for i in 1..=3 {
         let name = s(&format!("medName{i}"));
         let start = s(&format!("medStart{i}"));
@@ -198,30 +190,30 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
         }
     }
 
-    // ─── Q8 VP Shunt ───────────────────────────────────
+    // Q8 VP Shunt
     data.vp_shunt.had_vp_shunt_or_drain = s("hadVpShuntOrDrain");
     data.vp_shunt.procedure_date = s("vpShuntProcedureDate");
 
-    // ─── Q9 Daily Living ───────────────────────────────
+    // Q9 Daily Living
     data.daily_living.needs_help = s("needsHelp");
     data.daily_living.help_details = s("helpDetails");
 
-    // ─── Q10 Double Vision ─────────────────────────────
+    // Q10 Double Vision
     data.double_vision.has_double_vision = s("hasDoubleVision");
     data.double_vision.suppressed_or_controlled = s("suppressedOrControlled");
     data.double_vision.correction_method = s("correctionMethod");
     data.double_vision.correction_method_other = s("correctionMethodOther");
 
-    // ─── Q11 Eyesight ──────────────────────────────────
+    // Q11 Eyesight
     data.eyesight.has_eyesight_problems = s("hasEyesightProblems");
     data.eyesight.details = s("eyesightDetails");
 
-    // ─── Q12 Vehicle Adaptations ───────────────────────
+    // Q12 Vehicle Adaptations
     data.vehicle_adaptations.needs_adaptations = s("needsAdaptations");
     data.vehicle_adaptations.previously_declared = s("previouslyDeclared");
     data.vehicle_adaptations.additional_controls_fitted = s("additionalControlsFitted");
 
-    // ─── Authorisation ─────────────────────────────────
+    // Authorisation
     data.authorisation.declaration_accepted = b("authorisationAccepted");
     data.authorisation.name = s("authorisationName");
     data.authorisation.signature_date = s("authorisationSignatureDate");
@@ -232,26 +224,74 @@ fn form_to_assessment_data(form: &HashMap<String, String>) -> AssessmentData {
     data
 }
 
-/// Render a Tera template and return an HTML response (or 500 on error).
-fn render(tera: &Tera, template: &str, context: &Context) -> Response {
-    match tera.render(template, context) {
-        Ok(html) => Html(html).into_response(),
-        Err(e) => {
-            tracing::error!("Template error rendering {template}: {e}");
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                format!("Template error: {e}"),
-            )
-                .into_response()
-        }
-    }
+/// POST /assessment/{id}/submit -- merge form data into JSONB, run validator
+/// and flagged-issue engine, persist result, redirect to the report.
+#[debug_handler]
+async fn submit_assessment(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    axum::extract::Form(form): axum::extract::Form<HashMap<String, String>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data = form_to_assessment_data(&form);
+    let data_json = serde_json::to_value(&data).map_err(Error::wrap)?;
+
+    let validation = validate_b1(&data);
+    let flagged_issues = detect_flagged_issues(&data);
+    let timestamp = Utc::now().to_rfc3339();
+    let result = ReportResult {
+        validation,
+        flagged_issues,
+        timestamp,
+    };
+    let result_json = serde_json::to_value(&result).map_err(Error::wrap)?;
+
+    let mut active: ActiveModel = item.into_active_model();
+    active.data = ActiveValue::Set(data_json);
+    active.result = ActiveValue::Set(Some(result_json));
+    active.status = ActiveValue::Set("completed".to_string());
+    active.updated_at = ActiveValue::Set(Utc::now().into());
+    active.update(&ctx.db).await?;
+
+    Ok(Redirect::to(&format!("/assessment/{id}/report")).into_response())
 }
 
-pub fn router() -> Router {
-    Router::new()
-        .route("/", get(landing))
-        .route("/assessment/new", post(new_assessment))
-        .route("/assessment/{id}", get(show))
-        .route("/assessment/{id}/submit", post(submit))
-        .route("/assessment/{id}/report", get(report))
+/// GET /assessment/{id}/report -- render the validated report.
+#[debug_handler]
+async fn show_report(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Extension(tera): Extension<Arc<Tera>>,
+) -> Result<Response> {
+    let item = find_by_id(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+
+    let data: AssessmentData = item
+        .assessment_data()
+        .map_err(|e| Error::BadRequest(format!("Invalid assessment data: {e}")))?;
+
+    let context = build_report_context(&data, id);
+    let rendered = tera
+        .render("report.html.tera", &context)
+        .map_err(|e| Error::BadRequest(format!("Template error: {e}")))?;
+
+    Ok(Response::builder()
+        .header("Content-Type", "text/html; charset=utf-8")
+        .body(axum::body::Body::from(rendered))
+        .map_err(Error::wrap)?
+        .into_response())
+}
+
+pub fn routes(tera: Arc<Tera>) -> Routes {
+    Routes::new()
+        .add("/", get(landing))
+        .add("assessment/new", post(create_new))
+        .add("assessment/{id}", get(show_assessment))
+        .add("assessment/{id}/submit", post(submit_assessment))
+        .add("assessment/{id}/report", get(show_report))
+        .layer(Extension(tera))
 }

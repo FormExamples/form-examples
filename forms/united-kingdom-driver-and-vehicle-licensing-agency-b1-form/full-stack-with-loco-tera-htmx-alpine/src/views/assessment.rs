@@ -8,6 +8,9 @@ use crate::engine::b1_validator::validate_b1;
 use crate::engine::flagged_issues::detect_flagged_issues;
 use crate::engine::types::{AssessmentData, FlaggedIssue, ValidationResult};
 
+/// Total wizard steps (13 per the DVLA B1 form).
+pub const TOTAL_STEPS: u32 = 13;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReportResult {
@@ -20,7 +23,7 @@ pub struct ReportResult {
 pub fn build_assessment_context(data: &AssessmentData, id: Uuid) -> Context {
     let mut ctx = Context::new();
     ctx.insert("id", &id.to_string());
-    ctx.insert("total_steps", &13usize);
+    ctx.insert("total_steps", &TOTAL_STEPS);
     ctx.insert("data", data);
     ctx
 }

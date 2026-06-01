@@ -1,0 +1,18 @@
+<!-- Step 5 — Q3 Blackouts -->
+<div x-show="step === 5" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 5: Blackouts (Q3)</h2>
+  <div>
+    <label>Have you had any blackouts or altered consciousness?</label>
+    {% set v = data.blackouts.hadBlackouts %}
+    <select name="hadBlackouts" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Date of blackout (if Yes)</label>
+    <input type="date" name="blackoutDate" value="{{ data.blackouts.blackoutDate }}"
+           style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+</div>

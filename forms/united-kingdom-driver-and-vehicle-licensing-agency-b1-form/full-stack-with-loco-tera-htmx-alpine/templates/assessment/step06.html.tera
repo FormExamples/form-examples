@@ -1,0 +1,92 @@
+<!-- Step 6 — Q4-Q6 Seizures -->
+<div x-show="step === 6" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 6: Seizures (Q4–Q6)</h2>
+  <div>
+    <label>Q4: Have you ever had a seizure or epileptic attack?</label>
+    {% set v = data.seizures.hadSeizures %}
+    <select name="hadSeizures" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q4: Diagnosis</label>
+    {% set v = data.seizures.diagnosis %}
+    <select name="seizureDiagnosis" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="first-ever" {% if v == "first-ever" %}selected{% endif %}>First ever seizure</option>
+      <option value="more-than-one-or-epilepsy" {% if v == "more-than-one-or-epilepsy" %}selected{% endif %}>More than one seizure / epilepsy</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q5: First-ever seizure date</label>
+    <input type="date" name="firstEverSeizureDate" value="{{ data.seizures.firstEver.date }}"
+           style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q5: Details</label>
+    <textarea name="firstEverSeizureDetails" rows="2"
+              style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.seizures.firstEver.details }}</textarea>
+  </div>
+
+  <h3 style="margin-top:1.2rem;">Q6 — Repeated seizures / epilepsy</h3>
+  <div>
+    <label>Q6a: Two or more seizures within 5 years?</label>
+    {% set v = data.seizures.multiple.twoOrMoreWithinFiveYears %}
+    <select name="twoOrMoreWithinFiveYears" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q6g: Have seizures affected your level of consciousness?</label>
+    {% set v = data.seizures.multiple.affectedConsciousness %}
+    <select name="affectedConsciousness" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q6h: Would they have affected vehicle control?</label>
+    {% set v = data.seizures.multiple.wouldHaveAffectedDriving %}
+    <select name="wouldHaveAffectedDriving" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q6i: Was the last seizure a result of medication advice from your doctor?</label>
+    {% set v = data.seizures.multiple.resultOfMedicationAdvice %}
+    <select name="resultOfMedicationAdvice" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+
+  <h3 style="margin-top:1.2rem;">Epilepsy Declaration</h3>
+  <p style="color:#666;font-size:0.9rem;">Required if you have declared epilepsy or more than one lifetime seizure.</p>
+  <div>
+    <label>
+      <input type="checkbox" name="epilepsyDeclarationAccepted" value="on"
+             {% if data.seizures.epilepsyDeclaration.declarationAccepted %}checked{% endif %}>
+      I accept the epilepsy declaration.
+    </label>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:2;min-width:200px;">
+      <label>Signed name</label>
+      <input type="text" name="epilepsySignedName" value="{{ data.seizures.epilepsyDeclaration.signedName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Signature date</label>
+      <input type="date" name="epilepsySignatureDate" value="{{ data.seizures.epilepsyDeclaration.signatureDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+</div>

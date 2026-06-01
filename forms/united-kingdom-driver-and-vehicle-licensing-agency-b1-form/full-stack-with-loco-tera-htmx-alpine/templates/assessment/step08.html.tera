@@ -1,0 +1,18 @@
+<!-- Step 8 — Q8 VP Shunt -->
+<div x-show="step === 8" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 8: VP Shunt (Q8)</h2>
+  <div>
+    <label>Have you had a VP shunt or external ventricular drain?</label>
+    {% set v = data.vpShunt.hadVpShuntOrDrain %}
+    <select name="hadVpShuntOrDrain" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Date of procedure (if Yes)</label>
+    <input type="date" name="vpShuntProcedureDate" value="{{ data.vpShunt.procedureDate }}"
+           style="padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+</div>

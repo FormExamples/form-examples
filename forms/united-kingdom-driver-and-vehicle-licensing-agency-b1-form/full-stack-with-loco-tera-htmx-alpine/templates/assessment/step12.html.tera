@@ -1,0 +1,31 @@
+<!-- Step 12 — Q12 Vehicle Adaptations -->
+<div x-show="step === 12" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 12: Vehicle Adaptations (Q12)</h2>
+  <div>
+    <label>Q12: Do you need special controls or automatic transmission?</label>
+    {% set v = data.vehicleAdaptations.needsAdaptations %}
+    <select name="needsAdaptations" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q12a: Have you previously declared the need for special controls?</label>
+    {% set v = data.vehicleAdaptations.previouslyDeclared %}
+    <select name="previouslyDeclared" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Q12b: Have additional controls been fitted since last licence?</label>
+    {% set v = data.vehicleAdaptations.additionalControlsFitted %}
+    <select name="additionalControlsFitted" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="yes" {% if v == "yes" %}selected{% endif %}>Yes</option>
+      <option value="no" {% if v == "no" %}selected{% endif %}>No</option>
+    </select>
+  </div>
+</div>

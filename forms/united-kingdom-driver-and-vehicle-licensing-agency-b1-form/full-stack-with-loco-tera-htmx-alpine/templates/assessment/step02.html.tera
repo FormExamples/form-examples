@@ -1,0 +1,77 @@
+<!-- Step 2 — Healthcare Professionals -->
+<div x-show="step === 2" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 2: Healthcare Professionals (Part B)</h2>
+  <h3>GP</h3>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:200px;">
+      <label>GP name</label>
+      <input type="text" name="gpName" value="{{ data.healthcareProfessionals.gp.gpName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:200px;">
+      <label>Surgery name</label>
+      <input type="text" name="gpSurgeryName" value="{{ data.healthcareProfessionals.gp.surgeryName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:2;min-width:200px;">
+      <label>Address</label>
+      <input type="text" name="gpAddressLine1" value="{{ data.healthcareProfessionals.gp.addressLine1 }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:140px;">
+      <label>Town</label>
+      <input type="text" name="gpTown" value="{{ data.healthcareProfessionals.gp.town }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <label>Postcode</label>
+      <input type="text" name="gpPostcode" value="{{ data.healthcareProfessionals.gp.postcode }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:1;min-width:160px;">
+      <label>Contact number</label>
+      <input type="text" name="gpContactNumber" value="{{ data.healthcareProfessionals.gp.contactNumber }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:200px;">
+      <label>Email</label>
+      <input type="email" name="gpEmail" value="{{ data.healthcareProfessionals.gp.email }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Date last seen for this condition</label>
+      <input type="date" name="gpDateLastSeen" value="{{ data.healthcareProfessionals.gp.dateLastSeen }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.2rem;">Consultant (optional)</h3>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:200px;">
+      <label>Consultant name</label>
+      <input type="text" name="consultantName" value="{{ data.healthcareProfessionals.consultant.consultantName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:200px;">
+      <label>Speciality</label>
+      <input type="text" name="consultantSpeciality" value="{{ data.healthcareProfessionals.consultant.speciality }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:1;min-width:200px;">
+      <label>Hospital</label>
+      <input type="text" name="hospitalName" value="{{ data.healthcareProfessionals.consultant.hospitalName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Date last seen</label>
+      <input type="date" name="consultantDateLastSeen" value="{{ data.healthcareProfessionals.consultant.dateLastSeen }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+</div>

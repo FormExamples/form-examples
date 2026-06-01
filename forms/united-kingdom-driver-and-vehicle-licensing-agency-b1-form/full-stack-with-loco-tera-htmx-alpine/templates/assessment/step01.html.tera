@@ -1,0 +1,58 @@
+<!-- Step 1 — Personal Details -->
+<div x-show="step === 1" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 1: Personal Details (Part A)</h2>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px;">
+      <label>Title</label>
+      <input type="text" name="title" value="{{ data.personalDetails.title }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:2;min-width:200px;">
+      <label>Full Name</label>
+      <input type="text" name="fullName" value="{{ data.personalDetails.fullName }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Date of Birth</label>
+      <input type="date" name="dateOfBirth" value="{{ data.personalDetails.dateOfBirth }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="margin-top:1rem;">
+    <label>Address Line 1</label>
+    <input type="text" name="addressLine1" value="{{ data.personalDetails.addressLine1 }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Address Line 2</label>
+    <input type="text" name="addressLine2" value="{{ data.personalDetails.addressLine2 }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="margin-top:0.6rem;">
+    <label>Address Line 3</label>
+    <input type="text" name="addressLine3" value="{{ data.personalDetails.addressLine3 }}"
+           style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.6rem;">
+    <div style="flex:1;min-width:140px;">
+      <label>Postcode</label>
+      <input type="text" name="postcode" value="{{ data.personalDetails.postcode }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:2;min-width:200px;">
+      <label>Email</label>
+      <input type="email" name="email" value="{{ data.personalDetails.email }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Contact Number</label>
+      <input type="text" name="contactNumber" value="{{ data.personalDetails.contactNumber }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+  <div style="margin-top:0.8rem;">
+    <label>Change of details (since last contact)</label>
+    <textarea name="changeOfDetails" rows="2"
+              style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.personalDetails.changeOfDetails }}</textarea>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- Step 4 — Q2 Treatment Provider -->
+<div x-show="step === 4" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
+  <h2>Step 4: Treatment Provider (Q2)</h2>
+  <div>
+    <label>Who did you last see for this condition?</label>
+    {% set v = data.treatmentProvider.lastSeen %}
+    <select name="lastSeen" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+      <option value="">— select —</option>
+      <option value="gp" {% if v == "gp" %}selected{% endif %}>GP</option>
+      <option value="consultant" {% if v == "consultant" %}selected{% endif %}>Consultant</option>
+    </select>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+    <div style="flex:1;min-width:160px;">
+      <label>GP last contact date</label>
+      <input type="date" name="gpLastContactDate" value="{{ data.treatmentProvider.gpLastContactDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>GP next contact date</label>
+      <input type="date" name="gpNextContactDate" value="{{ data.treatmentProvider.gpNextContactDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Consultant last contact</label>
+      <input type="date" name="consultantLastContactDate" value="{{ data.treatmentProvider.consultantLastContactDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="flex:1;min-width:160px;">
+      <label>Consultant next contact</label>
+      <input type="date" name="consultantNextContactDate" value="{{ data.treatmentProvider.consultantNextContactDate }}"
+             style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+  </div>
+</div>

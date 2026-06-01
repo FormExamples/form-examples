@@ -34,5 +34,6 @@
       Begin New Assessment
     </button>
   </form>
+  <p style="margin-top:1rem;"><a href="/dashboard">View completed assessments dashboard &raquo;</a></p>
 </div>
 {% endblock %}
