@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}Continuation sheets{% endblock %}
-{% block content %}<h2>Continuation sheets</h2><p><a href="/lpa_continuation_sheet/new">New</a></p>
-<ul>{% for row in items %}<li><a href="/lpa_continuation_sheet/{{ row.id }}">{{ row.kind }} — LPA {{ row.lpa_id }}</a></li>{% endfor %}</ul>{% endblock %}

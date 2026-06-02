@@ -30,8 +30,8 @@ create_idempotent() {
     mkdir_with_ai_idempotent "$dir/front-end-dashboard-with-svelte"
     mkdir_with_ai_idempotent "$dir/front-end-form-with-html"
     mkdir_with_ai_idempotent "$dir/front-end-form-with-svelte"
-    mkdir_with_ai_idempotent "$dir/full-stack-with-loco-tera-htmx-alpine"
-    mkdir_with_ai_idempotent "$dir/full-stack-with-loco-tera-htmx-alpine-new"
+    mkdir_with_ai_idempotent "$dir/back-end-with-loco"
+    mkdir_with_ai_idempotent "$dir/back-end-with-loco-new"
     mkdir_with_ai_idempotent "$dir/protobuf"
     mkdir_with_ai_idempotent "$dir/sql-migrations"
     mkdir_with_ai_idempotent "$dir/typespec"
@@ -41,7 +41,7 @@ create_idempotent() {
 create_form_loco_script() {
     # form_dir="$1"
     # form_name_as_snake="$2"
-    file="$form_dir/full-stack-with-loco-tera-htmx-alpine/00-new.sh"
+    file="$form_dir/back-end-with-loco/00-new.sh"
     cat << EOF > "$file"
 #!/bin/sh
 set -euf
@@ -50,7 +50,7 @@ createuser --host=localhost --port=5432 --username=postgres --login --createdb l
 createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_development || :
 createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_test || :
 createdb --host=localhost --port=5432 --username=postgres --owner=loco ${form_name_as_snake}_production || :
-loco new --name ${form_name_as_kebab} --db postgres --bg async --assets serverside
+loco new --name ${form_name_as_kebab} --db postgres --bg pg --assets none
 EOF
     chmod +x "$file"
 }

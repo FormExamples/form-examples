@@ -1,7 +1,7 @@
 # Scoring engine fixtures
 
 Each JSON file is one scoring scenario consumed by both the TypeScript
-(`front-end-form-with-svelte`) and Rust (`full-stack-with-loco-tera-htmx-alpine`)
+(`front-end-form-with-svelte`) and Rust (`back-end-with-loco`)
 ports. Shape:
 
 ```json

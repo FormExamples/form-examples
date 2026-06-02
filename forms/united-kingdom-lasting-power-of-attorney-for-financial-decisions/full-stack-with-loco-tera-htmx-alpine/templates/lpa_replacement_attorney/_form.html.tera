@@ -1,4 +1,0 @@
-<label>LPA ID <input type="text" name="lpa_id" value="{{ item.lpa_id | default(value='') }}"></label>
-<label>Person ID <input type="text" name="person_id" value="{{ item.person_id | default(value='') }}"></label>
-<label>Ordinal <input type="number" name="ordinal" value="{{ item.ordinal | default(value=1) }}"></label>
-<label>Step-in condition <textarea name="replacement_step_in_condition">{{ item.replacement_step_in_condition | default(value='') }}</textarea></label>

@@ -142,8 +142,8 @@ international-certificate-of-vaccination-or-prophylaxis/
   front-end-form-with-svelte/                        # SvelteKit single-page wizard
   front-end-dashboard-with-html/                     # review dashboard (HTML table)
   front-end-dashboard-with-svelte/                   # review dashboard (SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/             # Rust backend + server-rendered UI
-  full-stack-with-loco-tera-htmx-alpine-setup       # scaffold generator (shell)
+  back-end-with-loco/             # Rust backend + server-rendered UI
+  back-end-with-loco-setup       # scaffold generator (shell)
 ```
 
 ## References

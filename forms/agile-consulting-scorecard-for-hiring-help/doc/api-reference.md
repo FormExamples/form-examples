@@ -1,7 +1,7 @@
 # Agile Consulting Scorecard — API reference
 
 Quick reference for the nine HTTP endpoints exposed by the Rust axum
-server at `full-stack-with-loco-tera-htmx-alpine/`. The SvelteKit
+server at `back-end-with-loco/`. The SvelteKit
 front-ends (`front-end-form-with-svelte`, `front-end-dashboard-with-svelte`)
 mount a subset of these at the same paths via `+server.ts` so they
 work standalone against the bundled sample data when no backend is
@@ -10,7 +10,7 @@ running.
 Start the Rust server with:
 
 ```sh
-cd full-stack-with-loco-tera-htmx-alpine
+cd back-end-with-loco
 cargo run --bin agile-consulting-scorecard-server
 # listens on http://127.0.0.1:5150 (override with $PORT)
 ```
@@ -248,7 +248,7 @@ identical to the SvelteKit dashboard's `ScorecardRow` type
 `AgileConsultingScorecardAssessment` and `GradeResult` shapes are
 identical between the TypeScript engine
 (`front-end-form-with-svelte/src/lib/engine/types.ts`) and the Rust
-engine (`full-stack-with-loco-tera-htmx-alpine/src/scoring/types.rs`).
+engine (`back-end-with-loco/src/scoring/types.rs`).
 The two engines are parity-tested against
 `samples/sample-assessment.json` / `samples/sample-grade.json` so any
 divergence breaks CI.

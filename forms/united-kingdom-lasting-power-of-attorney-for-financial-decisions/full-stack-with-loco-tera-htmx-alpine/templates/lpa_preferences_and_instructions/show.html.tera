@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block content %}<article><h2>Preferences and instructions {{ item.id }}</h2>
-<dl><dt>LPA</dt><dd>{{ item.lpa_id }}</dd></dl>
-<a href="/lpa_preferences_and_instructions/{{ item.id }}/edit">edit</a></article>{% endblock %}

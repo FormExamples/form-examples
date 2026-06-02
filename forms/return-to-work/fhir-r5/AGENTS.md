@@ -21,7 +21,7 @@ by `bin/fhir-r5/generate-fhir-r5-representations.py`. See
 
 The Rust full-stack backend assembles the final `Bundle` of
 type `document` in
-`full-stack-with-loco-tera-htmx-alpine/src/services/fhir.rs`.
+`back-end-with-loco/src/services/fhir.rs`.
 This directory is only the per-resource skeleton.
 
 ## Verify

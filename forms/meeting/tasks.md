@@ -27,8 +27,8 @@
 - [x] Build `front-end-dashboard-with-html/` static review table.
 - [ ] Build `front-end-form-with-svelte/` SvelteKit single-page wizard.
 - [ ] Build `front-end-dashboard-with-svelte/` SVAR DataGrid dashboard.
-- [ ] Build `full-stack-with-loco-tera-htmx-alpine-setup` scaffold script.
-- [ ] Build `full-stack-with-loco-tera-htmx-alpine/` Rust crate.
+- [ ] Build `back-end-with-loco-setup` scaffold script.
+- [ ] Build `back-end-with-loco/` Rust crate.
 - [ ] Author `typespec/` TypeSpec API definitions.
 - [ ] Unit-test `validateMeeting()` with Vitest.
 - [ ] Run `bin/test-form meeting` and resolve remaining failures.

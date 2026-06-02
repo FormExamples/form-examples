@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """bin/loco-config-refactor — mechanically refactor each form's
-`full-stack-with-loco-tera-htmx-alpine/` Loco crate to the canonical
+`back-end-with-loco/` Loco crate to the canonical
 background-queue and observability conventions documented in
-`AGENTS/full-stack-with-loco-tera-htmx-alpine.md`:
+`AGENTS/back-end-with-loco.md`:
 
   - Postgres-backed background queue (`bg_pg`)
   - SQLite-backed (`bg_sqlt`) and Redis-backed (`bg_redis`) queues removed
@@ -44,7 +44,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
 
-LOCO_DIR_NAME = "full-stack-with-loco-tera-htmx-alpine"
+LOCO_DIR_NAME = "back-end-with-loco"
 
 # --- loco-rs Cargo features -------------------------------------------------
 
@@ -85,7 +85,7 @@ def find_loco_crates(slug_filter: str | None) -> list[Path]:
 
     A Loco crate root is a directory containing a `Cargo.toml` whose text
     contains `loco-rs`, located anywhere inside
-    `forms/<slug>/full-stack-with-loco-tera-htmx-alpine/`.
+    `forms/<slug>/back-end-with-loco/`.
     """
     roots: list[Path] = []
     seen_real: set[Path] = set()

@@ -24,7 +24,7 @@ See [`index.md`](./index.md) for the full design and the 7-step wizard table.
 - `./front-end-form-with-svelte/` — SvelteKit single-page wizard
 - `./front-end-dashboard-with-html/` — HTML review dashboard
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with HTMX UI
+- `./back-end-with-loco/` — Rust backend with HTMX UI
 
 ## Scoring engine
 

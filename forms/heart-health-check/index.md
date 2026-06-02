@@ -33,7 +33,7 @@ heart-health-check/
   front-end-dashboard-with-html/                    # Dashboard (HTML/CSS/JS)
   front-end-form-with-svelte/                       # Patient form (SvelteKit + Tailwind)
   front-end-dashboard-with-svelte/                  # Dashboard (SvelteKit + SVAR)
-  full-stack-with-loco-tera-htmx-alpine/  # Backend (Rust + Loco + Tera)
+  back-end-with-loco/  # Backend (Rust + Loco + Tera)
   sql-migrations/                               # PostgreSQL schema migrations
 ```
 

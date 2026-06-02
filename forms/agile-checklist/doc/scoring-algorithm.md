@@ -87,4 +87,4 @@ JS) is a pure function with no side effects and no I/O. The Rust and
 TypeScript implementations produce **byte-identical** results for the
 same input (see browser smoke tests in each front-end's `tasks.md` and
 the engine unit tests in `front-end-form-with-svelte/` and
-`full-stack-with-loco-tera-htmx-alpine/`).
+`back-end-with-loco/`).

@@ -29,7 +29,7 @@
 - [ ] `fhir-r5/` — generate FHIR R5 JSON per SQL table.
 - [ ] `protobuf/` — generate `.proto` per SQL table.
 - [ ] `openapi/` — generate `.yaml` per SQL table.
-- [ ] `full-stack-with-loco-tera-htmx-alpine-setup` — generate Loco scaffold script.
+- [ ] `back-end-with-loco-setup` — generate Loco scaffold script.
 
 ## SvelteKit practitioner form (`front-end-form-with-svelte/`)
 - [ ] Engine: `types.ts`, `utils.ts`, `priority-targets.ts`,
@@ -49,7 +49,7 @@
 ## Static HTML dashboard (`front-end-dashboard-with-html/`)
 - [ ] Sortable HTML table mirroring the SvelteKit dashboard.
 
-## Rust full-stack (`full-stack-with-loco-tera-htmx-alpine/`)
+## Rust full-stack (`back-end-with-loco/`)
 - [ ] `cargo loco new medical-waiting-list-card`.
 - [ ] Run the generated scaffold script.
 - [ ] Tera templates for the practitioner wizard and dashboard.

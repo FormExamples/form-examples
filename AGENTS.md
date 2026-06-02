@@ -30,7 +30,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/sql-migrations/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql-migrations/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 
-### Loco backend refactor
+### Loco back-end refactor
 
 - `bin/loco-config-refactor [--check] [--dry-run] [--all|<slug>]` — mechanical Loco crate refactor for the canonical background-queue (Postgres only; drops `bg_sqlt` / `bg_redis`) and observability (OpenTelemetry + Prometheus `/metrics`) conventions; `--check` is the CI drift detector
 
@@ -40,7 +40,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
-- `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` — emit each form's `cargo loco generate scaffold` setup script
+- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — emit each form's `cargo loco generate scaffold --api` setup script
 
 ### Lily Design System (HTML front-ends)
 
@@ -86,8 +86,8 @@ forms/<slug>/
   front-end-form-with-svelte/                      # Questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML + table)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend (axum + Loco + Tera + HTMX + Alpine.js)
-  full-stack-with-loco-tera-htmx-alpine-setup      # Scaffold generator (executable shell script of `cargo loco generate scaffold` calls; generated)
+  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco; no Tera/HTMX/Alpine/CSS)
+  back-end-with-loco-setup                         # Scaffold generator (executable shell script of `cargo loco generate scaffold --api` calls; generated)
 ```
 
 ## Standard workflow for a new form
@@ -101,9 +101,9 @@ forms/<slug>/
    - `python3 bin/fhir-r5/generate-fhir-r5-representations.py`
    - `python3 bin/protobuf/generate-protobuf-representations.py`
    - `python3 bin/openapi/generate-openapi-representations.py`
-   - `python3 bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py`
+   - `python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py`
 5. Build the front-ends (form and dashboard, each in HTML and SvelteKit).
-6. Build the full-stack Rust implementation.
+6. Build the back-end Rust JSON API implementation.
 7. Run `bin/lily-html-refactor --check --all` to confirm no Lily contract drift.
 8. `bin/test-form <slug>` — validate structure.
 9. Update `forms/<slug>/tasks.md` with the work done.
@@ -120,8 +120,8 @@ See the per-stack agent docs:
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
-- [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
+- [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
+- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)

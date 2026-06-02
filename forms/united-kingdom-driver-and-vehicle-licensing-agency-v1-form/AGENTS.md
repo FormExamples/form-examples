@@ -21,7 +21,7 @@ General confidential medical information — vision self-declaration for driving
 - ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-html/ - Dashboard; HTML
 - ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack option; Rust + Tera templates
+- ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
 
 ## Form parts
 

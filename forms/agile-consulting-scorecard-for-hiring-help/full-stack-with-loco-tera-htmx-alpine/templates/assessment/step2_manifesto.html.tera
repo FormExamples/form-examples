@@ -1,8 +1,0 @@
-{% import "assessment/_macros.html.tera" as m %}
-<fieldset class="wizard-step" x-show="step === 2">
-  <legend>Step 2 — Agile Manifesto (4 items)</legend>
-  {{ m::item(key="m1", heading="Manifesto 1 — Individuals and interactions", prompt="Every leader is in conversation with customers ≥ 1 hour per week, with weekly results radiated to stakeholders.") }}
-  {{ m::item(key="m2", heading="Manifesto 2 — Working software", prompt='The team has launched a brand-new "hello world" program to production and discussed the experience.') }}
-  {{ m::item(key="m3", heading="Manifesto 3 — Customer collaboration", prompt="The organization has bought copies of the customer's favourite book and shared with the team (org spend, not personal).") }}
-  {{ m::item(key="m4", heading="Manifesto 4 — Responding to change", prompt="Every senior leader (BoD/CXO/VP/Director) has read one agile change-management book and shared three takeaways.") }}
-</fieldset>

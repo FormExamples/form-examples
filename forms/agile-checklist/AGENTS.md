@@ -26,7 +26,7 @@ table. The 57 items are sourced verbatim from [`seed.md`](./seed.md).
 - `./front-end-form-with-svelte/` — SvelteKit single-page assessment wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SvelteKit review dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with
+- `./back-end-with-loco/` — Rust backend with
   server-rendered HTMX UI
 
 ## Scoring engine

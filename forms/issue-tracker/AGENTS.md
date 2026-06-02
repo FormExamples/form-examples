@@ -25,7 +25,7 @@ table.
 - `./front-end-form-with-svelte/` — SvelteKit single-page issue wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with server-rendered HTMX UI
+- `./back-end-with-loco/` — Rust backend with server-rendered HTMX UI
 
 ## Scoring engine
 

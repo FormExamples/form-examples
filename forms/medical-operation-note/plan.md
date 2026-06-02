@@ -33,7 +33,7 @@
 - [ ] `fhir-r5/` — FHIR R5 JSON per SQL entity.
 - [ ] `protobuf/` — `.proto` per SQL entity.
 - [ ] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity.
-- [ ] `full-stack-with-loco-tera-htmx-alpine-setup` — Loco scaffold script.
+- [ ] `back-end-with-loco-setup` — Loco scaffold script.
 
 ## Phase 4 — Front-ends (deferred, parallel subagents)
 
@@ -46,7 +46,7 @@
 
 ## Phase 5 — Backend (deferred)
 
-- [ ] `full-stack-with-loco-tera-htmx-alpine/` — Rust Loco backend with
+- [ ] `back-end-with-loco/` — Rust Loco backend with
       Tera + HTMX + Alpine.js.
 
 ## Phase 6 — Verification

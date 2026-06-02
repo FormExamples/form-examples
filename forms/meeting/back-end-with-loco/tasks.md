@@ -1,0 +1,23 @@
+# Tasks: Meeting — Full-stack (Rust)
+
+- [ ] Run `../back-end-with-loco-setup` to scaffold.
+- [ ] Author SeaORM migration for `organizer`.
+- [ ] Author SeaORM migration for `meeting`.
+- [ ] Author SeaORM migration for `agenda_item`.
+- [ ] Author SeaORM migration for `participant`.
+- [ ] Author SeaORM migration for `resource`.
+- [ ] Author SeaORM migration for `recurring_rule`.
+- [ ] Author SeaORM migration for `action_item`.
+- [ ] Author SeaORM migration for `meeting_output`.
+- [ ] Author SeaORM migration for `meeting_outcome`.
+- [ ] Author SeaORM migration for `meeting_grade` and rule / flag tables.
+- [ ] Author entity models with `serde(rename_all = "camelCase")`.
+- [ ] Author controllers per entity (list / read / create / update / delete).
+- [ ] Author Tera templates for the wizard and report preview.
+- [ ] Author Tera templates for the dashboard.
+- [ ] Author Alpine.js controllers for the editable lists.
+- [ ] Port `validate_meeting()` from the SvelteKit engine.
+- [ ] Cover every fired rule with `cargo test`.
+- [ ] Wire ICS export endpoint.
+- [ ] Wire FHIR R5 Appointment / Encounter Bundle export.
+- [ ] Run `bin/test-form meeting` and resolve failures.

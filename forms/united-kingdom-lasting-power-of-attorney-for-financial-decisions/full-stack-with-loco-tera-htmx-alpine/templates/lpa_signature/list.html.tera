@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}Signatures{% endblock %}
-{% block content %}<h2>Signatures</h2><p><a href="/lpa_signature/new">New</a></p>
-<ul>{% for row in items %}<li><a href="/lpa_signature/{{ row.id }}">{{ row.role }} of LPA {{ row.lpa_id }} ({{ row.signed_on }})</a></li>{% endfor %}</ul>{% endblock %}

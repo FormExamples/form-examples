@@ -1,9 +1,0 @@
-<div class="card">
-    <h2>Step 14: Assessment &amp; Plan</h2>
-    <p class="form-hint">Summary, differential, plan for imaging, medications, interventions, consults (include times called / arrived and recommendations).</p>
-
-    <div class="form-group">
-        <label for="ap_narrative">Narrative</label>
-        <textarea id="ap_narrative" name="assessment_and_plan.narrative" rows="6">{{ assessment_and_plan.narrative }}</textarea>
-    </div>
-</div>

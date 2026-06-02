@@ -25,9 +25,9 @@ table, and safety-flag catalogue.
 - `./front-end-form-with-svelte/` — SvelteKit 2 + Svelte 5 wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SVAR DataGrid dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with
+- `./back-end-with-loco/` — Rust backend with
   server-rendered HTMX UI
-- `./full-stack-with-loco-tera-htmx-alpine-setup` — `cargo loco scaffold`
+- `./back-end-with-loco-setup` — `cargo loco scaffold`
   generator shell script
 
 ## Grading engine

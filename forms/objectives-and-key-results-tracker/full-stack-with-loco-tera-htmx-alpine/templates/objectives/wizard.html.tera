@@ -1,6 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}New objective{% endblock %}
-{% block content %}
-  <h2>OKR wizard</h2>
-  <p>Ten-step wizard rendered server-side — populated by the Loco controller (Plan 6 in progress).</p>
-{% endblock %}

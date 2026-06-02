@@ -28,8 +28,8 @@ See [`seed.md`](./seed.md) for the source brief.
 - `./front-end-form-with-svelte/` — SvelteKit single-page wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with HTMX UI
-- `./full-stack-with-loco-tera-htmx-alpine-setup` — scaffold generator script
+- `./back-end-with-loco/` — Rust backend with HTMX UI
+- `./back-end-with-loco-setup` — scaffold generator script
 
 ## Scoring engine
 

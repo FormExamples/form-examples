@@ -25,8 +25,8 @@ the validation rules.
 - `./front-end-form-with-svelte/` — SvelteKit single-page wizard
 - `./front-end-dashboard-with-html/` — review dashboard (HTML table)
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with HTMX UI
-- `./full-stack-with-loco-tera-htmx-alpine-setup` — Loco scaffold generator
+- `./back-end-with-loco/` — Rust backend with HTMX UI
+- `./back-end-with-loco-setup` — Loco scaffold generator
 
 ## Domain model
 

@@ -32,7 +32,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 vaccinations-assessment/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-loco-tera-htmx-alpine/
+  back-end-with-loco/
 ```
 
 ## Technology

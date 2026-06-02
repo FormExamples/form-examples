@@ -52,9 +52,9 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 
 - [ ] SVAR DataGrid review dashboard with status / specialty / flag filters.
 
-## Phase 8 — Full-stack Rust (`full-stack-with-loco-tera-htmx-alpine`)
+## Phase 8 — Full-stack Rust (`back-end-with-loco`)
 
-- [ ] Author `full-stack-with-loco-tera-htmx-alpine-setup` script with the
+- [ ] Author `back-end-with-loco-setup` script with the
       `cargo loco generate scaffold` invocations for each table.
 - [ ] Run the setup script to generate the application.
 - [ ] Customise templates with HTMX + Alpine.js for the three-phase wizard.

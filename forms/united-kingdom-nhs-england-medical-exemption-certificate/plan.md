@@ -34,9 +34,9 @@ ahead of printing and posting to NHSBSA Bridge House.
 
 ## Phase 4 — Full stack
 
-- [x] `full-stack-with-loco-tera-htmx-alpine-setup` — shell script of
+- [x] `back-end-with-loco-setup` — shell script of
       `cargo loco generate scaffold` calls aligned with the SQL.
-- [x] `full-stack-with-loco-tera-htmx-alpine/` — Rust axum + Tera + HTMX +
+- [x] `back-end-with-loco/` — Rust axum + Tera + HTMX +
       Alpine.js crate with a working wizard and grade report.
 
 ## Phase 5 — Verification

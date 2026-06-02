@@ -93,7 +93,7 @@ medium / high), a human-readable description, and a suggested action
 7. [ ] Generate Protobuf via
        `bin/protobuf/generate-protobuf-representations.py`.
 8. [ ] Write TypeSpec API definitions.
-9. [ ] Write `full-stack-with-loco-tera-htmx-alpine-setup` script
+9. [ ] Write `back-end-with-loco-setup` script
        (cargo loco generate scaffold per table).
 10. [ ] Populate each subproject's AGENTS / index / plan / tasks with
         form-specific content (so each is implementation-ready).

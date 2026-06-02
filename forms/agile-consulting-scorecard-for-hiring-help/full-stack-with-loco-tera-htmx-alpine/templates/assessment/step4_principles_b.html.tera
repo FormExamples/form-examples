@@ -1,8 +1,0 @@
-{% import "assessment/_macros.html.tera" as m %}
-<fieldset class="wizard-step" x-show="step === 4">
-  <legend>Step 4 — Principles 5–8</legend>
-  {{ m::item(key="p5", heading="Principle 5 — Motivated individuals", prompt='A "3 amigos" team (business + dev + test) has shipped a real new MVP within 30 days and on budget.') }}
-  {{ m::item(key="p6", heading="Principle 6 — Face-to-face conversation", prompt="Every product owner has committed to ≥ 50% face-to-face time (or weekly-video equivalent for remote teams).") }}
-  {{ m::item(key="p7", heading="Principle 7 — Working software is the primary measure", prompt='A new "fizz buzz" program has been created and shipped to production.') }}
-  {{ m::item(key="p8", heading="Principle 8 — Sustainable pace", prompt="All staff have a sustaining budget for ≥ 1 year secured.") }}
-</fieldset>

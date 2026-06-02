@@ -147,8 +147,8 @@ united-kingdom-statement-of-fitness-for-work/
   front-end-form-with-svelte/                     # SvelteKit wizard
   front-end-dashboard-with-html/                  # HTML review table
   front-end-dashboard-with-svelte/                # SVAR DataGrid review dashboard
-  full-stack-with-loco-tera-htmx-alpine/          # Rust backend (axum + Loco + Tera + HTMX + Alpine)
-  full-stack-with-loco-tera-htmx-alpine-setup     # cargo loco scaffold generator (shell script)
+  back-end-with-loco/          # Rust backend (axum + Loco + Tera + HTMX + Alpine)
+  back-end-with-loco-setup     # cargo loco scaffold generator (shell script)
 ```
 
 ## Policy and clinical references

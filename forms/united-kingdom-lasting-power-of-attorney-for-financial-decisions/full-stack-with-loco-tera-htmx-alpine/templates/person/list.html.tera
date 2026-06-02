@@ -1,6 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}People{% endblock %}
-{% block content %}
-<section><h2>People</h2><p><a href="/person/new">New</a></p>
-<ul>{% for row in items %}<li><a href="/person/{{ row.id }}">{{ row.first_names }} {{ row.last_name }}</a></li>{% endfor %}</ul>
-</section>{% endblock %}

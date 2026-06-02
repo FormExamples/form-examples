@@ -33,8 +33,8 @@ update_claude() {
     - AGENTS.md
     - AGENTS/fhir-r5.md
     - AGENTS/front-end-with-sveltekit-tailwind-svar.md
-    - AGENTS/full-stack-with-loco-tera-htmx-alpine.md
-    - AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md
+    - AGENTS/back-end-with-loco.md
+    - AGENTS/back-end-with-loco-setup.md
     - AGENTS/sql-migrations.md
     - AGENTS/xml-representations.md
     - plan.md

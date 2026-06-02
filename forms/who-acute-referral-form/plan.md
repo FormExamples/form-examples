@@ -7,7 +7,7 @@ SvelteKit patient front-end implemented. WHO standardised acute referral (SBAR) 
 Remaining work:
 
 - Build front-end-dashboard-with-svelte (SVAR DataGrid)
-- Build full-stack-with-loco-tera-htmx-alpine Rust backend (axum + Loco +
+- Build back-end-with-loco Rust backend (axum + Loco +
   Tera + HTMX + Alpine.js)
 - PDF report generation via SvelteKit server endpoint
 - End-to-end Playwright tests

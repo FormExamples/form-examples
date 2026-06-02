@@ -24,7 +24,7 @@ See [`index.md`](./index.md) for the full design and the 12-step wizard table.
 - `./front-end-form-with-html/` — placeholder (follow-up session)
 - `./front-end-dashboard-with-html/` — placeholder
 - `./front-end-dashboard-with-svelte/` — placeholder
-- `./full-stack-with-loco-tera-htmx-alpine/` — placeholder
+- `./back-end-with-loco/` — placeholder
 
 ## Scoring engine
 

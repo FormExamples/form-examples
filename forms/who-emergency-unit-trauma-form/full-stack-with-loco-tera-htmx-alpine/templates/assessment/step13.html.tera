@@ -1,8 +1,0 @@
-<!-- Step 13 — Assessment & Plan -->
-<div x-show="step === 13" style="border:1px solid #ddd;border-radius:6px;padding:1.5rem;margin-bottom:1rem;">
-  <h2>Step 13: Assessment &amp; Plan</h2>
-  <div>
-    <label>Narrative</label>
-    <textarea name="assessmentAndPlanNarrative" rows="5" style="width:100%;padding:0.4rem;border:1px solid #ccc;border-radius:4px;">{{ data.assessmentAndPlan.narrative }}</textarea>
-  </div>
-</div>

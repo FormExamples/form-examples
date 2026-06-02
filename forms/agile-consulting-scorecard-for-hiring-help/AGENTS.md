@@ -37,7 +37,7 @@ table. The unmodified design seed lives in [`seed.md`](./seed.md).
 - `./front-end-dashboard-with-svelte/` — SVAR DataGrid dashboard with
   same-origin endpoints, per-row report drilldown at `/report/[id]`,
   bulk-import UI at `/import`, and a band-distribution stats panel
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust axum server (nine
+- `./back-end-with-loco/` — Rust axum server (nine
   HTTP endpoints), CLI grader, in-memory `ScorecardStore`, and the
   full scoring engine (grader + recommendations + pre-tender + diff +
   bulk-import; parity-tested against the TypeScript engine)

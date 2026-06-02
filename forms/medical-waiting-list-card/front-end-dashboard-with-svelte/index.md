@@ -28,5 +28,5 @@ A free-text filter searches patient name and NHS number.
 ## Backend client
 
 The dashboard reads from the Rust full-stack backend (see
-[`../full-stack-with-loco-tera-htmx-alpine/`](../full-stack-with-loco-tera-htmx-alpine/))
+[`../back-end-with-loco/`](../back-end-with-loco/))
 with a sample-data fallback for standalone development.

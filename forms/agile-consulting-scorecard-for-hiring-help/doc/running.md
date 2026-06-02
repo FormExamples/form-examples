@@ -53,13 +53,13 @@ By default the dashboard fetches from its own same-origin
 data. To point at the Rust backend instead, pass a base URL into
 `fetchScorecards(base)` etc. (see `src/lib/api.ts`).
 
-## Rust axum backend (full-stack-with-loco-tera-htmx-alpine)
+## Rust axum backend (back-end-with-loco)
 
 The HTTP server with all nine endpoints, the in-memory `ScorecardStore`,
 and the CLI grader.
 
 ```sh
-cd full-stack-with-loco-tera-htmx-alpine
+cd back-end-with-loco
 cargo run --bin agile-consulting-scorecard-server     # http://127.0.0.1:5150
 cargo run --bin agile-consulting-scorecard-cli        # stdin JSON → stdout grade JSON
 cargo test                                            # 43 tests (30 unit + 13 integration)
@@ -119,7 +119,7 @@ The golden grade in `samples/sample-grade.json` is produced by the
 Rust CLI:
 
 ```sh
-cd full-stack-with-loco-tera-htmx-alpine
+cd back-end-with-loco
 cargo run --quiet --bin agile-consulting-scorecard-cli \
     < ../samples/sample-assessment.json \
     > ../samples/sample-grade.json

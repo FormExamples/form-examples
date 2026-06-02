@@ -18,7 +18,7 @@ for the full data model.
 ## Per-stack documentation
 
 - [Front-end with SvelteKit / Tailwind / SVAR](../../AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Loco / Tera / HTMX / Alpine](../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
+- [Full-stack with Loco / Tera / HTMX / Alpine](../../AGENTS/back-end-with-loco.md)
 - [SQL migrations](../../AGENTS/sql-migrations.md)
 - [XML representations](../../AGENTS/xml-representations.md)
 - [FHIR HL7 R5](../../AGENTS/fhir-r5.md)

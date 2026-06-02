@@ -48,13 +48,11 @@ rust_crate_exists_or_err() (
     file_size_or_err "$1/Cargo.toml"
     file_size_or_err "$1/.gitignore"
     directory_exists_or_err "$1/src"
-    directory_exists_or_err "$1/target"
-    ## Tera HTMX Alpine
-    f="$1/templates/base.html.tera"
-    file_exists_or_err "$f"
-    grep -q '<script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>' "$f" || err "$f" ' must contain <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>'
-    grep -q '<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>' "$f" || err "$f" ' must contain <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>'
-    grep -q '<body hx-boost="true">' "$f" || err "$f" ' must contain <body hx-boost="true">'
+    ## Back-end JSON API only — no templates/, assets/, or src/views/
+    test ! -e "$1/templates" || err "$1/templates must not exist (back-end is JSON-only)"
+    test ! -e "$1/assets"    || err "$1/assets must not exist (back-end is JSON-only)"
+    test ! -e "$1/src/views" || err "$1/src/views must not exist (back-end is JSON-only)"
+    ! grep -q '\btera\b' "$1/Cargo.toml" || err "$1/Cargo.toml must not depend on tera"
 )
 
 ## Main
@@ -114,8 +112,8 @@ test_form() {
     ai_exists_or_err "$form_dir/front-end-form-with-svelte"
     ai_exists_or_err "$form_dir/front-end-dashboard-with-html"
     ai_exists_or_err "$form_dir/front-end-dashboard-with-svelte"
-    file_size_or_err "$form_dir/full-stack-with-loco-tera-htmx-alpine-setup"
-    rust_crate_exists_or_err "$form_dir/full-stack-with-loco-tera-htmx-alpine"
+    file_size_or_err "$form_dir/back-end-with-loco-setup"
+    rust_crate_exists_or_err "$form_dir/back-end-with-loco"
 }
 
 test_dir_via_pnpm() {
@@ -136,4 +134,4 @@ test_dir_via_cargo() {
 test_form "$form_dir"
 test_dir_via_pnpm "$form_dir/front-end-form-with-svelte"
 test_dir_via_pnpm "$form_dir/front-end-dashboard-with-svelte"
-test_dir_via_cargo "$form_dir/full-stack-with-loco-tera-htmx-alpine"
+test_dir_via_cargo "$form_dir/back-end-with-loco"

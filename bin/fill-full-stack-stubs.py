@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Fill stub full-stack-with-loco-tera-htmx-alpine/ AGENTS.md, plan.md, index.md
-files across all forms.
+"""Fill stub back-end-with-loco/ AGENTS.md, plan.md, index.md files across all
+forms.
 
 Replaces files that contain the placeholder phrase "Not yet implemented." with
-templated content describing the planned Rust backend. Each form's root
-index.md is read to extract the form's title and one-line description.
+templated content describing the planned Rust JSON API back-end. Each form's
+root index.md is read to extract the form's title and one-line description.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
-SUBDIR_NAME = "full-stack-with-loco-tera-htmx-alpine"
+SUBDIR_NAME = "back-end-with-loco"
 STUB_PHRASE = "Not yet implemented."
 
 
@@ -80,7 +80,7 @@ def read_form_oneline(form_dir: Path) -> str:
 
 
 def index_md_template(title: str, oneline: str) -> str:
-    return f"""# {title}: Full Stack With Rust Axum Loco Tera
+    return f"""# {title}: Back-end with Rust Axum Loco (JSON API)
 
 {oneline}
 
@@ -90,14 +90,13 @@ Pending implementation. Scaffold present (sql-migrations, generated setup
 script). Rust crate not yet authored.
 
 See [AGENTS.md](AGENTS.md) for the planned project layout, and the parent
-[AGENTS/full-stack-with-loco-tera-htmx-alpine.md](../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
-for the canonical full-stack stack, conventions, and HTMX/Alpine integration
-requirements.
+[AGENTS/back-end-with-loco.md](../../../AGENTS/back-end-with-loco.md)
+for the canonical back-end JSON API stack, conventions, and route plan.
 """
 
 
 def plan_md_template(title: str) -> str:
-    return f"""# Plan: {title}: Full Stack With Rust Axum Loco Tera
+    return f"""# Plan: {title}: Back-end with Rust Axum Loco (JSON API)
 
 ## Current status
 
@@ -106,30 +105,30 @@ script). Rust crate not yet authored.
 
 ## Implementation plan
 
-1. Run the generated `full-stack-with-loco-tera-htmx-alpine-setup` script to
-   scaffold the Loco app and run `cargo loco generate scaffold` for each
-   table in `sql-migrations/`.
+1. Run the generated `back-end-with-loco-setup` script to scaffold the Loco
+   app and run `cargo loco generate scaffold ... --api` for each table in
+   `sql-migrations/`.
 2. Author engine types, rules, grader, and flagged-issues mirroring the
    front-end-form-with-svelte engine, with `serde(rename_all = "camelCase")`
    on shared structs.
-3. Wire HTTP routes: `GET /` landing, `POST /assessment/new`,
-   `GET /assessment/{{id}}` form, `POST /assessment/{{id}}/submit`,
-   `GET /assessment/{{id}}/report`, `GET /dashboard`.
-4. Author Tera templates including `templates/base.html.tera` with the
-   pinned HTMX 2.0.8 and Alpine.js 3.14.8 `<script defer>` tags and
-   `<body hx-boost="true">` (asserted by `bin/test-form`).
-5. Add cargo tests covering the grader and flagged-issues end-to-end.
+3. Wire JSON HTTP routes under `/api/assessments`:
+   `GET /api/assessments`, `POST /api/assessments`,
+   `GET /api/assessments/{{id}}`, `PATCH /api/assessments/{{id}}`,
+   `POST /api/assessments/{{id}}/submit`,
+   `GET /api/assessments/{{id}}/result`.
+4. Add cargo tests covering the grader, flagged-issues, and JSON API
+   end-to-end.
 
 See [AGENTS.md](AGENTS.md) for the planned project structure.
 """
 
 
 def agents_md_template(title: str, oneline: str) -> str:
-    return f"""# {title} -- Full Stack with Rust Axum Loco Tera
+    return f"""# {title} -- Back-end with Rust Axum Loco (JSON API)
 
 {oneline}
 
-@../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md
+@../../../AGENTS/back-end-with-loco.md
 
 ## Status
 
@@ -139,11 +138,10 @@ script). Rust crate not yet authored.
 ## Project structure
 
 See the parent
-[AGENTS/full-stack-with-loco-tera-htmx-alpine.md](../../../AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
+[AGENTS/back-end-with-loco.md](../../../AGENTS/back-end-with-loco.md)
 for the canonical Loco crate layout, scoring-engine module conventions,
-HTMX boost / Alpine.js integration in `templates/base.html.tera`, and the
-controller route plan. Per-form notes will be added here as the Rust
-implementation progresses.
+and the JSON API route plan. Per-form notes will be added here as the
+Rust implementation progresses.
 """
 
 

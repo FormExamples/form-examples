@@ -112,8 +112,8 @@ medical-waiting-list-card/
   front-end-form-with-svelte/                       # SvelteKit single-page wizard
   front-end-dashboard-with-html/                    # static dashboard
   front-end-dashboard-with-svelte/                  # SvelteKit + SVAR DataGrid
-  full-stack-with-loco-tera-htmx-alpine/            # Rust backend with HTMX UI
-  full-stack-with-loco-tera-htmx-alpine-setup       # generated scaffold script
+  back-end-with-loco/            # Rust backend with HTMX UI
+  back-end-with-loco-setup       # generated scaffold script
 ```
 
 ## Clinical and policy references

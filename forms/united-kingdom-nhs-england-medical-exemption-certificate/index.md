@@ -144,8 +144,8 @@ united-kingdom-nhs-england-medical-exemption-certificate/
   front-end-form-with-svelte/                     # SvelteKit single-page wizard
   front-end-dashboard-with-html/                  # static HTML review dashboard
   front-end-dashboard-with-svelte/                # SVAR DataGrid dashboard
-  full-stack-with-loco-tera-htmx-alpine/          # Rust axum + Tera + HTMX + Alpine.js
-  full-stack-with-loco-tera-htmx-alpine-setup     # scaffold generator (shell script)
+  back-end-with-loco/          # Rust axum + Tera + HTMX + Alpine.js
+  back-end-with-loco-setup     # scaffold generator (shell script)
 ```
 
 ## Verify

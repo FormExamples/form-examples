@@ -32,7 +32,7 @@ Pool / beach lifeguard certification checklist aligned with the RLSS UK National
 lifeguard-certification-checklist/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-loco-tera-htmx-alpine/
+  back-end-with-loco/
 ```
 
 ## Technology

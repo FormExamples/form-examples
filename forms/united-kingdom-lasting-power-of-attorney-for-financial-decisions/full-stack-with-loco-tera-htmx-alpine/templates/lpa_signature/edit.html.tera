@@ -1,3 +1,0 @@
-{% extends "base.html.tera" %}
-{% block content %}<form action="/lpa_signature/{{ item.id }}" method="post" hx-put="/lpa_signature/{{ item.id }}" hx-target="body">
-{% include "lpa_signature/_form.html.tera" %}<button type="submit">Save</button></form>{% endblock %}

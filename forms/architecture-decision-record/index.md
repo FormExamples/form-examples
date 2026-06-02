@@ -74,7 +74,7 @@ where in the team's lifecycle the ADR is being captured.
      `file://`, no build step
    - `front-end-form-with-svelte/` — `pnpm dev`, then visit
      `http://localhost:5173`
-   - `full-stack-with-loco-tera-htmx-alpine/` — `cargo loco start`,
+   - `back-end-with-loco/` — `cargo loco start`,
      then visit `http://localhost:5150/architecture_decision_records/new`
 2. Fill the 16-step wizard. The HTML and SvelteKit forms autosave to
    `localStorage` under `adr.form.v1` as you type. The Loco backend
@@ -104,7 +104,7 @@ where in the team's lifecycle the ADR is being captured.
 ### Run the backend
 
 ```sh
-cd full-stack-with-loco-tera-htmx-alpine
+cd back-end-with-loco
 cargo loco db migrate
 cargo loco start
 ```
@@ -141,7 +141,7 @@ architecture-decision-record/
   front-end-form-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
   front-end-dashboard-with-html/                 Decision register (HTML table)
   front-end-dashboard-with-svelte/               Decision register (SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/         Rust + Loco + Tera + HTMX + Alpine
+  back-end-with-loco/         Rust + Loco + Tera + HTMX + Alpine
 ```
 
 ## References

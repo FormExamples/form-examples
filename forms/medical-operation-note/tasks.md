@@ -41,7 +41,7 @@
 - Run `bin/fhir-r5/generate-fhir-r5-representations.py`.
 - Run `bin/protobuf/generate-protobuf-representations.py`.
 - Run `bin/openapi/generate-openapi-representations.py`.
-- Run `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py`.
+- Run `bin/back-end-with-loco/generate-back-end-with-loco-setup.py`.
 
 ### Front-ends
 
@@ -54,7 +54,7 @@
 
 ### Backend
 
-- `full-stack-with-loco-tera-htmx-alpine/` — Loco / Tera / HTMX / Alpine
+- `back-end-with-loco/` — Loco / Tera / HTMX / Alpine
   full-stack implementation.
 
 ### Verification

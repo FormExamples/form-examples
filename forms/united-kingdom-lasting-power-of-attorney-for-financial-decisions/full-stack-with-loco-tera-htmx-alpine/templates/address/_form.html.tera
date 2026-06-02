@@ -1,5 +1,0 @@
-<label>Address line 1 <input type="text" name="address_line_1" value="{{ item.address_line_1 | default(value='') }}"></label>
-<label>Address line 2 <input type="text" name="address_line_2" value="{{ item.address_line_2 | default(value='') }}"></label>
-<label>Address line 3 <input type="text" name="address_line_3" value="{{ item.address_line_3 | default(value='') }}"></label>
-<label>Postcode <input type="text" name="postcode" value="{{ item.postcode | default(value='') }}"></label>
-<label>Country (ISO 3166-1 alpha-2) <input type="text" name="country_as_iso_3166_1_alpha_2" value="{{ item.country_as_iso_3166_1_alpha_2 | default(value='GB') }}"></label>

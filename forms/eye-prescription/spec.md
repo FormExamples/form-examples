@@ -93,8 +93,8 @@ Required artefacts and their current status:
 | `front-end-form-with-svelte` | SvelteKit |
 | `front-end-dashboard-with-html` | Lily contract |
 | `front-end-dashboard-with-svelte` | SvelteKit + SVAR |
-| `full-stack-with-loco-tera-htmx-alpine` | Rust + Loco |
-| `full-stack-with-loco-tera-htmx-alpine-setup` | generated scaffold script |
+| `back-end-with-loco` | Rust + Loco JSON API |
+| `back-end-with-loco-setup` | generated scaffold script |
 
 Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../AGENTS.md) §Tools after schema changes.
 

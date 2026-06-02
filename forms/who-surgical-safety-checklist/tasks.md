@@ -10,7 +10,7 @@
 - [ ] Build `front-end-form-with-svelte` single-page wizard.
 - [ ] Build `front-end-dashboard-with-html`.
 - [ ] Build `front-end-dashboard-with-svelte`.
-- [ ] Build `full-stack-with-loco-tera-htmx-alpine` + setup script.
+- [ ] Build `back-end-with-loco` + setup script.
 - [ ] `bin/test-form who-surgical-safety-checklist` passes.
 
 ## Backlog

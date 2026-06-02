@@ -1,9 +1,0 @@
-<div class="card">
-    <h2>Step 10: Summary &amp; Notes</h2>
-    <p class="form-hint">Optional notes and final sign-off before submitting the FP92A application.</p>
-
-    <div class="form-group">
-        <label for="applicationNotes">Application notes</label>
-        <textarea id="applicationNotes" name="applicationNotes" rows="4" placeholder="Optional clinical or administrative notes recorded with the application.">{{ notes }}</textarea>
-    </div>
-</div>

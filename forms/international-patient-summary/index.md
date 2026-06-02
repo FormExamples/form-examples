@@ -32,7 +32,7 @@ International Patient Summary (IPS) — a standardised, minimal, specialty-agnos
 international-patient-summary/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-loco-tera-htmx-alpine/
+  back-end-with-loco/
 ```
 
 ## Technology

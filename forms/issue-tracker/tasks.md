@@ -14,10 +14,10 @@
       HTML and SvelteKit) with `index.md`, `AGENTS.md`, `CLAUDE.md`,
       `plan.md`, `tasks.md`
 - [x] Scaffolded the Rust crate at
-      `full-stack-with-loco-tera-htmx-alpine/` with `Cargo.toml`,
+      `back-end-with-loco/` with `Cargo.toml`,
       `.gitignore`, `src/bin/main.rs`, and a base Tera template that
       includes HTMX, Alpine.js, and `hx-boost`
-- [x] Authored the `full-stack-with-loco-tera-htmx-alpine-setup` scaffold
+- [x] Authored the `back-end-with-loco-setup` scaffold
       generator shell script
 
 ## Pending

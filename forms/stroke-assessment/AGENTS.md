@@ -10,7 +10,7 @@ Acute stroke evaluation using the NIHSS (National Institutes of Health Stroke Sc
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack option; Rust + Tera templates
+- ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
 
 ## Scoring system
 

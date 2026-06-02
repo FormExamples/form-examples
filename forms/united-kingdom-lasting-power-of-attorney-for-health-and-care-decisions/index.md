@@ -169,8 +169,8 @@ united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
   front-end-form-with-svelte/           # SvelteKit single-page wizard
   front-end-dashboard-with-html/        # review dashboard (HTML table)
   front-end-dashboard-with-svelte/      # review dashboard (SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/        # Rust backend + UI
-  full-stack-with-loco-tera-htmx-alpine-new/    # Loco scaffold generator
+  back-end-with-loco/        # Rust backend + UI
+  back-end-with-loco-new/    # Loco scaffold generator
 ```
 
 ## Statutory and regulatory references

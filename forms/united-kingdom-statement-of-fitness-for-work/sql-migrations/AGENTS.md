@@ -33,7 +33,7 @@ These migrations drive:
 - `../xml-representations/` (via `bin/xml-representations/generate-xml-representations.py`)
 - `../fhir-r5/` (via `bin/fhir-r5/generate-fhir-r5-representations.py`)
 - `../protobuf/` (via `bin/protobuf/generate-protobuf-representations.py`)
-- `../full-stack-with-loco-tera-htmx-alpine-setup` (via
+- `../back-end-with-loco-setup` (via
   `bin/generate-full-stack-with-loco.py`)
 
 When you change a migration, re-run the generators to keep representations

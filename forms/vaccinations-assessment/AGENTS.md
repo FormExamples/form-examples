@@ -10,7 +10,7 @@ Immunisation-schedule compliance assessment covering childhood, adult, travel, a
 - ./tasks.md - Task tracking
 - ./front-end-form-with-svelte/ - Patient questionnaire; SvelteKit + Svelte 5 + Tailwind 4
 - ./front-end-dashboard-with-svelte/ - Immunisation nurse dashboard; SvelteKit + SVAR DataGrid
-- ./full-stack-with-loco-tera-htmx-alpine/ - Full-stack Rust backend
+- ./back-end-with-loco/ - Full-stack Rust backend
 
 ## Scoring system
 

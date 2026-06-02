@@ -31,7 +31,7 @@ framingham-risk-score-for-hard-coronary-heart-disease/
   front-end-form-with-svelte/
   front-end-dashboard-with-html/
   front-end-dashboard-with-svelte/
-  full-stack-with-loco-tera-htmx-alpine/
+  back-end-with-loco/
 ```
 
 ## Technology

@@ -30,8 +30,7 @@ In scope:
 - Per-form schema (SQL migrations as the source of truth for data shape).
 - Generated representations (XML, FHIR R5 JSON, Protocol Buffers, OpenAPI).
 - Four front-ends per form (form + dashboard, each in HTML and SvelteKit).
-- One Rust full-stack implementation per form (axum + Loco + Tera + HTMX +
-  Alpine.js).
+- One Rust back-end JSON API implementation per form (axum + Loco).
 - Cross-cutting documentation, agent instructions, and verification.
 
 Out of scope (today):
@@ -66,7 +65,7 @@ forms/<slug>/spec.md            (source of truth for BEHAVIOUR)
         ├──► front-end-form-with-svelte/      (SvelteKit wizard)
         ├──► front-end-dashboard-with-html/   (HTML dashboard)
         ├──► front-end-dashboard-with-svelte/ (SvelteKit dashboard)
-        └──► full-stack-with-loco-tera-htmx-alpine/ (Rust backend)
+        └──► back-end-with-loco/              (Rust JSON API back-end)
 ```
 
 **Rule:** generated artefacts are never hand-edited. Hand-edits to
@@ -117,8 +116,8 @@ divergence.
 | `front-end-form-with-svelte/`                   | author              | no         |
 | `front-end-dashboard-with-html/`                | author              | partial    |
 | `front-end-dashboard-with-svelte/`              | author              | no         |
-| `full-stack-with-loco-tera-htmx-alpine/`        | author              | no         |
-| `full-stack-with-loco-tera-htmx-alpine-setup`   | `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` | **yes** |
+| `back-end-with-loco/`                           | author              | no         |
+| `back-end-with-loco-setup`                      | `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` | **yes** |
 
 `bin/test-form <slug>` asserts every required path exists and is non-empty.
 
@@ -149,13 +148,15 @@ divergence.
   role="region" aria-live="polite">` placeholder. The PDF endpoint is
   `/report/pdf` in SvelteKit, served by `pdfmake`.
 
-## 6. Backend contract
+## 6. Back-end contract
 
-- One Rust crate per form under `full-stack-with-loco-tera-htmx-alpine/`.
+- One Rust crate per form under `back-end-with-loco/`.
 - `serde(rename_all = "camelCase")` on every struct shared with the
   front-end.
-- Tera templates render server-side; HTMX `hx-boost="true"` swaps fragments
-  on navigation; Alpine.js handles small client-side conditionals.
+- **JSON API only.** No HTML rendering, no Tera templates, no HTMX, no
+  Alpine.js, no static assets, no Lily Design System. The canonical
+  resource is `/api/assessments` (list, create, read, update, submit,
+  result); see [`AGENTS/back-end-with-loco.md`](AGENTS/back-end-with-loco.md).
 - Database name pattern: `<slug_snake>_development`, `<slug_snake>_test`,
   `<slug_snake>_production`. Connection string for production lives in
   `DATABASE_URL`.

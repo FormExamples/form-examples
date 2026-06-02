@@ -48,9 +48,9 @@
 - [x] `front-end-dashboard-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `full-stack-with-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8 +
+- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
       SeaORM + Tera + HTMX + Alpine.
-- [x] `full-stack-with-loco-tera-htmx-alpine-setup` — scaffold generator.
+- [x] `back-end-with-loco-setup` — scaffold generator.
 
 ## Tests
 - [x] Vitest unit tests for the validation engine.

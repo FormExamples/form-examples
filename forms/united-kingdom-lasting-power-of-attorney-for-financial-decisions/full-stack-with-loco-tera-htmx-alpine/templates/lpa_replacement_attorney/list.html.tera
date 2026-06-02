@@ -1,5 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}LPA replacement attorneys{% endblock %}
-{% block content %}<h2>LPA replacement attorneys</h2><p><a href="/lpa_replacement_attorney/new">New</a></p>
-<ul>{% for row in items %}<li><a href="/lpa_replacement_attorney/{{ row.id }}">replacement #{{ row.ordinal }} of LPA {{ row.lpa_id }}</a></li>{% endfor %}</ul>
-{% endblock %}

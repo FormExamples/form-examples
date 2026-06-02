@@ -15,7 +15,7 @@ engine, and generates a clinical report with flagged issues.
 - Protocol Buffers `.proto` schemas per SQL entity (generated).
 - OpenAPI 3.1 `.yaml` specifications per SQL entity (generated).
 - Four front-end implementations per form (form + dashboard, each in HTML and SvelteKit).
-- One Rust full-stack implementation per form (axum + Loco + Tera + HTMX + Alpine.js).
+- One Rust back-end JSON API implementation per form (axum + Loco).
 - Lily Design System HTML headless contract for every HTML front-end.
 - Lily Design System Svelte headless contract for every SvelteKit front-end.
 
@@ -54,8 +54,8 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 ├── AGENTS/                         # Per-stack agent documentation
 │   ├── fhir-r5.md
 │   ├── front-end-with-sveltekit-tailwind-svar.md
-│   ├── full-stack-with-loco-tera-htmx-alpine.md
-│   ├── full-stack-with-loco-tera-htmx-alpine-setup.md
+│   ├── back-end-with-loco.md
+│   ├── back-end-with-loco-setup.md
 │   ├── openapi.md
 │   ├── protobuf.md
 │   ├── sql-migrations.md
@@ -102,8 +102,8 @@ forms/<slug>/
   front-end-form-with-svelte/                      # Patient questionnaire (SvelteKit)
   front-end-dashboard-with-html/                   # Dashboard (HTML)
   front-end-dashboard-with-svelte/                 # Dashboard (SvelteKit + SVAR Grid)
-  full-stack-with-loco-tera-htmx-alpine/           # Full-stack Rust backend
-  full-stack-with-loco-tera-htmx-alpine-setup      # Scaffold generator (executable script; generated)
+  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco)
+  back-end-with-loco-setup                         # Scaffold generator (executable script; generated)
 ```
 
 ## Design patterns
@@ -123,13 +123,13 @@ forms/<slug>/
 - Backend API client with sample-data fallback.
 - Row list shows computed scores, severities, and safety flags.
 
-### Backend
+### Back-end
 
 - Loco framework with axum routing (default port 5150).
 - Rust scoring engine mirrors TypeScript types with `serde(rename_all = "camelCase")`.
 - SeaORM entities against PostgreSQL 18.
-- Tera templates with `<body hx-boost="true">` for HTMX-driven navigation.
-- Alpine.js for declarative client-side conditionals inside templates.
+- JSON API only — no HTML rendering, no Tera templates, no HTMX, no Alpine.js, no static assets.
+- Canonical resource at `/api/assessments` (list, create, read, update, submit, result).
 
 ## Technology stacks
 
@@ -138,8 +138,8 @@ See the per-stack agent docs:
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Rust / axum / Loco / Tera / HTMX / Alpine.js](AGENTS/full-stack-with-loco-tera-htmx-alpine.md)
-- [Full-stack scaffold generator (setup script)](AGENTS/full-stack-with-loco-tera-htmx-alpine-setup.md)
+- [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
+- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
 - [SQL migrations](AGENTS/sql-migrations.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
@@ -160,7 +160,7 @@ See the per-stack agent docs:
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — FHIR R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — Protocol Buffers per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — OpenAPI 3.1 per SQL entity
-- `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py` — Loco setup script per form
+- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — Loco setup script per form
 - `bin/lily-html-refactor` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync` — snapshot Lily HTML component specs and pin the upstream commit
 - `bin/lily-svelte-sync` — snapshot Lily Svelte component sources and pin the upstream commit
@@ -188,7 +188,7 @@ See the per-stack agent docs:
 claude mcp add -t stdio -s project svelte -- npx -y @sveltejs/mcp
 ```
 
-### Rust full stack
+### Rust back-end
 
 Loco:
 

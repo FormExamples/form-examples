@@ -53,9 +53,9 @@
 - [ ] `front-end-dashboard-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [ ] `full-stack-with-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8
+- [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8
       + SeaORM + Tera + HTMX + Alpine.
-- [ ] `full-stack-with-loco-tera-htmx-alpine-new/` — scaffold
+- [ ] `back-end-with-loco-new/` — scaffold
       generator (`00-new.sh`).
 
 ## Tests

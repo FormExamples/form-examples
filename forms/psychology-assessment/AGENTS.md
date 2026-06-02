@@ -18,7 +18,7 @@ subscale and raises safety flags on risk-screen items for clinician review.
 - `./front-end-form-with-svelte/` — SvelteKit single-page patient wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with
+- `./back-end-with-loco/` — Rust backend with
   server-rendered HTMX UI
 
 ## Scoring system

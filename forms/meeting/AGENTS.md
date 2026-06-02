@@ -25,7 +25,7 @@ See [`index.md`](./index.md) for the full design and the 10-step wizard table.
 - `./front-end-form-with-svelte/` — SvelteKit single-page wizard
 - `./front-end-dashboard-with-html/` — HTML review table
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid review
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend with server-
+- `./back-end-with-loco/` — Rust backend with server-
   rendered HTMX UI
 
 ## Data model

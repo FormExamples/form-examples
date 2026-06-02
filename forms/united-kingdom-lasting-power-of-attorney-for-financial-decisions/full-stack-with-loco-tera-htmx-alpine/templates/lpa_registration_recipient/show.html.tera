@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block content %}<article><h2>Recipient {{ item.id }}</h2>
-<dl><dt>LPA</dt><dd>{{ item.lpa_id }}</dd><dt>Kind</dt><dd>{{ item.recipient_kind }}</dd><dt>Person</dt><dd>{{ item.recipient_person_id }}</dd><dt>Company</dt><dd>{{ item.company_name }}</dd></dl>
-<a href="/lpa_registration_recipient/{{ item.id }}/edit">edit</a></article>{% endblock %}

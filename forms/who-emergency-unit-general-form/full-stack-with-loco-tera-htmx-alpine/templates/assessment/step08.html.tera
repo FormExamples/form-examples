@@ -1,9 +1,0 @@
-<div class="card">
-    <h2>Step 8: History of Present Illness</h2>
-    <p class="form-hint">Symptoms, time course, exacerbating and alleviating factors, prior episodes and prior interventions.</p>
-
-    <div class="form-group">
-        <label for="hpi_narrative">Narrative</label>
-        <textarea id="hpi_narrative" name="history_of_present_illness.narrative" rows="6">{{ history_of_present_illness.narrative }}</textarea>
-    </div>
-</div>

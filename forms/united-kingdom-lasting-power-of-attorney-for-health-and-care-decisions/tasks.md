@@ -51,8 +51,8 @@
 - [ ] `front-end-dashboard-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [ ] `full-stack-with-loco-tera-htmx-alpine-new/00-new.sh` — Loco scaffold.
-- [ ] `full-stack-with-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8 + SeaORM + Tera + HTMX + Alpine.
+- [ ] `back-end-with-loco-new/00-new.sh` — Loco scaffold.
+- [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8 + SeaORM + Tera + HTMX + Alpine.
 
 ## Tests
 - [ ] Vitest unit tests for `composite-validator.ts` (all rule families).

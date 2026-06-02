@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block content %}<article><h2>Signature {{ item.id }}</h2>
-<dl><dt>LPA</dt><dd>{{ item.lpa_id }}</dd><dt>Signatory</dt><dd>{{ item.signatory_person_id }}</dd><dt>Role</dt><dd>{{ item.role }}</dd><dt>LP1F section</dt><dd>{{ item.lp1f_section }}</dd><dt>Signed on</dt><dd>{{ item.signed_on }}</dd></dl>
-<a href="/lpa_signature/{{ item.id }}/edit">edit</a></article>{% endblock %}

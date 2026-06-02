@@ -1,4 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}Preferences and instructions{% endblock %}
-{% block content %}<h2>Preferences and instructions</h2><p><a href="/lpa_preferences_and_instructions/new">New</a></p>
-<ul>{% for row in items %}<li><a href="/lpa_preferences_and_instructions/{{ row.id }}">LPA {{ row.lpa_id }}</a></li>{% endfor %}</ul>{% endblock %}

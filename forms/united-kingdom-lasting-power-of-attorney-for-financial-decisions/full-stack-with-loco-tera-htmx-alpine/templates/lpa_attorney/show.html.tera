@@ -1,5 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}LPA attorney{% endblock %}
-{% block content %}<article><h2>LPA attorney {{ item.id }}</h2>
-<dl><dt>LPA</dt><dd>{{ item.lpa_id }}</dd><dt>Person</dt><dd>{{ item.person_id }}</dd><dt>Ordinal</dt><dd>{{ item.ordinal }}</dd></dl>
-<a href="/lpa_attorney/{{ item.id }}/edit">edit</a></article>{% endblock %}

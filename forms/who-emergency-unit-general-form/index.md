@@ -271,7 +271,7 @@ Free text (include summary and differential AND plan for imaging, meds/intervent
 who-emergency-unit-general-form/
   front-end-form-with-svelte/                         # Patient questionnaire
   front-end-dashboard-with-svelte/                    # Dashboard
-  full-stack-with-loco-tera-htmx-alpine/    # Full-stack option
+  back-end-with-loco/    # Full-stack option
 ```
 
 ## Technology

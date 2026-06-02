@@ -105,16 +105,16 @@ def stack_inventory(form_dir: Path) -> list[tuple[str, str]]:
         ("front-end-form-with-svelte", "SvelteKit"),
         ("front-end-dashboard-with-html", "Lily contract"),
         ("front-end-dashboard-with-svelte", "SvelteKit + SVAR"),
-        ("full-stack-with-loco-tera-htmx-alpine", "Rust + Loco"),
+        ("back-end-with-loco", "Rust + Loco JSON API"),
     ]
     for name, label in candidates:
         path = form_dir / name
         present = (path.is_dir() and any(path.iterdir())) or (path.is_file() and path.stat().st_size > 0)
         items.append((name, label if present else f"{label} — not implemented"))
     # The setup file is a single executable, not a directory
-    setup = form_dir / "full-stack-with-loco-tera-htmx-alpine-setup"
+    setup = form_dir / "back-end-with-loco-setup"
     if setup.is_file() and setup.stat().st_size > 0:
-        items.append(("full-stack-with-loco-tera-htmx-alpine-setup", "generated scaffold script"))
+        items.append(("back-end-with-loco-setup", "generated scaffold script"))
     return items
 
 

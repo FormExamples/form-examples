@@ -240,6 +240,6 @@ detection: `bin/lily-svelte-sync --check`.
 
 - HTML subprojects (`front-end-*-with-html/`) — see
   [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md).
-- The Loco/Rust full-stack subproject — see
-  [`/AGENTS/full-stack-with-loco-tera-htmx-alpine.md`](../AGENTS/full-stack-with-loco-tera-htmx-alpine.md).
+- The Loco/Rust back-end JSON API subproject — see
+  [`/AGENTS/back-end-with-loco.md`](../AGENTS/back-end-with-loco.md).
 - The Lily library's own development.

@@ -68,7 +68,7 @@ Safety / operational flags fire independently and surface as
 7. [ ] Generate OpenAPI 3.1 with
        `bin/openapi/generate-openapi-representations.py`.
 8. [ ] Generate Loco scaffold script with
-       `bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py`.
+       `bin/back-end-with-loco/generate-back-end-with-loco-setup.py`.
 9. [ ] Build SvelteKit practitioner form (single-page wizard).
 10. [ ] Build static HTML practitioner form (Alpine.js).
 11. [ ] Build SvelteKit dashboard (SVAR DataGrid).

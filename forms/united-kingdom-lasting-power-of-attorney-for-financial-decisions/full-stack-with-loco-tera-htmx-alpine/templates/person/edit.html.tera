@@ -1,6 +1,0 @@
-{% extends "base.html.tera" %}
-{% block title %}Edit person{% endblock %}
-{% block content %}
-<form action="/person/{{ item.id }}" method="post" hx-put="/person/{{ item.id }}" hx-target="body">
-{% include "person/_form.html.tera" %}
-<button type="submit">Save</button></form>{% endblock %}

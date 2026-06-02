@@ -25,8 +25,8 @@ See [`index.md`](./index.md) for the full design and the 14-step wizard table.
 - `./front-end-form-with-svelte/` — SvelteKit single-page MEDIF wizard
 - `./front-end-dashboard-with-html/` — HTML medical-desk dashboard
 - `./front-end-dashboard-with-svelte/` — SvelteKit SVAR DataGrid dashboard
-- `./full-stack-with-loco-tera-htmx-alpine/` — Rust backend + server-rendered HTMX UI
-- `./full-stack-with-loco-tera-htmx-alpine-setup` — shell script of `cargo loco generate scaffold` calls
+- `./back-end-with-loco/` — Rust backend + server-rendered HTMX UI
+- `./back-end-with-loco-setup` — shell script of `cargo loco generate scaffold` calls
 
 ## Scoring engine
 

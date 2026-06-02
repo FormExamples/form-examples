@@ -33,7 +33,7 @@ Haematological evaluation covering complete blood count, coagulation studies, pe
 hematology-assessment/
   front-end-form-with-svelte/
   front-end-dashboard-with-svelte/
-  full-stack-with-loco-tera-htmx-alpine/
+  back-end-with-loco/
 ```
 
 ## Technology

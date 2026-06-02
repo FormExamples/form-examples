@@ -1,3 +1,0 @@
-<label>LPA ID <input type="text" name="lpa_id" value="{{ item.lpa_id | default(value='') }}"></label>
-<label>Person ID <input type="text" name="person_id" value="{{ item.person_id | default(value='') }}"></label>
-<label>Ordinal (1-5) <input type="number" name="ordinal" min="1" max="5" value="{{ item.ordinal | default(value=1) }}"></label>

@@ -58,9 +58,9 @@
 - [ ] `front-end-dashboard-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [ ] `full-stack-with-loco-tera-htmx-alpine-setup` shell script with all
+- [ ] `back-end-with-loco-setup` shell script with all
       `cargo loco generate scaffold` calls.
-- [ ] `full-stack-with-loco-tera-htmx-alpine/` — Loco 0.16 + axum 0.8
+- [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8
       + SeaORM + Tera + HTMX 2.0.8 + Alpine 3.14.8.
 
 ## Tests
