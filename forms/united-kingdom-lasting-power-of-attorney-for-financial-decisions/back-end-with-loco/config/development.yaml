@@ -14,8 +14,8 @@ server:
   host: http://localhost
   middlewares:
     static:
-      enable: true
-      must_exist: true
+      enable: false
+      must_exist: false
       precompressed: false
       folder:
         uri: "/static"

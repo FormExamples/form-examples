@@ -10,8 +10,8 @@ server:
   host: http://localhost
   middlewares:
     static:
-      enable: true
-      must_exist: true
+      enable: false
+      must_exist: false
       folder:
         uri: "/static"
         path: "assets/static"
