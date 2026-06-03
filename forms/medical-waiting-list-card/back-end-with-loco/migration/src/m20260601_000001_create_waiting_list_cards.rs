@@ -9,38 +9,38 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    .table(WaitingListCards::Table)
+                    .table(Assessments::Table)
                     .if_not_exists()
                     .col(
-                        ColumnDef::new(WaitingListCards::Id)
+                        ColumnDef::new(Assessments::Id)
                             .uuid()
                             .not_null()
                             .primary_key(),
                     )
                     .col(
-                        ColumnDef::new(WaitingListCards::Data)
+                        ColumnDef::new(Assessments::Data)
                             .json_binary()
                             .not_null(),
                     )
                     .col(
-                        ColumnDef::new(WaitingListCards::Result)
+                        ColumnDef::new(Assessments::Result)
                             .json_binary()
                             .null(),
                     )
                     .col(
-                        ColumnDef::new(WaitingListCards::Status)
+                        ColumnDef::new(Assessments::Status)
                             .string()
                             .not_null()
                             .default("in_progress"),
                     )
                     .col(
-                        ColumnDef::new(WaitingListCards::CreatedAt)
+                        ColumnDef::new(Assessments::CreatedAt)
                             .timestamp_with_time_zone()
                             .not_null()
                             .default(Expr::current_timestamp()),
                     )
                     .col(
-                        ColumnDef::new(WaitingListCards::UpdatedAt)
+                        ColumnDef::new(Assessments::UpdatedAt)
                             .timestamp_with_time_zone()
                             .not_null()
                             .default(Expr::current_timestamp()),
@@ -52,13 +52,13 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(WaitingListCards::Table).to_owned())
+            .drop_table(Table::drop().table(Assessments::Table).to_owned())
             .await
     }
 }
 
 #[derive(Iden)]
-enum WaitingListCards {
+enum Assessments {
     Table,
     Id,
     Data,
