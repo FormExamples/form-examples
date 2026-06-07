@@ -1,6 +1,16 @@
 //! LP1H server — axum + tera. Renders the wizard, exposes a JSON validity
 //! endpoint, and serves the base Tera template with HTMX + Alpine.js boost.
 
+// Always start with high quality coding conventions.
+#![forbid(unsafe_code)]
+#![deny(missing_docs)]
+#![warn(clippy::clippy::pedantic)]
+
+// When we build for MUSL static, use faster memory allocator.
+#[cfg(target_env = "musl")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 use std::net::SocketAddr;
 use std::sync::Arc;
 
