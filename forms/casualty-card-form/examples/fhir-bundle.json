@@ -1,0 +1,3468 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Casualty Card Form example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card",
+              "display": "Casualty Card"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:status",
+                  "code": "in_progress",
+                  "display": "In Progress"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "attendance_date",
+                  "display": "Attendance Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "arrival_time",
+                  "display": "Arrival Time"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:110e8400-e29b-41d4-a716-44665544000b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "110e8400-e29b-41d4-a716-44665544000b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_allergy",
+              "display": "Casualty Card Allergy"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "allergen",
+                  "display": "Allergen"
+                }
+              ]
+            },
+            "valueString": "Peanuts"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "reaction",
+                  "display": "Reaction"
+                }
+              ]
+            },
+            "valueString": "Urticaria"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "severity",
+                  "display": "Severity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:severity",
+                  "code": "mild",
+                  "display": "Mild"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "sort_order",
+                  "display": "Sort Order"
+                }
+              ]
+            },
+            "valueInteger": 0
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb0e8400-e29b-41d4-a716-446655440006",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_arrival_triage",
+              "display": "Casualty Card Arrival Triage"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "attendance_category",
+                  "display": "Attendance Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:attendance_category",
+                  "code": "first",
+                  "display": "First"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "arrival_mode",
+                  "display": "Arrival Mode"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:arrival_mode",
+                  "code": "ambulance",
+                  "display": "Ambulance"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "referral_source",
+                  "display": "Referral Source"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:referral_source",
+                  "code": "self",
+                  "display": "Self"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "ambulance_incident_number",
+                  "display": "Ambulance Incident Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "triage_time",
+                  "display": "Triage Time"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "triage_nurse",
+                  "display": "Triage Nurse"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mts_flowchart",
+                  "display": "Mts Flowchart"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mts_category",
+                  "display": "Mts Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:mts_category",
+                  "code": "1-immediate",
+                  "display": "1-Immediate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mts_discriminator",
+                  "display": "Mts Discriminator"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:771e8400-e29b-41d4-a716-446655440011",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "771e8400-e29b-41d4-a716-446655440011",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_assessment_plan",
+              "display": "Casualty Card Plan"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "working_diagnosis",
+                  "display": "Working Diagnosis"
+                }
+              ]
+            },
+            "valueString": "Under investigation"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "differential_diagnoses",
+                  "display": "Differential Diagnoses"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "clinical_impression",
+                  "display": "Clinical Impression"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "risk_stratification",
+                  "display": "Risk Stratification"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:440e8400-e29b-41d4-a716-44665544000e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "440e8400-e29b-41d4-a716-44665544000e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_clinical_examination",
+              "display": "Casualty Card Clinical Examination"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "general_appearance",
+                  "display": "General Appearance"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "head_and_face",
+                  "display": "Head And Face"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "neck",
+                  "display": "Neck"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "chest_cardiovascular",
+                  "display": "Chest Cardiovascular"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "chest_respiratory",
+                  "display": "Chest Respiratory"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "abdomen",
+                  "display": "Abdomen"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pelvis",
+                  "display": "Pelvis"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "musculoskeletal_limbs",
+                  "display": "Musculoskeletal Limbs"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "neurological",
+                  "display": "Neurological"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "skin",
+                  "display": "Skin"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mental_state",
+                  "display": "Mental State"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "body_diagram_notes",
+                  "display": "Body Diagram Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_demographics",
+              "display": "Casualty Card Demographics"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "address",
+                  "display": "Address"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "ethnicity",
+                  "display": "Ethnicity"
+                }
+              ]
+            },
+            "valueString": "White British"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "preferred_language",
+                  "display": "Preferred Language"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "interpreter_required",
+                  "display": "Interpreter Required"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:interpreter_required",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:881e8400-e29b-41d4-a716-446655440012",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "881e8400-e29b-41d4-a716-446655440012",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_disposition",
+              "display": "Casualty Card Disposition"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "disposition",
+                  "display": "Disposition"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:disposition",
+                  "code": "admitted",
+                  "display": "Admitted"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "admitting_specialty",
+                  "display": "Admitting Specialty"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "admitting_consultant",
+                  "display": "Admitting Consultant"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "ward",
+                  "display": "Ward"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "level_of_care",
+                  "display": "Level Of Care"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "discharge_diagnosis",
+                  "display": "Discharge Diagnosis"
+                }
+              ]
+            },
+            "valueString": "Under investigation"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "discharge_medications",
+                  "display": "Discharge Medications"
+                }
+              ]
+            },
+            "valueString": "Paracetamol"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "discharge_instructions",
+                  "display": "Discharge Instructions"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "follow_up",
+                  "display": "Follow Up"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "return_precautions",
+                  "display": "Return Precautions"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "receiving_hospital",
+                  "display": "Receiving Hospital"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "reason_for_transfer",
+                  "display": "Reason For Transfer"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mode_of_transfer",
+                  "display": "Mode Of Transfer"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "discharge_time",
+                  "display": "Discharge Time"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "total_time_in_department",
+                  "display": "Total Time In Department"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_gp",
+              "display": "Casualty Card Gp"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "practice_name",
+                  "display": "Practice Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "practice_address",
+                  "display": "Practice Address"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "practice_phone",
+                  "display": "Practice Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:551e8400-e29b-41d4-a716-44665544000f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "551e8400-e29b-41d4-a716-44665544000f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_investigations",
+              "display": "Casualty Card Investigations"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "blood_tests",
+                  "display": "Blood Tests"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "urinalysis",
+                  "display": "Urinalysis"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pregnancy_test",
+                  "display": "Pregnancy Test"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "ecg_performed",
+                  "display": "Ecg Performed"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:ecg_performed",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "ecg_findings",
+                  "display": "Ecg Findings"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "other_investigations",
+                  "display": "Other Investigations"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ee0e8400-e29b-41d4-a716-446655440009",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ee0e8400-e29b-41d4-a716-446655440009",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_medical_history",
+              "display": "Casualty Card Medical History"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "past_medical_history",
+                  "display": "Past Medical History"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "past_surgical_history",
+                  "display": "Past Surgical History"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "tetanus_status",
+                  "display": "Tetanus Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:tetanus_status",
+                  "code": "up-to-date",
+                  "display": "Up-To-Date"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "smoking_status",
+                  "display": "Smoking Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:smoking_status",
+                  "code": "current",
+                  "display": "Current"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "alcohol_consumption",
+                  "display": "Alcohol Consumption"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "recreational_drug_use",
+                  "display": "Recreational Drug Use"
+                }
+              ]
+            },
+            "valueString": "Paracetamol"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "last_oral_intake",
+                  "display": "Last Oral Intake"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ff0e8400-e29b-41d4-a716-44665544000a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ff0e8400-e29b-41d4-a716-44665544000a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_medication",
+              "display": "Casualty Card Medication"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "dose",
+                  "display": "Dose"
+                }
+              ]
+            },
+            "valueString": "500mg"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "frequency",
+                  "display": "Frequency"
+                }
+              ]
+            },
+            "valueString": "twice daily"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "sort_order",
+                  "display": "Sort Order"
+                }
+              ]
+            },
+            "valueInteger": 0
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_next_of_kin",
+              "display": "Casualty Card Next Of Kin"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "relationship",
+                  "display": "Relationship"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "notified",
+                  "display": "Notified"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:notified",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dd0e8400-e29b-41d4-a716-446655440008",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "dd0e8400-e29b-41d4-a716-446655440008",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_pain_assessment",
+              "display": "Casualty Card Pain Assessment"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_present",
+                  "display": "Pain Present"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:pain_present",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_score",
+                  "display": "Pain Score"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_location",
+                  "display": "Pain Location"
+                }
+              ]
+            },
+            "valueString": "Example location"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_character",
+                  "display": "Pain Character"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_onset",
+                  "display": "Pain Onset"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pain_severity_category",
+                  "display": "Pain Severity Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:pain_severity_category",
+                  "code": "mild",
+                  "display": "Mild"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "cc0e8400-e29b-41d4-a716-446655440007",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_presenting_complaint",
+              "display": "Casualty Card Presenting Complaint"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "chief_complaint",
+                  "display": "Chief Complaint"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "history_of_presenting_complaint",
+                  "display": "History Of Presenting Complaint"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "onset",
+                  "display": "Onset"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "duration",
+                  "display": "Duration"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "character",
+                  "display": "Character"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "severity",
+                  "display": "Severity"
+                }
+              ]
+            },
+            "valueString": "moderate"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "location",
+                  "display": "Location"
+                }
+              ]
+            },
+            "valueString": "Example location"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "radiation",
+                  "display": "Radiation"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "aggravating_factors",
+                  "display": "Aggravating Factors"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "relieving_factors",
+                  "display": "Relieving Factors"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "associated_symptoms",
+                  "display": "Associated Symptoms"
+                }
+              ]
+            },
+            "valueString": "Fatigue"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "previous_episodes",
+                  "display": "Previous Episodes"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "treatment_prior_to_arrival",
+                  "display": "Treatment Prior To Arrival"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:330e8400-e29b-41d4-a716-44665544000d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "330e8400-e29b-41d4-a716-44665544000d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_primary_survey",
+              "display": "Casualty Card Primary Survey"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "airway_status",
+                  "display": "Airway Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:airway_status",
+                  "code": "patent",
+                  "display": "Patent"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "airway_adjuncts",
+                  "display": "Airway Adjuncts"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "c_spine_immobilised",
+                  "display": "C Spine Immobilised"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:c_spine_immobilised",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "breathing_effort",
+                  "display": "Breathing Effort"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:breathing_effort",
+                  "code": "normal",
+                  "display": "Normal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "chest_movement",
+                  "display": "Chest Movement"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "breath_sounds",
+                  "display": "Breath Sounds"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "trachea_position",
+                  "display": "Trachea Position"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pulse_character",
+                  "display": "Pulse Character"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "skin_colour",
+                  "display": "Skin Colour"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "skin_temperature",
+                  "display": "Skin Temperature"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "capillary_refill",
+                  "display": "Capillary Refill"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "haemorrhage",
+                  "display": "Haemorrhage"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "iv_access",
+                  "display": "Iv Access"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "gcs_eye",
+                  "display": "Gcs Eye"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "gcs_verbal",
+                  "display": "Gcs Verbal"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "gcs_motor",
+                  "display": "Gcs Motor"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "gcs_total",
+                  "display": "Gcs Total"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pupils",
+                  "display": "Pupils"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "blood_glucose_disability",
+                  "display": "Blood Glucose Disability"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "limb_movements",
+                  "display": "Limb Movements"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "skin_examination",
+                  "display": "Skin Examination"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "injuries_identified",
+                  "display": "Injuries Identified"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "log_roll_findings",
+                  "display": "Log Roll Findings"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:991e8400-e29b-41d4-a716-446655440013",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "991e8400-e29b-41d4-a716-446655440013",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_safeguarding_consent",
+              "display": "Casualty Card Safeguarding Consent"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "safeguarding_concern",
+                  "display": "Safeguarding Concern"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:safeguarding_concern",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "safeguarding_type",
+                  "display": "Safeguarding Type"
+                }
+              ]
+            },
+            "valueString": "standard"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "referral_made",
+                  "display": "Referral Made"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:referral_made",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mental_capacity_assessment",
+                  "display": "Mental Capacity Assessment"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "mental_health_act_status",
+                  "display": "Mental Health Act Status"
+                }
+              ]
+            },
+            "valueString": "active"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "consent_for_treatment",
+                  "display": "Consent For Treatment"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:consent_for_treatment",
+                  "code": "verbal",
+                  "display": "Verbal"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "completed_by_name",
+                  "display": "Completed By Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "completed_by_role",
+                  "display": "Completed By Role"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "completed_by_gmc_number",
+                  "display": "Completed By Gmc Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "senior_reviewing_clinician",
+                  "display": "Senior Reviewing Clinician"
+                }
+              ]
+            },
+            "valueString": "Dr Smith"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:661e8400-e29b-41d4-a716-446655440010",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "661e8400-e29b-41d4-a716-446655440010",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_treatment",
+              "display": "Casualty Card Treatment"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "oxygen_therapy_device",
+                  "display": "Oxygen Therapy Device"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "oxygen_therapy_flow_rate",
+                  "display": "Oxygen Therapy Flow Rate"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "tetanus_prophylaxis",
+                  "display": "Tetanus Prophylaxis"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:tetanus_prophylaxis",
+                  "code": "given",
+                  "display": "Given"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:220e8400-e29b-41d4-a716-44665544000c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "220e8400-e29b-41d4-a716-44665544000c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "casualty_card_vital_signs",
+              "display": "Casualty Card Vital Signs"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "heart_rate",
+                  "display": "Heart Rate"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "systolic_bp",
+                  "display": "Systolic Bp"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "diastolic_bp",
+                  "display": "Diastolic Bp"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "respiratory_rate",
+                  "display": "Respiratory Rate"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "oxygen_saturation",
+                  "display": "Oxygen Saturation"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "supplemental_oxygen",
+                  "display": "Supplemental Oxygen"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:supplemental_oxygen",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "oxygen_flow_rate",
+                  "display": "Oxygen Flow Rate"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "temperature",
+                  "display": "Temperature"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "blood_glucose",
+                  "display": "Blood Glucose"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "consciousness_level",
+                  "display": "Consciousness Level"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:consciousness_level",
+                  "code": "alert",
+                  "display": "Alert"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pupil_left_size",
+                  "display": "Pupil Left Size"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pupil_left_reactive",
+                  "display": "Pupil Left Reactive"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:pupil_left_reactive",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pupil_right_size",
+                  "display": "Pupil Right Size"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "pupil_right_reactive",
+                  "display": "Pupil Right Reactive"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:pupil_right_reactive",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "capillary_refill_time",
+                  "display": "Capillary Refill Time"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "weight",
+                  "display": "Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:role",
+                  "code": "anaesthetist",
+                  "display": "Anaesthetist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:registration_body",
+                  "code": "GMC",
+                  "display": "Gmc"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "united_kingdom_nhs_number",
+                  "display": "United Kingdom Nhs Number"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb1e8400-e29b-41d4-a716-446655440015",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb1e8400-e29b-41d4-a716-446655440015",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "flagged_issue",
+              "display": "Flagged Issue"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "message",
+                  "display": "Message"
+                }
+              ]
+            },
+            "valueString": "Clinical flag detected."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:priority",
+                  "code": "high",
+                  "display": "High"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa1e8400-e29b-41d4-a716-446655440014",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa1e8400-e29b-41d4-a716-446655440014",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:casualty-card-form",
+              "code": "news2_result",
+              "display": "News2 Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+        },
+        "encounter": {
+          "reference": "Encounter/cc1e8400-e29b-41d4-a716-446655440016"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "total_score",
+                  "display": "Total Score"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "clinical_response",
+                  "display": "Clinical Response"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form:clinical_response",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "has_any_single_score_3",
+                  "display": "Has Any Single Score 3"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "supplemental_oxygen",
+                  "display": "Supplemental Oxygen"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:casualty-card-form",
+                  "code": "scored_at",
+                  "display": "Scored At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "unknown",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

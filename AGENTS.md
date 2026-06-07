@@ -41,6 +41,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
 - `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — emit each form's `cargo loco generate scaffold --api` setup script
+- `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 
 ### Lily Design System (HTML front-ends)
 
@@ -76,7 +77,9 @@ forms/<slug>/
   spec.md                                          # Living spec for spec-driven development
   plan.md                                          # Implementation plan and status
   tasks.md                                         # Task tracking
-  doc/                                             # Documentation and references
+  CHANGELOG.md                                     # Keep-a-Changelog 1.1.0 + SemVer per form
+  doc/                                             # Clinical/regulatory reference documentation
+  examples/                                        # Filled-form JSON fixtures + FHIR R5 Bundle samples
   sql-migrations/                                  # PostgreSQL Liquibase migrations (source of truth)
   xml-representations/                             # XML + DTD per SQL table entity (generated)
   fhir-r5/                                         # FHIR HL7 R5 JSON per SQL entity (generated)
@@ -102,6 +105,7 @@ forms/<slug>/
    - `python3 bin/protobuf/generate-protobuf-representations.py`
    - `python3 bin/openapi/generate-openapi-representations.py`
    - `python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py`
+   - `python3 bin/generate-changelog-and-examples.py` (CHANGELOG + examples/)
 5. Build the front-ends (form and dashboard, each in HTML and SvelteKit).
 6. Build the back-end Rust JSON API implementation.
 7. Run `bin/lily-html-refactor --check --all` to confirm no Lily contract drift.
@@ -156,5 +160,6 @@ bin/lily-sync --check                 # Lily HTML spec-snapshot drift detector
 bin/lily-svelte-refactor --check --all # Lily Svelte contract drift detector
 bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift detector
 bin/generate-spec.py --check          # Per-form spec.md drift detector
+bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
 ```

@@ -1,0 +1,113 @@
+{
+  "patient": {
+    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "birthDate": "2026-04-09",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "unitedKingdomNhsNumber": "",
+    "waistAsCm": null,
+    "heightAsCm": null,
+    "weightAsKg": null,
+    "bodyMassIndex": null,
+    "waistHeightRatio": null,
+    "vo2Max": null
+  },
+  "clinician": {
+    "id": "550e8400-e29b-41d4-a716-0000000000d0",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "role": "anaesthetist",
+    "registrationBody": "GMC",
+    "registrationNumber": "",
+    "unitedKingdomNhsNumber": ""
+  },
+  "prescriptionRequest": {
+    "id": "550e8400-e29b-41d4-a716-00000000008a",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "patientId": "550e8400-e29b-41d4-a716-00000000008e",
+    "clinicianId": "550e8400-e29b-41d4-a716-00000000008f",
+    "status": "draft"
+  },
+  "prescriptionDetails": {
+    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "prescriptionRequestId": "550e8400-e29b-41d4-a716-000000000095",
+    "requestDate": "2026-04-09",
+    "medicationName": "",
+    "dosage": "",
+    "frequency": "",
+    "routeOfAdministration": "oral",
+    "treatmentInstructions": ""
+  },
+  "prescriptionSubstitutionOptions": {
+    "id": "550e8400-e29b-41d4-a716-00000000009c",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000a0",
+    "allowBrandSubstitution": "yes",
+    "allowGenericSubstitution": "yes",
+    "allowDosageAdjustment": "yes",
+    "substitutionNotes": ""
+  },
+  "prescriptionRequestType": {
+    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "isNewPrescription": "yes",
+    "isEmergency": "yes",
+    "additionalNotes": ""
+  },
+  "grade": {
+    "id": "550e8400-e29b-41d4-a716-0000000000e7",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000eb",
+    "priorityLevel": "routine",
+    "ruleCount": 0,
+    "gradedAt": "2026-04-09T10:00:00+00:00"
+  },
+  "gradingFiredRule": {
+    "id": "550e8400-e29b-41d4-a716-0000000000ef",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-0000000000f3",
+    "ruleId": "",
+    "category": "",
+    "description": "",
+    "severityLevel": "routine"
+  },
+  "gradingAdditionalFlag": {
+    "id": "550e8400-e29b-41d4-a716-0000000000f8",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-0000000000fc",
+    "flagId": "",
+    "category": "",
+    "message": "",
+    "priority": "high"
+  }
+}

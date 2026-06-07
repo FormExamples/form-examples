@@ -1,0 +1,1452 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Objectives and Key Results tracker example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_check_in",
+              "display": "Okr Check In"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "checked_in_at",
+                  "display": "Checked In At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "narrative",
+                  "display": "Narrative"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "since_last_changes",
+                  "display": "Since Last Changes"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "blockers",
+                  "display": "Blockers"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "asks",
+                  "display": "Asks"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "confidence_decile_at_check_in",
+                  "display": "Confidence Decile At Check In"
+                }
+              ]
+            },
+            "valueInteger": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_grade",
+              "display": "Okr Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_progress_percent",
+                  "display": "Score By Progress Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_confidence_decile",
+                  "display": "Score By Confidence Decile"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_stretch_tier",
+                  "display": "Score By Stretch Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_alignment_grade",
+                  "display": "Score By Alignment Grade"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_impact_tier",
+                  "display": "Score By Impact Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_smart_quality",
+                  "display": "Score By Smart Quality"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_pace_deviation_percent",
+                  "display": "Score By Pace Deviation Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "computed_composite_rag",
+                  "display": "Computed Composite Rag"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:computed_composite_rag",
+                  "code": "green",
+                  "display": "Green"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "final_composite_rag",
+                  "display": "Final Composite Rag"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:final_composite_rag",
+                  "code": "green",
+                  "display": "Green"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "override_reason",
+                  "display": "Override Reason"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "recommendation",
+                  "display": "Recommendation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:recommendation",
+                  "code": "continue",
+                  "display": "Continue"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "triage_notes",
+                  "display": "Triage Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "signed_by",
+                  "display": "Signed By"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "cc0e8400-e29b-41d4-a716-446655440007",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_grade_flag",
+              "display": "Okr Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "flag_code",
+                  "display": "Flag Code"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:flag_code",
+                  "code": "mis-aligned",
+                  "display": "Mis-Aligned"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:priority",
+                  "code": "high",
+                  "display": "High"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb0e8400-e29b-41d4-a716-446655440006",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_grade_rule",
+              "display": "Okr Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "instrument",
+                  "display": "Instrument"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:instrument",
+                  "code": "progress",
+                  "display": "Progress"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "grade",
+                  "display": "Grade"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_key_result",
+              "display": "Okr Key Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "position",
+                  "display": "Position"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "title",
+                  "display": "Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "kr_type",
+                  "display": "Kr Type"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:kr_type",
+                  "code": "numeric",
+                  "display": "Numeric"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "unit",
+                  "display": "Unit"
+                }
+              ]
+            },
+            "valueString": "mg/dL"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "start_value",
+                  "display": "Start Value"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "current_value",
+                  "display": "Current Value"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "target_value",
+                  "display": "Target Value"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "milestones_json",
+                  "display": "Milestones Json"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "binary_done",
+                  "display": "Binary Done"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "owner_name",
+                  "display": "Owner Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "due_date",
+                  "display": "Due Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "progress_fraction",
+                  "display": "Progress Fraction"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "okr_objective",
+              "display": "Okr Objective"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:status",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "level",
+                  "display": "Level"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:level",
+                  "code": "individual",
+                  "display": "Individual"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "cycle",
+                  "display": "Cycle"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:cycle",
+                  "code": "monthly",
+                  "display": "Monthly"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "cycle_start_date",
+                  "display": "Cycle Start Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "cycle_end_date",
+                  "display": "Cycle End Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "team_or_org_name",
+                  "display": "Team Or Org Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "strategic_theme",
+                  "display": "Strategic Theme"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "external_reference",
+                  "display": "External Reference"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "obj_title",
+                  "display": "Obj Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "obj_long_description",
+                  "display": "Obj Long Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "sa_parent_summary",
+                  "display": "Sa Parent Summary"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "sa_business_value_statement",
+                  "display": "Sa Business Value Statement"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "in_initiatives",
+                  "display": "In Initiatives"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "in_supporting_links",
+                  "display": "In Supporting Links"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "rk_known_risks",
+                  "display": "Rk Known Risks"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "rk_dependencies",
+                  "display": "Rk Dependencies"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "rk_blockers",
+                  "display": "Rk Blockers"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "rk_mitigation_plans",
+                  "display": "Rk Mitigation Plans"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "fc_expected_end_state",
+                  "display": "Fc Expected End State"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "fc_residual_risk",
+                  "display": "Fc Residual Risk"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_progress_percent",
+                  "display": "Score By Progress Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_confidence_decile",
+                  "display": "Score By Confidence Decile"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_stretch_tier",
+                  "display": "Score By Stretch Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_alignment_grade",
+                  "display": "Score By Alignment Grade"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_impact_tier",
+                  "display": "Score By Impact Tier"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_smart_quality",
+                  "display": "Score By Smart Quality"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "score_by_pace_deviation_percent",
+                  "display": "Score By Pace Deviation Percent"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "participant",
+              "display": "Participant"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker:role",
+                  "code": "dri",
+                  "display": "Dri"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "notes",
+                  "display": "Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:objectives-and-key-results-tracker",
+              "code": "reporter",
+              "display": "Reporter"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/dd0e8400-e29b-41d4-a716-446655440008"
+        },
+        "encounter": {
+          "reference": "Encounter/ee0e8400-e29b-41d4-a716-446655440009"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:objectives-and-key-results-tracker",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    }
+  ]
+}

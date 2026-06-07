@@ -1,0 +1,171 @@
+{
+  "patient": {
+    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "birthDate": "2026-04-09",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "unitedKingdomNhsNumber": "",
+    "waistAsCm": null,
+    "heightAsCm": null,
+    "weightAsKg": null,
+    "bodyMassIndex": null,
+    "waistHeightRatio": null,
+    "vo2Max": null
+  },
+  "clinician": {
+    "id": "550e8400-e29b-41d4-a716-000000000013",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "role": "anaesthetist",
+    "registrationBody": "GMC",
+    "registrationNumber": "",
+    "unitedKingdomNhsNumber": ""
+  },
+  "outpatientOutcome": {
+    "id": "550e8400-e29b-41d4-a716-000000000021",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "patientId": "550e8400-e29b-41d4-a716-000000000025",
+    "status": "draft"
+  },
+  "outpatientOutcomeEncounter": {
+    "id": "550e8400-e29b-41d4-a716-000000000027",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-00000000002b",
+    "clinicDate": null,
+    "specialty": "",
+    "clinicianId": "550e8400-e29b-41d4-a716-00000000002e",
+    "modality": "in_person",
+    "appointmentType": "new"
+  },
+  "outpatientOutcomeOperational": {
+    "id": "550e8400-e29b-41d4-a716-000000000031",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000035",
+    "referralDate": null,
+    "appointmentDate": null,
+    "waitTimeDays": null,
+    "serviceTargetDays": null,
+    "nhsAttendanceOutcome": "attended"
+  },
+  "outpatientOutcomeClinical": {
+    "id": "550e8400-e29b-41d4-a716-00000000003b",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-00000000003f",
+    "presentingComplaint": "",
+    "diagnosis": "",
+    "treatmentDelivered": "",
+    "outcomeClassification": "resolved"
+  },
+  "outpatientOutcomePromEq5d5l": {
+    "id": "550e8400-e29b-41d4-a716-000000000044",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000048"
+  },
+  "outpatientOutcomePromGrc": {
+    "id": "550e8400-e29b-41d4-a716-000000000049",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-00000000004d",
+    "globalRatingOfChange": 0,
+    "selfRatedHealth": "excellent"
+  },
+  "outpatientOutcomePromPromis": {
+    "id": "550e8400-e29b-41d4-a716-000000000050",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000054"
+  },
+  "outpatientOutcomePremFft": {
+    "id": "550e8400-e29b-41d4-a716-000000000055",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000059",
+    "fftResponse": "very_good",
+    "fftComment": ""
+  },
+  "outpatientOutcomeFollowup": {
+    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000060",
+    "disposition": "discharge",
+    "nextAppointmentDate": null,
+    "onwardReferralSpecialty": "",
+    "followupNotes": ""
+  },
+  "outpatientOutcomeSignoff": {
+    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000069",
+    "reportingClinicianId": "550e8400-e29b-41d4-a716-00000000006a",
+    "reportingClinicianName": "",
+    "reportingClinicianRole": "",
+    "signedOffAt": null
+  },
+  "outpatientOutcomeGrade": {
+    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "outpatientOutcomeId": "550e8400-e29b-41d4-a716-000000000072",
+    "overallGrade": "A",
+    "clinicalGrade": "A",
+    "promGrade": "A",
+    "premGrade": "A",
+    "operationalGrade": "A",
+    "resultNotes": "",
+    "gradedAt": "2026-04-09T10:00:00+00:00"
+  },
+  "outpatientOutcomeGradeRule": {
+    "id": "550e8400-e29b-41d4-a716-00000000007a",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-00000000007e",
+    "ruleId": "",
+    "category": "",
+    "description": "",
+    "severityLevel": "low"
+  },
+  "outpatientOutcomeGradeFlag": {
+    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-000000000087",
+    "flagId": "",
+    "category": "",
+    "description": "",
+    "priority": "low"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "patient": {
+    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "birthDate": "2026-04-09",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "unitedKingdomNhsNumber": "",
+    "waistAsCm": null,
+    "heightAsCm": null,
+    "weightAsKg": null,
+    "bodyMassIndex": null,
+    "waistHeightRatio": null,
+    "vo2Max": null
+  },
+  "clinician": {
+    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "role": "anaesthetist",
+    "registrationBody": "GMC",
+    "registrationNumber": "",
+    "unitedKingdomNhsNumber": ""
+  },
+  "encounterSatisfaction": {
+    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
+    "status": "in_progress"
+  },
+  "visitInformation": {
+    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-000000000080",
+    "visitDate": null,
+    "department": "",
+    "providerName": "",
+    "visitType": "routine-checkup",
+    "reasonForVisit": "",
+    "firstVisit": "yes"
+  },
+  "accessScheduling": {
+    "id": "550e8400-e29b-41d4-a716-000000000087",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-00000000008b",
+    "null": 3,
+    "waitForAppointment": 3,
+    "waitInWaitingRoom": 3
+  },
+  "communication": {
+    "id": "550e8400-e29b-41d4-a716-00000000008f",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-000000000093",
+    "null": 3,
+    "explainingCondition": 3,
+    "answeringQuestions": 3,
+    "timeSpent": 3
+  },
+  "staffProfessionalism": {
+    "id": "550e8400-e29b-41d4-a716-000000000098",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-00000000009c",
+    "null": 3,
+    "nursingCourtesy": 3,
+    "respectShown": 3
+  },
+  "careQuality": {
+    "id": "550e8400-e29b-41d4-a716-0000000000a0",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000a4",
+    "null": 3,
+    "treatmentPlanExplanation": 3,
+    "confidenceInCare": 3
+  },
+  "environment": {
+    "id": "550e8400-e29b-41d4-a716-0000000000a8",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000ac",
+    "null": 3,
+    "waitingAreaComfort": 3,
+    "privacy": 3
+  },
+  "overallSatisfaction": {
+    "id": "550e8400-e29b-41d4-a716-0000000000d0",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000d4",
+    "null": 3,
+    "likelyToRecommend": 3,
+    "likelyToReturn": 3,
+    "comments": ""
+  },
+  "satisfactionResult": {
+    "id": "550e8400-e29b-41d4-a716-0000000000d9",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "encounterSatisfactionId": "550e8400-e29b-41d4-a716-0000000000dd",
+    "compositeScore": 0.0,
+    "category": "Excellent",
+    "answeredCount": 0,
+    "scoredAt": "2026-04-09T10:00:00+00:00"
+  },
+  "flaggedIssue": {
+    "id": "550e8400-e29b-41d4-a716-0000000000e2",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "satisfactionResultId": "550e8400-e29b-41d4-a716-0000000000e6",
+    "flagId": "",
+    "category": "",
+    "message": "",
+    "priority": "high"
+  }
+}

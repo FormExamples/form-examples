@@ -1,0 +1,91 @@
+{
+  "patient": {
+    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "birthDate": "2026-04-09",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "unitedKingdomNhsNumber": "",
+    "waistAsCm": null,
+    "heightAsCm": null,
+    "weightAsKg": null,
+    "bodyMassIndex": null,
+    "waistHeightRatio": null,
+    "vo2Max": null
+  },
+  "clinician": {
+    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "name": "",
+    "email": "",
+    "phone": "",
+    "postalAddressAsFullText": "",
+    "countryAsIso31661Alpha2": "",
+    "postcode": "",
+    "role": "anaesthetist",
+    "registrationBody": "GMC",
+    "registrationNumber": "",
+    "unitedKingdomNhsNumber": ""
+  },
+  "assessment": {
+    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "patientId": "550e8400-e29b-41d4-a716-00000000006d",
+    "status": "in_progress"
+  },
+  "rebaRule": {
+    "id": "550e8400-e29b-41d4-a716-00000000006f",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "code": "",
+    "system": "",
+    "description": "",
+    "score": 0
+  },
+  "grade": {
+    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "assessmentId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "rebaScore": 0,
+    "riskLevel": "Negligible risk",
+    "rebaScoreOverride": null,
+    "overrideReason": "",
+    "gradedAt": "2026-04-09T10:00:00+00:00",
+    "a": ""
+  },
+  "gradingFiredRule": {
+    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "ruleId": "",
+    "system": "",
+    "description": "",
+    "score": 0
+  },
+  "gradingAdditionalFlag": {
+    "id": "550e8400-e29b-41d4-a716-0000000000c8",
+    "createdAt": "2026-04-09T10:00:00+00:00",
+    "updatedAt": "2026-04-09T10:00:00+00:00",
+    "deletedAt": null,
+    "gradeId": "550e8400-e29b-41d4-a716-0000000000cc",
+    "flagId": "",
+    "category": "",
+    "message": "",
+    "priority": "high"
+  }
+}

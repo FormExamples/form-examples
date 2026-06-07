@@ -1,0 +1,1183 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Agile Principles Assessment example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:agile-principles-assessment",
+              "code": "agile_principles_assessment",
+              "display": "Agile Principles Assessment"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:status",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "is_anonymous",
+                  "display": "Is Anonymous"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "assessment_date",
+                  "display": "Assessment Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "assessment_period",
+                  "display": "Assessment Period"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:assessment_period",
+                  "code": "sprint",
+                  "display": "Sprint"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p01_customer_satisfaction",
+                  "display": "P01 Customer Satisfaction"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p01_comment",
+                  "display": "P01 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p01_weight",
+                  "display": "P01 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p02_welcome_change",
+                  "display": "P02 Welcome Change"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p02_comment",
+                  "display": "P02 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p02_weight",
+                  "display": "P02 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p03_deliver_frequently",
+                  "display": "P03 Deliver Frequently"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p03_comment",
+                  "display": "P03 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p03_weight",
+                  "display": "P03 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p04_collaboration",
+                  "display": "P04 Collaboration"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p04_comment",
+                  "display": "P04 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p04_weight",
+                  "display": "P04 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p05_motivated_individuals",
+                  "display": "P05 Motivated Individuals"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p05_comment",
+                  "display": "P05 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p05_weight",
+                  "display": "P05 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p06_face_to_face",
+                  "display": "P06 Face To Face"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p06_comment",
+                  "display": "P06 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p06_weight",
+                  "display": "P06 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p07_working_software",
+                  "display": "P07 Working Software"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p07_comment",
+                  "display": "P07 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p07_weight",
+                  "display": "P07 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p08_sustainable_development",
+                  "display": "P08 Sustainable Development"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p08_comment",
+                  "display": "P08 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p08_weight",
+                  "display": "P08 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p09_technical_excellence",
+                  "display": "P09 Technical Excellence"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p09_comment",
+                  "display": "P09 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p09_weight",
+                  "display": "P09 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p10_simplicity",
+                  "display": "P10 Simplicity"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p10_comment",
+                  "display": "P10 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p10_weight",
+                  "display": "P10 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p11_self_organising_teams",
+                  "display": "P11 Self Organising Teams"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p11_comment",
+                  "display": "P11 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p11_weight",
+                  "display": "P11 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p12_regular_reflection",
+                  "display": "P12 Regular Reflection"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p12_comment",
+                  "display": "P12 Comment"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "p12_weight",
+                  "display": "P12 Weight"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "overall_notes",
+                  "display": "Overall Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:agile-principles-assessment",
+              "code": "agile_principles_assessment_grade",
+              "display": "Agile Principles Grade"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "answered_count",
+                  "display": "Answered Count"
+                }
+              ]
+            },
+            "valueInteger": 2
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "mean_score",
+                  "display": "Mean Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 5.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "weighted_mean_score",
+                  "display": "Weighted Mean Score"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 70.0
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "weights_customised",
+                  "display": "Weights Customised"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "maturity",
+                  "display": "Maturity"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:maturity",
+                  "code": "optimising",
+                  "display": "Optimising"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "top_action_1",
+                  "display": "Top Action 1"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "top_action_2",
+                  "display": "Top Action 2"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "top_action_3",
+                  "display": "Top Action 3"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "coach_notes",
+                  "display": "Coach Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:agile-principles-assessment",
+              "code": "agile_principles_assessment_grade_flag",
+              "display": "Agile Principles Grade Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:category",
+                  "code": "customer-disconnect",
+                  "display": "Customer-Disconnect"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "principle_number",
+                  "display": "Principle Number"
+                }
+              ]
+            },
+            "valueInteger": 2
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "suggested_action",
+                  "display": "Suggested Action"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:agile-principles-assessment",
+              "code": "agile_principles_assessment_grade_rule",
+              "display": "Agile Principles Grade Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "principle_number",
+                  "display": "Principle Number"
+                }
+              ]
+            },
+            "valueInteger": 2
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "band",
+                  "display": "Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:band",
+                  "code": "high",
+                  "display": "High"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "principle_slug",
+                  "display": "Principle Slug"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "description",
+                  "display": "Description"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:agile-principles-assessment",
+              "code": "respondent",
+              "display": "Respondent"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/aa0e8400-e29b-41d4-a716-446655440005"
+        },
+        "encounter": {
+          "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "full_name",
+                  "display": "Full Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment:role",
+                  "code": "individual-contributor",
+                  "display": "Individual-Contributor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "team_name",
+                  "display": "Team Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "organisation_name",
+                  "display": "Organisation Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:agile-principles-assessment",
+                  "code": "years_in_agile",
+                  "display": "Years In Agile"
+                }
+              ]
+            },
+            "valueInteger": 1
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,2050 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "document",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "United Kingdom Lasting Power of Attorney for Financial Decisions example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "address",
+              "display": "Address"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "address_line_1",
+                  "display": "Address Line 1"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "address_line_2",
+                  "display": "Address Line 2"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "address_line_3",
+                  "display": "Address Line 3"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lasting_power_of_attorney",
+              "display": "Lasting Power Of Attorney"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "decision_mode",
+                  "display": "Decision Mode"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:decision_mode",
+                  "code": "single_attorney",
+                  "display": "Single Attorney"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "decision_mode_mixed_text",
+                  "display": "Decision Mode Mixed Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "when_attorneys_can_act",
+                  "display": "When Attorneys Can Act"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:when_attorneys_can_act",
+                  "code": "as_soon_as_registered",
+                  "display": "As Soon As Registered"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "preferences_text",
+                  "display": "Preferences Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "instructions_text",
+                  "display": "Instructions Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "legal_rights_acknowledged",
+                  "display": "Legal Rights Acknowledged"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "opg_reference_number",
+                  "display": "Opg Reference Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "opg_registration_date",
+                  "display": "Opg Registration Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "status",
+                  "display": "Status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:status",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_attorney",
+              "display": "Lpa Attorney"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "ordinal",
+                  "display": "Ordinal"
+                }
+              ]
+            },
+            "valueInteger": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_certificate_provider",
+              "display": "Lpa Certificate Provider"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "knows_donor_as",
+                  "display": "Knows Donor As"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:knows_donor_as",
+                  "code": "friend",
+                  "display": "Friend"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "is_over_eighteen",
+                  "display": "Is Over Eighteen"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "read_lpa",
+                  "display": "Read Lpa"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "no_restrictions_on_acting",
+                  "display": "No Restrictions On Acting"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "eligibility_confirmation_at",
+                  "display": "Eligibility Confirmation At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ff0e8400-e29b-41d4-a716-44665544000a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ff0e8400-e29b-41d4-a716-44665544000a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_continuation_sheet",
+              "display": "Lpa Continuation Sheet"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "kind",
+                  "display": "Kind"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:kind",
+                  "code": "1_additional_people",
+                  "display": "1 Additional People"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "body_text",
+                  "display": "Body Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "signed_on",
+                  "display": "Signed On"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "ordinal",
+                  "display": "Ordinal"
+                }
+              ]
+            },
+            "valueInteger": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb0e8400-e29b-41d4-a716-446655440006",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "bb0e8400-e29b-41d4-a716-446655440006",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_person_to_notify",
+              "display": "Lpa Person To Notify"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "ordinal",
+                  "display": "Ordinal"
+                }
+              ]
+            },
+            "valueInteger": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc0e8400-e29b-41d4-a716-446655440007",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "cc0e8400-e29b-41d4-a716-446655440007",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_preferences_and_instructions",
+              "display": "Lpa Preferences And Instructions"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "preferences_overflow_text",
+                  "display": "Preferences Overflow Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "instructions_overflow_text",
+                  "display": "Instructions Overflow Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "decisions_jointly_overflow_text",
+                  "display": "Decisions Jointly Overflow Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "replacement_step_in_overflow_text",
+                  "display": "Replacement Step In Overflow Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:110e8400-e29b-41d4-a716-44665544000b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "110e8400-e29b-41d4-a716-44665544000b",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_registration_application",
+              "display": "Lpa Registration Application"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "applicant_kind",
+                  "display": "Applicant Kind"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:applicant_kind",
+                  "code": "donor",
+                  "display": "Donor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "payment_method",
+                  "display": "Payment Method"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:payment_method",
+                  "code": "card",
+                  "display": "Card"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "card_payment_phone",
+                  "display": "Card Payment Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "reduced_fee_requested",
+                  "display": "Reduced Fee Requested"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "has_lpa120a_evidence",
+                  "display": "Has Lpa120A Evidence"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "is_repeat_application",
+                  "display": "Is Repeat Application"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "repeat_case_number",
+                  "display": "Repeat Case Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "payment_reference",
+                  "display": "Payment Reference"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "payment_date",
+                  "display": "Payment Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "payment_amount",
+                  "display": "Payment Amount"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:220e8400-e29b-41d4-a716-44665544000c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "220e8400-e29b-41d4-a716-44665544000c",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_registration_recipient",
+              "display": "Lpa Registration Recipient"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "recipient_kind",
+                  "display": "Recipient Kind"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:recipient_kind",
+                  "code": "donor",
+                  "display": "Donor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "company_name",
+                  "display": "Company Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "prefers_post",
+                  "display": "Prefers Post"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "prefers_phone",
+                  "display": "Prefers Phone"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "prefers_email",
+                  "display": "Prefers Email"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "prefers_welsh",
+                  "display": "Prefers Welsh"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "contact_phone",
+                  "display": "Contact Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "contact_email",
+                  "display": "Contact Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_first_names",
+                  "display": "Other First Names"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_last_name",
+                  "display": "Other Last Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_address_line_1",
+                  "display": "Other Address Line 1"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_address_line_2",
+                  "display": "Other Address Line 2"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_address_line_3",
+                  "display": "Other Address Line 3"
+                }
+              ]
+            },
+            "valueString": "123 Example Street"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_postcode",
+                  "display": "Other Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_replacement_attorney",
+              "display": "Lpa Replacement Attorney"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "ordinal",
+                  "display": "Ordinal"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "replacement_step_in_condition",
+                  "display": "Replacement Step In Condition"
+                }
+              ]
+            },
+            "valueString": ""
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dd0e8400-e29b-41d4-a716-446655440008",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "dd0e8400-e29b-41d4-a716-446655440008",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_signature",
+              "display": "Lpa Signature"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:role",
+                  "code": "donor",
+                  "display": "Donor"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "lp1f_section",
+                  "display": "Lp1F Section"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "signature_blob_path",
+                  "display": "Signature Blob Path"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "signed_on",
+                  "display": "Signed On"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "signed_on_behalf_full_name",
+                  "display": "Signed On Behalf Full Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "is_witnessed",
+                  "display": "Is Witnessed"
+                }
+              ]
+            },
+            "valueBoolean": true
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:551e8400-e29b-41d4-a716-44665544000f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "551e8400-e29b-41d4-a716-44665544000f",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_validation_flag",
+              "display": "Lpa Validation Flag"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "flag_name",
+                  "display": "Flag Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "category",
+                  "display": "Category"
+                }
+              ]
+            },
+            "valueString": "General"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "remediation_hint",
+                  "display": "Remediation Hint"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "fired_at",
+                  "display": "Fired At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:330e8400-e29b-41d4-a716-44665544000d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "330e8400-e29b-41d4-a716-44665544000d",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_validation_result",
+              "display": "Lpa Validation Result"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "validity_band",
+                  "display": "Validity Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:validity_band",
+                  "code": "draft",
+                  "display": "Draft"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "composite_risk",
+                  "display": "Composite Risk"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:composite_risk",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "computed_at",
+                  "display": "Computed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:440e8400-e29b-41d4-a716-44665544000e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "440e8400-e29b-41d4-a716-44665544000e",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_validation_rule",
+              "display": "Lpa Validation Rule"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "rule_name",
+                  "display": "Rule Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "priority",
+                  "display": "Priority"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions:priority",
+                  "code": "low",
+                  "display": "Low"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "statutory_citation",
+                  "display": "Statutory Citation"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "remediation_hint",
+                  "display": "Remediation Hint"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "fired_at",
+                  "display": "Fired At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ee0e8400-e29b-41d4-a716-446655440009",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "ee0e8400-e29b-41d4-a716-446655440009",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "lpa_witness",
+              "display": "Lpa Witness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "witness_signature_blob_path",
+                  "display": "Witness Signature Blob Path"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "witnessed_on",
+                  "display": "Witnessed On"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+              "code": "person",
+              "display": "Person"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/661e8400-e29b-41d4-a716-446655440010"
+        },
+        "encounter": {
+          "reference": "Encounter/771e8400-e29b-41d4-a716-446655440011"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "title",
+                  "display": "Title"
+                }
+              ]
+            },
+            "valueString": "Example Title"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "first_names",
+                  "display": "First Names"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "last_name",
+                  "display": "Last Name"
+                }
+              ]
+            },
+            "valueString": "Doe"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "other_names",
+                  "display": "Other Names"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "date_of_birth",
+                  "display": "Date Of Birth"
+                }
+              ]
+            },
+            "valueDateTime": "1965-06-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "is_trust_corporation",
+                  "display": "Is Trust Corporation"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "trust_corporation_number",
+                  "display": "Trust Corporation Number"
+                }
+              ]
+            },
+            "valueString": ""
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "is_bankrupt",
+                  "display": "Is Bankrupt"
+                }
+              ]
+            },
+            "valueBoolean": true
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-kingdom-lasting-power-of-attorney-for-financial-decisions",
+                  "code": "has_debt_relief_order",
+                  "display": "Has Debt Relief Order"
+                }
+              ]
+            },
+            "valueBoolean": true
+          }
+        ]
+      }
+    }
+  ]
+}

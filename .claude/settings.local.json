@@ -516,7 +516,13 @@
       "Bash(bin/loco-config-refactor --check medical-waiting-list-card)",
       "Bash(bin/loco-config-refactor --help)",
       "Bash(bin/loco-config-refactor --check --all)",
-      "Bash(echo \"EXIT $?\")"
+      "Bash(echo \"EXIT $?\")",
+      "Bash(bin/generate-changelog-and-examples.py allergy-assessment *)",
+      "Bash(bin/generate-changelog-and-examples.py)",
+      "Bash(bin/generate-changelog-and-examples.py --check)",
+      "Bash(awk -F'\\\\t' '{print $1}' forms.tsv)",
+      "Bash(pgrep -f \"bin/test$\")",
+      "Bash(awk '/^\\\\?\\\\?/ {print $2}')"
     ]
   }
 }
