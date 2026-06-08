@@ -41,6 +41,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
 - `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — emit each form's `cargo loco generate scaffold --api` setup script
+- `bin/back-end-with-loco/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Loco crate compiles under `#![deny(missing_docs)]`; idempotent
 - `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 
 ### Lily Design System (HTML front-ends)
