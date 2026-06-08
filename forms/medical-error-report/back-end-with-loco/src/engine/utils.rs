@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::ContributingFactors;
 
 /// Display label for the WHO severity scale.

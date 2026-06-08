@@ -1,5 +1,8 @@
+//! Architecture decision record positions module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::architecture_decision_record_positions::{ActiveModel, Model, Entity};
+/// Architecture decision record positions.
 pub type ArchitectureDecisionRecordPositions = Entity;
 
 #[async_trait::async_trait]

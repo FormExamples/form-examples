@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use casualty_card_form_loco_crate::app::App;
 use migration::Migrator;

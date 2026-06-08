@@ -1,3 +1,5 @@
+//! Pcl5 rules module.
+
 use super::types::{AssessmentData, FiredRule, SeverityCategory};
 
 /// Detect PCL-5 clinical-summary fired rules:

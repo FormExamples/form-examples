@@ -1,3 +1,5 @@
+//! `assessments` model: constructors and query helpers.
+
 use chrono::Utc;
 use sea_orm::{entity::prelude::*, ActiveValue, QueryOrder, QuerySelect};
 use uuid::Uuid;
@@ -6,6 +8,7 @@ use super::_entities::assessments::{ActiveModel, Column, Entity, Model};
 use crate::engine::types::{AssessmentData, GradingResult};
 
 impl ActiveModel {
+    /// New draft.
     pub fn new_draft() -> Result<Self, serde_json::Error> {
         let now = Utc::now().into();
         Ok(Self {
@@ -18,6 +21,7 @@ impl ActiveModel {
         })
     }
 
+    /// New with data.
     pub fn new_with_data(data: &AssessmentData) -> Result<Self, serde_json::Error> {
         let now = Utc::now().into();
         Ok(Self {
@@ -32,10 +36,12 @@ impl ActiveModel {
 }
 
 impl Model {
+    /// Assessment data.
     pub fn assessment_data(&self) -> Result<AssessmentData, serde_json::Error> {
         serde_json::from_value(self.data.clone())
     }
 
+    /// Grade.
     pub fn grade(&self) -> Result<Option<GradingResult>, serde_json::Error> {
         match &self.result {
             Some(v) => serde_json::from_value(v.clone()).map(Some),
@@ -44,10 +50,12 @@ impl Model {
     }
 }
 
+/// Find by ID.
 pub async fn find_by_id(db: &DatabaseConnection, id: Uuid) -> Result<Option<Model>, DbErr> {
     Entity::find_by_id(id).one(db).await
 }
 
+/// List completed.
 pub async fn list_completed(db: &DatabaseConnection) -> Result<Vec<Model>, DbErr> {
     Entity::find()
         .filter(Column::Status.eq("completed"))
@@ -56,6 +64,7 @@ pub async fn list_completed(db: &DatabaseConnection) -> Result<Vec<Model>, DbErr
         .await
 }
 
+/// List paginated.
 pub async fn list_paginated(db: &DatabaseConnection, page: u64, per_page: u64) -> Result<Vec<Model>, DbErr> {
     Entity::find()
         .order_by_desc(Column::CreatedAt)

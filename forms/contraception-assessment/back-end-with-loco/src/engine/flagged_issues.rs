@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{has_severe_hypertension, calculate_bmi};
 

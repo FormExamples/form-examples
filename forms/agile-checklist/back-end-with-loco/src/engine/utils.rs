@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use std::collections::BTreeMap;
 
 use super::types::{AssessmentData, Band, Maturity};

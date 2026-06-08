@@ -1,14 +1,23 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::{has_established_cvd, hba1c_mmol_mol, calculate_bmi};
 
+/// Risk rule.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Risk level.
     pub risk_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 
+/// All rules.
 pub fn all_rules() -> Vec<RiskRule> {
     vec![
         // HIGH RISK rules

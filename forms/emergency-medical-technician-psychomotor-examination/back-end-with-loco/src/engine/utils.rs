@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for a tri-state response.
 pub fn tri_state_label(status: &str) -> String {
     match status {

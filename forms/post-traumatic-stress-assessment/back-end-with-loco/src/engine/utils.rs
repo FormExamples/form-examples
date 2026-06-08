@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::SeverityCategory;
 
 /// Display label for a severity category.

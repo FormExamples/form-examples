@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod flagged_issues;
 pub mod snot22_grader;
 pub mod snot22_rules;

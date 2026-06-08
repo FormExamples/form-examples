@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::{Datelike, NaiveDate, Utc};
 
 /// CSS class hint for the completeness badge.

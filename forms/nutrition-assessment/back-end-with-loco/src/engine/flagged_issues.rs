@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Detect clinician-facing safety flags independently of the MUST score.

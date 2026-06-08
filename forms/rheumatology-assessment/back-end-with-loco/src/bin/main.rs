@@ -1,3 +1,5 @@
+//! Main module.
+
 use rheumatology_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

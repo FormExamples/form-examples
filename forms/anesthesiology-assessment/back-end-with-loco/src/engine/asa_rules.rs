@@ -1,3 +1,5 @@
+//! Asa rules module.
+
 // ASA Physical Status Classification rules.
 //
 // The clinician selects ASA I-VI directly. The risk mapping promotes the

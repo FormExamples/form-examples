@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{DomainGrade, PromEq5d5l, PromPromis};
 
 /// Map a DomainGrade letter to a numeric ordinal (A=0 best, E=4 worst).
@@ -55,12 +57,17 @@ pub fn eq5d_dimension_change(before: Option<i32>, after: Option<i32>) -> Option<
 
 /// Counts of how many EQ-5D-5L items (5 dimensions + VAS) improved, worsened, etc.
 pub struct Eq5dSummary {
+    /// Improved.
     pub improved: u32,
+    /// Worsened.
     pub worsened: u32,
+    /// Unchanged.
     pub unchanged: u32,
+    /// Missing.
     pub missing: u32,
 }
 
+/// Eq5d summary.
 pub fn eq5d_summary(prom: &PromEq5d5l) -> Eq5dSummary {
     let dims: [(Option<i32>, Option<i32>); 5] = [
         (prom.before_mobility, prom.after_mobility),

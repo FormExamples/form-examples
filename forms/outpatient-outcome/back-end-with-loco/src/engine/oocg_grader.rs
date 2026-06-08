@@ -1,3 +1,5 @@
+//! Oocg grader module.
+
 use super::clinical_domain::grade_clinical;
 use super::flagged_issues::detect_flagged_issues;
 use super::operational_domain::grade_operational;

@@ -1,3 +1,5 @@
+//! Asthma grader module.
+
 use super::asthma_rules::all_rules;
 use super::types::{AssessmentData, ControlLevel, FiredRule};
 use super::utils::{count_gina_criteria, has_sufficient_data};

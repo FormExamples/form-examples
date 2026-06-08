@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{calculate_audit_score, calculate_dast_score};
 

@@ -1,12 +1,19 @@
+//! Dermatology rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_dlqi_score;
 
 /// A declarative dermatology concern rule.
 pub struct DermatologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

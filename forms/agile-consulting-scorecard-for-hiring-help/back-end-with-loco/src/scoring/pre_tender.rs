@@ -12,45 +12,66 @@ use crate::scoring::grader::grade_scorecard;
 use crate::scoring::types::{AgileConsultingScorecardAssessment, Band, GradeResult};
 use crate::scoring::utils::band_to_recommendation;
 
+/// Pre tender organization.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreTenderOrganization {
+    /// Organization name.
     pub organization_name: String,
+    /// Sector.
     pub sector: String,
+    /// Size band.
     pub size_band: String,
 }
 
+/// Pre tender assessment.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreTenderAssessment {
+    /// Assessment date.
     pub assessment_date: String,
 }
 
+/// Pre tender score.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreTenderScore {
+    /// Total.
     pub total: u8,
+    /// Manifesto subtotal.
     pub manifesto_subtotal: u8,
+    /// Principles subtotal.
     pub principles_subtotal: u8,
+    /// Band.
     pub band: Band,
+    /// Recommendation.
     pub recommendation: String,
 }
 
+/// Pre tender flag.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreTenderFlag {
+    /// Category.
     pub category: String,
+    /// Priority.
     pub priority: String,
 }
 
+/// Pre tender summary.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreTenderSummary {
+    /// Schema version.
     #[serde(rename = "$schemaVersion")]
     pub schema_version: u8,
+    /// Organization.
     pub organization: PreTenderOrganization,
+    /// Assessment.
     pub assessment: PreTenderAssessment,
+    /// Score.
     pub score: PreTenderScore,
+    /// Flags.
     pub flags: Vec<PreTenderFlag>,
 }
 
@@ -86,6 +107,7 @@ fn flag_priority_slug(p: crate::scoring::types::FlagPriority) -> &'static str {
     }
 }
 
+/// To pre tender summary.
 pub fn to_pre_tender_summary(
     data: &AgileConsultingScorecardAssessment,
     grade: &GradeResult,

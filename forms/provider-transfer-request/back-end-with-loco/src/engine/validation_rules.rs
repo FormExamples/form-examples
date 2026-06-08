@@ -1,3 +1,5 @@
+//! Validation rules module.
+
 use super::types::AssessmentData;
 use super::utils::{acknowledgement_started, has_text, is_yes_no_unknown_answered};
 
@@ -6,11 +8,17 @@ use super::utils::{acknowledgement_started, has_text, is_yes_no_unknown_answered
 /// like the escort-detail and acknowledgement-side rules). `is_satisfied`
 /// returns true when the field has been answered correctly.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Mandatory.
     pub mandatory: bool,
+    /// Applies.
     pub applies: fn(&AssessmentData) -> bool,
+    /// Is satisfied.
     pub is_satisfied: fn(&AssessmentData) -> bool,
 }
 

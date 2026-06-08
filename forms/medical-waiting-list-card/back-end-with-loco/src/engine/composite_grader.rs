@@ -1,3 +1,5 @@
+//! Composite grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::priority_targets::{days_between, today_iso};
 use super::types::{Card, GradingResult};

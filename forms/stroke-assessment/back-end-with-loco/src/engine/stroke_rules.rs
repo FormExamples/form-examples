@@ -1,12 +1,19 @@
+//! Stroke rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_nihss_total;
 
 /// A declarative stroke assessment rule.
 pub struct StrokeRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

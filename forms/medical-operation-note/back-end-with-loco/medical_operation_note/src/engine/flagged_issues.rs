@@ -6,6 +6,7 @@
 
 use super::types::{AdditionalFlag, FlagPriority, OperationNote};
 
+/// Collect.
 pub fn collect(note: &OperationNote) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

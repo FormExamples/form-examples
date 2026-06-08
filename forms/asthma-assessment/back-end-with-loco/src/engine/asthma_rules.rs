@@ -1,12 +1,19 @@
+//! Asthma rules module.
+
 use super::types::AssessmentData;
 use super::utils::{count_gina_criteria, fev1_percent_predicted};
 
 /// A declarative asthma concern rule.
 pub struct AsthmaRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

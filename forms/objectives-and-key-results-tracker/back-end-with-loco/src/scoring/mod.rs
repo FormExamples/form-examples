@@ -1,3 +1,5 @@
+//! Scoring module.
+
 pub mod alignment;
 pub mod composite;
 pub mod confidence;

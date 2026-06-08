@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod flagged_issues;
 pub mod hearing_aid_grader;
 pub mod hearing_aid_rules;

@@ -1,3 +1,5 @@
+//! Form validator module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, FiredRule, GradingResult};
 use super::utils::{completeness_percent, validation_status};

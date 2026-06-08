@@ -1,3 +1,5 @@
+//! Composite grader module.
+
 use super::flagged_issues::compute_flags;
 use super::scoring_rules::{
     grade_failure, grade_frequency, grade_harm, grade_magnitude, grade_moscow, grade_priority,

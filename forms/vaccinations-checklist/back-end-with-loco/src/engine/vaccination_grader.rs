@@ -1,3 +1,5 @@
+//! Vaccination grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::types::{
     AssessmentData, ComplianceStatus, FiredRule, GradingResult, RiskLevel,

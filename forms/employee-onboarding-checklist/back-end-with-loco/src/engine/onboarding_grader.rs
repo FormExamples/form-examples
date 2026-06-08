@@ -1,3 +1,5 @@
+//! Onboarding grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::onboarding_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, GradingResult};

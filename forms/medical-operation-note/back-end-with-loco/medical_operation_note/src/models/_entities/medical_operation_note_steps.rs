@@ -3,21 +3,31 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "medical_operation_note_steps")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
+    /// Step number.
     pub step_number: i32,
+    /// Title.
     pub title: String,
+    /// Description.
     #[sea_orm(column_type = "Text")]
     pub description: String,
+    /// Medical operation note ID.
     pub medical_operation_note_id: i32,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
@@ -27,6 +37,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Medical operation notes.
     MedicalOperationNotes,
 }
 

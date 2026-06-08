@@ -1,3 +1,5 @@
+//! Ophthalmology grader module.
+
 use super::ophthalmology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, ImpairmentLevel};
 use super::utils::{calculate_composite_score, collect_clinical_items};

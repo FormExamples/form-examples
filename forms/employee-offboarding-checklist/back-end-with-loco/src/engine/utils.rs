@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for the offboarding outcome.
 pub fn outcome_label(outcome: &str) -> String {
     match outcome {

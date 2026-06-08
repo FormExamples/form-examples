@@ -1,13 +1,20 @@
+//! Plastics rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_age;
 
 /// A declarative plastic-surgery grading rule.
 /// Grade 1 = mild, 2 = moderate, 3 = significant, 4 = severe/critical.
 pub struct PlasticsRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

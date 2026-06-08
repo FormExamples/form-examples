@@ -1,3 +1,5 @@
+//! Kdigo rules module.
+
 use super::types::AssessmentData;
 use super::utils::{
     albuminuria_category_label, gfr_category_label, kdigo_composite_risk,
@@ -7,9 +9,13 @@ use super::utils::{
 /// A KDIGO classification rule. Each rule produces a single named
 /// contribution to the report's audit trail.
 pub struct KdigoRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> String,
 }
 

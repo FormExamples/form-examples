@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Detects additional flags that should be highlighted for the anaesthetist,

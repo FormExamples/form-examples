@@ -1,3 +1,5 @@
+//! Rules module.
+
 // HSE Management Standards Indicator Tool — items registry and benchmarks.
 //
 // 35 statements across seven domains, each rated on a 1-5 Likert scale.
@@ -9,36 +11,55 @@
 
 use super::types::AssessmentData;
 
+/// Likert scale.
 #[derive(Debug, Clone, Copy)]
 pub enum LikertScale {
+    /// Frequency.
     Frequency,
+    /// Agreement.
     Agreement,
 }
 
+/// Stress item.
 #[derive(Debug, Clone)]
 pub struct StressItem {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Scale.
     pub scale: LikertScale,
+    /// Reverse scored.
     pub reverse_scored: bool,
 }
 
+/// Domain benchmark.
 #[derive(Debug, Clone, Copy)]
 pub struct DomainBenchmark {
+    /// Good at.
     pub good_at: f64,
+    /// Moderate at.
     pub moderate_at: f64,
+    /// High at.
     pub high_at: f64,
 }
 
+/// Domain meta.
 #[derive(Debug, Clone, Copy)]
 pub struct DomainMeta {
+    /// Key.
     pub key: &'static str,
+    /// Title.
     pub title: &'static str,
+    /// Step number.
     pub step_number: u32,
+    /// Description.
     pub description: &'static str,
 }
 
+/// Domains.
 pub fn domains() -> Vec<DomainMeta> {
     vec![
         DomainMeta {

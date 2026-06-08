@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::CompetencyLevel;
 
 /// Map a competency level string to a number (1..=4). 0 = not assessed.

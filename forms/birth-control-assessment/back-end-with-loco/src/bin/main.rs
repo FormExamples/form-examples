@@ -1,3 +1,5 @@
+//! Main module.
+
 use birth_control_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

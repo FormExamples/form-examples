@@ -1,3 +1,5 @@
+//! Hearing grader module.
+
 use super::hearing_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, HearingLevel};
 use super::utils::better_ear_pta;

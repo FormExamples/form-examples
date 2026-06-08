@@ -1,3 +1,5 @@
+//! Main module.
+
 use occupational_therapy_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

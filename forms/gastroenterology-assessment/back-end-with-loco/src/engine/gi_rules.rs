@@ -1,12 +1,19 @@
+//! Gi rules module.
+
 use super::types::AssessmentData;
 use super::utils::{count_alarm_features, upper_gi_score, lower_gi_score};
 
 /// A declarative GI assessment concern rule.
 pub struct GiRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

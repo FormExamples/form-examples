@@ -1,7 +1,10 @@
+//! Cymraeg rules module.
+
 use super::types::{AssessmentData, LinguisticRating};
 
 /// Domain of a criterion: linguistic (0-6, per role-play) or clinical (0-3).
 pub const DOMAIN_LINGUISTIC: &str = "linguistic";
+/// DOMAIN clinical.
 pub const DOMAIN_CLINICAL: &str = "clinical";
 
 /// Linguistic field accessor: returns the rating for the named criterion
@@ -16,10 +19,15 @@ pub type ClinAccessor = fn(&AssessmentData) -> Option<i32>;
 /// and the report. Mirrors the JS `CRITERIA` table verbatim by id, label,
 /// domain, and max score.
 pub struct Criterion {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Max score.
     pub max_score: i32,
     /// Field accessor for linguistic criteria (None for clinical).
     pub linguistic_field: Option<LingAccessor>,

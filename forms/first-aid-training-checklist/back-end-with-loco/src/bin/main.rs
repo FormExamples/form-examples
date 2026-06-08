@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use first_aid_training_checklist_loco_crate::app::App;

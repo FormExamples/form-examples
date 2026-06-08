@@ -1,13 +1,21 @@
+//! Genetic rules module.
+
 use super::types::AssessmentData;
 use super::utils::{count_affected_family_cancers, count_affected_relatives_under50};
 
 /// A declarative genetic risk rule.
 pub struct GeneticRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Weight.
     pub weight: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Push a flag for a numeric standardised score that falls below a

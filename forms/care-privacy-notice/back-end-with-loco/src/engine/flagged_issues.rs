@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Detect Care Privacy Notice additional flags. These are computed

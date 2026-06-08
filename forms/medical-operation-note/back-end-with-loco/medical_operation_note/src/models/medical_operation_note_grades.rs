@@ -1,5 +1,8 @@
+//! Medical operation note grades module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_grades::{ActiveModel, Model, Entity};
+/// Medical operation note grades.
 pub type MedicalOperationNoteGrades = Entity;
 
 #[async_trait::async_trait]

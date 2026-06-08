@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for ComplianceStatus.
 pub fn compliance_status_label(status: &str) -> String {
     match status {

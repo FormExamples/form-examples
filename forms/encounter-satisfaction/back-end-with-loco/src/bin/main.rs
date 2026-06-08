@@ -1,3 +1,5 @@
+//! Main module.
+
 use encounter_satisfaction_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

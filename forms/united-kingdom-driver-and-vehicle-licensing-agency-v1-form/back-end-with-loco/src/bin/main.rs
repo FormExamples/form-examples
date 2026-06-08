@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use united_kingdom_driver_and_vehicle_licensing_agency_v1_form_loco_crate::app::App;

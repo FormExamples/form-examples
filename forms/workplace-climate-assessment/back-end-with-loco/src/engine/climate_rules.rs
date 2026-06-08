@@ -1,12 +1,20 @@
+//! Climate rules module.
+
 use super::types::{AssessmentData, LikertValue};
 
 /// A declarative survey item (Likert 1-5, positively worded).
 pub struct SurveyItem {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Scale min.
     pub scale_min: i32,
+    /// Scale max.
     pub scale_max: i32,
+    /// Value of.
     pub value_of: fn(&AssessmentData) -> LikertValue,
 }
 

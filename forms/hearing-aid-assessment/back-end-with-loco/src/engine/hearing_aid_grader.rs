@@ -1,3 +1,5 @@
+//! Hearing aid grader module.
+
 use super::hearing_aid_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, HearingAidLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

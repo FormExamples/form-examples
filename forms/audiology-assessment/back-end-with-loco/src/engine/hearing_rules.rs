@@ -1,12 +1,19 @@
+//! Hearing rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_pta, has_air_bone_gap, pta_asymmetry, tinnitus_impact_score, communication_impact_score};
 
 /// A declarative hearing assessment rule.
 pub struct HearingRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

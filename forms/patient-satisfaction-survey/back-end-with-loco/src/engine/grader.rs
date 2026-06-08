@@ -1,3 +1,5 @@
+//! Grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::rules::all_rules;
 use super::types::{AssessmentData, DomainScores, FiredRule, GradingResult};

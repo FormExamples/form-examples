@@ -1,12 +1,19 @@
+//! Acknowledgment rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative acknowledgment rule. Each rule fires when its corresponding
 /// item is unanswered (or fails the front-end completion requirement).
 pub struct AcknowledgmentRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Severity.
     pub severity: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

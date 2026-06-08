@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Detect Patient Satisfaction Survey flagged issues. Independent of

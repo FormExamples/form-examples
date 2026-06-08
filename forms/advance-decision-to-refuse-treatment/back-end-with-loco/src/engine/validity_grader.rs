@@ -1,3 +1,5 @@
+//! Validity grader module.
+
 use super::types::{AssessmentData, FiredRule, ValidityStatus};
 use super::validity_rules::all_rules;
 

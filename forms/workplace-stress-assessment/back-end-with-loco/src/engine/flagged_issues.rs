@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection for the Workplace Stress Assessment.
 //
 // These flags are computed AFTER the per-domain mean has been graded.
@@ -137,6 +139,7 @@ fn matches_identifying(text: &str) -> bool {
     false
 }
 
+/// Detect additional flags.
 pub fn detect_additional_flags(
     data: &AssessmentData,
     domains: &DomainResults,

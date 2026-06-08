@@ -1,3 +1,5 @@
+//! Dental grader module.
+
 use super::dental_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, OralHealthStatus};
 use super::utils::{calculate_dmft, count_answered_fields, determine_oral_health_status};

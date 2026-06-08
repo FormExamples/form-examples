@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AssessmentData;
 
 /// Returns a human-readable label for a risk level.

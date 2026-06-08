@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AssessmentData, FlaggedIssue};
 use super::utils::has_text;
 

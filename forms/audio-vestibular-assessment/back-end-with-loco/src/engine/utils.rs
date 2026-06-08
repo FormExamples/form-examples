@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for the WHO hearing-loss grade.
 pub fn hearing_loss_grade_label(grade: &str) -> String {
     match grade {

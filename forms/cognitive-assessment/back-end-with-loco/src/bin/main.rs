@@ -1,3 +1,5 @@
+//! Main module.
+
 use cognitive_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

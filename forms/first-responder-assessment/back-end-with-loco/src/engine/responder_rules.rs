@@ -1,3 +1,5 @@
+//! Responder rules module.
+
 use super::types::AssessmentData;
 use super::utils::competency_to_number;
 
@@ -5,10 +7,15 @@ use super::utils::competency_to_number;
 /// `grade` semantics: 1 = minor, 2 = moderate, 3 = significant, 4 = critical.
 /// Rule IDs are preserved verbatim from the front-end JavaScript port.
 pub struct ResponderRule {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

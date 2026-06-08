@@ -9,11 +9,14 @@ use crate::engine::types::{ClinicalIndicators, LinguisticRating};
 /// Domain of a criterion.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CriterionDomain {
+    /// Linguistic.
     Linguistic,
+    /// Clinical.
     Clinical,
 }
 
 impl CriterionDomain {
+    /// As str.
     pub fn as_str(self) -> &'static str {
         match self {
             CriterionDomain::Linguistic => "linguistic",
@@ -26,13 +29,21 @@ impl CriterionDomain {
 /// rating from either a `LinguisticRating` (for linguistic) or
 /// `ClinicalIndicators` (for clinical).
 pub struct Criterion {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: CriterionDomain,
+    /// Label.
     pub label: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Max score.
     pub max_score: u32,
+    /// Data field.
     pub data_field: &'static str,
+    /// Linguistic accessor.
     pub linguistic_accessor: fn(&LinguisticRating) -> Option<f64>,
+    /// Clinical accessor.
     pub clinical_accessor: fn(&ClinicalIndicators) -> Option<f64>,
 }
 
@@ -47,11 +58,15 @@ fn none_clinical(_: &ClinicalIndicators) -> Option<f64> {
 /// engine doesn't consume them but the report and front-end need them later).
 #[derive(Debug, Clone, Copy)]
 pub struct Anchor {
+    /// Value.
     pub value: u32,
+    /// Label.
     pub label: &'static str,
+    /// Description.
     pub description: &'static str,
 }
 
+/// LINGUISTIC anchors.
 pub const LINGUISTIC_ANCHORS: &[Anchor] = &[
     Anchor { value: 0, label: "0", description: "Performance falls short of the lowest descriptor." },
     Anchor { value: 1, label: "1", description: "Limited control; communication frequently breaks down." },
@@ -62,6 +77,7 @@ pub const LINGUISTIC_ANCHORS: &[Anchor] = &[
     Anchor { value: 6, label: "6", description: "Excellent control; performance approaches that of an expert speaker." },
 ];
 
+/// CLINICAL anchors.
 pub const CLINICAL_ANCHORS: &[Anchor] = &[
     Anchor { value: 0, label: "0", description: "Indicator not demonstrated; behaviour absent or counter-productive." },
     Anchor { value: 1, label: "1", description: "Partially demonstrated; key elements are missing or under-developed." },

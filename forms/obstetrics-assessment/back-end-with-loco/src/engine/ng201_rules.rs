@@ -1,11 +1,17 @@
+//! Ng201 rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative NG201 rule. Each rule returns `Some(risk)` when it fires,
 /// or `None` otherwise.
 pub struct Ng201Rule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> Option<&'static str>,
 }
 

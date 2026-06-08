@@ -4,6 +4,7 @@
 
 use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
 
+/// Evaluate.
 pub fn evaluate(fit_note: &AssessmentData, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
     if fit_note.clinician.name.is_empty() {
         fired.push(FiredRule {

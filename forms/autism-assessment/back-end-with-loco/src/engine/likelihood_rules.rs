@@ -1,12 +1,19 @@
+//! Likelihood rules module.
+
 use super::types::AssessmentData;
 use super::utils::{sensory_score, social_communication_score, repetitive_behaviours_score};
 
 /// A declarative autism likelihood concern rule.
 pub struct LikelihoodRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

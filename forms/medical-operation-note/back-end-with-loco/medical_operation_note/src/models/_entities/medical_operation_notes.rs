@@ -3,128 +3,225 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "medical_operation_notes")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
+    /// Status.
     pub status: String,
+    /// Hospital name.
     pub hospital_name: String,
+    /// Theatre number.
     pub theatre_number: String,
+    /// List type.
     pub list_type: String,
+    /// Case start at.
     pub case_start_at: Option<DateTimeWithTimeZone>,
+    /// Anaesthesia start at.
     pub anaesthesia_start_at: Option<DateTimeWithTimeZone>,
+    /// Knife to skin at.
     pub knife_to_skin_at: Option<DateTimeWithTimeZone>,
+    /// End of surgery at.
     pub end_of_surgery_at: Option<DateTimeWithTimeZone>,
+    /// Case end at.
     pub case_end_at: Option<DateTimeWithTimeZone>,
+    /// Consent status.
     pub consent_status: String,
+    /// Side marked.
     pub side_marked: String,
+    /// Sign in completed.
     pub sign_in_completed: String,
+    /// Asa physical status.
     pub asa_physical_status: String,
+    /// Pre operative diagnosis.
     #[sea_orm(column_type = "Text")]
     pub pre_operative_diagnosis: String,
+    /// Post operative diagnosis.
     #[sea_orm(column_type = "Text")]
     pub post_operative_diagnosis: String,
+    /// Indication.
     #[sea_orm(column_type = "Text")]
     pub indication: String,
+    /// Urgency.
     pub urgency: String,
+    /// Laterality.
     pub laterality: String,
+    /// Anaesthesia type.
     pub anaesthesia_type: String,
+    /// Airway management.
     pub airway_management: String,
+    /// Induction agent.
     pub induction_agent: String,
+    /// Maintenance agent.
     pub maintenance_agent: String,
+    /// Neuromuscular blockade.
     pub neuromuscular_blockade: String,
+    /// Regional block description.
     pub regional_block_description: String,
+    /// Invasive monitoring.
     #[sea_orm(column_type = "Text")]
     pub invasive_monitoring: String,
+    /// Intraop crystalloid ml.
     pub intraop_crystalloid_ml: Option<i32>,
+    /// Intraop colloid ml.
     pub intraop_colloid_ml: Option<i32>,
+    /// Intraop blood ml.
     pub intraop_blood_ml: Option<i32>,
+    /// Intraop urine ml.
     pub intraop_urine_ml: Option<i32>,
+    /// Anaesthetic event.
     pub anaesthetic_event: String,
+    /// Anaesthetic event description.
     #[sea_orm(column_type = "Text")]
     pub anaesthetic_event_description: String,
+    /// Patient position.
     pub patient_position: String,
+    /// Pressure area protection notes.
     #[sea_orm(column_type = "Text")]
     pub pressure_area_protection_notes: String,
+    /// Prep solution.
     pub prep_solution: String,
+    /// Drape type.
     pub drape_type: String,
+    /// Surgical approach.
     pub surgical_approach: String,
+    /// Incision type.
     pub incision_type: String,
+    /// Incision length cm.
     #[sea_orm(column_type = "Double", nullable)]
     pub incision_length_cm: Option<f64>,
+    /// Table tilt.
     pub table_tilt: String,
+    /// Tourniquet used.
     pub tourniquet_used: String,
+    /// Tourniquet site.
     pub tourniquet_site: String,
+    /// Tourniquet pressure mmhg.
     pub tourniquet_pressure_mmhg: Option<i32>,
+    /// Tourniquet on at.
     pub tourniquet_on_at: Option<DateTimeWithTimeZone>,
+    /// Tourniquet off at.
     pub tourniquet_off_at: Option<DateTimeWithTimeZone>,
+    /// Converted to open.
     pub converted_to_open: String,
+    /// Conversion reason.
     #[sea_orm(column_type = "Text")]
     pub conversion_reason: String,
+    /// Operative findings summary.
     #[sea_orm(column_type = "Text")]
     pub operative_findings_summary: String,
+    /// Pathology found.
     #[sea_orm(column_type = "Text")]
     pub pathology_found: String,
+    /// Anatomical anomalies.
     #[sea_orm(column_type = "Text")]
     pub anatomical_anomalies: String,
+    /// Intraop photographs taken.
     pub intraop_photographs_taken: String,
+    /// Frozen section requested.
     pub frozen_section_requested: String,
+    /// Swab count first agreed.
     pub swab_count_first_agreed: String,
+    /// Swab count final agreed.
     pub swab_count_final_agreed: String,
+    /// Needle count first agreed.
     pub needle_count_first_agreed: String,
+    /// Needle count final agreed.
     pub needle_count_final_agreed: String,
+    /// Instrument count first agreed.
     pub instrument_count_first_agreed: String,
+    /// Instrument count final agreed.
     pub instrument_count_final_agreed: String,
+    /// Count discrepancy resolution.
     #[sea_orm(column_type = "Text")]
     pub count_discrepancy_resolution: String,
+    /// Estimated blood loss ml.
     pub estimated_blood_loss_ml: Option<i32>,
+    /// Transfusion given.
     pub transfusion_given: String,
+    /// Prbc units.
     pub prbc_units: Option<i32>,
+    /// Ffp units.
     pub ffp_units: Option<i32>,
+    /// Platelet units.
     pub platelet_units: Option<i32>,
+    /// Cryoprecipitate units.
     pub cryoprecipitate_units: Option<i32>,
+    /// Cell salvage ml.
     pub cell_salvage_ml: Option<i32>,
+    /// Massive haemorrhage protocol activated.
     pub massive_haemorrhage_protocol_activated: String,
+    /// Never event flagged.
     pub never_event_flagged: String,
+    /// Never event description.
     #[sea_orm(column_type = "Text")]
     pub never_event_description: String,
+    /// Equipment problem.
     pub equipment_problem: String,
+    /// Equipment problem description.
     #[sea_orm(column_type = "Text")]
     pub equipment_problem_description: String,
+    /// Recovery destination.
     pub recovery_destination: String,
+    /// Monitoring frequency.
     pub monitoring_frequency: String,
+    /// IV fluids plan.
     pub iv_fluids_plan: String,
+    /// Analgesia plan.
     #[sea_orm(column_type = "Text")]
     pub analgesia_plan: String,
+    /// Antibiotic plan.
     pub antibiotic_plan: String,
+    /// Vte prophylaxis plan.
     pub vte_prophylaxis_plan: String,
+    /// Diet plan.
     pub diet_plan: String,
+    /// Mobilisation plan.
     pub mobilisation_plan: String,
+    /// Wound care plan.
     #[sea_orm(column_type = "Text")]
     pub wound_care_plan: String,
+    /// Follow up plan.
     #[sea_orm(column_type = "Text")]
     pub follow_up_plan: String,
+    /// Special instructions.
     #[sea_orm(column_type = "Text")]
     pub special_instructions: String,
+    /// Sign out completed.
     pub sign_out_completed: String,
+    /// Debrief completed.
     pub debrief_completed: String,
+    /// Surgeon override grade.
     pub surgeon_override_grade: String,
+    /// Surgeon override reason.
     #[sea_orm(column_type = "Text")]
     pub surgeon_override_reason: String,
+    /// Attestation text.
     #[sea_orm(column_type = "Text")]
     pub attestation_text: String,
+    /// Electronic signature.
     #[sea_orm(column_type = "Text")]
     pub electronic_signature: String,
+    /// Dictated at.
     pub dictated_at: Option<DateTimeWithTimeZone>,
+    /// Signed at.
     pub signed_at: Option<DateTimeWithTimeZone>,
+    /// Patient ID.
     pub patient_id: i32,
+    /// Lead surgeon ID.
     pub lead_surgeon_id: i32,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
@@ -134,21 +231,30 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Clinicians.
     Clinicians,
+    /// Medical operation note complications.
     #[sea_orm(has_many = "super::medical_operation_note_complications::Entity")]
     MedicalOperationNoteComplications,
+    /// Medical operation note drains.
     #[sea_orm(has_many = "super::medical_operation_note_drains::Entity")]
     MedicalOperationNoteDrains,
+    /// Medical operation note grades.
     #[sea_orm(has_many = "super::medical_operation_note_grades::Entity")]
     MedicalOperationNoteGrades,
+    /// Medical operation note implants.
     #[sea_orm(has_many = "super::medical_operation_note_implants::Entity")]
     MedicalOperationNoteImplants,
+    /// Medical operation note procedures.
     #[sea_orm(has_many = "super::medical_operation_note_procedures::Entity")]
     MedicalOperationNoteProcedures,
+    /// Medical operation note specimens.
     #[sea_orm(has_many = "super::medical_operation_note_specimens::Entity")]
     MedicalOperationNoteSpecimens,
+    /// Medical operation note steps.
     #[sea_orm(has_many = "super::medical_operation_note_steps::Entity")]
     MedicalOperationNoteSteps,
+    /// Medical operation note team members.
     #[sea_orm(has_many = "super::medical_operation_note_team_members::Entity")]
     MedicalOperationNoteTeamMembers,
     #[sea_orm(
@@ -158,6 +264,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Patients.
     Patients,
 }
 

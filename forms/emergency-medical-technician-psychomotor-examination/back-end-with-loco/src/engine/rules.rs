@@ -1,3 +1,5 @@
+//! Rules module.
+
 use super::types::{AssessmentData, TriState};
 
 /// Declarative rule definition. Each rule resolves to a tri-state value:
@@ -8,12 +10,19 @@ use super::types::{AssessmentData, TriState};
 ///
 /// `critical = true` means any "no" forces an automatic Fail outcome.
 pub struct PsychomotorRule {
+    /// ID.
     pub id: &'static str,
+    /// Step.
     pub step: u32,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Critical.
     pub critical: bool,
+    /// Points.
     pub points: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> TriState,
 }
 

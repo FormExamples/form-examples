@@ -25,22 +25,27 @@ pub fn major_bleeding_assessment_answered(s: &MajorBleeding) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
 
+/// Airway assessment answered.
 pub fn airway_assessment_answered(s: &Airway) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
 
+/// Breathing assessment answered.
 pub fn breathing_assessment_answered(s: &Breathing) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
 
+/// Circulation assessment answered.
 pub fn circulation_assessment_answered(s: &Circulation) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
 
+/// Disability assessment answered.
 pub fn disability_assessment_answered(s: &Disability) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
 
+/// Exposure assessment answered.
 pub fn exposure_assessment_answered(s: &Exposure) -> bool {
     s.assessment_normal || has_text(&s.assessment_findings)
 }
@@ -127,14 +132,21 @@ pub fn section_label(section: &str) -> &'static str {
     }
 }
 
+/// Validation rule.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Applies.
     pub applies: fn(&AssessmentData) -> bool,
+    /// Is satisfied.
     pub is_satisfied: fn(&AssessmentData) -> bool,
 }
 
+/// Cfar rules.
 pub fn cfar_rules() -> &'static [ValidationRule] {
     &[
         // ─── Step 1 — Patient Identification ─────────────────

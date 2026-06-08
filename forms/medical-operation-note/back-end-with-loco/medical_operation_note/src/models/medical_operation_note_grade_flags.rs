@@ -1,5 +1,8 @@
+//! Medical operation note grade flags module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_grade_flags::{ActiveModel, Model, Entity};
+/// Medical operation note grade flags.
 pub type MedicalOperationNoteGradeFlags = Entity;
 
 #[async_trait::async_trait]

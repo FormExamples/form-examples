@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection for the Seasonal Affective Disorder Assessment.
 // Independent of the numeric grading (which `grade` does), this module
 // raises clinician-facing flags prioritised as high / medium / low.

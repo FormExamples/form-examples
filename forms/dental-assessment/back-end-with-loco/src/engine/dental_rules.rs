@@ -1,11 +1,18 @@
+//! Dental rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative dental assessment concern rule.
 pub struct DentalRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

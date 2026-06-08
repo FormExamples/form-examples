@@ -1,3 +1,5 @@
+//! `assessments` model: constructors and query helpers.
+
 use chrono::Utc;
 use sea_orm::{ActiveValue, QueryOrder, QuerySelect, entity::prelude::*};
 use uuid::Uuid;

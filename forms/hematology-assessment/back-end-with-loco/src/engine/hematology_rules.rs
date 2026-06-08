@@ -1,12 +1,19 @@
+//! Hematology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{blood_count_score, coagulation_score, iron_studies_score};
 
 /// A declarative hematology concern rule.
 pub struct HematologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Frailty grader module.
+
 use super::frailty_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, FrailtyLevel};
 use super::utils::count_answered_items;

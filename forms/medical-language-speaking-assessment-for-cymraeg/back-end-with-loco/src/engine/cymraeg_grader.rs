@@ -1,3 +1,5 @@
+//! Cymraeg grader module.
+
 // Clinical Welsh-language (Cymraeg) speaking assessment grader.
 //
 // Pure port of `front-end-form-with-html/js/oet-grader.js`.

@@ -1,3 +1,5 @@
+//! Prenatal grader module.
+
 use super::prenatal_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RiskLevel};
 use super::utils::{calculate_risk_score, collect_risk_indicators};

@@ -1,3 +1,5 @@
+//! Dashboard listing endpoints under `/api/dashboard`.
+
 use axum::{debug_handler, Json};
 use loco_rs::prelude::*;
 use sea_orm::{ColumnTrait, EntityTrait, QueryFilter, QueryOrder, QuerySelect};
@@ -45,6 +47,7 @@ async fn dashboard(
     Ok(Json(json!({ "items": items, "total": items.len() })).into_response())
 }
 
+/// Routes.
 pub fn routes() -> Routes {
     Routes::new()
         .prefix("api")

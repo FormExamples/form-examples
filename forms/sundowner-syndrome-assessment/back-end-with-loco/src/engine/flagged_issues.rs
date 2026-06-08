@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection for the sundowner syndrome assessment.
 //
 // Independent of the CMAI/NPI totals, this module raises clinician-facing

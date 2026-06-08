@@ -1,7 +1,12 @@
+//! Prem domain module.
+
 use super::types::{AssessmentData, DomainGrade, FiredRule};
 
+/// Prem result.
 pub struct PremResult {
+    /// Grade.
     pub grade: DomainGrade,
+    /// Rules.
     pub rules: Vec<FiredRule>,
 }
 

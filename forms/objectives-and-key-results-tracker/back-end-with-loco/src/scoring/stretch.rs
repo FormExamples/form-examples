@@ -1,5 +1,8 @@
+//! Stretch module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(t: Option<i32>) -> (RagBand, Vec<FiredRule>) {
     let name = match t.unwrap_or(1) { 1 => "COMMITTED", 2 => "ASPIRATIONAL", 3 => "MOONSHOT", _ => "COMMITTED" };
     (RagBand::Green, vec![FiredRule {

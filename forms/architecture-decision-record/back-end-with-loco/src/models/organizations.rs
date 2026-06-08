@@ -1,5 +1,8 @@
+//! Organizations module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::organizations::{ActiveModel, Model, Entity};
+/// Organizations.
 pub type Organizations = Entity;
 
 #[async_trait::async_trait]

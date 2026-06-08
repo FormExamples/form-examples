@@ -6,6 +6,7 @@
 use crate::engine::fp92a_rules::derive_age;
 use crate::engine::types::{AdditionalFlag, ApplicationData, RulePriority};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(data: &ApplicationData) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

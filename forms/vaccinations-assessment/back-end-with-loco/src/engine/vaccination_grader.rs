@@ -1,3 +1,5 @@
+//! Vaccination grader module.
+
 use super::vaccination_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, VaccinationLevel};
 use super::utils::{calculate_composite_score, collect_vaccination_items};

@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Return a human-readable label for a NEWS2 clinical response level.
 pub fn clinical_response_label(response: &str) -> &str {
     match response {

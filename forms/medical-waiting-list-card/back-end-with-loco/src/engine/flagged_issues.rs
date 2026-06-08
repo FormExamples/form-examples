@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::priority_targets::{days_between, LONG_WAIT_WEEKS};
 use super::types::{AdditionalFlag, Card};
 

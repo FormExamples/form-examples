@@ -1,13 +1,20 @@
+//! Substance rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_audit_score, calculate_dast_score};
 
 /// A declarative substance abuse grading rule.
 /// Grade scale: 1 = mild finding, 2 = moderate, 3 = significant, 4 = severe/critical.
 pub struct SubstanceRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

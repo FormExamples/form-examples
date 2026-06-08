@@ -1,3 +1,5 @@
+//! Safety grader module.
+
 // Workplace Safety Assessment grader. Pure functions: take an
 // `AssessmentData` object, return the overall outcome, the per-category
 // findings tally, the list of rules that fired, and the additional flags.

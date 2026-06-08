@@ -1,3 +1,5 @@
+//! Genetics grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::genetics_rules::all_rules;
 use super::types::{

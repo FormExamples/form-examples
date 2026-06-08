@@ -1,14 +1,21 @@
+//! Items module.
+
 use serde::{Deserialize, Serialize};
 
+/// Section.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum Section {
+    /// Teams.
     Teams,
+    /// Stakeholders.
     Stakeholders,
+    /// Practices.
     Practices,
 }
 
 impl Section {
+    /// Slug.
     pub fn slug(self) -> &'static str {
         match self {
             Section::Teams => "teams",
@@ -18,12 +25,17 @@ impl Section {
     }
 }
 
+/// Item def.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemDef {
+    /// ID.
     pub id: &'static str,
+    /// Ordinal.
     pub ordinal: u8,
+    /// Section.
     pub section: Section,
+    /// Text.
     pub text: &'static str,
 }
 
@@ -33,6 +45,7 @@ macro_rules! item {
     };
 }
 
+/// TEAMS items.
 pub const TEAMS_ITEMS: &[ItemDef] = &[
     item!("t01", 1, Section::Teams, "Teams have problems to solve rather than lists of tasks to perform."),
     item!("t02", 2, Section::Teams, "Teams generally make decisions without a manager's approval."),
@@ -61,6 +74,7 @@ pub const TEAMS_ITEMS: &[ItemDef] = &[
     item!("t25", 25, Section::Teams, "Teams take pride in their craft."),
 ];
 
+/// STAKEHOLDERS items.
 pub const STAKEHOLDERS_ITEMS: &[ItemDef] = &[
     item!("s01", 1, Section::Stakeholders, "Stakeholders know which factors determine priorities and deadlines."),
     item!("s02", 2, Section::Stakeholders, "Stakeholders accept plans that are expressed with ranges."),
@@ -78,6 +92,7 @@ pub const STAKEHOLDERS_ITEMS: &[ItemDef] = &[
     item!("s14", 14, Section::Stakeholders, "Stakeholders develop people rather than manage their performance."),
 ];
 
+/// PRACTICES items.
 pub const PRACTICES_ITEMS: &[ItemDef] = &[
     item!("p01", 1, Section::Practices, "The early release of a good product is generally favoured over the later release of a perfect product."),
     item!("p02", 2, Section::Practices, "An educated executive sponsor ensures the change agent is empowered to make decisions."),
@@ -99,6 +114,7 @@ pub const PRACTICES_ITEMS: &[ItemDef] = &[
     item!("p18", 18, Section::Practices, "People honour commitments and keep promises."),
 ];
 
+/// All items.
 pub fn all_items() -> Vec<&'static ItemDef> {
     TEAMS_ITEMS
         .iter()

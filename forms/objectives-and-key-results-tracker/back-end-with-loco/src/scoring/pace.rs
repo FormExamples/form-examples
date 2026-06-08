@@ -1,5 +1,8 @@
+//! Pace module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(d: Option<f64>) -> (RagBand, Vec<FiredRule>) {
     let band = match d {
         None => RagBand::Amber,

@@ -1,3 +1,5 @@
+//! Risk grader module.
+
 use super::risk_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RiskLevel};
 use super::utils::{calculate_risk_score, collect_scored_items};

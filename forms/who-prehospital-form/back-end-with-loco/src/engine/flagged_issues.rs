@@ -77,6 +77,7 @@ fn parse_systolic(bp: &str) -> Option<f64> {
     digits.parse::<f64>().ok()
 }
 
+/// Detect flagged issues.
 pub fn detect_flagged_issues(data: &AssessmentData) -> Vec<FlaggedIssue> {
     let mut flags: Vec<FlaggedIssue> = Vec::new();
     let v = &data.chief_complaint_and_vitals.initial_vitals;

@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod diabetes_grader;
 pub mod diabetes_rules;
 pub mod flagged_issues;

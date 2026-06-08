@@ -1,5 +1,8 @@
+//! Architecture decision records module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::architecture_decision_records::{ActiveModel, Model, Entity};
+/// Architecture decision records.
 pub type ArchitectureDecisionRecords = Entity;
 
 #[async_trait::async_trait]

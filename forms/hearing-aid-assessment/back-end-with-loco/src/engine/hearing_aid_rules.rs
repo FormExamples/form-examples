@@ -1,12 +1,19 @@
+//! Hearing aid rules module.
+
 use super::types::AssessmentData;
 use super::utils::{communication_needs_score, trial_period_score};
 
 /// A declarative hearing aid assessment concern rule.
 pub struct HearingAidRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

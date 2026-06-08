@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use who_emergency_unit_general_form_loco_crate::app::App;

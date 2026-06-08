@@ -1,3 +1,5 @@
+//! Sundowner grader module.
+
 // Sundowner syndrome grader. Pure functions: take an `AssessmentData`
 // object, return the CMAI total, NPI total, severity band, and a list
 // of fired rules summarising which scoring bands and elevated NPI
@@ -35,10 +37,15 @@ fn sum_cmai(data: &AssessmentData) -> (i32, u32) {
 
 /// Per-domain NPI score (frequency * severity, 0 if either is out of range).
 pub struct NpiDomainSum {
+    /// Key.
     pub key: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Score.
     pub score: i32,
+    /// Frequency.
     pub frequency: i32,
+    /// Severity.
     pub severity: i32,
 }
 

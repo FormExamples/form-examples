@@ -1,13 +1,20 @@
+//! Snot22 rules module.
+
 use super::types::AssessmentData;
 
 /// One SNOT-22 rule. Each rule reads a single questionnaire item, returning
 /// (score, answered). `answered = false` indicates the patient left the item
 /// blank (Option::None) -- it does not contribute to the total.
 pub struct Snot22Rule {
+    /// ID.
     pub id: &'static str,
+    /// Key.
     pub key: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> (i32, bool),
 }
 

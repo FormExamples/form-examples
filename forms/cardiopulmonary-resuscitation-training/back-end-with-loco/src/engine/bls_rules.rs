@@ -1,3 +1,5 @@
+//! Bls rules module.
+
 use super::types::{AssessmentData, TriState};
 use super::utils::{compression_depth_in_range, compression_rate_in_range};
 
@@ -5,11 +7,17 @@ use super::utils::{compression_depth_in_range, compression_rate_in_range};
 /// `TriState`: `'yes'` (passes), `'no'` (deficiency), `'na'` (not assessed),
 /// or `''` (examiner has not yet recorded an answer).
 pub struct BlsRule {
+    /// ID.
     pub id: &'static str,
+    /// Step.
     pub step: u32,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Critical.
     pub critical: bool,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> TriState,
 }
 

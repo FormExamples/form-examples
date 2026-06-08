@@ -1,3 +1,5 @@
+//! Dermatology grader module.
+
 use super::dermatology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_dlqi_score, dlqi_answered_count};

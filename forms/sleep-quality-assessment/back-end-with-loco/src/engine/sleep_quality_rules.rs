@@ -1,12 +1,19 @@
+//! Sleep quality rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_psqi_score, calculate_ess_score, calculate_stop_bang_score};
 
 /// A declarative sleep quality concern rule.
 pub struct SleepQualityRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

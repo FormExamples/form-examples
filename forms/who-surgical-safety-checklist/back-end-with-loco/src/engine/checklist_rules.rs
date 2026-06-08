@@ -1,13 +1,21 @@
+//! Checklist rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative checklist rule. Each rule fires when its corresponding
 /// item is unanswered (or fails the WHO completion requirement).
 pub struct ChecklistRule {
+    /// ID.
     pub id: &'static str,
+    /// Phase.
     pub phase: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Severity.
     pub severity: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

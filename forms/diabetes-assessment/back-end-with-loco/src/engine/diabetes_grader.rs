@@ -1,3 +1,5 @@
+//! Diabetes grader module.
+
 use super::diabetes_rules::all_rules;
 use super::types::{AssessmentData, ControlLevel, FiredRule};
 use super::utils::{calculate_composite_score, collect_scored_items};

@@ -1,3 +1,5 @@
+//! Mec rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_age;
 
@@ -8,11 +10,17 @@ use super::utils::calculate_age;
 /// `affected_methods`. The worst (highest) category across all fired rules
 /// wins for any given method.
 pub struct MECRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Mec category.
     pub mec_category: u8,
+    /// Affected methods.
     pub affected_methods: &'static [&'static str],
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

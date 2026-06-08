@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// EHP-30 total: average of the available domain scores. Returns
 /// `None` if fewer than 3 domains have been answered.
 pub fn calculate_ehp30_total(

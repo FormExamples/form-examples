@@ -1,3 +1,5 @@
+//! Pediatric grader module.
+
 use super::pediatric_rules::all_rules;
 use super::types::{AssessmentData, ConcernLevel, FiredRule};
 use super::utils::{calculate_composite_score, collect_likert_items};

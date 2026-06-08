@@ -10,38 +10,61 @@ use crate::scoring::flags;
 use crate::scoring::grader::grade_scorecard;
 use crate::scoring::types::{AdditionalFlag, AgileConsultingScorecardAssessment, Answer, Band, FlagCategory};
 
+/// Item change.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ItemChange {
+    /// Improved.
     Improved,
+    /// Regressed.
     Regressed,
+    /// Answered.
     Answered,
+    /// Cleared.
     Cleared,
+    /// Unchanged.
     Unchanged,
 }
 
+/// Item diff.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ItemDiff {
+    /// Item key.
     pub item_key: String,
+    /// Before.
     pub before: Answer,
+    /// After.
     pub after: Answer,
+    /// Change.
     pub change: ItemChange,
 }
 
+/// Scorecard diff.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ScorecardDiff {
+    /// Score delta.
     pub score_delta: i32,
+    /// Manifesto delta.
     pub manifesto_delta: i32,
+    /// Principles delta.
     pub principles_delta: i32,
+    /// Band before.
     pub band_before: Band,
+    /// Band after.
     pub band_after: Band,
+    /// Band changed.
     pub band_changed: bool,
+    /// Items.
     pub items: Vec<ItemDiff>,
+    /// Improved.
     pub improved: Vec<ItemDiff>,
+    /// Regressed.
     pub regressed: Vec<ItemDiff>,
+    /// New flags.
     pub new_flags: Vec<AdditionalFlag>,
+    /// Cleared flags.
     pub cleared_flags: Vec<AdditionalFlag>,
 }
 

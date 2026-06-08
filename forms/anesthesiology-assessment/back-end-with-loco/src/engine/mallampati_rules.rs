@@ -1,3 +1,5 @@
+//! Mallampati rules module.
+
 // Mallampati / Airway difficulty risk rules.
 //
 // Inputs: Mallampati class, mouth opening (cm), thyromental distance (cm),
@@ -32,6 +34,7 @@ pub fn mallampati_label(class: &str) -> String {
     }
 }
 
+/// Evaluate airway.
 pub fn evaluate_airway(d: &AssessmentData) -> AirwayResult {
     let ex = &d.physical_exam;
     let prev = &d.previous_anaesthesia;

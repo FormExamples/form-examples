@@ -1,12 +1,19 @@
+//! Kinesiology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{muscle_strength_score, postural_score, range_of_motion_score, functional_testing_score, gait_score};
 
 /// A declarative kinesiology concern rule.
 pub struct KinesiologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

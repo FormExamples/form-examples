@@ -3,34 +3,55 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "medical_operation_note_grades")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
+    /// Computed composite risk.
     pub computed_composite_risk: String,
+    /// Final composite risk.
     pub final_composite_risk: String,
+    /// Override reason.
     pub override_reason: String,
+    /// Worst clavien dindo grade.
     pub worst_clavien_dindo_grade: String,
+    /// Asa physical status.
     pub asa_physical_status: String,
+    /// Blood loss band.
     pub blood_loss_band: String,
+    /// Counts agreed.
     pub counts_agreed: String,
+    /// Never event suspected.
     pub never_event_suspected: String,
+    /// Recommendation.
     pub recommendation: String,
+    /// Surgeon notes.
     #[sea_orm(column_type = "Text")]
     pub surgeon_notes: String,
+    /// Signed at.
     pub signed_at: Option<DateTimeWithTimeZone>,
+    /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
+    /// Medical operation note ID.
     pub medical_operation_note_id: i32,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    /// Medical operation note grade flags.
     #[sea_orm(has_many = "super::medical_operation_note_grade_flags::Entity")]
     MedicalOperationNoteGradeFlags,
+    /// Medical operation note grade rules.
     #[sea_orm(has_many = "super::medical_operation_note_grade_rules::Entity")]
     MedicalOperationNoteGradeRules,
     #[sea_orm(
@@ -40,6 +61,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Medical operation notes.
     MedicalOperationNotes,
 }
 

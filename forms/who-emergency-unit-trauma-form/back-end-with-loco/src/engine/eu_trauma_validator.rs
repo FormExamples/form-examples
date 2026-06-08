@@ -13,6 +13,7 @@ use std::collections::BTreeMap;
 use crate::engine::eu_trauma_rules::{eu_trauma_rules, section_label};
 use crate::engine::types::{AssessmentData, FiredRule, SectionCompleteness, ValidationResult};
 
+/// Validate eu trauma.
 pub fn validate_eu_trauma(data: &AssessmentData) -> ValidationResult {
     let mut section_map: BTreeMap<String, SectionCompleteness> = BTreeMap::new();
     let mut missing: Vec<FiredRule> = Vec::new();

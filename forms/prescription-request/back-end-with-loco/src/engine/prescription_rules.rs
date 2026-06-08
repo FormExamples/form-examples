@@ -1,13 +1,20 @@
+//! Prescription rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative prescription priority-classification rule. Each rule has a
 /// `evaluate(data)` function returning true when the rule applies. Ports
 /// `front-end-form-with-html/js/prescription-rules.js`.
 pub struct PrescriptionRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Priority level.
     pub priority_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Rules module.
+
 use super::types::AssessmentData;
 use super::utils::esas_value;
 
@@ -5,18 +7,26 @@ use super::utils::esas_value;
 /// indicator. ESAS rules return the patient's 0-10 intensity; ancillary
 /// rules return a positive integer if fired, or 0 otherwise.
 pub struct PalliativeRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Kind.
     pub kind: RuleKind,
+    /// Symptom key.
     pub symptom_key: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> i32,
 }
 
 /// Discriminator: ESAS-r symptom rule, or ancillary palliative rule.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RuleKind {
+    /// Esas.
     Esas,
+    /// Ancillary.
     Ancillary,
 }
 

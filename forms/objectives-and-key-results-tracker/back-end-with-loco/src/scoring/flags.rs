@@ -1,7 +1,10 @@
+//! Flags module.
+
 use crate::scoring::types::{
     FiredFlag, FlagCode, FlagPriority, ObjectiveAssessment,
 };
 
+/// Compute.
 pub fn compute(a: &ObjectiveAssessment) -> Vec<FiredFlag> {
     let mut flags: Vec<FiredFlag> = Vec::new();
     let s = &a.scores;

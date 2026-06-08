@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use objectives_and_key_results_tracker::app::App;

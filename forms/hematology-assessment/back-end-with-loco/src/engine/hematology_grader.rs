@@ -1,3 +1,5 @@
+//! Hematology grader module.
+
 use super::hematology_rules::all_rules;
 use super::types::{AbnormalityLevel, AssessmentData, FiredRule};
 use super::utils::{calculate_abnormality_score, collect_numeric_items};

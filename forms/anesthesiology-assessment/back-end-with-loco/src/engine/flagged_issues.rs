@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection. Runs independently of the composite scoring
 // engine and raises clinician-facing flags for safety-critical findings:
 // allergies, MH risk, anticoagulants, difficult airway, GORD, pregnancy,
@@ -7,6 +9,7 @@
 
 use super::types::{AdditionalFlag, AssessmentData};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(d: &AssessmentData) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

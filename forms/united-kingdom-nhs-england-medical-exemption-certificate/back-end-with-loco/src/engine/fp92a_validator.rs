@@ -8,6 +8,7 @@ use crate::engine::flagged_issues::detect_additional_flags;
 use crate::engine::fp92a_rules::fp92a_rules;
 use crate::engine::types::{ApplicationData, FiredRule, GradeResult, RuleCategory};
 
+/// Validate fp92a.
 pub fn validate_fp92a(data: &ApplicationData) -> GradeResult {
     let mut fired: Vec<FiredRule> = Vec::new();
 

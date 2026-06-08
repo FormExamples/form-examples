@@ -1,12 +1,19 @@
+//! Likelihood rules module.
+
 use super::types::AssessmentData;
 use super::utils::{count_asrs_positive, functional_impact_score, inattention_score, hyperactivity_score};
 
 /// A declarative ADHD likelihood rule.
 pub struct LikelihoodRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

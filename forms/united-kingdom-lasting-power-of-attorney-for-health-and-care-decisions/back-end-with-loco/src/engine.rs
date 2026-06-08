@@ -700,6 +700,7 @@ fn count_populated_required_fields(app: &LpaApplication) -> u32 {
     n
 }
 
+/// Calculate LPA validity.
 pub fn calculate_lpa_validity(app: &LpaApplication) -> LpaValidityResult {
     let mut fired_rules = Vec::new();
     fired_rules.extend(apply_donor_rules(app));

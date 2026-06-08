@@ -1,3 +1,5 @@
+//! Main module.
+
 use consent_to_treatment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

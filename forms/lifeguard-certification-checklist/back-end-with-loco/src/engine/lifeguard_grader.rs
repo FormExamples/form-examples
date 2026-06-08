@@ -1,3 +1,5 @@
+//! Lifeguard grader module.
+
 // Lifeguard Competency Verification grader. Pure functions: take an
 // `AssessmentData` object, evaluate each declarative rule in the registry,
 // and return the outcome plus the audit trail of fired rules.
@@ -17,7 +19,9 @@ use super::flagged_issues::detect_additional_flags;
 use super::rules::lifeguard_rules;
 use super::types::{AssessmentData, FiredRule, GradingResult, Outcome};
 
+/// DEFICIENCY limit for pass.
 pub const DEFICIENCY_LIMIT_FOR_PASS: usize = 0;
+/// DEFICIENCY limit for needs development.
 pub const DEFICIENCY_LIMIT_FOR_NEEDS_DEVELOPMENT: usize = 2;
 
 /// Evaluate every lifeguard rule in the registry, classify the outcome, and

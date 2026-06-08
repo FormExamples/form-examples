@@ -50,14 +50,21 @@ pub fn section_label(section: &str) -> &'static str {
     }
 }
 
+/// Validation rule.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Applies.
     pub applies: fn(&AssessmentData) -> bool,
+    /// Is satisfied.
     pub is_satisfied: fn(&AssessmentData) -> bool,
 }
 
+/// B1 rules.
 pub fn b1_rules() -> &'static [ValidationRule] {
     &[
         // ─── Step 1 — Personal Details (Part A) ─────────────────

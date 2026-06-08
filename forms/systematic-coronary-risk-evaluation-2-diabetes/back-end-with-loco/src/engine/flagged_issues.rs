@@ -1,6 +1,9 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{has_established_cvd, hba1c_mmol_mol, calculate_bmi};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(data: &AssessmentData) -> Vec<AdditionalFlag> {
     let mut flags = Vec::new();
 

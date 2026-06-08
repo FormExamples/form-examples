@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AssessmentData;
 
 /// Display label for a section identifier (mirrors `sectionLabel` in types.js).

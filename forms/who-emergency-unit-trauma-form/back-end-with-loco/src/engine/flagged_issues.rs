@@ -62,6 +62,7 @@ fn has_circulation_intervention(data: &AssessmentData) -> bool {
         || c.bleeding_control_tourniquet
 }
 
+/// Detect flagged issues.
 pub fn detect_flagged_issues(data: &AssessmentData) -> Vec<FlaggedIssue> {
     let mut flags: Vec<FlaggedIssue> = Vec::new();
     let v = &data.chief_complaint_and_vitals.initial_vitals;

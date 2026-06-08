@@ -1,3 +1,5 @@
+//! Validation rules module.
+
 use super::types::ValidationRule;
 
 /// All required-field validation rules for the Code of Conduct Notice.

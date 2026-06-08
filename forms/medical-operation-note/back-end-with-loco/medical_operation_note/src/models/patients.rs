@@ -1,5 +1,8 @@
+//! Patients module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::patients::{ActiveModel, Model, Entity};
+/// Patients.
 pub type Patients = Entity;
 
 #[async_trait::async_trait]

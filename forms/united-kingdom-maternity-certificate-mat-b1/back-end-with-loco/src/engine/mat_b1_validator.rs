@@ -13,6 +13,7 @@ use crate::engine::flagged_issues::detect_additional_flags;
 use crate::engine::mat_b1_rules::{mat_b1_rules, weeks_between};
 use crate::engine::types::{AssessmentData, FiredRule, RuleCategory, ValidationResult};
 
+/// Validate mat b1.
 pub fn validate_mat_b1(data: &AssessmentData) -> ValidationResult {
     let mut fired: Vec<FiredRule> = Vec::new();
 

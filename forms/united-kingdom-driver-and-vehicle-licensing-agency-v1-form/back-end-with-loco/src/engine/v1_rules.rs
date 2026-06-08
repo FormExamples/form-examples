@@ -1,3 +1,5 @@
+//! V1 rules module.
+
 // DVLA V1 — branch-aware completeness validation rules.
 //
 // Each rule asserts that a required field on the *active* branch has been
@@ -19,11 +21,17 @@ use super::utils::{
 /// rule is satisfied (i.e. the required field on the active branch is
 /// answered). It returns `false` when the rule fires (unsatisfied).
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Severity.
     pub severity: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Genetics rules module.
+
 use super::types::{AssessmentData, GraderContext, RiskLevel};
 
 /// A declarative genetics rule.
@@ -5,9 +7,13 @@ use super::types::{AssessmentData, GraderContext, RiskLevel};
 /// `evaluate` returns one of "low", "moderate", "high" when the rule fires,
 /// or an empty string when it does not.
 pub struct GeneticsRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData, &GraderContext) -> RiskLevel,
 }
 

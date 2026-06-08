@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection for the Audio-Vestibular Assessment.
 //
 // Independent of the WHO grade and the DHI total, this module raises

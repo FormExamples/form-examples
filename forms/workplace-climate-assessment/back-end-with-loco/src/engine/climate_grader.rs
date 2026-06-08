@@ -1,3 +1,5 @@
+//! Climate grader module.
+
 use super::climate_rules::{GRADED_DOMAIN_KEYS, all_items};
 use super::flagged_issues::detect_additional_flags;
 use super::types::{

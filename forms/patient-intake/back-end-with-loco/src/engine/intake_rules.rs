@@ -1,11 +1,18 @@
+//! Intake rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative intake risk classification rule.
 pub struct IntakeRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Risk level.
     pub risk_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

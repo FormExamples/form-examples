@@ -1,5 +1,8 @@
+//! Confidence module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(decile: Option<i32>) -> (RagBand, Vec<FiredRule>) {
     let band = match decile {
         None => RagBand::Amber,

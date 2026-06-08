@@ -1,3 +1,5 @@
+//! Severity grader module.
+
 use super::severity_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, collect_severity_items};

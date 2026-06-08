@@ -1,3 +1,5 @@
+//! Kinesiology grader module.
+
 use super::kinesiology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, ImpairmentLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

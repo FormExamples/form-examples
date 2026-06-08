@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 // Utility helpers shared by views and templates.
 
 /// Friendly label for a [`Severity`](super::types::Severity) value.

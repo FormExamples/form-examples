@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{AssessmentData, Aq10Screening};
 
 /// Returns a human-readable label for a likelihood level.

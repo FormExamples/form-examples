@@ -9,6 +9,7 @@
 use crate::engine::b1_rules::epilepsy_declaration_required;
 use crate::engine::types::{AssessmentData, FlagPriority, FlaggedIssue};
 
+/// Detect flagged issues.
 pub fn detect_flagged_issues(data: &AssessmentData) -> Vec<FlaggedIssue> {
     let mut flags: Vec<FlaggedIssue> = Vec::new();
 

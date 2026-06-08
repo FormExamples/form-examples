@@ -1,12 +1,19 @@
+//! Pediatric rules module.
+
 use super::types::AssessmentData;
 use super::utils::{behavioral_score, developmental_score, systems_review_score};
 
 /// A declarative pediatric concern rule.
 pub struct PediatricRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

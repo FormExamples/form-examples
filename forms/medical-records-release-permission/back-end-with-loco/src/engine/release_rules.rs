@@ -1,12 +1,19 @@
+//! Release rules module.
+
 use super::types::AssessmentData;
 use super::utils::{is_consent_given, is_identity_verified, includes_sensitive_info};
 
 /// A declarative release permission validation rule.
 pub struct ReleaseRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

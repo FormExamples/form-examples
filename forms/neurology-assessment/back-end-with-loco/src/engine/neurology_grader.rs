@@ -1,3 +1,5 @@
+//! Neurology grader module.
+
 use super::neurology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::calculate_severity_score;

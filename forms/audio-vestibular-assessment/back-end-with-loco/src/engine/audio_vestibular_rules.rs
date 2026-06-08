@@ -1,3 +1,5 @@
+//! Audio vestibular rules module.
+
 // Audio-Vestibular Assessment scoring rules.
 //
 // Two independent instruments are computed:
@@ -24,8 +26,11 @@ use super::types::EarThresholds;
 
 /// One DHI item: number, subscale, and question text.
 pub struct DhiItem {
+    /// Num.
     pub num: u8,
+    /// Subscale.
     pub subscale: &'static str,
+    /// Text.
     pub text: &'static str,
 }
 

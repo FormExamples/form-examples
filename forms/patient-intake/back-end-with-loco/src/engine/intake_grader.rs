@@ -1,3 +1,5 @@
+//! Intake grader module.
+
 use super::intake_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RiskLevel};
 

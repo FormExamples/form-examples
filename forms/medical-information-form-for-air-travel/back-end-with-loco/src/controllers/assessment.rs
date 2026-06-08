@@ -1,3 +1,5 @@
+//! Assessment CRUD endpoints under `/api/assessments`.
+
 use axum::{debug_handler, Json};
 use chrono::Utc;
 use loco_rs::prelude::*;
@@ -117,6 +119,7 @@ async fn list_assessments(State(ctx): State<AppContext>) -> Result<Response> {
     Ok(Json(json!({ "items": items, "total": items.len() })).into_response())
 }
 
+/// Routes.
 pub fn routes() -> Routes {
     Routes::new()
         .prefix("api/assessments")

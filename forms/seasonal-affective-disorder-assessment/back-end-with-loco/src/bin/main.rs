@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use seasonal_affective_disorder_assessment_loco_crate::app::App;

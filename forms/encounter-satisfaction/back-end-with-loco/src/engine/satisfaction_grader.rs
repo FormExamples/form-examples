@@ -1,3 +1,5 @@
+//! Satisfaction grader module.
+
 use super::satisfaction_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SatisfactionLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

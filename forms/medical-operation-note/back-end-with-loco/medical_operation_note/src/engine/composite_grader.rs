@@ -10,6 +10,7 @@ use super::{
     types::{ClavienDindo, CompositeRisk, FiredRule, OperationGrade, OperationNote},
 };
 
+/// Grade.
 pub fn grade(note: &OperationNote) -> OperationGrade {
     let mut composite = CompositeRisk::Routine;
     let mut fired: Vec<FiredRule> = Vec::new();

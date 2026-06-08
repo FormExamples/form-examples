@@ -1,3 +1,5 @@
+//! Main module.
+
 use employee_satisfaction_survey_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

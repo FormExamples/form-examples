@@ -1,5 +1,8 @@
+//! Progress module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand, RawScores};
 
+/// Grade.
 pub fn grade(s: &RawScores) -> (RagBand, Vec<FiredRule>) {
     let tier = s.stretch_tier.unwrap_or(1);
     let p = match s.progress_percent {

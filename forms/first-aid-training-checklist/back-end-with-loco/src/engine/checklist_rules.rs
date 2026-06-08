@@ -1,3 +1,5 @@
+//! Checklist rules module.
+
 use super::types::{AssessmentData, TriState};
 use super::utils::normalise_tri;
 
@@ -5,11 +7,17 @@ use super::utils::normalise_tri;
 /// value: `yes` (demonstrated), `no` (deficiency), `na` (not assessed), or
 /// `""` (no answer yet).
 pub struct FawRule {
+    /// ID.
     pub id: &'static str,
+    /// Step.
     pub step: u32,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Critical.
     pub critical: bool,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> TriState,
 }
 

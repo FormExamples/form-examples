@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection. Pure port of
 // `front-end-form-with-html/js/flagged-issues.js`. All flag IDs preserved verbatim.
 

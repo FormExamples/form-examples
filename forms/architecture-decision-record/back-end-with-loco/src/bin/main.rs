@@ -1,3 +1,5 @@
+//! Main module.
+
 use architecture_decision_record::app::App;
 use loco_rs::cli;
 use migration::Migrator;

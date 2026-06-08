@@ -1,3 +1,5 @@
+//! Rules module.
+
 use super::types::AssessmentData;
 
 /// A Braden Scale subscale rule. The `evaluate` function returns the
@@ -11,10 +13,15 @@ use super::types::AssessmentData;
 ///   BRADEN-005  Nutrition            1-4
 ///   BRADEN-006  Friction and Shear   1-3
 pub struct BradenRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Max score.
     pub max_score: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> i32,
 }
 

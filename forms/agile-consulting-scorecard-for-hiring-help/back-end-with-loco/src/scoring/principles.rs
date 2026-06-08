@@ -1,3 +1,5 @@
+//! Principles module.
+
 use crate::scoring::types::{Answer, FiredRule, Instrument, PrinciplesItems};
 use crate::scoring::utils::{answer_to_grade, answer_to_points, item_answer_grade_str};
 
@@ -96,6 +98,7 @@ const PRINCIPLES: [PrincipleSpec; 12] = [
     },
 ];
 
+/// Grade.
 pub fn grade(items: &PrinciplesItems) -> (u8, Vec<FiredRule>) {
     let mut subtotal: u8 = 0;
     let mut fired: Vec<FiredRule> = Vec::with_capacity(12);

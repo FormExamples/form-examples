@@ -1,3 +1,5 @@
+//! Likelihood grader module.
+
 use super::likelihood_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, LikelihoodLevel};
 use super::utils::{calculate_aq10_score, collect_clinical_items};

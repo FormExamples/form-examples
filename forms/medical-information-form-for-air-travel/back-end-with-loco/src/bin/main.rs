@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use medical_information_form_for_air_travel_loco_crate::app::App;
 use migration::Migrator;

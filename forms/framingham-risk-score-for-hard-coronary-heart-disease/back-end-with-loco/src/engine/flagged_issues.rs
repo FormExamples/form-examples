@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{calculate_bmi, calculate_framingham_risk, convert_mmol_to_mg, is_smoker};
 

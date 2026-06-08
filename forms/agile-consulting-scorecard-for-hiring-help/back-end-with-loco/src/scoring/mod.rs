@@ -1,3 +1,5 @@
+//! Scoring module.
+
 pub mod bulk_import;
 pub mod diff;
 pub mod flags;

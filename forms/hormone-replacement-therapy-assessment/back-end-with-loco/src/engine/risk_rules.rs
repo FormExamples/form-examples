@@ -1,12 +1,19 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::symptom_burden_score;
 
 /// A declarative HRT risk assessment rule.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

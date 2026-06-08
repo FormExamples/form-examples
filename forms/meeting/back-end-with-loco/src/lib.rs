@@ -15,92 +15,155 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 use chrono::{DateTime, NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
 
+/// Meeting.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
 pub struct Meeting {
+    /// Organizer name.
     pub organizer_name: String,
+    /// Status.
     pub status: String,
+    /// Title.
     pub title: String,
+    /// Summary.
     pub summary: String,
+    /// Scheduled start at.
     pub scheduled_start_at: Option<DateTime<Utc>>,
+    /// Scheduled end at.
     pub scheduled_end_at: Option<DateTime<Utc>>,
+    /// Actual start at.
     pub actual_start_at: Option<DateTime<Utc>>,
+    /// Actual end at.
     pub actual_end_at: Option<DateTime<Utc>>,
+    /// Recurring frequency.
     pub recurring_frequency: String,
+    /// Recurring series count.
     pub recurring_series_count: Option<u32>,
+    /// Recurring series until.
     pub recurring_series_until: Option<DateTime<Utc>>,
+    /// Agenda.
     pub agenda: Vec<AgendaItem>,
+    /// Participants.
     pub participants: Vec<Participant>,
+    /// Action items.
     pub action_items: Vec<ActionItem>,
+    /// Outputs.
     pub outputs: Vec<MeetingOutput>,
+    /// Outcomes.
     pub outcomes: Vec<MeetingOutcome>,
 }
 
+/// Agenda item.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
-pub struct AgendaItem { pub title: String }
+pub struct AgendaItem {
+    /// Title.
+    pub title: String,
+}
 
+/// Participant.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
 pub struct Participant {
+    /// Name.
     pub name: String,
+    /// Response status.
     pub response_status: String,
+    /// Attendance status.
     pub attendance_status: String,
 }
 
+/// Action item.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
 pub struct ActionItem {
+    /// Title.
     pub title: String,
+    /// Status.
     pub status: String,
+    /// Due date.
     pub due_date: Option<NaiveDate>,
 }
 
+/// Meeting output.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
-pub struct MeetingOutput { pub title: String }
+pub struct MeetingOutput {
+    /// Title.
+    pub title: String,
+}
 
+/// Meeting outcome.
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", default)]
-pub struct MeetingOutcome { pub title: String }
+pub struct MeetingOutcome {
+    /// Title.
+    pub title: String,
+}
 
+/// Fired rule.
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
+    /// Rule ID.
     pub rule_id: &'static str,
+    /// Instrument.
     pub instrument: &'static str,
+    /// Grade.
     pub grade: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: String,
 }
 
+/// Flag.
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Flag {
+    /// Flag ID.
     pub flag_id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Priority.
     pub priority: &'static str,
+    /// Description.
     pub description: String,
+    /// Suggested action.
     pub suggested_action: &'static str,
 }
 
+/// Validation result.
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ValidationResult {
+    /// Duration minutes.
     pub duration_minutes: Option<i64>,
+    /// Participant count.
     pub participant_count: usize,
+    /// Accepted count.
     pub accepted_count: usize,
+    /// Attended count.
     pub attended_count: usize,
+    /// Agenda item count.
     pub agenda_item_count: usize,
+    /// Action item count.
     pub action_item_count: usize,
+    /// Output count.
     pub output_count: usize,
+    /// Outcome count.
     pub outcome_count: usize,
+    /// Completion status.
     pub completion_status: &'static str,
+    /// Overall health.
     pub overall_health: &'static str,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
+    /// Flags.
     pub flags: Vec<Flag>,
 }
 
+/// Validate meeting.
 pub fn validate_meeting(m: &Meeting) -> ValidationResult {
     let participant_count = m.participants.len();
     let accepted_count = m.participants.iter()

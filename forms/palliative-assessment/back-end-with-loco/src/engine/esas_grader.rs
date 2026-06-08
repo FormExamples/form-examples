@@ -1,3 +1,5 @@
+//! Esas grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::rules::{RuleKind, all_rules};
 use super::types::{

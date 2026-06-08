@@ -1,3 +1,5 @@
+//! Validation rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative required-field rule. Each rule fires when the named
@@ -5,10 +7,15 @@ use super::types::AssessmentData;
 /// data-driven list; the Rust port keeps the same shape with a typed
 /// `is_empty` closure so the data model can stay strongly typed.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Field.
     pub field: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Is empty.
     pub is_empty: fn(&AssessmentData) -> bool,
 }
 

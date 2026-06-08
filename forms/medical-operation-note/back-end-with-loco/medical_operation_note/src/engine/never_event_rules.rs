@@ -6,6 +6,7 @@
 
 use super::types::{CompositeRisk, FiredRule};
 
+/// Evaluate.
 pub fn evaluate(
     never_event_flagged: bool,
     never_event_kind: &str,

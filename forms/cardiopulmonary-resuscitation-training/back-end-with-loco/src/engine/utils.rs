@@ -1,11 +1,15 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::NaiveDate;
 
 /// AHA BLS adult compression rate (per minute).
 pub const COMPRESSION_RATE_MIN: f64 = 100.0;
+/// COMPRESSION rate max.
 pub const COMPRESSION_RATE_MAX: f64 = 120.0;
 
 /// AHA BLS adult compression depth (cm).
 pub const COMPRESSION_DEPTH_MIN: f64 = 5.0;
+/// COMPRESSION depth max.
 pub const COMPRESSION_DEPTH_MAX: f64 = 6.0;
 
 /// Slow time-to-first-shock threshold (seconds).

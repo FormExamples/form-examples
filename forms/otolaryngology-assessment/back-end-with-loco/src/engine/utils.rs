@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::{Datelike, NaiveDate, Utc};
 
 /// Display label for a SNOT-22 severity band.

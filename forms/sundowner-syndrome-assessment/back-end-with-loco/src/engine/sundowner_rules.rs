@@ -1,3 +1,5 @@
+//! Sundowner rules module.
+
 // CMAI item bank and NPI domain bank.
 //
 // CMAI: 29 observer-rated items, each scored 1-7 (range 29-203).
@@ -15,14 +17,19 @@
 
 /// One CMAI item.
 pub struct CmaiItem {
+    /// ID.
     pub id: &'static str,
+    /// Number.
     pub number: u32,
+    /// Label.
     pub label: &'static str,
 }
 
 /// One NPI domain.
 pub struct NpiDomain {
+    /// Key.
     pub key: &'static str,
+    /// Label.
     pub label: &'static str,
 }
 

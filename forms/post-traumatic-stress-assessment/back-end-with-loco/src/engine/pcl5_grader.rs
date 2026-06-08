@@ -1,3 +1,5 @@
+//! Pcl5 grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::pcl5_rules::detect_fired_rules;
 use super::types::{AssessmentData, ClusterScores, GradingResult, PclItemScore};

@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::clavien_dindo_rules::rule_by_grade;
 
 /// Friendly label for a Clavien-Dindo grade key (e.g. "Grade IIIa").

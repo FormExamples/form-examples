@@ -1,5 +1,8 @@
+//! Utils module.
+
 use crate::scoring::types::{Answer, Band, ItemAnswerGrade, Recommendation};
 
+/// Answer to points.
 pub fn answer_to_points(answer: Answer) -> u8 {
     match answer {
         Some(true) => 1,
@@ -7,6 +10,7 @@ pub fn answer_to_points(answer: Answer) -> u8 {
     }
 }
 
+/// Answer to grade.
 pub fn answer_to_grade(answer: Answer) -> ItemAnswerGrade {
     match answer {
         Some(true) => ItemAnswerGrade::Yes,
@@ -32,6 +36,7 @@ pub fn total_to_band(total: u8) -> Band {
     }
 }
 
+/// Band to recommendation.
 pub fn band_to_recommendation(band: Band) -> Recommendation {
     match band {
         Band::Low => Recommendation::DoNotHireYet,
@@ -41,6 +46,7 @@ pub fn band_to_recommendation(band: Band) -> Recommendation {
     }
 }
 
+/// Item answer grade str.
 pub fn item_answer_grade_str(grade: ItemAnswerGrade) -> &'static str {
     match grade {
         ItemAnswerGrade::Yes => "yes",

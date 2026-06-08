@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AssessmentData, DomainGrade, FlaggedIssue};
 use super::utils::eq5d_summary;
 

@@ -1,12 +1,19 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_bmi, convert_mmol_to_mg, is_smoker};
 
 /// A declarative risk rule.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Risk level.
     pub risk_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData, f64) -> bool,
 }
 

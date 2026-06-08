@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for the overall priority level.
 pub fn priority_level_label(level: &str) -> String {
     match level {

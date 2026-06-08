@@ -1,3 +1,5 @@
+//! Risk grader module.
+
 use super::risk_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RiskLevel};
 use super::utils::{estimate_ten_year_risk, estimate_thirty_year_risk, is_likely_draft};

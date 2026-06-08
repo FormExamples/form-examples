@@ -1,3 +1,5 @@
+//! Ppe rules module.
+
 use super::types::AssessmentData;
 
 /// PPE (Pre-Participation Physical Evaluation, 5th ed.) clearance rule.
@@ -12,11 +14,15 @@ use super::types::AssessmentData;
 ///
 /// Rule IDs follow PPE-NNN ordering by section.
 pub struct PpeRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
     /// 1=info, 2=conditional, 3=pending, 4=not-cleared.
     pub grade: u8,
+    /// Fires.
     pub fires: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Sad rules module.
+
 // SAD scoring rules: SPAQ Global Seasonality Score (GSS) items + PHQ-9 items.
 //
 // SPAQ GSS — 6 items, each scored 0-4. Total 0-24. Bands:
@@ -16,8 +18,11 @@ use super::types::{AssessmentData, Phq9Band, SpaqBand};
 
 /// A SPAQ Global Seasonality Score item descriptor.
 pub struct SpaqItem {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
     /// Extracts the numeric answer for this SPAQ item from the assessment data.
     pub extract: fn(&AssessmentData) -> Option<i32>,
@@ -25,8 +30,11 @@ pub struct SpaqItem {
 
 /// A PHQ-9 depression-severity item descriptor.
 pub struct Phq9Item {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
     /// Extracts the numeric answer for this PHQ-9 item from the assessment data.
     pub extract: fn(&AssessmentData) -> Option<i32>,

@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod discharge_validator;
 pub mod flagged_issues;
 pub mod types;

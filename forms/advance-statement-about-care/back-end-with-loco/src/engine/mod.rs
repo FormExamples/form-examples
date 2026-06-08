@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod completeness_grader;
 pub mod completeness_rules;
 pub mod flagged_issues;

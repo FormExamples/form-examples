@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::ClimateCategory;
 
 /// Classify a 0-100 score into a ClimateCategory.

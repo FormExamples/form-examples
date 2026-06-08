@@ -1,12 +1,19 @@
+//! Onboarding rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative onboarding rule. Each rule fires when its condition is true.
 /// Grade 1 = minor, 2 = moderate, 3 = significant, 4 = critical.
 pub struct OnboardingRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

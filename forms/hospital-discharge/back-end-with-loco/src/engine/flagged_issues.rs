@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use chrono::NaiveDate;
 
 use super::types::{AdditionalFlag, AssessmentData};

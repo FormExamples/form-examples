@@ -1,3 +1,5 @@
+//! Rheumatology grader module.
+
 use super::rheumatology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, ActivityLevel};
 use super::utils::{calculate_composite_score, collect_scored_items};

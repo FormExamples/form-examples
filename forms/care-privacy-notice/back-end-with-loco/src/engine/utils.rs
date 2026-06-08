@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for the overall acknowledgement status.
 pub fn overall_status_label(status: &str) -> String {
     match status {

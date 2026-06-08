@@ -1,12 +1,19 @@
+//! Severity rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_ipss_total;
 
 /// A declarative urology severity concern rule.
 pub struct SeverityRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

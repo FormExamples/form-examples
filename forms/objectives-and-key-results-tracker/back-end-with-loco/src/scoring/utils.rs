@@ -1,5 +1,8 @@
+//! Utils module.
+
 use crate::scoring::types::RagBand;
 
+/// Worst band.
 pub fn worst_band(bands: &[RagBand]) -> RagBand {
     bands.iter().copied().max_by_key(|b| b.rank()).unwrap_or(RagBand::Green)
 }

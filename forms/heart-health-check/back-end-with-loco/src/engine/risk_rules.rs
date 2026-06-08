@@ -1,12 +1,19 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_bmi, calculate_tc_hdl_ratio, is_smoker};
 
 /// A declarative cardiovascular risk rule.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Risk level.
     pub risk_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData, f64, Option<u8>) -> bool,
 }
 

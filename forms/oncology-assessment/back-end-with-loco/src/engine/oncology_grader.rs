@@ -1,3 +1,5 @@
+//! Oncology grader module.
+
 use super::oncology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, OncologyLevel};
 use super::utils::{calculate_composite_score, collect_scored_items};

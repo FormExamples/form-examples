@@ -1,12 +1,19 @@
+//! Asa rules module.
+
 use super::types::{AsaGrade, AssessmentData};
 use super::utils::calculate_age;
 
 /// A declarative ASA grading rule.
 pub struct AsaRule {
+    /// ID.
     pub id: &'static str,
+    /// System.
     pub system: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: AsaGrade,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

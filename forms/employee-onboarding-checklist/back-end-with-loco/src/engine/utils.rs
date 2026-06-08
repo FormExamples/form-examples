@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::NaiveDate;
 
 /// Derive completion status from percentage.

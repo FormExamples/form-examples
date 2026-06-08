@@ -1,3 +1,5 @@
+//! View engine module.
+
 use async_trait::async_trait;
 use axum::{Extension, Router as AxumRouter};
 use fluent_templates::{ArcLoader, FluentLoader};
@@ -10,6 +12,7 @@ use tracing::info;
 
 const I18N_DIR: &str = "assets/i18n";
 const I18N_SHARED: &str = "assets/i18n/shared.ftl";
+/// View engine initializer.
 #[allow(clippy::module_name_repetitions)]
 pub struct ViewEngineInitializer;
 

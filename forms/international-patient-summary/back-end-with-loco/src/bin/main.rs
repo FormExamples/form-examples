@@ -1,3 +1,5 @@
+//! Main module.
+
 use international_patient_summary_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

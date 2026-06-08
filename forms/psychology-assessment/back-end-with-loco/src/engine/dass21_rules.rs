@@ -1,12 +1,19 @@
+//! Dass21 rules module.
+
 use super::types::{AssessmentData, DassItem};
 
 /// A declarative DASS-21 rule. Each rule maps one questionnaire item to a
 /// 0..=3 Likert response (or `None` if the patient has not yet answered).
 pub struct DassRule {
+    /// ID.
     pub id: &'static str,
+    /// Subscale.
     pub subscale: &'static str,
+    /// Item number.
     pub item_number: i32,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> DassItem,
 }
 

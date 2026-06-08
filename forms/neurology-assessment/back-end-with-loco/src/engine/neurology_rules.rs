@@ -1,12 +1,19 @@
+//! Neurology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{any_motor_power_at_or_below, abnormal_cranial_nerve_count, composite_cognitive_score};
 
 /// A declarative neurology concern rule.
 pub struct NeurologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

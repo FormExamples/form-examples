@@ -1,12 +1,19 @@
+//! Eligibility rules module.
+
 use super::types::AssessmentData;
 use super::utils::{has_severe_hypertension, has_elevated_bp, calculate_bmi};
 
 /// A declarative eligibility concern rule.
 pub struct EligibilityRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,5 +1,8 @@
+//! Impact module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(t: Option<i32>) -> (RagBand, Vec<FiredRule>) {
     let v = t.unwrap_or(0);
     (RagBand::Green, vec![FiredRule {

@@ -1,3 +1,5 @@
+//! Completeness grader: evaluates rules against the payload.
+
 use super::completeness_rules::all_rules;
 use super::types::{AssessmentData, CompletenessStatus, FiredRule};
 use super::utils::{count_completed_sections, determine_completeness};

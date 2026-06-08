@@ -1,3 +1,5 @@
+//! Serde data types for the assessment payload and grading result.
+
 use serde::{Deserialize, Serialize};
 
 /// Validation status — either Complete (all required fields filled and
@@ -8,9 +10,13 @@ pub type ValidationStatus = String;
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecipientDetails {
+    /// Organisation name.
     pub organisation_name: String,
+    /// Recipient name.
     pub recipient_name: String,
+    /// Recipient role.
     pub recipient_role: String,
+    /// Recipient employee ID.
     pub recipient_employee_id: String,
 }
 
@@ -18,8 +24,11 @@ pub struct RecipientDetails {
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AcknowledgementSignature {
+    /// Agreed.
     pub agreed: bool,
+    /// Recipient typed full name.
     pub recipient_typed_full_name: String,
+    /// Recipient typed date.
     pub recipient_typed_date: String,
 }
 
@@ -29,7 +38,9 @@ pub struct AcknowledgementSignature {
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AssessmentData {
+    /// Recipient details.
     pub recipient_details: RecipientDetails,
+    /// Acknowledgement signature.
     pub acknowledgement_signature: AcknowledgementSignature,
 }
 
@@ -37,9 +48,13 @@ pub struct AssessmentData {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Field.
     pub field: &'static str,
+    /// Message.
     pub message: &'static str,
 }
 
@@ -48,9 +63,13 @@ pub struct ValidationRule {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
+    /// ID.
     pub id: String,
+    /// Section.
     pub section: String,
+    /// Description.
     pub description: String,
+    /// Field.
     pub field: String,
 }
 
@@ -58,9 +77,13 @@ pub struct FiredRule {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdditionalFlag {
+    /// ID.
     pub id: String,
+    /// Category.
     pub category: String,
+    /// Message.
     pub message: String,
+    /// Priority.
     pub priority: String,
 }
 
@@ -68,9 +91,14 @@ pub struct AdditionalFlag {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradingResult {
+    /// Completeness percent.
     pub completeness_percent: u32,
+    /// Status.
     pub status: ValidationStatus,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
+    /// Additional flags.
     pub additional_flags: Vec<AdditionalFlag>,
+    /// Timestamp.
     pub timestamp: String,
 }

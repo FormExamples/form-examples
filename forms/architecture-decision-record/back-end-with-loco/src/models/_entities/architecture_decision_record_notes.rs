@@ -3,20 +3,29 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "architecture_decision_record_notes")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Noted at.
     pub noted_at: Option<DateTimeWithTimeZone>,
+    /// Noted by.
     pub noted_by: Option<String>,
+    /// Body.
     #[sea_orm(column_type = "Text")]
     pub body: String,
+    /// Architecture decision record ID.
     pub architecture_decision_record_id: i32,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
@@ -26,6 +35,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Architecture decision records.
     ArchitectureDecisionRecords,
 }
 

@@ -1,3 +1,5 @@
+//! Dass21 grader module.
+
 use super::dass21_rules::dass21_rules;
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, FiredRule, GradingResult, SubscaleScore};

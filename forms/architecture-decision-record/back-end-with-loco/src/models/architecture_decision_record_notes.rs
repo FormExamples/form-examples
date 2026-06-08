@@ -1,5 +1,8 @@
+//! Architecture decision record notes module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::architecture_decision_record_notes::{ActiveModel, Model, Entity};
+/// Architecture decision record notes.
 pub type ArchitectureDecisionRecordNotes = Entity;
 
 #[async_trait::async_trait]

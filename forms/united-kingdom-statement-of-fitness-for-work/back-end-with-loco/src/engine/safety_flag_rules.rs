@@ -13,6 +13,7 @@ fn driving_regex() -> Regex {
     Regex::new(r"(?i)\b(should not drive|must not drive|do not drive|no driving)\b").unwrap()
 }
 
+/// Evaluate.
 pub fn evaluate(fit_note: &AssessmentData, fired: &mut Vec<FiredRule>, flags: &mut Vec<SafetyFlag>) {
     let auto = auto_disability_regex();
     let driving = driving_regex();

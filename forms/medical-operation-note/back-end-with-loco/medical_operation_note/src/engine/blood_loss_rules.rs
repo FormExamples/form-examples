@@ -6,6 +6,7 @@
 
 use super::types::{BloodLossBand, CompositeRisk, FiredRule};
 
+/// Classify blood loss.
 pub fn classify_blood_loss(ml: Option<i32>) -> BloodLossBand {
     match ml {
         None => BloodLossBand::Minimal,

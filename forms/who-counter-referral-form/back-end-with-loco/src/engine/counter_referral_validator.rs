@@ -14,6 +14,7 @@ use crate::engine::types::{
     AssessmentData, FiredRule, SectionCompleteness, ValidationResult,
 };
 
+/// Validate counter referral.
 pub fn validate_counter_referral(data: &AssessmentData) -> ValidationResult {
     let mut section_map: BTreeMap<String, SectionCompleteness> = BTreeMap::new();
     let mut missing: Vec<FiredRule> = Vec::new();

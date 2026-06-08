@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use std::collections::BTreeMap;
 
 use super::types::{AdditionalFlag, AssessmentData, FiredRule};

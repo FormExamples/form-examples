@@ -1,5 +1,8 @@
+//! Smart module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(q: Option<i32>) -> (RagBand, Vec<FiredRule>) {
     let band = match q {
         None => RagBand::Amber,

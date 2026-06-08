@@ -1,3 +1,5 @@
+//! Main module.
+
 use lifeguard_certification_checklist_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

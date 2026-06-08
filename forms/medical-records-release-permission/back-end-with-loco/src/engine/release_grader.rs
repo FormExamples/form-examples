@@ -1,3 +1,5 @@
+//! Release grader module.
+
 use super::release_rules::all_rules;
 use super::types::{AssessmentData, CompletionLevel, FiredRule};
 use super::utils::{calculate_completion_score, count_required_fields, is_consent_given, is_identity_verified};

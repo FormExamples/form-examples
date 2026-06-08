@@ -1,12 +1,19 @@
+//! Satisfaction rules module.
+
 use super::types::AssessmentData;
 use super::utils::{care_quality_score, communication_score};
 
 /// A declarative satisfaction concern rule.
 pub struct SatisfactionRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

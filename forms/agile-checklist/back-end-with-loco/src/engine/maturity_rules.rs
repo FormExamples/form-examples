@@ -1,3 +1,5 @@
+//! Maturity rules module.
+
 use super::items::Section;
 use super::types::{Band, FiredRule, SectionScore};
 use super::utils::capitalise;

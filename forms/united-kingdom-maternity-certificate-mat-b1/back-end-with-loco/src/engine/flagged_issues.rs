@@ -14,6 +14,7 @@
 use crate::engine::mat_b1_rules::{nmc_expired_before, weeks_between};
 use crate::engine::types::{AdditionalFlag, AssessmentData, RulePriority};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(data: &AssessmentData) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

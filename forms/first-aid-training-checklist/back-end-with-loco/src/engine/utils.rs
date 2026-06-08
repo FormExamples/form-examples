@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::TriState;
 
 /// Display label for the overall pass/needs-development/fail outcome.

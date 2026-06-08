@@ -1,5 +1,8 @@
+//! Authors module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::authors::{ActiveModel, Model, Entity};
+/// Authors.
 pub type Authors = Entity;
 
 #[async_trait::async_trait]

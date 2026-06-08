@@ -3,49 +3,76 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "architecture_decision_records")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Slug.
     pub slug: Option<String>,
+    /// Number.
     pub number: Option<i32>,
+    /// Title.
     pub title: String,
+    /// Decision date.
     pub decision_date: Option<Date>,
+    /// Status.
     pub status: Option<String>,
+    /// Decision group.
     pub decision_group: Option<String>,
+    /// Issue.
     #[sea_orm(column_type = "Text", nullable)]
     pub issue: Option<String>,
+    /// Decision.
     #[sea_orm(column_type = "Text", nullable)]
     pub decision: Option<String>,
+    /// Assumptions.
     #[sea_orm(column_type = "Text", nullable)]
     pub assumptions: Option<String>,
+    /// Constraints.
     #[sea_orm(column_type = "Text", nullable)]
     pub constraints: Option<String>,
+    /// Argument.
     #[sea_orm(column_type = "Text", nullable)]
     pub argument: Option<String>,
+    /// Implications.
     #[sea_orm(column_type = "Text", nullable)]
     pub implications: Option<String>,
+    /// Related decisions.
     #[sea_orm(column_type = "Text", nullable)]
     pub related_decisions: Option<String>,
+    /// Related requirements.
     #[sea_orm(column_type = "Text", nullable)]
     pub related_requirements: Option<String>,
+    /// Related artifacts.
     #[sea_orm(column_type = "Text", nullable)]
     pub related_artifacts: Option<String>,
+    /// Related principles.
     #[sea_orm(column_type = "Text", nullable)]
     pub related_principles: Option<String>,
+    /// Signed off by.
     pub signed_off_by: Option<String>,
+    /// Signed off at.
     pub signed_off_at: Option<DateTimeWithTimeZone>,
+    /// Author ID.
     pub author_id: i32,
+    /// Organization ID.
     pub organization_id: i32,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    /// Architecture decision record notes.
     #[sea_orm(has_many = "super::architecture_decision_record_notes::Entity")]
     ArchitectureDecisionRecordNotes,
+    /// Architecture decision record positions.
     #[sea_orm(has_many = "super::architecture_decision_record_positions::Entity")]
     ArchitectureDecisionRecordPositions,
     #[sea_orm(
@@ -55,6 +82,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Authors.
     Authors,
     #[sea_orm(
         belongs_to = "super::organizations::Entity",
@@ -63,6 +91,7 @@ pub enum Relation {
         on_update = "Cascade",
         on_delete = "Cascade"
     )]
+    /// Organizations.
     Organizations,
 }
 

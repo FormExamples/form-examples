@@ -1,5 +1,8 @@
+//! Alignment module.
+
 use crate::scoring::types::{FiredRule, Instrument, RagBand};
 
+/// Grade.
 pub fn grade(g: Option<i32>) -> (RagBand, Vec<FiredRule>) {
     let band = match g {
         None => RagBand::Amber,

@@ -1,3 +1,5 @@
+//! Fall risk grader module.
+
 // Fall Risk grader. Pure functions: take an `AssessmentData`, return the
 // total Morse Fall Scale score (0..=125), the `Severity`, the list of
 // fired item rules, and the Critical-override metadata.

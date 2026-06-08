@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{AssessmentData, ValidationStatus};
 
 /// Completeness percentage = round((completed / total) * 100). When `total`

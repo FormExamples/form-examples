@@ -1,3 +1,5 @@
+//! Clavien dindo grader module.
+
 use super::clavien_dindo_rules::rule_by_grade;
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, ClavienDindoGradeKey, FiredRule, GradingResult};

@@ -11,6 +11,7 @@
 use crate::engine::counter_referral_rules::{has_any_status_flag, has_text};
 use crate::engine::types::{AssessmentData, FlagPriority, FlaggedIssue};
 
+/// Detect flagged issues.
 pub fn detect_flagged_issues(data: &AssessmentData) -> Vec<FlaggedIssue> {
     let mut flags: Vec<FlaggedIssue> = Vec::new();
 

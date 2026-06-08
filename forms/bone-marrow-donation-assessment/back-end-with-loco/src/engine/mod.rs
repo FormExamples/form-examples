@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod donor_grader;
 pub mod donor_rules;
 pub mod flagged_issues;

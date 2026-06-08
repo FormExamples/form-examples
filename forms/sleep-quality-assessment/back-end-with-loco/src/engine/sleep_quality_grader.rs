@@ -1,3 +1,5 @@
+//! Sleep quality grader module.
+
 use super::sleep_quality_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SleepQuality};
 use super::utils::{calculate_psqi_score, psqi_answered_count, calculate_ess_score, calculate_stop_bang_score};

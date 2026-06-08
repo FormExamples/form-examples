@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use emergency_medical_technician_psychomotor_examination_loco_crate::app::App;

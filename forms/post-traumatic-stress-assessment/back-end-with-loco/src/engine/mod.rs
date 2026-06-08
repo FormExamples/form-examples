@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod flagged_issues;
 pub mod pcl5_grader;
 pub mod pcl5_rules;

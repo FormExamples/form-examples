@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{calculate_stop_bang_score, calculate_ess_score};
 

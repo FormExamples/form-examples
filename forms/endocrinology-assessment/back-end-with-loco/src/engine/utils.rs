@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AxisStatus;
 
 /// Order axis statuses from least to most severe.

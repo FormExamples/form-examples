@@ -11,9 +11,13 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum CompositeRisk {
+    /// Routine.
     Routine,
+    /// Complicated.
     Complicated,
+    /// High risk.
     HighRisk,
+    /// Critical.
     Critical,
 }
 
@@ -28,6 +32,7 @@ impl CompositeRisk {
         }
     }
 
+    /// Max.
     pub fn max(self, other: CompositeRisk) -> CompositeRisk {
         if self.rank() >= other.rank() { self } else { other }
     }
@@ -36,18 +41,27 @@ impl CompositeRisk {
 /// Clavien–Dindo grade for intra-operative complications.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ClavienDindo {
+    /// Zero.
     #[serde(rename = "0")]
     Zero,
+    /// I.
     I,
+    /// II.
     II,
+    /// II ia.
     IIIa,
+    /// II ib.
     IIIb,
+    /// I va.
     IVa,
+    /// I vb.
     IVb,
+    /// V.
     V,
 }
 
 impl ClavienDindo {
+    /// Rank.
     pub fn rank(self) -> u8 {
         match self {
             ClavienDindo::Zero => 0,
@@ -61,6 +75,7 @@ impl ClavienDindo {
         }
     }
 
+    /// From str.
     pub fn from_str(s: &str) -> Option<ClavienDindo> {
         match s {
             "0" => Some(ClavienDindo::Zero),
@@ -80,10 +95,15 @@ impl ClavienDindo {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum BloodLossBand {
+    /// Minimal.
     Minimal,
+    /// Mild.
     Mild,
+    /// Moderate.
     Moderate,
+    /// Severe.
     Severe,
+    /// Massive.
     Massive,
 }
 
@@ -91,8 +111,11 @@ pub enum BloodLossBand {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum FlagPriority {
+    /// High.
     High,
+    /// Medium.
     Medium,
+    /// Low.
     Low,
 }
 
@@ -100,10 +123,15 @@ pub enum FlagPriority {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
+    /// Rule ID.
     pub rule_id: String,
+    /// Instrument.
     pub instrument: String,
+    /// Band.
     pub band: String,
+    /// Category.
     pub category: String,
+    /// Description.
     pub description: String,
 }
 
@@ -111,10 +139,15 @@ pub struct FiredRule {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdditionalFlag {
+    /// Flag ID.
     pub flag_id: String,
+    /// Category.
     pub category: String,
+    /// Priority.
     pub priority: FlagPriority,
+    /// Description.
     pub description: String,
+    /// Suggested action.
     pub suggested_action: String,
 }
 
@@ -124,21 +157,37 @@ pub struct AdditionalFlag {
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OperationNote {
+    /// Estimated blood loss ml.
     pub estimated_blood_loss_ml: Option<i32>,
+    /// Transfusion prbc units.
     pub transfusion_prbc_units: Option<i32>,
+    /// Massive haemorrhage protocol activated.
     pub massive_haemorrhage_protocol_activated: bool,
+    /// Converted to open.
     pub converted_to_open: bool,
+    /// Swab count agreed.
     pub swab_count_agreed: bool,
+    /// Needle count agreed.
     pub needle_count_agreed: bool,
+    /// Instrument count agreed.
     pub instrument_count_agreed: bool,
+    /// Retained foreign body.
     pub retained_foreign_body: bool,
+    /// Never event flagged.
     pub never_event_flagged: bool,
+    /// Never event kind.
     pub never_event_kind: String,
+    /// Intra operative arrest.
     pub intra_operative_arrest: bool,
+    /// Anaesthetic event.
     pub anaesthetic_event: String,
+    /// Worst clavien dindo.
     pub worst_clavien_dindo: Option<ClavienDindo>,
+    /// Asa physical status.
     pub asa_physical_status: Option<u8>,
+    /// Recovery destination.
     pub recovery_destination: String,
+    /// Planned recovery destination.
     pub planned_recovery_destination: String,
 }
 
@@ -146,11 +195,18 @@ pub struct OperationNote {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OperationGrade {
+    /// Composite risk.
     pub composite_risk: CompositeRisk,
+    /// Clavien dindo grade.
     pub clavien_dindo_grade: ClavienDindo,
+    /// Asa physical status.
     pub asa_physical_status: Option<u8>,
+    /// Blood loss band.
     pub blood_loss_band: BloodLossBand,
+    /// Counts agreed.
     pub counts_agreed: bool,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
+    /// Additional flags.
     pub additional_flags: Vec<AdditionalFlag>,
 }

@@ -1,10 +1,15 @@
+//! Privacy rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative completeness rule. Each rule fires when its corresponding
 /// acknowledgement field is missing.
 pub struct PrivacyRule {
+    /// ID.
     pub id: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

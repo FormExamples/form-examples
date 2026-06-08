@@ -1,12 +1,19 @@
+//! Endo rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative endometriosis grading rule. Grade 1 = minimal,
 /// 2 = mild, 3 = moderate/significant, 4 = severe/critical.
 pub struct EndoRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,12 +1,18 @@
+//! Rules module.
+
 use super::types::{AssessmentData, AxisStatus};
 use super::utils::max_status;
 
 /// A declarative axis-grading rule. Each rule evaluates the assessment and
 /// returns a status plus contributing findings.
 pub struct AxisRule {
+    /// ID.
     pub id: &'static str,
+    /// Axis.
     pub axis: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> (AxisStatus, Vec<String>),
 }
 

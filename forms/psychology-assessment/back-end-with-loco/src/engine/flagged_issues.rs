@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData, SubscaleScore};
 
 /// Detect psychology-assessment safety / clinical flags. These are computed

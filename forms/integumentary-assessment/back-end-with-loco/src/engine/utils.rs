@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AssessmentData;
 
 /// Risk-level cutoffs for the Braden Scale total score (6-23, lower = higher risk).

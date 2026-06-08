@@ -1,12 +1,19 @@
+//! Semaglutide rules module.
+
 use super::types::AssessmentData;
 use super::utils::{clinical_review_score, lifestyle_score};
 
 /// A declarative semaglutide eligibility rule.
 pub struct SemaglutideRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

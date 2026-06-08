@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for the overall counter-referral form status.
 pub fn form_status_label(status: &str) -> String {
     match status {

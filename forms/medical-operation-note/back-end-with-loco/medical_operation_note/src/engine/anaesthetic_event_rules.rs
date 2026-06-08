@@ -14,6 +14,7 @@ const HIGH_SEVERITY: [&str; 5] = [
     "suxamethonium-apnoea",
 ];
 
+/// Evaluate.
 pub fn evaluate(event: &str) -> (CompositeRisk, Option<FiredRule>) {
     if event.is_empty() || event == "none" {
         return (CompositeRisk::Routine, None);

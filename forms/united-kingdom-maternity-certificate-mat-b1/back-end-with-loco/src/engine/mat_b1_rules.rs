@@ -42,15 +42,23 @@ pub fn nmc_expired_before(expiry: &str, issued: &str) -> bool {
     e < i
 }
 
+/// Validation rule.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: RuleCategory,
+    /// Priority.
     pub priority: RulePriority,
+    /// Description.
     pub description: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 
+/// Mat b1 rules.
 pub fn mat_b1_rules() -> &'static [ValidationRule] {
     &[
         // ─── Patient identification ──────────────────────────

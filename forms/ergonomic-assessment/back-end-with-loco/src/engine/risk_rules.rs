@@ -1,12 +1,19 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::{count_pain_sites, dse_compliance_count, posture_score, symptom_score};
 
 /// A declarative ergonomic risk rule.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

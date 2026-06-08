@@ -1,3 +1,5 @@
+//! Main module.
+
 use framingham_risk_score_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use screening_program_privacy_notice_loco_crate::app::App;

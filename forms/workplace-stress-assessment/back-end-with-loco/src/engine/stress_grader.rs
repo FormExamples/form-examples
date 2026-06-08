@@ -1,3 +1,5 @@
+//! Stress grader module.
+
 // HSE Management Standards stress grader. Pure functions: given an
 // `AssessmentData` object, return per-domain means + concern categories,
 // and an overall risk equal to the worst-domain category.

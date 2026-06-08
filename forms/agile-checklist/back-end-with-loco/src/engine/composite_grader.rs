@@ -1,3 +1,5 @@
+//! Composite grader module.
+
 use std::collections::BTreeMap;
 
 use super::flagged_issues::detect_additional_flags;

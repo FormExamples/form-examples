@@ -1,12 +1,19 @@
+//! Catalogue of completeness rules.
+
 use super::types::AssessmentData;
 use super::utils::{is_filled, is_yes};
 
 /// A declarative advance statement concern rule.
 pub struct CompletenessRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

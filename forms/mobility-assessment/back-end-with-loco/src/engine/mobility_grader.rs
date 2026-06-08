@@ -1,3 +1,5 @@
+//! Mobility grader module.
+
 use super::mobility_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, MobilityLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

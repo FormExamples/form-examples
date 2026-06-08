@@ -1,3 +1,5 @@
+//! Cognitive grader module.
+
 use super::cognitive_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, ImpairmentLevel};
 use super::utils::{calculate_mmse_score, calculate_moca_score, collect_mmse_items};

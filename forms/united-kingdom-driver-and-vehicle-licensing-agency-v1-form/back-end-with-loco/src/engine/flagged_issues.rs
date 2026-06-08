@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // DVLA V1 flagged-issue detection. Independent of the completeness check,
 // this module raises clinician- or DVLA-significant flags for high-risk
 // responses (eyesight failure, uncontrolled diplopia, monocular without

@@ -1,3 +1,5 @@
+//! Scoring and grading engine (pure, side-effect-free functions).
+
 pub mod flagged_issues;
 pub mod gynecology_grader;
 pub mod gynecology_rules;

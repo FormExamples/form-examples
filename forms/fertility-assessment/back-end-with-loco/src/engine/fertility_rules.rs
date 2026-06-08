@@ -1,13 +1,20 @@
+//! Fertility rules module.
+
 use super::types::AssessmentData;
 use super::utils::age_in_years;
 
 /// A declarative fertility rule. Each rule contributes its `weight` to the
 /// total concern score when its evaluation function returns true.
 pub struct FertilityRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Weight.
     pub weight: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

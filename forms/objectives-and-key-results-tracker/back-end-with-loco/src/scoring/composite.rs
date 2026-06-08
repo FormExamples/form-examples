@@ -1,7 +1,10 @@
+//! Composite module.
+
 use crate::scoring::types::{FiredRule, GradeResult, Instrument, ObjectiveAssessment, RagBand};
 use crate::scoring::utils::worst_band;
 use crate::scoring::{alignment, confidence, flags, impact, pace, progress, smart, stretch};
 
+/// Grade objective.
 pub fn grade_objective(a: &ObjectiveAssessment) -> GradeResult {
     let (p, p_rules) = progress::grade(&a.scores);
     let (c, c_rules) = confidence::grade(a.scores.confidence_decile);

@@ -1,3 +1,5 @@
+//! Validation rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative offboarding validation rule. `evaluate` returns `true`
@@ -6,11 +8,17 @@ use super::types::AssessmentData;
 /// - `mandatory` — true if this item must be confirmed for "complete".
 /// - `blocker`   — true if outstanding-while-mandatory forces "incomplete".
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Mandatory.
     pub mandatory: bool,
+    /// Blocker.
     pub blocker: bool,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,3 +1,5 @@
+//! Survey grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::survey_rules::{GRADED_DOMAIN_KEYS, SurveyItem, survey_items};
 use super::types::{

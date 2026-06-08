@@ -1,3 +1,5 @@
+//! Stopbang rules module.
+
 // STOP-BANG OSA screening — 8 yes/no items, sum 0-8.
 //
 // SB-S  Snoring loudly        (Step 7 social-history)
@@ -14,6 +16,7 @@
 use super::types::{AssessmentData, FiredRule, StopbangResult};
 use super::utils::calculate_age;
 
+/// Stopbang risk from score.
 pub fn stopbang_risk_from_score(score: u32) -> &'static str {
     if score >= 5 {
         "high"
@@ -24,6 +27,7 @@ pub fn stopbang_risk_from_score(score: u32) -> &'static str {
     }
 }
 
+/// Evaluate stopbang.
 pub fn evaluate_stopbang(d: &AssessmentData) -> StopbangResult {
     let sh = &d.social_history;
     let mh = &d.medical_history;

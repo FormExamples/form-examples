@@ -1,3 +1,5 @@
+//! Dsg rules module.
+
 use super::types::{AssessmentData, FiredRule};
 use super::utils::{calculate_age_years, days_since};
 
@@ -5,9 +7,13 @@ use super::utils::{calculate_age_years, days_since};
 /// `evaluate` closure returns `Some(FiredRule)` when the criterion fires
 /// against the supplied data, and `None` otherwise.
 pub struct DsgRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> Option<FiredRule>,
 }
 

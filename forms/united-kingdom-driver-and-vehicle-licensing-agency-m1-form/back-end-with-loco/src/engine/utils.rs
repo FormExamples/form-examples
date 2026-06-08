@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AssessmentData;
 
 /// True when a string contains a non-empty trimmed value.

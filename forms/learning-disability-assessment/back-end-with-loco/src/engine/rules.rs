@@ -1,3 +1,5 @@
+//! Rules module.
+
 use super::types::{AdaptiveFunctioning, AssessmentData, SupportLevel};
 
 /// One scoring rule for an adaptive-functioning item.
@@ -13,9 +15,13 @@ use super::types::{AdaptiveFunctioning, AssessmentData, SupportLevel};
 /// Severity is derived from the mean across the *answered* items, so
 /// partial completion is still meaningful.
 pub struct LdRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Field.
     pub field: fn(&AdaptiveFunctioning) -> &SupportLevel,
 }
 

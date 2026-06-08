@@ -1,12 +1,19 @@
+//! Vaccination rules module.
+
 use super::types::AssessmentData;
 use super::utils::{childhood_score, adult_score, consent_score};
 
 /// A declarative vaccination concern rule.
 pub struct VaccinationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

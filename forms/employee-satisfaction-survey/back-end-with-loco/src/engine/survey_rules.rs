@@ -1,11 +1,17 @@
+//! Survey rules module.
+
 use super::types::{AssessmentData, LikertValue};
 
 /// Static catalogue of all Likert survey items with their domain and label.
 /// IDs preserve the canonical front-end identifiers (wl1..wl5, mg1..mg5, etc.).
 pub struct SurveyItem {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Accessor.
     pub accessor: fn(&AssessmentData) -> LikertValue,
 }
 

@@ -1,3 +1,5 @@
+//! Orthopedic grader module.
+
 use super::orthopedic_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

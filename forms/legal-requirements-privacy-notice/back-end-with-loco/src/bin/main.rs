@@ -1,3 +1,5 @@
+//! Main module.
+
 use legal_requirements_privacy_notice_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

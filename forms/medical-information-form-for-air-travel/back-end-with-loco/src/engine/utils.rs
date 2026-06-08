@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::{NaiveDate, Utc};
 
 /// Priority order for the max-grade engine. Worst band wins.
@@ -20,6 +22,7 @@ pub fn worse_band(a: &str, b: &str) -> String {
     }
 }
 
+/// Band label.
 pub fn band_label(band: &str) -> String {
     match band {
         "fit" => "Fit to fly".to_string(),
@@ -30,6 +33,7 @@ pub fn band_label(band: &str) -> String {
     }
 }
 
+/// Desk recommendation.
 pub fn desk_recommendation(band: &str) -> String {
     match band {
         "fit" => "Proceed; no medical clearance needed beyond this form.".to_string(),

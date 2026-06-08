@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{calculate_four_at_score, calculate_gds_score, calculate_tinetti_score};
 

@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use medical_waiting_list_card_loco_crate::app::App;
 use migration::Migrator;

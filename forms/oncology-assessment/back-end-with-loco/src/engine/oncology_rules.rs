@@ -1,12 +1,19 @@
+//! Oncology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{side_effects_score, psychosocial_score};
 
 /// A declarative oncology concern rule.
 pub struct OncologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

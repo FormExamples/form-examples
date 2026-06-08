@@ -1,3 +1,5 @@
+//! Psychomotor grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::rules::all_rules;
 use super::types::{
@@ -57,10 +59,15 @@ pub fn grade(data: &AssessmentData) -> GradingResult {
 
 /// Compact bundle passed to the flag detector (subset of GradingResult).
 pub struct GradingForFlags {
+    /// Critical failures.
     pub critical_failures: Vec<FiredRule>,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
+    /// Percent.
     pub percent: f64,
+    /// Points.
     pub points: u32,
+    /// Max points.
     pub max_points: u32,
 }
 

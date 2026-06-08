@@ -1,3 +1,5 @@
+//! Frailty rules module.
+
 use super::types::AssessmentData;
 use super::utils::{
     calculate_barthel_score, calculate_gds_score, calculate_mna_score,
@@ -6,10 +8,15 @@ use super::utils::{
 
 /// A declarative frailty concern rule.
 pub struct FrailtyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

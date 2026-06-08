@@ -1,3 +1,5 @@
+//! Main module.
+
 fn main() {
     println!(
         "{} — Loco app entrypoint. Use `cargo loco start` after running ../full-stack-with-loco-tera-htmx-alpine-setup",

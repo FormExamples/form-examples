@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Display label for a Waiting Time Status band.
 pub fn waiting_time_status_label(band: &str) -> String {
     match band {

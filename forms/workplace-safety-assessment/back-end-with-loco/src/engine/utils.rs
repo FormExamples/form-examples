@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{Outcome, SeverityGrade};
 
 /// Friendly label for an audit outcome.

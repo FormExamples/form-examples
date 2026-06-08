@@ -1,3 +1,5 @@
+//! Loco application hooks: route registration, workers, tasks, and lifecycle.
+
 use std::path::Path;
 
 use async_trait::async_trait;
@@ -13,6 +15,7 @@ use loco_rs::{
 };
 use migration::Migrator;
 
+/// App.
 pub struct App;
 
 #[async_trait]

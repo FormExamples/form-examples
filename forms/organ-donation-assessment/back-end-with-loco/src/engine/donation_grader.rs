@@ -1,3 +1,5 @@
+//! Donation grader module.
+
 use super::donation_rules::all_rules;
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, Eligibility, FiredRule, GradingResult, RiskLevel};

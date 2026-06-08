@@ -5,6 +5,7 @@
 use crate::engine::types::{AssessmentData, Grade};
 use crate::engine::{adaptation_rules, period_rules, safety_flag_rules, validity_rules};
 
+/// Grade fit note.
 pub fn grade_fit_note(fit_note: &AssessmentData) -> Grade {
     let mut fired_rules = Vec::new();
     let mut safety_flags = Vec::new();

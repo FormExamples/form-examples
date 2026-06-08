@@ -1,3 +1,5 @@
+//! Gynecology grader module.
+
 use super::gynecology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

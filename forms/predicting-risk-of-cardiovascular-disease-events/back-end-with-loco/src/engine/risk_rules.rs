@@ -1,12 +1,19 @@
+//! Risk rules module.
+
 use super::types::AssessmentData;
 use super::utils::{estimate_ten_year_risk, hba1c_to_percent, is_smoker};
 
 /// A declarative risk rule for the PREVENT calculator.
 pub struct RiskRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Risk level.
     pub risk_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

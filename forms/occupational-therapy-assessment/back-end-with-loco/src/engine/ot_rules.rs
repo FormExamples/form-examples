@@ -1,12 +1,19 @@
+//! Ot rules module.
+
 use super::types::AssessmentData;
 use super::utils::{adl_score, iadl_score, cognitive_score, motor_score};
 
 /// A declarative occupational therapy concern rule.
 pub struct OtRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

@@ -1,12 +1,19 @@
+//! Mcas rules module.
+
 use super::types::AssessmentData;
 use super::utils::{elevated_mediator_count, gi_score, respiratory_score, skin_score};
 
 /// A declarative MCAS severity concern rule.
 pub struct McasRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

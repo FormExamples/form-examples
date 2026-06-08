@@ -3,41 +3,62 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "patients")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
+    /// Name.
     pub name: String,
+    /// Birth date.
     pub birth_date: Date,
+    /// Sex.
     pub sex: String,
+    /// Email.
     #[sea_orm(column_type = "Text", nullable)]
     pub email: Option<String>,
+    /// Phone.
     #[sea_orm(column_type = "Text", nullable)]
     pub phone: Option<String>,
+    /// Postal address as full text.
     #[sea_orm(column_type = "Text", nullable)]
     pub postal_address_as_full_text: Option<String>,
+    /// Country as iso 3166 1 alpha 2.
     pub country_as_iso_3166_1_alpha_2: Option<String>,
+    /// Postcode.
     #[sea_orm(column_type = "Text", nullable)]
     pub postcode: Option<String>,
+    /// United kingdom NHS number.
     #[sea_orm(unique)]
     pub united_kingdom_nhs_number: String,
+    /// Hospital mrn.
     pub hospital_mrn: Option<String>,
+    /// Height as cm.
     #[sea_orm(column_type = "Double", nullable)]
     pub height_as_cm: Option<f64>,
+    /// Weight as kg.
     #[sea_orm(column_type = "Double", nullable)]
     pub weight_as_kg: Option<f64>,
+    /// Body mass index.
     #[sea_orm(column_type = "Double", nullable)]
     pub body_mass_index: Option<f64>,
+    /// Allergies summary.
     #[sea_orm(column_type = "Text")]
     pub allergies_summary: String,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    /// Medical operation notes.
     #[sea_orm(has_many = "super::medical_operation_notes::Entity")]
     MedicalOperationNotes,
 }

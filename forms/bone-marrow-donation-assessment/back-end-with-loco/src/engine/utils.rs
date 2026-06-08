@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::{Datelike, NaiveDate, Utc};
 
 /// Calculate age in years from a YYYY-MM-DD date-of-birth string.

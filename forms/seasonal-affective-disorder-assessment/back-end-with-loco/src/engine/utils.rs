@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::{Datelike, NaiveDate, Utc};
 
 use super::sad_rules::{combined_severity_label, phq9_band_label, spaq_band_label};

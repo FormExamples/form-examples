@@ -1,3 +1,5 @@
+//! M1 rules module.
+
 use super::types::AssessmentData;
 use super::utils::is_filled;
 
@@ -6,11 +8,17 @@ use super::utils::is_filled;
 ///
 /// Ported 1:1 from `front-end-form-with-html/js/m1-rules.js`.
 pub struct M1Rule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Priority.
     pub priority: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

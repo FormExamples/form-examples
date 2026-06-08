@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use chrono::NaiveDate;
 
 /// Display label for a NICE NG27 completeness level.

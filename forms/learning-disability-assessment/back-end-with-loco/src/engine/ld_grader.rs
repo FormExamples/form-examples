@@ -1,3 +1,5 @@
+//! Ld grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::rules::{LdRule, all_rules, evaluate};
 use super::types::{AssessmentData, FiredRule, GradingResult, SeverityCategory};

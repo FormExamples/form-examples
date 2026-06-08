@@ -1,3 +1,5 @@
+//! Asa grader module.
+
 use super::asa_rules::all_rules;
 use super::types::{AsaGrade, AssessmentData, FiredRule};
 

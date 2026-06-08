@@ -5,6 +5,7 @@
 
 use super::types::{CompositeRisk, FiredRule};
 
+/// Evaluate.
 pub fn evaluate(
     swab_agreed: bool,
     needle_agreed: bool,

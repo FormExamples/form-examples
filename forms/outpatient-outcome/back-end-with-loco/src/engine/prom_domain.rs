@@ -1,11 +1,17 @@
+//! Prom domain module.
+
 use super::types::{AssessmentData, DomainGrade, FiredRule};
 use super::utils::{eq5d_summary, promis_gph_t_score, promis_mh_t_score};
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 enum InstrumentResult {
+    /// Improved.
     Improved,
+    /// Worsened.
     Worsened,
+    /// Stable.
     Stable,
+    /// Missing.
     Missing,
 }
 
@@ -50,8 +56,11 @@ fn grade_promis(data: &AssessmentData) -> InstrumentResult {
     }
 }
 
+/// Prom result.
 pub struct PromResult {
+    /// Grade.
     pub grade: DomainGrade,
+    /// Rules.
     pub rules: Vec<FiredRule>,
 }
 

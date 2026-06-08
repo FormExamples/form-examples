@@ -1,5 +1,8 @@
+//! Medical operation note drains module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_drains::{ActiveModel, Model, Entity};
+/// Medical operation note drains.
 pub type MedicalOperationNoteDrains = Entity;
 
 #[async_trait::async_trait]

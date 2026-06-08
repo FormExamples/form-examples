@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::genetics_grader::build_context;
 use super::types::{AdditionalFlag, AssessmentData};
 

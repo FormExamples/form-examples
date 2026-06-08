@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Normalize an array of Likert scores (1-5) to a 0-100 scale.
 /// Ignores `None` values. Returns `None` if no valid scores.
 pub fn normalize_likert_scores(scores: &[Option<i32>]) -> Option<f64> {

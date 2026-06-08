@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 use super::utils::{calculate_bmi, calculate_tc_hdl_ratio, estimate_ten_year_risk, calculate_heart_age};
 

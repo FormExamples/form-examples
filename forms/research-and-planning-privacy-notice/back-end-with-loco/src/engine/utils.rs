@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{AssessmentData, ValidationStatus};
 
 /// Mirrors the TypeScript `completenessPercent` helper.

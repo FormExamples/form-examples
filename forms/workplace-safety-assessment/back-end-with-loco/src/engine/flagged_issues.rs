@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection. Independent of grade aggregation; raises
 // auditor-facing flags prioritised as high / medium / low for findings
 // that warrant targeted follow-up beyond the headline grade.
@@ -11,6 +13,7 @@
 
 use super::types::{AdditionalFlag, AssessmentData};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(data: &AssessmentData) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

@@ -1,3 +1,5 @@
+//! Main module.
+
 use hospital_discharge_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

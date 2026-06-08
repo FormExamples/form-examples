@@ -41,13 +41,21 @@ pub fn condition_by_code<'a>(
         .find(|c| c.code == code && c.selected == "yes")
 }
 
+/// Validation rule.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: RuleCategory,
+    /// Priority.
     pub priority: RulePriority,
+    /// Description.
     pub description: &'static str,
+    /// Message.
     pub message: &'static str,
+    /// Contributing condition code.
     pub contributing_condition_code: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&ApplicationData) -> bool,
 }
 
@@ -65,6 +73,7 @@ pub const ELIGIBLE_CONDITION_CODES: &[&str] = &[
     "cancer-or-effects",
 ];
 
+/// Fp92a rules.
 pub fn fp92a_rules() -> &'static [ValidationRule] {
     &[
         // ─── Eligible-condition rules (one per declared condition) ─────────

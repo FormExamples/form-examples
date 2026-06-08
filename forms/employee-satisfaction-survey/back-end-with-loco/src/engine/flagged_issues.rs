@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use regex_lite_simple::matches_any;
 
 use super::types::{AdditionalFlag, AssessmentData, DomainScore, DomainScores, ENpsResult};

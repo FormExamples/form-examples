@@ -1,3 +1,5 @@
+//! Main module.
+
 use blood_donation_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

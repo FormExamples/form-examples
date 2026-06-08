@@ -1,3 +1,5 @@
+//! Rules module.
+
 // Workplace Safety Assessment — declarative scoring rules.
 //
 // Each rule maps a single audit checklist item to a severity grade if the
@@ -43,10 +45,15 @@ fn grade_yes_is_bad(answer: &str, severity: SeverityGrade) -> SeverityGrade {
 
 /// Declarative workplace-safety rule.
 pub struct SafetyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Severity.
     pub severity: SeverityGrade,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> SeverityGrade,
 }
 

@@ -1,3 +1,5 @@
+//! Priority targets module.
+
 use chrono::NaiveDate;
 
 /// 18-week NHS RTT standard breach threshold.

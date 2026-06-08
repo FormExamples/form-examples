@@ -10,32 +10,47 @@ use serde::{Deserialize, Serialize};
 use crate::scoring::grader::grade_scorecard;
 use crate::scoring::types::{AgileConsultingScorecardAssessment, GradeResult};
 
+/// Accepted import.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AcceptedImport {
+    /// Line number.
     pub line_number: usize,
+    /// Assessment.
     pub assessment: AgileConsultingScorecardAssessment,
+    /// Grade.
     pub grade: GradeResult,
 }
 
+/// Rejected import.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RejectedImport {
+    /// Line number.
     pub line_number: usize,
+    /// Raw line.
     pub raw_line: String,
+    /// Error.
     pub error: String,
 }
 
+/// Bulk import result.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BulkImportResult {
+    /// Accepted.
     pub accepted: Vec<AcceptedImport>,
+    /// Rejected.
     pub rejected: Vec<RejectedImport>,
+    /// Total lines.
     pub total_lines: usize,
+    /// Skipped blank.
     pub skipped_blank: usize,
+    /// Skipped comment.
     pub skipped_comment: usize,
 }
 
+/// Parse jsonl.
 pub fn parse_jsonl(text: &str) -> BulkImportResult {
     // Match the TypeScript splitter: split on `\r?\n` and process every chunk.
     let lines: Vec<&str> = text.split('\n').map(|s| s.trim_end_matches('\r')).collect();

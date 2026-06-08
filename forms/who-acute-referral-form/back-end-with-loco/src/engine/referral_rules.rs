@@ -38,11 +38,17 @@ pub fn section_label(section: &str) -> &'static str {
     }
 }
 
+/// Validation rule.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Section.
     pub section: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Applies.
     pub applies: fn(&AssessmentData) -> bool,
+    /// Is satisfied.
     pub is_satisfied: fn(&AssessmentData) -> bool,
 }
 
@@ -54,6 +60,7 @@ pub fn receipt_started(d: &AssessmentData) -> bool {
         || has_text(&d.referral_facility_receipt.receiving_provider_signature)
 }
 
+/// Referral rules.
 pub fn referral_rules() -> &'static [ValidationRule] {
     &[
         // ─── Step 1 — Patient Identification ─────────────────────

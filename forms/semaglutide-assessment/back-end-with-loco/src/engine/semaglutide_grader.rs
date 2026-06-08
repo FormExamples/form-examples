@@ -1,3 +1,5 @@
+//! Semaglutide grader module.
+
 use super::semaglutide_rules::all_rules;
 use super::types::{AssessmentData, EligibilityLevel, FiredRule};
 use super::utils::{calculate_composite_score, collect_likert_items, has_any_contraindication};

@@ -1,3 +1,5 @@
+//! Rcri rules module.
+
 // Revised Cardiac Risk Index (Lee Index) — 6 criteria, each worth 1 point.
 //
 // RCRI-001  High-risk surgery (auto from surgery grade major or complex)
@@ -12,6 +14,7 @@
 
 use super::types::{AssessmentData, FiredRule, RcriResult};
 
+/// Rcri risk from score.
 pub fn rcri_risk_from_score(score: u32) -> &'static str {
     if score >= 3 {
         "critical"
@@ -24,6 +27,7 @@ pub fn rcri_risk_from_score(score: u32) -> &'static str {
     }
 }
 
+/// Rcri mace percent.
 pub fn rcri_mace_percent(score: u32) -> f64 {
     if score >= 3 {
         5.4
@@ -36,6 +40,7 @@ pub fn rcri_mace_percent(score: u32) -> f64 {
     }
 }
 
+/// Evaluate rcri.
 pub fn evaluate_rcri(d: &AssessmentData) -> RcriResult {
     let grade = &d.planned_surgery.surgery_grade;
     let ip = &d.investigations_and_plan;

@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::RiskLevel;
 
 /// Friendly label for a RiskLevel.

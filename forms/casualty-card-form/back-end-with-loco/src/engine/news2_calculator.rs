@@ -1,3 +1,5 @@
+//! News2 calculator module.
+
 use crate::engine::types::{AssessmentData, FiredRule, News2Score};
 
 /// Calculate NEWS2 score from vital signs.

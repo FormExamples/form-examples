@@ -1,3 +1,5 @@
+//! Main module.
+
 use hearing_aid_assessment_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

@@ -5,6 +5,7 @@
 
 use super::types::{ClavienDindo, CompositeRisk, FiredRule};
 
+/// Evaluate.
 pub fn evaluate(grade: Option<ClavienDindo>) -> (CompositeRisk, Option<FiredRule>) {
     let g = grade.unwrap_or(ClavienDindo::Zero);
     let (risk, label) = match g {

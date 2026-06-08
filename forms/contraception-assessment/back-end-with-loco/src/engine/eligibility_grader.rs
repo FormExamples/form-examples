@@ -1,3 +1,5 @@
+//! Eligibility grader module.
+
 use super::eligibility_rules::all_rules;
 use super::types::{AssessmentData, EligibilityLevel, FiredRule};
 use super::utils::calculate_worst_ukmec_category;

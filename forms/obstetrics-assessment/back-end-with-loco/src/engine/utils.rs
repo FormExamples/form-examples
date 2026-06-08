@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Calculate BMI from weight (kg) and height (cm). Returns None if invalid.
 pub fn calculate_bmi(weight_kg: Option<f64>, height_cm: Option<f64>) -> Option<f64> {
     let w = weight_kg?;

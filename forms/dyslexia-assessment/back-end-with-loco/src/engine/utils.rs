@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Classify a single standardised score (mean 100, SD 15) into a severity band.
 /// - 85+   -> "none"      (average or above)
 /// - 70-84 -> "mild"      (below average)

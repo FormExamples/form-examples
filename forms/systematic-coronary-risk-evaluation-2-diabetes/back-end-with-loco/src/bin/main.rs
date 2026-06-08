@@ -1,3 +1,5 @@
+//! Main module.
+
 use score2_diabetes_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

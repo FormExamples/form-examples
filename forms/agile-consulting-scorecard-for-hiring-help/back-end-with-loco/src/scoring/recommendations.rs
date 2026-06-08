@@ -8,6 +8,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::scoring::types::{AgileConsultingScorecardAssessment, Answer};
 
+/// Recommended action.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RecommendedAction {

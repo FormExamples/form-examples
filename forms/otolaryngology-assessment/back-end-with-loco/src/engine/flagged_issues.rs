@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData};
 
 /// Capitalize a single ASCII word (used for side labels: "right" -> "Right").

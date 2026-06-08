@@ -1,3 +1,5 @@
+//! Main module.
+
 use international_certificate_of_vaccination_or_prophylaxis::app::App;
 use loco_rs::cli;
 use migration::Migrator;

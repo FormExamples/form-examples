@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use super::types::{AdditionalFlag, AssessmentData, GradingResult, LikertValue};
 
 /// Display labels for the eight graded domains.

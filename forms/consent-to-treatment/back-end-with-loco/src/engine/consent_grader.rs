@@ -1,3 +1,5 @@
+//! Consent grader module.
+
 use super::consent_rules::all_rules;
 use super::types::{AssessmentData, ConsentStatus, FiredRule};
 use super::utils::{calculate_completeness_score, collect_rated_items, field_filled};

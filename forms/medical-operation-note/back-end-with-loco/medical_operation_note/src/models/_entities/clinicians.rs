@@ -3,35 +3,52 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "clinicians")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
+    /// Name.
     #[sea_orm(column_type = "Text")]
     pub name: String,
+    /// Email.
     #[sea_orm(column_type = "Text", nullable)]
     pub email: Option<String>,
+    /// Phone.
     #[sea_orm(column_type = "Text", nullable)]
     pub phone: Option<String>,
+    /// Postal address as full text.
     #[sea_orm(column_type = "Text", nullable)]
     pub postal_address_as_full_text: Option<String>,
+    /// Country as iso 3166 1 alpha 2.
     pub country_as_iso_3166_1_alpha_2: Option<String>,
+    /// Postcode.
     #[sea_orm(column_type = "Text", nullable)]
     pub postcode: Option<String>,
+    /// Role.
     pub role: String,
+    /// Registration body.
     pub registration_body: String,
+    /// Registration number.
     #[sea_orm(column_type = "Text")]
     pub registration_number: String,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    /// Medical operation note team members.
     #[sea_orm(has_many = "super::medical_operation_note_team_members::Entity")]
     MedicalOperationNoteTeamMembers,
+    /// Medical operation notes.
     #[sea_orm(has_many = "super::medical_operation_notes::Entity")]
     MedicalOperationNotes,
 }

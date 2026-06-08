@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::Severity;
 
 /// CMAI severity thresholds (from the AGENTS.md spec):

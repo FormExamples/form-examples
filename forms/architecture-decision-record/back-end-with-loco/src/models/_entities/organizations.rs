@@ -3,24 +3,36 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Model.
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "organizations")]
 pub struct Model {
+    /// Created at.
     pub created_at: DateTimeWithTimeZone,
+    /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
+    /// ID.
     #[sea_orm(primary_key)]
     pub id: i32,
+    /// Name.
     pub name: String,
+    /// Legal name.
     pub legal_name: Option<String>,
+    /// Industry.
     pub industry: Option<String>,
+    /// Domain.
     pub domain: Option<String>,
+    /// Country as iso 3166 1 alpha 2.
     pub country_as_iso_3166_1_alpha_2: Option<String>,
+    /// Description.
     #[sea_orm(column_type = "Text", nullable)]
     pub description: Option<String>,
 }
 
+/// Relation.
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    /// Architecture decision records.
     #[sea_orm(has_many = "super::architecture_decision_records::Entity")]
     ArchitectureDecisionRecords,
 }

@@ -1,12 +1,19 @@
+//! Vaccination rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative vaccination rule. Grade values: 1 = low, 2 = moderate,
 /// 3 = significant, 4 = critical. Ported 1:1 from `vaccination-rules.js`.
 pub struct VaccinationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

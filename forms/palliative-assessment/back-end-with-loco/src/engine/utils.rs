@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::{AssessmentData, SeverityBand};
 
 /// Return the patient's ESAS-r intensity for `key` clamped to 0-10, or 0 if

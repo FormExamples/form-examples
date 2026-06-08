@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 use crate::engine::types::{AdditionalFlag, AssessmentData};
 
 /// Detect safety-critical flags for clinical review.

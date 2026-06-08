@@ -1,3 +1,5 @@
+//! Grader module.
+
 use crate::scoring::flags;
 use crate::scoring::manifesto;
 use crate::scoring::principles;

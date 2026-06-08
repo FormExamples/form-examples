@@ -1,3 +1,5 @@
+//! Endocrine grader module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::rules::axis_rules;
 use super::types::{AssessmentData, AxisGrade, AxisStatus, FiredRule, GradingResult};

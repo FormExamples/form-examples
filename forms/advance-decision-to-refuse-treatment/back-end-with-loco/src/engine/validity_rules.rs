@@ -1,12 +1,19 @@
+//! Validity rules module.
+
 use super::types::AssessmentData;
 use super::utils::has_life_sustaining_refusal;
 
 /// A declarative validity rule for Advance Decision to Refuse Treatment.
 pub struct ValidityRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Severity.
     pub severity: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

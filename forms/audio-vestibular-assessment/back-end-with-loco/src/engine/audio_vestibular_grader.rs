@@ -1,3 +1,5 @@
+//! Audio vestibular grader module.
+
 // Audio-Vestibular Assessment grader. Pure functions: take an
 // `AssessmentData` object, return:
 //
@@ -19,12 +21,19 @@ use super::types::{AdditionalFlag, AssessmentData, DhiFiredItem, GradingResult};
 /// Pure-tone audiometry results.
 #[derive(Debug, Clone)]
 pub struct PtaResult {
+    /// Right pta.
     pub right_pta: Option<f64>,
+    /// Left pta.
     pub left_pta: Option<f64>,
+    /// Better ear pta.
     pub better_ear_pta: Option<f64>,
+    /// Asymmetry.
     pub asymmetry: Option<f64>,
+    /// Hearing loss grade.
     pub hearing_loss_grade: String,
+    /// Right hearing loss grade.
     pub right_hearing_loss_grade: String,
+    /// Left hearing loss grade.
     pub left_hearing_loss_grade: String,
 }
 
@@ -65,12 +74,19 @@ pub fn calculate_pure_tone_audiometry(data: &AssessmentData) -> PtaResult {
 /// Dizziness Handicap Inventory result.
 #[derive(Debug, Clone)]
 pub struct DhiResult {
+    /// Total.
     pub total: u32,
+    /// Answered count.
     pub answered_count: u32,
+    /// Functional.
     pub functional: u32,
+    /// Emotional.
     pub emotional: u32,
+    /// Physical.
     pub physical: u32,
+    /// Handicap level.
     pub handicap_level: String,
+    /// Fired items.
     pub fired_items: Vec<DhiFiredItem>,
 }
 

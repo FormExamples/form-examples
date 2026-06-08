@@ -1,12 +1,19 @@
+//! Validation rules module.
+
 use super::types::AssessmentData;
 
 /// A declarative IPS section-population rule. Fires per rule on every
 /// grading run with `ok` if the section is populated, `empty` otherwise.
 pub struct IPSRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Mandatory.
     pub mandatory: bool,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> &'static str,
 }
 

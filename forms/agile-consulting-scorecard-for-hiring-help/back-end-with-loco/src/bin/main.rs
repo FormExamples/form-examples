@@ -1,3 +1,5 @@
+//! Main module.
+
 // Agile Consulting Scorecard for Hiring Help — Loco CLI entrypoint.
 //
 // Standard Loco runner. Subcommands include `start` (boots the HTTP

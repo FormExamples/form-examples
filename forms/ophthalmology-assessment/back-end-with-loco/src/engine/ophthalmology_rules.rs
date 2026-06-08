@@ -1,12 +1,19 @@
+//! Ophthalmology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{anterior_segment_score, classify_visual_acuity, posterior_segment_score};
 
 /// A declarative ophthalmology concern rule.
 pub struct OphthalmologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

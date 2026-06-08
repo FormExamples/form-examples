@@ -1,5 +1,8 @@
+//! Medical operation note team members module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_team_members::{ActiveModel, Model, Entity};
+/// Medical operation note team members.
 pub type MedicalOperationNoteTeamMembers = Entity;
 
 #[async_trait::async_trait]

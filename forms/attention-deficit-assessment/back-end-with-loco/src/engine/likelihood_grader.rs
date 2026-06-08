@@ -1,3 +1,5 @@
+//! Likelihood grader module.
+
 use super::likelihood_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, LikelihoodLevel};
 use super::utils::{count_asrs_answered, count_asrs_positive, calculate_asrs_score, functional_impact_score};

@@ -1,3 +1,5 @@
+//! Manifesto module.
+
 use crate::scoring::types::{Answer, FiredRule, Instrument, ManifestoItems};
 use crate::scoring::utils::{answer_to_grade, answer_to_points, item_answer_grade_str};
 
@@ -40,6 +42,7 @@ const MANIFESTO: [ManifestoSpec; 4] = [
     },
 ];
 
+/// Grade.
 pub fn grade(items: &ManifestoItems) -> (u8, Vec<FiredRule>) {
     let mut subtotal: u8 = 0;
     let mut fired: Vec<FiredRule> = Vec::with_capacity(4);

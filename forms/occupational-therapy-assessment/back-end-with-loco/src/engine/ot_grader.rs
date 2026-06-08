@@ -1,3 +1,5 @@
+//! Ot grader module.
+
 use super::ot_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, FunctionLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

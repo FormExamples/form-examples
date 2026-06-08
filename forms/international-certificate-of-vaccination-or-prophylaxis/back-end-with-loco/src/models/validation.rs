@@ -5,52 +5,81 @@
 use chrono::{Datelike, Duration, NaiveDate, Utc};
 use serde::{Deserialize, Serialize};
 
+/// Severity.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Severity {
+    /// Error.
     Error,
+    /// Warning.
     Warning,
+    /// Info.
     Info,
 }
 
+/// Fired rule.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiredRule {
+    /// Code.
     pub code: String,
+    /// Severity.
     pub severity: Severity,
+    /// Message.
     pub message: String,
 }
 
+/// Certificate.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Certificate {
+    /// Primary language as bcp 47.
     pub primary_language_as_bcp_47: String,
+    /// Secondary language as bcp 47.
     pub secondary_language_as_bcp_47: String,
+    /// Declared pregnancy.
     pub declared_pregnancy: String,
+    /// Declared breastfeeding.
     pub declared_breastfeeding: String,
+    /// Declared immunosuppression.
     pub declared_immunosuppression: String,
+    /// Patient birth date.
     pub patient_birth_date: Option<NaiveDate>,
+    /// Entries.
     pub entries: Vec<Entry>,
 }
 
+/// Entry.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Entry {
+    /// Disease.
     pub disease: String,
+    /// Vaccination date.
     pub vaccination_date: Option<NaiveDate>,
+    /// Manufacturer.
     pub manufacturer: String,
+    /// Batch number.
     pub batch_number: String,
+    /// Administering clinician signature data URL.
     pub administering_clinician_signature_data_url: String,
+    /// Centre stamp image data URL.
     pub centre_stamp_image_data_url: String,
+    /// Validity starts on.
     pub validity_starts_on: Option<NaiveDate>,
+    /// Validity ends on.
     pub validity_ends_on: Option<NaiveDate>,
+    /// Validity is lifetime.
     pub validity_is_lifetime: String,
 }
 
+/// Validation report.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ValidationReport {
+    /// Overall valid.
     pub overall_valid: bool,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
 }
 
@@ -62,6 +91,7 @@ fn fire(code: &str, severity: Severity, message: impl Into<String>) -> FiredRule
     }
 }
 
+/// Validate certificate.
 pub fn validate_certificate(cert: &Certificate) -> ValidationReport {
     let mut fired = Vec::new();
     let today = Utc::now().date_naive();

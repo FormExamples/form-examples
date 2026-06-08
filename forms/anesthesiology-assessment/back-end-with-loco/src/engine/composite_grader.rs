@@ -1,3 +1,5 @@
+//! Composite grader module.
+
 // Composite perioperative-risk grader.
 //
 // Runs the four sub-graders (ASA, Mallampati airway, RCRI, STOP-BANG) and

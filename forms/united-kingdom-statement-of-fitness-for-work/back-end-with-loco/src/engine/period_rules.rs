@@ -12,6 +12,7 @@
 use crate::engine::types::{AssessmentData, FiredRule, SafetyFlag};
 use crate::engine::utils::{classify_first_six_months, compute_period_days};
 
+/// Classify period.
 pub fn classify_period(days: Option<i64>, within_first_six_months: bool) -> String {
     match days {
         None => String::new(),

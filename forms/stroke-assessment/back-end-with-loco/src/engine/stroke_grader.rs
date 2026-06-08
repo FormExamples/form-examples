@@ -1,3 +1,5 @@
+//! Stroke grader module.
+
 use super::stroke_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_nihss_total, collect_nihss_items, severity_from_nihss};

@@ -1,3 +1,5 @@
+//! V1 grader module.
+
 use std::collections::BTreeMap;
 
 use super::flagged_issues::detect_flagged_issues;

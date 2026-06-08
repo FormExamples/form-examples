@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Flagged-issue detection for the Fall Risk Assessment.
 //
 // Independent of the raw MFS score, this module raises clinician-facing
@@ -21,6 +23,7 @@ use super::mfs_rules::{
 };
 use super::types::{AdditionalFlag, AssessmentData};
 
+/// Detect additional flags.
 pub fn detect_additional_flags(data: &AssessmentData) -> Vec<AdditionalFlag> {
     let mut flags: Vec<AdditionalFlag> = Vec::new();
 

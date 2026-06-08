@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use united_kingdom_statement_of_fitness_for_work_loco_crate::app::App;

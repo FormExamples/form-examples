@@ -1,3 +1,5 @@
+//! Respirology grader module.
+
 use super::respirology_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RespiratoryLevel};
 use super::utils::{calculate_composite_score, collect_likert_items};

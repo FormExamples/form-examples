@@ -1,3 +1,5 @@
+//! Mental health grader module.
+
 use super::mental_health_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, phq9_answered_count, gad7_answered_count, phq9_total, gad7_total};

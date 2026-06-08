@@ -1,3 +1,5 @@
+//! Mfs rules module.
+
 // Morse Fall Scale (MFS) item registry and ancillary rule registry.
 //
 // The MFS is a six-item bedside instrument that produces a total score in
@@ -19,9 +21,12 @@
 
 use super::types::{AssessmentData, MorseFallScale};
 
+/// Mfs option.
 #[derive(Debug, Clone)]
 pub struct MfsOption {
+    /// Score.
     pub score: i32,
+    /// Label.
     pub label: &'static str,
 }
 
@@ -29,13 +34,20 @@ pub struct MfsOption {
 /// out of the `MorseFallScale` struct.
 pub type MfsFieldSelector = fn(&MorseFallScale) -> Option<i32>;
 
+/// Mfs item.
 #[derive(Clone)]
 pub struct MfsItem {
+    /// ID.
     pub id: &'static str,
+    /// Field.
     pub field: &'static str,
+    /// Field get.
     pub field_get: MfsFieldSelector,
+    /// Label.
     pub label: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Options.
     pub options: &'static [MfsOption],
 }
 
@@ -71,6 +83,7 @@ const MENTAL_STATUS_OPTIONS: &[MfsOption] = &[
     MfsOption { score: 15, label: "Forgets / overestimates own ability" },
 ];
 
+/// Mfs items.
 pub fn mfs_items() -> Vec<MfsItem> {
     vec![
         MfsItem {
@@ -129,31 +142,38 @@ pub fn mfs_items() -> Vec<MfsItem> {
 // and drive both the Critical-override and the flag detection module.
 // ----------------------------------------------------------------------
 
+/// Is anticoagulated.
 pub fn is_anticoagulated(d: &AssessmentData) -> bool {
     d.medication_review.anticoagulants == "yes"
 }
 
+/// Has recurrent falls with injury.
 pub fn has_recurrent_falls_with_injury(d: &AssessmentData) -> bool {
     d.fall_history.recurrent_falls_with_injury == "yes"
 }
 
+/// Has recent injurious fall.
 pub fn has_recent_injurious_fall(d: &AssessmentData) -> bool {
     d.fall_history.has_fallen_in_past_year == "yes"
         && d.fall_history.most_recent_fall_injurious == "yes"
 }
 
+/// Has severe orthostatic hypotension.
 pub fn has_severe_orthostatic_hypotension(d: &AssessmentData) -> bool {
     d.mobility_gait.orthostatic_hypotension_severe == "yes"
 }
 
+/// Has dementia.
 pub fn has_dementia(d: &AssessmentData) -> bool {
     d.cognitive.dementia_diagnosis == "yes"
 }
 
+/// Hip protectors absent.
 pub fn hip_protectors_absent(d: &AssessmentData) -> bool {
     d.environmental.hip_protectors_used == "no"
 }
 
+/// Has polypharmacy.
 pub fn has_polypharmacy(d: &AssessmentData) -> bool {
     if d.medication_review.polypharmacy == "yes" {
         return true;

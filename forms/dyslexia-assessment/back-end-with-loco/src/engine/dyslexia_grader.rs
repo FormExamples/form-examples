@@ -1,3 +1,5 @@
+//! Dyslexia grader module.
+
 use super::dyslexia_rules::all_rules;
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AdditionalFlag, AssessmentData, DomainScore, GradingResult};

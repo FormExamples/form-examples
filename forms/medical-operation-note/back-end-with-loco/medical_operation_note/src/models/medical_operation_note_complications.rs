@@ -1,5 +1,8 @@
+//! Medical operation note complications module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_complications::{ActiveModel, Model, Entity};
+/// Medical operation note complications.
 pub type MedicalOperationNoteComplications = Entity;
 
 #[async_trait::async_trait]

@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::DassSeverity;
 
 /// Display label for a DASS-21 severity category.

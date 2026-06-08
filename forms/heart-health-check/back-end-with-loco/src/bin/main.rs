@@ -1,3 +1,5 @@
+//! Main module.
+
 use heart_health_check_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

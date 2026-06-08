@@ -1,12 +1,19 @@
+//! Gynecology rules module.
+
 use super::types::AssessmentData;
 use super::utils::{menopause_score, symptom_severity_score};
 
 /// A declarative gynecology assessment rule.
 pub struct GynecologyRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

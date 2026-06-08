@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 use super::types::AssessmentData;
 
 /// Calculate BMI from weight (kg) and height (cm). Returns None if either

@@ -1,13 +1,20 @@
+//! Error rules module.
+
 use super::types::AssessmentData;
 use super::utils::count_contributing_factors;
 
 /// A declarative grading rule. Each rule fires when its condition is true.
 /// Grade scale: 1 = minimal, 2 = mild, 3 = moderate, 4 = severe, 5 = critical.
 pub struct ErrorRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: i32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

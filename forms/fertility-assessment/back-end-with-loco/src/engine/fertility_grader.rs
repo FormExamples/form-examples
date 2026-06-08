@@ -1,3 +1,5 @@
+//! Fertility grader module.
+
 use super::fertility_rules::all_rules;
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, ConcernLevel, FiredRule, GradingResult};

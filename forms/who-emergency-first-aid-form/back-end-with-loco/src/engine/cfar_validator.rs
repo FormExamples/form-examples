@@ -12,6 +12,7 @@ use std::collections::BTreeMap;
 use crate::engine::cfar_rules::{cfar_rules, section_label};
 use crate::engine::types::{AssessmentData, FiredRule, SectionCompleteness, ValidationResult};
 
+/// Validate cfar.
 pub fn validate_cfar(data: &AssessmentData) -> ValidationResult {
     let mut section_map: BTreeMap<String, SectionCompleteness> = BTreeMap::new();
     let mut missing: Vec<FiredRule> = Vec::new();

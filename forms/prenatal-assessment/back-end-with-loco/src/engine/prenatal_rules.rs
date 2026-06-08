@@ -1,12 +1,19 @@
+//! Prenatal rules module.
+
 use super::types::AssessmentData;
 use super::utils::{mental_health_risk_score, obstetric_risk_score};
 
 /// A declarative prenatal risk rule.
 pub struct PrenatalRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

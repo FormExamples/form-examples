@@ -1,3 +1,5 @@
+//! Dyslexia rules module.
+
 use super::types::AssessmentData;
 
 /// A domain rule projects one of the standardised score fields (mean 100,
@@ -14,12 +16,17 @@ use super::types::AssessmentData;
 ///   DYS-008 Working memory
 ///   DYS-009 Processing speed
 pub struct DyslexiaRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> Option<i32>,
 }
 
+/// All rules.
 pub fn all_rules() -> Vec<DyslexiaRule> {
     vec![
         DyslexiaRule {

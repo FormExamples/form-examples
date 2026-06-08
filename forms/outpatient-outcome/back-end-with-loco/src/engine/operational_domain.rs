@@ -1,7 +1,12 @@
+//! Operational domain module.
+
 use super::types::{AssessmentData, DomainGrade, FiredRule};
 
+/// Operational result.
 pub struct OperationalResult {
+    /// Grade.
     pub grade: DomainGrade,
+    /// Rules.
     pub rules: Vec<FiredRule>,
 }
 

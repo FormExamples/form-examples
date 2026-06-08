@@ -1,3 +1,5 @@
+//! Mcas grader module.
+
 use super::mcas_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, collect_scored_items};

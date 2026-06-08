@@ -1,3 +1,5 @@
+//! Helper predicates and counters used by the grader.
+
 /// Band ranking — `low` < `moderate` < `high` < `critical`.
 pub fn band_rank(band: &str) -> u8 {
     match band {

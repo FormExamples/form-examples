@@ -1,3 +1,5 @@
+//! Rules module.
+
 use super::types::AssessmentData;
 use super::utils::normalize_likert_scores;
 
@@ -6,10 +8,15 @@ use super::utils::normalize_likert_scores;
 ///
 /// Severity: 1 = minor, 2 = moderate, 3 = significant, 4 = critical.
 pub struct SatisfactionRule {
+    /// ID.
     pub id: &'static str,
+    /// Domain.
     pub domain: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Severity.
     pub severity: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

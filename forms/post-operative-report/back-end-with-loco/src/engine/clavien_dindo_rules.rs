@@ -1,9 +1,16 @@
+//! Clavien dindo rules module.
+
 /// Clavien-Dindo classification rule (one per grade key).
 pub struct ClavienDindoRule {
+    /// Grade.
     pub grade: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Short label.
     pub short_label: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Order.
     pub order: i32,
 }
 

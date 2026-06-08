@@ -1,3 +1,5 @@
+//! Gi grader module.
+
 use super::gi_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, SeverityLevel};
 use super::utils::{calculate_composite_score, collect_scored_items, count_alarm_features};

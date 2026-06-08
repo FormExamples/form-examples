@@ -1,3 +1,5 @@
+//! Detection of additional flagged issues.
+
 // Prioritised flag detection for the Lifeguard Competency Verification report.
 //
 //   high   — any critical-competency failure (with reason), expired prior

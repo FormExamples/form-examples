@@ -1,3 +1,5 @@
+//! Donation rules module.
+
 use super::types::AssessmentData;
 use super::utils::calculate_age;
 
@@ -8,10 +10,15 @@ use super::utils::calculate_age;
 /// Grade 3 = moderate / significant,
 /// Grade 4 = severe / critical (typically disqualifying or contraindicated).
 pub struct DonorRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Grade.
     pub grade: u32,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

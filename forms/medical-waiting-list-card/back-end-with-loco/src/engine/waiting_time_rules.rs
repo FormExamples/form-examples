@@ -1,3 +1,5 @@
+//! Waiting time rules module.
+
 use super::priority_targets::{
     days_between, target_wait_weeks, weeks_between, APPROACHING_BREACH_WINDOW_WEEKS,
     LONG_WAIT_WEEKS, RTT_BREACH_WEEKS,
@@ -7,12 +9,19 @@ use super::types::{Card, FiredRule};
 /// The structured output of the waiting-time band classifier.
 #[derive(Debug, Clone)]
 pub struct WaitingTime {
+    /// Band.
     pub band: String,
+    /// Target wait weeks.
     pub target_wait_weeks: Option<f64>,
+    /// Days waited.
     pub days_waited: Option<i64>,
+    /// Weeks waited.
     pub weeks_waited: Option<f64>,
+    /// Days to target.
     pub days_to_target: Option<i64>,
+    /// Days to breach.
     pub days_to_breach: Option<i64>,
+    /// Fired rules.
     pub fired_rules: Vec<FiredRule>,
 }
 

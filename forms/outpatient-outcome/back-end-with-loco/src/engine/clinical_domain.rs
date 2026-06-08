@@ -1,7 +1,12 @@
+//! Clinical domain module.
+
 use super::types::{AssessmentData, DomainGrade, FiredRule};
 
+/// Clinical result.
 pub struct ClinicalResult {
+    /// Grade.
     pub grade: DomainGrade,
+    /// Rules.
     pub rules: Vec<FiredRule>,
 }
 

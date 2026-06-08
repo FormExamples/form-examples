@@ -1,3 +1,5 @@
+//! Flags module.
+
 use crate::scoring::types::{
     AdditionalFlag, AgileConsultingScorecardAssessment, FlagCategory, FlagPriority,
 };

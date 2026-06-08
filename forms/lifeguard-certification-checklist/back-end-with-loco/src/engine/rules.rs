@@ -1,3 +1,5 @@
+//! Rules module.
+
 // RLSS UK NPLQ / ILSF Lifeguard Competency Verification rules (declarative).
 //
 // Each rule maps a single observed competency to a TriState value:
@@ -14,12 +16,19 @@ use super::utils::{compression_depth_in_range, compression_rate_in_range, swim50
 
 /// A declarative lifeguard rule.
 pub struct LifeguardRule {
+    /// ID.
     pub id: &'static str,
+    /// Step.
     pub step: u32,
+    /// Category.
     pub category: &'static str,
+    /// Label.
     pub label: &'static str,
+    /// Critical.
     pub critical: bool,
+    /// Default expectation.
     pub default_expectation: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> TriState,
 }
 

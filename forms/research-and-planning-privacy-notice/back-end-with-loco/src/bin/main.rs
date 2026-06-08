@@ -1,3 +1,5 @@
+//! Main module.
+
 use loco_rs::cli;
 use migration::Migrator;
 use research_and_planning_privacy_notice_loco_crate::app::App;

@@ -1,3 +1,5 @@
+//! Main module.
+
 use medical_records_release_loco_crate::app::App;
 use loco_rs::cli;
 use migration::Migrator;

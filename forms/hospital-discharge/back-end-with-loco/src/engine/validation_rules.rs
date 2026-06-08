@@ -1,13 +1,20 @@
+//! Validation rules module.
+
 use super::types::AssessmentData;
 use super::utils::non_empty;
 
 /// A declarative NICE NG27 validation rule. Each rule reports whether the
 /// corresponding mandatory or optional field is satisfied.
 pub struct ValidationRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Mandatory.
     pub mandatory: bool,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

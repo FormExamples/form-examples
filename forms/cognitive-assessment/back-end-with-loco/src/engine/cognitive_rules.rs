@@ -1,12 +1,19 @@
+//! Cognitive rules module.
+
 use super::types::AssessmentData;
 use super::utils::{calculate_mmse_score, orientation_score, recall_score, attention_score, functional_score};
 
 /// A declarative cognitive concern rule.
 pub struct CognitiveRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Concern level.
     pub concern_level: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> bool,
 }
 

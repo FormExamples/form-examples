@@ -1,12 +1,18 @@
+//! Downloader module.
+
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Download worker.
 pub struct DownloadWorker {
+    /// Ctx.
     pub ctx: AppContext,
 }
 
+/// Download worker args.
 #[derive(Deserialize, Debug, Serialize)]
 pub struct DownloadWorkerArgs {
+    /// User guid.
     pub user_guid: String,
 }
 

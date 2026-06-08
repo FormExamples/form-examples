@@ -1,3 +1,5 @@
+//! Discharge validator module.
+
 use super::flagged_issues::detect_additional_flags;
 use super::types::{AssessmentData, CompletenessLevel, FiredRule, GradingResult};
 use super::validation_rules::all_rules;

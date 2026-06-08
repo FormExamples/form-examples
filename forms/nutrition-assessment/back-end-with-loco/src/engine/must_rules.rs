@@ -1,3 +1,5 @@
+//! Must rules module.
+
 use super::types::AssessmentData;
 
 /// Malnutrition Universal Screening Tool (MUST) scoring rule. Each rule
@@ -11,9 +13,13 @@ use super::types::AssessmentData;
 /// `evaluate` returns `-1` when the step is unanswered (so the grader can
 /// distinguish "not answered yet" from "answered with score 0").
 pub struct MustRule {
+    /// ID.
     pub id: &'static str,
+    /// Category.
     pub category: &'static str,
+    /// Description.
     pub description: &'static str,
+    /// Evaluate.
     pub evaluate: fn(&AssessmentData) -> i32,
 }
 

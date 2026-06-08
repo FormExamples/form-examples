@@ -1,5 +1,8 @@
+//! Medical operation note specimens module.
+
 use sea_orm::entity::prelude::*;
 pub use super::_entities::medical_operation_note_specimens::{ActiveModel, Model, Entity};
+/// Medical operation note specimens.
 pub type MedicalOperationNoteSpecimens = Entity;
 
 #[async_trait::async_trait]

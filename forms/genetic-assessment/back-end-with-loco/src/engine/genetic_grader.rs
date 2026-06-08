@@ -1,3 +1,5 @@
+//! Genetic grader module.
+
 use super::genetic_rules::all_rules;
 use super::types::{AssessmentData, FiredRule, RiskLevel};
 
