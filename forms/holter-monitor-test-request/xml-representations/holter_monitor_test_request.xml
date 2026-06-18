@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE holter_monitor_test_request SYSTEM "holter_monitor_test_request.dtd">
+<holter_monitor_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<monitor_type>24-hour</monitor_type>
+<primary_indication>palpitations</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<symptom_palpitations>true</symptom_palpitations>
+<symptom_syncope>true</symptom_syncope>
+<symptom_presyncope>true</symptom_presyncope>
+<symptom_breathlessness>true</symptom_breathlessness>
+<symptom_frequency>daily</symptom_frequency>
+<known_arrhythmia>none</known_arrhythmia>
+<recent_stroke_tia>true</recent_stroke_tia>
+<relevant_medications>Paracetamol</relevant_medications>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</holter_monitor_test_request>

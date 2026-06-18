@@ -1,0 +1,101 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: holter_monitor_test_request
+
+syntax = "proto3";
+
+package form_examples.holter_monitor_test_request;
+
+enum HolterMonitorTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum HolterMonitorTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum HolterMonitorTestRequestMonitorTypeEnum {
+  MONITORTYPE_UNSPECIFIED = 0;
+  MONITORTYPE_V_24_HOUR = 1;  // 24-hour
+  MONITORTYPE_V_48_HOUR = 2;  // 48-hour
+  MONITORTYPE_V_7_DAY = 3;  // 7-day
+  MONITORTYPE_V_14_DAY = 4;  // 14-day
+  MONITORTYPE_EVENT_RECORDER = 5;  // event-recorder
+  MONITORTYPE_IMPLANTABLE_LOOP_RECORDER = 6;  // implantable-loop-recorder
+  MONITORTYPE_OTHER = 7;  // other
+}
+
+enum HolterMonitorTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_PALPITATIONS = 1;  // palpitations
+  PRIMARYINDICATION_SUSPECTED_ARRHYTHMIA = 2;  // suspected-arrhythmia
+  PRIMARYINDICATION_SYNCOPE = 3;  // syncope
+  PRIMARYINDICATION_ATRIAL_FIBRILLATION_DETECTION = 4;  // atrial-fibrillation-detection
+  PRIMARYINDICATION_POST_STROKE_AF_SCREEN = 5;  // post-stroke-af-screen
+  PRIMARYINDICATION_RATE_CONTROL_ASSESSMENT = 6;  // rate-control-assessment
+  PRIMARYINDICATION_QT_MONITORING = 7;  // qt-monitoring
+  PRIMARYINDICATION_PACEMAKER_CHECK = 8;  // pacemaker-check
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum HolterMonitorTestRequestSymptomFrequencyEnum {
+  SYMPTOMFREQUENCY_UNSPECIFIED = 0;
+  SYMPTOMFREQUENCY_DAILY = 1;  // daily
+  SYMPTOMFREQUENCY_WEEKLY = 2;  // weekly
+  SYMPTOMFREQUENCY_MONTHLY = 3;  // monthly
+  SYMPTOMFREQUENCY_RARE = 4;  // rare
+}
+
+enum HolterMonitorTestRequestKnownArrhythmiaEnum {
+  KNOWNARRHYTHMIA_UNSPECIFIED = 0;
+  KNOWNARRHYTHMIA_NONE = 1;  // none
+  KNOWNARRHYTHMIA_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  KNOWNARRHYTHMIA_SVT = 3;  // svt
+  KNOWNARRHYTHMIA_VT = 4;  // vt
+  KNOWNARRHYTHMIA_HEART_BLOCK = 5;  // heart-block
+  KNOWNARRHYTHMIA_OTHER = 6;  // other
+}
+
+enum HolterMonitorTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message HolterMonitorTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HolterMonitorTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  HolterMonitorTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  HolterMonitorTestRequestMonitorTypeEnum monitor_type = 12;  // VARCHAR(30)
+  HolterMonitorTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_palpitations = 16;  // BOOLEAN
+  bool symptom_syncope = 17;  // BOOLEAN
+  bool symptom_presyncope = 18;  // BOOLEAN
+  bool symptom_breathlessness = 19;  // BOOLEAN
+  HolterMonitorTestRequestSymptomFrequencyEnum symptom_frequency = 20;  // VARCHAR(15)
+  HolterMonitorTestRequestKnownArrhythmiaEnum known_arrhythmia = 21;  // VARCHAR(30)
+  bool recent_stroke_tia = 22;  // BOOLEAN
+  string relevant_medications = 23;  // VARCHAR(1000) — max 1000 chars
+  HolterMonitorTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

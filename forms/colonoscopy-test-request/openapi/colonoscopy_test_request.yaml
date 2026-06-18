@@ -1,0 +1,312 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: colonoscopy_test_request
+openapi: 3.1.0
+info:
+  title: Colonoscopy Test Request — ColonoscopyTestRequest
+  version: 1.0.0
+  description: Lower-GI endoscopy (colonoscopy) request (referral). Captures the requested procedure, the clinical indication and question, lower-GI red flags, FIT and haemoglobin results, anticoagulant / antiplatelet medication, bowel-preparation fitness, renal function, ASA grade, and triage urgency.
+paths:
+  /colonoscopy-test-requests:
+    get:
+      summary: List ColonoscopyTestRequest records
+      operationId: listColonoscopyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ColonoscopyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ColonoscopyTestRequest"
+    post:
+      summary: Create a new ColonoscopyTestRequest
+      operationId: createColonoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColonoscopyTestRequest"
+      responses:
+        "201":
+          description: The newly created ColonoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColonoscopyTestRequest"
+        "400":
+          description: Validation error
+  /colonoscopy-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ColonoscopyTestRequest by id
+      operationId: getColonoscopyTestRequest
+      responses:
+        "200":
+          description: The requested ColonoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColonoscopyTestRequest"
+        "404":
+          description: ColonoscopyTestRequest not found
+    patch:
+      summary: Update an existing ColonoscopyTestRequest
+      operationId: updateColonoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ColonoscopyTestRequest"
+      responses:
+        "200":
+          description: The updated ColonoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ColonoscopyTestRequest"
+        "404":
+          description: ColonoscopyTestRequest not found
+    delete:
+      summary: Soft-delete a ColonoscopyTestRequest
+      operationId: deleteColonoscopyTestRequest
+      responses:
+        "204":
+          description: ColonoscopyTestRequest deleted
+        "404":
+          description: ColonoscopyTestRequest not found
+components:
+  schemas:
+    ColonoscopyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the procedure is requested to be performed.
+        procedure:
+          type: string
+          enum:
+            - colonoscopy
+            - flexible-sigmoidoscopy
+            - ct-colonography
+            - other
+            - ""
+          description: "Requested procedure: colonoscopy, flexible-sigmoidoscopy, ct-colonography, other."
+        primary_indication:
+          type: string
+          enum:
+            - rectal-bleeding
+            - change-in-bowel-habit
+            - iron-deficiency-anaemia
+            - positive-fit
+            - abdominal-mass
+            - ibd-diagnosis
+            - ibd-surveillance
+            - polyp-surveillance
+            - crc-screening
+            - abnormal-imaging
+            - chronic-diarrhoea
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring and cancer-pathway triage.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the procedure should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and GI history.
+        red_flag_weight_loss:
+          type: boolean
+          description: Whether the patient reports unexplained weight loss (lower-GI red flag).
+        red_flag_anaemia:
+          type: boolean
+          description: Whether the patient has iron-deficiency anaemia (lower-GI red flag).
+        red_flag_abdominal_mass:
+          type: boolean
+          description: Whether the patient has a palpable abdominal or rectal mass (lower-GI red flag).
+        red_flag_rectal_bleeding:
+          type: boolean
+          description: Whether the patient reports unexplained rectal bleeding (lower-GI red flag).
+        fit_result_ug_g:
+          type: number
+          format: double
+          description: Quantitative faecal immunochemical test (FIT) result in micrograms of haemoglobin per gram of faeces; >= 10 triggers the suspected-cancer pathway (NICE DG56).
+        haemoglobin_g_l:
+          type: number
+          format: double
+          description: Haemoglobin concentration in g/L, used for anaemia assessment.
+        taking_anticoagulant:
+          type: boolean
+          description: Whether the patient is taking an anticoagulant (e.g. warfarin, DOAC).
+        anticoagulant_agent:
+          type: string
+          maxLength: 100
+          description: Name of the anticoagulant agent, if any.
+        taking_antiplatelet:
+          type: boolean
+          description: Whether the patient is taking an antiplatelet agent (e.g. clopidogrel, aspirin).
+        antiplatelet_agent:
+          type: string
+          maxLength: 100
+          description: Name of the antiplatelet agent, if any.
+        diabetes_medication:
+          type: string
+          enum:
+            - none
+            - oral
+            - insulin
+            - ""
+          description: "Diabetes medication category affecting bowel-prep planning: none, oral, insulin."
+        fit_for_bowel_prep:
+          type: boolean
+          description: Whether the patient is assessed as fit to take bowel preparation.
+        bowel_prep_agent:
+          type: string
+          maxLength: 100
+          description: Planned bowel-preparation agent, if any.
+        chronic_kidney_disease:
+          type: boolean
+          description: Whether the patient has chronic kidney disease, affecting bowel-prep choice.
+        egfr_ml_min:
+          type: number
+          format: double
+          description: Estimated glomerular filtration rate (eGFR) in mL/min/1.73m2, affecting bowel-prep choice.
+        asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - ""
+          description: ASA physical-status classification (I-V).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - procedure
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - red_flag_weight_loss
+        - red_flag_anaemia
+        - red_flag_abdominal_mass
+        - red_flag_rectal_bleeding
+        - taking_anticoagulant
+        - anticoagulant_agent
+        - taking_antiplatelet
+        - antiplatelet_agent
+        - diabetes_medication
+        - fit_for_bowel_prep
+        - bowel_prep_agent
+        - chronic_kidney_disease
+        - asa_grade
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Lower-GI endoscopy (colonoscopy) request (referral). Captures the requested procedure, the clinical indication and question, lower-GI red flags, FIT and haemoglobin results, anticoagulant / antiplatelet medication, bowel-preparation fitness, renal function, ASA grade, and triage urgency.

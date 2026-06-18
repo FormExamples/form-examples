@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cardiac_stress_test_request_grade SYSTEM "cardiac_stress_test_request_grade.dtd">
+<cardiac_stress_test_request_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<cardiac_stress_test_request_id>770e8400-e29b-41d4-a716-446655440002</cardiac_stress_test_request_id>
+<appropriateness_score>5</appropriateness_score>
+<appropriateness_band>usually-appropriate</appropriateness_band>
+<contraindication_band>ok</contraindication_band>
+<completeness_percent>1</completeness_percent>
+<triage_tier>routine</triage_tier>
+<target_timeframe></target_timeframe>
+<recommendation>accept</recommendation>
+<clinician_notes>Example text.</clinician_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</cardiac_stress_test_request_grade>

@@ -1,0 +1,92 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: lumbar_puncture_test_request
+
+syntax = "proto3";
+
+package form_examples.lumbar_puncture_test_request;
+
+enum LumbarPunctureTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum LumbarPunctureTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum LumbarPunctureTestRequestProcedureIntentEnum {
+  PROCEDUREINTENT_UNSPECIFIED = 0;
+  PROCEDUREINTENT_DIAGNOSTIC = 1;  // diagnostic
+  PROCEDUREINTENT_THERAPEUTIC = 2;  // therapeutic
+  PROCEDUREINTENT_OTHER = 3;  // other
+}
+
+enum LumbarPunctureTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_MENINGITIS = 1;  // suspected-meningitis
+  PRIMARYINDICATION_SUSPECTED_SUBARACHNOID_HAEMORRHAGE = 2;  // suspected-subarachnoid-haemorrhage
+  PRIMARYINDICATION_SUSPECTED_MULTIPLE_SCLEROSIS = 3;  // suspected-multiple-sclerosis
+  PRIMARYINDICATION_SUSPECTED_GUILLAIN_BARRE = 4;  // suspected-guillain-barre
+  PRIMARYINDICATION_IDIOPATHIC_INTRACRANIAL_HYPERTENSION = 5;  // idiopathic-intracranial-hypertension
+  PRIMARYINDICATION_SUSPECTED_CNS_MALIGNANCY = 6;  // suspected-cns-malignancy
+  PRIMARYINDICATION_CNS_INFECTION = 7;  // cns-infection
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum LumbarPunctureTestRequestCtHeadStatusEnum {
+  CTHEADSTATUS_UNSPECIFIED = 0;
+  CTHEADSTATUS_DONE_NORMAL = 1;  // done-normal
+  CTHEADSTATUS_DONE_ABNORMAL = 2;  // done-abnormal
+  CTHEADSTATUS_NOT_REQUIRED = 3;  // not-required
+  CTHEADSTATUS_AWAITED = 4;  // awaited
+}
+
+enum LumbarPunctureTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message LumbarPunctureTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  LumbarPunctureTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  LumbarPunctureTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  LumbarPunctureTestRequestProcedureIntentEnum procedure_intent = 12;  // VARCHAR(20)
+  LumbarPunctureTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool suspected_raised_intracranial_pressure = 16;  // BOOLEAN
+  bool focal_neurological_signs = 17;  // BOOLEAN
+  bool reduced_consciousness = 18;  // BOOLEAN
+  LumbarPunctureTestRequestCtHeadStatusEnum ct_head_status = 19;  // VARCHAR(20)
+  bool taking_anticoagulant = 20;  // BOOLEAN
+  string anticoagulant_agent = 21;  // VARCHAR(255) — max 255 chars
+  bool taking_antiplatelet = 22;  // BOOLEAN
+  string antiplatelet_agent = 23;  // VARCHAR(255) — max 255 chars
+  double inr = 24;  // NUMERIC(4,1) — numeric(4,1)
+  double platelet_count = 25;  // NUMERIC(6,1) — numeric(6,1)
+  bool bleeding_disorder = 26;  // BOOLEAN
+  bool local_skin_infection = 27;  // BOOLEAN
+  bool opening_pressure_required = 28;  // BOOLEAN
+  LumbarPunctureTestRequestUrgencyEnum urgency = 29;  // VARCHAR(15)
+  string supervising_consultant = 30;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 31;  // VARCHAR(255) — max 255 chars
+  string notes = 32;  // VARCHAR(1000) — max 1000 chars
+}

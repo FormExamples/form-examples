@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cardiac_stress_test_request SYSTEM "cardiac_stress_test_request.dtd">
+<cardiac_stress_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<test_type>exercise-treadmill-ecg</test_type>
+<primary_indication>suspected-angina</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<symptom_chest_pain>true</symptom_chest_pain>
+<symptom_breathlessness>true</symptom_breathlessness>
+<symptom_palpitations>true</symptom_palpitations>
+<able_to_exercise>true</able_to_exercise>
+<resting_ecg_findings>Example text.</resting_ecg_findings>
+<known_coronary_artery_disease>true</known_coronary_artery_disease>
+<recent_acute_coronary_syndrome>true</recent_acute_coronary_syndrome>
+<aortic_stenosis>none</aortic_stenosis>
+<uncontrolled_hypertension>true</uncontrolled_hypertension>
+<beta_blocker>true</beta_blocker>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</cardiac_stress_test_request>

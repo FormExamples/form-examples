@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: lumbar_puncture_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Lumbar Puncture Test Request — LumbarPunctureTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+paths:
+  /lumbar-puncture-test-request-grade-rules:
+    get:
+      summary: List LumbarPunctureTestRequestGradeRule records
+      operationId: listLumbarPunctureTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of LumbarPunctureTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+    post:
+      summary: Create a new LumbarPunctureTestRequestGradeRule
+      operationId: createLumbarPunctureTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created LumbarPunctureTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /lumbar-puncture-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LumbarPunctureTestRequestGradeRule by id
+      operationId: getLumbarPunctureTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested LumbarPunctureTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+        "404":
+          description: LumbarPunctureTestRequestGradeRule not found
+    patch:
+      summary: Update an existing LumbarPunctureTestRequestGradeRule
+      operationId: updateLumbarPunctureTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated LumbarPunctureTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestRequestGradeRule"
+        "404":
+          description: LumbarPunctureTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a LumbarPunctureTestRequestGradeRule
+      operationId: deleteLumbarPunctureTestRequestGradeRule
+      responses:
+        "204":
+          description: LumbarPunctureTestRequestGradeRule deleted
+        "404":
+          description: LumbarPunctureTestRequestGradeRule not found
+components:
+  schemas:
+    LumbarPunctureTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        lumbar_puncture_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-MENINGITIS-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - safety
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, safety, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - lumbar_puncture_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.

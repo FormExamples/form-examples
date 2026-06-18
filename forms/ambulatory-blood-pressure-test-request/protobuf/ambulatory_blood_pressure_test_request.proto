@@ -1,0 +1,79 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: ambulatory_blood_pressure_test_request
+
+syntax = "proto3";
+
+package form_examples.ambulatory_blood_pressure_test_request;
+
+enum AmbulatoryBloodPressureTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum AmbulatoryBloodPressureTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum AmbulatoryBloodPressureTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_V_24_HOUR_ABPM = 1;  // 24-hour-abpm
+  TESTTYPE_HOME_BLOOD_PRESSURE_MONITORING = 2;  // home-blood-pressure-monitoring
+  TESTTYPE_OTHER = 3;  // other
+}
+
+enum AmbulatoryBloodPressureTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_DIAGNOSE_HYPERTENSION = 1;  // diagnose-hypertension
+  PRIMARYINDICATION_WHITE_COAT_HYPERTENSION = 2;  // white-coat-hypertension
+  PRIMARYINDICATION_MASKED_HYPERTENSION = 3;  // masked-hypertension
+  PRIMARYINDICATION_RESISTANT_HYPERTENSION = 4;  // resistant-hypertension
+  PRIMARYINDICATION_TREATMENT_MONITORING = 5;  // treatment-monitoring
+  PRIMARYINDICATION_HYPOTENSION_SYMPTOMS = 6;  // hypotension-symptoms
+  PRIMARYINDICATION_PREGNANCY_HYPERTENSION = 7;  // pregnancy-hypertension
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum AmbulatoryBloodPressureTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message AmbulatoryBloodPressureTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  AmbulatoryBloodPressureTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  AmbulatoryBloodPressureTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  AmbulatoryBloodPressureTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  AmbulatoryBloodPressureTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  int32 clinic_bp_systolic = 16;  // INTEGER
+  int32 clinic_bp_diastolic = 17;  // INTEGER
+  bool on_antihypertensives = 18;  // BOOLEAN
+  string current_medications = 19;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_dizziness = 20;  // BOOLEAN
+  bool symptom_headache = 21;  // BOOLEAN
+  bool atrial_fibrillation = 22;  // BOOLEAN
+  bool pregnant = 23;  // BOOLEAN
+  AmbulatoryBloodPressureTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

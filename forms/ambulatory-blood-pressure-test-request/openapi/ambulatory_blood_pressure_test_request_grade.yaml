@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: ambulatory_blood_pressure_test_request_grade
+openapi: 3.1.0
+info:
+  title: Ambulatory Blood Pressure Test Request — AmbulatoryBloodPressureTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (NICE NG136 1-9), suitability for oscillometric ABPM, request completeness, and triage priority."
+paths:
+  /ambulatory-blood-pressure-test-request-grades:
+    get:
+      summary: List AmbulatoryBloodPressureTestRequestGrade records
+      operationId: listAmbulatoryBloodPressureTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AmbulatoryBloodPressureTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+    post:
+      summary: Create a new AmbulatoryBloodPressureTestRequestGrade
+      operationId: createAmbulatoryBloodPressureTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created AmbulatoryBloodPressureTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+        "400":
+          description: Validation error
+  /ambulatory-blood-pressure-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AmbulatoryBloodPressureTestRequestGrade by id
+      operationId: getAmbulatoryBloodPressureTestRequestGrade
+      responses:
+        "200":
+          description: The requested AmbulatoryBloodPressureTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+        "404":
+          description: AmbulatoryBloodPressureTestRequestGrade not found
+    patch:
+      summary: Update an existing AmbulatoryBloodPressureTestRequestGrade
+      operationId: updateAmbulatoryBloodPressureTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+      responses:
+        "200":
+          description: The updated AmbulatoryBloodPressureTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequestGrade"
+        "404":
+          description: AmbulatoryBloodPressureTestRequestGrade not found
+    delete:
+      summary: Soft-delete a AmbulatoryBloodPressureTestRequestGrade
+      operationId: deleteAmbulatoryBloodPressureTestRequestGrade
+      responses:
+        "204":
+          description: AmbulatoryBloodPressureTestRequestGrade deleted
+        "404":
+          description: AmbulatoryBloodPressureTestRequestGrade not found
+components:
+  schemas:
+    AmbulatoryBloodPressureTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        ambulatory_blood_pressure_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9) grounded in NICE NG136 (ABPM to confirm clinic BP >=140/90).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        suitability_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - limited
+            - ""
+          description: "Suitability of oscillometric ABPM given accuracy factors (atrial fibrillation, arm size): ok, caution, limited."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the test implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - ambulatory_blood_pressure_test_request_id
+        - appropriateness_band
+        - suitability_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (NICE NG136 1-9), suitability for oscillometric ABPM, request completeness, and triage priority."

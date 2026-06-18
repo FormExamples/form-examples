@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: holter_monitor_test_request_grade
+openapi: 3.1.0
+info:
+  title: Holter Monitor Test Request — HolterMonitorTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (AHA/ACC ambulatory ECG 1-9), urgency / triage, request completeness, and clinical priority."
+paths:
+  /holter-monitor-test-request-grades:
+    get:
+      summary: List HolterMonitorTestRequestGrade records
+      operationId: listHolterMonitorTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HolterMonitorTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+    post:
+      summary: Create a new HolterMonitorTestRequestGrade
+      operationId: createHolterMonitorTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created HolterMonitorTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+        "400":
+          description: Validation error
+  /holter-monitor-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HolterMonitorTestRequestGrade by id
+      operationId: getHolterMonitorTestRequestGrade
+      responses:
+        "200":
+          description: The requested HolterMonitorTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+        "404":
+          description: HolterMonitorTestRequestGrade not found
+    patch:
+      summary: Update an existing HolterMonitorTestRequestGrade
+      operationId: updateHolterMonitorTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+      responses:
+        "200":
+          description: The updated HolterMonitorTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequestGrade"
+        "404":
+          description: HolterMonitorTestRequestGrade not found
+    delete:
+      summary: Soft-delete a HolterMonitorTestRequestGrade
+      operationId: deleteHolterMonitorTestRequestGrade
+      responses:
+        "204":
+          description: HolterMonitorTestRequestGrade deleted
+        "404":
+          description: HolterMonitorTestRequestGrade not found
+components:
+  schemas:
+    HolterMonitorTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        holter_monitor_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: AHA/ACC ambulatory ECG appropriateness score (1-9), matching indication and symptom frequency to monitor type.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the monitoring implied by the triage tier.
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        priority_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Clinical priority band: low, moderate, high."
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - holter_monitor_test_request_id
+        - appropriateness_band
+        - triage_tier
+        - target_timeframe
+        - priority_band
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (AHA/ACC ambulatory ECG 1-9), urgency / triage, request completeness, and clinical priority."

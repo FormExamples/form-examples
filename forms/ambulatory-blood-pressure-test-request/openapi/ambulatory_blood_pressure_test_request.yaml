@@ -1,0 +1,260 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: ambulatory_blood_pressure_test_request
+openapi: 3.1.0
+info:
+  title: Ambulatory Blood Pressure Test Request — AmbulatoryBloodPressureTestRequest
+  version: 1.0.0
+  description: Ambulatory blood pressure monitoring (ABPM) test request (referral). Captures the requested test, the clinical indication and question, clinic blood pressure, medication, symptoms and accuracy factors, and triage urgency.
+paths:
+  /ambulatory-blood-pressure-test-requests:
+    get:
+      summary: List AmbulatoryBloodPressureTestRequest records
+      operationId: listAmbulatoryBloodPressureTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AmbulatoryBloodPressureTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+    post:
+      summary: Create a new AmbulatoryBloodPressureTestRequest
+      operationId: createAmbulatoryBloodPressureTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+      responses:
+        "201":
+          description: The newly created AmbulatoryBloodPressureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+        "400":
+          description: Validation error
+  /ambulatory-blood-pressure-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AmbulatoryBloodPressureTestRequest by id
+      operationId: getAmbulatoryBloodPressureTestRequest
+      responses:
+        "200":
+          description: The requested AmbulatoryBloodPressureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+        "404":
+          description: AmbulatoryBloodPressureTestRequest not found
+    patch:
+      summary: Update an existing AmbulatoryBloodPressureTestRequest
+      operationId: updateAmbulatoryBloodPressureTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+      responses:
+        "200":
+          description: The updated AmbulatoryBloodPressureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbulatoryBloodPressureTestRequest"
+        "404":
+          description: AmbulatoryBloodPressureTestRequest not found
+    delete:
+      summary: Soft-delete a AmbulatoryBloodPressureTestRequest
+      operationId: deleteAmbulatoryBloodPressureTestRequest
+      responses:
+        "204":
+          description: AmbulatoryBloodPressureTestRequest deleted
+        "404":
+          description: AmbulatoryBloodPressureTestRequest not found
+components:
+  schemas:
+    AmbulatoryBloodPressureTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test is requested to be performed.
+        test_type:
+          type: string
+          enum:
+            - 24-hour-abpm
+            - home-blood-pressure-monitoring
+            - other
+            - ""
+          description: "Requested test type: 24-hour-abpm, home-blood-pressure-monitoring, other."
+        primary_indication:
+          type: string
+          enum:
+            - diagnose-hypertension
+            - white-coat-hypertension
+            - masked-hypertension
+            - resistant-hypertension
+            - treatment-monitoring
+            - hypotension-symptoms
+            - pregnancy-hypertension
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the test should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, cardiovascular, and medication history.
+        clinic_bp_systolic:
+          type: integer
+          format: int32
+          description: Most recent clinic systolic blood pressure in mmHg, used for appropriateness and triage.
+        clinic_bp_diastolic:
+          type: integer
+          format: int32
+          description: Most recent clinic diastolic blood pressure in mmHg, used for appropriateness and triage.
+        on_antihypertensives:
+          type: boolean
+          description: Whether the patient is currently taking antihypertensive medication.
+        current_medications:
+          type: string
+          maxLength: 1000
+          description: Free-text list of the patient's current medications.
+        symptom_dizziness:
+          type: boolean
+          description: Whether the patient reports dizziness (possible hypotension symptom).
+        symptom_headache:
+          type: boolean
+          description: Whether the patient reports headache.
+        atrial_fibrillation:
+          type: boolean
+          description: Whether the patient has atrial fibrillation, which reduces oscillometric measurement accuracy.
+        pregnant:
+          type: boolean
+          description: Whether the patient is pregnant, affecting thresholds and device validation.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - test_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - on_antihypertensives
+        - current_medications
+        - symptom_dizziness
+        - symptom_headache
+        - atrial_fibrillation
+        - pregnant
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Ambulatory blood pressure monitoring (ABPM) test request (referral). Captures the requested test, the clinical indication and question, clinic blood pressure, medication, symptoms and accuracy factors, and triage urgency.

@@ -1,0 +1,93 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: cardiac_stress_test_request
+
+syntax = "proto3";
+
+package form_examples.cardiac_stress_test_request;
+
+enum CardiacStressTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum CardiacStressTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CardiacStressTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_EXERCISE_TREADMILL_ECG = 1;  // exercise-treadmill-ecg
+  TESTTYPE_STRESS_ECHO = 2;  // stress-echo
+  TESTTYPE_DOBUTAMINE_STRESS_ECHO = 3;  // dobutamine-stress-echo
+  TESTTYPE_MYOCARDIAL_PERFUSION_SPECT = 4;  // myocardial-perfusion-spect
+  TESTTYPE_STRESS_CARDIAC_MRI = 5;  // stress-cardiac-mri
+  TESTTYPE_OTHER = 6;  // other
+}
+
+enum CardiacStressTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_ANGINA = 1;  // suspected-angina
+  PRIMARYINDICATION_KNOWN_CAD_ASSESSMENT = 2;  // known-cad-assessment
+  PRIMARYINDICATION_RISK_STRATIFICATION_POST_MI = 3;  // risk-stratification-post-mi
+  PRIMARYINDICATION_PRE_OPERATIVE_CARDIAC = 4;  // pre-operative-cardiac
+  PRIMARYINDICATION_EXERCISE_TOLERANCE = 5;  // exercise-tolerance
+  PRIMARYINDICATION_ARRHYTHMIA_EVALUATION = 6;  // arrhythmia-evaluation
+  PRIMARYINDICATION_VALVE_DISEASE = 7;  // valve-disease
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum CardiacStressTestRequestAorticStenosisEnum {
+  AORTICSTENOSIS_UNSPECIFIED = 0;
+  AORTICSTENOSIS_NONE = 1;  // none
+  AORTICSTENOSIS_MILD = 2;  // mild
+  AORTICSTENOSIS_MODERATE = 3;  // moderate
+  AORTICSTENOSIS_SEVERE = 4;  // severe
+  AORTICSTENOSIS_UNKNOWN = 5;  // unknown
+}
+
+enum CardiacStressTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message CardiacStressTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CardiacStressTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CardiacStressTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  CardiacStressTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  CardiacStressTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_chest_pain = 16;  // BOOLEAN
+  bool symptom_breathlessness = 17;  // BOOLEAN
+  bool symptom_palpitations = 18;  // BOOLEAN
+  bool able_to_exercise = 19;  // BOOLEAN
+  string resting_ecg_findings = 20;  // VARCHAR(1000) — max 1000 chars
+  bool known_coronary_artery_disease = 21;  // BOOLEAN
+  bool recent_acute_coronary_syndrome = 22;  // BOOLEAN
+  CardiacStressTestRequestAorticStenosisEnum aortic_stenosis = 23;  // VARCHAR(15)
+  bool uncontrolled_hypertension = 24;  // BOOLEAN
+  bool beta_blocker = 25;  // BOOLEAN
+  CardiacStressTestRequestUrgencyEnum urgency = 26;  // VARCHAR(15)
+  string supervising_consultant = 27;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 28;  // VARCHAR(255) — max 255 chars
+  string notes = 29;  // VARCHAR(1000) — max 1000 chars
+}

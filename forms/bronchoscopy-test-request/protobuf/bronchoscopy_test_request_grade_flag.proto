@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: bronchoscopy_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.bronchoscopy_test_request;
+
+enum BronchoscopyTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_CANCER_2WW = 1;  // suspected-cancer-2ww
+  CATEGORY_MASSIVE_HAEMOPTYSIS_EMERGENCY = 2;  // massive-haemoptysis-emergency
+  CATEGORY_HIGH_BLEEDING_RISK_ANTICOAG = 3;  // high-bleeding-risk-anticoag
+  CATEGORY_HYPOXIA = 4;  // hypoxia
+  CATEGORY_ASA_IV = 5;  // asa-iv
+  CATEGORY_MISSING_INDICATION = 6;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 7;  // missing-clinical-question
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum BronchoscopyTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message BronchoscopyTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string bronchoscopy_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  BronchoscopyTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  BronchoscopyTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

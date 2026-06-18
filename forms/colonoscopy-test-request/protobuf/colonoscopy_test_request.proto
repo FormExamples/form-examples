@@ -1,0 +1,109 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: colonoscopy_test_request
+
+syntax = "proto3";
+
+package form_examples.colonoscopy_test_request;
+
+enum ColonoscopyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum ColonoscopyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum ColonoscopyTestRequestProcedureEnum {
+  PROCEDURE_UNSPECIFIED = 0;
+  PROCEDURE_COLONOSCOPY = 1;  // colonoscopy
+  PROCEDURE_FLEXIBLE_SIGMOIDOSCOPY = 2;  // flexible-sigmoidoscopy
+  PROCEDURE_CT_COLONOGRAPHY = 3;  // ct-colonography
+  PROCEDURE_OTHER = 4;  // other
+}
+
+enum ColonoscopyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_RECTAL_BLEEDING = 1;  // rectal-bleeding
+  PRIMARYINDICATION_CHANGE_IN_BOWEL_HABIT = 2;  // change-in-bowel-habit
+  PRIMARYINDICATION_IRON_DEFICIENCY_ANAEMIA = 3;  // iron-deficiency-anaemia
+  PRIMARYINDICATION_POSITIVE_FIT = 4;  // positive-fit
+  PRIMARYINDICATION_ABDOMINAL_MASS = 5;  // abdominal-mass
+  PRIMARYINDICATION_IBD_DIAGNOSIS = 6;  // ibd-diagnosis
+  PRIMARYINDICATION_IBD_SURVEILLANCE = 7;  // ibd-surveillance
+  PRIMARYINDICATION_POLYP_SURVEILLANCE = 8;  // polyp-surveillance
+  PRIMARYINDICATION_CRC_SCREENING = 9;  // crc-screening
+  PRIMARYINDICATION_ABNORMAL_IMAGING = 10;  // abnormal-imaging
+  PRIMARYINDICATION_CHRONIC_DIARRHOEA = 11;  // chronic-diarrhoea
+  PRIMARYINDICATION_OTHER = 12;  // other
+}
+
+enum ColonoscopyTestRequestDiabetesMedicationEnum {
+  DIABETESMEDICATION_UNSPECIFIED = 0;
+  DIABETESMEDICATION_NONE = 1;  // none
+  DIABETESMEDICATION_ORAL = 2;  // oral
+  DIABETESMEDICATION_INSULIN = 3;  // insulin
+}
+
+enum ColonoscopyTestRequestAsaGradeEnum {
+  ASAGRADE_UNSPECIFIED = 0;
+  ASAGRADE_I = 1;  // I
+  ASAGRADE_II = 2;  // II
+  ASAGRADE_III = 3;  // III
+  ASAGRADE_IV = 4;  // IV
+  ASAGRADE_V = 5;  // V
+}
+
+enum ColonoscopyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message ColonoscopyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  ColonoscopyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  ColonoscopyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  ColonoscopyTestRequestProcedureEnum procedure = 12;  // VARCHAR(30)
+  ColonoscopyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool red_flag_weight_loss = 16;  // BOOLEAN
+  bool red_flag_anaemia = 17;  // BOOLEAN
+  bool red_flag_abdominal_mass = 18;  // BOOLEAN
+  bool red_flag_rectal_bleeding = 19;  // BOOLEAN
+  double fit_result_ug_g = 20;  // NUMERIC(8,1) — numeric(8,1)
+  double haemoglobin_g_l = 21;  // NUMERIC(5,1) — numeric(5,1)
+  bool taking_anticoagulant = 22;  // BOOLEAN
+  string anticoagulant_agent = 23;  // VARCHAR(100) — max 100 chars
+  bool taking_antiplatelet = 24;  // BOOLEAN
+  string antiplatelet_agent = 25;  // VARCHAR(100) — max 100 chars
+  ColonoscopyTestRequestDiabetesMedicationEnum diabetes_medication = 26;  // VARCHAR(15)
+  bool fit_for_bowel_prep = 27;  // BOOLEAN
+  string bowel_prep_agent = 28;  // VARCHAR(100) — max 100 chars
+  bool chronic_kidney_disease = 29;  // BOOLEAN
+  double egfr_ml_min = 30;  // NUMERIC(5,1) — numeric(5,1)
+  ColonoscopyTestRequestAsaGradeEnum asa_grade = 31;  // VARCHAR(3)
+  ColonoscopyTestRequestUrgencyEnum urgency = 32;  // VARCHAR(15)
+  string supervising_consultant = 33;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 34;  // VARCHAR(255) — max 255 chars
+  string notes = 35;  // VARCHAR(1000) — max 1000 chars
+}

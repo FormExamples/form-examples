@@ -1,0 +1,104 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: bronchoscopy_test_request
+
+syntax = "proto3";
+
+package form_examples.bronchoscopy_test_request;
+
+enum BronchoscopyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum BronchoscopyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum BronchoscopyTestRequestProcedureEnum {
+  PROCEDURE_UNSPECIFIED = 0;
+  PROCEDURE_FLEXIBLE_BRONCHOSCOPY = 1;  // flexible-bronchoscopy
+  PROCEDURE_EBUS = 2;  // ebus
+  PROCEDURE_RIGID_BRONCHOSCOPY = 3;  // rigid-bronchoscopy
+  PROCEDURE_BRONCHOALVEOLAR_LAVAGE = 4;  // bronchoalveolar-lavage
+  PROCEDURE_OTHER = 5;  // other
+}
+
+enum BronchoscopyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_LUNG_CANCER = 1;  // suspected-lung-cancer
+  PRIMARYINDICATION_HAEMOPTYSIS = 2;  // haemoptysis
+  PRIMARYINDICATION_PERSISTENT_COUGH = 3;  // persistent-cough
+  PRIMARYINDICATION_LUNG_MASS_ON_IMAGING = 4;  // lung-mass-on-imaging
+  PRIMARYINDICATION_MEDIASTINAL_LYMPHADENOPATHY = 5;  // mediastinal-lymphadenopathy
+  PRIMARYINDICATION_INFECTION_SAMPLING = 6;  // infection-sampling
+  PRIMARYINDICATION_FOREIGN_BODY = 7;  // foreign-body
+  PRIMARYINDICATION_STRIDOR = 8;  // stridor
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum BronchoscopyTestRequestAsaGradeEnum {
+  ASAGRADE_UNSPECIFIED = 0;
+  ASAGRADE_I = 1;  // I
+  ASAGRADE_II = 2;  // II
+  ASAGRADE_III = 3;  // III
+  ASAGRADE_IV = 4;  // IV
+  ASAGRADE_V = 5;  // V
+}
+
+enum BronchoscopyTestRequestSedationEnum {
+  SEDATION_UNSPECIFIED = 0;
+  SEDATION_CONSCIOUS = 1;  // conscious
+  SEDATION_DEEP = 2;  // deep
+  SEDATION_GENERAL = 3;  // general
+}
+
+enum BronchoscopyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message BronchoscopyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  BronchoscopyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  BronchoscopyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  BronchoscopyTestRequestProcedureEnum procedure = 12;  // VARCHAR(30)
+  BronchoscopyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_haemoptysis = 16;  // BOOLEAN
+  bool symptom_cough = 17;  // BOOLEAN
+  bool symptom_breathlessness = 18;  // BOOLEAN
+  bool symptom_weight_loss = 19;  // BOOLEAN
+  string imaging_findings = 20;  // VARCHAR(1000) — max 1000 chars
+  bool taking_anticoagulant = 21;  // BOOLEAN
+  string anticoagulant_agent = 22;  // VARCHAR(255) — max 255 chars
+  bool taking_antiplatelet = 23;  // BOOLEAN
+  string antiplatelet_agent = 24;  // VARCHAR(255) — max 255 chars
+  double platelet_count = 25;  // NUMERIC(6,1) — numeric(6,1)
+  bool oxygen_dependent = 26;  // BOOLEAN
+  BronchoscopyTestRequestAsaGradeEnum asa_grade = 27;  // VARCHAR(5)
+  BronchoscopyTestRequestSedationEnum sedation = 28;  // VARCHAR(15)
+  BronchoscopyTestRequestUrgencyEnum urgency = 29;  // VARCHAR(15)
+  string supervising_consultant = 30;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 31;  // VARCHAR(255) — max 255 chars
+  string notes = 32;  // VARCHAR(1000) — max 1000 chars
+}

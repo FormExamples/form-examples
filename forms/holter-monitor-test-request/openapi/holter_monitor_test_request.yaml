@@ -1,0 +1,278 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: holter_monitor_test_request
+openapi: 3.1.0
+info:
+  title: Holter Monitor Test Request — HolterMonitorTestRequest
+  version: 1.0.0
+  description: Ambulatory ECG (Holter) monitoring request (referral). Captures the requested monitor type, primary indication and clinical question, symptoms and symptom frequency, cardiac context and red flags, relevant history and medications, and triage urgency.
+paths:
+  /holter-monitor-test-requests:
+    get:
+      summary: List HolterMonitorTestRequest records
+      operationId: listHolterMonitorTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HolterMonitorTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HolterMonitorTestRequest"
+    post:
+      summary: Create a new HolterMonitorTestRequest
+      operationId: createHolterMonitorTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestRequest"
+      responses:
+        "201":
+          description: The newly created HolterMonitorTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequest"
+        "400":
+          description: Validation error
+  /holter-monitor-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HolterMonitorTestRequest by id
+      operationId: getHolterMonitorTestRequest
+      responses:
+        "200":
+          description: The requested HolterMonitorTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequest"
+        "404":
+          description: HolterMonitorTestRequest not found
+    patch:
+      summary: Update an existing HolterMonitorTestRequest
+      operationId: updateHolterMonitorTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolterMonitorTestRequest"
+      responses:
+        "200":
+          description: The updated HolterMonitorTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolterMonitorTestRequest"
+        "404":
+          description: HolterMonitorTestRequest not found
+    delete:
+      summary: Soft-delete a HolterMonitorTestRequest
+      operationId: deleteHolterMonitorTestRequest
+      responses:
+        "204":
+          description: HolterMonitorTestRequest deleted
+        "404":
+          description: HolterMonitorTestRequest not found
+components:
+  schemas:
+    HolterMonitorTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the monitoring is requested to be performed.
+        monitor_type:
+          type: string
+          enum:
+            - 24-hour
+            - 48-hour
+            - 7-day
+            - 14-day
+            - event-recorder
+            - implantable-loop-recorder
+            - other
+            - ""
+          description: "Requested monitor type: 24-hour, 48-hour, 7-day, 14-day, event-recorder, implantable-loop-recorder, other. Used for symptom-frequency / monitor-duration appropriateness."
+        primary_indication:
+          type: string
+          enum:
+            - palpitations
+            - suspected-arrhythmia
+            - syncope
+            - atrial-fibrillation-detection
+            - post-stroke-af-screen
+            - rate-control-assessment
+            - qt-monitoring
+            - pacemaker-check
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the monitoring should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant cardiac, medical, and surgical history.
+        symptom_palpitations:
+          type: boolean
+          description: Whether the patient reports palpitations.
+        symptom_syncope:
+          type: boolean
+          description: Whether the patient reports syncope (red flag).
+        symptom_presyncope:
+          type: boolean
+          description: Whether the patient reports presyncope / near-syncope.
+        symptom_breathlessness:
+          type: boolean
+          description: Whether the patient reports breathlessness.
+        symptom_frequency:
+          type: string
+          enum:
+            - daily
+            - weekly
+            - monthly
+            - rare
+            - ""
+          description: "Frequency of symptoms: daily, weekly, monthly, rare. Drives monitor-duration matching."
+        known_arrhythmia:
+          type: string
+          enum:
+            - none
+            - atrial-fibrillation
+            - svt
+            - vt
+            - heart-block
+            - other
+            - ""
+          description: "Known arrhythmia: none, atrial-fibrillation, svt, vt, heart-block, other."
+        recent_stroke_tia:
+          type: boolean
+          description: Whether the patient has had a recent stroke or TIA (AF-detection driver).
+        relevant_medications:
+          type: string
+          maxLength: 1000
+          description: Relevant current medications (e.g. rate-control, antiarrhythmics, QT-prolonging drugs).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Requested triage urgency: routine, urgent."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - monitor_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - symptom_palpitations
+        - symptom_syncope
+        - symptom_presyncope
+        - symptom_breathlessness
+        - symptom_frequency
+        - known_arrhythmia
+        - recent_stroke_tia
+        - relevant_medications
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Ambulatory ECG (Holter) monitoring request (referral). Captures the requested monitor type, primary indication and clinical question, symptoms and symptom frequency, cardiac context and red flags, relevant history and medications, and triage urgency.
