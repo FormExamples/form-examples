@@ -1,0 +1,269 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: tumor_marker_test_request
+openapi: 3.1.0
+info:
+  title: Tumor Marker Test Request — TumorMarkerTestRequest
+  version: 1.0.0
+  description: Serum tumour-marker blood-test request (referral). Captures the requested tumour markers (booleans), the clinical indication and details, any known cancer site / prior marker value, and triage urgency.
+paths:
+  /tumor-marker-test-requests:
+    get:
+      summary: List TumorMarkerTestRequest records
+      operationId: listTumorMarkerTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TumorMarkerTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TumorMarkerTestRequest"
+    post:
+      summary: Create a new TumorMarkerTestRequest
+      operationId: createTumorMarkerTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestRequest"
+      responses:
+        "201":
+          description: The newly created TumorMarkerTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequest"
+        "400":
+          description: Validation error
+  /tumor-marker-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TumorMarkerTestRequest by id
+      operationId: getTumorMarkerTestRequest
+      responses:
+        "200":
+          description: The requested TumorMarkerTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequest"
+        "404":
+          description: TumorMarkerTestRequest not found
+    patch:
+      summary: Update an existing TumorMarkerTestRequest
+      operationId: updateTumorMarkerTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestRequest"
+      responses:
+        "200":
+          description: The updated TumorMarkerTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequest"
+        "404":
+          description: TumorMarkerTestRequest not found
+    delete:
+      summary: Soft-delete a TumorMarkerTestRequest
+      operationId: deleteTumorMarkerTestRequest
+      responses:
+        "204":
+          description: TumorMarkerTestRequest deleted
+        "404":
+          description: TumorMarkerTestRequest not found
+components:
+  schemas:
+    TumorMarkerTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - collected
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, collected, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the request was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test is requested to be performed.
+        psa:
+          type: boolean
+          description: Whether prostate-specific antigen (PSA) is requested.
+        ca125:
+          type: boolean
+          description: Whether CA125 (suspected ovarian cancer; NICE CG122 / NG12) is requested.
+        ca19_9:
+          type: boolean
+          description: Whether CA19-9 (pancreatic / hepatobiliary cancer) is requested.
+        carcinoembryonic_antigen_cea:
+          type: boolean
+          description: Whether carcinoembryonic antigen (CEA; colorectal cancer monitoring) is requested.
+        alpha_fetoprotein_afp:
+          type: boolean
+          description: Whether alpha-fetoprotein (AFP; hepatocellular carcinoma, germ-cell tumours) is requested.
+        beta_hcg:
+          type: boolean
+          description: Whether beta human chorionic gonadotrophin (beta-hCG; germ-cell / trophoblastic tumours) is requested.
+        ca15_3:
+          type: boolean
+          description: Whether CA15-3 (breast cancer monitoring) is requested.
+        lactate_dehydrogenase_ldh:
+          type: boolean
+          description: Whether lactate dehydrogenase (LDH; germ-cell tumours, lymphoma prognosis) is requested.
+        calcitonin:
+          type: boolean
+          description: Whether calcitonin (medullary thyroid carcinoma) is requested.
+        chromogranin_a:
+          type: boolean
+          description: Whether chromogranin A (neuroendocrine tumours) is requested.
+        primary_indication:
+          type: string
+          enum:
+            - suspected-malignancy
+            - cancer-monitoring
+            - treatment-response
+            - recurrence-surveillance
+            - screening-high-risk
+            - characterise-mass
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Clinical details / history supporting the request (highest-value completeness field).
+        known_cancer_site:
+          type: string
+          maxLength: 255
+          description: Known or suspected primary cancer site, if any.
+        on_treatment:
+          type: boolean
+          description: Whether the patient is currently on cancer treatment (affects marker interpretation).
+        previous_marker_value:
+          type: number
+          format: double
+          description: Most recent previous marker value, for trend / response interpretation.
+        previous_marker_date:
+          type: string
+          format: date
+          description: Date of the most recent previous marker value.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - psa
+        - ca125
+        - ca19_9
+        - carcinoembryonic_antigen_cea
+        - alpha_fetoprotein_afp
+        - beta_hcg
+        - ca15_3
+        - lactate_dehydrogenase_ldh
+        - calcitonin
+        - chromogranin_a
+        - primary_indication
+        - clinical_details
+        - known_cancer_site
+        - on_treatment
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Serum tumour-marker blood-test request (referral). Captures the requested tumour markers (booleans), the clinical indication and details, any known cancer site / prior marker value, and triage urgency.

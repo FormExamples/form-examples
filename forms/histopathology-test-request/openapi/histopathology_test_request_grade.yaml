@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: histopathology_test_request_grade
+openapi: 3.1.0
+info:
+  title: Histopathology Test Request — HistopathologyTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (indication match / RCPath cancer datasets, 1-9), specimen quality, request completeness, and urgency / triage priority."
+paths:
+  /histopathology-test-request-grades:
+    get:
+      summary: List HistopathologyTestRequestGrade records
+      operationId: listHistopathologyTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistopathologyTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+    post:
+      summary: Create a new HistopathologyTestRequestGrade
+      operationId: createHistopathologyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created HistopathologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+        "400":
+          description: Validation error
+  /histopathology-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistopathologyTestRequestGrade by id
+      operationId: getHistopathologyTestRequestGrade
+      responses:
+        "200":
+          description: The requested HistopathologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+        "404":
+          description: HistopathologyTestRequestGrade not found
+    patch:
+      summary: Update an existing HistopathologyTestRequestGrade
+      operationId: updateHistopathologyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated HistopathologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequestGrade"
+        "404":
+          description: HistopathologyTestRequestGrade not found
+    delete:
+      summary: Soft-delete a HistopathologyTestRequestGrade
+      operationId: deleteHistopathologyTestRequestGrade
+      responses:
+        "204":
+          description: HistopathologyTestRequestGrade deleted
+        "404":
+          description: HistopathologyTestRequestGrade not found
+components:
+  schemas:
+    HistopathologyTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        histopathology_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9) for the indication / RCPath cancer dataset match.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        specimen_quality_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - reject-risk
+            - ""
+          description: "Specimen quality band based on fixative, labelling, and integrity: ok, caution, reject-risk."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - ""
+          description: "Assigned triage tier: routine, urgent, two-week-wait."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target turnaround timeframe implied by the triage tier (frozen section implies immediate).
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - histopathology_test_request_id
+        - appropriateness_band
+        - specimen_quality_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (indication match / RCPath cancer datasets, 1-9), specimen quality, request completeness, and urgency / triage priority."

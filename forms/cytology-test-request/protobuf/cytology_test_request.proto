@@ -1,0 +1,97 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: cytology_test_request
+
+syntax = "proto3";
+
+package form_examples.cytology_test_request;
+
+enum CytologyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum CytologyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CytologyTestRequestSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_CERVICAL_SMEAR = 1;  // cervical-smear
+  SPECIMENTYPE_URINE_CYTOLOGY = 2;  // urine-cytology
+  SPECIMENTYPE_SPUTUM_CYTOLOGY = 3;  // sputum-cytology
+  SPECIMENTYPE_FLUID_PLEURAL_ASCITIC = 4;  // fluid-pleural-ascitic
+  SPECIMENTYPE_FINE_NEEDLE_ASPIRATION_THYROID = 5;  // fine-needle-aspiration-thyroid
+  SPECIMENTYPE_FINE_NEEDLE_ASPIRATION_BREAST = 6;  // fine-needle-aspiration-breast
+  SPECIMENTYPE_CSF_CYTOLOGY = 7;  // csf-cytology
+  SPECIMENTYPE_OTHER = 8;  // other
+}
+
+enum CytologyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_CERVICAL_SCREENING = 1;  // cervical-screening
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 2;  // suspected-malignancy
+  PRIMARYINDICATION_HAEMATURIA = 3;  // haematuria
+  PRIMARYINDICATION_EFFUSION_INVESTIGATION = 4;  // effusion-investigation
+  PRIMARYINDICATION_THYROID_NODULE = 5;  // thyroid-nodule
+  PRIMARYINDICATION_BREAST_LUMP = 6;  // breast-lump
+  PRIMARYINDICATION_FOLLOW_UP = 7;  // follow-up
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum CytologyTestRequestPreviousAbnormalCytologyEnum {
+  PREVIOUSABNORMALCYTOLOGY_UNSPECIFIED = 0;
+  PREVIOUSABNORMALCYTOLOGY_NONE = 1;  // none
+  PREVIOUSABNORMALCYTOLOGY_BORDERLINE = 2;  // borderline
+  PREVIOUSABNORMALCYTOLOGY_LOW_GRADE = 3;  // low-grade
+  PREVIOUSABNORMALCYTOLOGY_HIGH_GRADE = 4;  // high-grade
+  PREVIOUSABNORMALCYTOLOGY_UNKNOWN = 5;  // unknown
+}
+
+enum CytologyTestRequestSpecimenCollectedEnum {
+  SPECIMENCOLLECTED_UNSPECIFIED = 0;
+  SPECIMENCOLLECTED_YES = 1;  // yes
+  SPECIMENCOLLECTED_NO = 2;  // no
+}
+
+enum CytologyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+}
+
+message CytologyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CytologyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CytologyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  CytologyTestRequestSpecimenTypeEnum specimen_type = 12;  // VARCHAR(40)
+  string specimen_site = 13;  // VARCHAR(255) — max 255 chars
+  CytologyTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(40)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string clinical_details = 16;  // VARCHAR(1000) — max 1000 chars
+  bool hpv_test_requested = 17;  // BOOLEAN
+  CytologyTestRequestPreviousAbnormalCytologyEnum previous_abnormal_cytology = 18;  // VARCHAR(15)
+  string last_menstrual_period_date = 19;  // DATE — iso 8601 date
+  CytologyTestRequestSpecimenCollectedEnum specimen_collected = 20;  // VARCHAR(5)
+  string collection_datetime = 21;  // TIMESTAMPTZ — iso 8601
+  CytologyTestRequestUrgencyEnum urgency = 22;  // VARCHAR(15)
+  string supervising_consultant = 23;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 24;  // VARCHAR(255) — max 255 chars
+  string notes = 25;  // VARCHAR(1000) — max 1000 chars
+}

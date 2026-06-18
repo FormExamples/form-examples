@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: tumor_marker_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Tumor Marker Test Request — TumorMarkerTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / interpretation / completeness / urgency rule that fired for this request.
+paths:
+  /tumor-marker-test-request-grade-rules:
+    get:
+      summary: List TumorMarkerTestRequestGradeRule records
+      operationId: listTumorMarkerTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of TumorMarkerTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+    post:
+      summary: Create a new TumorMarkerTestRequestGradeRule
+      operationId: createTumorMarkerTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created TumorMarkerTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /tumor-marker-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one TumorMarkerTestRequestGradeRule by id
+      operationId: getTumorMarkerTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested TumorMarkerTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+        "404":
+          description: TumorMarkerTestRequestGradeRule not found
+    patch:
+      summary: Update an existing TumorMarkerTestRequestGradeRule
+      operationId: updateTumorMarkerTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated TumorMarkerTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TumorMarkerTestRequestGradeRule"
+        "404":
+          description: TumorMarkerTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a TumorMarkerTestRequestGradeRule
+      operationId: deleteTumorMarkerTestRequestGradeRule
+      responses:
+        "204":
+          description: TumorMarkerTestRequestGradeRule deleted
+        "404":
+          description: TumorMarkerTestRequestGradeRule not found
+components:
+  schemas:
+    TumorMarkerTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        tumor_marker_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-CA125-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - interpretation
+            - completeness
+            - urgency
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, interpretation, completeness, urgency."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or marker the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - tumor_marker_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / interpretation / completeness / urgency rule that fired for this request.

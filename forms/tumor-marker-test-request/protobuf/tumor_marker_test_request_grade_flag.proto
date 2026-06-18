@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: tumor_marker_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.tumor_marker_test_request;
+
+enum TumorMarkerTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_CANCER_2WW = 1;  // suspected-cancer-2ww
+  CATEGORY_INAPPROPRIATE_SCREENING_USE = 2;  // inappropriate-screening-use
+  CATEGORY_MARKER_INDICATION_MISMATCH = 3;  // marker-indication-mismatch
+  CATEGORY_MISSING_CLINICAL_DETAILS = 4;  // missing-clinical-details
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_NO_MARKER_SELECTED = 6;  // no-marker-selected
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum TumorMarkerTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message TumorMarkerTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string tumor_marker_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  TumorMarkerTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  TumorMarkerTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

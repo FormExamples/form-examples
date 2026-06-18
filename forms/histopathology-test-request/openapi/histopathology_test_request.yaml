@@ -1,0 +1,267 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: histopathology_test_request
+openapi: 3.1.0
+info:
+  title: Histopathology Test Request — HistopathologyTestRequest
+  version: 1.0.0
+  description: Tissue histopathology specimen request (referral). Captures the specimen, the clinical indication and question, clinical details, provisional diagnosis, previous histology, and triage urgency.
+paths:
+  /histopathology-test-requests:
+    get:
+      summary: List HistopathologyTestRequest records
+      operationId: listHistopathologyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HistopathologyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistopathologyTestRequest"
+    post:
+      summary: Create a new HistopathologyTestRequest
+      operationId: createHistopathologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestRequest"
+      responses:
+        "201":
+          description: The newly created HistopathologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequest"
+        "400":
+          description: Validation error
+  /histopathology-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HistopathologyTestRequest by id
+      operationId: getHistopathologyTestRequest
+      responses:
+        "200":
+          description: The requested HistopathologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequest"
+        "404":
+          description: HistopathologyTestRequest not found
+    patch:
+      summary: Update an existing HistopathologyTestRequest
+      operationId: updateHistopathologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HistopathologyTestRequest"
+      responses:
+        "200":
+          description: The updated HistopathologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistopathologyTestRequest"
+        "404":
+          description: HistopathologyTestRequest not found
+    delete:
+      summary: Soft-delete a HistopathologyTestRequest
+      operationId: deleteHistopathologyTestRequest
+      responses:
+        "204":
+          description: HistopathologyTestRequest deleted
+        "404":
+          description: HistopathologyTestRequest not found
+components:
+  schemas:
+    HistopathologyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the report is requested to be available.
+        specimen_type:
+          type: string
+          enum:
+            - biopsy
+            - excision
+            - resection
+            - endoscopic-biopsy
+            - skin-lesion
+            - frozen-section
+            - other
+            - ""
+          description: "Specimen type: biopsy, excision, resection, endoscopic-biopsy, skin-lesion, frozen-section, other."
+        specimen_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site the specimen was taken from.
+        number_of_specimens:
+          type: integer
+          format: int32
+          description: Number of specimen containers / pots submitted (0-100).
+        fixative:
+          type: string
+          enum:
+            - formalin
+            - fresh
+            - other
+            - ""
+          description: "Fixative used: formalin, fresh, other."
+        primary_indication:
+          type: string
+          enum:
+            - suspected-malignancy
+            - cancer-staging
+            - inflammatory-disease
+            - infection
+            - characterise-lesion
+            - margin-assessment
+            - transplant-monitoring
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the report should answer (highest-value field).
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Relevant clinical details, history, and context for the pathologist.
+        provisional_diagnosis:
+          type: string
+          maxLength: 1000
+          description: Provisional or working diagnosis.
+        previous_histology:
+          type: string
+          maxLength: 1000
+          description: Reference to relevant previous histology / cytology.
+        urgent_frozen_section:
+          type: boolean
+          description: Whether an intra-operative urgent frozen section is requested (red flag, immediate).
+        two_week_wait:
+          type: boolean
+          description: Whether this is a suspected-cancer two-week-wait (2WW) pathway request (red flag).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - specimen_type
+        - specimen_site
+        - fixative
+        - primary_indication
+        - clinical_question
+        - clinical_details
+        - provisional_diagnosis
+        - previous_histology
+        - urgent_frozen_section
+        - two_week_wait
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Tissue histopathology specimen request (referral). Captures the specimen, the clinical indication and question, clinical details, provisional diagnosis, previous histology, and triage urgency.

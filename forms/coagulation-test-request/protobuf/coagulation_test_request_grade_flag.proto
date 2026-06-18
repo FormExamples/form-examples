@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: coagulation_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.coagulation_test_request;
+
+enum CoagulationTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_ACTIVE_BLEEDING_STAT = 1;  // active-bleeding-stat
+  CATEGORY_SUSPECTED_DIC = 2;  // suspected-dic
+  CATEGORY_D_DIMER_LOW_PRETEST_CAUTION = 3;  // d-dimer-low-pretest-caution
+  CATEGORY_SPECIMEN_UNDERFILLED_RISK = 4;  // specimen-underfilled-risk
+  CATEGORY_MISSING_CLINICAL_DETAILS = 5;  // missing-clinical-details
+  CATEGORY_NO_TEST_SELECTED = 6;  // no-test-selected
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum CoagulationTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CoagulationTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string coagulation_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CoagulationTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  CoagulationTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

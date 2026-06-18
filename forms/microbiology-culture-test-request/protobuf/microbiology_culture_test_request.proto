@@ -1,0 +1,101 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: microbiology_culture_test_request
+
+syntax = "proto3";
+
+package form_examples.microbiology_culture_test_request;
+
+enum MicrobiologyCultureTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum MicrobiologyCultureTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum MicrobiologyCultureTestRequestSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_BLOOD_CULTURE = 1;  // blood-culture
+  SPECIMENTYPE_URINE = 2;  // urine
+  SPECIMENTYPE_WOUND_SWAB = 3;  // wound-swab
+  SPECIMENTYPE_SPUTUM = 4;  // sputum
+  SPECIMENTYPE_THROAT_SWAB = 5;  // throat-swab
+  SPECIMENTYPE_STOOL = 6;  // stool
+  SPECIMENTYPE_CSF = 7;  // csf
+  SPECIMENTYPE_TISSUE = 8;  // tissue
+  SPECIMENTYPE_CATHETER_TIP = 9;  // catheter-tip
+  SPECIMENTYPE_GENITAL_SWAB = 10;  // genital-swab
+  SPECIMENTYPE_OTHER = 11;  // other
+}
+
+enum MicrobiologyCultureTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_SEPSIS = 1;  // suspected-sepsis
+  PRIMARYINDICATION_URINARY_TRACT_INFECTION = 2;  // urinary-tract-infection
+  PRIMARYINDICATION_WOUND_INFECTION = 3;  // wound-infection
+  PRIMARYINDICATION_RESPIRATORY_INFECTION = 4;  // respiratory-infection
+  PRIMARYINDICATION_GASTROENTERITIS = 5;  // gastroenteritis
+  PRIMARYINDICATION_MENINGITIS = 6;  // meningitis
+  PRIMARYINDICATION_STI_SCREEN = 7;  // sti-screen
+  PRIMARYINDICATION_PYREXIA_UNKNOWN_ORIGIN = 8;  // pyrexia-unknown-origin
+  PRIMARYINDICATION_INFECTION_SCREENING = 9;  // infection-screening
+  PRIMARYINDICATION_OTHER = 10;  // other
+}
+
+enum MicrobiologyCultureTestRequestSpecimenCollectedEnum {
+  SPECIMENCOLLECTED_UNSPECIFIED = 0;
+  SPECIMENCOLLECTED_YES = 1;  // yes
+  SPECIMENCOLLECTED_NO = 2;  // no
+}
+
+enum MicrobiologyCultureTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_STAT = 3;  // stat
+}
+
+message MicrobiologyCultureTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MicrobiologyCultureTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  MicrobiologyCultureTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  MicrobiologyCultureTestRequestSpecimenTypeEnum specimen_type = 12;  // VARCHAR(20)
+  string specimen_site_detail = 13;  // VARCHAR(255) — max 255 chars
+  bool test_culture_and_sensitivity = 14;  // BOOLEAN
+  bool test_gram_stain = 15;  // BOOLEAN
+  bool test_acid_fast_bacilli_tb = 16;  // BOOLEAN
+  bool test_fungal_culture = 17;  // BOOLEAN
+  bool test_pcr_molecular = 18;  // BOOLEAN
+  bool test_c_difficile_toxin = 19;  // BOOLEAN
+  bool test_mrsa_screen = 20;  // BOOLEAN
+  MicrobiologyCultureTestRequestPrimaryIndicationEnum primary_indication = 21;  // VARCHAR(30)
+  string clinical_details = 22;  // VARCHAR(1000) — max 1000 chars
+  bool fever = 23;  // BOOLEAN
+  bool current_antibiotics = 24;  // BOOLEAN
+  string antibiotic_name = 25;  // VARCHAR(255) — max 255 chars
+  bool recent_travel = 26;  // BOOLEAN
+  bool immunocompromised = 27;  // BOOLEAN
+  MicrobiologyCultureTestRequestSpecimenCollectedEnum specimen_collected = 28;  // VARCHAR(5)
+  string collection_datetime = 29;  // TIMESTAMPTZ — iso 8601
+  MicrobiologyCultureTestRequestUrgencyEnum urgency = 30;  // VARCHAR(10)
+  string supervising_consultant = 31;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 32;  // VARCHAR(255) — max 255 chars
+  string notes = 33;  // VARCHAR(1000) — max 1000 chars
+}

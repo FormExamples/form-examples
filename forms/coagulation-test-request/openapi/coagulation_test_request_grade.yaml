@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: coagulation_test_request_grade
+openapi: 3.1.0
+info:
+  title: Coagulation Test Request — CoagulationTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (1-9 anchored on BSH indication / retest-interval match), pre-analytical / specimen safety (citrate tube fill / ratio / timing), request completeness, and triage priority."
+paths:
+  /coagulation-test-request-grades:
+    get:
+      summary: List CoagulationTestRequestGrade records
+      operationId: listCoagulationTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CoagulationTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CoagulationTestRequestGrade"
+    post:
+      summary: Create a new CoagulationTestRequestGrade
+      operationId: createCoagulationTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created CoagulationTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGrade"
+        "400":
+          description: Validation error
+  /coagulation-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CoagulationTestRequestGrade by id
+      operationId: getCoagulationTestRequestGrade
+      responses:
+        "200":
+          description: The requested CoagulationTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGrade"
+        "404":
+          description: CoagulationTestRequestGrade not found
+    patch:
+      summary: Update an existing CoagulationTestRequestGrade
+      operationId: updateCoagulationTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequestGrade"
+      responses:
+        "200":
+          description: The updated CoagulationTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGrade"
+        "404":
+          description: CoagulationTestRequestGrade not found
+    delete:
+      summary: Soft-delete a CoagulationTestRequestGrade
+      operationId: deleteCoagulationTestRequestGrade
+      responses:
+        "204":
+          description: CoagulationTestRequestGrade deleted
+        "404":
+          description: CoagulationTestRequestGrade not found
+components:
+  schemas:
+    CoagulationTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        coagulation_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9), anchored on BSH indication and retest-interval match; there is no single published 1-9 coagulation-ordering score.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        preanalytical_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - reject-risk
+            - ""
+          description: "Pre-analytical / specimen safety band: ok, caution, reject-risk (citrate tube fill / ratio correct? specimen collected? analysed in time?)."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Assigned triage tier: routine, urgent, stat."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the tests implied by the triage tier (e.g. active bleeding / DIC -> stat).
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - coagulation_test_request_id
+        - appropriateness_band
+        - preanalytical_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (1-9 anchored on BSH indication / retest-interval match), pre-analytical / specimen safety (citrate tube fill / ratio / timing), request completeness, and triage priority."

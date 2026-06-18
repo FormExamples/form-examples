@@ -1,0 +1,282 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: toxicology_test_request
+openapi: 3.1.0
+info:
+  title: Toxicology Test Request — ToxicologyTestRequest
+  version: 1.0.0
+  description: Toxicology / poisons / therapeutic-drug-level blood-test request. Captures the requested assays (booleans), the clinical indication and details, suspected agent and ingestion timing, specimen handling, and triage urgency.
+paths:
+  /toxicology-test-requests:
+    get:
+      summary: List ToxicologyTestRequest records
+      operationId: listToxicologyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ToxicologyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ToxicologyTestRequest"
+    post:
+      summary: Create a new ToxicologyTestRequest
+      operationId: createToxicologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToxicologyTestRequest"
+      responses:
+        "201":
+          description: The newly created ToxicologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestRequest"
+        "400":
+          description: Validation error
+  /toxicology-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ToxicologyTestRequest by id
+      operationId: getToxicologyTestRequest
+      responses:
+        "200":
+          description: The requested ToxicologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestRequest"
+        "404":
+          description: ToxicologyTestRequest not found
+    patch:
+      summary: Update an existing ToxicologyTestRequest
+      operationId: updateToxicologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToxicologyTestRequest"
+      responses:
+        "200":
+          description: The updated ToxicologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToxicologyTestRequest"
+        "404":
+          description: ToxicologyTestRequest not found
+    delete:
+      summary: Soft-delete a ToxicologyTestRequest
+      operationId: deleteToxicologyTestRequest
+      responses:
+        "204":
+          description: ToxicologyTestRequest deleted
+        "404":
+          description: ToxicologyTestRequest not found
+components:
+  schemas:
+    ToxicologyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - collected
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, collected, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the request was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test is requested to be performed.
+        paracetamol_level:
+          type: boolean
+          description: Whether a paracetamol (acetaminophen) level is requested. Interpretable on the treatment nomogram only at >=4 h post-ingestion.
+        salicylate_level:
+          type: boolean
+          description: Whether a salicylate (aspirin) level is requested.
+        alcohol_level:
+          type: boolean
+          description: Whether a blood alcohol (ethanol) level is requested.
+        drugs_of_abuse_screen:
+          type: boolean
+          description: Whether a drugs-of-abuse screen (e.g. opiates, benzodiazepines, cocaine, amphetamines) is requested.
+        lithium_level:
+          type: boolean
+          description: Whether a lithium level is requested.
+        digoxin_level:
+          type: boolean
+          description: Whether a digoxin level is requested.
+        antiepileptic_drug_level:
+          type: boolean
+          description: Whether an antiepileptic drug level (e.g. phenytoin, carbamazepine, valproate) is requested.
+        carboxyhaemoglobin:
+          type: boolean
+          description: Whether a carboxyhaemoglobin (COHb, carbon-monoxide exposure) level is requested.
+        heavy_metals:
+          type: boolean
+          description: Whether a heavy-metals screen (e.g. lead, mercury, arsenic) is requested.
+        specific_drug_level:
+          type: boolean
+          description: Whether a specific (named) drug level is requested; the named agent is given in suspected_agent.
+        primary_indication:
+          type: string
+          enum:
+            - suspected-overdose
+            - deliberate-self-harm
+            - therapeutic-drug-monitoring
+            - suspected-poisoning
+            - substance-misuse-screen
+            - occupational-screen
+            - forensic
+            - other
+            - ""
+          description: "Primary clinical indication, used for appropriateness scoring: suspected-overdose, deliberate-self-harm, therapeutic-drug-monitoring, suspected-poisoning, substance-misuse-screen, occupational-screen, forensic, other."
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Clinical details / history supporting the request (highest-value completeness field).
+        suspected_agent:
+          type: string
+          maxLength: 255
+          description: Suspected toxic agent or named drug, free text.
+        time_since_ingestion_hours:
+          type: number
+          format: double
+          description: Hours since ingestion, used for timing appropriateness (e.g. paracetamol nomogram requires >=4 h).
+        deliberate_overdose:
+          type: boolean
+          description: Whether the exposure is a deliberate overdose (triggers safeguarding / triage escalation).
+        symptomatic:
+          type: boolean
+          description: Whether the patient is currently symptomatic from the exposure.
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Timestamp when the specimen was collected.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - paracetamol_level
+        - salicylate_level
+        - alcohol_level
+        - drugs_of_abuse_screen
+        - lithium_level
+        - digoxin_level
+        - antiepileptic_drug_level
+        - carboxyhaemoglobin
+        - heavy_metals
+        - specific_drug_level
+        - primary_indication
+        - clinical_details
+        - suspected_agent
+        - deliberate_overdose
+        - symptomatic
+        - specimen_collected
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Toxicology / poisons / therapeutic-drug-level blood-test request. Captures the requested assays (booleans), the clinical indication and details, suspected agent and ingestion timing, specimen handling, and triage urgency.

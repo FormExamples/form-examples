@@ -1,0 +1,268 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cytology_test_request
+openapi: 3.1.0
+info:
+  title: Cytology Test Request — CytologyTestRequest
+  version: 1.0.0
+  description: Cytology specimen test request (referral). Captures the requested specimen type and site, the clinical indication and question, cervical-screening / cytology context, specimen collection (pre-analytical) details, and triage urgency.
+paths:
+  /cytology-test-requests:
+    get:
+      summary: List CytologyTestRequest records
+      operationId: listCytologyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CytologyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CytologyTestRequest"
+    post:
+      summary: Create a new CytologyTestRequest
+      operationId: createCytologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequest"
+      responses:
+        "201":
+          description: The newly created CytologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequest"
+        "400":
+          description: Validation error
+  /cytology-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CytologyTestRequest by id
+      operationId: getCytologyTestRequest
+      responses:
+        "200":
+          description: The requested CytologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequest"
+        "404":
+          description: CytologyTestRequest not found
+    patch:
+      summary: Update an existing CytologyTestRequest
+      operationId: updateCytologyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequest"
+      responses:
+        "200":
+          description: The updated CytologyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequest"
+        "404":
+          description: CytologyTestRequest not found
+    delete:
+      summary: Soft-delete a CytologyTestRequest
+      operationId: deleteCytologyTestRequest
+      responses:
+        "204":
+          description: CytologyTestRequest deleted
+        "404":
+          description: CytologyTestRequest not found
+components:
+  schemas:
+    CytologyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the cytology examination is requested to be performed.
+        specimen_type:
+          type: string
+          enum:
+            - cervical-smear
+            - urine-cytology
+            - sputum-cytology
+            - fluid-pleural-ascitic
+            - fine-needle-aspiration-thyroid
+            - fine-needle-aspiration-breast
+            - csf-cytology
+            - other
+            - ""
+          description: "Requested cytology specimen type: cervical-smear, urine-cytology, sputum-cytology, fluid-pleural-ascitic, fine-needle-aspiration-thyroid, fine-needle-aspiration-breast, csf-cytology, other."
+        specimen_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site or source of the specimen (free text).
+        primary_indication:
+          type: string
+          enum:
+            - cervical-screening
+            - suspected-malignancy
+            - haematuria
+            - effusion-investigation
+            - thyroid-nodule
+            - breast-lump
+            - follow-up
+            - other
+            - ""
+          description: "Primary clinical indication, used for appropriateness scoring: cervical-screening, suspected-malignancy, haematuria, effusion-investigation, thyroid-nodule, breast-lump, follow-up, other."
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the cytology examination should answer (highest-value field).
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Relevant clinical details, history, and findings for the reporting cytologist.
+        hpv_test_requested:
+          type: boolean
+          description: Whether high-risk HPV testing is requested (cervical screening primary screen).
+        previous_abnormal_cytology:
+          type: string
+          enum:
+            - none
+            - borderline
+            - low-grade
+            - high-grade
+            - unknown
+            - ""
+          description: "Previous abnormal cytology grade: none, borderline, low-grade, high-grade, unknown."
+        last_menstrual_period_date:
+          type: string
+          format: date
+          description: First day of the last menstrual period (LMP), relevant to cervical-smear timing.
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has already been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Date and time the specimen was collected (pre-analytical timing).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - specimen_type
+        - specimen_site
+        - primary_indication
+        - clinical_question
+        - clinical_details
+        - hpv_test_requested
+        - previous_abnormal_cytology
+        - specimen_collected
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Cytology specimen test request (referral). Captures the requested specimen type and site, the clinical indication and question, cervical-screening / cytology context, specimen collection (pre-analytical) details, and triage urgency.

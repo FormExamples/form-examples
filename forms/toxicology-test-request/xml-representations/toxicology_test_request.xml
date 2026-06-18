@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE toxicology_test_request SYSTEM "toxicology_test_request.dtd">
+<toxicology_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<paracetamol_level>true</paracetamol_level>
+<salicylate_level>true</salicylate_level>
+<alcohol_level>true</alcohol_level>
+<drugs_of_abuse_screen>true</drugs_of_abuse_screen>
+<lithium_level>true</lithium_level>
+<digoxin_level>true</digoxin_level>
+<antiepileptic_drug_level>true</antiepileptic_drug_level>
+<carboxyhaemoglobin>true</carboxyhaemoglobin>
+<heavy_metals>true</heavy_metals>
+<specific_drug_level>true</specific_drug_level>
+<primary_indication>suspected-overdose</primary_indication>
+<clinical_details>Example text.</clinical_details>
+<suspected_agent></suspected_agent>
+<time_since_ingestion_hours>0.0</time_since_ingestion_hours>
+<deliberate_overdose>true</deliberate_overdose>
+<symptomatic>true</symptomatic>
+<specimen_collected>yes</specimen_collected>
+<collection_datetime>2026-04-09T10:00:00Z</collection_datetime>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</toxicology_test_request>

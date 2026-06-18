@@ -1,0 +1,194 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cytology_test_request_grade
+openapi: 3.1.0
+info:
+  title: Cytology Test Request — CytologyTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (NHS Cervical Screening / indication match, 1-9), pre-analytical specimen adequacy, request completeness, and triage priority."
+paths:
+  /cytology-test-request-grades:
+    get:
+      summary: List CytologyTestRequestGrade records
+      operationId: listCytologyTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CytologyTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CytologyTestRequestGrade"
+    post:
+      summary: Create a new CytologyTestRequestGrade
+      operationId: createCytologyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created CytologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGrade"
+        "400":
+          description: Validation error
+  /cytology-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CytologyTestRequestGrade by id
+      operationId: getCytologyTestRequestGrade
+      responses:
+        "200":
+          description: The requested CytologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGrade"
+        "404":
+          description: CytologyTestRequestGrade not found
+    patch:
+      summary: Update an existing CytologyTestRequestGrade
+      operationId: updateCytologyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated CytologyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGrade"
+        "404":
+          description: CytologyTestRequestGrade not found
+    delete:
+      summary: Soft-delete a CytologyTestRequestGrade
+      operationId: deleteCytologyTestRequestGrade
+      responses:
+        "204":
+          description: CytologyTestRequestGrade deleted
+        "404":
+          description: CytologyTestRequestGrade not found
+components:
+  schemas:
+    CytologyTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cytology_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9) from NHS Cervical Screening / indication match.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        preanalytical_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - reject-risk
+            - ""
+          description: "Pre-analytical specimen adequacy band based on collection / timing / fixation: ok, caution, reject-risk."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - ""
+          description: "Assigned triage tier: routine, urgent, two-week-wait."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the examination implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - cytology_test_request_id
+        - appropriateness_band
+        - preanalytical_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (NHS Cervical Screening / indication match, 1-9), pre-analytical specimen adequacy, request completeness, and triage priority."

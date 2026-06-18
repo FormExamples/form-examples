@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: toxicology_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.toxicology_test_request;
+
+enum ToxicologyTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_OVERDOSE_STAT = 1;  // suspected-overdose-stat
+  CATEGORY_PARACETAMOL_TIMING_CRITICAL = 2;  // paracetamol-timing-critical
+  CATEGORY_DELIBERATE_SELF_HARM_SAFEGUARDING = 3;  // deliberate-self-harm-safeguarding
+  CATEGORY_SPECIMEN_NOT_COLLECTED = 4;  // specimen-not-collected
+  CATEGORY_MISSING_CLINICAL_DETAILS = 5;  // missing-clinical-details
+  CATEGORY_NO_TEST_SELECTED = 6;  // no-test-selected
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum ToxicologyTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ToxicologyTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string toxicology_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ToxicologyTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  ToxicologyTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

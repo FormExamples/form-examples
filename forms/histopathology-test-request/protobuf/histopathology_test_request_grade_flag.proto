@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: histopathology_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.histopathology_test_request;
+
+enum HistopathologyTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_CANCER_2WW = 1;  // suspected-cancer-2ww
+  CATEGORY_FROZEN_SECTION_URGENT = 2;  // frozen-section-urgent
+  CATEGORY_SPECIMEN_FIXATION_ISSUE = 3;  // specimen-fixation-issue
+  CATEGORY_MISLABEL_RISK = 4;  // mislabel-risk
+  CATEGORY_MISSING_CLINICAL_DETAILS = 5;  // missing-clinical-details
+  CATEGORY_MISSING_INDICATION = 6;  // missing-indication
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum HistopathologyTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message HistopathologyTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string histopathology_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  HistopathologyTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  HistopathologyTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

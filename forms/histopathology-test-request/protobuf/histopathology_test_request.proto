@@ -1,0 +1,89 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: histopathology_test_request
+
+syntax = "proto3";
+
+package form_examples.histopathology_test_request;
+
+enum HistopathologyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum HistopathologyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum HistopathologyTestRequestSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_BIOPSY = 1;  // biopsy
+  SPECIMENTYPE_EXCISION = 2;  // excision
+  SPECIMENTYPE_RESECTION = 3;  // resection
+  SPECIMENTYPE_ENDOSCOPIC_BIOPSY = 4;  // endoscopic-biopsy
+  SPECIMENTYPE_SKIN_LESION = 5;  // skin-lesion
+  SPECIMENTYPE_FROZEN_SECTION = 6;  // frozen-section
+  SPECIMENTYPE_OTHER = 7;  // other
+}
+
+enum HistopathologyTestRequestFixativeEnum {
+  FIXATIVE_UNSPECIFIED = 0;
+  FIXATIVE_FORMALIN = 1;  // formalin
+  FIXATIVE_FRESH = 2;  // fresh
+  FIXATIVE_OTHER = 3;  // other
+}
+
+enum HistopathologyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 1;  // suspected-malignancy
+  PRIMARYINDICATION_CANCER_STAGING = 2;  // cancer-staging
+  PRIMARYINDICATION_INFLAMMATORY_DISEASE = 3;  // inflammatory-disease
+  PRIMARYINDICATION_INFECTION = 4;  // infection
+  PRIMARYINDICATION_CHARACTERISE_LESION = 5;  // characterise-lesion
+  PRIMARYINDICATION_MARGIN_ASSESSMENT = 6;  // margin-assessment
+  PRIMARYINDICATION_TRANSPLANT_MONITORING = 7;  // transplant-monitoring
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum HistopathologyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+}
+
+message HistopathologyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HistopathologyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  HistopathologyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  HistopathologyTestRequestSpecimenTypeEnum specimen_type = 12;  // VARCHAR(30)
+  string specimen_site = 13;  // VARCHAR(255) — max 255 chars
+  int32 number_of_specimens = 14;  // INTEGER
+  HistopathologyTestRequestFixativeEnum fixative = 15;  // VARCHAR(15)
+  HistopathologyTestRequestPrimaryIndicationEnum primary_indication = 16;  // VARCHAR(40)
+  string clinical_question = 17;  // VARCHAR(1000) — max 1000 chars
+  string clinical_details = 18;  // VARCHAR(1000) — max 1000 chars
+  string provisional_diagnosis = 19;  // VARCHAR(1000) — max 1000 chars
+  string previous_histology = 20;  // VARCHAR(1000) — max 1000 chars
+  bool urgent_frozen_section = 21;  // BOOLEAN
+  bool two_week_wait = 22;  // BOOLEAN
+  HistopathologyTestRequestUrgencyEnum urgency = 23;  // VARCHAR(15)
+  string supervising_consultant = 24;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 25;  // VARCHAR(255) — max 255 chars
+  string notes = 26;  // VARCHAR(1000) — max 1000 chars
+}

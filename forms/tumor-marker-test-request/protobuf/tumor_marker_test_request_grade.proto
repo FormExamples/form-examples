@@ -1,0 +1,53 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: tumor_marker_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.tumor_marker_test_request;
+
+enum TumorMarkerTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum TumorMarkerTestRequestGradeInterpretationBandEnum {
+  INTERPRETATIONBAND_UNSPECIFIED = 0;
+  INTERPRETATIONBAND_OK = 1;  // ok
+  INTERPRETATIONBAND_CAUTION = 2;  // caution
+  INTERPRETATIONBAND_MISUSE_RISK = 3;  // misuse-risk
+}
+
+enum TumorMarkerTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_TWO_WEEK_WAIT = 3;  // two-week-wait
+}
+
+enum TumorMarkerTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message TumorMarkerTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string tumor_marker_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  TumorMarkerTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  TumorMarkerTestRequestGradeInterpretationBandEnum interpretation_band = 8;  // VARCHAR(15)
+  int32 completeness_percent = 9;  // INTEGER
+  TumorMarkerTestRequestGradeTriageTierEnum triage_tier = 10;  // VARCHAR(15)
+  string target_timeframe = 11;  // VARCHAR(50) — max 50 chars
+  TumorMarkerTestRequestGradeRecommendationEnum recommendation = 12;  // VARCHAR(20)
+  string clinician_notes = 13;  // TEXT
+  string signed_at = 14;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

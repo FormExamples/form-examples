@@ -1,0 +1,279 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: coagulation_test_request
+openapi: 3.1.0
+info:
+  title: Coagulation Test Request — CoagulationTestRequest
+  version: 1.0.0
+  description: Coagulation / haemostasis blood-test order (request). Captures the requested coagulation tests (booleans), the clinical indication and details, anticoagulant and bleeding / thrombosis history, pre-analytical / specimen handling (citrate tube fill, ratio, timing), and triage urgency.
+paths:
+  /coagulation-test-requests:
+    get:
+      summary: List CoagulationTestRequest records
+      operationId: listCoagulationTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CoagulationTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CoagulationTestRequest"
+    post:
+      summary: Create a new CoagulationTestRequest
+      operationId: createCoagulationTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequest"
+      responses:
+        "201":
+          description: The newly created CoagulationTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequest"
+        "400":
+          description: Validation error
+  /coagulation-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CoagulationTestRequest by id
+      operationId: getCoagulationTestRequest
+      responses:
+        "200":
+          description: The requested CoagulationTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequest"
+        "404":
+          description: CoagulationTestRequest not found
+    patch:
+      summary: Update an existing CoagulationTestRequest
+      operationId: updateCoagulationTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequest"
+      responses:
+        "200":
+          description: The updated CoagulationTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequest"
+        "404":
+          description: CoagulationTestRequest not found
+    delete:
+      summary: Soft-delete a CoagulationTestRequest
+      operationId: deleteCoagulationTestRequest
+      responses:
+        "204":
+          description: CoagulationTestRequest deleted
+        "404":
+          description: CoagulationTestRequest not found
+components:
+  schemas:
+    CoagulationTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - collected
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, collected, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the tests are requested to be performed.
+        prothrombin_time_inr:
+          type: boolean
+          description: Whether prothrombin time / INR is requested.
+        activated_partial_thromboplastin_time:
+          type: boolean
+          description: Whether activated partial thromboplastin time (APTT) is requested.
+        fibrinogen:
+          type: boolean
+          description: Whether a fibrinogen (Clauss) assay is requested.
+        d_dimer:
+          type: boolean
+          description: Whether a D-dimer assay is requested.
+        thrombophilia_screen:
+          type: boolean
+          description: Whether a thrombophilia screen is requested.
+        factor_assays:
+          type: boolean
+          description: Whether specific coagulation factor assays are requested.
+        anti_xa_assay:
+          type: boolean
+          description: Whether an anti-Xa assay (e.g. for LMWH / DOAC level) is requested.
+        mixing_studies:
+          type: boolean
+          description: Whether mixing studies (to investigate a prolonged clotting time) are requested.
+        von_willebrand_screen:
+          type: boolean
+          description: Whether a von Willebrand screen is requested.
+        primary_indication:
+          type: string
+          enum:
+            - anticoagulation-monitoring
+            - bleeding-disorder
+            - suspected-dvt-pe
+            - pre-operative
+            - thrombophilia-investigation
+            - liver-disease
+            - disseminated-intravascular-coagulation
+            - abnormal-bleeding
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Free-text clinical details supporting the request (highest-value field).
+        on_anticoagulant:
+          type: boolean
+          description: Whether the patient is currently on an anticoagulant.
+        anticoagulant_agent:
+          type: string
+          maxLength: 255
+          description: Name of the anticoagulant agent, if any (e.g. warfarin, apixaban, LMWH).
+        bleeding_history:
+          type: boolean
+          description: Whether the patient has a personal or family bleeding history.
+        thrombosis_history:
+          type: boolean
+          description: Whether the patient has a personal or family thrombosis history.
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Timestamp the specimen was collected (citrate-sample analysis timing matters).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - prothrombin_time_inr
+        - activated_partial_thromboplastin_time
+        - fibrinogen
+        - d_dimer
+        - thrombophilia_screen
+        - factor_assays
+        - anti_xa_assay
+        - mixing_studies
+        - von_willebrand_screen
+        - primary_indication
+        - clinical_details
+        - on_anticoagulant
+        - anticoagulant_agent
+        - bleeding_history
+        - thrombosis_history
+        - specimen_collected
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Coagulation / haemostasis blood-test order (request). Captures the requested coagulation tests (booleans), the clinical indication and details, anticoagulant and bleeding / thrombosis history, pre-analytical / specimen handling (citrate tube fill, ratio, timing), and triage urgency.

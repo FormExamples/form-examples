@@ -1,0 +1,84 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: coagulation_test_request
+
+syntax = "proto3";
+
+package form_examples.coagulation_test_request;
+
+enum CoagulationTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_COLLECTED = 4;  // collected
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum CoagulationTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CoagulationTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_ANTICOAGULATION_MONITORING = 1;  // anticoagulation-monitoring
+  PRIMARYINDICATION_BLEEDING_DISORDER = 2;  // bleeding-disorder
+  PRIMARYINDICATION_SUSPECTED_DVT_PE = 3;  // suspected-dvt-pe
+  PRIMARYINDICATION_PRE_OPERATIVE = 4;  // pre-operative
+  PRIMARYINDICATION_THROMBOPHILIA_INVESTIGATION = 5;  // thrombophilia-investigation
+  PRIMARYINDICATION_LIVER_DISEASE = 6;  // liver-disease
+  PRIMARYINDICATION_DISSEMINATED_INTRAVASCULAR_COAGULATION = 7;  // disseminated-intravascular-coagulation
+  PRIMARYINDICATION_ABNORMAL_BLEEDING = 8;  // abnormal-bleeding
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum CoagulationTestRequestSpecimenCollectedEnum {
+  SPECIMENCOLLECTED_UNSPECIFIED = 0;
+  SPECIMENCOLLECTED_YES = 1;  // yes
+  SPECIMENCOLLECTED_NO = 2;  // no
+}
+
+enum CoagulationTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_STAT = 3;  // stat
+}
+
+message CoagulationTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CoagulationTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CoagulationTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  bool prothrombin_time_inr = 12;  // BOOLEAN
+  bool activated_partial_thromboplastin_time = 13;  // BOOLEAN
+  bool fibrinogen = 14;  // BOOLEAN
+  bool d_dimer = 15;  // BOOLEAN
+  bool thrombophilia_screen = 16;  // BOOLEAN
+  bool factor_assays = 17;  // BOOLEAN
+  bool anti_xa_assay = 18;  // BOOLEAN
+  bool mixing_studies = 19;  // BOOLEAN
+  bool von_willebrand_screen = 20;  // BOOLEAN
+  CoagulationTestRequestPrimaryIndicationEnum primary_indication = 21;  // VARCHAR(40)
+  string clinical_details = 22;  // VARCHAR(1000) — max 1000 chars
+  bool on_anticoagulant = 23;  // BOOLEAN
+  string anticoagulant_agent = 24;  // VARCHAR(255) — max 255 chars
+  bool bleeding_history = 25;  // BOOLEAN
+  bool thrombosis_history = 26;  // BOOLEAN
+  CoagulationTestRequestSpecimenCollectedEnum specimen_collected = 27;  // VARCHAR(5)
+  string collection_datetime = 28;  // TIMESTAMPTZ — iso 8601
+  CoagulationTestRequestUrgencyEnum urgency = 29;  // VARCHAR(15)
+  string supervising_consultant = 30;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 31;  // VARCHAR(255) — max 255 chars
+  string notes = 32;  // VARCHAR(1000) — max 1000 chars
+}

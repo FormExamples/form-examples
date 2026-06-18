@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: microbiology_culture_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.microbiology_culture_test_request;
+
+enum MicrobiologyCultureTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_SEPSIS_STAT = 1;  // suspected-sepsis-stat
+  CATEGORY_BLOOD_CULTURE_BEFORE_ANTIBIOTICS = 2;  // blood-culture-before-antibiotics
+  CATEGORY_SPECIMEN_NOT_COLLECTED = 3;  // specimen-not-collected
+  CATEGORY_MISSING_CLINICAL_DETAILS = 4;  // missing-clinical-details
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_NO_TEST_SELECTED = 6;  // no-test-selected
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum MicrobiologyCultureTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MicrobiologyCultureTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string microbiology_culture_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MicrobiologyCultureTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  MicrobiologyCultureTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

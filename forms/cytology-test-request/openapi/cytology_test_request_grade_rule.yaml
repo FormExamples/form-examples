@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cytology_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Cytology Test Request — CytologyTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / preanalytical / completeness / urgency rule that fired for this request.
+paths:
+  /cytology-test-request-grade-rules:
+    get:
+      summary: List CytologyTestRequestGradeRule records
+      operationId: listCytologyTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CytologyTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+    post:
+      summary: Create a new CytologyTestRequestGradeRule
+      operationId: createCytologyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created CytologyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /cytology-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CytologyTestRequestGradeRule by id
+      operationId: getCytologyTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested CytologyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+        "404":
+          description: CytologyTestRequestGradeRule not found
+    patch:
+      summary: Update an existing CytologyTestRequestGradeRule
+      operationId: updateCytologyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated CytologyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CytologyTestRequestGradeRule"
+        "404":
+          description: CytologyTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a CytologyTestRequestGradeRule
+      operationId: deleteCytologyTestRequestGradeRule
+      responses:
+        "204":
+          description: CytologyTestRequestGradeRule deleted
+        "404":
+          description: CytologyTestRequestGradeRule not found
+components:
+  schemas:
+    CytologyTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cytology_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-CERVICAL-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - preanalytical
+            - completeness
+            - urgency
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, preanalytical, completeness, urgency."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - cytology_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / preanalytical / completeness / urgency rule that fired for this request.

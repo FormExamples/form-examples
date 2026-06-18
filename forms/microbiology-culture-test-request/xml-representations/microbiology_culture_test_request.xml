@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE microbiology_culture_test_request SYSTEM "microbiology_culture_test_request.dtd">
+<microbiology_culture_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<specimen_type>blood-culture</specimen_type>
+<specimen_site_detail>Example location</specimen_site_detail>
+<test_culture_and_sensitivity>true</test_culture_and_sensitivity>
+<test_gram_stain>true</test_gram_stain>
+<test_acid_fast_bacilli_tb>true</test_acid_fast_bacilli_tb>
+<test_fungal_culture>true</test_fungal_culture>
+<test_pcr_molecular>true</test_pcr_molecular>
+<test_c_difficile_toxin>true</test_c_difficile_toxin>
+<test_mrsa_screen>true</test_mrsa_screen>
+<primary_indication>suspected-sepsis</primary_indication>
+<clinical_details>Example text.</clinical_details>
+<fever>true</fever>
+<current_antibiotics>true</current_antibiotics>
+<antibiotic_name>Example</antibiotic_name>
+<recent_travel>true</recent_travel>
+<immunocompromised>true</immunocompromised>
+<specimen_collected>yes</specimen_collected>
+<collection_datetime>2026-04-09T10:00:00Z</collection_datetime>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</microbiology_culture_test_request>

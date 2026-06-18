@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: coagulation_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Coagulation Test Request — CoagulationTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the laboratory / haematology team.
+paths:
+  /coagulation-test-request-grade-flags:
+    get:
+      summary: List CoagulationTestRequestGradeFlag records
+      operationId: listCoagulationTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CoagulationTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+    post:
+      summary: Create a new CoagulationTestRequestGradeFlag
+      operationId: createCoagulationTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created CoagulationTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /coagulation-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CoagulationTestRequestGradeFlag by id
+      operationId: getCoagulationTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested CoagulationTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+        "404":
+          description: CoagulationTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing CoagulationTestRequestGradeFlag
+      operationId: updateCoagulationTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated CoagulationTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoagulationTestRequestGradeFlag"
+        "404":
+          description: CoagulationTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a CoagulationTestRequestGradeFlag
+      operationId: deleteCoagulationTestRequestGradeFlag
+      responses:
+        "204":
+          description: CoagulationTestRequestGradeFlag deleted
+        "404":
+          description: CoagulationTestRequestGradeFlag not found
+components:
+  schemas:
+    CoagulationTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        coagulation_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-ACTIVE-BLEEDING-001).
+        category:
+          type: string
+          enum:
+            - active-bleeding-stat
+            - suspected-dic
+            - d-dimer-low-pretest-caution
+            - specimen-underfilled-risk
+            - missing-clinical-details
+            - no-test-selected
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"discuss with on-call haematologist, process as STAT\")."
+      required:
+        - created_at
+        - updated_at
+        - coagulation_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the laboratory / haematology team.

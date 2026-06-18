@@ -1,0 +1,75 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: tumor_marker_test_request
+
+syntax = "proto3";
+
+package form_examples.tumor_marker_test_request;
+
+enum TumorMarkerTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_COLLECTED = 4;  // collected
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum TumorMarkerTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum TumorMarkerTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 1;  // suspected-malignancy
+  PRIMARYINDICATION_CANCER_MONITORING = 2;  // cancer-monitoring
+  PRIMARYINDICATION_TREATMENT_RESPONSE = 3;  // treatment-response
+  PRIMARYINDICATION_RECURRENCE_SURVEILLANCE = 4;  // recurrence-surveillance
+  PRIMARYINDICATION_SCREENING_HIGH_RISK = 5;  // screening-high-risk
+  PRIMARYINDICATION_CHARACTERISE_MASS = 6;  // characterise-mass
+  PRIMARYINDICATION_OTHER = 7;  // other
+}
+
+enum TumorMarkerTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+}
+
+message TumorMarkerTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  TumorMarkerTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  TumorMarkerTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  bool psa = 12;  // BOOLEAN
+  bool ca125 = 13;  // BOOLEAN
+  bool ca19_9 = 14;  // BOOLEAN
+  bool carcinoembryonic_antigen_cea = 15;  // BOOLEAN
+  bool alpha_fetoprotein_afp = 16;  // BOOLEAN
+  bool beta_hcg = 17;  // BOOLEAN
+  bool ca15_3 = 18;  // BOOLEAN
+  bool lactate_dehydrogenase_ldh = 19;  // BOOLEAN
+  bool calcitonin = 20;  // BOOLEAN
+  bool chromogranin_a = 21;  // BOOLEAN
+  TumorMarkerTestRequestPrimaryIndicationEnum primary_indication = 22;  // VARCHAR(40)
+  string clinical_details = 23;  // VARCHAR(1000) — max 1000 chars
+  string known_cancer_site = 24;  // VARCHAR(255) — max 255 chars
+  bool on_treatment = 25;  // BOOLEAN
+  double previous_marker_value = 26;  // NUMERIC(12,2) — numeric(12,2)
+  string previous_marker_date = 27;  // DATE — iso 8601 date
+  TumorMarkerTestRequestUrgencyEnum urgency = 28;  // VARCHAR(15)
+  string supervising_consultant = 29;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 30;  // VARCHAR(255) — max 255 chars
+  string notes = 31;  // VARCHAR(1000) — max 1000 chars
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coagulation_test_request SYSTEM "coagulation_test_request.dtd">
+<coagulation_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<prothrombin_time_inr>true</prothrombin_time_inr>
+<activated_partial_thromboplastin_time>true</activated_partial_thromboplastin_time>
+<fibrinogen>true</fibrinogen>
+<d_dimer>true</d_dimer>
+<thrombophilia_screen>true</thrombophilia_screen>
+<factor_assays>true</factor_assays>
+<anti_xa_assay>true</anti_xa_assay>
+<mixing_studies>true</mixing_studies>
+<von_willebrand_screen>true</von_willebrand_screen>
+<primary_indication>anticoagulation-monitoring</primary_indication>
+<clinical_details>Example text.</clinical_details>
+<on_anticoagulant>true</on_anticoagulant>
+<anticoagulant_agent></anticoagulant_agent>
+<bleeding_history>true</bleeding_history>
+<thrombosis_history>true</thrombosis_history>
+<specimen_collected>yes</specimen_collected>
+<collection_datetime>2026-04-09T10:00:00Z</collection_datetime>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</coagulation_test_request>

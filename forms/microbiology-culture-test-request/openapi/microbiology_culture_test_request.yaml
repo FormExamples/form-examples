@@ -1,0 +1,298 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: microbiology_culture_test_request
+openapi: 3.1.0
+info:
+  title: Microbiology Culture Test Request — MicrobiologyCultureTestRequest
+  version: 1.0.0
+  description: Microbiology specimen culture / MC&S request (referral). Captures the specimen, the requested tests (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
+paths:
+  /microbiology-culture-test-requests:
+    get:
+      summary: List MicrobiologyCultureTestRequest records
+      operationId: listMicrobiologyCultureTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MicrobiologyCultureTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+    post:
+      summary: Create a new MicrobiologyCultureTestRequest
+      operationId: createMicrobiologyCultureTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+      responses:
+        "201":
+          description: The newly created MicrobiologyCultureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+        "400":
+          description: Validation error
+  /microbiology-culture-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MicrobiologyCultureTestRequest by id
+      operationId: getMicrobiologyCultureTestRequest
+      responses:
+        "200":
+          description: The requested MicrobiologyCultureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+        "404":
+          description: MicrobiologyCultureTestRequest not found
+    patch:
+      summary: Update an existing MicrobiologyCultureTestRequest
+      operationId: updateMicrobiologyCultureTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+      responses:
+        "200":
+          description: The updated MicrobiologyCultureTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MicrobiologyCultureTestRequest"
+        "404":
+          description: MicrobiologyCultureTestRequest not found
+    delete:
+      summary: Soft-delete a MicrobiologyCultureTestRequest
+      operationId: deleteMicrobiologyCultureTestRequest
+      responses:
+        "204":
+          description: MicrobiologyCultureTestRequest deleted
+        "404":
+          description: MicrobiologyCultureTestRequest not found
+components:
+  schemas:
+    MicrobiologyCultureTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test is requested to be processed.
+        specimen_type:
+          type: string
+          enum:
+            - blood-culture
+            - urine
+            - wound-swab
+            - sputum
+            - throat-swab
+            - stool
+            - csf
+            - tissue
+            - catheter-tip
+            - genital-swab
+            - other
+            - ""
+          description: "Specimen type: blood-culture, urine, wound-swab, sputum, throat-swab, stool, csf, tissue, catheter-tip, genital-swab, other."
+        specimen_site_detail:
+          type: string
+          maxLength: 255
+          description: Free-text detail of the anatomical specimen site (e.g. left leg ulcer, midstream urine).
+        test_culture_and_sensitivity:
+          type: boolean
+          description: Whether culture and antibiotic sensitivity (MC&S) is requested.
+        test_gram_stain:
+          type: boolean
+          description: Whether a Gram stain / direct microscopy is requested.
+        test_acid_fast_bacilli_tb:
+          type: boolean
+          description: Whether acid-fast bacilli (AFB) / TB culture is requested.
+        test_fungal_culture:
+          type: boolean
+          description: Whether fungal (mycology) culture is requested.
+        test_pcr_molecular:
+          type: boolean
+          description: Whether PCR / molecular detection is requested.
+        test_c_difficile_toxin:
+          type: boolean
+          description: Whether Clostridioides difficile toxin testing is requested.
+        test_mrsa_screen:
+          type: boolean
+          description: Whether MRSA colonisation screening is requested.
+        primary_indication:
+          type: string
+          enum:
+            - suspected-sepsis
+            - urinary-tract-infection
+            - wound-infection
+            - respiratory-infection
+            - gastroenteritis
+            - meningitis
+            - sti-screen
+            - pyrexia-unknown-origin
+            - infection-screening
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Clinical details / relevant history supporting the request.
+        fever:
+          type: boolean
+          description: Whether the patient has fever / pyrexia.
+        current_antibiotics:
+          type: boolean
+          description: Whether the patient is currently on antibiotics (affects yield).
+        antibiotic_name:
+          type: string
+          maxLength: 255
+          description: Name(s) of current antibiotic(s), if any.
+        recent_travel:
+          type: boolean
+          description: Whether the patient has relevant recent travel history.
+        immunocompromised:
+          type: boolean
+          description: Whether the patient is immunocompromised.
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has already been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Date and time the specimen was collected (pre-analytical transport clock).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - specimen_type
+        - specimen_site_detail
+        - test_culture_and_sensitivity
+        - test_gram_stain
+        - test_acid_fast_bacilli_tb
+        - test_fungal_culture
+        - test_pcr_molecular
+        - test_c_difficile_toxin
+        - test_mrsa_screen
+        - primary_indication
+        - clinical_details
+        - fever
+        - current_antibiotics
+        - antibiotic_name
+        - recent_travel
+        - immunocompromised
+        - specimen_collected
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Microbiology specimen culture / MC&S request (referral). Captures the specimen, the requested tests (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
