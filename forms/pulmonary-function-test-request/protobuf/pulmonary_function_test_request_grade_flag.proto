@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pulmonary_function_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.pulmonary_function_test_request;
+
+enum PulmonaryFunctionTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_RECENT_MI_CONTRAINDICATION = 1;  // recent-mi-contraindication
+  CATEGORY_ACTIVE_RESPIRATORY_INFECTION = 2;  // active-respiratory-infection
+  CATEGORY_SUSPECTED_TB_INFECTION_CONTROL = 3;  // suspected-tb-infection-control
+  CATEGORY_HAEMOPTYSIS = 4;  // haemoptysis
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum PulmonaryFunctionTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PulmonaryFunctionTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pulmonary_function_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PulmonaryFunctionTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  PulmonaryFunctionTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

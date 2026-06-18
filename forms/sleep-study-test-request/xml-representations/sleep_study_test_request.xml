@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sleep_study_test_request SYSTEM "sleep_study_test_request.dtd">
+<sleep_study_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<study_type>home-sleep-apnoea-test</study_type>
+<primary_indication>suspected-osa</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<epworth_score>5</epworth_score>
+<stop_bang_score>5</stop_bang_score>
+<body_mass_index>0.0</body_mass_index>
+<neck_circumference_cm>0.0</neck_circumference_cm>
+<witnessed_apnoeas>true</witnessed_apnoeas>
+<occupational_driver>true</occupational_driver>
+<cardiovascular_disease>true</cardiovascular_disease>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</sleep_study_test_request>

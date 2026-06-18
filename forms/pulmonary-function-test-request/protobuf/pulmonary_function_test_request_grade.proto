@@ -1,0 +1,52 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pulmonary_function_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.pulmonary_function_test_request;
+
+enum PulmonaryFunctionTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum PulmonaryFunctionTestRequestGradeContraindicationBandEnum {
+  CONTRAINDICATIONBAND_UNSPECIFIED = 0;
+  CONTRAINDICATIONBAND_OK = 1;  // ok
+  CONTRAINDICATIONBAND_CAUTION = 2;  // caution
+  CONTRAINDICATIONBAND_CONTRAINDICATED = 3;  // contraindicated
+}
+
+enum PulmonaryFunctionTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+}
+
+enum PulmonaryFunctionTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message PulmonaryFunctionTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pulmonary_function_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  PulmonaryFunctionTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  PulmonaryFunctionTestRequestGradeContraindicationBandEnum contraindication_band = 8;  // VARCHAR(15)
+  int32 completeness_percent = 9;  // INTEGER
+  PulmonaryFunctionTestRequestGradeTriageTierEnum triage_tier = 10;  // VARCHAR(15)
+  string target_timeframe = 11;  // VARCHAR(50) — max 50 chars
+  PulmonaryFunctionTestRequestGradeRecommendationEnum recommendation = 12;  // VARCHAR(20)
+  string clinician_notes = 13;  // TEXT
+  string signed_at = 14;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

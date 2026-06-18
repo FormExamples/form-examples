@@ -1,0 +1,98 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: dexa_bone_density_test_request
+
+syntax = "proto3";
+
+package form_examples.dexa_bone_density_test_request;
+
+enum DexaBoneDensityTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum DexaBoneDensityTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum DexaBoneDensityTestRequestScanRegionEnum {
+  SCANREGION_UNSPECIFIED = 0;
+  SCANREGION_HIP = 1;  // hip
+  SCANREGION_SPINE = 2;  // spine
+  SCANREGION_HIP_AND_SPINE = 3;  // hip-and-spine
+  SCANREGION_FOREARM = 4;  // forearm
+  SCANREGION_WHOLE_BODY = 5;  // whole-body
+  SCANREGION_OTHER = 6;  // other
+}
+
+enum DexaBoneDensityTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_OSTEOPOROSIS_SCREENING = 1;  // osteoporosis-screening
+  PRIMARYINDICATION_FRAGILITY_FRACTURE = 2;  // fragility-fracture
+  PRIMARYINDICATION_LONG_TERM_STEROIDS = 3;  // long-term-steroids
+  PRIMARYINDICATION_EARLY_MENOPAUSE = 4;  // early-menopause
+  PRIMARYINDICATION_HIGH_FRAX_RISK = 5;  // high-frax-risk
+  PRIMARYINDICATION_MONITORING_TREATMENT = 6;  // monitoring-treatment
+  PRIMARYINDICATION_SECONDARY_OSTEOPOROSIS = 7;  // secondary-osteoporosis
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum DexaBoneDensityTestRequestMenopauseStatusEnum {
+  MENOPAUSESTATUS_UNSPECIFIED = 0;
+  MENOPAUSESTATUS_PRE = 1;  // pre
+  MENOPAUSESTATUS_PERI = 2;  // peri
+  MENOPAUSESTATUS_POST = 3;  // post
+  MENOPAUSESTATUS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum DexaBoneDensityTestRequestPreviousDexaEnum {
+  PREVIOUSDEXA_UNSPECIFIED = 0;
+  PREVIOUSDEXA_NONE = 1;  // none
+  PREVIOUSDEXA_NORMAL = 2;  // normal
+  PREVIOUSDEXA_OSTEOPENIA = 3;  // osteopenia
+  PREVIOUSDEXA_OSTEOPOROSIS = 4;  // osteoporosis
+  PREVIOUSDEXA_UNKNOWN = 5;  // unknown
+}
+
+enum DexaBoneDensityTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message DexaBoneDensityTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  DexaBoneDensityTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  DexaBoneDensityTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  DexaBoneDensityTestRequestScanRegionEnum scan_region = 12;  // VARCHAR(20)
+  DexaBoneDensityTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(30)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  double frax_major_fracture_percent = 16;  // NUMERIC(4,1) — numeric(4,1)
+  bool previous_fragility_fracture = 17;  // BOOLEAN
+  bool long_term_steroids = 18;  // BOOLEAN
+  DexaBoneDensityTestRequestMenopauseStatusEnum menopause_status = 19;  // VARCHAR(15)
+  bool parental_hip_fracture = 20;  // BOOLEAN
+  double weight_kg = 21;  // NUMERIC(5,1) — numeric(5,1)
+  DexaBoneDensityTestRequestPreviousDexaEnum previous_dexa = 22;  // VARCHAR(15)
+  string previous_dexa_date = 23;  // DATE — iso 8601 date
+  DexaBoneDensityTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

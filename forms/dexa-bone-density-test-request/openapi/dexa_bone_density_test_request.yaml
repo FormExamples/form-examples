@@ -1,0 +1,274 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: dexa_bone_density_test_request
+openapi: 3.1.0
+info:
+  title: Dexa Bone Density Test Request — DexaBoneDensityTestRequest
+  version: 1.0.0
+  description: DEXA / DXA bone-densitometry (osteoporosis) scan request (referral). Captures the requested scan region, the clinical indication and question, fracture-risk factors (FRAX inputs), previous DEXA history, and triage urgency.
+paths:
+  /dexa-bone-density-test-requests:
+    get:
+      summary: List DexaBoneDensityTestRequest records
+      operationId: listDexaBoneDensityTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DexaBoneDensityTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+    post:
+      summary: Create a new DexaBoneDensityTestRequest
+      operationId: createDexaBoneDensityTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+      responses:
+        "201":
+          description: The newly created DexaBoneDensityTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+        "400":
+          description: Validation error
+  /dexa-bone-density-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DexaBoneDensityTestRequest by id
+      operationId: getDexaBoneDensityTestRequest
+      responses:
+        "200":
+          description: The requested DexaBoneDensityTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+        "404":
+          description: DexaBoneDensityTestRequest not found
+    patch:
+      summary: Update an existing DexaBoneDensityTestRequest
+      operationId: updateDexaBoneDensityTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+      responses:
+        "200":
+          description: The updated DexaBoneDensityTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequest"
+        "404":
+          description: DexaBoneDensityTestRequest not found
+    delete:
+      summary: Soft-delete a DexaBoneDensityTestRequest
+      operationId: deleteDexaBoneDensityTestRequest
+      responses:
+        "204":
+          description: DexaBoneDensityTestRequest deleted
+        "404":
+          description: DexaBoneDensityTestRequest not found
+components:
+  schemas:
+    DexaBoneDensityTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the scan is requested to be performed.
+        scan_region:
+          type: string
+          enum:
+            - hip
+            - spine
+            - hip-and-spine
+            - forearm
+            - whole-body
+            - other
+            - ""
+          description: "Requested DEXA scan region: hip, spine, hip-and-spine, forearm, whole-body, other."
+        primary_indication:
+          type: string
+          enum:
+            - osteoporosis-screening
+            - fragility-fracture
+            - long-term-steroids
+            - early-menopause
+            - high-frax-risk
+            - monitoring-treatment
+            - secondary-osteoporosis
+            - other
+            - ""
+          description: "Primary clinical indication, used for appropriateness scoring: osteoporosis-screening, fragility-fracture, long-term-steroids, early-menopause, high-frax-risk, monitoring-treatment, secondary-osteoporosis, other."
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the scan should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and fracture history.
+        frax_major_fracture_percent:
+          type: number
+          format: double
+          description: FRAX 10-year major osteoporotic fracture probability as a percentage (0-100).
+        previous_fragility_fracture:
+          type: boolean
+          description: Whether the patient has had a previous fragility fracture (low-trauma).
+        long_term_steroids:
+          type: boolean
+          description: Whether the patient is on long-term oral glucocorticoid (steroid) therapy.
+        menopause_status:
+          type: string
+          enum:
+            - pre
+            - peri
+            - post
+            - not-applicable
+            - ""
+          description: "Menopause status: pre, peri, post, not-applicable."
+        parental_hip_fracture:
+          type: boolean
+          description: Whether a parent had a hip fracture (FRAX risk factor).
+        weight_kg:
+          type: number
+          format: double
+          description: Body weight in kilograms (FRAX input; low weight raises fracture risk).
+        previous_dexa:
+          type: string
+          enum:
+            - none
+            - normal
+            - osteopenia
+            - osteoporosis
+            - unknown
+            - ""
+          description: "Result of any previous DEXA: none, normal, osteopenia, osteoporosis, unknown."
+        previous_dexa_date:
+          type: string
+          format: date
+          description: Date of the most recent previous DEXA scan.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Requested triage urgency: routine, urgent."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - scan_region
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - previous_fragility_fracture
+        - long_term_steroids
+        - menopause_status
+        - parental_hip_fracture
+        - previous_dexa
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: DEXA / DXA bone-densitometry (osteoporosis) scan request (referral). Captures the requested scan region, the clinical indication and question, fracture-risk factors (FRAX inputs), previous DEXA history, and triage urgency.

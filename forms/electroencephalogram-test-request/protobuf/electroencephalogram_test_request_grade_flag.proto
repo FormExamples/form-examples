@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: electroencephalogram_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.electroencephalogram_test_request;
+
+enum ElectroencephalogramTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_STATUS_EPILEPTICUS = 1;  // suspected-status-epilepticus
+  CATEGORY_RECENT_FIRST_SEIZURE = 2;  // recent-first-seizure
+  CATEGORY_ENCEPHALOPATHY = 3;  // encephalopathy
+  CATEGORY_EEG_NOT_TO_EXCLUDE_EPILEPSY = 4;  // eeg-not-to-exclude-epilepsy
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum ElectroencephalogramTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ElectroencephalogramTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string electroencephalogram_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ElectroencephalogramTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  ElectroencephalogramTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

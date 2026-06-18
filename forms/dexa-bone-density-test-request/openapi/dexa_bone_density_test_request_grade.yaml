@@ -1,0 +1,198 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: dexa_bone_density_test_request_grade
+openapi: 3.1.0
+info:
+  title: Dexa Bone Density Test Request — DexaBoneDensityTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (NICE CG146 / NOGG / FRAX, 1-9), radiation safety, request completeness, and triage priority."
+paths:
+  /dexa-bone-density-test-request-grades:
+    get:
+      summary: List DexaBoneDensityTestRequestGrade records
+      operationId: listDexaBoneDensityTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DexaBoneDensityTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+    post:
+      summary: Create a new DexaBoneDensityTestRequestGrade
+      operationId: createDexaBoneDensityTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created DexaBoneDensityTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+        "400":
+          description: Validation error
+  /dexa-bone-density-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DexaBoneDensityTestRequestGrade by id
+      operationId: getDexaBoneDensityTestRequestGrade
+      responses:
+        "200":
+          description: The requested DexaBoneDensityTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+        "404":
+          description: DexaBoneDensityTestRequestGrade not found
+    patch:
+      summary: Update an existing DexaBoneDensityTestRequestGrade
+      operationId: updateDexaBoneDensityTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+      responses:
+        "200":
+          description: The updated DexaBoneDensityTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGrade"
+        "404":
+          description: DexaBoneDensityTestRequestGrade not found
+    delete:
+      summary: Soft-delete a DexaBoneDensityTestRequestGrade
+      operationId: deleteDexaBoneDensityTestRequestGrade
+      responses:
+        "204":
+          description: DexaBoneDensityTestRequestGrade deleted
+        "404":
+          description: DexaBoneDensityTestRequestGrade not found
+components:
+  schemas:
+    DexaBoneDensityTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        dexa_bone_density_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9), grounded in NICE CG146 / NOGG / FRAX intervention thresholds.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        radiation_dose_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Radiation dose band for the requested scan: low, moderate, high (DEXA is very low dose, ~1-5 microsievert)."
+        safety_note:
+          type: string
+          maxLength: 500
+          description: Radiation-safety note (e.g. DEXA is very low dose; defer in known or suspected pregnancy).
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Assigned triage tier: routine, urgent."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the scan implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - dexa_bone_density_test_request_id
+        - appropriateness_band
+        - radiation_dose_band
+        - safety_note
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (NICE CG146 / NOGG / FRAX, 1-9), radiation safety, request completeness, and triage priority."

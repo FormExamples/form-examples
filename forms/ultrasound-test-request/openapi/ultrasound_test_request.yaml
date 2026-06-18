@@ -1,0 +1,259 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: ultrasound_test_request
+openapi: 3.1.0
+info:
+  title: Ultrasound Test Request — UltrasoundTestRequest
+  version: 1.0.0
+  description: General (non-obstetric) diagnostic ultrasound request (referral). Captures the requested examination (body region, laterality), the clinical indication and question, relevant history, preparation requirements, and triage urgency.
+paths:
+  /ultrasound-test-requests:
+    get:
+      summary: List UltrasoundTestRequest records
+      operationId: listUltrasoundTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UltrasoundTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UltrasoundTestRequest"
+    post:
+      summary: Create a new UltrasoundTestRequest
+      operationId: createUltrasoundTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UltrasoundTestRequest"
+      responses:
+        "201":
+          description: The newly created UltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UltrasoundTestRequest"
+        "400":
+          description: Validation error
+  /ultrasound-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UltrasoundTestRequest by id
+      operationId: getUltrasoundTestRequest
+      responses:
+        "200":
+          description: The requested UltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UltrasoundTestRequest"
+        "404":
+          description: UltrasoundTestRequest not found
+    patch:
+      summary: Update an existing UltrasoundTestRequest
+      operationId: updateUltrasoundTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UltrasoundTestRequest"
+      responses:
+        "200":
+          description: The updated UltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UltrasoundTestRequest"
+        "404":
+          description: UltrasoundTestRequest not found
+    delete:
+      summary: Soft-delete a UltrasoundTestRequest
+      operationId: deleteUltrasoundTestRequest
+      responses:
+        "204":
+          description: UltrasoundTestRequest deleted
+        "404":
+          description: UltrasoundTestRequest not found
+components:
+  schemas:
+    UltrasoundTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the scan is requested to be performed.
+        body_region:
+          type: string
+          enum:
+            - abdomen
+            - pelvis
+            - renal-tract
+            - liver-biliary
+            - thyroid-neck
+            - scrotum-testes
+            - breast
+            - soft-tissue
+            - vascular-doppler
+            - dvt-leg
+            - carotid
+            - msk-joint
+            - other
+            - ""
+          description: "Requested body region: abdomen, pelvis, renal-tract, liver-biliary, thyroid-neck, scrotum-testes, breast, soft-tissue, vascular-doppler, dvt-leg, carotid, msk-joint, other."
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - not-applicable
+            - ""
+          description: "Laterality of the requested examination: left, right, bilateral, not-applicable."
+        primary_indication:
+          type: string
+          enum:
+            - abdominal-pain
+            - suspected-gallstones
+            - abnormal-lfts
+            - renal-impairment
+            - haematuria
+            - palpable-mass
+            - suspected-dvt
+            - suspected-aaa
+            - thyroid-nodule
+            - testicular-pain
+            - follow-up
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the scan should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and clinical history.
+        fasting_required:
+          type: boolean
+          description: Whether fasting is required for the examination (e.g. upper-abdominal / biliary scans).
+        full_bladder_required:
+          type: boolean
+          description: Whether a full bladder is required for the examination (e.g. pelvic / lower-urinary-tract scans).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - body_region
+        - laterality
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - fasting_required
+        - full_bladder_required
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: General (non-obstetric) diagnostic ultrasound request (referral). Captures the requested examination (body region, laterality), the clinical indication and question, relevant history, preparation requirements, and triage urgency.

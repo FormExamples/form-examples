@@ -1,0 +1,193 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pulmonary_function_test_request_grade
+openapi: 3.1.0
+info:
+  title: Pulmonary Function Test Request — PulmonaryFunctionTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (NICE NG80 / NG115, ARTP indication match; 1-9), safety / contraindication, request completeness, and triage priority."
+paths:
+  /pulmonary-function-test-request-grades:
+    get:
+      summary: List PulmonaryFunctionTestRequestGrade records
+      operationId: listPulmonaryFunctionTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PulmonaryFunctionTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+    post:
+      summary: Create a new PulmonaryFunctionTestRequestGrade
+      operationId: createPulmonaryFunctionTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created PulmonaryFunctionTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+        "400":
+          description: Validation error
+  /pulmonary-function-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PulmonaryFunctionTestRequestGrade by id
+      operationId: getPulmonaryFunctionTestRequestGrade
+      responses:
+        "200":
+          description: The requested PulmonaryFunctionTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+        "404":
+          description: PulmonaryFunctionTestRequestGrade not found
+    patch:
+      summary: Update an existing PulmonaryFunctionTestRequestGrade
+      operationId: updatePulmonaryFunctionTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+      responses:
+        "200":
+          description: The updated PulmonaryFunctionTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGrade"
+        "404":
+          description: PulmonaryFunctionTestRequestGrade not found
+    delete:
+      summary: Soft-delete a PulmonaryFunctionTestRequestGrade
+      operationId: deletePulmonaryFunctionTestRequestGrade
+      responses:
+        "204":
+          description: PulmonaryFunctionTestRequestGrade deleted
+        "404":
+          description: PulmonaryFunctionTestRequestGrade not found
+components:
+  schemas:
+    PulmonaryFunctionTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pulmonary_function_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9), grounded in NICE NG80 / NG115 and ARTP indication match.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        contraindication_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - contraindicated
+            - ""
+          description: "Safety band for forced-expiration and infection-control contraindications: ok, caution, contraindicated."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Assigned triage tier: routine, urgent."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the test implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - pulmonary_function_test_request_id
+        - appropriateness_band
+        - contraindication_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (NICE NG80 / NG115, ARTP indication match; 1-9), safety / contraindication, request completeness, and triage priority."

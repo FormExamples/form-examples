@@ -1,0 +1,96 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: ultrasound_test_request
+
+syntax = "proto3";
+
+package form_examples.ultrasound_test_request;
+
+enum UltrasoundTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum UltrasoundTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum UltrasoundTestRequestBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_ABDOMEN = 1;  // abdomen
+  BODYREGION_PELVIS = 2;  // pelvis
+  BODYREGION_RENAL_TRACT = 3;  // renal-tract
+  BODYREGION_LIVER_BILIARY = 4;  // liver-biliary
+  BODYREGION_THYROID_NECK = 5;  // thyroid-neck
+  BODYREGION_SCROTUM_TESTES = 6;  // scrotum-testes
+  BODYREGION_BREAST = 7;  // breast
+  BODYREGION_SOFT_TISSUE = 8;  // soft-tissue
+  BODYREGION_VASCULAR_DOPPLER = 9;  // vascular-doppler
+  BODYREGION_DVT_LEG = 10;  // dvt-leg
+  BODYREGION_CAROTID = 11;  // carotid
+  BODYREGION_MSK_JOINT = 12;  // msk-joint
+  BODYREGION_OTHER = 13;  // other
+}
+
+enum UltrasoundTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UltrasoundTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_ABDOMINAL_PAIN = 1;  // abdominal-pain
+  PRIMARYINDICATION_SUSPECTED_GALLSTONES = 2;  // suspected-gallstones
+  PRIMARYINDICATION_ABNORMAL_LFTS = 3;  // abnormal-lfts
+  PRIMARYINDICATION_RENAL_IMPAIRMENT = 4;  // renal-impairment
+  PRIMARYINDICATION_HAEMATURIA = 5;  // haematuria
+  PRIMARYINDICATION_PALPABLE_MASS = 6;  // palpable-mass
+  PRIMARYINDICATION_SUSPECTED_DVT = 7;  // suspected-dvt
+  PRIMARYINDICATION_SUSPECTED_AAA = 8;  // suspected-aaa
+  PRIMARYINDICATION_THYROID_NODULE = 9;  // thyroid-nodule
+  PRIMARYINDICATION_TESTICULAR_PAIN = 10;  // testicular-pain
+  PRIMARYINDICATION_FOLLOW_UP = 11;  // follow-up
+  PRIMARYINDICATION_OTHER = 12;  // other
+}
+
+enum UltrasoundTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message UltrasoundTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  UltrasoundTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  UltrasoundTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  UltrasoundTestRequestBodyRegionEnum body_region = 12;  // VARCHAR(30)
+  UltrasoundTestRequestLateralityEnum laterality = 13;  // VARCHAR(20)
+  UltrasoundTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(40)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 16;  // VARCHAR(1000) — max 1000 chars
+  bool fasting_required = 17;  // BOOLEAN
+  bool full_bladder_required = 18;  // BOOLEAN
+  UltrasoundTestRequestUrgencyEnum urgency = 19;  // VARCHAR(15)
+  string supervising_consultant = 20;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 21;  // VARCHAR(255) — max 255 chars
+  string notes = 22;  // VARCHAR(1000) — max 1000 chars
+}

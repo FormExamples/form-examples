@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: dexa_bone_density_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Dexa Bone Density Test Request — DexaBoneDensityTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+paths:
+  /dexa-bone-density-test-request-grade-rules:
+    get:
+      summary: List DexaBoneDensityTestRequestGradeRule records
+      operationId: listDexaBoneDensityTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DexaBoneDensityTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+    post:
+      summary: Create a new DexaBoneDensityTestRequestGradeRule
+      operationId: createDexaBoneDensityTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created DexaBoneDensityTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /dexa-bone-density-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DexaBoneDensityTestRequestGradeRule by id
+      operationId: getDexaBoneDensityTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested DexaBoneDensityTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+        "404":
+          description: DexaBoneDensityTestRequestGradeRule not found
+    patch:
+      summary: Update an existing DexaBoneDensityTestRequestGradeRule
+      operationId: updateDexaBoneDensityTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated DexaBoneDensityTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DexaBoneDensityTestRequestGradeRule"
+        "404":
+          description: DexaBoneDensityTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a DexaBoneDensityTestRequestGradeRule
+      operationId: deleteDexaBoneDensityTestRequestGradeRule
+      responses:
+        "204":
+          description: DexaBoneDensityTestRequestGradeRule deleted
+        "404":
+          description: DexaBoneDensityTestRequestGradeRule not found
+components:
+  schemas:
+    DexaBoneDensityTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        dexa_bone_density_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-FRAGILITY-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - safety
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, safety, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - dexa_bone_density_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.

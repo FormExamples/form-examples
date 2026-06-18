@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pulmonary_function_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Pulmonary Function Test Request — PulmonaryFunctionTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the lung-function team.
+paths:
+  /pulmonary-function-test-request-grade-flags:
+    get:
+      summary: List PulmonaryFunctionTestRequestGradeFlag records
+      operationId: listPulmonaryFunctionTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PulmonaryFunctionTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+    post:
+      summary: Create a new PulmonaryFunctionTestRequestGradeFlag
+      operationId: createPulmonaryFunctionTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created PulmonaryFunctionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /pulmonary-function-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PulmonaryFunctionTestRequestGradeFlag by id
+      operationId: getPulmonaryFunctionTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested PulmonaryFunctionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+        "404":
+          description: PulmonaryFunctionTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing PulmonaryFunctionTestRequestGradeFlag
+      operationId: updatePulmonaryFunctionTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated PulmonaryFunctionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PulmonaryFunctionTestRequestGradeFlag"
+        "404":
+          description: PulmonaryFunctionTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a PulmonaryFunctionTestRequestGradeFlag
+      operationId: deletePulmonaryFunctionTestRequestGradeFlag
+      responses:
+        "204":
+          description: PulmonaryFunctionTestRequestGradeFlag deleted
+        "404":
+          description: PulmonaryFunctionTestRequestGradeFlag not found
+components:
+  schemas:
+    PulmonaryFunctionTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pulmonary_function_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-RECENT-MI-001).
+        category:
+          type: string
+          enum:
+            - recent-mi-contraindication
+            - active-respiratory-infection
+            - suspected-tb-infection-control
+            - haemoptysis
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"defer test and query referrer\")."
+      required:
+        - created_at
+        - updated_at
+        - pulmonary_function_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the lung-function team.

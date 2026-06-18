@@ -1,0 +1,82 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: sleep_study_test_request
+
+syntax = "proto3";
+
+package form_examples.sleep_study_test_request;
+
+enum SleepStudyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum SleepStudyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_HOME = 4;  // home
+}
+
+enum SleepStudyTestRequestStudyTypeEnum {
+  STUDYTYPE_UNSPECIFIED = 0;
+  STUDYTYPE_HOME_SLEEP_APNOEA_TEST = 1;  // home-sleep-apnoea-test
+  STUDYTYPE_POLYSOMNOGRAPHY = 2;  // polysomnography
+  STUDYTYPE_OVERNIGHT_OXIMETRY = 3;  // overnight-oximetry
+  STUDYTYPE_MULTIPLE_SLEEP_LATENCY_TEST = 4;  // multiple-sleep-latency-test
+  STUDYTYPE_ACTIGRAPHY = 5;  // actigraphy
+  STUDYTYPE_OTHER = 6;  // other
+}
+
+enum SleepStudyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_OSA = 1;  // suspected-osa
+  PRIMARYINDICATION_SNORING = 2;  // snoring
+  PRIMARYINDICATION_DAYTIME_SLEEPINESS = 3;  // daytime-sleepiness
+  PRIMARYINDICATION_SUSPECTED_NARCOLEPSY = 4;  // suspected-narcolepsy
+  PRIMARYINDICATION_INSOMNIA = 5;  // insomnia
+  PRIMARYINDICATION_RESTLESS_LEGS = 6;  // restless-legs
+  PRIMARYINDICATION_COPD_OVERLAP = 7;  // copd-overlap
+  PRIMARYINDICATION_PRE_BARIATRIC = 8;  // pre-bariatric
+  PRIMARYINDICATION_DRIVER_ASSESSMENT = 9;  // driver-assessment
+  PRIMARYINDICATION_OTHER = 10;  // other
+}
+
+enum SleepStudyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message SleepStudyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  SleepStudyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  SleepStudyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  SleepStudyTestRequestStudyTypeEnum study_type = 12;  // VARCHAR(30)
+  SleepStudyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(30)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  int32 epworth_score = 16;  // INTEGER
+  int32 stop_bang_score = 17;  // INTEGER
+  double body_mass_index = 18;  // NUMERIC(4,1) — numeric(4,1)
+  double neck_circumference_cm = 19;  // NUMERIC(4,1) — numeric(4,1)
+  bool witnessed_apnoeas = 20;  // BOOLEAN
+  bool occupational_driver = 21;  // BOOLEAN
+  bool cardiovascular_disease = 22;  // BOOLEAN
+  SleepStudyTestRequestUrgencyEnum urgency = 23;  // VARCHAR(15)
+  string supervising_consultant = 24;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 25;  // VARCHAR(255) — max 255 chars
+  string notes = 26;  // VARCHAR(1000) — max 1000 chars
+}

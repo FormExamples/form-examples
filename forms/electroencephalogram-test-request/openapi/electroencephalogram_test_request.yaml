@@ -1,0 +1,257 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: electroencephalogram_test_request
+openapi: 3.1.0
+info:
+  title: Electroencephalogram Test Request — ElectroencephalogramTestRequest
+  version: 1.0.0
+  description: Electroencephalogram (EEG) test request (referral). Captures the requested EEG type, the clinical indication and question, seizure / epilepsy context, antiepileptic medication, red flags, and triage urgency.
+paths:
+  /electroencephalogram-test-requests:
+    get:
+      summary: List ElectroencephalogramTestRequest records
+      operationId: listElectroencephalogramTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ElectroencephalogramTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+    post:
+      summary: Create a new ElectroencephalogramTestRequest
+      operationId: createElectroencephalogramTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+      responses:
+        "201":
+          description: The newly created ElectroencephalogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+        "400":
+          description: Validation error
+  /electroencephalogram-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ElectroencephalogramTestRequest by id
+      operationId: getElectroencephalogramTestRequest
+      responses:
+        "200":
+          description: The requested ElectroencephalogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+        "404":
+          description: ElectroencephalogramTestRequest not found
+    patch:
+      summary: Update an existing ElectroencephalogramTestRequest
+      operationId: updateElectroencephalogramTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+      responses:
+        "200":
+          description: The updated ElectroencephalogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectroencephalogramTestRequest"
+        "404":
+          description: ElectroencephalogramTestRequest not found
+    delete:
+      summary: Soft-delete a ElectroencephalogramTestRequest
+      operationId: deleteElectroencephalogramTestRequest
+      responses:
+        "204":
+          description: ElectroencephalogramTestRequest deleted
+        "404":
+          description: ElectroencephalogramTestRequest not found
+components:
+  schemas:
+    ElectroencephalogramTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the EEG is requested to be performed.
+        eeg_type:
+          type: string
+          enum:
+            - routine-awake
+            - sleep-deprived
+            - ambulatory-24h
+            - video-telemetry
+            - other
+            - ""
+          description: "Requested EEG type: routine-awake, sleep-deprived, ambulatory-24h, video-telemetry, other."
+        primary_indication:
+          type: string
+          enum:
+            - suspected-epilepsy
+            - seizure-classification
+            - status-epilepticus
+            - encephalopathy
+            - first-seizure
+            - funny-turns
+            - dementia
+            - pre-surgical-evaluation
+            - medication-review
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the EEG should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, neurological, and seizure history.
+        seizure_frequency:
+          type: string
+          maxLength: 255
+          description: "Reported seizure frequency (free text, e.g. \"2 per week\")."
+        first_seizure:
+          type: boolean
+          description: Whether this is a first unprovoked seizure presentation.
+        known_epilepsy:
+          type: boolean
+          description: Whether the patient has an established diagnosis of epilepsy.
+        current_antiepileptics:
+          type: string
+          maxLength: 1000
+          description: Current antiepileptic drug therapy (free text).
+        recent_seizure:
+          type: boolean
+          description: Whether the patient had a recent seizure relevant to timing of the EEG.
+        suspected_status_epilepticus:
+          type: boolean
+          description: Whether status epilepticus is suspected (red flag).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - eeg_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - seizure_frequency
+        - first_seizure
+        - known_epilepsy
+        - current_antiepileptics
+        - recent_seizure
+        - suspected_status_epilepticus
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Electroencephalogram (EEG) test request (referral). Captures the requested EEG type, the clinical indication and question, seizure / epilepsy context, antiepileptic medication, red flags, and triage urgency.

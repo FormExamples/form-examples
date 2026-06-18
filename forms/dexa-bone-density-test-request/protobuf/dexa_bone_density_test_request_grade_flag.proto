@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: dexa_bone_density_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.dexa_bone_density_test_request;
+
+enum DexaBoneDensityTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_RECENT_FRAGILITY_FRACTURE = 1;  // recent-fragility-fracture
+  CATEGORY_HIGH_FRAX_RISK = 2;  // high-frax-risk
+  CATEGORY_DUPLICATE_RECENT_DEXA = 3;  // duplicate-recent-dexa
+  CATEGORY_PREGNANCY = 4;  // pregnancy
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum DexaBoneDensityTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message DexaBoneDensityTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string dexa_bone_density_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  DexaBoneDensityTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  DexaBoneDensityTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

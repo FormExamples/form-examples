@@ -1,0 +1,90 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pulmonary_function_test_request
+
+syntax = "proto3";
+
+package form_examples.pulmonary_function_test_request;
+
+enum PulmonaryFunctionTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum PulmonaryFunctionTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum PulmonaryFunctionTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_SPIROMETRY = 1;  // spirometry
+  TESTTYPE_SPIROMETRY_WITH_REVERSIBILITY = 2;  // spirometry-with-reversibility
+  TESTTYPE_FULL_LUNG_FUNCTION = 3;  // full-lung-function
+  TESTTYPE_GAS_TRANSFER_DLCO = 4;  // gas-transfer-dlco
+  TESTTYPE_PEAK_FLOW = 5;  // peak-flow
+  TESTTYPE_FENO = 6;  // feno
+  TESTTYPE_OTHER = 7;  // other
+}
+
+enum PulmonaryFunctionTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_ASTHMA = 1;  // suspected-asthma
+  PRIMARYINDICATION_SUSPECTED_COPD = 2;  // suspected-copd
+  PRIMARYINDICATION_BREATHLESSNESS = 3;  // breathlessness
+  PRIMARYINDICATION_CHRONIC_COUGH = 4;  // chronic-cough
+  PRIMARYINDICATION_PRE_OPERATIVE = 5;  // pre-operative
+  PRIMARYINDICATION_OCCUPATIONAL_LUNG_DISEASE = 6;  // occupational-lung-disease
+  PRIMARYINDICATION_MONITORING = 7;  // monitoring
+  PRIMARYINDICATION_RESTRICTIVE_DISEASE = 8;  // restrictive-disease
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum PulmonaryFunctionTestRequestSmokingStatusEnum {
+  SMOKINGSTATUS_UNSPECIFIED = 0;
+  SMOKINGSTATUS_NEVER = 1;  // never
+  SMOKINGSTATUS_EX = 2;  // ex
+  SMOKINGSTATUS_CURRENT = 3;  // current
+}
+
+enum PulmonaryFunctionTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message PulmonaryFunctionTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PulmonaryFunctionTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  PulmonaryFunctionTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  PulmonaryFunctionTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  PulmonaryFunctionTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_breathlessness = 16;  // BOOLEAN
+  bool symptom_cough = 17;  // BOOLEAN
+  bool symptom_wheeze = 18;  // BOOLEAN
+  PulmonaryFunctionTestRequestSmokingStatusEnum smoking_status = 19;  // VARCHAR(10)
+  string current_inhalers = 20;  // VARCHAR(1000) — max 1000 chars
+  bool recent_respiratory_infection = 21;  // BOOLEAN
+  bool recent_mi_or_eye_abdominal_surgery = 22;  // BOOLEAN
+  bool suspected_active_tuberculosis = 23;  // BOOLEAN
+  PulmonaryFunctionTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

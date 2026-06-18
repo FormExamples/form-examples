@@ -1,0 +1,109 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: nerve_conduction_study_test_request
+
+syntax = "proto3";
+
+package form_examples.nerve_conduction_study_test_request;
+
+enum NerveConductionStudyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum NerveConductionStudyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum NerveConductionStudyTestRequestStudyTypeEnum {
+  STUDYTYPE_UNSPECIFIED = 0;
+  STUDYTYPE_NERVE_CONDUCTION = 1;  // nerve-conduction
+  STUDYTYPE_EMG = 2;  // emg
+  STUDYTYPE_NERVE_CONDUCTION_AND_EMG = 3;  // nerve-conduction-and-emg
+  STUDYTYPE_REPETITIVE_STIMULATION = 4;  // repetitive-stimulation
+  STUDYTYPE_OTHER = 5;  // other
+}
+
+enum NerveConductionStudyTestRequestRegionEnum {
+  REGION_UNSPECIFIED = 0;
+  REGION_UPPER_LIMB = 1;  // upper-limb
+  REGION_LOWER_LIMB = 2;  // lower-limb
+  REGION_ALL_LIMBS = 3;  // all-limbs
+  REGION_CRANIAL = 4;  // cranial
+  REGION_GENERALISED = 5;  // generalised
+  REGION_OTHER = 6;  // other
+}
+
+enum NerveConductionStudyTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum NerveConductionStudyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_CARPAL_TUNNEL = 1;  // carpal-tunnel
+  PRIMARYINDICATION_PERIPHERAL_NEUROPATHY = 2;  // peripheral-neuropathy
+  PRIMARYINDICATION_RADICULOPATHY = 3;  // radiculopathy
+  PRIMARYINDICATION_SUSPECTED_MOTOR_NEURONE_DISEASE = 4;  // suspected-motor-neurone-disease
+  PRIMARYINDICATION_MYOPATHY = 5;  // myopathy
+  PRIMARYINDICATION_PLEXOPATHY = 6;  // plexopathy
+  PRIMARYINDICATION_SUSPECTED_MYASTHENIA = 7;  // suspected-myasthenia
+  PRIMARYINDICATION_NERVE_INJURY = 8;  // nerve-injury
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum NerveConductionStudyTestRequestSymptomDurationEnum {
+  SYMPTOMDURATION_UNSPECIFIED = 0;
+  SYMPTOMDURATION_LESS_THAN_6_WEEKS = 1;  // less-than-6-weeks
+  SYMPTOMDURATION_V_6_WEEKS_TO_3_MONTHS = 2;  // 6-weeks-to-3-months
+  SYMPTOMDURATION_V_3_TO_12_MONTHS = 3;  // 3-to-12-months
+  SYMPTOMDURATION_OVER_12_MONTHS = 4;  // over-12-months
+}
+
+enum NerveConductionStudyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message NerveConductionStudyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  NerveConductionStudyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  NerveConductionStudyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  NerveConductionStudyTestRequestStudyTypeEnum study_type = 12;  // VARCHAR(30)
+  NerveConductionStudyTestRequestRegionEnum region = 13;  // VARCHAR(20)
+  NerveConductionStudyTestRequestLateralityEnum laterality = 14;  // VARCHAR(20)
+  NerveConductionStudyTestRequestPrimaryIndicationEnum primary_indication = 15;  // VARCHAR(40)
+  string clinical_question = 16;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 17;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_numbness = 18;  // BOOLEAN
+  bool symptom_weakness = 19;  // BOOLEAN
+  bool symptom_pain = 20;  // BOOLEAN
+  bool symptom_tingling = 21;  // BOOLEAN
+  NerveConductionStudyTestRequestSymptomDurationEnum symptom_duration = 22;  // VARCHAR(30)
+  bool diabetes = 23;  // BOOLEAN
+  bool taking_anticoagulant = 24;  // BOOLEAN
+  bool pacemaker_or_icd = 25;  // BOOLEAN
+  NerveConductionStudyTestRequestUrgencyEnum urgency = 26;  // VARCHAR(15)
+  string supervising_consultant = 27;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 28;  // VARCHAR(255) — max 255 chars
+  string notes = 29;  // VARCHAR(1000) — max 1000 chars
+}

@@ -1,0 +1,81 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: electroencephalogram_test_request
+
+syntax = "proto3";
+
+package form_examples.electroencephalogram_test_request;
+
+enum ElectroencephalogramTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum ElectroencephalogramTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum ElectroencephalogramTestRequestEegTypeEnum {
+  EEGTYPE_UNSPECIFIED = 0;
+  EEGTYPE_ROUTINE_AWAKE = 1;  // routine-awake
+  EEGTYPE_SLEEP_DEPRIVED = 2;  // sleep-deprived
+  EEGTYPE_AMBULATORY_24H = 3;  // ambulatory-24h
+  EEGTYPE_VIDEO_TELEMETRY = 4;  // video-telemetry
+  EEGTYPE_OTHER = 5;  // other
+}
+
+enum ElectroencephalogramTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_EPILEPSY = 1;  // suspected-epilepsy
+  PRIMARYINDICATION_SEIZURE_CLASSIFICATION = 2;  // seizure-classification
+  PRIMARYINDICATION_STATUS_EPILEPTICUS = 3;  // status-epilepticus
+  PRIMARYINDICATION_ENCEPHALOPATHY = 4;  // encephalopathy
+  PRIMARYINDICATION_FIRST_SEIZURE = 5;  // first-seizure
+  PRIMARYINDICATION_FUNNY_TURNS = 6;  // funny-turns
+  PRIMARYINDICATION_DEMENTIA = 7;  // dementia
+  PRIMARYINDICATION_PRE_SURGICAL_EVALUATION = 8;  // pre-surgical-evaluation
+  PRIMARYINDICATION_MEDICATION_REVIEW = 9;  // medication-review
+  PRIMARYINDICATION_OTHER = 10;  // other
+}
+
+enum ElectroencephalogramTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message ElectroencephalogramTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  ElectroencephalogramTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  ElectroencephalogramTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  ElectroencephalogramTestRequestEegTypeEnum eeg_type = 12;  // VARCHAR(30)
+  ElectroencephalogramTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string seizure_frequency = 16;  // VARCHAR(255) — max 255 chars
+  bool first_seizure = 17;  // BOOLEAN
+  bool known_epilepsy = 18;  // BOOLEAN
+  string current_antiepileptics = 19;  // VARCHAR(1000) — max 1000 chars
+  bool recent_seizure = 20;  // BOOLEAN
+  bool suspected_status_epilepticus = 21;  // BOOLEAN
+  ElectroencephalogramTestRequestUrgencyEnum urgency = 22;  // VARCHAR(15)
+  string supervising_consultant = 23;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 24;  // VARCHAR(255) — max 255 chars
+  string notes = 25;  // VARCHAR(1000) — max 1000 chars
+}
