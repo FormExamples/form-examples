@@ -1,0 +1,97 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: electrocardiogram_test_request
+
+syntax = "proto3";
+
+package form_examples.electrocardiogram_test_request;
+
+enum ElectrocardiogramTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum ElectrocardiogramTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum ElectrocardiogramTestRequestEcgTypeEnum {
+  ECGTYPE_UNSPECIFIED = 0;
+  ECGTYPE_RESTING_12_LEAD = 1;  // resting-12-lead
+  ECGTYPE_EXERCISE_STRESS = 2;  // exercise-stress
+  ECGTYPE_AMBULATORY_HOLTER_24H = 3;  // ambulatory-holter-24h
+  ECGTYPE_AMBULATORY_48H = 4;  // ambulatory-48h
+  ECGTYPE_EVENT_RECORDER = 5;  // event-recorder
+  ECGTYPE_OTHER = 6;  // other
+}
+
+enum ElectrocardiogramTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_CHEST_PAIN = 1;  // chest-pain
+  PRIMARYINDICATION_PALPITATIONS = 2;  // palpitations
+  PRIMARYINDICATION_SYNCOPE = 3;  // syncope
+  PRIMARYINDICATION_SUSPECTED_ARRHYTHMIA = 4;  // suspected-arrhythmia
+  PRIMARYINDICATION_SUSPECTED_MI_ACS = 5;  // suspected-mi-acs
+  PRIMARYINDICATION_PRE_OPERATIVE = 6;  // pre-operative
+  PRIMARYINDICATION_MEDICATION_MONITORING_QT = 7;  // medication-monitoring-qt
+  PRIMARYINDICATION_HYPERTENSION = 8;  // hypertension
+  PRIMARYINDICATION_HEART_FAILURE = 9;  // heart-failure
+  PRIMARYINDICATION_SCREENING = 10;  // screening
+  PRIMARYINDICATION_FOLLOW_UP = 11;  // follow-up
+  PRIMARYINDICATION_OTHER = 12;  // other
+}
+
+enum ElectrocardiogramTestRequestKnownArrhythmiaEnum {
+  KNOWNARRHYTHMIA_UNSPECIFIED = 0;
+  KNOWNARRHYTHMIA_NONE = 1;  // none
+  KNOWNARRHYTHMIA_ATRIAL_FIBRILLATION = 2;  // atrial-fibrillation
+  KNOWNARRHYTHMIA_SVT = 3;  // svt
+  KNOWNARRHYTHMIA_VT = 4;  // vt
+  KNOWNARRHYTHMIA_HEART_BLOCK = 5;  // heart-block
+  KNOWNARRHYTHMIA_OTHER = 6;  // other
+}
+
+enum ElectrocardiogramTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message ElectrocardiogramTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  ElectrocardiogramTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  ElectrocardiogramTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  ElectrocardiogramTestRequestEcgTypeEnum ecg_type = 12;  // VARCHAR(30)
+  ElectrocardiogramTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_chest_pain = 16;  // BOOLEAN
+  bool symptom_palpitations = 17;  // BOOLEAN
+  bool symptom_syncope = 18;  // BOOLEAN
+  bool symptom_breathlessness = 19;  // BOOLEAN
+  bool symptom_dizziness = 20;  // BOOLEAN
+  bool currently_symptomatic = 21;  // BOOLEAN
+  bool suspected_acs = 22;  // BOOLEAN
+  ElectrocardiogramTestRequestKnownArrhythmiaEnum known_arrhythmia = 23;  // VARCHAR(25)
+  string relevant_medications = 24;  // VARCHAR(1000) — max 1000 chars
+  ElectrocardiogramTestRequestUrgencyEnum urgency = 25;  // VARCHAR(15)
+  string supervising_consultant = 26;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 27;  // VARCHAR(255) — max 255 chars
+  string notes = 28;  // VARCHAR(1000) — max 1000 chars
+}

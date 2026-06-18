@@ -1,0 +1,98 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: urinalysis_test_request
+
+syntax = "proto3";
+
+package form_examples.urinalysis_test_request;
+
+enum UrinalysisTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum UrinalysisTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum UrinalysisTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_UTI = 1;  // suspected-uti
+  PRIMARYINDICATION_HAEMATURIA = 2;  // haematuria
+  PRIMARYINDICATION_PROTEINURIA = 3;  // proteinuria
+  PRIMARYINDICATION_DIABETES_MONITORING = 4;  // diabetes-monitoring
+  PRIMARYINDICATION_RENAL_MONITORING = 5;  // renal-monitoring
+  PRIMARYINDICATION_PREGNANCY_SCREEN = 6;  // pregnancy-screen
+  PRIMARYINDICATION_PRE_OPERATIVE = 7;  // pre-operative
+  PRIMARYINDICATION_CATHETER_RELATED = 8;  // catheter-related
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 9;  // suspected-malignancy
+  PRIMARYINDICATION_DRUG_MONITORING = 10;  // drug-monitoring
+  PRIMARYINDICATION_OTHER = 11;  // other
+}
+
+enum UrinalysisTestRequestSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_MIDSTREAM = 1;  // midstream
+  SPECIMENTYPE_CATHETER = 2;  // catheter
+  SPECIMENTYPE_CLEAN_CATCH = 3;  // clean-catch
+  SPECIMENTYPE_V_24H = 4;  // 24h
+  SPECIMENTYPE_RANDOM = 5;  // random
+}
+
+enum UrinalysisTestRequestSpecimenCollectedEnum {
+  SPECIMENCOLLECTED_UNSPECIFIED = 0;
+  SPECIMENCOLLECTED_YES = 1;  // yes
+  SPECIMENCOLLECTED_NO = 2;  // no
+}
+
+enum UrinalysisTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_STAT = 3;  // stat
+}
+
+message UrinalysisTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  UrinalysisTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  UrinalysisTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  bool dipstick = 11;  // BOOLEAN
+  bool microscopy_culture_sensitivity = 12;  // BOOLEAN
+  bool albumin_creatinine_ratio = 13;  // BOOLEAN
+  bool protein_creatinine_ratio = 14;  // BOOLEAN
+  bool pregnancy_test = 15;  // BOOLEAN
+  bool drug_screen = 16;  // BOOLEAN
+  bool cytology = 17;  // BOOLEAN
+  bool twenty_four_hour_collection = 18;  // BOOLEAN
+  UrinalysisTestRequestPrimaryIndicationEnum primary_indication = 19;  // VARCHAR(40)
+  string clinical_details = 20;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_dysuria = 21;  // BOOLEAN
+  bool symptom_frequency = 22;  // BOOLEAN
+  bool symptom_visible_haematuria = 23;  // BOOLEAN
+  bool symptom_loin_pain = 24;  // BOOLEAN
+  bool symptom_fever = 25;  // BOOLEAN
+  UrinalysisTestRequestSpecimenTypeEnum specimen_type = 26;  // VARCHAR(15)
+  UrinalysisTestRequestSpecimenCollectedEnum specimen_collected = 27;  // VARCHAR(5)
+  string collection_datetime = 28;  // TIMESTAMPTZ — iso 8601
+  bool pregnant = 29;  // BOOLEAN
+  bool catheterised = 30;  // BOOLEAN
+  bool current_antibiotics = 31;  // BOOLEAN
+  UrinalysisTestRequestUrgencyEnum urgency = 32;  // VARCHAR(15)
+  string supervising_consultant = 33;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 34;  // VARCHAR(255) — max 255 chars
+  string notes = 35;  // VARCHAR(1000) — max 1000 chars
+}

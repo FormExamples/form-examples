@@ -1,0 +1,95 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pet_scan_test_request
+
+syntax = "proto3";
+
+package form_examples.pet_scan_test_request;
+
+enum PetScanTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum PetScanTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum PetScanTestRequestScanTypeEnum {
+  SCANTYPE_UNSPECIFIED = 0;
+  SCANTYPE_FDG_PET_CT = 1;  // fdg-pet-ct
+  SCANTYPE_PSMA_PET = 2;  // psma-pet
+  SCANTYPE_DOTATATE_PET = 3;  // dotatate-pet
+  SCANTYPE_AMYLOID_PET = 4;  // amyloid-pet
+  SCANTYPE_CARDIAC_PET = 5;  // cardiac-pet
+  SCANTYPE_OTHER = 6;  // other
+}
+
+enum PetScanTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_CANCER_STAGING = 1;  // cancer-staging
+  PRIMARYINDICATION_CANCER_RESTAGING = 2;  // cancer-restaging
+  PRIMARYINDICATION_TREATMENT_RESPONSE = 3;  // treatment-response
+  PRIMARYINDICATION_SUSPECTED_RECURRENCE = 4;  // suspected-recurrence
+  PRIMARYINDICATION_SOLITARY_PULMONARY_NODULE = 5;  // solitary-pulmonary-nodule
+  PRIMARYINDICATION_LYMPHOMA = 6;  // lymphoma
+  PRIMARYINDICATION_CARDIAC_VIABILITY = 7;  // cardiac-viability
+  PRIMARYINDICATION_INFECTION_INFLAMMATION = 8;  // infection-inflammation
+  PRIMARYINDICATION_NEUROLOGY_DEMENTIA = 9;  // neurology-dementia
+  PRIMARYINDICATION_OTHER = 10;  // other
+}
+
+enum PetScanTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum PetScanTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message PetScanTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PetScanTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  PetScanTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  PetScanTestRequestScanTypeEnum scan_type = 12;  // VARCHAR(30)
+  PetScanTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  string primary_tumour_site = 16;  // VARCHAR(255) — max 255 chars
+  bool diabetes = 17;  // BOOLEAN
+  double blood_glucose_mmol_l = 18;  // NUMERIC(4,1) — numeric(4,1)
+  PetScanTestRequestPregnancyStatusEnum pregnancy_status = 19;  // VARCHAR(20)
+  bool breastfeeding = 20;  // BOOLEAN
+  double egfr = 21;  // NUMERIC(5,1) — numeric(5,1)
+  string recent_chemo_radiotherapy = 22;  // VARCHAR(1000) — max 1000 chars
+  bool claustrophobia = 23;  // BOOLEAN
+  double weight_kg = 24;  // NUMERIC(5,1) — numeric(5,1)
+  PetScanTestRequestUrgencyEnum urgency = 25;  // VARCHAR(15)
+  string ir_me_r_justification = 26;  // VARCHAR(1000) — max 1000 chars
+  string supervising_consultant = 27;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 28;  // VARCHAR(255) — max 255 chars
+  string notes = 29;  // VARCHAR(1000) — max 1000 chars
+}

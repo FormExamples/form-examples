@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: biopsy_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Biopsy Test Request — BiopsyTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / imaging team.
+paths:
+  /biopsy-test-request-grade-flags:
+    get:
+      summary: List BiopsyTestRequestGradeFlag records
+      operationId: listBiopsyTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BiopsyTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+    post:
+      summary: Create a new BiopsyTestRequestGradeFlag
+      operationId: createBiopsyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created BiopsyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /biopsy-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BiopsyTestRequestGradeFlag by id
+      operationId: getBiopsyTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested BiopsyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+        "404":
+          description: BiopsyTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing BiopsyTestRequestGradeFlag
+      operationId: updateBiopsyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated BiopsyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
+        "404":
+          description: BiopsyTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a BiopsyTestRequestGradeFlag
+      operationId: deleteBiopsyTestRequestGradeFlag
+      responses:
+        "204":
+          description: BiopsyTestRequestGradeFlag deleted
+        "404":
+          description: BiopsyTestRequestGradeFlag not found
+components:
+  schemas:
+    BiopsyTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        biopsy_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUSPECTED-CANCER-2WW-001).
+        category:
+          type: string
+          enum:
+            - suspected-cancer-2ww
+            - high-bleeding-risk-anticoag
+            - coagulopathy
+            - thrombocytopenia
+            - immunosuppression
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer on a suspected-cancer two-week-wait pathway\")."
+      required:
+        - created_at
+        - updated_at
+        - biopsy_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / imaging team.

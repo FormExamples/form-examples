@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: electrocardiogram_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Electrocardiogram Test Request — ElectrocardiogramTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the cardiac physiology / triage team.
+paths:
+  /electrocardiogram-test-request-grade-flags:
+    get:
+      summary: List ElectrocardiogramTestRequestGradeFlag records
+      operationId: listElectrocardiogramTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ElectrocardiogramTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+    post:
+      summary: Create a new ElectrocardiogramTestRequestGradeFlag
+      operationId: createElectrocardiogramTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created ElectrocardiogramTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /electrocardiogram-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ElectrocardiogramTestRequestGradeFlag by id
+      operationId: getElectrocardiogramTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested ElectrocardiogramTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+        "404":
+          description: ElectrocardiogramTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing ElectrocardiogramTestRequestGradeFlag
+      operationId: updateElectrocardiogramTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated ElectrocardiogramTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequestGradeFlag"
+        "404":
+          description: ElectrocardiogramTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a ElectrocardiogramTestRequestGradeFlag
+      operationId: deleteElectrocardiogramTestRequestGradeFlag
+      responses:
+        "204":
+          description: ElectrocardiogramTestRequestGradeFlag deleted
+        "404":
+          description: ElectrocardiogramTestRequestGradeFlag not found
+components:
+  schemas:
+    ElectrocardiogramTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        electrocardiogram_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUSPECTED-ACS-001).
+        category:
+          type: string
+          enum:
+            - suspected-acs
+            - active-chest-pain
+            - syncope-red-flag
+            - suspected-vt
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"arrange same-hour emergency 12-lead ECG and senior review\")."
+      required:
+        - created_at
+        - updated_at
+        - electrocardiogram_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the cardiac physiology / triage team.

@@ -1,0 +1,56 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: biopsy_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.biopsy_test_request;
+
+enum BiopsyTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum BiopsyTestRequestGradeBleedingRiskBandEnum {
+  BLEEDINGRISKBAND_UNSPECIFIED = 0;
+  BLEEDINGRISKBAND_LOW = 1;  // low
+  BLEEDINGRISKBAND_MODERATE = 2;  // moderate
+  BLEEDINGRISKBAND_HIGH = 3;  // high
+}
+
+enum BiopsyTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_TWO_WEEK_WAIT = 3;  // two-week-wait
+  TRIAGETIER_EMERGENCY = 4;  // emergency
+}
+
+enum BiopsyTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message BiopsyTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string biopsy_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  BiopsyTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  BiopsyTestRequestGradeBleedingRiskBandEnum bleeding_risk_band = 8;  // VARCHAR(10)
+  string anticoagulant_action = 9;  // VARCHAR(500) — max 500 chars
+  int32 completeness_percent = 10;  // INTEGER
+  BiopsyTestRequestGradeTriageTierEnum triage_tier = 11;  // VARCHAR(15)
+  string target_timeframe = 12;  // VARCHAR(50) — max 50 chars
+  bool two_week_wait_eligible = 13;  // BOOLEAN
+  BiopsyTestRequestGradeRecommendationEnum recommendation = 14;  // VARCHAR(20)
+  string clinician_notes = 15;  // TEXT
+  string signed_at = 16;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 17;  // TIMESTAMPTZ — iso 8601
+}

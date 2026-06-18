@@ -1,0 +1,37 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: electrocardiogram_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.electrocardiogram_test_request;
+
+enum ElectrocardiogramTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_ACS = 1;  // suspected-acs
+  CATEGORY_ACTIVE_CHEST_PAIN = 2;  // active-chest-pain
+  CATEGORY_SYNCOPE_RED_FLAG = 3;  // syncope-red-flag
+  CATEGORY_SUSPECTED_VT = 4;  // suspected-vt
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_OTHER = 7;  // other
+}
+
+enum ElectrocardiogramTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message ElectrocardiogramTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string electrocardiogram_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  ElectrocardiogramTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  ElectrocardiogramTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pet_scan_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.pet_scan_test_request;
+
+enum PetScanTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_PREGNANCY = 1;  // pregnancy
+  CATEGORY_BREASTFEEDING = 2;  // breastfeeding
+  CATEGORY_UNCONTROLLED_GLUCOSE = 3;  // uncontrolled-glucose
+  CATEGORY_HIGH_RADIATION_DOSE = 4;  // high-radiation-dose
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 6;  // missing-clinical-question
+  CATEGORY_MISSING_GLUCOSE = 7;  // missing-glucose
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum PetScanTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PetScanTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pet_scan_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PetScanTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  PetScanTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE biopsy_test_request SYSTEM "biopsy_test_request.dtd">
+<biopsy_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<biopsy_site>skin</biopsy_site>
+<biopsy_method>punch</biopsy_method>
+<laterality>left</laterality>
+<primary_indication>suspected-malignancy</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<lesion_description>Example text.</lesion_description>
+<imaging_guidance_required>true</imaging_guidance_required>
+<taking_anticoagulant>true</taking_anticoagulant>
+<anticoagulant_agent></anticoagulant_agent>
+<taking_antiplatelet>true</taking_antiplatelet>
+<antiplatelet_agent></antiplatelet_agent>
+<inr>0.0</inr>
+<platelet_count>0.0</platelet_count>
+<bleeding_disorder>true</bleeding_disorder>
+<immunosuppressed>true</immunosuppressed>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</biopsy_test_request>

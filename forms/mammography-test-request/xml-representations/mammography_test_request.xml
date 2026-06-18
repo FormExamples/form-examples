@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mammography_test_request SYSTEM "mammography_test_request.dtd">
+<mammography_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<exam_type>screening</exam_type>
+<primary_indication>routine-screening</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<laterality>left</laterality>
+<symptom_lump>true</symptom_lump>
+<symptom_pain>true</symptom_pain>
+<symptom_nipple_discharge>true</symptom_nipple_discharge>
+<symptom_skin_change>true</symptom_skin_change>
+<symptom_nipple_inversion>true</symptom_nipple_inversion>
+<previous_mammogram>none</previous_mammogram>
+<previous_mammogram_date>2026-01-15</previous_mammogram_date>
+<family_history_breast_cancer>true</family_history_breast_cancer>
+<breast_implants>true</breast_implants>
+<pregnancy_or_lactating>no</pregnancy_or_lactating>
+<hormone_replacement_therapy>true</hormone_replacement_therapy>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</mammography_test_request>

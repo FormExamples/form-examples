@@ -1,0 +1,54 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: urinalysis_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.urinalysis_test_request;
+
+enum UrinalysisTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum UrinalysisTestRequestGradePreanalyticalBandEnum {
+  PREANALYTICALBAND_UNSPECIFIED = 0;
+  PREANALYTICALBAND_OK = 1;  // ok
+  PREANALYTICALBAND_CAUTION = 2;  // caution
+  PREANALYTICALBAND_REJECT_RISK = 3;  // reject-risk
+}
+
+enum UrinalysisTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_STAT = 3;  // stat
+}
+
+enum UrinalysisTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message UrinalysisTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string urinalysis_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  UrinalysisTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  UrinalysisTestRequestGradePreanalyticalBandEnum preanalytical_band = 8;  // VARCHAR(15)
+  string fasting_or_specimen = 9;  // VARCHAR(500) — max 500 chars
+  int32 completeness_percent = 10;  // INTEGER
+  UrinalysisTestRequestGradeTriageTierEnum triage_tier = 11;  // VARCHAR(15)
+  string target_timeframe = 12;  // VARCHAR(50) — max 50 chars
+  UrinalysisTestRequestGradeRecommendationEnum recommendation = 13;  // VARCHAR(20)
+  string clinician_notes = 14;  // TEXT
+  string signed_at = 15;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

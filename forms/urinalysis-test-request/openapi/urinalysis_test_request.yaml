@@ -1,0 +1,299 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: urinalysis_test_request
+openapi: 3.1.0
+info:
+  title: Urinalysis Test Request — UrinalysisTestRequest
+  version: 1.0.0
+  description: Urinalysis (urine pathology) test request (order). Captures the requested urine test panel, the clinical indication and details, symptoms / red flags, specimen preanalytical data, modifiers, and triage urgency.
+paths:
+  /urinalysis-test-requests:
+    get:
+      summary: List UrinalysisTestRequest records
+      operationId: listUrinalysisTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UrinalysisTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UrinalysisTestRequest"
+    post:
+      summary: Create a new UrinalysisTestRequest
+      operationId: createUrinalysisTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestRequest"
+      responses:
+        "201":
+          description: The newly created UrinalysisTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequest"
+        "400":
+          description: Validation error
+  /urinalysis-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UrinalysisTestRequest by id
+      operationId: getUrinalysisTestRequest
+      responses:
+        "200":
+          description: The requested UrinalysisTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequest"
+        "404":
+          description: UrinalysisTestRequest not found
+    patch:
+      summary: Update an existing UrinalysisTestRequest
+      operationId: updateUrinalysisTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestRequest"
+      responses:
+        "200":
+          description: The updated UrinalysisTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequest"
+        "404":
+          description: UrinalysisTestRequest not found
+    delete:
+      summary: Soft-delete a UrinalysisTestRequest
+      operationId: deleteUrinalysisTestRequest
+      responses:
+        "204":
+          description: UrinalysisTestRequest deleted
+        "404":
+          description: UrinalysisTestRequest not found
+components:
+  schemas:
+    UrinalysisTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the request was made.
+        dipstick:
+          type: boolean
+          description: "Requested test: urine dipstick (reagent strip) for leucocytes, nitrites, blood, protein, glucose."
+        microscopy_culture_sensitivity:
+          type: boolean
+          description: "Requested test: microscopy, culture and sensitivity (MC&S) for confirmed / complicated UTI."
+        albumin_creatinine_ratio:
+          type: boolean
+          description: "Requested test: urine albumin-to-creatinine ratio (ACR) for albuminuria / CKD / diabetes monitoring."
+        protein_creatinine_ratio:
+          type: boolean
+          description: "Requested test: urine protein-to-creatinine ratio (PCR) for proteinuria quantification."
+        pregnancy_test:
+          type: boolean
+          description: "Requested test: urine pregnancy test (hCG)."
+        drug_screen:
+          type: boolean
+          description: "Requested test: urine drug screen / toxicology."
+        cytology:
+          type: boolean
+          description: "Requested test: urine cytology for suspected urothelial malignancy."
+        twenty_four_hour_collection:
+          type: boolean
+          description: "Requested test: 24-hour urine collection (e.g. protein, creatinine clearance, metanephrines)."
+        primary_indication:
+          type: string
+          enum:
+            - suspected-uti
+            - haematuria
+            - proteinuria
+            - diabetes-monitoring
+            - renal-monitoring
+            - pregnancy-screen
+            - pre-operative
+            - catheter-related
+            - suspected-malignancy
+            - drug-monitoring
+            - other
+            - ""
+          description: "Primary clinical indication, used for appropriateness scoring: suspected-uti, haematuria, proteinuria, diabetes-monitoring, renal-monitoring, pregnancy-screen, pre-operative, catheter-related, suspected-malignancy, drug-monitoring, other."
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Relevant clinical details and history supporting the request (highest-value field).
+        symptom_dysuria:
+          type: boolean
+          description: Whether the patient reports dysuria (painful urination).
+        symptom_frequency:
+          type: boolean
+          description: Whether the patient reports urinary frequency / urgency.
+        symptom_visible_haematuria:
+          type: boolean
+          description: Whether the patient reports visible (macroscopic) haematuria (red flag).
+        symptom_loin_pain:
+          type: boolean
+          description: Whether the patient reports loin / flank pain (possible upper-tract involvement).
+        symptom_fever:
+          type: boolean
+          description: Whether the patient reports fever / systemic symptoms (possible pyelonephritis / urosepsis).
+        specimen_type:
+          type: string
+          enum:
+            - midstream
+            - catheter
+            - clean-catch
+            - 24h
+            - random
+            - ""
+          description: "Specimen type: midstream (MSU), catheter (CSU), clean-catch, 24h, random."
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has already been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Date and time the specimen was collected (preanalytical timing).
+        pregnant:
+          type: boolean
+          description: Whether the patient is pregnant (alters UTI MSU / culture pathway).
+        catheterised:
+          type: boolean
+          description: Whether the patient is catheterised (CSU; asymptomatic bacteriuria caveats).
+        current_antibiotics:
+          type: boolean
+          description: Whether the patient is currently taking antibiotics (may suppress culture growth).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - dipstick
+        - microscopy_culture_sensitivity
+        - albumin_creatinine_ratio
+        - protein_creatinine_ratio
+        - pregnancy_test
+        - drug_screen
+        - cytology
+        - twenty_four_hour_collection
+        - primary_indication
+        - clinical_details
+        - symptom_dysuria
+        - symptom_frequency
+        - symptom_visible_haematuria
+        - symptom_loin_pain
+        - symptom_fever
+        - specimen_type
+        - specimen_collected
+        - pregnant
+        - catheterised
+        - current_antibiotics
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Urinalysis (urine pathology) test request (order). Captures the requested urine test panel, the clinical indication and details, symptoms / red flags, specimen preanalytical data, modifiers, and triage urgency.

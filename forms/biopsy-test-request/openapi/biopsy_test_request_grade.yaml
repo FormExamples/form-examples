@@ -1,0 +1,204 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: biopsy_test_request_grade
+openapi: 3.1.0
+info:
+  title: Biopsy Test Request — BiopsyTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (ACR 1-9), periprocedural bleeding risk, request completeness, and urgency / cancer-pathway triage."
+paths:
+  /biopsy-test-request-grades:
+    get:
+      summary: List BiopsyTestRequestGrade records
+      operationId: listBiopsyTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BiopsyTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BiopsyTestRequestGrade"
+    post:
+      summary: Create a new BiopsyTestRequestGrade
+      operationId: createBiopsyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BiopsyTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created BiopsyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGrade"
+        "400":
+          description: Validation error
+  /biopsy-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BiopsyTestRequestGrade by id
+      operationId: getBiopsyTestRequestGrade
+      responses:
+        "200":
+          description: The requested BiopsyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGrade"
+        "404":
+          description: BiopsyTestRequestGrade not found
+    patch:
+      summary: Update an existing BiopsyTestRequestGrade
+      operationId: updateBiopsyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BiopsyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated BiopsyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BiopsyTestRequestGrade"
+        "404":
+          description: BiopsyTestRequestGrade not found
+    delete:
+      summary: Soft-delete a BiopsyTestRequestGrade
+      operationId: deleteBiopsyTestRequestGrade
+      responses:
+        "204":
+          description: BiopsyTestRequestGrade deleted
+        "404":
+          description: BiopsyTestRequestGrade not found
+components:
+  schemas:
+    BiopsyTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        biopsy_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: ACR Appropriateness Criteria score (1-9).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        bleeding_risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Periprocedural bleeding-risk band: low, moderate, high, driven by anticoagulant / antiplatelet use, INR, platelet count, and bleeding disorder."
+        anticoagulant_action:
+          type: string
+          maxLength: 500
+          description: Recommended periprocedural anticoagulant / antiplatelet action (e.g. withhold, bridge, proceed).
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, two-week-wait, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the biopsy implied by the triage tier.
+        two_week_wait_eligible:
+          type: boolean
+          description: Whether the request meets NICE NG12 suspected-cancer two-week-wait eligibility.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - biopsy_test_request_id
+        - appropriateness_band
+        - bleeding_risk_band
+        - anticoagulant_action
+        - triage_tier
+        - target_timeframe
+        - two_week_wait_eligible
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (ACR 1-9), periprocedural bleeding risk, request completeness, and urgency / cancer-pathway triage."

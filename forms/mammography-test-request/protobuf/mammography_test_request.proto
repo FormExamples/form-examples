@@ -1,0 +1,113 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: mammography_test_request
+
+syntax = "proto3";
+
+package form_examples.mammography_test_request;
+
+enum MammographyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum MammographyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_SCREENING_UNIT = 4;  // screening-unit
+  SETTING_EMERGENCY = 5;  // emergency
+}
+
+enum MammographyTestRequestExamTypeEnum {
+  EXAMTYPE_UNSPECIFIED = 0;
+  EXAMTYPE_SCREENING = 1;  // screening
+  EXAMTYPE_DIAGNOSTIC = 2;  // diagnostic
+  EXAMTYPE_SYMPTOMATIC = 3;  // symptomatic
+  EXAMTYPE_SURVEILLANCE = 4;  // surveillance
+  EXAMTYPE_OTHER = 5;  // other
+}
+
+enum MammographyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_ROUTINE_SCREENING = 1;  // routine-screening
+  PRIMARYINDICATION_BREAST_LUMP = 2;  // breast-lump
+  PRIMARYINDICATION_BREAST_PAIN = 3;  // breast-pain
+  PRIMARYINDICATION_NIPPLE_DISCHARGE = 4;  // nipple-discharge
+  PRIMARYINDICATION_SKIN_CHANGE = 5;  // skin-change
+  PRIMARYINDICATION_FAMILY_HISTORY = 6;  // family-history
+  PRIMARYINDICATION_FOLLOW_UP_KNOWN_CANCER = 7;  // follow-up-known-cancer
+  PRIMARYINDICATION_POST_TREATMENT_SURVEILLANCE = 8;  // post-treatment-surveillance
+  PRIMARYINDICATION_RECALL_FROM_SCREENING = 9;  // recall-from-screening
+  PRIMARYINDICATION_OTHER = 10;  // other
+}
+
+enum MammographyTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum MammographyTestRequestPreviousMammogramEnum {
+  PREVIOUSMAMMOGRAM_UNSPECIFIED = 0;
+  PREVIOUSMAMMOGRAM_NONE = 1;  // none
+  PREVIOUSMAMMOGRAM_NORMAL = 2;  // normal
+  PREVIOUSMAMMOGRAM_ABNORMAL = 3;  // abnormal
+  PREVIOUSMAMMOGRAM_UNKNOWN = 4;  // unknown
+}
+
+enum MammographyTestRequestPregnancyOrLactatingEnum {
+  PREGNANCYORLACTATING_UNSPECIFIED = 0;
+  PREGNANCYORLACTATING_NO = 1;  // no
+  PREGNANCYORLACTATING_PREGNANT = 2;  // pregnant
+  PREGNANCYORLACTATING_LACTATING = 3;  // lactating
+  PREGNANCYORLACTATING_UNKNOWN = 4;  // unknown
+}
+
+enum MammographyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message MammographyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MammographyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  MammographyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  MammographyTestRequestExamTypeEnum exam_type = 12;  // VARCHAR(20)
+  MammographyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  MammographyTestRequestLateralityEnum laterality = 16;  // VARCHAR(15)
+  bool symptom_lump = 17;  // BOOLEAN
+  bool symptom_pain = 18;  // BOOLEAN
+  bool symptom_nipple_discharge = 19;  // BOOLEAN
+  bool symptom_skin_change = 20;  // BOOLEAN
+  bool symptom_nipple_inversion = 21;  // BOOLEAN
+  MammographyTestRequestPreviousMammogramEnum previous_mammogram = 22;  // VARCHAR(15)
+  string previous_mammogram_date = 23;  // DATE — iso 8601 date
+  bool family_history_breast_cancer = 24;  // BOOLEAN
+  bool breast_implants = 25;  // BOOLEAN
+  MammographyTestRequestPregnancyOrLactatingEnum pregnancy_or_lactating = 26;  // VARCHAR(15)
+  bool hormone_replacement_therapy = 27;  // BOOLEAN
+  MammographyTestRequestUrgencyEnum urgency = 28;  // VARCHAR(15)
+  string supervising_consultant = 29;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 30;  // VARCHAR(255) — max 255 chars
+  string notes = 31;  // VARCHAR(1000) — max 1000 chars
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urinalysis_test_request SYSTEM "urinalysis_test_request.dtd">
+<urinalysis_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<dipstick>true</dipstick>
+<microscopy_culture_sensitivity>true</microscopy_culture_sensitivity>
+<albumin_creatinine_ratio>true</albumin_creatinine_ratio>
+<protein_creatinine_ratio>true</protein_creatinine_ratio>
+<pregnancy_test>true</pregnancy_test>
+<drug_screen>true</drug_screen>
+<cytology>true</cytology>
+<twenty_four_hour_collection>true</twenty_four_hour_collection>
+<primary_indication>suspected-uti</primary_indication>
+<clinical_details>Example text.</clinical_details>
+<symptom_dysuria>true</symptom_dysuria>
+<symptom_frequency>true</symptom_frequency>
+<symptom_visible_haematuria>true</symptom_visible_haematuria>
+<symptom_loin_pain>true</symptom_loin_pain>
+<symptom_fever>true</symptom_fever>
+<specimen_type>midstream</specimen_type>
+<specimen_collected>yes</specimen_collected>
+<collection_datetime>2026-04-09T10:00:00Z</collection_datetime>
+<pregnant>true</pregnant>
+<catheterised>true</catheterised>
+<current_antibiotics>true</current_antibiotics>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</urinalysis_test_request>

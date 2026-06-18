@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: x_ray_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: X Ray Test Request — XRayTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+paths:
+  /x-ray-test-request-grade-rules:
+    get:
+      summary: List XRayTestRequestGradeRule records
+      operationId: listXRayTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of XRayTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/XRayTestRequestGradeRule"
+    post:
+      summary: Create a new XRayTestRequestGradeRule
+      operationId: createXRayTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/XRayTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created XRayTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /x-ray-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one XRayTestRequestGradeRule by id
+      operationId: getXRayTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested XRayTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeRule"
+        "404":
+          description: XRayTestRequestGradeRule not found
+    patch:
+      summary: Update an existing XRayTestRequestGradeRule
+      operationId: updateXRayTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/XRayTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated XRayTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeRule"
+        "404":
+          description: XRayTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a XRayTestRequestGradeRule
+      operationId: deleteXRayTestRequestGradeRule
+      responses:
+        "204":
+          description: XRayTestRequestGradeRule deleted
+        "404":
+          description: XRayTestRequestGradeRule not found
+components:
+  schemas:
+    XRayTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        x_ray_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-CHEST-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - safety
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, safety, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - x_ray_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.

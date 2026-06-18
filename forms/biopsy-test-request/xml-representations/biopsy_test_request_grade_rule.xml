@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE biopsy_test_request_grade_rule SYSTEM "biopsy_test_request_grade_rule.dtd">
+<biopsy_test_request_grade_rule>
+<id>990e8400-e29b-41d4-a716-446655440004</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<biopsy_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</biopsy_test_request_grade_id>
+<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<axis>appropriateness</axis>
+<category>General</category>
+<description>Example text.</description>
+</biopsy_test_request_grade_rule>

@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: urinalysis_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Urinalysis Test Request — UrinalysisTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / vetting team.
+paths:
+  /urinalysis-test-request-grade-flags:
+    get:
+      summary: List UrinalysisTestRequestGradeFlag records
+      operationId: listUrinalysisTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UrinalysisTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+    post:
+      summary: Create a new UrinalysisTestRequestGradeFlag
+      operationId: createUrinalysisTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created UrinalysisTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /urinalysis-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UrinalysisTestRequestGradeFlag by id
+      operationId: getUrinalysisTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested UrinalysisTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+        "404":
+          description: UrinalysisTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing UrinalysisTestRequestGradeFlag
+      operationId: updateUrinalysisTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated UrinalysisTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UrinalysisTestRequestGradeFlag"
+        "404":
+          description: UrinalysisTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a UrinalysisTestRequestGradeFlag
+      operationId: deleteUrinalysisTestRequestGradeFlag
+      responses:
+        "204":
+          description: UrinalysisTestRequestGradeFlag deleted
+        "404":
+          description: UrinalysisTestRequestGradeFlag not found
+components:
+  schemas:
+    UrinalysisTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        urinalysis_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-VISIBLE-HAEMATURIA-2WW-001).
+        category:
+          type: string
+          enum:
+            - visible-haematuria-2ww
+            - suspected-pyelonephritis
+            - specimen-not-collected
+            - missing-clinical-details
+            - missing-indication
+            - no-test-selected
+            - other
+            - ""
+          description: "Flag category: visible-haematuria-2ww, suspected-pyelonephritis, specimen-not-collected, missing-clinical-details, missing-indication, no-test-selected, other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"consider NICE NG12 suspected-cancer (2WW) referral\")."
+      required:
+        - created_at
+        - updated_at
+        - urinalysis_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / vetting team.

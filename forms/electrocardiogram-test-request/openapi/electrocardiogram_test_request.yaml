@@ -1,0 +1,279 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: electrocardiogram_test_request
+openapi: 3.1.0
+info:
+  title: Electrocardiogram Test Request — ElectrocardiogramTestRequest
+  version: 1.0.0
+  description: Electrocardiogram (ECG) test request (referral). Captures the requested ECG type, the clinical indication and question, relevant history and medications, symptoms / red flags, and triage urgency.
+paths:
+  /electrocardiogram-test-requests:
+    get:
+      summary: List ElectrocardiogramTestRequest records
+      operationId: listElectrocardiogramTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ElectrocardiogramTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+    post:
+      summary: Create a new ElectrocardiogramTestRequest
+      operationId: createElectrocardiogramTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+      responses:
+        "201":
+          description: The newly created ElectrocardiogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+        "400":
+          description: Validation error
+  /electrocardiogram-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ElectrocardiogramTestRequest by id
+      operationId: getElectrocardiogramTestRequest
+      responses:
+        "200":
+          description: The requested ElectrocardiogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+        "404":
+          description: ElectrocardiogramTestRequest not found
+    patch:
+      summary: Update an existing ElectrocardiogramTestRequest
+      operationId: updateElectrocardiogramTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+      responses:
+        "200":
+          description: The updated ElectrocardiogramTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElectrocardiogramTestRequest"
+        "404":
+          description: ElectrocardiogramTestRequest not found
+    delete:
+      summary: Soft-delete a ElectrocardiogramTestRequest
+      operationId: deleteElectrocardiogramTestRequest
+      responses:
+        "204":
+          description: ElectrocardiogramTestRequest deleted
+        "404":
+          description: ElectrocardiogramTestRequest not found
+components:
+  schemas:
+    ElectrocardiogramTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the ECG is requested to be performed.
+        ecg_type:
+          type: string
+          enum:
+            - resting-12-lead
+            - exercise-stress
+            - ambulatory-holter-24h
+            - ambulatory-48h
+            - event-recorder
+            - other
+            - ""
+          description: "Requested ECG type: resting-12-lead, exercise-stress, ambulatory-holter-24h, ambulatory-48h, event-recorder, other."
+        primary_indication:
+          type: string
+          enum:
+            - chest-pain
+            - palpitations
+            - syncope
+            - suspected-arrhythmia
+            - suspected-mi-acs
+            - pre-operative
+            - medication-monitoring-qt
+            - hypertension
+            - heart-failure
+            - screening
+            - follow-up
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the ECG should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant cardiac and medical history.
+        symptom_chest_pain:
+          type: boolean
+          description: Whether the patient reports chest pain.
+        symptom_palpitations:
+          type: boolean
+          description: Whether the patient reports palpitations.
+        symptom_syncope:
+          type: boolean
+          description: Whether the patient reports syncope or collapse.
+        symptom_breathlessness:
+          type: boolean
+          description: Whether the patient reports breathlessness.
+        symptom_dizziness:
+          type: boolean
+          description: Whether the patient reports dizziness or light-headedness.
+        currently_symptomatic:
+          type: boolean
+          description: Whether the patient is symptomatic at the time of request (favours capturing the event).
+        suspected_acs:
+          type: boolean
+          description: Whether acute coronary syndrome is suspected (red flag).
+        known_arrhythmia:
+          type: string
+          enum:
+            - none
+            - atrial-fibrillation
+            - svt
+            - vt
+            - heart-block
+            - other
+            - ""
+          description: "Known arrhythmia: none, atrial-fibrillation, svt, vt, heart-block, other."
+        relevant_medications:
+          type: string
+          maxLength: 1000
+          description: Relevant current medications, especially QT-prolonging or rate-controlling agents.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - ecg_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - symptom_chest_pain
+        - symptom_palpitations
+        - symptom_syncope
+        - symptom_breathlessness
+        - symptom_dizziness
+        - currently_symptomatic
+        - suspected_acs
+        - known_arrhythmia
+        - relevant_medications
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Electrocardiogram (ECG) test request (referral). Captures the requested ECG type, the clinical indication and question, relevant history and medications, symptoms / red flags, and triage urgency.

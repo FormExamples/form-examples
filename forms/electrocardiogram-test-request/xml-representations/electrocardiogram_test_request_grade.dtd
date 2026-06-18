@@ -1,0 +1,16 @@
+<!ELEMENT electrocardiogram_test_request_grade (id,created_at,updated_at,deleted_at,electrocardiogram_test_request_id,appropriateness_score,appropriateness_band,triage_tier,target_timeframe,completeness_percent,priority_band,recommendation,clinician_notes,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT electrocardiogram_test_request_id (#PCDATA)>
+<!ELEMENT appropriateness_score (#PCDATA)>
+<!ELEMENT appropriateness_band (#PCDATA)>
+<!ELEMENT triage_tier (#PCDATA)>
+<!ELEMENT target_timeframe (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT priority_band (#PCDATA)>
+<!ELEMENT recommendation (#PCDATA)>
+<!ELEMENT clinician_notes (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

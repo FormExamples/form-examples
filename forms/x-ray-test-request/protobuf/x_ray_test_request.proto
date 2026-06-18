@@ -1,0 +1,115 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: x_ray_test_request
+
+syntax = "proto3";
+
+package form_examples.x_ray_test_request;
+
+enum XRayTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum XRayTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum XRayTestRequestBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_CHEST = 1;  // chest
+  BODYREGION_ABDOMEN = 2;  // abdomen
+  BODYREGION_SPINE_CERVICAL = 3;  // spine-cervical
+  BODYREGION_SPINE_THORACIC = 4;  // spine-thoracic
+  BODYREGION_SPINE_LUMBAR = 5;  // spine-lumbar
+  BODYREGION_PELVIS = 6;  // pelvis
+  BODYREGION_HIP = 7;  // hip
+  BODYREGION_KNEE = 8;  // knee
+  BODYREGION_ANKLE_FOOT = 9;  // ankle-foot
+  BODYREGION_SHOULDER = 10;  // shoulder
+  BODYREGION_WRIST_HAND = 11;  // wrist-hand
+  BODYREGION_SKULL = 12;  // skull
+  BODYREGION_DENTAL = 13;  // dental
+  BODYREGION_OTHER = 14;  // other
+}
+
+enum XRayTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum XRayTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_TRAUMA_FRACTURE = 1;  // trauma-fracture
+  PRIMARYINDICATION_CHEST_INFECTION = 2;  // chest-infection
+  PRIMARYINDICATION_SUSPECTED_PNEUMOTHORAX = 3;  // suspected-pneumothorax
+  PRIMARYINDICATION_FOREIGN_BODY = 4;  // foreign-body
+  PRIMARYINDICATION_JOINT_PAIN = 5;  // joint-pain
+  PRIMARYINDICATION_ARTHRITIS = 6;  // arthritis
+  PRIMARYINDICATION_PRE_OPERATIVE = 7;  // pre-operative
+  PRIMARYINDICATION_LINE_POSITION_CHECK = 8;  // line-position-check
+  PRIMARYINDICATION_ABDOMINAL_OBSTRUCTION = 9;  // abdominal-obstruction
+  PRIMARYINDICATION_SWALLOWED_OBJECT = 10;  // swallowed-object
+  PRIMARYINDICATION_FOLLOW_UP = 11;  // follow-up
+  PRIMARYINDICATION_OTHER = 12;  // other
+}
+
+enum XRayTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum XRayTestRequestMobilityEnum {
+  MOBILITY_UNSPECIFIED = 0;
+  MOBILITY_AMBULANT = 1;  // ambulant
+  MOBILITY_WHEELCHAIR = 2;  // wheelchair
+  MOBILITY_TROLLEY = 3;  // trolley
+}
+
+enum XRayTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message XRayTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  XRayTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  XRayTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  XRayTestRequestBodyRegionEnum body_region = 12;  // VARCHAR(20)
+  XRayTestRequestLateralityEnum laterality = 13;  // VARCHAR(15)
+  XRayTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(30)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 16;  // VARCHAR(1000) — max 1000 chars
+  XRayTestRequestPregnancyStatusEnum pregnancy_status = 17;  // VARCHAR(15)
+  bool recent_similar_xray = 18;  // BOOLEAN
+  XRayTestRequestMobilityEnum mobility = 19;  // VARCHAR(15)
+  XRayTestRequestUrgencyEnum urgency = 20;  // VARCHAR(15)
+  string ir_me_r_justification = 21;  // VARCHAR(1000) — max 1000 chars
+  string supervising_consultant = 22;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 23;  // VARCHAR(255) — max 255 chars
+  string notes = 24;  // VARCHAR(1000) — max 1000 chars
+}

@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pet_scan_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Pet Scan Test Request — PetScanTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+paths:
+  /pet-scan-test-request-grade-rules:
+    get:
+      summary: List PetScanTestRequestGradeRule records
+      operationId: listPetScanTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PetScanTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+    post:
+      summary: Create a new PetScanTestRequestGradeRule
+      operationId: createPetScanTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created PetScanTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /pet-scan-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PetScanTestRequestGradeRule by id
+      operationId: getPetScanTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested PetScanTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+        "404":
+          description: PetScanTestRequestGradeRule not found
+    patch:
+      summary: Update an existing PetScanTestRequestGradeRule
+      operationId: updatePetScanTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated PetScanTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetScanTestRequestGradeRule"
+        "404":
+          description: PetScanTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a PetScanTestRequestGradeRule
+      operationId: deletePetScanTestRequestGradeRule
+      responses:
+        "204":
+          description: PetScanTestRequestGradeRule deleted
+        "404":
+          description: PetScanTestRequestGradeRule not found
+components:
+  schemas:
+    PetScanTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pet_scan_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-STAGING-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - safety
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, safety, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - pet_scan_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.

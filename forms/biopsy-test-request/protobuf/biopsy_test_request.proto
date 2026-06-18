@@ -1,0 +1,113 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: biopsy_test_request
+
+syntax = "proto3";
+
+package form_examples.biopsy_test_request;
+
+enum BiopsyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum BiopsyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum BiopsyTestRequestBiopsySiteEnum {
+  BIOPSYSITE_UNSPECIFIED = 0;
+  BIOPSYSITE_SKIN = 1;  // skin
+  BIOPSYSITE_BREAST = 2;  // breast
+  BIOPSYSITE_LYMPH_NODE = 3;  // lymph-node
+  BIOPSYSITE_LIVER = 4;  // liver
+  BIOPSYSITE_KIDNEY = 5;  // kidney
+  BIOPSYSITE_PROSTATE = 6;  // prostate
+  BIOPSYSITE_LUNG = 7;  // lung
+  BIOPSYSITE_BONE_MARROW = 8;  // bone-marrow
+  BIOPSYSITE_GI_TRACT = 9;  // gi-tract
+  BIOPSYSITE_THYROID = 10;  // thyroid
+  BIOPSYSITE_SOFT_TISSUE = 11;  // soft-tissue
+  BIOPSYSITE_OTHER = 12;  // other
+}
+
+enum BiopsyTestRequestBiopsyMethodEnum {
+  BIOPSYMETHOD_UNSPECIFIED = 0;
+  BIOPSYMETHOD_PUNCH = 1;  // punch
+  BIOPSYMETHOD_EXCISION = 2;  // excision
+  BIOPSYMETHOD_INCISION = 3;  // incision
+  BIOPSYMETHOD_CORE_NEEDLE = 4;  // core-needle
+  BIOPSYMETHOD_FINE_NEEDLE_ASPIRATION = 5;  // fine-needle-aspiration
+  BIOPSYMETHOD_IMAGE_GUIDED = 6;  // image-guided
+  BIOPSYMETHOD_ENDOSCOPIC = 7;  // endoscopic
+  BIOPSYMETHOD_OTHER = 8;  // other
+}
+
+enum BiopsyTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum BiopsyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 1;  // suspected-malignancy
+  PRIMARYINDICATION_CANCER_STAGING = 2;  // cancer-staging
+  PRIMARYINDICATION_SUSPECTED_INFECTION = 3;  // suspected-infection
+  PRIMARYINDICATION_INFLAMMATORY_DISEASE = 4;  // inflammatory-disease
+  PRIMARYINDICATION_TRANSPLANT_MONITORING = 5;  // transplant-monitoring
+  PRIMARYINDICATION_LYMPHADENOPATHY = 6;  // lymphadenopathy
+  PRIMARYINDICATION_CHARACTERISE_LESION = 7;  // characterise-lesion
+  PRIMARYINDICATION_OTHER = 8;  // other
+}
+
+enum BiopsyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message BiopsyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  BiopsyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  BiopsyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  BiopsyTestRequestBiopsySiteEnum biopsy_site = 12;  // VARCHAR(20)
+  BiopsyTestRequestBiopsyMethodEnum biopsy_method = 13;  // VARCHAR(25)
+  BiopsyTestRequestLateralityEnum laterality = 14;  // VARCHAR(15)
+  BiopsyTestRequestPrimaryIndicationEnum primary_indication = 15;  // VARCHAR(30)
+  string clinical_question = 16;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 17;  // VARCHAR(1000) — max 1000 chars
+  string lesion_description = 18;  // VARCHAR(1000) — max 1000 chars
+  bool imaging_guidance_required = 19;  // BOOLEAN
+  bool taking_anticoagulant = 20;  // BOOLEAN
+  string anticoagulant_agent = 21;  // VARCHAR(255) — max 255 chars
+  bool taking_antiplatelet = 22;  // BOOLEAN
+  string antiplatelet_agent = 23;  // VARCHAR(255) — max 255 chars
+  double inr = 24;  // NUMERIC(4,1) — numeric(4,1)
+  double platelet_count = 25;  // NUMERIC(6,0) — numeric(6,0)
+  bool bleeding_disorder = 26;  // BOOLEAN
+  bool immunosuppressed = 27;  // BOOLEAN
+  BiopsyTestRequestUrgencyEnum urgency = 28;  // VARCHAR(15)
+  string supervising_consultant = 29;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 30;  // VARCHAR(255) — max 255 chars
+  string notes = 31;  // VARCHAR(1000) — max 1000 chars
+}

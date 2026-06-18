@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: x_ray_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: X Ray Test Request — XRayTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+paths:
+  /x-ray-test-request-grade-flags:
+    get:
+      summary: List XRayTestRequestGradeFlag records
+      operationId: listXRayTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of XRayTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+    post:
+      summary: Create a new XRayTestRequestGradeFlag
+      operationId: createXRayTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created XRayTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /x-ray-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one XRayTestRequestGradeFlag by id
+      operationId: getXRayTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested XRayTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+        "404":
+          description: XRayTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing XRayTestRequestGradeFlag
+      operationId: updateXRayTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated XRayTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/XRayTestRequestGradeFlag"
+        "404":
+          description: XRayTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a XRayTestRequestGradeFlag
+      operationId: deleteXRayTestRequestGradeFlag
+      responses:
+        "204":
+          description: XRayTestRequestGradeFlag deleted
+        "404":
+          description: XRayTestRequestGradeFlag not found
+components:
+  schemas:
+    XRayTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        x_ray_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-PREGNANCY-001).
+        category:
+          type: string
+          enum:
+            - pregnancy
+            - repeat-recent-imaging
+            - unjustified-exposure
+            - wrong-laterality-risk
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"confirm pregnancy status before exposure\")."
+      required:
+        - created_at
+        - updated_at
+        - x_ray_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.

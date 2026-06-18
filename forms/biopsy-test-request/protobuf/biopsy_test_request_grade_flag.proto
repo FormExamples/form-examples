@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: biopsy_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.biopsy_test_request;
+
+enum BiopsyTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_CANCER_2WW = 1;  // suspected-cancer-2ww
+  CATEGORY_HIGH_BLEEDING_RISK_ANTICOAG = 2;  // high-bleeding-risk-anticoag
+  CATEGORY_COAGULOPATHY = 3;  // coagulopathy
+  CATEGORY_THROMBOCYTOPENIA = 4;  // thrombocytopenia
+  CATEGORY_IMMUNOSUPPRESSION = 5;  // immunosuppression
+  CATEGORY_MISSING_INDICATION = 6;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 7;  // missing-clinical-question
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum BiopsyTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message BiopsyTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string biopsy_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  BiopsyTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  BiopsyTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}
