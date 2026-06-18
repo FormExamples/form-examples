@@ -1,0 +1,224 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:mri-scan-test-request",
+        "code": "mri_scan_test_request_grade",
+        "display": "Mri Scan Test Request Grade"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "appropriateness_score",
+            "display": "Appropriateness Score"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "appropriateness_band",
+            "display": "Appropriateness Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request:appropriateness_band",
+            "code": "usually-appropriate",
+            "display": "Usually-Appropriate"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "mri_safety_band",
+            "display": "Mri Safety Band"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request:mri_safety_band",
+            "code": "cleared",
+            "display": "Cleared"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "contrast_renal_flag",
+            "display": "Contrast Renal Flag"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request:contrast_renal_flag",
+            "code": "none",
+            "display": "None"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "completeness_percent",
+            "display": "Completeness Percent"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "triage_tier",
+            "display": "Triage Tier"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request:triage_tier",
+            "code": "routine",
+            "display": "Routine"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "target_timeframe",
+            "display": "Target Timeframe"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "recommendation",
+            "display": "Recommendation"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request:recommendation",
+            "code": "accept",
+            "display": "Accept"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "clinician_notes",
+            "display": "Clinician Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "signed_at",
+            "display": "Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:mri-scan-test-request",
+            "code": "graded_at",
+            "display": "Graded At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

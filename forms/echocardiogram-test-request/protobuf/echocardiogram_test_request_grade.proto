@@ -1,0 +1,53 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: echocardiogram_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.echocardiogram_test_request;
+
+enum EchocardiogramTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_APPROPRIATE = 1;  // appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_RARELY_APPROPRIATE = 3;  // rarely-appropriate
+}
+
+enum EchocardiogramTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_EMERGENCY = 3;  // emergency
+}
+
+enum EchocardiogramTestRequestGradePriorityBandEnum {
+  PRIORITYBAND_UNSPECIFIED = 0;
+  PRIORITYBAND_LOW = 1;  // low
+  PRIORITYBAND_MODERATE = 2;  // moderate
+  PRIORITYBAND_HIGH = 3;  // high
+}
+
+enum EchocardiogramTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message EchocardiogramTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string echocardiogram_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  EchocardiogramTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  EchocardiogramTestRequestGradeTriageTierEnum triage_tier = 8;  // VARCHAR(15)
+  string target_timeframe = 9;  // VARCHAR(50) — max 50 chars
+  int32 completeness_percent = 10;  // INTEGER
+  EchocardiogramTestRequestGradePriorityBandEnum priority_band = 11;  // VARCHAR(15)
+  EchocardiogramTestRequestGradeRecommendationEnum recommendation = 12;  // VARCHAR(20)
+  string clinician_notes = 13;  // TEXT
+  string signed_at = 14;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

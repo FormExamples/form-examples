@@ -1,0 +1,207 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: ct_scan_test_request_grade
+openapi: 3.1.0
+info:
+  title: Ct Scan Test Request — CtScanTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (ACR 1-9), radiation / contrast safety (RCR / ESUR + IR(ME)R), request completeness, and triage priority."
+paths:
+  /ct-scan-test-request-grades:
+    get:
+      summary: List CtScanTestRequestGrade records
+      operationId: listCtScanTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CtScanTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CtScanTestRequestGrade"
+    post:
+      summary: Create a new CtScanTestRequestGrade
+      operationId: createCtScanTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CtScanTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created CtScanTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestRequestGrade"
+        "400":
+          description: Validation error
+  /ct-scan-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CtScanTestRequestGrade by id
+      operationId: getCtScanTestRequestGrade
+      responses:
+        "200":
+          description: The requested CtScanTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestRequestGrade"
+        "404":
+          description: CtScanTestRequestGrade not found
+    patch:
+      summary: Update an existing CtScanTestRequestGrade
+      operationId: updateCtScanTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CtScanTestRequestGrade"
+      responses:
+        "200":
+          description: The updated CtScanTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CtScanTestRequestGrade"
+        "404":
+          description: CtScanTestRequestGrade not found
+    delete:
+      summary: Soft-delete a CtScanTestRequestGrade
+      operationId: deleteCtScanTestRequestGrade
+      responses:
+        "204":
+          description: CtScanTestRequestGrade deleted
+        "404":
+          description: CtScanTestRequestGrade not found
+components:
+  schemas:
+    CtScanTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        ct_scan_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: ACR Appropriateness Criteria score (1-9).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        contrast_safety_band:
+          type: string
+          enum:
+            - safe
+            - caution
+            - contraindicated
+            - ""
+          description: "Contrast safety band derived from eGFR, allergy, and previous reaction: safe, caution, contraindicated."
+        estimated_dose_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Estimated radiation dose band for the requested study: low, moderate, high."
+        renal_risk:
+          type: boolean
+          description: Whether the request carries a contrast-induced nephropathy / renal risk (eGFR-driven).
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the scan implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - ct_scan_test_request_id
+        - appropriateness_band
+        - contrast_safety_band
+        - estimated_dose_band
+        - renal_risk
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (ACR 1-9), radiation / contrast safety (RCR / ESUR + IR(ME)R), request completeness, and triage priority."

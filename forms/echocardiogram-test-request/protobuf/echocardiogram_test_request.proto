@@ -1,0 +1,111 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: echocardiogram_test_request
+
+syntax = "proto3";
+
+package form_examples.echocardiogram_test_request;
+
+enum EchocardiogramTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum EchocardiogramTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum EchocardiogramTestRequestEchoTypeEnum {
+  ECHOTYPE_UNSPECIFIED = 0;
+  ECHOTYPE_TRANSTHORACIC_TTE = 1;  // transthoracic-tte
+  ECHOTYPE_TRANSOESOPHAGEAL_TOE = 2;  // transoesophageal-toe
+  ECHOTYPE_STRESS_ECHO = 3;  // stress-echo
+  ECHOTYPE_CONTRAST_ECHO = 4;  // contrast-echo
+  ECHOTYPE_OTHER = 5;  // other
+}
+
+enum EchocardiogramTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_HEART_FAILURE = 1;  // heart-failure
+  PRIMARYINDICATION_MURMUR = 2;  // murmur
+  PRIMARYINDICATION_SUSPECTED_VALVE_DISEASE = 3;  // suspected-valve-disease
+  PRIMARYINDICATION_BREATHLESSNESS = 4;  // breathlessness
+  PRIMARYINDICATION_PALPITATIONS = 5;  // palpitations
+  PRIMARYINDICATION_CHEST_PAIN = 6;  // chest-pain
+  PRIMARYINDICATION_HYPERTENSION = 7;  // hypertension
+  PRIMARYINDICATION_CARDIOMYOPATHY = 8;  // cardiomyopathy
+  PRIMARYINDICATION_ENDOCARDITIS = 9;  // endocarditis
+  PRIMARYINDICATION_POST_MI = 10;  // post-mi
+  PRIMARYINDICATION_PULMONARY_HYPERTENSION = 11;  // pulmonary-hypertension
+  PRIMARYINDICATION_PRE_CHEMOTHERAPY = 12;  // pre-chemotherapy
+  PRIMARYINDICATION_STROKE_TIA_SOURCE = 13;  // stroke-tia-source
+  PRIMARYINDICATION_CONGENITAL = 14;  // congenital
+  PRIMARYINDICATION_SURVEILLANCE_KNOWN_DISEASE = 15;  // surveillance-known-disease
+  PRIMARYINDICATION_OTHER = 16;  // other
+}
+
+enum EchocardiogramTestRequestNyhaClassEnum {
+  NYHACLASS_UNSPECIFIED = 0;
+  NYHACLASS_I = 1;  // i
+  NYHACLASS_II = 2;  // ii
+  NYHACLASS_III = 3;  // iii
+  NYHACLASS_IV = 4;  // iv
+}
+
+enum EchocardiogramTestRequestPreviousEchoEnum {
+  PREVIOUSECHO_UNSPECIFIED = 0;
+  PREVIOUSECHO_NONE = 1;  // none
+  PREVIOUSECHO_NORMAL = 2;  // normal
+  PREVIOUSECHO_ABNORMAL = 3;  // abnormal
+  PREVIOUSECHO_UNKNOWN = 4;  // unknown
+}
+
+enum EchocardiogramTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message EchocardiogramTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  EchocardiogramTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  EchocardiogramTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  EchocardiogramTestRequestEchoTypeEnum echo_type = 12;  // VARCHAR(30)
+  EchocardiogramTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool breathlessness = 16;  // BOOLEAN
+  bool chest_pain = 17;  // BOOLEAN
+  bool palpitations = 18;  // BOOLEAN
+  bool syncope = 19;  // BOOLEAN
+  bool oedema = 20;  // BOOLEAN
+  EchocardiogramTestRequestNyhaClassEnum nyha_class = 21;  // VARCHAR(5)
+  string ecg_findings = 22;  // VARCHAR(1000) — max 1000 chars
+  double bnp_or_nt_probnp = 23;  // NUMERIC(8,1) — numeric(8,1)
+  bool known_murmur = 24;  // BOOLEAN
+  EchocardiogramTestRequestPreviousEchoEnum previous_echo = 25;  // VARCHAR(15)
+  string previous_echo_date = 26;  // DATE — iso 8601 date
+  double ejection_fraction_known = 27;  // NUMERIC(4,1) — numeric(4,1)
+  bool on_cardiotoxic_chemotherapy = 28;  // BOOLEAN
+  string relevant_medications = 29;  // VARCHAR(1000) — max 1000 chars
+  EchocardiogramTestRequestUrgencyEnum urgency = 30;  // VARCHAR(15)
+  string supervising_consultant = 31;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 32;  // VARCHAR(255) — max 255 chars
+  string notes = 33;  // VARCHAR(1000) — max 1000 chars
+}

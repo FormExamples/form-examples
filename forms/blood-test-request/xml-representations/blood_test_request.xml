@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE blood_test_request SYSTEM "blood_test_request.dtd">
+<blood_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<full_blood_count>true</full_blood_count>
+<urea_electrolytes>true</urea_electrolytes>
+<liver_function>true</liver_function>
+<thyroid_function>true</thyroid_function>
+<hba1c>true</hba1c>
+<lipid_profile>true</lipid_profile>
+<c_reactive_protein>true</c_reactive_protein>
+<coagulation_screen>true</coagulation_screen>
+<bone_profile>true</bone_profile>
+<ferritin_iron>true</ferritin_iron>
+<vitamin_b12_folate>true</vitamin_b12_folate>
+<vitamin_d>true</vitamin_d>
+<hba1c_monitoring>true</hba1c_monitoring>
+<glucose>true</glucose>
+<inr>true</inr>
+<blood_culture>true</blood_culture>
+<group_and_save>true</group_and_save>
+<crossmatch>true</crossmatch>
+<troponin>true</troponin>
+<d_dimer>true</d_dimer>
+<amylase_lipase>true</amylase_lipase>
+<primary_indication>routine-monitoring</primary_indication>
+<clinical_details>Example text.</clinical_details>
+<relevant_medications>Paracetamol</relevant_medications>
+<fasting_required>true</fasting_required>
+<fasting_status>fasting</fasting_status>
+<specimen_collected>yes</specimen_collected>
+<collection_datetime>2026-04-09T10:00:00Z</collection_datetime>
+<known_blood_borne_virus>true</known_blood_borne_virus>
+<difficult_venous_access>true</difficult_venous_access>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</blood_test_request>

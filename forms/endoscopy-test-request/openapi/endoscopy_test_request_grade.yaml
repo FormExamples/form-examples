@@ -1,0 +1,217 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: endoscopy_test_request_grade
+openapi: 3.1.0
+info:
+  title: Endoscopy Test Request — EndoscopyTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (ACR / ASGE-AUC / EPAGE 1-9), cancer-pathway urgency / triage tier, request completeness, and pre-procedure bleeding / mortality risk."
+paths:
+  /endoscopy-test-request-grades:
+    get:
+      summary: List EndoscopyTestRequestGrade records
+      operationId: listEndoscopyTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EndoscopyTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+    post:
+      summary: Create a new EndoscopyTestRequestGrade
+      operationId: createEndoscopyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created EndoscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+        "400":
+          description: Validation error
+  /endoscopy-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EndoscopyTestRequestGrade by id
+      operationId: getEndoscopyTestRequestGrade
+      responses:
+        "200":
+          description: The requested EndoscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+        "404":
+          description: EndoscopyTestRequestGrade not found
+    patch:
+      summary: Update an existing EndoscopyTestRequestGrade
+      operationId: updateEndoscopyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated EndoscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+        "404":
+          description: EndoscopyTestRequestGrade not found
+    delete:
+      summary: Soft-delete a EndoscopyTestRequestGrade
+      operationId: deleteEndoscopyTestRequestGrade
+      responses:
+        "204":
+          description: EndoscopyTestRequestGrade deleted
+        "404":
+          description: EndoscopyTestRequestGrade not found
+components:
+  schemas:
+    EndoscopyTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        endoscopy_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9), ACR / ASGE-AUC / EPAGE style.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, two-week-wait, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: "Target timeframe for the procedure implied by the triage tier (e.g. \"<= 14 days (2WW)\")."
+        two_week_wait_eligible:
+          type: boolean
+          description: Whether the request meets NICE NG12 / DG56 suspected-cancer two-week-wait criteria.
+        two_week_wait_rationale:
+          type: string
+          maxLength: 500
+          description: Rationale explaining the two-week-wait eligibility decision.
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        glasgow_blatchford_score:
+          type: integer
+          format: int32
+          description: Glasgow-Blatchford bleeding score (0-23); 0 indicates very low risk suitable for outpatient management.
+        rockall_score:
+          type: integer
+          format: int32
+          description: Pre-endoscopy Rockall score (0-11) for upper-GI-bleed mortality / rebleed risk.
+        risk_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Pre-procedure risk band: low, moderate, high."
+        anticoagulant_action:
+          type: string
+          maxLength: 500
+          description: Recommended anticoagulant / antiplatelet management action per BSG / ESGE bleeding-risk stratification.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - endoscopy_test_request_id
+        - appropriateness_band
+        - triage_tier
+        - target_timeframe
+        - two_week_wait_eligible
+        - two_week_wait_rationale
+        - risk_band
+        - anticoagulant_action
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (ACR / ASGE-AUC / EPAGE 1-9), cancer-pathway urgency / triage tier, request completeness, and pre-procedure bleeding / mortality risk."

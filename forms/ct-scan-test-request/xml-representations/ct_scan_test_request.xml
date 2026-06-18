@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ct_scan_test_request SYSTEM "ct_scan_test_request.dtd">
+<ct_scan_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<body_region>head</body_region>
+<primary_indication>trauma</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<contrast_required>none</contrast_required>
+<pregnancy_status>not-pregnant</pregnancy_status>
+<egfr>0.0</egfr>
+<previous_contrast_reaction>none</previous_contrast_reaction>
+<iodine_contrast_allergy>true</iodine_contrast_allergy>
+<metformin>true</metformin>
+<diabetes>true</diabetes>
+<renal_impairment>true</renal_impairment>
+<weight_kg>70.0</weight_kg>
+<relevant_previous_imaging></relevant_previous_imaging>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<ir_me_r_justification></ir_me_r_justification>
+<notes>Example text.</notes>
+</ct_scan_test_request>

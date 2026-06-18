@@ -1,0 +1,107 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: blood_test_request
+
+syntax = "proto3";
+
+package form_examples.blood_test_request;
+
+enum BloodTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_COLLECTED = 4;  // collected
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum BloodTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum BloodTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_ROUTINE_MONITORING = 1;  // routine-monitoring
+  PRIMARYINDICATION_ANAEMIA = 2;  // anaemia
+  PRIMARYINDICATION_FATIGUE = 3;  // fatigue
+  PRIMARYINDICATION_INFECTION = 4;  // infection
+  PRIMARYINDICATION_DIABETES_MONITORING = 5;  // diabetes-monitoring
+  PRIMARYINDICATION_THYROID_SYMPTOMS = 6;  // thyroid-symptoms
+  PRIMARYINDICATION_CARDIOVASCULAR_RISK = 7;  // cardiovascular-risk
+  PRIMARYINDICATION_LIVER_DISEASE = 8;  // liver-disease
+  PRIMARYINDICATION_RENAL_MONITORING = 9;  // renal-monitoring
+  PRIMARYINDICATION_ANTICOAGULATION_MONITORING = 10;  // anticoagulation-monitoring
+  PRIMARYINDICATION_PRE_OPERATIVE = 11;  // pre-operative
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 12;  // suspected-malignancy
+  PRIMARYINDICATION_OTHER = 13;  // other
+}
+
+enum BloodTestRequestFastingStatusEnum {
+  FASTINGSTATUS_UNSPECIFIED = 0;
+  FASTINGSTATUS_FASTING = 1;  // fasting
+  FASTINGSTATUS_NON_FASTING = 2;  // non-fasting
+  FASTINGSTATUS_UNKNOWN = 3;  // unknown
+}
+
+enum BloodTestRequestSpecimenCollectedEnum {
+  SPECIMENCOLLECTED_UNSPECIFIED = 0;
+  SPECIMENCOLLECTED_YES = 1;  // yes
+  SPECIMENCOLLECTED_NO = 2;  // no
+}
+
+enum BloodTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_STAT = 3;  // stat
+}
+
+message BloodTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  BloodTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  BloodTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  bool full_blood_count = 11;  // BOOLEAN
+  bool urea_electrolytes = 12;  // BOOLEAN
+  bool liver_function = 13;  // BOOLEAN
+  bool thyroid_function = 14;  // BOOLEAN
+  bool hba1c = 15;  // BOOLEAN
+  bool lipid_profile = 16;  // BOOLEAN
+  bool c_reactive_protein = 17;  // BOOLEAN
+  bool coagulation_screen = 18;  // BOOLEAN
+  bool bone_profile = 19;  // BOOLEAN
+  bool ferritin_iron = 20;  // BOOLEAN
+  bool vitamin_b12_folate = 21;  // BOOLEAN
+  bool vitamin_d = 22;  // BOOLEAN
+  bool hba1c_monitoring = 23;  // BOOLEAN
+  bool glucose = 24;  // BOOLEAN
+  bool inr = 25;  // BOOLEAN
+  bool blood_culture = 26;  // BOOLEAN
+  bool group_and_save = 27;  // BOOLEAN
+  bool crossmatch = 28;  // BOOLEAN
+  bool troponin = 29;  // BOOLEAN
+  bool d_dimer = 30;  // BOOLEAN
+  bool amylase_lipase = 31;  // BOOLEAN
+  BloodTestRequestPrimaryIndicationEnum primary_indication = 32;  // VARCHAR(40)
+  string clinical_details = 33;  // VARCHAR(1000) — max 1000 chars
+  string relevant_medications = 34;  // VARCHAR(1000) — max 1000 chars
+  bool fasting_required = 35;  // BOOLEAN
+  BloodTestRequestFastingStatusEnum fasting_status = 36;  // VARCHAR(15)
+  BloodTestRequestSpecimenCollectedEnum specimen_collected = 37;  // VARCHAR(5)
+  string collection_datetime = 38;  // TIMESTAMPTZ — iso 8601
+  bool known_blood_borne_virus = 39;  // BOOLEAN
+  bool difficult_venous_access = 40;  // BOOLEAN
+  BloodTestRequestUrgencyEnum urgency = 41;  // VARCHAR(15)
+  string supervising_consultant = 42;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 43;  // VARCHAR(255) — max 255 chars
+  string notes = 44;  // VARCHAR(1000) — max 1000 chars
+}

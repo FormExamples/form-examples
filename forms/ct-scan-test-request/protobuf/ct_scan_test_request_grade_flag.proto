@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: ct_scan_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.ct_scan_test_request;
+
+enum CtScanTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_PREGNANCY = 1;  // pregnancy
+  CATEGORY_CONTRAST_ALLERGY = 2;  // contrast-allergy
+  CATEGORY_RENAL_IMPAIRMENT = 3;  // renal-impairment
+  CATEGORY_METFORMIN_CONTRAST = 4;  // metformin-contrast
+  CATEGORY_HIGH_RADIATION_DOSE = 5;  // high-radiation-dose
+  CATEGORY_UNJUSTIFIED_EXPOSURE = 6;  // unjustified-exposure
+  CATEGORY_MISSING_INDICATION = 7;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 8;  // missing-clinical-question
+  CATEGORY_MISSING_EGFR = 9;  // missing-egfr
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum CtScanTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message CtScanTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ct_scan_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  CtScanTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  CtScanTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

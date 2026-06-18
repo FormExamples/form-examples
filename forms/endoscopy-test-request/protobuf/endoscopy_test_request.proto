@@ -1,0 +1,184 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: endoscopy_test_request
+
+syntax = "proto3";
+
+package form_examples.endoscopy_test_request;
+
+enum EndoscopyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum EndoscopyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum EndoscopyTestRequestRequestedProcedureEnum {
+  REQUESTEDPROCEDURE_UNSPECIFIED = 0;
+  REQUESTEDPROCEDURE_OGD = 1;  // ogd
+  REQUESTEDPROCEDURE_GASTROSCOPY = 2;  // gastroscopy
+  REQUESTEDPROCEDURE_COLONOSCOPY = 3;  // colonoscopy
+  REQUESTEDPROCEDURE_FLEXIBLE_SIGMOIDOSCOPY = 4;  // flexible-sigmoidoscopy
+  REQUESTEDPROCEDURE_ERCP = 5;  // ercp
+  REQUESTEDPROCEDURE_EUS = 6;  // eus
+  REQUESTEDPROCEDURE_CAPSULE = 7;  // capsule
+  REQUESTEDPROCEDURE_OTHER = 8;  // other
+}
+
+enum EndoscopyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_DYSPEPSIA = 1;  // dyspepsia
+  PRIMARYINDICATION_GORD = 2;  // gord
+  PRIMARYINDICATION_DYSPHAGIA = 3;  // dysphagia
+  PRIMARYINDICATION_UPPER_GI_BLEEDING = 4;  // upper-gi-bleeding
+  PRIMARYINDICATION_IRON_DEFICIENCY_ANAEMIA = 5;  // iron-deficiency-anaemia
+  PRIMARYINDICATION_WEIGHT_LOSS = 6;  // weight-loss
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 7;  // suspected-malignancy
+  PRIMARYINDICATION_BARRETTS_SURVEILLANCE = 8;  // barretts-surveillance
+  PRIMARYINDICATION_H_PYLORI = 9;  // h-pylori
+  PRIMARYINDICATION_RECTAL_BLEEDING = 10;  // rectal-bleeding
+  PRIMARYINDICATION_CHANGE_IN_BOWEL_HABIT = 11;  // change-in-bowel-habit
+  PRIMARYINDICATION_POSITIVE_FIT = 12;  // positive-fit
+  PRIMARYINDICATION_IBD_SURVEILLANCE = 13;  // ibd-surveillance
+  PRIMARYINDICATION_POLYP_SURVEILLANCE = 14;  // polyp-surveillance
+  PRIMARYINDICATION_ABNORMAL_IMAGING = 15;  // abnormal-imaging
+  PRIMARYINDICATION_OTHER = 16;  // other
+}
+
+enum EndoscopyTestRequestAnticoagulantAgentEnum {
+  ANTICOAGULANTAGENT_UNSPECIFIED = 0;
+  ANTICOAGULANTAGENT_NONE = 1;  // none
+  ANTICOAGULANTAGENT_WARFARIN = 2;  // warfarin
+  ANTICOAGULANTAGENT_APIXABAN = 3;  // apixaban
+  ANTICOAGULANTAGENT_RIVAROXABAN = 4;  // rivaroxaban
+  ANTICOAGULANTAGENT_EDOXABAN = 5;  // edoxaban
+  ANTICOAGULANTAGENT_DABIGATRAN = 6;  // dabigatran
+  ANTICOAGULANTAGENT_LMWH = 7;  // lmwh
+  ANTICOAGULANTAGENT_OTHER = 8;  // other
+}
+
+enum EndoscopyTestRequestAntiplateletAgentEnum {
+  ANTIPLATELETAGENT_UNSPECIFIED = 0;
+  ANTIPLATELETAGENT_NONE = 1;  // none
+  ANTIPLATELETAGENT_ASPIRIN = 2;  // aspirin
+  ANTIPLATELETAGENT_CLOPIDOGREL = 3;  // clopidogrel
+  ANTIPLATELETAGENT_TICAGRELOR = 4;  // ticagrelor
+  ANTIPLATELETAGENT_PRASUGREL = 5;  // prasugrel
+  ANTIPLATELETAGENT_DIPYRIDAMOLE = 6;  // dipyridamole
+  ANTIPLATELETAGENT_DUAL = 7;  // dual
+  ANTIPLATELETAGENT_OTHER = 8;  // other
+}
+
+enum EndoscopyTestRequestDiabetesMedicationEnum {
+  DIABETESMEDICATION_UNSPECIFIED = 0;
+  DIABETESMEDICATION_NONE = 1;  // none
+  DIABETESMEDICATION_ORAL = 2;  // oral
+  DIABETESMEDICATION_INSULIN = 3;  // insulin
+}
+
+enum EndoscopyTestRequestCardiacNyhaClassEnum {
+  CARDIACNYHACLASS_UNSPECIFIED = 0;
+  CARDIACNYHACLASS_I = 1;  // I
+  CARDIACNYHACLASS_II = 2;  // II
+  CARDIACNYHACLASS_III = 3;  // III
+  CARDIACNYHACLASS_IV = 4;  // IV
+}
+
+enum EndoscopyTestRequestAsaGradeEnum {
+  ASAGRADE_UNSPECIFIED = 0;
+  ASAGRADE_I = 1;  // I
+  ASAGRADE_II = 2;  // II
+  ASAGRADE_III = 3;  // III
+  ASAGRADE_IV = 4;  // IV
+  ASAGRADE_V = 5;  // V
+}
+
+enum EndoscopyTestRequestBowelPrepAgentEnum {
+  BOWELPREPAGENT_UNSPECIFIED = 0;
+  BOWELPREPAGENT_NONE = 1;  // none
+  BOWELPREPAGENT_MOVIPREP = 2;  // moviprep
+  BOWELPREPAGENT_PLENVU = 3;  // plenvu
+  BOWELPREPAGENT_KLEAN_PREP = 4;  // klean-prep
+  BOWELPREPAGENT_PICOLAX = 5;  // picolax
+  BOWELPREPAGENT_CITRAMAG = 6;  // citramag
+  BOWELPREPAGENT_OTHER = 7;  // other
+}
+
+enum EndoscopyTestRequestSedationEnum {
+  SEDATION_UNSPECIFIED = 0;
+  SEDATION_NONE = 1;  // none
+  SEDATION_THROAT_SPRAY = 2;  // throat-spray
+  SEDATION_CONSCIOUS = 3;  // conscious
+  SEDATION_DEEP = 4;  // deep
+}
+
+enum EndoscopyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message EndoscopyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  EndoscopyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  EndoscopyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  EndoscopyTestRequestRequestedProcedureEnum requested_procedure = 12;  // VARCHAR(30)
+  EndoscopyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool red_flag_dysphagia = 16;  // BOOLEAN
+  bool red_flag_weight_loss = 17;  // BOOLEAN
+  bool red_flag_anaemia = 18;  // BOOLEAN
+  bool red_flag_gi_bleeding = 19;  // BOOLEAN
+  bool red_flag_abdominal_mass = 20;  // BOOLEAN
+  bool red_flag_age_over_55 = 21;  // BOOLEAN
+  double fit_result_ug_g = 22;  // NUMERIC(6,1) — numeric(6,1)
+  double haemoglobin_g_l = 23;  // NUMERIC(5,1) — numeric(5,1)
+  double ferritin_ug_l = 24;  // NUMERIC(6,1) — numeric(6,1)
+  bool taking_anticoagulant = 25;  // BOOLEAN
+  EndoscopyTestRequestAnticoagulantAgentEnum anticoagulant_agent = 26;  // VARCHAR(20)
+  bool taking_antiplatelet = 27;  // BOOLEAN
+  EndoscopyTestRequestAntiplateletAgentEnum antiplatelet_agent = 28;  // VARCHAR(20)
+  EndoscopyTestRequestDiabetesMedicationEnum diabetes_medication = 29;  // VARCHAR(15)
+  string allergies = 30;  // VARCHAR(1000) — max 1000 chars
+  bool latex_allergy = 31;  // BOOLEAN
+  EndoscopyTestRequestCardiacNyhaClassEnum cardiac_nyha_class = 32;  // VARCHAR(5)
+  bool pacemaker_icd = 33;  // BOOLEAN
+  bool chronic_kidney_disease = 34;  // BOOLEAN
+  double egfr_ml_min = 35;  // NUMERIC(5,1) — numeric(5,1)
+  bool sleep_apnoea = 36;  // BOOLEAN
+  bool neutropenia = 37;  // BOOLEAN
+  EndoscopyTestRequestAsaGradeEnum asa_grade = 38;  // VARCHAR(5)
+  bool vcjd_risk = 39;  // BOOLEAN
+  bool cpe_carriage = 40;  // BOOLEAN
+  bool mrsa = 41;  // BOOLEAN
+  bool blood_borne_virus = 42;  // BOOLEAN
+  bool fit_for_bowel_prep = 43;  // BOOLEAN
+  EndoscopyTestRequestBowelPrepAgentEnum bowel_prep_agent = 44;  // VARCHAR(20)
+  EndoscopyTestRequestSedationEnum sedation = 45;  // VARCHAR(15)
+  bool escort_available = 46;  // BOOLEAN
+  EndoscopyTestRequestUrgencyEnum urgency = 47;  // VARCHAR(15)
+  string supervising_consultant = 48;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 49;  // VARCHAR(255) — max 255 chars
+  bool interpreter_required = 50;  // BOOLEAN
+  string notes = 51;  // VARCHAR(1000) — max 1000 chars
+}

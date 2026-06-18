@@ -1,0 +1,121 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: ct_scan_test_request
+
+syntax = "proto3";
+
+package form_examples.ct_scan_test_request;
+
+enum CtScanTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum CtScanTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CtScanTestRequestBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_HEAD = 1;  // head
+  BODYREGION_NECK = 2;  // neck
+  BODYREGION_CHEST = 3;  // chest
+  BODYREGION_ABDOMEN = 4;  // abdomen
+  BODYREGION_PELVIS = 5;  // pelvis
+  BODYREGION_ABDOMEN_PELVIS = 6;  // abdomen-pelvis
+  BODYREGION_SPINE = 7;  // spine
+  BODYREGION_CT_ANGIOGRAM = 8;  // ct-angiogram
+  BODYREGION_CT_COLONOGRAPHY = 9;  // ct-colonography
+  BODYREGION_WHOLE_BODY = 10;  // whole-body
+  BODYREGION_EXTREMITY = 11;  // extremity
+  BODYREGION_OTHER = 12;  // other
+}
+
+enum CtScanTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_TRAUMA = 1;  // trauma
+  PRIMARYINDICATION_SUSPECTED_STROKE = 2;  // suspected-stroke
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 3;  // suspected-malignancy
+  PRIMARYINDICATION_CANCER_STAGING = 4;  // cancer-staging
+  PRIMARYINDICATION_PULMONARY_EMBOLISM = 5;  // pulmonary-embolism
+  PRIMARYINDICATION_ABDOMINAL_PAIN = 6;  // abdominal-pain
+  PRIMARYINDICATION_RENAL_COLIC = 7;  // renal-colic
+  PRIMARYINDICATION_INFECTION_ABSCESS = 8;  // infection-abscess
+  PRIMARYINDICATION_PRE_SURGICAL_PLANNING = 9;  // pre-surgical-planning
+  PRIMARYINDICATION_FOLLOW_UP_SURVEILLANCE = 10;  // follow-up-surveillance
+  PRIMARYINDICATION_HEADACHE = 11;  // headache
+  PRIMARYINDICATION_OTHER = 12;  // other
+}
+
+enum CtScanTestRequestContrastRequiredEnum {
+  CONTRASTREQUIRED_UNSPECIFIED = 0;
+  CONTRASTREQUIRED_NONE = 1;  // none
+  CONTRASTREQUIRED_IV_IODINATED = 2;  // iv-iodinated
+  CONTRASTREQUIRED_ORAL = 3;  // oral
+  CONTRASTREQUIRED_BOTH = 4;  // both
+  CONTRASTREQUIRED_UNKNOWN = 5;  // unknown
+}
+
+enum CtScanTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum CtScanTestRequestPreviousContrastReactionEnum {
+  PREVIOUSCONTRASTREACTION_UNSPECIFIED = 0;
+  PREVIOUSCONTRASTREACTION_NONE = 1;  // none
+  PREVIOUSCONTRASTREACTION_MILD = 2;  // mild
+  PREVIOUSCONTRASTREACTION_MODERATE = 3;  // moderate
+  PREVIOUSCONTRASTREACTION_SEVERE = 4;  // severe
+  PREVIOUSCONTRASTREACTION_UNKNOWN = 5;  // unknown
+}
+
+enum CtScanTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message CtScanTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CtScanTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CtScanTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  CtScanTestRequestBodyRegionEnum body_region = 12;  // VARCHAR(20)
+  CtScanTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(30)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  CtScanTestRequestContrastRequiredEnum contrast_required = 16;  // VARCHAR(20)
+  CtScanTestRequestPregnancyStatusEnum pregnancy_status = 17;  // VARCHAR(20)
+  double egfr = 18;  // NUMERIC(5,1) — numeric(5,1)
+  CtScanTestRequestPreviousContrastReactionEnum previous_contrast_reaction = 19;  // VARCHAR(15)
+  bool iodine_contrast_allergy = 20;  // BOOLEAN
+  bool metformin = 21;  // BOOLEAN
+  bool diabetes = 22;  // BOOLEAN
+  bool renal_impairment = 23;  // BOOLEAN
+  double weight_kg = 24;  // NUMERIC(5,1) — numeric(5,1)
+  string relevant_previous_imaging = 25;  // VARCHAR(1000) — max 1000 chars
+  CtScanTestRequestUrgencyEnum urgency = 26;  // VARCHAR(15)
+  string supervising_consultant = 27;  // VARCHAR(255) — max 255 chars
+  string ir_me_r_justification = 28;  // VARCHAR(1000) — max 1000 chars
+  string notes = 29;  // VARCHAR(1000) — max 1000 chars
+}

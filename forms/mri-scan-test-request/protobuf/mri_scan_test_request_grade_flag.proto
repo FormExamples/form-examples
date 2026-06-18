@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: mri_scan_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.mri_scan_test_request;
+
+enum MriScanTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_FERROMAGNETIC_IMPLANT = 1;  // ferromagnetic-implant
+  CATEGORY_PACEMAKER_ICD = 2;  // pacemaker-icd
+  CATEGORY_ORBITAL_FOREIGN_BODY = 3;  // orbital-foreign-body
+  CATEGORY_GADOLINIUM_RENAL_RISK = 4;  // gadolinium-renal-risk
+  CATEGORY_PREGNANCY = 5;  // pregnancy
+  CATEGORY_CLAUSTROPHOBIA = 6;  // claustrophobia
+  CATEGORY_MISSING_SAFETY_SCREEN = 7;  // missing-safety-screen
+  CATEGORY_MISSING_INDICATION = 8;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 9;  // missing-clinical-question
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum MriScanTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MriScanTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string mri_scan_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MriScanTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  MriScanTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

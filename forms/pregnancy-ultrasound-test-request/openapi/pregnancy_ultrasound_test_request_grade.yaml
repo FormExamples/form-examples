@@ -1,0 +1,200 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pregnancy_ultrasound_test_request_grade
+openapi: 3.1.0
+info:
+  title: Pregnancy Ultrasound Test Request — PregnancyUltrasoundTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (ACR 1-9), gestational-age window fit, request completeness, and triage priority."
+paths:
+  /pregnancy-ultrasound-test-request-grades:
+    get:
+      summary: List PregnancyUltrasoundTestRequestGrade records
+      operationId: listPregnancyUltrasoundTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PregnancyUltrasoundTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+    post:
+      summary: Create a new PregnancyUltrasoundTestRequestGrade
+      operationId: createPregnancyUltrasoundTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created PregnancyUltrasoundTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+        "400":
+          description: Validation error
+  /pregnancy-ultrasound-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PregnancyUltrasoundTestRequestGrade by id
+      operationId: getPregnancyUltrasoundTestRequestGrade
+      responses:
+        "200":
+          description: The requested PregnancyUltrasoundTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+        "404":
+          description: PregnancyUltrasoundTestRequestGrade not found
+    patch:
+      summary: Update an existing PregnancyUltrasoundTestRequestGrade
+      operationId: updatePregnancyUltrasoundTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+      responses:
+        "200":
+          description: The updated PregnancyUltrasoundTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequestGrade"
+        "404":
+          description: PregnancyUltrasoundTestRequestGrade not found
+    delete:
+      summary: Soft-delete a PregnancyUltrasoundTestRequestGrade
+      operationId: deletePregnancyUltrasoundTestRequestGrade
+      responses:
+        "204":
+          description: PregnancyUltrasoundTestRequestGrade deleted
+        "404":
+          description: PregnancyUltrasoundTestRequestGrade not found
+components:
+  schemas:
+    PregnancyUltrasoundTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        pregnancy_ultrasound_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: ACR Appropriateness Criteria score (1-9).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        gestational_age_window_fit:
+          type: string
+          enum:
+            - appropriate
+            - borderline
+            - outside-window
+            - ""
+          description: "Whether the requested scan type fits the evidence-based gestational-age window: appropriate, borderline, outside-window."
+        recommended_scan_type:
+          type: string
+          maxLength: 30
+          description: Recommended scan type when the requested type is outside its window.
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, soon, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the scan implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - pregnancy_ultrasound_test_request_id
+        - appropriateness_band
+        - gestational_age_window_fit
+        - recommended_scan_type
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (ACR 1-9), gestational-age window fit, request completeness, and triage priority."

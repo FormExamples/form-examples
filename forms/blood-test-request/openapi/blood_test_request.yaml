@@ -1,0 +1,336 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: blood_test_request
+openapi: 3.1.0
+info:
+  title: Blood Test Request — BloodTestRequest
+  version: 1.0.0
+  description: Pathology / phlebotomy blood-test order (request). Captures the requested test panels (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
+paths:
+  /blood-test-requests:
+    get:
+      summary: List BloodTestRequest records
+      operationId: listBloodTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BloodTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodTestRequest"
+    post:
+      summary: Create a new BloodTestRequest
+      operationId: createBloodTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodTestRequest"
+      responses:
+        "201":
+          description: The newly created BloodTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodTestRequest"
+        "400":
+          description: Validation error
+  /blood-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BloodTestRequest by id
+      operationId: getBloodTestRequest
+      responses:
+        "200":
+          description: The requested BloodTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodTestRequest"
+        "404":
+          description: BloodTestRequest not found
+    patch:
+      summary: Update an existing BloodTestRequest
+      operationId: updateBloodTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodTestRequest"
+      responses:
+        "200":
+          description: The updated BloodTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodTestRequest"
+        "404":
+          description: BloodTestRequest not found
+    delete:
+      summary: Soft-delete a BloodTestRequest
+      operationId: deleteBloodTestRequest
+      responses:
+        "204":
+          description: BloodTestRequest deleted
+        "404":
+          description: BloodTestRequest not found
+components:
+  schemas:
+    BloodTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - collected
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, collected, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the request was made.
+        full_blood_count:
+          type: boolean
+          description: Whether a full blood count (FBC) is requested.
+        urea_electrolytes:
+          type: boolean
+          description: Whether urea and electrolytes (U&E) are requested.
+        liver_function:
+          type: boolean
+          description: Whether liver function tests (LFT) are requested.
+        thyroid_function:
+          type: boolean
+          description: Whether thyroid function tests (TFT) are requested.
+        hba1c:
+          type: boolean
+          description: Whether HbA1c (glycated haemoglobin, diagnostic) is requested.
+        lipid_profile:
+          type: boolean
+          description: Whether a lipid profile is requested.
+        c_reactive_protein:
+          type: boolean
+          description: Whether C-reactive protein (CRP) is requested.
+        coagulation_screen:
+          type: boolean
+          description: Whether a coagulation screen (PT / APTT) is requested.
+        bone_profile:
+          type: boolean
+          description: Whether a bone profile (calcium, phosphate, ALP, albumin) is requested.
+        ferritin_iron:
+          type: boolean
+          description: Whether ferritin / iron studies are requested.
+        vitamin_b12_folate:
+          type: boolean
+          description: Whether vitamin B12 and folate are requested.
+        vitamin_d:
+          type: boolean
+          description: Whether vitamin D (25-OH) is requested.
+        hba1c_monitoring:
+          type: boolean
+          description: Whether HbA1c for diabetes monitoring (repeat) is requested.
+        glucose:
+          type: boolean
+          description: Whether a glucose (fasting or random) is requested.
+        inr:
+          type: boolean
+          description: Whether an INR (anticoagulation monitoring) is requested.
+        blood_culture:
+          type: boolean
+          description: Whether a blood culture is requested.
+        group_and_save:
+          type: boolean
+          description: Whether a group and save (blood group and antibody screen) is requested.
+        crossmatch:
+          type: boolean
+          description: Whether a crossmatch (for transfusion) is requested.
+        troponin:
+          type: boolean
+          description: Whether a troponin (cardiac marker) is requested.
+        d_dimer:
+          type: boolean
+          description: Whether a D-dimer is requested.
+        amylase_lipase:
+          type: boolean
+          description: Whether amylase / lipase is requested.
+        primary_indication:
+          type: string
+          enum:
+            - routine-monitoring
+            - anaemia
+            - fatigue
+            - infection
+            - diabetes-monitoring
+            - thyroid-symptoms
+            - cardiovascular-risk
+            - liver-disease
+            - renal-monitoring
+            - anticoagulation-monitoring
+            - pre-operative
+            - suspected-malignancy
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Clinical details / history supporting the request (highest-value completeness field).
+        relevant_medications:
+          type: string
+          maxLength: 1000
+          description: Relevant medications (e.g. anticoagulants, statins) affecting interpretation or safety.
+        fasting_required:
+          type: boolean
+          description: Whether any requested test requires the patient to be fasting.
+        fasting_status:
+          type: string
+          enum:
+            - fasting
+            - non-fasting
+            - unknown
+            - ""
+          description: "Patient fasting status at collection: fasting, non-fasting, unknown."
+        specimen_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the specimen has been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Timestamp when the specimen was collected.
+        known_blood_borne_virus:
+          type: boolean
+          description: Whether the patient has a known blood-borne virus (handling precaution).
+        difficult_venous_access:
+          type: boolean
+          description: Whether the patient has difficult venous access.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - full_blood_count
+        - urea_electrolytes
+        - liver_function
+        - thyroid_function
+        - hba1c
+        - lipid_profile
+        - c_reactive_protein
+        - coagulation_screen
+        - bone_profile
+        - ferritin_iron
+        - vitamin_b12_folate
+        - vitamin_d
+        - hba1c_monitoring
+        - glucose
+        - inr
+        - blood_culture
+        - group_and_save
+        - crossmatch
+        - troponin
+        - d_dimer
+        - amylase_lipase
+        - primary_indication
+        - clinical_details
+        - relevant_medications
+        - fasting_required
+        - fasting_status
+        - specimen_collected
+        - known_blood_borne_virus
+        - difficult_venous_access
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Pathology / phlebotomy blood-test order (request). Captures the requested test panels (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.

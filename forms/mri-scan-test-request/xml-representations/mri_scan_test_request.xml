@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mri_scan_test_request SYSTEM "mri_scan_test_request.dtd">
+<mri_scan_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<body_region>brain</body_region>
+<primary_indication>suspected-malignancy</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<contrast_required>none</contrast_required>
+<egfr>0.0</egfr>
+<previous_gadolinium_reaction>none</previous_gadolinium_reaction>
+<pregnancy_status>not-pregnant</pregnancy_status>
+<pacemaker_or_icd>true</pacemaker_or_icd>
+<cochlear_implant>true</cochlear_implant>
+<aneurysm_clip>true</aneurysm_clip>
+<metallic_foreign_body_eye>true</metallic_foreign_body_eye>
+<shrapnel_or_metal_fragments>true</shrapnel_or_metal_fragments>
+<programmable_shunt>true</programmable_shunt>
+<neurostimulator>true</neurostimulator>
+<metal_implant_or_prosthesis>true</metal_implant_or_prosthesis>
+<insulin_pump>true</insulin_pump>
+<claustrophobia>true</claustrophobia>
+<mri_safety_status>cleared</mri_safety_status>
+<weight_kg>70.0</weight_kg>
+<relevant_previous_imaging></relevant_previous_imaging>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<notes>Example text.</notes>
+</mri_scan_test_request>

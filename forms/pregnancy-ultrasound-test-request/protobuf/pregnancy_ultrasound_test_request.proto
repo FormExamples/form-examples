@@ -1,0 +1,186 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pregnancy_ultrasound_test_request
+
+syntax = "proto3";
+
+package form_examples.pregnancy_ultrasound_test_request;
+
+enum PregnancyUltrasoundTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum PregnancyUltrasoundTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum PregnancyUltrasoundTestRequestLastMenstrualPeriodReliabilityEnum {
+  LASTMENSTRUALPERIODRELIABILITY_UNSPECIFIED = 0;
+  LASTMENSTRUALPERIODRELIABILITY_RELIABLE = 1;  // reliable
+  LASTMENSTRUALPERIODRELIABILITY_UNCERTAIN = 2;  // uncertain
+  LASTMENSTRUALPERIODRELIABILITY_UNKNOWN = 3;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestEstimatedDueDateMethodEnum {
+  ESTIMATEDDUEDATEMETHOD_UNSPECIFIED = 0;
+  ESTIMATEDDUEDATEMETHOD_LMP = 1;  // lmp
+  ESTIMATEDDUEDATEMETHOD_ULTRASOUND = 2;  // ultrasound
+  ESTIMATEDDUEDATEMETHOD_IVF = 3;  // ivf
+  ESTIMATEDDUEDATEMETHOD_UNKNOWN = 4;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestPluralityEnum {
+  PLURALITY_UNSPECIFIED = 0;
+  PLURALITY_SINGLETON = 1;  // singleton
+  PLURALITY_TWIN = 2;  // twin
+  PLURALITY_TRIPLET = 3;  // triplet
+  PLURALITY_HIGHER_ORDER = 4;  // higher-order
+  PLURALITY_UNKNOWN = 5;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestChorionicityEnum {
+  CHORIONICITY_UNSPECIFIED = 0;
+  CHORIONICITY_DICHORIONIC_DIAMNIOTIC = 1;  // dichorionic-diamniotic
+  CHORIONICITY_MONOCHORIONIC_DIAMNIOTIC = 2;  // monochorionic-diamniotic
+  CHORIONICITY_MONOCHORIONIC_MONOAMNIOTIC = 3;  // monochorionic-monoamniotic
+  CHORIONICITY_NOT_APPLICABLE = 4;  // not-applicable
+  CHORIONICITY_UNKNOWN = 5;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestConceptionMethodEnum {
+  CONCEPTIONMETHOD_UNSPECIFIED = 0;
+  CONCEPTIONMETHOD_SPONTANEOUS = 1;  // spontaneous
+  CONCEPTIONMETHOD_IVF = 2;  // ivf
+  CONCEPTIONMETHOD_IUI = 3;  // iui
+  CONCEPTIONMETHOD_OVULATION_INDUCTION = 4;  // ovulation-induction
+  CONCEPTIONMETHOD_UNKNOWN = 5;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestRhesusStatusEnum {
+  RHESUSSTATUS_UNSPECIFIED = 0;
+  RHESUSSTATUS_POSITIVE = 1;  // positive
+  RHESUSSTATUS_NEGATIVE = 2;  // negative
+  RHESUSSTATUS_UNKNOWN = 3;  // unknown
+}
+
+enum PregnancyUltrasoundTestRequestRequestedScanTypeEnum {
+  REQUESTEDSCANTYPE_UNSPECIFIED = 0;
+  REQUESTEDSCANTYPE_VIABILITY = 1;  // viability
+  REQUESTEDSCANTYPE_DATING = 2;  // dating
+  REQUESTEDSCANTYPE_NUCHAL_TRANSLUCENCY = 3;  // nuchal-translucency
+  REQUESTEDSCANTYPE_ANOMALY = 4;  // anomaly
+  REQUESTEDSCANTYPE_GROWTH = 5;  // growth
+  REQUESTEDSCANTYPE_DOPPLER = 6;  // doppler
+  REQUESTEDSCANTYPE_PRESENTATION = 7;  // presentation
+  REQUESTEDSCANTYPE_CERVICAL_LENGTH = 8;  // cervical-length
+  REQUESTEDSCANTYPE_PLACENTAL_LOCATION = 9;  // placental-location
+  REQUESTEDSCANTYPE_LIQUOR_VOLUME = 10;  // liquor-volume
+  REQUESTEDSCANTYPE_REASSURANCE = 11;  // reassurance
+  REQUESTEDSCANTYPE_OTHER = 12;  // other
+}
+
+enum PregnancyUltrasoundTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_DATING = 1;  // dating
+  PRIMARYINDICATION_VIABILITY = 2;  // viability
+  PRIMARYINDICATION_EXCLUDE_ECTOPIC = 3;  // exclude-ectopic
+  PRIMARYINDICATION_BLEEDING = 4;  // bleeding
+  PRIMARYINDICATION_PAIN = 5;  // pain
+  PRIMARYINDICATION_ANEUPLOIDY_SCREENING = 6;  // aneuploidy-screening
+  PRIMARYINDICATION_ANOMALY_SCREENING = 7;  // anomaly-screening
+  PRIMARYINDICATION_SUSPECTED_ANOMALY = 8;  // suspected-anomaly
+  PRIMARYINDICATION_GROWTH_RESTRICTION = 9;  // growth-restriction
+  PRIMARYINDICATION_LARGE_FOR_DATES = 10;  // large-for-dates
+  PRIMARYINDICATION_REDUCED_FETAL_MOVEMENTS = 11;  // reduced-fetal-movements
+  PRIMARYINDICATION_MULTIPLE_PREGNANCY = 12;  // multiple-pregnancy
+  PRIMARYINDICATION_PLACENTAL_LOCATION = 13;  // placental-location
+  PRIMARYINDICATION_LIQUOR_ASSESSMENT = 14;  // liquor-assessment
+  PRIMARYINDICATION_PRESENTATION = 15;  // presentation
+  PRIMARYINDICATION_CERVICAL_ASSESSMENT = 16;  // cervical-assessment
+  PRIMARYINDICATION_ANTEPARTUM_HAEMORRHAGE = 17;  // antepartum-haemorrhage
+  PRIMARYINDICATION_MATERNAL_CONDITION = 18;  // maternal-condition
+  PRIMARYINDICATION_DOPPLER_SURVEILLANCE = 19;  // doppler-surveillance
+  PRIMARYINDICATION_FOLLOW_UP = 20;  // follow-up
+  PRIMARYINDICATION_OTHER = 21;  // other
+}
+
+enum PregnancyUltrasoundTestRequestVaginalBleedingEnum {
+  VAGINALBLEEDING_UNSPECIFIED = 0;
+  VAGINALBLEEDING_NONE = 1;  // none
+  VAGINALBLEEDING_LIGHT = 2;  // light
+  VAGINALBLEEDING_MODERATE = 3;  // moderate
+  VAGINALBLEEDING_HEAVY = 4;  // heavy
+}
+
+enum PregnancyUltrasoundTestRequestAbdominalPainEnum {
+  ABDOMINALPAIN_UNSPECIFIED = 0;
+  ABDOMINALPAIN_NONE = 1;  // none
+  ABDOMINALPAIN_MILD = 2;  // mild
+  ABDOMINALPAIN_MODERATE = 3;  // moderate
+  ABDOMINALPAIN_SEVERE = 4;  // severe
+}
+
+enum PregnancyUltrasoundTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_SOON = 2;  // soon
+  URGENCY_URGENT = 3;  // urgent
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message PregnancyUltrasoundTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  PregnancyUltrasoundTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  PregnancyUltrasoundTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  string last_menstrual_period_date = 12;  // DATE — iso 8601 date
+  PregnancyUltrasoundTestRequestLastMenstrualPeriodReliabilityEnum last_menstrual_period_reliability = 13;  // VARCHAR(20)
+  string estimated_due_date = 14;  // DATE — iso 8601 date
+  PregnancyUltrasoundTestRequestEstimatedDueDateMethodEnum estimated_due_date_method = 15;  // VARCHAR(20)
+  int32 gestational_age_weeks = 16;  // INTEGER
+  int32 gestational_age_days = 17;  // INTEGER
+  int32 gravida = 18;  // INTEGER
+  int32 para = 19;  // INTEGER
+  PregnancyUltrasoundTestRequestPluralityEnum plurality = 20;  // VARCHAR(20)
+  PregnancyUltrasoundTestRequestChorionicityEnum chorionicity = 21;  // VARCHAR(30)
+  PregnancyUltrasoundTestRequestConceptionMethodEnum conception_method = 22;  // VARCHAR(20)
+  PregnancyUltrasoundTestRequestRhesusStatusEnum rhesus_status = 23;  // VARCHAR(15)
+  double body_mass_index = 24;  // NUMERIC(4,1) — numeric(4,1)
+  PregnancyUltrasoundTestRequestRequestedScanTypeEnum requested_scan_type = 25;  // VARCHAR(30)
+  PregnancyUltrasoundTestRequestPrimaryIndicationEnum primary_indication = 26;  // VARCHAR(40)
+  string clinical_question = 27;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 28;  // VARCHAR(1000) — max 1000 chars
+  string previous_scan_finding = 29;  // VARCHAR(1000) — max 1000 chars
+  string previous_scan_date = 30;  // DATE — iso 8601 date
+  PregnancyUltrasoundTestRequestVaginalBleedingEnum vaginal_bleeding = 31;  // VARCHAR(15)
+  PregnancyUltrasoundTestRequestAbdominalPainEnum abdominal_pain = 32;  // VARCHAR(15)
+  bool reduced_fetal_movements = 33;  // BOOLEAN
+  bool suspected_ectopic = 34;  // BOOLEAN
+  bool haemodynamically_unstable = 35;  // BOOLEAN
+  bool hypertension = 36;  // BOOLEAN
+  bool diabetes = 37;  // BOOLEAN
+  bool previous_growth_restriction = 38;  // BOOLEAN
+  bool previous_preterm_birth = 39;  // BOOLEAN
+  bool previous_caesarean = 40;  // BOOLEAN
+  bool smoker = 41;  // BOOLEAN
+  PregnancyUltrasoundTestRequestUrgencyEnum urgency = 42;  // VARCHAR(15)
+  string supervising_consultant = 43;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 44;  // VARCHAR(255) — max 255 chars
+  bool interpreter_required = 45;  // BOOLEAN
+  string notes = 46;  // VARCHAR(1000) — max 1000 chars
+}

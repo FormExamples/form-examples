@@ -1,0 +1,408 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: pregnancy_ultrasound_test_request
+openapi: 3.1.0
+info:
+  title: Pregnancy Ultrasound Test Request — PregnancyUltrasoundTestRequest
+  version: 1.0.0
+  description: Obstetric ultrasound scan request (referral). Captures pregnancy dating, obstetric history, the requested examination, the clinical indication and question, symptoms / red flags, risk factors, and triage urgency.
+paths:
+  /pregnancy-ultrasound-test-requests:
+    get:
+      summary: List PregnancyUltrasoundTestRequest records
+      operationId: listPregnancyUltrasoundTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of PregnancyUltrasoundTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+    post:
+      summary: Create a new PregnancyUltrasoundTestRequest
+      operationId: createPregnancyUltrasoundTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+      responses:
+        "201":
+          description: The newly created PregnancyUltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+        "400":
+          description: Validation error
+  /pregnancy-ultrasound-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PregnancyUltrasoundTestRequest by id
+      operationId: getPregnancyUltrasoundTestRequest
+      responses:
+        "200":
+          description: The requested PregnancyUltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+        "404":
+          description: PregnancyUltrasoundTestRequest not found
+    patch:
+      summary: Update an existing PregnancyUltrasoundTestRequest
+      operationId: updatePregnancyUltrasoundTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+      responses:
+        "200":
+          description: The updated PregnancyUltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+        "404":
+          description: PregnancyUltrasoundTestRequest not found
+    delete:
+      summary: Soft-delete a PregnancyUltrasoundTestRequest
+      operationId: deletePregnancyUltrasoundTestRequest
+      responses:
+        "204":
+          description: PregnancyUltrasoundTestRequest deleted
+        "404":
+          description: PregnancyUltrasoundTestRequest not found
+components:
+  schemas:
+    PregnancyUltrasoundTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the scan is requested to be performed.
+        last_menstrual_period_date:
+          type: string
+          format: date
+          description: First day of the last menstrual period (LMP).
+        last_menstrual_period_reliability:
+          type: string
+          enum:
+            - reliable
+            - uncertain
+            - unknown
+            - ""
+          description: "Reliability of the LMP: reliable, uncertain, unknown."
+        estimated_due_date:
+          type: string
+          format: date
+          description: Estimated due date (EDD).
+        estimated_due_date_method:
+          type: string
+          enum:
+            - lmp
+            - ultrasound
+            - ivf
+            - unknown
+            - ""
+          description: "How the EDD was derived: lmp, ultrasound, ivf, unknown."
+        gestational_age_weeks:
+          type: integer
+          format: int32
+          description: Completed gestational weeks at the time of request (0-45).
+        gestational_age_days:
+          type: integer
+          format: int32
+          description: Additional gestational days beyond completed weeks (0-6).
+        gravida:
+          type: integer
+          format: int32
+          description: "Gravida: total number of pregnancies."
+        para:
+          type: integer
+          format: int32
+          description: "Para: number of births beyond 24 weeks."
+        plurality:
+          type: string
+          enum:
+            - singleton
+            - twin
+            - triplet
+            - higher-order
+            - unknown
+            - ""
+          description: "Plurality: singleton, twin, triplet, higher-order, unknown."
+        chorionicity:
+          type: string
+          enum:
+            - dichorionic-diamniotic
+            - monochorionic-diamniotic
+            - monochorionic-monoamniotic
+            - not-applicable
+            - unknown
+            - ""
+          description: Chorionicity for multiple pregnancy, if known.
+        conception_method:
+          type: string
+          enum:
+            - spontaneous
+            - ivf
+            - iui
+            - ovulation-induction
+            - unknown
+            - ""
+          description: "Conception method: spontaneous, ivf, iui, ovulation-induction, unknown."
+        rhesus_status:
+          type: string
+          enum:
+            - positive
+            - negative
+            - unknown
+            - ""
+          description: "Maternal rhesus status: positive, negative, unknown."
+        body_mass_index:
+          type: number
+          format: double
+          description: Maternal body mass index (BMI), affecting image quality and technique.
+        requested_scan_type:
+          type: string
+          enum:
+            - viability
+            - dating
+            - nuchal-translucency
+            - anomaly
+            - growth
+            - doppler
+            - presentation
+            - cervical-length
+            - placental-location
+            - liquor-volume
+            - reassurance
+            - other
+            - ""
+          description: Requested scan type, used for gestational-age-window appropriateness.
+        primary_indication:
+          type: string
+          enum:
+            - dating
+            - viability
+            - exclude-ectopic
+            - bleeding
+            - pain
+            - aneuploidy-screening
+            - anomaly-screening
+            - suspected-anomaly
+            - growth-restriction
+            - large-for-dates
+            - reduced-fetal-movements
+            - multiple-pregnancy
+            - placental-location
+            - liquor-assessment
+            - presentation
+            - cervical-assessment
+            - antepartum-haemorrhage
+            - maternal-condition
+            - doppler-surveillance
+            - follow-up
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the scan should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and obstetric history.
+        previous_scan_finding:
+          type: string
+          maxLength: 1000
+          description: Finding from a previous scan being followed up.
+        previous_scan_date:
+          type: string
+          format: date
+          description: Date of the previous scan being followed up.
+        vaginal_bleeding:
+          type: string
+          enum:
+            - none
+            - light
+            - moderate
+            - heavy
+            - ""
+          description: "Vaginal bleeding severity: none, light, moderate, heavy."
+        abdominal_pain:
+          type: string
+          enum:
+            - none
+            - mild
+            - moderate
+            - severe
+            - ""
+          description: "Abdominal pain severity: none, mild, moderate, severe."
+        reduced_fetal_movements:
+          type: boolean
+          description: Whether the patient reports reduced fetal movements (red flag).
+        suspected_ectopic:
+          type: boolean
+          description: Whether ectopic pregnancy is suspected (red flag).
+        haemodynamically_unstable:
+          type: boolean
+          description: Whether the patient is haemodynamically unstable (red flag).
+        hypertension:
+          type: boolean
+          description: Whether the patient has hypertension.
+        diabetes:
+          type: boolean
+          description: Whether the patient has diabetes.
+        previous_growth_restriction:
+          type: boolean
+          description: Whether the patient had a previous SGA / growth-restricted pregnancy.
+        previous_preterm_birth:
+          type: boolean
+          description: Whether the patient had a previous preterm birth.
+        previous_caesarean:
+          type: boolean
+          description: Whether the patient had a previous caesarean section.
+        smoker:
+          type: boolean
+          description: Whether the patient is a current smoker.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - soon
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, soon, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        interpreter_required:
+          type: boolean
+          description: Whether an interpreter is required.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - last_menstrual_period_reliability
+        - estimated_due_date_method
+        - plurality
+        - chorionicity
+        - conception_method
+        - rhesus_status
+        - requested_scan_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - previous_scan_finding
+        - vaginal_bleeding
+        - abdominal_pain
+        - reduced_fetal_movements
+        - suspected_ectopic
+        - haemodynamically_unstable
+        - hypertension
+        - diabetes
+        - previous_growth_restriction
+        - previous_preterm_birth
+        - previous_caesarean
+        - smoker
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - interpreter_required
+        - notes
+      description: Obstetric ultrasound scan request (referral). Captures pregnancy dating, obstetric history, the requested examination, the clinical indication and question, symptoms / red flags, risk factors, and triage urgency.

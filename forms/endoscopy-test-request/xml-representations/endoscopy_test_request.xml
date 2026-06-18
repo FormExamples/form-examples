@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE endoscopy_test_request SYSTEM "endoscopy_test_request.dtd">
+<endoscopy_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<requested_procedure>ogd</requested_procedure>
+<primary_indication>dyspepsia</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<red_flag_dysphagia>true</red_flag_dysphagia>
+<red_flag_weight_loss>true</red_flag_weight_loss>
+<red_flag_anaemia>true</red_flag_anaemia>
+<red_flag_gi_bleeding>true</red_flag_gi_bleeding>
+<red_flag_abdominal_mass>true</red_flag_abdominal_mass>
+<red_flag_age_over_55>true</red_flag_age_over_55>
+<fit_result_ug_g>5.0</fit_result_ug_g>
+<haemoglobin_g_l>0.0</haemoglobin_g_l>
+<ferritin_ug_l>0.0</ferritin_ug_l>
+<taking_anticoagulant>true</taking_anticoagulant>
+<anticoagulant_agent>none</anticoagulant_agent>
+<taking_antiplatelet>true</taking_antiplatelet>
+<antiplatelet_agent>none</antiplatelet_agent>
+<diabetes_medication>none</diabetes_medication>
+<allergies></allergies>
+<latex_allergy>true</latex_allergy>
+<cardiac_nyha_class>I</cardiac_nyha_class>
+<pacemaker_icd>true</pacemaker_icd>
+<chronic_kidney_disease>true</chronic_kidney_disease>
+<egfr_ml_min>0.0</egfr_ml_min>
+<sleep_apnoea>true</sleep_apnoea>
+<neutropenia>true</neutropenia>
+<asa_grade>I</asa_grade>
+<vcjd_risk>true</vcjd_risk>
+<cpe_carriage>true</cpe_carriage>
+<mrsa>true</mrsa>
+<blood_borne_virus>true</blood_borne_virus>
+<fit_for_bowel_prep>true</fit_for_bowel_prep>
+<bowel_prep_agent>none</bowel_prep_agent>
+<sedation>none</sedation>
+<escort_available>true</escort_available>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<interpreter_required>true</interpreter_required>
+<notes>Example text.</notes>
+</endoscopy_test_request>

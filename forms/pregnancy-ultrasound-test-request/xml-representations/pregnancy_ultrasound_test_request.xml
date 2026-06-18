@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pregnancy_ultrasound_test_request SYSTEM "pregnancy_ultrasound_test_request.dtd">
+<pregnancy_ultrasound_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<last_menstrual_period_date>2026-01-15</last_menstrual_period_date>
+<last_menstrual_period_reliability>reliable</last_menstrual_period_reliability>
+<estimated_due_date>2026-01-15</estimated_due_date>
+<estimated_due_date_method>lmp</estimated_due_date_method>
+<gestational_age_weeks>45</gestational_age_weeks>
+<gestational_age_days>45</gestational_age_days>
+<gravida>1</gravida>
+<para>1</para>
+<plurality>singleton</plurality>
+<chorionicity>dichorionic-diamniotic</chorionicity>
+<conception_method>spontaneous</conception_method>
+<rhesus_status>positive</rhesus_status>
+<body_mass_index>0.0</body_mass_index>
+<requested_scan_type>viability</requested_scan_type>
+<primary_indication>dating</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<previous_scan_finding>Example text.</previous_scan_finding>
+<previous_scan_date>2026-01-15</previous_scan_date>
+<vaginal_bleeding>none</vaginal_bleeding>
+<abdominal_pain>none</abdominal_pain>
+<reduced_fetal_movements>true</reduced_fetal_movements>
+<suspected_ectopic>true</suspected_ectopic>
+<haemodynamically_unstable>true</haemodynamically_unstable>
+<hypertension>true</hypertension>
+<diabetes>true</diabetes>
+<previous_growth_restriction>true</previous_growth_restriction>
+<previous_preterm_birth>true</previous_preterm_birth>
+<previous_caesarean>true</previous_caesarean>
+<smoker>true</smoker>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<interpreter_required>true</interpreter_required>
+<notes>Example text.</notes>
+</pregnancy_ultrasound_test_request>

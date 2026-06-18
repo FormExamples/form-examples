@@ -1,0 +1,63 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: mri_scan_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.mri_scan_test_request;
+
+enum MriScanTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum MriScanTestRequestGradeMriSafetyBandEnum {
+  MRISAFETYBAND_UNSPECIFIED = 0;
+  MRISAFETYBAND_CLEARED = 1;  // cleared
+  MRISAFETYBAND_CONDITIONAL = 2;  // conditional
+  MRISAFETYBAND_NEEDS_MRI_PHYSICS_REVIEW = 3;  // needs-mri-physics-review
+  MRISAFETYBAND_CONTRAINDICATED = 4;  // contraindicated
+}
+
+enum MriScanTestRequestGradeContrastRenalFlagEnum {
+  CONTRASTRENALFLAG_UNSPECIFIED = 0;
+  CONTRASTRENALFLAG_NONE = 1;  // none
+  CONTRASTRENALFLAG_CAUTION = 2;  // caution
+  CONTRASTRENALFLAG_CONTRAINDICATED = 3;  // contraindicated
+  CONTRASTRENALFLAG_UNKNOWN = 4;  // unknown
+}
+
+enum MriScanTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_EMERGENCY = 3;  // emergency
+}
+
+enum MriScanTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message MriScanTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string mri_scan_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  MriScanTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  MriScanTestRequestGradeMriSafetyBandEnum mri_safety_band = 8;  // VARCHAR(30)
+  MriScanTestRequestGradeContrastRenalFlagEnum contrast_renal_flag = 9;  // VARCHAR(20)
+  int32 completeness_percent = 10;  // INTEGER
+  MriScanTestRequestGradeTriageTierEnum triage_tier = 11;  // VARCHAR(15)
+  string target_timeframe = 12;  // VARCHAR(50) — max 50 chars
+  MriScanTestRequestGradeRecommendationEnum recommendation = 13;  // VARCHAR(20)
+  string clinician_notes = 14;  // TEXT
+  string signed_at = 15;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 16;  // TIMESTAMPTZ — iso 8601
+}

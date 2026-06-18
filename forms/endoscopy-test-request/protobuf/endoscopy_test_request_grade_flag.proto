@@ -1,0 +1,40 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: endoscopy_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.endoscopy_test_request;
+
+enum EndoscopyTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_ACUTE_GI_BLEED = 1;  // acute-gi-bleed
+  CATEGORY_SUSPECTED_CANCER_2WW = 2;  // suspected-cancer-2ww
+  CATEGORY_HIGH_BLEEDING_RISK_ANTICOAG = 3;  // high-bleeding-risk-anticoag
+  CATEGORY_ASA_IV = 4;  // asa-iv
+  CATEGORY_UNFIT_FOR_PREP = 5;  // unfit-for-prep
+  CATEGORY_INFECTION_PRECAUTION = 6;  // infection-precaution
+  CATEGORY_MISSING_INDICATION = 7;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 8;  // missing-clinical-question
+  CATEGORY_MISSING_FIT = 9;  // missing-fit
+  CATEGORY_OTHER = 10;  // other
+}
+
+enum EndoscopyTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message EndoscopyTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string endoscopy_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  EndoscopyTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  EndoscopyTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

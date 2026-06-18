@@ -1,0 +1,423 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: endoscopy_test_request
+openapi: 3.1.0
+info:
+  title: Endoscopy Test Request — EndoscopyTestRequest
+  version: 1.0.0
+  description: GI endoscopy procedure request (referral). Captures the requested procedure, clinical indication and question, ALARM red flags, FIT and haematinic results, anticoagulant / antiplatelet medication, diabetes, allergies, comorbidities, infection-control flags, bowel-prep and sedation plans, and triage urgency.
+paths:
+  /endoscopy-test-requests:
+    get:
+      summary: List EndoscopyTestRequest records
+      operationId: listEndoscopyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EndoscopyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EndoscopyTestRequest"
+    post:
+      summary: Create a new EndoscopyTestRequest
+      operationId: createEndoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndoscopyTestRequest"
+      responses:
+        "201":
+          description: The newly created EndoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequest"
+        "400":
+          description: Validation error
+  /endoscopy-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EndoscopyTestRequest by id
+      operationId: getEndoscopyTestRequest
+      responses:
+        "200":
+          description: The requested EndoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequest"
+        "404":
+          description: EndoscopyTestRequest not found
+    patch:
+      summary: Update an existing EndoscopyTestRequest
+      operationId: updateEndoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndoscopyTestRequest"
+      responses:
+        "200":
+          description: The updated EndoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequest"
+        "404":
+          description: EndoscopyTestRequest not found
+    delete:
+      summary: Soft-delete a EndoscopyTestRequest
+      operationId: deleteEndoscopyTestRequest
+      responses:
+        "204":
+          description: EndoscopyTestRequest deleted
+        "404":
+          description: EndoscopyTestRequest not found
+components:
+  schemas:
+    EndoscopyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the procedure is requested to be performed.
+        requested_procedure:
+          type: string
+          enum:
+            - ogd
+            - gastroscopy
+            - colonoscopy
+            - flexible-sigmoidoscopy
+            - ercp
+            - eus
+            - capsule
+            - other
+            - ""
+          description: "Requested endoscopic procedure: ogd, gastroscopy, colonoscopy, flexible-sigmoidoscopy, ercp, eus, capsule, other."
+        primary_indication:
+          type: string
+          enum:
+            - dyspepsia
+            - gord
+            - dysphagia
+            - upper-gi-bleeding
+            - iron-deficiency-anaemia
+            - weight-loss
+            - suspected-malignancy
+            - barretts-surveillance
+            - h-pylori
+            - rectal-bleeding
+            - change-in-bowel-habit
+            - positive-fit
+            - ibd-surveillance
+            - polyp-surveillance
+            - abnormal-imaging
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the procedure should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and endoscopic history.
+        red_flag_dysphagia:
+          type: boolean
+          description: "ALARM red flag: dysphagia (NICE NG12 suspected upper-GI cancer feature)."
+        red_flag_weight_loss:
+          type: boolean
+          description: "ALARM red flag: unexplained weight loss."
+        red_flag_anaemia:
+          type: boolean
+          description: "ALARM red flag: iron-deficiency anaemia."
+        red_flag_gi_bleeding:
+          type: boolean
+          description: "ALARM red flag: gastrointestinal bleeding (haematemesis, melaena, or rectal bleeding)."
+        red_flag_abdominal_mass:
+          type: boolean
+          description: "ALARM red flag: palpable abdominal or epigastric mass."
+        red_flag_age_over_55:
+          type: boolean
+          description: "ALARM red flag: age 55 or over (NICE NG12 age threshold for upper-GI referral)."
+        fit_result_ug_g:
+          type: number
+          format: double
+          description: Faecal immunochemical test (FIT) result in micrograms of haemoglobin per gram of faeces; NICE DG56 referral threshold is >= 10 ug/g.
+        haemoglobin_g_l:
+          type: number
+          format: double
+          description: Haemoglobin concentration in g/L.
+        ferritin_ug_l:
+          type: number
+          format: double
+          description: Serum ferritin in ug/L (micrograms per litre).
+        taking_anticoagulant:
+          type: boolean
+          description: Whether the patient is taking an anticoagulant.
+        anticoagulant_agent:
+          type: string
+          enum:
+            - none
+            - warfarin
+            - apixaban
+            - rivaroxaban
+            - edoxaban
+            - dabigatran
+            - lmwh
+            - other
+            - ""
+          description: "Anticoagulant agent: none, warfarin, apixaban, rivaroxaban, edoxaban, dabigatran, lmwh, other."
+        taking_antiplatelet:
+          type: boolean
+          description: Whether the patient is taking an antiplatelet agent.
+        antiplatelet_agent:
+          type: string
+          enum:
+            - none
+            - aspirin
+            - clopidogrel
+            - ticagrelor
+            - prasugrel
+            - dipyridamole
+            - dual
+            - other
+            - ""
+          description: "Antiplatelet agent: none, aspirin, clopidogrel, ticagrelor, prasugrel, dipyridamole, dual, other."
+        diabetes_medication:
+          type: string
+          enum:
+            - none
+            - oral
+            - insulin
+            - ""
+          description: "Diabetes medication category affecting fasting / prep plans: none, oral, insulin."
+        allergies:
+          type: string
+          maxLength: 1000
+          description: Free-text allergy list.
+        latex_allergy:
+          type: boolean
+          description: Whether the patient has a latex allergy (theatre / equipment precaution).
+        cardiac_nyha_class:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - ""
+          description: "New York Heart Association (NYHA) functional class: I, II, III, IV."
+        pacemaker_icd:
+          type: boolean
+          description: Whether the patient has a pacemaker or implantable cardioverter-defibrillator (diathermy precaution).
+        chronic_kidney_disease:
+          type: boolean
+          description: Whether the patient has chronic kidney disease (affects bowel-prep choice).
+        egfr_ml_min:
+          type: number
+          format: double
+          description: Estimated glomerular filtration rate (eGFR) in mL/min/1.73m2.
+        sleep_apnoea:
+          type: boolean
+          description: Whether the patient has obstructive sleep apnoea (sedation risk).
+        neutropenia:
+          type: boolean
+          description: Whether the patient is neutropenic (antibiotic-prophylaxis / infection consideration).
+        asa_grade:
+          type: string
+          enum:
+            - I
+            - II
+            - III
+            - IV
+            - V
+            - ""
+          description: "American Society of Anesthesiologists (ASA) physical-status grade: I, II, III, IV, V."
+        vcjd_risk:
+          type: boolean
+          description: "Infection flag: variant Creutzfeldt-Jakob disease (vCJD) risk requiring single-use or quarantined instruments."
+        cpe_carriage:
+          type: boolean
+          description: "Infection flag: carbapenemase-producing Enterobacterales (CPE) carriage."
+        mrsa:
+          type: boolean
+          description: "Infection flag: meticillin-resistant Staphylococcus aureus (MRSA) colonisation."
+        blood_borne_virus:
+          type: boolean
+          description: "Infection flag: known blood-borne virus (HIV, hepatitis B, hepatitis C)."
+        fit_for_bowel_prep:
+          type: boolean
+          description: Whether the patient is assessed as fit to take bowel preparation.
+        bowel_prep_agent:
+          type: string
+          enum:
+            - none
+            - moviprep
+            - plenvu
+            - klean-prep
+            - picolax
+            - citramag
+            - other
+            - ""
+          description: "Bowel-preparation agent: none, moviprep, plenvu, klean-prep, picolax, citramag, other."
+        sedation:
+          type: string
+          enum:
+            - none
+            - throat-spray
+            - conscious
+            - deep
+            - ""
+          description: "Planned sedation: none, throat-spray, conscious, deep."
+        escort_available:
+          type: boolean
+          description: Whether a responsible escort is available post-sedation.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        interpreter_required:
+          type: boolean
+          description: Whether an interpreter is required.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - requested_procedure
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - red_flag_dysphagia
+        - red_flag_weight_loss
+        - red_flag_anaemia
+        - red_flag_gi_bleeding
+        - red_flag_abdominal_mass
+        - red_flag_age_over_55
+        - taking_anticoagulant
+        - anticoagulant_agent
+        - taking_antiplatelet
+        - antiplatelet_agent
+        - diabetes_medication
+        - allergies
+        - latex_allergy
+        - cardiac_nyha_class
+        - pacemaker_icd
+        - chronic_kidney_disease
+        - sleep_apnoea
+        - neutropenia
+        - asa_grade
+        - vcjd_risk
+        - cpe_carriage
+        - mrsa
+        - blood_borne_virus
+        - fit_for_bowel_prep
+        - bowel_prep_agent
+        - sedation
+        - escort_available
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - interpreter_required
+        - notes
+      description: GI endoscopy procedure request (referral). Captures the requested procedure, clinical indication and question, ALARM red flags, FIT and haematinic results, anticoagulant / antiplatelet medication, diabetes, allergies, comorbidities, infection-control flags, bowel-prep and sedation plans, and triage urgency.

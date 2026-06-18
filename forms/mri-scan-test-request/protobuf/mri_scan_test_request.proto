@@ -1,0 +1,136 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: mri_scan_test_request
+
+syntax = "proto3";
+
+package form_examples.mri_scan_test_request;
+
+enum MriScanTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum MriScanTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum MriScanTestRequestBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_BRAIN = 1;  // brain
+  BODYREGION_SPINE_CERVICAL = 2;  // spine-cervical
+  BODYREGION_SPINE_THORACIC = 3;  // spine-thoracic
+  BODYREGION_SPINE_LUMBAR = 4;  // spine-lumbar
+  BODYREGION_HEAD_NECK = 5;  // head-neck
+  BODYREGION_CHEST = 6;  // chest
+  BODYREGION_ABDOMEN = 7;  // abdomen
+  BODYREGION_PELVIS = 8;  // pelvis
+  BODYREGION_CARDIAC = 9;  // cardiac
+  BODYREGION_MR_ANGIOGRAM = 10;  // mr-angiogram
+  BODYREGION_BREAST = 11;  // breast
+  BODYREGION_MUSCULOSKELETAL_JOINT = 12;  // musculoskeletal-joint
+  BODYREGION_WHOLE_BODY = 13;  // whole-body
+  BODYREGION_OTHER = 14;  // other
+}
+
+enum MriScanTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_MALIGNANCY = 1;  // suspected-malignancy
+  PRIMARYINDICATION_CANCER_STAGING = 2;  // cancer-staging
+  PRIMARYINDICATION_NEUROLOGICAL_DEFICIT = 3;  // neurological-deficit
+  PRIMARYINDICATION_SUSPECTED_MS = 4;  // suspected-ms
+  PRIMARYINDICATION_BACK_PAIN_RADICULOPATHY = 5;  // back-pain-radiculopathy
+  PRIMARYINDICATION_JOINT_DERANGEMENT = 6;  // joint-derangement
+  PRIMARYINDICATION_SUSPECTED_STROKE = 7;  // suspected-stroke
+  PRIMARYINDICATION_EPILEPSY = 8;  // epilepsy
+  PRIMARYINDICATION_DEMENTIA = 9;  // dementia
+  PRIMARYINDICATION_PITUITARY = 10;  // pituitary
+  PRIMARYINDICATION_CARDIAC_FUNCTION = 11;  // cardiac-function
+  PRIMARYINDICATION_FOLLOW_UP_SURVEILLANCE = 12;  // follow-up-surveillance
+  PRIMARYINDICATION_OTHER = 13;  // other
+}
+
+enum MriScanTestRequestContrastRequiredEnum {
+  CONTRASTREQUIRED_UNSPECIFIED = 0;
+  CONTRASTREQUIRED_NONE = 1;  // none
+  CONTRASTREQUIRED_IV_GADOLINIUM = 2;  // iv-gadolinium
+  CONTRASTREQUIRED_UNKNOWN = 3;  // unknown
+}
+
+enum MriScanTestRequestPreviousGadoliniumReactionEnum {
+  PREVIOUSGADOLINIUMREACTION_UNSPECIFIED = 0;
+  PREVIOUSGADOLINIUMREACTION_NONE = 1;  // none
+  PREVIOUSGADOLINIUMREACTION_MILD = 2;  // mild
+  PREVIOUSGADOLINIUMREACTION_MODERATE = 3;  // moderate
+  PREVIOUSGADOLINIUMREACTION_SEVERE = 4;  // severe
+  PREVIOUSGADOLINIUMREACTION_UNKNOWN = 5;  // unknown
+}
+
+enum MriScanTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum MriScanTestRequestMriSafetyStatusEnum {
+  MRISAFETYSTATUS_UNSPECIFIED = 0;
+  MRISAFETYSTATUS_CLEARED = 1;  // cleared
+  MRISAFETYSTATUS_CONDITIONAL = 2;  // conditional
+  MRISAFETYSTATUS_NEEDS_REVIEW = 3;  // needs-review
+  MRISAFETYSTATUS_UNSAFE = 4;  // unsafe
+}
+
+enum MriScanTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message MriScanTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MriScanTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  MriScanTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  MriScanTestRequestBodyRegionEnum body_region = 12;  // VARCHAR(30)
+  MriScanTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  MriScanTestRequestContrastRequiredEnum contrast_required = 16;  // VARCHAR(20)
+  double egfr = 17;  // NUMERIC(5,1) — numeric(5,1)
+  MriScanTestRequestPreviousGadoliniumReactionEnum previous_gadolinium_reaction = 18;  // VARCHAR(15)
+  MriScanTestRequestPregnancyStatusEnum pregnancy_status = 19;  // VARCHAR(20)
+  bool pacemaker_or_icd = 20;  // BOOLEAN
+  bool cochlear_implant = 21;  // BOOLEAN
+  bool aneurysm_clip = 22;  // BOOLEAN
+  bool metallic_foreign_body_eye = 23;  // BOOLEAN
+  bool shrapnel_or_metal_fragments = 24;  // BOOLEAN
+  bool programmable_shunt = 25;  // BOOLEAN
+  bool neurostimulator = 26;  // BOOLEAN
+  bool metal_implant_or_prosthesis = 27;  // BOOLEAN
+  bool insulin_pump = 28;  // BOOLEAN
+  bool claustrophobia = 29;  // BOOLEAN
+  MriScanTestRequestMriSafetyStatusEnum mri_safety_status = 30;  // VARCHAR(15)
+  double weight_kg = 31;  // NUMERIC(5,1) — numeric(5,1)
+  string relevant_previous_imaging = 32;  // VARCHAR(1000) — max 1000 chars
+  MriScanTestRequestUrgencyEnum urgency = 33;  // VARCHAR(15)
+  string supervising_consultant = 34;  // VARCHAR(255) — max 255 chars
+  string notes = 35;  // VARCHAR(1000) — max 1000 chars
+}

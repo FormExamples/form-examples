@@ -1,0 +1,39 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: echocardiogram_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.echocardiogram_test_request;
+
+enum EchocardiogramTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_ENDOCARDITIS = 1;  // suspected-endocarditis
+  CATEGORY_SEVERE_SYMPTOMATIC_VALVE = 2;  // severe-symptomatic-valve
+  CATEGORY_ACUTE_HEART_FAILURE = 3;  // acute-heart-failure
+  CATEGORY_RAISED_BNP = 4;  // raised-bnp
+  CATEGORY_RARELY_APPROPRIATE_INDICATION = 5;  // rarely-appropriate-indication
+  CATEGORY_MISSING_INDICATION = 6;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 7;  // missing-clinical-question
+  CATEGORY_DUPLICATE_RECENT_ECHO = 8;  // duplicate-recent-echo
+  CATEGORY_OTHER = 9;  // other
+}
+
+enum EchocardiogramTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message EchocardiogramTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string echocardiogram_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  EchocardiogramTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  EchocardiogramTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

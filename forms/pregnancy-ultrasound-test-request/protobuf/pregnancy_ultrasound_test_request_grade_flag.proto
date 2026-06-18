@@ -1,0 +1,43 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: pregnancy_ultrasound_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.pregnancy_ultrasound_test_request;
+
+enum PregnancyUltrasoundTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_SUSPECTED_ECTOPIC = 1;  // suspected-ectopic
+  CATEGORY_HEAVY_BLEEDING = 2;  // heavy-bleeding
+  CATEGORY_SEVERE_PAIN = 3;  // severe-pain
+  CATEGORY_HAEMODYNAMIC_INSTABILITY = 4;  // haemodynamic-instability
+  CATEGORY_REDUCED_FETAL_MOVEMENTS = 5;  // reduced-fetal-movements
+  CATEGORY_SUSPECTED_PRAEVIA = 6;  // suspected-praevia
+  CATEGORY_SUSPECTED_SEVERE_FGR = 7;  // suspected-severe-fgr
+  CATEGORY_PRE_ECLAMPSIA = 8;  // pre-eclampsia
+  CATEGORY_MISSING_INDICATION = 9;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_QUESTION = 10;  // missing-clinical-question
+  CATEGORY_WINDOW_MISMATCH = 11;  // window-mismatch
+  CATEGORY_INCOMPLETE_DATING = 12;  // incomplete-dating
+  CATEGORY_OTHER = 13;  // other
+}
+
+enum PregnancyUltrasoundTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PregnancyUltrasoundTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string pregnancy_ultrasound_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PregnancyUltrasoundTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  PregnancyUltrasoundTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

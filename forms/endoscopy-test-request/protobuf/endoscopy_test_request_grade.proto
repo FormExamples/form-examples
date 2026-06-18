@@ -1,0 +1,59 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: endoscopy_test_request_grade
+
+syntax = "proto3";
+
+package form_examples.endoscopy_test_request;
+
+enum EndoscopyTestRequestGradeAppropriatenessBandEnum {
+  APPROPRIATENESSBAND_UNSPECIFIED = 0;
+  APPROPRIATENESSBAND_USUALLY_APPROPRIATE = 1;  // usually-appropriate
+  APPROPRIATENESSBAND_MAY_BE_APPROPRIATE = 2;  // may-be-appropriate
+  APPROPRIATENESSBAND_USUALLY_NOT_APPROPRIATE = 3;  // usually-not-appropriate
+}
+
+enum EndoscopyTestRequestGradeTriageTierEnum {
+  TRIAGETIER_UNSPECIFIED = 0;
+  TRIAGETIER_ROUTINE = 1;  // routine
+  TRIAGETIER_URGENT = 2;  // urgent
+  TRIAGETIER_TWO_WEEK_WAIT = 3;  // two-week-wait
+  TRIAGETIER_EMERGENCY = 4;  // emergency
+}
+
+enum EndoscopyTestRequestGradeRiskBandEnum {
+  RISKBAND_UNSPECIFIED = 0;
+  RISKBAND_LOW = 1;  // low
+  RISKBAND_MODERATE = 2;  // moderate
+  RISKBAND_HIGH = 3;  // high
+}
+
+enum EndoscopyTestRequestGradeRecommendationEnum {
+  RECOMMENDATION_UNSPECIFIED = 0;
+  RECOMMENDATION_ACCEPT = 1;  // accept
+  RECOMMENDATION_QUERY_REFERRER = 2;  // query-referrer
+  RECOMMENDATION_REDIRECT = 3;  // redirect
+  RECOMMENDATION_REJECT = 4;  // reject
+}
+
+message EndoscopyTestRequestGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string endoscopy_test_request_id = 5;  // UUID — uuid
+  int32 appropriateness_score = 6;  // INTEGER
+  EndoscopyTestRequestGradeAppropriatenessBandEnum appropriateness_band = 7;  // VARCHAR(25)
+  EndoscopyTestRequestGradeTriageTierEnum triage_tier = 8;  // VARCHAR(15)
+  string target_timeframe = 9;  // VARCHAR(50) — max 50 chars
+  bool two_week_wait_eligible = 10;  // BOOLEAN
+  string two_week_wait_rationale = 11;  // VARCHAR(500) — max 500 chars
+  int32 completeness_percent = 12;  // INTEGER
+  int32 glasgow_blatchford_score = 13;  // INTEGER
+  int32 rockall_score = 14;  // INTEGER
+  EndoscopyTestRequestGradeRiskBandEnum risk_band = 15;  // VARCHAR(10)
+  string anticoagulant_action = 16;  // VARCHAR(500) — max 500 chars
+  EndoscopyTestRequestGradeRecommendationEnum recommendation = 17;  // VARCHAR(20)
+  string clinician_notes = 18;  // TEXT
+  string signed_at = 19;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 20;  // TIMESTAMPTZ — iso 8601
+}
