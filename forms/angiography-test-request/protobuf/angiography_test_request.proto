@@ -1,0 +1,118 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: angiography_test_request
+
+syntax = "proto3";
+
+package form_examples.angiography_test_request;
+
+enum AngiographyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum AngiographyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum AngiographyTestRequestAngiographyTypeEnum {
+  ANGIOGRAPHYTYPE_UNSPECIFIED = 0;
+  ANGIOGRAPHYTYPE_CT_ANGIOGRAPHY = 1;  // ct-angiography
+  ANGIOGRAPHYTYPE_MR_ANGIOGRAPHY = 2;  // mr-angiography
+  ANGIOGRAPHYTYPE_CATHETER_DSA = 3;  // catheter-dsa
+  ANGIOGRAPHYTYPE_CORONARY_ANGIOGRAPHY = 4;  // coronary-angiography
+  ANGIOGRAPHYTYPE_PERIPHERAL_ANGIOGRAPHY = 5;  // peripheral-angiography
+  ANGIOGRAPHYTYPE_CEREBRAL_ANGIOGRAPHY = 6;  // cerebral-angiography
+  ANGIOGRAPHYTYPE_OTHER = 7;  // other
+}
+
+enum AngiographyTestRequestBodyRegionEnum {
+  BODYREGION_UNSPECIFIED = 0;
+  BODYREGION_CORONARY = 1;  // coronary
+  BODYREGION_CEREBRAL = 2;  // cerebral
+  BODYREGION_CAROTID = 3;  // carotid
+  BODYREGION_AORTA = 4;  // aorta
+  BODYREGION_RENAL = 5;  // renal
+  BODYREGION_PERIPHERAL_LOWER_LIMB = 6;  // peripheral-lower-limb
+  BODYREGION_PULMONARY = 7;  // pulmonary
+  BODYREGION_MESENTERIC = 8;  // mesenteric
+  BODYREGION_OTHER = 9;  // other
+}
+
+enum AngiographyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_CORONARY_DISEASE = 1;  // suspected-coronary-disease
+  PRIMARYINDICATION_PERIPHERAL_ARTERIAL_DISEASE = 2;  // peripheral-arterial-disease
+  PRIMARYINDICATION_ANEURYSM = 3;  // aneurysm
+  PRIMARYINDICATION_STENOSIS = 4;  // stenosis
+  PRIMARYINDICATION_SUSPECTED_PULMONARY_EMBOLISM = 5;  // suspected-pulmonary-embolism
+  PRIMARYINDICATION_GI_BLEEDING = 6;  // gi-bleeding
+  PRIMARYINDICATION_PRE_INTERVENTION_PLANNING = 7;  // pre-intervention-planning
+  PRIMARYINDICATION_SUSPECTED_STROKE = 8;  // suspected-stroke
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum AngiographyTestRequestContrastRequiredEnum {
+  CONTRASTREQUIRED_UNSPECIFIED = 0;
+  CONTRASTREQUIRED_IODINATED = 1;  // iodinated
+  CONTRASTREQUIRED_GADOLINIUM = 2;  // gadolinium
+  CONTRASTREQUIRED_NONE = 3;  // none
+  CONTRASTREQUIRED_UNKNOWN = 4;  // unknown
+}
+
+enum AngiographyTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum AngiographyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message AngiographyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  AngiographyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  AngiographyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  AngiographyTestRequestAngiographyTypeEnum angiography_type = 12;  // VARCHAR(30)
+  AngiographyTestRequestBodyRegionEnum body_region = 13;  // VARCHAR(30)
+  AngiographyTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(40)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 16;  // VARCHAR(1000) — max 1000 chars
+  AngiographyTestRequestContrastRequiredEnum contrast_required = 17;  // VARCHAR(15)
+  double egfr = 18;  // NUMERIC(5,1) — numeric(5,1)
+  bool contrast_allergy = 19;  // BOOLEAN
+  bool diabetes = 20;  // BOOLEAN
+  bool metformin = 21;  // BOOLEAN
+  bool taking_anticoagulant = 22;  // BOOLEAN
+  string anticoagulant_agent = 23;  // VARCHAR(255) — max 255 chars
+  bool taking_antiplatelet = 24;  // BOOLEAN
+  bool bleeding_disorder = 25;  // BOOLEAN
+  AngiographyTestRequestPregnancyStatusEnum pregnancy_status = 26;  // VARCHAR(15)
+  AngiographyTestRequestUrgencyEnum urgency = 27;  // VARCHAR(15)
+  string ir_me_r_justification = 28;  // VARCHAR(1000) — max 1000 chars
+  string supervising_consultant = 29;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 30;  // VARCHAR(255) — max 255 chars
+  string notes = 31;  // VARCHAR(1000) — max 1000 chars
+}

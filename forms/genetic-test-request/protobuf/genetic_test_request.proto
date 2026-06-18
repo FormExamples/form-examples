@@ -1,0 +1,95 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: genetic_test_request
+
+syntax = "proto3";
+
+package form_examples.genetic_test_request;
+
+enum GeneticTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_ACCEPTED = 4;  // accepted
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum GeneticTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum GeneticTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_DIAGNOSTIC_SINGLE_GENE = 1;  // diagnostic-single-gene
+  TESTTYPE_GENE_PANEL = 2;  // gene-panel
+  TESTTYPE_WHOLE_EXOME = 3;  // whole-exome
+  TESTTYPE_WHOLE_GENOME = 4;  // whole-genome
+  TESTTYPE_CHROMOSOMAL_MICROARRAY = 5;  // chromosomal-microarray
+  TESTTYPE_KARYOTYPE = 6;  // karyotype
+  TESTTYPE_PREDICTIVE_PRESYMPTOMATIC = 7;  // predictive-presymptomatic
+  TESTTYPE_CARRIER_TESTING = 8;  // carrier-testing
+  TESTTYPE_PHARMACOGENOMIC = 9;  // pharmacogenomic
+  TESTTYPE_PRENATAL = 10;  // prenatal
+  TESTTYPE_OTHER = 11;  // other
+}
+
+enum GeneticTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SUSPECTED_GENETIC_DISORDER = 1;  // suspected-genetic-disorder
+  PRIMARYINDICATION_FAMILIAL_CANCER = 2;  // familial-cancer
+  PRIMARYINDICATION_DEVELOPMENTAL_DELAY = 3;  // developmental-delay
+  PRIMARYINDICATION_CONGENITAL_ANOMALY = 4;  // congenital-anomaly
+  PRIMARYINDICATION_CARDIOMYOPATHY_ARRHYTHMIA = 5;  // cardiomyopathy-arrhythmia
+  PRIMARYINDICATION_NEUROMUSCULAR = 6;  // neuromuscular
+  PRIMARYINDICATION_PREDICTIVE_FAMILY_HISTORY = 7;  // predictive-family-history
+  PRIMARYINDICATION_CARRIER_SCREENING = 8;  // carrier-screening
+  PRIMARYINDICATION_PRENATAL_DIAGNOSIS = 9;  // prenatal-diagnosis
+  PRIMARYINDICATION_PHARMACOGENOMICS = 10;  // pharmacogenomics
+  PRIMARYINDICATION_OTHER = 11;  // other
+}
+
+enum GeneticTestRequestSpecimenTypeEnum {
+  SPECIMENTYPE_UNSPECIFIED = 0;
+  SPECIMENTYPE_BLOOD = 1;  // blood
+  SPECIMENTYPE_SALIVA = 2;  // saliva
+  SPECIMENTYPE_TISSUE = 3;  // tissue
+  SPECIMENTYPE_PRENATAL = 4;  // prenatal
+}
+
+enum GeneticTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+}
+
+message GeneticTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  GeneticTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  GeneticTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  GeneticTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  GeneticTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string clinical_details = 15;  // VARCHAR(2000) — max 2000 chars
+  string family_history = 16;  // VARCHAR(2000) — max 2000 chars
+  string suspected_condition = 17;  // VARCHAR(255) — max 255 chars
+  bool consent_obtained = 18;  // BOOLEAN
+  bool genetic_counselling_offered = 19;  // BOOLEAN
+  bool affected_relative_tested = 20;  // BOOLEAN
+  GeneticTestRequestSpecimenTypeEnum specimen_type = 21;  // VARCHAR(15)
+  GeneticTestRequestUrgencyEnum urgency = 22;  // VARCHAR(15)
+  string supervising_consultant = 23;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 24;  // VARCHAR(255) — max 255 chars
+  string notes = 25;  // VARCHAR(1000) — max 1000 chars
+}

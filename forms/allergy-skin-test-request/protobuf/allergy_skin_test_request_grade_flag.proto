@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: allergy_skin_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.allergy_skin_test_request;
+
+enum AllergySkinTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_PREVIOUS_ANAPHYLAXIS_RESUS_READY = 1;  // previous-anaphylaxis-resus-ready
+  CATEGORY_ANTIHISTAMINES_INVALIDATE_TEST = 2;  // antihistamines-invalidate-test
+  CATEGORY_BETA_BLOCKER_CAUTION = 3;  // beta-blocker-caution
+  CATEGORY_ACTIVE_SKIN_DISEASE = 4;  // active-skin-disease
+  CATEGORY_MISSING_INDICATION = 5;  // missing-indication
+  CATEGORY_MISSING_CLINICAL_DETAILS = 6;  // missing-clinical-details
+  CATEGORY_NO_ALLERGEN_SELECTED = 7;  // no-allergen-selected
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum AllergySkinTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message AllergySkinTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string allergy_skin_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  AllergySkinTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  AllergySkinTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

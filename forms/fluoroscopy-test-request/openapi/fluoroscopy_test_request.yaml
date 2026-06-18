@@ -1,0 +1,264 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: fluoroscopy_test_request
+openapi: 3.1.0
+info:
+  title: Fluoroscopy Test Request — FluoroscopyTestRequest
+  version: 1.0.0
+  description: Fluoroscopy / contrast-study request (referral) for barium studies and related procedures. Captures the requested study, the clinical indication and question, relevant history, pregnancy and radiation-safety context, and triage urgency.
+paths:
+  /fluoroscopy-test-requests:
+    get:
+      summary: List FluoroscopyTestRequest records
+      operationId: listFluoroscopyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluoroscopyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluoroscopyTestRequest"
+    post:
+      summary: Create a new FluoroscopyTestRequest
+      operationId: createFluoroscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestRequest"
+      responses:
+        "201":
+          description: The newly created FluoroscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequest"
+        "400":
+          description: Validation error
+  /fluoroscopy-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluoroscopyTestRequest by id
+      operationId: getFluoroscopyTestRequest
+      responses:
+        "200":
+          description: The requested FluoroscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequest"
+        "404":
+          description: FluoroscopyTestRequest not found
+    patch:
+      summary: Update an existing FluoroscopyTestRequest
+      operationId: updateFluoroscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestRequest"
+      responses:
+        "200":
+          description: The updated FluoroscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequest"
+        "404":
+          description: FluoroscopyTestRequest not found
+    delete:
+      summary: Soft-delete a FluoroscopyTestRequest
+      operationId: deleteFluoroscopyTestRequest
+      responses:
+        "204":
+          description: FluoroscopyTestRequest deleted
+        "404":
+          description: FluoroscopyTestRequest not found
+components:
+  schemas:
+    FluoroscopyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the study is requested to be performed.
+        study_type:
+          type: string
+          enum:
+            - barium-swallow
+            - barium-meal
+            - barium-follow-through
+            - barium-enema
+            - water-soluble-contrast-swallow
+            - defecating-proctogram
+            - hysterosalpingogram
+            - micturating-cystourethrogram
+            - arthrogram
+            - fluoroscopy-guided-procedure
+            - other
+            - ""
+          description: Requested fluoroscopy / contrast study type, used for appropriateness and radiation-dose banding.
+        primary_indication:
+          type: string
+          enum:
+            - dysphagia
+            - reflux
+            - suspected-obstruction
+            - suspected-perforation
+            - constipation
+            - infertility-tubal-patency
+            - vesicoureteric-reflux
+            - joint-assessment
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring and contrast-choice safety.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the study should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and clinical history.
+        pregnancy_status:
+          type: string
+          enum:
+            - not-pregnant
+            - pregnant
+            - possible
+            - unknown
+            - not-applicable
+            - ""
+          description: "Pregnancy status for ionising-radiation safety: not-pregnant, pregnant, possible, unknown, not-applicable."
+        contrast_allergy:
+          type: boolean
+          description: Whether the patient has a known contrast-media allergy (safety factor).
+        aspiration_risk:
+          type: boolean
+          description: Whether the patient is at risk of aspiration (favours water-soluble contrast).
+        diabetes:
+          type: boolean
+          description: Whether the patient has diabetes.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        ir_me_r_justification:
+          type: string
+          maxLength: 1000
+          description: "IR(ME)R justification: clinical rationale for exposing the patient to ionising radiation."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - study_type
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - pregnancy_status
+        - contrast_allergy
+        - aspiration_risk
+        - diabetes
+        - urgency
+        - ir_me_r_justification
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Fluoroscopy / contrast-study request (referral) for barium studies and related procedures. Captures the requested study, the clinical indication and question, relevant history, pregnancy and radiation-safety context, and triage urgency.

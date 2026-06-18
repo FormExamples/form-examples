@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: allergy_skin_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Allergy Skin Test Request — AllergySkinTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / validity / completeness / triage rule that fired for this request.
+paths:
+  /allergy-skin-test-request-grade-rules:
+    get:
+      summary: List AllergySkinTestRequestGradeRule records
+      operationId: listAllergySkinTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AllergySkinTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+    post:
+      summary: Create a new AllergySkinTestRequestGradeRule
+      operationId: createAllergySkinTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created AllergySkinTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /allergy-skin-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AllergySkinTestRequestGradeRule by id
+      operationId: getAllergySkinTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested AllergySkinTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+        "404":
+          description: AllergySkinTestRequestGradeRule not found
+    patch:
+      summary: Update an existing AllergySkinTestRequestGradeRule
+      operationId: updateAllergySkinTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated AllergySkinTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeRule"
+        "404":
+          description: AllergySkinTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a AllergySkinTestRequestGradeRule
+      operationId: deleteAllergySkinTestRequestGradeRule
+      responses:
+        "204":
+          description: AllergySkinTestRequestGradeRule deleted
+        "404":
+          description: AllergySkinTestRequestGradeRule not found
+components:
+  schemas:
+    AllergySkinTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        allergy_skin_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-FOOD-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - validity
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, validity, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - allergy_skin_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / validity / completeness / triage rule that fired for this request.

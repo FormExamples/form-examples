@@ -1,0 +1,193 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: allergy_skin_test_request_grade
+openapi: 3.1.0
+info:
+  title: Allergy Skin Test Request — AllergySkinTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (BSACI / EAACI indication match, 1-9), validity-and-safety, request completeness, and triage priority."
+paths:
+  /allergy-skin-test-request-grades:
+    get:
+      summary: List AllergySkinTestRequestGrade records
+      operationId: listAllergySkinTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AllergySkinTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+    post:
+      summary: Create a new AllergySkinTestRequestGrade
+      operationId: createAllergySkinTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created AllergySkinTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+        "400":
+          description: Validation error
+  /allergy-skin-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AllergySkinTestRequestGrade by id
+      operationId: getAllergySkinTestRequestGrade
+      responses:
+        "200":
+          description: The requested AllergySkinTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+        "404":
+          description: AllergySkinTestRequestGrade not found
+    patch:
+      summary: Update an existing AllergySkinTestRequestGrade
+      operationId: updateAllergySkinTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+      responses:
+        "200":
+          description: The updated AllergySkinTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGrade"
+        "404":
+          description: AllergySkinTestRequestGrade not found
+    delete:
+      summary: Soft-delete a AllergySkinTestRequestGrade
+      operationId: deleteAllergySkinTestRequestGrade
+      responses:
+        "204":
+          description: AllergySkinTestRequestGrade deleted
+        "404":
+          description: AllergySkinTestRequestGrade not found
+components:
+  schemas:
+    AllergySkinTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        allergy_skin_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9) from BSACI / EAACI indication match.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        validity_safety_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - contraindicated
+            - ""
+          description: "Validity-and-safety band: ok, caution, contraindicated. Antihistamines invalidate skin-prick tests; beta-blocker plus anaphylaxis history and active skin disease raise caution / contraindication."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Assigned triage tier: routine, urgent."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the test implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - allergy_skin_test_request_id
+        - appropriateness_band
+        - validity_safety_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (BSACI / EAACI indication match, 1-9), validity-and-safety, request completeness, and triage priority."

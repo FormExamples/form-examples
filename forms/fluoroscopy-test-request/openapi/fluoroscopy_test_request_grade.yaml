@@ -1,0 +1,203 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: fluoroscopy_test_request_grade
+openapi: 3.1.0
+info:
+  title: Fluoroscopy Test Request — FluoroscopyTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), safety (safety band + radiation-dose band), request completeness, and triage priority."
+paths:
+  /fluoroscopy-test-request-grades:
+    get:
+      summary: List FluoroscopyTestRequestGrade records
+      operationId: listFluoroscopyTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of FluoroscopyTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+    post:
+      summary: Create a new FluoroscopyTestRequestGrade
+      operationId: createFluoroscopyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created FluoroscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+        "400":
+          description: Validation error
+  /fluoroscopy-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one FluoroscopyTestRequestGrade by id
+      operationId: getFluoroscopyTestRequestGrade
+      responses:
+        "200":
+          description: The requested FluoroscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+        "404":
+          description: FluoroscopyTestRequestGrade not found
+    patch:
+      summary: Update an existing FluoroscopyTestRequestGrade
+      operationId: updateFluoroscopyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated FluoroscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FluoroscopyTestRequestGrade"
+        "404":
+          description: FluoroscopyTestRequestGrade not found
+    delete:
+      summary: Soft-delete a FluoroscopyTestRequestGrade
+      operationId: deleteFluoroscopyTestRequestGrade
+      responses:
+        "204":
+          description: FluoroscopyTestRequestGrade deleted
+        "404":
+          description: FluoroscopyTestRequestGrade not found
+components:
+  schemas:
+    FluoroscopyTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        fluoroscopy_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: ACR Appropriateness Criteria / RCR iRefer score (1-9).
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        safety_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - contraindicated
+            - ""
+          description: "Safety band: ok, caution, contraindicated (driven by pregnancy, contrast allergy, aspiration risk, and contrast-choice for suspected perforation)."
+        radiation_dose_band:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Estimated radiation-dose band for the requested study: low, moderate, high."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Assigned triage tier: routine, urgent, emergency."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for the study implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - fluoroscopy_test_request_id
+        - appropriateness_band
+        - safety_band
+        - radiation_dose_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), safety (safety band + radiation-dose band), request completeness, and triage priority."

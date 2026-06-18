@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: genetic_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Genetic Test Request — GeneticTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / consent / completeness / triage rule that fired for this request.
+paths:
+  /genetic-test-request-grade-rules:
+    get:
+      summary: List GeneticTestRequestGradeRule records
+      operationId: listGeneticTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GeneticTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+    post:
+      summary: Create a new GeneticTestRequestGradeRule
+      operationId: createGeneticTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created GeneticTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /genetic-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GeneticTestRequestGradeRule by id
+      operationId: getGeneticTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested GeneticTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+        "404":
+          description: GeneticTestRequestGradeRule not found
+    patch:
+      summary: Update an existing GeneticTestRequestGradeRule
+      operationId: updateGeneticTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated GeneticTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequestGradeRule"
+        "404":
+          description: GeneticTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a GeneticTestRequestGradeRule
+      operationId: deleteGeneticTestRequestGradeRule
+      responses:
+        "204":
+          description: GeneticTestRequestGradeRule deleted
+        "404":
+          description: GeneticTestRequestGradeRule not found
+components:
+  schemas:
+    GeneticTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        genetic_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-FAMILIAL-CANCER-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - consent
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, consent, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - genetic_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / consent / completeness / triage rule that fired for this request.

@@ -1,0 +1,83 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: cystoscopy_test_request
+
+syntax = "proto3";
+
+package form_examples.cystoscopy_test_request;
+
+enum CystoscopyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum CystoscopyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum CystoscopyTestRequestProcedureEnum {
+  PROCEDURE_UNSPECIFIED = 0;
+  PROCEDURE_FLEXIBLE_CYSTOSCOPY = 1;  // flexible-cystoscopy
+  PROCEDURE_RIGID_CYSTOSCOPY = 2;  // rigid-cystoscopy
+  PROCEDURE_OTHER = 3;  // other
+}
+
+enum CystoscopyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_VISIBLE_HAEMATURIA = 1;  // visible-haematuria
+  PRIMARYINDICATION_NON_VISIBLE_HAEMATURIA = 2;  // non-visible-haematuria
+  PRIMARYINDICATION_RECURRENT_UTI = 3;  // recurrent-uti
+  PRIMARYINDICATION_LOWER_URINARY_TRACT_SYMPTOMS = 4;  // lower-urinary-tract-symptoms
+  PRIMARYINDICATION_BLADDER_CANCER_SURVEILLANCE = 5;  // bladder-cancer-surveillance
+  PRIMARYINDICATION_SUSPECTED_BLADDER_TUMOUR = 6;  // suspected-bladder-tumour
+  PRIMARYINDICATION_URETHRAL_STRICTURE = 7;  // urethral-stricture
+  PRIMARYINDICATION_CATHETER_PROBLEMS = 8;  // catheter-problems
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum CystoscopyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_TWO_WEEK_WAIT = 3;  // two-week-wait
+  URGENCY_EMERGENCY = 4;  // emergency
+}
+
+message CystoscopyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  CystoscopyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  CystoscopyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  CystoscopyTestRequestProcedureEnum procedure = 12;  // VARCHAR(30)
+  CystoscopyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_haematuria = 16;  // BOOLEAN
+  bool symptom_dysuria = 17;  // BOOLEAN
+  bool symptom_frequency = 18;  // BOOLEAN
+  bool symptom_retention = 19;  // BOOLEAN
+  bool visible_haematuria = 20;  // BOOLEAN
+  bool current_uti = 21;  // BOOLEAN
+  bool taking_anticoagulant = 22;  // BOOLEAN
+  string anticoagulant_agent = 23;  // VARCHAR(255) — max 255 chars
+  bool taking_antiplatelet = 24;  // BOOLEAN
+  bool previous_bladder_cancer = 25;  // BOOLEAN
+  CystoscopyTestRequestUrgencyEnum urgency = 26;  // VARCHAR(15)
+  string supervising_consultant = 27;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 28;  // VARCHAR(255) — max 255 chars
+  string notes = 29;  // VARCHAR(1000) — max 1000 chars
+}

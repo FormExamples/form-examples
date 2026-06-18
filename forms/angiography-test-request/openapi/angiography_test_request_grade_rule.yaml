@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: angiography_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Angiography Test Request — AngiographyTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+paths:
+  /angiography-test-request-grade-rules:
+    get:
+      summary: List AngiographyTestRequestGradeRule records
+      operationId: listAngiographyTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AngiographyTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+    post:
+      summary: Create a new AngiographyTestRequestGradeRule
+      operationId: createAngiographyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created AngiographyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /angiography-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AngiographyTestRequestGradeRule by id
+      operationId: getAngiographyTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested AngiographyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+        "404":
+          description: AngiographyTestRequestGradeRule not found
+    patch:
+      summary: Update an existing AngiographyTestRequestGradeRule
+      operationId: updateAngiographyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated AngiographyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeRule"
+        "404":
+          description: AngiographyTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a AngiographyTestRequestGradeRule
+      operationId: deleteAngiographyTestRequestGradeRule
+      responses:
+        "204":
+          description: AngiographyTestRequestGradeRule deleted
+        "404":
+          description: AngiographyTestRequestGradeRule not found
+components:
+  schemas:
+    AngiographyTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        angiography_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-CORONARY-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - safety
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, safety, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - angiography_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.

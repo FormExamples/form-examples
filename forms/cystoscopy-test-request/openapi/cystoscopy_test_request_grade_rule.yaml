@@ -1,0 +1,156 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cystoscopy_test_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Cystoscopy Test Request — CystoscopyTestRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / urgency / completeness / risk rule that fired for this request.
+paths:
+  /cystoscopy-test-request-grade-rules:
+    get:
+      summary: List CystoscopyTestRequestGradeRule records
+      operationId: listCystoscopyTestRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CystoscopyTestRequestGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+    post:
+      summary: Create a new CystoscopyTestRequestGradeRule
+      operationId: createCystoscopyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+      responses:
+        "201":
+          description: The newly created CystoscopyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+        "400":
+          description: Validation error
+  /cystoscopy-test-request-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CystoscopyTestRequestGradeRule by id
+      operationId: getCystoscopyTestRequestGradeRule
+      responses:
+        "200":
+          description: The requested CystoscopyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+        "404":
+          description: CystoscopyTestRequestGradeRule not found
+    patch:
+      summary: Update an existing CystoscopyTestRequestGradeRule
+      operationId: updateCystoscopyTestRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+      responses:
+        "200":
+          description: The updated CystoscopyTestRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeRule"
+        "404":
+          description: CystoscopyTestRequestGradeRule not found
+    delete:
+      summary: Soft-delete a CystoscopyTestRequestGradeRule
+      operationId: deleteCystoscopyTestRequestGradeRule
+      responses:
+        "204":
+          description: CystoscopyTestRequestGradeRule deleted
+        "404":
+          description: CystoscopyTestRequestGradeRule not found
+components:
+  schemas:
+    CystoscopyTestRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cystoscopy_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-APPROP-VISIBLE-HAEMATURIA-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - urgency
+            - completeness
+            - risk
+            - ""
+          description: "Scoring axis the rule belongs to: appropriateness, urgency, completeness, risk."
+        category:
+          type: string
+          maxLength: 50
+          description: Category or indication the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - cystoscopy_test_request_grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / urgency / completeness / risk rule that fired for this request.

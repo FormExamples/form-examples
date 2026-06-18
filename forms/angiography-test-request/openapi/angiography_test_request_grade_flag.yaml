@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: angiography_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Angiography Test Request — AngiographyTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+paths:
+  /angiography-test-request-grade-flags:
+    get:
+      summary: List AngiographyTestRequestGradeFlag records
+      operationId: listAngiographyTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AngiographyTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+    post:
+      summary: Create a new AngiographyTestRequestGradeFlag
+      operationId: createAngiographyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created AngiographyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /angiography-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AngiographyTestRequestGradeFlag by id
+      operationId: getAngiographyTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested AngiographyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+        "404":
+          description: AngiographyTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing AngiographyTestRequestGradeFlag
+      operationId: updateAngiographyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated AngiographyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AngiographyTestRequestGradeFlag"
+        "404":
+          description: AngiographyTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a AngiographyTestRequestGradeFlag
+      operationId: deleteAngiographyTestRequestGradeFlag
+      responses:
+        "204":
+          description: AngiographyTestRequestGradeFlag deleted
+        "404":
+          description: AngiographyTestRequestGradeFlag not found
+components:
+  schemas:
+    AngiographyTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        angiography_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-RENAL-IMPAIRMENT-001).
+        category:
+          type: string
+          enum:
+            - contrast-allergy
+            - renal-impairment
+            - high-bleeding-risk-anticoag
+            - pregnancy
+            - metformin-contrast
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: "Flag category: contrast-allergy, renal-impairment, high-bleeding-risk-anticoag, pregnancy, metformin-contrast, missing-indication, missing-clinical-question, other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"check eGFR and arrange renal-protective hydration\")."
+      required:
+        - created_at
+        - updated_at
+        - angiography_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.

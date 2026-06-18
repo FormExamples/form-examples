@@ -1,0 +1,269 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: genetic_test_request
+openapi: 3.1.0
+info:
+  title: Genetic Test Request — GeneticTestRequest
+  version: 1.0.0
+  description: Clinical genetics / genomic test request (referral). Captures the requested test type, the clinical indication and question, clinical details, family history, consent and pre-test counselling status, specimen type, and triage urgency. Aligned with the NHS National Genomic Test Directory eligibility criteria.
+paths:
+  /genetic-test-requests:
+    get:
+      summary: List GeneticTestRequest records
+      operationId: listGeneticTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of GeneticTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeneticTestRequest"
+    post:
+      summary: Create a new GeneticTestRequest
+      operationId: createGeneticTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestRequest"
+      responses:
+        "201":
+          description: The newly created GeneticTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequest"
+        "400":
+          description: Validation error
+  /genetic-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one GeneticTestRequest by id
+      operationId: getGeneticTestRequest
+      responses:
+        "200":
+          description: The requested GeneticTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequest"
+        "404":
+          description: GeneticTestRequest not found
+    patch:
+      summary: Update an existing GeneticTestRequest
+      operationId: updateGeneticTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GeneticTestRequest"
+      responses:
+        "200":
+          description: The updated GeneticTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticTestRequest"
+        "404":
+          description: GeneticTestRequest not found
+    delete:
+      summary: Soft-delete a GeneticTestRequest
+      operationId: deleteGeneticTestRequest
+      responses:
+        "204":
+          description: GeneticTestRequest deleted
+        "404":
+          description: GeneticTestRequest not found
+components:
+  schemas:
+    GeneticTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - accepted
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, accepted, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test result is requested.
+        test_type:
+          type: string
+          enum:
+            - diagnostic-single-gene
+            - gene-panel
+            - whole-exome
+            - whole-genome
+            - chromosomal-microarray
+            - karyotype
+            - predictive-presymptomatic
+            - carrier-testing
+            - pharmacogenomic
+            - prenatal
+            - other
+            - ""
+          description: "Requested genomic test type: diagnostic-single-gene, gene-panel, whole-exome, whole-genome, chromosomal-microarray, karyotype, predictive-presymptomatic, carrier-testing, pharmacogenomic, prenatal, other."
+        primary_indication:
+          type: string
+          enum:
+            - suspected-genetic-disorder
+            - familial-cancer
+            - developmental-delay
+            - congenital-anomaly
+            - cardiomyopathy-arrhythmia
+            - neuromuscular
+            - predictive-family-history
+            - carrier-screening
+            - prenatal-diagnosis
+            - pharmacogenomics
+            - other
+            - ""
+          description: Primary clinical indication, mapped to a National Genomic Test Directory clinical indication for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the test should answer (highest-value field).
+        clinical_details:
+          type: string
+          maxLength: 2000
+          description: Relevant clinical details, phenotype (HPO terms), and examination findings.
+        family_history:
+          type: string
+          maxLength: 2000
+          description: Relevant family history, pedigree summary, and inheritance pattern.
+        suspected_condition:
+          type: string
+          maxLength: 255
+          description: Suspected condition or gene of interest, if known.
+        consent_obtained:
+          type: boolean
+          description: Whether informed consent for genomic testing (Record of Discussion) has been obtained.
+        genetic_counselling_offered:
+          type: boolean
+          description: Whether pre-test genetic counselling has been offered or provided (mandatory for predictive / presymptomatic testing).
+        affected_relative_tested:
+          type: boolean
+          description: Whether an affected relative has already been tested and a familial variant is known.
+        specimen_type:
+          type: string
+          enum:
+            - blood
+            - saliva
+            - tissue
+            - prenatal
+            - ""
+          description: "Specimen type: blood, saliva, tissue, prenatal."
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - ""
+          description: "Requested triage urgency: routine, urgent."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - test_type
+        - primary_indication
+        - clinical_question
+        - clinical_details
+        - family_history
+        - suspected_condition
+        - consent_obtained
+        - genetic_counselling_offered
+        - affected_relative_tested
+        - specimen_type
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Clinical genetics / genomic test request (referral). Captures the requested test type, the clinical indication and question, clinical details, family history, consent and pre-test counselling status, specimen type, and triage urgency. Aligned with the NHS National Genomic Test Directory eligibility criteria.

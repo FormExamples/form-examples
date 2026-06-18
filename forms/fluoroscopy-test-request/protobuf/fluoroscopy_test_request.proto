@@ -1,0 +1,94 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: fluoroscopy_test_request
+
+syntax = "proto3";
+
+package form_examples.fluoroscopy_test_request;
+
+enum FluoroscopyTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum FluoroscopyTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum FluoroscopyTestRequestStudyTypeEnum {
+  STUDYTYPE_UNSPECIFIED = 0;
+  STUDYTYPE_BARIUM_SWALLOW = 1;  // barium-swallow
+  STUDYTYPE_BARIUM_MEAL = 2;  // barium-meal
+  STUDYTYPE_BARIUM_FOLLOW_THROUGH = 3;  // barium-follow-through
+  STUDYTYPE_BARIUM_ENEMA = 4;  // barium-enema
+  STUDYTYPE_WATER_SOLUBLE_CONTRAST_SWALLOW = 5;  // water-soluble-contrast-swallow
+  STUDYTYPE_DEFECATING_PROCTOGRAM = 6;  // defecating-proctogram
+  STUDYTYPE_HYSTEROSALPINGOGRAM = 7;  // hysterosalpingogram
+  STUDYTYPE_MICTURATING_CYSTOURETHROGRAM = 8;  // micturating-cystourethrogram
+  STUDYTYPE_ARTHROGRAM = 9;  // arthrogram
+  STUDYTYPE_FLUOROSCOPY_GUIDED_PROCEDURE = 10;  // fluoroscopy-guided-procedure
+  STUDYTYPE_OTHER = 11;  // other
+}
+
+enum FluoroscopyTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_DYSPHAGIA = 1;  // dysphagia
+  PRIMARYINDICATION_REFLUX = 2;  // reflux
+  PRIMARYINDICATION_SUSPECTED_OBSTRUCTION = 3;  // suspected-obstruction
+  PRIMARYINDICATION_SUSPECTED_PERFORATION = 4;  // suspected-perforation
+  PRIMARYINDICATION_CONSTIPATION = 5;  // constipation
+  PRIMARYINDICATION_INFERTILITY_TUBAL_PATENCY = 6;  // infertility-tubal-patency
+  PRIMARYINDICATION_VESICOURETERIC_REFLUX = 7;  // vesicoureteric-reflux
+  PRIMARYINDICATION_JOINT_ASSESSMENT = 8;  // joint-assessment
+  PRIMARYINDICATION_OTHER = 9;  // other
+}
+
+enum FluoroscopyTestRequestPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_PREGNANT = 1;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT = 2;  // pregnant
+  PREGNANCYSTATUS_POSSIBLE = 3;  // possible
+  PREGNANCYSTATUS_UNKNOWN = 4;  // unknown
+  PREGNANCYSTATUS_NOT_APPLICABLE = 5;  // not-applicable
+}
+
+enum FluoroscopyTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message FluoroscopyTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  FluoroscopyTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  FluoroscopyTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  FluoroscopyTestRequestStudyTypeEnum study_type = 12;  // VARCHAR(40)
+  FluoroscopyTestRequestPrimaryIndicationEnum primary_indication = 13;  // VARCHAR(40)
+  string clinical_question = 14;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 15;  // VARCHAR(1000) — max 1000 chars
+  FluoroscopyTestRequestPregnancyStatusEnum pregnancy_status = 16;  // VARCHAR(15)
+  bool contrast_allergy = 17;  // BOOLEAN
+  bool aspiration_risk = 18;  // BOOLEAN
+  bool diabetes = 19;  // BOOLEAN
+  FluoroscopyTestRequestUrgencyEnum urgency = 20;  // VARCHAR(15)
+  string ir_me_r_justification = 21;  // VARCHAR(1000) — max 1000 chars
+  string supervising_consultant = 22;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 23;  // VARCHAR(255) — max 255 chars
+  string notes = 24;  // VARCHAR(1000) — max 1000 chars
+}

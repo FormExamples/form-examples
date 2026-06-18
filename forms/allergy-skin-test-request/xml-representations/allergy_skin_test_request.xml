@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE allergy_skin_test_request SYSTEM "allergy_skin_test_request.dtd">
+<allergy_skin_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<test_type>skin-prick-test</test_type>
+<allergen_aeroallergens>true</allergen_aeroallergens>
+<allergen_food>true</allergen_food>
+<allergen_drug>true</allergen_drug>
+<allergen_venom>true</allergen_venom>
+<allergen_latex>true</allergen_latex>
+<allergen_contact>true</allergen_contact>
+<primary_indication>suspected-food-allergy</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<clinical_details>Example text.</clinical_details>
+<previous_anaphylaxis>true</previous_anaphylaxis>
+<on_antihistamines>true</on_antihistamines>
+<on_beta_blocker>true</on_beta_blocker>
+<current_skin_disease>true</current_skin_disease>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</allergy_skin_test_request>

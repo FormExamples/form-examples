@@ -1,0 +1,169 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: allergy_skin_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Allergy Skin Test Request — AllergySkinTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the allergy team.
+paths:
+  /allergy-skin-test-request-grade-flags:
+    get:
+      summary: List AllergySkinTestRequestGradeFlag records
+      operationId: listAllergySkinTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AllergySkinTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+    post:
+      summary: Create a new AllergySkinTestRequestGradeFlag
+      operationId: createAllergySkinTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created AllergySkinTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /allergy-skin-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AllergySkinTestRequestGradeFlag by id
+      operationId: getAllergySkinTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested AllergySkinTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+        "404":
+          description: AllergySkinTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing AllergySkinTestRequestGradeFlag
+      operationId: updateAllergySkinTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated AllergySkinTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllergySkinTestRequestGradeFlag"
+        "404":
+          description: AllergySkinTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a AllergySkinTestRequestGradeFlag
+      operationId: deleteAllergySkinTestRequestGradeFlag
+      responses:
+        "204":
+          description: AllergySkinTestRequestGradeFlag deleted
+        "404":
+          description: AllergySkinTestRequestGradeFlag not found
+components:
+  schemas:
+    AllergySkinTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        allergy_skin_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-PREVIOUS-ANAPHYLAXIS-001).
+        category:
+          type: string
+          enum:
+            - previous-anaphylaxis-resus-ready
+            - antihistamines-invalidate-test
+            - beta-blocker-caution
+            - active-skin-disease
+            - missing-indication
+            - missing-clinical-details
+            - no-allergen-selected
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"ensure resuscitation facilities and stop antihistamines for an appropriate washout before testing\")."
+      required:
+        - created_at
+        - updated_at
+        - allergy_skin_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the allergy team.

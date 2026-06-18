@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cystoscopy_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Cystoscopy Test Request — CystoscopyTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging / urology team.
+paths:
+  /cystoscopy-test-request-grade-flags:
+    get:
+      summary: List CystoscopyTestRequestGradeFlag records
+      operationId: listCystoscopyTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CystoscopyTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+    post:
+      summary: Create a new CystoscopyTestRequestGradeFlag
+      operationId: createCystoscopyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created CystoscopyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /cystoscopy-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CystoscopyTestRequestGradeFlag by id
+      operationId: getCystoscopyTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested CystoscopyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+        "404":
+          description: CystoscopyTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing CystoscopyTestRequestGradeFlag
+      operationId: updateCystoscopyTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated CystoscopyTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequestGradeFlag"
+        "404":
+          description: CystoscopyTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a CystoscopyTestRequestGradeFlag
+      operationId: deleteCystoscopyTestRequestGradeFlag
+      responses:
+        "204":
+          description: CystoscopyTestRequestGradeFlag deleted
+        "404":
+          description: CystoscopyTestRequestGradeFlag not found
+components:
+  schemas:
+    CystoscopyTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        cystoscopy_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUSPECTED-CANCER-2WW-001).
+        category:
+          type: string
+          enum:
+            - suspected-cancer-2ww
+            - visible-haematuria
+            - active-uti-defer
+            - high-bleeding-risk-anticoag
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer on the suspected-cancer two-week-wait pathway\")."
+      required:
+        - created_at
+        - updated_at
+        - cystoscopy_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging / urology team.

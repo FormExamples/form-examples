@@ -1,0 +1,270 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: cystoscopy_test_request
+openapi: 3.1.0
+info:
+  title: Cystoscopy Test Request — CystoscopyTestRequest
+  version: 1.0.0
+  description: Cystoscopy (bladder endoscopy) request (referral). Captures the requested procedure, the clinical indication and question, relevant history, symptoms, bleeding-risk factors, and triage urgency.
+paths:
+  /cystoscopy-test-requests:
+    get:
+      summary: List CystoscopyTestRequest records
+      operationId: listCystoscopyTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of CystoscopyTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CystoscopyTestRequest"
+    post:
+      summary: Create a new CystoscopyTestRequest
+      operationId: createCystoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequest"
+      responses:
+        "201":
+          description: The newly created CystoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequest"
+        "400":
+          description: Validation error
+  /cystoscopy-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one CystoscopyTestRequest by id
+      operationId: getCystoscopyTestRequest
+      responses:
+        "200":
+          description: The requested CystoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequest"
+        "404":
+          description: CystoscopyTestRequest not found
+    patch:
+      summary: Update an existing CystoscopyTestRequest
+      operationId: updateCystoscopyTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CystoscopyTestRequest"
+      responses:
+        "200":
+          description: The updated CystoscopyTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CystoscopyTestRequest"
+        "404":
+          description: CystoscopyTestRequest not found
+    delete:
+      summary: Soft-delete a CystoscopyTestRequest
+      operationId: deleteCystoscopyTestRequest
+      responses:
+        "204":
+          description: CystoscopyTestRequest deleted
+        "404":
+          description: CystoscopyTestRequest not found
+components:
+  schemas:
+    CystoscopyTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the cystoscopy is requested to be performed.
+        procedure:
+          type: string
+          enum:
+            - flexible-cystoscopy
+            - rigid-cystoscopy
+            - other
+            - ""
+          description: "Requested procedure: flexible-cystoscopy, rigid-cystoscopy, other."
+        primary_indication:
+          type: string
+          enum:
+            - visible-haematuria
+            - non-visible-haematuria
+            - recurrent-uti
+            - lower-urinary-tract-symptoms
+            - bladder-cancer-surveillance
+            - suspected-bladder-tumour
+            - urethral-stricture
+            - catheter-problems
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring.
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the cystoscopy should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant medical, surgical, and urological history.
+        symptom_haematuria:
+          type: boolean
+          description: Whether the patient reports blood in the urine (haematuria).
+        symptom_dysuria:
+          type: boolean
+          description: Whether the patient reports painful or difficult urination (dysuria).
+        symptom_frequency:
+          type: boolean
+          description: Whether the patient reports urinary frequency.
+        symptom_retention:
+          type: boolean
+          description: Whether the patient reports urinary retention.
+        visible_haematuria:
+          type: boolean
+          description: Whether the haematuria is visible (macroscopic / frank) rather than non-visible (red flag for 2WW).
+        current_uti:
+          type: boolean
+          description: Whether the patient currently has an active urinary tract infection (defer for active UTI).
+        taking_anticoagulant:
+          type: boolean
+          description: Whether the patient is taking an anticoagulant (bleeding-risk factor).
+        anticoagulant_agent:
+          type: string
+          maxLength: 255
+          description: Name of the anticoagulant agent the patient is taking, if any.
+        taking_antiplatelet:
+          type: boolean
+          description: Whether the patient is taking an antiplatelet agent (bleeding-risk factor).
+        previous_bladder_cancer:
+          type: boolean
+          description: Whether the patient has a history of bladder cancer (surveillance context).
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - two-week-wait
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, two-week-wait, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - procedure
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - symptom_haematuria
+        - symptom_dysuria
+        - symptom_frequency
+        - symptom_retention
+        - visible_haematuria
+        - current_uti
+        - taking_anticoagulant
+        - anticoagulant_agent
+        - taking_antiplatelet
+        - previous_bladder_cancer
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Cystoscopy (bladder endoscopy) request (referral). Captures the requested procedure, the clinical indication and question, relevant history, symptoms, bleeding-risk factors, and triage urgency.
