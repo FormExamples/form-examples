@@ -1,0 +1,295 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: blood_cross_match_test_request
+openapi: 3.1.0
+info:
+  title: Blood Cross Match Test Request — BloodCrossMatchTestRequest
+  version: 1.0.0
+  description: Blood cross-match / transfusion compatibility request (referral). Captures the requested test type and component, the clinical indication, the patient blood group, antibody and transfusion history, sample collection and two-sample-rule status, and triage urgency.
+paths:
+  /blood-cross-match-test-requests:
+    get:
+      summary: List BloodCrossMatchTestRequest records
+      operationId: listBloodCrossMatchTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BloodCrossMatchTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+    post:
+      summary: Create a new BloodCrossMatchTestRequest
+      operationId: createBloodCrossMatchTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+      responses:
+        "201":
+          description: The newly created BloodCrossMatchTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+        "400":
+          description: Validation error
+  /blood-cross-match-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BloodCrossMatchTestRequest by id
+      operationId: getBloodCrossMatchTestRequest
+      responses:
+        "200":
+          description: The requested BloodCrossMatchTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+        "404":
+          description: BloodCrossMatchTestRequest not found
+    patch:
+      summary: Update an existing BloodCrossMatchTestRequest
+      operationId: updateBloodCrossMatchTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+      responses:
+        "200":
+          description: The updated BloodCrossMatchTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequest"
+        "404":
+          description: BloodCrossMatchTestRequest not found
+    delete:
+      summary: Soft-delete a BloodCrossMatchTestRequest
+      operationId: deleteBloodCrossMatchTestRequest
+      responses:
+        "204":
+          description: BloodCrossMatchTestRequest deleted
+        "404":
+          description: BloodCrossMatchTestRequest not found
+components:
+  schemas:
+    BloodCrossMatchTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the test / component is requested to be available.
+        request_type:
+          type: string
+          enum:
+            - group-and-save
+            - crossmatch
+            - emergency-o-negative
+            - antibody-screen
+            - other
+            - ""
+          description: "Requested test type: group-and-save, crossmatch, emergency-o-negative, antibody-screen, other."
+        component:
+          type: string
+          enum:
+            - red-cells
+            - platelets
+            - fresh-frozen-plasma
+            - cryoprecipitate
+            - none
+            - ""
+          description: "Requested blood component: red-cells, platelets, fresh-frozen-plasma, cryoprecipitate, none."
+        units_required:
+          type: integer
+          format: int32
+          description: Number of units of the requested component (0-50).
+        primary_indication:
+          type: string
+          enum:
+            - surgery
+            - acute-bleeding
+            - anaemia
+            - obstetric-haemorrhage
+            - chemotherapy-support
+            - transfusion-dependent
+            - other
+            - ""
+          description: Primary clinical indication, used for appropriateness scoring against NICE NG24 thresholds.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: Clinical details supporting the request (highest-value free-text field).
+        patient_blood_group:
+          type: string
+          enum:
+            - a-pos
+            - a-neg
+            - b-pos
+            - b-neg
+            - o-pos
+            - o-neg
+            - ab-pos
+            - ab-neg
+            - unknown
+            - ""
+          description: "Known patient ABO/Rh blood group: a-pos, a-neg, b-pos, b-neg, o-pos, o-neg, ab-pos, ab-neg, unknown."
+        known_antibodies:
+          type: boolean
+          description: Whether the patient has known red-cell alloantibodies (requires extra crossmatch time).
+        antibody_detail:
+          type: string
+          maxLength: 1000
+          description: Detail of any known antibodies (specificity, source, antigen-negative requirements).
+        previous_transfusion:
+          type: boolean
+          description: Whether the patient has been transfused previously.
+        previous_transfusion_reaction:
+          type: boolean
+          description: Whether the patient has had a previous transfusion reaction.
+        pregnant:
+          type: boolean
+          description: Whether the patient is currently pregnant (alloimmunisation / anti-D relevance).
+        sample_collected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a pre-transfusion sample has been collected: yes, no."
+        collection_datetime:
+          type: string
+          format: date-time
+          description: Date and time the pre-transfusion sample was collected.
+        two_sample_rule_met:
+          type: boolean
+          description: Whether the BSH/SHOT two-sample (group-check) rule has been satisfied for this patient.
+        required_by_datetime:
+          type: string
+          format: date-time
+          description: Date and time by which compatible blood is required.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - stat
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency, stat."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - request_type
+        - component
+        - primary_indication
+        - clinical_details
+        - patient_blood_group
+        - known_antibodies
+        - antibody_detail
+        - previous_transfusion
+        - previous_transfusion_reaction
+        - pregnant
+        - sample_collected
+        - two_sample_rule_met
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Blood cross-match / transfusion compatibility request (referral). Captures the requested test type and component, the clinical indication, the patient blood group, antibody and transfusion history, sample collection and two-sample-rule status, and triage urgency.

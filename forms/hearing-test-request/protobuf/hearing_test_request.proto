@@ -1,0 +1,95 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: hearing_test_request
+
+syntax = "proto3";
+
+package form_examples.hearing_test_request;
+
+enum HearingTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum HearingTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum HearingTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_PURE_TONE_AUDIOMETRY = 1;  // pure-tone-audiometry
+  TESTTYPE_TYMPANOMETRY = 2;  // tympanometry
+  TESTTYPE_SPEECH_AUDIOMETRY = 3;  // speech-audiometry
+  TESTTYPE_OTOACOUSTIC_EMISSIONS = 4;  // otoacoustic-emissions
+  TESTTYPE_AUDITORY_BRAINSTEM_RESPONSE = 5;  // auditory-brainstem-response
+  TESTTYPE_NEWBORN_HEARING_SCREEN = 6;  // newborn-hearing-screen
+  TESTTYPE_HEARING_AID_ASSESSMENT = 7;  // hearing-aid-assessment
+  TESTTYPE_OTHER = 8;  // other
+}
+
+enum HearingTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum HearingTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_HEARING_LOSS = 1;  // hearing-loss
+  PRIMARYINDICATION_TINNITUS = 2;  // tinnitus
+  PRIMARYINDICATION_VERTIGO = 3;  // vertigo
+  PRIMARYINDICATION_EAR_DISCHARGE = 4;  // ear-discharge
+  PRIMARYINDICATION_SUSPECTED_OTOSCLEROSIS = 5;  // suspected-otosclerosis
+  PRIMARYINDICATION_OCCUPATIONAL_NOISE = 6;  // occupational-noise
+  PRIMARYINDICATION_OTOTOXIC_MONITORING = 7;  // ototoxic-monitoring
+  PRIMARYINDICATION_DEVELOPMENTAL_DELAY_CHILD = 8;  // developmental-delay-child
+  PRIMARYINDICATION_HEARING_AID_REVIEW = 9;  // hearing-aid-review
+  PRIMARYINDICATION_SUDDEN_HEARING_LOSS = 10;  // sudden-hearing-loss
+  PRIMARYINDICATION_OTHER = 11;  // other
+}
+
+enum HearingTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message HearingTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HearingTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  HearingTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  HearingTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  HearingTestRequestLateralityEnum laterality = 13;  // VARCHAR(15)
+  HearingTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(40)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 16;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_hearing_loss = 17;  // BOOLEAN
+  bool symptom_tinnitus = 18;  // BOOLEAN
+  bool symptom_vertigo = 19;  // BOOLEAN
+  bool symptom_otalgia = 20;  // BOOLEAN
+  bool sudden_onset = 21;  // BOOLEAN
+  bool ear_discharge = 22;  // BOOLEAN
+  bool ototoxic_medication = 23;  // BOOLEAN
+  HearingTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

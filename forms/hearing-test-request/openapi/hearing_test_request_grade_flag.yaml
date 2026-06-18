@@ -1,0 +1,167 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: hearing_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Hearing Test Request — HearingTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the audiology / ENT team.
+paths:
+  /hearing-test-request-grade-flags:
+    get:
+      summary: List HearingTestRequestGradeFlag records
+      operationId: listHearingTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of HearingTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+    post:
+      summary: Create a new HearingTestRequestGradeFlag
+      operationId: createHearingTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created HearingTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /hearing-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HearingTestRequestGradeFlag by id
+      operationId: getHearingTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested HearingTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+        "404":
+          description: HearingTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing HearingTestRequestGradeFlag
+      operationId: updateHearingTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated HearingTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HearingTestRequestGradeFlag"
+        "404":
+          description: HearingTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a HearingTestRequestGradeFlag
+      operationId: deleteHearingTestRequestGradeFlag
+      responses:
+        "204":
+          description: HearingTestRequestGradeFlag deleted
+        "404":
+          description: HearingTestRequestGradeFlag not found
+components:
+  schemas:
+    HearingTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        hearing_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUDDEN-SNHL-001).
+        category:
+          type: string
+          enum:
+            - sudden-sensorineural-hearing-loss-urgent
+            - unilateral-symptoms-red-flag
+            - ear-discharge
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"refer to ENT to be seen within 24 hours\")."
+      required:
+        - created_at
+        - updated_at
+        - hearing_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the audiology / ENT team.

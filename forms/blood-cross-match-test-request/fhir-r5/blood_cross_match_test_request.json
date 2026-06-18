@@ -1,0 +1,404 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:blood-cross-match-test-request",
+        "code": "blood_cross_match_test_request",
+        "display": "Blood Cross Match Test Request"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+  },
+  "encounter": {
+    "reference": "Encounter/bb0e8400-e29b-41d4-a716-446655440006"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "status",
+            "display": "Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:status",
+            "code": "draft",
+            "display": "Draft"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "site_name",
+            "display": "Site Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "setting",
+            "display": "Setting"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:setting",
+            "code": "outpatient",
+            "display": "Outpatient"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "referral_date",
+            "display": "Referral Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "requested_by_date",
+            "display": "Requested By Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "request_type",
+            "display": "Request Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:request_type",
+            "code": "group-and-save",
+            "display": "Group-And-Save"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "component",
+            "display": "Component"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:component",
+            "code": "red-cells",
+            "display": "Red-Cells"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "units_required",
+            "display": "Units Required"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "primary_indication",
+            "display": "Primary Indication"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:primary_indication",
+            "code": "surgery",
+            "display": "Surgery"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "clinical_details",
+            "display": "Clinical Details"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "patient_blood_group",
+            "display": "Patient Blood Group"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:patient_blood_group",
+            "code": "a-pos",
+            "display": "A-Pos"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "known_antibodies",
+            "display": "Known Antibodies"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "antibody_detail",
+            "display": "Antibody Detail"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "previous_transfusion",
+            "display": "Previous Transfusion"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "previous_transfusion_reaction",
+            "display": "Previous Transfusion Reaction"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "pregnant",
+            "display": "Pregnant"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "sample_collected",
+            "display": "Sample Collected"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:sample_collected",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "collection_datetime",
+            "display": "Collection Datetime"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "two_sample_rule_met",
+            "display": "Two Sample Rule Met"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "required_by_datetime",
+            "display": "Required By Datetime"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "urgency",
+            "display": "Urgency"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request:urgency",
+            "code": "routine",
+            "display": "Routine"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "supervising_consultant",
+            "display": "Supervising Consultant"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "requester_contact",
+            "display": "Requester Contact"
+          }
+        ]
+      },
+      "valueString": ""
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:blood-cross-match-test-request",
+            "code": "notes",
+            "display": "Notes"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    }
+  ]
+}

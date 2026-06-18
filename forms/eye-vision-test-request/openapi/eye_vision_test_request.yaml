@@ -1,0 +1,275 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_vision_test_request
+openapi: 3.1.0
+info:
+  title: Eye Vision Test Request — EyeVisionTestRequest
+  version: 1.0.0
+  description: Eye vision test request (ophthalmic / optometric examination referral). Captures the requested test, laterality, the clinical indication and question, relevant history, symptoms / red flags, risk factors, and triage urgency.
+paths:
+  /eye-vision-test-requests:
+    get:
+      summary: List EyeVisionTestRequest records
+      operationId: listEyeVisionTestRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyeVisionTestRequest records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyeVisionTestRequest"
+    post:
+      summary: Create a new EyeVisionTestRequest
+      operationId: createEyeVisionTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestRequest"
+      responses:
+        "201":
+          description: The newly created EyeVisionTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequest"
+        "400":
+          description: Validation error
+  /eye-vision-test-requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyeVisionTestRequest by id
+      operationId: getEyeVisionTestRequest
+      responses:
+        "200":
+          description: The requested EyeVisionTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequest"
+        "404":
+          description: EyeVisionTestRequest not found
+    patch:
+      summary: Update an existing EyeVisionTestRequest
+      operationId: updateEyeVisionTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestRequest"
+      responses:
+        "200":
+          description: The updated EyeVisionTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequest"
+        "404":
+          description: EyeVisionTestRequest not found
+    delete:
+      summary: Soft-delete a EyeVisionTestRequest
+      operationId: deleteEyeVisionTestRequest
+      responses:
+        "204":
+          description: EyeVisionTestRequest deleted
+        "404":
+          description: EyeVisionTestRequest not found
+components:
+  schemas:
+    EyeVisionTestRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician (referrer).
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - vetted
+            - scheduled
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, vetted, scheduled, rejected."
+        site_name:
+          type: string
+          maxLength: 255
+          description: Name of the requesting site or clinic.
+        setting:
+          type: string
+          enum:
+            - outpatient
+            - inpatient
+            - community
+            - emergency
+            - ""
+          description: "Care setting: outpatient, inpatient, community, emergency."
+        referral_date:
+          type: string
+          format: date
+          description: Date the referral was made.
+        requested_by_date:
+          type: string
+          format: date
+          description: Date by which the examination is requested to be performed.
+        test_type:
+          type: string
+          enum:
+            - visual-acuity
+            - visual-fields
+            - refraction
+            - fundus-examination
+            - optical-coherence-tomography
+            - fluorescein-angiography
+            - tonometry
+            - slit-lamp
+            - orthoptic-assessment
+            - other
+            - ""
+          description: "Requested ophthalmic test type, used for appropriateness scoring: visual-acuity, visual-fields, refraction, fundus-examination, optical-coherence-tomography, fluorescein-angiography, tonometry, slit-lamp, orthoptic-assessment, other."
+        laterality:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - not-applicable
+            - ""
+          description: "Eye(s) to be examined: left, right, bilateral, not-applicable."
+        primary_indication:
+          type: string
+          enum:
+            - reduced-vision
+            - suspected-glaucoma
+            - diabetic-retinopathy-screening
+            - sudden-visual-loss
+            - flashes-floaters
+            - red-eye
+            - childhood-squint
+            - visual-field-defect
+            - cataract-assessment
+            - headache-visual-symptoms
+            - other
+            - ""
+          description: "Primary clinical indication, used for appropriateness scoring: reduced-vision, suspected-glaucoma, diabetic-retinopathy-screening, sudden-visual-loss, flashes-floaters, red-eye, childhood-squint, visual-field-defect, cataract-assessment, headache-visual-symptoms, other."
+        clinical_question:
+          type: string
+          maxLength: 1000
+          description: Specific clinical question the examination should answer (highest-value field).
+        relevant_history:
+          type: string
+          maxLength: 1000
+          description: Relevant ocular, medical, and family history.
+        symptom_reduced_vision:
+          type: boolean
+          description: Whether the patient reports reduced vision.
+        symptom_sudden_loss:
+          type: boolean
+          description: Whether the patient reports sudden visual loss (red flag).
+        symptom_flashes_floaters:
+          type: boolean
+          description: Whether the patient reports flashes and/or floaters (retinal-detachment red flag).
+        symptom_eye_pain:
+          type: boolean
+          description: Whether the patient reports eye pain (red flag in combination with red eye).
+        symptom_red_eye:
+          type: boolean
+          description: Whether the patient reports a red eye.
+        diabetes:
+          type: boolean
+          description: Whether the patient has diabetes (diabetic retinopathy risk).
+        known_glaucoma:
+          type: boolean
+          description: Whether the patient has known or treated glaucoma.
+        urgency:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - ""
+          description: "Requested triage urgency: routine, urgent, emergency."
+        supervising_consultant:
+          type: string
+          maxLength: 255
+          description: Name of the supervising / responsible consultant.
+        requester_contact:
+          type: string
+          maxLength: 255
+          description: Contact details (bleep / phone) for the requester.
+        notes:
+          type: string
+          maxLength: 1000
+          description: Free-text additional notes.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - site_name
+        - setting
+        - test_type
+        - laterality
+        - primary_indication
+        - clinical_question
+        - relevant_history
+        - symptom_reduced_vision
+        - symptom_sudden_loss
+        - symptom_flashes_floaters
+        - symptom_eye_pain
+        - symptom_red_eye
+        - diabetes
+        - known_glaucoma
+        - urgency
+        - supervising_consultant
+        - requester_contact
+        - notes
+      description: Eye vision test request (ophthalmic / optometric examination referral). Captures the requested test, laterality, the clinical indication and question, relevant history, symptoms / red flags, risk factors, and triage urgency.

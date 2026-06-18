@@ -1,0 +1,168 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: eye_vision_test_request_grade_flag
+openapi: 3.1.0
+info:
+  title: Eye Vision Test Request — EyeVisionTestRequestGradeFlag
+  version: 1.0.0
+  description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the eye-care team.
+paths:
+  /eye-vision-test-request-grade-flags:
+    get:
+      summary: List EyeVisionTestRequestGradeFlag records
+      operationId: listEyeVisionTestRequestGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of EyeVisionTestRequestGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+    post:
+      summary: Create a new EyeVisionTestRequestGradeFlag
+      operationId: createEyeVisionTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+      responses:
+        "201":
+          description: The newly created EyeVisionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+        "400":
+          description: Validation error
+  /eye-vision-test-request-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one EyeVisionTestRequestGradeFlag by id
+      operationId: getEyeVisionTestRequestGradeFlag
+      responses:
+        "200":
+          description: The requested EyeVisionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+        "404":
+          description: EyeVisionTestRequestGradeFlag not found
+    patch:
+      summary: Update an existing EyeVisionTestRequestGradeFlag
+      operationId: updateEyeVisionTestRequestGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+      responses:
+        "200":
+          description: The updated EyeVisionTestRequestGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyeVisionTestRequestGradeFlag"
+        "404":
+          description: EyeVisionTestRequestGradeFlag not found
+    delete:
+      summary: Soft-delete a EyeVisionTestRequestGradeFlag
+      operationId: deleteEyeVisionTestRequestGradeFlag
+      responses:
+        "204":
+          description: EyeVisionTestRequestGradeFlag deleted
+        "404":
+          description: EyeVisionTestRequestGradeFlag not found
+components:
+  schemas:
+    EyeVisionTestRequestGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        eye_vision_test_request_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUDDEN-VISUAL-LOSS-001).
+        category:
+          type: string
+          enum:
+            - sudden-visual-loss-emergency
+            - retinal-detachment-symptoms
+            - acute-painful-red-eye
+            - suspected-giant-cell-arteritis
+            - missing-indication
+            - missing-clinical-question
+            - other
+            - ""
+          description: "Flag category: sudden-visual-loss-emergency, retinal-detachment-symptoms, acute-painful-red-eye, suspected-giant-cell-arteritis, missing-indication, missing-clinical-question, other."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: "Suggested clinical action (e.g. \"arrange same-day emergency eye assessment\")."
+      required:
+        - created_at
+        - updated_at
+        - eye_vision_test_request_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the eye-care team.

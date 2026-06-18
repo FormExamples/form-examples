@@ -1,0 +1,38 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: blood_cross_match_test_request_grade_flag
+
+syntax = "proto3";
+
+package form_examples.blood_cross_match_test_request;
+
+enum BloodCrossMatchTestRequestGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_MASSIVE_HAEMORRHAGE_STAT = 1;  // massive-haemorrhage-stat
+  CATEGORY_TWO_SAMPLE_RULE_NOT_MET = 2;  // two-sample-rule-not-met
+  CATEGORY_KNOWN_ANTIBODIES_EXTRA_TIME = 3;  // known-antibodies-extra-time
+  CATEGORY_PREVIOUS_TRANSFUSION_REACTION = 4;  // previous-transfusion-reaction
+  CATEGORY_MISLABEL_RISK = 5;  // mislabel-risk
+  CATEGORY_MISSING_CLINICAL_DETAILS = 6;  // missing-clinical-details
+  CATEGORY_MISSING_BLOOD_GROUP = 7;  // missing-blood-group
+  CATEGORY_OTHER = 8;  // other
+}
+
+enum BloodCrossMatchTestRequestGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message BloodCrossMatchTestRequestGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string blood_cross_match_test_request_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  BloodCrossMatchTestRequestGradeFlagCategoryEnum category = 7;  // VARCHAR(40)
+  BloodCrossMatchTestRequestGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

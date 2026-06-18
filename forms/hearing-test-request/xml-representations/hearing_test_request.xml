@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hearing_test_request SYSTEM "hearing_test_request.dtd">
+<hearing_test_request>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<site_name>Example</site_name>
+<setting>outpatient</setting>
+<referral_date>2026-01-15</referral_date>
+<requested_by_date>2026-01-15</requested_by_date>
+<test_type>pure-tone-audiometry</test_type>
+<laterality>left</laterality>
+<primary_indication>hearing-loss</primary_indication>
+<clinical_question>Example Hospital</clinical_question>
+<relevant_history>Example text.</relevant_history>
+<symptom_hearing_loss>true</symptom_hearing_loss>
+<symptom_tinnitus>true</symptom_tinnitus>
+<symptom_vertigo>true</symptom_vertigo>
+<symptom_otalgia>true</symptom_otalgia>
+<sudden_onset>true</sudden_onset>
+<ear_discharge>true</ear_discharge>
+<ototoxic_medication>true</ototoxic_medication>
+<urgency>routine</urgency>
+<supervising_consultant></supervising_consultant>
+<requester_contact>07700900001</requester_contact>
+<notes>Example text.</notes>
+</hearing_test_request>

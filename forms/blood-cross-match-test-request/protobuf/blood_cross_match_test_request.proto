@@ -1,0 +1,112 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: blood_cross_match_test_request
+
+syntax = "proto3";
+
+package form_examples.blood_cross_match_test_request;
+
+enum BloodCrossMatchTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum BloodCrossMatchTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum BloodCrossMatchTestRequestRequestTypeEnum {
+  REQUESTTYPE_UNSPECIFIED = 0;
+  REQUESTTYPE_GROUP_AND_SAVE = 1;  // group-and-save
+  REQUESTTYPE_CROSSMATCH = 2;  // crossmatch
+  REQUESTTYPE_EMERGENCY_O_NEGATIVE = 3;  // emergency-o-negative
+  REQUESTTYPE_ANTIBODY_SCREEN = 4;  // antibody-screen
+  REQUESTTYPE_OTHER = 5;  // other
+}
+
+enum BloodCrossMatchTestRequestComponentEnum {
+  COMPONENT_UNSPECIFIED = 0;
+  COMPONENT_RED_CELLS = 1;  // red-cells
+  COMPONENT_PLATELETS = 2;  // platelets
+  COMPONENT_FRESH_FROZEN_PLASMA = 3;  // fresh-frozen-plasma
+  COMPONENT_CRYOPRECIPITATE = 4;  // cryoprecipitate
+  COMPONENT_NONE = 5;  // none
+}
+
+enum BloodCrossMatchTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_SURGERY = 1;  // surgery
+  PRIMARYINDICATION_ACUTE_BLEEDING = 2;  // acute-bleeding
+  PRIMARYINDICATION_ANAEMIA = 3;  // anaemia
+  PRIMARYINDICATION_OBSTETRIC_HAEMORRHAGE = 4;  // obstetric-haemorrhage
+  PRIMARYINDICATION_CHEMOTHERAPY_SUPPORT = 5;  // chemotherapy-support
+  PRIMARYINDICATION_TRANSFUSION_DEPENDENT = 6;  // transfusion-dependent
+  PRIMARYINDICATION_OTHER = 7;  // other
+}
+
+enum BloodCrossMatchTestRequestPatientBloodGroupEnum {
+  PATIENTBLOODGROUP_UNSPECIFIED = 0;
+  PATIENTBLOODGROUP_A_POS = 1;  // a-pos
+  PATIENTBLOODGROUP_A_NEG = 2;  // a-neg
+  PATIENTBLOODGROUP_B_POS = 3;  // b-pos
+  PATIENTBLOODGROUP_B_NEG = 4;  // b-neg
+  PATIENTBLOODGROUP_O_POS = 5;  // o-pos
+  PATIENTBLOODGROUP_O_NEG = 6;  // o-neg
+  PATIENTBLOODGROUP_AB_POS = 7;  // ab-pos
+  PATIENTBLOODGROUP_AB_NEG = 8;  // ab-neg
+  PATIENTBLOODGROUP_UNKNOWN = 9;  // unknown
+}
+
+enum BloodCrossMatchTestRequestSampleCollectedEnum {
+  SAMPLECOLLECTED_UNSPECIFIED = 0;
+  SAMPLECOLLECTED_YES = 1;  // yes
+  SAMPLECOLLECTED_NO = 2;  // no
+}
+
+enum BloodCrossMatchTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+  URGENCY_STAT = 4;  // stat
+}
+
+message BloodCrossMatchTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  BloodCrossMatchTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  BloodCrossMatchTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  BloodCrossMatchTestRequestRequestTypeEnum request_type = 12;  // VARCHAR(30)
+  BloodCrossMatchTestRequestComponentEnum component = 13;  // VARCHAR(30)
+  int32 units_required = 14;  // INTEGER
+  BloodCrossMatchTestRequestPrimaryIndicationEnum primary_indication = 15;  // VARCHAR(40)
+  string clinical_details = 16;  // VARCHAR(1000) — max 1000 chars
+  BloodCrossMatchTestRequestPatientBloodGroupEnum patient_blood_group = 17;  // VARCHAR(10)
+  bool known_antibodies = 18;  // BOOLEAN
+  string antibody_detail = 19;  // VARCHAR(1000) — max 1000 chars
+  bool previous_transfusion = 20;  // BOOLEAN
+  bool previous_transfusion_reaction = 21;  // BOOLEAN
+  bool pregnant = 22;  // BOOLEAN
+  BloodCrossMatchTestRequestSampleCollectedEnum sample_collected = 23;  // VARCHAR(10)
+  string collection_datetime = 24;  // TIMESTAMPTZ — iso 8601
+  bool two_sample_rule_met = 25;  // BOOLEAN
+  string required_by_datetime = 26;  // TIMESTAMPTZ — iso 8601
+  BloodCrossMatchTestRequestUrgencyEnum urgency = 27;  // VARCHAR(15)
+  string supervising_consultant = 28;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 29;  // VARCHAR(255) — max 255 chars
+  string notes = 30;  // VARCHAR(1000) — max 1000 chars
+}

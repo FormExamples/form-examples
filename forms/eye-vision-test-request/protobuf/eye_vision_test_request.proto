@@ -1,0 +1,97 @@
+// Generated from sql-migrations/. Do not edit by hand.
+// SOURCE: eye_vision_test_request
+
+syntax = "proto3";
+
+package form_examples.eye_vision_test_request;
+
+enum EyeVisionTestRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_VETTED = 3;  // vetted
+  STATUS_SCHEDULED = 4;  // scheduled
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum EyeVisionTestRequestSettingEnum {
+  SETTING_UNSPECIFIED = 0;
+  SETTING_OUTPATIENT = 1;  // outpatient
+  SETTING_INPATIENT = 2;  // inpatient
+  SETTING_COMMUNITY = 3;  // community
+  SETTING_EMERGENCY = 4;  // emergency
+}
+
+enum EyeVisionTestRequestTestTypeEnum {
+  TESTTYPE_UNSPECIFIED = 0;
+  TESTTYPE_VISUAL_ACUITY = 1;  // visual-acuity
+  TESTTYPE_VISUAL_FIELDS = 2;  // visual-fields
+  TESTTYPE_REFRACTION = 3;  // refraction
+  TESTTYPE_FUNDUS_EXAMINATION = 4;  // fundus-examination
+  TESTTYPE_OPTICAL_COHERENCE_TOMOGRAPHY = 5;  // optical-coherence-tomography
+  TESTTYPE_FLUORESCEIN_ANGIOGRAPHY = 6;  // fluorescein-angiography
+  TESTTYPE_TONOMETRY = 7;  // tonometry
+  TESTTYPE_SLIT_LAMP = 8;  // slit-lamp
+  TESTTYPE_ORTHOPTIC_ASSESSMENT = 9;  // orthoptic-assessment
+  TESTTYPE_OTHER = 10;  // other
+}
+
+enum EyeVisionTestRequestLateralityEnum {
+  LATERALITY_UNSPECIFIED = 0;
+  LATERALITY_LEFT = 1;  // left
+  LATERALITY_RIGHT = 2;  // right
+  LATERALITY_BILATERAL = 3;  // bilateral
+  LATERALITY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum EyeVisionTestRequestPrimaryIndicationEnum {
+  PRIMARYINDICATION_UNSPECIFIED = 0;
+  PRIMARYINDICATION_REDUCED_VISION = 1;  // reduced-vision
+  PRIMARYINDICATION_SUSPECTED_GLAUCOMA = 2;  // suspected-glaucoma
+  PRIMARYINDICATION_DIABETIC_RETINOPATHY_SCREENING = 3;  // diabetic-retinopathy-screening
+  PRIMARYINDICATION_SUDDEN_VISUAL_LOSS = 4;  // sudden-visual-loss
+  PRIMARYINDICATION_FLASHES_FLOATERS = 5;  // flashes-floaters
+  PRIMARYINDICATION_RED_EYE = 6;  // red-eye
+  PRIMARYINDICATION_CHILDHOOD_SQUINT = 7;  // childhood-squint
+  PRIMARYINDICATION_VISUAL_FIELD_DEFECT = 8;  // visual-field-defect
+  PRIMARYINDICATION_CATARACT_ASSESSMENT = 9;  // cataract-assessment
+  PRIMARYINDICATION_HEADACHE_VISUAL_SYMPTOMS = 10;  // headache-visual-symptoms
+  PRIMARYINDICATION_OTHER = 11;  // other
+}
+
+enum EyeVisionTestRequestUrgencyEnum {
+  URGENCY_UNSPECIFIED = 0;
+  URGENCY_ROUTINE = 1;  // routine
+  URGENCY_URGENT = 2;  // urgent
+  URGENCY_EMERGENCY = 3;  // emergency
+}
+
+message EyeVisionTestRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  EyeVisionTestRequestStatusEnum status = 7;  // VARCHAR(20)
+  string site_name = 8;  // VARCHAR(255) — max 255 chars
+  EyeVisionTestRequestSettingEnum setting = 9;  // VARCHAR(20)
+  string referral_date = 10;  // DATE — iso 8601 date
+  string requested_by_date = 11;  // DATE — iso 8601 date
+  EyeVisionTestRequestTestTypeEnum test_type = 12;  // VARCHAR(40)
+  EyeVisionTestRequestLateralityEnum laterality = 13;  // VARCHAR(15)
+  EyeVisionTestRequestPrimaryIndicationEnum primary_indication = 14;  // VARCHAR(40)
+  string clinical_question = 15;  // VARCHAR(1000) — max 1000 chars
+  string relevant_history = 16;  // VARCHAR(1000) — max 1000 chars
+  bool symptom_reduced_vision = 17;  // BOOLEAN
+  bool symptom_sudden_loss = 18;  // BOOLEAN
+  bool symptom_flashes_floaters = 19;  // BOOLEAN
+  bool symptom_eye_pain = 20;  // BOOLEAN
+  bool symptom_red_eye = 21;  // BOOLEAN
+  bool diabetes = 22;  // BOOLEAN
+  bool known_glaucoma = 23;  // BOOLEAN
+  EyeVisionTestRequestUrgencyEnum urgency = 24;  // VARCHAR(15)
+  string supervising_consultant = 25;  // VARCHAR(255) — max 255 chars
+  string requester_contact = 26;  // VARCHAR(255) — max 255 chars
+  string notes = 27;  // VARCHAR(1000) — max 1000 chars
+}

@@ -1,0 +1,195 @@
+# Generated from sql-migrations/. Do not edit by hand.
+# SOURCE: blood_cross_match_test_request_grade
+openapi: 3.1.0
+info:
+  title: Blood Cross Match Test Request — BloodCrossMatchTestRequestGrade
+  version: 1.0.0
+  description: "Computed four-axis grading result: appropriateness (1-9, anchored on NICE NG24 thresholds and indication), identity / sample safety, request completeness, and triage priority."
+paths:
+  /blood-cross-match-test-request-grades:
+    get:
+      summary: List BloodCrossMatchTestRequestGrade records
+      operationId: listBloodCrossMatchTestRequestGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of BloodCrossMatchTestRequestGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+    post:
+      summary: Create a new BloodCrossMatchTestRequestGrade
+      operationId: createBloodCrossMatchTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+      responses:
+        "201":
+          description: The newly created BloodCrossMatchTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+        "400":
+          description: Validation error
+  /blood-cross-match-test-request-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one BloodCrossMatchTestRequestGrade by id
+      operationId: getBloodCrossMatchTestRequestGrade
+      responses:
+        "200":
+          description: The requested BloodCrossMatchTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+        "404":
+          description: BloodCrossMatchTestRequestGrade not found
+    patch:
+      summary: Update an existing BloodCrossMatchTestRequestGrade
+      operationId: updateBloodCrossMatchTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+      responses:
+        "200":
+          description: The updated BloodCrossMatchTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodCrossMatchTestRequestGrade"
+        "404":
+          description: BloodCrossMatchTestRequestGrade not found
+    delete:
+      summary: Soft-delete a BloodCrossMatchTestRequestGrade
+      operationId: deleteBloodCrossMatchTestRequestGrade
+      responses:
+        "204":
+          description: BloodCrossMatchTestRequestGrade deleted
+        "404":
+          description: BloodCrossMatchTestRequestGrade not found
+components:
+  schemas:
+    BloodCrossMatchTestRequestGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        blood_cross_match_test_request_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent request (unique, 1:1).
+        appropriateness_score:
+          type: integer
+          format: int32
+          description: Appropriateness score (1-9). No single published transfusion-ordering score exists; this is anchored on NICE NG24 restrictive thresholds and indication appropriateness.
+        appropriateness_band:
+          type: string
+          enum:
+            - usually-appropriate
+            - may-be-appropriate
+            - usually-not-appropriate
+            - ""
+          description: "Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3)."
+        identity_safety_band:
+          type: string
+          enum:
+            - ok
+            - caution
+            - reject-risk
+            - ""
+          description: "Identity / sample safety band: ok, caution, reject-risk (driven by two-sample rule, mislabel risk, and positive patient ID)."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Request completeness as a percentage of mandatory fields (0-100).
+        triage_tier:
+          type: string
+          enum:
+            - routine
+            - urgent
+            - emergency
+            - stat
+            - ""
+          description: "Assigned triage tier: routine, urgent, emergency, stat."
+        target_timeframe:
+          type: string
+          maxLength: 50
+          description: Target timeframe for compatible blood / testing implied by the triage tier.
+        recommendation:
+          type: string
+          enum:
+            - accept
+            - query-referrer
+            - redirect
+            - reject
+            - ""
+          description: "Vetting recommendation: accept, query-referrer, redirect, reject."
+        clinician_notes:
+          type: string
+          description: Free-text vetting notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of vetting clinician electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+        - created_at
+        - updated_at
+        - blood_cross_match_test_request_id
+        - appropriateness_band
+        - identity_safety_band
+        - triage_tier
+        - target_timeframe
+        - recommendation
+        - clinician_notes
+        - graded_at
+      description: "Computed four-axis grading result: appropriateness (1-9, anchored on NICE NG24 thresholds and indication), identity / sample safety, request completeness, and triage priority."
