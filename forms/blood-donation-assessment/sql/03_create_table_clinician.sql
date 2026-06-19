@@ -57,3 +57,6 @@ CREATE INDEX clinician_index_gto
     USING GIN ((
         name
     ) gin_trgm_ops);
+
+COMMENT ON COLUMN clinician.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';

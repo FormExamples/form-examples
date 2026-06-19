@@ -710,3 +710,22 @@ COMMENT ON COLUMN flagged_issue.deleted_at IS
 -- ========================================================================
 -- END 13_create_table_flagged_issue.sql
 -- ========================================================================
+
+COMMENT ON COLUMN access_scheduling.NULL IS
+    'Null.';
+COMMENT ON COLUMN communication.NULL IS
+    'Null.';
+COMMENT ON COLUMN staff_professionalism.NULL IS
+    'Null.';
+COMMENT ON COLUMN care_quality.NULL IS
+    'Null.';
+COMMENT ON COLUMN environment.NULL IS
+    'Null.';
+COMMENT ON COLUMN patient.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';
+COMMENT ON COLUMN clinician.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN overall_satisfaction.NULL IS
+    'Null.';

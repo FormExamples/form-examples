@@ -35,3 +35,6 @@ COMMENT ON COLUMN environment.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN environment.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN environment.NULL IS
+    'Null.';

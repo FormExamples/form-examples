@@ -4,7 +4,7 @@ openapi: 3.1.0
 info:
   title: Bone Marrow Donation Assessment — BoneMarrowDonationAssessment
   version: 1.0.0
-  description: OpenAPI specification for the bone_marrow_donation_assessment resource of the bone-marrow-donation-assessment form.
+  description: Bone marrow donation assessment.
 paths:
   /bone-marrow-donation-assessments:
     get:
@@ -123,6 +123,7 @@ components:
         patient_id:
           type: string
           format: uuid
+          description: Foreign key to the patient table.
         status:
           type: string
           enum:
@@ -130,8 +131,10 @@ components:
             - submitted
             - reviewed
             - urgent
+          description: Lifecycle status of this row.
       required:
         - created_at
         - updated_at
         - patient_id
         - status
+      description: Bone marrow donation assessment.

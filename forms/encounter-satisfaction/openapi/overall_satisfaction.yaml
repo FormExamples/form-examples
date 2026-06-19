@@ -126,6 +126,7 @@ components:
           description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
         "NULL":
           type: string
+          description: Null.
         likely_to_recommend:
           type: integer
           format: int32

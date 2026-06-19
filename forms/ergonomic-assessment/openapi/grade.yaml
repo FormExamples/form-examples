@@ -150,6 +150,7 @@ components:
           description: Timestamp when the REBA grading was computed.
         a:
           type: string
+          description: A.
       required:
         - created_at
         - updated_at

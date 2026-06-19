@@ -119,6 +119,7 @@ components:
         deleted_at:
           type: string
           format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.

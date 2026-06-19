@@ -51,3 +51,6 @@ COMMENT ON COLUMN outpatient_outcome_grade.operational_grade IS
     'Operational-domain grade A-E from attendance outcome + wait vs target + modality.';
 COMMENT ON COLUMN outpatient_outcome_grade.result_notes IS
     'Free-text clinician notes accompanying the grading result.';
+
+COMMENT ON COLUMN outpatient_outcome_grade.graded_at IS
+    'Graded at.';

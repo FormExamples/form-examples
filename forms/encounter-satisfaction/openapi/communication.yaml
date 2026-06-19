@@ -126,6 +126,7 @@ components:
           description: FK to encounter_satisfaction (UNIQUE = 1:1 relationship).
         "NULL":
           type: string
+          description: Null.
         explaining_condition:
           type: integer
           format: int32

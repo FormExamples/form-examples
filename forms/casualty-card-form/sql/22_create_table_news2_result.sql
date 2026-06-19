@@ -53,3 +53,6 @@ COMMENT ON COLUMN news2_result.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN news2_result.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN news2_result.supplemental_oxygen IS
+    'Supplemental oxygen.';

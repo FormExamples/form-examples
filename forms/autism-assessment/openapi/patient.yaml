@@ -119,6 +119,7 @@ components:
         deleted_at:
           type: string
           format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255
@@ -158,6 +159,7 @@ components:
         weight_as_kg:
           type: number
           format: double
+          description: Weight as kg.
         body_mass_index:
           type: number
           format: double

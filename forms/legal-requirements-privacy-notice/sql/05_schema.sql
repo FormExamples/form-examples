@@ -230,3 +230,10 @@ CREATE INDEX clinician_index_gto
 -- ========================================================================
 -- END 11_create_table_clinician.sql
 -- ========================================================================
+
+COMMENT ON COLUMN patient.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';
+COMMENT ON COLUMN clinician.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';

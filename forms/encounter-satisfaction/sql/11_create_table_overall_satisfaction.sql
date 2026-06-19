@@ -39,3 +39,6 @@ COMMENT ON COLUMN overall_satisfaction.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN overall_satisfaction.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN overall_satisfaction.NULL IS
+    'Null.';

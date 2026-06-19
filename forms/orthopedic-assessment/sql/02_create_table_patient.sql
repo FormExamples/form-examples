@@ -69,3 +69,8 @@ CREATE INDEX patient_index_gto
     USING GIN ((
         name
     ) gin_trgm_ops);
+
+COMMENT ON COLUMN patient.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';

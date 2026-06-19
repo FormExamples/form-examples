@@ -522,7 +522,26 @@
       "Bash(bin/generate-changelog-and-examples.py --check)",
       "Bash(awk -F'\\\\t' '{print $1}' forms.tsv)",
       "Bash(pgrep -f \"bin/test$\")",
-      "Bash(awk '/^\\\\?\\\\?/ {print $2}')"
+      "Bash(awk '/^\\\\?\\\\?/ {print $2}')",
+      "Bash(awk -F'\\\\t' 'NR>1 && \\($2!=0 || $3!=0\\){print $1\"  build_exit=\"$2\" errs=\"$3}' verify_results.tsv)",
+      "Bash(awk -F'\\\\t' 'NR>1 && $4!=0{print $1\"  test_exit=\"$4}' verify_results.tsv)",
+      "Bash(awk -F'\\\\t' 'NR>1{tot++; if\\($2==0&&$3==0\\)bok++; if\\($4==0\\)tok++} END{print \"crates=\"tot\"  build_ok=\"bok\"  test_ok=\"tok}' verify_results.tsv)",
+      "Skill(deep-research)",
+      "WebFetch(domain:www.ashfordstpeters.nhs.uk)",
+      "WebFetch(domain:www.gloshospitals.nhs.uk)",
+      "WebFetch(domain:www.nice.org.uk)",
+      "WebFetch(domain:www.esge.com)",
+      "WebFetch(domain:www.bsg.org.uk)",
+      "WebFetch(domain:apps.worcsacute.nhs.uk)",
+      "WebFetch(domain:www.leedsth.nhs.uk)",
+      "Bash(echo \"cargo: $\\(cargo --version 2>&1)",
+      "Bash(rm -rf full-stack-with-loco-tera-htmx-alpine)",
+      "Bash(mkdir -p back-end-with-loco front-end-form-with-html front-end-form-with-svelte front-end-dashboard-with-html front-end-dashboard-with-svelte openapi protobuf xml-representations fhir-r5 examples doc sql-migrations)",
+      "Bash(awk 'NR>=540' /Users/jph/git/formexamples/form-examples/forms/pre-operative-assessment-by-clinician/front-end-dashboard-with-html/css/style.css)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "svelte"
+  ]
 }

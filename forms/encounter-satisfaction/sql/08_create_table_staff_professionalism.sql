@@ -35,3 +35,6 @@ COMMENT ON COLUMN staff_professionalism.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN staff_professionalism.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN staff_professionalism.NULL IS
+    'Null.';

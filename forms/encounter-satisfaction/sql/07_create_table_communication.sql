@@ -38,3 +38,6 @@ COMMENT ON COLUMN communication.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN communication.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN communication.NULL IS
+    'Null.';

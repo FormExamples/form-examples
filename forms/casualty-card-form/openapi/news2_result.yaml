@@ -142,6 +142,7 @@ components:
           description: TRUE if any single NEWS2 parameter scored 3. Triggers urgent ward review regardless of total.
         supplemental_oxygen:
           type: string
+          description: Supplemental oxygen.
         scored_at:
           type: string
           format: date-time

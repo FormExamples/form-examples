@@ -28,6 +28,7 @@ implemented_or_err() { if (grep -q -m 1 "Not yet implemented\." "$1"); then err 
 
 ai_exists_or_err() (
     # dir="$1"
+    directory_exists_or_err "$1"
     file_size_or_err "$1/index.md"
     symlink_exists_or_err "$1/README.md"
     file_size_or_err "$1/AGENTS.md" && implemented_or_err "$1/AGENTS.md"
@@ -53,6 +54,7 @@ rust_crate_exists_or_err() (
     test ! -e "$1/assets"    || err "$1/assets must not exist (back-end is JSON-only)"
     test ! -e "$1/src/views" || err "$1/src/views must not exist (back-end is JSON-only)"
     ! grep -q '\btera\b' "$1/Cargo.toml" || err "$1/Cargo.toml must not depend on tera"
+    cd "$1" && cargo test
 )
 
 ## Main
@@ -61,42 +63,38 @@ top="$(git rev-parse --show-toplevel)"
 form="$1"
 form_dir="$top/forms/$form"
 
+test_form_ai_dot_directories() {
+    for dir in .claude .cursor .gemini .mimocode .opencode .qwen .windsurf; do
+        directory_exists_or_err "$1/$dir"
+        file_exists_or_err "$1/$dir/.keep"
+    done
+}
+
 test_form_doc() {
-    dir="$1/doc"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
+    ai_exists_or_err "$1/doc"
 }
 
-test_form_fhir_r5() {
-    dir="$1/fhir-r5"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
-}
-
-test_form_typespec() {
-    dir="$1/protobuf"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
+test_form_fhir() {
+    ai_exists_or_err "$1/fhir/r5"
 }
 
 test_form_protobuf() {
-    dir="$1/protobuf"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
+    ai_exists_or_err "$1/protobuf"
 }
 
-test_form_sql_migrations() {
-    dir="$1/sql-migrations"
-    directory_exists_or_err "$dir"
+test_form_sql() {
+    dir="$1/sql"
     ai_exists_or_err "$1"
     file_size_or_err "$dir/00_extensions.sql"
     file_size_or_err "$dir/01_create_function_set_updated_at.sql"
 }
 
-test_form_xml_representations() {
-    dir="$1/xml-representations"
-    directory_exists_or_err "$dir"
-    ai_exists_or_err "$1"
+test_form_typespec() {
+    ai_exists_or_err "$1/typespec"
+}
+
+test_form_xml() {
+    ai_exists_or_err "$1/xml"
     #cd "$dir" && xmllint --valid --noout '\*.xml'
 }
 
@@ -104,15 +102,14 @@ test_form() {
     form_dir="$1"
     echo "test_form $form_dir"
     ai_exists_or_err "$form_dir"
+    test_form_ai_dot_directories "$form_dir"
     test_form_doc "$form_dir"
-    test_form_fhir_r5 "$form_dir"
-    test_form_sql_migrations "$form_dir"
-    test_form_xml_representations "$form_dir"
-    ai_exists_or_err "$form_dir/front-end-form-with-html"
-    ai_exists_or_err "$form_dir/front-end-form-with-svelte"
-    ai_exists_or_err "$form_dir/front-end-dashboard-with-html"
-    ai_exists_or_err "$form_dir/front-end-dashboard-with-svelte"
-    file_size_or_err "$form_dir/back-end-with-loco-setup"
+    test_form_fhir "$form_dir"
+    test_form_protobuf "$form_dir"
+    test_form_sql "$form_dir"
+    test_form_typespec "$form_dir"
+    test_form_xml "$form_dir"
+    ai_exists_or_err "$form_dir/front-end-with-svelte"
     rust_crate_exists_or_err "$form_dir/back-end-with-loco"
 }
 

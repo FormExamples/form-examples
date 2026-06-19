@@ -26,13 +26,13 @@ migration = { path = "migration" }
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tokio = { version = "1.45", features = ["rt-multi-thread"] }
+tokio = { version = "1.52", features = ["rt-multi-thread"] }
 async-trait = "0.1"
 axum = "0.8"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 chrono = { version = "0.4", features = ["serde"] }
-uuid = { version = "1.6", features = ["v4", "serde"] }
+uuid = { version = "1.23", features = ["v4", "serde"] }
 thiserror = "1"
 include_dir = "0.7"
 opentelemetry = "0.27"
@@ -49,9 +49,9 @@ loco-rs = { version = "0.16", default-features = false, features = [
   "cli",
   "with-db",
 ] }
-serial_test = "3.1"
-assertables = "9.8"
-insta = { version = "1.40", features = ["redactions", "yaml"] }
+serial_test = "3.5"
+assertables = "10"
+insta = { version = "1.48", features = ["redactions", "yaml"] }
 
 [[bin]]
 name = "international_certificate_of_vaccination_or_prophylaxis-cli"

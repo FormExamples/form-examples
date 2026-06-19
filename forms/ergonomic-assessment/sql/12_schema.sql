@@ -645,3 +645,14 @@ COMMENT ON COLUMN grading_additional_flag.deleted_at IS
 -- ========================================================================
 -- END 92_create_table_grading_additional_flag.sql
 -- ========================================================================
+
+COMMENT ON COLUMN grade.a IS
+    'A.';
+COMMENT ON COLUMN patient.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';
+COMMENT ON COLUMN clinician.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN grade.a IS
+    'A.';

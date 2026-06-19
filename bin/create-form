@@ -20,28 +20,10 @@ mkdir_with_ai_idempotent() (
   touch tasks.md
 )
 
-# Create a form's directories and important files, in a idempotent manner.
-# This function is only needed if there's a glitch with ./etc/skeleton.
-create_idempotent() {
-    mkdir_with_ai_idempotent "$dir"
-    mkdir_with_ai_idempotent "$dir/doc"
-    mkdir_with_ai_idempotent "$dir/fhir-r5"
-    mkdir_with_ai_idempotent "$dir/front-end-dashboard-with-html"
-    mkdir_with_ai_idempotent "$dir/front-end-dashboard-with-svelte"
-    mkdir_with_ai_idempotent "$dir/front-end-form-with-html"
-    mkdir_with_ai_idempotent "$dir/front-end-form-with-svelte"
-    mkdir_with_ai_idempotent "$dir/back-end-with-loco"
-    mkdir_with_ai_idempotent "$dir/back-end-with-loco-new"
-    mkdir_with_ai_idempotent "$dir/protobuf"
-    mkdir_with_ai_idempotent "$dir/sql-migrations"
-    mkdir_with_ai_idempotent "$dir/typespec"
-    mkdir_with_ai_idempotent "$dir/xml-representations"
-}
-
 create_form_loco_script() {
     # form_dir="$1"
     # form_name_as_snake="$2"
-    file="$form_dir/back-end-with-loco/00-new.sh"
+    file="$form_dir/back-end-with-loco/sql-migrations/00-new.sh"
     cat << EOF > "$file"
 #!/bin/sh
 set -euf

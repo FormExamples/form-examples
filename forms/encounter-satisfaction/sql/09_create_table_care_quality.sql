@@ -35,3 +35,6 @@ COMMENT ON COLUMN care_quality.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN care_quality.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN care_quality.NULL IS
+    'Null.';

@@ -180,6 +180,7 @@ components:
         graded_at:
           type: string
           format: date-time
+          description: Graded at.
       required:
         - created_at
         - updated_at

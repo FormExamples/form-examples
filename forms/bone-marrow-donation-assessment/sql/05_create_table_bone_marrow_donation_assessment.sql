@@ -35,3 +35,10 @@ COMMENT ON COLUMN assessment.created_at IS
     'Timestamp when this row was created.';
 COMMENT ON COLUMN assessment.updated_at IS
     'Timestamp when this row was updated.';
+
+COMMENT ON TABLE bone_marrow_donation_assessment IS
+    'Bone marrow donation assessment.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.patient_id IS
+    'Foreign key to the patient table.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.status IS
+    'Lifecycle status of this row.';

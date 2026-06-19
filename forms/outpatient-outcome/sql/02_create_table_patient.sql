@@ -69,3 +69,6 @@ CREATE INDEX patient_index_gto
     USING GIN ((
         name
     ) gin_trgm_ops);
+
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';

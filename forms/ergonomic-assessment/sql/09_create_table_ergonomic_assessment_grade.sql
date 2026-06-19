@@ -51,3 +51,6 @@ COMMENT ON COLUMN grade.updated_at IS
     'Timestamp when this row was updated.';
 COMMENT ON COLUMN grade.deleted_at IS
     'Timestamp when this row was deleted.';
+
+COMMENT ON COLUMN grade.a IS
+    'A.';

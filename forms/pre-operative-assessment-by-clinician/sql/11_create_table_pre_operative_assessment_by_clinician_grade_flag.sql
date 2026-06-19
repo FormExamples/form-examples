@@ -70,3 +70,5 @@ COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.description I
 COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "prepare difficult-airway trolley").';
 
+COMMENT ON COLUMN pre_operative_assessment_by_clinician_grade_flag.pre_operative_assessment_by_clinician_grade_id IS
+    'Foreign key to the pre_operative_assessment_by_clinician_grade table.';

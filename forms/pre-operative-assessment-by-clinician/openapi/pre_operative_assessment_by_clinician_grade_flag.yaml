@@ -123,6 +123,7 @@ components:
         pre_operative_assessment_by_clinician_grade_id:
           type: string
           format: uuid
+          description: Foreign key to the pre_operative_assessment_by_clinician_grade table.
         flag_id:
           type: string
           maxLength: 50

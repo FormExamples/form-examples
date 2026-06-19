@@ -434,3 +434,22 @@ COMMENT ON COLUMN grading_additional_flag.deleted_at IS
 -- ========================================================================
 -- END 92_create_table_grading_additional_flag.sql
 -- ========================================================================
+
+COMMENT ON TABLE bone_marrow_donation_assessment IS
+    'Bone marrow donation assessment.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.patient_id IS
+    'Foreign key to the patient table.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.status IS
+    'Lifecycle status of this row.';
+COMMENT ON TABLE bone_marrow_donation_assessment IS
+    'Bone marrow donation assessment.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.patient_id IS
+    'Foreign key to the patient table.';
+COMMENT ON COLUMN bone_marrow_donation_assessment.status IS
+    'Lifecycle status of this row.';
+COMMENT ON COLUMN patient.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
+COMMENT ON COLUMN patient.weight_as_kg IS
+    'Weight as kg.';
+COMMENT ON COLUMN clinician.deleted_at IS
+    'Soft-delete timestamp; NULL when the row is live.';
