@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mammography Test Request — clinician referral</title>
+  <meta name="description" content="Clinician-driven breast mammography imaging request with four-axis grading: appropriateness (ACR), cancer-pathway urgency (NICE NG12 two-week-wait), request completeness, and clinical priority, plus safety flags.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to request form</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Mammography Test Request</h1>
+      <p class="subtitle">Breast mammography imaging request with four-axis grading: appropriateness, cancer-pathway urgency, completeness, and clinical priority.</p>
+
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Form completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="Mammography request steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Clinician referral wizard for a breast mammography examination.
+        Record the requesting clinician, patient identification, the requested
+        examination, breast symptoms, breast history and risk factors, and the
+        requested urgency. The engine computes a four-axis grade
+        (appropriateness, cancer-pathway urgency, request completeness, and
+        clinical priority) plus a set of safety-critical flags.
+      </p>
+      <p>
+        This is clinical decision support for the imaging vetting desk. A NICE
+        NG12 suspected-cancer trigger auto-escalates the triage tier to
+        two-week-wait. The final triage and booking decision remains the
+        responsibility of the vetting radiologist or radiographer.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="Mammography test request"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Sections rendered by js/app.js as <fieldset class="fieldset"> nodes: -->
+        <!-- 1 Requesting clinician, 2 Patient identification, -->
+        <!-- 3 Requested examination, 4 Symptoms, -->
+        <!-- 5 Breast history & risk, 6 Triage, 7 Review & submit -->
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          id="submit-btn"
+          class="button"
+          data-variant="primary"
+        >
+          Submit and view report
+        </button>
+        <button
+          type="button"
+          id="reset-btn"
+          class="button"
+          data-variant="secondary"
+        >
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Vetting report"
+    >
+      <p class="empty-message">Submit the form to see the vetting report.</p>
+    </section>
+
+    <footer class="page-footer">
+      <p>
+        Grading is aligned with the ACR Appropriateness Criteria (breast), the
+        NHS Breast Screening Programme (NHSBSP), NICE NG12 suspected-cancer
+        recognition and referral, and IR(ME)R 2017 justification of medical
+        exposure. This screening tool is for clinical decision support; the
+        final triage and booking decision remains the responsibility of the
+        vetting clinician.
+      </p>
+    </footer>
+  </main>
+
+  <!--
+    Classic <script> tags (no `type="module"`) so the page works when opened
+    directly via file:// — browsers block ES-module imports from file:// for
+    CORS reasons, but allow ordered classic scripts. Each file attaches its
+    public symbols to `window.MammographyTestRequest`. Whole-file IIFE
+    wrappers keep top-level locals out of the global scope.
+
+    Load order: types -> rules -> flags -> grader -> app.
+  -->
+  <script src="js/types.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/flags.js"></script>
+  <script src="js/grader.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
