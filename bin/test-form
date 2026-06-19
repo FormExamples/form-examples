@@ -33,6 +33,11 @@ ai_exists_or_err() (
     symlink_exists_or_err "$1/README.md"
     file_size_or_err "$1/AGENTS.md" && implemented_or_err "$1/AGENTS.md"
     file_size_or_err "$1/CLAUDE.md" && implemented_or_err "$1/CLAUDE.md"
+    file_size_or_err "$1/llms.txt" && implemented_or_err "$1/llms.txt"
+    for dir in .claude .cursor .gemini .mimocode .opencode .qwen .windsurf; do
+        directory_exists_or_err "$1/$dir"
+        file_exists_or_err "$1/$dir/.keep"
+    done
 )
 
 ai_planing_exists_or_err() (
@@ -62,13 +67,6 @@ rust_crate_exists_or_err() (
 top="$(git rev-parse --show-toplevel)"
 form="$1"
 form_dir="$top/forms/$form"
-
-test_form_ai_dot_directories() {
-    for dir in .claude .cursor .gemini .mimocode .opencode .qwen .windsurf; do
-        directory_exists_or_err "$1/$dir"
-        file_exists_or_err "$1/$dir/.keep"
-    done
-}
 
 test_form_doc() {
     ai_exists_or_err "$1/doc"
