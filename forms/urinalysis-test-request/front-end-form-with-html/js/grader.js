@@ -16,6 +16,7 @@ const {
   scorePreanalytical,
   scoreCompleteness,
   scoreTriage,
+  countSelectedTests,
   detectFlags
 } = NS;
 
@@ -23,8 +24,9 @@ const {
  * Derive an overall recommendation for the pathology vetting desk from the
  * four axes. Least-alarming wins only when nothing escalates.
  */
-function deriveRecommendation(appropriatenessBand, preanalyticalBand, completenessPercent) {
-  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+function deriveRecommendation(apprBand, preanalyticalBand, completenessPercent, noTestSelected) {
+  if (noTestSelected) return 'query-referrer';
+  if (apprBand === 'usually-not-appropriate') return 'query-referrer';
   if (preanalyticalBand === 'reject-risk') return 'reject';
   if (completenessPercent < 50) return 'query-referrer';
   return 'accept';
@@ -59,12 +61,12 @@ function calculateGrade(data) {
   const firedRules = [];
 
   // Axis A — appropriateness.
-  const appr = scoreAppropriateness(data.context.primaryIndication, data.tests);
+  const appr = scoreAppropriateness(data);
   if (appr.firedRule) firedRules.push(appr.firedRule);
 
-  // Axis B — pre-analytical specimen suitability.
-  const pre = scorePreanalytical(data);
-  if (pre.firedRule) firedRules.push(pre.firedRule);
+  // Axis B — preanalytical specimen suitability.
+  const preanalytical = scorePreanalytical(data);
+  for (const r of preanalytical.firedRules) firedRules.push(r);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
@@ -74,19 +76,24 @@ function calculateGrade(data) {
   const triage = scoreTriage(data);
   for (const r of triage.firedRules) firedRules.push(r);
 
+  const noTestSelected = countSelectedTests(data.tests) === 0;
+
   const recommendation = deriveRecommendation(
     appr.band,
-    pre.band,
-    completeness.percent
+    preanalytical.band,
+    completeness.percent,
+    noTestSelected
   );
 
-  const flags = detectFlags(data);
+  const flags = detectFlags(data, {
+    preanalyticalBand: preanalytical.band
+  });
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    preanalyticalBand: pre.band,
-    fastingOrSpecimen: pre.note,
+    preanalyticalBand: preanalytical.band,
+    fastingOrSpecimen: preanalytical.note,
     completenessPercent: completeness.percent,
     triageTier: triage.tier,
     targetTimeframe: triage.targetTimeframe,

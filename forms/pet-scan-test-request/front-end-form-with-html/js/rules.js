@@ -1,13 +1,12 @@
 // Four-axis rule catalogue for the PET Scan Test Request engine.
 //
-// Derived from index.md and sql-migrations/05-07: (A) appropriateness 1-9 +
-// band by indication x scan type (ACR / RCR iRefer); (B) preparation safety
-// band (ok / caution / contraindicated) + radiation-dose band (low / moderate
-// / high), driven by glucose control, pregnancy, and breastfeeding;
-// (C) request completeness over mandatory fields; (D) triage tier with
-// acuity escalation. Rule IDs are stable and identical across every
-// front-end and the back-end (R-APPROP-*, R-SAFETY-*, R-COMPLETE-*,
-// R-TRIAGE-*). Pure data + helpers; the grader composes them.
+// Derived from index.md and the SQL migrations: (A) appropriateness 1-9 + band
+// by indication x scan type; (B) preparation-safety band + radiation-dose band
+// driven by glucose control, pregnancy, and breastfeeding; (C) request
+// completeness over mandatory fields; (D) triage tier with urgency + safety
+// escalation. Rule IDs are stable and identical across every front-end and the
+// back-end (R-APPROP-*, R-SAFETY-*, R-COMPLETE-*, R-TRIAGE-*). Pure data +
+// helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.PetScanTestRequest`.
 
@@ -17,32 +16,27 @@ window.PetScanTestRequest = window.PetScanTestRequest || {};
 const NS = window.PetScanTestRequest;
 const { isFdgStudy } = NS;
 
-// Glucose threshold (mmol/L) above which FDG uptake is degraded and a study
-// should be rechecked / rescheduled (SNMMI ~11; EANM prefers below ~7).
-const GLUCOSE_RESCHEDULE_THRESHOLD = 11;
-const GLUCOSE_CAUTION_THRESHOLD = 7;
-
 // ----------------------------------------------------------------------
-// Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
+// Axis A — Appropriateness (ACR Appropriateness Criteria / RCR iRefer 1-9)
 // ----------------------------------------------------------------------
 //
-// Each indication has an ideal scan type (or set of types). When the
+// Each indication has an ideal tracer / scan type (or set of types). When the
 // requested scan type matches the indication well, the request scores high
 // (7-9, usually-appropriate). Plausible-but-suboptimal pairings score in the
 // 4-6 may-be-appropriate band; clearly mismatched pairings score 1-3.
 
 // Map of indication -> { ideal:[scanType], plausible:[scanType] }.
 const INDICATION_SCAN_MAP = {
-  'cancer-staging':             { ideal: ['fdg-pet-ct', 'psma-pet', 'dotatate-pet'], plausible: [] },
-  'cancer-restaging':           { ideal: ['fdg-pet-ct', 'psma-pet', 'dotatate-pet'], plausible: [] },
-  'treatment-response':         { ideal: ['fdg-pet-ct'], plausible: ['psma-pet', 'dotatate-pet'] },
-  'suspected-recurrence':       { ideal: ['fdg-pet-ct', 'psma-pet'], plausible: ['dotatate-pet'] },
-  'solitary-pulmonary-nodule':  { ideal: ['fdg-pet-ct'], plausible: [] },
-  'lymphoma':                   { ideal: ['fdg-pet-ct'], plausible: [] },
-  'cardiac-viability':          { ideal: ['cardiac-pet'], plausible: ['fdg-pet-ct'] },
-  'infection-inflammation':     { ideal: ['fdg-pet-ct'], plausible: [] },
-  'neurology-dementia':         { ideal: ['amyloid-pet'], plausible: ['fdg-pet-ct'] },
-  'other':                      { ideal: [], plausible: [] }
+  'cancer-staging':            { ideal: ['fdg-pet-ct', 'psma-pet', 'dotatate-pet'], plausible: [] },
+  'cancer-restaging':          { ideal: ['fdg-pet-ct', 'psma-pet', 'dotatate-pet'], plausible: [] },
+  'treatment-response':        { ideal: ['fdg-pet-ct'], plausible: ['psma-pet', 'dotatate-pet'] },
+  'suspected-recurrence':      { ideal: ['fdg-pet-ct', 'psma-pet', 'dotatate-pet'], plausible: [] },
+  'solitary-pulmonary-nodule': { ideal: ['fdg-pet-ct'], plausible: [] },
+  'lymphoma':                  { ideal: ['fdg-pet-ct'], plausible: [] },
+  'cardiac-viability':         { ideal: ['cardiac-pet'], plausible: ['fdg-pet-ct'] },
+  'infection-inflammation':    { ideal: ['fdg-pet-ct'], plausible: [] },
+  'neurology-dementia':        { ideal: ['amyloid-pet'], plausible: ['fdg-pet-ct'] },
+  'other':                     { ideal: [], plausible: [] }
 };
 
 /**
@@ -128,91 +122,91 @@ function appropriatenessBand(score) {
 // Axis B — Preparation safety & radiation dose (EANM / SNMMI + IR(ME)R)
 // ----------------------------------------------------------------------
 //
-// prepSafetyBand: ok / caution / contraindicated. Driven by glucose control
-// (FDG studies), pregnancy status, and breastfeeding. Pregnancy forces the
-// contraindicated band; uncontrolled glucose (>11 mmol/L for an FDG study)
-// forces caution; breastfeeding or borderline glucose raises caution.
-//
-// radiationDoseBand: low / moderate / high. PET-CT is a moderate-to-high
-// dose modality; higher when pregnancy is present (fetal-dose concern).
+// FDG uptake needs blood glucose typically below ~11 mmol/L. Pregnancy or
+// uncontrolled glucose force the caution / contraindicated band regardless of
+// appropriateness. Breastfeeding raises a caution. Radiation dose reflects the
+// study burden (PET-CT delivers a moderate-to-high effective dose).
 
+const GLUCOSE_UNCONTROLLED_THRESHOLD = 11; // mmol/L (SNMMI)
+const GLUCOSE_ELEVATED_THRESHOLD = 7;       // mmol/L (EANM preferred)
+
+// Most-severe band wins.
 const PREP_ORDER = ['ok', 'caution', 'contraindicated'];
 
-/** Return whichever of two prep-safety bands is more severe. */
 function maxPrepBand(a, b) {
-  return PREP_ORDER.indexOf(a) >= PREP_ORDER.indexOf(b) ? a : b;
+  const ia = PREP_ORDER.indexOf(a);
+  const ib = PREP_ORDER.indexOf(b);
+  return ia >= ib ? a : b;
 }
 
 /**
- * Evaluate preparation safety and radiation dose for the request.
+ * Evaluate the preparation-safety band and the fired safety rules.
  *
- * @returns {{ prepSafetyBand:string, radiationDoseBand:string, firedRules:object[] }}
+ * @returns {{ band:string, firedRules:object[] }}
  */
-function scoreSafety(data) {
-  const firedRules = [];
-  let prepBand = 'ok';
-  let doseBand = 'moderate'; // PET-CT baseline
-
+function scorePrepSafety(data) {
+  const prep = data.preparation;
   const fdg = isFdgStudy(data.request.scanType);
-  const glucose = data.prep.bloodGlucoseMmolL;
-  const pregnancy = data.prep.pregnancyStatus;
+  let band = 'ok';
+  const firedRules = [];
 
-  // Pregnancy — contraindicated band, high dose concern.
-  if (pregnancy === 'pregnant') {
-    prepBand = maxPrepBand(prepBand, 'contraindicated');
-    doseBand = 'high';
+  // Pregnancy forces contraindicated (relative) — radiation to the fetus.
+  if (prep.pregnancyStatus === 'pregnant') {
+    band = maxPrepBand(band, 'contraindicated');
     firedRules.push({
       ruleId: 'R-SAFETY-PREGNANT',
       axis: 'safety',
       category: 'pregnancy',
-      description: 'Patient is pregnant — PET-CT radiation exposure is contraindicated unless overriding justification.'
+      description: 'Patient is pregnant — PET-CT radiation exposure is contraindicated unless justified by exception.'
     });
-  } else if (pregnancy === 'possible' || pregnancy === 'unknown') {
-    prepBand = maxPrepBand(prepBand, 'caution');
+  } else if (prep.pregnancyStatus === 'possible') {
+    band = maxPrepBand(band, 'caution');
     firedRules.push({
-      ruleId: 'R-SAFETY-PREGNANCY-UNCONFIRMED',
+      ruleId: 'R-SAFETY-PREGNANCY-POSSIBLE',
       axis: 'safety',
       category: 'pregnancy',
-      description: 'Pregnancy is possible or not confirmed — confirm status before exposure.'
+      description: 'Pregnancy is possible — confirm pregnancy status before exposure.'
     });
   }
 
-  // Glucose control for FDG studies.
+  // Glucose control (FDG studies only).
   if (fdg) {
-    if (glucose === null || glucose === undefined || glucose === '') {
-      prepBand = maxPrepBand(prepBand, 'caution');
+    const g = prep.bloodGlucoseMmolL;
+    if (g === null || g === undefined || g === '') {
+      band = maxPrepBand(band, 'caution');
       firedRules.push({
         ruleId: 'R-SAFETY-GLUCOSE-MISSING',
         axis: 'safety',
         category: 'glucose',
-        description: 'No blood glucose recorded for an FDG study — measure and document before tracer.'
+        description: 'No blood glucose recorded for an FDG study — measure and document before tracer injection.'
       });
-    } else if (Number(glucose) > GLUCOSE_RESCHEDULE_THRESHOLD) {
-      prepBand = maxPrepBand(prepBand, 'caution');
+    } else if (Number(g) > GLUCOSE_UNCONTROLLED_THRESHOLD) {
+      band = maxPrepBand(band, 'caution');
       firedRules.push({
-        ruleId: 'R-SAFETY-GLUCOSE-HIGH',
+        ruleId: 'R-SAFETY-GLUCOSE-UNCONTROLLED',
         axis: 'safety',
         category: 'glucose',
-        description: `Blood glucose ${Number(glucose)} mmol/L exceeds ~11 mmol/L — recheck and reschedule; FDG uptake is degraded.`
+        description: `Blood glucose ${Number(g)} mmol/L is above ~11 mmol/L — recheck and reschedule; FDG uptake will be impaired.`
       });
-    } else if (Number(glucose) > GLUCOSE_CAUTION_THRESHOLD) {
+    } else if (Number(g) > GLUCOSE_ELEVATED_THRESHOLD) {
+      band = maxPrepBand(band, 'caution');
       firedRules.push({
-        ruleId: 'R-SAFETY-GLUCOSE-BORDERLINE',
+        ruleId: 'R-SAFETY-GLUCOSE-ELEVATED',
         axis: 'safety',
         category: 'glucose',
-        description: `Blood glucose ${Number(glucose)} mmol/L is in the 7-11 mmol/L range — acceptable but optimise control where possible.`
+        description: `Blood glucose ${Number(g)} mmol/L is above the EANM preferred ~7 mmol/L; acceptable but optimise where possible.`
       });
     }
   }
 
-  // Breastfeeding precaution.
-  if (data.prep.breastfeeding === true) {
-    prepBand = maxPrepBand(prepBand, 'caution');
+  // Breastfeeding precaution for the radiopharmaceutical.
+  if (prep.breastfeeding === true) {
+    band = maxPrepBand(band, 'caution');
     firedRules.push({
       ruleId: 'R-SAFETY-BREASTFEEDING',
       axis: 'safety',
       category: 'breastfeeding',
-      description: 'Patient is breastfeeding — advise interruption of breastfeeding and close contact per local radiopharmaceutical guidance.'
+      description: 'Patient is breastfeeding — advise interruption / close-contact precautions per local protocol.'
     });
   }
 
@@ -221,11 +215,50 @@ function scoreSafety(data) {
       ruleId: 'R-SAFETY-OK',
       axis: 'safety',
       category: 'preparation',
-      description: 'No preparation or safety concerns identified.'
+      description: 'No preparation-safety concern detected for the recorded data.'
     });
   }
 
-  return { prepSafetyBand: prepBand, radiationDoseBand: doseBand, firedRules };
+  return { band, firedRules };
+}
+
+// Relative radiation-dose band per scan type (PET-CT effective dose).
+const RADIATION_DOSE_BY_SCAN = {
+  'fdg-pet-ct': 'high',
+  'psma-pet': 'moderate',
+  'dotatate-pet': 'moderate',
+  'amyloid-pet': 'moderate',
+  'cardiac-pet': 'high',
+  'other': 'moderate'
+};
+
+/**
+ * Determine the radiation-dose band for the requested study.
+ *
+ * @returns {{ band:string, firedRule:object|null }}
+ */
+function scoreRadiationDose(scanType) {
+  if (!scanType) {
+    return {
+      band: '',
+      firedRule: {
+        ruleId: 'R-SAFETY-DOSE-UNKNOWN',
+        axis: 'safety',
+        category: 'radiation-dose',
+        description: 'Scan type not yet specified — radiation-dose band not assessed.'
+      }
+    };
+  }
+  const band = RADIATION_DOSE_BY_SCAN[scanType] || 'moderate';
+  return {
+    band,
+    firedRule: {
+      ruleId: `R-SAFETY-DOSE-${band.toUpperCase()}`,
+      axis: 'safety',
+      category: 'radiation-dose',
+      description: `Requested ${scanType} study carries a ${band} relative radiation dose; ensure IR(ME)R justification.`
+    }
+  };
 }
 
 // ----------------------------------------------------------------------
@@ -240,8 +273,8 @@ const COMPLETENESS_FIELDS = [
   { weight: 3, present: (d) => !!d.request.primaryIndication, ruleId: 'R-COMPLETE-INDICATION', label: 'primary indication' },
   { weight: 3, present: (d) => !!d.request.clinicalQuestion && d.request.clinicalQuestion.trim() !== '', ruleId: 'R-COMPLETE-CLINICAL-QUESTION', label: 'clinical question' },
   { weight: 2, present: (d) => !!d.request.scanType, ruleId: 'R-COMPLETE-SCAN-TYPE', label: 'requested scan type' },
-  { weight: 2, present: (d) => !!d.justification.irMeRJustification && d.justification.irMeRJustification.trim() !== '', ruleId: 'R-COMPLETE-JUSTIFICATION', label: 'IR(ME)R justification' },
-  { weight: 1, present: (d) => glucosePresentIfNeeded(d), ruleId: 'R-COMPLETE-GLUCOSE', label: 'blood glucose (FDG study)' },
+  { weight: 2, present: (d) => glucosePresentIfRequired(d), ruleId: 'R-COMPLETE-GLUCOSE', label: 'blood glucose (FDG study)' },
+  { weight: 1, present: (d) => !!d.justification.irMeRJustification && d.justification.irMeRJustification.trim() !== '', ruleId: 'R-COMPLETE-JUSTIFICATION', label: 'IR(ME)R justification' },
   { weight: 1, present: (d) => !!d.patient.firstName && !!d.patient.lastName, ruleId: 'R-COMPLETE-PATIENT-NAME', label: 'patient name' },
   { weight: 1, present: (d) => !!d.patient.nhsNumber, ruleId: 'R-COMPLETE-NHS-NUMBER', label: 'NHS number' },
   { weight: 1, present: (d) => !!d.patient.dateOfBirth, ruleId: 'R-COMPLETE-DOB', label: 'date of birth' },
@@ -250,9 +283,10 @@ const COMPLETENESS_FIELDS = [
   { weight: 1, present: (d) => !!d.justification.urgency, ruleId: 'R-COMPLETE-URGENCY', label: 'requested urgency' }
 ];
 
-function glucosePresentIfNeeded(d) {
+// Glucose only counts toward completeness for FDG studies.
+function glucosePresentIfRequired(d) {
   if (!isFdgStudy(d.request.scanType)) return true;
-  const g = d.prep.bloodGlucoseMmolL;
+  const g = d.preparation.bloodGlucoseMmolL;
   return g !== null && g !== undefined && g !== '';
 }
 
@@ -283,17 +317,17 @@ function scoreCompleteness(data) {
 }
 
 // ----------------------------------------------------------------------
-// Axis D — Triage priority (acuity escalation)
+// Axis D — Triage priority (urgency + safety escalation)
 // ----------------------------------------------------------------------
 //
-// A base tier is taken from the clinician's requested urgency, then acuity
-// rules can escalate it. The most-severe escalation wins.
+// A base tier is taken from the clinician's requested urgency, then safety
+// concerns auto-escalate it. The most-severe escalation wins.
 
 const TRIAGE_ORDER = ['routine', 'urgent', 'emergency'];
 
 const TARGET_TIMEFRAMES = {
   'routine': 'Within 2-4 weeks',
-  'urgent': 'Within 1 week',
+  'urgent': 'Within 3-7 days',
   'emergency': 'Within 24-48 hours'
 };
 
@@ -303,28 +337,6 @@ function maxTier(a, b) {
   const ib = TRIAGE_ORDER.indexOf(b);
   return ia >= ib ? a : b;
 }
-
-// Acuity escalation rules, each forcing at least the given tier.
-const TRIAGE_RULES = [
-  {
-    ruleId: 'R-TRIAGE-EMERGENCY-SETTING',
-    tier: 'emergency',
-    fires: (d) => d.patient.setting === 'emergency',
-    description: 'Request originates from the emergency setting — emergency triage.'
-  },
-  {
-    ruleId: 'R-TRIAGE-SUSPECTED-RECURRENCE',
-    tier: 'urgent',
-    fires: (d) => d.request.primaryIndication === 'suspected-recurrence',
-    description: 'Suspected recurrence — expedited assessment.'
-  },
-  {
-    ruleId: 'R-TRIAGE-INPATIENT',
-    tier: 'urgent',
-    fires: (d) => d.patient.setting === 'inpatient',
-    description: 'Inpatient request — expedited assessment to support discharge.'
-  }
-];
 
 /**
  * Compute the triage tier, target timeframe, and fired triage rules.
@@ -336,26 +348,12 @@ function scoreTriage(data) {
   let tier = TRIAGE_ORDER.includes(requested) ? requested : 'routine';
   const firedRules = [];
 
-  for (const rule of TRIAGE_RULES) {
-    if (rule.fires(data)) {
-      tier = maxTier(tier, rule.tier);
-      firedRules.push({
-        ruleId: rule.ruleId,
-        axis: 'triage',
-        category: 'acuity',
-        description: rule.description
-      });
-    }
-  }
-
-  if (firedRules.length === 0) {
-    firedRules.push({
-      ruleId: 'R-TRIAGE-REQUESTED',
-      axis: 'triage',
-      category: 'requested',
-      description: `No escalating factors; triage follows the requested urgency (${tier}).`
-    });
-  }
+  firedRules.push({
+    ruleId: 'R-TRIAGE-REQUESTED',
+    axis: 'triage',
+    category: 'requested',
+    description: `Triage follows the requested urgency (${tier}).`
+  });
 
   return {
     tier,
@@ -367,16 +365,17 @@ function scoreTriage(data) {
 Object.assign(NS, {
   scoreAppropriateness,
   appropriatenessBand,
-  scoreSafety,
+  scorePrepSafety,
+  scoreRadiationDose,
   scoreCompleteness,
   scoreTriage,
   maxTier,
   maxPrepBand,
   TRIAGE_ORDER,
   TARGET_TIMEFRAMES,
-  PREP_ORDER,
   INDICATION_SCAN_MAP,
-  GLUCOSE_RESCHEDULE_THRESHOLD,
-  GLUCOSE_CAUTION_THRESHOLD
+  RADIATION_DOSE_BY_SCAN,
+  GLUCOSE_UNCONTROLLED_THRESHOLD,
+  GLUCOSE_ELEVATED_THRESHOLD
 });
 })();

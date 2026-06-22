@@ -1,31 +1,32 @@
-// Four-axis grader for the Electrocardiogram (ECG) Test Request.
+// Four-axis grader for the Mammography Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
-// across every front-end and the back-end.
+// across every front-end and the back-end, and map onto the
+// mammography_test_request_grade SQL columns.
 //
-// Wrapped in an IIFE; published via `window.ElectrocardiogramTestRequest`.
+// Wrapped in an IIFE; published via `window.MammographyTestRequest`.
 
 (function () {
 'use strict';
-window.ElectrocardiogramTestRequest =
-  window.ElectrocardiogramTestRequest || {};
-const NS = window.ElectrocardiogramTestRequest;
+window.MammographyTestRequest =
+  window.MammographyTestRequest || {};
+const NS = window.MammographyTestRequest;
 const {
   scoreAppropriateness,
-  scoreTriage,
+  scoreUrgency,
   scoreCompleteness,
   scorePriority,
   detectFlags
 } = NS;
 
 /**
- * Derive an overall recommendation for the cardiac-physiology vetting desk
- * from the four axes. Least-alarming wins only when nothing escalates.
+ * Derive an overall vetting recommendation from the four axes. Least-alarming
+ * wins only when nothing escalates.
  */
-function deriveRecommendation(apprBand, completenessPercent, triageTier) {
-  if (apprBand === 'usually-not-appropriate') return 'query-referrer';
+function deriveRecommendation(appropriatenessBand, completenessPercent, twoWeekWaitEligible) {
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
   if (completenessPercent < 50) return 'query-referrer';
   return 'accept';
 }
@@ -33,7 +34,7 @@ function deriveRecommendation(apprBand, completenessPercent, triageTier) {
 const RECOMMENDATION_LABELS = {
   'accept': 'Accept and book',
   'query-referrer': 'Query the referrer',
-  'redirect': 'Redirect to a more suitable test',
+  'redirect': 'Redirect to a more suitable examination',
   'reject': 'Reject'
 };
 
@@ -46,6 +47,8 @@ const RECOMMENDATION_LABELS = {
  *   appropriatenessBand:string,
  *   triageTier:string,
  *   targetTimeframe:string,
+ *   twoWeekWaitEligible:boolean,
+ *   twoWeekWaitRationale:string,
  *   completenessPercent:number,
  *   priorityBand:string,
  *   recommendation:string,
@@ -60,35 +63,40 @@ function calculateGrade(data) {
   // Axis A — appropriateness.
   const appr = scoreAppropriateness(
     data.request.primaryIndication,
-    data.request.ecgType
+    data.request.examType
   );
   if (appr.firedRule) firedRules.push(appr.firedRule);
 
-  // Axis B — urgency / triage.
-  const triage = scoreTriage(data);
-  for (const r of triage.firedRules) firedRules.push(r);
+  // Axis B — cancer-pathway urgency.
+  const urgency = scoreUrgency(data);
+  for (const r of urgency.firedRules) firedRules.push(r);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
   for (const m of completeness.missing) firedRules.push(m);
 
   // Axis D — clinical priority.
-  const priority = scorePriority(triage.tier, appr.band);
+  const priority = scorePriority(data);
   for (const r of priority.firedRules) firedRules.push(r);
 
   const recommendation = deriveRecommendation(
     appr.band,
     completeness.percent,
-    triage.tier
+    urgency.twoWeekWaitEligible
   );
 
-  const flags = detectFlags(data);
+  const flags = detectFlags(data, {
+    twoWeekWaitEligible: urgency.twoWeekWaitEligible,
+    twoWeekWaitRationale: urgency.twoWeekWaitRationale
+  });
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    triageTier: triage.tier,
-    targetTimeframe: triage.targetTimeframe,
+    triageTier: urgency.tier,
+    targetTimeframe: urgency.targetTimeframe,
+    twoWeekWaitEligible: urgency.twoWeekWaitEligible,
+    twoWeekWaitRationale: urgency.twoWeekWaitRationale,
     completenessPercent: completeness.percent,
     priorityBand: priority.band,
     recommendation,

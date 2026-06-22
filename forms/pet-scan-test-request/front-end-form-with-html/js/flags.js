@@ -3,7 +3,7 @@
 // Pure function returning safety flags using the grade_flag categories from
 // SQL migration 07: pregnancy, breastfeeding, uncontrolled-glucose,
 // high-radiation-dose, missing-indication, missing-clinical-question,
-// missing-glucose, and other.
+// missing-glucose, other.
 //
 // Each flag is { flagId, category, priority, description, suggestedAction }.
 // Flag IDs are stable and identical across every front-end and the back-end.
@@ -13,86 +13,80 @@
 'use strict';
 window.PetScanTestRequest = window.PetScanTestRequest || {};
 const NS = window.PetScanTestRequest;
-const {
-  isFdgStudy,
-  GLUCOSE_RESCHEDULE_THRESHOLD
-} = NS;
+const { isFdgStudy, GLUCOSE_UNCONTROLLED_THRESHOLD } = NS;
 
 /**
  * Detect safety flags for a PET-CT scan request.
  *
  * @param {object} data - the request data model
- * @param {object} [context] - optional engine context
- *   ({ prepSafetyBand, radiationDoseBand })
+ * @param {object} [context] - optional engine context ({ radiationDoseBand })
  * @returns {object[]} safety flags
  */
 function detectFlags(data, context) {
   const flags = [];
   const ctx = context || {};
+  const prep = data.preparation;
   const fdg = isFdgStudy(data.request.scanType);
-  const glucose = data.prep.bloodGlucoseMmolL;
 
-  // --- Pregnancy -----------------------------------------------------
-  if (data.prep.pregnancyStatus === 'pregnant') {
+  // --- Radiation-safety flags ----------------------------------------
+  if (prep.pregnancyStatus === 'pregnant') {
     flags.push({
       flagId: 'F-PREGNANCY-001',
       category: 'pregnancy',
       priority: 'high',
-      description: 'Patient is pregnant; PET-CT delivers ionising radiation to the fetus.',
-      suggestedAction: 'Do not proceed without overriding IR(ME)R justification; discuss with the nuclear-medicine physician and medical physics expert.'
+      description: 'Patient is pregnant.',
+      suggestedAction: 'Do not expose unless justified by exception; discuss alternatives with the nuclear-medicine physician and ARSAC holder.'
     });
-  } else if (data.prep.pregnancyStatus === 'possible' || data.prep.pregnancyStatus === 'unknown') {
+  } else if (prep.pregnancyStatus === 'possible') {
     flags.push({
-      flagId: 'F-PREGNANCY-UNCONFIRMED-001',
+      flagId: 'F-PREGNANCY-002',
       category: 'pregnancy',
       priority: 'medium',
-      description: 'Pregnancy is possible or not confirmed.',
-      suggestedAction: 'Confirm pregnancy status (e.g. urine / serum hCG) before exposure.'
+      description: 'Pregnancy cannot be excluded.',
+      suggestedAction: 'Confirm pregnancy status (e.g. beta-hCG / LMP) before tracer administration.'
     });
   }
 
-  // --- Breastfeeding -------------------------------------------------
-  if (data.prep.breastfeeding === true) {
+  if (prep.breastfeeding === true) {
     flags.push({
       flagId: 'F-BREASTFEEDING-001',
       category: 'breastfeeding',
       priority: 'medium',
       description: 'Patient is breastfeeding.',
-      suggestedAction: 'Advise interruption of breastfeeding and close infant contact per local radiopharmaceutical guidance.'
+      suggestedAction: 'Advise interruption of breastfeeding and close-contact precautions per local radiation-protection protocol.'
     });
   }
 
-  // --- Uncontrolled glucose (FDG studies) ----------------------------
-  if (fdg && glucose !== null && glucose !== undefined && glucose !== '' &&
-      Number(glucose) > GLUCOSE_RESCHEDULE_THRESHOLD) {
-    flags.push({
-      flagId: 'F-UNCONTROLLED-GLUCOSE-001',
-      category: 'uncontrolled-glucose',
-      priority: 'high',
-      description: `Blood glucose ${Number(glucose)} mmol/L exceeds ~11 mmol/L; FDG uptake is degraded.`,
-      suggestedAction: 'Recheck glucose and reschedule the FDG study once glucose is controlled below ~11 mmol/L.'
-    });
+  // --- Glucose-control flags (FDG studies) ---------------------------
+  if (fdg) {
+    const g = prep.bloodGlucoseMmolL;
+    if (g === null || g === undefined || g === '') {
+      flags.push({
+        flagId: 'F-MISSING-GLUCOSE-001',
+        category: 'missing-glucose',
+        priority: 'medium',
+        description: 'No blood glucose recorded for an FDG study.',
+        suggestedAction: 'Measure and document blood glucose before tracer injection; FDG uptake depends on glucose control.'
+      });
+    } else if (Number(g) > GLUCOSE_UNCONTROLLED_THRESHOLD) {
+      flags.push({
+        flagId: 'F-UNCONTROLLED-GLUCOSE-001',
+        category: 'uncontrolled-glucose',
+        priority: 'high',
+        description: `Blood glucose ${Number(g)} mmol/L is above ~11 mmol/L.`,
+        suggestedAction: 'Recheck glucose and reschedule if it remains above ~11 mmol/L; impaired FDG uptake degrades the study.'
+      });
+    }
   }
 
-  // --- Missing glucose (FDG study, no glucose recorded) --------------
-  if (fdg && (glucose === null || glucose === undefined || glucose === '')) {
-    flags.push({
-      flagId: 'F-MISSING-GLUCOSE-001',
-      category: 'missing-glucose',
-      priority: 'medium',
-      description: 'No blood glucose recorded for an FDG study.',
-      suggestedAction: 'Measure and document blood glucose before administering the tracer.'
-    });
-  }
-
-  // --- High radiation dose -------------------------------------------
+  // --- Radiation-dose flag -------------------------------------------
   if (ctx.radiationDoseBand === 'high') {
     flags.push({
       flagId: 'F-HIGH-RADIATION-DOSE-001',
       category: 'high-radiation-dose',
-      priority: 'medium',
-      description: 'This request falls in the high relative radiation-dose band.',
-      suggestedAction: 'Confirm the IR(ME)R justification accounts for the dose; consider lower-dose alternatives where clinically equivalent.'
+      priority: 'low',
+      description: 'Requested study carries a high relative radiation dose.',
+      suggestedAction: 'Confirm the IR(ME)R justification documents that the benefit outweighs the dose.'
     });
   }
 
@@ -117,9 +111,9 @@ function detectFlags(data, context) {
   }
   if (!data.justification.irMeRJustification || data.justification.irMeRJustification.trim() === '') {
     flags.push({
-      flagId: 'F-MISSING-JUSTIFICATION-001',
+      flagId: 'F-OTHER-MISSING-JUSTIFICATION-001',
       category: 'other',
-      priority: 'low',
+      priority: 'medium',
       description: 'No IR(ME)R justification statement recorded.',
       suggestedAction: 'Record the IR(ME)R justification supporting the radiation exposure before booking.'
     });

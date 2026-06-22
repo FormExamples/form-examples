@@ -539,7 +539,7 @@ main {
 }
 
 /* ================================================================ *
- *  Mammography request specific styles (project-local, not Lily)
+ *  Pre-op assessment specific styles (project-local, not Lily)
  * ================================================================ */
 
 /* Intro card */
@@ -753,13 +753,17 @@ main {
 /* Cancer-pathway triage tier (Axis B) */
 .tier-routine       { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
 .tier-urgent        { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.tier-two-week-wait { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
+.tier-two-week-wait { background: #ffe4e6; color: #9f1239; border-color: #fda4af; }
 .tier-emergency     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
 .rec-accept         { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
 .rec-query-referrer { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .rec-redirect       { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
 .rec-reject         { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* Two-week-wait eligibility badge */
+.twoww-yes { background: #ffe4e6; color: #9f1239; border-color: #fda4af; }
+.twoww-no  { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
 
 /* Appropriateness score meter */
 .score-meter {

@@ -14,7 +14,7 @@ window.ElectrocardiogramTestRequest =
 /**
  * Build a fresh, fully-blank ECG test request.
  * Strings default to ''; numeric / date fields default to null;
- * boolean red-flag / symptom fields default to false.
+ * boolean symptom / red-flag fields default to false.
  */
 function emptyRequest() {
   return {
@@ -32,7 +32,8 @@ function emptyRequest() {
       firstName: '',
       lastName: '',
       dateOfBirth: '',
-      nhsNumber: ''
+      nhsNumber: '',
+      interpreterRequired: false
     },
     request: {
       ecgType: '',
@@ -57,6 +58,7 @@ function emptyRequest() {
       urgency: '',
       requestedByDate: '',
       setting: '',
+      siteName: '',
       notes: ''
     }
   };
@@ -77,9 +79,32 @@ function ecgTypeLabel(value) {
   return ECG_TYPE_LABELS[value] || value || '';
 }
 
+/** Pretty label for a primary indication. */
+const INDICATION_LABELS = {
+  'chest-pain': 'Chest pain',
+  'palpitations': 'Palpitations',
+  'syncope': 'Syncope',
+  'suspected-arrhythmia': 'Suspected arrhythmia',
+  'suspected-mi-acs': 'Suspected MI / ACS',
+  'pre-operative': 'Pre-operative',
+  'medication-monitoring-qt': 'Medication monitoring (QT)',
+  'hypertension': 'Hypertension',
+  'heart-failure': 'Heart failure',
+  'screening': 'Screening',
+  'follow-up': 'Follow-up',
+  'other': 'Other'
+};
+
+/** Human-readable label for an indication, falling back to the raw value. */
+function indicationLabel(value) {
+  return INDICATION_LABELS[value] || value || '';
+}
+
 Object.assign(window.ElectrocardiogramTestRequest, {
   emptyRequest,
   ecgTypeLabel,
-  ECG_TYPE_LABELS
+  indicationLabel,
+  ECG_TYPE_LABELS,
+  INDICATION_LABELS
 });
 })();

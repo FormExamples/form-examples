@@ -13,7 +13,8 @@ window.PetScanTestRequest = window.PetScanTestRequest || {};
 const NS = window.PetScanTestRequest;
 const {
   scoreAppropriateness,
-  scoreSafety,
+  scorePrepSafety,
+  scoreRadiationDose,
   scoreCompleteness,
   scoreTriage,
   detectFlags
@@ -67,8 +68,10 @@ function calculateGrade(data) {
   if (appr.firedRule) firedRules.push(appr.firedRule);
 
   // Axis B — preparation safety & radiation dose.
-  const safety = scoreSafety(data);
-  for (const r of safety.firedRules) firedRules.push(r);
+  const prep = scorePrepSafety(data);
+  for (const r of prep.firedRules) firedRules.push(r);
+  const dose = scoreRadiationDose(data.request.scanType);
+  if (dose.firedRule) firedRules.push(dose.firedRule);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
@@ -80,20 +83,19 @@ function calculateGrade(data) {
 
   const recommendation = deriveRecommendation(
     appr.band,
-    safety.prepSafetyBand,
+    prep.band,
     completeness.percent
   );
 
   const flags = detectFlags(data, {
-    prepSafetyBand: safety.prepSafetyBand,
-    radiationDoseBand: safety.radiationDoseBand
+    radiationDoseBand: dose.band
   });
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    prepSafetyBand: safety.prepSafetyBand,
-    radiationDoseBand: safety.radiationDoseBand,
+    prepSafetyBand: prep.band,
+    radiationDoseBand: dose.band,
     completenessPercent: completeness.percent,
     triageTier: triage.tier,
     targetTimeframe: triage.targetTimeframe,

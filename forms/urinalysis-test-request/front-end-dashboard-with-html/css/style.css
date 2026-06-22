@@ -316,8 +316,7 @@ main {
  *  Dashboard-specific badges and cells
  * -------------------------------------------------------------- */
 .band-badge,
-.prep-badge,
-.dose-badge,
+.preanalytical-badge,
 .tier-badge {
   display: inline-block;
   padding: 0.125rem 0.5rem;
@@ -333,20 +332,15 @@ main {
 .band-may-be-appropriate      { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .band-usually-not-appropriate { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-/* Preparation / safety band */
-.prep-ok              { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.prep-caution         { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.prep-contraindicated { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-
-/* Radiation-dose band */
-.dose-low      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.dose-moderate { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.dose-high     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+/* Preanalytical specimen-suitability band */
+.preanalytical-ok          { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.preanalytical-caution     { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.preanalytical-reject-risk { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
 /* Triage tier */
-.tier-routine   { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
-.tier-urgent    { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.tier-emergency { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+.tier-routine { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
+.tier-urgent  { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.tier-stat    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
 .numeric-cell {
   font-variant-numeric: tabular-nums;
@@ -374,3 +368,14 @@ main {
   font-weight: 500;
 }
 .flag-empty { color: var(--color-muted); }
+
+.test-chip {
+  display: inline-block;
+  padding: 0.0625rem 0.375rem;
+  background: var(--color-primary-light);
+  color: #1e3a8a;
+  border: 1px solid #93c5fd;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

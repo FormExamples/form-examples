@@ -1,4 +1,4 @@
-/* Pre-operative Assessment by Clinician — clinician dashboard styles.
+/* Electrocardiogram Test Request — vetting dashboard styles.
  * Targets Lily Design System HTML headless class contracts. See
  * forms/AGENTS-front-end-html.md for the class vocabulary.
  */
@@ -316,8 +316,7 @@ main {
  *  Dashboard-specific badges and cells
  * -------------------------------------------------------------- */
 .band-badge,
-.prep-badge,
-.dose-badge,
+.priority-badge,
 .tier-badge {
   display: inline-block;
   padding: 0.125rem 0.5rem;
@@ -333,15 +332,10 @@ main {
 .band-may-be-appropriate      { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .band-usually-not-appropriate { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-/* Preparation / safety band */
-.prep-ok              { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.prep-caution         { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.prep-contraindicated { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-
-/* Radiation-dose band */
-.dose-low      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.dose-moderate { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.dose-high     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+/* Clinical priority band */
+.priority-low      { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
+.priority-moderate { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.priority-high     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
 /* Triage tier */
 .tier-routine   { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }

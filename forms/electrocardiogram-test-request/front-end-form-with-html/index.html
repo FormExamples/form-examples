@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Electrocardiogram Test Request — clinician referral</title>
-  <meta name="description" content="Clinician-driven electrocardiogram (ECG) test request with four-axis grading: appropriateness (AHA/ACC 1-9), urgency triage tier, request completeness, and clinical priority, plus safety flags.">
+  <meta name="description" content="Clinician-driven ECG test request with four-axis grading: appropriateness (AHA/ACC), urgency triage (NICE CG95 / ACS), request completeness, and clinical priority, plus safety flags.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Electrocardiogram Test Request</h1>
-      <p class="subtitle">ECG test request with four-axis grading: appropriateness, urgency triage, completeness, and clinical priority.</p>
+      <p class="subtitle">ECG test request with four-axis grading: appropriateness, urgency triage, request completeness, and clinical priority.</p>
 
       <progress
         id="progress"
@@ -36,18 +36,18 @@
   <main>
     <div class="intro">
       <p>
-        Clinician referral wizard for an electrocardiogram (ECG) examination.
-        Record the requesting clinician, the patient, the requested ECG type,
-        the clinical indication and specific question, relevant cardiac history
-        and medications, symptoms and red flags, and the requested urgency. The
-        engine computes a four-axis grade (appropriateness, urgency triage,
-        request completeness, and clinical priority) plus a set of safety
-        flags.
+        Clinician referral wizard for a cardiac electrocardiogram (ECG)
+        examination. Record the requested ECG type, the clinical indication and
+        specific question, relevant cardiac history and medications, symptoms
+        and red flags, and the requested urgency. The engine computes a
+        four-axis grade (appropriateness, urgency triage, request completeness,
+        and clinical priority) plus a set of safety flags.
       </p>
       <p>
-        This is clinical decision support for the cardiac physiology vetting
+        This is clinical decision support for the cardiac-physiology vetting
         desk. The final triage and booking decision remains the responsibility
-        of the vetting cardiac physiologist or clinician.
+        of the vetting physiologist or cardiologist. Suspected ACS or active
+        chest pain implies an emergency, same-hour 12-lead ECG.
       </p>
     </div>
 
@@ -106,11 +106,11 @@
 
     <footer class="page-footer">
       <p>
-        Grading is aligned with AHA/ACC ECG-use guidance, NICE CG95 (recent-onset
-        chest pain) and NICE NG185 (acute coronary syndromes). Suspected ACS or
-        active chest pain implies an emergency, same-hour 12-lead ECG. This
-        screening tool is for clinical decision support; the final triage and
-        booking decision remains the responsibility of the vetting clinician.
+        Grading is aligned with AHA/ACC ECG-use guidance, NICE CG95
+        (recent-onset chest pain), and the NICE NG185 acute coronary syndrome
+        pathway. This screening tool is for clinical decision support; the final
+        triage and booking decision remains the responsibility of the vetting
+        clinician.
       </p>
     </footer>
   </main>

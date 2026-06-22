@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Urinalysis Test Request — clinician order</title>
-  <meta name="description" content="Clinician-driven urine pathology test request with four-axis grading: appropriateness, pre-analytical specimen suitability, request completeness, and triage priority, plus safety flags.">
+  <meta name="description" content="Clinician-driven urine pathology test request with four-axis grading: appropriateness, preanalytical specimen suitability, request completeness, and triage priority, plus safety flags.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Urinalysis Test Request</h1>
-      <p class="subtitle">Urine pathology test order with four-axis grading: appropriateness, pre-analytical specimen suitability, completeness, and triage.</p>
+      <p class="subtitle">Urine pathology test order with four-axis grading: appropriateness, preanalytical specimen suitability, completeness, and triage.</p>
 
       <progress
         id="progress"
@@ -22,7 +22,7 @@
         value="0"
         aria-label="Form completion"
       ></progress>
-      <p id="progress-text" class="subtitle" aria-live="polite">0 of 0 fields answered (0%)</p>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
 
       <ol
         id="step-list"
@@ -36,18 +36,16 @@
   <main>
     <div class="intro">
       <p>
-        Clinician order wizard for a urine pathology investigation. Record the
-        requesting clinician, the patient, the requested test panel (dipstick,
-        MC&amp;S, ACR, PCR, pregnancy test, drug screen, cytology, 24-hour
-        collection), the clinical indication and details, symptoms and red
-        flags, the specimen type and collection timing, and the requested
-        urgency. The engine computes a four-axis grade (appropriateness,
-        pre-analytical specimen suitability, request completeness, and triage
-        priority) plus a set of safety flags.
+        Clinician order wizard for one or more urine pathology investigations.
+        Record the requesting clinician, the patient, the requested test panel,
+        the clinical indication and details, symptoms and red flags, the
+        specimen, and the requested urgency. The engine computes a four-axis
+        grade (appropriateness, preanalytical specimen suitability, request
+        completeness, and triage priority) plus a set of safety flags.
       </p>
       <p>
-        This is clinical decision support for the pathology / laboratory triage
-        and vetting desk. The final acceptance and triage decision remains the
+        This is clinical decision support for the pathology / laboratory
+        triage desk. The final acceptance and triage decision remains the
         responsibility of the vetting laboratory clinician.
       </p>
     </div>
@@ -108,10 +106,11 @@
     <footer class="page-footer">
       <p>
         Grading is aligned with NICE NG109 (lower UTI), NICE NG12 (suspected
-        cancer / visible haematuria 2-week-wait), UK SMI B41 (urine
-        investigation), and NICE NG203 (CKD / ACR). This screening tool is for
-        clinical decision support; the final acceptance and triage decision
-        remains the responsibility of the vetting laboratory clinician.
+        cancer / haematuria), NICE NG203 (chronic kidney disease), and UK
+        Standards for Microbiology Investigations (UK SMI) B41 urine
+        investigation guidance. This screening tool is for clinical decision
+        support; the final acceptance and triage decision remains the
+        responsibility of the vetting laboratory clinician.
       </p>
     </footer>
   </main>

@@ -1,15 +1,12 @@
 // Four-axis rule catalogue for the Urinalysis Test Request engine.
 //
-// Derived from sql-migrations 05/06: (A) appropriateness 1-9 + band by
-// indication x requested-test match (NICE NG109 UTI, NICE NG12 haematuria,
-// UK SMI B41); (B) pre-analytical specimen suitability ok/caution/reject-risk
-// (UK SMI B41 specimen type / collected / timing / contamination); (C) request
-// completeness over mandatory fields, clinical details + indication weighted
-// highest; (D) triage tier routine/urgent/stat with red-flag auto-escalation
-// (visible haematuria; fever + loin pain -> suspected pyelonephritis). Rule IDs
-// are stable and identical across every front-end and the back-end
-// (R-APPROP-*, R-PREANALYTICAL-*, R-COMPLETE-*, R-TRIAGE-*). Pure data +
-// helpers; the grader composes them.
+// Derived from index.md and the SQL grade tables: (A) appropriateness 1-9 +
+// band by indication x requested-test match (NICE NG109, NICE NG12, UK SMI
+// B41); (B) preanalytical specimen suitability ok/caution/reject-risk;
+// (C) request completeness over mandatory fields; (D) triage tier
+// routine/urgent/stat with red-flag auto-escalation. Rule IDs are stable and
+// identical across every front-end and the back-end (R-APPROP-*, R-PREANALYTICAL-*,
+// R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.UrinalysisTestRequest`.
 
@@ -17,67 +14,56 @@
 'use strict';
 window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
 const NS = window.UrinalysisTestRequest;
-const { countSelectedTests, selectedTestFields } = NS;
 
 // ----------------------------------------------------------------------
-// Axis A — Appropriateness (indication-to-test match, 1-9 ordinal)
+// Axis A — Appropriateness (1-9 ordinal, indication-to-test match)
 // ----------------------------------------------------------------------
 //
-// Each indication has an ideal test (or set of tests) and a set of plausible
-// tests. When at least one requested test is the recommended test for the
-// indication, the request scores high (7-9, usually-appropriate). When only
-// plausible tests are requested it scores in the 4-6 may-be-appropriate band;
-// a clearly mismatched panel scores 1-3. A request with no test selected has
-// nothing to order and is treated as usually-not-appropriate.
+// Each indication has a set of ideal tests (first-line, guideline-aligned)
+// and plausible tests (defensible but not first-line). A request is scored on
+// the best-matching selected test. Anything not listed for an indication is a
+// mismatch.
 
-// Map of indication -> { ideal:[testField], plausible:[testField] }.
-// Anything not listed for an indication is treated as a mismatch.
 const INDICATION_TEST_MAP = {
   'suspected-uti':        { ideal: ['dipstick', 'microscopyCultureSensitivity'], plausible: ['pregnancyTest'] },
-  'haematuria':           { ideal: ['microscopyCultureSensitivity', 'cytology'], plausible: ['dipstick', 'proteinCreatinineRatio'] },
+  'haematuria':           { ideal: ['dipstick', 'microscopyCultureSensitivity', 'cytology'], plausible: [] },
   'proteinuria':          { ideal: ['proteinCreatinineRatio', 'albuminCreatinineRatio'], plausible: ['dipstick', 'twentyFourHourCollection'] },
   'diabetes-monitoring':  { ideal: ['albuminCreatinineRatio'], plausible: ['dipstick', 'proteinCreatinineRatio'] },
-  'renal-monitoring':     { ideal: ['albuminCreatinineRatio', 'proteinCreatinineRatio'], plausible: ['dipstick', 'twentyFourHourCollection'] },
-  'pregnancy-screen':     { ideal: ['pregnancyTest'], plausible: ['dipstick'] },
+  'renal-monitoring':     { ideal: ['albuminCreatinineRatio', 'proteinCreatinineRatio'], plausible: ['dipstick', 'twentyFourHourCollection', 'microscopyCultureSensitivity'] },
+  'pregnancy-screen':     { ideal: ['pregnancyTest'], plausible: ['dipstick', 'microscopyCultureSensitivity'] },
   'pre-operative':        { ideal: ['dipstick', 'pregnancyTest'], plausible: ['microscopyCultureSensitivity'] },
   'catheter-related':     { ideal: ['microscopyCultureSensitivity'], plausible: ['dipstick'] },
-  'suspected-malignancy': { ideal: ['cytology'], plausible: ['microscopyCultureSensitivity', 'twentyFourHourCollection'] },
+  'suspected-malignancy': { ideal: ['cytology', 'microscopyCultureSensitivity'], plausible: ['dipstick'] },
   'drug-monitoring':      { ideal: ['drugScreen'], plausible: [] },
   'other':                { ideal: [], plausible: [] }
 };
 
+/** List the camelCase keys of the currently-selected tests. */
+function selectedTestFields(data) {
+  const t = data.tests || {};
+  return Object.keys(t).filter((k) => t[k] === true);
+}
+
 /**
- * Score appropriateness (1-9) for an indication x requested-tests pairing and
- * return the fired rule. A request with no test selected scores low. Defaults
- * to a neutral may-be-appropriate when the indication has not yet been chosen.
+ * Score appropriateness (1-9) for the indication x selected-tests pairing and
+ * return the fired rule. Defaults to a neutral may-be-appropriate when the
+ * indication or test panel has not yet been chosen.
  *
  * @returns {{ score:number, band:string, firedRule:object|null }}
  */
-function scoreAppropriateness(indication, tests) {
-  const selected = selectedTestFields(tests);
+function scoreAppropriateness(data) {
+  const indication = data.context.primaryIndication;
+  const selected = selectedTestFields(data);
 
-  if (selected.length === 0) {
-    return {
-      score: 1,
-      band: 'usually-not-appropriate',
-      firedRule: {
-        ruleId: 'R-APPROP-NO-TEST',
-        axis: 'appropriateness',
-        category: 'no-test-selected',
-        description: 'No test selected on the panel — there is nothing to order.'
-      }
-    };
-  }
-
-  if (!indication) {
+  if (!indication || selected.length === 0) {
     return {
       score: 5,
       band: 'may-be-appropriate',
       firedRule: {
         ruleId: 'R-APPROP-UNSPECIFIED',
         axis: 'appropriateness',
-        category: 'unspecified',
-        description: 'Primary indication not yet specified — provisional appropriateness.'
+        category: indication || 'unspecified',
+        description: 'Indication or requested tests not yet specified — provisional appropriateness.'
       }
     };
   }
@@ -85,10 +71,10 @@ function scoreAppropriateness(indication, tests) {
   const map = INDICATION_TEST_MAP[indication] || { ideal: [], plausible: [] };
   const indicationKey = indication.toUpperCase().replace(/[^A-Z]+/g, '-');
 
-  const hasIdeal = selected.some((t) => map.ideal.includes(t));
-  const hasPlausible = selected.some((t) => map.plausible.includes(t));
+  const matchesIdeal = selected.some((f) => map.ideal.includes(f));
+  const matchesPlausible = selected.some((f) => map.plausible.includes(f));
 
-  if (hasIdeal) {
+  if (matchesIdeal) {
     return {
       score: 8,
       band: 'usually-appropriate',
@@ -96,11 +82,11 @@ function scoreAppropriateness(indication, tests) {
         ruleId: `R-APPROP-${indicationKey}-IDEAL`,
         axis: 'appropriateness',
         category: indication,
-        description: `Requested panel includes the recommended test for "${indication}".`
+        description: `A first-line test was requested for "${indication}".`
       }
     };
   }
-  if (hasPlausible) {
+  if (matchesPlausible) {
     return {
       score: 5,
       band: 'may-be-appropriate',
@@ -108,7 +94,7 @@ function scoreAppropriateness(indication, tests) {
         ruleId: `R-APPROP-${indicationKey}-PLAUSIBLE`,
         axis: 'appropriateness',
         category: indication,
-        description: `Requested panel may be appropriate for "${indication}" but omits the first-line test.`
+        description: `A requested test may be appropriate for "${indication}" but is not the first-line investigation.`
       }
     };
   }
@@ -131,7 +117,7 @@ function scoreAppropriateness(indication, tests) {
       ruleId: `R-APPROP-${indicationKey}-MISMATCH`,
       axis: 'appropriateness',
       category: indication,
-      description: `Requested panel is not usually appropriate for "${indication}"; query the referrer.`
+      description: `The requested tests are not usually appropriate for "${indication}"; query the referrer.`
     }
   };
 }
@@ -144,124 +130,113 @@ function appropriatenessBand(score) {
 }
 
 // ----------------------------------------------------------------------
-// Axis B — Pre-analytical specimen suitability (UK SMI B41)
+// Axis B — Preanalytical specimen suitability (UK SMI B41)
 // ----------------------------------------------------------------------
 //
-// Specimen type / collected / timing / contamination risk drive the band:
-//   ok          — specimen collected, suitable type, no contamination concern
-//   caution     — collected but a handling / type caveat applies
-//   reject-risk — specimen not collected, or a type / pathway mismatch that
-//                 risks rejection at the bench
-// The advisory note carries the specific UK SMI B41 handling guidance.
+// Bands: ok / caution / reject-risk. Driven by whether a specimen has been
+// collected, the specimen type, contamination / asymptomatic-bacteriuria
+// risk (catheter), and antibiotic suppression of culture growth.
 
 /**
- * Evaluate pre-analytical specimen suitability.
+ * Evaluate the preanalytical specimen-suitability band, an advisory note, and
+ * the fired rules.
  *
- * @returns {{ band:string, note:string, firedRule:object }}
+ * @returns {{ band:string, note:string, firedRules:object[] }}
  */
 function scorePreanalytical(data) {
+  const firedRules = [];
   const sp = data.specimen;
-  const ctx = data.context;
-  const tests = data.tests;
+  const cultureRequested = data.tests.microscopyCultureSensitivity === true ||
+    data.tests.cytology === true;
 
-  // Not collected yet -> reject-risk; request cannot proceed at the bench.
+  let band = 'ok';
+  let note = 'Specimen handling appears acceptable.';
+
+  const push = (band2, note2, rule) => {
+    band = worseBand(band, band2);
+    if (note2) note = note2;
+    if (rule) firedRules.push(rule);
+  };
+
   if (sp.specimenCollected === 'no') {
-    return {
-      band: 'reject-risk',
-      note: 'Specimen not yet collected. Collect an appropriate specimen; if >4 h to laboratory, refrigerate or use a boric-acid container (UK SMI B41).',
-      firedRule: {
-        ruleId: 'R-PREANALYTICAL-NOT-COLLECTED',
-        axis: 'preanalytical',
-        category: 'not-collected',
-        description: 'Specimen not yet collected — pre-analytical suitability cannot be assured.'
-      }
-    };
+    push('reject-risk', 'Specimen not yet collected; the request cannot proceed until a sample is provided.', {
+      ruleId: 'R-PREANALYTICAL-NOT-COLLECTED',
+      axis: 'preanalytical',
+      category: 'specimen-not-collected',
+      description: 'Specimen has not been collected; cannot be processed.'
+    });
   }
 
-  if (sp.specimenCollected !== 'yes') {
-    return {
-      band: '',
-      note: 'Specimen collection status not yet recorded.',
-      firedRule: {
-        ruleId: 'R-PREANALYTICAL-UNKNOWN',
-        axis: 'preanalytical',
-        category: 'unspecified',
-        description: 'Specimen collection status not yet specified — pre-analytical band not assessed.'
-      }
-    };
+  if (cultureRequested && sp.specimenType === 'random') {
+    push('caution', 'A random specimen is sub-optimal for culture; prefer a midstream (MSU) or clean-catch sample.', {
+      ruleId: 'R-PREANALYTICAL-RANDOM-FOR-CULTURE',
+      axis: 'preanalytical',
+      category: 'contamination-risk',
+      description: 'Random specimen requested for culture; contamination / contamination-risk per UK SMI B41.'
+    });
   }
 
-  // Collected, but catheter / culture pathway caveat (asymptomatic bacteriuria).
-  if (
-    sp.specimenType === 'catheter' &&
-    tests.microscopyCultureSensitivity === true
-  ) {
-    return {
-      band: 'caution',
-      note: 'Catheter specimen (CSU) for culture — interpret with caution; do not culture asymptomatic catheterised patients (UK SMI B41).',
-      firedRule: {
-        ruleId: 'R-PREANALYTICAL-CSU-CULTURE',
-        axis: 'preanalytical',
-        category: 'specimen-type',
-        description: 'Catheter specimen requested for culture; asymptomatic bacteriuria caveats apply.'
-      }
-    };
+  if (data.context.catheterised === true && data.tests.microscopyCultureSensitivity === true) {
+    push('caution', 'Catheter specimen (CSU): interpret culture with caution; asymptomatic bacteriuria is common and not usually treated.', {
+      ruleId: 'R-PREANALYTICAL-CATHETER',
+      axis: 'preanalytical',
+      category: 'catheter',
+      description: 'Catheterised patient with culture requested; asymptomatic bacteriuria caveat.'
+    });
   }
 
-  // Collected on antibiotics may suppress culture growth.
-  if (ctx.currentAntibiotics === true && tests.microscopyCultureSensitivity === true) {
-    return {
-      band: 'caution',
-      note: 'Patient on antibiotics; culture growth may be suppressed. Note antibiotic on the request (UK SMI B41).',
-      firedRule: {
-        ruleId: 'R-PREANALYTICAL-ON-ANTIBIOTICS',
-        axis: 'preanalytical',
-        category: 'modifier',
-        description: 'Specimen for culture taken while on antibiotics; growth may be suppressed.'
-      }
-    };
+  if (data.context.currentAntibiotics === true && data.tests.microscopyCultureSensitivity === true) {
+    push('caution', 'Current antibiotics may suppress culture growth; note antibiotic on the request and consider timing.', {
+      ruleId: 'R-PREANALYTICAL-ON-ANTIBIOTICS',
+      axis: 'preanalytical',
+      category: 'antibiotics',
+      description: 'Culture requested while on antibiotics; growth may be suppressed.'
+    });
   }
 
-  // Random specimen for an ACR is sub-optimal (early-morning preferred).
-  if (sp.specimenType === 'random' && tests.albuminCreatinineRatio === true) {
-    return {
-      band: 'caution',
-      note: 'Random specimen for ACR; an early-morning specimen is preferred for albuminuria assessment (NICE NG203).',
-      firedRule: {
-        ruleId: 'R-PREANALYTICAL-ACR-TIMING',
-        axis: 'preanalytical',
-        category: 'timing',
-        description: 'ACR requested on a random specimen; early-morning specimen preferred.'
-      }
-    };
+  if (data.tests.twentyFourHourCollection === true) {
+    push('caution', '24-hour collection: ensure correct container, complete collection, and prompt delivery — preanalytical handling is critical.', {
+      ruleId: 'R-PREANALYTICAL-24H',
+      axis: 'preanalytical',
+      category: 'handling',
+      description: '24-hour collection requested; handling and completeness are critical.'
+    });
   }
 
-  return {
-    band: 'ok',
-    note: 'Specimen collected and suitable. Transport within 4 h or refrigerate / use boric acid up to 48 h (UK SMI B41).',
-    firedRule: {
+  if (firedRules.length === 0) {
+    firedRules.push({
       ruleId: 'R-PREANALYTICAL-OK',
       axis: 'preanalytical',
-      category: 'suitable',
-      description: 'Specimen collected and pre-analytically suitable.'
-    }
-  };
+      category: 'specimen',
+      description: 'No preanalytical concerns detected for the requested tests.'
+    });
+  }
+
+  return { band, note, firedRules };
+}
+
+const PREANALYTICAL_ORDER = ['ok', 'caution', 'reject-risk'];
+
+/** Return whichever of two preanalytical bands is worse (more severe). */
+function worseBand(a, b) {
+  const ia = PREANALYTICAL_ORDER.indexOf(a);
+  const ib = PREANALYTICAL_ORDER.indexOf(b);
+  return ib > ia ? b : a;
 }
 
 // ----------------------------------------------------------------------
 // Axis C — Request completeness (mandatory-field checklist)
 // ----------------------------------------------------------------------
 //
-// Each tracked field carries a weight. Clinical details and indication are
+// Each tracked field carries a weight. Indication and clinical details are
 // weighted highest because they drive every other axis. Completeness is the
 // percentage of weighted points present.
 
 const COMPLETENESS_FIELDS = [
   { weight: 3, present: (d) => !!d.context.primaryIndication, ruleId: 'R-COMPLETE-INDICATION', label: 'primary indication' },
   { weight: 3, present: (d) => !!d.context.clinicalDetails && d.context.clinicalDetails.trim() !== '', ruleId: 'R-COMPLETE-CLINICAL-DETAILS', label: 'clinical details' },
-  { weight: 2, present: (d) => countSelectedTests(d.tests) > 0, ruleId: 'R-COMPLETE-TESTS', label: 'requested tests' },
+  { weight: 2, present: (d) => selectedTestFields(d).length > 0, ruleId: 'R-COMPLETE-TESTS', label: 'requested tests' },
   { weight: 2, present: (d) => !!d.specimen.specimenType, ruleId: 'R-COMPLETE-SPECIMEN-TYPE', label: 'specimen type' },
-  { weight: 1, present: (d) => !!d.specimen.specimenCollected, ruleId: 'R-COMPLETE-SPECIMEN-COLLECTED', label: 'specimen collected status' },
   { weight: 1, present: (d) => !!d.patient.firstName && !!d.patient.lastName, ruleId: 'R-COMPLETE-PATIENT-NAME', label: 'patient name' },
   { weight: 1, present: (d) => !!d.patient.nhsNumber, ruleId: 'R-COMPLETE-NHS-NUMBER', label: 'NHS number' },
   { weight: 1, present: (d) => !!d.patient.dateOfBirth, ruleId: 'R-COMPLETE-DOB', label: 'date of birth' },
@@ -306,9 +281,9 @@ function scoreCompleteness(data) {
 const TRIAGE_ORDER = ['routine', 'urgent', 'stat'];
 
 const TARGET_TIMEFRAMES = {
-  'routine': 'Within standard laboratory turnaround',
-  'urgent': 'Same day / within 24 hours',
-  'stat': 'Immediate / on-call laboratory'
+  'routine': 'Within 5-7 working days',
+  'urgent': 'Within 24-48 hours',
+  'stat': 'Same day / immediate'
 };
 
 /** Return whichever of two triage tiers is more severe. */
@@ -323,19 +298,19 @@ const TRIAGE_RULES = [
   {
     ruleId: 'R-TRIAGE-PYELONEPHRITIS',
     tier: 'stat',
-    fires: (d) => d.symptoms.fever === true && d.symptoms.loinPain === true,
-    description: 'Fever with loin pain — possible pyelonephritis / urosepsis; expedite.'
+    fires: (d) => d.symptoms.symptomFever === true && d.symptoms.symptomLoinPain === true,
+    description: 'Fever with loin pain — possible pyelonephritis / urosepsis; immediate assessment.'
   },
   {
     ruleId: 'R-TRIAGE-VISIBLE-HAEMATURIA',
     tier: 'urgent',
-    fires: (d) => d.symptoms.visibleHaematuria === true,
-    description: 'Visible haematuria — expedited assessment and NICE NG12 consideration.'
+    fires: (d) => d.symptoms.symptomVisibleHaematuria === true,
+    description: 'Visible haematuria — expedite culture / cytology and assessment.'
   },
   {
     ruleId: 'R-TRIAGE-FEVER',
     tier: 'urgent',
-    fires: (d) => d.symptoms.fever === true,
+    fires: (d) => d.symptoms.symptomFever === true,
     description: 'Fever / systemic symptoms — expedited assessment.'
   }
 ];
@@ -384,9 +359,12 @@ Object.assign(NS, {
   scorePreanalytical,
   scoreCompleteness,
   scoreTriage,
+  selectedTestFields,
   maxTier,
+  worseBand,
   TRIAGE_ORDER,
   TARGET_TIMEFRAMES,
+  PREANALYTICAL_ORDER,
   INDICATION_TEST_MAP
 });
 })();

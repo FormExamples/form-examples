@@ -13,44 +13,48 @@
 window.ElectrocardiogramTestRequest =
   window.ElectrocardiogramTestRequest || {};
 const NS = window.ElectrocardiogramTestRequest;
-const { activeChestPain } = NS;
 
 /**
  * Detect safety flags for an ECG test request.
  *
  * @param {object} data - the request data model
- * @param {object} [context] - optional engine context (unused; for parity)
  * @returns {object[]} safety flags
  */
-function detectFlags(data, context) {
+function detectFlags(data) {
   const flags = [];
 
-  // --- Red-flag symptom categories -----------------------------------
-  if (data.symptoms.suspectedAcs === true) {
+  // --- Red-flag clinical categories ----------------------------------
+  if (
+    data.symptoms.suspectedAcs === true ||
+    data.request.primaryIndication === 'suspected-mi-acs'
+  ) {
     flags.push({
       flagId: 'F-SUSPECTED-ACS-001',
       category: 'suspected-acs',
       priority: 'high',
       description: 'Acute coronary syndrome is suspected.',
-      suggestedAction: 'Arrange a same-hour emergency 12-lead ECG and senior review; do not delay for routine booking.'
+      suggestedAction: 'Arrange same-hour emergency 12-lead ECG and senior review; follow the ACS pathway (NICE NG185).'
     });
   }
-  if (activeChestPain(data)) {
+  if (
+    data.symptoms.symptomChestPain === true &&
+    data.symptoms.currentlySymptomatic === true
+  ) {
     flags.push({
       flagId: 'F-ACTIVE-CHEST-PAIN-001',
       category: 'active-chest-pain',
       priority: 'high',
       description: 'Patient has active chest pain at the time of request.',
-      suggestedAction: 'Same-hour 12-lead ECG; assess for ACS per NICE CG95 / NG185 and escalate if abnormal.'
+      suggestedAction: 'Do not delay for routine booking; perform an emergency same-hour 12-lead ECG (NICE CG95).'
     });
   }
-  if (data.symptoms.symptomSyncope === true || data.request.primaryIndication === 'syncope') {
+  if (data.symptoms.symptomSyncope === true) {
     flags.push({
       flagId: 'F-SYNCOPE-RED-FLAG-001',
       category: 'syncope-red-flag',
       priority: 'high',
       description: 'Syncope or collapse reported.',
-      suggestedAction: 'Urgent ECG to exclude an arrhythmic cause; consider ambulatory or event monitoring if recurrent.'
+      suggestedAction: 'Urgent 12-lead ECG to exclude an arrhythmic / structural cause; consider ambulatory monitoring.'
     });
   }
   if (data.symptoms.knownArrhythmia === 'vt') {
@@ -59,7 +63,7 @@ function detectFlags(data, context) {
       category: 'suspected-vt',
       priority: 'high',
       description: 'Known or suspected ventricular tachycardia.',
-      suggestedAction: 'Emergency assessment; same-hour 12-lead ECG and continuous cardiac monitoring.'
+      suggestedAction: 'Urgent cardiology review; capture a 12-lead ECG during symptoms and consider continuous monitoring.'
     });
   }
 

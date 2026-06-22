@@ -4,7 +4,7 @@
 // Builds the canonical empty `MammographyRequest` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention (see examples/assessment.json). Wrapped in an IIFE; published via
+// convention. Wrapped in an IIFE; published via
 // `window.MammographyTestRequest`.
 
 (function () {
@@ -34,9 +34,7 @@ function emptyRequest() {
       lastName: '',
       dateOfBirth: '',
       nhsNumber: '',
-      ageYears: null,
-      bodyMassIndex: null,
-      interpreterRequired: false
+      bodyMassIndex: null
     },
     request: {
       examType: '',
@@ -49,7 +47,6 @@ function emptyRequest() {
       symptomLump: false,
       symptomPain: false,
       symptomNippleDischarge: false,
-      bloodyNippleDischarge: false,
       symptomSkinChange: false,
       symptomNippleInversion: false
     },
@@ -65,6 +62,7 @@ function emptyRequest() {
       urgency: '',
       requestedByDate: '',
       setting: '',
+      siteName: '',
       notes: ''
     }
   };
@@ -84,30 +82,9 @@ function examTypeLabel(value) {
   return EXAM_TYPE_LABELS[value] || value || '';
 }
 
-/** Pretty label for a primary indication. */
-const INDICATION_LABELS = {
-  'routine-screening': 'Routine screening',
-  'breast-lump': 'Breast lump',
-  'breast-pain': 'Breast pain',
-  'nipple-discharge': 'Nipple discharge',
-  'skin-change': 'Skin change',
-  'family-history': 'Family history',
-  'follow-up-known-cancer': 'Follow-up known cancer',
-  'post-treatment-surveillance': 'Post-treatment surveillance',
-  'recall-from-screening': 'Recall from screening',
-  'other': 'Other'
-};
-
-/** Human-readable label for an indication, falling back to the raw value. */
-function indicationLabel(value) {
-  return INDICATION_LABELS[value] || value || '';
-}
-
 Object.assign(window.MammographyTestRequest, {
   emptyRequest,
   examTypeLabel,
-  indicationLabel,
-  EXAM_TYPE_LABELS,
-  INDICATION_LABELS
+  EXAM_TYPE_LABELS
 });
 })();

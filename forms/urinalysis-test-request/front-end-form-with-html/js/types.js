@@ -12,7 +12,7 @@ window.UrinalysisTestRequest = window.UrinalysisTestRequest || {};
 
 /**
  * Build a fresh, fully-blank urinalysis test request.
- * Strings default to ''; numeric / date / time fields default to null;
+ * Strings default to ''; numeric / date fields default to null;
  * boolean test / symptom / modifier fields default to false.
  */
 function emptyRequest() {
@@ -33,7 +33,7 @@ function emptyRequest() {
       dateOfBirth: '',
       nhsNumber: ''
     },
-    // Requested urine test panel — each test is a boolean order line.
+    // Requested test panel — each test is a boolean order line.
     tests: {
       dipstick: false,
       microscopyCultureSensitivity: false,
@@ -52,11 +52,11 @@ function emptyRequest() {
       currentAntibiotics: false
     },
     symptoms: {
-      dysuria: false,
-      frequency: false,
-      visibleHaematuria: false,
-      loinPain: false,
-      fever: false
+      symptomDysuria: false,
+      symptomFrequency: false,
+      symptomVisibleHaematuria: false,
+      symptomLoinPain: false,
+      symptomFever: false
     },
     specimen: {
       specimenType: '',
@@ -71,50 +71,44 @@ function emptyRequest() {
   };
 }
 
-/** Ordered list of the eight requestable urine tests (field + label). */
-const TEST_DEFINITIONS = [
+/**
+ * Catalogue of requested tests. `field` is the camelCase key on `tests`;
+ * `critical` tests (cytology, 24-hour collection) carry a preanalytical /
+ * handling caveat surfaced in the UI.
+ */
+const TESTS = [
   { field: 'dipstick', label: 'Dipstick (reagent strip)' },
   { field: 'microscopyCultureSensitivity', label: 'Microscopy, culture & sensitivity (MC&S)' },
   { field: 'albuminCreatinineRatio', label: 'Albumin-creatinine ratio (ACR)' },
   { field: 'proteinCreatinineRatio', label: 'Protein-creatinine ratio (PCR)' },
   { field: 'pregnancyTest', label: 'Pregnancy test (hCG)' },
   { field: 'drugScreen', label: 'Drug screen / toxicology' },
-  { field: 'cytology', label: 'Cytology' },
-  { field: 'twentyFourHourCollection', label: '24-hour collection' }
+  { field: 'cytology', label: 'Cytology', tag: 'malignancy' },
+  { field: 'twentyFourHourCollection', label: '24-hour collection', tag: 'handling' }
 ];
 
-/** Pretty label for a requested test field. */
-const TEST_LABELS = TEST_DEFINITIONS.reduce((acc, t) => {
-  acc[t.field] = t.label;
-  return acc;
-}, {});
-
-/** Count the requested tests that are selected (true). */
+/** Count how many tests are selected in the panel. */
 function countSelectedTests(tests) {
   if (!tests) return 0;
-  return TEST_DEFINITIONS.reduce(
-    (n, t) => n + (tests[t.field] === true ? 1 : 0),
-    0
-  );
+  return TESTS.reduce((n, t) => n + (tests[t.field] === true ? 1 : 0), 0);
 }
 
-/** Field names of the tests currently selected, in canonical order. */
-function selectedTestFields(tests) {
-  if (!tests) return [];
-  return TEST_DEFINITIONS.filter((t) => tests[t.field] === true).map((t) => t.field);
-}
+/** Pretty label for a test field. */
+const TEST_LABELS = TESTS.reduce((m, t) => {
+  m[t.field] = t.label;
+  return m;
+}, {});
 
-/** Human-readable label for a requested test field, falling back to raw. */
+/** Human-readable label for a test field, falling back to the raw value. */
 function testLabel(field) {
   return TEST_LABELS[field] || field || '';
 }
 
 Object.assign(window.UrinalysisTestRequest, {
   emptyRequest,
-  TEST_DEFINITIONS,
+  TESTS,
   TEST_LABELS,
   countSelectedTests,
-  selectedTestFields,
   testLabel
 });
 })();

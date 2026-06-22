@@ -278,6 +278,7 @@ main {
 .number-input,
 .date-input,
 .time-input,
+.datetime-input,
 .tel-input,
 .url-input,
 .search-input,
@@ -539,8 +540,43 @@ main {
 }
 
 /* ================================================================ *
- *  Pre-op assessment specific styles (project-local, not Lily)
+ *  Urinalysis test request specific styles (project-local, not Lily)
  * ================================================================ */
+
+/* Requested-tests checkbox grid (step 3) */
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+@media (min-width: 36rem) {
+  .panel-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 56rem) {
+  .panel-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+.panel-grid > label { justify-content: flex-start; }
+.panel-tag {
+  display: inline-block;
+  margin-left: 0.25rem;
+  padding: 0.0625rem 0.375rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+.panel-tag-malignancy {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+.panel-tag-handling {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
 
 /* Intro card */
 .intro {
@@ -745,18 +781,13 @@ main {
 .band-may-be-appropriate      { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
 .band-usually-not-appropriate { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-.prep-ok              { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.prep-caution         { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.prep-contraindicated { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+.preanalytical-ok          { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.preanalytical-caution     { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.preanalytical-reject-risk { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-.dose-low      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.dose-moderate { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-.dose-high     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-
-.tier-routine   { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
-.tier-soon      { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
-.tier-urgent    { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
-.tier-emergency { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+.tier-routine { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
+.tier-urgent  { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.tier-stat    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
 .rec-accept         { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
 .rec-query-referrer { background: #fef3c7; color: #92400e; border-color: #fcd34d; }

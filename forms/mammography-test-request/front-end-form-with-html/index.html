@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mammography Test Request — clinician referral</title>
-  <meta name="description" content="Clinician-driven breast mammography imaging request with four-axis grading: appropriateness (ACR), cancer-pathway urgency (NICE NG12 two-week-wait), request completeness, and clinical priority, plus safety flags.">
+  <meta name="description" content="Clinician-driven breast mammography imaging request with four-axis grading: appropriateness (ACR), cancer-pathway urgency (NICE NG12), request completeness, and clinical priority, plus safety flags.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -38,16 +38,16 @@
       <p>
         Clinician referral wizard for a breast mammography examination.
         Record the requesting clinician, patient identification, the requested
-        examination, breast symptoms, breast history and risk factors, and the
-        requested urgency. The engine computes a four-axis grade
-        (appropriateness, cancer-pathway urgency, request completeness, and
-        clinical priority) plus a set of safety-critical flags.
+        examination, the clinical indication and specific question, breast
+        symptoms, breast history and risk factors, and the requested urgency.
+        The engine computes a four-axis grade (appropriateness, cancer-pathway
+        urgency, request completeness, and clinical priority) plus a set of
+        safety flags.
       </p>
       <p>
-        This is clinical decision support for the imaging vetting desk. A NICE
-        NG12 suspected-cancer trigger auto-escalates the triage tier to
-        two-week-wait. The final triage and booking decision remains the
-        responsibility of the vetting radiologist or radiographer.
+        This is clinical decision support for the imaging vetting desk. The
+        final triage and booking decision remains the responsibility of the
+        vetting radiologist or radiographer.
       </p>
     </div>
 
@@ -107,11 +107,10 @@
     <footer class="page-footer">
       <p>
         Grading is aligned with the ACR Appropriateness Criteria (breast), the
-        NHS Breast Screening Programme (NHSBSP), NICE NG12 suspected-cancer
-        recognition and referral, and IR(ME)R 2017 justification of medical
-        exposure. This screening tool is for clinical decision support; the
-        final triage and booking decision remains the responsibility of the
-        vetting clinician.
+        NHS Breast Screening Programme (NHSBSP), and NICE NG12 suspected-cancer
+        recognition and referral. This screening tool is for clinical decision
+        support; the final triage and booking decision remains the
+        responsibility of the vetting clinician.
       </p>
     </footer>
   </main>
