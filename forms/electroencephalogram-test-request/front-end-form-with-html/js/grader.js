@@ -1,40 +1,41 @@
-// Four-axis grader for the Biopsy Test Request.
+// Four-axis grader for the Electroencephalogram (EEG) Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
-// across every front-end and the back-end, mirroring SQL migration 05's
-// columns.
+// across every front-end and the back-end.
 //
-// Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
+// Wrapped in an IIFE; published via `window.ElectroencephalogramTestRequest`.
 
 (function () {
 'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-const NS = window.BiopsyTestRequest;
+window.ElectroencephalogramTestRequest =
+  window.ElectroencephalogramTestRequest || {};
+const NS = window.ElectroencephalogramTestRequest;
 const {
   scoreAppropriateness,
-  scoreBleedingRisk,
+  scoreUrgency,
   scoreCompleteness,
-  scoreTriage,
+  scorePriority,
   detectFlags
 } = NS;
 
 /**
- * Derive an overall recommendation for the pathology / imaging vetting desk
- * from the four axes. Least-alarming wins only when nothing escalates.
+ * Derive an overall recommendation for the neurophysiology vetting desk from
+ * the four axes. Least-alarming wins only when nothing escalates.
  */
-function deriveRecommendation(appropriatenessBand, bleedingRiskBand, completenessPercent) {
+function deriveRecommendation(appropriatenessBand, completenessPercent, priorityBand, flags) {
+  const usesEegToExclude = flags.some((f) => f.category === 'eeg-not-to-exclude-epilepsy');
   if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (usesEegToExclude) return 'query-referrer';
   if (completenessPercent < 50) return 'query-referrer';
-  if (bleedingRiskBand === 'high') return 'query-referrer';
   return 'accept';
 }
 
 const RECOMMENDATION_LABELS = {
   'accept': 'Accept and book',
   'query-referrer': 'Query the referrer',
-  'redirect': 'Redirect to a more suitable test',
+  'redirect': 'Redirect to a more suitable study',
   'reject': 'Reject'
 };
 
@@ -45,12 +46,10 @@ const RECOMMENDATION_LABELS = {
  * @returns {{
  *   appropriatenessScore:number,
  *   appropriatenessBand:string,
- *   bleedingRiskBand:string,
- *   anticoagulantAction:string,
- *   completenessPercent:number,
  *   triageTier:string,
  *   targetTimeframe:string,
- *   twoWeekWaitEligible:boolean,
+ *   completenessPercent:number,
+ *   priorityBand:string,
  *   recommendation:string,
  *   recommendationLabel:string,
  *   firedRules:object[],
@@ -62,43 +61,39 @@ function calculateGrade(data) {
 
   // Axis A — appropriateness.
   const appr = scoreAppropriateness(
-    data.indication.primaryIndication,
-    data.procedure.biopsySite
+    data.request.primaryIndication,
+    data.request.eegType
   );
   if (appr.firedRule) firedRules.push(appr.firedRule);
 
-  // Axis B — periprocedural bleeding risk.
-  const bleeding = scoreBleedingRisk(data);
-  for (const r of bleeding.firedRules) firedRules.push(r);
+  // Axis B — urgency.
+  const urgency = scoreUrgency(data);
+  for (const r of urgency.firedRules) firedRules.push(r);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
   for (const m of completeness.missing) firedRules.push(m);
 
-  // Axis D — urgency / cancer-pathway triage.
-  const triage = scoreTriage(data);
-  for (const r of triage.firedRules) firedRules.push(r);
+  // Axis D — clinical priority.
+  const priority = scorePriority(data);
+  for (const r of priority.firedRules) firedRules.push(r);
+
+  const flags = detectFlags(data, {});
 
   const recommendation = deriveRecommendation(
     appr.band,
-    bleeding.band,
-    completeness.percent
+    completeness.percent,
+    priority.band,
+    flags
   );
-
-  const flags = detectFlags(data, {
-    bleedingRiskBand: bleeding.band,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible
-  });
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    bleedingRiskBand: bleeding.band,
-    anticoagulantAction: bleeding.anticoagulantAction,
+    triageTier: urgency.tier,
+    targetTimeframe: urgency.targetTimeframe,
     completenessPercent: completeness.percent,
-    triageTier: triage.tier,
-    targetTimeframe: triage.targetTimeframe,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible,
+    priorityBand: priority.band,
     recommendation,
     recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
     firedRules,

@@ -3,8 +3,7 @@
 // Builds the canonical empty `BiopsyRequest` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention (examples/assessment.json). Wrapped in an IIFE; published via
-// `window.BiopsyTestRequest`.
+// convention. Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
 
 (function () {
 'use strict';
@@ -72,7 +71,7 @@ function emptyRequest() {
 }
 
 /** Pretty label for a biopsy site. */
-const SITE_LABELS = {
+const BIOPSY_SITE_LABELS = {
   'skin': 'Skin',
   'breast': 'Breast',
   'lymph-node': 'Lymph node',
@@ -88,11 +87,11 @@ const SITE_LABELS = {
 };
 
 /** Pretty label for a biopsy method. */
-const METHOD_LABELS = {
+const BIOPSY_METHOD_LABELS = {
   'punch': 'Punch',
   'excision': 'Excision',
   'incision': 'Incision',
-  'core-needle': 'Core-needle',
+  'core-needle': 'Core needle',
   'fine-needle-aspiration': 'Fine-needle aspiration',
   'image-guided': 'Image-guided',
   'endoscopic': 'Endoscopic',
@@ -112,27 +111,27 @@ const INDICATION_LABELS = {
 };
 
 /** Human-readable label for a biopsy site, falling back to the raw value. */
-function siteLabel(value) {
-  return SITE_LABELS[value] || value || '';
+function biopsySiteLabel(value) {
+  return BIOPSY_SITE_LABELS[value] || value || '';
 }
 
 /** Human-readable label for a biopsy method, falling back to the raw value. */
-function methodLabel(value) {
-  return METHOD_LABELS[value] || value || '';
+function biopsyMethodLabel(value) {
+  return BIOPSY_METHOD_LABELS[value] || value || '';
 }
 
-/** Human-readable label for an indication, falling back to the raw value. */
+/** Human-readable label for a primary indication, falling back to the raw value. */
 function indicationLabel(value) {
   return INDICATION_LABELS[value] || value || '';
 }
 
 Object.assign(window.BiopsyTestRequest, {
   emptyRequest,
-  siteLabel,
-  methodLabel,
+  biopsySiteLabel,
+  biopsyMethodLabel,
   indicationLabel,
-  SITE_LABELS,
-  METHOD_LABELS,
+  BIOPSY_SITE_LABELS,
+  BIOPSY_METHOD_LABELS,
   INDICATION_LABELS
 });
 })();

@@ -1,40 +1,40 @@
-// Four-axis grader for the Biopsy Test Request.
+// Four-axis grader for the DEXA Bone Density Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
-// across every front-end and the back-end, mirroring SQL migration 05's
-// columns.
+// across every front-end and the back-end.
 //
-// Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
+// Wrapped in an IIFE; published via `window.DexaBoneDensityTestRequest`.
 
 (function () {
 'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-const NS = window.BiopsyTestRequest;
+window.DexaBoneDensityTestRequest =
+  window.DexaBoneDensityTestRequest || {};
+const NS = window.DexaBoneDensityTestRequest;
 const {
   scoreAppropriateness,
-  scoreBleedingRisk,
+  evaluateRadiationSafety,
   scoreCompleteness,
   scoreTriage,
   detectFlags
 } = NS;
 
 /**
- * Derive an overall recommendation for the pathology / imaging vetting desk
- * from the four axes. Least-alarming wins only when nothing escalates.
+ * Derive an overall recommendation for the imaging vetting desk from the four
+ * axes. Least-alarming wins only when nothing escalates.
  */
-function deriveRecommendation(appropriatenessBand, bleedingRiskBand, completenessPercent) {
+function deriveRecommendation(appropriatenessBand, radiationDoseBand, completenessPercent) {
+  if (radiationDoseBand === 'high') return 'redirect';
   if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
   if (completenessPercent < 50) return 'query-referrer';
-  if (bleedingRiskBand === 'high') return 'query-referrer';
   return 'accept';
 }
 
 const RECOMMENDATION_LABELS = {
   'accept': 'Accept and book',
   'query-referrer': 'Query the referrer',
-  'redirect': 'Redirect to a more suitable test',
+  'redirect': 'Redirect / defer',
   'reject': 'Reject'
 };
 
@@ -45,12 +45,11 @@ const RECOMMENDATION_LABELS = {
  * @returns {{
  *   appropriatenessScore:number,
  *   appropriatenessBand:string,
- *   bleedingRiskBand:string,
- *   anticoagulantAction:string,
+ *   radiationDoseBand:string,
+ *   safetyNote:string,
  *   completenessPercent:number,
  *   triageTier:string,
  *   targetTimeframe:string,
- *   twoWeekWaitEligible:boolean,
  *   recommendation:string,
  *   recommendationLabel:string,
  *   firedRules:object[],
@@ -60,45 +59,46 @@ const RECOMMENDATION_LABELS = {
 function calculateGrade(data) {
   const firedRules = [];
 
-  // Axis A — appropriateness.
+  // Axis A — appropriateness (with FRAX adjustment).
   const appr = scoreAppropriateness(
-    data.indication.primaryIndication,
-    data.procedure.biopsySite
+    data.request.primaryIndication,
+    data.request.scanRegion,
+    data.riskFactors.fraxMajorFracturePercent
   );
   if (appr.firedRule) firedRules.push(appr.firedRule);
+  if (appr.fraxRule) firedRules.push(appr.fraxRule);
 
-  // Axis B — periprocedural bleeding risk.
-  const bleeding = scoreBleedingRisk(data);
-  for (const r of bleeding.firedRules) firedRules.push(r);
+  // Axis B — radiation safety.
+  const safety = evaluateRadiationSafety(
+    data.request.scanRegion,
+    data.patient.pregnancyStatus
+  );
+  if (safety.firedRule) firedRules.push(safety.firedRule);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
   for (const m of completeness.missing) firedRules.push(m);
 
-  // Axis D — urgency / cancer-pathway triage.
+  // Axis D — triage.
   const triage = scoreTriage(data);
   for (const r of triage.firedRules) firedRules.push(r);
 
   const recommendation = deriveRecommendation(
     appr.band,
-    bleeding.band,
+    safety.band,
     completeness.percent
   );
 
-  const flags = detectFlags(data, {
-    bleedingRiskBand: bleeding.band,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible
-  });
+  const flags = detectFlags(data, { radiationDoseBand: safety.band });
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    bleedingRiskBand: bleeding.band,
-    anticoagulantAction: bleeding.anticoagulantAction,
+    radiationDoseBand: safety.band,
+    safetyNote: safety.note,
     completenessPercent: completeness.percent,
     triageTier: triage.tier,
     targetTimeframe: triage.targetTimeframe,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible,
     recommendation,
     recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
     firedRules,

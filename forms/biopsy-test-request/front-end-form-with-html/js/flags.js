@@ -14,87 +14,85 @@
 window.BiopsyTestRequest = window.BiopsyTestRequest || {};
 const NS = window.BiopsyTestRequest;
 
-// Thresholds mirror those in rules.js (BSIR / CIRSE).
-const INR_HIGH = 1.5;
-const PLATELET_HIGH = 50;
-const PLATELET_MODERATE = 100;
+function hasValue(v) {
+  return v !== null && v !== undefined && v !== '';
+}
 
 /**
  * Detect safety flags for a biopsy request.
  *
  * @param {object} data - the request data model
- * @param {object} [context] - optional engine context ({ twoWeekWaitEligible, bleedingRiskBand })
+ * @param {object} [context] - optional engine context ({ bleedingRiskBand, twoWeekWaitEligible })
  * @returns {object[]} safety flags
  */
 function detectFlags(data, context) {
   const flags = [];
   const ctx = context || {};
-  const b = data.bleeding;
 
   // --- Suspected-cancer two-week-wait --------------------------------
-  if (ctx.twoWeekWaitEligible === true) {
+  if (
+    ctx.twoWeekWaitEligible === true ||
+    data.indication.primaryIndication === 'suspected-malignancy' ||
+    data.indication.primaryIndication === 'cancer-staging'
+  ) {
     flags.push({
       flagId: 'F-SUSPECTED-CANCER-2WW-001',
       category: 'suspected-cancer-2ww',
       priority: 'high',
-      description: 'Suspected-malignancy / cancer-staging indication — NICE NG12 two-week-wait eligible.',
-      suggestedAction: 'Refer on a suspected-cancer two-week-wait pathway; expedite vetting and booking within 14 days.'
+      description: 'Suspected-malignancy / cancer-staging indication — two-week-wait eligible.',
+      suggestedAction: 'Book on a suspected-cancer two-week-wait pathway; complete within 14 days.'
     });
   }
 
   // --- High bleeding risk on anticoagulant ---------------------------
-  if (b.takingAnticoagulant === true) {
+  if (data.bleeding.takingAnticoagulant === true) {
     flags.push({
       flagId: 'F-HIGH-BLEEDING-RISK-ANTICOAG-001',
       category: 'high-bleeding-risk-anticoag',
       priority: 'high',
-      description: b.anticoagulantAgent
-        ? `Patient on an anticoagulant (${b.anticoagulantAgent}) — high periprocedural bleeding risk.`
-        : 'Patient on an anticoagulant — high periprocedural bleeding risk.',
-      suggestedAction: 'Withhold / bridge per local periprocedural protocol; confirm coagulation before the biopsy.'
+      description: `Patient is taking an anticoagulant${data.bleeding.anticoagulantAgent ? ` (${data.bleeding.anticoagulantAgent})` : ''}.`,
+      suggestedAction: 'Withhold / bridge per BSG / ESGE timing; confirm a periprocedural anticoagulant plan before booking.'
     });
   }
 
-  // --- Coagulopathy --------------------------------------------------
+  // --- Coagulopathy ---------------------------------------------------
   if (
-    b.bleedingDisorder === true ||
-    (b.inr !== null && b.inr !== undefined && b.inr !== '' && Number(b.inr) > INR_HIGH)
+    data.bleeding.bleedingDisorder === true ||
+    (hasValue(data.bleeding.inr) && Number(data.bleeding.inr) >= 1.5)
   ) {
     flags.push({
       flagId: 'F-COAGULOPATHY-001',
       category: 'coagulopathy',
       priority: 'high',
-      description: b.bleedingDisorder === true
+      description: data.bleeding.bleedingDisorder
         ? 'Known bleeding disorder / coagulopathy.'
-        : `INR ${Number(b.inr)} above ${INR_HIGH} — coagulopathy.`,
-      suggestedAction: 'Involve haematology; correct coagulation and arrange factor cover before the procedure.'
+        : `Raised INR (${data.bleeding.inr}).`,
+      suggestedAction: 'Liaise with haematology; correct coagulation (INR < 1.5) before the procedure.'
     });
   }
 
   // --- Thrombocytopenia ----------------------------------------------
-  if (b.plateletCount !== null && b.plateletCount !== undefined && b.plateletCount !== '') {
-    const plt = Number(b.plateletCount);
-    if (!Number.isNaN(plt) && plt < PLATELET_MODERATE) {
-      flags.push({
-        flagId: 'F-THROMBOCYTOPENIA-001',
-        category: 'thrombocytopenia',
-        priority: plt < PLATELET_HIGH ? 'high' : 'medium',
-        description: `Platelet count ${plt} x10^9/L below ${PLATELET_MODERATE} — thrombocytopenia.`,
-        suggestedAction: plt < PLATELET_HIGH
-          ? 'Arrange platelet transfusion cover and confirm a target platelet count before the biopsy.'
-          : 'Confirm the platelet count is acceptable for the planned biopsy method.'
-      });
-    }
+  if (hasValue(data.bleeding.plateletCount) && Number(data.bleeding.plateletCount) < 100) {
+    const severe = Number(data.bleeding.plateletCount) < 50;
+    flags.push({
+      flagId: 'F-THROMBOCYTOPENIA-001',
+      category: 'thrombocytopenia',
+      priority: severe ? 'high' : 'medium',
+      description: `Platelet count ${data.bleeding.plateletCount} ×10⁹/L${severe ? ' (severe)' : ' (borderline)'}.`,
+      suggestedAction: severe
+        ? 'Transfuse platelets to ≥ 50 ×10⁹/L before biopsy.'
+        : 'Confirm a recent platelet count; consider transfusion for higher-risk sites.'
+    });
   }
 
   // --- Immunosuppression ---------------------------------------------
-  if (b.immunosuppressed === true) {
+  if (data.bleeding.immunosuppressed === true) {
     flags.push({
       flagId: 'F-IMMUNOSUPPRESSION-001',
       category: 'immunosuppression',
       priority: 'medium',
       description: 'Patient is immunosuppressed.',
-      suggestedAction: 'Consider infection / wound-healing risk; review prophylaxis and aseptic technique.'
+      suggestedAction: 'Consider periprocedural infection precautions and antibiotic prophylaxis where indicated.'
     });
   }
 

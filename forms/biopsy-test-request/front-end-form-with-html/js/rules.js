@@ -1,12 +1,12 @@
 // Four-axis rule catalogue for the Biopsy Test Request engine.
 //
-// Derived from sql-migrations 05-06: (A) appropriateness 1-9 + band by
-// indication x biopsy-site/method; (B) periprocedural bleeding-risk band
-// low/moderate/high from anticoagulant / antiplatelet use, INR, platelet
+// Derived from index.md and SQL migration 05/06: (A) appropriateness 1-9 + band
+// by indication x biopsy site; (B) periprocedural bleeding-risk band
+// (low/moderate/high) from anticoagulant / antiplatelet use, INR, platelet
 // count, and bleeding disorder, plus a recommended anticoagulant action;
 // (C) request completeness over mandatory fields; (D) urgency / cancer-pathway
-// triage with NICE NG12 two-week-wait eligibility. Rule IDs are stable and
-// identical across every front-end and the back-end (R-APPROP-*, R-BLEED-*,
+// triage with two-week-wait eligibility. Rule IDs are stable and identical
+// across every front-end and the back-end (R-APPROP-*, R-BLEED-*,
 // R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
@@ -20,26 +20,26 @@ const NS = window.BiopsyTestRequest;
 // Axis A — Appropriateness (ACR Appropriateness Criteria 1-9 ordinal)
 // ----------------------------------------------------------------------
 //
-// Each indication has an ideal biopsy-site set (where the indication is a
-// recognised reason to biopsy that tissue) and a plausible set. When the
-// requested site matches the indication well, the request scores high (7-9,
-// usually-appropriate). Plausible-but-suboptimal pairings score 4-6
-// (may-be-appropriate); clearly mismatched pairings score 1-3.
+// Each indication has an ideal biopsy site (or set of sites). When the
+// requested site matches the indication well, the request scores high
+// (7-9, usually-appropriate). Plausible-but-suboptimal pairings score in the
+// 4-6 may-be-appropriate band; clearly mismatched pairings score 1-3.
 
 // Map of indication -> { ideal:[biopsySite], plausible:[biopsySite] }.
+// Anything not listed for an indication is treated as a mismatch.
 const INDICATION_SITE_MAP = {
-  'suspected-malignancy': { ideal: ['skin', 'breast', 'lymph-node', 'prostate', 'lung', 'bone-marrow', 'gi-tract', 'soft-tissue', 'thyroid'], plausible: ['liver', 'kidney'] },
-  'cancer-staging':       { ideal: ['lymph-node', 'breast', 'liver', 'bone-marrow'], plausible: ['lung', 'soft-tissue', 'skin'] },
-  'suspected-infection':  { ideal: ['lung', 'lymph-node'], plausible: ['skin', 'soft-tissue', 'liver', 'bone-marrow'] },
-  'inflammatory-disease': { ideal: ['kidney', 'gi-tract', 'liver'], plausible: ['skin', 'soft-tissue', 'lung'] },
+  'suspected-malignancy':  { ideal: ['skin', 'breast', 'prostate', 'lung', 'gi-tract', 'lymph-node', 'soft-tissue', 'thyroid', 'bone-marrow'], plausible: ['liver', 'kidney'] },
+  'cancer-staging':        { ideal: ['lymph-node', 'breast', 'liver', 'bone-marrow'], plausible: ['lung', 'soft-tissue', 'skin'] },
+  'suspected-infection':   { ideal: ['lung', 'liver'], plausible: ['lymph-node', 'kidney', 'skin', 'bone-marrow'] },
+  'inflammatory-disease':  { ideal: ['kidney', 'gi-tract', 'liver'], plausible: ['skin', 'soft-tissue'] },
   'transplant-monitoring': { ideal: ['kidney', 'liver'], plausible: ['bone-marrow'] },
-  'lymphadenopathy':      { ideal: ['lymph-node'], plausible: ['bone-marrow', 'soft-tissue'] },
-  'characterise-lesion':  { ideal: ['skin', 'liver', 'thyroid', 'soft-tissue', 'bone-marrow'], plausible: ['breast', 'lung', 'kidney', 'lymph-node'] },
-  'other':                { ideal: [], plausible: [] }
+  'lymphadenopathy':       { ideal: ['lymph-node'], plausible: ['bone-marrow', 'soft-tissue'] },
+  'characterise-lesion':   { ideal: ['skin', 'liver', 'thyroid', 'soft-tissue', 'bone-marrow'], plausible: ['breast', 'kidney', 'lung', 'lymph-node'] },
+  'other':                 { ideal: [], plausible: [] }
 };
 
 /**
- * Score appropriateness (1-9) for an indication x biopsy-site pairing and
+ * Score appropriateness (1-9) for an indication x biopsySite pairing and
  * return the fired rule. Defaults to a neutral may-be-appropriate when the
  * indication or site has not yet been chosen.
  *
@@ -70,7 +70,7 @@ function scoreAppropriateness(indication, biopsySite) {
         ruleId: `R-APPROP-${indicationKey}-IDEAL`,
         axis: 'appropriateness',
         category: indication,
-        description: `Biopsy of the ${biopsySite} is a recommended investigation for "${indication}".`
+        description: `A ${biopsySite} biopsy is a recommended target for "${indication}".`
       }
     };
   }
@@ -82,7 +82,7 @@ function scoreAppropriateness(indication, biopsySite) {
         ruleId: `R-APPROP-${indicationKey}-PLAUSIBLE`,
         axis: 'appropriateness',
         category: indication,
-        description: `Biopsy of the ${biopsySite} may be appropriate for "${indication}" but is not the first-line target.`
+        description: `A ${biopsySite} biopsy may be appropriate for "${indication}" but is not first-line.`
       }
     };
   }
@@ -105,7 +105,7 @@ function scoreAppropriateness(indication, biopsySite) {
       ruleId: `R-APPROP-${indicationKey}-MISMATCH`,
       axis: 'appropriateness',
       category: indication,
-      description: `Biopsy of the ${biopsySite} is not usually appropriate for "${indication}"; query the referrer.`
+      description: `A ${biopsySite} biopsy is not usually appropriate for "${indication}"; query the referrer.`
     }
   };
 }
@@ -118,153 +118,134 @@ function appropriatenessBand(score) {
 }
 
 // ----------------------------------------------------------------------
-// Axis B — Periprocedural bleeding risk (BSG / ESGE & BSIR)
+// Axis B — Periprocedural bleeding risk (BSG / ESGE & BSIR stratification)
 // ----------------------------------------------------------------------
 //
-// A diagnostic biopsy is itself a low-bleeding-risk procedure; the band is
-// driven by the patient's antithrombotic state, coagulation, and platelets.
-// Each contributing factor escalates the band; the most-severe wins. The
-// engine also recommends an explicit periprocedural anticoagulant action.
+// A diagnostic biopsy is a low-bleeding-risk procedure at baseline. Active
+// anticoagulation, antiplatelet therapy, a raised INR, thrombocytopenia, or a
+// known bleeding disorder escalate the band. The most-severe escalation wins,
+// and a periprocedural anticoagulant action is recommended.
 
-const BLEED_ORDER = ['low', 'moderate', 'high'];
+const BLEEDING_ORDER = ['low', 'moderate', 'high'];
 
 /** Return whichever of two bleeding-risk bands is more severe. */
 function maxBand(a, b) {
-  const ia = BLEED_ORDER.indexOf(a);
-  const ib = BLEED_ORDER.indexOf(b);
+  const ia = BLEEDING_ORDER.indexOf(a);
+  const ib = BLEEDING_ORDER.indexOf(b);
   return ia >= ib ? a : b;
 }
 
-// Numeric thresholds (BSIR / CIRSE periprocedural coagulation thresholds).
-const INR_HIGH = 1.5;       // INR > 1.5 -> high bleeding risk
-const INR_MODERATE = 1.4;   // INR 1.4-1.5 -> at least moderate
-const PLATELET_HIGH = 50;   // < 50 x10^9/L -> high bleeding risk
-const PLATELET_MODERATE = 100; // 50-100 x10^9/L -> at least moderate
+// Each rule forces at least the given band when it fires.
+const BLEEDING_RULES = [
+  {
+    ruleId: 'R-BLEED-DISORDER',
+    band: 'high',
+    fires: (d) => d.bleeding.bleedingDisorder === true,
+    category: 'coagulopathy',
+    description: 'Known bleeding disorder / coagulopathy — high periprocedural bleeding risk.'
+  },
+  {
+    ruleId: 'R-BLEED-INR-HIGH',
+    band: 'high',
+    fires: (d) => d.bleeding.inr !== null && d.bleeding.inr !== undefined && d.bleeding.inr !== '' && Number(d.bleeding.inr) >= 1.5,
+    category: 'coagulopathy',
+    description: 'INR ≥ 1.5 — correction usually required before biopsy (high risk).'
+  },
+  {
+    ruleId: 'R-BLEED-PLATELETS-LOW',
+    band: 'high',
+    fires: (d) => d.bleeding.plateletCount !== null && d.bleeding.plateletCount !== undefined && d.bleeding.plateletCount !== '' && Number(d.bleeding.plateletCount) < 50,
+    category: 'thrombocytopenia',
+    description: 'Platelet count < 50 ×10⁹/L — severe thrombocytopenia (high risk).'
+  },
+  {
+    ruleId: 'R-BLEED-ANTICOAG',
+    band: 'high',
+    fires: (d) => d.bleeding.takingAnticoagulant === true,
+    category: 'anticoagulant',
+    description: 'Patient on an anticoagulant — high periprocedural bleeding risk.'
+  },
+  {
+    ruleId: 'R-BLEED-PLATELETS-BORDERLINE',
+    band: 'moderate',
+    fires: (d) => d.bleeding.plateletCount !== null && d.bleeding.plateletCount !== undefined && d.bleeding.plateletCount !== '' && Number(d.bleeding.plateletCount) >= 50 && Number(d.bleeding.plateletCount) < 100,
+    category: 'thrombocytopenia',
+    description: 'Platelet count 50–99 ×10⁹/L — borderline thrombocytopenia (moderate risk).'
+  },
+  {
+    ruleId: 'R-BLEED-INR-BORDERLINE',
+    band: 'moderate',
+    fires: (d) => d.bleeding.inr !== null && d.bleeding.inr !== undefined && d.bleeding.inr !== '' && Number(d.bleeding.inr) >= 1.3 && Number(d.bleeding.inr) < 1.5,
+    category: 'coagulopathy',
+    description: 'INR 1.3–1.49 — mildly deranged clotting (moderate risk).'
+  },
+  {
+    ruleId: 'R-BLEED-ANTIPLATELET',
+    band: 'moderate',
+    fires: (d) => d.bleeding.takingAntiplatelet === true,
+    category: 'antiplatelet',
+    description: 'Patient on an antiplatelet agent — moderate periprocedural bleeding risk.'
+  }
+];
 
 /**
- * Stratify periprocedural bleeding risk and recommend an anticoagulant action.
+ * Compute the bleeding-risk band, recommended anticoagulant action, and fired
+ * bleeding rules.
  *
  * @returns {{ band:string, anticoagulantAction:string, firedRules:object[] }}
  */
-function scoreBleedingRisk(b) {
+function scoreBleedingRisk(data) {
   let band = 'low';
   const firedRules = [];
 
-  if (b.takingAnticoagulant === true) {
-    band = maxBand(band, 'high');
-    firedRules.push({
-      ruleId: 'R-BLEED-ANTICOAGULANT',
-      axis: 'bleeding-risk',
-      category: 'anticoagulant',
-      description: b.anticoagulantAgent
-        ? `Patient on anticoagulant (${b.anticoagulantAgent}) — high periprocedural bleeding risk.`
-        : 'Patient on an anticoagulant — high periprocedural bleeding risk.'
-    });
-  }
-  if (b.takingAntiplatelet === true) {
-    band = maxBand(band, 'moderate');
-    firedRules.push({
-      ruleId: 'R-BLEED-ANTIPLATELET',
-      axis: 'bleeding-risk',
-      category: 'antiplatelet',
-      description: b.antiplateletAgent
-        ? `Patient on antiplatelet (${b.antiplateletAgent}) — at least moderate bleeding risk.`
-        : 'Patient on an antiplatelet agent — at least moderate bleeding risk.'
-    });
-  }
-  if (b.bleedingDisorder === true) {
-    band = maxBand(band, 'high');
-    firedRules.push({
-      ruleId: 'R-BLEED-DISORDER',
-      axis: 'bleeding-risk',
-      category: 'bleeding-disorder',
-      description: 'Known bleeding disorder / coagulopathy — high periprocedural bleeding risk.'
-    });
-  }
-  if (b.inr !== null && b.inr !== undefined && b.inr !== '') {
-    const inr = Number(b.inr);
-    if (!Number.isNaN(inr)) {
-      if (inr > INR_HIGH) {
-        band = maxBand(band, 'high');
-        firedRules.push({
-          ruleId: 'R-BLEED-INR-HIGH',
-          axis: 'bleeding-risk',
-          category: 'coagulation',
-          description: `INR ${inr} is above ${INR_HIGH} — high bleeding risk; correct before biopsy.`
-        });
-      } else if (inr >= INR_MODERATE) {
-        band = maxBand(band, 'moderate');
-        firedRules.push({
-          ruleId: 'R-BLEED-INR-MODERATE',
-          axis: 'bleeding-risk',
-          category: 'coagulation',
-          description: `INR ${inr} is borderline (${INR_MODERATE}-${INR_HIGH}) — moderate bleeding risk.`
-        });
-      }
-    }
-  }
-  if (b.plateletCount !== null && b.plateletCount !== undefined && b.plateletCount !== '') {
-    const plt = Number(b.plateletCount);
-    if (!Number.isNaN(plt)) {
-      if (plt < PLATELET_HIGH) {
-        band = maxBand(band, 'high');
-        firedRules.push({
-          ruleId: 'R-BLEED-PLATELETS-HIGH',
-          axis: 'bleeding-risk',
-          category: 'thrombocytopenia',
-          description: `Platelet count ${plt} x10^9/L is below ${PLATELET_HIGH} — high bleeding risk; consider transfusion cover.`
-        });
-      } else if (plt < PLATELET_MODERATE) {
-        band = maxBand(band, 'moderate');
-        firedRules.push({
-          ruleId: 'R-BLEED-PLATELETS-MODERATE',
-          axis: 'bleeding-risk',
-          category: 'thrombocytopenia',
-          description: `Platelet count ${plt} x10^9/L is below ${PLATELET_MODERATE} — moderate bleeding risk.`
-        });
-      }
+  for (const rule of BLEEDING_RULES) {
+    if (rule.fires(data)) {
+      band = maxBand(band, rule.band);
+      firedRules.push({
+        ruleId: rule.ruleId,
+        axis: 'bleeding-risk',
+        category: rule.category,
+        description: rule.description
+      });
     }
   }
 
   if (firedRules.length === 0) {
     firedRules.push({
-      ruleId: 'R-BLEED-LOW',
+      ruleId: 'R-BLEED-BASELINE',
       axis: 'bleeding-risk',
       category: 'baseline',
-      description: 'No antithrombotic agents, coagulopathy, or thrombocytopenia — low bleeding risk.'
+      description: 'No anticoagulant / antiplatelet, normal coagulation — baseline low bleeding risk.'
     });
   }
 
   return {
     band,
-    anticoagulantAction: recommendAnticoagulantAction(band, b),
+    anticoagulantAction: anticoagulantAction(band, data),
     firedRules
   };
 }
 
-/** Recommend a periprocedural anticoagulant / antiplatelet action. */
-function recommendAnticoagulantAction(band, b) {
-  if (band === 'low') return '';
-  const parts = [];
-  if (b.takingAnticoagulant === true) {
-    parts.push('withhold the anticoagulant per local periprocedural protocol (bridge if high thrombotic risk)');
+/** Recommend a periprocedural anticoagulant / antiplatelet action for the band. */
+function anticoagulantAction(band, data) {
+  if (band === 'high') {
+    const parts = [];
+    if (data.bleeding.takingAnticoagulant) {
+      parts.push(`withhold the anticoagulant${data.bleeding.anticoagulantAgent ? ` (${data.bleeding.anticoagulantAgent})` : ''} per BSG / ESGE timing and consider bridging`);
+    }
+    if (data.bleeding.bleedingDisorder) parts.push('liaise with haematology and arrange factor / product cover');
+    if (data.bleeding.inr !== null && data.bleeding.inr !== undefined && data.bleeding.inr !== '' && Number(data.bleeding.inr) >= 1.5) parts.push('correct the INR to < 1.5');
+    if (data.bleeding.plateletCount !== null && data.bleeding.plateletCount !== undefined && data.bleeding.plateletCount !== '' && Number(data.bleeding.plateletCount) < 50) parts.push('transfuse platelets to ≥ 50 ×10⁹/L');
+    if (parts.length === 0) parts.push('optimise coagulation before the procedure');
+    return `High bleeding risk: ${parts.join('; ')}.`;
   }
-  if (b.takingAntiplatelet === true) {
-    parts.push('review antiplatelet timing with the prescriber');
+  if (band === 'moderate') {
+    const parts = [];
+    if (data.bleeding.takingAntiplatelet) parts.push(`review the antiplatelet${data.bleeding.antiplateletAgent ? ` (${data.bleeding.antiplateletAgent})` : ''}; continue aspirin but consider withholding a P2Y12 inhibitor`);
+    parts.push('confirm a recent platelet count and clotting screen');
+    return `Moderate bleeding risk: ${parts.join('; ')}.`;
   }
-  if (b.bleedingDisorder === true) {
-    parts.push('involve haematology and arrange factor / platelet cover');
-  }
-  if (b.inr !== null && b.inr !== undefined && b.inr !== '' && Number(b.inr) > INR_HIGH) {
-    parts.push('correct the INR before the procedure');
-  }
-  if (b.plateletCount !== null && b.plateletCount !== undefined && b.plateletCount !== '' && Number(b.plateletCount) < PLATELET_HIGH) {
-    parts.push('arrange platelet transfusion cover');
-  }
-  if (parts.length === 0) {
-    return 'Confirm coagulation status and follow the local periprocedural protocol before the biopsy.';
-  }
-  return 'Before the biopsy: ' + parts.join('; ') + '.';
+  return 'Low bleeding risk: proceed without specific anticoagulant action; standard haemostasis precautions.';
 }
 
 // ----------------------------------------------------------------------
@@ -278,8 +259,8 @@ function recommendAnticoagulantAction(band, b) {
 const COMPLETENESS_FIELDS = [
   { weight: 3, present: (d) => !!d.indication.primaryIndication, ruleId: 'R-COMPLETE-INDICATION', label: 'primary indication' },
   { weight: 3, present: (d) => !!d.indication.clinicalQuestion && d.indication.clinicalQuestion.trim() !== '', ruleId: 'R-COMPLETE-CLINICAL-QUESTION', label: 'clinical question' },
-  { weight: 2, present: (d) => !!d.procedure.biopsySite, ruleId: 'R-COMPLETE-SITE', label: 'biopsy site' },
-  { weight: 2, present: (d) => !!d.procedure.biopsyMethod, ruleId: 'R-COMPLETE-METHOD', label: 'biopsy method' },
+  { weight: 2, present: (d) => !!d.procedure.biopsySite, ruleId: 'R-COMPLETE-BIOPSY-SITE', label: 'biopsy site' },
+  { weight: 2, present: (d) => !!d.procedure.biopsyMethod, ruleId: 'R-COMPLETE-BIOPSY-METHOD', label: 'biopsy method' },
   { weight: 1, present: (d) => !!d.lesion.lesionDescription && d.lesion.lesionDescription.trim() !== '', ruleId: 'R-COMPLETE-LESION', label: 'lesion description' },
   { weight: 1, present: (d) => !!d.patient.firstName && !!d.patient.lastName, ruleId: 'R-COMPLETE-PATIENT-NAME', label: 'patient name' },
   { weight: 1, present: (d) => !!d.patient.nhsNumber, ruleId: 'R-COMPLETE-NHS-NUMBER', label: 'NHS number' },
@@ -319,10 +300,10 @@ function scoreCompleteness(data) {
 // Axis D — Urgency / cancer-pathway triage (NICE NG12)
 // ----------------------------------------------------------------------
 //
-// A base tier is taken from the clinician's requested urgency. A
-// suspected-malignancy or cancer-staging indication makes the request
-// two-week-wait eligible and escalates the tier to at least two-week-wait.
-// The most-severe escalation wins.
+// A base tier is taken from the clinician's requested urgency. A suspected-
+// malignancy or cancer-staging indication makes the request two-week-wait
+// eligible and escalates at least to the two-week-wait tier. The most-severe
+// escalation wins.
 
 const TRIAGE_ORDER = ['routine', 'urgent', 'two-week-wait', 'emergency'];
 
@@ -340,13 +321,8 @@ function maxTier(a, b) {
   return ia >= ib ? a : b;
 }
 
-// Indications that make a request NICE NG12 two-week-wait eligible.
+// Indications that meet NICE NG12 suspected-cancer two-week-wait eligibility.
 const TWO_WEEK_WAIT_INDICATIONS = ['suspected-malignancy', 'cancer-staging'];
-
-/** Whether the request meets two-week-wait eligibility. */
-function isTwoWeekWaitEligible(data) {
-  return TWO_WEEK_WAIT_INDICATIONS.includes(data.indication.primaryIndication);
-}
 
 /**
  * Compute the triage tier, target timeframe, two-week-wait eligibility, and
@@ -358,19 +334,21 @@ function scoreTriage(data) {
   const requested = data.triage.urgency || 'routine';
   let tier = TRIAGE_ORDER.includes(requested) ? requested : 'routine';
   const firedRules = [];
-  const twoWeekWaitEligible = isTwoWeekWaitEligible(data);
+  let twoWeekWaitEligible = false;
 
-  if (twoWeekWaitEligible) {
+  if (TWO_WEEK_WAIT_INDICATIONS.includes(data.indication.primaryIndication)) {
+    twoWeekWaitEligible = true;
     tier = maxTier(tier, 'two-week-wait');
     firedRules.push({
-      ruleId: 'R-TRIAGE-SUSPECTED-CANCER-2WW',
+      ruleId: 'R-TRIAGE-SUSPECTED-CANCER',
       axis: 'urgency',
       category: 'suspected-cancer',
-      description: `"${data.indication.primaryIndication}" indication is NICE NG12 two-week-wait eligible — escalate to the suspected-cancer pathway.`
+      description: `A "${data.indication.primaryIndication}" indication meets NICE NG12 two-week-wait eligibility.`
     });
   }
 
   if (data.triage.urgency === 'emergency') {
+    tier = maxTier(tier, 'emergency');
     firedRules.push({
       ruleId: 'R-TRIAGE-EMERGENCY',
       axis: 'urgency',
@@ -400,13 +378,13 @@ Object.assign(NS, {
   scoreAppropriateness,
   appropriatenessBand,
   scoreBleedingRisk,
+  anticoagulantAction,
   scoreCompleteness,
   scoreTriage,
-  isTwoWeekWaitEligible,
   maxBand,
   maxTier,
+  BLEEDING_ORDER,
   TRIAGE_ORDER,
-  BLEED_ORDER,
   TARGET_TIMEFRAMES,
   INDICATION_SITE_MAP,
   TWO_WEEK_WAIT_INDICATIONS

@@ -1,40 +1,40 @@
-// Four-axis grader for the Biopsy Test Request.
+// Four-axis grader for the Nerve Conduction Study Test Request.
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
 // single pure, deterministic grading result. The public entry point is
 // `calculateGrade(data)`. The output shape and rule / flag IDs are identical
-// across every front-end and the back-end, mirroring SQL migration 05's
-// columns.
+// across every front-end and the back-end.
 //
-// Wrapped in an IIFE; published via `window.BiopsyTestRequest`.
+// Wrapped in an IIFE; published via `window.NerveConductionStudyTestRequest`.
 
 (function () {
 'use strict';
-window.BiopsyTestRequest = window.BiopsyTestRequest || {};
-const NS = window.BiopsyTestRequest;
+window.NerveConductionStudyTestRequest =
+  window.NerveConductionStudyTestRequest || {};
+const NS = window.NerveConductionStudyTestRequest;
 const {
   scoreAppropriateness,
-  scoreBleedingRisk,
+  scoreProceduralRisk,
   scoreCompleteness,
   scoreTriage,
   detectFlags
 } = NS;
 
 /**
- * Derive an overall recommendation for the pathology / imaging vetting desk
- * from the four axes. Least-alarming wins only when nothing escalates.
+ * Derive an overall recommendation for the neurophysiology vetting desk from
+ * the four axes. Least-alarming wins only when nothing escalates.
  */
-function deriveRecommendation(appropriatenessBand, bleedingRiskBand, completenessPercent) {
+function deriveRecommendation(appropriatenessBand, proceduralRiskBand, completenessPercent, triageTier) {
   if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
   if (completenessPercent < 50) return 'query-referrer';
-  if (bleedingRiskBand === 'high') return 'query-referrer';
+  if (proceduralRiskBand === 'high') return 'query-referrer';
   return 'accept';
 }
 
 const RECOMMENDATION_LABELS = {
   'accept': 'Accept and book',
   'query-referrer': 'Query the referrer',
-  'redirect': 'Redirect to a more suitable test',
+  'redirect': 'Redirect to a more suitable study',
   'reject': 'Reject'
 };
 
@@ -45,12 +45,10 @@ const RECOMMENDATION_LABELS = {
  * @returns {{
  *   appropriatenessScore:number,
  *   appropriatenessBand:string,
- *   bleedingRiskBand:string,
- *   anticoagulantAction:string,
+ *   proceduralRiskBand:string,
  *   completenessPercent:number,
  *   triageTier:string,
  *   targetTimeframe:string,
- *   twoWeekWaitEligible:boolean,
  *   recommendation:string,
  *   recommendationLabel:string,
  *   firedRules:object[],
@@ -62,43 +60,39 @@ function calculateGrade(data) {
 
   // Axis A — appropriateness.
   const appr = scoreAppropriateness(
-    data.indication.primaryIndication,
-    data.procedure.biopsySite
+    data.request.primaryIndication,
+    data.study.studyType
   );
   if (appr.firedRule) firedRules.push(appr.firedRule);
 
-  // Axis B — periprocedural bleeding risk.
-  const bleeding = scoreBleedingRisk(data);
-  for (const r of bleeding.firedRules) firedRules.push(r);
+  // Axis B — procedural risk.
+  const risk = scoreProceduralRisk(data);
+  for (const r of risk.firedRules) firedRules.push(r);
 
   // Axis C — completeness.
   const completeness = scoreCompleteness(data);
   for (const m of completeness.missing) firedRules.push(m);
 
-  // Axis D — urgency / cancer-pathway triage.
+  // Axis D — triage.
   const triage = scoreTriage(data);
   for (const r of triage.firedRules) firedRules.push(r);
 
   const recommendation = deriveRecommendation(
     appr.band,
-    bleeding.band,
-    completeness.percent
+    risk.band,
+    completeness.percent,
+    triage.tier
   );
 
-  const flags = detectFlags(data, {
-    bleedingRiskBand: bleeding.band,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible
-  });
+  const flags = detectFlags(data, {});
 
   return {
     appropriatenessScore: appr.score,
     appropriatenessBand: appr.band,
-    bleedingRiskBand: bleeding.band,
-    anticoagulantAction: bleeding.anticoagulantAction,
+    proceduralRiskBand: risk.band,
     completenessPercent: completeness.percent,
     triageTier: triage.tier,
     targetTimeframe: triage.targetTimeframe,
-    twoWeekWaitEligible: triage.twoWeekWaitEligible,
     recommendation,
     recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
     firedRules,
