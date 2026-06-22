@@ -1,11 +1,10 @@
-// Plain-JavaScript / JSDoc type definitions for the (general, non-obstetric)
-// Ultrasound Test Request form.
+// Plain-JavaScript / JSDoc type definitions for the Ultrasound Test Request
+// form (general, non-obstetric diagnostic ultrasound referral).
 //
 // Builds the canonical empty `UltrasoundRequest` shape so newly-added fields
 // default correctly when older saved state is rehydrated from localStorage.
 // Property names are camelCase to match the front-end serde / examples
-// convention. Wrapped in an IIFE; published via
-// `window.UltrasoundTestRequest`.
+// convention. Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
 
 (function () {
 'use strict';
@@ -34,20 +33,23 @@ function emptyRequest() {
       lastName: '',
       dateOfBirth: '',
       nhsNumber: '',
-      bodyMassIndex: null
+      bodyMassIndex: null,
+      interpreterRequired: false
     },
     request: {
       bodyRegion: '',
       laterality: '',
       primaryIndication: '',
       clinicalQuestion: '',
-      relevantHistory: ''
+      relevantHistory: '',
+      previousScanFinding: '',
+      previousScanDate: ''
     },
-    preparation: {
+    prep: {
       fastingRequired: false,
       fullBladderRequired: false
     },
-    symptoms: {
+    redFlags: {
       suspectedDvt: false,
       suspectedTesticularTorsion: false,
       suspectedAaa: false
@@ -72,7 +74,7 @@ const BODY_REGION_LABELS = {
   'breast': 'Breast',
   'soft-tissue': 'Soft tissue',
   'vascular-doppler': 'Vascular Doppler',
-  'dvt-leg': 'DVT leg',
+  'dvt-leg': 'DVT (leg)',
   'carotid': 'Carotid',
   'msk-joint': 'MSK / joint',
   'other': 'Other'

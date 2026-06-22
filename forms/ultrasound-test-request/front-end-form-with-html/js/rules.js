@@ -1,14 +1,14 @@
-// Four-axis rule catalogue for the (general, non-obstetric) Ultrasound Test
-// Request engine.
+// Four-axis rule catalogue for the Ultrasound Test Request engine
+// (general, non-obstetric diagnostic ultrasound).
 //
-// Derived from index.md and SQL migration 05: (A) appropriateness 1-9 + band
-// by body-region x indication; (B) preparation / technical suitability
-// (ok / caution / limited) plus prep requirements; (C) request completeness
-// over mandatory fields; (D) triage tier (routine / urgent / emergency) with
-// red-flag auto-escalation (suspected DVT / testicular torsion / AAA). Rule
-// IDs are stable and identical across every front-end and the back-end
-// (R-APPROP-*, R-SUIT-*, R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the
-// grader composes them.
+// Derived from index.md: (A) appropriateness 1-9 + band by body region x
+// indication (ACR Appropriateness Criteria); (B) preparation / technical
+// suitability ok/caution/limited + prep requirements; (C) request
+// completeness over mandatory fields; (D) triage tier routine/urgent/
+// emergency with red-flag auto-escalation (suspected DVT, suspected
+// testicular torsion, suspected AAA). Rule IDs are stable and identical
+// across every front-end and the back-end (R-APPROP-*, R-SUIT-*,
+// R-COMPLETE-*, R-TRIAGE-*). Pure data + helpers; the grader composes them.
 //
 // Wrapped in an IIFE; published via `window.UltrasoundTestRequest`.
 
@@ -33,14 +33,14 @@ const INDICATION_REGION_MAP = {
   'abdominal-pain':       { ideal: ['abdomen', 'liver-biliary', 'renal-tract'], plausible: ['pelvis'] },
   'suspected-gallstones': { ideal: ['liver-biliary', 'abdomen'], plausible: [] },
   'abnormal-lfts':        { ideal: ['liver-biliary', 'abdomen'], plausible: [] },
-  'renal-impairment':     { ideal: ['renal-tract', 'abdomen'], plausible: ['pelvis'] },
-  'haematuria':           { ideal: ['renal-tract'], plausible: ['abdomen', 'pelvis'] },
-  'palpable-mass':        { ideal: ['soft-tissue', 'thyroid-neck', 'breast', 'abdomen', 'pelvis', 'scrotum-testes'], plausible: ['msk-joint'] },
+  'renal-impairment':     { ideal: ['renal-tract'], plausible: ['abdomen'] },
+  'haematuria':           { ideal: ['renal-tract'], plausible: ['pelvis', 'abdomen'] },
+  'palpable-mass':        { ideal: ['soft-tissue', 'thyroid-neck', 'breast', 'abdomen', 'pelvis'], plausible: ['scrotum-testes', 'msk-joint'] },
   'suspected-dvt':        { ideal: ['dvt-leg'], plausible: ['vascular-doppler'] },
   'suspected-aaa':        { ideal: ['abdomen', 'vascular-doppler'], plausible: [] },
-  'thyroid-nodule':       { ideal: ['thyroid-neck'], plausible: [] },
+  'thyroid-nodule':       { ideal: ['thyroid-neck'], plausible: ['soft-tissue'] },
   'testicular-pain':      { ideal: ['scrotum-testes'], plausible: [] },
-  'follow-up':            { ideal: ['abdomen', 'pelvis', 'renal-tract', 'liver-biliary', 'thyroid-neck', 'scrotum-testes', 'breast', 'soft-tissue', 'vascular-doppler', 'carotid', 'msk-joint'], plausible: [] },
+  'follow-up':            { ideal: ['abdomen', 'liver-biliary', 'renal-tract', 'pelvis', 'thyroid-neck', 'scrotum-testes', 'breast', 'soft-tissue', 'vascular-doppler', 'carotid', 'msk-joint'], plausible: [] },
   'other':                { ideal: [], plausible: [] }
 };
 
@@ -76,7 +76,7 @@ function scoreAppropriateness(indication, bodyRegion) {
         ruleId: `R-APPROP-${indicationKey}-IDEAL`,
         axis: 'appropriateness',
         category: indication,
-        description: `Requested ${bodyRegion} scan is the recommended examination for "${indication}".`
+        description: `Requested ${bodyRegion} ultrasound is the recommended examination for "${indication}".`
       }
     };
   }
@@ -88,7 +88,7 @@ function scoreAppropriateness(indication, bodyRegion) {
         ruleId: `R-APPROP-${indicationKey}-PLAUSIBLE`,
         axis: 'appropriateness',
         category: indication,
-        description: `Requested ${bodyRegion} scan may be appropriate for "${indication}" but is not the first-line examination.`
+        description: `Requested ${bodyRegion} ultrasound may be appropriate for "${indication}" but is not the first-line examination.`
       }
     };
   }
@@ -111,7 +111,7 @@ function scoreAppropriateness(indication, bodyRegion) {
       ruleId: `R-APPROP-${indicationKey}-MISMATCH`,
       axis: 'appropriateness',
       category: indication,
-      description: `Requested ${bodyRegion} scan is not usually appropriate for "${indication}"; query the referrer.`
+      description: `Requested ${bodyRegion} ultrasound is not usually appropriate for "${indication}"; query the referrer.`
     }
   };
 }
@@ -124,40 +124,35 @@ function appropriatenessBand(score) {
 }
 
 // ----------------------------------------------------------------------
-// Axis B — Preparation / technical suitability (BMUS / AIUM practice)
+// Axis B — Preparation / technical suitability (BMUS / AIUM)
 // ----------------------------------------------------------------------
 //
-// Each body region carries an expected preparation. The engine compares the
-// expected preparation against what the requester recorded, and folds in a
-// body-habitus caveat (high BMI degrades acoustic windows). Suitability band
-// is ok / caution / limited and a human-readable prep-requirements string is
-// emitted alongside.
+// Each body region has expected preparation. The engine compares the
+// preparation the clinician has flagged against what the region needs, and
+// folds in a body-habitus caveat from BMI. The band is ok / caution /
+// limited and a human-readable prep-requirements string is produced.
 
 // Expected preparation per body region.
-//   fasting  -> fasting required for upper-abdominal / biliary windows
-//   bladder  -> full bladder required for pelvic / lower-urinary-tract windows
 const REGION_PREP = {
-  'abdomen':          { fasting: true,  bladder: false, note: 'Fast 6 hours before an upper-abdominal scan.' },
-  'liver-biliary':    { fasting: true,  bladder: false, note: 'Fast 6 hours before a hepatobiliary scan to distend the gallbladder.' },
-  'renal-tract':      { fasting: false, bladder: true,  note: 'Attend with a comfortably full bladder for the lower urinary tract.' },
-  'pelvis':           { fasting: false, bladder: true,  note: 'Attend with a full bladder for a transabdominal pelvic scan.' },
-  'thyroid-neck':     { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'scrotum-testes':   { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'breast':           { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'soft-tissue':      { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'vascular-doppler': { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'dvt-leg':          { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'carotid':          { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'msk-joint':        { fasting: false, bladder: false, note: 'No specific preparation required.' },
-  'other':            { fasting: false, bladder: false, note: '' }
+  'abdomen':          { fasting: true,  fullBladder: false, note: 'Fasting 6 hours for upper-abdominal / biliary views.' },
+  'liver-biliary':    { fasting: true,  fullBladder: false, note: 'Fasting 6 hours to distend the gallbladder.' },
+  'renal-tract':      { fasting: false, fullBladder: true,  note: 'Full bladder for the lower urinary tract.' },
+  'pelvis':           { fasting: false, fullBladder: true,  note: 'Full bladder for a transabdominal pelvic view.' },
+  'thyroid-neck':     { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'scrotum-testes':   { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'breast':           { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'soft-tissue':      { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'vascular-doppler': { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'dvt-leg':          { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'carotid':          { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'msk-joint':        { fasting: false, fullBladder: false, note: 'No specific preparation.' },
+  'other':            { fasting: false, fullBladder: false, note: 'Confirm preparation with the imaging department.' }
 };
 
-// BMI threshold above which acoustic windows are technically limited.
-const HIGH_BMI = 35;
-const MODERATE_BMI = 30;
+const HIGH_BMI_THRESHOLD = 35; // body-habitus caveat for technical quality
 
 /**
- * Evaluate preparation / technical suitability for the requested examination.
+ * Evaluate preparation / technical suitability for the requested region.
  *
  * @returns {{ band:string, prepRequirements:string, firedRules:object[] }}
  */
@@ -170,79 +165,50 @@ function evaluateSuitability(data) {
       band: '',
       prepRequirements: '',
       firedRules: [{
-        ruleId: 'R-SUIT-UNSPECIFIED',
+        ruleId: 'R-SUIT-UNKNOWN',
         axis: 'suitability',
         category: 'unspecified',
-        description: 'Body region not yet specified — technical suitability not assessed.'
+        description: 'Body region not yet specified — suitability not assessed.'
       }]
     };
   }
 
-  const expected = REGION_PREP[region] || { fasting: false, bladder: false, note: '' };
+  const expected = REGION_PREP[region] || REGION_PREP['other'];
   const regionKey = region.toUpperCase().replace(/[^A-Z]+/g, '-');
-  const reqs = [];
   let band = 'ok';
+  const prepParts = [expected.note];
 
-  if (expected.note) reqs.push(expected.note);
-
-  // Compare expected prep against what the requester recorded.
-  if (expected.fasting && data.preparation.fastingRequired !== true) {
-    band = maxBand(band, 'caution');
+  // Caution when required preparation has not been flagged on the request.
+  if (expected.fasting && data.prep.fastingRequired !== true) {
+    band = 'caution';
     firedRules.push({
-      ruleId: `R-SUIT-${regionKey}-FASTING-MISSING`,
+      ruleId: `R-SUIT-${regionKey}-FASTING-NOT-FLAGGED`,
       axis: 'suitability',
       category: 'prep',
-      description: `Fasting is expected for a ${region} scan but was not flagged on the request.`
+      description: `A ${region} scan usually needs fasting, but the request does not flag fasting required.`
     });
-  } else if (expected.fasting) {
+  }
+  if (expected.fullBladder && data.prep.fullBladderRequired !== true) {
+    band = 'caution';
     firedRules.push({
-      ruleId: `R-SUIT-${regionKey}-FASTING-OK`,
+      ruleId: `R-SUIT-${regionKey}-BLADDER-NOT-FLAGGED`,
       axis: 'suitability',
       category: 'prep',
-      description: `Fasting preparation correctly flagged for a ${region} scan.`
+      description: `A ${region} scan usually needs a full bladder, but the request does not flag full bladder required.`
     });
   }
 
-  if (expected.bladder && data.preparation.fullBladderRequired !== true) {
-    band = maxBand(band, 'caution');
-    firedRules.push({
-      ruleId: `R-SUIT-${regionKey}-BLADDER-MISSING`,
-      axis: 'suitability',
-      category: 'prep',
-      description: `A full bladder is expected for a ${region} scan but was not flagged on the request.`
-    });
-  } else if (expected.bladder) {
-    firedRules.push({
-      ruleId: `R-SUIT-${regionKey}-BLADDER-OK`,
-      axis: 'suitability',
-      category: 'prep',
-      description: `Full-bladder preparation correctly flagged for a ${region} scan.`
-    });
-  }
-
-  // Body-habitus caveat.
+  // Body-habitus caveat — high BMI can limit deep abdominal / pelvic views.
   const bmi = data.patient.bodyMassIndex;
-  if (bmi !== null && bmi !== undefined && bmi !== '') {
-    const n = Number(bmi);
-    if (!Number.isNaN(n) && n >= HIGH_BMI) {
-      band = maxBand(band, 'limited');
-      reqs.push('High body mass index may technically limit acoustic windows.');
-      firedRules.push({
-        ruleId: 'R-SUIT-HIGH-BMI',
-        axis: 'suitability',
-        category: 'body-habitus',
-        description: `Body mass index ${n} may significantly limit ultrasound image quality.`
-      });
-    } else if (!Number.isNaN(n) && n >= MODERATE_BMI) {
-      band = maxBand(band, 'caution');
-      reqs.push('Raised body mass index may reduce acoustic window quality.');
-      firedRules.push({
-        ruleId: 'R-SUIT-RAISED-BMI',
-        axis: 'suitability',
-        category: 'body-habitus',
-        description: `Raised body mass index ${n} may reduce ultrasound image quality.`
-      });
-    }
+  const deepRegion = ['abdomen', 'liver-biliary', 'renal-tract', 'pelvis', 'vascular-doppler'].includes(region);
+  if (bmi !== null && bmi !== undefined && bmi !== '' && Number(bmi) >= HIGH_BMI_THRESHOLD && deepRegion) {
+    band = 'limited';
+    firedRules.push({
+      ruleId: 'R-SUIT-HIGH-BMI',
+      axis: 'suitability',
+      category: 'body-habitus',
+      description: `Raised BMI (${Number(bmi)} kg/m²) may technically limit a deep ${region} ultrasound.`
+    });
   }
 
   if (firedRules.length === 0) {
@@ -250,24 +216,18 @@ function evaluateSuitability(data) {
       ruleId: `R-SUIT-${regionKey}-OK`,
       axis: 'suitability',
       category: 'prep',
-      description: `No preparation or technical concerns for a ${region} scan.`
+      description: `Preparation requirements are met for a ${region} scan.`
     });
   }
 
+  if (expected.fasting) prepParts.push('Fasting required.');
+  if (expected.fullBladder) prepParts.push('Full bladder required.');
+
   return {
     band,
-    prepRequirements: reqs.join(' '),
+    prepRequirements: prepParts.join(' '),
     firedRules
   };
-}
-
-const SUITABILITY_ORDER = ['ok', 'caution', 'limited'];
-
-/** Return whichever of two suitability bands is more limiting. */
-function maxBand(a, b) {
-  const ia = SUITABILITY_ORDER.indexOf(a);
-  const ib = SUITABILITY_ORDER.indexOf(b);
-  return ia >= ib ? a : b;
 }
 
 // ----------------------------------------------------------------------
@@ -320,8 +280,8 @@ function scoreCompleteness(data) {
 // Axis D — Triage priority (red-flag escalation)
 // ----------------------------------------------------------------------
 //
-// A base tier is taken from the clinician's requested urgency, then red flags
-// auto-escalate it. The most-severe escalation wins.
+// A base tier is taken from the clinician's requested urgency, then red
+// flags auto-escalate it. The most-severe escalation wins.
 
 const TRIAGE_ORDER = ['routine', 'urgent', 'emergency'];
 
@@ -341,22 +301,22 @@ function maxTier(a, b) {
 // Red-flag escalation rules, each forcing at least the given tier.
 const TRIAGE_RULES = [
   {
-    ruleId: 'R-TRIAGE-SUSPECTED-TESTICULAR-TORSION',
+    ruleId: 'R-TRIAGE-SUSPECTED-TORSION',
     tier: 'emergency',
-    fires: (d) => d.symptoms.suspectedTesticularTorsion === true,
-    description: 'Suspected testicular torsion — emergency assessment; torsion is a surgical emergency.'
+    fires: (d) => d.redFlags.suspectedTesticularTorsion === true,
+    description: 'Suspected testicular torsion — emergency Doppler; surgical window is short.'
   },
   {
     ruleId: 'R-TRIAGE-SUSPECTED-AAA',
     tier: 'emergency',
-    fires: (d) => d.symptoms.suspectedAaa === true,
-    description: 'Suspected abdominal aortic aneurysm — emergency assessment; exclude rupture / leak.'
+    fires: (d) => d.redFlags.suspectedAaa === true,
+    description: 'Suspected abdominal aortic aneurysm — emergency assessment.'
   },
   {
     ruleId: 'R-TRIAGE-SUSPECTED-DVT',
     tier: 'urgent',
-    fires: (d) => d.symptoms.suspectedDvt === true,
-    description: 'Suspected deep-vein thrombosis — urgent Doppler within the local DVT pathway.'
+    fires: (d) => d.redFlags.suspectedDvt === true,
+    description: 'Suspected DVT — urgent leg-vein Doppler.'
   }
 ];
 
@@ -405,10 +365,8 @@ Object.assign(NS, {
   scoreCompleteness,
   scoreTriage,
   maxTier,
-  maxBand,
   TRIAGE_ORDER,
   TARGET_TIMEFRAMES,
-  SUITABILITY_ORDER,
   REGION_PREP,
   INDICATION_REGION_MAP
 });

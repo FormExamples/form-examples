@@ -1,4 +1,5 @@
-// Four-axis grader for the (general, non-obstetric) Ultrasound Test Request.
+// Four-axis grader for the Ultrasound Test Request
+// (general, non-obstetric diagnostic ultrasound).
 //
 // Composes the rule sets in rules.js and the safety flags in flags.js into a
 // single pure, deterministic grading result. The public entry point is
@@ -34,7 +35,7 @@ function deriveRecommendation(appropriatenessBand, suitabilityBand, completeness
 const RECOMMENDATION_LABELS = {
   'accept': 'Accept and book',
   'query-referrer': 'Query the referrer',
-  'redirect': 'Redirect / review technique',
+  'redirect': 'Redirect / amend preparation',
   'reject': 'Reject'
 };
 

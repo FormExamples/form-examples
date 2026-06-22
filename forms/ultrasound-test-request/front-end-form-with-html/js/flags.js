@@ -1,5 +1,5 @@
-// Safety-flag detection for the (general, non-obstetric) Ultrasound Test
-// Request engine.
+// Safety-flag detection for the Ultrasound Test Request engine
+// (general, non-obstetric diagnostic ultrasound).
 //
 // Pure function returning safety flags using the grade_flag categories from
 // SQL migration 07: suspected-dvt-urgent, suspected-testicular-torsion,
@@ -27,32 +27,32 @@ function detectFlags(data, context) {
   const flags = [];
   const ctx = context || {};
 
-  // --- Red-flag symptom categories -----------------------------------
-  if (data.symptoms.suspectedTesticularTorsion === true) {
+  // --- Red-flag clinical categories ----------------------------------
+  if (data.redFlags.suspectedTesticularTorsion === true) {
     flags.push({
       flagId: 'F-SUSPECTED-TESTICULAR-TORSION-001',
       category: 'suspected-testicular-torsion',
       priority: 'high',
-      description: 'Testicular torsion is suspected.',
-      suggestedAction: 'Arrange immediate surgical / urology assessment; torsion is a surgical emergency — do not delay scanning for triage.'
+      description: 'Suspected testicular torsion.',
+      suggestedAction: 'Arrange emergency scrotal Doppler now and alert urology / surgery; do not delay for routine booking — the salvage window is short.'
     });
   }
-  if (data.symptoms.suspectedAaa === true) {
+  if (data.redFlags.suspectedAaa === true) {
     flags.push({
       flagId: 'F-SUSPECTED-AAA-001',
       category: 'suspected-aaa',
       priority: 'high',
-      description: 'Abdominal aortic aneurysm is suspected.',
-      suggestedAction: 'Arrange same-day emergency aortic ultrasound; exclude rupture / leak and involve the vascular team.'
+      description: 'Suspected abdominal aortic aneurysm.',
+      suggestedAction: 'Arrange emergency abdominal aortic ultrasound; if haemodynamically unstable or tender, treat as a surgical emergency.'
     });
   }
-  if (data.symptoms.suspectedDvt === true) {
+  if (data.redFlags.suspectedDvt === true) {
     flags.push({
       flagId: 'F-SUSPECTED-DVT-URGENT-001',
       category: 'suspected-dvt-urgent',
       priority: 'high',
-      description: 'Deep-vein thrombosis is suspected.',
-      suggestedAction: 'Arrange urgent leg-vein Doppler within the local DVT pathway; consider interim anticoagulation per protocol.'
+      description: 'Suspected deep vein thrombosis.',
+      suggestedAction: 'Arrange urgent leg-vein Doppler within the local DVT pathway; consider interim anticoagulation if the scan is delayed.'
     });
   }
 
@@ -61,11 +61,13 @@ function detectFlags(data, context) {
     flags.push({
       flagId: 'F-PREP-NOT-MET-001',
       category: 'prep-not-met',
-      priority: ctx.suitabilityBand === 'limited' ? 'medium' : 'low',
-      description: 'Preparation or technical suitability is not fully met for this examination.',
+      priority: 'medium',
+      description: ctx.suitabilityBand === 'limited'
+        ? 'Examination may be technically limited (preparation or body habitus).'
+        : 'Required preparation has not been flagged on the request.',
       suggestedAction: ctx.prepRequirements
-        ? `Confirm preparation with the patient: ${ctx.prepRequirements}`
-        : 'Confirm the required preparation (fasting / full bladder) with the patient before booking.'
+        ? `Confirm preparation before booking: ${ctx.prepRequirements}`
+        : 'Confirm the preparation requirements with the referrer before booking.'
     });
   }
 

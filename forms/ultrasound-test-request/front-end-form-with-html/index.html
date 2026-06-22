@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ultrasound Test Request — clinician referral</title>
-  <meta name="description" content="Clinician-driven general (non-obstetric) diagnostic ultrasound request with four-axis grading: appropriateness (ACR / iRefer), preparation / technical suitability, request completeness, and triage priority, plus safety flags.">
+  <meta name="description" content="Clinician-driven general (non-obstetric) ultrasound scan request with four-axis grading: appropriateness (ACR), preparation / technical suitability, request completeness, and triage priority, plus safety flags.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
   <header class="page-header">
     <div class="page-header-inner">
       <h1>Ultrasound Test Request</h1>
-      <p class="subtitle">General (non-obstetric) diagnostic ultrasound request with four-axis grading: appropriateness, preparation / technical suitability, completeness, and triage.</p>
+      <p class="subtitle">General (non-obstetric) ultrasound scan request with four-axis grading: appropriateness, preparation / technical suitability, completeness, and triage.</p>
 
       <progress
         id="progress"
@@ -38,12 +38,13 @@
       <p>
         Clinician referral wizard for a general diagnostic ultrasound
         examination — abdominal, pelvic, renal-tract, hepatobiliary,
-        small-parts, soft-tissue, vascular, or musculoskeletal. Record the
-        requested examination, the clinical indication and specific question,
-        relevant history, preparation requirements, and the requested urgency.
-        The engine computes a four-axis grade (appropriateness, preparation /
-        technical suitability, request completeness, and triage priority) plus
-        a set of safety flags.
+        small-parts (thyroid, scrotum, breast), soft-tissue, vascular
+        (Doppler, DVT, carotid), or musculoskeletal. Record the requesting
+        clinician, the patient, the requested examination, the clinical
+        indication and specific question, preparation requirements, and the
+        requested urgency. The engine computes a four-axis grade
+        (appropriateness, preparation / technical suitability, request
+        completeness, and triage priority) plus a set of safety flags.
       </p>
       <p>
         This is clinical decision support for the imaging vetting desk. The
@@ -110,8 +111,9 @@
       <p>
         Grading is aligned with the ACR Appropriateness Criteria, the Royal
         College of Radiologists' iRefer referral guidelines, and BMUS / AIUM
-        ultrasound practice parameters. This screening tool is for clinical
-        decision support; the final triage and booking decision remains the
+        practice parameters for abdominal, pelvic, scrotal, thyroid, and
+        vascular ultrasound. This screening tool is for clinical decision
+        support; the final triage and booking decision remains the
         responsibility of the vetting clinician.
       </p>
     </footer>
