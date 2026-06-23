@@ -1,0 +1,911 @@
+/* Base stylesheet template for `front-end-form-with-html/`.
+ *
+ * Targets Lily Design System HTML headless class contracts. The Lily
+ * library ships zero CSS — this file IS the CSS. Each form's
+ * `css/style.css` starts as a copy of this template and may add
+ * form-specific report styling (e.g., score badges, risk pills).
+ *
+ * Class contracts referenced here are documented in
+ * forms/AGENTS-front-end-html.md. Do not introduce non-Lily class
+ * names without updating that doc first.
+ *
+ * Layout-helper classes prefixed with `.page-`, `.skip-`, `.visually-`,
+ * `.button-group`, `.report-section`, `.intro` are project-local and
+ * NOT part of the Lily contract.
+ */
+
+/* -------------------------------------------------------------- *
+ *  Design tokens
+ * -------------------------------------------------------------- */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-bg: #f9fafb;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-focus: #3b82f6;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fee2e2;
+  --color-warning: #d97706;
+  --color-warning-bg: #fef3c7;
+  --color-success: #059669;
+  --color-success-bg: #d1fae5;
+
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  --content-width: 56rem;
+}
+
+/* -------------------------------------------------------------- *
+ *  Reset & document
+ * -------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px; top: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+
+/* -------------------------------------------------------------- *
+ *  Page chrome (project-local, not Lily)
+ * -------------------------------------------------------------- */
+.page-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+.page-header-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+.page-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+.subtitle {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem;
+}
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.page-footer {
+  margin-top: 3rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+.page-footer p { margin: 0; }
+
+/* -------------------------------------------------------------- *
+ *  Lily: .progress
+ * -------------------------------------------------------------- */
+.progress {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+  border: 0;
+  background: var(--color-border);
+  border-radius: 9999px;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.progress::-webkit-progress-bar { background: var(--color-border); }
+.progress::-webkit-progress-value {
+  background: var(--color-primary);
+  transition: width 200ms ease-out;
+}
+.progress::-moz-progress-bar { background: var(--color-primary); }
+
+/* -------------------------------------------------------------- *
+ *  Lily: .step-list / .step-list-item
+ * -------------------------------------------------------------- */
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  counter-reset: step;
+}
+.step-list-item {
+  counter-increment: step;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  user-select: none;
+}
+.step-list-item::before {
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.step-list-item[data-status="finished"] {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
+}
+.step-list-item[data-status="finished"]::before {
+  background: var(--color-success);
+  color: white;
+  content: "✓";
+}
+.step-list-item[data-status="in-progress"],
+.step-list-item[aria-current="step"] {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  font-weight: 600;
+}
+.step-list-item[data-status="in-progress"]::before,
+.step-list-item[aria-current="step"]::before {
+  background: var(--color-primary);
+  color: white;
+}
+.step-list-item[data-status="error"] {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+.step-list-item[data-status="error"]::before {
+  background: var(--color-danger);
+  color: white;
+  content: "!";
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: .form, .fieldset, .field, .label, .hint
+ * -------------------------------------------------------------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.fieldset {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  margin: 0;
+  min-width: 0;
+}
+.fieldset-legend {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  width: 100%;
+}
+
+.field {
+  margin: 0 0 1rem;
+  min-width: 0;
+}
+.field:last-child { margin-bottom: 0; }
+
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+}
+.label[data-required]::after,
+.label .req {
+  content: "*";
+  color: var(--color-danger);
+  margin-left: 0.125rem;
+}
+
+.hint {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  margin: 0.25rem 0 0;
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: text/email/number/date/etc. inputs, textarea, select
+ * -------------------------------------------------------------- */
+.text-input,
+.text-area-input,
+.email-input,
+.number-input,
+.date-input,
+.time-input,
+.tel-input,
+.url-input,
+.search-input,
+.select {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+.number-input,
+.date-input,
+.time-input { max-width: 12rem; }
+.text-area-input { resize: vertical; min-height: 4rem; }
+
+.text-input:focus,
+.text-area-input:focus,
+.email-input:focus,
+.number-input:focus,
+.date-input:focus,
+.time-input:focus,
+.tel-input:focus,
+.url-input:focus,
+.search-input:focus,
+.select:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.text-input[aria-invalid="true"],
+.text-area-input[aria-invalid="true"],
+.email-input[aria-invalid="true"],
+.number-input[aria-invalid="true"],
+.date-input[aria-invalid="true"],
+.select[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: .radio-group / .radio-input, .checkbox-group / .checkbox-input
+ * -------------------------------------------------------------- */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.radio-group > label,
+.checkbox-group > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  user-select: none;
+  font-weight: 400;
+  margin: 0;
+}
+.radio-group > label:hover,
+.checkbox-group > label:hover {
+  border-color: var(--color-primary);
+}
+.radio-input,
+.checkbox-input {
+  accent-color: var(--color-primary);
+  margin: 0;
+}
+.radio-group > label:has(.radio-input:checked),
+.checkbox-group > label:has(.checkbox-input:checked) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.radio-group > label:has(.radio-input:focus-visible),
+.checkbox-group > label:has(.checkbox-input:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: .button, .submit-input, .reset-input
+ *  Variants via data-variant="primary|secondary|danger"
+ * -------------------------------------------------------------- */
+.button,
+.submit-input,
+.reset-input {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: background 120ms ease, border 120ms ease;
+}
+.button:focus-visible,
+.submit-input:focus-visible,
+.reset-input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.button:hover:not(:disabled),
+.submit-input:hover:not(:disabled),
+.reset-input:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+.button:disabled,
+.submit-input:disabled,
+.reset-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button[data-variant="primary"],
+.submit-input {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+.button[data-variant="primary"]:hover:not(:disabled),
+.submit-input:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.button[data-variant="danger"] {
+  background: var(--color-surface);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.button[data-variant="danger"]:hover:not(:disabled) {
+  background: var(--color-danger-bg);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: .error-summary, .error-message
+ * -------------------------------------------------------------- */
+.error-summary {
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  border-left-width: 4px;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+}
+.error-summary[hidden] { display: none; }
+.error-summary :is(h2, strong) {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--color-danger);
+}
+.error-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.error-summary a {
+  color: var(--color-danger);
+  text-decoration: underline;
+}
+
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--color-danger);
+}
+.error-message:empty { display: none; }
+
+/* -------------------------------------------------------------- *
+ *  Lily: .alert (with data-type=info|success|warning|error)
+ * -------------------------------------------------------------- */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+  background: var(--color-bg);
+}
+.alert[data-type="info"] {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.alert[data-type="success"] {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}
+.alert[data-type="warning"] {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+}
+.alert[data-type="error"] {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger);
+}
+
+/* -------------------------------------------------------------- *
+ *  Lily: .panel (used as report region)
+ * -------------------------------------------------------------- */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+.panel h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+}
+.panel .empty-message {
+  margin: 0;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* -------------------------------------------------------------- *
+ *  Multi-column grids (project-local, not Lily)
+ * -------------------------------------------------------------- */
+.two-col,
+.three-col,
+.four-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
+}
+@media (min-width: 36rem) {
+  .two-col { grid-template-columns: 1fr 1fr; }
+  .three-col { grid-template-columns: 1fr 1fr 1fr; }
+  .four-col { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+
+/* -------------------------------------------------------------- *
+ *  Reduced motion
+ * -------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .progress::-webkit-progress-value { transition: none; }
+}
+
+/* ================================================================ *
+ *  Pre-op assessment specific styles (project-local, not Lily)
+ * ================================================================ */
+
+/* Intro card */
+.intro {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+.intro p { margin: 0 0 0.75rem; color: var(--color-text); }
+.intro p:last-child {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* Section step badge rendered inside .fieldset-legend by sectionCard() */
+.section-step {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.section-title {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.25rem 0 0.25rem;
+  color: var(--color-text);
+}
+.section-description {
+  display: block;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+.fieldset h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Read-only auto-calculated readout (e.g. BMI) */
+.readout-value {
+  display: flex;
+  align-items: center;
+  height: 2.375rem;
+  padding: 0 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  font-size: 0.9375rem;
+}
+.readout-value .muted { color: var(--color-muted); }
+
+/* Inline unit annotation next to numeric inputs */
+.unit {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+.req { color: var(--color-danger); margin-left: 0.125rem; }
+
+/* List-section subheaders (medications, allergies) */
+.list-section-header { margin: 0.5rem 0; }
+.list-section-header h3 {
+  margin: 0 0 0.125rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.list-section-header .hint {
+  margin: 0 0 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+/* Repeating-list editors */
+.list-editor { margin: 0 0 1.25rem; }
+.list-empty {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+.list-row {
+  background: #fafbfc;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.625rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  flex: 1;
+  align-items: end;
+}
+@media (min-width: 36rem) {
+  .list-grid.med-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1.2fr auto;
+  }
+  .list-grid.allergy-grid {
+    grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+  }
+}
+.list-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+}
+.list-cell > span {
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+/* Icon-only "remove row" button */
+.button[data-variant="icon"] {
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: var(--color-danger);
+  border: 1px solid transparent;
+  font-size: 1.125rem;
+  line-height: 1;
+  align-self: center;
+}
+.button[data-variant="icon"]:hover:not(:disabled) {
+  border-color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+/* "Add row" button */
+.button[data-variant="add"] {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px dashed var(--color-border-strong);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+.button[data-variant="add"]:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* Report region helpers */
+.muted { color: var(--color-muted); font-size: 0.875rem; margin: 0; }
+
+/* Boolean toggle field (red flags / risk factors) */
+.bool-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.625rem;
+}
+.bool-field input { accent-color: var(--color-primary); width: 1.1rem; height: 1.1rem; }
+.bool-field label { font-size: 0.9375rem; cursor: pointer; }
+
+/* Four-axis grade grid */
+.axis-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+@media (min-width: 36rem) {
+  .axis-grid { grid-template-columns: 1fr 1fr; }
+}
+.axis-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  padding: 0.75rem 0.875rem;
+}
+.axis-card .axis-name {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+}
+.axis-card .axis-value { font-size: 1rem; }
+
+/* Band / tier badge (shared with dashboard vocabulary) */
+.band-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 1px solid;
+}
+.band-usually-appropriate     { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.band-may-be-appropriate      { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.band-usually-not-appropriate { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* Pre-procedure risk band */
+.risk-low      { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.risk-moderate { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.risk-high     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* Cancer-pathway urgency tier */
+.tier-routine       { background: var(--color-bg); color: var(--color-muted); border-color: var(--color-border-strong); }
+.tier-urgent        { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.tier-two-week-wait { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+.tier-emergency     { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+.rec-accept         { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+.rec-query-referrer { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.rec-redirect       { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+.rec-reject         { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* Appropriateness score meter */
+.score-meter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.score-meter strong { font-size: 1.25rem; }
+
+/* Completeness bar */
+.completeness-bar {
+  height: 0.5rem;
+  background: var(--color-border);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.375rem;
+}
+.completeness-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+/* Recommendation banner */
+.recommendation-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+
+/* Subscale chips */
+.subscale-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+}
+.subscale-chip {
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+.subscale-chip strong { font-weight: 600; }
+
+/* Per-rule table */
+table.subscales {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+table.subscales th,
+table.subscales td {
+  padding: 0.5rem 0.625rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+table.subscales thead th {
+  background: var(--color-bg);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+table.subscales tbody th { font-weight: 500; white-space: nowrap; }
+table.subscales td.num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Flag list */
+.flags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.flags li {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 0.625rem;
+  align-items: baseline;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid;
+  font-size: 0.9375rem;
+  background: var(--color-bg);
+}
+@media (max-width: 36rem) {
+  .flags li { grid-template-columns: 1fr; }
+}
+.flag-priority {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.0625rem 0.4375rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  align-self: center;
+}
+.flag-category {
+  font-weight: 500;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+.flag-message { line-height: 1.4; }
+.flag-action {
+  grid-column: 3;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: 0.125rem;
+}
+.flags li.flag-high {
+  background: #ffedd5;
+  border-left-color: #ea580c;
+}
+.flags li.flag-high .flag-priority {
+  background: #ea580c;
+  color: white;
+}
+.flags li.flag-medium {
+  background: var(--color-warning-bg);
+  border-left-color: var(--color-warning);
+}
+.flags li.flag-medium .flag-priority {
+  background: var(--color-warning);
+  color: white;
+}
+.flags li.flag-low {
+  background: var(--color-primary-light);
+  border-left-color: var(--color-primary);
+}
+.flags li.flag-low .flag-priority {
+  background: var(--color-primary);
+  color: white;
+}
+
+.report-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
