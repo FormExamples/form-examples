@@ -1,0 +1,76 @@
+// Plain-JavaScript / JSDoc type definitions for the toxicology vetting
+// dashboard.
+//
+// This file deliberately exports nothing executable; it exists so other
+// modules can reference the JSDoc type aliases and so engineers can read the
+// canonical shape of the dashboard data in one place.
+
+/**
+ * Appropriateness band emitted by the engine's Axis A (TOXBASE / NPIS 1-9).
+ * @typedef {'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate'} AppropriatenessBand
+ */
+
+/**
+ * Ingestion-timing validity band emitted by Axis B.
+ * @typedef {'ok' | 'caution' | 'invalid'} TimingBand
+ */
+
+/**
+ * Triage tier emitted by Axis D (acuity escalation).
+ * @typedef {'routine' | 'urgent' | 'stat'} TriageTier
+ */
+
+/**
+ * Request row displayed in the vetting dashboard.
+ *
+ * @typedef {Object} RequestRow
+ * @property {string} id              - UUID / case identifier of the request
+ * @property {string} referralDate    - ISO date "YYYY-MM-DD" of the referral
+ * @property {string} patient         - Patient display name
+ * @property {string} nhs             - NHS number, formatted "NNN NNN NNNN"
+ * @property {string[]} assays        - Selected assay fields (camelCase)
+ * @property {string} indication      - Primary clinical indication (kebab-case)
+ * @property {AppropriatenessBand} appropriatenessBand - Axis A band
+ * @property {TimingBand} timingBand  - Axis B ingestion-timing validity
+ * @property {TriageTier} triageTier  - Axis D triage tier
+ * @property {number} completenessPercent - Axis C completeness 0..100
+ * @property {string} clinician       - Requesting clinician display name
+ * @property {string[]} flags         - Safety-flag categories (kebab-case)
+ */
+
+/**
+ * Response from `GET /api/requests`.
+ *
+ * The Loco backend returns a bare JSON array of `RequestRow` objects; the
+ * dashboard accepts either a bare array or an `{ items, total }` envelope so
+ * future paginated responses are forwards-compatible.
+ *
+ * @typedef {RequestRow[] | { items: RequestRow[], total?: number }} DashboardRequestsResponse
+ */
+
+// Wrapped in an IIFE so locals stay scoped — this file is loaded as a classic
+// <script> (no ES modules) so the page can be opened directly via `file://`.
+// The IIFE attaches its public symbols to a single global namespace,
+// `window.ToxicologyTestRequestDashboard`.
+(function () {
+'use strict';
+window.ToxicologyTestRequestDashboard =
+  window.ToxicologyTestRequestDashboard || {};
+
+// Human-readable labels for the toxicology assay fields, used to render the
+// "assays selected" column. Mirrors the form's ASSAYS list.
+const ASSAY_LABELS = {
+  paracetamolLevel: 'Paracetamol',
+  salicylateLevel: 'Salicylate',
+  alcoholLevel: 'Alcohol',
+  drugsOfAbuseScreen: 'Drugs of abuse',
+  lithiumLevel: 'Lithium',
+  digoxinLevel: 'Digoxin',
+  antiepilepticDrugLevel: 'Antiepileptic',
+  carboxyhaemoglobin: 'Carboxyhaemoglobin',
+  heavyMetals: 'Heavy metals',
+  specificDrugLevel: 'Specific drug'
+};
+
+window.ToxicologyTestRequestDashboard.ASSAY_LABELS = ASSAY_LABELS;
+})();
