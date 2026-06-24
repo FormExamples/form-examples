@@ -1,0 +1,52 @@
+<script lang="ts">
+	import Field from '$lib/components/ui/Field.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+	import { resultStore } from '$lib/stores/result.svelte';
+
+	const d = resultStore.data;
+</script>
+
+<Fieldset legend="6. Findings & Impression">
+	<p class="hint">The narrative findings, comparison, summary impression, and follow-up.</p>
+
+	<Field label="Findings narrative" inputId="findingsNarrative">
+		<TextAreaInput
+			id="findingsNarrative"
+			label="Findings narrative"
+			rows={5}
+			placeholder="Narrative description of the echocardiographic findings (the body of the report)…"
+			bind:value={d.findingsNarrative}
+		/>
+	</Field>
+
+	<Field label="Comparison with previous" inputId="comparisonWithPrevious">
+		<TextAreaInput
+			id="comparisonWithPrevious"
+			label="Comparison with previous"
+			rows={3}
+			placeholder="Relevant previous echo studies and changes since…"
+			bind:value={d.comparisonWithPrevious}
+		/>
+	</Field>
+
+	<Field label="Impression" inputId="impression" required>
+		<TextAreaInput
+			id="impression"
+			label="Impression"
+			rows={4}
+			placeholder="Summary impression / conclusion answering the clinical question…"
+			bind:value={d.impression}
+		/>
+	</Field>
+
+	<Field label="Recommended follow-up" inputId="recommendedFollowUp">
+		<TextAreaInput
+			id="recommendedFollowUp"
+			label="Recommended follow-up"
+			rows={3}
+			placeholder="Recommended follow-up imaging, referral, or management…"
+			bind:value={d.recommendedFollowUp}
+		/>
+	</Field>
+</Fieldset>
