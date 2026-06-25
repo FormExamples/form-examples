@@ -1,0 +1,131 @@
+# Histopathology Test Request — specification
+
+This file is the **living domain spec** for this form. It captures the contract each implementation (SQL schema, generated representations, front-ends, and Rust backend) must satisfy. Treat it as the source of truth for behaviour — update the spec before changing code.
+
+Slug: `histopathology-test-request`
+
+## 1. Purpose
+
+A UK NHS–aligned **tissue histopathology specimen request (referral)** that a
+clinician completes when submitting a tissue specimen for histopathological
+examination. It records the specimen (type, anatomical site, number of pots,
+fixative), the clinical indication and specific question, relevant clinical
+details, provisional diagnosis and previous histology, and the requested urgency
+— then computes a **four-axis grading** (appropriateness, specimen quality,
+request completeness, and urgency triage) plus a set of safety-critical flags.
+The output is a vetting report that supports the pathology laboratory's
+accessioning, triage, and reporting decisions.
+
+This form is the tissue-pathology counterpart to the repository's other
+clinician-driven request forms. It is completed by a pathologist, surgeon, GP,
+dermatologist, gastroenterologist, radiologist, or other requester rather than
+by the patient, and is aligned with the Royal College of Pathologists (RCPath)
+cancer datasets and tissue pathways, NICE NG12 *Suspected cancer: recognition
+and referral*, and RCPath specimen-handling guidance.
+
+Full design description: [`index.md`](index.md).
+
+## 2. Scope
+
+In scope: the schema, scoring engine, four front-ends (form + dashboard, each in HTML and SvelteKit), and the Rust full-stack crate listed in §5. Out of scope: hosted deployment, authentication, multi-tenancy.
+
+## 3. Scoring system
+
+The engine grades each request on **four independent axes**, each citable to a
+recognised body. Axes are orthogonal: a highly appropriate request can still be
+incomplete, have a specimen-handling problem, or be urgent.
+
+| Axis | Instrument | Output |
+| --- | --- | --- |
+| **A. Appropriateness** | Indication match against RCPath cancer datasets / tissue pathways (1–9 ordinal) | usually-appropriate (7–9) / may-be-appropriate (4–6) / usually-not-appropriate (1–3) |
+| **B. Specimen quality** | Fixative, labelling, and specimen-integrity checks | ok / caution / reject-risk |
+| **C. Request completeness** | Mandatory-field checklist, indication + clinical question weighted highest | 0–100 % complete (+ missing fields) |
+| **D. Urgency triage** | NICE NG12 / frozen-section escalation rules | routine / urgent / two-week-wait (+ target timeframe; frozen section → immediate) |
+
+A two-week-wait (suspected-cancer) request or an urgent intra-operative frozen
+section **auto-escalates** the triage tier regardless of the other axes.
+
+### Specimen types and indications
+
+| Specimen type | Typical use |
+| --- | --- |
+| Biopsy | Small diagnostic tissue sample |
+| Excision | Local excision of a lesion |
+| Resection | Larger operative resection (often cancer staging) |
+| Endoscopic biopsy | GI / airway endoscopic sampling |
+| Skin lesion | Punch / shave / excision of a skin lesion |
+| Frozen section | Intra-operative urgent diagnosis (immediate) |
+| Other | Any other specimen |
+
+| Indication | Maps to |
+| --- | --- |
+| Suspected malignancy | RCPath cancer dataset; usually-appropriate |
+| Cancer staging | RCPath cancer dataset resection; usually-appropriate |
+| Inflammatory disease | Tissue pathway |
+| Infection | Tissue pathway (± microbiology) |
+| Characterise lesion | Tissue pathway |
+| Margin assessment | Excision / re-excision dataset |
+| Transplant monitoring | Protocol biopsy pathway |
+| Other | Free-text clinical question required |
+
+## 4. Inputs and outputs
+
+**Inputs.** A typed assessment object whose shape mirrors the SQL schema in `sql-migrations/` (9 migration files). Unanswered text and enum fields default to `''`; unanswered numeric, date, and time fields default to `null`.
+
+**Outputs.** A grading object emitted by the engine: scoring result (per the instrument named in §3), `firedRules[]`, `additionalFlags[]`, and a clinical / administrative report. Rendered as HTML in the browser, exported as PDF via the SvelteKit endpoint, and convertible to FHIR R5 Bundle, XML, JSON, CSV, or TSV.
+
+## 5. Artefacts
+
+Required artefacts and their current status:
+
+| Subdirectory | Role |
+| --- | --- |
+| `sql-migrations` | source of truth |
+| `xml-representations` | generated |
+| `fhir-r5` | generated |
+| `protobuf` | generated |
+| `openapi` | generated |
+| `front-end-form-with-html` | Lily contract |
+| `front-end-form-with-svelte` | SvelteKit |
+| `front-end-dashboard-with-html` | Lily contract |
+| `front-end-dashboard-with-svelte` | SvelteKit + SVAR |
+| `back-end-with-loco` | Rust + Loco JSON API |
+| `back-end-with-loco-setup` | generated scaffold script |
+
+Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../AGENTS.md) §Tools after schema changes.
+
+## 6. Acceptance criteria
+
+- `bin/test-form histopathology-test-request` exits cleanly.
+- The scoring engine is pure (no side effects, no I/O) and unit-tested.
+- The HTML front-ends conform to the Lily HTML headless contract
+  ([`forms/AGENTS-front-end-html.md`](../AGENTS-front-end-html.md)).
+- The SvelteKit front-ends conform to the Lily Svelte headless contract
+  ([`forms/AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md))
+  and pass `pnpm check` and `pnpm test`.
+- The Rust crate builds (`cargo build`) and tests pass (`cargo test`).
+- `bin/lily-html-refactor --check histopathology-test-request` reports no drift.
+- LocalStorage keys preserve draft state across reloads:
+  - `histopathology-test-request.front-end-form-with-html.v1` (HTML)
+  - `histopathology-test-request.front-end-form-with-svelte.v1` (SvelteKit)
+
+## 7. Compliance
+
+Inherits the monorepo compliance baseline: MDCG 2019-11 Rev.1 (EU MDR), UK Medical Devices Regulations 2002, ISO/IEC/IEEE 26514:2022, UK MHRA Software and AI as a Medical Device. Form-specific classification (e.g. Class IIa where output drives clinical decisions) is recorded in [`index.md`](index.md) and [`AGENTS.md`](AGENTS.md) where it differs from the baseline.
+
+## 8. References
+
+- [`index.md`](index.md) — form description and scoring details
+- [`AGENTS.md`](AGENTS.md) — agent instructions
+- [`plan.md`](plan.md) — implementation roadmap
+- [`tasks.md`](tasks.md) — task tracking
+- [`/spec.md`](../../spec.md) — system-level specification
+- [`/AGENTS.md`](../../AGENTS.md) — cross-cutting agent instructions
+- [`../AGENTS-front-end-html.md`](../AGENTS-front-end-html.md) — Lily HTML contract
+- [`../AGENTS-front-end-svelte.md`](../AGENTS-front-end-svelte.md) — Lily Svelte contract
+
+## 9. Verify
+
+```sh
+bin/test-form histopathology-test-request
+```
