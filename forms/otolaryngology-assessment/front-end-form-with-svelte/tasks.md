@@ -1,3 +1,0 @@
-# Tasks: SvelteKit form
-
-- [ ] Implement.

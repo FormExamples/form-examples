@@ -1,1 +1,0 @@
-# SvelteKit form — Agent Instructions

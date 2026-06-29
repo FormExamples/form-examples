@@ -1,0 +1,193 @@
+import { browser } from '$app/environment';
+import type { AssessmentData, DizzinessHandicapInventory, GradingResult } from '$lib/engine/types';
+import { DHI_ITEMS } from '$lib/engine/rules';
+
+/** localStorage draft key for a given assessment id (defaults to `new`). */
+function storageKey(id: string): string {
+	return `audio-vestibular-assessment.front-end-with-svelte.${id || 'new'}.v1`;
+}
+
+/** Build a fresh, fully-blank set of DHI answers (q1…q25 all empty). */
+function emptyDhiAnswers(): DizzinessHandicapInventory {
+	const answers: DizzinessHandicapInventory = {};
+	for (const item of DHI_ITEMS) {
+		answers['q' + item.num] = '';
+	}
+	return answers;
+}
+
+/** A blank audio-vestibular assessment with all fields at unanswered defaults. */
+export function createDefaultAssessment(): AssessmentData {
+	return {
+		demographics: {
+			firstName: '',
+			lastName: '',
+			dateOfBirth: '',
+			sex: '',
+			assessmentDate: ''
+		},
+		presentingSymptoms: {
+			hearingLoss: '',
+			hearingLossSide: '',
+			hearingLossOnset: '',
+			hearingLossDurationMonths: null,
+			tinnitus: '',
+			tinnitusSide: '',
+			otalgia: '',
+			otorrhea: '',
+			auralFullness: '',
+			vertigo: '',
+			vertigoCharacter: '',
+			vertigoEpisodeDurationSeconds: null,
+			vertigoFrequencyPerWeek: null,
+			imbalance: '',
+			falls: '',
+			fallsLastYearCount: null,
+			headacheMigraine: '',
+			neurologicalSymptoms: '',
+			otherSymptoms: ''
+		},
+		otoscopicExamination: {
+			rightEar: { canalStatus: '', tympanicMembrane: '' },
+			leftEar: { canalStatus: '', tympanicMembrane: '' },
+			notes: ''
+		},
+		pureToneAudiometry: {
+			rightEar: {
+				airConduction: { hz500: null, hz1000: null, hz2000: null, hz4000: null },
+				boneConduction: { hz500: null, hz1000: null, hz2000: null, hz4000: null },
+				pureToneAverage: null
+			},
+			leftEar: {
+				airConduction: { hz500: null, hz1000: null, hz2000: null, hz4000: null },
+				boneConduction: { hz500: null, hz1000: null, hz2000: null, hz4000: null },
+				pureToneAverage: null
+			},
+			betterEarPureToneAverage: null,
+			asymmetryDb: null,
+			audiometryNotes: ''
+		},
+		speechAudiometry: {
+			rightSrtDb: null,
+			leftSrtDb: null,
+			rightWordRecognitionPercent: null,
+			leftWordRecognitionPercent: null,
+			speechAudiometryNotes: ''
+		},
+		tympanometryAcousticReflexes: {
+			rightTympanogram: '',
+			leftTympanogram: '',
+			rightAcousticReflexes: '',
+			leftAcousticReflexes: '',
+			notes: ''
+		},
+		vestibularScreening: {
+			headImpulseTest: '',
+			dixHallpike: '',
+			rombergTest: '',
+			tandemGait: '',
+			nystagmus: '',
+			fukudaSteppingTest: '',
+			notes: ''
+		},
+		dizzinessHandicapInventory: emptyDhiAnswers(),
+		clinicalImpressionReferral: {
+			provisionalDiagnosis: '',
+			hearingAidCandidate: '',
+			vestibularRehabIndicated: '',
+			ent_referral: '',
+			neurologyReferral: '',
+			imagingRequested: '',
+			followUpWeeks: null,
+			additionalNotes: ''
+		}
+	};
+}
+
+/**
+ * Svelte 5 reactive store for the audio-vestibular assessment, with
+ * localStorage persistence so an in-progress assessment survives a page
+ * reload. Drafts are keyed by assessment id so each record edits independently.
+ */
+class AssessmentStore {
+	data = $state<AssessmentData>(createDefaultAssessment());
+	result = $state<GradingResult | null>(null);
+	currentStep = $state(1);
+	/** The id of the assessment currently loaded into the store (`new` for a fresh draft). */
+	id = $state('new');
+
+	constructor() {
+		if (browser) {
+			$effect.root(() => {
+				$effect(() => {
+					localStorage.setItem(storageKey(this.id), JSON.stringify(this.data));
+				});
+			});
+		}
+	}
+
+	/**
+	 * Load the assessment for `id` into the store. A saved draft for that id (in
+	 * localStorage) takes precedence; otherwise the `seed` assessment is used
+	 * (e.g. a sample for an existing id), falling back to a blank draft.
+	 *
+	 * The data is merged in place (nested object identities preserved) rather
+	 * than reassigned, so step components that captured a section reference
+	 * (e.g. `const d = assessment.data.presentingSymptoms`) stay bound to live
+	 * state.
+	 */
+	loadForId(id: string, seed?: AssessmentData) {
+		const key = id || 'new';
+		this.id = key;
+		this.result = null;
+		this.currentStep = 1;
+
+		let draft: AssessmentData | null = null;
+		if (browser) {
+			const raw = localStorage.getItem(storageKey(key));
+			if (raw) {
+				try {
+					draft = JSON.parse(raw) as AssessmentData;
+				} catch {
+					// Ignore corrupt storage.
+				}
+			}
+		}
+		deepAssign(
+			this.data as unknown as Record<string, unknown>,
+			(draft ?? seed ?? createDefaultAssessment()) as unknown as Record<string, unknown>
+		);
+	}
+
+	reset() {
+		deepAssign(
+			this.data as unknown as Record<string, unknown>,
+			createDefaultAssessment() as unknown as Record<string, unknown>
+		);
+		this.result = null;
+		this.currentStep = 1;
+		if (browser) {
+			localStorage.removeItem(storageKey(this.id));
+		}
+	}
+}
+
+/**
+ * Deep-merge `source` into `target`, recursing into plain objects so nested
+ * object identities are preserved (primitives and arrays are replaced). This
+ * keeps Svelte's deep `$state` proxies — and any references captured from
+ * them — reactive when a new assessment is loaded.
+ */
+function deepAssign(target: Record<string, unknown>, source: Record<string, unknown>) {
+	for (const key of Object.keys(source)) {
+		const sv = source[key];
+		const tv = target[key];
+		if (sv && typeof sv === 'object' && !Array.isArray(sv) && tv && typeof tv === 'object') {
+			deepAssign(tv as Record<string, unknown>, sv as Record<string, unknown>);
+		} else {
+			target[key] = sv;
+		}
+	}
+}
+
+export const assessment = new AssessmentStore();

@@ -1,7 +1,0 @@
-node_modules/
-.svelte-kit/
-build/
-dist/
-*.log
-test-results/
-playwright-report/

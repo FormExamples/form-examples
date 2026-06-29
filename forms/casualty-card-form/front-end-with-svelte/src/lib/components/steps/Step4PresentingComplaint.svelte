@@ -1,0 +1,32 @@
+<script lang="ts">
+	import { assessment } from '$lib/stores/assessment.svelte';
+	import Fieldset from '$lib/components/ui/Fieldset.svelte';
+	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import TextAreaInput from '$lib/components/ui/TextAreaInput.svelte';
+
+	const pc = assessment.data.presentingComplaint;
+</script>
+
+<Fieldset title="Presenting Complaint" description="Chief complaint and history of presenting illness">
+	<TextInput label="Chief Complaint" name="chiefComplaint" bind:value={pc.chiefComplaint} required />
+	<TextAreaInput label="History of Presenting Complaint" name="historyOfPresentingComplaint" bind:value={pc.historyOfPresentingComplaint} rows={4} />
+
+	<h3 class="mb-3 mt-4 text-lg font-semibold text-base-content">Symptom Details</h3>
+	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+		<TextInput label="Onset" name="onset" bind:value={pc.onset} placeholder="When did it start?" />
+		<TextInput label="Duration" name="duration" bind:value={pc.duration} />
+	</div>
+	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+		<TextInput label="Character" name="character" bind:value={pc.character} placeholder="e.g. sharp, dull, burning" />
+		<TextInput label="Severity" name="severity" bind:value={pc.severity} />
+	</div>
+	<div class="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+		<TextInput label="Location" name="location" bind:value={pc.location} />
+		<TextInput label="Radiation" name="radiation" bind:value={pc.radiation} />
+	</div>
+	<TextAreaInput label="Aggravating Factors" name="aggravatingFactors" bind:value={pc.aggravatingFactors} rows={2} />
+	<TextAreaInput label="Relieving Factors" name="relievingFactors" bind:value={pc.relievingFactors} rows={2} />
+	<TextAreaInput label="Associated Symptoms" name="associatedSymptoms" bind:value={pc.associatedSymptoms} rows={2} />
+	<TextAreaInput label="Previous Episodes" name="previousEpisodes" bind:value={pc.previousEpisodes} rows={2} />
+	<TextAreaInput label="Treatment Prior to Arrival" name="treatmentPriorToArrival" bind:value={pc.treatmentPriorToArrival} rows={2} />
+</Fieldset>
