@@ -1,0 +1,110 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=fluoroscopy-test-result
+form_snake_case=fluoroscopy_test_result
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
+cd "${form_kebab_case}"
+
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    waist_as_cm:double \
+    height_as_cm:double \
+    weight_as_kg:double \
+    body_mass_index:double \
+    waist_height_ratio:double \
+    vo2_max:double \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold fluoroscopy_test_result \
+    deleted_at:ts \
+    patient:references \
+    clinician:references \
+    originating_request_reference:string! \
+    report_status:string! \
+    performed_date:date \
+    reported_date:date \
+    study_type:string! \
+    contrast_used:string! \
+    examination_adequacy:string! \
+    screening_time_minutes:double \
+    clinical_history:string! \
+    comparison_with_previous:string! \
+    findings_narrative:string! \
+    stricture:bool! \
+    reflux:bool! \
+    obstruction:bool! \
+    perforation_or_leak:bool! \
+    fistula:bool! \
+    filling_defect:bool! \
+    dysmotility:bool! \
+    normal_study:bool! \
+    incidental_finding:bool! \
+    impression:string! \
+    reporting_category:string! \
+    recommended_follow_up:string! \
+    critical_result_communicated:bool! \
+    reported_to:string! \
+    --api
+
+cargo loco generate scaffold fluoroscopy_test_result_grade \
+    deleted_at:ts \
+    fluoroscopy_test_result:references \
+    result_classification:string! \
+    abnormality_severity:string! \
+    reporting_category:string! \
+    report_completeness_percent:int \
+    follow_up_urgency:string! \
+    target_timeframe:string! \
+    recommended_action:string! \
+    recommendation:string! \
+    clinician_notes:text! \
+    signed_at:ts \
+    graded_at:ts! \
+    --api
+
+cargo loco generate scaffold fluoroscopy_test_result_grade_rule \
+    deleted_at:ts \
+    fluoroscopy_test_result_grade:references \
+    rule_id:string! \
+    axis:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold fluoroscopy_test_result_grade_flag \
+    deleted_at:ts \
+    fluoroscopy_test_result_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api

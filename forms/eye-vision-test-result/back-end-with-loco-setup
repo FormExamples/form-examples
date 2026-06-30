@@ -1,0 +1,104 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=eye-vision-test-result
+form_snake_case=eye_vision_test_result
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_kebab_case}" --db postgres --bg async --assets none
+cd "${form_kebab_case}"
+
+cargo loco generate scaffold patient \
+    deleted_at:ts \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:ts \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    united_kingdom_nhs_number:string^ \
+    --api
+
+cargo loco generate scaffold eye_vision_test_result \
+    deleted_at:ts \
+    patient:references \
+    clinician:references \
+    originating_request_reference:string! \
+    report_status:string! \
+    test_type:string! \
+    performed_date:date \
+    reported_date:date \
+    clinical_history:string! \
+    visual_acuity_right:string! \
+    visual_acuity_left:string! \
+    intraocular_pressure_right_mmhg:double \
+    intraocular_pressure_left_mmhg:double \
+    visual_field_result:string! \
+    reduced_visual_acuity:bool! \
+    visual_field_defect:bool! \
+    raised_intraocular_pressure:bool! \
+    diabetic_retinopathy:bool! \
+    optic_disc_abnormality:bool! \
+    macular_abnormality:bool! \
+    normal_examination:bool! \
+    retinopathy_grade:string! \
+    findings_narrative:string! \
+    impression:string! \
+    reporting_category:string! \
+    recommended_follow_up:string! \
+    critical_result_communicated:bool! \
+    reported_to:string! \
+    --api
+
+cargo loco generate scaffold eye_vision_test_result_grade \
+    deleted_at:ts \
+    eye_vision_test_result:references \
+    result_classification:string! \
+    abnormality_severity:string! \
+    reporting_category:string! \
+    report_completeness_percent:int \
+    follow_up_urgency:string! \
+    target_timeframe:string! \
+    recommended_action:string! \
+    recommendation:string! \
+    clinician_notes:text! \
+    signed_at:ts \
+    graded_at:ts! \
+    --api
+
+cargo loco generate scaffold eye_vision_test_result_grade_rule \
+    deleted_at:ts \
+    eye_vision_test_result_grade:references \
+    rule_id:string! \
+    axis:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold eye_vision_test_result_grade_flag \
+    deleted_at:ts \
+    eye_vision_test_result_grade:references \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
